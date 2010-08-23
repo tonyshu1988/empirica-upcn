@@ -47,8 +47,8 @@ requires
   cxLibraryVCLD7,
   dxThemeD7,
   dxComnD7,
-  InterSol,
-  dxBarExtItemsD7;
+  dxBarExtItemsD7,
+  InterSol;
 
 contains
   EKAppEvnts in 'EKAppEvnts.pas',
