@@ -67,6 +67,10 @@ object FPrincipal: TFPrincipal
       Caption = 'Configuracion'
       OnExecute = AConfiguracionExecute
     end
+    object AABMProveedores: TAction
+      Caption = 'ABM Proveedores'
+      OnExecute = AABMProveedoresExecute
+    end
   end
   object MainMenu1: TMainMenu
     Images = EKImageList16x16
