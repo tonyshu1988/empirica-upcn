@@ -5,19 +5,12 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, StdCtrls, DBCtrls, Mask, ExtCtrls, Grids,
-  DBGrids;
+  DBGrids, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
 
 type
   TFABMProveedores = class(TForm)
     DBGridProveedores: TDBGrid;
     Panel_edicion: TPanel;
-    Shape5: TShape;
-    Shape7: TShape;
-    Shape8: TShape;
-    Shape4: TShape;
-    Shape2: TShape;
-    Shape1: TShape;
-    Shape3: TShape;
     Label1: TLabel;
     Label2: TLabel;
     Label16: TLabel;
@@ -48,6 +41,17 @@ type
     GrupoModEspecial: TdxBarGroup;
     GrupoBuscar: TdxBarGroup;
     PanelContenedor: TPanel;
+    ZQ_IE_Proveedores: TZQuery;
+    DS_IE_Proveedores: TDataSource;
+    ZQ_IE_ProveedoresNRO_PROVEEDOR: TIntegerField;
+    ZQ_IE_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
+    ZQ_IE_ProveedoresNOMBRE_FANTASIA: TStringField;
+    ZQ_IE_ProveedoresDIRECCION: TStringField;
+    ZQ_IE_ProveedoresTIPO_DOCUMENTO: TStringField;
+    ZQ_IE_ProveedoresNRO_DOCUMENTO: TStringField;
+    ZQ_IE_ProveedoresTELEFONOS: TStringField;
+    ZQ_IE_ProveedoresEMAIL: TStringField;
+    ZQ_IE_ProveedoresBAJA: TStringField;
   private
     { Private declarations }
   public
@@ -58,6 +62,8 @@ var
   FABMProveedores: TFABMProveedores;
 
 implementation
+
+uses UDM;
 
 {$R *.dfm}
 
