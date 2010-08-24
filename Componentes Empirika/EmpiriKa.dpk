@@ -1,7 +1,7 @@
 package EmpiriKa;
 
 {$R *.res}
-{$R recursos.res}
+{$R 'recursos.res'}
 {$ALIGN 8}
 {$ASSERTIONS ON}
 {$BOOLEVAL OFF}
@@ -78,6 +78,8 @@ contains
   EKVentanas in 'EKVentanas.pas',
   EKVersion in 'EKVersion.pas' {Control_version},
   EKVistaPreviaQR in 'EKVistaPreviaQR.pas',
-  EKVistaPreviaQRForm in 'EKVistaPreviaQRForm.pas' {EKVistaPreviaQRForm};
+  EKVistaPreviaQRForm in 'EKVistaPreviaQRForm.pas' {EKVistaPreviaQRForm},
+  EKImageList32 in 'EKImageList32.pas',
+  EKImageList32Reg in 'EKImageList32Reg.pas' {EKImageListImagesEditor};
 
 end.
