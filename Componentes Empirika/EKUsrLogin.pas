@@ -1,3 +1,4 @@
+{$I EmpiriKa.inc}
 unit EKUsrLogin;
 
 interface
@@ -154,6 +155,7 @@ var
   Ini : TIniFile;
   leer : string;
   encriptado : string;
+  protocolo  : string;
 
   procedure final_correcto;
   begin
@@ -215,6 +217,7 @@ Begin
       passwordlog  := Ini.ReadString( leer, 'password', '' );
       db   := Ini.ReadString( leer, 'db_aplicacion', 'automatico');
       dbu  := Ini.ReadString( leer, 'db_usuarios', '' );
+      protocolo  := Ini.ReadString( leer, 'protocolo', 'firebird-1.5' );
     finally
       Ini.Free;
     end;
@@ -231,6 +234,7 @@ Begin
         ipl := ip;
       db   := Ini.ReadString( leer, 'db_aplicacion', 'automatico' );
       dbu  := Ini.ReadString( leer, 'db_usuarios', 'dbusuarios' );
+	  protocolo  := Ini.ReadString( leer, 'protocolo', 'firebird-1.5' );
     finally
       Ini.Free;
     end;
@@ -261,6 +265,7 @@ Begin
   EKUsrLogin1.coneccion.Database := dbu;
   EKUsrLogin1.coneccion.User := usuariolog;
   EKUsrLogin1.coneccion.Password := passwordlog;
+  EKUsrLogin1.Coneccion.Protocol := protocolo;
   EKUsrLogin1.coneccion.connect;
 
 
