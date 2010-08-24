@@ -1730,6 +1730,7 @@ object DM: TDM
     Top = 8
   end
   object EKInformacion1: TEKInformacion
+    StatusBar = FPrincipal.StatusBar1
     IndiceUsuario = 0
     IndiceTransaccion = 2
     IndiceVersion = 1
@@ -1737,14 +1738,13 @@ object DM: TDM
     Top = 88
   end
   object EKUsrLogin1: TEKUsrLogin
+    OnLogin = LoginLogin
     Coneccion = Conexion
-    Menu = FPrincipal.MainMenu1
     Aplicacion = 'UPCN'
     Estado = 'Ingreso al Sistema'
     Version = 0
     ControlVersion = False
     LoadImagen = 'login.jpg'
-    Caption = 'Sistema de Gestion'
     Modo = EKLoginAutomatico
     ModoPermiso = EKPermisoAction
     Left = 152

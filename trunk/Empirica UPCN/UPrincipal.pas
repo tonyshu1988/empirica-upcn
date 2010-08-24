@@ -13,15 +13,11 @@ type
     ActionManager1: TActionManager;
     MainMenu1: TMainMenu;
     ActionToolBar1: TActionToolBar;
-    ImageList2: TImageList;
-    ImageList1: TImageList;
     Sistema: TMenuItem;
     PanelTapa: TPanel;
     PlandeCuentas: TMenuItem;
     CambiarContrasea1: TMenuItem;
     Salir2: TMenuItem;
-    TDXBar_Imagenes_Chicas: TImageList;
-    TDXBar_Imagenes_Grandes: TImageList;
     Cierres: TMenuItem;
     Disponibilidades: TMenuItem;
     Pagos: TMenuItem;
@@ -37,10 +33,13 @@ type
     Reportes1: TMenuItem;
     OrdenesdePago2: TMenuItem;
     Disponibilidades1: TMenuItem;
+    AConfiguracion: TAction;
+    Configuracion1: TMenuItem;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure AConfiguracionExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,7 +53,7 @@ implementation
 
 {$R *.dfm}
 
-Uses UDM;
+Uses UDM, UConfiguracion;
 
 function salir_de_programa:boolean;
 begin
@@ -77,7 +76,7 @@ end;
 
 procedure TFPrincipal.CambiarContrasea1Click(Sender: TObject);
 begin
- { dm.ISUsrLogin1.CambiarClave;    }
+  dm.EKUsrLogin1.CambiarClave;   
 end;
 
 procedure TFPrincipal.Salir2Click(Sender: TObject);
@@ -90,6 +89,11 @@ procedure TFPrincipal.FormCloseQuery(Sender: TObject;
 begin
  { if not salir_de_programa then
     CanClose := false;       }
+end;
+
+procedure TFPrincipal.AConfiguracionExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFConfiguracion, FConfiguracion);
 end;
 
 end.
