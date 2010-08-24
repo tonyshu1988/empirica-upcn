@@ -6,7 +6,7 @@ object DM: TDM
   Width = 735
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
-    HostName = '127.0.0.1'
+    HostName = 'localhost'
     Database = 'D:\empirica\Empirica UPCN\Bases\UPCN.FDB'
     User = 'sysdba'
     Password = 'masterkey'
@@ -1738,11 +1738,15 @@ object DM: TDM
   end
   object EKUsrLogin1: TEKUsrLogin
     Coneccion = Conexion
+    Menu = FPrincipal.MainMenu1
+    Aplicacion = 'UPCN'
+    Estado = 'Ingreso al Sistema'
     Version = 0
     ControlVersion = False
     LoadImagen = 'login.jpg'
+    Caption = 'Sistema de Gestion'
     Modo = EKLoginAutomatico
-    ModoPermiso = EKPermisoCaption
+    ModoPermiso = EKPermisoAction
     Left = 152
     Top = 8
   end
