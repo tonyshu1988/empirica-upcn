@@ -1,6 +1,7 @@
 package EmpiriKa;
 
 {$R *.res}
+{$R recursos.res}
 {$ALIGN 8}
 {$ASSERTIONS ON}
 {$BOOLEVAL OFF}
