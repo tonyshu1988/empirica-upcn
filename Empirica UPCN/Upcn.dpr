@@ -3,7 +3,8 @@ program Upcn;
 uses
   Forms,
   UPrincipal in 'UPrincipal.pas' {FPrincipal},
-  UDM in 'UDM.pas' {DM: TDataModule};
+  UDM in 'UDM.pas' {DM: TDataModule},
+  UUtilidades in 'UUtilidades.pas';
 
 {$R *.res}
 
