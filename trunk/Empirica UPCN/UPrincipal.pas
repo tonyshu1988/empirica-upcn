@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
-  ComCtrls, ImgList, ExtCtrls, EKVentanas;
+  ComCtrls, ImgList, ExtCtrls, EKVentanas, EKImageList32;
 
 type
   TFPrincipal = class(TForm)
@@ -35,6 +35,8 @@ type
     Disponibilidades1: TMenuItem;
     AConfiguracion: TAction;
     Configuracion1: TMenuItem;
+    EKImageList16x16: TEKImageList32;
+    EKImageList32x32: TEKImageList32;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);

@@ -59,6 +59,7 @@ object FPrincipal: TFPrincipal
       item
         ActionBar = ActionToolBar1
       end>
+    Images = EKImageList32x32
     Left = 472
     Top = 272
     StyleName = 'XP Style'
@@ -68,6 +69,7 @@ object FPrincipal: TFPrincipal
     end
   end
   object MainMenu1: TMainMenu
+    Images = EKImageList16x16
     Left = 272
     Top = 272
     object PlandeCuentas: TMenuItem
@@ -139,5 +141,13 @@ object FPrincipal: TFPrincipal
     PonerCaption = False
     Left = 440
     Top = 141
+  end
+  object EKImageList16x16: TEKImageList32
+    Left = 256
+    Top = 101
+  end
+  object EKImageList32x32: TEKImageList32
+    Left = 256
+    Top = 157
   end
 end
