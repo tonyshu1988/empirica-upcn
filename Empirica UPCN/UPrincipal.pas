@@ -37,11 +37,13 @@ type
     Configuracion1: TMenuItem;
     EKImageList16x16: TEKImageList32;
     EKImageList32x32: TEKImageList32;
+    AABMProveedores: TAction;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure AConfiguracionExecute(Sender: TObject);
+    procedure AABMProveedoresExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,7 +57,7 @@ implementation
 
 {$R *.dfm}
 
-Uses UDM, UConfiguracion;
+Uses UDM, UConfiguracion, UABMProveedores;
 
 function salir_de_programa:boolean;
 begin
@@ -96,6 +98,11 @@ end;
 procedure TFPrincipal.AConfiguracionExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFConfiguracion, FConfiguracion);
+end;
+
+procedure TFPrincipal.AABMProveedoresExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABMProveedores, FABMProveedores);
 end;
 
 end.
