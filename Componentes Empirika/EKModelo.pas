@@ -396,6 +396,7 @@ begin
     bien := false;
     for i := 0 to length(transacciones_activas[ta_a].datasets)-1 do
     begin
+	 if transacciones_activas[ta_a].datasets[i].Active then
       transacciones_activas[ta_a].datasets[i].ApplyUpdates;
     end;
     Coneccion.Commit;
@@ -438,6 +439,7 @@ begin
   //---------------------------------------------------
   for i := 0 to length(transacciones_activas[ta_a].datasets)-1 do
   begin
+	if transacciones_activas[ta_a].datasets[i].Active then
     transacciones_activas[ta_a].datasets[i].CommitUpdates;
     transacciones_activas[ta_a].datasets[i].CachedUpdates := false;;
     (transacciones_activas[ta_a].datasets[i] as TZQuery).ReadOnly := True;
@@ -496,9 +498,12 @@ begin
   //-----------------------
   for i := 0 to length(transacciones_activas[ta_a].datasets)-1 do
   begin
+	if transacciones_activas[ta_a].datasets[i].Active then
+    begin
     transacciones_activas[ta_a].datasets[i].CancelUpdates;
-    transacciones_activas[ta_a].datasets[i].CachedUpdates := false;;
+    transacciones_activas[ta_a].datasets[i].CachedUpdates := false;
     (transacciones_activas[ta_a].datasets[i] as TZQuery).ReadOnly := True;
+    end;
   end;
 
   Coneccion.Rollback;
@@ -510,6 +515,7 @@ begin
   //-----------------------------------------------------------------------
   if transaccion_blk <> '' then
     for i := 0 to length(transacciones_activas[ta_a].datasets)-1 do
+	 if transacciones_activas[ta_a].datasets[i].Active then
       transacciones_activas[ta_a].datasets[i].Refresh;
 
   for i := ta_a+1 to ta-1 do
