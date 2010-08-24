@@ -5,10 +5,10 @@ object FABMProveedores: TFABMProveedores
   Height = 500
   Caption = 'ABM Proveedores'
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
@@ -32,79 +32,16 @@ object FABMProveedores: TFABMProveedores
       Align = alBottom
       TabOrder = 0
       Visible = False
-      object Shape5: TShape
-        Left = 393
-        Top = 18
-        Width = 106
-        Height = 20
-        Brush.Color = 16762544
-        Pen.Color = 16745557
-        Shape = stRoundRect
-      end
-      object Shape7: TShape
-        Left = 393
-        Top = 46
-        Width = 106
-        Height = 20
-        Brush.Color = 16762544
-        Pen.Color = 16745557
-        Shape = stRoundRect
-      end
-      object Shape8: TShape
-        Left = 393
-        Top = 76
-        Width = 106
-        Height = 20
-        Brush.Color = 16762544
-        Pen.Color = 16745557
-        Shape = stRoundRect
-      end
-      object Shape4: TShape
-        Left = 11
-        Top = 106
-        Width = 106
-        Height = 20
-        Brush.Color = 16762544
-        Pen.Color = 16745557
-        Shape = stRoundRect
-      end
-      object Shape2: TShape
-        Left = 10
-        Top = 76
-        Width = 106
-        Height = 20
-        Brush.Color = 16762544
-        Pen.Color = 16745557
-        Shape = stRoundRect
-      end
-      object Shape1: TShape
-        Left = 11
-        Top = 46
-        Width = 106
-        Height = 20
-        Brush.Color = 16762544
-        Pen.Color = 16745557
-        Shape = stRoundRect
-      end
-      object Shape3: TShape
-        Left = 11
-        Top = 18
-        Width = 106
-        Height = 20
-        Brush.Color = 16762544
-        Pen.Color = 16745557
-        Shape = stRoundRect
-      end
       object Label1: TLabel
         Left = 15
         Top = 21
-        Width = 85
+        Width = 105
         Height = 13
         Caption = 'Nombre y Apellido'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clRed
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
         Transparent = True
@@ -112,13 +49,13 @@ object FABMProveedores: TFABMProveedores
       object Label2: TLabel
         Left = 14
         Top = 49
-        Width = 95
+        Width = 114
         Height = 13
         Caption = 'Nombre de Fantasia'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clRed
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
         Transparent = True
@@ -126,7 +63,7 @@ object FABMProveedores: TFABMProveedores
       object Label16: TLabel
         Left = 14
         Top = 79
-        Width = 42
+        Width = 49
         Height = 13
         Caption = 'Telefono'
         Transparent = True
@@ -134,7 +71,7 @@ object FABMProveedores: TFABMProveedores
       object Label5: TLabel
         Left = 14
         Top = 109
-        Width = 45
+        Width = 53
         Height = 13
         Caption = 'Direccion'
         Transparent = True
@@ -142,7 +79,7 @@ object FABMProveedores: TFABMProveedores
       object Label3: TLabel
         Left = 396
         Top = 22
-        Width = 29
+        Width = 34
         Height = 13
         Caption = 'E-Mail'
         Transparent = True
@@ -150,7 +87,7 @@ object FABMProveedores: TFABMProveedores
       object Label6: TLabel
         Left = 396
         Top = 49
-        Width = 79
+        Width = 93
         Height = 13
         Caption = 'Tipo Documento'
         Transparent = True
@@ -158,7 +95,7 @@ object FABMProveedores: TFABMProveedores
       object Label7: TLabel
         Left = 396
         Top = 79
-        Width = 75
+        Width = 89
         Height = 13
         Caption = 'Nro Documento'
         Transparent = True
@@ -170,6 +107,12 @@ object FABMProveedores: TFABMProveedores
         Height = 21
         CharCase = ecUpperCase
         DataField = 'APELLIDO_Y_NOMBRE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 0
       end
       object DBENombreFantasia: TDBEdit
@@ -179,6 +122,12 @@ object FABMProveedores: TFABMProveedores
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NOMBRE_FANTASIA'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 1
       end
       object DBETelefono: TDBEdit
@@ -188,6 +137,12 @@ object FABMProveedores: TFABMProveedores
         Height = 21
         CharCase = ecUpperCase
         DataField = 'TELEFONOS'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 2
       end
       object DBEDireccion: TDBEdit
@@ -197,6 +152,12 @@ object FABMProveedores: TFABMProveedores
         Height = 21
         CharCase = ecUpperCase
         DataField = 'DIRECCION'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 3
       end
       object DBCBTipoDocumento: TDBComboBox
@@ -206,6 +167,11 @@ object FABMProveedores: TFABMProveedores
         Height = 21
         CharCase = ecUpperCase
         DataField = 'TIPO_DOCUMENTO'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
         ItemHeight = 13
         Items.Strings = (
           'D.N.I.'
@@ -213,6 +179,7 @@ object FABMProveedores: TFABMProveedores
           'L.E.'
           'CUIT/CUIL'
           'OTROS')
+        ParentFont = False
         TabOrder = 5
       end
       object DBENroDocumento: TDBEdit
@@ -222,6 +189,12 @@ object FABMProveedores: TFABMProveedores
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NRO_DOCUMENTO'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 6
       end
       object DBEEmail: TDBEdit
@@ -230,6 +203,12 @@ object FABMProveedores: TFABMProveedores
         Width = 273
         Height = 21
         DataField = 'EMAIL'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 4
       end
     end
@@ -240,106 +219,60 @@ object FABMProveedores: TFABMProveedores
       Height = 289
       Align = alClient
       Color = 16772842
+      DataSource = DS_IE_Proveedores
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 1
-      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Name = 'Verdana'
       TitleFont.Style = []
       Columns = <
         item
           Expanded = False
           FieldName = 'APELLIDO_Y_NOMBRE'
-          Title.Caption = 'NOMBRE Y APELLIDO'
-          Title.Font.Charset = ANSI_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Verdana'
-          Title.Font.Style = []
-          Width = 134
+          Width = 214
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'NOMBRE_FANTASIA'
-          Title.Caption = 'NOMBRE DE FANTASIA'
-          Title.Font.Charset = ANSI_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Verdana'
-          Title.Font.Style = []
-          Width = 127
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TELEFONOS'
-          Title.Font.Charset = ANSI_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Verdana'
-          Title.Font.Style = []
-          Width = 143
+          Width = 184
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'DIRECCION'
-          Title.Font.Charset = ANSI_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Verdana'
-          Title.Font.Style = []
-          Width = 112
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'EMAIL'
-          Title.Caption = 'E-MAIL'
-          Title.Font.Charset = ANSI_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Verdana'
-          Title.Font.Style = []
-          Width = 144
+          Width = 170
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'TIPO_DOCUMENTO'
-          Title.Caption = 'TIPO DOCUMENTO'
-          Title.Font.Charset = ANSI_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Verdana'
-          Title.Font.Style = []
-          Width = 117
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'NRO_DOCUMENTO'
-          Title.Caption = 'NRO DOCUMENTO'
-          Title.Font.Charset = ANSI_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Verdana'
-          Title.Font.Style = []
-          Width = 202
+          Width = 64
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'NRO_PROVEEDOR'
-          Title.Caption = 'NRO'
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Verdana'
-          Title.Font.Style = []
-          Width = 74
+          FieldName = 'TELEFONOS'
+          Width = 64
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'EMAIL'
+          Width = 64
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'BAJA'
+          Width = 64
           Visible = True
         end>
     end
@@ -621,5 +554,56 @@ object FABMProveedores: TFABMProveedores
     end
     object GrupoBuscar: TdxBarGroup
     end
+  end
+  object ZQ_IE_Proveedores: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from ie_proveedores p'
+      'where p.baja <> '#39'N'#39)
+    Params = <>
+    Left = 432
+    Top = 64
+    object ZQ_IE_ProveedoresNRO_PROVEEDOR: TIntegerField
+      FieldName = 'NRO_PROVEEDOR'
+      Required = True
+    end
+    object ZQ_IE_ProveedoresAPELLIDO_Y_NOMBRE: TStringField
+      FieldName = 'APELLIDO_Y_NOMBRE'
+      Size = 60
+    end
+    object ZQ_IE_ProveedoresNOMBRE_FANTASIA: TStringField
+      FieldName = 'NOMBRE_FANTASIA'
+      Size = 60
+    end
+    object ZQ_IE_ProveedoresDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 150
+    end
+    object ZQ_IE_ProveedoresTIPO_DOCUMENTO: TStringField
+      FieldName = 'TIPO_DOCUMENTO'
+      Size = 10
+    end
+    object ZQ_IE_ProveedoresNRO_DOCUMENTO: TStringField
+      FieldName = 'NRO_DOCUMENTO'
+      Size = 30
+    end
+    object ZQ_IE_ProveedoresTELEFONOS: TStringField
+      FieldName = 'TELEFONOS'
+      Size = 30
+    end
+    object ZQ_IE_ProveedoresEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 60
+    end
+    object ZQ_IE_ProveedoresBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+  end
+  object DS_IE_Proveedores: TDataSource
+    DataSet = ZQ_IE_Proveedores
+    Left = 432
+    Top = 120
   end
 end
