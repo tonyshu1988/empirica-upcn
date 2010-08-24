@@ -1,0 +1,95 @@
+unit UPrincipal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
+  ComCtrls, ImgList, ExtCtrls, EKVentanas;
+
+type
+  TFPrincipal = class(TForm)
+    StatusBar1: TStatusBar;
+    ActionManager1: TActionManager;
+    MainMenu1: TMainMenu;
+    ActionToolBar1: TActionToolBar;
+    ImageList2: TImageList;
+    ImageList1: TImageList;
+    Sistema: TMenuItem;
+    PanelTapa: TPanel;
+    PlandeCuentas: TMenuItem;
+    CambiarContrasea1: TMenuItem;
+    Salir2: TMenuItem;
+    TDXBar_Imagenes_Chicas: TImageList;
+    TDXBar_Imagenes_Grandes: TImageList;
+    Cierres: TMenuItem;
+    Disponibilidades: TMenuItem;
+    Pagos: TMenuItem;
+    EKVentanas1: TEKVentanas;
+    PlandeCuentasErogaciones1: TMenuItem;
+    SaldosIniciales1: TMenuItem;
+    CuentasBancariasyCajas1: TMenuItem;
+    ransferenciaEntreCuentas1: TMenuItem;
+    Conciliacion1: TMenuItem;
+    ABMProveedores1: TMenuItem;
+    OrdenesdePago1: TMenuItem;
+    Balance1: TMenuItem;
+    Reportes1: TMenuItem;
+    OrdenesdePago2: TMenuItem;
+    Disponibilidades1: TMenuItem;
+    procedure ALiquidacionExecute(Sender: TObject);
+    procedure CambiarContrasea1Click(Sender: TObject);
+    procedure Salir2Click(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FPrincipal: TFPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+Uses UDM;
+
+function salir_de_programa:boolean;
+begin
+ { result := true;
+  if dm.ISModeloT.hay_transaccion then
+  begin
+    if Application.MessageBox('Hay transacciones abiertas, Desea cerrar igualmente la aplicación', 'Atención', MB_YESNO ) = IDYES then
+      ExitProcess(0)
+    else
+      result := false;
+  end
+  else
+    ExitProcess(0);      }
+end;
+
+procedure TFPrincipal.ALiquidacionExecute(Sender: TObject);
+begin
+//  ISVentanas1.Abrir(Sender, TFLiquidacion, FLiquidacion);
+end;
+
+procedure TFPrincipal.CambiarContrasea1Click(Sender: TObject);
+begin
+ { dm.ISUsrLogin1.CambiarClave;    }
+end;
+
+procedure TFPrincipal.Salir2Click(Sender: TObject);
+begin
+  salir_de_programa;
+end;
+
+procedure TFPrincipal.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+ { if not salir_de_programa then
+    CanClose := false;       }
+end;
+
+end.
