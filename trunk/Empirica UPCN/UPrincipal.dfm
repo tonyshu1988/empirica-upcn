@@ -100,7 +100,7 @@ object FPrincipal: TFPrincipal
     object Pagos: TMenuItem
       Caption = 'Pagos'
       object ABMProveedores1: TMenuItem
-        Caption = 'ABM Proveedores'
+        Action = AABMProveedores
       end
       object OrdenesdePago1: TMenuItem
         Caption = 'Ordenes de Pago'
