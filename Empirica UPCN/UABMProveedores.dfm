@@ -14,6 +14,8 @@ object FABMProveedores: TFABMProveedores
   OldCreateOrder = False
   Position = poDefault
   Visible = True
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PanelContenedor: TPanel
@@ -30,8 +32,8 @@ object FABMProveedores: TFABMProveedores
       Width = 860
       Height = 137
       Align = alBottom
+      Enabled = False
       TabOrder = 0
-      Visible = False
       object Label1: TLabel
         Left = 15
         Top = 21
@@ -47,7 +49,7 @@ object FABMProveedores: TFABMProveedores
         Transparent = True
       end
       object Label2: TLabel
-        Left = 14
+        Left = 6
         Top = 49
         Width = 114
         Height = 13
@@ -61,15 +63,15 @@ object FABMProveedores: TFABMProveedores
         Transparent = True
       end
       object Label16: TLabel
-        Left = 14
+        Left = 65
         Top = 79
-        Width = 49
+        Width = 55
         Height = 13
-        Caption = 'Telefono'
+        Caption = 'Tel'#233'fonos'
         Transparent = True
       end
       object Label5: TLabel
-        Left = 14
+        Left = 67
         Top = 109
         Width = 53
         Height = 13
@@ -77,7 +79,7 @@ object FABMProveedores: TFABMProveedores
         Transparent = True
       end
       object Label3: TLabel
-        Left = 396
+        Left = 466
         Top = 22
         Width = 34
         Height = 13
@@ -85,7 +87,7 @@ object FABMProveedores: TFABMProveedores
         Transparent = True
       end
       object Label6: TLabel
-        Left = 396
+        Left = 407
         Top = 49
         Width = 93
         Height = 13
@@ -93,20 +95,21 @@ object FABMProveedores: TFABMProveedores
         Transparent = True
       end
       object Label7: TLabel
-        Left = 396
+        Left = 480
         Top = 79
-        Width = 89
+        Width = 20
         Height = 13
-        Caption = 'Nro Documento'
+        Caption = 'Nro'
         Transparent = True
       end
       object DBENombreApellido: TDBEdit
-        Left = 124
+        Left = 125
         Top = 18
         Width = 261
         Height = 21
         CharCase = ecUpperCase
         DataField = 'APELLIDO_Y_NOMBRE'
+        DataSource = DS_IE_Proveedores
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -116,12 +119,13 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 0
       end
       object DBENombreFantasia: TDBEdit
-        Left = 124
+        Left = 125
         Top = 46
         Width = 261
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NOMBRE_FANTASIA'
+        DataSource = DS_IE_Proveedores
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -131,12 +135,13 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 1
       end
       object DBETelefono: TDBEdit
-        Left = 124
+        Left = 125
         Top = 76
         Width = 261
         Height = 21
         CharCase = ecUpperCase
         DataField = 'TELEFONOS'
+        DataSource = DS_IE_Proveedores
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -146,12 +151,13 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 2
       end
       object DBEDireccion: TDBEdit
-        Left = 124
+        Left = 125
         Top = 106
         Width = 261
         Height = 21
         CharCase = ecUpperCase
         DataField = 'DIRECCION'
+        DataSource = DS_IE_Proveedores
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -160,35 +166,14 @@ object FABMProveedores: TFABMProveedores
         ParentFont = False
         TabOrder = 3
       end
-      object DBCBTipoDocumento: TDBComboBox
-        Left = 505
-        Top = 46
-        Width = 272
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'TIPO_DOCUMENTO'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ItemHeight = 13
-        Items.Strings = (
-          'D.N.I.'
-          'L.C.'
-          'L.E.'
-          'CUIT/CUIL'
-          'OTROS')
-        ParentFont = False
-        TabOrder = 5
-      end
       object DBENroDocumento: TDBEdit
-        Left = 504
+        Left = 505
         Top = 76
         Width = 273
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NRO_DOCUMENTO'
+        DataSource = DS_IE_Proveedores
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -198,11 +183,12 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 6
       end
       object DBEEmail: TDBEdit
-        Left = 504
+        Left = 505
         Top = 18
         Width = 273
         Height = 21
         DataField = 'EMAIL'
+        DataSource = DS_IE_Proveedores
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -211,12 +197,30 @@ object FABMProveedores: TFABMProveedores
         ParentFont = False
         TabOrder = 4
       end
+      object DBLookupComboBox1: TDBLookupComboBox
+        Left = 505
+        Top = 45
+        Width = 159
+        Height = 21
+        DataField = 'ID_TIPO_DOCUMENTO'
+        DataSource = DS_IE_Proveedores
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        KeyField = 'ID_TIPO_DOCUMENTO'
+        ListField = 'DECRIPCION'
+        ListSource = DS_TipoDocumento
+        ParentFont = False
+        TabOrder = 5
+      end
     end
     object DBGridProveedores: TDBGrid
       Left = 1
-      Top = 1
+      Top = 20
       Width = 860
-      Height = 289
+      Height = 270
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -227,54 +231,79 @@ object FABMProveedores: TFABMProveedores
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGridProveedoresDrawColumnCell
       Columns = <
         item
           Expanded = False
           FieldName = 'APELLIDO_Y_NOMBRE'
-          Width = 214
+          Title.Caption = 'Apellido y Nombre'
+          Width = 274
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'NOMBRE_FANTASIA'
-          Width = 184
+          Title.Caption = 'Nombre de Fantasia'
+          Width = 282
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'DIRECCION'
-          Width = 170
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TIPO_DOCUMENTO'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NRO_DOCUMENTO'
-          Width = 64
+          Title.Caption = 'Direccion'
+          Width = 198
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'TELEFONOS'
-          Width = 64
+          Title.Caption = 'Telefono'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'EMAIL'
-          Width = 64
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'BAJA'
-          Width = 64
+          Title.Caption = 'Email'
           Visible = True
         end>
+    end
+    object PBusqueda: TPanel
+      Left = 1
+      Top = 1
+      Width = 860
+      Height = 19
+      Align = alTop
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 2
+      object Label4: TLabel
+        Left = 1
+        Top = 1
+        Width = 132
+        Height = 17
+        Align = alLeft
+        Caption = '                                 '
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object StaticText3: TStaticText
+        Left = 750
+        Top = 1
+        Width = 109
+        Height = 17
+        Align = alRight
+        Alignment = taCenter
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'Dado de Baja'
+        Color = 6974207
+        ParentColor = False
+        TabOrder = 0
+      end
     end
   end
   object dxBarABM: TdxBarManager
@@ -382,6 +411,11 @@ object FABMProveedores: TFABMProveedores
         Font.Style = []
         ItemLinks = <
           item
+            Item = btBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = BtNuevo
             Visible = True
           end
@@ -390,7 +424,12 @@ object FABMProveedores: TFABMProveedores
             Visible = True
           end
           item
-            Item = BtEliminar
+            BeginGroup = True
+            Item = btBaja
+            Visible = True
+          end
+          item
+            Item = btReactivar
             Visible = True
           end
           item
@@ -446,6 +485,7 @@ object FABMProveedores: TFABMProveedores
       Visible = ivAlways
       ImageIndex = 0
       ShortCut = 113
+      OnClick = BtNuevoClick
       AutoGrayScale = False
     end
     object BtModificar: TdxBarLargeButton
@@ -455,24 +495,26 @@ object FABMProveedores: TFABMProveedores
       Visible = ivAlways
       ImageIndex = 1
       ShortCut = 114
+      OnClick = BtModificarClick
       AutoGrayScale = False
     end
-    object BtEliminar: TdxBarLargeButton
-      Caption = 'Eliminar'
+    object btBaja: TdxBarLargeButton
+      Caption = 'Baja'
       Category = 0
-      Hint = 'Eliminar el registro actual'
+      Hint = 'Da de baja un registro'
       Visible = ivAlways
       ImageIndex = 2
       ShortCut = 115
+      OnClick = btBajaClick
       AutoGrayScale = False
     end
-    object btAutoComit: TdxBarLargeButton
-      Caption = 'Mod. Especial'
+    object btBuscar: TdxBarLargeButton
+      Caption = 'Buscar'
       Category = 0
-      Hint = 'Modifica y guarda los cambios autom'#225'ticamente'
+      Hint = 'Buscar'
       Visible = ivAlways
       ImageIndex = 16
-      ShortCut = 117
+      OnClick = btBuscarClick
       AutoGrayScale = False
     end
     object BtGuardar: TdxBarLargeButton
@@ -483,6 +525,7 @@ object FABMProveedores: TFABMProveedores
       Visible = ivAlways
       ImageIndex = 3
       ShortCut = 121
+      OnClick = BtGuardarClick
       AutoGrayScale = False
     end
     object BtCancelar: TdxBarLargeButton
@@ -493,15 +536,17 @@ object FABMProveedores: TFABMProveedores
       Visible = ivAlways
       ImageIndex = 4
       ShortCut = 120
+      OnClick = BtCancelarClick
       AutoGrayScale = False
     end
-    object BtDuplicar: TdxBarLargeButton
-      Caption = 'Duplicar'
+    object btReactivar: TdxBarLargeButton
+      Caption = 'Reactivar'
       Category = 0
-      Hint = 'Crea una copia del registro actual'
+      Hint = 'Reactiva un registro'
       Visible = ivAlways
       ImageIndex = 3
       ShortCut = 116
+      OnClick = btReactivarClick
       AutoGrayScale = False
     end
     object Bt_Seleccionar: TdxBarLargeButton
@@ -530,43 +575,38 @@ object FABMProveedores: TFABMProveedores
       Visible = ivAlways
       ImageIndex = 13
       ShortCut = 123
+      OnClick = bt_salirClick
       AutoGrayScale = False
     end
-    object GrupoVisualizando: TdxBarGroup
+    object GrupoEditando: TdxBarGroup
       Items = (
         'BtNuevo'
         'BtModificar'
-        'btAutoComit'
+        'btBuscar'
         'Bt_Seleccionar'
-        'BtEliminar'
+        'btBaja'
         'btBajar'
-        'bt_salir')
+        'bt_salir'
+        'btReactivar')
     end
-    object GrupoEditando: TdxBarGroup
+    object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
       Items = (
         'BtGuardar'
         'BtCancelar')
     end
-    object GrupoModEspecial: TdxBarGroup
-      Items = (
-        'btAutoComit')
-    end
-    object GrupoBuscar: TdxBarGroup
-    end
   end
   object ZQ_IE_Proveedores: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select *'
-      'from ie_proveedores p'
+      'select p.*'
+      'from ie_proveedores p '
       'where p.baja <> '#39'N'#39)
     Params = <>
     Left = 432
-    Top = 64
+    Top = 72
     object ZQ_IE_ProveedoresNRO_PROVEEDOR: TIntegerField
       FieldName = 'NRO_PROVEEDOR'
-      Required = True
     end
     object ZQ_IE_ProveedoresAPELLIDO_Y_NOMBRE: TStringField
       FieldName = 'APELLIDO_Y_NOMBRE'
@@ -579,10 +619,6 @@ object FABMProveedores: TFABMProveedores
     object ZQ_IE_ProveedoresDIRECCION: TStringField
       FieldName = 'DIRECCION'
       Size = 150
-    end
-    object ZQ_IE_ProveedoresTIPO_DOCUMENTO: TStringField
-      FieldName = 'TIPO_DOCUMENTO'
-      Size = 10
     end
     object ZQ_IE_ProveedoresNRO_DOCUMENTO: TStringField
       FieldName = 'NRO_DOCUMENTO'
@@ -600,10 +636,99 @@ object FABMProveedores: TFABMProveedores
       FieldName = 'BAJA'
       Size = 1
     end
+    object ZQ_IE_ProveedoresID_TIPO_DOCUMENTO: TIntegerField
+      FieldName = 'ID_TIPO_DOCUMENTO'
+    end
   end
   object DS_IE_Proveedores: TDataSource
     DataSet = ZQ_IE_Proveedores
     Left = 432
     Top = 120
+  end
+  object ZQ_TipoDocumento: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from tipo_documento')
+    Params = <>
+    Left = 568
+    Top = 72
+    object ZQ_TipoDocumentoID_TIPO_DOCUMENTO: TIntegerField
+      FieldName = 'ID_TIPO_DOCUMENTO'
+      Required = True
+    end
+    object ZQ_TipoDocumentoDECRIPCION: TStringField
+      FieldName = 'DECRIPCION'
+      Size = 30
+    end
+  end
+  object DS_TipoDocumento: TDataSource
+    DataSet = ZQ_TipoDocumento
+    Left = 568
+    Top = 120
+  end
+  object EKBusquedaAvanzada1: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Nombre y Apellido'
+        Campo = 'apellido_y_nombre'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre Fantasia'
+        Campo = 'nombre_fantasia'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Direccion'
+        Campo = 'direccion'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nro Doc'
+        Campo = 'nro_documento'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'p'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'SI'
+          'NO')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'S'
+          'N')
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_IE_Proveedores
+    SQL.Strings = (
+      'select p.*'
+      'from ie_proveedores p ')
+    SQL_Select.Strings = (
+      'select p.*')
+    SQL_From.Strings = (
+      'from ie_proveedores p ')
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 72
+    Top = 96
   end
 end
