@@ -65,11 +65,18 @@ object FPrincipal: TFPrincipal
     StyleName = 'XP Style'
     object AConfiguracion: TAction
       Caption = 'Configuracion'
+      ImageIndex = 16
       OnExecute = AConfiguracionExecute
     end
     object AABMProveedores: TAction
       Caption = 'ABM Proveedores'
+      ImageIndex = 18
       OnExecute = AABMProveedoresExecute
+    end
+    object AABM_Cuentas: TAction
+      Caption = 'ABM Cuentas'
+      ImageIndex = 23
+      OnExecute = AABM_CuentasExecute
     end
   end
   object MainMenu1: TMainMenu
@@ -88,7 +95,7 @@ object FPrincipal: TFPrincipal
         Caption = 'Saldos Iniciales'
       end
       object CuentasBancariasyCajas1: TMenuItem
-        Caption = 'Cuentas Bancarias y Cajas'
+        Action = AABM_Cuentas
       end
       object ransferenciaEntreCuentas1: TMenuItem
         Caption = 'Transferencia Entre Cuentas'
@@ -133,7 +140,7 @@ object FPrincipal: TFPrincipal
       end
       object Salir2: TMenuItem
         Caption = 'Salir'
-        ImageIndex = 8
+        ImageIndex = 13
         OnClick = Salir2Click
       end
     end

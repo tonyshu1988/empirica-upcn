@@ -6,7 +6,8 @@ uses
   UDM in 'UDM.pas' {DM: TDataModule},
   UUtilidades in 'UUtilidades.pas',
   UConfiguracion in 'UConfiguracion.pas' {FConfiguracion},
-  UABMProveedores in 'UABMProveedores.pas' {FABMProveedores};
+  UABMProveedores in 'UABMProveedores.pas' {FABMProveedores},
+  UABM_Cuentas in 'UABM_Cuentas.pas' {FABM_Cuentas};
 
 {$R *.res}
 

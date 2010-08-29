@@ -38,12 +38,14 @@ type
     EKImageList16x16: TEKImageList32;
     EKImageList32x32: TEKImageList32;
     AABMProveedores: TAction;
+    AABM_Cuentas: TAction;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure AConfiguracionExecute(Sender: TObject);
     procedure AABMProveedoresExecute(Sender: TObject);
+    procedure AABM_CuentasExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,7 +59,7 @@ implementation
 
 {$R *.dfm}
 
-Uses UDM, UConfiguracion, UABMProveedores;
+Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas;
 
 function salir_de_programa:boolean;
 begin
@@ -103,6 +105,11 @@ end;
 procedure TFPrincipal.AABMProveedoresExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABMProveedores, FABMProveedores);
+end;
+
+procedure TFPrincipal.AABM_CuentasExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABM_Cuentas, FABM_Cuentas);
 end;
 
 end.
