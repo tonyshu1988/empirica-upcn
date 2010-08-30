@@ -14,15 +14,17 @@ object FPlanCuentaRecursos: TFPlanCuentaRecursos
   OldCreateOrder = False
   Position = poDefault
   Visible = True
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object dxDBTreeView1: TdxDBTreeView
     Left = 0
     Top = 0
     Width = 854
-    Height = 315
+    Height = 344
     ShowNodeHint = True
     AutoExpand = True
+    DataSource = DS_PC_Erogaciones
     DisplayField = 'CODIGO_CUENTA;NOMBRE_CUENTA'
     KeyField = 'CODIGO_CUENTA'
     ListField = 'NOMBRE_CUENTA'
@@ -32,111 +34,126 @@ object FPlanCuentaRecursos: TFPlanCuentaRecursos
     RaiseOnError = True
     Indent = 19
     Align = alClient
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Verdana'
+    Font.Style = []
+    Color = 16702641
     ParentColor = False
     Options = [trDBConfirmDelete, trCanDBNavigate, trSmartRecordCopy, trCheckHasChildren]
     SelectedIndex = -1
     TabOrder = 0
+    ParentFont = False
   end
   object pDatos: TPanel
     Left = 0
-    Top = 315
+    Top = 344
     Width = 854
-    Height = 99
+    Height = 70
     Align = alBottom
     BevelOuter = bvNone
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Verdana'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 5
     Visible = False
     object Label1: TLabel
-      Left = 7
-      Top = 21
-      Width = 77
+      Left = 271
+      Top = 13
+      Width = 95
       Height = 13
       Caption = 'Nombre Cuenta:'
       Transparent = True
     end
     object Label2: TLabel
-      Left = 462
-      Top = 21
-      Width = 102
+      Left = 14
+      Top = 13
+      Width = 74
       Height = 13
-      Caption = 'Nro Cuenta Bancaria:'
-      Transparent = True
-    end
-    object Label3: TLabel
-      Left = 9
-      Top = 62
-      Width = 75
-      Height = 13
-      Caption = 'Medio de Pago:'
-      Transparent = True
-    end
-    object Label4: TLabel
-      Left = 419
-      Top = 62
-      Width = 72
-      Height = 13
-      Caption = 'Ultimo N'#250'mero:'
+      Caption = 'Nro. Cuenta:'
       Transparent = True
     end
     object Label5: TLabel
-      Left = 654
-      Top = 62
-      Width = 68
-      Height = 13
-      Caption = 'Auto Numerar:'
+      Left = 299
+      Top = 45
+      Width = 63
+      Height = 14
+      Caption = 'Imputable:'
       Transparent = True
     end
-    object dbEditNombreCuenta: TDBEdit
-      Left = 88
-      Top = 15
-      Width = 355
+    object Label6: TLabel
+      Left = 14
+      Top = 45
+      Width = 38
+      Height = 13
+      Caption = 'Padre:'
+      Transparent = True
+    end
+    object dbPadre: TDBText
+      Left = 56
+      Top = 45
+      Width = 185
+      Height = 17
+      DataField = 'PADRE'
+      DataSource = DS_PC_Erogaciones
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object dbNombreCuenta: TDBEdit
+      Left = 368
+      Top = 9
+      Width = 361
       Height = 21
       CharCase = ecUpperCase
       DataField = 'NOMBRE_CUENTA'
+      DataSource = DS_PC_Erogaciones
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 0
     end
-    object dbEditNroCuenta: TDBEdit
-      Left = 568
-      Top = 15
-      Width = 251
+    object dbNroCuenta: TDBEdit
+      Left = 96
+      Top = 9
+      Width = 153
       Height = 21
       CharCase = ecUpperCase
-      DataField = 'NRO_CUENTA_BANCARIA'
+      DataField = 'CODIGO_CUENTA'
+      DataSource = DS_PC_Erogaciones
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 1
     end
-    object dbEditUltimoNro: TDBEdit
-      Left = 495
-      Top = 56
-      Width = 114
-      Height = 21
-      CharCase = ecUpperCase
-      DataField = 'ULTIMO_NRO'
-      TabOrder = 3
-    end
-    object dbLookupCBoxMedio: TDBLookupComboBox
-      Left = 88
-      Top = 56
-      Width = 289
-      Height = 21
-      DataField = 'MEDIO_POR_DEFECTO'
-      KeyField = 'ID_MEDIO'
-      ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
-      TabOrder = 2
-    end
-    object dbRGroupAutonumerar: TDBRadioGroup
-      Left = 726
-      Top = 48
+    object dbImputable: TDBRadioGroup
+      Left = 368
+      Top = 32
       Width = 93
-      Height = 33
+      Height = 30
       Columns = 2
-      DataField = 'AUTONUMERAR'
+      DataField = 'TITULO'
+      DataSource = DS_PC_Erogaciones
       Items.Strings = (
-        'SI'
-        'NO')
-      TabOrder = 4
+        'Si'
+        'No')
+      TabOrder = 2
       Values.Strings = (
-        'S'
-        'N')
+        '0'
+        '1')
     end
   end
   object dxBarABM: TdxBarManager
@@ -244,6 +261,11 @@ object FPlanCuentaRecursos: TFPlanCuentaRecursos
         Font.Style = []
         ItemLinks = <
           item
+            Item = btBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnNuevo
             Visible = True
           end
@@ -309,6 +331,7 @@ object FPlanCuentaRecursos: TFPlanCuentaRecursos
       Visible = ivAlways
       ImageIndex = 0
       ShortCut = 113
+      OnClick = btnNuevoClick
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
@@ -318,6 +341,7 @@ object FPlanCuentaRecursos: TFPlanCuentaRecursos
       Visible = ivAlways
       ImageIndex = 1
       ShortCut = 114
+      OnClick = btnModificarClick
       AutoGrayScale = False
     end
     object btnEliminar: TdxBarLargeButton
@@ -327,6 +351,7 @@ object FPlanCuentaRecursos: TFPlanCuentaRecursos
       Visible = ivAlways
       ImageIndex = 2
       ShortCut = 115
+      OnClick = btnEliminarClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
@@ -359,12 +384,22 @@ object FPlanCuentaRecursos: TFPlanCuentaRecursos
       ShortCut = 123
       AutoGrayScale = False
     end
+    object btBuscar: TdxBarLargeButton
+      Caption = 'Buscar Plan'
+      Category = 0
+      Hint = 'Buscar Plan'
+      Visible = ivAlways
+      ImageIndex = 29
+      OnClick = btBuscarClick
+      AutoGrayScale = False
+    end
     object GrupoVisualizando: TdxBarGroup
       Items = (
         'btnNuevo'
         'btnModificar'
         'btnEliminar'
-        'btnSalir')
+        'btnSalir'
+        'btBuscar')
     end
     object GrupoEditando: TdxBarGroup
       Enabled = False
@@ -372,5 +407,60 @@ object FPlanCuentaRecursos: TFPlanCuentaRecursos
         'btnGuardar'
         'btnCancelar')
     end
+  end
+  object ZQ_PC_Erogaciones: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from IE_PC_EROGACIONES'
+      'where IE_PC_EROGACIONES.codigo_cuenta > '#39#39
+      'order by IE_PC_EROGACIONES.codigo_cuenta')
+    Params = <>
+    Left = 256
+    Top = 72
+    object ZQ_PC_ErogacionesCODIGO_CUENTA: TStringField
+      FieldName = 'CODIGO_CUENTA'
+    end
+    object ZQ_PC_ErogacionesPADRE: TStringField
+      FieldName = 'PADRE'
+    end
+    object ZQ_PC_ErogacionesTITULO: TIntegerField
+      FieldName = 'TITULO'
+    end
+    object ZQ_PC_ErogacionesNOMBRE_CUENTA: TStringField
+      FieldName = 'NOMBRE_CUENTA'
+      Size = 240
+    end
+    object ZQ_PC_ErogacionesCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+      Size = 6
+    end
+    object ZQ_PC_ErogacionesPAGADO_EJ: TFloatField
+      FieldName = 'PAGADO_EJ'
+    end
+    object ZQ_PC_ErogacionesDEUDA_EJ: TFloatField
+      FieldName = 'DEUDA_EJ'
+    end
+  end
+  object DS_PC_Erogaciones: TDataSource
+    DataSet = ZQ_PC_Erogaciones
+    Left = 320
+    Top = 24
+  end
+  object EKListadoSQL1: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      
+        'select ie_pc_erogaciones.codigo_cuenta, ie_pc_erogaciones.nombre' +
+        '_cuenta'
+      'from ie_pc_erogaciones'
+      'where (ie_pc_erogaciones.titulo = 0)'
+      'order by ie_pc_erogaciones.nombre_cuenta')
+    CampoBuscar = 'nombre_cuenta'
+    CampoClave = 'codigo_cuenta'
+    BuscarEnQuery = ZQ_PC_Erogaciones
+    TituloVentana = 'Selecci'#243'n del Plan de Cuenta'
+    Left = 360
+    Top = 160
   end
 end
