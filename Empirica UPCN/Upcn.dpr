@@ -7,7 +7,8 @@ uses
   UUtilidades in 'UUtilidades.pas',
   UConfiguracion in 'UConfiguracion.pas' {FConfiguracion},
   UABMProveedores in 'UABMProveedores.pas' {FABMProveedores},
-  UABM_Cuentas in 'UABM_Cuentas.pas' {FABM_Cuentas};
+  UABM_Cuentas in 'UABM_Cuentas.pas' {FABM_Cuentas},
+  UPlanCuentaRecursos in 'UPlanCuentaRecursos.pas' {FPlanCuentaRecursos};
 
 {$R *.res}
 
