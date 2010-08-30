@@ -20,8 +20,8 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 575
-    Width = 863
+    Top = 567
+    Width = 855
     Height = 19
     Panels = <
       item
@@ -37,20 +37,20 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 863
+    Width = 855
     Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionToolBar1'
-    ColorMap.HighlightColor = 14410210
+    ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 14410210
+    ColorMap.UnusedColor = clWhite
     Spacing = 0
   end
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 863
-    Height = 546
+    Width = 855
+    Height = 538
     Align = alClient
     TabOrder = 2
   end
@@ -78,6 +78,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 23
       OnExecute = AABM_CuentasExecute
     end
+    object APlanErogaciones: TAction
+      Caption = 'Plan de Cuentas Erogaciones'
+      ImageIndex = 35
+      OnExecute = APlanErogacionesExecute
+    end
   end
   object MainMenu1: TMainMenu
     Images = Iconos_Menu_16
@@ -85,8 +90,9 @@ object FPrincipal: TFPrincipal
     Top = 56
     object PlandeCuentas: TMenuItem
       Caption = 'Plan de Ctas'
+      ImageIndex = 35
       object PlandeCuentasErogaciones1: TMenuItem
-        Caption = 'Plan de Cuentas Erogaciones'
+        Action = APlanErogaciones
       end
     end
     object Disponibilidades: TMenuItem
@@ -6574,7 +6580,7 @@ object FPrincipal: TFPrincipal
     Left = 56
     Top = 178
     Bitmap = {
-      494C010140004500040020002000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010140004500040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004002000001002000000000000080
       0400000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -16082,6 +16088,7 @@ object FPrincipal: TFPrincipal
       E00001FFF00000FFE00003FFE00003FFE00003FFF00001FFE00003FFE00003FF
       F00007FFF80003FFF00007FFF00007FFFC000FFFFC0007FFFC001FFFFC001FFF
       FF003FFFFF803FFFFF007FFFFF007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
 end
