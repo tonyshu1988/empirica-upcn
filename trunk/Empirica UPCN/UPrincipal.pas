@@ -35,10 +35,11 @@ type
     Disponibilidades1: TMenuItem;
     AConfiguracion: TAction;
     Configuracion1: TMenuItem;
-    EKImageList16x16: TEKImageList32;
-    EKImageList32x32: TEKImageList32;
+    Iconos_Menu_16: TEKImageList32;
+    Iconos_Menu_32: TEKImageList32;
     AABMProveedores: TAction;
     AABM_Cuentas: TAction;
+    Iconos_Barra_32: TImageList;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
