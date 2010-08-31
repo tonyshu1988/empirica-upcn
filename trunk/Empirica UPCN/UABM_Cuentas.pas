@@ -52,6 +52,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
   public
@@ -149,9 +150,21 @@ end;
 
 procedure TFABM_Cuentas.FormCreate(Sender: TObject);
 begin
-//  ISOrdenarGrilla1.CargarConfigColunmas;
   dm.ekModelo.abrir(ZQ_Cuentas);
   dm.ekModelo.abrir(ZQ_Medios);
+end;
+
+
+procedure TFABM_Cuentas.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_cuentas) then
+  begin
+    if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela?'), 'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+      canClose := False
+    else
+      dm.EKModelo.cancelar_transaccion(transaccion_cuentas);
+  end;
 end;
 
 end.

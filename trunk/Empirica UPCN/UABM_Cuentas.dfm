@@ -8,9 +8,13 @@ object FABM_Cuentas: TFABM_Cuentas
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -25,9 +29,9 @@ object FABM_Cuentas: TFABM_Cuentas
     TabOrder = 0
     object pDatos: TPanel
       Left = 2
-      Top = 320
+      Top = 329
       Width = 858
-      Height = 99
+      Height = 90
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
@@ -35,23 +39,23 @@ object FABM_Cuentas: TFABM_Cuentas
       object Label1: TLabel
         Left = 7
         Top = 21
-        Width = 77
+        Width = 95
         Height = 13
         Caption = 'Nombre Cuenta:'
         Transparent = True
       end
       object Label2: TLabel
-        Left = 462
+        Left = 475
         Top = 21
-        Width = 102
+        Width = 124
         Height = 13
         Caption = 'Nro Cuenta Bancaria:'
         Transparent = True
       end
       object Label3: TLabel
-        Left = 9
+        Left = 14
         Top = 62
-        Width = 75
+        Width = 88
         Height = 13
         Caption = 'Medio de Pago:'
         Transparent = True
@@ -59,64 +63,69 @@ object FABM_Cuentas: TFABM_Cuentas
       object Label4: TLabel
         Left = 419
         Top = 62
-        Width = 72
+        Width = 113
         Height = 13
-        Caption = 'Ultimo N'#250'mero:'
+        Caption = 'Ultimo Nro Cheque:'
         Transparent = True
       end
       object Label5: TLabel
-        Left = 654
+        Left = 672
         Top = 62
-        Width = 68
+        Width = 85
         Height = 13
         Caption = 'Auto Numerar:'
         Transparent = True
       end
       object dbEditNombreCuenta: TDBEdit
-        Left = 88
+        Left = 105
         Top = 15
         Width = 355
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NOMBRE_CUENTA'
+        DataSource = DS_Cuentas
         TabOrder = 0
       end
       object dbEditNroCuenta: TDBEdit
-        Left = 568
-        Top = 15
+        Left = 602
+        Top = 14
         Width = 251
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NRO_CUENTA_BANCARIA'
+        DataSource = DS_Cuentas
         TabOrder = 1
       end
       object dbEditUltimoNro: TDBEdit
-        Left = 495
-        Top = 56
+        Left = 535
+        Top = 55
         Width = 114
         Height = 21
         CharCase = ecUpperCase
         DataField = 'ULTIMO_NRO'
+        DataSource = DS_Cuentas
         TabOrder = 3
       end
       object dbLookupCBoxMedio: TDBLookupComboBox
-        Left = 88
+        Left = 105
         Top = 56
         Width = 289
         Height = 21
         DataField = 'MEDIO_POR_DEFECTO'
+        DataSource = DS_Cuentas
         KeyField = 'ID_MEDIO'
         ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
         ListSource = DS_Medios
         TabOrder = 2
       end
       object dbRGroupAutonumerar: TDBRadioGroup
-        Left = 726
+        Left = 760
         Top = 48
         Width = 93
         Height = 33
         Columns = 2
         DataField = 'AUTONUMERAR'
+        DataSource = DS_Cuentas
         Items.Strings = (
           'SI'
           'NO')
@@ -130,16 +139,58 @@ object FABM_Cuentas: TFABM_Cuentas
       Left = 2
       Top = 2
       Width = 858
-      Height = 318
+      Height = 327
       Align = alClient
       Color = 16772842
       DataSource = DS_Cuentas
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Name = 'Verdana'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_CUENTA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nombre Cuenta'
+          Width = 346
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NRO_CUENTA_BANCARIA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. Cuenta'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'medioPago'
+          Title.Alignment = taCenter
+          Title.Caption = 'Medio Pago'
+          Width = 234
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ULTIMO_NRO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Ultimo Nro. Cheque'
+          Width = 136
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'AUTONUMERAR'
+          Title.Alignment = taCenter
+          Title.Caption = 'Autonumerar'
+          Width = 92
+          Visible = True
+        end>
     end
   end
   object dxBarABM: TdxBarManager
@@ -392,7 +443,6 @@ object FABM_Cuentas: TFABM_Cuentas
     Top = 80
     object ZQ_CuentasID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
-      Required = True
     end
     object ZQ_CuentasNOMBRE_CUENTA: TStringField
       FieldName = 'NOMBRE_CUENTA'
