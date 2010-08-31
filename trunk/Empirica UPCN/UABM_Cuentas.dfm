@@ -298,6 +298,11 @@ object FABM_Cuentas: TFABM_Cuentas
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnVerDetalle
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnNuevo
             Visible = True
           end
@@ -339,6 +344,7 @@ object FABM_Cuentas: TFABM_Cuentas
     Categories.Visibles = (
       True)
     HideFloatingBarsWhenInactive = False
+    Images = FPrincipal.Iconos_Barra_32
     LargeImages = FPrincipal.Iconos_Barra_32
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
@@ -365,6 +371,7 @@ object FABM_Cuentas: TFABM_Cuentas
       ShortCut = 113
       OnClick = btnNuevoClick
       AutoGrayScale = False
+      HotImageIndex = 0
     end
     object btnModificar: TdxBarLargeButton
       Caption = 'Modificar'
@@ -375,6 +382,7 @@ object FABM_Cuentas: TFABM_Cuentas
       ShortCut = 114
       OnClick = btnModificarClick
       AutoGrayScale = False
+      HotImageIndex = 1
     end
     object btnEliminar: TdxBarLargeButton
       Caption = 'Eliminar'
@@ -385,6 +393,7 @@ object FABM_Cuentas: TFABM_Cuentas
       ShortCut = 115
       OnClick = btnEliminarClick
       AutoGrayScale = False
+      HotImageIndex = 2
     end
     object btnGuardar: TdxBarLargeButton
       Caption = 'Guardar'
@@ -396,6 +405,7 @@ object FABM_Cuentas: TFABM_Cuentas
       ShortCut = 121
       OnClick = btnGuardarClick
       AutoGrayScale = False
+      HotImageIndex = 3
     end
     object btnCancelar: TdxBarLargeButton
       Caption = 'Cancelar'
@@ -407,6 +417,7 @@ object FABM_Cuentas: TFABM_Cuentas
       ShortCut = 120
       OnClick = btnCancelarClick
       AutoGrayScale = False
+      HotImageIndex = 4
     end
     object btnSalir: TdxBarLargeButton
       Align = iaRight
@@ -418,13 +429,24 @@ object FABM_Cuentas: TFABM_Cuentas
       ShortCut = 123
       OnClick = btnSalirClick
       AutoGrayScale = False
+      HotImageIndex = 6
+    end
+    object btnVerDetalle: TdxBarLargeButton
+      Caption = 'Ver Detalle'
+      Category = 0
+      Hint = 'Ver Detalle'
+      Visible = ivAlways
+      ImageIndex = 12
+      OnClick = btnVerDetalleClick
+      AutoGrayScale = False
     end
     object GrupoVisualizando: TdxBarGroup
       Items = (
         'btnNuevo'
         'btnModificar'
         'btnEliminar'
-        'btnSalir')
+        'btnSalir'
+        'btnVerDetalle')
     end
     object GrupoEditando: TdxBarGroup
       Enabled = False

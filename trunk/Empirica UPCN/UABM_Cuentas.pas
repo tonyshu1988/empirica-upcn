@@ -45,6 +45,7 @@ type
     dbEditUltimoNro: TDBEdit;
     dbLookupCBoxMedio: TDBLookupComboBox;
     dbRGroupAutonumerar: TDBRadioGroup;
+    btnVerDetalle: TdxBarLargeButton;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -53,6 +54,7 @@ type
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure btnVerDetalleClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -77,6 +79,7 @@ begin
   begin
     dbGridCuentas.Enabled := false;
     pDatos.Visible := true;
+    pDatos.Enabled := true;
     ZQ_Cuentas.Append;
     ZQ_CuentasAUTONUMERAR.AsString := 'N';
     dbEditNombreCuenta.SetFocus;
@@ -95,6 +98,7 @@ begin
   begin
     dbGridCuentas.Enabled := false;
     pDatos.Visible := true;
+    pDatos.Enabled := true;    
     dbEditNombreCuenta.SetFocus;
     GrupoVisualizando.Enabled := false;
     GrupoEditando.Enabled := true;
@@ -127,6 +131,7 @@ begin
     GrupoVisualizando.Enabled := true;
     GrupoEditando.Enabled := false;
     pDatos.Visible := false;
+    pDatos.Enabled := false;
     ZQ_Cuentas.Refresh;
   end;
 end;
@@ -137,6 +142,7 @@ begin
   dbGridCuentas.Enabled := true;
   dm.EKModelo.cancelar_transaccion(transaccion_cuentas);
   pDatos.Visible := false;
+  pDatos.Enabled := false;  
   GrupoVisualizando.Enabled := true;
   GrupoEditando.Enabled := false;
 end;
@@ -165,6 +171,13 @@ begin
     else
       dm.EKModelo.cancelar_transaccion(transaccion_cuentas);
   end;
+end;
+
+
+procedure TFABM_Cuentas.btnVerDetalleClick(Sender: TObject);
+begin
+  pDatos.Visible:= not pDatos.Visible;
+  pDatos.Enabled:= not pDatos.Visible;
 end;
 
 end.
