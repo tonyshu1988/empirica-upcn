@@ -87,7 +87,7 @@ const
 
 implementation
 
-uses UDM;
+uses UDM, UPrincipal;
 
 {$R *.dfm}
 
@@ -206,6 +206,7 @@ end;
 procedure TFABMProveedores.FormCreate(Sender: TObject);
 begin
 dm.EKModelo.abrir(ZQ_TipoDocumento);
+EKBusquedaAvanzada1.Abrir;
 end;
 
 procedure TFABMProveedores.DBGridProveedoresDrawColumnCell(Sender: TObject;
