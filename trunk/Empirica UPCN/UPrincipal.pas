@@ -67,8 +67,8 @@ Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
 
 function salir_de_programa:boolean;
 begin
- { result := true;
-  if dm.ISModeloT.hay_transaccion then
+  result := true;
+  if dm.EKModelo.hay_transaccion then
   begin
     if Application.MessageBox('Hay transacciones abiertas, Desea cerrar igualmente la aplicación', 'Atención', MB_YESNO ) = IDYES then
       ExitProcess(0)
@@ -76,7 +76,7 @@ begin
       result := false;
   end
   else
-    ExitProcess(0);      }
+    ExitProcess(0);
 end;
 
 procedure TFPrincipal.ALiquidacionExecute(Sender: TObject);

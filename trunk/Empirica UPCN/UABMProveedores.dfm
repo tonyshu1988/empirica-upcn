@@ -22,13 +22,13 @@ object FABMProveedores: TFABMProveedores
     Left = 0
     Top = 0
     Width = 862
-    Height = 428
+    Height = 416
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
     object Panel_edicion: TPanel
       Left = 1
-      Top = 290
+      Top = 278
       Width = 860
       Height = 137
       Align = alBottom
@@ -220,7 +220,7 @@ object FABMProveedores: TFABMProveedores
       Left = 1
       Top = 20
       Width = 860
-      Height = 270
+      Height = 258
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -462,6 +462,7 @@ object FABMProveedores: TFABMProveedores
     Categories.Visibles = (
       True)
     HideFloatingBarsWhenInactive = False
+    LargeImages = FPrincipal.Iconos_Barra_32
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
     MenusShowRecentItemsFirst = False
@@ -477,7 +478,7 @@ object FABMProveedores: TFABMProveedores
       0
       0
       0
-      40)
+      52)
     object BtNuevo: TdxBarLargeButton
       Caption = 'Nuevo'
       Category = 0
@@ -503,7 +504,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
-      ImageIndex = 2
+      ImageIndex = 25
       ShortCut = 115
       OnClick = btBajaClick
       AutoGrayScale = False
@@ -513,7 +514,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Buscar'
       Visible = ivAlways
-      ImageIndex = 16
+      ImageIndex = 29
       OnClick = btBuscarClick
       AutoGrayScale = False
     end
@@ -544,7 +545,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
-      ImageIndex = 3
+      ImageIndex = 24
       ShortCut = 116
       OnClick = btReactivarClick
       AutoGrayScale = False
@@ -573,7 +574,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
-      ImageIndex = 13
+      ImageIndex = 6
       ShortCut = 123
       OnClick = bt_salirClick
       AutoGrayScale = False
