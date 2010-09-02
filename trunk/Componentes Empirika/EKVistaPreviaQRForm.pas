@@ -5,12 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, QRPrntr, ToolWin, ComCtrls, Buttons, ImgList, StdCtrls, QRExport,
-  qr3const, ActnList, ActnMan, ActnCtrls, XPStyleActnCtrls;
+  qr3const, ActnList, ActnMan, ActnCtrls, XPStyleActnCtrls, EKImageList32,
+  ExtCtrls;
 
 type
   TEKVistaPreviaQRForm = class(TForm)
     QRPreview1: TQRPreview;
-    imagenes: TImageList;
+    imagenesx: TImageList;
     Acciones: TActionManager;
     Barra: TActionToolBar;
     zoom_pagina: TAction;
@@ -35,6 +36,8 @@ type
     zoom_mas: TAction;
     zoom_menos: TAction;
     QRExcelFilter1: TQRExcelFilter;
+    imagenes: TEKImageList32;
+    Image1: TImage;
     procedure SpeedButton1Click(Sender: TObject);
     procedure ExitButtonClick(Sender: TObject);
     procedure ZoomFitClick(Sender: TObject);
