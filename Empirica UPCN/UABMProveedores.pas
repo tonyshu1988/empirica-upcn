@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, StdCtrls, DBCtrls, Mask, ExtCtrls, Grids,
   DBGrids, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
-  EKBusquedaAvanzada;
+  EKBusquedaAvanzada, QuickRpt, QRCtrls, EKVistaPreviaQR;
 
 type
   TFABMProveedores = class(TForm)
@@ -59,6 +59,32 @@ type
     PBusqueda: TPanel;
     Label4: TLabel;
     StaticText3: TStaticText;
+    btImprimir: TdxBarLargeButton;
+    ReporteProveedores: TQuickRep;
+    QRBand7: TQRBand;
+    QRLabel26: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRBand9: TQRBand;
+    QRLabel35: TQRLabel;
+    fechaHoy: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand10: TQRBand;
+    QRDBText53: TQRDBText;
+    QRDBText63: TQRDBText;
+    QRDBText67: TQRDBText;
+    QRDBText69: TQRDBText;
+    ChildBand1: TQRChildBand;
+    QRLabel18: TQRLabel;
+    QRLabel77: TQRLabel;
+    QRLabel87: TQRLabel;
+    QRLabel88: TQRLabel;
+    QRLabel89: TQRLabel;
+    QRBand1: TQRBand;
+    QRSysData4: TQRSysData;
+    QRLabel5: TQRLabel;
+    QRDBText1: TQRDBText;
+    EKVistaPreviaQR1: TEKVistaPreviaQR;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -72,6 +98,7 @@ type
     procedure DBGridProveedoresDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure btImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -237,6 +264,12 @@ begin
        DBGridProveedores.DefaultDrawColumnCell(rect,datacol,column,state);
     end;
 
+end;
+
+procedure TFABMProveedores.btImprimirClick(Sender: TObject);
+begin
+if not ZQ_IE_Proveedores.IsEmpty then
+  EKVistaPreviaQR1.VistaPrevia;
 end;
 
 end.
