@@ -13,6 +13,7 @@ object FABM_Cuentas: TFABM_Cuentas
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Position = poDefault
+  Scaled = False
   Visible = True
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -21,16 +22,16 @@ object FABM_Cuentas: TFABM_Cuentas
   object pContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 421
+    Width = 854
+    Height = 410
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
     TabOrder = 0
     object pDatos: TPanel
       Left = 2
-      Top = 329
-      Width = 858
+      Top = 318
+      Width = 850
       Height = 90
       Align = alBottom
       BevelOuter = bvNone
@@ -138,8 +139,8 @@ object FABM_Cuentas: TFABM_Cuentas
     object dbGridCuentas: TDBGrid
       Left = 2
       Top = 2
-      Width = 858
-      Height = 327
+      Width = 850
+      Height = 316
       Align = alClient
       Color = 16772842
       DataSource = DS_Cuentas
@@ -192,11 +193,66 @@ object FABM_Cuentas: TFABM_Cuentas
           Visible = True
         end>
     end
+    object QuickRep1: TQuickRep
+      Tag = 99
+      Left = 304
+      Top = 48
+      Width = 794
+      Height = 1123
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      Functions.Strings = (
+        'PAGENUMBER'
+        'COLUMNNUMBER'
+        'REPORTTITLE')
+      Functions.DATA = (
+        '0'
+        '0'
+        #39#39)
+      Options = [FirstPageHeader, LastPageFooter]
+      Page.Columns = 1
+      Page.Orientation = poPortrait
+      Page.PaperSize = A4
+      Page.Values = (
+        100.000000000000000000
+        2970.000000000000000000
+        100.000000000000000000
+        2100.000000000000000000
+        100.000000000000000000
+        100.000000000000000000
+        0.000000000000000000)
+      PrinterSettings.Copies = 1
+      PrinterSettings.OutputBin = Auto
+      PrinterSettings.Duplex = False
+      PrinterSettings.FirstPage = 0
+      PrinterSettings.LastPage = 0
+      PrinterSettings.ExtendedDuplex = 0
+      PrinterSettings.UseStandardprinter = False
+      PrinterSettings.UseCustomBinCode = False
+      PrinterSettings.CustomBinCode = 0
+      PrinterSettings.UseCustomPaperCode = False
+      PrinterSettings.CustomPaperCode = 0
+      PrinterSettings.PrintMetaFile = False
+      PrintIfEmpty = True
+      SnapToGrid = True
+      Units = MM
+      Zoom = 100
+      PrevFormStyle = fsNormal
+      PreviewInitialState = wsNormal
+    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -324,6 +380,11 @@ object FABM_Cuentas: TFABM_Cuentas
             Visible = True
           end
           item
+            BeginGroup = True
+            Item = btnImprimir
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -440,13 +501,22 @@ object FABM_Cuentas: TFABM_Cuentas
       OnClick = btnVerDetalleClick
       AutoGrayScale = False
     end
+    object btnImprimir: TdxBarLargeButton
+      Caption = 'Imprimir'
+      Category = 0
+      Hint = 'Imprimir'
+      Visible = ivAlways
+      ImageIndex = 28
+      OnClick = btnImprimirClick
+    end
     object GrupoVisualizando: TdxBarGroup
       Items = (
         'btnNuevo'
         'btnModificar'
         'btnEliminar'
         'btnSalir'
-        'btnVerDetalle')
+        'btnVerDetalle'
+        'btnImprimir')
     end
     object GrupoEditando: TdxBarGroup
       Enabled = False
@@ -525,5 +595,14 @@ object FABM_Cuentas: TFABM_Cuentas
       FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
       Size = 30
     end
+  end
+  object EKVistaPrevia: TEKVistaPreviaQR
+    Reporte = QuickRep1
+    ShowModal = False
+    VerGuardar = False
+    VerExpImagen = False
+    VerExpWord = False
+    Left = 312
+    Top = 200
   end
 end

@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, Grids, DBGrids, DB,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls, DBCtrls, Mask;
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls, DBCtrls, Mask,
+  QuickRpt, EKVistaPreviaQR;
 
 type
   TFABM_Cuentas = class(TForm)
@@ -46,6 +47,9 @@ type
     dbLookupCBoxMedio: TDBLookupComboBox;
     dbRGroupAutonumerar: TDBRadioGroup;
     btnVerDetalle: TdxBarLargeButton;
+    EKVistaPrevia: TEKVistaPreviaQR;
+    QuickRep1: TQuickRep;
+    btnImprimir: TdxBarLargeButton;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -55,6 +59,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnVerDetalleClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -178,6 +183,12 @@ procedure TFABM_Cuentas.btnVerDetalleClick(Sender: TObject);
 begin
   pDatos.Visible:= not pDatos.Visible;
   pDatos.Enabled:= not pDatos.Visible;
+end;
+
+
+procedure TFABM_Cuentas.btnImprimirClick(Sender: TObject);
+begin
+  EKVistaPrevia.VistaPrevia;
 end;
 
 end.
