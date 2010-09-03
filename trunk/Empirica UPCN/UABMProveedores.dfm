@@ -203,15 +203,15 @@ object FABMProveedores: TFABMProveedores
         Top = 45
         Width = 159
         Height = 21
-        DataField = 'ID_TIPO_DOCUMENTO'
+        DataField = 'TIPO_DOCUMENTO'
         DataSource = DS_IE_Proveedores
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
-        KeyField = 'ID_TIPO_DOCUMENTO'
-        ListField = 'DECRIPCION'
+        KeyField = 'TIPO_DOCUMENTO'
+        ListField = 'DESCRIPCION'
         ListSource = DS_TipoDocumento
         ParentFont = False
         TabOrder = 5
@@ -1373,8 +1373,9 @@ object FABMProveedores: TFABMProveedores
       FieldName = 'BAJA'
       Size = 1
     end
-    object ZQ_IE_ProveedoresID_TIPO_DOCUMENTO: TIntegerField
-      FieldName = 'ID_TIPO_DOCUMENTO'
+    object ZQ_IE_ProveedoresTIPO_DOCUMENTO: TStringField
+      FieldName = 'TIPO_DOCUMENTO'
+      Size = 10
     end
   end
   object DS_IE_Proveedores: TDataSource
@@ -1390,13 +1391,13 @@ object FABMProveedores: TFABMProveedores
     Params = <>
     Left = 568
     Top = 72
-    object ZQ_TipoDocumentoID_TIPO_DOCUMENTO: TIntegerField
-      FieldName = 'ID_TIPO_DOCUMENTO'
+    object ZQ_TipoDocumentoTIPO_DOCUMENTO: TIntegerField
+      FieldName = 'TIPO_DOCUMENTO'
       Required = True
     end
-    object ZQ_TipoDocumentoDECRIPCION: TStringField
-      FieldName = 'DECRIPCION'
-      Size = 30
+    object ZQ_TipoDocumentoDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 50
     end
   end
   object DS_TipoDocumento: TDataSource
