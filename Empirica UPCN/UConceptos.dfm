@@ -19,7 +19,7 @@ object FConceptos: TFConceptos
   TextHeight = 13
   object pDatos: TPanel
     Left = 0
-    Top = 344
+    Top = 396
     Width = 854
     Height = 70
     Align = alBottom
@@ -30,7 +30,7 @@ object FConceptos: TFConceptos
     Font.Name = 'Verdana'
     Font.Style = []
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 0
     Visible = False
     object Label1: TLabel
       Left = 279
@@ -114,7 +114,7 @@ object FConceptos: TFConceptos
     Color = 16772842
     DataSource = DS_IE_Conceptos
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-    TabOrder = 5
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -124,28 +124,87 @@ object FConceptos: TFConceptos
       item
         Expanded = False
         FieldName = 'ID_CONCEPTO'
+        Title.Caption = 'Id'
+        Width = 31
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'COD_CORTO'
+        Title.Caption = 'C'#243'digo'
+        Width = 81
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'NOMBRE_CONCEPTO'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'BAJA'
+        Title.Caption = 'Nombre'
+        Width = 463
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'IMPORTE'
+        Title.Caption = 'Importe'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BAJA'
+        Title.Caption = 'Baja'
+        Width = 40
         Visible = True
       end>
+  end
+  object ZQ_IE_Conceptos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from IE_conceptos'
+      'order by ie_conceptos.id_concepto,ie_conceptos.cod_corto')
+    Params = <>
+    Left = 256
+    Top = 72
+    object ZQ_IE_ConceptosID_CONCEPTO: TIntegerField
+      FieldName = 'ID_CONCEPTO'
+      Required = True
+    end
+    object ZQ_IE_ConceptosCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+      Size = 6
+    end
+    object ZQ_IE_ConceptosNOMBRE_CONCEPTO: TStringField
+      FieldName = 'NOMBRE_CONCEPTO'
+      Size = 240
+    end
+    object ZQ_IE_ConceptosBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_IE_ConceptosIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+    end
+  end
+  object DS_IE_Conceptos: TDataSource
+    DataSet = ZQ_IE_Conceptos
+    Left = 376
+    Top = 72
+  end
+  object EKListadoSQL1: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      
+        'select ie_pc_erogaciones.codigo_cuenta, ie_pc_erogaciones.nombre' +
+        '_cuenta'
+      'from ie_pc_erogaciones'
+      'where (ie_pc_erogaciones.titulo = 0)'
+      'order by ie_pc_erogaciones.nombre_cuenta')
+    CampoBuscar = 'nombre_cuenta'
+    CampoClave = 'codigo_cuenta'
+    BuscarEnQuery = ZQ_IE_Conceptos
+    TituloVentana = 'Selecci'#243'n del Plan de Cuenta'
+    Left = 112
+    Top = 192
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -257,28 +316,33 @@ object FConceptos: TFConceptos
           end
           item
             BeginGroup = True
-            Item = btnNuevo
+            Item = BtNuevo
             Visible = True
           end
           item
-            Item = btnModificar
-            Visible = True
-          end
-          item
-            Item = btnEliminar
+            Item = BtModificar
             Visible = True
           end
           item
             BeginGroup = True
-            Item = btnGuardar
+            Item = btBaja
             Visible = True
           end
           item
-            Item = btnCancelar
+            Item = btReactivar
             Visible = True
           end
           item
-            Item = btnSalir
+            BeginGroup = True
+            Item = BtGuardar
+            Visible = True
+          end
+          item
+            Item = BtCancelar
+            Visible = True
+          end
+          item
+            Item = bt_salir
             Visible = True
           end>
         Name = 'barra'
@@ -308,44 +372,50 @@ object FConceptos: TFConceptos
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 208
-    Top = 200
+    Left = 504
+    Top = 176
     DockControlHeights = (
       0
       0
       0
       52)
-    object btnNuevo: TdxBarLargeButton
+    object BtNuevo: TdxBarLargeButton
       Caption = 'Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
       ImageIndex = 0
       ShortCut = 113
-      OnClick = btnNuevoClick
       AutoGrayScale = False
     end
-    object btnModificar: TdxBarLargeButton
+    object BtModificar: TdxBarLargeButton
       Caption = 'Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
       ImageIndex = 1
       ShortCut = 114
-      OnClick = btnModificarClick
       AutoGrayScale = False
     end
-    object btnEliminar: TdxBarLargeButton
-      Caption = 'Eliminar'
+    object btBaja: TdxBarLargeButton
+      Caption = 'Baja'
       Category = 0
-      Hint = 'Eliminar el registro actual'
+      Hint = 'Da de baja un registro'
       Visible = ivAlways
-      ImageIndex = 2
+      ImageIndex = 25
       ShortCut = 115
-      OnClick = btnEliminarClick
       AutoGrayScale = False
     end
-    object btnGuardar: TdxBarLargeButton
+    object btBuscar: TdxBarLargeButton
+      Caption = 'Buscar'
+      Category = 0
+      Hint = 'Buscar'
+      Visible = ivAlways
+      ImageIndex = 29
+      OnClick = btBuscarClick
+      AutoGrayScale = False
+    end
+    object BtGuardar: TdxBarLargeButton
       Caption = 'Guardar'
       Category = 0
       Enabled = False
@@ -355,7 +425,7 @@ object FConceptos: TFConceptos
       ShortCut = 121
       AutoGrayScale = False
     end
-    object btnCancelar: TdxBarLargeButton
+    object BtCancelar: TdxBarLargeButton
       Caption = 'Cancelar'
       Category = 0
       Enabled = False
@@ -365,7 +435,34 @@ object FConceptos: TFConceptos
       ShortCut = 120
       AutoGrayScale = False
     end
-    object btnSalir: TdxBarLargeButton
+    object btReactivar: TdxBarLargeButton
+      Caption = 'Reactivar'
+      Category = 0
+      Hint = 'Reactiva un registro'
+      Visible = ivAlways
+      ImageIndex = 24
+      ShortCut = 116
+      AutoGrayScale = False
+    end
+    object Bt_Seleccionar: TdxBarLargeButton
+      Align = iaRight
+      Caption = 'Seleccionar'
+      Category = 0
+      Hint = 'Selecciona la calle Visualizada'
+      Visible = ivAlways
+      ImageIndex = 12
+      ShortCut = 122
+      AutoGrayScale = False
+    end
+    object btBajar: TdxBarLargeButton
+      Caption = 'Bajar'
+      Category = 0
+      Hint = 'Da de Baja o Reactiva el Inmueble'
+      Visible = ivAlways
+      ImageIndex = 9
+      AutoGrayScale = False
+    end
+    object bt_salir: TdxBarLargeButton
       Align = iaRight
       Caption = 'Salir'
       Category = 0
@@ -375,78 +472,22 @@ object FConceptos: TFConceptos
       ShortCut = 123
       AutoGrayScale = False
     end
-    object btBuscar: TdxBarLargeButton
-      Caption = 'Buscar Plan'
-      Category = 0
-      Hint = 'Buscar Plan'
-      Visible = ivAlways
-      ImageIndex = 29
-      OnClick = btBuscarClick
-      AutoGrayScale = False
-    end
-    object GrupoVisualizando: TdxBarGroup
-      Items = (
-        'btnNuevo'
-        'btnModificar'
-        'btnEliminar'
-        'btnSalir'
-        'btBuscar')
-    end
     object GrupoEditando: TdxBarGroup
+      Items = (
+        'BtNuevo'
+        'BtModificar'
+        'btBuscar'
+        'Bt_Seleccionar'
+        'btBaja'
+        'btBajar'
+        'bt_salir'
+        'btReactivar')
+    end
+    object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
       Items = (
-        'btnGuardar'
-        'btnCancelar')
+        'BtGuardar'
+        'BtCancelar')
     end
-  end
-  object ZQ_IE_Conceptos: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select *'
-      'from IE_conceptos'
-      'order by ie_conceptos.id_concepto,ie_conceptos.cod_corto')
-    Params = <>
-    Left = 256
-    Top = 72
-    object ZQ_IE_ConceptosID_CONCEPTO: TIntegerField
-      FieldName = 'ID_CONCEPTO'
-      Required = True
-    end
-    object ZQ_IE_ConceptosCOD_CORTO: TStringField
-      FieldName = 'COD_CORTO'
-      Size = 6
-    end
-    object ZQ_IE_ConceptosNOMBRE_CONCEPTO: TStringField
-      FieldName = 'NOMBRE_CONCEPTO'
-      Size = 240
-    end
-    object ZQ_IE_ConceptosBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_IE_ConceptosIMPORTE: TFloatField
-      FieldName = 'IMPORTE'
-    end
-  end
-  object DS_IE_Conceptos: TDataSource
-    DataSet = ZQ_IE_Conceptos
-    Left = 376
-    Top = 72
-  end
-  object EKListadoSQL1: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      
-        'select ie_pc_erogaciones.codigo_cuenta, ie_pc_erogaciones.nombre' +
-        '_cuenta'
-      'from ie_pc_erogaciones'
-      'where (ie_pc_erogaciones.titulo = 0)'
-      'order by ie_pc_erogaciones.nombre_cuenta')
-    CampoBuscar = 'nombre_cuenta'
-    CampoClave = 'codigo_cuenta'
-    BuscarEnQuery = ZQ_IE_Conceptos
-    TituloVentana = 'Selecci'#243'n del Plan de Cuenta'
-    Left = 112
-    Top = 192
   end
 end
