@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'D:\empirica\Empirica UPCN\Bases\UPCN.FDB'
+    Database = 'E:\Empirica\empirica-upcn\Empirica UPCN\Bases\UPCN-VACIA.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -16,6 +16,7 @@ object DM: TDM
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
+    Connected = True
     SQLHourGlass = True
     Left = 22
     Top = 6
@@ -129,7 +130,7 @@ object DM: TDM
       'TOVCDBNUMERICFIELD=Edit')
     SkinStore = '(Good)'
     SkinFormtype = sfMainform
-    Version = '2.77.02.05'
+    Version = '5.40.07.15'
     MenuUpdate = True
     MenuMerge = False
     Left = 168

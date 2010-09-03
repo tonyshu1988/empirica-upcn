@@ -8,7 +8,7 @@ uses
   UConfiguracion in 'UConfiguracion.pas' {FConfiguracion},
   UABMProveedores in 'UABMProveedores.pas' {FABMProveedores},
   UABM_Cuentas in 'UABM_Cuentas.pas' {FABM_Cuentas},
-  UPlanCuentaRecursos in 'UPlanCuentaRecursos.pas' {FPlanCuentaRecursos};
+  UConceptos in 'UConceptos.pas' {FConceptos};
 
 {$R *.res}
 
