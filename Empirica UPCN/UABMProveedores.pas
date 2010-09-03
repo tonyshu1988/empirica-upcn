@@ -49,11 +49,8 @@ type
     ZQ_IE_ProveedoresTELEFONOS: TStringField;
     ZQ_IE_ProveedoresEMAIL: TStringField;
     ZQ_IE_ProveedoresBAJA: TStringField;
-    ZQ_IE_ProveedoresID_TIPO_DOCUMENTO: TIntegerField;
     DBLookupComboBox1: TDBLookupComboBox;
     ZQ_TipoDocumento: TZQuery;
-    ZQ_TipoDocumentoID_TIPO_DOCUMENTO: TIntegerField;
-    ZQ_TipoDocumentoDECRIPCION: TStringField;
     DS_TipoDocumento: TDataSource;
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     PBusqueda: TPanel;
@@ -85,6 +82,9 @@ type
     QRLabel5: TQRLabel;
     QRDBText1: TQRDBText;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
+    ZQ_TipoDocumentoTIPO_DOCUMENTO: TIntegerField;
+    ZQ_TipoDocumentoDESCRIPCION: TStringField;
+    ZQ_IE_ProveedoresTIPO_DOCUMENTO: TStringField;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
