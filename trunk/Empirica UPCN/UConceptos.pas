@@ -10,15 +10,6 @@ uses
 
 type
   TFConceptos = class(TForm)
-    dxBarABM: TdxBarManager;
-    btnNuevo: TdxBarLargeButton;
-    btnModificar: TdxBarLargeButton;
-    btnEliminar: TdxBarLargeButton;
-    btnGuardar: TdxBarLargeButton;
-    btnCancelar: TdxBarLargeButton;
-    btnSalir: TdxBarLargeButton;
-    GrupoVisualizando: TdxBarGroup;
-    GrupoEditando: TdxBarGroup;
     pDatos: TPanel;
     Label1: TLabel;
     Label2: TLabel;
@@ -27,7 +18,6 @@ type
     ZQ_IE_Conceptos: TZQuery;
     DS_IE_Conceptos: TDataSource;
     EKListadoSQL1: TEKListadoSQL;
-    btBuscar: TdxBarLargeButton;
     Grilla: TDBGrid;
     ZQ_IE_ConceptosID_CONCEPTO: TIntegerField;
     ZQ_IE_ConceptosCOD_CORTO: TStringField;
@@ -36,6 +26,19 @@ type
     ZQ_IE_ConceptosIMPORTE: TFloatField;
     dbImporte: TDBEdit;
     Label3: TLabel;
+    dxBarABM: TdxBarManager;
+    BtNuevo: TdxBarLargeButton;
+    BtModificar: TdxBarLargeButton;
+    btBaja: TdxBarLargeButton;
+    btBuscar: TdxBarLargeButton;
+    BtGuardar: TdxBarLargeButton;
+    BtCancelar: TdxBarLargeButton;
+    btReactivar: TdxBarLargeButton;
+    Bt_Seleccionar: TdxBarLargeButton;
+    btBajar: TdxBarLargeButton;
+    bt_salir: TdxBarLargeButton;
+    GrupoEditando: TdxBarGroup;
+    GrupoGuardarCancelar: TdxBarGroup;
     procedure FormCreate(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
