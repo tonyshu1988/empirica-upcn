@@ -40,7 +40,7 @@ type
     AABMProveedores: TAction;
     AABM_Cuentas: TAction;
     Iconos_Barra_32: TImageList;
-    APlanErogaciones: TAction;
+    AConceptos: TAction;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -48,7 +48,7 @@ type
     procedure AConfiguracionExecute(Sender: TObject);
     procedure AABMProveedoresExecute(Sender: TObject);
     procedure AABM_CuentasExecute(Sender: TObject);
-    procedure APlanErogacionesExecute(Sender: TObject);
+    procedure AConceptosExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -63,7 +63,7 @@ implementation
 {$R *.dfm}
 
 Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
-  UPlanCuentaRecursos;
+  UConceptos;
 
 function salir_de_programa:boolean;
 begin
@@ -116,9 +116,9 @@ begin
   EKVentanas1.Abrir(Sender, TFABM_Cuentas, FABM_Cuentas);
 end;
 
-procedure TFPrincipal.APlanErogacionesExecute(Sender: TObject);
+procedure TFPrincipal.AConceptosExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFPlanCuentaRecursos, FPlanCuentaRecursos);
+  EKVentanas1.Abrir(Sender, TFConceptos, FConceptos);
 end;
 
 end.
