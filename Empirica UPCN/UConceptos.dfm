@@ -14,6 +14,7 @@ object FConceptos: TFConceptos
   OldCreateOrder = False
   Position = poDefault
   Visible = True
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -107,11 +108,11 @@ object FConceptos: TFConceptos
   end
   object Grilla: TDBGrid
     Left = 0
-    Top = 0
+    Top = 19
     Width = 854
-    Height = 344
+    Height = 325
     Align = alClient
-    Color = 16772842
+    Color = 16764097
     DataSource = DS_IE_Conceptos
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 1
@@ -120,6 +121,7 @@ object FConceptos: TFConceptos
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = []
+    OnDrawColumnCell = GrillaDrawColumnCell
     Columns = <
       item
         Expanded = False
@@ -129,6 +131,7 @@ object FConceptos: TFConceptos
         Visible = True
       end
       item
+        Color = 16767698
         Expanded = False
         FieldName = 'COD_CORTO'
         Title.Caption = 'C'#243'digo'
@@ -145,7 +148,9 @@ object FConceptos: TFConceptos
       item
         Expanded = False
         FieldName = 'IMPORTE'
+        Title.Alignment = taCenter
         Title.Caption = 'Importe'
+        Width = 94
         Visible = True
       end
       item
@@ -155,6 +160,44 @@ object FConceptos: TFConceptos
         Width = 40
         Visible = True
       end>
+  end
+  object PBusqueda: TPanel
+    Left = 0
+    Top = 0
+    Width = 854
+    Height = 19
+    Align = alTop
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 6
+    object Label4: TLabel
+      Left = 1
+      Top = 1
+      Width = 132
+      Height = 17
+      Align = alLeft
+      Caption = '                                 '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+    end
+    object StaticText3: TStaticText
+      Left = 744
+      Top = 1
+      Width = 109
+      Height = 17
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'Dado de Baja'
+      Color = 6974207
+      ParentColor = False
+      TabOrder = 0
+    end
   end
   object ZQ_IE_Conceptos: TZQuery
     Connection = DM.Conexion
@@ -183,28 +226,13 @@ object FConceptos: TFConceptos
     end
     object ZQ_IE_ConceptosIMPORTE: TFloatField
       FieldName = 'IMPORTE'
+      currency = True
     end
   end
   object DS_IE_Conceptos: TDataSource
     DataSet = ZQ_IE_Conceptos
     Left = 376
     Top = 72
-  end
-  object EKListadoSQL1: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      
-        'select ie_pc_erogaciones.codigo_cuenta, ie_pc_erogaciones.nombre' +
-        '_cuenta'
-      'from ie_pc_erogaciones'
-      'where (ie_pc_erogaciones.titulo = 0)'
-      'order by ie_pc_erogaciones.nombre_cuenta')
-    CampoBuscar = 'nombre_cuenta'
-    CampoClave = 'codigo_cuenta'
-    BuscarEnQuery = ZQ_IE_Conceptos
-    TituloVentana = 'Selecci'#243'n del Plan de Cuenta'
-    Left = 112
-    Top = 192
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -386,6 +414,7 @@ object FConceptos: TFConceptos
       Visible = ivAlways
       ImageIndex = 0
       ShortCut = 113
+      OnClick = BtNuevoClick
       AutoGrayScale = False
     end
     object BtModificar: TdxBarLargeButton
@@ -395,6 +424,7 @@ object FConceptos: TFConceptos
       Visible = ivAlways
       ImageIndex = 1
       ShortCut = 114
+      OnClick = BtModificarClick
       AutoGrayScale = False
     end
     object btBaja: TdxBarLargeButton
@@ -404,6 +434,7 @@ object FConceptos: TFConceptos
       Visible = ivAlways
       ImageIndex = 25
       ShortCut = 115
+      OnClick = btBajaClick
       AutoGrayScale = False
     end
     object btBuscar: TdxBarLargeButton
@@ -423,6 +454,7 @@ object FConceptos: TFConceptos
       Visible = ivAlways
       ImageIndex = 3
       ShortCut = 121
+      OnClick = BtGuardarClick
       AutoGrayScale = False
     end
     object BtCancelar: TdxBarLargeButton
@@ -433,6 +465,7 @@ object FConceptos: TFConceptos
       Visible = ivAlways
       ImageIndex = 4
       ShortCut = 120
+      OnClick = BtCancelarClick
       AutoGrayScale = False
     end
     object btReactivar: TdxBarLargeButton
@@ -442,6 +475,7 @@ object FConceptos: TFConceptos
       Visible = ivAlways
       ImageIndex = 24
       ShortCut = 116
+      OnClick = btReactivarClick
       AutoGrayScale = False
     end
     object Bt_Seleccionar: TdxBarLargeButton
@@ -470,6 +504,7 @@ object FConceptos: TFConceptos
       Visible = ivAlways
       ImageIndex = 6
       ShortCut = 123
+      OnClick = bt_salirClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -489,5 +524,64 @@ object FConceptos: TFConceptos
         'BtGuardar'
         'BtCancelar')
     end
+  end
+  object EKBusquedaAvanzada1: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'digo Concepto'
+        Campo = 'cod_corto'
+        Tabla = 'ie_conceptos'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre Concepto'
+        Campo = 'nombre_concepto'
+        Tabla = 'ie_conceptos'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe'
+        Campo = 'importe'
+        Tabla = 'ie_conceptos'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'ie_conceptos'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'S'
+          'N')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'S'
+          'N')
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_IE_Conceptos
+    SQL.Strings = (
+      'select *'
+      'from IE_conceptos'
+      'order by ie_conceptos.id_concepto,ie_conceptos.cod_corto')
+    SQL_Select.Strings = (
+      'select *')
+    SQL_From.Strings = (
+      'from IE_conceptos')
+    SQL_Orden.Strings = (
+      'order by ie_conceptos.id_concepto,ie_conceptos.cod_corto')
+    UsarWhereOriginal = EK_Con_Where
+    Left = 168
+    Top = 96
   end
 end

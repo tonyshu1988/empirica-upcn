@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ComCtrls, dxtree, dxdbtree, StdCtrls,
   ExtCtrls, DBCtrls, Mask, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKListadoSQL, Grids, DBGrids;
+  ZDataset, EKListadoSQL, Grids, DBGrids, EKBusquedaAvanzada;
 
 type
   TFConceptos = class(TForm)
@@ -17,7 +17,6 @@ type
     dbCodigoConcepto: TDBEdit;
     ZQ_IE_Conceptos: TZQuery;
     DS_IE_Conceptos: TDataSource;
-    EKListadoSQL1: TEKListadoSQL;
     Grilla: TDBGrid;
     ZQ_IE_ConceptosID_CONCEPTO: TIntegerField;
     ZQ_IE_ConceptosCOD_CORTO: TStringField;
@@ -39,11 +38,23 @@ type
     bt_salir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
+    EKBusquedaAvanzada1: TEKBusquedaAvanzada;
+    PBusqueda: TPanel;
+    Label4: TLabel;
+    StaticText3: TStaticText;
     procedure FormCreate(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
-    procedure btnNuevoClick(Sender: TObject);
-    procedure btnModificarClick(Sender: TObject);
-    procedure btnEliminarClick(Sender: TObject);
+    procedure BtNuevoClick(Sender: TObject);
+    procedure BtModificarClick(Sender: TObject);
+    procedure btBajaClick(Sender: TObject);
+    procedure btReactivarClick(Sender: TObject);
+    function validarcampos():boolean;
+    procedure BtGuardarClick(Sender: TObject);
+    procedure BtCancelarClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure bt_salirClick(Sender: TObject);
+    procedure GrillaDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -54,7 +65,7 @@ var
   FConceptos: TFConceptos;
 
 const
-  Plan_cuenta_erogaciones='ABM Plan Cuenta Erogaciones';
+  Transaccion_Conceptos='ABM Conceptos';
 implementation
 
 uses UDM;
@@ -68,73 +79,176 @@ end;
 
 procedure TFConceptos.btBuscarClick(Sender: TObject);
 begin
-EKListadoSQL1.Buscar;
+  EKBusquedaAvanzada1.Buscar;
 end;
 
-procedure TFConceptos.btnNuevoClick(Sender: TObject);
-var
-  padre: string;
+procedure TFConceptos.BtNuevoClick(Sender: TObject);
 begin
-//  if (ZQ_PC_ErogacionesTITULO.AsInteger = 1) then
-//    padre := ZQ_PC_ErogacionesCODIGO_CUENTA.AsString
-//  else
-//    padre := ZQ_PC_ErogacionesPADRE.AsString;
-//
-//  if dm.EKModelo.iniciar_transaccion(Plan_cuenta_erogaciones, [ZQ_PC_Erogaciones]) then
-//  begin
-//    dxDBTreeView1.Enabled := false;
-//    pDatos.Visible := true;
-//    ZQ_PC_Erogaciones.Insert;
-//    ZQ_PC_ErogacionesTITULO.AsInteger := 0;
-//    ZQ_PC_ErogacionesPADRE.Value := padre;
-//    dbNroCuenta.SetFocus;
-//    GrupoVisualizando.Enabled := false;
-//    GrupoEditando.Enabled := true;
-//  end;
+ if dm.EKModelo.iniciar_transaccion(Transaccion_Conceptos, [ZQ_IE_Conceptos]) then
+  begin
+    Grilla.Enabled := false;
+    pDatos.Visible := true;
+    ZQ_IE_Conceptos.Insert;
+    ZQ_IE_ConceptosBAJA.AsString:='N';
+    ZQ_IE_ConceptosIMPORTE.Value :=0;
+    dbCodigoConcepto.SetFocus;
+    GrupoGuardarCancelar.Enabled := true;
+    GrupoEditando.Enabled := false;
+  end;
 end;
 
-procedure TFConceptos.btnModificarClick(Sender: TObject);
+procedure TFConceptos.BtModificarClick(Sender: TObject);
 begin
-
-//  if ZQ_PC_Erogaciones.IsEmpty then
-//    exit;
-//  if ZQ_PC_ErogacionesTITULO.Value = 1 then
-//  begin
-//    dbNroCuenta.Enabled := false;
-//    dbImputable.Enabled := false;
-//  end;
-//  if dm.EKModelo.iniciar_transaccion(Plan_cuenta_erogaciones, [ZQ_PC_Erogaciones]) then
-//  begin
-//    dxDBTreeView1.Enabled := false;
-//    pDatos.Visible := true;
-//    GrupoVisualizando.Enabled := false;
-//    GrupoEditando.Enabled := true;
-//  end;
+ if dm.EKModelo.iniciar_transaccion(Transaccion_Conceptos, [ZQ_IE_Conceptos]) then
+  begin
+    Grilla.Enabled := false;
+    pDatos.Visible := true;
+    ZQ_IE_Conceptos.Edit;
+    dbCodigoConcepto.SetFocus;
+    GrupoGuardarCancelar.Enabled := true;
+    GrupoEditando.Enabled := false;
+  end;
 end;
 
-procedure TFConceptos.btnEliminarClick(Sender: TObject);
-var
-  posicionPadre: string;
+procedure TFConceptos.btBajaClick(Sender: TObject);
 begin
-//  if ZQ_PC_Erogaciones.IsEmpty then
-//    exit;
-//  if (application.MessageBox(pchar('¿Desea Eliminar la cuenta ' + ZQ_PC_ErogacionesNOMBRE_CUENTA.AsString + ' del Plan de Cuentas? '), 'Confirmación', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//  begin
-//    posicionPadre := ZQ_PC_ErogacionesPADRE.AsString;
-//    dxDBTreeView1.Visible := false;
-//    if dm.EKModelo.iniciar_transaccion(Plan_cuenta_erogaciones, [ZQ_PC_Erogaciones]) then
-//      ZQ_PC_Erogaciones.Delete
-//    else
-//      exit;
-//    if not (dm.EKModelo.finalizar_transaccion(Plan_cuenta_erogaciones)) then
-//      dm.EKModelo.cancelar_transaccion(Plan_cuenta_erogaciones)
-//    else
-//    begin
-//      dxDBTreeView1.RefreshItems;
-//      dxDBTreeView1.GotoKeyFieldValue(posicionPadre);
-//    end;
-//    dxDBTreeView1.Visible := true;
-//  end;
+  if (ZQ_IE_Conceptos.IsEmpty) or (ZQ_IE_ConceptosBAJA.AsString='S') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea dar de baja el Concepto?'), 'ABM Conceptos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  begin
+    if dm.EKModelo.iniciar_transaccion(Transaccion_Conceptos, [ZQ_IE_Conceptos]) then
+    begin
+      ZQ_IE_Conceptos.Edit;
+      ZQ_IE_ConceptosBAJA.AsString:='S';
+    end
+    else
+      exit;
+
+    if not (dm.EKModelo.finalizar_transaccion(Transaccion_Conceptos)) then
+      dm.EKModelo.cancelar_transaccion(Transaccion_Conceptos);
+  end;
+end;
+
+procedure TFConceptos.btReactivarClick(Sender: TObject);
+begin
+  if (ZQ_IE_Conceptos.IsEmpty) or (ZQ_IE_ConceptosBAJA.AsString='N') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea Reactivar el Concepto?'), 'ABM Conceptos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  begin
+    if dm.EKModelo.iniciar_transaccion(Transaccion_Conceptos, [ZQ_IE_Conceptos]) then
+    begin
+      ZQ_IE_Conceptos.Edit;
+      ZQ_IE_ConceptosBAJA.AsString:='N';
+    end
+    else
+      exit;
+
+    if not (dm.EKModelo.finalizar_transaccion(Transaccion_Conceptos)) then
+      dm.EKModelo.cancelar_transaccion(Transaccion_Conceptos);
+  end;
+end;
+
+
+function TFConceptos.validarcampos():boolean;
+begin
+result := true;
+
+   if (dbCodigoConcepto.Text = '') then
+    begin
+      Application.MessageBox('El campo "Código" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      dbCodigoConcepto.SetFocus;
+      result := false;
+      exit;
+    end;
+  if (dbNombreConcepto.Text = '') then
+    begin
+      Application.MessageBox('El campo "Nombre" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      dbNombreConcepto.SetFocus;
+      result := false;
+      exit;
+    end;
+   if (ZQ_IE_ConceptosIMPORTE.AsFloat <= 0) then
+    begin
+      Application.MessageBox('El campo "Importe" es incorrecto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      dbImporte.SetFocus;
+      result := false;
+      exit;
+    end;
+
+end;
+
+procedure TFConceptos.BtGuardarClick(Sender: TObject);
+begin
+if validarcampos() then
+ begin
+     if DM.EKModelo.finalizar_transaccion(Transaccion_Conceptos) then
+      begin
+        pDatos.Visible:=false;
+        Grilla.Enabled := true;
+        GrupoEditando.Enabled := true;
+        GrupoGuardarCancelar.Enabled := false;
+        ZQ_IE_Conceptos.Refresh;
+      end;
+ end
+end;
+
+procedure TFConceptos.BtCancelarClick(Sender: TObject);
+begin
+  DM.EKModelo.cancelar_transaccion(Transaccion_Conceptos);
+  pDatos.Visible:=false;
+  Grilla.Enabled := true;
+  GrupoEditando.Enabled := true;
+  GrupoGuardarCancelar.Enabled := false;
+  ZQ_IE_Conceptos.Refresh;
+end;
+
+procedure TFConceptos.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  if dm.EKModelo.verificar_transaccion(Transaccion_Conceptos) then
+  begin
+    if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela?'), 'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+      canClose := False
+    else
+      dm.EKModelo.cancelar_transaccion(Transaccion_Conceptos);
+  end;
+end;
+
+procedure TFConceptos.bt_salirClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TFConceptos.GrillaDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+ if not ZQ_IE_Conceptos.IsEmpty then
+    begin
+       if (ZQ_IE_ConceptosBAJA.Value='S') then
+          begin
+           Grilla.Canvas.Brush.Color :=$007A7AFE;
+           Grilla.Canvas.Font.Color := clBlack;
+           Grilla.Canvas.Font.Style := Grilla.Canvas.Font.Style + [fsBold];
+           if (gdFocused in State) or (gdSelected in State) then
+             begin
+             Grilla.Canvas.Font.Color := clwhite;
+             end
+          end
+       else
+          begin
+            if (gdFocused in State) or (gdSelected in State) then
+             begin
+               Grilla.Canvas.Font.Color := clwhite;
+               Grilla.Canvas.Brush.Color:=clBlue;
+               Grilla.Canvas.Font.Style := Grilla.Canvas.Font.Style + [fsBold];
+             end;
+          end;
+       Grilla.DefaultDrawColumnCell(rect,datacol,column,state);
+    end;
+
 end;
 
 end.
