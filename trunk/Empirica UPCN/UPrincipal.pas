@@ -20,7 +20,7 @@ type
     Salir2: TMenuItem;
     Cierres: TMenuItem;
     Disponibilidades: TMenuItem;
-    Pagos: TMenuItem;
+    Movimientos: TMenuItem;
     EKVentanas1: TEKVentanas;
     PlandeCuentasErogaciones1: TMenuItem;
     SaldosIniciales1: TMenuItem;
@@ -28,7 +28,7 @@ type
     ransferenciaEntreCuentas1: TMenuItem;
     Conciliacion1: TMenuItem;
     ABMProveedores1: TMenuItem;
-    OrdenesdePago1: TMenuItem;
+    ABMMovimientos1: TMenuItem;
     Balance1: TMenuItem;
     Reportes1: TMenuItem;
     OrdenesdePago2: TMenuItem;
@@ -41,6 +41,7 @@ type
     AABM_Cuentas: TAction;
     Iconos_Barra_32: TImageList;
     AConceptos: TAction;
+    AMovimientos: TAction;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -49,6 +50,7 @@ type
     procedure AABMProveedoresExecute(Sender: TObject);
     procedure AABM_CuentasExecute(Sender: TObject);
     procedure AConceptosExecute(Sender: TObject);
+    procedure AMovimientosExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -63,7 +65,7 @@ implementation
 {$R *.dfm}
 
 Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
-  UConceptos;
+  UConceptos, UUtilidades, UMovimientos;
 
 function salir_de_programa:boolean;
 begin
@@ -119,6 +121,11 @@ end;
 procedure TFPrincipal.AConceptosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFConceptos, FConceptos);
+end;
+
+procedure TFPrincipal.AMovimientosExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFMovimientos, FMovimientos);
 end;
 
 end.

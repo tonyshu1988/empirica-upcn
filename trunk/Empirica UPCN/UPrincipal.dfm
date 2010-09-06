@@ -20,8 +20,8 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 567
-    Width = 855
+    Top = 569
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -37,7 +37,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionToolBar1'
@@ -49,8 +49,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 538
+    Width = 863
+    Height = 540
     Align = alClient
     TabOrder = 2
   end
@@ -79,8 +79,14 @@ object FPrincipal: TFPrincipal
       OnExecute = AABM_CuentasExecute
     end
     object AConceptos: TAction
+      Caption = 'Conceptos'
       ImageIndex = 35
       OnExecute = AConceptosExecute
+    end
+    object AMovimientos: TAction
+      Caption = 'Movimientos'
+      ImageIndex = 25
+      OnExecute = AMovimientosExecute
     end
   end
   object MainMenu1: TMainMenu
@@ -89,7 +95,6 @@ object FPrincipal: TFPrincipal
     Top = 56
     object PlandeCuentas: TMenuItem
       Caption = 'Conceptos'
-      ImageIndex = 35
       object PlandeCuentasErogaciones1: TMenuItem
         Action = AConceptos
         Caption = 'ABM Conceptos'
@@ -110,13 +115,14 @@ object FPrincipal: TFPrincipal
         Caption = 'Conciliacion'
       end
     end
-    object Pagos: TMenuItem
-      Caption = 'Pagos'
+    object Movimientos: TMenuItem
+      Caption = 'Movimientos'
       object ABMProveedores1: TMenuItem
         Action = AABMProveedores
       end
-      object OrdenesdePago1: TMenuItem
-        Caption = 'Ordenes de Pago'
+      object ABMMovimientos1: TMenuItem
+        Action = AMovimientos
+        Caption = 'ABM Movimientos'
       end
     end
     object Cierres: TMenuItem
