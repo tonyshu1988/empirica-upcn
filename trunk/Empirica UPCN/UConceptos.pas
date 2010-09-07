@@ -99,6 +99,8 @@ end;
 
 procedure TFConceptos.BtModificarClick(Sender: TObject);
 begin
+if ZQ_IE_Conceptos.IsEmpty then exit;
+
  if dm.EKModelo.iniciar_transaccion(Transaccion_Conceptos, [ZQ_IE_Conceptos]) then
   begin
     Grilla.Enabled := false;
@@ -169,7 +171,7 @@ result := true;
       result := false;
       exit;
     end;
-   if (ZQ_IE_ConceptosIMPORTE.AsFloat <= 0) then
+   if (dbImporte.Text='') then
     begin
       Application.MessageBox('El campo "Importe" es incorrecto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
       dbImporte.SetFocus;
