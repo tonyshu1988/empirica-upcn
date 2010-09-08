@@ -9,7 +9,8 @@ uses
   UABMProveedores in 'UABMProveedores.pas' {FABMProveedores},
   UABM_Cuentas in 'UABM_Cuentas.pas' {FABM_Cuentas},
   UConceptos in 'UConceptos.pas' {FConceptos},
-  UMovimientos in 'UMovimientos.pas' {FMovimientos};
+  UMovimientos in 'UMovimientos.pas' {FMovimientos},
+  USaldoInicial in 'USaldoInicial.pas' {FSaldoInicial};
 
 {$R *.res}
 
