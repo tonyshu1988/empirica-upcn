@@ -84,6 +84,7 @@ object FABM_Cuentas: TFABM_Cuentas
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
       object QRBand1: TQRBand
+        Tag = 99
         Left = 38
         Top = 38
         Width = 718

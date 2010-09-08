@@ -153,12 +153,14 @@ end;
 
 procedure TFABM_Cuentas.btnCancelarClick(Sender: TObject);
 begin
-  dbGridCuentas.Enabled := true;
-  dm.EKModelo.cancelar_transaccion(transaccion_cuentas);
-  pDatos.Visible := false;
-  pDatos.Enabled := false;  
-  GrupoVisualizando.Enabled := true;
-  GrupoEditando.Enabled := false;
+  if dm.EKModelo.cancelar_transaccion(transaccion_cuentas) then
+  begin
+    dbGridCuentas.Enabled := true;
+    pDatos.Visible := false;
+    pDatos.Enabled := false;
+    GrupoVisualizando.Enabled := true;
+    GrupoEditando.Enabled := false;
+  end;
 end;
 
 
