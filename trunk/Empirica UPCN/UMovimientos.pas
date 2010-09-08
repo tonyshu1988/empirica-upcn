@@ -193,8 +193,8 @@ DBGridLibroBanco.Visible:=false;
 BanderaIngresoEgreso:=0;
 DbGridMediosCobroPago.Columns[2].Visible := false;
 DbGridMediosCobroPago.Columns[3].Visible := false;
-DbGridMediosCobroPago.Columns[6].Visible := false;
-DbGridMediosCobroPago.Columns[7].Visible := false;
+DbGridMediosCobroPago.Columns[6].Visible := true;
+DbGridMediosCobroPago.Columns[7].Visible := true;
 DbGridMediosCobroPago.Columns[4].Visible := true;
 DbGridMediosCobroPago.Columns[5].Visible := true;
 
