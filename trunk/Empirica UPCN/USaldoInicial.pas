@@ -220,6 +220,7 @@ begin
   ZQ_Cuenta_MovNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
   ZQ_MovimientoNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
 
+  ZQ_MovimientoID_CONCEPTO.Clear;
   ZQ_MovimientoID_OBJETO_MOVIMIENTO.AsInteger:= 4;
   ZQ_MovimientoIMPORTE.AsFloat:= ZQ_Cuenta_MovIMPORTE.AsFloat;
 
