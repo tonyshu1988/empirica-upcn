@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, StdCtrls,
   DBCtrls, Mask, ComCtrls, ISDBEditDateTimePicker, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, EKListadoSQL, ZStoredProcedure;
+  ZAbstractDataset, ZDataset, EKListadoSQL, ZStoredProcedure,
+  EKBusquedaAvanzada;
 
 type
   TFMovimientos = class(TForm)
@@ -117,12 +118,44 @@ type
     EK_ListadoMedCobroPago: TEKListadoSQL;
     Nro_Moviemiento: TZStoredProc;
     Nro_MoviemientoID: TIntegerField;
+    DS_LIBRO_BANCO: TDataSource;
+    PParametrosLibroBanco: TPanel;
+    Label8: TLabel;
+    DBLCuenta: TDBLookupComboBox;
+    Label9: TLabel;
+    Label11: TLabel;
+    DTPFechaDesde: TDateTimePicker;
+    DTPFechaHasta: TDateTimePicker;
+    btaplicar: TButton;
+    LIBRO_BANCO: TZQuery;
+    LIBRO_BANCOID_MOVIMIENTO: TIntegerField;
+    LIBRO_BANCOORDEN: TIntegerField;
+    LIBRO_BANCOFECHA: TDateField;
+    LIBRO_BANCOMOVIMIENTO: TStringField;
+    LIBRO_BANCONRO_PAGO_REC: TIntegerField;
+    LIBRO_BANCOMEDIO: TStringField;
+    LIBRO_BANCONRO_MEDIO: TStringField;
+    LIBRO_BANCODEBE: TFloatField;
+    LIBRO_BANCOHABER: TFloatField;
+    LIBRO_BANCOSALDO: TFloatField;
+    LIBRO_BANCODESCRIPCION: TStringField;
+    LIBRO_BANCOCONCILIADO: TStringField;
+    LIBRO_BANCONOMBRE_CONCEPTO: TStringField;
+    LIBRO_BANCOTIPO_MOV: TStringField;
+    EKBusquedaAvanzada1: TEKBusquedaAvanzada;
+    LIBRO_BANCOFECHA_PD: TDateField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
     procedure DbGridMediosCobroPagoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BtGuardarClick(Sender: TObject);
+    procedure BtIngresosClick(Sender: TObject);
+    procedure BtCancelarClick(Sender: TObject);
+    procedure btSalirClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure btaplicarClick(Sender: TObject);
+    procedure btBuscarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -132,25 +165,36 @@ type
 var
   FMovimientos: TFMovimientos;
   CuentaNro : integer;
+  BanderaIngresoEgreso : integer; //Si es 1 es ingreso si es 0 es egreso
 
 const
   Transaccion_Movimientos = 'ABM MOVIMIENTOS';
 
 implementation
 
-uses UDM;
+uses UDM, DateUtils;
 
 {$R *.dfm}
 
 procedure TFMovimientos.BtEgresosClick(Sender: TObject);
 begin
 PEdicion.Visible:= true;
+PParametrosLibroBanco.Visible:=false;
+DBGridLibroBanco.Visible:=false;
+BanderaIngresoEgreso:=0;
 DbGridMediosCobroPago.Columns[2].Visible := false;
 DbGridMediosCobroPago.Columns[3].Visible := false;
 DbGridMediosCobroPago.Columns[6].Visible := false;
 DbGridMediosCobroPago.Columns[7].Visible := false;
+DbGridMediosCobroPago.Columns[4].Visible := true;
+DbGridMediosCobroPago.Columns[5].Visible := true;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
+ZQ_Movimientos.Active := False;
+ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
+ZQ_Cuenta_Movimiento.Active := False;
+ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := 0;
+
+  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
   begin
     ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
@@ -158,9 +202,10 @@ DbGridMediosCobroPago.Columns[7].Visible := false;
     if CuentaNro <> 0 then
     begin
       DBLCCuenta.Enabled:= false;
-      ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger:= CuentaNro;
+      ZQ_CuentasID_CUENTA.AsInteger:= CuentaNro;
     end;
 
+    ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1;
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
     ISDBEditDateTimePicker1.SetFocus;
     GrupoEditando.Enabled := false;
@@ -171,11 +216,26 @@ end;
 
 procedure TFMovimientos.FormCreate(Sender: TObject);
 begin
-//CuentaNro:= StrToInt(dm.EKUsrLogin1.PermisoAccionValor('Cuenta Nro'));
 dm.EKModelo.abrir(ZQ_Proveedores);
 dm.EKModelo.abrir(ZQ_Conceptos);
 dm.EKModelo.abrir(ZQ_Cuentas);
 dm.EKModelo.abrir(ZQ_Tipo_Movimiento);
+
+DTPFechaDesde.Date:= StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha));
+DTPFechaHasta.Date:=DM.EKModelo.Fecha;
+
+//CuentaNro:= StrToInt(dm.EKUsrLogin1.PermisoAccionValor('Cuenta Nro'));
+  if CuentaNro <> 0 then
+  begin
+    ZQ_CuentasID_CUENTA.AsInteger:=CuentaNro;
+    DBLCuenta.Enabled:=false;
+  end
+  else
+  begin
+    DBLCuenta.Enabled:=true;
+  end;
+
+
 end;
 
 procedure TFMovimientos.DbGridMediosCobroPagoColExit(Sender: TObject);
@@ -187,7 +247,11 @@ begin
         ZQ_Medios_Cobro_Pago.Refresh;
         ZQ_Cuenta_Movimiento.Edit;
         ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
-        ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
+
+        if BanderaIngresoEgreso = 1 then
+          ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger
+        else
+          ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
       end;
 end;
 
@@ -229,17 +293,103 @@ begin
     begin
       ZQ_Cuenta_Movimiento.Edit;
       ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger :=nro_mov;
-    end;  
+    end;
 
     ZQ_Cuenta_Movimiento.Next;
   end;
 
   if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
   begin
-   PEdicion.Visible:= false; 
+   GrupoEditando.Enabled := true;
+   GrupoGuardarCancelar.Enabled := false;
+   PEdicion.Visible:= false;
+   PParametrosLibroBanco.Visible:=true;
+   DBGridLibroBanco.Visible:=true;
+
+//   ZQ_Cuenta_Movimiento.Locate('NroMov',nro_mov,[]);
   end;
 
 
+end;
+
+procedure TFMovimientos.BtIngresosClick(Sender: TObject);
+begin
+PEdicion.Visible:= true;
+PParametrosLibroBanco.Visible:=false;
+DBGridLibroBanco.Visible:=false;
+BanderaIngresoEgreso:=1;
+DbGridMediosCobroPago.Columns[2].Visible := true;
+DbGridMediosCobroPago.Columns[3].Visible := true;
+DbGridMediosCobroPago.Columns[6].Visible := true;
+DbGridMediosCobroPago.Columns[7].Visible := true;
+DbGridMediosCobroPago.Columns[4].Visible := false;
+DbGridMediosCobroPago.Columns[5].Visible := false;
+
+ZQ_Movimientos.Active := False;
+ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
+ZQ_Cuenta_Movimiento.Active := False;
+ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := 0;
+
+  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
+  begin
+    ZQ_Movimientos.Append;
+    ZQ_Cuenta_Movimiento.Append;
+
+    if CuentaNro <> 0 then
+    begin
+      DBLCCuenta.Enabled:= false;
+      ZQ_CuentasID_CUENTA.AsInteger:= CuentaNro;
+    end;
+
+    ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=2;
+    ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
+    ISDBEditDateTimePicker1.SetFocus;
+    GrupoEditando.Enabled := false;
+    GrupoGuardarCancelar.Enabled := true;
+  end;
+
+end;
+
+procedure TFMovimientos.BtCancelarClick(Sender: TObject);
+begin
+dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+GrupoEditando.Enabled := true;
+GrupoGuardarCancelar.Enabled := false;
+PEdicion.Visible:= false;
+PParametrosLibroBanco.Visible:=True;
+DBGridLibroBanco.Visible:=true;
+end;
+
+procedure TFMovimientos.btSalirClick(Sender: TObject);
+begin
+close;
+end;
+
+procedure TFMovimientos.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
+  begin
+    if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela?'), 'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+      canClose := False
+    else
+      dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+  end;
+
+end;
+
+procedure TFMovimientos.btaplicarClick(Sender: TObject);
+begin
+LIBRO_BANCO.Close;
+LIBRO_BANCO.ParamByName('cuenta').AsInteger :=ZQ_CuentasID_CUENTA.AsInteger;
+LIBRO_BANCO.ParamByName('desde').AsDate := DTPFechaDesde.Date;
+LIBRO_BANCO.ParamByName('hasta').AsDate := DTPFechaHasta.Date;
+LIBRO_BANCO.Open;
+end;
+
+procedure TFMovimientos.btBuscarClick(Sender: TObject);
+begin
+EKBusquedaAvanzada1.Buscar;
 end;
 
 end.
