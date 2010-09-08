@@ -98,6 +98,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure btImprimirClick(Sender: TObject);
+    function validarcampos():boolean;
   private
     { Private declarations }
   public
@@ -272,6 +273,28 @@ procedure TFABMProveedores.btImprimirClick(Sender: TObject);
 begin
 if not ZQ_IE_Proveedores.IsEmpty then
   EKVistaPreviaQR1.VistaPrevia;
+end;
+
+
+function TFABMProveedores.validarcampos():boolean;
+begin
+result := true;
+
+   if (DBENombreApellido.Text = '') then
+    begin
+      Application.MessageBox('El campo "Nombre y Apellido" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      DBENombreApellido.SetFocus;
+      result := false;
+      exit;
+    end;
+  if (DBENombreFantasia.Text = '') then
+    begin
+      Application.MessageBox('El campo "Nombre de Fantasía" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      DBENombreFantasia.SetFocus;
+      result := false;
+      exit;
+    end;
+
 end;
 
 end.
