@@ -528,11 +528,9 @@ object FSaldoInicial: TFSaldoInicial
       end>
     object ZQ_Cuenta_MovID: TIntegerField
       FieldName = 'ID'
-      Required = True
     end
     object ZQ_Cuenta_MovNRO_MOVIMIENTO: TIntegerField
       FieldName = 'NRO_MOVIMIENTO'
-      Required = True
     end
     object ZQ_Cuenta_MovID_CUENTA_INGRESO: TIntegerField
       FieldName = 'ID_CUENTA_INGRESO'
@@ -584,14 +582,12 @@ object FSaldoInicial: TFSaldoInicial
       end>
     object ZQ_MovimientoNRO_MOVIMIENTO: TIntegerField
       FieldName = 'NRO_MOVIMIENTO'
-      Required = True
     end
     object ZQ_MovimientoNRO_PROVEEDOR: TIntegerField
       FieldName = 'NRO_PROVEEDOR'
     end
     object ZQ_MovimientoID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
-      Required = True
     end
     object ZQ_MovimientoID_TIPO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_TIPO_MOVIMIENTO'
