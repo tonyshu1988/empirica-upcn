@@ -20,8 +20,8 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 569
-    Width = 863
+    Top = 563
+    Width = 855
     Height = 19
     Panels = <
       item
@@ -37,7 +37,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 863
+    Width = 855
     Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionToolBar1'
@@ -49,8 +49,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 863
-    Height = 540
+    Width = 855
+    Height = 534
     Align = alClient
     TabOrder = 2
   end
@@ -75,7 +75,7 @@ object FPrincipal: TFPrincipal
     end
     object AABM_Cuentas: TAction
       Caption = 'ABM Cuentas'
-      ImageIndex = 23
+      ImageIndex = 29
       OnExecute = AABM_CuentasExecute
     end
     object AConceptos: TAction
@@ -87,6 +87,11 @@ object FPrincipal: TFPrincipal
       Caption = 'Movimientos'
       ImageIndex = 25
       OnExecute = AMovimientosExecute
+    end
+    object ASaldoInicial: TAction
+      Caption = 'Saldo Inicial'
+      ImageIndex = 24
+      OnExecute = ASaldoInicialExecute
     end
   end
   object MainMenu1: TMainMenu
@@ -103,7 +108,7 @@ object FPrincipal: TFPrincipal
     object Disponibilidades: TMenuItem
       Caption = 'Disponibilidades'
       object SaldosIniciales1: TMenuItem
-        Caption = 'Saldos Iniciales'
+        Action = ASaldoInicial
       end
       object CuentasBancariasyCajas1: TMenuItem
         Action = AABM_Cuentas

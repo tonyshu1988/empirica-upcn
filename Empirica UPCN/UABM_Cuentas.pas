@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls, DBCtrls, Mask,
-  QuickRpt, EKVistaPreviaQR;
+  QuickRpt, EKVistaPreviaQR, QRCtrls;
 
 type
   TFABM_Cuentas = class(TForm)
@@ -50,6 +50,9 @@ type
     EKVistaPrevia: TEKVistaPreviaQR;
     QuickRep1: TQuickRep;
     btnImprimir: TdxBarLargeButton;
+    QRBand1: TQRBand;
+    QRLabel1: TQRLabel;
+    QRDBText1: TQRDBText;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -60,6 +63,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnVerDetalleClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    function  validarDatos(): boolean;
   private
     { Private declarations }
   public
@@ -130,6 +134,11 @@ end;
 
 procedure TFABM_Cuentas.btnGuardarClick(Sender: TObject);
 begin
+  Perform(WM_NEXTDLGCTL, 0, 0);
+
+  if not validarDatos() then
+    exit;
+
   if DM.EKModelo.finalizar_transaccion(transaccion_cuentas) then
   begin
     dbGridCuentas.Enabled := true;
@@ -188,7 +197,32 @@ end;
 
 procedure TFABM_Cuentas.btnImprimirClick(Sender: TObject);
 begin
+  if ZQ_Cuentas.IsEmpty then
+    exit;
+
   EKVistaPrevia.VistaPrevia;
+end;
+
+
+function TFABM_Cuentas.validarDatos():boolean;
+begin
+  result:= true;
+
+   if (ZQ_CuentasNOMBRE_CUENTA.IsNull) then
+   begin
+      Application.MessageBox('El campo "Nombre Cuenta" se encuentra vacío, Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      dbEditNombreCuenta.SetFocus;
+      result:= false;
+      exit;
+   end;
+
+   if (ZQ_CuentasNRO_CUENTA_BANCARIA.IsNull) then
+   begin
+      Application.MessageBox('El campo "Nro Cuenta Bancaria" se encuentra vacío, Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      dbEditNroCuenta.SetFocus;
+      result:= false;
+      exit;
+   end;
 end;
 
 end.
