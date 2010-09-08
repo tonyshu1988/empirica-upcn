@@ -18,185 +18,194 @@ object FConceptos: TFConceptos
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object pDatos: TPanel
-    Left = 0
-    Top = 396
-    Width = 854
-    Height = 70
-    Align = alBottom
-    BevelOuter = bvNone
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Verdana'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 0
-    Visible = False
-    object Label1: TLabel
-      Left = 279
-      Top = 13
-      Width = 108
-      Height = 13
-      Caption = 'Nombre Concepto:'
-      Transparent = True
-    end
-    object Label2: TLabel
-      Left = 14
-      Top = 13
-      Width = 90
-      Height = 13
-      Caption = 'C'#243'd. Concepto:'
-      Transparent = True
-    end
-    object Label3: TLabel
-      Left = 53
-      Top = 45
-      Width = 51
-      Height = 13
-      Caption = 'Importe:'
-      Transparent = True
-    end
-    object dbNombreConcepto: TDBEdit
-      Left = 392
-      Top = 9
-      Width = 361
-      Height = 21
-      CharCase = ecUpperCase
-      DataField = 'NOMBRE_CONCEPTO'
-      DataSource = DS_IE_Conceptos
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-    end
-    object dbCodigoConcepto: TDBEdit
-      Left = 112
-      Top = 9
-      Width = 121
-      Height = 21
-      CharCase = ecUpperCase
-      DataField = 'COD_CORTO'
-      DataSource = DS_IE_Conceptos
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-    end
-    object dbImporte: TDBEdit
-      Left = 112
-      Top = 41
-      Width = 153
-      Height = 21
-      CharCase = ecUpperCase
-      DataField = 'IMPORTE'
-      DataSource = DS_IE_Conceptos
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 2
-    end
-  end
-  object Grilla: TDBGrid
-    Left = 0
-    Top = 19
-    Width = 854
-    Height = 325
-    Align = alClient
-    Color = 16764097
-    DataSource = DS_IE_Conceptos
-    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-    TabOrder = 1
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    OnDrawColumnCell = GrillaDrawColumnCell
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'ID_CONCEPTO'
-        Title.Caption = 'Id'
-        Width = 31
-        Visible = True
-      end
-      item
-        Color = 16767698
-        Expanded = False
-        FieldName = 'COD_CORTO'
-        Title.Caption = 'C'#243'digo'
-        Width = 81
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOMBRE_CONCEPTO'
-        Title.Caption = 'Nombre'
-        Width = 463
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'IMPORTE'
-        Title.Alignment = taCenter
-        Title.Caption = 'Importe'
-        Width = 94
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'BAJA'
-        Title.Caption = 'Baja'
-        Width = 40
-        Visible = True
-      end>
-  end
-  object PBusqueda: TPanel
+  object Panel1: TPanel
     Left = 0
     Top = 0
     Width = 854
-    Height = 19
-    Align = alTop
-    ParentShowHint = False
-    ShowHint = False
-    TabOrder = 6
-    object Label4: TLabel
+    Height = 414
+    Align = alClient
+    Caption = 'Panel1'
+    TabOrder = 4
+    object Grilla: TDBGrid
+      Left = 1
+      Top = 20
+      Width = 852
+      Height = 323
+      Align = alClient
+      Color = 16764097
+      DataSource = DS_IE_Conceptos
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      OnDrawColumnCell = GrillaDrawColumnCell
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_CONCEPTO'
+          Title.Caption = 'Id'
+          Width = 31
+          Visible = True
+        end
+        item
+          Color = 16767698
+          Expanded = False
+          FieldName = 'COD_CORTO'
+          Title.Caption = 'C'#243'digo'
+          Width = 81
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_CONCEPTO'
+          Title.Caption = 'Nombre'
+          Width = 463
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IMPORTE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Importe'
+          Width = 94
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'BAJA'
+          Title.Caption = 'Baja'
+          Width = 40
+          Visible = True
+        end>
+    end
+    object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 132
-      Height = 17
-      Align = alLeft
-      Caption = '                                 '
+      Width = 852
+      Height = 19
+      Align = alTop
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 1
+      object Label4: TLabel
+        Left = 1
+        Top = 1
+        Width = 132
+        Height = 17
+        Align = alLeft
+        Caption = '                                 '
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object StaticText3: TStaticText
+        Left = 742
+        Top = 1
+        Width = 109
+        Height = 17
+        Align = alRight
+        Alignment = taCenter
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'Dado de Baja'
+        Color = 6974207
+        ParentColor = False
+        TabOrder = 0
+      end
+    end
+    object pDatos: TPanel
+      Left = 1
+      Top = 343
+      Width = 852
+      Height = 70
+      Align = alBottom
+      BevelOuter = bvNone
       Font.Charset = ANSI_CHARSET
-      Font.Color = clNavy
+      Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Verdana'
-      Font.Style = [fsBold, fsItalic]
+      Font.Style = []
       ParentFont = False
-    end
-    object StaticText3: TStaticText
-      Left = 744
-      Top = 1
-      Width = 109
-      Height = 17
-      Align = alRight
-      Alignment = taCenter
-      AutoSize = False
-      BorderStyle = sbsSunken
-      Caption = 'Dado de Baja'
-      Color = 6974207
-      ParentColor = False
-      TabOrder = 0
+      TabOrder = 2
+      Visible = False
+      object Label1: TLabel
+        Left = 279
+        Top = 13
+        Width = 108
+        Height = 13
+        Caption = 'Nombre Concepto:'
+        Transparent = True
+      end
+      object Label2: TLabel
+        Left = 14
+        Top = 13
+        Width = 90
+        Height = 13
+        Caption = 'C'#243'd. Concepto:'
+        Transparent = True
+      end
+      object Label3: TLabel
+        Left = 53
+        Top = 45
+        Width = 51
+        Height = 13
+        Caption = 'Importe:'
+        Transparent = True
+      end
+      object dbNombreConcepto: TDBEdit
+        Left = 392
+        Top = 9
+        Width = 361
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'NOMBRE_CONCEPTO'
+        DataSource = DS_IE_Conceptos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+      end
+      object dbCodigoConcepto: TDBEdit
+        Left = 112
+        Top = 9
+        Width = 121
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'COD_CORTO'
+        DataSource = DS_IE_Conceptos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+      end
+      object dbImporte: TDBEdit
+        Left = 112
+        Top = 41
+        Width = 153
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'IMPORTE'
+        DataSource = DS_IE_Conceptos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+      end
     end
   end
   object ZQ_IE_Conceptos: TZQuery
@@ -210,7 +219,6 @@ object FConceptos: TFConceptos
     Top = 72
     object ZQ_IE_ConceptosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
-      Required = True
     end
     object ZQ_IE_ConceptosCOD_CORTO: TStringField
       FieldName = 'COD_CORTO'

@@ -244,7 +244,7 @@ begin
     begin
        if (ZQ_IE_ProveedoresBAJA.Value='S') then
           begin
-           DBGridProveedores.Canvas.Brush.Color :=$007A7AFE;
+           DBGridProveedores.Canvas.Brush.Color :=StaticText3.Brush.Color;
            DBGridProveedores.Canvas.Font.Color := clBlack;
            DBGridProveedores.Canvas.Font.Style := DBGridProveedores.Canvas.Font.Style + [fsBold];
            if (gdFocused in State) or (gdSelected in State) then

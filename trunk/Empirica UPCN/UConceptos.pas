@@ -42,6 +42,7 @@ type
     PBusqueda: TPanel;
     Label4: TLabel;
     StaticText3: TStaticText;
+    Panel1: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
@@ -231,7 +232,7 @@ begin
     begin
        if (ZQ_IE_ConceptosBAJA.Value='S') then
           begin
-           Grilla.Canvas.Brush.Color :=$007A7AFE;
+           Grilla.Canvas.Brush.Color :=StaticText3.Brush.Color;
            Grilla.Canvas.Font.Color := clBlack;
            Grilla.Canvas.Font.Style := Grilla.Canvas.Font.Style + [fsBold];
            if (gdFocused in State) or (gdSelected in State) then
