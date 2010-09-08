@@ -15,6 +15,7 @@ object FSaldoInicial: TFSaldoInicial
   Position = poDefault
   Scaled = False
   Visible = True
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pContenedor: TPanel
