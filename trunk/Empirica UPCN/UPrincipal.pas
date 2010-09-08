@@ -42,6 +42,7 @@ type
     Iconos_Barra_32: TImageList;
     AConceptos: TAction;
     AMovimientos: TAction;
+    ASaldoInicial: TAction;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -51,6 +52,7 @@ type
     procedure AABM_CuentasExecute(Sender: TObject);
     procedure AConceptosExecute(Sender: TObject);
     procedure AMovimientosExecute(Sender: TObject);
+    procedure ASaldoInicialExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -65,7 +67,7 @@ implementation
 {$R *.dfm}
 
 Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
-  UConceptos, UUtilidades, UMovimientos;
+  UConceptos, UUtilidades, UMovimientos, USaldoInicial;
 
 function salir_de_programa:boolean;
 begin
@@ -126,6 +128,11 @@ end;
 procedure TFPrincipal.AMovimientosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFMovimientos, FMovimientos);
+end;
+
+procedure TFPrincipal.ASaldoInicialExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFSaldoInicial, FSaldoInicial);
 end;
 
 end.
