@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, EKListadoSQL, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Mask, DBCtrls, StdCtrls, ComCtrls, ISDBEditDateTimePicker,
-  dxBar, dxBarExtItems, Grids, DBGrids, ExtCtrls, EKDBDateTimePicker;
+  dxBar, dxBarExtItems, Grids, DBGrids, ExtCtrls, EKDBDateTimePicker,
+  ZStoredProcedure;
 
 type
   TFSaldoInicial = class(TForm)
@@ -32,18 +33,78 @@ type
     Label2: TLabel;
     DBEditImporte: TDBEdit;
     Label10: TLabel;
-    ZQ_Cuentas: TZQuery;
-    DS_Cuentas: TDataSource;
+    ZQ_CuentaIngreso: TZQuery;
+    DS_CuentasIngreso: TDataSource;
     EKListadoCuentas: TEKListadoSQL;
-    ZQ_CuentasID_CUENTA: TIntegerField;
-    ZQ_CuentasNOMBRE_CUENTA: TStringField;
-    ZQ_CuentasMEDIO_DE_PAGO: TStringField;
-    ZQ_CuentasNRO_CUENTA_BANCARIA: TStringField;
-    ZQ_CuentasULTIMO_NRO: TIntegerField;
-    ZQ_CuentasAUTONUMERAR: TStringField;
-    ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField;
-    ZQ_CuentasBUSQUEDA: TStringField;
     EKDTPFecha: TEKDBDateTimePicker;
+    ZQ_Cuenta_Mov: TZQuery;
+    ZQ_Movimiento: TZQuery;
+    DS_Cuenta_Mov: TDataSource;
+    DS_Movimiento: TDataSource;
+    ZQ_VerSaldos: TZQuery;
+    DS_VerSaldos: TDataSource;
+    ZQ_VerSaldosID: TIntegerField;
+    ZQ_VerSaldosNRO_MOVIMIENTO: TIntegerField;
+    ZQ_VerSaldosID_CUENTA_INGRESO: TIntegerField;
+    ZQ_VerSaldosID_CUENTA_EGRESO: TIntegerField;
+    ZQ_VerSaldosID_MEDIO: TIntegerField;
+    ZQ_VerSaldosFECHA_MDC: TDateField;
+    ZQ_VerSaldosBANCO_MDC: TStringField;
+    ZQ_VerSaldosNRO_CHEQUE_TRANSF: TStringField;
+    ZQ_VerSaldosIMPORTE: TFloatField;
+    ZQ_VerSaldosCONCILIADO: TStringField;
+    ZQ_VerSaldosNRO_MOVIMIENTO_1: TIntegerField;
+    ZQ_VerSaldosNRO_PROVEEDOR: TIntegerField;
+    ZQ_VerSaldosID_CONCEPTO: TIntegerField;
+    ZQ_VerSaldosID_TIPO_MOVIMIENTO: TIntegerField;
+    ZQ_VerSaldosID_OBJETO_MOVIMIENTO: TIntegerField;
+    ZQ_VerSaldosDESCRIPCION: TStringField;
+    ZQ_VerSaldosPAGO_DEL_EJERCICIO: TStringField;
+    ZQ_VerSaldosFECHA: TDateField;
+    ZQ_VerSaldosIMPORTE_1: TFloatField;
+    ZQ_VerSaldosIMPRESO: TStringField;
+    ZQ_VerSaldosNRO_COMPROMISO: TIntegerField;
+    ZQ_VerSaldosNRO_PARTE: TIntegerField;
+    ZQ_VerSaldosANULADO: TStringField;
+    ZQ_VerSaldosFECHA_ANULADO: TDateField;
+    ZQ_VerSaldosPARTE_ANULADO: TIntegerField;
+    ZQ_VerSaldosDETALLE_ANULADO: TStringField;
+    ZQ_CuentaIngresoID_CUENTA: TIntegerField;
+    ZQ_CuentaIngresoNOMBRE_CUENTA: TStringField;
+    ZQ_CuentaIngresoMEDIO_DE_PAGO: TStringField;
+    ZQ_CuentaIngresoNRO_CUENTA_BANCARIA: TStringField;
+    ZQ_CuentaIngresoULTIMO_NRO: TIntegerField;
+    ZQ_CuentaIngresoAUTONUMERAR: TStringField;
+    ZQ_CuentaIngresoMEDIO_POR_DEFECTO: TIntegerField;
+    ZQ_CuentaIngresoBUSQUEDA: TStringField;
+    ZQ_Cuenta_MovID: TIntegerField;
+    ZQ_Cuenta_MovNRO_MOVIMIENTO: TIntegerField;
+    ZQ_Cuenta_MovID_CUENTA_INGRESO: TIntegerField;
+    ZQ_Cuenta_MovID_CUENTA_EGRESO: TIntegerField;
+    ZQ_Cuenta_MovID_MEDIO: TIntegerField;
+    ZQ_Cuenta_MovFECHA_MDC: TDateField;
+    ZQ_Cuenta_MovBANCO_MDC: TStringField;
+    ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TStringField;
+    ZQ_Cuenta_MovIMPORTE: TFloatField;
+    ZQ_Cuenta_MovCONCILIADO: TStringField;
+    ZQ_MovimientoNRO_MOVIMIENTO: TIntegerField;
+    ZQ_MovimientoNRO_PROVEEDOR: TIntegerField;
+    ZQ_MovimientoID_CONCEPTO: TIntegerField;
+    ZQ_MovimientoID_TIPO_MOVIMIENTO: TIntegerField;
+    ZQ_MovimientoID_OBJETO_MOVIMIENTO: TIntegerField;
+    ZQ_MovimientoDESCRIPCION: TStringField;
+    ZQ_MovimientoPAGO_DEL_EJERCICIO: TStringField;
+    ZQ_MovimientoFECHA: TDateField;
+    ZQ_MovimientoIMPORTE: TFloatField;
+    ZQ_MovimientoIMPRESO: TStringField;
+    ZQ_MovimientoNRO_COMPROMISO: TIntegerField;
+    ZQ_MovimientoNRO_PARTE: TIntegerField;
+    ZQ_MovimientoANULADO: TStringField;
+    ZQ_MovimientoFECHA_ANULADO: TDateField;
+    ZQ_MovimientoPARTE_ANULADO: TIntegerField;
+    ZQ_MovimientoDETALLE_ANULADO: TStringField;
+    ZP_ObtenerNroMov: TZStoredProc;
+    ZP_ObtenerNroMovID: TIntegerField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -77,53 +138,76 @@ uses UDM;
 
 procedure TFSaldoInicial.btnNuevoClick(Sender: TObject);
 begin
-  //if dm.EKModelo.iniciar_transaccion(transaccion_saldo, [ZQ_Cuentas]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_saldo, [ZQ_Movimiento, ZQ_Cuenta_Mov]) then
   begin
     DBGridSaldosIniciales.Enabled := false;
     pDatos.Visible := true;
     pDatos.Enabled := true;
-
-    //ZQ_Cuentas.Append;
-    //ZQ_CuentasAUTONUMERAR.AsString := 'N';
-    //EditNombreCuenta.SetFocus;
-
     GrupoVisualizando.Enabled := false;
     GrupoEditando.Enabled := true;
+
+    ZQ_Movimiento.Append;
+    ZQ_Cuenta_Mov.Append;
+
+    EKDTPFecha.SetFocus;
   end;
 end;
 
 
 procedure TFSaldoInicial.btnModificarClick(Sender: TObject);
 begin
-  //if ZQ_Cuentas.IsEmpty then
-  //  exit;
+  if ZQ_VerSaldos.IsEmpty then
+    exit;
 
-  //if dm.EKModelo.iniciar_transaccion(transaccion_saldo, [ZQ_Cuentas]) then
+  ZQ_Movimiento.Close;
+  ZQ_Movimiento.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
+  ZQ_Movimiento.Open;
+  ZQ_Cuenta_Mov.Close;
+  ZQ_Cuenta_Mov.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
+  ZQ_Cuenta_Mov.Open;
+
+  if dm.EKModelo.iniciar_transaccion(transaccion_saldo, [ZQ_Movimiento, ZQ_Cuenta_Mov]) then
   begin
     DBGridSaldosIniciales.Enabled := false;
     pDatos.Visible := true;
     pDatos.Enabled := true;
-    //dbEditNombreCuenta.SetFocus;
     GrupoVisualizando.Enabled := false;
     GrupoEditando.Enabled := true;
+
+    ZQ_Movimiento.Edit;
+    ZQ_Cuenta_Mov.Edit;
+
+    EKDTPFecha.SetFocus;
   end;
 end;
 
 
 procedure TFSaldoInicial.btnEliminarClick(Sender: TObject);
 begin
-  //if ZQ_Cuentas.IsEmpty then
-  //  exit;
+  if ZQ_VerSaldos.IsEmpty then
+    exit;
+
+  ZQ_Movimiento.Close;
+  ZQ_Movimiento.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
+  ZQ_Movimiento.Open;
+  ZQ_Cuenta_Mov.Close;
+  ZQ_Cuenta_Mov.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
+  ZQ_Cuenta_Mov.Open;
 
   if (application.MessageBox(pchar('¿Esta seguro que desea Eliminar el Saldo Inicial seleccionado?                        ' + #13 + #13), 'Confirmación', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    //if dm.EKModelo.iniciar_transaccion(transaccion_cuentas, [ZQ_Cuentas]) then
-    //  ZQ_Cuentas.Delete
-    //else
-    //  exit;
+    if dm.EKModelo.iniciar_transaccion(transaccion_saldo, [ZQ_Movimiento, ZQ_Cuenta_Mov]) then
+    begin
+      ZQ_Movimiento.Delete;
+      ZQ_Cuenta_Mov.Delete;
+    end
+    else
+      exit;
     if not (dm.EKModelo.finalizar_transaccion(transaccion_saldo)) then
       dm.EKModelo.cancelar_transaccion(transaccion_saldo);
   end;
+
+  ZQ_VerSaldos.Refresh;
 end;
 
 
@@ -131,11 +215,26 @@ procedure TFSaldoInicial.btnGuardarClick(Sender: TObject);
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
+  ZP_ObtenerNroMov.Close;
+  ZP_ObtenerNroMov.Open;
+  ZQ_Cuenta_MovNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
+  ZQ_MovimientoNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
+
+  ZQ_MovimientoID_OBJETO_MOVIMIENTO.AsInteger:= 4;
+  ZQ_MovimientoIMPORTE.AsFloat:= ZQ_Cuenta_MovIMPORTE.AsFloat;
+
   if not validarDatos() then
     exit;
 
-  //completar codigo
-
+  if DM.EKModelo.finalizar_transaccion(transaccion_saldo) then
+  begin
+    DBGridSaldosIniciales.Enabled := true;
+    GrupoVisualizando.Enabled := true;
+    GrupoEditando.Enabled := false;
+    pDatos.Visible := false;
+    pDatos.Enabled := false;
+    ZQ_VerSaldos.Refresh;
+  end;
 end;
 
 procedure TFSaldoInicial.btnCancelarClick(Sender: TObject);
@@ -170,8 +269,8 @@ begin
   if key = 112 then
     if EKListadoCuentas.Buscar then
     begin
-      //ZQ_Cuentas_Movimientos.Edit;
-      //ZQ_Cuentas_MovimientosID_CUENTA_INGRESO.AsInteger := StrToInt(ISListadoCuentas.Resultado);
+      ZQ_Cuenta_Mov.Edit;
+      ZQ_Cuenta_MovID_CUENTA_INGRESO.AsInteger := StrToInt(EKListadoCuentas.Resultado);
       DBEditImporte.SetFocus;
     end;
 end;
