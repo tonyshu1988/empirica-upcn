@@ -18,7 +18,6 @@ type
     Label5: TLabel;
     Label3: TLabel;
     Label6: TLabel;
-    Label7: TLabel;
     DBENombreApellido: TDBEdit;
     DBENombreFantasia: TDBEdit;
     DBETelefono: TDBEdit;
@@ -193,6 +192,8 @@ end;
 
 procedure TFABMProveedores.BtGuardarClick(Sender: TObject);
 begin
+if validarcampos() then
+ begin
   if DM.EKModelo.finalizar_transaccion(transaccion_ABMProveedores) then
   begin
     Panel_edicion.Enabled:=false;
@@ -201,6 +202,7 @@ begin
     GrupoGuardarCancelar.Enabled := false;
     ZQ_IE_Proveedores.Refresh;
   end;
+ end
 end;
 
 procedure TFABMProveedores.BtCancelarClick(Sender: TObject);

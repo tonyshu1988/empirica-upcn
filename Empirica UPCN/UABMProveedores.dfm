@@ -1,6 +1,6 @@
 object FABMProveedores: TFABMProveedores
-  Left = 241
-  Top = 111
+  Left = 306
+  Top = 196
   Width = 870
   Height = 500
   Caption = 'ABM Proveedores'
@@ -22,15 +22,15 @@ object FABMProveedores: TFABMProveedores
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 414
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
     object Panel_edicion: TPanel
       Left = 1
-      Top = 278
-      Width = 860
+      Top = 276
+      Width = 852
       Height = 137
       Align = alBottom
       Enabled = False
@@ -38,11 +38,11 @@ object FABMProveedores: TFABMProveedores
       object Label1: TLabel
         Left = 15
         Top = 21
-        Width = 105
+        Width = 110
         Height = 13
-        Caption = 'Nombre y Apellido'
+        Caption = 'Nombre y Apellido:'
         Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
+        Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = []
@@ -52,11 +52,11 @@ object FABMProveedores: TFABMProveedores
       object Label2: TLabel
         Left = 6
         Top = 49
-        Width = 114
+        Width = 119
         Height = 13
-        Caption = 'Nombre de Fantasia'
+        Caption = 'Nombre de Fantas'#237'a:'
         Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
+        Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = []
@@ -66,41 +66,33 @@ object FABMProveedores: TFABMProveedores
       object Label16: TLabel
         Left = 65
         Top = 79
-        Width = 55
+        Width = 60
         Height = 13
-        Caption = 'Tel'#233'fonos'
+        Caption = 'Tel'#233'fonos:'
         Transparent = True
       end
       object Label5: TLabel
         Left = 67
         Top = 109
-        Width = 53
+        Width = 58
         Height = 13
-        Caption = 'Direccion'
+        Caption = 'Direcci'#243'n:'
         Transparent = True
       end
       object Label3: TLabel
         Left = 466
         Top = 22
-        Width = 34
+        Width = 39
         Height = 13
-        Caption = 'E-Mail'
+        Caption = 'E-Mail:'
         Transparent = True
       end
       object Label6: TLabel
-        Left = 407
+        Left = 435
         Top = 49
-        Width = 93
+        Width = 70
         Height = 13
-        Caption = 'Tipo Documento'
-        Transparent = True
-      end
-      object Label7: TLabel
-        Left = 480
-        Top = 79
-        Width = 20
-        Height = 13
-        Caption = 'Nro'
+        Caption = 'Documento:'
         Transparent = True
       end
       object DBENombreApellido: TDBEdit
@@ -168,9 +160,9 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 3
       end
       object DBENroDocumento: TDBEdit
-        Left = 505
-        Top = 76
-        Width = 273
+        Left = 655
+        Top = 44
+        Width = 148
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NRO_DOCUMENTO'
@@ -186,7 +178,7 @@ object FABMProveedores: TFABMProveedores
       object DBEEmail: TDBEdit
         Left = 505
         Top = 18
-        Width = 273
+        Width = 299
         Height = 21
         DataField = 'EMAIL'
         DataSource = DS_IE_Proveedores
@@ -201,7 +193,7 @@ object FABMProveedores: TFABMProveedores
       object DBLookupComboBox1: TDBLookupComboBox
         Left = 505
         Top = 45
-        Width = 159
+        Width = 147
         Height = 21
         DataField = 'TIPO_DOCUMENTO'
         DataSource = DS_IE_Proveedores
@@ -220,8 +212,8 @@ object FABMProveedores: TFABMProveedores
     object DBGridProveedores: TDBGrid
       Left = 1
       Top = 20
-      Width = 860
-      Height = 258
+      Width = 852
+      Height = 256
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -272,7 +264,7 @@ object FABMProveedores: TFABMProveedores
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 852
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -281,9 +273,10 @@ object FABMProveedores: TFABMProveedores
       object Label4: TLabel
         Left = 1
         Top = 1
-        Width = 132
+        Width = 240
         Height = 17
         Align = alLeft
+        AutoSize = False
         Caption = '                                 '
         Font.Charset = ANSI_CHARSET
         Font.Color = clNavy
@@ -293,7 +286,7 @@ object FABMProveedores: TFABMProveedores
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 750
+        Left = 742
         Top = 1
         Width = 109
         Height = 17
@@ -309,8 +302,8 @@ object FABMProveedores: TFABMProveedores
     end
     object ReporteProveedores: TQuickRep
       Tag = 99
-      Left = 595
-      Top = 336
+      Left = 475
+      Top = 392
       Width = 952
       Height = 1347
       Frame.Color = clBlack
@@ -607,7 +600,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          55.121527777777790000
+          55.121527777777780000
           1898.385416666667000000)
         BandType = rbDetail
         object QRDBText53: TQRDBText
@@ -962,7 +955,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          74.965277777777790000
+          74.965277777777780000
           1898.385416666667000000)
         BandType = rbSummary
         object QRSysData4: TQRSysData
@@ -1031,7 +1024,7 @@ object FABMProveedores: TFABMProveedores
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1199,8 +1192,8 @@ object FABMProveedores: TFABMProveedores
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 704
-    Top = 176
+    Left = 664
+    Top = 72
     DockControlHeights = (
       0
       0
@@ -1465,6 +1458,7 @@ object FABMProveedores: TFABMProveedores
     SQL_From.Strings = (
       'from ie_proveedores p ')
     UsarWhereOriginal = EK_Con_Where
+    InfoRegistros = Label4
     PantallaReducida = True
     Left = 72
     Top = 96
