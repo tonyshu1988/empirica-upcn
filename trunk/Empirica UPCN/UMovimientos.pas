@@ -7,7 +7,8 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, StdCtrls,
   DBCtrls, Mask, ComCtrls, ISDBEditDateTimePicker, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKListadoSQL, ZStoredProcedure,
-  EKBusquedaAvanzada;
+  EKBusquedaAvanzada, ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma,
+  EKLlenarCombo;
 
 type
   TFMovimientos = class(TForm)
@@ -35,11 +36,10 @@ type
     panel_edicion_medio_de_pago: TPanel;
     Shape5: TShape;
     Label7: TLabel;
-    Label10: TLabel;
     DbGridMediosCobroPago: TDBGrid;
     Panel2: TPanel;
     txt_total_medio_pago: TLabel;
-    Button2: TButton;
+    btEliminarLinea: TButton;
     DBLookupComboBox2: TDBLookupComboBox;
     DBEdit2: TDBEdit;
     Label1: TLabel;
@@ -121,7 +121,6 @@ type
     DS_LIBRO_BANCO: TDataSource;
     PParametrosLibroBanco: TPanel;
     Label8: TLabel;
-    DBLCuenta: TDBLookupComboBox;
     Label9: TLabel;
     Label11: TLabel;
     DTPFechaDesde: TDateTimePicker;
@@ -144,6 +143,11 @@ type
     LIBRO_BANCOTIPO_MOV: TStringField;
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     LIBRO_BANCOFECHA_PD: TDateField;
+    ActionManager1: TActionManager;
+    ADeleteLinea: TAction;
+    EKDbSumaImporte: TEKDbSuma;
+    EKLlenarCombo1: TEKLlenarCombo;
+    DBLCuenta: TComboBox;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
@@ -156,6 +160,11 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btaplicarClick(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
+    procedure DBLCCuentaEnter(Sender: TObject);
+    procedure btEliminarLineaClick(Sender: TObject);
+    procedure ADeleteLineaExecute(Sender: TObject);
+    procedure EKDbSumaImporteSumListChanged(Sender: TObject);
+    procedure EKLlenarCombo1Cambio(valor: String);
   private
     { Private declarations }
   public
@@ -202,7 +211,7 @@ ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := 0;
     if CuentaNro <> 0 then
     begin
       DBLCCuenta.Enabled:= false;
-      ZQ_CuentasID_CUENTA.AsInteger:= CuentaNro;
+      ZQ_Cuentas.Locate('id_cuenta',CuentaNro,[]);
     end;
 
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1;
@@ -223,18 +232,20 @@ dm.EKModelo.abrir(ZQ_Tipo_Movimiento);
 
 DTPFechaDesde.Date:= StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha));
 DTPFechaHasta.Date:=DM.EKModelo.Fecha;
+EKLlenarCombo1.CargarCombo;
 
 //CuentaNro:= StrToInt(dm.EKUsrLogin1.PermisoAccionValor('Cuenta Nro'));
   if CuentaNro <> 0 then
   begin
-    ZQ_CuentasID_CUENTA.AsInteger:=CuentaNro;
+    ZQ_Cuentas.Locate('id_cuenta',CuentaNro,[]);
     DBLCuenta.Enabled:=false;
   end
   else
   begin
+    EKLlenarCombo1.SelectClave:=ZQ_CuentasID_CUENTA.AsString;
+    DBLCuenta.ItemIndex:=0;
     DBLCuenta.Enabled:=true;
   end;
-
 
 end;
 
@@ -261,6 +272,14 @@ begin
   if key = 112 then
   begin
     if ((sender as tdbgrid).SelectedField.FullName = 'ID_MEDIO') then
+      if EK_ListadoMedCobroPago.Buscar then
+      begin
+        ZQ_Medios_Cobro_Pago.Refresh;
+        ZQ_Cuenta_Movimiento.Edit;
+        ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
+      end;
+
+    if ((sender as tdbgrid).SelectedField.FullName = 'medio_de_pago') then
       if EK_ListadoMedCobroPago.Buscar then
       begin
         ZQ_Medios_Cobro_Pago.Refresh;
@@ -338,7 +357,7 @@ ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := 0;
     if CuentaNro <> 0 then
     begin
       DBLCCuenta.Enabled:= false;
-      ZQ_CuentasID_CUENTA.AsInteger:= CuentaNro;
+      ZQ_Cuentas.Locate('id_cuenta',CuentaNro,[]);
     end;
 
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=2;
@@ -390,6 +409,38 @@ end;
 procedure TFMovimientos.btBuscarClick(Sender: TObject);
 begin
 EKBusquedaAvanzada1.Buscar;
+end;
+
+procedure TFMovimientos.DBLCCuentaEnter(Sender: TObject);
+begin
+if ZQ_Cuenta_MovimientoID_MEDIO.AsInteger <> 0 then
+  DBLCCuenta.Enabled:=false;
+end;
+
+procedure TFMovimientos.btEliminarLineaClick(Sender: TObject);
+begin
+if not(ZQ_Cuenta_Movimiento.IsEmpty)then
+begin
+  ZQ_Cuenta_Movimiento.Delete;
+  if (ZQ_Cuenta_Movimiento.IsEmpty) and (CuentaNro = 0) then
+    DBLCCuenta.Enabled:=true;
+end;
+end;
+
+procedure TFMovimientos.ADeleteLineaExecute(Sender: TObject);
+begin
+if DbGridMediosCobroPago.Focused then
+  btEliminarLinea.Click;
+end;
+
+procedure TFMovimientos.EKDbSumaImporteSumListChanged(Sender: TObject);
+begin
+txt_total_medio_pago.Caption:='Total:     '+FormatFloat('###,###,###,##0.00',EKDbSumaImporte.SumCollection[0].SumValue);
+end;
+
+procedure TFMovimientos.EKLlenarCombo1Cambio(valor: String);
+begin
+ZQ_Cuentas.Locate('id_cuenta',strtoint(EKLlenarCombo1.SelectClave),[]);
 end;
 
 end.
