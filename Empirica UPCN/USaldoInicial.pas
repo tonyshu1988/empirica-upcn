@@ -77,6 +77,8 @@ type
     ZQ_CuentaIngresoAUTONUMERAR: TStringField;
     ZQ_CuentaIngresoMEDIO_POR_DEFECTO: TIntegerField;
     ZQ_CuentaIngresoBUSQUEDA: TStringField;
+    ZP_ObtenerNroMov: TZStoredProc;
+    ZP_ObtenerNroMovID: TIntegerField;
     ZQ_Cuenta_MovID: TIntegerField;
     ZQ_Cuenta_MovNRO_MOVIMIENTO: TIntegerField;
     ZQ_Cuenta_MovID_CUENTA_INGRESO: TIntegerField;
@@ -103,8 +105,6 @@ type
     ZQ_MovimientoFECHA_ANULADO: TDateField;
     ZQ_MovimientoPARTE_ANULADO: TIntegerField;
     ZQ_MovimientoDETALLE_ANULADO: TStringField;
-    ZP_ObtenerNroMov: TZStoredProc;
-    ZP_ObtenerNroMovID: TIntegerField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -118,6 +118,7 @@ type
     procedure DBGridSaldosInicialesDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -217,9 +218,10 @@ begin
 
   ZP_ObtenerNroMov.Close;
   ZP_ObtenerNroMov.Open;
-  ZQ_Cuenta_MovNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
-  ZQ_MovimientoNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
 
+  ZQ_Cuenta_MovNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
+
+  ZQ_MovimientoNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
   ZQ_MovimientoID_CONCEPTO.Clear;
   ZQ_MovimientoID_OBJETO_MOVIMIENTO.AsInteger:= 4;
   ZQ_MovimientoIMPORTE.AsFloat:= ZQ_Cuenta_MovIMPORTE.AsFloat;
@@ -322,5 +324,11 @@ begin
    }
 end;
 
+
+procedure TFSaldoInicial.FormCreate(Sender: TObject);
+begin
+  dm.EKModelo.abrir(ZQ_CuentaIngreso);
+  dm.EKModelo.abrir(ZQ_VerSaldos);  
+end;
 
 end.
