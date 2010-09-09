@@ -24,119 +24,17 @@ object FMovimientos: TFMovimientos
     Height = 416
     Align = alClient
     TabOrder = 0
-    object DBGridLibroBanco: TDBGrid
-      Left = 1
-      Top = 33
-      Width = 996
-      Height = 382
-      Align = alClient
-      Color = 16772842
-      DataSource = DS_LIBRO_BANCO
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-      TabOrder = 0
-      TitleFont.Charset = ANSI_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'ID_MOVIMIENTO'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'FECHA'
-          Title.Caption = 'Fecha Emi'
-          Width = 68
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'FECHA_PD'
-          Title.Caption = 'Fecha PD'
-          Width = 68
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NRO_PAGO_REC'
-          Title.Caption = 'Nro Movimiento'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'MEDIO'
-          Title.Caption = 'Medio'
-          Width = 109
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NRO_MEDIO'
-          Title.Caption = 'Nro medio'
-          Width = 109
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TIPO_MOV'
-          Title.Caption = 'Tipo Movimiento'
-          Width = 106
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DESCRIPCION'
-          Title.Caption = 'Proveedor'
-          Width = 200
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_CONCEPTO'
-          Title.Caption = 'Concepto'
-          Width = 200
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DEBE'
-          Title.Caption = 'Debe'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'HABER'
-          Title.Caption = 'Haber'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SALDO'
-          Title.Caption = 'Saldo'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CONCILIADO'
-          Title.Caption = 'Conciliado'
-          Visible = True
-        end>
-    end
     object PEdicion: TPanel
       Left = 1
       Top = 33
       Width = 996
-      Height = 382
+      Height = 351
       Align = alClient
       TabOrder = 1
       Visible = False
       DesignSize = (
         996
-        382)
+        351)
       object Label3: TLabel
         Left = 12
         Top = 10
@@ -235,7 +133,7 @@ object FMovimientos: TFMovimientos
         Left = 7
         Top = 160
         Width = 978
-        Height = 213
+        Height = 182
         Anchors = [akLeft, akTop, akRight, akBottom]
         BevelOuter = bvNone
         TabOrder = 8
@@ -261,7 +159,7 @@ object FMovimientos: TFMovimientos
           Left = 0
           Top = 20
           Width = 978
-          Height = 167
+          Height = 136
           Align = alClient
           Color = 16772842
           DataSource = DS_Cuenta_Movimiento
@@ -350,7 +248,7 @@ object FMovimientos: TFMovimientos
         end
         object Panel2: TPanel
           Left = 0
-          Top = 187
+          Top = 156
           Width = 978
           Height = 26
           Align = alBottom
@@ -429,6 +327,108 @@ object FMovimientos: TFMovimientos
         ListSource = DS_Tipo_Movimiento
         TabOrder = 6
       end
+    end
+    object DBGridLibroBanco: TDBGrid
+      Left = 1
+      Top = 33
+      Width = 996
+      Height = 351
+      Align = alClient
+      Color = 16772842
+      DataSource = DS_LIBRO_BANCO
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_MOVIMIENTO'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA'
+          Title.Caption = 'Fecha Emi'
+          Width = 68
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA_PD'
+          Title.Caption = 'Fecha PD'
+          Width = 68
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NRO_PAGO_REC'
+          Title.Caption = 'Nro Movimiento'
+          Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'MEDIO'
+          Title.Caption = 'Medio'
+          Width = 109
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NRO_MEDIO'
+          Title.Caption = 'Nro medio'
+          Width = 109
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TIPO_MOV'
+          Title.Caption = 'Tipo Movimiento'
+          Width = 106
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DESCRIPCION'
+          Title.Caption = 'Proveedor'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_CONCEPTO'
+          Title.Caption = 'Concepto'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DEBE'
+          Title.Caption = 'Debe'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'HABER'
+          Title.Caption = 'Haber'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SALDO'
+          Title.Caption = 'Saldo'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CONCILIADO'
+          Title.Caption = 'Conciliado'
+          Visible = True
+        end>
     end
     object PParametrosLibroBanco: TPanel
       Left = 1
@@ -513,6 +513,104 @@ object FMovimientos: TFMovimientos
         Items.Strings = (
           'Fecha Emision'
           'Fecha PD')
+      end
+    end
+    object PFiltrosColumnas: TPanel
+      Left = 1
+      Top = 384
+      Width = 996
+      Height = 31
+      Align = alBottom
+      TabOrder = 3
+      Visible = False
+      object BtAplicarFiltrosColumnas: TButton
+        Left = 839
+        Top = 6
+        Width = 75
+        Height = 19
+        Caption = 'Aplicar'
+        TabOrder = 0
+        OnClick = BtAplicarFiltrosColumnasClick
+      end
+      object CBFechaEmi: TCheckBox
+        Left = 8
+        Top = 8
+        Width = 103
+        Height = 17
+        Caption = 'Fecha emision'
+        Checked = True
+        State = cbChecked
+        TabOrder = 1
+      end
+      object CBFechaPD: TCheckBox
+        Left = 115
+        Top = 8
+        Width = 78
+        Height = 17
+        Caption = 'Fecha PD'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+      end
+      object CBNroMov: TCheckBox
+        Left = 203
+        Top = 8
+        Width = 111
+        Height = 17
+        Caption = 'Nro Movimiento'
+        Checked = True
+        State = cbChecked
+        TabOrder = 3
+      end
+      object CBMedio: TCheckBox
+        Left = 323
+        Top = 8
+        Width = 62
+        Height = 17
+        Caption = 'Medio'
+        Checked = True
+        State = cbChecked
+        TabOrder = 4
+      end
+      object CBNroMedio: TCheckBox
+        Left = 395
+        Top = 8
+        Width = 81
+        Height = 17
+        Caption = 'Nro Medio'
+        Checked = True
+        State = cbChecked
+        TabOrder = 5
+      end
+      object CBProveedor: TCheckBox
+        Left = 579
+        Top = 8
+        Width = 102
+        Height = 17
+        Caption = 'Proveedores'
+        Checked = True
+        State = cbChecked
+        TabOrder = 6
+      end
+      object CBConcepto: TCheckBox
+        Left = 683
+        Top = 8
+        Width = 81
+        Height = 17
+        Caption = 'Concepto'
+        Checked = True
+        State = cbChecked
+        TabOrder = 7
+      end
+      object CBTipoMedio: TCheckBox
+        Left = 491
+        Top = 8
+        Width = 81
+        Height = 17
+        Caption = 'Tipo Medio'
+        Checked = True
+        State = cbChecked
+        TabOrder = 8
       end
     end
   end
@@ -636,6 +734,11 @@ object FMovimientos: TFMovimientos
           item
             BeginGroup = True
             Item = BtEditarMovimiento
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = BtVerCampos
             Visible = True
           end
           item
@@ -767,6 +870,15 @@ object FMovimientos: TFMovimientos
       OnClick = BtEditarMovimientoClick
       AutoGrayScale = False
     end
+    object BtVerCampos: TdxBarLargeButton
+      Caption = 'Filtrar Campos'
+      Category = 0
+      Hint = 'Filtrar Campos'
+      Visible = ivAlways
+      ImageIndex = 7
+      OnClick = BtVerCamposClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'BtIngresos'
@@ -774,7 +886,8 @@ object FMovimientos: TFMovimientos
         'btBuscar'
         'btImprimir'
         'btSalir'
-        'BtEditarMovimiento')
+        'BtEditarMovimiento'
+        'BtVerCampos')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -1315,7 +1428,11 @@ object FMovimientos: TFMovimientos
         Titulo = 'Medio'
         Campo = 'medio'
         Tabla = 'ie'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Medios_Cobro_Pago
+        TipoCombollenarCampo = 'NOMBRE_MEDIO_COBRO_PAGO'
+        TipoCombollenarCampoReal = 'NOMBRE_MEDIO_COBRO_PAGO'
         TipoComboEditable = False
         ItemIndex = -1
       end
@@ -1331,7 +1448,11 @@ object FMovimientos: TFMovimientos
         Titulo = 'Tipo Movimiento'
         Campo = 'tipo_mov'
         Tabla = 'ie'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Tipo_Movimiento
+        TipoCombollenarCampo = 'DESCRIPCION'
+        TipoCombollenarCampoReal = 'DESCRIPCION'
         TipoComboEditable = False
         ItemIndex = -1
       end
@@ -1364,11 +1485,11 @@ object FMovimientos: TFMovimientos
     DataSet = LIBRO_BANCO
     SQL.Strings = (
       'select ie.*'
-      'from ie_ver_libro_banco(:cuenta,:hasta,:desde) ie')
+      'from ie_ver_libro_banco(:cuenta,:hasta,:desde,:ordenamiento)ie')
     SQL_Select.Strings = (
       'select ie.*')
     SQL_From.Strings = (
-      'from ie_ver_libro_banco(:cuenta,:hasta,:desde) ie')
+      'from ie_ver_libro_banco(:cuenta,:hasta,:desde,:ordenamiento)ie')
     UsarWhereOriginal = EK_Con_Where
     Left = 96
     Top = 128

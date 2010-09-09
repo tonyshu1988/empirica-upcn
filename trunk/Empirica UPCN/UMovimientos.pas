@@ -151,6 +151,17 @@ type
     BtEditarMovimiento: TdxBarLargeButton;
     ComboOrden: TComboBox;
     Label10: TLabel;
+    BtVerCampos: TdxBarLargeButton;
+    PFiltrosColumnas: TPanel;
+    BtAplicarFiltrosColumnas: TButton;
+    CBFechaEmi: TCheckBox;
+    CBFechaPD: TCheckBox;
+    CBNroMov: TCheckBox;
+    CBMedio: TCheckBox;
+    CBNroMedio: TCheckBox;
+    CBProveedor: TCheckBox;
+    CBConcepto: TCheckBox;
+    CBTipoMedio: TCheckBox;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
@@ -170,6 +181,8 @@ type
     procedure EKLlenarCombo1Cambio(valor: String);
     function validarcampos():boolean;
     procedure BtEditarMovimientoClick(Sender: TObject);
+    procedure BtAplicarFiltrosColumnasClick(Sender: TObject);
+    procedure BtVerCamposClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -553,6 +566,58 @@ begin
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
+end;
+
+procedure TFMovimientos.BtAplicarFiltrosColumnasClick(Sender: TObject);
+begin
+  if not CBFechaEmi.Checked then
+    DBGridLibroBanco.Columns[1].Visible := false
+  else
+    DBGridLibroBanco.Columns[1].Visible := true;
+
+  if not CBFechaPD.Checked then
+    DBGridLibroBanco.Columns[2].Visible := false
+  else
+    DBGridLibroBanco.Columns[2].Visible := true;
+
+  if not CBNroMov.Checked then
+    DBGridLibroBanco.Columns[3].Visible := false
+  else
+    DBGridLibroBanco.Columns[3].Visible := true;
+
+  if not CBMedio.Checked then
+    DBGridLibroBanco.Columns[4].Visible := false
+  else
+    DBGridLibroBanco.Columns[4].Visible := true;
+
+  if not CBNroMedio.Checked then
+    DBGridLibroBanco.Columns[5].Visible := false
+  else
+    DBGridLibroBanco.Columns[5].Visible := true;
+
+  if not CBProveedor.Checked then
+    DBGridLibroBanco.Columns[6].Visible := false
+  else
+    DBGridLibroBanco.Columns[6].Visible := true;
+
+  if not CBConcepto.Checked then
+    DBGridLibroBanco.Columns[7].Visible := false
+  else
+    DBGridLibroBanco.Columns[7].Visible := true;
+
+  if not CBTipoMedio.Checked then
+    DBGridLibroBanco.Columns[8].Visible := false
+  else
+    DBGridLibroBanco.Columns[8].Visible := true;
+end;
+
+procedure TFMovimientos.BtVerCamposClick(Sender: TObject);
+begin
+if PFiltrosColumnas.Visible = false then
+ PFiltrosColumnas.Visible:=true
+else
+ PFiltrosColumnas.Visible:=false;
+
 end;
 
 end.
