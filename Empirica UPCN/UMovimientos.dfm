@@ -458,6 +458,13 @@ object FMovimientos: TFMovimientos
         Height = 13
         Caption = 'Fecha Hasta:'
       end
+      object Label10: TLabel
+        Left = 674
+        Top = 8
+        Width = 40
+        Height = 13
+        Caption = 'Orden:'
+      end
       object DTPFechaDesde: TDateTimePicker
         Left = 384
         Top = 4
@@ -477,8 +484,8 @@ object FMovimientos: TFMovimientos
         TabOrder = 1
       end
       object btaplicar: TButton
-        Left = 680
-        Top = 4
+        Left = 839
+        Top = 6
         Width = 75
         Height = 19
         Caption = 'Aplicar'
@@ -493,6 +500,19 @@ object FMovimientos: TFMovimientos
         Style = csDropDownList
         ItemHeight = 13
         TabOrder = 3
+      end
+      object ComboOrden: TComboBox
+        Left = 720
+        Top = 5
+        Width = 110
+        Height = 21
+        ItemHeight = 13
+        ItemIndex = 0
+        TabOrder = 4
+        Text = 'Fecha Emision'
+        Items.Strings = (
+          'Fecha Emision'
+          'Fecha PD')
       end
     end
   end
@@ -615,6 +635,11 @@ object FMovimientos: TFMovimientos
           end
           item
             BeginGroup = True
+            Item = BtEditarMovimiento
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = BtGuardar
             Visible = True
           end
@@ -733,13 +758,23 @@ object FMovimientos: TFMovimientos
       OnClick = btSalirClick
       AutoGrayScale = False
     end
+    object BtEditarMovimiento: TdxBarLargeButton
+      Caption = 'Editar'
+      Category = 0
+      Hint = 'Editar'
+      Visible = ivAlways
+      ImageIndex = 35
+      OnClick = BtEditarMovimientoClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'BtIngresos'
         'BtEgresos'
         'btBuscar'
         'btImprimir'
-        'btSalir')
+        'btSalir'
+        'BtEditarMovimiento')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -1137,7 +1172,7 @@ object FMovimientos: TFMovimientos
     Connection = DM.Conexion
     SQL.Strings = (
       'select ie.*'
-      'from ie_ver_libro_banco(:cuenta,:hasta,:desde)ie')
+      'from ie_ver_libro_banco(:cuenta,:hasta,:desde,:ordenamiento)ie')
     Params = <
       item
         DataType = ftUnknown
@@ -1152,6 +1187,11 @@ object FMovimientos: TFMovimientos
       item
         DataType = ftUnknown
         Name = 'desde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ordenamiento'
         ParamType = ptUnknown
       end>
     Left = 200
@@ -1170,6 +1210,11 @@ object FMovimientos: TFMovimientos
       item
         DataType = ftUnknown
         Name = 'desde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ordenamiento'
         ParamType = ptUnknown
       end>
     object LIBRO_BANCOID_MOVIMIENTO: TIntegerField
