@@ -241,6 +241,19 @@ object FMovimientos: TFMovimientos
             end
             item
               Expanded = False
+              FieldName = 'FECHA_FACTURA_RECIBO'
+              Title.Caption = 'Fecha F/R'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NRO_FACTURA_RECIBO'
+              Title.Caption = 'Nro F/R'
+              Width = 110
+              Visible = True
+            end
+            item
+              Expanded = False
               FieldName = 'IMPORTE'
               Title.Caption = 'Importe'
               Visible = True
@@ -343,6 +356,8 @@ object FMovimientos: TFMovimientos
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGridLibroBancoDrawColumnCell
+      OnDblClick = DBGridLibroBancoDblClick
       Columns = <
         item
           Expanded = False
@@ -407,6 +422,19 @@ object FMovimientos: TFMovimientos
         end
         item
           Expanded = False
+          FieldName = 'FECHA_FR'
+          Title.Caption = 'Fecha F/R'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NRO_FAC_REC'
+          Title.Caption = 'Nro F/R'
+          Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'DEBE'
           Title.Caption = 'Debe'
           Visible = True
@@ -437,6 +465,9 @@ object FMovimientos: TFMovimientos
       Height = 32
       Align = alTop
       TabOrder = 2
+      DesignSize = (
+        996
+        32)
       object Label8: TLabel
         Left = 8
         Top = 8
@@ -513,6 +544,23 @@ object FMovimientos: TFMovimientos
         Items.Strings = (
           'Fecha Emision'
           'Fecha PD')
+      end
+      object StaticText1: TStaticText
+        Left = 932
+        Top = 6
+        Width = 71
+        Height = 17
+        Anchors = [akTop, akRight]
+        Caption = 'Conciliado'
+        Color = 10354687
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 5
       end
     end
     object PFiltrosColumnas: TPanel
@@ -871,9 +919,9 @@ object FMovimientos: TFMovimientos
       AutoGrayScale = False
     end
     object BtVerCampos: TdxBarLargeButton
-      Caption = 'Filtrar Campos'
+      Caption = 'Filtrar Columnas'
       Category = 0
-      Hint = 'Filtrar Campos'
+      Hint = 'Filtrar Columnas'
       Visible = ivAlways
       ImageIndex = 7
       OnClick = BtVerCamposClick
@@ -901,11 +949,16 @@ object FMovimientos: TFMovimientos
     SQL.Strings = (
       'select *'
       'from ie_cuentas_movimientos cm'
-      'where cm.nro_movimiento = :NroMov')
+      'where (cm.nro_movimiento = :NroMov) or (cm.id = :IDCtaMov)')
     Params = <
       item
         DataType = ftUnknown
         Name = 'NroMov'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IDCtaMov'
         ParamType = ptUnknown
       end>
     Left = 536
@@ -914,6 +967,11 @@ object FMovimientos: TFMovimientos
       item
         DataType = ftUnknown
         Name = 'NroMov'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IDCtaMov'
         ParamType = ptUnknown
       end>
     object ZQ_Cuenta_MovimientoID: TIntegerField
@@ -933,6 +991,7 @@ object FMovimientos: TFMovimientos
     end
     object ZQ_Cuenta_MovimientoFECHA_MDC: TDateField
       FieldName = 'FECHA_MDC'
+      EditMask = '##/##/####'
     end
     object ZQ_Cuenta_MovimientoBANCO_MDC: TStringField
       FieldName = 'BANCO_MDC'
@@ -940,6 +999,14 @@ object FMovimientos: TFMovimientos
     end
     object ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TStringField
       FieldName = 'NRO_CHEQUE_TRANSF'
+      Size = 30
+    end
+    object ZQ_Cuenta_MovimientoFECHA_FACTURA_RECIBO: TDateField
+      FieldName = 'FECHA_FACTURA_RECIBO'
+      EditMask = '##/##/####'
+    end
+    object ZQ_Cuenta_MovimientoNRO_FACTURA_RECIBO: TStringField
+      FieldName = 'NRO_FACTURA_RECIBO'
       Size = 30
     end
     object ZQ_Cuenta_MovimientoIMPORTE: TFloatField
@@ -1382,6 +1449,13 @@ object FMovimientos: TFMovimientos
     object LIBRO_BANCOFECHA_PD: TDateField
       FieldName = 'FECHA_PD'
     end
+    object LIBRO_BANCOFECHA_FR: TDateField
+      FieldName = 'FECHA_FR'
+    end
+    object LIBRO_BANCONRO_FAC_REC: TStringField
+      FieldName = 'NRO_FAC_REC'
+      Size = 30
+    end
   end
   object EKBusquedaAvanzada1: TEKBusquedaAvanzada
     CriteriosBusqueda = <
@@ -1475,6 +1549,25 @@ object FMovimientos: TFMovimientos
       item
         Titulo = 'Conciliado'
         Campo = 'conciliado'
+        Tabla = 'ie'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha F/R'
+        Campo = 'FECHA_FR'
+        Tabla = 'ie'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndice = 6
+        TipoCampoIndiceVer = 'Desde - Hasta'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nro F/R'
+        Campo = 'NRO_FAC_REC'
         Tabla = 'ie'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False

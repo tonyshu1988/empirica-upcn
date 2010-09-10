@@ -162,6 +162,11 @@ type
     CBProveedor: TCheckBox;
     CBConcepto: TCheckBox;
     CBTipoMedio: TCheckBox;
+    ZQ_Cuenta_MovimientoFECHA_FACTURA_RECIBO: TDateField;
+    ZQ_Cuenta_MovimientoNRO_FACTURA_RECIBO: TStringField;
+    LIBRO_BANCOFECHA_FR: TDateField;
+    LIBRO_BANCONRO_FAC_REC: TStringField;
+    StaticText1: TStaticText;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
@@ -183,6 +188,10 @@ type
     procedure BtEditarMovimientoClick(Sender: TObject);
     procedure BtAplicarFiltrosColumnasClick(Sender: TObject);
     procedure BtVerCamposClick(Sender: TObject);
+    procedure DBGridLibroBancoDblClick(Sender: TObject);
+    procedure DBGridLibroBancoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -261,7 +270,7 @@ ZQ_Movimientos.Active := False;
 ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
 ZQ_Cuenta_Movimiento.Active := False;
 ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := 0;
-
+ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := 0;
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
   begin
@@ -385,6 +394,9 @@ begin
       if ZQ_Cuenta_MovimientoFECHA_MDC.IsNull then
         ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime := ZQ_MovimientosFECHA.AsDateTime;
 
+       if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) and (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then
+         ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
+
 
       ZQ_Cuenta_Movimiento.Next;
     end;
@@ -420,6 +432,7 @@ ZQ_Movimientos.Active := False;
 ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
 ZQ_Cuenta_Movimiento.Active := False;
 ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := 0;
+ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := 0;
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
   begin
@@ -617,6 +630,86 @@ if PFiltrosColumnas.Visible = false then
  PFiltrosColumnas.Visible:=true
 else
  PFiltrosColumnas.Visible:=false;
+
+end;
+
+procedure TFMovimientos.DBGridLibroBancoDblClick(Sender: TObject);
+begin
+     if ((sender as tdbgrid).SelectedField.FullName = 'CONCILIADO') then
+     begin
+       ZQ_Cuenta_Movimiento.Close;
+       ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCOID_MOVIMIENTO.AsInteger;
+       ZQ_Cuenta_Movimiento.Open;
+
+       if ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2 then
+       begin
+         if ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N' then
+         begin
+           if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
+           begin
+             ZQ_Cuenta_Movimiento.edit;
+             ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'S';
+             if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+               DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+           end
+         end
+         else
+         begin
+           if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
+           begin
+             ZQ_Cuenta_Movimiento.edit;
+             ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
+             if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+               DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+           end;
+         end;
+          btaplicar.Click;
+          LIBRO_BANCO.Locate('ID_MOVIMIENTO',ZQ_Cuenta_MovimientoID.AsInteger,[]);
+       end;
+     end;
+
+end;
+
+procedure TFMovimientos.DBGridLibroBancoDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if not LIBRO_BANCO.IsEmpty then
+  begin
+     if LIBRO_BANCOMEDIO.AsString = 'CHEQUE' then
+     begin
+       if (LIBRO_BANCOCONCILIADO.Value='S') then
+          begin
+           DBGridLibroBanco.Canvas.Brush.Color :=StaticText1.Brush.Color;
+           DBGridLibroBanco.Canvas.Font.Color := clBlack;
+//           DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+           if (gdFocused in State) or (gdSelected in State) then
+             begin
+             DBGridLibroBanco.Canvas.Font.Color := clBlack;
+             DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+             end
+          end
+       else
+          begin
+            if (gdFocused in State) or (gdSelected in State) then
+             begin
+               DBGridLibroBanco.Canvas.Font.Color := clwhite;
+               DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
+               DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+             end;
+          end;
+       DBGridLibroBanco.DefaultDrawColumnCell(rect,datacol,column,state);
+     end
+     else
+     begin
+       if (gdFocused in State) or (gdSelected in State) then
+       begin
+         DBGridLibroBanco.Canvas.Font.Color := clwhite;
+         DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
+         DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+       end;
+     end;
+  end;
 
 end;
 
