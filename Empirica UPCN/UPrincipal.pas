@@ -43,6 +43,7 @@ type
     AConceptos: TAction;
     AMovimientos: TAction;
     ASaldoInicial: TAction;
+    ARep_Disponibilidad: TAction;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -53,6 +54,7 @@ type
     procedure AConceptosExecute(Sender: TObject);
     procedure AMovimientosExecute(Sender: TObject);
     procedure ASaldoInicialExecute(Sender: TObject);
+    procedure ARep_DisponibilidadExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,7 +69,8 @@ implementation
 {$R *.dfm}
 
 Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
-  UConceptos, UUtilidades, UMovimientos, USaldoInicial;
+  UConceptos, UUtilidades, UMovimientos, USaldoInicial,
+  UReportes_Disponibilidades;
 
 function salir_de_programa:boolean;
 begin
@@ -133,6 +136,11 @@ end;
 procedure TFPrincipal.ASaldoInicialExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFSaldoInicial, FSaldoInicial);
+end;
+
+procedure TFPrincipal.ARep_DisponibilidadExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFReportes_Disponibilidades, FReportes_Disponibilidades);
 end;
 
 end.
