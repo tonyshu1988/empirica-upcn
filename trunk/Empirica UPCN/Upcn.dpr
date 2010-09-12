@@ -10,7 +10,8 @@ uses
   UABM_Cuentas in 'UABM_Cuentas.pas' {FABM_Cuentas},
   UConceptos in 'UConceptos.pas' {FConceptos},
   UMovimientos in 'UMovimientos.pas' {FMovimientos},
-  USaldoInicial in 'USaldoInicial.pas' {FSaldoInicial};
+  USaldoInicial in 'USaldoInicial.pas' {FSaldoInicial},
+  UReportes_Disponibilidades in 'UReportes_Disponibilidades.pas' {FReportes_Disponibilidades};
 
 {$R *.res}
 
