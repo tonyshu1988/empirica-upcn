@@ -25,13 +25,11 @@ type
     PlandeCuentasErogaciones1: TMenuItem;
     SaldosIniciales1: TMenuItem;
     CuentasBancariasyCajas1: TMenuItem;
-    ransferenciaEntreCuentas1: TMenuItem;
     Conciliacion1: TMenuItem;
     ABMProveedores1: TMenuItem;
     ABMMovimientos1: TMenuItem;
     Balance1: TMenuItem;
     Reportes1: TMenuItem;
-    OrdenesdePago2: TMenuItem;
     Disponibilidades1: TMenuItem;
     AConfiguracion: TAction;
     Configuracion1: TMenuItem;
@@ -44,6 +42,8 @@ type
     AMovimientos: TAction;
     ASaldoInicial: TAction;
     ARep_Disponibilidad: TAction;
+    ListadoErogaciones1: TMenuItem;
+    AListado_Erogaciones: TAction;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -55,6 +55,7 @@ type
     procedure AMovimientosExecute(Sender: TObject);
     procedure ASaldoInicialExecute(Sender: TObject);
     procedure ARep_DisponibilidadExecute(Sender: TObject);
+    procedure AListado_ErogacionesExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -70,7 +71,7 @@ implementation
 
 Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
   UConceptos, UUtilidades, UMovimientos, USaldoInicial,
-  UReportes_Disponibilidades;
+  UReportes_Disponibilidades, UListadoErogaciones;
 
 function salir_de_programa:boolean;
 begin
@@ -141,6 +142,11 @@ end;
 procedure TFPrincipal.ARep_DisponibilidadExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFReportes_Disponibilidades, FReportes_Disponibilidades);
+end;
+
+procedure TFPrincipal.AListado_ErogacionesExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFListadoErogaciones, FListadoErogaciones);
 end;
 
 end.

@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, ExtCtrls, EKBusquedaAvanzada;
+  ZDataset, Grids, DBGrids, ExtCtrls, EKBusquedaAvanzada, StdCtrls,
+  QRCtrls, QuickRpt, EKVistaPreviaQR;
 
 type
   TFReportes_Disponibilidades = class(TForm)
@@ -50,8 +51,67 @@ type
     LIBRO_BANCOFECHA_FR: TDateField;
     LIBRO_BANCONRO_FAC_REC: TStringField;
     EKBAvanzadaLibroBco: TEKBusquedaAvanzada;
+    pLibroBanco: TPanel;
+    pSaldoCta: TPanel;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Label12: TLabel;
+    Label9: TLabel;
+    Shape4: TShape;
+    Shape5: TShape;
+    Shape1: TShape;
+    Shape2: TShape;
+    Label1: TLabel;
+    Label2: TLabel;
+    pTapa: TPanel;
+    ReporteLibroBanco: TQuickRep;
+    QRBand5: TQRBand;
+    QRLabel41: TQRLabel;
+    QRDBImage1: TQRDBImage;
+    QRLabel11: TQRLabel;
+    ReporteDisponibilidades_direccion: TQRLabel;
+    ReporteDisponibilidades_municipio: TQRLabel;
+    QRBand6: TQRBand;
+    QRDBText5: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText12: TQRDBText;
+    QRDBText13: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRDBText15: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRDBText30: TQRDBText;
+    QRChildBand2: TQRChildBand;
+    QRLabel18: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRLabel20: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRLabel26: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRBand7: TQRBand;
+    QRLabel35: TQRLabel;
+    fechaHoyDisponibilidades: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRSysData2: TQRSysData;
+    QRBand8: TQRBand;
+    QRExpr15: TQRExpr;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    EKVistaPrevia_LibroBco: TEKVistaPreviaQR;
+    lblLibBco_FDesde: TQRLabel;
+    lblLibBco_FHasta: TQRLabel;
+    lblLibBco_Oden: TQRLabel;
+    lblLibBco_Cuenta: TQRLabel;
     procedure btnLibroBancoClick(Sender: TObject);
     function  validarDatos():boolean;
+    procedure btnSalirClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnSaldoCuentaClick(Sender: TObject);
+    procedure btImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,9 +127,22 @@ const
 
 implementation
 
-uses UDM;
+uses UDM, DateUtils;
 
 {$R *.dfm}
+
+procedure TFReportes_Disponibilidades.btnSalirClick(Sender: TObject);
+begin
+  close;
+end;
+
+
+procedure TFReportes_Disponibilidades.FormCreate(Sender: TObject);
+begin
+  reporte:= -1;
+  pTapa.BringToFront;
+  //
+end;
 
 function TFReportes_Disponibilidades.validarDatos():boolean;
 begin
@@ -138,9 +211,18 @@ begin
 }
 end;
 
+
 procedure TFReportes_Disponibilidades.btnLibroBancoClick(Sender: TObject);
+var
+  fecha: tdate;
 begin
   reporte:= LIBRO_BCO;
+  pLibroBanco.BringToFront;
+
+  fecha:= StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha));
+  TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[1]).Valor := DateToStr(fecha);
+  TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.Fecha);
+
   if EKBAvanzadaLibroBco.BuscarSinEjecutar then
   begin
     if not validarDatos then
@@ -155,11 +237,32 @@ begin
       LIBRO_BANCO.ParamByName('hasta').AsDate := StrToDate(EKBAvanzadaLibroBco.ParametrosSeleccionados1[2]);
       LIBRO_BANCO.ParamByName('ordenamiento').AsInteger := StrToInt(EKBAvanzadaLibroBco.ParametrosSeleccionados1[3]);
       LIBRO_BANCO.Open;
-
-      //lblDeudaMensualConcepto.Caption:= ISBA_DeudaMensual.ParametrosSelecReales1[0];
-      //lblTotalDeudaMensual.Caption := 'Total:  ' + FormatFloat('$ ###,###,###,##0.00', SumaDeudaMensual.SumCollection[0].sumvalue);
     end;
   end;
+end;
+
+
+procedure TFReportes_Disponibilidades.btnSaldoCuentaClick(Sender: TObject);
+begin
+  pSaldoCta.BringToFront;
+end;
+
+
+procedure TFReportes_Disponibilidades.btImprimirClick(Sender: TObject);
+begin
+  if reporte = LIBRO_BCO then
+  begin
+    if LIBRO_BANCO.IsEmpty then
+      exit;
+
+    lblLibBco_Cuenta.Caption:= EKBAvanzadaLibroBco.ParametrosSelecReales1[0];
+    lblLibBco_FDesde.Caption:= EKBAvanzadaLibroBco.ParametrosSelecReales1[1];
+    lblLibBco_FHasta.Caption:= EKBAvanzadaLibroBco.ParametrosSelecReales1[2];
+    lblLibBco_Oden.Caption:=   EKBAvanzadaLibroBco.ParametrosSelecReales1[3];
+
+    EKVistaPrevia_LibroBco.VistaPrevia;
+  end;
+
 end;
 
 end.

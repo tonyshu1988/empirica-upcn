@@ -30,9 +30,9 @@ type
     Label5: TLabel;
     Label6: TLabel;
     ISDBEditDateTimePicker1: TISDBEditDateTimePicker;
-    DBEdit1: TDBEdit;
-    DBLookupComboBox1: TDBLookupComboBox;
-    DBMemo2: TDBMemo;
+    DBEditNroProveedor: TDBEdit;
+    DBLUpCBoxProveedor: TDBLookupComboBox;
+    DBMemoDescripcion: TDBMemo;
     panel_edicion_medio_de_pago: TPanel;
     Shape5: TShape;
     Label7: TLabel;
@@ -40,10 +40,10 @@ type
     Panel2: TPanel;
     txt_total_medio_pago: TLabel;
     btEliminarLinea: TButton;
-    DBLookupComboBox2: TDBLookupComboBox;
-    DBEdit2: TDBEdit;
+    DBLUpCBoxConcepto: TDBLookupComboBox;
+    DBEditNroConcepto: TDBEdit;
     Label1: TLabel;
-    DBLCCuenta: TDBLookupComboBox;
+    DBLUpCBoxCuenta: TDBLookupComboBox;
     ZQ_Cuenta_Movimiento: TZQuery;
     DS_Cuenta_Movimiento: TDataSource;
     ZQ_Cuenta_MovimientoID: TIntegerField;
@@ -104,7 +104,7 @@ type
     DS_Conceptos: TDataSource;
     DS_Cuentas: TDataSource;
     DS_Movimientos: TDataSource;
-    DBLookupComboBox4: TDBLookupComboBox;
+    DBLUCBoxNroTipoMov: TDBLookupComboBox;
     ZQ_Tipo_Movimiento: TZQuery;
     ZQ_Tipo_MovimientoID_TIPO_MOVIEMIENTO: TIntegerField;
     ZQ_Tipo_MovimientoCODIGO_CORTO: TStringField;
@@ -167,6 +167,16 @@ type
     LIBRO_BANCOFECHA_FR: TDateField;
     LIBRO_BANCONRO_FAC_REC: TStringField;
     StaticText1: TStaticText;
+    CBFechaFr: TCheckBox;
+    CBNroFactura: TCheckBox;
+    ZQ_CuentasBUSQUEDA: TStringField;
+    EKListado_Proveedores: TEKListadoSQL;
+    EKListado_Conceptos: TEKListadoSQL;
+    BtVerDetalle: TdxBarLargeButton;
+    LabelDetalle: TLabel;
+    DBLUCBoxNombreTipoMov: TDBLookupComboBox;
+    Label12: TLabel;
+    Label13: TLabel;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
@@ -179,7 +189,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btaplicarClick(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
-    procedure DBLCCuentaEnter(Sender: TObject);
+    procedure DBLUpCBoxCuentaEnter(Sender: TObject);
     procedure btEliminarLineaClick(Sender: TObject);
     procedure ADeleteLineaExecute(Sender: TObject);
     procedure EKDbSumaImporteSumListChanged(Sender: TObject);
@@ -192,6 +202,15 @@ type
     procedure DBGridLibroBancoDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure DBLUpCBoxProveedorKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBLUpCBoxConceptoKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure BtVerDetalleClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -223,30 +242,35 @@ result := true;
       result := false;
       exit;
     end;
-  if (DBLookupComboBox1.Text = '') then
+
+  if (DBLUpCBoxProveedor.Text = '') then
     begin
       Application.MessageBox('El campo "Proveedor" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-      DBLookupComboBox1.SetFocus;
+      DBLUpCBoxProveedor.SetFocus;
       result := false;
       exit;
     end;
-   if (DBLookupComboBox2.Text='') then
+
+   if (DBLUpCBoxConcepto.Text='') then
     begin
       Application.MessageBox('El campo "Concepto" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-      DBLookupComboBox2.SetFocus;
+      DBLUpCBoxConcepto.SetFocus;
       result := false;
       exit;
     end;
-   if (DBLCCuenta.Text='') then
+
+   if (DBLUpCBoxCuenta.Text='') then
     begin
       Application.MessageBox('El campo "Cuenta" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      DBLUpCBoxCuenta.SetFocus;
       result := false;
       exit;
     end;
-   if (DBLookupComboBox4.Text='') then
+
+   if (DBLUCBoxNombreTipoMov.Text='') then
     begin
       Application.MessageBox('El campo "Tipo Movimiento" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-      DBLookupComboBox4.SetFocus;
+      DBLUCBoxNombreTipoMov.SetFocus;
       result := false;
       exit;
     end;
@@ -279,7 +303,7 @@ ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := 0;
 
     if CuentaNro <> 0 then
     begin
-      DBLCCuenta.Enabled:= false;
+      DBLUpCBoxCuenta.Enabled:= false;
       ZQ_Cuentas.Locate('id_cuenta',CuentaNro,[]);
     end;
 
@@ -441,7 +465,7 @@ ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := 0;
 
     if CuentaNro <> 0 then
     begin
-      DBLCCuenta.Enabled:= false;
+      DBLUpCBoxCuenta.Enabled:= false;
       ZQ_Cuentas.Locate('id_cuenta',CuentaNro,[]);
     end;
 
@@ -497,10 +521,10 @@ begin
 EKBusquedaAvanzada1.Buscar;
 end;
 
-procedure TFMovimientos.DBLCCuentaEnter(Sender: TObject);
+procedure TFMovimientos.DBLUpCBoxCuentaEnter(Sender: TObject);
 begin
 if ZQ_Cuenta_MovimientoID_MEDIO.AsInteger <> 0 then
-  DBLCCuenta.Enabled:=false;
+  DBLUpCBoxCuenta.Enabled:=false;
 end;
 
 procedure TFMovimientos.btEliminarLineaClick(Sender: TObject);
@@ -509,7 +533,7 @@ if not(ZQ_Cuenta_Movimiento.IsEmpty)then
 begin
   ZQ_Cuenta_Movimiento.Delete;
   if (ZQ_Cuenta_Movimiento.IsEmpty) and (CuentaNro = 0) then
-    DBLCCuenta.Enabled:=true;
+    DBLUpCBoxCuenta.Enabled:=true;
 end;
 end;
 
@@ -550,8 +574,8 @@ begin
     DbGridMediosCobroPago.Columns[4].Visible := true;
     DbGridMediosCobroPago.Columns[5].Visible := true;
     BanderaIngresoEgreso:=0;
-    DBLCCuenta.DataSource:=DS_Cuenta_Movimiento;
-    DBLCCuenta.DataField := 'ID_CUENTA_EGRESO';
+    DBLUpCBoxCuenta.DataSource:=DS_Cuenta_Movimiento;
+    DBLUpCBoxCuenta.DataField := 'ID_CUENTA_EGRESO';
  end
  else
  begin
@@ -562,8 +586,8 @@ begin
     DbGridMediosCobroPago.Columns[4].Visible := false;
     DbGridMediosCobroPago.Columns[5].Visible := false;
     BanderaIngresoEgreso:=1;
-    DBLCCuenta.DataSource:=DS_Cuenta_Movimiento;
-    DBLCCuenta.DataField := 'ID_CUENTA_INGRESO';
+    DBLUpCBoxCuenta.DataSource:=DS_Cuenta_Movimiento;
+    DBLUpCBoxCuenta.DataField := 'ID_CUENTA_INGRESO';
  end;
 
 
@@ -622,6 +646,16 @@ begin
     DBGridLibroBanco.Columns[8].Visible := false
   else
     DBGridLibroBanco.Columns[8].Visible := true;
+
+  if not CBFechaFr.Checked then
+    DBGridLibroBanco.Columns[9].Visible := false
+  else
+    DBGridLibroBanco.Columns[9].Visible := true;
+
+  if not CBNroFactura.Checked then
+    DBGridLibroBanco.Columns[10].Visible := false
+  else
+    DBGridLibroBanco.Columns[10].Visible := true;
 end;
 
 procedure TFMovimientos.BtVerCamposClick(Sender: TObject);
@@ -710,6 +744,118 @@ begin
        end;
      end;
   end;
+
+end;
+
+procedure TFMovimientos.DBLUpCBoxProveedorKeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+  begin
+      if EKListado_Proveedores.Buscar then
+      begin
+        ZQ_Movimientos.Edit;
+        ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
+      end;
+  end;
+end;
+
+procedure TFMovimientos.DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key = 112 then
+  begin
+      if EKListado_Proveedores.Buscar then
+      begin
+        ZQ_Movimientos.Edit;
+        ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
+      end;
+  end;
+end;
+
+procedure TFMovimientos.DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key = 112 then
+  begin
+      if EKListado_Conceptos.Buscar then
+      begin
+        ZQ_Movimientos.Edit;
+        ZQ_MovimientosID_CONCEPTO.AsInteger := StrToInt(EKListado_Conceptos.Resultado);
+      end;
+  end;
+end;
+
+procedure TFMovimientos.DBLUpCBoxConceptoKeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+  begin
+      if EKListado_Conceptos.Buscar then
+      begin
+        ZQ_Movimientos.Edit;
+        ZQ_MovimientosID_CONCEPTO.AsInteger := StrToInt(EKListado_Conceptos.Resultado);
+      end;
+  end;
+end;
+
+procedure TFMovimientos.BtVerDetalleClick(Sender: TObject);
+begin
+   if PEdicion.Visible = true then
+   begin
+    PEdicion.Visible:= false;
+    PParametrosLibroBanco.Visible:=true;
+    DBGridLibroBanco.Visible:=true;
+    PEdicion.Enabled:=true;
+    LabelDetalle.Caption:= '';
+    GrupoEditando.Enabled := true;
+   end
+   else
+   begin
+    PEdicion.Visible:= true;
+    PParametrosLibroBanco.Visible:=false;
+    DBGridLibroBanco.Visible:=false;
+    PEdicion.Enabled:=false;
+    GrupoEditando.Enabled := false;
+    BtVerDetalle.Enabled:=true;
+
+     ZQ_Movimientos.Close;
+     ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+     ZQ_Movimientos.Open;
+
+     ZQ_Cuenta_Movimiento.Close;
+     ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger :=ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
+     ZQ_Cuenta_Movimiento.Open;
+
+     ZQ_Cuentas.Locate('id_cuenta',ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger,[]);
+
+     if ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.IsNull then
+     begin
+        DbGridMediosCobroPago.Columns[2].Visible := false;
+        DbGridMediosCobroPago.Columns[3].Visible := false;
+        DbGridMediosCobroPago.Columns[6].Visible := true;
+        DbGridMediosCobroPago.Columns[7].Visible := true;
+        DbGridMediosCobroPago.Columns[4].Visible := true;
+        DbGridMediosCobroPago.Columns[5].Visible := true;
+        BanderaIngresoEgreso:=0;
+        DBLUpCBoxCuenta.DataSource:=DS_Cuenta_Movimiento;
+        DBLUpCBoxCuenta.DataField := 'ID_CUENTA_EGRESO';
+     end
+     else
+     begin
+        DbGridMediosCobroPago.Columns[2].Visible := true;
+        DbGridMediosCobroPago.Columns[3].Visible := true;
+        DbGridMediosCobroPago.Columns[6].Visible := true;
+        DbGridMediosCobroPago.Columns[7].Visible := true;
+        DbGridMediosCobroPago.Columns[4].Visible := false;
+        DbGridMediosCobroPago.Columns[5].Visible := false;
+        BanderaIngresoEgreso:=1;
+        DBLUpCBoxCuenta.DataSource:=DS_Cuenta_Movimiento;
+        DBLUpCBoxCuenta.DataField := 'ID_CUENTA_INGRESO';
+     end;
+
+     LabelDetalle.Caption:= 'DETALLE '+DBLUCBoxNombreTipoMov.Text;
+   end;
 
 end;
 
