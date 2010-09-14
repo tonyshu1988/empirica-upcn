@@ -11,7 +11,8 @@ uses
   UConceptos in 'UConceptos.pas' {FConceptos},
   UMovimientos in 'UMovimientos.pas' {FMovimientos},
   USaldoInicial in 'USaldoInicial.pas' {FSaldoInicial},
-  UReportes_Disponibilidades in 'UReportes_Disponibilidades.pas' {FReportes_Disponibilidades};
+  UReportes_Disponibilidades in 'UReportes_Disponibilidades.pas' {FReportes_Disponibilidades},
+  UListadoErogaciones in 'UListadoErogaciones.pas' {FListadoErogaciones};
 
 {$R *.res}
 

@@ -12,7 +12,7 @@ object FSaldoInicial: TFSaldoInicial
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poDesktopCenter
   Scaled = False
   Visible = True
   OnCreate = FormCreate
