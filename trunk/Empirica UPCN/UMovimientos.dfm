@@ -20,23 +20,23 @@ object FMovimientos: TFMovimientos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1014
-    Height = 410
+    Width = 1022
+    Height = 416
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PEdicion: TPanel
       Left = 0
       Top = 32
-      Width = 1014
-      Height = 347
+      Width = 1022
+      Height = 353
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       Visible = False
       DesignSize = (
-        1014
-        347)
+        1022
+        353)
       object Label3: TLabel
         Left = 12
         Top = 10
@@ -279,15 +279,16 @@ object FMovimientos: TFMovimientos
             end
             item
               Expanded = False
-              FieldName = 'FECHA_FACTURA_RECIBO'
-              Title.Caption = 'Fecha F/R'
+              FieldName = 'NRO_FACTURA_RECIBO'
+              Title.Caption = 'Nro F/R'
+              Width = 110
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'NRO_FACTURA_RECIBO'
-              Title.Caption = 'Nro F/R'
-              Width = 110
+              FieldName = 'OTROS'
+              Title.Caption = 'Otros'
+              Width = 135
               Visible = True
             end
             item
@@ -398,8 +399,8 @@ object FMovimientos: TFMovimientos
     object DBGridLibroBanco: TDBGrid
       Left = 0
       Top = 32
-      Width = 1014
-      Height = 347
+      Width = 1022
+      Height = 353
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -441,6 +442,12 @@ object FMovimientos: TFMovimientos
         end
         item
           Expanded = False
+          FieldName = 'NRO_ORDEN'
+          Title.Caption = 'Nro Orden'
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'MEDIO'
           Title.Caption = 'Medio'
           Width = 109
@@ -476,8 +483,9 @@ object FMovimientos: TFMovimientos
         end
         item
           Expanded = False
-          FieldName = 'FECHA_FR'
-          Title.Caption = 'Fecha F/R'
+          FieldName = 'OTROS'
+          Title.Caption = 'Otros'
+          Width = 100
           Visible = True
         end
         item
@@ -515,13 +523,13 @@ object FMovimientos: TFMovimientos
     object PParametrosLibroBanco: TPanel
       Left = 0
       Top = 0
-      Width = 1014
+      Width = 1022
       Height = 32
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
       DesignSize = (
-        1014
+        1022
         32)
       object Label8: TLabel
         Left = 8
@@ -602,9 +610,9 @@ object FMovimientos: TFMovimientos
       end
       object StaticText1: TStaticText
         Left = 945
-        Top = 8
-        Width = 69
-        Height = 16
+        Top = 7
+        Width = 71
+        Height = 15
         Anchors = [akRight]
         Caption = 'Conciliado'
         Color = 10354687
@@ -617,17 +625,34 @@ object FMovimientos: TFMovimientos
         ParentFont = False
         TabOrder = 5
       end
+      object StaticText2: TStaticText
+        Left = 880
+        Top = 7
+        Width = 57
+        Height = 15
+        Anchors = [akRight]
+        Caption = 'Anulado'
+        Color = 8421631
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 6
+      end
     end
     object PFiltrosColumnas: TPanel
       Left = 0
-      Top = 379
-      Width = 1014
+      Top = 385
+      Width = 1022
       Height = 31
       Align = alBottom
       TabOrder = 3
       Visible = False
       object BtAplicarFiltrosColumnas: TButton
-        Left = 894
+        Left = 887
         Top = 6
         Width = 75
         Height = 19
@@ -715,18 +740,18 @@ object FMovimientos: TFMovimientos
         State = cbChecked
         TabOrder = 8
       end
-      object CBFechaFr: TCheckBox
+      object CBOtros: TCheckBox
         Left = 720
         Top = 8
         Width = 78
         Height = 17
-        Caption = 'Fecha Fr'
+        Caption = 'Otros'
         Checked = True
         State = cbChecked
         TabOrder = 9
       end
       object CBNroFactura: TCheckBox
-        Left = 793
+        Left = 780
         Top = 8
         Width = 88
         Height = 17
@@ -740,7 +765,7 @@ object FMovimientos: TFMovimientos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -867,6 +892,15 @@ object FMovimientos: TFMovimientos
           item
             BeginGroup = True
             Item = BtVerDetalle
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = BtAnularOrden
+            Visible = True
+          end
+          item
+            Item = BtAnularMov
             Visible = True
           end
           item
@@ -1016,6 +1050,24 @@ object FMovimientos: TFMovimientos
       OnClick = BtVerDetalleClick
       AutoGrayScale = False
     end
+    object BtAnularOrden: TdxBarLargeButton
+      Caption = 'Anular Orden'
+      Category = 0
+      Hint = 'Anular Orden'
+      Visible = ivAlways
+      ImageIndex = 9
+      OnClick = BtAnularOrdenClick
+      AutoGrayScale = False
+    end
+    object BtAnularMov: TdxBarLargeButton
+      Caption = 'Anular Movimiento'
+      Category = 0
+      Hint = 'Anular Movimiento'
+      Visible = ivAlways
+      ImageIndex = 4
+      OnClick = BtAnularMovClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'BtIngresos'
@@ -1091,13 +1143,13 @@ object FMovimientos: TFMovimientos
       FieldName = 'NRO_CHEQUE_TRANSF'
       Size = 30
     end
-    object ZQ_Cuenta_MovimientoFECHA_FACTURA_RECIBO: TDateField
-      FieldName = 'FECHA_FACTURA_RECIBO'
-      EditMask = '##/##/####'
-    end
     object ZQ_Cuenta_MovimientoNRO_FACTURA_RECIBO: TStringField
       FieldName = 'NRO_FACTURA_RECIBO'
       Size = 30
+    end
+    object ZQ_Cuenta_MovimientoOTROS: TStringField
+      FieldName = 'OTROS'
+      Size = 40
     end
     object ZQ_Cuenta_MovimientoIMPORTE: TFloatField
       FieldName = 'IMPORTE'
@@ -1350,6 +1402,9 @@ object FMovimientos: TFMovimientos
       FieldName = 'DETALLE_ANULADO'
       Size = 200
     end
+    object ZQ_MovimientosNRO_ORDEN: TIntegerField
+      FieldName = 'NRO_ORDEN'
+    end
   end
   object DS_Proveedores: TDataSource
     DataSet = ZQ_Proveedores
@@ -1545,12 +1600,16 @@ object FMovimientos: TFMovimientos
     object LIBRO_BANCOFECHA_PD: TDateField
       FieldName = 'FECHA_PD'
     end
-    object LIBRO_BANCOFECHA_FR: TDateField
-      FieldName = 'FECHA_FR'
+    object LIBRO_BANCOOTROS: TStringField
+      FieldName = 'OTROS'
+      Size = 40
     end
     object LIBRO_BANCONRO_FAC_REC: TStringField
       FieldName = 'NRO_FAC_REC'
       Size = 30
+    end
+    object LIBRO_BANCONRO_ORDEN: TIntegerField
+      FieldName = 'NRO_ORDEN'
     end
   end
   object EKBusquedaAvanzada1: TEKBusquedaAvanzada
@@ -1732,5 +1791,26 @@ object FMovimientos: TFMovimientos
     CampoClave = 'id_concepto'
     Left = 353
     Top = 97
+  end
+  object nro_orden: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    StoredProcName = 'SP_GEN_IE_NRO_ORDEN_ID'
+    Left = 952
+    Top = 40
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    object nro_ordenID: TIntegerField
+      FieldName = 'ID'
+    end
   end
 end
