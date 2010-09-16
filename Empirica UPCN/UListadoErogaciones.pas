@@ -95,6 +95,7 @@ type
     procedure DBGridListaErogacionDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure btnSalirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -236,6 +237,11 @@ begin
        end;
      end;
   end;
+end;
+
+procedure TFListadoErogaciones.btnSalirClick(Sender: TObject);
+begin
+close;
 end;
 
 end.

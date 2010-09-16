@@ -162,12 +162,10 @@ type
     CBProveedor: TCheckBox;
     CBConcepto: TCheckBox;
     CBTipoMedio: TCheckBox;
-    ZQ_Cuenta_MovimientoFECHA_FACTURA_RECIBO: TDateField;
     ZQ_Cuenta_MovimientoNRO_FACTURA_RECIBO: TStringField;
-    LIBRO_BANCOFECHA_FR: TDateField;
     LIBRO_BANCONRO_FAC_REC: TStringField;
     StaticText1: TStaticText;
-    CBFechaFr: TCheckBox;
+    CBOtros: TCheckBox;
     CBNroFactura: TCheckBox;
     ZQ_CuentasBUSQUEDA: TStringField;
     EKListado_Proveedores: TEKListadoSQL;
@@ -177,6 +175,15 @@ type
     DBLUCBoxNombreTipoMov: TDBLookupComboBox;
     Label12: TLabel;
     Label13: TLabel;
+    LIBRO_BANCONRO_ORDEN: TIntegerField;
+    nro_orden: TZStoredProc;
+    nro_ordenID: TIntegerField;
+    ZQ_MovimientosNRO_ORDEN: TIntegerField;
+    ZQ_Cuenta_MovimientoOTROS: TStringField;
+    LIBRO_BANCOOTROS: TStringField;
+    BtAnularOrden: TdxBarLargeButton;
+    BtAnularMov: TdxBarLargeButton;
+    StaticText2: TStaticText;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
@@ -211,6 +218,8 @@ type
     procedure DBLUpCBoxConceptoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BtVerDetalleClick(Sender: TObject);
+    procedure BtAnularOrdenClick(Sender: TObject);
+    procedure BtAnularMovClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -389,7 +398,7 @@ begin
    ZQ_Cuenta_Movimiento.First;
    while not ZQ_Cuenta_Movimiento.Eof do
    begin
-     if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) or (ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0) then
+     if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) then
        ZQ_Cuenta_Movimiento.Delete;
 
      ZQ_Cuenta_Movimiento.Next;
@@ -406,6 +415,15 @@ begin
       Nro_Moviemiento.Active := false;
 
       ZQ_MovimientosNRO_MOVIMIENTO.AsInteger := nro_mov;
+
+
+      if ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger = 1 then
+      begin
+        nro_orden.Active := true;
+        ZQ_MovimientosNRO_ORDEN.AsInteger := nro_ordenID.AsInteger;
+        nro_orden.Active := false;
+      end;
+
     end
     else
      nro_mov:= ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
@@ -623,39 +641,39 @@ begin
     DBGridLibroBanco.Columns[3].Visible := true;
 
   if not CBMedio.Checked then
-    DBGridLibroBanco.Columns[4].Visible := false
-  else
-    DBGridLibroBanco.Columns[4].Visible := true;
-
-  if not CBNroMedio.Checked then
     DBGridLibroBanco.Columns[5].Visible := false
   else
     DBGridLibroBanco.Columns[5].Visible := true;
 
-  if not CBProveedor.Checked then
+  if not CBNroMedio.Checked then
     DBGridLibroBanco.Columns[6].Visible := false
   else
     DBGridLibroBanco.Columns[6].Visible := true;
 
-  if not CBConcepto.Checked then
-    DBGridLibroBanco.Columns[7].Visible := false
-  else
-    DBGridLibroBanco.Columns[7].Visible := true;
-
-  if not CBTipoMedio.Checked then
+  if not CBProveedor.Checked then
     DBGridLibroBanco.Columns[8].Visible := false
   else
     DBGridLibroBanco.Columns[8].Visible := true;
 
-  if not CBFechaFr.Checked then
+  if not CBConcepto.Checked then
     DBGridLibroBanco.Columns[9].Visible := false
   else
     DBGridLibroBanco.Columns[9].Visible := true;
 
-  if not CBNroFactura.Checked then
+  if not CBTipoMedio.Checked then
+    DBGridLibroBanco.Columns[7].Visible := false
+  else
+    DBGridLibroBanco.Columns[7].Visible := true;
+
+  if not CBOtros.Checked then
     DBGridLibroBanco.Columns[10].Visible := false
   else
     DBGridLibroBanco.Columns[10].Visible := true;
+
+  if not CBNroFactura.Checked then
+    DBGridLibroBanco.Columns[11].Visible := false
+  else
+    DBGridLibroBanco.Columns[11].Visible := true;
 end;
 
 procedure TFMovimientos.BtVerCamposClick(Sender: TObject);
@@ -732,15 +750,43 @@ begin
                DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
              end;
           end;
+
+       if ((LIBRO_BANCODEBE.IsNull) and (LIBRO_BANCOHABER.Value = 0)) or ((LIBRO_BANCOHABER.IsNull) and (LIBRO_BANCODEBE.Value = 0)) then
+       begin
+         DBGridLibroBanco.Canvas.Brush.Color :=StaticText2.Brush.Color;
+         DBGridLibroBanco.Canvas.Font.Color := clBlack;
+//          DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+         if (gdFocused in State) or (gdSelected in State) then
+         begin
+           DBGridLibroBanco.Canvas.Font.Color := clBlack;
+           DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+         end
+       end;
+
        DBGridLibroBanco.DefaultDrawColumnCell(rect,datacol,column,state);
      end
      else
      begin
-       if (gdFocused in State) or (gdSelected in State) then
+       if ((LIBRO_BANCODEBE.IsNull) and (LIBRO_BANCOHABER.Value = 0)) or ((LIBRO_BANCOHABER.IsNull) and (LIBRO_BANCODEBE.Value = 0)) then
        begin
-         DBGridLibroBanco.Canvas.Font.Color := clwhite;
-         DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
-         DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+         DBGridLibroBanco.Canvas.Brush.Color :=StaticText2.Brush.Color;
+         DBGridLibroBanco.Canvas.Font.Color := clBlack;
+//          DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+         if (gdFocused in State) or (gdSelected in State) then
+         begin
+           DBGridLibroBanco.Canvas.Font.Color := clBlack;
+           DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+         end;
+         DBGridLibroBanco.DefaultDrawColumnCell(rect,datacol,column,state);
+       end
+       else
+       begin
+         if (gdFocused in State) or (gdSelected in State) then
+         begin
+           DBGridLibroBanco.Canvas.Font.Color := clwhite;
+           DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
+           DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+         end;
        end;
      end;
   end;
@@ -857,6 +903,60 @@ begin
      LabelDetalle.Caption:= 'DETALLE '+DBLUCBoxNombreTipoMov.Text;
    end;
 
+end;
+
+procedure TFMovimientos.BtAnularOrdenClick(Sender: TObject);
+begin
+ ZQ_Movimientos.Close;
+ ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+ ZQ_Movimientos.Open;
+
+ ZQ_Cuenta_Movimiento.Close;
+ ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger :=ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
+ ZQ_Cuenta_Movimiento.Open;
+
+ ZQ_Cuenta_Movimiento.First;
+
+ if not ZQ_Cuenta_MovimientoID.IsNull then
+ begin
+   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
+   begin
+     while not ZQ_Cuenta_Movimiento.eof do
+     begin
+       ZQ_Cuenta_Movimiento.Edit;
+       ZQ_Cuenta_MovimientoIMPORTE.AsInteger := 0;
+       ZQ_Cuenta_Movimiento.Next;
+     end;
+   end;
+
+   if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+     dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+
+   btaplicar.Click;
+ end;
+
+end;
+
+procedure TFMovimientos.BtAnularMovClick(Sender: TObject);
+begin
+ ZQ_Cuenta_Movimiento.Close;
+ ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger :=LIBRO_BANCOID_MOVIMIENTO.AsInteger;
+ ZQ_Cuenta_Movimiento.Open;
+
+
+ if not ZQ_Cuenta_MovimientoID.IsNull then
+ begin
+   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
+   begin
+     ZQ_Cuenta_Movimiento.Edit;
+     ZQ_Cuenta_MovimientoIMPORTE.AsInteger := 0;
+   end;
+
+   if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+     dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+
+   btaplicar.Click;
+ end;
 end;
 
 end.

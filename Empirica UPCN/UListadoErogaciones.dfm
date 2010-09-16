@@ -22,8 +22,8 @@ object FListadoErogaciones: TFListadoErogaciones
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 416
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -31,8 +31,8 @@ object FListadoErogaciones: TFListadoErogaciones
     object DBGridListaErogacion: TDBGrid
       Left = 3
       Top = 58
-      Width = 848
-      Height = 349
+      Width = 856
+      Height = 355
       Align = alClient
       Color = 16772842
       DataSource = DS_Libro_erogaciones
@@ -169,13 +169,13 @@ object FListadoErogaciones: TFListadoErogaciones
     object pDatos: TPanel
       Left = 3
       Top = 3
-      Width = 848
+      Width = 856
       Height = 55
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
       DesignSize = (
-        848
+        856
         55)
       object Shape1: TShape
         Left = 3
@@ -297,7 +297,7 @@ object FListadoErogaciones: TFListadoErogaciones
         Left = 774
         Top = 39
         Width = 71
-        Height = 14
+        Height = 17
         Anchors = [akRight]
         Caption = 'Conciliado'
         Color = 10354687
@@ -315,7 +315,7 @@ object FListadoErogaciones: TFListadoErogaciones
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -489,6 +489,7 @@ object FListadoErogaciones: TFListadoErogaciones
       Hint = 'Salir'
       Visible = ivAlways
       ImageIndex = 6
+      OnClick = btnSalirClick
       AutoGrayScale = False
     end
     object btn2: TdxBarLargeButton
