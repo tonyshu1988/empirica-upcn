@@ -8,7 +8,8 @@ uses
   DBCtrls, Mask, ComCtrls, ISDBEditDateTimePicker, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKListadoSQL, ZStoredProcedure,
   EKBusquedaAvanzada, ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma,
-  EKLlenarCombo;
+  EKLlenarCombo, mxNativeExcel, mxExport, QuickRpt, QRCtrls,
+  EKVistaPreviaQR, EKNumeroATexto;
 
 type
   TFMovimientos = class(TForm)
@@ -184,6 +185,64 @@ type
     BtAnularOrden: TdxBarLargeButton;
     BtAnularMov: TdxBarLargeButton;
     StaticText2: TStaticText;
+    BtExportarExel: TdxBarLargeButton;
+    mxNativeExcel1: TmxNativeExcel;
+    mxDBGridExport: TmxDBGridExport;
+    ReporteMoviemiento: TQuickRep;
+    QRBand2: TQRBand;
+    QRDBText10: TQRDBText;
+    QRLabel14: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRDBText11: TQRDBText;
+    QRLabelNumeroLetras: TQRLabel;
+    QRBand3: TQRBand;
+    QRLabeTipoMovimiento: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRLabel25: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRDBText5: TQRDBText;
+    QRChildBand1: TQRChildBand;
+    QRLabel19: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRBand4: TQRBand;
+    QRDBText8: TQRDBText;
+    SummaryBand1: TQRBand;
+    QRLabel30: TQRLabel;
+    QRLabel31: TQRLabel;
+    QRDBText9: TQRDBText;
+    QRDBText18: TQRDBText;
+    QRDBText19: TQRDBText;
+    QRDBText20: TQRDBText;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    QRShape5: TQRShape;
+    QRSubDetail4: TQRSubDetail;
+    QRDBText13: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRSubDetail5: TQRSubDetail;
+    QRTIMPORTE: TQRLabel;
+    QRShape1: TQRShape;
+    QRLabel4: TQRLabel;
+    QRLabel28: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRDBText15: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRDBText12: TQRDBText;
+    QRDBText21: TQRDBText;
+    QRDBText22: TQRDBText;
+    QRDBText23: TQRDBText;
+    EKVistaPreviaMovimiento: TEKVistaPreviaQR;
+    EKNumeroALetras1: TEKNumeroALetras;
+    QRLabel9: TQRLabel;
+    QRLabelConfecciono: TQRLabel;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
@@ -220,6 +279,8 @@ type
     procedure BtVerDetalleClick(Sender: TObject);
     procedure BtAnularOrdenClick(Sender: TObject);
     procedure BtAnularMovClick(Sender: TObject);
+    procedure BtExportarExelClick(Sender: TObject);
+    procedure btImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -236,7 +297,7 @@ const
 
 implementation
 
-uses UDM, DateUtils;
+uses UDM, DateUtils, EKUsrLogin;
 
 {$R *.dfm}
 
@@ -957,6 +1018,41 @@ begin
 
    btaplicar.Click;
  end;
+end;
+
+procedure TFMovimientos.BtExportarExelClick(Sender: TObject);
+begin
+if not LIBRO_BANCO.IsEmpty then
+  mxDBGridExport.Select;
+end;
+
+procedure TFMovimientos.btImprimirClick(Sender: TObject);
+begin
+if LIBRO_BANCO.IsEmpty then
+exit;
+
+ZQ_Cuenta_Movimiento.Close;
+ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+ZQ_Cuenta_Movimiento.Open;
+
+ZQ_Movimientos.Close;
+ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+ZQ_Movimientos.Open;
+
+case ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger of
+1:QRLabeTipoMovimiento.Caption:='ORDEN DE PAGO';
+2:QRLabeTipoMovimiento.Caption:='RECIBO';
+3:QRLabeTipoMovimiento.Caption:='TRANSFERENCIA';
+4:QRLabeTipoMovimiento.Caption:='SALDO INICIAL';
+end;
+
+ekNumeroALetras1.Numero := EKDbSumaImporte.SumCollection[0].sumvalue;
+QRLabelNumeroLetras.Caption := UpperCase(EkNumeroALetras1.AsString);
+QRTIMPORTE.Caption:= FormatFloat('###,###,###,##0.00', EKDbSumaImporte.SumCollection[0].sumvalue);
+
+QRLabelConfecciono.Caption:= dm.EKUsrLogin1.usuariosis;
+
+EKVistaPreviaMovimiento.VistaPrevia;
 end;
 
 end.
