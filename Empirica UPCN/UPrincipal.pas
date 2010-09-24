@@ -44,6 +44,7 @@ type
     ARep_Disponibilidad: TAction;
     ListadoErogaciones1: TMenuItem;
     AListado_Erogaciones: TAction;
+    AConciliacion: TAction;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -56,6 +57,7 @@ type
     procedure ASaldoInicialExecute(Sender: TObject);
     procedure ARep_DisponibilidadExecute(Sender: TObject);
     procedure AListado_ErogacionesExecute(Sender: TObject);
+    procedure AConciliacionExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -71,7 +73,7 @@ implementation
 
 Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
   UConceptos, UUtilidades, UMovimientos, USaldoInicial,
-  UReportes_Disponibilidades, UListadoErogaciones;
+  UReportes_Disponibilidades, UListadoErogaciones, UConciliacion;
 
 function salir_de_programa:boolean;
 begin
@@ -147,6 +149,11 @@ end;
 procedure TFPrincipal.AListado_ErogacionesExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFListadoErogaciones, FListadoErogaciones);
+end;
+
+procedure TFPrincipal.AConciliacionExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFConciliacion, FConciliacion);
 end;
 
 end.

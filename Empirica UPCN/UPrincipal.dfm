@@ -20,7 +20,7 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 563
+    Top = 567
     Width = 855
     Height = 19
     Panels = <
@@ -50,7 +50,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 29
     Width = 855
-    Height = 534
+    Height = 538
     Align = alClient
     TabOrder = 2
   end
@@ -103,6 +103,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 43
       OnExecute = AListado_ErogacionesExecute
     end
+    object AConciliacion: TAction
+      Caption = 'Conciliaci'#243'n Bancaria'
+      ImageIndex = 41
+      OnExecute = AConciliacionExecute
+    end
   end
   object MainMenu1: TMainMenu
     Images = Iconos_Menu_16
@@ -124,7 +129,7 @@ object FPrincipal: TFPrincipal
         Action = AABM_Cuentas
       end
       object Conciliacion1: TMenuItem
-        Caption = 'Conciliacion'
+        Action = AConciliacion
       end
     end
     object Movimientos: TMenuItem

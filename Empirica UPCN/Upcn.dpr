@@ -12,7 +12,8 @@ uses
   UMovimientos in 'UMovimientos.pas' {FMovimientos},
   USaldoInicial in 'USaldoInicial.pas' {FSaldoInicial},
   UReportes_Disponibilidades in 'UReportes_Disponibilidades.pas' {FReportes_Disponibilidades},
-  UListadoErogaciones in 'UListadoErogaciones.pas' {FListadoErogaciones};
+  UListadoErogaciones in 'UListadoErogaciones.pas' {FListadoErogaciones},
+  UConciliacion in 'UConciliacion.pas' {FConciliacion};
 
 {$R *.res}
 
