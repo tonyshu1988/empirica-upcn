@@ -22,8 +22,8 @@ object FListadoErogaciones: TFListadoErogaciones
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -31,8 +31,8 @@ object FListadoErogaciones: TFListadoErogaciones
     object DBGridListaErogacion: TDBGrid
       Left = 3
       Top = 58
-      Width = 856
-      Height = 355
+      Width = 848
+      Height = 349
       Align = alClient
       Color = 16772842
       DataSource = DS_Libro_erogaciones
@@ -43,7 +43,6 @@ object FListadoErogaciones: TFListadoErogaciones
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
-      OnDrawColumnCell = DBGridListaErogacionDrawColumnCell
       Columns = <
         item
           Expanded = False
@@ -169,13 +168,13 @@ object FListadoErogaciones: TFListadoErogaciones
     object pDatos: TPanel
       Left = 3
       Top = 3
-      Width = 856
+      Width = 848
       Height = 55
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
       DesignSize = (
-        856
+        848
         55)
       object Shape1: TShape
         Left = 3
@@ -315,7 +314,7 @@ object FListadoErogaciones: TFListadoErogaciones
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -562,7 +561,9 @@ object FListadoErogaciones: TFListadoErogaciones
       'where ('
       '        (mov.fecha between :Fecha_Desde and :Fecha_Hasta)'
       '         or'
-      '        (ctamov.conciliado = '#39'N'#39' and mov.fecha <= :fecha_Hasta)'
+      
+        '        ((ctamov.conciliado = '#39'N'#39' or ctamov.fecha_conciliado > :' +
+        'fecha_Hasta)  and (mov.fecha <= :fecha_Hasta))'
       '       )'
       '  and (ctamov.id_medio = 2)'
       '  and (ctamov.id_cuenta_egreso = :cuenta)')
@@ -638,12 +639,13 @@ object FListadoErogaciones: TFListadoErogaciones
       FieldName = 'NRO_CHEQUE_TRANSF'
       Size = 30
     end
-    object ZQ_Libro_erogacionesFECHA_FACTURA_RECIBO: TDateField
-      FieldName = 'FECHA_FACTURA_RECIBO'
-    end
     object ZQ_Libro_erogacionesNRO_FACTURA_RECIBO: TStringField
       FieldName = 'NRO_FACTURA_RECIBO'
       Size = 30
+    end
+    object ZQ_Libro_erogacionesOTROS: TStringField
+      FieldName = 'OTROS'
+      Size = 40
     end
     object ZQ_Libro_erogacionesIMPORTE: TFloatField
       FieldName = 'IMPORTE'
@@ -651,6 +653,9 @@ object FListadoErogaciones: TFListadoErogaciones
     object ZQ_Libro_erogacionesCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
       Size = 1
+    end
+    object ZQ_Libro_erogacionesFECHA_CONCILIADO: TDateField
+      FieldName = 'FECHA_CONCILIADO'
     end
     object ZQ_Libro_erogacionesNRO_MOVIMIENTO_1: TIntegerField
       FieldName = 'NRO_MOVIMIENTO_1'
@@ -773,18 +778,44 @@ object FListadoErogaciones: TFListadoErogaciones
         ItemIndex = 0
       end
       item
-        Titulo = 'Fecha Desde'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
+        Titulo = 'Mes'
+        TipoCampo = EK_Numero
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = '='
+        TipoComboValores.Strings = (
+          '1'
+          '2'
+          '3'
+          '4'
+          '5'
+          '6'
+          '7'
+          '8'
+          '9'
+          '10'
+          '11'
+          '12')
         TipoComboEditable = False
         CambiarCondicion = False
+        TipoComboValoresReales.Strings = (
+          '1'
+          '2'
+          '3'
+          '4'
+          '5'
+          '6'
+          '7'
+          '8'
+          '9'
+          '10'
+          '11'
+          '12')
         ItemIndex = -1
       end
       item
-        Titulo = 'Fecha Hasta'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
+        Titulo = 'A'#241'o'
+        TipoCampo = EK_Numero
+        Mascara = '####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
         CambiarCondicion = False

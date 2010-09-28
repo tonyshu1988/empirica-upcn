@@ -15,6 +15,7 @@ object FABMProveedores: TFABMProveedores
   Position = poDefault
   Scaled = False
   Visible = True
+  WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -23,13 +24,13 @@ object FABMProveedores: TFABMProveedores
     Left = 0
     Top = 0
     Width = 854
-    Height = 414
+    Height = 410
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
     object Panel_edicion: TPanel
       Left = 1
-      Top = 276
+      Top = 272
       Width = 852
       Height = 137
       Align = alBottom
@@ -213,7 +214,7 @@ object FABMProveedores: TFABMProveedores
       Left = 1
       Top = 20
       Width = 852
-      Height = 256
+      Height = 252
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores

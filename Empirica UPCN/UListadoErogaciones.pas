@@ -41,6 +41,12 @@ type
     Label2: TLabel;
     Label1: TLabel;
     StaticText1: TStaticText;
+    Label3: TLabel;
+    lblNombreCuenta: TLabel;
+    Label4: TLabel;
+    lblFechaDesde: TLabel;
+    lblFechaHasta: TLabel;
+    Label7: TLabel;
     ZQ_Libro_erogacionesID: TIntegerField;
     ZQ_Libro_erogacionesNRO_MOVIMIENTO: TIntegerField;
     ZQ_Libro_erogacionesID_CUENTA_INGRESO: TIntegerField;
@@ -49,10 +55,11 @@ type
     ZQ_Libro_erogacionesFECHA_MDC: TDateField;
     ZQ_Libro_erogacionesBANCO_MDC: TStringField;
     ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TStringField;
-    ZQ_Libro_erogacionesFECHA_FACTURA_RECIBO: TDateField;
     ZQ_Libro_erogacionesNRO_FACTURA_RECIBO: TStringField;
+    ZQ_Libro_erogacionesOTROS: TStringField;
     ZQ_Libro_erogacionesIMPORTE: TFloatField;
     ZQ_Libro_erogacionesCONCILIADO: TStringField;
+    ZQ_Libro_erogacionesFECHA_CONCILIADO: TDateField;
     ZQ_Libro_erogacionesNRO_MOVIMIENTO_1: TIntegerField;
     ZQ_Libro_erogacionesNRO_PROVEEDOR: TIntegerField;
     ZQ_Libro_erogacionesID_CONCEPTO: TIntegerField;
@@ -81,12 +88,6 @@ type
     ZQ_Libro_erogacionesNOMBRE_TIPOMOV: TStringField;
     ZQ_Libro_erogacionesCOD_OBJMOVIMIENTO: TStringField;
     ZQ_Libro_erogacionesNOMBRE_OBJMOVIMIENTO: TStringField;
-    Label3: TLabel;
-    lblNombreCuenta: TLabel;
-    Label4: TLabel;
-    lblFechaDesde: TLabel;
-    lblFechaHasta: TLabel;
-    Label7: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -122,7 +123,7 @@ begin
     exit;
   end;
 
-  if EKBAvanzadaListadoErog.ParametrosSeleccionados1[1] = '' then
+{  if EKBAvanzadaListadoErog.ParametrosSeleccionados1[1] = '' then
   begin
     Application.MessageBox('El campo FECHA DESDE se encuentra vacío, por favor Verifique','Atención',MB_OK+MB_ICONINFORMATION);
     result := false;
@@ -141,7 +142,7 @@ begin
     Application.MessageBox('El campo FECHA DESDE es mayor al campo FECHA HASTA, por favor Verifique','Atención',MB_OK+MB_ICONINFORMATION);
     result := false;
     exit;
-  end;
+  end;}
 end;
 
 
@@ -149,8 +150,8 @@ procedure TFListadoErogaciones.FormCreate(Sender: TObject);
 begin
   dm.EKModelo.abrir(ZQ_Libro_erogaciones);
   dm.EKModelo.abrir(ZQ_Cuentas);
-  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[1]).Valor := DateToStr(StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha)));
-  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[2]).Valor := DateToStr(EndOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha)));
+  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[1]).Valor:= IntToStr(MonthOf(DM.EKModelo.Fecha));
+  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[2]).Valor:= IntToStr(YearOf(DM.EKModelo.Fecha));
 
   lblNombreCuenta.Caption:= '';
   lblFechaDesde.Caption:= '';
@@ -161,7 +162,7 @@ end;
 procedure TFListadoErogaciones.ZQ_Libro_erogacionesCalcFields(
   DataSet: TDataSet);
 begin
-  if ZQ_Libro_erogacionesCONCILIADO.AsString = 'S' then
+  if (ZQ_Libro_erogacionesCONCILIADO.AsString = 'S') and (ZQ_Libro_erogacionesFECHA_CONCILIADO.AsDateTime < StrToDate(EKBAvanzadaListadoErog.ParametrosSelecReales1[2])) then
     ZQ_Libro_erogacionespagos_corrientes.AsFloat:= ZQ_Libro_erogacionesIMPORTE.AsFloat
   else
     ZQ_Libro_erogacionespagos_diferidos.AsFloat:= ZQ_Libro_erogacionesIMPORTE.AsFloat;
@@ -175,6 +176,9 @@ end;
 
 
 procedure TFListadoErogaciones.btnListadoErogacionesClick(Sender: TObject);
+var
+  fechaDesde, fechaHasta: TDate;
+  anio, mes: integer;
 begin
   if EKBAvanzadaListadoErog.BuscarSinEjecutar then
   begin
@@ -184,15 +188,23 @@ begin
     end
     else
     begin
+      mes:= StrToInt(EKBAvanzadaListadoErog.ParametrosSelecReales1[1]);
+      anio:= StrToInt(EKBAvanzadaListadoErog.ParametrosSelecReales1[2]);
+
+      fechaDesde:= StartOfAMonth(anio, mes);
+      fechaHasta:= EndOfAMonth(anio, mes);
+
+      ShowMessage('D: '+DateToStr(fechaDesde)+' H: '+DateToStr(fechaHasta));
+
       ZQ_Libro_erogaciones.Close;
       ZQ_Libro_erogaciones.ParamByName('cuenta').AsInteger:= StrToInt(EKBAvanzadaListadoErog.ParametrosSeleccionados1[0]);
-      ZQ_Libro_erogaciones.ParamByName('Fecha_Desde').AsDate:= StrToDate(EKBAvanzadaListadoErog.ParametrosSeleccionados1[1]);
-      ZQ_Libro_erogaciones.ParamByName('Fecha_Hasta').AsDate:= StrToDate(EKBAvanzadaListadoErog.ParametrosSeleccionados1[2]);
+      ZQ_Libro_erogaciones.ParamByName('Fecha_Desde').AsDate:= fechaDesde;
+      ZQ_Libro_erogaciones.ParamByName('Fecha_Hasta').AsDate:= fechaHasta;
       ZQ_Libro_erogaciones.open;
 
       lblNombreCuenta.Caption:= EKBAvanzadaListadoErog.ParametrosSelecReales1[0];
-      lblFechaDesde.Caption:= EKBAvanzadaListadoErog.ParametrosSelecReales1[1];
-      lblFechaHasta.Caption:= EKBAvanzadaListadoErog.ParametrosSelecReales1[2];
+      lblFechaDesde.Caption:= DateToStr(fechaDesde);
+      lblFechaHasta.Caption:= DateToStr(fechaHasta);
     end;
   end;
 end;
@@ -241,7 +253,7 @@ end;
 
 procedure TFListadoErogaciones.btnSalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
 
 end.
