@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, StdCtrls, ExtCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZStoredProcedure,
-  EKBusquedaAvanzada, EKDbSuma;
+  EKBusquedaAvanzada, EKDbSuma, QuickRpt, QRCtrls, EKVistaPreviaQR;
 
 type
   TFConciliacion = class(TForm)
@@ -20,7 +20,7 @@ type
     Label3: TLabel;
     lblNombreCuenta: TLabel;
     Label4: TLabel;
-    lblFecha: TLabel;
+    lblFHasta: TLabel;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
     btnLibroBanco: TdxBarLargeButton;
@@ -39,8 +39,6 @@ type
     ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField;
     ZQ_CuentasBUSQUEDA: TStringField;
     DS_Cuentas: TDataSource;
-    Label5: TLabel;
-    lblSaldo: TLabel;
     ZSP_LibroBanco: TZStoredProc;
     ZSP_LibroBancoID_MOVIMIENTO: TIntegerField;
     ZSP_LibroBancoORDEN: TIntegerField;
@@ -88,8 +86,48 @@ type
     EKDbSuma1: TEKDbSuma;
     Label7: TLabel;
     lblSaldoConciliacion: TLabel;
+    Label8: TLabel;
+    lblFdesde: TLabel;
+    QuickRep1: TQuickRep;
+    ColumnHeaderBand1: TQRBand;
+    DetailBand1: TQRBand;
+    SummaryBand1: TQRBand;
+    PageHeaderBand1: TQRBand;
+    PageFooterBand1: TQRBand;
+    QRLabel1: TQRLabel;
+    QRDBText1: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    qrFecha: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    EKVistaPreviaQR1: TEKVistaPreviaQR;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRShape3: TQRShape;
+    QRLabel9: TQRLabel;
+    qrSaldoConciliacion: TQRLabel;
+    QRLabel10: TQRLabel;
+    qrTotalHaber: TQRLabel;
+    QRShape4: TQRShape;
+    QRShape5: TQRShape;
+    QRShape6: TQRShape;
+    QRLabel4: TQRLabel;
+    qrSaldoLibroBanco: TQRLabel;
+    QRLabel11: TQRLabel;
+    qrExtracto: TQRLabel;
+    Label5: TLabel;
+    lblSaldo: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
+    function validarcampos():boolean;
+    procedure btImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -113,41 +151,82 @@ begin
 //  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[2]).Valor := DateToStr(EndOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha)));
 //
   lblNombreCuenta.Caption:= '';
-  lblFecha.Caption:= '';
+  lblFdesde.Caption:= '';
+  lblFHasta.Caption:= '';
   lblSaldo.Caption:= '';
 end;
 
 procedure TFConciliacion.btnBuscarClick(Sender: TObject);
 begin
+  TEKCriterioBA(BuscarParametros.CriteriosBusqueda.Items[1]).Valor := '01/01/2010';
+  TEKCriterioBA(BuscarParametros.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.Fecha());
+
   if BuscarParametros.BuscarSinEjecutar then
   begin
-//    if not validarDatos then
-//    begin
-//       btnBuscar.Click;
-//    end
-//    else
+    if not validarcampos then
+    begin
+       btnBuscar.Click;
+    end
+    else
     begin
       ZSP_LibroBanco.Close;
       ZSP_LibroBanco.ParamByName('e_id_cuenta').AsInteger:= StrToInt(BuscarParametros.ParametrosSeleccionados1[0]);
       ZSP_LibroBanco.ParamByName('e_ordenamiento').AsInteger:=1; //Fecha PD
-      ZSP_LibroBanco.ParamByName('e_hasta').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[1]);
-      ZSP_LibroBanco.ParamByName('e_desde').AsDate:= IncMonth(StrToDate(BuscarParametros.ParametrosSeleccionados1[1]),-3);
+      ZSP_LibroBanco.ParamByName('e_hasta').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[2]);
+      ZSP_LibroBanco.ParamByName('e_desde').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[1]);
       ZSP_LibroBanco.open;
 
       ZSP_Conciliacion.Close;
       ZSP_Conciliacion.ParamByName('e_id_cuenta').AsInteger:= StrToInt(BuscarParametros.ParametrosSeleccionados1[0]);
       ZSP_Conciliacion.ParamByName('e_ordenamiento').AsInteger:=1; //Fecha PD
-      ZSP_Conciliacion.ParamByName('e_fecha').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[1]);
-      ZSP_Conciliacion.ParamByName('e_desde').AsDate:= IncMonth(StrToDate(BuscarParametros.ParametrosSeleccionados1[1]),-3);
+      ZSP_Conciliacion.ParamByName('e_fecha').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[2]);
+      ZSP_Conciliacion.ParamByName('e_desde').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[1]);
       ZSP_Conciliacion.open;
 
       lblNombreCuenta.Caption:= BuscarParametros.ParametrosSelecReales1[0];
-      lblFecha.Caption:= BuscarParametros.ParametrosSelecReales1[1];
+      lblFdesde.Caption:= BuscarParametros.ParametrosSelecReales1[1];
+      lblFHasta.Caption:= BuscarParametros.ParametrosSelecReales1[2];
       lblSaldo.Caption:= '$ '+ZSP_LibroBancoSALDO.AsString;
       lblTotalHaber.Caption:= '$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue);
       lblSaldoConciliacion.Caption:= '$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue+ZSP_LibroBancoSALDO.AsFloat);
     end;
   end;
+end;
+
+function TFConciliacion.validarcampos():boolean;
+begin
+result := true;
+
+   if (BuscarParametros.ParametrosSelecReales1[0]='') then
+    begin
+      Application.MessageBox('El campo "Cuenta" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      result := false;
+      exit;
+    end;
+   if (BuscarParametros.ParametrosSelecReales1[1]='') then
+    begin
+      Application.MessageBox('El campo "Fecha Desde" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      result := false;
+      exit;
+    end;
+   if (BuscarParametros.ParametrosSelecReales1[2]='') then
+    begin
+      Application.MessageBox('El campo "Fecha Hasta" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      result := false;
+      exit;
+    end;
+end;
+
+procedure TFConciliacion.btImprimirClick(Sender: TObject);
+begin
+  if ZSP_Conciliacion.IsEmpty then exit;
+
+  qrSaldoLibroBanco.Caption:=lblSaldo.Caption;
+  qrFecha.Caption:=lblFHasta.Caption;
+  qrSaldoConciliacion.Caption:=lblSaldoConciliacion.Caption;
+  qrTotalHaber.Caption:=lblTotalHaber.Caption;
+  qrExtracto.Caption:=lblSaldoConciliacion.Caption;
+  EKVistaPreviaQR1.VistaPrevia;
 end;
 
 end.
