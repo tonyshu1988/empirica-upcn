@@ -120,14 +120,22 @@ begin
   if ZQ_Cuentas.IsEmpty then
     exit;
 
-  if (application.MessageBox(pchar('¿Esta seguro que desea Eliminar la Cuenta?                        ' + #13 + #13), 'Confirmación', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Esta seguro que desea Eliminar la Cuenta?                        ' + #13 + #13), 'Eliminar Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_cuentas, [ZQ_Cuentas]) then
       ZQ_Cuentas.Delete
     else
       exit;
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_cuentas)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_cuentas);
+    try
+      if not (dm.EKModelo.finalizar_transaccion(transaccion_cuentas)) then
+        dm.EKModelo.cancelar_transaccion(transaccion_cuentas);
+
+    except
+      begin
+        Application.MessageBox('La cuenta seleccionada no se puede borrar porque depende de otras tablas','Atención',MB_OK+MB_ICONINFORMATION);
+        dm.EKModelo.cancelar_transaccion(transaccion_cuentas);
+      end
+    end;
   end;
 end;
 

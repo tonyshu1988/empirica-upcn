@@ -105,6 +105,18 @@ type
     ZQ_MovimientoFECHA_ANULADO: TDateField;
     ZQ_MovimientoPARTE_ANULADO: TIntegerField;
     ZQ_MovimientoDETALLE_ANULADO: TStringField;
+    Label4: TLabel;
+    DBLookupCBoxMedio: TDBLookupComboBox;
+    DBEditNroMedio: TDBEdit;
+    Label5: TLabel;
+    ZQ_Medio: TZQuery;
+    ZQ_MedioID_MEDIO: TIntegerField;
+    ZQ_MedioNOMBRE_MEDIO_COBRO_PAGO: TStringField;
+    DS_Medio: TDataSource;
+    ZQ_VerSaldosnombreCuenta: TStringField;
+    ZQ_VerSaldosnombreMedio: TStringField;
+    ZQ_BuscarMov: TZQuery;
+    ZQ_BuscarMovNRO_MOVIMIENTO: TIntegerField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -119,6 +131,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure FormCreate(Sender: TObject);
+    procedure ZQ_VerSaldosAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -195,7 +208,7 @@ begin
   ZQ_Cuenta_Mov.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
   ZQ_Cuenta_Mov.Open;
 
-  if (application.MessageBox(pchar('¿Esta seguro que desea Eliminar el Saldo Inicial seleccionado?                        ' + #13 + #13), 'Confirmación', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Esta seguro que desea Eliminar el Saldo Inicial seleccionado?                        ' + #13 + #13), 'Eliminar Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_saldo, [ZQ_Movimiento, ZQ_Cuenta_Mov]) then
     begin
@@ -204,8 +217,15 @@ begin
     end
     else
       exit;
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_saldo)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_saldo);
+    try
+      if not (dm.EKModelo.finalizar_transaccion(transaccion_saldo)) then
+        dm.EKModelo.cancelar_transaccion(transaccion_saldo);
+    except
+      begin
+        Application.MessageBox('El Saldo inicial no se puede borrar porque depende de otras tablas','Atención',MB_OK+MB_ICONINFORMATION);
+        dm.EKModelo.cancelar_transaccion(transaccion_saldo);
+      end
+    end;
   end;
 
   ZQ_VerSaldos.Refresh;
@@ -220,11 +240,13 @@ begin
   ZP_ObtenerNroMov.Open;
 
   ZQ_Cuenta_MovNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
+  ZQ_Cuenta_MovFECHA_MDC.AsDateTime:= ZQ_MovimientoFECHA.AsDateTime;
 
   ZQ_MovimientoNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
   ZQ_MovimientoID_CONCEPTO.Clear;
   ZQ_MovimientoID_OBJETO_MOVIMIENTO.AsInteger:= 4;
   ZQ_MovimientoIMPORTE.AsFloat:= ZQ_Cuenta_MovIMPORTE.AsFloat;
+  ZQ_MovimientoID_TIPO_MOVIMIENTO.AsInteger:= 2;//INGRESO
 
   if not validarDatos() then
     exit;
@@ -239,6 +261,7 @@ begin
     ZQ_VerSaldos.Refresh;
   end;
 end;
+
 
 procedure TFSaldoInicial.btnCancelarClick(Sender: TObject);
 begin
@@ -328,7 +351,26 @@ end;
 procedure TFSaldoInicial.FormCreate(Sender: TObject);
 begin
   dm.EKModelo.abrir(ZQ_CuentaIngreso);
-  dm.EKModelo.abrir(ZQ_VerSaldos);  
+  dm.EKModelo.abrir(ZQ_VerSaldos);
+  dm.EKModelo.abrir(ZQ_Medio);
+end;
+
+procedure TFSaldoInicial.ZQ_VerSaldosAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_BuscarMov.Close;
+  ZQ_BuscarMov.ParamByName('id_cuenta').AsInteger:= ZQ_VerSaldosID_CUENTA_INGRESO.AsInteger;
+  ZQ_BuscarMov.Open;
+
+  if ZQ_BuscarMovNRO_MOVIMIENTO.AsInteger <= 1 then
+  begin
+    btnModificar.Enabled:= false;
+    btnEliminar.Enabled:= false;
+  end
+  else
+  begin
+    btnModificar.Enabled:= true;
+    btnEliminar.Enabled:= true;
+  end;
 end;
 
 end.

@@ -1,8 +1,8 @@
 object FSaldoInicial: TFSaldoInicial
-  Left = 315
-  Top = 183
+  Left = 305
+  Top = 196
   Width = 870
-  Height = 500
+  Height = 531
   Caption = 'Saldo Inicial'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,23 +22,23 @@ object FSaldoInicial: TFSaldoInicial
     Left = 0
     Top = 0
     Width = 854
-    Height = 410
+    Height = 441
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
     TabOrder = 0
     object pDatos: TPanel
       Left = 2
-      Top = 283
+      Top = 280
       Width = 850
-      Height = 125
+      Height = 159
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
       Visible = False
       DesignSize = (
         850
-        125)
+        159)
       object Label3: TLabel
         Left = 70
         Top = 10
@@ -65,7 +65,7 @@ object FSaldoInicial: TFSaldoInicial
       end
       object Label2: TLabel
         Left = 57
-        Top = 102
+        Top = 128
         Width = 51
         Height = 13
         Caption = 'Importe:'
@@ -78,6 +78,22 @@ object FSaldoInicial: TFSaldoInicial
         Height = 13
         Anchors = [akTop, akRight]
         Caption = 'Presione F1 Para Buscar una Cuenta Ingreso'
+        Transparent = True
+      end
+      object Label4: TLabel
+        Left = 70
+        Top = 102
+        Width = 38
+        Height = 13
+        Caption = 'Medio:'
+        Transparent = True
+      end
+      object Label5: TLabel
+        Left = 293
+        Top = 101
+        Width = 62
+        Height = 13
+        Caption = 'Nro Medio:'
         Transparent = True
       end
       object DBMemoDescripcion: TDBMemo
@@ -94,7 +110,7 @@ object FSaldoInicial: TFSaldoInicial
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 1
       end
       object DBLookupCBoxCuenta: TDBLookupComboBox
         Left = 109
@@ -113,12 +129,12 @@ object FSaldoInicial: TFSaldoInicial
         ListField = 'BUSQUEDA'
         ListSource = DS_CuentasIngreso
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
         OnKeyUp = DBLookupCBoxCuentaKeyUp
       end
       object DBEditImporte: TDBEdit
         Left = 109
-        Top = 99
+        Top = 125
         Width = 157
         Height = 21
         DataField = 'IMPORTE'
@@ -129,7 +145,7 @@ object FSaldoInicial: TFSaldoInicial
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 5
       end
       object EKDTPFecha: TEKDBDateTimePicker
         Left = 109
@@ -138,16 +154,49 @@ object FSaldoInicial: TFSaldoInicial
         Height = 21
         Date = 40429.725941030090000000
         Time = 40429.725941030090000000
-        TabOrder = 3
+        TabOrder = 0
         DataField = 'FECHA'
         DataSource = DS_Movimiento
+      end
+      object DBLookupCBoxMedio: TDBLookupComboBox
+        Left = 109
+        Top = 98
+        Width = 158
+        Height = 21
+        DataField = 'ID_MEDIO'
+        DataSource = DS_Cuenta_Mov
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        KeyField = 'ID_MEDIO'
+        ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
+        ListSource = DS_Medio
+        ParentFont = False
+        TabOrder = 3
+      end
+      object DBEditNroMedio: TDBEdit
+        Left = 356
+        Top = 98
+        Width = 157
+        Height = 21
+        DataField = 'NRO_CHEQUE_TRANSF'
+        DataSource = DS_Cuenta_Mov
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 4
       end
     end
     object DBGridSaldosIniciales: TDBGrid
       Left = 2
       Top = 2
       Width = 850
-      Height = 281
+      Height = 278
       Align = alClient
       Color = 16772842
       DataSource = DS_VerSaldos
@@ -159,6 +208,63 @@ object FSaldoInicial: TFSaldoInicial
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
       OnDrawColumnCell = DBGridSaldosInicialesDrawColumnCell
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'FECHA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fecha'
+          Width = 119
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'nombreCuenta'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cuenta'
+          Width = 217
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'nombreMedio'
+          Title.Alignment = taCenter
+          Title.Caption = 'Medio'
+          Width = 159
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA_MDC'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fecha Medio'
+          Width = 96
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NRO_CHEQUE_TRANSF'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro Medio'
+          Width = 105
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IMPORTE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Importe'
+          Width = 109
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DESCRIPCION'
+          Title.Alignment = taCenter
+          Title.Caption = 'Descripci'#243'n'
+          Width = 389
+          Visible = True
+        end>
     end
   end
   object dxBarABM: TdxBarManager
@@ -647,6 +753,7 @@ object FSaldoInicial: TFSaldoInicial
   end
   object ZQ_VerSaldos: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_VerSaldosAfterScroll
     SQL.Strings = (
       'select cm.*, mv.*'
       'from ie_cuentas_movimientos cm'
@@ -687,6 +794,7 @@ object FSaldoInicial: TFSaldoInicial
     end
     object ZQ_VerSaldosIMPORTE: TFloatField
       FieldName = 'IMPORTE'
+      currency = True
     end
     object ZQ_VerSaldosCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
@@ -747,6 +855,26 @@ object FSaldoInicial: TFSaldoInicial
       FieldName = 'DETALLE_ANULADO'
       Size = 200
     end
+    object ZQ_VerSaldosnombreCuenta: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombreCuenta'
+      LookupDataSet = ZQ_CuentaIngreso
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'NOMBRE_CUENTA'
+      KeyFields = 'ID_CUENTA_INGRESO'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_VerSaldosnombreMedio: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombreMedio'
+      LookupDataSet = ZQ_Medio
+      LookupKeyFields = 'ID_MEDIO'
+      LookupResultField = 'NOMBRE_MEDIO_COBRO_PAGO'
+      KeyFields = 'ID_MEDIO'
+      Size = 30
+      Lookup = True
+    end
   end
   object DS_VerSaldos: TDataSource
     DataSet = ZQ_VerSaldos
@@ -772,6 +900,55 @@ object FSaldoInicial: TFSaldoInicial
       end>
     object ZP_ObtenerNroMovID: TIntegerField
       FieldName = 'ID'
+    end
+  end
+  object ZQ_Medio: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from ie_medios_cobro_pago mcp')
+    Params = <>
+    Left = 440
+    Top = 65
+    object ZQ_MedioID_MEDIO: TIntegerField
+      FieldName = 'ID_MEDIO'
+      Required = True
+    end
+    object ZQ_MedioNOMBRE_MEDIO_COBRO_PAGO: TStringField
+      FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
+      Size = 30
+    end
+  end
+  object DS_Medio: TDataSource
+    DataSet = ZQ_Medio
+    Left = 440
+    Top = 120
+  end
+  object ZQ_BuscarMov: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select distinct c.nro_movimiento'
+      'from ie_cuentas_movimientos c'
+      
+        'where (c.id_cuenta_ingreso = :id_cuenta or c.id_cuenta_egreso = ' +
+        ':id_cuenta)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
+        ParamType = ptUnknown
+      end>
+    Left = 656
+    Top = 64
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
+        ParamType = ptUnknown
+      end>
+    object ZQ_BuscarMovNRO_MOVIMIENTO: TIntegerField
+      FieldName = 'NRO_MOVIMIENTO'
+      Required = True
     end
   end
 end
