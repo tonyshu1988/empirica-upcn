@@ -416,6 +416,7 @@ procedure TFMovimientos.DbGridMediosCobroPagoColExit(Sender: TObject);
 begin
   if ((sender as tdbgrid).SelectedField.FullName = 'ID_MEDIO') then
     if (ZQ_Cuenta_MovimientoID_MEDIO.AsString = '') then
+    begin
       if EK_ListadoMedCobroPago.Buscar then
       begin
         ZQ_Medios_Cobro_Pago.Refresh;
@@ -427,6 +428,14 @@ begin
         else
           ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
       end;
+    end
+    else
+    if ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.IsNull and ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.IsNull then
+      if BanderaIngresoEgreso = 1 then
+        ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger
+      else
+        ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
+
 end;
 
 procedure TFMovimientos.DbGridMediosCobroPagoKeyUp(Sender: TObject;
