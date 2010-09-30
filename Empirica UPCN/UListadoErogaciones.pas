@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
-  EKBusquedaAvanzada, StdCtrls;
+  EKBusquedaAvanzada, StdCtrls, EKDbSuma;
 
 type
   TFListadoErogaciones = class(TForm)
@@ -88,6 +88,9 @@ type
     ZQ_Libro_erogacionesNOMBRE_TIPOMOV: TStringField;
     ZQ_Libro_erogacionesCOD_OBJMOVIMIENTO: TStringField;
     ZQ_Libro_erogacionesNOMBRE_OBJMOVIMIENTO: TStringField;
+    pResumen: TPanel;
+    EKDbSuma: TEKDbSuma;
+    lblSaldo: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -97,10 +100,11 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure btnSalirClick(Sender: TObject);
+    procedure EKDbSumaSumListChanged(Sender: TObject);
   private
     { Private declarations }
   public
-    { Public declarations }
+    fechaDesde, fechaHasta: TDate;
   end;
 
 var
@@ -122,27 +126,6 @@ begin
     result := false;
     exit;
   end;
-
-{  if EKBAvanzadaListadoErog.ParametrosSeleccionados1[1] = '' then
-  begin
-    Application.MessageBox('El campo FECHA DESDE se encuentra vacío, por favor Verifique','Atención',MB_OK+MB_ICONINFORMATION);
-    result := false;
-    exit;
-  end;
-
-  if EKBAvanzadaListadoErog.ParametrosSeleccionados1[2] = '' then
-  begin
-    Application.MessageBox('El campo FECHA HASTA se encuentra vacío, por favor Verifique','Atención',MB_OK+MB_ICONINFORMATION);
-    result := false;
-    exit;
-  end;
-
-  if (StrToDate(EKBAvanzadaListadoErog.ParametrosSeleccionados1[1])  > StrToDate(EKBAvanzadaListadoErog.ParametrosSeleccionados1[2])) then
-  begin
-    Application.MessageBox('El campo FECHA DESDE es mayor al campo FECHA HASTA, por favor Verifique','Atención',MB_OK+MB_ICONINFORMATION);
-    result := false;
-    exit;
-  end;}
 end;
 
 
@@ -150,7 +133,7 @@ procedure TFListadoErogaciones.FormCreate(Sender: TObject);
 begin
   dm.EKModelo.abrir(ZQ_Libro_erogaciones);
   dm.EKModelo.abrir(ZQ_Cuentas);
-  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[1]).Valor:= IntToStr(MonthOf(DM.EKModelo.Fecha));
+  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[1]).ItemIndex:= MonthOf(DM.EKModelo.Fecha)-1;
   TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[2]).Valor:= IntToStr(YearOf(DM.EKModelo.Fecha));
 
   lblNombreCuenta.Caption:= '';
@@ -162,7 +145,7 @@ end;
 procedure TFListadoErogaciones.ZQ_Libro_erogacionesCalcFields(
   DataSet: TDataSet);
 begin
-  if (ZQ_Libro_erogacionesCONCILIADO.AsString = 'S') and (ZQ_Libro_erogacionesFECHA_CONCILIADO.AsDateTime < StrToDate(EKBAvanzadaListadoErog.ParametrosSelecReales1[2])) then
+  if (ZQ_Libro_erogacionesCONCILIADO.AsString = 'S') and (ZQ_Libro_erogacionesFECHA_CONCILIADO.AsDateTime < fechaHasta) then
     ZQ_Libro_erogacionespagos_corrientes.AsFloat:= ZQ_Libro_erogacionesIMPORTE.AsFloat
   else
     ZQ_Libro_erogacionespagos_diferidos.AsFloat:= ZQ_Libro_erogacionesIMPORTE.AsFloat;
@@ -177,7 +160,6 @@ end;
 
 procedure TFListadoErogaciones.btnListadoErogacionesClick(Sender: TObject);
 var
-  fechaDesde, fechaHasta: TDate;
   anio, mes: integer;
 begin
   if EKBAvanzadaListadoErog.BuscarSinEjecutar then
@@ -193,8 +175,6 @@ begin
 
       fechaDesde:= StartOfAMonth(anio, mes);
       fechaHasta:= EndOfAMonth(anio, mes);
-
-      ShowMessage('D: '+DateToStr(fechaDesde)+' H: '+DateToStr(fechaHasta));
 
       ZQ_Libro_erogaciones.Close;
       ZQ_Libro_erogaciones.ParamByName('cuenta').AsInteger:= StrToInt(EKBAvanzadaListadoErog.ParametrosSeleccionados1[0]);
@@ -216,44 +196,43 @@ procedure TFListadoErogaciones.DBGridListaErogacionDrawColumnCell(
 begin
   if not ZQ_Libro_erogaciones.IsEmpty then
   begin
-     if ZQ_Libro_erogacionesID_MEDIO.AsInteger = 2 then
-     begin
-       if (ZQ_Libro_erogacionesCONCILIADO.Value='S') then
-          begin
-           DBGridListaErogacion.Canvas.Brush.Color :=StaticText1.Brush.Color;
-           DBGridListaErogacion.Canvas.Font.Color := clBlack;
-           if (gdFocused in State) or (gdSelected in State) then
-             begin
-             DBGridListaErogacion.Canvas.Font.Color := clBlack;
-             DBGridListaErogacion.Canvas.Font.Style := DBGridListaErogacion.Canvas.Font.Style + [fsBold];
-             end
-          end
-       else
-          begin
-            if (gdFocused in State) or (gdSelected in State) then
-             begin
-               DBGridListaErogacion.Canvas.Font.Color := clwhite;
-               DBGridListaErogacion.Canvas.Brush.Color:=clBlue;
-               DBGridListaErogacion.Canvas.Font.Style := DBGridListaErogacion.Canvas.Font.Style + [fsBold];
-             end;
-          end;
-       DBGridListaErogacion.DefaultDrawColumnCell(rect,datacol,column,state);
-     end
-     else
-     begin
+    if (ZQ_Libro_erogacionespagos_diferidos.Value > 0) then
+      begin
+       DBGridListaErogacion.Canvas.Brush.Color :=StaticText1.Brush.Color;
+       DBGridListaErogacion.Canvas.Font.Color := clBlack;
        if (gdFocused in State) or (gdSelected in State) then
-       begin
-         DBGridListaErogacion.Canvas.Font.Color := clwhite;
-         DBGridListaErogacion.Canvas.Brush.Color:=clBlue;
+         begin
+         DBGridListaErogacion.Canvas.Font.Color := clBlack;
          DBGridListaErogacion.Canvas.Font.Style := DBGridListaErogacion.Canvas.Font.Style + [fsBold];
-       end;
-     end;
+         end
+      end
+    else
+      begin
+        if (gdFocused in State) or (gdSelected in State) then
+         begin
+           DBGridListaErogacion.Canvas.Font.Color := clwhite;
+           DBGridListaErogacion.Canvas.Brush.Color:=clBlue;
+           DBGridListaErogacion.Canvas.Font.Style := DBGridListaErogacion.Canvas.Font.Style + [fsBold];
+         end;
+      end;
+    DBGridListaErogacion.DefaultDrawColumnCell(rect,datacol,column,state);
   end;
 end;
+
 
 procedure TFListadoErogaciones.btnSalirClick(Sender: TObject);
 begin
   close;
+end;
+
+
+procedure TFListadoErogaciones.EKDbSumaSumListChanged(Sender: TObject);
+var
+  diferido, corriente: Real;
+begin
+  corriente:= EKDbSuma.SumCollection[0].SumValue;
+  diferido:= EKDbSuma.SumCollection[1].SumValue;
+  lblSaldo.Caption:= 'TOTAL DIFERIDO = '+ FormatFloat('$ ###,###,##0.00', diferido)+'    /    TOTAL CORRIENTE = '+ FormatFloat('$ ###,###,##0.00', corriente);
 end;
 
 end.
