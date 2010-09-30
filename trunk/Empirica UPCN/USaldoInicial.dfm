@@ -515,7 +515,7 @@ object FSaldoInicial: TFSaldoInicial
       Category = 0
       Hint = 'Ver Detalle'
       Visible = ivAlways
-      ImageIndex = 12
+      ImageIndex = 69
       OnClick = btnVerDetalleClick
       AutoGrayScale = False
     end

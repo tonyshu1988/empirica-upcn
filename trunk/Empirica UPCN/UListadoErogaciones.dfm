@@ -32,7 +32,7 @@ object FListadoErogaciones: TFListadoErogaciones
       Left = 3
       Top = 58
       Width = 848
-      Height = 349
+      Height = 331
       Align = alClient
       Color = 16772842
       DataSource = DS_Libro_erogaciones
@@ -43,6 +43,7 @@ object FListadoErogaciones: TFListadoErogaciones
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGridListaErogacionDrawColumnCell
       Columns = <
         item
           Expanded = False
@@ -64,8 +65,24 @@ object FListadoErogaciones: TFListadoErogaciones
           Expanded = False
           FieldName = 'FECHA'
           Title.Alignment = taCenter
-          Title.Caption = 'Emisi'#243'n'
+          Title.Caption = 'F. Emisi'#243'n'
           Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA_MDC'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fecha PD'
+          Width = 101
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA_CONCILIADO'
+          Title.Alignment = taCenter
+          Title.Caption = 'F. Conciliado'
+          Width = 93
           Visible = True
         end
         item
@@ -86,14 +103,6 @@ object FListadoErogaciones: TFListadoErogaciones
         end
         item
           Expanded = False
-          FieldName = 'FECHA_MDC'
-          Title.Alignment = taCenter
-          Title.Caption = 'Fecha Medio Pago'
-          Width = 101
-          Visible = True
-        end
-        item
-          Expanded = False
           FieldName = 'BANCO_MDC'
           Title.Alignment = taCenter
           Title.Caption = 'Banco Medio Pago'
@@ -110,17 +119,17 @@ object FListadoErogaciones: TFListadoErogaciones
         end
         item
           Expanded = False
-          FieldName = 'FECHA_FACTURA_RECIBO'
+          FieldName = 'NRO_FACTURA_RECIBO'
           Title.Alignment = taCenter
-          Title.Caption = 'Nro. Factura'
+          Title.Caption = 'Fecha Factura'
           Width = 81
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'NRO_FACTURA_RECIBO'
+          FieldName = 'OTROS'
           Title.Alignment = taCenter
-          Title.Caption = 'Fecha Factura'
+          Title.Caption = 'Nro. Factura'
           Width = 81
           Visible = True
         end
@@ -295,11 +304,11 @@ object FListadoErogaciones: TFListadoErogaciones
       object StaticText1: TStaticText
         Left = 774
         Top = 39
-        Width = 71
+        Width = 69
         Height = 17
         Anchors = [akRight]
-        Caption = 'Conciliado'
-        Color = 10354687
+        Caption = 'Pendiente'
+        Color = 12371452
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -308,6 +317,29 @@ object FListadoErogaciones: TFListadoErogaciones
         ParentColor = False
         ParentFont = False
         TabOrder = 0
+      end
+    end
+    object pResumen: TPanel
+      Left = 3
+      Top = 389
+      Width = 848
+      Height = 18
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 2
+      object lblSaldo: TLabel
+        Left = 785
+        Top = 0
+        Width = 63
+        Height = 18
+        Align = alRight
+        Caption = 'lblSaldo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
     end
   end
@@ -456,18 +488,18 @@ object FListadoErogaciones: TFListadoErogaciones
     UseF10ForMenu = False
     UseSystemFont = False
     Left = 800
-    Top = 344
+    Top = 312
     DockControlHeights = (
       0
       0
       0
       52)
     object btnListadoErogaciones: TdxBarLargeButton
-      Caption = 'Listado Erogaciones'
+      Caption = 'Ver Mes'
       Category = 0
       Hint = 'Saldo actual de todas las Cuentas Bancarias'
       Visible = ivAlways
-      ImageIndex = 55
+      ImageIndex = 29
       ShortCut = 120
       OnClick = btnListadoErogacionesClick
       AutoGrayScale = False
@@ -559,14 +591,21 @@ object FListadoErogaciones: TFListadoErogaciones
         'left join objeto_movimientos omov on (mov.id_objeto_movimiento =' +
         ' omov.id_objeto_movimiento)'
       'where ('
-      '        (mov.fecha between :Fecha_Desde and :Fecha_Hasta)'
+      
+        '        (mov.fecha between :Fecha_Desde and :Fecha_Hasta) /*TODO' +
+        'S LOS EMITIDOS EN EL MES*/'
       '         or'
       
-        '        ((ctamov.conciliado = '#39'N'#39' or ctamov.fecha_conciliado > :' +
-        'fecha_Hasta)  and (mov.fecha <= :fecha_Hasta))'
+        '        ((ctamov.conciliado = '#39'N'#39' or ctamov.fecha_conciliado >= ' +
+        ':fecha_Hasta)  and (mov.fecha <= :fecha_Hasta))'
+      '        or'
+      
+        '        (ctamov.fecha_conciliado between :Fecha_Desde and :Fecha' +
+        '_Hasta)'
       '       )'
       '  and (ctamov.id_medio = 2)'
-      '  and (ctamov.id_cuenta_egreso = :cuenta)')
+      '  and (ctamov.id_cuenta_egreso = :cuenta)'
+      'order by mov.fecha')
     Params = <
       item
         DataType = ftUnknown
@@ -832,7 +871,7 @@ object FListadoErogaciones: TFListadoErogaciones
   object DS_Cuentas: TDataSource
     DataSet = ZQ_Cuentas
     Left = 418
-    Top = 336
+    Top = 288
   end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
@@ -844,7 +883,7 @@ object FListadoErogaciones: TFListadoErogaciones
       'order by c.nombre_cuenta')
     Params = <>
     Left = 418
-    Top = 288
+    Top = 240
     object ZQ_CuentasID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
     end
@@ -875,5 +914,20 @@ object FListadoErogaciones: TFListadoErogaciones
       ReadOnly = True
       Size = 245
     end
+  end
+  object EKDbSuma: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'pagos_corrientes'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'pagos_diferidos'
+      end>
+    DataSet = ZQ_Libro_erogaciones
+    SumListChanged = EKDbSumaSumListChanged
+    Left = 544
+    Top = 120
   end
 end
