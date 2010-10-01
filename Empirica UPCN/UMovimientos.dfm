@@ -985,6 +985,7 @@ object FMovimientos: TFMovimientos
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
       PrintIfEmpty = True
+      ReportTitle = 'Orden de Pago'
       SnapToGrid = True
       Units = MM
       Zoom = 100
