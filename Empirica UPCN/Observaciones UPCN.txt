@@ -1,0 +1,26 @@
+ABM PROVEEDORES
+	*Contacto Nombre.
+	*Contacto Telefono.
+	
+LIBRO BANCO
+ok	*Tipo_Movimiento poner una prioridad para q siempre tome esa por defecto en el combo.
+ok	*Agregar el exportar a excel, pero no el de la vista previa, el de mxExport (Ver agregarlo en todos lados).
+ok	*Cambiar el campo Fecha_F/R x Otros
+	*Agregar el nro de la orden de pago en la carga y mostrarlo a la derecha en grande.
+ok	*A la hora de imprimir la Orden de Pago elegir quien autoriza la misma de un combo (poner uno por defecto).
+ok	*En la impresion de la Orden de Pago tiene que salir la persona q la confecciono como asi tambien quien la autoriza.
+ok	*A la hora de ver el libro por fecha de postdata cambiar el filtro para que tome la fecha_mdc en lugar de la fecha_emision.
+	 (Procedure VER_LIBRO_DIARIO).
+ok	*La anulacion de la Orden de Pago implica poner los  montos de todos los cheques en cero y cuando se imprime la misma sale ANULADA.
+ok	*La anulacion de un cheque implica poner el monto del mismo en cero.
+	*Agrgar un boton que recorra todos los nros de cheque y se detenga cuando encuentra un salteo.
+	*Permitir la eliminacion de una orden de pago. El efecto de esta es que desaparecen todos los movimiento relacionados tanto del libro banco
+	 como asi tambien de la conciliacion y del listado de erogaciones.
+	*Preguntar antes de anular una orden y un movimiento si lo quiere hacer o no?
+	
+CONCILIACION
+	* 
+	
+LISTADO EROGACION
+	*
+	
