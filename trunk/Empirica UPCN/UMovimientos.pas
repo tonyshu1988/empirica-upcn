@@ -1176,6 +1176,9 @@ begin
      end;
    end;
 
+   ZQ_Movimientos.Edit;
+   ZQ_MovimientosANULADO.AsString:= 'S';
+
    if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
      dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
 
@@ -1344,22 +1347,21 @@ begin
     if ori.Checked then
     begin
       QRLabelImpresion.Caption := 'ORIGINAL';
-      //if LIBRO_BANCO.AsString = 'S' then
-      //  QRLabelImpresion.Caption := 'ANULADO';
+      if ZQ_MovimientosANULADO.AsString = 'S' then
+        QRLabelImpresion.Caption := 'ANULADO';
       QR_OrdenPago.Print;
     end;
     if dup.Checked then
     begin
       QRLabelImpresion.Caption := 'DUPLICADO';
-      //if ZQ_ConsultaOrdenANULADO.AsString = 'S' then
-      //  QRLabelImpresion.Caption := 'ANULADO';
+      if ZQ_MovimientosANULADO.AsString = 'S' then
+        QRLabelImpresion.Caption := 'ANULADO';
       QR_OrdenPago.Print;
     end;
     if tri.Checked then
     begin
-      QRLabelImpresion.Caption := 'TRIPLICADO';
-      //if ZQ_ConsultaOrdenANULADO.AsString = 'S' then
-      //  QRLabelImpresion.Caption := 'ANULADO';
+      if ZQ_MovimientosANULADO.AsString = 'S' then
+        QRLabelImpresion.Caption := 'ANULADO';
       QR_OrdenPago.Print;
     end;
 
