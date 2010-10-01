@@ -48,11 +48,32 @@ type
     dbRGroupAutonumerar: TDBRadioGroup;
     btnVerDetalle: TdxBarLargeButton;
     EKVistaPrevia: TEKVistaPreviaQR;
-    QuickRep1: TQuickRep;
     btnImprimir: TdxBarLargeButton;
+    ReporteCuentas: TQuickRep;
+    QRBand5: TQRBand;
+    QRDBImage1: TQRDBImage;
+    QRLabel11: TQRLabel;
+    ReporteCuentas_direccion: TQRLabel;
+    ReporteCuentas_entidad: TQRLabel;
+    QRBandDetalle: TQRBand;
+    QRDBText13: TQRDBText;
+    QRDBText30: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRChildBand2: TQRChildBand;
+    QRLabel27: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRLabel18: TQRLabel;
+    QRBand7: TQRBand;
+    QRLabel35: TQRLabel;
+    QRlblFechaHoy: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRSysData2: TQRSysData;
     QRBand1: TQRBand;
-    QRLabel1: TQRLabel;
-    QRDBText1: TQRDBText;
+    QRExpr15: TQRExpr;
+    QRLabel2: TQRLabel;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -209,6 +230,8 @@ procedure TFABM_Cuentas.btnImprimirClick(Sender: TObject);
 begin
   if ZQ_Cuentas.IsEmpty then
     exit;
+
+  QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
 
   EKVistaPrevia.VistaPrevia;
 end;

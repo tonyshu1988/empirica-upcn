@@ -70,7 +70,7 @@ type
     QRDBImage1: TQRDBImage;
     QRLabel11: TQRLabel;
     ReporteDisponibilidades_direccion: TQRLabel;
-    ReporteDisponibilidades_municipio: TQRLabel;
+    ReporteLibroBanco_entidad: TQRLabel;
     QRBand6: TQRBand;
     QRDBText5: TQRDBText;
     QRDBText8: TQRDBText;
@@ -92,10 +92,6 @@ type
     QRLabel27: TQRLabel;
     QRLabel16: TQRLabel;
     QRBand7: TQRBand;
-    QRLabel35: TQRLabel;
-    fechaHoyDisponibilidades: TQRLabel;
-    QRLabel24: TQRLabel;
-    QRSysData2: TQRSysData;
     QRBand8: TQRBand;
     QRExpr15: TQRExpr;
     QRLabel1: TQRLabel;
@@ -106,6 +102,10 @@ type
     lblLibBco_FHasta: TQRLabel;
     lblLibBco_Oden: TQRLabel;
     lblLibBco_Cuenta: TQRLabel;
+    QRLabel35: TQRLabel;
+    QRlblFechaHoyLibroBanco: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRSysData2: TQRSysData;
     procedure btnLibroBancoClick(Sender: TObject);
     function  validarDatos():boolean;
     procedure btnSalirClick(Sender: TObject);
@@ -259,6 +259,8 @@ begin
     lblLibBco_FDesde.Caption:= EKBAvanzadaLibroBco.ParametrosSelecReales1[1];
     lblLibBco_FHasta.Caption:= EKBAvanzadaLibroBco.ParametrosSelecReales1[2];
     lblLibBco_Oden.Caption:=   EKBAvanzadaLibroBco.ParametrosSelecReales1[3];
+
+    QRlblFechaHoyLibroBanco.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
 
     EKVistaPrevia_LibroBco.VistaPrevia;
   end;

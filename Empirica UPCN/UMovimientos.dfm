@@ -1,8 +1,8 @@
 object FMovimientos: TFMovimientos
-  Left = 227
-  Top = 144
-  Width = 1030
-  Height = 500
+  Left = 212
+  Top = 186
+  Width = 1047
+  Height = 588
   Caption = 'Movimientos'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,23 +22,26 @@ object FMovimientos: TFMovimientos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1022
-    Height = 416
+    Width = 1031
+    Height = 498
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    DesignSize = (
+      1031
+      498)
     object PEdicion: TPanel
       Left = 0
       Top = 26
-      Width = 1022
-      Height = 359
+      Width = 1031
+      Height = 441
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       Visible = False
       DesignSize = (
-        1022
-        359)
+        1031
+        441)
       object Label3: TLabel
         Left = 12
         Top = 10
@@ -102,7 +105,7 @@ object FMovimientos: TFMovimientos
         ParentFont = False
       end
       object Label12: TLabel
-        Left = 581
+        Left = 598
         Top = 38
         Width = 220
         Height = 13
@@ -111,7 +114,7 @@ object FMovimientos: TFMovimientos
         Transparent = True
       end
       object Label13: TLabel
-        Left = 581
+        Left = 598
         Top = 67
         Width = 215
         Height = 13
@@ -147,7 +150,7 @@ object FMovimientos: TFMovimientos
       object DBLUpCBoxProveedor: TDBLookupComboBox
         Left = 157
         Top = 35
-        Width = 417
+        Width = 434
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'NRO_PROVEEDOR'
@@ -161,7 +164,7 @@ object FMovimientos: TFMovimientos
       object DBMemoDescripcion: TDBMemo
         Left = 101
         Top = 118
-        Width = 891
+        Width = 908
         Height = 33
         Anchors = [akLeft, akTop, akRight]
         Color = 16772842
@@ -172,15 +175,15 @@ object FMovimientos: TFMovimientos
       object panel_edicion_medio_de_pago: TPanel
         Left = 7
         Top = 160
-        Width = 1004
-        Height = 190
+        Width = 1021
+        Height = 278
         Anchors = [akLeft, akTop, akRight, akBottom]
         BevelOuter = bvNone
         TabOrder = 9
         object Shape5: TShape
           Left = 0
           Top = 0
-          Width = 1004
+          Width = 1021
           Height = 20
           Align = alTop
           Brush.Color = 16762544
@@ -198,8 +201,8 @@ object FMovimientos: TFMovimientos
         object DbGridMediosCobroPago: TDBGrid
           Left = 0
           Top = 20
-          Width = 1004
-          Height = 144
+          Width = 1021
+          Height = 232
           Align = alClient
           Color = 16772842
           DataSource = DS_Cuenta_Movimiento
@@ -302,17 +305,17 @@ object FMovimientos: TFMovimientos
         end
         object Panel2: TPanel
           Left = 0
-          Top = 164
-          Width = 1004
+          Top = 252
+          Width = 1021
           Height = 26
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            1004
+            1021
             26)
           object txt_total_medio_pago: TLabel
-            Left = 931
+            Left = 948
             Top = 8
             Width = 37
             Height = 13
@@ -341,7 +344,7 @@ object FMovimientos: TFMovimientos
       object DBLUpCBoxConcepto: TDBLookupComboBox
         Left = 157
         Top = 64
-        Width = 417
+        Width = 434
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'ID_CONCEPTO'
@@ -372,6 +375,7 @@ object FMovimientos: TFMovimientos
         ListSource = DS_Cuentas
         TabOrder = 5
         OnEnter = DBLUpCBoxCuentaEnter
+        OnExit = DBLUpCBoxCuentaExit
       end
       object DBLUCBoxNroTipoMov: TDBLookupComboBox
         Left = 572
@@ -388,8 +392,9 @@ object FMovimientos: TFMovimientos
       object DBLUCBoxNombreTipoMov: TDBLookupComboBox
         Left = 656
         Top = 89
-        Width = 297
+        Width = 355
         Height = 21
+        Anchors = [akLeft, akTop, akRight]
         DataField = 'ID_TIPO_MOVIMIENTO'
         DataSource = DS_Movimientos
         KeyField = 'ID_TIPO_MOVIEMIENTO'
@@ -401,8 +406,8 @@ object FMovimientos: TFMovimientos
     object DBGridLibroBanco: TDBGrid
       Left = 0
       Top = 26
-      Width = 1022
-      Height = 359
+      Width = 1031
+      Height = 441
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -525,7 +530,7 @@ object FMovimientos: TFMovimientos
     object PParametrosLibroBanco: TPanel
       Left = 0
       Top = 0
-      Width = 1022
+      Width = 1031
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -608,7 +613,7 @@ object FMovimientos: TFMovimientos
           'Fecha PD')
       end
       object StaticText1: TStaticText
-        Left = 951
+        Left = 960
         Top = 0
         Width = 71
         Height = 26
@@ -625,7 +630,7 @@ object FMovimientos: TFMovimientos
         TabOrder = 5
       end
       object StaticText2: TStaticText
-        Left = 894
+        Left = 903
         Top = 0
         Width = 57
         Height = 26
@@ -644,8 +649,8 @@ object FMovimientos: TFMovimientos
     end
     object PFiltrosColumnas: TPanel
       Left = 0
-      Top = 385
-      Width = 1022
+      Top = 467
+      Width = 1031
       Height = 31
       Align = alBottom
       TabOrder = 3
@@ -760,22 +765,192 @@ object FMovimientos: TFMovimientos
         TabOrder = 10
       end
     end
-    object ReporteMoviemiento: TQuickRep
+    object PanelImpresion: TPanel
       Tag = 99
-      Left = 308
-      Top = 69
+      Left = 306
+      Top = 139
+      Width = 505
+      Height = 281
+      Anchors = []
+      BevelInner = bvRaised
+      BevelOuter = bvNone
+      BevelWidth = 3
+      BorderWidth = 3
+      TabOrder = 4
+      Visible = False
+      DesignSize = (
+        505
+        281)
+      object Label15: TLabel
+        Left = 6
+        Top = 8
+        Width = 489
+        Height = 18
+        AutoSize = False
+        Caption = ' Imprimir Orden de Pago'
+        Color = clNavy
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label19: TLabel
+        Left = 18
+        Top = 63
+        Width = 70
+        Height = 13
+        Caption = 'Nro Orden:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label20: TLabel
+        Left = 8
+        Top = 82
+        Width = 80
+        Height = 13
+        Caption = 'Descripci'#243'n:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label21: TLabel
+        Left = 15
+        Top = 39
+        Width = 73
+        Height = 13
+        Caption = 'Impresora:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label14: TLabel
+        Left = 29
+        Top = 215
+        Width = 59
+        Height = 13
+        Caption = 'Autoriza:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object nro_comprobante: TDBEdit
+        Left = 96
+        Top = 56
+        Width = 121
+        Height = 21
+        Color = 16777088
+        DataField = 'NRO_ORDEN'
+        DataSource = DS_Movimientos
+        Enabled = False
+        TabOrder = 1
+      end
+      object DBMemo3: TDBMemo
+        Left = 8
+        Top = 99
+        Width = 489
+        Height = 105
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'DESCRIPCION'
+        DataSource = DS_Movimientos
+        TabOrder = 5
+        WantTabs = True
+      end
+      object cBoxImpresoras: TComboBox
+        Left = 96
+        Top = 32
+        Width = 393
+        Height = 21
+        Style = csDropDownList
+        ItemHeight = 13
+        TabOrder = 0
+      end
+      object ori: TCheckBox
+        Left = 230
+        Top = 60
+        Width = 51
+        Height = 17
+        Caption = 'Orig.'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+      end
+      object dup: TCheckBox
+        Left = 286
+        Top = 60
+        Width = 57
+        Height = 17
+        Caption = 'Dup.'
+        Checked = True
+        State = cbChecked
+        TabOrder = 3
+      end
+      object tri: TCheckBox
+        Left = 342
+        Top = 60
+        Width = 57
+        Height = 17
+        Caption = 'Trip.'
+        TabOrder = 4
+      end
+      object btnImprimirAceptar: TButton
+        Left = 167
+        Top = 240
+        Width = 75
+        Height = 25
+        Caption = 'Aceptar'
+        TabOrder = 6
+        OnClick = btnImprimirAceptarClick
+      end
+      object btnImprimirCancelar: TButton
+        Left = 263
+        Top = 240
+        Width = 75
+        Height = 25
+        Caption = 'Cancelar'
+        TabOrder = 7
+        OnClick = btnImprimirCancelarClick
+      end
+      object CBoxAutoriza: TComboBox
+        Left = 96
+        Top = 211
+        Width = 393
+        Height = 21
+        Style = csDropDownList
+        ItemHeight = 13
+        TabOrder = 8
+      end
+    end
+    object QR_OrdenPago: TQuickRep
+      Tag = 99
+      Left = 529
+      Top = -57
       Width = 794
       Height = 1123
       Frame.Color = clBlack
-      Frame.DrawTop = False
-      Frame.DrawBottom = False
-      Frame.DrawLeft = False
-      Frame.DrawRight = False
-      DataSet = ZQ_Movimientos
+      Frame.DrawTop = True
+      Frame.DrawBottom = True
+      Frame.DrawLeft = True
+      Frame.DrawRight = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Arial'
+      Font.Height = -11
+      Font.Name = 'Verdana'
       Font.Style = []
       Functions.Strings = (
         'PAGENUMBER'
@@ -815,40 +990,40 @@ object FMovimientos: TFMovimientos
       Zoom = 100
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
-      object QRBand2: TQRBand
+      object QRBand13: TQRBand
         Tag = 99
         Left = 38
-        Top = 118
+        Top = 150
         Width = 718
-        Height = 197
+        Height = 146
         Frame.Color = clBlack
         Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
+        Frame.DrawBottom = True
+        Frame.DrawLeft = True
+        Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          521.229166666666800000
+          386.291666666666700000
           1899.708333333333000000)
         BandType = rbDetail
-        object QRDBText10: TQRDBText
-          Left = 119
-          Top = 1
-          Width = 572
-          Height = 17
+        object QRDBText30: TQRDBText
+          Left = 118
+          Top = 23
+          Width = 591
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            314.854166666666700000
-            2.645833333333333000
-            1513.416666666667000000)
+            37.041666666666670000
+            312.208333333333300000
+            60.854166666666670000
+            1563.687500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -866,26 +1041,26 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRLabel14: TQRLabel
-          Left = 3
-          Top = 1
-          Width = 108
-          Height = 17
+        object QRLabel17: TQRLabel
+          Left = 30
+          Top = 23
+          Width = 85
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            7.937500000000000000
-            2.645833333333333000
-            285.750000000000000000)
-          Alignment = taLeftJustify
+            37.041666666666670000
+            79.375000000000000000
+            60.854166666666670000
+            224.895833333333300000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
-          Caption = 'Sirvase pagar a:'
+          Caption = 'Destinatario:'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -897,26 +1072,26 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRLabel15: TQRLabel
-          Left = 3
-          Top = 21
-          Width = 124
-          Height = 17
+        object QRLabel10: TQRLabel
+          Left = 50
+          Top = 41
+          Width = 65
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            7.937500000000000000
-            55.562500000000000000
-            328.083333333333400000)
-          Alignment = taLeftJustify
+            37.041666666666670000
+            132.291666666666700000
+            108.479166666666700000
+            171.979166666666700000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
-          Caption = 'El monto de Pesos:'
+          Caption = 'Domicilio:'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -928,22 +1103,180 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRLabel16: TQRLabel
-          Left = 3
-          Top = 101
+        object QRDBText41: TQRDBText
+          Left = 118
+          Top = 41
+          Width = 592
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            312.208333333333300000
+            108.479166666666700000
+            1566.333333333333000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Proveedores
+          DataField = 'DIRECCION'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRDBText46: TQRDBText
+          Left = 347
+          Top = 59
+          Width = 247
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            918.104166666666700000
+            156.104166666666700000
+            653.520833333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Proveedores
+          DataField = 'NRO_DOCUMENTO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRLabel27: TQRLabel
+          Left = 233
+          Top = 59
+          Width = 111
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            616.479166666666700000
+            156.104166666666700000
+            293.687500000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Nro. Documento:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRDBText63: TQRDBText
+          Left = 118
+          Top = 59
+          Width = 107
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            312.208333333333300000
+            156.104166666666700000
+            283.104166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Proveedores
+          DataField = 'TIPO_DOCUMENTO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRLabel12: TQRLabel
+          Left = 5
+          Top = 59
+          Width = 110
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            13.229166666666670000
+            156.104166666666700000
+            291.041666666666700000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Tipo Documento:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRLabel43: TQRLabel
+          Left = 34
+          Top = 93
           Width = 81
-          Height = 17
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            7.937500000000000000
-            267.229166666666700000
+            37.041666666666670000
+            89.958333333333330000
+            246.062500000000000000
             214.312500000000000000)
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
@@ -959,25 +1292,25 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRDBText11: TQRDBText
-          Left = 91
-          Top = 101
-          Width = 603
-          Height = 80
+        object QRDBText64: TQRDBText
+          Left = 118
+          Top = 93
+          Width = 591
+          Height = 49
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            211.666666666666700000
-            240.770833333333300000
-            267.229166666666700000
-            1595.437500000000000000)
+            129.645833333333300000
+            312.208333333333300000
+            246.062500000000000000
+            1563.687500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
-          AutoStretch = False
+          AutoStretch = True
           Color = clWhite
           DataSet = ZQ_Movimientos
           DataField = 'DESCRIPCION'
@@ -991,115 +1324,22 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRLabelNumeroLetras: TQRLabel
-          Left = 136
-          Top = 20
-          Width = 103
-          Height = 17
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            44.979166666666670000
-            359.833333333333400000
-            52.916666666666670000
-            272.520833333333400000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'QRTEXT IMPORTE'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 8
-        end
-        object QRLabel28: TQRLabel
-          Left = 3
-          Top = 216
-          Width = 112
-          Height = 15
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            39.687500000000000000
-            7.937500000000000000
-            571.500000000000000000
-            296.333333333333400000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Forma de Pago:'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold, fsUnderline]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 9
-        end
         object QRLabel1: TQRLabel
-          Left = 3
-          Top = 40
-          Width = 65
-          Height = 17
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            44.979166666666670000
-            7.937500000000000000
-            105.833333333333300000
-            171.979166666666700000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'Concepto:'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 8
-        end
-        object QRLabel3: TQRLabel
-          Left = 3
-          Top = 58
+          Left = 65
+          Top = 4
           Width = 50
-          Height = 17
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            7.937500000000000000
-            153.458333333333300000
+            37.041666666666670000
+            171.979166666666700000
+            10.583333333333330000
             132.291666666666700000)
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
@@ -1115,26 +1355,108 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRLabel7: TQRLabel
-          Left = 3
-          Top = 76
-          Width = 112
-          Height = 17
+        object QRDBText1: TQRDBText
+          Left = 118
+          Top = 4
+          Width = 251
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            7.937500000000000000
-            201.083333333333300000
-            296.333333333333400000)
+            37.041666666666670000
+            312.208333333333300000
+            10.583333333333330000
+            664.104166666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
-          AutoSize = True
+          AutoSize = False
           AutoStretch = False
-          Caption = 'Tipo Movimiento:'
+          Color = clWhite
+          DataSet = ZQ_Cuentas
+          DataField = 'NOMBRE_CUENTA'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRShape1: TQRShape
+          Left = 5
+          Top = 18
+          Width = 704
+          Height = 5
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            13.229166666666670000
+            13.229166666666670000
+            47.625000000000000000
+            1862.666666666667000000)
+          Shape = qrsHorLine
+          VertAdjust = 0
+        end
+        object QRDBText3: TQRDBText
+          Left = 494
+          Top = 4
+          Width = 211
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1307.041666666667000000
+            10.583333333333330000
+            558.270833333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Cuentas
+          DataField = 'NRO_CUENTA_BANCARIA'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRLabel2: TQRLabel
+          Left = 381
+          Top = 4
+          Width = 110
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1008.062500000000000000
+            10.583333333333330000
+            291.041666666666700000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'N'#250'mero Cuenta:'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -1146,20 +1468,38 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRDBText15: TQRDBText
-          Left = 76
-          Top = 39
-          Width = 572
-          Height = 17
+        object QRShape3: TQRShape
+          Left = 5
+          Top = 74
+          Width = 704
+          Height = 5
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            201.083333333333300000
-            103.187500000000000000
+            13.229166666666670000
+            13.229166666666670000
+            195.791666666666700000
+            1862.666666666667000000)
+          Shape = qrsHorLine
+          VertAdjust = 0
+        end
+        object QRDBText15: TQRDBText
+          Left = 118
+          Top = 78
+          Width = 572
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            312.208333333333300000
+            206.375000000000000000
             1513.416666666667000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -1178,137 +1518,165 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRDBText16: TQRDBText
-          Left = 61
-          Top = 59
-          Width = 572
-          Height = 17
+        object QRLabel3: TQRLabel
+          Left = 50
+          Top = 78
+          Width = 65
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            161.395833333333300000
-            156.104166666666700000
-            1513.416666666667000000)
+            37.041666666666670000
+            132.291666666666700000
+            206.375000000000000000
+            171.979166666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
-          AutoSize = False
+          AutoSize = True
           AutoStretch = False
+          Caption = 'Concepto:'
           Color = clWhite
-          DataSet = ZQ_Cuentas
-          DataField = 'NOMBRE_CUENTA'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 8
-        end
-        object QRDBText17: TQRDBText
-          Left = 123
-          Top = 77
-          Width = 572
-          Height = 17
-          Cursor = crDrag
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            44.979166666666670000
-            325.437500000000000000
-            203.729166666666700000
-            1513.416666666667000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Tipo_Movimiento
-          DataField = 'DESCRIPCION'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           Transparent = False
           WordWrap = True
           FontSize = 8
         end
       end
-      object QRBand3: TQRBand
+      object QRBand14: TQRBand
         Tag = 99
         Left = 38
         Top = 38
         Width = 718
-        Height = 80
+        Height = 112
         Frame.Color = clBlack
-        Frame.DrawTop = False
+        Frame.DrawTop = True
         Frame.DrawBottom = True
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
+        Frame.DrawLeft = True
+        Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          211.666666666666700000
+          296.333333333333300000
           1899.708333333333000000)
-        BandType = rbTitle
-        object QRLabeTipoMovimiento: TQRLabel
-          Left = 285
-          Top = 13
-          Width = 150
-          Height = 19
+        BandType = rbPageHeader
+        object RepOrdenCompra_SITUACIONIVAYCUIT: TQRLabel
+          Left = 80
+          Top = 71
+          Width = 316
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            50.270833333333330000
-            754.062500000000000000
-            34.395833333333340000
-            396.875000000000000000)
-          Alignment = taLeftJustify
+            37.041666666666670000
+            211.666666666666700000
+            187.854166666666700000
+            836.083333333333400000)
+          Alignment = taCenter
           AlignToBand = False
-          AutoSize = True
+          AutoSize = False
           AutoStretch = False
-          Caption = 'ORDEN DE PAGO'
+          Caption = 'RepOrdenCompra_SITUACIONIVAYCUIT'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = [fsBold]
+          Font.Style = []
           ParentFont = False
-          Transparent = False
+          Transparent = True
           WordWrap = True
-          FontSize = 12
+          FontSize = 8
         end
-        object QRDBText3: TQRDBText
-          Left = 623
-          Top = 59
-          Width = 90
-          Height = 17
+        object RepOrdenCompra_TELEFONOS: TQRLabel
+          Left = 80
+          Top = 58
+          Width = 316
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            1648.354166666667000000
-            156.104166666666700000
-            238.125000000000000000)
+            37.041666666666670000
+            211.666666666666700000
+            153.458333333333300000
+            836.083333333333400000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'RepOrdenCompra_TELEFONOS'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 8
+        end
+        object RepOrdenCompra_DIRECCION: TQRLabel
+          Left = 80
+          Top = 45
+          Width = 316
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            211.666666666666700000
+            119.062500000000000000
+            836.083333333333400000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'RepOrdenCompra_DIRECCION'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRDBText65: TQRDBText
+          Left = 477
+          Top = 94
+          Width = 236
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            1262.062500000000000000
+            248.708333333333300000
+            624.416666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -1320,32 +1688,112 @@ object FMovimientos: TFMovimientos
           Font.Color = clWindowText
           Font.Height = -9
           Font.Name = 'Verdana'
-          Font.Style = [fsBold, fsItalic]
+          Font.Style = [fsItalic]
           ParentFont = False
           Transparent = False
           WordWrap = True
           FontSize = 7
         end
-        object QRLabel25: TQRLabel
-          Left = 500
-          Top = 59
-          Width = 119
-          Height = 17
+        object RepOrdenCompra_EMPRESA: TQRLabel
+          Left = 80
+          Top = 9
+          Width = 316
+          Height = 24
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            1322.916666666667000000
-            156.104166666666700000
-            314.854166666666700000)
-          Alignment = taLeftJustify
+            63.500000000000000000
+            211.666666666666700000
+            23.812500000000000000
+            836.083333333333400000)
+          Alignment = taCenter
           AlignToBand = False
-          AutoSize = True
+          AutoSize = False
           AutoStretch = False
-          Caption = 'Fecha Orden de Pago:'
+          Caption = 'RepOrdenCompra_EMPRESA'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 14
+        end
+        object QRShape2: TQRShape
+          Left = 406
+          Top = 0
+          Width = 9
+          Height = 111
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            293.687500000000000000
+            1074.208333333333000000
+            0.000000000000000000
+            23.812500000000000000)
+          Shape = qrsVertLine
+          VertAdjust = 0
+        end
+        object QRLabel94: TQRLabel
+          Left = 425
+          Top = 78
+          Width = 50
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            1124.479166666667000000
+            206.375000000000000000
+            132.291666666666700000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'N'#250'mero:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 7
+        end
+        object QRLabel95: TQRLabel
+          Left = 425
+          Top = 94
+          Width = 50
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            1124.479166666667000000
+            248.708333333333300000
+            132.291666666666700000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Fecha:'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -1357,52 +1805,21 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 7
         end
-        object QRLabel6: TQRLabel
-          Left = 500
-          Top = 43
-          Width = 107
-          Height = 17
+        object QRDBText66: TQRDBText
+          Left = 477
+          Top = 78
+          Width = 236
+          Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            1322.916666666667000000
-            113.770833333333300000
-            283.104166666666700000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'Orden de Pago Nro:'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold, fsItalic]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
-        object QRDBText5: TQRDBText
-          Left = 622
-          Top = 43
-          Width = 90
-          Height = 17
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            44.979166666666670000
-            1645.708333333333000000
-            113.770833333333300000
-            238.125000000000000000)
+            34.395833333333330000
+            1262.062500000000000000
+            206.375000000000000000
+            624.416666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -1414,22 +1831,199 @@ object FMovimientos: TFMovimientos
           Font.Color = clWindowText
           Font.Height = -9
           Font.Name = 'Verdana'
-          Font.Style = [fsBold, fsItalic]
+          Font.Style = [fsItalic]
           ParentFont = False
           Transparent = False
           WordWrap = True
           FontSize = 7
         end
+        object RepOrdenCompra_DUENIO: TQRLabel
+          Left = 80
+          Top = 32
+          Width = 316
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            211.666666666666700000
+            84.666666666666680000
+            836.083333333333400000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'RepOrdenCompra_DUENIO'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRLabel102: TQRLabel
+          Left = 441
+          Top = 24
+          Width = 249
+          Height = 29
+          Frame.Color = clGray
+          Frame.DrawTop = True
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            76.729166666666670000
+            1166.812500000000000000
+            63.500000000000000000
+            658.812500000000000000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'ORDEN DE'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clGray
+          Font.Height = -23
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 17
+        end
+        object QRLabel106: TQRLabel
+          Left = 441
+          Top = 48
+          Width = 249
+          Height = 29
+          Frame.Color = clGray
+          Frame.DrawTop = False
+          Frame.DrawBottom = True
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            76.729166666666670000
+            1166.812500000000000000
+            127.000000000000000000
+            658.812500000000000000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'PAGO'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clGray
+          Font.Height = -23
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 17
+        end
+        object QRLabelImpresion: TQRLabel
+          Left = 576
+          Top = 3
+          Width = 132
+          Height = 19
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            50.270833333333330000
+            1524.000000000000000000
+            7.937500000000000000
+            349.250000000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Tipo De Impresion'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          FontSize = 10
+        end
       end
-      object QRChildBand1: TQRChildBand
+      object QRSubDetail14: TQRSubDetail
         Tag = 99
         Left = 38
-        Top = 315
+        Top = 296
+        Width = 718
+        Height = 18
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          47.625000000000000000
+          1899.708333333333000000)
+        Master = QR_OrdenPago
+        PrintBefore = False
+        PrintIfEmpty = True
+        object QRLabel107: TQRLabel
+          Left = 3
+          Top = 2
+          Width = 112
+          Height = 15
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            39.687500000000000000
+            7.937500000000000000
+            5.291666666666667000
+            296.333333333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Forma de Pago'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsUnderline]
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          FontSize = 9
+        end
+      end
+      object QRChildBand8: TQRChildBand
+        Tag = 99
+        Left = 38
+        Top = 314
         Width = 718
         Height = 15
         Frame.Color = clBlack
         Frame.DrawTop = True
-        Frame.DrawBottom = True
+        Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         AlignToBottom = False
@@ -1439,21 +2033,83 @@ object FMovimientos: TFMovimientos
         Size.Values = (
           39.687500000000000000
           1899.708333333333000000)
-        ParentBand = QRBand2
-        object QRLabel19: TQRLabel
-          Left = 649
-          Top = 0
-          Width = 61
-          Height = 15
+        ParentBand = QRSubDetail14
+        object QRLabel110: TQRLabel
+          Left = 92
+          Top = 1
+          Width = 39
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            39.687500000000000000
-            1717.145833333333000000
-            0.000000000000000000
+            37.041666666666670000
+            243.416666666666700000
+            2.645833333333333000
+            103.187500000000000000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Medio'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRLabel111: TQRLabel
+          Left = 513
+          Top = 1
+          Width = 130
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1357.312500000000000000
+            2.645833333333333000
+            343.958333333333300000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Nro Cheque/Transf.'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRLabel112: TQRLabel
+          Left = 652
+          Top = 1
+          Width = 61
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1725.083333333333000000
+            2.645833333333333000
             161.395833333333300000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -1471,26 +2127,26 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRLabel21: TQRLabel
-          Left = 95
-          Top = 0
-          Width = 76
-          Height = 15
+        object QRLabel113: TQRLabel
+          Left = 7
+          Top = 1
+          Width = 68
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            39.687500000000000000
-            251.354166666666700000
-            0.000000000000000000
-            201.083333333333300000)
-          Alignment = taLeftJustify
+            37.041666666666670000
+            18.520833333333330000
+            2.645833333333333000
+            179.916666666666700000)
+          Alignment = taCenter
           AlignToBand = False
-          AutoSize = False
+          AutoSize = True
           AutoStretch = False
-          Caption = 'Fecha PD'
+          Caption = 'F. Emisi'#243'n'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -1502,52 +2158,21 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRLabel22: TQRLabel
-          Left = 2
-          Top = 0
-          Width = 75
-          Height = 15
+        object QRLabel114: TQRLabel
+          Left = 367
+          Top = 1
+          Width = 82
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            39.687500000000000000
-            5.291666666666667000
-            0.000000000000000000
-            198.437500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Medio'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 8
-        end
-        object QRLabel2: TQRLabel
-          Left = 193
-          Top = 0
-          Width = 76
-          Height = 15
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            39.687500000000000000
-            510.645833333333300000
-            0.000000000000000000
-            201.083333333333300000)
+            37.041666666666670000
+            971.020833333333300000
+            2.645833333333333000
+            216.958333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -1564,92 +2189,10 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRLabel5: TQRLabel
-          Left = 338
-          Top = 0
-          Width = 76
-          Height = 15
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            39.687500000000000000
-            894.291666666666800000
-            0.000000000000000000
-            201.083333333333300000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Nro'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 8
-        end
-        object QRLabel8: TQRLabel
-          Left = 472
-          Top = 0
-          Width = 76
-          Height = 15
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            39.687500000000000000
-            1248.833333333333000000
-            0.000000000000000000
-            201.083333333333300000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Nro F/R'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 8
-        end
-      end
-      object QRBand4: TQRBand
-        Tag = 99
-        Left = 38
-        Top = 618
-        Width = 718
-        Height = 23
-        Frame.Color = clBlack
-        Frame.DrawTop = True
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        AlignToBottom = False
-        Color = clWhite
-        ForceNewColumn = False
-        ForceNewPage = False
-        Size.Values = (
-          60.854166666666680000
-          1899.708333333333000000)
-        BandType = rbPageFooter
-        object QRDBText8: TQRDBText
-          Left = 2
-          Top = 5
-          Width = 90
+        object QRLabel116: TQRLabel
+          Left = 266
+          Top = 1
+          Width = 95
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1658,356 +2201,30 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            5.291666666666667000
-            13.229166666666670000
-            238.125000000000000000)
-          Alignment = taLeftJustify
+            703.791666666666700000
+            2.645833333333333000
+            251.354166666666700000)
+          Alignment = taCenter
           AlignToBand = False
-          AutoSize = True
+          AutoSize = False
           AutoStretch = False
+          Caption = 'Fecha Cheque'
           Color = clWhite
-          DataField = 'NOMBRE_EMPRESA'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -9
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = [fsItalic]
+          Font.Style = [fsBold]
           ParentFont = False
-          Transparent = False
+          Transparent = True
           WordWrap = True
-          FontSize = 7
+          FontSize = 8
         end
       end
-      object SummaryBand1: TQRBand
+      object QRSubDetail17: TQRSubDetail
         Tag = 99
         Left = 38
-        Top = 400
-        Width = 718
-        Height = 218
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        AlignToBottom = False
-        Color = clWhite
-        ForceNewColumn = False
-        ForceNewPage = False
-        Size.Values = (
-          576.791666666666800000
-          1899.708333333333000000)
-        BandType = rbSummary
-        object QRLabel30: TQRLabel
-          Left = 32
-          Top = 195
-          Width = 153
-          Height = 16
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            42.333333333333330000
-            84.666666666666680000
-            515.937500000000000000
-            404.812500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Recib'#237' de Conformidad:'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
-        object QRLabel31: TQRLabel
-          Left = 189
-          Top = 195
-          Width = 510
-          Height = 16
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            42.333333333333330000
-            500.062500000000000000
-            515.937500000000000000
-            1349.375000000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 
-            '________________________________________________________________' +
-            '________________________________________________________________' +
-            '________________________________________________________________' +
-            '________________'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
-        object QRDBText9: TQRDBText
-          Left = 346
-          Top = 126
-          Width = 41
-          Height = 12
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            31.750000000000000000
-            915.458333333333200000
-            333.375000000000000000
-            108.479166666666700000)
-          Alignment = taCenter
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Color = clWhite
-          DataField = 'NOMBRE2'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 6
-        end
-        object QRDBText18: TQRDBText
-          Left = 349
-          Top = 142
-          Width = 35
-          Height = 12
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            31.750000000000000000
-            923.395833333333400000
-            375.708333333333400000
-            92.604166666666680000)
-          Alignment = taCenter
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Color = clWhite
-          DataField = 'CARGO2'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 6
-        end
-        object QRDBText19: TQRDBText
-          Left = 562
-          Top = 126
-          Width = 41
-          Height = 12
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            31.750000000000000000
-            1486.958333333333000000
-            333.375000000000000000
-            108.479166666666700000)
-          Alignment = taCenter
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Color = clWhite
-          DataField = 'NOMBRE3'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 6
-        end
-        object QRDBText20: TQRDBText
-          Left = 565
-          Top = 142
-          Width = 35
-          Height = 12
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            31.750000000000000000
-            1494.895833333333000000
-            375.708333333333400000
-            92.604166666666680000)
-          Alignment = taCenter
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Color = clWhite
-          DataField = 'CARGO3'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 6
-        end
-        object QRShape3: TQRShape
-          Left = 40
-          Top = 112
-          Width = 193
-          Height = 9
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            23.812500000000000000
-            105.833333333333300000
-            296.333333333333300000
-            510.645833333333300000)
-          Shape = qrsHorLine
-          VertAdjust = 0
-        end
-        object QRShape4: TQRShape
-          Left = 264
-          Top = 112
-          Width = 193
-          Height = 9
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            23.812500000000000000
-            698.500000000000000000
-            296.333333333333300000
-            510.645833333333300000)
-          Shape = qrsHorLine
-          VertAdjust = 0
-        end
-        object QRShape5: TQRShape
-          Left = 488
-          Top = 112
-          Width = 193
-          Height = 9
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            23.812500000000000000
-            1291.166666666667000000
-            296.333333333333300000
-            510.645833333333300000)
-          Shape = qrsHorLine
-          VertAdjust = 0
-        end
-        object QRLabel9: TQRLabel
-          Left = 40
-          Top = 124
-          Width = 70
-          Height = 16
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            42.333333333333340000
-            105.833333333333300000
-            328.083333333333400000
-            185.208333333333300000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Confecciono:'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
-        object QRLabelConfecciono: TQRLabel
-          Left = 116
-          Top = 124
-          Width = 70
-          Height = 16
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            42.333333333333340000
-            306.916666666666700000
-            328.083333333333400000
-            185.208333333333300000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Confecciono:'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
-      end
-      object QRSubDetail4: TQRSubDetail
-        Tag = 99
-        Left = 38
-        Top = 330
+        Top = 329
         Width = 718
         Height = 18
         Frame.Color = clBlack
@@ -2022,25 +2239,25 @@ object FMovimientos: TFMovimientos
         Size.Values = (
           47.625000000000000000
           1899.708333333333000000)
-        Master = ReporteMoviemiento
+        Master = QR_OrdenPago
         DataSet = ZQ_Cuenta_Movimiento
         PrintBefore = False
         PrintIfEmpty = True
-        object QRDBText13: TQRDBText
-          Left = 3
-          Top = 1
-          Width = 86
-          Height = 15
+        object QRDBText71: TQRDBText
+          Left = 93
+          Top = 2
+          Width = 168
+          Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            39.687500000000000000
-            7.937500000000000000
-            2.645833333333333000
-            227.541666666666700000)
+            34.395833333333330000
+            246.062500000000000000
+            5.291666666666667000
+            444.500000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -2050,29 +2267,29 @@ object FMovimientos: TFMovimientos
           DataField = 'medio_de_pago'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -9
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
           Transparent = False
           WordWrap = True
-          FontSize = 8
+          FontSize = 7
         end
-        object QRDBText14: TQRDBText
-          Left = 637
-          Top = 1
-          Width = 74
-          Height = 15
+        object QRDBText74: TQRDBText
+          Left = 630
+          Top = 2
+          Width = 83
+          Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            39.687500000000000000
-            1685.395833333333000000
-            2.645833333333333000
-            195.791666666666700000)
+            34.395833333333330000
+            1666.875000000000000000
+            5.291666666666667000
+            219.604166666666700000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
@@ -2082,30 +2299,30 @@ object FMovimientos: TFMovimientos
           DataField = 'IMPORTE'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -9
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
           Transparent = False
           WordWrap = True
-          FontSize = 8
+          FontSize = 7
         end
-        object QRDBText12: TQRDBText
-          Left = 94
-          Top = 1
-          Width = 90
-          Height = 15
+        object QRDBText75: TQRDBText
+          Left = 2
+          Top = 2
+          Width = 87
+          Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            39.687500000000000000
-            248.708333333333300000
-            2.645833333333333000
-            238.125000000000000000)
-          Alignment = taLeftJustify
+            34.395833333333330000
+            5.291666666666667000
+            5.291666666666667000
+            230.187500000000000000)
+          Alignment = taCenter
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
@@ -2114,29 +2331,29 @@ object FMovimientos: TFMovimientos
           DataField = 'FECHA_MDC'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -9
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
           Transparent = False
           WordWrap = True
-          FontSize = 8
+          FontSize = 7
         end
-        object QRDBText21: TQRDBText
-          Left = 192
-          Top = 1
-          Width = 140
-          Height = 15
+        object QRDBText76: TQRDBText
+          Left = 367
+          Top = 2
+          Width = 142
+          Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            39.687500000000000000
-            508.000000000000000000
-            2.645833333333333000
-            370.416666666666700000)
+            34.395833333333330000
+            971.020833333333300000
+            5.291666666666667000
+            375.708333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -2146,29 +2363,29 @@ object FMovimientos: TFMovimientos
           DataField = 'BANCO_MDC'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -9
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
           Transparent = False
           WordWrap = True
-          FontSize = 8
+          FontSize = 7
         end
-        object QRDBText22: TQRDBText
-          Left = 339
-          Top = 1
-          Width = 127
-          Height = 15
+        object QRDBText77: TQRDBText
+          Left = 512
+          Top = 2
+          Width = 115
+          Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            39.687500000000000000
-            896.937500000000000000
-            2.645833333333333000
-            336.020833333333400000)
+            34.395833333333330000
+            1354.666666666667000000
+            5.291666666666667000
+            304.270833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -2178,55 +2395,55 @@ object FMovimientos: TFMovimientos
           DataField = 'NRO_CHEQUE_TRANSF'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -9
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
           Transparent = False
           WordWrap = True
-          FontSize = 8
+          FontSize = 7
         end
-        object QRDBText23: TQRDBText
-          Left = 472
-          Top = 1
-          Width = 155
-          Height = 15
+        object QRDBText78: TQRDBText
+          Left = 266
+          Top = 2
+          Width = 95
+          Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            39.687500000000000000
-            1248.833333333333000000
-            2.645833333333333000
-            410.104166666666800000)
+            34.395833333333330000
+            703.791666666666700000
+            5.291666666666667000
+            251.354166666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_Cuenta_Movimiento
-          DataField = 'NRO_FACTURA_RECIBO'
+          DataField = 'FECHA_MDC'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -9
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
           Transparent = False
           WordWrap = True
-          FontSize = 8
+          FontSize = 7
         end
       end
-      object QRSubDetail5: TQRSubDetail
+      object QRSubDetail18: TQRSubDetail
         Tag = 99
         Left = 38
-        Top = 348
+        Top = 347
         Width = 718
-        Height = 52
+        Height = 125
         Frame.Color = clBlack
-        Frame.DrawTop = False
+        Frame.DrawTop = True
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
@@ -2235,31 +2452,31 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          137.583333333333300000
+          330.729166666666700000
           1899.708333333333000000)
-        Master = ReporteMoviemiento
+        Master = QR_OrdenPago
         PrintBefore = False
         PrintIfEmpty = True
-        object QRTIMPORTE: TQRLabel
-          Left = 638
-          Top = 8
-          Width = 73
-          Height = 17
+        object QrtImporteFPago: TQRLabel
+          Left = 432
+          Top = 5
+          Width = 281
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            44.979166666666670000
-            1688.041666666667000000
-            21.166666666666670000
-            193.145833333333300000)
+            37.041666666666670000
+            1143.000000000000000000
+            13.229166666666670000
+            743.479166666666700000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'QRTIMPORTE'
+          Caption = 'QrtImporteFPago'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -2271,10 +2488,35 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRShape1: TQRShape
-          Left = 625
-          Top = 4
-          Width = 90
+        object QRLblConfecciona: TQRLabel
+          Left = 105
+          Top = 77
+          Width = 76
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            277.812500000000000000
+            203.729166666666700000
+            201.083333333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Confeccion'#243':'
+          Color = clWhite
+          Transparent = False
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRShape6: TQRShape
+          Left = 105
+          Top = 72
+          Width = 206
           Height = 1
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -2283,42 +2525,136 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             2.645833333333333000
-            1653.645833333333000000
-            10.583333333333330000
-            238.125000000000000000)
-          Shape = qrsRectangle
+            277.812500000000000000
+            190.500000000000000000
+            545.041666666666700000)
+          Shape = qrsHorLine
           VertAdjust = 0
         end
-        object QRLabel4: TQRLabel
-          Left = 520
-          Top = 9
-          Width = 111
-          Height = 15
+        object QRShape7: TQRShape
+          Left = 350
+          Top = 72
+          Width = 206
+          Height = 1
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            39.687500000000000000
-            1375.833333333333000000
-            23.812500000000000000
-            293.687500000000000000)
-          Alignment = taRightJustify
+            2.645833333333333000
+            926.041666666666700000
+            190.500000000000000000
+            545.041666666666700000)
+          Shape = qrsHorLine
+          VertAdjust = 0
+        end
+        object QRLblAutorizo: TQRLabel
+          Left = 350
+          Top = 77
+          Width = 53
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            926.041666666666700000
+            203.729166666666700000
+            140.229166666666700000)
+          Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
-          Caption = 'Importe Total:  $'
+          Caption = 'Autoriz'#243':'
           Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
           Transparent = False
           WordWrap = True
           FontSize = 8
+        end
+      end
+      object QRBand15: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 472
+        Width = 718
+        Height = 16
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          42.333333333333330000
+          1899.708333333333000000)
+        BandType = rbPageFooter
+        object QRLabel123: TQRLabel
+          Left = 4
+          Top = 2
+          Width = 85
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            10.583333333333330000
+            5.291666666666667000
+            224.895833333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Empirica / UPCN -'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 7
+        end
+        object QRlblFechaHoy: TQRLabel
+          Left = 91
+          Top = 2
+          Width = 70
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            240.770833333333300000
+            5.291666666666667000
+            185.208333333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'QRlblFechaHoy'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 7
         end
       end
     end
@@ -2326,7 +2662,7 @@ object FMovimientos: TFMovimientos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2432,6 +2768,10 @@ object FMovimientos: TFMovimientos
             Visible = True
           end
           item
+            Item = BtVerDetalle
+            Visible = True
+          end
+          item
             BeginGroup = True
             Item = BtIngresos
             Visible = True
@@ -2441,18 +2781,7 @@ object FMovimientos: TFMovimientos
             Visible = True
           end
           item
-            BeginGroup = True
             Item = BtEditarMovimiento
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = BtVerCampos
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = BtVerDetalle
             Visible = True
           end
           item
@@ -2466,7 +2795,15 @@ object FMovimientos: TFMovimientos
           end
           item
             BeginGroup = True
+            Item = btnImprimirOrden
+            Visible = True
+          end
+          item
             Item = BtExportarExel
+            Visible = True
+          end
+          item
+            Item = BtVerCampos
             Visible = True
           end
           item
@@ -2514,8 +2851,8 @@ object FMovimientos: TFMovimientos
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 792
-    Top = 16
+    Left = 840
+    Top = 320
     DockControlHeights = (
       0
       0
@@ -2613,7 +2950,7 @@ object FMovimientos: TFMovimientos
       Category = 0
       Hint = 'Ver Detalle'
       Visible = ivAlways
-      ImageIndex = 12
+      ImageIndex = 69
       OnClick = BtVerDetalleClick
       AutoGrayScale = False
     end
@@ -2631,7 +2968,7 @@ object FMovimientos: TFMovimientos
       Category = 0
       Hint = 'Anular Movimiento'
       Visible = ivAlways
-      ImageIndex = 4
+      ImageIndex = 68
       OnClick = BtAnularMovClick
       AutoGrayScale = False
     end
@@ -2640,9 +2977,17 @@ object FMovimientos: TFMovimientos
       Category = 0
       Hint = 'Exportar Exel'
       Visible = ivAlways
-      ImageIndex = 5
+      ImageIndex = 66
       OnClick = BtExportarExelClick
       AutoGrayScale = False
+    end
+    object btnImprimirOrden: TdxBarLargeButton
+      Caption = 'Orden Pago'
+      Category = 0
+      Hint = 'Orden Pago'
+      Visible = ivAlways
+      ImageIndex = 28
+      OnClick = btnImprimirOrdenClick
     end
     object GrupoEditando: TdxBarGroup
       Items = (
@@ -2656,7 +3001,8 @@ object FMovimientos: TFMovimientos
         'BtVerDetalle'
         'BtAnularOrden'
         'BtAnularMov'
-        'BtExportarExel')
+        'BtExportarExel'
+        'btnImprimirOrden')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -2682,8 +3028,8 @@ object FMovimientos: TFMovimientos
         Name = 'IDCtaMov'
         ParamType = ptUnknown
       end>
-    Left = 536
-    Top = 265
+    Left = 464
+    Top = 169
     ParamData = <
       item
         DataType = ftUnknown
@@ -2771,8 +3117,8 @@ object FMovimientos: TFMovimientos
   end
   object DS_Cuenta_Movimiento: TDataSource
     DataSet = ZQ_Cuenta_Movimiento
-    Left = 640
-    Top = 265
+    Left = 464
+    Top = 225
   end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
@@ -2782,8 +3128,8 @@ object FMovimientos: TFMovimientos
         'uenta_bancaria, '#39'N'#176': S/N'#39') Busqueda'
       'from ie_cuentas c')
     Params = <>
-    Left = 632
-    Top = 137
+    Left = 624
+    Top = 201
     object ZQ_CuentasID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
       Required = True
@@ -2822,8 +3168,8 @@ object FMovimientos: TFMovimientos
       'select *'
       'from ie_medios_cobro_pago mcp')
     Params = <>
-    Left = 120
-    Top = 305
+    Left = 56
+    Top = 297
     object ZQ_Medios_Cobro_PagoID_MEDIO: TIntegerField
       FieldName = 'ID_MEDIO'
       Required = True
@@ -2839,8 +3185,8 @@ object FMovimientos: TFMovimientos
       'select *'
       'from ie_proveedores p')
     Params = <>
-    Left = 625
-    Top = 17
+    Left = 617
+    Top = 81
     object ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField
       FieldName = 'NRO_PROVEEDOR'
       Required = True
@@ -2884,8 +3230,8 @@ object FMovimientos: TFMovimientos
       'select *'
       'from ie_conceptos c')
     Params = <>
-    Left = 625
-    Top = 73
+    Left = 617
+    Top = 137
     object ZQ_ConceptosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
       Required = True
@@ -2918,8 +3264,8 @@ object FMovimientos: TFMovimientos
         Name = 'NroMov'
         ParamType = ptUnknown
       end>
-    Left = 353
-    Top = 233
+    Left = 305
+    Top = 169
     ParamData = <
       item
         DataType = ftUnknown
@@ -2987,32 +3333,33 @@ object FMovimientos: TFMovimientos
   end
   object DS_Proveedores: TDataSource
     DataSet = ZQ_Proveedores
-    Left = 713
-    Top = 17
+    Left = 705
+    Top = 81
   end
   object DS_Conceptos: TDataSource
     DataSet = ZQ_Conceptos
-    Left = 705
-    Top = 73
+    Left = 697
+    Top = 137
   end
   object DS_Cuentas: TDataSource
     DataSet = ZQ_Cuentas
-    Left = 713
-    Top = 153
+    Left = 705
+    Top = 201
   end
   object DS_Movimientos: TDataSource
     DataSet = ZQ_Movimientos
-    Left = 432
-    Top = 233
+    Left = 304
+    Top = 225
   end
   object ZQ_Tipo_Movimiento: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from tipo_movimiento tm')
+      'from tipo_movimiento tm'
+      'order by tm.prioridad')
     Params = <>
-    Left = 240
-    Top = 241
+    Left = 56
+    Top = 161
     object ZQ_Tipo_MovimientoID_TIPO_MOVIEMIENTO: TIntegerField
       FieldName = 'ID_TIPO_MOVIEMIENTO'
       Required = True
@@ -3025,11 +3372,18 @@ object FMovimientos: TFMovimientos
       FieldName = 'DESCRIPCION'
       Size = 100
     end
+    object ZQ_Tipo_MovimientoPRIORIDAD: TIntegerField
+      FieldName = 'PRIORIDAD'
+    end
+    object ZQ_Tipo_MovimientoTIPO: TStringField
+      FieldName = 'TIPO'
+      Size = 1
+    end
   end
   object DS_Tipo_Movimiento: TDataSource
     DataSet = ZQ_Tipo_Movimiento
-    Left = 128
-    Top = 241
+    Left = 56
+    Top = 225
   end
   object EK_ListadoCuentas: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -3039,8 +3393,8 @@ object FMovimientos: TFMovimientos
       'order by ie_cuentas.nombre_cuenta')
     CampoBuscar = 'NOMBRE_CUENTA'
     CampoClave = 'ID_CUENTA'
-    Left = 312
-    Top = 329
+    Left = 304
+    Top = 297
   end
   object EK_ListadoMedCobroPago: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -3049,8 +3403,8 @@ object FMovimientos: TFMovimientos
       'FROM IE_MEDIOS_COBRO_PAGO')
     CampoBuscar = 'NOMBRE_MEDIO_COBRO_PAGO'
     CampoClave = 'ID_MEDIO'
-    Left = 440
-    Top = 329
+    Left = 464
+    Top = 297
   end
   object Nro_Moviemiento: TZStoredProc
     Connection = DM.Conexion
@@ -3076,7 +3430,7 @@ object FMovimientos: TFMovimientos
   object DS_LIBRO_BANCO: TDataSource
     DataSet = LIBRO_BANCO
     Left = 184
-    Top = 72
+    Top = 224
   end
   object LIBRO_BANCO: TZQuery
     Connection = DM.Conexion
@@ -3104,8 +3458,8 @@ object FMovimientos: TFMovimientos
         Name = 'ordenamiento'
         ParamType = ptUnknown
       end>
-    Left = 200
-    Top = 136
+    Left = 184
+    Top = 176
     ParamData = <
       item
         DataType = ftUnknown
@@ -3318,12 +3672,12 @@ object FMovimientos: TFMovimientos
     SQL_From.Strings = (
       'from ie_ver_libro_banco(:cuenta,:hasta,:desde,:ordenamiento)ie')
     UsarWhereOriginal = EK_Con_Where
-    Left = 96
-    Top = 128
+    Left = 56
+    Top = 104
   end
   object ActionManager1: TActionManager
-    Left = 792
-    Top = 273
+    Left = 928
+    Top = 209
     StyleName = 'XP Style'
     object ADeleteLinea: TAction
       Caption = 'DeleteLinea'
@@ -3339,8 +3693,8 @@ object FMovimientos: TFMovimientos
       end>
     DataSet = ZQ_Cuenta_Movimiento
     SumListChanged = EKDbSumaImporteSumListChanged
-    Left = 873
-    Top = 81
+    Left = 841
+    Top = 265
   end
   object EKLlenarCombo1: TEKLlenarCombo
     dataset = ZQ_Cuentas
@@ -3359,7 +3713,7 @@ object FMovimientos: TFMovimientos
     CampoBuscar = 'Nombre_fantasia'
     CampoClave = 'nro_proveedor'
     Left = 353
-    Top = 41
+    Top = 57
   end
   object EKListado_Conceptos: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -3369,7 +3723,7 @@ object FMovimientos: TFMovimientos
     CampoBuscar = 'nombre_concepto'
     CampoClave = 'id_concepto'
     Left = 353
-    Top = 97
+    Top = 113
   end
   object nro_orden: TZStoredProc
     Connection = DM.Conexion
@@ -3380,8 +3734,8 @@ object FMovimientos: TFMovimientos
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_IE_NRO_ORDEN_ID'
-    Left = 952
-    Top = 40
+    Left = 184
+    Top = 112
     ParamData = <
       item
         DataType = ftInteger
@@ -3397,8 +3751,8 @@ object FMovimientos: TFMovimientos
     Borders = []
     Shading = False
     Version = '1.24'
-    Left = 896
-    Top = 336
+    Left = 928
+    Top = 312
   end
   object mxDBGridExport: TmxDBGridExport
     DateFormat = 'dd/MM/yyyy'
@@ -3497,18 +3851,90 @@ object FMovimientos: TFMovimientos
     Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
     Version = '2.37'
     DBGrid = DBGridLibroBanco
-    Left = 796
-    Top = 330
-  end
-  object EKVistaPreviaMovimiento: TEKVistaPreviaQR
-    Reporte = ReporteMoviemiento
-    ShowModal = False
-    Left = 538
-    Top = 179
+    Left = 924
+    Top = 266
   end
   object EKNumeroALetras1: TEKNumeroALetras
     Separador = ','
-    Left = 402
-    Top = 163
+    Left = 842
+    Top = 211
+  end
+  object ZQ_NroCheque: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select c.ultimo_nro'
+      'from ie_cuentas c'
+      'where c.autonumerar = '#39'S'#39' and c.id_cuenta = :idCuenta')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idCuenta'
+        ParamType = ptUnknown
+      end>
+    Left = 864
+    Top = 66
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idCuenta'
+        ParamType = ptUnknown
+      end>
+    object ZQ_NroChequeULTIMO_NRO: TIntegerField
+      FieldName = 'ULTIMO_NRO'
+    end
+  end
+  object CD_Cheque: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 935
+    Top = 66
+    object CD_ChequeNumero: TIntegerField
+      FieldName = 'Numero'
+    end
+  end
+  object EKIni_Impresion: TEKIni
+    Left = 602
+    Top = 307
+  end
+  object EKVistaPreviaOrdenPago: TEKVistaPreviaQR
+    Reporte = QR_OrdenPago
+    ShowModal = False
+    Caption = 'Orden de Pago'
+    Left = 927
+    Top = 378
+  end
+  object ZQ_Autoriza: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from autoridad'
+      'order by prioridad')
+    Params = <>
+    Left = 16
+    Top = 408
+    object ZQ_AutorizaID_AUTORIDAD: TIntegerField
+      FieldName = 'ID_AUTORIDAD'
+    end
+    object ZQ_AutorizaNOMBE: TStringField
+      FieldName = 'NOMBE'
+      Size = 50
+    end
+    object ZQ_AutorizaPRIORIDAD: TIntegerField
+      FieldName = 'PRIORIDAD'
+    end
+  end
+  object DS_Autoriza: TDataSource
+    DataSet = ZQ_Autoriza
+    Left = 16
+    Top = 459
+  end
+  object EKLlenarCBAutoriza: TEKLlenarCombo
+    dataset = ZQ_Autoriza
+    combo = CBoxAutoriza
+    OnCambio = EKLlenarCombo1Cambio
+    CampoClave = 'ID_AUTORIDAD'
+    CampoVer = 'Nombe'
+    Left = 97
+    Top = 409
   end
 end

@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ComCtrls, dxtree, dxdbtree, StdCtrls,
   ExtCtrls, DBCtrls, Mask, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKListadoSQL, Grids, DBGrids, EKBusquedaAvanzada;
+  ZDataset, EKListadoSQL, Grids, DBGrids, EKBusquedaAvanzada,
+  EKVistaPreviaQR, QRCtrls, QuickRpt;
 
 type
   TFConceptos = class(TForm)
@@ -43,6 +44,31 @@ type
     Label4: TLabel;
     StaticText3: TStaticText;
     Panel1: TPanel;
+    ReporteConceptos: TQuickRep;
+    QRBand5: TQRBand;
+    QRDBImage1: TQRDBImage;
+    QRLabel11: TQRLabel;
+    ReporteConceptos_direccion: TQRLabel;
+    ReporteConceptos_entidad: TQRLabel;
+    QRBandDetalle: TQRBand;
+    QRDBText30: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRChildBand2: TQRChildBand;
+    QRLabel27: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRLabel18: TQRLabel;
+    QRBand7: TQRBand;
+    QRLabel35: TQRLabel;
+    QRlblFechaHoy: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRSysData2: TQRSysData;
+    QRBand1: TQRBand;
+    QRExpr15: TQRExpr;
+    EKVistaPrevia: TEKVistaPreviaQR;
+    btnImprimir: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
@@ -56,6 +82,7 @@ type
     procedure bt_salirClick(Sender: TObject);
     procedure GrillaDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -252,6 +279,16 @@ begin
        Grilla.DefaultDrawColumnCell(rect,datacol,column,state);
     end;
 
+end;
+
+procedure TFConceptos.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_IE_Conceptos.IsEmpty then
+    exit;
+
+  QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+
+  EKVistaPrevia.VistaPrevia;
 end;
 
 end.

@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
-  EKBusquedaAvanzada, StdCtrls, EKDbSuma;
+  EKBusquedaAvanzada, StdCtrls, EKDbSuma, QuickRpt, QRCtrls,
+  EKVistaPreviaQR;
 
 type
   TFListadoErogaciones = class(TForm)
@@ -91,6 +92,56 @@ type
     pResumen: TPanel;
     EKDbSuma: TEKDbSuma;
     lblSaldo: TLabel;
+    ReporteErogaciones: TQuickRep;
+    QRBand5: TQRBand;
+    QRLabel41: TQRLabel;
+    QRDBImage1: TQRDBImage;
+    QRLabel11: TQRLabel;
+    ReporteErogaciones_direccion: TQRLabel;
+    ReporteErogaciones_entidad: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRlblErogaciones_FDesde: TQRLabel;
+    QRlblErogaciones_FHasta: TQRLabel;
+    QRlblErogaciones_Cuenta: TQRLabel;
+    QRBandDetalle: TQRBand;
+    QRDBText5: TQRDBText;
+    QRDBText13: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRDBText30: TQRDBText;
+    QRChildBand2: TQRChildBand;
+    QRLabel18: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRBand7: TQRBand;
+    QRLabel35: TQRLabel;
+    QRlblFechaHoy: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRSysData2: TQRSysData;
+    QRBand8: TQRBand;
+    QRGroup1: TQRGroup;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRBandGroup1Footer: TQRBand;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    EKVistaPrevia: TEKVistaPreviaQR;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRlblTotalDiferidos: TQRLabel;
+    QRlblTotalCorrientes: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -101,6 +152,7 @@ type
       State: TGridDrawState);
     procedure btnSalirClick(Sender: TObject);
     procedure EKDbSumaSumListChanged(Sender: TObject);
+    procedure btImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -233,6 +285,28 @@ begin
   corriente:= EKDbSuma.SumCollection[0].SumValue;
   diferido:= EKDbSuma.SumCollection[1].SumValue;
   lblSaldo.Caption:= 'TOTAL DIFERIDO = '+ FormatFloat('$ ###,###,##0.00', diferido)+'    /    TOTAL CORRIENTE = '+ FormatFloat('$ ###,###,##0.00', corriente);
+end;
+
+procedure TFListadoErogaciones.btImprimirClick(Sender: TObject);
+var
+  diferido, corriente: Real;
+begin
+  if ZQ_Libro_erogaciones.IsEmpty then
+    exit;
+
+  corriente:= EKDbSuma.SumCollection[0].SumValue;
+  diferido:= EKDbSuma.SumCollection[1].SumValue;
+
+  QRlblErogaciones_Cuenta.Caption:= lblNombreCuenta.Caption;
+  QRlblErogaciones_FDesde.Caption:= lblFechaDesde.Caption;
+  QRlblErogaciones_FHasta.Caption:= lblFechaHasta.Caption;
+
+  QRlblTotalDiferidos.Caption:= FormatFloat('$ ###,###,##0.00', diferido);
+  QRlblTotalCorrientes.Caption:= FormatFloat('$ ###,###,##0.00', corriente);
+
+  QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+
+  EKVistaPrevia.VistaPrevia;
 end;
 
 end.

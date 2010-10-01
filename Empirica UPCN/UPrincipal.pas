@@ -18,7 +18,6 @@ type
     PlandeCuentas: TMenuItem;
     CambiarContrasea1: TMenuItem;
     Salir2: TMenuItem;
-    Cierres: TMenuItem;
     Disponibilidades: TMenuItem;
     Movimientos: TMenuItem;
     EKVentanas1: TEKVentanas;
@@ -28,7 +27,6 @@ type
     Conciliacion1: TMenuItem;
     ABMProveedores1: TMenuItem;
     ABMMovimientos1: TMenuItem;
-    Balance1: TMenuItem;
     Reportes1: TMenuItem;
     Disponibilidades1: TMenuItem;
     AConfiguracion: TAction;
@@ -41,10 +39,13 @@ type
     AConceptos: TAction;
     AMovimientos: TAction;
     ASaldoInicial: TAction;
-    ARep_Disponibilidad: TAction;
+    ARep_LibroBanco: TAction;
     ListadoErogaciones1: TMenuItem;
-    AListado_Erogaciones: TAction;
-    AConciliacion: TAction;
+    ARepListado_Erogaciones: TAction;
+    ARep_Conciliacion: TAction;
+    ARep_SaldoInicial: TAction;
+    Sal1: TMenuItem;
+    Proveedores1: TMenuItem;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -55,9 +56,9 @@ type
     procedure AConceptosExecute(Sender: TObject);
     procedure AMovimientosExecute(Sender: TObject);
     procedure ASaldoInicialExecute(Sender: TObject);
-    procedure ARep_DisponibilidadExecute(Sender: TObject);
-    procedure AListado_ErogacionesExecute(Sender: TObject);
-    procedure AConciliacionExecute(Sender: TObject);
+    procedure ARep_LibroBancoExecute(Sender: TObject);
+    procedure ARepListado_ErogacionesExecute(Sender: TObject);
+    procedure ARep_ConciliacionExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -141,17 +142,17 @@ begin
   EKVentanas1.Abrir(Sender, TFSaldoInicial, FSaldoInicial);
 end;
 
-procedure TFPrincipal.ARep_DisponibilidadExecute(Sender: TObject);
+procedure TFPrincipal.ARep_LibroBancoExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFReportes_Disponibilidades, FReportes_Disponibilidades);
 end;
 
-procedure TFPrincipal.AListado_ErogacionesExecute(Sender: TObject);
+procedure TFPrincipal.ARepListado_ErogacionesExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFListadoErogaciones, FListadoErogaciones);
 end;
 
-procedure TFPrincipal.AConciliacionExecute(Sender: TObject);
+procedure TFPrincipal.ARep_ConciliacionExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFConciliacion, FConciliacion);
 end;

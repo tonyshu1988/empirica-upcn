@@ -399,10 +399,6 @@ object FSaldoInicial: TFSaldoInicial
           end
           item
             BeginGroup = True
-            Item = btnImprimir
-            Visible = True
-          end
-          item
             Item = btnSalir
             Visible = True
           end>
