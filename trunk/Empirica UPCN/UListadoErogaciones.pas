@@ -284,8 +284,9 @@ var
 begin
   corriente:= EKDbSuma.SumCollection[0].SumValue;
   diferido:= EKDbSuma.SumCollection[1].SumValue;
-  lblSaldo.Caption:= 'TOTAL DIFERIDO = '+ FormatFloat('$ ###,###,##0.00', diferido)+'    /    TOTAL CORRIENTE = '+ FormatFloat('$ ###,###,##0.00', corriente);
+  lblSaldo.Caption:= 'TOTAL DIFERIDO: '+ FormatFloat('$ ###,###,##0.00', diferido)+'    /    TOTAL CORRIENTE: '+ FormatFloat('$ ###,###,##0.00', corriente);
 end;
+
 
 procedure TFListadoErogaciones.btImprimirClick(Sender: TObject);
 var

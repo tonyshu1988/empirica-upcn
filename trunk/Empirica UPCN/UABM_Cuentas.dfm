@@ -15,6 +15,7 @@ object FABM_Cuentas: TFABM_Cuentas
   Position = poDefault
   Scaled = False
   Visible = True
+  WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
