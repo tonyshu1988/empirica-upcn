@@ -24,3 +24,6 @@ CONCILIACION
 LISTADO EROGACION
 	*
 	
+	
+* Ver cuando entramos a la pantalla de movimientos que no clava el id_tipo_movimiento
+	

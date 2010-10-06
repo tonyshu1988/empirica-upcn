@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls, DBCtrls, Mask,
-  QuickRpt, EKVistaPreviaQR, QRCtrls;
+  QuickRpt, EKVistaPreviaQR, QRCtrls, EKOrdenarGrilla;
 
 type
   TFABM_Cuentas = class(TForm)
@@ -74,6 +74,7 @@ type
     QRBand1: TQRBand;
     QRExpr15: TQRExpr;
     QRLabel2: TQRLabel;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -85,6 +86,7 @@ type
     procedure btnVerDetalleClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     function  validarDatos(): boolean;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -201,6 +203,7 @@ end;
 
 procedure TFABM_Cuentas.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColunmas;
   dm.ekModelo.abrir(ZQ_Cuentas);
   dm.ekModelo.abrir(ZQ_Medios);
 end;
@@ -256,6 +259,12 @@ begin
       result:= false;
       exit;
    end;
+end;
+
+procedure TFABM_Cuentas.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

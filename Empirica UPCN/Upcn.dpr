@@ -1,5 +1,5 @@
 program Upcn;
-//156986918
+
 uses
   Forms,
   UPrincipal in 'UPrincipal.pas' {FPrincipal},

@@ -7,7 +7,7 @@ uses
   Dialogs, EKListadoSQL, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Mask, DBCtrls, StdCtrls, ComCtrls, ISDBEditDateTimePicker,
   dxBar, dxBarExtItems, Grids, DBGrids, ExtCtrls, EKDBDateTimePicker,
-  ZStoredProcedure;
+  ZStoredProcedure, EKOrdenarGrilla;
 
 type
   TFSaldoInicial = class(TForm)
@@ -117,6 +117,7 @@ type
     ZQ_VerSaldosnombreMedio: TStringField;
     ZQ_BuscarMov: TZQuery;
     ZQ_BuscarMovNRO_MOVIMIENTO: TIntegerField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -132,6 +133,7 @@ type
       State: TGridDrawState);
     procedure FormCreate(Sender: TObject);
     procedure ZQ_VerSaldosAfterScroll(DataSet: TDataSet);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -350,6 +352,7 @@ end;
 
 procedure TFSaldoInicial.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_CuentaIngreso);
   dm.EKModelo.abrir(ZQ_VerSaldos);
   dm.EKModelo.abrir(ZQ_Medio);
@@ -371,6 +374,12 @@ begin
     btnModificar.Enabled:= true;
     btnEliminar.Enabled:= true;
   end;
+end;
+
+procedure TFSaldoInicial.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

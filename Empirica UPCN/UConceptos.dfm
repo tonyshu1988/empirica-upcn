@@ -15,6 +15,7 @@ object FConceptos: TFConceptos
   Position = poDefault
   Scaled = False
   Visible = True
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -1256,6 +1257,14 @@ object FConceptos: TFConceptos
     Reporte = ReporteConceptos
     ShowModal = False
     Left = 72
+    Top = 80
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = Grilla
+    FuenteNormal = []
+    NombreGuardarConfig = 'UConceptos'
+    Ordenar = True
+    Left = 552
     Top = 80
   end
 end

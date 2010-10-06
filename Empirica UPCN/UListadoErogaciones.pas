@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
   EKBusquedaAvanzada, StdCtrls, EKDbSuma, QuickRpt, QRCtrls,
-  EKVistaPreviaQR;
+  EKVistaPreviaQR, EKOrdenarGrilla;
 
 type
   TFListadoErogaciones = class(TForm)
@@ -124,10 +124,6 @@ type
     QRDBText1: TQRDBText;
     QRDBText2: TQRDBText;
     QRDBText3: TQRDBText;
-    QRLabel2: TQRLabel;
-    QRLabel4: TQRLabel;
-    QRLabel5: TQRLabel;
-    QRLabel6: TQRLabel;
     QRDBText4: TQRDBText;
     QRDBText6: TQRDBText;
     QRBandGroup1Footer: TQRBand;
@@ -138,10 +134,11 @@ type
     QRDBText7: TQRDBText;
     QRDBText8: TQRDBText;
     EKVistaPrevia: TEKVistaPreviaQR;
-    QRLabel9: TQRLabel;
-    QRLabel10: TQRLabel;
     QRlblTotalDiferidos: TQRLabel;
     QRlblTotalCorrientes: TQRLabel;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -153,6 +150,7 @@ type
     procedure btnSalirClick(Sender: TObject);
     procedure EKDbSumaSumListChanged(Sender: TObject);
     procedure btImprimirClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -183,6 +181,7 @@ end;
 
 procedure TFListadoErogaciones.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_Libro_erogaciones);
   dm.EKModelo.abrir(ZQ_Cuentas);
   TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[1]).ItemIndex:= MonthOf(DM.EKModelo.Fecha)-1;
@@ -308,6 +307,12 @@ begin
   QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
 
   EKVistaPrevia.VistaPrevia;
+end;
+
+procedure TFListadoErogaciones.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

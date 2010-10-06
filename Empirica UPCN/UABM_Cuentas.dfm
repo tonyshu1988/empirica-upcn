@@ -16,6 +16,7 @@ object FABM_Cuentas: TFABM_Cuentas
   Scaled = False
   Visible = True
   WindowState = wsMaximized
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -1256,5 +1257,13 @@ object FABM_Cuentas: TFABM_Cuentas
     VerExpWord = False
     Left = 40
     Top = 312
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = dbGridCuentas
+    FuenteNormal = []
+    NombreGuardarConfig = 'UABM_Cuentas'
+    Ordenar = True
+    Left = 152
+    Top = 40
   end
 end
