@@ -1,6 +1,6 @@
 object FReportes_Disponibilidades: TFReportes_Disponibilidades
-  Left = 268
-  Top = 176
+  Left = 261
+  Top = 188
   Width = 1022
   Height = 576
   Caption = 'Reportes Disponibilidades'
@@ -15,6 +15,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   Position = poDefault
   Scaled = False
   Visible = True
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -133,190 +134,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       BevelOuter = bvNone
       BorderWidth = 3
       TabOrder = 0
-      object DBGridLibroBanco: TDBGrid
-        Left = 3
-        Top = 33
-        Width = 998
-        Height = 448
-        Align = alClient
-        Color = 16772842
-        DataSource = DS_LIBRO_BANCO
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'ID_MOVIMIENTO'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FECHA'
-            Title.Caption = 'Fecha Emi'
-            Width = 68
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FECHA_PD'
-            Title.Caption = 'Fecha PD'
-            Width = 68
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NRO_PAGO_REC'
-            Title.Caption = 'Nro Movimiento'
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'MEDIO'
-            Title.Caption = 'Medio'
-            Width = 109
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NRO_MEDIO'
-            Title.Caption = 'Nro medio'
-            Width = 109
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TIPO_MOV'
-            Title.Caption = 'Tipo Movimiento'
-            Width = 106
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DESCRIPCION'
-            Title.Caption = 'Proveedor'
-            Width = 200
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE_CONCEPTO'
-            Title.Caption = 'Concepto'
-            Width = 200
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FECHA_FR'
-            Title.Caption = 'Fecha F/R'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NRO_FAC_REC'
-            Title.Caption = 'Nro F/R'
-            Width = 80
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DEBE'
-            Title.Caption = 'Debe'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'HABER'
-            Title.Caption = 'Haber'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SALDO'
-            Title.Caption = 'Saldo'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'CONCILIADO'
-            Title.Caption = 'Conciliado'
-            Visible = True
-          end>
-      end
-      object Panel1: TPanel
-        Left = 3
-        Top = 3
-        Width = 998
-        Height = 30
-        Align = alTop
-        BevelOuter = bvNone
-        TabOrder = 1
-        DesignSize = (
-          998
-          30)
-        object Shape1: TShape
-          Left = 1
-          Top = 5
-          Width = 994
-          Height = 22
-          Anchors = [akLeft, akTop, akRight]
-          Brush.Color = clGray
-          Pen.Color = clGray
-          Shape = stRoundRect
-        end
-        object Shape2: TShape
-          Left = 3
-          Top = 3
-          Width = 994
-          Height = 22
-          Anchors = [akLeft, akTop, akRight]
-          Brush.Color = clTeal
-          Shape = stRoundRect
-        end
-        object Label2: TLabel
-          Left = 0
-          Top = 7
-          Width = 997
-          Height = 18
-          Alignment = taCenter
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'LIBRO BANCO'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-        end
-        object Label1: TLabel
-          Left = 1
-          Top = 6
-          Width = 997
-          Height = 18
-          Alignment = taCenter
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'LIBRO BANCO'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clInfoBk
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-        end
-      end
       object ReporteLibroBanco: TQuickRep
         Tag = 99
-        Left = 105
-        Top = 54
+        Left = 113
+        Top = 166
         Width = 1123
         Height = 794
         Frame.Color = clBlack
@@ -1495,6 +1316,243 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           end
         end
       end
+      object DBGridLibroBanco: TDBGrid
+        Left = 3
+        Top = 49
+        Width = 998
+        Height = 432
+        Align = alClient
+        Color = 16772842
+        DataSource = DS_LIBRO_BANCO
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridLibroBancoDrawColumnCell
+        Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'FECHA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Fecha Emi'
+            Width = 68
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'FECHA_PD'
+            Title.Alignment = taCenter
+            Title.Caption = 'Fecha PD'
+            Width = 68
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NRO_PAGO_REC'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nro Movimiento'
+            Width = 100
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'ORDEN'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nro Orden Pago'
+            Width = 91
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MEDIO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Medio'
+            Width = 109
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'NRO_MEDIO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nro Cheque/Transf'
+            Width = 109
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TIPO_MOV'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tipo Movimiento'
+            Width = 106
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DESCRIPCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Proveedor'
+            Width = 200
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_CONCEPTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Concepto'
+            Width = 200
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'NRO_FAC_REC'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nro F/R'
+            Width = 80
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'OTROS'
+            Title.Alignment = taCenter
+            Title.Caption = 'Otros'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DEBE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Debe'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'HABER'
+            Title.Alignment = taCenter
+            Title.Caption = 'Haber'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SALDO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Saldo'
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'CONCILIADO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Conciliado'
+            Visible = True
+          end>
+      end
+      object Panel1: TPanel
+        Left = 3
+        Top = 3
+        Width = 998
+        Height = 46
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 1
+        DesignSize = (
+          998
+          46)
+        object Shape1: TShape
+          Left = 1
+          Top = 5
+          Width = 994
+          Height = 22
+          Anchors = [akLeft, akTop, akRight]
+          Brush.Color = clGray
+          Pen.Color = clGray
+          Shape = stRoundRect
+        end
+        object Shape2: TShape
+          Left = 3
+          Top = 3
+          Width = 994
+          Height = 22
+          Anchors = [akLeft, akTop, akRight]
+          Brush.Color = clTeal
+          Shape = stRoundRect
+        end
+        object Label2: TLabel
+          Left = 0
+          Top = 7
+          Width = 997
+          Height = 18
+          Alignment = taCenter
+          Anchors = [akLeft, akTop, akRight]
+          AutoSize = False
+          Caption = 'LIBRO BANCO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+        end
+        object Label1: TLabel
+          Left = 1
+          Top = 6
+          Width = 997
+          Height = 18
+          Alignment = taCenter
+          Anchors = [akLeft, akTop, akRight]
+          AutoSize = False
+          Caption = 'LIBRO BANCO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clInfoBk
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+        end
+        object StaticTextAnulado: TStaticText
+          Left = 872
+          Top = 30
+          Width = 57
+          Height = 17
+          Caption = 'Anulado'
+          Color = 8421631
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 0
+        end
+        object StaticTextConciliado: TStaticText
+          Left = 929
+          Top = 30
+          Width = 71
+          Height = 17
+          Caption = 'Conciliado'
+          Color = 10354687
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 1
+        end
+      end
     end
   end
   object dxBarABM: TdxBarManager
@@ -1645,8 +1703,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 792
-    Top = 16
+    Left = 784
+    Top = 80
     DockControlHeights = (
       0
       0
@@ -1765,6 +1823,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     end
     object LIBRO_BANCOORDEN: TIntegerField
       FieldName = 'ORDEN'
+      DisplayFormat = '00000000'
     end
     object LIBRO_BANCOFECHA: TDateField
       FieldName = 'FECHA'
@@ -1786,12 +1845,15 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     end
     object LIBRO_BANCODEBE: TFloatField
       FieldName = 'DEBE'
+      currency = True
     end
     object LIBRO_BANCOHABER: TFloatField
       FieldName = 'HABER'
+      currency = True
     end
     object LIBRO_BANCOSALDO: TFloatField
       FieldName = 'SALDO'
+      currency = True
     end
     object LIBRO_BANCODESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
@@ -1812,12 +1874,22 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     object LIBRO_BANCOFECHA_PD: TDateField
       FieldName = 'FECHA_PD'
     end
-    object LIBRO_BANCOFECHA_FR: TDateField
-      FieldName = 'FECHA_FR'
+    object LIBRO_BANCOOTROS: TStringField
+      FieldName = 'OTROS'
+      Size = 40
     end
     object LIBRO_BANCONRO_FAC_REC: TStringField
       FieldName = 'NRO_FAC_REC'
       Size = 30
+    end
+    object LIBRO_BANCONRO_ORDEN: TIntegerField
+      FieldName = 'NRO_ORDEN'
+    end
+    object LIBRO_BANCOFECHA_CONCILIADO: TDateField
+      FieldName = 'FECHA_CONCILIADO'
+    end
+    object LIBRO_BANCOID_MEDIO: TIntegerField
+      FieldName = 'ID_MEDIO'
     end
   end
   object DS_LIBRO_BANCO: TDataSource
@@ -1930,5 +2002,13 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     Caption = 'Reporte de Libro Banco'
     Left = 162
     Top = 343
+  end
+  object EKOrdenarGrillaLB: TEKOrdenarGrilla
+    Grilla = DBGridLibroBanco
+    FuenteNormal = []
+    NombreGuardarConfig = 'UR_DisponibilidadesLB'
+    Ordenar = False
+    Left = 41
+    Top = 297
   end
 end

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, StdCtrls, DBCtrls, Mask, ExtCtrls, Grids,
   DBGrids, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
-  EKBusquedaAvanzada, QuickRpt, QRCtrls, EKVistaPreviaQR;
+  EKBusquedaAvanzada, QuickRpt, QRCtrls, EKVistaPreviaQR, EKOrdenarGrilla;
 
 type
   TFABMProveedores = class(TForm)
@@ -84,6 +84,7 @@ type
     ZQ_TipoDocumentoTIPO_DOCUMENTO: TIntegerField;
     ZQ_TipoDocumentoDESCRIPCION: TStringField;
     ZQ_IE_ProveedoresTIPO_DOCUMENTO: TStringField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -99,6 +100,7 @@ type
       State: TGridDrawState);
     procedure btImprimirClick(Sender: TObject);
     function validarcampos():boolean;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -235,8 +237,9 @@ end;
 
 procedure TFABMProveedores.FormCreate(Sender: TObject);
 begin
-dm.EKModelo.abrir(ZQ_TipoDocumento);
-EKBusquedaAvanzada1.Abrir;
+  EKOrdenarGrilla1.CargarConfigColunmas;
+  dm.EKModelo.abrir(ZQ_TipoDocumento);
+  EKBusquedaAvanzada1.Abrir;
 end;
 
 procedure TFABMProveedores.DBGridProveedoresDrawColumnCell(Sender: TObject;
@@ -295,6 +298,12 @@ result := true;
       exit;
     end;
 
+end;
+
+procedure TFABMProveedores.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

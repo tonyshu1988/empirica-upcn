@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, StdCtrls, ExtCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZStoredProcedure,
-  EKBusquedaAvanzada, EKDbSuma, QuickRpt, QRCtrls, EKVistaPreviaQR;
+  EKBusquedaAvanzada, EKDbSuma, QuickRpt, QRCtrls, EKVistaPreviaQR,
+  EKOrdenarGrilla;
 
 type
   TFConciliacion = class(TForm)
@@ -125,10 +126,13 @@ type
     qrSaldoLibroBanco: TQRLabel;
     QRLabel1: TQRLabel;
     QRDBText1: TQRDBText;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
     procedure btImprimirClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnSalirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -146,7 +150,7 @@ uses UDM;
 
 procedure TFConciliacion.FormCreate(Sender: TObject);
 begin
-
+  EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_Cuentas);
 //  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[1]).Valor := DateToStr(StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha)));
 //  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[2]).Valor := DateToStr(EndOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha)));
@@ -231,6 +235,17 @@ begin
   QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
 
   EKVistaPreviaQR1.VistaPrevia;
+end;
+
+procedure TFConciliacion.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
+end;
+
+procedure TFConciliacion.btnSalirClick(Sender: TObject);
+begin
+  close;
 end;
 
 end.

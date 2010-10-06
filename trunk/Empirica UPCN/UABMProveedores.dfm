@@ -16,6 +16,7 @@ object FABMProveedores: TFABMProveedores
   Scaled = False
   Visible = True
   WindowState = wsMaximized
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -1469,5 +1470,13 @@ object FABMProveedores: TFABMProveedores
     ShowModal = False
     Left = 256
     Top = 96
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridProveedores
+    FuenteNormal = []
+    NombreGuardarConfig = 'UABMProveedores'
+    Ordenar = True
+    Left = 80
+    Top = 160
   end
 end

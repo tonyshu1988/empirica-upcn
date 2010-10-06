@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Grids, DBGrids, ExtCtrls, EKBusquedaAvanzada, StdCtrls,
-  QRCtrls, QuickRpt, EKVistaPreviaQR;
+  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla;
 
 type
   TFReportes_Disponibilidades = class(TForm)
@@ -33,23 +33,6 @@ type
     ZQ_CuentasAUTONUMERAR: TStringField;
     ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField;
     ZQ_CuentasBUSQUEDA: TStringField;
-    LIBRO_BANCOID_MOVIMIENTO: TIntegerField;
-    LIBRO_BANCOORDEN: TIntegerField;
-    LIBRO_BANCOFECHA: TDateField;
-    LIBRO_BANCOMOVIMIENTO: TStringField;
-    LIBRO_BANCONRO_PAGO_REC: TIntegerField;
-    LIBRO_BANCOMEDIO: TStringField;
-    LIBRO_BANCONRO_MEDIO: TStringField;
-    LIBRO_BANCODEBE: TFloatField;
-    LIBRO_BANCOHABER: TFloatField;
-    LIBRO_BANCOSALDO: TFloatField;
-    LIBRO_BANCODESCRIPCION: TStringField;
-    LIBRO_BANCOCONCILIADO: TStringField;
-    LIBRO_BANCONOMBRE_CONCEPTO: TStringField;
-    LIBRO_BANCOTIPO_MOV: TStringField;
-    LIBRO_BANCOFECHA_PD: TDateField;
-    LIBRO_BANCOFECHA_FR: TDateField;
-    LIBRO_BANCONRO_FAC_REC: TStringField;
     EKBAvanzadaLibroBco: TEKBusquedaAvanzada;
     pLibroBanco: TPanel;
     pSaldoCta: TPanel;
@@ -106,12 +89,39 @@ type
     QRlblFechaHoyLibroBanco: TQRLabel;
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
+    LIBRO_BANCOID_MOVIMIENTO: TIntegerField;
+    LIBRO_BANCOORDEN: TIntegerField;
+    LIBRO_BANCOFECHA: TDateField;
+    LIBRO_BANCOMOVIMIENTO: TStringField;
+    LIBRO_BANCONRO_PAGO_REC: TIntegerField;
+    LIBRO_BANCOMEDIO: TStringField;
+    LIBRO_BANCONRO_MEDIO: TStringField;
+    LIBRO_BANCODEBE: TFloatField;
+    LIBRO_BANCOHABER: TFloatField;
+    LIBRO_BANCOSALDO: TFloatField;
+    LIBRO_BANCODESCRIPCION: TStringField;
+    LIBRO_BANCOCONCILIADO: TStringField;
+    LIBRO_BANCONOMBRE_CONCEPTO: TStringField;
+    LIBRO_BANCOTIPO_MOV: TStringField;
+    LIBRO_BANCOFECHA_PD: TDateField;
+    LIBRO_BANCOOTROS: TStringField;
+    LIBRO_BANCONRO_FAC_REC: TStringField;
+    LIBRO_BANCONRO_ORDEN: TIntegerField;
+    LIBRO_BANCOFECHA_CONCILIADO: TDateField;
+    LIBRO_BANCOID_MEDIO: TIntegerField;
+    StaticTextAnulado: TStaticText;
+    StaticTextConciliado: TStaticText;
+    EKOrdenarGrillaLB: TEKOrdenarGrilla;
     procedure btnLibroBancoClick(Sender: TObject);
     function  validarDatos():boolean;
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSaldoCuentaClick(Sender: TObject);
     procedure btImprimirClick(Sender: TObject);
+    procedure DBGridLibroBancoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -138,10 +148,16 @@ end;
 
 
 procedure TFReportes_Disponibilidades.FormCreate(Sender: TObject);
+var
+  fecha: tdate;
 begin
+  EKOrdenarGrillaLB.CargarConfigColunmas;
   reporte:= -1;
   pTapa.BringToFront;
-  //
+
+  fecha:= StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha));
+  TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[1]).Valor := DateToStr(fecha);
+  TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.Fecha);
 end;
 
 function TFReportes_Disponibilidades.validarDatos():boolean;
@@ -213,15 +229,9 @@ end;
 
 
 procedure TFReportes_Disponibilidades.btnLibroBancoClick(Sender: TObject);
-var
-  fecha: tdate;
 begin
   reporte:= LIBRO_BCO;
   pLibroBanco.BringToFront;
-
-  fecha:= StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha));
-  TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[1]).Valor := DateToStr(fecha);
-  TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.Fecha);
 
   if EKBAvanzadaLibroBco.BuscarSinEjecutar then
   begin
@@ -265,6 +275,79 @@ begin
     EKVistaPrevia_LibroBco.VistaPrevia;
   end;
 
+end;
+
+procedure TFReportes_Disponibilidades.DBGridLibroBancoDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if not LIBRO_BANCO.IsEmpty then
+  begin
+     if LIBRO_BANCOMEDIO.AsString = 'CHEQUE' then
+     begin
+       if (LIBRO_BANCOCONCILIADO.Value = 'S') and (LIBRO_BANCOFECHA_CONCILIADO.AsDateTime < StrToDate(EKBAvanzadaLibroBco.ParametrosSeleccionados1[2])) then
+          begin
+           DBGridLibroBanco.Canvas.Brush.Color :=StaticTextConciliado.Brush.Color;
+           DBGridLibroBanco.Canvas.Font.Color := clBlack;
+           if (gdFocused in State) or (gdSelected in State) then
+             begin
+             DBGridLibroBanco.Canvas.Font.Color := clBlack;
+             DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+             end
+          end
+       else
+          begin
+            if (gdFocused in State) or (gdSelected in State) then
+             begin
+               DBGridLibroBanco.Canvas.Font.Color := clwhite;
+               DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
+               DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+             end;
+          end;
+
+       if ((LIBRO_BANCODEBE.IsNull) and (LIBRO_BANCOHABER.Value = 0)) or ((LIBRO_BANCOHABER.IsNull) and (LIBRO_BANCODEBE.Value = 0)) then
+       begin
+         DBGridLibroBanco.Canvas.Brush.Color :=StaticTextAnulado.Brush.Color;
+         DBGridLibroBanco.Canvas.Font.Color := clBlack;
+         if (gdFocused in State) or (gdSelected in State) then
+         begin
+           DBGridLibroBanco.Canvas.Font.Color := clBlack;
+           DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+         end
+       end;
+
+       DBGridLibroBanco.DefaultDrawColumnCell(rect,datacol,column,state);
+     end
+     else  // if LIBRO_BANCOMEDIO.AsString <> 'CHEQUE' then
+     begin
+       if ((LIBRO_BANCODEBE.IsNull) and (LIBRO_BANCOHABER.Value = 0)) or ((LIBRO_BANCOHABER.IsNull) and (LIBRO_BANCODEBE.Value = 0)) then
+       begin
+         DBGridLibroBanco.Canvas.Brush.Color :=StaticTextAnulado.Brush.Color;
+         DBGridLibroBanco.Canvas.Font.Color := clBlack;
+         if (gdFocused in State) or (gdSelected in State) then
+         begin
+           DBGridLibroBanco.Canvas.Font.Color := clBlack;
+           DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+         end;
+         DBGridLibroBanco.DefaultDrawColumnCell(rect,datacol,column,state);
+       end
+       else
+       begin
+         if (gdFocused in State) or (gdSelected in State) then
+         begin
+           DBGridLibroBanco.Canvas.Font.Color := clwhite;
+           DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
+           DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+         end;
+       end;
+     end;
+  end;
+end;
+
+procedure TFReportes_Disponibilidades.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrillaLB.GuardarConfigColumnas;
 end;
 
 end.

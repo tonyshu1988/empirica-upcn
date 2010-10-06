@@ -15,6 +15,7 @@ object FSaldoInicial: TFSaldoInicial
   Position = poDesktopCenter
   Scaled = False
   Visible = True
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -210,6 +211,7 @@ object FSaldoInicial: TFSaldoInicial
       OnDrawColumnCell = DBGridSaldosInicialesDrawColumnCell
       Columns = <
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'FECHA'
           Title.Alignment = taCenter
@@ -234,6 +236,7 @@ object FSaldoInicial: TFSaldoInicial
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'FECHA_MDC'
           Title.Alignment = taCenter
@@ -242,11 +245,12 @@ object FSaldoInicial: TFSaldoInicial
           Visible = True
         end
         item
+          Alignment = taRightJustify
           Expanded = False
           FieldName = 'NRO_CHEQUE_TRANSF'
           Title.Alignment = taCenter
-          Title.Caption = 'Nro Medio'
-          Width = 105
+          Title.Caption = 'Nro Cheque/Transf.'
+          Width = 125
           Visible = True
         end
         item
@@ -946,5 +950,13 @@ object FSaldoInicial: TFSaldoInicial
       FieldName = 'NRO_MOVIMIENTO'
       Required = True
     end
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridSaldosIniciales
+    FuenteNormal = []
+    NombreGuardarConfig = 'USaldoInicial'
+    Ordenar = False
+    Left = 224
+    Top = 232
   end
 end

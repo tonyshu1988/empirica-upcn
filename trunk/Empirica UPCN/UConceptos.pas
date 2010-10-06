@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, ComCtrls, dxtree, dxdbtree, StdCtrls,
   ExtCtrls, DBCtrls, Mask, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, EKListadoSQL, Grids, DBGrids, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+  EKVistaPreviaQR, QRCtrls, QuickRpt, EKOrdenarGrilla;
 
 type
   TFConceptos = class(TForm)
@@ -69,6 +69,7 @@ type
     QRExpr15: TQRExpr;
     EKVistaPrevia: TEKVistaPreviaQR;
     btnImprimir: TdxBarLargeButton;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure FormCreate(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
@@ -83,6 +84,7 @@ type
     procedure GrillaDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnImprimirClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -102,7 +104,8 @@ uses UDM;
 
 procedure TFConceptos.FormCreate(Sender: TObject);
 begin
-dm.EKModelo.abrir(ZQ_IE_Conceptos);
+  EKOrdenarGrilla1.CargarConfigColunmas;
+  dm.EKModelo.abrir(ZQ_IE_Conceptos);
 end;
 
 procedure TFConceptos.btBuscarClick(Sender: TObject);
@@ -289,6 +292,11 @@ begin
   QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
 
   EKVistaPrevia.VistaPrevia;
+end;
+
+procedure TFConceptos.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

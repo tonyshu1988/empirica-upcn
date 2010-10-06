@@ -1,8 +1,8 @@
 object FConciliacion: TFConciliacion
-  Left = 145
-  Top = 137
+  Left = 109
+  Top = 57
   Width = 1142
-  Height = 625
+  Height = 681
   Caption = 'Conciliaci'#243'n Bancaria'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -16,6 +16,7 @@ object FConciliacion: TFConciliacion
   Scaled = False
   Visible = True
   WindowState = wsMaximized
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -23,7 +24,7 @@ object FConciliacion: TFConciliacion
     Left = 0
     Top = 0
     Width = 1126
-    Height = 535
+    Height = 591
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -1052,7 +1053,7 @@ object FConciliacion: TFConciliacion
       Left = 3
       Top = 56
       Width = 1120
-      Height = 445
+      Height = 501
       Align = alClient
       Color = 16763323
       DataSource = DS_Conciliacion
@@ -1257,7 +1258,7 @@ object FConciliacion: TFConciliacion
     end
     object Panel1: TPanel
       Left = 3
-      Top = 501
+      Top = 557
       Width = 1120
       Height = 31
       Align = alBottom
@@ -1523,6 +1524,7 @@ object FConciliacion: TFConciliacion
       Hint = 'Salir'
       Visible = ivAlways
       ImageIndex = 6
+      OnClick = btnSalirClick
       AutoGrayScale = False
     end
     object btn2: TdxBarLargeButton
@@ -2251,5 +2253,13 @@ object FConciliacion: TFConciliacion
     VerExpImagen = False
     Left = 136
     Top = 96
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridListaErogacion
+    FuenteNormal = []
+    NombreGuardarConfig = 'UConciliacion'
+    Ordenar = False
+    Left = 176
+    Top = 160
   end
 end
