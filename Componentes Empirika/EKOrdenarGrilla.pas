@@ -15,6 +15,7 @@ type
     FFuenteNormal : TFontStyles;
     FFuenteOrdenado : TFontStyles;
     FFormContenedor : String;
+    FOrdenar : Boolean;
     procedure SetFOrdenar_Grilla(const Value: TDBGrid);
     procedure TitleClick(Column: TColumn);
     procedure DBGrid1PillaLaRueda(var Message: TMessage);
@@ -39,6 +40,8 @@ type
       FuenteOrdenado : TFontStyles read FFuenteOrdenado write FFuenteOrdenado default [fsBold,fsUnderline];
     Property
       NombreGuardarConfig : String read FFormContenedor write FFormContenedor;
+    property
+      Ordenar : Boolean read FOrdenar write FOrdenar;
   end;
 
 procedure Register;
@@ -59,6 +62,7 @@ begin
   inherited;
   FFuenteOrdenado := [fsBold,fsUnderline];
   FFuenteNormal := [];
+  FOrdenar:= true;
 end;
 
 procedure TEKOrdenarGrilla.DBGrid1PillaLaRueda(var Message: TMessage);
@@ -122,6 +126,9 @@ end;
 procedure TEKOrdenarGrilla.MouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
+  if not Ordenar then
+    exit;
+                     
   if y <= 15 then
   begin
     FOrdenar_Grilla.Hint := 'Click sobre el título para ordenar  -  CTRL para mas de un campo  -  SHIFT para buscar';
@@ -152,6 +159,10 @@ var
     buscar : string;
     PulsoOk : boolean;
 begin
+    if not Ordenar then
+      exit;
+
+
     if column.Field.FieldKind = fkLookup	then   // saco los lockup porque dan error
     begin
       ShowMessage('No se puede ordenar ni buscar sobre este tipo de campo (lookup)');
