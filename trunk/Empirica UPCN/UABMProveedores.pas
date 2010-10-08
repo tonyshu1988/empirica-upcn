@@ -85,6 +85,8 @@ type
     ZQ_TipoDocumentoDESCRIPCION: TStringField;
     ZQ_IE_ProveedoresTIPO_DOCUMENTO: TStringField;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    Label7: TLabel;
+    dbDatosAdic: TDBMemo;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);

@@ -25,21 +25,21 @@ object FABMProveedores: TFABMProveedores
     Left = 0
     Top = 0
     Width = 854
-    Height = 410
+    Height = 414
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
     object Panel_edicion: TPanel
       Left = 1
-      Top = 272
+      Top = 294
       Width = 852
-      Height = 137
+      Height = 119
       Align = alBottom
       Enabled = False
       TabOrder = 0
       object Label1: TLabel
-        Left = 15
-        Top = 21
+        Left = 10
+        Top = 11
         Width = 110
         Height = 13
         Caption = 'Nombre y Apellido:'
@@ -52,8 +52,8 @@ object FABMProveedores: TFABMProveedores
         Transparent = True
       end
       object Label2: TLabel
-        Left = 6
-        Top = 49
+        Left = 10
+        Top = 39
         Width = 119
         Height = 13
         Caption = 'Nombre de Fantas'#237'a:'
@@ -66,41 +66,49 @@ object FABMProveedores: TFABMProveedores
         Transparent = True
       end
       object Label16: TLabel
-        Left = 65
-        Top = 79
+        Left = 10
+        Top = 97
         Width = 60
         Height = 13
         Caption = 'Tel'#233'fonos:'
         Transparent = True
       end
       object Label5: TLabel
-        Left = 67
-        Top = 109
+        Left = 10
+        Top = 68
         Width = 58
         Height = 13
         Caption = 'Direcci'#243'n:'
         Transparent = True
       end
       object Label3: TLabel
-        Left = 466
-        Top = 22
+        Left = 430
+        Top = 11
         Width = 39
         Height = 13
         Caption = 'E-Mail:'
         Transparent = True
       end
       object Label6: TLabel
-        Left = 435
-        Top = 49
+        Left = 430
+        Top = 35
         Width = 70
         Height = 13
         Caption = 'Documento:'
         Transparent = True
       end
+      object Label7: TLabel
+        Left = 430
+        Top = 59
+        Width = 106
+        Height = 13
+        Caption = 'Datos Adicionales:'
+        Transparent = True
+      end
       object DBENombreApellido: TDBEdit
-        Left = 125
-        Top = 18
-        Width = 261
+        Left = 128
+        Top = 7
+        Width = 266
         Height = 21
         CharCase = ecUpperCase
         DataField = 'APELLIDO_Y_NOMBRE'
@@ -114,8 +122,8 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 0
       end
       object DBENombreFantasia: TDBEdit
-        Left = 125
-        Top = 46
+        Left = 133
+        Top = 35
         Width = 261
         Height = 21
         CharCase = ecUpperCase
@@ -130,9 +138,9 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 1
       end
       object DBETelefono: TDBEdit
-        Left = 125
-        Top = 76
-        Width = 261
+        Left = 81
+        Top = 93
+        Width = 313
         Height = 21
         CharCase = ecUpperCase
         DataField = 'TELEFONOS'
@@ -146,9 +154,9 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 2
       end
       object DBEDireccion: TDBEdit
-        Left = 125
-        Top = 106
-        Width = 261
+        Left = 73
+        Top = 64
+        Width = 321
         Height = 21
         CharCase = ecUpperCase
         DataField = 'DIRECCION'
@@ -162,9 +170,9 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 3
       end
       object DBENroDocumento: TDBEdit
-        Left = 655
-        Top = 44
-        Width = 148
+        Left = 619
+        Top = 31
+        Width = 188
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NRO_DOCUMENTO'
@@ -178,9 +186,9 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 6
       end
       object DBEEmail: TDBEdit
-        Left = 505
-        Top = 18
-        Width = 299
+        Left = 475
+        Top = 7
+        Width = 332
         Height = 21
         DataField = 'EMAIL'
         DataSource = DS_IE_Proveedores
@@ -193,9 +201,9 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 4
       end
       object DBLookupComboBox1: TDBLookupComboBox
-        Left = 505
-        Top = 45
-        Width = 147
+        Left = 509
+        Top = 31
+        Width = 104
         Height = 21
         DataField = 'TIPO_DOCUMENTO'
         DataSource = DS_IE_Proveedores
@@ -210,12 +218,25 @@ object FABMProveedores: TFABMProveedores
         ParentFont = False
         TabOrder = 5
       end
+      object dbDatosAdic: TDBMemo
+        Left = 430
+        Top = 77
+        Width = 377
+        Height = 37
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 7
+      end
     end
     object DBGridProveedores: TDBGrid
       Left = 1
       Top = 20
       Width = 852
-      Height = 252
+      Height = 274
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -297,7 +318,7 @@ object FABMProveedores: TFABMProveedores
         AutoSize = False
         BorderStyle = sbsSunken
         Caption = 'Dado de Baja'
-        Color = 6974207
+        Color = 11184895
         ParentColor = False
         TabOrder = 0
       end
