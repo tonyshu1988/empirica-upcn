@@ -54,10 +54,7 @@ type
     ZSP_LibroBancoDESCRIPCION: TStringField;
     ZSP_LibroBancoCONCILIADO: TStringField;
     ZSP_LibroBancoNOMBRE_CONCEPTO: TStringField;
-    ZSP_LibroBancoTIPO_MOV: TStringField;
     ZSP_LibroBancoFECHA_PD: TDateField;
-    ZSP_LibroBancoOTROS: TStringField;
-    ZSP_LibroBancoNRO_FAC_REC: TStringField;
     ZSP_LibroBancoNRO_ORDEN: TIntegerField;
     BuscarParametros: TEKBusquedaAvanzada;
     DS_LibroBanco: TDataSource;
@@ -77,9 +74,6 @@ type
     ZSP_ConciliacionCONCILIADO: TStringField;
     ZSP_ConciliacionNOMBRE_CONCEPTO: TStringField;
     ZSP_ConciliacionTIPO_MOV: TStringField;
-    ZSP_ConciliacionFECHA_PD: TDateField;
-    ZSP_ConciliacionOTROS: TStringField;
-    ZSP_ConciliacionNRO_FAC_REC: TStringField;
     ZSP_ConciliacionNRO_ORDEN: TIntegerField;
     Panel1: TPanel;
     Label6: TLabel;
@@ -87,8 +81,6 @@ type
     EKDbSuma1: TEKDbSuma;
     Label7: TLabel;
     lblSaldoConciliacion: TLabel;
-    Label8: TLabel;
-    lblFdesde: TLabel;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
     Label5: TLabel;
     lblSaldo: TLabel;
@@ -127,6 +119,15 @@ type
     QRLabel1: TQRLabel;
     QRDBText1: TQRDBText;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    Label8: TLabel;
+    lblMonto: TLabel;
+    QRShape1: TQRShape;
+    qrDetalleExtracto: TQRLabel;
+    lblDetalleExtracto: TLabel;
+    QRShape2: TQRShape;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    ZSP_ConciliacionFECHA_PD: TDateField;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
@@ -152,19 +153,16 @@ procedure TFConciliacion.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_Cuentas);
-//  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[1]).Valor := DateToStr(StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha)));
-//  TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[2]).Valor := DateToStr(EndOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha)));
-//
   lblNombreCuenta.Caption:= '';
-  lblFdesde.Caption:= '';
+  lblMonto.Caption:= '';
   lblFHasta.Caption:= '';
   lblSaldo.Caption:= '';
+  lblDetalleExtracto.Caption:= '';
 end;
 
 procedure TFConciliacion.btnBuscarClick(Sender: TObject);
 begin
-  TEKCriterioBA(BuscarParametros.CriteriosBusqueda.Items[1]).Valor := '01/01/2010';
-  TEKCriterioBA(BuscarParametros.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.Fecha());
+  TEKCriterioBA(BuscarParametros.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.Fecha());;
 
   if BuscarParametros.BuscarSinEjecutar then
   begin
@@ -176,24 +174,27 @@ begin
     begin
       ZSP_LibroBanco.Close;
       ZSP_LibroBanco.ParamByName('e_id_cuenta').AsInteger:= StrToInt(BuscarParametros.ParametrosSeleccionados1[0]);
-      ZSP_LibroBanco.ParamByName('e_ordenamiento').AsInteger:=1; //Fecha PD
-      ZSP_LibroBanco.ParamByName('e_hasta').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[2]);
-      ZSP_LibroBanco.ParamByName('e_desde').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[1]);
+      ZSP_LibroBanco.ParamByName('e_ordenamiento').AsInteger:=0; //Fecha Emision
+      ZSP_LibroBanco.ParamByName('e_hasta').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[1]);
+      ZSP_LibroBanco.ParamByName('e_desde').AsDate:= StrToDate('01/01/1950');
       ZSP_LibroBanco.open;
 
       ZSP_Conciliacion.Close;
       ZSP_Conciliacion.ParamByName('e_id_cuenta').AsInteger:= StrToInt(BuscarParametros.ParametrosSeleccionados1[0]);
-      ZSP_Conciliacion.ParamByName('e_ordenamiento').AsInteger:=1; //Fecha PD
-      ZSP_Conciliacion.ParamByName('e_fecha').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[2]);
-      ZSP_Conciliacion.ParamByName('e_desde').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[1]);
+      ZSP_Conciliacion.ParamByName('e_ordenamiento').AsInteger:=0; //Fecha Emision
+      ZSP_Conciliacion.ParamByName('e_fecha').AsDate:= StrToDate(BuscarParametros.ParametrosSeleccionados1[1]);
+      ZSP_Conciliacion.ParamByName('e_desde').AsDate:= StrToDate('01/01/1950');
       ZSP_Conciliacion.open;
 
+      ZSP_LibroBanco.Last;
+
       lblNombreCuenta.Caption:= BuscarParametros.ParametrosSelecReales1[0];
-      lblFdesde.Caption:= BuscarParametros.ParametrosSelecReales1[1];
-      lblFHasta.Caption:= BuscarParametros.ParametrosSelecReales1[2];
+      lblFHasta.Caption:= BuscarParametros.ParametrosSelecReales1[1];
+      lblMonto.Caption:='$ '+ BuscarParametros.ParametrosSelecReales1[2];
       lblSaldo.Caption:= '$ '+ZSP_LibroBancoSALDO.AsString;
       lblTotalHaber.Caption:= '$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue);
       lblSaldoConciliacion.Caption:= '$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue+ZSP_LibroBancoSALDO.AsFloat);
+      lblDetalleExtracto.Caption:= BuscarParametros.ParametrosSelecReales1[3];
     end;
   end;
 end;
@@ -210,13 +211,13 @@ result := true;
     end;
    if (BuscarParametros.ParametrosSelecReales1[1]='') then
     begin
-      Application.MessageBox('El campo "Fecha Desde" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox('El campo "Fecha" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
       result := false;
       exit;
     end;
    if (BuscarParametros.ParametrosSelecReales1[2]='') then
     begin
-      Application.MessageBox('El campo "Fecha Hasta" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox('El campo "Monto Extr. Bancario" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
       result := false;
       exit;
     end;
@@ -230,8 +231,8 @@ begin
   qrFecha.Caption:=lblFHasta.Caption;
   qrSaldoConciliacion.Caption:=lblSaldoConciliacion.Caption;
   qrTotalHaber.Caption:=lblTotalHaber.Caption;
-  qrExtracto.Caption:=lblSaldoConciliacion.Caption;
-
+  qrExtracto.Caption:=lblMonto.Caption;
+  qrDetalleExtracto.Caption:=lblDetalleExtracto.Caption;
   QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
 
   EKVistaPreviaQR1.VistaPrevia;
