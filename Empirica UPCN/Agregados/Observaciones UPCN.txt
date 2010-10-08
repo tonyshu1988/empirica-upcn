@@ -34,14 +34,14 @@ ok	*Verificar los filtros de las columnas que estan corridos.
 	
 
 CONCILIACION
-	*Permitir el ingreso del importe y el nro o fecha del extracto bancario.
-	*Sacar el debe porque es solamente para los egresos.
-	*sacar el desde de la busqueda.
-	*No anda el salir.
-	*Reporte	=>	cambiar "haber" por "importe".
-				=>	cambiar "total haber" por "total".
-				=>	alinear la columna de haber con la de los totales para una mejor visualizacion.
-				=>	poner el hasta de la conciliacion.
+OK ====	*Permitir el ingreso del importe y el nro o fecha del extracto bancario.
+OK ====	*Sacar el debe porque es solamente para los egresos.
+OK ====	*sacar el desde de la busqueda.
+OK ====	*No anda el salir.
+	*Reporte	=>	OK ==== cambiar "haber" por "importe".
+				=> OK ====	cambiar "total haber" por "total".
+				=> OK ====	alinear la columna de haber con la de los totales para una mejor visualizacion.
+				=> OK ====	poner el hasta de la conciliacion.
 	
 LISTADO EROGACION
 	*poner el boton filtrar columnas.
