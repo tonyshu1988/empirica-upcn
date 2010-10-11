@@ -56,7 +56,6 @@ type
     ZQ_VerSaldosNRO_MOVIMIENTO_1: TIntegerField;
     ZQ_VerSaldosNRO_PROVEEDOR: TIntegerField;
     ZQ_VerSaldosID_CONCEPTO: TIntegerField;
-    ZQ_VerSaldosID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_VerSaldosID_OBJETO_MOVIMIENTO: TIntegerField;
     ZQ_VerSaldosDESCRIPCION: TStringField;
     ZQ_VerSaldosPAGO_DEL_EJERCICIO: TStringField;
@@ -92,7 +91,6 @@ type
     ZQ_MovimientoNRO_MOVIMIENTO: TIntegerField;
     ZQ_MovimientoNRO_PROVEEDOR: TIntegerField;
     ZQ_MovimientoID_CONCEPTO: TIntegerField;
-    ZQ_MovimientoID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_MovimientoID_OBJETO_MOVIMIENTO: TIntegerField;
     ZQ_MovimientoDESCRIPCION: TStringField;
     ZQ_MovimientoPAGO_DEL_EJERCICIO: TStringField;
@@ -248,7 +246,7 @@ begin
   ZQ_MovimientoID_CONCEPTO.Clear;
   ZQ_MovimientoID_OBJETO_MOVIMIENTO.AsInteger:= 4;
   ZQ_MovimientoIMPORTE.AsFloat:= ZQ_Cuenta_MovIMPORTE.AsFloat;
-  ZQ_MovimientoID_TIPO_MOVIMIENTO.AsInteger:= 2;//INGRESO
+
 
   if not validarDatos() then
     exit;

@@ -44,7 +44,6 @@ type
     ARepListado_Erogaciones: TAction;
     ARep_Conciliacion: TAction;
     ARep_SaldoInicial: TAction;
-    Sal1: TMenuItem;
     Proveedores1: TMenuItem;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);

@@ -15,6 +15,7 @@ object FSaldoInicial: TFSaldoInicial
   Position = poDesktopCenter
   Scaled = False
   Visible = True
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -22,23 +23,23 @@ object FSaldoInicial: TFSaldoInicial
   object pContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 441
+    Width = 862
+    Height = 447
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
     TabOrder = 0
     object pDatos: TPanel
       Left = 2
-      Top = 280
-      Width = 850
+      Top = 286
+      Width = 858
       Height = 159
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
       Visible = False
       DesignSize = (
-        850
+        858
         159)
       object Label3: TLabel
         Left = 70
@@ -196,8 +197,8 @@ object FSaldoInicial: TFSaldoInicial
     object DBGridSaldosIniciales: TDBGrid
       Left = 2
       Top = 2
-      Width = 850
-      Height = 278
+      Width = 858
+      Height = 284
       Align = alClient
       Color = 16772842
       DataSource = DS_VerSaldos
@@ -274,7 +275,7 @@ object FSaldoInicial: TFSaldoInicial
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -696,9 +697,6 @@ object FSaldoInicial: TFSaldoInicial
     object ZQ_MovimientoID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
     end
-    object ZQ_MovimientoID_TIPO_MOVIMIENTO: TIntegerField
-      FieldName = 'ID_TIPO_MOVIMIENTO'
-    end
     object ZQ_MovimientoID_OBJETO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_OBJETO_MOVIMIENTO'
     end
@@ -810,9 +808,6 @@ object FSaldoInicial: TFSaldoInicial
     object ZQ_VerSaldosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
       Required = True
-    end
-    object ZQ_VerSaldosID_TIPO_MOVIMIENTO: TIntegerField
-      FieldName = 'ID_TIPO_MOVIMIENTO'
     end
     object ZQ_VerSaldosID_OBJETO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_OBJETO_MOVIMIENTO'

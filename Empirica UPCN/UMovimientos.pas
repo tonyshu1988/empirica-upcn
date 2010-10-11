@@ -26,7 +26,7 @@ type
     GrupoGuardarCancelar: TdxBarGroup;
     DBGridLibroBanco: TDBGrid;
     btSalir: TdxBarLargeButton;
-    PEdicion: TPanel;
+    PEgresos: TPanel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -89,7 +89,6 @@ type
     ZQ_MovimientosNRO_MOVIMIENTO: TIntegerField;
     ZQ_MovimientosNRO_PROVEEDOR: TIntegerField;
     ZQ_MovimientosID_CONCEPTO: TIntegerField;
-    ZQ_MovimientosID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO: TIntegerField;
     ZQ_MovimientosDESCRIPCION: TStringField;
     ZQ_MovimientosPAGO_DEL_EJERCICIO: TStringField;
@@ -106,13 +105,11 @@ type
     DS_Conceptos: TDataSource;
     DS_Cuentas: TDataSource;
     DS_Movimientos: TDataSource;
-    DBLUCBoxNroTipoMov: TDBLookupComboBox;
     ZQ_Tipo_Movimiento: TZQuery;
     ZQ_Tipo_MovimientoID_TIPO_MOVIEMIENTO: TIntegerField;
     ZQ_Tipo_MovimientoCODIGO_CORTO: TStringField;
     ZQ_Tipo_MovimientoDESCRIPCION: TStringField;
     DS_Tipo_Movimiento: TDataSource;
-    Label2: TLabel;
     ZQ_Cuenta_Movimientonombre_cuenta_egreso: TStringField;
     ZQ_Cuenta_Movimientonombre_cuenta_ingreso: TStringField;
     ZQ_Cuenta_Movimientomedio_de_pago: TStringField;
@@ -142,7 +139,6 @@ type
     LIBRO_BANCODESCRIPCION: TStringField;
     LIBRO_BANCOCONCILIADO: TStringField;
     LIBRO_BANCONOMBRE_CONCEPTO: TStringField;
-    LIBRO_BANCOTIPO_MOV: TStringField;
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     LIBRO_BANCOFECHA_PD: TDateField;
     ActionManager1: TActionManager;
@@ -164,24 +160,20 @@ type
     CBProveedor: TCheckBox;
     CBConcepto: TCheckBox;
     CBNroOrden: TCheckBox;
-    ZQ_Cuenta_MovimientoNRO_FACTURA_RECIBO: TStringField;
-    LIBRO_BANCONRO_FAC_REC: TStringField;
     StaticText1: TStaticText;
-    CBOtros: TCheckBox;
+    CBRecibo: TCheckBox;
     CBNroFactura: TCheckBox;
     ZQ_CuentasBUSQUEDA: TStringField;
     EKListado_Proveedores: TEKListadoSQL;
     EKListado_Conceptos: TEKListadoSQL;
     BtVerDetalle: TdxBarLargeButton;
     LabelDetalle: TLabel;
-    DBLUCBoxNombreTipoMov: TDBLookupComboBox;
     Label12: TLabel;
     Label13: TLabel;
     LIBRO_BANCONRO_ORDEN: TIntegerField;
     nro_orden: TZStoredProc;
     nro_ordenID: TIntegerField;
     ZQ_MovimientosNRO_ORDEN: TIntegerField;
-    ZQ_Cuenta_MovimientoOTROS: TStringField;
     LIBRO_BANCOOTROS: TStringField;
     BtAnularOrden: TdxBarLargeButton;
     BtAnularMov: TdxBarLargeButton;
@@ -290,6 +282,30 @@ type
     DataSource1: TDataSource;
     DBGrid1: TDBGrid;
     LabelNroChequeActual: TLabel;
+    PIngresos: TPanel;
+    DBEditCodMedio: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit6: TDBEdit;
+    Label2: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DS_Medios_Cobro_Pago: TDataSource;
+    DBLUpCBoxCuentaIngreaso: TDBLookupComboBox;
+    LIBRO_BANCONRO_FACTURA: TStringField;
+    LIBRO_BANCONRO_RECIBO: TStringField;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    Label25: TLabel;
+    Label26: TLabel;
+    ZQ_MovimientosNRO_FACTURA: TStringField;
+    ZQ_MovimientosNRO_RECIBO: TStringField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
@@ -367,7 +383,6 @@ begin
   dm.EKModelo.abrir(ZQ_Proveedores);
   dm.EKModelo.abrir(ZQ_Conceptos);
   dm.EKModelo.abrir(ZQ_Cuentas);
-  dm.EKModelo.abrir(ZQ_Tipo_Movimiento);
   dm.EKModelo.abrir(ZQ_Autoriza);
 
   DTPFechaDesde.Date:= StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha));
@@ -375,7 +390,11 @@ begin
   EKLlenarCombo1.CargarCombo;
   EKLlenarCBAutoriza.CargarCombo;
 
-  CuentaNro:= StrToInt(dm.EKUsrLogin1.PermisoAccionValor('ACCESO'));
+  if dm.EKUsrLogin1.PermisoAccionValor('ACCESO') = '' then
+    CuentaNro:= 0
+  else
+    CuentaNro:= StrToInt(dm.EKUsrLogin1.PermisoAccionValor('ACCESO'));
+
   if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
   begin
     ZQ_Cuentas.Locate('id_cuenta',CuentaNro,[]);
@@ -447,6 +466,8 @@ function TFMovimientos.validarcampos():boolean;
 begin
   result := true;
 
+  if PIngresos.Visible = false then
+  begin
    if (ZQ_MovimientosFECHA.IsNull) then
     begin
       Application.MessageBox('El campo "Fecha" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
@@ -496,12 +517,14 @@ begin
 
      exit;
     end;
+ end;
+    
 end;
 
 
 procedure TFMovimientos.BtEgresosClick(Sender: TObject);
 begin
-  PEdicion.Visible:= true;
+  PEgresos.Visible:= true;
   PParametrosLibroBanco.Visible:=false;
   DBGridLibroBanco.Visible:=false;
   BanderaIngresoEgreso:=0;
@@ -552,16 +575,7 @@ end;
 
 procedure TFMovimientos.BtIngresosClick(Sender: TObject);
 begin
-  PEdicion.Visible:= true;
-  PParametrosLibroBanco.Visible:=false;
-  DBGridLibroBanco.Visible:=false;
-  BanderaIngresoEgreso:=1;
-  DbGridMediosCobroPago.Columns[2].Visible := true;
-  DbGridMediosCobroPago.Columns[3].Visible := true;
-  DbGridMediosCobroPago.Columns[6].Visible := true;
-  DbGridMediosCobroPago.Columns[7].Visible := true;
-  DbGridMediosCobroPago.Columns[4].Visible := false;
-  DbGridMediosCobroPago.Columns[5].Visible := false;
+PIngresos.Visible:=true;
 
   ZQ_Movimientos.Active := False;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
@@ -576,21 +590,18 @@ begin
 
     if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
     begin
-      DBLUpCBoxCuenta.Enabled:= false;
+      DBLUpCBoxCuentaIngreaso.Enabled:= false;
       ZQ_Cuentas.Locate('id_cuenta', CuentaNro, []);
-      DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
+      DBLUpCBoxCuentaIngreaso.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
     end
     else //si me logueo como administrador
-      DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
+      DBLUpCBoxCuentaIngreaso.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
 
-    ISDBEditDateTimePicker1.SetFocus;
 
-//    ZQ_Tipo_Movimiento.Filter:= 'TIPO = ''I'' or TIPO = ''T''';
-//    ZQ_Tipo_Movimiento.Filtered:= true;
-//    DBLUCBoxNombreTipoMov.KeyValue:= ZQ_Tipo_MovimientoID_TIPO_MOVIEMIENTO.AsInteger;
-//    DBLUCBoxNroTipoMov.KeyValue:= ZQ_Tipo_MovimientoID_TIPO_MOVIEMIENTO.AsInteger;
-
+    ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:= 2; //PONGO Q ES UN RECIBO
+    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=0;//Pongo proveedor generico
+    ZQ_MovimientosID_CONCEPTO.AsInteger:=0;//Pongo Concepto generico
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -786,10 +797,11 @@ begin
 
     if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
     begin
-     UltimoNroCheque:= -1;    
+     UltimoNroCheque:= -1;
      GrupoEditando.Enabled := true;
      GrupoGuardarCancelar.Enabled := false;
-     PEdicion.Visible:= false;
+     PEgresos.Visible:= false;
+     PIngresos.Visible:=false;
      PParametrosLibroBanco.Visible:=true;
      DBGridLibroBanco.Visible:=true;
      btaplicar.Click;
@@ -806,7 +818,8 @@ begin
     UltimoNroCheque:= -1;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
-    PEdicion.Visible:= false;
+    PEgresos.Visible:= false;
+    PIngresos.Visible:=False;
     PParametrosLibroBanco.Visible:=True;
     DBGridLibroBanco.Visible:=true;
   end
@@ -908,18 +921,18 @@ begin
     BanderaIngresoEgreso:=0;
     DBLUpCBoxCuenta.DataSource:= DS_Cuenta_Movimiento;
     DBLUpCBoxCuenta.DataField := 'ID_CUENTA_EGRESO';
+
+    PEgresos.Visible:= true;
+    PParametrosLibroBanco.Visible:=false;
+    DBGridLibroBanco.Visible:=false;
+    ISDBEditDateTimePicker1.SetFocus;
  end
  else
  begin
-    DbGridMediosCobroPago.Columns[2].Visible := true;
-    DbGridMediosCobroPago.Columns[3].Visible := true;
-    DbGridMediosCobroPago.Columns[6].Visible := true;
-    DbGridMediosCobroPago.Columns[7].Visible := true;
-    DbGridMediosCobroPago.Columns[4].Visible := false;
-    DbGridMediosCobroPago.Columns[5].Visible := false;
     BanderaIngresoEgreso:=1;
-    DBLUpCBoxCuenta.DataSource:= DS_Cuenta_Movimiento;
-    DBLUpCBoxCuenta.DataField := 'ID_CUENTA_INGRESO';
+    PIngresos.Visible:= true;
+    PParametrosLibroBanco.Visible:=false;
+    DBEditCodMedio.SetFocus;
  end;
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
@@ -927,10 +940,10 @@ begin
     ZQ_Movimientos.edit;
     ZQ_Cuenta_Movimiento.Edit;
 
-    PEdicion.Visible:= true;
-    PParametrosLibroBanco.Visible:=false;
-    DBGridLibroBanco.Visible:=false;
-    ISDBEditDateTimePicker1.SetFocus;
+//    PEdicion.Visible:= true;
+//    PParametrosLibroBanco.Visible:=false;
+//    DBGridLibroBanco.Visible:=false;
+//    ISDBEditDateTimePicker1.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -956,7 +969,7 @@ begin
 
    if ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2 then
    begin
-     if ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N' then
+     if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') then
      begin
        if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
        begin
@@ -1077,21 +1090,34 @@ begin
  if LIBRO_BANCO.IsEmpty then
   exit;
 
-   if PEdicion.Visible = true then
+   if (PEgresos.Visible = true) or (PIngresos.Visible = true) then
    begin
-    PEdicion.Visible:= false;
+    PEgresos.Visible:= false;
+    PIngresos.Visible:=false;
     PParametrosLibroBanco.Visible:=true;
     DBGridLibroBanco.Visible:=true;
-    PEdicion.Enabled:=true;
+    DBGridLibroBanco.Enabled:=true;
+    PEgresos.Enabled:=true;
+    PIngresos.Enabled:=true;
     LabelDetalle.Caption:= '';
     GrupoEditando.Enabled := true;
    end
    else
    begin
-    PEdicion.Visible:= true;
+    if LIBRO_BANCODEBE.IsNull then
+    begin
+      PEgresos.Visible:= true;
+      PEgresos.Enabled:=false;
+      DBGridLibroBanco.Visible:=false;
+    end
+    else
+    begin
+      PIngresos.Visible:= true;
+      PIngresos.Enabled:=false;
+      DBGridLibroBanco.Enabled:=false;
+    end;
+
     PParametrosLibroBanco.Visible:=false;
-    DBGridLibroBanco.Visible:=false;
-    PEdicion.Enabled:=false;
     GrupoEditando.Enabled := false;
     BtVerDetalle.Enabled:=true;
 
@@ -1119,18 +1145,9 @@ begin
      end
      else
      begin
-        DbGridMediosCobroPago.Columns[2].Visible := true;
-        DbGridMediosCobroPago.Columns[3].Visible := true;
-        DbGridMediosCobroPago.Columns[6].Visible := true;
-        DbGridMediosCobroPago.Columns[7].Visible := true;
-        DbGridMediosCobroPago.Columns[4].Visible := false;
-        DbGridMediosCobroPago.Columns[5].Visible := false;
         BanderaIngresoEgreso:=1;
-        DBLUpCBoxCuenta.DataSource:=DS_Cuenta_Movimiento;
-        DBLUpCBoxCuenta.DataField := 'ID_CUENTA_INGRESO';
      end;
 
-     LabelDetalle.Caption:= 'DETALLE '+DBLUCBoxNombreTipoMov.Text;
    end;
 end;
 
@@ -1434,7 +1451,7 @@ begin
   else
     DBGridLibroBanco.Columns[9].Visible := true;
 
-  if not CBOtros.Checked then //otros
+  if not CBrecibo.Checked then //otros
     DBGridLibroBanco.Columns[10].Visible := false
   else
     DBGridLibroBanco.Columns[10].Visible := true;
@@ -1483,7 +1500,7 @@ begin
   else
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroOrden', 'FALSE');
 
-  if CBOtros.Checked then
+  if CBRecibo.Checked then
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Otros', 'TRUE')
   else
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Otros', 'FALSE');
@@ -1522,7 +1539,7 @@ begin
     CBNroOrden.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroOrden'));
 
   if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Otros') <> '' then
-    CBOtros.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Otros'));
+    CBRecibo.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Otros'));
 
   if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroFactura') <> '' then
     CBNroFactura.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroFactura'));
