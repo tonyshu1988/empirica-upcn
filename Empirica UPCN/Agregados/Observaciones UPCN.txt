@@ -22,9 +22,9 @@ ok	*Permitir la eliminacion de una orden de pago. El efecto de esta es que desap
 ok	*Preguntar antes de anular una orden y un movimiento si lo quiere hacer o no?
 ok	*Sacar el color rojo del anulado y agregar la columna de anulado ('A' o null).
 	*En la impresion del libro banco sale "ANULADO - Costa Leandro".
-	*Nro de factura y Nro Recibo ponerlo en la orden de pago.
+ok	*Nro de factura y Nro Recibo ponerlo en la orden de pago.
 ok	*Para los ingresos no tomar en cuenta el autonumerar cheque pq es externo.
-	*Tipo de movimiento no vas mas y pasa a ser la forma de pago.
+ok	*Tipo de movimiento no vas mas y pasa a ser la forma de pago.
 	*Concatenar al numero de orden de pago el año correspondiente de la misma (00002345-10 ó 10-00002345).
 	*Pedir confirmacion al conciliar un cheque y permitir cambiar la fecha de conciliado.
 	*Verificar cuando es un ingreso que tiene problemas cuando ponemos 2 forma de pagos.
