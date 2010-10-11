@@ -253,12 +253,8 @@ type
     QRDBText78: TQRDBText;
     QRSubDetail18: TQRSubDetail;
     QrtImporteFPago: TQRLabel;
-    QRLblConfecciona: TQRLabel;
-    QRShape6: TQRShape;
-    QRShape7: TQRShape;
     QRBand15: TQRBand;
     QRLabel123: TQRLabel;
-    QRLblAutorizo: TQRLabel;
     QRlblFechaHoy: TQRLabel;
     QRLabelImpresion: TQRLabel;
     QRLabel1: TQRLabel;
@@ -306,6 +302,13 @@ type
     Label26: TLabel;
     ZQ_MovimientosNRO_FACTURA: TStringField;
     ZQ_MovimientosNRO_RECIBO: TStringField;
+    ChildBand1: TQRChildBand;
+    QRLblConfecciona: TQRLabel;
+    QRLblAutorizo: TQRLabel;
+    QRShape6: TQRShape;
+    QRShape4: TQRShape;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
@@ -576,6 +579,8 @@ end;
 procedure TFMovimientos.BtIngresosClick(Sender: TObject);
 begin
 PIngresos.Visible:=true;
+DBEditCodMedio.SetFocus;
+
 
   ZQ_Movimientos.Active := False;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
@@ -751,7 +756,9 @@ begin
    else
    begin
      ZQ_Cuenta_Movimiento.Edit;
+     ZQ_Movimientos.Edit;
      ZQ_Cuenta_MovimientoANULADO.Clear;
+     ZQ_MovimientosANULADO.Clear;
    end;
 
    ZQ_Cuenta_Movimiento.Next;
@@ -964,6 +971,7 @@ begin
   if ((sender as tdbgrid).SelectedField.FullName = 'CONCILIADO') then
   begin
    ZQ_Cuenta_Movimiento.Close;
+   ZQ_Cuenta_Movimiento.ParamByName('NroMov').clear;
    ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCOID_MOVIMIENTO.AsInteger;
    ZQ_Cuenta_Movimiento.Open;
 
@@ -1127,6 +1135,7 @@ begin
 
      ZQ_Cuenta_Movimiento.Close;
      ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger :=ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
+     ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
      ZQ_Cuenta_Movimiento.Open;
 
      ZQ_Cuentas.Locate('id_cuenta',ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger,[]);
@@ -1170,6 +1179,7 @@ begin
 
  ZQ_Cuenta_Movimiento.Close;
  ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger :=ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
+ ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').Clear;
  ZQ_Cuenta_Movimiento.Open;
 
  ZQ_Cuenta_Movimiento.First;
@@ -1215,6 +1225,7 @@ begin
   exit;
 
  ZQ_Cuenta_Movimiento.Close;
+ ZQ_Cuenta_Movimiento.ParamByName('NroMov').Clear;
  ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger :=LIBRO_BANCOID_MOVIMIENTO.AsInteger;
  ZQ_Cuenta_Movimiento.Open;
 
@@ -1223,8 +1234,13 @@ begin
    if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
    begin
      ZQ_Cuenta_Movimiento.Edit;
+     ZQ_Cuenta_MovimientoID.AsInteger;
+
      ZQ_Cuenta_MovimientoIMPORTE.AsInteger:= 0;
-     ZQ_Cuenta_MovimientoANULADO.AsString:= 'A';     
+     ZQ_Cuenta_MovimientoANULADO.AsString:= 'A';
+
+     ZQ_Cuenta_Movimiento.Post;
+
    end;
 
    if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
@@ -1292,6 +1308,7 @@ begin
 
   ZQ_Cuenta_Movimiento.Close;
   ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+  ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
   ZQ_Cuenta_Movimiento.Open;
 
   ZQ_Movimientos.Close;
