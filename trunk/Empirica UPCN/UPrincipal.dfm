@@ -20,8 +20,8 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 563
-    Width = 855
+    Top = 569
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -37,7 +37,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionToolBar1'
@@ -49,8 +49,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 534
+    Width = 863
+    Height = 540
     Align = alClient
     TabOrder = 2
   end
@@ -155,9 +155,6 @@ object FPrincipal: TFPrincipal
       end
       object ListadoErogaciones1: TMenuItem
         Action = ARepListado_Erogaciones
-      end
-      object Sal1: TMenuItem
-        Action = ARep_SaldoInicial
       end
     end
     object Sistema: TMenuItem
