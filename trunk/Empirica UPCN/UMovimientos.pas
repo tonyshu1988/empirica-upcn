@@ -309,6 +309,11 @@ type
     QRShape4: TQRShape;
     QRLabel4: TQRLabel;
     QRLabel5: TQRLabel;
+    ChildBand2: TQRChildBand;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRDBText4: TQRDBText;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
