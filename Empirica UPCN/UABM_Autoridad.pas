@@ -56,7 +56,7 @@ const
 
 implementation
 
-uses UPrincipal, UDM;
+uses UPrincipal, UDM, UUtilidades;
 
 {$R *.dfm}
 

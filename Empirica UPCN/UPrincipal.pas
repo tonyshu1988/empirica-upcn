@@ -21,7 +21,7 @@ type
     Disponibilidades: TMenuItem;
     Movimientos: TMenuItem;
     EKVentanas1: TEKVentanas;
-    PlandeCuentasErogaciones1: TMenuItem;
+    ABMConceptos1: TMenuItem;
     SaldosIniciales1: TMenuItem;
     CuentasBancariasyCajas1: TMenuItem;
     Conciliacion1: TMenuItem;
@@ -45,6 +45,8 @@ type
     ARep_Conciliacion: TAction;
     ARep_SaldoInicial: TAction;
     Proveedores1: TMenuItem;
+    AABM_Autoridad: TAction;
+    ABMAutoridad1: TMenuItem;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -58,6 +60,7 @@ type
     procedure ARep_LibroBancoExecute(Sender: TObject);
     procedure ARepListado_ErogacionesExecute(Sender: TObject);
     procedure ARep_ConciliacionExecute(Sender: TObject);
+    procedure AABM_AutoridadExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,7 +76,8 @@ implementation
 
 Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
   UConceptos, UUtilidades, UMovimientos, USaldoInicial,
-  UReportes_Disponibilidades, UListadoErogaciones, UConciliacion;
+  UReportes_Disponibilidades, UListadoErogaciones, UConciliacion,
+  UABM_Autoridad;
 
 function salir_de_programa:boolean;
 begin
@@ -154,6 +158,11 @@ end;
 procedure TFPrincipal.ARep_ConciliacionExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFConciliacion, FConciliacion);
+end;
+
+procedure TFPrincipal.AABM_AutoridadExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABM_Autoridad, FABM_Autoridad);
 end;
 
 end.
