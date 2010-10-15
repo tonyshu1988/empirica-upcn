@@ -13,7 +13,8 @@ uses
   USaldoInicial in 'USaldoInicial.pas' {FSaldoInicial},
   UReportes_Disponibilidades in 'UReportes_Disponibilidades.pas' {FReportes_Disponibilidades},
   UListadoErogaciones in 'UListadoErogaciones.pas' {FListadoErogaciones},
-  UConciliacion in 'UConciliacion.pas' {FConciliacion};
+  UConciliacion in 'UConciliacion.pas' {FConciliacion},
+  UABM_Autoridad in 'UABM_Autoridad.pas' {FABM_Autoridad};
 
 {$R *.res}
 
