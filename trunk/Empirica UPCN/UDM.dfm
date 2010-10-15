@@ -1469,4 +1469,42 @@ object DM: TDM
     Left = 152
     Top = 8
   end
+  object ZQ_Configuracion: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select *'
+      'from configuracion')
+    Params = <>
+    Left = 24
+    Top = 160
+    object ZQ_ConfiguracionCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Required = True
+    end
+    object ZQ_ConfiguracionFECHA: TDateField
+      FieldName = 'FECHA'
+    end
+    object ZQ_ConfiguracionNUMERO: TFloatField
+      FieldName = 'NUMERO'
+    end
+    object ZQ_ConfiguracionTEXTO: TStringField
+      FieldName = 'TEXTO'
+      Required = True
+      Size = 100
+    end
+    object ZQ_ConfiguracionNIVEL: TSmallintField
+      FieldName = 'NIVEL'
+    end
+    object ZQ_ConfiguracionGRUPO: TStringField
+      FieldName = 'GRUPO'
+      Size = 40
+    end
+    object ZQ_ConfiguracionDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object ZQ_ConfiguracionGRAFICO: TBlobField
+      FieldName = 'GRAFICO'
+    end
+  end
 end

@@ -1,8 +1,8 @@
 object FListadoErogaciones: TFListadoErogaciones
-  Left = 316
-  Top = 179
-  Width = 900
-  Height = 568
+  Left = 320
+  Top = 228
+  Width = 913
+  Height = 565
   Caption = 'Listado Erogaciones en Cumplimiento'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -24,8 +24,8 @@ object FListadoErogaciones: TFListadoErogaciones
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 892
-    Height = 484
+    Width = 897
+    Height = 475
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -33,8 +33,8 @@ object FListadoErogaciones: TFListadoErogaciones
     object DBGridListaErogacion: TDBGrid
       Left = 3
       Top = 58
-      Width = 886
-      Height = 405
+      Width = 891
+      Height = 396
       Align = alClient
       Color = 16772842
       DataSource = DS_Libro_erogaciones
@@ -50,7 +50,7 @@ object FListadoErogaciones: TFListadoErogaciones
         item
           Alignment = taCenter
           Expanded = False
-          FieldName = 'NRO_ORDEN'
+          FieldName = 'NRO_ORDEN_STRING'
           Title.Alignment = taCenter
           Title.Caption = 'Nro. Orden'
           Width = 78
@@ -61,7 +61,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Expanded = False
           FieldName = 'FECHA'
           Title.Alignment = taCenter
-          Title.Caption = 'F. Emisi'#243'n'
+          Title.Caption = 'Fecha Emisi'#243'n'
           Width = 80
           Visible = True
         end
@@ -85,7 +85,7 @@ object FListadoErogaciones: TFListadoErogaciones
         end
         item
           Expanded = False
-          FieldName = 'NOMBRE_FANTASIA'
+          FieldName = 'APELLIDO_Y_NOMBRE'
           Title.Alignment = taCenter
           Title.Caption = 'Proveedor'
           Width = 117
@@ -97,22 +97,6 @@ object FListadoErogaciones: TFListadoErogaciones
           Title.Alignment = taCenter
           Title.Caption = 'Concepto'
           Width = 180
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COD_OBJMOVIMIENTO'
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Mov.'
-          Width = 60
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_OBJMOVIMIENTO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nombre  Mov.'
-          Width = 137
           Visible = True
         end
         item
@@ -132,26 +116,27 @@ object FListadoErogaciones: TFListadoErogaciones
           Visible = True
         end
         item
+          Alignment = taRightJustify
           Expanded = False
           FieldName = 'NRO_CHEQUE_TRANSF'
           Title.Alignment = taCenter
-          Title.Caption = 'Nro. Medio Pago'
+          Title.Caption = 'Nro. Cheq/Trans'
           Width = 95
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'NRO_FACTURA_RECIBO'
+          FieldName = 'NRO_FACTURA'
           Title.Alignment = taCenter
-          Title.Caption = 'Fecha Factura'
+          Title.Caption = 'Nro. Factura'
           Width = 81
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'OTROS'
+          FieldName = 'NRO_RECIBO'
           Title.Alignment = taCenter
-          Title.Caption = 'Nro. Factura'
+          Title.Caption = 'Nro. Recibo'
           Width = 81
           Visible = True
         end
@@ -175,18 +160,18 @@ object FListadoErogaciones: TFListadoErogaciones
     object pDatos: TPanel
       Left = 3
       Top = 3
-      Width = 886
+      Width = 891
       Height = 55
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
       DesignSize = (
-        886
+        891
         55)
       object Shape1: TShape
         Left = 3
         Top = 4
-        Width = 873
+        Width = 886
         Height = 22
         Anchors = [akLeft, akTop, akRight]
         Brush.Color = clGray
@@ -196,7 +181,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object Shape2: TShape
         Left = 3
         Top = 3
-        Width = 873
+        Width = 886
         Height = 22
         Anchors = [akLeft, akTop, akRight]
         Brush.Color = clTeal
@@ -205,7 +190,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object Label2: TLabel
         Left = 0
         Top = 7
-        Width = 876
+        Width = 889
         Height = 18
         Alignment = taCenter
         Anchors = [akLeft, akTop, akRight]
@@ -222,7 +207,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object Label1: TLabel
         Left = 0
         Top = 6
-        Width = 876
+        Width = 889
         Height = 18
         Alignment = taCenter
         Anchors = [akLeft, akTop, akRight]
@@ -300,7 +285,7 @@ object FListadoErogaciones: TFListadoErogaciones
         Caption = 'Hasta:'
       end
       object StaticText1: TStaticText
-        Left = 804
+        Left = 817
         Top = 39
         Width = 69
         Height = 17
@@ -319,14 +304,14 @@ object FListadoErogaciones: TFListadoErogaciones
     end
     object pResumen: TPanel
       Left = 3
-      Top = 463
-      Width = 886
+      Top = 454
+      Width = 891
       Height = 18
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 2
       object lblSaldo: TLabel
-        Left = 823
+        Left = 828
         Top = 0
         Width = 63
         Height = 18
@@ -340,10 +325,10 @@ object FListadoErogaciones: TFListadoErogaciones
         ParentFont = False
       end
     end
-    object ReporteErogaciones: TQuickRep
+    object RepErog: TQuickRep
       Tag = 99
-      Left = 115
-      Top = 88
+      Left = 59
+      Top = 83
       Width = 794
       Height = 1123
       Frame.Color = clBlack
@@ -412,7 +397,7 @@ object FListadoErogaciones: TFListadoErogaciones
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          272.520833333333400000
+          272.520833333333300000
           1899.708333333333000000)
         BandType = rbPageHeader
         object QRLabel41: TQRLabel
@@ -475,9 +460,9 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            621.770833333333400000
+            621.770833333333300000
             158.750000000000000000
-            653.520833333333400000)
+            653.520833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -494,10 +479,10 @@ object FListadoErogaciones: TFListadoErogaciones
           WordWrap = True
           FontSize = 12
         end
-        object ReporteErogaciones_direccion: TQRLabel
-          Left = 257
+        object RepErog_Reporte_Titulo_2: TQRLabel
+          Left = 268
           Top = 36
-          Width = 204
+          Width = 182
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -506,14 +491,14 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            679.979166666666800000
+            709.083333333333300000
             95.250000000000000000
-            539.750000000000000000)
+            481.541666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'ReporteErogaciones_direccion'
+          Caption = 'RepErog_Reporte_Titulo_2'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -525,10 +510,10 @@ object FListadoErogaciones: TFListadoErogaciones
           WordWrap = True
           FontSize = 9
         end
-        object ReporteErogaciones_entidad: TQRLabel
-          Left = 230
+        object RepErog_Reporte_Titulo_1: TQRLabel
+          Left = 238
           Top = 12
-          Width = 257
+          Width = 242
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -537,14 +522,14 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            608.541666666666800000
+            629.708333333333300000
             31.750000000000000000
-            679.979166666666800000)
+            640.291666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'ReporteErogaciones_entidad'
+          Caption = 'RepErog_Reporte_Titulo_1'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -693,7 +678,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Size.Values = (
             37.041666666666670000
             1053.041666666667000000
-            232.833333333333400000
+            232.833333333333300000
             373.062500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -718,11 +703,11 @@ object FListadoErogaciones: TFListadoErogaciones
         Top = 169
         Width = 718
         Height = 14
-        Frame.Color = clSilver
+        Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
+        Frame.DrawLeft = True
+        Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
         Font.Charset = ANSI_CHARSET
@@ -804,7 +789,7 @@ object FListadoErogaciones: TFListadoErogaciones
             1060.979166666667000000
             2.645833333333333000
             224.895833333333300000)
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = True
@@ -856,7 +841,7 @@ object FListadoErogaciones: TFListadoErogaciones
             431.270833333333300000
             2.645833333333333000
             201.083333333333300000)
-          Alignment = taLeftJustify
+          Alignment = taCenter
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
@@ -882,7 +867,7 @@ object FListadoErogaciones: TFListadoErogaciones
             224.895833333333300000
             2.645833333333333000
             201.083333333333300000)
-          Alignment = taLeftJustify
+          Alignment = taCenter
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
@@ -911,6 +896,132 @@ object FListadoErogaciones: TFListadoErogaciones
           Shape = qrsHorLine
           VertAdjust = 0
         end
+        object QRShape5: TQRShape
+          Left = 602
+          Top = 0
+          Width = 2
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1592.791666666667000000
+            0.000000000000000000
+            5.291666666666667000)
+          Shape = qrsVertLine
+          VertAdjust = 0
+        end
+        object QRShape6: TQRShape
+          Left = 487
+          Top = 0
+          Width = 2
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1288.520833333333000000
+            0.000000000000000000
+            5.291666666666667000)
+          Shape = qrsVertLine
+          VertAdjust = 0
+        end
+        object QRShape7: TQRShape
+          Left = 399
+          Top = 0
+          Width = 2
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1055.687500000000000000
+            0.000000000000000000
+            5.291666666666667000)
+          Shape = qrsVertLine
+          VertAdjust = 0
+        end
+        object QRShape8: TQRShape
+          Left = 239
+          Top = 0
+          Width = 2
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            632.354166666666700000
+            0.000000000000000000
+            5.291666666666667000)
+          Shape = qrsVertLine
+          VertAdjust = 0
+        end
+        object QRShape9: TQRShape
+          Left = 161
+          Top = 0
+          Width = 2
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            425.979166666666700000
+            0.000000000000000000
+            5.291666666666667000)
+          Shape = qrsVertLine
+          VertAdjust = 0
+        end
+        object QRShape10: TQRShape
+          Left = 716
+          Top = 0
+          Width = 2
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1894.416666666667000000
+            0.000000000000000000
+            5.291666666666667000)
+          Shape = qrsVertLine
+          VertAdjust = 0
+        end
+        object QRShape11: TQRShape
+          Left = 81
+          Top = 0
+          Width = 2
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            214.312500000000000000
+            0.000000000000000000
+            5.291666666666667000)
+          Shape = qrsVertLine
+          VertAdjust = 0
+        end
       end
       object QRChildBand2: TQRChildBand
         Tag = 99
@@ -921,8 +1032,8 @@ object FListadoErogaciones: TFListadoErogaciones
         Frame.Color = clBlack
         Frame.DrawTop = True
         Frame.DrawBottom = True
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
+        Frame.DrawLeft = True
+        Frame.DrawRight = True
         AlignToBottom = False
         Color = clSilver
         ForceNewColumn = False
@@ -1072,7 +1183,7 @@ object FListadoErogaciones: TFListadoErogaciones
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           1899.708333333333000000)
         BandType = rbPageFooter
         object QRLabel35: TQRLabel
@@ -1117,7 +1228,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             150.812500000000000000
             2.645833333333333000
             185.208333333333300000)
@@ -1148,7 +1259,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1685.395833333333000000
             2.645833333333333000
             103.187500000000000000)
@@ -1179,7 +1290,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -1205,7 +1316,7 @@ object FListadoErogaciones: TFListadoErogaciones
         Width = 718
         Height = 17
         Frame.Color = clBlack
-        Frame.DrawTop = False
+        Frame.DrawTop = True
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
@@ -1301,14 +1412,14 @@ object FListadoErogaciones: TFListadoErogaciones
           Left = 601
           Top = 0
           Width = 2
-          Height = 16
+          Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333330000
+            37.041666666666670000
             1590.145833333333000000
             0.000000000000000000
             5.291666666666667000)
@@ -1325,18 +1436,18 @@ object FListadoErogaciones: TFListadoErogaciones
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
+        Frame.DrawLeft = True
+        Frame.DrawRight = True
         AlignToBottom = False
         Color = clSilver
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          34.395833333333340000
+          34.395833333333330000
           1899.708333333333000000)
         Expression = 'ZQ_Libro_erogaciones.NRO_MOVIMIENTO'
         FooterBand = QRBandGroup1Footer
-        Master = ReporteErogaciones
+        Master = RepErog
         ReprintOnNewPage = False
         object QRDBText1: TQRDBText
           Left = 5
@@ -1359,14 +1470,14 @@ object FListadoErogaciones: TFListadoErogaciones
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_Libro_erogaciones
-          DataField = 'NRO_ORDEN'
+          DataField = 'NRO_ORDEN_STRING'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -9
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
-          Transparent = False
+          Transparent = True
           WordWrap = True
           FontSize = 7
         end
@@ -1391,14 +1502,14 @@ object FListadoErogaciones: TFListadoErogaciones
           AutoStretch = True
           Color = clWhite
           DataSet = ZQ_Libro_erogaciones
-          DataField = 'NOMBRE_FANTASIA'
+          DataField = 'APELLIDO_Y_NOMBRE'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -9
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
-          Transparent = False
+          Transparent = True
           WordWrap = True
           FontSize = 7
         end
@@ -1430,7 +1541,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
-          Transparent = False
+          Transparent = True
           WordWrap = True
           FontSize = 7
         end
@@ -1444,8 +1555,8 @@ object FListadoErogaciones: TFListadoErogaciones
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = True
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
+        Frame.DrawLeft = True
+        Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
         ForceNewColumn = False
@@ -1455,7 +1566,7 @@ object FListadoErogaciones: TFListadoErogaciones
           1899.708333333333000000)
         BandType = rbGroupFooter
         object QRDBText7: TQRDBText
-          Left = 173
+          Left = 143
           Top = 1
           Width = 212
           Height = 13
@@ -1466,7 +1577,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333330000
-            457.729166666666700000
+            378.354166666666700000
             2.645833333333333000
             560.916666666666700000)
           Alignment = taLeftJustify
@@ -1475,7 +1586,7 @@ object FListadoErogaciones: TFListadoErogaciones
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_Libro_erogaciones
-          DataField = 'NRO_FACTURA_RECIBO'
+          DataField = 'NRO_FACTURA'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -9
@@ -1487,7 +1598,7 @@ object FListadoErogaciones: TFListadoErogaciones
           FontSize = 7
         end
         object QRDBText8: TQRDBText
-          Left = 415
+          Left = 412
           Top = 1
           Width = 212
           Height = 13
@@ -1498,7 +1609,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333330000
-            1098.020833333333000000
+            1090.083333333333000000
             2.645833333333333000
             560.916666666666700000)
           Alignment = taLeftJustify
@@ -1507,7 +1618,7 @@ object FListadoErogaciones: TFListadoErogaciones
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_Libro_erogaciones
-          DataField = 'OTROS'
+          DataField = 'NRO_RECIBO'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -9
@@ -1539,7 +1650,7 @@ object FListadoErogaciones: TFListadoErogaciones
         object QRLabel7: TQRLabel
           Left = 85
           Top = 3
-          Width = 86
+          Width = 55
           Height = 11
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1550,12 +1661,12 @@ object FListadoErogaciones: TFListadoErogaciones
             29.104166666666670000
             224.895833333333300000
             7.937500000000000000
-            227.541666666666700000)
+            145.520833333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
-          Caption = 'Nro. Factura/Recibo:'
+          Caption = 'Nro. Factura:'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -1568,9 +1679,9 @@ object FListadoErogaciones: TFListadoErogaciones
           FontSize = 6
         end
         object QRLabel8: TQRLabel
-          Left = 387
+          Left = 360
           Top = 3
-          Width = 26
+          Width = 49
           Height = 11
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1579,14 +1690,14 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawRight = False
           Size.Values = (
             29.104166666666670000
-            1023.937500000000000000
+            952.500000000000000000
             7.937500000000000000
-            68.791666666666680000)
+            129.645833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
-          Caption = 'Otros:'
+          Caption = 'Nro Recibo:'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -1604,7 +1715,7 @@ object FListadoErogaciones: TFListadoErogaciones
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1815,18 +1926,20 @@ object FListadoErogaciones: TFListadoErogaciones
     OnCalcFields = ZQ_Libro_erogacionesCalcFields
     SQL.Strings = (
       
-        'select ctamov.*, mov.*, cta.nombre_cuenta, cta.nro_cuenta_bancar' +
-        'ia,'
+        'select ctamov.fecha_mdc, ctamov.banco_mdc, ctamov.nro_cheque_tra' +
+        'nsf, ctamov.importe, ctamov.conciliado,'
       
-        '       pro.nro_proveedor, pro.nombre_fantasia, mcob.nombre_medio' +
-        '_cobro_pago,'
-      '       cpto.cod_corto as cod_concepto, cpto.nombre_concepto,'
+        '       ctamov.fecha_conciliado, ctamov.anulado, mov.descripcion,' +
+        ' mov.fecha, mov.nro_orden, mov.nro_movimiento,'
       
-        '       tmov.codigo_corto as cod_tipomovimiento, tmov.descripcion' +
-        ' as nombre_tipomov,'
+        '       mov.nro_factura, mov.nro_recibo, cta.nombre_cuenta, cta.n' +
+        'ro_cuenta_bancaria,'
       
-        '       omov.codigo_corto as cod_objmovimiento, omov.descripcion ' +
-        'as nombre_objmovimiento'
+        '       pro.apellido_y_nombre, mcob.nombre_medio_cobro_pago, cpto' +
+        '.cod_corto, cpto.nombre_concepto,'
+      
+        '       ('#39#39'||substr(extractyear(mov.fecha),3,4)||'#39'-'#39'||lpad(mov.nr' +
+        'o_orden,8,'#39'0'#39')) as nro_orden_string'
       'from ie_cuentas_movimientos ctamov'
       
         'left join ie_cuentas cta on (ctamov.id_cuenta_egreso = cta.id_cu' +
@@ -1843,12 +1956,6 @@ object FListadoErogaciones: TFListadoErogaciones
       
         'left join ie_conceptos cpto on (mov.id_concepto = cpto.id_concep' +
         'to)'
-      
-        'left join tipo_movimiento tmov on (mov.id_tipo_movimiento = tmov' +
-        '.id_tipo_moviemiento)'
-      
-        'left join objeto_movimientos omov on (mov.id_objeto_movimiento =' +
-        ' omov.id_objeto_movimiento)'
       'where ('
       
         '        (mov.fecha between :Fecha_Desde and :Fecha_Hasta) /*TODO' +
@@ -1911,23 +2018,6 @@ object FListadoErogaciones: TFListadoErogaciones
       currency = True
       Calculated = True
     end
-    object ZQ_Libro_erogacionesID: TIntegerField
-      FieldName = 'ID'
-      Required = True
-    end
-    object ZQ_Libro_erogacionesNRO_MOVIMIENTO: TIntegerField
-      FieldName = 'NRO_MOVIMIENTO'
-      Required = True
-    end
-    object ZQ_Libro_erogacionesID_CUENTA_INGRESO: TIntegerField
-      FieldName = 'ID_CUENTA_INGRESO'
-    end
-    object ZQ_Libro_erogacionesID_CUENTA_EGRESO: TIntegerField
-      FieldName = 'ID_CUENTA_EGRESO'
-    end
-    object ZQ_Libro_erogacionesID_MEDIO: TIntegerField
-      FieldName = 'ID_MEDIO'
-    end
     object ZQ_Libro_erogacionesFECHA_MDC: TDateField
       FieldName = 'FECHA_MDC'
     end
@@ -1939,14 +2029,6 @@ object FListadoErogaciones: TFListadoErogaciones
       FieldName = 'NRO_CHEQUE_TRANSF'
       Size = 30
     end
-    object ZQ_Libro_erogacionesNRO_FACTURA_RECIBO: TStringField
-      FieldName = 'NRO_FACTURA_RECIBO'
-      Size = 30
-    end
-    object ZQ_Libro_erogacionesOTROS: TStringField
-      FieldName = 'OTROS'
-      Size = 40
-    end
     object ZQ_Libro_erogacionesIMPORTE: TFloatField
       FieldName = 'IMPORTE'
     end
@@ -1957,63 +2039,27 @@ object FListadoErogaciones: TFListadoErogaciones
     object ZQ_Libro_erogacionesFECHA_CONCILIADO: TDateField
       FieldName = 'FECHA_CONCILIADO'
     end
-    object ZQ_Libro_erogacionesNRO_MOVIMIENTO_1: TIntegerField
-      FieldName = 'NRO_MOVIMIENTO_1'
-      Required = True
-    end
-    object ZQ_Libro_erogacionesNRO_PROVEEDOR: TIntegerField
-      FieldName = 'NRO_PROVEEDOR'
-    end
-    object ZQ_Libro_erogacionesID_CONCEPTO: TIntegerField
-      FieldName = 'ID_CONCEPTO'
-    end
-    object ZQ_Libro_erogacionesID_TIPO_MOVIMIENTO: TIntegerField
-      FieldName = 'ID_TIPO_MOVIMIENTO'
-    end
-    object ZQ_Libro_erogacionesID_OBJETO_MOVIMIENTO: TIntegerField
-      FieldName = 'ID_OBJETO_MOVIMIENTO'
+    object ZQ_Libro_erogacionesANULADO: TStringField
+      FieldName = 'ANULADO'
+      Size = 1
     end
     object ZQ_Libro_erogacionesDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       Size = 200
     end
-    object ZQ_Libro_erogacionesPAGO_DEL_EJERCICIO: TStringField
-      FieldName = 'PAGO_DEL_EJERCICIO'
-      Size = 1
-    end
     object ZQ_Libro_erogacionesFECHA: TDateField
       FieldName = 'FECHA'
     end
-    object ZQ_Libro_erogacionesIMPORTE_1: TFloatField
-      FieldName = 'IMPORTE_1'
-    end
-    object ZQ_Libro_erogacionesIMPRESO: TStringField
-      FieldName = 'IMPRESO'
-      Size = 1
-    end
-    object ZQ_Libro_erogacionesNRO_COMPROMISO: TIntegerField
-      FieldName = 'NRO_COMPROMISO'
-    end
-    object ZQ_Libro_erogacionesNRO_PARTE: TIntegerField
-      FieldName = 'NRO_PARTE'
-    end
-    object ZQ_Libro_erogacionesANULADO: TStringField
-      FieldName = 'ANULADO'
-      Size = 1
-    end
-    object ZQ_Libro_erogacionesFECHA_ANULADO: TDateField
-      FieldName = 'FECHA_ANULADO'
-    end
-    object ZQ_Libro_erogacionesPARTE_ANULADO: TIntegerField
-      FieldName = 'PARTE_ANULADO'
-    end
-    object ZQ_Libro_erogacionesDETALLE_ANULADO: TStringField
-      FieldName = 'DETALLE_ANULADO'
-      Size = 200
-    end
     object ZQ_Libro_erogacionesNRO_ORDEN: TIntegerField
       FieldName = 'NRO_ORDEN'
-      DisplayFormat = '00000000'
+    end
+    object ZQ_Libro_erogacionesNRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 50
+    end
+    object ZQ_Libro_erogacionesNRO_RECIBO: TStringField
+      FieldName = 'NRO_RECIBO'
+      Size = 50
     end
     object ZQ_Libro_erogacionesNOMBRE_CUENTA: TStringField
       FieldName = 'NOMBRE_CUENTA'
@@ -2023,41 +2069,30 @@ object FListadoErogaciones: TFListadoErogaciones
       FieldName = 'NRO_CUENTA_BANCARIA'
       Size = 100
     end
-    object ZQ_Libro_erogacionesNRO_PROVEEDOR_1: TIntegerField
-      FieldName = 'NRO_PROVEEDOR_1'
-      Required = True
-    end
-    object ZQ_Libro_erogacionesNOMBRE_FANTASIA: TStringField
-      FieldName = 'NOMBRE_FANTASIA'
+    object ZQ_Libro_erogacionesAPELLIDO_Y_NOMBRE: TStringField
+      FieldName = 'APELLIDO_Y_NOMBRE'
       Size = 60
     end
     object ZQ_Libro_erogacionesNOMBRE_MEDIO_COBRO_PAGO: TStringField
       FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
       Size = 30
     end
-    object ZQ_Libro_erogacionesCOD_CONCEPTO: TStringField
-      FieldName = 'COD_CONCEPTO'
+    object ZQ_Libro_erogacionesCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
       Size = 6
     end
     object ZQ_Libro_erogacionesNOMBRE_CONCEPTO: TStringField
       FieldName = 'NOMBRE_CONCEPTO'
       Size = 240
     end
-    object ZQ_Libro_erogacionesCOD_TIPOMOVIMIENTO: TStringField
-      FieldName = 'COD_TIPOMOVIMIENTO'
-      Size = 6
+    object ZQ_Libro_erogacionesNRO_ORDEN_STRING: TStringField
+      FieldName = 'NRO_ORDEN_STRING'
+      ReadOnly = True
+      Size = 336
     end
-    object ZQ_Libro_erogacionesNOMBRE_TIPOMOV: TStringField
-      FieldName = 'NOMBRE_TIPOMOV'
-      Size = 100
-    end
-    object ZQ_Libro_erogacionesCOD_OBJMOVIMIENTO: TStringField
-      FieldName = 'COD_OBJMOVIMIENTO'
-      Size = 6
-    end
-    object ZQ_Libro_erogacionesNOMBRE_OBJMOVIMIENTO: TStringField
-      FieldName = 'NOMBRE_OBJMOVIMIENTO'
-      Size = 100
+    object ZQ_Libro_erogacionesNRO_MOVIMIENTO: TIntegerField
+      FieldName = 'NRO_MOVIMIENTO'
+      Required = True
     end
   end
   object DS_Libro_erogaciones: TDataSource
@@ -2193,7 +2228,7 @@ object FListadoErogaciones: TFListadoErogaciones
     Top = 368
   end
   object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = ReporteErogaciones
+    Reporte = RepErog
     ShowModal = False
     Left = 920
     Top = 464
