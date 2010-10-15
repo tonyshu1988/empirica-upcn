@@ -43,31 +43,19 @@ type
     DS_Movimiento: TDataSource;
     ZQ_VerSaldos: TZQuery;
     DS_VerSaldos: TDataSource;
-    ZQ_VerSaldosID: TIntegerField;
-    ZQ_VerSaldosNRO_MOVIMIENTO: TIntegerField;
-    ZQ_VerSaldosID_CUENTA_INGRESO: TIntegerField;
-    ZQ_VerSaldosID_CUENTA_EGRESO: TIntegerField;
-    ZQ_VerSaldosID_MEDIO: TIntegerField;
-    ZQ_VerSaldosFECHA_MDC: TDateField;
-    ZQ_VerSaldosBANCO_MDC: TStringField;
-    ZQ_VerSaldosNRO_CHEQUE_TRANSF: TStringField;
-    ZQ_VerSaldosIMPORTE: TFloatField;
-    ZQ_VerSaldosCONCILIADO: TStringField;
-    ZQ_VerSaldosNRO_MOVIMIENTO_1: TIntegerField;
-    ZQ_VerSaldosNRO_PROVEEDOR: TIntegerField;
-    ZQ_VerSaldosID_CONCEPTO: TIntegerField;
-    ZQ_VerSaldosID_OBJETO_MOVIMIENTO: TIntegerField;
-    ZQ_VerSaldosDESCRIPCION: TStringField;
-    ZQ_VerSaldosPAGO_DEL_EJERCICIO: TStringField;
-    ZQ_VerSaldosFECHA: TDateField;
-    ZQ_VerSaldosIMPORTE_1: TFloatField;
-    ZQ_VerSaldosIMPRESO: TStringField;
-    ZQ_VerSaldosNRO_COMPROMISO: TIntegerField;
-    ZQ_VerSaldosNRO_PARTE: TIntegerField;
-    ZQ_VerSaldosANULADO: TStringField;
-    ZQ_VerSaldosFECHA_ANULADO: TDateField;
-    ZQ_VerSaldosPARTE_ANULADO: TIntegerField;
-    ZQ_VerSaldosDETALLE_ANULADO: TStringField;
+    ZP_ObtenerNroMov: TZStoredProc;
+    Label4: TLabel;
+    DBLookupCBoxMedio: TDBLookupComboBox;
+    DBEditNroMedio: TDBEdit;
+    Label5: TLabel;
+    ZQ_Medio: TZQuery;
+    ZQ_MedioID_MEDIO: TIntegerField;
+    ZQ_MedioNOMBRE_MEDIO_COBRO_PAGO: TStringField;
+    DS_Medio: TDataSource;
+    ZQ_VerSaldosnombreCuenta: TStringField;
+    ZQ_VerSaldosnombreMedio: TStringField;
+    ZQ_BuscarMov: TZQuery;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_CuentaIngresoID_CUENTA: TIntegerField;
     ZQ_CuentaIngresoNOMBRE_CUENTA: TStringField;
     ZQ_CuentaIngresoMEDIO_DE_PAGO: TStringField;
@@ -76,8 +64,6 @@ type
     ZQ_CuentaIngresoAUTONUMERAR: TStringField;
     ZQ_CuentaIngresoMEDIO_POR_DEFECTO: TIntegerField;
     ZQ_CuentaIngresoBUSQUEDA: TStringField;
-    ZP_ObtenerNroMov: TZStoredProc;
-    ZP_ObtenerNroMovID: TIntegerField;
     ZQ_Cuenta_MovID: TIntegerField;
     ZQ_Cuenta_MovNRO_MOVIMIENTO: TIntegerField;
     ZQ_Cuenta_MovID_CUENTA_INGRESO: TIntegerField;
@@ -88,6 +74,8 @@ type
     ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Cuenta_MovIMPORTE: TFloatField;
     ZQ_Cuenta_MovCONCILIADO: TStringField;
+    ZQ_Cuenta_MovFECHA_CONCILIADO: TDateField;
+    ZQ_Cuenta_MovANULADO: TStringField;
     ZQ_MovimientoNRO_MOVIMIENTO: TIntegerField;
     ZQ_MovimientoNRO_PROVEEDOR: TIntegerField;
     ZQ_MovimientoID_CONCEPTO: TIntegerField;
@@ -103,19 +91,41 @@ type
     ZQ_MovimientoFECHA_ANULADO: TDateField;
     ZQ_MovimientoPARTE_ANULADO: TIntegerField;
     ZQ_MovimientoDETALLE_ANULADO: TStringField;
-    Label4: TLabel;
-    DBLookupCBoxMedio: TDBLookupComboBox;
-    DBEditNroMedio: TDBEdit;
-    Label5: TLabel;
-    ZQ_Medio: TZQuery;
-    ZQ_MedioID_MEDIO: TIntegerField;
-    ZQ_MedioNOMBRE_MEDIO_COBRO_PAGO: TStringField;
-    DS_Medio: TDataSource;
-    ZQ_VerSaldosnombreCuenta: TStringField;
-    ZQ_VerSaldosnombreMedio: TStringField;
-    ZQ_BuscarMov: TZQuery;
+    ZQ_MovimientoNRO_ORDEN: TIntegerField;
+    ZQ_MovimientoNRO_FACTURA: TStringField;
+    ZQ_MovimientoNRO_RECIBO: TStringField;
+    ZQ_VerSaldosID: TIntegerField;
+    ZQ_VerSaldosNRO_MOVIMIENTO: TIntegerField;
+    ZQ_VerSaldosID_CUENTA_INGRESO: TIntegerField;
+    ZQ_VerSaldosID_CUENTA_EGRESO: TIntegerField;
+    ZQ_VerSaldosID_MEDIO: TIntegerField;
+    ZQ_VerSaldosFECHA_MDC: TDateField;
+    ZQ_VerSaldosBANCO_MDC: TStringField;
+    ZQ_VerSaldosNRO_CHEQUE_TRANSF: TStringField;
+    ZQ_VerSaldosIMPORTE: TFloatField;
+    ZQ_VerSaldosCONCILIADO: TStringField;
+    ZQ_VerSaldosFECHA_CONCILIADO: TDateField;
+    ZQ_VerSaldosANULADO: TStringField;
+    ZQ_VerSaldosNRO_MOVIMIENTO_1: TIntegerField;
+    ZQ_VerSaldosNRO_PROVEEDOR: TIntegerField;
+    ZQ_VerSaldosID_CONCEPTO: TIntegerField;
+    ZQ_VerSaldosID_OBJETO_MOVIMIENTO: TIntegerField;
+    ZQ_VerSaldosDESCRIPCION: TStringField;
+    ZQ_VerSaldosPAGO_DEL_EJERCICIO: TStringField;
+    ZQ_VerSaldosFECHA: TDateField;
+    ZQ_VerSaldosIMPORTE_1: TFloatField;
+    ZQ_VerSaldosIMPRESO: TStringField;
+    ZQ_VerSaldosNRO_COMPROMISO: TIntegerField;
+    ZQ_VerSaldosNRO_PARTE: TIntegerField;
+    ZQ_VerSaldosANULADO_1: TStringField;
+    ZQ_VerSaldosFECHA_ANULADO: TDateField;
+    ZQ_VerSaldosPARTE_ANULADO: TIntegerField;
+    ZQ_VerSaldosDETALLE_ANULADO: TStringField;
+    ZQ_VerSaldosNRO_ORDEN: TIntegerField;
+    ZQ_VerSaldosNRO_FACTURA: TStringField;
+    ZQ_VerSaldosNRO_RECIBO: TStringField;
     ZQ_BuscarMovNRO_MOVIMIENTO: TIntegerField;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    ZP_ObtenerNroMovID: TIntegerField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -132,6 +142,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure ZQ_VerSaldosAfterScroll(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
   public
@@ -356,6 +367,7 @@ begin
   dm.EKModelo.abrir(ZQ_Medio);
 end;
 
+
 procedure TFSaldoInicial.ZQ_VerSaldosAfterScroll(DataSet: TDataSet);
 begin
   ZQ_BuscarMov.Close;
@@ -374,10 +386,24 @@ begin
   end;
 end;
 
+
 procedure TFSaldoInicial.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
+end;
+
+
+procedure TFSaldoInicial.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_saldo) then
+  begin
+    if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela?'), 'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+      canClose := False
+    else
+      dm.EKModelo.cancelar_transaccion(transaccion_saldo);
+  end;
 end;
 
 end.

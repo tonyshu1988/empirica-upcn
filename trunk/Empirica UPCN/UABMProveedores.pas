@@ -87,6 +87,7 @@ type
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     Label7: TLabel;
     dbDatosAdic: TDBMemo;
+    ZQ_IE_ProveedoresDESCRIPCION: TStringField;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -103,6 +104,7 @@ type
     procedure btImprimirClick(Sender: TObject);
     function validarcampos():boolean;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ZQ_IE_ProveedoresAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -134,6 +136,7 @@ begin
     DBGridProveedores.Enabled := false;
     Panel_edicion.Enabled:=true;
     ZQ_IE_Proveedores.Append;
+    ZQ_IE_ProveedoresBAJA.AsString:= 'N';    
     DBENombreApellido.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -156,6 +159,8 @@ begin
 end;
 
 procedure TFABMProveedores.btBajaClick(Sender: TObject);
+var
+  recNo: integer;
 begin
   if ZQ_IE_Proveedores.IsEmpty then
     exit;
@@ -172,10 +177,16 @@ begin
 
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMProveedores)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABMProveedores);
+
+    recNo:= ZQ_IE_Proveedores.RecNo;
+    ZQ_IE_Proveedores.Refresh;
+    ZQ_IE_Proveedores.RecNo:= recNo;
   end;
 end;
 
 procedure TFABMProveedores.btReactivarClick(Sender: TObject);
+var
+  recNo: integer;
 begin
   if ZQ_IE_Proveedores.IsEmpty then
     exit;
@@ -192,6 +203,10 @@ begin
 
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMProveedores)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABMProveedores);
+
+    recNo:= ZQ_IE_Proveedores.RecNo;
+    ZQ_IE_Proveedores.Refresh;
+    ZQ_IE_Proveedores.RecNo:= recNo;
   end;
 end;
 
@@ -306,6 +321,21 @@ procedure TFABMProveedores.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
+end;
+
+procedure TFABMProveedores.ZQ_IE_ProveedoresAfterScroll(DataSet: TDataSet);
+begin
+  if ZQ_IE_ProveedoresBAJA.AsString = 'S' then
+  begin
+    btBaja.Enabled:= false;
+    btReactivar.Enabled:= true;
+  end
+  else
+  if ZQ_IE_ProveedoresBAJA.AsString = 'N' then
+  begin
+    btBaja.Enabled:= true;
+    btReactivar.Enabled:= false;
+  end
 end;
 
 end.

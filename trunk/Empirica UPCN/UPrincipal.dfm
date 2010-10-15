@@ -65,54 +65,65 @@ object FPrincipal: TFPrincipal
     StyleName = 'XP Style'
     object AConfiguracion: TAction
       Caption = 'Configuracion'
+      Hint = 'Configuracion'
       ImageIndex = 16
       OnExecute = AConfiguracionExecute
     end
     object AABMProveedores: TAction
       Caption = 'ABM Proveedores'
+      Hint = 'ABM Proveedores'
       ImageIndex = 18
       OnExecute = AABMProveedoresExecute
     end
     object AABM_Cuentas: TAction
       Caption = 'ABM Cuentas'
+      Hint = 'ABM Cuentas'
       ImageIndex = 29
       OnExecute = AABM_CuentasExecute
     end
     object AConceptos: TAction
       Caption = 'Conceptos'
+      Hint = 'Conceptos'
       ImageIndex = 35
       OnExecute = AConceptosExecute
     end
     object AMovimientos: TAction
       Caption = 'Movimientos'
+      Hint = 'Movimientos'
       ImageIndex = 25
       OnExecute = AMovimientosExecute
     end
     object ASaldoInicial: TAction
       Caption = 'Saldo Inicial'
+      Hint = 'Saldo Inicial'
       ImageIndex = 24
       OnExecute = ASaldoInicialExecute
     end
     object ARep_LibroBanco: TAction
       Caption = 'Libro Banco'
+      Hint = 'Libro Banco'
       ImageIndex = 49
       OnExecute = ARep_LibroBancoExecute
     end
     object ARepListado_Erogaciones: TAction
       Caption = 'Listado Erogaciones'
+      Hint = 'Listado Erogaciones'
       ImageIndex = 48
       OnExecute = ARepListado_ErogacionesExecute
     end
     object ARep_Conciliacion: TAction
       Caption = 'Conciliaci'#243'n Bancaria'
+      Hint = 'Conciliaci'#243'n Bancaria'
       ImageIndex = 47
       OnExecute = ARep_ConciliacionExecute
     end
     object ARep_SaldoInicial: TAction
       Caption = 'Saldos Iniciales'
+      Hint = 'Saldos Iniciales'
     end
     object AABM_Autoridad: TAction
       Caption = 'ABM Autoridad'
+      Hint = 'ABM Autoridad'
       ImageIndex = 20
       OnExecute = AABM_AutoridadExecute
     end

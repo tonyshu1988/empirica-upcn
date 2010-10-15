@@ -25,13 +25,13 @@ object FABMProveedores: TFABMProveedores
     Left = 0
     Top = 0
     Width = 854
-    Height = 414
+    Height = 410
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
     object Panel_edicion: TPanel
       Left = 1
-      Top = 294
+      Top = 290
       Width = 852
       Height = 119
       Align = alBottom
@@ -151,7 +151,7 @@ object FABMProveedores: TFABMProveedores
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 3
       end
       object DBEDireccion: TDBEdit
         Left = 73
@@ -167,7 +167,7 @@ object FABMProveedores: TFABMProveedores
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 2
       end
       object DBENroDocumento: TDBEdit
         Left = 619
@@ -223,6 +223,8 @@ object FABMProveedores: TFABMProveedores
         Top = 77
         Width = 377
         Height = 37
+        DataField = 'DESCRIPCION'
+        DataSource = DS_IE_Proveedores
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -236,7 +238,7 @@ object FABMProveedores: TFABMProveedores
       Left = 1
       Top = 20
       Width = 852
-      Height = 274
+      Height = 270
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -1351,10 +1353,12 @@ object FABMProveedores: TFABMProveedores
   end
   object ZQ_IE_Proveedores: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_IE_ProveedoresAfterScroll
     SQL.Strings = (
       'select p.*'
       'from ie_proveedores p '
-      'where p.baja <> '#39'N'#39)
+      'where p.nro_proveedor > 0'
+      'order by p.apellido_y_nombre, p.nombre_fantasia')
     Params = <>
     Left = 432
     Top = 72
@@ -1392,6 +1396,10 @@ object FABMProveedores: TFABMProveedores
     object ZQ_IE_ProveedoresTIPO_DOCUMENTO: TStringField
       FieldName = 'TIPO_DOCUMENTO'
       Size = 10
+    end
+    object ZQ_IE_ProveedoresDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
     end
   end
   object DS_IE_Proveedores: TDataSource
@@ -1475,11 +1483,17 @@ object FABMProveedores: TFABMProveedores
     DataSet = ZQ_IE_Proveedores
     SQL.Strings = (
       'select p.*'
-      'from ie_proveedores p ')
+      'from ie_proveedores p '
+      'where p.nro_proveedor > 0'
+      'order by p.apellido_y_nombre, p.nombre_fantasia')
     SQL_Select.Strings = (
       'select p.*')
     SQL_From.Strings = (
       'from ie_proveedores p ')
+    SQL_Where.Strings = (
+      'where p.nro_proveedor > 0')
+    SQL_Orden.Strings = (
+      'order by p.apellido_y_nombre, p.nombre_fantasia')
     UsarWhereOriginal = EK_Con_Where
     InfoRegistros = Label4
     PantallaReducida = True
