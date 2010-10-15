@@ -860,10 +860,11 @@ object FConceptos: TFConceptos
     SQL.Strings = (
       'select *'
       'from IE_conceptos'
+      'where ie_conceptos.id_concepto > 0'
       'order by ie_conceptos.id_concepto,ie_conceptos.cod_corto')
     Params = <>
-    Left = 256
-    Top = 72
+    Left = 280
+    Top = 80
     object ZQ_IE_ConceptosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
     end
@@ -1242,11 +1243,14 @@ object FConceptos: TFConceptos
     SQL.Strings = (
       'select *'
       'from IE_conceptos'
+      'where ie_conceptos.id_concepto > 0'
       'order by ie_conceptos.id_concepto,ie_conceptos.cod_corto')
     SQL_Select.Strings = (
       'select *')
     SQL_From.Strings = (
       'from IE_conceptos')
+    SQL_Where.Strings = (
+      'where ie_conceptos.id_concepto > 0')
     SQL_Orden.Strings = (
       'order by ie_conceptos.id_concepto,ie_conceptos.cod_corto')
     UsarWhereOriginal = EK_Con_Where

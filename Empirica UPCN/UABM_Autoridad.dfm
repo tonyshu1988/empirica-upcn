@@ -381,7 +381,6 @@ object FABM_Autoridad: TFABM_Autoridad
     Top = 152
     object ZQ_AutoridadID_AUTORIDAD: TIntegerField
       FieldName = 'ID_AUTORIDAD'
-      Required = True
     end
     object ZQ_AutoridadNOMBE: TStringField
       FieldName = 'NOMBE'

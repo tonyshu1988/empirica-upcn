@@ -17,29 +17,30 @@ object FSaldoInicial: TFSaldoInicial
   Visible = True
   WindowState = wsMaximized
   OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 447
+    Width = 854
+    Height = 441
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
     TabOrder = 0
     object pDatos: TPanel
       Left = 2
-      Top = 286
-      Width = 858
+      Top = 280
+      Width = 850
       Height = 159
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
       Visible = False
       DesignSize = (
-        858
+        850
         159)
       object Label3: TLabel
         Left = 70
@@ -197,8 +198,8 @@ object FSaldoInicial: TFSaldoInicial
     object DBGridSaldosIniciales: TDBGrid
       Left = 2
       Top = 2
-      Width = 858
-      Height = 284
+      Width = 850
+      Height = 278
       Align = alClient
       Color = 16772842
       DataSource = DS_VerSaldos
@@ -275,7 +276,7 @@ object FSaldoInicial: TFSaldoInicial
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -448,7 +449,6 @@ object FSaldoInicial: TFSaldoInicial
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
       ImageIndex = 0
-      ShortCut = 113
       OnClick = btnNuevoClick
       AutoGrayScale = False
       HotImageIndex = 0
@@ -459,7 +459,6 @@ object FSaldoInicial: TFSaldoInicial
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
       ImageIndex = 1
-      ShortCut = 114
       OnClick = btnModificarClick
       AutoGrayScale = False
       HotImageIndex = 1
@@ -470,7 +469,6 @@ object FSaldoInicial: TFSaldoInicial
       Hint = 'Eliminar el registro actual'
       Visible = ivAlways
       ImageIndex = 2
-      ShortCut = 115
       OnClick = btnEliminarClick
       AutoGrayScale = False
       HotImageIndex = 2
@@ -482,7 +480,6 @@ object FSaldoInicial: TFSaldoInicial
       Hint = 'Guarda los cambios'
       Visible = ivAlways
       ImageIndex = 3
-      ShortCut = 121
       OnClick = btnGuardarClick
       AutoGrayScale = False
       HotImageIndex = 3
@@ -494,7 +491,6 @@ object FSaldoInicial: TFSaldoInicial
       Hint = 'Cancela los cambios'
       Visible = ivAlways
       ImageIndex = 4
-      ShortCut = 120
       OnClick = btnCancelarClick
       AutoGrayScale = False
       HotImageIndex = 4
@@ -506,7 +502,6 @@ object FSaldoInicial: TFSaldoInicial
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
       ImageIndex = 6
-      ShortCut = 123
       OnClick = btnSalirClick
       AutoGrayScale = False
       HotImageIndex = 6
@@ -560,7 +555,6 @@ object FSaldoInicial: TFSaldoInicial
     Top = 64
     object ZQ_CuentaIngresoID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
-      Required = True
     end
     object ZQ_CuentaIngresoNOMBRE_CUENTA: TStringField
       FieldName = 'NOMBRE_CUENTA'
@@ -667,6 +661,13 @@ object FSaldoInicial: TFSaldoInicial
       FieldName = 'CONCILIADO'
       Size = 1
     end
+    object ZQ_Cuenta_MovFECHA_CONCILIADO: TDateField
+      FieldName = 'FECHA_CONCILIADO'
+    end
+    object ZQ_Cuenta_MovANULADO: TStringField
+      FieldName = 'ANULADO'
+      Size = 1
+    end
   end
   object ZQ_Movimiento: TZQuery
     Connection = DM.Conexion
@@ -738,6 +739,17 @@ object FSaldoInicial: TFSaldoInicial
       FieldName = 'DETALLE_ANULADO'
       Size = 200
     end
+    object ZQ_MovimientoNRO_ORDEN: TIntegerField
+      FieldName = 'NRO_ORDEN'
+    end
+    object ZQ_MovimientoNRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 50
+    end
+    object ZQ_MovimientoNRO_RECIBO: TStringField
+      FieldName = 'NRO_RECIBO'
+      Size = 50
+    end
   end
   object DS_Cuenta_Mov: TDataSource
     DataSet = ZQ_Cuenta_Mov
@@ -762,13 +774,31 @@ object FSaldoInicial: TFSaldoInicial
     Params = <>
     Left = 544
     Top = 64
+    object ZQ_VerSaldosnombreCuenta: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombreCuenta'
+      LookupDataSet = ZQ_CuentaIngreso
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'NOMBRE_CUENTA'
+      KeyFields = 'ID_CUENTA_INGRESO'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_VerSaldosnombreMedio: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombreMedio'
+      LookupDataSet = ZQ_Medio
+      LookupKeyFields = 'ID_MEDIO'
+      LookupResultField = 'NOMBRE_MEDIO_COBRO_PAGO'
+      KeyFields = 'ID_MEDIO'
+      Size = 30
+      Lookup = True
+    end
     object ZQ_VerSaldosID: TIntegerField
       FieldName = 'ID'
-      Required = True
     end
     object ZQ_VerSaldosNRO_MOVIMIENTO: TIntegerField
       FieldName = 'NRO_MOVIMIENTO'
-      Required = True
     end
     object ZQ_VerSaldosID_CUENTA_INGRESO: TIntegerField
       FieldName = 'ID_CUENTA_INGRESO'
@@ -792,22 +822,26 @@ object FSaldoInicial: TFSaldoInicial
     end
     object ZQ_VerSaldosIMPORTE: TFloatField
       FieldName = 'IMPORTE'
-      currency = True
     end
     object ZQ_VerSaldosCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
       Size = 1
     end
+    object ZQ_VerSaldosFECHA_CONCILIADO: TDateField
+      FieldName = 'FECHA_CONCILIADO'
+    end
+    object ZQ_VerSaldosANULADO: TStringField
+      FieldName = 'ANULADO'
+      Size = 1
+    end
     object ZQ_VerSaldosNRO_MOVIMIENTO_1: TIntegerField
       FieldName = 'NRO_MOVIMIENTO_1'
-      Required = True
     end
     object ZQ_VerSaldosNRO_PROVEEDOR: TIntegerField
       FieldName = 'NRO_PROVEEDOR'
     end
     object ZQ_VerSaldosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
-      Required = True
     end
     object ZQ_VerSaldosID_OBJETO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_OBJETO_MOVIMIENTO'
@@ -836,8 +870,8 @@ object FSaldoInicial: TFSaldoInicial
     object ZQ_VerSaldosNRO_PARTE: TIntegerField
       FieldName = 'NRO_PARTE'
     end
-    object ZQ_VerSaldosANULADO: TStringField
-      FieldName = 'ANULADO'
+    object ZQ_VerSaldosANULADO_1: TStringField
+      FieldName = 'ANULADO_1'
       Size = 1
     end
     object ZQ_VerSaldosFECHA_ANULADO: TDateField
@@ -850,25 +884,16 @@ object FSaldoInicial: TFSaldoInicial
       FieldName = 'DETALLE_ANULADO'
       Size = 200
     end
-    object ZQ_VerSaldosnombreCuenta: TStringField
-      FieldKind = fkLookup
-      FieldName = 'nombreCuenta'
-      LookupDataSet = ZQ_CuentaIngreso
-      LookupKeyFields = 'ID_CUENTA'
-      LookupResultField = 'NOMBRE_CUENTA'
-      KeyFields = 'ID_CUENTA_INGRESO'
-      Size = 100
-      Lookup = True
+    object ZQ_VerSaldosNRO_ORDEN: TIntegerField
+      FieldName = 'NRO_ORDEN'
     end
-    object ZQ_VerSaldosnombreMedio: TStringField
-      FieldKind = fkLookup
-      FieldName = 'nombreMedio'
-      LookupDataSet = ZQ_Medio
-      LookupKeyFields = 'ID_MEDIO'
-      LookupResultField = 'NOMBRE_MEDIO_COBRO_PAGO'
-      KeyFields = 'ID_MEDIO'
-      Size = 30
-      Lookup = True
+    object ZQ_VerSaldosNRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 50
+    end
+    object ZQ_VerSaldosNRO_RECIBO: TStringField
+      FieldName = 'NRO_RECIBO'
+      Size = 50
     end
   end
   object DS_VerSaldos: TDataSource
