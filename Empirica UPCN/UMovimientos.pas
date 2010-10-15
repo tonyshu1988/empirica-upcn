@@ -314,6 +314,7 @@ type
     QRLabel7: TQRLabel;
     QRDBText2: TQRDBText;
     QRDBText4: TQRDBText;
+    LIBRO_BANCONRO_ORDEN_STRING: TStringField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);

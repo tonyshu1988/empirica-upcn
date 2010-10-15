@@ -84,12 +84,12 @@ type
     EKVistaPreviaQR1: TEKVistaPreviaQR;
     Label5: TLabel;
     lblSaldo: TLabel;
-    ReporteConciliacion: TQuickRep;
+    RepConciliacion: TQuickRep;
     QRBand5: TQRBand;
     QRDBImage1: TQRDBImage;
     QRLabel12: TQRLabel;
-    ReporteConciliacion_direccion: TQRLabel;
-    ReporteConciliacion_entidad: TQRLabel;
+    RepConciliacion_Reporte_Titulo_2: TQRLabel;
+    RepConciliacion_Reporte_Titulo_1: TQRLabel;
     QRBandDetalle: TQRBand;
     QRChildBand2: TQRChildBand;
     QRBand7: TQRBand;
@@ -190,10 +190,10 @@ begin
 
       lblNombreCuenta.Caption:= BuscarParametros.ParametrosSelecReales1[0];
       lblFHasta.Caption:= BuscarParametros.ParametrosSelecReales1[1];
-      lblMonto.Caption:='$ '+ BuscarParametros.ParametrosSelecReales1[2];
-      lblSaldo.Caption:= '$ '+ZSP_LibroBancoSALDO.AsString;
-      lblTotalHaber.Caption:= '$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue);
-      lblSaldoConciliacion.Caption:= '$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue+ZSP_LibroBancoSALDO.AsFloat);
+      lblMonto.Caption:= FormatFloat('$ ###,###,##0.00', StrToFloat(BuscarParametros.ParametrosSelecReales1[2])); //'$ '+ BuscarParametros.ParametrosSelecReales1[2];
+      lblSaldo.Caption:= FormatFloat('$ ###,###,##0.00', ZSP_LibroBancoSALDO.AsFloat); //'$ '+ZSP_LibroBancoSALDO.AsString;
+      lblTotalHaber.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma1.SumCollection[0].SumValue); //'$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue);
+      lblSaldoConciliacion.Caption:= FormatFloat('$ ###,###,##0.00', (EKDbSuma1.SumCollection[0].SumValue+ZSP_LibroBancoSALDO.AsFloat)); //'$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue+ZSP_LibroBancoSALDO.AsFloat);
       lblDetalleExtracto.Caption:= BuscarParametros.ParametrosSelecReales1[3];
     end;
   end;
@@ -234,6 +234,7 @@ begin
   qrExtracto.Caption:=lblMonto.Caption;
   qrDetalleExtracto.Caption:=lblDetalleExtracto.Caption;
   QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  dm.VariablesReportes(RepConciliacion);
 
   EKVistaPreviaQR1.VistaPrevia;
 end;
