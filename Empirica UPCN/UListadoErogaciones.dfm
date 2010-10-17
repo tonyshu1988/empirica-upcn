@@ -1,6 +1,6 @@
 object FListadoErogaciones: TFListadoErogaciones
-  Left = 320
-  Top = 228
+  Left = 314
+  Top = 172
   Width = 913
   Height = 565
   Caption = 'Listado Erogaciones en Cumplimiento'
@@ -774,88 +774,10 @@ object FListadoErogaciones: TFListadoErogaciones
           WordWrap = True
           FontSize = 7
         end
-        object QRDBText30: TQRDBText
-          Left = 401
-          Top = 1
-          Width = 85
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            1060.979166666667000000
-            2.645833333333333000
-            224.895833333333300000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = True
-          Color = clWhite
-          DataSet = ZQ_Libro_erogaciones
-          DataField = 'NRO_CHEQUE_TRANSF'
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
-        object QRDBText6: TQRDBText
-          Left = 241
-          Top = 1
-          Width = 158
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            637.645833333333200000
-            2.645833333333333000
-            418.041666666666700000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Libro_erogaciones
-          DataField = 'BANCO_MDC'
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
-        object QRDBText4: TQRDBText
-          Left = 163
-          Top = 1
-          Width = 76
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            431.270833333333300000
-            2.645833333333333000
-            201.083333333333300000)
-          Alignment = taCenter
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Libro_erogaciones
-          DataField = 'FECHA_MDC'
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
         object QRDBText5: TQRDBText
-          Left = 85
+          Left = 150
           Top = 1
-          Width = 76
+          Width = 99
           Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -864,9 +786,9 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333330000
-            224.895833333333300000
+            396.875000000000000000
             2.645833333333333000
-            201.083333333333300000)
+            261.937500000000000000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -932,60 +854,6 @@ object FListadoErogaciones: TFListadoErogaciones
           Shape = qrsVertLine
           VertAdjust = 0
         end
-        object QRShape7: TQRShape
-          Left = 399
-          Top = 0
-          Width = 2
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1055.687500000000000000
-            0.000000000000000000
-            5.291666666666667000)
-          Shape = qrsVertLine
-          VertAdjust = 0
-        end
-        object QRShape8: TQRShape
-          Left = 239
-          Top = 0
-          Width = 2
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            632.354166666666700000
-            0.000000000000000000
-            5.291666666666667000)
-          Shape = qrsVertLine
-          VertAdjust = 0
-        end
-        object QRShape9: TQRShape
-          Left = 161
-          Top = 0
-          Width = 2
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            425.979166666666700000
-            0.000000000000000000
-            5.291666666666667000)
-          Shape = qrsVertLine
-          VertAdjust = 0
-        end
         object QRShape10: TQRShape
           Left = 716
           Top = 0
@@ -1021,6 +889,94 @@ object FListadoErogaciones: TFListadoErogaciones
             5.291666666666667000)
           Shape = qrsVertLine
           VertAdjust = 0
+        end
+        object QRLabel2: TQRLabel
+          Left = 85
+          Top = 2
+          Width = 63
+          Height = 11
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            29.104166666666670000
+            224.895833333333300000
+            5.291666666666667000
+            166.687500000000000000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Fecha Emisi'#243'n:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 6
+        end
+        object QRLabel4: TQRLabel
+          Left = 259
+          Top = 2
+          Width = 82
+          Height = 11
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            29.104166666666670000
+            685.270833333333300000
+            5.291666666666667000
+            216.958333333333300000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Nro Cheque/Transf:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 6
+        end
+        object QRDBText4: TQRDBText
+          Left = 344
+          Top = 1
+          Width = 99
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            910.166666666666700000
+            2.645833333333333000
+            261.937500000000000000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Libro_erogaciones
+          DataField = 'NRO_CHEQUE_TRANSF'
+          Transparent = False
+          WordWrap = True
+          FontSize = 7
         end
       end
       object QRChildBand2: TQRChildBand
@@ -1649,7 +1605,7 @@ object FListadoErogaciones: TFListadoErogaciones
         end
         object QRLabel7: TQRLabel
           Left = 85
-          Top = 3
+          Top = 2
           Width = 55
           Height = 11
           Frame.Color = clBlack
@@ -1660,7 +1616,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Size.Values = (
             29.104166666666670000
             224.895833333333300000
-            7.937500000000000000
+            5.291666666666667000
             145.520833333333300000)
           Alignment = taCenter
           AlignToBand = False
@@ -1680,7 +1636,7 @@ object FListadoErogaciones: TFListadoErogaciones
         end
         object QRLabel8: TQRLabel
           Left = 360
-          Top = 3
+          Top = 2
           Width = 49
           Height = 11
           Frame.Color = clBlack
@@ -1691,7 +1647,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Size.Values = (
             29.104166666666670000
             952.500000000000000000
-            7.937500000000000000
+            5.291666666666667000
             129.645833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -1939,7 +1895,7 @@ object FListadoErogaciones: TFListadoErogaciones
         '.cod_corto, cpto.nombre_concepto,'
       
         '       ('#39#39'||substr(extractyear(mov.fecha),3,4)||'#39'-'#39'||lpad(mov.nr' +
-        'o_orden,8,'#39'0'#39')) as nro_orden_string'
+        'o_orden,4,'#39'0'#39')) as nro_orden_string'
       'from ie_cuentas_movimientos ctamov'
       
         'left join ie_cuentas cta on (ctamov.id_cuenta_egreso = cta.id_cu' +

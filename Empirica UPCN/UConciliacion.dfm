@@ -61,7 +61,7 @@ object FConciliacion: TFConciliacion
         end
         item
           Expanded = False
-          FieldName = 'DESCRIPCION'
+          FieldName = 'PROVEEDOR'
           Title.Caption = 'Proveedor'
           Width = 437
           Visible = True
@@ -809,7 +809,7 @@ object FConciliacion: TFConciliacion
           AutoStretch = True
           Color = clWhite
           DataSet = ZSP_Conciliacion
-          DataField = 'DESCRIPCION'
+          DataField = 'PROVEEDOR'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -1967,10 +1967,6 @@ object FConciliacion: TFConciliacion
     object ZSP_LibroBancoSALDO: TFloatField
       FieldName = 'SALDO'
     end
-    object ZSP_LibroBancoDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 100
-    end
     object ZSP_LibroBancoCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
       Size = 1
@@ -1984,6 +1980,10 @@ object FConciliacion: TFConciliacion
     end
     object ZSP_LibroBancoNRO_ORDEN: TIntegerField
       FieldName = 'NRO_ORDEN'
+    end
+    object ZSP_LibroBancoPROVEEDOR: TStringField
+      FieldName = 'PROVEEDOR'
+      Size = 100
     end
   end
   object BuscarParametros: TEKBusquedaAvanzada
@@ -2298,10 +2298,6 @@ object FConciliacion: TFConciliacion
       FieldName = 'SALDO'
       currency = True
     end
-    object ZSP_ConciliacionDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 100
-    end
     object ZSP_ConciliacionCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
       Size = 1
@@ -2319,6 +2315,10 @@ object FConciliacion: TFConciliacion
     end
     object ZSP_ConciliacionFECHA_PD: TDateField
       FieldName = 'FECHA_PD'
+    end
+    object ZSP_ConciliacionPROVEEDOR: TStringField
+      FieldName = 'PROVEEDOR'
+      Size = 100
     end
   end
   object DS_Conciliacion: TDataSource

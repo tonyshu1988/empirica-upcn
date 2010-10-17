@@ -56,15 +56,8 @@ type
     Label4: TLabel;
     StaticText3: TStaticText;
     btImprimir: TdxBarLargeButton;
-    ReporteProveedores: TQuickRep;
+    RepProv: TQuickRep;
     QRBand7: TQRBand;
-    QRLabel26: TQRLabel;
-    QRLabel27: TQRLabel;
-    QRBand9: TQRBand;
-    QRLabel35: TQRLabel;
-    fechaHoy: TQRLabel;
-    QRLabel6: TQRLabel;
-    QRSysData1: TQRSysData;
     QRBand10: TQRBand;
     QRDBText53: TQRDBText;
     QRDBText63: TQRDBText;
@@ -88,6 +81,15 @@ type
     Label7: TLabel;
     dbDatosAdic: TDBMemo;
     ZQ_IE_ProveedoresDESCRIPCION: TStringField;
+    QRDBImage1: TQRDBImage;
+    QRLabel11: TQRLabel;
+    RepProv_Reporte_Titulo_2: TQRLabel;
+    RepProv_Reporte_Titulo_1: TQRLabel;
+    QRBand2: TQRBand;
+    QRLabel35: TQRLabel;
+    QRlblFechaHoy: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRSysData2: TQRSysData;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -291,7 +293,11 @@ end;
 
 procedure TFABMProveedores.btImprimirClick(Sender: TObject);
 begin
-if not ZQ_IE_Proveedores.IsEmpty then
+  if ZQ_IE_Proveedores.IsEmpty then
+    exit;
+
+  QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  dm.VariablesReportes(RepProv);
   EKVistaPreviaQR1.VistaPrevia;
 end;
 

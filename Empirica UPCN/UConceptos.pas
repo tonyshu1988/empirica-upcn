@@ -44,12 +44,12 @@ type
     Label4: TLabel;
     StaticText3: TStaticText;
     Panel1: TPanel;
-    ReporteConceptos: TQuickRep;
+    RepCptos: TQuickRep;
     QRBand5: TQRBand;
     QRDBImage1: TQRDBImage;
     QRLabel11: TQRLabel;
-    ReporteConceptos_direccion: TQRLabel;
-    ReporteConceptos_entidad: TQRLabel;
+    RepCptos_Reporte_Titulo_2: TQRLabel;
+    RepCptos_Reporte_Titulo_1: TQRLabel;
     QRBandDetalle: TQRBand;
     QRDBText30: TQRDBText;
     QRDBText6: TQRDBText;
@@ -290,6 +290,7 @@ begin
     exit;
 
   QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  dm.VariablesReportes(RepCptos);
 
   EKVistaPrevia.VistaPrevia;
 end;
