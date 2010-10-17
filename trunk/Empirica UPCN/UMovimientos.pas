@@ -21,7 +21,7 @@ type
     btBuscar: TdxBarLargeButton;
     BtGuardar: TdxBarLargeButton;
     BtCancelar: TdxBarLargeButton;
-    btImprimir: TdxBarLargeButton;
+    btImprimirLB: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     DBGridLibroBanco: TDBGrid;
@@ -90,7 +90,6 @@ type
     ZQ_MovimientosNRO_PROVEEDOR: TIntegerField;
     ZQ_MovimientosID_CONCEPTO: TIntegerField;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO: TIntegerField;
-    ZQ_MovimientosDESCRIPCION: TStringField;
     ZQ_MovimientosPAGO_DEL_EJERCICIO: TStringField;
     ZQ_MovimientosFECHA: TDateField;
     ZQ_MovimientosIMPORTE: TFloatField;
@@ -136,7 +135,6 @@ type
     LIBRO_BANCODEBE: TFloatField;
     LIBRO_BANCOHABER: TFloatField;
     LIBRO_BANCOSALDO: TFloatField;
-    LIBRO_BANCODESCRIPCION: TStringField;
     LIBRO_BANCOCONCILIADO: TStringField;
     LIBRO_BANCONOMBRE_CONCEPTO: TStringField;
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
@@ -177,7 +175,6 @@ type
     LIBRO_BANCOOTROS: TStringField;
     BtAnularOrden: TdxBarLargeButton;
     BtAnularMov: TdxBarLargeButton;
-    StaticText2: TStaticText;
     BtExportarExel: TdxBarLargeButton;
     mxNativeExcel1: TmxNativeExcel;
     mxDBGridExport: TmxDBGridExport;
@@ -276,8 +273,6 @@ type
     LIBRO_BANCOMOV_ANULADO: TStringField;
     LIBRO_BANCOCTA_MOV_ANULADO: TStringField;
     DataSource1: TDataSource;
-    DBGrid1: TDBGrid;
-    LabelNroChequeActual: TLabel;
     PIngresos: TPanel;
     DBEditCodMedio: TDBEdit;
     DBEdit3: TDBEdit;
@@ -314,6 +309,69 @@ type
     QRLabel7: TQRLabel;
     QRDBText2: TQRDBText;
     QRDBText4: TQRDBText;
+    RepLibroB: TQuickRep;
+    QRBand5: TQRBand;
+    QRLabel41: TQRLabel;
+    QRDBImage1: TQRDBImage;
+    QRLabel11: TQRLabel;
+    RepLibroB_Reporte_Titulo_2: TQRLabel;
+    RepLibroB_Reporte_Titulo_1: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel13: TQRLabel;
+    lblLibBco_FDesde: TQRLabel;
+    lblLibBco_FHasta: TQRLabel;
+    lblLibBco_Oden: TQRLabel;
+    lblLibBco_Cuenta: TQRLabel;
+    QRBand6: TQRBand;
+    QRDBText5: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText12: TQRDBText;
+    QRDBText13: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRDBTxtConciliado: TQRDBText;
+    QRShape11: TQRShape;
+    QRShape5: TQRShape;
+    QRShape7: TQRShape;
+    QRShape8: TQRShape;
+    QRShape9: TQRShape;
+    QRShape10: TQRShape;
+    QRShape12: TQRShape;
+    QRShape13: TQRShape;
+    QRShape14: TQRShape;
+    QRLblProveedor: TQRLabel;
+    QRChildBand2: TQRChildBand;
+    QRLabel18: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRLabel20: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRLabel26: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRBand7: TQRBand;
+    QRLabel35: TQRLabel;
+    QRlblFechaHoyLibroBanco: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRSysData2: TQRSysData;
+    QRBand8: TQRBand;
+    QRExpr15: TQRExpr;
+    EKVistaPrevia_LibroBco: TEKVistaPreviaQR;
+    ZQ_MovimientosNRO_ORDEN_STRING: TStringField;
+    ZQ_Ver_NroOrden: TZQuery;
+    ZQ_Ver_NroOrdenNRO_ORDEN_STRING: TStringField;
+    ZQ_Ver_NroOrdenNRO_ORDEN_INT: TIntegerField;
+    DS_Ver_NroOrden: TDataSource;
+    lblNroOrden: TLabel;
+    LIBRO_BANCOPROVEEDOR: TStringField;
+    ZQ_MovimientosDESCRIPCION: TStringField;
+    CBFechaConciliado: TCheckBox;
+    Label27: TLabel;
     LIBRO_BANCONRO_ORDEN_STRING: TStringField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -351,7 +409,7 @@ type
     procedure BtAnularOrdenClick(Sender: TObject);
     procedure BtAnularMovClick(Sender: TObject);
     procedure BtExportarExelClick(Sender: TObject);
-    procedure btImprimirClick(Sender: TObject);
+    procedure btImprimirLBClick(Sender: TObject);
     procedure DBLUpCBoxCuentaExit(Sender: TObject);
     function validarNroCheque(): integer;
     procedure btnImprimirOrdenClick(Sender: TObject);
@@ -537,12 +595,12 @@ begin
   PParametrosLibroBanco.Visible:=false;
   DBGridLibroBanco.Visible:=false;
   BanderaIngresoEgreso:=0;
-  DbGridMediosCobroPago.Columns[2].Visible := false;
-  DbGridMediosCobroPago.Columns[3].Visible := false;
-  DbGridMediosCobroPago.Columns[6].Visible := true;
-  DbGridMediosCobroPago.Columns[7].Visible := true;
-  DbGridMediosCobroPago.Columns[4].Visible := true;
-  DbGridMediosCobroPago.Columns[5].Visible := true;
+//  DbGridMediosCobroPago.Columns[2].Visible := false;
+//  DbGridMediosCobroPago.Columns[3].Visible := false;
+//  DbGridMediosCobroPago.Columns[6].Visible := true;
+//  DbGridMediosCobroPago.Columns[7].Visible := true;
+//  DbGridMediosCobroPago.Columns[4].Visible := true;
+//  DbGridMediosCobroPago.Columns[5].Visible := true;
 
   ZQ_Movimientos.Active := False;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
@@ -552,6 +610,11 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
   begin
+    ZQ_Ver_NroOrden.Close;
+    ZQ_Ver_NroOrden.Open;
+
+    lblNroOrden.Caption:= 'ORDEN DE PAGO Nro: '+ZQ_Ver_NroOrdenNRO_ORDEN_STRING.AsString;
+
     ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
 
@@ -630,7 +693,6 @@ begin
       if ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsString <> '' then //si tiene un numero de cheque cargado
       begin
         NroChequeEditando:= ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsInteger;
-        LabelNroChequeActual.Caption:= IntToStr(NroChequeEditando);
       end
    end
 end;
@@ -894,7 +956,7 @@ end;
 
 procedure TFMovimientos.EKDbSumaImporteSumListChanged(Sender: TObject);
 begin
-  txt_total_medio_pago.Caption:='Total:     '+FormatFloat('###,###,###,##0.00',EKDbSumaImporte.SumCollection[0].SumValue);
+  txt_total_medio_pago.Caption:='Total:     '+FormatFloat('$ ###,###,###,##0.00',EKDbSumaImporte.SumCollection[0].SumValue);
 end;
 
 
@@ -925,12 +987,12 @@ begin
 
  if ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.IsNull then
  begin
-    DbGridMediosCobroPago.Columns[2].Visible := false;
-    DbGridMediosCobroPago.Columns[3].Visible := false;
-    DbGridMediosCobroPago.Columns[6].Visible := true;
-    DbGridMediosCobroPago.Columns[7].Visible := true;
-    DbGridMediosCobroPago.Columns[4].Visible := true;
-    DbGridMediosCobroPago.Columns[5].Visible := true;
+//    DbGridMediosCobroPago.Columns[2].Visible := false;
+//    DbGridMediosCobroPago.Columns[3].Visible := false;
+//    DbGridMediosCobroPago.Columns[6].Visible := true;
+//    DbGridMediosCobroPago.Columns[7].Visible := true;
+//    DbGridMediosCobroPago.Columns[4].Visible := true;
+//    DbGridMediosCobroPago.Columns[5].Visible := true;
     BanderaIngresoEgreso:=0;
     DBLUpCBoxCuenta.DataSource:= DS_Cuenta_Movimiento;
     DBLUpCBoxCuenta.DataField := 'ID_CUENTA_EGRESO';
@@ -939,6 +1001,8 @@ begin
     PParametrosLibroBanco.Visible:=false;
     DBGridLibroBanco.Visible:=false;
     ISDBEditDateTimePicker1.SetFocus;
+
+    lblNroOrden.Caption:= 'ORDEN DE PAGO Nro: '+ZQ_MovimientosNRO_ORDEN_STRING.AsString;
  end
  else
  begin
@@ -1264,33 +1328,21 @@ begin
 end;
 
 
-procedure TFMovimientos.btImprimirClick(Sender: TObject);
+procedure TFMovimientos.btImprimirLBClick(Sender: TObject);
 begin
   if LIBRO_BANCO.IsEmpty then
-  exit;
-{
-  ZQ_Cuenta_Movimiento.Close;
-  ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
-  ZQ_Cuenta_Movimiento.Open;
+    exit;
 
-  ZQ_Movimientos.Close;
-  ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
-  ZQ_Movimientos.Open;
 
-  case ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger of
-  1:QRLabeTipoMovimiento.Caption:='ORDEN DE PAGO';
-  2:QRLabeTipoMovimiento.Caption:='RECIBO';
-  3:QRLabeTipoMovimiento.Caption:='TRANSFERENCIA';
-  4:QRLabeTipoMovimiento.Caption:='SALDO INICIAL';
-  end;
+  lblLibBco_Cuenta.Caption:= DBLCuenta.Text;
+  lblLibBco_FDesde.Caption:= DateToStr(DTPFechaDesde.Date);
+  lblLibBco_FHasta.Caption:= DateToStr(DTPFechaHasta.Date);
+  lblLibBco_Oden.Caption:=   ComboOrden.Text;
 
-  ekNumeroALetras1.Numero := EKDbSumaImporte.SumCollection[0].sumvalue;
-  QRLabelNumeroLetras.Caption := UpperCase(EkNumeroALetras1.AsString);
-  QRTIMPORTE.Caption:= FormatFloat('###,###,###,##0.00', EKDbSumaImporte.SumCollection[0].sumvalue);
+  QRlblFechaHoyLibroBanco.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  dm.VariablesReportes(RepLibroB);
 
-  QRLabelConfecciono.Caption:= dm.EKUsrLogin1.usuariosis;
-                                               }
-  //EKVistaPreviaMovimiento.VistaPrevia;
+  EKVistaPrevia_LibroBco.VistaPrevia;
 end;
 
 
@@ -1474,10 +1526,15 @@ begin
   else
     DBGridLibroBanco.Columns[9].Visible := true;
 
-  if not CBrecibo.Checked then //otros
+  if not CBrecibo.Checked then //Recibo
     DBGridLibroBanco.Columns[10].Visible := false
   else
     DBGridLibroBanco.Columns[10].Visible := true;
+
+  if not CBFechaConciliado.Checked then //conciliado
+    DBGridLibroBanco.Columns[15].Visible := false
+  else
+    DBGridLibroBanco.Columns[15].Visible := true;
 end;
 
 
@@ -1532,6 +1589,11 @@ begin
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroFactura', 'TRUE')
   else
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroFactura', 'FALSE');
+
+  if CBFechaConciliado.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaConciliado', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaConciliado', 'FALSE');
 end;
 
 
@@ -1566,6 +1628,9 @@ begin
 
   if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroFactura') <> '' then
     CBNroFactura.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroFactura'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\FechaConciliado') <> '' then
+    CBFechaConciliado.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\FechaConciliado'));
 end;
 
 procedure TFMovimientos.LIBRO_BANCOAfterScroll(DataSet: TDataSet);

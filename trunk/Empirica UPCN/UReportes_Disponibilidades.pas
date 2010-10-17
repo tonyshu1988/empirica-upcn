@@ -100,7 +100,6 @@ type
     LIBRO_BANCODEBE: TFloatField;
     LIBRO_BANCOHABER: TFloatField;
     LIBRO_BANCOSALDO: TFloatField;
-    LIBRO_BANCODESCRIPCION: TStringField;
     LIBRO_BANCOCONCILIADO: TStringField;
     LIBRO_BANCONOMBRE_CONCEPTO: TStringField;
     LIBRO_BANCOFECHA_PD: TDateField;
@@ -125,6 +124,7 @@ type
     QRShape7: TQRShape;
     QRShape8: TQRShape;
     QRLblProveedor: TQRLabel;
+    LIBRO_BANCOPROVEEDOR: TStringField;
     procedure btnLibroBancoClick(Sender: TObject);
     function  validarDatos():boolean;
     procedure btnSalirClick(Sender: TObject);
@@ -167,7 +167,7 @@ var
 begin
   EKOrdenarGrillaLB.CargarConfigColunmas;
   reporte:= -1;
-  pTapa.BringToFront;
+  pLibroBanco.BringToFront;
 
   fecha:= StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha));
   TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[1]).Valor := DateToStr(fecha);
@@ -374,9 +374,9 @@ begin
     QRDBTxtConciliado.Enabled:= false;
 
   if LIBRO_BANCOCTA_MOV_ANULADO.AsString = 'A' then
-    QRLblProveedor.Caption:= 'ANULADO - '+LIBRO_BANCODESCRIPCION.AsString
+    QRLblProveedor.Caption:= 'ANULADO - '+LIBRO_BANCOPROVEEDOR.AsString
   else
-    QRLblProveedor.Caption:= LIBRO_BANCODESCRIPCION.AsString;
+    QRLblProveedor.Caption:= LIBRO_BANCOPROVEEDOR.AsString;
 
 end;
 

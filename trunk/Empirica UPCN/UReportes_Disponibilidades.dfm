@@ -1,6 +1,6 @@
 object FReportes_Disponibilidades: TFReportes_Disponibilidades
-  Left = 262
-  Top = 229
+  Left = 322
+  Top = 189
   Width = 1022
   Height = 576
   Caption = 'Reportes Disponibilidades'
@@ -197,7 +197,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           end
           item
             Expanded = False
-            FieldName = 'DESCRIPCION'
+            FieldName = 'PROVEEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Proveedor'
             Width = 200
@@ -765,9 +765,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Top = 157
           Width = 1047
           Height = 14
-          Frame.Color = clSilver
+          Frame.Color = clBlack
           Frame.DrawTop = False
-          Frame.DrawBottom = False
+          Frame.DrawBottom = True
           Frame.DrawLeft = True
           Frame.DrawRight = True
           AlignToBottom = False
@@ -1691,7 +1691,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Width = 1047
           Height = 22
           Frame.Color = clBlack
-          Frame.DrawTop = True
+          Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
@@ -1892,7 +1892,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       Caption = 'Saldo Cuentas'
       Category = 0
       Hint = 'Saldo actual de todas las Cuentas Bancarias'
-      Visible = ivAlways
+      Visible = ivNever
       ImageIndex = 30
       ShortCut = 120
       OnClick = btnSaldoCuentaClick
@@ -1904,7 +1904,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       Category = 0
       Hint = 'Libro Banco'
       Visible = ivAlways
-      ImageIndex = 65
+      ImageIndex = 29
       OnClick = btnLibroBancoClick
       AutoGrayScale = False
     end
@@ -2033,10 +2033,6 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       FieldName = 'SALDO'
       currency = True
     end
-    object LIBRO_BANCODESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 100
-    end
     object LIBRO_BANCOCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
       Size = 1
@@ -2080,6 +2076,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     object LIBRO_BANCONRO_ORDEN_STRING: TStringField
       FieldName = 'NRO_ORDEN_STRING'
       Size = 11
+    end
+    object LIBRO_BANCOPROVEEDOR: TStringField
+      FieldName = 'PROVEEDOR'
+      Size = 100
     end
   end
   object DS_LIBRO_BANCO: TDataSource

@@ -40,9 +40,9 @@ object FABMProveedores: TFABMProveedores
       object Label1: TLabel
         Left = 10
         Top = 11
-        Width = 110
+        Width = 64
         Height = 13
-        Caption = 'Nombre y Apellido:'
+        Caption = 'Proveedor:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -106,9 +106,9 @@ object FABMProveedores: TFABMProveedores
         Transparent = True
       end
       object DBENombreApellido: TDBEdit
-        Left = 128
+        Left = 77
         Top = 7
-        Width = 266
+        Width = 317
         Height = 21
         CharCase = ecUpperCase
         DataField = 'APELLIDO_Y_NOMBRE'
@@ -254,13 +254,15 @@ object FABMProveedores: TFABMProveedores
         item
           Expanded = False
           FieldName = 'APELLIDO_Y_NOMBRE'
-          Title.Caption = 'Apellido y Nombre'
+          Title.Alignment = taCenter
+          Title.Caption = 'Proveedor'
           Width = 274
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'NOMBRE_FANTASIA'
+          Title.Alignment = taCenter
           Title.Caption = 'Nombre de Fantasia'
           Width = 282
           Visible = True
@@ -268,6 +270,7 @@ object FABMProveedores: TFABMProveedores
         item
           Expanded = False
           FieldName = 'DIRECCION'
+          Title.Alignment = taCenter
           Title.Caption = 'Direccion'
           Width = 198
           Visible = True
@@ -275,12 +278,14 @@ object FABMProveedores: TFABMProveedores
         item
           Expanded = False
           FieldName = 'TELEFONOS'
+          Title.Alignment = taCenter
           Title.Caption = 'Telefono'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'EMAIL'
+          Title.Alignment = taCenter
           Title.Caption = 'Email'
           Width = 233
           Visible = True
@@ -325,10 +330,10 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 0
       end
     end
-    object ReporteProveedores: TQuickRep
+    object RepProv: TQuickRep
       Tag = 99
-      Left = 475
-      Top = 392
+      Left = 11
+      Top = 24
       Width = 952
       Height = 1347
       Frame.Color = clBlack
@@ -389,7 +394,7 @@ object FABMProveedores: TFABMProveedores
         Left = 45
         Top = 45
         Width = 861
-        Height = 84
+        Height = 103
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = True
@@ -400,29 +405,46 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          185.208333333333300000
+          227.100694444444400000
           1898.385416666667000000)
         BandType = rbPageHeader
-        object QRLabel26: TQRLabel
-          Left = 384
-          Top = 8
-          Width = 88
-          Height = 29
+        object QRDBImage1: TQRDBImage
+          Left = 148
+          Top = 17
+          Width = 77
+          Height = 77
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            63.940972222222230000
-            846.666666666666600000
-            17.638888888888890000
-            194.027777777777800000)
-          Alignment = taLeftJustify
-          AlignToBand = False
+            169.774305555555600000
+            326.319444444444400000
+            37.482638888888890000
+            169.774305555555600000)
+          DataField = 'GRAFICO'
+        end
+        object QRLabel11: TQRLabel
+          Left = 355
+          Top = 72
+          Width = 151
+          Height = 23
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            50.711805555555560000
+            782.725694444444400000
+            158.750000000000000000
+            332.934027777777800000)
+          Alignment = taCenter
+          AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'Reporte'
+          Caption = 'LIBRO BANCO'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -434,184 +456,73 @@ object FABMProveedores: TFABMProveedores
           WordWrap = True
           FontSize = 12
         end
-        object QRLabel27: TQRLabel
-          Left = 357
-          Top = 34
-          Width = 137
-          Height = 31
+        object RepProv_Reporte_Titulo_2: TQRLabel
+          Left = 320
+          Top = 43
+          Width = 221
+          Height = 24
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            68.350694444444440000
-            787.135416666666600000
-            74.965277777777790000
-            302.065972222222200000)
-          Alignment = taLeftJustify
-          AlignToBand = False
+            52.916666666666670000
+            705.555555555555600000
+            94.809027777777780000
+            487.274305555555600000)
+          Alignment = taCenter
+          AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'Proveedores'
+          Caption = 'RepProv_Reporte_Titulo_2'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic, fsUnderline]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 9
+        end
+        object RepProv_Reporte_Titulo_1: TQRLabel
+          Left = 285
+          Top = 14
+          Width = 290
+          Height = 24
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            628.385416666666700000
+            30.868055555555560000
+            639.409722222222200000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'RepProv_Reporte_Titulo_1'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
           Font.Name = 'Verdana'
-          Font.Style = [fsBold]
+          Font.Style = [fsBold, fsUnderline]
           ParentFont = False
           Transparent = True
           WordWrap = True
           FontSize = 12
         end
       end
-      object QRBand9: TQRBand
-        Tag = 99
-        Left = 45
-        Top = 210
-        Width = 861
-        Height = 31
-        Frame.Color = clBlack
-        Frame.DrawTop = True
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        AlignToBottom = True
-        Color = clWhite
-        ForceNewColumn = False
-        ForceNewPage = False
-        Size.Values = (
-          68.350694444444440000
-          1898.385416666667000000)
-        BandType = rbPageFooter
-        object QRLabel35: TQRLabel
-          Left = 4
-          Top = 0
-          Width = 110
-          Height = 24
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            52.916666666666660000
-            8.819444444444444000
-            0.000000000000000000
-            242.534722222222200000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Empirica'
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsItalic]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 8
-        end
-        object fechaHoy: TQRLabel
-          Left = 118
-          Top = 0
-          Width = 56
-          Height = 24
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            52.916666666666660000
-            260.173611111111100000
-            0.000000000000000000
-            123.472222222222200000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'fechaHoy'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsItalic]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 8
-        end
-        object QRLabel6: TQRLabel
-          Left = 758
-          Top = 0
-          Width = 40
-          Height = 24
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            52.916666666666660000
-            1671.284722222222000000
-            0.000000000000000000
-            88.194444444444450000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'P'#225'gina'
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 8
-        end
-        object QRSysData1: TQRSysData
-          Left = 800
-          Top = 0
-          Width = 57
-          Height = 24
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            52.916666666666660000
-            1763.888888888889000000
-            0.000000000000000000
-            125.677083333333300000)
-          Alignment = taCenter
-          AlignToBand = False
-          AutoSize = False
-          Color = clWhite
-          Data = qrsPageNumber
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-          FontSize = 8
-        end
-      end
       object QRBand10: TQRBand
         Tag = 99
         Left = 45
-        Top = 151
+        Top = 170
         Width = 861
         Height = 25
         Frame.Color = clBlack
@@ -792,7 +703,7 @@ object FABMProveedores: TFABMProveedores
       object ChildBand1: TQRChildBand
         Tag = 99
         Left = 45
-        Top = 129
+        Top = 148
         Width = 861
         Height = 22
         Frame.Color = clBlack
@@ -827,7 +738,7 @@ object FABMProveedores: TFABMProveedores
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Apellido y Nombre'
+          Caption = 'Proveedor'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -967,7 +878,7 @@ object FABMProveedores: TFABMProveedores
       object QRBand1: TQRBand
         Tag = 99
         Left = 45
-        Top = 176
+        Top = 195
         Width = 861
         Height = 34
         Frame.Color = clBlack
@@ -995,9 +906,9 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawRight = False
           Size.Values = (
             50.711805555555560000
-            328.524305555555500000
+            328.524305555555600000
             13.229166666666670000
-            227.100694444444500000)
+            227.100694444444400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1042,6 +953,148 @@ object FABMProveedores: TFABMProveedores
           Transparent = False
           WordWrap = True
           FontSize = 8
+        end
+      end
+      object QRBand2: TQRBand
+        Tag = 99
+        Left = 45
+        Top = 229
+        Width = 861
+        Height = 19
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          42.333333333333330000
+          1898.385416666667000000)
+        BandType = rbPageFooter
+        object QRLabel35: TQRLabel
+          Left = 5
+          Top = 1
+          Width = 64
+          Height = 16
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            10.583333333333330000
+            2.645833333333333000
+            140.229166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Empirica -'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 7
+        end
+        object QRlblFechaHoy: TQRLabel
+          Left = 68
+          Top = 1
+          Width = 84
+          Height = 16
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            35.277777777777780000
+            149.930555555555600000
+            2.204861111111111000
+            185.208333333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'QRlblFechaHoy'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 7
+        end
+        object QRLabel24: TQRLabel
+          Left = 764
+          Top = 1
+          Width = 47
+          Height = 16
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            35.277777777777780000
+            1684.513888888889000000
+            2.204861111111111000
+            103.628472222222200000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'P'#225'gina:'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          FontSize = 7
+        end
+        object QRSysData2: TQRSysData
+          Left = 812
+          Top = 1
+          Width = 49
+          Height = 16
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            35.277777777777780000
+            1790.347222222222000000
+            2.204861111111111000
+            108.038194444444400000)
+          Alignment = taRightJustify
+          AlignToBand = True
+          AutoSize = False
+          Color = clWhite
+          Data = qrsPageNumber
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          FontSize = 7
         end
       end
     end
@@ -1501,7 +1554,7 @@ object FABMProveedores: TFABMProveedores
     Top = 96
   end
   object EKVistaPreviaQR1: TEKVistaPreviaQR
-    Reporte = ReporteProveedores
+    Reporte = RepProv
     ShowModal = False
     Left = 256
     Top = 96

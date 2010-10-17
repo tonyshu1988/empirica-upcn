@@ -51,7 +51,6 @@ type
     ZSP_LibroBancoDEBE: TFloatField;
     ZSP_LibroBancoHABER: TFloatField;
     ZSP_LibroBancoSALDO: TFloatField;
-    ZSP_LibroBancoDESCRIPCION: TStringField;
     ZSP_LibroBancoCONCILIADO: TStringField;
     ZSP_LibroBancoNOMBRE_CONCEPTO: TStringField;
     ZSP_LibroBancoFECHA_PD: TDateField;
@@ -70,7 +69,6 @@ type
     ZSP_ConciliacionDEBE: TFloatField;
     ZSP_ConciliacionHABER: TFloatField;
     ZSP_ConciliacionSALDO: TFloatField;
-    ZSP_ConciliacionDESCRIPCION: TStringField;
     ZSP_ConciliacionCONCILIADO: TStringField;
     ZSP_ConciliacionNOMBRE_CONCEPTO: TStringField;
     ZSP_ConciliacionTIPO_MOV: TStringField;
@@ -128,6 +126,8 @@ type
     QRShape3: TQRShape;
     QRShape4: TQRShape;
     ZSP_ConciliacionFECHA_PD: TDateField;
+    ZSP_LibroBancoPROVEEDOR: TStringField;
+    ZSP_ConciliacionPROVEEDOR: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;

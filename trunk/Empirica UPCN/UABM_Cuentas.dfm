@@ -195,7 +195,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Visible = True
         end>
     end
-    object ReporteCuentas: TQuickRep
+    object RepCtas: TQuickRep
       Tag = 99
       Left = 49
       Top = 55
@@ -318,10 +318,10 @@ object FABM_Cuentas: TFABM_Cuentas
           WordWrap = True
           FontSize = 12
         end
-        object ReporteCuentas_direccion: TQRLabel
-          Left = 270
+        object RepCtas_Reporte_Titulo_2: TQRLabel
+          Left = 268
           Top = 36
-          Width = 178
+          Width = 181
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -330,14 +330,14 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            714.375000000000000000
+            709.083333333333300000
             95.250000000000000000
-            470.958333333333300000)
+            478.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'ReporteCuentas_direccion'
+          Caption = 'RepCtas_Reporte_Titulo_2'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -349,10 +349,10 @@ object FABM_Cuentas: TFABM_Cuentas
           WordWrap = True
           FontSize = 9
         end
-        object ReporteCuentas_entidad: TQRLabel
-          Left = 248
+        object RepCtas_Reporte_Titulo_1: TQRLabel
+          Left = 239
           Top = 12
-          Width = 222
+          Width = 240
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -361,14 +361,14 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            656.166666666666700000
+            632.354166666666700000
             31.750000000000000000
-            587.375000000000000000)
+            635.000000000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'ReporteCuentas_entidad'
+          Caption = 'RepCtas_Reporte_Titulo_1'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -1250,7 +1250,7 @@ object FABM_Cuentas: TFABM_Cuentas
     end
   end
   object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = ReporteCuentas
+    Reporte = RepCtas
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False

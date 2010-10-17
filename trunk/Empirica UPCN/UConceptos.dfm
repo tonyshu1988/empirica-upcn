@@ -205,7 +205,7 @@ object FConceptos: TFConceptos
         TabOrder = 2
       end
     end
-    object ReporteConceptos: TQuickRep
+    object RepCptos: TQuickRep
       Tag = 99
       Left = 49
       Top = 119
@@ -328,10 +328,10 @@ object FConceptos: TFConceptos
           WordWrap = True
           FontSize = 12
         end
-        object ReporteConceptos_direccion: TQRLabel
-          Left = 263
+        object RepCptos_Reporte_Titulo_2: TQRLabel
+          Left = 264
           Top = 36
-          Width = 192
+          Width = 189
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -340,14 +340,14 @@ object FConceptos: TFConceptos
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            695.854166666666700000
+            698.500000000000000000
             95.250000000000000000
-            508.000000000000000000)
+            500.062500000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'ReporteConceptos_direccion'
+          Caption = 'RepCptos_Reporte_Titulo_2'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -359,10 +359,10 @@ object FConceptos: TFConceptos
           WordWrap = True
           FontSize = 9
         end
-        object ReporteConceptos_entidad: TQRLabel
-          Left = 238
+        object RepCptos_Reporte_Titulo_1: TQRLabel
+          Left = 233
           Top = 12
-          Width = 242
+          Width = 251
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -371,14 +371,14 @@ object FConceptos: TFConceptos
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            629.708333333333300000
+            616.479166666666700000
             31.750000000000000000
-            640.291666666666700000)
+            664.104166666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'ReporteConceptos_entidad'
+          Caption = 'RepCptos_Reporte_Titulo_1'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -1258,7 +1258,7 @@ object FConceptos: TFConceptos
     Top = 80
   end
   object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = ReporteConceptos
+    Reporte = RepCptos
     ShowModal = False
     Left = 72
     Top = 80

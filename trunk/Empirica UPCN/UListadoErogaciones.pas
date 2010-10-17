@@ -67,7 +67,6 @@ type
     QRDBText5: TQRDBText;
     QRDBText13: TQRDBText;
     QRDBText17: TQRDBText;
-    QRDBText30: TQRDBText;
     QRChildBand2: TQRChildBand;
     QRLabel18: TQRLabel;
     QRLabel21: TQRLabel;
@@ -83,8 +82,6 @@ type
     QRDBText1: TQRDBText;
     QRDBText2: TQRDBText;
     QRDBText3: TQRDBText;
-    QRDBText4: TQRDBText;
-    QRDBText6: TQRDBText;
     QRBandGroup1Footer: TQRBand;
     QRShape1: TQRShape;
     QRShape2: TQRShape;
@@ -100,9 +97,6 @@ type
     QRShape4: TQRShape;
     QRShape5: TQRShape;
     QRShape6: TQRShape;
-    QRShape7: TQRShape;
-    QRShape8: TQRShape;
-    QRShape9: TQRShape;
     QRShape10: TQRShape;
     QRShape11: TQRShape;
     ZQ_Libro_erogacionesFECHA_MDC: TDateField;
@@ -125,6 +119,9 @@ type
     ZQ_Libro_erogacionesNOMBRE_CONCEPTO: TStringField;
     ZQ_Libro_erogacionesNRO_ORDEN_STRING: TStringField;
     ZQ_Libro_erogacionesNRO_MOVIMIENTO: TIntegerField;
+    QRLabel2: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRDBText4: TQRDBText;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -295,6 +292,7 @@ begin
 
   EKVistaPrevia.VistaPrevia;
 end;
+
 
 procedure TFListadoErogaciones.FormClose(Sender: TObject;
   var Action: TCloseAction);

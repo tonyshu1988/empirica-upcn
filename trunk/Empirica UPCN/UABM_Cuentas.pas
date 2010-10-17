@@ -49,12 +49,12 @@ type
     btnVerDetalle: TdxBarLargeButton;
     EKVistaPrevia: TEKVistaPreviaQR;
     btnImprimir: TdxBarLargeButton;
-    ReporteCuentas: TQuickRep;
+    RepCtas: TQuickRep;
     QRBand5: TQRBand;
     QRDBImage1: TQRDBImage;
     QRLabel11: TQRLabel;
-    ReporteCuentas_direccion: TQRLabel;
-    ReporteCuentas_entidad: TQRLabel;
+    RepCtas_Reporte_Titulo_2: TQRLabel;
+    RepCtas_Reporte_Titulo_1: TQRLabel;
     QRBandDetalle: TQRBand;
     QRDBText13: TQRDBText;
     QRDBText30: TQRDBText;
@@ -235,6 +235,7 @@ begin
     exit;
 
   QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  dm.VariablesReportes(RepCtas);
 
   EKVistaPrevia.VistaPrevia;
 end;

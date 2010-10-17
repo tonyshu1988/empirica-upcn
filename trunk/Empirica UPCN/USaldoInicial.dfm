@@ -378,11 +378,6 @@ object FSaldoInicial: TFSaldoInicial
         Font.Style = []
         ItemLinks = <
           item
-            Item = btnVerDetalle
-            Visible = True
-          end
-          item
-            BeginGroup = True
             Item = btnNuevo
             Visible = True
           end
@@ -510,7 +505,7 @@ object FSaldoInicial: TFSaldoInicial
       Caption = 'Ver Detalle'
       Category = 0
       Hint = 'Ver Detalle'
-      Visible = ivAlways
+      Visible = ivNever
       ImageIndex = 69
       OnClick = btnVerDetalleClick
       AutoGrayScale = False
