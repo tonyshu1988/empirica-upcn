@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 209
-  Top = 136
+  Left = 213
+  Top = 157
   Width = 1065
   Height = 588
   Caption = 'Movimientos'
@@ -1448,7 +1448,7 @@ object FMovimientos: TFMovimientos
       BevelOuter = bvNone
       BevelWidth = 3
       BorderWidth = 3
-      TabOrder = 4
+      TabOrder = 3
       Visible = False
       DesignSize = (
         505
@@ -3559,7 +3559,7 @@ object FMovimientos: TFMovimientos
       Height = 26
       Align = alTop
       BevelOuter = bvNone
-      TabOrder = 2
+      TabOrder = 1
       object Label8: TLabel
         Left = 8
         Top = 8
@@ -3668,7 +3668,7 @@ object FMovimientos: TFMovimientos
       Height = 31
       Align = alBottom
       Color = 8454016
-      TabOrder = 3
+      TabOrder = 2
       Visible = False
       object BtAplicarFiltrosColumnas: TButton
         Left = 1028
@@ -3802,7 +3802,7 @@ object FMovimientos: TFMovimientos
       Width = 1049
       Height = 102
       Align = alBottom
-      TabOrder = 6
+      TabOrder = 5
       Visible = False
       DesignSize = (
         1049
@@ -4096,395 +4096,6 @@ object FMovimientos: TFMovimientos
           Visible = True
         end>
     end
-    object PEgresos: TPanel
-      Left = 0
-      Top = 26
-      Width = 1049
-      Height = 339
-      Align = alClient
-      BevelOuter = bvNone
-      TabOrder = 1
-      Visible = False
-      DesignSize = (
-        1049
-        339)
-      object Label3: TLabel
-        Left = 12
-        Top = 10
-        Width = 38
-        Height = 13
-        Caption = 'Fecha:'
-        Transparent = True
-      end
-      object Label4: TLabel
-        Left = 12
-        Top = 44
-        Width = 64
-        Height = 13
-        Caption = 'Proveedor:'
-        Transparent = True
-      end
-      object Label5: TLabel
-        Left = 12
-        Top = 73
-        Width = 59
-        Height = 13
-        Caption = 'Concepto:'
-        Transparent = True
-      end
-      object Label6: TLabel
-        Left = 12
-        Top = 126
-        Width = 71
-        Height = 13
-        Caption = 'Descripci'#243'n:'
-        Transparent = True
-      end
-      object Label1: TLabel
-        Left = 12
-        Top = 100
-        Width = 46
-        Height = 13
-        Caption = 'Cuenta:'
-        Transparent = True
-      end
-      object LabelDetalle: TLabel
-        Left = 770
-        Top = 8
-        Width = 64
-        Height = 13
-        Alignment = taRightJustify
-        Caption = '                '
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-      object Label12: TLabel
-        Left = 616
-        Top = 44
-        Width = 159
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = '(F1 Para Buscar Proveedor)'
-        Transparent = True
-      end
-      object Label13: TLabel
-        Left = 616
-        Top = 73
-        Width = 124
-        Height = 13
-        Anchors = [akTop, akRight]
-        Caption = '(F1 Buscar Concepto)'
-        Transparent = True
-      end
-      object Label25: TLabel
-        Left = 465
-        Top = 102
-        Width = 71
-        Height = 13
-        Caption = 'Nro Factura:'
-      end
-      object Label26: TLabel
-        Left = 841
-        Top = 102
-        Width = 67
-        Height = 13
-        Caption = 'Nro Recibo:'
-      end
-      object lblNroOrden: TLabel
-        Left = 404
-        Top = 3
-        Width = 633
-        Height = 32
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        Caption = 'ORDEN DE PAGO Nro: 10-0001'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
-        Font.Height = -27
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-      end
-      object ISDBEditDateTimePicker1: TISDBEditDateTimePicker
-        Left = 101
-        Top = 7
-        Width = 145
-        Height = 21
-        Date = 39417.795984317130000000
-        Time = 39417.795984317130000000
-        DateFormat = dfLong
-        TabOrder = 0
-        DataField = 'FECHA'
-        DataSource = DS_Movimientos
-        ReadOnly = False
-        DefaultEditMask = '!99/99/9999;1;_'
-        AutoApplyEditMask = True
-      end
-      object DBEditNroProveedor: TDBEdit
-        Left = 101
-        Top = 41
-        Width = 49
-        Height = 21
-        DataField = 'NRO_PROVEEDOR'
-        DataSource = DS_Movimientos
-        TabOrder = 1
-        OnKeyUp = DBEditNroProveedorKeyUp
-      end
-      object DBLUpCBoxProveedor: TDBLookupComboBox
-        Left = 157
-        Top = 41
-        Width = 452
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'NRO_PROVEEDOR'
-        DataSource = DS_Movimientos
-        KeyField = 'NRO_PROVEEDOR'
-        ListField = 'APELLIDO_Y_NOMBRE'
-        ListSource = DS_Proveedores
-        TabOrder = 2
-        OnKeyUp = DBLUpCBoxProveedorKeyUp
-      end
-      object DBMemoDescripcion: TDBMemo
-        Left = 101
-        Top = 123
-        Width = 926
-        Height = 33
-        Anchors = [akLeft, akTop, akRight]
-        Color = 16772842
-        DataField = 'DESCRIPCION'
-        DataSource = DS_Movimientos
-        TabOrder = 8
-      end
-      object panel_edicion_medio_de_pago: TPanel
-        Left = 7
-        Top = 160
-        Width = 1039
-        Height = 176
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        BevelOuter = bvNone
-        TabOrder = 9
-        object Shape5: TShape
-          Left = 0
-          Top = 0
-          Width = 1039
-          Height = 20
-          Align = alTop
-          Brush.Color = 16762544
-          Pen.Color = 16745557
-          Shape = stRoundRect
-        end
-        object Label7: TLabel
-          Left = 13
-          Top = 3
-          Width = 47
-          Height = 13
-          Caption = 'MEDIOS'
-          Transparent = True
-        end
-        object DbGridMediosCobroPago: TDBGrid
-          Left = 0
-          Top = 20
-          Width = 1039
-          Height = 118
-          Align = alClient
-          Color = 16772842
-          DataSource = DS_Cuenta_Movimiento
-          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 0
-          TitleFont.Charset = ANSI_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnColEnter = DbGridMediosCobroPagoColEnter
-          OnColExit = DbGridMediosCobroPagoColExit
-          OnKeyUp = DbGridMediosCobroPagoKeyUp
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'FECHA_MDC'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha PD'
-              Width = 88
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_MEDIO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cod.'
-              Width = 34
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'medio_de_pago'
-              Title.Alignment = taCenter
-              Title.Caption = 'Medio'
-              Width = 210
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_CUENTA_INGRESO'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Cod Cta'
-              Width = -1
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'nombre_cuenta_ingreso'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Nombre Cuenta Ingreso'
-              Width = -1
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_CUENTA_EGRESO'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Cod Cta'
-              Width = -1
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'nombre_cuenta_egreso'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Nombre Cuenta Egreso'
-              Width = -1
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'BANCO_MDC'
-              Title.Alignment = taCenter
-              Title.Caption = 'Banco'
-              Width = -1
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'NRO_CHEQUE_TRANSF'
-              Title.Alignment = taCenter
-              Title.Caption = 'Nro Chque\Transf'
-              Width = 132
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Importe'
-              Width = 92
-              Visible = True
-            end>
-        end
-        object Panel2: TPanel
-          Left = 0
-          Top = 138
-          Width = 1039
-          Height = 38
-          Align = alBottom
-          BevelOuter = bvNone
-          TabOrder = 1
-          DesignSize = (
-            1039
-            38)
-          object txt_total_medio_pago: TLabel
-            Left = 738
-            Top = 3
-            Width = 297
-            Height = 29
-            Alignment = taRightJustify
-            Anchors = [akTop, akRight]
-            Caption = 'Total:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -27
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object btEliminarLinea: TButton
-            Left = 8
-            Top = 4
-            Width = 153
-            Height = 17
-            Caption = 'Eliminar Linea (Del)'
-            TabOrder = 0
-            TabStop = False
-            OnClick = btEliminarLineaClick
-          end
-        end
-      end
-      object DBLUpCBoxConcepto: TDBLookupComboBox
-        Left = 157
-        Top = 70
-        Width = 452
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'ID_CONCEPTO'
-        DataSource = DS_Movimientos
-        KeyField = 'ID_CONCEPTO'
-        ListField = 'NOMBRE_CONCEPTO'
-        ListSource = DS_Conceptos
-        TabOrder = 4
-        OnKeyUp = DBLUpCBoxConceptoKeyUp
-      end
-      object DBEditNroConcepto: TDBEdit
-        Left = 101
-        Top = 70
-        Width = 49
-        Height = 21
-        DataField = 'ID_CONCEPTO'
-        DataSource = DS_Movimientos
-        TabOrder = 3
-        OnKeyUp = DBEditNroConceptoKeyUp
-      end
-      object DBLUpCBoxCuenta: TDBLookupComboBox
-        Left = 101
-        Top = 97
-        Width = 357
-        Height = 21
-        KeyField = 'ID_CUENTA'
-        ListField = 'BUSQUEDA'
-        ListSource = DS_Cuentas
-        TabOrder = 5
-        OnEnter = DBLUpCBoxCuentaEnter
-        OnExit = DBLUpCBoxCuentaExit
-      end
-      object DBEdit1: TDBEdit
-        Left = 542
-        Top = 97
-        Width = 289
-        Height = 21
-        DataField = 'NRO_FACTURA'
-        DataSource = DS_Movimientos
-        TabOrder = 6
-      end
-      object DBEdit2: TDBEdit
-        Left = 917
-        Top = 97
-        Width = 109
-        Height = 21
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'NRO_RECIBO'
-        DataSource = DS_Movimientos
-        TabOrder = 7
-      end
-    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -4600,6 +4211,10 @@ object FMovimientos: TFMovimientos
           end
           item
             BeginGroup = True
+            Item = btnAltaOrdenPago
+            Visible = True
+          end
+          item
             Item = BtIngresos
             Visible = True
           end
@@ -4644,7 +4259,7 @@ object FMovimientos: TFMovimientos
           end
           item
             BeginGroup = True
-            Item = BtVerCampos
+            Item = btnFiltrar
             Visible = True
           end
           item
@@ -4734,7 +4349,6 @@ object FMovimientos: TFMovimientos
       Visible = ivAlways
       ImageIndex = 4
       ShortCut = 120
-      OnClick = BtCancelarClick
       AutoGrayScale = False
     end
     object btImprimirLB: TdxBarLargeButton
@@ -4764,13 +4378,13 @@ object FMovimientos: TFMovimientos
       OnClick = BtEditarMovimientoClick
       AutoGrayScale = False
     end
-    object BtVerCampos: TdxBarLargeButton
+    object btnFiltrar: TdxBarLargeButton
       Caption = 'Filtrar Columnas'
       Category = 0
       Hint = 'Filtrar Columnas'
       Visible = ivAlways
       ImageIndex = 7
-      OnClick = BtVerCamposClick
+      OnClick = btnFiltrarClick
       AutoGrayScale = False
     end
     object BtVerDetalle: TdxBarLargeButton
@@ -4819,6 +4433,15 @@ object FMovimientos: TFMovimientos
       ImageIndex = 28
       OnClick = btnImprimirOrdenClick
     end
+    object btnAltaOrdenPago: TdxBarLargeButton
+      Caption = 'Orden Pago'
+      Category = 0
+      Hint = 'Orden Pago'
+      Visible = ivAlways
+      ImageIndex = 40
+      OnClick = btnAltaOrdenPagoClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'BtIngresos'
@@ -4827,12 +4450,13 @@ object FMovimientos: TFMovimientos
         'btImprimirLB'
         'btSalir'
         'BtEditarMovimiento'
-        'BtVerCampos'
+        'btnFiltrar'
         'BtVerDetalle'
         'BtAnularOrden'
         'BtAnularMov'
         'BtExportarExel'
-        'btnImprimirOrden')
+        'btnImprimirOrden'
+        'btnAltaOrdenPago')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -5502,27 +5126,6 @@ object FMovimientos: TFMovimientos
     Left = 56
     Top = 104
   end
-  object ActionManager1: TActionManager
-    Left = 928
-    Top = 209
-    StyleName = 'XP Style'
-    object ADeleteLinea: TAction
-      Caption = 'DeleteLinea'
-      ShortCut = 46
-      OnExecute = ADeleteLineaExecute
-    end
-  end
-  object EKDbSumaImporte: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'importe'
-      end>
-    DataSet = ZQ_Cuenta_Movimiento
-    SumListChanged = EKDbSumaImporteSumListChanged
-    Left = 841
-    Top = 265
-  end
   object EKLlenarCombo1: TEKLlenarCombo
     dataset = ZQ_Cuentas
     combo = DBLCuenta
@@ -5815,5 +5418,15 @@ object FMovimientos: TFMovimientos
     DataSet = ZQ_Ver_NroOrden
     Left = 711
     Top = 330
+  end
+  object EKDbSuma1: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'importe'
+      end>
+    DataSet = ZQ_Cuenta_Movimiento
+    Left = 936
+    Top = 208
   end
 end
