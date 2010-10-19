@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, DBCtrls, ComCtrls, ISDBEditDateTimePicker, Mask,
-  Buttons, Grids, DBGrids, ExtCtrls;
+  Buttons, Grids, DBGrids, ExtCtrls, ZSqlProcessor;
 
 type
   TFConfiguracion = class(TForm)
@@ -49,6 +49,7 @@ type
     btnSalir: TdxBarLargeButton;
     btnVerDetalle: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
+    ZS_ReiniciarNroOrden: TZSQLProcessor;
     procedure btnSalirClick(Sender: TObject);
     procedure btAgregGralClick(Sender: TObject);
     procedure btModifGralClick(Sender: TObject);
@@ -57,6 +58,7 @@ type
     procedure btCancGralClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
+    procedure btnNuevoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -162,6 +164,20 @@ begin
   dm.EKModelo.abrir(ZQ_Config);
   grpGeneral.Enabled:= false;
   panelGrilla.Enabled:= true;
+end;
+
+procedure TFConfiguracion.btnNuevoClick(Sender: TObject);
+begin
+  if (application.MessageBox(pchar('¿Esta seguro que desea reiniciar el Número de Orden de Pago?' + #13 + #13), 'Reiniciar Número Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+    exit;
+
+  if dm.EKModelo.iniciar_transaccion(TRANSACCION, []) then
+  begin
+    ZS_ReiniciarNroOrden.Execute;  
+
+    if not DM.EKModelo.finalizar_transaccion(TRANSACCION) then
+      dm.EKModelo.cancelar_transaccion(TRANSACCION);
+  end;
 end;
 
 end.
