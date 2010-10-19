@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 205
-  Top = 143
+  Left = 222
+  Top = 140
   Width = 1206
   Height = 588
   Caption = 'Movimientos'
@@ -5442,6 +5442,7 @@ object FMovimientos: TFMovimientos
         NombreCampo = 'importe'
       end>
     DataSet = ZQ_Cuenta_Movimiento
+    SumListChanged = EKDbSuma1SumListChanged
     Left = 936
     Top = 208
   end

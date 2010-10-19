@@ -70,6 +70,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure VerOrdenPago();
     procedure habilitar(hab:boolean);
+    procedure EditarOrdenPago();
   private
     { Private declarations }
   public
@@ -264,6 +265,7 @@ end;
 
 procedure TFAlta_OrdenPago.VerOrdenPago();
 begin
+  habilitar(False);
   //asdasd
   with FMovimientos do
     begin
@@ -277,9 +279,10 @@ begin
      ZQ_Cuenta_Movimiento.Open;
 
      ZQ_Cuentas.Locate('id_cuenta',ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger,[]);
+     GrupoEditando.Enabled := false;
     end;
 
-  habilitar(False);
+
 
 end;
 
@@ -289,6 +292,7 @@ i:Integer;
 begin
     for i:=0 to (gBoxDatos.ControlCount-1) do
     begin
+        if not(gBoxDatos.Controls[i].ClassNameIs('TLabel'))then
         gBoxDatos.Controls[i].Enabled:=hab;
     end;
     btEliminarLinea.Enabled:=hab;
@@ -300,15 +304,22 @@ end;
 
 procedure TFAlta_OrdenPago.IniciarOrdenPago();
 begin
+  habilitar(True);
   with FMovimientos do
   begin
-    PParametrosLibroBanco.Enabled:=false;
     ZQ_Movimientos.Close;
     ZQ_Cuenta_Movimiento.Close;
 
+    ZQ_Movimientos.ParamByName('NroMov').AsInteger := -1;
+    ZQ_Movimientos.Open;
+
+    ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger :=-1;
+    ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
+    ZQ_Cuenta_Movimiento.Open;
+
     if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
     begin
-      habilitar(True);
+
       ZQ_Ver_NroOrden.Close;
       ZQ_Ver_NroOrden.Open;
 
@@ -338,6 +349,38 @@ begin
   end;
 end;
 
+
+
+procedure TFAlta_OrdenPago.EditarOrdenPago();
+begin
+  VerOrdenPago();
+  habilitar(True);
+  with FMovimientos do
+  begin
+
+    if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
+    begin
+
+
+      ZQ_Movimientos.Edit;
+      ZQ_Cuenta_Movimiento.Edit;
+
+      if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
+      begin
+        DBLUpCBoxCuenta.Enabled:= false;
+        ZQ_Cuentas.Locate('id_cuenta',CuentaNro,[]);
+      end;
+
+      DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
+
+      if ZQ_CuentasAUTONUMERAR.AsString = 'S' then
+        UltimoNroCheque:= ZQ_CuentasULTIMO_NRO.AsInteger;
+
+      ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1; //PONGO QUE ES UNA ORDEN DE PAGO
+      GrupoEditando.Enabled := false;
+    end;
+  end;
+end;
 
 procedure TFAlta_OrdenPago.btEliminarLineaClick(Sender: TObject);
 begin
@@ -377,10 +420,9 @@ begin
    if dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos) then
     begin
       FMovimientos.UltimoNroCheque:= -1;
-      FMovimientos.GrupoEditando.Enabled := true;
-      FMovimientos.PParametrosLibroBanco.Enabled:=True;
-    end;
 
+    end;
+  FMovimientos.GrupoEditando.Enabled := true;
   close;
 end;
 
@@ -454,13 +496,14 @@ if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
         begin
           UltimoNroCheque:= -1;
           GrupoEditando.Enabled := true;
-          PParametrosLibroBanco.Enabled:=true;
           btaplicar.Click;
-        end;
+          close;
+        end
+      else
+        DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
     end;
   end;
 
-  close;
 end;
 
 
@@ -533,7 +576,11 @@ end;
 
 procedure TFAlta_OrdenPago.FormCreate(Sender: TObject);
 begin
-  FAlta_OrdenPago.lblNroOrden.Caption:= Format('ORDEN DE PAGO Nro: %s',[FMovimientos.LIBRO_BANCONRO_ORDEN.AsString]);
+  lblNroOrden.Caption:= Format('ORDEN DE PAGO Nro: %s',[FMovimientos.LIBRO_BANCONRO_ORDEN_STRING.AsString]);
 end;
+
+
+
+
 
 end.
