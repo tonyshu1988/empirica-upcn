@@ -215,7 +215,6 @@ object FConfiguracion: TFConfiguracion
             FieldName = 'NUMERO'
             Title.Alignment = taCenter
             Title.Caption = 'N'#250'mero'
-            Width = 64
             Visible = True
           end
           item
@@ -426,6 +425,10 @@ object FConfiguracion: TFConfiguracion
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnNuevo
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -465,12 +468,12 @@ object FConfiguracion: TFConfiguracion
       0
       52)
     object btnNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+      Caption = 'Reiniciar Numero Orden Pago'
       Category = 0
-      Hint = 'Inserta un nuevo registro'
+      Hint = 'Reinicia el nro de la orden de pago a 0'
       Visible = ivAlways
-      ImageIndex = 0
-      ShortCut = 113
+      ImageIndex = 40
+      OnClick = btnNuevoClick
       AutoGrayScale = False
       HotImageIndex = 0
     end
@@ -522,7 +525,6 @@ object FConfiguracion: TFConfiguracion
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
       ImageIndex = 6
-      ShortCut = 123
       OnClick = btnSalirClick
       AutoGrayScale = False
       HotImageIndex = 6
@@ -542,5 +544,14 @@ object FConfiguracion: TFConfiguracion
       Visible = ivAlways
       ImageIndex = 28
     end
+  end
+  object ZS_ReiniciarNroOrden: TZSQLProcessor
+    Params = <>
+    Script.Strings = (
+      'set generator GEN_IE_NRO_ORDEN_ID to 0;')
+    Connection = DM.Conexion
+    Delimiter = ';'
+    Left = 192
+    Top = 112
   end
 end
