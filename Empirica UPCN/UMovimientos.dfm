@@ -4441,6 +4441,10 @@ object FMovimientos: TFMovimientos
             Visible = True
           end
           item
+            Item = btVerificarnroCheque
+            Visible = True
+          end
+          item
             BeginGroup = True
             Item = btSalir
             Visible = True
@@ -4619,6 +4623,15 @@ object FMovimientos: TFMovimientos
       Visible = ivAlways
       ImageIndex = 40
       OnClick = btnAltaOrdenPagoClick
+      AutoGrayScale = False
+    end
+    object btVerificarnroCheque: TdxBarLargeButton
+      Caption = 'Ver Nro Ch'
+      Category = 0
+      Hint = 'Ver Nro Ch'
+      Visible = ivAlways
+      ImageIndex = 12
+      OnClick = btVerificarnroChequeClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -5607,5 +5620,36 @@ object FMovimientos: TFMovimientos
     SumListChanged = EKDbSuma1SumListChanged
     Left = 936
     Top = 208
+  end
+  object VerificarNroCheque: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'RESULTADO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'NRO_CHEQUE'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'VERIFICAR_NRO_CHEQUE'
+    Left = 1064
+    Top = 96
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'RESULTADO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'NRO_CHEQUE'
+        ParamType = ptInput
+      end>
+    object VerificarNroChequeRESULTADO: TIntegerField
+      FieldName = 'RESULTADO'
+    end
   end
 end

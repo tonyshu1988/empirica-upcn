@@ -360,6 +360,9 @@ type
     DBLookupComboBox6: TDBLookupComboBox;
     EKDBDateTimePicker3: TEKDBDateTimePicker;
     EKDBDateTimePicker4: TEKDBDateTimePicker;
+    VerificarNroCheque: TZStoredProc;
+    VerificarNroChequeRESULTADO: TIntegerField;
+    btVerificarnroCheque: TdxBarLargeButton;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -369,7 +372,6 @@ type
     procedure btaplicarClick(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure EKLlenarCombo1Cambio(valor: String);
-    function validarcampos():boolean;
     procedure BtEditarMovimientoClick(Sender: TObject);
     procedure BtAplicarFiltrosColumnasClick(Sender: TObject);
     procedure btnFiltrarClick(Sender: TObject);
@@ -382,7 +384,6 @@ type
     procedure BtAnularMovClick(Sender: TObject);
     procedure BtExportarExelClick(Sender: TObject);
     procedure btImprimirLBClick(Sender: TObject);
-    function validarNroCheque(): integer;
     procedure btnImprimirOrdenClick(Sender: TObject);
     procedure btnImprimirCancelarClick(Sender: TObject);
     procedure btnImprimirAceptarClick(Sender: TObject);
@@ -393,10 +394,12 @@ type
     procedure btnAltaOrdenPagoClick(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
     procedure BtCancelarClick(Sender: TObject);
+    function validarcampo():boolean;
+    procedure btVerificarnroChequeClick(Sender: TObject);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
-    UltimoNroCheque, NroChequeEditando: integer;
+
   end;
 
 var
@@ -413,9 +416,43 @@ uses UDM, DateUtils, EKUsrLogin;
 
 {$R *.dfm}
 
+
+function TFMovimientos.validarcampo():boolean;
+begin
+  result := true;
+
+    if (ZQ_MovimientosFECHA.IsNull) then
+    begin
+      Application.MessageBox('El campo "Fecha" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      result := false;
+      exit;
+    end;
+
+    if (ZQ_MovimientosNRO_PROVEEDOR.IsNull) then
+    begin
+      Application.MessageBox('El campo "Proveedor" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      result := false;
+      exit;
+    end;
+
+    if (ZQ_MovimientosID_CONCEPTO.IsNull) then
+    begin
+      Application.MessageBox('El campo "Concepto" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      result := false;
+      exit;
+    end;
+
+    if (ZQ_Cuenta_MovimientoID_MEDIO.IsNull) then
+    begin
+      Application.MessageBox('El campo "Medio" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      result := false;
+      exit;
+    end;
+
+end;
+
 procedure TFMovimientos.FormCreate(Sender: TObject);
 begin
-  UltimoNroCheque:= -1;
   EKOrdenarGrilla1.CargarConfigColunmas;
 
   CD_Cheque.CreateDataSet;
@@ -470,91 +507,6 @@ begin
     else
       dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
   end;
-end;
-
-
-function TFMovimientos.validarNroCheque():integer;
-var
-  anterior: integer;
-begin
-//  result := -1;
-//  anterior:= -1;
-//  CD_Cheque.IndexFieldNames:= 'Numero';
-//  CD_Cheque.First;
-//  while not CD_Cheque.Eof do
-//  begin
-//    if anterior = -1 then //si es el primer cheque
-//      anterior:= CD_ChequeNumero.AsInteger
-//    else
-//    begin //si falta un numero de cheque o hay 2 o mas cheques con el mismo numero
-//     if ((CD_ChequeNumero.AsInteger - anterior) >  1) or (CD_ChequeNumero.AsInteger = anterior) then
-//     begin
-//       result:= anterior;
-//       exit;
-//     end;
-//     anterior:= CD_ChequeNumero.AsInteger;
-//    end;
-//
-//    CD_Cheque.Next;
-//  end;
-end;
-
-
-function TFMovimientos.validarcampos():boolean;
-begin
-  result := true;
-
-//  if PIngresos.Visible = false then
-//  begin
-//   if (ZQ_MovimientosFECHA.IsNull) then
-//    begin
-//      Application.MessageBox('El campo "Fecha" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-//      ISDBEditDateTimePicker1.SetFocus;
-//      result := false;
-//      exit;
-//    end;
-//
-//  if (DBLUpCBoxProveedor.Text = '') then
-//    begin
-//      Application.MessageBox('El campo "Proveedor" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-//      DBLUpCBoxProveedor.SetFocus;
-//      result := false;
-//      exit;
-//    end;
-//
-//   if (DBLUpCBoxConcepto.Text='') then
-//    begin
-//      Application.MessageBox('El campo "Concepto" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-//      DBLUpCBoxConcepto.SetFocus;
-//      result := false;
-//      exit;
-//    end;
-//
-//   if (DBLUpCBoxCuenta.Text='') then
-//    begin
-//      Application.MessageBox('El campo "Cuenta" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-//      DBLUpCBoxCuenta.SetFocus;
-//      result := false;
-//      exit;
-//    end;
-
-//   if (DBLUCBoxNombreTipoMov.Text='') then
-//    begin
-//      Application.MessageBox('El campo "Tipo Movimiento" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-//      DBLUCBoxNombreTipoMov.SetFocus;
-//      result := false;
-//      exit;
-//    end;
-
-//   if (validarNroCheque <> -1) then
-//    begin
-//     if (Application.MessageBox(pchar('El cheque nro: '+IntToStr(validarNroCheque)+ 'esta repetido o falta el nro: '+IntToStr(validarNroCheque + 1)+', Desea continuar con la transaccion?'),'Validación',MB_YESNO+MB_ICONINFORMATION) = IDYES)then
-//       result := true
-//     else
-//       result := false;
-//
-//     exit;
-//    end;
 end;
 
 
@@ -630,8 +582,8 @@ Perform(WM_NEXTDLGCTL,0,0);
      ZQ_MovimientosANULADO.Clear;
    end;
 
-// if validarcampos then
-// begin
+ if validarcampo then
+ begin
     ZQ_Cuenta_Movimiento.First;
     if ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0 then
     begin
@@ -668,7 +620,7 @@ Perform(WM_NEXTDLGCTL,0,0);
      DBGridLibroBanco.Enabled:=true;
      btaplicar.Click;
     end;
- //end;
+ end;
 end;
 
 
@@ -1279,8 +1231,27 @@ end;
 
 procedure TFMovimientos.BtCancelarClick(Sender: TObject);
 begin
-     PParametrosLibroBanco.Enabled:=true;
-     DBGridLibroBanco.Enabled:=true;
+  dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+  GrupoEditando.Enabled := true;
+  GrupoGuardarCancelar.Enabled := false;
+  PEgresos.Visible:= false;
+  PIngresos.Visible:=false;
+  PParametrosLibroBanco.Enabled:=true;
+  DBGridLibroBanco.Enabled:=true;
+end;
+
+procedure TFMovimientos.btVerificarnroChequeClick(Sender: TObject);
+begin
+VerificarNroCheque.Close;
+VerificarNroCheque.ParamByName('NRO_CHEQUE').AsInteger:= StrToInt(InputBox('Verificar Nro Cheque','Ingrese desde que nro de cheque quiere verificar',''));
+VerificarNroCheque.Open;
+
+
+if VerificarNroChequeRESULTADO.AsInteger = 0 then
+  ShowMessage('No se encontraron numeros de cheques faltantes')
+else
+  ShowMessage('Falta el cheque nro: '+VerificarNroChequeRESULTADO.AsString);
+
 end;
 
 end.
