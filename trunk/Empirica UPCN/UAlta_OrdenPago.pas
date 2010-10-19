@@ -55,7 +55,6 @@ type
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBLUpCBoxCuentaEnter(Sender: TObject);
-    procedure DBLUpCBoxCuentaExit(Sender: TObject);
     procedure DbGridMediosCobroPagoColEnter(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
     procedure DbGridMediosCobroPagoKeyUp(Sender: TObject; var Key: Word;
@@ -125,13 +124,6 @@ procedure TFAlta_OrdenPago.DBLUpCBoxCuentaEnter(Sender: TObject);
 begin
   if FMovimientos.ZQ_Cuenta_MovimientoID_MEDIO.AsInteger <> 0 then
     DBLUpCBoxCuenta.Enabled:=false;
-end;
-
-
-procedure TFAlta_OrdenPago.DBLUpCBoxCuentaExit(Sender: TObject);
-begin
-  if FMovimientos.ZQ_CuentasAUTONUMERAR.AsString = 'S' then
-    FMovimientos.UltimoNroCheque:= FMovimientos.ZQ_CuentasULTIMO_NRO.AsInteger;
 end;
 
 
@@ -417,11 +409,8 @@ end;
 procedure TFAlta_OrdenPago.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
-   if dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos) then
-    begin
-      FMovimientos.UltimoNroCheque:= -1;
+    dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
 
-    end;
   FMovimientos.GrupoEditando.Enabled := true;
   close;
 end;
@@ -545,16 +534,6 @@ begin
       result := false;
       exit;
     end;
-
-  //  if (validarNroCheque <> -1) then
-  //  begin
-  //   if (Application.MessageBox(pchar('El cheque nro: '+IntToStr(validarNroCheque)+ 'esta repetido o falta el nro: '+IntToStr(validarNroCheque + 1)+', Desea continuar con la transaccion?'),'Validación',MB_YESNO+MB_ICONINFORMATION) = IDYES)then
-  //     result := true
-  //   else
-  //     result := false;
-  //   exit;
-  //  end;
-
   end;
 end;
 
