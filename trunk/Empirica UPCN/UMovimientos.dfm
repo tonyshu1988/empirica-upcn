@@ -3559,6 +3559,7 @@ object FMovimientos: TFMovimientos
       Height = 26
       Align = alTop
       BevelOuter = bvNone
+      Caption = ' '
       TabOrder = 1
       object Label8: TLabel
         Left = 8
@@ -3896,7 +3897,7 @@ object FMovimientos: TFMovimientos
         Height = 21
         DataField = 'NRO_CHEQUE_TRANSF'
         DataSource = DS_Cuenta_Movimiento
-        TabOrder = 1
+        TabOrder = 3
       end
       object DBEdit6: TDBEdit
         Left = 868
@@ -3905,7 +3906,7 @@ object FMovimientos: TFMovimientos
         Height = 21
         DataField = 'IMPORTE'
         DataSource = DS_Cuenta_Movimiento
-        TabOrder = 2
+        TabOrder = 6
       end
       object DBLookupComboBox1: TDBLookupComboBox
         Left = 200
@@ -3917,7 +3918,7 @@ object FMovimientos: TFMovimientos
         KeyField = 'ID_MEDIO'
         ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
         ListSource = DS_Medios_Cobro_Pago
-        TabOrder = 0
+        TabOrder = 2
       end
       object DBLookupComboBox3: TDBLookupComboBox
         Left = 476
@@ -3927,9 +3928,9 @@ object FMovimientos: TFMovimientos
         DataField = 'NRO_PROVEEDOR'
         DataSource = DS_Movimientos
         KeyField = 'NRO_PROVEEDOR'
-        ListField = 'NOMBRE_FANTASIA'
+        ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = DS_Proveedores
-        TabOrder = 3
+        TabOrder = 4
       end
       object DBLookupComboBox4: TDBLookupComboBox
         Left = 663
@@ -3941,7 +3942,7 @@ object FMovimientos: TFMovimientos
         KeyField = 'ID_CONCEPTO'
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = DS_Conceptos
-        TabOrder = 4
+        TabOrder = 5
       end
       object EKDBDateTimePicker1: TEKDBDateTimePicker
         Left = 13
@@ -3950,7 +3951,7 @@ object FMovimientos: TFMovimientos
         Height = 21
         Date = 40470.714505208340000000
         Time = 40470.714505208340000000
-        TabOrder = 5
+        TabOrder = 0
         DataField = 'FECHA'
         DataSource = DS_Movimientos
       end
@@ -3961,7 +3962,7 @@ object FMovimientos: TFMovimientos
         Height = 21
         Date = 40470.714505208340000000
         Time = 40470.714505208340000000
-        TabOrder = 6
+        TabOrder = 1
         DataField = 'FECHA_MDC'
         DataSource = DS_Cuenta_Movimiento
       end
@@ -4203,7 +4204,7 @@ object FMovimientos: TFMovimientos
         Height = 21
         DataField = 'NRO_CHEQUE_TRANSF'
         DataSource = DS_Cuenta_Movimiento
-        TabOrder = 1
+        TabOrder = 3
       end
       object DBEdit2: TDBEdit
         Left = 868
@@ -4212,7 +4213,7 @@ object FMovimientos: TFMovimientos
         Height = 21
         DataField = 'IMPORTE'
         DataSource = DS_Cuenta_Movimiento
-        TabOrder = 2
+        TabOrder = 6
       end
       object DBLookupComboBox2: TDBLookupComboBox
         Left = 200
@@ -4224,7 +4225,7 @@ object FMovimientos: TFMovimientos
         KeyField = 'ID_MEDIO'
         ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
         ListSource = DS_Medios_Cobro_Pago
-        TabOrder = 0
+        TabOrder = 2
       end
       object DBLookupComboBox5: TDBLookupComboBox
         Left = 476
@@ -4234,9 +4235,9 @@ object FMovimientos: TFMovimientos
         DataField = 'NRO_PROVEEDOR'
         DataSource = DS_Movimientos
         KeyField = 'NRO_PROVEEDOR'
-        ListField = 'NOMBRE_FANTASIA'
+        ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = DS_Proveedores
-        TabOrder = 3
+        TabOrder = 4
       end
       object DBLookupComboBox6: TDBLookupComboBox
         Left = 663
@@ -4248,7 +4249,7 @@ object FMovimientos: TFMovimientos
         KeyField = 'ID_CONCEPTO'
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = DS_Conceptos
-        TabOrder = 4
+        TabOrder = 5
       end
       object EKDBDateTimePicker3: TEKDBDateTimePicker
         Left = 13
@@ -4257,7 +4258,7 @@ object FMovimientos: TFMovimientos
         Height = 21
         Date = 40470.714505208340000000
         Time = 40470.714505208340000000
-        TabOrder = 5
+        TabOrder = 0
         DataField = 'FECHA'
         DataSource = DS_Movimientos
       end
@@ -4268,7 +4269,7 @@ object FMovimientos: TFMovimientos
         Height = 21
         Date = 40470.714505208340000000
         Time = 40470.714505208340000000
-        TabOrder = 6
+        TabOrder = 1
         DataField = 'FECHA_MDC'
         DataSource = DS_Cuenta_Movimiento
       end
@@ -4526,6 +4527,7 @@ object FMovimientos: TFMovimientos
       Visible = ivAlways
       ImageIndex = 4
       ShortCut = 120
+      OnClick = BtCancelarClick
       AutoGrayScale = False
     end
     object btImprimirLB: TdxBarLargeButton

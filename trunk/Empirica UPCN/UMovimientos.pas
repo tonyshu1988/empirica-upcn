@@ -392,6 +392,7 @@ type
     procedure LIBRO_BANCOAfterScroll(DataSet: TDataSet);
     procedure btnAltaOrdenPagoClick(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
+    procedure BtCancelarClick(Sender: TObject);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -559,52 +560,9 @@ end;
 
 procedure TFMovimientos.BtEgresosClick(Sender: TObject);
 begin
-//  PParametrosLibroBanco.Visible:=false;
-//
-//  ZQ_Movimientos.Active := False;
-//  ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
-//
-//  ZQ_Cuenta_Movimiento.Active := False;
-//  ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := 0;
-//  ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := 0;
-//
-//  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
-//  begin
-//    ZQ_Ver_NroOrden.Close;
-//    ZQ_Ver_NroOrden.Open;
-//
-//    lblNroOrden.Caption:= 'ORDEN DE PAGO Nro: '+ZQ_Ver_NroOrdenNRO_ORDEN_STRING.AsString;
-//
-//    ZQ_Movimientos.Append;
-//    ZQ_Cuenta_Movimiento.Append;
-//
-//    if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
-//    begin
-//      DBLUpCBoxCuenta.Enabled:= false;
-//      ZQ_Cuentas.Locate('id_cuenta',CuentaNro,[]);
-//      DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
-//    end
-//    else  //si me logueo como administrador
-//      DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
-//
-//    if ZQ_CuentasAUTONUMERAR.AsString = 'S' then
-//      UltimoNroCheque:= ZQ_CuentasULTIMO_NRO.AsInteger;
-//
-//    ISDBEditDateTimePicker1.SetFocus;
-//
-//    ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1; //PONGO QUE ES UNA ORDEN DE PAGO
-//    ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
-//    GrupoEditando.Enabled := false;
-//    GrupoGuardarCancelar.Enabled := true;
-//  end;
-end;
-
-
-procedure TFMovimientos.BtIngresosClick(Sender: TObject);
-begin
-PIngresos.Visible:=true;
-DBEditCodMedio.SetFocus;
-
+PEgresos.Visible:=true;
+DBGridLibroBanco.Enabled:=false;
+PParametrosLibroBanco.Enabled:=false;
 
   ZQ_Movimientos.Active := False;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
@@ -617,20 +575,35 @@ DBEditCodMedio.SetFocus;
     ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
 
-    if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
-    begin
-      DBLUpCBoxCuentaIngreaso.Enabled:= false;
-      ZQ_Cuentas.Locate('id_cuenta', CuentaNro, []);
-      DBLUpCBoxCuentaIngreaso.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
-    end
-    else //si me logueo como administrador
-      DBLUpCBoxCuentaIngreaso.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:= 3; //PONGO Q ES UN EGRESO
+    ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
+    GrupoEditando.Enabled := false;
+    GrupoGuardarCancelar.Enabled := true;
+  end;
 
+end;
+
+
+procedure TFMovimientos.BtIngresosClick(Sender: TObject);
+begin
+PIngresos.Visible:=true;
+DBGridLibroBanco.Enabled:=false;
+PParametrosLibroBanco.Enabled:=false;
+
+  ZQ_Movimientos.Active := False;
+  ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
+  ZQ_Cuenta_Movimiento.Active := False;
+  ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := 0;
+  ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := 0;
+
+  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
+  begin
+    ZQ_Movimientos.Append;
+    ZQ_Cuenta_Movimiento.Append;
 
     ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:= 2; //PONGO Q ES UN RECIBO
-    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=0;//Pongo proveedor generico
-    ZQ_MovimientosID_CONCEPTO.AsInteger:=0;//Pongo Concepto generico
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -642,78 +615,60 @@ procedure TFMovimientos.BtGuardarClick(Sender: TObject);
 var
   nro_mov : integer;
 begin
-// ZQ_Cuenta_Movimiento.First; //borro los renglones vacios
-// while not ZQ_Cuenta_Movimiento.Eof do
-// begin
-//   if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) then
-//     ZQ_Cuenta_Movimiento.Delete;
-//
-//   if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0) then //si el saldo es 0 entonces anulo el movimiento
-//   begin
-//     ZQ_Cuenta_Movimiento.Edit;
-//     ZQ_Cuenta_MovimientoANULADO.AsString := 'A';
-//   end
-//   else
-//   begin
-//     ZQ_Cuenta_Movimiento.Edit;
-//     ZQ_Movimientos.Edit;
-//     ZQ_Cuenta_MovimientoANULADO.Clear;
-//     ZQ_MovimientosANULADO.Clear;
-//   end;
-//
-//   ZQ_Cuenta_Movimiento.Next;
-// end;
-//
+Perform(WM_NEXTDLGCTL,0,0);
+
+   if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0) then //si el saldo es 0 entonces anulo el movimiento
+   begin
+     ZQ_Cuenta_Movimiento.Edit;
+     ZQ_Cuenta_MovimientoANULADO.AsString := 'A';
+   end
+   else
+   begin
+     ZQ_Cuenta_Movimiento.Edit;
+     ZQ_Movimientos.Edit;
+     ZQ_Cuenta_MovimientoANULADO.Clear;
+     ZQ_MovimientosANULADO.Clear;
+   end;
+
 // if validarcampos then
 // begin
-//    ZQ_Tipo_Movimiento.Filtered:= false;
-//
-//    ZQ_Cuenta_Movimiento.First;
-//    if ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0 then
-//    begin
-//      Nro_Moviemiento.Active := true;
-//      nro_mov := Nro_MoviemientoID.AsInteger;
-//      Nro_Moviemiento.Active := false;
-//      ZQ_MovimientosNRO_MOVIMIENTO.AsInteger := nro_mov;
-//
-//      if ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger = 1 then //SI ES UNA ORDEN DE PAGO LE CARGO UN NRO DE ORDEN
-//      begin
-//        nro_orden.Active := true;
-//        ZQ_MovimientosNRO_ORDEN.AsInteger := nro_ordenID.AsInteger;
-//        nro_orden.Active := false;
-//      end;
-//    end
-//    else
-//      nro_mov:= ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
-//
-//
-//    while not ZQ_Cuenta_Movimiento.Eof do //recorro todas la formas de pago cargadas
-//    begin
-//      ZQ_Cuenta_Movimiento.Edit;
-//      ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger :=nro_mov; //le agrego el nro de movimiento
-//
-//      if ZQ_Cuenta_MovimientoFECHA_MDC.IsNull then //si la fecha es vacia le pongo la fecha de emision
-//        ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime := ZQ_MovimientosFECHA.AsDateTime;
-//
-//      //si es un cheque y no tiene la marca de conciliado le pongo q no esta conciliado
-//      if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) and (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then
-//        ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
-//
-//      ZQ_Cuenta_Movimiento.Next;
-//    end;
-//
-//    if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
-//    begin
-//     UltimoNroCheque:= -1;
-//     GrupoEditando.Enabled := true;
-//     GrupoGuardarCancelar.Enabled := false;
-//     PEgresos.Visible:= false;
-//     PIngresos.Visible:=false;
-//     PParametrosLibroBanco.Visible:=true;
-//     DBGridLibroBanco.Visible:=true;
-//     btaplicar.Click;
-//    end;
-// end;
+    ZQ_Cuenta_Movimiento.First;
+    if ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0 then
+    begin
+      ZQ_Cuenta_Movimiento.Edit;
+      Nro_Moviemiento.Active := true;
+      nro_mov := Nro_MoviemientoID.AsInteger;
+      Nro_Moviemiento.Active := false;
+      ZQ_MovimientosNRO_MOVIMIENTO.AsInteger := nro_mov;
+      ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger := nro_mov;
+    end
+    else
+      nro_mov:= ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
+
+      if ZQ_Cuenta_MovimientoFECHA_MDC.IsNull then //si la fecha es vacia le pongo la fecha de emision
+      begin
+        ZQ_Cuenta_Movimiento.Edit;
+        ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime := ZQ_MovimientosFECHA.AsDateTime;
+      end;
+
+      //si es un cheque y no tiene la marca de conciliado le pongo q no esta conciliado
+      if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) and (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then
+      begin
+        ZQ_Cuenta_Movimiento.Edit;
+        ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
+      end;
+
+    if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+    begin
+     GrupoEditando.Enabled := true;
+     GrupoGuardarCancelar.Enabled := false;
+     PEgresos.Visible:= false;
+     PIngresos.Visible:=false;
+     PParametrosLibroBanco.Enabled:=true;
+     DBGridLibroBanco.Enabled:=true;
+     btaplicar.Click;
+    end;
+ //end;
 end;
 
 
@@ -1320,6 +1275,12 @@ procedure TFMovimientos.EKDbSuma1SumListChanged(Sender: TObject);
 begin
  if FAlta_OrdenPago<>nil then
   FAlta_OrdenPago.txt_total_medio_pago.Caption:=Format('Total: $%f',[EKDbSuma1.SumCollection[0].SumValue]);
+end;
+
+procedure TFMovimientos.BtCancelarClick(Sender: TObject);
+begin
+     PParametrosLibroBanco.Enabled:=true;
+     DBGridLibroBanco.Enabled:=true;
 end;
 
 end.
