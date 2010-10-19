@@ -14,7 +14,10 @@ uses
   UReportes_Disponibilidades in 'UReportes_Disponibilidades.pas' {FReportes_Disponibilidades},
   UListadoErogaciones in 'UListadoErogaciones.pas' {FListadoErogaciones},
   UConciliacion in 'UConciliacion.pas' {FConciliacion},
-  UABM_Autoridad in 'UABM_Autoridad.pas' {FABM_Autoridad};
+  UABM_Autoridad in 'UABM_Autoridad.pas' {FABM_Autoridad},
+  UAlta_OrdenPago in 'UAlta_OrdenPago.pas' {FAlta_OrdenPago},
+  UAlta_Ingreso in 'UAlta_Ingreso.pas' {FAlta_Ingreso},
+  UAlta_Egreso in 'UAlta_Egreso.pas' {FAlta_Egreso};
 
 {$R *.res}
 
