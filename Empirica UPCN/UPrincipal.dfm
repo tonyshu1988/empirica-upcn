@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
   Left = 276
-  Top = 161
+  Top = 98
   Width = 871
   Height = 640
   Caption = 'FPrincipal'
@@ -20,8 +20,8 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 567
-    Width = 855
+    Top = 569
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -37,22 +37,20 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionToolBar1'
     ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
     ColorMap.UnusedColor = clWhite
-    ParentShowHint = False
-    ShowHint = True
     Spacing = 0
   end
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 538
+    Width = 863
+    Height = 540
     Align = alClient
     TabOrder = 2
   end
@@ -129,19 +127,27 @@ object FPrincipal: TFPrincipal
       ImageIndex = 20
       OnExecute = AABM_AutoridadExecute
     end
+    object AABM_Medio: TAction
+      Caption = 'ABM Medio Cobro/Pago'
+      ImageIndex = 34
+      OnExecute = AABM_MedioExecute
+    end
   end
   object MainMenu1: TMainMenu
     Images = Iconos_Menu_16
     Left = 176
     Top = 56
     object PlandeCuentas: TMenuItem
-      Caption = 'Varios'
+      Caption = 'Configuracion'
       object ABMAutoridad1: TMenuItem
         Action = AABM_Autoridad
       end
       object ABMConceptos1: TMenuItem
         Action = AConceptos
         Caption = 'ABM Conceptos'
+      end
+      object ABMMedioCobroPago1: TMenuItem
+        Action = AABM_Medio
       end
     end
     object Disponibilidades: TMenuItem
