@@ -123,7 +123,9 @@ Begin
     end
   else
     begin
-      DateTime:= StrToDateTime(FDataLink.Field.AsString);
+      DateTime_SetFormat(Handle,'''''');
+      DateTime:= Now();
+      //DateTime:= StrToDateTime(FDataLink.Field.AsString);
       if FDataLink.Editing then
         FDataLink.Modified;
     end;
