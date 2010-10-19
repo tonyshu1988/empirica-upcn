@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, DBCtrls, Mask, ComCtrls, ISDBEditDateTimePicker,
   Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, ActnList,
-  XPStyleActnCtrls, ActnMan, EKDbSuma;
+  XPStyleActnCtrls, ActnMan, EKDbSuma, EKDBDateTimePicker;
 
 type
   TFAlta_OrdenPago = class(TForm)
@@ -29,7 +29,6 @@ type
     Label13: TLabel;
     Label25: TLabel;
     lblNroOrden: TLabel;
-    ISDBEditDateTimePicker1: TISDBEditDateTimePicker;
     DBEditNroProveedor: TDBEdit;
     DBLUpCBoxProveedor: TDBLookupComboBox;
     DBMemoDescripcion: TDBMemo;
@@ -50,6 +49,7 @@ type
     btnImprimir: TdxBarLargeButton;
     ActionManager1: TActionManager;
     ADeleteLinea: TAction;
+    dbFechaEmision: TEKDBDateTimePicker;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -66,6 +66,10 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
     function validarcampos():boolean;
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormCreate(Sender: TObject);
+    procedure VerOrdenPago();
+    procedure habilitar(hab:boolean);
   private
     { Private declarations }
   public
@@ -132,6 +136,7 @@ end;
 
 procedure TFAlta_OrdenPago.DbGridMediosCobroPagoColEnter(Sender: TObject);
 begin
+if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
   with FMovimientos do
   begin
      if ((sender as tdbgrid).SelectedField.FullName = 'NRO_CHEQUE_TRANSF') then
@@ -150,6 +155,7 @@ end;
 
 procedure TFAlta_OrdenPago.DbGridMediosCobroPagoColExit(Sender: TObject);
 begin
+if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
   with FMovimientos do
   begin
      if ((sender as tdbgrid).SelectedField.FullName = 'NRO_CHEQUE_TRANSF') then
@@ -219,6 +225,7 @@ end;
 procedure TFAlta_OrdenPago.DbGridMediosCobroPagoKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
+if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
   with FMovimientos do
   begin
     if key = 112 then
@@ -254,24 +261,54 @@ begin
 end;
 
 
+
+procedure TFAlta_OrdenPago.VerOrdenPago();
+begin
+  //asdasd
+  with FMovimientos do
+    begin
+     ZQ_Movimientos.Close;
+     ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+     ZQ_Movimientos.Open;
+
+     ZQ_Cuenta_Movimiento.Close;
+     ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger :=ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
+     ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
+     ZQ_Cuenta_Movimiento.Open;
+
+     ZQ_Cuentas.Locate('id_cuenta',ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger,[]);
+    end;
+
+  habilitar(False);
+
+end;
+
+procedure TFAlta_OrdenPago.habilitar(hab:boolean);
+var
+i:Integer;
+begin
+    for i:=0 to (gBoxDatos.ControlCount-1) do
+    begin
+        gBoxDatos.Controls[i].Enabled:=hab;
+    end;
+    btEliminarLinea.Enabled:=hab;
+    //Permito o no la edicion de la orden de Pago
+    FMovimientos.ZQ_Cuenta_Movimiento.ReadOnly:=not(hab);
+
+end;
+
+
 procedure TFAlta_OrdenPago.IniciarOrdenPago();
 begin
   with FMovimientos do
   begin
     PParametrosLibroBanco.Enabled:=false;
-
-//    ZQ_Movimientos.Active := False;
-//    ZQ_Movimientos.ParamByName('NroMov').AsInteger := 0;
-//
-//    ZQ_Cuenta_Movimiento.Active := False;
-//    ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := 0;
-//    ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := 0;
-
     ZQ_Movimientos.Close;
     ZQ_Cuenta_Movimiento.Close;
 
     if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
     begin
+      habilitar(True);
       ZQ_Ver_NroOrden.Close;
       ZQ_Ver_NroOrden.Open;
 
@@ -284,10 +321,9 @@ begin
       begin
         DBLUpCBoxCuenta.Enabled:= false;
         ZQ_Cuentas.Locate('id_cuenta',CuentaNro,[]);
-        DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
-      end
-      else  //si me logueo como administrador
-        DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
+      end;
+
+      DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
 
       if ZQ_CuentasAUTONUMERAR.AsString = 'S' then
         UltimoNroCheque:= ZQ_CuentasULTIMO_NRO.AsInteger;
@@ -295,6 +331,9 @@ begin
       ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1; //PONGO QUE ES UNA ORDEN DE PAGO
       ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
       GrupoEditando.Enabled := false;
+      //Por defecto los coloco en el primer registro
+      ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=1;
+      ZQ_MovimientosID_CONCEPTO.AsInteger:=1;
     end;
   end;
 end;
@@ -302,7 +341,8 @@ end;
 
 procedure TFAlta_OrdenPago.btEliminarLineaClick(Sender: TObject);
 begin
-  with FMovimientos do
+if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
+ with FMovimientos do
   begin
     if not(ZQ_Cuenta_Movimiento.IsEmpty)then
     begin
@@ -325,6 +365,7 @@ end;
 
 procedure TFAlta_OrdenPago.ADeleteLineaExecute(Sender: TObject);
 begin
+ if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
   if DbGridMediosCobroPago.Focused then
     btEliminarLinea.Click;
 end;
@@ -332,12 +373,13 @@ end;
 
 procedure TFAlta_OrdenPago.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos) then
-  begin
-    FMovimientos.UltimoNroCheque:= -1;
-    FMovimientos.GrupoEditando.Enabled := true;
-    FMovimientos.PParametrosLibroBanco.Enabled:=True;
-  end;
+  if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
+   if dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos) then
+    begin
+      FMovimientos.UltimoNroCheque:= -1;
+      FMovimientos.GrupoEditando.Enabled := true;
+      FMovimientos.PParametrosLibroBanco.Enabled:=True;
+    end;
 
   close;
 end;
@@ -347,47 +389,48 @@ procedure TFAlta_OrdenPago.btnGuardarClick(Sender: TObject);
 var
   nro_mov : integer;
 begin
+if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
   with FMovimientos do
   begin
     ZQ_Cuenta_Movimiento.First; //borro los renglones vacios
-    while not ZQ_Cuenta_Movimiento.Eof do
-    begin
-     if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) then
-       ZQ_Cuenta_Movimiento.Delete;
+    while (not ZQ_Cuenta_Movimiento.Eof) do
+      begin
+       if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) then
+         ZQ_Cuenta_Movimiento.Delete;
 
-     if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0) then //si el saldo es 0 entonces anulo el movimiento
-     begin
-       ZQ_Cuenta_Movimiento.Edit;
-       ZQ_Cuenta_MovimientoANULADO.AsString := 'A';
-     end
-     else
-     begin
-       ZQ_Cuenta_Movimiento.Edit;
-       ZQ_Movimientos.Edit;
-       ZQ_Cuenta_MovimientoANULADO.Clear;
-       ZQ_MovimientosANULADO.Clear;
-     end;
+       if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0) then //si el saldo es 0 entonces anulo el movimiento
+         begin
+           ZQ_Cuenta_Movimiento.Edit;
+           ZQ_Cuenta_MovimientoANULADO.AsString := 'A';
+         end
+       else
+         begin
+           ZQ_Cuenta_Movimiento.Edit;
+           ZQ_Movimientos.Edit;
+           ZQ_Cuenta_MovimientoANULADO.Clear;
+           ZQ_MovimientosANULADO.Clear;
+         end;
 
-     ZQ_Cuenta_Movimiento.Next;
-    end;
+       ZQ_Cuenta_Movimiento.Next;
+      end;
 
     if self.validarcampos then
     begin
       ZQ_Cuenta_Movimiento.First;
       if ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0 then
-      begin
-        Nro_Moviemiento.Active := true;
-        nro_mov := Nro_MoviemientoID.AsInteger;
-        Nro_Moviemiento.Active := false;
-        ZQ_MovimientosNRO_MOVIMIENTO.AsInteger := nro_mov;
-
-        if ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger = 1 then //SI ES UNA ORDEN DE PAGO LE CARGO UN NRO DE ORDEN
         begin
-          nro_orden.Active := true;
-          ZQ_MovimientosNRO_ORDEN.AsInteger := nro_ordenID.AsInteger;
-          nro_orden.Active := false;
-        end;
-      end
+          Nro_Moviemiento.Active := true;
+          nro_mov := Nro_MoviemientoID.AsInteger;
+          Nro_Moviemiento.Active := false;
+          ZQ_MovimientosNRO_MOVIMIENTO.AsInteger := nro_mov;
+
+          if ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger = 1 then //SI ES UNA ORDEN DE PAGO LE CARGO UN NRO DE ORDEN
+          begin
+            nro_orden.Active := true;
+            ZQ_MovimientosNRO_ORDEN.AsInteger := nro_ordenID.AsInteger;
+            nro_orden.Active := false;
+          end;
+        end
       else
         nro_mov:= ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
 
@@ -408,12 +451,12 @@ begin
       end;
 
       if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
-      begin
-       UltimoNroCheque:= -1;
-       GrupoEditando.Enabled := true;
-       PParametrosLibroBanco.Enabled:=true;
-       btaplicar.Click;
-      end;
+        begin
+          UltimoNroCheque:= -1;
+          GrupoEditando.Enabled := true;
+          PParametrosLibroBanco.Enabled:=true;
+          btaplicar.Click;
+        end;
     end;
   end;
 
@@ -431,7 +474,7 @@ begin
     if (ZQ_MovimientosFECHA.IsNull) then
     begin
       Application.MessageBox('El campo "Fecha" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-      ISDBEditDateTimePicker1.SetFocus;
+      dbFechaEmision.SetFocus;
       result := false;
       exit;
     end;
@@ -472,5 +515,25 @@ begin
   end;
 end;
 
+
+procedure TFAlta_OrdenPago.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
+  begin
+      if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela ?'),'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+        canClose := False
+      else
+        begin
+           Perform(WM_NEXTDLGCTL, 0, 0);
+           dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+        end
+  end;
+end;
+
+procedure TFAlta_OrdenPago.FormCreate(Sender: TObject);
+begin
+  FAlta_OrdenPago.lblNroOrden.Caption:= Format('ORDEN DE PAGO Nro: %s',[FMovimientos.LIBRO_BANCONRO_ORDEN.AsString]);
+end;
 
 end.

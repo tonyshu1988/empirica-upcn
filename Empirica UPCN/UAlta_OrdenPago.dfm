@@ -1,19 +1,21 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 327
-  Top = 189
+  Left = 303
+  Top = 165
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
   ClientHeight = 527
   ClientWidth = 771
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PEgresos: TPanel
@@ -60,9 +62,15 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       object Label7: TLabel
         Left = 13
         Top = 3
-        Width = 42
+        Width = 50
         Height = 13
         Caption = 'MEDIOS'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         Transparent = True
       end
       object DbGridMediosCobroPago: TDBGrid
@@ -76,10 +84,10 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         DataSource = FMovimientos.DS_Cuenta_Movimiento
         Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Charset = ANSI_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Name = 'Verdana'
         TitleFont.Style = []
         OnColEnter = DbGridMediosCobroPagoColEnter
         OnColExit = DbGridMediosCobroPagoColExit
@@ -98,7 +106,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
             FieldName = 'ID_MEDIO'
             Title.Alignment = taCenter
             Title.Caption = 'Cod.'
-            Width = 34
+            Width = 40
             Visible = True
           end
           item
@@ -151,7 +159,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         end
         object btEliminarLinea: TButton
           Left = 2
-          Top = 2
+          Top = 5
           Width = 153
           Height = 17
           Caption = 'Eliminar Linea (Del)'
@@ -173,17 +181,17 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         765
         226)
       object Label3: TLabel
-        Left = 7
+        Left = 3
         Top = 37
-        Width = 72
+        Width = 86
         Height = 13
         Caption = 'Fecha Emisi'#243'n:'
         Transparent = True
       end
       object Label4: TLabel
-        Left = 27
+        Left = 25
         Top = 64
-        Width = 52
+        Width = 64
         Height = 13
         Caption = 'Proveedor:'
         Transparent = True
@@ -191,23 +199,23 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       object Label5: TLabel
         Left = 30
         Top = 92
-        Width = 49
+        Width = 59
         Height = 13
         Caption = 'Concepto:'
         Transparent = True
       end
       object Label6: TLabel
-        Left = 20
+        Left = 18
         Top = 172
-        Width = 59
+        Width = 71
         Height = 13
         Caption = 'Descripci'#243'n:'
         Transparent = True
       end
       object Label1: TLabel
-        Left = 42
+        Left = 43
         Top = 120
-        Width = 37
+        Width = 46
         Height = 13
         Caption = 'Cuenta:'
         Transparent = True
@@ -215,25 +223,25 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       object Label12: TLabel
         Left = 617
         Top = 64
-        Width = 131
+        Width = 129
         Height = 13
         Anchors = [akTop, akRight]
-        Caption = '(F1 Para Buscar Proveedor)'
+        Caption = '(F1 Buscar Proveedor)'
         Transparent = True
       end
       object Label13: TLabel
         Left = 617
         Top = 92
-        Width = 103
+        Width = 124
         Height = 13
         Anchors = [akTop, akRight]
         Caption = '(F1 Buscar Concepto)'
         Transparent = True
       end
       object Label25: TLabel
-        Left = 20
+        Left = 18
         Top = 148
-        Width = 59
+        Width = 71
         Height = 13
         Caption = 'Nro Factura:'
       end
@@ -257,103 +265,130 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       object Label26: TLabel
         Left = 386
         Top = 148
-        Width = 57
+        Width = 67
         Height = 13
         Caption = 'Nro Recibo:'
       end
-      object ISDBEditDateTimePicker1: TISDBEditDateTimePicker
-        Left = 84
-        Top = 33
-        Width = 196
-        Height = 21
-        Date = 39417.795984317130000000
-        Time = 39417.795984317130000000
-        DateFormat = dfLong
-        TabOrder = 0
-        DataField = 'FECHA'
-        DataSource = FMovimientos.DS_Movimientos
-        ReadOnly = False
-        DefaultEditMask = '!99/99/9999;1;_'
-        AutoApplyEditMask = True
-      end
       object DBEditNroProveedor: TDBEdit
-        Left = 84
+        Left = 91
         Top = 60
         Width = 49
         Height = 21
         DataField = 'NRO_PROVEEDOR'
         DataSource = FMovimientos.DS_Movimientos
-        TabOrder = 1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
         OnKeyUp = DBEditNroProveedorKeyUp
       end
       object DBLUpCBoxProveedor: TDBLookupComboBox
-        Left = 140
+        Left = 147
         Top = 60
         Width = 464
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'NRO_PROVEEDOR'
         DataSource = FMovimientos.DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'NRO_PROVEEDOR'
         ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = FMovimientos.DS_Proveedores
-        TabOrder = 2
+        ParentFont = False
+        TabOrder = 1
         OnKeyUp = DBEditNroProveedorKeyUp
       end
       object DBMemoDescripcion: TDBMemo
-        Left = 84
+        Left = 91
         Top = 171
-        Width = 670
+        Width = 662
         Height = 49
         Color = 16772842
         DataField = 'DESCRIPCION'
         DataSource = FMovimientos.DS_Movimientos
-        TabOrder = 8
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 7
       end
       object DBLUpCBoxConcepto: TDBLookupComboBox
-        Left = 140
+        Left = 147
         Top = 88
         Width = 464
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'ID_CONCEPTO'
         DataSource = FMovimientos.DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'ID_CONCEPTO'
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = FMovimientos.DS_Conceptos
-        TabOrder = 4
+        ParentFont = False
+        TabOrder = 3
         OnKeyUp = DBEditNroConceptoKeyUp
       end
       object DBEditNroConcepto: TDBEdit
-        Left = 84
+        Left = 91
         Top = 88
         Width = 49
         Height = 21
         DataField = 'ID_CONCEPTO'
         DataSource = FMovimientos.DS_Movimientos
-        TabOrder = 3
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
         OnKeyUp = DBEditNroConceptoKeyUp
       end
       object DBLUpCBoxCuenta: TDBLookupComboBox
-        Left = 84
+        Left = 91
         Top = 116
         Width = 357
         Height = 21
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'ID_CUENTA'
         ListField = 'BUSQUEDA'
         ListSource = FMovimientos.DS_Cuentas
-        TabOrder = 5
+        ParentFont = False
+        TabOrder = 4
         OnEnter = DBLUpCBoxCuentaEnter
         OnExit = DBLUpCBoxCuentaExit
       end
       object DBEditNroFactura: TDBEdit
-        Left = 84
+        Left = 91
         Top = 144
         Width = 290
         Height = 21
         DataField = 'NRO_FACTURA'
         DataSource = FMovimientos.DS_Movimientos
-        TabOrder = 6
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 5
       end
       object DBEditNroRecibo: TDBEdit
         Left = 450
@@ -362,7 +397,30 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Height = 21
         DataField = 'NRO_RECIBO'
         DataSource = FMovimientos.DS_Movimientos
-        TabOrder = 7
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 6
+      end
+      object dbFechaEmision: TEKDBDateTimePicker
+        Left = 91
+        Top = 32
+        Width = 165
+        Height = 21
+        Date = 40470.524141851850000000
+        Time = 40470.524141851850000000
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 8
+        DataField = 'FECHA'
+        DataSource = FMovimientos.DS_Movimientos
       end
     end
   end
@@ -544,7 +602,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       HotImageIndex = 2
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'Aceptar'
       Category = 0
       Hint = 'Guarda los cambios'
       Visible = ivAlways

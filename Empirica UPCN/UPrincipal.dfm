@@ -20,7 +20,7 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 563
+    Top = 567
     Width = 855
     Height = 19
     Panels = <
@@ -44,13 +44,15 @@ object FPrincipal: TFPrincipal
     ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
     ColorMap.UnusedColor = clWhite
+    ParentShowHint = False
+    ShowHint = True
     Spacing = 0
   end
   object PanelTapa: TPanel
     Left = 0
     Top = 29
     Width = 855
-    Height = 534
+    Height = 538
     Align = alClient
     TabOrder = 2
   end
