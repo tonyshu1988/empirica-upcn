@@ -1,7 +1,7 @@
 object FMovimientos: TFMovimientos
-  Left = 213
-  Top = 157
-  Width = 1065
+  Left = 205
+  Top = 143
+  Width = 1206
   Height = 588
   Caption = 'Movimientos'
   Color = clBtnFace
@@ -23,14 +23,14 @@ object FMovimientos: TFMovimientos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1049
-    Height = 498
+    Width = 1190
+    Height = 502
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
-      1049
-      498)
+      1190
+      502)
     object RepLibroB: TQuickRep
       Tag = 99
       Left = 20
@@ -1439,7 +1439,7 @@ object FMovimientos: TFMovimientos
     end
     object PanelImpresion: TPanel
       Tag = 99
-      Left = 316
+      Left = 392
       Top = 139
       Width = 505
       Height = 281
@@ -3555,7 +3555,7 @@ object FMovimientos: TFMovimientos
     object PParametrosLibroBanco: TPanel
       Left = 0
       Top = 0
-      Width = 1049
+      Width = 1190
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -3644,10 +3644,13 @@ object FMovimientos: TFMovimientos
           'Fecha PD')
       end
       object StaticText1: TStaticText
-        Left = 976
-        Top = 9
+        Left = 1100
+        Top = 4
         Width = 71
         Height = 17
+        Align = alCustom
+        Alignment = taCenter
+        BorderStyle = sbsSunken
         Caption = 'Conciliado'
         Color = 10354687
         Font.Charset = ANSI_CHARSET
@@ -3663,8 +3666,8 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 467
-      Width = 1049
+      Top = 471
+      Width = 1190
       Height = 31
       Align = alBottom
       Color = 8454016
@@ -3672,7 +3675,7 @@ object FMovimientos: TFMovimientos
       Visible = False
       object BtAplicarFiltrosColumnas: TButton
         Left = 1028
-        Top = 4
+        Top = 5
         Width = 93
         Height = 20
         Caption = 'Aplicar'
@@ -3686,6 +3689,7 @@ object FMovimientos: TFMovimientos
         OnClick = BtAplicarFiltrosColumnasClick
       end
       object CBFechaEmi: TCheckBox
+        Tag = 99
         Left = 8
         Top = 8
         Width = 103
@@ -3696,6 +3700,7 @@ object FMovimientos: TFMovimientos
         TabOrder = 1
       end
       object CBFechaPD: TCheckBox
+        Tag = 99
         Left = 112
         Top = 8
         Width = 78
@@ -3706,6 +3711,7 @@ object FMovimientos: TFMovimientos
         TabOrder = 2
       end
       object CBNroMov: TCheckBox
+        Tag = 99
         Left = 193
         Top = 8
         Width = 111
@@ -3716,6 +3722,7 @@ object FMovimientos: TFMovimientos
         TabOrder = 3
       end
       object CBMedio: TCheckBox
+        Tag = 99
         Left = 311
         Top = 8
         Width = 62
@@ -3726,6 +3733,7 @@ object FMovimientos: TFMovimientos
         TabOrder = 4
       end
       object CBNroMedio: TCheckBox
+        Tag = 99
         Left = 375
         Top = 8
         Width = 81
@@ -3736,6 +3744,7 @@ object FMovimientos: TFMovimientos
         TabOrder = 5
       end
       object CBProveedor: TCheckBox
+        Tag = 99
         Left = 546
         Top = 8
         Width = 102
@@ -3746,6 +3755,7 @@ object FMovimientos: TFMovimientos
         TabOrder = 6
       end
       object CBConcepto: TCheckBox
+        Tag = 99
         Left = 642
         Top = 8
         Width = 81
@@ -3756,6 +3766,7 @@ object FMovimientos: TFMovimientos
         TabOrder = 7
       end
       object CBNroOrden: TCheckBox
+        Tag = 99
         Left = 460
         Top = 8
         Width = 81
@@ -3766,6 +3777,7 @@ object FMovimientos: TFMovimientos
         TabOrder = 8
       end
       object CBRecibo: TCheckBox
+        Tag = 99
         Left = 720
         Top = 8
         Width = 80
@@ -3776,6 +3788,7 @@ object FMovimientos: TFMovimientos
         TabOrder = 9
       end
       object CBNroFactura: TCheckBox
+        Tag = 99
         Left = 807
         Top = 8
         Width = 88
@@ -3786,26 +3799,29 @@ object FMovimientos: TFMovimientos
         TabOrder = 10
       end
       object CBFechaConciliado: TCheckBox
+        Tag = 99
         Left = 903
         Top = 8
         Width = 117
         Height = 17
         Caption = 'Fecha Conciliado'
         Checked = True
+        Color = 8454016
+        ParentColor = False
         State = cbChecked
         TabOrder = 11
       end
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 365
-      Width = 1049
+      Top = 369
+      Width = 1190
       Height = 102
       Align = alBottom
       TabOrder = 5
       Visible = False
       DesignSize = (
-        1049
+        1190
         102)
       object Label2: TLabel
         Left = 18
@@ -3857,7 +3873,7 @@ object FMovimientos: TFMovimientos
         Caption = 'Importe'
       end
       object Label27: TLabel
-        Left = 888
+        Left = 1029
         Top = 3
         Width = 149
         Height = 32
@@ -3946,8 +3962,8 @@ object FMovimientos: TFMovimientos
     object DBGridLibroBanco: TDBGrid
       Left = 0
       Top = 26
-      Width = 1049
-      Height = 339
+      Width = 1190
+      Height = 343
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -4210,6 +4226,10 @@ object FMovimientos: TFMovimientos
             Visible = True
           end
           item
+            Item = BtEditarMovimiento
+            Visible = True
+          end
+          item
             BeginGroup = True
             Item = btnAltaOrdenPago
             Visible = True
@@ -4220,10 +4240,6 @@ object FMovimientos: TFMovimientos
           end
           item
             Item = BtEgresos
-            Visible = True
-          end
-          item
-            Item = BtEditarMovimiento
             Visible = True
           end
           item
@@ -5357,8 +5373,8 @@ object FMovimientos: TFMovimientos
   end
   object DS_Autoriza: TDataSource
     DataSet = ZQ_Autoriza
-    Left = 16
-    Top = 459
+    Left = 152
+    Top = 363
   end
   object EKLlenarCBAutoriza: TEKLlenarCombo
     dataset = ZQ_Autoriza

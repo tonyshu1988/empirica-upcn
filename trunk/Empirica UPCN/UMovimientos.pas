@@ -719,8 +719,8 @@ end;
 
 procedure TFMovimientos.BtEditarMovimientoClick(Sender: TObject);
 begin
-// if LIBRO_BANCO.IsEmpty then
-//  exit;
+ if LIBRO_BANCO.IsEmpty then
+  exit;
 //
 // ZQ_Movimientos.Close;
 // ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
@@ -860,69 +860,14 @@ end;
 
 procedure TFMovimientos.BtVerDetalleClick(Sender: TObject);
 begin
-// if LIBRO_BANCO.IsEmpty then
-//  exit;
-//
-//   if (PEgresos.Visible = true) or (PIngresos.Visible = true) then
-//   begin
-//    PEgresos.Visible:= false;
-//    PIngresos.Visible:=false;
-//    PParametrosLibroBanco.Visible:=true;
-//    DBGridLibroBanco.Visible:=true;
-//    DBGridLibroBanco.Enabled:=true;
-//    PEgresos.Enabled:=true;
-//    PIngresos.Enabled:=true;
-//    LabelDetalle.Caption:= '';
-//    GrupoEditando.Enabled := true;
-//   end
-//   else
-//   begin
-//    if LIBRO_BANCODEBE.IsNull then
-//    begin
-//      PEgresos.Visible:= true;
-//      PEgresos.Enabled:=false;
-//      DBGridLibroBanco.Visible:=false;
-//    end
-//    else
-//    begin
-//      PIngresos.Visible:= true;
-//      PIngresos.Enabled:=false;
-//      DBGridLibroBanco.Enabled:=false;
-//    end;
-//
-//    PParametrosLibroBanco.Visible:=false;
-//    GrupoEditando.Enabled := false;
-//    BtVerDetalle.Enabled:=true;
-//
-//     ZQ_Movimientos.Close;
-//     ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
-//     ZQ_Movimientos.Open;
-//
-//     ZQ_Cuenta_Movimiento.Close;
-//     ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger :=ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
-//     ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
-//     ZQ_Cuenta_Movimiento.Open;
-//
-//     ZQ_Cuentas.Locate('id_cuenta',ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger,[]);
-//
-//     if ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.IsNull then
-//     begin
-//        DbGridMediosCobroPago.Columns[2].Visible := false;
-//        DbGridMediosCobroPago.Columns[3].Visible := false;
-//        DbGridMediosCobroPago.Columns[6].Visible := true;
-//        DbGridMediosCobroPago.Columns[7].Visible := true;
-//        DbGridMediosCobroPago.Columns[4].Visible := true;
-//        DbGridMediosCobroPago.Columns[5].Visible := true;
-//        BanderaIngresoEgreso:=0;
-//        DBLUpCBoxCuenta.DataSource:=DS_Cuenta_Movimiento;
-//        DBLUpCBoxCuenta.DataField := 'ID_CUENTA_EGRESO';
-//     end
-//     else
-//     begin
-//        BanderaIngresoEgreso:=1;
-//     end;
-//
-//   end;
+ if LIBRO_BANCO.IsEmpty then
+  exit;
+
+  //Sólo para Ordenes de Pago
+  Application.CreateForm(TFAlta_OrdenPago,FAlta_OrdenPago);
+  FAlta_OrdenPago.VerOrdenPago();
+  FAlta_OrdenPago.ShowModal;
+  FAlta_OrdenPago.Release;
 end;
 
 
@@ -1227,6 +1172,8 @@ begin
     DBGridLibroBanco.Columns[15].Visible := false
   else
     DBGridLibroBanco.Columns[15].Visible := true;
+
+  PFiltrosColumnas.Visible:=false;
 end;
 
 
@@ -1342,12 +1289,10 @@ end;
 
 procedure TFMovimientos.btnAltaOrdenPagoClick(Sender: TObject);
 begin
-  if ventanaOrdenPago = nil then
-    ventanaOrdenPago := TFAlta_OrdenPago.Create(nil);
-
-  //ventanaOrdenPago.IniciarOrdenPago();
-  ventanaOrdenPago.ShowModal;
-  ventanaOrdenPago.Release;
+  Application.CreateForm(TFAlta_OrdenPago,FAlta_OrdenPago);
+  FAlta_OrdenPago.IniciarOrdenPago();
+  FAlta_OrdenPago.ShowModal;
+  FAlta_OrdenPago.Release;
 end;
 
 end.
