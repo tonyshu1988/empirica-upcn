@@ -45,16 +45,22 @@ uses UPrincipal;
 procedure TDM.LoginLogin(Sender: TObject);
 begin
   Application.CreateForm(TFPrincipal, FPrincipal);
+
+  ZQ_Configuracion.Open;
+  if ZQ_Configuracion.Locate('clave', 'iniciar_libro_banco',[]) then
+    if (ZQ_ConfiguracionTEXTO.AsString = 'SI') then
+      FPrincipal.ABMMovimientos1.Click;
 end;
 
 
 procedure TDM.VariablesReportes(Reporte: TQuickRep);
 var
-i : integer;
-Etiqueta : TQRLabel;
-Form : TForm;
+  i : integer;
+  Etiqueta : TQRLabel;
+  Form : TForm;
 begin
   //--- SETEAR VARIABLE GLOBALES DESDE TABLA CONFIGURACION ---
+  ZQ_Configuracion.close;
   ZQ_Configuracion.Open;
   ZQ_Configuracion.First;
 
