@@ -375,6 +375,7 @@ type
     procedure LeerOpcionesFiltrado();
     procedure LIBRO_BANCOAfterScroll(DataSet: TDataSet);
     procedure btnAltaOrdenPagoClick(Sender: TObject);
+    procedure EKDbSuma1SumListChanged(Sender: TObject);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -721,6 +722,10 @@ procedure TFMovimientos.BtEditarMovimientoClick(Sender: TObject);
 begin
  if LIBRO_BANCO.IsEmpty then
   exit;
+  Application.CreateForm(TFAlta_OrdenPago,FAlta_OrdenPago);
+  FAlta_OrdenPago.EditarOrdenPago();
+  FAlta_OrdenPago.ShowModal;
+  FAlta_OrdenPago.Release;
 //
 // ZQ_Movimientos.Close;
 // ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
@@ -1293,6 +1298,12 @@ begin
   FAlta_OrdenPago.IniciarOrdenPago();
   FAlta_OrdenPago.ShowModal;
   FAlta_OrdenPago.Release;
+end;
+
+procedure TFMovimientos.EKDbSuma1SumListChanged(Sender: TObject);
+begin
+ if FAlta_OrdenPago<>nil then
+  FAlta_OrdenPago.txt_total_medio_pago.Caption:=Format('Total: $%f',[EKDbSuma1.SumCollection[0].SumValue]);
 end;
 
 end.
