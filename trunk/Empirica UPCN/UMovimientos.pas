@@ -10,7 +10,7 @@ uses
   EKBusquedaAvanzada, ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma,
   EKLlenarCombo, mxNativeExcel, mxExport, QuickRpt, QRCtrls,
   EKVistaPreviaQR, EKNumeroATexto, DBClient, QPrinters, EKIni, jpeg,
-  EKOrdenarGrilla, UAlta_OrdenPago;
+  EKOrdenarGrilla, UAlta_OrdenPago, EKDBDateTimePicker;
 
 type
   TFMovimientos = class(TForm)
@@ -35,7 +35,6 @@ type
     ZQ_Cuenta_MovimientoID_MEDIO: TIntegerField;
     ZQ_Cuenta_MovimientoFECHA_MDC: TDateField;
     ZQ_Cuenta_MovimientoBANCO_MDC: TStringField;
-    ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Cuenta_MovimientoIMPORTE: TFloatField;
     ZQ_Cuenta_MovimientoCONCILIADO: TStringField;
     ZQ_Cuentas: TZQuery;
@@ -248,21 +247,14 @@ type
     LIBRO_BANCOCTA_MOV_ANULADO: TStringField;
     DataSource1: TDataSource;
     PIngresos: TPanel;
-    DBEditCodMedio: TDBEdit;
-    DBEdit3: TDBEdit;
-    DBEdit4: TDBEdit;
     DBEdit5: TDBEdit;
     DBEdit6: TDBEdit;
-    Label2: TLabel;
     Label16: TLabel;
-    Label17: TLabel;
     Label18: TLabel;
-    Label22: TLabel;
     Label23: TLabel;
     Label24: TLabel;
     DBLookupComboBox1: TDBLookupComboBox;
     DS_Medios_Cobro_Pago: TDataSource;
-    DBLUpCBoxCuentaIngreaso: TDBLookupComboBox;
     LIBRO_BANCONRO_FACTURA: TStringField;
     LIBRO_BANCONRO_RECIBO: TStringField;
     ZQ_MovimientosNRO_FACTURA: TStringField;
@@ -344,6 +336,30 @@ type
     LIBRO_BANCONRO_ORDEN_STRING: TStringField;
     btnAltaOrdenPago: TdxBarLargeButton;
     EKDbSuma1: TEKDbSuma;
+    ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TIntegerField;
+    DBLookupComboBox3: TDBLookupComboBox;
+    DBLookupComboBox4: TDBLookupComboBox;
+    Label1: TLabel;
+    Label3: TLabel;
+    EKDBDateTimePicker1: TEKDBDateTimePicker;
+    EKDBDateTimePicker2: TEKDBDateTimePicker;
+    Label4: TLabel;
+    PEgresos: TPanel;
+    Label2: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label17: TLabel;
+    Label22: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBLookupComboBox2: TDBLookupComboBox;
+    DBLookupComboBox5: TDBLookupComboBox;
+    DBLookupComboBox6: TDBLookupComboBox;
+    EKDBDateTimePicker3: TEKDBDateTimePicker;
+    EKDBDateTimePicker4: TEKDBDateTimePicker;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
