@@ -117,7 +117,9 @@ end;
 
 procedure TFPrincipal.AConfiguracionExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFConfiguracion, FConfiguracion);
+  Application.CreateForm(TFConfiguracion, FConfiguracion);
+  FConfiguracion.ShowModal;
+  FConfiguracion.Release;
 end;
 
 procedure TFPrincipal.AABMProveedoresExecute(Sender: TObject);
