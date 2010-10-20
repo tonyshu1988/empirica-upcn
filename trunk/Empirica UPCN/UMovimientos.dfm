@@ -1,8 +1,8 @@
 object FMovimientos: TFMovimientos
-  Left = 45
-  Top = 125
-  Width = 1206
-  Height = 588
+  Left = 210
+  Top = 157
+  Width = 1117
+  Height = 582
   Caption = 'Movimientos'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -23,14 +23,185 @@ object FMovimientos: TFMovimientos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1198
-    Height = 504
+    Width = 1101
+    Height = 492
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
-      1198
-      504)
+      1101
+      492)
+    object PanelImpresion: TPanel
+      Tag = 99
+      Left = 343
+      Top = 136
+      Width = 505
+      Height = 281
+      Anchors = []
+      BevelInner = bvRaised
+      BevelOuter = bvNone
+      BevelWidth = 3
+      BorderWidth = 3
+      TabOrder = 3
+      Visible = False
+      DesignSize = (
+        505
+        281)
+      object Label15: TLabel
+        Left = 6
+        Top = 8
+        Width = 489
+        Height = 18
+        AutoSize = False
+        Caption = ' Imprimir Orden de Pago'
+        Color = clNavy
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label19: TLabel
+        Left = 18
+        Top = 63
+        Width = 70
+        Height = 13
+        Caption = 'Nro Orden:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label20: TLabel
+        Left = 8
+        Top = 82
+        Width = 80
+        Height = 13
+        Caption = 'Descripci'#243'n:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label21: TLabel
+        Left = 15
+        Top = 39
+        Width = 73
+        Height = 13
+        Caption = 'Impresora:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label14: TLabel
+        Left = 29
+        Top = 215
+        Width = 59
+        Height = 13
+        Caption = 'Autoriza:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object nro_comprobante: TDBEdit
+        Left = 96
+        Top = 56
+        Width = 121
+        Height = 21
+        Color = 16777088
+        DataField = 'NRO_ORDEN_STRING'
+        DataSource = DS_Movimientos
+        Enabled = False
+        TabOrder = 1
+      end
+      object DBMemo3: TDBMemo
+        Left = 8
+        Top = 99
+        Width = 489
+        Height = 105
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'DESCRIPCION'
+        DataSource = DS_Movimientos
+        TabOrder = 5
+        WantTabs = True
+      end
+      object cBoxImpresoras: TComboBox
+        Left = 96
+        Top = 32
+        Width = 393
+        Height = 21
+        Style = csDropDownList
+        ItemHeight = 13
+        TabOrder = 0
+      end
+      object ori: TCheckBox
+        Left = 230
+        Top = 60
+        Width = 51
+        Height = 17
+        Caption = 'Orig.'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+      end
+      object dup: TCheckBox
+        Left = 286
+        Top = 60
+        Width = 57
+        Height = 17
+        Caption = 'Dup.'
+        Checked = True
+        State = cbChecked
+        TabOrder = 3
+      end
+      object tri: TCheckBox
+        Left = 342
+        Top = 60
+        Width = 57
+        Height = 17
+        Caption = 'Trip.'
+        TabOrder = 4
+      end
+      object btnImprimirAceptar: TButton
+        Left = 167
+        Top = 240
+        Width = 75
+        Height = 25
+        Caption = 'Aceptar'
+        TabOrder = 6
+        OnClick = btnImprimirAceptarClick
+      end
+      object btnImprimirCancelar: TButton
+        Left = 263
+        Top = 240
+        Width = 75
+        Height = 25
+        Caption = 'Cancelar'
+        TabOrder = 7
+        OnClick = btnImprimirCancelarClick
+      end
+      object CBoxAutoriza: TComboBox
+        Left = 96
+        Top = 211
+        Width = 393
+        Height = 21
+        Style = csDropDownList
+        ItemHeight = 13
+        TabOrder = 8
+      end
+    end
     object RepLibroB: TQuickRep
       Tag = 99
       Left = 20
@@ -103,7 +274,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          272.520833333333400000
+          272.520833333333300000
           2770.187500000000000000)
         BandType = rbPageHeader
         object QRLabel41: TQRLabel
@@ -230,7 +401,7 @@ object FMovimientos: TFMovimientos
             52.916666666666670000
             1045.104166666667000000
             31.750000000000000000
-            679.979166666666800000)
+            679.979166666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -354,7 +525,7 @@ object FMovimientos: TFMovimientos
             37.041666666666670000
             190.500000000000000000
             230.187500000000000000
-            256.645833333333400000)
+            256.645833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -383,7 +554,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            637.645833333333400000
+            637.645833333333300000
             230.187500000000000000
             254.000000000000000000)
           Alignment = taLeftJustify
@@ -934,7 +1105,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         ParentBand = QRBand5
         object QRLabel18: TQRLabel
@@ -1309,7 +1480,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             150.812500000000000000
             2.645833333333333000
             317.500000000000000000)
@@ -1340,7 +1511,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2553.229166666667000000
             2.645833333333333000
             103.187500000000000000)
@@ -1371,7 +1542,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -1406,7 +1577,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           2770.187500000000000000)
         BandType = rbSummary
         object QRExpr15: TQRExpr
@@ -1435,177 +1606,6 @@ object FMovimientos: TFMovimientos
           Expression = #39'Cantidad de Registros: '#39'+COUNT'
           FontSize = 8
         end
-      end
-    end
-    object PanelImpresion: TPanel
-      Tag = 99
-      Left = 392
-      Top = 139
-      Width = 505
-      Height = 281
-      Anchors = []
-      BevelInner = bvRaised
-      BevelOuter = bvNone
-      BevelWidth = 3
-      BorderWidth = 3
-      TabOrder = 3
-      Visible = False
-      DesignSize = (
-        505
-        281)
-      object Label15: TLabel
-        Left = 6
-        Top = 8
-        Width = 489
-        Height = 18
-        AutoSize = False
-        Caption = ' Imprimir Orden de Pago'
-        Color = clNavy
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -13
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label19: TLabel
-        Left = 18
-        Top = 63
-        Width = 70
-        Height = 13
-        Caption = 'Nro Orden:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label20: TLabel
-        Left = 8
-        Top = 82
-        Width = 80
-        Height = 13
-        Caption = 'Descripci'#243'n:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label21: TLabel
-        Left = 15
-        Top = 39
-        Width = 73
-        Height = 13
-        Caption = 'Impresora:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label14: TLabel
-        Left = 29
-        Top = 215
-        Width = 59
-        Height = 13
-        Caption = 'Autoriza:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object nro_comprobante: TDBEdit
-        Left = 96
-        Top = 56
-        Width = 121
-        Height = 21
-        Color = 16777088
-        DataField = 'NRO_ORDEN'
-        DataSource = DS_Movimientos
-        Enabled = False
-        TabOrder = 1
-      end
-      object DBMemo3: TDBMemo
-        Left = 8
-        Top = 99
-        Width = 489
-        Height = 105
-        Anchors = [akLeft, akTop, akRight]
-        DataField = 'DESCRIPCION'
-        DataSource = DS_Movimientos
-        TabOrder = 5
-        WantTabs = True
-      end
-      object cBoxImpresoras: TComboBox
-        Left = 96
-        Top = 32
-        Width = 393
-        Height = 21
-        Style = csDropDownList
-        ItemHeight = 13
-        TabOrder = 0
-      end
-      object ori: TCheckBox
-        Left = 230
-        Top = 60
-        Width = 51
-        Height = 17
-        Caption = 'Orig.'
-        Checked = True
-        State = cbChecked
-        TabOrder = 2
-      end
-      object dup: TCheckBox
-        Left = 286
-        Top = 60
-        Width = 57
-        Height = 17
-        Caption = 'Dup.'
-        Checked = True
-        State = cbChecked
-        TabOrder = 3
-      end
-      object tri: TCheckBox
-        Left = 342
-        Top = 60
-        Width = 57
-        Height = 17
-        Caption = 'Trip.'
-        TabOrder = 4
-      end
-      object btnImprimirAceptar: TButton
-        Left = 167
-        Top = 240
-        Width = 75
-        Height = 25
-        Caption = 'Aceptar'
-        TabOrder = 6
-        OnClick = btnImprimirAceptarClick
-      end
-      object btnImprimirCancelar: TButton
-        Left = 263
-        Top = 240
-        Width = 75
-        Height = 25
-        Caption = 'Cancelar'
-        TabOrder = 7
-        OnClick = btnImprimirCancelarClick
-      end
-      object CBoxAutoriza: TComboBox
-        Left = 96
-        Top = 211
-        Width = 393
-        Height = 21
-        Style = csDropDownList
-        ItemHeight = 13
-        TabOrder = 8
       end
     end
     object QR_OrdenPago: TQuickRep
@@ -1727,7 +1727,7 @@ object FMovimientos: TFMovimientos
           Size.Values = (
             37.041666666666670000
             79.375000000000000000
-            60.854166666666680000
+            60.854166666666670000
             224.895833333333300000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -1946,7 +1946,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            89.958333333333320000
+            89.958333333333330000
             246.062500000000000000
             214.312500000000000000)
           Alignment = taRightJustify
@@ -2239,7 +2239,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          296.333333333333400000
+          296.333333333333300000
           1899.708333333333000000)
         BandType = rbPageHeader
         object RepOrdenCompra_SITUACIONIVAYCUIT: TQRLabel
@@ -2757,7 +2757,7 @@ object FMovimientos: TFMovimientos
             37.041666666666670000
             1357.312500000000000000
             2.645833333333333000
-            343.958333333333400000)
+            343.958333333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = True
@@ -3183,7 +3183,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           1899.708333333333000000)
         BandType = rbPageFooter
         object QRLabel123: TQRLabel
@@ -3392,7 +3392,7 @@ object FMovimientos: TFMovimientos
           Size.Values = (
             37.041666666666670000
             1301.750000000000000000
-            74.083333333333340000
+            74.083333333333330000
             100.541666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -3438,7 +3438,7 @@ object FMovimientos: TFMovimientos
             37.041666666666670000
             18.520833333333330000
             7.937500000000000000
-            216.958333333333400000)
+            216.958333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -3468,7 +3468,7 @@ object FMovimientos: TFMovimientos
           Size.Values = (
             37.041666666666670000
             37.041666666666670000
-            58.208333333333340000
+            58.208333333333330000
             198.437500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -3555,7 +3555,7 @@ object FMovimientos: TFMovimientos
     object PParametrosLibroBanco: TPanel
       Left = 0
       Top = 0
-      Width = 1198
+      Width = 1101
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -3667,8 +3667,8 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 473
-      Width = 1198
+      Top = 461
+      Width = 1101
       Height = 31
       Align = alBottom
       Color = 8454016
@@ -3815,17 +3815,17 @@ object FMovimientos: TFMovimientos
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 420
-      Width = 1198
+      Top = 408
+      Width = 1101
       Height = 53
       Align = alBottom
       TabOrder = 5
       Visible = False
       DesignSize = (
-        1198
+        1101
         53)
       object Label16: TLabel
-        Left = 202
+        Left = 203
         Top = 9
         Width = 33
         Height = 13
@@ -3839,7 +3839,7 @@ object FMovimientos: TFMovimientos
         Caption = 'Fecha Emision'
       end
       object Label23: TLabel
-        Left = 350
+        Left = 419
         Top = 9
         Width = 109
         Height = 13
@@ -3853,14 +3853,14 @@ object FMovimientos: TFMovimientos
         Caption = 'Importe'
       end
       object Label27: TLabel
-        Left = 1029
+        Left = 927
         Top = 12
-        Width = 149
+        Width = 162
         Height = 32
         Alignment = taRightJustify
         Anchors = [akTop, akRight]
         AutoSize = False
-        Caption = 'INGRESO'
+        Caption = 'INGRESOS'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGreen
         Font.Height = -27
@@ -3870,14 +3870,14 @@ object FMovimientos: TFMovimientos
         Transparent = True
       end
       object Label1: TLabel
-        Left = 477
+        Left = 546
         Top = 9
         Width = 59
         Height = 13
         Caption = 'Proveedor'
       end
       object Label3: TLabel
-        Left = 662
+        Left = 732
         Top = 9
         Width = 54
         Height = 13
@@ -3890,38 +3890,39 @@ object FMovimientos: TFMovimientos
         Height = 13
         Caption = 'Fecha PD'
       end
-      object DBEdit5: TDBEdit
-        Left = 349
+      object DBEditIngreso_NroCheque: TDBEdit
+        Left = 419
         Top = 25
         Width = 121
         Height = 21
         DataField = 'NRO_CHEQUE_TRANSF'
         DataSource = DS_Cuenta_Movimiento
-        TabOrder = 3
+        TabOrder = 4
       end
-      object DBEdit6: TDBEdit
-        Left = 868
+      object DBEditIngreso_Importe: TDBEdit
+        Left = 938
         Top = 25
         Width = 121
         Height = 21
         DataField = 'IMPORTE'
         DataSource = DS_Cuenta_Movimiento
-        TabOrder = 6
+        TabOrder = 7
       end
-      object DBLookupComboBox1: TDBLookupComboBox
-        Left = 200
+      object DBLookupCBoxIngreso_Medio: TDBLookupComboBox
+        Left = 261
         Top = 25
-        Width = 145
+        Width = 153
         Height = 21
         DataField = 'ID_MEDIO'
         DataSource = DS_Cuenta_Movimiento
         KeyField = 'ID_MEDIO'
         ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
         ListSource = DS_Medios_Cobro_Pago
-        TabOrder = 2
+        TabOrder = 3
+        OnKeyUp = DBLookupCBoxIngreso_MedioKeyUp
       end
-      object DBLookupComboBox3: TDBLookupComboBox
-        Left = 476
+      object DBLookupCBoxIngreso_Proveedor: TDBLookupComboBox
+        Left = 546
         Top = 25
         Width = 182
         Height = 21
@@ -3930,10 +3931,11 @@ object FMovimientos: TFMovimientos
         KeyField = 'NRO_PROVEEDOR'
         ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = DS_Proveedores
-        TabOrder = 4
+        TabOrder = 5
+        OnKeyUp = DBLookupCBoxIngreso_ProveedorKeyUp
       end
-      object DBLookupComboBox4: TDBLookupComboBox
-        Left = 663
+      object DBLookupCBoxIngreso_Concepto: TDBLookupComboBox
+        Left = 733
         Top = 25
         Width = 199
         Height = 21
@@ -3942,9 +3944,10 @@ object FMovimientos: TFMovimientos
         KeyField = 'ID_CONCEPTO'
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = DS_Conceptos
-        TabOrder = 5
+        TabOrder = 6
+        OnKeyUp = DBLookupCBoxIngreso_ConceptoKeyUp
       end
-      object EKDBDateTimePicker1: TEKDBDateTimePicker
+      object EKDBDateIngreso_FechaEmision: TEKDBDateTimePicker
         Left = 13
         Top = 25
         Width = 89
@@ -3955,7 +3958,7 @@ object FMovimientos: TFMovimientos
         DataField = 'FECHA'
         DataSource = DS_Movimientos
       end
-      object EKDBDateTimePicker2: TEKDBDateTimePicker
+      object EKDBDateIngreso_FechaPD: TEKDBDateTimePicker
         Left = 107
         Top = 25
         Width = 89
@@ -3966,12 +3969,25 @@ object FMovimientos: TFMovimientos
         DataField = 'FECHA_MDC'
         DataSource = DS_Cuenta_Movimiento
       end
+      object DBLookupCBoxIngreso_Codigo: TDBLookupComboBox
+        Left = 203
+        Top = 25
+        Width = 53
+        Height = 21
+        DataField = 'ID_MEDIO'
+        DataSource = DS_Cuenta_Movimiento
+        KeyField = 'ID_MEDIO'
+        ListField = 'CODIGO_CORTO'
+        ListSource = DS_Medios_Cobro_Pago
+        TabOrder = 2
+        OnKeyUp = DBLookupCBoxEgreso_MedioKeyUp
+      end
     end
     object DBGridLibroBanco: TDBGrid
       Left = 0
       Top = 26
-      Width = 1198
-      Height = 341
+      Width = 1101
+      Height = 329
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -4122,17 +4138,17 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 367
-      Width = 1198
+      Top = 355
+      Width = 1101
       Height = 53
       Align = alBottom
       TabOrder = 7
       Visible = False
       DesignSize = (
-        1198
+        1101
         53)
       object Label2: TLabel
-        Left = 202
+        Left = 203
         Top = 9
         Width = 33
         Height = 13
@@ -4146,21 +4162,21 @@ object FMovimientos: TFMovimientos
         Caption = 'Fecha Emision'
       end
       object Label6: TLabel
-        Left = 350
+        Left = 420
         Top = 9
         Width = 109
         Height = 13
         Caption = 'Nro Cheque/Transf'
       end
       object Label7: TLabel
-        Left = 939
+        Left = 938
         Top = 9
         Width = 46
         Height = 13
         Caption = 'Importe'
       end
       object Label12: TLabel
-        Left = 1031
+        Left = 942
         Top = 12
         Width = 149
         Height = 32
@@ -4177,14 +4193,14 @@ object FMovimientos: TFMovimientos
         Transparent = True
       end
       object Label13: TLabel
-        Left = 477
+        Left = 546
         Top = 9
         Width = 59
         Height = 13
         Caption = 'Proveedor'
       end
       object Label17: TLabel
-        Left = 662
+        Left = 732
         Top = 9
         Width = 54
         Height = 13
@@ -4197,38 +4213,39 @@ object FMovimientos: TFMovimientos
         Height = 13
         Caption = 'Fecha PD'
       end
-      object DBEdit1: TDBEdit
-        Left = 349
+      object DBEditEgreso_NroCheque: TDBEdit
+        Left = 419
         Top = 25
         Width = 121
         Height = 21
         DataField = 'NRO_CHEQUE_TRANSF'
         DataSource = DS_Cuenta_Movimiento
-        TabOrder = 3
+        TabOrder = 4
       end
-      object DBEdit2: TDBEdit
-        Left = 868
+      object DBEditEgreso_Importe: TDBEdit
+        Left = 938
         Top = 25
         Width = 121
         Height = 21
         DataField = 'IMPORTE'
         DataSource = DS_Cuenta_Movimiento
-        TabOrder = 6
+        TabOrder = 7
       end
-      object DBLookupComboBox2: TDBLookupComboBox
-        Left = 200
+      object DBLookupCBoxEgreso_Medio: TDBLookupComboBox
+        Left = 261
         Top = 25
-        Width = 145
+        Width = 153
         Height = 21
         DataField = 'ID_MEDIO'
         DataSource = DS_Cuenta_Movimiento
         KeyField = 'ID_MEDIO'
         ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
         ListSource = DS_Medios_Cobro_Pago
-        TabOrder = 2
+        TabOrder = 3
+        OnKeyUp = DBLookupCBoxEgreso_MedioKeyUp
       end
-      object DBLookupComboBox5: TDBLookupComboBox
-        Left = 476
+      object DBLookupCBoxEgreso_Proveedor: TDBLookupComboBox
+        Left = 546
         Top = 25
         Width = 182
         Height = 21
@@ -4237,10 +4254,11 @@ object FMovimientos: TFMovimientos
         KeyField = 'NRO_PROVEEDOR'
         ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = DS_Proveedores
-        TabOrder = 4
+        TabOrder = 5
+        OnKeyUp = DBLookupCBoxEgreso_ProveedorKeyUp
       end
-      object DBLookupComboBox6: TDBLookupComboBox
-        Left = 663
+      object DBLookupCBoxEgreso_Concepto: TDBLookupComboBox
+        Left = 733
         Top = 25
         Width = 199
         Height = 21
@@ -4249,9 +4267,10 @@ object FMovimientos: TFMovimientos
         KeyField = 'ID_CONCEPTO'
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = DS_Conceptos
-        TabOrder = 5
+        TabOrder = 6
+        OnKeyUp = DBLookupCBoxEgreso_ConceptoKeyUp
       end
-      object EKDBDateTimePicker3: TEKDBDateTimePicker
+      object EKDBDateEgreso_FechaEmision: TEKDBDateTimePicker
         Left = 13
         Top = 25
         Width = 89
@@ -4262,7 +4281,7 @@ object FMovimientos: TFMovimientos
         DataField = 'FECHA'
         DataSource = DS_Movimientos
       end
-      object EKDBDateTimePicker4: TEKDBDateTimePicker
+      object EKDBDateEgreso_FechaPD: TEKDBDateTimePicker
         Left = 107
         Top = 25
         Width = 89
@@ -4273,12 +4292,25 @@ object FMovimientos: TFMovimientos
         DataField = 'FECHA_MDC'
         DataSource = DS_Cuenta_Movimiento
       end
+      object DBLookupCBoxEgreso_Codigo: TDBLookupComboBox
+        Left = 203
+        Top = 25
+        Width = 53
+        Height = 21
+        DataField = 'ID_MEDIO'
+        DataSource = DS_Cuenta_Movimiento
+        KeyField = 'ID_MEDIO'
+        ListField = 'CODIGO_CORTO'
+        ListSource = DS_Medios_Cobro_Pago
+        TabOrder = 2
+        OnKeyUp = DBLookupCBoxEgreso_MedioKeyUp
+      end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4384,10 +4416,12 @@ object FMovimientos: TFMovimientos
             Visible = True
           end
           item
+            BeginGroup = True
             Item = BtVerDetalle
             Visible = True
           end
           item
+            BeginGroup = True
             Item = BtEditarMovimiento
             Visible = True
           end
@@ -4476,8 +4510,8 @@ object FMovimientos: TFMovimientos
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 840
-    Top = 320
+    Left = 936
+    Top = 288
     DockControlHeights = (
       0
       0
@@ -4486,20 +4520,18 @@ object FMovimientos: TFMovimientos
     object BtIngresos: TdxBarLargeButton
       Caption = 'Ingresos'
       Category = 0
-      Hint = 'Inserta un nuevo registro'
+      Hint = 'Inserta un nuevo movimiento de ingreso'
       Visible = ivAlways
       ImageIndex = 60
-      ShortCut = 113
       OnClick = BtIngresosClick
       AutoGrayScale = False
     end
     object BtEgresos: TdxBarLargeButton
       Caption = 'Egresos'
       Category = 0
-      Hint = 'Modifica el registro actual'
+      Hint = 'Inserta un nuevo movimiento de egreso'
       Visible = ivAlways
       ImageIndex = 61
-      ShortCut = 114
       OnClick = BtEgresosClick
       AutoGrayScale = False
     end
@@ -4519,7 +4551,6 @@ object FMovimientos: TFMovimientos
       Hint = 'Guarda los cambios'
       Visible = ivAlways
       ImageIndex = 3
-      ShortCut = 121
       OnClick = BtGuardarClick
       AutoGrayScale = False
     end
@@ -4530,7 +4561,6 @@ object FMovimientos: TFMovimientos
       Hint = 'Cancela los cambios'
       Visible = ivAlways
       ImageIndex = 4
-      ShortCut = 120
       OnClick = BtCancelarClick
       AutoGrayScale = False
     end
@@ -4546,7 +4576,7 @@ object FMovimientos: TFMovimientos
       Align = iaRight
       Caption = 'Salir'
       Category = 0
-      Hint = 'Salir'
+      Hint = 'Salir del Libro Banco'
       Visible = ivAlways
       ImageIndex = 6
       OnClick = btSalirClick
@@ -4555,16 +4585,16 @@ object FMovimientos: TFMovimientos
     object BtEditarMovimiento: TdxBarLargeButton
       Caption = 'Editar'
       Category = 0
-      Hint = 'Editar'
+      Hint = 'Editar el movimiento o orden de pago seleccionada'
       Visible = ivAlways
       ImageIndex = 35
       OnClick = BtEditarMovimientoClick
       AutoGrayScale = False
     end
     object btnFiltrar: TdxBarLargeButton
-      Caption = 'Filtrar Columnas'
+      Caption = 'Filtrar'
       Category = 0
-      Hint = 'Filtrar Columnas'
+      Hint = 'Filtrar las columnas'
       Visible = ivAlways
       ImageIndex = 7
       OnClick = btnFiltrarClick
@@ -4573,7 +4603,7 @@ object FMovimientos: TFMovimientos
     object BtVerDetalle: TdxBarLargeButton
       Caption = 'Ver Detalle'
       Category = 0
-      Hint = 'Ver Detalle'
+      Hint = 'Ver Detalle del movimiento o orden de pago seleccionada'
       Visible = ivAlways
       ImageIndex = 69
       OnClick = BtVerDetalleClick
@@ -4582,9 +4612,7 @@ object FMovimientos: TFMovimientos
     object BtAnularOrden: TdxBarLargeButton
       Caption = 'Anular Orden'
       Category = 0
-      Hint = 
-        'Anula todos los cheques implicados en la orden de pago seleccion' +
-        'ada'
+      Hint = 'Anula la orden de pago seleccionada'
       Visible = ivAlways
       ImageIndex = 9
       OnClick = BtAnularOrdenClick
@@ -4619,16 +4647,18 @@ object FMovimientos: TFMovimientos
     object btnAltaOrdenPago: TdxBarLargeButton
       Caption = 'Orden Pago'
       Category = 0
-      Hint = 'Orden Pago'
+      Hint = 'Ingresar una nueva Orden de Pago'
       Visible = ivAlways
       ImageIndex = 40
       OnClick = btnAltaOrdenPagoClick
       AutoGrayScale = False
     end
     object btVerificarnroCheque: TdxBarLargeButton
-      Caption = 'Ver Nro Ch'
+      Caption = 'Ver Nro Cheque'
       Category = 0
-      Hint = 'Ver Nro Ch'
+      Hint = 
+        'Recorre todos los cheques cargados buscando cuando se produce un' +
+        ' salto de n'#250'mero'
       Visible = ivAlways
       ImageIndex = 12
       OnClick = btVerificarnroChequeClick
@@ -4648,7 +4678,8 @@ object FMovimientos: TFMovimientos
         'BtAnularMov'
         'BtExportarExel'
         'btnImprimirOrden'
-        'btnAltaOrdenPago')
+        'btnAltaOrdenPago'
+        'btVerificarnroCheque')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -4674,8 +4705,8 @@ object FMovimientos: TFMovimientos
         Name = 'IDCtaMov'
         ParamType = ptUnknown
       end>
-    Left = 464
-    Top = 169
+    Left = 456
+    Top = 105
     ParamData = <
       item
         DataType = ftUnknown
@@ -4761,8 +4792,8 @@ object FMovimientos: TFMovimientos
   end
   object DS_Cuenta_Movimiento: TDataSource
     DataSet = ZQ_Cuenta_Movimiento
-    Left = 464
-    Top = 225
+    Left = 456
+    Top = 161
   end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
@@ -4772,8 +4803,8 @@ object FMovimientos: TFMovimientos
         'uenta_bancaria, '#39'N'#176': S/N'#39') Busqueda'
       'from ie_cuentas c')
     Params = <>
-    Left = 624
-    Top = 201
+    Left = 592
+    Top = 169
     object ZQ_CuentasID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
       Required = True
@@ -4812,8 +4843,8 @@ object FMovimientos: TFMovimientos
       'select *'
       'from ie_medios_cobro_pago mcp')
     Params = <>
-    Left = 56
-    Top = 297
+    Left = 184
+    Top = 105
     object ZQ_Medios_Cobro_PagoID_MEDIO: TIntegerField
       FieldName = 'ID_MEDIO'
       Required = True
@@ -4821,6 +4852,10 @@ object FMovimientos: TFMovimientos
     object ZQ_Medios_Cobro_PagoNOMBRE_MEDIO_COBRO_PAGO: TStringField
       FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
       Size = 30
+    end
+    object ZQ_Medios_Cobro_PagoCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
+      Size = 4
     end
   end
   object ZQ_Proveedores: TZQuery
@@ -4830,8 +4865,8 @@ object FMovimientos: TFMovimientos
       'from ie_proveedores p'
       'where nro_proveedor > 0')
     Params = <>
-    Left = 617
-    Top = 81
+    Left = 593
+    Top = 49
     object ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField
       FieldName = 'NRO_PROVEEDOR'
       Required = True
@@ -4876,8 +4911,8 @@ object FMovimientos: TFMovimientos
       'from ie_conceptos c'
       'where c.id_concepto > 0')
     Params = <>
-    Left = 617
-    Top = 137
+    Left = 457
+    Top = 209
     object ZQ_ConceptosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
       Required = True
@@ -4913,7 +4948,7 @@ object FMovimientos: TFMovimientos
         ParamType = ptUnknown
       end>
     Left = 305
-    Top = 169
+    Top = 49
     ParamData = <
       item
         DataType = ftUnknown
@@ -4991,57 +5026,23 @@ object FMovimientos: TFMovimientos
   end
   object DS_Proveedores: TDataSource
     DataSet = ZQ_Proveedores
-    Left = 705
-    Top = 81
+    Left = 593
+    Top = 105
   end
   object DS_Conceptos: TDataSource
     DataSet = ZQ_Conceptos
-    Left = 697
-    Top = 137
+    Left = 457
+    Top = 265
   end
   object DS_Cuentas: TDataSource
     DataSet = ZQ_Cuentas
-    Left = 705
-    Top = 201
+    Left = 593
+    Top = 225
   end
   object DS_Movimientos: TDataSource
     DataSet = ZQ_Movimientos
     Left = 304
-    Top = 225
-  end
-  object ZQ_Tipo_Movimiento: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select *'
-      'from tipo_movimiento tm'
-      'order by tm.prioridad')
-    Params = <>
-    Left = 56
-    Top = 161
-    object ZQ_Tipo_MovimientoID_TIPO_MOVIEMIENTO: TIntegerField
-      FieldName = 'ID_TIPO_MOVIEMIENTO'
-      Required = True
-    end
-    object ZQ_Tipo_MovimientoCODIGO_CORTO: TStringField
-      FieldName = 'CODIGO_CORTO'
-      Size = 6
-    end
-    object ZQ_Tipo_MovimientoDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 100
-    end
-    object ZQ_Tipo_MovimientoPRIORIDAD: TIntegerField
-      FieldName = 'PRIORIDAD'
-    end
-    object ZQ_Tipo_MovimientoTIPO: TStringField
-      FieldName = 'TIPO'
-      Size = 1
-    end
-  end
-  object DS_Tipo_Movimiento: TDataSource
-    DataSet = ZQ_Tipo_Movimiento
-    Left = 56
-    Top = 225
+    Top = 105
   end
   object EK_ListadoCuentas: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -5051,8 +5052,8 @@ object FMovimientos: TFMovimientos
       'order by ie_cuentas.nombre_cuenta')
     CampoBuscar = 'NOMBRE_CUENTA'
     CampoClave = 'ID_CUENTA'
-    Left = 304
-    Top = 297
+    Left = 184
+    Top = 265
   end
   object EK_ListadoMedCobroPago: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -5061,8 +5062,8 @@ object FMovimientos: TFMovimientos
       'FROM IE_MEDIOS_COBRO_PAGO')
     CampoBuscar = 'NOMBRE_MEDIO_COBRO_PAGO'
     CampoClave = 'ID_MEDIO'
-    Left = 464
-    Top = 297
+    Left = 304
+    Top = 153
   end
   object Nro_Moviemiento: TZStoredProc
     Connection = DM.Conexion
@@ -5073,8 +5074,8 @@ object FMovimientos: TFMovimientos
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_IE_MOVIMIENTOS_ID'
-    Left = 488
-    Top = 56
+    Left = 456
+    Top = 48
     ParamData = <
       item
         DataType = ftInteger
@@ -5087,8 +5088,8 @@ object FMovimientos: TFMovimientos
   end
   object DS_LIBRO_BANCO: TDataSource
     DataSet = LIBRO_BANCO
-    Left = 184
-    Top = 224
+    Left = 56
+    Top = 208
   end
   object LIBRO_BANCO: TZQuery
     Connection = DM.Conexion
@@ -5117,8 +5118,8 @@ object FMovimientos: TFMovimientos
         Name = 'ordenamiento'
         ParamType = ptUnknown
       end>
-    Left = 184
-    Top = 176
+    Left = 56
+    Top = 152
     ParamData = <
       item
         DataType = ftUnknown
@@ -5323,8 +5324,8 @@ object FMovimientos: TFMovimientos
     OnCambio = EKLlenarCombo1Cambio
     CampoClave = 'id_cuenta'
     CampoVer = 'Busqueda'
-    Left = 49
-    Top = 41
+    Left = 57
+    Top = 49
   end
   object EKListado_Proveedores: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -5334,8 +5335,8 @@ object FMovimientos: TFMovimientos
       'where nro_proveedor > 0')
     CampoBuscar = 'APELLIDO_Y_NOMBRE'
     CampoClave = 'nro_proveedor'
-    Left = 353
-    Top = 57
+    Left = 305
+    Top = 209
   end
   object EKListado_Conceptos: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -5345,37 +5346,16 @@ object FMovimientos: TFMovimientos
       'where id_concepto > 0')
     CampoBuscar = 'nombre_concepto'
     CampoClave = 'id_concepto'
-    Left = 353
-    Top = 113
-  end
-  object nro_orden: TZStoredProc
-    Connection = DM.Conexion
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptResult
-      end>
-    StoredProcName = 'SP_GEN_IE_NRO_ORDEN_ID'
-    Left = 184
-    Top = 112
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptResult
-      end>
-    object nro_ordenID: TIntegerField
-      FieldName = 'ID'
-    end
+    Left = 305
+    Top = 265
   end
   object mxNativeExcel1: TmxNativeExcel
     ActiveFont = 0
     Borders = []
     Shading = False
     Version = '1.24'
-    Left = 928
-    Top = 312
+    Left = 688
+    Top = 168
   end
   object mxDBGridExport: TmxDBGridExport
     DateFormat = 'dd/MM/yyyy'
@@ -5474,57 +5454,19 @@ object FMovimientos: TFMovimientos
     Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
     Version = '2.37'
     DBGrid = DBGridLibroBanco
-    Left = 924
-    Top = 266
-  end
-  object EKNumeroALetras1: TEKNumeroALetras
-    Separador = ','
-    Left = 842
-    Top = 211
-  end
-  object ZQ_NroCheque: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select c.ultimo_nro'
-      'from ie_cuentas c'
-      'where c.autonumerar = '#39'S'#39' and c.id_cuenta = :idCuenta')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'idCuenta'
-        ParamType = ptUnknown
-      end>
-    Left = 864
-    Top = 66
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'idCuenta'
-        ParamType = ptUnknown
-      end>
-    object ZQ_NroChequeULTIMO_NRO: TIntegerField
-      FieldName = 'ULTIMO_NRO'
-    end
-  end
-  object CD_Cheque: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 935
-    Top = 66
-    object CD_ChequeNumero: TIntegerField
-      FieldName = 'Numero'
-    end
+    Left = 684
+    Top = 114
   end
   object EKIni_Impresion: TEKIni
-    Left = 602
-    Top = 307
+    Left = 930
+    Top = 224
   end
   object EKVistaPreviaOrdenPago: TEKVistaPreviaQR
     Reporte = QR_OrdenPago
     ShowModal = False
     Caption = 'Orden de Pago'
-    Left = 927
-    Top = 378
+    Left = 930
+    Top = 49
   end
   object ZQ_Autoriza: TZQuery
     Connection = DM.Conexion
@@ -5533,8 +5475,8 @@ object FMovimientos: TFMovimientos
       'from autoridad'
       'order by prioridad')
     Params = <>
-    Left = 16
-    Top = 408
+    Left = 56
+    Top = 257
     object ZQ_AutorizaID_AUTORIDAD: TIntegerField
       FieldName = 'ID_AUTORIDAD'
     end
@@ -5548,8 +5490,8 @@ object FMovimientos: TFMovimientos
   end
   object DS_Autoriza: TDataSource
     DataSet = ZQ_Autoriza
-    Left = 152
-    Top = 363
+    Left = 56
+    Top = 307
   end
   object EKLlenarCBAutoriza: TEKLlenarCombo
     dataset = ZQ_Autoriza
@@ -5557,8 +5499,8 @@ object FMovimientos: TFMovimientos
     OnCambio = EKLlenarCombo1Cambio
     CampoClave = 'ID_AUTORIDAD'
     CampoVer = 'Nombe'
-    Left = 97
-    Top = 409
+    Left = 185
+    Top = 209
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridLibroBanco
@@ -5566,49 +5508,23 @@ object FMovimientos: TFMovimientos
     NombreGuardarConfig = 'UMovimientos'
     Ordenar = False
     Left = 184
-    Top = 64
+    Top = 48
   end
   object EKIniGuardarFiltros: TEKIni
-    Left = 840
-    Top = 384
-  end
-  object DataSource1: TDataSource
-    DataSet = CD_Cheque
-    Left = 936
-    Top = 114
+    Left = 928
+    Top = 168
   end
   object DS_Medios_Cobro_Pago: TDataSource
     DataSet = ZQ_Medios_Cobro_Pago
-    Left = 159
-    Top = 298
+    Left = 183
+    Top = 154
   end
   object EKVistaPrevia_LibroBco: TEKVistaPreviaQR
     Reporte = RepLibroB
     ShowModal = False
     Caption = 'Reporte de Libro Banco'
-    Left = 930
-    Top = 431
-  end
-  object ZQ_Ver_NroOrden: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select nro_orden_string, nro_orden_int'
-      'from nro_orden_siguiente')
-    Params = <>
-    Left = 711
-    Top = 269
-    object ZQ_Ver_NroOrdenNRO_ORDEN_STRING: TStringField
-      FieldName = 'NRO_ORDEN_STRING'
-      Size = 11
-    end
-    object ZQ_Ver_NroOrdenNRO_ORDEN_INT: TIntegerField
-      FieldName = 'NRO_ORDEN_INT'
-    end
-  end
-  object DS_Ver_NroOrden: TDataSource
-    DataSet = ZQ_Ver_NroOrden
-    Left = 711
-    Top = 330
+    Left = 933
+    Top = 110
   end
   object EKDbSuma1: TEKDbSuma
     SumCollection = <
@@ -5617,9 +5533,8 @@ object FMovimientos: TFMovimientos
         NombreCampo = 'importe'
       end>
     DataSet = ZQ_Cuenta_Movimiento
-    SumListChanged = EKDbSuma1SumListChanged
-    Left = 936
-    Top = 208
+    Left = 680
+    Top = 56
   end
   object VerificarNroCheque: TZStoredProc
     Connection = DM.Conexion
@@ -5635,8 +5550,8 @@ object FMovimientos: TFMovimientos
         ParamType = ptInput
       end>
     StoredProcName = 'VERIFICAR_NRO_CHEQUE'
-    Left = 1064
-    Top = 96
+    Left = 688
+    Top = 232
     ParamData = <
       item
         DataType = ftInteger
@@ -5650,6 +5565,46 @@ object FMovimientos: TFMovimientos
       end>
     object VerificarNroChequeRESULTADO: TIntegerField
       FieldName = 'RESULTADO'
+    end
+  end
+  object ActionManager1: TActionManager
+    Left = 688
+    Top = 288
+    StyleName = 'XP Style'
+    object AConciliar: TAction
+      Caption = 'AConciliar'
+      ShortCut = 16465
+      OnExecute = AConciliarExecute
+    end
+    object AOrdenPago: TAction
+      Caption = 'AOrdenPago'
+      ShortCut = 16463
+      OnExecute = AOrdenPagoExecute
+    end
+    object AIngreso: TAction
+      Caption = 'AIngreso'
+      ShortCut = 16457
+      OnExecute = AIngresoExecute
+    end
+    object AEgreso: TAction
+      Caption = 'AEgreso'
+      ShortCut = 16453
+      OnExecute = AEgresoExecute
+    end
+    object AVerDetalle: TAction
+      Caption = 'AVerDetalle'
+      ShortCut = 16470
+      OnExecute = AVerDetalleExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 16455
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 16451
+      OnExecute = ACancelarExecute
     end
   end
 end

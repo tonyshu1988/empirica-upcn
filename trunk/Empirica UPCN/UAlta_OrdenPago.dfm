@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 303
-  Top = 165
+  Left = 296
+  Top = 180
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -74,14 +74,14 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Transparent = True
       end
       object DbGridMediosCobroPago: TDBGrid
-        Left = 0
-        Top = 24
+        Left = 1
+        Top = 23
         Width = 765
         Height = 180
         Align = alCustom
         Anchors = [akLeft, akTop, akRight, akBottom]
         Color = 16772842
-        DataSource = FMovimientos.DS_Cuenta_Movimiento
+        DataSource = DS_Cuenta_Movimiento
         Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = ANSI_CHARSET
@@ -275,14 +275,14 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Width = 49
         Height = 21
         DataField = 'NRO_PROVEEDOR'
-        DataSource = FMovimientos.DS_Movimientos
+        DataSource = DS_Movimientos
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 1
         OnKeyUp = DBEditNroProveedorKeyUp
       end
       object DBLUpCBoxProveedor: TDBLookupComboBox
@@ -292,7 +292,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'NRO_PROVEEDOR'
-        DataSource = FMovimientos.DS_Movimientos
+        DataSource = DS_Movimientos
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -300,9 +300,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Style = [fsBold]
         KeyField = 'NRO_PROVEEDOR'
         ListField = 'APELLIDO_Y_NOMBRE'
-        ListSource = FMovimientos.DS_Proveedores
+        ListSource = DS_Proveedores
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
         OnKeyUp = DBEditNroProveedorKeyUp
       end
       object DBMemoDescripcion: TDBMemo
@@ -312,14 +312,14 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Height = 49
         Color = 16772842
         DataField = 'DESCRIPCION'
-        DataSource = FMovimientos.DS_Movimientos
+        DataSource = DS_Movimientos
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 8
       end
       object DBLUpCBoxConcepto: TDBLookupComboBox
         Left = 147
@@ -328,7 +328,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'ID_CONCEPTO'
-        DataSource = FMovimientos.DS_Movimientos
+        DataSource = DS_Movimientos
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -336,9 +336,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Style = [fsBold]
         KeyField = 'ID_CONCEPTO'
         ListField = 'NOMBRE_CONCEPTO'
-        ListSource = FMovimientos.DS_Conceptos
+        ListSource = DS_Conceptos
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
         OnKeyUp = DBEditNroConceptoKeyUp
       end
       object DBEditNroConcepto: TDBEdit
@@ -347,14 +347,14 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Width = 49
         Height = 21
         DataField = 'ID_CONCEPTO'
-        DataSource = FMovimientos.DS_Movimientos
+        DataSource = DS_Movimientos
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 3
         OnKeyUp = DBEditNroConceptoKeyUp
       end
       object DBLUpCBoxCuenta: TDBLookupComboBox
@@ -371,31 +371,16 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'BUSQUEDA'
         ListSource = FMovimientos.DS_Cuentas
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
         OnEnter = DBLUpCBoxCuentaEnter
       end
       object DBEditNroFactura: TDBEdit
-        Left = 91
+        Left = 92
         Top = 144
         Width = 290
         Height = 21
         DataField = 'NRO_FACTURA'
-        DataSource = FMovimientos.DS_Movimientos
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 5
-      end
-      object DBEditNroRecibo: TDBEdit
-        Left = 450
-        Top = 144
-        Width = 304
-        Height = 21
-        DataField = 'NRO_RECIBO'
-        DataSource = FMovimientos.DS_Movimientos
+        DataSource = DS_Movimientos
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -403,6 +388,21 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 6
+      end
+      object DBEditNroRecibo: TDBEdit
+        Left = 450
+        Top = 144
+        Width = 304
+        Height = 21
+        DataField = 'NRO_RECIBO'
+        DataSource = DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 7
       end
       object dbFechaEmision: TEKDBDateTimePicker
         Left = 91
@@ -417,16 +417,16 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 0
         DataField = 'FECHA'
-        DataSource = FMovimientos.DS_Movimientos
+        DataSource = DS_Movimientos
       end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -563,8 +563,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 656
-    Top = 320
+    Left = 712
+    Top = 312
     DockControlHeights = (
       0
       0
@@ -601,7 +601,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       HotImageIndex = 2
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Aceptar'
+      Caption = 'Guardar'
       Category = 0
       Hint = 'Guarda los cambios'
       Visible = ivAlways
@@ -651,7 +651,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
   end
   object ActionManager1: TActionManager
-    Left = 640
+    Left = 712
     Top = 257
     StyleName = 'XP Style'
     object ADeleteLinea: TAction
@@ -659,5 +659,492 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       ShortCut = 46
       OnExecute = ADeleteLineaExecute
     end
+    object AVerDetalle: TAction
+      Caption = 'AVerDetalle'
+      ShortCut = 16470
+      OnExecute = AVerDetalleExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 16455
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 16451
+      OnExecute = ACancelarExecute
+    end
+  end
+  object EKListado_Proveedores: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select *'
+      'from ie_proveedores'
+      'where nro_proveedor > 0')
+    CampoBuscar = 'APELLIDO_Y_NOMBRE'
+    CampoClave = 'nro_proveedor'
+    Left = 67
+    Top = 393
+  end
+  object ZQ_Movimientos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select m.*, ('#39#39'||substr(extractyear(m.fecha),3,4)||'#39'-'#39'||lpad(m.n' +
+        'ro_orden,4,'#39'0'#39')) as nro_orden_string'
+      'from ie_movimientos m'
+      'where m.nro_movimiento = :NroMov')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'NroMov'
+        ParamType = ptUnknown
+      end>
+    Left = 185
+    Top = 289
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'NroMov'
+        ParamType = ptUnknown
+      end>
+    object ZQ_MovimientosNRO_MOVIMIENTO: TIntegerField
+      FieldName = 'NRO_MOVIMIENTO'
+      Required = True
+    end
+    object ZQ_MovimientosNRO_PROVEEDOR: TIntegerField
+      FieldName = 'NRO_PROVEEDOR'
+    end
+    object ZQ_MovimientosID_CONCEPTO: TIntegerField
+      FieldName = 'ID_CONCEPTO'
+      Required = True
+    end
+    object ZQ_MovimientosID_OBJETO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_OBJETO_MOVIMIENTO'
+    end
+    object ZQ_MovimientosPAGO_DEL_EJERCICIO: TStringField
+      FieldName = 'PAGO_DEL_EJERCICIO'
+      Size = 1
+    end
+    object ZQ_MovimientosFECHA: TDateField
+      FieldName = 'FECHA'
+    end
+    object ZQ_MovimientosIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+    end
+    object ZQ_MovimientosIMPRESO: TStringField
+      FieldName = 'IMPRESO'
+      Size = 1
+    end
+    object ZQ_MovimientosNRO_COMPROMISO: TIntegerField
+      FieldName = 'NRO_COMPROMISO'
+    end
+    object ZQ_MovimientosNRO_PARTE: TIntegerField
+      FieldName = 'NRO_PARTE'
+    end
+    object ZQ_MovimientosANULADO: TStringField
+      FieldName = 'ANULADO'
+      Size = 1
+    end
+    object ZQ_MovimientosFECHA_ANULADO: TDateField
+      FieldName = 'FECHA_ANULADO'
+    end
+    object ZQ_MovimientosPARTE_ANULADO: TIntegerField
+      FieldName = 'PARTE_ANULADO'
+    end
+    object ZQ_MovimientosDETALLE_ANULADO: TStringField
+      FieldName = 'DETALLE_ANULADO'
+      Size = 200
+    end
+    object ZQ_MovimientosNRO_ORDEN: TIntegerField
+      FieldName = 'NRO_ORDEN'
+    end
+    object ZQ_MovimientosNRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 50
+    end
+    object ZQ_MovimientosNRO_RECIBO: TStringField
+      FieldName = 'NRO_RECIBO'
+      Size = 50
+    end
+    object ZQ_MovimientosNRO_ORDEN_STRING: TStringField
+      FieldName = 'NRO_ORDEN_STRING'
+      ReadOnly = True
+      Size = 336
+    end
+    object ZQ_MovimientosDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 200
+    end
+  end
+  object DS_Movimientos: TDataSource
+    DataSet = ZQ_Movimientos
+    Left = 184
+    Top = 345
+  end
+  object EKListado_Conceptos: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select *'
+      'from ie_conceptos'
+      'where id_concepto > 0')
+    CampoBuscar = 'nombre_concepto'
+    CampoClave = 'id_concepto'
+    Left = 185
+    Top = 393
+  end
+  object ZQ_Cuenta_Movimiento: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from ie_cuentas_movimientos cm'
+      'where (cm.nro_movimiento = :NroMov) or (cm.id = :IDCtaMov)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'NroMov'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IDCtaMov'
+        ParamType = ptUnknown
+      end>
+    Left = 304
+    Top = 289
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'NroMov'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IDCtaMov'
+        ParamType = ptUnknown
+      end>
+    object ZQ_Cuenta_MovimientoID: TIntegerField
+      FieldName = 'ID'
+    end
+    object ZQ_Cuenta_MovimientoNRO_MOVIMIENTO: TIntegerField
+      FieldName = 'NRO_MOVIMIENTO'
+    end
+    object ZQ_Cuenta_MovimientoID_CUENTA_INGRESO: TIntegerField
+      FieldName = 'ID_CUENTA_INGRESO'
+    end
+    object ZQ_Cuenta_MovimientoID_CUENTA_EGRESO: TIntegerField
+      FieldName = 'ID_CUENTA_EGRESO'
+    end
+    object ZQ_Cuenta_MovimientoID_MEDIO: TIntegerField
+      FieldName = 'ID_MEDIO'
+    end
+    object ZQ_Cuenta_MovimientoFECHA_MDC: TDateField
+      FieldName = 'FECHA_MDC'
+      EditMask = '##/##/####'
+    end
+    object ZQ_Cuenta_MovimientoBANCO_MDC: TStringField
+      FieldName = 'BANCO_MDC'
+      Size = 50
+    end
+    object ZQ_Cuenta_MovimientoIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+      currency = True
+    end
+    object ZQ_Cuenta_MovimientoCONCILIADO: TStringField
+      FieldName = 'CONCILIADO'
+      Size = 1
+    end
+    object ZQ_Cuenta_Movimientonombre_cuenta_egreso: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombre_cuenta_egreso'
+      LookupDataSet = ZQ_Cuentas
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'NOMBRE_CUENTA'
+      KeyFields = 'ID_CUENTA_EGRESO'
+      Size = 50
+      Lookup = True
+    end
+    object ZQ_Cuenta_Movimientonombre_cuenta_ingreso: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombre_cuenta_ingreso'
+      LookupDataSet = ZQ_Cuentas
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'NOMBRE_CUENTA'
+      KeyFields = 'ID_CUENTA_INGRESO'
+      Size = 50
+      Lookup = True
+    end
+    object ZQ_Cuenta_Movimientomedio_de_pago: TStringField
+      FieldKind = fkLookup
+      FieldName = 'medio_de_pago'
+      LookupDataSet = ZQ_Medios_Cobro_Pago
+      LookupKeyFields = 'ID_MEDIO'
+      LookupResultField = 'NOMBRE_MEDIO_COBRO_PAGO'
+      KeyFields = 'ID_MEDIO'
+      Size = 50
+      Lookup = True
+    end
+    object ZQ_Cuenta_MovimientoFECHA_CONCILIADO: TDateField
+      FieldName = 'FECHA_CONCILIADO'
+    end
+    object ZQ_Cuenta_MovimientoANULADO: TStringField
+      FieldName = 'ANULADO'
+      Size = 1
+    end
+    object ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TIntegerField
+      FieldName = 'NRO_CHEQUE_TRANSF'
+    end
+  end
+  object DS_Cuenta_Movimiento: TDataSource
+    DataSet = ZQ_Cuenta_Movimiento
+    Left = 304
+    Top = 345
+  end
+  object ZQ_Cuentas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select c.*, c.nombre_cuenta||'#39' - '#39'|| coalesce ('#39'N'#176': '#39' || c.nro_c' +
+        'uenta_bancaria, '#39'N'#176': S/N'#39') Busqueda'
+      'from ie_cuentas c')
+    Params = <>
+    Left = 416
+    Top = 289
+    object ZQ_CuentasID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+      Required = True
+    end
+    object ZQ_CuentasNOMBRE_CUENTA: TStringField
+      FieldName = 'NOMBRE_CUENTA'
+      Size = 100
+    end
+    object ZQ_CuentasMEDIO_DE_PAGO: TStringField
+      FieldName = 'MEDIO_DE_PAGO'
+      Size = 50
+    end
+    object ZQ_CuentasNRO_CUENTA_BANCARIA: TStringField
+      FieldName = 'NRO_CUENTA_BANCARIA'
+      Size = 100
+    end
+    object ZQ_CuentasULTIMO_NRO: TIntegerField
+      FieldName = 'ULTIMO_NRO'
+    end
+    object ZQ_CuentasAUTONUMERAR: TStringField
+      FieldName = 'AUTONUMERAR'
+      Size = 1
+    end
+    object ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField
+      FieldName = 'MEDIO_POR_DEFECTO'
+    end
+    object ZQ_CuentasBUSQUEDA: TStringField
+      FieldName = 'BUSQUEDA'
+      ReadOnly = True
+      Size = 207
+    end
+  end
+  object DS_Cuentas: TDataSource
+    DataSet = ZQ_Cuentas
+    Left = 417
+    Top = 345
+  end
+  object CD_Cheque: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 711
+    Top = 370
+    object CD_ChequeNumero: TIntegerField
+      FieldName = 'Numero'
+    end
+  end
+  object DS_Cheque: TDataSource
+    DataSet = CD_Cheque
+    Left = 712
+    Top = 418
+  end
+  object EK_ListadoMedCobroPago: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'SELECT *'
+      'FROM IE_MEDIOS_COBRO_PAGO')
+    CampoBuscar = 'NOMBRE_MEDIO_COBRO_PAGO'
+    CampoClave = 'ID_MEDIO'
+    Left = 304
+    Top = 393
+  end
+  object ZQ_Medios_Cobro_Pago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from ie_medios_cobro_pago mcp')
+    Params = <>
+    Left = 72
+    Top = 289
+    object ZQ_Medios_Cobro_PagoID_MEDIO: TIntegerField
+      FieldName = 'ID_MEDIO'
+      Required = True
+    end
+    object ZQ_Medios_Cobro_PagoNOMBRE_MEDIO_COBRO_PAGO: TStringField
+      FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
+      Size = 30
+    end
+  end
+  object DS_Medios_Cobro_Pago: TDataSource
+    DataSet = ZQ_Medios_Cobro_Pago
+    Left = 71
+    Top = 338
+  end
+  object ZQ_Conceptos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from ie_conceptos c'
+      'where c.id_concepto > 0')
+    Params = <>
+    Left = 587
+    Top = 289
+    object ZQ_ConceptosID_CONCEPTO: TIntegerField
+      FieldName = 'ID_CONCEPTO'
+      Required = True
+    end
+    object ZQ_ConceptosCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+      Size = 6
+    end
+    object ZQ_ConceptosNOMBRE_CONCEPTO: TStringField
+      FieldName = 'NOMBRE_CONCEPTO'
+      Size = 240
+    end
+    object ZQ_ConceptosBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_ConceptosIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+    end
+  end
+  object ZQ_Proveedores: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from ie_proveedores p'
+      'where nro_proveedor > 0')
+    Params = <>
+    Left = 497
+    Top = 289
+    object ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField
+      FieldName = 'NRO_PROVEEDOR'
+      Required = True
+    end
+    object ZQ_ProveedoresAPELLIDO_Y_NOMBRE: TStringField
+      FieldName = 'APELLIDO_Y_NOMBRE'
+      Size = 60
+    end
+    object ZQ_ProveedoresNOMBRE_FANTASIA: TStringField
+      FieldName = 'NOMBRE_FANTASIA'
+      Size = 60
+    end
+    object ZQ_ProveedoresDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 150
+    end
+    object ZQ_ProveedoresTIPO_DOCUMENTO: TStringField
+      FieldName = 'TIPO_DOCUMENTO'
+      Size = 10
+    end
+    object ZQ_ProveedoresNRO_DOCUMENTO: TStringField
+      FieldName = 'NRO_DOCUMENTO'
+      Size = 30
+    end
+    object ZQ_ProveedoresTELEFONOS: TStringField
+      FieldName = 'TELEFONOS'
+      Size = 30
+    end
+    object ZQ_ProveedoresEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 60
+    end
+    object ZQ_ProveedoresBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+  end
+  object DS_Proveedores: TDataSource
+    DataSet = ZQ_Proveedores
+    Left = 497
+    Top = 345
+  end
+  object DS_Conceptos: TDataSource
+    DataSet = ZQ_Conceptos
+    Left = 587
+    Top = 345
+  end
+  object ZQ_Ver_NroOrden: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select nro_orden_string, nro_orden_int'
+      'from nro_orden_siguiente')
+    Params = <>
+    Left = 415
+    Top = 397
+    object ZQ_Ver_NroOrdenNRO_ORDEN_STRING: TStringField
+      FieldName = 'NRO_ORDEN_STRING'
+      Size = 11
+    end
+    object ZQ_Ver_NroOrdenNRO_ORDEN_INT: TIntegerField
+      FieldName = 'NRO_ORDEN_INT'
+    end
+  end
+  object nro_orden: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    StoredProcName = 'SP_GEN_IE_NRO_ORDEN_ID'
+    Left = 592
+    Top = 400
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    object nro_ordenID: TIntegerField
+      FieldName = 'ID'
+    end
+  end
+  object Nro_Moviemiento: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    StoredProcName = 'SP_GEN_IE_MOVIMIENTOS_ID'
+    Left = 512
+    Top = 400
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    object Nro_MoviemientoID: TIntegerField
+      FieldName = 'ID'
+    end
+  end
+  object EKDbSuma1: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'importe'
+      end>
+    DataSet = ZQ_Cuenta_Movimiento
+    SumListChanged = EKDbSuma1SumListChanged
+    Left = 640
+    Top = 257
   end
 end
