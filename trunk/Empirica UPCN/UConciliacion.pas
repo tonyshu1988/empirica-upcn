@@ -80,8 +80,6 @@ type
     Label7: TLabel;
     lblSaldoConciliacion: TLabel;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
-    Label5: TLabel;
-    lblSaldo: TLabel;
     RepConciliacion: TQuickRep;
     QRBand5: TQRBand;
     QRDBImage1: TQRDBImage;
@@ -98,7 +96,7 @@ type
     QRBand1: TQRBand;
     QRLabel9: TQRLabel;
     qrSaldoConciliacion: TQRLabel;
-    QRLabel11: TQRLabel;
+    qrsaldoEB: TQRLabel;
     qrExtracto: TQRLabel;
     QRLabel10: TQRLabel;
     qrTotalHaber: TQRLabel;
@@ -117,17 +115,20 @@ type
     QRLabel1: TQRLabel;
     QRDBText1: TQRDBText;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
-    Label8: TLabel;
-    lblMonto: TLabel;
-    QRShape1: TQRShape;
-    qrDetalleExtracto: TQRLabel;
-    lblDetalleExtracto: TLabel;
     QRShape2: TQRShape;
     QRShape3: TQRShape;
-    QRShape4: TQRShape;
     ZSP_ConciliacionFECHA_PD: TDateField;
     ZSP_LibroBancoPROVEEDOR: TStringField;
     ZSP_ConciliacionPROVEEDOR: TStringField;
+    QRLabel2: TQRLabel;
+    QRShape1: TQRShape;
+    QRShape4: TQRShape;
+    QRShape5: TQRShape;
+    Label8: TLabel;
+    lblMonto: TLabel;
+    lblDetalleExtracto: TLabel;
+    Label5: TLabel;
+    lblSaldo: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
@@ -232,7 +233,7 @@ begin
   qrSaldoConciliacion.Caption:=lblSaldoConciliacion.Caption;
   qrTotalHaber.Caption:=lblTotalHaber.Caption;
   qrExtracto.Caption:=lblMonto.Caption;
-  qrDetalleExtracto.Caption:=lblDetalleExtracto.Caption;
+  qrsaldoEB.Caption:=Format('Saldo s/ Extracto Bancario al %s %s',[lblFHasta.Caption,lblDetalleExtracto.Caption]);
   QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   dm.VariablesReportes(RepConciliacion);
 
