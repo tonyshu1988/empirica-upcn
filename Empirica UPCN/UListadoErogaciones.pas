@@ -69,9 +69,6 @@ type
     QRDBText17: TQRDBText;
     QRChildBand2: TQRChildBand;
     QRLabel18: TQRLabel;
-    QRLabel21: TQRLabel;
-    QRLabel27: TQRLabel;
-    QRLabel16: TQRLabel;
     QRBand7: TQRBand;
     QRLabel35: TQRLabel;
     QRlblFechaHoy: TQRLabel;
@@ -80,8 +77,6 @@ type
     QRBand8: TQRBand;
     QRGroup1: TQRGroup;
     QRDBText1: TQRDBText;
-    QRDBText2: TQRDBText;
-    QRDBText3: TQRDBText;
     QRBandGroup1Footer: TQRBand;
     QRShape1: TQRShape;
     QRShape2: TQRShape;
@@ -101,7 +96,6 @@ type
     QRShape11: TQRShape;
     ZQ_Libro_erogacionesFECHA_MDC: TDateField;
     ZQ_Libro_erogacionesBANCO_MDC: TStringField;
-    ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Libro_erogacionesIMPORTE: TFloatField;
     ZQ_Libro_erogacionesCONCILIADO: TStringField;
     ZQ_Libro_erogacionesFECHA_CONCILIADO: TDateField;
@@ -119,9 +113,6 @@ type
     ZQ_Libro_erogacionesNOMBRE_CONCEPTO: TStringField;
     ZQ_Libro_erogacionesNRO_ORDEN_STRING: TStringField;
     ZQ_Libro_erogacionesNRO_MOVIMIENTO: TIntegerField;
-    QRLabel2: TQRLabel;
-    QRLabel4: TQRLabel;
-    QRDBText4: TQRDBText;
     PFiltrosColumnas: TPanel;
     BtAplicarFiltrosColumnas: TButton;
     CBFechaEmi: TCheckBox;
@@ -135,6 +126,63 @@ type
     CBNroFactura: TCheckBox;
     CBFechaConciliado: TCheckBox;
     EKIniGuardarFiltros: TEKIni;
+    ReporteViejoMatias: TQuickRep;
+    QRBand1: TQRBand;
+    QRLabel5: TQRLabel;
+    QRDBImage2: TQRDBImage;
+    QRLabel6: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRLabel17: TQRLabel;
+    QRBand2: TQRBand;
+    QRDBText6: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRDBText10: TQRDBText;
+    QRShape7: TQRShape;
+    QRShape8: TQRShape;
+    QRShape9: TQRShape;
+    QRShape12: TQRShape;
+    QRShape13: TQRShape;
+    QRLabel19: TQRLabel;
+    QRLabel20: TQRLabel;
+    QRDBText11: TQRDBText;
+    QRChildBand1: TQRChildBand;
+    QRLabel22: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRLabel25: TQRLabel;
+    QRLabel26: TQRLabel;
+    QRBand3: TQRBand;
+    QRLabel28: TQRLabel;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand4: TQRBand;
+    QRShape14: TQRShape;
+    QRLabel31: TQRLabel;
+    QRLabel32: TQRLabel;
+    QRShape15: TQRShape;
+    QRGroup2: TQRGroup;
+    QRDBText12: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRDBText15: TQRDBText;
+    QRBand6: TQRBand;
+    QRDBText16: TQRDBText;
+    QRDBText18: TQRDBText;
+    QRShape16: TQRShape;
+    QRLabel33: TQRLabel;
+    QRLabel34: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRLabel36: TQRLabel;
+    QRDBText2: TQRDBText;
+    ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TIntegerField;
+    ZQ_Libro_erogaciones_nombreConcepto: TStringField;
+    QRLabel2: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel27: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -196,10 +244,13 @@ end;
 procedure TFListadoErogaciones.ZQ_Libro_erogacionesCalcFields(
   DataSet: TDataSet);
 begin
+
   if (ZQ_Libro_erogacionesCONCILIADO.AsString = 'S') and (ZQ_Libro_erogacionesFECHA_CONCILIADO.AsDateTime < fechaHasta) then
     ZQ_Libro_erogacionespagos_corrientes.AsFloat:= ZQ_Libro_erogacionesIMPORTE.AsFloat
   else
     ZQ_Libro_erogacionespagos_diferidos.AsFloat:= ZQ_Libro_erogacionesIMPORTE.AsFloat;
+
+  ZQ_Libro_erogaciones_nombreConcepto.AsString:=Format('%s / %s',[ZQ_Libro_erogacionesAPELLIDO_Y_NOMBRE.AsString,ZQ_Libro_erogacionesNOMBRE_CONCEPTO.AsString]);
 end;
 
 
