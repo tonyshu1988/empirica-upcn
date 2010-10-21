@@ -173,11 +173,8 @@ type
     QRLabel10: TQRLabel;
     QRDBText41: TQRDBText;
     QRDBText46: TQRDBText;
-    QRLabel27: TQRLabel;
     QRDBText63: TQRDBText;
     QRLabel12: TQRLabel;
-    QRLabel43: TQRLabel;
-    QRDBText64: TQRDBText;
     QRBand14: TQRBand;
     RepOrdenCompra_SITUACIONIVAYCUIT: TQRLabel;
     RepOrdenCompra_TELEFONOS: TQRLabel;
@@ -355,6 +352,10 @@ type
     QRDBText4: TQRDBText;
     QRShape15: TQRShape;
     QRDBText7: TQRDBText;
+    QRLabel43: TQRLabel;
+    QRDBText64: TQRDBText;
+    QRShape16: TQRShape;
+    qrtImporteTotal: TQRLabel;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -1082,10 +1083,10 @@ begin
     EKIni_Impresion.EsribirRegString('Imprimir_Triplicado_Orden', BoolToStr(tri.Checked));
 
     QRlblFechaHoy.Caption := FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-    QRLblConfecciona.Caption:= 'Confeccionó: '+dm.EKUsrLogin1.nusuariosis;
-    QRLblAutorizo.Caption:= 'Autorizó: '+CBoxAutoriza.Text;
+    QRLblConfecciona.Caption:=format('Confeccionado por: %s',[dm.EKUsrLogin1.nusuariosis]);
+    QRLblAutorizo.Caption:= format('Autorizado por: %s',[CBoxAutoriza.Text]);
     QrtImporteFPago.Caption := 'Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma1.SumCollection[0].sumvalue);
-
+    qrtImporteTotal.Caption:=Format('%s',[FormatFloat('$ ###,###,###,##0.00', EKDbSuma1.SumCollection[0].sumvalue)]);
     QR_OrdenPago.PrinterSettings.PrinterIndex := cBoxImpresoras.ItemIndex;
 
     if ori.Checked then
