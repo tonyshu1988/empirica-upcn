@@ -23,6 +23,7 @@ uses
 
 begin
   Application.Initialize;
+  Application.Title := 'UPCN';
   Application.CreateForm(TDM, DM);
   Application.Run;
 end.
