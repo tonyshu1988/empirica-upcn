@@ -251,11 +251,6 @@ type
     QRShape4: TQRShape;
     QRLabel4: TQRLabel;
     QRLabel5: TQRLabel;
-    ChildBand2: TQRChildBand;
-    QRLabel6: TQRLabel;
-    QRLabel7: TQRLabel;
-    QRDBText2: TQRDBText;
-    QRDBText4: TQRDBText;
     RepLibroB: TQuickRep;
     QRBand5: TQRBand;
     QRLabel41: TQRLabel;
@@ -289,7 +284,6 @@ type
     QRShape12: TQRShape;
     QRShape13: TQRShape;
     QRShape14: TQRShape;
-    QRLblProveedor: TQRLabel;
     QRChildBand2: TQRChildBand;
     QRLabel18: TQRLabel;
     QRLabel19: TQRLabel;
@@ -355,6 +349,12 @@ type
     AVerDetalle: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
+    QRLabel6: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRLabel7: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRShape15: TQRShape;
+    QRDBText7: TQRDBText;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
