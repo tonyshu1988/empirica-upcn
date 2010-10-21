@@ -41,7 +41,7 @@ type
     ASaldoInicial: TAction;
     ARep_LibroBanco: TAction;
     ListadoErogaciones1: TMenuItem;
-    ARepListado_Erogaciones: TAction;
+    ARepList_Erogacion: TAction;
     ARep_Conciliacion: TAction;
     ARep_SaldoInicial: TAction;
     Proveedores1: TMenuItem;
@@ -49,6 +49,8 @@ type
     ABMAutoridad1: TMenuItem;
     AABM_Medio: TAction;
     ABMMedioCobroPago1: TMenuItem;
+    AAuditoria: TAction;
+    AAuditoria1: TMenuItem;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -60,10 +62,11 @@ type
     procedure AMovimientosExecute(Sender: TObject);
     procedure ASaldoInicialExecute(Sender: TObject);
     procedure ARep_LibroBancoExecute(Sender: TObject);
-    procedure ARepListado_ErogacionesExecute(Sender: TObject);
+    procedure ARepList_ErogacionExecute(Sender: TObject);
     procedure ARep_ConciliacionExecute(Sender: TObject);
     procedure AABM_AutoridadExecute(Sender: TObject);
     procedure AABM_MedioExecute(Sender: TObject);
+    procedure AAuditoriaExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -80,7 +83,7 @@ implementation
 Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
   UConceptos, UUtilidades, UMovimientos, USaldoInicial,
   UReportes_Disponibilidades, UListadoErogaciones, UConciliacion,
-  UABM_Autoridad, UABM_MedioCobroPago;
+  UABM_Autoridad, UABM_MedioCobroPago, UAuditoria;
 
 function salir_de_programa:boolean;
 begin
@@ -155,7 +158,7 @@ begin
   EKVentanas1.Abrir(Sender, TFReportes_Disponibilidades, FReportes_Disponibilidades);
 end;
 
-procedure TFPrincipal.ARepListado_ErogacionesExecute(Sender: TObject);
+procedure TFPrincipal.ARepList_ErogacionExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFListadoErogaciones, FListadoErogaciones);
 end;
@@ -173,6 +176,11 @@ end;
 procedure TFPrincipal.AABM_MedioExecute(Sender: TObject);
 begin
  EKVentanas1.Abrir(Sender, TFABM_MedioCobroPago, FABM_MedioCobroPago);
+end;
+
+procedure TFPrincipal.AAuditoriaExecute(Sender: TObject);
+begin
+ EKVentanas1.Abrir(Sender, TFAuditoria, FAuditoria);
 end;
 
 end.

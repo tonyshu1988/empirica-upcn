@@ -547,6 +547,8 @@ begin
         ZQ_Cuenta_Movimiento.Next;
       end;
 
+      ZQ_MovimientosIMPORTE.AsFloat:= EKDbSuma1.SumCollection[0].SumValue;
+
       if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
       begin
         UltimoNroCheque:= -1;

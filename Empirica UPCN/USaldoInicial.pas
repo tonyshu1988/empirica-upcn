@@ -71,7 +71,6 @@ type
     ZQ_Cuenta_MovID_MEDIO: TIntegerField;
     ZQ_Cuenta_MovFECHA_MDC: TDateField;
     ZQ_Cuenta_MovBANCO_MDC: TStringField;
-    ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Cuenta_MovIMPORTE: TFloatField;
     ZQ_Cuenta_MovCONCILIADO: TStringField;
     ZQ_Cuenta_MovFECHA_CONCILIADO: TDateField;
@@ -101,7 +100,6 @@ type
     ZQ_VerSaldosID_MEDIO: TIntegerField;
     ZQ_VerSaldosFECHA_MDC: TDateField;
     ZQ_VerSaldosBANCO_MDC: TStringField;
-    ZQ_VerSaldosNRO_CHEQUE_TRANSF: TStringField;
     ZQ_VerSaldosIMPORTE: TFloatField;
     ZQ_VerSaldosCONCILIADO: TStringField;
     ZQ_VerSaldosFECHA_CONCILIADO: TDateField;
@@ -126,6 +124,8 @@ type
     ZQ_VerSaldosNRO_RECIBO: TStringField;
     ZQ_BuscarMovNRO_MOVIMIENTO: TIntegerField;
     ZP_ObtenerNroMovID: TIntegerField;
+    ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TIntegerField;
+    ZQ_VerSaldosNRO_CHEQUE_TRANSF: TIntegerField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);

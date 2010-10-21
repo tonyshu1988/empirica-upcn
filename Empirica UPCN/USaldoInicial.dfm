@@ -247,7 +247,6 @@ object FSaldoInicial: TFSaldoInicial
           Visible = True
         end
         item
-          Alignment = taRightJustify
           Expanded = False
           FieldName = 'NRO_CHEQUE_TRANSF'
           Title.Alignment = taCenter
@@ -645,12 +644,9 @@ object FSaldoInicial: TFSaldoInicial
       FieldName = 'BANCO_MDC'
       Size = 50
     end
-    object ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TStringField
-      FieldName = 'NRO_CHEQUE_TRANSF'
-      Size = 30
-    end
     object ZQ_Cuenta_MovIMPORTE: TFloatField
       FieldName = 'IMPORTE'
+      currency = True
     end
     object ZQ_Cuenta_MovCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
@@ -662,6 +658,9 @@ object FSaldoInicial: TFSaldoInicial
     object ZQ_Cuenta_MovANULADO: TStringField
       FieldName = 'ANULADO'
       Size = 1
+    end
+    object ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TIntegerField
+      FieldName = 'NRO_CHEQUE_TRANSF'
     end
   end
   object ZQ_Movimiento: TZQuery
@@ -811,12 +810,9 @@ object FSaldoInicial: TFSaldoInicial
       FieldName = 'BANCO_MDC'
       Size = 50
     end
-    object ZQ_VerSaldosNRO_CHEQUE_TRANSF: TStringField
-      FieldName = 'NRO_CHEQUE_TRANSF'
-      Size = 30
-    end
     object ZQ_VerSaldosIMPORTE: TFloatField
       FieldName = 'IMPORTE'
+      currency = True
     end
     object ZQ_VerSaldosCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
@@ -854,6 +850,7 @@ object FSaldoInicial: TFSaldoInicial
     end
     object ZQ_VerSaldosIMPORTE_1: TFloatField
       FieldName = 'IMPORTE_1'
+      currency = True
     end
     object ZQ_VerSaldosIMPRESO: TStringField
       FieldName = 'IMPRESO'
@@ -889,6 +886,9 @@ object FSaldoInicial: TFSaldoInicial
     object ZQ_VerSaldosNRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'
       Size = 50
+    end
+    object ZQ_VerSaldosNRO_CHEQUE_TRANSF: TIntegerField
+      FieldName = 'NRO_CHEQUE_TRANSF'
     end
   end
   object DS_VerSaldos: TDataSource

@@ -16,7 +16,8 @@ uses
   UConciliacion in 'UConciliacion.pas' {FConciliacion},
   UABM_Autoridad in 'UABM_Autoridad.pas' {FABM_Autoridad},
   UAlta_OrdenPago in 'UAlta_OrdenPago.pas' {FAlta_OrdenPago},
-  UABM_MedioCobroPago in 'UABM_MedioCobroPago.pas' {FABM_MedioCobroPago};
+  UABM_MedioCobroPago in 'UABM_MedioCobroPago.pas' {FABM_MedioCobroPago},
+  UAuditoria in 'UAuditoria.pas' {FAuditoria};
 
 {$R *.res}
 
