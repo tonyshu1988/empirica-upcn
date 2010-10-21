@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 191
-  Top = 77
+  Left = 317
+  Top = 120
   Width = 871
   Height = 640
   Caption = 'FPrincipal'
@@ -105,11 +105,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 49
       OnExecute = ARep_LibroBancoExecute
     end
-    object ARepListado_Erogaciones: TAction
+    object ARepList_Erogacion: TAction
       Caption = 'Listado Erogaciones'
       Hint = 'Listado Erogaciones'
       ImageIndex = 48
-      OnExecute = ARepListado_ErogacionesExecute
+      OnExecute = ARepList_ErogacionExecute
     end
     object ARep_Conciliacion: TAction
       Caption = 'Conciliaci'#243'n Bancaria'
@@ -131,6 +131,11 @@ object FPrincipal: TFPrincipal
       Caption = 'ABM Medio Cobro/Pago'
       ImageIndex = 34
       OnExecute = AABM_MedioExecute
+    end
+    object AAuditoria: TAction
+      Caption = 'AAuditoria'
+      ImageIndex = 37
+      OnExecute = AAuditoriaExecute
     end
   end
   object MainMenu1: TMainMenu
@@ -181,12 +186,13 @@ object FPrincipal: TFPrincipal
         Action = ARep_Conciliacion
       end
       object ListadoErogaciones1: TMenuItem
-        Action = ARepListado_Erogaciones
+        Action = ARepList_Erogacion
       end
     end
     object Sistema: TMenuItem
       Caption = 'Sistema'
       object CambiarContrasea1: TMenuItem
+        Tag = 1
         Caption = 'Cambiar Contrase'#241'a'
         ImageIndex = 39
         OnClick = CambiarContrasea1Click
@@ -194,7 +200,12 @@ object FPrincipal: TFPrincipal
       object Configuracion1: TMenuItem
         Action = AConfiguracion
       end
+      object AAuditoria1: TMenuItem
+        Action = AAuditoria
+        Caption = 'Auditoria'
+      end
       object Salir2: TMenuItem
+        Tag = 1
         Caption = 'Salir'
         ImageIndex = 13
         OnClick = Salir2Click
