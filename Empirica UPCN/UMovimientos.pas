@@ -595,6 +595,8 @@ begin
     ZQ_MovimientosANULADO.Clear;
   end;
 
+  ZQ_MovimientosIMPORTE.AsFloat:= ZQ_Cuenta_MovimientoIMPORTE.AsFloat;
+
   if validarcampo then
   begin
     if ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0 then

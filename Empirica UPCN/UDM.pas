@@ -46,10 +46,10 @@ procedure TDM.LoginLogin(Sender: TObject);
 begin
   Application.CreateForm(TFPrincipal, FPrincipal);
 
-  ZQ_Configuracion.Open;
-  if ZQ_Configuracion.Locate('clave', 'iniciar_libro_banco',[]) then
-    if (ZQ_ConfiguracionTEXTO.AsString = 'SI') then
-      FPrincipal.ABMMovimientos1.Click;
+//  ZQ_Configuracion.Open;
+//  if ZQ_Configuracion.Locate('clave', 'iniciar_libro_banco',[]) then
+//    if (ZQ_ConfiguracionTEXTO.AsString = 'SI') then
+//      FPrincipal.ABMMovimientos1.Click;
 end;
 
 

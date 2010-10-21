@@ -1,9 +1,9 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 259
-  Top = 194
-  Height = 341
-  Width = 735
+  Left = 548
+  Top = 243
+  Height = 283
+  Width = 279
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
@@ -17,8 +17,8 @@ object DM: TDM
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
     SQLHourGlass = True
-    Left = 22
-    Top = 6
+    Left = 54
+    Top = 22
   end
   object SkinData1: TSkinData
     Active = True
@@ -132,8 +132,8 @@ object DM: TDM
     Version = '5.40.07.15'
     MenuUpdate = True
     MenuMerge = False
-    Left = 168
-    Top = 88
+    Left = 200
+    Top = 104
     SkinStream = {
       B2A200001D420400FE6771B8CDB63F0AFE7DDBA97F4F18038F007701BED1C07C
       75C80BD9C9F5D70591A9FECC5240394623B2CA86E4171CB29CAD627055451458
@@ -1440,34 +1440,36 @@ object DM: TDM
   end
   object EKEventos1: TEKEventos
     EnterPorTab = True
-    Left = 24
-    Top = 88
+    Left = 56
+    Top = 104
   end
   object EKModelo: TEKModeloTransaccion
     Coneccion = Conexion
-    Left = 88
-    Top = 8
+    Left = 120
+    Top = 24
   end
   object EKInformacion1: TEKInformacion
     StatusBar = FPrincipal.StatusBar1
     IndiceUsuario = 0
     IndiceTransaccion = 2
     IndiceVersion = 1
-    Left = 96
-    Top = 88
+    Left = 128
+    Top = 104
   end
   object EKUsrLogin1: TEKUsrLogin
     OnLogin = LoginLogin
     Coneccion = Conexion
+    Menu = FPrincipal.MainMenu1
     Aplicacion = 'UPCN'
     Estado = 'Ingreso al Sistema'
     Version = 0
     ControlVersion = False
     LoadImagen = 'login.jpg'
+    Caption = 'UPCN'
     Modo = EKLoginAutomatico
     ModoPermiso = EKPermisoAction
-    Left = 152
-    Top = 8
+    Left = 184
+    Top = 24
   end
   object ZQ_Configuracion: TZQuery
     Connection = Conexion
@@ -1475,8 +1477,8 @@ object DM: TDM
       'select *'
       'from configuracion')
     Params = <>
-    Left = 24
-    Top = 160
+    Left = 56
+    Top = 176
     object ZQ_ConfiguracionCLAVE: TStringField
       FieldName = 'CLAVE'
       Required = True

@@ -24,13 +24,13 @@ object FMovimientos: TFMovimientos
     Left = 0
     Top = 0
     Width = 1143
-    Height = 496
+    Height = 492
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
       1143
-      496)
+      492)
     object RepLibroB: TQuickRep
       Tag = 99
       Left = 20
@@ -1719,7 +1719,7 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 465
+      Top = 461
       Width = 1143
       Height = 31
       Align = alBottom
@@ -1867,7 +1867,7 @@ object FMovimientos: TFMovimientos
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 389
+      Top = 385
       Width = 1143
       Height = 76
       Align = alBottom
@@ -2038,7 +2038,7 @@ object FMovimientos: TFMovimientos
       Left = 0
       Top = 26
       Width = 1143
-      Height = 287
+      Height = 283
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -2189,7 +2189,7 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 313
+      Top = 309
       Width = 1143
       Height = 76
       Align = alBottom
