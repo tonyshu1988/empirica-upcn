@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = -4
-  Top = 149
+  Left = 247
+  Top = 163
   Width = 1159
   Height = 582
   Caption = 'Movimientos'
@@ -2358,8 +2358,8 @@ object FMovimientos: TFMovimientos
     end
     object QR_OrdenPago: TQuickRep
       Tag = 99
-      Left = 377
-      Top = 63
+      Left = 65
+      Top = 39
       Width = 794
       Height = 1123
       Frame.Color = clBlack
@@ -3431,7 +3431,7 @@ object FMovimientos: TFMovimientos
           FontSize = 8
         end
         object QRLabel111: TQRLabel
-          Left = 513
+          Left = 377
           Top = 1
           Width = 130
           Height = 14
@@ -3442,7 +3442,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1357.312500000000000000
+            997.479166666666700000
             2.645833333333333000
             343.958333333333300000)
           Alignment = taCenter
@@ -3523,37 +3523,6 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
-        object QRLabel114: TQRLabel
-          Left = 367
-          Top = 1
-          Width = 82
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            971.020833333333200000
-            2.645833333333333000
-            216.958333333333300000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Banco'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 8
-        end
         object QRLabel116: TQRLabel
           Left = 266
           Top = 1
@@ -3573,7 +3542,7 @@ object FMovimientos: TFMovimientos
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Fecha Cheque'
+          Caption = 'Fecha PD'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -3608,7 +3577,7 @@ object FMovimientos: TFMovimientos
         DataSet = ZQ_Cuenta_Movimiento
         PrintBefore = False
         PrintIfEmpty = True
-        object QRDBText71: TQRDBText
+        object QRDBTextMedio: TQRDBText
           Left = 93
           Top = 2
           Width = 168
@@ -3640,10 +3609,10 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 7
         end
-        object QRDBText74: TQRDBText
-          Left = 630
+        object QRDBTextImporte: TQRDBText
+          Left = 592
           Top = 2
-          Width = 83
+          Width = 121
           Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -3652,9 +3621,9 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333330000
-            1666.875000000000000000
+            1566.333333333333000000
             5.291666666666667000
-            219.604166666666700000)
+            320.145833333333300000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
@@ -3672,7 +3641,7 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 7
         end
-        object QRDBText75: TQRDBText
+        object QRDBTextFechaE: TQRDBText
           Left = 2
           Top = 2
           Width = 87
@@ -3704,40 +3673,8 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 7
         end
-        object QRDBText76: TQRDBText
-          Left = 367
-          Top = 2
-          Width = 142
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            971.020833333333200000
-            5.291666666666667000
-            375.708333333333300000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Cuenta_Movimiento
-          DataField = 'BANCO_MDC'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
-        object QRDBText77: TQRDBText
-          Left = 512
+        object QRDBTextNroCheque: TQRDBText
+          Left = 376
           Top = 2
           Width = 115
           Height = 13
@@ -3748,7 +3685,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333330000
-            1354.666666666667000000
+            994.833333333333300000
             5.291666666666667000
             304.270833333333300000)
           Alignment = taLeftJustify
@@ -3768,7 +3705,7 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 7
         end
-        object QRDBText78: TQRDBText
+        object QRDBTextFechaCMD: TQRDBText
           Left = 266
           Top = 2
           Width = 95
@@ -5383,7 +5320,7 @@ object FMovimientos: TFMovimientos
       end>
     DataSet = ZQ_Cuenta_Movimiento
     Left = 680
-    Top = 56
+    Top = 64
   end
   object VerificarNroCheque: TZStoredProc
     Connection = DM.Conexion
@@ -5455,5 +5392,126 @@ object FMovimientos: TFMovimientos
       ShortCut = 16451
       OnExecute = ACancelarExecute
     end
+  end
+  object ZQ_OrdenDebitoBancario: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from ie_cuentas_movimientos cm'
+      
+        'left join ie_movimientos mov on (cm.nro_movimiento = mov.nro_mov' +
+        'imiento)'
+      'where cm.id_medio = 5 and mov.fecha between :fdesde and :fhasta'
+      '  and cm.importe <> 0')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'fdesde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fhasta'
+        ParamType = ptUnknown
+      end>
+    Left = 792
+    Top = 55
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'fdesde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fhasta'
+        ParamType = ptUnknown
+      end>
+    object IntegerField1: TIntegerField
+      FieldName = 'ID'
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'NRO_MOVIMIENTO'
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'ID_CUENTA_INGRESO'
+    end
+    object IntegerField4: TIntegerField
+      FieldName = 'ID_CUENTA_EGRESO'
+    end
+    object IntegerField5: TIntegerField
+      FieldName = 'ID_MEDIO'
+    end
+    object DateField1: TDateField
+      FieldName = 'FECHA_MDC'
+      EditMask = '##/##/####'
+    end
+    object StringField1: TStringField
+      FieldName = 'BANCO_MDC'
+      Size = 50
+    end
+    object FloatField1: TFloatField
+      FieldName = 'IMPORTE'
+      currency = True
+    end
+    object StringField2: TStringField
+      FieldName = 'CONCILIADO'
+      Size = 1
+    end
+    object StringField3: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombre_cuenta_egreso'
+      LookupDataSet = ZQ_Cuentas
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'NOMBRE_CUENTA'
+      KeyFields = 'ID_CUENTA_EGRESO'
+      Size = 50
+      Lookup = True
+    end
+    object StringField4: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombre_cuenta_ingreso'
+      LookupDataSet = ZQ_Cuentas
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'NOMBRE_CUENTA'
+      KeyFields = 'ID_CUENTA_INGRESO'
+      Size = 50
+      Lookup = True
+    end
+    object StringField5: TStringField
+      FieldKind = fkLookup
+      FieldName = 'medio_de_pago'
+      LookupDataSet = ZQ_Medios_Cobro_Pago
+      LookupKeyFields = 'ID_MEDIO'
+      LookupResultField = 'NOMBRE_MEDIO_COBRO_PAGO'
+      KeyFields = 'ID_MEDIO'
+      Size = 50
+      Lookup = True
+    end
+    object DateField2: TDateField
+      FieldName = 'FECHA_CONCILIADO'
+    end
+    object StringField6: TStringField
+      FieldName = 'ANULADO'
+      Size = 1
+    end
+    object IntegerField6: TIntegerField
+      FieldName = 'NRO_CHEQUE_TRANSF'
+    end
+  end
+  object DS_OrdenDebitoBancario: TDataSource
+    DataSet = ZQ_OrdenDebitoBancario
+    Left = 792
+    Top = 111
+  end
+  object EKDbSumaOrdenDebito: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'importe'
+      end>
+    DataSet = ZQ_OrdenDebitoBancario
+    Left = 792
+    Top = 168
   end
 end

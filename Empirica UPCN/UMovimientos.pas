@@ -190,15 +190,13 @@ type
     QRLabel111: TQRLabel;
     QRLabel112: TQRLabel;
     QRLabel113: TQRLabel;
-    QRLabel114: TQRLabel;
     QRLabel116: TQRLabel;
     QRSubDetail17: TQRSubDetail;
-    QRDBText71: TQRDBText;
-    QRDBText74: TQRDBText;
-    QRDBText75: TQRDBText;
-    QRDBText76: TQRDBText;
-    QRDBText77: TQRDBText;
-    QRDBText78: TQRDBText;
+    QRDBTextMedio: TQRDBText;
+    QRDBTextImporte: TQRDBText;
+    QRDBTextFechaE: TQRDBText;
+    QRDBTextNroCheque: TQRDBText;
+    QRDBTextFechaCMD: TQRDBText;
     QRSubDetail18: TQRSubDetail;
     QrtImporteFPago: TQRLabel;
     QRBand15: TQRBand;
@@ -351,6 +349,24 @@ type
     QRDBText64: TQRDBText;
     QRShape16: TQRShape;
     qrtImporteTotal: TQRLabel;
+    ZQ_OrdenDebitoBancario: TZQuery;
+    IntegerField1: TIntegerField;
+    IntegerField2: TIntegerField;
+    IntegerField3: TIntegerField;
+    IntegerField4: TIntegerField;
+    IntegerField5: TIntegerField;
+    DateField1: TDateField;
+    StringField1: TStringField;
+    FloatField1: TFloatField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    StringField5: TStringField;
+    DateField2: TDateField;
+    StringField6: TStringField;
+    IntegerField6: TIntegerField;
+    DS_OrdenDebitoBancario: TDataSource;
+    EKDbSumaOrdenDebito: TEKDbSuma;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -452,13 +468,6 @@ begin
   if (ZQ_Cuenta_MovimientoID_MEDIO.IsNull) then
   begin
     Application.MessageBox('El campo "Medio" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    result := false;
-    exit;
-  end;
-
-  if (ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime < ZQ_MovimientosFECHA.AsDateTime) then
-  begin
-    Application.MessageBox('La Fecha de postdatado es menor a la fecha de emisión','Validación',MB_OK+MB_ICONINFORMATION);
     result := false;
     exit;
   end;
@@ -618,6 +627,12 @@ begin
     begin
       ZQ_Cuenta_Movimiento.Edit;
       ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime := ZQ_MovimientosFECHA.AsDateTime;
+    end;
+
+    if (ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime < ZQ_MovimientosFECHA.AsDateTime) then
+    begin
+      Application.MessageBox('La Fecha de postdatado es menor a la fecha de emisión','Validación',MB_OK+MB_ICONINFORMATION);
+      exit;
     end;
 
     //si es un cheque y no tiene la marca de conciliado le pongo q no esta conciliado
@@ -1018,7 +1033,7 @@ procedure TFMovimientos.btnImprimirOrdenClick(Sender: TObject);
 var
   j, index: integer;
 begin
-  if (LIBRO_BANCO.IsEmpty) or (LIBRO_BANCOID_MEDIO.AsInteger <> 2) then //si no hay movimiento o el mov seleccionado
+  if (LIBRO_BANCO.IsEmpty) or (LIBRO_BANCONRO_ORDEN.IsNull) then //si no hay movimiento o el mov seleccionado
     exit;                                                     //no es una orden de pago entonces salgo
 
   CBoxAutoriza.ItemIndex:= 0;
@@ -1031,6 +1046,39 @@ begin
   ZQ_Movimientos.Close;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
   ZQ_Movimientos.Open;
+
+
+  if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 5) and (ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0) then
+  begin
+    ZQ_OrdenDebitoBancario.Close;
+    ZQ_OrdenDebitoBancario.ParamByName('fdesde').AsDate:= StartOfTheMonth(ZQ_MovimientosFECHA.AsDateTime);
+    ZQ_OrdenDebitoBancario.ParamByName('fhasta').AsDate:= EndOfTheMonth(ZQ_MovimientosFECHA.AsDateTime);
+    ZQ_OrdenDebitoBancario.Open;
+
+    QRSubDetail17.DataSet:= ZQ_OrdenDebitoBancario;
+    QRDBTextFechaCMD.DataSet:= ZQ_OrdenDebitoBancario;
+    QRDBTextMedio.DataSet:= ZQ_OrdenDebitoBancario;
+    QRDBTextNroCheque.DataSet:= ZQ_OrdenDebitoBancario;
+    QRDBTextImporte.DataSet:= ZQ_OrdenDebitoBancario;
+    QRDBTextFechaE.DataSet:= ZQ_OrdenDebitoBancario;
+
+    QrtImporteFPago.Caption := 'Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSumaOrdenDebito.SumCollection[0].sumvalue);
+    qrtImporteTotal.Caption:=Format('%s',[FormatFloat('$ ###,###,###,##0.00', EKDbSumaOrdenDebito.SumCollection[0].sumvalue)]);
+  end
+  else
+  begin
+    QRSubDetail17.DataSet:= ZQ_Cuenta_Movimiento;
+    QRDBTextFechaCMD.DataSet:= ZQ_Cuenta_Movimiento;
+    QRDBTextMedio.DataSet:= ZQ_Cuenta_Movimiento;
+    QRDBTextNroCheque.DataSet:= ZQ_Cuenta_Movimiento;
+    QRDBTextImporte.DataSet:= ZQ_Cuenta_Movimiento;
+    QRDBTextFechaE.DataSet:= ZQ_Cuenta_Movimiento;
+
+    QrtImporteFPago.Caption := 'Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma1.SumCollection[0].sumvalue);
+    qrtImporteTotal.Caption:=Format('%s',[FormatFloat('$ ###,###,###,##0.00', EKDbSuma1.SumCollection[0].sumvalue)]);
+  end;
+
+
 
   cBoxImpresoras.Items.Clear;
   for J := 0 to printer.Printers.Count - 1 do
@@ -1089,8 +1137,6 @@ begin
     QRlblFechaHoy.Caption := FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
     QRLblConfecciona.Caption:=format('Confeccionado por: %s',[dm.EKUsrLogin1.nusuariosis]);
     QRLblAutorizo.Caption:= format('Autorizado por: %s',[CBoxAutoriza.Text]);
-    QrtImporteFPago.Caption := 'Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma1.SumCollection[0].sumvalue);
-    qrtImporteTotal.Caption:=Format('%s',[FormatFloat('$ ###,###,###,##0.00', EKDbSuma1.SumCollection[0].sumvalue)]);
     QR_OrdenPago.PrinterSettings.PrinterIndex := cBoxImpresoras.ItemIndex;
 
     if ori.Checked then
