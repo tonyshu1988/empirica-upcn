@@ -103,7 +103,8 @@ type
     ZQ_Usuarios: TZQuery;
     ZQ_UsuariosAUDIT_USUARIO: TStringField;
     DBComboBox1: TDBComboBox;
-    procedure fechaDesdeChange(Sender: TObject);
+    btnAplicarFecha: TButton;
+    btnAplicarUsuario: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_MovimientosAfterScroll(DataSet: TDataSet);
@@ -114,11 +115,12 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure btnBuscarClick(Sender: TObject);
-    procedure DBComboBox1Change(Sender: TObject);
+    procedure btnAplicarFechaClick(Sender: TObject);
+    procedure btnAplicarUsuarioClick(Sender: TObject);
   private
     { Private declarations }
   public
-    { Public declarations }
+    hoy: Tdate;
   end;
 
 var
@@ -126,54 +128,23 @@ var
 
 implementation
 
-uses UDM;
+uses UDM, DateUtils;
 
 {$R *.dfm}
 
-procedure TFAuditoria.fechaDesdeChange(Sender: TObject);
-var
-  hoy: Tdate;
-begin
-//cago los gráficos con la fecha actual y la del mes anterior
-  fechaDesde.Date:= dm.EKModelo.Fecha();
-  hoy:= dm.EKModelo.Fecha;
-
-  ZQ_MovInsert.close;
-  ZQ_MovInsert.ParamByName('fdesde').AsDate:= fechaDesde.Date;
-  ZQ_MovInsert.ParamByName('fhasta').AsDate:= hoy;
-  ZQ_MovInsert.Open;
-
-  ZQ_MovDelete.close;
-  ZQ_MovDelete.ParamByName('fdesde').AsDate:= fechaDesde.Date;
-  ZQ_MovDelete.ParamByName('fhasta').AsDate:= hoy;
-  ZQ_MovDelete.Open;
-
-  ZQ_MovUpdate.close;
-  ZQ_MovUpdate.ParamByName('fdesde').AsDate:= fechaDesde.Date;
-  ZQ_MovUpdate.ParamByName('fhasta').AsDate:= hoy;
-  ZQ_MovUpdate.Open;
-end;
-
-
 procedure TFAuditoria.FormCreate(Sender: TObject);
 var
-  hoy: Tdate;
   texto: TStrings;
 begin
   PageControl.TabIndex:=0;
-
   EKBusquedaAvanzada1.Abrir;
-                                                                            
-  //cago los gráficos con la fecha actual y la del mes anterior
-  fechaDesde.Date:= dm.EKModelo.Fecha();
-  hoy:= dm.EKModelo.Fecha;
 
   ZQ_Usuarios.Close;
   ZQ_Usuarios.Open;
 
-//  ZQ_Grafico_TipoMov.Close;
-//  ZQ_Grafico_TipoMov.ParamByName('usuario').AsString:= ZQ_UsuariosAUDIT_USUARIO.AsString;
-//  ZQ_Grafico_TipoMov.Open;
+  //cargo fecha actual y la del mes anterior
+  fechaDesde.Date:= StartOfTheMonth(dm.EKModelo.Fecha());
+  hoy:= dm.EKModelo.Fecha;
 
   ZQ_MovInsert.close;
   ZQ_MovInsert.ParamByName('fdesde').AsDate:= fechaDesde.Date;
@@ -242,11 +213,30 @@ begin
 end;
 
 
-procedure TFAuditoria.DBComboBox1Change(Sender: TObject);
+procedure TFAuditoria.btnAplicarFechaClick(Sender: TObject);
 begin
-//  ZQ_Grafico_TipoMov.Close;
-//  ZQ_Grafico_TipoMov.ParamByName('usuario').AsString:= ZQ_UsuariosAUDIT_USUARIO.AsString;
-//  ZQ_Grafico_TipoMov.Open;
+  ZQ_MovInsert.close;
+  ZQ_MovInsert.ParamByName('fdesde').AsDate:= fechaDesde.Date;
+  ZQ_MovInsert.ParamByName('fhasta').AsDate:= hoy;
+  ZQ_MovInsert.Open;
+
+  ZQ_MovDelete.close;
+  ZQ_MovDelete.ParamByName('fdesde').AsDate:= fechaDesde.Date;
+  ZQ_MovDelete.ParamByName('fhasta').AsDate:= hoy;
+  ZQ_MovDelete.Open;
+
+  ZQ_MovUpdate.close;
+  ZQ_MovUpdate.ParamByName('fdesde').AsDate:= fechaDesde.Date;
+  ZQ_MovUpdate.ParamByName('fhasta').AsDate:= hoy;
+  ZQ_MovUpdate.Open;
+end;
+
+
+procedure TFAuditoria.btnAplicarUsuarioClick(Sender: TObject);
+begin
+  ZQ_Grafico_TipoMov.Close;
+  ZQ_Grafico_TipoMov.ParamByName('usuario').AsString:= ZQ_UsuariosAUDIT_USUARIO.AsString;
+  ZQ_Grafico_TipoMov.Open;
 end;
 
 end.

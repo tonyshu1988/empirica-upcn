@@ -1,6 +1,6 @@
 object FConciliacion: TFConciliacion
-  Left = 214
-  Top = 77
+  Left = 206
+  Top = 46
   Width = 1041
   Height = 679
   Caption = 'Conciliaci'#243'n Bancaria'
@@ -24,7 +24,7 @@ object FConciliacion: TFConciliacion
     Left = 0
     Top = 0
     Width = 1025
-    Height = 593
+    Height = 589
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -33,9 +33,9 @@ object FConciliacion: TFConciliacion
       Left = 3
       Top = 56
       Width = 1019
-      Height = 488
+      Height = 484
       Align = alClient
-      Color = 16763323
+      Color = 16772842
       DataSource = DS_Conciliacion
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
@@ -46,15 +46,19 @@ object FConciliacion: TFConciliacion
       TitleFont.Style = []
       Columns = <
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'FECHA_PD'
+          Title.Alignment = taCenter
           Title.Caption = 'Fecha PD'
           Width = 84
           Visible = True
         end
         item
+          Alignment = taRightJustify
           Expanded = False
           FieldName = 'NRO_MEDIO'
+          Title.Alignment = taCenter
           Title.Caption = 'Nro Cheque'
           Width = 155
           Visible = True
@@ -62,6 +66,7 @@ object FConciliacion: TFConciliacion
         item
           Expanded = False
           FieldName = 'PROVEEDOR'
+          Title.Alignment = taCenter
           Title.Caption = 'Proveedor'
           Width = 464
           Visible = True
@@ -69,7 +74,7 @@ object FConciliacion: TFConciliacion
         item
           Expanded = False
           FieldName = 'HABER'
-          Title.Alignment = taRightJustify
+          Title.Alignment = taCenter
           Title.Caption = 'Importe'
           Width = 113
           Visible = True
@@ -221,7 +226,7 @@ object FConciliacion: TFConciliacion
     end
     object Panel1: TPanel
       Left = 3
-      Top = 544
+      Top = 540
       Width = 1019
       Height = 46
       Align = alBottom
@@ -230,7 +235,7 @@ object FConciliacion: TFConciliacion
       TabOrder = 2
       object Label6: TLabel
         Left = 604
-        Top = 14
+        Top = 8
         Width = 90
         Height = 14
         Caption = 'Total Importe:'
@@ -243,7 +248,7 @@ object FConciliacion: TFConciliacion
       end
       object lblTotalHaber: TLabel
         Left = 701
-        Top = 14
+        Top = 8
         Width = 22
         Height = 14
         Caption = '$ 0'
@@ -255,12 +260,12 @@ object FConciliacion: TFConciliacion
         ParentFont = False
       end
       object Label7: TLabel
-        Left = 20
+        Left = 47
         Top = 6
-        Width = 216
+        Width = 152
         Height = 16
         Alignment = taRightJustify
-        Caption = 'Saldo s/ Conciliaci'#243'n a la Fecha:'
+        Caption = 'Saldo s/ Conciliaci'#243'n al'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -269,7 +274,7 @@ object FConciliacion: TFConciliacion
         ParentFont = False
       end
       object lblSaldoConciliacion: TLabel
-        Left = 240
+        Left = 301
         Top = 6
         Width = 22
         Height = 16
@@ -282,12 +287,12 @@ object FConciliacion: TFConciliacion
         ParentFont = False
       end
       object Label8: TLabel
-        Left = 54
+        Left = 7
         Top = 24
-        Width = 182
+        Width = 192
         Height = 16
         Alignment = taRightJustify
-        Caption = 'Saldo s/ Extracto Bancario:'
+        Caption = 'Saldo s/ Extracto Bancario al'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -295,8 +300,8 @@ object FConciliacion: TFConciliacion
         Font.Style = []
         ParentFont = False
       end
-      object lblMonto: TLabel
-        Left = 240
+      object lblSaldoExtracto: TLabel
+        Left = 301
         Top = 24
         Width = 22
         Height = 16
@@ -309,8 +314,8 @@ object FConciliacion: TFConciliacion
         ParentFont = False
       end
       object lblDetalleExtracto: TLabel
-        Left = 340
-        Top = 30
+        Left = 380
+        Top = 36
         Width = 286
         Height = 13
         AutoSize = False
@@ -323,11 +328,41 @@ object FConciliacion: TFConciliacion
         ParentFont = False
         Visible = False
       end
+      object lblFechaConciliacion: TLabel
+        Left = 208
+        Top = 6
+        Width = 81
+        Height = 16
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Fecha'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblFechaExtracto: TLabel
+        Left = 208
+        Top = 24
+        Width = 81
+        Height = 16
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Fecha'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
     end
     object RepConciliacion: TQuickRep
       Tag = 99
-      Left = 25
-      Top = 92
+      Left = 73
+      Top = 108
       Width = 952
       Height = 1347
       Frame.Color = clBlack
@@ -1277,7 +1312,7 @@ object FConciliacion: TFConciliacion
           Shape = qrsRectangle
           VertAdjust = 0
         end
-        object QRLabel9: TQRLabel
+        object qrsaldoC: TQRLabel
           Left = 456
           Top = 46
           Width = 236
@@ -1610,8 +1645,8 @@ object FConciliacion: TFConciliacion
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 24
-    Top = 464
+    Left = 40
+    Top = 376
     DockControlHeights = (
       0
       0
@@ -1683,8 +1718,8 @@ object FConciliacion: TFConciliacion
       'from ie_cuentas c'
       'order by c.nombre_cuenta')
     Params = <>
-    Left = 18
-    Top = 392
+    Left = 42
+    Top = 320
     object ZQ_CuentasID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
     end
@@ -1718,13 +1753,11 @@ object FConciliacion: TFConciliacion
   end
   object DS_Cuentas: TDataSource
     DataSet = ZQ_Cuentas
-    Left = 90
-    Top = 400
+    Left = 138
+    Top = 320
   end
   object ZSP_LibroBanco: TZStoredProc
     Connection = DM.Conexion
-    Filter = 'ORDEN=5'
-    Filtered = True
     Params = <
       item
         DataType = ftInteger
@@ -1837,8 +1870,8 @@ object FConciliacion: TFConciliacion
         ParamType = ptInput
       end>
     StoredProcName = 'IE_VER_LIBRO_BANCO'
-    Left = 72
-    Top = 144
+    Left = 40
+    Top = 152
     ParamData = <
       item
         DataType = ftInteger
@@ -2043,13 +2076,13 @@ object FConciliacion: TFConciliacion
     Modelo = DM.EKModelo
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
-    Left = 88
-    Top = 232
+    Left = 40
+    Top = 208
   end
   object DS_LibroBanco: TDataSource
     DataSet = ZSP_LibroBanco
-    Left = 88
-    Top = 336
+    Left = 136
+    Top = 264
   end
   object ZSP_Conciliacion: TZStoredProc
     Connection = DM.Conexion
@@ -2165,8 +2198,8 @@ object FConciliacion: TFConciliacion
         ParamType = ptInput
       end>
     StoredProcName = 'IE_CONCILIACION_FECHA'
-    Left = 232
-    Top = 240
+    Left = 136
+    Top = 208
     ParamData = <
       item
         DataType = ftInteger
@@ -2339,8 +2372,8 @@ object FConciliacion: TFConciliacion
   end
   object DS_Conciliacion: TDataSource
     DataSet = ZSP_Conciliacion
-    Left = 16
-    Top = 344
+    Left = 40
+    Top = 264
   end
   object EKDbSuma1: TEKDbSuma
     SumCollection = <
@@ -2357,14 +2390,14 @@ object FConciliacion: TFConciliacion
     ShowModal = False
     VerExpImagen = False
     Left = 136
-    Top = 96
+    Top = 88
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridListaErogacion
     FuenteNormal = []
     NombreGuardarConfig = 'UConciliacion'
     Ordenar = False
-    Left = 176
-    Top = 160
+    Left = 136
+    Top = 144
   end
 end

@@ -1,6 +1,6 @@
 object FAuditoria: TFAuditoria
-  Left = 324
-  Top = 102
+  Left = 300
+  Top = 121
   Width = 920
   Height = 640
   Caption = 'Auditor'#237'a'
@@ -482,7 +482,7 @@ object FAuditoria: TFAuditoria
             end
             object fechaDesde: TDateTimePicker
               Left = 154
-              Top = 2
+              Top = 1
               Width = 91
               Height = 21
               Hint = 'Seleccione una Fecha para ver las estad'#237'sticas'
@@ -491,7 +491,21 @@ object FAuditoria: TFAuditoria
               ParentShowHint = False
               ShowHint = True
               TabOrder = 0
-              OnChange = fechaDesdeChange
+            end
+            object btnAplicarFecha: TButton
+              Left = 254
+              Top = 1
+              Width = 75
+              Height = 20
+              Caption = 'Aplicar'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 1
+              OnClick = btnAplicarFechaClick
             end
           end
         end
@@ -526,14 +540,29 @@ object FAuditoria: TFAuditoria
               ParentFont = False
             end
             object DBComboBox1: TDBComboBox
-              Left = 184
-              Top = 0
+              Left = 167
+              Top = 4
               Width = 145
               Height = 21
               DataField = 'AUDIT_USUARIO'
               DataSource = DS_Usuarios
               ItemHeight = 13
               TabOrder = 0
+            end
+            object btnAplicarUsuario: TButton
+              Left = 322
+              Top = 4
+              Width = 75
+              Height = 20
+              Caption = 'Aplicar'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 1
+              OnClick = btnAplicarUsuarioClick
             end
           end
           object DBChartUserTipoMov: TDBChart

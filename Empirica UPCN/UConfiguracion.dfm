@@ -1,6 +1,6 @@
 object FConfiguracion: TFConfiguracion
-  Left = 435
-  Top = 248
+  Left = 424
+  Top = 122
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'FConfiguracion'
@@ -425,7 +425,7 @@ object FConfiguracion: TFConfiguracion
         Font.Style = []
         ItemLinks = <
           item
-            Item = btnNuevo
+            Item = btnConfigNroOrden
             Visible = True
           end
           item
@@ -460,20 +460,20 @@ object FConfiguracion: TFConfiguracion
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 180
+    Left = 188
     Top = 51
     DockControlHeights = (
       0
       0
       0
       52)
-    object btnNuevo: TdxBarLargeButton
-      Caption = 'Reiniciar Numero Orden Pago'
+    object btnConfigNroOrden: TdxBarLargeButton
+      Caption = 'Configurar N'#250'mero Orden Pago'
       Category = 0
-      Hint = 'Reinicia el nro de la orden de pago a 0'
+      Hint = 'Configura el nro de la orden de pago '
       Visible = ivAlways
       ImageIndex = 40
-      OnClick = btnNuevoClick
+      OnClick = btnConfigNroOrdenClick
       AutoGrayScale = False
       HotImageIndex = 0
     end
@@ -546,12 +546,17 @@ object FConfiguracion: TFConfiguracion
     end
   end
   object ZS_ReiniciarNroOrden: TZSQLProcessor
-    Params = <>
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'nro'
+        ParamType = ptUnknown
+      end>
     Script.Strings = (
-      'set generator GEN_IE_NRO_ORDEN_ID to 0;')
+      'set generator GEN_IE_NRO_ORDEN_ID to :nro;')
     Connection = DM.Conexion
     Delimiter = ';'
     Left = 192
-    Top = 112
+    Top = 104
   end
 end

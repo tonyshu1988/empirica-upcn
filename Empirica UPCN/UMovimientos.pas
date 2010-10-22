@@ -176,16 +176,11 @@ type
     QRDBText63: TQRDBText;
     QRLabel12: TQRLabel;
     QRBand14: TQRBand;
-    RepOrdenCompra_SITUACIONIVAYCUIT: TQRLabel;
-    RepOrdenCompra_TELEFONOS: TQRLabel;
-    RepOrdenCompra_DIRECCION: TQRLabel;
     QRDBText65: TQRDBText;
-    RepOrdenCompra_EMPRESA: TQRLabel;
     QRShape2: TQRShape;
     QRLabel94: TQRLabel;
     QRLabel95: TQRLabel;
     QRDBText66: TQRDBText;
-    RepOrdenCompra_DUENIO: TQRLabel;
     QRLabel102: TQRLabel;
     QRLabel106: TQRLabel;
     QRSubDetail14: TQRSubDetail;
@@ -457,6 +452,13 @@ begin
   if (ZQ_Cuenta_MovimientoID_MEDIO.IsNull) then
   begin
     Application.MessageBox('El campo "Medio" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    result := false;
+    exit;
+  end;
+
+  if (ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime < ZQ_MovimientosFECHA.AsDateTime) then
+  begin
+    Application.MessageBox('La Fecha de postdatado es menor a la fecha de emisión','Validación',MB_OK+MB_ICONINFORMATION);
     result := false;
     exit;
   end;

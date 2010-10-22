@@ -89,7 +89,6 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
-        OnColEnter = DbGridMediosCobroPagoColEnter
         OnColExit = DbGridMediosCobroPagoColExit
         OnKeyUp = DbGridMediosCobroPagoKeyUp
         Columns = <
@@ -369,7 +368,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Style = [fsBold]
         KeyField = 'ID_CUENTA'
         ListField = 'BUSQUEDA'
-        ListSource = FMovimientos.DS_Cuentas
+        ListSource = DS_Cuentas
         ParentFont = False
         TabOrder = 5
         OnEnter = DBLUpCBoxCuentaEnter
@@ -418,6 +417,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
+        OnChange = dbFechaEmisionChange
         DataField = 'FECHA'
         DataSource = DS_Movimientos
       end
@@ -946,20 +946,6 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     DataSet = ZQ_Cuentas
     Left = 417
     Top = 345
-  end
-  object CD_Cheque: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 711
-    Top = 370
-    object CD_ChequeNumero: TIntegerField
-      FieldName = 'Numero'
-    end
-  end
-  object DS_Cheque: TDataSource
-    DataSet = CD_Cheque
-    Left = 712
-    Top = 418
   end
   object EK_ListadoMedCobroPago: TEKListadoSQL
     Modelo = DM.EKModelo

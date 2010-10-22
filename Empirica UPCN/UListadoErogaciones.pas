@@ -79,11 +79,6 @@ type
     QRDBText1: TQRDBText;
     QRBandGroup1Footer: TQRBand;
     QRShape1: TQRShape;
-    QRShape2: TQRShape;
-    QRLabel7: TQRLabel;
-    QRLabel8: TQRLabel;
-    QRDBText7: TQRDBText;
-    QRDBText8: TQRDBText;
     EKVistaPrevia: TEKVistaPreviaQR;
     QRlblTotalDiferidos: TQRLabel;
     QRlblTotalCorrientes: TQRLabel;
@@ -183,6 +178,13 @@ type
     QRLabel2: TQRLabel;
     QRLabel21: TQRLabel;
     QRLabel27: TQRLabel;
+    ChildBand1: TQRChildBand;
+    QRShape2: TQRShape;
+    QRDBText7: TQRDBText;
+    QRLabel7: TQRLabel;
+    QRDBText8: TQRDBText;
+    QRLabel8: TQRLabel;
+    QRDBText3: TQRDBText;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -199,6 +201,7 @@ type
     procedure GuardarOpcionesFiltrado();
     procedure LeerOpcionesFiltrado();
     procedure BtAplicarFiltrosColumnasClick(Sender: TObject);
+    procedure ZQ_Libro_erogacionesAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -521,5 +524,14 @@ begin
     CBFechaConciliado.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\FechaConciliado'));
 end;
 
+
+procedure TFListadoErogaciones.ZQ_Libro_erogacionesAfterScroll(
+  DataSet: TDataSet);
+begin
+  if trim(ZQ_Libro_erogacionesDESCRIPCION.AsString) = '' then
+    QRBandGroup1Footer.Enabled:= false
+  else
+    QRBandGroup1Footer.Enabled:= true;
+end;
 
 end.

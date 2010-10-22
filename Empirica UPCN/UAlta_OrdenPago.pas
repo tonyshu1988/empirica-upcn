@@ -102,9 +102,6 @@ type
     ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField;
     ZQ_CuentasBUSQUEDA: TStringField;
     DS_Cuentas: TDataSource;
-    CD_Cheque: TClientDataSet;
-    CD_ChequeNumero: TIntegerField;
-    DS_Cheque: TDataSource;
     EK_ListadoMedCobroPago: TEKListadoSQL;
     ZQ_Medios_Cobro_Pago: TZQuery;
     ZQ_Medios_Cobro_PagoID_MEDIO: TIntegerField;
@@ -144,7 +141,6 @@ type
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBLUpCBoxCuentaEnter(Sender: TObject);
-    procedure DbGridMediosCobroPagoColEnter(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
     procedure DbGridMediosCobroPagoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -164,11 +160,12 @@ type
     procedure AVerDetalleExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
+    procedure dbFechaEmisionChange(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    UltimoNroCheque, NroChequeEditando, CuentaNro: integer;
+    CuentaNro: integer;
   end;
 
 var
@@ -179,7 +176,7 @@ const
 
 implementation
 
-uses UDM;
+uses UDM, DateUtils;
 
 {$R *.dfm}
 
@@ -216,88 +213,17 @@ begin
 end;
 
 
-procedure TFAlta_OrdenPago.DbGridMediosCobroPagoColEnter(Sender: TObject);
-begin
-  if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then //SI ESTOY DANDO DE ALTA O EDITANDO
-  begin
-     if ((sender as tdbgrid).SelectedField.FullName = 'NRO_CHEQUE_TRANSF') then
-     begin
-      NroChequeEditando:= -1;
-      //si es un cheque y y la cuenta es autonumerada
-      if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) and (ZQ_CuentasAUTONUMERAR.AsString = 'S') then
-        if ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsString <> '' then //si tiene un numero de cheque cargado
-        begin
-          NroChequeEditando:= ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsInteger;
-        end
-     end;
-  end;
-end;
-
-
 procedure TFAlta_OrdenPago.DbGridMediosCobroPagoColExit(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then //SI ESTOY DANDO DE ALTA O EDITANDO
   begin
-     if ((sender as tdbgrid).SelectedField.FullName = 'NRO_CHEQUE_TRANSF') then
-     begin
-      //si un cheque y y la cuenta es autonumerada
-      if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) and (ZQ_CuentasAUTONUMERAR.AsString = 'S') then
-        if ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsString <> '' then //si tiene un numero de cheque cargado
-        begin
-          if ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsInteger <> NroChequeEditando then //si es distinto del actual
-          begin
-            CD_Cheque.Locate('Numero', NroChequeEditando, []);
-            CD_Cheque.Edit;
-            CD_ChequeNumero.AsInteger:= ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsInteger;
-            CD_Cheque.Post;
-          end;
-        end
-        else
-        begin
-            CD_Cheque.Locate('Numero', NroChequeEditando, []);
-            CD_Cheque.Delete;
-        end;
-     end;
-
-     if ((sender as tdbgrid).SelectedField.FullName = 'ID_MEDIO') then
-      if (ZQ_Cuenta_MovimientoID_MEDIO.IsNull) then //si no tiene cargado el numero de medio
+    if ((sender as tdbgrid).SelectedField.FullName = 'ID_MEDIO') then
+      if EK_ListadoMedCobroPago.Buscar then
       begin
-        if EK_ListadoMedCobroPago.Buscar then
-        begin
-          ZQ_Medios_Cobro_Pago.Refresh;
-          ZQ_Cuenta_Movimiento.Edit;
-          ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
-
-          if ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2 then    //si es un cheque
-          begin
-              UltimoNroCheque:= UltimoNroCheque + 1;
-              ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsInteger:= UltimoNroCheque; //le clavo el ultimo nro
-              CD_Cheque.Append;
-              CD_ChequeNumero.AsInteger:= UltimoNroCheque;
-              CD_Cheque.Post
-          end;
-
-          ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
-        end;
-      end
-      else   //si tiene cargado el numero de medio
-      begin
+        //ZQ_Medios_Cobro_Pago.Refresh;
         ZQ_Cuenta_Movimiento.Edit;
-
-        //si es un cheque y y la cuenta es autonumerada
-        if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) and (ZQ_CuentasAUTONUMERAR.AsString = 'S') then
-          if ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsString = '' then //si no tiene nro de cheque
-          begin
-              UltimoNroCheque:= UltimoNroCheque + 1;
-              ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsInteger:= UltimoNroCheque; //le clavo el ultimo nro
-              CD_Cheque.Append;
-              CD_ChequeNumero.AsInteger:= UltimoNroCheque;
-              CD_Cheque.Post
-          end;
-
-        if ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.IsNull then
-          ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
-      end
+        ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
+      end;
   end;
 end;
 
@@ -322,17 +248,6 @@ begin
           ZQ_Medios_Cobro_Pago.Refresh;
           ZQ_Cuenta_Movimiento.Edit;
           ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
-
-          //si es un cheque y y la cuenta es autonumerada
-          if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) and (ZQ_CuentasAUTONUMERAR.AsString = 'S') then
-            if ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsString = '' then //si no tiene nro de cheque
-            begin
-              UltimoNroCheque:= UltimoNroCheque + 1;
-              ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsInteger:= UltimoNroCheque; //le clavo el ultimo nro
-              CD_Cheque.Append;
-              CD_ChequeNumero.AsInteger:= UltimoNroCheque;
-              CD_Cheque.Post;
-            end;
         end;
     end;
   end;
@@ -395,7 +310,7 @@ begin
     ZQ_Ver_NroOrden.Close;
     ZQ_Ver_NroOrden.Open;
 
-    lblNroOrden.Caption:= 'ORDEN DE PAGO Nro: '+ZQ_Ver_NroOrdenNRO_ORDEN_STRING.AsString;
+    lblNroOrden.Caption:= Format('ORDEN DE PAGO Nro: %d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger)]);
 
     ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
@@ -407,15 +322,8 @@ begin
     end;
     DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
 
-    if ZQ_CuentasAUTONUMERAR.AsString = 'S' then
-      UltimoNroCheque:= ZQ_CuentasULTIMO_NRO.AsInteger;
-
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1; //PONGO QUE ES UNA ORDEN DE PAGO
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
-
-    //Por defecto los coloco en el primer registro
-    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=1;
-    ZQ_MovimientosID_CONCEPTO.AsInteger:=1;
   end;
 end;
 
@@ -441,9 +349,6 @@ begin
     ZQ_Movimientos.Edit;
     ZQ_Cuenta_Movimiento.Edit;
 
-    if ZQ_CuentasAUTONUMERAR.AsString = 'S' then
-      UltimoNroCheque:= ZQ_CuentasULTIMO_NRO.AsInteger;
-
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1; //PONGO QUE ES UNA ORDEN DE PAGO
   end;
 end;
@@ -455,14 +360,6 @@ begin
   begin
     if not(ZQ_Cuenta_Movimiento.IsEmpty)then
     begin
-      //si un cheque y y la cuenta es autonumerada
-      if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) and (ZQ_CuentasAUTONUMERAR.AsString = 'S') then
-      begin
-        CD_Cheque.Locate('Numero', ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF.AsInteger, []);
-        CD_Cheque.Delete;
-        UltimoNroCheque:= UltimoNroCheque - 1;
-      end;
-
       ZQ_Cuenta_Movimiento.Delete;
 
       if (ZQ_Cuenta_Movimiento.IsEmpty) and (CuentaNro = 0) then
@@ -493,27 +390,34 @@ procedure TFAlta_OrdenPago.btnGuardarClick(Sender: TObject);
 var
   nro_mov : integer;
 begin
-    ZQ_Cuenta_Movimiento.First; //borro los renglones vacios
-    while (not ZQ_Cuenta_Movimiento.Eof) do
-    begin
-     if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) then
-       ZQ_Cuenta_Movimiento.Delete;
 
-     if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0) then //si el importe es 0 entonces anulo el movimiento
-     begin
-       ZQ_Cuenta_Movimiento.Edit;
-       ZQ_Cuenta_MovimientoANULADO.AsString := 'A';
-     end
-     else //si el importe es distinto de cero
-     begin
-       ZQ_Cuenta_Movimiento.Edit;
-       ZQ_Movimientos.Edit;
-       ZQ_Cuenta_MovimientoANULADO.Clear;
-       ZQ_MovimientosANULADO.Clear;
-     end;
+      ZQ_Cuenta_Movimiento.First; //borro los renglones vacios
+      while (not ZQ_Cuenta_Movimiento.Eof) do
+      begin
+       if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) then
+         ZQ_Cuenta_Movimiento.Delete;
 
-     ZQ_Cuenta_Movimiento.Next;
-    end;
+       if ((ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0)or(ZQ_Cuenta_MovimientoIMPORTE.IsNull)) then //si el importe es 0 entonces anulo el movimiento
+       begin
+         ZQ_Cuenta_Movimiento.Edit;
+         ZQ_Cuenta_MovimientoIMPORTE.AsFloat:=0;
+         ZQ_Cuenta_MovimientoANULADO.AsString := 'A';
+       end
+       else //si el importe es distinto de cero
+       begin
+         ZQ_Cuenta_Movimiento.Edit;
+         ZQ_Movimientos.Edit;
+         ZQ_Cuenta_MovimientoANULADO.Clear;
+         ZQ_MovimientosANULADO.Clear;
+       end;
+
+       ZQ_Cuenta_Movimiento.Next;
+      end;
+      if ZQ_Cuenta_Movimiento.IsEmpty then
+      begin
+        Application.MessageBox('Debe ingresar al menos un medio de Pago.','Atención',MB_OK+MB_ICONINFORMATION);
+        exit;
+      end;
 
     if validarcampos then
     begin
@@ -537,8 +441,17 @@ begin
         ZQ_Cuenta_Movimiento.Edit;
         ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger :=nro_mov; //le agrego el nro de movimiento
 
+        if ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.IsNull then
+          ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
+
         if ZQ_Cuenta_MovimientoFECHA_MDC.IsNull then //si la fecha es vacia le pongo la fecha de emision
-          ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime := ZQ_MovimientosFECHA.AsDateTime;
+          ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime := ZQ_MovimientosFECHA.AsDateTime
+        else
+          if ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime < ZQ_MovimientosFECHA.AsDateTime then
+          begin
+            Application.MessageBox('La Fecha de postdatado de una de las forma de pago es menor a la fecha de emisión de la Orden','Validación',MB_OK+MB_ICONINFORMATION);
+            exit;
+          end;
 
         //si es un cheque y no tiene la marca de conciliado le pongo q no esta conciliado
         if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) and (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then
@@ -551,7 +464,6 @@ begin
 
       if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
       begin
-        UltimoNroCheque:= -1;
         close;
       end
       else
@@ -616,7 +528,6 @@ end;
 
 procedure TFAlta_OrdenPago.FormCreate(Sender: TObject);
 begin
-  CD_Cheque.CreateDataSet;
   dm.EKModelo.abrir(ZQ_Proveedores);
   dm.EKModelo.abrir(ZQ_Conceptos);
   dm.EKModelo.abrir(ZQ_Cuentas);
@@ -648,6 +559,12 @@ end;
 procedure TFAlta_OrdenPago.ACancelarExecute(Sender: TObject);
 begin
   btnCancelar.Click;
+end;
+
+procedure TFAlta_OrdenPago.dbFechaEmisionChange(Sender: TObject);
+begin
+  if ZQ_Movimientos.State = dsInsert then //solamente se cambia cuando estoy insertando (VER SI ES ASI O SE CAMBIA SIEMPRE)
+    lblNroOrden.Caption:= Format('ORDEN DE PAGO Nro: %d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger)]);
 end;
 
 end.

@@ -3,7 +3,7 @@ object FPrincipal: TFPrincipal
   Top = 120
   Width = 871
   Height = 640
-  Caption = 'FPrincipal'
+  Caption = 'UPCN'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -44,6 +44,8 @@ object FPrincipal: TFPrincipal
     ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
     ColorMap.UnusedColor = clWhite
+    ParentShowHint = False
+    ShowHint = True
     Spacing = 0
   end
   object PanelTapa: TPanel
@@ -71,25 +73,25 @@ object FPrincipal: TFPrincipal
     end
     object AABMProveedores: TAction
       Caption = 'ABM Proveedores'
-      Hint = 'ABM Proveedores'
+      Hint = 'Alta Proveedores'
       ImageIndex = 18
       OnExecute = AABMProveedoresExecute
     end
     object AABM_Cuentas: TAction
       Caption = 'ABM Cuentas'
-      Hint = 'ABM Cuentas'
+      Hint = 'Alta Cuentas'
       ImageIndex = 29
       OnExecute = AABM_CuentasExecute
     end
     object AConceptos: TAction
       Caption = 'Conceptos'
-      Hint = 'Conceptos'
+      Hint = 'Alta Conceptos'
       ImageIndex = 35
       OnExecute = AConceptosExecute
     end
     object AMovimientos: TAction
       Caption = 'Movimientos'
-      Hint = 'Movimientos'
+      Hint = 'Libro Banco'
       ImageIndex = 25
       OnExecute = AMovimientosExecute
     end
@@ -101,39 +103,41 @@ object FPrincipal: TFPrincipal
     end
     object ARep_LibroBanco: TAction
       Caption = 'Libro Banco'
-      Hint = 'Libro Banco'
+      Hint = 'Reporte Libro Banco'
       ImageIndex = 49
       OnExecute = ARep_LibroBancoExecute
     end
     object ARepList_Erogacion: TAction
       Caption = 'Listado Erogaciones'
-      Hint = 'Listado Erogaciones'
+      Hint = 'Reporte Listado Erogaciones'
       ImageIndex = 48
       OnExecute = ARepList_ErogacionExecute
     end
     object ARep_Conciliacion: TAction
       Caption = 'Conciliaci'#243'n Bancaria'
-      Hint = 'Conciliaci'#243'n Bancaria'
+      Hint = 'Reporte Conciliaci'#243'n Bancaria'
       ImageIndex = 47
       OnExecute = ARep_ConciliacionExecute
     end
     object ARep_SaldoInicial: TAction
       Caption = 'Saldos Iniciales'
-      Hint = 'Saldos Iniciales'
+      Hint = 'Reporte Saldos Iniciales'
     end
     object AABM_Autoridad: TAction
       Caption = 'ABM Autoridad'
-      Hint = 'ABM Autoridad'
+      Hint = 'Alta Autoridad'
       ImageIndex = 20
       OnExecute = AABM_AutoridadExecute
     end
     object AABM_Medio: TAction
       Caption = 'ABM Medio Cobro/Pago'
+      Hint = 'Alta Medio Cobro/Pago'
       ImageIndex = 34
       OnExecute = AABM_MedioExecute
     end
     object AAuditoria: TAction
       Caption = 'AAuditoria'
+      Hint = 'Auditoria'
       ImageIndex = 37
       OnExecute = AAuditoriaExecute
     end
@@ -171,10 +175,10 @@ object FPrincipal: TFPrincipal
       end
     end
     object Movimientos: TMenuItem
-      Caption = 'Movimientos'
+      Caption = 'Libro Banco'
       object ABMMovimientos1: TMenuItem
         Action = AMovimientos
-        Caption = 'ABM Movimientos'
+        Caption = 'ABM Libro Banco'
       end
     end
     object Reportes1: TMenuItem

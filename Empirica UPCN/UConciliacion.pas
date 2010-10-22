@@ -94,7 +94,7 @@ type
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
     QRBand1: TQRBand;
-    QRLabel9: TQRLabel;
+    qrsaldoC: TQRLabel;
     qrSaldoConciliacion: TQRLabel;
     qrsaldoEB: TQRLabel;
     qrExtracto: TQRLabel;
@@ -125,10 +125,12 @@ type
     QRShape4: TQRShape;
     QRShape5: TQRShape;
     Label8: TLabel;
-    lblMonto: TLabel;
+    lblSaldoExtracto: TLabel;
     lblDetalleExtracto: TLabel;
     Label5: TLabel;
     lblSaldo: TLabel;
+    lblFechaConciliacion: TLabel;
+    lblFechaExtracto: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
@@ -155,8 +157,11 @@ begin
   EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_Cuentas);
   lblNombreCuenta.Caption:= '';
-  lblMonto.Caption:= '';
+  lblSaldoExtracto.Caption:= '';
+  lblSaldoConciliacion.Caption:= '';  
   lblFHasta.Caption:= '';
+  lblFechaConciliacion.Caption:= '';
+  lblFechaExtracto.Caption:= '';
   lblSaldo.Caption:= '';
   lblDetalleExtracto.Caption:= '';
 end;
@@ -190,11 +195,15 @@ begin
       ZSP_LibroBanco.Last;
 
       lblNombreCuenta.Caption:= BuscarParametros.ParametrosSelecReales1[0];
+
       lblFHasta.Caption:= BuscarParametros.ParametrosSelecReales1[1];
-      lblMonto.Caption:= FormatFloat('$ ###,###,##0.00', StrToFloat(BuscarParametros.ParametrosSelecReales1[2])); //'$ '+ BuscarParametros.ParametrosSelecReales1[2];
+      lblFechaConciliacion.Caption:= BuscarParametros.ParametrosSelecReales1[1];
+      lblFechaExtracto.Caption:= BuscarParametros.ParametrosSelecReales1[1];
+
       lblSaldo.Caption:= FormatFloat('$ ###,###,##0.00', ZSP_LibroBancoSALDO.AsFloat); //'$ '+ZSP_LibroBancoSALDO.AsString;
       lblTotalHaber.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma1.SumCollection[0].SumValue); //'$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue);
-      lblSaldoConciliacion.Caption:= FormatFloat('$ ###,###,##0.00', (EKDbSuma1.SumCollection[0].SumValue+ZSP_LibroBancoSALDO.AsFloat)); //'$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue+ZSP_LibroBancoSALDO.AsFloat);
+      lblSaldoConciliacion.Caption:= FormatFloat('$ ###,###,##0.00', (ZSP_LibroBancoSALDO.AsFloat+EKDbSuma1.SumCollection[0].SumValue)); //'$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue+ZSP_LibroBancoSALDO.AsFloat);
+      lblSaldoExtracto.Caption:= FormatFloat('$ ###,###,##0.00', StrToFloat(BuscarParametros.ParametrosSelecReales1[2])); //'$ '+ BuscarParametros.ParametrosSelecReales1[2];
       lblDetalleExtracto.Caption:= BuscarParametros.ParametrosSelecReales1[3];
     end;
   end;
@@ -232,8 +241,9 @@ begin
   qrFecha.Caption:=lblFHasta.Caption;
   qrSaldoConciliacion.Caption:=lblSaldoConciliacion.Caption;
   qrTotalHaber.Caption:=lblTotalHaber.Caption;
-  qrExtracto.Caption:=lblMonto.Caption;
-  qrsaldoEB.Caption:=Format('Saldo s/ Extracto Bancario al %s %s',[lblFHasta.Caption,lblDetalleExtracto.Caption]);
+  qrExtracto.Caption:=lblSaldoExtracto.Caption;
+  qrsaldoEB.Caption:=Format('Saldo s/ Extracto Bancario al %s %s',[lblFechaExtracto.Caption,lblDetalleExtracto.Caption]);
+  qrsaldoC.Caption:=Format('Saldo s/ Conciliación al %s',[lblFechaConciliacion.Caption]);
   QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   dm.VariablesReportes(RepConciliacion);
 

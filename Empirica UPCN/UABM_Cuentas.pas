@@ -56,13 +56,10 @@ type
     RepCtas_Reporte_Titulo_2: TQRLabel;
     RepCtas_Reporte_Titulo_1: TQRLabel;
     QRBandDetalle: TQRBand;
-    QRDBText13: TQRDBText;
-    QRDBText30: TQRDBText;
     QRDBText6: TQRDBText;
     QRDBText4: TQRDBText;
     QRDBText5: TQRDBText;
     QRChildBand2: TQRChildBand;
-    QRLabel27: TQRLabel;
     QRLabel21: TQRLabel;
     QRLabel16: TQRLabel;
     QRLabel18: TQRLabel;
@@ -73,8 +70,9 @@ type
     QRSysData2: TQRSysData;
     QRBand1: TQRBand;
     QRExpr15: TQRExpr;
-    QRLabel2: TQRLabel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    QRLabel1: TQRLabel;
+    QRDBText1: TQRDBText;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
