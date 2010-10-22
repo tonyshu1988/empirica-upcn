@@ -401,7 +401,7 @@ begin
        begin
          ZQ_Cuenta_Movimiento.Edit;
          ZQ_Cuenta_MovimientoIMPORTE.AsFloat:=0;
-         ZQ_Cuenta_MovimientoANULADO.AsString := 'A';
+//         ZQ_Cuenta_MovimientoANULADO.AsString := 'A';
        end
        else //si el importe es distinto de cero
        begin
