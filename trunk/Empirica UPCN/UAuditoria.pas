@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, ComCtrls, TeEngine, Series, TeeProcs, Chart, DbChart,
   Grids, DBGrids, Buttons, ExtCtrls, dxBar, dxBarExtItems, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
-  DBCtrls;
+  DBCtrls, EKLlenarCombo;
 
 type
   TFAuditoria = class(TForm)
@@ -102,9 +102,10 @@ type
     ZQ_MovimientosNRO_ORDEN_STRING: TStringField;
     ZQ_Usuarios: TZQuery;
     ZQ_UsuariosAUDIT_USUARIO: TStringField;
-    DBComboBox1: TDBComboBox;
     btnAplicarFecha: TButton;
     btnAplicarUsuario: TButton;
+    ComboBox1: TComboBox;
+    EKLlenarComboUsuario: TEKLlenarCombo;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_MovimientosAfterScroll(DataSet: TDataSet);
@@ -137,7 +138,9 @@ var
   texto: TStrings;
 begin
   PageControl.TabIndex:=0;
+  
   EKBusquedaAvanzada1.Abrir;
+  EKLlenarComboUsuario.CargarCombo;
 
   ZQ_Usuarios.Close;
   ZQ_Usuarios.Open;

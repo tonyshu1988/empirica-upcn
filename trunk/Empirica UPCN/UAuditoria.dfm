@@ -408,7 +408,7 @@ object FAuditoria: TFAuditoria
               Marks.Visible = True
               DataSource = ZQ_MovInsert
               SeriesColor = clGreen
-              Title = 'INSERT'
+              Title = 'ALTA'
               XLabelsSource = 'AUDIT_USUARIO'
               BarStyle = bsRectGradient
               XValues.DateTime = False
@@ -427,7 +427,7 @@ object FAuditoria: TFAuditoria
               Marks.Visible = True
               DataSource = ZQ_MovUpdate
               SeriesColor = clYellow
-              Title = 'UPDATE'
+              Title = 'EDICION'
               XLabelsSource = 'AUDIT_USUARIO'
               BarStyle = bsRectGradient
               XValues.DateTime = False
@@ -446,7 +446,7 @@ object FAuditoria: TFAuditoria
               Marks.Visible = True
               DataSource = ZQ_MovDelete
               SeriesColor = clRed
-              Title = 'DELETE'
+              Title = 'BAJA'
               BarStyle = bsRectGradient
               XValues.DateTime = False
               XValues.Name = 'X'
@@ -539,16 +539,6 @@ object FAuditoria: TFAuditoria
               Font.Style = [fsBold]
               ParentFont = False
             end
-            object DBComboBox1: TDBComboBox
-              Left = 167
-              Top = 4
-              Width = 145
-              Height = 21
-              DataField = 'AUDIT_USUARIO'
-              DataSource = DS_Usuarios
-              ItemHeight = 13
-              TabOrder = 0
-            end
             object btnAplicarUsuario: TButton
               Left = 322
               Top = 4
@@ -561,8 +551,17 @@ object FAuditoria: TFAuditoria
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 1
+              TabOrder = 0
               OnClick = btnAplicarUsuarioClick
+            end
+            object ComboBox1: TComboBox
+              Left = 167
+              Top = 4
+              Width = 147
+              Height = 21
+              ItemHeight = 13
+              TabOrder = 1
+              Text = 'ComboBox1'
             end
           end
           object DBChartUserTipoMov: TDBChart
@@ -851,7 +850,7 @@ object FAuditoria: TFAuditoria
         'to)'
       'from audit_movimientos mov'
       'where (mov.audit_fecha between :fdesde and :fhasta)'
-      '  and (mov.audit_tipo like '#39'I%'#39')'
+      '  and (mov.audit_tipo like '#39'A%'#39')'
       'group by mov.audit_usuario, mov.audit_tipo'
       'order by mov.audit_usuario')
     Params = <
@@ -1187,7 +1186,7 @@ object FAuditoria: TFAuditoria
         'to)'
       'from audit_movimientos mov'
       'where (mov.audit_fecha between :fdesde and :fhasta)'
-      '  and (mov.audit_tipo like '#39'U%'#39')'
+      '  and (mov.audit_tipo like '#39'E%'#39')'
       'group by mov.audit_usuario, mov.audit_tipo'
       'order by mov.audit_usuario')
     Params = <
@@ -1228,7 +1227,7 @@ object FAuditoria: TFAuditoria
         'to)'
       'from audit_movimientos mov'
       'where (mov.audit_fecha between :fdesde and :fhasta)'
-      '  and (mov.audit_tipo like '#39'D%'#39')'
+      '  and (mov.audit_tipo like '#39'B%'#39')'
       'group by mov.audit_usuario, mov.audit_tipo'
       'order by mov.audit_usuario')
     Params = <
@@ -1310,5 +1309,13 @@ object FAuditoria: TFAuditoria
       FieldName = 'AUDIT_USUARIO'
       Size = 50
     end
+  end
+  object EKLlenarComboUsuario: TEKLlenarCombo
+    dataset = ZQ_Usuarios
+    combo = ComboBox1
+    CampoClave = 'AUDIT_USUARIO'
+    CampoVer = 'AUDIT_USUARIO'
+    Left = 684
+    Top = 341
   end
 end
