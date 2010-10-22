@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 214
-  Top = 120
+  Left = -4
+  Top = 149
   Width = 1159
   Height = 582
   Caption = 'Movimientos'
