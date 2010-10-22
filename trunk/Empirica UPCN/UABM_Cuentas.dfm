@@ -40,7 +40,7 @@ object FABM_Cuentas: TFABM_Cuentas
       TabOrder = 0
       Visible = False
       object Label1: TLabel
-        Left = 7
+        Left = 23
         Top = 21
         Width = 95
         Height = 13
@@ -56,11 +56,11 @@ object FABM_Cuentas: TFABM_Cuentas
         Transparent = True
       end
       object Label3: TLabel
-        Left = 14
+        Left = 9
         Top = 62
-        Width = 88
+        Width = 109
         Height = 13
-        Caption = 'Medio de Pago:'
+        Caption = 'Medio por Defecto:'
         Transparent = True
       end
       object Label4: TLabel
@@ -70,6 +70,7 @@ object FABM_Cuentas: TFABM_Cuentas
         Height = 13
         Caption = 'Ultimo Nro Cheque:'
         Transparent = True
+        Visible = False
       end
       object Label5: TLabel
         Left = 672
@@ -78,9 +79,10 @@ object FABM_Cuentas: TFABM_Cuentas
         Height = 13
         Caption = 'Auto Numerar:'
         Transparent = True
+        Visible = False
       end
       object dbEditNombreCuenta: TDBEdit
-        Left = 105
+        Left = 121
         Top = 15
         Width = 355
         Height = 21
@@ -108,9 +110,10 @@ object FABM_Cuentas: TFABM_Cuentas
         DataField = 'ULTIMO_NRO'
         DataSource = DS_Cuentas
         TabOrder = 3
+        Visible = False
       end
       object dbLookupCBoxMedio: TDBLookupComboBox
-        Left = 105
+        Left = 121
         Top = 56
         Width = 289
         Height = 21
@@ -136,6 +139,7 @@ object FABM_Cuentas: TFABM_Cuentas
         Values.Strings = (
           'S'
           'N')
+        Visible = False
       end
     end
     object dbGridCuentas: TDBGrid
@@ -156,6 +160,13 @@ object FABM_Cuentas: TFABM_Cuentas
       Columns = <
         item
           Expanded = False
+          FieldName = 'ID_CUENTA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. ID'
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'NOMBRE_CUENTA'
           Title.Alignment = taCenter
           Title.Caption = 'Nombre Cuenta'
@@ -174,31 +185,15 @@ object FABM_Cuentas: TFABM_Cuentas
           Expanded = False
           FieldName = 'medioPago'
           Title.Alignment = taCenter
-          Title.Caption = 'Medio Pago'
+          Title.Caption = 'Medio por Defecto'
           Width = 234
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'ULTIMO_NRO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Ultimo Nro. Cheque'
-          Width = 136
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'AUTONUMERAR'
-          Title.Alignment = taCenter
-          Title.Caption = 'Autonumerar'
-          Width = 92
           Visible = True
         end>
     end
     object RepCtas: TQuickRep
       Tag = 99
-      Left = 49
-      Top = 55
+      Left = 97
+      Top = 31
       Width = 794
       Height = 1123
       Frame.Color = clBlack
@@ -406,60 +401,8 @@ object FABM_Cuentas: TFABM_Cuentas
           39.687500000000000000
           1899.708333333333000000)
         BandType = rbDetail
-        object QRDBText13: TQRDBText
-          Left = 630
-          Top = 0
-          Width = 87
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            1666.875000000000000000
-            0.000000000000000000
-            230.187500000000000000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Cuentas
-          DataField = 'AUTONUMERAR'
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
-        object QRDBText30: TQRDBText
-          Left = 515
-          Top = 0
-          Width = 110
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            1362.604166666667000000
-            0.000000000000000000
-            291.041666666666700000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = True
-          Color = clWhite
-          DataSet = ZQ_Cuentas
-          DataField = 'ULTIMO_NRO'
-          Transparent = False
-          WordWrap = True
-          FontSize = 7
-        end
         object QRDBText6: TQRDBText
-          Left = 355
+          Left = 532
           Top = 0
           Width = 155
           Height = 13
@@ -470,7 +413,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333330000
-            939.270833333333300000
+            1407.583333333333000000
             0.000000000000000000
             410.104166666666700000)
           Alignment = taLeftJustify
@@ -485,9 +428,9 @@ object FABM_Cuentas: TFABM_Cuentas
           FontSize = 7
         end
         object QRDBText4: TQRDBText
-          Left = 245
+          Left = 378
           Top = 0
-          Width = 105
+          Width = 127
           Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -496,9 +439,9 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333330000
-            648.229166666666700000
+            1000.125000000000000000
             0.000000000000000000
-            277.812500000000000000)
+            336.020833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -511,9 +454,9 @@ object FABM_Cuentas: TFABM_Cuentas
           FontSize = 7
         end
         object QRDBText5: TQRDBText
-          Left = 2
+          Left = 55
           Top = 0
-          Width = 238
+          Width = 314
           Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -522,9 +465,9 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333330000
-            5.291666666666667000
+            145.520833333333300000
             0.000000000000000000
-            629.708333333333300000)
+            830.791666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -532,6 +475,32 @@ object FABM_Cuentas: TFABM_Cuentas
           Color = clWhite
           DataSet = ZQ_Cuentas
           DataField = 'NOMBRE_CUENTA'
+          Transparent = False
+          WordWrap = True
+          FontSize = 7
+        end
+        object QRDBText1: TQRDBText
+          Left = 4
+          Top = 0
+          Width = 47
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            10.583333333333330000
+            0.000000000000000000
+            124.354166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Cuentas
+          DataField = 'ID_CUENTA'
           Transparent = False
           WordWrap = True
           FontSize = 7
@@ -556,41 +525,10 @@ object FABM_Cuentas: TFABM_Cuentas
           39.687500000000000000
           1899.708333333333000000)
         ParentBand = QRBand5
-        object QRLabel27: TQRLabel
-          Left = 515
-          Top = 0
-          Width = 110
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1362.604166666667000000
-            0.000000000000000000
-            291.041666666666700000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Ultimo Nro.'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 8
-        end
         object QRLabel21: TQRLabel
-          Left = 355
+          Left = 532
           Top = 0
-          Width = 155
+          Width = 119
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -599,14 +537,14 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            939.270833333333300000
+            1407.583333333333000000
             0.000000000000000000
-            410.104166666666700000)
+            314.854166666666700000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
-          Caption = 'Medio Pago por Defecto'
+          Caption = 'Medio por Defecto'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -619,7 +557,7 @@ object FABM_Cuentas: TFABM_Cuentas
           FontSize = 8
         end
         object QRLabel16: TQRLabel
-          Left = 245
+          Left = 378
           Top = 0
           Width = 105
           Height = 14
@@ -630,7 +568,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            648.229166666666700000
+            1000.125000000000000000
             0.000000000000000000
             277.812500000000000000)
           Alignment = taLeftJustify
@@ -650,7 +588,7 @@ object FABM_Cuentas: TFABM_Cuentas
           FontSize = 8
         end
         object QRLabel18: TQRLabel
-          Left = 2
+          Left = 55
           Top = 0
           Width = 203
           Height = 14
@@ -661,7 +599,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            5.291666666666667000
+            145.520833333333300000
             0.000000000000000000
             537.104166666666700000)
           Alignment = taLeftJustify
@@ -680,10 +618,10 @@ object FABM_Cuentas: TFABM_Cuentas
           WordWrap = True
           FontSize = 8
         end
-        object QRLabel2: TQRLabel
-          Left = 630
-          Top = 1
-          Width = 87
+        object QRLabel1: TQRLabel
+          Left = 4
+          Top = 0
+          Width = 47
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -692,14 +630,14 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1666.875000000000000000
-            2.645833333333333000
-            230.187500000000000000)
-          Alignment = taRightJustify
+            10.583333333333330000
+            0.000000000000000000
+            124.354166666666700000)
+          Alignment = taLeftJustify
           AlignToBand = False
-          AutoSize = True
+          AutoSize = False
           AutoStretch = False
-          Caption = 'Autonumerar'
+          Caption = 'Nro. ID'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText

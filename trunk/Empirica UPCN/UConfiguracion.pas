@@ -41,7 +41,7 @@ type
     ZQ_ConfigDESCRIPCION: TStringField;
     ZQ_ConfigGRAFICO: TBlobField;
     dxBarABM: TdxBarManager;
-    btnNuevo: TdxBarLargeButton;
+    btnConfigNroOrden: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnEliminar: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
@@ -58,7 +58,7 @@ type
     procedure btCancGralClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
-    procedure btnNuevoClick(Sender: TObject);
+    procedure btnConfigNroOrdenClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,7 +73,7 @@ const
 
 implementation
 
-uses UDM;
+uses UDM, UUtilidades;
 
 {$R *.dfm}
 
@@ -166,18 +166,27 @@ begin
   panelGrilla.Enabled:= true;
 end;
 
-procedure TFConfiguracion.btnNuevoClick(Sender: TObject);
+procedure TFConfiguracion.btnConfigNroOrdenClick(Sender: TObject);
+var
+  nro: string;
 begin
-  if (application.MessageBox(pchar('¿Esta seguro que desea reiniciar el Número de Orden de Pago?' + #13 + #13), 'Reiniciar Número Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
-    exit;
-
-  if dm.EKModelo.iniciar_transaccion(TRANSACCION, []) then
-  begin
-    ZS_ReiniciarNroOrden.Execute;  
-
-    if not DM.EKModelo.finalizar_transaccion(TRANSACCION) then
-      dm.EKModelo.cancelar_transaccion(TRANSACCION);
-  end;
+//  if InputQuery('Verificar Nro Cheque', 'Ingrese desde que nro de cheque quiere verificar:', nro) then
+//  begin
+//    if (trim(nro) = '') or not (sonTodosNumeros(nro)) then
+//    begin
+//      ShowMessage('El nro de Orden de Pago ingresado es incorrecto');
+//      exit;
+//    end;
+//
+//    if dm.EKModelo.iniciar_transaccion(TRANSACCION, []) then
+//    begin
+//      ZS_ReiniciarNroOrden.ParamByName('nro').AsInteger:= StrToInt(nro);
+//      ZS_ReiniciarNroOrden.Execute;
+//
+//      if not DM.EKModelo.finalizar_transaccion(TRANSACCION) then
+//        dm.EKModelo.cancelar_transaccion(TRANSACCION);
+//    end;
+//  end;
 end;
 
 end.
