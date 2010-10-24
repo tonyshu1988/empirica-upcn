@@ -90,7 +90,7 @@ object FPrincipal: TFPrincipal
       OnExecute = AConceptosExecute
     end
     object AMovimientos: TAction
-      Caption = 'Movimientos'
+      Caption = 'Libro Banco'
       Hint = 'Libro Banco'
       ImageIndex = 25
       OnExecute = AMovimientosExecute
