@@ -51,6 +51,8 @@ type
     ABMMedioCobroPago1: TMenuItem;
     AAuditoria: TAction;
     AAuditoria1: TMenuItem;
+    ARepMovProveedor: TAction;
+    MovimientoProveedor1: TMenuItem;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -67,6 +69,7 @@ type
     procedure AABM_AutoridadExecute(Sender: TObject);
     procedure AABM_MedioExecute(Sender: TObject);
     procedure AAuditoriaExecute(Sender: TObject);
+    procedure ARepMovProveedorExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -83,7 +86,7 @@ implementation
 Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
   UConceptos, UUtilidades, UMovimientos, USaldoInicial,
   UReportes_Disponibilidades, UListadoErogaciones, UConciliacion,
-  UABM_Autoridad, UABM_MedioCobroPago, UAuditoria;
+  UABM_Autoridad, UABM_MedioCobroPago, UAuditoria, UReporteMovProveedor;
 
 function salir_de_programa:boolean;
 begin
@@ -181,6 +184,11 @@ end;
 procedure TFPrincipal.AAuditoriaExecute(Sender: TObject);
 begin
  EKVentanas1.Abrir(Sender, TFAuditoria, FAuditoria);
+end;
+
+procedure TFPrincipal.ARepMovProveedorExecute(Sender: TObject);
+begin
+ EKVentanas1.Abrir(Sender, TFReporteMovProveedor, FReporteMovProveedor);
 end;
 
 end.
