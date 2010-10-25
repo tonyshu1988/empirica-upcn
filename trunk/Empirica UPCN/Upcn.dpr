@@ -17,7 +17,8 @@ uses
   UABM_Autoridad in 'UABM_Autoridad.pas' {FABM_Autoridad},
   UAlta_OrdenPago in 'UAlta_OrdenPago.pas' {FAlta_OrdenPago},
   UABM_MedioCobroPago in 'UABM_MedioCobroPago.pas' {FABM_MedioCobroPago},
-  UAuditoria in 'UAuditoria.pas' {FAuditoria};
+  UAuditoria in 'UAuditoria.pas' {FAuditoria},
+  UReporteMovProveedor in 'UReporteMovProveedor.pas' {FReporteMovProveedor};
 
 {$R *.res}
 
