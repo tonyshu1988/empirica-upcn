@@ -1,6 +1,6 @@
 object FConceptos: TFConceptos
-  Left = 342
-  Top = 199
+  Left = 374
+  Top = 337
   Width = 870
   Height = 500
   Caption = 'ABM Conceptos'
@@ -23,16 +23,16 @@ object FConceptos: TFConceptos
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 414
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 4
     object Grilla: TDBGrid
       Left = 1
       Top = 20
-      Width = 860
-      Height = 325
+      Width = 852
+      Height = 323
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Conceptos
@@ -82,7 +82,7 @@ object FConceptos: TFConceptos
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 852
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -103,7 +103,7 @@ object FConceptos: TFConceptos
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 750
+        Left = 742
         Top = 1
         Width = 109
         Height = 17
@@ -119,8 +119,8 @@ object FConceptos: TFConceptos
     end
     object pDatos: TPanel
       Left = 1
-      Top = 345
-      Width = 860
+      Top = 343
+      Width = 852
       Height = 70
       Align = alBottom
       BevelOuter = bvNone
@@ -311,7 +311,7 @@ object FConceptos: TFConceptos
             50.270833333333330000
             801.687500000000000000
             158.750000000000000000
-            296.333333333333400000)
+            296.333333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -371,9 +371,9 @@ object FConceptos: TFConceptos
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            616.479166666666800000
+            616.479166666666700000
             31.750000000000000000
-            664.104166666666800000)
+            664.104166666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -681,7 +681,7 @@ object FConceptos: TFConceptos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           1899.708333333333000000)
         BandType = rbPageFooter
         object QRLabel35: TQRLabel
@@ -726,7 +726,7 @@ object FConceptos: TFConceptos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             150.812500000000000000
             2.645833333333333000
             185.208333333333300000)
@@ -757,7 +757,7 @@ object FConceptos: TFConceptos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1685.395833333333000000
             2.645833333333333000
             103.187500000000000000)
@@ -788,7 +788,7 @@ object FConceptos: TFConceptos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -840,7 +840,7 @@ object FConceptos: TFConceptos
             37.041666666666670000
             1373.187500000000000000
             5.291666666666667000
-            526.520833333333400000)
+            526.520833333333300000)
           Alignment = taRightJustify
           AlignToBand = True
           AutoSize = True
@@ -893,7 +893,7 @@ object FConceptos: TFConceptos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

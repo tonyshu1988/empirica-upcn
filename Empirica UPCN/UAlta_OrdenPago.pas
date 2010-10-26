@@ -217,7 +217,7 @@ procedure TFAlta_OrdenPago.DbGridMediosCobroPagoColExit(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then //SI ESTOY DANDO DE ALTA O EDITANDO
   begin
-    if ((sender as tdbgrid).SelectedField.FullName = 'ID_MEDIO') then
+    if ((sender as tdbgrid).SelectedField.FullName = 'ID_MEDIO')and(ZQ_Cuenta_MovimientoID_MEDIO.IsNull) then
       if EK_ListadoMedCobroPago.Buscar then
       begin
         //ZQ_Medios_Cobro_Pago.Refresh;
@@ -234,21 +234,14 @@ begin
   begin
     if key = 112 then
     begin
-      if ((sender as tdbgrid).SelectedField.FullName = 'ID_MEDIO') then
-        if EK_ListadoMedCobroPago.Buscar then
-        begin
-          ZQ_Medios_Cobro_Pago.Refresh;
-          ZQ_Cuenta_Movimiento.Edit;
-          ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
-        end;
-
-      if ((sender as tdbgrid).SelectedField.FullName = 'medio_de_pago') then
-        if EK_ListadoMedCobroPago.Buscar then
-        begin
-          ZQ_Medios_Cobro_Pago.Refresh;
-          ZQ_Cuenta_Movimiento.Edit;
-          ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
-        end;
+      if (((sender as tdbgrid).SelectedField.FullName = 'ID_MEDIO')or ((sender as tdbgrid).SelectedField.FullName = 'medio_de_pago'))
+          and(ZQ_Cuenta_MovimientoID_MEDIO.IsNull) then
+          if EK_ListadoMedCobroPago.Buscar then
+          begin
+            ZQ_Medios_Cobro_Pago.Refresh;
+            ZQ_Cuenta_Movimiento.Edit;
+            ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
+          end;
     end;
   end;
 end;
@@ -322,7 +315,10 @@ begin
     end;
     DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
 
+    //Cargo los valores por defecto...
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1; //PONGO QUE ES UNA ORDEN DE PAGO
+    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
+    ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
   end;
 end;
