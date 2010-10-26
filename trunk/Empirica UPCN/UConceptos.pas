@@ -111,6 +111,8 @@ end;
 procedure TFConceptos.btBuscarClick(Sender: TObject);
 begin
   EKBusquedaAvanzada1.Buscar;
+  //Así ve el ultimo id generado y no llora.
+  ZQ_IE_Conceptos.Last;
 end;
 
 procedure TFConceptos.BtNuevoClick(Sender: TObject);
@@ -119,7 +121,7 @@ begin
   begin
     Grilla.Enabled := false;
     pDatos.Visible := true;
-    ZQ_IE_Conceptos.Insert;
+    ZQ_IE_Conceptos.Append;
     ZQ_IE_ConceptosBAJA.AsString:='N';
     ZQ_IE_ConceptosIMPORTE.Value :=0;
     dbCodigoConcepto.SetFocus;

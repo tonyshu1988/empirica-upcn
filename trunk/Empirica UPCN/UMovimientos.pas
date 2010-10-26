@@ -10,7 +10,7 @@ uses
   EKBusquedaAvanzada, ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma,
   EKLlenarCombo, mxNativeExcel, mxExport, QuickRpt, QRCtrls,
   EKVistaPreviaQR, EKNumeroATexto, DBClient, QPrinters, EKIni, jpeg,
-  EKOrdenarGrilla, UAlta_OrdenPago, EKDBDateTimePicker;
+  EKOrdenarGrilla, UAlta_OrdenPago, EKDBDateTimePicker, Menus;
 
 type
   TFMovimientos = class(TForm)
@@ -129,7 +129,6 @@ type
     CBProveedor: TCheckBox;
     CBConcepto: TCheckBox;
     CBNroOrden: TCheckBox;
-    StaticText1: TStaticText;
     CBRecibo: TCheckBox;
     CBNroFactura: TCheckBox;
     ZQ_CuentasBUSQUEDA: TStringField;
@@ -297,7 +296,6 @@ type
     LIBRO_BANCOPROVEEDOR: TStringField;
     ZQ_MovimientosDESCRIPCION: TStringField;
     CBFechaConciliado: TCheckBox;
-    Label27: TLabel;
     LIBRO_BANCONRO_ORDEN_STRING: TStringField;
     btnAltaOrdenPago: TdxBarLargeButton;
     EKDbSuma1: TEKDbSuma;
@@ -314,7 +312,6 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    Label12: TLabel;
     Label13: TLabel;
     Label17: TLabel;
     Label22: TLabel;
@@ -367,6 +364,18 @@ type
     IntegerField6: TIntegerField;
     DS_OrdenDebitoBancario: TDataSource;
     EKDbSumaOrdenDebito: TEKDbSuma;
+    MenuGrilla: TPopupMenu;
+    ConciliarMovimiento1: TMenuItem;
+    ImprimirOrdendePago1: TMenuItem;
+    Panel1: TPanel;
+    StaticText1: TStaticText;
+    verAnulados: TCheckBox;
+    dxBarStatic1: TdxBarStatic;
+    dxBarButton1: TdxBarButton;
+    dxBarFontNameCombo1: TdxBarFontNameCombo;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    ZQ_Cuenta_MovimientocodMedioPago: TStringField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -419,6 +428,7 @@ type
     procedure AVerDetalleExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
+    procedure ConciliarMovimiento1Click(Sender: TObject);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -435,7 +445,7 @@ const
 
 implementation
 
-uses UDM, DateUtils, EKUsrLogin, UUtilidades;
+uses UDM, DateUtils, EKUsrLogin, UUtilidades, UPrincipal;
 
 {$R *.dfm}
 
@@ -550,9 +560,13 @@ begin
     ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
 
-    ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
+    //Cargo los valores por defecto...
+    ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:= 3; //PONGO Q ES UN EGRESO
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
+    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
+    ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
+
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -577,9 +591,13 @@ begin
     ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
 
+    //Cargo los valores por defecto...
     ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:= 2; //PONGO Q ES UN INGRESO
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
+    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
+    ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
+
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -674,6 +692,12 @@ end;
 
 procedure TFMovimientos.btaplicarClick(Sender: TObject);
 begin
+  //Tipo refresco...
+  dm.EKModelo.abrir(ZQ_Proveedores);
+  dm.EKModelo.abrir(ZQ_Conceptos);
+  dm.EKModelo.abrir(ZQ_Cuentas);
+  dm.EKModelo.abrir(ZQ_Autoriza);
+
   LIBRO_BANCO.Close;
   LIBRO_BANCO.ParamByName('cuenta').AsInteger :=ZQ_CuentasID_CUENTA.AsInteger;
   LIBRO_BANCO.ParamByName('desde').AsDate := DTPFechaDesde.Date;
@@ -832,31 +856,33 @@ begin
   ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCOID_MOVIMIENTO.AsInteger;
   ZQ_Cuenta_Movimiento.Open;
 
-  if ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2 then //si es un cheque
-  begin
-   if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') then //si no esta conciliado
-   begin
-     if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
-     begin
-       ZQ_Cuenta_Movimiento.edit;
-       ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'S';
-       if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
-         DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
-     end
-   end
-   else //si esta conciliado
-   begin
-     if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
-     begin
-       ZQ_Cuenta_Movimiento.edit;
-       ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
-       if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
-         DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
-     end;
-   end;
-  end;
-  btaplicar.Click;
-  LIBRO_BANCO.Locate('ID_MOVIMIENTO',ZQ_Cuenta_MovimientoID.AsInteger,[]);
+  if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) then
+      begin
+         if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') then //si no esta conciliado
+         begin
+           if (application.MessageBox(pchar('¿Esta seguro que desea Conciliar el cheque seleccionado?'), 'Conciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+             if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
+             begin
+               ZQ_Cuenta_Movimiento.edit;
+               ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'S';
+               if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+                 DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+             end
+         end
+         else //si esta conciliado
+         begin
+           if (application.MessageBox(pchar('¿Esta seguro que desea Desconciliar el cheque seleccionado?'), 'Desconciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+             if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
+             begin
+               ZQ_Cuenta_Movimiento.edit;
+               ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
+               if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+                 DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+             end;
+         end;
+        btaplicar.Click;
+        LIBRO_BANCO.Locate('ID_MOVIMIENTO',ZQ_Cuenta_MovimientoID.AsInteger,[]);
+      end;
 end;
 
 
@@ -870,7 +896,14 @@ end;
 
 
 procedure TFMovimientos.DBGridLibroBancoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  a: TRect;
 begin
+  a.Left := rect.Left;
+  a.Right := rect.Right;
+  a.Top := rect.Top;
+  a.Bottom := rect.Bottom;
+
   if not LIBRO_BANCO.IsEmpty then
   begin
     if (LIBRO_BANCOMEDIO.AsString = 'CHEQUE') and (LIBRO_BANCOCONCILIADO.Value='S') then
@@ -879,6 +912,8 @@ begin
       DBGridLibroBanco.Canvas.Font.Color := clBlack;
       if (gdFocused in State) or (gdSelected in State) then
        begin
+       a.Top := rect.Top+1;
+       a.Bottom := rect.Bottom -1;
        DBGridLibroBanco.Canvas.Font.Color := clBlack;
        DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
        end;
@@ -887,13 +922,15 @@ begin
     begin
       if (gdFocused in State) or (gdSelected in State) then
       begin
+        a.Top := rect.Top+1;
+        a.Bottom := rect.Bottom -1;
         DBGridLibroBanco.Canvas.Font.Color := clwhite;
         DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
         DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
       end;
     end;
 
-    DBGridLibroBanco.DefaultDrawColumnCell(rect,datacol,column,state);
+    DBGridLibroBanco.DefaultDrawColumnCell(a,datacol,column,state);
   end;
 end;
 
@@ -1239,6 +1276,20 @@ begin
   else
     DBGridLibroBanco.Columns[15].Visible := true;
 
+  //filtro los anulados para que se vean o no
+  if verAnulados.Checked then
+    begin
+      LIBRO_BANCO.Filtered:=False;
+      LIBRO_BANCO.Filter:='';
+    end
+  else
+    begin
+      LIBRO_BANCO.Filtered:=False;
+      LIBRO_BANCO.Filter:= Format('CTA_MOV_ANULADO<>%s',[quotedStr('A')]);
+      LIBRO_BANCO.Filtered:=True;
+    end;
+    
+
   PFiltrosColumnas.Visible:=false;
 end;
 
@@ -1521,6 +1572,11 @@ procedure TFMovimientos.ACancelarExecute(Sender: TObject);
 begin
   if BtCancelar.Enabled then
     BtCancelar.Click;
+end;
+
+procedure TFMovimientos.ConciliarMovimiento1Click(Sender: TObject);
+begin
+  ConciliarCheque;
 end;
 
 end.
