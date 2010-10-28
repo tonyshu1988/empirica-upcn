@@ -126,6 +126,8 @@ type
     ZP_ObtenerNroMovID: TIntegerField;
     ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TIntegerField;
     ZQ_VerSaldosNRO_CHEQUE_TRANSF: TIntegerField;
+    ZQ_YaExisteSaldo: TZQuery;
+    ZQ_YaExisteSaldoNRO_MOVIMIENTO: TIntegerField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -330,15 +332,20 @@ end;
 function TFSaldoInicial.ValidarDatos():boolean;
 begin
   result := true;
- {
-  if ZQ_TransferenciaFECHA.IsNull then
+
+  ZQ_YaExisteSaldo.Close;
+  ZQ_YaExisteSaldo.ParamByName('id_cta').AsInteger:= ZQ_CuentaIngresoID_CUENTA.AsInteger;
+  ZQ_YaExisteSaldo.Open;
+
+  if not ZQ_YaExisteSaldo.IsEmpty then
    begin
-     Application.MessageBox('El capo Fecha se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-     ISDTPFecha.SetFocus;
+     Application.MessageBox('Ya se ha cargado un saldo inicial para la cuenta seleccionada, verifique','Validar',MB_OK+MB_ICONINFORMATION);
+     DBLookupCBoxCuenta.SetFocus;
      result := false;
      Exit;
    end;
 
+{
   if ZQ_Cuentas_MovimientosID_CUENTA_INGRESO.IsNull then
    begin
      Application.MessageBox('El campo Cuenta Ingreso se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
@@ -399,7 +406,7 @@ procedure TFSaldoInicial.FormCloseQuery(Sender: TObject;
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_saldo) then
   begin
-    if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela?'), 'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+    if not (application.MessageBox(pchar('Si continua con el cierre se perderan los cambios realizados.'+#13+#13+'¿Salir de todos modos?'),'Atención', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
       canClose := False
     else
       dm.EKModelo.cancelar_transaccion(transaccion_saldo);

@@ -151,7 +151,7 @@ procedure TFConfiguracion.FormCloseQuery(Sender: TObject; var CanClose: Boolean)
 begin
   if dm.EKModelo.verificar_transaccion(TRANSACCION) then
   begin
-    if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela ?'),'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+    if not (application.MessageBox(pchar('Si continua con el cierre se perderan los cambios realizados.'+#13+#13+'¿Salir de todos modos?'),'Atención', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
       canClose := False
     else
       dm.EKModelo.cancelar_transaccion(TRANSACCION);

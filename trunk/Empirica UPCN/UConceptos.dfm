@@ -1,6 +1,6 @@
 object FConceptos: TFConceptos
-  Left = 374
-  Top = 337
+  Left = 343
+  Top = 158
   Width = 870
   Height = 500
   Caption = 'ABM Conceptos'
@@ -24,7 +24,7 @@ object FConceptos: TFConceptos
     Left = 0
     Top = 0
     Width = 854
-    Height = 414
+    Height = 410
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 4
@@ -32,7 +32,7 @@ object FConceptos: TFConceptos
       Left = 1
       Top = 20
       Width = 852
-      Height = 323
+      Height = 319
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Conceptos
@@ -45,14 +45,6 @@ object FConceptos: TFConceptos
       TitleFont.Style = []
       OnDrawColumnCell = GrillaDrawColumnCell
       Columns = <
-        item
-          Expanded = False
-          FieldName = 'ID_CONCEPTO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Id'
-          Width = 31
-          Visible = True
-        end
         item
           Color = 16767698
           Expanded = False
@@ -119,7 +111,7 @@ object FConceptos: TFConceptos
     end
     object pDatos: TPanel
       Left = 1
-      Top = 343
+      Top = 339
       Width = 852
       Height = 70
       Align = alBottom
