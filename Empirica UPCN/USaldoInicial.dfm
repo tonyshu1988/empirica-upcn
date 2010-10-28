@@ -974,4 +974,33 @@ object FSaldoInicial: TFSaldoInicial
     Left = 224
     Top = 232
   end
+  object ZQ_YaExisteSaldo: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select mov.nro_movimiento'
+      'from ie_movimientos mov'
+      
+        'left join ie_cuentas_movimientos cta on (mov.nro_movimiento = ct' +
+        'a.nro_movimiento)'
+      'where mov.id_objeto_movimiento = 4'
+      '  and cta.id_cuenta_ingreso = :id_cta')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cta'
+        ParamType = ptUnknown
+      end>
+    Left = 328
+    Top = 176
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cta'
+        ParamType = ptUnknown
+      end>
+    object ZQ_YaExisteSaldoNRO_MOVIMIENTO: TIntegerField
+      FieldName = 'NRO_MOVIMIENTO'
+      Required = True
+    end
+  end
 end

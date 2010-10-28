@@ -76,12 +76,13 @@ begin
 
 end;
 
+
 procedure TFABM_MedioCobroPago.BtModificarClick(Sender: TObject);
 begin
   if ZQ_MedioCobroPago.IsEmpty then
   exit;
-
-  if (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 1) or (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 2) or (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 3) then
+      //EFECTIVO                                   //CHEQUE                                     //TRANSFERENCIA                              //DEBITO BANCARIO
+  if (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 1) or (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 2) or (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 3) or (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 5) then
   exit; 
 
  if dm.EKModelo.iniciar_transaccion(Transaccion_Medios, [ZQ_MedioCobroPago]) then
@@ -93,8 +94,8 @@ begin
     GrupoGuardarCancelar.Enabled := true;
     GrupoEditando.Enabled := false;
   end;
-
 end;
+
 
 procedure TFABM_MedioCobroPago.BtGuardarClick(Sender: TObject);
 begin
@@ -103,8 +104,7 @@ begin
     Application.MessageBox('El campo nombre medio esta vacio','VERIFICAR',MB_OK+MB_ICONINFORMATION);
     dbNombreConcepto.SetFocus;
     exit;
-  end; 
-
+  end;
 
   if DM.EKModelo.finalizar_transaccion(Transaccion_Medios) then
   begin
@@ -116,10 +116,12 @@ begin
   end;
 end;
 
+
 procedure TFABM_MedioCobroPago.bt_salirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFABM_MedioCobroPago.BtCancelarClick(Sender: TObject);
 begin
@@ -131,22 +133,23 @@ begin
   ZQ_MedioCobroPago.Refresh;
 end;
 
+
 procedure TFABM_MedioCobroPago.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
   if dm.EKModelo.verificar_transaccion(Transaccion_Medios) then
   begin
-    if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela?'), 'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+    if not (application.MessageBox(pchar('Si continua con el cierre se perderan los cambios realizados.'+#13+#13+'¿Salir de todos modos?'),'Atención', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
       canClose := False
     else
       dm.EKModelo.cancelar_transaccion(Transaccion_Medios);
   end;
-
 end;
+
 
 procedure TFABM_MedioCobroPago.FormCreate(Sender: TObject);
 begin
-dm.EKModelo.abrir(ZQ_MedioCobroPago);
+  dm.EKModelo.abrir(ZQ_MedioCobroPago);
 end;
 
 end.
