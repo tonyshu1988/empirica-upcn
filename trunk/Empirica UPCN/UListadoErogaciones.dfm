@@ -1,7 +1,7 @@
 object FListadoErogaciones: TFListadoErogaciones
-  Left = 281
-  Top = 154
-  Width = 1296
+  Left = 277
+  Top = 173
+  Width = 960
   Height = 565
   Caption = 'Listado Erogaciones en Cumplimiento'
   Color = clBtnFace
@@ -24,7 +24,7 @@ object FListadoErogaciones: TFListadoErogaciones
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1280
+    Width = 944
     Height = 475
     Align = alClient
     BevelOuter = bvNone
@@ -1375,7 +1375,7 @@ object FListadoErogaciones: TFListadoErogaciones
     object DBGridListaErogacion: TDBGrid
       Left = 3
       Top = 58
-      Width = 1274
+      Width = 938
       Height = 365
       Align = alClient
       Color = 16772842
@@ -1493,18 +1493,18 @@ object FListadoErogaciones: TFListadoErogaciones
     object pDatos: TPanel
       Left = 3
       Top = 3
-      Width = 1274
+      Width = 938
       Height = 55
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
       DesignSize = (
-        1274
+        938
         55)
       object Shape1: TShape
         Left = 3
         Top = 4
-        Width = 1654
+        Width = 932
         Height = 22
         Anchors = [akLeft, akTop, akRight]
         Brush.Color = clGray
@@ -1514,7 +1514,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object Shape2: TShape
         Left = 3
         Top = 3
-        Width = 1654
+        Width = 932
         Height = 22
         Anchors = [akLeft, akTop, akRight]
         Brush.Color = clTeal
@@ -1523,7 +1523,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object Label2: TLabel
         Left = 0
         Top = 7
-        Width = 1657
+        Width = 932
         Height = 18
         Alignment = taCenter
         Anchors = [akLeft, akTop, akRight]
@@ -1540,8 +1540,9 @@ object FListadoErogaciones: TFListadoErogaciones
       object Label1: TLabel
         Left = -1
         Top = 5
-        Width = 1657
+        Width = 932
         Height = 18
+        Align = alCustom
         Alignment = taCenter
         Anchors = [akLeft, akTop, akRight]
         AutoSize = False
@@ -1559,6 +1560,7 @@ object FListadoErogaciones: TFListadoErogaciones
         Top = 38
         Width = 46
         Height = 13
+        Anchors = [akLeft, akTop, akRight]
         Caption = 'Cuenta:'
       end
       object lblNombreCuenta: TLabel
@@ -1566,6 +1568,7 @@ object FListadoErogaciones: TFListadoErogaciones
         Top = 38
         Width = 317
         Height = 13
+        Anchors = [akLeft, akTop, akRight]
         AutoSize = False
         Caption = 'lblNombreCuenta'
         Font.Charset = DEFAULT_CHARSET
@@ -1580,6 +1583,7 @@ object FListadoErogaciones: TFListadoErogaciones
         Top = 38
         Width = 41
         Height = 13
+        Anchors = [akLeft, akTop, akRight]
         Caption = 'Desde:'
       end
       object lblFechaDesde: TLabel
@@ -1587,6 +1591,7 @@ object FListadoErogaciones: TFListadoErogaciones
         Top = 38
         Width = 112
         Height = 13
+        Anchors = [akLeft, akTop, akRight]
         AutoSize = False
         Caption = 'lblFechaDesde'
         Font.Charset = DEFAULT_CHARSET
@@ -1601,6 +1606,7 @@ object FListadoErogaciones: TFListadoErogaciones
         Top = 38
         Width = 112
         Height = 13
+        Anchors = [akLeft, akTop, akRight]
         AutoSize = False
         Caption = 'lblFechaHasta'
         Font.Charset = DEFAULT_CHARSET
@@ -1615,11 +1621,12 @@ object FListadoErogaciones: TFListadoErogaciones
         Top = 38
         Width = 37
         Height = 13
+        Anchors = [akLeft, akTop, akRight]
         Caption = 'Hasta:'
       end
       object StaticText1: TStaticText
-        Left = 1585
-        Top = 39
+        Left = 867
+        Top = 38
         Width = 69
         Height = 17
         Anchors = [akRight]
@@ -1638,13 +1645,13 @@ object FListadoErogaciones: TFListadoErogaciones
     object pResumen: TPanel
       Left = 3
       Top = 423
-      Width = 1274
+      Width = 938
       Height = 18
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 2
       object lblSaldo: TLabel
-        Left = 1211
+        Left = 875
         Top = 0
         Width = 63
         Height = 18
@@ -1662,7 +1669,7 @@ object FListadoErogaciones: TFListadoErogaciones
       Tag = 99
       Left = 3
       Top = 441
-      Width = 1274
+      Width = 938
       Height = 31
       Align = alBottom
       Color = 8454016
@@ -1796,8 +1803,8 @@ object FListadoErogaciones: TFListadoErogaciones
     end
     object RepErog: TQuickRep
       Tag = 99
-      Left = 139
-      Top = 27
+      Left = 67
+      Top = 107
       Width = 794
       Height = 1123
       Frame.Color = clBlack
@@ -2978,6 +2985,7 @@ object FListadoErogaciones: TFListadoErogaciones
         end
       end
       object ChildBand1: TQRChildBand
+        Tag = 99
         Left = 38
         Top = 227
         Width = 718

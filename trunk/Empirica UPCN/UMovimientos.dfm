@@ -16,6 +16,7 @@ object FMovimientos: TFMovimientos
   Scaled = False
   Visible = True
   WindowState = wsMaximized
+  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96

@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'E:\Empirica\empirica-upcn\Empirica UPCN\Bases\UPCN.FDB'
+    Database = 'D:\PROYECTOS\EMPIRIKA\Empirica UPCN\Bases\UPCN-VACIA.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
