@@ -429,6 +429,7 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ConciliarMovimiento1Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -1577,6 +1578,14 @@ end;
 procedure TFMovimientos.ConciliarMovimiento1Click(Sender: TObject);
 begin
   ConciliarCheque;
+end;
+
+procedure TFMovimientos.FormActivate(Sender: TObject);
+begin
+  dm.EKModelo.abrir(ZQ_Proveedores);
+  dm.EKModelo.abrir(ZQ_Conceptos);
+  dm.EKModelo.abrir(ZQ_Cuentas);
+  dm.EKModelo.abrir(ZQ_Autoriza);
 end;
 
 end.

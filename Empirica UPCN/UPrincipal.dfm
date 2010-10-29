@@ -20,8 +20,8 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 569
-    Width = 863
+    Top = 563
+    Width = 855
     Height = 19
     Panels = <
       item
@@ -37,7 +37,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 863
+    Width = 855
     Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionToolBar1'
@@ -51,8 +51,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 863
-    Height = 540
+    Width = 855
+    Height = 534
     Align = alClient
     TabOrder = 2
   end
@@ -142,6 +142,7 @@ object FPrincipal: TFPrincipal
       OnExecute = AAuditoriaExecute
     end
     object ARepMovProveedor: TAction
+      Tag = 1
       Caption = 'Reporte Movimiento Proveedor'
       ImageIndex = 48
       OnExecute = ARepMovProveedorExecute
@@ -198,6 +199,7 @@ object FPrincipal: TFPrincipal
         Action = ARepList_Erogacion
       end
       object MovimientoProveedor1: TMenuItem
+        Tag = 1
         Action = ARepMovProveedor
       end
     end
