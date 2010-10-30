@@ -86,6 +86,7 @@ type
     ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField;
     QRDBText4: TQRDBText;
     QRLabel10: TQRLabel;
+    ZQ_MovimientoProveedorescalc_importe: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -135,6 +136,7 @@ begin
     ZQ_Cuentas.Open;
 
     ZQ_MovimientoProveedoresie_Cuenta.AsString :=ZQ_CuentasNOMBRE_CUENTA.AsString+' '+ZQ_CuentasNRO_CUENTA_BANCARIA.AsString;
+    //ZQ_MovimientoProveedorescalc_importe.AsFloat := ZQ_MovimientoProveedoresIMPORTE.AsFloat*-1;
   end
   else
   begin
@@ -143,6 +145,7 @@ begin
     ZQ_Cuentas.Open;
 
     ZQ_MovimientoProveedoresie_Cuenta.AsString :=ZQ_CuentasNOMBRE_CUENTA.AsString+' '+ZQ_CuentasNRO_CUENTA_BANCARIA.AsString;
+    //ZQ_MovimientoProveedorescalc_importe.AsFloat := ZQ_MovimientoProveedoresIMPORTE.AsFloat;
   end;
 
 end;
