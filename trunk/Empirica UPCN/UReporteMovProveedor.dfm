@@ -1305,6 +1305,12 @@ object FReporteMovProveedor: TFReporteMovProveedor
     object ZQ_MovimientoProveedoresID_CUENTA_EGRESO: TIntegerField
       FieldName = 'ID_CUENTA_EGRESO'
     end
+    object ZQ_MovimientoProveedorescalc_importe: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'calc_importe'
+      currency = True
+      Calculated = True
+    end
   end
   object DS_MovimientoProveedores: TDataSource
     DataSet = ZQ_MovimientoProveedores
@@ -1577,6 +1583,28 @@ object FReporteMovProveedor: TFReporteMovProveedor
         Titulo = 'Fecha Emision Hasta'
         Campo = 'fecha'
         Tabla = 'm'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndice = 4
+        TipoCampoIndiceVer = '<='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha PD Desde'
+        Campo = 'fecha_mdc'
+        Tabla = 'cm'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndice = 2
+        TipoCampoIndiceVer = '>='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha PD Hasta'
+        Campo = 'Fecha_mdc'
+        Tabla = 'cm'
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
         TipoCampoIndice = 4
