@@ -773,7 +773,7 @@ object FConciliacion: TFConciliacion
         Frame.DrawTop = False
         Frame.DrawBottom = True
         Frame.DrawLeft = True
-        Frame.DrawRight = False
+        Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
         Font.Charset = ANSI_CHARSET
@@ -823,7 +823,7 @@ object FConciliacion: TFConciliacion
         object QRDBText3: TQRDBText
           Left = 125
           Top = 0
-          Width = 132
+          Width = 123
           Height = 17
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -834,7 +834,7 @@ object FConciliacion: TFConciliacion
             37.482638888888890000
             275.607638888888900000
             0.000000000000000000
-            291.041666666666700000)
+            271.197916666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -853,9 +853,9 @@ object FConciliacion: TFConciliacion
           FontSize = 8
         end
         object QRDBText4: TQRDBText
-          Left = 259
+          Left = 250
           Top = 0
-          Width = 312
+          Width = 322
           Height = 17
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -864,9 +864,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            571.059027777777800000
+            551.215277777777800000
             0.000000000000000000
-            687.916666666666700000)
+            709.965277777777800000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -902,7 +902,7 @@ object FConciliacion: TFConciliacion
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
-          AutoStretch = True
+          AutoStretch = False
           Color = clWhite
           DataSet = ZSP_Conciliacion
           DataField = 'HABER'
@@ -968,9 +968,9 @@ object FConciliacion: TFConciliacion
           FontSize = 9
         end
         object QRLabel6: TQRLabel
-          Left = 122
+          Left = 124
           Top = 0
-          Width = 135
+          Width = 123
           Height = 17
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -979,9 +979,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            268.993055555555600000
+            273.402777777777800000
             0.000000000000000000
-            297.656250000000000000)
+            271.197916666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -999,7 +999,7 @@ object FConciliacion: TFConciliacion
           FontSize = 9
         end
         object QRLabel7: TQRLabel
-          Left = 263
+          Left = 250
           Top = 0
           Width = 84
           Height = 17
@@ -1010,7 +1010,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            579.878472222222200000
+            551.215277777777800000
             0.000000000000000000
             185.208333333333300000)
           Alignment = taLeftJustify
@@ -1030,18 +1030,18 @@ object FConciliacion: TFConciliacion
           FontSize = 9
         end
         object QRLabel8: TQRLabel
-          Left = 576
+          Left = 574
           Top = 0
           Width = 129
           Height = 17
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
-          Frame.DrawLeft = True
+          Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            1270.000000000000000000
+            1265.590277777778000000
             0.000000000000000000
             284.427083333333300000)
           Alignment = taCenter
