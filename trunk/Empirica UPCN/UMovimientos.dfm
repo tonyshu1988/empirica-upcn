@@ -1,8 +1,8 @@
 object FMovimientos: TFMovimientos
-  Left = 87
-  Top = 25
-  Width = 1261
-  Height = 758
+  Left = 191
+  Top = 96
+  Width = 1059
+  Height = 643
   Caption = 'Movimientos'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -24,14 +24,14 @@ object FMovimientos: TFMovimientos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1141
-    Height = 672
+    Width = 939
+    Height = 553
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
-      1141
-      672)
+      939
+      553)
     object QR_OrdenPago: TQuickRep
       Tag = 99
       Left = 65
@@ -3172,8 +3172,8 @@ object FMovimientos: TFMovimientos
     end
     object PanelImpresion: TPanel
       Tag = 99
-      Left = 365
-      Top = 234
+      Left = 256
+      Top = 170
       Width = 505
       Height = 281
       Anchors = []
@@ -3344,7 +3344,7 @@ object FMovimientos: TFMovimientos
     object PParametrosLibroBanco: TPanel
       Left = 0
       Top = 0
-      Width = 1141
+      Width = 939
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -3434,7 +3434,7 @@ object FMovimientos: TFMovimientos
           'Fecha PD')
       end
       object Panel1: TPanel
-        Left = 1055
+        Left = 853
         Top = 0
         Width = 86
         Height = 26
@@ -3465,8 +3465,8 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 618
-      Width = 1141
+      Top = 499
+      Width = 939
       Height = 54
       Align = alBottom
       BevelInner = bvLowered
@@ -3627,22 +3627,22 @@ object FMovimientos: TFMovimientos
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 542
-      Width = 1141
+      Top = 423
+      Width = 939
       Height = 76
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 5
       Visible = False
       object Label16: TLabel
-        Left = 198
+        Left = 192
         Top = 33
         Width = 33
         Height = 13
         Caption = 'Medio'
       end
       object Label18: TLabel
-        Left = 13
+        Left = 5
         Top = 33
         Width = 81
         Height = 13
@@ -3677,7 +3677,7 @@ object FMovimientos: TFMovimientos
         Caption = 'Concepto'
       end
       object Label4: TLabel
-        Left = 111
+        Left = 100
         Top = 33
         Width = 53
         Height = 13
@@ -3741,7 +3741,7 @@ object FMovimientos: TFMovimientos
         OnKeyUp = DBLookupCBoxIngreso_ConceptoKeyUp
       end
       object EKDBDateIngreso_FechaEmision: TEKDBDateTimePicker
-        Left = 13
+        Left = 5
         Top = 49
         Width = 89
         Height = 21
@@ -3752,7 +3752,7 @@ object FMovimientos: TFMovimientos
         DataSource = DS_Movimientos
       end
       object EKDBDateIngreso_FechaPD: TEKDBDateTimePicker
-        Left = 107
+        Left = 96
         Top = 49
         Width = 89
         Height = 21
@@ -3763,7 +3763,7 @@ object FMovimientos: TFMovimientos
         DataSource = DS_Cuenta_Movimiento
       end
       object DBLookupCBoxIngreso_Codigo: TDBLookupComboBox
-        Left = 195
+        Left = 189
         Top = 49
         Width = 67
         Height = 21
@@ -3777,7 +3777,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 1141
+        Width = 939
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -3797,8 +3797,8 @@ object FMovimientos: TFMovimientos
     object DBGridLibroBanco: TDBGrid
       Left = 0
       Top = 26
-      Width = 1141
-      Height = 440
+      Width = 939
+      Height = 321
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -3949,22 +3949,22 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 466
-      Width = 1141
+      Top = 347
+      Width = 939
       Height = 76
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 7
       Visible = False
       object Label2: TLabel
-        Left = 198
+        Left = 190
         Top = 33
         Width = 33
         Height = 13
         Caption = 'Medio'
       end
       object Label5: TLabel
-        Left = 13
+        Left = 5
         Top = 33
         Width = 81
         Height = 13
@@ -3999,7 +3999,7 @@ object FMovimientos: TFMovimientos
         Caption = 'Concepto'
       end
       object Label22: TLabel
-        Left = 111
+        Left = 99
         Top = 33
         Width = 53
         Height = 13
@@ -4063,7 +4063,7 @@ object FMovimientos: TFMovimientos
         OnKeyUp = DBLookupCBoxEgreso_ConceptoKeyUp
       end
       object EKDBDateEgreso_FechaEmision: TEKDBDateTimePicker
-        Left = 13
+        Left = 5
         Top = 49
         Width = 89
         Height = 21
@@ -4074,7 +4074,7 @@ object FMovimientos: TFMovimientos
         DataSource = DS_Movimientos
       end
       object EKDBDateEgreso_FechaPD: TEKDBDateTimePicker
-        Left = 107
+        Left = 95
         Top = 49
         Width = 89
         Height = 21
@@ -4085,7 +4085,7 @@ object FMovimientos: TFMovimientos
         DataSource = DS_Cuenta_Movimiento
       end
       object DBLookupCBoxEgreso_Codigo: TDBLookupComboBox
-        Left = 195
+        Left = 187
         Top = 49
         Width = 67
         Height = 21
@@ -4099,7 +4099,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 1141
+        Width = 939
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -4574,7 +4574,9 @@ object FMovimientos: TFMovimientos
         'BtExportarExel'
         'btnImprimirOrden'
         'btnAltaOrdenPago'
-        'btVerificarnroCheque')
+        'btVerificarnroCheque'
+        'btnConciliar'
+        'btnEliminarMov')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
