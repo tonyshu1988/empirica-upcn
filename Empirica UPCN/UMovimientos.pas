@@ -574,7 +574,7 @@ begin
     ZQ_Cuenta_Movimiento.Append;
 
     //Cargo los valores por defecto...
-    ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:= 3; //PONGO Q ES UN EGRESO
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
 //    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;

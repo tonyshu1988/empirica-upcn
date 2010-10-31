@@ -172,6 +172,7 @@ begin
     pDatos.Enabled := true;
     GrupoVisualizando.Enabled := false;
     GrupoEditando.Enabled := true;
+    DBLookupCBoxCuenta.Enabled:=true;
 
     ZQ_Movimiento.Append;
     ZQ_Cuenta_Mov.Append;
@@ -180,8 +181,7 @@ begin
     ZP_ObtenerNroMov.Open;
 
     ZQ_Cuenta_MovNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
-    ZQ_Cuenta_MovFECHA_MDC.AsDateTime:= ZQ_MovimientoFECHA.AsDateTime;
-
+    
     ZQ_MovimientoNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
     ZQ_MovimientoID_CONCEPTO.Clear;
     ZQ_MovimientoID_OBJETO_MOVIMIENTO.AsInteger:= 4;
@@ -262,9 +262,8 @@ procedure TFSaldoInicial.btnGuardarClick(Sender: TObject);
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-
-
-
+  ZQ_Cuenta_MovFECHA_MDC.AsDateTime:= ZQ_MovimientoFECHA.AsDateTime;
+  
   if not validarDatos() then
     exit;
 

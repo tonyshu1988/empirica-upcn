@@ -617,7 +617,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_MovimientoProveedores
-          DataField = 'NOMBRE_MEDIO_COBRO_PAGO'
+          DataField = 'DESCRIPCION'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -8
@@ -841,7 +841,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         object QRLabel6: TQRLabel
           Left = 247
           Top = 1
-          Width = 34
+          Width = 58
           Height = 16
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -852,12 +852,12 @@ object FReporteMovProveedor: TFReporteMovProveedor
             42.333333333333340000
             653.520833333333400000
             2.645833333333333000
-            89.958333333333340000)
+            153.458333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
-          Caption = 'Medio'
+          Caption = 'Tipo mov.'
           Color = clWhite
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -1237,9 +1237,10 @@ object FReporteMovProveedor: TFReporteMovProveedor
     SQL.Strings = (
       
         'select m.fecha, m.nro_proveedor, m.nro_orden, cm.fecha_mdc, cm.n' +
-        'ro_cheque_transf, mc.codigo_corto, mc.nombre_medio_cobro_pago,cm' +
-        '.importe, p.apellido_y_nombre, c.nombre_concepto, ob.descripcion' +
-        ', cm.id_cuenta_ingreso, cm.id_cuenta_egreso'
+        'ro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre_medio_' +
+        'cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto, c.nom' +
+        'bre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id_cuenta' +
+        '_egreso'
       'from ie_movimientos m'
       
         'left join ie_cuentas_movimientos cm on(m.nro_movimiento = cm.nro' +
@@ -1622,17 +1623,37 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       item
         Titulo = 'Medio'
-        Campo = 'nombre_medio_cobro_pago'
+        Campo = 'id_medio'
         Tabla = 'mc'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Medio
+        TipoCombollenarCampo = 'nombre_medio_cobro_pago'
+        TipoCombollenarCampoReal = 'id_medio'
         TipoComboEditable = False
         ItemIndex = -1
       end
       item
         Titulo = 'Concepto'
-        Campo = 'nombre_concepto'
+        Campo = 'id_concepto'
         Tabla = 'c'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Concepto
+        TipoCombollenarCampo = 'nombre_concepto'
+        TipoCombollenarCampoReal = 'id_concepto'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Movimiento'
+        Campo = 'ID_objeto_movimiento'
+        Tabla = 'ob'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Objeto_Movimiento
+        TipoCombollenarCampo = 'descripcion'
+        TipoCombollenarCampoReal = 'ID_objeto_movimiento'
         TipoComboEditable = False
         ItemIndex = -1
       end>
@@ -1642,9 +1663,10 @@ object FReporteMovProveedor: TFReporteMovProveedor
     SQL.Strings = (
       
         'select m.fecha, m.nro_proveedor, m.nro_orden, cm.fecha_mdc, cm.n' +
-        'ro_cheque_transf, mc.codigo_corto, mc.nombre_medio_cobro_pago,cm' +
-        '.importe, p.apellido_y_nombre, c.nombre_concepto, ob.descripcion' +
-        ', cm.id_cuenta_ingreso, cm.id_cuenta_egreso'
+        'ro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre_medio_' +
+        'cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto, c.nom' +
+        'bre_concepto, ob.descripcion,  ob.id_objeto_movimiento, cm.id_cu' +
+        'enta_ingreso, cm.id_cuenta_egreso'
       'from ie_movimientos m'
       
         'left join ie_cuentas_movimientos cm on(m.nro_movimiento = cm.nro' +
@@ -1659,9 +1681,10 @@ object FReporteMovProveedor: TFReporteMovProveedor
     SQL_Select.Strings = (
       
         'select m.fecha, m.nro_proveedor, m.nro_orden, cm.fecha_mdc, cm.n' +
-        'ro_cheque_transf, mc.codigo_corto, mc.nombre_medio_cobro_pago,cm' +
-        '.importe, p.apellido_y_nombre, c.nombre_concepto, ob.descripcion' +
-        ', cm.id_cuenta_ingreso, cm.id_cuenta_egreso')
+        'ro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre_medio_' +
+        'cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto, c.nom' +
+        'bre_concepto, ob.descripcion,  ob.id_objeto_movimiento, cm.id_cu' +
+        'enta_ingreso, cm.id_cuenta_egreso')
     SQL_From.Strings = (
       'from ie_movimientos m'
       
@@ -1725,6 +1748,76 @@ object FReporteMovProveedor: TFReporteMovProveedor
     end
     object ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField
       FieldName = 'MEDIO_POR_DEFECTO'
+    end
+  end
+  object ZQ_Objeto_Movimiento: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from objeto_movimientos')
+    Params = <>
+    Left = 560
+    Top = 64
+    object ZQ_Objeto_MovimientoID_OBJETO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_OBJETO_MOVIMIENTO'
+      Required = True
+    end
+    object ZQ_Objeto_MovimientoDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
+    end
+    object ZQ_Objeto_MovimientoCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
+      Size = 6
+    end
+  end
+  object ZQ_Medio: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from ie_medios_cobro_pago')
+    Params = <>
+    Left = 672
+    Top = 64
+    object ZQ_MedioID_MEDIO: TIntegerField
+      FieldName = 'ID_MEDIO'
+      Required = True
+    end
+    object ZQ_MedioCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
+      Size = 4
+    end
+    object ZQ_MedioNOMBRE_MEDIO_COBRO_PAGO: TStringField
+      FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
+      Size = 30
+    end
+  end
+  object ZQ_Concepto: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from ie_conceptos')
+    Params = <>
+    Left = 752
+    Top = 64
+    object ZQ_ConceptoID_CONCEPTO: TIntegerField
+      FieldName = 'ID_CONCEPTO'
+      Required = True
+    end
+    object ZQ_ConceptoCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+      Size = 6
+    end
+    object ZQ_ConceptoNOMBRE_CONCEPTO: TStringField
+      FieldName = 'NOMBRE_CONCEPTO'
+      Size = 240
+    end
+    object ZQ_ConceptoBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_ConceptoIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
     end
   end
 end
