@@ -327,8 +327,8 @@ begin
 
     //Cargo los valores por defecto...
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1; //PONGO QUE ES UNA ORDEN DE PAGO
-    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
-    ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
+//    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
+//    ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
   end;
 end;
@@ -495,7 +495,7 @@ begin
 
   if not(ZQ_ExisteNroOrden.IsEmpty) then
   begin
-    Application.MessageBox('el Nro. de Orden ya há sido utilizado.'+char(13)+'(ingrese un nuevo Número de Orden)','Validación',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El Nro. de Orden ya há sido utilizado.'+char(13)+'(ingrese un nuevo Número de Orden)','Validación',MB_OK+MB_ICONINFORMATION);
     dbNroOrden.SetFocus;
     result := false;
     exit;

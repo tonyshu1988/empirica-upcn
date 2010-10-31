@@ -1,7 +1,7 @@
 object FMovimientos: TFMovimientos
-  Left = 198
+  Left = 87
   Top = 25
-  Width = 1150
+  Width = 1261
   Height = 758
   Caption = 'Movimientos'
   Color = clBtnFace
@@ -24,13 +24,13 @@ object FMovimientos: TFMovimientos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1030
+    Width = 1141
     Height = 672
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
-      1030
+      1141
       672)
     object QR_OrdenPago: TQuickRep
       Tag = 99
@@ -3172,7 +3172,7 @@ object FMovimientos: TFMovimientos
     end
     object PanelImpresion: TPanel
       Tag = 99
-      Left = 305
+      Left = 365
       Top = 234
       Width = 505
       Height = 281
@@ -3344,7 +3344,7 @@ object FMovimientos: TFMovimientos
     object PParametrosLibroBanco: TPanel
       Left = 0
       Top = 0
-      Width = 1030
+      Width = 1141
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -3434,7 +3434,7 @@ object FMovimientos: TFMovimientos
           'Fecha PD')
       end
       object Panel1: TPanel
-        Left = 944
+        Left = 1055
         Top = 0
         Width = 86
         Height = 26
@@ -3466,7 +3466,7 @@ object FMovimientos: TFMovimientos
       Tag = 99
       Left = 0
       Top = 618
-      Width = 1030
+      Width = 1141
       Height = 54
       Align = alBottom
       BevelInner = bvLowered
@@ -3628,7 +3628,7 @@ object FMovimientos: TFMovimientos
     object PIngresos: TPanel
       Left = 0
       Top = 542
-      Width = 1030
+      Width = 1141
       Height = 76
       Align = alBottom
       BevelOuter = bvNone
@@ -3777,7 +3777,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 1030
+        Width = 1141
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -3797,7 +3797,7 @@ object FMovimientos: TFMovimientos
     object DBGridLibroBanco: TDBGrid
       Left = 0
       Top = 26
-      Width = 1030
+      Width = 1141
       Height = 440
       Align = alClient
       Color = 16772842
@@ -3950,7 +3950,7 @@ object FMovimientos: TFMovimientos
     object PEgresos: TPanel
       Left = 0
       Top = 466
-      Width = 1030
+      Width = 1141
       Height = 76
       Align = alBottom
       BevelOuter = bvNone
@@ -4099,7 +4099,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 1030
+        Width = 1141
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
