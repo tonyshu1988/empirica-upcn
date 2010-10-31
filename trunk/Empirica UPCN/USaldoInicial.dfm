@@ -24,23 +24,23 @@ object FSaldoInicial: TFSaldoInicial
   object pContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 445
+    Width = 862
+    Height = 447
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
     TabOrder = 0
     object pDatos: TPanel
       Left = 2
-      Top = 284
-      Width = 850
+      Top = 286
+      Width = 858
       Height = 159
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
       Visible = False
       DesignSize = (
-        850
+        858
         159)
       object Label3: TLabel
         Left = 70
@@ -204,8 +204,8 @@ object FSaldoInicial: TFSaldoInicial
     object DBGridSaldosIniciales: TDBGrid
       Left = 2
       Top = 2
-      Width = 850
-      Height = 282
+      Width = 858
+      Height = 284
       Align = alClient
       Color = 16772842
       DataSource = DS_VerSaldos
@@ -244,15 +244,6 @@ object FSaldoInicial: TFSaldoInicial
           Visible = True
         end
         item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'FECHA_MDC'
-          Title.Alignment = taCenter
-          Title.Caption = 'Fecha Medio'
-          Width = 96
-          Visible = True
-        end
-        item
           Expanded = False
           FieldName = 'NRO_CHEQUE_TRANSF'
           Title.Alignment = taCenter
@@ -281,7 +272,7 @@ object FSaldoInicial: TFSaldoInicial
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

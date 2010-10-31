@@ -260,6 +260,8 @@ end;
 procedure TFListadoErogaciones.FormActivate(Sender: TObject);
 begin
   ZQ_Libro_erogaciones.Refresh;
+  EKDbSuma.RecalcAll;
+  EKDbSumaSumListChanged(nil);
 end;
 
 
