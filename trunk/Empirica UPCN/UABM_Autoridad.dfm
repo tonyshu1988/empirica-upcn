@@ -24,14 +24,14 @@ object FABM_Autoridad: TFABM_Autoridad
     Left = 0
     Top = 0
     Width = 875
-    Height = 410
+    Height = 414
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
     TabOrder = 0
     object pDatos: TPanel
       Left = 2
-      Top = 367
+      Top = 371
       Width = 871
       Height = 41
       Align = alBottom
@@ -56,22 +56,34 @@ object FABM_Autoridad: TFABM_Autoridad
       end
       object dbEditNombre: TDBEdit
         Left = 59
-        Top = 12
+        Top = 14
         Width = 355
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NOMBE'
         DataSource = DS_Autoridad
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 0
       end
       object dbEditPrioridad: TDBEdit
         Left = 493
-        Top = 12
+        Top = 14
         Width = 100
         Height = 21
         CharCase = ecUpperCase
         DataField = 'PRIORIDAD'
         DataSource = DS_Autoridad
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 1
       end
     end
@@ -79,7 +91,7 @@ object FABM_Autoridad: TFABM_Autoridad
       Left = 2
       Top = 2
       Width = 871
-      Height = 365
+      Height = 369
       Align = alClient
       Color = 16772842
       DataSource = DS_Autoridad

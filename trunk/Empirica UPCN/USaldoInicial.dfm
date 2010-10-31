@@ -25,14 +25,14 @@ object FSaldoInicial: TFSaldoInicial
     Left = 0
     Top = 0
     Width = 854
-    Height = 441
+    Height = 445
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
     TabOrder = 0
     object pDatos: TPanel
       Left = 2
-      Top = 280
+      Top = 284
       Width = 850
       Height = 159
       Align = alBottom
@@ -152,11 +152,17 @@ object FSaldoInicial: TFSaldoInicial
       end
       object EKDTPFecha: TEKDBDateTimePicker
         Left = 109
-        Top = 8
+        Top = 6
         Width = 153
         Height = 21
         Date = 40429.725941030090000000
         Time = 40429.725941030090000000
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 0
         DataField = 'FECHA'
         DataSource = DS_Movimiento
@@ -199,7 +205,7 @@ object FSaldoInicial: TFSaldoInicial
       Left = 2
       Top = 2
       Width = 850
-      Height = 278
+      Height = 282
       Align = alClient
       Color = 16772842
       DataSource = DS_VerSaldos

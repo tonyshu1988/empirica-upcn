@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 247
-  Top = 163
+  Left = 198
+  Top = 25
   Width = 1150
   Height = 758
   Caption = 'Movimientos'
@@ -25,13 +25,13 @@ object FMovimientos: TFMovimientos
     Left = 0
     Top = 0
     Width = 1030
-    Height = 668
+    Height = 672
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
       1030
-      668)
+      672)
     object QR_OrdenPago: TQuickRep
       Tag = 99
       Left = 65
@@ -3465,7 +3465,7 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 614
+      Top = 618
       Width = 1030
       Height = 54
       Align = alBottom
@@ -3474,10 +3474,10 @@ object FMovimientos: TFMovimientos
       TabOrder = 2
       Visible = False
       object BtAplicarFiltrosColumnas: TButton
-        Left = 620
-        Top = 7
-        Width = 107
-        Height = 20
+        Left = 716
+        Top = 14
+        Width = 85
+        Height = 26
         Caption = 'Aplicar'
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -3611,25 +3611,23 @@ object FMovimientos: TFMovimientos
       end
       object verAnulados: TCheckBox
         Tag = 99
-        Left = 620
-        Top = 32
+        Left = 596
+        Top = 19
         Width = 117
         Height = 17
         Caption = 'Ver Anulados'
-        Checked = True
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        State = cbChecked
         TabOrder = 12
       end
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 538
+      Top = 542
       Width = 1030
       Height = 76
       Align = alBottom
@@ -3800,7 +3798,7 @@ object FMovimientos: TFMovimientos
       Left = 0
       Top = 26
       Width = 1030
-      Height = 436
+      Height = 440
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -3842,7 +3840,6 @@ object FMovimientos: TFMovimientos
           Visible = True
         end
         item
-          Alignment = taCenter
           Expanded = False
           FieldName = 'NRO_ORDEN_STRING'
           Title.Alignment = taCenter
@@ -3952,7 +3949,7 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 462
+      Top = 466
       Width = 1030
       Height = 76
       Align = alBottom
@@ -4230,11 +4227,6 @@ object FMovimientos: TFMovimientos
           end
           item
             BeginGroup = True
-            Item = BtVerDetalle
-            Visible = True
-          end
-          item
-            BeginGroup = True
             Item = BtEditarMovimiento
             Visible = True
           end
@@ -4258,6 +4250,15 @@ object FMovimientos: TFMovimientos
           end
           item
             Item = BtAnularMov
+            Visible = True
+          end
+          item
+            Item = btnEliminarMov
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnConciliar
             Visible = True
           end
           item
@@ -4322,6 +4323,10 @@ object FMovimientos: TFMovimientos
           item
             Item = btnFiltrar
             Visible = True
+          end
+          item
+            Item = BtVerDetalle
+            Visible = True
           end>
         MultiLine = True
         Name = 'barraVertical'
@@ -4359,7 +4364,7 @@ object FMovimientos: TFMovimientos
       0
       52)
     object BtIngresos: TdxBarLargeButton
-      Caption = 'Crear Ingresos'
+      Caption = 'Crear Ingreso'
       Category = 0
       Hint = 'Inserta un nuevo movimiento de ingreso'
       Visible = ivAlways
@@ -4368,7 +4373,7 @@ object FMovimientos: TFMovimientos
       AutoGrayScale = False
     end
     object BtEgresos: TdxBarLargeButton
-      Caption = 'Crear Egresos'
+      Caption = 'Crear Egreso'
       Category = 0
       Hint = 'Inserta un nuevo movimiento de egreso'
       Visible = ivAlways
@@ -4460,7 +4465,7 @@ object FMovimientos: TFMovimientos
       AutoGrayScale = False
     end
     object BtAnularMov: TdxBarLargeButton
-      Caption = 'Anular Movimiento'
+      Caption = 'Anular Mov.'
       Category = 0
       Hint = 'Anular el movimiento seleccionado'
       Visible = ivAlways
@@ -4534,6 +4539,25 @@ object FMovimientos: TFMovimientos
         8888888888848888888888888888888888888888888888888888}
       Width = 160
       DropDownCount = 12
+    end
+    object btnConciliar: TdxBarLargeButton
+      Caption = 'Conciliar/Desconciliar'
+      Category = 0
+      Hint = 'Conciliar/Desconciliar'
+      Visible = ivAlways
+      ImageIndex = 67
+      ShortCut = 16465
+      OnClick = AConciliarExecute
+      AutoGrayScale = False
+    end
+    object btnEliminarMov: TdxBarLargeButton
+      Caption = 'Eliminar Mov.'
+      Category = 0
+      Hint = 'Eliminar Mov.'
+      Visible = ivAlways
+      ImageIndex = 4
+      OnClick = btnEliminarMovClick
+      AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
       Items = (
@@ -4816,9 +4840,7 @@ object FMovimientos: TFMovimientos
   object ZQ_Movimientos: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      
-        'select m.*, ('#39#39'||substr(extractyear(m.fecha),3,4)||'#39'-'#39'||lpad(m.n' +
-        'ro_orden,4,'#39'0'#39')) as nro_orden_string'
+      'select m.*'
       'from ie_movimientos m'
       'where m.nro_movimiento = :NroMov')
     Params = <
@@ -4894,14 +4916,12 @@ object FMovimientos: TFMovimientos
       FieldName = 'NRO_RECIBO'
       Size = 50
     end
-    object ZQ_MovimientosNRO_ORDEN_STRING: TStringField
-      FieldName = 'NRO_ORDEN_STRING'
-      ReadOnly = True
-      Size = 336
-    end
     object ZQ_MovimientosDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       Size = 200
+    end
+    object ZQ_MovimientosNRO_ORDEN_STRING: TStringField
+      FieldName = 'NRO_ORDEN_STRING'
     end
   end
   object DS_Proveedores: TDataSource
@@ -5074,7 +5094,6 @@ object FMovimientos: TFMovimientos
     end
     object LIBRO_BANCONRO_ORDEN: TIntegerField
       FieldName = 'NRO_ORDEN'
-      DisplayFormat = '00000000'
     end
     object LIBRO_BANCOFECHA_CONCILIADO: TDateField
       FieldName = 'FECHA_CONCILIADO'
@@ -5612,13 +5631,36 @@ object FMovimientos: TFMovimientos
     Images = FPrincipal.Iconos_Menu_16
     Left = 808
     Top = 296
+    object Editar1: TMenuItem
+      Caption = 'Editar'
+      ImageIndex = 31
+      OnClick = Editar1Click
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object AnularOrden1: TMenuItem
+      Caption = 'Anular Orden'
+      ImageIndex = 0
+      OnClick = AnularOrden1Click
+    end
+    object AnularMovimiento1: TMenuItem
+      Caption = 'Anular Movimiento'
+      ImageIndex = 12
+      OnClick = AnularMovimiento1Click
+    end
+    object EliminarMovimiento1: TMenuItem
+      Caption = 'Eliminar Movimiento'
+      ImageIndex = 5
+      OnClick = EliminarMovimiento1Click
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
     object ConciliarMovimiento1: TMenuItem
       Caption = 'Conciliar/Desconciliar'
       ImageIndex = 33
       OnClick = ConciliarMovimiento1Click
-    end
-    object ImprimirOrdendePago1: TMenuItem
-      Caption = 'Imprimir Orden de Pago'
     end
   end
 end

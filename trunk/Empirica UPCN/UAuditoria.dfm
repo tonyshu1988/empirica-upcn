@@ -21,8 +21,8 @@ object FAuditoria: TFAuditoria
     Left = 0
     Top = 0
     Width = 904
-    Height = 550
-    ActivePage = TabSheet12
+    Height = 554
+    ActivePage = TabSheet9
     Align = alClient
     MultiLine = True
     TabOrder = 0
@@ -33,21 +33,21 @@ object FAuditoria: TFAuditoria
         Left = 0
         Top = 0
         Width = 896
-        Height = 522
+        Height = 526
         Align = alClient
         TabOrder = 0
         object Panel16: TPanel
           Left = 1
           Top = 1
           Width = 894
-          Height = 296
+          Height = 300
           Align = alClient
           TabOrder = 0
           object GroupBox1: TGroupBox
             Left = 1
             Top = 1
             Width = 892
-            Height = 294
+            Height = 298
             Align = alClient
             Caption = ' Auditoria Libro Banco  '
             TabOrder = 0
@@ -55,7 +55,7 @@ object FAuditoria: TFAuditoria
               Left = 2
               Top = 15
               Width = 888
-              Height = 277
+              Height = 281
               Align = alClient
               Color = 16112578
               DataSource = DS_Movimientos
@@ -203,7 +203,7 @@ object FAuditoria: TFAuditoria
         end
         object Panel17: TPanel
           Left = 1
-          Top = 297
+          Top = 301
           Width = 894
           Height = 224
           Align = alBottom
@@ -365,7 +365,7 @@ object FAuditoria: TFAuditoria
         Left = 0
         Top = 0
         Width = 896
-        Height = 522
+        Height = 526
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -513,7 +513,7 @@ object FAuditoria: TFAuditoria
           Left = 0
           Top = 333
           Width = 896
-          Height = 189
+          Height = 193
           Align = alClient
           BevelOuter = bvNone
           Caption = 'panelAbajo'
@@ -568,7 +568,7 @@ object FAuditoria: TFAuditoria
             Left = 0
             Top = 29
             Width = 896
-            Height = 160
+            Height = 164
             BackWall.Brush.Color = clWhite
             BackWall.Brush.Style = bsClear
             Gradient.EndColor = clGray
@@ -1076,15 +1076,16 @@ object FAuditoria: TFAuditoria
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
         TipoComboValores.Strings = (
-          'INSERT'
-          'UPDATE'
-          'DELETE'
-          'ANULACION')
+          'ALTA'
+          'EDICION'
+          'BAJA'
+          'ANULACION'
+          '')
         TipoComboEditable = False
         TipoComboValoresReales.Strings = (
-          'INSERT'
-          'UPDATE'
-          'DELETE'
+          'ALTA'
+          'EDICION'
+          'BAJA'
           'ANULACION')
         ItemIndex = -1
       end

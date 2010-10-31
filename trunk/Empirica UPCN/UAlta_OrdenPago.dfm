@@ -245,14 +245,13 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Caption = 'Nro Factura:'
       end
       object lblNroOrden: TLabel
-        Left = 291
+        Left = 265
         Top = 9
-        Width = 464
+        Width = 326
         Height = 32
-        Alignment = taRightJustify
         Anchors = [akTop, akRight]
         AutoSize = False
-        Caption = 'ORDEN DE PAGO Nro: 10-0001'
+        Caption = 'ORDEN DE PAGO Nro: '
         Font.Charset = ANSI_CHARSET
         Font.Color = clNavy
         Font.Height = -27
@@ -420,6 +419,24 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         OnChange = dbFechaEmisionChange
         DataField = 'FECHA'
         DataSource = DS_Movimientos
+      end
+      object dbNroOrden: TDBEdit
+        Left = 595
+        Top = 8
+        Width = 166
+        Height = 38
+        BevelKind = bkFlat
+        BorderStyle = bsNone
+        Color = 16382457
+        DataField = 'NRO_ORDEN_STRING'
+        DataSource = DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -27
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 9
       end
     end
   end
@@ -661,17 +678,14 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
     object AVerDetalle: TAction
       Caption = 'AVerDetalle'
-      ShortCut = 16470
       OnExecute = AVerDetalleExecute
     end
     object AGuardar: TAction
       Caption = 'AGuardar'
-      ShortCut = 16455
       OnExecute = AGuardarExecute
     end
     object ACancelar: TAction
       Caption = 'ACancelar'
-      ShortCut = 16451
       OnExecute = ACancelarExecute
     end
   end
@@ -689,9 +703,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object ZQ_Movimientos: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      
-        'select m.*, ('#39#39'||substr(extractyear(m.fecha),3,4)||'#39'-'#39'||lpad(m.n' +
-        'ro_orden,4,'#39'0'#39')) as nro_orden_string'
+      'select m.*'
       'from ie_movimientos m'
       'where m.nro_movimiento = :NroMov')
     Params = <
@@ -767,14 +779,12 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       FieldName = 'NRO_RECIBO'
       Size = 50
     end
-    object ZQ_MovimientosNRO_ORDEN_STRING: TStringField
-      FieldName = 'NRO_ORDEN_STRING'
-      ReadOnly = True
-      Size = 336
-    end
     object ZQ_MovimientosDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       Size = 200
+    end
+    object ZQ_MovimientosNRO_ORDEN_STRING: TStringField
+      FieldName = 'NRO_ORDEN_STRING'
     end
   end
   object DS_Movimientos: TDataSource
@@ -1132,5 +1142,29 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     SumListChanged = EKDbSuma1SumListChanged
     Left = 640
     Top = 257
+  end
+  object ZQ_ExisteNroOrden: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select m.nro_orden'
+      'from ie_movimientos m'
+      'where m.nro_orden_string=:nroOrd')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'nroOrd'
+        ParamType = ptUnknown
+      end>
+    Left = 679
+    Top = 381
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'nroOrd'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ExisteNroOrdenNRO_ORDEN: TIntegerField
+      FieldName = 'NRO_ORDEN'
+    end
   end
 end
