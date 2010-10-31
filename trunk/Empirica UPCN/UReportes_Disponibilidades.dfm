@@ -1,7 +1,7 @@
 object FReportes_Disponibilidades: TFReportes_Disponibilidades
-  Left = 322
-  Top = 189
-  Width = 1022
+  Left = 72
+  Top = 70
+  Width = 1082
   Height = 576
   Caption = 'Reportes Disponibilidades'
   Color = clBtnFace
@@ -22,15 +22,15 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   object pFondo: TPanel
     Left = 0
     Top = 0
-    Width = 1006
-    Height = 486
+    Width = 1066
+    Height = 490
     Align = alClient
     TabOrder = 4
     object pTapa: TPanel
       Left = 1
       Top = 1
-      Width = 1004
-      Height = 484
+      Width = 1064
+      Height = 488
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
@@ -38,8 +38,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     object pSaldoCta: TPanel
       Left = 1
       Top = 1
-      Width = 1004
-      Height = 484
+      Width = 1064
+      Height = 488
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 3
@@ -48,8 +48,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object DBGridSaldoCtas: TDBGrid
         Left = 3
         Top = 33
-        Width = 998
-        Height = 448
+        Width = 1058
+        Height = 452
         Align = alClient
         Color = 16772842
         TabOrder = 0
@@ -62,18 +62,18 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object Panel2: TPanel
         Left = 3
         Top = 3
-        Width = 998
+        Width = 1058
         Height = 30
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
         DesignSize = (
-          998
+          1058
           30)
         object Shape5: TShape
           Left = 1
           Top = 5
-          Width = 994
+          Width = 1054
           Height = 22
           Anchors = [akLeft, akTop, akRight]
           Brush.Color = clGray
@@ -83,7 +83,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         object Shape4: TShape
           Left = 3
           Top = 3
-          Width = 994
+          Width = 1054
           Height = 22
           Anchors = [akLeft, akTop, akRight]
           Brush.Color = clTeal
@@ -92,7 +92,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         object Label12: TLabel
           Left = 0
           Top = 7
-          Width = 997
+          Width = 1057
           Height = 18
           Alignment = taCenter
           Anchors = [akLeft, akTop, akRight]
@@ -109,7 +109,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         object Label9: TLabel
           Left = 1
           Top = 6
-          Width = 997
+          Width = 1057
           Height = 18
           Alignment = taCenter
           Anchors = [akLeft, akTop, akRight]
@@ -128,17 +128,17 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     object pLibroBanco: TPanel
       Left = 1
       Top = 1
-      Width = 1004
-      Height = 484
+      Width = 1064
+      Height = 488
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 3
       TabOrder = 0
       object DBGridLibroBanco: TDBGrid
         Left = 3
-        Top = 49
-        Width = 998
-        Height = 432
+        Top = 34
+        Width = 1058
+        Height = 451
         Align = alClient
         Color = 16772842
         DataSource = DS_LIBRO_BANCO
@@ -247,18 +247,18 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object Panel1: TPanel
         Left = 3
         Top = 3
-        Width = 998
-        Height = 46
+        Width = 1058
+        Height = 31
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
         DesignSize = (
-          998
-          46)
+          1058
+          31)
         object Shape1: TShape
           Left = 1
           Top = 5
-          Width = 994
+          Width = 964
           Height = 22
           Anchors = [akLeft, akTop, akRight]
           Brush.Color = clGray
@@ -268,7 +268,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         object Shape2: TShape
           Left = 3
           Top = 3
-          Width = 994
+          Width = 964
           Height = 22
           Anchors = [akLeft, akTop, akRight]
           Brush.Color = clTeal
@@ -277,7 +277,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         object Label2: TLabel
           Left = 0
           Top = 7
-          Width = 997
+          Width = 967
           Height = 18
           Alignment = taCenter
           Anchors = [akLeft, akTop, akRight]
@@ -294,7 +294,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         object Label1: TLabel
           Left = 1
           Top = 6
-          Width = 997
+          Width = 967
           Height = 18
           Alignment = taCenter
           Anchors = [akLeft, akTop, akRight]
@@ -308,21 +308,33 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           ParentFont = False
           Transparent = True
         end
-        object StaticTextConciliado: TStaticText
-          Left = 929
-          Top = 30
-          Width = 71
-          Height = 17
-          Caption = 'Conciliado'
-          Color = 10354687
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
+        object Panel3: TPanel
+          Left = 972
+          Top = 0
+          Width = 86
+          Height = 31
+          Align = alRight
           TabOrder = 0
+          object StaticTextConciliado: TStaticText
+            Left = 7
+            Top = 7
+            Width = 71
+            Height = 17
+            Align = alCustom
+            Alignment = taCenter
+            Anchors = [akTop, akRight]
+            BorderStyle = sbsSunken
+            Caption = 'Conciliado'
+            Color = 10354687
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 0
+          end
         end
       end
       object RepLibroB: TQuickRep

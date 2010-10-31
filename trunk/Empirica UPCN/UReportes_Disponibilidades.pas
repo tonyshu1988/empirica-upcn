@@ -88,7 +88,6 @@ type
     QRlblFechaHoyLibroBanco: TQRLabel;
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
-    StaticTextConciliado: TStaticText;
     EKOrdenarGrillaLB: TEKOrdenarGrilla;
     LIBRO_BANCOID_MOVIMIENTO: TIntegerField;
     LIBRO_BANCOORDEN: TIntegerField;
@@ -125,6 +124,8 @@ type
     QRShape8: TQRShape;
     QRLblProveedor: TQRLabel;
     LIBRO_BANCOPROVEEDOR: TStringField;
+    Panel3: TPanel;
+    StaticTextConciliado: TStaticText;
     procedure btnLibroBancoClick(Sender: TObject);
     function  validarDatos():boolean;
     procedure btnSalirClick(Sender: TObject);
