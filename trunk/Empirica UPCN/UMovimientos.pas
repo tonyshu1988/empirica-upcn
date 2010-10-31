@@ -577,8 +577,8 @@ begin
     ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:= 3; //PONGO Q ES UN EGRESO
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
-    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
-    ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
+//    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
+//    ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
 
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -608,8 +608,8 @@ begin
     ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:= 2; //PONGO Q ES UN INGRESO
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
-    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
-    ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
+//    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
+//    ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
 
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -873,7 +873,7 @@ begin
       begin
          if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') then //si no esta conciliado
          begin
-           if (application.MessageBox(pchar('¿Esta seguro que desea Conciliar el cheque seleccionado?'), 'Conciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+           if (application.MessageBox(pchar('¿Está seguro que desea Conciliar el cheque seleccionado?'), 'Conciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
              if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
              begin
                ZQ_Cuenta_Movimiento.edit;
@@ -884,7 +884,7 @@ begin
          end
          else //si esta conciliado
          begin
-           if (application.MessageBox(pchar('¿Esta seguro que desea Desconciliar el cheque seleccionado?'), 'Desconciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+           if (application.MessageBox(pchar('¿Está seguro que desea Desconciliar el cheque seleccionado?'), 'Desconciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
              if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
              begin
                ZQ_Cuenta_Movimiento.edit;
@@ -955,7 +955,7 @@ begin
  if LIBRO_BANCO.IsEmpty then
   exit;
 
- if (application.MessageBox(pchar('¿Esta seguro que desea Anular la Orden de Pago número '+LIBRO_BANCONRO_ORDEN.AsString+'?' + #13 + #13), 'Anular Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+ if (application.MessageBox(pchar('¿Está seguro que desea Anular la Orden de Pago número '+LIBRO_BANCONRO_ORDEN.AsString+'?' + #13 + #13), 'Anular Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
   exit;
 
  ZQ_Movimientos.Close;
@@ -1006,7 +1006,7 @@ begin
  if LIBRO_BANCO.IsEmpty then
   exit;
 
- if (application.MessageBox(pchar('¿Esta seguro que desea Anular el Movimiento seleccionado?' + #13 + #13), 'Anular Movimiento', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+ if (application.MessageBox(pchar('¿Está seguro que desea Anular el Movimiento seleccionado?' + #13 + #13), 'Anular Movimiento', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
   exit;
 
  ZQ_Movimientos.Close;
@@ -1621,7 +1621,7 @@ begin
 if LIBRO_BANCO.IsEmpty then
   exit;
 
- if (application.MessageBox(pchar('¿Esta seguro que desea Eliminar el Movimiento seleccionado?' + #13 + #13), 'Anular Movimiento', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+ if (application.MessageBox(pchar('¿Está seguro que desea Eliminar el Movimiento seleccionado?' + #13 + #13), 'Anular Movimiento', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
   exit;
 
  ZQ_Movimientos.Close;
