@@ -24,7 +24,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     Left = 0
     Top = 0
     Width = 854
-    Height = 410
+    Height = 414
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 0
@@ -32,7 +32,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
       Left = 1
       Top = 20
       Width = 852
-      Height = 351
+      Height = 355
       Align = alClient
       Color = 16772842
       DataSource = DS_MedioCobroPago
@@ -84,7 +84,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     end
     object pDatos: TPanel
       Left = 1
-      Top = 371
+      Top = 375
       Width = 852
       Height = 38
       Align = alBottom

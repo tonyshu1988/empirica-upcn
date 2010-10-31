@@ -218,14 +218,20 @@ procedure TFConceptos.BtGuardarClick(Sender: TObject);
 begin
 if validarcampos() then
  begin
-     if DM.EKModelo.finalizar_transaccion(Transaccion_Conceptos) then
+     try
       begin
-        pDatos.Visible:=false;
-        Grilla.Enabled := true;
-        GrupoEditando.Enabled := true;
-        GrupoGuardarCancelar.Enabled := false;
-        ZQ_IE_Conceptos.Refresh;
-      end;
+       if DM.EKModelo.finalizar_transaccion(Transaccion_Conceptos) then
+        begin
+          pDatos.Visible:=false;
+          Grilla.Enabled := true;
+          GrupoEditando.Enabled := true;
+          GrupoGuardarCancelar.Enabled := false;
+          ZQ_IE_Conceptos.Refresh;
+        end;
+      end
+     except
+        Application.MessageBox('Verifique que el Código ingresado no exista y que los campos estén correctamente cargados.','Validación',MB_OK+MB_ICONINFORMATION);
+     end
  end
 end;
 

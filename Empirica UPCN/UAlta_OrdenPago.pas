@@ -71,7 +71,6 @@ type
     ZQ_MovimientosNRO_ORDEN: TIntegerField;
     ZQ_MovimientosNRO_FACTURA: TStringField;
     ZQ_MovimientosNRO_RECIBO: TStringField;
-    ZQ_MovimientosNRO_ORDEN_STRING: TStringField;
     ZQ_MovimientosDESCRIPCION: TStringField;
     DS_Movimientos: TDataSource;
     EKListado_Conceptos: TEKListadoSQL;
@@ -136,6 +135,10 @@ type
     AVerDetalle: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
+    dbNroOrden: TDBEdit;
+    ZQ_MovimientosNRO_ORDEN_STRING: TStringField;
+    ZQ_ExisteNroOrden: TZQuery;
+    ZQ_ExisteNroOrdenNRO_ORDEN: TIntegerField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -161,6 +164,7 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure dbFechaEmisionChange(Sender: TObject);
+    function validarNroOrden(nro:String):boolean;
   private
     { Private declarations }
   public
@@ -170,7 +174,7 @@ type
 
 var
   FAlta_OrdenPago: TFAlta_OrdenPago;
-
+  NroOrden:String;
 const
   Transaccion_Movimientos = 'ABM ORDEN PAGO';
 
@@ -258,6 +262,8 @@ begin
   ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
   ZQ_Cuenta_Movimiento.Open;
 
+  NroOrden:=ZQ_MovimientosNRO_ORDEN_STRING.AsString;
+
   if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
   begin
     DBLUpCBoxCuenta.Enabled:= false;
@@ -265,7 +271,7 @@ begin
   end;
   DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
 
-  lblNroOrden.Caption:= 'ORDEN DE PAGO Nro: '+ZQ_MovimientosNRO_ORDEN_STRING.AsString;  
+  //edNroOrden.Text:=ZQ_MovimientosNRO_ORDEN_STRING.AsString;
 end;
 
 
@@ -285,6 +291,7 @@ end;
 
 procedure TFAlta_OrdenPago.AltaOrdenPago();
 begin
+  NroOrden:='';
   FAlta_OrdenPago.Caption:= 'ALTA ORDEN DE PAGO';
   habilitar(True);
 
@@ -303,10 +310,13 @@ begin
     ZQ_Ver_NroOrden.Close;
     ZQ_Ver_NroOrden.Open;
 
-    lblNroOrden.Caption:= Format('ORDEN DE PAGO Nro: %d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger)]);
-
     ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
+
+//    //Cargo el Nro de orden de pago interno y el visual
+//    ZQ_MovimientosNRO_ORDEN.AsInteger:=ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger;
+    ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger)]);
+
 
     if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
     begin
@@ -387,7 +397,8 @@ var
   nro_mov : integer;
 begin
 
-      ZQ_Cuenta_Movimiento.First; //borro los renglones vacios
+      //borro los renglones vacios
+      ZQ_Cuenta_Movimiento.First;
       while (not ZQ_Cuenta_Movimiento.Eof) do
       begin
        if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) then
@@ -406,16 +417,9 @@ begin
          ZQ_Cuenta_MovimientoANULADO.Clear;
          ZQ_MovimientosANULADO.Clear;
        end;
-
-       ZQ_Cuenta_Movimiento.Next;
-      end;
-      if ZQ_Cuenta_Movimiento.IsEmpty then
-      begin
-        Application.MessageBox('Debe ingresar al menos un medio de Pago.','Atención',MB_OK+MB_ICONINFORMATION);
-        exit;
-      end;
-
-    if validarcampos then
+            ZQ_Cuenta_Movimiento.Next;
+    end;
+    if (validarcampos)and(validarNroOrden(dbNroOrden.Text)) then
     begin
       ZQ_Cuenta_Movimiento.First;
       if ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0 then //si es un alta
@@ -425,12 +429,24 @@ begin
         Nro_Moviemiento.Active := false;
         ZQ_MovimientosNRO_MOVIMIENTO.AsInteger := nro_mov;
 
-        nro_orden.Active := true; //obtengo el numero de orden de pago
-        ZQ_MovimientosNRO_ORDEN.AsInteger := nro_ordenID.AsInteger;
-        nro_orden.Active := false;
+        //Esto se ejecuta en paralelo con el VER_NroOrden, habria q meter eso en la transacc asi qda guardado el incremento
+        if ZQ_MovimientosNRO_ORDEN.IsNull then
+        begin
+          nro_orden.Active := true; //obtengo el numero de orden de pago
+          ZQ_MovimientosNRO_ORDEN.AsInteger := nro_ordenID.AsInteger;
+          nro_orden.Active := false;
+        end;
       end
       else
         nro_mov:= ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
+
+
+
+      if ZQ_Cuenta_Movimiento.IsEmpty then
+      begin
+        Application.MessageBox('Debe ingresar al menos un medio de Pago.','Atención',MB_OK+MB_ICONINFORMATION);
+        exit;
+      end;
 
       while not ZQ_Cuenta_Movimiento.Eof do //recorro todas la formas de pago cargadas
       begin
@@ -468,9 +484,35 @@ begin
 end;
 
 
+function TFAlta_OrdenPago.validarNroOrden(nro:String):boolean;
+begin
+  result := true;
+  if (dbNroOrden.Text=NroOrden) then exit;
+
+  ZQ_ExisteNroOrden.Close;
+  ZQ_ExisteNroOrden.ParamByName('nroOrd').AsString:=nro;
+  ZQ_ExisteNroOrden.Open;
+
+  if not(ZQ_ExisteNroOrden.IsEmpty) then
+  begin
+    Application.MessageBox('el Nro. de Orden ya há sido utilizado.'+char(13)+'(ingrese un nuevo Número de Orden)','Validación',MB_OK+MB_ICONINFORMATION);
+    dbNroOrden.SetFocus;
+    result := false;
+    exit;
+  end;
+end;
+
 function TFAlta_OrdenPago.validarcampos():boolean;
 begin
   result := true;
+
+  if (ZQ_MovimientosNRO_ORDEN_STRING.AsString='') then
+    begin
+      Application.MessageBox('Debe ingresar un Nro de Orden de Pago.','Validación',MB_OK+MB_ICONINFORMATION);
+      dbNroOrden.SetFocus;
+      result := False;
+      exit;
+    end;
 
   if (ZQ_MovimientosFECHA.IsNull) then
   begin
@@ -511,7 +553,7 @@ procedure TFAlta_OrdenPago.FormCloseQuery(Sender: TObject;
 begin
   if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
   begin
-    if not (application.MessageBox(pchar('Si continua con el cierre se perderan los cambios realizados.'+#13+#13+'¿Salir de todos modos?'),'Atención', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+    if not (application.MessageBox(pchar('Si continua con el cierre se perderán los cambios realizados.'+#13+#13+'¿Salir de todos modos?'),'Atención', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
       canClose := False
     else
     begin
@@ -560,7 +602,7 @@ end;
 procedure TFAlta_OrdenPago.dbFechaEmisionChange(Sender: TObject);
 begin
   if ZQ_Movimientos.State = dsInsert then //solamente se cambia cuando estoy insertando (VER SI ES ASI O SE CAMBIA SIEMPRE)
-    lblNroOrden.Caption:= Format('ORDEN DE PAGO Nro: %d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger)]);
+    ZQ_MovimientosNRO_ORDEN_STRING.AsString:= Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger)]);
 end;
 
 end.

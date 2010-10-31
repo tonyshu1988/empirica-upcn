@@ -292,11 +292,9 @@ type
     QRBand8: TQRBand;
     QRExpr15: TQRExpr;
     EKVistaPrevia_LibroBco: TEKVistaPreviaQR;
-    ZQ_MovimientosNRO_ORDEN_STRING: TStringField;
     LIBRO_BANCOPROVEEDOR: TStringField;
     ZQ_MovimientosDESCRIPCION: TStringField;
     CBFechaConciliado: TCheckBox;
-    LIBRO_BANCONRO_ORDEN_STRING: TStringField;
     btnAltaOrdenPago: TdxBarLargeButton;
     EKDbSuma1: TEKDbSuma;
     ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TIntegerField;
@@ -366,7 +364,6 @@ type
     EKDbSumaOrdenDebito: TEKDbSuma;
     MenuGrilla: TPopupMenu;
     ConciliarMovimiento1: TMenuItem;
-    ImprimirOrdendePago1: TMenuItem;
     Panel1: TPanel;
     StaticText1: TStaticText;
     verAnulados: TCheckBox;
@@ -376,6 +373,16 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     ZQ_Cuenta_MovimientocodMedioPago: TStringField;
+    btnConciliar: TdxBarLargeButton;
+    AnularOrden1: TMenuItem;
+    AnularMovimiento1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    Editar1: TMenuItem;
+    btnEliminarMov: TdxBarLargeButton;
+    EliminarMovimiento1: TMenuItem;
+    ZQ_MovimientosNRO_ORDEN_STRING: TStringField;
+    LIBRO_BANCONRO_ORDEN_STRING: TStringField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -430,6 +437,11 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure ConciliarMovimiento1Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure AnularOrden1Click(Sender: TObject);
+    procedure Editar1Click(Sender: TObject);
+    procedure AnularMovimiento1Click(Sender: TObject);
+    procedure btnEliminarMovClick(Sender: TObject);
+    procedure EliminarMovimiento1Click(Sender: TObject);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -943,7 +955,7 @@ begin
  if LIBRO_BANCO.IsEmpty then
   exit;
 
- if (application.MessageBox(pchar('¿Esta seguro que desea Anular la Orden de Pago número '+LIBRO_BANCONRO_ORDEN_STRING.AsString+'?' + #13 + #13), 'Anular Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+ if (application.MessageBox(pchar('¿Esta seguro que desea Anular la Orden de Pago número '+LIBRO_BANCONRO_ORDEN.AsString+'?' + #13 + #13), 'Anular Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
   exit;
 
  ZQ_Movimientos.Close;
@@ -1289,7 +1301,6 @@ begin
       LIBRO_BANCO.Filter:= Format('CTA_MOV_ANULADO<>%s',[quotedStr('A')]);
       LIBRO_BANCO.Filtered:=True;
     end;
-    
 
   PFiltrosColumnas.Visible:=false;
 end;
@@ -1403,7 +1414,7 @@ begin
   else
     BtAnularOrden.Enabled:= true;
 
-  if LIBRO_BANCONRO_ORDEN_STRING.AsString = '' then
+  if LIBRO_BANCONRO_ORDEN.AsString = '' then
     BtAnularOrden.Enabled:= false
   else
     BtAnularOrden.Enabled:= true;
@@ -1586,6 +1597,65 @@ begin
   dm.EKModelo.abrir(ZQ_Conceptos);
   dm.EKModelo.abrir(ZQ_Cuentas);
   dm.EKModelo.abrir(ZQ_Autoriza);
+end;
+
+procedure TFMovimientos.AnularOrden1Click(Sender: TObject);
+begin
+  BtAnularOrden.Click;
+end;
+
+procedure TFMovimientos.Editar1Click(Sender: TObject);
+begin
+  BtEditarMovimiento.Click;
+end;
+
+procedure TFMovimientos.AnularMovimiento1Click(Sender: TObject);
+begin
+  BtAnularMov.Click;
+end;
+
+procedure TFMovimientos.btnEliminarMovClick(Sender: TObject);
+var
+recno:Integer;
+begin
+if LIBRO_BANCO.IsEmpty then
+  exit;
+
+ if (application.MessageBox(pchar('¿Esta seguro que desea Eliminar el Movimiento seleccionado?' + #13 + #13), 'Anular Movimiento', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+  exit;
+
+ ZQ_Movimientos.Close;
+ ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+ ZQ_Movimientos.Open;
+
+ //si el un saldo inicial no se puede editar
+ if ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger = 4 then
+  exit;
+
+ ZQ_Cuenta_Movimiento.Close;
+ ZQ_Cuenta_Movimiento.ParamByName('NroMov').Clear;
+ ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger :=LIBRO_BANCOID_MOVIMIENTO.AsInteger;
+ ZQ_Cuenta_Movimiento.Open;
+
+ if not ZQ_Cuenta_MovimientoID.IsNull then
+ begin
+   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
+   begin
+     ZQ_Cuenta_Movimiento.Delete;
+   end;
+
+   if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+     dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+
+   recNo:= LIBRO_BANCO.RecNo;
+   btaplicar.Click;
+   LIBRO_BANCO.RecNo:= recNo;
+ end;
+end;
+
+procedure TFMovimientos.EliminarMovimiento1Click(Sender: TObject);
+begin
+  btnEliminarMov.Click;
 end;
 
 end.

@@ -176,6 +176,17 @@ begin
     ZQ_Movimiento.Append;
     ZQ_Cuenta_Mov.Append;
 
+    ZP_ObtenerNroMov.Close;
+    ZP_ObtenerNroMov.Open;
+
+    ZQ_Cuenta_MovNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
+    ZQ_Cuenta_MovFECHA_MDC.AsDateTime:= ZQ_MovimientoFECHA.AsDateTime;
+
+    ZQ_MovimientoNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
+    ZQ_MovimientoID_CONCEPTO.Clear;
+    ZQ_MovimientoID_OBJETO_MOVIMIENTO.AsInteger:= 4;
+    ZQ_MovimientoIMPORTE.AsFloat:= ZQ_Cuenta_MovIMPORTE.AsFloat;
+
     EKDTPFecha.SetFocus;
   end;
 end;
@@ -198,6 +209,8 @@ begin
     DBGridSaldosIniciales.Enabled := false;
     pDatos.Visible := true;
     pDatos.Enabled := true;
+    //No dejo que modifique la cuenta para evitar conflictos.
+    DBLookupCBoxCuenta.Enabled:=False;
     GrupoVisualizando.Enabled := false;
     GrupoEditando.Enabled := true;
 
@@ -249,16 +262,7 @@ procedure TFSaldoInicial.btnGuardarClick(Sender: TObject);
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-  ZP_ObtenerNroMov.Close;
-  ZP_ObtenerNroMov.Open;
 
-  ZQ_Cuenta_MovNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
-  ZQ_Cuenta_MovFECHA_MDC.AsDateTime:= ZQ_MovimientoFECHA.AsDateTime;
-
-  ZQ_MovimientoNRO_MOVIMIENTO.AsInteger:= ZP_ObtenerNroMovID.AsInteger;
-  ZQ_MovimientoID_CONCEPTO.Clear;
-  ZQ_MovimientoID_OBJETO_MOVIMIENTO.AsInteger:= 4;
-  ZQ_MovimientoIMPORTE.AsFloat:= ZQ_Cuenta_MovIMPORTE.AsFloat;
 
 
   if not validarDatos() then
@@ -332,19 +336,22 @@ end;
 function TFSaldoInicial.ValidarDatos():boolean;
 begin
   result := true;
+  //Si está modificando no lo restrinjo
+  //Porque no podría cambiar la cta del registro.
+  if not(ZQ_Cuenta_Mov.State=dsEdit) then
+    begin
+      ZQ_YaExisteSaldo.Close;
+      ZQ_YaExisteSaldo.ParamByName('id_cta').AsInteger:= ZQ_CuentaIngresoID_CUENTA.AsInteger;
+      ZQ_YaExisteSaldo.Open;
 
-  ZQ_YaExisteSaldo.Close;
-  ZQ_YaExisteSaldo.ParamByName('id_cta').AsInteger:= ZQ_CuentaIngresoID_CUENTA.AsInteger;
-  ZQ_YaExisteSaldo.Open;
-
-  if not ZQ_YaExisteSaldo.IsEmpty then
-   begin
-     Application.MessageBox('Ya se ha cargado un saldo inicial para la cuenta seleccionada, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-     DBLookupCBoxCuenta.SetFocus;
-     result := false;
-     Exit;
-   end;
-
+      if not ZQ_YaExisteSaldo.IsEmpty then
+       begin
+         Application.MessageBox('Ya se ha cargado un saldo inicial para la cuenta seleccionada, verifique','Validar',MB_OK+MB_ICONINFORMATION);
+         DBLookupCBoxCuenta.SetFocus;
+         result := false;
+         Exit;
+       end;
+    end;
 {
   if ZQ_Cuentas_MovimientosID_CUENTA_INGRESO.IsNull then
    begin
@@ -381,16 +388,16 @@ begin
   ZQ_BuscarMov.ParamByName('id_cuenta').AsInteger:= ZQ_VerSaldosID_CUENTA_INGRESO.AsInteger;
   ZQ_BuscarMov.Open;
 
-  if ZQ_BuscarMovNRO_MOVIMIENTO.AsInteger <= 1 then
-  begin
-    btnModificar.Enabled:= false;
-    btnEliminar.Enabled:= false;
-  end
-  else
-  begin
-    btnModificar.Enabled:= true;
-    btnEliminar.Enabled:= true;
-  end;
+//  if ZQ_BuscarMovNRO_MOVIMIENTO.AsInteger <= 1 then
+//  begin
+//    btnModificar.Enabled:= false;
+//    btnEliminar.Enabled:= false;
+//  end
+//  else
+//  begin
+//    btnModificar.Enabled:= true;
+//    btnEliminar.Enabled:= true;
+//  end;
 end;
 
 
