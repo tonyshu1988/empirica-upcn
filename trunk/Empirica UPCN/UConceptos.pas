@@ -70,6 +70,7 @@ type
     EKVistaPrevia: TEKVistaPreviaQR;
     btnImprimir: TdxBarLargeButton;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    ZQ_IE_ConceptosEDITABLE: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
@@ -132,7 +133,7 @@ end;
 
 procedure TFConceptos.BtModificarClick(Sender: TObject);
 begin
-if ZQ_IE_Conceptos.IsEmpty then exit;
+if (ZQ_IE_Conceptos.IsEmpty) or (ZQ_IE_ConceptosEDITABLE.AsString='N') then exit;
 
  if dm.EKModelo.iniciar_transaccion(Transaccion_Conceptos, [ZQ_IE_Conceptos]) then
   begin
@@ -147,7 +148,7 @@ end;
 
 procedure TFConceptos.btBajaClick(Sender: TObject);
 begin
-  if (ZQ_IE_Conceptos.IsEmpty) or (ZQ_IE_ConceptosBAJA.AsString='S') then
+  if (ZQ_IE_Conceptos.IsEmpty) or (ZQ_IE_ConceptosBAJA.AsString='S') or (ZQ_IE_ConceptosEDITABLE.AsString='N')  then
     exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja el Concepto?'), 'ABM Conceptos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then

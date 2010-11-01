@@ -54,7 +54,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
           Expanded = False
           FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
           Title.Caption = 'Nombre Medio'
-          Width = 432
+          Width = 661
           Visible = True
         end>
     end
@@ -443,6 +443,10 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     object ZQ_MedioCobroPagoNOMBRE_MEDIO_COBRO_PAGO: TStringField
       FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
       Size = 30
+    end
+    object ZQ_MedioCobroPagoEDITABLE: TStringField
+      FieldName = 'EDITABLE'
+      Size = 1
     end
   end
   object DS_MedioCobroPago: TDataSource

@@ -32,7 +32,7 @@ type
     BtGuardar: TdxBarLargeButton;
     BtCancelar: TdxBarLargeButton;
     btReactivar: TdxBarLargeButton;
-    Bt_Seleccionar: TdxBarLargeButton;
+    btVerDetalle: TdxBarLargeButton;
     btBajar: TdxBarLargeButton;
     bt_salir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
@@ -90,6 +90,7 @@ type
     QRlblFechaHoy: TQRLabel;
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
+    ZQ_IE_ProveedoresEDITABLE: TStringField;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -107,6 +108,7 @@ type
     function validarcampos():boolean;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ZQ_IE_ProveedoresAfterScroll(DataSet: TDataSet);
+    procedure btVerDetalleClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -136,7 +138,8 @@ begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores]) then
   begin
     DBGridProveedores.Enabled := false;
-    Panel_edicion.Enabled:=true;
+    Panel_edicion.Visible:=true;
+
     ZQ_IE_Proveedores.Append;
     ZQ_IE_ProveedoresBAJA.AsString:= 'N';    
     DBENombreApellido.SetFocus;
@@ -148,12 +151,12 @@ end;
 
 procedure TFABMProveedores.BtModificarClick(Sender: TObject);
 begin
-  if ZQ_IE_Proveedores.IsEmpty then
+  if (ZQ_IE_Proveedores.IsEmpty) OR (ZQ_IE_ProveedoresEDITABLE.AsString='N') then
     exit;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores]) then
   begin
-    Panel_edicion.Enabled:=true;
+    Panel_edicion.Visible:=true;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -164,7 +167,7 @@ procedure TFABMProveedores.btBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if ZQ_IE_Proveedores.IsEmpty then
+  if ZQ_IE_Proveedores.IsEmpty OR (ZQ_IE_ProveedoresEDITABLE.AsString='N') then
     exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja el Proveedor ?'), 'ABM Proveedores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -218,7 +221,7 @@ if validarcampos() then
  begin
   if DM.EKModelo.finalizar_transaccion(transaccion_ABMProveedores) then
   begin
-    Panel_edicion.Enabled:=false;
+    Panel_edicion.Visible:=false;
     DBGridProveedores.Enabled := true;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
@@ -229,7 +232,7 @@ end;
 
 procedure TFABMProveedores.BtCancelarClick(Sender: TObject);
 begin
-  Panel_edicion.Enabled:=FALSE;
+  Panel_edicion.Visible:=FALSE;
   DBGridProveedores.Enabled := true;
   dm.EKModelo.cancelar_transaccion(transaccion_ABMProveedores);
   GrupoEditando.Enabled := true;
@@ -342,6 +345,11 @@ begin
     btBaja.Enabled:= true;
     btReactivar.Enabled:= false;
   end
+end;
+
+procedure TFABMProveedores.btVerDetalleClick(Sender: TObject);
+begin
+  Panel_edicion.Visible:=not(Panel_edicion.Visible);
 end;
 
 end.

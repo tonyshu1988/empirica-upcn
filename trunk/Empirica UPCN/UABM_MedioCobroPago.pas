@@ -37,6 +37,7 @@ type
     ZQ_MedioCobroPagoID_MEDIO: TIntegerField;
     ZQ_MedioCobroPagoCODIGO_CORTO: TStringField;
     ZQ_MedioCobroPagoNOMBRE_MEDIO_COBRO_PAGO: TStringField;
+    ZQ_MedioCobroPagoEDITABLE: TStringField;
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -79,7 +80,7 @@ end;
 
 procedure TFABM_MedioCobroPago.BtModificarClick(Sender: TObject);
 begin
-  if ZQ_MedioCobroPago.IsEmpty then
+  if ZQ_MedioCobroPago.IsEmpty or (ZQ_MedioCobroPagoEDITABLE.AsString='N') then
   exit;
       //EFECTIVO                                   //CHEQUE                                     //TRANSFERENCIA                              //DEBITO BANCARIO
   if (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 1) or (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 2) or (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 3) or (ZQ_MedioCobroPagoID_MEDIO.AsInteger = 5) then

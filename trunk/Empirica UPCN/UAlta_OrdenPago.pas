@@ -579,7 +579,7 @@ end;
 
 procedure TFAlta_OrdenPago.EKDbSuma1SumListChanged(Sender: TObject);
 begin
-  FAlta_OrdenPago.txt_total_medio_pago.Caption:= Format('Total: $ %f',[EKDbSuma1.SumCollection[0].SumValue]);
+  FAlta_OrdenPago.txt_total_medio_pago.Caption:= Format('Total: $ %s',[FormatFloat('###,###,###,##0.00',EKDbSuma1.SumCollection[0].SumValue)]);
 end;
 
 
