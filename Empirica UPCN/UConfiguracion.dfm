@@ -545,18 +545,10 @@ object FConfiguracion: TFConfiguracion
       ImageIndex = 28
     end
   end
-  object ZS_ReiniciarNroOrden: TZSQLProcessor
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'nro'
-        ParamType = ptUnknown
-      end>
-    Script.Strings = (
-      'set generator GEN_IE_NRO_ORDEN_ID to :nro;')
+  object ZQ_ReiniciarNroOrden: TZQuery
     Connection = DM.Conexion
-    Delimiter = ';'
-    Left = 192
+    Params = <>
+    Left = 184
     Top = 104
   end
 end
