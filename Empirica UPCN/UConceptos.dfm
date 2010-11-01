@@ -1,6 +1,6 @@
 object FConceptos: TFConceptos
-  Left = 343
-  Top = 158
+  Left = 307
+  Top = 240
   Width = 870
   Height = 500
   Caption = 'ABM Conceptos'
@@ -875,6 +875,10 @@ object FConceptos: TFConceptos
     object ZQ_IE_ConceptosIMPORTE: TFloatField
       FieldName = 'IMPORTE'
       currency = True
+    end
+    object ZQ_IE_ConceptosEDITABLE: TStringField
+      FieldName = 'EDITABLE'
+      Size = 1
     end
   end
   object DS_IE_Conceptos: TDataSource

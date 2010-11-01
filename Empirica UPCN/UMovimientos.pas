@@ -442,6 +442,12 @@ type
     procedure AnularMovimiento1Click(Sender: TObject);
     procedure btnEliminarMovClick(Sender: TObject);
     procedure EliminarMovimiento1Click(Sender: TObject);
+    procedure refrescarConsultas();
+    procedure DBLookupCBoxEgreso_MedioExit(Sender: TObject);
+    procedure DBLookupCBoxIngreso_MedioExit(Sender: TObject);
+    procedure DBLookupCBoxEgreso_CodigoExit(Sender: TObject);
+    procedure DBLookupCBoxIngreso_CodigoExit(Sender: TObject);
+    procedure cargarDatosporDefecto();
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -501,13 +507,10 @@ procedure TFMovimientos.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla1.CargarConfigColunmas;
 
-  dm.EKModelo.abrir(ZQ_Proveedores);
-  dm.EKModelo.abrir(ZQ_Conceptos);
-  dm.EKModelo.abrir(ZQ_Cuentas);
-  dm.EKModelo.abrir(ZQ_Autoriza);
+  refrescarConsultas();
 
-  DTPFechaDesde.Date:= StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha));
-  DTPFechaHasta.Date:= DM.EKModelo.Fecha;
+  DTPFechaDesde.Date:= StartOfTheMonth(DM.EKModelo.Fecha);
+  DTPFechaHasta.Date:= EndOfTheMonth(DM.EKModelo.Fecha);
   EKLlenarCombo1.CargarCombo;
   EKLlenarCBAutoriza.CargarCombo;
 
@@ -601,6 +604,8 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
   begin
+
+
     ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
 
@@ -690,6 +695,8 @@ end;
 
 
 procedure TFMovimientos.BtCancelarClick(Sender: TObject);
+var
+recno:integer;
 begin
   if dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos) then
   begin
@@ -699,17 +706,16 @@ begin
     PIngresos.Visible:=false;
     PParametrosLibroBanco.Enabled:=true;
     DBGridLibroBanco.Enabled:=true;
+    recNo:= LIBRO_BANCO.RecNo;
+    btaplicar.Click;
+    LIBRO_BANCO.RecNo:= recNo;
   end;
 end;
-
 
 procedure TFMovimientos.btaplicarClick(Sender: TObject);
 begin
   //Tipo refresco...
-  dm.EKModelo.abrir(ZQ_Proveedores);
-  dm.EKModelo.abrir(ZQ_Conceptos);
-  dm.EKModelo.abrir(ZQ_Cuentas);
-  dm.EKModelo.abrir(ZQ_Autoriza);
+  //refrescarConsultas();
 
   LIBRO_BANCO.Close;
   LIBRO_BANCO.ParamByName('cuenta').AsInteger :=ZQ_CuentasID_CUENTA.AsInteger;
@@ -1418,6 +1424,19 @@ begin
     BtAnularOrden.Enabled:= false
   else
     BtAnularOrden.Enabled:= true;
+
+  if LIBRO_BANCO.IsEmpty then
+  begin
+    BtAnularOrden.Enabled:= false;
+    btnConciliar.Enabled:=False;
+    btnEliminarMov.Enabled:=False;
+    BtAnularMov.Enabled:= false
+  end
+  else
+    begin
+      btnConciliar.Enabled:=true;
+      btnEliminarMov.Enabled:=true;
+    end
 end;
 
 
@@ -1593,10 +1612,7 @@ end;
 
 procedure TFMovimientos.FormActivate(Sender: TObject);
 begin
-  dm.EKModelo.abrir(ZQ_Proveedores);
-  dm.EKModelo.abrir(ZQ_Conceptos);
-  dm.EKModelo.abrir(ZQ_Cuentas);
-  dm.EKModelo.abrir(ZQ_Autoriza);
+  refrescarConsultas();
 end;
 
 procedure TFMovimientos.AnularOrden1Click(Sender: TObject);
@@ -1656,6 +1672,50 @@ end;
 procedure TFMovimientos.EliminarMovimiento1Click(Sender: TObject);
 begin
   btnEliminarMov.Click;
+end;
+
+procedure TFMovimientos.refrescarConsultas;
+begin
+  ZQ_Conceptos.Active:=false;
+  ZQ_Conceptos.Active:=true;
+  ZQ_Proveedores.Active:=false;
+  ZQ_Proveedores.Active:=true;
+  ZQ_Cuentas.Active:=false;
+  ZQ_Cuentas.Active:=true;
+  ZQ_Autoriza.Active:=false;
+  ZQ_Autoriza.Active:=true;
+
+end;
+
+procedure TFMovimientos.DBLookupCBoxEgreso_MedioExit(Sender: TObject);
+begin
+ cargarDatosporDefecto()
+end;
+
+procedure TFMovimientos.DBLookupCBoxIngreso_MedioExit(Sender: TObject);
+begin
+  cargarDatosporDefecto()
+end;
+
+procedure TFMovimientos.DBLookupCBoxEgreso_CodigoExit(Sender: TObject);
+begin
+  cargarDatosporDefecto()
+end;
+
+procedure TFMovimientos.DBLookupCBoxIngreso_CodigoExit(Sender: TObject);
+begin
+  cargarDatosporDefecto()
+end;
+
+
+procedure TFMovimientos.cargarDatosporDefecto();
+begin
+  // Si es Débito Bancario le dejo por defecto el proveedor y concepto DB.
+  if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger=5) then
+   begin
+      ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=1;
+      ZQ_MovimientosID_CONCEPTO.AsInteger:=1;
+   end
 end;
 
 end.

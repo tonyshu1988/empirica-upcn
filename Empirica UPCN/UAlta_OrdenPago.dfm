@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 296
-  Top = 180
+  Left = 258
+  Top = 243
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -435,6 +435,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Height = -27
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
+        MaxLength = 7
         ParentFont = False
         TabOrder = 9
       end
@@ -994,7 +995,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     SQL.Strings = (
       'select *'
       'from ie_conceptos c'
-      'where c.id_concepto > 0')
+      'where c.id_concepto > 0'
+      'and c.baja<>'#39'S'#39
+      'order by c.nombre_concepto')
     Params = <>
     Left = 587
     Top = 289
@@ -1023,7 +1026,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     SQL.Strings = (
       'select *'
       'from ie_proveedores p'
-      'where nro_proveedor > 0')
+      'where nro_proveedor > 0'
+      'and p.baja<>'#39'S'#39
+      'order by apellido_y_nombre')
     Params = <>
     Left = 497
     Top = 289
