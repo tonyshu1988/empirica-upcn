@@ -49,7 +49,7 @@ type
     btnSalir: TdxBarLargeButton;
     btnVerDetalle: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
-    ZS_ReiniciarNroOrden: TZSQLProcessor;
+    ZQ_ReiniciarNroOrden: TZQuery;
     procedure btnSalirClick(Sender: TObject);
     procedure btAgregGralClick(Sender: TObject);
     procedure btModifGralClick(Sender: TObject);
@@ -169,24 +169,35 @@ end;
 procedure TFConfiguracion.btnConfigNroOrdenClick(Sender: TObject);
 var
   nro: string;
+  numero: integer;
 begin
-//  if InputQuery('Verificar Nro Cheque', 'Ingrese desde que nro de cheque quiere verificar:', nro) then
-//  begin
-//    if (trim(nro) = '') or not (sonTodosNumeros(nro)) then
-//    begin
-//      ShowMessage('El nro de Orden de Pago ingresado es incorrecto');
-//      exit;
-//    end;
-//
-//    if dm.EKModelo.iniciar_transaccion(TRANSACCION, []) then
-//    begin
-//      ZS_ReiniciarNroOrden.ParamByName('nro').AsInteger:= StrToInt(nro);
-//      ZS_ReiniciarNroOrden.Execute;
-//
-//      if not DM.EKModelo.finalizar_transaccion(TRANSACCION) then
-//        dm.EKModelo.cancelar_transaccion(TRANSACCION);
-//    end;
-//  end;
+  if InputQuery('Número de Orden de Pago', 'Ingrese el Número de Orden de Pago del cual desea arrancar:', nro) then
+  begin
+    if (trim(nro) = '') or not (sonTodosNumeros(nro)) then
+    begin
+      ShowMessage('El nro de Orden de Pago ingresado es incorrecto');
+      exit;
+    end;
+
+    numero:= StrToInt(nro);
+    if (numero <= 0) then
+    begin
+      ShowMessage('El nro de Orden de Pago ingresado es incorrecto (tiene que ser > 0)');
+      exit;
+    end;
+
+    if dm.EKModelo.iniciar_transaccion(TRANSACCION, []) then
+    begin
+      ZQ_ReiniciarNroOrden.SQL.Clear;
+      ZQ_ReiniciarNroOrden.SQL.Add('set generator GEN_IE_NRO_ORDEN_ID to '+IntToStr(numero - 1));
+      ZQ_ReiniciarNroOrden.ExecSQL;
+
+//      ShowMessage(ZQ_ReiniciarNroOrden.SQL.Text);
+
+      if not DM.EKModelo.finalizar_transaccion(TRANSACCION) then
+        dm.EKModelo.cancelar_transaccion(TRANSACCION);
+    end;
+  end;
 end;
 
 end.
