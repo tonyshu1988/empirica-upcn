@@ -874,7 +874,6 @@ object FConceptos: TFConceptos
     end
     object ZQ_IE_ConceptosIMPORTE: TFloatField
       FieldName = 'IMPORTE'
-      currency = True
     end
     object ZQ_IE_ConceptosEDITABLE: TStringField
       FieldName = 'EDITABLE'
@@ -1257,7 +1256,7 @@ object FConceptos: TFConceptos
     Grilla = Grilla
     FuenteNormal = []
     NombreGuardarConfig = 'UConceptos'
-    Ordenar = True
+    Ordenar = False
     Left = 552
     Top = 80
   end
