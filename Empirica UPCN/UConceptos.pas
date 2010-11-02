@@ -19,11 +19,6 @@ type
     ZQ_IE_Conceptos: TZQuery;
     DS_IE_Conceptos: TDataSource;
     Grilla: TDBGrid;
-    ZQ_IE_ConceptosID_CONCEPTO: TIntegerField;
-    ZQ_IE_ConceptosCOD_CORTO: TStringField;
-    ZQ_IE_ConceptosNOMBRE_CONCEPTO: TStringField;
-    ZQ_IE_ConceptosBAJA: TStringField;
-    ZQ_IE_ConceptosIMPORTE: TFloatField;
     dbImporte: TDBEdit;
     Label3: TLabel;
     dxBarABM: TdxBarManager;
@@ -70,6 +65,11 @@ type
     EKVistaPrevia: TEKVistaPreviaQR;
     btnImprimir: TdxBarLargeButton;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    ZQ_IE_ConceptosID_CONCEPTO: TIntegerField;
+    ZQ_IE_ConceptosCOD_CORTO: TStringField;
+    ZQ_IE_ConceptosNOMBRE_CONCEPTO: TStringField;
+    ZQ_IE_ConceptosBAJA: TStringField;
+    ZQ_IE_ConceptosIMPORTE: TFloatField;
     ZQ_IE_ConceptosEDITABLE: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
