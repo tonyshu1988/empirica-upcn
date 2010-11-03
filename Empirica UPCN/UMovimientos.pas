@@ -233,13 +233,6 @@ type
     LIBRO_BANCONRO_RECIBO: TStringField;
     ZQ_MovimientosNRO_FACTURA: TStringField;
     ZQ_MovimientosNRO_RECIBO: TStringField;
-    ChildBand1: TQRChildBand;
-    QRLblConfecciona: TQRLabel;
-    QRLblAutorizo: TQRLabel;
-    QRShape6: TQRShape;
-    QRShape4: TQRShape;
-    QRLabel4: TQRLabel;
-    QRLabel5: TQRLabel;
     RepLibroB: TQuickRep;
     QRBand5: TQRBand;
     QRLabel41: TQRLabel;
@@ -385,6 +378,8 @@ type
     LIBRO_BANCONRO_ORDEN_STRING: TStringField;
     ZQ_ExisteCheque: TZQuery;
     IntegerField7: TIntegerField;
+    QRLblAutorizo: TQRLabel;
+    QRLblConfecciona: TQRLabel;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -887,11 +882,11 @@ begin
   ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCOID_MOVIMIENTO.AsInteger;
   ZQ_Cuenta_Movimiento.Open;
 
-  if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) then
+  if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) or (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 3) then
       begin
          if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') then //si no esta conciliado
          begin
-           if (application.MessageBox(pchar('¿Está seguro que desea Conciliar el cheque seleccionado?'), 'Conciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+           if (application.MessageBox(pchar('¿Está seguro que desea Conciliar el movimiento seleccionado?'), 'Conciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
              if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
              begin
                ZQ_Cuenta_Movimiento.edit;
@@ -902,7 +897,7 @@ begin
          end
          else //si esta conciliado
          begin
-           if (application.MessageBox(pchar('¿Está seguro que desea Desconciliar el cheque seleccionado?'), 'Desconciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+           if (application.MessageBox(pchar('¿Está seguro que desea Desconciliar el movimiento seleccionado?'), 'Desconciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
              if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
              begin
                ZQ_Cuenta_Movimiento.edit;
@@ -937,7 +932,7 @@ begin
 
   if not LIBRO_BANCO.IsEmpty then
   begin
-    if (LIBRO_BANCOMEDIO.AsString = 'CHEQUE') and (LIBRO_BANCOCONCILIADO.Value='S') then
+    if (LIBRO_BANCOCONCILIADO.Value='S') or (LIBRO_BANCOID_MEDIO.AsInteger = 5) then
     begin
       DBGridLibroBanco.Canvas.Brush.Color :=StaticText1.Brush.Color;
       DBGridLibroBanco.Canvas.Font.Color := clBlack;
@@ -973,7 +968,7 @@ begin
  if LIBRO_BANCO.IsEmpty then
   exit;
 
- if (application.MessageBox(pchar('¿Está seguro que desea Anular la Orden de Pago número '+LIBRO_BANCONRO_ORDEN.AsString+'?' + #13 + #13), 'Anular Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+ if (application.MessageBox(pchar('¿Está seguro que desea Anular la Orden de Pago número '+LIBRO_BANCONRO_ORDEN_STRING.AsString+'?' + #13 + #13), 'Anular Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
   exit;
 
  ZQ_Movimientos.Close;
@@ -1380,6 +1375,11 @@ begin
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaConciliado', 'TRUE')
   else
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaConciliado', 'FALSE');
+
+  if verAnulados.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\verAnulados', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\verAnulados', 'FALSE');
 end;
 
 
@@ -1417,6 +1417,9 @@ begin
 
   if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\FechaConciliado') <> '' then
     CBFechaConciliado.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\FechaConciliado'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\verAnulados') <> '' then
+    verAnulados.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\verAnulados'));
 end;
 
 
@@ -1427,12 +1430,12 @@ begin
   else
     BtAnularMov.Enabled:= true;
 
-  if LIBRO_BANCOMOV_ANULADO.AsString = 'A' then
+  if LIBRO_BANCONRO_ORDEN.AsString = '' then
     BtAnularOrden.Enabled:= false
   else
     BtAnularOrden.Enabled:= true;
 
-  if LIBRO_BANCONRO_ORDEN.AsString = '' then
+  if LIBRO_BANCOMOV_ANULADO.AsString = 'A' then
     BtAnularOrden.Enabled:= false
   else
     BtAnularOrden.Enabled:= true;
