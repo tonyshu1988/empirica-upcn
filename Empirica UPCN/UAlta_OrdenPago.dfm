@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 290
-  Top = 110
+  Left = 320
+  Top = 189
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -158,10 +158,10 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         end
         object btEliminarLinea: TButton
           Left = 2
-          Top = 5
-          Width = 153
-          Height = 17
-          Caption = 'Eliminar Linea (Del)'
+          Top = 10
+          Width = 167
+          Height = 21
+          Caption = 'Eliminar Linea (Ctrl+Del)'
           TabOrder = 0
           TabStop = False
           OnClick = btEliminarLineaClick
@@ -674,7 +674,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     StyleName = 'XP Style'
     object ADeleteLinea: TAction
       Caption = 'DeleteLinea'
-      ShortCut = 46
+      ShortCut = 16430
       OnExecute = ADeleteLineaExecute
     end
     object AVerDetalle: TAction
