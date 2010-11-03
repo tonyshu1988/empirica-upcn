@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 320
-  Top = 189
+  Left = 355
+  Top = 223
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -181,7 +181,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         226)
       object Label3: TLabel
         Left = 3
-        Top = 37
+        Top = 36
         Width = 86
         Height = 13
         Caption = 'Fecha Emisi'#243'n:'
@@ -189,7 +189,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Label4: TLabel
         Left = 25
-        Top = 64
+        Top = 92
         Width = 64
         Height = 13
         Caption = 'Proveedor:'
@@ -197,7 +197,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Label5: TLabel
         Left = 30
-        Top = 92
+        Top = 120
         Width = 59
         Height = 13
         Caption = 'Concepto:'
@@ -213,7 +213,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Label1: TLabel
         Left = 43
-        Top = 120
+        Top = 64
         Width = 46
         Height = 13
         Caption = 'Cuenta:'
@@ -221,7 +221,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Label12: TLabel
         Left = 641
-        Top = 64
+        Top = 92
         Width = 129
         Height = 13
         Anchors = [akTop, akRight]
@@ -230,7 +230,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Label13: TLabel
         Left = 641
-        Top = 92
+        Top = 120
         Width = 124
         Height = 13
         Anchors = [akTop, akRight]
@@ -268,8 +268,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Caption = 'Nro Recibo:'
       end
       object DBEditNroProveedor: TDBEdit
-        Left = 91
-        Top = 60
+        Left = 92
+        Top = 88
         Width = 49
         Height = 21
         DataField = 'NRO_PROVEEDOR'
@@ -280,12 +280,12 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 3
         OnKeyUp = DBEditNroProveedorKeyUp
       end
       object DBLUpCBoxProveedor: TDBLookupComboBox
         Left = 147
-        Top = 60
+        Top = 88
         Width = 488
         Height = 21
         Anchors = [akLeft, akTop, akRight]
@@ -300,7 +300,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = DS_Proveedores
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 4
         OnKeyUp = DBEditNroProveedorKeyUp
       end
       object DBMemoDescripcion: TDBMemo
@@ -317,11 +317,11 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 9
       end
       object DBLUpCBoxConcepto: TDBLookupComboBox
         Left = 147
-        Top = 88
+        Top = 116
         Width = 488
         Height = 21
         Anchors = [akLeft, akTop, akRight]
@@ -336,12 +336,12 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = DS_Conceptos
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 6
         OnKeyUp = DBEditNroConceptoKeyUp
       end
       object DBEditNroConcepto: TDBEdit
-        Left = 91
-        Top = 88
+        Left = 92
+        Top = 116
         Width = 49
         Height = 21
         DataField = 'ID_CONCEPTO'
@@ -352,12 +352,12 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 5
         OnKeyUp = DBEditNroConceptoKeyUp
       end
       object DBLUpCBoxCuenta: TDBLookupComboBox
-        Left = 91
-        Top = 116
+        Left = 92
+        Top = 60
         Width = 357
         Height = 21
         Font.Charset = ANSI_CHARSET
@@ -369,7 +369,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'BUSQUEDA'
         ListSource = DS_Cuentas
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 2
         OnEnter = DBLUpCBoxCuentaEnter
       end
       object DBEditNroFactura: TDBEdit
@@ -385,7 +385,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 7
       end
       object DBEditNroRecibo: TDBEdit
         Left = 450
@@ -400,10 +400,10 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 8
       end
       object dbFechaEmision: TEKDBDateTimePicker
-        Left = 91
+        Left = 92
         Top = 32
         Width = 165
         Height = 21
@@ -437,7 +437,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Style = [fsBold]
         MaxLength = 7
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 1
       end
     end
   end
@@ -581,8 +581,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 712
-    Top = 312
+    Left = 576
+    Top = 184
     DockControlHeights = (
       0
       0
@@ -913,6 +913,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_CuentasAfterScroll
     SQL.Strings = (
       
         'select c.*, c.nombre_cuenta||'#39' - '#39'|| coalesce ('#39'N'#176': '#39' || c.nro_c' +
@@ -999,7 +1000,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       'and c.baja<>'#39'S'#39
       'order by c.nombre_concepto')
     Params = <>
-    Left = 587
+    Left = 603
     Top = 289
     object ZQ_ConceptosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
@@ -1026,12 +1027,23 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     SQL.Strings = (
       'select *'
       'from ie_proveedores p'
-      'where nro_proveedor > 0'
-      'and p.baja<>'#39'S'#39
+      'where'
+      '(p.baja<>'#39'S'#39') and (p.id_cuenta=:idCta)'
       'order by apellido_y_nombre')
-    Params = <>
-    Left = 497
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idCta'
+        ParamType = ptUnknown
+      end>
+    Left = 513
     Top = 289
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idCta'
+        ParamType = ptUnknown
+      end>
     object ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField
       FieldName = 'NRO_PROVEEDOR'
       Required = True
@@ -1067,6 +1079,17 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     object ZQ_ProveedoresBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
+    end
+    object ZQ_ProveedoresDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object ZQ_ProveedoresEDITABLE: TStringField
+      FieldName = 'EDITABLE'
+      Size = 1
+    end
+    object ZQ_ProveedoresID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
     end
   end
   object DS_Proveedores: TDataSource
@@ -1145,8 +1168,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end>
     DataSet = ZQ_Cuenta_Movimiento
     SumListChanged = EKDbSuma1SumListChanged
-    Left = 640
-    Top = 257
+    Left = 720
+    Top = 313
   end
   object ZQ_ExisteNroOrden: TZQuery
     Connection = DM.Conexion
@@ -1160,8 +1183,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Name = 'nroOrd'
         ParamType = ptUnknown
       end>
-    Left = 679
-    Top = 381
+    Left = 719
+    Top = 373
     ParamData = <
       item
         DataType = ftUnknown
@@ -1176,8 +1199,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 699
-    Top = 277
+    Left = 723
+    Top = 261
     Data = {
       530000009619E0BD0100000018000000020000000000030000005300096E726F
       4368657175650100490000000100055749445448020002001400066573746164
