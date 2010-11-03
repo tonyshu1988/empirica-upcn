@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 146
-  Top = 16
+  Left = 239
+  Top = 56
   Width = 1050
   Height = 758
   Caption = 'Movimientos'
@@ -25,17 +25,17 @@ object FMovimientos: TFMovimientos
     Left = 0
     Top = 0
     Width = 930
-    Height = 672
+    Height = 668
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
       930
-      672)
+      668)
     object QR_OrdenPago: TQuickRep
       Tag = 99
       Left = 65
-      Top = 39
+      Top = -17
       Width = 794
       Height = 1123
       Frame.Color = clBlack
@@ -1006,7 +1006,7 @@ object FMovimientos: TFMovimientos
       object QRSubDetail14: TQRSubDetail
         Tag = 99
         Left = 38
-        Top = 317
+        Top = 272
         Width = 718
         Height = 18
         Frame.Color = clBlack
@@ -1059,7 +1059,7 @@ object FMovimientos: TFMovimientos
       object QRChildBand8: TQRChildBand
         Tag = 99
         Left = 38
-        Top = 335
+        Top = 290
         Width = 718
         Height = 15
         Frame.Color = clBlack
@@ -1234,7 +1234,7 @@ object FMovimientos: TFMovimientos
       object QRSubDetail17: TQRSubDetail
         Tag = 99
         Left = 38
-        Top = 350
+        Top = 305
         Width = 718
         Height = 18
         Frame.Color = clBlack
@@ -1417,9 +1417,9 @@ object FMovimientos: TFMovimientos
       object QRSubDetail18: TQRSubDetail
         Tag = 99
         Left = 38
-        Top = 368
+        Top = 323
         Width = 718
-        Height = 110
+        Height = 217
         Frame.Color = clBlack
         Frame.DrawTop = True
         Frame.DrawBottom = False
@@ -1430,7 +1430,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          291.041666666666700000
+          574.145833333333300000
           1899.708333333333000000)
         Master = QR_OrdenPago
         PrintBefore = False
@@ -1529,11 +1529,61 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           FontSize = 8
         end
+        object QRLblAutorizo: TQRLabel
+          Left = 382
+          Top = 148
+          Width = 250
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = True
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1010.708333333333000000
+            391.583333333333300000
+            661.458333333333300000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Autorizado por:'
+          Color = clWhite
+          Transparent = False
+          WordWrap = True
+          FontSize = 8
+        end
+        object QRLblConfecciona: TQRLabel
+          Left = 86
+          Top = 148
+          Width = 250
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = True
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            227.541666666666700000
+            391.583333333333300000
+            661.458333333333300000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Confeccion'#243':'
+          Color = clWhite
+          Transparent = False
+          WordWrap = True
+          FontSize = 8
+        end
       end
       object QRBand15: TQRBand
         Tag = 99
         Left = 38
-        Top = 478
+        Top = 540
         Width = 718
         Height = 16
         Frame.Color = clBlack
@@ -1543,6 +1593,7 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        Enabled = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
@@ -1610,162 +1661,6 @@ object FMovimientos: TFMovimientos
           Transparent = True
           WordWrap = True
           FontSize = 7
-        end
-      end
-      object ChildBand1: TQRChildBand
-        Tag = 99
-        Left = 38
-        Top = 272
-        Width = 718
-        Height = 45
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        AlignToBottom = False
-        Color = clWhite
-        ForceNewColumn = False
-        ForceNewPage = False
-        Size.Values = (
-          119.062500000000000000
-          1899.708333333333000000)
-        ParentBand = QRBand13
-        object QRLblConfecciona: TQRLabel
-          Left = 4
-          Top = 27
-          Width = 477
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            10.583333333333330000
-            71.437500000000000000
-            1262.062500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Confeccion'#243':'
-          Color = clWhite
-          Transparent = False
-          WordWrap = True
-          FontSize = 8
-        end
-        object QRLblAutorizo: TQRLabel
-          Left = 4
-          Top = 4
-          Width = 477
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            10.583333333333330000
-            10.583333333333330000
-            1262.062500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Autorizado por:'
-          Color = clWhite
-          Transparent = False
-          WordWrap = True
-          FontSize = 8
-        end
-        object QRShape6: TQRShape
-          Left = 2
-          Top = 21
-          Width = 714
-          Height = 1
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            2.645833333333333000
-            5.291666666666667000
-            55.562500000000000000
-            1889.125000000000000000)
-          Shape = qrsHorLine
-          VertAdjust = 0
-        end
-        object QRShape4: TQRShape
-          Left = 533
-          Top = 0
-          Width = 1
-          Height = 45
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            119.062500000000000000
-            1410.229166666667000000
-            0.000000000000000000
-            2.645833333333333000)
-          Shape = qrsVertLine
-          VertAdjust = 0
-        end
-        object QRLabel4: TQRLabel
-          Left = 492
-          Top = 4
-          Width = 38
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1301.750000000000000000
-            10.583333333333330000
-            100.541666666666700000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'Firma:'
-          Color = clWhite
-          Transparent = False
-          WordWrap = True
-          FontSize = 8
-        end
-        object QRLabel5: TQRLabel
-          Left = 492
-          Top = 27
-          Width = 38
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1301.750000000000000000
-            71.437500000000000000
-            100.541666666666700000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'Firma:'
-          Color = clWhite
-          Transparent = False
-          WordWrap = True
-          FontSize = 8
         end
       end
     end
@@ -3465,7 +3360,7 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 618
+      Top = 614
       Width = 930
       Height = 54
       Align = alBottom
@@ -3627,7 +3522,7 @@ object FMovimientos: TFMovimientos
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 542
+      Top = 538
       Width = 930
       Height = 76
       Align = alBottom
@@ -3802,7 +3697,7 @@ object FMovimientos: TFMovimientos
       Left = 0
       Top = 26
       Width = 930
-      Height = 440
+      Height = 436
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -3953,7 +3848,7 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 466
+      Top = 462
       Width = 930
       Height = 76
       Align = alBottom
@@ -4261,10 +4156,6 @@ object FMovimientos: TFMovimientos
             Visible = True
           end
           item
-            Item = btnEliminarMov
-            Visible = True
-          end
-          item
             BeginGroup = True
             Item = btnConciliar
             Visible = True
@@ -4334,6 +4225,11 @@ object FMovimientos: TFMovimientos
           end
           item
             Item = BtVerDetalle
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnEliminarMov
             Visible = True
           end>
         MultiLine = True
