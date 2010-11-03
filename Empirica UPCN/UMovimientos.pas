@@ -383,6 +383,8 @@ type
     EliminarMovimiento1: TMenuItem;
     ZQ_MovimientosNRO_ORDEN_STRING: TStringField;
     LIBRO_BANCONRO_ORDEN_STRING: TStringField;
+    ZQ_ExisteCheque: TZQuery;
+    IntegerField7: TIntegerField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -585,6 +587,7 @@ begin
 
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
+    EKDBDateEgreso_FechaEmision.SetFocus;
   end;
 end;
 
@@ -618,6 +621,7 @@ begin
 
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
+    EKDBDateIngreso_FechaEmision.SetFocus;
   end;
 end;
 
@@ -678,6 +682,7 @@ begin
       ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
     end;
 
+    try
     if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
     begin
       GrupoEditando.Enabled := true;
@@ -690,6 +695,13 @@ begin
       btaplicar.Click;
       LIBRO_BANCO.RecNo:= recNo;
     end;
+    except
+      begin
+       Application.MessageBox('Verifique el nro de cheque ingresado.'+char(13)
+                                +'(no debe duplicarse en el sistema)','Validación',MB_OK+MB_ICONINFORMATION);
+       exit;
+      end
+    end
   end;
 end;
 

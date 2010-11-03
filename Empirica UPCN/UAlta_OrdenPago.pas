@@ -139,6 +139,9 @@ type
     ZQ_MovimientosNRO_ORDEN_STRING: TStringField;
     ZQ_ExisteNroOrden: TZQuery;
     ZQ_ExisteNroOrdenNRO_ORDEN: TIntegerField;
+    ChequesPorOrden: TClientDataSet;
+    ChequesPorOrdennroCheque: TStringField;
+    ChequesPorOrdenestado: TStringField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -222,12 +225,14 @@ begin
   if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then //SI ESTOY DANDO DE ALTA O EDITANDO
   begin
     if ((sender as tdbgrid).SelectedField.FullName = 'ID_MEDIO')and(ZQ_Cuenta_MovimientoID_MEDIO.IsNull) then
-      if EK_ListadoMedCobroPago.Buscar then
       begin
-        //ZQ_Medios_Cobro_Pago.Refresh;
-        ZQ_Cuenta_Movimiento.Edit;
-        ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
-      end;
+        if EK_ListadoMedCobroPago.Buscar then
+        begin
+          //ZQ_Medios_Cobro_Pago.Refresh;
+          ZQ_Cuenta_Movimiento.Edit;
+          ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
+        end
+      end
   end;
 end;
 
@@ -261,6 +266,8 @@ begin
   ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger :=ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
   ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
   ZQ_Cuenta_Movimiento.Open;
+
+ 
 
   NroOrden:=ZQ_MovimientosNRO_ORDEN_STRING.AsString;
 
@@ -441,8 +448,7 @@ begin
         nro_mov:= ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
 
 
-
-      if ZQ_Cuenta_Movimiento.IsEmpty then
+     if ZQ_Cuenta_Movimiento.IsEmpty then
       begin
         Application.MessageBox('Debe ingresar al menos un medio de Pago.','Atención',MB_OK+MB_ICONINFORMATION);
         exit;
@@ -473,14 +479,22 @@ begin
       end;
 
       ZQ_MovimientosIMPORTE.AsFloat:= EKDbSuma1.SumCollection[0].SumValue;
-
+    try
       if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
       begin
-        close;
+        close
       end
       else
-        DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
-    end;
+        begin
+        dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+        end;
+    except
+      begin
+        Application.MessageBox('Verifique los nros de cheque ingresados.'+char(13)+'(no deben duplicarse en el sistema/orden de pago)','Validación',MB_OK+MB_ICONINFORMATION);
+        exit;
+      end;
+    end
+  end;
 end;
 
 
@@ -604,5 +618,7 @@ begin
   if ZQ_Movimientos.State = dsInsert then //solamente se cambia cuando estoy insertando (VER SI ES ASI O SE CAMBIA SIEMPRE)
     ZQ_MovimientosNRO_ORDEN_STRING.AsString:= Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger)]);
 end;
+
+
 
 end.

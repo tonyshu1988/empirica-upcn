@@ -1,11 +1,11 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 258
-  Top = 243
+  Left = 290
+  Top = 110
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
-  ClientHeight = 527
-  ClientWidth = 771
+  ClientHeight = 537
+  ClientWidth = 795
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -21,8 +21,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object PEgresos: TPanel
     Left = 0
     Top = 0
-    Width = 771
-    Height = 475
+    Width = 795
+    Height = 485
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -44,15 +44,15 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     object panel_edicion_medio_de_pago: TPanel
       Left = 3
       Top = 229
-      Width = 765
-      Height = 243
+      Width = 789
+      Height = 253
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Shape5: TShape
         Left = 0
         Top = 0
-        Width = 765
+        Width = 789
         Height = 20
         Align = alTop
         Brush.Color = 16762544
@@ -76,8 +76,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       object DbGridMediosCobroPago: TDBGrid
         Left = 1
         Top = 23
-        Width = 765
-        Height = 180
+        Width = 789
+        Height = 190
         Align = alCustom
         Anchors = [akLeft, akTop, akRight, akBottom]
         Color = 16772842
@@ -97,7 +97,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
             FieldName = 'FECHA_MDC'
             Title.Alignment = taCenter
             Title.Caption = 'Fecha PD'
-            Width = 88
+            Width = 89
             Visible = True
           end
           item
@@ -120,8 +120,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
             Expanded = False
             FieldName = 'NRO_CHEQUE_TRANSF'
             Title.Alignment = taCenter
-            Title.Caption = 'Nro Chque\Transf'
-            Width = 132
+            Title.Caption = 'Nro Cheque\Transf'
+            Width = 197
             Visible = True
           end
           item
@@ -129,20 +129,20 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
             FieldName = 'IMPORTE'
             Title.Alignment = taCenter
             Title.Caption = 'Importe'
-            Width = 92
+            Width = 150
             Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
-        Top = 205
-        Width = 765
+        Top = 215
+        Width = 789
         Height = 38
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
         object txt_total_medio_pago: TLabel
-          Left = 678
+          Left = 702
           Top = 0
           Width = 87
           Height = 38
@@ -171,13 +171,13 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     object gBoxDatos: TGroupBox
       Left = 3
       Top = 3
-      Width = 765
+      Width = 789
       Height = 226
       Align = alTop
       Caption = ' Datos Orden de Pago  '
       TabOrder = 0
       DesignSize = (
-        765
+        789
         226)
       object Label3: TLabel
         Left = 3
@@ -220,7 +220,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Transparent = True
       end
       object Label12: TLabel
-        Left = 617
+        Left = 641
         Top = 64
         Width = 129
         Height = 13
@@ -229,7 +229,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Transparent = True
       end
       object Label13: TLabel
-        Left = 617
+        Left = 641
         Top = 92
         Width = 124
         Height = 13
@@ -245,7 +245,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Caption = 'Nro Factura:'
       end
       object lblNroOrden: TLabel
-        Left = 265
+        Left = 289
         Top = 9
         Width = 326
         Height = 32
@@ -286,7 +286,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       object DBLUpCBoxProveedor: TDBLookupComboBox
         Left = 147
         Top = 60
-        Width = 464
+        Width = 488
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'NRO_PROVEEDOR'
@@ -322,7 +322,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       object DBLUpCBoxConcepto: TDBLookupComboBox
         Left = 147
         Top = 88
-        Width = 464
+        Width = 488
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'ID_CONCEPTO'
@@ -421,7 +421,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         DataSource = DS_Movimientos
       end
       object dbNroOrden: TDBEdit
-        Left = 595
+        Left = 619
         Top = 8
         Width = 166
         Height = 38
@@ -669,8 +669,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
   end
   object ActionManager1: TActionManager
-    Left = 712
-    Top = 257
+    Left = 456
+    Top = 185
     StyleName = 'XP Style'
     object ADeleteLinea: TAction
       Caption = 'DeleteLinea'
@@ -1170,6 +1170,23 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end>
     object ZQ_ExisteNroOrdenNRO_ORDEN: TIntegerField
       FieldName = 'NRO_ORDEN'
+    end
+  end
+  object ChequesPorOrden: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 699
+    Top = 277
+    Data = {
+      530000009619E0BD0100000018000000020000000000030000005300096E726F
+      4368657175650100490000000100055749445448020002001400066573746164
+      6F01004900000001000557494454480200020014000000}
+    object ChequesPorOrdennroCheque: TStringField
+      FieldName = 'nroCheque'
+    end
+    object ChequesPorOrdenestado: TStringField
+      FieldName = 'estado'
     end
   end
 end

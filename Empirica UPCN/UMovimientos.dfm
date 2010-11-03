@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 215
-  Top = 189
+  Left = 146
+  Top = 16
   Width = 1050
   Height = 758
   Caption = 'Movimientos'
@@ -5675,6 +5675,30 @@ object FMovimientos: TFMovimientos
       Caption = 'Conciliar/Desconciliar'
       ImageIndex = 33
       OnClick = ConciliarMovimiento1Click
+    end
+  end
+  object ZQ_ExisteCheque: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select m.nro_orden'
+      'from ie_movimientos m'
+      'where m.nro_orden_string=:nroOrd')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'nroOrd'
+        ParamType = ptUnknown
+      end>
+    Left = 879
+    Top = 285
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'nroOrd'
+        ParamType = ptUnknown
+      end>
+    object IntegerField7: TIntegerField
+      FieldName = 'NRO_ORDEN'
     end
   end
 end
