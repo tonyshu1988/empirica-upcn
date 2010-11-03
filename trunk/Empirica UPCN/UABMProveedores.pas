@@ -91,6 +91,20 @@ type
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
     ZQ_IE_ProveedoresEDITABLE: TStringField;
+    ZQ_Cuentas: TZQuery;
+    ZQ_CuentasID_CUENTA: TIntegerField;
+    ZQ_CuentasNOMBRE_CUENTA: TStringField;
+    ZQ_CuentasMEDIO_DE_PAGO: TStringField;
+    ZQ_CuentasNRO_CUENTA_BANCARIA: TStringField;
+    ZQ_CuentasULTIMO_NRO: TIntegerField;
+    ZQ_CuentasAUTONUMERAR: TStringField;
+    ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField;
+    ZQ_CuentasBUSQUEDA: TStringField;
+    DS_Cuentas: TDataSource;
+    Label8: TLabel;
+    DBLUpCBoxCuenta: TDBLookupComboBox;
+    ZQ_IE_ProveedoresID_CUENTA: TIntegerField;
+    ZQ_IE_Proveedores_cuenta: TStringField;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -261,6 +275,7 @@ procedure TFABMProveedores.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_TipoDocumento);
+  dm.EKModelo.abrir(ZQ_Cuentas);
   EKBusquedaAvanzada1.Abrir;
 end;
 
@@ -323,7 +338,13 @@ result := true;
       result := false;
       exit;
     end;
-
+  if (DBLUpCBoxCuenta.Text='') then
+  begin
+    Application.MessageBox('El campo "Cuenta" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    DBLUpCBoxCuenta.SetFocus;
+    result := false;
+    exit;
+  end;
 end;
 
 procedure TFABMProveedores.FormClose(Sender: TObject;

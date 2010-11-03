@@ -1,8 +1,8 @@
 object FABMProveedores: TFABMProveedores
-  Left = 314
-  Top = 279
-  Width = 870
-  Height = 500
+  Left = 279
+  Top = 251
+  Width = 945
+  Height = 592
   Caption = 'ABM Proveedores'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -24,8 +24,8 @@ object FABMProveedores: TFABMProveedores
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 414
+    Width = 929
+    Height = 506
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
@@ -799,9 +799,9 @@ object FABMProveedores: TFABMProveedores
     end
     object Panel_edicion: TPanel
       Left = 1
-      Top = 294
-      Width = 852
-      Height = 119
+      Top = 342
+      Width = 927
+      Height = 163
       Align = alBottom
       TabOrder = 0
       Visible = False
@@ -821,7 +821,7 @@ object FABMProveedores: TFABMProveedores
       end
       object Label2: TLabel
         Left = 10
-        Top = 39
+        Top = 36
         Width = 119
         Height = 13
         Caption = 'Nombre de Fantas'#237'a:'
@@ -835,7 +835,7 @@ object FABMProveedores: TFABMProveedores
       end
       object Label16: TLabel
         Left = 10
-        Top = 97
+        Top = 113
         Width = 60
         Height = 13
         Caption = 'Tel'#233'fonos:'
@@ -843,34 +843,42 @@ object FABMProveedores: TFABMProveedores
       end
       object Label5: TLabel
         Left = 10
-        Top = 68
+        Top = 87
         Width = 58
         Height = 13
         Caption = 'Direcci'#243'n:'
         Transparent = True
       end
       object Label3: TLabel
-        Left = 430
-        Top = 11
+        Left = 10
+        Top = 139
         Width = 39
         Height = 13
         Caption = 'E-Mail:'
         Transparent = True
       end
       object Label6: TLabel
-        Left = 430
-        Top = 35
+        Left = 10
+        Top = 62
         Width = 70
         Height = 13
         Caption = 'Documento:'
         Transparent = True
       end
       object Label7: TLabel
-        Left = 430
-        Top = 59
+        Left = 475
+        Top = 49
         Width = 106
         Height = 13
         Caption = 'Datos Adicionales:'
+        Transparent = True
+      end
+      object Label8: TLabel
+        Left = 475
+        Top = 6
+        Width = 46
+        Height = 13
+        Caption = 'Cuenta:'
         Transparent = True
       end
       object DBENombreApellido: TDBEdit
@@ -891,7 +899,7 @@ object FABMProveedores: TFABMProveedores
       end
       object DBENombreFantasia: TDBEdit
         Left = 133
-        Top = 35
+        Top = 32
         Width = 261
         Height = 21
         CharCase = ecUpperCase
@@ -906,9 +914,9 @@ object FABMProveedores: TFABMProveedores
         TabOrder = 1
       end
       object DBETelefono: TDBEdit
-        Left = 81
-        Top = 93
-        Width = 313
+        Left = 72
+        Top = 109
+        Width = 322
         Height = 21
         CharCase = ecUpperCase
         DataField = 'TELEFONOS'
@@ -919,11 +927,11 @@ object FABMProveedores: TFABMProveedores
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 5
       end
       object DBEDireccion: TDBEdit
         Left = 73
-        Top = 64
+        Top = 83
         Width = 321
         Height = 21
         CharCase = ecUpperCase
@@ -935,12 +943,12 @@ object FABMProveedores: TFABMProveedores
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 4
       end
       object DBENroDocumento: TDBEdit
-        Left = 619
-        Top = 31
-        Width = 188
+        Left = 176
+        Top = 58
+        Width = 218
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NRO_DOCUMENTO'
@@ -951,12 +959,12 @@ object FABMProveedores: TFABMProveedores
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 3
       end
       object DBEEmail: TDBEdit
-        Left = 475
-        Top = 7
-        Width = 332
+        Left = 72
+        Top = 135
+        Width = 322
         Height = 21
         DataField = 'EMAIL'
         DataSource = DS_IE_Proveedores
@@ -966,12 +974,12 @@ object FABMProveedores: TFABMProveedores
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 6
       end
       object DBLookupComboBox1: TDBLookupComboBox
-        Left = 509
-        Top = 31
-        Width = 104
+        Left = 85
+        Top = 58
+        Width = 92
         Height = 21
         DataField = 'TIPO_DOCUMENTO'
         DataSource = DS_IE_Proveedores
@@ -984,13 +992,13 @@ object FABMProveedores: TFABMProveedores
         ListField = 'DESCRIPCION'
         ListSource = DS_TipoDocumento
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 2
       end
       object dbDatosAdic: TDBMemo
-        Left = 430
-        Top = 77
-        Width = 377
-        Height = 37
+        Left = 475
+        Top = 64
+        Width = 310
+        Height = 91
         DataField = 'DESCRIPCION'
         DataSource = DS_IE_Proveedores
         Font.Charset = ANSI_CHARSET
@@ -999,14 +1007,32 @@ object FABMProveedores: TFABMProveedores
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
+        TabOrder = 8
+      end
+      object DBLUpCBoxCuenta: TDBLookupComboBox
+        Left = 475
+        Top = 21
+        Width = 310
+        Height = 21
+        DataField = 'ID_CUENTA'
+        DataSource = DS_IE_Proveedores
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        KeyField = 'ID_CUENTA'
+        ListField = 'BUSQUEDA'
+        ListSource = DS_Cuentas
+        ParentFont = False
         TabOrder = 7
       end
     end
     object DBGridProveedores: TDBGrid
       Left = 1
       Top = 20
-      Width = 852
-      Height = 274
+      Width = 927
+      Height = 322
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -1037,6 +1063,13 @@ object FABMProveedores: TFABMProveedores
         end
         item
           Expanded = False
+          FieldName = '_cuenta'
+          Title.Caption = 'Cuenta'
+          Width = 313
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'DIRECCION'
           Title.Alignment = taCenter
           Title.Caption = 'Direccion'
@@ -1062,7 +1095,7 @@ object FABMProveedores: TFABMProveedores
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 927
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -1084,7 +1117,7 @@ object FABMProveedores: TFABMProveedores
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 742
+        Left = 817
         Top = 1
         Width = 109
         Height = 17
@@ -1464,6 +1497,19 @@ object FABMProveedores: TFABMProveedores
       FieldName = 'EDITABLE'
       Size = 1
     end
+    object ZQ_IE_ProveedoresID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+    end
+    object ZQ_IE_Proveedores_cuenta: TStringField
+      FieldKind = fkLookup
+      FieldName = '_cuenta'
+      LookupDataSet = ZQ_Cuentas
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'BUSQUEDA'
+      KeyFields = 'ID_CUENTA'
+      Size = 100
+      Lookup = True
+    end
   end
   object DS_IE_Proveedores: TDataSource
     DataSet = ZQ_IE_Proveedores
@@ -1527,6 +1573,18 @@ object FABMProveedores: TFABMProveedores
         ItemIndex = -1
       end
       item
+        Titulo = 'Cuenta'
+        Campo = 'id_cuenta'
+        Tabla = 'IE_PROVEEDORES'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Cuentas
+        TipoCombollenarCampo = 'BUSQUEDA'
+        TipoCombollenarCampoReal = 'ID_CUENTA'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Baja'
         Campo = 'baja'
         Tabla = 'p'
@@ -1576,5 +1634,52 @@ object FABMProveedores: TFABMProveedores
     Ordenar = True
     Left = 80
     Top = 160
+  end
+  object ZQ_Cuentas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select c.*, c.nombre_cuenta||'#39' - '#39'|| coalesce ('#39'N'#176': '#39' || c.nro_c' +
+        'uenta_bancaria, '#39'N'#176': S/N'#39') Busqueda'
+      'from ie_cuentas c')
+    Params = <>
+    Left = 400
+    Top = 225
+    object ZQ_CuentasID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+      Required = True
+    end
+    object ZQ_CuentasNOMBRE_CUENTA: TStringField
+      FieldName = 'NOMBRE_CUENTA'
+      Size = 100
+    end
+    object ZQ_CuentasMEDIO_DE_PAGO: TStringField
+      FieldName = 'MEDIO_DE_PAGO'
+      Size = 50
+    end
+    object ZQ_CuentasNRO_CUENTA_BANCARIA: TStringField
+      FieldName = 'NRO_CUENTA_BANCARIA'
+      Size = 100
+    end
+    object ZQ_CuentasULTIMO_NRO: TIntegerField
+      FieldName = 'ULTIMO_NRO'
+    end
+    object ZQ_CuentasAUTONUMERAR: TStringField
+      FieldName = 'AUTONUMERAR'
+      Size = 1
+    end
+    object ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField
+      FieldName = 'MEDIO_POR_DEFECTO'
+    end
+    object ZQ_CuentasBUSQUEDA: TStringField
+      FieldName = 'BUSQUEDA'
+      ReadOnly = True
+      Size = 207
+    end
+  end
+  object DS_Cuentas: TDataSource
+    DataSet = ZQ_Cuentas
+    Left = 473
+    Top = 225
   end
 end

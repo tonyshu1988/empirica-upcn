@@ -404,30 +404,11 @@ var
   nro_mov : integer;
 begin
 
-      //borro los renglones vacios
-      ZQ_Cuenta_Movimiento.First;
-      while (not ZQ_Cuenta_Movimiento.Eof) do
-      begin
-       if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) then
-         ZQ_Cuenta_Movimiento.Delete;
+    //Borro los renglones vacios
+    ZQ_Cuenta_Movimiento.First;
 
-       if ((ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0)or(ZQ_Cuenta_MovimientoIMPORTE.IsNull)) then //si el importe es 0 entonces anulo el movimiento
-       begin
-         ZQ_Cuenta_Movimiento.Edit;
-         ZQ_Cuenta_MovimientoIMPORTE.AsFloat:=0;
-//         ZQ_Cuenta_MovimientoANULADO.AsString := 'A';
-       end
-       else //si el importe es distinto de cero
-       begin
-         ZQ_Cuenta_Movimiento.Edit;
-         ZQ_Movimientos.Edit;
-         ZQ_Cuenta_MovimientoANULADO.Clear;
-         ZQ_MovimientosANULADO.Clear;
-       end;
-            ZQ_Cuenta_Movimiento.Next;
-    end;
-    if (validarcampos)and(validarNroOrden(dbNroOrden.Text)) then
-    begin
+  if (validarcampos)and(validarNroOrden(dbNroOrden.Text)) then
+  begin
       ZQ_Cuenta_Movimiento.First;
       if ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0 then //si es un alta
       begin
@@ -453,44 +434,56 @@ begin
         Application.MessageBox('Debe ingresar al menos un medio de Pago.','Atención',MB_OK+MB_ICONINFORMATION);
         exit;
       end;
-
-      while not ZQ_Cuenta_Movimiento.Eof do //recorro todas la formas de pago cargadas
+      //Recorro todas la formas de pago cargadas
+      while not ZQ_Cuenta_Movimiento.Eof do
       begin
-        ZQ_Cuenta_Movimiento.Edit;
-        ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger :=nro_mov; //le agrego el nro de movimiento
+         if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) then ZQ_Cuenta_Movimiento.Delete;
 
-        if ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.IsNull then
-          ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
+         //Si el importe es 0 entonces anulo el movimiento
+         if ((ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0)or(ZQ_Cuenta_MovimientoIMPORTE.IsNull)) then
+         begin
+           ZQ_Cuenta_Movimiento.Edit;
+           ZQ_Cuenta_MovimientoIMPORTE.AsFloat:=0;
+         end
+         else
+         //Si el importe es distinto de cero
+         begin
+           ZQ_Cuenta_Movimiento.Edit;
+           ZQ_Movimientos.Edit;
+           ZQ_Cuenta_MovimientoANULADO.Clear;
+           ZQ_MovimientosANULADO.Clear;
+         end;
 
-        if ZQ_Cuenta_MovimientoFECHA_MDC.IsNull then //si la fecha es vacia le pongo la fecha de emision
-          ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime := ZQ_MovimientosFECHA.AsDateTime
-        else
-          if ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime < ZQ_MovimientosFECHA.AsDateTime then
-          begin
-            Application.MessageBox('La Fecha de postdatado de una de las forma de pago es menor a la fecha de emisión de la Orden','Validación',MB_OK+MB_ICONINFORMATION);
-            exit;
-          end;
+          ZQ_Cuenta_Movimiento.Edit;
+          ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger :=nro_mov; //le agrego el nro de movimiento
 
-        //si es un cheque y no tiene la marca de conciliado le pongo q no esta conciliado
-        if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) and (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then
-          ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
+          if ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.IsNull then
+            ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
 
-        ZQ_Cuenta_Movimiento.Next;
+          if ZQ_Cuenta_MovimientoFECHA_MDC.IsNull then //si la fecha es vacia le pongo la fecha de emision
+            ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime := ZQ_MovimientosFECHA.AsDateTime
+          else
+            if ZQ_Cuenta_MovimientoFECHA_MDC.AsDateTime < ZQ_MovimientosFECHA.AsDateTime then
+            begin
+              Application.MessageBox('La Fecha de postdatado de una de las forma de pago es menor a la fecha de emisión de la Orden','Validación',MB_OK+MB_ICONINFORMATION);
+              exit;
+            end;
+
+          //Si es un cheque y no tiene la marca de conciliado le pongo q no esta conciliado
+          if ((ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2)or(ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 3)) and (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then
+            ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
+
+          ZQ_Cuenta_Movimiento.Next;
       end;
 
       ZQ_MovimientosIMPORTE.AsFloat:= EKDbSuma1.SumCollection[0].SumValue;
     try
       if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+         Close;
+    Except
       begin
-        close
-      end
-      else
-        begin
-        dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
-        end;
-    except
-      begin
-        Application.MessageBox('Verifique los nros de cheque ingresados.'+char(13)+'(no deben duplicarse en el sistema/orden de pago)','Validación',MB_OK+MB_ICONINFORMATION);
+        Application.MessageBox('Verifique los nros de cheque ingresados.'+char(13)
+                              +'(no deben duplicarse en el sistema/orden de pago)','Validación',MB_OK+MB_ICONINFORMATION);
         exit;
       end;
     end
