@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
   Left = 355
-  Top = 223
+  Top = 134
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -267,26 +267,10 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Height = 13
         Caption = 'Nro Recibo:'
       end
-      object DBEditNroProveedor: TDBEdit
+      object DBLUpCBoxProveedor: TDBLookupComboBox
         Left = 92
         Top = 88
-        Width = 49
-        Height = 21
-        DataField = 'NRO_PROVEEDOR'
-        DataSource = DS_Movimientos
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 3
-        OnKeyUp = DBEditNroProveedorKeyUp
-      end
-      object DBLUpCBoxProveedor: TDBLookupComboBox
-        Left = 147
-        Top = 88
-        Width = 488
+        Width = 543
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'NRO_PROVEEDOR'
@@ -300,7 +284,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = DS_Proveedores
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 3
         OnKeyUp = DBEditNroProveedorKeyUp
       end
       object DBMemoDescripcion: TDBMemo
@@ -317,12 +301,12 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 8
       end
       object DBLUpCBoxConcepto: TDBLookupComboBox
-        Left = 147
+        Left = 168
         Top = 116
-        Width = 488
+        Width = 467
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'ID_CONCEPTO'
@@ -335,22 +319,6 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         KeyField = 'ID_CONCEPTO'
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = DS_Conceptos
-        ParentFont = False
-        TabOrder = 6
-        OnKeyUp = DBEditNroConceptoKeyUp
-      end
-      object DBEditNroConcepto: TDBEdit
-        Left = 92
-        Top = 116
-        Width = 49
-        Height = 21
-        DataField = 'ID_CONCEPTO'
-        DataSource = DS_Movimientos
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 5
         OnKeyUp = DBEditNroConceptoKeyUp
@@ -385,7 +353,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 6
       end
       object DBEditNroRecibo: TDBEdit
         Left = 450
@@ -400,7 +368,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 7
       end
       object dbFechaEmision: TEKDBDateTimePicker
         Left = 92
@@ -438,6 +406,26 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         MaxLength = 7
         ParentFont = False
         TabOrder = 1
+      end
+      object DBLookupComboBox1: TDBLookupComboBox
+        Left = 92
+        Top = 116
+        Width = 75
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'ID_CONCEPTO'
+        DataSource = DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        KeyField = 'ID_CONCEPTO'
+        ListField = 'COD_CORTO'
+        ListSource = DS_Conceptos
+        ParentFont = False
+        TabOrder = 4
+        OnKeyUp = DBEditNroConceptoKeyUp
       end
     end
   end
@@ -1196,15 +1184,10 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
   end
   object ChequesPorOrden: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     Left = 723
     Top = 261
-    Data = {
-      530000009619E0BD0100000018000000020000000000030000005300096E726F
-      4368657175650100490000000100055749445448020002001400066573746164
-      6F01004900000001000557494454480200020014000000}
     object ChequesPorOrdennroCheque: TStringField
       FieldName = 'nroCheque'
     end

@@ -31,11 +31,9 @@ type
     Label13: TLabel;
     Label25: TLabel;
     lblNroOrden: TLabel;
-    DBEditNroProveedor: TDBEdit;
     DBLUpCBoxProveedor: TDBLookupComboBox;
     DBMemoDescripcion: TDBMemo;
     DBLUpCBoxConcepto: TDBLookupComboBox;
-    DBEditNroConcepto: TDBEdit;
     DBLUpCBoxCuenta: TDBLookupComboBox;
     DBEditNroFactura: TDBEdit;
     Label26: TLabel;
@@ -145,6 +143,7 @@ type
     ZQ_ProveedoresDESCRIPCION: TStringField;
     ZQ_ProveedoresEDITABLE: TStringField;
     ZQ_ProveedoresID_CUENTA: TIntegerField;
+    DBLookupComboBox1: TDBLookupComboBox;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -187,7 +186,7 @@ const
 
 implementation
 
-uses UDM, DateUtils;
+uses UDM, DateUtils, UMovimientos;
 
 {$R *.dfm}
 
@@ -483,8 +482,10 @@ begin
       ZQ_MovimientosIMPORTE.AsFloat:= EKDbSuma1.SumCollection[0].SumValue;
     try
       if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
-         Close;
-    Except
+         Close
+      else
+        raise Exception.Create('Verifique los nros de cheque ingresados.');
+    except
       begin
         Application.MessageBox('Verifique los nros de cheque ingresados.'+char(13)
                               +'(no deben duplicarse en el sistema/orden de pago)','Validación',MB_OK+MB_ICONINFORMATION);
@@ -577,9 +578,14 @@ end;
 
 procedure TFAlta_OrdenPago.FormCreate(Sender: TObject);
 begin
-  dm.EKModelo.abrir(ZQ_Proveedores);
   dm.EKModelo.abrir(ZQ_Conceptos);
   dm.EKModelo.abrir(ZQ_Cuentas);
+  ZQ_Cuentas.Locate('id_cuenta',FMovimientos.ZQ_CuentasID_CUENTA.AsInteger,[]);
+  ZQ_Proveedores.Active:=false;
+  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Proveedores.Active:=true;
+  dm.EKModelo.abrir(ZQ_Proveedores);
+
 
   if dm.EKUsrLogin1.PermisoAccionValor('ACCESO') = '' then
     CuentaNro:= 0
