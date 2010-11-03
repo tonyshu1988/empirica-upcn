@@ -142,6 +142,9 @@ type
     ChequesPorOrden: TClientDataSet;
     ChequesPorOrdennroCheque: TStringField;
     ChequesPorOrdenestado: TStringField;
+    ZQ_ProveedoresDESCRIPCION: TStringField;
+    ZQ_ProveedoresEDITABLE: TStringField;
+    ZQ_ProveedoresID_CUENTA: TIntegerField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -168,6 +171,7 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure dbFechaEmisionChange(Sender: TObject);
     function validarNroOrden(nro:String):boolean;
+    procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -613,5 +617,12 @@ begin
 end;
 
 
+
+procedure TFAlta_OrdenPago.ZQ_CuentasAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_Proveedores.Active:=false;
+  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Proveedores.Active:=true;
+end;
 
 end.
