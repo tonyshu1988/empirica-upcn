@@ -25,7 +25,7 @@ uses
 
 begin
   Application.Initialize;
-  Application.Title := 'UPCN';
+  Application.Title := 'GA-UPCN (Gestión Administrativa UPCN)';
   Application.CreateForm(TDM, DM);
   Application.Run;
 end.
