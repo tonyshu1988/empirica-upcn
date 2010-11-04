@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, QuickRpt, QRCtrls, Grids, DBGrids, ExtCtrls, dxBar,
   dxBarExtItems, EKVistaPreviaQR, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKBusquedaAvanzada;
+  ZDataset, EKBusquedaAvanzada, DBCtrls, StdCtrls;
 
 type
   TFReporteMovProveedor = class(TForm)
@@ -41,7 +41,6 @@ type
     QRBand18: TQRBand;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
     ZQ_MovimientoProveedores: TZQuery;
-    ZQ_MovimientoProveedoresNRO_ORDEN: TIntegerField;
     ZQ_MovimientoProveedoresFECHA_MDC: TDateField;
     ZQ_MovimientoProveedoresNRO_CHEQUE_TRANSF: TIntegerField;
     ZQ_MovimientoProveedoresCODIGO_CORTO: TStringField;
@@ -69,7 +68,7 @@ type
     QRDBText3: TQRDBText;
     QRLabel5: TQRLabel;
     QRLabel9: TQRLabel;
-    EKBusquedaAvanzada1: TEKBusquedaAvanzada;
+    EKBusquedaAvanzada: TEKBusquedaAvanzada;
     QRLabel35: TQRLabel;
     QRlblFechaHoyLibroBanco: TQRLabel;
     RepMovProveedores_Reporte_Titulo_2: TQRLabel;
@@ -86,7 +85,6 @@ type
     ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField;
     QRDBText4: TQRDBText;
     QRLabel10: TQRLabel;
-    ZQ_MovimientoProveedorescalc_importe: TFloatField;
     ZQ_Objeto_Movimiento: TZQuery;
     ZQ_Objeto_MovimientoID_OBJETO_MOVIMIENTO: TIntegerField;
     ZQ_Objeto_MovimientoDESCRIPCION: TStringField;
@@ -101,6 +99,69 @@ type
     ZQ_ConceptoNOMBRE_CONCEPTO: TStringField;
     ZQ_ConceptoBAJA: TStringField;
     ZQ_ConceptoIMPORTE: TFloatField;
+    ZQ_MovimientoProveedores_debe: TFloatField;
+    ZQ_MovimientoProveedores_haber: TFloatField;
+    ZQ_MovimientoProveedoresID_MEDIO: TIntegerField;
+    ZQ_MovimientoProveedoresID_CONCEPTO: TIntegerField;
+    ZQ_Proveedor: TZQuery;
+    ZQ_ProveedorNRO_PROVEEDOR: TIntegerField;
+    ZQ_ProveedorAPELLIDO_Y_NOMBRE: TStringField;
+    ZQ_ProveedorNOMBRE_FANTASIA: TStringField;
+    ZQ_ProveedorDIRECCION: TStringField;
+    ZQ_ProveedorTIPO_DOCUMENTO: TStringField;
+    ZQ_ProveedorNRO_DOCUMENTO: TStringField;
+    ZQ_ProveedorTELEFONOS: TStringField;
+    ZQ_ProveedorEMAIL: TStringField;
+    ZQ_ProveedorBAJA: TStringField;
+    ZQ_ProveedorDESCRIPCION: TStringField;
+    ZQ_ProveedorEDITABLE: TStringField;
+    ZQ_ProveedorID_CUENTA: TIntegerField;
+    PanelDatos: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label5: TLabel;
+    Label16: TLabel;
+    Label7: TLabel;
+    Label6: TLabel;
+    Label3: TLabel;
+    DBTxtRazonSocial: TDBText;
+    DBTxtNomFan: TDBText;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    DBText5: TDBText;
+    Panel2: TPanel;
+    Shape1: TShape;
+    Shape2: TShape;
+    Label4: TLabel;
+    Label8: TLabel;
+    DS_Proveedor: TDataSource;
+    ZQ_BuscarProveedor: TZQuery;
+    ZQ_BuscarProveedorNRO_PROVEEDOR: TIntegerField;
+    ZQ_BuscarProveedorAPELLIDO_Y_NOMBRE: TStringField;
+    ZQ_BuscarProveedorNOMBRE_FANTASIA: TStringField;
+    ZQ_BuscarProveedorDIRECCION: TStringField;
+    ZQ_BuscarProveedorTIPO_DOCUMENTO: TStringField;
+    ZQ_BuscarProveedorNRO_DOCUMENTO: TStringField;
+    ZQ_BuscarProveedorTELEFONOS: TStringField;
+    ZQ_BuscarProveedorEMAIL: TStringField;
+    ZQ_BuscarProveedorBAJA: TStringField;
+    ZQ_BuscarProveedorDESCRIPCION: TStringField;
+    ZQ_BuscarProveedorEDITABLE: TStringField;
+    ZQ_BuscarProveedorID_CUENTA: TIntegerField;
+    ZQ_MovimientoProveedoresNRO_ORDEN_STRING: TStringField;
+    ZQ_MovimientoProveedoresANULADO: TStringField;
+    pResumen: TPanel;
+    lblSaldo: TLabel;
+    GroupBox1: TGroupBox;
+    lblFiltroMedio: TLabel;
+    lblFiltroConcepto: TLabel;
+    lblFiltroTipoMov: TLabel;
+    lblFiltroEmiDesde: TLabel;
+    lblFiltroEmiHasta: TLabel;
+    lblFiltroPDDesde: TLabel;
+    lblFiltroPDHasta: TLabel;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -122,23 +183,39 @@ uses UDM;
 
 procedure TFReporteMovProveedor.btnBuscarClick(Sender: TObject);
 begin
-EKBusquedaAvanzada1.Buscar;
+  if EKBusquedaAvanzada.Buscar then
+  begin
+    ZQ_Proveedor.Close;
+    ZQ_Proveedor.ParamByName('id_prov').AsInteger:= StrToInt(EKBusquedaAvanzada.ParametrosSeleccionados1[0]);
+    ZQ_Proveedor.Open;
+
+    lblFiltroMedio.Caption:= 'Medio: '+EKBusquedaAvanzada.ParametrosSelecReales1[1];
+    lblFiltroConcepto.Caption:= 'Concepto: '+EKBusquedaAvanzada.ParametrosSelecReales1[2];
+    lblFiltroTipoMov.Caption:= 'Tipo  Movimiento: '+EKBusquedaAvanzada.ParametrosSelecReales1[3];
+    lblFiltroEmiDesde.Caption:= 'F. Emisión Desde: '+EKBusquedaAvanzada.ParametrosSelecReales1[4];
+    lblFiltroEmiHasta.Caption:= 'F. Emisión Hasta: '+EKBusquedaAvanzada.ParametrosSelecReales1[5];
+    lblFiltroPDDesde.Caption:= 'F. PD Desde: '+EKBusquedaAvanzada.ParametrosSelecReales1[6];
+    lblFiltroPDHasta.Caption:= 'F. PD Hasta: '+EKBusquedaAvanzada.ParametrosSelecReales1[7];
+  end
 end;
+
 
 procedure TFReporteMovProveedor.btnImprimirClick(Sender: TObject);
 begin
   if ZQ_MovimientoProveedores.IsEmpty then
     exit;
 
-    QRlblFechaHoyLibroBanco.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-    dm.VariablesReportes(RepMovProveedores);
-    EKVistaPreviaQR1.VistaPrevia;
+  QRlblFechaHoyLibroBanco.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  dm.VariablesReportes(RepMovProveedores);
+  EKVistaPreviaQR1.VistaPrevia;
 end;
+
 
 procedure TFReporteMovProveedor.btnSalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFReporteMovProveedor.ZQ_MovimientoProveedoresCalcFields(
   DataSet: TDataSet);
@@ -150,18 +227,30 @@ begin
     ZQ_Cuentas.Open;
 
     ZQ_MovimientoProveedoresie_Cuenta.AsString :=ZQ_CuentasNOMBRE_CUENTA.AsString+' '+ZQ_CuentasNRO_CUENTA_BANCARIA.AsString;
-    //ZQ_MovimientoProveedorescalc_importe.AsFloat := ZQ_MovimientoProveedoresIMPORTE.AsFloat*-1;
   end
   else
-  begin
+  begin                                   
     ZQ_Cuentas.Close;
     ZQ_Cuentas.ParamByName('ID_CUENTA').AsInteger:= ZQ_MovimientoProveedoresID_CUENTA_INGRESO.AsInteger;
     ZQ_Cuentas.Open;
 
     ZQ_MovimientoProveedoresie_Cuenta.AsString :=ZQ_CuentasNOMBRE_CUENTA.AsString+' '+ZQ_CuentasNRO_CUENTA_BANCARIA.AsString;
-    //ZQ_MovimientoProveedorescalc_importe.AsFloat := ZQ_MovimientoProveedoresIMPORTE.AsFloat;
   end;
 
+  case ZQ_MovimientoProveedoresID_MEDIO.AsInteger of
+  1: begin  //ORDEN DE PAGO
+      ZQ_MovimientoProveedores_debe.AsFloat:= ZQ_MovimientoProveedoresIMPORTE.AsFloat;
+      ZQ_MovimientoProveedores_haber.Clear;
+     end;
+  2: begin //INGRESO
+      ZQ_MovimientoProveedores_debe.Clear;
+      ZQ_MovimientoProveedores_haber.AsFloat:= ZQ_MovimientoProveedoresIMPORTE.AsFloat;
+     end;
+  3: begin //EGRESO
+      ZQ_MovimientoProveedores_debe.AsFloat:= ZQ_MovimientoProveedoresIMPORTE.AsFloat;
+      ZQ_MovimientoProveedores_haber.Clear;
+     end;
+  end;
 end;
 
 end.

@@ -83,7 +83,7 @@ type
     RepConciliacion: TQuickRep;
     QRBand5: TQRBand;
     QRDBImage1: TQRDBImage;
-    QRLabel12: TQRLabel;
+    QRLblTituloReporte: TQRLabel;
     RepConciliacion_Reporte_Titulo_2: TQRLabel;
     RepConciliacion_Reporte_Titulo_1: TQRLabel;
     QRBandDetalle: TQRBand;
@@ -108,8 +108,6 @@ type
     QRLabel6: TQRLabel;
     QRLabel7: TQRLabel;
     QRLabel8: TQRLabel;
-    QRLabel3: TQRLabel;
-    qrFecha: TQRLabel;
     QRLabel4: TQRLabel;
     qrSaldoLibroBanco: TQRLabel;
     QRLabel1: TQRLabel;
@@ -131,16 +129,21 @@ type
     lblSaldo: TLabel;
     lblFechaConciliacion: TLabel;
     lblFechaExtracto: TLabel;
+    QRlblMesEmision: TQRLabel;
+    QRLabel9: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
     procedure btImprimirClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnSalirClick(Sender: TObject);
+    procedure imprimirMesReporte();
+    procedure QRBandDetalleBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
-    { Private declarations }
+
   public
-    { Public declarations }
+    aux_fecha:string;
   end;
 
 var
@@ -154,6 +157,7 @@ uses UDM;
 
 procedure TFConciliacion.FormCreate(Sender: TObject);
 begin
+  aux_fecha:='';
   EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_Cuentas);
   lblNombreCuenta.Caption:= '';
@@ -165,6 +169,7 @@ begin
   lblSaldo.Caption:= '';
   lblDetalleExtracto.Caption:= '';
 end;
+
 
 procedure TFConciliacion.btnBuscarClick(Sender: TObject);
 begin
@@ -209,6 +214,7 @@ begin
   end;
 end;
 
+
 function TFConciliacion.validarcampos():boolean;
 begin
 result := true;
@@ -233,12 +239,13 @@ result := true;
     end;
 end;
 
+
 procedure TFConciliacion.btImprimirClick(Sender: TObject);
 begin
   if ZSP_Conciliacion.IsEmpty then exit;
 
   qrSaldoLibroBanco.Caption:=lblSaldo.Caption;
-  qrFecha.Caption:=lblFHasta.Caption;
+  QRLblTituloReporte.Caption:= 'CONCILIACION BANCARIA AL '+lblFHasta.Caption;
   qrSaldoConciliacion.Caption:=lblSaldoConciliacion.Caption;
   qrTotalHaber.Caption:=lblTotalHaber.Caption;
   qrExtracto.Caption:=lblSaldoExtracto.Caption;
@@ -250,15 +257,35 @@ begin
   EKVistaPreviaQR1.VistaPrevia;
 end;
 
+
 procedure TFConciliacion.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
+
 procedure TFConciliacion.btnSalirClick(Sender: TObject);
 begin
   close;
+end;
+
+
+procedure TFConciliacion.imprimirMesReporte;
+begin
+  if FormatDateTime('mm-yyyy', ZSP_ConciliacionFECHA.AsDateTime) <> aux_fecha then
+  begin
+    aux_fecha:= FormatDateTime('mm-yyyy', ZSP_ConciliacionFECHA.AsDateTime);
+    QRlblMesEmision.Caption:= UpperCase(FormatDateTime('MMM-YY',ZSP_ConciliacionFECHA.AsDateTime));
+  end
+  else
+    QRlblMesEmision.Caption:= '';
+end;
+
+procedure TFConciliacion.QRBandDetalleBeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  imprimirMesReporte;
 end;
 
 end.
