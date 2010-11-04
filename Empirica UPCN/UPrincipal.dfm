@@ -16,12 +16,13 @@ object FPrincipal: TFPrincipal
   Visible = True
   WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 569
-    Width = 863
+    Top = 567
+    Width = 855
     Height = 19
     Panels = <
       item
@@ -37,7 +38,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 863
+    Width = 855
     Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionToolBar1'
@@ -51,8 +52,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 863
-    Height = 540
+    Width = 855
+    Height = 538
     Align = alClient
     TabOrder = 2
   end
