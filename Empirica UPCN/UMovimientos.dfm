@@ -25,13 +25,13 @@ object FMovimientos: TFMovimientos
     Left = 0
     Top = 0
     Width = 1023
-    Height = 672
+    Height = 668
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
       1023
-      672)
+      668)
     object QR_OrdenPago: TQuickRep
       Tag = 99
       Left = 65
@@ -3360,7 +3360,7 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 618
+      Top = 614
       Width = 1023
       Height = 54
       Align = alBottom
@@ -3522,7 +3522,7 @@ object FMovimientos: TFMovimientos
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 502
+      Top = 498
       Width = 1023
       Height = 116
       Align = alBottom
@@ -3767,7 +3767,7 @@ object FMovimientos: TFMovimientos
       Left = 0
       Top = 26
       Width = 1023
-      Height = 360
+      Height = 356
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -3918,7 +3918,7 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 386
+      Top = 382
       Width = 1023
       Height = 116
       Align = alBottom
@@ -5414,6 +5414,8 @@ object FMovimientos: TFMovimientos
   object EKVistaPreviaOrdenPago: TEKVistaPreviaQR
     Reporte = QR_OrdenPago
     ShowModal = False
+    VerGuardar = False
+    VerExpImagen = False
     Caption = 'Orden de Pago'
     Left = 178
     Top = 329
@@ -5472,6 +5474,8 @@ object FMovimientos: TFMovimientos
   object EKVistaPrevia_LibroBco: TEKVistaPreviaQR
     Reporte = RepLibroB
     ShowModal = False
+    VerGuardar = False
+    VerExpImagen = False
     Caption = 'Reporte de Libro Banco'
     Left = 317
     Top = 326

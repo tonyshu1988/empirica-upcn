@@ -1,6 +1,6 @@
 object FListadoErogaciones: TFListadoErogaciones
-  Left = 228
-  Top = 185
+  Left = 129
+  Top = 190
   Width = 1130
   Height = 565
   Caption = 'Listado Erogaciones en Cumplimiento'
@@ -2281,6 +2281,8 @@ object FListadoErogaciones: TFListadoErogaciones
   object EKVistaPrevia: TEKVistaPreviaQR
     Reporte = RepErog
     ShowModal = False
+    VerGuardar = False
+    VerExpImagen = False
     Left = 664
     Top = 248
   end

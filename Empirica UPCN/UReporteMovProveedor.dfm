@@ -1585,6 +1585,8 @@ object FReporteMovProveedor: TFReporteMovProveedor
   object EKVistaPreviaQR1: TEKVistaPreviaQR
     Reporte = RepMovProveedores
     ShowModal = False
+    VerGuardar = False
+    VerExpImagen = False
     Left = 616
     Top = 338
   end

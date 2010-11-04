@@ -2385,6 +2385,7 @@ object FConciliacion: TFConciliacion
   object EKVistaPreviaQR1: TEKVistaPreviaQR
     Reporte = RepConciliacion
     ShowModal = False
+    VerGuardar = False
     VerExpImagen = False
     Left = 136
     Top = 88

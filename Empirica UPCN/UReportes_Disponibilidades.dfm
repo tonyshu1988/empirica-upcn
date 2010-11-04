@@ -1,6 +1,6 @@
 object FReportes_Disponibilidades: TFReportes_Disponibilidades
-  Left = 72
-  Top = 70
+  Left = 216
+  Top = 100
   Width = 1082
   Height = 576
   Caption = 'Reportes Disponibilidades'
@@ -23,14 +23,14 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     Left = 0
     Top = 0
     Width = 1066
-    Height = 490
+    Height = 486
     Align = alClient
     TabOrder = 4
     object pTapa: TPanel
       Left = 1
       Top = 1
       Width = 1064
-      Height = 488
+      Height = 484
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
@@ -39,7 +39,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       Left = 1
       Top = 1
       Width = 1064
-      Height = 488
+      Height = 484
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 3
@@ -49,7 +49,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Left = 3
         Top = 33
         Width = 1058
-        Height = 452
+        Height = 448
         Align = alClient
         Color = 16772842
         TabOrder = 0
@@ -129,7 +129,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       Left = 1
       Top = 1
       Width = 1064
-      Height = 488
+      Height = 484
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 3
@@ -138,7 +138,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Left = 3
         Top = 34
         Width = 1058
-        Height = 451
+        Height = 447
         Align = alClient
         Color = 16772842
         DataSource = DS_LIBRO_BANCO
@@ -2201,6 +2201,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   object EKVistaPrevia_LibroBco: TEKVistaPreviaQR
     Reporte = RepLibroB
     ShowModal = False
+    VerGuardar = False
+    VerExpImagen = False
     Caption = 'Reporte de Libro Banco'
     Left = 162
     Top = 343

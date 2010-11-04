@@ -24,7 +24,7 @@ object FConceptos: TFConceptos
     Left = 0
     Top = 0
     Width = 854
-    Height = 414
+    Height = 410
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 4
@@ -681,7 +681,7 @@ object FConceptos: TFConceptos
       Left = 1
       Top = 20
       Width = 852
-      Height = 323
+      Height = 319
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Conceptos
@@ -760,7 +760,7 @@ object FConceptos: TFConceptos
     end
     object pDatos: TPanel
       Left = 1
-      Top = 343
+      Top = 339
       Width = 852
       Height = 70
       Align = alBottom
@@ -1249,6 +1249,8 @@ object FConceptos: TFConceptos
   object EKVistaPrevia: TEKVistaPreviaQR
     Reporte = RepCptos
     ShowModal = False
+    VerGuardar = False
+    VerExpImagen = False
     Left = 72
     Top = 80
   end

@@ -25,7 +25,7 @@ object FABMProveedores: TFABMProveedores
     Left = 0
     Top = 0
     Width = 929
-    Height = 506
+    Height = 502
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
@@ -799,7 +799,7 @@ object FABMProveedores: TFABMProveedores
     end
     object Panel_edicion: TPanel
       Left = 1
-      Top = 342
+      Top = 338
       Width = 927
       Height = 163
       Align = alBottom
@@ -1032,7 +1032,7 @@ object FABMProveedores: TFABMProveedores
       Left = 1
       Top = 20
       Width = 927
-      Height = 322
+      Height = 318
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -1624,6 +1624,9 @@ object FABMProveedores: TFABMProveedores
   object EKVistaPreviaQR1: TEKVistaPreviaQR
     Reporte = RepProv
     ShowModal = False
+    VerGuardar = False
+    VerExpImagen = False
+    VerExpWord = False
     Left = 256
     Top = 96
   end
