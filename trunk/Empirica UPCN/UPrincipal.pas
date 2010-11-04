@@ -73,6 +73,7 @@ type
     procedure AAuditoriaExecute(Sender: TObject);
     procedure ARepMovProveedorExecute(Sender: TObject);
     procedure AImprimirChequeExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -198,6 +199,11 @@ end;
 procedure TFPrincipal.AImprimirChequeExecute(Sender: TObject);
 begin
  EKVentanas1.Abrir(Sender, TFImpresionCheques, FImpresionCheques);
+end;
+
+procedure TFPrincipal.FormCreate(Sender: TObject);
+begin
+Caption:=Application.Title;
 end;
 
 end.
