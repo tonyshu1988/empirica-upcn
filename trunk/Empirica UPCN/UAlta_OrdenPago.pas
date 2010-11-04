@@ -143,6 +143,15 @@ type
     ZSP_DECODIFICAR_NRO_ORDEN: TZStoredProc;
     ZSP_DECODIFICAR_NRO_ORDENANIO: TIntegerField;
     ZSP_DECODIFICAR_NRO_ORDENNRO_ORDEN: TIntegerField;
+    ZQ_Configuracion: TZQuery;
+    ZQ_ConfiguracionCLAVE: TStringField;
+    ZQ_ConfiguracionFECHA: TDateField;
+    ZQ_ConfiguracionNUMERO: TFloatField;
+    ZQ_ConfiguracionTEXTO: TStringField;
+    ZQ_ConfiguracionNIVEL: TSmallintField;
+    ZQ_ConfiguracionGRUPO: TStringField;
+    ZQ_ConfiguracionDESCRIPCION: TStringField;
+    ZQ_ConfiguracionGRAFICO: TBlobField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -169,6 +178,7 @@ type
     procedure ACancelarExecute(Sender: TObject);
     function validarNroOrden(nro:String):boolean;
     procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
+    procedure dbFechaEmisionChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -178,7 +188,8 @@ type
 
 var
   FAlta_OrdenPago: TFAlta_OrdenPago;
-
+  NroOrdenAnt:Integer;
+  
 const
   Transaccion_Movimientos = 'ABM ORDEN PAGO';
 
@@ -310,7 +321,7 @@ begin
   ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
   ZQ_Cuenta_Movimiento.Open;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
+  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento,ZQ_Configuracion]) then
   begin
     ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
@@ -327,9 +338,12 @@ begin
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
 
     //Busco el nro de Orden Siguiente al mayor numero cargado
-    ZSP_NRO_ORDEN_SIGUIENTE.Active:=False;
-    ZSP_NRO_ORDEN_SIGUIENTE.Active:=True;
-    ZQ_MovimientosNRO_ORDEN_STRING.AsString:=ZSP_NRO_ORDEN_SIGUIENTENRO_ORDEN_STRING.AsString;
+    //ZSP_NRO_ORDEN_SIGUIENTE.Active:=False;
+    //ZSP_NRO_ORDEN_SIGUIENTE.Active:=True;
+    //ZQ_MovimientosNRO_ORDEN_STRING.AsString:=ZSP_NRO_ORDEN_SIGUIENTENRO_ORDEN_STRING.AsString;
+
+    ZQ_MovimientosNRO_ORDEN.AsInteger:=ZQ_ConfiguracionNUMERO.AsInteger;
+    ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNUMERO.AsInteger)]);
 
   end;
 end;
@@ -348,10 +362,10 @@ procedure TFAlta_OrdenPago.EditarOrdenPago(nroMovimiento: integer);
 begin
   habilitar(true);
   CargarDatos(nroMovimiento);
-  ZQ_Cuenta_Movimiento.ReadOnly:= false;   //Permito la edicion de la orden de Pago
+  ZQ_Cuenta_Movimiento.ReadOnly:=false;   //Permito la edicion de la orden de Pago
   FAlta_OrdenPago.Caption:= 'EDITANDO ORDEN DE PAGO NRO: '+ZQ_MovimientosNRO_ORDEN_STRING.AsString;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
+  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento,ZQ_Configuracion]) then
   begin
     ZQ_Movimientos.Edit;
     ZQ_Cuenta_Movimiento.Edit;
@@ -407,7 +421,7 @@ begin
       ZSP_DECODIFICAR_NRO_ORDEN.ParamByName('NRO_ORDEN_STRING').AsString:=dbNroOrden.Text;
       ZSP_DECODIFICAR_NRO_ORDEN.Active:=True;
       ZQ_MovimientosNRO_ORDEN.AsInteger:=ZSP_DECODIFICAR_NRO_ORDENNRO_ORDEN.AsInteger;
-
+      NroOrdenAnt:=ZQ_MovimientosNRO_ORDEN.AsInteger;
 
       ZQ_Cuenta_Movimiento.First;
       if ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0 then //si es un alta
@@ -469,11 +483,13 @@ begin
       end;
 
       ZQ_MovimientosIMPORTE.AsFloat:= EKDbSuma1.SumCollection[0].SumValue;
-
+      ZQ_Configuracion.Edit;
+      ZQ_ConfiguracionNUMERO.AsInteger:=nroOrdenAnt+1;
+      ZQ_Configuracion.Post;
+      
       try
         if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
            begin
-            NroOrdenAnt:=dbNroOrden.Text;
             Close;
            end
         else
@@ -493,7 +509,9 @@ end;
 function TFAlta_OrdenPago.validarNroOrden(nro:String):boolean;
 begin
   result := true;
-  if (dbNroOrden.Text=NroOrdenAnt) then exit;
+
+ // if (dbNroOrden.Text=NroOrdenAnt) then exit;
+
 end;
 
 function TFAlta_OrdenPago.validarcampos():boolean;
@@ -567,7 +585,7 @@ begin
   ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
   ZQ_Proveedores.Active:=true;
   dm.EKModelo.abrir(ZQ_Proveedores);
-
+  dm.EKModelo.abrir(ZQ_Configuracion);
 
   if dm.EKUsrLogin1.PermisoAccionValor('ACCESO') = '' then
     CuentaNro:= 0
@@ -603,6 +621,11 @@ begin
     ZQ_Proveedores.Active:=false;
     ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
     ZQ_Proveedores.Active:=true;
+end;
+
+procedure TFAlta_OrdenPago.dbFechaEmisionChange(Sender: TObject);
+begin
+       ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNUMERO.AsInteger)]);
 end;
 
 end.
