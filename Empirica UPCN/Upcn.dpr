@@ -18,7 +18,8 @@ uses
   UAlta_OrdenPago in 'UAlta_OrdenPago.pas' {FAlta_OrdenPago},
   UABM_MedioCobroPago in 'UABM_MedioCobroPago.pas' {FABM_MedioCobroPago},
   UAuditoria in 'UAuditoria.pas' {FAuditoria},
-  UReporteMovProveedor in 'UReporteMovProveedor.pas' {FReporteMovProveedor};
+  UReporteMovProveedor in 'UReporteMovProveedor.pas' {FReporteMovProveedor},
+  UImpresionCheques in 'UImpresionCheques.pas' {FImpresionCheques};
 
 {$R *.res}
 

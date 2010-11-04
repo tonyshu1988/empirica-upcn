@@ -20,8 +20,8 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 567
-    Width = 855
+    Top = 569
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -37,7 +37,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionToolBar1'
@@ -51,8 +51,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 538
+    Width = 863
+    Height = 540
     Align = alClient
     TabOrder = 2
   end
@@ -147,6 +147,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 48
       OnExecute = ARepMovProveedorExecute
     end
+    object AImprimirCheque: TAction
+      Caption = 'Imprimir Cheque'
+      ImageIndex = 27
+      OnExecute = AImprimirChequeExecute
+    end
   end
   object MainMenu1: TMainMenu
     Images = Iconos_Menu_16
@@ -201,6 +206,9 @@ object FPrincipal: TFPrincipal
       object MovimientoProveedor1: TMenuItem
         Tag = 1
         Action = ARepMovProveedor
+      end
+      object ImprimirCheque1: TMenuItem
+        Action = AImprimirCheque
       end
     end
     object Sistema: TMenuItem
@@ -8255,7 +8263,7 @@ object FPrincipal: TFPrincipal
     Left = 56
     Top = 178
     Bitmap = {
-      494C010149004A00040020002000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010149004A00040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060020000010020000000000000C0
       0400000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -18291,6 +18299,7 @@ object FPrincipal: TFPrincipal
       E00001FFF00000FFE00003FFE00003FFE00003FFF00001FFE00003FFE00003FF
       F00007FFF80003FFF00007FFF00007FFFC000FFFFC0007FFFC001FFFFC001FFF
       FF003FFFFF803FFFFF007FFFFF007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
 end
