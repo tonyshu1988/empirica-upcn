@@ -461,7 +461,6 @@ var
   FMovimientos: TFMovimientos;
   CuentaNro : integer;
   BanderaIngresoEgreso : integer; //Si es 1 es ingreso si es 0 es egreso
-  NroOrdenAnt:String;
 const
   Transaccion_Movimientos = 'ABM MOVIMIENTOS';
 

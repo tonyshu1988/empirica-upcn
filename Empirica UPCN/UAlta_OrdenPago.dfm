@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 355
-  Top = 134
+  Left = 344
+  Top = 224
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -326,7 +326,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       object DBLUpCBoxCuenta: TDBLookupComboBox
         Left = 92
         Top = 60
-        Width = 357
+        Width = 541
         Height = 21
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -384,6 +384,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
+        OnChange = dbFechaEmisionChange
         DataField = 'FECHA'
         DataSource = DS_Movimientos
       end
@@ -1122,15 +1123,10 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Top = 313
   end
   object ChequesPorOrden: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     Left = 723
     Top = 261
-    Data = {
-      530000009619E0BD0100000018000000020000000000030000005300096E726F
-      4368657175650100490000000100055749445448020002001400066573746164
-      6F01004900000001000557494454480200020014000000}
     object ChequesPorOrdennroCheque: TStringField
       FieldName = 'nroCheque'
     end
@@ -1215,6 +1211,47 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
     object ZSP_DECODIFICAR_NRO_ORDENNRO_ORDEN: TIntegerField
       FieldName = 'NRO_ORDEN'
+    end
+  end
+  object ZQ_Configuracion: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select c.clave, c.fecha, c.numero, c.texto, c.nivel, c.grupo, c.' +
+        'descripcion, c.grafico'
+      'from configuracion c'
+      'where c.clave='#39'ULTIMO_NRO_ORDEN_P'#39)
+    Params = <>
+    Left = 667
+    Top = 185
+    object ZQ_ConfiguracionCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Required = True
+    end
+    object ZQ_ConfiguracionFECHA: TDateField
+      FieldName = 'FECHA'
+    end
+    object ZQ_ConfiguracionNUMERO: TFloatField
+      FieldName = 'NUMERO'
+    end
+    object ZQ_ConfiguracionTEXTO: TStringField
+      FieldName = 'TEXTO'
+      Required = True
+      Size = 100
+    end
+    object ZQ_ConfiguracionNIVEL: TSmallintField
+      FieldName = 'NIVEL'
+    end
+    object ZQ_ConfiguracionGRUPO: TStringField
+      FieldName = 'GRUPO'
+      Size = 40
+    end
+    object ZQ_ConfiguracionDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object ZQ_ConfiguracionGRAFICO: TBlobField
+      FieldName = 'GRAFICO'
     end
   end
 end
