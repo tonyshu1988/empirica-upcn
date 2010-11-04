@@ -122,11 +122,6 @@ type
     ZQ_ProveedoresBAJA: TStringField;
     DS_Proveedores: TDataSource;
     DS_Conceptos: TDataSource;
-    ZQ_Ver_NroOrden: TZQuery;
-    ZQ_Ver_NroOrdenNRO_ORDEN_STRING: TStringField;
-    ZQ_Ver_NroOrdenNRO_ORDEN_INT: TIntegerField;
-    nro_orden: TZStoredProc;
-    nro_ordenID: TIntegerField;
     Nro_Moviemiento: TZStoredProc;
     Nro_MoviemientoID: TIntegerField;
     EKDbSuma1: TEKDbSuma;
@@ -135,8 +130,6 @@ type
     ACancelar: TAction;
     dbNroOrden: TDBEdit;
     ZQ_MovimientosNRO_ORDEN_STRING: TStringField;
-    ZQ_ExisteNroOrden: TZQuery;
-    ZQ_ExisteNroOrdenNRO_ORDEN: TIntegerField;
     ChequesPorOrden: TClientDataSet;
     ChequesPorOrdennroCheque: TStringField;
     ChequesPorOrdenestado: TStringField;
@@ -144,6 +137,12 @@ type
     ZQ_ProveedoresEDITABLE: TStringField;
     ZQ_ProveedoresID_CUENTA: TIntegerField;
     DBLookupComboBox1: TDBLookupComboBox;
+    ZSP_NRO_ORDEN_SIGUIENTE: TZStoredProc;
+    ZSP_NRO_ORDEN_SIGUIENTENRO_ORDEN_STRING: TStringField;
+    ZSP_NRO_ORDEN_SIGUIENTENRO_ORDEN_INT: TIntegerField;
+    ZSP_DECODIFICAR_NRO_ORDEN: TZStoredProc;
+    ZSP_DECODIFICAR_NRO_ORDENANIO: TIntegerField;
+    ZSP_DECODIFICAR_NRO_ORDENNRO_ORDEN: TIntegerField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -168,7 +167,6 @@ type
     procedure AVerDetalleExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
-    procedure dbFechaEmisionChange(Sender: TObject);
     function validarNroOrden(nro:String):boolean;
     procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
   private
@@ -180,7 +178,7 @@ type
 
 var
   FAlta_OrdenPago: TFAlta_OrdenPago;
-  NroOrden:String;
+
 const
   Transaccion_Movimientos = 'ABM ORDEN PAGO';
 
@@ -272,8 +270,6 @@ begin
 
  
 
-  NroOrden:=ZQ_MovimientosNRO_ORDEN_STRING.AsString;
-
   if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
   begin
     DBLUpCBoxCuenta.Enabled:= false;
@@ -281,7 +277,6 @@ begin
   end;
   DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
 
-  //edNroOrden.Text:=ZQ_MovimientosNRO_ORDEN_STRING.AsString;
 end;
 
 
@@ -301,7 +296,7 @@ end;
 
 procedure TFAlta_OrdenPago.AltaOrdenPago();
 begin
-  NroOrden:='';
+
   FAlta_OrdenPago.Caption:= 'ALTA ORDEN DE PAGO';
   habilitar(True);
 
@@ -317,16 +312,8 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
   begin
-    ZQ_Ver_NroOrden.Close;
-    ZQ_Ver_NroOrden.Open;
-
     ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
-
-//    //Cargo el Nro de orden de pago interno y el visual
-//    ZQ_MovimientosNRO_ORDEN.AsInteger:=ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger;
-    ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger)]);
-
 
     if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
     begin
@@ -337,9 +324,13 @@ begin
 
     //Cargo los valores por defecto...
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1; //PONGO QUE ES UNA ORDEN DE PAGO
-//    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
-//    ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
+
+    //Busco el nro de Orden Siguiente al mayor numero cargado
+    ZSP_NRO_ORDEN_SIGUIENTE.Active:=False;
+    ZSP_NRO_ORDEN_SIGUIENTE.Active:=True;
+    ZQ_MovimientosNRO_ORDEN_STRING.AsString:=ZSP_NRO_ORDEN_SIGUIENTENRO_ORDEN_STRING.AsString;
+
   end;
 end;
 
@@ -364,7 +355,6 @@ begin
   begin
     ZQ_Movimientos.Edit;
     ZQ_Cuenta_Movimiento.Edit;
-
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1; //PONGO QUE ES UNA ORDEN DE PAGO
   end;
 end;
@@ -407,11 +397,18 @@ var
   nro_mov : integer;
 begin
 
-    //Borro los renglones vacios
-    ZQ_Cuenta_Movimiento.First;
+  //Borro los renglones vacios
+  ZQ_Cuenta_Movimiento.First;
 
-  if (validarcampos)and(validarNroOrden(dbNroOrden.Text)) then
+  if (validarcampos) then
   begin
+
+      ZSP_DECODIFICAR_NRO_ORDEN.Active:=False;
+      ZSP_DECODIFICAR_NRO_ORDEN.ParamByName('NRO_ORDEN_STRING').AsString:=dbNroOrden.Text;
+      ZSP_DECODIFICAR_NRO_ORDEN.Active:=True;
+      ZQ_MovimientosNRO_ORDEN.AsInteger:=ZSP_DECODIFICAR_NRO_ORDENNRO_ORDEN.AsInteger;
+
+
       ZQ_Cuenta_Movimiento.First;
       if ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0 then //si es un alta
       begin
@@ -419,14 +416,6 @@ begin
         nro_mov := Nro_MoviemientoID.AsInteger;
         Nro_Moviemiento.Active := false;
         ZQ_MovimientosNRO_MOVIMIENTO.AsInteger := nro_mov;
-
-        //Esto se ejecuta en paralelo con el VER_NroOrden, habria q meter eso en la transacc asi qda guardado el incremento
-        if ZQ_MovimientosNRO_ORDEN.IsNull then
-        begin
-          nro_orden.Active := true; //obtengo el numero de orden de pago
-          ZQ_MovimientosNRO_ORDEN.AsInteger := nro_ordenID.AsInteger;
-          nro_orden.Active := false;
-        end;
       end
       else
         nro_mov:= ZQ_MovimientosNRO_MOVIMIENTO.AsInteger;
@@ -480,18 +469,23 @@ begin
       end;
 
       ZQ_MovimientosIMPORTE.AsFloat:= EKDbSuma1.SumCollection[0].SumValue;
-    try
-      if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
-         Close
-      else
-        raise Exception.Create('Verifique los nros de cheque ingresados.');
-    except
-      begin
-        Application.MessageBox('Verifique los nros de cheque ingresados.'+char(13)
-                              +'(no deben duplicarse en el sistema/orden de pago)','Validación',MB_OK+MB_ICONINFORMATION);
-        exit;
-      end;
-    end
+
+      try
+        if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+           begin
+            NroOrdenAnt:=dbNroOrden.Text;
+            Close;
+           end
+        else
+          raise Exception.Create('Error en Finalizar Transacción');
+      except
+        begin
+          Application.MessageBox('Verifique que los datos estén cargados correctamente.'+char(13)
+                                +'Revise el Nro de Orden y los nros de cheque ingresados.'+char(13)
+                                +'(no deben duplicarse en el sistema/orden de pago)','Orden de Pago',MB_OK+MB_ICONINFORMATION);
+          exit;
+        end;
+      end
   end;
 end;
 
@@ -499,19 +493,7 @@ end;
 function TFAlta_OrdenPago.validarNroOrden(nro:String):boolean;
 begin
   result := true;
-  if (dbNroOrden.Text=NroOrden) then exit;
-
-  ZQ_ExisteNroOrden.Close;
-  ZQ_ExisteNroOrden.ParamByName('nroOrd').AsString:=nro;
-  ZQ_ExisteNroOrden.Open;
-
-  if not(ZQ_ExisteNroOrden.IsEmpty) then
-  begin
-    Application.MessageBox('El Nro. de Orden ya há sido utilizado.'+char(13)+'(ingrese un nuevo Número de Orden)','Validación',MB_OK+MB_ICONINFORMATION);
-    dbNroOrden.SetFocus;
-    result := false;
-    exit;
-  end;
+  if (dbNroOrden.Text=NroOrdenAnt) then exit;
 end;
 
 function TFAlta_OrdenPago.validarcampos():boolean;
@@ -525,7 +507,7 @@ begin
       result := False;
       exit;
     end;
-
+   
   if (ZQ_MovimientosFECHA.IsNull) then
   begin
     Application.MessageBox('El campo "Fecha" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
@@ -616,19 +598,11 @@ begin
   btnCancelar.Click;
 end;
 
-procedure TFAlta_OrdenPago.dbFechaEmisionChange(Sender: TObject);
-begin
-  if ZQ_Movimientos.State = dsInsert then //solamente se cambia cuando estoy insertando (VER SI ES ASI O SE CAMBIA SIEMPRE)
-    ZQ_MovimientosNRO_ORDEN_STRING.AsString:= Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_Ver_NroOrdenNRO_ORDEN_INT.AsInteger)]);
-end;
-
-
-
 procedure TFAlta_OrdenPago.ZQ_CuentasAfterScroll(DataSet: TDataSet);
 begin
-  ZQ_Proveedores.Active:=false;
-  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-  ZQ_Proveedores.Active:=true;
+    ZQ_Proveedores.Active:=false;
+    ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_Proveedores.Active:=true;
 end;
 
 end.

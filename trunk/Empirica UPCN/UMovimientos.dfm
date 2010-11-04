@@ -1,7 +1,7 @@
 object FMovimientos: TFMovimientos
-  Left = 239
-  Top = 56
-  Width = 1050
+  Left = 118
+  Top = 26
+  Width = 1143
   Height = 758
   Caption = 'Movimientos'
   Color = clBtnFace
@@ -24,14 +24,14 @@ object FMovimientos: TFMovimientos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 930
-    Height = 668
+    Width = 1023
+    Height = 672
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
-      930
-      668)
+      1023
+      672)
     object QR_OrdenPago: TQuickRep
       Tag = 99
       Left = 65
@@ -3067,7 +3067,7 @@ object FMovimientos: TFMovimientos
     end
     object PanelImpresion: TPanel
       Tag = 99
-      Left = 251
+      Left = 301
       Top = 234
       Width = 505
       Height = 281
@@ -3239,7 +3239,7 @@ object FMovimientos: TFMovimientos
     object PParametrosLibroBanco: TPanel
       Left = 0
       Top = 0
-      Width = 930
+      Width = 1023
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -3329,7 +3329,7 @@ object FMovimientos: TFMovimientos
           'Fecha PD')
       end
       object Panel1: TPanel
-        Left = 844
+        Left = 937
         Top = 0
         Width = 86
         Height = 26
@@ -3360,8 +3360,8 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 614
-      Width = 930
+      Top = 618
+      Width = 1023
       Height = 54
       Align = alBottom
       BevelInner = bvLowered
@@ -3522,152 +3522,207 @@ object FMovimientos: TFMovimientos
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 538
-      Width = 930
-      Height = 76
+      Top = 502
+      Width = 1023
+      Height = 116
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 5
       Visible = False
       object Label16: TLabel
-        Left = 198
-        Top = 33
-        Width = 33
+        Left = 229
+        Top = 36
+        Width = 38
         Height = 13
-        Caption = 'Medio'
+        Caption = 'Medio:'
       end
       object Label18: TLabel
-        Left = 13
-        Top = 33
-        Width = 81
+        Left = 10
+        Top = 36
+        Width = 86
         Height = 13
-        Caption = 'Fecha Emision'
+        Caption = 'Fecha Emisi'#243'n:'
       end
       object Label23: TLabel
-        Left = 419
-        Top = 33
+        Left = 555
+        Top = 36
         Width = 109
         Height = 13
         Caption = 'Nro Cheque/Transf'
       end
       object Label24: TLabel
-        Left = 939
-        Top = 33
+        Left = 555
+        Top = 73
         Width = 46
         Height = 13
         Caption = 'Importe'
       end
       object Label1: TLabel
-        Left = 546
-        Top = 33
-        Width = 59
+        Left = 10
+        Top = 75
+        Width = 64
         Height = 13
-        Caption = 'Proveedor'
+        Caption = 'Proveedor:'
       end
       object Label3: TLabel
-        Left = 732
-        Top = 33
+        Left = 300
+        Top = 73
         Width = 54
         Height = 13
         Caption = 'Concepto'
       end
       object Label4: TLabel
-        Left = 111
-        Top = 33
-        Width = 53
+        Left = 119
+        Top = 36
+        Width = 58
         Height = 13
-        Caption = 'Fecha PD'
+        Caption = 'Fecha PD:'
+      end
+      object Label26: TLabel
+        Left = 748
+        Top = 36
+        Width = 67
+        Height = 13
+        Caption = 'Nro Recibo:'
       end
       object DBEditIngreso_NroCheque: TDBEdit
-        Left = 419
-        Top = 49
-        Width = 121
+        Left = 555
+        Top = 50
+        Width = 182
         Height = 21
         DataField = 'NRO_CHEQUE_TRANSF'
         DataSource = DS_Cuenta_Movimiento
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 4
       end
       object DBEditIngreso_Importe: TDBEdit
-        Left = 938
-        Top = 49
-        Width = 121
+        Left = 555
+        Top = 89
+        Width = 182
         Height = 21
         DataField = 'IMPORTE'
         DataSource = DS_Cuenta_Movimiento
-        TabOrder = 7
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 8
       end
       object DBLookupCBoxIngreso_Medio: TDBLookupComboBox
-        Left = 261
-        Top = 49
-        Width = 153
+        Left = 299
+        Top = 50
+        Width = 246
         Height = 21
         DataField = 'ID_MEDIO'
         DataSource = DS_Cuenta_Movimiento
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'ID_MEDIO'
         ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
         ListSource = DS_Medios_Cobro_Pago
+        ParentFont = False
         TabOrder = 3
         OnExit = DBLookupCBoxIngreso_MedioExit
         OnKeyUp = DBLookupCBoxIngreso_MedioKeyUp
       end
       object DBLookupCBoxIngreso_Proveedor: TDBLookupComboBox
-        Left = 546
-        Top = 49
-        Width = 182
+        Left = 10
+        Top = 89
+        Width = 287
         Height = 21
         DataField = 'NRO_PROVEEDOR'
         DataSource = DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'NRO_PROVEEDOR'
         ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = DS_Proveedores
-        TabOrder = 5
+        ParentFont = False
+        TabOrder = 6
         OnKeyUp = DBLookupCBoxIngreso_ProveedorKeyUp
       end
       object DBLookupCBoxIngreso_Concepto: TDBLookupComboBox
-        Left = 733
-        Top = 49
-        Width = 199
+        Left = 299
+        Top = 89
+        Width = 246
         Height = 21
         DataField = 'ID_CONCEPTO'
         DataSource = DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'ID_CONCEPTO'
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = DS_Conceptos
-        TabOrder = 6
+        ParentFont = False
+        TabOrder = 7
         OnKeyUp = DBLookupCBoxIngreso_ConceptoKeyUp
       end
       object EKDBDateIngreso_FechaEmision: TEKDBDateTimePicker
-        Left = 13
-        Top = 49
-        Width = 89
+        Left = 10
+        Top = 50
+        Width = 104
         Height = 21
         Date = 40470.714505208350000000
         Time = 40470.714505208350000000
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 0
         DataField = 'FECHA'
         DataSource = DS_Movimientos
       end
       object EKDBDateIngreso_FechaPD: TEKDBDateTimePicker
-        Left = 107
-        Top = 49
-        Width = 89
+        Left = 119
+        Top = 50
+        Width = 104
         Height = 21
         Date = 40470.714505208350000000
         Time = 40470.714505208350000000
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 1
         DataField = 'FECHA_MDC'
         DataSource = DS_Cuenta_Movimiento
       end
       object DBLookupCBoxIngreso_Codigo: TDBLookupComboBox
-        Left = 195
-        Top = 49
+        Left = 229
+        Top = 50
         Width = 67
         Height = 21
         DataField = 'ID_MEDIO'
         DataSource = DS_Cuenta_Movimiento
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'ID_MEDIO'
         ListField = 'CODIGO_CORTO'
         ListSource = DS_Medios_Cobro_Pago
+        ParentFont = False
         TabOrder = 2
         OnExit = DBLookupCBoxIngreso_CodigoExit
         OnKeyUp = DBLookupCBoxEgreso_MedioKeyUp
@@ -3676,7 +3731,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 930
+        Width = 1023
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -3690,14 +3745,29 @@ object FMovimientos: TFMovimientos
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 9
+      end
+      object DBEditNroRecibo: TDBEdit
+        Left = 746
+        Top = 50
+        Width = 241
+        Height = 21
+        DataField = 'NRO_RECIBO'
+        DataSource = DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 5
       end
     end
     object DBGridLibroBanco: TDBGrid
       Left = 0
       Top = 26
-      Width = 930
-      Height = 436
+      Width = 1023
+      Height = 360
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -3848,152 +3918,200 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 462
-      Width = 930
-      Height = 76
+      Top = 386
+      Width = 1023
+      Height = 116
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 7
       Visible = False
       object Label2: TLabel
-        Left = 198
+        Left = 235
         Top = 33
-        Width = 33
+        Width = 38
         Height = 13
-        Caption = 'Medio'
+        Caption = 'Medio:'
       end
       object Label5: TLabel
         Left = 13
         Top = 33
-        Width = 81
+        Width = 86
         Height = 13
-        Caption = 'Fecha Emision'
+        Caption = 'Fecha Emisi'#243'n:'
       end
       object Label6: TLabel
-        Left = 420
+        Left = 556
         Top = 33
-        Width = 109
+        Width = 114
         Height = 13
-        Caption = 'Nro Cheque/Transf'
+        Caption = 'Nro Cheque/Transf:'
       end
       object Label7: TLabel
-        Left = 938
-        Top = 33
-        Width = 46
+        Left = 556
+        Top = 74
+        Width = 51
         Height = 13
-        Caption = 'Importe'
+        Caption = 'Importe:'
       end
       object Label13: TLabel
-        Left = 546
-        Top = 33
-        Width = 59
+        Left = 10
+        Top = 74
+        Width = 64
         Height = 13
-        Caption = 'Proveedor'
+        Caption = 'Proveedor:'
       end
       object Label17: TLabel
-        Left = 732
-        Top = 33
-        Width = 54
+        Left = 301
+        Top = 74
+        Width = 59
         Height = 13
-        Caption = 'Concepto'
+        Caption = 'Concepto:'
       end
       object Label22: TLabel
-        Left = 111
+        Left = 123
         Top = 33
-        Width = 53
+        Width = 58
         Height = 13
-        Caption = 'Fecha PD'
+        Caption = 'Fecha PD:'
       end
       object DBEditEgreso_NroCheque: TDBEdit
-        Left = 419
+        Left = 556
         Top = 49
-        Width = 121
+        Width = 182
         Height = 21
         DataField = 'NRO_CHEQUE_TRANSF'
         DataSource = DS_Cuenta_Movimiento
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 4
       end
       object DBEditEgreso_Importe: TDBEdit
-        Left = 938
-        Top = 49
-        Width = 121
+        Left = 556
+        Top = 89
+        Width = 182
         Height = 21
         DataField = 'IMPORTE'
         DataSource = DS_Cuenta_Movimiento
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 7
       end
       object DBLookupCBoxEgreso_Medio: TDBLookupComboBox
-        Left = 261
+        Left = 301
         Top = 49
-        Width = 153
+        Width = 248
         Height = 21
         DataField = 'ID_MEDIO'
         DataSource = DS_Cuenta_Movimiento
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'ID_MEDIO'
         ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
         ListSource = DS_Medios_Cobro_Pago
+        ParentFont = False
         TabOrder = 3
         OnExit = DBLookupCBoxEgreso_MedioExit
         OnKeyUp = DBLookupCBoxEgreso_MedioKeyUp
       end
       object DBLookupCBoxEgreso_Proveedor: TDBLookupComboBox
-        Left = 546
-        Top = 49
-        Width = 182
+        Left = 10
+        Top = 89
+        Width = 287
         Height = 21
         DataField = 'NRO_PROVEEDOR'
         DataSource = DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'NRO_PROVEEDOR'
         ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = DS_Proveedores
+        ParentFont = False
         TabOrder = 5
         OnKeyUp = DBLookupCBoxEgreso_ProveedorKeyUp
       end
       object DBLookupCBoxEgreso_Concepto: TDBLookupComboBox
-        Left = 733
-        Top = 49
-        Width = 199
+        Left = 301
+        Top = 89
+        Width = 248
         Height = 21
         DataField = 'ID_CONCEPTO'
         DataSource = DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'ID_CONCEPTO'
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = DS_Conceptos
+        ParentFont = False
         TabOrder = 6
         OnKeyUp = DBLookupCBoxEgreso_ConceptoKeyUp
       end
       object EKDBDateEgreso_FechaEmision: TEKDBDateTimePicker
         Left = 13
         Top = 49
-        Width = 89
+        Width = 104
         Height = 21
         Date = 40470.714505208350000000
         Time = 40470.714505208350000000
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 0
         DataField = 'FECHA'
         DataSource = DS_Movimientos
       end
       object EKDBDateEgreso_FechaPD: TEKDBDateTimePicker
-        Left = 107
+        Left = 123
         Top = 49
-        Width = 89
+        Width = 103
         Height = 21
         Date = 40470.714505208350000000
         Time = 40470.714505208350000000
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 1
         DataField = 'FECHA_MDC'
         DataSource = DS_Cuenta_Movimiento
       end
       object DBLookupCBoxEgreso_Codigo: TDBLookupComboBox
-        Left = 195
+        Left = 235
         Top = 49
         Width = 67
         Height = 21
         DataField = 'ID_MEDIO'
         DataSource = DS_Cuenta_Movimiento
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'ID_MEDIO'
         ListField = 'CODIGO_CORTO'
         ListSource = DS_Medios_Cobro_Pago
+        ParentFont = False
         TabOrder = 2
         OnExit = DBLookupCBoxEgreso_CodigoExit
         OnKeyUp = DBLookupCBoxEgreso_MedioKeyUp
@@ -4002,7 +4120,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 930
+        Width = 1023
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -4607,6 +4725,7 @@ object FMovimientos: TFMovimientos
   end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_CuentasAfterScroll
     SQL.Strings = (
       
         'select c.*, c.nombre_cuenta||'#39' - '#39'|| coalesce ('#39'N'#176': '#39' || c.nro_c' +
@@ -4673,12 +4792,23 @@ object FMovimientos: TFMovimientos
     SQL.Strings = (
       'select *'
       'from ie_proveedores p'
-      'where nro_proveedor > 0'
-      'and p.baja<>'#39'S'#39
+      'where'
+      '(p.baja<>'#39'S'#39') and (p.id_cuenta=:idCta)'
       'order by apellido_y_nombre')
-    Params = <>
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idCta'
+        ParamType = ptUnknown
+      end>
     Left = 593
     Top = 49
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idCta'
+        ParamType = ptUnknown
+      end>
     object ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField
       FieldName = 'NRO_PROVEEDOR'
       Required = True
@@ -4714,6 +4844,17 @@ object FMovimientos: TFMovimientos
     object ZQ_ProveedoresBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
+    end
+    object ZQ_ProveedoresDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object ZQ_ProveedoresEDITABLE: TStringField
+      FieldName = 'EDITABLE'
+      Size = 1
+    end
+    object ZQ_ProveedoresID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
     end
   end
   object ZQ_Conceptos: TZQuery
@@ -5585,7 +5726,7 @@ object FMovimientos: TFMovimientos
         Name = 'nroOrd'
         ParamType = ptUnknown
       end>
-    Left = 879
+    Left = 807
     Top = 285
     ParamData = <
       item

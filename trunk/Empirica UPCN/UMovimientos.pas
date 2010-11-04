@@ -380,6 +380,11 @@ type
     IntegerField7: TIntegerField;
     QRLblAutorizo: TQRLabel;
     QRLblConfecciona: TQRLabel;
+    Label26: TLabel;
+    DBEditNroRecibo: TDBEdit;
+    ZQ_ProveedoresDESCRIPCION: TStringField;
+    ZQ_ProveedoresEDITABLE: TStringField;
+    ZQ_ProveedoresID_CUENTA: TIntegerField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -445,6 +450,7 @@ type
     procedure DBLookupCBoxEgreso_CodigoExit(Sender: TObject);
     procedure DBLookupCBoxIngreso_CodigoExit(Sender: TObject);
     procedure cargarDatosporDefecto();
+    procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -455,7 +461,7 @@ var
   FMovimientos: TFMovimientos;
   CuentaNro : integer;
   BanderaIngresoEgreso : integer; //Si es 1 es ingreso si es 0 es egreso
-
+  NroOrdenAnt:String;
 const
   Transaccion_Movimientos = 'ABM MOVIMIENTOS';
 
@@ -689,10 +695,12 @@ begin
       recNo:= LIBRO_BANCO.RecNo;
       btaplicar.Click;
       LIBRO_BANCO.RecNo:= recNo;
-    end;
+    end
+    else
+        raise Exception.Create('');
     except
       begin
-       Application.MessageBox('Verifique el nro de cheque ingresado.'+char(13)
+        Application.MessageBox('Verifique el nro de cheque ingresado.'+char(13)
                                 +'(no debe duplicarse en el sistema)','Validación',MB_OK+MB_ICONINFORMATION);
        exit;
       end
@@ -1694,7 +1702,9 @@ begin
   ZQ_Conceptos.Active:=false;
   ZQ_Conceptos.Active:=true;
   ZQ_Proveedores.Active:=false;
+  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
   ZQ_Proveedores.Active:=true;
+  dm.EKModelo.abrir(ZQ_Proveedores);
   ZQ_Cuentas.Active:=false;
   ZQ_Cuentas.Active:=true;
   ZQ_Autoriza.Active:=false;
@@ -1728,9 +1738,18 @@ begin
   // Si es Débito Bancario le dejo por defecto el proveedor y concepto DB.
   if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger=5) then
    begin
-      ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=1;
-      ZQ_MovimientosID_CONCEPTO.AsInteger:=1;
+      ZQ_Proveedores.Locate('apellido_y_nombre','DEBITO BANCARIO',[]);
+      ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
+      ZQ_Conceptos.Locate('nombre_concepto','DEBITO BANCARIO',[]);
+      ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
    end
+end;
+
+procedure TFMovimientos.ZQ_CuentasAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_Proveedores.Active:=false;
+  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Proveedores.Active:=true;
 end;
 
 end.
