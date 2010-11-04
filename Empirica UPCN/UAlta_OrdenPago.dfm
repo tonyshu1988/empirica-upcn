@@ -356,9 +356,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         TabOrder = 6
       end
       object DBEditNroRecibo: TDBEdit
-        Left = 450
+        Left = 456
         Top = 144
-        Width = 304
+        Width = 298
         Height = 21
         DataField = 'NRO_RECIBO'
         DataSource = DS_Movimientos
@@ -384,7 +384,6 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
-        OnChange = dbFechaEmisionChange
         DataField = 'FECHA'
         DataSource = DS_Movimientos
       end
@@ -1090,43 +1089,6 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Left = 587
     Top = 345
   end
-  object ZQ_Ver_NroOrden: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select nro_orden_string, nro_orden_int'
-      'from nro_orden_siguiente')
-    Params = <>
-    Left = 415
-    Top = 397
-    object ZQ_Ver_NroOrdenNRO_ORDEN_STRING: TStringField
-      FieldName = 'NRO_ORDEN_STRING'
-      Size = 11
-    end
-    object ZQ_Ver_NroOrdenNRO_ORDEN_INT: TIntegerField
-      FieldName = 'NRO_ORDEN_INT'
-    end
-  end
-  object nro_orden: TZStoredProc
-    Connection = DM.Conexion
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptResult
-      end>
-    StoredProcName = 'SP_GEN_IE_NRO_ORDEN_ID'
-    Left = 592
-    Top = 400
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptResult
-      end>
-    object nro_ordenID: TIntegerField
-      FieldName = 'ID'
-    end
-  end
   object Nro_Moviemiento: TZStoredProc
     Connection = DM.Conexion
     Params = <
@@ -1136,8 +1098,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_IE_MOVIMIENTOS_ID'
-    Left = 512
-    Top = 400
+    Left = 720
+    Top = 384
     ParamData = <
       item
         DataType = ftInteger
@@ -1159,40 +1121,100 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Left = 720
     Top = 313
   end
-  object ZQ_ExisteNroOrden: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select m.nro_orden'
-      'from ie_movimientos m'
-      'where m.nro_orden_string=:nroOrd')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'nroOrd'
-        ParamType = ptUnknown
-      end>
-    Left = 719
-    Top = 373
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'nroOrd'
-        ParamType = ptUnknown
-      end>
-    object ZQ_ExisteNroOrdenNRO_ORDEN: TIntegerField
-      FieldName = 'NRO_ORDEN'
-    end
-  end
   object ChequesPorOrden: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     Left = 723
     Top = 261
+    Data = {
+      530000009619E0BD0100000018000000020000000000030000005300096E726F
+      4368657175650100490000000100055749445448020002001400066573746164
+      6F01004900000001000557494454480200020014000000}
     object ChequesPorOrdennroCheque: TStringField
       FieldName = 'nroCheque'
     end
     object ChequesPorOrdenestado: TStringField
       FieldName = 'estado'
+    end
+  end
+  object ZSP_NRO_ORDEN_SIGUIENTE: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftString
+        Name = 'NRO_ORDEN_STRING'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'NRO_ORDEN_INT'
+        ParamType = ptResult
+      end>
+    StoredProcName = 'NRO_ORDEN_SIGUIENTE'
+    Left = 435
+    Top = 405
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'NRO_ORDEN_STRING'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'NRO_ORDEN_INT'
+        ParamType = ptResult
+      end>
+    object ZSP_NRO_ORDEN_SIGUIENTENRO_ORDEN_STRING: TStringField
+      FieldName = 'NRO_ORDEN_STRING'
+      Size = 11
+    end
+    object ZSP_NRO_ORDEN_SIGUIENTENRO_ORDEN_INT: TIntegerField
+      FieldName = 'NRO_ORDEN_INT'
+    end
+  end
+  object ZSP_DECODIFICAR_NRO_ORDEN: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ANIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'NRO_ORDEN'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftString
+        Name = 'NRO_ORDEN_STRING'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'DECODIFICAR_NRO_ORDEN'
+    Left = 587
+    Top = 396
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ANIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'NRO_ORDEN'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftString
+        Name = 'NRO_ORDEN_STRING'
+        ParamType = ptInput
+      end>
+    object ZSP_DECODIFICAR_NRO_ORDENANIO: TIntegerField
+      FieldName = 'ANIO'
+    end
+    object ZSP_DECODIFICAR_NRO_ORDENNRO_ORDEN: TIntegerField
+      FieldName = 'NRO_ORDEN'
     end
   end
 end
