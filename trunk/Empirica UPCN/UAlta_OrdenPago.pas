@@ -152,6 +152,8 @@ type
     ZQ_ConfiguracionGRUPO: TStringField;
     ZQ_ConfiguracionDESCRIPCION: TStringField;
     ZQ_ConfiguracionGRAFICO: TBlobField;
+    ZSP_EXISTE_CHEQUE: TZStoredProc;
+    ZSP_EXISTE_CHEQUEEXISTE: TStringField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -496,6 +498,8 @@ begin
           raise Exception.Create('Error en Finalizar Transacción');
       except
         begin
+          ZQ_Cuenta_Movimiento.edit;
+          ZQ_Movimientos.Edit;
           Application.MessageBox('Verifique que los datos estén cargados correctamente.'+char(13)
                                 +'Revise el Nro de Orden y los nros de cheque ingresados.'+char(13)
                                 +'(no deben duplicarse en el sistema/orden de pago)','Orden de Pago',MB_OK+MB_ICONINFORMATION);

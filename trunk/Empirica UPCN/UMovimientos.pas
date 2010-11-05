@@ -144,7 +144,6 @@ type
     mxNativeExcel1: TmxNativeExcel;
     mxDBGridExport: TmxDBGridExport;
     PanelImpresion: TPanel;
-    Label15: TLabel;
     Label19: TLabel;
     Label20: TLabel;
     Label21: TLabel;
@@ -385,6 +384,51 @@ type
     ZQ_ProveedoresDESCRIPCION: TStringField;
     ZQ_ProveedoresEDITABLE: TStringField;
     ZQ_ProveedoresID_CUENTA: TIntegerField;
+    QR_SolicitudCompra: TQuickRep;
+    QRBand1: TQRBand;
+    QRDBText9: TQRDBText;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRDBText10: TQRDBText;
+    QRDBText11: TQRDBText;
+    QRDBText18: TQRDBText;
+    QRLabel25: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRDBText19: TQRDBText;
+    QRShape4: TQRShape;
+    QRDBText20: TQRDBText;
+    QRLabel28: TQRLabel;
+    QRShape6: TQRShape;
+    QRDBText21: TQRDBText;
+    QRLabel29: TQRLabel;
+    QRLabel31: TQRLabel;
+    QRDBText23: TQRDBText;
+    QRShape17: TQRShape;
+    QRShape18: TQRShape;
+    QRLabel32: TQRLabel;
+    QRBand2: TQRBand;
+    QRLabel36: TQRLabel;
+    QRSubDetail1: TQRSubDetail;
+    QRLabel39: TQRLabel;
+    QRChildBand1: TQRChildBand;
+    QRLabel40: TQRLabel;
+    QRLabel42: TQRLabel;
+    QRLabel45: TQRLabel;
+    QRLabel46: TQRLabel;
+    QRSubDetail2: TQRSubDetail;
+    QRDBText26: TQRDBText;
+    QRDBText28: TQRDBText;
+    QRDBText29: TQRDBText;
+    QRDBText31: TQRDBText;
+    QRSubDetail3: TQRSubDetail;
+    QRLabel47: TQRLabel;
+    QRLabel49: TQRLabel;
+    QRLabel50: TQRLabel;
+    QRBand3: TQRBand;
+    qrDatosNombreyFecha: TQRSysData;
+    btnImprimirSolicitud: TdxBarLargeButton;
+    EKVistaPreviaSolicitud: TEKVistaPreviaQR;
+    Panel4: TPanel;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -451,6 +495,7 @@ type
     procedure DBLookupCBoxIngreso_CodigoExit(Sender: TObject);
     procedure cargarDatosporDefecto();
     procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
+    procedure btnImprimirSolicitudClick(Sender: TObject);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -1749,6 +1794,21 @@ begin
   ZQ_Proveedores.Active:=false;
   ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
   ZQ_Proveedores.Active:=true;
+end;
+
+procedure TFMovimientos.btnImprimirSolicitudClick(Sender: TObject);
+begin
+  ZQ_Cuenta_Movimiento.Close;
+  ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+  ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
+  ZQ_Cuenta_Movimiento.Open;
+
+  ZQ_Movimientos.Close;
+  ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+  ZQ_Movimientos.Open;
+  
+  qrDatosNombreyFecha.Text:=Format(' %s - ',[Application.Title]);
+  EKVistaPreviaSolicitud.VistaPrevia;
 end;
 
 end.
