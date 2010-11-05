@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 344
-  Top = 224
+  Left = 320
+  Top = 115
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -1252,6 +1252,38 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
     object ZQ_ConfiguracionGRAFICO: TBlobField
       FieldName = 'GRAFICO'
+    end
+  end
+  object ZSP_EXISTE_CHEQUE: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftString
+        Name = 'EXISTE'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'NRO_CHEQUE'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'EXISTE_CHEQUE'
+    Left = 555
+    Top = 460
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'EXISTE'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'NRO_CHEQUE'
+        ParamType = ptInput
+      end>
+    object ZSP_EXISTE_CHEQUEEXISTE: TStringField
+      FieldName = 'EXISTE'
+      Size = 1
     end
   end
 end
