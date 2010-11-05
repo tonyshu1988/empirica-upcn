@@ -14,7 +14,7 @@ type
     FShowModal : Boolean;
     FBorderIcons : TBorderIcons;
     Fvp : TEKVistaPreviaQRForm;
-    FVerConfImpresora, FVerImprimir, FVerExpWord, FVerExpImagen, FVerGuardar : Boolean;
+    FVerConfImpresora, FVerImprimir, FVerExpWord, FVerExpImagen, FVerGuardar, FVerExpExel : Boolean;
     FCaption : string;
     procedure SetReporte(const Value: TQuickRep);
   protected
@@ -37,6 +37,7 @@ type
     property VerGuardar : Boolean read FVerGuardar write FVerGuardar default True;
     property VerExpImagen : Boolean read FVerExpImagen write FVerExpImagen default True;
     property VerExpWord : Boolean read FVerExpWord write FVerExpWord default True;
+    property VerExpExel : Boolean read FVerExpExel write FVerExpExel default True;
     property VerImprimir : Boolean read FVerImprimir write FVerImprimir default True;
     property VerConfImpresora : Boolean read FVerConfImpresora write FVerConfImpresora default True;
     property Caption : string read Fcaption write FCaption ;
@@ -60,6 +61,7 @@ begin
   VerConfImpresora := true;
   VerImprimir := true;
   VerExpWord := true;
+  VerExpExel := true;
   VerExpImagen  := true;
   VerGuardar := true;
   Caption := '';
@@ -101,6 +103,7 @@ begin
     fvp.Conf_impresora.Visible := FVerConfImpresora;
     fvp.imagen.Visible := FVerExpImagen;
     fvp.word.Visible := FVerExpWord;
+    fvp.Excel.Visible := FVerExpExel;
     fvp.guardar.Visible := FVerGuardar;
     if caption > '' then
       fvp.Caption := caption;
