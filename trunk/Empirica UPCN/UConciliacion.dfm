@@ -2387,6 +2387,7 @@ object FConciliacion: TFConciliacion
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False
+    VerExpExel = False
     Left = 136
     Top = 88
   end

@@ -1587,6 +1587,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False
+    VerExpExel = False
     Left = 616
     Top = 338
   end

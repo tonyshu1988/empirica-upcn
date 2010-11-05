@@ -25,7 +25,7 @@ object FABM_Cuentas: TFABM_Cuentas
     Left = 0
     Top = 0
     Width = 875
-    Height = 414
+    Height = 410
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
@@ -681,7 +681,7 @@ object FABM_Cuentas: TFABM_Cuentas
     end
     object pDatos: TPanel
       Left = 2
-      Top = 322
+      Top = 318
       Width = 871
       Height = 90
       Align = alBottom
@@ -825,7 +825,7 @@ object FABM_Cuentas: TFABM_Cuentas
       Left = 2
       Top = 2
       Width = 871
-      Height = 320
+      Height = 316
       Align = alClient
       Color = 16772842
       DataSource = DS_Cuentas
@@ -1223,6 +1223,7 @@ object FABM_Cuentas: TFABM_Cuentas
     VerGuardar = False
     VerExpImagen = False
     VerExpWord = False
+    VerExpExel = False
     Left = 160
     Top = 224
   end

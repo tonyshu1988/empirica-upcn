@@ -1251,6 +1251,7 @@ object FConceptos: TFConceptos
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False
+    VerExpExel = False
     Left = 72
     Top = 80
   end
