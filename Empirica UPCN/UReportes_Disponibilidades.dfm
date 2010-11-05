@@ -2203,6 +2203,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False
+    VerExpExel = False
     Caption = 'Reporte de Libro Banco'
     Left = 162
     Top = 343

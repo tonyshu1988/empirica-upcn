@@ -1627,6 +1627,7 @@ object FABMProveedores: TFABMProveedores
     VerGuardar = False
     VerExpImagen = False
     VerExpWord = False
+    VerExpExel = False
     Left = 256
     Top = 96
   end

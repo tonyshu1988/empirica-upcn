@@ -20,15 +20,15 @@ object FImpresionCheques: TFImpresionCheques
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     TabOrder = 0
     object DBGridMercaderiaVendida: TDBGrid
       Left = 1
       Top = 1
-      Width = 860
-      Height = 414
+      Width = 852
+      Height = 408
       Align = alClient
       Color = 16772842
       DataSource = DS_movimientos
@@ -145,10 +145,10 @@ object FImpresionCheques: TFImpresionCheques
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          664.104166666666800000
+          664.104166666666700000
           1899.708333333333000000)
         BandType = rbDetail
-        object QRImage1: TQRImage
+        object QRImageCheque: TQRImage
           Left = 1
           Top = 1
           Width = 715
@@ -23636,7 +23636,7 @@ object FImpresionCheques: TFImpresionCheques
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            486.833333333333400000
+            486.833333333333300000
             243.416666666666700000
             338.666666666666700000)
           Alignment = taLeftJustify
@@ -23713,7 +23713,7 @@ object FImpresionCheques: TFImpresionCheques
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            584.729166666666800000
+            584.729166666666700000
             134.937500000000000000
             330.729166666666700000)
           Alignment = taLeftJustify
@@ -23732,7 +23732,7 @@ object FImpresionCheques: TFImpresionCheques
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -24125,6 +24125,7 @@ object FImpresionCheques: TFImpresionCheques
     VerGuardar = False
     VerExpImagen = False
     VerExpWord = False
+    VerExpExel = False
     VerConfImpresora = False
     Left = 216
     Top = 32

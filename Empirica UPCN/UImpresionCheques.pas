@@ -25,7 +25,7 @@ type
     btnImprimir: TdxBarLargeButton;
     GrupoVisualizando: TdxBarGroup;
     GrupoEditando: TdxBarGroup;
-    QRImage1: TQRImage;
+    QRImageCheque: TQRImage;
     QRDBText1: TQRDBText;
     ZQ_movimientos: TZQuery;
     ZQ_movimientosFECHA: TDateField;
@@ -63,6 +63,8 @@ uses UDM;
 
 procedure TFImpresionCheques.btnImprimirClick(Sender: TObject);
 begin
+  if ZQ_movimientos.IsEmpty then
+    exit;
 //EKNumeroALetras1.Numero := ZQ_movimientosIMPORTE.AsFloat;
 //QRLabelNumeroLetra.Caption := UpperCase(EKNumeroALetras1.AsString);
 //QRLabelFechaCheque.Caption := FormatDateTime('d mmmm, yyyy',ZQ_movimientosFECHA_MDC.AsDateTime);

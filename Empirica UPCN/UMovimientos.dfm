@@ -25,13 +25,13 @@ object FMovimientos: TFMovimientos
     Left = 0
     Top = 0
     Width = 989
-    Height = 672
+    Height = 668
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
       989
-      672)
+      668)
     object QR_OrdenPago: TQuickRep
       Tag = 99
       Left = 113
@@ -3365,7 +3365,7 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 618
+      Top = 614
       Width = 989
       Height = 54
       Align = alBottom
@@ -3527,7 +3527,7 @@ object FMovimientos: TFMovimientos
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 502
+      Top = 498
       Width = 989
       Height = 116
       Align = alBottom
@@ -3772,7 +3772,7 @@ object FMovimientos: TFMovimientos
       Left = 0
       Top = 26
       Width = 989
-      Height = 360
+      Height = 356
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -3923,7 +3923,7 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 386
+      Top = 382
       Width = 989
       Height = 116
       Align = alBottom
@@ -4147,7 +4147,7 @@ object FMovimientos: TFMovimientos
       Left = 137
       Top = -67
       Width = 794
-      Height = 596
+      Height = 1123
       Frame.Color = clBlack
       Frame.DrawTop = True
       Frame.DrawBottom = True
@@ -4191,7 +4191,7 @@ object FMovimientos: TFMovimientos
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
       PrintIfEmpty = True
-      ReportTitle = 'Reporte de Libro Banco'
+      ReportTitle = 'Reporte Solicitud Compra/Pago'
       SnapToGrid = True
       Units = MM
       Zoom = 100
@@ -6551,6 +6551,7 @@ object FMovimientos: TFMovimientos
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False
+    VerExpExel = False
     Caption = 'Orden de Pago'
     Left = 178
     Top = 329
@@ -6611,6 +6612,7 @@ object FMovimientos: TFMovimientos
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False
+    VerExpExel = False
     Caption = 'Reporte de Libro Banco'
     Left = 317
     Top = 326
@@ -6882,6 +6884,7 @@ object FMovimientos: TFMovimientos
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False
+    VerExpExel = False
     Caption = 'Reporte Solicitud Compra/Pago'
     Left = 317
     Top = 382

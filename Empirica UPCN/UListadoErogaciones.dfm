@@ -2283,6 +2283,7 @@ object FListadoErogaciones: TFListadoErogaciones
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False
+    VerExpExel = False
     Left = 664
     Top = 248
   end
