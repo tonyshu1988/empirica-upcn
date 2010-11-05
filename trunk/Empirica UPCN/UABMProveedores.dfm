@@ -1,6 +1,6 @@
 object FABMProveedores: TFABMProveedores
-  Left = 279
-  Top = 251
+  Left = 292
+  Top = 95
   Width = 945
   Height = 592
   Caption = 'ABM Proveedores'
@@ -1392,7 +1392,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Ver Detalle'
       Visible = ivAlways
-      ImageIndex = 13
+      ImageIndex = 69
       ShortCut = 122
       OnClick = btVerDetalleClick
       AutoGrayScale = False
