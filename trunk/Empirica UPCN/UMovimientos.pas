@@ -405,7 +405,7 @@ type
     QRDBText23: TQRDBText;
     QRShape17: TQRShape;
     QRShape18: TQRShape;
-    QRLabel32: TQRLabel;
+    qrtSolImporteTotal: TQRLabel;
     QRBand2: TQRBand;
     QRLabel36: TQRLabel;
     QRSubDetail1: TQRSubDetail;
@@ -413,22 +413,19 @@ type
     QRChildBand1: TQRChildBand;
     QRLabel40: TQRLabel;
     QRLabel42: TQRLabel;
-    QRLabel45: TQRLabel;
     QRLabel46: TQRLabel;
     QRSubDetail2: TQRSubDetail;
     QRDBText26: TQRDBText;
-    QRDBText28: TQRDBText;
     QRDBText29: TQRDBText;
     QRDBText31: TQRDBText;
     QRSubDetail3: TQRSubDetail;
-    QRLabel47: TQRLabel;
     QRLabel49: TQRLabel;
-    QRLabel50: TQRLabel;
     QRBand3: TQRBand;
     qrDatosNombreyFecha: TQRSysData;
     btnImprimirSolicitud: TdxBarLargeButton;
     EKVistaPreviaSolicitud: TEKVistaPreviaQR;
     Panel4: TPanel;
+    QRLabel30: TQRLabel;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -1806,7 +1803,7 @@ begin
   ZQ_Movimientos.Close;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
   ZQ_Movimientos.Open;
-  
+  qrtSolImporteTotal.Caption:=Format('%s',[FormatFloat('$ ###,###,###,##0.00', EKDbSuma1.SumCollection[0].sumvalue)]);
   qrDatosNombreyFecha.Text:=Format(' %s - ',[Application.Title]);
   EKVistaPreviaSolicitud.VistaPrevia;
 end;
