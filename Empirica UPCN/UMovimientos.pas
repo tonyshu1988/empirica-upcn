@@ -113,7 +113,7 @@ type
     LIBRO_BANCONOMBRE_CONCEPTO: TStringField;
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     LIBRO_BANCOFECHA_PD: TDateField;
-    EKLlenarCombo1: TEKLlenarCombo;
+    EKLlenarCuentas: TEKLlenarCombo;
     DBLCuenta: TComboBox;
     BtEditarMovimiento: TdxBarLargeButton;
     ComboOrden: TComboBox;
@@ -426,6 +426,7 @@ type
     EKVistaPreviaSolicitud: TEKVistaPreviaQR;
     Panel4: TPanel;
     QRLabel30: TQRLabel;
+    ZQ_CuentasCOLOR_CONSILIADO: TStringField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -434,7 +435,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btaplicarClick(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
-    procedure EKLlenarCombo1Cambio(valor: String);
+    procedure EKLlenarCuentasCambio(valor: String);
     procedure BtEditarMovimientoClick(Sender: TObject);
     procedure BtAplicarFiltrosColumnasClick(Sender: TObject);
     procedure btnFiltrarClick(Sender: TObject);
@@ -555,7 +556,7 @@ begin
 
   DTPFechaDesde.Date:= StartOfTheMonth(DM.EKModelo.Fecha);
   DTPFechaHasta.Date:= EndOfTheMonth(DM.EKModelo.Fecha);
-  EKLlenarCombo1.CargarCombo;
+  EKLlenarCuentas.CargarCombo;
   EKLlenarCBAutoriza.CargarCombo;
 
   if dm.EKUsrLogin1.PermisoAccionValor('ACCESO') = '' then
@@ -572,7 +573,7 @@ begin
   else  //si me logueo como administrador
   begin
     ZQ_Cuentas.First;
-    EKLlenarCombo1.SelectClave:=ZQ_CuentasID_CUENTA.AsString;
+    EKLlenarCuentas.SelectClave:=ZQ_CuentasID_CUENTA.AsString;
     DBLCuenta.ItemIndex:= 0;
     DBLCuenta.Enabled:=true;
   end;
@@ -772,19 +773,23 @@ procedure TFMovimientos.btaplicarClick(Sender: TObject);
 begin
   //Tipo refresco...
   //refrescarConsultas();
-
   LIBRO_BANCO.Close;
   LIBRO_BANCO.ParamByName('cuenta').AsInteger :=ZQ_CuentasID_CUENTA.AsInteger;
   LIBRO_BANCO.ParamByName('desde').AsDate := DTPFechaDesde.Date;
   LIBRO_BANCO.ParamByName('hasta').AsDate := DTPFechaHasta.Date;
   LIBRO_BANCO.ParamByName('ordenamiento').AsInteger := ComboOrden.ItemIndex;
   LIBRO_BANCO.Open;
+
+  if ZQ_CuentasCOLOR_CONSILIADO.AsString = '' then
+    StaticText1.Color:= $009DFFFF
+  else
+    StaticText1.Color:= StringToColor(ZQ_CuentasCOLOR_CONSILIADO.AsString);
 end;
 
 
-procedure TFMovimientos.EKLlenarCombo1Cambio(valor: String);
+procedure TFMovimientos.EKLlenarCuentasCambio(valor: String);
 begin
-  ZQ_Cuentas.Locate('id_cuenta',strtoint(EKLlenarCombo1.SelectClave),[]);
+  ZQ_Cuentas.Locate('id_cuenta',strtoint(EKLlenarCuentas.SelectClave),[]);
 end;
 
 

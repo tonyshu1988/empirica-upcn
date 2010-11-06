@@ -90,6 +90,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
         OnColExit = DbGridMediosCobroPagoColExit
+        OnDrawColumnCell = DbGridMediosCobroPagoDrawColumnCell
         OnKeyUp = DbGridMediosCobroPagoKeyUp
         Columns = <
           item

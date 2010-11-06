@@ -181,6 +181,9 @@ type
     function validarNroOrden(nro:String):boolean;
     procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
     procedure dbFechaEmisionChange(Sender: TObject);
+    procedure DbGridMediosCobroPagoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -412,13 +415,8 @@ procedure TFAlta_OrdenPago.btnGuardarClick(Sender: TObject);
 var
   nro_mov : integer;
 begin
-
-  //Borro los renglones vacios
-  ZQ_Cuenta_Movimiento.First;
-
   if (validarcampos) then
   begin
-
       ZSP_DECODIFICAR_NRO_ORDEN.Active:=False;
       ZSP_DECODIFICAR_NRO_ORDEN.ParamByName('NRO_ORDEN_STRING').AsString:=dbNroOrden.Text;
       ZSP_DECODIFICAR_NRO_ORDEN.Active:=True;
@@ -442,19 +440,22 @@ begin
         Application.MessageBox('Debe ingresar al menos un medio de Pago.','Atención',MB_OK+MB_ICONINFORMATION);
         exit;
       end;
+
       //Recorro todas la formas de pago cargadas
+      ZQ_Cuenta_Movimiento.First;
       while not ZQ_Cuenta_Movimiento.Eof do
       begin
+         //Borro los renglones vacios
          if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 0) then ZQ_Cuenta_Movimiento.Delete;
 
          //Si el importe es 0 entonces anulo el movimiento
-         if ((ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0)or(ZQ_Cuenta_MovimientoIMPORTE.IsNull)) then
+         if ((ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0) or (ZQ_Cuenta_MovimientoIMPORTE.IsNull)) then
          begin
            ZQ_Cuenta_Movimiento.Edit;
-           ZQ_Cuenta_MovimientoIMPORTE.AsFloat:=0;
+           ZQ_Cuenta_MovimientoIMPORTE.AsFloat:= 0;
+           ZQ_Cuenta_MovimientoANULADO.AsString:= 'A';
          end
-         else
-         //Si el importe es distinto de cero
+         else //Si el importe es distinto de cero
          begin
            ZQ_Cuenta_Movimiento.Edit;
            ZQ_Movimientos.Edit;
@@ -463,7 +464,7 @@ begin
          end;
 
           ZQ_Cuenta_Movimiento.Edit;
-          ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger :=nro_mov; //le agrego el nro de movimiento
+          ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger:= nro_mov; //le agrego el nro de movimiento
 
           if ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.IsNull then
             ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
@@ -478,7 +479,7 @@ begin
             end;
 
           //Si es un cheque y no tiene la marca de conciliado le pongo q no esta conciliado
-          if ((ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2)or(ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 3)) and (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then
+          if ((ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) or (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 3)) and (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then
             ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
 
           ZQ_Cuenta_Movimiento.Next;
@@ -622,14 +623,55 @@ end;
 
 procedure TFAlta_OrdenPago.ZQ_CuentasAfterScroll(DataSet: TDataSet);
 begin
-    ZQ_Proveedores.Active:=false;
-    ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-    ZQ_Proveedores.Active:=true;
+  ZQ_Proveedores.Active:=false;
+  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Proveedores.Active:=true;
 end;
 
 procedure TFAlta_OrdenPago.dbFechaEmisionChange(Sender: TObject);
 begin
-       ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNUMERO.AsInteger)]);
+  ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNUMERO.AsInteger)]);
+end;
+
+procedure TFAlta_OrdenPago.DbGridMediosCobroPagoDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+var
+  a: TRect;
+begin
+  a.Left := rect.Left;
+  a.Right := rect.Right;
+  a.Top := rect.Top;
+  a.Bottom := rect.Bottom;
+
+  if not ZQ_Cuenta_Movimiento.IsEmpty then
+  begin
+    if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0) then
+    begin
+      DbGridMediosCobroPago.Canvas.Brush.Color:= $00BCC5FC;
+      DbGridMediosCobroPago.Canvas.Font.Color := clBlack;
+      if (gdFocused in State) or (gdSelected in State) then
+      begin
+         a.Top := rect.Top+1;
+         a.Bottom := rect.Bottom -1;
+         DbGridMediosCobroPago.Canvas.Font.Color := clBlack;
+         DbGridMediosCobroPago.Canvas.Font.Style := DbGridMediosCobroPago.Canvas.Font.Style + [fsBold];
+      end;
+    end
+    else
+    begin
+      if (gdFocused in State) or (gdSelected in State) then
+      begin
+        a.Top := rect.Top+1;
+        a.Bottom := rect.Bottom -1;
+        DbGridMediosCobroPago.Canvas.Font.Color := clwhite;
+        DbGridMediosCobroPago.Canvas.Brush.Color:=clBlue;
+        DbGridMediosCobroPago.Canvas.Font.Style := DbGridMediosCobroPago.Canvas.Font.Style + [fsBold];
+      end;
+    end;
+
+    DbGridMediosCobroPago.DefaultDrawColumnCell(a,datacol,column,state);
+  end;
 end;
 
 end.

@@ -39,13 +39,9 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
     dbEditNombreCuenta: TDBEdit;
     dbEditNroCuenta: TDBEdit;
-    dbEditUltimoNro: TDBEdit;
     dbLookupCBoxMedio: TDBLookupComboBox;
-    dbRGroupAutonumerar: TDBRadioGroup;
     btnVerDetalle: TdxBarLargeButton;
     EKVistaPrevia: TEKVistaPreviaQR;
     btnImprimir: TdxBarLargeButton;
@@ -73,6 +69,10 @@ type
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     QRLabel1: TQRLabel;
     QRDBText1: TQRDBText;
+    ZQ_CuentasCOLOR_CONSILIADO: TStringField;
+    btnColorConciliacion: TButton;
+    ShapeColorConciliacion: TShape;
+    ColorDialog: TColorDialog;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);
@@ -85,6 +85,8 @@ type
     procedure btnImprimirClick(Sender: TObject);
     function  validarDatos(): boolean;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnColorConciliacionClick(Sender: TObject);
+    procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -167,6 +169,9 @@ begin
 
   if not validarDatos() then
     exit;
+
+  ZQ_Cuentas.Edit;  
+  ZQ_CuentasCOLOR_CONSILIADO.AsString:= ColorToString(ShapeColorConciliacion.Brush.Color);
 
   if DM.EKModelo.finalizar_transaccion(transaccion_cuentas) then
   begin
@@ -260,10 +265,28 @@ begin
    end;
 end;
 
+
 procedure TFABM_Cuentas.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
+end;
+
+
+procedure TFABM_Cuentas.btnColorConciliacionClick(Sender: TObject);
+begin
+  if ColorDialog.Execute then
+  begin
+    ShapeColorConciliacion.Brush.Color:= ColorDialog.Color;
+  end
+end;
+
+procedure TFABM_Cuentas.ZQ_CuentasAfterScroll(DataSet: TDataSet);
+begin
+  if ZQ_CuentasCOLOR_CONSILIADO.AsString = '' then
+    ShapeColorConciliacion.Brush.Color:= clWhite
+  else
+    ShapeColorConciliacion.Brush.Color:= StringToColor(ZQ_CuentasCOLOR_CONSILIADO.AsString);
 end;
 
 end.
