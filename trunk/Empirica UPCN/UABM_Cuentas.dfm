@@ -712,23 +712,11 @@ object FABM_Cuentas: TFABM_Cuentas
         Caption = 'Medio por Defecto:'
         Transparent = True
       end
-      object Label4: TLabel
-        Left = 419
-        Top = 62
-        Width = 113
-        Height = 13
-        Caption = 'Ultimo Nro Cheque:'
-        Transparent = True
-        Visible = False
-      end
-      object Label5: TLabel
-        Left = 672
-        Top = 62
-        Width = 85
-        Height = 13
-        Caption = 'Auto Numerar:'
-        Transparent = True
-        Visible = False
+      object ShapeColorConciliacion: TShape
+        Left = 640
+        Top = 58
+        Width = 121
+        Height = 21
       end
       object dbEditNombreCuenta: TDBEdit
         Left = 121
@@ -762,23 +750,6 @@ object FABM_Cuentas: TFABM_Cuentas
         ParentFont = False
         TabOrder = 1
       end
-      object dbEditUltimoNro: TDBEdit
-        Left = 535
-        Top = 58
-        Width = 114
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'ULTIMO_NRO'
-        DataSource = DS_Cuentas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 3
-        Visible = False
-      end
       object dbLookupCBoxMedio: TDBLookupComboBox
         Left = 121
         Top = 58
@@ -797,28 +768,14 @@ object FABM_Cuentas: TFABM_Cuentas
         ParentFont = False
         TabOrder = 2
       end
-      object dbRGroupAutonumerar: TDBRadioGroup
-        Left = 760
-        Top = 48
-        Width = 93
-        Height = 33
-        Columns = 2
-        DataField = 'AUTONUMERAR'
-        DataSource = DS_Cuentas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        Items.Strings = (
-          'SI'
-          'NO')
-        ParentFont = False
-        TabOrder = 4
-        Values.Strings = (
-          'S'
-          'N')
-        Visible = False
+      object btnColorConciliacion: TButton
+        Left = 520
+        Top = 56
+        Width = 113
+        Height = 25
+        Caption = 'Color Conciliaci'#243'n'
+        TabOrder = 3
+        OnClick = btnColorConciliacionClick
       end
     end
     object dbGridCuentas: TDBGrid
@@ -1148,6 +1105,7 @@ object FABM_Cuentas: TFABM_Cuentas
   end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_CuentasAfterScroll
     SQL.Strings = (
       'SELECT *'
       'FROM IE_CUENTAS')
@@ -1188,6 +1146,9 @@ object FABM_Cuentas: TFABM_Cuentas
       KeyFields = 'MEDIO_POR_DEFECTO'
       Size = 30
       Lookup = True
+    end
+    object ZQ_CuentasCOLOR_CONSILIADO: TStringField
+      FieldName = 'COLOR_CONSILIADO'
     end
   end
   object DS_Cuentas: TDataSource
@@ -1234,5 +1195,9 @@ object FABM_Cuentas: TFABM_Cuentas
     Ordenar = True
     Left = 152
     Top = 40
+  end
+  object ColorDialog: TColorDialog
+    Left = 794
+    Top = 366
   end
 end

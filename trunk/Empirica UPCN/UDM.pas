@@ -44,6 +44,7 @@ uses UPrincipal;
 
 procedure TDM.LoginLogin(Sender: TObject);
 begin
+  SkinData1.Active:= true;
   Application.CreateForm(TFPrincipal, FPrincipal);
 
   ZQ_Configuracion.Open;

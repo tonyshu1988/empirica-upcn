@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'E:\Empirica\empirica-upcn\Empirica UPCN\Bases\UPCN.FDB'
+    Database = 'D:\PROYECTOS\EMPIRIKA\Empirica UPCN\Bases\UPCN-VACIA.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -21,7 +21,7 @@ object DM: TDM
     Top = 22
   end
   object SkinData1: TSkinData
-    Active = True
+    Active = False
     DisableTag = 99
     SkinControls = [xcMainMenu, xcPopupMenu, xcToolbar, xcControlbar, xcCombo, xcCheckBox, xcRadioButton, xcProgress, xcScrollbar, xcEdit, xcButton, xcBitBtn, xcSpeedButton, xcPanel, xcGroupBox, xcStatusBar, xcTab, xcSystemMenu]
     Options = []
