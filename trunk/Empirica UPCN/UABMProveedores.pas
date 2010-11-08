@@ -86,8 +86,6 @@ type
     RepProv_Reporte_Titulo_2: TQRLabel;
     RepProv_Reporte_Titulo_1: TQRLabel;
     QRBand2: TQRBand;
-    QRLabel35: TQRLabel;
-    QRlblFechaHoy: TQRLabel;
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
     ZQ_IE_ProveedoresEDITABLE: TStringField;
@@ -314,7 +312,6 @@ begin
   if ZQ_IE_Proveedores.IsEmpty then
     exit;
 
-  QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   dm.VariablesReportes(RepProv);
   EKVistaPreviaQR1.VistaPrevia;
 end;

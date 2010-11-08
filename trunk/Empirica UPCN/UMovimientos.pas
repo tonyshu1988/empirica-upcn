@@ -198,8 +198,6 @@ type
     QRSubDetail18: TQRSubDetail;
     QrtImporteFPago: TQRLabel;
     QRBand15: TQRBand;
-    QRLabel123: TQRLabel;
-    QRlblFechaHoy: TQRLabel;
     QRLabelImpresion: TQRLabel;
     QRLabel1: TQRLabel;
     QRDBText1: TQRDBText;
@@ -277,8 +275,6 @@ type
     QRLabel16: TQRLabel;
     QRLabel15: TQRLabel;
     QRBand7: TQRBand;
-    QRLabel35: TQRLabel;
-    QRlblFechaHoyLibroBanco: TQRLabel;
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
     QRBand8: TQRBand;
@@ -330,7 +326,6 @@ type
     QRDBText2: TQRDBText;
     QRLabel7: TQRLabel;
     QRDBText4: TQRDBText;
-    QRShape15: TQRShape;
     QRDBText7: TQRDBText;
     QRLabel43: TQRLabel;
     QRDBText64: TQRDBText;
@@ -427,6 +422,7 @@ type
     Panel4: TPanel;
     QRLabel30: TQRLabel;
     ZQ_CuentasCOLOR_CONSILIADO: TStringField;
+    QRShape19: TQRShape;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -936,9 +932,9 @@ begin
   ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCOID_MOVIMIENTO.AsInteger;
   ZQ_Cuenta_Movimiento.Open;
 
-  if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) or (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 3) then
-      begin
-         if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') then //si no esta conciliado
+  //if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) or (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 3) then
+      //begin
+         if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') or (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then //si no esta conciliado
          begin
            if (application.MessageBox(pchar('¿Está seguro que desea Conciliar el movimiento seleccionado?'), 'Conciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
              if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
@@ -962,7 +958,7 @@ begin
          end;
         btaplicar.Click;
         LIBRO_BANCO.Locate('ID_MOVIMIENTO',ZQ_Cuenta_MovimientoID.AsInteger,[]);
-      end;
+      //end;
 end;
 
 
@@ -986,7 +982,7 @@ begin
 
   if not LIBRO_BANCO.IsEmpty then
   begin
-    if (LIBRO_BANCOCONCILIADO.Value='S') or (LIBRO_BANCOID_MEDIO.AsInteger = 5) then
+    if (LIBRO_BANCOCONCILIADO.Value='S') then// or (LIBRO_BANCOID_MEDIO.AsInteger = 5) then
     begin
       DBGridLibroBanco.Canvas.Brush.Color :=StaticText1.Brush.Color;
       DBGridLibroBanco.Canvas.Font.Color := clBlack;
@@ -1130,7 +1126,6 @@ begin
   lblLibBco_FHasta.Caption:= DateToStr(DTPFechaHasta.Date);
   lblLibBco_Oden.Caption:=   ComboOrden.Text;
 
-  QRlblFechaHoyLibroBanco.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   dm.VariablesReportes(RepLibroB);
 
   EKVistaPrevia_LibroBco.VistaPrevia;
@@ -1251,7 +1246,6 @@ begin
     EKIni_Impresion.EsribirRegString('Imprimir_Duplicado_Orden', BoolToStr(dup.Checked));
     EKIni_Impresion.EsribirRegString('Imprimir_Triplicado_Orden', BoolToStr(tri.Checked));
 
-    QRlblFechaHoy.Caption := FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
     QRLblConfecciona.Caption:=format('Confeccionado por: %s',[dm.EKUsrLogin1.nusuariosis]);
     QRLblAutorizo.Caption:= format('Autorizado por: %s',[CBoxAutoriza.Text]);
     QR_OrdenPago.PrinterSettings.PrinterIndex := cBoxImpresoras.ItemIndex;

@@ -56,8 +56,6 @@ type
     QRLabel16: TQRLabel;
     QRLabel18: TQRLabel;
     QRBand7: TQRBand;
-    QRLabel35: TQRLabel;
-    QRlblFechaHoy: TQRLabel;
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
     QRBand1: TQRBand;
@@ -298,7 +296,6 @@ begin
   if ZQ_IE_Conceptos.IsEmpty then
     exit;
 
-  QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   dm.VariablesReportes(RepCptos);
 
   EKVistaPrevia.VistaPrevia;

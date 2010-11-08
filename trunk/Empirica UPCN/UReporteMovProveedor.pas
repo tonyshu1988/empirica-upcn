@@ -33,7 +33,6 @@ type
     QRLabel4: TQRLabel;
     QRLabel6: TQRLabel;
     QRLabel7: TQRLabel;
-    QRLabel8: TQRLabel;
     QRLabel1: TQRLabel;
     QRBand19: TQRBand;
     QRLabel39: TQRLabel;
@@ -69,8 +68,6 @@ type
     QRLabel5: TQRLabel;
     QRLabel9: TQRLabel;
     EKBusquedaAvanzada: TEKBusquedaAvanzada;
-    QRLabel35: TQRLabel;
-    QRlblFechaHoyLibroBanco: TQRLabel;
     RepMovProveedores_Reporte_Titulo_2: TQRLabel;
     RepMovProveedores_Reporte_Titulo_1: TQRLabel;
     ZQ_MovimientoProveedoresID_CUENTA_INGRESO: TIntegerField;
@@ -116,7 +113,7 @@ type
     ZQ_ProveedorDESCRIPCION: TStringField;
     ZQ_ProveedorEDITABLE: TStringField;
     ZQ_ProveedorID_CUENTA: TIntegerField;
-    PanelDatos: TPanel;
+    PanelDatosProveedor: TPanel;
     Label1: TLabel;
     Label2: TLabel;
     Label5: TLabel;
@@ -154,6 +151,8 @@ type
     ZQ_MovimientoProveedoresANULADO: TStringField;
     pResumen: TPanel;
     lblSaldo: TLabel;
+    ZQ_MovimientoProveedoresCONCILIADO: TStringField;
+    PanelFiltrosBusqueda: TPanel;
     GroupBox1: TGroupBox;
     lblFiltroMedio: TLabel;
     lblFiltroConcepto: TLabel;
@@ -162,6 +161,11 @@ type
     lblFiltroEmiHasta: TLabel;
     lblFiltroPDDesde: TLabel;
     lblFiltroPDHasta: TLabel;
+    QRLabel13: TQRLabel;
+    QRDBText1: TQRDBText;
+    QRLabel14: TQRLabel;
+    QRExpr1: TQRExpr;
+    QRExpr3: TQRExpr;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -185,9 +189,17 @@ procedure TFReporteMovProveedor.btnBuscarClick(Sender: TObject);
 begin
   if EKBusquedaAvanzada.Buscar then
   begin
+
     ZQ_Proveedor.Close;
-    ZQ_Proveedor.ParamByName('id_prov').AsInteger:= StrToInt(EKBusquedaAvanzada.ParametrosSeleccionados1[0]);
-    ZQ_Proveedor.Open;
+    if EKBusquedaAvanzada.ParametrosSeleccionados1[0] <> ''  then
+    begin
+      ZQ_Proveedor.ParamByName('id_prov').AsInteger:= StrToInt(EKBusquedaAvanzada.ParametrosSeleccionados1[0]);
+      ZQ_Proveedor.Open;
+
+      PanelDatosProveedor.visible := true;
+   end
+   else
+      PanelDatosProveedor.visible := false;
 
     lblFiltroMedio.Caption:= 'Medio: '+EKBusquedaAvanzada.ParametrosSelecReales1[1];
     lblFiltroConcepto.Caption:= 'Concepto: '+EKBusquedaAvanzada.ParametrosSelecReales1[2];
@@ -205,7 +217,6 @@ begin
   if ZQ_MovimientoProveedores.IsEmpty then
     exit;
 
-  QRlblFechaHoyLibroBanco.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   dm.VariablesReportes(RepMovProveedores);
   EKVistaPreviaQR1.VistaPrevia;
 end;

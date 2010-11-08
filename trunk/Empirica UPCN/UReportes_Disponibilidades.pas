@@ -84,8 +84,6 @@ type
     lblLibBco_FHasta: TQRLabel;
     lblLibBco_Oden: TQRLabel;
     lblLibBco_Cuenta: TQRLabel;
-    QRLabel35: TQRLabel;
-    QRlblFechaHoyLibroBanco: TQRLabel;
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
     EKOrdenarGrillaLB: TEKOrdenarGrilla;
@@ -285,7 +283,6 @@ begin
     lblLibBco_FHasta.Caption:= EKBAvanzadaLibroBco.ParametrosSelecReales1[2];
     lblLibBco_Oden.Caption:=   EKBAvanzadaLibroBco.ParametrosSelecReales1[3];
 
-    QRlblFechaHoyLibroBanco.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
     dm.VariablesReportes(RepLibroB);
 
     EKVistaPrevia_LibroBco.VistaPrevia;
