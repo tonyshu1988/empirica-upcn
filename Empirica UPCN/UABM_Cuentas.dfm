@@ -24,12 +24,159 @@ object FABM_Cuentas: TFABM_Cuentas
   object pContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 875
-    Height = 410
+    Width = 883
+    Height = 416
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
     TabOrder = 0
+    object pDatos: TPanel
+      Left = 2
+      Top = 324
+      Width = 879
+      Height = 90
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 0
+      Visible = False
+      object Label1: TLabel
+        Left = 23
+        Top = 21
+        Width = 95
+        Height = 13
+        Caption = 'Nombre Cuenta:'
+        Transparent = True
+      end
+      object Label2: TLabel
+        Left = 512
+        Top = 21
+        Width = 124
+        Height = 13
+        Caption = 'Nro Cuenta Bancaria:'
+        Transparent = True
+      end
+      object Label3: TLabel
+        Left = 9
+        Top = 62
+        Width = 109
+        Height = 13
+        Caption = 'Medio por Defecto:'
+        Transparent = True
+      end
+      object ShapeColorConciliacion: TShape
+        Left = 640
+        Top = 58
+        Width = 121
+        Height = 21
+      end
+      object dbEditNombreCuenta: TDBEdit
+        Left = 121
+        Top = 17
+        Width = 385
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'NOMBRE_CUENTA'
+        DataSource = DS_Cuentas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+      end
+      object dbEditNroCuenta: TDBEdit
+        Left = 640
+        Top = 17
+        Width = 213
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'NRO_CUENTA_BANCARIA'
+        DataSource = DS_Cuentas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+      end
+      object dbLookupCBoxMedio: TDBLookupComboBox
+        Left = 121
+        Top = 58
+        Width = 289
+        Height = 21
+        DataField = 'MEDIO_POR_DEFECTO'
+        DataSource = DS_Cuentas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        KeyField = 'ID_MEDIO'
+        ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
+        ListSource = DS_Medios
+        ParentFont = False
+        TabOrder = 2
+      end
+      object btnColorConciliacion: TButton
+        Left = 520
+        Top = 56
+        Width = 113
+        Height = 25
+        Caption = 'Color Conciliaci'#243'n'
+        TabOrder = 3
+        OnClick = btnColorConciliacionClick
+      end
+    end
+    object dbGridCuentas: TDBGrid
+      Left = 2
+      Top = 2
+      Width = 879
+      Height = 322
+      Align = alClient
+      Color = 16772842
+      DataSource = DS_Cuentas
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_CUENTA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. ID'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_CUENTA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nombre Cuenta'
+          Width = 346
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NRO_CUENTA_BANCARIA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. Cuenta'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'medioPago'
+          Title.Alignment = taCenter
+          Title.Caption = 'Medio por Defecto'
+          Width = 234
+          Visible = True
+        end>
+    end
     object RepCtas: TQuickRep
       Tag = 99
       Left = 97
@@ -134,7 +281,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            836.083333333333300000
+            836.083333333333400000
             158.750000000000000000
             224.895833333333300000)
           Alignment = taCenter
@@ -165,9 +312,9 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            709.083333333333300000
+            709.083333333333200000
             95.250000000000000000
-            478.895833333333300000)
+            478.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -196,7 +343,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            632.354166666666700000
+            632.354166666666800000
             31.750000000000000000
             635.000000000000000000)
           Alignment = taCenter
@@ -307,7 +454,7 @@ object FABM_Cuentas: TFABM_Cuentas
             34.395833333333330000
             145.520833333333300000
             0.000000000000000000
-            830.791666666666700000)
+            830.791666666666800000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -506,71 +653,9 @@ object FABM_Cuentas: TFABM_Cuentas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           1899.708333333333000000)
         BandType = rbPageFooter
-        object QRLabel35: TQRLabel
-          Left = 4
-          Top = 1
-          Width = 53
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            10.583333333333330000
-            2.645833333333333000
-            140.229166666666700000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Empirica -'
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = [fsItalic]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 7
-        end
-        object QRlblFechaHoy: TQRLabel
-          Left = 57
-          Top = 1
-          Width = 70
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            150.812500000000000000
-            2.645833333333333000
-            185.208333333333300000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'QRlblFechaHoy'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = [fsItalic]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 7
-        end
         object QRLabel24: TQRLabel
           Left = 637
           Top = 1
@@ -582,7 +667,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             1685.395833333333000000
             2.645833333333333000
             103.187500000000000000)
@@ -613,7 +698,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -679,158 +764,11 @@ object FABM_Cuentas: TFABM_Cuentas
         end
       end
     end
-    object pDatos: TPanel
-      Left = 2
-      Top = 318
-      Width = 871
-      Height = 90
-      Align = alBottom
-      BevelOuter = bvNone
-      TabOrder = 0
-      Visible = False
-      object Label1: TLabel
-        Left = 23
-        Top = 21
-        Width = 95
-        Height = 13
-        Caption = 'Nombre Cuenta:'
-        Transparent = True
-      end
-      object Label2: TLabel
-        Left = 512
-        Top = 21
-        Width = 124
-        Height = 13
-        Caption = 'Nro Cuenta Bancaria:'
-        Transparent = True
-      end
-      object Label3: TLabel
-        Left = 9
-        Top = 62
-        Width = 109
-        Height = 13
-        Caption = 'Medio por Defecto:'
-        Transparent = True
-      end
-      object ShapeColorConciliacion: TShape
-        Left = 640
-        Top = 58
-        Width = 121
-        Height = 21
-      end
-      object dbEditNombreCuenta: TDBEdit
-        Left = 121
-        Top = 17
-        Width = 385
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'NOMBRE_CUENTA'
-        DataSource = DS_Cuentas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-      end
-      object dbEditNroCuenta: TDBEdit
-        Left = 640
-        Top = 17
-        Width = 213
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'NRO_CUENTA_BANCARIA'
-        DataSource = DS_Cuentas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-      end
-      object dbLookupCBoxMedio: TDBLookupComboBox
-        Left = 121
-        Top = 58
-        Width = 289
-        Height = 21
-        DataField = 'MEDIO_POR_DEFECTO'
-        DataSource = DS_Cuentas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        KeyField = 'ID_MEDIO'
-        ListField = 'NOMBRE_MEDIO_COBRO_PAGO'
-        ListSource = DS_Medios
-        ParentFont = False
-        TabOrder = 2
-      end
-      object btnColorConciliacion: TButton
-        Left = 520
-        Top = 56
-        Width = 113
-        Height = 25
-        Caption = 'Color Conciliaci'#243'n'
-        TabOrder = 3
-        OnClick = btnColorConciliacionClick
-      end
-    end
-    object dbGridCuentas: TDBGrid
-      Left = 2
-      Top = 2
-      Width = 871
-      Height = 316
-      Align = alClient
-      Color = 16772842
-      DataSource = DS_Cuentas
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-      TabOrder = 1
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'ID_CUENTA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nro. ID'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_CUENTA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nombre Cuenta'
-          Width = 346
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NRO_CUENTA_BANCARIA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nro. Cuenta'
-          Width = 200
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'medioPago'
-          Title.Alignment = taCenter
-          Title.Caption = 'Medio por Defecto'
-          Width = 234
-          Visible = True
-        end>
-    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

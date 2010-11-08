@@ -89,8 +89,6 @@ type
     QRBandDetalle: TQRBand;
     QRChildBand2: TQRChildBand;
     QRBand7: TQRBand;
-    QRLabel35: TQRLabel;
-    QRlblFechaHoy: TQRLabel;
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
     QRBand1: TQRBand;
@@ -251,7 +249,6 @@ begin
   qrExtracto.Caption:=lblSaldoExtracto.Caption;
   qrsaldoEB.Caption:=Format('Saldo s/ Extracto Bancario al %s %s',[lblFechaExtracto.Caption,lblDetalleExtracto.Caption]);
   qrsaldoC.Caption:=Format('Saldo s/ Conciliación al %s',[lblFechaConciliacion.Caption]);
-  QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   dm.VariablesReportes(RepConciliacion);
 
   EKVistaPreviaQR1.VistaPrevia;

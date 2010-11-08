@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
   EKBusquedaAvanzada, StdCtrls, EKDbSuma, QuickRpt, QRCtrls,
-  EKVistaPreviaQR, EKOrdenarGrilla, EKIni;
+  EKVistaPreviaQR, EKOrdenarGrilla, EKIni, mxNativeExcel, mxExport;
 
 type
   TFListadoErogaciones = class(TForm)
@@ -70,8 +70,6 @@ type
     QRChildBand2: TQRChildBand;
     QRLabel18: TQRLabel;
     QRBand7: TQRBand;
-    QRLabel35: TQRLabel;
-    QRlblFechaHoy: TQRLabel;
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
     QRBand8: TQRBand;
@@ -137,6 +135,9 @@ type
     ZQ_Libro_erogacionesCONCILIADO: TStringField;
     ZQ_Libro_erogacionesFECHA_CONCILIADO: TDateField;
     ZQ_Libro_erogacionesCMOV_ANULADO: TStringField;
+    mxDBGridExport: TmxDBGridExport;
+    mxNativeExcel1: TmxNativeExcel;
+    btexportarExel: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -154,6 +155,7 @@ type
     procedure LeerOpcionesFiltrado();
     procedure BtAplicarFiltrosColumnasClick(Sender: TObject);
     procedure ZQ_Libro_erogacionesAfterScroll(DataSet: TDataSet);
+    procedure btexportarExelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -315,7 +317,6 @@ begin
   QRlblTotalDiferidos.Caption:= FormatFloat('$ ###,###,##0.00', diferido);
   QRlblTotalCorrientes.Caption:= FormatFloat('$ ###,###,##0.00', corriente);
 
-  QRlblFechaHoy.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   dm.VariablesReportes(RepErog);
 
   EKVistaPrevia.VistaPrevia;
@@ -491,6 +492,12 @@ begin
     QRBandGroup1Footer.Enabled:= false
   else
     QRBandGroup1Footer.Enabled:= true;
+end;
+
+procedure TFListadoErogaciones.btexportarExelClick(Sender: TObject);
+begin
+  if not ZQ_Libro_erogaciones.IsEmpty then
+    mxDBGridExport.Select;
 end;
 
 end.
