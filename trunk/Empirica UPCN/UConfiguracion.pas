@@ -5,8 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
-  dxBarExtItems, StdCtrls, DBCtrls, ComCtrls, ISDBEditDateTimePicker, Mask,
-  Buttons, Grids, DBGrids, ExtCtrls, ZSqlProcessor;
+  dxBarExtItems, StdCtrls, DBCtrls, ComCtrls, Mask,
+  Buttons, Grids, DBGrids, ExtCtrls, ZSqlProcessor, EKDBDateTimePicker;
 
 type
   TFConfiguracion = class(TForm)
@@ -50,6 +50,7 @@ type
     btnVerDetalle: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
     ZQ_ReiniciarNroOrden: TZQuery;
+    EKDBDateTimePicker1: TEKDBDateTimePicker;
     procedure btnSalirClick(Sender: TObject);
     procedure btAgregGralClick(Sender: TObject);
     procedure btModifGralClick(Sender: TObject);

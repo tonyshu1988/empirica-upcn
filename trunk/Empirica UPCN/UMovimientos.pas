@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, StdCtrls,
-  DBCtrls, Mask, ComCtrls, ISDBEditDateTimePicker, DB, ZAbstractRODataset,
+  DBCtrls, Mask, ComCtrls, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKListadoSQL, ZStoredProcedure,
   EKBusquedaAvanzada, ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma,
   EKLlenarCombo, mxNativeExcel, mxExport, QuickRpt, QRCtrls,
