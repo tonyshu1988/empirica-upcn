@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, DBCtrls, Mask, ComCtrls, ISDBEditDateTimePicker,
+  Dialogs, StdCtrls, DBCtrls, Mask, ComCtrls,
   Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, ActnList,
   XPStyleActnCtrls, ActnMan, EKDbSuma, EKDBDateTimePicker, DBClient, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKListadoSQL,

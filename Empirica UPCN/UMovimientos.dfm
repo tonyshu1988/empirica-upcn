@@ -187,7 +187,7 @@ object FMovimientos: TFMovimientos
           FontSize = 12
         end
         object RepLibroB_Reporte_Titulo_2: TQRLabel
-          Left = 426
+          Left = -90
           Top = 36
           Width = 195
           Height = 20
@@ -231,7 +231,7 @@ object FMovimientos: TFMovimientos
             52.916666666666670000
             1045.104166666667000000
             31.750000000000000000
-            679.979166666666800000)
+            679.979166666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
