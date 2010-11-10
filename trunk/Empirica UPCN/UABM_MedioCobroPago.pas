@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids,
-  ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  EKOrdenarGrilla;
 
 type
   TFABM_MedioCobroPago = class(TForm)
@@ -38,6 +39,10 @@ type
     ZQ_MedioCobroPagoCODIGO_CORTO: TStringField;
     ZQ_MedioCobroPagoNOMBRE_MEDIO_COBRO_PAGO: TStringField;
     ZQ_MedioCobroPagoEDITABLE: TStringField;
+    ZQ_MedioCobroPagoVER_LIBRO_BANCO: TStringField;
+    Label3: TLabel;
+    DBCBoxVerLB: TDBComboBox;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -70,6 +75,7 @@ begin
     Grilla.Enabled := false;
     pDatos.Visible := true;
     ZQ_MedioCobroPago.Insert;
+    ZQ_MedioCobroPagoVER_LIBRO_BANCO.AsString:= 'S';
     DBEditCodcorto.SetFocus;
     GrupoGuardarCancelar.Enabled := true;
     GrupoEditando.Enabled := false;
