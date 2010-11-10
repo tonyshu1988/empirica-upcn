@@ -1509,4 +1509,54 @@ object DM: TDM
       FieldName = 'GRAFICO'
     end
   end
+  object ZQ_Configuracion_Cuenta: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select c.*'
+      'from configuracion c'
+      'where c.numero=:cta')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'cta'
+        ParamType = ptUnknown
+      end>
+    Left = 176
+    Top = 176
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cta'
+        ParamType = ptUnknown
+      end>
+    object StringField1: TStringField
+      FieldName = 'CLAVE'
+      Required = True
+    end
+    object DateField1: TDateField
+      FieldName = 'FECHA'
+    end
+    object FloatField1: TFloatField
+      FieldName = 'NUMERO'
+    end
+    object StringField2: TStringField
+      FieldName = 'TEXTO'
+      Required = True
+      Size = 100
+    end
+    object SmallintField1: TSmallintField
+      FieldName = 'NIVEL'
+    end
+    object StringField3: TStringField
+      FieldName = 'GRUPO'
+      Size = 40
+    end
+    object StringField4: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object BlobField1: TBlobField
+      FieldName = 'GRAFICO'
+    end
+  end
 end

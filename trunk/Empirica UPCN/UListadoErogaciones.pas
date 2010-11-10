@@ -55,11 +55,10 @@ type
     QRBand5: TQRBand;
     QRLabel41: TQRLabel;
     QRDBImage1: TQRDBImage;
-    QRLabel11: TQRLabel;
+    RepErog_TITULO_EROG: TQRLabel;
     RepErog_Reporte_Titulo_2: TQRLabel;
     RepErog_Reporte_Titulo_1: TQRLabel;
     QRLabel1: TQRLabel;
-    QRLabel3: TQRLabel;
     QRlblErogaciones_FDesde: TQRLabel;
     QRlblErogaciones_FHasta: TQRLabel;
     QRlblErogaciones_Cuenta: TQRLabel;
@@ -319,6 +318,7 @@ begin
 
   dm.VariablesReportes(RepErog);
 
+  dm.TitulosReportes(RepErog,StrToInt(EKBAvanzadaListadoErog.ParametrosSeleccionados1[0]));
   EKVistaPrevia.VistaPrevia;
 end;
 
