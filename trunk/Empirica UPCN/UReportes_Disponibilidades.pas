@@ -6,16 +6,15 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Grids, DBGrids, ExtCtrls, EKBusquedaAvanzada, StdCtrls,
-  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla;
+  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, EKIni,
+  mxNativeExcel, mxExport;
 
 type
   TFReportes_Disponibilidades = class(TForm)
     dxBarABM: TdxBarManager;
-    btnSaldoCuenta: TdxBarLargeButton;
     btImprimir: TdxBarLargeButton;
     btnLibroBanco: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    btn2: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     pFondo: TPanel;
@@ -124,6 +123,26 @@ type
     LIBRO_BANCOPROVEEDOR: TStringField;
     Panel3: TPanel;
     StaticTextConciliado: TStaticText;
+    ZQ_CuentasCOLOR_CONSILIADO: TStringField;
+    PFiltrosColumnas: TPanel;
+    BtAplicarFiltrosColumnas: TButton;
+    CBFechaEmi: TCheckBox;
+    CBFechaPD: TCheckBox;
+    CBNroMov: TCheckBox;
+    CBMedio: TCheckBox;
+    CBNroMedio: TCheckBox;
+    CBProveedor: TCheckBox;
+    CBConcepto: TCheckBox;
+    CBNroOrden: TCheckBox;
+    CBRecibo: TCheckBox;
+    CBNroFactura: TCheckBox;
+    CBFechaConciliado: TCheckBox;
+    verAnulados: TCheckBox;
+    EKIniGuardarFiltros: TEKIni;
+    btnFiltrat: TdxBarLargeButton;
+    mxDBGridExport: TmxDBGridExport;
+    mxNativeExcel1: TmxNativeExcel;
+    btnExel: TdxBarLargeButton;
     procedure btnLibroBancoClick(Sender: TObject);
     function  validarDatos():boolean;
     procedure btnSalirClick(Sender: TObject);
@@ -135,6 +154,11 @@ type
       State: TGridDrawState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure LIBRO_BANCOAfterScroll(DataSet: TDataSet);
+    procedure BtAplicarFiltrosColumnasClick(Sender: TObject);
+    procedure GuardarOpcionesFiltrado();
+    procedure LeerOpcionesFiltrado();
+    procedure btnFiltratClick(Sender: TObject);
+    procedure btnExelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -171,6 +195,9 @@ begin
   fecha:= StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha));
   TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[1]).Valor := DateToStr(fecha);
   TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.Fecha);
+
+  LeerOpcionesFiltrado;
+  BtAplicarFiltrosColumnas.Click;
 end;
 
 function TFReportes_Disponibilidades.validarDatos():boolean;
@@ -215,29 +242,6 @@ begin
         exit;
       end;
   end;
-
-{
-  //MINUTA
-  if (PageControl.ActivePage = TabSheetMinuta) then
-  begin
-      if (cBoxTipoMinuta.Text = '') then
-      begin
-        Application.MessageBox('No se ha seleccionado ningún TIPO DE MINUTA, por favor Verifique','Atención',MB_OK+MB_ICONINFORMATION);
-        cBoxTipoMinuta.SetFocus;
-        cBoxTipoMinuta.Perform(CB_SHOWDROPDOWN, 1,0);
-        result := false;
-        exit;
-      end;
-
-      if (DTPMinutaDesdeFecha.Date > DTPMinutaHastaFecha.Date) then
-      begin
-        Application.MessageBox('La FECHA DESDE es mayor a la FECHA HASTA, por favor Verifique','Atención',MB_OK+MB_ICONINFORMATION);
-        DTPMinutaDesdeFecha.SetFocus;
-        result := false;
-        exit;
-      end;
-  end;
-}
 end;
 
 
@@ -260,6 +264,11 @@ begin
       LIBRO_BANCO.ParamByName('hasta').AsDate := StrToDate(EKBAvanzadaLibroBco.ParametrosSeleccionados1[2]);
       LIBRO_BANCO.ParamByName('ordenamiento').AsInteger := StrToInt(EKBAvanzadaLibroBco.ParametrosSeleccionados1[3]);
       LIBRO_BANCO.Open;
+
+      if ZQ_CuentasCOLOR_CONSILIADO.AsString = '' then
+        StaticTextConciliado.Color:= $009DFFFF
+      else
+        StaticTextConciliado.Color:= StringToColor(ZQ_CuentasCOLOR_CONSILIADO.AsString);
     end;
   end;
 end;
@@ -287,81 +296,72 @@ begin
 
     EKVistaPrevia_LibroBco.VistaPrevia;
   end;
-
 end;
+
 
 procedure TFReportes_Disponibilidades.DBGridLibroBancoDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
+var
+  a: TRect;
 begin
+  a.Left := rect.Left;
+  a.Right := rect.Right;
+  a.Top := rect.Top;
+  a.Bottom := rect.Bottom;
+
   if not LIBRO_BANCO.IsEmpty then
   begin
-     if LIBRO_BANCOMEDIO.AsString = 'CHEQUE' then
-     begin
-       if (LIBRO_BANCOCONCILIADO.Value = 'S') and (LIBRO_BANCOFECHA_CONCILIADO.AsDateTime < StrToDate(EKBAvanzadaLibroBco.ParametrosSeleccionados1[2])) then
-          begin
-           DBGridLibroBanco.Canvas.Brush.Color :=StaticTextConciliado.Brush.Color;
-           DBGridLibroBanco.Canvas.Font.Color := clBlack;
-           if (gdFocused in State) or (gdSelected in State) then
-             begin
-             DBGridLibroBanco.Canvas.Font.Color := clBlack;
-             DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
-             end
-          end
-       else
-          begin
-            if (gdFocused in State) or (gdSelected in State) then
-             begin
-               DBGridLibroBanco.Canvas.Font.Color := clwhite;
-               DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
-               DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
-             end;
-          end;
-//
-//       if ((LIBRO_BANCODEBE.IsNull) and (LIBRO_BANCOHABER.Value = 0)) or ((LIBRO_BANCOHABER.IsNull) and (LIBRO_BANCODEBE.Value = 0)) then
-//       begin
-//         DBGridLibroBanco.Canvas.Brush.Color :=StaticTextAnulado.Brush.Color;
-//         DBGridLibroBanco.Canvas.Font.Color := clBlack;
-//         if (gdFocused in State) or (gdSelected in State) then
-//         begin
-//           DBGridLibroBanco.Canvas.Font.Color := clBlack;
-//           DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
-//         end
-//       end;
+    if LIBRO_BANCOID_MOVIMIENTO.AsInteger <> -1 then
+    begin
+      if (LIBRO_BANCOCONCILIADO.Value='S') or (LIBRO_BANCOID_MEDIO.AsInteger = 5) then
+      begin
+        DBGridLibroBanco.Canvas.Brush.Color :=StaticTextConciliado.Brush.Color;
+        DBGridLibroBanco.Canvas.Font.Color := clBlack;
+        if (gdFocused in State) or (gdSelected in State) then
+        begin
+          a.Top := rect.Top+1;
+          a.Bottom := rect.Bottom -1;
+          DBGridLibroBanco.Canvas.Font.Color := clBlack;
+          DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+        end;
+      end
+      else
+      begin
+        if (gdFocused in State) or (gdSelected in State) then
+        begin
+          a.Top := rect.Top+1;
+          a.Bottom := rect.Bottom -1;
+          DBGridLibroBanco.Canvas.Font.Color := clwhite;
+          DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
+          DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+        end;
+      end;
+    end
+    else
+    begin
+      DBGridLibroBanco.Canvas.Brush.Color := clBlack;
+      DBGridLibroBanco.Canvas.Font.Color := clWhite;
+      DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+      if (gdFocused in State) or (gdSelected in State) then
+      begin
+        a.Top := rect.Top+1;
+        a.Bottom := rect.Bottom -1;
+      end;
+    end;
 
-       DBGridLibroBanco.DefaultDrawColumnCell(rect,datacol,column,state);
-     end
-//     else  // if LIBRO_BANCOMEDIO.AsString <> 'CHEQUE' then
-//     begin
-//       if ((LIBRO_BANCODEBE.IsNull) and (LIBRO_BANCOHABER.Value = 0)) or ((LIBRO_BANCOHABER.IsNull) and (LIBRO_BANCODEBE.Value = 0)) then
-//       begin
-//         DBGridLibroBanco.Canvas.Brush.Color :=StaticTextAnulado.Brush.Color;
-//         DBGridLibroBanco.Canvas.Font.Color := clBlack;
-//         if (gdFocused in State) or (gdSelected in State) then
-//         begin
-//           DBGridLibroBanco.Canvas.Font.Color := clBlack;
-//           DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
-//         end;
-//         DBGridLibroBanco.DefaultDrawColumnCell(rect,datacol,column,state);
-//       end
-//       else
-//       begin
-//         if (gdFocused in State) or (gdSelected in State) then
-//         begin
-//           DBGridLibroBanco.Canvas.Font.Color := clwhite;
-//           DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
-//           DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
-//         end;
-//       end;
-//     end;
+    DBGridLibroBanco.DefaultDrawColumnCell(a,datacol,column,state);
   end;
 end;
+
 
 procedure TFReportes_Disponibilidades.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   EKOrdenarGrillaLB.GuardarConfigColumnas;
+  GuardarOpcionesFiltrado;
 end;
+
 
 procedure TFReportes_Disponibilidades.LIBRO_BANCOAfterScroll(
   DataSet: TDataSet);
@@ -376,6 +376,203 @@ begin
   else
     QRLblProveedor.Caption:= LIBRO_BANCOPROVEEDOR.AsString;
 
+end;
+
+
+procedure TFReportes_Disponibilidades.BtAplicarFiltrosColumnasClick(
+  Sender: TObject);
+begin
+  if not CBFechaEmi.Checked then  //fecha emision
+    DBGridLibroBanco.Columns[0].Visible := false
+  else
+    DBGridLibroBanco.Columns[0].Visible := true;
+
+  if not CBFechaPD.Checked then  //fecha postdata
+    DBGridLibroBanco.Columns[1].Visible := false
+  else
+    DBGridLibroBanco.Columns[1].Visible := true;
+
+  if not CBNroMov.Checked then //nro movimiento
+    DBGridLibroBanco.Columns[2].Visible := false
+  else
+    DBGridLibroBanco.Columns[2].Visible := true;
+
+  if not CBNroOrden.Checked then //Nro Orden
+    DBGridLibroBanco.Columns[3].Visible := false
+  else
+    DBGridLibroBanco.Columns[3].Visible := true;
+
+  if not CBMedio.Checked then  //medio
+    DBGridLibroBanco.Columns[4].Visible := false
+  else
+    DBGridLibroBanco.Columns[4].Visible := true;
+
+  if not CBNroMedio.Checked then  //nro cheque/transf
+    DBGridLibroBanco.Columns[5].Visible := false
+  else
+    DBGridLibroBanco.Columns[5].Visible := true;
+
+  if not CBProveedor.Checked then  //proveedor
+    DBGridLibroBanco.Columns[6].Visible := false
+  else
+    DBGridLibroBanco.Columns[6].Visible := true;
+
+  if not CBConcepto.Checked then  //concepto
+    DBGridLibroBanco.Columns[8].Visible := false
+  else
+    DBGridLibroBanco.Columns[8].Visible := true;
+
+  if not CBNroFactura.Checked then //factura
+    DBGridLibroBanco.Columns[9].Visible := false
+  else
+    DBGridLibroBanco.Columns[9].Visible := true;
+
+  if not CBrecibo.Checked then //Recibo
+    DBGridLibroBanco.Columns[10].Visible := false
+  else
+    DBGridLibroBanco.Columns[10].Visible := true;
+
+  if not CBFechaConciliado.Checked then //conciliado
+    DBGridLibroBanco.Columns[15].Visible := false
+  else
+    DBGridLibroBanco.Columns[15].Visible := true;
+
+  //filtro los anulados para que se vean o no
+  if verAnulados.Checked then
+    begin
+      LIBRO_BANCO.Filtered:=False;
+      LIBRO_BANCO.Filter:='';
+      DBGridLibroBanco.Columns[7].Visible := true;
+    end
+  else
+    begin
+      LIBRO_BANCO.Filtered:=False;
+      LIBRO_BANCO.Filter:= Format('CTA_MOV_ANULADO<>%s',[quotedStr('A')]);
+      LIBRO_BANCO.Filtered:=True;
+      DBGridLibroBanco.Columns[7].Visible := false;
+    end;
+
+  PFiltrosColumnas.Visible:=false;
+end;
+
+
+procedure TFReportes_Disponibilidades.GuardarOpcionesFiltrado();
+begin
+  if CBFechaEmi.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\FechaEmision', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\FechaEmision', 'FALSE');
+
+  if CBFechaPD.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\FechaPD', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\FechaPD', 'FALSE');
+
+  if CBNroMov.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\NroMov', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\NroMov', 'FALSE');
+
+  if CBMedio.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Medio', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Medio', 'FALSE');
+
+  if CBNroMedio.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\NroMedio', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\NroMedio', 'FALSE');
+
+  if CBProveedor.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Proveedor', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Proveedor', 'FALSE');
+
+  if CBConcepto.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Concepto', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Concepto', 'FALSE');
+
+  if CBNroOrden.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\NroOrden', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\NroOrden', 'FALSE');
+
+  if CBRecibo.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Otros', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Otros', 'FALSE');
+
+  if CBNroFactura.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\NroFactura', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\NroFactura', 'FALSE');
+
+  if CBFechaConciliado.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\FechaConciliado', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\FechaConciliado', 'FALSE');
+
+  if verAnulados.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\verAnulados', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\verAnulados', 'FALSE');
+end;
+
+
+procedure TFReportes_Disponibilidades.LeerOpcionesFiltrado();
+begin
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\FechaEmision') <> '' then
+    CBFechaEmi.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\FechaEmision'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\FechaPD') <> '' then
+    CBFechaPD.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\FechaPD'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\NroMov') <> '' then
+    CBNroMov.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\NroMov'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Medio') <> '' then
+    CBMedio.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Medio'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\NroMedio') <> '' then
+    CBNroMedio.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\NroMedio'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Proveedor') <> '' then
+    CBProveedor.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Proveedor'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Concepto') <> '' then
+    CBConcepto.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Concepto'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\NroOrden') <> '' then
+    CBNroOrden.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\NroOrden'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Otros') <> '' then
+    CBRecibo.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Otros'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\NroFactura') <> '' then
+    CBNroFactura.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\NroFactura'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\FechaConciliado') <> '' then
+    CBFechaConciliado.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\FechaConciliado'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\verAnulados') <> '' then
+    verAnulados.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\verAnulados'));
+end;
+
+
+procedure TFReportes_Disponibilidades.btnFiltratClick(Sender: TObject);
+begin
+  if PFiltrosColumnas.Visible = false then
+    PFiltrosColumnas.Visible:=true
+  else
+    PFiltrosColumnas.Visible:=false;
+end;
+
+
+procedure TFReportes_Disponibilidades.btnExelClick(Sender: TObject);
+begin
+  if not LIBRO_BANCO.IsEmpty then
+    mxDBGridExport.Select;
 end;
 
 end.

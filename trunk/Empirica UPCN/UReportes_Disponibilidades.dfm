@@ -1,6 +1,6 @@
 object FReportes_Disponibilidades: TFReportes_Disponibilidades
-  Left = 216
-  Top = 100
+  Left = 232
+  Top = 153
   Width = 1082
   Height = 576
   Caption = 'Reportes Disponibilidades'
@@ -22,15 +22,15 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   object pFondo: TPanel
     Left = 0
     Top = 0
-    Width = 1074
-    Height = 492
+    Width = 1066
+    Height = 486
     Align = alClient
     TabOrder = 4
     object pTapa: TPanel
       Left = 1
       Top = 1
-      Width = 1072
-      Height = 490
+      Width = 1064
+      Height = 430
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
@@ -38,8 +38,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     object pSaldoCta: TPanel
       Left = 1
       Top = 1
-      Width = 1072
-      Height = 490
+      Width = 1064
+      Height = 430
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 3
@@ -48,8 +48,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object DBGridSaldoCtas: TDBGrid
         Left = 3
         Top = 33
-        Width = 1066
-        Height = 454
+        Width = 1058
+        Height = 394
         Align = alClient
         Color = 16772842
         TabOrder = 0
@@ -62,13 +62,13 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object Panel2: TPanel
         Left = 3
         Top = 3
-        Width = 1066
+        Width = 1058
         Height = 30
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
         DesignSize = (
-          1066
+          1058
           30)
         object Shape5: TShape
           Left = 1
@@ -128,8 +128,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     object pLibroBanco: TPanel
       Left = 1
       Top = 1
-      Width = 1072
-      Height = 490
+      Width = 1064
+      Height = 430
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 3
@@ -137,12 +137,12 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object DBGridLibroBanco: TDBGrid
         Left = 3
         Top = 34
-        Width = 1066
-        Height = 453
+        Width = 1058
+        Height = 393
         Align = alClient
         Color = 16772842
         DataSource = DS_LIBRO_BANCO
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -167,6 +167,13 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Title.Alignment = taCenter
             Title.Caption = 'Fecha PD'
             Width = 120
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NRO_PAGO_REC'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nro Movimiento'
             Visible = True
           end
           item
@@ -204,11 +211,38 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Visible = True
           end
           item
-            Alignment = taCenter
+            Alignment = taRightJustify
             Expanded = False
             FieldName = 'CTA_MOV_ANULADO'
             Title.Alignment = taCenter
             Title.Caption = 'Anulado'
+            Width = 20
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_CONCEPTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Concepto'
+            Width = 200
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'NRO_FACTURA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nro Factura'
+            Width = 98
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'NRO_RECIBO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nro Recibo'
+            Width = 106
             Visible = True
           end
           item
@@ -242,18 +276,27 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Title.Alignment = taCenter
             Title.Caption = 'Conciliado'
             Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'FECHA_CONCILIADO'
+            Title.Alignment = taCenter
+            Title.Caption = 'F. Conciliado'
+            Width = 69
+            Visible = True
           end>
       end
       object Panel1: TPanel
         Left = 3
         Top = 3
-        Width = 1066
+        Width = 1058
         Height = 31
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
         DesignSize = (
-          1066
+          1058
           31)
         object Shape1: TShape
           Left = 1
@@ -309,7 +352,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Transparent = True
         end
         object Panel3: TPanel
-          Left = 980
+          Left = 972
           Top = 0
           Width = 86
           Height = 31
@@ -339,8 +382,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       end
       object RepLibroB: TQuickRep
         Tag = 99
-        Left = 9
-        Top = 6
+        Left = 393
+        Top = 302
         Width = 1123
         Height = 794
         Frame.Color = clBlack
@@ -409,7 +452,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            272.520833333333400000
+            272.520833333333300000
             2770.187500000000000000)
           BandType = rbPageHeader
           object QRLabel41: TQRLabel
@@ -536,7 +579,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               52.916666666666670000
               1045.104166666667000000
               31.750000000000000000
-              679.979166666666800000)
+              679.979166666666700000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -660,7 +703,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               37.041666666666670000
               190.500000000000000000
               230.187500000000000000
-              256.645833333333400000)
+              256.645833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -689,7 +732,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              637.645833333333400000
+              637.645833333333300000
               230.187500000000000000
               254.000000000000000000)
             Alignment = taLeftJustify
@@ -1096,7 +1139,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              693.208333333333200000
+              693.208333333333300000
               0.000000000000000000
               2.645833333333333000)
             Shape = qrsVertLine
@@ -1240,7 +1283,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             2770.187500000000000000)
           ParentBand = QRBand5
           object QRLabel18: TQRLabel
@@ -1350,7 +1393,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               37.041666666666670000
               2159.000000000000000000
               2.645833333333333000
-              89.958333333333320000)
+              89.958333333333330000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -1381,7 +1424,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               37.041666666666670000
               2667.000000000000000000
               2.645833333333333000
-              97.895833333333320000)
+              97.895833333333330000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -1573,6 +1616,68 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             39.687500000000000000
             2770.187500000000000000)
           BandType = rbPageFooter
+          object QRLabel35: TQRLabel
+            Left = 4
+            Top = 1
+            Width = 53
+            Height = 13
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              34.395833333333330000
+              10.583333333333330000
+              2.645833333333333000
+              140.229166666666700000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Caption = 'Empirica -'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -9
+            Font.Name = 'Verdana'
+            Font.Style = [fsItalic]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            FontSize = 7
+          end
+          object QRlblFechaHoyLibroBanco: TQRLabel
+            Left = 57
+            Top = 1
+            Width = 120
+            Height = 13
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              34.395833333333330000
+              150.812500000000000000
+              2.645833333333333000
+              317.500000000000000000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = True
+            AutoStretch = False
+            Caption = 'QRlblFechaHoyLibroBanco'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -9
+            Font.Name = 'Verdana'
+            Font.Style = [fsItalic]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            FontSize = 7
+          end
           object QRLabel24: TQRLabel
             Left = 965
             Top = 1
@@ -1584,7 +1689,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               2553.229166666667000000
               2.645833333333333000
               103.187500000000000000)
@@ -1615,7 +1720,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               2661.708333333333000000
               2.645833333333333000
               108.479166666666700000)
@@ -1650,7 +1755,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333340000
+            58.208333333333330000
             2770.187500000000000000)
           BandType = rbSummary
           object QRExpr15: TQRExpr
@@ -1682,11 +1787,174 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         end
       end
     end
+    object PFiltrosColumnas: TPanel
+      Tag = 99
+      Left = 1
+      Top = 431
+      Width = 1064
+      Height = 54
+      Align = alBottom
+      BevelInner = bvLowered
+      Color = 11004820
+      TabOrder = 3
+      Visible = False
+      object BtAplicarFiltrosColumnas: TButton
+        Left = 716
+        Top = 14
+        Width = 85
+        Height = 26
+        Caption = 'Aplicar'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        OnClick = BtAplicarFiltrosColumnasClick
+      end
+      object CBFechaEmi: TCheckBox
+        Tag = 99
+        Left = 8
+        Top = 8
+        Width = 103
+        Height = 17
+        Caption = 'Fecha Emision'
+        Checked = True
+        State = cbChecked
+        TabOrder = 1
+      end
+      object CBFechaPD: TCheckBox
+        Tag = 99
+        Left = 112
+        Top = 8
+        Width = 78
+        Height = 17
+        Caption = 'Fecha PD'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+      end
+      object CBNroMov: TCheckBox
+        Tag = 99
+        Left = 193
+        Top = 8
+        Width = 111
+        Height = 17
+        Caption = 'Nro. Movimiento'
+        Checked = True
+        State = cbChecked
+        TabOrder = 3
+      end
+      object CBMedio: TCheckBox
+        Tag = 99
+        Left = 311
+        Top = 8
+        Width = 62
+        Height = 17
+        Caption = 'Medio'
+        Checked = True
+        State = cbChecked
+        TabOrder = 4
+      end
+      object CBNroMedio: TCheckBox
+        Tag = 99
+        Left = 375
+        Top = 8
+        Width = 81
+        Height = 17
+        Caption = 'Nro. Medio'
+        Checked = True
+        State = cbChecked
+        TabOrder = 5
+      end
+      object CBProveedor: TCheckBox
+        Tag = 99
+        Left = 8
+        Top = 32
+        Width = 102
+        Height = 17
+        Caption = 'Proveedores'
+        Checked = True
+        State = cbChecked
+        TabOrder = 6
+      end
+      object CBConcepto: TCheckBox
+        Tag = 99
+        Left = 112
+        Top = 32
+        Width = 81
+        Height = 17
+        Caption = 'Concepto'
+        Checked = True
+        State = cbChecked
+        TabOrder = 7
+      end
+      object CBNroOrden: TCheckBox
+        Tag = 99
+        Left = 460
+        Top = 8
+        Width = 81
+        Height = 17
+        Caption = 'Nro. Orden'
+        Checked = True
+        State = cbChecked
+        TabOrder = 8
+      end
+      object CBRecibo: TCheckBox
+        Tag = 99
+        Left = 193
+        Top = 32
+        Width = 80
+        Height = 17
+        Caption = 'Nro Recibo'
+        Checked = True
+        State = cbChecked
+        TabOrder = 9
+      end
+      object CBNroFactura: TCheckBox
+        Tag = 99
+        Left = 311
+        Top = 32
+        Width = 88
+        Height = 17
+        Caption = 'Nro Factura'
+        Checked = True
+        State = cbChecked
+        TabOrder = 10
+      end
+      object CBFechaConciliado: TCheckBox
+        Tag = 99
+        Left = 460
+        Top = 32
+        Width = 117
+        Height = 17
+        Caption = 'Fecha Conciliado'
+        Checked = True
+        State = cbChecked
+        TabOrder = 11
+      end
+      object verAnulados: TCheckBox
+        Tag = 99
+        Left = 596
+        Top = 19
+        Width = 117
+        Height = 17
+        Caption = 'Ver Anulados'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 12
+      end
+    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1788,16 +2056,21 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Font.Style = []
         ItemLinks = <
           item
-            Item = btnSaldoCuenta
-            Visible = True
-          end
-          item
             Item = btnLibroBanco
             Visible = True
           end
           item
             BeginGroup = True
+            Item = btnFiltrat
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btImprimir
+            Visible = True
+          end
+          item
+            Item = btnExel
             Visible = True
           end
           item
@@ -1838,16 +2111,6 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       0
       0
       52)
-    object btnSaldoCuenta: TdxBarLargeButton
-      Caption = 'Saldo Cuentas'
-      Category = 0
-      Hint = 'Saldo actual de todas las Cuentas Bancarias'
-      Visible = ivNever
-      ImageIndex = 30
-      ShortCut = 120
-      OnClick = btnSaldoCuentaClick
-      AutoGrayScale = False
-    end
     object btnLibroBanco: TdxBarLargeButton
       Align = iaRight
       Caption = 'Libro Banco'
@@ -1868,14 +2131,6 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
-    object btn2: TdxBarLargeButton
-      Caption = 'btn2'
-      Category = 0
-      Hint = 'btn2'
-      Visible = ivAlways
-      ImageIndex = 7
-      AutoGrayScale = False
-    end
     object btImprimir: TdxBarLargeButton
       Caption = 'Imprimir'
       Category = 0
@@ -1884,17 +2139,32 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       ImageIndex = 28
       OnClick = btImprimirClick
     end
+    object btnFiltrat: TdxBarLargeButton
+      Caption = 'Filtrar'
+      Category = 0
+      Hint = 'Filtrar'
+      Visible = ivAlways
+      ImageIndex = 7
+      OnClick = btnFiltratClick
+      AutoGrayScale = False
+    end
+    object btnExel: TdxBarLargeButton
+      Caption = 'Exportar Excel'
+      Category = 0
+      Hint = 'Exportar Excel'
+      Visible = ivAlways
+      ImageIndex = 66
+      OnClick = btnExelClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btImprimir'
         'btnLibroBanco'
-        'btnSalir'
-        'btn2')
+        'btnSalir')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
-      Items = (
-        'btnSaldoCuenta')
     end
   end
   object LIBRO_BANCO: TZQuery
@@ -1925,7 +2195,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         ParamType = ptUnknown
       end>
     Left = 40
-    Top = 392
+    Top = 208
     ParamData = <
       item
         DataType = ftUnknown
@@ -2035,7 +2305,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   object DS_LIBRO_BANCO: TDataSource
     DataSet = LIBRO_BANCO
     Left = 40
-    Top = 440
+    Top = 256
   end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
@@ -2047,7 +2317,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       'order by c.nombre_cuenta')
     Params = <>
     Left = 162
-    Top = 392
+    Top = 208
     object ZQ_CuentasID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
     end
@@ -2078,11 +2348,14 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       ReadOnly = True
       Size = 245
     end
+    object ZQ_CuentasCOLOR_CONSILIADO: TStringField
+      FieldName = 'COLOR_CONSILIADO'
+    end
   end
   object DS_Cuentas: TDataSource
     DataSet = ZQ_Cuentas
     Left = 162
-    Top = 440
+    Top = 256
   end
   object EKBAvanzadaLibroBco: TEKBusquedaAvanzada
     CriteriosBusqueda = <
@@ -2134,7 +2407,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 40
-    Top = 344
+    Top = 160
   end
   object EKVistaPrevia_LibroBco: TEKVistaPreviaQR
     Reporte = RepLibroB
@@ -2144,7 +2417,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     VerExpExel = False
     Caption = 'Reporte de Libro Banco'
     Left = 162
-    Top = 343
+    Top = 159
   end
   object EKOrdenarGrillaLB: TEKOrdenarGrilla
     Grilla = DBGridLibroBanco
@@ -2152,6 +2425,118 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     NombreGuardarConfig = 'UR_DisponibilidadesLB'
     Ordenar = False
     Left = 41
-    Top = 297
+    Top = 113
+  end
+  object EKIniGuardarFiltros: TEKIni
+    Left = 160
+    Top = 112
+  end
+  object mxDBGridExport: TmxDBGridExport
+    DateFormat = 'dd/MM/yyyy'
+    TimeFormat = 'hh:mm AMPM'
+    DateTimeFormat = 'hh:mm AMPM dd/MM/yyyy'
+    ExportType = xtExcel
+    ExportTypes = [xtHTML, xtExcel, xtWord, xtTXT]
+    ExportStyle = xsView
+    HTML.CustomColors.Background = clWhite
+    HTML.CustomColors.DefaultLink = clRed
+    HTML.CustomColors.DefaultFontFace = 'Arial,Helvetica'
+    HTML.CustomColors.VisitedLink = clAqua
+    HTML.CustomColors.ActiveLink = clBlue
+    HTML.CustomColors.DefaultText = clBlack
+    HTML.CustomColors.TableFontColor = clBlack
+    HTML.CustomColors.TableFontFace = 'Arial,Helvetica'
+    HTML.CustomColors.TableBackground = 16777167
+    HTML.CustomColors.TableOddBackground = clWhite
+    HTML.CustomColors.HeaderBackground = 3368601
+    HTML.CustomColors.HeadersFontColor = clWhite
+    HTML.Options = [hoShowGridLines, hoBoldHeaders, hoAutoLink, hoOddRowColoring, hoDisplayTitle]
+    HTML.Template = ctStandard
+    Messages.Caption = 'Exportar datos'
+    Messages.CopiedToClipboard = 'Data was copied to clipboard!'
+    Messages.CancelCaption = '&Cancelar'
+    Messages.CreatedText = 'Exportando:'
+    Messages.DocumentFilter.HTML = 'HTML Documents'
+    Messages.DocumentFilter.Excel = 'Excel Files'
+    Messages.DocumentFilter.Word = 'Word Documents'
+    Messages.DocumentFilter.Text = 'Text Files'
+    Messages.DocumentFilter.Comma = 'CSV (Comma delimited)'
+    Messages.DocumentFilter.Tab = 'Text (Tab delimited)'
+    Messages.DocumentFilter.RTF = 'Rich Text Format'
+    Messages.DocumentFilter.DIF = 'Data Interchange Format'
+    Messages.DocumentFilter.SYLK = 'SYLK Files'
+    Messages.ExportCaption = '&Aceptar'
+    Messages.ExportToFile = '&Guardar'
+    Messages.FalseText = 'False'
+    Messages.Height = 80
+    Messages.SaveTitle = 'Guardar'
+    Messages.SelectFormat = 'Opciones'
+    Messages.Text = 'Proceseando...'
+    Messages.TrueText = 'True'
+    Messages.Width = 300
+    Messages.ViewOnly = '&Ver'
+    TruncateSymbol = '...'
+    RowNumberFormat = '%d'
+    DOC_RTF.Template = rtStandard
+    DOC_RTF.Options = [roShowGridLines, roOddRowColoring]
+    DOC_RTF.CustomSettings.TableBackground = 16777167
+    DOC_RTF.CustomSettings.TableOddBackground = clWhite
+    DOC_RTF.CustomSettings.HeaderBackground = 3368601
+    DOC_RTF.CustomSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    DOC_RTF.CustomSettings.DefaultFont.Color = clWindowText
+    DOC_RTF.CustomSettings.DefaultFont.Height = -11
+    DOC_RTF.CustomSettings.DefaultFont.Name = 'MS Sans Serif'
+    DOC_RTF.CustomSettings.DefaultFont.Style = []
+    DOC_RTF.CustomSettings.HeaderFont.Charset = DEFAULT_CHARSET
+    DOC_RTF.CustomSettings.HeaderFont.Color = clWindowText
+    DOC_RTF.CustomSettings.HeaderFont.Height = -11
+    DOC_RTF.CustomSettings.HeaderFont.Name = 'MS Sans Serif'
+    DOC_RTF.CustomSettings.HeaderFont.Style = [fsBold]
+    DOC_RTF.CustomSettings.TableFont.Charset = DEFAULT_CHARSET
+    DOC_RTF.CustomSettings.TableFont.Color = clWindowText
+    DOC_RTF.CustomSettings.TableFont.Height = -11
+    DOC_RTF.CustomSettings.TableFont.Name = 'MS Sans Serif'
+    DOC_RTF.CustomSettings.TableFont.Style = []
+    DOC_RTF.CellWidth = 1400
+    DOC_RTF.TopMargin = 101
+    DOC_RTF.BottomMargin = 101
+    DOC_RTF.LeftMargin = 461
+    DOC_RTF.RightMargin = 562
+    EXCEL.Options = [reSetColumnWidths, reSetMargins, reUseBorders]
+    EXCEL.ColumnWidth = 30
+    EXCEL.Protected = False
+    EXCEL.Footer = '&P'
+    EXCEL.DefaultFont.Charset = DEFAULT_CHARSET
+    EXCEL.DefaultFont.Color = clWindowText
+    EXCEL.DefaultFont.Height = -11
+    EXCEL.DefaultFont.Name = 'MS Sans Serif'
+    EXCEL.DefaultFont.Style = []
+    EXCEL.HeaderFont.Charset = DEFAULT_CHARSET
+    EXCEL.HeaderFont.Color = clWindowText
+    EXCEL.HeaderFont.Height = -12
+    EXCEL.HeaderFont.Name = 'Verdana'
+    EXCEL.HeaderFont.Style = [fsBold]
+    EXCEL.TableFont.Charset = DEFAULT_CHARSET
+    EXCEL.TableFont.Color = clWindowText
+    EXCEL.TableFont.Height = -11
+    EXCEL.TableFont.Name = 'MS Sans Serif'
+    EXCEL.TableFont.Style = []
+    EXCEL.TopMargin = 0.300000000000000000
+    EXCEL.BottomMargin = 0.300000000000000000
+    EXCEL.LeftMargin = 0.300000000000000000
+    EXCEL.RightMargin = 0.300000000000000000
+    Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
+    Version = '2.37'
+    DBGrid = DBGridLibroBanco
+    Left = 36
+    Top = 322
+  end
+  object mxNativeExcel1: TmxNativeExcel
+    ActiveFont = 0
+    Borders = []
+    Shading = False
+    Version = '1.24'
+    Left = 160
+    Top = 320
   end
 end
