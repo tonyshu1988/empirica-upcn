@@ -24,7 +24,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     Left = 0
     Top = 0
     Width = 854
-    Height = 414
+    Height = 410
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 0
@@ -32,7 +32,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
       Left = 1
       Top = 20
       Width = 852
-      Height = 355
+      Height = 351
       Align = alClient
       Color = 16772842
       DataSource = DS_MedioCobroPago
@@ -47,14 +47,35 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
         item
           Expanded = False
           FieldName = 'CODIGO_CORTO'
+          Title.Alignment = taCenter
           Title.Caption = 'Codigo Corto'
+          Width = 90
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
+          Title.Alignment = taCenter
           Title.Caption = 'Nombre Medio'
-          Width = 661
+          Width = 377
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'EDITABLE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Editable'
+          Width = 61
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'VER_LIBRO_BANCO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Incluir en Libro Banco'
+          Width = 135
           Visible = True
         end>
     end
@@ -84,7 +105,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     end
     object pDatos: TPanel
       Left = 1
-      Top = 375
+      Top = 371
       Width = 852
       Height = 38
       Align = alBottom
@@ -113,10 +134,18 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
         Caption = 'Cod. Corto:'
         Transparent = True
       end
+      object Label3: TLabel
+        Left = 641
+        Top = 13
+        Width = 130
+        Height = 13
+        Caption = 'Incluir en Libro Banco:'
+        Transparent = True
+      end
       object dbNombreConcepto: TDBEdit
         Left = 235
         Top = 9
-        Width = 546
+        Width = 396
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NOMBRE_MEDIO_COBRO_PAGO'
@@ -144,6 +173,19 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
+      end
+      object DBCBoxVerLB: TDBComboBox
+        Left = 776
+        Top = 8
+        Width = 73
+        Height = 21
+        DataField = 'VER_LIBRO_BANCO'
+        DataSource = DS_MedioCobroPago
+        ItemHeight = 13
+        Items.Strings = (
+          'S'
+          'N')
+        TabOrder = 2
       end
     end
   end
@@ -428,8 +470,9 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
   object ZQ_MedioCobroPago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select *'
-      'from ie_medios_cobro_pago mcp')
+      'select m.*'
+      'from ie_medios_cobro_pago m'
+      '')
     Params = <>
     Left = 224
     Top = 80
@@ -448,10 +491,21 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
       FieldName = 'EDITABLE'
       Size = 1
     end
+    object ZQ_MedioCobroPagoVER_LIBRO_BANCO: TStringField
+      FieldName = 'VER_LIBRO_BANCO'
+      Size = 1
+    end
   end
   object DS_MedioCobroPago: TDataSource
     DataSet = ZQ_MedioCobroPago
     Left = 336
     Top = 80
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = Grilla
+    FuenteNormal = []
+    Ordenar = True
+    Left = 224
+    Top = 144
   end
 end
