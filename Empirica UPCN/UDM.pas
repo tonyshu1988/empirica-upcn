@@ -50,7 +50,8 @@ begin
   ZQ_Configuracion.Open;
   if ZQ_Configuracion.Locate('clave', 'iniciar_libro_banco',[]) then
     if (ZQ_ConfiguracionTEXTO.AsString = 'SI') then
-      FPrincipal.ABMMovimientos1.Click;
+      if dm.EKUsrLogin1.PermisoAccionValor('ACCESO') <> '' then
+        FPrincipal.ABMMovimientos1.Click;
 end;
 
 
