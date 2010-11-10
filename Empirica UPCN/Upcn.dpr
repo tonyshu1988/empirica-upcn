@@ -25,7 +25,7 @@ uses
 
 begin
   Application.Initialize;
-  Application.Title := 'GA (Gestión Administrativa)';
+  Application.Title := 'Sistema de Libro Banco';
   Application.CreateForm(TDM, DM);
   Application.Run;
 end.

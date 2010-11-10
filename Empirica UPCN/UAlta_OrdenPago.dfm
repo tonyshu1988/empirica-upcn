@@ -1,10 +1,10 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 320
-  Top = 115
+  Left = 291
+  Top = 59
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
-  ClientHeight = 537
+  ClientHeight = 601
   ClientWidth = 795
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,7 +22,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Left = 0
     Top = 0
     Width = 795
-    Height = 485
+    Height = 549
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -45,7 +45,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       Left = 3
       Top = 229
       Width = 789
-      Height = 253
+      Height = 317
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
@@ -77,7 +77,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Left = 1
         Top = 23
         Width = 789
-        Height = 190
+        Height = 254
         Align = alCustom
         Anchors = [akLeft, akTop, akRight, akBottom]
         Color = 16772842
@@ -96,47 +96,97 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
           item
             Expanded = False
             FieldName = 'FECHA_MDC'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Fecha PD'
-            Width = 89
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Verdana'
+            Title.Font.Style = []
+            Width = 120
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ID_MEDIO'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Cod.'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Verdana'
+            Title.Font.Style = []
             Width = 40
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'medio_de_pago'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Medio'
-            Width = 210
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Verdana'
+            Title.Font.Style = []
+            Width = 235
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'NRO_CHEQUE_TRANSF'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Nro Cheque\Transf'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Verdana'
+            Title.Font.Style = []
             Width = 197
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'IMPORTE'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Importe'
-            Width = 150
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Verdana'
+            Title.Font.Style = []
+            Width = 166
             Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
-        Top = 215
+        Top = 279
         Width = 789
         Height = 38
         Align = alBottom
@@ -433,7 +483,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

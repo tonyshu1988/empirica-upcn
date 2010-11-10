@@ -172,7 +172,6 @@ type
     QRDBText41: TQRDBText;
     QRDBText46: TQRDBText;
     QRDBText63: TQRDBText;
-    QRLabel12: TQRLabel;
     QRBand14: TQRBand;
     QRDBText65: TQRDBText;
     QRShape2: TQRShape;
