@@ -1,6 +1,6 @@
 object FABMProveedores: TFABMProveedores
-  Left = 292
-  Top = 95
+  Left = 217
+  Top = 130
   Width = 945
   Height = 592
   Caption = 'ABM Proveedores'
@@ -24,15 +24,15 @@ object FABMProveedores: TFABMProveedores
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 937
-    Height = 508
+    Width = 929
+    Height = 506
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
     object Panel_edicion: TPanel
       Left = 1
-      Top = 344
-      Width = 935
+      Top = 342
+      Width = 927
       Height = 163
       Align = alBottom
       TabOrder = 0
@@ -263,8 +263,8 @@ object FABMProveedores: TFABMProveedores
     object DBGridProveedores: TDBGrid
       Left = 1
       Top = 20
-      Width = 935
-      Height = 324
+      Width = 927
+      Height = 322
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -327,7 +327,7 @@ object FABMProveedores: TFABMProveedores
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 935
+      Width = 927
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -349,7 +349,7 @@ object FABMProveedores: TFABMProveedores
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 825
+        Left = 817
         Top = 1
         Width = 109
         Height = 17
@@ -438,7 +438,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          227.100694444444500000
+          227.100694444444400000
           1898.385416666667000000)
         BandType = rbPageHeader
         object QRDBImage1: TQRDBImage
@@ -459,9 +459,9 @@ object FABMProveedores: TFABMProveedores
           DataField = 'GRAFICO'
         end
         object QRLabel11: TQRLabel
-          Left = 355
+          Left = 298
           Top = 72
-          Width = 151
+          Width = 265
           Height = 23
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -470,14 +470,14 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawRight = False
           Size.Values = (
             50.711805555555560000
-            782.725694444444400000
+            657.048611111111100000
             158.750000000000000000
-            332.934027777777900000)
+            584.288194444444400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'LIBRO BANCO'
+          Caption = 'LISTADO PROVEEDORES'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -500,9 +500,9 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666660000
-            705.555555555555700000
-            94.809027777777790000
+            52.916666666666670000
+            705.555555555555600000
+            94.809027777777780000
             487.274305555555600000)
           Alignment = taCenter
           AlignToBand = True
@@ -531,10 +531,10 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666660000
-            628.385416666666800000
+            52.916666666666670000
+            628.385416666666700000
             30.868055555555560000
-            639.409722222222300000)
+            639.409722222222200000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -939,9 +939,9 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawRight = False
           Size.Values = (
             50.711805555555560000
-            328.524305555555500000
+            328.524305555555600000
             13.229166666666670000
-            227.100694444444500000)
+            227.100694444444400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1004,7 +1004,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          41.892361111111120000
+          41.892361111111110000
           1898.385416666667000000)
         BandType = rbPageFooter
         object QRLabel24: TQRLabel
@@ -1073,7 +1073,7 @@ object FABMProveedores: TFABMProveedores
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

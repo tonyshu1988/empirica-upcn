@@ -129,6 +129,7 @@ type
     lblFechaExtracto: TLabel;
     QRlblMesEmision: TQRLabel;
     QRLabel9: TQRLabel;
+    QRShape6: TQRShape;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
