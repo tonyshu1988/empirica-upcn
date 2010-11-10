@@ -1,6 +1,6 @@
 object FListadoErogaciones: TFListadoErogaciones
-  Left = 63
-  Top = 264
+  Left = 144
+  Top = 116
   Width = 1130
   Height = 565
   Caption = 'Listado Erogaciones en Cumplimiento'
@@ -30,9 +30,438 @@ object FListadoErogaciones: TFListadoErogaciones
     BevelOuter = bvNone
     BorderWidth = 3
     TabOrder = 4
+    object DBGridListaErogacion: TDBGrid
+      Left = 3
+      Top = 58
+      Width = 1108
+      Height = 348
+      Align = alClient
+      Color = 16772842
+      DataSource = DS_Libro_erogaciones
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      OnDrawColumnCell = DBGridListaErogacionDrawColumnCell
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'FECHA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fecha Emisi'#243'n'
+          Width = 80
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'FECHA_MDC'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fecha PD'
+          Width = 80
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'NRO_ORDEN_STRING'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. Orden'
+          Width = 78
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'FECHA_CONCILIADO'
+          Title.Alignment = taCenter
+          Title.Caption = 'F. Conciliado'
+          Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'APELLIDO_Y_NOMBRE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Proveedor'
+          Width = 117
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_CONCEPTO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Concepto'
+          Width = 180
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Medio Pago'
+          Width = 95
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NRO_CHEQUE_TRANSF'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. Cheq/Trans'
+          Width = 95
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NRO_FACTURA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. Factura'
+          Width = 81
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NRO_RECIBO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. Recibo'
+          Width = 81
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'pagos_diferidos'
+          Title.Alignment = taCenter
+          Title.Caption = 'Pagos Diferidos'
+          Width = 103
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'pagos_corrientes'
+          Title.Alignment = taCenter
+          Title.Caption = 'Pagos Corrientes'
+          Width = 117
+          Visible = True
+        end>
+    end
+    object pDatos: TPanel
+      Left = 3
+      Top = 3
+      Width = 1108
+      Height = 55
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 1
+      DesignSize = (
+        1108
+        55)
+      object Shape1: TShape
+        Left = 3
+        Top = 4
+        Width = 1102
+        Height = 22
+        Anchors = [akLeft, akTop, akRight]
+        Brush.Color = clGray
+        Pen.Color = clGray
+        Shape = stRoundRect
+      end
+      object Shape2: TShape
+        Left = 3
+        Top = 3
+        Width = 1102
+        Height = 22
+        Anchors = [akLeft, akTop, akRight]
+        Brush.Color = clTeal
+        Shape = stRoundRect
+      end
+      object Label2: TLabel
+        Left = 0
+        Top = 7
+        Width = 1102
+        Height = 18
+        Alignment = taCenter
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'LISTADO DE EROGACIONES'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+      end
+      object Label1: TLabel
+        Left = -1
+        Top = 5
+        Width = 1102
+        Height = 18
+        Align = alCustom
+        Alignment = taCenter
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'LISTADO DE EROGACIONES'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clInfoBk
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+      end
+      object Label3: TLabel
+        Left = 4
+        Top = 38
+        Width = 46
+        Height = 13
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'Cuenta:'
+      end
+      object lblNombreCuenta: TLabel
+        Left = 52
+        Top = 38
+        Width = 487
+        Height = 13
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'lblNombreCuenta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 380
+        Top = 38
+        Width = 41
+        Height = 13
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'Desde:'
+      end
+      object lblFechaDesde: TLabel
+        Left = 423
+        Top = 38
+        Width = 282
+        Height = 13
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'lblFechaDesde'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object lblFechaHasta: TLabel
+        Left = 595
+        Top = 38
+        Width = 282
+        Height = 13
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'lblFechaHasta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 556
+        Top = 38
+        Width = 37
+        Height = 13
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'Hasta:'
+      end
+      object StaticText1: TStaticText
+        Left = 1037
+        Top = 38
+        Width = 69
+        Height = 17
+        Anchors = [akRight]
+        Caption = 'Pendiente'
+        Color = 12371452
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object pResumen: TPanel
+      Left = 3
+      Top = 406
+      Width = 1108
+      Height = 18
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 2
+      object lblSaldo: TLabel
+        Left = 1045
+        Top = 0
+        Width = 63
+        Height = 18
+        Align = alRight
+        Caption = 'lblSaldo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    object PFiltrosColumnas: TPanel
+      Tag = 99
+      Left = 3
+      Top = 424
+      Width = 1108
+      Height = 52
+      Align = alBottom
+      Color = 8454016
+      TabOrder = 3
+      Visible = False
+      object BtAplicarFiltrosColumnas: TButton
+        Left = 556
+        Top = 13
+        Width = 93
+        Height = 26
+        Caption = 'Aplicar'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        OnClick = BtAplicarFiltrosColumnasClick
+      end
+      object CBFechaEmi: TCheckBox
+        Tag = 99
+        Left = 7
+        Top = 7
+        Width = 103
+        Height = 17
+        Caption = 'Fecha Emision'
+        Checked = True
+        State = cbChecked
+        TabOrder = 1
+      end
+      object CBFechaPD: TCheckBox
+        Tag = 99
+        Left = 112
+        Top = 7
+        Width = 78
+        Height = 17
+        Caption = 'Fecha PD'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+      end
+      object CBMedio: TCheckBox
+        Tag = 99
+        Left = 112
+        Top = 31
+        Width = 62
+        Height = 17
+        Caption = 'Medio'
+        Checked = True
+        State = cbChecked
+        TabOrder = 3
+      end
+      object CBNroMedio: TCheckBox
+        Tag = 99
+        Left = 196
+        Top = 31
+        Width = 81
+        Height = 17
+        Caption = 'Nro. Medio'
+        Checked = True
+        State = cbChecked
+        TabOrder = 4
+      end
+      object CBProveedor: TCheckBox
+        Tag = 99
+        Left = 410
+        Top = 7
+        Width = 102
+        Height = 17
+        Caption = 'Proveedores'
+        Checked = True
+        State = cbChecked
+        TabOrder = 5
+      end
+      object CBConcepto: TCheckBox
+        Tag = 99
+        Left = 7
+        Top = 31
+        Width = 81
+        Height = 17
+        Caption = 'Concepto'
+        Checked = True
+        State = cbChecked
+        TabOrder = 6
+      end
+      object CBNroOrden: TCheckBox
+        Tag = 99
+        Left = 196
+        Top = 7
+        Width = 81
+        Height = 17
+        Caption = 'Nro. Orden'
+        Checked = True
+        State = cbChecked
+        TabOrder = 7
+      end
+      object CBRecibo: TCheckBox
+        Tag = 99
+        Left = 287
+        Top = 31
+        Width = 80
+        Height = 17
+        Caption = 'Nro Recibo'
+        Checked = True
+        State = cbChecked
+        TabOrder = 8
+      end
+      object CBNroFactura: TCheckBox
+        Tag = 99
+        Left = 410
+        Top = 31
+        Width = 88
+        Height = 17
+        Caption = 'Nro Factura'
+        Checked = True
+        State = cbChecked
+        TabOrder = 9
+      end
+      object CBFechaConciliado: TCheckBox
+        Tag = 99
+        Left = 287
+        Top = 7
+        Width = 117
+        Height = 17
+        Caption = 'Fecha Conciliado'
+        Checked = True
+        State = cbChecked
+        TabOrder = 10
+      end
+    end
     object RepErog: TQuickRep
       Tag = 99
-      Left = 275
+      Left = 75
       Top = 43
       Width = 952
       Height = 1347
@@ -153,7 +582,7 @@ object FListadoErogaciones: TFListadoErogaciones
             170.089285714285700000)
           DataField = 'GRAFICO'
         end
-        object QRLabel11: TQRLabel
+        object RepErog_TITULO_EROG: TQRLabel
           Left = 171
           Top = 72
           Width = 518
@@ -277,37 +706,6 @@ object FListadoErogaciones: TFListadoErogaciones
           WordWrap = True
           FontSize = 8
         end
-        object QRLabel3: TQRLabel
-          Left = 316
-          Top = 109
-          Width = 56
-          Height = 17
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.797619047619050000
-            697.366071428571400000
-            240.014880952381000000
-            122.842261904761900000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Fondo:'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 8
-        end
         object QRlblErogaciones_FDesde: TQRLabel
           Left = 306
           Top = 140
@@ -385,7 +783,7 @@ object FListadoErogaciones: TFListadoErogaciones
             831.232638888888900000
             242.534722222222200000
             372.621527777777800000)
-          Alignment = taLeftJustify
+          Alignment = taCenter
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
@@ -1297,435 +1695,6 @@ object FListadoErogaciones: TFListadoErogaciones
           WordWrap = True
           FontSize = 6
         end
-      end
-    end
-    object DBGridListaErogacion: TDBGrid
-      Left = 3
-      Top = 58
-      Width = 1108
-      Height = 348
-      Align = alClient
-      Color = 16772842
-      DataSource = DS_Libro_erogaciones
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-      OnDrawColumnCell = DBGridListaErogacionDrawColumnCell
-      Columns = <
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'FECHA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Fecha Emisi'#243'n'
-          Width = 80
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'FECHA_MDC'
-          Title.Alignment = taCenter
-          Title.Caption = 'Fecha PD'
-          Width = 80
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'NRO_ORDEN_STRING'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nro. Orden'
-          Width = 78
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'FECHA_CONCILIADO'
-          Title.Alignment = taCenter
-          Title.Caption = 'F. Conciliado'
-          Width = 80
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'APELLIDO_Y_NOMBRE'
-          Title.Alignment = taCenter
-          Title.Caption = 'Proveedor'
-          Width = 117
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_CONCEPTO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Concepto'
-          Width = 180
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Medio Pago'
-          Width = 95
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NRO_CHEQUE_TRANSF'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nro. Cheq/Trans'
-          Width = 95
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NRO_FACTURA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nro. Factura'
-          Width = 81
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NRO_RECIBO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nro. Recibo'
-          Width = 81
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'pagos_diferidos'
-          Title.Alignment = taCenter
-          Title.Caption = 'Pagos Diferidos'
-          Width = 103
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'pagos_corrientes'
-          Title.Alignment = taCenter
-          Title.Caption = 'Pagos Corrientes'
-          Width = 117
-          Visible = True
-        end>
-    end
-    object pDatos: TPanel
-      Left = 3
-      Top = 3
-      Width = 1108
-      Height = 55
-      Align = alTop
-      BevelOuter = bvNone
-      TabOrder = 1
-      DesignSize = (
-        1108
-        55)
-      object Shape1: TShape
-        Left = 3
-        Top = 4
-        Width = 1102
-        Height = 22
-        Anchors = [akLeft, akTop, akRight]
-        Brush.Color = clGray
-        Pen.Color = clGray
-        Shape = stRoundRect
-      end
-      object Shape2: TShape
-        Left = 3
-        Top = 3
-        Width = 1102
-        Height = 22
-        Anchors = [akLeft, akTop, akRight]
-        Brush.Color = clTeal
-        Shape = stRoundRect
-      end
-      object Label2: TLabel
-        Left = 0
-        Top = 7
-        Width = 1102
-        Height = 18
-        Alignment = taCenter
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        Caption = 'LISTADO DE EROGACIONES'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-      end
-      object Label1: TLabel
-        Left = -1
-        Top = 5
-        Width = 1102
-        Height = 18
-        Align = alCustom
-        Alignment = taCenter
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        Caption = 'LISTADO DE EROGACIONES'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clInfoBk
-        Font.Height = -16
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-      end
-      object Label3: TLabel
-        Left = 4
-        Top = 38
-        Width = 46
-        Height = 13
-        Anchors = [akLeft, akTop, akRight]
-        Caption = 'Cuenta:'
-      end
-      object lblNombreCuenta: TLabel
-        Left = 52
-        Top = 38
-        Width = 487
-        Height = 13
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        Caption = 'lblNombreCuenta'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-      object Label4: TLabel
-        Left = 380
-        Top = 38
-        Width = 41
-        Height = 13
-        Anchors = [akLeft, akTop, akRight]
-        Caption = 'Desde:'
-      end
-      object lblFechaDesde: TLabel
-        Left = 423
-        Top = 38
-        Width = 282
-        Height = 13
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        Caption = 'lblFechaDesde'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-      object lblFechaHasta: TLabel
-        Left = 595
-        Top = 38
-        Width = 282
-        Height = 13
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        Caption = 'lblFechaHasta'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-      object Label7: TLabel
-        Left = 556
-        Top = 38
-        Width = 37
-        Height = 13
-        Anchors = [akLeft, akTop, akRight]
-        Caption = 'Hasta:'
-      end
-      object StaticText1: TStaticText
-        Left = 1037
-        Top = 38
-        Width = 69
-        Height = 17
-        Anchors = [akRight]
-        Caption = 'Pendiente'
-        Color = 12371452
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        TabOrder = 0
-      end
-    end
-    object pResumen: TPanel
-      Left = 3
-      Top = 406
-      Width = 1108
-      Height = 18
-      Align = alBottom
-      BevelOuter = bvNone
-      TabOrder = 2
-      object lblSaldo: TLabel
-        Left = 1045
-        Top = 0
-        Width = 63
-        Height = 18
-        Align = alRight
-        Caption = 'lblSaldo'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-    end
-    object PFiltrosColumnas: TPanel
-      Tag = 99
-      Left = 3
-      Top = 424
-      Width = 1108
-      Height = 52
-      Align = alBottom
-      Color = 8454016
-      TabOrder = 3
-      Visible = False
-      object BtAplicarFiltrosColumnas: TButton
-        Left = 556
-        Top = 13
-        Width = 93
-        Height = 26
-        Caption = 'Aplicar'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        OnClick = BtAplicarFiltrosColumnasClick
-      end
-      object CBFechaEmi: TCheckBox
-        Tag = 99
-        Left = 7
-        Top = 7
-        Width = 103
-        Height = 17
-        Caption = 'Fecha Emision'
-        Checked = True
-        State = cbChecked
-        TabOrder = 1
-      end
-      object CBFechaPD: TCheckBox
-        Tag = 99
-        Left = 112
-        Top = 7
-        Width = 78
-        Height = 17
-        Caption = 'Fecha PD'
-        Checked = True
-        State = cbChecked
-        TabOrder = 2
-      end
-      object CBMedio: TCheckBox
-        Tag = 99
-        Left = 112
-        Top = 31
-        Width = 62
-        Height = 17
-        Caption = 'Medio'
-        Checked = True
-        State = cbChecked
-        TabOrder = 3
-      end
-      object CBNroMedio: TCheckBox
-        Tag = 99
-        Left = 196
-        Top = 31
-        Width = 81
-        Height = 17
-        Caption = 'Nro. Medio'
-        Checked = True
-        State = cbChecked
-        TabOrder = 4
-      end
-      object CBProveedor: TCheckBox
-        Tag = 99
-        Left = 410
-        Top = 7
-        Width = 102
-        Height = 17
-        Caption = 'Proveedores'
-        Checked = True
-        State = cbChecked
-        TabOrder = 5
-      end
-      object CBConcepto: TCheckBox
-        Tag = 99
-        Left = 7
-        Top = 31
-        Width = 81
-        Height = 17
-        Caption = 'Concepto'
-        Checked = True
-        State = cbChecked
-        TabOrder = 6
-      end
-      object CBNroOrden: TCheckBox
-        Tag = 99
-        Left = 196
-        Top = 7
-        Width = 81
-        Height = 17
-        Caption = 'Nro. Orden'
-        Checked = True
-        State = cbChecked
-        TabOrder = 7
-      end
-      object CBRecibo: TCheckBox
-        Tag = 99
-        Left = 287
-        Top = 31
-        Width = 80
-        Height = 17
-        Caption = 'Nro Recibo'
-        Checked = True
-        State = cbChecked
-        TabOrder = 8
-      end
-      object CBNroFactura: TCheckBox
-        Tag = 99
-        Left = 410
-        Top = 31
-        Width = 88
-        Height = 17
-        Caption = 'Nro Factura'
-        Checked = True
-        State = cbChecked
-        TabOrder = 9
-      end
-      object CBFechaConciliado: TCheckBox
-        Tag = 99
-        Left = 287
-        Top = 7
-        Width = 117
-        Height = 17
-        Caption = 'Fecha Conciliado'
-        Checked = True
-        State = cbChecked
-        TabOrder = 10
       end
     end
   end

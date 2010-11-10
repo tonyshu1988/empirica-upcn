@@ -24,8 +24,18 @@ type
     ZQ_ConfiguracionGRUPO: TStringField;
     ZQ_ConfiguracionDESCRIPCION: TStringField;
     ZQ_ConfiguracionGRAFICO: TBlobField;
+    ZQ_Configuracion_Cuenta: TZQuery;
+    StringField1: TStringField;
+    DateField1: TDateField;
+    FloatField1: TFloatField;
+    StringField2: TStringField;
+    SmallintField1: TSmallintField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    BlobField1: TBlobField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
+    procedure TitulosReportes(Reporte: TQuickRep;Cuenta:Integer);
   private
     { Private declarations }
   public
@@ -80,6 +90,35 @@ begin
     end;
 
     ZQ_Configuracion.Next;
+  end;
+end;
+
+procedure TDM.TitulosReportes(Reporte: TQuickRep;Cuenta:Integer);
+var
+  i : integer;
+  Etiqueta : TQRLabel;
+  Form : TForm;
+begin
+  //--- SETEAR VARIABLE GLOBALES DESDE TABLA CONFIGURACION ---
+  ZQ_Configuracion_Cuenta.close;
+  ZQ_Configuracion_Cuenta.ParamByName('CTA').AsInteger:=Cuenta;
+  ZQ_Configuracion_Cuenta.Open;
+  ZQ_Configuracion_Cuenta.First;
+
+  Form := Tform(Reporte.Owner);
+  while not ZQ_Configuracion_Cuenta.Eof do
+  begin
+    Etiqueta := TQRLabel(Form.FindComponent(reporte.Name+'_'+ZQ_Configuracion_Cuenta.fieldbyname('clave').AsString));
+    i:=0;
+    while Assigned(Etiqueta) do
+    begin
+      Etiqueta.Enabled:= true;
+      Etiqueta.Caption:= ZQ_Configuracion_Cuenta.fieldbyname('texto').AsString;
+      inc(i);
+      Etiqueta := TQRLabel(Form.FindComponent(reporte.Name+'_'+ZQ_Configuracion_Cuenta.fieldbyname('clave').AsString+inttostr(i)));
+    end;
+
+    ZQ_Configuracion_Cuenta.Next;
   end;
 end;
 
