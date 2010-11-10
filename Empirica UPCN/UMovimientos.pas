@@ -982,27 +982,41 @@ begin
 
   if not LIBRO_BANCO.IsEmpty then
   begin
-    if (LIBRO_BANCOCONCILIADO.Value='S') then// or (LIBRO_BANCOID_MEDIO.AsInteger = 5) then
+    if LIBRO_BANCOID_MOVIMIENTO.AsInteger <> -1 then
     begin
-      DBGridLibroBanco.Canvas.Brush.Color :=StaticText1.Brush.Color;
-      DBGridLibroBanco.Canvas.Font.Color := clBlack;
-      if (gdFocused in State) or (gdSelected in State) then
-       begin
-       a.Top := rect.Top+1;
-       a.Bottom := rect.Bottom -1;
-       DBGridLibroBanco.Canvas.Font.Color := clBlack;
-       DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
-       end;
+      if (LIBRO_BANCOCONCILIADO.Value='S') or (LIBRO_BANCOID_MEDIO.AsInteger = 5) then
+      begin
+        DBGridLibroBanco.Canvas.Brush.Color :=StaticText1.Brush.Color;
+        DBGridLibroBanco.Canvas.Font.Color := clBlack;
+        if (gdFocused in State) or (gdSelected in State) then
+        begin
+          a.Top := rect.Top+1;
+          a.Bottom := rect.Bottom -1;
+          DBGridLibroBanco.Canvas.Font.Color := clBlack;
+          DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+        end;
+      end
+      else
+      begin
+        if (gdFocused in State) or (gdSelected in State) then
+        begin
+          a.Top := rect.Top+1;
+          a.Bottom := rect.Bottom -1;
+          DBGridLibroBanco.Canvas.Font.Color := clwhite;
+          DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
+          DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
+        end;
+      end;
     end
     else
     begin
+      DBGridLibroBanco.Canvas.Brush.Color := clBlack;
+      DBGridLibroBanco.Canvas.Font.Color := clWhite;
+      DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
       if (gdFocused in State) or (gdSelected in State) then
       begin
         a.Top := rect.Top+1;
         a.Bottom := rect.Bottom -1;
-        DBGridLibroBanco.Canvas.Font.Color := clwhite;
-        DBGridLibroBanco.Canvas.Brush.Color:=clBlue;
-        DBGridLibroBanco.Canvas.Font.Style := DBGridLibroBanco.Canvas.Font.Style + [fsBold];
       end;
     end;
 
