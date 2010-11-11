@@ -1,11 +1,11 @@
 object FConfiguracion: TFConfiguracion
-  Left = 612
-  Top = 261
+  Left = 362
+  Top = 100
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'FConfiguracion'
-  ClientHeight = 482
-  ClientWidth = 673
+  ClientHeight = 476
+  ClientWidth = 665
   Color = clBtnFace
   Constraints.MaxHeight = 514
   Constraints.MaxWidth = 681
@@ -25,15 +25,15 @@ object FConfiguracion: TFConfiguracion
   object pFondo: TPanel
     Left = 0
     Top = 0
-    Width = 673
-    Height = 430
+    Width = 665
+    Height = 424
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object grpGeneral: TGroupBox
       Left = 0
-      Top = 241
-      Width = 673
+      Top = 235
+      Width = 665
       Height = 189
       Align = alBottom
       TabOrder = 0
@@ -187,14 +187,14 @@ object FConfiguracion: TFConfiguracion
     object panelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 673
-      Height = 241
+      Width = 665
+      Height = 235
       Align = alClient
       TabOrder = 1
       object DBGrid2: TDBGrid
         Left = 1
         Top = 25
-        Width = 671
+        Width = 663
         Height = 173
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alTop
@@ -216,15 +216,16 @@ object FConfiguracion: TFConfiguracion
             FieldName = 'CLAVE'
             Title.Alignment = taCenter
             Title.Caption = 'Clave'
-            Width = 222
+            Width = 183
             Visible = True
           end
           item
+            Alignment = taRightJustify
             Expanded = False
             FieldName = 'FECHA'
             Title.Alignment = taCenter
             Title.Caption = 'Fecha'
-            Width = 88
+            Width = 79
             Visible = True
           end
           item
@@ -232,6 +233,7 @@ object FConfiguracion: TFConfiguracion
             FieldName = 'NUMERO'
             Title.Alignment = taCenter
             Title.Caption = 'N'#250'mero'
+            Width = 59
             Visible = True
           end
           item
@@ -281,7 +283,7 @@ object FConfiguracion: TFConfiguracion
       object Panel3: TPanel
         Left = 1
         Top = 1
-        Width = 671
+        Width = 663
         Height = 24
         Align = alTop
         Caption = 'Configuraci'#243'n General'
@@ -340,7 +342,7 @@ object FConfiguracion: TFConfiguracion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -441,10 +443,6 @@ object FConfiguracion: TFConfiguracion
         Font.Name = 'Verdana'
         Font.Style = []
         ItemLinks = <
-          item
-            Item = btnConfigNroOrden
-            Visible = True
-          end
           item
             Item = btnSalir
             Visible = True

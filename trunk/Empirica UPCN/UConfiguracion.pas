@@ -117,10 +117,13 @@ procedure TFConfiguracion.btQuitarGralClick(Sender: TObject);
 begin
   if not(ZQ_Config.IsEmpty) then
   begin
-    if dm.EKModelo.iniciar_transaccion(TRANSACCION, [ZQ_Config]) then
+    if (application.MessageBox(pchar('¿Esta seguro que desea eliminar la clave '+ZQ_ConfigCLAVE.AsString+'?'), 'Configuracón', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
     begin
-      ZQ_Config.Delete;
-      dm.EKModelo.finalizar_transaccion(TRANSACCION);
+      if dm.EKModelo.iniciar_transaccion(TRANSACCION, [ZQ_Config]) then
+      begin
+        ZQ_Config.Delete;
+        dm.EKModelo.finalizar_transaccion(TRANSACCION);
+      end;
     end;
   end
 end;
