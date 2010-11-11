@@ -184,6 +184,7 @@ type
     procedure DbGridMediosCobroPagoDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -203,32 +204,6 @@ implementation
 uses UDM, DateUtils, UMovimientos;
 
 {$R *.dfm}
-
-procedure TFAlta_OrdenPago.DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-  if key = 112 then
-  begin
-      if EKListado_Proveedores.Buscar then
-      begin
-        ZQ_Movimientos.Edit;
-        ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
-      end;
-  end;
-end;
-
-
-procedure TFAlta_OrdenPago.DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-  if key = 112 then
-  begin
-      if EKListado_Conceptos.Buscar then
-      begin
-        ZQ_Movimientos.Edit;
-        ZQ_MovimientosID_CONCEPTO.AsInteger := StrToInt(EKListado_Conceptos.Resultado);
-      end;
-  end;
-end;
-
 
 procedure TFAlta_OrdenPago.DBLUpCBoxCuentaEnter(Sender: TObject);
 begin
@@ -292,7 +267,6 @@ begin
     ZQ_Cuentas.Locate('id_cuenta', ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger,[]);
   end;
   DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
-
 end;
 
 
@@ -514,10 +488,9 @@ end;
 function TFAlta_OrdenPago.validarNroOrden(nro:String):boolean;
 begin
   result := true;
-
  // if (dbNroOrden.Text=NroOrdenAnt) then exit;
-
 end;
+
 
 function TFAlta_OrdenPago.validarcampos():boolean;
 begin
@@ -610,28 +583,25 @@ begin
   btnCancelar.Click;
 end;
 
+
 procedure TFAlta_OrdenPago.AGuardarExecute(Sender: TObject);
 begin
   if btnGuardar.Enabled then
     btnGuardar.Click;
 end;
 
+
 procedure TFAlta_OrdenPago.ACancelarExecute(Sender: TObject);
 begin
   btnCancelar.Click;
 end;
 
-procedure TFAlta_OrdenPago.ZQ_CuentasAfterScroll(DataSet: TDataSet);
-begin
-  ZQ_Proveedores.Active:=false;
-  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-  ZQ_Proveedores.Active:=true;
-end;
 
 procedure TFAlta_OrdenPago.dbFechaEmisionChange(Sender: TObject);
 begin
   ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNUMERO.AsInteger)]);
 end;
+
 
 procedure TFAlta_OrdenPago.DbGridMediosCobroPagoDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -674,4 +644,50 @@ begin
   end;
 end;
 
+
+procedure TFAlta_OrdenPago.ZQ_CuentasAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_Proveedores.Active:=false;
+  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Proveedores.Active:=true;
+end;
+
+
+procedure TFAlta_OrdenPago.ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_Conceptos.Active:=false;
+  ZQ_Conceptos.ParamByName('idProveedor').AsInteger:= ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
+  ZQ_Conceptos.Active:=true;
+end;
+
+
+procedure TFAlta_OrdenPago.DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+  begin
+      EKListado_Proveedores.SQL[4]:= ' and (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
+      if EKListado_Proveedores.Buscar then
+      begin
+        ZQ_Movimientos.Edit;
+        ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
+      end;
+  end;
+end;
+
+
+procedure TFAlta_OrdenPago.DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+  begin
+      EKListado_Conceptos.SQL[4]:= ' and (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
+      if EKListado_Conceptos.Buscar then
+      begin
+        ZQ_Movimientos.Edit;
+        ZQ_MovimientosID_CONCEPTO.AsInteger := StrToInt(EKListado_Conceptos.Resultado);
+      end;
+  end;
+end;
+
+
 end.
+

@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 291
-  Top = 59
+  Left = 346
+  Top = 273
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -732,9 +732,14 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object EKListado_Proveedores: TEKListadoSQL
     Modelo = DM.EKModelo
     SQL.Strings = (
-      'select *'
-      'from ie_proveedores'
-      'where nro_proveedor > 0')
+      'select distinct p.*'
+      'from ie_proveedores p'
+      
+        'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
+        'r)'
+      'where (p.baja <> '#39'S'#39')'
+      ' and (c.id_cuenta = :idCta)'
+      'order by apellido_y_nombre')
     CampoBuscar = 'APELLIDO_Y_NOMBRE'
     CampoClave = 'nro_proveedor'
     Left = 67
@@ -835,9 +840,14 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object EKListado_Conceptos: TEKListadoSQL
     Modelo = DM.EKModelo
     SQL.Strings = (
-      'select *'
-      'from ie_conceptos'
-      'where id_concepto > 0')
+      'select distinct c.*'
+      'from ie_conceptos c'
+      
+        'left join proveedor_concepto pc on (c.id_concepto = pc.id_concep' +
+        'to)'
+      'where (c.baja <> '#39'S'#39')'
+      '  and (pc.id_proveedor = :idProveedor)'
+      'order by nombre_concepto')
     CampoBuscar = 'nombre_concepto'
     CampoClave = 'id_concepto'
     Left = 185
@@ -1033,14 +1043,28 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object ZQ_Conceptos: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select *'
+      'select distinct c.*'
       'from ie_conceptos c'
-      'where c.id_concepto > 0'
-      'and c.baja<>'#39'S'#39
-      'order by c.nombre_concepto')
-    Params = <>
+      
+        'left join proveedor_concepto pc on (c.id_concepto = pc.id_concep' +
+        'to)'
+      'where (c.baja <> '#39'S'#39')'
+      '  and (pc.id_proveedor = :idProveedor)'
+      'order by nombre_concepto')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idProveedor'
+        ParamType = ptUnknown
+      end>
     Left = 603
     Top = 289
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idProveedor'
+        ParamType = ptUnknown
+      end>
     object ZQ_ConceptosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
       Required = True
@@ -1063,11 +1087,15 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   end
   object ZQ_Proveedores: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_ProveedoresAfterScroll
     SQL.Strings = (
-      'select *'
+      'select distinct p.*'
       'from ie_proveedores p'
-      'where'
-      '(p.baja<>'#39'S'#39') and (p.id_cuenta=:idCta)'
+      
+        'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
+        'r)'
+      'where (p.baja <> '#39'S'#39')'
+      ' and (c.id_cuenta = :idCta)'
       'order by apellido_y_nombre')
     Params = <
       item
