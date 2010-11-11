@@ -21,8 +21,8 @@ object FAuditoria: TFAuditoria
     Left = 0
     Top = 0
     Width = 904
-    Height = 554
-    ActivePage = TabSheet9
+    Height = 550
+    ActivePage = TabSheet12
     Align = alClient
     MultiLine = True
     TabOrder = 0
@@ -33,21 +33,21 @@ object FAuditoria: TFAuditoria
         Left = 0
         Top = 0
         Width = 896
-        Height = 526
+        Height = 522
         Align = alClient
         TabOrder = 0
         object Panel16: TPanel
           Left = 1
           Top = 1
           Width = 894
-          Height = 300
+          Height = 296
           Align = alClient
           TabOrder = 0
           object GroupBox1: TGroupBox
             Left = 1
             Top = 1
             Width = 892
-            Height = 298
+            Height = 294
             Align = alClient
             Caption = ' Auditoria Libro Banco  '
             TabOrder = 0
@@ -55,7 +55,7 @@ object FAuditoria: TFAuditoria
               Left = 2
               Top = 15
               Width = 888
-              Height = 281
+              Height = 277
               Align = alClient
               Color = 16112578
               DataSource = DS_Movimientos
@@ -203,7 +203,7 @@ object FAuditoria: TFAuditoria
         end
         object Panel17: TPanel
           Left = 1
-          Top = 301
+          Top = 297
           Width = 894
           Height = 224
           Align = alBottom
@@ -365,7 +365,7 @@ object FAuditoria: TFAuditoria
         Left = 0
         Top = 0
         Width = 896
-        Height = 526
+        Height = 522
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -513,7 +513,7 @@ object FAuditoria: TFAuditoria
           Left = 0
           Top = 333
           Width = 896
-          Height = 193
+          Height = 189
           Align = alClient
           BevelOuter = bvNone
           Caption = 'panelAbajo'
@@ -539,8 +539,21 @@ object FAuditoria: TFAuditoria
               Font.Style = [fsBold]
               ParentFont = False
             end
+            object Label3: TLabel
+              Left = 324
+              Top = 8
+              Width = 152
+              Height = 17
+              Caption = 'Seleccione la Acci'#243'n:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clNavy
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
             object btnAplicarUsuario: TButton
-              Left = 322
+              Left = 666
               Top = 4
               Width = 75
               Height = 20
@@ -551,24 +564,39 @@ object FAuditoria: TFAuditoria
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 0
+              TabOrder = 2
               OnClick = btnAplicarUsuarioClick
             end
-            object ComboBox1: TComboBox
+            object CBoxUsuario: TComboBox
               Left = 167
               Top = 4
               Width = 147
               Height = 21
               ItemHeight = 13
+              TabOrder = 0
+              Text = 'CBoxUsuario'
+            end
+            object CBoxAccion: TComboBox
+              Left = 479
+              Top = 4
+              Width = 147
+              Height = 21
+              Style = csDropDownList
+              ItemHeight = 13
+              ItemIndex = 0
               TabOrder = 1
-              Text = 'ComboBox1'
+              Text = 'ALTA'
+              Items.Strings = (
+                'ALTA'
+                'EDICION'
+                'BAJA')
             end
           end
           object DBChartUserTipoMov: TDBChart
             Left = 0
             Top = 29
             Width = 896
-            Height = 164
+            Height = 160
             BackWall.Brush.Color = clWhite
             BackWall.Brush.Style = bsClear
             Gradient.EndColor = clGray
@@ -580,9 +608,7 @@ object FAuditoria: TFAuditoria
             Title.Font.Name = 'Arial'
             Title.Font.Style = [fsBold]
             Title.Text.Strings = (
-              
-                'TIPOS DE MOVIMIENTOS INSERTADOS POR EL USUARIO SELECCIONADO EN E' +
-                'L LIBRO BANCO'
+              ''
               '')
             Legend.ShadowSize = 1
             Legend.TextStyle = ltsPlain
@@ -1263,8 +1289,8 @@ object FAuditoria: TFAuditoria
   end
   object DS_Usuarios: TDataSource
     DataSet = ZQ_Usuarios
-    Left = 486
-    Top = 338
+    Left = 494
+    Top = 290
   end
   object ZQ_Grafico_TipoMov: TZQuery
     Connection = DM.Conexion
@@ -1275,12 +1301,17 @@ object FAuditoria: TFAuditoria
         'left join objeto_movimientos obj on (mov.id_objeto_movimiento = ' +
         'obj.id_objeto_movimiento)'
       'where mov.audit_usuario = :usuario'
-      '   and (mov.audit_tipo like '#39'I%'#39')'
+      '   and (mov.audit_tipo = :tipo)'
       'group by obj.descripcion')
     Params = <
       item
         DataType = ftUnknown
         Name = 'usuario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tipo'
         ParamType = ptUnknown
       end>
     Left = 196
@@ -1289,6 +1320,11 @@ object FAuditoria: TFAuditoria
       item
         DataType = ftUnknown
         Name = 'usuario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tipo'
         ParamType = ptUnknown
       end>
   end
@@ -1304,8 +1340,8 @@ object FAuditoria: TFAuditoria
       'from audit_movimientos mov'
       'order by mov.audit_usuario')
     Params = <>
-    Left = 596
-    Top = 341
+    Left = 604
+    Top = 293
     object ZQ_UsuariosAUDIT_USUARIO: TStringField
       FieldName = 'AUDIT_USUARIO'
       Size = 50
@@ -1313,10 +1349,10 @@ object FAuditoria: TFAuditoria
   end
   object EKLlenarComboUsuario: TEKLlenarCombo
     dataset = ZQ_Usuarios
-    combo = ComboBox1
+    combo = CBoxUsuario
     CampoClave = 'AUDIT_USUARIO'
     CampoVer = 'AUDIT_USUARIO'
-    Left = 684
-    Top = 341
+    Left = 700
+    Top = 293
   end
 end

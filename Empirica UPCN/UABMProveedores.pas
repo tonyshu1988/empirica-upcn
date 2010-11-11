@@ -6,24 +6,12 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, StdCtrls, DBCtrls, Mask, ExtCtrls, Grids,
   DBGrids, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
-  EKBusquedaAvanzada, QuickRpt, QRCtrls, EKVistaPreviaQR, EKOrdenarGrilla;
+  EKBusquedaAvanzada, QuickRpt, QRCtrls, EKVistaPreviaQR, EKOrdenarGrilla,
+  ComCtrls, DBClient, Provider, ZStoredProcedure;
 
 type
   TFABMProveedores = class(TForm)
     DBGridProveedores: TDBGrid;
-    Panel_edicion: TPanel;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label16: TLabel;
-    Label5: TLabel;
-    Label3: TLabel;
-    Label6: TLabel;
-    DBENombreApellido: TDBEdit;
-    DBENombreFantasia: TDBEdit;
-    DBETelefono: TDBEdit;
-    DBEDireccion: TDBEdit;
-    DBENroDocumento: TDBEdit;
-    DBEEmail: TDBEdit;
     dxBarABM: TdxBarManager;
     BtNuevo: TdxBarLargeButton;
     BtModificar: TdxBarLargeButton;
@@ -40,15 +28,6 @@ type
     PanelContenedor: TPanel;
     ZQ_IE_Proveedores: TZQuery;
     DS_IE_Proveedores: TDataSource;
-    ZQ_IE_ProveedoresNRO_PROVEEDOR: TIntegerField;
-    ZQ_IE_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
-    ZQ_IE_ProveedoresNOMBRE_FANTASIA: TStringField;
-    ZQ_IE_ProveedoresDIRECCION: TStringField;
-    ZQ_IE_ProveedoresNRO_DOCUMENTO: TStringField;
-    ZQ_IE_ProveedoresTELEFONOS: TStringField;
-    ZQ_IE_ProveedoresEMAIL: TStringField;
-    ZQ_IE_ProveedoresBAJA: TStringField;
-    DBLookupComboBox1: TDBLookupComboBox;
     ZQ_TipoDocumento: TZQuery;
     DS_TipoDocumento: TDataSource;
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
@@ -76,11 +55,7 @@ type
     EKVistaPreviaQR1: TEKVistaPreviaQR;
     ZQ_TipoDocumentoTIPO_DOCUMENTO: TIntegerField;
     ZQ_TipoDocumentoDESCRIPCION: TStringField;
-    ZQ_IE_ProveedoresTIPO_DOCUMENTO: TStringField;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
-    Label7: TLabel;
-    dbDatosAdic: TDBMemo;
-    ZQ_IE_ProveedoresDESCRIPCION: TStringField;
     QRDBImage1: TQRDBImage;
     QRLabel11: TQRLabel;
     RepProv_Reporte_Titulo_2: TQRLabel;
@@ -88,21 +63,87 @@ type
     QRBand2: TQRBand;
     QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Panel_edicion: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label16: TLabel;
+    Label5: TLabel;
+    Label3: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    DBENombreApellido: TDBEdit;
+    DBENombreFantasia: TDBEdit;
+    DBETelefono: TDBEdit;
+    DBEDireccion: TDBEdit;
+    DBENroDocumento: TDBEdit;
+    DBEEmail: TDBEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    dbDatosAdic: TDBMemo;
+    GBoxCuentasAsig: TGroupBox;
+    GBoxConceptosAsig: TGroupBox;
+    Provider_Conceptos: TDataSetProvider;
+    Provider_CuentasA: TDataSetProvider;
+    CD_Conceptos: TClientDataSet;
+    DS_Conceptos: TDataSource;
+    ZQ_Conceptos: TZQuery;
+    DBGridConceptos: TDBGrid;
+    DBGridCuentas: TDBGrid;
+    ZQ_CuentasA: TZQuery;
+    DS_CuentasA: TDataSource;
+    CD_CuentasA: TClientDataSet;
+    ZQ_IE_ProveedoresNRO_PROVEEDOR: TIntegerField;
+    ZQ_IE_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
+    ZQ_IE_ProveedoresNOMBRE_FANTASIA: TStringField;
+    ZQ_IE_ProveedoresDIRECCION: TStringField;
+    ZQ_IE_ProveedoresTIPO_DOCUMENTO: TStringField;
+    ZQ_IE_ProveedoresNRO_DOCUMENTO: TStringField;
+    ZQ_IE_ProveedoresTELEFONOS: TStringField;
+    ZQ_IE_ProveedoresEMAIL: TStringField;
+    ZQ_IE_ProveedoresBAJA: TStringField;
+    ZQ_IE_ProveedoresDESCRIPCION: TStringField;
     ZQ_IE_ProveedoresEDITABLE: TStringField;
-    ZQ_Cuentas: TZQuery;
-    ZQ_CuentasID_CUENTA: TIntegerField;
-    ZQ_CuentasNOMBRE_CUENTA: TStringField;
-    ZQ_CuentasMEDIO_DE_PAGO: TStringField;
-    ZQ_CuentasNRO_CUENTA_BANCARIA: TStringField;
-    ZQ_CuentasULTIMO_NRO: TIntegerField;
-    ZQ_CuentasAUTONUMERAR: TStringField;
-    ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField;
-    ZQ_CuentasBUSQUEDA: TStringField;
-    DS_Cuentas: TDataSource;
-    Label8: TLabel;
-    DBLUpCBoxCuenta: TDBLookupComboBox;
     ZQ_IE_ProveedoresID_CUENTA: TIntegerField;
-    ZQ_IE_Proveedores_cuenta: TStringField;
+    ZQ_CuentasAID_CUENTA: TIntegerField;
+    ZQ_CuentasANOMBRE_CUENTA: TStringField;
+    ZQ_CuentasAMEDIO_DE_PAGO: TStringField;
+    ZQ_CuentasANRO_CUENTA_BANCARIA: TStringField;
+    ZQ_CuentasAULTIMO_NRO: TIntegerField;
+    ZQ_CuentasAAUTONUMERAR: TStringField;
+    ZQ_CuentasAMEDIO_POR_DEFECTO: TIntegerField;
+    ZQ_CuentasACOLOR_CONSILIADO: TStringField;
+    ZQ_CuentasAID_PROVEEDOR: TIntegerField;
+    CD_CuentasAID_CUENTA: TIntegerField;
+    CD_CuentasANOMBRE_CUENTA: TStringField;
+    CD_CuentasAMEDIO_DE_PAGO: TStringField;
+    CD_CuentasANRO_CUENTA_BANCARIA: TStringField;
+    CD_CuentasAULTIMO_NRO: TIntegerField;
+    CD_CuentasAAUTONUMERAR: TStringField;
+    CD_CuentasAMEDIO_POR_DEFECTO: TIntegerField;
+    CD_CuentasACOLOR_CONSILIADO: TStringField;
+    CD_CuentasAID_PROVEEDOR: TIntegerField;
+    ZQ_ConceptosID_CONCEPTO: TIntegerField;
+    ZQ_ConceptosCOD_CORTO: TStringField;
+    ZQ_ConceptosNOMBRE_CONCEPTO: TStringField;
+    ZQ_ConceptosBAJA: TStringField;
+    ZQ_ConceptosIMPORTE: TFloatField;
+    ZQ_ConceptosEDITABLE: TStringField;
+    ZQ_ConceptosID_PROVEEDOR: TIntegerField;
+    CD_ConceptosID_CONCEPTO: TIntegerField;
+    CD_ConceptosCOD_CORTO: TStringField;
+    CD_ConceptosNOMBRE_CONCEPTO: TStringField;
+    CD_ConceptosBAJA: TStringField;
+    CD_ConceptosIMPORTE: TFloatField;
+    CD_ConceptosEDITABLE: TStringField;
+    CD_ConceptosID_PROVEEDOR: TIntegerField;
+    EKOrdenarCuentas: TEKOrdenarGrilla;
+    EKOrdenarConceptos: TEKOrdenarGrilla;
+    ZQ_Insertar: TZQuery;
+    ZQ_Borrar: TZQuery;
+    Nro_Proveedor: TZStoredProc;
+    Nro_ProveedorID: TIntegerField;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -113,14 +154,18 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridProveedoresDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridProveedoresDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btImprimirClick(Sender: TObject);
     function validarcampos():boolean;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ZQ_IE_ProveedoresAfterScroll(DataSet: TDataSet);
     procedure btVerDetalleClick(Sender: TObject);
+    procedure actualizar_permisos(id_proveedor: integer);
+    procedure grabar_permisos;
+    procedure DBGridCuentasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridConceptosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridConceptosDblClick(Sender: TObject);
+    procedure DBGridCuentasDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -142,24 +187,35 @@ uses UDM, UPrincipal;
 
 procedure TFABMProveedores.bt_salirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
 
+
 procedure TFABMProveedores.BtNuevoClick(Sender: TObject);
+var
+  id_proveedor: integer;
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores]) then
   begin
     DBGridProveedores.Enabled := false;
-    Panel_edicion.Visible:=true;
+    PageControl1.Visible:= true;
+    PageControl1.ActivePageIndex:= 0;
+
+    Nro_Proveedor.Active := true;   //obtengo el numero de movimiento
+    id_proveedor := Nro_ProveedorID.AsInteger;
+    Nro_Proveedor.Active := false;
 
     ZQ_IE_Proveedores.Append;
-    ZQ_IE_ProveedoresBAJA.AsString:= 'N';    
+    ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger:= id_proveedor;
+    ZQ_IE_ProveedoresBAJA.AsString:= 'N';
+    actualizar_permisos(id_proveedor);
+
     DBENombreApellido.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
-
 end;
+
 
 procedure TFABMProveedores.BtModificarClick(Sender: TObject);
 begin
@@ -168,12 +224,13 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores]) then
   begin
-    Panel_edicion.Visible:=true;
+    DBGridProveedores.Enabled := false;
+    PageControl1.Visible:=true;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
-
 end;
+
 
 procedure TFABMProveedores.btBajaClick(Sender: TObject);
 var
@@ -182,7 +239,7 @@ begin
   if ZQ_IE_Proveedores.IsEmpty OR (ZQ_IE_ProveedoresEDITABLE.AsString='N') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea dar de baja el Proveedor ?'), 'ABM Proveedores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea dar de baja el Proveedor?'), 'ABM Proveedores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores]) then
     begin
@@ -201,6 +258,7 @@ begin
   end;
 end;
 
+
 procedure TFABMProveedores.btReactivarClick(Sender: TObject);
 var
   recNo: integer;
@@ -208,7 +266,7 @@ begin
   if ZQ_IE_Proveedores.IsEmpty then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea Reactivar el Proveedor ?'), 'ABM Proveedores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea Reactivar el Proveedor?'), 'ABM Proveedores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores]) then
     begin
@@ -227,29 +285,37 @@ begin
   end;
 end;
 
+
 procedure TFABMProveedores.BtGuardarClick(Sender: TObject);
+var
+  recNo: integer;
 begin
 if validarcampos() then
  begin
+  //grabar_permisos;
   if DM.EKModelo.finalizar_transaccion(transaccion_ABMProveedores) then
   begin
-    Panel_edicion.Visible:=false;
     DBGridProveedores.Enabled := true;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
+    recNo:= ZQ_IE_Proveedores.RecNo;
     ZQ_IE_Proveedores.Refresh;
+    ZQ_IE_Proveedores.RecNo:= recNo;
+    actualizar_permisos(ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger);
   end;
  end
 end;
 
+
 procedure TFABMProveedores.BtCancelarClick(Sender: TObject);
 begin
-  Panel_edicion.Visible:=FALSE;
   DBGridProveedores.Enabled := true;
   dm.EKModelo.cancelar_transaccion(transaccion_ABMProveedores);
   GrupoEditando.Enabled := true;
   GrupoGuardarCancelar.Enabled := false;
+  actualizar_permisos(ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger);
 end;
+
 
 procedure TFABMProveedores.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
@@ -261,21 +327,23 @@ begin
     else
       dm.EKModelo.cancelar_transaccion(transaccion_ABMProveedores);
   end;
-
 end;
+
 
 procedure TFABMProveedores.btBuscarClick(Sender: TObject);
 begin
-EKBusquedaAvanzada1.Buscar;
+  EKBusquedaAvanzada1.Buscar;
 end;
+
 
 procedure TFABMProveedores.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColunmas;
+//  EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_TipoDocumento);
-  dm.EKModelo.abrir(ZQ_Cuentas);
   EKBusquedaAvanzada1.Abrir;
+  PageControl1.ActivePageIndex:= 0;
 end;
+
 
 procedure TFABMProveedores.DBGridProveedoresDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -304,8 +372,8 @@ begin
           end;
        DBGridProveedores.DefaultDrawColumnCell(rect,datacol,column,state);
     end;
-
 end;
+
 
 procedure TFABMProveedores.btImprimirClick(Sender: TObject);
 begin
@@ -319,36 +387,33 @@ end;
 
 function TFABMProveedores.validarcampos():boolean;
 begin
-result := true;
+   result := true;
 
    if (DBENombreApellido.Text = '') then
     begin
       Application.MessageBox('El campo "Nombre y Apellido" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      PageControl1.ActivePageIndex:= 0;
       DBENombreApellido.SetFocus;
       result := false;
       exit;
     end;
+
   if (DBENombreFantasia.Text = '') then
     begin
       Application.MessageBox('El campo "Nombre de Fantasía" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      PageControl1.ActivePageIndex:= 0;
       DBENombreFantasia.SetFocus;
       result := false;
       exit;
     end;
-  if (DBLUpCBoxCuenta.Text='') then
-  begin
-    Application.MessageBox('El campo "Cuenta" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    DBLUpCBoxCuenta.SetFocus;
-    result := false;
-    exit;
-  end;
 end;
 
-procedure TFABMProveedores.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+
+procedure TFABMProveedores.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
+
 
 procedure TFABMProveedores.ZQ_IE_ProveedoresAfterScroll(DataSet: TDataSet);
 begin
@@ -362,12 +427,171 @@ begin
   begin
     btBaja.Enabled:= true;
     btReactivar.Enabled:= false;
-  end
+  end;
+
+  actualizar_permisos(ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger);
 end;
+
 
 procedure TFABMProveedores.btVerDetalleClick(Sender: TObject);
 begin
-  Panel_edicion.Visible:=not(Panel_edicion.Visible);
+  PageControl1.Visible:= not(PageControl1.Visible);
+end;
+
+
+procedure TFABMProveedores.actualizar_permisos(id_proveedor: integer);
+begin
+//  if ZQ_IE_Proveedores.State = dsBrowse then
+//  begin
+    CD_Conceptos.Active := false;
+    ZQ_Conceptos.Active := false;
+    ZQ_Conceptos.ParamByName('proveedor').AsInteger:= id_proveedor;
+    ZQ_Conceptos.Active := true;
+    CD_Conceptos.Active := true;
+
+    CD_CuentasA.Active := false;
+    ZQ_CuentasA.Active := false;
+    ZQ_CuentasA.ParamByName('proveedor').AsInteger:= id_proveedor;
+    ZQ_CuentasA.Active := true;
+    CD_CuentasA.Active := true;
+//  end;
+end;
+
+
+procedure TFABMProveedores.DBGridCuentasDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if not (CD_CuentasA.FieldByName('ID_PROVEEDOR').IsNull) then
+  begin
+    DBGridCuentas.Canvas.Brush.Color := $008DC08D;
+    DBGridCuentas.Canvas.Font.Style := DBGridCuentas.Canvas.Font.Style + [fsBold];
+  end;
+  DBGridCuentas.DefaultDrawColumnCell(rect,datacol,column,state);
+end;
+
+
+procedure TFABMProveedores.DBGridConceptosDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if not (CD_Conceptos.FieldByName('ID_PROVEEDOR').IsNull) then
+  begin
+    DBGridConceptos.Canvas.Brush.Color := $008DC08D;
+    DBGridConceptos.Canvas.Font.Style := DBGridConceptos.Canvas.Font.Style + [fsBold];
+  end;
+  DBGridConceptos.DefaultDrawColumnCell(rect,datacol,column,state);
+end;
+
+
+procedure TFABMProveedores.DBGridConceptosDblClick(Sender: TObject);
+var
+  id_proveedor, id_concepto: string;
+begin
+  id_proveedor:= ZQ_IE_ProveedoresNRO_PROVEEDOR.AsString;
+  id_concepto:= CD_ConceptosID_CONCEPTO.AsString;
+
+  if dm.EKModelo.verificar_transaccion(transaccion_ABMProveedores) then
+  begin
+    if CD_ConceptosID_PROVEEDOR.IsNull then //ai no esta asignado
+    begin
+      CD_Conceptos.Edit;
+      CD_Conceptos.FieldByName('ID_PROVEEDOR').AsInteger := ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger;
+      CD_Conceptos.Post;
+
+      ZQ_Insertar.SQL.Text:= 'insert into proveedor_concepto (id_proveedor, id_concepto) values ('+id_proveedor+', '+id_concepto+')';
+      ZQ_Insertar.ExecSQL;
+    end
+    else
+    begin
+      CD_Conceptos.Edit;
+      CD_Conceptos.FieldByName('ID_PROVEEDOR').Clear;
+      CD_Conceptos.Post;
+
+      ZQ_Borrar.SQL.Text:= 'delete from proveedor_concepto where (id_proveedor = '+id_proveedor+' and id_concepto = '+id_concepto+')';
+      ZQ_Borrar.ExecSQL;
+    end;
+  end;
+end;
+
+
+procedure TFABMProveedores.DBGridCuentasDblClick(Sender: TObject);
+var
+  id_proveedor, id_cuenta: string;
+begin
+  id_proveedor:= ZQ_IE_ProveedoresNRO_PROVEEDOR.AsString;
+  id_cuenta:= CD_CuentasAID_CUENTA.AsString;
+
+  if dm.EKModelo.verificar_transaccion(transaccion_ABMProveedores) then
+  begin
+    if CD_CuentasAID_PROVEEDOR.IsNull then //Si no esta asignado
+    begin
+      CD_CuentasA.Edit;
+      CD_CuentasA.FieldByName('ID_PROVEEDOR').AsInteger := ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger;
+      CD_CuentasA.Post;
+
+      ZQ_Insertar.SQL.Text:= 'insert into proveedor_cuenta (id_proveedor, id_cuenta) values ('+id_proveedor+', '+id_cuenta+')';
+      ZQ_Insertar.ExecSQL;
+    end
+    else
+    begin
+      CD_CuentasA.Edit;
+      CD_CuentasA.FieldByName('ID_PROVEEDOR').Clear;
+      CD_CuentasA.Post;
+
+      ZQ_Borrar.SQL.Text:= 'delete from proveedor_cuenta where (id_proveedor = '+id_proveedor+' and id_cuenta = '+id_cuenta+')';
+      ZQ_Borrar.ExecSQL;
+    end;
+  end;
+end;
+
+
+procedure TFABMProveedores.grabar_permisos;
+var
+  id_proveedor, id_cuenta, id_concepto: string;
+begin
+  CD_CuentasA.DisableControls;
+  CD_Conceptos.DisableControls;
+
+  id_proveedor:= ZQ_IE_ProveedoresNRO_PROVEEDOR.AsString;
+  CD_CuentasA.First;
+  while not CD_CuentasA.Eof do
+  begin
+    if not CD_CuentasAID_PROVEEDOR.IsNull then
+    begin
+      id_cuenta:= CD_CuentasAID_CUENTA.AsString;
+      ZQ_Insertar.SQL.Text:= 'insert into proveedor_cuenta (id_proveedor, id_cuenta) values ('+id_proveedor+', '+id_cuenta+')';
+      ZQ_Insertar.ExecSQL;
+    end
+    else
+    begin
+      id_cuenta:= CD_CuentasAID_CUENTA.AsString;
+      ZQ_Borrar.SQL.Text:= 'delete from proveedor_cuenta where (id_proveedor = '+id_proveedor+' and id_cuenta = '+id_cuenta+')';
+      ZQ_Borrar.ExecSQL;
+    end;
+    CD_CuentasA.Next;
+  end;
+
+  CD_Conceptos.First;
+  while not CD_Conceptos.Eof do
+  begin
+    if not CD_ConceptosID_PROVEEDOR.IsNull then
+    begin
+      id_concepto:= CD_ConceptosID_CONCEPTO.AsString;
+      ZQ_Insertar.SQL.Text:= 'insert into proveedor_concepto (id_proveedor, id_concepto) values ('+id_proveedor+', '+id_concepto+')';
+      ZQ_Insertar.ExecSQL;
+    end
+    else
+    begin
+      id_concepto:= CD_ConceptosID_CONCEPTO.AsString;
+      ZQ_Borrar.SQL.Text:= 'delete from proveedor_concepto where (id_proveedor = '+id_proveedor+' and id_concepto = '+id_concepto+')';
+      ZQ_Borrar.ExecSQL;
+    end;
+    CD_Conceptos.Next;
+  end;
+
+  CD_CuentasA.EnableControls;
+  CD_Conceptos.EnableControls;
 end;
 
 end.

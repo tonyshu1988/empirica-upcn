@@ -104,8 +104,10 @@ type
     ZQ_UsuariosAUDIT_USUARIO: TStringField;
     btnAplicarFecha: TButton;
     btnAplicarUsuario: TButton;
-    ComboBox1: TComboBox;
+    CBoxUsuario: TComboBox;
     EKLlenarComboUsuario: TEKLlenarCombo;
+    Label3: TLabel;
+    CBoxAccion: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_MovimientosAfterScroll(DataSet: TDataSet);
@@ -239,6 +241,7 @@ procedure TFAuditoria.btnAplicarUsuarioClick(Sender: TObject);
 begin
   ZQ_Grafico_TipoMov.Close;
   ZQ_Grafico_TipoMov.ParamByName('usuario').AsString:= ZQ_UsuariosAUDIT_USUARIO.AsString;
+  ZQ_Grafico_TipoMov.ParamByName('tipo').AsString:= CBoxAccion.Text;
   ZQ_Grafico_TipoMov.Open;
 end;
 
