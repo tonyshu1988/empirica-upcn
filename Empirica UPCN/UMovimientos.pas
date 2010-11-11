@@ -50,20 +50,6 @@ type
     ZQ_CuentasMEDIO_POR_DEFECTO: TIntegerField;
     ZQ_Proveedores: TZQuery;
     ZQ_Conceptos: TZQuery;
-    ZQ_ConceptosID_CONCEPTO: TIntegerField;
-    ZQ_ConceptosCOD_CORTO: TStringField;
-    ZQ_ConceptosNOMBRE_CONCEPTO: TStringField;
-    ZQ_ConceptosBAJA: TStringField;
-    ZQ_ConceptosIMPORTE: TFloatField;
-    ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField;
-    ZQ_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
-    ZQ_ProveedoresNOMBRE_FANTASIA: TStringField;
-    ZQ_ProveedoresDIRECCION: TStringField;
-    ZQ_ProveedoresTIPO_DOCUMENTO: TStringField;
-    ZQ_ProveedoresNRO_DOCUMENTO: TStringField;
-    ZQ_ProveedoresTELEFONOS: TStringField;
-    ZQ_ProveedoresEMAIL: TStringField;
-    ZQ_ProveedoresBAJA: TStringField;
     ZQ_Movimientos: TZQuery;
     ZQ_MovimientosNRO_MOVIMIENTO: TIntegerField;
     ZQ_MovimientosNRO_PROVEEDOR: TIntegerField;
@@ -375,9 +361,6 @@ type
     QRLblConfecciona: TQRLabel;
     Label26: TLabel;
     DBEditNroRecibo: TDBEdit;
-    ZQ_ProveedoresDESCRIPCION: TStringField;
-    ZQ_ProveedoresEDITABLE: TStringField;
-    ZQ_ProveedoresID_CUENTA: TIntegerField;
     QR_SolicitudCompra: TQuickRep;
     QRBand1: TQRBand;
     QRDBText9: TQRDBText;
@@ -422,6 +405,24 @@ type
     QRLabel30: TQRLabel;
     ZQ_CuentasCOLOR_CONSILIADO: TStringField;
     QRShape19: TQRShape;
+    ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField;
+    ZQ_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
+    ZQ_ProveedoresNOMBRE_FANTASIA: TStringField;
+    ZQ_ProveedoresDIRECCION: TStringField;
+    ZQ_ProveedoresTIPO_DOCUMENTO: TStringField;
+    ZQ_ProveedoresNRO_DOCUMENTO: TStringField;
+    ZQ_ProveedoresTELEFONOS: TStringField;
+    ZQ_ProveedoresEMAIL: TStringField;
+    ZQ_ProveedoresBAJA: TStringField;
+    ZQ_ProveedoresDESCRIPCION: TStringField;
+    ZQ_ProveedoresEDITABLE: TStringField;
+    ZQ_ProveedoresID_CUENTA: TIntegerField;
+    ZQ_ConceptosID_CONCEPTO: TIntegerField;
+    ZQ_ConceptosCOD_CORTO: TStringField;
+    ZQ_ConceptosNOMBRE_CONCEPTO: TStringField;
+    ZQ_ConceptosBAJA: TStringField;
+    ZQ_ConceptosIMPORTE: TFloatField;
+    ZQ_ConceptosEDITABLE: TStringField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -489,6 +490,7 @@ type
     procedure cargarDatosporDefecto();
     procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
     procedure btnImprimirSolicitudClick(Sender: TObject);
+    procedure ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -1559,6 +1561,7 @@ procedure TFMovimientos.DBLookupCBoxEgreso_ProveedorKeyUp(Sender: TObject;
 begin
   if key = 112 then
   begin
+      EKListado_Proveedores.SQL[4]:= ' and (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
       if EKListado_Proveedores.Buscar then
       begin
         ZQ_Movimientos.Edit;
@@ -1573,6 +1576,7 @@ procedure TFMovimientos.DBLookupCBoxIngreso_ProveedorKeyUp(Sender: TObject;
 begin
   if key = 112 then
   begin
+      EKListado_Proveedores.SQL[4]:= ' and (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
       if EKListado_Proveedores.Buscar then
       begin
         ZQ_Movimientos.Edit;
@@ -1587,6 +1591,7 @@ procedure TFMovimientos.DBLookupCBoxEgreso_ConceptoKeyUp(Sender: TObject;
 begin
   if key = 112 then
   begin
+      EKListado_Conceptos.SQL[4]:= ' and (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
       if EKListado_Conceptos.Buscar then
       begin
         ZQ_Movimientos.Edit;
@@ -1601,6 +1606,7 @@ procedure TFMovimientos.DBLookupCBoxIngreso_ConceptoKeyUp(Sender: TObject;
 begin
   if key = 112 then
   begin
+      EKListado_Conceptos.SQL[4]:= ' and (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
       if EKListado_Conceptos.Buscar then
       begin
         ZQ_Movimientos.Edit;
@@ -1818,6 +1824,13 @@ begin
   qrtSolImporteTotal.Caption:=Format('%s',[FormatFloat('$ ###,###,###,##0.00', EKDbSuma1.SumCollection[0].sumvalue)]);
   qrDatosNombreyFecha.Text:=Format(' %s - ',[Application.Title]);
   EKVistaPreviaSolicitud.VistaPrevia;
+end;
+
+procedure TFMovimientos.ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_Conceptos.Active:=false;
+  ZQ_Conceptos.ParamByName('idProveedor').AsInteger:= ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
+  ZQ_Conceptos.Active:=true;
 end;
 
 end.

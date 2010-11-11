@@ -543,7 +543,7 @@ object FAuditoria: TFAuditoria
               Left = 324
               Top = 8
               Width = 152
-              Height = 17
+              Height = 16
               Caption = 'Seleccione la Acci'#243'n:'
               Font.Charset = ANSI_CHARSET
               Font.Color = clNavy
@@ -1105,14 +1105,13 @@ object FAuditoria: TFAuditoria
           'ALTA'
           'EDICION'
           'BAJA'
-          'ANULACION'
           '')
         TipoComboEditable = False
         TipoComboValoresReales.Strings = (
           'ALTA'
           'EDICION'
           'BAJA'
-          'ANULACION')
+          '')
         ItemIndex = -1
       end
       item
