@@ -130,7 +130,7 @@ object FABMProveedores: TFABMProveedores
       Top = 308
       Width = 927
       Height = 193
-      ActivePage = TabSheet2
+      ActivePage = TabSheet1
       Align = alBottom
       TabOrder = 3
       object TabSheet1: TTabSheet
@@ -141,6 +141,7 @@ object FABMProveedores: TFABMProveedores
           Width = 919
           Height = 163
           Align = alBottom
+          Enabled = False
           TabOrder = 0
           object Label1: TLabel
             Left = 10
@@ -445,8 +446,8 @@ object FABMProveedores: TFABMProveedores
     end
     object RepProv: TQuickRep
       Tag = 99
-      Left = 11
-      Top = 24
+      Left = 523
+      Top = 72
       Width = 952
       Height = 1347
       Frame.Color = clBlack
