@@ -200,6 +200,7 @@ begin
     DBGridProveedores.Enabled := false;
     PageControl1.Visible:= true;
     PageControl1.ActivePageIndex:= 0;
+    Panel_edicion.Enabled:= true;
 
     Nro_Proveedor.Active := true;   //obtengo el numero de movimiento
     id_proveedor := Nro_ProveedorID.AsInteger;
@@ -224,6 +225,7 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores]) then
   begin
+    Panel_edicion.Enabled:= true;  
     DBGridProveedores.Enabled := false;
     PageControl1.Visible:=true;
     GrupoEditando.Enabled := false;
@@ -296,6 +298,7 @@ if validarcampos() then
   if DM.EKModelo.finalizar_transaccion(transaccion_ABMProveedores) then
   begin
     DBGridProveedores.Enabled := true;
+    Panel_edicion.Enabled:= False;    
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
     recNo:= ZQ_IE_Proveedores.RecNo;
@@ -309,11 +312,14 @@ end;
 
 procedure TFABMProveedores.BtCancelarClick(Sender: TObject);
 begin
-  DBGridProveedores.Enabled := true;
-  dm.EKModelo.cancelar_transaccion(transaccion_ABMProveedores);
-  GrupoEditando.Enabled := true;
-  GrupoGuardarCancelar.Enabled := false;
-  actualizar_permisos(ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger);
+  if dm.EKModelo.cancelar_transaccion(transaccion_ABMProveedores) then
+  begin
+    Panel_edicion.Enabled:= false;
+    DBGridProveedores.Enabled := true;
+    GrupoEditando.Enabled := true;
+    GrupoGuardarCancelar.Enabled := false;
+    actualizar_permisos(ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger);
+  end;
 end;
 
 
