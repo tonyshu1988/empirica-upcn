@@ -144,6 +144,20 @@ type
     ZQ_Borrar: TZQuery;
     Nro_Proveedor: TZStoredProc;
     Nro_ProveedorID: TIntegerField;
+    Label8: TLabel;
+    DBTipo: TDBLookupComboBox;
+    ZQ_TipoProveedor: TZQuery;
+    DS_TipoProveedor: TDataSource;
+    ZQ_TipoProveedorID_TIPO: TIntegerField;
+    ZQ_TipoProveedorDESCRIPCION: TStringField;
+    ZQ_IE_ProveedoresID_TIPO: TIntegerField;
+    Label9: TLabel;
+    DBLookupComboBox2: TDBLookupComboBox;
+    ZQ_CondicIVA: TZQuery;
+    DS_CondicIVA: TDataSource;
+    ZQ_CondicIVAID_TIPO_IVA: TIntegerField;
+    ZQ_CondicIVADESCRIPCION: TStringField;
+    ZQ_IE_ProveedoresID_TIPO_IVA: TIntegerField;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -346,6 +360,8 @@ procedure TFABMProveedores.FormCreate(Sender: TObject);
 begin
 //  EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_TipoDocumento);
+  dm.EKModelo.abrir(ZQ_TipoProveedor);
+  dm.EKModelo.abrir(ZQ_CondicIVA);
   EKBusquedaAvanzada1.Abrir;
   PageControl1.ActivePageIndex:= 0;
 end;
@@ -409,6 +425,14 @@ begin
       Application.MessageBox('El campo "Nombre de Fantasía" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
       PageControl1.ActivePageIndex:= 0;
       DBENombreFantasia.SetFocus;
+      result := false;
+      exit;
+    end;
+  if (DBTipo.Text = '') then
+    begin
+      Application.MessageBox('El campo "Tipo" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      PageControl1.ActivePageIndex:= 0;
+      DBTipo.SetFocus;
       result := false;
       exit;
     end;

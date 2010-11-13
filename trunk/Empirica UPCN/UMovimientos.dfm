@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 218
-  Top = 14
+  Left = 118
+  Top = 19
   Width = 1143
   Height = 758
   Caption = 'Libro Banco'
@@ -25,13 +25,13 @@ object FMovimientos: TFMovimientos
     Left = 0
     Top = 0
     Width = 1023
-    Height = 668
+    Height = 672
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
       1023
-      668)
+      672)
     object QR_OrdenPago: TQuickRep
       Tag = 99
       Left = 113
@@ -4326,7 +4326,7 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 614
+      Top = 618
       Width = 1023
       Height = 54
       Align = alBottom
@@ -4488,7 +4488,7 @@ object FMovimientos: TFMovimientos
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 498
+      Top = 502
       Width = 1023
       Height = 116
       Align = alBottom
@@ -4733,7 +4733,7 @@ object FMovimientos: TFMovimientos
       Left = 0
       Top = 26
       Width = 1023
-      Height = 356
+      Height = 360
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -4889,7 +4889,7 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 382
+      Top = 386
       Width = 1023
       Height = 116
       Align = alBottom
