@@ -227,15 +227,15 @@ begin
   if ZQ_VerSaldos.IsEmpty then
     exit;
 
-  ZQ_Movimiento.Close;
-  ZQ_Movimiento.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
-  ZQ_Movimiento.Open;
-  ZQ_Cuenta_Mov.Close;
-  ZQ_Cuenta_Mov.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
-  ZQ_Cuenta_Mov.Open;
-
   if (application.MessageBox(pchar('¿Esta seguro que desea Eliminar el Saldo Inicial seleccionado?                        ' + #13 + #13), 'Eliminar Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
+    ZQ_Movimiento.Close;
+    ZQ_Movimiento.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
+    ZQ_Movimiento.Open;
+    ZQ_Cuenta_Mov.Close;
+    ZQ_Cuenta_Mov.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
+    ZQ_Cuenta_Mov.Open;
+
     if dm.EKModelo.iniciar_transaccion(transaccion_saldo, [ZQ_Movimiento, ZQ_Cuenta_Mov]) then
     begin
       ZQ_Movimiento.Delete;
@@ -244,17 +244,15 @@ begin
     else
       exit;
     try
-      if not (dm.EKModelo.finalizar_transaccion(transaccion_saldo)) then
-        dm.EKModelo.cancelar_transaccion(transaccion_saldo);
+      if not(dm.EKModelo.finalizar_transaccion(transaccion_saldo)) then
+       raise Exception.Create('');
     except
       begin
-        Application.MessageBox('El Saldo inicial no se puede borrar porque depende de otras tablas','Atención',MB_OK+MB_ICONINFORMATION);
+        Application.MessageBox('El Saldo inicial no se puede ser elimininado porque está siendo utilizado.','Atención',MB_OK+MB_ICONINFORMATION);
         dm.EKModelo.cancelar_transaccion(transaccion_saldo);
       end
     end;
   end;
-
-  ZQ_VerSaldos.Refresh;
 end;
 
 
