@@ -87,7 +87,6 @@ type
     ZQ_Cuenta_Movimientomedio_de_pago: TStringField;
     ZQ_Cuenta_MovimientoFECHA_CONCILIADO: TDateField;
     ZQ_Cuenta_MovimientoANULADO: TStringField;
-    ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TIntegerField;
     DS_Cuenta_Movimiento: TDataSource;
     ZQ_Cuentas: TZQuery;
     ZQ_CuentasID_CUENTA: TIntegerField;
@@ -154,6 +153,8 @@ type
     ZQ_ConfiguracionGRAFICO: TBlobField;
     ZSP_EXISTE_CHEQUE: TZStoredProc;
     ZSP_EXISTE_CHEQUEEXISTE: TStringField;
+    ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TStringField;
+    ZQ_Cuenta_MovimientoIMPRESO: TStringField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;

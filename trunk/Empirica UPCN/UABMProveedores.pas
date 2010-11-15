@@ -158,6 +158,13 @@ type
     ZQ_CondicIVAID_TIPO_IVA: TIntegerField;
     ZQ_CondicIVADESCRIPCION: TStringField;
     ZQ_IE_ProveedoresID_TIPO_IVA: TIntegerField;
+    ZQ_IE_ProveedoresID_TIPO_FACTURA: TIntegerField;
+    ZQ_TipoFactura: TZQuery;
+    DS_TipoFactura: TDataSource;
+    Label10: TLabel;
+    DBLookupComboBox3: TDBLookupComboBox;
+    ZQ_TipoFacturaID_TIPO_FACTURA: TIntegerField;
+    ZQ_TipoFacturaDESCRIPCION: TStringField;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -362,6 +369,7 @@ begin
   dm.EKModelo.abrir(ZQ_TipoDocumento);
   dm.EKModelo.abrir(ZQ_TipoProveedor);
   dm.EKModelo.abrir(ZQ_CondicIVA);
+  dm.EKModelo.abrir(ZQ_TipoFactura);
   EKBusquedaAvanzada1.Abrir;
   PageControl1.ActivePageIndex:= 0;
 end;

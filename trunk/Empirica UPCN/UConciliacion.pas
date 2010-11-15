@@ -47,7 +47,6 @@ type
     ZSP_LibroBancoMOVIMIENTO: TStringField;
     ZSP_LibroBancoNRO_PAGO_REC: TIntegerField;
     ZSP_LibroBancoMEDIO: TStringField;
-    ZSP_LibroBancoNRO_MEDIO: TStringField;
     ZSP_LibroBancoDEBE: TFloatField;
     ZSP_LibroBancoHABER: TFloatField;
     ZSP_LibroBancoSALDO: TFloatField;
@@ -65,7 +64,6 @@ type
     ZSP_ConciliacionMOVIMIENTO: TStringField;
     ZSP_ConciliacionNRO_PAGO_REC: TIntegerField;
     ZSP_ConciliacionMEDIO: TStringField;
-    ZSP_ConciliacionNRO_MEDIO: TStringField;
     ZSP_ConciliacionDEBE: TFloatField;
     ZSP_ConciliacionHABER: TFloatField;
     ZSP_ConciliacionSALDO: TFloatField;
@@ -130,6 +128,21 @@ type
     QRlblMesEmision: TQRLabel;
     QRLabel9: TQRLabel;
     QRShape6: TQRShape;
+    ZSP_LibroBancoNRO_MEDIO: TStringField;
+    ZSP_LibroBancoOTROS: TStringField;
+    ZSP_LibroBancoFECHA_CONCILIADO: TDateField;
+    ZSP_LibroBancoID_MEDIO: TIntegerField;
+    ZSP_LibroBancoMOV_ANULADO: TStringField;
+    ZSP_LibroBancoCTA_MOV_ANULADO: TStringField;
+    ZSP_LibroBancoNRO_FACTURA: TStringField;
+    ZSP_LibroBancoNRO_RECIBO: TStringField;
+    ZSP_LibroBancoNRO_ORDEN_STRING: TStringField;
+    ZSP_LibroBancoORDEN_SALDO_ANTERIOR: TIntegerField;
+    ZSP_ConciliacionNRO_MEDIO: TStringField;
+    ZSP_ConciliacionOTROS: TStringField;
+    ZSP_ConciliacionNRO_FAC_REC: TStringField;
+    ZSP_ConciliacionID_MEDIO: TIntegerField;
+    ZSP_ConciliacionFECHA_CONCILIADO: TDateField;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;

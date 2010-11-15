@@ -656,7 +656,11 @@ object FSaldoInicial: TFSaldoInicial
       FieldName = 'ANULADO'
       Size = 1
     end
-    object ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TIntegerField
+    object ZQ_Cuenta_MovIMPRESO: TStringField
+      FieldName = 'IMPRESO'
+      Size = 1
+    end
+    object ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TStringField
       FieldName = 'NRO_CHEQUE_TRANSF'
     end
   end
@@ -884,8 +888,15 @@ object FSaldoInicial: TFSaldoInicial
       FieldName = 'NRO_RECIBO'
       Size = 50
     end
-    object ZQ_VerSaldosNRO_CHEQUE_TRANSF: TIntegerField
+    object ZQ_VerSaldosNRO_CHEQUE_TRANSF: TStringField
       FieldName = 'NRO_CHEQUE_TRANSF'
+    end
+    object ZQ_VerSaldosIMPRESO_1: TStringField
+      FieldName = 'IMPRESO_1'
+      Size = 1
+    end
+    object ZQ_VerSaldosNRO_ORDEN_STRING: TStringField
+      FieldName = 'NRO_ORDEN_STRING'
     end
   end
   object DS_VerSaldos: TDataSource
