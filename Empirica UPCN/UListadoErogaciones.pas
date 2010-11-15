@@ -129,7 +129,6 @@ type
     ZQ_Libro_erogacionesNOMBRE_MEDIO_COBRO_PAGO: TStringField;
     ZQ_Libro_erogacionesFECHA_MDC: TDateField;
     ZQ_Libro_erogacionesBANCO_MDC: TStringField;
-    ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TIntegerField;
     ZQ_Libro_erogacionesIMPORTE: TFloatField;
     ZQ_Libro_erogacionesCONCILIADO: TStringField;
     ZQ_Libro_erogacionesFECHA_CONCILIADO: TDateField;
@@ -137,6 +136,7 @@ type
     mxDBGridExport: TmxDBGridExport;
     mxNativeExcel1: TmxNativeExcel;
     btexportarExel: TdxBarLargeButton;
+    ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);

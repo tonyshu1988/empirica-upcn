@@ -41,7 +41,6 @@ type
     EKVistaPreviaQR1: TEKVistaPreviaQR;
     ZQ_MovimientoProveedores: TZQuery;
     ZQ_MovimientoProveedoresFECHA_MDC: TDateField;
-    ZQ_MovimientoProveedoresNRO_CHEQUE_TRANSF: TIntegerField;
     ZQ_MovimientoProveedoresCODIGO_CORTO: TStringField;
     ZQ_MovimientoProveedoresNOMBRE_MEDIO_COBRO_PAGO: TStringField;
     ZQ_MovimientoProveedoresIMPORTE: TFloatField;
@@ -166,6 +165,7 @@ type
     QRLabel14: TQRLabel;
     QRExpr1: TQRExpr;
     QRExpr3: TQRExpr;
+    ZQ_MovimientoProveedoresNRO_CHEQUE_TRANSF: TStringField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);

@@ -91,7 +91,6 @@ type
     LIBRO_BANCOMOVIMIENTO: TStringField;
     LIBRO_BANCONRO_PAGO_REC: TIntegerField;
     LIBRO_BANCOMEDIO: TStringField;
-    LIBRO_BANCONRO_MEDIO: TStringField;
     LIBRO_BANCODEBE: TFloatField;
     LIBRO_BANCOHABER: TFloatField;
     LIBRO_BANCOSALDO: TFloatField;
@@ -270,7 +269,6 @@ type
     CBFechaConciliado: TCheckBox;
     btnAltaOrdenPago: TdxBarLargeButton;
     EKDbSuma1: TEKDbSuma;
-    ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TIntegerField;
     DBLookupCBoxIngreso_Proveedor: TDBLookupComboBox;
     DBLookupCBoxIngreso_Concepto: TDBLookupComboBox;
     Label1: TLabel;
@@ -331,7 +329,6 @@ type
     StringField5: TStringField;
     DateField2: TDateField;
     StringField6: TStringField;
-    IntegerField6: TIntegerField;
     DS_OrdenDebitoBancario: TDataSource;
     EKDbSumaOrdenDebito: TEKDbSuma;
     MenuGrilla: TPopupMenu;
@@ -352,7 +349,6 @@ type
     N2: TMenuItem;
     Editar1: TMenuItem;
     btnEliminarMov: TdxBarLargeButton;
-    EliminarMovimiento1: TMenuItem;
     ZQ_MovimientosNRO_ORDEN_STRING: TStringField;
     LIBRO_BANCONRO_ORDEN_STRING: TStringField;
     ZQ_ExisteCheque: TZQuery;
@@ -423,6 +419,14 @@ type
     ZQ_ConceptosBAJA: TStringField;
     ZQ_ConceptosIMPORTE: TFloatField;
     ZQ_ConceptosEDITABLE: TStringField;
+    ZQ_Cuenta_MovimientoIMPRESO: TStringField;
+    LIBRO_BANCONRO_MEDIO: TStringField;
+    LIBRO_BANCOORDEN_SALDO_ANTERIOR: TIntegerField;
+    ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TStringField;
+    ZQ_OrdenDebitoBancarioNRO_CHEQUE_TRANSF: TStringField;
+    ZQ_ProveedoresID_TIPO: TIntegerField;
+    ZQ_ProveedoresID_TIPO_IVA: TIntegerField;
+    ZQ_ProveedoresID_TIPO_FACTURA: TIntegerField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -739,9 +743,10 @@ begin
         raise Exception.Create('');
     except
       begin
-        Application.MessageBox('Verifique el nro de cheque ingresado.'+char(13)
-                                +'(no debe duplicarse en el sistema)','Validación',MB_OK+MB_ICONINFORMATION);
-       exit;
+        Application.MessageBox('Verifique que los datos estén cargados correctamente.'+char(13)
+                                +'Revise los datos y el nro de cheque ingresado.'+char(13)
+                                +'(no deben duplicarse en el sistema)','Movimiento',MB_OK+MB_ICONINFORMATION);
+        exit;
       end
     end
   end;

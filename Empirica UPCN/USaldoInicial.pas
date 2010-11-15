@@ -124,10 +124,13 @@ type
     ZQ_VerSaldosNRO_RECIBO: TStringField;
     ZQ_BuscarMovNRO_MOVIMIENTO: TIntegerField;
     ZP_ObtenerNroMovID: TIntegerField;
-    ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TIntegerField;
-    ZQ_VerSaldosNRO_CHEQUE_TRANSF: TIntegerField;
     ZQ_YaExisteSaldo: TZQuery;
     ZQ_YaExisteSaldoNRO_MOVIMIENTO: TIntegerField;
+    ZQ_Cuenta_MovIMPRESO: TStringField;
+    ZQ_Cuenta_MovNRO_CHEQUE_TRANSF: TStringField;
+    ZQ_VerSaldosNRO_CHEQUE_TRANSF: TStringField;
+    ZQ_VerSaldosIMPRESO_1: TStringField;
+    ZQ_VerSaldosNRO_ORDEN_STRING: TStringField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);

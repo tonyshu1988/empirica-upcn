@@ -92,7 +92,6 @@ type
     LIBRO_BANCOMOVIMIENTO: TStringField;
     LIBRO_BANCONRO_PAGO_REC: TIntegerField;
     LIBRO_BANCOMEDIO: TStringField;
-    LIBRO_BANCONRO_MEDIO: TStringField;
     LIBRO_BANCODEBE: TFloatField;
     LIBRO_BANCOHABER: TFloatField;
     LIBRO_BANCOSALDO: TFloatField;
@@ -143,6 +142,8 @@ type
     mxDBGridExport: TmxDBGridExport;
     mxNativeExcel1: TmxNativeExcel;
     btnExel: TdxBarLargeButton;
+    LIBRO_BANCONRO_MEDIO: TStringField;
+    LIBRO_BANCOORDEN_SALDO_ANTERIOR: TIntegerField;
     procedure btnLibroBancoClick(Sender: TObject);
     function  validarDatos():boolean;
     procedure btnSalirClick(Sender: TObject);

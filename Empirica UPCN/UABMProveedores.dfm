@@ -1,6 +1,6 @@
 object FABMProveedores: TFABMProveedores
-  Left = 240
-  Top = 97
+  Left = 357
+  Top = 201
   Width = 945
   Height = 592
   Caption = 'ABM Proveedores'
@@ -24,8 +24,8 @@ object FABMProveedores: TFABMProveedores
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 929
-    Height = 506
+    Width = 937
+    Height = 508
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
@@ -104,7 +104,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          227.100694444444400000
+          227.100694444444500000
           1898.385416666667000000)
         BandType = rbPageHeader
         object QRDBImage1: TQRDBImage
@@ -136,7 +136,7 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawRight = False
           Size.Values = (
             50.711805555555560000
-            657.048611111111100000
+            657.048611111111000000
             158.750000000000000000
             584.288194444444400000)
           Alignment = taCenter
@@ -166,9 +166,9 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            705.555555555555600000
-            94.809027777777780000
+            52.916666666666660000
+            705.555555555555700000
+            94.809027777777790000
             487.274305555555600000)
           Alignment = taCenter
           AlignToBand = True
@@ -197,10 +197,10 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            628.385416666666700000
+            52.916666666666660000
+            628.385416666666800000
             30.868055555555560000
-            639.409722222222200000)
+            639.409722222222300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -607,7 +607,7 @@ object FABMProveedores: TFABMProveedores
             39.687500000000000000
             348.368055555555600000
             15.434027777777780000
-            227.100694444444400000)
+            227.100694444444500000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -670,7 +670,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          41.892361111111110000
+          41.892361111111120000
           1898.385416666667000000)
         BandType = rbPageFooter
         object QRLabel24: TQRLabel
@@ -738,8 +738,8 @@ object FABMProveedores: TFABMProveedores
     object DBGridProveedores: TDBGrid
       Left = 1
       Top = 20
-      Width = 927
-      Height = 292
+      Width = 935
+      Height = 294
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -795,7 +795,7 @@ object FABMProveedores: TFABMProveedores
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 927
+      Width = 935
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -817,7 +817,7 @@ object FABMProveedores: TFABMProveedores
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 817
+        Left = 825
         Top = 1
         Width = 109
         Height = 17
@@ -833,8 +833,8 @@ object FABMProveedores: TFABMProveedores
     end
     object PageControl1: TPageControl
       Left = 1
-      Top = 312
-      Width = 927
+      Top = 314
+      Width = 935
       Height = 193
       ActivePage = TabSheet1
       Align = alBottom
@@ -844,7 +844,7 @@ object FABMProveedores: TFABMProveedores
         object Panel_edicion: TPanel
           Left = 0
           Top = 2
-          Width = 919
+          Width = 927
           Height = 163
           Align = alBottom
           Enabled = False
@@ -911,7 +911,7 @@ object FABMProveedores: TFABMProveedores
           end
           object Label7: TLabel
             Left = 474
-            Top = 91
+            Top = 87
             Width = 106
             Height = 13
             Caption = 'Datos Adicionales:'
@@ -931,6 +931,14 @@ object FABMProveedores: TFABMProveedores
             Width = 86
             Height = 13
             Caption = 'Condici'#243'n IVA:'
+            Transparent = True
+          end
+          object Label10: TLabel
+            Left = 474
+            Top = 62
+            Width = 75
+            Height = 13
+            Caption = 'Tipo Factura:'
             Transparent = True
           end
           object DBENombreApellido: TDBEdit
@@ -1048,9 +1056,9 @@ object FABMProveedores: TFABMProveedores
           end
           object dbDatosAdic: TDBMemo
             Left = 474
-            Top = 109
+            Top = 104
             Width = 422
-            Height = 42
+            Height = 51
             DataField = 'DESCRIPCION'
             DataSource = DS_IE_Proveedores
             Font.Charset = ANSI_CHARSET
@@ -1096,6 +1104,24 @@ object FABMProveedores: TFABMProveedores
             ListSource = DS_CondicIVA
             ParentFont = False
             TabOrder = 9
+          end
+          object DBLookupComboBox3: TDBLookupComboBox
+            Left = 568
+            Top = 58
+            Width = 329
+            Height = 21
+            DataField = 'ID_TIPO_FACTURA'
+            DataSource = DS_IE_Proveedores
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            KeyField = 'ID_TIPO_FACTURA'
+            ListField = 'DESCRIPCION'
+            ListSource = DS_TipoFactura
+            ParentFont = False
+            TabOrder = 10
           end
         end
       end
@@ -1206,7 +1232,7 @@ object FABMProveedores: TFABMProveedores
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1577,6 +1603,9 @@ object FABMProveedores: TFABMProveedores
     object ZQ_IE_ProveedoresID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
     end
+    object ZQ_IE_ProveedoresID_TIPO_FACTURA: TIntegerField
+      FieldName = 'ID_TIPO_FACTURA'
+    end
   end
   object DS_IE_Proveedores: TDataSource
     DataSet = ZQ_IE_Proveedores
@@ -1648,6 +1677,18 @@ object FABMProveedores: TFABMProveedores
         ItemIndex = -1
       end
       item
+        Titulo = 'Tipo Factura'
+        Campo = 'id_tipo_factura'
+        Tabla = 'ie_proveedores'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_TipoFactura
+        TipoCombollenarCampo = 'descripcion'
+        TipoCombollenarCampoReal = 'id_tipo_factura'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Direccion'
         Campo = 'direccion'
         Tabla = 'p'
@@ -1659,6 +1700,14 @@ object FABMProveedores: TFABMProveedores
         Titulo = 'Nro Doc/CUIT/CUIL'
         Campo = 'nro_documento'
         Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Datos Adicionales'
+        Campo = 'descripcion'
+        Tabla = 'ie_proveedores'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         ItemIndex = -1
@@ -1712,8 +1761,8 @@ object FABMProveedores: TFABMProveedores
     FuenteNormal = []
     NombreGuardarConfig = 'UABMProveedores'
     Ordenar = True
-    Left = 80
-    Top = 160
+    Left = 144
+    Top = 72
   end
   object Provider_Conceptos: TDataSetProvider
     DataSet = ZQ_Conceptos
@@ -2060,5 +2109,27 @@ object FABMProveedores: TFABMProveedores
     DataSet = ZQ_CondicIVA
     Left = 184
     Top = 192
+  end
+  object ZQ_TipoFactura: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from tipo_factura')
+    Params = <>
+    Left = 64
+    Top = 232
+    object ZQ_TipoFacturaID_TIPO_FACTURA: TIntegerField
+      FieldName = 'ID_TIPO_FACTURA'
+      Required = True
+    end
+    object ZQ_TipoFacturaDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
+    end
+  end
+  object DS_TipoFactura: TDataSource
+    DataSet = ZQ_TipoFactura
+    Left = 80
+    Top = 168
   end
 end

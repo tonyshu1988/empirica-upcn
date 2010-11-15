@@ -483,7 +483,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -951,8 +951,12 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       FieldName = 'ANULADO'
       Size = 1
     end
-    object ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TIntegerField
+    object ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TStringField
       FieldName = 'NRO_CHEQUE_TRANSF'
+    end
+    object ZQ_Cuenta_MovimientoIMPRESO: TStringField
+      FieldName = 'IMPRESO'
+      Size = 1
     end
   end
   object DS_Cuenta_Movimiento: TDataSource
@@ -1342,7 +1346,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ParamType = ptResult
       end
       item
-        DataType = ftInteger
+        DataType = ftString
         Name = 'NRO_CHEQUE'
         ParamType = ptInput
       end>
@@ -1356,7 +1360,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ParamType = ptResult
       end
       item
-        DataType = ftInteger
+        DataType = ftString
         Name = 'NRO_CHEQUE'
         ParamType = ptInput
       end>

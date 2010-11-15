@@ -1702,9 +1702,6 @@ object FReporteMovProveedor: TFReporteMovProveedor
     object ZQ_MovimientoProveedoresFECHA_MDC: TDateField
       FieldName = 'FECHA_MDC'
     end
-    object ZQ_MovimientoProveedoresNRO_CHEQUE_TRANSF: TIntegerField
-      FieldName = 'NRO_CHEQUE_TRANSF'
-    end
     object ZQ_MovimientoProveedoresCODIGO_CORTO: TStringField
       FieldName = 'CODIGO_CORTO'
       Size = 4
@@ -1777,6 +1774,9 @@ object FReporteMovProveedor: TFReporteMovProveedor
     object ZQ_MovimientoProveedoresCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
       Size = 1
+    end
+    object ZQ_MovimientoProveedoresNRO_CHEQUE_TRANSF: TStringField
+      FieldName = 'NRO_CHEQUE_TRANSF'
     end
   end
   object DS_MovimientoProveedores: TDataSource
