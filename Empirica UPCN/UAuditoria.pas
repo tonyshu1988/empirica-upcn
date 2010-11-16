@@ -71,7 +71,6 @@ type
     ZQ_CuentaMovID_MEDIO: TIntegerField;
     ZQ_CuentaMovFECHA_MDC: TDateField;
     ZQ_CuentaMovBANCO_MDC: TStringField;
-    ZQ_CuentaMovNRO_CHEQUE_TRANSF: TIntegerField;
     ZQ_CuentaMovIMPORTE: TFloatField;
     ZQ_CuentaMovCONCILIADO: TStringField;
     ZQ_CuentaMovFECHA_CONCILIADO: TDateField;
@@ -108,6 +107,7 @@ type
     EKLlenarComboUsuario: TEKLlenarCombo;
     Label3: TLabel;
     CBoxAccion: TComboBox;
+    ZQ_CuentaMovNRO_CHEQUE_TRANSF: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_MovimientosAfterScroll(DataSet: TDataSet);
