@@ -1,6 +1,6 @@
 object FConfiguracion: TFConfiguracion
-  Left = 362
-  Top = 100
+  Left = 346
+  Top = 137
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'FConfiguracion'
@@ -444,6 +444,10 @@ object FConfiguracion: TFConfiguracion
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnInicializarGen
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -482,13 +486,13 @@ object FConfiguracion: TFConfiguracion
       0
       0
       52)
-    object btnConfigNroOrden: TdxBarLargeButton
-      Caption = 'Configurar N'#250'mero Orden Pago'
+    object btnInicializarGen: TdxBarLargeButton
+      Caption = 'Inicializar Generadores'
       Category = 0
-      Hint = 'Configura el nro de la orden de pago '
+      Hint = 'Inicializa los generadores de la base de datos'
       Visible = ivAlways
       ImageIndex = 40
-      OnClick = btnConfigNroOrdenClick
+      OnClick = btnInicializarGenClick
       AutoGrayScale = False
       HotImageIndex = 0
     end
@@ -560,10 +564,22 @@ object FConfiguracion: TFConfiguracion
       ImageIndex = 28
     end
   end
-  object ZQ_ReiniciarNroOrden: TZQuery
+  object ZP_InicializarGen: TZStoredProc
     Connection = DM.Conexion
-    Params = <>
-    Left = 184
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    StoredProcName = 'INICIALIZAR_GENERADORES'
+    Left = 192
     Top = 104
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
   end
 end
