@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, DBCtrls, ComCtrls, Mask,
-  Buttons, Grids, DBGrids, ExtCtrls, ZSqlProcessor, EKDBDateTimePicker;
+  Buttons, Grids, DBGrids, ExtCtrls, ZSqlProcessor, EKDBDateTimePicker,
+  ZStoredProcedure;
 
 type
   TFConfiguracion = class(TForm)
@@ -41,7 +42,7 @@ type
     ZQ_ConfigDESCRIPCION: TStringField;
     ZQ_ConfigGRAFICO: TBlobField;
     dxBarABM: TdxBarManager;
-    btnConfigNroOrden: TdxBarLargeButton;
+    btnInicializarGen: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnEliminar: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
@@ -49,8 +50,8 @@ type
     btnSalir: TdxBarLargeButton;
     btnVerDetalle: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
-    ZQ_ReiniciarNroOrden: TZQuery;
     EKDBDateTimePicker1: TEKDBDateTimePicker;
+    ZP_InicializarGen: TZStoredProc;
     procedure btnSalirClick(Sender: TObject);
     procedure btAgregGralClick(Sender: TObject);
     procedure btModifGralClick(Sender: TObject);
@@ -59,7 +60,7 @@ type
     procedure btCancGralClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
-    procedure btnConfigNroOrdenClick(Sender: TObject);
+    procedure btnInicializarGenClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -170,37 +171,15 @@ begin
   panelGrilla.Enabled:= true;
 end;
 
-procedure TFConfiguracion.btnConfigNroOrdenClick(Sender: TObject);
-var
-  nro: string;
-  numero: integer;
+procedure TFConfiguracion.btnInicializarGenClick(Sender: TObject);
 begin
-  if InputQuery('Número de Orden de Pago', 'Ingrese el Número de Orden de Pago del cual desea arrancar:', nro) then
+  if dm.EKModelo.iniciar_transaccion(TRANSACCION, []) then
   begin
-    if (trim(nro) = '') or not (sonTodosNumeros(nro)) then
-    begin
-      ShowMessage('El nro de Orden de Pago ingresado es incorrecto');
-      exit;
-    end;
+    ZP_InicializarGen.Close;
+    ZP_InicializarGen.ExecProc;
 
-    numero:= StrToInt(nro);
-    if (numero <= 0) then
-    begin
-      ShowMessage('El nro de Orden de Pago ingresado es incorrecto (tiene que ser > 0)');
-      exit;
-    end;
-
-    if dm.EKModelo.iniciar_transaccion(TRANSACCION, []) then
-    begin
-      ZQ_ReiniciarNroOrden.SQL.Clear;
-      ZQ_ReiniciarNroOrden.SQL.Add('set generator GEN_IE_NRO_ORDEN_ID to '+IntToStr(numero - 1));
-      ZQ_ReiniciarNroOrden.ExecSQL;
-
-//      ShowMessage(ZQ_ReiniciarNroOrden.SQL.Text);
-
-      if not DM.EKModelo.finalizar_transaccion(TRANSACCION) then
-        dm.EKModelo.cancelar_transaccion(TRANSACCION);
-    end;
+    if not DM.EKModelo.finalizar_transaccion(TRANSACCION) then
+      dm.EKModelo.cancelar_transaccion(TRANSACCION);
   end;
 end;
 
