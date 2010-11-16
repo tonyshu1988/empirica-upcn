@@ -816,9 +816,6 @@ object FAuditoria: TFAuditoria
       FieldName = 'BANCO_MDC'
       Size = 50
     end
-    object ZQ_CuentaMovNRO_CHEQUE_TRANSF: TIntegerField
-      FieldName = 'NRO_CHEQUE_TRANSF'
-    end
     object ZQ_CuentaMovIMPORTE: TFloatField
       FieldName = 'IMPORTE'
       currency = True
@@ -856,6 +853,9 @@ object FAuditoria: TFAuditoria
     object ZQ_CuentaMovNOMBRE_MEDIO_COBRO_PAGO: TStringField
       FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
       Size = 30
+    end
+    object ZQ_CuentaMovNRO_CHEQUE_TRANSF: TStringField
+      FieldName = 'NRO_CHEQUE_TRANSF'
     end
   end
   object DS_Movimientos: TDataSource
