@@ -155,6 +155,12 @@ type
     ZSP_EXISTE_CHEQUEEXISTE: TStringField;
     ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Cuenta_MovimientoIMPRESO: TStringField;
+    ZQ_ProveedoresID_TIPO: TIntegerField;
+    ZQ_ProveedoresID_TIPO_IVA: TIntegerField;
+    ZQ_ProveedoresID_TIPO_FACTURA: TIntegerField;
+    ZQ_ProveedoresTIPO_PROVEEDOR: TStringField;
+    DBLookupComboBox2: TDBLookupComboBox;
+    Label2: TLabel;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;

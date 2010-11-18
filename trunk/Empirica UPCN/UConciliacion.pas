@@ -143,6 +143,8 @@ type
     ZSP_ConciliacionNRO_FAC_REC: TStringField;
     ZSP_ConciliacionID_MEDIO: TIntegerField;
     ZSP_ConciliacionFECHA_CONCILIADO: TDateField;
+    ZSP_LibroBancoTIPO_PROVEEDOR: TStringField;
+    ZSP_ConciliacionTIPO_PROVEEDOR: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;

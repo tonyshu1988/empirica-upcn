@@ -165,6 +165,7 @@ type
     DBLookupComboBox3: TDBLookupComboBox;
     ZQ_TipoFacturaID_TIPO_FACTURA: TIntegerField;
     ZQ_TipoFacturaDESCRIPCION: TStringField;
+    ZQ_IE_Proveedores_Tipo: TStringField;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);

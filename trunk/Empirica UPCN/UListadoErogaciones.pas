@@ -136,7 +136,8 @@ type
     mxDBGridExport: TmxDBGridExport;
     mxNativeExcel1: TmxNativeExcel;
     btexportarExel: TdxBarLargeButton;
-    ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TIntegerField;
+    ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TStringField;
+    ZQ_Libro_erogacionesTIPO_PROVEEDOR: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
