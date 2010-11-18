@@ -271,7 +271,7 @@ type
     EKDbSuma1: TEKDbSuma;
     DBLookupCBoxIngreso_Proveedor: TDBLookupComboBox;
     DBLookupCBoxIngreso_Concepto: TDBLookupComboBox;
-    Label1: TLabel;
+    lblEgrDenom: TLabel;
     Label3: TLabel;
     EKDBDateIngreso_FechaEmision: TEKDBDateTimePicker;
     EKDBDateIngreso_FechaPD: TEKDBDateTimePicker;
@@ -281,7 +281,7 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    Label13: TLabel;
+    lblIngDenom: TLabel;
     Label17: TLabel;
     Label22: TLabel;
     DBEditEgreso_NroCheque: TDBEdit;
@@ -427,6 +427,19 @@ type
     ZQ_ProveedoresID_TIPO: TIntegerField;
     ZQ_ProveedoresID_TIPO_IVA: TIntegerField;
     ZQ_ProveedoresID_TIPO_FACTURA: TIntegerField;
+    LIBRO_BANCOTIPO_PROVEEDOR: TStringField;
+    ZQ_ProveedoresTIPO_PROVEEDOR: TStringField;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DBLookupComboBox2: TDBLookupComboBox;
+    Label1: TLabel;
+    Label12: TLabel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Label13: TLabel;
+    Label15: TLabel;
+    totDebe: TLabel;
+    totHaber: TLabel;
+    EKDbSumaLibroBanco: TEKDbSuma;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -1519,7 +1532,10 @@ begin
     begin
       btnConciliar.Enabled:=true;
       btnEliminarMov.Enabled:=true;
-    end
+    end;
+
+  totDebe.Caption:=Format('%s',[FormatFloat('$ ###,###,###,##0.00', EKDbSumaLibroBanco.SumCollection[0].sumvalue)]);
+  totHaber.Caption:=Format('%s',[FormatFloat('$ ###,###,###,##0.00', EKDbSumaLibroBanco.SumCollection[1].sumvalue)]);
 end;
 
 
@@ -1836,6 +1852,19 @@ begin
   ZQ_Conceptos.Active:=false;
   ZQ_Conceptos.ParamByName('idProveedor').AsInteger:= ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
   ZQ_Conceptos.Active:=true;
+
+  {if ZQ_ProveedoresTIPO_PROVEEDOR.IsNull then
+    begin
+        lblIngDenom.Caption:='Denominación:';
+        lblEgrDenom.Caption:='Denominación:';
+    end
+  else
+    begin
+      lblIngDenom.Caption:=Format('%s:',[ZQ_ProveedoresTIPO_PROVEEDOR.AsString]);
+      lblEgrDenom.Caption:=Format('%s:',[ZQ_ProveedoresTIPO_PROVEEDOR.AsString]);
+    end;}
+
+
 end;
 
 end.

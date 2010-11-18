@@ -3,7 +3,7 @@ object FABMProveedores: TFABMProveedores
   Top = 201
   Width = 945
   Height = 592
-  Caption = 'ABM Proveedores'
+  Caption = 'ABM Listado General'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -756,7 +756,7 @@ object FABMProveedores: TFABMProveedores
           Expanded = False
           FieldName = 'APELLIDO_Y_NOMBRE'
           Title.Alignment = taCenter
-          Title.Caption = 'Proveedor'
+          Title.Caption = 'Denominaci'#243'n'
           Width = 274
           Visible = True
         end
@@ -766,6 +766,14 @@ object FABMProveedores: TFABMProveedores
           Title.Alignment = taCenter
           Title.Caption = 'Nombre de Fantasia'
           Width = 282
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = '_Tipo'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo'
+          Width = 181
           Visible = True
         end
         item
@@ -789,6 +797,11 @@ object FABMProveedores: TFABMProveedores
           Title.Alignment = taCenter
           Title.Caption = 'Email'
           Width = 233
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NRO_PROVEEDOR'
           Visible = True
         end>
     end
@@ -852,9 +865,9 @@ object FABMProveedores: TFABMProveedores
           object Label1: TLabel
             Left = 10
             Top = 11
-            Width = 64
+            Width = 86
             Height = 13
-            Caption = 'Proveedor:'
+            Caption = 'Denominaci'#243'n:'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -942,9 +955,9 @@ object FABMProveedores: TFABMProveedores
             Transparent = True
           end
           object DBENombreApellido: TDBEdit
-            Left = 77
+            Left = 96
             Top = 7
-            Width = 317
+            Width = 298
             Height = 21
             CharCase = ecUpperCase
             DataField = 'APELLIDO_Y_NOMBRE'
@@ -1067,7 +1080,7 @@ object FABMProveedores: TFABMProveedores
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 7
+            TabOrder = 10
           end
           object DBTipo: TDBLookupComboBox
             Left = 512
@@ -1085,7 +1098,7 @@ object FABMProveedores: TFABMProveedores
             ListField = 'DESCRIPCION'
             ListSource = DS_TipoProveedor
             ParentFont = False
-            TabOrder = 8
+            TabOrder = 7
           end
           object DBLookupComboBox2: TDBLookupComboBox
             Left = 568
@@ -1103,7 +1116,7 @@ object FABMProveedores: TFABMProveedores
             ListField = 'DESCRIPCION'
             ListSource = DS_CondicIVA
             ParentFont = False
-            TabOrder = 9
+            TabOrder = 8
           end
           object DBLookupComboBox3: TDBLookupComboBox
             Left = 568
@@ -1121,7 +1134,7 @@ object FABMProveedores: TFABMProveedores
             ListField = 'DESCRIPCION'
             ListSource = DS_TipoFactura
             ParentFont = False
-            TabOrder = 10
+            TabOrder = 9
           end
         end
       end
@@ -1605,6 +1618,16 @@ object FABMProveedores: TFABMProveedores
     end
     object ZQ_IE_ProveedoresID_TIPO_FACTURA: TIntegerField
       FieldName = 'ID_TIPO_FACTURA'
+    end
+    object ZQ_IE_Proveedores_Tipo: TStringField
+      FieldKind = fkLookup
+      FieldName = '_Tipo'
+      LookupDataSet = ZQ_TipoProveedor
+      LookupKeyFields = 'ID_TIPO'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'ID_TIPO'
+      Size = 100
+      Lookup = True
     end
   end
   object DS_IE_Proveedores: TDataSource

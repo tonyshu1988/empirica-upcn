@@ -44,7 +44,6 @@ type
     ARepList_Erogacion: TAction;
     ARep_Conciliacion: TAction;
     ARep_SaldoInicial: TAction;
-    Proveedores1: TMenuItem;
     AABM_Autoridad: TAction;
     ABMAutoridad1: TMenuItem;
     AABM_Medio: TAction;

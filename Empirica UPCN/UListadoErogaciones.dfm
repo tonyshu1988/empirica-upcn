@@ -1,6 +1,6 @@
 object FListadoErogaciones: TFListadoErogaciones
-  Left = 144
-  Top = 116
+  Left = 305
+  Top = 214
   Width = 1130
   Height = 565
   Caption = 'Listado Erogaciones en Cumplimiento'
@@ -87,8 +87,16 @@ object FListadoErogaciones: TFListadoErogaciones
           Expanded = False
           FieldName = 'APELLIDO_Y_NOMBRE'
           Title.Alignment = taCenter
-          Title.Caption = 'Proveedor'
-          Width = 117
+          Title.Caption = 'Denominaci'#243'n'
+          Width = 164
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TIPO_PROVEEDOR'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo'
+          Width = 92
           Visible = True
         end
         item
@@ -461,8 +469,8 @@ object FListadoErogaciones: TFListadoErogaciones
     end
     object RepErog: TQuickRep
       Tag = 99
-      Left = 75
-      Top = 43
+      Left = 91
+      Top = 123
       Width = 952
       Height = 1347
       Frame.Color = clBlack
@@ -2062,8 +2070,13 @@ object FListadoErogaciones: TFListadoErogaciones
       FieldName = 'CMOV_ANULADO'
       Size = 1
     end
-    object ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TIntegerField
+    object ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TStringField
       FieldName = 'NRO_CHEQUE_TRANSF'
+      Size = 50
+    end
+    object ZQ_Libro_erogacionesTIPO_PROVEEDOR: TStringField
+      FieldName = 'TIPO_PROVEEDOR'
+      Size = 50
     end
   end
   object DS_Libro_erogaciones: TDataSource

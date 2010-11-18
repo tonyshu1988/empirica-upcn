@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 563
-    Width = 855
+    Top = 569
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -38,7 +38,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionToolBar1'
@@ -52,8 +52,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 534
+    Width = 863
+    Height = 540
     Align = alClient
     TabOrder = 2
   end
@@ -73,8 +73,8 @@ object FPrincipal: TFPrincipal
       OnExecute = AConfiguracionExecute
     end
     object AABMProveedores: TAction
-      Caption = 'ABM Proveedores'
-      Hint = 'Alta Proveedores'
+      Caption = 'ABM Listado General'
+      Hint = 'Alta Listado General'
       ImageIndex = 18
       OnExecute = AABMProveedoresExecute
     end
@@ -159,20 +159,23 @@ object FPrincipal: TFPrincipal
     Left = 176
     Top = 56
     object PlandeCuentas: TMenuItem
-      Caption = 'Configuracion'
+      Caption = '&Configuraci'#243'n'
       object ABMAutoridad1: TMenuItem
         Action = AABM_Autoridad
       end
       object ABMConceptos1: TMenuItem
         Action = AConceptos
-        Caption = 'ABM Conceptos'
+        Caption = 'ABM &Conceptos'
       end
       object ABMMedioCobroPago1: TMenuItem
         Action = AABM_Medio
       end
+      object ABMProveedores1: TMenuItem
+        Action = AABMProveedores
+      end
     end
     object Disponibilidades: TMenuItem
-      Caption = 'Disponibilidades'
+      Caption = '&Disponibilidades'
       object CuentasBancariasyCajas1: TMenuItem
         Action = AABM_Cuentas
       end
@@ -180,21 +183,15 @@ object FPrincipal: TFPrincipal
         Action = ASaldoInicial
       end
     end
-    object Proveedores1: TMenuItem
-      Caption = 'Proveedores'
-      object ABMProveedores1: TMenuItem
-        Action = AABMProveedores
-      end
-    end
     object Movimientos: TMenuItem
-      Caption = 'Libro Banco'
+      Caption = '&Libro Banco'
       object ABMMovimientos1: TMenuItem
         Action = AMovimientos
-        Caption = 'ABM Libro Banco'
+        Caption = 'ABM &Libro Banco'
       end
     end
     object Reportes1: TMenuItem
-      Caption = 'Reportes'
+      Caption = '&Reportes'
       object Disponibilidades1: TMenuItem
         Action = ARep_LibroBanco
       end
@@ -213,10 +210,10 @@ object FPrincipal: TFPrincipal
       end
     end
     object Sistema: TMenuItem
-      Caption = 'Sistema'
+      Caption = '&Sistema'
       object CambiarContrasea1: TMenuItem
         Tag = 1
-        Caption = 'Cambiar Contrase'#241'a'
+        Caption = '&Cambiar Contrase'#241'a'
         ImageIndex = 39
         OnClick = CambiarContrasea1Click
       end
@@ -225,11 +222,11 @@ object FPrincipal: TFPrincipal
       end
       object AAuditoria1: TMenuItem
         Action = AAuditoria
-        Caption = 'Auditoria'
+        Caption = '&Auditoria'
       end
       object Salir2: TMenuItem
         Tag = 1
-        Caption = 'Salir'
+        Caption = '&Salir'
         ImageIndex = 13
         OnClick = Salir2Click
       end

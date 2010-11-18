@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 345
-  Top = 73
+  Left = 380
+  Top = 165
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -239,11 +239,11 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Transparent = True
       end
       object Label4: TLabel
-        Left = 25
+        Left = 60
         Top = 92
-        Width = 64
+        Width = 29
         Height = 13
-        Caption = 'Proveedor:'
+        Caption = 'Tipo:'
         Transparent = True
       end
       object Label5: TLabel
@@ -273,10 +273,10 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       object Label12: TLabel
         Left = 641
         Top = 92
-        Width = 129
+        Width = 138
         Height = 13
         Anchors = [akTop, akRight]
-        Caption = '(F1 Buscar Proveedor)'
+        Caption = '(F1 Buscar Denominac.)'
         Transparent = True
       end
       object Label13: TLabel
@@ -318,10 +318,18 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Height = 13
         Caption = 'Nro Recibo:'
       end
+      object Label2: TLabel
+        Left = 208
+        Top = 92
+        Width = 86
+        Height = 13
+        Caption = 'Denominaci'#243'n:'
+        Transparent = True
+      end
       object DBLUpCBoxProveedor: TDBLookupComboBox
-        Left = 92
+        Left = 296
         Top = 88
-        Width = 543
+        Width = 339
         Height = 21
         Anchors = [akLeft, akTop, akRight]
         DataField = 'NRO_PROVEEDOR'
@@ -477,6 +485,26 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ParentFont = False
         TabOrder = 4
         OnKeyUp = DBEditNroConceptoKeyUp
+      end
+      object DBLookupComboBox2: TDBLookupComboBox
+        Left = 92
+        Top = 88
+        Width = 109
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'NRO_PROVEEDOR'
+        DataSource = DS_Movimientos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        KeyField = 'NRO_PROVEEDOR'
+        ListField = 'TIPO_PROVEEDOR'
+        ListSource = DS_Proveedores
+        ParentFont = False
+        TabOrder = 9
+        OnKeyUp = DBEditNroProveedorKeyUp
       end
     end
   end
@@ -909,6 +937,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     object ZQ_Cuenta_MovimientoIMPORTE: TFloatField
       FieldName = 'IMPORTE'
       currency = True
+      Precision = 10
     end
     object ZQ_Cuenta_MovimientoCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
@@ -1093,11 +1122,12 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Connection = DM.Conexion
     AfterScroll = ZQ_ProveedoresAfterScroll
     SQL.Strings = (
-      'select distinct p.*'
+      'select distinct p.*,tp.descripcion as TIPO_PROVEEDOR'
       'from ie_proveedores p'
       
         'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
         'r)'
+      'left join tipo_proveedor tp on (tp.id_tipo=p.id_tipo)'
       'where (p.baja <> '#39'S'#39')'
       ' and (c.id_cuenta = :idCta)'
       'order by apellido_y_nombre')
@@ -1161,6 +1191,19 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
     object ZQ_ProveedoresID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
+    end
+    object ZQ_ProveedoresID_TIPO: TIntegerField
+      FieldName = 'ID_TIPO'
+    end
+    object ZQ_ProveedoresID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_ProveedoresID_TIPO_FACTURA: TIntegerField
+      FieldName = 'ID_TIPO_FACTURA'
+    end
+    object ZQ_ProveedoresTIPO_PROVEEDOR: TStringField
+      FieldName = 'TIPO_PROVEEDOR'
+      Size = 100
     end
   end
   object DS_Proveedores: TDataSource
