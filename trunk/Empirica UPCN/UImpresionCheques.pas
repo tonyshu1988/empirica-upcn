@@ -74,6 +74,8 @@ type
     ZQ_movimientosID: TIntegerField;
     ClientZQ_movimientosIdCheque: TIntegerField;
     ZUpdateSQL1: TZUpdateSQL;
+    ZQ_movimientosTIPOPROV: TStringField;
+    ClientZQ_movimientostipoProv: TStringField;
     procedure btnChequeCorrienteClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -287,6 +289,7 @@ begin
     ClientZQ_movimientosnro_cheque.AsInteger := ZQ_movimientosNRO_CHEQUE_TRANSF.AsInteger;
     ClientZQ_movimientosImporte.AsFloat := ZQ_movimientosIMPORTE.AsFloat;
     ClientZQ_movimientosimpreso.AsString := ZQ_movimientosIMPRESO.AsString;
+    ClientZQ_movimientostipoProv.AsString := ZQ_movimientosTIPOPROV.AsString;
     ClientZQ_movimientos.Post;
 
     ZQ_movimientos.Next;
