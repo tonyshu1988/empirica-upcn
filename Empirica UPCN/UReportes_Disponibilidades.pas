@@ -144,6 +144,7 @@ type
     btnExel: TdxBarLargeButton;
     LIBRO_BANCONRO_MEDIO: TStringField;
     LIBRO_BANCOORDEN_SALDO_ANTERIOR: TIntegerField;
+    LIBRO_BANCOTIPO_PROVEEDOR: TStringField;
     procedure btnLibroBancoClick(Sender: TObject);
     function  validarDatos():boolean;
     procedure btnSalirClick(Sender: TObject);

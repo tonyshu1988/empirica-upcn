@@ -1,8 +1,8 @@
 object FImpresionCheques: TFImpresionCheques
-  Left = 346
-  Top = 187
-  Width = 870
-  Height = 500
+  Left = 240
+  Top = 196
+  Width = 987
+  Height = 666
   Caption = 'Impresion de Cheques'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -21,15 +21,15 @@ object FImpresionCheques: TFImpresionCheques
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 971
+    Height = 580
     Align = alClient
     TabOrder = 0
     object DBGridCheques: TDBGrid
       Left = 1
       Top = 20
-      Width = 860
-      Height = 395
+      Width = 969
+      Height = 559
       Align = alClient
       Color = 16772842
       DataSource = DS_movimientos
@@ -60,8 +60,15 @@ object FImpresionCheques: TFImpresionCheques
         item
           Expanded = False
           FieldName = 'proveedor'
-          Title.Caption = 'Proveedor'
+          Title.Caption = 'Denominaci'#243'n'
           Width = 253
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'tipoProv'
+          Title.Caption = 'Tipo'
+          Width = 132
           Visible = True
         end
         item
@@ -159,7 +166,7 @@ object FImpresionCheques: TFImpresionCheques
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          748.770833333333400000
+          748.770833333333300000
           1820.333333333333000000)
         BandType = rbDetail
         object QRImageCheque: TQRImage
@@ -23866,7 +23873,7 @@ object FImpresionCheques: TFImpresionCheques
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          748.770833333333400000
+          748.770833333333300000
           1820.333333333333000000)
         BandType = rbDetail
         object QRImage1: TQRImage
@@ -47579,7 +47586,7 @@ object FImpresionCheques: TFImpresionCheques
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 969
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -47600,7 +47607,7 @@ object FImpresionCheques: TFImpresionCheques
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 750
+        Left = 859
         Top = 1
         Width = 109
         Height = 17
@@ -47618,7 +47625,7 @@ object FImpresionCheques: TFImpresionCheques
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -47874,12 +47881,14 @@ object FImpresionCheques: TFImpresionCheques
     SQL.Strings = (
       
         'select m.fecha, cm.fecha_mdc, cm.nro_cheque_transf, cm.importe, ' +
-        'cm.anulado, p.apellido_y_nombre, cm.impreso, cm.id'
+        'cm.anulado, p.apellido_y_nombre, cm.impreso, cm.id,tp.descripcio' +
+        'n as TipoProv'
       'from ie_cuentas_movimientos cm'
       
         'left join ie_movimientos m on(cm.nro_movimiento = m.nro_movimien' +
         'to)'
       'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
+      'left join tipo_proveedor tp on (p.id_tipo = tp.id_tipo)'
       'where cm.id_medio = 2 and cm.anulado is null')
     Params = <>
     Left = 36
@@ -47912,6 +47921,10 @@ object FImpresionCheques: TFImpresionCheques
     object ZQ_movimientosID: TIntegerField
       FieldName = 'ID'
       Required = True
+    end
+    object ZQ_movimientosTIPOPROV: TStringField
+      FieldName = 'TIPOPROV'
+      Size = 100
     end
   end
   object EKNumeroALetras1: TEKNumeroALetras
@@ -48077,6 +48090,10 @@ object FImpresionCheques: TFImpresionCheques
     end
     object ClientZQ_movimientosIdCheque: TIntegerField
       FieldName = 'IdCheque'
+    end
+    object ClientZQ_movimientostipoProv: TStringField
+      FieldName = 'tipoProv'
+      Size = 50
     end
   end
   object EKVistaPreviaQR2: TEKVistaPreviaQR
