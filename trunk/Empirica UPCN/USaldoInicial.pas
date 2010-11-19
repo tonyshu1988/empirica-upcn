@@ -251,7 +251,7 @@ begin
        raise Exception.Create('');
     except
       begin
-        Application.MessageBox('El Saldo inicial no se puede ser elimininado porque está siendo utilizado.','Atención',MB_OK+MB_ICONINFORMATION);
+        Application.MessageBox('El Saldo inicial no se puede ser eliminado porque está siendo utilizado.','Atención',MB_OK+MB_ICONINFORMATION);
         dm.EKModelo.cancelar_transaccion(transaccion_saldo);
       end
     end;

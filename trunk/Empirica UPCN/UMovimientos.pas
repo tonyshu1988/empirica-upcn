@@ -310,8 +310,6 @@ type
     QRLabel7: TQRLabel;
     QRDBText4: TQRDBText;
     QRDBText7: TQRDBText;
-    QRLabel43: TQRLabel;
-    QRDBText64: TQRDBText;
     QRShape16: TQRShape;
     qrtImporteTotal: TQRLabel;
     ZQ_OrdenDebitoBancario: TZQuery;
@@ -440,6 +438,9 @@ type
     totDebe: TLabel;
     totHaber: TLabel;
     EKDbSumaLibroBanco: TEKDbSuma;
+    QRLabel43: TQRLabel;
+    QRDBText64: TQRDBText;
+    QRLabel12: TQRLabel;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);

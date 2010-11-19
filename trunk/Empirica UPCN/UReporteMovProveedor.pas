@@ -166,7 +166,6 @@ type
     QRExpr1: TQRExpr;
     QRExpr3: TQRExpr;
     ZQ_MovimientoProveedoresNRO_CHEQUE_TRANSF: TStringField;
-    ZQ_MovimientoProveedoresTIPOPROV: TStringField;
     ZQ_TipoProveedor: TZQuery;
     ZQ_TipoProveedorID_TIPO: TIntegerField;
     ZQ_TipoProveedorDESCRIPCION: TStringField;
