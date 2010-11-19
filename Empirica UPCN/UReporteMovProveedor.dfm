@@ -1617,7 +1617,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         TabOrder = 0
         object lblFiltroMedio: TLabel
           Left = 76
-          Top = 13
+          Top = 20
           Width = 38
           Height = 13
           Caption = 'Medio:'
@@ -1625,7 +1625,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         end
         object lblFiltroConcepto: TLabel
           Left = 55
-          Top = 29
+          Top = 36
           Width = 59
           Height = 13
           Caption = 'Concepto:'
@@ -1633,7 +1633,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         end
         object lblFiltroTipoMov: TLabel
           Left = 12
-          Top = 45
+          Top = 52
           Width = 102
           Height = 13
           Caption = 'Tipo  Movimiento:'
@@ -1641,7 +1641,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         end
         object lblFiltroEmiDesde: TLabel
           Left = 328
-          Top = 13
+          Top = 20
           Width = 103
           Height = 13
           Caption = 'F. Emisi'#243'n Desde:'
@@ -1649,7 +1649,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         end
         object lblFiltroEmiHasta: TLabel
           Left = 332
-          Top = 29
+          Top = 36
           Width = 99
           Height = 13
           Caption = 'F. Emisi'#243'n Hasta:'
@@ -1657,7 +1657,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         end
         object lblFiltroPDDesde: TLabel
           Left = 592
-          Top = 13
+          Top = 20
           Width = 75
           Height = 13
           Caption = 'F. PD Desde:'
@@ -1665,7 +1665,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         end
         object lblFiltroPDHasta: TLabel
           Left = 596
-          Top = 29
+          Top = 36
           Width = 71
           Height = 13
           Caption = 'F. PD Hasta:'
@@ -1692,14 +1692,12 @@ object FReporteMovProveedor: TFReporteMovProveedor
         'c, cm.nro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre' +
         '_medio_cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto' +
         ', c.nombre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id' +
-        '_cuenta_egreso, m.anulado, cm.conciliado, tp.descripcion as Tipo' +
-        'Prov'
+        '_cuenta_egreso, m.anulado, cm.conciliado'
       'from ie_movimientos m'
       
         'left join ie_cuentas_movimientos cm on(m.nro_movimiento = cm.nro' +
         '_movimiento)'
       'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
-      'left join tipo_proveedor tp on (p.id_tipo = tp.id_tipo)'
       
         'left join objeto_movimientos ob on(m.id_objeto_movimiento = ob.i' +
         'd_objeto_movimiento)'
@@ -1787,10 +1785,6 @@ object FReporteMovProveedor: TFReporteMovProveedor
     end
     object ZQ_MovimientoProveedoresNRO_CHEQUE_TRANSF: TStringField
       FieldName = 'NRO_CHEQUE_TRANSF'
-    end
-    object ZQ_MovimientoProveedoresTIPOPROV: TStringField
-      FieldName = 'TIPOPROV'
-      Size = 100
     end
   end
   object DS_MovimientoProveedores: TDataSource
