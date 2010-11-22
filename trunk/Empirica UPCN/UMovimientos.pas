@@ -441,6 +441,10 @@ type
     QRLabel43: TQRLabel;
     QRDBText64: TQRDBText;
     QRLabel12: TQRLabel;
+    ZQ_ProveedoresTIPODOC: TStringField;
+    CBTipo: TCheckBox;
+    QRLabel32: TQRLabel;
+    QRDBText22: TQRDBText;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -1004,7 +1008,7 @@ begin
   begin
     if LIBRO_BANCOID_MOVIMIENTO.AsInteger <> -1 then
     begin
-      if (LIBRO_BANCOCONCILIADO.Value='S') or (LIBRO_BANCOID_MEDIO.AsInteger = 5) then
+      if (LIBRO_BANCOCONCILIADO.Value='S') then
       begin
         DBGridLibroBanco.Canvas.Brush.Color :=StaticText1.Brush.Color;
         DBGridLibroBanco.Canvas.Font.Color := clBlack;
@@ -1354,35 +1358,35 @@ begin
   else
     DBGridLibroBanco.Columns[5].Visible := true;
 
-  if not CBProveedor.Checked then  //proveedor
+  if not CBProveedor.Checked then  //Denominacion
     DBGridLibroBanco.Columns[6].Visible := false
   else
     DBGridLibroBanco.Columns[6].Visible := true;
 
-//  if not CBConcepto.Checked then  //anulado
-//    DBGridLibroBanco.Columns[7].Visible := false
-//  else
-//    DBGridLibroBanco.Columns[7].Visible := true;
+  if not CBTipo.Checked then  //Tipo
+    DBGridLibroBanco.Columns[7].Visible := false
+  else
+    DBGridLibroBanco.Columns[7].Visible := true;
 
   if not CBConcepto.Checked then  //concepto
-    DBGridLibroBanco.Columns[8].Visible := false
-  else
-    DBGridLibroBanco.Columns[8].Visible := true;
-
-  if not CBNroFactura.Checked then //factura
     DBGridLibroBanco.Columns[9].Visible := false
   else
     DBGridLibroBanco.Columns[9].Visible := true;
 
-  if not CBrecibo.Checked then //Recibo
+  if not CBNroFactura.Checked then //factura
     DBGridLibroBanco.Columns[10].Visible := false
   else
     DBGridLibroBanco.Columns[10].Visible := true;
 
-  if not CBFechaConciliado.Checked then //conciliado
-    DBGridLibroBanco.Columns[15].Visible := false
+  if not CBrecibo.Checked then //Recibo
+    DBGridLibroBanco.Columns[11].Visible := false
   else
-    DBGridLibroBanco.Columns[15].Visible := true;
+    DBGridLibroBanco.Columns[11].Visible := true;
+
+  if not CBFechaConciliado.Checked then //conciliado
+    DBGridLibroBanco.Columns[16].Visible := false
+  else
+    DBGridLibroBanco.Columns[16].Visible := true;
 
   //filtro los anulados para que se vean o no
   if verAnulados.Checked then
