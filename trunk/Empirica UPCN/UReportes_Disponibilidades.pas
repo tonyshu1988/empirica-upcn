@@ -18,7 +18,6 @@ type
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     pFondo: TPanel;
-    DBGridSaldoCtas: TDBGrid;
     DBGridLibroBanco: TDBGrid;
     LIBRO_BANCO: TZQuery;
     DS_LIBRO_BANCO: TDataSource;
@@ -34,18 +33,11 @@ type
     ZQ_CuentasBUSQUEDA: TStringField;
     EKBAvanzadaLibroBco: TEKBusquedaAvanzada;
     pLibroBanco: TPanel;
-    pSaldoCta: TPanel;
     Panel1: TPanel;
-    Panel2: TPanel;
-    Label12: TLabel;
-    Label9: TLabel;
-    Shape4: TShape;
-    Shape5: TShape;
     Shape1: TShape;
     Shape2: TShape;
     Label1: TLabel;
     Label2: TLabel;
-    pTapa: TPanel;
     RepLibroB: TQuickRep;
     QRBand5: TQRBand;
     QRLabel41: TQRLabel;
@@ -149,7 +141,6 @@ type
     function  validarDatos():boolean;
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btnSaldoCuentaClick(Sender: TObject);
     procedure btImprimirClick(Sender: TObject);
     procedure DBGridLibroBancoDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -191,12 +182,22 @@ var
   fecha: tdate;
 begin
   EKOrdenarGrillaLB.CargarConfigColunmas;
-  reporte:= -1;
   pLibroBanco.BringToFront;
 
   fecha:= StartOfAMonth(YearOf(DM.EKModelo.Fecha),MonthOf(DM.EKModelo.Fecha));
   TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[1]).Valor := DateToStr(fecha);
   TEKCriterioBA(EKBAvanzadaLibroBco.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.Fecha);
+
+  if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
+  begin
+    ZQ_Cuentas.Filter:= 'ID_CUENTA = '+IntToStr(CuentaNro);
+    ZQ_Cuentas.Filtered:= true;
+  end
+  else  //si me logueo como administrador
+  begin
+    ZQ_Cuentas.Filter:= '';
+    ZQ_Cuentas.Filtered:= false;
+  end;
 
   LeerOpcionesFiltrado;
   BtAplicarFiltrosColumnas.Click;
@@ -273,12 +274,6 @@ begin
         StaticTextConciliado.Color:= StringToColor(ZQ_CuentasCOLOR_CONSILIADO.AsString);
     end;
   end;
-end;
-
-
-procedure TFReportes_Disponibilidades.btnSaldoCuentaClick(Sender: TObject);
-begin
-  pSaldoCta.BringToFront;
 end;
 
 

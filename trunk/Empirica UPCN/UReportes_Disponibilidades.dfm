@@ -26,105 +26,6 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     Height = 486
     Align = alClient
     TabOrder = 4
-    object pTapa: TPanel
-      Left = 1
-      Top = 1
-      Width = 1064
-      Height = 430
-      Align = alClient
-      BevelOuter = bvNone
-      TabOrder = 2
-    end
-    object pSaldoCta: TPanel
-      Left = 1
-      Top = 1
-      Width = 1064
-      Height = 430
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 3
-      Caption = 'pSaldoCta'
-      TabOrder = 1
-      object DBGridSaldoCtas: TDBGrid
-        Left = 3
-        Top = 33
-        Width = 1058
-        Height = 394
-        Align = alClient
-        Color = 16772842
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-      end
-      object Panel2: TPanel
-        Left = 3
-        Top = 3
-        Width = 1058
-        Height = 30
-        Align = alTop
-        BevelOuter = bvNone
-        TabOrder = 1
-        DesignSize = (
-          1058
-          30)
-        object Shape5: TShape
-          Left = 1
-          Top = 5
-          Width = 1054
-          Height = 22
-          Anchors = [akLeft, akTop, akRight]
-          Brush.Color = clGray
-          Pen.Color = clGray
-          Shape = stRoundRect
-        end
-        object Shape4: TShape
-          Left = 3
-          Top = 3
-          Width = 1054
-          Height = 22
-          Anchors = [akLeft, akTop, akRight]
-          Brush.Color = clTeal
-          Shape = stRoundRect
-        end
-        object Label12: TLabel
-          Left = 0
-          Top = 7
-          Width = 1057
-          Height = 18
-          Alignment = taCenter
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'SALDO CUENTAS BANCARIAS'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-        end
-        object Label9: TLabel
-          Left = 1
-          Top = 6
-          Width = 1057
-          Height = 18
-          Alignment = taCenter
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'SALDO CUENTAS BANCARIAS'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clInfoBk
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-        end
-      end
-    end
     object pLibroBanco: TPanel
       Left = 1
       Top = 1
@@ -1804,7 +1705,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       Align = alBottom
       BevelInner = bvLowered
       Color = 8454016
-      TabOrder = 3
+      TabOrder = 1
       Visible = False
       object BtAplicarFiltrosColumnas: TButton
         Left = 732
@@ -2121,9 +2022,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       52)
     object btnLibroBanco: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Libro Banco'
+      Caption = 'Buscar'
       Category = 0
-      Hint = 'Libro Banco'
+      Hint = 'Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnLibroBancoClick
@@ -2202,7 +2103,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Name = 'ordenamiento'
         ParamType = ptUnknown
       end>
-    Left = 40
+    Left = 61
     Top = 208
     ParamData = <
       item
@@ -2319,7 +2220,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   end
   object DS_LIBRO_BANCO: TDataSource
     DataSet = LIBRO_BANCO
-    Left = 40
+    Left = 61
     Top = 256
   end
   object ZQ_Cuentas: TZQuery
@@ -2331,7 +2232,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       'from ie_cuentas c'
       'order by c.nombre_cuenta')
     Params = <>
-    Left = 162
+    Left = 183
     Top = 208
     object ZQ_CuentasID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
@@ -2369,7 +2270,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   end
   object DS_Cuentas: TDataSource
     DataSet = ZQ_Cuentas
-    Left = 162
+    Left = 183
     Top = 256
   end
   object EKBAvanzadaLibroBco: TEKBusquedaAvanzada
@@ -2421,7 +2322,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     DataSet = LIBRO_BANCO
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
-    Left = 40
+    Left = 61
     Top = 160
   end
   object EKVistaPrevia_LibroBco: TEKVistaPreviaQR
@@ -2430,7 +2331,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     VerGuardar = False
     VerExpImagen = False
     Caption = 'Reporte de Libro Banco'
-    Left = 162
+    Left = 183
     Top = 159
   end
   object EKOrdenarGrillaLB: TEKOrdenarGrilla
@@ -2438,11 +2339,11 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     FuenteNormal = []
     NombreGuardarConfig = 'UR_DisponibilidadesLB'
     Ordenar = False
-    Left = 41
+    Left = 62
     Top = 113
   end
   object EKIniGuardarFiltros: TEKIni
-    Left = 160
+    Left = 181
     Top = 112
   end
   object mxDBGridExport: TmxDBGridExport
@@ -2542,7 +2443,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
     Version = '2.37'
     DBGrid = DBGridLibroBanco
-    Left = 36
+    Left = 57
     Top = 322
   end
   object mxNativeExcel1: TmxNativeExcel
@@ -2550,7 +2451,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     Borders = []
     Shading = False
     Version = '1.24'
-    Left = 160
+    Left = 181
     Top = 320
   end
 end

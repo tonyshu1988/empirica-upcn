@@ -109,7 +109,7 @@ begin
 
     except
       begin
-        Application.MessageBox('La autoridad seleccionada no se puede borrar porque depende de otras tablas','Atención',MB_OK+MB_ICONINFORMATION);
+        Application.MessageBox('La autoridad seleccionada no se puede borrar porque está siendo utilizada.','Atención',MB_OK+MB_ICONINFORMATION);
         dm.EKModelo.cancelar_transaccion(transaccion_autoridad);
       end
     end;

@@ -177,7 +177,7 @@ begin
 
     except
       begin
-        Application.MessageBox('El Medio seleccionado no se puede borrar porque depende de otras tablas','Atención',MB_OK+MB_ICONINFORMATION);
+        Application.MessageBox('El Medio seleccionado no se puede borrar porque está siendo utilizado.','Atención',MB_OK+MB_ICONINFORMATION);
         dm.EKModelo.cancelar_transaccion(Transaccion_Medios);
       end
     end;

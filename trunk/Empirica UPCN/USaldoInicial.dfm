@@ -24,23 +24,23 @@ object FSaldoInicial: TFSaldoInicial
   object pContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 447
+    Width = 854
+    Height = 441
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
     TabOrder = 0
     object pDatos: TPanel
       Left = 2
-      Top = 286
-      Width = 858
+      Top = 280
+      Width = 850
       Height = 159
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
       Visible = False
       DesignSize = (
-        858
+        850
         159)
       object Label3: TLabel
         Left = 70
@@ -204,8 +204,8 @@ object FSaldoInicial: TFSaldoInicial
     object DBGridSaldosIniciales: TDBGrid
       Left = 2
       Top = 2
-      Width = 858
-      Height = 284
+      Width = 850
+      Height = 278
       Align = alClient
       Color = 16772842
       DataSource = DS_VerSaldos
@@ -272,7 +272,7 @@ object FSaldoInicial: TFSaldoInicial
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

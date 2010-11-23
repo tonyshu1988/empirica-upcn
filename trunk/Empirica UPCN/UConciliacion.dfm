@@ -527,8 +527,8 @@ object FConciliacion: TFConciliacion
           FontSize = 7
         end
         object QRShapeV1: TQRShape
-          Left = 0
-          Top = 0
+          Left = -1
+          Top = -1
           Width = 3
           Height = 16
           Frame.Color = clBlack
@@ -545,8 +545,8 @@ object FConciliacion: TFConciliacion
           VertAdjust = 0
         end
         object QRShapeV2: TQRShape
-          Left = 57
-          Top = 0
+          Left = 58
+          Top = -1
           Width = 3
           Height = 16
           Frame.Color = clBlack
@@ -564,7 +564,7 @@ object FConciliacion: TFConciliacion
         end
         object QRShapeV3: TQRShape
           Left = 131
-          Top = 0
+          Top = -1
           Width = 3
           Height = 16
           Frame.Color = clBlack
@@ -582,7 +582,7 @@ object FConciliacion: TFConciliacion
         end
         object QRShapeV4: TQRShape
           Left = 236
-          Top = 0
+          Top = -1
           Width = 3
           Height = 16
           Frame.Color = clBlack
@@ -599,8 +599,8 @@ object FConciliacion: TFConciliacion
           VertAdjust = 0
         end
         object QRShapeV5: TQRShape
-          Left = 474
-          Top = 0
+          Left = 475
+          Top = -1
           Width = 3
           Height = 16
           Frame.Color = clBlack
@@ -618,7 +618,7 @@ object FConciliacion: TFConciliacion
         end
         object QRShapeV6: TQRShape
           Left = 584
-          Top = 0
+          Top = -1
           Width = 3
           Height = 16
           Frame.Color = clBlack
@@ -638,7 +638,7 @@ object FConciliacion: TFConciliacion
           Left = 1
           Top = 14
           Width = 584
-          Height = 0
+          Height = 1
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False

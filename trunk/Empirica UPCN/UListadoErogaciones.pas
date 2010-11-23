@@ -192,6 +192,17 @@ begin
   TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[1]).ItemIndex:= MonthOf(DM.EKModelo.Fecha)-1;
   TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[2]).Valor:= IntToStr(YearOf(DM.EKModelo.Fecha));
 
+  if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
+  begin
+    ZQ_Cuentas.Filter:= 'ID_CUENTA = '+IntToStr(CuentaNro);
+    ZQ_Cuentas.Filtered:= true;
+  end
+  else  //si me logueo como administrador
+  begin
+    ZQ_Cuentas.Filter:= '';
+    ZQ_Cuentas.Filtered:= false;
+  end;
+
   lblNombreCuenta.Caption:= '';
   lblFechaDesde.Caption:= '';
   lblFechaHasta.Caption:= '';
