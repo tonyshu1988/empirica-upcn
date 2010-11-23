@@ -1,13 +1,23 @@
-Boton eliminar en ABM Medios de Cobro
-Mostrar el nro de medio de Cobro
-Títulos de Columna en Reportes al Medio
-Exportación de Excel en casi todas las pantallas
-Revisar el transporte en LE
-OK --///cambiar tipo doc en orden de pago
-Conciliacion bancaria (ver que se imprima bien)
-Ver ampliar el campo en la busqueda de cuenta
-Saldo total en Reportes Movim
+OK --////Boton eliminar en ABM Medios de Cobro.
+OK --////Mostrar el nro de medio de Cobro.
+OK --////Títulos de Columna en Reportes al Medio.
+		OK --////ABM Cuentas.
+		OK --////ABM Listado General.
+		OK --////Conciliacion.
+		OK --////LE.
 OK --////Que el Debito no lo pinte automaticamente.
+OK --////cambiar tipo doc en orden de pago.
+OK --////Conciliacion bancaria (ver que se imprima bien el mes de emision).
+OK --////Exportación de Excel en casi todas las pantallas.
+		OK --////ABM Libro Banco.
+		OK --////Reporte Libro Banco.
+		OK --////Conciliacion.
+		OK --////Listado Erogaciones.
+		Reporte Movimientos.
+Ver ampliar el campo en la busqueda de cuenta.
+Saldo total en Reportes Movimientos.
+Revisar el transporte en LE.
+
 
 
 
