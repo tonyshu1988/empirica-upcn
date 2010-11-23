@@ -21,14 +21,14 @@ object FReporteMovProveedor: TFReporteMovProveedor
     Left = 0
     Top = 0
     Width = 881
-    Height = 414
+    Height = 410
     Align = alClient
     TabOrder = 0
     object DBGridMercaderiaVendida: TDBGrid
       Left = 1
       Top = 212
       Width = 879
-      Height = 183
+      Height = 179
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 16772842
@@ -1577,7 +1577,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
     end
     object pResumen: TPanel
       Left = 1
-      Top = 395
+      Top = 391
       Width = 879
       Height = 18
       Align = alBottom
@@ -1679,7 +1679,6 @@ object FReporteMovProveedor: TFReporteMovProveedor
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False
-    VerExpExel = False
     Left = 616
     Top = 338
   end
