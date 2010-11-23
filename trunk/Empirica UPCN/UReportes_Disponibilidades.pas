@@ -415,43 +415,49 @@ begin
     DBGridLibroBanco.Columns[5].Visible := true;
 
   if not CBProveedor.Checked then  //proveedor
-    DBGridLibroBanco.Columns[6].Visible := false
+  begin
+    DBGridLibroBanco.Columns[6].Visible := false;
+    DBGridLibroBanco.Columns[7].Visible := false;
+  end
   else
+  begin
     DBGridLibroBanco.Columns[6].Visible := true;
+    DBGridLibroBanco.Columns[7].Visible := true;
+  end;
 
   if not CBConcepto.Checked then  //concepto
-    DBGridLibroBanco.Columns[8].Visible := false
-  else
-    DBGridLibroBanco.Columns[8].Visible := true;
-
-  if not CBNroFactura.Checked then //factura
     DBGridLibroBanco.Columns[9].Visible := false
   else
     DBGridLibroBanco.Columns[9].Visible := true;
 
-  if not CBrecibo.Checked then //Recibo
+  if not CBNroFactura.Checked then //factura
     DBGridLibroBanco.Columns[10].Visible := false
   else
     DBGridLibroBanco.Columns[10].Visible := true;
 
-  if not CBFechaConciliado.Checked then //conciliado
-    DBGridLibroBanco.Columns[15].Visible := false
+  if not CBrecibo.Checked then //Recibo
+    DBGridLibroBanco.Columns[11].Visible := false
   else
-    DBGridLibroBanco.Columns[15].Visible := true;
+    DBGridLibroBanco.Columns[11].Visible := true;
+
+  if not CBFechaConciliado.Checked then //conciliado
+    DBGridLibroBanco.Columns[16].Visible := false
+  else
+    DBGridLibroBanco.Columns[16].Visible := true;
 
   //filtro los anulados para que se vean o no
   if verAnulados.Checked then
     begin
       LIBRO_BANCO.Filtered:=False;
       LIBRO_BANCO.Filter:='';
-      DBGridLibroBanco.Columns[7].Visible := true;
+      DBGridLibroBanco.Columns[8].Visible := true;
     end
   else
     begin
       LIBRO_BANCO.Filtered:=False;
       LIBRO_BANCO.Filter:= Format('CTA_MOV_ANULADO<>%s',[quotedStr('A')]);
       LIBRO_BANCO.Filtered:=True;
-      DBGridLibroBanco.Columns[7].Visible := false;
+      DBGridLibroBanco.Columns[8].Visible := false;
     end;
 
   PFiltrosColumnas.Visible:=false;

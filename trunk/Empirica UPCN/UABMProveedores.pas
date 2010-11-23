@@ -49,8 +49,6 @@ type
     QRLabel88: TQRLabel;
     QRLabel89: TQRLabel;
     QRBand1: TQRBand;
-    QRSysData4: TQRSysData;
-    QRLabel5: TQRLabel;
     QRDBText1: TQRDBText;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
     ZQ_TipoDocumentoTIPO_DOCUMENTO: TIntegerField;
@@ -166,6 +164,7 @@ type
     ZQ_TipoFacturaID_TIPO_FACTURA: TIntegerField;
     ZQ_TipoFacturaDESCRIPCION: TStringField;
     ZQ_IE_Proveedores_Tipo: TStringField;
+    QRExpr15: TQRExpr;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -263,7 +262,7 @@ begin
   if ZQ_IE_Proveedores.IsEmpty OR (ZQ_IE_ProveedoresEDITABLE.AsString='N') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea dar de baja el Proveedor?'), 'ABM Proveedores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea dar de baja la Entidad seleccionada?'), 'ABM Listado General', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores]) then
     begin
@@ -290,7 +289,7 @@ begin
   if ZQ_IE_Proveedores.IsEmpty then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea Reactivar el Proveedor?'), 'ABM Proveedores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea Reactivar la Entidad seleccionada?'), 'ABM Listado General', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores]) then
     begin
@@ -422,7 +421,7 @@ begin
 
    if (DBENombreApellido.Text = '') then
     begin
-      Application.MessageBox('El campo "Nombre y Apellido" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox('El campo "Denominacion" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
       PageControl1.ActivePageIndex:= 0;
       DBENombreApellido.SetFocus;
       result := false;

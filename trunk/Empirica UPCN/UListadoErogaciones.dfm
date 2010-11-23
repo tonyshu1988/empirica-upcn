@@ -1,9 +1,9 @@
 object FListadoErogaciones: TFListadoErogaciones
-  Left = 25
-  Top = 115
-  Width = 1130
+  Left = 240
+  Top = 174
+  Width = 993
   Height = 565
-  Caption = 'Listado Erogaciones en Cumplimiento'
+  Caption = 'Listado Erogaciones'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,16 +24,16 @@ object FListadoErogaciones: TFListadoErogaciones
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1114
-    Height = 479
+    Width = 977
+    Height = 475
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
     TabOrder = 4
     object RepErog: TQuickRep
       Tag = 99
-      Left = 91
-      Top = 123
+      Left = 19
+      Top = 19
       Width = 952
       Height = 1347
       Frame.Color = clBlack
@@ -407,9 +407,9 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            33.674242424242420000
+            33.072916666666670000
             1600.729166666667000000
-            2.405303030303030000
+            2.204861111111111000
             291.041666666666700000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -433,9 +433,9 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            33.674242424242420000
-            1298.863636363636000000
-            2.405303030303030000
+            33.072916666666670000
+            1298.663194444444000000
+            2.204861111111111000
             291.041666666666700000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -661,9 +661,9 @@ object FListadoErogaciones: TFListadoErogaciones
           FontSize = 7
         end
         object QRLabel21: TQRLabel
-          Left = 613
+          Left = 589
           Top = 1
-          Width = 95
+          Width = 132
           Height = 16
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -672,12 +672,12 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawRight = False
           Size.Values = (
             35.277777777777780000
-            1351.579861111111000000
+            1298.663194444444000000
             2.204861111111111000
-            209.461805555555600000)
-          Alignment = taRightJustify
+            291.041666666666700000)
+          Alignment = taCenter
           AlignToBand = False
-          AutoSize = True
+          AutoSize = False
           AutoStretch = True
           Caption = 'Pagos Diferidos'
           Color = clWhite
@@ -692,9 +692,9 @@ object FListadoErogaciones: TFListadoErogaciones
           FontSize = 7
         end
         object QRLabel27: TQRLabel
-          Left = 743
+          Left = 726
           Top = 1
-          Width = 102
+          Width = 132
           Height = 16
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -703,12 +703,12 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawRight = False
           Size.Values = (
             35.277777777777780000
-            1638.211805555556000000
+            1600.729166666667000000
             2.204861111111111000
-            224.895833333333300000)
-          Alignment = taRightJustify
+            291.041666666666700000)
+          Alignment = taCenter
           AlignToBand = False
-          AutoSize = True
+          AutoSize = False
           AutoStretch = True
           Caption = 'Pagos Corrientes'
           Color = clWhite
@@ -925,6 +925,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Top = 1
           Width = 135
           Height = 16
+          Enabled = False
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
@@ -1007,9 +1008,9 @@ object FListadoErogaciones: TFListadoErogaciones
           FontSize = 7
         end
         object QRLabel16: TQRLabel
-          Left = 184
+          Left = 182
           Top = 0
-          Width = 119
+          Width = 401
           Height = 16
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1017,11 +1018,11 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            404.812500000000000000
+            35.277777777777780000
+            401.284722222222200000
             0.000000000000000000
-            261.937500000000000000)
-          Alignment = taLeftJustify
+            884.149305555555600000)
+          Alignment = taCenter
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
@@ -1038,9 +1039,9 @@ object FListadoErogaciones: TFListadoErogaciones
           FontSize = 7
         end
         object QRLabel36: TQRLabel
-          Left = 101
+          Left = 91
           Top = 0
-          Width = 66
+          Width = 84
           Height = 16
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1048,10 +1049,10 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            222.250000000000000000
+            35.277777777777780000
+            200.642361111111100000
             0.000000000000000000
-            145.520833333333300000)
+            185.208333333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -1271,8 +1272,8 @@ object FListadoErogaciones: TFListadoErogaciones
     object DBGridListaErogacion: TDBGrid
       Left = 3
       Top = 58
-      Width = 1108
-      Height = 348
+      Width = 971
+      Height = 344
       Align = alClient
       Color = 16772842
       DataSource = DS_Libro_erogaciones
@@ -1397,18 +1398,18 @@ object FListadoErogaciones: TFListadoErogaciones
     object pDatos: TPanel
       Left = 3
       Top = 3
-      Width = 1108
+      Width = 971
       Height = 55
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
       DesignSize = (
-        1108
+        971
         55)
       object Shape1: TShape
         Left = 3
         Top = 4
-        Width = 1102
+        Width = 965
         Height = 22
         Anchors = [akLeft, akTop, akRight]
         Brush.Color = clGray
@@ -1418,7 +1419,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object Shape2: TShape
         Left = 3
         Top = 3
-        Width = 1102
+        Width = 965
         Height = 22
         Anchors = [akLeft, akTop, akRight]
         Brush.Color = clTeal
@@ -1427,7 +1428,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object Label2: TLabel
         Left = 0
         Top = 7
-        Width = 1102
+        Width = 965
         Height = 18
         Alignment = taCenter
         Anchors = [akLeft, akTop, akRight]
@@ -1444,7 +1445,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object Label1: TLabel
         Left = -1
         Top = 5
-        Width = 1102
+        Width = 965
         Height = 18
         Align = alCustom
         Alignment = taCenter
@@ -1470,7 +1471,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object lblNombreCuenta: TLabel
         Left = 52
         Top = 38
-        Width = 487
+        Width = 350
         Height = 13
         Anchors = [akLeft, akTop, akRight]
         AutoSize = False
@@ -1493,7 +1494,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object lblFechaDesde: TLabel
         Left = 423
         Top = 38
-        Width = 282
+        Width = 145
         Height = 13
         Anchors = [akLeft, akTop, akRight]
         AutoSize = False
@@ -1508,7 +1509,7 @@ object FListadoErogaciones: TFListadoErogaciones
       object lblFechaHasta: TLabel
         Left = 595
         Top = 38
-        Width = 282
+        Width = 145
         Height = 13
         Anchors = [akLeft, akTop, akRight]
         AutoSize = False
@@ -1529,7 +1530,7 @@ object FListadoErogaciones: TFListadoErogaciones
         Caption = 'Hasta:'
       end
       object StaticText1: TStaticText
-        Left = 1037
+        Left = 900
         Top = 38
         Width = 69
         Height = 17
@@ -1548,14 +1549,14 @@ object FListadoErogaciones: TFListadoErogaciones
     end
     object pResumen: TPanel
       Left = 3
-      Top = 406
-      Width = 1108
+      Top = 402
+      Width = 971
       Height = 18
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 2
       object lblSaldo: TLabel
-        Left = 1045
+        Left = 908
         Top = 0
         Width = 63
         Height = 18
@@ -1572,15 +1573,15 @@ object FListadoErogaciones: TFListadoErogaciones
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 3
-      Top = 424
-      Width = 1108
+      Top = 420
+      Width = 971
       Height = 52
       Align = alBottom
       Color = 8454016
       TabOrder = 3
       Visible = False
       object BtAplicarFiltrosColumnas: TButton
-        Left = 556
+        Left = 579
         Top = 13
         Width = 93
         Height = 26
@@ -1642,9 +1643,9 @@ object FListadoErogaciones: TFListadoErogaciones
         Tag = 99
         Left = 410
         Top = 7
-        Width = 102
+        Width = 144
         Height = 17
-        Caption = 'Denominaci'#243'n'
+        Caption = 'Denominaci'#243'n y Tipo'
         Checked = True
         State = cbChecked
         TabOrder = 5
@@ -1868,12 +1869,11 @@ object FListadoErogaciones: TFListadoErogaciones
       0
       52)
     object btnListadoErogaciones: TdxBarLargeButton
-      Caption = 'Ver Mes'
+      Caption = 'Buscar'
       Category = 0
-      Hint = 'Saldo actual de todas las Cuentas Bancarias'
+      Hint = 'Buscar el mes para el cual desea ver el listado de erogaciones'
       Visible = ivAlways
       ImageIndex = 29
-      ShortCut = 120
       OnClick = btnListadoErogacionesClick
       AutoGrayScale = False
     end
