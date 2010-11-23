@@ -251,7 +251,7 @@ begin
        raise Exception.Create('');
     except
       begin
-        Application.MessageBox('El Saldo inicial no se puede ser eliminado porque está siendo utilizado.','Atención',MB_OK+MB_ICONINFORMATION);
+        Application.MessageBox('El Saldo inicial seleccionado no puede ser eliminado porque está siendo utilizado.','Atención',MB_OK+MB_ICONINFORMATION);
         dm.EKModelo.cancelar_transaccion(transaccion_saldo);
       end
     end;
@@ -379,6 +379,19 @@ begin
   dm.EKModelo.abrir(ZQ_CuentaIngreso);
   dm.EKModelo.abrir(ZQ_VerSaldos);
   dm.EKModelo.abrir(ZQ_Medio);
+
+  if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
+  begin
+    ZQ_CuentaIngreso.Filter:= 'ID_CUENTA = '+IntToStr(CuentaNro);
+    ZQ_CuentaIngreso.Filtered:= true;
+    EKListadoCuentas.SQL[3]:='where ID_CUENTA = '+IntToStr(CuentaNro);
+  end
+  else  //si me logueo como administrador
+  begin
+    ZQ_CuentaIngreso.Filter:= '';
+    ZQ_CuentaIngreso.Filtered:= false;
+    EKListadoCuentas.SQL[3]:='';    
+  end;
 end;
 
 

@@ -787,6 +787,7 @@ object FConceptos: TFConceptos
   end
   object ZQ_IE_Conceptos: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_IE_ConceptosAfterScroll
     SQL.Strings = (
       'select *'
       'from IE_conceptos'

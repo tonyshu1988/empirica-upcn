@@ -44,6 +44,7 @@ type
 
 var
   DM: TDM;
+  CuentaNro: integer;
 
 implementation
 
@@ -57,10 +58,15 @@ begin
   SkinData1.Active:= true;
   Application.CreateForm(TFPrincipal, FPrincipal);
 
+  if EKUsrLogin1.PermisoAccionValor('ACCESO') = '' then
+    CuentaNro:= 0
+  else
+    CuentaNro:= StrToInt(EKUsrLogin1.PermisoAccionValor('ACCESO'));
+
   ZQ_Configuracion.Open;
   if ZQ_Configuracion.Locate('clave', 'iniciar_libro_banco',[]) then
     if (ZQ_ConfiguracionTEXTO.AsString = 'SI') then
-      if dm.EKUsrLogin1.PermisoAccionValor('ACCESO') <> '' then
+      if CuentaNro > 0 then
         FPrincipal.ABMMovimientos1.Click;
 end;
 

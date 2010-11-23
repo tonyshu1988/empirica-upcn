@@ -193,6 +193,17 @@ begin
   lblFechaExtracto.Caption:= '';
   lblSaldo.Caption:= '';
   lblDetalleExtracto.Caption:= '';
+
+  if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
+  begin
+    ZQ_Cuentas.Filter:= 'ID_CUENTA = '+IntToStr(CuentaNro);
+    ZQ_Cuentas.Filtered:= true;
+  end
+  else  //si me logueo como administrador
+  begin
+    ZQ_Cuentas.Filter:= '';
+    ZQ_Cuentas.Filtered:= false;
+  end;
 end;
 
 

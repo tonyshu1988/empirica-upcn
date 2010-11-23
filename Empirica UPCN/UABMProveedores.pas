@@ -365,7 +365,7 @@ end;
 
 procedure TFABMProveedores.FormCreate(Sender: TObject);
 begin
-//  EKOrdenarGrilla1.CargarConfigColunmas;
+  EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_TipoDocumento);
   dm.EKModelo.abrir(ZQ_TipoProveedor);
   dm.EKModelo.abrir(ZQ_CondicIVA);

@@ -84,6 +84,7 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnImprimirClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ZQ_IE_ConceptosAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -304,6 +305,20 @@ end;
 procedure TFConceptos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
+end;
+
+procedure TFConceptos.ZQ_IE_ConceptosAfterScroll(DataSet: TDataSet);
+begin
+  if ZQ_IE_ConceptosBAJA.AsString = 'S' then
+  begin
+    btBaja.Enabled:= false;
+    btReactivar.Enabled:= true;
+  end
+  else
+  begin
+    btBaja.Enabled:= true;
+    btReactivar.Enabled:= false;
+  end;
 end;
 
 end.

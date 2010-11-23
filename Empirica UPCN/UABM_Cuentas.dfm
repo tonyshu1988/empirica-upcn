@@ -748,6 +748,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Visible = True
         end
         item
+          Alignment = taRightJustify
           Expanded = False
           FieldName = 'NRO_CUENTA_BANCARIA'
           Title.Alignment = taCenter
@@ -1003,9 +1004,9 @@ object FABM_Cuentas: TFABM_Cuentas
       HotImageIndex = 6
     end
     object btnVerDetalle: TdxBarLargeButton
-      Caption = 'Ver Detalle'
+      Caption = 'Ver/Ocultar Detalle'
       Category = 0
-      Hint = 'Ver Detalle'
+      Hint = 'Ver/Ocultar Detalle'
       Visible = ivAlways
       ImageIndex = 69
       OnClick = btnVerDetalleClick
