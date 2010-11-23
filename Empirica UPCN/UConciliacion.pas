@@ -7,12 +7,12 @@ uses
   Dialogs, dxBar, dxBarExtItems, StdCtrls, ExtCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZStoredProcedure,
   EKBusquedaAvanzada, EKDbSuma, QuickRpt, QRCtrls, EKVistaPreviaQR,
-  EKOrdenarGrilla;
+  EKOrdenarGrilla, mxNativeExcel, mxExport;
 
 type
   TFConciliacion = class(TForm)
     PContenedor: TPanel;
-    DBGridListaErogacion: TDBGrid;
+    DBGridConciliacion: TDBGrid;
     pDatos: TPanel;
     Shape1: TShape;
     Shape2: TShape;
@@ -24,9 +24,8 @@ type
     lblFHasta: TLabel;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btnLibroBanco: TdxBarLargeButton;
+    btnExcel: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    btn2: TdxBarLargeButton;
     btImprimir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
@@ -127,7 +126,6 @@ type
     lblFechaExtracto: TLabel;
     QRlblMesEmision: TQRLabel;
     QRLabel9: TQRLabel;
-    QRShape6: TQRShape;
     ZSP_LibroBancoNRO_MEDIO: TStringField;
     ZSP_LibroBancoOTROS: TStringField;
     ZSP_LibroBancoFECHA_CONCILIADO: TDateField;
@@ -145,6 +143,15 @@ type
     ZSP_ConciliacionFECHA_CONCILIADO: TDateField;
     ZSP_LibroBancoTIPO_PROVEEDOR: TStringField;
     ZSP_ConciliacionTIPO_PROVEEDOR: TStringField;
+    mxDBGridExport: TmxDBGridExport;
+    mxNativeExcel1: TmxNativeExcel;
+    QRShapeV1: TQRShape;
+    QRShapeV2: TQRShape;
+    QRShapeV3: TQRShape;
+    QRShapeV4: TQRShape;
+    QRShapeV5: TQRShape;
+    QRShapeV6: TQRShape;
+    QRShapeH1: TQRShape;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
@@ -154,10 +161,14 @@ type
     procedure imprimirMesReporte();
     procedure QRBandDetalleBeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
+    procedure btnExcelClick(Sender: TObject);
+    procedure RepConciliacionBeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
   private
 
   public
     aux_fecha:string;
+    aux_imprimir: Integer;
   end;
 
 var
@@ -256,8 +267,10 @@ end;
 
 procedure TFConciliacion.btImprimirClick(Sender: TObject);
 begin
-  if ZSP_Conciliacion.IsEmpty then exit;
+  if ZSP_Conciliacion.IsEmpty then
+    exit;
 
+  aux_fecha:= '';
   qrSaldoLibroBanco.Caption:=lblSaldo.Caption;
   QRLblTituloReporte.Caption:= 'CONCILIACION BANCARIA AL '+lblFHasta.Caption;
   qrSaldoConciliacion.Caption:=lblSaldoConciliacion.Caption;
@@ -266,7 +279,6 @@ begin
   qrsaldoEB.Caption:=Format('Saldo s/ Extracto Bancario al %s %s',[lblFechaExtracto.Caption,lblDetalleExtracto.Caption]);
   qrsaldoC.Caption:=Format('Saldo s/ Conciliación al %s',[lblFechaConciliacion.Caption]);
   dm.VariablesReportes(RepConciliacion);
-
   EKVistaPreviaQR1.VistaPrevia;
 end;
 
@@ -295,10 +307,24 @@ begin
     QRlblMesEmision.Caption:= '';
 end;
 
+
 procedure TFConciliacion.QRBandDetalleBeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
 begin
   imprimirMesReporte;
+end;
+
+
+procedure TFConciliacion.btnExcelClick(Sender: TObject);
+begin
+  if not ZSP_Conciliacion.IsEmpty then
+    mxDBGridExport.Select;
+end;
+
+procedure TFConciliacion.RepConciliacionBeforePrint(
+  Sender: TCustomQuickRep; var PrintReport: Boolean);
+begin
+  aux_fecha:= '';
 end;
 
 end.

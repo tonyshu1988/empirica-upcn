@@ -357,43 +357,49 @@ begin
   else
     DBGridListaErogacion.Columns[2].Visible := true;
 
-  if not CBFechaConciliado.Checked then //conciliado
+  if not CBFechaConciliado.Checked then //fecha conciliado
     DBGridListaErogacion.Columns[3].Visible := false
   else
     DBGridListaErogacion.Columns[3].Visible := true;
 
   if not CBProveedor.Checked then  //proveedor
-    DBGridListaErogacion.Columns[4].Visible := false
+  begin
+    DBGridListaErogacion.Columns[4].Visible := false;
+    DBGridListaErogacion.Columns[5].Visible := false;
+  end
   else
+  begin
     DBGridListaErogacion.Columns[4].Visible := true;
+    DBGridListaErogacion.Columns[5].Visible := true;
+  end;
 
   if not CBConcepto.Checked then  //concepto
-    DBGridListaErogacion.Columns[5].Visible := false
-  else
-    DBGridListaErogacion.Columns[5].Visible := true;
-
-  if not CBMedio.Checked then  //medio
     DBGridListaErogacion.Columns[6].Visible := false
   else
     DBGridListaErogacion.Columns[6].Visible := true;
 
-  if not CBNroMedio.Checked then  //nro cheque/transf
+  if not CBMedio.Checked then  //medio
     DBGridListaErogacion.Columns[7].Visible := false
   else
     DBGridListaErogacion.Columns[7].Visible := true;
 
-  if not CBNroFactura.Checked then //factura
+  if not CBNroMedio.Checked then  //nro cheque/transf
     DBGridListaErogacion.Columns[8].Visible := false
   else
     DBGridListaErogacion.Columns[8].Visible := true;
 
-  if not CBrecibo.Checked then //Recibo
+  if not CBNroFactura.Checked then //factura
     DBGridListaErogacion.Columns[9].Visible := false
   else
     DBGridListaErogacion.Columns[9].Visible := true;
 
+  if not CBrecibo.Checked then //Recibo
+    DBGridListaErogacion.Columns[10].Visible := false
+  else
+    DBGridListaErogacion.Columns[10].Visible := true;
+
   PFiltrosColumnas.Visible:= false;
-  
+
   GuardarOpcionesFiltrado;
 end;
 

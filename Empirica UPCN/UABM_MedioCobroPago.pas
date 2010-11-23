@@ -20,7 +20,7 @@ type
     dxBarABM: TdxBarManager;
     BtNuevo: TdxBarLargeButton;
     BtModificar: TdxBarLargeButton;
-    btBaja: TdxBarLargeButton;
+    btnEliminar: TdxBarLargeButton;
     btBuscar: TdxBarLargeButton;
     BtGuardar: TdxBarLargeButton;
     BtCancelar: TdxBarLargeButton;
@@ -50,6 +50,7 @@ type
     procedure BtCancelarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
+    procedure btnEliminarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -157,6 +158,30 @@ end;
 procedure TFABM_MedioCobroPago.FormCreate(Sender: TObject);
 begin
   dm.EKModelo.abrir(ZQ_MedioCobroPago);
+end;
+
+procedure TFABM_MedioCobroPago.btnEliminarClick(Sender: TObject);
+begin
+  if (ZQ_MedioCobroPago.IsEmpty) or (ZQ_MedioCobroPagoEDITABLE.AsString='N') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Esta seguro que desea eliminar el Medio seleccionado?                        ' + #13 + #13), 'Eliminar Medio', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  begin
+    if dm.EKModelo.iniciar_transaccion(Transaccion_Medios, [ZQ_MedioCobroPago]) then
+      ZQ_MedioCobroPago.Delete
+    else
+      exit;
+    try
+      if not (dm.EKModelo.finalizar_transaccion(Transaccion_Medios)) then
+        dm.EKModelo.cancelar_transaccion(Transaccion_Medios);
+
+    except
+      begin
+        Application.MessageBox('El Medio seleccionado no se puede borrar porque depende de otras tablas','Atención',MB_OK+MB_ICONINFORMATION);
+        dm.EKModelo.cancelar_transaccion(Transaccion_Medios);
+      end
+    end;
+  end;
 end;
 
 end.

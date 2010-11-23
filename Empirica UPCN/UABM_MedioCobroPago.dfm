@@ -1,6 +1,6 @@
 object FABM_MedioCobroPago: TFABM_MedioCobroPago
   Tag = 1
-  Left = 353
+  Left = 285
   Top = 194
   Width = 870
   Height = 500
@@ -24,7 +24,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     Left = 0
     Top = 0
     Width = 854
-    Height = 414
+    Height = 410
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 0
@@ -32,7 +32,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
       Left = 1
       Top = 20
       Width = 852
-      Height = 355
+      Height = 351
       Align = alClient
       Color = 16772842
       DataSource = DS_MedioCobroPago
@@ -46,9 +46,17 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
       Columns = <
         item
           Expanded = False
+          FieldName = 'ID_MEDIO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. ID'
+          Width = 59
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'CODIGO_CORTO'
           Title.Alignment = taCenter
-          Title.Caption = 'Codigo Corto'
+          Title.Caption = 'C'#243'digo Corto'
           Width = 90
           Visible = True
         end
@@ -105,7 +113,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     end
     object pDatos: TPanel
       Left = 1
-      Top = 375
+      Top = 371
       Width = 852
       Height = 38
       Align = alBottom
@@ -131,7 +139,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
         Top = 13
         Width = 68
         Height = 13
-        Caption = 'Cod. Corto:'
+        Caption = 'C'#243'd. Corto:'
         Transparent = True
       end
       object Label3: TLabel
@@ -304,6 +312,10 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
             Visible = True
           end
           item
+            Item = btnEliminar
+            Visible = True
+          end
+          item
             BeginGroup = True
             Item = BtGuardar
             Visible = True
@@ -334,6 +346,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     Categories.Visibles = (
       True)
     HideFloatingBarsWhenInactive = False
+    Images = FPrincipal.Iconos_Barra_32
     LargeImages = FPrincipal.Iconos_Barra_32
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
@@ -369,13 +382,13 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
       OnClick = BtModificarClick
       AutoGrayScale = False
     end
-    object btBaja: TdxBarLargeButton
-      Caption = 'Baja'
+    object btnEliminar: TdxBarLargeButton
+      Caption = 'Eliminar'
       Category = 0
-      Hint = 'Da de baja un registro'
+      Hint = 'Eliminar el registro actual'
       Visible = ivAlways
-      ImageIndex = 25
-      ShortCut = 115
+      ImageIndex = 2
+      OnClick = btnEliminarClick
       AutoGrayScale = False
     end
     object btBuscar: TdxBarLargeButton
@@ -456,7 +469,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
         'BtModificar'
         'btBuscar'
         'Bt_Seleccionar'
-        'btBaja'
+        'btnEliminar'
         'btBajar'
         'bt_salir'
         'btReactivar'
