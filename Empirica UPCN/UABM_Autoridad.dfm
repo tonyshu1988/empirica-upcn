@@ -27,12 +27,11 @@ object FABM_Autoridad: TFABM_Autoridad
     Height = 410
     Align = alClient
     BevelOuter = bvNone
-    BorderWidth = 2
     TabOrder = 0
     object pDatos: TPanel
-      Left = 2
-      Top = 367
-      Width = 871
+      Left = 0
+      Top = 369
+      Width = 875
       Height = 41
       Align = alBottom
       BevelOuter = bvNone
@@ -88,10 +87,10 @@ object FABM_Autoridad: TFABM_Autoridad
       end
     end
     object dbGridAutoridad: TDBGrid
-      Left = 2
-      Top = 2
-      Width = 871
-      Height = 365
+      Left = 0
+      Top = 0
+      Width = 875
+      Height = 369
       Align = alClient
       Color = 16772842
       DataSource = DS_Autoridad
