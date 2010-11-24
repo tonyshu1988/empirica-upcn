@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 2
-  Top = 23
+  Left = 299
+  Top = 170
   Width = 1237
   Height = 758
   Caption = 'Libro Banco'
@@ -103,7 +103,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          526.961805555555600000
+          526.961805555555700000
           1898.385416666667000000)
         BandType = rbDetail
         object QRDBText30: TQRDBText
@@ -149,7 +149,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
+            37.482638888888890000
             13.229166666666670000
             66.145833333333340000
             255.763888888888900000)
@@ -180,8 +180,8 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
-            97.013888888888880000
+            37.482638888888890000
+            97.013888888888890000
             112.447916666666700000
             171.979166666666700000)
           Alignment = taRightJustify
@@ -307,7 +307,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
+            37.482638888888890000
             136.701388888888900000
             15.434027777777780000
             132.291666666666700000)
@@ -501,8 +501,8 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
-            97.013888888888880000
+            37.482638888888890000
+            97.013888888888890000
             224.895833333333300000
             171.979166666666700000)
           Alignment = taRightJustify
@@ -532,8 +532,8 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
-            8.819444444444444000
+            37.482638888888890000
+            8.819444444444445000
             480.659722222222300000
             216.076388888888900000)
           Alignment = taLeftJustify
@@ -595,7 +595,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
+            37.482638888888890000
             926.041666666666600000
             480.659722222222300000
             198.437500000000000000)
@@ -694,7 +694,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
+            37.482638888888890000
             55.121527777777790000
             282.222222222222200000
             213.871527777777800000)
@@ -757,10 +757,10 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
-            61.736111111111120000
+            37.482638888888890000
+            61.736111111111110000
             160.954861111111100000
-            207.256944444444400000)
+            207.256944444444500000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = True
@@ -819,10 +819,10 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
+            37.482638888888890000
             1091.406250000000000000
             66.145833333333340000
-            88.194444444444450000)
+            88.194444444444460000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1110,7 +1110,7 @@ object FMovimientos: TFMovimientos
           Size.Values = (
             50.711805555555560000
             1523.559027777778000000
-            8.819444444444444000
+            8.819444444444445000
             348.368055555555600000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -1212,7 +1212,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
+            37.482638888888890000
             414.513888888888900000
             2.204861111111111000
             103.628472222222200000)
@@ -1305,7 +1305,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
+            37.482638888888890000
             24.253472222222220000
             2.204861111111111000
             180.798611111111100000)
@@ -1662,7 +1662,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          41.892361111111120000
+          41.892361111111110000
           1898.385416666667000000)
         BandType = rbPageFooter
       end
@@ -1866,7 +1866,7 @@ object FMovimientos: TFMovimientos
             52.916666666666670000
             1045.104166666667000000
             31.750000000000000000
-            679.979166666666800000)
+            679.979166666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -3155,7 +3155,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            76.729166666666680000
+            76.729166666666670000
             156.104166666666700000
             171.979166666666700000)
           Alignment = taRightJustify
@@ -3507,7 +3507,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            76.729166666666680000
+            76.729166666666670000
             267.229166666666700000
             171.979166666666700000)
           Alignment = taLeftJustify
@@ -3854,7 +3854,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            997.479166666666800000
+            997.479166666666900000
             2.645833333333333000
             343.958333333333400000)
           Alignment = taCenter
