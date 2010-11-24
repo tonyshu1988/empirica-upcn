@@ -343,7 +343,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = DS_Proveedores
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
         OnKeyUp = DBEditNroProveedorKeyUp
       end
       object DBMemoDescripcion: TDBMemo
@@ -360,7 +360,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 9
       end
       object DBLUpCBoxConcepto: TDBLookupComboBox
         Left = 168
@@ -379,7 +379,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = DS_Conceptos
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 6
         OnKeyUp = DBEditNroConceptoKeyUp
       end
       object DBLUpCBoxCuenta: TDBLookupComboBox
@@ -412,7 +412,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 7
       end
       object DBEditNroRecibo: TDBEdit
         Left = 456
@@ -427,7 +427,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 8
       end
       object dbFechaEmision: TEKDBDateTimePicker
         Left = 92
@@ -483,7 +483,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'COD_CORTO'
         ListSource = DS_Conceptos
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
         OnKeyUp = DBEditNroConceptoKeyUp
       end
       object DBLookupComboBox2: TDBLookupComboBox
@@ -503,7 +503,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'TIPO_PROVEEDOR'
         ListSource = DS_Proveedores
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 3
         OnKeyUp = DBEditNroProveedorKeyUp
       end
     end
