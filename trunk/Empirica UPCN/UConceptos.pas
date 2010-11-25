@@ -297,7 +297,7 @@ begin
   if ZQ_IE_Conceptos.IsEmpty then
     exit;
 
-  dm.VariablesReportes(RepCptos);
+  dm.TitulosReportes(RepCptos,CuentaNro);
 
   EKVistaPrevia.VistaPrevia;
 end;
