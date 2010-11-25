@@ -80,7 +80,7 @@ type
     RepConciliacion: TQuickRep;
     QRBand5: TQRBand;
     QRDBImage1: TQRDBImage;
-    QRLblTituloReporte: TQRLabel;
+    RepConciliacion_TITULO_CONCILIAC: TQRLabel;
     RepConciliacion_Reporte_Titulo_2: TQRLabel;
     RepConciliacion_Reporte_Titulo_1: TQRLabel;
     QRBandDetalle: TQRBand;
@@ -105,7 +105,6 @@ type
     QRLabel8: TQRLabel;
     QRLabel4: TQRLabel;
     qrSaldoLibroBanco: TQRLabel;
-    QRLabel1: TQRLabel;
     QRDBText1: TQRDBText;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     QRShape2: TQRShape;
@@ -283,7 +282,6 @@ begin
 
   aux_fecha:= '';
   qrSaldoLibroBanco.Caption:=lblSaldo.Caption;
-  QRLblTituloReporte.Caption:= 'CONCILIACION BANCARIA AL '+lblFHasta.Caption;
   qrSaldoConciliacion.Caption:=lblSaldoConciliacion.Caption;
   qrTotalHaber.Caption:=lblTotalHaber.Caption;
   qrExtracto.Caption:=lblSaldoExtracto.Caption;

@@ -42,7 +42,7 @@ type
     QRBand5: TQRBand;
     QRLabel41: TQRLabel;
     QRDBImage1: TQRDBImage;
-    QRLabel11: TQRLabel;
+    RepLibroB_TITULO_LB: TQRLabel;
     RepLibroB_Reporte_Titulo_2: TQRLabel;
     RepLibroB_Reporte_Titulo_1: TQRLabel;
     QRBand6: TQRBand;

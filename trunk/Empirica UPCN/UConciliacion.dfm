@@ -24,11 +24,349 @@ object FConciliacion: TFConciliacion
     Left = 0
     Top = 0
     Width = 1025
-    Height = 589
+    Height = 593
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
     TabOrder = 0
+    object DBGridConciliacion: TDBGrid
+      Left = 3
+      Top = 56
+      Width = 1019
+      Height = 488
+      Align = alClient
+      Color = 16772842
+      DataSource = DS_Conciliacion
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'FECHA_PD'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fecha PD'
+          Width = 84
+          Visible = True
+        end
+        item
+          Alignment = taRightJustify
+          Expanded = False
+          FieldName = 'NRO_MEDIO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro Cheque'
+          Width = 155
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PROVEEDOR'
+          Title.Alignment = taCenter
+          Title.Caption = 'Denominaci'#243'n'
+          Width = 373
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TIPO_PROVEEDOR'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo'
+          Width = 106
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'HABER'
+          Title.Alignment = taCenter
+          Title.Caption = 'Importe'
+          Width = 113
+          Visible = True
+        end>
+    end
+    object pDatos: TPanel
+      Left = 3
+      Top = 3
+      Width = 1019
+      Height = 53
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 1
+      DesignSize = (
+        1019
+        53)
+      object Shape1: TShape
+        Left = 3
+        Top = 4
+        Width = 1014
+        Height = 22
+        Anchors = [akLeft, akTop, akRight]
+        Brush.Color = clGray
+        Pen.Color = clGray
+        Shape = stRoundRect
+      end
+      object Shape2: TShape
+        Left = 3
+        Top = 3
+        Width = 1014
+        Height = 22
+        Anchors = [akLeft, akTop, akRight]
+        Brush.Color = clTeal
+        Shape = stRoundRect
+      end
+      object Label3: TLabel
+        Left = 4
+        Top = 33
+        Width = 46
+        Height = 13
+        Caption = 'Cuenta:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblNombreCuenta: TLabel
+        Left = 51
+        Top = 33
+        Width = 317
+        Height = 13
+        AutoSize = False
+        Caption = 'lblNombreCuenta'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 372
+        Top = 33
+        Width = 110
+        Height = 13
+        Caption = 'Fecha Conciliaci'#243'n:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblFHasta: TLabel
+        Left = 483
+        Top = 33
+        Width = 35
+        Height = 13
+        Caption = 'fecha'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 1
+        Top = 7
+        Width = 1017
+        Height = 18
+        Alignment = taCenter
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'CONCILIACION BANCARIA'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+      end
+      object Label1: TLabel
+        Left = 0
+        Top = 6
+        Width = 1017
+        Height = 18
+        Alignment = taCenter
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'CONCILIACION BANCARIA'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clInfoBk
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+      end
+      object Label5: TLabel
+        Left = 608
+        Top = 33
+        Width = 141
+        Height = 13
+        Caption = 'Saldo s/ Libro de Banco:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblSaldo: TLabel
+        Left = 754
+        Top = 33
+        Width = 20
+        Height = 13
+        Caption = '$ 0'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+    end
+    object Panel1: TPanel
+      Left = 3
+      Top = 544
+      Width = 1019
+      Height = 46
+      Align = alBottom
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
+      TabOrder = 2
+      object Label6: TLabel
+        Left = 604
+        Top = 8
+        Width = 90
+        Height = 14
+        Caption = 'Total Importe:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblTotalHaber: TLabel
+        Left = 701
+        Top = 8
+        Width = 22
+        Height = 14
+        Caption = '$ 0'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 47
+        Top = 6
+        Width = 152
+        Height = 16
+        Alignment = taRightJustify
+        Caption = 'Saldo s/ Conciliaci'#243'n al'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblSaldoConciliacion: TLabel
+        Left = 301
+        Top = 6
+        Width = 22
+        Height = 16
+        Caption = '$ 0'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 7
+        Top = 24
+        Width = 192
+        Height = 16
+        Alignment = taRightJustify
+        Caption = 'Saldo s/ Extracto Bancario al'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblSaldoExtracto: TLabel
+        Left = 301
+        Top = 24
+        Width = 22
+        Height = 16
+        Caption = '$ 0'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object lblDetalleExtracto: TLabel
+        Left = 380
+        Top = 28
+        Width = 286
+        Height = 13
+        AutoSize = False
+        Caption = 'fecha'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+        Visible = False
+      end
+      object lblFechaConciliacion: TLabel
+        Left = 208
+        Top = 6
+        Width = 81
+        Height = 16
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Fecha'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblFechaExtracto: TLabel
+        Left = 208
+        Top = 24
+        Width = 81
+        Height = 16
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Fecha'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+    end
     object RepConciliacion: TQuickRep
       Tag = 99
       Left = 169
@@ -122,7 +460,7 @@ object FConciliacion: TFConciliacion
             169.333333333333300000)
           DataField = 'GRAFICO'
         end
-        object QRLblTituloReporte: TQRLabel
+        object RepConciliacion_TITULO_CONCILIAC: TQRLabel
           Left = 241
           Top = 60
           Width = 236
@@ -277,10 +615,10 @@ object FConciliacion: TFConciliacion
           WordWrap = True
           FontSize = 9
         end
-        object QRLabel1: TQRLabel
-          Left = 95
-          Top = 100
-          Width = 54
+        object QRDBText1: TQRDBText
+          Left = 102
+          Top = 98
+          Width = 513
           Height = 17
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -289,41 +627,10 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             44.979166666666670000
-            251.354166666666700000
-            264.583333333333300000
-            142.875000000000000000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'Cuenta:'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 10
-        end
-        object QRDBText1: TQRDBText
-          Left = 152
-          Top = 98
-          Width = 436
-          Height = 17
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            44.097222222222220000
-            403.489583333333300000
-            260.173611111111100000
-            1153.142361111111000000)
-          Alignment = taLeftJustify
+            269.875000000000000000
+            259.291666666666700000
+            1357.312500000000000000)
+          Alignment = taCenter
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
@@ -1228,344 +1535,6 @@ object FConciliacion: TFConciliacion
           WordWrap = True
           FontSize = 11
         end
-      end
-    end
-    object DBGridConciliacion: TDBGrid
-      Left = 3
-      Top = 56
-      Width = 1019
-      Height = 484
-      Align = alClient
-      Color = 16772842
-      DataSource = DS_Conciliacion
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'FECHA_PD'
-          Title.Alignment = taCenter
-          Title.Caption = 'Fecha PD'
-          Width = 84
-          Visible = True
-        end
-        item
-          Alignment = taRightJustify
-          Expanded = False
-          FieldName = 'NRO_MEDIO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nro Cheque'
-          Width = 155
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'PROVEEDOR'
-          Title.Alignment = taCenter
-          Title.Caption = 'Denominaci'#243'n'
-          Width = 373
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TIPO_PROVEEDOR'
-          Title.Alignment = taCenter
-          Title.Caption = 'Tipo'
-          Width = 106
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'HABER'
-          Title.Alignment = taCenter
-          Title.Caption = 'Importe'
-          Width = 113
-          Visible = True
-        end>
-    end
-    object pDatos: TPanel
-      Left = 3
-      Top = 3
-      Width = 1019
-      Height = 53
-      Align = alTop
-      BevelOuter = bvNone
-      TabOrder = 1
-      DesignSize = (
-        1019
-        53)
-      object Shape1: TShape
-        Left = 3
-        Top = 4
-        Width = 1014
-        Height = 22
-        Anchors = [akLeft, akTop, akRight]
-        Brush.Color = clGray
-        Pen.Color = clGray
-        Shape = stRoundRect
-      end
-      object Shape2: TShape
-        Left = 3
-        Top = 3
-        Width = 1014
-        Height = 22
-        Anchors = [akLeft, akTop, akRight]
-        Brush.Color = clTeal
-        Shape = stRoundRect
-      end
-      object Label3: TLabel
-        Left = 4
-        Top = 33
-        Width = 46
-        Height = 13
-        Caption = 'Cuenta:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblNombreCuenta: TLabel
-        Left = 51
-        Top = 33
-        Width = 317
-        Height = 13
-        AutoSize = False
-        Caption = 'lblNombreCuenta'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-      object Label4: TLabel
-        Left = 372
-        Top = 33
-        Width = 110
-        Height = 13
-        Caption = 'Fecha Conciliaci'#243'n:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblFHasta: TLabel
-        Left = 483
-        Top = 33
-        Width = 35
-        Height = 13
-        Caption = 'fecha'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-      object Label2: TLabel
-        Left = 1
-        Top = 7
-        Width = 1017
-        Height = 18
-        Alignment = taCenter
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        Caption = 'CONCILIACION BANCARIA'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-      end
-      object Label1: TLabel
-        Left = 0
-        Top = 6
-        Width = 1017
-        Height = 18
-        Alignment = taCenter
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        Caption = 'CONCILIACION BANCARIA'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clInfoBk
-        Font.Height = -16
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-      end
-      object Label5: TLabel
-        Left = 608
-        Top = 33
-        Width = 141
-        Height = 13
-        Caption = 'Saldo s/ Libro de Banco:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblSaldo: TLabel
-        Left = 754
-        Top = 33
-        Width = 20
-        Height = 13
-        Caption = '$ 0'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-    end
-    object Panel1: TPanel
-      Left = 3
-      Top = 540
-      Width = 1019
-      Height = 46
-      Align = alBottom
-      BevelOuter = bvNone
-      BorderStyle = bsSingle
-      TabOrder = 2
-      object Label6: TLabel
-        Left = 604
-        Top = 8
-        Width = 90
-        Height = 14
-        Caption = 'Total Importe:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblTotalHaber: TLabel
-        Left = 701
-        Top = 8
-        Width = 22
-        Height = 14
-        Caption = '$ 0'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-      object Label7: TLabel
-        Left = 47
-        Top = 6
-        Width = 152
-        Height = 16
-        Alignment = taRightJustify
-        Caption = 'Saldo s/ Conciliaci'#243'n al'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblSaldoConciliacion: TLabel
-        Left = 301
-        Top = 6
-        Width = 22
-        Height = 16
-        Caption = '$ 0'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-      object Label8: TLabel
-        Left = 7
-        Top = 24
-        Width = 192
-        Height = 16
-        Alignment = taRightJustify
-        Caption = 'Saldo s/ Extracto Bancario al'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblSaldoExtracto: TLabel
-        Left = 301
-        Top = 24
-        Width = 22
-        Height = 16
-        Caption = '$ 0'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-      object lblDetalleExtracto: TLabel
-        Left = 380
-        Top = 28
-        Width = 286
-        Height = 13
-        AutoSize = False
-        Caption = 'fecha'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-        Visible = False
-      end
-      object lblFechaConciliacion: TLabel
-        Left = 208
-        Top = 6
-        Width = 81
-        Height = 16
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Fecha'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblFechaExtracto: TLabel
-        Left = 208
-        Top = 24
-        Width = 81
-        Height = 16
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Fecha'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
       end
     end
   end
