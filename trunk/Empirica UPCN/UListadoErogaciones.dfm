@@ -1,6 +1,6 @@
 object FListadoErogaciones: TFListadoErogaciones
-  Left = 240
-  Top = 174
+  Left = 253
+  Top = 215
   Width = 993
   Height = 565
   Caption = 'Listado Erogaciones'
@@ -25,7 +25,7 @@ object FListadoErogaciones: TFListadoErogaciones
     Left = 0
     Top = 0
     Width = 977
-    Height = 475
+    Height = 479
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -1273,7 +1273,7 @@ object FListadoErogaciones: TFListadoErogaciones
       Left = 3
       Top = 58
       Width = 971
-      Height = 344
+      Height = 348
       Align = alClient
       Color = 16772842
       DataSource = DS_Libro_erogaciones
@@ -1549,7 +1549,7 @@ object FListadoErogaciones: TFListadoErogaciones
     end
     object pResumen: TPanel
       Left = 3
-      Top = 402
+      Top = 406
       Width = 971
       Height = 18
       Align = alBottom
@@ -1573,11 +1573,11 @@ object FListadoErogaciones: TFListadoErogaciones
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 3
-      Top = 420
+      Top = 424
       Width = 971
       Height = 52
       Align = alBottom
-      Color = 8454016
+      Color = 11004820
       TabOrder = 3
       Visible = False
       object BtAplicarFiltrosColumnas: TButton
