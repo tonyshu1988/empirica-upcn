@@ -966,45 +966,23 @@ begin
   ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCOID_MOVIMIENTO.AsInteger;
   ZQ_Cuenta_Movimiento.Open;
 
-  //if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 2) or (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 3) then
-      //begin
-         if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') or (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then //si no esta conciliado
-         begin
-           PanelConciliar.Visible:= true;
-           BanderaConcialiar:= true;
-           LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Conciliar este movimiento?';
-           LabelFechaConciliacion.Visible:= true;
-           DTPFechaConciliar.Visible:=true;
-           DTPFechaConciliar.Date := dm.EKModelo.Fecha;
-
-//           if (application.MessageBox(pchar('¿Está seguro que desea Conciliar el movimiento seleccionado?'), 'Conciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//             if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
-//             begin
-//               ZQ_Cuenta_Movimiento.edit;
-//               ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'S';
-//               if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
-//                 DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
-//             end
-         end
-         else //si esta conciliado
-         begin
-           PanelConciliar.Visible:= true;
-           BanderaConcialiar:= false;
-           LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Desconciliar este movimiento?';
-           LabelFechaConciliacion.Visible:= false;
-           DTPFechaConciliar.Visible:=false;
-//           if (application.MessageBox(pchar('¿Está seguro que desea Desconciliar el movimiento seleccionado?'), 'Desconciliar', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//             if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
-//             begin
-//               ZQ_Cuenta_Movimiento.edit;
-//               ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
-//               if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
-//                 DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
-//             end;
-         end;
-//        btaplicar.Click;
-//        LIBRO_BANCO.Locate('ID_MOVIMIENTO',ZQ_Cuenta_MovimientoID.AsInteger,[]);
-      //end;
+   if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') or (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then //si no esta conciliado
+   begin
+     PanelConciliar.Visible:= true;
+     BanderaConcialiar:= true;
+     LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Conciliar este movimiento?';
+     LabelFechaConciliacion.Visible:= true;
+     DTPFechaConciliar.Visible:=true;
+     DTPFechaConciliar.Date := dm.EKModelo.Fecha;
+   end
+   else //si esta conciliado
+   begin
+     PanelConciliar.Visible:= true;
+     BanderaConcialiar:= false;
+     LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Desconciliar este movimiento?';
+     LabelFechaConciliacion.Visible:= false;
+     DTPFechaConciliar.Visible:=false;
+   end;
 end;
 
 
