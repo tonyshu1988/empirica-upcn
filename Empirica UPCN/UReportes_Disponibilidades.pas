@@ -289,7 +289,7 @@ begin
     lblLibBco_FHasta.Caption:= EKBAvanzadaLibroBco.ParametrosSelecReales1[2];
     lblLibBco_Oden.Caption:=   EKBAvanzadaLibroBco.ParametrosSelecReales1[3];
 
-    dm.VariablesReportes(RepLibroB);
+    dm.TitulosReportes(RepLibroB,CuentaNro);
 
     EKVistaPrevia_LibroBco.VistaPrevia;
   end;

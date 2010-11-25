@@ -410,7 +410,7 @@ begin
   if ZQ_IE_Proveedores.IsEmpty then
     exit;
 
-  dm.VariablesReportes(RepProv);
+  dm.TitulosReportes(RepProv,CuentaNro);
   EKVistaPreviaQR1.VistaPrevia;
 end;
 

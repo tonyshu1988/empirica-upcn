@@ -1164,7 +1164,7 @@ begin
   lblLibBco_FHasta.Caption:= DateToStr(DTPFechaHasta.Date);
   lblLibBco_Oden.Caption:=   ComboOrden.Text;
 
-  dm.VariablesReportes(RepLibroB);
+  dm.TitulosReportes(RepLibroB,CuentaNro);
 
   EKVistaPrevia_LibroBco.VistaPrevia;
 end;

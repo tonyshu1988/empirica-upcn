@@ -235,7 +235,7 @@ begin
   if ZQ_Cuentas.IsEmpty then
     exit;
 
-  dm.VariablesReportes(RepCtas);
+  dm.TitulosReportes(RepCtas,CuentaNro);
 
   EKVistaPrevia.VistaPrevia;
 end;
