@@ -1,8 +1,8 @@
 object FABMProveedores: TFABMProveedores
-  Left = 278
-  Top = 155
+  Left = 217
+  Top = 249
   Width = 945
-  Height = 592
+  Height = 581
   Caption = 'ABM Listado General'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -25,7 +25,7 @@ object FABMProveedores: TFABMProveedores
     Left = 0
     Top = 0
     Width = 929
-    Height = 506
+    Height = 495
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
@@ -711,7 +711,7 @@ object FABMProveedores: TFABMProveedores
       Left = 1
       Top = 20
       Width = 927
-      Height = 292
+      Height = 281
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -813,7 +813,7 @@ object FABMProveedores: TFABMProveedores
     end
     object PageControl1: TPageControl
       Left = 1
-      Top = 312
+      Top = 301
       Width = 927
       Height = 193
       ActivePage = TabSheet2
