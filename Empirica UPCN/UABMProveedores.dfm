@@ -25,7 +25,7 @@ object FABMProveedores: TFABMProveedores
     Left = 0
     Top = 0
     Width = 929
-    Height = 502
+    Height = 506
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
@@ -711,7 +711,7 @@ object FABMProveedores: TFABMProveedores
       Left = 1
       Top = 20
       Width = 927
-      Height = 288
+      Height = 292
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -813,7 +813,7 @@ object FABMProveedores: TFABMProveedores
     end
     object PageControl1: TPageControl
       Left = 1
-      Top = 308
+      Top = 312
       Width = 927
       Height = 193
       ActivePage = TabSheet2
