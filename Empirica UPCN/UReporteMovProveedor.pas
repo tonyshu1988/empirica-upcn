@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, QuickRpt, QRCtrls, Grids, DBGrids, ExtCtrls, dxBar,
   dxBarExtItems, EKVistaPreviaQR, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKBusquedaAvanzada, DBCtrls, StdCtrls;
+  ZDataset, EKBusquedaAvanzada, DBCtrls, StdCtrls, EKDbSuma;
 
 type
   TFReporteMovProveedor = class(TForm)
@@ -17,7 +17,6 @@ type
     QRLabel11: TQRLabel;
     QRGroup1: TQRGroup;
     QRDBText14: TQRDBText;
-    QRLabel12: TQRLabel;
     QRBand16: TQRBand;
     QRLabel2: TQRLabel;
     QRExpr4: TQRExpr;
@@ -149,7 +148,7 @@ type
     ZQ_MovimientoProveedoresNRO_ORDEN_STRING: TStringField;
     ZQ_MovimientoProveedoresANULADO: TStringField;
     pResumen: TPanel;
-    lblSaldo: TLabel;
+    lblDebe: TLabel;
     ZQ_MovimientoProveedoresCONCILIADO: TStringField;
     PanelFiltrosBusqueda: TPanel;
     GroupBox1: TGroupBox;
@@ -169,10 +168,20 @@ type
     ZQ_TipoProveedor: TZQuery;
     ZQ_TipoProveedorID_TIPO: TIntegerField;
     ZQ_TipoProveedorDESCRIPCION: TStringField;
+    ZQ_MovimientoProveedoresID_TIPO: TIntegerField;
+    ZQ_Tipo_Denominacion: TZQuery;
+    ZQ_Tipo_DenominacionID_TIPO: TIntegerField;
+    ZQ_Tipo_DenominacionDESCRIPCION: TStringField;
+    ZQ_MovimientoProveedorestipo_denominacion: TStringField;
+    QRDBText5: TQRDBText;
+    QRLabel8: TQRLabel;
+    QRLabel12: TQRLabel;
+    EKDbSuma: TEKDbSuma;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_MovimientoProveedoresCalcFields(DataSet: TDataSet);
+    procedure EKDbSumaSumListChanged(Sender: TObject);
   private
     { Private declarations }
   public
@@ -220,7 +229,7 @@ begin
   if ZQ_MovimientoProveedores.IsEmpty then
     exit;
 
-  dm.VariablesReportes(RepMovProveedores);
+  dm.TitulosReportes(RepMovProveedores, CuentaNro);
   EKVistaPreviaQR1.VistaPrevia;
 end;
 
@@ -253,18 +262,23 @@ begin
 
   case ZQ_MovimientoProveedoresID_MEDIO.AsInteger of
   1: begin  //ORDEN DE PAGO
-      ZQ_MovimientoProveedores_debe.AsFloat:= ZQ_MovimientoProveedoresIMPORTE.AsFloat;
-      ZQ_MovimientoProveedores_haber.Clear;
+      ZQ_MovimientoProveedores_haber.AsFloat:= ZQ_MovimientoProveedoresIMPORTE.AsFloat;
+      ZQ_MovimientoProveedores_debe.Clear;
      end;
   2: begin //INGRESO
-      ZQ_MovimientoProveedores_debe.Clear;
-      ZQ_MovimientoProveedores_haber.AsFloat:= ZQ_MovimientoProveedoresIMPORTE.AsFloat;
+      ZQ_MovimientoProveedores_haber.Clear;
+      ZQ_MovimientoProveedores_debe.AsFloat:= ZQ_MovimientoProveedoresIMPORTE.AsFloat;
      end;
   3: begin //EGRESO
-      ZQ_MovimientoProveedores_debe.AsFloat:= ZQ_MovimientoProveedoresIMPORTE.AsFloat;
-      ZQ_MovimientoProveedores_haber.Clear;
+      ZQ_MovimientoProveedores_haber.AsFloat:= ZQ_MovimientoProveedoresIMPORTE.AsFloat;
+      ZQ_MovimientoProveedores_debe.Clear;
      end;
   end;
+end;
+
+procedure TFReporteMovProveedor.EKDbSumaSumListChanged(Sender: TObject);
+begin
+lblDebe.Caption:= 'Total Debe: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma.SumCollection[0].SumValue)+'      Total Haber: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma.SumCollection[1].SumValue)+'  ';
 end;
 
 end.
