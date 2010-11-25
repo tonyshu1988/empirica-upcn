@@ -14,7 +14,7 @@ type
     DBGridMercaderiaVendida: TDBGrid;
     RepMovProveedores: TQuickRep;
     QRBand12: TQRBand;
-    QRLabel11: TQRLabel;
+    RepMovProveedores_TITULO_REPMOV: TQRLabel;
     QRGroup1: TQRGroup;
     QRDBText14: TQRDBText;
     QRBand16: TQRBand;
@@ -182,6 +182,7 @@ type
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_MovimientoProveedoresCalcFields(DataSet: TDataSet);
     procedure EKDbSumaSumListChanged(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -279,6 +280,20 @@ end;
 procedure TFReporteMovProveedor.EKDbSumaSumListChanged(Sender: TObject);
 begin
 lblDebe.Caption:= 'Total Debe: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma.SumCollection[0].SumValue)+'      Total Haber: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma.SumCollection[1].SumValue)+'  ';
+end;
+
+procedure TFReporteMovProveedor.FormCreate(Sender: TObject);
+begin
+  if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
+  begin
+    ZQ_MovimientoProveedores.Close;
+    ZQ_MovimientoProveedores.ParamByName('ID_CUENTA').AsInteger := (CuentaNro);
+
+  end
+  else  //si me logueo como administrador
+  begin
+    EKBusquedaAvanzada.UsarWhereOriginal := EK_Sin_Where;
+  end;
 end;
 
 end.

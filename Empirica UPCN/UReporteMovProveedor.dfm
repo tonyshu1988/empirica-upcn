@@ -15,6 +15,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
   Position = poDefault
   Scaled = False
   Visible = True
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -219,7 +220,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           230.187500000000000000
           2770.187500000000000000)
         BandType = rbPageHeader
-        object QRLabel11: TQRLabel
+        object RepMovProveedores_TITULO_REPMOV: TQRLabel
           Left = 428
           Top = 61
           Width = 190
@@ -264,7 +265,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
             52.916666666666670000
             1034.520833333333000000
             95.250000000000000000
-            701.145833333333300000)
+            701.145833333333200000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -295,7 +296,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
             52.916666666666670000
             920.750000000000000000
             31.750000000000000000
-            926.041666666666700000)
+            926.041666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -478,7 +479,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          68.791666666666670000
+          68.791666666666680000
           2770.187500000000000000)
         BandType = rbSummary
         object QRLabel2: TQRLabel
@@ -1754,21 +1755,37 @@ object FReporteMovProveedor: TFReporteMovProveedor
         'c, cm.nro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre' +
         '_medio_cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto' +
         ', c.nombre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id' +
-        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo'
+        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo, cp.id_cuent' +
+        'a'
       'from ie_movimientos m'
       
         'left join ie_cuentas_movimientos cm on(m.nro_movimiento = cm.nro' +
         '_movimiento)'
       'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
       
+        'left join proveedor_cuenta cp on(cp.id_proveedor = p.nro_proveed' +
+        'or)'
+      
         'left join objeto_movimientos ob on(m.id_objeto_movimiento = ob.i' +
         'd_objeto_movimiento)'
       'left join ie_medios_cobro_pago mc on(cm.id_medio = mc.id_medio)'
       'left join ie_conceptos c on (m.id_concepto = c.id_concepto)'
+      'where cp.id_cuenta = :ID_CUENTA'
       'order by m.fecha, m.nro_movimiento')
-    Params = <>
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_CUENTA'
+        ParamType = ptUnknown
+      end>
     Left = 64
     Top = 224
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_CUENTA'
+        ParamType = ptUnknown
+      end>
     object ZQ_MovimientoProveedoresFECHA_MDC: TDateField
       FieldName = 'FECHA_MDC'
     end
@@ -2238,12 +2255,6 @@ object FReporteMovProveedor: TFReporteMovProveedor
         TipoCombollenarCampoReal = 'nro_proveedor'
         TipoComboEditable = False
         ItemIndex = -1
-      end
-      item
-        Titulo = 'Sin Titulo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -2253,28 +2264,32 @@ object FReporteMovProveedor: TFReporteMovProveedor
         'select m.fecha, m.nro_proveedor, m.nro_orden_string, cm.fecha_md' +
         'c, cm.nro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre' +
         '_medio_cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto' +
-        ', c.nombre_concepto, ob.descripcion,  ob.id_objeto_movimiento, c' +
-        'm.id_cuenta_ingreso, cm.id_cuenta_egreso, m.anulado, cm.concilia' +
-        'do, p.id_tipo'
+        ', c.nombre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id' +
+        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo, cp.id_cuent' +
+        'a'
       'from ie_movimientos m'
       
         'left join ie_cuentas_movimientos cm on(m.nro_movimiento = cm.nro' +
         '_movimiento)'
       'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
       
+        'left join proveedor_cuenta cp on(cp.id_proveedor = p.nro_proveed' +
+        'or)'
+      
         'left join objeto_movimientos ob on(m.id_objeto_movimiento = ob.i' +
         'd_objeto_movimiento)'
       'left join ie_medios_cobro_pago mc on(cm.id_medio = mc.id_medio)'
       'left join ie_conceptos c on (m.id_concepto = c.id_concepto)'
+      'where cp.id_cuenta = :ID_CUENTA'
       'order by m.fecha, m.nro_movimiento')
     SQL_Select.Strings = (
       
         'select m.fecha, m.nro_proveedor, m.nro_orden_string, cm.fecha_md' +
         'c, cm.nro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre' +
         '_medio_cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto' +
-        ', c.nombre_concepto, ob.descripcion,  ob.id_objeto_movimiento, c' +
-        'm.id_cuenta_ingreso, cm.id_cuenta_egreso, m.anulado, cm.concilia' +
-        'do, p.id_tipo')
+        ', c.nombre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id' +
+        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo, cp.id_cuent' +
+        'a')
     SQL_From.Strings = (
       'from ie_movimientos m'
       
@@ -2282,13 +2297,18 @@ object FReporteMovProveedor: TFReporteMovProveedor
         '_movimiento)'
       'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
       
+        'left join proveedor_cuenta cp on(cp.id_proveedor = p.nro_proveed' +
+        'or)'
+      
         'left join objeto_movimientos ob on(m.id_objeto_movimiento = ob.i' +
         'd_objeto_movimiento)'
       'left join ie_medios_cobro_pago mc on(cm.id_medio = mc.id_medio)'
       'left join ie_conceptos c on (m.id_concepto = c.id_concepto)')
+    SQL_Where.Strings = (
+      'where cp.id_cuenta = :ID_CUENTA')
     SQL_Orden.Strings = (
       'order by m.fecha, m.nro_movimiento')
-    UsarWhereOriginal = EK_Sin_Where
+    UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 64
     Top = 336
@@ -2414,8 +2434,8 @@ object FReporteMovProveedor: TFReporteMovProveedor
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from ie_proveedores'
-      'where nro_proveedor = :id_prov')
+      'from ie_proveedores p'
+      'where p.nro_proveedor = :id_prov')
     Params = <
       item
         DataType = ftUnknown
