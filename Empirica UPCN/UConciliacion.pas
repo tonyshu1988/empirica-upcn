@@ -289,7 +289,7 @@ begin
   qrExtracto.Caption:=lblSaldoExtracto.Caption;
   qrsaldoEB.Caption:=Format('Saldo s/ Extracto Bancario al %s %s',[lblFechaExtracto.Caption,lblDetalleExtracto.Caption]);
   qrsaldoC.Caption:=Format('Saldo s/ Conciliación al %s',[lblFechaConciliacion.Caption]);
-  dm.VariablesReportes(RepConciliacion);
+  dm.TitulosReportes(RepConciliacion,CuentaNro);
   EKVistaPreviaQR1.VistaPrevia;
 end;
 

@@ -328,9 +328,8 @@ begin
   QRlblTotalDiferidos.Caption:= FormatFloat('$ ###,###,##0.00', diferido);
   QRlblTotalCorrientes.Caption:= FormatFloat('$ ###,###,##0.00', corriente);
 
-  dm.VariablesReportes(RepErog);
+  dm.TitulosReportes(RepErog,CuentaNro);
 
-  dm.TitulosReportes(RepErog,StrToInt(EKBAvanzadaListadoErog.ParametrosSeleccionados1[0]));
   EKVistaPrevia.VistaPrevia;
 end;
 
