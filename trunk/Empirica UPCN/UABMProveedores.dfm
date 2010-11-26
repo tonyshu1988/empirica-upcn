@@ -1,8 +1,8 @@
 object FABMProveedores: TFABMProveedores
-  Left = 217
-  Top = 249
-  Width = 945
-  Height = 581
+  Left = 226
+  Top = 221
+  Width = 1038
+  Height = 669
   Caption = 'ABM Listado General'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -24,8 +24,8 @@ object FABMProveedores: TFABMProveedores
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 929
-    Height = 495
+    Width = 1022
+    Height = 583
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
@@ -710,8 +710,8 @@ object FABMProveedores: TFABMProveedores
     object DBGridProveedores: TDBGrid
       Left = 1
       Top = 20
-      Width = 927
-      Height = 281
+      Width = 1020
+      Height = 369
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -775,7 +775,7 @@ object FABMProveedores: TFABMProveedores
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 927
+      Width = 1020
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -797,7 +797,7 @@ object FABMProveedores: TFABMProveedores
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 817
+        Left = 910
         Top = 1
         Width = 109
         Height = 17
@@ -813,8 +813,8 @@ object FABMProveedores: TFABMProveedores
     end
     object PageControl1: TPageControl
       Left = 1
-      Top = 301
-      Width = 927
+      Top = 389
+      Width = 1020
       Height = 193
       ActivePage = TabSheet2
       Align = alBottom
@@ -824,7 +824,7 @@ object FABMProveedores: TFABMProveedores
         object Panel_edicion: TPanel
           Left = 0
           Top = 2
-          Width = 919
+          Width = 1012
           Height = 163
           Align = alBottom
           Enabled = False
@@ -1123,7 +1123,7 @@ object FABMProveedores: TFABMProveedores
             Height = 148
             Align = alClient
             Color = 16772842
-            DataSource = DS_CuentasA
+            DataSource = DS_ProvCtas
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
             TitleFont.Charset = ANSI_CHARSET
@@ -1136,31 +1136,25 @@ object FABMProveedores: TFABMProveedores
             Columns = <
               item
                 Expanded = False
-                FieldName = 'NOMBRE_CUENTA'
-                Title.Alignment = taCenter
-                Title.Caption = 'Nombre'
-                Width = 309
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'NRO_CUENTA_BANCARIA'
-                Title.Alignment = taCenter
-                Title.Caption = 'N'#250'mero'
-                Width = 147
+                FieldName = 'ID'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'ID_PROVEEDOR'
-                Visible = False
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_CUENTA'
+                Visible = True
               end>
           end
         end
         object GBoxConceptosAsig: TGroupBox
           Left = 497
           Top = 0
-          Width = 422
+          Width = 515
           Height = 165
           Align = alClient
           Caption = ' Conceptos Asignados '
@@ -1168,11 +1162,11 @@ object FABMProveedores: TFABMProveedores
           object DBGridConceptos: TDBGrid
             Left = 2
             Top = 15
-            Width = 418
+            Width = 511
             Height = 148
             Align = alClient
             Color = 16772842
-            DataSource = DS_Conceptos
+            DataSource = DS_ProvConceptos
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
             TitleFont.Charset = ANSI_CHARSET
@@ -1185,24 +1179,18 @@ object FABMProveedores: TFABMProveedores
             Columns = <
               item
                 Expanded = False
-                FieldName = 'COD_CORTO'
-                Title.Alignment = taCenter
-                Title.Caption = 'C'#243'digo'
-                Width = 80
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'NOMBRE_CONCEPTO'
-                Title.Alignment = taCenter
-                Title.Caption = 'Nombre'
-                Width = 413
+                FieldName = 'ID'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'ID_PROVEEDOR'
-                Visible = False
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_CONCEPTO'
+                Visible = True
               end>
           end
         end
@@ -1315,11 +1303,6 @@ object FABMProveedores: TFABMProveedores
         ItemLinks = <
           item
             Item = btBuscar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btVerDetalle
             Visible = True
           end
           item
@@ -1748,74 +1731,23 @@ object FABMProveedores: TFABMProveedores
     Left = 144
     Top = 72
   end
-  object Provider_Conceptos: TDataSetProvider
-    DataSet = ZQ_Conceptos
-    ResolveToDataSet = True
-    Left = 707
-    Top = 242
-  end
-  object CD_Conceptos: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'Provider_Conceptos'
-    Left = 707
-    Top = 178
-    object CD_ConceptosID_CONCEPTO: TIntegerField
-      FieldName = 'ID_CONCEPTO'
-    end
-    object CD_ConceptosCOD_CORTO: TStringField
-      FieldName = 'COD_CORTO'
-      Size = 6
-    end
-    object CD_ConceptosNOMBRE_CONCEPTO: TStringField
-      FieldName = 'NOMBRE_CONCEPTO'
-      Size = 240
-    end
-    object CD_ConceptosBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object CD_ConceptosIMPORTE: TFloatField
-      FieldName = 'IMPORTE'
-    end
-    object CD_ConceptosEDITABLE: TStringField
-      FieldName = 'EDITABLE'
-      Size = 1
-    end
-    object CD_ConceptosID_PROVEEDOR: TIntegerField
-      FieldName = 'ID_PROVEEDOR'
-    end
-  end
-  object DS_Conceptos: TDataSource
-    DataSet = CD_Conceptos
-    Left = 707
-    Top = 122
+  object DS_ProvConceptos: TDataSource
+    DataSet = ZQ_ProvConceptos
+    Left = 731
+    Top = 154
   end
   object ZQ_Conceptos: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select c.*, p.id_proveedor'
+      'select c.*'
       'from ie_conceptos c'
-      
-        'left join proveedor_concepto p on (c.id_concepto = p.id_concepto' +
-        ') and (p.id_proveedor = :proveedor)'
       'order by c.nombre_concepto')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'proveedor'
-        ParamType = ptUnknown
-      end>
+    Params = <>
     Left = 707
     Top = 66
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'proveedor'
-        ParamType = ptUnknown
-      end>
     object ZQ_ConceptosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
+      Required = True
     end
     object ZQ_ConceptosCOD_CORTO: TStringField
       FieldName = 'COD_CORTO'
@@ -1836,127 +1768,35 @@ object FABMProveedores: TFABMProveedores
       FieldName = 'EDITABLE'
       Size = 1
     end
-    object ZQ_ConceptosID_PROVEEDOR: TIntegerField
-      FieldName = 'ID_PROVEEDOR'
-    end
   end
   object ZQ_CuentasA: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select c.*, p.id_proveedor'
+      'select c.*'
       'from ie_cuentas c'
-      
-        'left join proveedor_cuenta p on (c.id_cuenta = p.id_cuenta) and ' +
-        '(p.id_proveedor = :proveedor)'
       'order by c.nombre_cuenta')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'proveedor'
-        ParamType = ptUnknown
-      end>
+    Params = <>
     Left = 835
     Top = 66
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'proveedor'
-        ParamType = ptUnknown
-      end>
-    object ZQ_CuentasAID_CUENTA: TIntegerField
-      FieldName = 'ID_CUENTA'
-    end
-    object ZQ_CuentasANOMBRE_CUENTA: TStringField
-      FieldName = 'NOMBRE_CUENTA'
-      Size = 100
-    end
-    object ZQ_CuentasAMEDIO_DE_PAGO: TStringField
-      FieldName = 'MEDIO_DE_PAGO'
-      Size = 50
-    end
-    object ZQ_CuentasANRO_CUENTA_BANCARIA: TStringField
-      FieldName = 'NRO_CUENTA_BANCARIA'
-      Size = 100
-    end
-    object ZQ_CuentasAULTIMO_NRO: TIntegerField
-      FieldName = 'ULTIMO_NRO'
-    end
-    object ZQ_CuentasAAUTONUMERAR: TStringField
-      FieldName = 'AUTONUMERAR'
-      Size = 1
-    end
-    object ZQ_CuentasAMEDIO_POR_DEFECTO: TIntegerField
-      FieldName = 'MEDIO_POR_DEFECTO'
-    end
-    object ZQ_CuentasACOLOR_CONSILIADO: TStringField
-      FieldName = 'COLOR_CONSILIADO'
-    end
-    object ZQ_CuentasAID_PROVEEDOR: TIntegerField
-      FieldName = 'ID_PROVEEDOR'
-    end
   end
-  object DS_CuentasA: TDataSource
-    DataSet = CD_CuentasA
+  object DS_ProvCtas: TDataSource
+    DataSet = ZQ_ProvCtas
     Left = 835
-    Top = 122
-  end
-  object CD_CuentasA: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'Provider_CuentasA'
-    Left = 835
-    Top = 178
-    object CD_CuentasAID_CUENTA: TIntegerField
-      FieldName = 'ID_CUENTA'
-    end
-    object CD_CuentasANOMBRE_CUENTA: TStringField
-      FieldName = 'NOMBRE_CUENTA'
-      Size = 100
-    end
-    object CD_CuentasAMEDIO_DE_PAGO: TStringField
-      FieldName = 'MEDIO_DE_PAGO'
-      Size = 50
-    end
-    object CD_CuentasANRO_CUENTA_BANCARIA: TStringField
-      FieldName = 'NRO_CUENTA_BANCARIA'
-      Size = 100
-    end
-    object CD_CuentasAULTIMO_NRO: TIntegerField
-      FieldName = 'ULTIMO_NRO'
-    end
-    object CD_CuentasAAUTONUMERAR: TStringField
-      FieldName = 'AUTONUMERAR'
-      Size = 1
-    end
-    object CD_CuentasAMEDIO_POR_DEFECTO: TIntegerField
-      FieldName = 'MEDIO_POR_DEFECTO'
-    end
-    object CD_CuentasACOLOR_CONSILIADO: TStringField
-      FieldName = 'COLOR_CONSILIADO'
-    end
-    object CD_CuentasAID_PROVEEDOR: TIntegerField
-      FieldName = 'ID_PROVEEDOR'
-    end
-  end
-  object Provider_CuentasA: TDataSetProvider
-    DataSet = ZQ_CuentasA
-    ResolveToDataSet = True
-    Left = 835
-    Top = 242
+    Top = 154
   end
   object EKOrdenarCuentas: TEKOrdenarGrilla
     Grilla = DBGridCuentas
     FuenteNormal = []
     Ordenar = True
-    Left = 53
-    Top = 412
+    Left = 101
+    Top = 308
   end
   object EKOrdenarConceptos: TEKOrdenarGrilla
     Grilla = DBGridConceptos
     FuenteNormal = []
     Ordenar = True
-    Left = 550
-    Top = 420
+    Left = 566
+    Top = 252
   end
   object ZQ_Insertar: TZQuery
     Connection = DM.Conexion
@@ -1979,8 +1819,8 @@ object FABMProveedores: TFABMProveedores
         Name = 'id_concepto'
         ParamType = ptUnknown
       end>
-    Left = 293
-    Top = 404
+    Left = 373
+    Top = 300
     ParamData = <
       item
         DataType = ftUnknown
@@ -2015,8 +1855,8 @@ object FABMProveedores: TFABMProveedores
         Name = 'id_concepto'
         ParamType = ptUnknown
       end>
-    Left = 365
-    Top = 404
+    Left = 373
+    Top = 236
     ParamData = <
       item
         DataType = ftUnknown
@@ -2057,7 +1897,7 @@ object FABMProveedores: TFABMProveedores
       'from tipo_proveedor')
     Params = <>
     Left = 288
-    Top = 176
+    Top = 160
     object ZQ_TipoProveedorID_TIPO: TIntegerField
       FieldName = 'ID_TIPO'
       Required = True
@@ -2115,5 +1955,65 @@ object FABMProveedores: TFABMProveedores
     DataSet = ZQ_TipoFactura
     Left = 80
     Top = 168
+  end
+  object ZQ_ProvConceptos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select pc.*'
+      'from proveedor_concepto pc'
+      'where pc.id_proveedor=:idProv')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idProv'
+        ParamType = ptUnknown
+      end>
+    Left = 731
+    Top = 218
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idProv'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ProvConceptosID: TIntegerField
+      FieldName = 'ID'
+    end
+    object ZQ_ProvConceptosID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_ProvConceptosID_CONCEPTO: TIntegerField
+      FieldName = 'ID_CONCEPTO'
+    end
+  end
+  object ZQ_ProvCtas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select pc.*'
+      'from proveedor_cuenta pc'
+      'where pc.id_proveedor=:idProv')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idProv'
+        ParamType = ptUnknown
+      end>
+    Left = 835
+    Top = 218
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idProv'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ProvCtasID: TIntegerField
+      FieldName = 'ID'
+    end
+    object ZQ_ProvCtasID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_ProvCtasID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+    end
   end
 end
