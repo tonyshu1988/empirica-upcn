@@ -237,19 +237,28 @@ end;
 
 procedure TFABMProveedores.BtModificarClick(Sender: TObject);
 begin
-  if (ZQ_IE_Proveedores.IsEmpty) OR (ZQ_IE_ProveedoresEDITABLE.AsString='N') then
+  if (ZQ_IE_Proveedores.IsEmpty) then//OR (ZQ_IE_ProveedoresEDITABLE.AsString='N') then
     exit;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores,ZQ_ProvCtas,ZQ_ProvConceptos]) then
   begin
-    Panel_edicion.Enabled:= true;  
+    Panel_edicion.Enabled:= true;
     DBGridProveedores.Enabled := false;
     PageControl1.Visible:=true;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
     DBGridCuentas.PopupMenu:=MenuCtas;
     DBGridConceptos.PopupMenu:=MenuConc;
+
+    if (ZQ_IE_ProveedoresEDITABLE.AsString='N') then
+    begin
+      PageControl1.TabIndex :=1;
+      Panel_edicion.Enabled:= false;
+    end;
+    
   end;
+
+
 end;
 
 
@@ -311,32 +320,32 @@ procedure TFABMProveedores.BtGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-if validarcampos() then
- begin
-  //grabar_permisos;
-   try
-   if DM.EKModelo.finalizar_transaccion(transaccion_ABMProveedores) then
-    begin
-    DBGridProveedores.Enabled := true;
-    Panel_edicion.Enabled:= False;
-    GrupoEditando.Enabled := true;
-    GrupoGuardarCancelar.Enabled := false;
-    recNo:= ZQ_IE_Proveedores.RecNo;
-    ZQ_IE_Proveedores.Refresh;
-    ZQ_IE_Proveedores.RecNo:= recNo;
-    actualizar_permisos(ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger);
-    DBGridCuentas.PopupMenu:=nil;
-    DBGridConceptos.PopupMenu:=nil;
-    end
-   else
-        raise Exception.Create('');
-   except
+  if validarcampos() then
+   begin
+    //grabar_permisos;
+     try
+     if DM.EKModelo.finalizar_transaccion(transaccion_ABMProveedores) then
       begin
-        Application.MessageBox('Verifique que los datos estén cargados correctamente.','Atención',MB_OK+MB_ICONINFORMATION);
-        exit;
+      DBGridProveedores.Enabled := true;
+      Panel_edicion.Enabled:= False;
+      GrupoEditando.Enabled := true;
+      GrupoGuardarCancelar.Enabled := false;
+      recNo:= ZQ_IE_Proveedores.RecNo;
+      ZQ_IE_Proveedores.Refresh;
+      ZQ_IE_Proveedores.RecNo:= recNo;
+      actualizar_permisos(ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger);
+      DBGridCuentas.PopupMenu:=nil;
+      DBGridConceptos.PopupMenu:=nil;
       end
+     else
+          raise Exception.Create('');
+     except
+        begin
+          Application.MessageBox('Verifique que los datos estén cargados correctamente.','Atención',MB_OK+MB_ICONINFORMATION);
+          exit;
+        end
+     end
    end
- end
 end;
 
 
@@ -431,7 +440,8 @@ end;
 function TFABMProveedores.validarcampos():boolean;
 begin
    result := true;
-
+   if (ZQ_IE_ProveedoresEDITABLE.AsString='N') then exit;
+   
    if (DBENombreApellido.Text = '') then
     begin
       Application.MessageBox('El campo "Denominacion" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
