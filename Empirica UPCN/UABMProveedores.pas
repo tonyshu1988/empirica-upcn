@@ -82,16 +82,12 @@ type
     dbDatosAdic: TDBMemo;
     GBoxCuentasAsig: TGroupBox;
     GBoxConceptosAsig: TGroupBox;
-    Provider_Conceptos: TDataSetProvider;
-    Provider_CuentasA: TDataSetProvider;
-    CD_Conceptos: TClientDataSet;
-    DS_Conceptos: TDataSource;
+    DS_ProvConceptos: TDataSource;
     ZQ_Conceptos: TZQuery;
     DBGridConceptos: TDBGrid;
     DBGridCuentas: TDBGrid;
     ZQ_CuentasA: TZQuery;
-    DS_CuentasA: TDataSource;
-    CD_CuentasA: TClientDataSet;
+    DS_ProvCtas: TDataSource;
     ZQ_IE_ProveedoresNRO_PROVEEDOR: TIntegerField;
     ZQ_IE_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
     ZQ_IE_ProveedoresNOMBRE_FANTASIA: TStringField;
@@ -104,38 +100,6 @@ type
     ZQ_IE_ProveedoresDESCRIPCION: TStringField;
     ZQ_IE_ProveedoresEDITABLE: TStringField;
     ZQ_IE_ProveedoresID_CUENTA: TIntegerField;
-    ZQ_CuentasAID_CUENTA: TIntegerField;
-    ZQ_CuentasANOMBRE_CUENTA: TStringField;
-    ZQ_CuentasAMEDIO_DE_PAGO: TStringField;
-    ZQ_CuentasANRO_CUENTA_BANCARIA: TStringField;
-    ZQ_CuentasAULTIMO_NRO: TIntegerField;
-    ZQ_CuentasAAUTONUMERAR: TStringField;
-    ZQ_CuentasAMEDIO_POR_DEFECTO: TIntegerField;
-    ZQ_CuentasACOLOR_CONSILIADO: TStringField;
-    ZQ_CuentasAID_PROVEEDOR: TIntegerField;
-    CD_CuentasAID_CUENTA: TIntegerField;
-    CD_CuentasANOMBRE_CUENTA: TStringField;
-    CD_CuentasAMEDIO_DE_PAGO: TStringField;
-    CD_CuentasANRO_CUENTA_BANCARIA: TStringField;
-    CD_CuentasAULTIMO_NRO: TIntegerField;
-    CD_CuentasAAUTONUMERAR: TStringField;
-    CD_CuentasAMEDIO_POR_DEFECTO: TIntegerField;
-    CD_CuentasACOLOR_CONSILIADO: TStringField;
-    CD_CuentasAID_PROVEEDOR: TIntegerField;
-    ZQ_ConceptosID_CONCEPTO: TIntegerField;
-    ZQ_ConceptosCOD_CORTO: TStringField;
-    ZQ_ConceptosNOMBRE_CONCEPTO: TStringField;
-    ZQ_ConceptosBAJA: TStringField;
-    ZQ_ConceptosIMPORTE: TFloatField;
-    ZQ_ConceptosEDITABLE: TStringField;
-    ZQ_ConceptosID_PROVEEDOR: TIntegerField;
-    CD_ConceptosID_CONCEPTO: TIntegerField;
-    CD_ConceptosCOD_CORTO: TStringField;
-    CD_ConceptosNOMBRE_CONCEPTO: TStringField;
-    CD_ConceptosBAJA: TStringField;
-    CD_ConceptosIMPORTE: TFloatField;
-    CD_ConceptosEDITABLE: TStringField;
-    CD_ConceptosID_PROVEEDOR: TIntegerField;
     EKOrdenarCuentas: TEKOrdenarGrilla;
     EKOrdenarConceptos: TEKOrdenarGrilla;
     ZQ_Insertar: TZQuery;
@@ -165,6 +129,20 @@ type
     ZQ_TipoFacturaDESCRIPCION: TStringField;
     ZQ_IE_Proveedores_Tipo: TStringField;
     QRExpr15: TQRExpr;
+    ZQ_ConceptosID_CONCEPTO: TIntegerField;
+    ZQ_ConceptosCOD_CORTO: TStringField;
+    ZQ_ConceptosNOMBRE_CONCEPTO: TStringField;
+    ZQ_ConceptosBAJA: TStringField;
+    ZQ_ConceptosIMPORTE: TFloatField;
+    ZQ_ConceptosEDITABLE: TStringField;
+    ZQ_ProvConceptos: TZQuery;
+    ZQ_ProvCtas: TZQuery;
+    ZQ_ProvConceptosID: TIntegerField;
+    ZQ_ProvConceptosID_PROVEEDOR: TIntegerField;
+    ZQ_ProvConceptosID_CONCEPTO: TIntegerField;
+    ZQ_ProvCtasID: TIntegerField;
+    ZQ_ProvCtasID_PROVEEDOR: TIntegerField;
+    ZQ_ProvCtasID_CUENTA: TIntegerField;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -479,20 +457,13 @@ end;
 
 procedure TFABMProveedores.actualizar_permisos(id_proveedor: integer);
 begin
-//  if ZQ_IE_Proveedores.State = dsBrowse then
-//  begin
-    CD_Conceptos.Active := false;
-    ZQ_Conceptos.Active := false;
-    ZQ_Conceptos.ParamByName('proveedor').AsInteger:= id_proveedor;
-    ZQ_Conceptos.Active := true;
-    CD_Conceptos.Active := true;
+    ZQ_ProvConceptos.Active := false;
+    ZQ_ProvConceptos.ParamByName('idProv').AsInteger:=id_proveedor;
+    ZQ_ProvConceptos.Active :=True;
+    ZQ_ProvCtas.Active := false;
+    ZQ_ProvCtas.ParamByName('idProv').AsInteger:=id_proveedor;
+    ZQ_ProvCtas.Active :=True;
 
-    CD_CuentasA.Active := false;
-    ZQ_CuentasA.Active := false;
-    ZQ_CuentasA.ParamByName('proveedor').AsInteger:= id_proveedor;
-    ZQ_CuentasA.Active := true;
-    CD_CuentasA.Active := true;
-//  end;
 end;
 
 
