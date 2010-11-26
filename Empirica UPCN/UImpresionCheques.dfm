@@ -1,6 +1,6 @@
 object FImpresionCheques: TFImpresionCheques
-  Left = 240
-  Top = 196
+  Left = 228
+  Top = 22
   Width = 987
   Height = 666
   Caption = 'Impresion de Cheques'
@@ -119,6 +119,7 @@ object FImpresionCheques: TFImpresionCheques
         '0'
         '0'
         #39#39)
+      OnEndPage = RepChequesCorrienteEndPage
       Options = [FirstPageHeader, LastPageFooter]
       Page.Columns = 1
       Page.Orientation = poPortrait
@@ -23826,6 +23827,7 @@ object FImpresionCheques: TFImpresionCheques
         '0'
         '0'
         #39#39)
+      OnEndPage = RepChequeDiferidoEndPage
       Options = [FirstPageHeader, LastPageFooter]
       Page.Columns = 1
       Page.Orientation = poPortrait

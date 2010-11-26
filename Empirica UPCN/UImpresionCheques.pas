@@ -87,6 +87,8 @@ type
     procedure DBGridChequesDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure RepChequeDiferidoEndPage(Sender: TCustomQuickRep);
+    procedure RepChequesCorrienteEndPage(Sender: TCustomQuickRep);
   private
     { Private declarations }
   public
@@ -122,6 +124,8 @@ begin
   begin
     ZQ_movimientos.Edit;
 
+    QRImageCheque.Enabled:= true;
+    QRDBText2.Enabled:= true;
     EKVistaPreviaQR1.VistaPrevia;
     if (Application.MessageBox('Los cheques se imprimieron correctamente?','Impresion Cheques',MB_YESNO+MB_ICONQUESTION) = IDYES) then
     begin
@@ -218,6 +222,8 @@ begin
   begin
     ZQ_movimientos.Edit;
 
+    QRImage1.Enabled := true;
+    QRDBText6.Enabled := true;
     EKVistaPreviaQR2.VistaPrevia;
     if (Application.MessageBox('Los cheques se imprimieron correctamente?','Impresion Cheques',MB_YESNO+MB_ICONQUESTION) = IDYES) then
     begin
@@ -294,6 +300,20 @@ begin
 
     ZQ_movimientos.Next;
   end;
+end;
+
+procedure TFImpresionCheques.RepChequeDiferidoEndPage(
+  Sender: TCustomQuickRep);
+begin
+ QRImage1.Enabled := false;
+ QRDBText6.Enabled := false;
+end;
+
+procedure TFImpresionCheques.RepChequesCorrienteEndPage(
+  Sender: TCustomQuickRep);
+begin
+QRImageCheque.Enabled:= false;
+QRDBText2.Enabled:= false;
 end;
 
 end.
