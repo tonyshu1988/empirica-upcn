@@ -8,7 +8,7 @@ uses
   Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, ActnList,
   XPStyleActnCtrls, ActnMan, EKDbSuma, EKDBDateTimePicker, DBClient, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKListadoSQL,
-  ZStoredProcedure;
+  ZStoredProcedure,StrUtils;
 
 type
   TFAlta_OrdenPago = class(TForm)
@@ -208,7 +208,7 @@ const
 
 implementation
 
-uses UDM, DateUtils, UMovimientos;
+uses UDM, DateUtils, UMovimientos, UUtilidades;
 
 {$R *.dfm}
 
@@ -493,15 +493,46 @@ end;
 
 
 function TFAlta_OrdenPago.validarNroOrden(nro:String):boolean;
+var
+anio,num:String;
 begin
   result := true;
- // if (dbNroOrden.Text=NroOrdenAnt) then exit;
+  anio:=LeftStr(nro,2);
+  num:=RightStr(nro,4);
+
+  if (anio<>Format('%d',[yearof(dbFechaEmision.Date)-2000])) then
+    begin
+      Application.MessageBox('Los 2 primeros dígitos deben corresponder al año en Curso.','Nº Orden de Pago',MB_OK+MB_ICONINFORMATION);
+      result:=false;
+      exit;
+    end;
+
+  if not(sonTodosNumeros(num)) then
+    begin
+      Application.MessageBox('Los 4 últimos dígitos deben corresponder al Nº de Orden.','Nº Orden de Pago',MB_OK+MB_ICONINFORMATION);
+      result:=false;
+      exit;
+    end;
+  if (MidStr(dbNroOrden.Text,3,1)<>'-') then
+    begin
+      Application.MessageBox('El formato es 00-0000.','Nº Orden de Pago',MB_OK+MB_ICONINFORMATION);
+      result:=false;
+      exit;
+    end;
+
 end;
 
 
 function TFAlta_OrdenPago.validarcampos():boolean;
 begin
   result := true;
+
+  if not (validarNroOrden(dbNroOrden.Text)) then
+    begin
+     result := False;
+     exit;
+    end;
+
 
   if (ZQ_MovimientosNRO_ORDEN_STRING.AsString='') then
     begin
