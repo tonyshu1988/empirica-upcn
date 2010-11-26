@@ -1522,15 +1522,11 @@ begin
   else
     BtAnularMov.Enabled:= true;
 
-  if LIBRO_BANCONRO_ORDEN.AsString = '' then
+  if (trim(LIBRO_BANCONRO_ORDEN_STRING.AsString) = '') or (LIBRO_BANCOMOV_ANULADO.AsString = 'A') then
     BtAnularOrden.Enabled:= false
   else
     BtAnularOrden.Enabled:= true;
 
-  if LIBRO_BANCOMOV_ANULADO.AsString = 'A' then
-    BtAnularOrden.Enabled:= false
-  else
-    BtAnularOrden.Enabled:= true;
 
   if LIBRO_BANCO.IsEmpty then
   begin
