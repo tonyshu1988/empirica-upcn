@@ -21,15 +21,15 @@ object FImpresionCheques: TFImpresionCheques
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 971
-    Height = 580
+    Width = 979
+    Height = 582
     Align = alClient
     TabOrder = 0
     object DBGridCheques: TDBGrid
       Left = 1
       Top = 20
-      Width = 969
-      Height = 559
+      Width = 977
+      Height = 561
       Align = alClient
       Color = 16772842
       DataSource = DS_movimientos
@@ -166,7 +166,7 @@ object FImpresionCheques: TFImpresionCheques
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          748.770833333333300000
+          748.770833333333400000
           1820.333333333333000000)
         BandType = rbDetail
         object QRImageCheque: TQRImage
@@ -23873,7 +23873,7 @@ object FImpresionCheques: TFImpresionCheques
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          748.770833333333300000
+          748.770833333333400000
           1820.333333333333000000)
         BandType = rbDetail
         object QRImage1: TQRImage
@@ -47586,7 +47586,7 @@ object FImpresionCheques: TFImpresionCheques
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 969
+      Width = 977
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -47607,7 +47607,7 @@ object FImpresionCheques: TFImpresionCheques
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 859
+        Left = 867
         Top = 1
         Width = 109
         Height = 17
@@ -47625,7 +47625,7 @@ object FImpresionCheques: TFImpresionCheques
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -47899,9 +47899,6 @@ object FImpresionCheques: TFImpresionCheques
     object ZQ_movimientosFECHA_MDC: TDateField
       FieldName = 'FECHA_MDC'
     end
-    object ZQ_movimientosNRO_CHEQUE_TRANSF: TIntegerField
-      FieldName = 'NRO_CHEQUE_TRANSF'
-    end
     object ZQ_movimientosIMPORTE: TFloatField
       FieldName = 'IMPORTE'
       DisplayFormat = '###,###,###,##0.00'
@@ -47925,6 +47922,9 @@ object FImpresionCheques: TFImpresionCheques
     object ZQ_movimientosTIPOPROV: TStringField
       FieldName = 'TIPOPROV'
       Size = 100
+    end
+    object ZQ_movimientosNRO_CHEQUE_TRANSF: TStringField
+      FieldName = 'NRO_CHEQUE_TRANSF'
     end
   end
   object EKNumeroALetras1: TEKNumeroALetras
@@ -48016,23 +48016,29 @@ object FImpresionCheques: TFImpresionCheques
     SQL.Strings = (
       
         'select m.fecha, cm.fecha_mdc, cm.nro_cheque_transf, cm.importe, ' +
-        'cm.anulado, p.apellido_y_nombre, cm.impreso, cm.id'
+        'cm.anulado, p.apellido_y_nombre, cm.impreso, cm.id,tp.descripcio' +
+        'n as TipoProv'
       'from ie_cuentas_movimientos cm'
       
         'left join ie_movimientos m on(cm.nro_movimiento = m.nro_movimien' +
         'to)'
       'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
+      'left join tipo_proveedor tp on (p.id_tipo = tp.id_tipo)'
+      ''
       'where cm.id_medio = 2 and cm.anulado is null')
     SQL_Select.Strings = (
       
         'select m.fecha, cm.fecha_mdc, cm.nro_cheque_transf, cm.importe, ' +
-        'cm.anulado, p.apellido_y_nombre, cm.impreso, cm.id')
+        'cm.anulado, p.apellido_y_nombre, cm.impreso, cm.id,tp.descripcio' +
+        'n as TipoProv')
     SQL_From.Strings = (
       'from ie_cuentas_movimientos cm'
       
         'left join ie_movimientos m on(cm.nro_movimiento = m.nro_movimien' +
         'to)'
-      'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)')
+      'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
+      'left join tipo_proveedor tp on (p.id_tipo = tp.id_tipo)'
+      '')
     SQL_Where.Strings = (
       'where cm.id_medio = 2 and cm.anulado is null')
     UsarWhereOriginal = EK_Con_Where
@@ -48074,9 +48080,6 @@ object FImpresionCheques: TFImpresionCheques
       FieldName = 'proveedor'
       Size = 100
     end
-    object ClientZQ_movimientosnro_cheque: TIntegerField
-      FieldName = 'nro_cheque'
-    end
     object ClientZQ_movimientosImporte: TFloatField
       FieldName = 'Importe'
       DisplayFormat = '###,###,###,##0.00'
@@ -48093,6 +48096,10 @@ object FImpresionCheques: TFImpresionCheques
     end
     object ClientZQ_movimientostipoProv: TStringField
       FieldName = 'tipoProv'
+      Size = 50
+    end
+    object ClientZQ_movimientosnro_cheque: TStringField
+      FieldName = 'nro_cheque'
       Size = 50
     end
   end
