@@ -30,7 +30,6 @@ type
     ZQ_movimientos: TZQuery;
     ZQ_movimientosFECHA: TDateField;
     ZQ_movimientosFECHA_MDC: TDateField;
-    ZQ_movimientosNRO_CHEQUE_TRANSF: TIntegerField;
     ZQ_movimientosIMPORTE: TFloatField;
     ZQ_movimientosANULADO: TStringField;
     ZQ_movimientosAPELLIDO_Y_NOMBRE: TStringField;
@@ -47,7 +46,6 @@ type
     ClientZQ_movimientosFecha_emision: TDateTimeField;
     ClientZQ_movimientosFecha_Pd: TDateTimeField;
     ClientZQ_movimientosproveedor: TStringField;
-    ClientZQ_movimientosnro_cheque: TIntegerField;
     ClientZQ_movimientosImporte: TFloatField;
     ClientZQ_movimientosorden_impresion: TIntegerField;
     ClientZQ_movimientosimpreso: TStringField;
@@ -76,6 +74,8 @@ type
     ZUpdateSQL1: TZUpdateSQL;
     ZQ_movimientosTIPOPROV: TStringField;
     ClientZQ_movimientostipoProv: TStringField;
+    ZQ_movimientosNRO_CHEQUE_TRANSF: TStringField;
+    ClientZQ_movimientosnro_cheque: TStringField;
     procedure btnChequeCorrienteClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -286,7 +286,7 @@ begin
     ClientZQ_movimientosFecha_emision.AsDateTime := ZQ_movimientosFECHA.AsDateTime;
     ClientZQ_movimientosFecha_Pd.AsDateTime := ZQ_movimientosFECHA_MDC.AsDateTime;
     ClientZQ_movimientosproveedor.AsString := ZQ_movimientosAPELLIDO_Y_NOMBRE.AsString;
-    ClientZQ_movimientosnro_cheque.AsInteger := ZQ_movimientosNRO_CHEQUE_TRANSF.AsInteger;
+    ClientZQ_movimientosnro_cheque.AsString := ZQ_movimientosNRO_CHEQUE_TRANSF.AsString;
     ClientZQ_movimientosImporte.AsFloat := ZQ_movimientosIMPORTE.AsFloat;
     ClientZQ_movimientosimpreso.AsString := ZQ_movimientosIMPRESO.AsString;
     ClientZQ_movimientostipoProv.AsString := ZQ_movimientosTIPOPROV.AsString;

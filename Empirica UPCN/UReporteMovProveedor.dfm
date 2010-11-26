@@ -53,7 +53,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         end
         item
           Expanded = False
-          FieldName = 'TIPOPROV'
+          FieldName = 'tipo_denominacion'
           Title.Alignment = taCenter
           Title.Caption = 'Tipo'
           Width = 99
@@ -265,7 +265,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
             52.916666666666670000
             1034.520833333333000000
             95.250000000000000000
-            701.145833333333200000)
+            701.145833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -296,7 +296,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
             52.916666666666670000
             920.750000000000000000
             31.750000000000000000
-            926.041666666666800000)
+            926.041666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -479,7 +479,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          68.791666666666680000
+          68.791666666666670000
           2770.187500000000000000)
         BandType = rbSummary
         object QRLabel2: TQRLabel
