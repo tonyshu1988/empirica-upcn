@@ -1726,7 +1726,7 @@ end;
 
 procedure TFMovimientos.FormActivate(Sender: TObject);
 begin
-  refrescarConsultas();
+//  refrescarConsultas();
 end;
 
 procedure TFMovimientos.AnularOrden1Click(Sender: TObject);

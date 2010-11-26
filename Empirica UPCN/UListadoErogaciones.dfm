@@ -267,6 +267,14 @@ object FListadoErogaciones: TFListadoErogaciones
         Font.Style = [fsBold, fsItalic]
         ParentFont = False
       end
+      object Label7: TLabel
+        Left = 556
+        Top = 38
+        Width = 37
+        Height = 13
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'Hasta:'
+      end
       object lblFechaHasta: TLabel
         Left = 595
         Top = 38
@@ -281,14 +289,6 @@ object FListadoErogaciones: TFListadoErogaciones
         Font.Name = 'Verdana'
         Font.Style = [fsBold, fsItalic]
         ParentFont = False
-      end
-      object Label7: TLabel
-        Left = 556
-        Top = 38
-        Width = 37
-        Height = 13
-        Anchors = [akLeft, akTop, akRight]
-        Caption = 'Hasta:'
       end
       object StaticText1: TStaticText
         Left = 900
