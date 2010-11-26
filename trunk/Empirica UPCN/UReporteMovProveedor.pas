@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, QuickRpt, QRCtrls, Grids, DBGrids, ExtCtrls, dxBar,
   dxBarExtItems, EKVistaPreviaQR, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKBusquedaAvanzada, DBCtrls, StdCtrls, EKDbSuma;
+  ZDataset, EKBusquedaAvanzada, DBCtrls, StdCtrls, EKDbSuma, mxNativeExcel,
+  mxExport;
 
 type
   TFReporteMovProveedor = class(TForm)
@@ -177,12 +178,16 @@ type
     QRLabel8: TQRLabel;
     QRLabel12: TQRLabel;
     EKDbSuma: TEKDbSuma;
+    btExportarExel: TdxBarLargeButton;
+    mxDBGridExport: TmxDBGridExport;
+    mxNativeExcel1: TmxNativeExcel;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_MovimientoProveedoresCalcFields(DataSet: TDataSet);
     procedure EKDbSumaSumListChanged(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btExportarExelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -214,13 +219,13 @@ begin
    else
       PanelDatosProveedor.visible := false;
 
-    lblFiltroMedio.Caption:= 'Medio: '+EKBusquedaAvanzada.ParametrosSelecReales1[1];
-    lblFiltroConcepto.Caption:= 'Concepto: '+EKBusquedaAvanzada.ParametrosSelecReales1[2];
-    lblFiltroTipoMov.Caption:= 'Tipo  Movimiento: '+EKBusquedaAvanzada.ParametrosSelecReales1[3];
-    lblFiltroEmiDesde.Caption:= 'F. Emisión Desde: '+EKBusquedaAvanzada.ParametrosSelecReales1[4];
-    lblFiltroEmiHasta.Caption:= 'F. Emisión Hasta: '+EKBusquedaAvanzada.ParametrosSelecReales1[5];
-    lblFiltroPDDesde.Caption:= 'F. PD Desde: '+EKBusquedaAvanzada.ParametrosSelecReales1[6];
-    lblFiltroPDHasta.Caption:= 'F. PD Hasta: '+EKBusquedaAvanzada.ParametrosSelecReales1[7];
+    lblFiltroMedio.Caption:= 'Medio: '+EKBusquedaAvanzada.ParametrosSelecReales1[0];
+    lblFiltroConcepto.Caption:= 'Concepto: '+EKBusquedaAvanzada.ParametrosSelecReales1[1];
+    lblFiltroTipoMov.Caption:= 'Tipo  Movimiento: '+EKBusquedaAvanzada.ParametrosSelecReales1[2];
+    lblFiltroEmiDesde.Caption:= 'F. Emisión Desde: '+EKBusquedaAvanzada.ParametrosSelecReales1[3];
+    lblFiltroEmiHasta.Caption:= 'F. Emisión Hasta: '+EKBusquedaAvanzada.ParametrosSelecReales1[4];
+    lblFiltroPDDesde.Caption:= 'F. PD Desde: '+EKBusquedaAvanzada.ParametrosSelecReales1[5];
+    lblFiltroPDHasta.Caption:= 'F. PD Hasta: '+EKBusquedaAvanzada.ParametrosSelecReales1[6];
   end
 end;
 
@@ -294,6 +299,12 @@ begin
   begin
     EKBusquedaAvanzada.UsarWhereOriginal := EK_Sin_Where;
   end;
+end;
+
+procedure TFReporteMovProveedor.btExportarExelClick(Sender: TObject);
+begin
+  if not ZQ_MovimientoProveedores.IsEmpty then
+    mxDBGridExport.Select;
 end;
 
 end.

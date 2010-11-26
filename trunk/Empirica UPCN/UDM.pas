@@ -5,7 +5,7 @@ interface
 uses
   Forms, SysUtils, Classes, ZConnection, WinSkinData, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKUsrLogin, EKInformacion, EKModelo,
-  EKAppEvnts, EKEventos, QRCtrls, QuickRpt;
+  EKAppEvnts, EKEventos, QRCtrls, QuickRpt, MidasLib;
 
 type
   TDM = class(TDataModule)

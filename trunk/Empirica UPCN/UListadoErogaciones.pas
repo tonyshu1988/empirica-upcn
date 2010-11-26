@@ -251,6 +251,9 @@ begin
       fechaDesde:= StartOfAMonth(anio, mes);
       fechaHasta:= EndOfAMonth(anio, mes);
 
+      lblFechaDesde.Caption:= DateToStr(fechaDesde);
+      lblFechaHasta.Caption:= DateToStr(fechaHasta);     
+
       ZQ_Libro_erogaciones.Close;
       ZQ_Libro_erogaciones.ParamByName('cuenta').AsInteger:= StrToInt(EKBAvanzadaListadoErog.ParametrosSeleccionados1[0]);
       ZQ_Libro_erogaciones.ParamByName('Fecha_Desde').AsDate:= fechaDesde;
@@ -258,8 +261,7 @@ begin
       ZQ_Libro_erogaciones.open;
 
       lblNombreCuenta.Caption:= EKBAvanzadaListadoErog.ParametrosSelecReales1[0];
-      lblFechaDesde.Caption:= DateToStr(fechaDesde);
-      lblFechaHasta.Caption:= DateToStr(fechaHasta);
+
     end;
   end;
 end;

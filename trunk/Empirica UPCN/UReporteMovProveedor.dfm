@@ -1998,6 +1998,11 @@ object FReporteMovProveedor: TFReporteMovProveedor
             Visible = True
           end
           item
+            BeginGroup = True
+            Item = btExportarExel
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -2116,6 +2121,15 @@ object FReporteMovProveedor: TFReporteMovProveedor
       Visible = ivAlways
       ImageIndex = 28
       OnClick = btnImprimirClick
+    end
+    object btExportarExel: TdxBarLargeButton
+      Caption = 'Exportar Exel'
+      Category = 0
+      Hint = 'Exportar Exel'
+      Visible = ivAlways
+      ImageIndex = 66
+      OnClick = btExportarExelClick
+      AutoGrayScale = False
     end
     object GrupoVisualizando: TdxBarGroup
       Items = (
@@ -2608,5 +2622,113 @@ object FReporteMovProveedor: TFReporteMovProveedor
     SumListChanged = EKDbSumaSumListChanged
     Left = 600
     Top = 248
+  end
+  object mxDBGridExport: TmxDBGridExport
+    DateFormat = 'dd/MM/yyyy'
+    TimeFormat = 'hh:mm AMPM'
+    DateTimeFormat = 'hh:mm AMPM dd/MM/yyyy'
+    ExportType = xtExcel
+    ExportTypes = [xtHTML, xtExcel, xtWord, xtTXT]
+    ExportStyle = xsView
+    HTML.CustomColors.Background = clWhite
+    HTML.CustomColors.DefaultLink = clRed
+    HTML.CustomColors.DefaultFontFace = 'Arial,Helvetica'
+    HTML.CustomColors.VisitedLink = clAqua
+    HTML.CustomColors.ActiveLink = clBlue
+    HTML.CustomColors.DefaultText = clBlack
+    HTML.CustomColors.TableFontColor = clBlack
+    HTML.CustomColors.TableFontFace = 'Arial,Helvetica'
+    HTML.CustomColors.TableBackground = 16777167
+    HTML.CustomColors.TableOddBackground = clWhite
+    HTML.CustomColors.HeaderBackground = 3368601
+    HTML.CustomColors.HeadersFontColor = clWhite
+    HTML.Options = [hoShowGridLines, hoBoldHeaders, hoAutoLink, hoOddRowColoring, hoDisplayTitle]
+    HTML.Template = ctStandard
+    Messages.Caption = 'Exportar datos'
+    Messages.CopiedToClipboard = 'Data was copied to clipboard!'
+    Messages.CancelCaption = '&Cancelar'
+    Messages.CreatedText = 'Exportando:'
+    Messages.DocumentFilter.HTML = 'HTML Documents'
+    Messages.DocumentFilter.Excel = 'Excel Files'
+    Messages.DocumentFilter.Word = 'Word Documents'
+    Messages.DocumentFilter.Text = 'Text Files'
+    Messages.DocumentFilter.Comma = 'CSV (Comma delimited)'
+    Messages.DocumentFilter.Tab = 'Text (Tab delimited)'
+    Messages.DocumentFilter.RTF = 'Rich Text Format'
+    Messages.DocumentFilter.DIF = 'Data Interchange Format'
+    Messages.DocumentFilter.SYLK = 'SYLK Files'
+    Messages.ExportCaption = '&Aceptar'
+    Messages.ExportToFile = '&Guardar'
+    Messages.FalseText = 'False'
+    Messages.Height = 80
+    Messages.SaveTitle = 'Guardar'
+    Messages.SelectFormat = 'Opciones'
+    Messages.Text = 'Proceseando...'
+    Messages.TrueText = 'True'
+    Messages.Width = 300
+    Messages.ViewOnly = '&Ver'
+    TruncateSymbol = '...'
+    RowNumberFormat = '%d'
+    DOC_RTF.Template = rtStandard
+    DOC_RTF.Options = [roShowGridLines, roOddRowColoring]
+    DOC_RTF.CustomSettings.TableBackground = 16777167
+    DOC_RTF.CustomSettings.TableOddBackground = clWhite
+    DOC_RTF.CustomSettings.HeaderBackground = 3368601
+    DOC_RTF.CustomSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    DOC_RTF.CustomSettings.DefaultFont.Color = clWindowText
+    DOC_RTF.CustomSettings.DefaultFont.Height = -11
+    DOC_RTF.CustomSettings.DefaultFont.Name = 'MS Sans Serif'
+    DOC_RTF.CustomSettings.DefaultFont.Style = []
+    DOC_RTF.CustomSettings.HeaderFont.Charset = DEFAULT_CHARSET
+    DOC_RTF.CustomSettings.HeaderFont.Color = clWindowText
+    DOC_RTF.CustomSettings.HeaderFont.Height = -11
+    DOC_RTF.CustomSettings.HeaderFont.Name = 'MS Sans Serif'
+    DOC_RTF.CustomSettings.HeaderFont.Style = [fsBold]
+    DOC_RTF.CustomSettings.TableFont.Charset = DEFAULT_CHARSET
+    DOC_RTF.CustomSettings.TableFont.Color = clWindowText
+    DOC_RTF.CustomSettings.TableFont.Height = -11
+    DOC_RTF.CustomSettings.TableFont.Name = 'MS Sans Serif'
+    DOC_RTF.CustomSettings.TableFont.Style = []
+    DOC_RTF.CellWidth = 1400
+    DOC_RTF.TopMargin = 101
+    DOC_RTF.BottomMargin = 101
+    DOC_RTF.LeftMargin = 461
+    DOC_RTF.RightMargin = 562
+    EXCEL.Options = [reSetColumnWidths, reSetMargins, reUseBorders]
+    EXCEL.ColumnWidth = 30
+    EXCEL.Protected = False
+    EXCEL.Footer = '&P'
+    EXCEL.DefaultFont.Charset = DEFAULT_CHARSET
+    EXCEL.DefaultFont.Color = clWindowText
+    EXCEL.DefaultFont.Height = -11
+    EXCEL.DefaultFont.Name = 'MS Sans Serif'
+    EXCEL.DefaultFont.Style = []
+    EXCEL.HeaderFont.Charset = DEFAULT_CHARSET
+    EXCEL.HeaderFont.Color = clWindowText
+    EXCEL.HeaderFont.Height = -12
+    EXCEL.HeaderFont.Name = 'Verdana'
+    EXCEL.HeaderFont.Style = [fsBold]
+    EXCEL.TableFont.Charset = DEFAULT_CHARSET
+    EXCEL.TableFont.Color = clWindowText
+    EXCEL.TableFont.Height = -11
+    EXCEL.TableFont.Name = 'MS Sans Serif'
+    EXCEL.TableFont.Style = []
+    EXCEL.TopMargin = 0.300000000000000000
+    EXCEL.BottomMargin = 0.300000000000000000
+    EXCEL.LeftMargin = 0.300000000000000000
+    EXCEL.RightMargin = 0.300000000000000000
+    Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
+    Version = '2.37'
+    DBGrid = DBGridMercaderiaVendida
+    Left = 681
+    Top = 66
+  end
+  object mxNativeExcel1: TmxNativeExcel
+    ActiveFont = 0
+    Borders = []
+    Shading = False
+    Version = '1.24'
+    Left = 765
+    Top = 72
   end
 end

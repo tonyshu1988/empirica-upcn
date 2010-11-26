@@ -959,30 +959,36 @@ begin
 end;
 
 
-procedure TFMovimientos.ConciliarCheque();
+  procedure TFMovimientos.ConciliarCheque();
 begin
   ZQ_Cuenta_Movimiento.Close;
   ZQ_Cuenta_Movimiento.ParamByName('NroMov').clear;
   ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCOID_MOVIMIENTO.AsInteger;
   ZQ_Cuenta_Movimiento.Open;
 
-   if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') or (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then //si no esta conciliado
-   begin
-     PanelConciliar.Visible:= true;
-     BanderaConcialiar:= true;
-     LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Conciliar este movimiento?';
-     LabelFechaConciliacion.Visible:= true;
-     DTPFechaConciliar.Visible:=true;
-     DTPFechaConciliar.Date := dm.EKModelo.Fecha;
-   end
-   else //si esta conciliado
-   begin
-     PanelConciliar.Visible:= true;
-     BanderaConcialiar:= false;
-     LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Desconciliar este movimiento?';
-     LabelFechaConciliacion.Visible:= false;
-     DTPFechaConciliar.Visible:=false;
-   end;
+  if (ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0) then
+  begin
+    Application.MessageBox('Este movimiento no puede ser conciliado','Conciliar',MB_OK+MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') or (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then //si no esta conciliado
+  begin
+    PanelConciliar.Visible:= true;
+    BanderaConcialiar:= true;
+    LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Conciliar este movimiento?';
+    LabelFechaConciliacion.Visible:= true;
+    DTPFechaConciliar.Visible:=true;
+    DTPFechaConciliar.Date := dm.EKModelo.Fecha;
+  end
+  else //si esta conciliado
+  begin
+    PanelConciliar.Visible:= true;
+    BanderaConcialiar:= false;
+    LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Desconciliar este movimiento?';
+    LabelFechaConciliacion.Visible:= false;
+    DTPFechaConciliar.Visible:=false;
+  end;
 end;
 
 
