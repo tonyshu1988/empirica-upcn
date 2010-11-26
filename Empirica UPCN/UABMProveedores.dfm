@@ -1,6 +1,6 @@
 object FABMProveedores: TFABMProveedores
-  Left = 226
-  Top = 221
+  Left = 127
+  Top = 66
   Width = 1038
   Height = 669
   Caption = 'ABM Listado General'
@@ -24,8 +24,8 @@ object FABMProveedores: TFABMProveedores
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1022
-    Height = 583
+    Width = 1030
+    Height = 585
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
@@ -104,7 +104,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          227.100694444444400000
+          227.100694444444500000
           1898.385416666667000000)
         BandType = rbPageHeader
         object QRDBImage1: TQRDBImage
@@ -136,7 +136,7 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawRight = False
           Size.Values = (
             50.711805555555560000
-            725.399305555555600000
+            725.399305555555700000
             158.750000000000000000
             447.586805555555600000)
           Alignment = taCenter
@@ -166,9 +166,9 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            705.555555555555600000
-            94.809027777777780000
+            52.916666666666660000
+            705.555555555555700000
+            94.809027777777790000
             487.274305555555600000)
           Alignment = taCenter
           AlignToBand = True
@@ -197,10 +197,10 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            628.385416666666700000
+            52.916666666666660000
+            628.385416666666800000
             30.868055555555560000
-            639.409722222222200000)
+            639.409722222222300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -590,7 +590,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          46.302083333333330000
+          46.302083333333340000
           1898.385416666667000000)
         BandType = rbSummary
         object QRExpr15: TQRExpr
@@ -604,10 +604,10 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888890000
+            37.482638888888900000
             1479.461805555556000000
             4.409722222222222000
-            418.923611111111100000)
+            418.923611111111200000)
           Alignment = taRightJustify
           AlignToBand = True
           AutoSize = True
@@ -642,7 +642,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          41.892361111111110000
+          41.892361111111120000
           1898.385416666667000000)
         BandType = rbPageFooter
         object QRLabel24: TQRLabel
@@ -710,8 +710,8 @@ object FABMProveedores: TFABMProveedores
     object DBGridProveedores: TDBGrid
       Left = 1
       Top = 20
-      Width = 1020
-      Height = 369
+      Width = 1028
+      Height = 371
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -775,7 +775,7 @@ object FABMProveedores: TFABMProveedores
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1020
+      Width = 1028
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -797,7 +797,7 @@ object FABMProveedores: TFABMProveedores
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 910
+        Left = 918
         Top = 1
         Width = 109
         Height = 17
@@ -813,10 +813,10 @@ object FABMProveedores: TFABMProveedores
     end
     object PageControl1: TPageControl
       Left = 1
-      Top = 389
-      Width = 1020
+      Top = 391
+      Width = 1028
       Height = 193
-      ActivePage = TabSheet2
+      ActivePage = TabSheet1
       Align = alBottom
       TabOrder = 3
       object TabSheet1: TTabSheet
@@ -824,7 +824,7 @@ object FABMProveedores: TFABMProveedores
         object Panel_edicion: TPanel
           Left = 0
           Top = 2
-          Width = 1012
+          Width = 1020
           Height = 163
           Align = alBottom
           Enabled = False
@@ -1145,7 +1145,7 @@ object FABMProveedores: TFABMProveedores
         object GBoxConceptosAsig: TGroupBox
           Left = 489
           Top = 0
-          Width = 523
+          Width = 531
           Height = 165
           Align = alClient
           Caption = ' Conceptos Asignados '
@@ -1153,7 +1153,7 @@ object FABMProveedores: TFABMProveedores
           object DBGridConceptos: TDBGrid
             Left = 2
             Top = 15
-            Width = 519
+            Width = 527
             Height = 148
             Align = alClient
             Color = 16772842
@@ -1182,7 +1182,7 @@ object FABMProveedores: TFABMProveedores
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
