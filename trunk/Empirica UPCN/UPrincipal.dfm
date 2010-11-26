@@ -153,6 +153,10 @@ object FPrincipal: TFPrincipal
       ImageIndex = 27
       OnExecute = AImprimirChequeExecute
     end
+    object AABM_TipoDenom: TAction
+      Caption = 'ABM Tipo Denominacion'
+      OnExecute = AABM_TipoDenomExecute
+    end
   end
   object MainMenu1: TMainMenu
     Images = Iconos_Menu_16
@@ -162,6 +166,9 @@ object FPrincipal: TFPrincipal
       Caption = '&Configuraci'#243'n'
       object ABMAutoridad1: TMenuItem
         Action = AABM_Autoridad
+      end
+      object ABMTipoDenominacin1: TMenuItem
+        Action = AABM_TipoDenom
       end
       object ABMConceptos1: TMenuItem
         Action = AConceptos

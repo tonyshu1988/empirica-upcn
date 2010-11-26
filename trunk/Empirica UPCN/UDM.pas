@@ -66,7 +66,7 @@ begin
   ZQ_Configuracion.Open;
   if ZQ_Configuracion.Locate('clave', 'iniciar_libro_banco',[]) then
     if (ZQ_ConfiguracionTEXTO.AsString = 'SI') then
-      if CuentaNro > 0 then
+      //if CuentaNro > 0 then
         FPrincipal.ABMMovimientos1.Click;
 end;
 

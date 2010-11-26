@@ -147,13 +147,15 @@ begin
       ZQ_Cuentas.Delete
     else
       exit;
+
     try
-      if not (dm.EKModelo.finalizar_transaccion(transaccion_cuentas)) then
-        dm.EKModelo.cancelar_transaccion(transaccion_cuentas);
+      if not(dm.EKModelo.finalizar_transaccion(transaccion_cuentas)) then
+        raise Exception.Create('');
 
     except
       begin
-        Application.MessageBox('La cuenta seleccionada no se puede borrar porque está siendo utilizada.','Atención',MB_OK+MB_ICONINFORMATION);
+        Application.MessageBox('La cuenta seleccionada no se puede eliminar.'+char(13)+
+        'Verifique que no esta siendo utilizada en algun movimiento.','ABM Cuentas',MB_OK+MB_ICONINFORMATION);
         dm.EKModelo.cancelar_transaccion(transaccion_cuentas);
       end
     end;

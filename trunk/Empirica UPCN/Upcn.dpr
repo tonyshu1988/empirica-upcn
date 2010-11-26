@@ -19,7 +19,8 @@ uses
   UABM_MedioCobroPago in 'UABM_MedioCobroPago.pas' {FABM_MedioCobroPago},
   UAuditoria in 'UAuditoria.pas' {FAuditoria},
   UReporteMovProveedor in 'UReporteMovProveedor.pas' {FReporteMovProveedor},
-  UImpresionCheques in 'UImpresionCheques.pas' {FImpresionCheques};
+  UImpresionCheques in 'UImpresionCheques.pas' {FImpresionCheques},
+  UABM_Tipo_Denominacion in 'UABM_Tipo_Denominacion.pas' {FABM_Tipo_Denominacion};
 
 {$R *.res}
 

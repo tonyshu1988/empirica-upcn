@@ -54,6 +54,8 @@ type
     MovimientoProveedor1: TMenuItem;
     AImprimirCheque: TAction;
     ImprimirCheque1: TMenuItem;
+    AABM_TipoDenom: TAction;
+    ABMTipoDenominacin1: TMenuItem;
     procedure ALiquidacionExecute(Sender: TObject);
     procedure CambiarContrasea1Click(Sender: TObject);
     procedure Salir2Click(Sender: TObject);
@@ -73,6 +75,7 @@ type
     procedure ARepMovProveedorExecute(Sender: TObject);
     procedure AImprimirChequeExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure AABM_TipoDenomExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -90,7 +93,7 @@ Uses UDM, UConfiguracion, UABMProveedores, UABM_Cuentas,
   UConceptos, UUtilidades, UMovimientos, USaldoInicial,
   UReportes_Disponibilidades, UListadoErogaciones, UConciliacion,
   UABM_Autoridad, UABM_MedioCobroPago, UAuditoria, UReporteMovProveedor,
-  UImpresionCheques;
+  UImpresionCheques, UABM_Tipo_Denominacion;
 
 function salir_de_programa:boolean;
 begin
@@ -203,6 +206,11 @@ end;
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
 Caption:=Application.Title;
+end;
+
+procedure TFPrincipal.AABM_TipoDenomExecute(Sender: TObject);
+begin
+ EKVentanas1.Abrir(Sender, TFABM_Tipo_Denominacion, FABM_Tipo_Denominacion);
 end;
 
 end.
