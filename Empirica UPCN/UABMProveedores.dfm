@@ -1111,7 +1111,7 @@ object FABMProveedores: TFABMProveedores
         object GBoxCuentasAsig: TGroupBox
           Left = 0
           Top = 0
-          Width = 497
+          Width = 489
           Height = 165
           Align = alLeft
           Caption = ' Cuentas Asignadas '
@@ -1119,7 +1119,7 @@ object FABMProveedores: TFABMProveedores
           object DBGridCuentas: TDBGrid
             Left = 2
             Top = 15
-            Width = 493
+            Width = 485
             Height = 148
             Align = alClient
             Color = 16772842
@@ -1136,25 +1136,16 @@ object FABMProveedores: TFABMProveedores
             Columns = <
               item
                 Expanded = False
-                FieldName = 'ID'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_PROVEEDOR'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_CUENTA'
+                FieldName = '_nombre'
+                Title.Caption = 'Cuenta'
                 Visible = True
               end>
           end
         end
         object GBoxConceptosAsig: TGroupBox
-          Left = 497
+          Left = 489
           Top = 0
-          Width = 515
+          Width = 523
           Height = 165
           Align = alClient
           Caption = ' Conceptos Asignados '
@@ -1162,7 +1153,7 @@ object FABMProveedores: TFABMProveedores
           object DBGridConceptos: TDBGrid
             Left = 2
             Top = 15
-            Width = 511
+            Width = 519
             Height = 148
             Align = alClient
             Color = 16772842
@@ -1179,17 +1170,8 @@ object FABMProveedores: TFABMProveedores
             Columns = <
               item
                 Expanded = False
-                FieldName = 'ID'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_PROVEEDOR'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_CONCEPTO'
+                FieldName = '_nombre'
+                Title.Caption = 'Concepto'
                 Visible = True
               end>
           end
@@ -1819,8 +1801,8 @@ object FABMProveedores: TFABMProveedores
         Name = 'id_concepto'
         ParamType = ptUnknown
       end>
-    Left = 373
-    Top = 300
+    Left = 461
+    Top = 236
     ParamData = <
       item
         DataType = ftUnknown
@@ -1985,6 +1967,16 @@ object FABMProveedores: TFABMProveedores
     object ZQ_ProvConceptosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
     end
+    object ZQ_ProvConceptos_nombre: TStringField
+      FieldKind = fkLookup
+      FieldName = '_nombre'
+      LookupDataSet = ZQ_Conceptos
+      LookupKeyFields = 'ID_CONCEPTO'
+      LookupResultField = 'NOMBRE_CONCEPTO'
+      KeyFields = 'ID_CONCEPTO'
+      Size = 100
+      Lookup = True
+    end
   end
   object ZQ_ProvCtas: TZQuery
     Connection = DM.Conexion
@@ -2014,6 +2006,126 @@ object FABMProveedores: TFABMProveedores
     end
     object ZQ_ProvCtasID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
+    end
+    object ZQ_ProvCtas_nombre: TStringField
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = '_nombre'
+      LookupDataSet = ZQ_CuentasA
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'NOMBRE_CUENTA'
+      KeyFields = 'ID_CUENTA'
+      Size = 100
+      Lookup = True
+    end
+  end
+  object MenuCtas: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    MenuAnimation = [maLeftToRight]
+    Left = 738
+    Top = 273
+    object Cta1: TMenuItem
+      Caption = 'Agregar Cuenta'
+      ImageIndex = 40
+      OnClick = Cta1Click
+    end
+    object Cta2: TMenuItem
+      Caption = 'Quitar Cuenta'
+      ImageIndex = 43
+      OnClick = Cta2Click
+    end
+  end
+  object MenuConc: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    MenuAnimation = [maLeftToRight]
+    Left = 810
+    Top = 273
+    object Conc1: TMenuItem
+      Caption = 'Agregar Concepto'
+      ImageIndex = 40
+      OnClick = Conc1Click
+    end
+    object Conc2: TMenuItem
+      Caption = 'Quitar Concepto'
+      ImageIndex = 43
+      OnClick = Conc2Click
+    end
+  end
+  object EKCtas: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select c.id_cuenta,c.nombre_cuenta'
+      'from ie_cuentas c'
+      'order by c.nombre_cuenta')
+    CampoBuscar = 'nombre_cuenta'
+    CampoClave = 'id_cuenta'
+    BuscarEnQuery = ZQ_CuentasA
+    TituloVentana = 'Seleccionar Cuentas'
+    Left = 200
+    Top = 312
+  end
+  object EKConc: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select c.id_concepto,c.nombre_concepto'
+      'from ie_conceptos c'
+      'order by c.nombre_concepto')
+    CampoBuscar = 'nombre_concepto'
+    CampoClave = 'id_concepto'
+    BuscarEnQuery = ZQ_Conceptos
+    TituloVentana = 'Seleccionar Concepto'
+    Left = 312
+    Top = 312
+  end
+  object ZSP_VerificarElim: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'CANT'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'PROV'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CONC'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CTA'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'VERIFICAR_PROV_CTA_CONC'
+    Left = 448
+    Top = 312
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'CANT'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'PROV'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CONC'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CTA'
+        ParamType = ptInput
+      end>
+    object ZSP_VerificarElimCANT: TIntegerField
+      FieldName = 'CANT'
     end
   end
 end
