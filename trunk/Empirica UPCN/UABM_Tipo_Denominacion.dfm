@@ -79,7 +79,6 @@ object FABM_Tipo_Denominacion: TFABM_Tipo_Denominacion
         Top = 9
         Width = 361
         Height = 21
-        CharCase = ecUpperCase
         DataField = 'DESCRIPCION'
         DataSource = DS_tipo_proveedor
         Font.Charset = ANSI_CHARSET
@@ -383,7 +382,6 @@ object FABM_Tipo_Denominacion: TFABM_Tipo_Denominacion
     Top = 112
     object ZQ_tipo_proveedorID_TIPO: TIntegerField
       FieldName = 'ID_TIPO'
-      Required = True
     end
     object ZQ_tipo_proveedorDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
