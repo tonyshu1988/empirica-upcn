@@ -37,7 +37,13 @@ object FConciliacion: TFConciliacion
       Align = alClient
       Color = 16772842
       DataSource = DS_Conciliacion
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      ParentFont = False
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -51,6 +57,11 @@ object FConciliacion: TFConciliacion
           FieldName = 'FECHA_PD'
           Title.Alignment = taCenter
           Title.Caption = 'Fecha PD'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Verdana'
+          Title.Font.Style = []
           Width = 84
           Visible = True
         end
@@ -60,6 +71,11 @@ object FConciliacion: TFConciliacion
           FieldName = 'NRO_MEDIO'
           Title.Alignment = taCenter
           Title.Caption = 'Nro Cheque'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Verdana'
+          Title.Font.Style = []
           Width = 155
           Visible = True
         end
@@ -68,6 +84,11 @@ object FConciliacion: TFConciliacion
           FieldName = 'PROVEEDOR'
           Title.Alignment = taCenter
           Title.Caption = 'Denominaci'#243'n'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Verdana'
+          Title.Font.Style = []
           Width = 373
           Visible = True
         end
@@ -76,6 +97,11 @@ object FConciliacion: TFConciliacion
           FieldName = 'TIPO_PROVEEDOR'
           Title.Alignment = taCenter
           Title.Caption = 'Tipo'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Verdana'
+          Title.Font.Style = []
           Width = 106
           Visible = True
         end
@@ -84,6 +110,11 @@ object FConciliacion: TFConciliacion
           FieldName = 'HABER'
           Title.Alignment = taCenter
           Title.Caption = 'Importe'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Verdana'
+          Title.Font.Style = []
           Width = 113
           Visible = True
         end>
