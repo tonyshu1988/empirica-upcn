@@ -155,6 +155,7 @@ object FPrincipal: TFPrincipal
     end
     object AABM_TipoDenom: TAction
       Caption = 'ABM Tipo Denominacion'
+      ImageIndex = 19
       OnExecute = AABM_TipoDenomExecute
     end
   end
