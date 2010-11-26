@@ -105,7 +105,6 @@ type
     QRLabel8: TQRLabel;
     QRLabel4: TQRLabel;
     qrSaldoLibroBanco: TQRLabel;
-    QRDBText1: TQRDBText;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     QRShape2: TQRShape;
     QRShape3: TQRShape;
@@ -151,6 +150,7 @@ type
     QRShapeV5: TQRShape;
     QRShapeV6: TQRShape;
     QRShapeH1: TQRShape;
+    qrCuenta: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
@@ -235,7 +235,7 @@ begin
       ZSP_LibroBanco.Last;
 
       lblNombreCuenta.Caption:= BuscarParametros.ParametrosSelecReales1[0];
-
+      qrCuenta.Caption:=lblNombreCuenta.Caption;
       lblFHasta.Caption:= BuscarParametros.ParametrosSelecReales1[1];
       lblFechaConciliacion.Caption:= BuscarParametros.ParametrosSelecReales1[1];
       lblFechaExtracto.Caption:= BuscarParametros.ParametrosSelecReales1[1];
@@ -244,7 +244,7 @@ begin
       lblTotalHaber.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma1.SumCollection[0].SumValue); //'$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue);
       lblSaldoConciliacion.Caption:= FormatFloat('$ ###,###,##0.00', (ZSP_LibroBancoSALDO.AsFloat+EKDbSuma1.SumCollection[0].SumValue)); //'$ '+floattostr(EKDbSuma1.SumCollection[0].SumValue+ZSP_LibroBancoSALDO.AsFloat);
       lblSaldoExtracto.Caption:= FormatFloat('$ ###,###,##0.00', StrToFloat(BuscarParametros.ParametrosSelecReales1[2])); //'$ '+ BuscarParametros.ParametrosSelecReales1[2];
-      lblDetalleExtracto.Caption:= BuscarParametros.ParametrosSelecReales1[3];
+      //lblDetalleExtracto.Caption:= BuscarParametros.ParametrosSelecReales1[3];
     end;
   end;
 end;
@@ -279,7 +279,6 @@ procedure TFConciliacion.btImprimirClick(Sender: TObject);
 begin
   if ZSP_Conciliacion.IsEmpty then
     exit;
-
   aux_fecha:= '';
   qrSaldoLibroBanco.Caption:=lblSaldo.Caption;
   qrSaldoConciliacion.Caption:=lblSaldoConciliacion.Caption;

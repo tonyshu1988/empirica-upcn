@@ -369,8 +369,8 @@ object FConciliacion: TFConciliacion
     end
     object RepConciliacion: TQuickRep
       Tag = 99
-      Left = 169
-      Top = 84
+      Left = 129
+      Top = 124
       Width = 794
       Height = 1123
       Frame.Color = clBlack
@@ -615,38 +615,6 @@ object FConciliacion: TFConciliacion
           WordWrap = True
           FontSize = 9
         end
-        object QRDBText1: TQRDBText
-          Left = 102
-          Top = 98
-          Width = 513
-          Height = 17
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            44.979166666666670000
-            269.875000000000000000
-            259.291666666666700000
-            1357.312500000000000000)
-          Alignment = taCenter
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Cuentas
-          DataField = 'BUSQUEDA'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          FontSize = 10
-        end
         object QRLabel2: TQRLabel
           Left = 0
           Top = 119
@@ -677,6 +645,37 @@ object FConciliacion: TFConciliacion
           Transparent = False
           WordWrap = True
           FontSize = 9
+        end
+        object qrCuenta: TQRLabel
+          Left = 241
+          Top = 88
+          Width = 236
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            637.645833333333300000
+            232.833333333333300000
+            624.416666666666700000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'CONCILIACION BANCARIA'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          FontSize = 12
         end
       end
       object QRBandDetalle: TQRBand
@@ -2132,13 +2131,6 @@ object FConciliacion: TFConciliacion
         Titulo = 'Monto Extr. Banc.'
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        CambiarCondicion = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Detalle Extr. Banc.'
-        TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         CambiarCondicion = False
         ItemIndex = -1
