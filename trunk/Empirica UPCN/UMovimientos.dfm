@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 51
-  Top = 2
+  Left = 76
+  Top = 137
   Width = 1237
   Height = 758
   Caption = 'Libro Banco'

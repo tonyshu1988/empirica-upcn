@@ -38,7 +38,6 @@ type
     RepProv: TQuickRep;
     QRBand7: TQRBand;
     QRBand10: TQRBand;
-    QRDBText53: TQRDBText;
     QRDBText63: TQRDBText;
     QRDBText67: TQRDBText;
     QRDBText69: TQRDBText;
@@ -155,6 +154,9 @@ type
     ZQ_ProvCtas_nombre: TStringField;
     ZSP_VerificarElim: TZStoredProc;
     ZSP_VerificarElimCANT: TIntegerField;
+    QRLabel1: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRDBText4: TQRDBText;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
@@ -181,6 +183,7 @@ type
     procedure Cta2Click(Sender: TObject);
     procedure Conc1Click(Sender: TObject);
     procedure Conc2Click(Sender: TObject);
+    procedure cargarQuerys();
   private
     { Private declarations }
   public
@@ -210,6 +213,7 @@ procedure TFABMProveedores.BtNuevoClick(Sender: TObject);
 var
   id_proveedor: integer;
 begin
+  cargarQuerys();
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores,ZQ_ProvCtas,ZQ_ProvConceptos]) then
   begin
     DBGridProveedores.Enabled := false;
@@ -239,7 +243,7 @@ procedure TFABMProveedores.BtModificarClick(Sender: TObject);
 begin
   if (ZQ_IE_Proveedores.IsEmpty) then//OR (ZQ_IE_ProveedoresEDITABLE.AsString='N') then
     exit;
-
+  cargarQuerys();
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMProveedores, [ZQ_IE_Proveedores,ZQ_ProvCtas,ZQ_ProvConceptos]) then
   begin
     Panel_edicion.Enabled:= true;
@@ -386,14 +390,24 @@ end;
 procedure TFABMProveedores.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla1.CargarConfigColunmas;
-  dm.EKModelo.abrir(ZQ_TipoDocumento);
-  dm.EKModelo.abrir(ZQ_TipoProveedor);
-  dm.EKModelo.abrir(ZQ_CondicIVA);
-  dm.EKModelo.abrir(ZQ_TipoFactura);
-  dm.EKModelo.abrir(ZQ_Conceptos);
-  dm.EKModelo.abrir(ZQ_CuentasA);
+  cargarQuerys();
   EKBusquedaAvanzada1.Abrir;
   PageControl1.ActivePageIndex:= 0;
+end;
+procedure TFABMProveedores.cargarQuerys();
+begin
+  ZQ_TipoDocumento.Active:=False;
+  ZQ_TipoDocumento.Active:=True;
+  ZQ_TipoProveedor.Active:=False;
+  ZQ_TipoProveedor.Active:=True;
+  ZQ_CondicIVA.Active:=False;
+  ZQ_CondicIVA.Active:=True;
+  ZQ_TipoFactura.Active:=False;
+  ZQ_TipoFactura.Active:=True;
+  ZQ_Conceptos.Active:=False;
+  ZQ_Conceptos.Active:=True;
+  ZQ_CuentasA.Active:=False;
+  ZQ_CuentasA.Active:=True;
 end;
 
 
