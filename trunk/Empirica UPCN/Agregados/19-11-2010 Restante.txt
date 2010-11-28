@@ -13,7 +13,9 @@ OK --////Exportación de Excel en casi todas las pantallas.
 		OK --////Reporte Libro Banco.
 		OK --////Conciliacion.
 		OK --////Listado Erogaciones.
-		Reporte Movimientos.
+
+Reporte Movimientos.
+)))))))))))))))))))))
 Ver ampliar el campo en la busqueda de cuenta.
 Saldo total en Reportes Movimientos.
 Revisar el transporte en LE.
