@@ -1,6 +1,6 @@
 object FABM_Tipo_Denominacion: TFABM_Tipo_Denominacion
-  Left = 278
-  Top = 150
+  Left = 400
+  Top = 306
   Width = 870
   Height = 500
   Caption = 'ABM Tipo Denominacion'
