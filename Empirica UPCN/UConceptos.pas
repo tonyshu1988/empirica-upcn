@@ -227,7 +227,9 @@ if validarcampos() then
           GrupoEditando.Enabled := true;
           GrupoGuardarCancelar.Enabled := false;
           ZQ_IE_Conceptos.Refresh;
-        end;
+        end
+        else
+          raise Exception.Create('');
       end
      except
         Application.MessageBox('Verifique que el Código ingresado no exista y que los campos estén correctamente cargados.','Validación',MB_OK+MB_ICONINFORMATION);
