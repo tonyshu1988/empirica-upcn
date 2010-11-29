@@ -43,12 +43,18 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Align = alClient
         Color = 16772842
         DataSource = DS_LIBRO_BANCO
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        ParentFont = False
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Charset = ANSI_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Name = 'Verdana'
         TitleFont.Style = []
         OnDrawColumnCell = DBGridLibroBancoDrawColumnCell
         Columns = <
@@ -291,8 +297,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       end
       object RepLibroB: TQuickRep
         Tag = 99
-        Left = 57
-        Top = 78
+        Left = -15
+        Top = 70
         Width = 1123
         Height = 794
         Frame.Color = clBlack
@@ -1289,9 +1295,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             FontSize = 8
           end
           object QRLabel21: TQRLabel
-            Left = 816
+            Left = 752
             Top = 1
-            Width = 34
+            Width = 98
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1300,10 +1306,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              2159.000000000000000000
+              1989.666666666667000000
               2.645833333333333000
-              89.958333333333320000)
-            Alignment = taRightJustify
+              259.291666666666700000)
+            Alignment = taCenter
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
@@ -1320,9 +1326,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             FontSize = 8
           end
           object QRLabel22: TQRLabel
-            Left = 1008
+            Left = 952
             Top = 1
-            Width = 37
+            Width = 93
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1331,10 +1337,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              2667.000000000000000000
+              2518.833333333333000000
               2.645833333333333000
-              97.895833333333320000)
-            Alignment = taRightJustify
+              246.062500000000000000)
+            Alignment = taCenter
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
@@ -1365,7 +1371,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               1140.354166666667000000
               2.645833333333333000
               267.229166666666700000)
-            Alignment = taRightJustify
+            Alignment = taCenter
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
@@ -1384,7 +1390,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           object QRLabel26: TQRLabel
             Left = 264
             Top = 1
-            Width = 39
+            Width = 161
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1395,8 +1401,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               37.041666666666670000
               698.500000000000000000
               2.645833333333333000
-              103.187500000000000000)
-            Alignment = taLeftJustify
+              425.979166666666700000)
+            Alignment = taCenter
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
@@ -1413,9 +1419,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             FontSize = 8
           end
           object QRLabel27: TQRLabel
-            Left = 908
+            Left = 848
             Top = 1
-            Width = 40
+            Width = 100
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1424,10 +1430,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              2402.416666666667000000
+              2243.666666666667000000
               2.645833333333333000
-              105.833333333333300000)
-            Alignment = taRightJustify
+              264.583333333333400000)
+            Alignment = taCenter
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
@@ -1446,7 +1452,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           object QRLabel16: TQRLabel
             Left = 535
             Top = 1
-            Width = 114
+            Width = 218
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1457,8 +1463,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               37.041666666666670000
               1415.520833333333000000
               2.645833333333333000
-              301.625000000000000000)
-            Alignment = taLeftJustify
+              576.791666666666800000)
+            Alignment = taCenter
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
