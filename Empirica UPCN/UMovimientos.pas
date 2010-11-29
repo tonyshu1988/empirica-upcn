@@ -802,7 +802,7 @@ end;
 procedure TFMovimientos.btaplicarClick(Sender: TObject);
 begin
   //Tipo refresco...
-  refrescarConsultas();
+ // refrescarConsultas();
   LIBRO_BANCO.Close;
   LIBRO_BANCO.ParamByName('cuenta').AsInteger :=ZQ_CuentasID_CUENTA.AsInteger;
   LIBRO_BANCO.ParamByName('desde').AsDate := DTPFechaDesde.Date;

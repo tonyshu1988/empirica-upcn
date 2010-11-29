@@ -23,8 +23,8 @@ object FConciliacion: TFConciliacion
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1025
-    Height = 593
+    Width = 1033
+    Height = 595
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -32,8 +32,8 @@ object FConciliacion: TFConciliacion
     object DBGridConciliacion: TDBGrid
       Left = 3
       Top = 56
-      Width = 1019
-      Height = 488
+      Width = 1027
+      Height = 490
       Align = alClient
       Color = 16772842
       DataSource = DS_Conciliacion
@@ -122,13 +122,13 @@ object FConciliacion: TFConciliacion
     object pDatos: TPanel
       Left = 3
       Top = 3
-      Width = 1019
+      Width = 1027
       Height = 53
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
       DesignSize = (
-        1019
+        1027
         53)
       object Shape1: TShape
         Left = 3
@@ -265,8 +265,8 @@ object FConciliacion: TFConciliacion
     end
     object Panel1: TPanel
       Left = 3
-      Top = 544
-      Width = 1019
+      Top = 546
+      Width = 1027
       Height = 46
       Align = alBottom
       BevelOuter = bvNone
@@ -471,7 +471,7 @@ object FConciliacion: TFConciliacion
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          359.833333333333300000
+          359.833333333333400000
           1899.708333333333000000)
         BandType = rbPageHeader
         object QRDBImage1: TQRDBImage
@@ -503,9 +503,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            637.645833333333300000
+            637.645833333333400000
             158.750000000000000000
-            624.416666666666700000)
+            624.416666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -534,9 +534,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            640.291666666666700000
+            640.291666666666800000
             95.250000000000000000
-            616.479166666666700000)
+            616.479166666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -565,9 +565,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            550.333333333333300000
+            550.333333333333400000
             37.041666666666670000
-            799.041666666666700000)
+            799.041666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -689,9 +689,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            637.645833333333300000
-            232.833333333333300000
-            624.416666666666700000)
+            637.645833333333400000
+            232.833333333333400000
+            624.416666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -929,7 +929,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             42.333333333333330000
-            625.739583333333300000
+            625.739583333333200000
             -1.322916666666667000
             7.937500000000000000)
           Shape = qrsVertLine
@@ -1110,7 +1110,7 @@ object FConciliacion: TFConciliacion
             39.687500000000000000
             635.000000000000000000
             0.000000000000000000
-            613.833333333333300000)
+            613.833333333333200000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -1286,7 +1286,7 @@ object FConciliacion: TFConciliacion
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          264.583333333333300000
+          264.583333333333400000
           1899.708333333333000000)
         BandType = rbSummary
         object QRShape2: TQRShape
@@ -1300,7 +1300,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            61.184895833333330000
+            61.184895833333320000
             0.000000000000000000
             84.335937500000000000
             1898.385416666667000000)
@@ -1310,7 +1310,7 @@ object FConciliacion: TFConciliacion
         object QRShape5: TQRShape
           Left = 585
           Top = 32
-          Width = 133
+          Width = 132
           Height = 23
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1318,7 +1318,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            61.184895833333330000
+            61.184895833333320000
             1547.812500000000000000
             84.335937500000000000
             350.572916666666700000)
@@ -1336,7 +1336,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            61.184895833333330000
+            61.184895833333320000
             0.000000000000000000
             143.867187500000000000
             1898.385416666667000000)
@@ -1346,7 +1346,7 @@ object FConciliacion: TFConciliacion
         object QRShape4: TQRShape
           Left = 585
           Top = 54
-          Width = 133
+          Width = 132
           Height = 23
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1354,7 +1354,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            61.184895833333330000
+            61.184895833333320000
             1547.812500000000000000
             143.867187500000000000
             350.572916666666700000)
@@ -1391,9 +1391,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            907.520833333333300000
-            89.958333333333330000
-            616.479166666666700000)
+            907.520833333333400000
+            89.958333333333320000
+            616.479166666666800000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = True
@@ -1547,7 +1547,7 @@ object FConciliacion: TFConciliacion
           Size.Values = (
             49.136904761904760000
             1553.482142857143000000
-            92.604166666666670000
+            92.604166666666680000
             338.288690476190500000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -1571,7 +1571,7 @@ object FConciliacion: TFConciliacion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
