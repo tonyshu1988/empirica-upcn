@@ -557,7 +557,7 @@ begin
 
   if (ZQ_MovimientosNRO_PROVEEDOR.IsNull) then
   begin
-    Application.MessageBox('El campo "Proveedor" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El campo "Denominacion" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
     result := false;
     exit;
   end;
