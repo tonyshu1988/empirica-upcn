@@ -165,7 +165,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            709.083333333333200000
+            709.083333333333400000
             95.250000000000000000
             478.895833333333400000)
           Alignment = taCenter
@@ -246,6 +246,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Top = 0
           Width = 155
           Height = 13
+          Enabled = False
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
@@ -370,6 +371,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Top = 0
           Width = 155
           Height = 14
+          Enabled = False
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
@@ -649,6 +651,7 @@ object FABM_Cuentas: TFABM_Cuentas
         Height = 13
         Caption = 'Medio por Defecto:'
         Transparent = True
+        Visible = False
       end
       object ShapeColorConciliacion: TShape
         Left = 640
@@ -705,6 +708,7 @@ object FABM_Cuentas: TFABM_Cuentas
         ListSource = DS_Medios
         ParentFont = False
         TabOrder = 2
+        Visible = False
       end
       object btnColorConciliacion: TButton
         Left = 520
@@ -882,10 +886,6 @@ object FABM_Cuentas: TFABM_Cuentas
           end
           item
             Item = btnModificar
-            Visible = True
-          end
-          item
-            Item = btnEliminar
             Visible = True
           end
           item

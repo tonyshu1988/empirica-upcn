@@ -754,6 +754,11 @@ begin
       ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
     end;
 
+    if PIngresos.Visible then
+        DBEditIngreso_Importe.SetFocus
+      else
+        DBEditEgreso_Importe.SetFocus;
+
     try
     if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
     begin

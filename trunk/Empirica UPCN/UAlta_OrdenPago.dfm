@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 266
-  Top = 167
+  Left = 389
+  Top = 168
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -387,6 +387,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Top = 60
         Width = 541
         Height = 21
+        DataField = 'NRO_CUENTA'
+        DataSource = DS_Movimientos
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -511,7 +513,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -858,6 +860,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
     object ZQ_MovimientosNRO_ORDEN_STRING: TStringField
       FieldName = 'NRO_ORDEN_STRING'
+    end
+    object ZQ_MovimientosNRO_CUENTA: TIntegerField
+      FieldName = 'NRO_CUENTA'
     end
   end
   object DS_Movimientos: TDataSource
@@ -1343,16 +1348,27 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Connection = DM.Conexion
     SQL.Strings = (
       
-        'select c.clave, c.fecha, c.numero, c.texto, c.nivel, c.grupo, c.' +
-        'descripcion, c.grafico'
+        'select first 1 c.clave, c.fecha, c.numero, c.texto, c.nivel, c.g' +
+        'rupo, c.descripcion, c.grafico'
       'from configuracion c'
-      'where c.clave='#39'ULTIMO_NRO_ORDEN_P'#39)
-    Params = <>
+      'where c.clave='#39'ULTIMO_NRO_ORDEN_P'#39
+      'and (c.numero=:cta)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'cta'
+        ParamType = ptUnknown
+      end>
     Left = 667
     Top = 185
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cta'
+        ParamType = ptUnknown
+      end>
     object ZQ_ConfiguracionCLAVE: TStringField
       FieldName = 'CLAVE'
-      Required = True
     end
     object ZQ_ConfiguracionFECHA: TDateField
       FieldName = 'FECHA'
@@ -1362,7 +1378,6 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
     object ZQ_ConfiguracionTEXTO: TStringField
       FieldName = 'TEXTO'
-      Required = True
       Size = 100
     end
     object ZQ_ConfiguracionNIVEL: TSmallintField

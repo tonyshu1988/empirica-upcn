@@ -161,6 +161,7 @@ type
     ZQ_ProveedoresTIPO_PROVEEDOR: TStringField;
     DBLookupComboBox2: TDBLookupComboBox;
     Label2: TLabel;
+    ZQ_MovimientosNRO_CUENTA: TIntegerField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -328,8 +329,8 @@ begin
     //ZSP_NRO_ORDEN_SIGUIENTE.Active:=True;
     //ZQ_MovimientosNRO_ORDEN_STRING.AsString:=ZSP_NRO_ORDEN_SIGUIENTENRO_ORDEN_STRING.AsString;
 
-    ZQ_MovimientosNRO_ORDEN.AsInteger:=ZQ_ConfiguracionNUMERO.AsInteger;
-    ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNUMERO.AsInteger)]);
+    ZQ_MovimientosNRO_ORDEN.AsInteger:=ZQ_ConfiguracionNIVEL.AsInteger;
+    ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNIVEL.AsInteger)]);
 
   end;
 end;
@@ -402,6 +403,7 @@ begin
       ZSP_DECODIFICAR_NRO_ORDEN.ParamByName('NRO_ORDEN_STRING').AsString:=dbNroOrden.Text;
       ZSP_DECODIFICAR_NRO_ORDEN.Active:=True;
       ZQ_MovimientosNRO_ORDEN.AsInteger:=ZSP_DECODIFICAR_NRO_ORDENNRO_ORDEN.AsInteger;
+      ZQ_MovimientosNRO_CUENTA.AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
       NroOrdenAnt:=ZQ_MovimientosNRO_ORDEN.AsInteger;
 
       ZQ_Cuenta_Movimiento.First;
@@ -468,7 +470,7 @@ begin
 
       ZQ_MovimientosIMPORTE.AsFloat:= EKDbSuma1.SumCollection[0].SumValue;
       ZQ_Configuracion.Edit;
-      ZQ_ConfiguracionNUMERO.AsInteger:=nroOrdenAnt+1;
+      ZQ_ConfiguracionNIVEL.AsInteger:=nroOrdenAnt+1;
       ZQ_Configuracion.Post;
       
       try
@@ -483,7 +485,7 @@ begin
           ZQ_Cuenta_Movimiento.edit;
           ZQ_Movimientos.Edit;
           Application.MessageBox('Verifique que los datos estén cargados correctamente.'+char(13)
-                                +'Revise el Nro de Orden y los nros de cheque ingresados.'+char(13)
+                                +'Revise el Nro de Orden (y su cuenta) y los nros de cheque ingresados.'+char(13)
                                 +'(no deben duplicarse en el sistema/orden de pago)','Orden de Pago',MB_OK+MB_ICONINFORMATION);
           exit;
         end;
@@ -601,7 +603,9 @@ begin
   ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
   ZQ_Proveedores.Active:=true;
   dm.EKModelo.abrir(ZQ_Proveedores);
-  dm.EKModelo.abrir(ZQ_Configuracion);
+  ZQ_Configuracion.Active:=false;
+  ZQ_Configuracion.ParamByName('cta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Configuracion.Active:=true;
 
   if dm.EKUsrLogin1.PermisoAccionValor('ACCESO') = '' then
     CuentaNro:= 0
@@ -637,7 +641,7 @@ end;
 
 procedure TFAlta_OrdenPago.dbFechaEmisionChange(Sender: TObject);
 begin
-  ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNUMERO.AsInteger)]);
+  ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNIVEL.AsInteger)]);
 end;
 
 
@@ -688,6 +692,12 @@ begin
   ZQ_Proveedores.Active:=false;
   ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
   ZQ_Proveedores.Active:=true;
+  ZQ_Configuracion.Active:=false;
+  ZQ_Configuracion.ParamByName('cta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Configuracion.Active:=true;
+  //Si lo permite verifico el ultimo nro de orden con la cuenta correspondiente
+  if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
+     ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNIVEL.AsInteger)]);
 end;
 
 
