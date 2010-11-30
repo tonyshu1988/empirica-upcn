@@ -522,6 +522,7 @@ type
     procedure ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure ZQ_Cuenta_MovimientoIMPORTEValidate(Sender: TField);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -1918,6 +1919,15 @@ end;
 procedure TFMovimientos.Button2Click(Sender: TObject);
 begin
 PanelConciliar.Visible:= false;
+end;
+
+procedure TFMovimientos.ZQ_Cuenta_MovimientoIMPORTEValidate(
+  Sender: TField);
+begin
+//  if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat  >  1000000000000.00) or
+//      (ZQ_Cuenta_MovimientoIMPORTE.AsFloat < -1000000000000.00)
+//   then
+//      raise Exception.Create('Importe ingresado incorrecto, verifique');
 end;
 
 end.

@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 387
-  Top = 26
+  Left = 249
+  Top = 31
   Width = 1237
   Height = 758
   Caption = 'Libro Banco'
@@ -2912,7 +2912,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2553.229166666667000000
             2.645833333333333000
             103.187500000000000000)
@@ -5950,7 +5950,9 @@ object FMovimientos: TFMovimientos
       Size = 50
     end
     object ZQ_Cuenta_MovimientoIMPORTE: TFloatField
+      DisplayWidth = 17
       FieldName = 'IMPORTE'
+      OnValidate = ZQ_Cuenta_MovimientoIMPORTEValidate
       currency = True
     end
     object ZQ_Cuenta_MovimientoCONCILIADO: TStringField
@@ -6456,14 +6458,17 @@ object FMovimientos: TFMovimientos
       Size = 50
     end
     object LIBRO_BANCODEBE: TFloatField
+      DisplayWidth = 17
       FieldName = 'DEBE'
       currency = True
     end
     object LIBRO_BANCOHABER: TFloatField
+      DisplayWidth = 17
       FieldName = 'HABER'
       currency = True
     end
     object LIBRO_BANCOSALDO: TFloatField
+      DisplayWidth = 17
       FieldName = 'SALDO'
       currency = True
     end

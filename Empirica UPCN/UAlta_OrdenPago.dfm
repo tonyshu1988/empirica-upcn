@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 389
-  Top = 168
+  Left = 327
+  Top = 103
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
@@ -941,9 +941,10 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       Size = 50
     end
     object ZQ_Cuenta_MovimientoIMPORTE: TFloatField
+      DisplayWidth = 10
       FieldName = 'IMPORTE'
+      OnValidate = ZQ_Cuenta_MovimientoIMPORTEValidate
       currency = True
-      Precision = 10
     end
     object ZQ_Cuenta_MovimientoCONCILIADO: TStringField
       FieldName = 'CONCILIADO'
