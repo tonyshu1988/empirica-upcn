@@ -402,13 +402,16 @@ begin
     Coneccion.Commit;
     bien := true;
   except
-    on E: Exception do
-    begin
-      if Assigned(transacciones_activas[ta_a].CtrlError) then
-        transacciones_activas[ta_a].CtrlError(transacciones_activas[ta_a].datasets[i], e)
-      else
-        control_errores(E);
-    end
+
+    raise Exception.Create('');
+
+//    on E: Exception do
+//    begin
+//        if Assigned(transacciones_activas[ta_a].CtrlError) then
+//        transacciones_activas[ta_a].CtrlError(transacciones_activas[ta_a].datasets[i], e)
+//      else
+//        control_errores(E);
+//    end
   end;
   if not bien then
   begin

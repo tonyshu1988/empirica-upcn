@@ -22,6 +22,7 @@ var
    d, h:integer;
    s   :string;
 begin
+
       F_Error.error_c.Caption := e.Message;
       // Si es un error generado por los Zeos
       if e.ClassName = 'EZSQLException' then
@@ -88,6 +89,7 @@ begin
 
           f_error.Caption := 'ERROR EN BASE DE DATOS';
           f_error.text_error.Caption := s;
+          F_Error.Visible:=False;
           F_Error.ShowModal;
           //Application.MessageBox(pchar(s),'Error en los Datos Ingresados',0);
           //Application.MessageBox(pchar(e.Message),'Error' ,0);
@@ -101,6 +103,7 @@ begin
           s:=StringReplace(s, 'must have a value', 'No puede estar vacio', [rfReplaceAll]);
           f_error.Caption := 'ERROR EN BASE DE DATOS';
           f_error.text_error.Caption := s;
+          F_Error.Visible:=False;
           F_Error.ShowModal;
       end
       // Otro tipo de Error
@@ -121,6 +124,7 @@ begin
 
           f_error.Caption := 'ERROR GENERAL';
           f_error.text_error.Caption := s;
+          F_Error.Visible:=False;
           F_Error.ShowModal;
 
       end;
