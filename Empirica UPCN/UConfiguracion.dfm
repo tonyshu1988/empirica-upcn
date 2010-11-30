@@ -4,8 +4,8 @@ object FConfiguracion: TFConfiguracion
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'FConfiguracion'
-  ClientHeight = 476
-  ClientWidth = 665
+  ClientHeight = 482
+  ClientWidth = 673
   Color = clBtnFace
   Constraints.MaxHeight = 514
   Constraints.MaxWidth = 681
@@ -25,15 +25,15 @@ object FConfiguracion: TFConfiguracion
   object pFondo: TPanel
     Left = 0
     Top = 0
-    Width = 665
-    Height = 424
+    Width = 673
+    Height = 430
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object grpGeneral: TGroupBox
       Left = 0
-      Top = 235
-      Width = 665
+      Top = 241
+      Width = 673
       Height = 189
       Align = alBottom
       TabOrder = 0
@@ -45,7 +45,7 @@ object FConfiguracion: TFConfiguracion
         Caption = 'Clave:'
       end
       object Label18: TLabel
-        Left = 328
+        Left = 416
         Top = 16
         Width = 38
         Height = 13
@@ -54,9 +54,9 @@ object FConfiguracion: TFConfiguracion
       object Label19: TLabel
         Left = 224
         Top = 16
-        Width = 19
+        Width = 62
         Height = 13
-        Caption = 'N'#186':'
+        Caption = 'Id Cuenta:'
       end
       object Label20: TLabel
         Left = 8
@@ -66,11 +66,11 @@ object FConfiguracion: TFConfiguracion
         Caption = 'Texto:'
       end
       object Label21: TLabel
-        Left = 496
+        Left = 480
         Top = 51
-        Width = 33
+        Width = 19
         Height = 13
-        Caption = 'Nivel:'
+        Caption = 'N'#186':'
       end
       object dbEditClave: TDBEdit
         Left = 48
@@ -88,9 +88,9 @@ object FConfiguracion: TFConfiguracion
         TabOrder = 0
       end
       object dbEditNro: TDBEdit
-        Left = 244
+        Left = 288
         Top = 12
-        Width = 45
+        Width = 113
         Height = 21
         DataField = 'NUMERO'
         DataSource = DS_General
@@ -119,9 +119,9 @@ object FConfiguracion: TFConfiguracion
         TabOrder = 2
       end
       object dbEditNivel: TDBEdit
-        Left = 532
+        Left = 500
         Top = 47
-        Width = 37
+        Width = 61
         Height = 21
         DataField = 'NIVEL'
         DataSource = DS_General
@@ -167,7 +167,7 @@ object FConfiguracion: TFConfiguracion
         TabOrder = 4
       end
       object EKDBDateTimePicker1: TEKDBDateTimePicker
-        Left = 376
+        Left = 456
         Top = 12
         Width = 186
         Height = 21
@@ -187,14 +187,14 @@ object FConfiguracion: TFConfiguracion
     object panelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 665
-      Height = 235
+      Width = 673
+      Height = 241
       Align = alClient
       TabOrder = 1
       object DBGrid2: TDBGrid
         Left = 1
         Top = 25
-        Width = 663
+        Width = 671
         Height = 173
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alTop
@@ -283,7 +283,7 @@ object FConfiguracion: TFConfiguracion
       object Panel3: TPanel
         Left = 1
         Top = 1
-        Width = 663
+        Width = 671
         Height = 24
         Align = alTop
         Caption = 'Configuraci'#243'n General'
@@ -342,7 +342,7 @@ object FConfiguracion: TFConfiguracion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

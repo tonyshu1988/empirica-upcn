@@ -6023,7 +6023,8 @@ object FMovimientos: TFMovimientos
       
         'select c.*, c.nombre_cuenta||'#39' - '#39'|| coalesce ('#39'N'#176': '#39' || c.nro_c' +
         'uenta_bancaria, '#39'N'#176': S/N'#39') Busqueda'
-      'from ie_cuentas c')
+      'from ie_cuentas c'
+      'order by c.id_cuenta')
     Params = <>
     Left = 592
     Top = 169
@@ -6312,6 +6313,9 @@ object FMovimientos: TFMovimientos
     end
     object ZQ_MovimientosNRO_ORDEN_STRING: TStringField
       FieldName = 'NRO_ORDEN_STRING'
+    end
+    object ZQ_MovimientosNRO_CUENTA: TIntegerField
+      FieldName = 'NRO_CUENTA'
     end
   end
   object DS_Proveedores: TDataSource
