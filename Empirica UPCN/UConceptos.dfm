@@ -1,6 +1,6 @@
 object FConceptos: TFConceptos
-  Left = 302
-  Top = 171
+  Left = 465
+  Top = 259
   Width = 870
   Height = 500
   Caption = 'ABM Conceptos'
@@ -194,9 +194,9 @@ object FConceptos: TFConceptos
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            616.479166666666800000
+            616.479166666666700000
             31.750000000000000000
-            664.104166666666800000)
+            664.104166666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True

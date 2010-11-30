@@ -89,14 +89,23 @@ end;
 
 procedure TFABM_Tipo_Denominacion.BtGuardarClick(Sender: TObject);
 begin
-  if DM.EKModelo.finalizar_transaccion(transaccion_Tipo_Denominacion) then
-  begin
-    pDatos.Visible:=false;
-    Grilla.Enabled := true;
-    GrupoEditando.Enabled := true;
-    GrupoGuardarCancelar.Enabled := false;
-    ZQ_tipo_proveedor.Refresh;
-  end;
+  try
+      begin
+       if DM.EKModelo.finalizar_transaccion(transaccion_Tipo_Denominacion) then
+        begin
+          pDatos.Visible:=false;
+          Grilla.Enabled := true;
+          GrupoEditando.Enabled := true;
+          GrupoGuardarCancelar.Enabled := false;
+          ZQ_tipo_proveedor.Refresh;
+        end
+        else
+          raise Exception.Create('');
+      end
+     except
+        Application.MessageBox('Verifique que el Código ingresado no exista y que los campos estén correctamente cargados.','Validación',MB_OK+MB_ICONINFORMATION);
+     end
+
 end;
 
 procedure TFABM_Tipo_Denominacion.BtCancelarClick(Sender: TObject);
