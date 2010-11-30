@@ -193,6 +193,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
+    procedure ZQ_Cuenta_MovimientoIMPORTEValidate(Sender: TField);
   private
     { Private declarations }
   public
@@ -736,6 +737,15 @@ begin
   end;
 end;
 
+
+procedure TFAlta_OrdenPago.ZQ_Cuenta_MovimientoIMPORTEValidate(
+  Sender: TField);
+begin
+  if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat  >  1000000000000.00) or
+      (ZQ_Cuenta_MovimientoIMPORTE.AsFloat < -1000000000000.00)
+   then
+      raise Exception.Create('Importe ingresado incorrecto, verifique');
+end;
 
 end.
 
