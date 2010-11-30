@@ -3857,7 +3857,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            997.479166666666800000
+            997.479166666666900000
             2.645833333333333000
             343.958333333333400000)
           Alignment = taCenter
