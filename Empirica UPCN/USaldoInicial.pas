@@ -232,23 +232,23 @@ begin
 
   if (application.MessageBox(pchar('¿Esta seguro que desea Eliminar el Saldo Inicial seleccionado?                        ' + #13 + #13), 'Eliminar Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    ZQ_Movimiento.Close;
-    ZQ_Movimiento.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
-    ZQ_Movimiento.Open;
     ZQ_Cuenta_Mov.Close;
     ZQ_Cuenta_Mov.ParamByName('nro_mov').AsInteger := ZQ_VerSaldosNRO_MOVIMIENTO.AsInteger;
     ZQ_Cuenta_Mov.Open;
 
-    if dm.EKModelo.iniciar_transaccion(transaccion_saldo, [ZQ_Movimiento, ZQ_Cuenta_Mov]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_saldo, [ZQ_Cuenta_Mov]) then
     begin
-      ZQ_Movimiento.Delete;
       ZQ_Cuenta_Mov.Delete;
     end
     else
       exit;
     try
-      if not(dm.EKModelo.finalizar_transaccion(transaccion_saldo)) then
-       raise Exception.Create('');
+      if dm.EKModelo.finalizar_transaccion(transaccion_saldo) then
+      begin
+        ZQ_VerSaldos.Refresh;
+      end
+      else
+        raise Exception.Create('');
     except
       begin
         Application.MessageBox('El Saldo inicial seleccionado no puede ser eliminado porque está siendo utilizado.','Atención',MB_OK+MB_ICONINFORMATION);

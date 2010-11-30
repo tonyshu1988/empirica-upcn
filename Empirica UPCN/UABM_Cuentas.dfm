@@ -24,8 +24,8 @@ object FABM_Cuentas: TFABM_Cuentas
   object pContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 883
-    Height = 416
+    Width = 875
+    Height = 410
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
@@ -134,7 +134,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            836.083333333333400000
+            836.083333333333300000
             158.750000000000000000
             224.895833333333300000)
           Alignment = taCenter
@@ -165,9 +165,9 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            709.083333333333400000
+            709.083333333333300000
             95.250000000000000000
-            478.895833333333400000)
+            478.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -196,7 +196,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            632.354166666666800000
+            632.354166666666700000
             31.750000000000000000
             635.000000000000000000)
           Alignment = taCenter
@@ -508,7 +508,7 @@ object FABM_Cuentas: TFABM_Cuentas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           1899.708333333333000000)
         BandType = rbPageFooter
         object QRLabel24: TQRLabel
@@ -522,7 +522,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1685.395833333333000000
             2.645833333333333000
             103.187500000000000000)
@@ -553,7 +553,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -621,8 +621,8 @@ object FABM_Cuentas: TFABM_Cuentas
     end
     object pDatos: TPanel
       Left = 2
-      Top = 324
-      Width = 879
+      Top = 318
+      Width = 871
       Height = 90
       Align = alBottom
       BevelOuter = bvNone
@@ -723,8 +723,8 @@ object FABM_Cuentas: TFABM_Cuentas
     object dbGridCuentas: TDBGrid
       Left = 2
       Top = 2
-      Width = 879
-      Height = 322
+      Width = 871
+      Height = 316
       Align = alClient
       Color = 16772842
       DataSource = DS_Cuentas
@@ -766,15 +766,15 @@ object FABM_Cuentas: TFABM_Cuentas
           FieldName = 'medioPago'
           Title.Alignment = taCenter
           Title.Caption = 'Medio por Defecto'
-          Width = 234
-          Visible = True
+          Width = -1
+          Visible = False
         end>
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

@@ -1404,12 +1404,14 @@ begin
     begin
       LIBRO_BANCO.Filtered:=False;
       LIBRO_BANCO.Filter:='';
+      DBGridLibroBanco.Columns[8].Visible := true;
     end
   else
     begin
-      LIBRO_BANCO.Filtered:=False;
-      LIBRO_BANCO.Filter:= Format('CTA_MOV_ANULADO<>%s',[quotedStr('A')]);
-      LIBRO_BANCO.Filtered:=True;
+      LIBRO_BANCO.Filtered:= False;
+      LIBRO_BANCO.Filter:= Format('CTA_MOV_ANULADO <> %s',[quotedStr('A')]);
+      LIBRO_BANCO.Filtered:= True;
+      DBGridLibroBanco.Columns[8].Visible:= false;
     end;
 
   PFiltrosColumnas.Visible:=false;
@@ -1473,6 +1475,11 @@ begin
   else
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaConciliado', 'FALSE');
 
+  if CBTipo.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Tipo', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Tipo', 'FALSE');
+
   if verAnulados.Checked then
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\verAnulados', 'TRUE')
   else
@@ -1499,6 +1506,9 @@ begin
 
   if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Proveedor') <> '' then
     CBProveedor.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Proveedor'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Tipo') <> '' then
+    CBTipo.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Tipo'));
 
   if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Concepto') <> '' then
     CBConcepto.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Concepto'));
