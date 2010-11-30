@@ -148,6 +148,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
             Visible = True
           end
           item
+            Alignment = taRightJustify
             Expanded = False
             FieldName = 'NRO_CHEQUE_TRANSF'
             Font.Charset = ANSI_CHARSET
@@ -513,7 +514,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

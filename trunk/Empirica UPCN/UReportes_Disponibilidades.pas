@@ -137,6 +137,7 @@ type
     LIBRO_BANCONRO_MEDIO: TStringField;
     LIBRO_BANCOORDEN_SALDO_ANTERIOR: TIntegerField;
     LIBRO_BANCOTIPO_PROVEEDOR: TStringField;
+    cbTipo: TCheckBox;
     procedure btnLibroBancoClick(Sender: TObject);
     function  validarDatos():boolean;
     procedure btnSalirClick(Sender: TObject);
@@ -410,15 +411,14 @@ begin
     DBGridLibroBanco.Columns[5].Visible := true;
 
   if not CBProveedor.Checked then  //proveedor
-  begin
-    DBGridLibroBanco.Columns[6].Visible := false;
-    DBGridLibroBanco.Columns[7].Visible := false;
-  end
+    DBGridLibroBanco.Columns[6].Visible := false
   else
-  begin
     DBGridLibroBanco.Columns[6].Visible := true;
+
+  if not cbTipo.Checked then  //Tipo
+    DBGridLibroBanco.Columns[7].Visible := false
+  else
     DBGridLibroBanco.Columns[7].Visible := true;
-  end;
 
   if not CBConcepto.Checked then  //concepto
     DBGridLibroBanco.Columns[9].Visible := false
@@ -491,6 +491,11 @@ begin
   else
     EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Proveedor', 'FALSE');
 
+  if cbTipo.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Tipo', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Tipo', 'FALSE');
+
   if CBConcepto.Checked then
     EKIniGuardarFiltros.EsribirRegString('\UReporteLibroBanco\Filtro\Concepto', 'TRUE')
   else
@@ -542,6 +547,9 @@ begin
 
   if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Proveedor') <> '' then
     CBProveedor.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Proveedor'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Tipo') <> '' then
+    cbTipo.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Tipo'));
 
   if EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Concepto') <> '' then
     CBConcepto.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UReporteLibroBanco\Filtro\Concepto'));

@@ -138,6 +138,7 @@ type
     btexportarExel: TdxBarLargeButton;
     ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Libro_erogacionesTIPO_PROVEEDOR: TStringField;
+    cbTipo: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -375,15 +376,14 @@ begin
     DBGridListaErogacion.Columns[3].Visible := true;
 
   if not CBProveedor.Checked then  //proveedor
-  begin
-    DBGridListaErogacion.Columns[4].Visible := false;
-    DBGridListaErogacion.Columns[5].Visible := false;
-  end
+    DBGridListaErogacion.Columns[4].Visible := false
   else
-  begin
     DBGridListaErogacion.Columns[4].Visible := true;
+
+  if not cbTipo.Checked then  //Tipo
+    DBGridListaErogacion.Columns[5].Visible := false
+  else
     DBGridListaErogacion.Columns[5].Visible := true;
-  end;
 
   if not CBConcepto.Checked then  //concepto
     DBGridListaErogacion.Columns[6].Visible := false
@@ -443,6 +443,11 @@ begin
   else
     EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Proveedor', 'FALSE');
 
+  if cbTipo.Checked then
+    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Tipo', 'TRUE')
+  else
+    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Tipo', 'FALSE');
+
   if CBConcepto.Checked then
     EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Concepto', 'TRUE')
   else
@@ -486,6 +491,9 @@ begin
 
   if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Proveedor') <> '' then
     CBProveedor.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Proveedor'));
+
+  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Tipo') <> '' then
+    cbTipo.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Tipo'));
 
   if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Concepto') <> '' then
     CBConcepto.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Concepto'));
