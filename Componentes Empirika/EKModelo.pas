@@ -396,15 +396,13 @@ begin
     bien := false;
     for i := 0 to length(transacciones_activas[ta_a].datasets)-1 do
     begin
-	 if transacciones_activas[ta_a].datasets[i].Active then
-      transacciones_activas[ta_a].datasets[i].ApplyUpdates;
+	    if transacciones_activas[ta_a].datasets[i].Active then
+        transacciones_activas[ta_a].datasets[i].ApplyUpdates;
     end;
     Coneccion.Commit;
     bien := true;
   except
-
     raise Exception.Create('');
-
 //    on E: Exception do
 //    begin
 //        if Assigned(transacciones_activas[ta_a].CtrlError) then
