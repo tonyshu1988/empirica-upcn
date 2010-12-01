@@ -312,7 +312,7 @@ begin
   begin
     if LIBRO_BANCOID_MOVIMIENTO.AsInteger <> -1 then
     begin
-      if (LIBRO_BANCOCONCILIADO.Value='S') or (LIBRO_BANCOID_MEDIO.AsInteger = 5) then
+      if (LIBRO_BANCOCONCILIADO.Value='S') then
       begin
         DBGridLibroBanco.Canvas.Brush.Color :=StaticTextConciliado.Brush.Color;
         DBGridLibroBanco.Canvas.Font.Color := clBlack;
