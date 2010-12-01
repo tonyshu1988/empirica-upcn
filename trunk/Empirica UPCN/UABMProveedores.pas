@@ -341,11 +341,10 @@ begin
       DBGridCuentas.PopupMenu:=nil;
       DBGridConceptos.PopupMenu:=nil;
       end
-     else
-          raise Exception.Create('');
      except
         begin
-          Application.MessageBox('Verifique que los datos estén cargados correctamente.','Atención',MB_OK+MB_ICONINFORMATION);
+          Application.MessageBox('Verifique que los datos estén cargados correctamente.'+char(13)+
+                                  '(las Cuentas y Conceptos no deben repetirse)','Atención',MB_OK+MB_ICONINFORMATION);
           exit;
         end
      end

@@ -774,8 +774,6 @@ begin
       btaplicar.Click;
       LIBRO_BANCO.RecNo:= recNo;
     end
-    else
-        raise Exception.Create('');
     except
       begin
         Application.MessageBox('Verifique que los datos estén cargados correctamente.'+char(13)

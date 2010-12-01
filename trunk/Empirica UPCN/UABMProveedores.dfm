@@ -169,7 +169,7 @@ object FABMProveedores: TFABMProveedores
             52.916666666666660000
             705.555555555555700000
             94.809027777777790000
-            487.274305555555600000)
+            487.274305555555700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -198,7 +198,7 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666660000
-            628.385416666666800000
+            628.385416666666700000
             30.868055555555560000
             639.409722222222300000)
           Alignment = taCenter
@@ -667,10 +667,10 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
+            37.482638888888890000
             1479.461805555556000000
             4.409722222222222000
-            418.923611111111200000)
+            418.923611111111100000)
           Alignment = taRightJustify
           AlignToBand = True
           AutoSize = True
@@ -705,7 +705,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          41.892361111111120000
+          41.892361111111110000
           1898.385416666667000000)
         BandType = rbPageFooter
         object QRLabel24: TQRLabel

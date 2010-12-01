@@ -123,16 +123,22 @@ begin
 
   if not validarDatos() then
     exit;
+     try
+      begin
+       if DM.EKModelo.finalizar_transaccion(transaccion_autoridad) then
+          begin
+            dbGridAutoridad.Enabled := true;
+            GrupoVisualizando.Enabled := true;
+            GrupoEditando.Enabled := false;
+            pDatos.Visible := false;
+            pDatos.Enabled := false;
+            ZQ_Autoridad.Refresh;
+          end;
+      end
+     except
+        Application.MessageBox('Verifique que la Autoridad ingresada no exista y que los campos estén correctamente cargados.','Validación',MB_OK+MB_ICONINFORMATION);
+     end
 
-  if DM.EKModelo.finalizar_transaccion(transaccion_autoridad) then
-  begin
-    dbGridAutoridad.Enabled := true;
-    GrupoVisualizando.Enabled := true;
-    GrupoEditando.Enabled := false;
-    pDatos.Visible := false;
-    pDatos.Enabled := false;
-    ZQ_Autoridad.Refresh;
-  end;
 end;
 
 

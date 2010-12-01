@@ -173,15 +173,22 @@ begin
   ZQ_Cuentas.Edit;  
   ZQ_CuentasCOLOR_CONSILIADO.AsString:= ColorToString(ShapeColorConciliacion.Brush.Color);
 
-  if DM.EKModelo.finalizar_transaccion(transaccion_cuentas) then
-  begin
-    dbGridCuentas.Enabled := true;
-    GrupoVisualizando.Enabled := true;
-    GrupoEditando.Enabled := false;
-    pDatos.Visible := false;
-    pDatos.Enabled := false;
-    ZQ_Cuentas.Refresh;
-  end;
+   try
+    begin
+     if DM.EKModelo.finalizar_transaccion(transaccion_cuentas) then
+      begin
+        dbGridCuentas.Enabled := true;
+        GrupoVisualizando.Enabled := true;
+        GrupoEditando.Enabled := false;
+        pDatos.Visible := false;
+        pDatos.Enabled := false;
+        ZQ_Cuentas.Refresh;
+      end;
+    end
+   except
+      Application.MessageBox('Verifique que la Cuenta ingresada no exista y que los campos estén correctamente cargados.','Validación',MB_OK+MB_ICONINFORMATION);
+   end
+
 end;
 
 

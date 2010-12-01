@@ -5357,27 +5357,29 @@ object FMovimientos: TFMovimientos
     Width = 329
     Height = 112
     Anchors = []
+    BevelInner = bvLowered
+    BorderStyle = bsSingle
     TabOrder = 5
     Visible = False
     object LabelPreguntaConciliar: TLabel
-      Left = 7
+      Left = 14
       Top = 31
       Width = 297
       Height = 13
       Caption = #191'Esta Seguro que desea Conciliar este movimiento?'
     end
     object LabelFechaConciliacion: TLabel
-      Left = 7
+      Left = 55
       Top = 55
       Width = 107
       Height = 13
       Caption = 'Fecha conciliacion:'
     end
     object Button1: TButton
-      Left = 68
+      Left = 52
       Top = 81
       Width = 75
-      Height = 24
+      Height = 21
       Caption = 'Si'
       TabOrder = 0
       OnClick = Button1Click
@@ -5386,19 +5388,18 @@ object FMovimientos: TFMovimientos
       Left = 172
       Top = 81
       Width = 75
-      Height = 24
+      Height = 21
       Caption = 'No'
       TabOrder = 1
       OnClick = Button2Click
     end
     object Panel7: TPanel
       Tag = 99
-      Left = 1
-      Top = 1
-      Width = 327
+      Left = 2
+      Top = 2
+      Width = 321
       Height = 23
       Align = alTop
-      Alignment = taLeftJustify
       BevelInner = bvLowered
       BorderStyle = bsSingle
       Caption = 'Conciliar Movimiento'
@@ -5412,7 +5413,7 @@ object FMovimientos: TFMovimientos
       TabOrder = 2
     end
     object DTPFechaConciliar: TDateTimePicker
-      Left = 126
+      Left = 166
       Top = 51
       Width = 103
       Height = 21

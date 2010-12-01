@@ -113,15 +113,21 @@ begin
     dbNombreConcepto.SetFocus;
     exit;
   end;
+  try
+    begin
+     if DM.EKModelo.finalizar_transaccion(Transaccion_Medios) then
+      begin
+        pDatos.Visible:=false;
+        Grilla.Enabled := true;
+        GrupoEditando.Enabled := true;
+        GrupoGuardarCancelar.Enabled := false;
+        ZQ_MedioCobroPago.Refresh;
+      end;
+    end
+   except
+      Application.MessageBox('Verifique que el Medio ingresado no exista y que los campos estén correctamente cargados.','Validación',MB_OK+MB_ICONINFORMATION);
+   end
 
-  if DM.EKModelo.finalizar_transaccion(Transaccion_Medios) then
-  begin
-    pDatos.Visible:=false;
-    Grilla.Enabled := true;
-    GrupoEditando.Enabled := true;
-    GrupoGuardarCancelar.Enabled := false;
-    ZQ_MedioCobroPago.Refresh;
-  end;
 end;
 
 

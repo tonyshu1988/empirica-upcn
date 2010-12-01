@@ -1,6 +1,6 @@
 object FConceptos: TFConceptos
-  Left = 465
-  Top = 259
+  Left = 760
+  Top = 254
   Width = 870
   Height = 500
   Caption = 'ABM Conceptos'

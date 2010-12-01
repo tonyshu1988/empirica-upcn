@@ -23,15 +23,15 @@ object FABM_Autoridad: TFABM_Autoridad
   object pContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 875
-    Height = 410
+    Width = 883
+    Height = 416
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object pDatos: TPanel
       Left = 0
-      Top = 369
-      Width = 875
+      Top = 375
+      Width = 883
       Height = 41
       Align = alBottom
       BevelOuter = bvNone
@@ -89,8 +89,8 @@ object FABM_Autoridad: TFABM_Autoridad
     object dbGridAutoridad: TDBGrid
       Left = 0
       Top = 0
-      Width = 875
-      Height = 369
+      Width = 883
+      Height = 375
       Align = alClient
       Color = 16772842
       DataSource = DS_Autoridad
@@ -121,7 +121,7 @@ object FABM_Autoridad: TFABM_Autoridad
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
