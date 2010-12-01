@@ -16,6 +16,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,6 +60,13 @@ end;
 procedure TF_Error.Button2Click(Sender: TObject);
 begin
   ShowMessage(error_c.Caption);
+end;
+
+procedure TF_Error.FormCreate(Sender: TObject);
+begin
+  if assigned(F_Error) then
+
+  F_Error.Visible:=False;
 end;
 
 initialization
