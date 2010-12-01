@@ -1,5 +1,5 @@
 object FReportes_Disponibilidades: TFReportes_Disponibilidades
-  Left = 160
+  Left = 282
   Top = 106
   Width = 1082
   Height = 576
