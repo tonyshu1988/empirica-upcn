@@ -1,6 +1,6 @@
 object FConciliacion: TFConciliacion
-  Left = 232
-  Top = 87
+  Left = 421
+  Top = 188
   Width = 1041
   Height = 679
   Caption = 'Conciliaci'#243'n Bancaria'
@@ -505,7 +505,7 @@ object FConciliacion: TFConciliacion
             52.916666666666670000
             637.645833333333400000
             158.750000000000000000
-            624.416666666666800000)
+            624.416666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -534,9 +534,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            640.291666666666800000
+            640.291666666666700000
             95.250000000000000000
-            616.479166666666800000)
+            616.479166666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -567,7 +567,7 @@ object FConciliacion: TFConciliacion
             52.916666666666670000
             550.333333333333400000
             37.041666666666670000
-            799.041666666666800000)
+            799.041666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -691,7 +691,7 @@ object FConciliacion: TFConciliacion
             52.916666666666670000
             637.645833333333400000
             232.833333333333400000
-            624.416666666666800000)
+            624.416666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1392,8 +1392,8 @@ object FConciliacion: TFConciliacion
           Size.Values = (
             52.916666666666670000
             907.520833333333400000
-            89.958333333333320000
-            616.479166666666800000)
+            89.958333333333340000
+            616.479166666666700000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = True

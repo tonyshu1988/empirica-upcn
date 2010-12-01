@@ -99,8 +99,6 @@ begin
           GrupoGuardarCancelar.Enabled := false;
           ZQ_tipo_proveedor.Refresh;
         end
-        else
-          raise Exception.Create('');
       end
      except
         Application.MessageBox('Verifique que el Código ingresado no exista y que los campos estén correctamente cargados.','Validación',MB_OK+MB_ICONINFORMATION);

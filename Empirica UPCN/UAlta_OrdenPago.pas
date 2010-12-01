@@ -479,8 +479,6 @@ begin
            begin
             Close;
            end
-        else
-          raise Exception.Create('Error en Finalizar Transacción');
       except
         begin
           ZQ_Cuenta_Movimiento.edit;
