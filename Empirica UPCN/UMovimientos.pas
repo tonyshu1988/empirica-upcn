@@ -980,6 +980,7 @@ begin
   if (ZQ_Cuenta_MovimientoCONCILIADO.AsString = 'N') or (ZQ_Cuenta_MovimientoCONCILIADO.IsNull) then //si no esta conciliado
   begin
     PanelConciliar.Visible:= true;
+    PanelConciliar.BringToFront;
     BanderaConcialiar:= true;
     LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Conciliar este movimiento?';
     LabelFechaConciliacion.Visible:= true;
