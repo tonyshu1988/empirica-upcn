@@ -1794,11 +1794,11 @@ if LIBRO_BANCO.IsEmpty then
    if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
      dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
 
-   if dm.EKModelo.iniciar_transaccion('Eliminar Movimiento', []) then //Chequeo si el movimiento no tiene cuentas_movimiento, y lo elimino.
-     EliminarMovimiento.ExecProc;
-
-   if not DM.EKModelo.finalizar_transaccion('Eliminar Movimiento') then
-     dm.EKModelo.cancelar_transaccion('Eliminar Movimiento');
+//   if dm.EKModelo.iniciar_transaccion('Eliminar Movimiento', []) then //Chequeo si el movimiento no tiene cuentas_movimiento, y lo elimino.
+//     EliminarMovimiento.ExecProc;
+//
+//   if not DM.EKModelo.finalizar_transaccion('Eliminar Movimiento') then
+//     dm.EKModelo.cancelar_transaccion('Eliminar Movimiento');
 
 
    recNo:= LIBRO_BANCO.RecNo;

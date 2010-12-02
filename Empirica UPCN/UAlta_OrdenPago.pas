@@ -349,8 +349,13 @@ procedure TFAlta_OrdenPago.btEliminarLineaClick(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
   begin
-    if not(ZQ_Cuenta_Movimiento.IsEmpty)then
-      ZQ_Cuenta_Movimiento.Delete;
+    if (ZQ_Cuenta_Movimiento.RecordCount>1)then
+      ZQ_Cuenta_Movimiento.Delete
+    else
+      begin
+        Application.MessageBox('Debe ingresar al menos un medio de Pago (modifique el existente).','Atención',MB_OK+MB_ICONINFORMATION);
+        exit;
+      end
   end;
 end;
 
