@@ -264,11 +264,17 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Transparent = True
       end
       object Label1: TLabel
-        Left = 43
+        Left = 40
         Top = 64
-        Width = 46
+        Width = 49
         Height = 13
         Caption = 'Cuenta:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         Transparent = True
       end
       object Label12: TLabel
@@ -327,6 +333,19 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Caption = 'Denominaci'#243'n:'
         Transparent = True
       end
+      object LabelCuenta: TLabel
+        Left = 92
+        Top = 64
+        Width = 126
+        Height = 14
+        Caption = 'Cuenta Movimiento'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -12
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object DBLUpCBoxProveedor: TDBLookupComboBox
         Left = 296
         Top = 88
@@ -344,7 +363,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'APELLIDO_Y_NOMBRE'
         ListSource = DS_Proveedores
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 3
         OnKeyUp = DBEditNroProveedorKeyUp
       end
       object DBMemoDescripcion: TDBMemo
@@ -361,7 +380,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 8
       end
       object DBLUpCBoxConcepto: TDBLookupComboBox
         Left = 168
@@ -380,27 +399,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'NOMBRE_CONCEPTO'
         ListSource = DS_Conceptos
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 5
         OnKeyUp = DBEditNroConceptoKeyUp
-      end
-      object DBLUpCBoxCuenta: TDBLookupComboBox
-        Left = 92
-        Top = 60
-        Width = 541
-        Height = 21
-        DataField = 'NRO_CUENTA'
-        DataSource = DS_Movimientos
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        KeyField = 'ID_CUENTA'
-        ListField = 'BUSQUEDA'
-        ListSource = DS_Cuentas
-        ParentFont = False
-        TabOrder = 2
-        OnEnter = DBLUpCBoxCuentaEnter
       end
       object DBEditNroFactura: TDBEdit
         Left = 92
@@ -415,7 +415,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 6
       end
       object DBEditNroRecibo: TDBEdit
         Left = 456
@@ -430,7 +430,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 7
       end
       object dbFechaEmision: TEKDBDateTimePicker
         Left = 92
@@ -486,7 +486,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'COD_CORTO'
         ListSource = DS_Conceptos
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 4
         OnKeyUp = DBEditNroConceptoKeyUp
       end
       object DBLookupComboBox2: TDBLookupComboBox
@@ -506,7 +506,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         ListField = 'TIPO_PROVEEDOR'
         ListSource = DS_Proveedores
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 2
         OnKeyUp = DBEditNroProveedorKeyUp
       end
     end
@@ -864,6 +864,16 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
     object ZQ_MovimientosNRO_CUENTA: TIntegerField
       FieldName = 'NRO_CUENTA'
+    end
+    object ZQ_Movimientosnombre_cuenta: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombre_cuenta'
+      LookupDataSet = ZQ_Cuentas
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'NOMBRE_CUENTA'
+      KeyFields = 'NRO_CUENTA'
+      Size = 100
+      Lookup = True
     end
   end
   object DS_Movimientos: TDataSource

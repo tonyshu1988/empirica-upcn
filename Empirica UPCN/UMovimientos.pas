@@ -452,6 +452,7 @@ type
     Panel7: TPanel;
     LabelFechaConciliacion: TLabel;
     DTPFechaConciliar: TDateTimePicker;
+    EliminarMovimiento: TZStoredProc;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -964,7 +965,7 @@ begin
 end;
 
 
-  procedure TFMovimientos.ConciliarCheque();
+procedure TFMovimientos.ConciliarCheque();
 begin
   ZQ_Cuenta_Movimiento.Close;
   ZQ_Cuenta_Movimiento.ParamByName('NroMov').clear;
@@ -1779,15 +1780,26 @@ if LIBRO_BANCO.IsEmpty then
  ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger :=LIBRO_BANCOID_MOVIMIENTO.AsInteger;
  ZQ_Cuenta_Movimiento.Open;
 
+ if (ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0) then
+ begin
+   Application.MessageBox('Este movimiento no puede ser Eliminado','Eliminar',MB_OK+MB_ICONINFORMATION);
+   exit;
+ end;
+
  if not ZQ_Cuenta_MovimientoID.IsNull then
  begin
    if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos,ZQ_Cuenta_Movimiento]) then
-   begin
      ZQ_Cuenta_Movimiento.Delete;
-   end;
 
    if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
      dm.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+
+   if dm.EKModelo.iniciar_transaccion('Eliminar Movimiento', []) then //Chequeo si el movimiento no tiene cuentas_movimiento, y lo elimino.
+     EliminarMovimiento.ExecProc;
+
+   if not DM.EKModelo.finalizar_transaccion('Eliminar Movimiento') then
+     dm.EKModelo.cancelar_transaccion('Eliminar Movimiento');
+
 
    recNo:= LIBRO_BANCO.RecNo;
    btaplicar.Click;

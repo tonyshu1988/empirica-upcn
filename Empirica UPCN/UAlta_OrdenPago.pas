@@ -34,7 +34,6 @@ type
     DBLUpCBoxProveedor: TDBLookupComboBox;
     DBMemoDescripcion: TDBMemo;
     DBLUpCBoxConcepto: TDBLookupComboBox;
-    DBLUpCBoxCuenta: TDBLookupComboBox;
     DBEditNroFactura: TDBEdit;
     Label26: TLabel;
     DBEditNroRecibo: TDBEdit;
@@ -162,11 +161,12 @@ type
     DBLookupComboBox2: TDBLookupComboBox;
     Label2: TLabel;
     ZQ_MovimientosNRO_CUENTA: TIntegerField;
+    ZQ_Movimientosnombre_cuenta: TStringField;
+    LabelCuenta: TLabel;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure DBLUpCBoxCuentaEnter(Sender: TObject);
     procedure DbGridMediosCobroPagoColExit(Sender: TObject);
     procedure DbGridMediosCobroPagoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -213,13 +213,6 @@ implementation
 uses UDM, DateUtils, UMovimientos, UUtilidades;
 
 {$R *.dfm}
-
-procedure TFAlta_OrdenPago.DBLUpCBoxCuentaEnter(Sender: TObject);
-begin
-  if ZQ_Cuenta_MovimientoID_MEDIO.AsInteger <> 0 then
-    DBLUpCBoxCuenta.Enabled:=false;
-end;
-
 
 procedure TFAlta_OrdenPago.DbGridMediosCobroPagoColExit(Sender: TObject);
 begin
@@ -268,14 +261,8 @@ begin
   ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
   ZQ_Cuenta_Movimiento.Open;
 
- 
-
   if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
-  begin
-    DBLUpCBoxCuenta.Enabled:= false;
     ZQ_Cuentas.Locate('id_cuenta', ZQ_Cuenta_MovimientoID_CUENTA_INGRESO.AsInteger,[]);
-  end;
-  DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
 end;
 
 
@@ -315,11 +302,7 @@ begin
     ZQ_Cuenta_Movimiento.Append;
 
     if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
-    begin
-      DBLUpCBoxCuenta.Enabled:= false;
       ZQ_Cuentas.Locate('id_cuenta',CuentaNro,[]);
-    end;
-    DBLUpCBoxCuenta.KeyValue:= ZQ_CuentasID_CUENTA.AsInteger;
 
     //Cargo los valores por defecto...
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:=1; //PONGO QUE ES UNA ORDEN DE PAGO
@@ -353,7 +336,7 @@ begin
   ZQ_Cuenta_Movimiento.ReadOnly:=false;   //Permito la edicion de la orden de Pago
   FAlta_OrdenPago.Caption:= 'EDITANDO ORDEN DE PAGO NRO: '+ZQ_MovimientosNRO_ORDEN_STRING.AsString;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento,ZQ_Configuracion]) then
+  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento,ZQ_Movimientos,ZQ_Configuracion]) then
   begin
     ZQ_Movimientos.Edit;
     ZQ_Cuenta_Movimiento.Edit;
@@ -367,12 +350,7 @@ begin
   if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
   begin
     if not(ZQ_Cuenta_Movimiento.IsEmpty)then
-    begin
       ZQ_Cuenta_Movimiento.Delete;
-
-      if (ZQ_Cuenta_Movimiento.IsEmpty) and (CuentaNro = 0) then
-        DBLUpCBoxCuenta.Enabled:=true;
-    end;
   end;
 end;
 
@@ -407,8 +385,8 @@ begin
       ZQ_MovimientosNRO_CUENTA.AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
       NroOrdenAnt:=ZQ_MovimientosNRO_ORDEN.AsInteger;
 
-      ZQ_Cuenta_Movimiento.First;
-      if ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0 then //si es un alta
+      //ZQ_Cuenta_Movimiento.First;
+      if ZQ_MovimientosNRO_MOVIMIENTO.IsNull then //si es un alta
       begin
         Nro_Moviemiento.Active := true;   //obtengo el numero de movimiento
         nro_mov := Nro_MoviemientoID.AsInteger;
@@ -473,7 +451,7 @@ begin
       ZQ_Configuracion.Edit;
       ZQ_ConfiguracionNIVEL.AsInteger:=nroOrdenAnt+1;
       ZQ_Configuracion.Post;
-      
+
       try
         if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
            begin
@@ -566,14 +544,6 @@ begin
     result := false;
     exit;
   end;
-
-  if (DBLUpCBoxCuenta.Text='') then
-  begin
-    Application.MessageBox('El campo "Cuenta" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    DBLUpCBoxCuenta.SetFocus;
-    result := false;
-    exit;
-  end;
 end;
 
 
@@ -606,10 +576,7 @@ begin
   ZQ_Configuracion.ParamByName('cta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
   ZQ_Configuracion.Active:=true;
 
-  if dm.EKUsrLogin1.PermisoAccionValor('ACCESO') = '' then
-    CuentaNro:= 0
-  else
-    CuentaNro:= StrToInt(dm.EKUsrLogin1.PermisoAccionValor('ACCESO'));
+  LabelCuenta.Caption:= ZQ_CuentasBUSQUEDA.AsString;
 end;
 
 
