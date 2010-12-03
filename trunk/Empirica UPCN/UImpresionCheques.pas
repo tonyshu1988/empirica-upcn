@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, QuickRpt, QRCtrls, Grids, DBGrids, ExtCtrls, jpeg,
   dxBar, dxBarExtItems, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKBusquedaAvanzada, EKNumeroATexto, EKVistaPreviaQR, DBClient, ZSqlUpdate;
+  EKBusquedaAvanzada, EKNumeroATexto, EKVistaPreviaQR, DBClient, ZSqlUpdate,
+  ZStoredProcedure;
 
 type
   TFImpresionCheques = class(TForm)
@@ -17,8 +18,8 @@ type
     dxBarABM: TdxBarManager;
     btnNuevo: TdxBarLargeButton;
     btnchequeDiferido: TdxBarLargeButton;
-    btnEliminar: TdxBarLargeButton;
-    btnGuardar: TdxBarLargeButton;
+    BtVistaPreviaCorr: TdxBarLargeButton;
+    BtVistaPreviaDif: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
     btnBuscar: TdxBarLargeButton;
@@ -71,7 +72,6 @@ type
     Update_Cheques: TZQuery;
     ZQ_movimientosID: TIntegerField;
     ClientZQ_movimientosIdCheque: TIntegerField;
-    ZUpdateSQL1: TZUpdateSQL;
     ZQ_movimientosTIPOPROV: TStringField;
     ClientZQ_movimientostipoProv: TStringField;
     ZQ_movimientosNRO_CHEQUE_TRANSF: TStringField;
@@ -87,8 +87,8 @@ type
     procedure DBGridChequesDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
-    procedure RepChequeDiferidoEndPage(Sender: TCustomQuickRep);
-    procedure RepChequesCorrienteEndPage(Sender: TCustomQuickRep);
+    procedure BtVistaPreviaDifClick(Sender: TObject);
+    procedure BtVistaPreviaCorrClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -120,14 +120,14 @@ begin
     exit;
   end;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_cheques, [ZQ_movimientos]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_cheques, []) then
   begin
-    ZQ_movimientos.Edit;
+    QRImageCheque.Enabled:= false;
+    QRDBText2.Enabled:= false;
+    RepChequesCorriente.Prepare;
+    RepChequesCorriente.Print;
 
-    QRImageCheque.Enabled:= true;
-    QRDBText2.Enabled:= true;
-    EKVistaPreviaQR1.VistaPrevia;
-    if (Application.MessageBox('Los cheques se imprimieron correctamente?','Impresion Cheques',MB_YESNO+MB_ICONQUESTION) = IDYES) then
+    if (Application.MessageBox('Verifique que los cheques se imprimieron correctamente?','Impresion Cheques',MB_YESNO+MB_ICONQUESTION) = IDYES) then
     begin
       ClientZQ_movimientos.First;
 
@@ -218,14 +218,14 @@ begin
     exit;
   end;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_cheques, [ZQ_movimientos]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_cheques, []) then
   begin
-    ZQ_movimientos.Edit;
+    QRImage1.Enabled := false;
+    QRDBText6.Enabled := false;
+    RepChequeDiferido.Prepare;
+    RepChequeDiferido.Print;
 
-    QRImage1.Enabled := true;
-    QRDBText6.Enabled := true;
-    EKVistaPreviaQR2.VistaPrevia;
-    if (Application.MessageBox('Los cheques se imprimieron correctamente?','Impresion Cheques',MB_YESNO+MB_ICONQUESTION) = IDYES) then
+    if (Application.MessageBox('Verifique que los cheques se imprimieron correctamente?','Impresion Cheques',MB_YESNO+MB_ICONQUESTION) = IDYES) then
     begin
       ClientZQ_movimientos.First;
 
@@ -243,7 +243,7 @@ begin
     else
       dm.EKModelo.cancelar_transaccion(transaccion_cheques);
   end;
-  
+
   ClientZQ_movimientos.Filtered:= false;
   EKBusquedaAvanzada1.Abrir;
   llenarclient();
@@ -302,18 +302,38 @@ begin
   end;
 end;
 
-procedure TFImpresionCheques.RepChequeDiferidoEndPage(
-  Sender: TCustomQuickRep);
+procedure TFImpresionCheques.BtVistaPreviaDifClick(Sender: TObject);
 begin
- QRImage1.Enabled := false;
- QRDBText6.Enabled := false;
+  tipocheque:='DIFERIDO';
+  ClientZQ_movimientos.Filtered:=true;
+
+  if ClientZQ_movimientos.IsEmpty then
+  begin
+    ClientZQ_movimientos.Filtered:= false;
+    exit;
+  end;
+
+  QRImage1.Enabled := true;
+  QRDBText6.Enabled := true;
+  EKVistaPreviaQR2.VistaPrevia;
+  ClientZQ_movimientos.Filtered:= false;
 end;
 
-procedure TFImpresionCheques.RepChequesCorrienteEndPage(
-  Sender: TCustomQuickRep);
+procedure TFImpresionCheques.BtVistaPreviaCorrClick(Sender: TObject);
 begin
-QRImageCheque.Enabled:= false;
-QRDBText2.Enabled:= false;
+  tipocheque:='CORRIENTE';
+  ClientZQ_movimientos.Filtered:=true;
+
+  if ClientZQ_movimientos.IsEmpty then
+  begin
+    ClientZQ_movimientos.Filtered:= false;
+    exit;
+  end;
+
+  QRImageCheque.Enabled:= true;
+  QRDBText2.Enabled:= true;
+  EKVistaPreviaQR1.VistaPrevia;
+  ClientZQ_movimientos.Filtered:= false;  
 end;
 
 end.
