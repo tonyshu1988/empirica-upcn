@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 317
-  Top = 154
+  Left = 251
+  Top = 135
   Width = 871
   Height = 640
   Caption = 'UPCN'
