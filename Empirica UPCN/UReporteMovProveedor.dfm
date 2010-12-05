@@ -1,6 +1,6 @@
 object FReporteMovProveedor: TFReporteMovProveedor
-  Left = 307
-  Top = 194
+  Left = 350
+  Top = 174
   Width = 897
   Height = 500
   Caption = 'Reporte Movimientos'
@@ -1394,9 +1394,9 @@ object FReporteMovProveedor: TFReporteMovProveedor
     end
     object PanelDatosProveedor: TPanel
       Left = 1
-      Top = 1
+      Top = 27
       Width = 887
-      Height = 133
+      Height = 107
       Align = alTop
       BevelOuter = bvNone
       Font.Charset = DEFAULT_CHARSET
@@ -1409,7 +1409,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       Visible = False
       object Label1: TLabel
         Left = 57
-        Top = 29
+        Top = 7
         Width = 81
         Height = 13
         Caption = 'Denominaci'#243'n'
@@ -1423,7 +1423,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object Label2: TLabel
         Left = 19
-        Top = 55
+        Top = 33
         Width = 119
         Height = 13
         Caption = 'Nombre de Fantas'#237'a:'
@@ -1437,7 +1437,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object Label5: TLabel
         Left = 80
-        Top = 82
+        Top = 60
         Width = 58
         Height = 13
         Caption = 'Direcci'#243'n:'
@@ -1445,7 +1445,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object Label16: TLabel
         Left = 84
-        Top = 109
+        Top = 87
         Width = 54
         Height = 13
         Caption = 'Tel'#233'fono:'
@@ -1453,7 +1453,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object Label7: TLabel
         Left = 459
-        Top = 82
+        Top = 60
         Width = 94
         Height = 13
         Caption = 'Nro Documento:'
@@ -1461,7 +1461,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object Label6: TLabel
         Left = 455
-        Top = 55
+        Top = 33
         Width = 98
         Height = 13
         Caption = 'Tipo Documento:'
@@ -1469,7 +1469,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object Label3: TLabel
         Left = 514
-        Top = 29
+        Top = 7
         Width = 39
         Height = 13
         Caption = 'E-Mail:'
@@ -1477,7 +1477,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object DBTxtRazonSocial: TDBText
         Left = 141
-        Top = 27
+        Top = 5
         Width = 293
         Height = 17
         DataField = 'APELLIDO_Y_NOMBRE'
@@ -1491,7 +1491,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object DBTxtNomFan: TDBText
         Left = 141
-        Top = 53
+        Top = 31
         Width = 293
         Height = 17
         DataField = 'NOMBRE_FANTASIA'
@@ -1505,7 +1505,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object DBText1: TDBText
         Left = 141
-        Top = 80
+        Top = 58
         Width = 293
         Height = 17
         DataField = 'DIRECCION'
@@ -1519,7 +1519,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object DBText2: TDBText
         Left = 141
-        Top = 107
+        Top = 85
         Width = 293
         Height = 17
         DataField = 'TELEFONOS'
@@ -1533,7 +1533,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object DBText3: TDBText
         Left = 557
-        Top = 27
+        Top = 5
         Width = 290
         Height = 17
         DataField = 'EMAIL'
@@ -1547,7 +1547,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object DBText4: TDBText
         Left = 557
-        Top = 53
+        Top = 31
         Width = 290
         Height = 17
         DataField = 'TIPO_DOCUMENTO'
@@ -1561,7 +1561,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       end
       object DBText5: TDBText
         Left = 557
-        Top = 80
+        Top = 58
         Width = 290
         Height = 17
         DataField = 'NRO_DOCUMENTO'
@@ -1572,71 +1572,6 @@ object FReporteMovProveedor: TFReporteMovProveedor
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-      end
-      object Panel2: TPanel
-        Left = 0
-        Top = 0
-        Width = 887
-        Height = 26
-        Align = alTop
-        BevelOuter = bvNone
-        TabOrder = 0
-        DesignSize = (
-          887
-          26)
-        object Shape1: TShape
-          Left = 2
-          Top = 2
-          Width = 865
-          Height = 22
-          Anchors = [akLeft, akTop, akRight]
-          Brush.Color = clGray
-          Pen.Color = clGray
-          Shape = stRoundRect
-        end
-        object Shape2: TShape
-          Left = 4
-          Top = 0
-          Width = 865
-          Height = 22
-          Anchors = [akLeft, akTop, akRight]
-          Brush.Color = clTeal
-          Shape = stRoundRect
-        end
-        object Label4: TLabel
-          Left = 1
-          Top = 3
-          Width = 868
-          Height = 18
-          Alignment = taCenter
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Listado General'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-        end
-        object Label8: TLabel
-          Left = 2
-          Top = 2
-          Width = 868
-          Height = 18
-          Alignment = taCenter
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          Caption = 'Listado General'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clInfoBk
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-        end
       end
     end
     object pResumen: TPanel
@@ -1737,6 +1672,71 @@ object FReporteMovProveedor: TFReporteMovProveedor
         end
       end
     end
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 887
+      Height = 26
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 5
+      DesignSize = (
+        887
+        26)
+      object Shape1: TShape
+        Left = 2
+        Top = 2
+        Width = 865
+        Height = 22
+        Anchors = [akLeft, akTop, akRight]
+        Brush.Color = clGray
+        Pen.Color = clGray
+        Shape = stRoundRect
+      end
+      object Shape2: TShape
+        Left = 4
+        Top = 0
+        Width = 865
+        Height = 22
+        Anchors = [akLeft, akTop, akRight]
+        Brush.Color = clTeal
+        Shape = stRoundRect
+      end
+      object Label4: TLabel
+        Left = 1
+        Top = 3
+        Width = 868
+        Height = 18
+        Alignment = taCenter
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'Listado General'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+      end
+      object Label8: TLabel
+        Left = 2
+        Top = 2
+        Width = 868
+        Height = 18
+        Alignment = taCenter
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'Listado General'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clInfoBk
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+      end
+    end
   end
   object EKVistaPreviaQR1: TEKVistaPreviaQR
     Reporte = RepMovProveedores
@@ -1755,23 +1755,19 @@ object FReporteMovProveedor: TFReporteMovProveedor
         'c, cm.nro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre' +
         '_medio_cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto' +
         ', c.nombre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id' +
-        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo, cp.id_cuent' +
-        'a'
+        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo,m.nro_cuenta'
       'from ie_movimientos m'
       
         'left join ie_cuentas_movimientos cm on(m.nro_movimiento = cm.nro' +
         '_movimiento)'
       'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
       
-        'left join proveedor_cuenta cp on(cp.id_proveedor = p.nro_proveed' +
-        'or)'
-      
         'left join objeto_movimientos ob on(m.id_objeto_movimiento = ob.i' +
         'd_objeto_movimiento)'
       'left join ie_medios_cobro_pago mc on(cm.id_medio = mc.id_medio)'
       'left join ie_conceptos c on (m.id_concepto = c.id_concepto)'
-      'where cp.id_cuenta = :ID_CUENTA'
-      'order by m.fecha, m.nro_movimiento')
+      'where m.nro_cuenta=:ID_CUENTA'
+      'order by m.nro_proveedor,m.fecha, m.nro_movimiento')
     Params = <
       item
         DataType = ftUnknown
@@ -1877,6 +1873,9 @@ object FReporteMovProveedor: TFReporteMovProveedor
       KeyFields = 'ID_TIPO'
       Size = 100
       Lookup = True
+    end
+    object ZQ_MovimientoProveedoresNRO_CUENTA: TIntegerField
+      FieldName = 'NRO_CUENTA'
     end
   end
   object DS_MovimientoProveedores: TDataSource
@@ -2150,6 +2149,18 @@ object FReporteMovProveedor: TFReporteMovProveedor
   object EKBusquedaAvanzada: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'Nro Cuenta'
+        Campo = 'nro_cuenta'
+        Tabla = 'm'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Cuenta
+        TipoCombollenarCampo = 'BUSQUEDA'
+        TipoCombollenarCampoReal = 'id_cuenta'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Medio'
         Campo = 'id_medio'
         Tabla = 'mc'
@@ -2279,31 +2290,27 @@ object FReporteMovProveedor: TFReporteMovProveedor
         'c, cm.nro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre' +
         '_medio_cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto' +
         ', c.nombre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id' +
-        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo, cp.id_cuent' +
-        'a'
+        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo,m.nro_cuenta'
       'from ie_movimientos m'
       
         'left join ie_cuentas_movimientos cm on(m.nro_movimiento = cm.nro' +
         '_movimiento)'
       'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
       
-        'left join proveedor_cuenta cp on(cp.id_proveedor = p.nro_proveed' +
-        'or)'
-      
         'left join objeto_movimientos ob on(m.id_objeto_movimiento = ob.i' +
         'd_objeto_movimiento)'
       'left join ie_medios_cobro_pago mc on(cm.id_medio = mc.id_medio)'
       'left join ie_conceptos c on (m.id_concepto = c.id_concepto)'
-      'where cp.id_cuenta = :ID_CUENTA'
-      'order by m.fecha, m.nro_movimiento')
+      'where m.nro_cuenta=:ID_CUENTA'
+      ''
+      'order by m.nro_proveedor,m.fecha, m.nro_movimiento')
     SQL_Select.Strings = (
       
         'select m.fecha, m.nro_proveedor, m.nro_orden_string, cm.fecha_md' +
         'c, cm.nro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre' +
         '_medio_cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto' +
         ', c.nombre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id' +
-        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo, cp.id_cuent' +
-        'a')
+        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo,m.nro_cuenta')
     SQL_From.Strings = (
       'from ie_movimientos m'
       
@@ -2311,17 +2318,15 @@ object FReporteMovProveedor: TFReporteMovProveedor
         '_movimiento)'
       'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
       
-        'left join proveedor_cuenta cp on(cp.id_proveedor = p.nro_proveed' +
-        'or)'
-      
         'left join objeto_movimientos ob on(m.id_objeto_movimiento = ob.i' +
         'd_objeto_movimiento)'
       'left join ie_medios_cobro_pago mc on(cm.id_medio = mc.id_medio)'
       'left join ie_conceptos c on (m.id_concepto = c.id_concepto)')
     SQL_Where.Strings = (
-      'where cp.id_cuenta = :ID_CUENTA')
+      'where m.nro_cuenta=:ID_CUENTA'
+      '')
     SQL_Orden.Strings = (
-      'order by m.fecha, m.nro_movimiento')
+      'order by m.nro_proveedor,m.fecha, m.nro_movimiento')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 64
@@ -2730,5 +2735,53 @@ object FReporteMovProveedor: TFReporteMovProveedor
     Version = '1.24'
     Left = 765
     Top = 72
+  end
+  object ZQ_Cuenta: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select c.*, c.nombre_cuenta||'#39' - '#39'|| coalesce ('#39'N'#176': '#39' || c.nro_c' +
+        'uenta_bancaria, '#39'N'#176': S/N'#39') Busqueda'
+      'from ie_cuentas c'
+      'order by c.id_cuenta'
+      ''
+      '')
+    Params = <>
+    Left = 496
+    Top = 144
+    object ZQ_CuentaID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+      Required = True
+    end
+    object ZQ_CuentaNOMBRE_CUENTA: TStringField
+      FieldName = 'NOMBRE_CUENTA'
+      Size = 100
+    end
+    object ZQ_CuentaMEDIO_DE_PAGO: TStringField
+      FieldName = 'MEDIO_DE_PAGO'
+      Size = 50
+    end
+    object ZQ_CuentaNRO_CUENTA_BANCARIA: TStringField
+      FieldName = 'NRO_CUENTA_BANCARIA'
+      Size = 100
+    end
+    object ZQ_CuentaULTIMO_NRO: TIntegerField
+      FieldName = 'ULTIMO_NRO'
+    end
+    object ZQ_CuentaAUTONUMERAR: TStringField
+      FieldName = 'AUTONUMERAR'
+      Size = 1
+    end
+    object ZQ_CuentaMEDIO_POR_DEFECTO: TIntegerField
+      FieldName = 'MEDIO_POR_DEFECTO'
+    end
+    object ZQ_CuentaCOLOR_CONSILIADO: TStringField
+      FieldName = 'COLOR_CONSILIADO'
+    end
+    object ZQ_CuentaBUSQUEDA: TStringField
+      FieldName = 'BUSQUEDA'
+      ReadOnly = True
+      Size = 207
+    end
   end
 end

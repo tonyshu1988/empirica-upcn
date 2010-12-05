@@ -181,6 +181,17 @@ type
     btExportarExel: TdxBarLargeButton;
     mxDBGridExport: TmxDBGridExport;
     mxNativeExcel1: TmxNativeExcel;
+    ZQ_MovimientoProveedoresNRO_CUENTA: TIntegerField;
+    ZQ_Cuenta: TZQuery;
+    ZQ_CuentaID_CUENTA: TIntegerField;
+    ZQ_CuentaNOMBRE_CUENTA: TStringField;
+    ZQ_CuentaMEDIO_DE_PAGO: TStringField;
+    ZQ_CuentaNRO_CUENTA_BANCARIA: TStringField;
+    ZQ_CuentaULTIMO_NRO: TIntegerField;
+    ZQ_CuentaAUTONUMERAR: TStringField;
+    ZQ_CuentaMEDIO_POR_DEFECTO: TIntegerField;
+    ZQ_CuentaCOLOR_CONSILIADO: TStringField;
+    ZQ_CuentaBUSQUEDA: TStringField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -205,27 +216,34 @@ uses UDM;
 
 procedure TFReporteMovProveedor.btnBuscarClick(Sender: TObject);
 begin
+  if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
+  begin
+    ZQ_Cuenta.Filtered:=False;
+    ZQ_Cuenta.Filter:=Format('ID_CUENTA=%d',[CuentaNro]);
+    ZQ_Cuenta.Filtered:=True;
+  end;
+
   if EKBusquedaAvanzada.Buscar then
   begin
 
-    ZQ_Proveedor.Close;
-    if EKBusquedaAvanzada.ParametrosSeleccionados1[0] <> ''  then
-    begin
-      ZQ_Proveedor.ParamByName('id_prov').AsInteger:= StrToInt(EKBusquedaAvanzada.ParametrosSeleccionados1[0]);
-      ZQ_Proveedor.Open;
+//    ZQ_Proveedor.Close;
+//    if EKBusquedaAvanzada.ParametrosSeleccionados1[1] <> ''  then
+//    begin
+//      ZQ_Proveedor.ParamByName('id_prov').AsInteger:= StrToInt(EKBusquedaAvanzada.ParametrosSeleccionados1[0]);
+//      ZQ_Proveedor.Open;
+//
+//      PanelDatosProveedor.visible := true;
+//   end
+//   else
+//      PanelDatosProveedor.visible := false;
 
-      PanelDatosProveedor.visible := true;
-   end
-   else
-      PanelDatosProveedor.visible := false;
-
-    lblFiltroMedio.Caption:= 'Medio: '+EKBusquedaAvanzada.ParametrosSelecReales1[0];
-    lblFiltroConcepto.Caption:= 'Concepto: '+EKBusquedaAvanzada.ParametrosSelecReales1[1];
-    lblFiltroTipoMov.Caption:= 'Tipo  Movimiento: '+EKBusquedaAvanzada.ParametrosSelecReales1[2];
-    lblFiltroEmiDesde.Caption:= 'F. Emisión Desde: '+EKBusquedaAvanzada.ParametrosSelecReales1[3];
-    lblFiltroEmiHasta.Caption:= 'F. Emisión Hasta: '+EKBusquedaAvanzada.ParametrosSelecReales1[4];
-    lblFiltroPDDesde.Caption:= 'F. PD Desde: '+EKBusquedaAvanzada.ParametrosSelecReales1[5];
-    lblFiltroPDHasta.Caption:= 'F. PD Hasta: '+EKBusquedaAvanzada.ParametrosSelecReales1[6];
+    lblFiltroMedio.Caption:= 'Medio: '+EKBusquedaAvanzada.ParametrosSelecReales1[1];
+    lblFiltroConcepto.Caption:= 'Concepto: '+EKBusquedaAvanzada.ParametrosSelecReales1[2];
+    lblFiltroTipoMov.Caption:= 'Tipo  Movimiento: '+EKBusquedaAvanzada.ParametrosSelecReales1[3];
+    lblFiltroEmiDesde.Caption:= 'F. Emisión Desde: '+EKBusquedaAvanzada.ParametrosSelecReales1[4];
+    lblFiltroEmiHasta.Caption:= 'F. Emisión Hasta: '+EKBusquedaAvanzada.ParametrosSelecReales1[5];
+    lblFiltroPDDesde.Caption:= 'F. PD Desde: '+EKBusquedaAvanzada.ParametrosSelecReales1[6];
+    lblFiltroPDHasta.Caption:= 'F. PD Hasta: '+EKBusquedaAvanzada.ParametrosSelecReales1[7];
   end
 end;
 
@@ -289,11 +307,12 @@ end;
 
 procedure TFReporteMovProveedor.FormCreate(Sender: TObject);
 begin
+  dm.EKModelo.abrir(ZQ_Cuenta);
+  
   if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
   begin
     ZQ_MovimientoProveedores.Close;
     ZQ_MovimientoProveedores.ParamByName('ID_CUENTA').AsInteger := (CuentaNro);
-
   end
   else  //si me logueo como administrador
   begin
