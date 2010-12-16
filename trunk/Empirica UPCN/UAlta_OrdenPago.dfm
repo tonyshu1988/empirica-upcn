@@ -495,16 +495,16 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Width = 109
         Height = 21
         Anchors = [akLeft, akTop, akRight]
-        DataField = 'NRO_PROVEEDOR'
+        DataField = 'ID_TIPO'
         DataSource = DS_Movimientos
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
-        KeyField = 'NRO_PROVEEDOR'
+        KeyField = 'ID_TIPO'
         ListField = 'TIPO_PROVEEDOR'
-        ListSource = DS_Proveedores
+        ListSource = DS_TipoProveedor
         ParentFont = False
         TabOrder = 2
         OnKeyUp = DBEditNroProveedorKeyUp
@@ -778,9 +778,13 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   end
   object ZQ_Movimientos: TZQuery
     Connection = DM.Conexion
+    UpdateObject = updateMovimientos
     SQL.Strings = (
-      'select m.*'
+      'select m.*, p.id_tipo'
       'from ie_movimientos m'
+      
+        'left join ie_proveedores p on (m.nro_proveedor = p.nro_proveedor' +
+        ')'
       'where m.nro_movimiento = :NroMov')
     Params = <
       item
@@ -874,6 +878,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       KeyFields = 'NRO_CUENTA'
       Size = 100
       Lookup = True
+    end
+    object ZQ_MovimientosID_TIPO: TIntegerField
+      FieldName = 'ID_TIPO'
     end
   end
   object DS_Movimientos: TDataSource
@@ -1146,12 +1153,17 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         'r)'
       'left join tipo_proveedor tp on (tp.id_tipo=p.id_tipo)'
       'where (p.baja <> '#39'S'#39')'
-      ' and (c.id_cuenta = :idCta)'
+      ' and (c.id_cuenta = :idCta) and (p.id_tipo = :tipo)'
       'order by apellido_y_nombre')
     Params = <
       item
         DataType = ftUnknown
         Name = 'idCta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tipo'
         ParamType = ptUnknown
       end>
     Left = 513
@@ -1160,6 +1172,11 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       item
         DataType = ftUnknown
         Name = 'idCta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tipo'
         ParamType = ptUnknown
       end>
     object ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField
@@ -1438,5 +1455,219 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       FieldName = 'EXISTE'
       Size = 1
     end
+  end
+  object ZQ_TipoProveedor: TZQuery
+    Connection = DM.Conexion
+    AfterScroll = ZQ_TipoProveedorAfterScroll
+    SQL.Strings = (
+      'select distinct tp.id_tipo, tp.descripcion as TIPO_PROVEEDOR'
+      'from tipo_proveedor tp'
+      'left join ie_proveedores p on (p.id_tipo=tp.id_tipo)'
+      
+        'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
+        'r)'
+      'where (p.baja <> '#39'S'#39')'
+      ' and (c.id_cuenta = :idCta)'
+      'order by apellido_y_nombre')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idCta'
+        ParamType = ptUnknown
+      end>
+    Left = 275
+    Top = 43
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idCta'
+        ParamType = ptUnknown
+      end>
+    object ZQ_TipoProveedorID_TIPO: TIntegerField
+      FieldName = 'ID_TIPO'
+      Required = True
+    end
+    object ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField
+      FieldName = 'TIPO_PROVEEDOR'
+      Size = 100
+    end
+  end
+  object DS_TipoProveedor: TDataSource
+    DataSet = ZQ_TipoProveedor
+    Left = 379
+    Top = 43
+  end
+  object updateMovimientos: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM ie_movimientos'
+      'WHERE'
+      '  ie_movimientos.NRO_MOVIMIENTO = :OLD_NRO_MOVIMIENTO')
+    InsertSQL.Strings = (
+      'INSERT INTO ie_movimientos'
+      
+        '  (ie_movimientos.NRO_MOVIMIENTO, ie_movimientos.NRO_PROVEEDOR, ' +
+        'ie_movimientos.ID_CONCEPTO, '
+      
+        '   ie_movimientos.ID_OBJETO_MOVIMIENTO, ie_movimientos.DESCRIPCI' +
+        'ON, ie_movimientos.PAGO_DEL_EJERCICIO, '
+      
+        '   ie_movimientos.FECHA, ie_movimientos.IMPORTE, ie_movimientos.' +
+        'IMPRESO, '
+      
+        '   ie_movimientos.NRO_COMPROMISO, ie_movimientos.NRO_PARTE, ie_m' +
+        'ovimientos.ANULADO, '
+      
+        '   ie_movimientos.FECHA_ANULADO, ie_movimientos.PARTE_ANULADO, i' +
+        'e_movimientos.DETALLE_ANULADO, '
+      
+        '   ie_movimientos.NRO_ORDEN, ie_movimientos.NRO_FACTURA, ie_movi' +
+        'mientos.NRO_RECIBO, '
+      '   ie_movimientos.NRO_ORDEN_STRING, ie_movimientos.NRO_CUENTA)'
+      'VALUES'
+      
+        '  (:NRO_MOVIMIENTO, :NRO_PROVEEDOR, :ID_CONCEPTO, :ID_OBJETO_MOV' +
+        'IMIENTO, '
+      
+        '   :DESCRIPCION, :PAGO_DEL_EJERCICIO, :FECHA, :IMPORTE, :IMPRESO' +
+        ', :NRO_COMPROMISO, '
+      
+        '   :NRO_PARTE, :ANULADO, :FECHA_ANULADO, :PARTE_ANULADO, :DETALL' +
+        'E_ANULADO, '
+      
+        '   :NRO_ORDEN, :NRO_FACTURA, :NRO_RECIBO, :NRO_ORDEN_STRING, :NR' +
+        'O_CUENTA)')
+    ModifySQL.Strings = (
+      'UPDATE ie_movimientos SET'
+      '  ie_movimientos.NRO_MOVIMIENTO = :NRO_MOVIMIENTO,'
+      '  ie_movimientos.NRO_PROVEEDOR = :NRO_PROVEEDOR,'
+      '  ie_movimientos.ID_CONCEPTO = :ID_CONCEPTO,'
+      '  ie_movimientos.ID_OBJETO_MOVIMIENTO = '
+      ':ID_OBJETO_MOVIMIENTO,'
+      '  ie_movimientos.DESCRIPCION = :DESCRIPCION,'
+      '  ie_movimientos.PAGO_DEL_EJERCICIO = :PAGO_DEL_EJERCICIO,'
+      '  ie_movimientos.FECHA = :FECHA,'
+      '  ie_movimientos.IMPORTE = :IMPORTE,'
+      '  ie_movimientos.IMPRESO = :IMPRESO,'
+      '  ie_movimientos.NRO_COMPROMISO = :NRO_COMPROMISO,'
+      '  ie_movimientos.NRO_PARTE = :NRO_PARTE,'
+      '  ie_movimientos.ANULADO = :ANULADO,'
+      '  ie_movimientos.FECHA_ANULADO = :FECHA_ANULADO,'
+      '  ie_movimientos.PARTE_ANULADO = :PARTE_ANULADO,'
+      '  ie_movimientos.DETALLE_ANULADO = :DETALLE_ANULADO,'
+      '  ie_movimientos.NRO_ORDEN = :NRO_ORDEN,'
+      '  ie_movimientos.NRO_FACTURA = :NRO_FACTURA,'
+      '  ie_movimientos.NRO_RECIBO = :NRO_RECIBO,'
+      '  ie_movimientos.NRO_ORDEN_STRING = :NRO_ORDEN_STRING,'
+      '  ie_movimientos.NRO_CUENTA = :NRO_CUENTA'
+      'WHERE'
+      '  ie_movimientos.NRO_MOVIMIENTO = :OLD_NRO_MOVIMIENTO')
+    Left = 187
+    Top = 253
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'NRO_MOVIMIENTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_PROVEEDOR'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_CONCEPTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_OBJETO_MOVIMIENTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DESCRIPCION'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PAGO_DEL_EJERCICIO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FECHA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPORTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPRESO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_COMPROMISO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_PARTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ANULADO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FECHA_ANULADO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PARTE_ANULADO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DETALLE_ANULADO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_ORDEN'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_FACTURA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_RECIBO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_ORDEN_STRING'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_CUENTA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_NRO_MOVIMIENTO'
+        ParamType = ptUnknown
+      end>
   end
 end

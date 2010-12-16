@@ -19,8 +19,8 @@ object FMovimientos: TFMovimientos
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    1189
-    699)
+    1197
+    705)
   PixelsPerInch = 96
   TextHeight = 13
   object PanelConciliar: TPanel
@@ -97,14 +97,14 @@ object FMovimientos: TFMovimientos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1101
-    Height = 647
+    Width = 1109
+    Height = 653
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
-      1101
-      647)
+      1109
+      653)
     object QR_OrdenPago: TQuickRep
       Tag = 99
       Left = 17
@@ -176,7 +176,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          526.961805555555600000
+          526.961805555555700000
           1898.385416666667000000)
         BandType = rbDetail
         object QRDBText30: TQRDBText
@@ -223,8 +223,8 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            28.663194444444440000
-            66.145833333333330000
+            28.663194444444450000
+            66.145833333333340000
             255.763888888888900000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -606,8 +606,8 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            8.819444444444444000
-            480.659722222222200000
+            8.819444444444445000
+            480.659722222222300000
             216.076388888888900000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -669,8 +669,8 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            926.041666666666700000
-            480.659722222222200000
+            926.041666666666600000
+            480.659722222222300000
             198.437500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -768,7 +768,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            55.121527777777780000
+            55.121527777777790000
             282.222222222222200000
             213.871527777777800000)
           Alignment = taRightJustify
@@ -894,8 +894,8 @@ object FMovimientos: TFMovimientos
           Size.Values = (
             37.482638888888890000
             1091.406250000000000000
-            66.145833333333330000
-            88.194444444444440000)
+            66.145833333333340000
+            88.194444444444460000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1183,7 +1183,7 @@ object FMovimientos: TFMovimientos
           Size.Values = (
             50.711805555555560000
             1523.559027777778000000
-            8.819444444444444000
+            8.819444444444445000
             348.368055555555600000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -2016,7 +2016,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            42.333333333333330000
+            42.333333333333340000
             203.729166666666700000
             206.375000000000000000)
           Alignment = taRightJustify
@@ -2048,7 +2048,7 @@ object FMovimientos: TFMovimientos
           Size.Values = (
             37.041666666666670000
             116.416666666666700000
-            58.208333333333330000
+            58.208333333333340000
             132.291666666666700000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -2438,7 +2438,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          296.333333333333300000
+          296.333333333333400000
           1899.708333333333000000)
         BandType = rbPageHeader
         object QRLabel36: TQRLabel
@@ -2489,7 +2489,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           1899.708333333333000000)
         Master = QR_SolicitudCompra
         PrintBefore = False
@@ -2588,9 +2588,9 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            997.479166666666700000
+            997.479166666666900000
             2.645833333333333000
-            343.958333333333300000)
+            343.958333333333400000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = True
@@ -2774,7 +2774,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          550.333333333333300000
+          550.333333333333400000
           1899.708333333333000000)
         Master = QR_SolicitudCompra
         PrintBefore = False
@@ -2822,7 +2822,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           1899.708333333333000000)
         BandType = rbPageFooter
         object qrDatosNombreyFecha: TQRSysData
@@ -3033,7 +3033,7 @@ object FMovimientos: TFMovimientos
     object PParametrosLibroBanco: TPanel
       Left = 0
       Top = 0
-      Width = 1101
+      Width = 1109
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -3123,7 +3123,7 @@ object FMovimientos: TFMovimientos
           'Fecha PD')
       end
       object Panel1: TPanel
-        Left = 1015
+        Left = 1023
         Top = 0
         Width = 86
         Height = 26
@@ -3155,8 +3155,8 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 593
-      Width = 1101
+      Top = 599
+      Width = 1109
       Height = 54
       Align = alBottom
       BevelInner = bvLowered
@@ -3328,8 +3328,8 @@ object FMovimientos: TFMovimientos
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 477
-      Width = 1101
+      Top = 483
+      Width = 1109
       Height = 116
       Align = alBottom
       BevelOuter = bvNone
@@ -3544,7 +3544,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 1101
+        Width = 1109
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -3580,16 +3580,16 @@ object FMovimientos: TFMovimientos
         Top = 89
         Width = 112
         Height = 21
-        DataField = 'NRO_PROVEEDOR'
+        DataField = 'ID_TIPO'
         DataSource = DS_Movimientos
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
-        KeyField = 'NRO_PROVEEDOR'
+        KeyField = 'ID_TIPO'
         ListField = 'TIPO_PROVEEDOR'
-        ListSource = DS_Proveedores
+        ListSource = DS_TipoProveedor
         ParentFont = False
         TabOrder = 6
         OnKeyUp = DBLookupCBoxEgreso_ProveedorKeyUp
@@ -3598,8 +3598,8 @@ object FMovimientos: TFMovimientos
     object DBGridLibroBanco: TDBGrid
       Left = 0
       Top = 26
-      Width = 1101
-      Height = 309
+      Width = 1109
+      Height = 315
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -3763,8 +3763,8 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 361
-      Width = 1101
+      Top = 367
+      Width = 1109
       Height = 116
       Align = alBottom
       BevelOuter = bvNone
@@ -3972,7 +3972,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 1101
+        Width = 1109
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -3993,16 +3993,16 @@ object FMovimientos: TFMovimientos
         Top = 89
         Width = 116
         Height = 21
-        DataField = 'NRO_PROVEEDOR'
+        DataField = 'ID_TIPO'
         DataSource = DS_Movimientos
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
-        KeyField = 'NRO_PROVEEDOR'
+        KeyField = 'ID_TIPO'
         ListField = 'TIPO_PROVEEDOR'
-        ListSource = DS_Proveedores
+        ListSource = DS_TipoProveedor
         ParentFont = False
         TabOrder = 5
         OnKeyUp = DBLookupCBoxEgreso_ProveedorKeyUp
@@ -4010,15 +4010,15 @@ object FMovimientos: TFMovimientos
     end
     object Panel5: TPanel
       Left = 0
-      Top = 335
-      Width = 1101
+      Top = 341
+      Width = 1109
       Height = 26
       Align = alBottom
       BevelOuter = bvLowered
       Caption = ' '
       TabOrder = 9
       object Panel6: TPanel
-        Left = 366
+        Left = 374
         Top = 1
         Width = 734
         Height = 24
@@ -4083,8 +4083,8 @@ object FMovimientos: TFMovimientos
     end
     object RepLibroB: TQuickRep
       Tag = 99
-      Left = 12
-      Top = 240
+      Left = 860
+      Top = 568
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -4153,7 +4153,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          272.520833333333300000
+          272.520833333333400000
           2770.187500000000000000)
         BandType = rbPageHeader
         object QRLabel41: TQRLabel
@@ -4404,7 +4404,7 @@ object FMovimientos: TFMovimientos
             37.041666666666670000
             190.500000000000000000
             230.187500000000000000
-            256.645833333333300000)
+            256.645833333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -4433,7 +4433,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            637.645833333333300000
+            637.645833333333400000
             230.187500000000000000
             254.000000000000000000)
           Alignment = taLeftJustify
@@ -4979,7 +4979,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         ParentBand = QRBand5
         object QRLabel18: TQRLabel
@@ -5323,7 +5323,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2553.229166666667000000
             2.645833333333333000
             103.187500000000000000)
@@ -5354,7 +5354,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -5389,7 +5389,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           2770.187500000000000000)
         BandType = rbSummary
         object QRExpr15: TQRExpr
@@ -5424,7 +5424,7 @@ object FMovimientos: TFMovimientos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -6102,12 +6102,17 @@ object FMovimientos: TFMovimientos
         'left join tipo_documento td on (td.tipo_documento=p.tipo_documen' +
         'to)'
       'where (p.baja <> '#39'S'#39')'
-      ' and (c.id_cuenta = :idCta)'
+      ' and (c.id_cuenta = :idCta) and (p.id_tipo = :tipo)'
       'order by apellido_y_nombre')
     Params = <
       item
         DataType = ftUnknown
         Name = 'idCta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tipo'
         ParamType = ptUnknown
       end>
     Left = 593
@@ -6116,6 +6121,11 @@ object FMovimientos: TFMovimientos
       item
         DataType = ftUnknown
         Name = 'idCta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tipo'
         ParamType = ptUnknown
       end>
     object ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField
@@ -6232,9 +6242,13 @@ object FMovimientos: TFMovimientos
   end
   object ZQ_Movimientos: TZQuery
     Connection = DM.Conexion
+    UpdateObject = UpdateMovimientos
     SQL.Strings = (
-      'select m.*'
+      'select m.*, p.id_tipo'
       'from ie_movimientos m'
+      
+        'left join ie_proveedores p on (m.nro_proveedor = p.nro_proveedor' +
+        ')'
       'where m.nro_movimiento = :NroMov')
     Params = <
       item
@@ -6318,6 +6332,9 @@ object FMovimientos: TFMovimientos
     end
     object ZQ_MovimientosNRO_CUENTA: TIntegerField
       FieldName = 'NRO_CUENTA'
+    end
+    object ZQ_MovimientosID_TIPO: TIntegerField
+      FieldName = 'ID_TIPO'
     end
   end
   object DS_Proveedores: TDataSource
@@ -7185,5 +7202,219 @@ object FMovimientos: TFMovimientos
     StoredProcName = 'ELIMINAR_MOVIMIENTO'
     Left = 1056
     Top = 460
+  end
+  object DS_TipoProveedor: TDataSource
+    DataSet = ZQ_TipoProveedor
+    Left = 891
+    Top = 427
+  end
+  object ZQ_TipoProveedor: TZQuery
+    Connection = DM.Conexion
+    AfterScroll = ZQ_TipoProveedorAfterScroll
+    SQL.Strings = (
+      'select distinct tp.id_tipo, tp.descripcion as TIPO_PROVEEDOR'
+      'from tipo_proveedor tp'
+      'left join ie_proveedores p on (p.id_tipo=tp.id_tipo)'
+      
+        'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
+        'r)'
+      'where (p.baja <> '#39'S'#39')'
+      ' and (c.id_cuenta = :idCta)'
+      'order by apellido_y_nombre')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idCta'
+        ParamType = ptUnknown
+      end>
+    Left = 811
+    Top = 427
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idCta'
+        ParamType = ptUnknown
+      end>
+    object ZQ_TipoProveedorID_TIPO: TIntegerField
+      FieldName = 'ID_TIPO'
+      Required = True
+    end
+    object ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField
+      FieldName = 'TIPO_PROVEEDOR'
+      Size = 100
+    end
+  end
+  object UpdateMovimientos: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM ie_movimientos'
+      'WHERE'
+      '  ie_movimientos.NRO_MOVIMIENTO = :OLD_NRO_MOVIMIENTO')
+    InsertSQL.Strings = (
+      'INSERT INTO ie_movimientos'
+      
+        '  (ie_movimientos.NRO_MOVIMIENTO, ie_movimientos.NRO_PROVEEDOR, ' +
+        'ie_movimientos.ID_CONCEPTO, '
+      
+        '   ie_movimientos.ID_OBJETO_MOVIMIENTO, ie_movimientos.DESCRIPCI' +
+        'ON, ie_movimientos.PAGO_DEL_EJERCICIO, '
+      
+        '   ie_movimientos.FECHA, ie_movimientos.IMPORTE, ie_movimientos.' +
+        'IMPRESO, '
+      
+        '   ie_movimientos.NRO_COMPROMISO, ie_movimientos.NRO_PARTE, ie_m' +
+        'ovimientos.ANULADO, '
+      
+        '   ie_movimientos.FECHA_ANULADO, ie_movimientos.PARTE_ANULADO, i' +
+        'e_movimientos.DETALLE_ANULADO, '
+      
+        '   ie_movimientos.NRO_ORDEN, ie_movimientos.NRO_FACTURA, ie_movi' +
+        'mientos.NRO_RECIBO, '
+      '   ie_movimientos.NRO_ORDEN_STRING, ie_movimientos.NRO_CUENTA)'
+      'VALUES'
+      
+        '  (:NRO_MOVIMIENTO, :NRO_PROVEEDOR, :ID_CONCEPTO, :ID_OBJETO_MOV' +
+        'IMIENTO, '
+      
+        '   :DESCRIPCION, :PAGO_DEL_EJERCICIO, :FECHA, :IMPORTE, :IMPRESO' +
+        ', :NRO_COMPROMISO, '
+      
+        '   :NRO_PARTE, :ANULADO, :FECHA_ANULADO, :PARTE_ANULADO, :DETALL' +
+        'E_ANULADO, '
+      
+        '   :NRO_ORDEN, :NRO_FACTURA, :NRO_RECIBO, :NRO_ORDEN_STRING, :NR' +
+        'O_CUENTA)')
+    ModifySQL.Strings = (
+      'UPDATE ie_movimientos SET'
+      '  ie_movimientos.NRO_MOVIMIENTO = :NRO_MOVIMIENTO,'
+      '  ie_movimientos.NRO_PROVEEDOR = :NRO_PROVEEDOR,'
+      '  ie_movimientos.ID_CONCEPTO = :ID_CONCEPTO,'
+      '  ie_movimientos.ID_OBJETO_MOVIMIENTO = '
+      ':ID_OBJETO_MOVIMIENTO,'
+      '  ie_movimientos.DESCRIPCION = :DESCRIPCION,'
+      '  ie_movimientos.PAGO_DEL_EJERCICIO = :PAGO_DEL_EJERCICIO,'
+      '  ie_movimientos.FECHA = :FECHA,'
+      '  ie_movimientos.IMPORTE = :IMPORTE,'
+      '  ie_movimientos.IMPRESO = :IMPRESO,'
+      '  ie_movimientos.NRO_COMPROMISO = :NRO_COMPROMISO,'
+      '  ie_movimientos.NRO_PARTE = :NRO_PARTE,'
+      '  ie_movimientos.ANULADO = :ANULADO,'
+      '  ie_movimientos.FECHA_ANULADO = :FECHA_ANULADO,'
+      '  ie_movimientos.PARTE_ANULADO = :PARTE_ANULADO,'
+      '  ie_movimientos.DETALLE_ANULADO = :DETALLE_ANULADO,'
+      '  ie_movimientos.NRO_ORDEN = :NRO_ORDEN,'
+      '  ie_movimientos.NRO_FACTURA = :NRO_FACTURA,'
+      '  ie_movimientos.NRO_RECIBO = :NRO_RECIBO,'
+      '  ie_movimientos.NRO_ORDEN_STRING = :NRO_ORDEN_STRING,'
+      '  ie_movimientos.NRO_CUENTA = :NRO_CUENTA'
+      'WHERE'
+      '  ie_movimientos.NRO_MOVIMIENTO = :OLD_NRO_MOVIMIENTO')
+    Left = 376
+    Top = 48
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'NRO_MOVIMIENTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_PROVEEDOR'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_CONCEPTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_OBJETO_MOVIMIENTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DESCRIPCION'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PAGO_DEL_EJERCICIO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FECHA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPORTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPRESO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_COMPROMISO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_PARTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ANULADO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FECHA_ANULADO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PARTE_ANULADO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DETALLE_ANULADO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_ORDEN'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_FACTURA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_RECIBO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_ORDEN_STRING'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_CUENTA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_NRO_MOVIMIENTO'
+        ParamType = ptUnknown
+      end>
   end
 end
