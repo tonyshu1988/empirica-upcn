@@ -8,7 +8,7 @@ uses
   Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, ActnList,
   XPStyleActnCtrls, ActnMan, EKDbSuma, EKDBDateTimePicker, DBClient, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKListadoSQL,
-  ZStoredProcedure,StrUtils;
+  ZStoredProcedure,StrUtils, ZSqlUpdate;
 
 type
   TFAlta_OrdenPago = class(TForm)
@@ -163,6 +163,12 @@ type
     ZQ_MovimientosNRO_CUENTA: TIntegerField;
     ZQ_Movimientosnombre_cuenta: TStringField;
     LabelCuenta: TLabel;
+    ZQ_TipoProveedor: TZQuery;
+    DS_TipoProveedor: TDataSource;
+    ZQ_TipoProveedorID_TIPO: TIntegerField;
+    ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField;
+    updateMovimientos: TZUpdateSQL;
+    ZQ_MovimientosID_TIPO: TIntegerField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -194,6 +200,7 @@ type
       State: TGridDrawState);
     procedure ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
     procedure ZQ_Cuenta_MovimientoIMPORTEValidate(Sender: TField);
+    procedure ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -570,9 +577,15 @@ end;
 
 procedure TFAlta_OrdenPago.FormCreate(Sender: TObject);
 begin
+  dm.EKModelo.abrir(ZQ_TipoProveedor);
   dm.EKModelo.abrir(ZQ_Conceptos);
   dm.EKModelo.abrir(ZQ_Cuentas);
   ZQ_Cuentas.Locate('id_cuenta',FMovimientos.ZQ_CuentasID_CUENTA.AsInteger,[]);
+
+  ZQ_TipoProveedor.Active:=false;
+  ZQ_TipoProveedor.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_TipoProveedor.Active:=true;
+
   ZQ_Proveedores.Active:=false;
   ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
   ZQ_Proveedores.Active:=true;
@@ -715,6 +728,13 @@ begin
       (ZQ_Cuenta_MovimientoIMPORTE.AsFloat < -1000000000000.00)
    then
       raise Exception.Create('Importe ingresado incorrecto, verifique');
+end;
+
+procedure TFAlta_OrdenPago.ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_Proveedores.Active:=false;
+  ZQ_Proveedores.ParamByName('tipo').AsInteger:=ZQ_TipoProveedorID_TIPO.AsInteger;
+  ZQ_Proveedores.Active:=true;
 end;
 
 end.

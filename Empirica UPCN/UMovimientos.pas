@@ -10,7 +10,7 @@ uses
   EKBusquedaAvanzada, ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma,
   EKLlenarCombo, mxNativeExcel, mxExport, QuickRpt, QRCtrls,
   EKVistaPreviaQR, EKNumeroATexto, DBClient, QPrinters, EKIni, jpeg,
-  EKOrdenarGrilla, UAlta_OrdenPago, EKDBDateTimePicker, Menus;
+  EKOrdenarGrilla, UAlta_OrdenPago, EKDBDateTimePicker, Menus, ZSqlUpdate;
 
 type
   TFMovimientos = class(TForm)
@@ -453,6 +453,12 @@ type
     LabelFechaConciliacion: TLabel;
     DTPFechaConciliar: TDateTimePicker;
     EliminarMovimiento: TZStoredProc;
+    DS_TipoProveedor: TDataSource;
+    ZQ_TipoProveedor: TZQuery;
+    ZQ_TipoProveedorID_TIPO: TIntegerField;
+    ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField;
+    UpdateMovimientos: TZUpdateSQL;
+    ZQ_MovimientosID_TIPO: TIntegerField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -524,6 +530,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure ZQ_Cuenta_MovimientoIMPORTEValidate(Sender: TField);
+    procedure ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -582,7 +589,6 @@ end;
 procedure TFMovimientos.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla1.CargarConfigColunmas;
-
   refrescarConsultas();
 
   DTPFechaDesde.Date:= StartOfTheMonth(DM.EKModelo.Fecha);
@@ -608,6 +614,12 @@ begin
     DBLCuenta.ItemIndex:= 0;
     DBLCuenta.Enabled:=true;
   end;
+
+  dm.EKModelo.abrir(ZQ_TipoProveedor);
+  //filtro el tipo proveedor segun la cuenta
+  ZQ_TipoProveedor.Active:=false;
+  ZQ_TipoProveedor.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_TipoProveedor.Active:=true;
 
   btaplicar.Click;
   LeerOpcionesFiltrado;
@@ -640,6 +652,11 @@ begin
   DBGridLibroBanco.Enabled:=false;
   PParametrosLibroBanco.Enabled:=false;
 
+  //filtro el tipo proveedor segun la cuenta
+  ZQ_TipoProveedor.Active:=false;
+  ZQ_TipoProveedor.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_TipoProveedor.Active:=true;  
+
   ZQ_Movimientos.Active := False;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := -1;
 
@@ -671,6 +688,11 @@ begin
   PIngresos.Visible:=true;
   DBGridLibroBanco.Enabled:=false;
   PParametrosLibroBanco.Enabled:=false;
+
+  //filtro el tipo proveedor segun la cuenta
+  ZQ_TipoProveedor.Active:=false;
+  ZQ_TipoProveedor.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_TipoProveedor.Active:=true;  
 
   ZQ_Movimientos.Active := False;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := -1;
@@ -1574,6 +1596,7 @@ begin
 
   GrupoEditando.Enabled:= true;
   btaplicar.Click();
+  LIBRO_BANCO.Last;
 end;
 
 
@@ -1814,6 +1837,7 @@ end;
 
 procedure TFMovimientos.refrescarConsultas;
 begin
+
   ZQ_Conceptos.Active:=false;
   ZQ_Conceptos.Active:=true;
   ZQ_Proveedores.Active:=false;
@@ -1940,6 +1964,14 @@ begin
 //      (ZQ_Cuenta_MovimientoIMPORTE.AsFloat < -1000000000000.00)
 //   then
 //      raise Exception.Create('Importe ingresado incorrecto, verifique');
+end;
+
+procedure TFMovimientos.ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
+begin
+  //cargo los proveedores segun el tipo
+  ZQ_Proveedores.Active:=false;
+  ZQ_Proveedores.ParamByName('tipo').AsInteger:=ZQ_TipoProveedorID_TIPO.AsInteger;
+  ZQ_Proveedores.Active:=true;
 end;
 
 end.
