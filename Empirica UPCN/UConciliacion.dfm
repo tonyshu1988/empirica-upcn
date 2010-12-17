@@ -1,6 +1,6 @@
 object FConciliacion: TFConciliacion
   Left = 172
-  Top = 195
+  Top = 78
   Width = 1041
   Height = 679
   Caption = 'Conciliaci'#243'n Bancaria'
@@ -400,8 +400,8 @@ object FConciliacion: TFConciliacion
     end
     object RepConciliacion: TQuickRep
       Tag = 99
-      Left = 825
-      Top = 28
+      Left = 81
+      Top = -12
       Width = 952
       Height = 1347
       Frame.Color = clBlack
@@ -471,7 +471,7 @@ object FConciliacion: TFConciliacion
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          359.392361111111200000
+          359.392361111111100000
           1898.385416666667000000)
         BandType = rbPageHeader
         object QRDBImage1: TQRDBImage
@@ -503,9 +503,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666660000
-            637.204861111111000000
+            637.204861111111100000
             158.750000000000000000
-            623.975694444444500000)
+            623.975694444444600000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -566,7 +566,7 @@ object FConciliacion: TFConciliacion
           Size.Values = (
             52.916666666666660000
             549.010416666666600000
-            37.482638888888900000
+            37.482638888888890000
             798.159722222222300000)
           Alignment = taCenter
           AlignToBand = True
@@ -629,7 +629,7 @@ object FConciliacion: TFConciliacion
             39.687500000000000000
             0.000000000000000000
             315.295138888888900000
-            531.371527777777900000)
+            531.371527777777800000)
           Alignment = taLeftJustify
           AlignToBand = True
           AutoSize = False
@@ -658,9 +658,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666660000
-            637.204861111111000000
+            637.204861111111100000
             233.715277777777800000
-            623.975694444444500000)
+            623.975694444444600000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -771,7 +771,7 @@ object FConciliacion: TFConciliacion
         object QRDBText4: TQRDBText
           Left = 288
           Top = 1
-          Width = 281
+          Width = 190
           Height = 16
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -779,10 +779,10 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            35.277777777777780000
             635.000000000000000000
-            2.645833333333333000
-            619.125000000000000000)
+            2.204861111111111000
+            418.923611111111100000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -801,9 +801,9 @@ object FConciliacion: TFConciliacion
           FontSize = 7
         end
         object QRDBText5: TQRDBText
-          Left = 574
+          Left = 488
           Top = 1
-          Width = 122
+          Width = 156
           Height = 16
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -811,10 +811,10 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            1264.708333333333000000
-            2.645833333333333000
-            269.875000000000000000)
+            35.277777777777780000
+            1075.972222222222000000
+            2.204861111111111000
+            343.958333333333300000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
@@ -905,7 +905,7 @@ object FConciliacion: TFConciliacion
           VertAdjust = 0
         end
         object QRShapeV5: TQRShape
-          Left = 569
+          Left = 480
           Top = -1
           Width = 4
           Height = 19
@@ -915,15 +915,15 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333330000
-            1255.447916666667000000
-            -1.322916666666667000
-            7.937500000000000000)
+            41.892361111111110000
+            1058.333333333333000000
+            -2.204861111111111000
+            8.819444444444445000)
           Shape = qrsVertLine
           VertAdjust = 0
         end
         object QRShapeV6: TQRShape
-          Left = 700
+          Left = 645
           Top = -1
           Width = 4
           Height = 19
@@ -933,17 +933,17 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333330000
-            1543.843750000000000000
-            -1.322916666666667000
-            7.937500000000000000)
+            41.892361111111110000
+            1422.135416666667000000
+            -2.204861111111111000
+            8.819444444444445000)
           Shape = qrsVertLine
           VertAdjust = 0
         end
         object QRShapeH1: TQRShape
           Left = 1
           Top = 17
-          Width = 701
+          Width = 859
           Height = 1
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -951,10 +951,10 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            1.322916666666667000
-            2.645833333333333000
-            38.364583333333330000
-            1546.489583333333000000)
+            2.204861111111111000
+            2.204861111111111000
+            37.482638888888890000
+            1893.975694444445000000)
           Shape = qrsHorLine
           VertAdjust = 0
         end
@@ -1068,7 +1068,7 @@ object FConciliacion: TFConciliacion
         object QRLabel7: TQRLabel
           Left = 288
           Top = 0
-          Width = 278
+          Width = 190
           Height = 18
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1079,7 +1079,7 @@ object FConciliacion: TFConciliacion
             39.687500000000000000
             635.000000000000000000
             0.000000000000000000
-            613.833333333333200000)
+            418.923611111111100000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -1097,9 +1097,9 @@ object FConciliacion: TFConciliacion
           FontSize = 9
         end
         object QRLabel8: TQRLabel
-          Left = 571
+          Left = 487
           Top = 0
-          Width = 130
+          Width = 157
           Height = 18
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1108,9 +1108,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             39.687500000000000000
-            1259.416666666667000000
+            1073.767361111111000000
             0.000000000000000000
-            285.750000000000000000)
+            346.163194444444500000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -1189,7 +1189,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
+            37.482638888888890000
             1682.309027777778000000
             0.000000000000000000
             103.628472222222200000)
@@ -1220,7 +1220,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888900000
+            37.482638888888890000
             1792.552083333333000000
             0.000000000000000000
             105.833333333333300000)
@@ -1276,27 +1276,9 @@ object FConciliacion: TFConciliacion
           Shape = qrsRectangle
           VertAdjust = 0
         end
-        object QRShape5: TQRShape
-          Left = 702
-          Top = 38
-          Width = 159
-          Height = 28
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            61.184895833333320000
-            1547.812500000000000000
-            84.335937500000000000
-            350.572916666666700000)
-          Shape = qrsRectangle
-          VertAdjust = 0
-        end
         object QRShape3: TQRShape
           Left = 0
-          Top = 65
+          Top = 64
           Width = 861
           Height = 28
           Frame.Color = clBlack
@@ -1305,35 +1287,17 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            61.184895833333320000
+            61.736111111111110000
             0.000000000000000000
-            143.867187500000000000
+            141.111111111111100000
             1898.385416666667000000)
           Shape = qrsRectangle
           VertAdjust = 0
         end
-        object QRShape4: TQRShape
-          Left = 702
-          Top = 65
-          Width = 159
-          Height = 28
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            61.184895833333320000
-            1547.812500000000000000
-            143.867187500000000000
-            350.572916666666700000)
-          Shape = qrsRectangle
-          VertAdjust = 0
-        end
         object QRShape1: TQRShape
-          Left = 702
+          Left = 647
           Top = -1
-          Width = 159
+          Width = 213
           Height = 25
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1341,17 +1305,17 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            54.806547619047620000
-            1547.812500000000000000
-            -1.889880952380952000
-            351.517857142857100000)
+            55.121527777777790000
+            1426.545138888889000000
+            -2.204861111111111000
+            469.635416666666700000)
           Shape = qrsRectangle
           VertAdjust = 0
         end
         object qrsaldoC: TQRLabel
-          Left = 412
+          Left = 184
           Top = 41
-          Width = 280
+          Width = 675
           Height = 24
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1360,12 +1324,12 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666660000
-            908.402777777777900000
+            405.694444444444500000
             90.399305555555570000
-            617.361111111111200000)
+            1488.281250000000000000)
           Alignment = taRightJustify
           AlignToBand = False
-          AutoSize = True
+          AutoSize = False
           AutoStretch = False
           Caption = 'Saldo s/ Conciliaci'#243'n a la Fecha'
           Color = clWhite
@@ -1380,7 +1344,7 @@ object FConciliacion: TFConciliacion
           FontSize = 11
         end
         object qrsaldoEB: TQRLabel
-          Left = 15
+          Left = 184
           Top = 68
           Width = 675
           Height = 22
@@ -1390,10 +1354,10 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            49.136904761904760000
-            34.017857142857140000
-            149.300595238095200000
-            1489.226190476190000000)
+            48.506944444444440000
+            405.694444444444500000
+            149.930555555555600000
+            1488.281250000000000000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
@@ -1410,39 +1374,8 @@ object FConciliacion: TFConciliacion
           WordWrap = True
           FontSize = 11
         end
-        object qrExtracto: TQRLabel
-          Left = 705
-          Top = 69
-          Width = 153
-          Height = 22
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            49.136904761904760000
-            1553.482142857143000000
-            151.190476190476200000
-            338.288690476190500000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = '$0'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 11
-        end
         object QRLabel10: TQRLabel
-          Left = 648
+          Left = 595
           Top = 2
           Width = 47
           Height = 18
@@ -1453,7 +1386,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             39.687500000000000000
-            1428.750000000000000000
+            1311.892361111111000000
             4.409722222222222000
             103.628472222222200000)
           Alignment = taRightJustify
@@ -1473,9 +1406,9 @@ object FConciliacion: TFConciliacion
           FontSize = 9
         end
         object qrTotalHaber: TQRLabel
-          Left = 704
+          Left = 650
           Top = 2
-          Width = 154
+          Width = 207
           Height = 18
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1484,9 +1417,9 @@ object FConciliacion: TFConciliacion
           Frame.DrawRight = False
           Size.Values = (
             39.687500000000000000
-            1553.104166666667000000
-            5.291666666666667000
-            338.666666666666700000)
+            1433.159722222222000000
+            4.409722222222222000
+            456.406250000000100000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
@@ -1502,37 +1435,6 @@ object FConciliacion: TFConciliacion
           Transparent = True
           WordWrap = True
           FontSize = 9
-        end
-        object qrSaldoConciliacion: TQRLabel
-          Left = 705
-          Top = 42
-          Width = 153
-          Height = 22
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            49.136904761904760000
-            1553.482142857143000000
-            92.604166666666680000
-            338.288690476190500000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = '$0'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          FontSize = 11
         end
       end
     end
