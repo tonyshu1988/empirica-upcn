@@ -158,7 +158,7 @@ type
     ZQ_ProveedoresID_TIPO_IVA: TIntegerField;
     ZQ_ProveedoresID_TIPO_FACTURA: TIntegerField;
     ZQ_ProveedoresTIPO_PROVEEDOR: TStringField;
-    DBLookupComboBox2: TDBLookupComboBox;
+    DBLUpCBoxTipo: TDBLookupComboBox;
     Label2: TLabel;
     ZQ_MovimientosNRO_CUENTA: TIntegerField;
     ZQ_Movimientosnombre_cuenta: TStringField;
@@ -697,7 +697,12 @@ procedure TFAlta_OrdenPago.DBEditNroProveedorKeyUp(Sender: TObject; var Key: Wor
 begin
   if key = 112 then
   begin
-      EKListado_Proveedores.SQL[4]:= ' and (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
+      EKListado_Proveedores.SQL[5]:= ' and (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
+      if DBLUpCBoxTipo.Text <> '' then
+        EKListado_Proveedores.SQL[6]:= ' and (t.descripcion = '''+DBLUpCBoxTipo.Text+''')'
+      else
+        EKListado_Proveedores.SQL[6]:= '';
+
       if EKListado_Proveedores.Buscar then
       begin
         ZQ_Movimientos.Edit;

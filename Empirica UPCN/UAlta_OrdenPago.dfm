@@ -489,7 +489,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         TabOrder = 4
         OnKeyUp = DBEditNroConceptoKeyUp
       end
-      object DBLookupComboBox2: TDBLookupComboBox
+      object DBLUpCBoxTipo: TDBLookupComboBox
         Left = 92
         Top = 88
         Width = 109
@@ -514,7 +514,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -768,8 +768,10 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       
         'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
         'r)'
+      'left join tipo_proveedor t on (p.id_tipo = t.id_tipo)'
       'where (p.baja <> '#39'S'#39')'
       ' and (c.id_cuenta = :idCta)'
+      ' and (t.descripcion = :desc)'
       'order by apellido_y_nombre')
     CampoBuscar = 'APELLIDO_Y_NOMBRE'
     CampoClave = 'nro_proveedor'
