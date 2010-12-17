@@ -312,7 +312,7 @@ begin
   begin
     if LIBRO_BANCOID_MOVIMIENTO.AsInteger <> -1 then
     begin
-      if (LIBRO_BANCOCONCILIADO.Value='S') then
+      if (LIBRO_BANCOCONCILIADO.Value='S')and (LIBRO_BANCOFECHA_CONCILIADO.Value <= StrToDate(EKBAvanzadaLibroBco.ParametrosSelecReales1[2]))  then
       begin
         DBGridLibroBanco.Canvas.Brush.Color :=StaticTextConciliado.Brush.Color;
         DBGridLibroBanco.Canvas.Font.Color := clBlack;
