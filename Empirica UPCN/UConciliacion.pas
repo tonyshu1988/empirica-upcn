@@ -103,7 +103,6 @@ type
     QRLabel6: TQRLabel;
     QRLabel7: TQRLabel;
     QRLabel8: TQRLabel;
-    QRLabel4: TQRLabel;
     qrSaldoLibroBanco: TQRLabel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     QRShape2: TQRShape;
@@ -280,7 +279,7 @@ begin
   if ZSP_Conciliacion.IsEmpty then
     exit;
   aux_fecha:= '';
-  qrSaldoLibroBanco.Caption:=lblSaldo.Caption;
+  qrSaldoLibroBanco.Caption:=Format('Saldo s/ Libro de Banco: %s' ,[lblSaldo.Caption]);
   qrSaldoConciliacion.Caption:=lblSaldoConciliacion.Caption;
   qrTotalHaber.Caption:=lblTotalHaber.Caption;
   qrExtracto.Caption:=lblSaldoExtracto.Caption;
