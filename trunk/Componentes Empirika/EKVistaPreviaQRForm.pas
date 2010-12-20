@@ -72,6 +72,7 @@ type
     procedure Conf_impresoraExecute(Sender: TObject);
     procedure zoom_masExecute(Sender: TObject);
     procedure zoom_menosExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -638,6 +639,25 @@ begin
   Application.ProcessMessages;
   if not(QRPreview1.Zoom <= 10) then
     QRPreview1.Zoom := QRPreview1.Zoom - 10;
+
+end;
+
+procedure TEKVistaPreviaQRForm.FormCreate(Sender: TObject);
+var
+i:integer;
+begin
+  tag:=98;
+  // Elimino los enter por tabs
+  barra.Tag:=tag;
+  for  i:=0 to Barra.ComponentCount-1 do
+  begin
+      with barra do
+        begin
+           Components[i].Tag:=tag;
+        end
+  end;
+
+  QRPreview1.Tag:=tag;
 
 end;
 

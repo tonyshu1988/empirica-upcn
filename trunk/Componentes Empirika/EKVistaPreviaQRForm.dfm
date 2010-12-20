@@ -1,6 +1,7 @@
 object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
-  Left = 263
-  Top = 172
+  Tag = 98
+  Left = 357
+  Top = 231
   Width = 994
   Height = 481
   Caption = 'Vista Previa'
@@ -18,15 +19,16 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
+  OnCreate = FormCreate
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
   TextHeight = 13
   object QRPreview1: TQRPreview
-    Tag = 99
+    Tag = 98
     Left = 0
     Top = 42
-    Width = 978
-    Height = 401
+    Width = 986
+    Height = 407
     HorzScrollBar.Tracking = True
     VertScrollBar.Tracking = True
     Align = alClient
@@ -36,8 +38,8 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
     PageNumber = 1
     Zoom = 100
     DesignSize = (
-      974
-      397)
+      982
+      403)
     object Image1: TImage
       Left = 928
       Top = 368
@@ -6575,7 +6577,7 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
   object Barra: TActionToolBar
     Left = 0
     Top = 0
-    Width = 978
+    Width = 986
     Height = 42
     ActionManager = Acciones
     Caption = 'Barra'
