@@ -81,7 +81,6 @@ type
     QRlblTotalCorrientes: TQRLabel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     QRShape5: TQRShape;
-    QRShape6: TQRShape;
     QRShape10: TQRShape;
     QRShape11: TQRShape;
     PFiltrosColumnas: TPanel;
@@ -136,6 +135,7 @@ type
     ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Libro_erogacionesTIPO_PROVEEDOR: TStringField;
     cbTipo: TCheckBox;
+    QRShape3: TQRShape;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -521,6 +521,7 @@ end;
 procedure TFListadoErogaciones.btexportarExelClick(Sender: TObject);
 begin
   if not ZQ_Libro_erogaciones.IsEmpty then
+
     mxDBGridExport.Select;
 end;
 
