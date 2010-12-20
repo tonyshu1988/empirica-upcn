@@ -144,7 +144,7 @@ var
 
 implementation
 
-Uses EKEventos;
+Uses EKEventos, EKVistaPreviaQRForm;
 
 
 { TCustomApplicationEvents }
@@ -664,40 +664,43 @@ end;
 procedure TEKMultiCaster.enter_por_tab(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
-    with screen.ActiveForm do
-    begin
-      if (ActiveControl is TDBGrid) then
+    if Screen.ActiveForm is TEKVistaPreviaQRForm then
+      exit
+    else
+      with screen.ActiveForm do
       begin
-        with TDBGrid(ActiveControl) do
-          if selectedindex < (fieldcount -1) then
-          begin
-            { increment the field }
-            Key := #0;
-            selectedindex := selectedindex +1
-          end
-          else
-          begin
-            Key := #0;
-            keybd_event(VK_TAB, 0, 0, 0);
-          end;
-        exit;
+        if (ActiveControl is TDBGrid) then
+        begin
+          with TDBGrid(ActiveControl) do
+            if selectedindex < (fieldcount -1) then
+            begin
+              { increment the field }
+              Key := #0;
+              selectedindex := selectedindex +1
+            end
+            else
+            begin
+              Key := #0;
+              keybd_event(VK_TAB, 0, 0, 0);
+            end;
+          exit;
+        end;
+        if (ActiveControl is TDBMemo)
+           or (ActiveControl is TRichEdit)
+           or (ActiveControl is TDBRichEdit)
+           or (ActiveControl is TMemo) then
+          exit;
+
+        //  PONERLE 98 AL TAG DE UN COMPONENTE PARA QUE NO HAGA EL ENTER POR TAB
+
+        if ActiveControl.Tag = 98 then
+          exit;
+
+        //Showmessage(ActiveControl.ClassName);
+
+        Key := #0;
+        Perform(WM_NEXTDLGCTL, 0, 0);
       end;
-      if (ActiveControl is TDBMemo)
-         or (ActiveControl is TRichEdit)
-         or (ActiveControl is TDBRichEdit)
-         or (ActiveControl is TMemo) then
-        exit;
-
-      //  PONERLE 98 AL TAG DE UN COMPONENTE PARA QUE NO HAGA EL ENTER POR TAB
-
-      if ActiveControl.Tag = 98 then
-        exit;
-
-      //Showmessage(ActiveControl.ClassName);
-
-      Key := #0;
-      Perform(WM_NEXTDLGCTL, 0, 0);
-    end;
 end;
 
 procedure TEKMultiCaster.DoFormActivate(Sender: TObject);

@@ -84,11 +84,11 @@ var
 begin
   FReporte := Value;
   FReporte.Visible := false;
-  FReporte.Tag := 99;
+  FReporte.Tag := 98;
   if caption > '' then
     FReporte.ReportTitle := caption;
   for i := 0 to FReporte.BandList.Count-1 do
-    TQRBand(FReporte.BandList.Items[i]).Tag := 99;
+    TQRBand(FReporte.BandList.Items[i]).Tag := 98;
 end;
 
 procedure TEKVistaPreviaQR.VistaPrevia;
