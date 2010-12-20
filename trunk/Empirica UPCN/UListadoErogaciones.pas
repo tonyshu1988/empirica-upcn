@@ -80,8 +80,6 @@ type
     QRlblTotalDiferidos: TQRLabel;
     QRlblTotalCorrientes: TQRLabel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
-    QRShape3: TQRShape;
-    QRShape4: TQRShape;
     QRShape5: TQRShape;
     QRShape6: TQRShape;
     QRShape10: TQRShape;
@@ -103,7 +101,6 @@ type
     QRLabel36: TQRLabel;
     QRDBText2: TQRDBText;
     ZQ_Libro_erogaciones_nombreConcepto: TStringField;
-    QRLabel2: TQRLabel;
     QRLabel21: TQRLabel;
     QRLabel27: TQRLabel;
     ChildBand1: TQRChildBand;
