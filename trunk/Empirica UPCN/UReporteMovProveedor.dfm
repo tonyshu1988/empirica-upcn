@@ -147,8 +147,8 @@ object FReporteMovProveedor: TFReporteMovProveedor
     end
     object RepMovProveedores: TQuickRep
       Tag = 99
-      Left = 156
-      Top = 321
+      Left = 100
+      Top = 193
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -296,7 +296,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
             52.916666666666670000
             920.750000000000000000
             31.750000000000000000
-            926.041666666666700000)
+            926.041666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -479,7 +479,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          68.791666666666670000
+          68.791666666666680000
           2770.187500000000000000)
         BandType = rbSummary
         object QRLabel2: TQRLabel
@@ -654,7 +654,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_MovimientoProveedores
-          DataField = 'NRO_ORDEN'
+          DataField = 'NRO_ORDEN_STRING'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -8
@@ -1751,11 +1751,12 @@ object FReporteMovProveedor: TFReporteMovProveedor
     OnCalcFields = ZQ_MovimientoProveedoresCalcFields
     SQL.Strings = (
       
-        'select m.fecha, m.nro_proveedor, m.nro_orden_string, cm.fecha_md' +
-        'c, cm.nro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre' +
-        '_medio_cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto' +
-        ', c.nombre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id' +
-        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo,m.nro_cuenta'
+        'select m.id_objeto_movimiento, m.fecha, m.nro_proveedor, m.nro_o' +
+        'rden_string, cm.fecha_mdc, cm.nro_cheque_transf, mc.id_medio, mc' +
+        '.codigo_corto, mc.nombre_medio_cobro_pago,cm.importe, p.apellido' +
+        '_y_nombre, c.id_concepto, c.nombre_concepto, ob.descripcion, cm.' +
+        'id_cuenta_ingreso, cm.id_cuenta_egreso, m.anulado, cm.conciliado' +
+        ', p.id_tipo,m.nro_cuenta'
       'from ie_movimientos m'
       
         'left join ie_cuentas_movimientos cm on(m.nro_movimiento = cm.nro' +
@@ -1876,6 +1877,9 @@ object FReporteMovProveedor: TFReporteMovProveedor
     end
     object ZQ_MovimientoProveedoresNRO_CUENTA: TIntegerField
       FieldName = 'NRO_CUENTA'
+    end
+    object ZQ_MovimientoProveedoresID_OBJETO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_OBJETO_MOVIMIENTO'
     end
   end
   object DS_MovimientoProveedores: TDataSource
@@ -2286,11 +2290,12 @@ object FReporteMovProveedor: TFReporteMovProveedor
     DataSet = ZQ_MovimientoProveedores
     SQL.Strings = (
       
-        'select m.fecha, m.nro_proveedor, m.nro_orden_string, cm.fecha_md' +
-        'c, cm.nro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre' +
-        '_medio_cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto' +
-        ', c.nombre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id' +
-        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo,m.nro_cuenta'
+        'select m.id_objeto_movimiento, m.fecha, m.nro_proveedor, m.nro_o' +
+        'rden_string, cm.fecha_mdc, cm.nro_cheque_transf, mc.id_medio, mc' +
+        '.codigo_corto, mc.nombre_medio_cobro_pago,cm.importe, p.apellido' +
+        '_y_nombre, c.id_concepto, c.nombre_concepto, ob.descripcion, cm.' +
+        'id_cuenta_ingreso, cm.id_cuenta_egreso, m.anulado, cm.conciliado' +
+        ', p.id_tipo,m.nro_cuenta'
       'from ie_movimientos m'
       
         'left join ie_cuentas_movimientos cm on(m.nro_movimiento = cm.nro' +
@@ -2306,11 +2311,12 @@ object FReporteMovProveedor: TFReporteMovProveedor
       'order by m.nro_proveedor,m.fecha, m.nro_movimiento')
     SQL_Select.Strings = (
       
-        'select m.fecha, m.nro_proveedor, m.nro_orden_string, cm.fecha_md' +
-        'c, cm.nro_cheque_transf, mc.id_medio, mc.codigo_corto, mc.nombre' +
-        '_medio_cobro_pago,cm.importe, p.apellido_y_nombre, c.id_concepto' +
-        ', c.nombre_concepto, ob.descripcion, cm.id_cuenta_ingreso, cm.id' +
-        '_cuenta_egreso, m.anulado, cm.conciliado, p.id_tipo,m.nro_cuenta')
+        'select m.id_objeto_movimiento, m.fecha, m.nro_proveedor, m.nro_o' +
+        'rden_string, cm.fecha_mdc, cm.nro_cheque_transf, mc.id_medio, mc' +
+        '.codigo_corto, mc.nombre_medio_cobro_pago,cm.importe, p.apellido' +
+        '_y_nombre, c.id_concepto, c.nombre_concepto, ob.descripcion, cm.' +
+        'id_cuenta_ingreso, cm.id_cuenta_egreso, m.anulado, cm.conciliado' +
+        ', p.id_tipo,m.nro_cuenta')
     SQL_From.Strings = (
       'from ie_movimientos m'
       

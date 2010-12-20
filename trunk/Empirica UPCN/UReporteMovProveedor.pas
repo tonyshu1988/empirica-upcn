@@ -192,6 +192,7 @@ type
     ZQ_CuentaMEDIO_POR_DEFECTO: TIntegerField;
     ZQ_CuentaCOLOR_CONSILIADO: TStringField;
     ZQ_CuentaBUSQUEDA: TStringField;
+    ZQ_MovimientoProveedoresID_OBJETO_MOVIMIENTO: TIntegerField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -284,7 +285,7 @@ begin
     ZQ_MovimientoProveedoresie_Cuenta.AsString :=ZQ_CuentasNOMBRE_CUENTA.AsString+' '+ZQ_CuentasNRO_CUENTA_BANCARIA.AsString;
   end;
 
-  case ZQ_MovimientoProveedoresID_MEDIO.AsInteger of
+  case ZQ_MovimientoProveedoresID_OBJETO_MOVIMIENTO.AsInteger of
   1: begin  //ORDEN DE PAGO
       ZQ_MovimientoProveedores_haber.AsFloat:= ZQ_MovimientoProveedoresIMPORTE.AsFloat;
       ZQ_MovimientoProveedores_debe.Clear;
