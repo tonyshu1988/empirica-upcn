@@ -130,22 +130,28 @@ type
     ZSP_ConciliacionTIPO_PROVEEDOR: TStringField;
     mxDBGridExport: TmxDBGridExport;
     mxNativeExcel1: TmxNativeExcel;
-    QRShapeV1: TQRShape;
     QRShapeV2: TQRShape;
     QRShapeV3: TQRShape;
     QRShapeV4: TQRShape;
     QRShapeV5: TQRShape;
     QRShapeV6: TQRShape;
-    QRShapeH1: TQRShape;
     qrCuenta: TQRLabel;
     QRBand1: TQRBand;
     QRShape2: TQRShape;
     QRShape3: TQRShape;
-    QRShape1: TQRShape;
     qrsaldoC: TQRLabel;
     qrsaldoEB: TQRLabel;
     QRLabel10: TQRLabel;
     qrTotalHaber: TQRLabel;
+    QRShape5: TQRShape;
+    QRShape6: TQRShape;
+    QRShape7: TQRShape;
+    QRShape8: TQRShape;
+    QRShape9: TQRShape;
+    QRShape1: TQRShape;
+    QRShape4: TQRShape;
+    QRShape10: TQRShape;
+    QRLabel1: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
@@ -275,7 +281,7 @@ begin
   if ZSP_Conciliacion.IsEmpty then
     exit;
   aux_fecha:= '';
-  qrSaldoLibroBanco.Caption:=Format('Saldo s/ Libro de Banco: %s' ,[lblSaldo.Caption]);
+  qrSaldoLibroBanco.Caption:=Format('%s' ,[lblSaldo.Caption]);
   //qrSaldoConciliacion.Caption:=lblSaldoConciliacion.Caption;
   qrTotalHaber.Caption:=lblTotalHaber.Caption;
   //qrExtracto.Caption:=lblSaldoExtracto.Caption;
@@ -315,6 +321,23 @@ procedure TFConciliacion.QRBandDetalleBeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
 begin
   imprimirMesReporte;
+
+  if StrLen(pchar(ZSP_ConciliacionPROVEEDOR.AsString)) > 40 then
+  begin
+    QRShapeV2.Height:= 76;
+    QRShapeV3.Height:= 76;
+    QRShapeV4.Height:= 76;
+    QRShapeV5.Height:= 76;
+    QRShapeV6.Height:= 76;
+  end
+  else
+  begin
+    QRShapeV2.Height:= 28;
+    QRShapeV3.Height:= 28;
+    QRShapeV4.Height:= 28;
+    QRShapeV5.Height:= 28;
+    QRShapeV6.Height:= 28;
+  end
 end;
 
 

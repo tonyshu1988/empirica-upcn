@@ -1,10 +1,10 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
   Left = 327
-  Top = 103
+  Top = 78
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
-  ClientHeight = 601
+  ClientHeight = 626
   ClientWidth = 795
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,7 +22,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Left = 0
     Top = 0
     Width = 795
-    Height = 549
+    Height = 574
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -43,9 +43,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
     object panel_edicion_medio_de_pago: TPanel
       Left = 3
-      Top = 229
+      Top = 249
       Width = 789
-      Height = 317
+      Height = 322
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
@@ -77,7 +77,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Left = 1
         Top = 23
         Width = 789
-        Height = 254
+        Height = 259
         Align = alCustom
         Anchors = [akLeft, akTop, akRight, akBottom]
         Color = 16772842
@@ -187,7 +187,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Panel2: TPanel
         Left = 0
-        Top = 279
+        Top = 284
         Width = 789
         Height = 38
         Align = alBottom
@@ -224,13 +224,13 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       Left = 3
       Top = 3
       Width = 789
-      Height = 226
+      Height = 246
       Align = alTop
       Caption = ' Datos Orden de Pago  '
       TabOrder = 0
       DesignSize = (
         789
-        226)
+        246)
       object Label3: TLabel
         Left = 3
         Top = 36
@@ -257,7 +257,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Label6: TLabel
         Left = 18
-        Top = 172
+        Top = 192
         Width = 71
         Height = 13
         Caption = 'Descripci'#243'n:'
@@ -319,8 +319,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Transparent = True
       end
       object Label26: TLabel
-        Left = 386
-        Top = 148
+        Left = 22
+        Top = 172
         Width = 67
         Height = 13
         Caption = 'Nro Recibo:'
@@ -368,7 +368,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object DBMemoDescripcion: TDBMemo
         Left = 91
-        Top = 171
+        Top = 191
         Width = 662
         Height = 49
         Color = 16772842
@@ -379,6 +379,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
+        MaxLength = 200
         ParentFont = False
         TabOrder = 8
       end
@@ -405,7 +406,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       object DBEditNroFactura: TDBEdit
         Left = 92
         Top = 144
-        Width = 290
+        Width = 541
         Height = 21
         DataField = 'NRO_FACTURA'
         DataSource = DS_Movimientos
@@ -418,9 +419,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         TabOrder = 6
       end
       object DBEditNroRecibo: TDBEdit
-        Left = 456
-        Top = 144
-        Width = 298
+        Left = 92
+        Top = 168
+        Width = 541
         Height = 21
         DataField = 'NRO_RECIBO'
         DataSource = DS_Movimientos
