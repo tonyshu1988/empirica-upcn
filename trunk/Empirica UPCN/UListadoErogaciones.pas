@@ -157,6 +157,9 @@ type
     QRShape8: TQRShape;
     QRShape9: TQRShape;
     QRShape10: TQRShape;
+    QRShapePanelFondo: TQRShape;
+    ChildBand1: TQRChildBand;
+    QRShape11: TQRShape;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -557,10 +560,20 @@ end;
 procedure TFListadoErogaciones.QRBandDetalleBeforePrint(
   Sender: TQRCustomBand; var PrintBand: Boolean);
 begin
-  QRDetVertical1.Height:= 90;
-  QRDetVertical2.Height:= 90;
-  QRDetVertical3.Height:= 90;
-  QRDetVertical4.Height:= 90;
+  if StrLen(pchar(ZQ_Libro_erogacionesNOMBRE_CONCEPTO.AsString)) > 80 then
+  begin
+    QRDetVertical1.Height:= 130;
+    QRDetVertical2.Height:= 130;
+    QRDetVertical3.Height:= 130;
+    QRDetVertical4.Height:= 130;
+  end
+  else
+  begin
+    QRDetVertical1.Height:= 90;
+    QRDetVertical2.Height:= 90;
+    QRDetVertical3.Height:= 90;
+    QRDetVertical4.Height:= 90;
+  end
 end;
 
 procedure TFListadoErogaciones.QRBandGroupFooterDescBeforePrint(
@@ -575,19 +588,19 @@ end;
 procedure TFListadoErogaciones.ChildBandReciboBeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
 begin
-  QRNroReciboVertical1.Height:= 36;
-  QRNroReciboVertical2.Height:= 36;
-  QRNroReciboVertical3.Height:= 36;
-  QRNroReciboVertical4.Height:= 36;
+  QRNroReciboVertical1.Height:= 30;
+  QRNroReciboVertical2.Height:= 30;
+  QRNroReciboVertical3.Height:= 30;
+  QRNroReciboVertical4.Height:= 30;
 end;
 
 procedure TFListadoErogaciones.ChildBandFacturaBeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
 begin
-  QRNroFacturaVertical1.Height:= 36;
-  QRNroFacturaVertical2.Height:= 36;
-  QRNroFacturaVertical3.Height:= 36;
-  QRNroFacturaVertical4.Height:= 36;
+  QRNroFacturaVertical1.Height:= 30;
+  QRNroFacturaVertical2.Height:= 30;
+  QRNroFacturaVertical3.Height:= 30;
+  QRNroFacturaVertical4.Height:= 30;
 end;
 
 end.

@@ -151,7 +151,7 @@ type
     QRShape1: TQRShape;
     QRShape4: TQRShape;
     QRShape10: TQRShape;
-    QRLabel1: TQRLabel;
+    QRLabel3: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
