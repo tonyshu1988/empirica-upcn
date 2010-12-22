@@ -400,8 +400,8 @@ object FConciliacion: TFConciliacion
     end
     object RepConciliacion: TQuickRep
       Tag = 99
-      Left = 137
-      Top = 44
+      Left = 441
+      Top = -132
       Width = 952
       Height = 1347
       Frame.Color = clBlack
