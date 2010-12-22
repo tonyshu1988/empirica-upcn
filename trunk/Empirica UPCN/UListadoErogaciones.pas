@@ -73,16 +73,11 @@ type
     QRSysData2: TQRSysData;
     QRBand8: TQRBand;
     QRGroup1: TQRGroup;
-    QRDBText1: TQRDBText;
-    QRBandGroup1Footer: TQRBand;
-    QRShape1: TQRShape;
+    QRBandGroupFooterDesc: TQRBand;
     EKVistaPrevia: TEKVistaPreviaQR;
     QRlblTotalDiferidos: TQRLabel;
     QRlblTotalCorrientes: TQRLabel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
-    QRShape5: TQRShape;
-    QRShape10: TQRShape;
-    QRShape11: TQRShape;
     PFiltrosColumnas: TPanel;
     BtAplicarFiltrosColumnas: TButton;
     CBFechaEmi: TCheckBox;
@@ -96,16 +91,11 @@ type
     CBNroFactura: TCheckBox;
     CBFechaConciliado: TCheckBox;
     EKIniGuardarFiltros: TEKIni;
-    QRLabel16: TQRLabel;
-    QRLabel36: TQRLabel;
     QRDBText2: TQRDBText;
     ZQ_Libro_erogaciones_nombreConcepto: TStringField;
     QRLabel21: TQRLabel;
     QRLabel27: TQRLabel;
-    ChildBand1: TQRChildBand;
-    QRShape2: TQRShape;
-    QRDBText7: TQRDBText;
-    QRLabel7: TQRLabel;
+    ChildBandRecibo: TQRChildBand;
     QRDBText8: TQRDBText;
     QRLabel8: TQRLabel;
     QRDBText3: TQRDBText;
@@ -135,7 +125,38 @@ type
     ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Libro_erogacionesTIPO_PROVEEDOR: TStringField;
     cbTipo: TCheckBox;
+    ChildBandFactura: TQRChildBand;
+    QRLabel7: TQRLabel;
+    QRDBText7: TQRDBText;
+    QRLabel36: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRDBText1: TQRDBText;
+    QRDetVertical1: TQRShape;
+    QRDescVertical1: TQRShape;
+    QRNroReciboVertical1: TQRShape;
+    QRNroFacturaVertical1: TQRShape;
+    QRDetVertical2: TQRShape;
+    QRDetVertical3: TQRShape;
+    QRDetVertical4: TQRShape;
+    QRDescVertical2: TQRShape;
+    QRDescVertical3: TQRShape;
+    QRDescVertical4: TQRShape;
+    QRNroReciboVertical2: TQRShape;
+    QRNroReciboVertical3: TQRShape;
+    QRNroReciboVertical4: TQRShape;
+    QRNroFacturaVertical2: TQRShape;
+    QRNroFacturaVertical3: TQRShape;
+    QRNroFacturaVertical4: TQRShape;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
     QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    QRShape5: TQRShape;
+    QRShape6: TQRShape;
+    QRShape7: TQRShape;
+    QRShape8: TQRShape;
+    QRShape9: TQRShape;
+    QRShape10: TQRShape;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -154,6 +175,14 @@ type
     procedure BtAplicarFiltrosColumnasClick(Sender: TObject);
     procedure ZQ_Libro_erogacionesAfterScroll(DataSet: TDataSet);
     procedure btexportarExelClick(Sender: TObject);
+    procedure QRBandDetalleBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBandGroupFooterDescBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure ChildBandReciboBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure ChildBandFacturaBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
     { Private declarations }
   public
@@ -513,9 +542,9 @@ procedure TFListadoErogaciones.ZQ_Libro_erogacionesAfterScroll(
   DataSet: TDataSet);
 begin
   if trim(ZQ_Libro_erogacionesDESCRIPCION.AsString) = '' then
-    QRBandGroup1Footer.Enabled:= false
+    QRBandGroupFooterDesc.Enabled:= false
   else
-    QRBandGroup1Footer.Enabled:= true;
+    QRBandGroupFooterDesc.Enabled:= true;
 end;
 
 procedure TFListadoErogaciones.btexportarExelClick(Sender: TObject);
@@ -523,6 +552,42 @@ begin
   if not ZQ_Libro_erogaciones.IsEmpty then
 
     mxDBGridExport.Select;
+end;
+
+procedure TFListadoErogaciones.QRBandDetalleBeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+  QRDetVertical1.Height:= 90;
+  QRDetVertical2.Height:= 90;
+  QRDetVertical3.Height:= 90;
+  QRDetVertical4.Height:= 90;
+end;
+
+procedure TFListadoErogaciones.QRBandGroupFooterDescBeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+  QRDescVertical1.Height:= 120;
+  QRDescVertical2.Height:= 120;
+  QRDescVertical3.Height:= 120;
+  QRDescVertical4.Height:= 120;
+end;
+
+procedure TFListadoErogaciones.ChildBandReciboBeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  QRNroReciboVertical1.Height:= 36;
+  QRNroReciboVertical2.Height:= 36;
+  QRNroReciboVertical3.Height:= 36;
+  QRNroReciboVertical4.Height:= 36;
+end;
+
+procedure TFListadoErogaciones.ChildBandFacturaBeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  QRNroFacturaVertical1.Height:= 36;
+  QRNroFacturaVertical2.Height:= 36;
+  QRNroFacturaVertical3.Height:= 36;
+  QRNroFacturaVertical4.Height:= 36;
 end;
 
 end.
