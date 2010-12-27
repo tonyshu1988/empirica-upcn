@@ -37,7 +37,7 @@ type
     zoom_menos: TAction;
     QRExcelFilter1: TQRExcelFilter;
     imagenes: TEKImageList32;
-    Image1: TImage;
+    Image2: TImage;
     procedure SpeedButton1Click(Sender: TObject);
     procedure ExitButtonClick(Sender: TObject);
     procedure ZoomFitClick(Sender: TObject);
