@@ -1,8 +1,8 @@
 object FReportes_Disponibilidades: TFReportes_Disponibilidades
-  Left = 282
-  Top = 106
+  Left = 246
+  Top = 163
   Width = 1082
-  Height = 576
+  Height = 585
   Caption = 'Reportes Disponibilidades'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,15 +22,15 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   object pFondo: TPanel
     Left = 0
     Top = 0
-    Width = 1074
-    Height = 492
+    Width = 1066
+    Height = 495
     Align = alClient
     TabOrder = 4
     object pLibroBanco: TPanel
       Left = 1
       Top = 1
-      Width = 1072
-      Height = 436
+      Width = 1064
+      Height = 439
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 3
@@ -38,8 +38,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object DBGridLibroBanco: TDBGrid
         Left = 3
         Top = 34
-        Width = 1066
-        Height = 399
+        Width = 1058
+        Height = 402
         Align = alClient
         Color = 16772842
         DataSource = DS_LIBRO_BANCO
@@ -205,13 +205,13 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object Panel1: TPanel
         Left = 3
         Top = 3
-        Width = 1066
+        Width = 1058
         Height = 31
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
         DesignSize = (
-          1066
+          1058
           31)
         object Shape1: TShape
           Left = 1
@@ -267,7 +267,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Transparent = True
         end
         object Panel3: TPanel
-          Left = 980
+          Left = 972
           Top = 0
           Width = 86
           Height = 31
@@ -297,8 +297,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       end
       object RepLibroB: TQuickRep
         Tag = 99
-        Left = -15
-        Top = 70
+        Left = -156
+        Top = 220
         Width = 1123
         Height = 794
         Frame.Color = clBlack
@@ -351,7 +351,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Zoom = 100
         PrevFormStyle = fsNormal
         PreviewInitialState = wsNormal
-        object QRBand5: TQRBand
+        object QRBand1: TQRBand
           Tag = 99
           Left = 38
           Top = 38
@@ -367,10 +367,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            272.520833333333400000
+            272.520833333333300000
             2770.187500000000000000)
           BandType = rbPageHeader
-          object QRLabel41: TQRLabel
+          object QRLabel5: TQRLabel
             Left = 7
             Top = 87
             Width = 61
@@ -402,7 +402,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             FontSize = 8
           end
           object QRDBImage1: TQRDBImage
-            Left = 17
+            Left = 49
             Top = 14
             Width = 64
             Height = 64
@@ -413,7 +413,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               169.333333333333300000
-              44.979166666666670000
+              129.645833333333300000
               37.041666666666670000
               169.333333333333300000)
             DataField = 'GRAFICO'
@@ -511,7 +511,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 12
           end
-          object QRLabel1: TQRLabel
+          object QRLabel8: TQRLabel
             Left = 179
             Top = 87
             Width = 58
@@ -542,7 +542,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel2: TQRLabel
+          object QRLabel9: TQRLabel
             Left = 348
             Top = 87
             Width = 45
@@ -573,7 +573,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel3: TQRLabel
+          object QRLabel13: TQRLabel
             Left = 515
             Top = 87
             Width = 51
@@ -618,7 +618,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               37.041666666666670000
               190.500000000000000000
               230.187500000000000000
-              256.645833333333400000)
+              256.645833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -647,7 +647,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              637.645833333333400000
+              637.645833333333300000
               230.187500000000000000
               254.000000000000000000)
             Alignment = taLeftJustify
@@ -729,7 +729,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             FontSize = 7
           end
         end
-        object QRBand6: TQRBand
+        object QRBand2: TQRBand
           Tag = 99
           Left = 38
           Top = 157
@@ -754,7 +754,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             37.041666666666670000
             2770.187500000000000000)
           BandType = rbDetail
-          object QRDBText5: TQRDBText
+          object QRDBText1: TQRDBText
             Left = 2
             Top = 0
             Width = 68
@@ -780,10 +780,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 7
           end
-          object QRDBText8: TQRDBText
-            Left = 182
+          object QRDBText2: TQRDBText
+            Left = 184
             Top = 0
-            Width = 79
+            Width = 76
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -792,9 +792,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              481.541666666666700000
+              486.833333333333300000
               0.000000000000000000
-              209.020833333333300000)
+              201.083333333333300000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -806,10 +806,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 7
           end
-          object QRDBText12: TQRDBText
-            Left = 951
+          object QRDBText3: TQRDBText
+            Left = 934
             Top = 0
-            Width = 95
+            Width = 111
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -818,9 +818,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              2516.187500000000000000
+              2471.208333333333000000
               0.000000000000000000
-              251.354166666666700000)
+              293.687500000000000000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -832,10 +832,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 7
           end
-          object QRDBText13: TQRDBText
-            Left = 755
+          object QRDBText4: TQRDBText
+            Left = 715
             Top = 0
-            Width = 95
+            Width = 102
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -844,9 +844,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1997.604166666667000000
+              1891.770833333333000000
               0.000000000000000000
-              251.354166666666700000)
+              269.875000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -858,10 +858,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 7
           end
-          object QRDBText14: TQRDBText
-            Left = 431
+          object QRDBText6: TQRDBText
+            Left = 383
             Top = 0
-            Width = 101
+            Width = 112
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -870,10 +870,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1140.354166666667000000
+              1013.354166666667000000
               0.000000000000000000
-              267.229166666666700000)
-            Alignment = taRightJustify
+              296.333333333333300000)
+            Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
@@ -884,7 +884,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 7
           end
-          object QRDBText15: TQRDBText
+          object QRDBText7: TQRDBText
             Left = 73
             Top = 0
             Width = 68
@@ -910,10 +910,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 7
           end
-          object QRDBText16: TQRDBText
+          object QRDBText9: TQRDBText
             Left = 264
             Top = 0
-            Width = 164
+            Width = 121
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -924,7 +924,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               37.041666666666670000
               698.500000000000000000
               0.000000000000000000
-              433.916666666666700000)
+              320.145833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -936,10 +936,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 7
           end
-          object QRDBText17: TQRDBText
-            Left = 853
+          object QRDBText10: TQRDBText
+            Left = 821
             Top = 0
-            Width = 95
+            Width = 108
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -948,9 +948,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              2256.895833333333000000
+              2172.229166666667000000
               0.000000000000000000
-              251.354166666666700000)
+              285.750000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -988,7 +988,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 7
           end
-          object QRShape11: TQRShape
+          object QRShape9: TQRShape
             Left = 71
             Top = 0
             Width = 1
@@ -1006,7 +1006,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Shape = qrsVertLine
             VertAdjust = 0
           end
-          object QRShape1: TQRShape
+          object QRShape10: TQRShape
             Left = 142
             Top = 0
             Width = 1
@@ -1024,8 +1024,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Shape = qrsVertLine
             VertAdjust = 0
           end
-          object QRShape2: TQRShape
-            Left = 429
+          object QRShape12: TQRShape
+            Left = 384
             Top = 0
             Width = 1
             Height = 14
@@ -1036,13 +1036,13 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1135.062500000000000000
+              1016.000000000000000000
               0.000000000000000000
               2.645833333333333000)
             Shape = qrsVertLine
             VertAdjust = 0
           end
-          object QRShape3: TQRShape
+          object QRShape13: TQRShape
             Left = 262
             Top = 0
             Width = 1
@@ -1060,7 +1060,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Shape = qrsVertLine
             VertAdjust = 0
           end
-          object QRShape4: TQRShape
+          object QRShape14: TQRShape
             Left = 180
             Top = 0
             Width = 1
@@ -1078,8 +1078,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Shape = qrsVertLine
             VertAdjust = 0
           end
-          object QRShape5: TQRShape
-            Left = 533
+          object QRShape15: TQRShape
+            Left = 495
             Top = 0
             Width = 1
             Height = 14
@@ -1090,14 +1090,14 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1410.229166666667000000
+              1309.687500000000000000
               0.000000000000000000
               2.645833333333333000)
             Shape = qrsVertLine
             VertAdjust = 0
           end
-          object QRShape6: TQRShape
-            Left = 753
+          object QRShape16: TQRShape
+            Left = 714
             Top = 0
             Width = 1
             Height = 14
@@ -1108,14 +1108,14 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1992.312500000000000000
+              1889.125000000000000000
               0.000000000000000000
               2.645833333333333000)
             Shape = qrsVertLine
             VertAdjust = 0
           end
-          object QRShape7: TQRShape
-            Left = 851
+          object QRShape17: TQRShape
+            Left = 819
             Top = 0
             Width = 1
             Height = 14
@@ -1126,14 +1126,14 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              2251.604166666667000000
+              2166.937500000000000000
               0.000000000000000000
               2.645833333333333000)
             Shape = qrsVertLine
             VertAdjust = 0
           end
-          object QRShape8: TQRShape
-            Left = 949
+          object QRShape18: TQRShape
+            Left = 931
             Top = 0
             Width = 1
             Height = 14
@@ -1144,16 +1144,16 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              2510.895833333333000000
+              2463.270833333333000000
               0.000000000000000000
               2.645833333333333000)
             Shape = qrsVertLine
             VertAdjust = 0
           end
-          object QRLblProveedor: TQRLabel
-            Left = 535
+          object QRLblProveedor: TQRDBText
+            Left = 498
             Top = 0
-            Width = 217
+            Width = 213
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1162,27 +1162,22 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1415.520833333333000000
+              1317.625000000000000000
               0.000000000000000000
-              574.145833333333300000)
+              563.562500000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'Proveedor'
             Color = clWhite
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -9
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
+            DataSet = LIBRO_BANCO
+            DataField = 'PROVEEDOR'
             Transparent = True
             WordWrap = True
             FontSize = 7
           end
         end
-        object QRChildBand2: TQRChildBand
+        object QRChildBand1: TQRChildBand
           Tag = 99
           Left = 38
           Top = 141
@@ -1198,10 +1193,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             2770.187500000000000000)
-          ParentBand = QRBand5
-          object QRLabel18: TQRLabel
+          ParentBand = QRBand1
+          object QRLabel17: TQRLabel
             Left = 2
             Top = 1
             Width = 68
@@ -1232,7 +1227,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel19: TQRLabel
+          object QRLabel25: TQRLabel
             Left = 73
             Top = 1
             Width = 68
@@ -1263,7 +1258,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel20: TQRLabel
+          object QRLabel28: TQRLabel
             Left = 182
             Top = 1
             Width = 79
@@ -1294,10 +1289,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel21: TQRLabel
-            Left = 752
+          object QRLabel29: TQRLabel
+            Left = 712
             Top = 1
-            Width = 98
+            Width = 105
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1306,9 +1301,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1989.666666666667000000
+              1883.833333333333000000
               2.645833333333333000
-              259.291666666666700000)
+              277.812500000000000000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -1325,10 +1320,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel22: TQRLabel
-            Left = 952
+          object QRLabel30: TQRLabel
+            Left = 936
             Top = 1
-            Width = 93
+            Width = 109
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1337,9 +1332,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              2518.833333333333000000
+              2476.500000000000000000
               2.645833333333333000
-              246.062500000000000000)
+              288.395833333333300000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -1356,10 +1351,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel23: TQRLabel
-            Left = 431
+          object QRLabel31: TQRLabel
+            Left = 383
             Top = 1
-            Width = 101
+            Width = 114
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1368,9 +1363,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1140.354166666667000000
+              1013.354166666667000000
               2.645833333333333000
-              267.229166666666700000)
+              301.625000000000000000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -1387,10 +1382,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel26: TQRLabel
+          object QRLabel32: TQRLabel
             Left = 264
             Top = 1
-            Width = 161
+            Width = 121
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1401,7 +1396,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               37.041666666666670000
               698.500000000000000000
               2.645833333333333000
-              425.979166666666700000)
+              320.145833333333300000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -1418,10 +1413,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel27: TQRLabel
-            Left = 848
+          object QRLabel33: TQRLabel
+            Left = 816
             Top = 1
-            Width = 100
+            Width = 113
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -1430,9 +1425,9 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              2243.666666666667000000
+              2159.000000000000000000
               2.645833333333333000
-              264.583333333333400000)
+              298.979166666666700000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -1449,8 +1444,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel16: TQRLabel
-            Left = 535
+          object QRLabel34: TQRLabel
+            Left = 495
             Top = 1
             Width = 218
             Height = 14
@@ -1461,7 +1456,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1415.520833333333000000
+              1309.687500000000000000
               2.645833333333333000
               576.791666666666800000)
             Alignment = taCenter
@@ -1480,7 +1475,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 8
           end
-          object QRLabel4: TQRLabel
+          object QRLabel36: TQRLabel
             Left = 143
             Top = 1
             Width = 36
@@ -1512,7 +1507,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             FontSize = 8
           end
         end
-        object QRBand7: TQRBand
+        object QRBand3: TQRBand
           Tag = 99
           Left = 38
           Top = 193
@@ -1531,69 +1526,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             39.687500000000000000
             2770.187500000000000000)
           BandType = rbPageFooter
-          object QRLabel35: TQRLabel
-            Left = 4
-            Top = 1
-            Width = 53
-            Height = 13
-            Frame.Color = clBlack
-            Frame.DrawTop = False
-            Frame.DrawBottom = False
-            Frame.DrawLeft = False
-            Frame.DrawRight = False
-            Size.Values = (
-              34.395833333333330000
-              10.583333333333330000
-              2.645833333333333000
-              140.229166666666700000)
-            Alignment = taLeftJustify
-            AlignToBand = False
-            AutoSize = False
-            AutoStretch = False
-            Caption = 'Empirica -'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -9
-            Font.Name = 'Verdana'
-            Font.Style = [fsItalic]
-            ParentFont = False
-            Transparent = True
-            WordWrap = True
-            FontSize = 7
-          end
-          object QRlblFechaHoyLibroBanco: TQRLabel
-            Left = 57
-            Top = 1
-            Width = 120
-            Height = 13
-            Frame.Color = clBlack
-            Frame.DrawTop = False
-            Frame.DrawBottom = False
-            Frame.DrawLeft = False
-            Frame.DrawRight = False
-            Size.Values = (
-              34.395833333333340000
-              150.812500000000000000
-              2.645833333333333000
-              317.500000000000000000)
-            Alignment = taLeftJustify
-            AlignToBand = False
-            AutoSize = True
-            AutoStretch = False
-            Caption = 'QRlblFechaHoyLibroBanco'
-            Color = clWhite
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -9
-            Font.Name = 'Verdana'
-            Font.Style = [fsItalic]
-            ParentFont = False
-            Transparent = True
-            WordWrap = True
-            FontSize = 7
-          end
-          object QRLabel24: TQRLabel
+          object QRLabel37: TQRLabel
             Left = 965
             Top = 1
             Width = 39
@@ -1604,7 +1537,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               2553.229166666667000000
               2.645833333333333000
               103.187500000000000000)
@@ -1624,7 +1557,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             WordWrap = True
             FontSize = 7
           end
-          object QRSysData2: TQRSysData
+          object QRSysData1: TQRSysData
             Left = 1006
             Top = 1
             Width = 41
@@ -1635,7 +1568,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               2661.708333333333000000
               2.645833333333333000
               108.479166666666700000)
@@ -1654,7 +1587,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             FontSize = 7
           end
         end
-        object QRBand8: TQRBand
+        object QRBand4: TQRBand
           Tag = 99
           Left = 38
           Top = 171
@@ -1670,10 +1603,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333340000
+            58.208333333333330000
             2770.187500000000000000)
           BandType = rbSummary
-          object QRExpr15: TQRExpr
+          object QRExpr1: TQRExpr
             Left = 6
             Top = 4
             Width = 192
@@ -1705,8 +1638,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 1
-      Top = 437
-      Width = 1072
+      Top = 440
+      Width = 1064
       Height = 54
       Align = alBottom
       BevelInner = bvLowered
@@ -1880,7 +1813,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
