@@ -14,7 +14,7 @@ type
     PanelContenedor: TPanel;
     DBGridCheques: TDBGrid;
     RepChequesCorriente: TQuickRep;
-    QRBand17: TQRBand;
+    QRBandCorriente: TQRBand;
     dxBarABM: TdxBarManager;
     btnNuevo: TdxBarLargeButton;
     btnchequeDiferido: TdxBarLargeButton;
@@ -26,7 +26,7 @@ type
     btnChequeCorriente: TdxBarLargeButton;
     GrupoVisualizando: TdxBarGroup;
     GrupoEditando: TdxBarGroup;
-    QRImageCheque: TQRImage;
+    QRImageChequeCorriente: TQRImage;
     QRDBText1: TQRDBText;
     ZQ_movimientos: TZQuery;
     ZQ_movimientosFECHA: TDateField;
@@ -39,7 +39,7 @@ type
     DS_movimientos: TDataSource;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
     QRDBText4: TQRDBText;
-    QRLabelNumeroLetracorriente: TQRLabel;
+    QRLabelNumeroLetraCorriente1: TQRLabel;
     QRDBText2: TQRDBText;
     QRLabelmesCheque: TQRLabel;
     ZQ_movimientosIMPRESO: TStringField;
@@ -52,11 +52,11 @@ type
     ClientZQ_movimientosimpreso: TStringField;
     QRLabelDiaCheque: TQRLabel;
     QRLabelanioCheque: TQRLabel;
-    QRBand1: TQRBand;
-    QRImage1: TQRImage;
+    QRBandDiferido: TQRBand;
+    QRImageChequeDiferido: TQRImage;
     QRDBText3: TQRDBText;
     QRDBText5: TQRDBText;
-    QRLabelNumeroLetraDiferido: TQRLabel;
+    QRLabelNumeroLetraDiferido1: TQRLabel;
     QRDBText6: TQRDBText;
     QRLabelmesChequedif: TQRLabel;
     QRLabelDiaChequeDif: TQRLabel;
@@ -89,6 +89,7 @@ type
       State: TGridDrawState);
     procedure BtVistaPreviaDifClick(Sender: TObject);
     procedure BtVistaPreviaCorrClick(Sender: TObject);
+    procedure ajustarMargenes();
   private
     { Private declarations }
   public
@@ -122,8 +123,9 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(transaccion_cheques, []) then
   begin
-    QRImageCheque.Enabled:= false;
+    QRImageChequeCorriente.Enabled:= false;
     QRDBText2.Enabled:= false;
+    ajustarMargenes;
     RepChequesCorriente.Prepare;
     RepChequesCorriente.Print;
 
@@ -150,8 +152,8 @@ begin
   ClientZQ_movimientos.Filtered:= false;
   EKBusquedaAvanzada1.Abrir;
   llenarclient();
-
 end;
+
 
 procedure TFImpresionCheques.btnBuscarClick(Sender: TObject);
 begin
@@ -160,15 +162,18 @@ if EKBusquedaAvanzada1.Buscar then
 
 end;
 
+
 procedure TFImpresionCheques.btnSalirClick(Sender: TObject);
 begin
 close;
 end;
 
+
 procedure TFImpresionCheques.FormCreate(Sender: TObject);
 begin
   ClientZQ_movimientos.CreateDataSet;
 end;
+
 
 procedure TFImpresionCheques.DBGridChequesDblClick(
   Sender: TObject);
@@ -182,21 +187,24 @@ begin
   end;
 end;
 
-procedure TFImpresionCheques.ClientZQ_movimientosAfterScroll(
-  DataSet: TDataSet);
+
+procedure TFImpresionCheques.ClientZQ_movimientosAfterScroll(DataSet: TDataSet);
+var
+  texto_numero: string;
 begin
-EKNumeroALetras1.Numero := ClientZQ_movimientosImporte.AsFloat;
+  EKNumeroALetras1.Numero := ClientZQ_movimientosImporte.AsFloat;
+  texto_numero:= UpperCase(EKNumeroALetras1.AsString)+'.--';
 
   if tipocheque = 'CORRIENTE' then
   BEGIN
-    QRLabelNumeroLetracorriente.Caption := UpperCase(EKNumeroALetras1.AsString);
+    QRLabelNumeroLetraCorriente1.Caption := '                          ' + texto_numero;
     QRLabelDiaCheque.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_emision.AsDateTime);
     QRLabelmesCheque.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_emision.AsDateTime);
     QRLabelanioCheque.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_emision.AsDateTime);
   END
-  ELSE
+  ELSE //DIFERIDO
   BEGIN
-    QRLabelNumeroLetraDiferido.Caption := UpperCase(EKNumeroALetras1.AsString);
+    QRLabelNumeroLetraDiferido1.Caption := '                          ' + texto_numero;  
     QRLabelDiaChequeDif.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_emision.AsDateTime);
     QRLabelmesChequedif.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_emision.AsDateTime);
     QRLabelanioChequedif.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_emision.AsDateTime);
@@ -206,6 +214,7 @@ EKNumeroALetras1.Numero := ClientZQ_movimientosImporte.AsFloat;
     QRLabelanioPD.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_Pd.AsDateTime);
   END;
 end;
+
 
 procedure TFImpresionCheques.btnchequeDiferidoClick(Sender: TObject);
 begin
@@ -220,8 +229,9 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(transaccion_cheques, []) then
   begin
-    QRImage1.Enabled := false;
+    QRImageChequeDiferido.Enabled := false;
     QRDBText6.Enabled := false;
+    ajustarMargenes;    
     RepChequeDiferido.Prepare;
     RepChequeDiferido.Print;
 
@@ -249,6 +259,7 @@ begin
   llenarclient();
 end;
 
+
 procedure TFImpresionCheques.DBGridChequesDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
@@ -275,8 +286,8 @@ begin
     end;
     DBGridCheques.DefaultDrawColumnCell(rect,datacol,column,state);
   end;
-
 end;
+
 
 procedure TFImpresionCheques.llenarclient;
 begin
@@ -302,8 +313,10 @@ begin
   end;
 end;
 
+
 procedure TFImpresionCheques.BtVistaPreviaDifClick(Sender: TObject);
 begin
+    ajustarMargenes;
   tipocheque:='DIFERIDO';
   ClientZQ_movimientos.Filtered:=true;
 
@@ -313,14 +326,16 @@ begin
     exit;
   end;
 
-  QRImage1.Enabled := true;
+  QRImageChequeDiferido.Enabled := true;
   QRDBText6.Enabled := true;
   EKVistaPreviaQR2.VistaPrevia;
   ClientZQ_movimientos.Filtered:= false;
 end;
 
+
 procedure TFImpresionCheques.BtVistaPreviaCorrClick(Sender: TObject);
 begin
+  ajustarMargenes;
   tipocheque:='CORRIENTE';
   ClientZQ_movimientos.Filtered:=true;
 
@@ -330,10 +345,47 @@ begin
     exit;
   end;
 
-  QRImageCheque.Enabled:= true;
+  QRImageChequeCorriente.Enabled:= true;
   QRDBText2.Enabled:= true;
   EKVistaPreviaQR1.VistaPrevia;
   ClientZQ_movimientos.Filtered:= false;  
+end;
+
+
+procedure TFImpresionCheques.ajustarMargenes();
+var
+  i: integer;
+  desplazarIzquierda, desplazarArriba: integer;
+begin
+  desplazarIzquierda:= 0;
+  desplazarArriba:= 0;
+
+  dm.ZQ_Configuracion.Close;
+  dm.ZQ_Configuracion.Open;
+
+  if dm.ZQ_Configuracion.Locate('clave', VarArrayOf(['Cheque_AjustarIzq']), []) then //si existe la clave desplazarIzquierda se toma este valor para ajustar el margen izquierdo
+    desplazarIzquierda:= (dm.ZQ_Configuracion.fieldbyname('nivel').AsInteger);
+
+  if dm.ZQ_Configuracion.Locate('clave', VarArrayOf(['Cheque_AjustarArriba']), []) then //si existe la clave desplazarArriba se toma este valor para ajustar el margen superior
+    desplazarArriba:= (dm.ZQ_Configuracion.fieldbyname('nivel').AsInteger);
+
+  for i := 0 to QRBandCorriente.ControlCount-1 do
+  begin
+    if QRBandCorriente.Controls[i].Name <> 'QRImageChequeCorriente' then
+    begin
+      QRBandCorriente.Controls[i].Top:= QRBandCorriente.Controls[i].Top + desplazarArriba;
+      QRBandCorriente.Controls[i].Left:= QRBandCorriente.Controls[i].Left + desplazarIzquierda;
+    end;
+  end;
+
+  for i := 0 to QRBandDiferido.ControlCount-1 do
+  begin
+    if QRBandDiferido.Controls[i].Name <> 'QRImageChequeDiferido' then
+    begin
+      QRBandDiferido.Controls[i].Top:= QRBandDiferido.Controls[i].Top + desplazarArriba;
+      QRBandDiferido.Controls[i].Left:= QRBandDiferido.Controls[i].Left + desplazarIzquierda;
+    end;
+  end;
 end;
 
 end.
