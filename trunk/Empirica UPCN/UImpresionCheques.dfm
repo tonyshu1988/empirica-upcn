@@ -3910,18 +3910,18 @@ object FImpresionCheques: TFImpresionCheques
         object QRLabelNumeroLetraCorriente1: TQRLabel
           Left = 128
           Top = 132
-          Width = 347
-          Height = 37
+          Width = 460
+          Height = 68
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            97.895833333333330000
+            179.916666666666700000
             338.666666666666700000
             349.250000000000000000
-            918.104166666666700000)
+            1217.083333333333000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -7827,18 +7827,18 @@ object FImpresionCheques: TFImpresionCheques
         object QRLabelNumeroLetraDiferido1: TQRLabel
           Left = 128
           Top = 131
-          Width = 347
-          Height = 37
+          Width = 460
+          Height = 68
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            97.895833333333330000
+            179.916666666666700000
             338.666666666666700000
             346.604166666666700000
-            918.104166666666700000)
+            1217.083333333333000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
