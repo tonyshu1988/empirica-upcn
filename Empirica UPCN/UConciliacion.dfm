@@ -400,8 +400,8 @@ object FConciliacion: TFConciliacion
     end
     object RepConciliacion: TQuickRep
       Tag = 99
-      Left = 441
-      Top = -132
+      Left = 49
+      Top = 236
       Width = 952
       Height = 1347
       Frame.Color = clBlack
@@ -2114,10 +2114,6 @@ object FConciliacion: TFConciliacion
     object ZSP_LibroBancoCTA_MOV_ANULADO: TStringField
       FieldName = 'CTA_MOV_ANULADO'
       Size = 1
-    end
-    object ZSP_LibroBancoNRO_FACTURA: TStringField
-      FieldName = 'NRO_FACTURA'
-      Size = 50
     end
     object ZSP_LibroBancoNRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'

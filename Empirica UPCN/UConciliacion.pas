@@ -117,7 +117,6 @@ type
     ZSP_LibroBancoID_MEDIO: TIntegerField;
     ZSP_LibroBancoMOV_ANULADO: TStringField;
     ZSP_LibroBancoCTA_MOV_ANULADO: TStringField;
-    ZSP_LibroBancoNRO_FACTURA: TStringField;
     ZSP_LibroBancoNRO_RECIBO: TStringField;
     ZSP_LibroBancoNRO_ORDEN_STRING: TStringField;
     ZSP_LibroBancoORDEN_SALDO_ANTERIOR: TIntegerField;

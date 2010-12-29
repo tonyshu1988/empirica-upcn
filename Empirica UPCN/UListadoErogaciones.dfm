@@ -2396,7 +2396,7 @@ object FListadoErogaciones: TFListadoErogaciones
     end
     object ZQ_Libro_erogacionesNRO_FACTURA: TStringField
       FieldName = 'NRO_FACTURA'
-      Size = 50
+      Size = 200
     end
     object ZQ_Libro_erogacionesNRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'

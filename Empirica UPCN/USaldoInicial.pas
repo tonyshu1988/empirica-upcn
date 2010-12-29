@@ -91,7 +91,6 @@ type
     ZQ_MovimientoPARTE_ANULADO: TIntegerField;
     ZQ_MovimientoDETALLE_ANULADO: TStringField;
     ZQ_MovimientoNRO_ORDEN: TIntegerField;
-    ZQ_MovimientoNRO_FACTURA: TStringField;
     ZQ_MovimientoNRO_RECIBO: TStringField;
     ZQ_VerSaldosID: TIntegerField;
     ZQ_VerSaldosNRO_MOVIMIENTO: TIntegerField;
@@ -120,7 +119,6 @@ type
     ZQ_VerSaldosPARTE_ANULADO: TIntegerField;
     ZQ_VerSaldosDETALLE_ANULADO: TStringField;
     ZQ_VerSaldosNRO_ORDEN: TIntegerField;
-    ZQ_VerSaldosNRO_FACTURA: TStringField;
     ZQ_VerSaldosNRO_RECIBO: TStringField;
     ZQ_BuscarMovNRO_MOVIMIENTO: TIntegerField;
     ZP_ObtenerNroMovID: TIntegerField;

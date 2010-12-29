@@ -2139,7 +2139,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     end
     object LIBRO_BANCONRO_FACTURA: TStringField
       FieldName = 'NRO_FACTURA'
-      Size = 50
+      Size = 200
     end
     object LIBRO_BANCONRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'
