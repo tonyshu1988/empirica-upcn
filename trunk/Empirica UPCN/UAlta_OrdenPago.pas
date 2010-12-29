@@ -625,7 +625,11 @@ end;
 
 procedure TFAlta_OrdenPago.dbFechaEmisionChange(Sender: TObject);
 begin
-  ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNIVEL.AsInteger)]);
+  if ZQ_Movimientos.State  = dsInsert then
+    ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNIVEL.AsInteger)])
+  else
+  if ZQ_Movimientos.State  = dsEdit then
+    ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_MovimientosNRO_ORDEN.AsInteger)]);
 end;
 
 
