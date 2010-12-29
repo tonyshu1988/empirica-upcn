@@ -6317,7 +6317,7 @@ object FMovimientos: TFMovimientos
     end
     object ZQ_MovimientosNRO_FACTURA: TStringField
       FieldName = 'NRO_FACTURA'
-      Size = 50
+      Size = 200
     end
     object ZQ_MovimientosNRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'
@@ -6523,7 +6523,7 @@ object FMovimientos: TFMovimientos
     end
     object LIBRO_BANCONRO_FACTURA: TStringField
       FieldName = 'NRO_FACTURA'
-      Size = 50
+      Size = 200
     end
     object LIBRO_BANCONRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'

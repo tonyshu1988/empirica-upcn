@@ -737,10 +737,6 @@ object FSaldoInicial: TFSaldoInicial
     object ZQ_MovimientoNRO_ORDEN: TIntegerField
       FieldName = 'NRO_ORDEN'
     end
-    object ZQ_MovimientoNRO_FACTURA: TStringField
-      FieldName = 'NRO_FACTURA'
-      Size = 50
-    end
     object ZQ_MovimientoNRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'
       Size = 50
@@ -879,10 +875,6 @@ object FSaldoInicial: TFSaldoInicial
     end
     object ZQ_VerSaldosNRO_ORDEN: TIntegerField
       FieldName = 'NRO_ORDEN'
-    end
-    object ZQ_VerSaldosNRO_FACTURA: TStringField
-      FieldName = 'NRO_FACTURA'
-      Size = 50
     end
     object ZQ_VerSaldosNRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'
