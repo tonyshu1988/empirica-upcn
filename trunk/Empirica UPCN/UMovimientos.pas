@@ -1238,6 +1238,7 @@ begin
     ZQ_OrdenDebitoBancario.Close;
     ZQ_OrdenDebitoBancario.ParamByName('fdesde').AsDate:= StartOfTheMonth(ZQ_MovimientosFECHA.AsDateTime);
     ZQ_OrdenDebitoBancario.ParamByName('fhasta').AsDate:= EndOfTheMonth(ZQ_MovimientosFECHA.AsDateTime);
+    ZQ_OrdenDebitoBancario.ParamByName('cta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
     ZQ_OrdenDebitoBancario.Open;
 
     QRSubDetail17.DataSet:= ZQ_OrdenDebitoBancario;

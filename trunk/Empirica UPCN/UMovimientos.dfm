@@ -7007,7 +7007,8 @@ object FMovimientos: TFMovimientos
         'left join ie_movimientos mov on (cm.nro_movimiento = mov.nro_mov' +
         'imiento)'
       'where cm.id_medio = 5 and mov.fecha between :fdesde and :fhasta'
-      '  and cm.importe <> 0')
+      '  and cm.importe <> 0'
+      '  and cm.id_cuenta_egreso = :cta')
     Params = <
       item
         DataType = ftUnknown
@@ -7017,6 +7018,11 @@ object FMovimientos: TFMovimientos
       item
         DataType = ftUnknown
         Name = 'fhasta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'cta'
         ParamType = ptUnknown
       end>
     Left = 800
@@ -7030,6 +7036,11 @@ object FMovimientos: TFMovimientos
       item
         DataType = ftUnknown
         Name = 'fhasta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'cta'
         ParamType = ptUnknown
       end>
     object IntegerField1: TIntegerField
