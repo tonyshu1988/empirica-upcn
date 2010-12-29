@@ -459,6 +459,7 @@ type
     ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField;
     UpdateMovimientos: TZUpdateSQL;
     ZQ_MovimientosID_TIPO: TIntegerField;
+    ZQ_TipoProveedorAPELLIDO_Y_NOMBRE: TStringField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -1883,14 +1884,16 @@ end;
 
 procedure TFMovimientos.cargarDatosporDefecto();
 begin
-//  // Si es Débito Bancario le dejo por defecto el proveedor y concepto DB.
-//  if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger=5) then
-//   begin
-//      ZQ_Proveedores.Locate('apellido_y_nombre','DEBITO BANCARIO',[]);
-//      ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
-//      ZQ_Conceptos.Locate('nombre_concepto','DEBITO BANCARIO',[]);
-//      ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
-//   end
+  // Si es Débito Bancario le dejo por defecto el proveedor y concepto DB.
+  if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger=5) then
+   begin
+      ZQ_TipoProveedor.Locate('apellido_y_nombre','DEBITO BANCARIO',[]);
+      ZQ_MovimientosID_TIPO.AsInteger:=ZQ_TipoProveedorID_TIPO.AsInteger;
+      ZQ_Proveedores.Locate('apellido_y_nombre','DEBITO BANCARIO',[]);
+      ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
+      ZQ_Conceptos.Locate('nombre_concepto','DEBITO BANCARIO',[]);
+      ZQ_MovimientosID_CONCEPTO.AsInteger:=ZQ_ConceptosID_CONCEPTO.AsInteger;
+   end
 end;
 
 procedure TFMovimientos.ZQ_CuentasAfterScroll(DataSet: TDataSet);

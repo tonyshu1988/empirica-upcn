@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 229
-  Top = 17
+  Left = 148
+  Top = 16
   Width = 1205
   Height = 733
   Color = clBtnFace
@@ -7214,7 +7214,9 @@ object FMovimientos: TFMovimientos
     Connection = DM.Conexion
     AfterScroll = ZQ_TipoProveedorAfterScroll
     SQL.Strings = (
-      'select distinct tp.id_tipo, tp.descripcion as TIPO_PROVEEDOR'
+      
+        'select distinct tp.id_tipo, tp.descripcion as TIPO_PROVEEDOR, p.' +
+        'apellido_y_nombre'
       'from tipo_proveedor tp'
       'left join ie_proveedores p on (p.id_tipo=tp.id_tipo)'
       
@@ -7244,6 +7246,10 @@ object FMovimientos: TFMovimientos
     object ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField
       FieldName = 'TIPO_PROVEEDOR'
       Size = 100
+    end
+    object ZQ_TipoProveedorAPELLIDO_Y_NOMBRE: TStringField
+      FieldName = 'APELLIDO_Y_NOMBRE'
+      Size = 60
     end
   end
   object UpdateMovimientos: TZUpdateSQL
