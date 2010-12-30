@@ -395,7 +395,14 @@ begin
       ZSP_DECODIFICAR_NRO_ORDEN.Active:=True;
       ZQ_MovimientosNRO_ORDEN.AsInteger:=ZSP_DECODIFICAR_NRO_ORDENNRO_ORDEN.AsInteger;
       ZQ_MovimientosNRO_CUENTA.AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+
       NroOrdenAnt:=ZQ_MovimientosNRO_ORDEN.AsInteger;
+      if ZQ_Movimientos.State = dsInsert then
+      begin
+        ZQ_Configuracion.Edit;
+        ZQ_ConfiguracionNIVEL.AsInteger:=nroOrdenAnt+1;
+        ZQ_Configuracion.Post;
+      end;
 
       //ZQ_Cuenta_Movimiento.First;
       if ZQ_MovimientosNRO_MOVIMIENTO.IsNull then //si es un alta
@@ -460,9 +467,6 @@ begin
       end;
 
       ZQ_MovimientosIMPORTE.AsFloat:= EKDbSuma1.SumCollection[0].SumValue;
-      ZQ_Configuracion.Edit;
-      ZQ_ConfiguracionNIVEL.AsInteger:=nroOrdenAnt+1;
-      ZQ_Configuracion.Post;
 
       try
         if DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
