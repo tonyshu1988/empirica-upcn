@@ -449,7 +449,7 @@ type
     LabelPreguntaConciliar: TLabel;
     Button1: TButton;
     Button2: TButton;
-    Panel7: TPanel;
+    PConcilTitulo: TPanel;
     LabelFechaConciliacion: TLabel;
     DTPFechaConciliar: TDateTimePicker;
     EliminarMovimiento: TZStoredProc;
@@ -531,6 +531,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure ZQ_Cuenta_MovimientoIMPORTEValidate(Sender: TField);
     procedure ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
+    procedure centrala(var p : TPanel);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -986,8 +987,15 @@ begin
     PFiltrosColumnas.Visible:=false;
 end;
 
+procedure TFMovimientos.centrala(var p : TPanel); //sirve para centrar el panel de parametro
+ 	 begin
+ 	       p.Left:= (self.Width - p.Width) div 2;   {Posicion X}
+ 	       p.Top := (self.Height - p.Height) div 2; {Posicion Y}
+ 	 end;
 
 procedure TFMovimientos.ConciliarCheque();
+var
+fechaConc:TDate;
 begin
   ZQ_Cuenta_Movimiento.Close;
   ZQ_Cuenta_Movimiento.ParamByName('NroMov').clear;
@@ -1004,17 +1012,22 @@ begin
   begin
     PanelConciliar.Visible:= true;
     PanelConciliar.BringToFront;
+    centrala(PanelConciliar);
     BanderaConcialiar:= true;
     LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Conciliar este movimiento?';
+    PConcilTitulo.Caption:='Conciliar Movimiento';
     LabelFechaConciliacion.Visible:= true;
     DTPFechaConciliar.Visible:=true;
-    DTPFechaConciliar.Date := dm.EKModelo.Fecha;
+    DTPFechaConciliar.Date := dm.EKModelo.Fecha();
   end
   else //si esta conciliado
   begin
     PanelConciliar.Visible:= true;
+    PanelConciliar.BringToFront;
+    centrala(PanelConciliar);    
     BanderaConcialiar:= false;
     LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Desconciliar este movimiento?';
+    PConcilTitulo.Caption:='Desconciliar Movimiento';
     LabelFechaConciliacion.Visible:= false;
     DTPFechaConciliar.Visible:=false;
   end;
