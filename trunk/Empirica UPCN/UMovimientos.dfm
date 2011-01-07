@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 0
-  Top = 3
+  Left = 191
+  Top = 122
   Width = 1024
   Height = 733
   Color = clBtnFace
@@ -19,92 +19,21 @@ object FMovimientos: TFMovimientos
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    1016
-    701)
+    1008
+    699)
   PixelsPerInch = 96
   TextHeight = 13
-  object PanelConciliar: TPanel
-    Left = 402
-    Top = 315
-    Width = 329
-    Height = 112
-    Anchors = []
-    BevelInner = bvLowered
-    BorderStyle = bsSingle
-    TabOrder = 5
-    Visible = False
-    object LabelPreguntaConciliar: TLabel
-      Left = 14
-      Top = 31
-      Width = 297
-      Height = 13
-      Caption = #191'Esta Seguro que desea Conciliar este movimiento?'
-    end
-    object LabelFechaConciliacion: TLabel
-      Left = 55
-      Top = 55
-      Width = 107
-      Height = 13
-      Caption = 'Fecha conciliacion:'
-    end
-    object Button1: TButton
-      Left = 52
-      Top = 81
-      Width = 75
-      Height = 21
-      Caption = 'Si'
-      TabOrder = 0
-      OnClick = Button1Click
-    end
-    object Button2: TButton
-      Left = 172
-      Top = 81
-      Width = 75
-      Height = 21
-      Caption = 'No'
-      TabOrder = 1
-      OnClick = Button2Click
-    end
-    object Panel7: TPanel
-      Tag = 99
-      Left = 2
-      Top = 2
-      Width = 321
-      Height = 23
-      Align = alTop
-      BevelInner = bvLowered
-      BorderStyle = bsSingle
-      Caption = 'Conciliar Movimiento'
-      Color = 16571333
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clBlack
-      Font.Height = -15
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 2
-    end
-    object DTPFechaConciliar: TDateTimePicker
-      Left = 166
-      Top = 51
-      Width = 103
-      Height = 21
-      Date = 40507.561240590280000000
-      Time = 40507.561240590280000000
-      TabOrder = 3
-    end
-  end
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 928
-    Height = 649
+    Width = 920
+    Height = 647
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
-      928
-      649)
+      920
+      647)
     object QR_OrdenPago: TQuickRep
       Tag = 99
       Left = 17
@@ -176,7 +105,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          526.961805555555700000
+          526.961805555555600000
           1898.385416666667000000)
         BandType = rbDetail
         object QRDBText30: TQRDBText
@@ -223,8 +152,8 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            28.663194444444450000
-            66.145833333333340000
+            28.663194444444440000
+            66.145833333333330000
             255.763888888888900000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -606,8 +535,8 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            8.819444444444445000
-            480.659722222222300000
+            8.819444444444444000
+            480.659722222222200000
             216.076388888888900000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -669,8 +598,8 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            926.041666666666600000
-            480.659722222222300000
+            926.041666666666700000
+            480.659722222222200000
             198.437500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -768,7 +697,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.482638888888890000
-            55.121527777777790000
+            55.121527777777780000
             282.222222222222200000
             213.871527777777800000)
           Alignment = taRightJustify
@@ -894,8 +823,8 @@ object FMovimientos: TFMovimientos
           Size.Values = (
             37.482638888888890000
             1091.406250000000000000
-            66.145833333333340000
-            88.194444444444460000)
+            66.145833333333330000
+            88.194444444444440000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1183,7 +1112,7 @@ object FMovimientos: TFMovimientos
           Size.Values = (
             50.711805555555560000
             1523.559027777778000000
-            8.819444444444445000
+            8.819444444444444000
             348.368055555555600000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -2016,7 +1945,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            42.333333333333340000
+            42.333333333333330000
             203.729166666666700000
             206.375000000000000000)
           Alignment = taRightJustify
@@ -2048,7 +1977,7 @@ object FMovimientos: TFMovimientos
           Size.Values = (
             37.041666666666670000
             116.416666666666700000
-            58.208333333333340000
+            58.208333333333330000
             132.291666666666700000)
           Alignment = taRightJustify
           AlignToBand = False
@@ -2438,7 +2367,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          296.333333333333400000
+          296.333333333333300000
           1899.708333333333000000)
         BandType = rbPageHeader
         object QRLabel36: TQRLabel
@@ -2489,7 +2418,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           1899.708333333333000000)
         Master = QR_SolicitudCompra
         PrintBefore = False
@@ -2590,7 +2519,7 @@ object FMovimientos: TFMovimientos
             37.041666666666670000
             997.479166666666700000
             2.645833333333333000
-            343.958333333333400000)
+            343.958333333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = True
@@ -2774,7 +2703,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          550.333333333333400000
+          550.333333333333300000
           1899.708333333333000000)
         Master = QR_SolicitudCompra
         PrintBefore = False
@@ -2822,7 +2751,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           1899.708333333333000000)
         BandType = rbPageFooter
         object qrDatosNombreyFecha: TQRSysData
@@ -3033,7 +2962,7 @@ object FMovimientos: TFMovimientos
     object PParametrosLibroBanco: TPanel
       Left = 0
       Top = 0
-      Width = 928
+      Width = 920
       Height = 29
       Align = alTop
       BevelOuter = bvNone
@@ -3108,7 +3037,7 @@ object FMovimientos: TFMovimientos
           'Fecha PD')
       end
       object Panel1: TPanel
-        Left = 855
+        Left = 847
         Top = 0
         Width = 73
         Height = 29
@@ -3118,7 +3047,7 @@ object FMovimientos: TFMovimientos
         object StaticText1: TStaticText
           Left = 3
           Top = 4
-          Width = 66
+          Width = 71
           Height = 17
           Align = alCustom
           Alignment = taCenter
@@ -3155,8 +3084,8 @@ object FMovimientos: TFMovimientos
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 0
-      Top = 595
-      Width = 928
+      Top = 593
+      Width = 920
       Height = 54
       Align = alBottom
       BevelInner = bvLowered
@@ -3328,8 +3257,8 @@ object FMovimientos: TFMovimientos
     end
     object PIngresos: TPanel
       Left = 0
-      Top = 479
-      Width = 928
+      Top = 477
+      Width = 920
       Height = 116
       Align = alBottom
       BevelOuter = bvNone
@@ -3544,7 +3473,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 928
+        Width = 920
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -3598,8 +3527,8 @@ object FMovimientos: TFMovimientos
     object DBGridLibroBanco: TDBGrid
       Left = 0
       Top = 29
-      Width = 928
-      Height = 308
+      Width = 920
+      Height = 306
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -3763,8 +3692,8 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 363
-      Width = 928
+      Top = 361
+      Width = 920
       Height = 116
       Align = alBottom
       BevelOuter = bvNone
@@ -3972,7 +3901,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 928
+        Width = 920
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -4010,15 +3939,15 @@ object FMovimientos: TFMovimientos
     end
     object Panel5: TPanel
       Left = 0
-      Top = 337
-      Width = 928
+      Top = 335
+      Width = 920
       Height = 26
       Align = alBottom
       BevelOuter = bvLowered
       Caption = ' '
       TabOrder = 9
       object Panel6: TPanel
-        Left = 193
+        Left = 185
         Top = 1
         Width = 734
         Height = 24
@@ -4153,7 +4082,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          272.520833333333400000
+          272.520833333333300000
           2770.187500000000000000)
         BandType = rbPageHeader
         object QRLabel41: TQRLabel
@@ -4979,7 +4908,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         ParentBand = QRBand5
         object QRLabel18: TQRLabel
@@ -5354,7 +5283,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -5389,7 +5318,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           2770.187500000000000000)
         BandType = rbSummary
         object QRExpr15: TQRExpr
@@ -5421,10 +5350,88 @@ object FMovimientos: TFMovimientos
       end
     end
   end
+  object PanelConciliar: TPanel
+    Left = 306
+    Top = 219
+    Width = 375
+    Height = 118
+    Anchors = []
+    BevelInner = bvSpace
+    BorderStyle = bsSingle
+    TabOrder = 5
+    Visible = False
+    object LabelPreguntaConciliar: TLabel
+      Left = 37
+      Top = 31
+      Width = 297
+      Height = 13
+      Alignment = taCenter
+      Caption = #191'Esta Seguro que desea Conciliar este movimiento?'
+    end
+    object LabelFechaConciliacion: TLabel
+      Left = 55
+      Top = 55
+      Width = 107
+      Height = 13
+      Caption = 'Fecha conciliacion:'
+    end
+    object Button1: TButton
+      Left = 52
+      Top = 81
+      Width = 75
+      Height = 21
+      Caption = 'Si'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 244
+      Top = 81
+      Width = 75
+      Height = 21
+      Caption = 'No'
+      TabOrder = 1
+      OnClick = Button2Click
+    end
+    object PConcilTitulo: TPanel
+      Tag = 99
+      Left = 2
+      Top = 2
+      Width = 367
+      Height = 23
+      Align = alTop
+      BevelInner = bvLowered
+      BorderStyle = bsSingle
+      Caption = 'Conciliar Movimiento'
+      Color = 16571333
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -15
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+    end
+    object DTPFechaConciliar: TDateTimePicker
+      Left = 166
+      Top = 51
+      Width = 103
+      Height = 21
+      Date = 40507.561240590280000000
+      Time = 40507.561240590280000000
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
