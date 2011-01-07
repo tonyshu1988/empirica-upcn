@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 191
-  Top = 122
+  Left = 0
+  Top = 47
   Width = 1024
   Height = 733
   Color = clBtnFace
