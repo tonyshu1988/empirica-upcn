@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 300
-  Top = 110
+  Left = 191
+  Top = 111
   Width = 871
   Height = 640
   Caption = 'UPCN'
@@ -21,7 +21,7 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 563
+    Top = 567
     Width = 855
     Height = 19
     Panels = <
@@ -53,7 +53,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 29
     Width = 855
-    Height = 534
+    Height = 538
     Align = alClient
     TabOrder = 2
   end

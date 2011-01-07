@@ -1,8 +1,8 @@
 object FReporteMovProveedor: TFReporteMovProveedor
-  Left = 350
-  Top = 174
-  Width = 897
-  Height = 500
+  Left = 235
+  Top = 256
+  Width = 969
+  Height = 689
   Caption = 'Reporte Movimientos'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -21,15 +21,15 @@ object FReporteMovProveedor: TFReporteMovProveedor
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 889
-    Height = 416
+    Width = 953
+    Height = 603
     Align = alClient
     TabOrder = 0
     object DBGridMercaderiaVendida: TDBGrid
       Left = 1
       Top = 212
-      Width = 887
-      Height = 185
+      Width = 951
+      Height = 372
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 16772842
@@ -234,7 +234,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
             50.270833333333330000
             1132.416666666667000000
             161.395833333333300000
-            502.708333333333400000)
+            502.708333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -265,7 +265,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
             52.916666666666670000
             1034.520833333333000000
             95.250000000000000000
-            701.145833333333400000)
+            701.145833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -296,7 +296,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
             52.916666666666670000
             920.750000000000000000
             31.750000000000000000
-            926.041666666666800000)
+            926.041666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -330,7 +330,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           2770.187500000000000000)
         Expression = 'ZQ_MovimientoProveedores.NRO_PROVEEDOR'
         FooterBand = QRBand19
@@ -348,7 +348,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            717.020833333333400000
+            717.020833333333300000
             7.937500000000000000
             357.187500000000000000)
           Alignment = taLeftJustify
@@ -382,7 +382,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
             37.041666666666670000
             108.479166666666700000
             7.937500000000000000
-            328.083333333333400000)
+            328.083333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -411,7 +411,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             10.583333333333330000
             5.291666666666667000
             87.312500000000000000)
@@ -442,7 +442,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             455.083333333333300000
             5.291666666666667000
             254.000000000000000000)
@@ -479,7 +479,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          68.791666666666680000
+          68.791666666666670000
           2770.187500000000000000)
         BandType = rbSummary
         object QRLabel2: TQRLabel
@@ -598,7 +598,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         BandType = rbDetail
         object QRDBText16: TQRDBText
@@ -952,7 +952,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             10.583333333333330000
             2.645833333333333000
             156.104166666666700000)
@@ -983,7 +983,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             354.541666666666700000
             2.645833333333333000
             158.750000000000000000)
@@ -1014,8 +1014,8 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333340000
-            653.520833333333400000
+            42.333333333333330000
+            653.520833333333300000
             2.645833333333333000
             153.458333333333300000)
           Alignment = taLeftJustify
@@ -1045,7 +1045,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             873.125000000000000000
             2.645833333333333000
             182.562500000000000000)
@@ -1076,7 +1076,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             190.500000000000000000
             2.645833333333333000
             142.875000000000000000)
@@ -1107,7 +1107,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             560.916666666666700000
             2.645833333333333000
             71.437500000000000000)
@@ -1138,7 +1138,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             1066.270833333333000000
             2.645833333333333000
             145.520833333333300000)
@@ -1169,7 +1169,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             1653.645833333333000000
             2.645833333333333000
             111.125000000000000000)
@@ -1268,7 +1268,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           2770.187500000000000000)
         BandType = rbGroupFooter
         object QRLabel39: TQRLabel
@@ -1395,7 +1395,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
     object PanelDatosProveedor: TPanel
       Left = 1
       Top = 27
-      Width = 887
+      Width = 951
       Height = 107
       Align = alTop
       BevelOuter = bvNone
@@ -1576,14 +1576,14 @@ object FReporteMovProveedor: TFReporteMovProveedor
     end
     object pResumen: TPanel
       Left = 1
-      Top = 397
-      Width = 887
+      Top = 584
+      Width = 951
       Height = 18
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
       object lblDebe: TLabel
-        Left = 827
+        Left = 891
         Top = 0
         Width = 60
         Height = 18
@@ -1600,7 +1600,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
     object PanelFiltrosBusqueda: TPanel
       Left = 1
       Top = 134
-      Width = 887
+      Width = 951
       Height = 78
       Align = alTop
       BevelOuter = bvNone
@@ -1609,7 +1609,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       object GroupBox1: TGroupBox
         Left = 0
         Top = 0
-        Width = 887
+        Width = 951
         Height = 78
         Align = alClient
         Caption = '  Filtro Busqueda  '
@@ -1675,18 +1675,18 @@ object FReporteMovProveedor: TFReporteMovProveedor
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 887
+      Width = 951
       Height = 26
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 5
       DesignSize = (
-        887
+        951
         26)
       object Shape1: TShape
         Left = 2
         Top = 2
-        Width = 865
+        Width = 937
         Height = 22
         Anchors = [akLeft, akTop, akRight]
         Brush.Color = clGray
@@ -1696,7 +1696,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       object Shape2: TShape
         Left = 4
         Top = 0
-        Width = 865
+        Width = 937
         Height = 22
         Anchors = [akLeft, akTop, akRight]
         Brush.Color = clTeal
@@ -1705,7 +1705,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       object Label4: TLabel
         Left = 1
         Top = 3
-        Width = 868
+        Width = 940
         Height = 18
         Alignment = taCenter
         Anchors = [akLeft, akTop, akRight]
@@ -1722,7 +1722,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       object Label8: TLabel
         Left = 2
         Top = 2
-        Width = 868
+        Width = 940
         Height = 18
         Alignment = taCenter
         Anchors = [akLeft, akTop, akRight]
@@ -1890,7 +1890,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2191,7 +2191,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
       item
         Titulo = 'Tipo Movimiento'
         Campo = 'ID_objeto_movimiento'
-        Tabla = 'ob'
+        Tabla = 'm'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
         TipoCombollenarSQL = ZQ_Objeto_Movimiento

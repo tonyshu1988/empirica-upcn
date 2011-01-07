@@ -1,6 +1,6 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 327
-  Top = 78
+  Left = 309
+  Top = 169
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
