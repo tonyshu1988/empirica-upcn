@@ -402,7 +402,7 @@ begin
     Coneccion.Commit;
     bien := true;
   except
-    raise Exception.Create('');
+    raise Exception.Create('Há ocurrido un error. Vuelva a intentarlo.');
 //    on E: Exception do
 //    begin
 //        if Assigned(transacciones_activas[ta_a].CtrlError) then
