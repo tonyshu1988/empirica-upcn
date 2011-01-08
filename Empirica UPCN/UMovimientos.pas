@@ -210,9 +210,7 @@ type
     Label24: TLabel;
     DBLookupCBoxIngreso_Medio: TDBLookupComboBox;
     DS_Medios_Cobro_Pago: TDataSource;
-    LIBRO_BANCONRO_FACTURA: TStringField;
     LIBRO_BANCONRO_RECIBO: TStringField;
-    ZQ_MovimientosNRO_FACTURA: TStringField;
     ZQ_MovimientosNRO_RECIBO: TStringField;
     RepLibroB: TQuickRep;
     QRBand5: TQRBand;
@@ -265,7 +263,6 @@ type
     QRExpr15: TQRExpr;
     EKVistaPrevia_LibroBco: TEKVistaPreviaQR;
     LIBRO_BANCOPROVEEDOR: TStringField;
-    ZQ_MovimientosDESCRIPCION: TStringField;
     CBFechaConciliado: TCheckBox;
     btnAltaOrdenPago: TdxBarLargeButton;
     EKDbSuma1: TEKDbSuma;
@@ -440,7 +437,6 @@ type
     EKDbSumaLibroBanco: TEKDbSuma;
     QRLabel43: TQRLabel;
     QRDBText64: TQRDBText;
-    QRLabel12: TQRLabel;
     ZQ_ProveedoresTIPODOC: TStringField;
     CBTipo: TCheckBox;
     QRLabel32: TQRLabel;
@@ -459,6 +455,9 @@ type
     ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField;
     UpdateMovimientos: TZUpdateSQL;
     ZQ_MovimientosID_TIPO: TIntegerField;
+    ZQ_MovimientosDESCRIPCION: TStringField;
+    ZQ_MovimientosNRO_FACTURA: TStringField;
+    LIBRO_BANCONRO_FACTURA: TStringField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -1305,6 +1304,7 @@ begin
 
     PanelImpresion.Visible := true;
     PanelImpresion.BringToFront;
+    centrala(PanelImpresion);
     GrupoGuardarCancelar.Enabled := false;
     GrupoEditando.Enabled := false;
     cBoxImpresoras.SetFocus;

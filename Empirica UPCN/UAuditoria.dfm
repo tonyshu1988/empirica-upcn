@@ -1,6 +1,6 @@
 object FAuditoria: TFAuditoria
-  Left = 300
-  Top = 121
+  Left = 295
+  Top = 119
   Width = 920
   Height = 640
   Caption = 'Auditor'#237'a'
@@ -20,8 +20,8 @@ object FAuditoria: TFAuditoria
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 904
-    Height = 550
+    Width = 912
+    Height = 556
     ActivePage = TabSheet12
     Align = alClient
     MultiLine = True
@@ -364,15 +364,15 @@ object FAuditoria: TFAuditoria
       object Panel19: TPanel
         Left = 0
         Top = 0
-        Width = 896
-        Height = 522
+        Width = 904
+        Height = 528
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object panelArriba: TPanel
           Left = 0
           Top = 0
-          Width = 896
+          Width = 904
           Height = 333
           Align = alTop
           BevelOuter = bvNone
@@ -381,7 +381,7 @@ object FAuditoria: TFAuditoria
           object DBChartMov: TDBChart
             Left = 0
             Top = 29
-            Width = 896
+            Width = 904
             Height = 304
             BackWall.Brush.Color = clWhite
             BackWall.Brush.Style = bsClear
@@ -462,7 +462,7 @@ object FAuditoria: TFAuditoria
           object Panel1: TPanel
             Left = 0
             Top = 0
-            Width = 896
+            Width = 904
             Height = 29
             Align = alTop
             BevelOuter = bvNone
@@ -512,8 +512,8 @@ object FAuditoria: TFAuditoria
         object panelAbajo: TPanel
           Left = 0
           Top = 333
-          Width = 896
-          Height = 189
+          Width = 904
+          Height = 195
           Align = alClient
           BevelOuter = bvNone
           Caption = 'panelAbajo'
@@ -521,7 +521,7 @@ object FAuditoria: TFAuditoria
           object Panel2: TPanel
             Left = 0
             Top = 0
-            Width = 896
+            Width = 904
             Height = 29
             Align = alTop
             BevelOuter = bvNone
@@ -595,8 +595,8 @@ object FAuditoria: TFAuditoria
           object DBChartUserTipoMov: TDBChart
             Left = 0
             Top = 29
-            Width = 896
-            Height = 160
+            Width = 904
+            Height = 166
             BackWall.Brush.Color = clWhite
             BackWall.Brush.Style = bsClear
             Gradient.EndColor = clGray
@@ -680,10 +680,6 @@ object FAuditoria: TFAuditoria
     object ZQ_MovimientosID_OBJETO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_OBJETO_MOVIMIENTO'
     end
-    object ZQ_MovimientosDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 200
-    end
     object ZQ_MovimientosPAGO_DEL_EJERCICIO: TStringField
       FieldName = 'PAGO_DEL_EJERCICIO'
       Size = 1
@@ -722,10 +718,6 @@ object FAuditoria: TFAuditoria
     object ZQ_MovimientosNRO_ORDEN: TIntegerField
       FieldName = 'NRO_ORDEN'
     end
-    object ZQ_MovimientosNRO_FACTURA: TStringField
-      FieldName = 'NRO_FACTURA'
-      Size = 200
-    end
     object ZQ_MovimientosNRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'
       Size = 50
@@ -757,6 +749,14 @@ object FAuditoria: TFAuditoria
       FieldName = 'NRO_ORDEN_STRING'
       ReadOnly = True
       Size = 336
+    end
+    object ZQ_MovimientosNRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 200
+    end
+    object ZQ_MovimientosDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 200
     end
   end
   object ZQ_CuentaMov: TZQuery
@@ -912,7 +912,7 @@ object FAuditoria: TFAuditoria
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

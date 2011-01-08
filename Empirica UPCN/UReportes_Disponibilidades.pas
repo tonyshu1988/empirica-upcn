@@ -57,7 +57,6 @@ type
     LIBRO_BANCOID_MEDIO: TIntegerField;
     LIBRO_BANCOMOV_ANULADO: TStringField;
     LIBRO_BANCOCTA_MOV_ANULADO: TStringField;
-    LIBRO_BANCONRO_FACTURA: TStringField;
     LIBRO_BANCONRO_RECIBO: TStringField;
     LIBRO_BANCONRO_ORDEN: TIntegerField;
     LIBRO_BANCONRO_ORDEN_STRING: TStringField;
@@ -138,6 +137,7 @@ type
     QRSysData1: TQRSysData;
     QRBand4: TQRBand;
     QRExpr1: TQRExpr;
+    LIBRO_BANCONRO_FACTURA: TStringField;
     procedure btnLibroBancoClick(Sender: TObject);
     function  validarDatos():boolean;
     procedure btnSalirClick(Sender: TObject);

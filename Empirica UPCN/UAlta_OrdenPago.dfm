@@ -379,7 +379,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
-        MaxLength = 200
+        MaxLength = 600
         ParentFont = False
         TabOrder = 8
       end
@@ -515,7 +515,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -854,17 +854,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     object ZQ_MovimientosNRO_ORDEN: TIntegerField
       FieldName = 'NRO_ORDEN'
     end
-    object ZQ_MovimientosNRO_FACTURA: TStringField
-      FieldName = 'NRO_FACTURA'
-      Size = 200
-    end
     object ZQ_MovimientosNRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'
       Size = 50
-    end
-    object ZQ_MovimientosDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 200
     end
     object ZQ_MovimientosNRO_ORDEN_STRING: TStringField
       FieldName = 'NRO_ORDEN_STRING'
@@ -884,6 +876,14 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     end
     object ZQ_MovimientosID_TIPO: TIntegerField
       FieldName = 'ID_TIPO'
+    end
+    object ZQ_MovimientosDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 600
+    end
+    object ZQ_MovimientosNRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 200
     end
   end
   object DS_Movimientos: TDataSource
