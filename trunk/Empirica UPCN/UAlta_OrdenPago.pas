@@ -66,9 +66,7 @@ type
     ZQ_MovimientosPARTE_ANULADO: TIntegerField;
     ZQ_MovimientosDETALLE_ANULADO: TStringField;
     ZQ_MovimientosNRO_ORDEN: TIntegerField;
-    ZQ_MovimientosNRO_FACTURA: TStringField;
     ZQ_MovimientosNRO_RECIBO: TStringField;
-    ZQ_MovimientosDESCRIPCION: TStringField;
     DS_Movimientos: TDataSource;
     EKListado_Conceptos: TEKListadoSQL;
     ZQ_Cuenta_Movimiento: TZQuery;
@@ -169,6 +167,8 @@ type
     ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField;
     updateMovimientos: TZUpdateSQL;
     ZQ_MovimientosID_TIPO: TIntegerField;
+    ZQ_MovimientosDESCRIPCION: TStringField;
+    ZQ_MovimientosNRO_FACTURA: TStringField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;

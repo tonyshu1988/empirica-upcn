@@ -102,10 +102,8 @@ type
     ZQ_Libro_erogacionesFECHA: TDateField;
     ZQ_Libro_erogacionesNRO_ORDEN: TIntegerField;
     ZQ_Libro_erogacionesNRO_MOVIMIENTO: TIntegerField;
-    ZQ_Libro_erogacionesNRO_FACTURA: TStringField;
     ZQ_Libro_erogacionesNRO_RECIBO: TStringField;
     ZQ_Libro_erogacionesNRO_ORDEN_STRING: TStringField;
-    ZQ_Libro_erogacionesDESCRIPCION: TStringField;
     ZQ_Libro_erogacionesANULADO: TStringField;
     ZQ_Libro_erogacionesAPELLIDO_Y_NOMBRE: TStringField;
     ZQ_Libro_erogacionesNOMBRE_CONCEPTO: TStringField;
@@ -160,6 +158,8 @@ type
     QRShapePanelFondo: TQRShape;
     ChildBand1: TQRChildBand;
     QRShape11: TQRShape;
+    ZQ_Libro_erogacionesNRO_FACTURA: TStringField;
+    ZQ_Libro_erogacionesDESCRIPCION: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure ZQ_Libro_erogacionesCalcFields(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);

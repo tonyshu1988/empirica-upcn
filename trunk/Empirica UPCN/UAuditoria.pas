@@ -43,7 +43,6 @@ type
     ZQ_MovimientosNRO_PROVEEDOR: TIntegerField;
     ZQ_MovimientosID_CONCEPTO: TIntegerField;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO: TIntegerField;
-    ZQ_MovimientosDESCRIPCION: TStringField;
     ZQ_MovimientosPAGO_DEL_EJERCICIO: TStringField;
     ZQ_MovimientosFECHA: TDateField;
     ZQ_MovimientosIMPORTE: TFloatField;
@@ -55,7 +54,6 @@ type
     ZQ_MovimientosPARTE_ANULADO: TIntegerField;
     ZQ_MovimientosDETALLE_ANULADO: TStringField;
     ZQ_MovimientosNRO_ORDEN: TIntegerField;
-    ZQ_MovimientosNRO_FACTURA: TStringField;
     ZQ_MovimientosNRO_RECIBO: TStringField;
     ZQ_MovimientosAUDIT_USUARIO: TStringField;
     ZQ_MovimientosAUDIT_FECHA: TDateField;
@@ -108,6 +106,8 @@ type
     Label3: TLabel;
     CBoxAccion: TComboBox;
     ZQ_CuentaMovNRO_CHEQUE_TRANSF: TStringField;
+    ZQ_MovimientosNRO_FACTURA: TStringField;
+    ZQ_MovimientosDESCRIPCION: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_MovimientosAfterScroll(DataSet: TDataSet);

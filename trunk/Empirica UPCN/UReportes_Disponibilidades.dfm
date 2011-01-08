@@ -22,15 +22,15 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   object pFondo: TPanel
     Left = 0
     Top = 0
-    Width = 1066
-    Height = 495
+    Width = 1074
+    Height = 501
     Align = alClient
     TabOrder = 4
     object pLibroBanco: TPanel
       Left = 1
       Top = 1
-      Width = 1064
-      Height = 439
+      Width = 1072
+      Height = 445
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 3
@@ -38,8 +38,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object DBGridLibroBanco: TDBGrid
         Left = 3
         Top = 34
-        Width = 1058
-        Height = 402
+        Width = 1066
+        Height = 408
         Align = alClient
         Color = 16772842
         DataSource = DS_LIBRO_BANCO
@@ -205,13 +205,13 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object Panel1: TPanel
         Left = 3
         Top = 3
-        Width = 1058
+        Width = 1066
         Height = 31
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
         DesignSize = (
-          1058
+          1066
           31)
         object Shape1: TShape
           Left = 1
@@ -267,7 +267,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Transparent = True
         end
         object Panel3: TPanel
-          Left = 972
+          Left = 980
           Top = 0
           Width = 86
           Height = 31
@@ -367,7 +367,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            272.520833333333300000
+            272.520833333333400000
             2770.187500000000000000)
           BandType = rbPageHeader
           object QRLabel5: TQRLabel
@@ -450,7 +450,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             FontSize = 12
           end
           object RepLibroB_Reporte_Titulo_2: TQRLabel
-            Left = 426
+            Left = -90
             Top = 36
             Width = 195
             Height = 20
@@ -494,7 +494,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               52.916666666666670000
               1045.104166666667000000
               31.750000000000000000
-              679.979166666666700000)
+              679.979166666666800000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -618,7 +618,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               37.041666666666670000
               190.500000000000000000
               230.187500000000000000
-              256.645833333333300000)
+              256.645833333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -647,7 +647,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              637.645833333333300000
+              637.645833333333400000
               230.187500000000000000
               254.000000000000000000)
             Alignment = taLeftJustify
@@ -1193,7 +1193,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333330000
+            42.333333333333340000
             2770.187500000000000000)
           ParentBand = QRBand1
           object QRLabel17: TQRLabel
@@ -1537,7 +1537,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               2553.229166666667000000
               2.645833333333333000
               103.187500000000000000)
@@ -1568,7 +1568,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               2661.708333333333000000
               2.645833333333333000
               108.479166666666700000)
@@ -1603,7 +1603,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333330000
+            58.208333333333340000
             2770.187500000000000000)
           BandType = rbSummary
           object QRExpr1: TQRExpr
@@ -1638,8 +1638,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 1
-      Top = 440
-      Width = 1064
+      Top = 446
+      Width = 1072
       Height = 54
       Align = alBottom
       BevelInner = bvLowered
@@ -1813,7 +1813,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2137,10 +2137,6 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       FieldName = 'CTA_MOV_ANULADO'
       Size = 1
     end
-    object LIBRO_BANCONRO_FACTURA: TStringField
-      FieldName = 'NRO_FACTURA'
-      Size = 200
-    end
     object LIBRO_BANCONRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'
       Size = 50
@@ -2166,6 +2162,10 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     object LIBRO_BANCOTIPO_PROVEEDOR: TStringField
       FieldName = 'TIPO_PROVEEDOR'
       Size = 50
+    end
+    object LIBRO_BANCONRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 200
     end
   end
   object DS_LIBRO_BANCO: TDataSource

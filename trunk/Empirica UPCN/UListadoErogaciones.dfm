@@ -24,8 +24,8 @@ object FListadoErogaciones: TFListadoErogaciones
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 977
-    Height = 475
+    Width = 985
+    Height = 481
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -33,8 +33,8 @@ object FListadoErogaciones: TFListadoErogaciones
     object DBGridListaErogacion: TDBGrid
       Left = 3
       Top = 58
-      Width = 971
-      Height = 344
+      Width = 979
+      Height = 350
       Align = alClient
       Color = 16772842
       DataSource = DS_Libro_erogaciones
@@ -159,13 +159,13 @@ object FListadoErogaciones: TFListadoErogaciones
     object pDatos: TPanel
       Left = 3
       Top = 3
-      Width = 971
+      Width = 979
       Height = 55
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
       DesignSize = (
-        971
+        979
         55)
       object Shape1: TShape
         Left = 3
@@ -310,14 +310,14 @@ object FListadoErogaciones: TFListadoErogaciones
     end
     object pResumen: TPanel
       Left = 3
-      Top = 402
-      Width = 971
+      Top = 408
+      Width = 979
       Height = 18
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 2
       object lblSaldo: TLabel
-        Left = 908
+        Left = 916
         Top = 0
         Width = 63
         Height = 18
@@ -334,8 +334,8 @@ object FListadoErogaciones: TFListadoErogaciones
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 3
-      Top = 420
-      Width = 971
+      Top = 426
+      Width = 979
       Height = 52
       Align = alBottom
       Color = 11004820
@@ -866,7 +866,7 @@ object FListadoErogaciones: TFListadoErogaciones
         ForceNewPage = False
         LinkBand = ChildBandRecibo
         Size.Values = (
-          41.892361111111110000
+          41.892361111111120000
           1898.385416666667000000)
         BandType = rbGroupFooter
         object QRDescVertical1: TQRShape
@@ -1194,7 +1194,7 @@ object FListadoErogaciones: TFListadoErogaciones
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          359.392361111111100000
+          359.392361111111200000
           1898.385416666667000000)
         BandType = rbPageHeader
         object QRLabel41: TQRLabel
@@ -1287,10 +1287,10 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            707.760416666666700000
-            77.170138888888890000
-            480.659722222222200000)
+            52.916666666666660000
+            707.760416666666600000
+            77.170138888888900000
+            480.659722222222300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1318,10 +1318,10 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            628.385416666666700000
+            52.916666666666660000
+            628.385416666666800000
             11.024305555555560000
-            639.409722222222200000)
+            639.409722222222300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1349,7 +1349,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888890000
+            37.482638888888900000
             1078.177083333333000000
             304.270833333333300000
             154.340277777777800000)
@@ -1442,8 +1442,8 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888890000
-            831.232638888888900000
+            37.482638888888900000
+            831.232638888889000000
             240.329861111111100000
             372.621527777777800000)
           Alignment = taCenter
@@ -1845,7 +1845,7 @@ object FListadoErogaciones: TFListadoErogaciones
         ForceNewPage = False
         LinkBand = QRBandDetalle
         Size.Values = (
-          41.892361111111110000
+          41.892361111111120000
           1898.385416666667000000)
         Expression = 'ZQ_Libro_erogaciones.NRO_MOVIMIENTO'
         FooterBand = QRBandGroupFooterDesc
@@ -1972,7 +1972,7 @@ object FListadoErogaciones: TFListadoErogaciones
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          41.892361111111110000
+          41.892361111111120000
           1898.385416666667000000)
         BandType = rbPageFooter
         object QRLabel24: TQRLabel
@@ -1986,7 +1986,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888890000
+            37.482638888888900000
             1684.513888888889000000
             2.204861111111111000
             103.628472222222200000)
@@ -2017,7 +2017,7 @@ object FListadoErogaciones: TFListadoErogaciones
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888890000
+            37.482638888888900000
             1788.142361111111000000
             2.204861111111111000
             110.243055555555600000)
@@ -2071,7 +2071,7 @@ object FListadoErogaciones: TFListadoErogaciones
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          41.892361111111110000
+          41.892361111111120000
           1898.385416666667000000)
         ParentBand = QRBand8
         object QRShape11: TQRShape
@@ -2099,7 +2099,7 @@ object FListadoErogaciones: TFListadoErogaciones
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2394,10 +2394,6 @@ object FListadoErogaciones: TFListadoErogaciones
     object ZQ_Libro_erogacionesNRO_MOVIMIENTO: TIntegerField
       FieldName = 'NRO_MOVIMIENTO'
     end
-    object ZQ_Libro_erogacionesNRO_FACTURA: TStringField
-      FieldName = 'NRO_FACTURA'
-      Size = 200
-    end
     object ZQ_Libro_erogacionesNRO_RECIBO: TStringField
       FieldName = 'NRO_RECIBO'
       Size = 50
@@ -2405,10 +2401,6 @@ object FListadoErogaciones: TFListadoErogaciones
     object ZQ_Libro_erogacionesNRO_ORDEN_STRING: TStringField
       FieldName = 'NRO_ORDEN_STRING'
       Size = 10
-    end
-    object ZQ_Libro_erogacionesDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 200
     end
     object ZQ_Libro_erogacionesANULADO: TStringField
       FieldName = 'ANULADO'
@@ -2466,6 +2458,14 @@ object FListadoErogaciones: TFListadoErogaciones
     object ZQ_Libro_erogacionesTIPO_PROVEEDOR: TStringField
       FieldName = 'TIPO_PROVEEDOR'
       Size = 50
+    end
+    object ZQ_Libro_erogacionesNRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 200
+    end
+    object ZQ_Libro_erogacionesDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 600
     end
   end
   object DS_Libro_erogaciones: TDataSource
