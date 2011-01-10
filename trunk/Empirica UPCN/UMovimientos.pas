@@ -460,6 +460,50 @@ type
     LIBRO_BANCONRO_FACTURA: TStringField;
     btaplicar: TBitBtn;
     ZQ_MovimientosNRO_CUENTA: TIntegerField;
+    dxBarButton2: TdxBarButton;
+    btImprimirCaratula: TdxBarLargeButton;
+    ReporteCaratulaOP: TQuickRep;
+    QRBand4: TQRBand;
+    QRLabel12: TQRLabel;
+    QRLabel37: TQRLabel;
+    QRLabel38: TQRLabel;
+    QRLabel44: TQRLabel;
+    qrDesde: TQRLabel;
+    qrHasta: TQRLabel;
+    qrOrden: TQRLabel;
+    qrCuenta: TQRLabel;
+    QRBand9: TQRBand;
+    QRDBText24: TQRDBText;
+    QRDBText25: TQRDBText;
+    QRDBText32: TQRDBText;
+    QRDBText33: TQRDBText;
+    QRDBText34: TQRDBText;
+    QRDBText35: TQRDBText;
+    QRDBText37: TQRDBText;
+    QRChildBand3: TQRChildBand;
+    QRLabel51: TQRLabel;
+    QRLabel52: TQRLabel;
+    QRLabel53: TQRLabel;
+    QRLabel54: TQRLabel;
+    QRLabel55: TQRLabel;
+    QRLabel56: TQRLabel;
+    QRLabel57: TQRLabel;
+    QRLabel58: TQRLabel;
+    QRLabel59: TQRLabel;
+    QRBand10: TQRBand;
+    QRLabel61: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand11: TQRBand;
+    QRExpr1: TQRExpr;
+    QRLabel62: TQRLabel;
+    QRLabel63: TQRLabel;
+    QRDBText28: TQRDBText;
+    QRLabel34: TQRLabel;
+    QRLabel33: TQRLabel;
+    QRExpr2: TQRExpr;
+    EKVistaPreviaCaratulaOPs: TEKVistaPreviaQR;
+    QRLabel35: TQRLabel;
+    QRDBText27: TQRDBText;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -533,6 +577,7 @@ type
     procedure ZQ_Cuenta_MovimientoIMPORTEValidate(Sender: TField);
     procedure ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
     procedure centrala(var p : TPanel);
+    procedure btImprimirCaratulaClick(Sender: TObject);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -2000,6 +2045,19 @@ begin
   ZQ_Proveedores.Active:=false;
   ZQ_Proveedores.ParamByName('tipo').AsInteger:=ZQ_TipoProveedorID_TIPO.AsInteger;
   ZQ_Proveedores.Active:=true;
+end;
+
+procedure TFMovimientos.btImprimirCaratulaClick(Sender: TObject);
+begin
+if LIBRO_BANCO.IsEmpty then
+    exit;
+
+  qrDesde.Caption:= DateToStr(DTPFechaDesde.Date);
+  qrHasta.Caption:= DateToStr(DTPFechaHasta.Date);
+  qrOrden.Caption:= ComboOrden.Text;
+  qrCuenta.Caption:= DBLCuenta.Text  ;
+
+  EKVistaPreviaCaratulaOPs.VistaPrevia;
 end;
 
 end.
