@@ -76,6 +76,16 @@ type
     ClientZQ_movimientostipoProv: TStringField;
     ZQ_movimientosNRO_CHEQUE_TRANSF: TStringField;
     ClientZQ_movimientosnro_cheque: TStringField;
+    ZQ_Cuenta: TZQuery;
+    ZQ_CuentaID_CUENTA: TIntegerField;
+    ZQ_CuentaNOMBRE_CUENTA: TStringField;
+    ZQ_CuentaMEDIO_DE_PAGO: TStringField;
+    ZQ_CuentaNRO_CUENTA_BANCARIA: TStringField;
+    ZQ_CuentaULTIMO_NRO: TIntegerField;
+    ZQ_CuentaAUTONUMERAR: TStringField;
+    ZQ_CuentaMEDIO_POR_DEFECTO: TIntegerField;
+    ZQ_CuentaCOLOR_CONSILIADO: TStringField;
+    ZQ_CuentaBUSQUEDA: TStringField;
     procedure btnChequeCorrienteClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -157,6 +167,13 @@ end;
 
 procedure TFImpresionCheques.btnBuscarClick(Sender: TObject);
 begin
+if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
+  begin
+    ZQ_Cuenta.Filtered:=False;
+    ZQ_Cuenta.Filter:=Format('ID_CUENTA=%d',[CuentaNro]);
+    ZQ_Cuenta.Filtered:=True;
+  end;
+
 if EKBusquedaAvanzada1.Buscar then
   llenarclient();
 
@@ -171,6 +188,7 @@ end;
 
 procedure TFImpresionCheques.FormCreate(Sender: TObject);
 begin
+  dm.EKModelo.abrir(ZQ_Cuenta);
   ClientZQ_movimientos.CreateDataSet;
 end;
 

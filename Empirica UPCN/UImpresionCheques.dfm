@@ -1,6 +1,6 @@
 object FImpresionCheques: TFImpresionCheques
-  Left = 253
-  Top = 83
+  Left = 311
+  Top = 223
   Width = 987
   Height = 720
   Caption = 'Impresion de Cheques'
@@ -21,15 +21,15 @@ object FImpresionCheques: TFImpresionCheques
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 971
-    Height = 630
+    Width = 979
+    Height = 636
     Align = alClient
     TabOrder = 0
     object DBGridCheques: TDBGrid
       Left = 1
       Top = 20
-      Width = 969
-      Height = 609
+      Width = 977
+      Height = 615
       Align = alClient
       Color = 16772842
       DataSource = DS_movimientos
@@ -97,7 +97,7 @@ object FImpresionCheques: TFImpresionCheques
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 969
+      Width = 977
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -118,7 +118,7 @@ object FImpresionCheques: TFImpresionCheques
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 859
+        Left = 867
         Top = 1
         Width = 109
         Height = 17
@@ -204,7 +204,7 @@ object FImpresionCheques: TFImpresionCheques
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          748.770833333333300000
+          748.770833333333400000
           1820.333333333333000000)
         BandType = rbDetail
         object QRImageChequeCorriente: TQRImage
@@ -4121,7 +4121,7 @@ object FImpresionCheques: TFImpresionCheques
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          748.770833333333300000
+          748.770833333333400000
           1820.333333333333000000)
         BandType = rbDetail
         object QRImageChequeDiferido: TQRImage
@@ -4135,7 +4135,7 @@ object FImpresionCheques: TFImpresionCheques
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            743.479166666666700000
+            743.479166666666800000
             0.000000000000000000
             0.000000000000000000
             1812.395833333333000000)
@@ -8026,7 +8026,7 @@ object FImpresionCheques: TFImpresionCheques
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            918.104166666666700000
+            918.104166666666800000
             214.312500000000000000
             116.416666666666700000)
           Alignment = taLeftJustify
@@ -8045,7 +8045,7 @@ object FImpresionCheques: TFImpresionCheques
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -8365,6 +8365,18 @@ object FImpresionCheques: TFImpresionCheques
   object EKBusquedaAvanzada1: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'Nro Cuenta'
+        Campo = 'nro_cuenta'
+        Tabla = 'm'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Cuenta
+        TipoCombollenarCampo = 'BUSQUEDA'
+        TipoCombollenarCampoReal = 'id_cuenta'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Fecha PD Desde'
         Campo = 'fecha_mdc'
         Tabla = 'cm'
@@ -8575,5 +8587,53 @@ object FImpresionCheques: TFImpresionCheques
         Name = 'id'
         ParamType = ptUnknown
       end>
+  end
+  object ZQ_Cuenta: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select c.*, c.nombre_cuenta||'#39' - '#39'|| coalesce ('#39'N'#176': '#39' || c.nro_c' +
+        'uenta_bancaria, '#39'N'#176': S/N'#39') Busqueda'
+      'from ie_cuentas c'
+      'order by c.id_cuenta'
+      ''
+      '')
+    Params = <>
+    Left = 496
+    Top = 144
+    object ZQ_CuentaID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+      Required = True
+    end
+    object ZQ_CuentaNOMBRE_CUENTA: TStringField
+      FieldName = 'NOMBRE_CUENTA'
+      Size = 100
+    end
+    object ZQ_CuentaMEDIO_DE_PAGO: TStringField
+      FieldName = 'MEDIO_DE_PAGO'
+      Size = 50
+    end
+    object ZQ_CuentaNRO_CUENTA_BANCARIA: TStringField
+      FieldName = 'NRO_CUENTA_BANCARIA'
+      Size = 100
+    end
+    object ZQ_CuentaULTIMO_NRO: TIntegerField
+      FieldName = 'ULTIMO_NRO'
+    end
+    object ZQ_CuentaAUTONUMERAR: TStringField
+      FieldName = 'AUTONUMERAR'
+      Size = 1
+    end
+    object ZQ_CuentaMEDIO_POR_DEFECTO: TIntegerField
+      FieldName = 'MEDIO_POR_DEFECTO'
+    end
+    object ZQ_CuentaCOLOR_CONSILIADO: TStringField
+      FieldName = 'COLOR_CONSILIADO'
+    end
+    object ZQ_CuentaBUSQUEDA: TStringField
+      FieldName = 'BUSQUEDA'
+      ReadOnly = True
+      Size = 207
+    end
   end
 end
