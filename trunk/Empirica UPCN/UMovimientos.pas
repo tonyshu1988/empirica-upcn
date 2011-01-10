@@ -10,7 +10,8 @@ uses
   EKBusquedaAvanzada, ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma,
   EKLlenarCombo, mxNativeExcel, mxExport, QuickRpt, QRCtrls,
   EKVistaPreviaQR, EKNumeroATexto, DBClient, QPrinters, EKIni, jpeg,
-  EKOrdenarGrilla, UAlta_OrdenPago, EKDBDateTimePicker, Menus, ZSqlUpdate;
+  EKOrdenarGrilla, UAlta_OrdenPago, EKDBDateTimePicker, Menus, ZSqlUpdate,
+  Buttons;
 
 type
   TFMovimientos = class(TForm)
@@ -83,7 +84,6 @@ type
     Label11: TLabel;
     DTPFechaDesde: TDateTimePicker;
     DTPFechaHasta: TDateTimePicker;
-    btaplicar: TButton;
     LIBRO_BANCO: TZQuery;
     LIBRO_BANCOID_MOVIMIENTO: TIntegerField;
     LIBRO_BANCOORDEN: TIntegerField;
@@ -458,13 +458,14 @@ type
     ZQ_MovimientosDESCRIPCION: TStringField;
     ZQ_MovimientosNRO_FACTURA: TStringField;
     LIBRO_BANCONRO_FACTURA: TStringField;
+    btaplicar: TBitBtn;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
     procedure BtIngresosClick(Sender: TObject);
     procedure btSalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure btaplicarClick(Sender: TObject);
+    procedure btaplicar2Click(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure EKLlenarCuentasCambio(valor: String);
     procedure BtEditarMovimientoClick(Sender: TObject);
@@ -827,7 +828,7 @@ begin
   end;
 end;
 
-procedure TFMovimientos.btaplicarClick(Sender: TObject);
+procedure TFMovimientos.btaplicar2Click(Sender: TObject);
 begin
   //Tipo refresco...
  // refrescarConsultas();
