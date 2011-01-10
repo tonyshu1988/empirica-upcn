@@ -459,6 +459,7 @@ type
     ZQ_MovimientosNRO_FACTURA: TStringField;
     LIBRO_BANCONRO_FACTURA: TStringField;
     btaplicar: TBitBtn;
+    ZQ_MovimientosNRO_CUENTA: TIntegerField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -745,6 +746,7 @@ begin
 
   ZQ_Movimientos.Edit;
   ZQ_MovimientosIMPORTE.AsFloat:= ZQ_Cuenta_MovimientoIMPORTE.AsFloat;
+  ZQ_MovimientosNRO_CUENTA.AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
 
   if validarcampo then
   begin

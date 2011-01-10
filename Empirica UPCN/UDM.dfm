@@ -1,13 +1,13 @@
 object DM: TDM
   OldCreateOrder = False
   Left = 737
-  Top = 368
+  Top = 471
   Height = 283
   Width = 279
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'E:\Empirica\Empirica UPCN\Bases\UPCN.FDB'
+    Database = 'E:\Empirica\empirica-upcn\Empirica UPCN\Bases\UPCN.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (

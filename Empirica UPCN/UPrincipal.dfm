@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
   Left = 192
-  Top = 112
+  Top = 143
   Width = 871
   Height = 640
   Caption = 'UPCN'
@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 569
-    Width = 863
+    Top = 567
+    Width = 855
     Height = 19
     Panels = <
       item
@@ -38,7 +38,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 863
+    Width = 855
     Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionToolBar1'
@@ -52,8 +52,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 863
-    Height = 540
+    Width = 855
+    Height = 538
     Align = alClient
     TabOrder = 2
   end
