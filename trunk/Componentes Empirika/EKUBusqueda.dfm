@@ -312,6 +312,7 @@ object FBusqueda: TFBusqueda
     Top = -8
     Width = 761
     Height = 41
+    Brush.Color = 15656155
     Pen.Style = psClear
     Pen.Width = 0
   end
@@ -329,6 +330,7 @@ object FBusqueda: TFBusqueda
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
+    Transparent = True
   end
   object Label2: TLabel
     Left = 208
@@ -344,6 +346,7 @@ object FBusqueda: TFBusqueda
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
+    Transparent = True
   end
   object labelyo: TLabel
     Left = 408
@@ -359,6 +362,7 @@ object FBusqueda: TFBusqueda
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
+    Transparent = True
   end
   object labelcondicion2: TLabel
     Left = 480
@@ -374,6 +378,7 @@ object FBusqueda: TFBusqueda
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
+    Transparent = True
   end
   object c_yo: TComboBox
     Left = 304
@@ -396,6 +401,7 @@ object FBusqueda: TFBusqueda
     Width = 49
     Height = 21
     ItemHeight = 13
+    ItemIndex = 0
     TabOrder = 1
     TabStop = False
     Text = 'Contiene'
