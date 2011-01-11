@@ -491,8 +491,6 @@ type
     QRLabel58: TQRLabel;
     QRLabel59: TQRLabel;
     QRBand10: TQRBand;
-    QRLabel61: TQRLabel;
-    QRSysData1: TQRSysData;
     QRBand11: TQRBand;
     QRExpr1: TQRExpr;
     QRLabel62: TQRLabel;
@@ -504,6 +502,9 @@ type
     EKVistaPreviaCaratulaOPs: TEKVistaPreviaQR;
     QRLabel35: TQRLabel;
     QRDBText27: TQRDBText;
+    QRExpr9: TQRExpr;
+    QRExpr19: TQRExpr;
+    QRLabel45: TQRLabel;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
