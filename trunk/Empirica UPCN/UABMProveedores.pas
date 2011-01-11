@@ -58,7 +58,6 @@ type
     RepProv_Reporte_Titulo_2: TQRLabel;
     RepProv_Reporte_Titulo_1: TQRLabel;
     QRBand2: TQRBand;
-    QRLabel24: TQRLabel;
     QRSysData2: TQRSysData;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
@@ -154,9 +153,12 @@ type
     ZQ_ProvCtas_nombre: TStringField;
     ZSP_VerificarElim: TZStoredProc;
     ZSP_VerificarElimCANT: TIntegerField;
-    QRLabel1: TQRLabel;
     QRDBText2: TQRDBText;
     QRDBText4: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRDBText5: TQRDBText;
+    ZQ_IE_ProveedoresTIPODOC: TStringField;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
