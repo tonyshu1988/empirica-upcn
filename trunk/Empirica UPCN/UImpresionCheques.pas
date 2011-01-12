@@ -86,6 +86,19 @@ type
     ZQ_CuentaMEDIO_POR_DEFECTO: TIntegerField;
     ZQ_CuentaCOLOR_CONSILIADO: TStringField;
     ZQ_CuentaBUSQUEDA: TStringField;
+    ZQ_movimientosNRO_MOVIMIENTO: TIntegerField;
+    ZQ_movimientosCONCILIADO: TStringField;
+    ZQ_movimientosNOMBRE_CONCEPTO: TStringField;
+    ZQ_movimientosNRO_ORDEN: TIntegerField;
+    ZQ_movimientosID_MEDIO: TIntegerField;
+    ZQ_movimientosFECHA_CONCILIADO: TDateField;
+    ZQ_movimientosANULADO_1: TStringField;
+    ZQ_movimientosNRO_FACTURA: TStringField;
+    ZQ_movimientosNRO_RECIBO: TStringField;
+    ZQ_movimientosNRO_ORDEN_STRING: TStringField;
+    ZQ_movimientosDESCRIPCION: TStringField;
+    ClientZQ_movimientosconcepto: TStringField;
+    ClientZQ_movimientosdenominacion: TStringField;
     procedure btnChequeCorrienteClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -135,7 +148,6 @@ begin
   begin
     QRImageChequeCorriente.Enabled:= false;
     QRDBText2.Enabled:= false;
-    ajustarMargenes;
     RepChequesCorriente.Prepare;
     RepChequesCorriente.Print;
 
@@ -190,6 +202,7 @@ procedure TFImpresionCheques.FormCreate(Sender: TObject);
 begin
   dm.EKModelo.abrir(ZQ_Cuenta);
   ClientZQ_movimientos.CreateDataSet;
+  ajustarMargenes;
 end;
 
 
@@ -249,7 +262,6 @@ begin
   begin
     QRImageChequeDiferido.Enabled := false;
     QRDBText6.Enabled := false;
-    ajustarMargenes;    
     RepChequeDiferido.Prepare;
     RepChequeDiferido.Print;
 
@@ -325,6 +337,8 @@ begin
     ClientZQ_movimientosImporte.AsFloat := ZQ_movimientosIMPORTE.AsFloat;
     ClientZQ_movimientosimpreso.AsString := ZQ_movimientosIMPRESO.AsString;
     ClientZQ_movimientostipoProv.AsString := ZQ_movimientosTIPOPROV.AsString;
+    ClientZQ_movimientosdenominacion.AsString:=ZQ_movimientosAPELLIDO_Y_NOMBRE.AsString;
+    ClientZQ_movimientosconcepto.AsString:=ZQ_movimientosNOMBRE_CONCEPTO.AsString;
     ClientZQ_movimientos.Post;
 
     ZQ_movimientos.Next;
@@ -334,7 +348,7 @@ end;
 
 procedure TFImpresionCheques.BtVistaPreviaDifClick(Sender: TObject);
 begin
-    ajustarMargenes;
+
   tipocheque:='DIFERIDO';
   ClientZQ_movimientos.Filtered:=true;
 
@@ -353,7 +367,6 @@ end;
 
 procedure TFImpresionCheques.BtVistaPreviaCorrClick(Sender: TObject);
 begin
-  ajustarMargenes;
   tipocheque:='CORRIENTE';
   ClientZQ_movimientos.Filtered:=true;
 
@@ -373,7 +386,7 @@ end;
 procedure TFImpresionCheques.ajustarMargenes();
 var
   i: integer;
-  desplazarIzquierda, desplazarArriba: integer;
+  desplazarIzquierda, desplazarArriba,izq,der: integer;
 begin
   desplazarIzquierda:= 0;
   desplazarArriba:= 0;
