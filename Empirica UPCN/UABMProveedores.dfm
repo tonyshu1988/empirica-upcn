@@ -1,6 +1,6 @@
 object FABMProveedores: TFABMProveedores
-  Left = 213
-  Top = 177
+  Left = 190
+  Top = 101
   Width = 1038
   Height = 669
   Caption = 'ABM Listado General'
@@ -34,7 +34,7 @@ object FABMProveedores: TFABMProveedores
       Left = -165
       Top = 296
       Width = 1347
-      Height = 352
+      Height = 952
       Frame.Color = clBlack
       Frame.DrawTop = False
       Frame.DrawBottom = False
@@ -1584,6 +1584,7 @@ object FABMProveedores: TFABMProveedores
   object ZQ_IE_Proveedores: TZQuery
     Connection = DM.Conexion
     AfterScroll = ZQ_IE_ProveedoresAfterScroll
+    UpdateObject = ZU_IE_Proveedores
     SQL.Strings = (
       'select p.*,tp.descripcion as tipoDoc'
       'from ie_proveedores p '
@@ -2243,5 +2244,138 @@ object FABMProveedores: TFABMProveedores
     object ZSP_VerificarElimCANT: TIntegerField
       FieldName = 'CANT'
     end
+  end
+  object ZU_IE_Proveedores: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM ie_proveedores'
+      'WHERE'
+      '  ie_proveedores.NRO_PROVEEDOR = :OLD_NRO_PROVEEDOR')
+    InsertSQL.Strings = (
+      'INSERT INTO ie_proveedores'
+      
+        '  (ie_proveedores.NRO_PROVEEDOR, ie_proveedores.APELLIDO_Y_NOMBR' +
+        'E, ie_proveedores.NOMBRE_FANTASIA, '
+      
+        '   ie_proveedores.DIRECCION, ie_proveedores.TIPO_DOCUMENTO, ie_p' +
+        'roveedores.NRO_DOCUMENTO, '
+      
+        '   ie_proveedores.TELEFONOS, ie_proveedores.EMAIL, ie_proveedore' +
+        's.BAJA, '
+      
+        '   ie_proveedores.DESCRIPCION, ie_proveedores.EDITABLE, ie_prove' +
+        'edores.ID_CUENTA, '
+      
+        '   ie_proveedores.ID_TIPO, ie_proveedores.ID_TIPO_IVA, ie_provee' +
+        'dores.ID_TIPO_FACTURA)'
+      'VALUES'
+      
+        '  (:NRO_PROVEEDOR, :APELLIDO_Y_NOMBRE, :NOMBRE_FANTASIA, :DIRECC' +
+        'ION, :TIPO_DOCUMENTO, '
+      
+        '   :NRO_DOCUMENTO, :TELEFONOS, :EMAIL, :BAJA, :DESCRIPCION, :EDI' +
+        'TABLE, '
+      '   :ID_CUENTA, :ID_TIPO, :ID_TIPO_IVA, :ID_TIPO_FACTURA)')
+    ModifySQL.Strings = (
+      'UPDATE ie_proveedores SET'
+      '  ie_proveedores.NRO_PROVEEDOR = :NRO_PROVEEDOR,'
+      '  ie_proveedores.APELLIDO_Y_NOMBRE = :APELLIDO_Y_NOMBRE,'
+      '  ie_proveedores.NOMBRE_FANTASIA = :NOMBRE_FANTASIA,'
+      '  ie_proveedores.DIRECCION = :DIRECCION,'
+      '  ie_proveedores.TIPO_DOCUMENTO = :TIPO_DOCUMENTO,'
+      '  ie_proveedores.NRO_DOCUMENTO = :NRO_DOCUMENTO,'
+      '  ie_proveedores.TELEFONOS = :TELEFONOS,'
+      '  ie_proveedores.EMAIL = :EMAIL,'
+      '  ie_proveedores.BAJA = :BAJA,'
+      '  ie_proveedores.DESCRIPCION = :DESCRIPCION,'
+      '  ie_proveedores.EDITABLE = :EDITABLE,'
+      '  ie_proveedores.ID_CUENTA = :ID_CUENTA,'
+      '  ie_proveedores.ID_TIPO = :ID_TIPO,'
+      '  ie_proveedores.ID_TIPO_IVA = :ID_TIPO_IVA,'
+      '  ie_proveedores.ID_TIPO_FACTURA = :ID_TIPO_FACTURA'
+      'WHERE'
+      '  ie_proveedores.NRO_PROVEEDOR = :OLD_NRO_PROVEEDOR')
+    Left = 224
+    Top = 72
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'NRO_PROVEEDOR'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'APELLIDO_Y_NOMBRE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NOMBRE_FANTASIA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DIRECCION'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TIPO_DOCUMENTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRO_DOCUMENTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TELEFONOS'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'EMAIL'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BAJA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DESCRIPCION'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'EDITABLE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_CUENTA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_TIPO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_TIPO_IVA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_TIPO_FACTURA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_NRO_PROVEEDOR'
+        ParamType = ptUnknown
+      end>
   end
 end

@@ -1,5 +1,5 @@
 object FImpresionCheques: TFImpresionCheques
-  Left = 311
+  Left = 124
   Top = 223
   Width = 987
   Height = 720
@@ -21,15 +21,15 @@ object FImpresionCheques: TFImpresionCheques
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 979
-    Height = 636
+    Width = 971
+    Height = 634
     Align = alClient
     TabOrder = 0
     object DBGridCheques: TDBGrid
       Left = 1
       Top = 20
-      Width = 977
-      Height = 615
+      Width = 969
+      Height = 613
       Align = alClient
       Color = 16772842
       DataSource = DS_movimientos
@@ -49,32 +49,42 @@ object FImpresionCheques: TFImpresionCheques
           Expanded = False
           FieldName = 'Fecha_emision'
           Title.Caption = 'Fecha Emision'
+          Width = 85
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Fecha_Pd'
           Title.Caption = 'Fecha PD'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'proveedor'
-          Title.Caption = 'Denominaci'#243'n'
-          Width = 253
+          Width = 71
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'tipoProv'
           Title.Caption = 'Tipo'
-          Width = 132
+          Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'denominacion'
+          Title.Caption = 'Denominaci'#243'n'
+          Width = 177
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'concepto'
+          Title.Caption = 'Concepto'
+          Width = 179
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'nro_cheque'
           Title.Caption = 'Nro Cheque'
+          Width = 169
           Visible = True
         end
         item
@@ -91,13 +101,14 @@ object FImpresionCheques: TFImpresionCheques
         item
           Expanded = False
           FieldName = 'impreso'
+          Title.Caption = 'Impreso'
           Visible = True
         end>
     end
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 977
+      Width = 969
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -118,7 +129,7 @@ object FImpresionCheques: TFImpresionCheques
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 867
+        Left = 859
         Top = 1
         Width = 109
         Height = 17
@@ -134,8 +145,8 @@ object FImpresionCheques: TFImpresionCheques
     end
     object RepChequesCorriente: TQuickRep
       Tag = 99
-      Left = 52
-      Top = 9
+      Left = 188
+      Top = 121
       Width = 688
       Height = 1134
       Frame.Color = clBlack
@@ -181,7 +192,7 @@ object FImpresionCheques: TFImpresionCheques
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
-      PrintIfEmpty = True
+      PrintIfEmpty = False
       ReportTitle = '+'
       SnapToGrid = True
       Units = MM
@@ -204,7 +215,7 @@ object FImpresionCheques: TFImpresionCheques
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          748.770833333333400000
+          748.770833333333300000
           1820.333333333333000000)
         BandType = rbDetail
         object QRImageChequeCorriente: TQRImage
@@ -3910,7 +3921,7 @@ object FImpresionCheques: TFImpresionCheques
         object QRLabelNumeroLetraCorriente1: TQRLabel
           Left = 128
           Top = 132
-          Width = 460
+          Width = 345
           Height = 68
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -3921,7 +3932,7 @@ object FImpresionCheques: TFImpresionCheques
             179.916666666666700000
             338.666666666666700000
             349.250000000000000000
-            1217.083333333333000000)
+            912.812500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -4051,8 +4062,8 @@ object FImpresionCheques: TFImpresionCheques
     end
     object RepChequeDiferido: TQuickRep
       Tag = 99
-      Left = 52
-      Top = 298
+      Left = 188
+      Top = 314
       Width = 688
       Height = 1134
       Frame.Color = clBlack
@@ -4098,7 +4109,7 @@ object FImpresionCheques: TFImpresionCheques
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
-      PrintIfEmpty = True
+      PrintIfEmpty = False
       ReportTitle = '+'
       SnapToGrid = True
       Units = MM
@@ -4121,7 +4132,7 @@ object FImpresionCheques: TFImpresionCheques
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          748.770833333333400000
+          748.770833333333300000
           1820.333333333333000000)
         BandType = rbDetail
         object QRImageChequeDiferido: TQRImage
@@ -7827,7 +7838,7 @@ object FImpresionCheques: TFImpresionCheques
         object QRLabelNumeroLetraDiferido1: TQRLabel
           Left = 128
           Top = 131
-          Width = 460
+          Width = 345
           Height = 68
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -7838,7 +7849,7 @@ object FImpresionCheques: TFImpresionCheques
             179.916666666666700000
             338.666666666666700000
             346.604166666666700000
-            1217.083333333333000000)
+            912.812500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -8045,7 +8056,7 @@ object FImpresionCheques: TFImpresionCheques
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -8309,16 +8320,30 @@ object FImpresionCheques: TFImpresionCheques
     Connection = DM.Conexion
     SQL.Strings = (
       
-        'select m.fecha, cm.fecha_mdc, cm.nro_cheque_transf, cm.importe, ' +
-        'cm.anulado, p.apellido_y_nombre, cm.impreso, cm.id,tp.descripcio' +
-        'n as TipoProv'
-      'from ie_cuentas_movimientos cm'
+        'select  mov.fecha, mov.nro_movimiento, cta_mov.nro_cheque_transf' +
+        ',mov.nro_cuenta,'
       
-        'left join ie_movimientos m on(cm.nro_movimiento = m.nro_movimien' +
-        'to)'
-      'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
-      'left join tipo_proveedor tp on (p.id_tipo = tp.id_tipo)'
-      'where cm.id_medio = 2 and cm.anulado is null')
+        'cta_mov.importe, prov.apellido_y_nombre, cta_mov.id, cta_mov.con' +
+        'ciliado, cpto.nombre_concepto,'
+      
+        'cta_mov.fecha_mdc, mov.nro_orden,cta_mov.impreso,tp.descripcion ' +
+        'as TipoProv,'
+      
+        'cta_mov.id_medio, cta_mov.fecha_conciliado, mov.anulado, cta_mov' +
+        '.anulado, mov.nro_factura, mov.nro_recibo,mov.nro_orden_string,t' +
+        'p.descripcion'
+      'from ie_cuentas_movimientos cta_mov'
+      
+        'inner join ie_movimientos  mov on (cta_mov.nro_movimiento = mov.' +
+        'nro_movimiento)'
+      
+        'inner join ie_proveedores prov on (mov.nro_proveedor = prov.nro_' +
+        'proveedor)'
+      'inner join tipo_proveedor tp on (prov.id_tipo = tp.id_tipo)'
+      
+        'inner join ie_conceptos cpto on (mov.id_concepto = cpto.id_conce' +
+        'pto)'
+      'where (cta_mov.id_medio = 2) and (cta_mov.anulado is null)')
     Params = <>
     Left = 36
     Top = 89
@@ -8355,6 +8380,46 @@ object FImpresionCheques: TFImpresionCheques
     object ZQ_movimientosNRO_CHEQUE_TRANSF: TStringField
       FieldName = 'NRO_CHEQUE_TRANSF'
     end
+    object ZQ_movimientosNRO_MOVIMIENTO: TIntegerField
+      FieldName = 'NRO_MOVIMIENTO'
+      Required = True
+    end
+    object ZQ_movimientosCONCILIADO: TStringField
+      FieldName = 'CONCILIADO'
+      Size = 1
+    end
+    object ZQ_movimientosNOMBRE_CONCEPTO: TStringField
+      FieldName = 'NOMBRE_CONCEPTO'
+      Size = 240
+    end
+    object ZQ_movimientosNRO_ORDEN: TIntegerField
+      FieldName = 'NRO_ORDEN'
+    end
+    object ZQ_movimientosID_MEDIO: TIntegerField
+      FieldName = 'ID_MEDIO'
+    end
+    object ZQ_movimientosFECHA_CONCILIADO: TDateField
+      FieldName = 'FECHA_CONCILIADO'
+    end
+    object ZQ_movimientosANULADO_1: TStringField
+      FieldName = 'ANULADO_1'
+      Size = 1
+    end
+    object ZQ_movimientosNRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 200
+    end
+    object ZQ_movimientosNRO_RECIBO: TStringField
+      FieldName = 'NRO_RECIBO'
+      Size = 50
+    end
+    object ZQ_movimientosNRO_ORDEN_STRING: TStringField
+      FieldName = 'NRO_ORDEN_STRING'
+    end
+    object ZQ_movimientosDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
+    end
   end
   object EKNumeroALetras1: TEKNumeroALetras
     Separador = ','
@@ -8367,7 +8432,7 @@ object FImpresionCheques: TFImpresionCheques
       item
         Titulo = 'Nro Cuenta'
         Campo = 'nro_cuenta'
-        Tabla = 'm'
+        Tabla = 'mov'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
         TipoCombollenarSQL = ZQ_Cuenta
@@ -8379,7 +8444,7 @@ object FImpresionCheques: TFImpresionCheques
       item
         Titulo = 'Fecha PD Desde'
         Campo = 'fecha_mdc'
-        Tabla = 'cm'
+        Tabla = 'cta_mov'
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
         TipoCampoIndice = 2
@@ -8390,7 +8455,7 @@ object FImpresionCheques: TFImpresionCheques
       item
         Titulo = 'Fecha PD Hasta'
         Campo = 'fecha_mdc'
-        Tabla = 'cm'
+        Tabla = 'cta_mov'
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
         TipoCampoIndice = 4
@@ -8401,7 +8466,7 @@ object FImpresionCheques: TFImpresionCheques
       item
         Titulo = 'Fecha emision Desde'
         Campo = 'fecha'
-        Tabla = 'm'
+        Tabla = 'cta_mov'
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
         TipoCampoIndice = 2
@@ -8412,7 +8477,7 @@ object FImpresionCheques: TFImpresionCheques
       item
         Titulo = 'Fecha emision Hasta'
         Campo = 'fecha'
-        Tabla = 'm'
+        Tabla = 'cta_mov'
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
         TipoCampoIndice = 4
@@ -8421,17 +8486,9 @@ object FImpresionCheques: TFImpresionCheques
         ItemIndex = -1
       end
       item
-        Titulo = 'Proveedor'
-        Campo = 'apellido_y_nombre'
-        Tabla = 'p'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
         Titulo = 'Nro Cheque'
         Campo = 'nro_cheque_transf'
-        Tabla = 'cm'
+        Tabla = 'cta_mov'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         ItemIndex = -1
@@ -8439,7 +8496,7 @@ object FImpresionCheques: TFImpresionCheques
       item
         Titulo = 'Impreso'
         Campo = 'impreso'
-        Tabla = 'cm'
+        Tabla = 'cta_mov'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
         TipoComboValores.Strings = (
@@ -8450,38 +8507,98 @@ object FImpresionCheques: TFImpresionCheques
           'S'
           'N')
         ItemIndex = 1
+      end
+      item
+        Titulo = 'Nro Orden'
+        Campo = 'Nro_orden_string'
+        Tabla = 'mov'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo'
+        Campo = 'descripcion'
+        Tabla = 'tp'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Denominaci'#243'n'
+        Campo = 'apellido_y_nombre'
+        Tabla = 'prov'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Concepto'
+        Campo = 'nombre_concepto'
+        Tabla = 'cpto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
     DataSet = ZQ_movimientos
     SQL.Strings = (
       
-        'select m.fecha, cm.fecha_mdc, cm.nro_cheque_transf, cm.importe, ' +
-        'cm.anulado, p.apellido_y_nombre, cm.impreso, cm.id,tp.descripcio' +
-        'n as TipoProv'
-      'from ie_cuentas_movimientos cm'
+        'select  mov.fecha, mov.nro_movimiento, cta_mov.nro_cheque_transf' +
+        ',mov.nro_cuenta,'
       
-        'left join ie_movimientos m on(cm.nro_movimiento = m.nro_movimien' +
-        'to)'
-      'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
-      'left join tipo_proveedor tp on (p.id_tipo = tp.id_tipo)'
+        'cta_mov.importe, prov.apellido_y_nombre, cta_mov.id, cta_mov.con' +
+        'ciliado, cpto.nombre_concepto,'
+      
+        'cta_mov.fecha_mdc, mov.nro_orden,cta_mov.impreso,tp.descripcion ' +
+        'as TipoProv,'
+      
+        'cta_mov.id_medio, cta_mov.fecha_conciliado, mov.anulado, cta_mov' +
+        '.anulado, mov.nro_factura, mov.nro_recibo,mov.nro_orden_string,t' +
+        'p.descripcion'
+      'from ie_cuentas_movimientos cta_mov'
+      
+        'inner join ie_movimientos  mov on (cta_mov.nro_movimiento = mov.' +
+        'nro_movimiento)'
+      
+        'inner join ie_proveedores prov on (mov.nro_proveedor = prov.nro_' +
+        'proveedor)'
+      'inner join tipo_proveedor tp on (prov.id_tipo = tp.id_tipo)'
+      
+        'inner join ie_conceptos cpto on (mov.id_concepto = cpto.id_conce' +
+        'pto)'
       ''
-      'where cm.id_medio = 2 and cm.anulado is null')
+      'where (cta_mov.id_medio = 2) and (cta_mov.anulado is null)')
     SQL_Select.Strings = (
       
-        'select m.fecha, cm.fecha_mdc, cm.nro_cheque_transf, cm.importe, ' +
-        'cm.anulado, p.apellido_y_nombre, cm.impreso, cm.id,tp.descripcio' +
-        'n as TipoProv')
-    SQL_From.Strings = (
-      'from ie_cuentas_movimientos cm'
+        'select  mov.fecha, mov.nro_movimiento, cta_mov.nro_cheque_transf' +
+        ',mov.nro_cuenta,'
       
-        'left join ie_movimientos m on(cm.nro_movimiento = m.nro_movimien' +
-        'to)'
-      'left join ie_proveedores p on(m.nro_proveedor = p.nro_proveedor)'
-      'left join tipo_proveedor tp on (p.id_tipo = tp.id_tipo)'
+        'cta_mov.importe, prov.apellido_y_nombre, cta_mov.id, cta_mov.con' +
+        'ciliado, cpto.nombre_concepto,'
+      
+        'cta_mov.fecha_mdc, mov.nro_orden,cta_mov.impreso,tp.descripcion ' +
+        'as TipoProv,'
+      
+        'cta_mov.id_medio, cta_mov.fecha_conciliado, mov.anulado, cta_mov' +
+        '.anulado, mov.nro_factura, mov.nro_recibo,mov.nro_orden_string,t' +
+        'p.descripcion')
+    SQL_From.Strings = (
+      'from ie_cuentas_movimientos cta_mov'
+      
+        'inner join ie_movimientos  mov on (cta_mov.nro_movimiento = mov.' +
+        'nro_movimiento)'
+      
+        'inner join ie_proveedores prov on (mov.nro_proveedor = prov.nro_' +
+        'proveedor)'
+      'inner join tipo_proveedor tp on (prov.id_tipo = tp.id_tipo)'
+      
+        'inner join ie_conceptos cpto on (mov.id_concepto = cpto.id_conce' +
+        'pto)'
       '')
     SQL_Where.Strings = (
-      'where cm.id_medio = 2 and cm.anulado is null')
+      'where (cta_mov.id_medio = 2) and (cta_mov.anulado is null)')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 48
@@ -8543,6 +8660,12 @@ object FImpresionCheques: TFImpresionCheques
     object ClientZQ_movimientosnro_cheque: TStringField
       FieldName = 'nro_cheque'
       Size = 50
+    end
+    object ClientZQ_movimientosconcepto: TStringField
+      FieldName = 'concepto'
+    end
+    object ClientZQ_movimientosdenominacion: TStringField
+      FieldName = 'denominacion'
     end
   end
   object EKVistaPreviaQR2: TEKVistaPreviaQR

@@ -159,6 +159,7 @@ type
     QRDBText3: TQRDBText;
     QRDBText5: TQRDBText;
     ZQ_IE_ProveedoresTIPODOC: TStringField;
+    ZU_IE_Proveedores: TZUpdateSQL;
     procedure bt_salirClick(Sender: TObject);
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);

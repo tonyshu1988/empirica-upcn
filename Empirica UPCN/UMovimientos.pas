@@ -505,6 +505,9 @@ type
     QRExpr9: TQRExpr;
     QRExpr19: TQRExpr;
     QRLabel45: TQRLabel;
+    QRLabel47: TQRLabel;
+    QRExpr3: TQRExpr;
+    QRExpr4: TQRExpr;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -1029,6 +1032,7 @@ end;
 
 procedure TFMovimientos.btnFiltrarClick(Sender: TObject);
 begin
+
   if PFiltrosColumnas.Visible = false then
     PFiltrosColumnas.Visible:=true
   else
