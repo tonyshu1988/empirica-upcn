@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, QuickRpt, QRCtrls, Grids, DBGrids, ExtCtrls, jpeg,
   dxBar, dxBarExtItems, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKBusquedaAvanzada, EKNumeroATexto, EKVistaPreviaQR, DBClient, ZSqlUpdate,
-  ZStoredProcedure;
+  ZStoredProcedure, EKOrdenarGrilla;
 
 type
   TFImpresionCheques = class(TForm)
@@ -99,6 +99,7 @@ type
     ZQ_movimientosDESCRIPCION: TStringField;
     ClientZQ_movimientosconcepto: TStringField;
     ClientZQ_movimientosdenominacion: TStringField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure btnChequeCorrienteClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
