@@ -1,6 +1,6 @@
 object FImpresionCheques: TFImpresionCheques
-  Left = 124
-  Top = 223
+  Left = 269
+  Top = 175
   Width = 987
   Height = 720
   Caption = 'Impresion de Cheques'
@@ -139,7 +139,13 @@ object FImpresionCheques: TFImpresionCheques
         BorderStyle = sbsSunken
         Caption = 'Impreso'
         Color = 7471032
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         ParentColor = False
+        ParentFont = False
         TabOrder = 0
       end
     end
@@ -8758,5 +8764,12 @@ object FImpresionCheques: TFImpresionCheques
       ReadOnly = True
       Size = 207
     end
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridCheques
+    FuenteNormal = []
+    Ordenar = True
+    Left = 128
+    Top = 88
   end
 end
