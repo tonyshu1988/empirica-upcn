@@ -152,6 +152,10 @@ type
     QRShape10: TQRShape;
     QRLabel3: TQRLabel;
     ZSP_Conciliacionimporte: TFloatField;
+    QRDBText1: TQRDBText;
+    QRLabel1: TQRLabel;
+    QRShape12: TQRShape;
+    QRShapeV1: TQRShape;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
@@ -184,11 +188,11 @@ uses UDM;
 procedure TFConciliacion.FormCreate(Sender: TObject);
 begin
   aux_fecha:='';
-  EKOrdenarGrilla1.CargarConfigColunmas;
+ // EKOrdenarGrilla1.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_Cuentas);
   lblNombreCuenta.Caption:= '';
   lblSaldoExtracto.Caption:= '';
-  lblSaldoConciliacion.Caption:= '';  
+  lblSaldoConciliacion.Caption:= '';
   lblFHasta.Caption:= '';
   lblFechaConciliacion.Caption:= '';
   lblFechaExtracto.Caption:= '';
@@ -325,6 +329,7 @@ begin
 
   if StrLen(pchar(ZSP_ConciliacionPROVEEDOR.AsString)) > 40 then
   begin
+    QRShapeV1.Height:= 76;
     QRShapeV2.Height:= 76;
     QRShapeV3.Height:= 76;
     QRShapeV4.Height:= 76;
@@ -333,6 +338,7 @@ begin
   end
   else
   begin
+    QRShapeV1.Height:= 28;
     QRShapeV2.Height:= 28;
     QRShapeV3.Height:= 28;
     QRShapeV4.Height:= 28;
@@ -356,11 +362,10 @@ end;
 
 procedure TFConciliacion.ZSP_ConciliacionCalcFields(DataSet: TDataSet);
 begin
-if ZSP_ConciliacionDEBE.IsNull then
-  ZSP_Conciliacionimporte.AsFloat := ZSP_ConciliacionHABER.AsFloat
-else
-  ZSP_Conciliacionimporte.AsFloat := -ZSP_ConciliacionDEBE.AsFloat;
-
+  if ZSP_ConciliacionDEBE.IsNull then
+    ZSP_Conciliacionimporte.AsFloat := ZSP_ConciliacionHABER.AsFloat
+  else
+    ZSP_Conciliacionimporte.AsFloat := -ZSP_ConciliacionDEBE.AsFloat;
 end;
 
 end.
