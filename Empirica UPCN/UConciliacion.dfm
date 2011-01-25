@@ -23,8 +23,8 @@ object FConciliacion: TFConciliacion
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1093
-    Height = 529
+    Width = 1101
+    Height = 535
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -32,8 +32,8 @@ object FConciliacion: TFConciliacion
     object DBGridConciliacion: TDBGrid
       Left = 3
       Top = 56
-      Width = 1087
-      Height = 424
+      Width = 1095
+      Height = 430
       Align = alClient
       Color = 16772842
       DataSource = DS_Conciliacion
@@ -107,28 +107,23 @@ object FConciliacion: TFConciliacion
         end
         item
           Expanded = False
-          FieldName = 'HABER'
+          FieldName = 'importe'
           Title.Alignment = taCenter
           Title.Caption = 'Importe'
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Verdana'
-          Title.Font.Style = []
-          Width = 113
+          Width = 149
           Visible = True
         end>
     end
     object pDatos: TPanel
       Left = 3
       Top = 3
-      Width = 1087
+      Width = 1095
       Height = 53
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
       DesignSize = (
-        1087
+        1095
         53)
       object Shape1: TShape
         Left = 3
@@ -265,8 +260,8 @@ object FConciliacion: TFConciliacion
     end
     object Panel1: TPanel
       Left = 3
-      Top = 480
-      Width = 1087
+      Top = 486
+      Width = 1095
       Height = 46
       Align = alBottom
       BevelOuter = bvNone
@@ -400,8 +395,8 @@ object FConciliacion: TFConciliacion
     end
     object RepConciliacion: TQuickRep
       Tag = 99
-      Left = 49
-      Top = 236
+      Left = 89
+      Top = 76
       Width = 952
       Height = 1347
       Frame.Color = clBlack
@@ -471,7 +466,7 @@ object FConciliacion: TFConciliacion
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          359.392361111111100000
+          359.392361111111200000
           1898.385416666667000000)
         BandType = rbPageHeader
         object QRDBImage1: TQRDBImage
@@ -502,10 +497,10 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            637.204861111111100000
+            52.916666666666660000
+            637.204861111111000000
             158.750000000000000000
-            623.975694444444400000)
+            623.975694444444500000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -533,10 +528,10 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            639.409722222222200000
-            94.809027777777780000
-            617.361111111111100000)
+            52.916666666666660000
+            639.409722222222300000
+            94.809027777777790000
+            617.361111111111200000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -564,10 +559,10 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            549.010416666666700000
-            37.482638888888890000
-            798.159722222222200000)
+            52.916666666666660000
+            549.010416666666600000
+            37.482638888888900000
+            798.159722222222300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -629,12 +624,12 @@ object FConciliacion: TFConciliacion
             39.687500000000000000
             0.000000000000000000
             315.295138888888900000
-            531.371527777777800000)
+            531.371527777777900000)
           Alignment = taLeftJustify
           AlignToBand = True
           AutoSize = False
           AutoStretch = False
-          Caption = '  Cheques pendientes de cobro'
+          Caption = ' Pendientes'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -657,10 +652,10 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            637.204861111111100000
+            52.916666666666660000
+            637.204861111111000000
             233.715277777777800000
-            623.975694444444400000)
+            623.975694444444500000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -869,7 +864,7 @@ object FConciliacion: TFConciliacion
           AlignToBand = False
           AutoSize = False
           AutoStretch = True
-          Caption = 'Nro Cheque'
+          Caption = 'N'#176' Cheq/Trans'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -1005,7 +1000,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888890000
+            37.482638888888900000
             1684.513888888889000000
             0.000000000000000000
             103.628472222222200000)
@@ -1036,7 +1031,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888890000
+            37.482638888888900000
             1792.552083333333000000
             0.000000000000000000
             105.833333333333300000)
@@ -1071,7 +1066,7 @@ object FConciliacion: TFConciliacion
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          264.583333333333300000
+          264.583333333333400000
           1898.385416666667000000)
         BandType = rbSummary
         object QRShape10: TQRShape
@@ -1121,7 +1116,7 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            61.736111111111110000
+            61.736111111111100000
             0.000000000000000000
             141.111111111111100000
             1898.385416666667000000)
@@ -1448,10 +1443,10 @@ object FConciliacion: TFConciliacion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            33.513888888888890000
-            351.013888888888900000
-            1.763888888888889000
-            269.875000000000000000)
+            33.072916666666670000
+            350.572916666666700000
+            2.204861111111111000
+            268.993055555555600000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -1522,7 +1517,7 @@ object FConciliacion: TFConciliacion
           AutoStretch = False
           Color = clWhite
           DataSet = ZSP_Conciliacion
-          DataField = 'HABER'
+          DataField = 'importe'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -9
@@ -1570,7 +1565,7 @@ object FConciliacion: TFConciliacion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2175,6 +2170,7 @@ object FConciliacion: TFConciliacion
   end
   object ZSP_Conciliacion: TZStoredProc
     Connection = DM.Conexion
+    OnCalcFields = ZSP_ConciliacionCalcFields
     Params = <
       item
         DataType = ftInteger
@@ -2476,6 +2472,12 @@ object FConciliacion: TFConciliacion
       FieldName = 'TIPO_PROVEEDOR'
       Size = 50
     end
+    object ZSP_Conciliacionimporte: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'importe'
+      currency = True
+      Calculated = True
+    end
   end
   object DS_Conciliacion: TDataSource
     DataSet = ZSP_Conciliacion
@@ -2486,7 +2488,7 @@ object FConciliacion: TFConciliacion
     SumCollection = <
       item
         Operacion = goSum
-        NombreCampo = 'haber'
+        NombreCampo = 'importe'
       end>
     DataSet = ZSP_Conciliacion
     Left = 40

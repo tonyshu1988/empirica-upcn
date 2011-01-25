@@ -151,6 +151,7 @@ type
     QRShape4: TQRShape;
     QRShape10: TQRShape;
     QRLabel3: TQRLabel;
+    ZSP_Conciliacionimporte: TFloatField;
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     function validarcampos():boolean;
@@ -163,6 +164,7 @@ type
     procedure btnExcelClick(Sender: TObject);
     procedure RepConciliacionBeforePrint(Sender: TCustomQuickRep;
       var PrintReport: Boolean);
+    procedure ZSP_ConciliacionCalcFields(DataSet: TDataSet);
   private
 
   public
@@ -350,6 +352,15 @@ procedure TFConciliacion.RepConciliacionBeforePrint(
   Sender: TCustomQuickRep; var PrintReport: Boolean);
 begin
   aux_fecha:= '';
+end;
+
+procedure TFConciliacion.ZSP_ConciliacionCalcFields(DataSet: TDataSet);
+begin
+if ZSP_ConciliacionDEBE.IsNull then
+  ZSP_Conciliacionimporte.AsFloat := ZSP_ConciliacionHABER.AsFloat
+else
+  ZSP_Conciliacionimporte.AsFloat := -ZSP_ConciliacionDEBE.AsFloat;
+
 end;
 
 end.
