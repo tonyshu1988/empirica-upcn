@@ -215,7 +215,7 @@ function TEKNumeroALetras.NumeroATexto: String;
        if numero > 999 then begin
          if numero > 1999
          then Result:= Centenas(numero div 1000)+' mil '+Centenas(numero mod 1000)
-         else Result:= 'mil '+Centenas(numero mod 1000);
+         else Result:= 'un mil '+Centenas(numero mod 1000);
        end else
          Result:= Centenas(numero);
      end;
