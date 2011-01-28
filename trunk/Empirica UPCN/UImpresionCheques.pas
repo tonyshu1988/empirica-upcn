@@ -114,6 +114,10 @@ type
     procedure BtVistaPreviaDifClick(Sender: TObject);
     procedure BtVistaPreviaCorrClick(Sender: TObject);
     procedure ajustarMargenes();
+    procedure QRBandCorrienteBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBandDiferidoBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
     { Private declarations }
   public
@@ -224,27 +228,27 @@ procedure TFImpresionCheques.ClientZQ_movimientosAfterScroll(DataSet: TDataSet);
 var
   texto_numero: string;
 begin
-  EKNumeroALetras1.Numero := ClientZQ_movimientosImporte.AsFloat;
-  texto_numero:= UpperCase(EKNumeroALetras1.AsString)+'.--';
-
-  if tipocheque = 'CORRIENTE' then
-  BEGIN
-    QRLabelNumeroLetraCorriente1.Caption := '                          ' + texto_numero;
-    QRLabelDiaCheque.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_emision.AsDateTime);
-    QRLabelmesCheque.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_emision.AsDateTime);
-    QRLabelanioCheque.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_emision.AsDateTime);
-  END
-  ELSE //DIFERIDO
-  BEGIN
-    QRLabelNumeroLetraDiferido1.Caption := '                          ' + texto_numero;  
-    QRLabelDiaChequeDif.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_emision.AsDateTime);
-    QRLabelmesChequedif.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_emision.AsDateTime);
-    QRLabelanioChequedif.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_emision.AsDateTime);
-
-    QRLabeldiaPD.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_Pd.AsDateTime);
-    QRLabelmesPD.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_Pd.AsDateTime);
-    QRLabelanioPD.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_Pd.AsDateTime);
-  END;
+//  EKNumeroALetras1.Numero := ClientZQ_movimientosImporte.AsFloat;
+//  texto_numero:= UpperCase(EKNumeroALetras1.AsString)+'.--';
+//
+//  if tipocheque = 'CORRIENTE' then
+//  BEGIN
+//    QRLabelNumeroLetraCorriente1.Caption := '                          ' + texto_numero;
+//    QRLabelDiaCheque.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_emision.AsDateTime);
+//    QRLabelmesCheque.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_emision.AsDateTime);
+//    QRLabelanioCheque.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_emision.AsDateTime);
+//  END
+//  ELSE //DIFERIDO
+//  BEGIN
+//    QRLabelNumeroLetraDiferido1.Caption := '                          ' + texto_numero;
+//    QRLabelDiaChequeDif.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_emision.AsDateTime);
+//    QRLabelmesChequedif.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_emision.AsDateTime);
+//    QRLabelanioChequedif.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_emision.AsDateTime);
+//
+//    QRLabeldiaPD.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_Pd.AsDateTime);
+//    QRLabelmesPD.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_Pd.AsDateTime);
+//    QRLabelanioPD.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_Pd.AsDateTime);
+//  END;
 end;
 
 
@@ -418,6 +422,40 @@ begin
       QRBandDiferido.Controls[i].Left:= QRBandDiferido.Controls[i].Left + desplazarIzquierda;
     end;
   end;
+end;
+
+
+procedure TFImpresionCheques.QRBandCorrienteBeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+var
+  texto_numero: string;
+begin
+  EKNumeroALetras1.Numero := ClientZQ_movimientosImporte.AsFloat;
+  texto_numero:= UpperCase(EKNumeroALetras1.AsString)+'.--';
+
+  QRLabelNumeroLetraCorriente1.Caption := '                          ' + texto_numero;
+  QRLabelDiaCheque.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_emision.AsDateTime);
+  QRLabelmesCheque.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_emision.AsDateTime);
+  QRLabelanioCheque.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_emision.AsDateTime);
+end;
+
+
+procedure TFImpresionCheques.QRBandDiferidoBeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+var
+  texto_numero: string;
+begin
+  EKNumeroALetras1.Numero := ClientZQ_movimientosImporte.AsFloat;
+  texto_numero:= UpperCase(EKNumeroALetras1.AsString)+'.--';
+
+  QRLabelNumeroLetraDiferido1.Caption := '                          ' + texto_numero;
+  QRLabelDiaChequeDif.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_emision.AsDateTime);
+  QRLabelmesChequedif.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_emision.AsDateTime);
+  QRLabelanioChequedif.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_emision.AsDateTime);
+
+  QRLabeldiaPD.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_Pd.AsDateTime);
+  QRLabelmesPD.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_Pd.AsDateTime);
+  QRLabelanioPD.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_Pd.AsDateTime);
 end;
 
 end.

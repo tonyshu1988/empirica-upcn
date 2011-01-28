@@ -22,14 +22,14 @@ object FImpresionCheques: TFImpresionCheques
     Left = 0
     Top = 0
     Width = 971
-    Height = 634
+    Height = 630
     Align = alClient
     TabOrder = 0
     object DBGridCheques: TDBGrid
       Left = 1
       Top = 20
       Width = 969
-      Height = 613
+      Height = 609
       Align = alClient
       Color = 16772842
       DataSource = DS_movimientos
@@ -217,6 +217,7 @@ object FImpresionCheques: TFImpresionCheques
         Frame.DrawLeft = False
         Frame.DrawRight = False
         AlignToBottom = False
+        BeforePrint = QRBandCorrienteBeforePrint
         Color = clWhite
         ForceNewColumn = False
         ForceNewPage = False
@@ -4134,6 +4135,7 @@ object FImpresionCheques: TFImpresionCheques
         Frame.DrawLeft = False
         Frame.DrawRight = False
         AlignToBottom = False
+        BeforePrint = QRBandDiferidoBeforePrint
         Color = clWhite
         ForceNewColumn = False
         ForceNewPage = False
