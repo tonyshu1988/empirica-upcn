@@ -1,10 +1,10 @@
 object FAlta_OrdenPago: TFAlta_OrdenPago
-  Left = 309
-  Top = 169
+  Left = 341
+  Top = 133
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Alta Orden de Pago'
-  ClientHeight = 626
+  ClientHeight = 594
   ClientWidth = 795
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,7 +22,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Left = 0
     Top = 0
     Width = 795
-    Height = 574
+    Height = 542
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -45,7 +45,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       Left = 3
       Top = 249
       Width = 789
-      Height = 322
+      Height = 290
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
@@ -77,7 +77,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         Left = 1
         Top = 23
         Width = 789
-        Height = 259
+        Height = 227
         Align = alCustom
         Anchors = [akLeft, akTop, akRight, akBottom]
         Color = 16772842
@@ -187,7 +187,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Panel2: TPanel
         Left = 0
-        Top = 284
+        Top = 252
         Width = 789
         Height = 38
         Align = alBottom
@@ -515,7 +515,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -770,9 +770,9 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
         'r)'
       'left join tipo_proveedor t on (p.id_tipo = t.id_tipo)'
-      'where (p.baja <> '#39'S'#39')'
-      ' and (c.id_cuenta = :idCta)'
-      ' and (t.descripcion = :desc)'
+      'where (c.id_cuenta = :idCta)'
+      '  and (t.descripcion = :desc)'
+      '  and (p.baja <> '#39'S'#39')'
       'order by apellido_y_nombre')
     CampoBuscar = 'APELLIDO_Y_NOMBRE'
     CampoClave = 'nro_proveedor'
@@ -899,8 +899,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       
         'left join proveedor_concepto pc on (c.id_concepto = pc.id_concep' +
         'to)'
-      'where (c.baja <> '#39'S'#39')'
-      '  and (pc.id_proveedor = :idProveedor)'
+      'where (pc.id_proveedor = :idProveedor)'
+      '  and (c.baja <> '#39'S'#39')'
       'order by nombre_concepto')
     CampoBuscar = 'nombre_concepto'
     CampoClave = 'id_concepto'
@@ -1108,8 +1108,8 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       
         'left join proveedor_concepto pc on (c.id_concepto = pc.id_concep' +
         'to)'
-      'where (c.baja <> '#39'S'#39')'
-      '  and (pc.id_proveedor = :idProveedor)'
+      'where (pc.id_proveedor = :idProveedor)'
+      '  and (c.baja <> '#39'S'#39')'
       'order by nombre_concepto')
     Params = <
       item
@@ -1149,14 +1149,15 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Connection = DM.Conexion
     AfterScroll = ZQ_ProveedoresAfterScroll
     SQL.Strings = (
-      'select distinct p.*,tp.descripcion as TIPO_PROVEEDOR'
+      'select distinct p.*, tp.descripcion as TIPO_PROVEEDOR'
       'from ie_proveedores p'
       
         'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
         'r)'
       'left join tipo_proveedor tp on (tp.id_tipo=p.id_tipo)'
-      'where (p.baja <> '#39'S'#39')'
-      ' and (c.id_cuenta = :idCta) and (p.id_tipo = :tipo)'
+      'where (c.id_cuenta = :idCta)'
+      '  and ((p.id_tipo = :tipo) or (:tipo = -1))'
+      '  and (p.baja <> '#39'S'#39')'
       'order by apellido_y_nombre')
     Params = <
       item
@@ -1464,28 +1465,10 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     AfterScroll = ZQ_TipoProveedorAfterScroll
     SQL.Strings = (
       'select distinct tp.id_tipo, tp.descripcion as TIPO_PROVEEDOR'
-      'from tipo_proveedor tp'
-      'left join ie_proveedores p on (p.id_tipo=tp.id_tipo)'
-      
-        'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
-        'r)'
-      'where (p.baja <> '#39'S'#39')'
-      ' and (c.id_cuenta = :idCta)'
-      'order by apellido_y_nombre')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'idCta'
-        ParamType = ptUnknown
-      end>
+      'from tipo_proveedor tp')
+    Params = <>
     Left = 275
     Top = 43
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'idCta'
-        ParamType = ptUnknown
-      end>
     object ZQ_TipoProveedorID_TIPO: TIntegerField
       FieldName = 'ID_TIPO'
       Required = True
@@ -1565,7 +1548,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       'WHERE'
       '  ie_movimientos.NRO_MOVIMIENTO = :OLD_NRO_MOVIMIENTO')
     Left = 187
-    Top = 253
+    Top = 245
     ParamData = <
       item
         DataType = ftUnknown

@@ -201,6 +201,7 @@ type
     procedure ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
     procedure ZQ_Cuenta_MovimientoIMPORTEValidate(Sender: TField);
     procedure ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
+    procedure verConceptosProvedores(estado: string);
   private
     { Private declarations }
   public
@@ -287,8 +288,30 @@ begin
 end;
 
 
+procedure TFAlta_OrdenPago.verConceptosProvedores(estado: string);
+begin
+  if estado = 'ACTIVOS' then //muestros solo los prevedores y conceptos activos
+  begin
+    ZQ_Proveedores.SQL[6]:= 'and (p.baja <> ''S'')';
+    EKListado_Proveedores.SQL[6]:= 'and (p.baja <> ''S'')';
+
+    ZQ_Conceptos.SQL[4]:= 'and (c.baja <> ''S'')';
+    EKListado_Conceptos.SQL[4]:= 'and (c.baja <> ''S'')';
+  end
+  else //muestro todos los proveedores y conceptos
+  begin
+    ZQ_Proveedores.SQL[6]:= '';
+    EKListado_Proveedores.SQL[6]:= '';
+
+    ZQ_Conceptos.SQL[4]:= '';
+    EKListado_Conceptos.SQL[4]:= '';
+  end
+end;
+
+
 procedure TFAlta_OrdenPago.AltaOrdenPago();
 begin
+  verConceptosProvedores('ACTIVOS');
 
   FAlta_OrdenPago.Caption:= 'ALTA ORDEN DE PAGO';
   habilitar(True);
@@ -322,13 +345,13 @@ begin
 
     ZQ_MovimientosNRO_ORDEN.AsInteger:=ZQ_ConfiguracionNIVEL.AsInteger;
     ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNIVEL.AsInteger)]);
-
   end;
 end;
 
 
 procedure TFAlta_OrdenPago.VerOrdenPago(nroMovimiento: integer);
 begin
+  verConceptosProvedores('TODOS');
   habilitar(false);
   CargarDatos(nroMovimiento);
   ZQ_Cuenta_Movimiento.ReadOnly:= true;   //No permito la edicion de la orden de Pago
@@ -338,6 +361,7 @@ end;
 
 procedure TFAlta_OrdenPago.EditarOrdenPago(nroMovimiento: integer);
 begin
+  verConceptosProvedores('TODOS');
   habilitar(true);
   CargarDatos(nroMovimiento);
   ZQ_Cuenta_Movimiento.ReadOnly:=false;   //Permito la edicion de la orden de Pago
@@ -581,19 +605,11 @@ end;
 
 procedure TFAlta_OrdenPago.FormCreate(Sender: TObject);
 begin
-  dm.EKModelo.abrir(ZQ_TipoProveedor);
-  dm.EKModelo.abrir(ZQ_Conceptos);
   dm.EKModelo.abrir(ZQ_Cuentas);
   ZQ_Cuentas.Locate('id_cuenta',FMovimientos.ZQ_CuentasID_CUENTA.AsInteger,[]);
 
-  ZQ_TipoProveedor.Active:=false;
-  ZQ_TipoProveedor.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-  ZQ_TipoProveedor.Active:=true;
+  dm.EKModelo.abrir(ZQ_TipoProveedor);
 
-  ZQ_Proveedores.Active:=false;
-  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-  ZQ_Proveedores.Active:=true;
-  dm.EKModelo.abrir(ZQ_Proveedores);
   ZQ_Configuracion.Active:=false;
   ZQ_Configuracion.ParamByName('cta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
   ZQ_Configuracion.Active:=true;
@@ -678,18 +694,16 @@ begin
   end;
 end;
 
-
+//se ejecuta cuando se abre la pantalla
 procedure TFAlta_OrdenPago.ZQ_CuentasAfterScroll(DataSet: TDataSet);
 begin
-  ZQ_Proveedores.Active:=false;
-  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-  ZQ_Proveedores.Active:=true;
   ZQ_Configuracion.Active:=false;
   ZQ_Configuracion.ParamByName('cta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
   ZQ_Configuracion.Active:=true;
+  
   //Si lo permite verifico el ultimo nro de orden con la cuenta correspondiente
   if dm.EKModelo.verificar_transaccion(Transaccion_Movimientos) then
-     ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNIVEL.AsInteger)]);
+    ZQ_MovimientosNRO_ORDEN_STRING.AsString:=Format('%d-%s',[yearof(dbFechaEmision.Date)-2000, FormatCurr('0000', ZQ_ConfiguracionNIVEL.AsInteger)]);
 end;
 
 
@@ -703,19 +717,29 @@ end;
 
 procedure TFAlta_OrdenPago.DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
+  if ZQ_Proveedores.IsEmpty then
+  begin
+    ZQ_Proveedores.Active:=false;
+    ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
+    ZQ_Proveedores.Active:=true;
+  end;
+
   if key = 112 then
   begin
-      EKListado_Proveedores.SQL[5]:= ' and (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
-      if DBLUpCBoxTipo.Text <> '' then
-        EKListado_Proveedores.SQL[6]:= ' and (t.descripcion = '''+DBLUpCBoxTipo.Text+''')'
-      else
-        EKListado_Proveedores.SQL[6]:= '';
+    EKListado_Proveedores.SQL[4]:= ' where (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
+    if DBLUpCBoxTipo.Text <> '' then
+      EKListado_Proveedores.SQL[5]:= ' and (t.descripcion = '''+DBLUpCBoxTipo.Text+''')'
+    else
+      EKListado_Proveedores.SQL[5]:= '';
 
-      if EKListado_Proveedores.Buscar then
-      begin
-        ZQ_Movimientos.Edit;
-        ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
-      end;
+    if EKListado_Proveedores.Buscar then
+    begin
+      ZQ_Movimientos.Edit;
+      ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
+      ZQ_Proveedores.Locate('NRO_PROVEEDOR', StrToInt(EKListado_Proveedores.Resultado),[]);
+      ZQ_MovimientosID_TIPO.AsInteger := ZQ_ProveedoresID_TIPO.AsInteger;
+    end;
   end;
 end;
 
@@ -724,12 +748,12 @@ procedure TFAlta_OrdenPago.DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word
 begin
   if key = 112 then
   begin
-      EKListado_Conceptos.SQL[4]:= ' and (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
-      if EKListado_Conceptos.Buscar then
-      begin
-        ZQ_Movimientos.Edit;
-        ZQ_MovimientosID_CONCEPTO.AsInteger := StrToInt(EKListado_Conceptos.Resultado);
-      end;
+    EKListado_Conceptos.SQL[3]:= ' where (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
+    if EKListado_Conceptos.Buscar then
+    begin
+      ZQ_Movimientos.Edit;
+      ZQ_MovimientosID_CONCEPTO.AsInteger := StrToInt(EKListado_Conceptos.Resultado);
+    end;
   end;
 end;
 
@@ -738,15 +762,17 @@ procedure TFAlta_OrdenPago.ZQ_Cuenta_MovimientoIMPORTEValidate(
   Sender: TField);
 begin
   if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat  >  1000000000000.00) or
-      (ZQ_Cuenta_MovimientoIMPORTE.AsFloat < -1000000000000.00)
-   then
-      raise Exception.Create('Importe ingresado incorrecto, verifique');
+    (ZQ_Cuenta_MovimientoIMPORTE.AsFloat < -1000000000000.00)
+  then
+    raise Exception.Create('Importe ingresado incorrecto, verifique');
 end;
+
 
 procedure TFAlta_OrdenPago.ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
 begin
   ZQ_Proveedores.Active:=false;
-  ZQ_Proveedores.ParamByName('tipo').AsInteger:=ZQ_TipoProveedorID_TIPO.AsInteger;
+  ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Proveedores.ParamByName('tipo').AsInteger:= ZQ_TipoProveedorID_TIPO.AsInteger;
   ZQ_Proveedores.Active:=true;
 end;
 
