@@ -451,8 +451,6 @@ type
     EliminarMovimiento: TZStoredProc;
     DS_TipoProveedor: TDataSource;
     ZQ_TipoProveedor: TZQuery;
-    ZQ_TipoProveedorID_TIPO: TIntegerField;
-    ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField;
     UpdateMovimientos: TZUpdateSQL;
     ZQ_MovimientosID_TIPO: TIntegerField;
     ZQ_MovimientosDESCRIPCION: TStringField;
@@ -508,6 +506,16 @@ type
     QRLabel47: TQRLabel;
     QRExpr3: TQRExpr;
     QRExpr4: TQRExpr;
+    ZQ_MovimientosNOMBRE_CONCEPTO: TStringField;
+    ZQ_MovimientosAPELLIDO_Y_NOMBRE: TStringField;
+    ZQ_MovimientosDIRECCION: TStringField;
+    ZQ_MovimientosTIPO_DOCUMENTO: TStringField;
+    ZQ_MovimientosNRO_DOCUMENTO: TStringField;
+    ZQ_MovimientosTIPO_PROVEEDOR: TStringField;
+    ZQ_MovimientosTIPO_DOC: TStringField;
+    ZQ_TipoProveedorID_TIPO: TIntegerField;
+    ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField;
+    VerDetalle1: TMenuItem;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -582,6 +590,8 @@ type
     procedure ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
     procedure centrala(var p : TPanel);
     procedure btImprimirCaratulaClick(Sender: TObject);
+    procedure verConceptosProvedores(estado: string);
+    procedure VerDetalle1Click(Sender: TObject);
   private
     ventanaOrdenPago: TFAlta_OrdenPago;
   public
@@ -666,10 +676,8 @@ begin
     DBLCuenta.Enabled:=true;
   end;
 
-  dm.EKModelo.abrir(ZQ_TipoProveedor);
   //filtro el tipo proveedor segun la cuenta
   ZQ_TipoProveedor.Active:=false;
-  ZQ_TipoProveedor.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
   ZQ_TipoProveedor.Active:=true;
 
   btaplicar.Click;
@@ -699,14 +707,15 @@ end;
 
 procedure TFMovimientos.BtEgresosClick(Sender: TObject);
 begin
+  verConceptosProvedores('ACTIVOS');
+
   PEgresos.Visible:=true;
   DBGridLibroBanco.Enabled:=false;
   PParametrosLibroBanco.Enabled:=false;
 
-  //filtro el tipo proveedor segun la cuenta
-  ZQ_TipoProveedor.Active:=false;
-  ZQ_TipoProveedor.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-  ZQ_TipoProveedor.Active:=true;  
+//  //filtro el tipo proveedor segun la cuenta
+//  ZQ_TipoProveedor.Active:=false;
+//  ZQ_TipoProveedor.Active:=true;
 
   ZQ_Movimientos.Active := False;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := -1;
@@ -736,14 +745,15 @@ end;
 
 procedure TFMovimientos.BtIngresosClick(Sender: TObject);
 begin
+  verConceptosProvedores('ACTIVOS');
+
   PIngresos.Visible:=true;
   DBGridLibroBanco.Enabled:=false;
   PParametrosLibroBanco.Enabled:=false;
 
-  //filtro el tipo proveedor segun la cuenta
-  ZQ_TipoProveedor.Active:=false;
-  ZQ_TipoProveedor.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-  ZQ_TipoProveedor.Active:=true;  
+//  //filtro el tipo proveedor segun la cuenta
+//  ZQ_TipoProveedor.Active:=false;
+//  ZQ_TipoProveedor.Active:=true;
 
   ZQ_Movimientos.Active := False;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := -1;
@@ -879,6 +889,7 @@ begin
   end;
 end;
 
+
 procedure TFMovimientos.btaplicar2Click(Sender: TObject);
 begin
   //Tipo refresco...
@@ -931,6 +942,8 @@ begin
       end;
     2: //INGRESO
       begin
+       verConceptosProvedores('TODOS');
+
        ZQ_Cuenta_Movimiento.Close;
        ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger:= nroMov;
        ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
@@ -945,6 +958,8 @@ begin
       end;
     3: //EGRESO
       begin
+       verConceptosProvedores('TODOS');
+             
        ZQ_Cuenta_Movimiento.Close;
        ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger:= nroMov;
        ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
@@ -958,6 +973,27 @@ begin
        BtVerDetalle.Enabled:= true;
       end;
   end;
+end;
+
+
+procedure TFMovimientos.verConceptosProvedores(estado: string);
+begin
+  if estado = 'ACTIVOS' then //muestros solo los prevedores y conceptos activos
+  begin
+    ZQ_Proveedores.SQL[7]:= 'and (p.baja <> ''S'')';
+    EKListado_Proveedores.SQL[6]:= 'and (p.baja <> ''S'')';
+
+    ZQ_Conceptos.SQL[4]:= 'and (c.baja <> ''S'')';
+    EKListado_Conceptos.SQL[4]:= 'and (c.baja <> ''S'')';
+  end
+  else //muestro todos los proveedores y conceptos
+  begin
+    ZQ_Proveedores.SQL[7]:= '';
+    EKListado_Proveedores.SQL[6]:= '';
+
+    ZQ_Conceptos.SQL[4]:= '';
+    EKListado_Conceptos.SQL[4]:= '';
+  end
 end;
 
 
@@ -992,6 +1028,8 @@ begin
       end;
     2: //INGRESO
       begin
+        verConceptosProvedores('TODOS');
+
         ZQ_Cuenta_Movimiento.Close;
         ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := nroMov;
         ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
@@ -1010,6 +1048,8 @@ begin
       end;
     3: //EGRESO
       begin
+        verConceptosProvedores('TODOS');
+
         ZQ_Cuenta_Movimiento.Close;
         ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := nroMov;
         ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
@@ -1032,26 +1072,31 @@ end;
 
 procedure TFMovimientos.btnFiltrarClick(Sender: TObject);
 begin
-
   if PFiltrosColumnas.Visible = false then
     PFiltrosColumnas.Visible:=true
   else
     PFiltrosColumnas.Visible:=false;
 end;
 
+
 procedure TFMovimientos.centrala(var p : TPanel); //sirve para centrar el panel de parametro
- 	 begin
- 	       p.Left:= (self.Width - p.Width) div 2;   {Posicion X}
- 	       p.Top := (self.Height - p.Height) div 2; {Posicion Y}
- 	 end;
+begin
+  p.Left:= (self.Width - p.Width) div 2;   {Posicion X}
+  p.Top := (self.Height - p.Height) div 2; {Posicion Y}
+end;
+
 
 procedure TFMovimientos.ConciliarCheque();
 var
-fechaConc:TDate;
+  fechaConc:TDate;
 begin
+  ZQ_Movimientos.Close;
+  ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+  ZQ_Movimientos.Open;
+
   ZQ_Cuenta_Movimiento.Close;
   ZQ_Cuenta_Movimiento.ParamByName('NroMov').clear;
-  ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCOID_MOVIMIENTO.AsInteger;
+  ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
   ZQ_Cuenta_Movimiento.Open;
 
   if (ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0) then
@@ -1297,7 +1342,7 @@ begin
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
   ZQ_Movimientos.Open;
 
-
+  //si es una orden de pago de debito bancario imprimo todos los debitos del mes en curso
   if (ZQ_Cuenta_MovimientoID_MEDIO.AsInteger = 5) and (ZQ_Cuenta_MovimientoIMPORTE.AsFloat = 0) then
   begin
     ZQ_OrdenDebitoBancario.Close;
@@ -1328,7 +1373,6 @@ begin
     QrtImporteFPago.Caption := 'Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma1.SumCollection[0].sumvalue);
     qrtImporteTotal.Caption:=Format('%s',[FormatFloat('$ ###,###,###,##0.00', EKDbSuma1.SumCollection[0].sumvalue)]);
   end;
-
 
 
   cBoxImpresoras.Items.Clear;
@@ -1694,18 +1738,28 @@ end;
 procedure TFMovimientos.DBLookupCBoxEgreso_ProveedorKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
+  if ZQ_Proveedores.IsEmpty then
+  begin
+    ZQ_Proveedores.Active:=false;
+    ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
+    ZQ_Proveedores.Active:=true;
+  end;
+
   if key = 112 then
   begin
-      EKListado_Proveedores.SQL[5]:= ' and (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
+      EKListado_Proveedores.SQL[4]:= ' where (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
       if DBLUCBoxTipoProEgre.Text <> '' then
-        EKListado_Proveedores.SQL[6]:= ' and (t.descripcion = '''+DBLUCBoxTipoProEgre.Text+''')'
+        EKListado_Proveedores.SQL[5]:= ' and (t.descripcion = '''+DBLUCBoxTipoProEgre.Text+''')'
       else
-        EKListado_Proveedores.SQL[6]:= '';
+        EKListado_Proveedores.SQL[5]:= '';
 
       if EKListado_Proveedores.Buscar then
       begin
         ZQ_Movimientos.Edit;
         ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
+        ZQ_Proveedores.Locate('NRO_PROVEEDOR', StrToInt(EKListado_Proveedores.Resultado),[]);
+        ZQ_MovimientosID_TIPO.AsInteger := ZQ_ProveedoresID_TIPO.AsInteger;
       end;
   end;
 end;
@@ -1714,17 +1768,27 @@ end;
 procedure TFMovimientos.DBLookupCBoxIngreso_ProveedorKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
+  if ZQ_Proveedores.IsEmpty then
+  begin
+    ZQ_Proveedores.Active:=false;
+    ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
+    ZQ_Proveedores.Active:=true;
+  end;
+
   if key = 112 then
   begin
-      EKListado_Proveedores.SQL[5]:= ' and (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
+      EKListado_Proveedores.SQL[4]:= ' where (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
       if DBLUCBoxTipoProIng.Text <> '' then
-        EKListado_Proveedores.SQL[6]:= ' and (t.descripcion = '''+DBLUCBoxTipoProIng.Text+''')'
+        EKListado_Proveedores.SQL[5]:= ' and (t.descripcion = '''+DBLUCBoxTipoProIng.Text+''')'
       else
-        EKListado_Proveedores.SQL[6]:= '';
+        EKListado_Proveedores.SQL[5]:= '';
       if EKListado_Proveedores.Buscar then
       begin
         ZQ_Movimientos.Edit;
         ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
+        ZQ_Proveedores.Locate('NRO_PROVEEDOR', StrToInt(EKListado_Proveedores.Resultado),[]);
+        ZQ_MovimientosID_TIPO.AsInteger := ZQ_ProveedoresID_TIPO.AsInteger;        
       end;
   end;
 end;
@@ -1735,7 +1799,7 @@ procedure TFMovimientos.DBLookupCBoxEgreso_ConceptoKeyUp(Sender: TObject;
 begin
   if key = 112 then
   begin
-      EKListado_Conceptos.SQL[4]:= ' and (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
+      EKListado_Conceptos.SQL[3]:= ' where (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
       if EKListado_Conceptos.Buscar then
       begin
         ZQ_Movimientos.Edit;
@@ -1750,7 +1814,7 @@ procedure TFMovimientos.DBLookupCBoxIngreso_ConceptoKeyUp(Sender: TObject;
 begin
   if key = 112 then
   begin
-      EKListado_Conceptos.SQL[4]:= ' and (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
+      EKListado_Conceptos.SQL[3]:= ' where (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
       if EKListado_Conceptos.Buscar then
       begin
         ZQ_Movimientos.Edit;
@@ -1795,11 +1859,13 @@ begin
     ConciliarCheque;
 end;
 
+
 procedure TFMovimientos.AOrdenPagoExecute(Sender: TObject);
 begin
   if btnAltaOrdenPago.Enabled then
     btnAltaOrdenPago.Click;
 end;
+
 
 procedure TFMovimientos.AIngresoExecute(Sender: TObject);
 begin
@@ -1807,11 +1873,13 @@ begin
     BtIngresos.Click;
 end;
 
+
 procedure TFMovimientos.AEgresoExecute(Sender: TObject);
 begin
   if BtEgresos.Enabled then
     BtEgresos.Click;
 end;
+
 
 procedure TFMovimientos.AVerDetalleExecute(Sender: TObject);
 begin
@@ -1819,11 +1887,13 @@ begin
     BtVerDetalle.Click;
 end;
 
+
 procedure TFMovimientos.AGuardarExecute(Sender: TObject);
 begin
   if BtGuardar.Enabled then
     BtGuardar.Click;
 end;
+
 
 procedure TFMovimientos.ACancelarExecute(Sender: TObject);
 begin
@@ -1831,30 +1901,42 @@ begin
     BtCancelar.Click;
 end;
 
+
 procedure TFMovimientos.ConciliarMovimiento1Click(Sender: TObject);
 begin
   ConciliarCheque;
 end;
+
 
 procedure TFMovimientos.FormActivate(Sender: TObject);
 begin
 //  refrescarConsultas();
 end;
 
+
 procedure TFMovimientos.AnularOrden1Click(Sender: TObject);
 begin
   BtAnularOrden.Click;
 end;
+
 
 procedure TFMovimientos.Editar1Click(Sender: TObject);
 begin
   BtEditarMovimiento.Click;
 end;
 
+
+procedure TFMovimientos.VerDetalle1Click(Sender: TObject);
+begin
+  BtVerDetalle.Click;
+end;
+
+
 procedure TFMovimientos.AnularMovimiento1Click(Sender: TObject);
 begin
   BtAnularMov.Click;
 end;
+
 
 procedure TFMovimientos.btnEliminarMovClick(Sender: TObject);
 var
@@ -1899,48 +1981,54 @@ if LIBRO_BANCO.IsEmpty then
 //   if not DM.EKModelo.finalizar_transaccion('Eliminar Movimiento') then
 //     dm.EKModelo.cancelar_transaccion('Eliminar Movimiento');
 
-
    recNo:= LIBRO_BANCO.RecNo;
    btaplicar.Click;
    LIBRO_BANCO.RecNo:= recNo;
  end;
 end;
 
+
 procedure TFMovimientos.EliminarMovimiento1Click(Sender: TObject);
 begin
   btnEliminarMov.Click;
 end;
 
+
 procedure TFMovimientos.refrescarConsultas;
 begin
-
   ZQ_Conceptos.Active:=false;
   ZQ_Conceptos.Active:=true;
+
   ZQ_Proveedores.Active:=false;
   ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
   ZQ_Proveedores.Active:=true;
-  dm.EKModelo.abrir(ZQ_Proveedores);
-  ZQ_Cuentas.Active:=false;
-  ZQ_Cuentas.Active:=true;
+
+//  ZQ_Cuentas.Active:=false;
+//  ZQ_Cuentas.Active:=true;
+
   ZQ_Autoriza.Active:=false;
   ZQ_Autoriza.Active:=true;
-
 end;
+
 
 procedure TFMovimientos.DBLookupCBoxEgreso_MedioExit(Sender: TObject);
 begin
  cargarDatosporDefecto()
 end;
 
+
 procedure TFMovimientos.DBLookupCBoxIngreso_MedioExit(Sender: TObject);
 begin
   cargarDatosporDefecto()
 end;
 
+
 procedure TFMovimientos.DBLookupCBoxEgreso_CodigoExit(Sender: TObject);
 begin
   cargarDatosporDefecto()
 end;
+
 
 procedure TFMovimientos.DBLookupCBoxIngreso_CodigoExit(Sender: TObject);
 begin
@@ -1962,12 +2050,15 @@ begin
 //   end
 end;
 
+
 procedure TFMovimientos.ZQ_CuentasAfterScroll(DataSet: TDataSet);
 begin
   ZQ_Proveedores.Active:=false;
   ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
   ZQ_Proveedores.Active:=true;
 end;
+
 
 procedure TFMovimientos.btnImprimirSolicitudClick(Sender: TObject);
 begin
@@ -1983,6 +2074,7 @@ begin
   qrDatosNombreyFecha.Text:=Format(' %s - ',[Application.Title]);
   EKVistaPreviaSolicitud.VistaPrevia;
 end;
+
 
 procedure TFMovimientos.ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
 begin
@@ -2000,43 +2092,50 @@ begin
       lblIngDenom.Caption:=Format('%s:',[ZQ_ProveedoresTIPO_PROVEEDOR.AsString]);
       lblEgrDenom.Caption:=Format('%s:',[ZQ_ProveedoresTIPO_PROVEEDOR.AsString]);
     end;}
-
-
 end;
+
 
 procedure TFMovimientos.Button1Click(Sender: TObject);
 begin
-if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
-begin
- ZQ_Cuenta_Movimiento.edit;
- if BanderaConcialiar then
- begin
-   ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'S';
-   ZQ_Cuenta_MovimientoFECHA_CONCILIADO.AsDateTime := DTPFechaConciliar.Date;
- end
- else
- begin
-   ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
-   ZQ_Cuenta_MovimientoFECHA_CONCILIADO.Clear;
- end;
 
- if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
-   DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+  if DTPFechaConciliar.DateTime < ZQ_MovimientosFECHA.AsDateTime then
+  begin
+    Application.MessageBox('La Fcha de Conciliación es menor a la Fecha de Emisión, Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    exit;
+  end;
 
-  btaplicar.Click;
-  LIBRO_BANCO.Locate('ID_MOVIMIENTO',ZQ_Cuenta_MovimientoID.AsInteger,[]);
+  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
+  begin
+    ZQ_Cuenta_Movimiento.edit;
+    if BanderaConcialiar then
+    begin
+      ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'S';
+      ZQ_Cuenta_MovimientoFECHA_CONCILIADO.AsDateTime := DTPFechaConciliar.Date;
+    end
+    else
+    begin
+      ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
+      ZQ_Cuenta_MovimientoFECHA_CONCILIADO.Clear;
+    end;
 
-PanelConciliar.Visible:= false;
-end
+    if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+      DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+
+    btaplicar.Click;
+    LIBRO_BANCO.Locate('ID_MOVIMIENTO',ZQ_Cuenta_MovimientoID.AsInteger,[]);
+
+    PanelConciliar.Visible:= false;
+  end
 end;
+
 
 procedure TFMovimientos.Button2Click(Sender: TObject);
 begin
-PanelConciliar.Visible:= false;
+  PanelConciliar.Visible:= false;
 end;
 
-procedure TFMovimientos.ZQ_Cuenta_MovimientoIMPORTEValidate(
-  Sender: TField);
+
+procedure TFMovimientos.ZQ_Cuenta_MovimientoIMPORTEValidate(Sender: TField);
 begin
 //  if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat  >  1000000000000.00) or
 //      (ZQ_Cuenta_MovimientoIMPORTE.AsFloat < -1000000000000.00)
@@ -2044,17 +2143,20 @@ begin
 //      raise Exception.Create('Importe ingresado incorrecto, verifique');
 end;
 
+
 procedure TFMovimientos.ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
 begin
   //cargo los proveedores segun el tipo
   ZQ_Proveedores.Active:=false;
-  ZQ_Proveedores.ParamByName('tipo').AsInteger:=ZQ_TipoProveedorID_TIPO.AsInteger;
+  ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Proveedores.ParamByName('tipo').AsInteger:= ZQ_TipoProveedorID_TIPO.AsInteger;
   ZQ_Proveedores.Active:=true;
 end;
 
+
 procedure TFMovimientos.btImprimirCaratulaClick(Sender: TObject);
 begin
-if LIBRO_BANCO.IsEmpty then
+  if LIBRO_BANCO.IsEmpty then
     exit;
 
   qrDesde.Caption:= DateToStr(DTPFechaDesde.Date);
@@ -2064,5 +2166,7 @@ if LIBRO_BANCO.IsEmpty then
 
   EKVistaPreviaCaratulaOPs.VistaPrevia;
 end;
+
+
 
 end.
