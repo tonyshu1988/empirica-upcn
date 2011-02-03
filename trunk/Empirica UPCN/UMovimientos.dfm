@@ -6037,6 +6037,7 @@ object FMovimientos: TFMovimientos
         DataField = 'NRO_PROVEEDOR'
         DataSource = DS_Movimientos
         DropDownRows = 5
+        DropDownWidth = 400
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -6057,6 +6058,7 @@ object FMovimientos: TFMovimientos
         DataField = 'ID_CONCEPTO'
         DataSource = DS_Movimientos
         DropDownRows = 5
+        DropDownWidth = 400
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -6470,6 +6472,7 @@ object FMovimientos: TFMovimientos
         DataField = 'NRO_PROVEEDOR'
         DataSource = DS_Movimientos
         DropDownRows = 5
+        DropDownWidth = 400
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -6490,6 +6493,7 @@ object FMovimientos: TFMovimientos
         DataField = 'ID_CONCEPTO'
         DataSource = DS_Movimientos
         DropDownRows = 5
+        DropDownWidth = 400
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -7441,17 +7445,11 @@ object FMovimientos: TFMovimientos
     Connection = DM.Conexion
     AfterScroll = ZQ_ProveedoresAfterScroll
     SQL.Strings = (
-      
-        'select distinct p.*,tp.descripcion as TIPO_PROVEEDOR, td.descrip' +
-        'cion as TipoDoc'
+      'select distinct p.nro_proveedor, p.apellido_y_nombre, p.id_tipo'
       'from ie_proveedores p'
       
         'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
         'r)'
-      'left join tipo_proveedor tp on (tp.id_tipo=p.id_tipo)'
-      
-        'left join tipo_documento td on (td.tipo_documento=p.tipo_documen' +
-        'to)'
       'where (c.id_cuenta = :idCta)'
       '  and ((p.id_tipo = :tipo) or (:tipo = -1))'
       '  and (p.baja <> '#39'S'#39')'
@@ -7487,61 +7485,8 @@ object FMovimientos: TFMovimientos
       FieldName = 'APELLIDO_Y_NOMBRE'
       Size = 60
     end
-    object ZQ_ProveedoresNOMBRE_FANTASIA: TStringField
-      FieldName = 'NOMBRE_FANTASIA'
-      Size = 60
-    end
-    object ZQ_ProveedoresDIRECCION: TStringField
-      FieldName = 'DIRECCION'
-      Size = 150
-    end
-    object ZQ_ProveedoresTIPO_DOCUMENTO: TStringField
-      FieldName = 'TIPO_DOCUMENTO'
-      Size = 10
-    end
-    object ZQ_ProveedoresNRO_DOCUMENTO: TStringField
-      FieldName = 'NRO_DOCUMENTO'
-      Size = 30
-    end
-    object ZQ_ProveedoresTELEFONOS: TStringField
-      FieldName = 'TELEFONOS'
-      Size = 30
-    end
-    object ZQ_ProveedoresEMAIL: TStringField
-      FieldName = 'EMAIL'
-      Size = 60
-    end
-    object ZQ_ProveedoresBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_ProveedoresDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 1000
-    end
-    object ZQ_ProveedoresEDITABLE: TStringField
-      FieldName = 'EDITABLE'
-      Size = 1
-    end
-    object ZQ_ProveedoresID_CUENTA: TIntegerField
-      FieldName = 'ID_CUENTA'
-    end
     object ZQ_ProveedoresID_TIPO: TIntegerField
       FieldName = 'ID_TIPO'
-    end
-    object ZQ_ProveedoresID_TIPO_IVA: TIntegerField
-      FieldName = 'ID_TIPO_IVA'
-    end
-    object ZQ_ProveedoresID_TIPO_FACTURA: TIntegerField
-      FieldName = 'ID_TIPO_FACTURA'
-    end
-    object ZQ_ProveedoresTIPO_PROVEEDOR: TStringField
-      FieldName = 'TIPO_PROVEEDOR'
-      Size = 100
-    end
-    object ZQ_ProveedoresTIPODOC: TStringField
-      FieldName = 'TIPODOC'
-      Size = 50
     end
   end
   object ZQ_Conceptos: TZQuery
@@ -8619,6 +8564,7 @@ object FMovimientos: TFMovimientos
   object ZQ_TipoProveedor: TZQuery
     Connection = DM.Conexion
     AfterScroll = ZQ_TipoProveedorAfterScroll
+    ReadOnly = True
     SQL.Strings = (
       'select distinct tp.id_tipo, tp.descripcion as TIPO_PROVEEDOR'
       'from tipo_proveedor tp')

@@ -396,18 +396,6 @@ type
     QRLabel30: TQRLabel;
     ZQ_CuentasCOLOR_CONSILIADO: TStringField;
     QRShape19: TQRShape;
-    ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField;
-    ZQ_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
-    ZQ_ProveedoresNOMBRE_FANTASIA: TStringField;
-    ZQ_ProveedoresDIRECCION: TStringField;
-    ZQ_ProveedoresTIPO_DOCUMENTO: TStringField;
-    ZQ_ProveedoresNRO_DOCUMENTO: TStringField;
-    ZQ_ProveedoresTELEFONOS: TStringField;
-    ZQ_ProveedoresEMAIL: TStringField;
-    ZQ_ProveedoresBAJA: TStringField;
-    ZQ_ProveedoresDESCRIPCION: TStringField;
-    ZQ_ProveedoresEDITABLE: TStringField;
-    ZQ_ProveedoresID_CUENTA: TIntegerField;
     ZQ_ConceptosID_CONCEPTO: TIntegerField;
     ZQ_ConceptosCOD_CORTO: TStringField;
     ZQ_ConceptosNOMBRE_CONCEPTO: TStringField;
@@ -419,11 +407,7 @@ type
     LIBRO_BANCOORDEN_SALDO_ANTERIOR: TIntegerField;
     ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TStringField;
     ZQ_OrdenDebitoBancarioNRO_CHEQUE_TRANSF: TStringField;
-    ZQ_ProveedoresID_TIPO: TIntegerField;
-    ZQ_ProveedoresID_TIPO_IVA: TIntegerField;
-    ZQ_ProveedoresID_TIPO_FACTURA: TIntegerField;
     LIBRO_BANCOTIPO_PROVEEDOR: TStringField;
-    ZQ_ProveedoresTIPO_PROVEEDOR: TStringField;
     DBLUCBoxTipoProEgre: TDBLookupComboBox;
     DBLUCBoxTipoProIng: TDBLookupComboBox;
     Label1: TLabel;
@@ -437,7 +421,6 @@ type
     EKDbSumaLibroBanco: TEKDbSuma;
     QRLabel43: TQRLabel;
     QRDBText64: TQRDBText;
-    ZQ_ProveedoresTIPODOC: TStringField;
     CBTipo: TCheckBox;
     QRLabel32: TQRLabel;
     QRDBText22: TQRDBText;
@@ -516,6 +499,9 @@ type
     ZQ_TipoProveedorID_TIPO: TIntegerField;
     ZQ_TipoProveedorTIPO_PROVEEDOR: TStringField;
     VerDetalle1: TMenuItem;
+    ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField;
+    ZQ_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
+    ZQ_ProveedoresID_TIPO: TIntegerField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -980,7 +966,7 @@ procedure TFMovimientos.verConceptosProvedores(estado: string);
 begin
   if estado = 'ACTIVOS' then //muestros solo los prevedores y conceptos activos
   begin
-    ZQ_Proveedores.SQL[7]:= 'and (p.baja <> ''S'')';
+    ZQ_Proveedores.SQL[5]:= 'and (p.baja <> ''S'')';
     EKListado_Proveedores.SQL[6]:= 'and (p.baja <> ''S'')';
 
     ZQ_Conceptos.SQL[4]:= 'and (c.baja <> ''S'')';
@@ -988,7 +974,7 @@ begin
   end
   else //muestro todos los proveedores y conceptos
   begin
-    ZQ_Proveedores.SQL[7]:= '';
+    ZQ_Proveedores.SQL[5]:= '';
     EKListado_Proveedores.SQL[6]:= '';
 
     ZQ_Conceptos.SQL[4]:= '';
@@ -1738,29 +1724,35 @@ end;
 procedure TFMovimientos.DBLookupCBoxEgreso_ProveedorKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
-  if ZQ_Proveedores.IsEmpty then
-  begin
-    ZQ_Proveedores.Active:=false;
-    ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
-    ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
-    ZQ_Proveedores.Active:=true;
-  end;
-
   if key = 112 then
   begin
-      EKListado_Proveedores.SQL[4]:= ' where (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
-      if DBLUCBoxTipoProEgre.Text <> '' then
-        EKListado_Proveedores.SQL[5]:= ' and (t.descripcion = '''+DBLUCBoxTipoProEgre.Text+''')'
-      else
-        EKListado_Proveedores.SQL[5]:= '';
+    if ZQ_Proveedores.IsEmpty then
+    begin
+      ZQ_Proveedores.Active:=false;
+      ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+      ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
+      ZQ_Proveedores.Active:=true;
+    end;
 
-      if EKListado_Proveedores.Buscar then
-      begin
-        ZQ_Movimientos.Edit;
-        ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
-        ZQ_Proveedores.Locate('NRO_PROVEEDOR', StrToInt(EKListado_Proveedores.Resultado),[]);
-        ZQ_MovimientosID_TIPO.AsInteger := ZQ_ProveedoresID_TIPO.AsInteger;
-      end;
+    EKListado_Proveedores.SQL[4]:= ' where (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
+    if DBLUCBoxTipoProEgre.Text <> '' then
+    begin
+      EKListado_Proveedores.SQL[3]:= ' left join tipo_proveedor t on (p.id_tipo = t.id_tipo)';
+      EKListado_Proveedores.SQL[5]:= ' and (t.descripcion = '''+DBLUCBoxTipoProEgre.Text+''')';
+    end
+    else
+    begin
+      EKListado_Proveedores.SQL[3]:= '';
+      EKListado_Proveedores.SQL[5]:= '';
+    end;
+
+    if EKListado_Proveedores.Buscar then
+    begin
+      ZQ_Movimientos.Edit;
+      ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
+      ZQ_Proveedores.Locate('NRO_PROVEEDOR', StrToInt(EKListado_Proveedores.Resultado),[]);
+      ZQ_MovimientosID_TIPO.AsInteger := ZQ_ProveedoresID_TIPO.AsInteger;
+    end;
   end;
 end;
 
@@ -1768,28 +1760,35 @@ end;
 procedure TFMovimientos.DBLookupCBoxIngreso_ProveedorKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
-  if ZQ_Proveedores.IsEmpty then
-  begin
-    ZQ_Proveedores.Active:=false;
-    ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
-    ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
-    ZQ_Proveedores.Active:=true;
-  end;
-
   if key = 112 then
   begin
-      EKListado_Proveedores.SQL[4]:= ' where (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
-      if DBLUCBoxTipoProIng.Text <> '' then
-        EKListado_Proveedores.SQL[5]:= ' and (t.descripcion = '''+DBLUCBoxTipoProIng.Text+''')'
-      else
-        EKListado_Proveedores.SQL[5]:= '';
-      if EKListado_Proveedores.Buscar then
-      begin
-        ZQ_Movimientos.Edit;
-        ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
-        ZQ_Proveedores.Locate('NRO_PROVEEDOR', StrToInt(EKListado_Proveedores.Resultado),[]);
-        ZQ_MovimientosID_TIPO.AsInteger := ZQ_ProveedoresID_TIPO.AsInteger;        
-      end;
+    if ZQ_Proveedores.IsEmpty then
+    begin
+      ZQ_Proveedores.Active:=false;
+      ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+      ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
+      ZQ_Proveedores.Active:=true;
+    end;
+
+    EKListado_Proveedores.SQL[4]:= ' where (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
+    if DBLUCBoxTipoProIng.Text <> '' then
+    begin
+      EKListado_Proveedores.SQL[3]:= ' left join tipo_proveedor t on (p.id_tipo = t.id_tipo)';
+      EKListado_Proveedores.SQL[5]:= ' and (t.descripcion = '''+DBLUCBoxTipoProIng.Text+''')';
+    end
+    else
+    begin
+      EKListado_Proveedores.SQL[3]:= '';
+      EKListado_Proveedores.SQL[5]:= '';
+    end;
+
+    if EKListado_Proveedores.Buscar then
+    begin
+      ZQ_Movimientos.Edit;
+      ZQ_MovimientosNRO_PROVEEDOR.AsInteger := StrToInt(EKListado_Proveedores.Resultado);
+      ZQ_Proveedores.Locate('NRO_PROVEEDOR', StrToInt(EKListado_Proveedores.Resultado),[]);
+      ZQ_MovimientosID_TIPO.AsInteger := ZQ_ProveedoresID_TIPO.AsInteger;
+    end;
   end;
 end;
 

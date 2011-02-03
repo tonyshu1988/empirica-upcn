@@ -249,7 +249,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Label5: TLabel
         Left = 30
-        Top = 120
+        Top = 117
         Width = 59
         Height = 13
         Caption = 'Concepto:'
@@ -288,7 +288,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Label13: TLabel
         Left = 641
-        Top = 120
+        Top = 117
         Width = 124
         Height = 13
         Anchors = [akTop, akRight]
@@ -297,7 +297,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Label25: TLabel
         Left = 18
-        Top = 148
+        Top = 143
         Width = 71
         Height = 13
         Caption = 'Nro Factura:'
@@ -320,7 +320,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object Label26: TLabel
         Left = 22
-        Top = 172
+        Top = 168
         Width = 67
         Height = 13
         Caption = 'Nro Recibo:'
@@ -367,7 +367,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
         OnKeyUp = DBEditNroProveedorKeyUp
       end
       object DBMemoDescripcion: TDBMemo
-        Left = 91
+        Left = 92
         Top = 191
         Width = 662
         Height = 49
@@ -385,7 +385,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object DBLUpCBoxConcepto: TDBLookupComboBox
         Left = 168
-        Top = 116
+        Top = 113
         Width = 467
         Height = 21
         Anchors = [akLeft, akTop, akRight]
@@ -405,7 +405,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object DBEditNroFactura: TDBEdit
         Left = 92
-        Top = 144
+        Top = 139
         Width = 541
         Height = 21
         DataField = 'NRO_FACTURA'
@@ -420,7 +420,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object DBEditNroRecibo: TDBEdit
         Left = 92
-        Top = 168
+        Top = 164
         Width = 541
         Height = 21
         DataField = 'NRO_RECIBO'
@@ -472,7 +472,7 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end
       object DBLookupComboBox1: TDBLookupComboBox
         Left = 92
-        Top = 116
+        Top = 113
         Width = 75
         Height = 21
         Anchors = [akLeft, akTop, akRight]
@@ -1149,12 +1149,11 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
     Connection = DM.Conexion
     AfterScroll = ZQ_ProveedoresAfterScroll
     SQL.Strings = (
-      'select distinct p.*, tp.descripcion as TIPO_PROVEEDOR'
+      'select distinct p.nro_proveedor, p.apellido_y_nombre, p.id_tipo'
       'from ie_proveedores p'
       
         'left join proveedor_cuenta c on (p.nro_proveedor = c.id_proveedo' +
         'r)'
-      'left join tipo_proveedor tp on (tp.id_tipo=p.id_tipo)'
       'where (c.id_cuenta = :idCta)'
       '  and ((p.id_tipo = :tipo) or (:tipo = -1))'
       '  and (p.baja <> '#39'S'#39')'
@@ -1185,63 +1184,13 @@ object FAlta_OrdenPago: TFAlta_OrdenPago
       end>
     object ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField
       FieldName = 'NRO_PROVEEDOR'
-      Required = True
     end
     object ZQ_ProveedoresAPELLIDO_Y_NOMBRE: TStringField
       FieldName = 'APELLIDO_Y_NOMBRE'
       Size = 60
     end
-    object ZQ_ProveedoresNOMBRE_FANTASIA: TStringField
-      FieldName = 'NOMBRE_FANTASIA'
-      Size = 60
-    end
-    object ZQ_ProveedoresDIRECCION: TStringField
-      FieldName = 'DIRECCION'
-      Size = 150
-    end
-    object ZQ_ProveedoresTIPO_DOCUMENTO: TStringField
-      FieldName = 'TIPO_DOCUMENTO'
-      Size = 10
-    end
-    object ZQ_ProveedoresNRO_DOCUMENTO: TStringField
-      FieldName = 'NRO_DOCUMENTO'
-      Size = 30
-    end
-    object ZQ_ProveedoresTELEFONOS: TStringField
-      FieldName = 'TELEFONOS'
-      Size = 30
-    end
-    object ZQ_ProveedoresEMAIL: TStringField
-      FieldName = 'EMAIL'
-      Size = 60
-    end
-    object ZQ_ProveedoresBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_ProveedoresDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 1000
-    end
-    object ZQ_ProveedoresEDITABLE: TStringField
-      FieldName = 'EDITABLE'
-      Size = 1
-    end
-    object ZQ_ProveedoresID_CUENTA: TIntegerField
-      FieldName = 'ID_CUENTA'
-    end
     object ZQ_ProveedoresID_TIPO: TIntegerField
       FieldName = 'ID_TIPO'
-    end
-    object ZQ_ProveedoresID_TIPO_IVA: TIntegerField
-      FieldName = 'ID_TIPO_IVA'
-    end
-    object ZQ_ProveedoresID_TIPO_FACTURA: TIntegerField
-      FieldName = 'ID_TIPO_FACTURA'
-    end
-    object ZQ_ProveedoresTIPO_PROVEEDOR: TStringField
-      FieldName = 'TIPO_PROVEEDOR'
-      Size = 100
     end
   end
   object DS_Proveedores: TDataSource

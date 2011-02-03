@@ -107,15 +107,6 @@ type
     ZQ_ConceptosBAJA: TStringField;
     ZQ_ConceptosIMPORTE: TFloatField;
     ZQ_Proveedores: TZQuery;
-    ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField;
-    ZQ_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
-    ZQ_ProveedoresNOMBRE_FANTASIA: TStringField;
-    ZQ_ProveedoresDIRECCION: TStringField;
-    ZQ_ProveedoresTIPO_DOCUMENTO: TStringField;
-    ZQ_ProveedoresNRO_DOCUMENTO: TStringField;
-    ZQ_ProveedoresTELEFONOS: TStringField;
-    ZQ_ProveedoresEMAIL: TStringField;
-    ZQ_ProveedoresBAJA: TStringField;
     DS_Proveedores: TDataSource;
     DS_Conceptos: TDataSource;
     Nro_Moviemiento: TZStoredProc;
@@ -129,9 +120,6 @@ type
     ChequesPorOrden: TClientDataSet;
     ChequesPorOrdennroCheque: TStringField;
     ChequesPorOrdenestado: TStringField;
-    ZQ_ProveedoresDESCRIPCION: TStringField;
-    ZQ_ProveedoresEDITABLE: TStringField;
-    ZQ_ProveedoresID_CUENTA: TIntegerField;
     DBLookupComboBox1: TDBLookupComboBox;
     ZSP_NRO_ORDEN_SIGUIENTE: TZStoredProc;
     ZSP_NRO_ORDEN_SIGUIENTENRO_ORDEN_STRING: TStringField;
@@ -152,10 +140,6 @@ type
     ZSP_EXISTE_CHEQUEEXISTE: TStringField;
     ZQ_Cuenta_MovimientoNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Cuenta_MovimientoIMPRESO: TStringField;
-    ZQ_ProveedoresID_TIPO: TIntegerField;
-    ZQ_ProveedoresID_TIPO_IVA: TIntegerField;
-    ZQ_ProveedoresID_TIPO_FACTURA: TIntegerField;
-    ZQ_ProveedoresTIPO_PROVEEDOR: TStringField;
     DBLUpCBoxTipo: TDBLookupComboBox;
     Label2: TLabel;
     ZQ_MovimientosNRO_CUENTA: TIntegerField;
@@ -169,6 +153,9 @@ type
     ZQ_MovimientosID_TIPO: TIntegerField;
     ZQ_MovimientosDESCRIPCION: TStringField;
     ZQ_MovimientosNRO_FACTURA: TStringField;
+    ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField;
+    ZQ_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
+    ZQ_ProveedoresID_TIPO: TIntegerField;
     procedure DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEditNroConceptoKeyUp(Sender: TObject; var Key: Word;
@@ -292,7 +279,7 @@ procedure TFAlta_OrdenPago.verConceptosProvedores(estado: string);
 begin
   if estado = 'ACTIVOS' then //muestros solo los prevedores y conceptos activos
   begin
-    ZQ_Proveedores.SQL[6]:= 'and (p.baja <> ''S'')';
+    ZQ_Proveedores.SQL[5]:= 'and (p.baja <> ''S'')';
     EKListado_Proveedores.SQL[6]:= 'and (p.baja <> ''S'')';
 
     ZQ_Conceptos.SQL[4]:= 'and (c.baja <> ''S'')';
@@ -300,7 +287,7 @@ begin
   end
   else //muestro todos los proveedores y conceptos
   begin
-    ZQ_Proveedores.SQL[6]:= '';
+    ZQ_Proveedores.SQL[5]:= '';
     EKListado_Proveedores.SQL[6]:= '';
 
     ZQ_Conceptos.SQL[4]:= '';
@@ -317,14 +304,15 @@ begin
   habilitar(True);
 
   ZQ_Movimientos.Close;
-  ZQ_Cuenta_Movimiento.Close;
-
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := -1;
-  ZQ_Movimientos.Open;
+  ZQ_Movimientos.open;
+//  dm.EKModelo.abrir(ZQ_Movimientos);
 
+  ZQ_Cuenta_Movimiento.Close;
   ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger :=-1;
   ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
-  ZQ_Cuenta_Movimiento.Open;
+  ZQ_Cuenta_Movimiento.open;
+//  dm.EKModelo.abrir(ZQ_Cuenta_Movimiento);
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento,ZQ_Configuracion]) then
   begin
@@ -717,21 +705,27 @@ end;
 
 procedure TFAlta_OrdenPago.DBEditNroProveedorKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if ZQ_Proveedores.IsEmpty then
-  begin
-    ZQ_Proveedores.Active:=false;
-    ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
-    ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
-    ZQ_Proveedores.Active:=true;
-  end;
-
   if key = 112 then
   begin
+    if ZQ_Proveedores.IsEmpty then
+    begin
+      ZQ_Proveedores.Active:=false;
+      ZQ_Proveedores.ParamByName('idCta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+      ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
+      ZQ_Proveedores.Active:=true;
+    end;
+
     EKListado_Proveedores.SQL[4]:= ' where (c.id_cuenta = '+ZQ_CuentasID_CUENTA.AsString+')';
     if DBLUpCBoxTipo.Text <> '' then
-      EKListado_Proveedores.SQL[5]:= ' and (t.descripcion = '''+DBLUpCBoxTipo.Text+''')'
+    begin
+      EKListado_Proveedores.SQL[3]:= ' left join tipo_proveedor t on (p.id_tipo = t.id_tipo)';
+      EKListado_Proveedores.SQL[5]:= ' and (t.descripcion = '''+DBLUpCBoxTipo.Text+''')';
+    end
     else
+    begin
+      EKListado_Proveedores.SQL[3]:= '';
       EKListado_Proveedores.SQL[5]:= '';
+    end;
 
     if EKListado_Proveedores.Buscar then
     begin
