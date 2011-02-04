@@ -6179,7 +6179,7 @@ object FMovimientos: TFMovimientos
         ListSource = DS_TipoProveedor
         ParentFont = False
         TabOrder = 6
-        OnKeyUp = DBLookupCBoxEgreso_ProveedorKeyUp
+        OnKeyUp = DBLookupCBoxIngreso_ProveedorKeyUp
       end
     end
     object DBGridLibroBanco: TDBGrid
@@ -7307,7 +7307,6 @@ object FMovimientos: TFMovimientos
     object ZQ_Cuenta_MovimientoIMPORTE: TFloatField
       DisplayWidth = 17
       FieldName = 'IMPORTE'
-      OnValidate = ZQ_Cuenta_MovimientoIMPORTEValidate
       currency = True
     end
     object ZQ_Cuenta_MovimientoCONCILIADO: TStringField
@@ -7375,7 +7374,6 @@ object FMovimientos: TFMovimientos
   end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
-    AfterScroll = ZQ_CuentasAfterScroll
     SQL.Strings = (
       
         'select c.*, c.nombre_cuenta||'#39' - '#39'|| coalesce ('#39'N'#176': '#39' || c.nro_c' +
