@@ -520,13 +520,13 @@ begin
       result:=false;
       exit;
     end;
+
   if (MidStr(dbNroOrden.Text,3,1)<>'-') then
     begin
       Application.MessageBox('El formato es 00-0000.','Nº Orden de Pago',MB_OK+MB_ICONINFORMATION);
       result:=false;
       exit;
     end;
-
 end;
 
 
