@@ -567,12 +567,10 @@ type
     procedure DBLookupCBoxEgreso_CodigoExit(Sender: TObject);
     procedure DBLookupCBoxIngreso_CodigoExit(Sender: TObject);
     procedure cargarDatosporDefecto();
-    procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
     procedure btnImprimirSolicitudClick(Sender: TObject);
     procedure ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure ZQ_Cuenta_MovimientoIMPORTEValidate(Sender: TField);
     procedure ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
     procedure centrala(var p : TPanel);
     procedure btImprimirCaratulaClick(Sender: TObject);
@@ -699,10 +697,6 @@ begin
   DBGridLibroBanco.Enabled:=false;
   PParametrosLibroBanco.Enabled:=false;
 
-//  //filtro el tipo proveedor segun la cuenta
-//  ZQ_TipoProveedor.Active:=false;
-//  ZQ_TipoProveedor.Active:=true;
-
   ZQ_Movimientos.Active := False;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := -1;
 
@@ -736,10 +730,6 @@ begin
   PIngresos.Visible:=true;
   DBGridLibroBanco.Enabled:=false;
   PParametrosLibroBanco.Enabled:=false;
-
-//  //filtro el tipo proveedor segun la cuenta
-//  ZQ_TipoProveedor.Active:=false;
-//  ZQ_TipoProveedor.Active:=true;
 
   ZQ_Movimientos.Active := False;
   ZQ_Movimientos.ParamByName('NroMov').AsInteger := -1;
@@ -928,35 +918,37 @@ begin
       end;
     2: //INGRESO
       begin
-       verConceptosProvedores('TODOS');
-
-       ZQ_Cuenta_Movimiento.Close;
-       ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger:= nroMov;
-       ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
-       ZQ_Cuenta_Movimiento.Open;
-
        PParametrosLibroBanco.Enabled:= not PParametrosLibroBanco.Enabled;
        DBGridLibroBanco.Enabled:= not DBGridLibroBanco.Enabled;
        PIngresos.Visible:= not PIngresos.Visible;
        PIngresos.Enabled:= not PIngresos.Enabled;
        GrupoEditando.Enabled := not GrupoEditando.Enabled;
        BtVerDetalle.Enabled:= true;
-      end;
-    3: //EGRESO
-      begin
-       verConceptosProvedores('TODOS');
-             
+
+       if PIngresos.Visible then
+          verConceptosProvedores('TODOS');
+
        ZQ_Cuenta_Movimiento.Close;
        ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger:= nroMov;
        ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
        ZQ_Cuenta_Movimiento.Open;
-
+      end;
+    3: //EGRESO
+      begin
        PParametrosLibroBanco.Enabled:= not PParametrosLibroBanco.Enabled;
        DBGridLibroBanco.Enabled:= not DBGridLibroBanco.Enabled;
        PEgresos.Visible:= not PEgresos.Visible;
        PEgresos.Enabled:= not PEgresos.Enabled;
        GrupoEditando.Enabled := not GrupoEditando.Enabled;
        BtVerDetalle.Enabled:= true;
+
+       if PEgresos.Visible then
+          verConceptosProvedores('TODOS');
+
+       ZQ_Cuenta_Movimiento.Close;
+       ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger:= nroMov;
+       ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
+       ZQ_Cuenta_Movimiento.Open;
       end;
   end;
 end;
@@ -979,7 +971,12 @@ begin
 
     ZQ_Conceptos.SQL[4]:= '';
     EKListado_Conceptos.SQL[4]:= '';
-  end
+  end;
+
+  ZQ_Proveedores.Active:=false;
+  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
+  ZQ_Proveedores.Active:=true;
 end;
 
 
@@ -1014,13 +1011,6 @@ begin
       end;
     2: //INGRESO
       begin
-        verConceptosProvedores('TODOS');
-
-        ZQ_Cuenta_Movimiento.Close;
-        ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := nroMov;
-        ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
-        ZQ_Cuenta_Movimiento.Open;
-
         if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
         begin
          PParametrosLibroBanco.Enabled:= false;
@@ -1028,19 +1018,20 @@ begin
          PIngresos.Visible:= true;
          GrupoEditando.Enabled := false;
          GrupoGuardarCancelar.Enabled := true;
+
+         verConceptosProvedores('TODOS');
+
+         ZQ_Cuenta_Movimiento.Close;
+         ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := nroMov;
+         ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
+         ZQ_Cuenta_Movimiento.Open;
+
          ZQ_Movimientos.Edit;
          ZQ_Cuenta_Movimiento.Edit;
         end;
       end;
     3: //EGRESO
       begin
-        verConceptosProvedores('TODOS');
-
-        ZQ_Cuenta_Movimiento.Close;
-        ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := nroMov;
-        ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
-        ZQ_Cuenta_Movimiento.Open;
-
         if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
         begin
          PParametrosLibroBanco.Enabled:= false;
@@ -1048,6 +1039,14 @@ begin
          PEgresos.Visible:= true;
          GrupoEditando.Enabled := false;
          GrupoGuardarCancelar.Enabled := true;
+
+         verConceptosProvedores('TODOS');
+
+         ZQ_Cuenta_Movimiento.Close;
+         ZQ_Cuenta_Movimiento.ParamByName('NroMov').AsInteger := nroMov;
+         ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').clear;
+         ZQ_Cuenta_Movimiento.Open;
+
          ZQ_Movimientos.Edit;
          ZQ_Cuenta_Movimiento.Edit;
         end;
@@ -1724,6 +1723,7 @@ end;
 procedure TFMovimientos.DBLookupCBoxEgreso_ProveedorKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
+//EGRESO
   if key = 112 then
   begin
     if ZQ_Proveedores.IsEmpty then
@@ -1760,6 +1760,7 @@ end;
 procedure TFMovimientos.DBLookupCBoxIngreso_ProveedorKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
+//INGRESO
   if key = 112 then
   begin
     if ZQ_Proveedores.IsEmpty then
@@ -1796,6 +1797,7 @@ end;
 procedure TFMovimientos.DBLookupCBoxEgreso_ConceptoKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
+//EGRESO
   if key = 112 then
   begin
       EKListado_Conceptos.SQL[3]:= ' where (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
@@ -1811,6 +1813,7 @@ end;
 procedure TFMovimientos.DBLookupCBoxIngreso_ConceptoKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
+//INGRESO
   if key = 112 then
   begin
       EKListado_Conceptos.SQL[3]:= ' where (pc.id_proveedor = '+ZQ_ProveedoresNRO_PROVEEDOR.AsString+')';
@@ -1998,11 +2001,6 @@ begin
   ZQ_Conceptos.Active:=false;
   ZQ_Conceptos.Active:=true;
 
-  ZQ_Proveedores.Active:=false;
-  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-  ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
-  ZQ_Proveedores.Active:=true;
-
 //  ZQ_Cuentas.Active:=false;
 //  ZQ_Cuentas.Active:=true;
 
@@ -2050,15 +2048,6 @@ begin
 end;
 
 
-procedure TFMovimientos.ZQ_CuentasAfterScroll(DataSet: TDataSet);
-begin
-  ZQ_Proveedores.Active:=false;
-  ZQ_Proveedores.ParamByName('idCta').AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-  ZQ_Proveedores.ParamByName('tipo').AsInteger:= -1;
-  ZQ_Proveedores.Active:=true;
-end;
-
-
 procedure TFMovimientos.btnImprimirSolicitudClick(Sender: TObject);
 begin
   ZQ_Cuenta_Movimiento.Close;
@@ -2080,17 +2069,6 @@ begin
   ZQ_Conceptos.Active:=false;
   ZQ_Conceptos.ParamByName('idProveedor').AsInteger:= ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
   ZQ_Conceptos.Active:=true;
-
-  {if ZQ_ProveedoresTIPO_PROVEEDOR.IsNull then
-    begin
-        lblIngDenom.Caption:='Denominación:';
-        lblEgrDenom.Caption:='Denominación:';
-    end
-  else
-    begin
-      lblIngDenom.Caption:=Format('%s:',[ZQ_ProveedoresTIPO_PROVEEDOR.AsString]);
-      lblEgrDenom.Caption:=Format('%s:',[ZQ_ProveedoresTIPO_PROVEEDOR.AsString]);
-    end;}
 end;
 
 
@@ -2131,15 +2109,6 @@ end;
 procedure TFMovimientos.Button2Click(Sender: TObject);
 begin
   PanelConciliar.Visible:= false;
-end;
-
-
-procedure TFMovimientos.ZQ_Cuenta_MovimientoIMPORTEValidate(Sender: TField);
-begin
-//  if (ZQ_Cuenta_MovimientoIMPORTE.AsFloat  >  1000000000000.00) or
-//      (ZQ_Cuenta_MovimientoIMPORTE.AsFloat < -1000000000000.00)
-//   then
-//      raise Exception.Create('Importe ingresado incorrecto, verifique');
 end;
 
 
