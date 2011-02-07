@@ -1081,7 +1081,7 @@ begin
 
   ZQ_Cuenta_Movimiento.Close;
   ZQ_Cuenta_Movimiento.ParamByName('NroMov').clear;
-  ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCONRO_PAGO_REC.AsInteger;
+  ZQ_Cuenta_Movimiento.ParamByName('IDCtaMov').AsInteger := LIBRO_BANCOID_MOVIMIENTO.AsInteger;
   ZQ_Cuenta_Movimiento.Open;
 
   if (ZQ_Cuenta_MovimientoNRO_MOVIMIENTO.AsInteger = 0) then
@@ -2077,7 +2077,7 @@ begin
 
   if DTPFechaConciliar.DateTime < ZQ_MovimientosFECHA.AsDateTime then
   begin
-    Application.MessageBox('La Fcha de Conciliación es menor a la Fecha de Emisión, Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('La Fecha de Conciliación es menor a la Fecha de Emisión, Verifique','Validación',MB_OK+MB_ICONINFORMATION);
     exit;
   end;
 
