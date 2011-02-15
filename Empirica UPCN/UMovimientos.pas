@@ -584,7 +584,6 @@ type
 
 var
   FMovimientos: TFMovimientos;
-  CuentaNro : integer;
   BanderaIngresoEgreso : integer; //Si es 1 es ingreso si es 0 es egreso
   BanderaConcialiar : boolean; //Si es true, se concilia el movimiento, False No se concilia el Movimiento
 const
@@ -640,11 +639,6 @@ begin
   DTPFechaHasta.Date:= EndOfTheMonth(DM.EKModelo.Fecha);
   EKLlenarCuentas.CargarCombo;
   EKLlenarCBAutoriza.CargarCombo;
-
-  if dm.EKUsrLogin1.PermisoAccionValor('ACCESO') = '' then
-    CuentaNro:= 0
-  else
-    CuentaNro:= StrToInt(dm.EKUsrLogin1.PermisoAccionValor('ACCESO'));
 
   if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
   begin
