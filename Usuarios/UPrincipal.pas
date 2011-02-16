@@ -192,7 +192,7 @@ begin
       EKOrdenarPermisos.CargarConfigColunmas;
       EKOrdenarUsuarios.CargarConfigColunmas;
       EKOrdenarGrupos.CargarConfigColunmas;
-  Finally
+  Except
     begin
       ShowMessage('El usuario no tiene permisos para ingresar al sistema');
       Application.Terminate;
