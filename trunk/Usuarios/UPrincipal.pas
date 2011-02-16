@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, EKLlenarCombo, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, Grids, DBGrids, Provider,
-  DBClient, EKUsrPermisos, IBServices, StrUtils;
+  DBClient, EKUsrPermisos, IBServices, StrUtils, EKOrdenarGrilla;
 
 type
   TFPrincipal = class(TForm)
@@ -60,7 +60,6 @@ type
     DSGurposP: TDataSource;
     GruposPGRUPO: TStringField;
     GruposPNOMBRE: TStringField;
-    GruposPUSUARIO: TStringField;
     panelMedioDerecha: TPanel;
     panelMedioIzquierda: TPanel;
     panelMedioIzquierdaTop: TPanel;
@@ -104,6 +103,11 @@ type
     PermisosVALOR: TStringField;
     PermisosUSUARIO: TStringField;
     PermisosDESCRIPCION: TBlobField;
+    Button1: TButton;
+    GruposPUSUARIO: TStringField;
+    EKOrdenarPermisos: TEKOrdenarGrilla;
+    EKOrdenarUsuarios: TEKOrdenarGrilla;
+    EKOrdenarGrupos: TEKOrdenarGrilla;
     procedure EKLlenarAplicacionCambio(valor: String);
     procedure FormCreate(Sender: TObject);
     procedure DBGridUsuariosDrawColumnCell(Sender: TObject;
@@ -134,9 +138,12 @@ type
     procedure DBGridGruposDblClick(Sender: TObject);
     procedure btnTodosClick(Sender: TObject);
     procedure btnNingunoClick(Sender: TObject);
-    procedure RadioGroupUsuariosClick(Sender: TObject);
     procedure btnAbmPermisosClick(Sender: TObject);
     procedure btnAbmUsuariosClick(Sender: TObject);
+    procedure RadioBtnTodosClick(Sender: TObject);
+    procedure RadioBtnGrupoClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -159,24 +166,39 @@ end;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
-  nivel.ParamByName('usu').AsString:=dm.EKUsrLogin.usuariosis;
-  nivel.Open;
-  Usuarios.ParamByName('nivel').AsInteger:= NivelNIVEL.AsInteger;
-  GruposP.ParamByName('nivel').AsInteger:= NivelNIVEL.AsInteger;
-  nivel.close;
+  try
+      nivel.ParamByName('usu').AsString:=dm.EKUsrLogin.usuariosis;
+      nivel.Open;
+      Usuarios.ParamByName('nivel').AsInteger:= NivelNIVEL.AsInteger;
+      GruposP.ParamByName('nivel').AsInteger:= NivelNIVEL.AsInteger;
+      nivel.close;
 
-  dm.EKModelo.abrir(Usuarios);
-  EKLlenarAplicacion.CargarCombo;
-  EKLlenarGrupo.CargarCombo;
-  EKUsrPermisos.Validar;
+      dm.EKModelo.abrir(Usuarios);
+      EKLlenarAplicacion.CargarCombo;
+      EKLlenarGrupo.CargarCombo;
+      EKUsrPermisos.Validar;
 
-  DBGridPermisos.OnDblClick:= nil; //le saco el doble click a la grilla de permisos
+      DBGridPermisos.OnDblClick:= nil; //le saco el doble click a la grilla de permisos
 
-  GrupoEditando.Enabled:= true;
-  GrupoGuardarCancelar.Enabled:= false;
-  GrupoAsignacion.Enabled:= false;
+      GrupoEditando.Enabled:= true;
+      GrupoGuardarCancelar.Enabled:= false;
+      GrupoAsignacion.Enabled:= false;
 
-  EKLlenarAplicacion.SetItem(0);
+      RadioBtnTodos.Checked:= true;
+      RadioGrupo.ItemIndex:=1;
+
+      EKLlenarAplicacion.SetItem(0);
+
+      EKOrdenarPermisos.CargarConfigColunmas;
+      EKOrdenarUsuarios.CargarConfigColunmas;
+      EKOrdenarGrupos.CargarConfigColunmas;
+  Finally
+    begin
+      ShowMessage('El usuario no tiene permisos para ingresar al sistema');
+      Application.Terminate;
+    end;
+  end;
+
 end;
 
 
@@ -232,9 +254,9 @@ end;
 
 procedure TFPrincipal.RadioGrupoClick(Sender: TObject);
 begin
-  if RadioGrupo.ItemIndex = 0 then
+  if RadioGrupo.ItemIndex = 1 then //muestro todos los grupos del sistema
     GruposP.SQL[4]:=''
-  else
+  else //muestro solo los grupos del usuario seleccionado
     GruposP.SQL[4]:='and ug.usuario is not null';
 
   GruposP.Open;
@@ -256,9 +278,12 @@ end;
 
 procedure TFPrincipal.EKLlenarGrupoCambio(valor: String);
 begin
-  Usuarios.Close;
-  Usuarios.ParamByName('grupo').AsString:=EKLlenarGrupo.SelectClave;
-  Usuarios.Open;
+  if RadioBtnGrupo.Checked then
+  begin
+    Usuarios.Close;
+    Usuarios.ParamByName('grupo').AsString:=EKLlenarGrupo.SelectClave;
+    Usuarios.Open;
+  end;
 end;
 
 
@@ -407,10 +432,6 @@ begin
   Cambiar_valor.ParamByName('clave_ap').AsInteger:=Permisos.FieldByName('clave').AsInteger;
   Cambiar_valor.ParamByName('valor').AsString:= inputbox('Ingrese el valor',valor,'');
   Cambiar_valor.ExecSQL;
-//  Permisos.Edit;
-//  Permisos.FieldByName('usuario').AsString := UsuariosUSUARIO.AsString;
-//  Permisos.FieldByName('valor').AsString := valor;
-//  Permisos.Post;
 end;
 
 
@@ -519,23 +540,6 @@ begin
 end;
 
 
-procedure TFPrincipal.RadioGroupUsuariosClick(Sender: TObject);
-begin
-  if RadioGroupUsuarios.ItemIndex=0 then
-  begin
-    Usuarios.Close;
-    Usuarios.ParamByName('grupo').AsString:='VER  TODOS';
-    Usuarios.Open;
-  end
-  else
-  begin
-    Usuarios.Close;
-    Usuarios.ParamByName('grupo').AsString:=EKLlenarGrupo.SelectClave;
-    Usuarios.Open;
-  end;
-end;
-
-
 procedure TFPrincipal.btnAbmPermisosClick(Sender: TObject);
 begin
   if cBoxAplicacion.Text = '' then
@@ -593,6 +597,68 @@ begin
   FUsuario.lee_role.Open;
 
   FUsuario.ShowModal;
+end;
+
+
+procedure TFPrincipal.RadioBtnTodosClick(Sender: TObject);
+begin
+  Usuarios.Close;
+  Usuarios.ParamByName('grupo').AsString:='VER  TODOS';
+  Usuarios.Open;
+
+  cBoxGrupos.Text:= '';
+  EKLlenarGrupo.SelectClave:= '';
+end;
+
+
+procedure TFPrincipal.RadioBtnGrupoClick(Sender: TObject);
+begin
+  Usuarios.Close;
+  Usuarios.ParamByName('grupo').AsString:=EKLlenarGrupo.SelectClave;
+  Usuarios.Open;
+
+  cBoxGrupos.ItemIndex:= 0;
+  EKLlenarGrupo.SetItem(0);
+end;
+
+
+procedure TFPrincipal.Button1Click(Sender: TObject);
+begin
+  Usuarios.close;
+  if Usuarios.ParamByName('esgrupo').AsString='N' then
+  begin
+    Usuarios.ParamByName('esgrupo').AsString:='S';
+    panelMedioDerecha.Enabled:=false;
+    DBGridUsuarios.Columns[0].Title.Caption:='Grupo';
+    DBGridGrupos.DataSource:= nil;
+    RadioBtnTodos.Checked:= true;
+    RadioBtnTodos.OnClick(Sender);
+
+    RadioBtnTodos.Enabled:= false;
+    RadioBtnGrupo.Enabled:= false;
+    cBoxGrupos.Enabled:= false;
+    RadioGrupo.Enabled:= false;
+  end
+  else
+  begin
+    Usuarios.ParamByName('esgrupo').AsString:='N';
+    panelMedioDerecha.Enabled:=true;
+    DBGridUsuarios.Columns[0].Title.Caption:='Usuario';
+    DBGridGrupos.DataSource:= DSGurposP;
+
+    RadioBtnTodos.Enabled:= true;
+    RadioBtnGrupo.Enabled:= true;
+    cBoxGrupos.Enabled:= true;
+    RadioGrupo.Enabled:= true;
+  end;
+  Usuarios.Open;
+end;
+
+procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  EKOrdenarPermisos.GuardarConfigColumnas;
+  EKOrdenarUsuarios.GuardarConfigColumnas;
+  EKOrdenarGrupos.GuardarConfigColumnas;
 end;
 
 end.
