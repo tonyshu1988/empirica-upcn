@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = '127.0.0.1'
-    Database = 'D:\PROYECTOS\Usuarios\Base\USUARIOS.FDB'
+    Database = 'D:\SISTEMAS WORK\usuarios\USUARIOS.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (

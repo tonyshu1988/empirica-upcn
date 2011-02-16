@@ -11,6 +11,7 @@ object FPrincipal: TFPrincipal
   Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -27,7 +28,7 @@ object FPrincipal: TFPrincipal
       Left = 2
       Top = 2
       Width = 874
-      Height = 71
+      Height = 36
       Align = alTop
       BevelOuter = bvNone
       Color = clMedGray
@@ -48,12 +49,21 @@ object FPrincipal: TFPrincipal
         ItemHeight = 13
         TabOrder = 0
       end
+      object Button1: TButton
+        Left = 455
+        Top = 6
+        Width = 377
+        Height = 25
+        Caption = 'Ver Permisos de Usuarios / Grupos'
+        TabOrder = 1
+        OnClick = Button1Click
+      end
     end
     object panelMedio: TPanel
       Left = 2
-      Top = 73
+      Top = 38
       Width = 874
-      Height = 191
+      Height = 226
       Align = alClient
       BevelOuter = bvNone
       Color = clMedGray
@@ -62,7 +72,7 @@ object FPrincipal: TFPrincipal
         Left = 417
         Top = 0
         Width = 457
-        Height = 191
+        Height = 226
         Align = alClient
         BevelOuter = bvNone
         Caption = 'panelMedioDerecha'
@@ -72,7 +82,7 @@ object FPrincipal: TFPrincipal
           Left = 0
           Top = 35
           Width = 457
-          Height = 156
+          Height = 191
           Align = alClient
           Color = 16378329
           DataSource = DSGurposP
@@ -91,6 +101,7 @@ object FPrincipal: TFPrincipal
               FieldName = 'GRUPO'
               Title.Alignment = taCenter
               Title.Caption = 'Grupo'
+              Width = 180
               Visible = True
             end
             item
@@ -98,14 +109,7 @@ object FPrincipal: TFPrincipal
               FieldName = 'NOMBRE'
               Title.Alignment = taCenter
               Title.Caption = 'Nombre'
-              Width = 263
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'USUARIO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Usuario'
+              Width = 234
               Visible = True
             end>
         end
@@ -139,7 +143,7 @@ object FPrincipal: TFPrincipal
         Left = 0
         Top = 0
         Width = 417
-        Height = 191
+        Height = 226
         Align = alLeft
         BevelOuter = bvNone
         Caption = 'panelMedioIzquierda'
@@ -149,7 +153,7 @@ object FPrincipal: TFPrincipal
           Left = 0
           Top = 35
           Width = 417
-          Height = 156
+          Height = 191
           Align = alClient
           Color = 16378329
           DataSource = DSUsuarios
@@ -212,7 +216,6 @@ object FPrincipal: TFPrincipal
             Align = alClient
             Caption = '  Usuarios  '
             TabOrder = 0
-            OnClick = RadioGroupUsuariosClick
           end
           object cBoxGrupos: TComboBox
             Left = 274
@@ -231,6 +234,7 @@ object FPrincipal: TFPrincipal
             Height = 17
             Caption = 'Todos los Usuarios'
             TabOrder = 2
+            OnClick = RadioBtnTodosClick
           end
           object RadioBtnGrupo: TRadioButton
             Left = 142
@@ -241,6 +245,7 @@ object FPrincipal: TFPrincipal
             Color = clMedGray
             ParentColor = False
             TabOrder = 3
+            OnClick = RadioBtnGrupoClick
           end
         end
       end
@@ -305,18 +310,18 @@ object FPrincipal: TFPrincipal
           end
           item
             Expanded = False
-            FieldName = '_desc'
-            Title.Alignment = taCenter
-            Title.Caption = 'Descripci'#243'n'
-            Width = 264
-            Visible = True
-          end
-          item
-            Expanded = False
             FieldName = 'VALOR'
             Title.Alignment = taCenter
             Title.Caption = 'Valor'
             Width = 61
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = '_desc'
+            Title.Alignment = taCenter
+            Title.Caption = 'Descripci'#243'n'
+            Width = 264
             Visible = True
           end>
       end
@@ -1591,6 +1596,7 @@ object FPrincipal: TFPrincipal
     end
     object GruposPUSUARIO: TStringField
       FieldName = 'USUARIO'
+      Required = True
       Size = 10
     end
   end
@@ -1934,5 +1940,29 @@ object FPrincipal: TFPrincipal
         Name = 'grupo'
         ParamType = ptUnknown
       end>
+  end
+  object EKOrdenarPermisos: TEKOrdenarGrilla
+    Grilla = DBGridPermisos
+    FuenteNormal = []
+    NombreGuardarConfig = 'GrillaPermisos'
+    Ordenar = True
+    Left = 250
+    Top = 408
+  end
+  object EKOrdenarUsuarios: TEKOrdenarGrilla
+    Grilla = DBGridUsuarios
+    FuenteNormal = []
+    NombreGuardarConfig = 'GrillaUsuarios'
+    Ordenar = True
+    Left = 178
+    Top = 126
+  end
+  object EKOrdenarGrupos: TEKOrdenarGrilla
+    Grilla = DBGridGrupos
+    FuenteNormal = []
+    NombreGuardarConfig = 'GrillaGrupos'
+    Ordenar = True
+    Left = 459
+    Top = 198
   end
 end
