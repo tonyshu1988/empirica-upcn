@@ -426,8 +426,8 @@ type
     QRDBText22: TQRDBText;
     PanelConciliar: TPanel;
     LabelPreguntaConciliar: TLabel;
-    Button1: TButton;
-    Button2: TButton;
+    btnConciliarAceptar: TButton;
+    btnConciliarCancelar: TButton;
     PConcilTitulo: TPanel;
     LabelFechaConciliacion: TLabel;
     DTPFechaConciliar: TDateTimePicker;
@@ -569,8 +569,8 @@ type
     procedure cargarDatosporDefecto();
     procedure btnImprimirSolicitudClick(Sender: TObject);
     procedure ZQ_ProveedoresAfterScroll(DataSet: TDataSet);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure btnConciliarAceptarClick(Sender: TObject);
+    procedure btnConciliarCancelarClick(Sender: TObject);
     procedure ZQ_TipoProveedorAfterScroll(DataSet: TDataSet);
     procedure centrala(var p : TPanel);
     procedure btImprimirCaratulaClick(Sender: TObject);
@@ -1100,13 +1100,54 @@ begin
   begin
     PanelConciliar.Visible:= true;
     PanelConciliar.BringToFront;
-    centrala(PanelConciliar);    
+    centrala(PanelConciliar);
     BanderaConcialiar:= false;
     LabelPreguntaConciliar.Caption:='¿Esta Seguro que desea Desconciliar este movimiento?';
     PConcilTitulo.Caption:='Desconciliar Movimiento';
     LabelFechaConciliacion.Visible:= false;
     DTPFechaConciliar.Visible:=false;
   end;
+end;
+
+
+procedure TFMovimientos.btnConciliarAceptarClick(Sender: TObject);
+begin
+
+  if BanderaConcialiar then //si se esta conciliando el movimiento
+    if DTPFechaConciliar.DateTime < ZQ_MovimientosFECHA.AsDateTime then
+    begin
+      Application.MessageBox('La Fecha de Conciliación es menor a la Fecha de Emisión, Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      exit;
+    end;
+
+  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
+  begin
+    ZQ_Cuenta_Movimiento.edit;
+    if BanderaConcialiar then
+    begin
+      ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'S';
+      ZQ_Cuenta_MovimientoFECHA_CONCILIADO.AsDateTime := DTPFechaConciliar.Date;
+    end
+    else
+    begin
+      ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
+      ZQ_Cuenta_MovimientoFECHA_CONCILIADO.Clear;
+    end;
+
+    if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
+      DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
+
+    btaplicar.Click;
+    LIBRO_BANCO.Locate('ID_MOVIMIENTO',ZQ_Cuenta_MovimientoID.AsInteger,[]);
+
+    PanelConciliar.Visible:= false;
+  end
+end;
+
+
+procedure TFMovimientos.btnConciliarCancelarClick(Sender: TObject);
+begin
+  PanelConciliar.Visible:= false;
 end;
 
 
@@ -2063,46 +2104,6 @@ begin
   ZQ_Conceptos.Active:=false;
   ZQ_Conceptos.ParamByName('idProveedor').AsInteger:= ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
   ZQ_Conceptos.Active:=true;
-end;
-
-
-procedure TFMovimientos.Button1Click(Sender: TObject);
-begin
-
-  if DTPFechaConciliar.DateTime < ZQ_MovimientosFECHA.AsDateTime then
-  begin
-    Application.MessageBox('La Fecha de Conciliación es menor a la Fecha de Emisión, Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    exit;
-  end;
-
-  if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Cuenta_Movimiento]) then
-  begin
-    ZQ_Cuenta_Movimiento.edit;
-    if BanderaConcialiar then
-    begin
-      ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'S';
-      ZQ_Cuenta_MovimientoFECHA_CONCILIADO.AsDateTime := DTPFechaConciliar.Date;
-    end
-    else
-    begin
-      ZQ_Cuenta_MovimientoCONCILIADO.AsString := 'N';
-      ZQ_Cuenta_MovimientoFECHA_CONCILIADO.Clear;
-    end;
-
-    if not DM.EKModelo.finalizar_transaccion(Transaccion_Movimientos) then
-      DM.EKModelo.cancelar_transaccion(Transaccion_Movimientos);
-
-    btaplicar.Click;
-    LIBRO_BANCO.Locate('ID_MOVIMIENTO',ZQ_Cuenta_MovimientoID.AsInteger,[]);
-
-    PanelConciliar.Visible:= false;
-  end
-end;
-
-
-procedure TFMovimientos.Button2Click(Sender: TObject);
-begin
-  PanelConciliar.Visible:= false;
 end;
 
 

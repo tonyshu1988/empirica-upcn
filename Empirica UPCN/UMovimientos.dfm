@@ -48,23 +48,23 @@ object FMovimientos: TFMovimientos
       Height = 13
       Caption = 'Fecha conciliacion:'
     end
-    object Button1: TButton
+    object btnConciliarAceptar: TButton
       Left = 52
       Top = 81
       Width = 75
       Height = 21
       Caption = 'Si'
       TabOrder = 0
-      OnClick = Button1Click
+      OnClick = btnConciliarAceptarClick
     end
-    object Button2: TButton
+    object btnConciliarCancelar: TButton
       Left = 244
       Top = 81
       Width = 75
       Height = 21
       Caption = 'No'
       TabOrder = 1
-      OnClick = Button2Click
+      OnClick = btnConciliarCancelarClick
     end
     object PConcilTitulo: TPanel
       Tag = 99
