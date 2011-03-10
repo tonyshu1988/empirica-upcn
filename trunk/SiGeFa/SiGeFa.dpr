@@ -6,7 +6,10 @@ uses
   UPrincipal in 'UPrincipal.pas' {FPrincipal},
   UDM in 'UDM.pas' {DM: TDataModule},
   UUtilidades in 'UUtilidades.pas',
-  UAcerca_De in 'UAcerca_De.pas' {FAcerca_De};
+  UAcerca_De in 'UAcerca_De.pas' {FAcerca_De},
+  UABMProductos in 'UABMProductos.pas' {FABMProductos},
+  UABMClientes in 'UABMClientes.pas' {FABMClientes},
+  UABMEmpresas in 'UABMEmpresas.pas' {FABMEmpresas};
 
 {$R *.res}
 

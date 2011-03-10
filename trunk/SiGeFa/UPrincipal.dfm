@@ -20,8 +20,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 855
-    Height = 534
+    Width = 863
+    Height = 540
     Align = alClient
     Center = True
     Picture.Data = {
@@ -1678,8 +1678,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 563
-    Width = 855
+    Top = 569
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -1695,7 +1695,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
@@ -1709,8 +1709,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 534
+    Width = 863
+    Height = 540
     Align = alClient
     Color = 16053492
     TabOrder = 2
@@ -1737,11 +1737,41 @@ object FPrincipal: TFPrincipal
       ImageIndex = 92
       OnExecute = AAcerca_deExecute
     end
+    object AABMProductos: TAction
+      Caption = 'ABM Productos'
+      OnExecute = AABMProductosExecute
+    end
+    object AABMClientes: TAction
+      Caption = 'ABM Clientes'
+      OnExecute = AABMClientesExecute
+    end
+    object AABMEmpresas: TAction
+      Caption = 'ABM Empresas'
+      OnExecute = AABMEmpresasExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = TDXBar_Imagenes_Grandes
     Left = 288
     Top = 72
+    object Productos1: TMenuItem
+      Caption = 'Productos'
+      object ABMProductos1: TMenuItem
+        Action = AABMProductos
+      end
+    end
+    object Clientes1: TMenuItem
+      Caption = 'Clientes'
+      object ABMClientes1: TMenuItem
+        Action = AABMClientes
+      end
+    end
+    object Empresas1: TMenuItem
+      Caption = 'Empresas'
+      object ABMEmpresas1: TMenuItem
+        Action = AABMEmpresas
+      end
+    end
     object Salir1: TMenuItem
       Caption = 'Sistema'
       object CambiarContrasenia: TMenuItem

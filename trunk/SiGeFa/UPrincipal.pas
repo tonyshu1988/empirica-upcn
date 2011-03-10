@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
   ComCtrls, ImgList, ExtCtrls, ISVentanas, jpeg, QPrinters,
-  Grids, DBGrids, EKImageList32, MCoP32bitImageList, EKVentanas;
+  Grids, DBGrids, EKImageList32, EKVentanas;
 
 type
   TFPrincipal = class(TForm)
@@ -31,12 +31,24 @@ type
     Iconos_Menu_32: TEKImageList32;
     Iconos_Menu_16: TEKImageList32;
     EKVentanas1: TEKVentanas;
+    Productos1: TMenuItem;
+    ABMProductos1: TMenuItem;
+    Clientes1: TMenuItem;
+    ABMClientes1: TMenuItem;
+    Empresas1: TMenuItem;
+    ABMEmpresas1: TMenuItem;
+    AABMProductos: TAction;
+    AABMClientes: TAction;
+    AABMEmpresas: TAction;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure AConfiguracionExecute(Sender: TObject);
     procedure AConfigImpresoraExecute(Sender: TObject);
     procedure AAcerca_deExecute(Sender: TObject);
+    procedure AABMProductosExecute(Sender: TObject);
+    procedure AABMClientesExecute(Sender: TObject);
+    procedure AABMEmpresasExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,7 +62,7 @@ implementation
 
 {$R *.dfm}
 
-Uses UDM, UAcerca_De;
+Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos;
 
   
 function salir_de_programa:boolean;
@@ -127,5 +139,20 @@ end;
 //  ISVentanas1.Abrir(Sender,TFABM_Proveedores,FABM_Proveedores);
 //end;
 
+
+procedure TFPrincipal.AABMProductosExecute(Sender: TObject);
+begin
+EKVentanas1.Abrir(Sender, TFABMProductos, FABMProductos);
+end;
+
+procedure TFPrincipal.AABMClientesExecute(Sender: TObject);
+begin
+EKVentanas1.Abrir(Sender, TFABMClientes, FABMClientes);
+end;
+
+procedure TFPrincipal.AABMEmpresasExecute(Sender: TObject);
+begin
+EKVentanas1.Abrir(Sender, TFABMEmpresas, FABMEmpresas);
+end;
 
 end.
