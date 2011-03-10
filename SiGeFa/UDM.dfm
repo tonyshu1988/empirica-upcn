@@ -1458,12 +1458,12 @@ object DM: TDM
   object EKUsrLogin: TEKUsrLogin
     OnLogin = LoginLogin
     Coneccion = Conexion
-    Aplicacion = 'TRADER'
+    Aplicacion = 'SIGEFA'
     Estado = 'Ingreso al Sistema'
     Version = 0
     ControlVersion = False
     LoadImagen = 'login.bmp'
-    Caption = 'TRADER'
+    Caption = 'SIGEFA'
     Modo = EKLoginAutomatico
     ModoPermiso = EKPermisoAction
     Left = 176
