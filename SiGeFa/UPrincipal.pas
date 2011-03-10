@@ -5,8 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
-  ComCtrls, ImgList, ExtCtrls, ISVentanas, jpeg, MCoP32bitImageList, QPrinters,
-  Grids, DBGrids, EKImageList32;
+  ComCtrls, ImgList, ExtCtrls, ISVentanas, jpeg, QPrinters,
+  Grids, DBGrids, EKImageList32, MCoP32bitImageList, EKVentanas;
 
 type
   TFPrincipal = class(TForm)
@@ -15,7 +15,6 @@ type
     MainMenuPrincipal: TMainMenu;
     ActionToolBar1: TActionToolBar;
     Salir1: TMenuItem;
-    ISVentanas1: TISVentanas;
     PanelTapa: TPanel;
     CambiarContrasenia: TMenuItem;
     Salir: TMenuItem;
@@ -28,10 +27,10 @@ type
     AAcerca_de: TAction;
     AcercaDe: TMenuItem;
     LogoFondo: TImage;
-    IS32bitImagenes_Chicas: TIS32bitImageList;
     EKImageMenu24: TEKImageList32;
     Iconos_Menu_32: TEKImageList32;
     Iconos_Menu_16: TEKImageList32;
+    EKVentanas1: TEKVentanas;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
