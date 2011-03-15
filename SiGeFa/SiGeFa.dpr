@@ -9,7 +9,8 @@ uses
   UAcerca_De in 'UAcerca_De.pas' {FAcerca_De},
   UABMProductos in 'UABMProductos.pas' {FABMProductos},
   UABMClientes in 'UABMClientes.pas' {FABMClientes},
-  UABMEmpresas in 'UABMEmpresas.pas' {FABMEmpresas};
+  UABMEmpresas in 'UABMEmpresas.pas' {FABMEmpresas},
+  UBuscarPersona in 'UBuscarPersona.pas' {FBuscarPersona};
 
 {$R *.res}
 
