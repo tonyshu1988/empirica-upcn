@@ -89,6 +89,9 @@ begin
 end;
 
 
+//PROCEDIMIENTO PARA EJECUTAR ANTES DE EXPORTAR LAS GRILLAS A EXCEL.
+//LO QUE HACE ES SACAR LOS CURRENCIS DE LOS CAMPOS FLOAT Y DESPUES
+//LOS VUELVE A SETEAR
 procedure TDM.prepararParaExportar(query: TDataSet; valor: Boolean);
 var
   i:integer;
@@ -114,6 +117,5 @@ begin
     CurrencyString:= auxCurrencyString;
   end;
 end;
-
 
 end.
