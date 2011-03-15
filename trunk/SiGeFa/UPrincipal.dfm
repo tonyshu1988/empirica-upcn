@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 614
-  Top = 76
+  Left = 366
+  Top = 92
   Width = 871
   Height = 640
   Caption = 'Administrativo'
@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 855
-    Height = 534
+    Width = 863
+    Height = 540
     Align = alClient
     Center = True
     Picture.Data = {
@@ -1679,8 +1679,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 563
-    Width = 855
+    Top = 569
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -1696,7 +1696,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
@@ -1710,8 +1710,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 534
+    Width = 863
+    Height = 540
     Align = alClient
     Color = 16053492
     TabOrder = 2

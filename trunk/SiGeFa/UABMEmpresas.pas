@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, ComCtrls, Grids, DBGrids,
   DBCtrls, StdCtrls, Mask, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla, Menus;
+  ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla, Menus,UBuscarPersona;
 
 type
   TFABMEmpresas = class(TForm)
@@ -135,8 +135,12 @@ type
       State: TGridDrawState);
     procedure FormCreate(Sender: TObject);
     procedure AgregarContacto1Click(Sender: TObject);
+    procedure ZQ_EmpresaAfterScroll(DataSet: TDataSet);
+    
   private
     { Private declarations }
+    vsel : TFBuscarPersona;
+    procedure OnSelPersona;
   public
     { Public declarations }
   end;
@@ -150,7 +154,7 @@ const
 
 implementation
 
-uses UDM, UBuscarPersona;
+uses UDM, UPrincipal;
 
 {$R *.dfm}
 
@@ -220,14 +224,7 @@ end;
 procedure TFABMEmpresas.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABMEmpresas) then
-  begin
-      if not (application.MessageBox(pchar('Esta editando un registro, hay cambios sin guardar. Los Cancela ?'),'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
-        canClose := False
-      else
-        dm.EKModelo.cancelar_transaccion(transaccion_ABMEmpresas);
-  end;
-
+  CanClose:= FPrincipal.cerrar_ventana(transaccion_ABMEmpresas);
 end;
 
 procedure TFABMEmpresas.btBuscarClick(Sender: TObject);
@@ -282,29 +279,35 @@ procedure TFABMEmpresas.DBGridEmpresasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if not ZQ_Empresa.IsEmpty then
-    begin
-       if (ZQ_EmpresaBAJA.Value='S') then
-          begin
-           DBGridEmpresas.Canvas.Brush.Color :=$007A7AFE;
-           DBGridEmpresas.Canvas.Font.Color := clBlack;
-           DBGridEmpresas.Canvas.Font.Style := DBGridEmpresas.Canvas.Font.Style + [fsBold];
-           if (gdFocused in State) or (gdSelected in State) then
-             begin
-             DBGridEmpresas.Canvas.Font.Color := clwhite;
-             end
-          end
-       else
-          begin
-            if (gdFocused in State) or (gdSelected in State) then
-             begin
-               DBGridEmpresas.Canvas.Font.Color := clwhite;
-               DBGridEmpresas.Canvas.Brush.Color:=clBlue;
-               DBGridEmpresas.Canvas.Font.Style := DBGridEmpresas.Canvas.Font.Style + [fsBold];
-             end;
-          end;
-       DBGridEmpresas.DefaultDrawColumnCell(rect,datacol,column,state);
-    end;
+  if ZQ_Empresa.IsEmpty then
+    exit;
+
+  FPrincipal.PintarFilasGrillasConBajas(DBGridEmpresas, ZQ_EmpresaBAJA.AsString, Rect, DataCol, Column, State);
+
+
+//  if not ZQ_Empresa.IsEmpty then
+//    begin
+//       if (ZQ_EmpresaBAJA.Value='S') then
+//          begin
+//           DBGridEmpresas.Canvas.Brush.Color :=$007A7AFE;
+//           DBGridEmpresas.Canvas.Font.Color := clBlack;
+//           DBGridEmpresas.Canvas.Font.Style := DBGridEmpresas.Canvas.Font.Style + [fsBold];
+//           if (gdFocused in State) or (gdSelected in State) then
+//             begin
+//             DBGridEmpresas.Canvas.Font.Color := clwhite;
+//             end
+//          end
+//       else
+//          begin
+//            if (gdFocused in State) or (gdSelected in State) then
+//             begin
+//               DBGridEmpresas.Canvas.Font.Color := clwhite;
+//               DBGridEmpresas.Canvas.Brush.Color:=clBlue;
+//               DBGridEmpresas.Canvas.Font.Style := DBGridEmpresas.Canvas.Font.Style + [fsBold];
+//             end;
+//          end;
+//       DBGridEmpresas.DefaultDrawColumnCell(rect,datacol,column,state);
+//    end;
 end;
 
 procedure TFABMEmpresas.FormCreate(Sender: TObject);
@@ -314,22 +317,44 @@ end;
 
 procedure TFABMEmpresas.AgregarContacto1Click(Sender: TObject);
 begin
+  if ZQ_EmpresaID_EMPRESA.AsInteger = 0 then
+  begin
+    Application.MessageBox(PChar('Debe seleccionar una empresa a la cual asignarle un contacto'),'Atención',MB_OK+MB_ICONINFORMATION);
+    exit;
+  end;
+
+
   if dm.EKModelo.iniciar_transaccion(transaccion_contactos,[ZQ_PersonaRelacion]) then
   begin
     DBGridEmpresas.Enabled:= false;
-    Application.CreateForm(TFBuscarPersona,FBuscarPersona);
-    FBuscarPersona.ShowModal;
-    FBuscarPersona.Release;
-
     ZQ_PersonaRelacion.Append;
+
+    if not Assigned(vsel) then
+      vsel := TFBuscarPersona.Create(nil);
+    vsel.OnSeleccionar := OnSelPersona;
+    vsel.ShowModal;
+
     ZQ_PersonaRelacionID_RELACION.AsInteger := 4;
     ZQ_PersonaRelacionID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
-    
+
 
     if dm.EKModelo.finalizar_transaccion(transaccion_contactos) then
       Application.MessageBox(PChar('La persona seleccionada há sido agregada como contacto'),'Atención',MB_OK+MB_ICONINFORMATION)
 
   end;
+end;
+
+procedure TFABMEmpresas.OnSelPersona;
+begin
+  ZQ_PersonaRelacionID_PERSONA.AsInteger := vsel.ZQ_PersonasID_PERSONA.AsInteger;
+  vsel.Close;
+end;
+
+procedure TFABMEmpresas.ZQ_EmpresaAfterScroll(DataSet: TDataSet);
+begin
+ZQ_Contacto.Close;
+ZQ_Contacto.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
+ZQ_Contacto.Open;
 end;
 
 end.
