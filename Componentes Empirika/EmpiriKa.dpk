@@ -79,6 +79,7 @@ contains
   EKVistaPreviaQR in 'EKVistaPreviaQR.pas',
   EKVistaPreviaQRForm in 'EKVistaPreviaQRForm.pas' {EKVistaPreviaQRForm},
   EKImageList32 in 'EKImageList32.pas',
-  EKImageList32Reg in 'EKImageList32Reg.pas' {EKImageListImagesEditor};
+  EKImageList32Reg in 'EKImageList32Reg.pas' {EKImageListImagesEditor},
+  EKDBGrid in 'EKDBGrid.pas';
 
 end.
