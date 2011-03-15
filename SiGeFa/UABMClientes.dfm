@@ -1,6 +1,6 @@
 object FABMClientes: TFABMClientes
-  Left = 449
-  Top = 305
+  Left = 204
+  Top = 52
   Width = 864
   Height = 557
   Caption = 'FABMClientes'
@@ -23,8 +23,8 @@ object FABMClientes: TFABMClientes
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 848
-    Height = 467
+    Width = 856
+    Height = 473
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -32,8 +32,8 @@ object FABMClientes: TFABMClientes
     object DBGridClientes: TDBGrid
       Left = 5
       Top = 50
-      Width = 838
-      Height = 244
+      Width = 846
+      Height = 250
       Align = alClient
       Color = 16112578
       DataSource = DS_Clientes
@@ -174,8 +174,8 @@ object FABMClientes: TFABMClientes
     end
     object PanelEdicion: TPanel
       Left = 5
-      Top = 294
-      Width = 838
+      Top = 300
+      Width = 846
       Height = 168
       Align = alBottom
       BevelOuter = bvNone
@@ -184,7 +184,7 @@ object FABMClientes: TFABMClientes
       object PageControl: TPageControl
         Left = 0
         Top = 0
-        Width = 838
+        Width = 846
         Height = 168
         ActivePage = TabSheetDatos
         Align = alClient
@@ -531,13 +531,13 @@ object FABMClientes: TFABMClientes
     object PanelCabecera: TPanel
       Left = 5
       Top = 5
-      Width = 838
+      Width = 846
       Height = 45
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
       DesignSize = (
-        838
+        846
         45)
       object ShapeCabeceraFondo: TShape
         Left = 2
@@ -608,8 +608,8 @@ object FABMClientes: TFABMClientes
       object StaticTxtBaja: TStaticText
         Left = 789
         Top = 30
-        Width = 47
-        Height = 15
+        Width = 33
+        Height = 17
         Alignment = taCenter
         Anchors = [akRight, akBottom]
         Caption = 'Baja'
@@ -628,7 +628,7 @@ object FABMClientes: TFABMClientes
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
