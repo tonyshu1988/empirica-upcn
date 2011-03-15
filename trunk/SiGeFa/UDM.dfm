@@ -1,13 +1,13 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 469
-  Top = 221
+  Left = 704
+  Top = 332
   Height = 426
   Width = 470
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'D:\PROYECTOS\MATIAS\TRADER\Bases\BASE.FDB'
+    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFa Edicion.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
