@@ -18,10 +18,6 @@ type
     PanelTapa: TPanel;
     CambiarContrasenia: TMenuItem;
     Salir: TMenuItem;
-    TDXBar_Imagenes_Grandes: TImageList;
-    Acciones_Menu: TImageList;
-    Acciones_Barra: TImageList;
-    TDXBar_Imagenes_Chicas: TImageList;
     ConfigurarImpresora: TMenuItem;
     AConfigImpresora: TAction;
     AAcerca_de: TAction;
@@ -40,19 +36,23 @@ type
     AABMProductos: TAction;
     AABMClientes: TAction;
     AABMEmpresas: TAction;
+    Iconos_Barra_32: TImageList;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure AConfiguracionExecute(Sender: TObject);
     procedure AConfigImpresoraExecute(Sender: TObject);
     procedure AAcerca_deExecute(Sender: TObject);
     procedure AABMProductosExecute(Sender: TObject);
     procedure AABMClientesExecute(Sender: TObject);
     procedure AABMEmpresasExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
+    baja, activo: Tcolor;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure PintarFilasGrillasConBajas(grilla: TDBGrid; valor: string; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    function  cerrar_ventana(transaccion: string): boolean;
   end;
 
 var
@@ -64,8 +64,15 @@ implementation
 
 Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos;
 
-  
-function salir_de_programa:boolean;
+
+procedure TFPrincipal.FormCreate(Sender: TObject);
+begin
+  baja:= $006A6AFF;    //ROJO = color de los registros dados de baja
+  activo:= $00FB952F;  //AZUL = color de los registro comunes
+end;
+
+
+function cerrar_sistema:boolean;
 begin
   result := true;
   if dm.EKModelo.hay_transaccion then
@@ -80,6 +87,23 @@ begin
 end;
 
 
+//FUNCION PARA CERRAR LAS VENTANAS Y UNIFICAR EL MENSAJE.
+//SE LE PASA COMO PARAMETRO LA TRANSACCION QUE HAY QUE VERIFICAR.
+function  TFPrincipal.cerrar_ventana(transaccion: string):boolean;
+begin
+  Result:= True;
+
+  if DM.EKModelo.verificar_transaccion(transaccion) then
+  begin
+    if not (application.MessageBox(pchar('Si continua con el cierre se perderan los cambios realizados.'+#13+#13+'¿Salir de todos modos?'),'Atención', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+      Result:= False
+    else
+      DM.EKModelo.cancelar_transaccion(transaccion);
+  end;
+end;
+
+
+//PROCEDURE PARA PINTAR LAS FILAS DE LA GRILLA QUE SE PASA POR PARAMETROS.
 procedure TFPrincipal.PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   if (gdFocused in State) or (gdSelected in State) then
@@ -92,6 +116,31 @@ begin
 end;
 
 
+//PROCEDURE PARA PINTAR LAS FILAS DE LA GRILLA QUE SE PASA POR PARAMETROS.
+//Y SI EL PARAMETRO VALOR ES 'S' SE PINTA LA FILA EN ROJO
+procedure TFPrincipal.PintarFilasGrillasConBajas(grilla: TDBGrid; valor:string; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if (valor = 'S') then //si el registro esta dado de baja
+  begin
+    grilla.Canvas.Font.Color := clBlack;
+    grilla.Canvas.Font.Style := grilla.Canvas.Font.Style + [fsBold];
+    grilla.Canvas.Brush.Color:= baja;
+    if (gdFocused in State) or (gdSelected in State) then
+      grilla.Canvas.Font.Color := clwhite;
+  end
+  else  //si el registro es comun
+  begin
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      grilla.Canvas.Font.Color := clwhite;
+      grilla.Canvas.Font.Style := grilla.Canvas.Font.Style + [fsBold];
+      grilla.Canvas.Brush.Color:= activo;
+    end;
+  end;
+  grilla.DefaultDrawColumnCell(rect,datacol,column,state);
+end;
+
+
 procedure TFPrincipal.CambiarContraseniaClick(Sender: TObject);
 begin
   dm.EKUsrLogin.CambiarClave;
@@ -100,23 +149,15 @@ end;
 
 procedure TFPrincipal.SalirClick(Sender: TObject);
 begin
-  salir_de_programa;
+  cerrar_sistema;
 end;
 
 
 procedure TFPrincipal.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
-  if not salir_de_programa then
+  if not cerrar_sistema then
     CanClose := false;
-end;
-
-
-procedure TFPrincipal.AConfiguracionExecute(Sender: TObject);
-begin
-//   Application.CreateForm(TFConfiguracionGeneral,FConfiguracionGeneral);
-//   FConfiguracionGeneral.ShowModal;
-//   FConfiguracionGeneral.Release;
 end;
 
 
@@ -134,25 +175,21 @@ begin
 end;
 
 
-//procedure TFPrincipal.AProveedoresExecute(Sender: TObject);
-//begin
-//  ISVentanas1.Abrir(Sender,TFABM_Proveedores,FABM_Proveedores);
-//end;
-
-
 procedure TFPrincipal.AABMProductosExecute(Sender: TObject);
 begin
 EKVentanas1.Abrir(Sender, TFABMProductos, FABMProductos);
 end;
+
 
 procedure TFPrincipal.AABMClientesExecute(Sender: TObject);
 begin
 EKVentanas1.Abrir(Sender, TFABMClientes, FABMClientes);
 end;
 
+
 procedure TFPrincipal.AABMEmpresasExecute(Sender: TObject);
 begin
 EKVentanas1.Abrir(Sender, TFABMEmpresas, FABMEmpresas);
-end;
+end;        
 
 end.
