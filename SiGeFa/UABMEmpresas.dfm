@@ -30,11 +30,14 @@ object FABMEmpresas: TFABMEmpresas
       Top = 290
       Width = 885
       Height = 281
-      ActivePage = TabContactos
+      ActivePage = TabEmpresa
       Align = alBottom
+      Images = FPrincipal.Iconos_Menu_16
       TabOrder = 0
       object TabEmpresa: TTabSheet
         Caption = 'Empresa'
+        Enabled = False
+        ImageIndex = 35
         object Label5: TLabel
           Left = 5
           Top = 12
@@ -54,7 +57,7 @@ object FABMEmpresas: TFABMEmpresas
           Top = 12
           Width = 55
           Height = 13
-          Caption = 'Cuit-Cuil:'
+          Caption = 'Cuit/Cuil:'
         end
         object Label15: TLabel
           Left = 14
@@ -311,16 +314,16 @@ object FABMEmpresas: TFABMEmpresas
       end
       object TabContactos: TTabSheet
         Caption = 'Contactos'
-        ImageIndex = 1
+        ImageIndex = 18
         object DBGridContactos: TDBGrid
           Left = 0
           Top = 0
           Width = 877
-          Height = 253
+          Height = 185
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
           Color = 16112578
-          DataSource = DS_Contacto
+          DataSource = DS_PersonaRelacionContacto
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -329,7 +332,6 @@ object FABMEmpresas: TFABMEmpresas
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           ParentShowHint = False
-          PopupMenu = PopupMenuContactos
           ShowHint = True
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -340,75 +342,88 @@ object FABMEmpresas: TFABMEmpresas
           Columns = <
             item
               Expanded = False
-              FieldName = 'NOMBRE'
-              Width = 100
+              FieldName = 'nombre'
+              Title.Caption = 'Nombre y Apellido'
+              Width = 278
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'TELEFONO'
+              FieldName = 'telefono'
+              Title.Caption = 'Tel'#233'fono'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'email'
+              Title.Caption = 'Email'
+              Width = 111
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'direccion'
+              Title.Caption = 'Direcci'#243'n'
+              Width = 81
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'localidad'
+              Title.Caption = 'Localidad'
               Width = 117
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'DIRECCION'
-              Width = 163
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'LOCALIDAD'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CODIGO_POSTAL'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'EMAIL'
-              Width = 115
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NOMBRE_TIPO_IVA'
-              Width = 138
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NOMBRE_TIPO_DOC'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NUMERO_DOC'
-              Width = 103
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_NACIMIENTO'
+              FieldName = 'cod_postal'
+              Title.Caption = 'Cod.Postal'
+              Width = 57
               Visible = True
             end>
+        end
+        object Panel1: TPanel
+          Left = 0
+          Top = 185
+          Width = 877
+          Height = 19
+          Align = alBottom
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 1
+          object Label12: TLabel
+            Left = 3
+            Top = 3
+            Width = 106
+            Height = 13
+            Caption = 'Datos Adicionales:'
+          end
+        end
+        object DBMemo2: TDBMemo
+          Left = 0
+          Top = 204
+          Width = 877
+          Height = 48
+          Align = alBottom
+          Color = 16112578
+          DataField = 'descripcion'
+          DataSource = DS_PersonaRelacionContacto
+          TabOrder = 2
         end
       end
       object TabViajantes: TTabSheet
         Caption = 'Viajantes'
-        ImageIndex = 2
+        ImageIndex = 20
         object DBGridViajantes: TDBGrid
           Left = 0
           Top = 0
           Width = 877
-          Height = 253
+          Height = 185
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
           Color = 16112578
+          DataSource = DS_PersonaRelacionViajante
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -424,6 +439,77 @@ object FABMEmpresas: TFABMEmpresas
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'nombre'
+              Title.Caption = 'Nombre y Apellido'
+              Width = 249
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'telefono'
+              Title.Caption = 'Tel'#233'fono'
+              Width = 161
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'email'
+              Title.Caption = 'Email'
+              Width = 179
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'direccion'
+              Title.Caption = 'Direcci'#243'n'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'localidad'
+              Title.Caption = 'Localidad'
+              Width = 84
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cod_postal'
+              Title.Caption = 'Cod.Postal'
+              Width = 57
+              Visible = True
+            end>
+        end
+        object DBMemo3: TDBMemo
+          Left = 0
+          Top = 204
+          Width = 877
+          Height = 48
+          Align = alBottom
+          Color = 16112578
+          DataField = 'descripcion'
+          DataSource = DS_PersonaRelacionViajante
+          TabOrder = 1
+        end
+        object Panel2: TPanel
+          Left = 0
+          Top = 185
+          Width = 877
+          Height = 19
+          Align = alBottom
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 2
+          object Label13: TLabel
+            Left = 3
+            Top = 3
+            Width = 106
+            Height = 13
+            Caption = 'Datos Adicionales:'
+          end
         end
       end
     end
@@ -1631,6 +1717,7 @@ object FABMEmpresas: TFABMEmpresas
     Top = 72
   end
   object PopupMenuContactos: TPopupMenu
+    MenuAnimation = [maLeftToRight]
     Left = 277
     Top = 378
     object AgregarContacto1: TMenuItem
@@ -1641,100 +1728,320 @@ object FABMEmpresas: TFABMEmpresas
     object QuitarContacto1: TMenuItem
       Caption = 'Quitar Contacto'
       Hint = 'Quita un contacto del listado'
+      OnClick = QuitarContacto1Click
     end
   end
-  object ZQ_PersonaRelacion: TZQuery
+  object ZQ_PersonaRelacionContacto: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from persona_relacion pr')
-    Params = <>
-    Left = 405
-    Top = 378
-    object ZQ_PersonaRelacionID_PERSONA_RELACION: TIntegerField
-      FieldName = 'ID_PERSONA_RELACION'
-    end
-    object ZQ_PersonaRelacionID_PERSONA: TIntegerField
-      FieldName = 'ID_PERSONA'
-    end
-    object ZQ_PersonaRelacionID_RELACION: TIntegerField
-      FieldName = 'ID_RELACION'
-    end
-    object ZQ_PersonaRelacionID_EMPRESA: TIntegerField
-      FieldName = 'ID_EMPRESA'
-    end
-    object ZQ_PersonaRelacionID_SUCURSAL: TIntegerField
-      FieldName = 'ID_SUCURSAL'
-    end
-  end
-  object ZQ_Contacto: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      
-        'select p.nombre, p.direccion, p.localidad, td.nombre_tipo_doc, p' +
-        '.numero_doc, p.codigo_postal, p.telefono, p.email, p.fecha_nacim' +
-        'iento, ti.nombre_tipo_iva'
       'from persona_relacion pr'
-      'left join persona p on (pr.id_persona = p.id_persona)'
-      'left join tipo_documento td on (p.id_tipo_doc = td.id_tipo_doc)'
-      'left join tipo_iva ti on (p.id_tipo_iva = ti.nombre_tipo_iva)'
-      'left join empresa e on (pr.id_empresa = e.id_empresa)'
-      'where pr.id_relacion = 4 and e.id_empresa = :id_empresa')
+      'where pr.id_relacion = 4 and pr.id_empresa = :id_empresa')
     Params = <
       item
         DataType = ftUnknown
         Name = 'id_empresa'
         ParamType = ptUnknown
       end>
-    Left = 157
-    Top = 362
+    Left = 405
+    Top = 378
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'id_empresa'
         ParamType = ptUnknown
       end>
-    object ZQ_ContactoNOMBRE: TStringField
+    object ZQ_PersonaRelacionContactoID_PERSONA_RELACION: TIntegerField
+      FieldName = 'ID_PERSONA_RELACION'
+    end
+    object ZQ_PersonaRelacionContactoID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_PersonaRelacionContactoID_RELACION: TIntegerField
+      FieldName = 'ID_RELACION'
+    end
+    object ZQ_PersonaRelacionContactoID_EMPRESA: TIntegerField
+      FieldName = 'ID_EMPRESA'
+    end
+    object ZQ_PersonaRelacionContactoID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_PersonaRelacionContactonombre: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombre'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionContactodireccion: TStringField
+      FieldKind = fkLookup
+      FieldName = 'direccion'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'DIRECCION'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionContactotelefono: TStringField
+      FieldKind = fkLookup
+      FieldName = 'telefono'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'TELEFONO'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionContactoemail: TStringField
+      FieldKind = fkLookup
+      FieldName = 'email'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'EMAIL'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionContactodescripcion: TStringField
+      DisplayWidth = 500
+      FieldKind = fkLookup
+      FieldName = 'descripcion'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'ID_PERSONA'
+      Size = 500
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionContactolocalidad: TStringField
+      FieldKind = fkLookup
+      FieldName = 'localidad'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'LOCALIDAD'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionContactocod_postal: TStringField
+      FieldKind = fkLookup
+      FieldName = 'cod_postal'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'CODIGO_POSTAL'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+  end
+  object ZQ_Personas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from Persona')
+    Params = <>
+    Left = 525
+    Top = 378
+    object ZQ_PersonasID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+      Required = True
+    end
+    object ZQ_PersonasID_PROVINCIA: TIntegerField
+      FieldName = 'ID_PROVINCIA'
+    end
+    object ZQ_PersonasID_TIPO_DOC: TIntegerField
+      FieldName = 'ID_TIPO_DOC'
+    end
+    object ZQ_PersonasID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_PersonasNOMBRE: TStringField
       FieldName = 'NOMBRE'
       Size = 200
     end
-    object ZQ_ContactoDIRECCION: TStringField
+    object ZQ_PersonasDIRECCION: TStringField
       FieldName = 'DIRECCION'
       Size = 200
     end
-    object ZQ_ContactoLOCALIDAD: TStringField
+    object ZQ_PersonasLOCALIDAD: TStringField
       FieldName = 'LOCALIDAD'
       Size = 200
     end
-    object ZQ_ContactoNOMBRE_TIPO_DOC: TStringField
-      FieldName = 'NOMBRE_TIPO_DOC'
-    end
-    object ZQ_ContactoNUMERO_DOC: TStringField
-      FieldName = 'NUMERO_DOC'
-      Size = 50
-    end
-    object ZQ_ContactoCODIGO_POSTAL: TStringField
+    object ZQ_PersonasCODIGO_POSTAL: TStringField
       FieldName = 'CODIGO_POSTAL'
     end
-    object ZQ_ContactoTELEFONO: TStringField
+    object ZQ_PersonasTELEFONO: TStringField
       FieldName = 'TELEFONO'
       Size = 100
     end
-    object ZQ_ContactoEMAIL: TStringField
+    object ZQ_PersonasEMAIL: TStringField
       FieldName = 'EMAIL'
       Size = 100
     end
-    object ZQ_ContactoFECHA_NACIMIENTO: TDateField
+    object ZQ_PersonasFECHA_NACIMIENTO: TDateField
       FieldName = 'FECHA_NACIMIENTO'
     end
-    object ZQ_ContactoNOMBRE_TIPO_IVA: TStringField
-      FieldName = 'NOMBRE_TIPO_IVA'
+    object ZQ_PersonasNUMERO_DOC: TStringField
+      FieldName = 'NUMERO_DOC'
       Size = 50
     end
+    object ZQ_PersonasSEXO: TStringField
+      FieldName = 'SEXO'
+      Size = 1
+    end
+    object ZQ_PersonasBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_PersonasAUD_USUARIO: TStringField
+      FieldName = 'AUD_USUARIO'
+      Size = 10
+    end
+    object ZQ_PersonasAUD_FECHA: TDateTimeField
+      FieldName = 'AUD_FECHA'
+    end
+    object ZQ_PersonasDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object ZQ_PersonasCUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
+    end
   end
-  object DS_Contacto: TDataSource
-    DataSet = ZQ_Contacto
-    Left = 157
-    Top = 418
+  object DS_PersonaRelacionContacto: TDataSource
+    DataSet = ZQ_PersonaRelacionContacto
+    Left = 405
+    Top = 426
+  end
+  object DS_PersonaRelacionViajante: TDataSource
+    DataSet = ZQ_PersonaRelacionViajante
+    Left = 629
+    Top = 426
+  end
+  object PopupMenuViajantes: TPopupMenu
+    Left = 757
+    Top = 378
+    object AgregarViajante1: TMenuItem
+      Caption = 'Agregar Viajante'
+      OnClick = AgregarViajante1Click
+    end
+    object QuitarViajante1: TMenuItem
+      Caption = 'Quitar Viajante'
+      OnClick = QuitarViajante1Click
+    end
+  end
+  object ZQ_PersonaRelacionViajante: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from persona_relacion pr'
+      'where pr.id_relacion = 3 and pr.id_empresa = :id_empresa')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_empresa'
+        ParamType = ptUnknown
+      end>
+    Left = 629
+    Top = 378
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_empresa'
+        ParamType = ptUnknown
+      end>
+    object StringField2: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombre'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object StringField3: TStringField
+      FieldKind = fkLookup
+      FieldName = 'direccion'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'DIRECCION'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object StringField4: TStringField
+      FieldKind = fkLookup
+      FieldName = 'telefono'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'TELEFONO'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object StringField5: TStringField
+      FieldKind = fkLookup
+      FieldName = 'email'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'EMAIL'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object StringField6: TStringField
+      DisplayWidth = 500
+      FieldKind = fkLookup
+      FieldName = 'descripcion'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'ID_PERSONA'
+      Size = 500
+      Lookup = True
+    end
+    object StringField7: TStringField
+      FieldKind = fkLookup
+      FieldName = 'localidad'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'LOCALIDAD'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object StringField8: TStringField
+      FieldKind = fkLookup
+      FieldName = 'cod_postal'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'CODIGO_POSTAL'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionViajanteID_PERSONA_RELACION: TIntegerField
+      FieldName = 'ID_PERSONA_RELACION'
+    end
+    object ZQ_PersonaRelacionViajanteID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+      Required = True
+    end
+    object ZQ_PersonaRelacionViajanteID_RELACION: TIntegerField
+      FieldName = 'ID_RELACION'
+      Required = True
+    end
+    object ZQ_PersonaRelacionViajanteID_EMPRESA: TIntegerField
+      FieldName = 'ID_EMPRESA'
+    end
+    object ZQ_PersonaRelacionViajanteID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
   end
 end

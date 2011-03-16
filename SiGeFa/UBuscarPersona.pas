@@ -97,6 +97,11 @@ type
     procedure BtSeleccionarClick(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBGridPersonasDblClick(Sender: TObject);
+    procedure BtCrearPersonaClick(Sender: TObject);
+    procedure BtGuardarClick(Sender: TObject);
+    procedure BtCancelarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -106,6 +111,9 @@ type
 
 var
   FBuscarPersona: TFBuscarPersona;
+
+const
+  Transaccion_CrearPersona = 'Crear Persona';
 
 implementation
 
@@ -133,6 +141,69 @@ end;
 procedure TFBuscarPersona.btsalirClick(Sender: TObject);
 begin
 close;
+end;
+
+procedure TFBuscarPersona.FormCreate(Sender: TObject);
+begin
+DM.EKModelo.abrir(ZQ_Provincia);
+DM.EKModelo.abrir(ZQ_TipoIVA);
+DM.EKModelo.abrir(ZQ_TipoDoc);
+
+EKBusquedaAvanzada1.Buscar;
+end;
+
+procedure TFBuscarPersona.DBGridPersonasDblClick(Sender: TObject);
+begin
+  if ((not(DBGridPersonas.SelectedRows.Count > 0)) and (not(ZQ_Personas.IsEmpty))) then
+  begin
+    if Assigned(OnSeleccionar) then
+      OnSeleccionar
+  end
+  else
+    Application.MessageBox(PChar('Debe seleccionar algúna Persona.')
+                                   ,'Datos Incompletos',MB_OK+MB_ICONWARNING);
+end;
+
+procedure TFBuscarPersona.BtCrearPersonaClick(Sender: TObject);
+begin
+  if dm.EKModelo.iniciar_transaccion(Transaccion_CrearPersona,[ZQ_Personas]) then
+  begin
+    GrupoVisualizando.Enabled:=false;
+    GrupoEditando.Enabled:=true;
+    DBGridPersonas.Enabled:= false;
+    ZQ_Personas.Append;
+    ZQ_PersonasBAJA.AsString := 'N';
+    PanelEdicion.Visible := true;
+    dbNombre.SetFocus;
+  end;
+end;
+
+procedure TFBuscarPersona.BtGuardarClick(Sender: TObject);
+var
+recno : integer;
+begin
+    if DM.EKModelo.finalizar_transaccion(Transaccion_CrearPersona) then
+    begin
+      DBGridPersonas.Enabled:=true;
+      GrupoVisualizando.Enabled:=true;
+      GrupoEditando.Enabled:=false;
+      recno:=ZQ_Personas.RecNo;
+      ZQ_Personas.Refresh;
+      ZQ_Personas.RecNo:=recno;
+      DBGridPersonas.SetFocus;
+      PanelEdicion.Visible := false;
+    end;
+end;
+
+procedure TFBuscarPersona.BtCancelarClick(Sender: TObject);
+begin
+  Perform(WM_NEXTDLGCTL, 0, 0);
+  DBGridPersonas.Enabled:=true;
+  dm.EKModelo.cancelar_transaccion(Transaccion_CrearPersona);
+  GrupoVisualizando.Enabled:=true;
+  GrupoEditando.Enabled:=false;
+  DBGridPersonas.SetFocus;
+  PanelEdicion.Visible := false;
 end;
 
 end.
