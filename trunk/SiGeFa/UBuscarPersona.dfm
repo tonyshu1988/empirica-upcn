@@ -11,6 +11,7 @@ object FBuscarPersona: TFBuscarPersona
   Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PanelContenedor: TPanel
@@ -38,95 +39,64 @@ object FBuscarPersona: TFBuscarPersona
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
+      OnDblClick = DBGridPersonasDblClick
       Columns = <
         item
           Expanded = False
-          FieldName = 'ID_PERSONA'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'ID_PROVINCIA'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'ID_TIPO_DOC'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'ID_TIPO_IVA'
-          Visible = True
-        end
-        item
-          Expanded = False
           FieldName = 'NOMBRE'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DIRECCION'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'LOCALIDAD'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CODIGO_POSTAL'
+          Title.Caption = 'NOMBRE Y APELLIDO'
+          Width = 225
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'TELEFONO'
+          Width = 143
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'EMAIL'
+          Width = 157
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'FECHA_NACIMIENTO'
+          FieldName = 'DIRECCION'
+          Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LOCALIDAD'
+          Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CODIGO_POSTAL'
+          Title.Caption = 'COD.POSTAL'
+          Width = 85
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'NUMERO_DOC'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SEXO'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'BAJA'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'AUD_USUARIO'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'AUD_FECHA'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DESCRIPCION'
+          Title.Caption = 'NRO DOC'
+          Width = 146
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'CUIT_CUIL'
+          Title.Caption = 'CUIT/CUIL'
+          Width = 90
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA_NACIMIENTO'
+          Title.Caption = 'FECHA NACIMIENTO'
           Visible = True
         end>
     end
@@ -261,7 +231,7 @@ object FBuscarPersona: TFBuscarPersona
         ParentShowHint = False
         ShowHint = True
         Sorted = True
-        TabOrder = 0
+        TabOrder = 1
       end
       object dblkTipoDoc: TDBLookupComboBox
         Left = 71
@@ -278,8 +248,9 @@ object FBuscarPersona: TFBuscarPersona
         KeyField = 'ID_TIPO_DOC'
         ListField = 'NOMBRE_TIPO_DOC'
         ListSource = DS_TipoDoc
+        NullValueKey = 46
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 4
       end
       object dbNombre: TDBEdit
         Left = 127
@@ -295,7 +266,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 0
       end
       object dbNroDocu: TDBEdit
         Left = 263
@@ -312,7 +283,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Style = [fsBold]
         MaxLength = 18
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 5
       end
       object ISDBEditDateTimePicker1: TISDBEditDateTimePicker
         Left = 539
@@ -328,7 +299,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Style = [fsBold]
         MinDate = 3654.000000000000000000
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 3
         DataField = 'FECHA_NACIMIENTO'
         DataSource = DS_Personas
         ReadOnly = False
@@ -349,7 +320,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 12
       end
       object DBLookupComboBox1: TDBLookupComboBox
         Left = 320
@@ -366,8 +337,9 @@ object FBuscarPersona: TFBuscarPersona
         KeyField = 'ID_PROVINCIA'
         ListField = 'NOMBRE_PROVINCIA'
         ListSource = DS_Provincia
+        NullValueKey = 46
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 8
       end
       object DBLookupComboBox2: TDBLookupComboBox
         Left = 507
@@ -384,8 +356,9 @@ object FBuscarPersona: TFBuscarPersona
         KeyField = 'ID_TIPO_IVA'
         ListField = 'NOMBRE_TIPO_IVA'
         ListSource = DS_TipoIVA
+        NullValueKey = 46
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 6
       end
       object DBEdit3: TDBEdit
         Left = 71
@@ -401,7 +374,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 2
       end
       object DBEdit4: TDBEdit
         Left = 71
@@ -417,7 +390,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 10
       end
       object DBEdit5: TDBEdit
         Left = 603
@@ -433,14 +406,13 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 10
+        TabOrder = 9
       end
       object DBEdit2: TDBEdit
         Left = 366
         Top = 98
         Width = 335
         Height = 21
-        CharCase = ecUpperCase
         DataField = 'EMAIL'
         DataSource = DS_Personas
         Font.Charset = DEFAULT_CHARSET
@@ -465,7 +437,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 12
+        TabOrder = 7
       end
       object DBMemo1: TDBMemo
         Left = 56
@@ -1125,7 +1097,7 @@ object FBuscarPersona: TFBuscarPersona
       Category = 0
       Hint = 'Selecciona una persona'
       Visible = ivAlways
-      ImageIndex = 0
+      ImageIndex = 32
       OnClick = BtSeleccionarClick
       AutoGrayScale = False
     end
@@ -1134,7 +1106,8 @@ object FBuscarPersona: TFBuscarPersona
       Category = 0
       Hint = 'Crear Persona'
       Visible = ivAlways
-      ImageIndex = 1
+      ImageIndex = 52
+      OnClick = BtCrearPersonaClick
       AutoGrayScale = False
     end
     object btBaja: TdxBarLargeButton
@@ -1160,6 +1133,7 @@ object FBuscarPersona: TFBuscarPersona
       Hint = 'Guarda los cambios'
       Visible = ivAlways
       ImageIndex = 3
+      OnClick = BtGuardarClick
       AutoGrayScale = False
     end
     object BtCancelar: TdxBarLargeButton
@@ -1169,6 +1143,7 @@ object FBuscarPersona: TFBuscarPersona
       Hint = 'Cancela los cambios'
       Visible = ivAlways
       ImageIndex = 4
+      OnClick = BtCancelarClick
       AutoGrayScale = False
     end
     object BtImprimir: TdxBarLargeButton
@@ -1256,13 +1231,13 @@ object FBuscarPersona: TFBuscarPersona
     SQL.Strings = (
       'select *'
       'from persona p'
+      'where p.baja <> '#39'S'#39
       'order by p.nombre')
     Params = <>
     Left = 264
     Top = 64
     object ZQ_PersonasID_PERSONA: TIntegerField
       FieldName = 'ID_PERSONA'
-      Required = True
     end
     object ZQ_PersonasID_PROVINCIA: TIntegerField
       FieldName = 'ID_PROVINCIA'
@@ -1272,7 +1247,6 @@ object FBuscarPersona: TFBuscarPersona
     end
     object ZQ_PersonasID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
-      Required = True
     end
     object ZQ_PersonasNOMBRE: TStringField
       FieldName = 'NOMBRE'
@@ -1479,14 +1453,17 @@ object FBuscarPersona: TFBuscarPersona
     SQL.Strings = (
       'select *'
       'from persona p'
+      'where p.baja <> '#39'S'#39
       'order by p.nombre')
     SQL_Select.Strings = (
       'select *')
     SQL_From.Strings = (
       'from persona p')
+    SQL_Where.Strings = (
+      'where p.baja <> '#39'S'#39)
     SQL_Orden.Strings = (
       'order by p.nombre')
-    UsarWhereOriginal = EK_Sin_Where
+    UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 72
     Top = 56
