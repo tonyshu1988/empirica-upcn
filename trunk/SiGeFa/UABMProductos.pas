@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   ExtCtrls, Grids, DBGrids, EKDBGrid, dxBar, dxBarExtItems, StdCtrls,
-  DBCtrls, Mask, EKBusquedaAvanzada, EKOrdenarGrilla, EKLlenarCombo;
+  DBCtrls, Mask, EKBusquedaAvanzada, EKOrdenarGrilla, EKLlenarCombo, Menus,
+  Buttons;
 
 type
   TFABMProductos = class(TForm)
@@ -74,30 +75,6 @@ type
     ZQ_DetalleProductoCODIGO_BARRA: TStringField;
     ZQ_DetalleProductoSTOCK_MAX: TFloatField;
     ZQ_DetalleProductoSTOCK_MIN: TFloatField;
-    Label5: TLabel;
-    DBEdit3: TDBEdit;
-    Label6: TLabel;
-    DBEdit4: TDBEdit;
-    Label7: TLabel;
-    DBEdit5: TDBEdit;
-    Label9: TLabel;
-    DBEdit6: TDBEdit;
-    Label10: TLabel;
-    DBEdit8: TDBEdit;
-    Label11: TLabel;
-    DBEdit9: TDBEdit;
-    Label12: TLabel;
-    DBEdit10: TDBEdit;
-    Label13: TLabel;
-    DBEdit11: TDBEdit;
-    Label14: TLabel;
-    DBEdit12: TDBEdit;
-    Label15: TLabel;
-    DBEdit13: TDBEdit;
-    Label16: TLabel;
-    DBEdit14: TDBEdit;
-    Label17: TLabel;
-    DBEdit15: TDBEdit;
     Label18: TLabel;
     ZQ_Articulo: TZQuery;
     ZQ_ArticuloID_ARTICULO: TIntegerField;
@@ -113,6 +90,38 @@ type
     ZQ_MarcaNOMBRE_MARCA: TStringField;
     ZQ_ProductoCabecera_marca: TStringField;
     Label19: TLabel;
+    EKDBGrid1: TEKDBGrid;
+    grupoDetalle: TGroupBox;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    DBEdit3: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit6: TDBEdit;
+    DBEdit8: TDBEdit;
+    DBEdit9: TDBEdit;
+    DBEdit10: TDBEdit;
+    DBEdit11: TDBEdit;
+    DBEdit12: TDBEdit;
+    DBEdit13: TDBEdit;
+    DBEdit14: TDBEdit;
+    DBEdit15: TDBEdit;
+    PopupMenuDetalleProd: TPopupMenu;
+    AgregaDetalle: TMenuItem;
+    QuitarDetalle: TMenuItem;
+    EditarDetalle: TMenuItem;
+    grupoAceptar: TBitBtn;
+    grupoCancelar: TBitBtn;
+    DBMemo2: TDBMemo;
     procedure btBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -122,6 +131,12 @@ type
     procedure BtGuardarClick(Sender: TObject);
     procedure BtCancelarClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
+    procedure btBajaClick(Sender: TObject);
+    procedure btReactivarClick(Sender: TObject);
+    procedure AgregaDetalleClick(Sender: TObject);
+    procedure EditarDetalleClick(Sender: TObject);
+    procedure grupoAceptarClick(Sender: TObject);
+    procedure grupoCancelarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -198,6 +213,7 @@ Perform(WM_NEXTDLGCTL, 0, 0);
     begin
       Grilla.Enabled := true;
       PageControl1.Enabled:= false;
+
       GrupoEditando.Enabled := false;
       GrupoVisualizando.Enabled := true;
 
@@ -234,6 +250,79 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     GrupoEditando.Enabled := true;
     GrupoVisualizando.Enabled := false;
   end;
+end;
+
+procedure TFABMProductos.btBajaClick(Sender: TObject);
+var
+  recNo: integer;
+begin
+ if (ZQ_ProductoCabecera.IsEmpty) OR (ZQ_ProductoCabeceraBAJA.AsString <> 'N') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea dar de baja el Producto seleccionado?'), 'ABM Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  begin
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera]) then
+    begin
+      ZQ_ProductoCabecera.Edit;
+      ZQ_ProductoCabeceraBAJA.AsString:='S';
+    end
+    else
+      exit;
+
+    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMProductos)) then
+      dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos);
+
+    recNo:= ZQ_ProductoCabecera.RecNo;
+    ZQ_ProductoCabecera.Refresh;
+    ZQ_ProductoCabecera.RecNo:= recNo;
+  end;
+end;
+
+procedure TFABMProductos.btReactivarClick(Sender: TObject);
+var
+  recNo: integer;
+begin
+  if (ZQ_ProductoCabecera.IsEmpty) OR (ZQ_ProductoCabeceraBAJA.AsString <> 'S') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea reactivar el Producto seleccionado?'), 'ABM Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  begin
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera]) then
+    begin
+      ZQ_ProductoCabecera.Edit;
+      ZQ_ProductoCabeceraBAJA.AsString:='N';
+    end
+    else
+      exit;
+
+    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMProductos)) then
+      dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos);
+
+    recNo:= ZQ_ProductoCabecera.RecNo;
+    ZQ_ProductoCabecera.Refresh;
+    ZQ_ProductoCabecera.RecNo:= recNo;
+  end;
+
+end;
+
+procedure TFABMProductos.AgregaDetalleClick(Sender: TObject);
+begin
+   grupoDetalle.Visible:=true;
+end;
+
+procedure TFABMProductos.EditarDetalleClick(Sender: TObject);
+begin
+   grupoDetalle.Visible:=true;
+end;
+
+procedure TFABMProductos.grupoAceptarClick(Sender: TObject);
+begin
+  grupoDetalle.Visible:=false;
+end;
+
+procedure TFABMProductos.grupoCancelarClick(Sender: TObject);
+begin
+grupoDetalle.Visible:=false;
 end;
 
 end.
