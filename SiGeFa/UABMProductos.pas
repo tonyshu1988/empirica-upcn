@@ -7,7 +7,7 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   ExtCtrls, Grids, DBGrids, EKDBGrid, dxBar, dxBarExtItems, StdCtrls,
   DBCtrls, Mask, EKBusquedaAvanzada, EKOrdenarGrilla, EKLlenarCombo, Menus,
-  Buttons;
+  Buttons, ZStoredProcedure, ExtDlgs;
 
 type
   TFABMProductos = class(TForm)
@@ -90,7 +90,7 @@ type
     ZQ_MarcaNOMBRE_MARCA: TStringField;
     ZQ_ProductoCabecera_marca: TStringField;
     Label19: TLabel;
-    EKDBGrid1: TEKDBGrid;
+    grillaDetalle: TEKDBGrid;
     grupoDetalle: TGroupBox;
     Label5: TLabel;
     Label6: TLabel;
@@ -104,7 +104,6 @@ type
     Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
-    DBEdit3: TDBEdit;
     DBEdit5: TDBEdit;
     DBEdit6: TDBEdit;
     DBEdit8: TDBEdit;
@@ -122,6 +121,18 @@ type
     grupoAceptar: TBitBtn;
     grupoCancelar: TBitBtn;
     DBMemo2: TDBMemo;
+    DBLookupComboBox3: TDBLookupComboBox;
+    ZQ_MedidaArticulo: TZQuery;
+    ZQ_MedidaArticuloID_ARTICULO: TIntegerField;
+    ZQ_MedidaArticuloID_MEDIDA: TIntegerField;
+    ZQ_MedidaArticuloMEDIDA: TStringField;
+    DS_MedidaArticulo: TDataSource;
+    ZSP_GenerarIDProdDeralle: TZStoredProc;
+    ZSP_GenerarIDProdDeralleID: TIntegerField;
+    ZQ_DetalleProducto_medida: TStringField;
+    buscarImagen: TOpenPictureDialog;
+    ZSP_GenerarIDProdCabecera: TZStoredProc;
+    ZSP_GenerarIDProdCabeceraID: TIntegerField;
     procedure btBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -137,6 +148,9 @@ type
     procedure EditarDetalleClick(Sender: TObject);
     procedure grupoAceptarClick(Sender: TObject);
     procedure grupoCancelarClick(Sender: TObject);
+    procedure ZQ_ProductoCabeceraAfterScroll(DataSet: TDataSet);
+    procedure ZQ_ArticuloAfterScroll(DataSet: TDataSet);
+    procedure DBImage1DblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -182,15 +196,18 @@ procedure TFABMProductos.FormCreate(Sender: TObject);
 begin
   dm.EKModelo.abrir(ZQ_Articulo);
   dm.EKModelo.abrir(ZQ_Marca);
+  dm.EKModelo.abrir(ZQ_MedidaArticulo);
+  grillaDetalle.PopupMenu:=nil;
 end;
 
 procedure TFABMProductos.BtNuevoClick(Sender: TObject);
 begin
-if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera]) then
+if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera,ZQ_DetalleProducto]) then
   begin
+    grillaDetalle.PopupMenu:=PopupMenuDetalleProd;;
     grilla.Enabled := false;
     PageControl1.Enabled:= true;
-    PageControl1.ActivePageIndex:= 0;
+    //PageControl1.ActivePageIndex:= 0;
 
     ZQ_ProductoCabecera.Append;
     ZQ_ProductoCabeceraBAJA.AsString:= 'N';
@@ -198,11 +215,20 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     edNombre.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoVisualizando.Enabled := false;
+
+    //Es medio obvio pero si o si hay q ponerlo aca, para el id q vá en detalle prod
+     if (ZQ_ProductoCabecera.State=dsinsert) then
+      begin
+          ZSP_GenerarIDProdCabecera.Active:=false;
+          ZSP_GenerarIDProdCabecera.Active:=true;
+          ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger:=ZSP_GenerarIDProdCabeceraID.AsInteger;
+      end;
   end;
 end;
 
 procedure TFABMProductos.BtGuardarClick(Sender: TObject);
 begin
+
 Perform(WM_NEXTDLGCTL, 0, 0);
 
 //  if not validarcampos() then
@@ -213,10 +239,10 @@ Perform(WM_NEXTDLGCTL, 0, 0);
     begin
       Grilla.Enabled := true;
       PageControl1.Enabled:= false;
-
+      grillaDetalle.PopupMenu:=nil;
       GrupoEditando.Enabled := false;
       GrupoVisualizando.Enabled := true;
-
+      PageControl1.Enabled:= true;
     end
   except
     begin
@@ -231,18 +257,21 @@ begin
  if dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos) then
   begin
     Grilla.Enabled := true;
+    grillaDetalle.PopupMenu:=nil;
     GrupoVisualizando.Enabled := true;
     GrupoEditando.Enabled := false;
+    PageControl1.Enabled:= true;
   end;
 end;
 
 procedure TFABMProductos.BtModificarClick(Sender: TObject);
 begin
-if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera]) then
+if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera,ZQ_DetalleProducto]) then
   begin
     grilla.Enabled := false;
+    grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
     PageControl1.Enabled:= true;
-    PageControl1.ActivePageIndex:= 0;
+    //PageControl1.ActivePageIndex:= 0;
 
     ZQ_ProductoCabecera.edit;
 
@@ -308,21 +337,61 @@ end;
 procedure TFABMProductos.AgregaDetalleClick(Sender: TObject);
 begin
    grupoDetalle.Visible:=true;
+   grillaDetalle.PopupMenu:=nil;
+   ZQ_DetalleProducto.Append;
+   ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:=ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
 end;
 
 procedure TFABMProductos.EditarDetalleClick(Sender: TObject);
 begin
    grupoDetalle.Visible:=true;
+   grillaDetalle.PopupMenu:=nil;
+   ZQ_DetalleProducto.Edit;
 end;
 
 procedure TFABMProductos.grupoAceptarClick(Sender: TObject);
 begin
   grupoDetalle.Visible:=false;
+  grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
+  //Si inserto uno nuevo genero un id nuevo
+  if (ZQ_DetalleProducto.State=dsInsert) then
+   begin
+    ZSP_GenerarIDProdDeralle.Active:=False;
+    ZSP_GenerarIDProdDeralle.Active:=True;
+    ZQ_DetalleProductoID_PRODUCTO.AsInteger:=ZSP_GenerarIDProdDeralleID.AsInteger;
+   end;
+  ZQ_DetalleProducto.Post;
 end;
 
 procedure TFABMProductos.grupoCancelarClick(Sender: TObject);
 begin
 grupoDetalle.Visible:=false;
+grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
+ZQ_DetalleProducto.RevertRecord;
+end;
+
+procedure TFABMProductos.ZQ_ProductoCabeceraAfterScroll(DataSet: TDataSet);
+begin
+    ZQ_DetalleProducto.Close;
+    ZQ_DetalleProducto.ParamByName('prod').AsInteger:=ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
+    dm.EKModelo.abrir(ZQ_DetalleProducto);
+end;
+
+procedure TFABMProductos.ZQ_ArticuloAfterScroll(DataSet: TDataSet);
+begin
+    //Traigo las medidas que correspondan a un tipo de articulo
+    ZQ_MedidaArticulo.Close;
+    ZQ_MedidaArticulo.ParamByName('artic').AsInteger:=ZQ_ProductoCabeceraID_ARTICULO.AsInteger;
+    dm.EKModelo.abrir(ZQ_MedidaArticulo);
+end;
+
+procedure TFABMProductos.DBImage1DblClick(Sender: TObject);
+begin
+if dm.EKModelo.verificar_transaccion(transaccion_ABMProductos) then
+  if buscarImagen.Execute then
+    begin
+         ZQ_ProductoCabeceraIMAGEN.LoadFromFile(buscarImagen.FileName);
+    end
 end;
 
 end.
