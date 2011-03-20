@@ -212,7 +212,7 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     grillaDetalle.PopupMenu:=PopupMenuDetalleProd;;
     grilla.Enabled := false;
     PageControl1.Enabled:= true;
-    //PageControl1.ActivePageIndex:= 0;
+    PageControl1.ActivePageIndex:= 0;
 
     ZQ_ProductoCabecera.Append;
     ZQ_ProductoCabeceraBAJA.AsString:= 'N';
