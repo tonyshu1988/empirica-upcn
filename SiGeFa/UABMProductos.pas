@@ -50,10 +50,10 @@ type
     edNombre: TDBEdit;
     Label3: TLabel;
     Label4: TLabel;
-    DBImage1: TDBImage;
+    edImagen: TDBImage;
     Label8: TLabel;
     DBEdit7: TDBEdit;
-    DBMemo1: TDBMemo;
+    edDescripcion: TDBMemo;
     PanelCabecera: TPanel;
     lblResultadoBusqueda: TLabel;
     StaticTxtBaja: TStaticText;
@@ -81,11 +81,11 @@ type
     ZQ_ArticuloDESCRIPCION: TStringField;
     ZQ_ArticuloID_TIPO_ARTICULO: TIntegerField;
     ZQ_ProductoCabecera_articulo: TStringField;
-    DBLookupComboBox1: TDBLookupComboBox;
+    cmbArticulo: TDBLookupComboBox;
     DS_Articulo: TDataSource;
     ZQ_Marca: TZQuery;
     DS_Marca: TDataSource;
-    DBLookupComboBox2: TDBLookupComboBox;
+    cmbMarca: TDBLookupComboBox;
     ZQ_MarcaID_MARCA: TIntegerField;
     ZQ_MarcaNOMBRE_MARCA: TStringField;
     ZQ_ProductoCabecera_marca: TStringField;
@@ -104,24 +104,24 @@ type
     Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
-    DBEdit5: TDBEdit;
-    DBEdit6: TDBEdit;
-    DBEdit8: TDBEdit;
-    DBEdit9: TDBEdit;
-    DBEdit10: TDBEdit;
-    DBEdit11: TDBEdit;
-    DBEdit12: TDBEdit;
-    DBEdit13: TDBEdit;
-    DBEdit14: TDBEdit;
-    DBEdit15: TDBEdit;
+    dpCosto: TDBEdit;
+    dpVenta: TDBEdit;
+    dpGanancia: TDBEdit;
+    dpDescuento: TDBEdit;
+    dpImpInterno: TDBEdit;
+    spImpIVA: TDBEdit;
+    dpCodCorto: TDBEdit;
+    dpCodBarras: TDBEdit;
+    dpStockMax: TDBEdit;
+    dpStockMin: TDBEdit;
     PopupMenuDetalleProd: TPopupMenu;
     AgregaDetalle: TMenuItem;
     QuitarDetalle: TMenuItem;
     EditarDetalle: TMenuItem;
     grupoAceptar: TBitBtn;
     grupoCancelar: TBitBtn;
-    DBMemo2: TDBMemo;
-    DBLookupComboBox3: TDBLookupComboBox;
+    dpDescripcion: TDBMemo;
+    dpMedida: TDBLookupComboBox;
     ZQ_MedidaArticulo: TZQuery;
     ZQ_MedidaArticuloID_ARTICULO: TIntegerField;
     ZQ_MedidaArticuloID_MEDIDA: TIntegerField;
@@ -133,6 +133,9 @@ type
     buscarImagen: TOpenPictureDialog;
     ZSP_GenerarIDProdCabecera: TZStoredProc;
     ZSP_GenerarIDProdCabeceraID: TIntegerField;
+    ZQ_ProductoCabeceraCOD_CORTO: TStringField;
+    Label20: TLabel;
+    edCodCorto: TDBEdit;
     procedure btBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -150,7 +153,9 @@ type
     procedure grupoCancelarClick(Sender: TObject);
     procedure ZQ_ProductoCabeceraAfterScroll(DataSet: TDataSet);
     procedure ZQ_ArticuloAfterScroll(DataSet: TDataSet);
-    procedure DBImage1DblClick(Sender: TObject);
+    procedure edImagenDblClick(Sender: TObject);
+    procedure GrillaDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -266,12 +271,14 @@ end;
 
 procedure TFABMProductos.BtModificarClick(Sender: TObject);
 begin
+if ZQ_ProductoCabecera.IsEmpty then exit;
+
 if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera,ZQ_DetalleProducto]) then
   begin
     grilla.Enabled := false;
     grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
     PageControl1.Enabled:= true;
-    //PageControl1.ActivePageIndex:= 0;
+    PageControl1.ActivePageIndex:= 0;
 
     ZQ_ProductoCabecera.edit;
 
@@ -353,6 +360,14 @@ procedure TFABMProductos.grupoAceptarClick(Sender: TObject);
 begin
   grupoDetalle.Visible:=false;
   grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
+
+  if (dpCodBarras.Text='') then
+   begin
+       ZQ_DetalleProductoCODIGO_BARRA.AsString:=ZQ_ProductoCabeceraCOD_CORTO.AsString+
+                                                ZQ_DetalleProductoCOD_CORTO.AsString;
+   end;
+
+
   //Si inserto uno nuevo genero un id nuevo
   if (ZQ_DetalleProducto.State=dsInsert) then
    begin
@@ -385,13 +400,23 @@ begin
     dm.EKModelo.abrir(ZQ_MedidaArticulo);
 end;
 
-procedure TFABMProductos.DBImage1DblClick(Sender: TObject);
+procedure TFABMProductos.edImagenDblClick(Sender: TObject);
 begin
 if dm.EKModelo.verificar_transaccion(transaccion_ABMProductos) then
   if buscarImagen.Execute then
     begin
          ZQ_ProductoCabeceraIMAGEN.LoadFromFile(buscarImagen.FileName);
     end
+end;
+
+procedure TFABMProductos.GrillaDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if ZQ_ProductoCabecera.IsEmpty then
+    exit;
+
+  FPrincipal.PintarFilasGrillasConBajas(Grilla, ZQ_ProductoCabeceraBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
 end.
