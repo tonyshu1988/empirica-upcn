@@ -1753,6 +1753,46 @@ object FPrincipal: TFPrincipal
       ImageIndex = 2
       OnExecute = AABMEmpresasExecute
     end
+    object AABM_Articulo: TAction
+      Caption = 'ABM Articulo'
+      OnExecute = AABM_ArticuloExecute
+    end
+    object AABM_TipoArticulo: TAction
+      Caption = 'ABM Tipo Articulo'
+      OnExecute = AABM_TipoArticuloExecute
+    end
+    object AABM_Marcas: TAction
+      Caption = 'ABM Marcas'
+      OnExecute = AABM_MarcasExecute
+    end
+    object AABM_ArticuloMedida: TAction
+      Caption = 'ABM Articulo Medida'
+      OnExecute = AABM_ArticuloMedidaExecute
+    end
+    object AABM_TipoEmpresa: TAction
+      Caption = 'ABM Tipo Empresa'
+      OnExecute = AABM_TipoEmpresaExecute
+    end
+    object AABM_Sucursal: TAction
+      Caption = 'ABM Sucursal'
+      OnExecute = AABM_SucursalExecute
+    end
+    object AABM_SucursalPosicion: TAction
+      Caption = 'ABM Sucursal Posicion'
+      OnExecute = AABM_SucursalPosicionExecute
+    end
+    object AABM_ProductoStock: TAction
+      Caption = 'ABM Producto Stock'
+      OnExecute = AABM_ProductoStockExecute
+    end
+    object AABM_ProductoPosicion: TAction
+      Caption = 'ABM Producto Posicion'
+      OnExecute = AABM_ProductoPosicionExecute
+    end
+    object AABM_Personas: TAction
+      Caption = 'ABM Personas'
+      OnExecute = AABM_PersonasExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -1763,17 +1803,47 @@ object FPrincipal: TFPrincipal
       object ABMProductos1: TMenuItem
         Action = AABMProductos
       end
+      object ABM_Articulos: TMenuItem
+        Action = AABM_Articulo
+      end
+      object ABMMarcas1: TMenuItem
+        Action = AABM_Marcas
+      end
+      object ABMTipoArticulo1: TMenuItem
+        Action = AABM_TipoArticulo
+      end
+      object ABMArticulosMedida1: TMenuItem
+        Action = AABM_ArticuloMedida
+      end
     end
     object Clientes1: TMenuItem
       Caption = 'Clientes'
       object ABMClientes1: TMenuItem
         Action = AABMClientes
       end
+      object ABMProductoStock1: TMenuItem
+        Action = AABM_ProductoStock
+      end
+      object ABMProductoPosicion1: TMenuItem
+        Action = AABM_ProductoPosicion
+      end
+      object ABMPersonas1: TMenuItem
+        Action = AABM_Personas
+      end
     end
     object Empresas1: TMenuItem
       Caption = 'Empresas'
       object ABMEmpresas1: TMenuItem
         Action = AABMEmpresas
+      end
+      object ABMTipoEmpresa1: TMenuItem
+        Action = AABM_TipoEmpresa
+      end
+      object ABMSucursal1: TMenuItem
+        Action = AABM_Sucursal
+      end
+      object ABMSucursalPosicion1: TMenuItem
+        Action = AABM_SucursalPosicion
       end
     end
     object Salir1: TMenuItem

@@ -10,7 +10,17 @@ uses
   UABMProductos in 'UABMProductos.pas' {FABMProductos},
   UABMClientes in 'UABMClientes.pas' {FABMClientes},
   UABMEmpresas in 'UABMEmpresas.pas' {FABMEmpresas},
-  UBuscarPersona in 'UBuscarPersona.pas' {FBuscarPersona};
+  UBuscarPersona in 'UBuscarPersona.pas' {FBuscarPersona},
+  UABM_Articulo in 'UABM_Articulo.pas' {FABM_Articulo},
+  UABM_ArticuloMedida in 'UABM_ArticuloMedida.pas' {FABM_ArticuloMedida},
+  UABM_Marcas in 'UABM_Marcas.pas' {FABM_Marcas},
+  UABM_TipoArticulo in 'UABM_TipoArticulo.pas' {FABM_TipoArticulo},
+  UABM_TipoEmpresa in 'UABM_TipoEmpresa.pas' {FABM_TipoEmpresa},
+  UABM_Sucursal in 'UABM_Sucursal.pas' {FABM_Sucursal},
+  UABM_SucursalPosicion in 'UABM_SucursalPosicion.pas' {FABM_SucursalPosicion},
+  UABM_ProductoStock in 'UABM_ProductoStock.pas' {FABM_ProductoStock},
+  UABM_ProductoPosicion in 'UABM_ProductoPosicion.pas' {FABM_ProductoPosicion},
+  UABM_Personas in 'UABM_Personas.pas' {FABM_Personas};
 
 {$R *.res}
 
