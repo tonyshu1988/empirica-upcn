@@ -1135,6 +1135,8 @@ object FABMClientes: TFABMClientes
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
       'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
+      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
+      'where pr.id_relacion = 1 --CLIENTE'
       'order by cl.nombre')
     Params = <>
     Left = 64
@@ -1231,6 +1233,124 @@ object FABMClientes: TFABMClientes
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         ItemIndex = -1
+      end
+      item
+        Titulo = 'Direcci'#243'n'
+        Campo = 'DIRECCION'
+        Tabla = 'PERSONA'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Localidad'
+        Campo = 'LOCALIDAD'
+        Tabla = 'PERSONA'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo Postal'
+        Campo = 'CODIGO_POSTAL'
+        Tabla = 'PERSONA'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Provincia'
+        Campo = 'ID_PROVINCIA'
+        Tabla = 'PERSONA'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Provincia
+        TipoCombollenarCampo = 'NOMBRE_PROVINCIA'
+        TipoCombollenarCampoReal = 'ID_PROVINCIA'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Nac.'
+        Campo = 'FECHA_NACIMIENTO'
+        Tabla = 'PERSONA'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sexo'
+        Campo = 'SEXO'
+        Tabla = 'PERSONA'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'Masculino'
+          'Femenino'
+          'Ning'#250'no')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'M'
+          'F'
+          'N')
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Documento'
+        Campo = 'ID_TIPO_DOC'
+        Tabla = 'PERSONA'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Documento
+        TipoCombollenarCampo = 'NOMBRE_TIPO_DOC'
+        TipoCombollenarCampoReal = 'ID_TIPO_DOC'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nro. Documento'
+        Campo = 'NUMERO_DOC'
+        Tabla = 'PERSONA'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Condicion IVA'
+        Campo = 'ID_TIPO_IVA'
+        Tabla = 'PERSONA'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Iva
+        TipoCombollenarCampo = 'NOMBRE_TIPO_IVA'
+        TipoCombollenarCampoReal = 'ID_TIPO_IVA'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cuit/Cuil'
+        Campo = 'CUIT_CUIL'
+        Tabla = 'PERSONA'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'BAJA'
+        Tabla = 'PERSONA'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'SI'
+          'NO')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'S'
+          'N')
+        ItemIndex = -1
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1243,6 +1363,8 @@ object FABMClientes: TFABMClientes
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
       'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
+      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
+      'where pr.id_relacion = 1'
       'order by cl.nombre')
     SQL_Select.Strings = (
       
@@ -1252,10 +1374,13 @@ object FABMClientes: TFABMClientes
       'from persona cl'
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
-      'left join provincia pv on (cl.id_provincia = pv.id_provincia)')
+      'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
+      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)')
+    SQL_Where.Strings = (
+      'where pr.id_relacion = 1')
     SQL_Orden.Strings = (
       'order by cl.nombre')
-    UsarWhereOriginal = EK_Sin_Where
+    UsarWhereOriginal = EK_Con_Where
     InfoRegistros = lblResultadoBusqueda
     Left = 160
     Top = 72
@@ -1379,25 +1504,28 @@ object FABMClientes: TFABMClientes
     InsertSQL.Strings = (
       'INSERT INTO persona'
       
-        '  (persona.ID_PROVINCIA, persona.ID_TIPO_DOC, persona.ID_TIPO_IV' +
-        'A, persona.NOMBRE, '
+        '  (persona.ID_PERSONA, persona.ID_PROVINCIA, persona.ID_TIPO_DOC' +
+        ', persona.ID_TIPO_IVA, '
       
-        '   persona.DIRECCION, persona.LOCALIDAD, persona.CODIGO_POSTAL, ' +
-        'persona.TELEFONO, '
+        '   persona.NOMBRE, persona.DIRECCION, persona.LOCALIDAD, persona' +
+        '.CODIGO_POSTAL, '
       
-        '   persona.EMAIL, persona.FECHA_NACIMIENTO, persona.NUMERO_DOC, ' +
-        'persona.SEXO, '
-      '   persona.BAJA, persona.DESCRIPCION, persona.CUIT_CUIL)'
+        '   persona.TELEFONO, persona.EMAIL, persona.FECHA_NACIMIENTO, pe' +
+        'rsona.NUMERO_DOC, '
+      
+        '   persona.SEXO, persona.BAJA, persona.DESCRIPCION, persona.CUIT' +
+        '_CUIL)'
       'VALUES'
       
-        '  (:ID_PROVINCIA, :ID_TIPO_DOC, :ID_TIPO_IVA, :NOMBRE, :DIRECCIO' +
-        'N, :LOCALIDAD, '
+        '  (:ID_PERSONA, :ID_PROVINCIA, :ID_TIPO_DOC, :ID_TIPO_IVA, :NOMB' +
+        'RE, :DIRECCION, '
       
-        '   :CODIGO_POSTAL, :TELEFONO, :EMAIL, :FECHA_NACIMIENTO, :NUMERO' +
-        '_DOC, :SEXO, '
-      '   :BAJA, :DESCRIPCION, :CUIT_CUIL)')
+        '   :LOCALIDAD, :CODIGO_POSTAL, :TELEFONO, :EMAIL, :FECHA_NACIMIE' +
+        'NTO, :NUMERO_DOC, '
+      '   :SEXO, :BAJA, :DESCRIPCION, :CUIT_CUIL)')
     ModifySQL.Strings = (
       'UPDATE persona SET'
+      '  persona.ID_PERSONA = :ID_PERSONA,'
       '  persona.ID_PROVINCIA = :ID_PROVINCIA,'
       '  persona.ID_TIPO_DOC = :ID_TIPO_DOC,'
       '  persona.ID_TIPO_IVA = :ID_TIPO_IVA,'
@@ -1418,6 +1546,11 @@ object FABMClientes: TFABMClientes
     Left = 64
     Top = 176
     ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PERSONA'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'ID_PROVINCIA'
@@ -1498,5 +1631,30 @@ object FABMClientes: TFABMClientes
         Name = 'OLD_ID_PERSONA'
         ParamType = ptUnknown
       end>
+  end
+  object ZQ_RelacionCliente: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select pr.*'
+      'from persona_relacion pr'
+      '')
+    Params = <>
+    Left = 256
+    Top = 176
+    object ZQ_RelacionClienteID_PERSONA_RELACION: TIntegerField
+      FieldName = 'ID_PERSONA_RELACION'
+    end
+    object ZQ_RelacionClienteID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_RelacionClienteID_RELACION: TIntegerField
+      FieldName = 'ID_RELACION'
+    end
+    object ZQ_RelacionClienteID_EMPRESA: TIntegerField
+      FieldName = 'ID_EMPRESA'
+    end
+    object ZQ_RelacionClienteID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
   end
 end
