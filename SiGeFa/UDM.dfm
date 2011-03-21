@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'E:\Empirica\empirica-upcn\SiGeFa\Bases\SiGeFa.FDB'
+    Database = 'D:\Empirica\SiGeFa\Bases\SiGeFa.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
