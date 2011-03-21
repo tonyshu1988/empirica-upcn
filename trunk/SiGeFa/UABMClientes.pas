@@ -101,10 +101,6 @@ type
     DBECuit_Cuil: TDBEdit;
     ZU_Clientes: TZUpdateSQL;
     PanelCabecera: TPanel;
-    ShapeCabeceraFrente: TShape;
-    ShapeCabeceraFondo: TShape;
-    LabelCabeceraFrente: TLabel;
-    LabelCabeceraFondo: TLabel;
     lblResultadoBusqueda: TLabel;
     StaticTxtBaja: TStaticText;
     procedure btnSalirClick(Sender: TObject);
@@ -287,11 +283,11 @@ procedure TFABMClientes.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  Perform(WM_NEXTDLGCTL, 0, 0);
-
   if not validarcampos() then
     exit;
 
+  Perform(WM_NEXTDLGCTL, 0, 0);
+  
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMCliente) then
     begin
