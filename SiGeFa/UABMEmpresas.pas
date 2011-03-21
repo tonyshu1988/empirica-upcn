@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, ComCtrls, Grids, DBGrids,
   DBCtrls, StdCtrls, Mask, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla, Menus,UBuscarPersona;
+  ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla, Menus,UBuscarPersona,
+  ZStoredProcedure;
 
 type
   TFABMEmpresas = class(TForm)
@@ -159,6 +160,8 @@ type
     DBMemo3: TDBMemo;
     Panel2: TPanel;
     Label13: TLabel;
+    ZPID_Empresa: TZStoredProc;
+    ZPID_EmpresaID: TIntegerField;
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -224,6 +227,9 @@ begin
     DBGridEmpresas.Enabled:= false;
     ZQ_Empresa.Append;
     ZQ_EmpresaBAJA.AsString := 'N';
+    ZPID_Empresa.Close;
+    ZPID_Empresa.Open;
+    ZQ_EmpresaID_EMPRESA.AsInteger := ZPID_EmpresaID.AsInteger;    
     DBGridViajantes.PopupMenu := PopupMenuViajantes;
     DBGridContactos.PopupMenu := PopupMenuContactos;
     TabEmpresa.Enabled := true;

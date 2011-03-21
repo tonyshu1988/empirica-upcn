@@ -2044,4 +2044,25 @@ object FABMEmpresas: TFABMEmpresas
       FieldName = 'ID_SUCURSAL'
     end
   end
+  object ZPID_Empresa: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    StoredProcName = 'SP_GEN_EMPRESA_ID'
+    Left = 656
+    Top = 120
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    object ZPID_EmpresaID: TIntegerField
+      FieldName = 'ID'
+    end
+  end
 end
