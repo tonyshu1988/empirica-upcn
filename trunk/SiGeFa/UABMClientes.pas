@@ -103,6 +103,12 @@ type
     PanelCabecera: TPanel;
     lblResultadoBusqueda: TLabel;
     StaticTxtBaja: TStaticText;
+    ZQ_RelacionCliente: TZQuery;
+    ZQ_RelacionClienteID_PERSONA_RELACION: TIntegerField;
+    ZQ_RelacionClienteID_PERSONA: TIntegerField;
+    ZQ_RelacionClienteID_RELACION: TIntegerField;
+    ZQ_RelacionClienteID_EMPRESA: TIntegerField;
+    ZQ_RelacionClienteID_SUCURSAL: TIntegerField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -123,7 +129,7 @@ type
   private
     id_cliente: integer;
   public
-    { Public declarations }
+    id_sucursal: integer;
   end;
 
 var
@@ -184,7 +190,7 @@ end;
 
 procedure TFABMClientes.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes, ZQ_RelacionCliente]) then
   begin
     DBGridClientes.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -192,7 +198,18 @@ begin
     PageControl.Visible:= true;
     PageControl.ActivePageIndex:= 0;
 
+    Nro_Cliente.Active:= True;
+    id_cliente:= Nro_ClienteID.AsInteger;
+    Nro_Cliente.Active:= false;
+
+    ZQ_RelacionCliente.Append;
+    ZQ_RelacionClienteID_PERSONA.AsInteger:= id_cliente;
+    ZQ_RelacionClienteID_RELACION.AsInteger:= 1; //cliente
+    ZQ_RelacionClienteID_SUCURSAL.clear; //AsInteger:= id_sucursal;
+    ZQ_RelacionClienteID_EMPRESA.Clear;
+
     ZQ_Clientes.Append;
+    ZQ_ClientesID_PERSONA.AsInteger:= id_cliente;
     ZQ_ClientesBAJA.AsString:= 'N';
 
     DBEApellidoNombre.SetFocus;
@@ -206,7 +223,6 @@ procedure TFABMClientes.btnModificarClick(Sender: TObject);
 begin
   if ZQ_Clientes.IsEmpty then
     exit;
-
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes]) then
   begin
