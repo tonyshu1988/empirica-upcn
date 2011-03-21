@@ -1,8 +1,8 @@
 object FABMClientes: TFABMClientes
-  Left = 204
-  Top = 52
-  Width = 864
-  Height = 557
+  Left = 458
+  Top = 292
+  Width = 784
+  Height = 575
   Caption = 'FABMClientes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,20 +23,21 @@ object FABMClientes: TFABMClientes
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 856
-    Height = 473
+    Width = 768
+    Height = 485
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
     TabOrder = 4
     object DBGridClientes: TDBGrid
       Left = 5
-      Top = 50
-      Width = 846
-      Height = 250
+      Top = 20
+      Width = 758
+      Height = 292
       Align = alClient
-      Color = 16112578
+      Color = 14606012
       DataSource = DS_Clientes
+      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -47,135 +48,113 @@ object FABMClientes: TFABMClientes
       Columns = <
         item
           Expanded = False
-          FieldName = 'ID_PERSONA'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'ID_PROVINCIA'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'ID_TIPO_DOC'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'ID_TIPO_IVA'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
           FieldName = 'NOMBRE'
-          Width = 100
+          Title.Alignment = taCenter
+          Title.Caption = 'Apellido y Nombre'
+          Width = 179
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'DIRECCION'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'LOCALIDAD'
-          Width = 100
+          Title.Alignment = taCenter
+          Title.Caption = 'Direcci'#243'n'
+          Width = 193
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'CODIGO_POSTAL'
-          Width = 100
+          Title.Alignment = taCenter
+          Title.Caption = 'C.P.'
+          Width = 66
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'TELEFONO'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'EMAIL'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'FECHA_NACIMIENTO'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NUMERO_DOC'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SEXO'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DESCRIPCION'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CUIT_CUIL'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'BAJA'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'AUD_USUARIO'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'AUD_FECHA'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_TIPO_DOC'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_TIPO_IVA'
+          FieldName = 'LOCALIDAD'
+          Title.Alignment = taCenter
+          Title.Caption = 'Localidad'
           Width = 100
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'NOMBRE_PROVINCIA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Provincia'
           Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TELEFONO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Telefonos'
+          Width = 159
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'EMAIL'
+          Title.Alignment = taCenter
+          Title.Caption = 'E-Mail'
+          Width = 146
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA_NACIMIENTO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fecha Nac.'
+          Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_TIPO_DOC'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo Doc.'
+          Width = 107
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NUMERO_DOC'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. Doc.'
+          Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SEXO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Sexo'
+          Width = 43
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_TIPO_IVA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo IVA'
+          Width = 156
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CUIT_CUIL'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cuit/Cuil'
+          Width = 139
           Visible = True
         end>
     end
     object PanelEdicion: TPanel
       Left = 5
-      Top = 300
-      Width = 846
+      Top = 312
+      Width = 758
       Height = 168
       Align = alBottom
       BevelOuter = bvNone
@@ -184,7 +163,7 @@ object FABMClientes: TFABMClientes
       object PageControl: TPageControl
         Left = 0
         Top = 0
-        Width = 846
+        Width = 758
         Height = 168
         ActivePage = TabSheetDatos
         Align = alClient
@@ -518,7 +497,7 @@ object FABMClientes: TFABMClientes
           object DBMemoDetalle: TDBMemo
             Left = 0
             Top = 0
-            Width = 822
+            Width = 742
             Height = 132
             Align = alClient
             DataField = 'DESCRIPCION'
@@ -531,72 +510,20 @@ object FABMClientes: TFABMClientes
     object PanelCabecera: TPanel
       Left = 5
       Top = 5
-      Width = 846
-      Height = 45
+      Width = 758
+      Height = 15
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
       DesignSize = (
-        846
-        45)
-      object ShapeCabeceraFondo: TShape
-        Left = 2
-        Top = 3
-        Width = 833
-        Height = 22
-        Anchors = [akLeft, akTop, akRight]
-        Brush.Color = clSilver
-        Pen.Color = clGray
-        Shape = stRoundRect
-      end
-      object ShapeCabeceraFrente: TShape
-        Left = 5
-        Top = 0
-        Width = 833
-        Height = 22
-        Anchors = [akLeft, akTop, akRight]
-        Brush.Color = 863643
-        Shape = stRoundRect
-      end
-      object LabelCabeceraFondo: TLabel
-        Left = 0
-        Top = 4
-        Width = 833
-        Height = 18
-        Alignment = taCenter
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        Caption = 'CLIENTES'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-      end
-      object LabelCabeceraFrente: TLabel
-        Left = 2
-        Top = 2
-        Width = 833
-        Height = 18
-        Alignment = taCenter
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        Caption = 'CLIENTES'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 14417379
-        Font.Height = -16
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-      end
+        758
+        15)
       object lblResultadoBusqueda: TLabel
         Left = 3
-        Top = 29
+        Top = 0
         Width = 143
         Height = 13
+        Anchors = [akLeft, akBottom]
         Caption = 'lblResultadoBusqueda'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -606,8 +533,8 @@ object FABMClientes: TFABMClientes
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 789
-        Top = 30
+        Left = 722
+        Top = 0
         Width = 33
         Height = 17
         Alignment = taCenter
@@ -628,7 +555,7 @@ object FABMClientes: TFABMClientes
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
