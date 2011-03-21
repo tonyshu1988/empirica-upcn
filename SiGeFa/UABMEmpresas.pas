@@ -281,11 +281,16 @@ begin
   Perform(WM_NEXTDLGCTL, 0, 0);
   DBGridEmpresas.Enabled:=true;
 
-//   if ZQ_PersonaRelacionContactoID_EMPRESA.AsInteger <> 0 then
-//     ZQ_PersonaRelacionContactoID_EMPRESA.Clear;
-//
-//   if ZQ_PersonaRelacionViajanteID_EMPRESA.AsInteger <> 0 then
-//     ZQ_PersonaRelacionViajanteID_EMPRESA.Clear;
+  // Cuando estoy insertando primero cancela ZQ_empresa y despues Persona_relacion.. por lo que me deja sin id_empresa y hay problemas con la
+  //clave foranea... entonces dejo en nulo el campo id_empresa al cancelar cuando estoy insertando para no tener problemas.
+  if (ZQ_Empresa.State=dsinsert) then
+  begin
+     if ZQ_PersonaRelacionContactoID_EMPRESA.AsInteger <> 0 then
+       ZQ_PersonaRelacionContactoID_EMPRESA.Clear;
+
+     if ZQ_PersonaRelacionViajanteID_EMPRESA.AsInteger <> 0 then
+       ZQ_PersonaRelacionViajanteID_EMPRESA.Clear;
+  end;
 
   dm.EKModelo.cancelar_transaccion(transaccion_ABMEmpresas);
   GrupoVisualizando.Enabled:=true;
