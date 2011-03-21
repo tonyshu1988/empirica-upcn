@@ -220,15 +220,15 @@ end;
 
 procedure TFABMEmpresas.BtNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,[ZQ_Empresa, ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,[ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante]) then
   begin
     GrupoVisualizando.Enabled:=false;
     GrupoEditando.Enabled:=true;
     DBGridEmpresas.Enabled:= false;
     ZQ_Empresa.Append;
     ZQ_EmpresaBAJA.AsString := 'N';
-    ZPID_Empresa.Close;
-    ZPID_Empresa.Open;
+    ZPID_Empresa.Active := false;
+    ZPID_Empresa.Active := true;
     ZQ_EmpresaID_EMPRESA.AsInteger := ZPID_EmpresaID.AsInteger;    
     DBGridViajantes.PopupMenu := PopupMenuViajantes;
     DBGridContactos.PopupMenu := PopupMenuContactos;
@@ -280,6 +280,13 @@ procedure TFABMEmpresas.BtCancelarClick(Sender: TObject);
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
   DBGridEmpresas.Enabled:=true;
+
+//   if ZQ_PersonaRelacionContactoID_EMPRESA.AsInteger <> 0 then
+//     ZQ_PersonaRelacionContactoID_EMPRESA.Clear;
+//
+//   if ZQ_PersonaRelacionViajanteID_EMPRESA.AsInteger <> 0 then
+//     ZQ_PersonaRelacionViajanteID_EMPRESA.Clear;
+
   dm.EKModelo.cancelar_transaccion(transaccion_ABMEmpresas);
   GrupoVisualizando.Enabled:=true;
   GrupoEditando.Enabled:=false;

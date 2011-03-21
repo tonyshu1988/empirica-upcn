@@ -30,7 +30,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 290
       Width = 885
       Height = 281
-      ActivePage = TabEmpresa
+      ActivePage = TabViajantes
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       TabOrder = 0
