@@ -156,6 +156,8 @@ type
     procedure edImagenDblClick(Sender: TObject);
     procedure GrillaDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    function validarcampos():Boolean;
+    function validarcamposDetalle():Boolean;
   private
     { Private declarations }
   public
@@ -203,6 +205,7 @@ begin
   dm.EKModelo.abrir(ZQ_Marca);
   dm.EKModelo.abrir(ZQ_MedidaArticulo);
   grillaDetalle.PopupMenu:=nil;
+  PageControl1.ActivePageIndex:=0;
 end;
 
 procedure TFABMProductos.BtNuevoClick(Sender: TObject);
@@ -231,13 +234,88 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
   end;
 end;
 
+function TFABMProductos.validarcampos():Boolean;
+begin
+ result := true;
+
+  if (ZQ_ProductoCabeceraCOD_CORTO.IsNull) then
+  begin
+    Application.MessageBox('El campo Código Corto se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    PageControl1.ActivePageIndex:= 0;
+    edCodCorto.SetFocus;
+    result := false;
+    exit;
+  end;
+
+  if (ZQ_ProductoCabeceraNOMBRE.IsNull) then
+  begin
+    Application.MessageBox('El campo Nombre se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    PageControl1.ActivePageIndex:= 0;
+    edNombre.SetFocus;
+    result := false;
+    exit;
+  end;
+
+  if (ZQ_ProductoCabeceraID_MARCA.IsNull) then
+  begin
+    Application.MessageBox('El campo Marca se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    PageControl1.ActivePageIndex:= 0;
+    cmbMarca.SetFocus;
+    result := false;
+    exit;
+  end;
+
+  if (ZQ_ProductoCabeceraID_MARCA.IsNull) then
+  begin
+    Application.MessageBox('El campo Artículo se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    PageControl1.ActivePageIndex:= 0;
+    cmbArticulo.SetFocus;
+    result := false;
+    exit;
+  end;
+
+end;
+
+function TFABMProductos.validarcamposDetalle():Boolean;
+begin
+  result := true;
+
+  if (ZQ_DetalleProductoCOD_CORTO.IsNull) then
+  begin
+    Application.MessageBox('El campo Código Corto se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    PageControl1.ActivePageIndex:= 1;
+    dpCodCorto.SetFocus;
+    result := false;
+    exit;
+  end;
+
+  if (ZQ_DetalleProductoPRECIO_COSTO.IsNull) then
+  begin
+    Application.MessageBox('El campo Precio Costo se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    PageControl1.ActivePageIndex:= 1;
+    dpCosto.SetFocus;
+    result := false;
+    exit;
+  end;
+
+  if (ZQ_DetalleProductoPRECIO_VENTA.IsNull) then
+  begin
+    Application.MessageBox('El campo Precio Venta se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    PageControl1.ActivePageIndex:= 1;
+    dpVenta.SetFocus;
+    result := false;
+    exit;
+  end;
+  
+end;
+
 procedure TFABMProductos.BtGuardarClick(Sender: TObject);
 begin
 
 Perform(WM_NEXTDLGCTL, 0, 0);
 
-//  if not validarcampos() then
-//    exit;
+  if not validarcampos() then
+    exit;
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMProductos) then
@@ -245,6 +323,7 @@ Perform(WM_NEXTDLGCTL, 0, 0);
       Grilla.Enabled := true;
       PageControl1.Enabled:= false;
       grillaDetalle.PopupMenu:=nil;
+      grupoDetalle.Visible:=false;
       GrupoEditando.Enabled := false;
       GrupoVisualizando.Enabled := true;
       PageControl1.Enabled:= true;
@@ -263,6 +342,7 @@ begin
   begin
     Grilla.Enabled := true;
     grillaDetalle.PopupMenu:=nil;
+    grupoDetalle.Visible:=false;
     GrupoVisualizando.Enabled := true;
     GrupoEditando.Enabled := false;
     PageControl1.Enabled:= true;
@@ -346,6 +426,15 @@ begin
    grupoDetalle.Visible:=true;
    grillaDetalle.PopupMenu:=nil;
    ZQ_DetalleProducto.Append;
+   ZQ_DetalleProductoPRECIO_COSTO.AsFloat:=0;
+   ZQ_DetalleProductoPRECIO_VENTA.AsFloat:=0;
+   ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:=1;
+   ZQ_DetalleProductoCOEF_DESCUENTO.AsFloat:=0;
+   ZQ_DetalleProductoIMPUESTO_INTERNO.AsFloat:=0;
+   ZQ_DetalleProductoIMPUESTO_IVA.AsFloat:=0;
+   ZQ_DetalleProductoSTOCK_MIN.AsFloat:=0;
+   ZQ_DetalleProductoSTOCK_MAX.AsFloat:=0;
+
    ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:=ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
 end;
 
@@ -358,15 +447,14 @@ end;
 
 procedure TFABMProductos.grupoAceptarClick(Sender: TObject);
 begin
-  grupoDetalle.Visible:=false;
-  grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
+  if not(validarcamposDetalle) then
+  exit;
 
   if (dpCodBarras.Text='') then
    begin
        ZQ_DetalleProductoCODIGO_BARRA.AsString:=ZQ_ProductoCabeceraCOD_CORTO.AsString+
                                                 ZQ_DetalleProductoCOD_CORTO.AsString;
    end;
-
 
   //Si inserto uno nuevo genero un id nuevo
   if (ZQ_DetalleProducto.State=dsInsert) then
@@ -375,7 +463,10 @@ begin
     ZSP_GenerarIDProdDeralle.Active:=True;
     ZQ_DetalleProductoID_PRODUCTO.AsInteger:=ZSP_GenerarIDProdDeralleID.AsInteger;
    end;
-  ZQ_DetalleProducto.Post;
+
+   ZQ_DetalleProducto.Post;
+   grupoDetalle.Visible:=false;
+   grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
 end;
 
 procedure TFABMProductos.grupoCancelarClick(Sender: TObject);
