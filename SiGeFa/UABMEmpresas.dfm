@@ -30,7 +30,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 290
       Width = 885
       Height = 281
-      ActivePage = TabViajantes
+      ActivePage = TabEmpresa
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       TabOrder = 0
@@ -1578,7 +1578,8 @@ object FABMEmpresas: TFABMEmpresas
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from tipo_empresa te')
+      'from tipo_empresa te'
+      'where te.baja <> '#39'S'#39)
     Params = <>
     Left = 488
     Top = 112
