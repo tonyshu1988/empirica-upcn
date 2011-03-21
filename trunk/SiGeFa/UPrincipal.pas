@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
   ComCtrls, ImgList, ExtCtrls, ISVentanas, jpeg, QPrinters,
-  Grids, DBGrids, EKImageList32, EKVentanas;
+  Grids, DBGrids, EKImageList32, EKVentanas, EKInformacion;
 
 type
   TFPrincipal = class(TForm)
@@ -57,6 +57,7 @@ type
     ABMTipoEmpresa1: TMenuItem;
     ABMSucursal1: TMenuItem;
     ABMSucursalPosicion1: TMenuItem;
+    EKInformacion1: TEKInformacion;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
