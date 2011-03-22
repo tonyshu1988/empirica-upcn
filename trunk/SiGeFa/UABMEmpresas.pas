@@ -404,6 +404,7 @@ end;
 
 procedure TFABMEmpresas.OnSelPersona;
 begin
+ZQ_Personas.Refresh;
   if contacto = 1 then
     ZQ_PersonaRelacionContactoID_PERSONA.AsInteger := vsel.ZQ_PersonasID_PERSONA.AsInteger
   else
