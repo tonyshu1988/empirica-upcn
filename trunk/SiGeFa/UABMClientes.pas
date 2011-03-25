@@ -109,6 +109,17 @@ type
     ZQ_RelacionClienteID_RELACION: TIntegerField;
     ZQ_RelacionClienteID_EMPRESA: TIntegerField;
     ZQ_RelacionClienteID_SUCURSAL: TIntegerField;
+    ZQ_Sucursal: TZQuery;
+    ZQ_SucursalID_SUCURSAL: TIntegerField;
+    ZQ_SucursalNOMBRE: TStringField;
+    ZQ_SucursalDIRECCION: TStringField;
+    ZQ_SucursalLOCALIDAD: TStringField;
+    ZQ_SucursalCODIGO_POSTAL: TStringField;
+    ZQ_SucursalTELEFONO: TStringField;
+    ZQ_SucursalEMAIL: TStringField;
+    ZQ_SucursalBAJA: TStringField;
+    ZQ_SucursalAUD_UDUARIO: TStringField;
+    ZQ_SucursalAUD_FECHA: TDateTimeField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -129,7 +140,7 @@ type
   private
     id_cliente: integer;
   public
-    id_sucursal: integer;
+
   end;
 
 var
@@ -205,7 +216,7 @@ begin
     ZQ_RelacionCliente.Append;
     ZQ_RelacionClienteID_PERSONA.AsInteger:= id_cliente;
     ZQ_RelacionClienteID_RELACION.AsInteger:= 1; //cliente
-    ZQ_RelacionClienteID_SUCURSAL.clear; //AsInteger:= id_sucursal;
+    ZQ_RelacionClienteID_SUCURSAL.AsInteger:= id_sucursal;
     ZQ_RelacionClienteID_EMPRESA.Clear;
 
     ZQ_Clientes.Append;
@@ -338,6 +349,8 @@ end;
 
 procedure TFABMClientes.btnImprimirClick(Sender: TObject);
 begin
+  ShowMessage('Funcion no disponible en este momento');
+
   if ZQ_Clientes.IsEmpty then
     exit;
 
@@ -347,35 +360,51 @@ end;
 
 
 function TFABMClientes.validarcampos():boolean;
+var
+  mensaje: string;
+  color: TColor;
 begin
-   result := true;
+  DBEApellidoNombre.Color:= clWhite;
+  DBEDireccion.Color:= clWhite;
+  DBLCBoxTipoDoc.Color:= clWhite;
+  DBENroDocumento.Color:= clWhite;
 
-//  if (ZQ_ClientesNOMBRE.IsNull) then
-//  begin
-//    Application.MessageBox('El campo Apellido y Nombre se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-//    PageControl.ActivePageIndex:= 0;
-//    DBEApellidoNombre.SetFocus;
-//    result := false;
-//    exit;
-//  end;
-//
-//  if (DBENombreFantasia.Text = '') then
-//  begin
-//    Application.MessageBox('El campo "Nombre de Fantasía" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-//    PageControl1.ActivePageIndex:= 0;
-//    DBENombreFantasia.SetFocus;
-//    result := false;
-//    exit;
-//  end;
-//
-//  if (DBTipo.Text = '') then
-//  begin
-//    Application.MessageBox('El campo "Tipo" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-//    PageControl1.ActivePageIndex:= 0;
-//    DBTipo.SetFocus;
-//    result := false;
-//    exit;
-//  end;
+  PageControl.ActivePageIndex:= 0;
+  result:= true;
+  mensaje:= '';
+  color:= $00B3FFFF;
+  DBEApellidoNombre.SetFocus;
+
+  if (ZQ_ClientesNOMBRE.IsNull) then
+  begin
+    mensaje:= 'El campo Apellido y Nombre se encuentra vacío, Verifique';
+    DBEApellidoNombre.Color:= color;
+    result := false;
+  end;
+
+  if (ZQ_ClientesDIRECCION.IsNull) then
+  begin
+    mensaje:= mensaje+#13+'El campo Dirección se encuentra vacío, Verifique';
+    DBEDireccion.Color:= color;
+    result := false;
+  end;
+
+  if (ZQ_ClientesID_TIPO_DOC.IsNull) then
+  begin
+    mensaje:= mensaje+#13+'El campo Tipo Documento se encuentra vacío, Verifique';
+    DBLCBoxTipoDoc.Color:= color;
+    result := false;
+  end;
+
+  if (ZQ_ClientesNUMERO_DOC.IsNull) then
+  begin
+    mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío, Verifique';
+    DBENroDocumento.Color:= color;
+    result := false;
+  end;
+
+  if Result = False then
+    Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
 end;
 
 

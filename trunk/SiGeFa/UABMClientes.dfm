@@ -1,8 +1,8 @@
 object FABMClientes: TFABMClientes
-  Left = 458
-  Top = 292
-  Width = 784
-  Height = 575
+  Left = 303
+  Top = 165
+  Width = 861
+  Height = 547
   Caption = 'FABMClientes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,8 +23,8 @@ object FABMClientes: TFABMClientes
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 768
-    Height = 485
+    Width = 845
+    Height = 457
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -32,12 +32,12 @@ object FABMClientes: TFABMClientes
     object DBGridClientes: TDBGrid
       Left = 5
       Top = 20
-      Width = 758
-      Height = 292
+      Width = 835
+      Height = 264
       Align = alClient
       Color = 14606012
       DataSource = DS_Clientes
-      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -153,8 +153,8 @@ object FABMClientes: TFABMClientes
     end
     object PanelEdicion: TPanel
       Left = 5
-      Top = 312
-      Width = 758
+      Top = 284
+      Width = 835
       Height = 168
       Align = alBottom
       BevelOuter = bvNone
@@ -163,7 +163,7 @@ object FABMClientes: TFABMClientes
       object PageControl: TPageControl
         Left = 0
         Top = 0
-        Width = 758
+        Width = 835
         Height = 168
         ActivePage = TabSheetDatos
         Align = alClient
@@ -330,6 +330,7 @@ object FABMClientes: TFABMClientes
             Width = 270
             Height = 21
             CharCase = ecUpperCase
+            Color = clWhite
             DataField = 'NOMBRE'
             DataSource = DS_Clientes
             Font.Charset = DEFAULT_CHARSET
@@ -424,6 +425,7 @@ object FABMClientes: TFABMClientes
             Top = 114
             Width = 65
             Height = 21
+            CharCase = ecUpperCase
             DataField = 'SEXO'
             DataSource = DS_Clientes
             Font.Charset = DEFAULT_CHARSET
@@ -497,7 +499,7 @@ object FABMClientes: TFABMClientes
           object DBMemoDetalle: TDBMemo
             Left = 0
             Top = 0
-            Width = 742
+            Width = 819
             Height = 132
             Align = alClient
             DataField = 'DESCRIPCION'
@@ -510,13 +512,13 @@ object FABMClientes: TFABMClientes
     object PanelCabecera: TPanel
       Left = 5
       Top = 5
-      Width = 758
+      Width = 835
       Height = 15
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
       DesignSize = (
-        758
+        835
         15)
       object lblResultadoBusqueda: TLabel
         Left = 3
@@ -533,7 +535,7 @@ object FABMClientes: TFABMClientes
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 722
+        Left = 799
         Top = 0
         Width = 33
         Height = 17
@@ -1351,6 +1353,18 @@ object FABMClientes: TFABMClientes
           'S'
           'N')
         ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'ID_SUCURSAL'
+        Tabla = 'PERSONA_RELACION'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Sucursal
+        TipoCombollenarCampo = 'NOMBRE'
+        TipoCombollenarCampoReal = 'ID_SUCURSAL'
+        TipoComboEditable = False
+        ItemIndex = -1
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1655,6 +1669,53 @@ object FABMClientes: TFABMClientes
     end
     object ZQ_RelacionClienteID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
+    end
+  end
+  object ZQ_Sucursal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select s.*'
+      'from sucursal s')
+    Params = <>
+    Left = 496
+    Top = 72
+    object ZQ_SucursalID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
+    end
+    object ZQ_SucursalNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_SucursalDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_SucursalLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_SucursalCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_SucursalTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_SucursalEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_SucursalBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_SucursalAUD_UDUARIO: TStringField
+      FieldName = 'AUD_UDUARIO'
+      Size = 10
+    end
+    object ZQ_SucursalAUD_FECHA: TDateTimeField
+      FieldName = 'AUD_FECHA'
     end
   end
 end
