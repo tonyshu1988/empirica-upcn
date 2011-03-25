@@ -216,7 +216,7 @@ begin
     ZQ_RelacionCliente.Append;
     ZQ_RelacionClienteID_PERSONA.AsInteger:= id_cliente;
     ZQ_RelacionClienteID_RELACION.AsInteger:= 1; //cliente
-    ZQ_RelacionClienteID_SUCURSAL.AsInteger:= id_sucursal;
+    ZQ_RelacionClienteID_SUCURSAL.clear;//AsInteger:= id_sucursal;
     ZQ_RelacionClienteID_EMPRESA.Clear;
 
     ZQ_Clientes.Append;
