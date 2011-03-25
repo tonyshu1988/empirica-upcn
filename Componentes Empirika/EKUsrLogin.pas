@@ -13,6 +13,11 @@ type
   TOnConectarEvent = procedure(status : tstatusbar) of object;
   TEKUsrLoginModo = (EKLoginAutomatico, EKLoginSistema_ini);
   TEKUsrLoginModoPermiso = (EKPermisoCaption, EKPermisoAction);
+  TEKPermisoValores = record
+    usuario : string;
+    valor : string;
+  end;
+  TEKArrayPermisos = array of TEKPermisoValores;
 
 type
   TEKUsrLogin = class(TComponent)
@@ -49,6 +54,7 @@ type
     function PermisoAccion(Clave : String) : boolean ;
     function PermisoCaptionValor(Clave : String) : String ;
     function PermisoAccionValor(Clave : String) : String ;
+    function PermisoAccionValores(Clave : String) : TEKArrayPermisos ;
     function PermisoCaption(Clave : String) : boolean ;
     function conectar: boolean;
     function configurar_conexion(conexion : TZConnection; aplicacion : string) : boolean; overload;
@@ -109,12 +115,14 @@ begin
     EKLoginForm1.Caption := fcaption;
 end;
 
+
 procedure TEKUsrLogin.CambiarClave;
 begin
   cambioclave:=Tcambioclave.Create(nil);
   cambioclave.ShowModal;
   cambioclave.Release;
 end;
+
 
 procedure TEKUsrLogin.chequear_permisos;
 var
@@ -146,8 +154,8 @@ begin
       if menuvacio then
         menu.Items[i].Enabled := false;
     end;
-
 end;
+
 
 function TEKUsrLogin.conectar: boolean;
 var
@@ -161,7 +169,6 @@ var
   begin
     usuariodb := EKLoginForm1.EKSQLUsuarios.fieldbyname('db_usr').AsString;
     passworddb := EKLoginForm1.EKSQLUsuarios.fieldbyname('db_clv').AsString;
-
 
     // CAMBIA EL USUARIO DE BASE DE DATOS //
     error_clave := 'Error al intentar conectar a la Base de Datos con el usuario "'+usuariodb+'"';
@@ -177,10 +184,8 @@ var
         Application.Terminate;
     end;
     error_clave := '';
-
     conectar := true;
   end;
-
 
 Begin
   EKLoginForm1.StatusBar1.SimpleText := 'Validando Usuario...';
@@ -191,7 +196,6 @@ Begin
     ShowMessage('TEKUsrLogin: Error, No se definió Conección.');
     exit;
   end;
-
 
 //  if EKUsrLogin1.coneccion.Connected then
 //  begin
@@ -204,7 +208,6 @@ Begin
     Ini := TIniFile.Create( '.\SISTEMA.INI' );
     //application.OnException:= AppException;       // manejador generico
     //Modificado:= 0;
-
     try
       leer := Ini.ReadString( 'Leer', 'Seccion', 'Servidor' );
 
@@ -244,13 +247,11 @@ Begin
     passwordlog := Desencriptar('e#%22q', 'pmaabpibifnklkllgk', 18); //354875642
   end;
 
-
   if ipl = 'automatico' then
   begin
     ShowMessage('No se encotro configuración de Servidores. Verifique "sistema.ini"');
     Application.Terminate;
   end;
-
 
   error_clave := 'Verifique el archivo "sistema.ini"'+chr(13)+
                  'El error no esta en el usuario de sistema sino en el de base datos';
@@ -268,16 +269,11 @@ Begin
   EKUsrLogin1.Coneccion.Protocol := protocolo;
   EKUsrLogin1.coneccion.connect;
 
-
-  //usuarios.Open;
-
   error_clave := '';
-
 
   if Assigned(EKUsrLogin1.Coneccion) then
   with EKLoginForm1 do
   begin
-
     if (ip = 'automatico') or (db = 'automatico')  then
     begin
        EKSQLAplicacion.Connection:=EKUsrLogin1.Coneccion;
@@ -350,21 +346,16 @@ Begin
               //-- CONTROLA SI MODIFICO LA PASSWORD --
               if passwordsis <> oldpasswd then
               begin
-
                 //-- FINAL CORRECTO --
                 final_correcto;
-
               end
               else
                 showmessage('El Usuario Ingresado esta obligado a modificar su contraseña')
             end
             else
-
             begin
-
               //-- FINAL CORRECTO --
               final_correcto;
-
             end;
           end;
         end
@@ -386,6 +377,7 @@ begin
   result := configurar_conexion(conexion, aplicacion, '', '', '', '');
 end;
 
+
 function TEKUsrLogin.configurar_conexion(conexion: TZConnection; aplicacion, ip, alias,
   usuario, password: String): boolean;
 var
@@ -394,7 +386,6 @@ var
   encrip, ipa, usu, pass, dba : string;
   conex : TZConnection;
 begin
-
   try
     conex := TZConnection.create(nil);
     conex.Protocol := conexion.Protocol;
@@ -409,8 +400,6 @@ begin
     sqla.SQL.Add('select * from aplica where aplicacion = '''+aplicacion+'''');
     sqla.Open;
 
-
-
     ini := TIniFile.Create( '.\SISTEMA.INI' );
     try
       encrip  := Ini.ReadString( aplicacion, 'encriptado', 'S' );
@@ -423,11 +412,9 @@ begin
         usu := Desencriptar('momiamun', pchar(usu), length(usu));
         pass := Desencriptar('momiamun', pchar(pass), length(pass));
       end;
-
     finally
       Ini.Free;
     end;
-
 
     if ipa = '' then
       ipa := sqla.fieldbyname('ip_db').AsString;
@@ -449,9 +436,8 @@ begin
   except;
     result:=false;
   end;
-
-
 end;
+
 
 constructor TEKUsrLogin.create(AOwner: TComponent);
 var
@@ -486,10 +472,8 @@ begin
     end;
     EKLoginForm1.OnActivate := ActivarLoginForm;
   end;
-
-
-
 end;
+
 
 destructor TEKUsrLogin.destroy;
 begin
@@ -514,7 +498,6 @@ begin
         if EKInformacion1.IndiceUsuario > -1 then
           EKInformacion1.StatusBar.Panels.Items[EKInformacion1.IndiceUsuario].Text := 'Usuario: '+usuariosis;
 
-
     EKUsrLogin1.chequear_permisos;
 
     //--- CONTROL DE VERSION ---
@@ -526,7 +509,6 @@ begin
 
       with Control_version do
       begin
-
         version.Connection := FConeccion;
         version_db.Connection := FConeccion;
         version.ParamByName('programa').AsString := FAplicacion;
@@ -548,8 +530,6 @@ begin
         end
         else
           ver.Caption := 'Su Versión es desconocida, Nro. de secuencia : '+inttostr(sec);
-
-
 
         //principal.Caption := 'Apremios      Versión : '+versionFECHA.AsString+' - '+versionVERSIOND.AsString;
 
@@ -583,24 +563,21 @@ begin
         version.Close;
         if ((txtincompatible.Caption <> '') or (dbincompatible.Caption <> '')) then
           Application.Terminate
-
       end;
 
       Control_version.Release;
-
     end;
 
     if Assigned(FOnActivar) then
     begin
       FOnActivar(sender);
     end;
-
   end;
 
   Application.MainForm.Visible := true;
   Application.MainForm.BringToFront;
-
 end;
+
 
 function TEKUsrLogin.PermisoAccion(Clave: String): boolean;
 var
@@ -612,6 +589,7 @@ begin
       result := true;
 end;
 
+
 function TEKUsrLogin.PermisoAccionValor(Clave: String): String;
 var
   i : integer;
@@ -622,6 +600,38 @@ begin
       result := EKPermisos1[i].valor;
 end;
 
+
+//devuelve un array con el dato del campo valor del usuarios
+//y de los grupos al que pertenece el usuario
+function TEKUsrLogin.PermisoAccionValores(Clave: String): TEKArrayPermisos;
+var
+  i : integer;
+  indiceArray: integer;
+  auxArray: TEKArrayPermisos;
+  tamanio: integer;
+begin
+  tamanio:= 0;
+  for i := 0 to length(EKPermisos1)-1 do   //obtengo el tamanio del array
+    if EKPermisos1[i].accion = clave then  //contando todos los permisoso
+      if EKPermisos1[i].valor <> '' then   //que tienen valor asignado
+        tamanio:= tamanio + 1;
+
+  SetLength(auxArray, tamanio); //creo el array del tamanio obtenido anteriormente
+
+  indiceArray:= 0;
+  for i := 0 to length(EKPermisos1)-1 do
+    if EKPermisos1[i].accion = clave then
+      if EKPermisos1[i].valor <> '' then
+      begin
+        auxArray[indiceArray].usuario:= EKPermisos1[i].usuario; //asigno los valores
+        auxArray[indiceArray].valor:= EKPermisos1[i].valor;     //al array
+        indiceArray:= indiceArray + 1;
+      end;
+
+  Result:= auxArray;
+end;
+
+
 function TEKUsrLogin.PermisoCaption(Clave: String): boolean;
 var
   i : integer;
@@ -631,6 +641,7 @@ begin
     if EKPermisos1[i].caption = clave then
       result := true;
 end;
+
 
 function TEKUsrLogin.PermisoCaptionValor(Clave: String): String;
 var
