@@ -100,6 +100,8 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
+var
+  i: integer;
 begin
   baja:= $006A6AFF;    //ROJO = color de los registros dados de baja
   activo:= $00FB952F;  //AZUL = color de los registro comunes
@@ -176,8 +178,11 @@ end;
 
 
 procedure TFPrincipal.CambiarContraseniaClick(Sender: TObject);
+var i:integer;
 begin
-  dm.EKUsrLogin.CambiarClave;
+    for i := 0 to length(sucursales)-1 do
+      ShowMessage(sucursales[i].usuario+' - '+sucursales[i].valor);
+//  dm.EKUsrLogin.CambiarClave;
 end;
 
 
