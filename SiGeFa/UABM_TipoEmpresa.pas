@@ -33,6 +33,9 @@ type
     ZQ_TipoEmpresaDESCRIPCION: TStringField;
     DS_TipoEmpresa: TDataSource;
     ZQ_TipoEmpresaBAJA: TStringField;
+    PBusqueda: TPanel;
+    Label16: TLabel;
+    StaticText3: TStaticText;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -94,6 +97,13 @@ end;
 
 procedure TFABM_TipoEmpresa.btnGuardarClick(Sender: TObject);
 begin
+   if (trim(ZQ_TipoEmpresaDESCRIPCION.AsString) = '') then
+    begin
+      Application.MessageBox('El campo "Descripcion" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      DBEApellidoNombre.SetFocus;
+      exit;
+    end;
+
     if DM.EKModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa) then
     begin
       DBGridTipoEmpresa.Enabled:=true;
