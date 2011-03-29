@@ -180,8 +180,8 @@ end;
 procedure TFPrincipal.CambiarContraseniaClick(Sender: TObject);
 var i:integer;
 begin
-    for i := 0 to length(sucursales)-1 do
-      ShowMessage(sucursales[i].usuario+' - '+sucursales[i].valor);
+//    for i := 0 to length(sucursales)-1 do
+//      ShowMessage(sucursales[i].usuario+' - '+sucursales[i].valor);
 //  dm.EKUsrLogin.CambiarClave;
 end;
 

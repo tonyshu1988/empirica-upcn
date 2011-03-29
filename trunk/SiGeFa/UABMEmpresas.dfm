@@ -993,6 +993,15 @@ object FABMEmpresas: TFABMEmpresas
           end
           item
             BeginGroup = True
+            Item = BtSkype
+            Visible = True
+          end
+          item
+            Item = btEnviarMail
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = BtImprimir
             Visible = True
           end
@@ -1390,7 +1399,6 @@ object FABMEmpresas: TFABMEmpresas
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
       ImageIndex = 6
-      ShortCut = 123
       OnClick = btsalirClick
       AutoGrayScale = False
     end
@@ -1427,6 +1435,29 @@ object FABMEmpresas: TFABMEmpresas
       Hint = 'Anterior'
       Visible = ivAlways
       ImageIndex = 42
+      AutoGrayScale = False
+    end
+    object BtSkype: TdxBarLargeButton
+      Caption = 'Skype'
+      Category = 0
+      Hint = 'Skype'
+      Visible = ivAlways
+      ImageIndex = 73
+      OnClick = BtSkypeClick
+      AutoGrayScale = False
+    end
+    object bt: TdxBarLargeButton
+      Caption = 'sk'
+      Category = 0
+      Hint = 'sk'
+      Visible = ivAlways
+    end
+    object btEnviarMail: TdxBarLargeButton
+      Caption = 'Enviar Mail'
+      Category = 0
+      Hint = 'Enviar Mail'
+      Visible = ivAlways
+      ImageIndex = 74
       AutoGrayScale = False
     end
     object GrupoVisualizando: TdxBarGroup
@@ -1976,16 +2007,6 @@ object FABMEmpresas: TFABMEmpresas
       Size = 100
       Lookup = True
     end
-    object StringField4: TStringField
-      FieldKind = fkLookup
-      FieldName = 'telefono'
-      LookupDataSet = ZQ_Personas
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'TELEFONO'
-      KeyFields = 'ID_PERSONA'
-      Size = 100
-      Lookup = True
-    end
     object StringField5: TStringField
       FieldKind = fkLookup
       FieldName = 'email'
@@ -2043,6 +2064,16 @@ object FABMEmpresas: TFABMEmpresas
     end
     object ZQ_PersonaRelacionViajanteID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_PersonaRelacionViajantetelefono: TStringField
+      FieldKind = fkLookup
+      FieldName = 'telefono'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'TELEFONO'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
     end
   end
   object ZPID_Empresa: TZStoredProc

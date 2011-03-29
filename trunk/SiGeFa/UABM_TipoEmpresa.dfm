@@ -20,16 +20,16 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   TextHeight = 13
   object PContenedor: TPanel
     Left = 0
-    Top = 0
+    Top = 19
     Width = 862
-    Height = 416
+    Height = 397
     Align = alClient
     TabOrder = 0
     object DBGridTipoEmpresa: TDBGrid
       Left = 1
       Top = 1
       Width = 860
-      Height = 381
+      Height = 362
       Align = alClient
       Color = 16112578
       DataSource = DS_TipoEmpresa
@@ -50,7 +50,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 382
+      Top = 363
       Width = 860
       Height = 33
       Align = alBottom
@@ -87,6 +87,44 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
         ParentFont = False
         TabOrder = 0
       end
+    end
+  end
+  object PBusqueda: TPanel
+    Left = 0
+    Top = 0
+    Width = 862
+    Height = 19
+    Align = alTop
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 5
+    object Label16: TLabel
+      Left = 1
+      Top = 1
+      Width = 132
+      Height = 17
+      Align = alLeft
+      Caption = '                                 '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+    end
+    object StaticText3: TStaticText
+      Left = 752
+      Top = 1
+      Width = 109
+      Height = 17
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'Dado de Baja'
+      Color = 6974207
+      ParentColor = False
+      TabOrder = 0
     end
   end
   object dxBarABM: TdxBarManager

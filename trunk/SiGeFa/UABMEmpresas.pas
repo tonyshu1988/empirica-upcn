@@ -7,7 +7,8 @@ uses
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, ComCtrls, Grids, DBGrids,
   DBCtrls, StdCtrls, Mask, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla, Menus,UBuscarPersona,
-  ZStoredProcedure;
+  ZStoredProcedure,ShellAPI, IdMessage, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP;
 
 type
   TFABMEmpresas = class(TForm)
@@ -144,7 +145,6 @@ type
     ZQ_PersonaRelacionViajante: TZQuery;
     StringField2: TStringField;
     StringField3: TStringField;
-    StringField4: TStringField;
     StringField5: TStringField;
     StringField6: TStringField;
     StringField7: TStringField;
@@ -162,6 +162,10 @@ type
     Label13: TLabel;
     ZPID_Empresa: TZStoredProc;
     ZPID_EmpresaID: TIntegerField;
+    BtSkype: TdxBarLargeButton;
+    bt: TdxBarLargeButton;
+    ZQ_PersonaRelacionViajantetelefono: TStringField;
+    btEnviarMail: TdxBarLargeButton;
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -181,6 +185,7 @@ type
     procedure QuitarContacto1Click(Sender: TObject);
     function validarCampos():boolean;
     procedure QuitarViajante1Click(Sender: TObject);
+    procedure BtSkypeClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -464,6 +469,45 @@ begin
   exit;
 
   ZQ_PersonaRelacionViajante.Delete;
+end;
+
+procedure TFABMEmpresas.BtSkypeClick(Sender: TObject);
+var
+Telefono : string;
+begin
+
+  case PageControlEdicion.TabIndex of
+  0: begin
+        if ZQ_Empresa.IsEmpty then
+        exit;
+
+        Telefono:= '"callto://+'+ZQ_EmpresaTELEFONO.AsString+'"';
+
+        if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
+        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+     end;
+
+  1:begin
+      if ZQ_PersonaRelacionContacto.IsEmpty then
+      exit;
+
+      Telefono:= '"callto://+'+ZQ_PersonaRelacionContactotelefono.AsString+'"';
+
+      if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
+      Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+    end;
+
+   2: begin
+        if ZQ_PersonaRelacionViajante.IsEmpty then
+        exit;
+
+        Telefono:= '"callto://+'+ZQ_PersonaRelacionViajantetelefono.AsString+'"';
+
+        if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
+        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+      end;
+  end;
+
 end;
 
 end.
