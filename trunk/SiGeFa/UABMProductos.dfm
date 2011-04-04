@@ -23,7 +23,7 @@ object FABMProductos: TFABMProductos
     Left = 0
     Top = 0
     Width = 983
-    Height = 594
+    Height = 590
     Align = alClient
     Caption = 'Panel4'
     TabOrder = 4
@@ -38,7 +38,7 @@ object FABMProductos: TFABMProductos
       Left = 1
       Top = 17
       Width = 981
-      Height = 335
+      Height = 331
       Align = alClient
       Color = 14606012
       DataSource = DS_ProductoCabecera
@@ -111,10 +111,10 @@ object FABMProductos: TFABMProductos
     end
     object PageControl1: TPageControl
       Left = 1
-      Top = 352
+      Top = 348
       Width = 981
       Height = 241
-      ActivePage = tabDetalle
+      ActivePage = tabCabecera
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       MultiLine = True
@@ -129,7 +129,6 @@ object FABMProductos: TFABMProductos
           Width = 973
           Height = 209
           Align = alClient
-          Caption = '\'
           TabOrder = 0
           object Label1: TLabel
             Left = 16
@@ -214,6 +213,16 @@ object FABMProductos: TFABMProductos
             Caption = 'C'#243'digo Corto'
             FocusControl = edCodCorto
           end
+          object edImagen: TDBImage
+            Left = 593
+            Top = 24
+            Width = 200
+            Height = 180
+            DataField = 'IMAGEN'
+            DataSource = DS_ProductoCabecera
+            TabOrder = 5
+            OnDblClick = edImagenDblClick
+          end
           object edNombre: TDBEdit
             Left = 152
             Top = 23
@@ -229,17 +238,6 @@ object FABMProductos: TFABMProductos
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 1
-          end
-          object edImagen: TDBImage
-            Left = 592
-            Top = 24
-            Width = 223
-            Height = 180
-            DataField = 'IMAGEN'
-            DataSource = DS_ProductoCabecera
-            Stretch = True
-            TabOrder = 5
-            OnDblClick = edImagenDblClick
           end
           object DBEdit7: TDBEdit
             Left = 40
@@ -2036,13 +2034,6 @@ object FABMProductos: TFABMProductos
       FieldName = 'ID'
     end
   end
-  object buscarImagen: TOpenPictureDialog
-    DefaultExt = 'bmp'
-    Filter = 'Bitmaps (*.bmp)|*.bmp'
-    Title = 'Buscar Imagen'
-    Left = 280
-    Top = 224
-  end
   object ZSP_GenerarIDProdCabecera: TZStoredProc
     Connection = DM.Conexion
     Params = <
@@ -2063,5 +2054,13 @@ object FABMProductos: TFABMProductos
     object ZSP_GenerarIDProdCabeceraID: TIntegerField
       FieldName = 'ID'
     end
+  end
+  object buscarImagen: TOpenPictureDialog
+    Filter = 
+      'All (*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf)|*.jpg;*.jpeg;*.bmp|JP' +
+      'EG Image File (*.jpg)|*.jpg|JPEG Image File (*.jpeg)|*.jpeg|Bitm' +
+      'aps (*.bmp)|*.bmp'
+    Left = 280
+    Top = 272
   end
 end
