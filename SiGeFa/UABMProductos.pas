@@ -7,7 +7,7 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   ExtCtrls, Grids, DBGrids, EKDBGrid, dxBar, dxBarExtItems, StdCtrls,
   DBCtrls, Mask, EKBusquedaAvanzada, EKOrdenarGrilla, EKLlenarCombo, Menus,
-  Buttons, ZStoredProcedure, ExtDlgs;
+  Buttons, ZStoredProcedure, jpeg, ExtDlgs;
 
 type
   TFABMProductos = class(TForm)
@@ -130,12 +130,12 @@ type
     ZSP_GenerarIDProdDeralle: TZStoredProc;
     ZSP_GenerarIDProdDeralleID: TIntegerField;
     ZQ_DetalleProducto_medida: TStringField;
-    buscarImagen: TOpenPictureDialog;
     ZSP_GenerarIDProdCabecera: TZStoredProc;
     ZSP_GenerarIDProdCabeceraID: TIntegerField;
     ZQ_ProductoCabeceraCOD_CORTO: TStringField;
     Label20: TLabel;
     edCodCorto: TDBEdit;
+    buscarImagen: TOpenPictureDialog;
     procedure btBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -158,6 +158,7 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     function validarcampos():Boolean;
     function validarcamposDetalle():Boolean;
+    procedure CargaImagenProporcionado(Archivo: string);
   private
     { Private declarations }
   public
@@ -173,7 +174,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal;
+uses UDM, UPrincipal, UUtilidades;
 
 {$R *.dfm}
 
@@ -182,22 +183,24 @@ begin
     EKBuscar.Buscar;
 end;
 
-procedure TFABMProductos.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
+
+procedure TFABMProductos.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
-CanClose:= FPrincipal.cerrar_ventana(transaccion_ABMProductos);
+  CanClose:= FPrincipal.cerrar_ventana(transaccion_ABMProductos);
 end;
 
-procedure TFABMProductos.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+
+procedure TFABMProductos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-EKOrdenar.GuardarConfigColumnas
+  EKOrdenar.GuardarConfigColumnas
 end;
+
 
 procedure TFABMProductos.btsalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFABMProductos.FormCreate(Sender: TObject);
 begin
@@ -207,6 +210,7 @@ begin
   grillaDetalle.PopupMenu:=nil;
   PageControl1.ActivePageIndex:=0;
 end;
+
 
 procedure TFABMProductos.BtNuevoClick(Sender: TObject);
 begin
@@ -233,6 +237,7 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
       end;
   end;
 end;
+
 
 function TFABMProductos.validarcampos():Boolean;
 begin
@@ -273,8 +278,8 @@ begin
     result := false;
     exit;
   end;
-
 end;
+
 
 function TFABMProductos.validarcamposDetalle():Boolean;
 begin
@@ -306,13 +311,12 @@ begin
     result := false;
     exit;
   end;
-  
 end;
+
 
 procedure TFABMProductos.BtGuardarClick(Sender: TObject);
 begin
-
-Perform(WM_NEXTDLGCTL, 0, 0);
+  Perform(WM_NEXTDLGCTL, 0, 0);
 
   if not validarcampos() then
     exit;
@@ -336,6 +340,7 @@ Perform(WM_NEXTDLGCTL, 0, 0);
   end
 end;
 
+
 procedure TFABMProductos.BtCancelarClick(Sender: TObject);
 begin
  if dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos) then
@@ -348,6 +353,7 @@ begin
     PageControl1.Enabled:= true;
   end;
 end;
+
 
 procedure TFABMProductos.BtModificarClick(Sender: TObject);
 begin
@@ -367,6 +373,7 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     GrupoVisualizando.Enabled := false;
   end;
 end;
+
 
 procedure TFABMProductos.btBajaClick(Sender: TObject);
 var
@@ -394,6 +401,7 @@ begin
   end;
 end;
 
+
 procedure TFABMProductos.btReactivarClick(Sender: TObject);
 var
   recNo: integer;
@@ -418,8 +426,8 @@ begin
     ZQ_ProductoCabecera.Refresh;
     ZQ_ProductoCabecera.RecNo:= recNo;
   end;
-
 end;
+
 
 procedure TFABMProductos.AgregaDetalleClick(Sender: TObject);
 begin
@@ -434,9 +442,9 @@ begin
    ZQ_DetalleProductoIMPUESTO_IVA.AsFloat:=0;
    ZQ_DetalleProductoSTOCK_MIN.AsFloat:=0;
    ZQ_DetalleProductoSTOCK_MAX.AsFloat:=0;
-
    ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:=ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
 end;
+
 
 procedure TFABMProductos.EditarDetalleClick(Sender: TObject);
 begin
@@ -444,6 +452,7 @@ begin
    grillaDetalle.PopupMenu:=nil;
    ZQ_DetalleProducto.Edit;
 end;
+
 
 procedure TFABMProductos.grupoAceptarClick(Sender: TObject);
 begin
@@ -469,12 +478,14 @@ begin
    grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
 end;
 
+
 procedure TFABMProductos.grupoCancelarClick(Sender: TObject);
 begin
-grupoDetalle.Visible:=false;
-grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
-ZQ_DetalleProducto.RevertRecord;
+  grupoDetalle.Visible:=false;
+  grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
+  ZQ_DetalleProducto.RevertRecord;
 end;
+
 
 procedure TFABMProductos.ZQ_ProductoCabeceraAfterScroll(DataSet: TDataSet);
 begin
@@ -482,6 +493,7 @@ begin
     ZQ_DetalleProducto.ParamByName('prod').AsInteger:=ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
     dm.EKModelo.abrir(ZQ_DetalleProducto);
 end;
+
 
 procedure TFABMProductos.ZQ_ArticuloAfterScroll(DataSet: TDataSet);
 begin
@@ -491,14 +503,85 @@ begin
     dm.EKModelo.abrir(ZQ_MedidaArticulo);
 end;
 
+
 procedure TFABMProductos.edImagenDblClick(Sender: TObject);
+var
+  jpg: TJpegImage;
 begin
-if dm.EKModelo.verificar_transaccion(transaccion_ABMProductos) then
-  if buscarImagen.Execute then
+  if dm.EKModelo.verificar_transaccion(transaccion_ABMProductos) then //si esta activa la transaccion
+    if buscarImagen.Execute then //abro para buscar la imagen
     begin
-         ZQ_ProductoCabeceraIMAGEN.LoadFromFile(buscarImagen.FileName);
+      CargaImagenProporcionado(buscarImagen.FileName);
     end
 end;
+
+
+procedure TFABMProductos.CargaImagenProporcionado(Archivo: string);
+var
+  imagen: TGraphic; //contiene la imagen, es del tipo TGraphic poque puede ser jpg o bmp
+  auxBmp: TBitmap;
+  Rectangulo: TRect;
+  EscalaX,
+  EscalaY,
+  Escala: Single;
+begin
+  auxBMP:= TBitMap.Create;
+
+  //creo el tipo correcto dependiendo de la extencion del archivo
+  if pos('.jpg', archivo) > 0 then
+    imagen:= TJPEGImage.Create
+  else
+    if pos('.jpeg', archivo) > 0 then
+      imagen:= TJPEGImage.Create
+    else
+      if pos('.bmp', archivo) > 0 then
+        imagen:= TBitmap.Create;
+
+  try
+    //cargo la imagen
+    imagen.LoadFromFile(Archivo);
+
+//    //comprimo la imagen
+//    auxBMP.Assign(imagen);
+//    TJPEGImage (imagen).CompressionQuality:= 50;
+//    TJPEGImage (imagen).Compress;
+
+    //Por defecto, escala 1:1
+    EscalaX := 1.0;
+    EscalaY := 1.0;
+
+    //Hallamos la escala de reducción Horizontal
+    if edImagen.Width < imagen.Width then
+      EscalaX := edImagen.Width / imagen.Width;
+
+    //La escala vertical
+    if edImagen.Height < imagen.Height then
+      EscalaY := edImagen.Height / imagen.Height;
+
+    //Escogemos la menor de las 2
+    if EscalaY < EscalaX then Escala := EscalaY else Escala := EscalaX;
+
+    //Y la usamos para reducir el rectangulo destino
+    with Rectangulo do begin
+      Right := Trunc(imagen.Width * Escala);
+      Bottom := Trunc(imagen.Height * Escala);
+      Left := 0;
+      Top := 0;
+    end;
+
+    //Dibujamos el bitmap con el nuevo tamaño en el TImage destino
+    with edImagen.Picture.Bitmap do begin
+      Width := Rectangulo.Right;
+      Height := Rectangulo.Bottom;
+      Canvas.StretchDraw(Rectangulo, imagen);
+    end;
+
+  finally
+    imagen.Free;
+    auxBmp.Free;
+  end;
+end;
+
 
 procedure TFABMProductos.GrillaDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
