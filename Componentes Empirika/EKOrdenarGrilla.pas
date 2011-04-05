@@ -4,7 +4,12 @@ interface
 
 uses
   Messages, Controls, Dialogs, SysUtils, Classes, DBGrids, ZDataset, Graphics, windows,
-  DBClient, Provider, DB, Registry, forms;
+  DBClient, Provider, DB, Registry, forms, Grids;
+
+type
+  // Tipo de datos para poder acceder a las propiedades proptegidas de TCustomGrid
+  THackGrid = class(TCustomGrid);
+
 type
   TomaInvento = class(TControl);
 type
@@ -16,13 +21,14 @@ type
     FFuenteOrdenado : TFontStyles;
     FFormContenedor : String;
     FOrdenar : Boolean;
+    FMoverColumna : boolean;
     procedure SetFOrdenar_Grilla(const Value: TDBGrid);
     procedure TitleClick(Column: TColumn);
     procedure DBGrid1PillaLaRueda(var Message: TMessage);
     procedure MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure SaveColPos(Const DbGrid:TDBgrid);
     procedure LoadColPos(Var DbGrid:TDBgrid);
-
+    procedure setOpcionMover();
   protected
     { Protected declarations }
   public
@@ -42,6 +48,8 @@ type
       NombreGuardarConfig : String read FFormContenedor write FFormContenedor;
     property
       Ordenar : Boolean read FOrdenar write FOrdenar;
+    property
+      MoverColumna : Boolean read FMoverColumna write FMoverColumna;
   end;
 
 procedure Register;
@@ -63,7 +71,35 @@ begin
   FFuenteOrdenado := [fsBold,fsUnderline];
   FFuenteNormal := [];
   FOrdenar:= true;
+  FMoverColumna:= true;
 end;
+
+
+procedure TEKOrdenarGrilla.setOpcionMover();
+begin
+  with THackGrid(FOrdenar_Grilla) do
+    if MoverColumna then
+        Options := Options + [goColMoving] //si moverColumna es TRUE agrego la opcion de mover
+    else
+        Options := Options - [goColMoving]; //si moverColumna es FALSE quito la opcion de mover
+end;
+
+
+procedure TEKOrdenarGrilla.SetFOrdenar_Grilla(const Value: TDBGrid);
+begin
+  FOrdenar_Grilla := Value;
+  if not ((csDesigning in ComponentState)) then
+  begin
+    if Assigned(FOrdenar_Grilla) then
+    begin
+      FOrdenar_Grilla.OnTitleClick := TitleClick;
+      FOrdenar_Grilla.WindowProc := DBGrid1PillaLaRueda;
+      FOrdenar_Grilla.OnMouseMove := MouseMove;
+      setOpcionMover;
+    end;
+  end;
+end;
+
 
 procedure TEKOrdenarGrilla.DBGrid1PillaLaRueda(var Message: TMessage);
 var 
@@ -79,10 +115,12 @@ begin
     TomaInvento(FOrdenar_Grilla).WndProc(Message);
 end;
 
+
 destructor TEKOrdenarGrilla.destroy;
 begin
   inherited;
 end;
+
 
 procedure TEKOrdenarGrilla.SaveColPos(Const DbGrid:TDBgrid);
 var
@@ -101,6 +139,7 @@ begin
     end;
   end;
 end;
+
 
 procedure TEKOrdenarGrilla.LoadColPos(Var DbGrid:TDBgrid);
 var
@@ -123,34 +162,23 @@ begin
   end;
 end;
 
+
 procedure TEKOrdenarGrilla.MouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
-  if not Ordenar then
-    exit;
-                     
+  if Ordenar then
+    FOrdenar_Grilla.Hint := 'Click sobre el título para ordenar (+ CTRL para mas de un campo;  + SHIFT para buscar).'
+  else
+    FOrdenar_Grilla.Hint := 'Click + SHIFT sobre el título para buscar.';
+
   if y <= 15 then
   begin
-    FOrdenar_Grilla.Hint := 'Click sobre el título para ordenar  -  CTRL para mas de un campo  -  SHIFT para buscar';
     FOrdenar_Grilla.ShowHint := true;
   end
   else
     FOrdenar_Grilla.ShowHint := false;
 end;
 
-procedure TEKOrdenarGrilla.SetFOrdenar_Grilla(const Value: TDBGrid);
-begin
-  FOrdenar_Grilla := Value;
-  if not ((csDesigning in ComponentState)) then
-  begin
-    if Assigned(FOrdenar_Grilla) then
-    begin
-      FOrdenar_Grilla.OnTitleClick := TitleClick;
-      FOrdenar_Grilla.WindowProc := DBGrid1PillaLaRueda;
-      FOrdenar_Grilla.OnMouseMove := MouseMove;
-    end;
-  end;
-end;
 
 procedure TEKOrdenarGrilla.TitleClick(Column: TColumn);
 var
@@ -159,15 +187,13 @@ var
     buscar : string;
     PulsoOk : boolean;
 begin
-    if not Ordenar then
-      exit;
-
-
-    if column.Field.FieldKind = fkLookup	then   // saco los lockup porque dan error
+    if column.Field.FieldKind = fkLookup then   // saco los lockup porque dan error
     begin
       ShowMessage('No se puede ordenar ni buscar sobre este tipo de campo (lookup)');
       exit;
     end;
+
+    //Buscar en la columna si esta el shift presionado
     if HiWord(GetKeyState(VK_SHIFT)) <> 0  then
     begin
         PulsoOk:= InputQuery('Busqueda en el campo '+column.Title.Caption, 'Ingrese la cadena a buscar:', buscar);
@@ -177,11 +203,17 @@ begin
         exit;
     end;
 
+    //si ordenar = false no se puede ordenar presionando sobre los titulos
+    if not Ordenar then
+      exit;
+
+    //Ordeno la query por el titulo de la grilla presionado
     if FOrdenar_Grilla.DataSource.DataSet.ClassName = 'TClientDataSet'then
       filtro := TClientDataSet(FOrdenar_Grilla.DataSource.DataSet).IndexFieldNames
     else
       filtro := TZQuery(FOrdenar_Grilla.DataSource.DataSet).SortedFields;
 
+    //si tengo apretado el CTRL permito ordenar por mas de un campo de la grilla
     if HiWord(GetKeyState(VK_CONTROL)) <> 0 then
     begin
       if filtro = '' then
@@ -206,20 +238,23 @@ begin
         Column.Title.Font.Style := FFuenteOrdenado;
       end;
     end;
+
     if FOrdenar_Grilla.DataSource.DataSet.ClassName = 'TClientDataSet'then
       TClientDataSet(FOrdenar_Grilla.DataSource.DataSet).IndexFieldNames := filtro
     else
        TZQuery(FOrdenar_Grilla.DataSource.DataSet).SortedFields := filtro;
 end;
 
+
 procedure TEKOrdenarGrilla.CargarConfigColunmas;
 begin
-    LoadColPos(FOrdenar_Grilla);
+  LoadColPos(FOrdenar_Grilla);
 end;
+
 
 procedure TEKOrdenarGrilla.GuardarConfigColumnas;
 begin
-    SaveColPos(FOrdenar_Grilla);
+  SaveColPos(FOrdenar_Grilla);
 end;
 
 end.
