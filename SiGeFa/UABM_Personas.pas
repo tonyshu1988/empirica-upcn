@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids,
   EKBusquedaAvanzada, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ZStoredProcedure, ComCtrls, EKDBDateTimePicker,
-  StdCtrls, DBCtrls, Mask, ZSqlUpdate;
+  StdCtrls, DBCtrls, Mask, ZSqlUpdate, EKFiltrarColumna;
 
 type
   TFABM_Personas = class(TForm)
@@ -109,6 +109,8 @@ type
     ZQ_RelacionPersonaID_RELACION: TIntegerField;
     ZQ_RelacionPersonaID_EMPRESA: TIntegerField;
     ZQ_RelacionPersonaID_SUCURSAL: TIntegerField;
+    RadioButton1: TRadioButton;
+    CheckBox1: TCheckBox;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);

@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 302
-  Top = 134
+  Left = 455
+  Top = 289
   Width = 858
   Height = 575
   Caption = 'ABM Personas'
@@ -489,6 +489,22 @@ object FABM_Personas: TFABM_Personas
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 12
+          end
+          object RadioButton1: TRadioButton
+            Left = 416
+            Top = 16
+            Width = 113
+            Height = 17
+            Caption = 'RadioButton1'
+            TabOrder = 13
+          end
+          object CheckBox1: TCheckBox
+            Left = 416
+            Top = 40
+            Width = 97
+            Height = 17
+            Caption = 'CheckBox1'
+            TabOrder = 14
           end
         end
         object TabSheetDetalle: TTabSheet
@@ -1482,6 +1498,7 @@ object FABM_Personas: TFABM_Personas
     FuenteNormal = []
     NombreGuardarConfig = 'ABM_Clientes'
     Ordenar = True
+    MoverColumna = True
     Left = 160
     Top = 120
   end
