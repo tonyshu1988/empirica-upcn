@@ -39,7 +39,8 @@ type
 
 var
   DM: TDM;
-  CuentaNro: integer;
+  id_sucursal: integer;
+  sucursales: TEKArrayPermisos;
 
 implementation
 
@@ -49,6 +50,8 @@ uses UPrincipal;
 
 
 procedure TDM.LoginLogin(Sender: TObject);
+var
+  aux:string;
 begin
   auxDecimalSeparator:= DecimalSeparator;
   auxCurrencyDecimals:= CurrencyDecimals;
@@ -57,6 +60,15 @@ begin
 
   SkinData1.Active:= true;
   Application.CreateForm(TFPrincipal, FPrincipal);
+
+  //if EKUsrLogin.PermisoAccionValor('ACCESO') = '' then
+    id_sucursal:= 1;
+  //else
+  //  id_sucursal:= StrToInt(EKUsrLogin.PermisoAccionValor('ACCESO'));
+
+//  if EKUsrLogin.PermisoAccionValores('ACCESO') <> nil then
+//  SetLength(sucursales, cantidadPermisos);
+  sucursales:= EKUsrLogin.PermisoAccionValores('ACCESO');
 end;
 
 

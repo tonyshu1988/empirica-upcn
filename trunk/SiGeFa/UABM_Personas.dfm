@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 455
-  Top = 289
+  Left = 322
+  Top = 141
   Width = 858
   Height = 575
   Caption = 'ABM Personas'
