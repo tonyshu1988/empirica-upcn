@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
-  ComCtrls, ImgList, ExtCtrls, ISVentanas, jpeg, QPrinters,
+  ComCtrls, ImgList, ExtCtrls, jpeg, QPrinters,
   Grids, DBGrids, EKImageList32, EKVentanas, EKInformacion;
 
 type

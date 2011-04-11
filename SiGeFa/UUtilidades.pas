@@ -15,11 +15,61 @@ function Redondear(Valor: Real; Redondeo: Integer): Real;
 
 implementation
 
-uses SysUtils;
+uses SysUtils, Graphics, Jpeg;
 
 const
     TablaMul:Array[1..10] of Integer=(5,4,3,2,7,6,5,4,3,2); {Tabla Arbitraria}
 
+
+procedure SetJPGCompression (compresion: integer; const archivoEntrada: string; const archivoSalida: string);
+var
+  auxJPG : TJPegImage;
+  auxBMP : TBitMap;
+begin
+  //Force Compression to range 1..100
+  if compresion < 1 then compresion:= 1;
+  if compresion > 100 then compresion:= 100;
+
+  //Create Jpeg and Bmp work classes
+  auxJPG:= TJPegImage.Create;
+  auxBMP:= TBitMap.Create;
+
+  try
+    auxJPG.LoadFromFile(archivoEntrada);
+    auxBMP.Assign(auxJPG);
+
+    //Do the Compression and Save New File
+    auxJPG.CompressionQuality:= compresion;
+    auxJPG.Compress;
+    auxJPG.SaveToFile(archivoSalida);
+  finally
+    //Clean Up
+    auxJPG.Free;
+    auxBMP.Free;
+  end;
+end;
+
+
+function BMPtoJPG(var archivoBMP, archivoJPG: string):boolean;
+var Bitmap: TBitmap;
+    JpegImg: TJpegImage;
+begin
+  Result:=False;
+  Bitmap := TBitmap.Create;
+  try
+   Bitmap.LoadFromFile(archivoBMP) ;
+   JpegImg := TJpegImage.Create;
+   try
+    JpegImg.Assign(Bitmap) ;
+    JpegImg.SaveToFile(archivoJPG) ;
+    Result:=True;
+   finally
+    JpegImg.Free
+   end;
+  finally
+   Bitmap.Free
+  end;
+end;
 
 function Redondear(Valor: Real; Redondeo: Integer): Real;
 begin
