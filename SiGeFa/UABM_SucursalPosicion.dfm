@@ -22,15 +22,15 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 1016
-    Height = 543
+    Width = 1008
+    Height = 537
     Align = alClient
     TabOrder = 0
     object DBGridPosicionSucursal: TDBGrid
       Left = 1
       Top = 1
-      Width = 1014
-      Height = 435
+      Width = 1006
+      Height = 429
       Align = alClient
       Color = 16112578
       DataSource = DS_PosicionSucursal
@@ -75,8 +75,8 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 436
-      Width = 1014
+      Top = 430
+      Width = 1006
       Height = 106
       Align = alBottom
       BevelOuter = bvNone
@@ -247,7 +247,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 1016
+    Width = 1008
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -267,7 +267,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       ParentFont = False
     end
     object StaticText3: TStaticText
-      Left = 906
+      Left = 898
       Top = 1
       Width = 109
       Height = 17
@@ -284,7 +284,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

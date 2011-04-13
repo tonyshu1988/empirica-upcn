@@ -8,7 +8,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
@@ -41,7 +41,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Name = 'Verdana'
       TitleFont.Style = []
       Columns = <
         item

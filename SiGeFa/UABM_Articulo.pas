@@ -177,6 +177,13 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
+  if (DBLookupComboBox1.Text = '') then
+  begin
+    Application.MessageBox(pchar('El campo Tipo Articulo se encuentra vacío, Verifique'), 'Validación', MB_OK+MB_ICONINFORMATION);
+    DBLookupComboBox1.SetFocus;
+    Exit;
+  end;
+
   if (DBEDescripcion.Text = '') then
   begin
     Application.MessageBox(pchar('El campo Descripción se encuentra vacío, Verifique'), 'Validación', MB_OK+MB_ICONINFORMATION);
