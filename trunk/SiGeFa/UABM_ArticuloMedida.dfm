@@ -96,6 +96,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
+        OnDrawColumnCell = DBGridMedidasDrawColumnCell
       end
     end
   end
@@ -589,7 +590,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       Caption = 'Baja'
       Category = 0
       Hint = 'Da de baja un registro'
-      Visible = ivNever
+      Visible = ivAlways
       ImageIndex = 25
       OnClick = btnBajaClick
       AutoGrayScale = False
@@ -598,7 +599,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       Caption = 'Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
-      Visible = ivNever
+      Visible = ivAlways
       ImageIndex = 24
       OnClick = btnReactivarClick
       AutoGrayScale = False
@@ -661,7 +662,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object ZQ_Medida: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select id_medida, medida'
+      'select *'
       'from medida')
     Params = <>
     Left = 48
@@ -672,6 +673,10 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     object ZQ_MedidaMEDIDA: TStringField
       FieldName = 'MEDIDA'
       Size = 30
+    end
+    object ZQ_MedidaBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
     end
   end
   object DS_Medida: TDataSource

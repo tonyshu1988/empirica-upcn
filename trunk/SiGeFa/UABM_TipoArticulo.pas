@@ -32,6 +32,7 @@ type
     DS_TipoArt: TDataSource;
     ZQ_TipoArtID_TIPO_ARTICULO: TIntegerField;
     ZQ_TipoArtDESCRIPCION: TStringField;
+    ZQ_TipoArtBAJA: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -41,6 +42,9 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure DBGridMedidasDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -110,15 +114,15 @@ procedure TFABM_TipoArticulo.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-//  if (ZQ_Persona.IsEmpty) OR (ZQ_PersonaBAJA.AsString <> 'N') then
-//    exit;
+  if (ZQ_TipoArt.IsEmpty) OR (ZQ_TipoArtBAJA.AsString <> 'N') then
+    exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja la Medida seleccionada?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, []) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
     begin
-//      ZQ_Persona.Edit;
-//      ZQ_PersonaBAJA.AsString:='S';
+      ZQ_TipoArt.Edit;
+      ZQ_TipoArtBAJA.AsString:='S';
     end
     else
       exit;
@@ -126,9 +130,9 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
 
-//    recNo:= ZQ_Persona.RecNo;
-//    ZQ_Persona.Refresh;
-//    ZQ_Persona.RecNo:= recNo;
+    recNo:= ZQ_TipoArt.RecNo;
+    ZQ_TipoArt.Refresh;
+    ZQ_TipoArt.RecNo:= recNo;
   end;
 end;
 
@@ -136,15 +140,15 @@ procedure TFABM_TipoArticulo.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-//  if (ZQ_Persona.IsEmpty) OR (ZQ_PersonaBAJA.AsString <> 'S') then
-//    exit;
+  if (ZQ_TipoArt.IsEmpty) OR (ZQ_TipoArtBAJA.AsString <> 'S') then
+    exit;
 
   if (application.MessageBox(pchar('¿Desea reactivar la Medida seleccionado?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, []) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
     begin
-//      ZQ_Persona.Edit;
-//      ZQ_PersonaBAJA.AsString:='N';
+      ZQ_TipoArt.Edit;
+      ZQ_TipoArtBAJA.AsString:='N';
     end
     else
       exit;
@@ -152,9 +156,9 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
 
-//    recNo:= ZQ_Persona.RecNo;
-//    ZQ_Persona.Refresh;
-//    ZQ_Persona.RecNo:= recNo;
+    recNo:= ZQ_TipoArt.RecNo;
+    ZQ_TipoArt.Refresh;
+    ZQ_TipoArt.RecNo:= recNo;
   end;
 end;
 
@@ -207,6 +211,16 @@ procedure TFABM_TipoArticulo.FormCreate(Sender: TObject);
 begin
   ZQ_TipoArt.Close;
   ZQ_TipoArt.open;
+end;
+
+procedure TFABM_TipoArticulo.DBGridMedidasDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if ZQ_TipoArt.IsEmpty then
+    exit;
+
+  FPrincipal.PintarFilasGrillasConBajas(DBGridMedidas, ZQ_TipoArtBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
 end.
