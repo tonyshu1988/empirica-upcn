@@ -96,6 +96,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
+        OnDrawColumnCell = DBGridMedidasDrawColumnCell
       end
     end
   end
@@ -589,7 +590,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
       Caption = 'Baja'
       Category = 0
       Hint = 'Da de baja un registro'
-      Visible = ivNever
+      Visible = ivAlways
       ImageIndex = 25
       OnClick = btnBajaClick
       AutoGrayScale = False
@@ -598,7 +599,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
       Caption = 'Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
-      Visible = ivNever
+      Visible = ivAlways
       ImageIndex = 24
       OnClick = btnReactivarClick
       AutoGrayScale = False
@@ -661,7 +662,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
   object ZQ_TipoArt: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select id_tipo_articulo, descripcion'
+      'select *'
       'from tipo_articulo')
     Params = <>
     Left = 48
@@ -672,6 +673,10 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
     object ZQ_TipoArtDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       Size = 200
+    end
+    object ZQ_TipoArtBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
     end
   end
   object DS_TipoArt: TDataSource
