@@ -4851,12 +4851,6 @@ object FPrincipal: TFPrincipal
       object ABMClientes1: TMenuItem
         Action = AABMClientes
       end
-      object ABMProductoStock1: TMenuItem
-        Action = AABM_ProductoStock
-      end
-      object ABMProductoPosicion1: TMenuItem
-        Action = AABM_ProductoPosicion
-      end
       object ABMPersonas1: TMenuItem
         Action = AABM_Personas
       end
@@ -4874,6 +4868,16 @@ object FPrincipal: TFPrincipal
       end
       object ABMSucursalPosicion1: TMenuItem
         Action = AABM_SucursalPosicion
+      end
+    end
+    object ControlStock1: TMenuItem
+      Caption = 'Control Stock'
+      object ABMProductoStock1: TMenuItem
+        Action = AABM_ProductoStock
+      end
+      object ABMProductoPosicion1: TMenuItem
+        Action = AABM_ProductoPosicion
+        Visible = False
       end
     end
     object Salir1: TMenuItem

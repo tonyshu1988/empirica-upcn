@@ -58,6 +58,7 @@ type
     ABMSucursal1: TMenuItem;
     ABMSucursalPosicion1: TMenuItem;
     EKInformacion1: TEKInformacion;
+    ControlStock1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);

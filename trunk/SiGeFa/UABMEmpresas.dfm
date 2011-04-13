@@ -21,14 +21,14 @@ object FABMEmpresas: TFABMEmpresas
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 887
-    Height = 572
+    Width = 879
+    Height = 566
     Align = alClient
     TabOrder = 0
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 290
-      Width = 885
+      Top = 284
+      Width = 877
       Height = 281
       ActivePage = TabEmpresa
       Align = alBottom
@@ -516,8 +516,8 @@ object FABMEmpresas: TFABMEmpresas
     object DBGridEmpresas: TDBGrid
       Left = 1
       Top = 20
-      Width = 885
-      Height = 270
+      Width = 877
+      Height = 264
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 16112578
@@ -620,7 +620,7 @@ object FABMEmpresas: TFABMEmpresas
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 885
+      Width = 877
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -641,7 +641,7 @@ object FABMEmpresas: TFABMEmpresas
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 775
+        Left = 767
         Top = 1
         Width = 109
         Height = 17
@@ -659,7 +659,7 @@ object FABMEmpresas: TFABMEmpresas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1745,6 +1745,7 @@ object FABMEmpresas: TFABMEmpresas
     Grilla = DBGridEmpresas
     FuenteNormal = []
     Ordenar = True
+    MoverColumna = True
     Left = 328
     Top = 72
   end

@@ -8,7 +8,7 @@ object FABM_Articulo: TFABM_Articulo
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False

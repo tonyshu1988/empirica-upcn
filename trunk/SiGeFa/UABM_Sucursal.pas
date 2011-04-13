@@ -115,7 +115,7 @@ end;
 
 procedure TFABM_Sucursal.btnGuardarClick(Sender: TObject);
 begin
-   if (trim(ZQ_SucursalNOMBRE.AsString) = '') then
+   if (trim(DBEApellidoNombre.Text) = '') then
     begin
       Application.MessageBox('El campo "Nombre" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
       DBEApellidoNombre.SetFocus;

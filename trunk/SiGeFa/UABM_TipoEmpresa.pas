@@ -58,7 +58,7 @@ var
   FABM_TipoEmpresa: TFABM_TipoEmpresa;
 
 const
-  Transaccion_ABM_TipoEmpresa = 'ABM Tipo Empresa';
+  Transaccion_ABM_TipoEmpresa = 'ABM TIPO EMPRESA';
 
 implementation
 
@@ -97,7 +97,9 @@ end;
 
 procedure TFABM_TipoEmpresa.btnGuardarClick(Sender: TObject);
 begin
-   if (trim(ZQ_TipoEmpresaDESCRIPCION.AsString) = '') then
+   Perform(WM_NEXTDLGCTL, 0, 0);
+
+   if (trim(DBEApellidoNombre.Text) = '') then
     begin
       Application.MessageBox('El campo "Descripcion" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
       DBEApellidoNombre.SetFocus;

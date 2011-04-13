@@ -21,15 +21,15 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 862
-    Height = 397
+    Width = 854
+    Height = 391
     Align = alClient
     TabOrder = 0
     object DBGridTipoEmpresa: TDBGrid
       Left = 1
       Top = 1
-      Width = 860
-      Height = 362
+      Width = 852
+      Height = 356
       Align = alClient
       Color = 16112578
       DataSource = DS_TipoEmpresa
@@ -50,8 +50,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 363
-      Width = 860
+      Top = 357
+      Width = 852
       Height = 33
       Align = alBottom
       BevelOuter = bvNone
@@ -92,7 +92,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 862
+    Width = 854
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -113,7 +113,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       ParentFont = False
     end
     object StaticText3: TStaticText
-      Left = 752
+      Left = 744
       Top = 1
       Width = 109
       Height = 17
@@ -130,7 +130,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
