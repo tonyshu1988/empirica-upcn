@@ -59,6 +59,8 @@ type
     ABMSucursalPosicion1: TMenuItem;
     EKInformacion1: TEKInformacion;
     ControlStock1: TMenuItem;
+    AImprimirEtiqueta: TAction;
+    ImprimirEtiquetas1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -78,6 +80,7 @@ type
     procedure AABM_ProductoStockExecute(Sender: TObject);
     procedure AABM_ProductoPosicionExecute(Sender: TObject);
     procedure AABM_PersonasExecute(Sender: TObject);
+    procedure AImprimirEtiquetaExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -97,7 +100,8 @@ implementation
 Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_Articulo, UABM_TipoArticulo, UABM_Marcas, UABM_ArticuloMedida,
   UABM_TipoEmpresa, UABM_Sucursal, UABM_SucursalPosicion,
-  UABM_ProductoStock, UABM_ProductoPosicion, UABM_Personas;
+  UABM_ProductoStock, UABM_ProductoPosicion, UABM_Personas,
+  UImprimirEtiquetas;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -217,69 +221,74 @@ end;
 
 procedure TFPrincipal.AABMProductosExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABMProductos, FABMProductos);
+  EKVentanas1.Abrir(Sender, TFABMProductos, FABMProductos);
 end;
 
 
 procedure TFPrincipal.AABMClientesExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABMClientes, FABMClientes);
+  EKVentanas1.Abrir(Sender, TFABMClientes, FABMClientes);
 end;
 
 
 procedure TFPrincipal.AABMEmpresasExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABMEmpresas, FABMEmpresas);
+  EKVentanas1.Abrir(Sender, TFABMEmpresas, FABMEmpresas);
 end;
 
 procedure TFPrincipal.AABM_ArticuloExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABM_Articulo, FABM_Articulo);
+  EKVentanas1.Abrir(Sender, TFABM_Articulo, FABM_Articulo);
 end;
 
 procedure TFPrincipal.AABM_TipoArticuloExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABM_TipoArticulo, FABM_TipoArticulo);
+  EKVentanas1.Abrir(Sender, TFABM_TipoArticulo, FABM_TipoArticulo);
 end;
 
 procedure TFPrincipal.AABM_MarcasExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABM_Marcas, FABM_Marcas);
+  EKVentanas1.Abrir(Sender, TFABM_Marcas, FABM_Marcas);
 end;
 
 procedure TFPrincipal.AABM_ArticuloMedidaExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABM_ArticuloMedida, FABM_ArticuloMedida);
+  EKVentanas1.Abrir(Sender, TFABM_ArticuloMedida, FABM_ArticuloMedida);
 end;
 
 procedure TFPrincipal.AABM_TipoEmpresaExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABM_TipoEmpresa, FABM_TipoEmpresa);
+  EKVentanas1.Abrir(Sender, TFABM_TipoEmpresa, FABM_TipoEmpresa);
 end;
 
 procedure TFPrincipal.AABM_SucursalExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABM_Sucursal, FABM_Sucursal);
+  EKVentanas1.Abrir(Sender, TFABM_Sucursal, FABM_Sucursal);
 end;
 
 procedure TFPrincipal.AABM_SucursalPosicionExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABM_SucursalPosicion, FABM_SucursalPosicion);
+  EKVentanas1.Abrir(Sender, TFABM_SucursalPosicion, FABM_SucursalPosicion);
 end;
 
 procedure TFPrincipal.AABM_ProductoStockExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABM_ProductoStock, FABM_ProductoStock);
+  EKVentanas1.Abrir(Sender, TFABM_ProductoStock, FABM_ProductoStock);
 end;
 
 procedure TFPrincipal.AABM_ProductoPosicionExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABM_ProductoPosicion, FABM_ProductoPosicion);
+  EKVentanas1.Abrir(Sender, TFABM_ProductoPosicion, FABM_ProductoPosicion);
 end;
 
 procedure TFPrincipal.AABM_PersonasExecute(Sender: TObject);
 begin
-EKVentanas1.Abrir(Sender, TFABM_Personas, FABM_Personas);
+  EKVentanas1.Abrir(Sender, TFABM_Personas, FABM_Personas);
+end;
+
+procedure TFPrincipal.AImprimirEtiquetaExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFImprimirEtiquetas, FImprimirEtiquetas);
 end;
 
 end.
