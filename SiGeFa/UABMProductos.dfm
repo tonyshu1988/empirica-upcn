@@ -114,7 +114,7 @@ object FABMProductos: TFABMProductos
       Top = 348
       Width = 981
       Height = 241
-      ActivePage = tabCabecera
+      ActivePage = tabDetalle
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       MultiLine = True
@@ -431,6 +431,19 @@ object FABMProductos: TFABMProductos
                 FieldName = 'STOCK_MIN'
                 Title.Caption = 'Stock M'#237'nimo'
                 Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = '_medida'
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'LLEVAR_STOCK'
+                Title.Alignment = taCenter
+                Title.Caption = 'Llevar Stock'
+                Visible = True
               end>
           end
           object grupoDetalle: TGroupBox
@@ -443,7 +456,7 @@ object FABMProductos: TFABMProductos
             TabOrder = 0
             Visible = False
             object Label5: TLabel
-              Left = 152
+              Left = 136
               Top = 96
               Width = 40
               Height = 13
@@ -469,7 +482,7 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label7: TLabel
-              Left = 152
+              Left = 136
               Top = 16
               Width = 72
               Height = 13
@@ -483,7 +496,7 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label9: TLabel
-              Left = 152
+              Left = 136
               Top = 56
               Width = 72
               Height = 13
@@ -497,7 +510,7 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label10: TLabel
-              Left = 296
+              Left = 265
               Top = 16
               Width = 88
               Height = 13
@@ -511,7 +524,7 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label11: TLabel
-              Left = 296
+              Left = 265
               Top = 56
               Width = 95
               Height = 13
@@ -567,7 +580,7 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label15: TLabel
-              Left = 296
+              Left = 265
               Top = 96
               Width = 100
               Height = 13
@@ -581,7 +594,7 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label16: TLabel
-              Left = 416
+              Left = 375
               Top = 16
               Width = 80
               Height = 13
@@ -595,7 +608,7 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label17: TLabel
-              Left = 416
+              Left = 375
               Top = 56
               Width = 76
               Height = 13
@@ -609,9 +622,9 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object dpCosto: TDBEdit
-              Left = 152
+              Left = 136
               Top = 32
-              Width = 134
+              Width = 124
               Height = 21
               CharCase = ecUpperCase
               DataField = 'PRECIO_COSTO'
@@ -625,9 +638,9 @@ object FABMProductos: TFABMProductos
               TabOrder = 1
             end
             object dpVenta: TDBEdit
-              Left = 152
+              Left = 136
               Top = 72
-              Width = 134
+              Width = 124
               Height = 21
               CharCase = ecUpperCase
               DataField = 'PRECIO_VENTA'
@@ -638,10 +651,10 @@ object FABMProductos: TFABMProductos
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 5
+              TabOrder = 6
             end
             object dpGanancia: TDBEdit
-              Left = 296
+              Left = 265
               Top = 32
               Width = 105
               Height = 21
@@ -657,9 +670,9 @@ object FABMProductos: TFABMProductos
               TabOrder = 2
             end
             object dpDescuento: TDBEdit
-              Left = 296
+              Left = 265
               Top = 72
-              Width = 97
+              Width = 105
               Height = 21
               CharCase = ecUpperCase
               DataField = 'COEF_DESCUENTO'
@@ -670,12 +683,12 @@ object FABMProductos: TFABMProductos
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 6
+              TabOrder = 7
             end
             object dpImpInterno: TDBEdit
               Left = 8
               Top = 72
-              Width = 134
+              Width = 124
               Height = 21
               CharCase = ecUpperCase
               DataField = 'IMPUESTO_INTERNO'
@@ -686,12 +699,12 @@ object FABMProductos: TFABMProductos
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 4
+              TabOrder = 5
             end
             object spImpIVA: TDBEdit
               Left = 8
               Top = 112
-              Width = 134
+              Width = 124
               Height = 21
               CharCase = ecUpperCase
               DataField = 'IMPUESTO_IVA'
@@ -702,12 +715,12 @@ object FABMProductos: TFABMProductos
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 8
+              TabOrder = 9
             end
             object dpCodCorto: TDBEdit
               Left = 8
               Top = 32
-              Width = 129
+              Width = 124
               Height = 21
               CharCase = ecUpperCase
               DataField = 'COD_CORTO'
@@ -721,9 +734,9 @@ object FABMProductos: TFABMProductos
               TabOrder = 0
             end
             object dpCodBarras: TDBEdit
-              Left = 296
+              Left = 265
               Top = 112
-              Width = 200
+              Width = 256
               Height = 21
               CharCase = ecUpperCase
               DataField = 'CODIGO_BARRA'
@@ -734,10 +747,10 @@ object FABMProductos: TFABMProductos
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 10
+              TabOrder = 11
             end
             object dpStockMax: TDBEdit
-              Left = 416
+              Left = 375
               Top = 32
               Width = 81
               Height = 21
@@ -753,7 +766,7 @@ object FABMProductos: TFABMProductos
               TabOrder = 3
             end
             object dpStockMin: TDBEdit
-              Left = 416
+              Left = 375
               Top = 72
               Width = 81
               Height = 21
@@ -766,7 +779,7 @@ object FABMProductos: TFABMProductos
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 7
+              TabOrder = 8
             end
             object grupoAceptar: TBitBtn
               Left = 440
@@ -774,7 +787,7 @@ object FABMProductos: TFABMProductos
               Width = 75
               Height = 21
               Caption = 'Aceptar'
-              TabOrder = 12
+              TabOrder = 13
               OnClick = grupoAceptarClick
             end
             object grupoCancelar: TBitBtn
@@ -783,7 +796,7 @@ object FABMProductos: TFABMProductos
               Width = 75
               Height = 21
               Caption = 'Cancelar'
-              TabOrder = 13
+              TabOrder = 14
               OnClick = grupoCancelarClick
             end
             object dpDescripcion: TDBMemo
@@ -799,12 +812,12 @@ object FABMProductos: TFABMProductos
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 11
+              TabOrder = 12
             end
             object dpMedida: TDBLookupComboBox
-              Left = 152
+              Left = 136
               Top = 112
-              Width = 137
+              Width = 124
               Height = 21
               DataField = 'ID_MEDIDA'
               DataSource = DS_DetalleProducto
@@ -818,7 +831,20 @@ object FABMProductos: TFABMProductos
               ListField = 'MEDIDA'
               ListSource = DS_MedidaArticulo
               ParentFont = False
-              TabOrder = 9
+              TabOrder = 10
+            end
+            object DBCheckLllevarStock: TDBCheckBox
+              Left = 462
+              Top = 28
+              Width = 59
+              Height = 29
+              Caption = 'Llevar '#13#10'Stock'
+              DataField = 'LLEVAR_STOCK'
+              DataSource = DS_DetalleProducto
+              TabOrder = 4
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
+              WordWrap = True
             end
           end
         end
@@ -1822,6 +1848,7 @@ object FABMProductos: TFABMProductos
     FuenteNormal = []
     NombreGuardarConfig = 'ABM_Productos'
     Ordenar = True
+    MoverColumna = True
     Left = 96
     Top = 96
   end
@@ -1899,6 +1926,10 @@ object FABMProductos: TFABMProductos
       LookupResultField = 'MEDIDA'
       KeyFields = 'ID_MEDIDA'
       Lookup = True
+    end
+    object ZQ_DetalleProductoLLEVAR_STOCK: TStringField
+      FieldName = 'LLEVAR_STOCK'
+      Size = 1
     end
   end
   object DS_DetalleProducto: TDataSource

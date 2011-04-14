@@ -87,13 +87,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Visible = True
         end
         item
-          Expanded = False
-          FieldName = 'LLEVAR_STOCK'
-          Title.Alignment = taCenter
-          Title.Caption = 'Llevar Stock'
-          Visible = True
-        end
-        item
           Color = 15856100
           Expanded = False
           FieldName = 'STOCK_ACTUAL'
@@ -236,6 +229,11 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnModificar
             Visible = True
           end
@@ -738,10 +736,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
     end
     object ZQ_StockID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
-    end
-    object ZQ_StockLLEVAR_STOCK: TStringField
-      FieldName = 'LLEVAR_STOCK'
-      Size = 1
     end
     object ZQ_StockSTOCK_ACTUAL: TFloatField
       FieldName = 'STOCK_ACTUAL'

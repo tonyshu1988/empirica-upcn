@@ -30,7 +30,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 284
       Width = 877
       Height = 281
-      ActivePage = TabEmpresa
+      ActivePage = TabDescripcion
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       TabOrder = 0
@@ -118,9 +118,9 @@ object FABMEmpresas: TFABMEmpresas
         object Label10: TLabel
           Left = 33
           Top = 147
-          Width = 45
+          Width = 89
           Height = 13
-          Caption = 'Detalle:'
+          Caption = 'Observaciones:'
         end
         object dbNombre: TDBEdit
           Left = 110
@@ -318,7 +318,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridContactos: TDBGrid
           Left = 0
           Top = 0
-          Width = 877
+          Width = 869
           Height = 185
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
@@ -386,7 +386,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel1: TPanel
           Left = 0
           Top = 185
-          Width = 877
+          Width = 869
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -403,7 +403,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemo2: TDBMemo
           Left = 0
           Top = 204
-          Width = 877
+          Width = 869
           Height = 48
           Align = alBottom
           Color = 16112578
@@ -418,7 +418,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridViajantes: TDBGrid
           Left = 0
           Top = 0
-          Width = 877
+          Width = 869
           Height = 185
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
@@ -486,7 +486,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemo3: TDBMemo
           Left = 0
           Top = 204
-          Width = 877
+          Width = 869
           Height = 48
           Align = alBottom
           Color = 16112578
@@ -497,7 +497,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel2: TPanel
           Left = 0
           Top = 185
-          Width = 877
+          Width = 869
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -510,6 +510,21 @@ object FABMEmpresas: TFABMEmpresas
             Height = 13
             Caption = 'Datos Adicionales:'
           end
+        end
+      end
+      object TabDescripcion: TTabSheet
+        BorderWidth = 10
+        Caption = 'Descripci'#243'n'
+        ImageIndex = 3
+        object DBMemo4: TDBMemo
+          Left = 0
+          Top = 0
+          Width = 849
+          Height = 232
+          Align = alClient
+          DataField = 'DESCRIPCION_PRIVADA'
+          DataSource = DS_Empresa
+          TabOrder = 0
         end
       end
     end
@@ -1576,6 +1591,10 @@ object FABMEmpresas: TFABMEmpresas
     end
     object ZQ_EmpresaID_TIPO_EMPRESA: TIntegerField
       FieldName = 'ID_TIPO_EMPRESA'
+    end
+    object ZQ_EmpresaDESCRIPCION_PRIVADA: TStringField
+      FieldName = 'DESCRIPCION_PRIVADA'
+      Size = 1000
     end
   end
   object DS_Empresa: TDataSource
