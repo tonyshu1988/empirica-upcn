@@ -166,6 +166,9 @@ type
     bt: TdxBarLargeButton;
     ZQ_PersonaRelacionViajantetelefono: TStringField;
     btEnviarMail: TdxBarLargeButton;
+    ZQ_EmpresaDESCRIPCION_PRIVADA: TStringField;
+    TabDescripcion: TTabSheet;
+    DBMemo4: TDBMemo;
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);

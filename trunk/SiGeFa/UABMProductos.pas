@@ -136,6 +136,8 @@ type
     Label20: TLabel;
     edCodCorto: TDBEdit;
     buscarImagen: TOpenPictureDialog;
+    ZQ_DetalleProductoLLEVAR_STOCK: TStringField;
+    DBCheckLllevarStock: TDBCheckBox;
     procedure btBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -457,7 +459,7 @@ end;
 procedure TFABMProductos.grupoAceptarClick(Sender: TObject);
 begin
   if not(validarcamposDetalle) then
-  exit;
+    exit;
 
   if (dpCodBarras.Text='') then
    begin

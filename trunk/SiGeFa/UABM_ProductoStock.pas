@@ -33,7 +33,6 @@ type
     ZQ_StockID_STOCK_PRODUCTO: TIntegerField;
     ZQ_StockID_SUCURSAL: TIntegerField;
     ZQ_StockID_PRODUCTO: TIntegerField;
-    ZQ_StockLLEVAR_STOCK: TStringField;
     ZQ_StockSTOCK_ACTUAL: TFloatField;
     ZQ_StockSTOCK_MIN: TFloatField;
     ZQ_StockSTOCK_MAX: TFloatField;

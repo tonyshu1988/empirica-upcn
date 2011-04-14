@@ -28,9 +28,9 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     TabOrder = 0
     object PanelEdicion: TPanel
       Left = 0
-      Top = 374
+      Top = 376
       Width = 854
-      Height = 36
+      Height = 34
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
@@ -70,7 +70,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       Left = 0
       Top = 0
       Width = 854
-      Height = 374
+      Height = 376
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -85,7 +85,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         Left = 5
         Top = 5
         Width = 844
-        Height = 364
+        Height = 366
         Align = alClient
         Color = 16112578
         DataSource = DS_Medida
