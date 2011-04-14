@@ -20,7 +20,8 @@ uses
   UABM_ProductoStock in 'UABM_ProductoStock.pas' {FABM_ProductoStock},
   UABM_ProductoPosicion in 'UABM_ProductoPosicion.pas' {FABM_ProductoPosicion},
   UABM_Personas in 'UABM_Personas.pas' {FABM_Personas},
-  UABM_Articulo in 'UABM_Articulo.pas' {FABM_Articulo};
+  UABM_Articulo in 'UABM_Articulo.pas' {FABM_Articulo},
+  UImprimirEtiquetas in 'UImprimirEtiquetas.pas' {FImprimirEtiquetas};
 
 {$R *.res}
 
