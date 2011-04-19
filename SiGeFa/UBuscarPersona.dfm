@@ -207,7 +207,7 @@ object FBuscarPersona: TFBuscarPersona
         Caption = 'Detalle:'
       end
       object dbcSexo: TDBComboBox
-        Left = 640
+        Left = 641
         Top = 3
         Width = 57
         Height = 21
@@ -287,8 +287,8 @@ object FBuscarPersona: TFBuscarPersona
       end
       object ISDBEditDateTimePicker1: TISDBEditDateTimePicker
         Left = 539
-        Top = 25
-        Width = 158
+        Top = 27
+        Width = 159
         Height = 21
         Date = 3654.436158275457000000
         Time = 3654.436158275457000000
@@ -393,9 +393,9 @@ object FBuscarPersona: TFBuscarPersona
         TabOrder = 10
       end
       object DBEdit5: TDBEdit
-        Left = 603
-        Top = 76
-        Width = 95
+        Left = 604
+        Top = 74
+        Width = 97
         Height = 21
         CharCase = ecUpperCase
         DataField = 'CODIGO_POSTAL'
@@ -410,7 +410,7 @@ object FBuscarPersona: TFBuscarPersona
       end
       object DBEdit2: TDBEdit
         Left = 366
-        Top = 98
+        Top = 97
         Width = 335
         Height = 21
         DataField = 'EMAIL'

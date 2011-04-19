@@ -34,30 +34,8 @@ type
     TabContactos: TTabSheet;
     TabViajantes: TTabSheet;
     DBGridEmpresas: TDBGrid;
-    Label5: TLabel;
-    Label2: TLabel;
-    Label11: TLabel;
-    Label15: TLabel;
-    dbNombre: TDBEdit;
-    DBEdit1: TDBEdit;
-    DBLookupComboBox1: TDBLookupComboBox;
-    DBEdit2: TDBEdit;
-    Label1: TLabel;
-    DBLookupComboBox2: TDBLookupComboBox;
-    Label3: TLabel;
-    DBLookupComboBox3: TDBLookupComboBox;
-    Label4: TLabel;
-    DBEdit3: TDBEdit;
-    DBEdit4: TDBEdit;
-    Label6: TLabel;
-    DBEdit5: TDBEdit;
-    Label7: TLabel;
-    Label8: TLabel;
-    DBEdit6: TDBEdit;
-    Label9: TLabel;
-    DBEdit7: TDBEdit;
     Label10: TLabel;
-    DBMemo1: TDBMemo;
+    DBMemoEmpresa: TDBMemo;
     DBGridContactos: TDBGrid;
     DBGridViajantes: TDBGrid;
     ZQ_Empresa: TZQuery;
@@ -150,14 +128,14 @@ type
     StringField7: TStringField;
     StringField8: TStringField;
     Panel1: TPanel;
-    DBMemo2: TDBMemo;
+    DBMemoContactos: TDBMemo;
     Label12: TLabel;
     ZQ_PersonaRelacionViajanteID_PERSONA_RELACION: TIntegerField;
     ZQ_PersonaRelacionViajanteID_PERSONA: TIntegerField;
     ZQ_PersonaRelacionViajanteID_RELACION: TIntegerField;
     ZQ_PersonaRelacionViajanteID_EMPRESA: TIntegerField;
     ZQ_PersonaRelacionViajanteID_SUCURSAL: TIntegerField;
-    DBMemo3: TDBMemo;
+    DBMemoViajantes: TDBMemo;
     Panel2: TPanel;
     Label13: TLabel;
     ZPID_Empresa: TZStoredProc;
@@ -168,7 +146,33 @@ type
     btEnviarMail: TdxBarLargeButton;
     ZQ_EmpresaDESCRIPCION_PRIVADA: TStringField;
     TabDescripcion: TTabSheet;
-    DBMemo4: TDBMemo;
+    DBMemoDescripcion: TDBMemo;
+    PopupMenuSkypeMail: TPopupMenu;
+    llamar1: TMenuItem;
+    EnviarunMail1: TMenuItem;
+    PanelEdicion: TPanel;
+    Label5: TLabel;
+    Label2: TLabel;
+    Label11: TLabel;
+    Label15: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    dbNombre: TDBEdit;
+    DBEdit1: TDBEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DBEdit2: TDBEdit;
+    DBLookupComboBox2: TDBLookupComboBox;
+    DBLookupComboBox3: TDBLookupComboBox;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit6: TDBEdit;
+    DBEdit7: TDBEdit;
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -189,6 +193,7 @@ type
     function validarCampos():boolean;
     procedure QuitarViajante1Click(Sender: TObject);
     procedure BtSkypeClick(Sender: TObject);
+    procedure llamar1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -240,7 +245,7 @@ begin
     ZQ_EmpresaID_EMPRESA.AsInteger := ZPID_EmpresaID.AsInteger;    
     DBGridViajantes.PopupMenu := PopupMenuViajantes;
     DBGridContactos.PopupMenu := PopupMenuContactos;
-    TabEmpresa.Enabled := true;
+    PanelEdicion.Enabled := true;
   end;
 end;
 
@@ -257,7 +262,7 @@ begin
     GrupoEditando.Enabled:=true;
     DBGridViajantes.PopupMenu := PopupMenuViajantes;
     DBGridContactos.PopupMenu := PopupMenuContactos;
-    TabEmpresa.Enabled := true;
+    PanelEdicion.Enabled := true;
   end;
 end;
 
@@ -279,7 +284,7 @@ begin
       DBGridEmpresas.SetFocus;
       DBGridViajantes.PopupMenu := nil;
       DBGridContactos.PopupMenu := nil;
-      TabEmpresa.Enabled := false;
+      PanelEdicion.Enabled := false;
     end;
   end;
 end;
@@ -306,7 +311,7 @@ begin
   DBGridEmpresas.SetFocus;
   DBGridViajantes.PopupMenu := nil;
   DBGridContactos.PopupMenu := nil;
-  TabEmpresa.Enabled := false;
+  PanelEdicion.Enabled := false;
 end;
 
 procedure TFABMEmpresas.btsalirClick(Sender: TObject);
@@ -478,13 +483,70 @@ procedure TFABMEmpresas.BtSkypeClick(Sender: TObject);
 var
 Telefono : string;
 begin
+  case PageControlEdicion.TabIndex of
+  0: begin
+        if ZQ_Empresa.IsEmpty then
+        exit;
+
+        if DBMemoEmpresa.SelText <> '' then
+          Telefono:= '"callto://+'+DBMemoEmpresa.SelText+'"'
+        else
+          Telefono:= '"callto://+'+ZQ_EmpresaTELEFONO.AsString+'"';
+
+        if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
+        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+     end;
+
+  1:  begin
+        if ZQ_PersonaRelacionContacto.IsEmpty then
+        exit;
+
+        if DBMemoContactos.SelText <> '' then
+          Telefono:= '"callto://+'+DBMemoContactos.SelText+'"'
+        else
+          Telefono:= '"callto://+'+ZQ_PersonaRelacionContactotelefono.AsString+'"';
+
+        if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
+        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+    end;
+
+   2: begin
+        if ZQ_PersonaRelacionViajante.IsEmpty then
+        exit;
+
+        if DBMemoViajantes.SelText <> '' then
+          Telefono:= '"callto://+'+DBMemoViajantes.SelText+'"'
+        else
+          Telefono:= '"callto://+'+ZQ_PersonaRelacionViajantetelefono.AsString+'"';
+
+        if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
+        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+      end;
+
+   3: begin
+        if ZQ_Empresa.IsEmpty then
+        exit;
+
+        Telefono:= '"callto://+'+DBMemoDescripcion.SelText+'"';
+
+        if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
+        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+      end;
+  end;
+
+end;
+
+procedure TFABMEmpresas.llamar1Click(Sender: TObject);
+var
+telefono : string;
+begin
 
   case PageControlEdicion.TabIndex of
   0: begin
         if ZQ_Empresa.IsEmpty then
         exit;
 
-        Telefono:= '"callto://+'+ZQ_EmpresaTELEFONO.AsString+'"';
+        Telefono:= '"callto://+'+DBMemoEmpresa.SelText+'"';
 
         if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
         Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
@@ -494,7 +556,7 @@ begin
       if ZQ_PersonaRelacionContacto.IsEmpty then
       exit;
 
-      Telefono:= '"callto://+'+ZQ_PersonaRelacionContactotelefono.AsString+'"';
+      Telefono:= '"callto://+'+DBMemoContactos.SelText+'"';
 
       if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
       Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
@@ -504,7 +566,17 @@ begin
         if ZQ_PersonaRelacionViajante.IsEmpty then
         exit;
 
-        Telefono:= '"callto://+'+ZQ_PersonaRelacionViajantetelefono.AsString+'"';
+        Telefono:= '"callto://+'+DBMemoViajantes.SelText+'"';
+
+        if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
+        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+      end;
+
+   3: begin
+        if ZQ_Empresa.IsEmpty then
+        exit;
+
+        Telefono:= '"callto://+'+DBMemoDescripcion.SelText+'"';
 
         if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
         Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
