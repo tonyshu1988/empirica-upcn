@@ -21,100 +21,22 @@ object FABMEmpresas: TFABMEmpresas
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 879
-    Height = 566
+    Width = 887
+    Height = 572
     Align = alClient
     TabOrder = 0
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 284
-      Width = 877
+      Top = 290
+      Width = 885
       Height = 281
-      ActivePage = TabDescripcion
+      ActivePage = TabViajantes
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       TabOrder = 0
       object TabEmpresa: TTabSheet
         Caption = 'Empresa'
-        Enabled = False
         ImageIndex = 35
-        object Label5: TLabel
-          Left = 5
-          Top = 12
-          Width = 104
-          Height = 13
-          Caption = 'Nombre Empresa:'
-        end
-        object Label2: TLabel
-          Left = 52
-          Top = 96
-          Width = 57
-          Height = 13
-          Caption = 'Provincia:'
-        end
-        object Label11: TLabel
-          Left = 581
-          Top = 12
-          Width = 55
-          Height = 13
-          Caption = 'Cuit/Cuil:'
-        end
-        object Label15: TLabel
-          Left = 14
-          Top = 40
-          Width = 95
-          Height = 13
-          Caption = 'Nro Tel/Cel/Fax:'
-        end
-        object Label1: TLabel
-          Left = 582
-          Top = 68
-          Width = 54
-          Height = 13
-          Caption = 'Tipo IVA:'
-        end
-        object Label3: TLabel
-          Left = 553
-          Top = 40
-          Width = 83
-          Height = 13
-          Caption = 'Tipo Empresa:'
-        end
-        object Label4: TLabel
-          Left = 51
-          Top = 68
-          Width = 58
-          Height = 13
-          Caption = 'Direcci'#243'n:'
-        end
-        object Label6: TLabel
-          Left = 331
-          Top = 96
-          Width = 58
-          Height = 13
-          Caption = 'Localidad:'
-        end
-        object Label7: TLabel
-          Left = 690
-          Top = 96
-          Width = 66
-          Height = 13
-          Caption = 'Cod.Postal:'
-        end
-        object Label8: TLabel
-          Left = 73
-          Top = 124
-          Width = 36
-          Height = 13
-          Caption = 'Email:'
-        end
-        object Label9: TLabel
-          Left = 415
-          Top = 124
-          Width = 55
-          Height = 13
-          Caption = 'Pag.Web:'
-        end
         object Label10: TLabel
           Left = 33
           Top = 147
@@ -122,194 +44,283 @@ object FABMEmpresas: TFABMEmpresas
           Height = 13
           Caption = 'Observaciones:'
         end
-        object dbNombre: TDBEdit
-          Left = 110
-          Top = 8
-          Width = 433
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'NOMBRE'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 0
-        end
-        object DBEdit1: TDBEdit
-          Left = 110
-          Top = 36
-          Width = 433
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'TELEFONO'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-        end
-        object DBLookupComboBox1: TDBLookupComboBox
-          Left = 110
-          Top = 92
-          Width = 215
-          Height = 21
-          DataField = 'ID_PROVINCIA'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          KeyField = 'ID_PROVINCIA'
-          ListField = 'NOMBRE_PROVINCIA'
-          ListSource = DS_Provincia
-          ParentFont = False
-          TabOrder = 6
-        end
-        object DBEdit2: TDBEdit
-          Left = 640
-          Top = 8
-          Width = 212
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'CUIT_CUIL'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 1
-        end
-        object DBLookupComboBox2: TDBLookupComboBox
-          Left = 640
-          Top = 64
-          Width = 215
-          Height = 21
-          DataField = 'ID_TIPO_IVA'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          KeyField = 'ID_TIPO_IVA'
-          ListField = 'NOMBRE_TIPO_IVA'
-          ListSource = DS_TipoIVA
-          ParentFont = False
-          TabOrder = 5
-        end
-        object DBLookupComboBox3: TDBLookupComboBox
-          Left = 640
-          Top = 36
-          Width = 215
-          Height = 21
-          DataField = 'ID_TIPO_EMPRESA'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          KeyField = 'ID_TIPO_EMPRESA'
-          ListField = 'DESCRIPCION'
-          ListSource = DS_TipoEmpresa
-          ParentFont = False
-          TabOrder = 3
-        end
-        object DBEdit3: TDBEdit
-          Left = 110
-          Top = 64
-          Width = 432
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'DIRECCION'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 4
-        end
-        object DBEdit4: TDBEdit
-          Left = 395
-          Top = 92
-          Width = 288
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'LOCALIDAD'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 7
-        end
-        object DBEdit5: TDBEdit
-          Left = 762
-          Top = 92
-          Width = 95
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'CODIGO_POSTAL'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 8
-        end
-        object DBEdit6: TDBEdit
-          Left = 110
-          Top = 120
-          Width = 301
-          Height = 21
-          DataField = 'EMAIL'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 9
-        end
-        object DBEdit7: TDBEdit
-          Left = 472
-          Top = 120
-          Width = 385
-          Height = 21
-          DataField = 'PAGINA_WEB'
-          DataSource = DS_Empresa
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 10
-        end
-        object DBMemo1: TDBMemo
+        object DBMemoEmpresa: TDBMemo
           Left = 32
           Top = 162
           Width = 825
           Height = 73
+          Hint = 'Seleccione un Telefono/Mail y haga click derecho'
           DataField = 'DESCRIPCION'
           DataSource = DS_Empresa
-          TabOrder = 11
+          PopupMenu = PopupMenuSkypeMail
+          TabOrder = 0
+        end
+        object PanelEdicion: TPanel
+          Left = 0
+          Top = 4
+          Width = 877
+          Height = 144
+          BevelOuter = bvNone
+          Caption = 'PanelEdicion'
+          Enabled = False
+          TabOrder = 1
+          object Label5: TLabel
+            Left = 5
+            Top = 12
+            Width = 104
+            Height = 13
+            Caption = 'Nombre Empresa:'
+          end
+          object Label2: TLabel
+            Left = 52
+            Top = 96
+            Width = 57
+            Height = 13
+            Caption = 'Provincia:'
+          end
+          object Label11: TLabel
+            Left = 581
+            Top = 12
+            Width = 55
+            Height = 13
+            Caption = 'Cuit/Cuil:'
+          end
+          object Label15: TLabel
+            Left = 14
+            Top = 40
+            Width = 95
+            Height = 13
+            Caption = 'Nro Tel/Cel/Fax:'
+          end
+          object Label1: TLabel
+            Left = 582
+            Top = 68
+            Width = 54
+            Height = 13
+            Caption = 'Tipo IVA:'
+          end
+          object Label3: TLabel
+            Left = 553
+            Top = 40
+            Width = 83
+            Height = 13
+            Caption = 'Tipo Empresa:'
+          end
+          object Label4: TLabel
+            Left = 51
+            Top = 68
+            Width = 58
+            Height = 13
+            Caption = 'Direcci'#243'n:'
+          end
+          object Label6: TLabel
+            Left = 331
+            Top = 96
+            Width = 58
+            Height = 13
+            Caption = 'Localidad:'
+          end
+          object Label7: TLabel
+            Left = 690
+            Top = 96
+            Width = 66
+            Height = 13
+            Caption = 'Cod.Postal:'
+          end
+          object Label8: TLabel
+            Left = 73
+            Top = 124
+            Width = 36
+            Height = 13
+            Caption = 'Email:'
+          end
+          object Label9: TLabel
+            Left = 415
+            Top = 124
+            Width = 55
+            Height = 13
+            Caption = 'Pag.Web:'
+          end
+          object dbNombre: TDBEdit
+            Left = 110
+            Top = 8
+            Width = 433
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'NOMBRE'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+          end
+          object DBEdit1: TDBEdit
+            Left = 110
+            Top = 36
+            Width = 433
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'TELEFONO'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+          end
+          object DBLookupComboBox1: TDBLookupComboBox
+            Left = 110
+            Top = 92
+            Width = 215
+            Height = 21
+            DataField = 'ID_PROVINCIA'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            KeyField = 'ID_PROVINCIA'
+            ListField = 'NOMBRE_PROVINCIA'
+            ListSource = DS_Provincia
+            ParentFont = False
+            TabOrder = 2
+          end
+          object DBEdit2: TDBEdit
+            Left = 640
+            Top = 8
+            Width = 212
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'CUIT_CUIL'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 3
+          end
+          object DBLookupComboBox2: TDBLookupComboBox
+            Left = 640
+            Top = 64
+            Width = 215
+            Height = 21
+            DataField = 'ID_TIPO_IVA'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            KeyField = 'ID_TIPO_IVA'
+            ListField = 'NOMBRE_TIPO_IVA'
+            ListSource = DS_TipoIVA
+            ParentFont = False
+            TabOrder = 4
+          end
+          object DBLookupComboBox3: TDBLookupComboBox
+            Left = 640
+            Top = 36
+            Width = 215
+            Height = 21
+            DataField = 'ID_TIPO_EMPRESA'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            KeyField = 'ID_TIPO_EMPRESA'
+            ListField = 'DESCRIPCION'
+            ListSource = DS_TipoEmpresa
+            ParentFont = False
+            TabOrder = 5
+          end
+          object DBEdit3: TDBEdit
+            Left = 110
+            Top = 64
+            Width = 432
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'DIRECCION'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 6
+          end
+          object DBEdit4: TDBEdit
+            Left = 395
+            Top = 92
+            Width = 288
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'LOCALIDAD'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 7
+          end
+          object DBEdit5: TDBEdit
+            Left = 762
+            Top = 92
+            Width = 95
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'CODIGO_POSTAL'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 8
+          end
+          object DBEdit6: TDBEdit
+            Left = 110
+            Top = 120
+            Width = 301
+            Height = 21
+            DataField = 'EMAIL'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 9
+          end
+          object DBEdit7: TDBEdit
+            Left = 472
+            Top = 120
+            Width = 385
+            Height = 21
+            DataField = 'PAGINA_WEB'
+            DataSource = DS_Empresa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 10
+          end
         end
       end
       object TabContactos: TTabSheet
@@ -318,8 +329,8 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridContactos: TDBGrid
           Left = 0
           Top = 0
-          Width = 869
-          Height = 185
+          Width = 877
+          Height = 133
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
           Color = 16112578
@@ -385,8 +396,8 @@ object FABMEmpresas: TFABMEmpresas
         end
         object Panel1: TPanel
           Left = 0
-          Top = 185
-          Width = 869
+          Top = 133
+          Width = 877
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -400,15 +411,16 @@ object FABMEmpresas: TFABMEmpresas
             Caption = 'Datos Adicionales:'
           end
         end
-        object DBMemo2: TDBMemo
+        object DBMemoContactos: TDBMemo
           Left = 0
-          Top = 204
-          Width = 869
-          Height = 48
+          Top = 152
+          Width = 877
+          Height = 100
           Align = alBottom
           Color = 16112578
           DataField = 'descripcion'
           DataSource = DS_PersonaRelacionContacto
+          PopupMenu = PopupMenuSkypeMail
           TabOrder = 2
         end
       end
@@ -418,8 +430,8 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridViajantes: TDBGrid
           Left = 0
           Top = 0
-          Width = 869
-          Height = 185
+          Width = 877
+          Height = 133
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
           Color = 16112578
@@ -483,21 +495,22 @@ object FABMEmpresas: TFABMEmpresas
               Visible = True
             end>
         end
-        object DBMemo3: TDBMemo
+        object DBMemoViajantes: TDBMemo
           Left = 0
-          Top = 204
-          Width = 869
-          Height = 48
+          Top = 152
+          Width = 877
+          Height = 100
           Align = alBottom
           Color = 16112578
           DataField = 'descripcion'
           DataSource = DS_PersonaRelacionViajante
+          PopupMenu = PopupMenuSkypeMail
           TabOrder = 1
         end
         object Panel2: TPanel
           Left = 0
-          Top = 185
-          Width = 869
+          Top = 133
+          Width = 877
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -516,14 +529,15 @@ object FABMEmpresas: TFABMEmpresas
         BorderWidth = 10
         Caption = 'Descripci'#243'n'
         ImageIndex = 3
-        object DBMemo4: TDBMemo
+        object DBMemoDescripcion: TDBMemo
           Left = 0
           Top = 0
-          Width = 849
+          Width = 857
           Height = 232
           Align = alClient
           DataField = 'DESCRIPCION_PRIVADA'
           DataSource = DS_Empresa
+          PopupMenu = PopupMenuSkypeMail
           TabOrder = 0
         end
       end
@@ -531,8 +545,8 @@ object FABMEmpresas: TFABMEmpresas
     object DBGridEmpresas: TDBGrid
       Left = 1
       Top = 20
-      Width = 877
-      Height = 264
+      Width = 885
+      Height = 270
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 16112578
@@ -635,7 +649,7 @@ object FABMEmpresas: TFABMEmpresas
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 877
+      Width = 885
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -656,7 +670,7 @@ object FABMEmpresas: TFABMEmpresas
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 767
+        Left = 775
         Top = 1
         Width = 109
         Height = 17
@@ -674,7 +688,7 @@ object FABMEmpresas: TFABMEmpresas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2115,6 +2129,17 @@ object FABMEmpresas: TFABMEmpresas
       end>
     object ZPID_EmpresaID: TIntegerField
       FieldName = 'ID'
+    end
+  end
+  object PopupMenuSkypeMail: TPopupMenu
+    Left = 229
+    Top = 467
+    object llamar1: TMenuItem
+      Caption = 'Llamar por Skype'
+      OnClick = llamar1Click
+    end
+    object EnviarunMail1: TMenuItem
+      Caption = 'Enviar un Mail'
     end
   end
 end
