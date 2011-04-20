@@ -81,6 +81,8 @@ contains
   EKImageList32 in 'EKImageList32.pas',
   EKImageList32Reg in 'EKImageList32Reg.pas' {EKImageListImagesEditor},
   EKDBGrid in 'EKDBGrid.pas',
-  EKFiltrarColumna in 'EKFiltrarColumna.pas';
+  EKFiltrarColumna in 'EKFiltrarColumna.pas',
+  EKCodigoBarra in 'EKCodigoBarra.pas',
+  bcchksum;
 
 end.
