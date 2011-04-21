@@ -524,6 +524,9 @@ end;
 
 procedure TFABM_ArticuloMedida.btseleccionarArticuloClick(Sender: TObject);
 begin
+if (EKLlenarComboArticulo.SelectClave = '') then
+exit;
+
 ZQ_MedidaArticulo.Close;
 ZQ_MedidaArticulo.ParamByName('ID_ARTICULO').AsInteger := strtoint(EKLlenarComboArticulo.SelectClave);
 ZQ_MedidaArticulo.Open;

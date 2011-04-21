@@ -81,7 +81,9 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Color = 12320767
           DataSource = DSMedidas
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ParentShowHint = False
           PopupMenu = PopupMenuMedida
+          ShowHint = True
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -107,7 +109,9 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Color = 16112578
           DataSource = DSArticulo
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ParentShowHint = False
           PopupMenu = PopupMenuArticulo
+          ShowHint = True
           TabOrder = 1
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -173,12 +177,15 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Top = 39
           Width = 854
           Height = 349
+          Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
           Color = 16112578
           DataSource = DS_MedidaArticulo
           Enabled = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ParentShowHint = False
           PopupMenu = PopupMenuArticuloMedida
+          ShowHint = True
           TabOrder = 1
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -872,26 +879,32 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     Top = 128
   end
   object PopupMenuArticulo: TPopupMenu
+    Images = FPrincipal.EKImageMenu24
     Left = 276
     Top = 96
     object AgregarArticulo1: TMenuItem
       Caption = 'Agregar Articulo'
+      ImageIndex = 22
       OnClick = AgregarArticulo1Click
     end
     object QuitarArticulo1: TMenuItem
       Caption = 'Quitar Articulo'
+      ImageIndex = 23
       OnClick = QuitarArticulo1Click
     end
   end
   object PopupMenuMedida: TPopupMenu
+    Images = FPrincipal.EKImageMenu24
     Left = 756
     Top = 72
     object AgregarMedida1: TMenuItem
       Caption = 'Agregar Medida'
+      ImageIndex = 22
       OnClick = AgregarMedida1Click
     end
     object QuitarMedida1: TMenuItem
       Caption = 'Quitar Medida'
+      ImageIndex = 23
       OnClick = QuitarMedida1Click
     end
   end
@@ -999,14 +1012,17 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     end
   end
   object PopupMenuArticuloMedida: TPopupMenu
+    Images = FPrincipal.EKImageMenu24
     Left = 604
     Top = 264
     object AgregarMedida2: TMenuItem
       Caption = 'Agregar Medida'
+      ImageIndex = 22
       OnClick = AgregarMedida2Click
     end
     object QuitarMedida2: TMenuItem
       Caption = 'Quitar Medida'
+      ImageIndex = 23
       OnClick = QuitarMedida2Click
     end
   end
