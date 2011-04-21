@@ -22,8 +22,8 @@ object FABMProductos: TFABMProductos
   object Panel4: TPanel
     Left = 0
     Top = 0
-    Width = 983
-    Height = 590
+    Width = 991
+    Height = 596
     Align = alClient
     Caption = 'Panel4'
     TabOrder = 4
@@ -37,8 +37,8 @@ object FABMProductos: TFABMProductos
     object Grilla: TEKDBGrid
       Left = 1
       Top = 17
-      Width = 981
-      Height = 331
+      Width = 989
+      Height = 337
       Align = alClient
       Color = 14606012
       DataSource = DS_ProductoCabecera
@@ -111,8 +111,8 @@ object FABMProductos: TFABMProductos
     end
     object PageControl1: TPageControl
       Left = 1
-      Top = 348
-      Width = 981
+      Top = 354
+      Width = 989
       Height = 241
       ActivePage = tabDetalle
       Align = alBottom
@@ -126,7 +126,7 @@ object FABMProductos: TFABMProductos
         object Panel2: TPanel
           Left = 0
           Top = 0
-          Width = 973
+          Width = 981
           Height = 209
           Align = alClient
           TabOrder = 0
@@ -325,14 +325,14 @@ object FABMProductos: TFABMProductos
         object Panel3: TPanel
           Left = 0
           Top = 0
-          Width = 973
+          Width = 981
           Height = 209
           Align = alClient
           TabOrder = 0
           object grillaDetalle: TEKDBGrid
             Left = 537
             Top = 1
-            Width = 435
+            Width = 443
             Height = 207
             Align = alClient
             Color = 14606012
@@ -853,7 +853,7 @@ object FABMProductos: TFABMProductos
     object PanelCabecera: TPanel
       Left = 1
       Top = 1
-      Width = 981
+      Width = 989
       Height = 16
       Align = alTop
       BevelOuter = bvNone
@@ -873,7 +873,7 @@ object FABMProductos: TFABMProductos
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 896
+        Left = 904
         Top = 0
         Width = 85
         Height = 16
@@ -967,7 +967,7 @@ object FABMProductos: TFABMProductos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2008,10 +2008,10 @@ object FABMProductos: TFABMProductos
   object ZQ_MedidaArticulo: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select ma.id_articulo,ma.id_medida,m.medida'
+      'select ma.id_articulo,ma.id_medida,m.medida, ma.baja'
       'from medida_articulo ma'
       'join medida m on (m.id_medida=ma.id_medida)'
-      'where ma.id_articulo=:artic')
+      'where (ma.id_articulo=:artic) and (ma.baja <> '#39'S'#39')')
     Params = <
       item
         DataType = ftUnknown
