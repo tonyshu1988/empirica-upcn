@@ -31,7 +31,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       Top = 0
       Width = 862
       Height = 416
-      ActivePage = TabMedidaArticuloUnico
+      ActivePage = TabABMMedidas
       Align = alClient
       TabOrder = 0
       OnChange = PageControlEdicionChange

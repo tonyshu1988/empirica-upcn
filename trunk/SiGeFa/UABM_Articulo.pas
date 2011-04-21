@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
-  ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  EKBusquedaAvanzada;
 
 type
   TFABM_Articulo = class(TForm)
@@ -42,6 +43,7 @@ type
     ZQ_ArticuloTipoArticulo: TStringField;
     DBLookupComboBox1: TDBLookupComboBox;
     Label1: TLabel;
+    EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -53,6 +55,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure DBGridArticuloDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnBuscarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -201,6 +204,7 @@ begin
       recNo:= ZQ_Articulo.RecNo;
       ZQ_Articulo.Refresh;
       ZQ_Articulo.RecNo:= recNo;
+      PanelEdicion.Visible := false;
     end
   except
     begin
@@ -219,6 +223,7 @@ begin
     DBGridArticulo.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
+    PanelEdicion.Visible := false;
   end;
 end;
 
@@ -237,6 +242,11 @@ begin
     exit;
 
   FPrincipal.PintarFilasGrillasConBajas(DBGridArticulo, ZQ_ArticuloBAJA.AsString, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_Articulo.btnBuscarClick(Sender: TObject);
+begin
+EKBusquedaAvanzada1.Buscar;
 end;
 
 end.
