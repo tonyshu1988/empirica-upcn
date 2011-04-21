@@ -10,9 +10,6 @@ uses
 type
   TFABM_Marcas = class(TForm)
     PanelFondo: TPanel;
-    PanelEdicion: TPanel;
-    Label4: TLabel;
-    DBEDescripcion: TDBEdit;
     PanelGrilla: TPanel;
     DBGridMarca: TDBGrid;
     dxBarABM: TdxBarManager;
@@ -79,12 +76,9 @@ procedure TFABM_Marcas.btnNuevoClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
   begin
-    DBGridMarca.Enabled := false;
-    PanelEdicion.Visible:= true;
-
     ZQ_Marcas.Append;
 
-    DBEDescripcion.SetFocus;
+    DBGridMarca.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -98,12 +92,9 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
   begin
-    DBGridMarca.Enabled := false;
-    PanelEdicion.Visible:= true;
-
     ZQ_Marcas.Edit;
 
-    DBEDescripcion.SetFocus;
+    DBGridMarca.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -168,17 +159,16 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-  if (DBEDescripcion.Text = '') then
+  if (trim(ZQ_MarcasNOMBRE_MARCA.AsString) = '') then
   begin
-    Application.MessageBox(pchar('El campo Descripción se encuentra vacío, Verifique'), 'Validación', MB_OK+MB_ICONINFORMATION);
-    DBEDescripcion.SetFocus;
-    Exit;
+    Application.MessageBox('El campo no puede estar vacio. VERIFIQUE','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBGridMarca.SetFocus;
+    exit;
   end;
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
-      DBGridMarca.Enabled := true;
       DBGridMarca.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
@@ -199,7 +189,6 @@ procedure TFABM_Marcas.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
-    DBGridMarca.Enabled := true;
     DBGridMarca.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;

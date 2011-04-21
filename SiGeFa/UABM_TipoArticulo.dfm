@@ -21,56 +21,16 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 416
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object PanelEdicion: TPanel
-      Left = 0
-      Top = 374
-      Width = 854
-      Height = 36
-      Align = alBottom
-      BevelOuter = bvNone
-      TabOrder = 0
-      Visible = False
-      object Label4: TLabel
-        Left = 16
-        Top = 8
-        Width = 71
-        Height = 13
-        Caption = 'Descripci'#243'n:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object DBEDescripcion: TDBEdit
-        Left = 90
-        Top = 4
-        Width = 388
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'DESCRIPCION'
-        DataSource = DS_TipoArt
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-      end
-    end
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 854
-      Height = 374
+      Width = 862
+      Height = 416
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -80,30 +40,37 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 1
-      object DBGridMedidas: TDBGrid
+      TabOrder = 0
+      object DBGridTipoArticulo: TDBGrid
         Left = 5
         Top = 5
-        Width = 844
-        Height = 364
+        Width = 852
+        Height = 406
         Align = alClient
         Color = 16112578
         DataSource = DS_TipoArt
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
-        OnDrawColumnCell = DBGridMedidasDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'DESCRIPCION'
+            Title.Caption = 'TIPO ARTICULO'
+            Width = 442
+            Visible = True
+          end>
       end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -231,6 +198,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
             Visible = True
           end
           item
+            BeginGroup = True
             Item = btnImprimir
             Visible = True
           end

@@ -21,8 +21,8 @@ object FABM_Articulo: TFABM_Articulo
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 416
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
@@ -34,8 +34,8 @@ object FABM_Articulo: TFABM_Articulo
     TabOrder = 0
     object PanelEdicion: TPanel
       Left = 0
-      Top = 352
-      Width = 854
+      Top = 358
+      Width = 862
       Height = 58
       Align = alBottom
       BevelOuter = bvNone
@@ -107,8 +107,8 @@ object FABM_Articulo: TFABM_Articulo
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 854
-      Height = 352
+      Width = 862
+      Height = 358
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -122,8 +122,8 @@ object FABM_Articulo: TFABM_Articulo
       object DBGridArticulo: TDBGrid
         Left = 5
         Top = 5
-        Width = 844
-        Height = 342
+        Width = 852
+        Height = 348
         Align = alClient
         Color = 16112578
         DataSource = DS_Articulo
@@ -135,13 +135,28 @@ object FABM_Articulo: TFABM_Articulo
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
         OnDrawColumnCell = DBGridArticuloDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'DESCRIPCION'
+            Title.Caption = 'ARTICULO'
+            Width = 400
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TipoArticulo'
+            Title.Caption = 'TIPO ARTICULO'
+            Width = 422
+            Visible = True
+          end>
       end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -243,6 +258,11 @@ object FABM_Articulo: TFABM_Articulo
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnNuevo
             Visible = True
           end
@@ -269,11 +289,11 @@ object FABM_Articulo: TFABM_Articulo
             Visible = True
           end
           item
+            BeginGroup = True
             Item = btnImprimir
             Visible = True
           end
           item
-            BeginGroup = True
             Item = btnSalir
             Visible = True
           end>
@@ -595,6 +615,7 @@ object FABM_Articulo: TFABM_Articulo
       Hint = 'Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnVerDetalle: TdxBarLargeButton
@@ -759,5 +780,57 @@ object FABM_Articulo: TFABM_Articulo
     DataSet = ZQ_TipoArt
     Left = 136
     Top = 128
+  end
+  object EKBusquedaAvanzada1: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Articulo'
+        Campo = 'descripcion'
+        Tabla = 'articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'articulo'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'Si'
+          'No')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'S'
+          'N')
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Articulo'
+        Campo = 'id_tipo_articulo'
+        Tabla = 'articulo'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_TipoArt
+        TipoCombollenarCampo = 'descripcion'
+        TipoCombollenarCampoReal = 'id_tipo_articulo'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_Articulo
+    SQL.Strings = (
+      'select *'
+      'from articulo')
+    SQL_Select.Strings = (
+      'select *')
+    SQL_From.Strings = (
+      'from articulo')
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 296
+    Top = 72
   end
 end

@@ -10,11 +10,7 @@ uses
 type
   TFABM_TipoArticulo = class(TForm)
     PanelFondo: TPanel;
-    PanelEdicion: TPanel;
-    Label4: TLabel;
-    DBEDescripcion: TDBEdit;
     PanelGrilla: TPanel;
-    DBGridMedidas: TDBGrid;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
     btnVerDetalle: TdxBarLargeButton;
@@ -33,6 +29,7 @@ type
     ZQ_TipoArtID_TIPO_ARTICULO: TIntegerField;
     ZQ_TipoArtDESCRIPCION: TStringField;
     ZQ_TipoArtBAJA: TStringField;
+    DBGridTipoArticulo: TDBGrid;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -42,7 +39,7 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridMedidasDrawColumnCell(Sender: TObject;
+    procedure DBGridTipoArticuloDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
   private
@@ -79,12 +76,8 @@ procedure TFABM_TipoArticulo.btnNuevoClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
   begin
-    DBGridMedidas.Enabled := false;
-    PanelEdicion.Visible:= true;
-
-    ZQ_TipoArt.Append;
-
-    DBEDescripcion.SetFocus;
+    ZQ_TipoArt.Append; 
+    DBGridTipoArticulo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -98,12 +91,9 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
   begin
-    DBGridMedidas.Enabled := false;
-    PanelEdicion.Visible:= true;
-
     ZQ_TipoArt.Edit;
 
-    DBEDescripcion.SetFocus;
+    DBGridTipoArticulo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -168,18 +158,17 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-  if (DBEDescripcion.Text = '') then
+  if (trim(ZQ_TipoArtDESCRIPCION.AsString) = '') then
   begin
-    Application.MessageBox(pchar('El campo Descripción se encuentra vacío, Verifique'), 'Validación', MB_OK+MB_ICONINFORMATION);
-    DBEDescripcion.SetFocus;
-    Exit;
+    Application.MessageBox('El campo no puede estar vacio. VERIFIQUE','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBGridTipoArticulo.SetFocus;
+    exit;
   end;
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
-      DBGridMedidas.Enabled := true;
-      DBGridMedidas.SetFocus;
+      DBGridTipoArticulo.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
       recNo:= ZQ_TipoArt.RecNo;
@@ -199,8 +188,7 @@ procedure TFABM_TipoArticulo.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
-    DBGridMedidas.Enabled := true;
-    DBGridMedidas.SetFocus;    
+    DBGridTipoArticulo.SetFocus;    
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
   end;
@@ -213,14 +201,14 @@ begin
   ZQ_TipoArt.open;
 end;
 
-procedure TFABM_TipoArticulo.DBGridMedidasDrawColumnCell(Sender: TObject;
+procedure TFABM_TipoArticulo.DBGridTipoArticuloDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
   if ZQ_TipoArt.IsEmpty then
     exit;
 
-  FPrincipal.PintarFilasGrillasConBajas(DBGridMedidas, ZQ_TipoArtBAJA.AsString, Rect, DataCol, Column, State);
+  FPrincipal.PintarFilasGrillasConBajas(DBGridTipoArticulo, ZQ_TipoArtBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
 end.
