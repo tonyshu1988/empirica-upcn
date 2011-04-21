@@ -21,89 +21,187 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 416
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object PanelEdicion: TPanel
-      Left = 0
-      Top = 376
-      Width = 854
-      Height = 34
-      Align = alBottom
-      BevelOuter = bvNone
-      TabOrder = 0
-      Visible = False
-      object Label4: TLabel
-        Left = 16
-        Top = 8
-        Width = 71
-        Height = 13
-        Caption = 'Descripci'#243'n:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object DBEDescripcion: TDBEdit
-        Left = 90
-        Top = 4
-        Width = 388
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'MEDIDA'
-        DataSource = DS_Medida
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-      end
-    end
-    object PanelGrilla: TPanel
+    object PageControlEdicion: TPageControl
       Left = 0
       Top = 0
-      Width = 854
-      Height = 376
+      Width = 862
+      Height = 416
+      ActivePage = TabMedidaArticuloUnico
       Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 5
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-      object DBGridMedidas: TDBGrid
-        Left = 5
-        Top = 5
-        Width = 844
-        Height = 366
-        Align = alClient
-        Color = 16112578
-        DataSource = DS_Medida
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridMedidasDrawColumnCell
+      TabOrder = 0
+      OnChange = PageControlEdicionChange
+      OnChanging = PageControlEdicionChanging
+      object TabABMMedidas: TTabSheet
+        Caption = 'ABM Medidas'
+        object DBGridMedidas: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 854
+          Height = 388
+          Align = alClient
+          Color = 16112578
+          DataSource = DS_Medida
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridMedidasDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'MEDIDA'
+              Width = 442
+              Visible = True
+            end>
+        end
+      end
+      object TabMedidaArticulo: TTabSheet
+        Caption = 'Medida Articulo'
+        ImageIndex = 1
+        object Splitter1: TSplitter
+          Left = 487
+          Top = 0
+          Height = 388
+        end
+        object DBGridMedida: TDBGrid
+          Left = 490
+          Top = 0
+          Width = 364
+          Height = 388
+          Hint = 'Presione el boton derecho del mouse para cargar una medida'
+          Align = alClient
+          Color = 12320767
+          DataSource = DSMedidas
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = PopupMenuMedida
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'medida'
+              Title.Caption = 'Medidas'
+              Width = 301
+              Visible = True
+            end>
+        end
+        object DBGridArticulo: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 487
+          Height = 388
+          Hint = 'Presione el boton derecho del mouse para cargar un articulo'
+          Align = alLeft
+          Color = 16112578
+          DataSource = DSArticulo
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = PopupMenuArticulo
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'nombre_articulo'
+              Title.Caption = 'Nombres Articulos'
+              Width = 253
+              Visible = True
+            end>
+        end
+      end
+      object TabMedidaArticuloUnico: TTabSheet
+        Caption = 'Medida Articulo Unico'
+        ImageIndex = 2
+        object PanelSeleccionarArticulo: TPanel
+          Left = 0
+          Top = 0
+          Width = 854
+          Height = 39
+          Align = alTop
+          BevelOuter = bvNone
+          TabOrder = 0
+          DesignSize = (
+            854
+            39)
+          object Label1: TLabel
+            Left = 4
+            Top = 12
+            Width = 130
+            Height = 13
+            Caption = 'Seleccione un articulo:'
+          end
+          object CBArticulo: TComboBox
+            Left = 139
+            Top = 8
+            Width = 214
+            Height = 21
+            Anchors = [akLeft, akTop, akRight]
+            CharCase = ecUpperCase
+            ItemHeight = 13
+            TabOrder = 0
+            Text = 'CBARTICULO'
+            OnExit = CBArticuloExit
+          end
+          object btseleccionarArticulo: TButton
+            Left = 364
+            Top = 6
+            Width = 182
+            Height = 25
+            Anchors = [akTop, akRight]
+            Caption = 'Seleccionar Articulo'
+            TabOrder = 1
+            OnClick = btseleccionarArticuloClick
+          end
+        end
+        object DBGridMedidaARticulo: TDBGrid
+          Left = 0
+          Top = 39
+          Width = 854
+          Height = 349
+          Align = alClient
+          Color = 16112578
+          DataSource = DS_MedidaArticulo
+          Enabled = False
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = PopupMenuArticuloMedida
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridMedidaARticuloDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'medida'
+              Title.Caption = 'Medida'
+              Width = 583
+              Visible = True
+            end>
+        end
       end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -231,7 +329,22 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             Visible = True
           end
           item
+            BeginGroup = True
             Item = btnImprimir
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btProcesar
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btGuardarCarga
+            Visible = True
+          end
+          item
+            Item = btCancelarCarga
             Visible = True
           end
           item
@@ -641,6 +754,44 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btProcesar: TdxBarLargeButton
+      Caption = 'Procesar'
+      Category = 0
+      Hint = 'Procesar'
+      Visible = ivNever
+      ImageIndex = 35
+      OnClick = btProcesarClick
+      AutoGrayScale = False
+    end
+    object btCargarDatos: TdxBarLargeButton
+      Caption = 'Cargar Datos'
+      Category = 0
+      Hint = 'Cargar Datos'
+      Visible = ivNever
+      ImageIndex = 7
+      OnClick = btCargarDatosClick
+      AutoGrayScale = False
+    end
+    object btGuardarCarga: TdxBarLargeButton
+      Caption = 'Guardar Carga'
+      Category = 0
+      Enabled = False
+      Hint = 'Guardar Carga'
+      Visible = ivNever
+      ImageIndex = 5
+      OnClick = btGuardarCargaClick
+      AutoGrayScale = False
+    end
+    object btCancelarCarga: TdxBarLargeButton
+      Caption = 'Cancelar Carga'
+      Category = 0
+      Enabled = False
+      Hint = 'Cancelar Carga'
+      Visible = ivNever
+      ImageIndex = 9
+      OnClick = btCancelarCargaClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -683,5 +834,213 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     DataSet = ZQ_Medida
     Left = 48
     Top = 128
+  end
+  object CDSArticulo: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 180
+    Top = 88
+    object CDSArticulonombre_producto: TStringField
+      FieldName = 'nombre_articulo'
+      Size = 200
+    end
+    object CDSArticuloid_articulo: TIntegerField
+      FieldName = 'id_articulo'
+    end
+  end
+  object CDSMedidas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 644
+    Top = 72
+    object CDSMedidasid_medida: TIntegerField
+      FieldName = 'id_medida'
+    end
+    object CDSMedidasmedida: TStringField
+      FieldName = 'medida'
+      Size = 30
+    end
+  end
+  object DSArticulo: TDataSource
+    DataSet = CDSArticulo
+    Left = 180
+    Top = 152
+  end
+  object DSMedidas: TDataSource
+    DataSet = CDSMedidas
+    Left = 652
+    Top = 128
+  end
+  object PopupMenuArticulo: TPopupMenu
+    Left = 276
+    Top = 96
+    object AgregarArticulo1: TMenuItem
+      Caption = 'Agregar Articulo'
+      OnClick = AgregarArticulo1Click
+    end
+    object QuitarArticulo1: TMenuItem
+      Caption = 'Quitar Articulo'
+      OnClick = QuitarArticulo1Click
+    end
+  end
+  object PopupMenuMedida: TPopupMenu
+    Left = 756
+    Top = 72
+    object AgregarMedida1: TMenuItem
+      Caption = 'Agregar Medida'
+      OnClick = AgregarMedida1Click
+    end
+    object QuitarMedida1: TMenuItem
+      Caption = 'Quitar Medida'
+      OnClick = QuitarMedida1Click
+    end
+  end
+  object EKListadoArticulos: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select *'
+      'from articulo a'
+      'where a.baja <> '#39'S'#39)
+    CampoBuscar = 'descripcion'
+    CampoClave = 'id_articulo'
+    TituloVentana = 'Buscar Articulo'
+    Left = 276
+    Top = 160
+  end
+  object EKListadoMedidas: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select *'
+      'from medida m'
+      'where m.baja <> '#39'S'#39)
+    CampoBuscar = 'medida'
+    CampoClave = 'id_medida'
+    Left = 764
+    Top = 136
+  end
+  object ZQ_MedidaArticulo: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from medida_Articulo ma'
+      'where (ma.id_articulo = :ID_ARTICULO)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ARTICULO'
+        ParamType = ptUnknown
+      end>
+    Left = 316
+    Top = 264
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ARTICULO'
+        ParamType = ptUnknown
+      end>
+    object ZQ_MedidaArticuloID_ARTICULO: TIntegerField
+      FieldName = 'ID_ARTICULO'
+    end
+    object ZQ_MedidaArticuloID_MEDIDA: TIntegerField
+      FieldName = 'ID_MEDIDA'
+    end
+    object ZQ_MedidaArticuloBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_MedidaArticulomedida: TStringField
+      FieldKind = fkLookup
+      FieldName = 'medida'
+      LookupDataSet = ZQ_Medida
+      LookupKeyFields = 'ID_MEDIDA'
+      LookupResultField = 'MEDIDA'
+      KeyFields = 'ID_MEDIDA'
+      Size = 30
+      Lookup = True
+    end
+  end
+  object DS_MedidaArticulo: TDataSource
+    DataSet = ZQ_MedidaArticulo
+    Left = 416
+    Top = 264
+  end
+  object EKLlenarComboArticulo: TEKLlenarCombo
+    dataset = ZQ_Articulo
+    combo = CBArticulo
+    CampoClave = 'id_articulo'
+    CampoVer = 'descripcion'
+    Left = 436
+    Top = 88
+  end
+  object ZQ_Articulo: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from articulo a'
+      'where a.baja <> '#39'S'#39)
+    Params = <>
+    Left = 52
+    Top = 256
+    object ZQ_ArticuloID_ARTICULO: TIntegerField
+      FieldName = 'ID_ARTICULO'
+      Required = True
+    end
+    object ZQ_ArticuloDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 200
+    end
+    object ZQ_ArticuloID_TIPO_ARTICULO: TIntegerField
+      FieldName = 'ID_TIPO_ARTICULO'
+      Required = True
+    end
+    object ZQ_ArticuloBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+  end
+  object PopupMenuArticuloMedida: TPopupMenu
+    Left = 604
+    Top = 264
+    object AgregarMedida2: TMenuItem
+      Caption = 'Agregar Medida'
+      OnClick = AgregarMedida2Click
+    end
+    object QuitarMedida2: TMenuItem
+      Caption = 'Quitar Medida'
+      OnClick = QuitarMedida2Click
+    end
+  end
+  object MedidaArticuloBAJA: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from medida_Articulo ma'
+      'where (ma.id_medida = :ID_MEDIDA)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_MEDIDA'
+        ParamType = ptUnknown
+      end>
+    Left = 52
+    Top = 320
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_MEDIDA'
+        ParamType = ptUnknown
+      end>
+    object MedidaArticuloBAJAID_ARTICULO: TIntegerField
+      FieldName = 'ID_ARTICULO'
+      Required = True
+    end
+    object MedidaArticuloBAJAID_MEDIDA: TIntegerField
+      FieldName = 'ID_MEDIDA'
+      Required = True
+    end
+    object MedidaArticuloBAJABAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
   end
 end
