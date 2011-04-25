@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 270
-  Top = 93
+  Left = 171
+  Top = 58
   Width = 999
   Height = 680
   Caption = 'FABMProductos'
@@ -22,8 +22,8 @@ object FABMProductos: TFABMProductos
   object Panel4: TPanel
     Left = 0
     Top = 0
-    Width = 991
-    Height = 596
+    Width = 983
+    Height = 590
     Align = alClient
     Caption = 'Panel4'
     TabOrder = 4
@@ -37,8 +37,8 @@ object FABMProductos: TFABMProductos
     object Grilla: TEKDBGrid
       Left = 1
       Top = 17
-      Width = 989
-      Height = 337
+      Width = 981
+      Height = 331
       Align = alClient
       Color = 14606012
       DataSource = DS_ProductoCabecera
@@ -109,25 +109,25 @@ object FABMProductos: TFABMProductos
           Visible = True
         end>
     end
-    object PageControl1: TPageControl
+    object tabs: TPageControl
       Left = 1
-      Top = 354
-      Width = 989
+      Top = 348
+      Width = 981
       Height = 241
       ActivePage = tabDetalle
       Align = alBottom
-      Images = FPrincipal.Iconos_Menu_16
       MultiLine = True
       Style = tsFlatButtons
       TabOrder = 1
+      OnChanging = tabsChanging
       object tabCabecera: TTabSheet
         Caption = 'Producto'
         ImageIndex = 34
         object Panel2: TPanel
           Left = 0
           Top = 0
-          Width = 981
-          Height = 209
+          Width = 973
+          Height = 210
           Align = alClient
           TabOrder = 0
           object Label1: TLabel
@@ -220,6 +220,7 @@ object FABMProductos: TFABMProductos
             Height = 180
             DataField = 'IMAGEN'
             DataSource = DS_ProductoCabecera
+            Stretch = True
             TabOrder = 5
             OnDblClick = edImagenDblClick
           end
@@ -325,15 +326,15 @@ object FABMProductos: TFABMProductos
         object Panel3: TPanel
           Left = 0
           Top = 0
-          Width = 981
-          Height = 209
+          Width = 973
+          Height = 210
           Align = alClient
           TabOrder = 0
           object grillaDetalle: TEKDBGrid
             Left = 537
             Top = 1
-            Width = 443
-            Height = 207
+            Width = 435
+            Height = 208
             Align = alClient
             Color = 14606012
             DataSource = DS_DetalleProducto
@@ -450,7 +451,7 @@ object FABMProductos: TFABMProductos
             Left = 1
             Top = 1
             Width = 536
-            Height = 207
+            Height = 208
             Align = alLeft
             Caption = 'Detalles Producto '
             TabOrder = 0
@@ -853,7 +854,7 @@ object FABMProductos: TFABMProductos
     object PanelCabecera: TPanel
       Left = 1
       Top = 1
-      Width = 989
+      Width = 981
       Height = 16
       Align = alTop
       BevelOuter = bvNone
@@ -873,7 +874,7 @@ object FABMProductos: TFABMProductos
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 904
+        Left = 896
         Top = 0
         Width = 85
         Height = 16
@@ -967,7 +968,7 @@ object FABMProductos: TFABMProductos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

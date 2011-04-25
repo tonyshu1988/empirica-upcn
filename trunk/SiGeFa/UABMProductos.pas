@@ -11,7 +11,7 @@ uses
 
 type
   TFABMProductos = class(TForm)
-    PageControl1: TPageControl;
+    tabs: TPageControl;
     tabCabecera: TTabSheet;
     tabDetalle: TTabSheet;
     Panel2: TPanel;
@@ -161,6 +161,7 @@ type
     function validarcampos():Boolean;
     function validarcamposDetalle():Boolean;
     procedure CargaImagenProporcionado(Archivo: string);
+    procedure tabsChanging(Sender: TObject; var AllowChange: Boolean);
   private
     { Private declarations }
   public
@@ -210,7 +211,7 @@ begin
   dm.EKModelo.abrir(ZQ_Marca);
   dm.EKModelo.abrir(ZQ_MedidaArticulo);
   grillaDetalle.PopupMenu:=nil;
-  PageControl1.ActivePageIndex:=0;
+  tabs.ActivePageIndex:=0;
 end;
 
 
@@ -220,8 +221,8 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
   begin
     grillaDetalle.PopupMenu:=PopupMenuDetalleProd;;
     grilla.Enabled := false;
-    PageControl1.Enabled:= true;
-    PageControl1.ActivePageIndex:= 0;
+    tabs.Enabled:= true;
+    tabs.ActivePageIndex:= 0;
 
     ZQ_ProductoCabecera.Append;
     ZQ_ProductoCabeceraBAJA.AsString:= 'N';
@@ -248,7 +249,7 @@ begin
   if (ZQ_ProductoCabeceraCOD_CORTO.IsNull) then
   begin
     Application.MessageBox('El campo Código Corto se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    PageControl1.ActivePageIndex:= 0;
+    tabs.ActivePageIndex:= 0;
     edCodCorto.SetFocus;
     result := false;
     exit;
@@ -257,7 +258,7 @@ begin
   if (ZQ_ProductoCabeceraNOMBRE.IsNull) then
   begin
     Application.MessageBox('El campo Nombre se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    PageControl1.ActivePageIndex:= 0;
+    tabs.ActivePageIndex:= 0;
     edNombre.SetFocus;
     result := false;
     exit;
@@ -266,7 +267,7 @@ begin
   if (ZQ_ProductoCabeceraID_MARCA.IsNull) then
   begin
     Application.MessageBox('El campo Marca se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    PageControl1.ActivePageIndex:= 0;
+    tabs.ActivePageIndex:= 0;
     cmbMarca.SetFocus;
     result := false;
     exit;
@@ -275,7 +276,7 @@ begin
   if (ZQ_ProductoCabeceraID_MARCA.IsNull) then
   begin
     Application.MessageBox('El campo Artículo se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    PageControl1.ActivePageIndex:= 0;
+    tabs.ActivePageIndex:= 0;
     cmbArticulo.SetFocus;
     result := false;
     exit;
@@ -290,7 +291,7 @@ begin
   if (ZQ_DetalleProductoCOD_CORTO.IsNull) then
   begin
     Application.MessageBox('El campo Código Corto se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    PageControl1.ActivePageIndex:= 1;
+    tabs.ActivePageIndex:= 1;
     dpCodCorto.SetFocus;
     result := false;
     exit;
@@ -299,7 +300,7 @@ begin
   if (ZQ_DetalleProductoPRECIO_COSTO.IsNull) then
   begin
     Application.MessageBox('El campo Precio Costo se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    PageControl1.ActivePageIndex:= 1;
+    tabs.ActivePageIndex:= 1;
     dpCosto.SetFocus;
     result := false;
     exit;
@@ -308,7 +309,7 @@ begin
   if (ZQ_DetalleProductoPRECIO_VENTA.IsNull) then
   begin
     Application.MessageBox('El campo Precio Venta se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    PageControl1.ActivePageIndex:= 1;
+    tabs.ActivePageIndex:= 1;
     dpVenta.SetFocus;
     result := false;
     exit;
@@ -327,12 +328,12 @@ begin
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMProductos) then
     begin
       Grilla.Enabled := true;
-      PageControl1.Enabled:= false;
+      tabs.Enabled:= false;
       grillaDetalle.PopupMenu:=nil;
       grupoDetalle.Visible:=false;
       GrupoEditando.Enabled := false;
       GrupoVisualizando.Enabled := true;
-      PageControl1.Enabled:= true;
+      tabs.Enabled:= true;
     end
   except
     begin
@@ -352,7 +353,7 @@ begin
     grupoDetalle.Visible:=false;
     GrupoVisualizando.Enabled := true;
     GrupoEditando.Enabled := false;
-    PageControl1.Enabled:= true;
+    tabs.Enabled:= true;
   end;
 end;
 
@@ -365,8 +366,8 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
   begin
     grilla.Enabled := false;
     grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
-    PageControl1.Enabled:= true;
-    PageControl1.ActivePageIndex:= 0;
+    tabs.Enabled:= true;
+    tabs.ActivePageIndex:= 0;
 
     ZQ_ProductoCabecera.edit;
 
@@ -445,6 +446,7 @@ begin
    ZQ_DetalleProductoSTOCK_MIN.AsFloat:=0;
    ZQ_DetalleProductoSTOCK_MAX.AsFloat:=0;
    ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:=ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
+   GrupoEditando.Enabled :=false;
 end;
 
 
@@ -452,6 +454,7 @@ procedure TFABMProductos.EditarDetalleClick(Sender: TObject);
 begin
    grupoDetalle.Visible:=true;
    grillaDetalle.PopupMenu:=nil;
+   GrupoEditando.Enabled :=false;
    ZQ_DetalleProducto.Edit;
 end;
 
@@ -478,6 +481,7 @@ begin
    ZQ_DetalleProducto.Post;
    grupoDetalle.Visible:=false;
    grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
+   GrupoEditando.Enabled :=true;
 end;
 
 
@@ -486,6 +490,7 @@ begin
   grupoDetalle.Visible:=false;
   grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
   ZQ_DetalleProducto.RevertRecord;
+  GrupoEditando.Enabled :=true;
 end;
 
 
@@ -593,6 +598,13 @@ begin
     exit;
 
   FPrincipal.PintarFilasGrillasConBajas(Grilla, ZQ_ProductoCabeceraBAJA.AsString, Rect, DataCol, Column, State);
+end;
+
+procedure TFABMProductos.tabsChanging(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+   if (ZQ_DetalleProducto.state=dsInsert)or(ZQ_DetalleProducto.state=dsEdit) then
+      AllowChange:=False;
 end;
 
 end.
