@@ -21,8 +21,8 @@ object FABM_Articulo: TFABM_Articulo
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
@@ -34,8 +34,8 @@ object FABM_Articulo: TFABM_Articulo
     TabOrder = 0
     object PanelEdicion: TPanel
       Left = 0
-      Top = 358
-      Width = 862
+      Top = 352
+      Width = 854
       Height = 58
       Align = alBottom
       BevelOuter = bvNone
@@ -107,8 +107,8 @@ object FABM_Articulo: TFABM_Articulo
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 862
-      Height = 358
+      Width = 854
+      Height = 352
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -122,8 +122,8 @@ object FABM_Articulo: TFABM_Articulo
       object DBGridArticulo: TDBGrid
         Left = 5
         Top = 5
-        Width = 852
-        Height = 348
+        Width = 844
+        Height = 342
         Align = alClient
         Color = 16112578
         DataSource = DS_Articulo
@@ -156,7 +156,7 @@ object FABM_Articulo: TFABM_Articulo
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
