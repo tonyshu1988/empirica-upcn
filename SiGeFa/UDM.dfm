@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 708
-  Top = 281
+  Left = 508
+  Top = 197
   Height = 426
   Width = 470
   object Conexion: TZConnection
@@ -17,7 +17,7 @@ object DM: TDM
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
     SQLHourGlass = True
-    Left = 30
+    Left = 46
     Top = 14
   end
   object SkinData1: TSkinData
@@ -132,7 +132,7 @@ object DM: TDM
     Version = '5.40.07.15'
     MenuUpdate = True
     MenuMerge = False
-    Left = 176
+    Left = 192
     Top = 80
     SkinStream = {
       B2A200001D420400FE6771B8CDB63F0AFE7DDBA97F4F18038F007701BED1C07C
@@ -1440,19 +1440,19 @@ object DM: TDM
   end
   object EKEventos1: TEKEventos
     EnterPorTab = True
-    Left = 30
+    Left = 46
     Top = 80
   end
   object EKModelo: TEKModeloTransaccion
     Coneccion = Conexion
-    Left = 104
+    Left = 120
     Top = 14
   end
   object EKInformacion1: TEKInformacion
     IndiceUsuario = 0
     IndiceTransaccion = 2
     IndiceVersion = 1
-    Left = 104
+    Left = 120
     Top = 80
   end
   object EKUsrLogin: TEKUsrLogin
@@ -1466,7 +1466,7 @@ object DM: TDM
     Caption = 'SIGEFA'
     Modo = EKLoginAutomatico
     ModoPermiso = EKPermisoAction
-    Left = 176
+    Left = 192
     Top = 14
   end
   object ZQ_Configuracion: TZQuery
@@ -1475,7 +1475,7 @@ object DM: TDM
       'select *'
       'from configuracion')
     Params = <>
-    Left = 32
+    Left = 48
     Top = 144
     object ZQ_ConfiguracionCLAVE: TStringField
       FieldName = 'CLAVE'
@@ -1512,7 +1512,7 @@ object DM: TDM
     Borders = []
     Shading = False
     Version = '1.24'
-    Left = 248
+    Left = 264
     Top = 14
   end
   object ExcelExport: TmxDBGridExport
@@ -1611,7 +1611,91 @@ object DM: TDM
     EXCEL.RightMargin = 0.300000000000000000
     Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
     Version = '2.37'
-    Left = 248
+    Left = 264
     Top = 80
+  end
+  object IdSMTP: TIdSMTP
+    MaxLineAction = maException
+    ReadTimeout = 0
+    Port = 25
+    AuthenticationType = atLogin
+    Left = 48
+    Top = 200
+  end
+  object ZQ_ConfigMail: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select c.*'
+      'from mail_cuentas c'
+      'where c.cuenta_principal = '#39'S'#39
+      '  and c.id_sucursal = :id_sucursal')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 136
+    Top = 144
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ConfigMailID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+    end
+    object ZQ_ConfigMailID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_ConfigMailEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_ConfigMailPOP3_HOST: TStringField
+      FieldName = 'POP3_HOST'
+      Size = 100
+    end
+    object ZQ_ConfigMailPOP3_PUERTO: TIntegerField
+      FieldName = 'POP3_PUERTO'
+    end
+    object ZQ_ConfigMailPOP3_USUARIO: TStringField
+      FieldName = 'POP3_USUARIO'
+      Size = 100
+    end
+    object ZQ_ConfigMailPOP3_PASSWORD: TStringField
+      FieldName = 'POP3_PASSWORD'
+      Size = 100
+    end
+    object ZQ_ConfigMailSMTP_HOST: TStringField
+      FieldName = 'SMTP_HOST'
+      Size = 100
+    end
+    object ZQ_ConfigMailSMTP_PUERTO: TIntegerField
+      FieldName = 'SMTP_PUERTO'
+    end
+    object ZQ_ConfigMailSMTP_USUARIO: TStringField
+      FieldName = 'SMTP_USUARIO'
+      Size = 100
+    end
+    object ZQ_ConfigMailSMTP_PASSWORD: TStringField
+      FieldName = 'SMTP_PASSWORD'
+      Size = 100
+    end
+    object ZQ_ConfigMailSMTP_AUTENTICACION: TStringField
+      FieldName = 'SMTP_AUTENTICACION'
+      Size = 100
+    end
+    object ZQ_ConfigMailCUENTA_PRINCIPAL: TStringField
+      FieldName = 'CUENTA_PRINCIPAL'
+      Size = 1
+    end
+  end
+  object IdPOP3: TIdPOP3
+    MaxLineAction = maException
+    ReadTimeout = 0
+    Left = 136
+    Top = 200
   end
 end
