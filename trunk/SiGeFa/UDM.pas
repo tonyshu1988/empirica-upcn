@@ -6,7 +6,8 @@ uses
   Forms, SysUtils, Classes, ZConnection, WinSkinData, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKUsrLogin, EKInformacion, EKModelo,
   EKAppEvnts, EKEventos, QRCtrls, QuickRpt, MidasLib, mxExport,
-  mxNativeExcel;
+  mxNativeExcel, IdBaseComponent, IdComponent, IdTCPConnection,
+  IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage;
 
 type
   TDM = class(TDataModule)
@@ -27,8 +28,25 @@ type
     ZQ_ConfiguracionGRAFICO: TBlobField;
     ExcelNative: TmxNativeExcel;
     ExcelExport: TmxDBGridExport;
+    IdSMTP: TIdSMTP;
+    ZQ_ConfigMail: TZQuery;
+    IdPOP3: TIdPOP3;
+    ZQ_ConfigMailID_CUENTA: TIntegerField;
+    ZQ_ConfigMailID_SUCURSAL: TIntegerField;
+    ZQ_ConfigMailEMAIL: TStringField;
+    ZQ_ConfigMailPOP3_HOST: TStringField;
+    ZQ_ConfigMailPOP3_PUERTO: TIntegerField;
+    ZQ_ConfigMailPOP3_USUARIO: TStringField;
+    ZQ_ConfigMailPOP3_PASSWORD: TStringField;
+    ZQ_ConfigMailSMTP_HOST: TStringField;
+    ZQ_ConfigMailSMTP_PUERTO: TIntegerField;
+    ZQ_ConfigMailSMTP_USUARIO: TStringField;
+    ZQ_ConfigMailSMTP_PASSWORD: TStringField;
+    ZQ_ConfigMailSMTP_AUTENTICACION: TStringField;
+    ZQ_ConfigMailCUENTA_PRINCIPAL: TStringField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
+    procedure configMail();
   private
     auxDecimalSeparator, auxThousandSeparator: Char;
     auxCurrencyDecimals: Integer;
@@ -47,7 +65,6 @@ implementation
 uses UPrincipal;
 
 {$R *.dfm}
-
 
 procedure TDM.LoginLogin(Sender: TObject);
 var
@@ -69,6 +86,41 @@ begin
 //  if EKUsrLogin.PermisoAccionValores('ACCESO') <> nil then
 //  SetLength(sucursales, cantidadPermisos);
   sucursales:= EKUsrLogin.PermisoAccionValores('ACCESO');
+
+  configMail;  
+end;
+
+
+procedure TDM.configMail();
+begin
+  ZQ_ConfigMail.Close;
+  ZQ_ConfigMail.ParamByName('id_sucursal').AsInteger:= id_sucursal;
+  ZQ_ConfigMail.Open;
+
+//{Configuracion POP3}
+//  IdPOP3.Port:= 110;
+//  IdPOP3.Host:= 'pop3.arnetbiz.com.ar';
+//  IdPOP3.Username:= 'mdservicios@chapino.arnetbiz.com.ar';
+//  IdPOP3.Password:= 'simurdiera';
+  IdPOP3.Port:= ZQ_ConfigMailPOP3_PUERTO.AsInteger;
+  IdPOP3.Host:= ZQ_ConfigMailPOP3_HOST.AsString;
+  IdPOP3.Username:= ZQ_ConfigMailPOP3_USUARIO.AsString;
+  IdPOP3.Password:= ZQ_ConfigMailPOP3_PASSWORD.AsString;
+
+//{Configuracion SMTP}
+//  IdSMTP.AuthenticationType := atLogin; {Simple Login}
+//  IdSMTP.Port := 25;
+//  IdSMTP.Host := 'smtp.ciudad.com.ar';
+//  IdSMTP.Username := 'mdservicios@ciudad.com.ar';
+//  IdSMTP.Password := 'jrdcha';
+  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atNone' then
+    IdSMTP.AuthenticationType := atNone;
+  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atLogin' then
+    IdSMTP.AuthenticationType := atLogin;
+  IdSMTP.Port := ZQ_ConfigMailSMTP_PUERTO.AsInteger;
+  IdSMTP.Host := ZQ_ConfigMailSMTP_HOST.AsString;
+  IdSMTP.Username := ZQ_ConfigMailSMTP_USUARIO.AsString;
+  IdSMTP.Password := ZQ_ConfigMailSMTP_PASSWORD.AsString;
 end;
 
 

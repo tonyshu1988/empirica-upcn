@@ -12,6 +12,8 @@ function EsCUITValido(Num:String):boolean;
 function contiene(AString, Pattern: string): boolean;
 function rellenar(texto: string; caracter: Char; cantidad: integer):String;
 function Redondear(Valor: Real; Redondeo: Integer): Real;
+function EsEmailValido(const Value: String): boolean;
+function EsEmailValido2(email: string): boolean;
 
 implementation
 
@@ -19,6 +21,131 @@ uses SysUtils, Graphics, Jpeg;
 
 const
     TablaMul:Array[1..10] of Integer=(5,4,3,2,7,6,5,4,3,2); {Tabla Arbitraria}
+
+
+function EsEmailValido(const Value: String): boolean;
+
+  function CheckAllowed(const s: String): boolean;
+  var
+    i: Integer;
+  begin
+    Result:= False;
+    for i:= 1 to Length(s) do // illegal char in s -> no valid address
+      if not (s[i] in ['a'..'z','A'..'Z','0'..'9','_','-','.']) then
+        Exit;
+
+    Result:= true;
+  end;
+
+var
+  i,len: Integer;
+  namePart, serverPart: String;
+begin
+  Result:= False;
+  i:= Pos('@', Value);
+
+  if (i=0) or (Pos('..',Value) > 0) then
+    exit;
+
+  namePart:= Copy(Value, 1, i - 1);
+  serverPart:= Copy(Value, i+1, Length(Value));
+  len:=Length(serverPart);
+  if (len<4) or (Pos('.',serverPart)=0) or (serverPart[1]='.') or (serverPart[len]='.') or (serverPart[len-1]='.') then
+    exit;
+
+  Result:= CheckAllowed(namePart) and CheckAllowed(serverPart);
+end;
+
+
+function EsEmailValido2(email: string): boolean;
+   // Devuelve True si la dirección de email es válida
+   const
+     // Caracteres válidos en un "átomo"
+     atom_chars = [#33..#255] - ['(', ')', '<', '>', '@', ',', ';', 
+     ':', '\', '/', '"', '.', '[', ']', #127];
+     // Caracteres válidos en una "cadena-entrecomillada"
+     quoted_string_chars = [#0..#255] - ['"', #13, '\'];
+     // Caracteres válidos en un subdominio
+     letters = ['A'..'Z', 'a'..'z'];
+     letters_digits = ['0'..'9', 'A'..'Z', 'a'..'z'];
+     subdomain_chars = ['-', '0'..'9', 'A'..'Z', 'a'..'z'];
+   type
+     States = (STATE_BEGIN, STATE_ATOM, STATE_QTEXT,
+     STATE_QCHAR, STATE_QUOTE, STATE_LOCAL_PERIOD,
+     STATE_EXPECTING_SUBDOMAIN, STATE_SUBDOMAIN, STATE_HYPHEN);
+   var
+     State: States;
+     i, n, subdomains: integer;
+     c: char;
+begin 
+  State := STATE_BEGIN;
+  n := Length(email); 
+  i := 1;
+  subdomains := 1; 
+  while (i <= n) do 
+    begin
+      c := email[i];
+      case State of 
+         STATE_BEGIN: 
+                  if c in atom_chars then
+                  State := STATE_ATOM 
+                  else if c = '"' then 
+                  State := STATE_QTEXT
+                  else break;
+         STATE_ATOM:
+                  if c = '@' then
+                  State := STATE_EXPECTING_SUBDOMAIN
+                  else if c = '.' then 
+                  State := STATE_LOCAL_PERIOD
+                  else if not (c in atom_chars) then 
+                  break; 
+         STATE_QTEXT:
+                  if c = '\' then
+                  State := STATE_QCHAR 
+                  else if c = '"' then
+                  State := STATE_QUOTE 
+                  else if not (c in quoted_string_chars) then 
+                  break; 
+         STATE_QCHAR:   
+                  State := STATE_QTEXT; 
+         STATE_QUOTE:
+                  if c = '@' then 
+                  State := STATE_EXPECTING_SUBDOMAIN
+                  else if c = '.' then
+                  State := STATE_LOCAL_PERIOD 
+                  else break; 
+         STATE_LOCAL_PERIOD:
+                  if c in atom_chars then
+                  State := STATE_ATOM 
+                  else if c = '"' then 
+                  State := STATE_QTEXT
+                              else break; 
+         STATE_EXPECTING_SUBDOMAIN: 
+                  if c in letters then
+                  State := STATE_SUBDOMAIN 
+                  else break;
+         STATE_SUBDOMAIN:
+                  if c = '.' then
+                  begin 
+                      inc(subdomains);
+                      State := STATE_EXPECTING_SUBDOMAIN
+                  end
+                  else if c = '-' then 
+                  State := STATE_HYPHEN
+                  else if not (c in letters_digits) then 
+                  break;
+         STATE_HYPHEN:
+                  if c in letters_digits then
+                  State := STATE_SUBDOMAIN
+                  else if c <> '-' then break;
+      end;
+      inc(i);
+    end;
+  if i <= n then
+  Result := False
+  else
+  Result := (State = STATE_SUBDOMAIN) and (subdomains >= 2);
+end;
 
 
 procedure SetJPGCompression (compresion: integer; const archivoEntrada: string; const archivoSalida: string);
