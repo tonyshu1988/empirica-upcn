@@ -21,7 +21,10 @@ uses
   UABM_ProductoPosicion in 'UABM_ProductoPosicion.pas' {FABM_ProductoPosicion},
   UABM_Personas in 'UABM_Personas.pas' {FABM_Personas},
   UABM_Articulo in 'UABM_Articulo.pas' {FABM_Articulo},
-  UImprimirEtiquetas in 'UImprimirEtiquetas.pas' {FImprimirEtiquetas};
+  UImprimirEtiquetas in 'UImprimirEtiquetas.pas' {FImprimirEtiquetas},
+  UMailBandeja in 'UMailBandeja.pas' {FMailBandeja},
+  UMailConfigurar in 'UMailConfigurar.pas' {FMailConfigurar},
+  UMailEnviar in 'UMailEnviar.pas' {FMailEnviar};
 
 {$R *.res}
 
