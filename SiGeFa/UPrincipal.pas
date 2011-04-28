@@ -105,13 +105,35 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_Articulo, UABM_TipoArticulo, UABM_Marcas, UABM_ArticuloMedida,
   UABM_TipoEmpresa, UABM_Sucursal, UABM_SucursalPosicion,
   UABM_ProductoStock, UABM_ProductoPosicion, UABM_Personas,
-  UImprimirEtiquetas, UMailBandeja;
+  UImprimirEtiquetas, UMailBandeja, USeleccionarSucursal;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 var
   i: integer;
 begin
+  SUCURSAL_LOGUEO:= -1;
+
+  if DM.EKUsrLogin.PermisoAccionValorGrupo('ACCESO') <> nil then
+  begin
+    sucursales:= DM.EKUsrLogin.PermisoAccionValorGrupo('ACCESO'); //obtengo todas las sucursales
+  end;                                                         //a las q tiene acceso el usuario
+
+  if Length(sucursales) = 1 then //si hay una sola sucursal
+  begin
+    SUCURSAL_LOGUEO:= strtoint(sucursales[0].valor);
+  end
+  else  //si hay mas de una sucursal abro la pantalla para q seleccione una
+  begin
+    FSeleccionarSucursal:= TFSeleccionarSucursal.Create(nil);
+    FSeleccionarSucursal.ShowModal;
+  end;
+
+  if SUCURSAL_LOGUEO = -1 then  //si no selecciono ninguna sucursal o el
+    Application.Terminate;      //usuario no tiene asignada ninguna salgo del sistema
+
+  dm.configMailSucursal(SUCURSAL_LOGUEO);
+
   baja:= $006A6AFF;    //ROJO = color de los registros dados de baja
   activo:= $00FB952F;  //AZUL = color de los registro comunes
 end;
@@ -189,9 +211,7 @@ end;
 procedure TFPrincipal.CambiarContraseniaClick(Sender: TObject);
 var i:integer;
 begin
-//    for i := 0 to length(sucursales)-1 do
-//      ShowMessage(sucursales[i].usuario+' - '+sucursales[i].valor);
-//  dm.EKUsrLogin.CambiarClave;
+  dm.EKUsrLogin.CambiarClave;
 end;
 
 
