@@ -46,7 +46,8 @@ type
     ZQ_ConfigMailCUENTA_PRINCIPAL: TStringField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
-    procedure configMail();
+    procedure configMailSucursal(idSucursal: integer);
+    procedure configMailCuenta(idCuenta: integer);
   private
     auxDecimalSeparator, auxThousandSeparator: Char;
     auxCurrencyDecimals: Integer;
@@ -57,70 +58,75 @@ type
 
 var
   DM: TDM;
-  id_sucursal: integer;
-  sucursales: TEKArrayPermisos;
-
+  SUCURSAL_LOGUEO: integer;
+  sucursales: TEKArrayPermisos; //array de permisos valores que tiene
+                                //un campo usuario y un campo valor
 implementation
 
-uses UPrincipal;
+uses UPrincipal, USeleccionarSucursal;
 
 {$R *.dfm}
 
 procedure TDM.LoginLogin(Sender: TObject);
 var
   aux:string;
+  i: integer;
 begin
+  SkinData1.Active:= true;
+  Application.CreateForm(TFPrincipal, FPrincipal);  
+
   auxDecimalSeparator:= DecimalSeparator;
   auxCurrencyDecimals:= CurrencyDecimals;
   auxThousandSeparator:= ThousandSeparator;
   auxCurrencyString:= CurrencyString;
-
-  SkinData1.Active:= true;
-  Application.CreateForm(TFPrincipal, FPrincipal);
-
-  //if EKUsrLogin.PermisoAccionValor('ACCESO') = '' then
-    id_sucursal:= 1;
-  //else
-  //  id_sucursal:= StrToInt(EKUsrLogin.PermisoAccionValor('ACCESO'));
-
-//  if EKUsrLogin.PermisoAccionValores('ACCESO') <> nil then
-//  SetLength(sucursales, cantidadPermisos);
-  sucursales:= EKUsrLogin.PermisoAccionValores('ACCESO');
-
-  configMail;  
 end;
 
 
-procedure TDM.configMail();
+procedure TDM.configMailSucursal(idSucursal: integer);
 begin
   ZQ_ConfigMail.Close;
-  ZQ_ConfigMail.ParamByName('id_sucursal').AsInteger:= id_sucursal;
+  ZQ_ConfigMail.SQL[4]:= 'and c.id_sucursal = :id_sucursal';
+  ZQ_ConfigMail.SQL[5]:= '';
+  ZQ_ConfigMail.ParamByName('id_sucursal').AsInteger:= idSucursal;
   ZQ_ConfigMail.Open;
 
-//{Configuracion POP3}
-//  IdPOP3.Port:= 110;
-//  IdPOP3.Host:= 'pop3.arnetbiz.com.ar';
-//  IdPOP3.Username:= 'mdservicios@chapino.arnetbiz.com.ar';
-//  IdPOP3.Password:= 'simurdiera';
   IdPOP3.Port:= ZQ_ConfigMailPOP3_PUERTO.AsInteger;
   IdPOP3.Host:= ZQ_ConfigMailPOP3_HOST.AsString;
   IdPOP3.Username:= ZQ_ConfigMailPOP3_USUARIO.AsString;
   IdPOP3.Password:= ZQ_ConfigMailPOP3_PASSWORD.AsString;
 
-//{Configuracion SMTP}
-//  IdSMTP.AuthenticationType := atLogin; {Simple Login}
-//  IdSMTP.Port := 25;
-//  IdSMTP.Host := 'smtp.ciudad.com.ar';
-//  IdSMTP.Username := 'mdservicios@ciudad.com.ar';
-//  IdSMTP.Password := 'jrdcha';
-  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atNone' then
-    IdSMTP.AuthenticationType := atNone;
-  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atLogin' then
-    IdSMTP.AuthenticationType := atLogin;
   IdSMTP.Port := ZQ_ConfigMailSMTP_PUERTO.AsInteger;
   IdSMTP.Host := ZQ_ConfigMailSMTP_HOST.AsString;
   IdSMTP.Username := ZQ_ConfigMailSMTP_USUARIO.AsString;
   IdSMTP.Password := ZQ_ConfigMailSMTP_PASSWORD.AsString;
+  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atNone' then
+    IdSMTP.AuthenticationType := atNone;
+  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atLogin' then
+    IdSMTP.AuthenticationType := atLogin;
+end;
+
+
+procedure TDM.configMailCuenta(idCuenta: integer);
+begin
+  ZQ_ConfigMail.Close;
+  ZQ_ConfigMail.SQL[4]:= '';
+  ZQ_ConfigMail.SQL[5]:= 'and c.id_cuenta = :id_cuenta';
+  ZQ_ConfigMail.ParamByName('id_cuenta').AsInteger:= idCuenta;
+  ZQ_ConfigMail.Open;
+
+  IdPOP3.Port:= ZQ_ConfigMailPOP3_PUERTO.AsInteger;
+  IdPOP3.Host:= ZQ_ConfigMailPOP3_HOST.AsString;
+  IdPOP3.Username:= ZQ_ConfigMailPOP3_USUARIO.AsString;
+  IdPOP3.Password:= ZQ_ConfigMailPOP3_PASSWORD.AsString;
+
+  IdSMTP.Port := ZQ_ConfigMailSMTP_PUERTO.AsInteger;
+  IdSMTP.Host := ZQ_ConfigMailSMTP_HOST.AsString;
+  IdSMTP.Username := ZQ_ConfigMailSMTP_USUARIO.AsString;
+  IdSMTP.Password := ZQ_ConfigMailSMTP_PASSWORD.AsString;
+  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atNone' then
+    IdSMTP.AuthenticationType := atNone;
+  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atLogin' then
+    IdSMTP.AuthenticationType := atLogin;
 end;
 
 

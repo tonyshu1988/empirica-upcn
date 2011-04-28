@@ -1627,12 +1627,19 @@ object DM: TDM
     SQL.Strings = (
       'select c.*'
       'from mail_cuentas c'
-      'where c.cuenta_principal = '#39'S'#39
-      '  and c.id_sucursal = :id_sucursal')
+      'where 1 = 1'
+      '  and c.cuenta_principal = '#39'S'#39
+      '  and c.id_sucursal = :id_sucursal'
+      '  and c.id_cuenta = :id_cuenta ')
     Params = <
       item
         DataType = ftUnknown
         Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
         ParamType = ptUnknown
       end>
     Left = 136
@@ -1641,6 +1648,11 @@ object DM: TDM
       item
         DataType = ftUnknown
         Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
         ParamType = ptUnknown
       end>
     object ZQ_ConfigMailID_CUENTA: TIntegerField

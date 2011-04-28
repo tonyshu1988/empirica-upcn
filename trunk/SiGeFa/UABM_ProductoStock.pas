@@ -95,7 +95,7 @@ begin
     DBGridStock.ReadOnly:= false;
 
     ZQ_Stock.Close;
-    ZQ_Stock.ParamByName('id_sucursal').AsInteger:= id_sucursal;
+    ZQ_Stock.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
     ZQ_Stock.Open;
   end;
 end;
@@ -148,7 +148,7 @@ begin
   begin
     //genero el stock en 0 para los productos cargados recientemente
     ZQ_GenerarStock.close;
-    ZQ_GenerarStock.ParamByName('id_sucursal').AsInteger:= id_sucursal;
+    ZQ_GenerarStock.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
     ZQ_GenerarStock.ExecSQL;
 
     //finalizo la transaccion
