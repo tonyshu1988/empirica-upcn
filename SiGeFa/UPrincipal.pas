@@ -64,6 +64,11 @@ type
     ABandejaMail: TAction;
     BandejadeMail1: TMenuItem;
     Iconos_Mail: TImageList;
+    AConfigMail: TAction;
+    AEnviarMail: TAction;
+    BandejadeMail2: TMenuItem;
+    EnviarMail1: TMenuItem;
+    ConfigurarMail1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -85,6 +90,8 @@ type
     procedure AABM_PersonasExecute(Sender: TObject);
     procedure AImprimirEtiquetaExecute(Sender: TObject);
     procedure ABandejaMailExecute(Sender: TObject);
+    procedure AConfigMailExecute(Sender: TObject);
+    procedure AEnviarMailExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -105,7 +112,8 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_Articulo, UABM_TipoArticulo, UABM_Marcas, UABM_ArticuloMedida,
   UABM_TipoEmpresa, UABM_Sucursal, UABM_SucursalPosicion,
   UABM_ProductoStock, UABM_ProductoPosicion, UABM_Personas,
-  UImprimirEtiquetas, UMailBandeja, USeleccionarSucursal;
+  UImprimirEtiquetas, UMailBandeja, USeleccionarSucursal, UMailConfigurar,
+  UMailEnviar;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -318,6 +326,18 @@ end;
 procedure TFPrincipal.ABandejaMailExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFMailBandeja, FMailBandeja);
+end;
+
+procedure TFPrincipal.AConfigMailExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFMailConfigurar, FMailConfigurar);
+  FMailConfigurar.ShowModal;
+end;
+
+procedure TFPrincipal.AEnviarMailExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFMailEnviar, FMailEnviar);
+  FMailEnviar.ShowModal;
 end;
 
 end.
