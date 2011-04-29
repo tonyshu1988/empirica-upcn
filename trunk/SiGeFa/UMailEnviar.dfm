@@ -252,14 +252,14 @@ object FMailEnviar: TFMailEnviar
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
     end
-    object Button1: TButton
+    object btnCambiarCuenta: TButton
       Left = 16
       Top = 8
       Width = 75
       Height = 19
       Caption = 'Cambiar'
       TabOrder = 0
-      OnClick = Button1Click
+      OnClick = btnCambiarCuentaClick
     end
   end
   object dxBarABM: TdxBarManager
