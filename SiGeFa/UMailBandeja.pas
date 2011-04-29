@@ -7,14 +7,14 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   IdMessage, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
-  IdMessageClient, IdPOP3, idsync, idglobal, Buttons, ImgList, Menus;
+  IdMessageClient, IdPOP3, idsync, idglobal, Buttons, ImgList, Menus,
+  EKListadoSQL;
 
 type
   TFMailBandeja = class(TForm)
     PanelFondo: TPanel;
     PanelGrilla: TPanel;
     dxBarABM: TdxBarManager;
-    btnConfigurar: TdxBarLargeButton;
     btnRecibir: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnEliminar: TdxBarLargeButton;
@@ -66,6 +66,26 @@ type
     AbrirMail1: TMenuItem;
     Recibir1: TMenuItem;
     EliminarMarcados1: TMenuItem;
+    Panel1: TPanel;
+    Label6: TLabel;
+    DBText1: TDBText;
+    Button1: TButton;
+    EKListadoCuentas: TEKListadoSQL;
+    ZQ_Cuentas: TZQuery;
+    ZQ_CuentasID_CUENTA: TIntegerField;
+    ZQ_CuentasID_SUCURSAL: TIntegerField;
+    ZQ_CuentasEMAIL: TStringField;
+    ZQ_CuentasPOP3_HOST: TStringField;
+    ZQ_CuentasPOP3_PUERTO: TIntegerField;
+    ZQ_CuentasPOP3_USUARIO: TStringField;
+    ZQ_CuentasPOP3_PASSWORD: TStringField;
+    ZQ_CuentasSMTP_HOST: TStringField;
+    ZQ_CuentasSMTP_PUERTO: TIntegerField;
+    ZQ_CuentasSMTP_USUARIO: TStringField;
+    ZQ_CuentasSMTP_PASSWORD: TStringField;
+    ZQ_CuentasSMTP_AUTENTICACION: TStringField;
+    ZQ_CuentasCUENTA_PRINCIPAL: TStringField;
+    DS_Cuentas: TDataSource;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -73,12 +93,12 @@ type
     procedure btnRecibirClick(Sender: TObject);
     procedure btnGuardarAdjuntoClick(Sender: TObject);
     procedure listaBandejaEntradaDblClick(Sender: TObject);
-    procedure btnConfigurarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure Recibir1Click(Sender: TObject);
     procedure AbrirMail1Click(Sender: TObject);
     procedure MarcarEliminar1Click(Sender: TObject);
     procedure EliminarMarcados1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     function BuscarIndiceAdjuntos(nombreArchivo: string): integer;
     function BuscarAdjuntos(const nombreArchivo: string): TIdAttachment;
@@ -140,6 +160,11 @@ begin
   directorioAdjunto:= directorioAdjunto+'Adjuntos\';
   if not DirectoryExists(directorioAdjunto) then
     ForceDirectories(directorioAdjunto);
+
+  ZQ_Cuentas.Close;
+  ZQ_Cuentas.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
+  ZQ_Cuentas.Open;
+  ZQ_Cuentas.Filtered:= true;
 end;
 
 
@@ -390,6 +415,7 @@ begin
     DM.IdPOP3.Connect;
   except
     mostrarEstado('No se pudo conectar');
+    mostrarOcupado(false);
     exit;
   end;
 
@@ -453,17 +479,9 @@ begin
 end;
 
 
-procedure TFMailBandeja.btnConfigurarClick(Sender: TObject);
-begin
-  Application.CreateForm(TFMailConfigurar, FMailConfigurar);
-  FMailConfigurar.ShowModal;
-end;
-
-
 procedure TFMailBandeja.btnNuevoClick(Sender: TObject);
 begin
   Application.CreateForm(TFMailEnviar, FMailEnviar);
-  FMailEnviar.cargarDestinatario('mdservicios@chapino.arnetbiz.com.ar;');
   FMailEnviar.ShowModal;
 end;
 
@@ -489,6 +507,20 @@ end;
 procedure TFMailBandeja.EliminarMarcados1Click(Sender: TObject);
 begin
   eliminarMarcados;
+end;
+
+procedure TFMailBandeja.Button1Click(Sender: TObject);
+begin
+  ZQ_Cuentas.Filtered:= false;                                                                                      
+  
+  EKListadoCuentas.SQL.Text:= 'select c.* '+
+                              'from mail_cuentas c '+
+                              'where id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
+
+  if EKListadoCuentas.Buscar then
+  begin
+    dm.configMailCuenta(StrToInt(EKListadoCuentas.Resultado));
+  end;
 end;
 
 end.

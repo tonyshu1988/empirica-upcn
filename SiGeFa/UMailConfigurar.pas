@@ -419,9 +419,9 @@ end;
 procedure TFMailConfigurar.ZQ_CuentasAfterScroll(DataSet: TDataSet);
 begin
   if ZQ_CuentasCUENTA_PRINCIPAL.AsString = 'S' then
-    btnPrincipal.Visible:= ivNever
+    btnPrincipal.Enabled:= false
   else
-    btnPrincipal.Visible:= ivAlways;
+    btnPrincipal.Enabled:= true;
 end;
 
 procedure TFMailConfigurar.EKLlenarComboCambio(valor: String);

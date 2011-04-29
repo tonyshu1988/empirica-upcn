@@ -20,9 +20,9 @@ object FMailBandeja: TFMailBandeja
   TextHeight = 13
   object PanelFondo: TPanel
     Left = 0
-    Top = 0
+    Top = 36
     Width = 891
-    Height = 537
+    Height = 501
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -30,7 +30,7 @@ object FMailBandeja: TFMailBandeja
       Left = 0
       Top = 0
       Width = 891
-      Height = 537
+      Height = 501
       Align = alClient
       BevelOuter = bvNone
       Font.Charset = DEFAULT_CHARSET
@@ -44,7 +44,7 @@ object FMailBandeja: TFMailBandeja
         Left = 0
         Top = 0
         Width = 891
-        Height = 537
+        Height = 501
         ActivePage = TabBandejaEntrada
         Align = alClient
         TabOrder = 0
@@ -113,7 +113,7 @@ object FMailBandeja: TFMailBandeja
             Left = 0
             Top = 189
             Width = 883
-            Height = 320
+            Height = 284
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
@@ -281,7 +281,7 @@ object FMailBandeja: TFMailBandeja
               Left = 0
               Top = 73
               Width = 883
-              Height = 247
+              Height = 211
               Align = alClient
               BevelOuter = bvNone
               BorderWidth = 5
@@ -290,7 +290,7 @@ object FMailBandeja: TFMailBandeja
                 Left = 5
                 Top = 5
                 Width = 873
-                Height = 237
+                Height = 201
                 Align = alClient
                 BevelInner = bvNone
                 BevelOuter = bvNone
@@ -318,7 +318,7 @@ object FMailBandeja: TFMailBandeja
             Left = 0
             Top = 105
             Width = 883
-            Height = 404
+            Height = 368
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
@@ -446,7 +446,7 @@ object FMailBandeja: TFMailBandeja
               Left = 0
               Top = 73
               Width = 883
-              Height = 331
+              Height = 295
               Align = alClient
               BevelOuter = bvNone
               BorderWidth = 5
@@ -455,7 +455,7 @@ object FMailBandeja: TFMailBandeja
                 Left = 5
                 Top = 5
                 Width = 873
-                Height = 321
+                Height = 285
                 Align = alClient
                 TabOrder = 0
               end
@@ -463,6 +463,45 @@ object FMailBandeja: TFMailBandeja
           end
         end
       end
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 891
+    Height = 36
+    Align = alTop
+    TabOrder = 5
+    object Label6: TLabel
+      Left = 96
+      Top = 11
+      Width = 46
+      Height = 13
+      Caption = 'Cuenta:'
+    end
+    object DBText1: TDBText
+      Left = 144
+      Top = 11
+      Width = 54
+      Height = 13
+      AutoSize = True
+      DataField = 'EMAIL'
+      DataSource = DS_Cuentas
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+    end
+    object Button1: TButton
+      Left = 16
+      Top = 8
+      Width = 75
+      Height = 19
+      Caption = 'Cambiar'
+      TabOrder = 0
+      OnClick = Button1Click
     end
   end
   object dxBarABM: TdxBarManager
@@ -583,10 +622,6 @@ object FMailBandeja: TFMailBandeja
           end
           item
             BeginGroup = True
-            Item = btnConfigurar
-            Visible = True
-          end
-          item
             Item = btnSalir
             Visible = True
           end>
@@ -931,15 +966,6 @@ object FMailBandeja: TFMailBandeja
       OnClick = btnEliminarClick
       AutoGrayScale = False
     end
-    object btnConfigurar: TdxBarLargeButton
-      Caption = 'Configurar'
-      Category = 0
-      Hint = 'Configurar'
-      Visible = ivAlways
-      ImageIndex = 43
-      OnClick = btnConfigurarClick
-      AutoGrayScale = False
-    end
     object btnSalir: TdxBarLargeButton
       Align = iaRight
       Caption = 'Salir'
@@ -954,7 +980,6 @@ object FMailBandeja: TFMailBandeja
       Items = (
         'btnRecibir'
         'btnNuevo'
-        'btnConfigurar'
         'btnEliminar'
         'btnSalir')
     end
@@ -1539,5 +1564,91 @@ object FMailBandeja: TFMailBandeja
       ImageIndex = 4
       OnClick = EliminarMarcados1Click
     end
+  end
+  object EKListadoCuentas: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select c.*'
+      'from mail_cuentas c'
+      'where id_sucursal = :id_sucursal')
+    CampoBuscar = 'EMAIL'
+    CampoClave = 'ID_CUENTA'
+    BuscarEnQuery = ZQ_Cuentas
+    TituloVentana = 'Seleccionar Cuenta'
+    Left = 416
+  end
+  object ZQ_Cuentas: TZQuery
+    Connection = DM.Conexion
+    Filter = 'cuenta_principal = '#39'S'#39
+    SQL.Strings = (
+      'select c.*'
+      'from mail_cuentas c'
+      'where c.id_sucursal = :id_sucursal')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 336
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    object ZQ_CuentasID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+      Required = True
+    end
+    object ZQ_CuentasID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_CuentasEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_CuentasPOP3_HOST: TStringField
+      FieldName = 'POP3_HOST'
+      Size = 100
+    end
+    object ZQ_CuentasPOP3_PUERTO: TIntegerField
+      FieldName = 'POP3_PUERTO'
+    end
+    object ZQ_CuentasPOP3_USUARIO: TStringField
+      FieldName = 'POP3_USUARIO'
+      Size = 100
+    end
+    object ZQ_CuentasPOP3_PASSWORD: TStringField
+      FieldName = 'POP3_PASSWORD'
+      Size = 100
+    end
+    object ZQ_CuentasSMTP_HOST: TStringField
+      FieldName = 'SMTP_HOST'
+      Size = 100
+    end
+    object ZQ_CuentasSMTP_PUERTO: TIntegerField
+      FieldName = 'SMTP_PUERTO'
+    end
+    object ZQ_CuentasSMTP_USUARIO: TStringField
+      FieldName = 'SMTP_USUARIO'
+      Size = 100
+    end
+    object ZQ_CuentasSMTP_PASSWORD: TStringField
+      FieldName = 'SMTP_PASSWORD'
+      Size = 100
+    end
+    object ZQ_CuentasSMTP_AUTENTICACION: TStringField
+      FieldName = 'SMTP_AUTENTICACION'
+      Size = 100
+    end
+    object ZQ_CuentasCUENTA_PRINCIPAL: TStringField
+      FieldName = 'CUENTA_PRINCIPAL'
+      Size = 1
+    end
+  end
+  object DS_Cuentas: TDataSource
+    DataSet = ZQ_Cuentas
+    Left = 264
   end
 end

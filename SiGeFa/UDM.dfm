@@ -2,8 +2,8 @@ object DM: TDM
   OldCreateOrder = False
   Left = 508
   Top = 197
-  Height = 426
-  Width = 470
+  Height = 298
+  Width = 350
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
@@ -1709,5 +1709,9 @@ object DM: TDM
     ReadTimeout = 0
     Left = 136
     Top = 200
+  end
+  object Actualizar: TTimer
+    Left = 214
+    Top = 144
   end
 end

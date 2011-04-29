@@ -25,7 +25,8 @@ uses
   UMailBandeja in 'UMailBandeja.pas' {FMailBandeja},
   UMailConfigurar in 'UMailConfigurar.pas' {FMailConfigurar},
   UMailEnviar in 'UMailEnviar.pas' {FMailEnviar},
-  USeleccionarSucursal in 'USeleccionarSucursal.pas' {FSeleccionarSucursal};
+  USeleccionarSucursal in 'USeleccionarSucursal.pas' {FSeleccionarSucursal},
+  UPanelNotificacion in 'UPanelNotificacion.pas' {FPanelNotificacion};
 
 {$R *.res}
 
