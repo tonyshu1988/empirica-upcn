@@ -1,7 +1,7 @@
 object FMailBandeja: TFMailBandeja
-  Left = 299
-  Top = 66
-  Width = 907
+  Left = 270
+  Top = 143
+  Width = 848
   Height = 627
   Caption = 'Bandeja de Mail'
   Color = clBtnFace
@@ -21,7 +21,7 @@ object FMailBandeja: TFMailBandeja
   object PanelFondo: TPanel
     Left = 0
     Top = 36
-    Width = 891
+    Width = 832
     Height = 501
     Align = alClient
     BevelOuter = bvNone
@@ -29,7 +29,7 @@ object FMailBandeja: TFMailBandeja
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 891
+      Width = 832
       Height = 501
       Align = alClient
       BevelOuter = bvNone
@@ -43,24 +43,291 @@ object FMailBandeja: TFMailBandeja
       object PageControlBandeja: TPageControl
         Left = 0
         Top = 0
-        Width = 891
+        Width = 832
         Height = 501
-        ActivePage = TabBandejaEntrada
+        ActivePage = TabBandejaSalida
         Align = alClient
         TabOrder = 0
+        object TabBandejaSalida: TTabSheet
+          Caption = 'Bandeja de Salida'
+          ImageIndex = 1
+          object pSalidaCabecera: TPanel
+            Left = 0
+            Top = 0
+            Width = 824
+            Height = 189
+            Align = alTop
+            TabOrder = 0
+            object DBGridMarca: TDBGrid
+              Left = 1
+              Top = 1
+              Width = 822
+              Height = 168
+              Align = alClient
+              Color = 16112578
+              DataSource = DS_MailSalida
+              Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Verdana'
+              TitleFont.Style = []
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'CABECERA_PARA'
+                  Title.Caption = 'Para'
+                  Width = 270
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'CABECERA_ASUNTO'
+                  Title.Caption = 'Asunto'
+                  Width = 270
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'FECHA_Y_HORA'
+                  Title.Caption = 'Fecha'
+                  Width = 157
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'CABECERA_CC'
+                  Title.Caption = 'Cc'
+                  Width = 270
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'CABECERA_CCO'
+                  Title.Caption = 'Bcc'
+                  Width = 270
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'CABECERA_PRIORIDAD'
+                  Title.Caption = 'Prioridad'
+                  Width = 90
+                  Visible = True
+                end
+                item
+                  Alignment = taCenter
+                  Expanded = False
+                  FieldName = 'CABECERA_ACUSE_RECIBO'
+                  Title.Caption = 'Acuse'
+                  Width = 54
+                  Visible = True
+                end
+                item
+                  Alignment = taCenter
+                  Expanded = False
+                  FieldName = 'ENVIADO'
+                  Title.Caption = 'Enviado'
+                  Width = 58
+                  Visible = True
+                end>
+            end
+            object StatusBarBandejaSalida: TStatusBar
+              Tag = 99
+              Left = 1
+              Top = 169
+              Width = 822
+              Height = 19
+              Panels = <
+                item
+                  Width = 120
+                end
+                item
+                  Width = 180
+                end
+                item
+                  Width = 50
+                end>
+            end
+          end
+          object pSalidaMensaje: TPanel
+            Left = 0
+            Top = 189
+            Width = 824
+            Height = 284
+            Align = alClient
+            BevelOuter = bvNone
+            TabOrder = 1
+            object pSalidaMsjCabecera: TPanel
+              Left = 0
+              Top = 0
+              Width = 824
+              Height = 73
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 0
+              object pSalidaMsjCabDerecha: TPanel
+                Left = 475
+                Top = 0
+                Width = 349
+                Height = 73
+                Align = alRight
+                BevelInner = bvRaised
+                BevelOuter = bvNone
+                TabOrder = 0
+                object DBGrid1: TDBGrid
+                  Left = 1
+                  Top = 1
+                  Width = 347
+                  Height = 71
+                  Align = alClient
+                  Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+                  TabOrder = 0
+                  TitleFont.Charset = DEFAULT_CHARSET
+                  TitleFont.Color = clWindowText
+                  TitleFont.Height = -11
+                  TitleFont.Name = 'Verdana'
+                  TitleFont.Style = []
+                end
+              end
+              object pSalidaMsjCabIzquierda: TPanel
+                Left = 0
+                Top = 0
+                Width = 475
+                Height = 73
+                Align = alClient
+                BevelInner = bvRaised
+                BevelOuter = bvNone
+                TabOrder = 1
+                DesignSize = (
+                  475
+                  73)
+                object Label5: TLabel
+                  Left = 32
+                  Top = 9
+                  Width = 21
+                  Height = 13
+                  Caption = 'De:'
+                end
+                object Label7: TLabel
+                  Left = 22
+                  Top = 24
+                  Width = 31
+                  Height = 13
+                  Caption = 'Para:'
+                end
+                object Label9: TLabel
+                  Left = 15
+                  Top = 39
+                  Width = 38
+                  Height = 13
+                  Caption = 'Fecha:'
+                end
+                object Label11: TLabel
+                  Left = 9
+                  Top = 54
+                  Width = 44
+                  Height = 13
+                  Caption = 'Asunto:'
+                end
+                object DBText2: TDBText
+                  Left = 55
+                  Top = 9
+                  Width = 399
+                  Height = 13
+                  Anchors = [akLeft, akTop, akRight]
+                  DataField = 'EMAIL'
+                  DataSource = DS_MailSalida
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object DBText3: TDBText
+                  Left = 55
+                  Top = 24
+                  Width = 399
+                  Height = 13
+                  Anchors = [akLeft, akTop, akRight]
+                  DataField = 'CABECERA_PARA'
+                  DataSource = DS_MailSalida
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object DBText4: TDBText
+                  Left = 55
+                  Top = 39
+                  Width = 399
+                  Height = 13
+                  Anchors = [akLeft, akTop, akRight]
+                  DataField = 'FECHA_Y_HORA'
+                  DataSource = DS_MailSalida
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object DBText5: TDBText
+                  Left = 55
+                  Top = 54
+                  Width = 399
+                  Height = 13
+                  Anchors = [akLeft, akTop, akRight]
+                  DataField = 'CABECERA_ASUNTO'
+                  DataSource = DS_MailSalida
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+              end
+            end
+            object pSalidaMsjCuerpo: TPanel
+              Left = 0
+              Top = 73
+              Width = 824
+              Height = 211
+              Align = alClient
+              BevelOuter = bvNone
+              BorderWidth = 5
+              TabOrder = 1
+              object DBMemoMensajeSalida: TDBMemo
+                Left = 5
+                Top = 5
+                Width = 814
+                Height = 201
+                Align = alClient
+                DataField = 'CUERPO'
+                DataSource = DS_MailSalida
+                TabOrder = 0
+              end
+            end
+          end
+        end
         object TabBandejaEntrada: TTabSheet
           Caption = 'Bandeja de Entrada'
           object pEntradaCabecera: TPanel
             Left = 0
             Top = 0
-            Width = 883
+            Width = 824
             Height = 189
             Align = alTop
             TabOrder = 0
             object listaBandejaEntrada: TListView
               Left = 1
               Top = 1
-              Width = 881
+              Width = 822
               Height = 168
               Align = alClient
               Color = 16112578
@@ -95,7 +362,7 @@ object FMailBandeja: TFMailBandeja
               Tag = 99
               Left = 1
               Top = 169
-              Width = 881
+              Width = 822
               Height = 19
               Panels = <
                 item
@@ -112,7 +379,7 @@ object FMailBandeja: TFMailBandeja
           object pEntradaMensaje: TPanel
             Left = 0
             Top = 189
-            Width = 883
+            Width = 824
             Height = 284
             Align = alClient
             BevelOuter = bvNone
@@ -120,13 +387,13 @@ object FMailBandeja: TFMailBandeja
             object pEntradaMsjCabecera: TPanel
               Left = 0
               Top = 0
-              Width = 883
+              Width = 824
               Height = 73
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 0
               object pEntradaMsjCabDerecha: TPanel
-                Left = 534
+                Left = 475
                 Top = 0
                 Width = 349
                 Height = 73
@@ -138,16 +405,16 @@ object FMailBandeja: TFMailBandeja
                   349
                   73)
                 object listaArchivosAdjuntos: TListView
-                  Left = 3
+                  Left = 9
                   Top = 3
-                  Width = 307
+                  Width = 295
                   Height = 66
                   Align = alCustom
                   Anchors = [akLeft, akTop, akRight, akBottom]
                   Columns = <
                     item
                       Caption = 'Archivos Adjuntos'
-                      Width = 300
+                      Width = 280
                     end>
                   ReadOnly = True
                   RowSelect = True
@@ -178,14 +445,14 @@ object FMailBandeja: TFMailBandeja
               object pEntradaMsjCabIzquierda: TPanel
                 Left = 0
                 Top = 0
-                Width = 534
+                Width = 475
                 Height = 73
                 Align = alClient
                 BevelInner = bvRaised
                 BevelOuter = bvNone
                 TabOrder = 1
                 DesignSize = (
-                  534
+                  475
                   73)
                 object Label1: TLabel
                   Left = 32
@@ -218,7 +485,7 @@ object FMailBandeja: TFMailBandeja
                 object lblMensajeEntradaDe: TLabel
                   Left = 55
                   Top = 9
-                  Width = 467
+                  Width = 408
                   Height = 13
                   Anchors = [akLeft, akTop, akRight]
                   AutoSize = False
@@ -233,7 +500,7 @@ object FMailBandeja: TFMailBandeja
                 object lblMensajeEntradaPara: TLabel
                   Left = 55
                   Top = 24
-                  Width = 467
+                  Width = 408
                   Height = 13
                   Anchors = [akLeft, akTop, akRight]
                   AutoSize = False
@@ -248,7 +515,7 @@ object FMailBandeja: TFMailBandeja
                 object lblMensajeEntradaFecha: TLabel
                   Left = 55
                   Top = 39
-                  Width = 467
+                  Width = 408
                   Height = 13
                   Anchors = [akLeft, akTop, akRight]
                   AutoSize = False
@@ -263,7 +530,7 @@ object FMailBandeja: TFMailBandeja
                 object lblMensajeEntradaAsunto: TLabel
                   Left = 55
                   Top = 54
-                  Width = 467
+                  Width = 408
                   Height = 13
                   Anchors = [akLeft, akTop, akRight]
                   AutoSize = False
@@ -280,7 +547,7 @@ object FMailBandeja: TFMailBandeja
             object pEntradaMsjCuerpo: TPanel
               Left = 0
               Top = 73
-              Width = 883
+              Width = 824
               Height = 211
               Align = alClient
               BevelOuter = bvNone
@@ -289,7 +556,7 @@ object FMailBandeja: TFMailBandeja
               object memoMensajeEntrada: TMemo
                 Left = 5
                 Top = 5
-                Width = 873
+                Width = 814
                 Height = 201
                 Align = alClient
                 BevelInner = bvNone
@@ -303,172 +570,13 @@ object FMailBandeja: TFMailBandeja
             end
           end
         end
-        object TabBandejaSalida: TTabSheet
-          Caption = 'Bandeja de Salida'
-          ImageIndex = 1
-          object pSalidaCabecera: TPanel
-            Left = 0
-            Top = 0
-            Width = 883
-            Height = 105
-            Align = alTop
-            TabOrder = 0
-          end
-          object pSalidaMensaje: TPanel
-            Left = 0
-            Top = 105
-            Width = 883
-            Height = 368
-            Align = alClient
-            BevelOuter = bvNone
-            TabOrder = 1
-            object pSalidaMsjCabecera: TPanel
-              Left = 0
-              Top = 0
-              Width = 883
-              Height = 73
-              Align = alTop
-              BevelOuter = bvNone
-              TabOrder = 0
-              object pSalidaMsjCabDerecha: TPanel
-                Left = 534
-                Top = 0
-                Width = 349
-                Height = 73
-                Align = alRight
-                BevelInner = bvRaised
-                BevelOuter = bvNone
-                TabOrder = 0
-              end
-              object pSalidaMsjCabIzquierda: TPanel
-                Left = 0
-                Top = 0
-                Width = 534
-                Height = 73
-                Align = alClient
-                BevelInner = bvRaised
-                BevelOuter = bvNone
-                TabOrder = 1
-                DesignSize = (
-                  534
-                  73)
-                object Label5: TLabel
-                  Left = 32
-                  Top = 9
-                  Width = 21
-                  Height = 13
-                  Caption = 'De:'
-                end
-                object lblMensajeSalidaDe: TLabel
-                  Left = 55
-                  Top = 9
-                  Width = 467
-                  Height = 13
-                  Anchors = [akLeft, akTop, akRight]
-                  AutoSize = False
-                  Caption = 'De'
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWindowText
-                  Font.Height = -11
-                  Font.Name = 'Verdana'
-                  Font.Style = [fsBold]
-                  ParentFont = False
-                end
-                object Label7: TLabel
-                  Left = 22
-                  Top = 24
-                  Width = 31
-                  Height = 13
-                  Caption = 'Para:'
-                end
-                object lblMensajeSalidaPara: TLabel
-                  Left = 55
-                  Top = 24
-                  Width = 467
-                  Height = 13
-                  Anchors = [akLeft, akTop, akRight]
-                  AutoSize = False
-                  Caption = 'Para'
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWindowText
-                  Font.Height = -11
-                  Font.Name = 'Verdana'
-                  Font.Style = [fsBold]
-                  ParentFont = False
-                end
-                object Label9: TLabel
-                  Left = 15
-                  Top = 39
-                  Width = 38
-                  Height = 13
-                  Caption = 'Fecha:'
-                end
-                object lblMensajeSalidaFecha: TLabel
-                  Left = 55
-                  Top = 39
-                  Width = 467
-                  Height = 13
-                  Anchors = [akLeft, akTop, akRight]
-                  AutoSize = False
-                  Caption = 'Fecha'
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWindowText
-                  Font.Height = -11
-                  Font.Name = 'Verdana'
-                  Font.Style = [fsBold]
-                  ParentFont = False
-                end
-                object Label11: TLabel
-                  Left = 9
-                  Top = 54
-                  Width = 44
-                  Height = 13
-                  Caption = 'Asunto:'
-                end
-                object lblMensajeSalidaAsunto: TLabel
-                  Left = 55
-                  Top = 54
-                  Width = 467
-                  Height = 13
-                  Anchors = [akLeft, akTop, akRight]
-                  AutoSize = False
-                  Caption = 'Asunto'
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWindowText
-                  Font.Height = -11
-                  Font.Name = 'Verdana'
-                  Font.Style = [fsBold]
-                  ParentFont = False
-                end
-              end
-            end
-            object pSalidaMsjCuerpo: TPanel
-              Left = 0
-              Top = 73
-              Width = 883
-              Height = 295
-              Align = alClient
-              BevelOuter = bvNone
-              BorderWidth = 5
-              TabOrder = 1
-              object DBMemoMensajeSalida: TDBMemo
-                Left = 5
-                Top = 5
-                Width = 873
-                Height = 285
-                Align = alClient
-                TabOrder = 0
-              end
-            end
-          end
-        end
       end
     end
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 891
+    Width = 832
     Height = 36
     Align = alTop
     TabOrder = 5
@@ -930,8 +1038,8 @@ object FMailBandeja: TFMailBandeja
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 688
-    Top = 56
+    Left = 224
+    Top = 96
     DockControlHeights = (
       0
       0
@@ -994,16 +1102,16 @@ object FMailBandeja: TFMailBandeja
     Encoding = meMIME
     Recipients = <>
     ReplyTo = <>
-    Left = 688
-    Top = 112
+    Left = 224
+    Top = 152
   end
   object SaveDialog: TSaveDialog
-    Left = 626
-    Top = 56
+    Left = 162
+    Top = 96
   end
   object ImageList: TImageList
-    Left = 626
-    Top = 112
+    Left = 162
+    Top = 152
     Bitmap = {
       494C010109000E00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
@@ -1542,8 +1650,8 @@ object FMailBandeja: TFMailBandeja
   end
   object PopupMenu1: TPopupMenu
     Images = FPrincipal.Iconos_Mail
-    Left = 556
-    Top = 56
+    Left = 92
+    Top = 96
     object Recibir1: TMenuItem
       Caption = 'Recibir'
       ImageIndex = 0
@@ -1650,5 +1758,80 @@ object FMailBandeja: TFMailBandeja
   object DS_Cuentas: TDataSource
     DataSet = ZQ_Cuentas
     Left = 264
+  end
+  object ZQ_MailSalida: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select m.*, c.email'
+      'from mail_mensaje m'
+      'left join mail_cuentas c on m.id_cuenta = c.id_cuenta'
+      'where m.tipo = '#39'S'#39
+      '  and m.id_cuenta = :id_cuenta')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
+        ParamType = ptUnknown
+      end>
+    Left = 356
+    Top = 100
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
+        ParamType = ptUnknown
+      end>
+    object ZQ_MailSalidaID_MAIL_MENSAJE: TIntegerField
+      FieldName = 'ID_MAIL_MENSAJE'
+    end
+    object ZQ_MailSalidaID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+    end
+    object ZQ_MailSalidaCABECERA_PARA: TStringField
+      FieldName = 'CABECERA_PARA'
+      Size = 500
+    end
+    object ZQ_MailSalidaCABECERA_CC: TStringField
+      FieldName = 'CABECERA_CC'
+      Size = 500
+    end
+    object ZQ_MailSalidaCABECERA_CCO: TStringField
+      FieldName = 'CABECERA_CCO'
+      Size = 500
+    end
+    object ZQ_MailSalidaCABECERA_ASUNTO: TStringField
+      FieldName = 'CABECERA_ASUNTO'
+      Size = 100
+    end
+    object ZQ_MailSalidaCABECERA_PRIORIDAD: TStringField
+      FieldName = 'CABECERA_PRIORIDAD'
+    end
+    object ZQ_MailSalidaCABECERA_ACUSE_RECIBO: TStringField
+      FieldName = 'CABECERA_ACUSE_RECIBO'
+      Size = 1
+    end
+    object ZQ_MailSalidaCUERPO: TBlobField
+      FieldName = 'CUERPO'
+    end
+    object ZQ_MailSalidaFECHA_Y_HORA: TDateTimeField
+      FieldName = 'FECHA_Y_HORA'
+    end
+    object ZQ_MailSalidaENVIADO: TStringField
+      FieldName = 'ENVIADO'
+      Size = 1
+    end
+    object ZQ_MailSalidaTIPO: TStringField
+      FieldName = 'TIPO'
+      Size = 1
+    end
+    object ZQ_MailSalidaEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+  end
+  object DS_MailSalida: TDataSource
+    DataSet = ZQ_MailSalida
+    Left = 356
+    Top = 148
   end
 end

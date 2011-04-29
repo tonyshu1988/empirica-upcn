@@ -48,13 +48,9 @@ type
     lblMensajeEntradaFecha: TLabel;
     lblMensajeEntradaAsunto: TLabel;
     Label5: TLabel;
-    lblMensajeSalidaDe: TLabel;
     Label7: TLabel;
-    lblMensajeSalidaPara: TLabel;
     Label9: TLabel;
-    lblMensajeSalidaFecha: TLabel;
     Label11: TLabel;
-    lblMensajeSalidaAsunto: TLabel;
     IdMessage: TIdMessage;
     listaArchivosAdjuntos: TListView;
     StatusBarBandejaEntrada: TStatusBar;
@@ -86,6 +82,28 @@ type
     ZQ_CuentasSMTP_AUTENTICACION: TStringField;
     ZQ_CuentasCUENTA_PRINCIPAL: TStringField;
     DS_Cuentas: TDataSource;
+    DBText2: TDBText;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    DBText5: TDBText;
+    ZQ_MailSalida: TZQuery;
+    DS_MailSalida: TDataSource;
+    DBGridMarca: TDBGrid;
+    ZQ_MailSalidaID_MAIL_MENSAJE: TIntegerField;
+    ZQ_MailSalidaID_CUENTA: TIntegerField;
+    ZQ_MailSalidaCABECERA_PARA: TStringField;
+    ZQ_MailSalidaCABECERA_CC: TStringField;
+    ZQ_MailSalidaCABECERA_CCO: TStringField;
+    ZQ_MailSalidaCABECERA_ASUNTO: TStringField;
+    ZQ_MailSalidaCABECERA_PRIORIDAD: TStringField;
+    ZQ_MailSalidaCABECERA_ACUSE_RECIBO: TStringField;
+    ZQ_MailSalidaCUERPO: TBlobField;
+    ZQ_MailSalidaFECHA_Y_HORA: TDateTimeField;
+    ZQ_MailSalidaENVIADO: TStringField;
+    ZQ_MailSalidaTIPO: TStringField;
+    ZQ_MailSalidaEMAIL: TStringField;
+    StatusBarBandejaSalida: TStatusBar;
+    DBGrid1: TDBGrid;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -165,6 +183,11 @@ begin
   ZQ_Cuentas.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
   ZQ_Cuentas.Open;
   ZQ_Cuentas.Filtered:= true;
+
+  ZQ_MailSalida.Close;
+  ZQ_MailSalida.ParamByName('id_cuenta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_MailSalida.Open;
+  StatusBarBandejaSalida.Panels[1].text:= 'Total de Mensajes '+inttostr(ZQ_MailSalida.RecordCount);
 end;
 
 
@@ -511,7 +534,7 @@ end;
 
 procedure TFMailBandeja.Button1Click(Sender: TObject);
 begin
-  ZQ_Cuentas.Filtered:= false;                                                                                      
+  ZQ_Cuentas.Filtered:= false;
   
   EKListadoCuentas.SQL.Text:= 'select c.* '+
                               'from mail_cuentas c '+
@@ -520,6 +543,11 @@ begin
   if EKListadoCuentas.Buscar then
   begin
     dm.configMailCuenta(StrToInt(EKListadoCuentas.Resultado));
+
+    ZQ_MailSalida.Close;
+    ZQ_MailSalida.ParamByName('id_cuenta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_MailSalida.Open;
+    StatusBarBandejaSalida.Panels[1].text:= 'Total de Mensajes '+inttostr(ZQ_MailSalida.RecordCount);    
   end;
 end;
 

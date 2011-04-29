@@ -1,6 +1,6 @@
 object FMailEnviar: TFMailEnviar
-  Left = 361
-  Top = 255
+  Left = 242
+  Top = 170
   BorderStyle = bsDialog
   Caption = 'Enviar Mail'
   ClientHeight = 562
@@ -44,7 +44,7 @@ object FMailEnviar: TFMailEnviar
         Width = 284
         Height = 135
         Align = alRight
-        TabOrder = 0
+        TabOrder = 1
         object listaAdjuntos: TListView
           Left = 1
           Top = 1
@@ -93,7 +93,7 @@ object FMailEnviar: TFMailEnviar
         Width = 580
         Height = 135
         Align = alClient
-        TabOrder = 1
+        TabOrder = 0
         object Label1: TLabel
           Left = 41
           Top = 11
