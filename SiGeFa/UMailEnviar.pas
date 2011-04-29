@@ -48,7 +48,7 @@ type
     btnAdjuntarArchivo: TBitBtn;
     Panel1: TPanel;
     Label6: TLabel;
-    Button1: TButton;
+    btnCambiarCuenta: TButton;
     DS_Cuentas: TDataSource;
     DBText1: TDBText;
     EKListadoCuentas: TEKListadoSQL;
@@ -98,7 +98,7 @@ type
     procedure btnAdjuntarArchivoClick(Sender: TObject);
     procedure agregarAListaAdjuntos;
     procedure cargarDestinatario(destinatario: string);
-    procedure Button1Click(Sender: TObject);
+    procedure btnCambiarCuentaClick(Sender: TObject);
     procedure guardarMail();
     procedure marcarEnvio(enviado: boolean);
     function finalDireccionValida(direccion: string): boolean;
@@ -184,6 +184,8 @@ end;
 //Función para conectar con el servidor de email
 function TFMailEnviar.ConectarServidor(): boolean;
 begin
+  result:= false;
+
   try
     if not conectado then
     begin
@@ -276,8 +278,7 @@ var
 begin
   Result:= false;
 
-  mailUsuario:= 'mdservicios@ciudad.com.ar';
-
+  mailUsuario:= ZQ_CuentasEMAIL.AsString;
   with IdMensaje do
   begin
     Body.Assign(MemoCuerpo.Lines);
@@ -366,7 +367,7 @@ begin
 end;
 
 
-procedure TFMailEnviar.Button1Click(Sender: TObject);
+procedure TFMailEnviar.btnCambiarCuentaClick(Sender: TObject);
 begin
   ZQ_Cuentas.Filtered:= false;
 
