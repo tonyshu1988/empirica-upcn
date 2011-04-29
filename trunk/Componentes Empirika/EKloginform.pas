@@ -4,7 +4,8 @@ interface
 
 uses
   Windows,  Forms, Dialogs, EKUsrLogin, ZAbstractRODataset, ZDataset,
-  jpeg, Controls, StdCtrls, DB, ExtCtrls, ComCtrls, Classes;
+  jpeg, Controls, StdCtrls, DB, ExtCtrls, ComCtrls, Classes,
+  ZAbstractDataset;
 
 type
   TEKPermisos = record
@@ -12,6 +13,7 @@ type
     accion : string;
     caption : string;
     valor : string;
+    esGrupo : string;
   end;
 
 
@@ -32,6 +34,8 @@ type
     Image1: TImage;
     StatusBar1: TStatusBar;
     EKSQLAplicacion: TZReadOnlyQuery;
+    EKSQLGrupo: TZQuery;
+    EKSQLGrupoGRUPO: TStringField;
     procedure sButton1Click(Sender: TObject);
     procedure btingresarClick(Sender: TObject);
     procedure passwordKeyDown(Sender: TObject; var Key: Word;
@@ -58,6 +62,7 @@ begin
    application.Terminate;
 end;
 
+
 procedure TEKLoginForm.btingresarClick(Sender: TObject);
 begin
   if not Assigned(EKUsrLogin1) then
@@ -74,24 +79,23 @@ begin
     if Assigned(EKUsrLogin1.OnConectar) then
       EKUsrLogin1.OnConectar(EKLoginForm1.StatusBar1);
 
-
     if Assigned(EKUsrLogin1.OnLogin) then
     begin
-      // Dispara Timer para ejecutar OnLogin 
+      // Dispara Timer para ejecutar OnLogin
       EKUsrLogin1.Timer.Enabled := true;
       EKLoginForm1.release;
       EKLoginForm1 := nil;
     end;
   end;
-
-
 end;
+
 
 destructor TEKLoginForm.destroy;
 begin
   EKLoginForm1 := nil;
   inherited;
 end;
+
 
 procedure TEKLoginForm.passwordKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
