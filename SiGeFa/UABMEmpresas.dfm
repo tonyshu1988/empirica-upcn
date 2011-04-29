@@ -30,7 +30,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 290
       Width = 885
       Height = 281
-      ActivePage = TabViajantes
+      ActivePage = TabContactos
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       TabOrder = 0
@@ -1486,7 +1486,8 @@ object FABMEmpresas: TFABMEmpresas
       Category = 0
       Hint = 'Enviar Mail'
       Visible = ivAlways
-      ImageIndex = 74
+      ImageIndex = 77
+      OnClick = btEnviarMailClick
       AutoGrayScale = False
     end
     object GrupoVisualizando: TdxBarGroup
@@ -2041,16 +2042,6 @@ object FABMEmpresas: TFABMEmpresas
       Size = 100
       Lookup = True
     end
-    object StringField5: TStringField
-      FieldKind = fkLookup
-      FieldName = 'email'
-      LookupDataSet = ZQ_Personas
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'EMAIL'
-      KeyFields = 'ID_PERSONA'
-      Size = 100
-      Lookup = True
-    end
     object StringField6: TStringField
       DisplayWidth = 500
       FieldKind = fkLookup
@@ -2109,6 +2100,16 @@ object FABMEmpresas: TFABMEmpresas
       Size = 100
       Lookup = True
     end
+    object ZQ_PersonaRelacionViajanteemail: TStringField
+      FieldKind = fkLookup
+      FieldName = 'email'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'EMAIL'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
   end
   object ZPID_Empresa: TZStoredProc
     Connection = DM.Conexion
@@ -2140,6 +2141,7 @@ object FABMEmpresas: TFABMEmpresas
     end
     object EnviarunMail1: TMenuItem
       Caption = 'Enviar un Mail'
+      OnClick = EnviarunMail1Click
     end
   end
 end
