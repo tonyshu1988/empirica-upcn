@@ -123,7 +123,6 @@ type
     ZQ_PersonaRelacionViajante: TZQuery;
     StringField2: TStringField;
     StringField3: TStringField;
-    StringField5: TStringField;
     StringField6: TStringField;
     StringField7: TStringField;
     StringField8: TStringField;
@@ -173,6 +172,7 @@ type
     DBEdit5: TDBEdit;
     DBEdit6: TDBEdit;
     DBEdit7: TDBEdit;
+    ZQ_PersonaRelacionViajanteemail: TStringField;
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
@@ -194,6 +194,8 @@ type
     procedure QuitarViajante1Click(Sender: TObject);
     procedure BtSkypeClick(Sender: TObject);
     procedure llamar1Click(Sender: TObject);
+    procedure btEnviarMailClick(Sender: TObject);
+    procedure EnviarunMail1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -212,7 +214,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal;
+uses UDM, UPrincipal, UMailEnviar;
 
 {$R *.dfm}
 
@@ -489,7 +491,11 @@ begin
         exit;
 
         if DBMemoEmpresa.SelText <> '' then
-          Telefono:= '"callto://+'+DBMemoEmpresa.SelText+'"'
+        begin
+          Telefono:= '"callto://+'+DBMemoEmpresa.SelText+'"';
+          DBMemoEmpresa.SetFocus;
+        end
+
         else
           Telefono:= '"callto://+'+ZQ_EmpresaTELEFONO.AsString+'"';
 
@@ -502,7 +508,10 @@ begin
         exit;
 
         if DBMemoContactos.SelText <> '' then
-          Telefono:= '"callto://+'+DBMemoContactos.SelText+'"'
+        begin
+          Telefono:= '"callto://+'+DBMemoContactos.SelText+'"';
+          DBMemoContactos.SetFocus;
+        end
         else
           Telefono:= '"callto://+'+ZQ_PersonaRelacionContactotelefono.AsString+'"';
 
@@ -515,7 +524,10 @@ begin
         exit;
 
         if DBMemoViajantes.SelText <> '' then
-          Telefono:= '"callto://+'+DBMemoViajantes.SelText+'"'
+        begin
+          Telefono:= '"callto://+'+DBMemoViajantes.SelText+'"';
+          DBMemoViajantes.SetFocus;
+        end
         else
           Telefono:= '"callto://+'+ZQ_PersonaRelacionViajantetelefono.AsString+'"';
 
@@ -540,49 +552,73 @@ procedure TFABMEmpresas.llamar1Click(Sender: TObject);
 var
 telefono : string;
 begin
+BtSkype.Click;
+
+end;
+
+procedure TFABMEmpresas.btEnviarMailClick(Sender: TObject);
+begin
+
+  Application.CreateForm(TFMailEnviar, FMailEnviar);
 
   case PageControlEdicion.TabIndex of
   0: begin
         if ZQ_Empresa.IsEmpty then
         exit;
 
-        Telefono:= '"callto://+'+DBMemoEmpresa.SelText+'"';
-
-        if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
-        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+        if DBMemoEmpresa.SelText <> '' then
+        begin
+          FMailEnviar.cargarDestinatario(DBMemoEmpresa.SelText+';');
+          DBMemoEmpresa.SetFocus;
+        end
+        else
+          FMailEnviar.cargarDestinatario(ZQ_EmpresaEMAIL.AsString+';');
      end;
 
-  1:begin
-      if ZQ_PersonaRelacionContacto.IsEmpty then
-      exit;
+  1:  begin
+        if ZQ_PersonaRelacionContacto.IsEmpty then
+        exit;
 
-      Telefono:= '"callto://+'+DBMemoContactos.SelText+'"';
-
-      if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
-      Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
-    end;
+        if DBMemoContactos.SelText <> '' then
+        begin
+          FMailEnviar.cargarDestinatario(DBMemoContactos.SelText+';');
+          DBMemoContactos.SetFocus;
+        end
+        else
+          FMailEnviar.cargarDestinatario(ZQ_PersonaRelacionContactoemail.AsString+';');
+      end;
 
    2: begin
         if ZQ_PersonaRelacionViajante.IsEmpty then
         exit;
 
-        Telefono:= '"callto://+'+DBMemoViajantes.SelText+'"';
+        if DBMemoViajantes.SelText <> '' then
+        begin
+          FMailEnviar.cargarDestinatario(DBMemoViajantes.SelText+';');
+          DBMemoViajantes.SetFocus;
+        end
+        else
+          FMailEnviar.cargarDestinatario(ZQ_PersonaRelacionViajanteemail.AsString+';');
 
-        if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
-        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
       end;
 
    3: begin
         if ZQ_Empresa.IsEmpty then
         exit;
 
-        Telefono:= '"callto://+'+DBMemoDescripcion.SelText+'"';
+        FMailEnviar.cargarDestinatario(DBMemoDescripcion.SelText+';');
 
-        if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
-        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
       end;
   end;
 
+  FMailEnviar.ShowModal;
+
+
+end;
+
+procedure TFABMEmpresas.EnviarunMail1Click(Sender: TObject);
+begin
+btEnviarMail.Click;
 end;
 
 end.
