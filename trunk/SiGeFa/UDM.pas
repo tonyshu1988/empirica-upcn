@@ -7,7 +7,7 @@ uses
   ZAbstractDataset, ZDataset, EKUsrLogin, EKInformacion, EKModelo,
   EKAppEvnts, EKEventos, QRCtrls, QuickRpt, MidasLib, mxExport,
   mxNativeExcel, IdBaseComponent, IdComponent, IdTCPConnection,
-  IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage;
+  IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage, ExtCtrls;
 
 type
   TDM = class(TDataModule)
@@ -44,6 +44,7 @@ type
     ZQ_ConfigMailSMTP_PASSWORD: TStringField;
     ZQ_ConfigMailSMTP_AUTENTICACION: TStringField;
     ZQ_ConfigMailCUENTA_PRINCIPAL: TStringField;
+    Actualizar: TTimer;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure configMailSucursal(idSucursal: integer);
@@ -58,12 +59,13 @@ type
 
 var
   DM: TDM;
-  SUCURSAL_LOGUEO: integer;
-  sucursales: TEKArrayPermisos; //array de permisos valores que tiene
-                                //un campo usuario y un campo valor
+  SUCURSAL_LOGUEO: integer; //Mantiene el id de la sucursal con la cual me conecte
+  enviandoMail: boolean; //TRUE si se esta enviado un mail; FALSE en caso contrario
+  sucursales: TEKArrayPermisos; //array de permisos valores que tiene un campo usuario y un campo valor
+
 implementation
 
-uses UPrincipal, USeleccionarSucursal;
+uses UPrincipal, USeleccionarSucursal, UPanelNotificacion;
 
 {$R *.dfm}
 
@@ -79,6 +81,8 @@ begin
   auxCurrencyDecimals:= CurrencyDecimals;
   auxThousandSeparator:= ThousandSeparator;
   auxCurrencyString:= CurrencyString;
+
+  enviandoMail:= false;
 end;
 
 
@@ -187,5 +191,6 @@ begin
     CurrencyString:= auxCurrencyString;
   end;
 end;
+
 
 end.

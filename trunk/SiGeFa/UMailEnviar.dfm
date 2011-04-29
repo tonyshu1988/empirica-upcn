@@ -1,6 +1,6 @@
 object FMailEnviar: TFMailEnviar
-  Left = 288
-  Top = 151
+  Left = 361
+  Top = 255
   BorderStyle = bsDialog
   Caption = 'Enviar Mail'
   ClientHeight = 562
@@ -24,9 +24,9 @@ object FMailEnviar: TFMailEnviar
   TextHeight = 13
   object PanelFondo: TPanel
     Left = 0
-    Top = 0
+    Top = 36
     Width = 864
-    Height = 510
+    Height = 474
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -55,6 +55,9 @@ object FMailEnviar: TFMailEnviar
             item
               Caption = 'Archivos Adjuntos'
               Width = 220
+            end
+            item
+              Caption = 'Ubicacion'
             end>
           ReadOnly = True
           RowSelect = True
@@ -133,6 +136,7 @@ object FMailEnviar: TFMailEnviar
           Height = 21
           TabOrder = 0
           Text = 'EditPara'
+          OnExit = EditParaExit
         end
         object EditCC: TEdit
           Left = 80
@@ -141,6 +145,7 @@ object FMailEnviar: TFMailEnviar
           Height = 21
           TabOrder = 1
           Text = 'EditCC'
+          OnExit = EditCCExit
         end
         object EditBCC: TEdit
           Left = 80
@@ -149,6 +154,7 @@ object FMailEnviar: TFMailEnviar
           Height = 21
           TabOrder = 2
           Text = 'EditBCC'
+          OnExit = EditBCCExit
         end
         object EditAsunto: TEdit
           Left = 80
@@ -187,7 +193,7 @@ object FMailEnviar: TFMailEnviar
       Left = 0
       Top = 135
       Width = 864
-      Height = 356
+      Height = 320
       Align = alClient
       BorderWidth = 5
       TabOrder = 1
@@ -195,7 +201,7 @@ object FMailEnviar: TFMailEnviar
         Left = 6
         Top = 6
         Width = 852
-        Height = 344
+        Height = 308
         Align = alClient
         Lines.Strings = (
           'MemoCuerpo')
@@ -205,7 +211,7 @@ object FMailEnviar: TFMailEnviar
     object StatusBar1: TStatusBar
       Tag = 99
       Left = 0
-      Top = 491
+      Top = 455
       Width = 864
       Height = 19
       Panels = <
@@ -215,6 +221,45 @@ object FMailEnviar: TFMailEnviar
         item
           Width = 50
         end>
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 864
+    Height = 36
+    Align = alTop
+    TabOrder = 5
+    object Label6: TLabel
+      Left = 96
+      Top = 11
+      Width = 46
+      Height = 13
+      Caption = 'Cuenta:'
+    end
+    object DBText1: TDBText
+      Left = 144
+      Top = 11
+      Width = 54
+      Height = 13
+      AutoSize = True
+      DataField = 'EMAIL'
+      DataSource = DS_Cuentas
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+    end
+    object Button1: TButton
+      Left = 16
+      Top = 8
+      Width = 75
+      Height = 19
+      Caption = 'Cambiar'
+      TabOrder = 0
+      OnClick = Button1Click
     end
   end
   object dxBarABM: TdxBarManager
@@ -758,5 +803,188 @@ object FMailEnviar: TFMailEnviar
   object OpenDialog: TOpenDialog
     Left = 424
     Top = 248
+  end
+  object DS_Cuentas: TDataSource
+    DataSet = ZQ_Cuentas
+    Left = 264
+  end
+  object EKListadoCuentas: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select c.*'
+      'from mail_cuentas c'
+      'where id_sucursal = :id_sucursal')
+    CampoBuscar = 'EMAIL'
+    CampoClave = 'ID_CUENTA'
+    BuscarEnQuery = ZQ_Cuentas
+    TituloVentana = 'Seleccionar Cuenta'
+    Left = 416
+  end
+  object ZQ_Cuentas: TZQuery
+    Connection = DM.Conexion
+    Filter = 'cuenta_principal = '#39'S'#39
+    SQL.Strings = (
+      'select c.*'
+      'from mail_cuentas c'
+      'where c.id_sucursal = :id_sucursal'
+      '')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 336
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    object ZQ_CuentasID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+      Required = True
+    end
+    object ZQ_CuentasID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_CuentasEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_CuentasPOP3_HOST: TStringField
+      FieldName = 'POP3_HOST'
+      Size = 100
+    end
+    object ZQ_CuentasPOP3_PUERTO: TIntegerField
+      FieldName = 'POP3_PUERTO'
+    end
+    object ZQ_CuentasPOP3_USUARIO: TStringField
+      FieldName = 'POP3_USUARIO'
+      Size = 100
+    end
+    object ZQ_CuentasPOP3_PASSWORD: TStringField
+      FieldName = 'POP3_PASSWORD'
+      Size = 100
+    end
+    object ZQ_CuentasSMTP_HOST: TStringField
+      FieldName = 'SMTP_HOST'
+      Size = 100
+    end
+    object ZQ_CuentasSMTP_PUERTO: TIntegerField
+      FieldName = 'SMTP_PUERTO'
+    end
+    object ZQ_CuentasSMTP_USUARIO: TStringField
+      FieldName = 'SMTP_USUARIO'
+      Size = 100
+    end
+    object ZQ_CuentasSMTP_PASSWORD: TStringField
+      FieldName = 'SMTP_PASSWORD'
+      Size = 100
+    end
+    object ZQ_CuentasSMTP_AUTENTICACION: TStringField
+      FieldName = 'SMTP_AUTENTICACION'
+      Size = 100
+    end
+    object ZQ_CuentasCUENTA_PRINCIPAL: TStringField
+      FieldName = 'CUENTA_PRINCIPAL'
+      Size = 1
+    end
+  end
+  object ZQ_Mail: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select m.*'
+      'from mail_mensaje m')
+    Params = <>
+    Left = 272
+    Top = 307
+    object ZQ_MailID_MAIL_MENSAJE: TIntegerField
+      FieldName = 'ID_MAIL_MENSAJE'
+    end
+    object ZQ_MailID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+    end
+    object ZQ_MailCABECERA_PARA: TStringField
+      FieldName = 'CABECERA_PARA'
+      Size = 500
+    end
+    object ZQ_MailCABECERA_CC: TStringField
+      FieldName = 'CABECERA_CC'
+      Size = 500
+    end
+    object ZQ_MailCABECERA_CCO: TStringField
+      FieldName = 'CABECERA_CCO'
+      Size = 500
+    end
+    object ZQ_MailCABECERA_ASUNTO: TStringField
+      FieldName = 'CABECERA_ASUNTO'
+      Size = 100
+    end
+    object ZQ_MailCABECERA_PRIORIDAD: TStringField
+      FieldName = 'CABECERA_PRIORIDAD'
+    end
+    object ZQ_MailCABECERA_ACUSE_RECIBO: TStringField
+      FieldName = 'CABECERA_ACUSE_RECIBO'
+      Size = 1
+    end
+    object ZQ_MailCUERPO: TBlobField
+      FieldName = 'CUERPO'
+    end
+    object ZQ_MailFECHA_Y_HORA: TDateTimeField
+      FieldName = 'FECHA_Y_HORA'
+    end
+    object ZQ_MailENVIADO: TStringField
+      FieldName = 'ENVIADO'
+      Size = 1
+    end
+    object ZQ_MailTIPO: TStringField
+      FieldName = 'TIPO'
+      Size = 1
+    end
+  end
+  object ZQ_Adjunto: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select m.*'
+      'from mail_adjuntos m')
+    Params = <>
+    Left = 352
+    Top = 307
+    object ZQ_AdjuntoID_ADJUNTO: TIntegerField
+      FieldName = 'ID_ADJUNTO'
+    end
+    object ZQ_AdjuntoID_MAIL: TIntegerField
+      FieldName = 'ID_MAIL'
+    end
+    object ZQ_AdjuntoNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 100
+    end
+    object ZQ_AdjuntoUBICACION_ARCHIVO: TStringField
+      FieldName = 'UBICACION_ARCHIVO'
+      Size = 200
+    end
+  end
+  object ZP_IDMail: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    StoredProcName = 'SP_GEN_MAIL_MENSAJE_ID'
+    Left = 192
+    Top = 251
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    object ZP_IDMailID: TIntegerField
+      FieldName = 'ID'
+    end
   end
 end

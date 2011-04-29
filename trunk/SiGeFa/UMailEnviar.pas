@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  IdBaseComponent, IdMessage, IdException, ComCtrls, Buttons;
+  IdBaseComponent, IdMessage, IdException, ComCtrls, Buttons, EKListadoSQL,
+  ZStoredProcedure;
 
 type
   TFMailEnviar = class(TForm)
@@ -45,6 +46,46 @@ type
     StatusBar1: TStatusBar;
     listaAdjuntos: TListView;
     btnAdjuntarArchivo: TBitBtn;
+    Panel1: TPanel;
+    Label6: TLabel;
+    Button1: TButton;
+    DS_Cuentas: TDataSource;
+    DBText1: TDBText;
+    EKListadoCuentas: TEKListadoSQL;
+    ZQ_Cuentas: TZQuery;
+    ZQ_CuentasID_CUENTA: TIntegerField;
+    ZQ_CuentasID_SUCURSAL: TIntegerField;
+    ZQ_CuentasEMAIL: TStringField;
+    ZQ_CuentasPOP3_HOST: TStringField;
+    ZQ_CuentasPOP3_PUERTO: TIntegerField;
+    ZQ_CuentasPOP3_USUARIO: TStringField;
+    ZQ_CuentasPOP3_PASSWORD: TStringField;
+    ZQ_CuentasSMTP_HOST: TStringField;
+    ZQ_CuentasSMTP_PUERTO: TIntegerField;
+    ZQ_CuentasSMTP_USUARIO: TStringField;
+    ZQ_CuentasSMTP_PASSWORD: TStringField;
+    ZQ_CuentasSMTP_AUTENTICACION: TStringField;
+    ZQ_CuentasCUENTA_PRINCIPAL: TStringField;
+    ZQ_Mail: TZQuery;
+    ZQ_MailID_MAIL_MENSAJE: TIntegerField;
+    ZQ_MailID_CUENTA: TIntegerField;
+    ZQ_MailCABECERA_PARA: TStringField;
+    ZQ_MailCABECERA_CC: TStringField;
+    ZQ_MailCABECERA_CCO: TStringField;
+    ZQ_MailCABECERA_ASUNTO: TStringField;
+    ZQ_MailCABECERA_PRIORIDAD: TStringField;
+    ZQ_MailCABECERA_ACUSE_RECIBO: TStringField;
+    ZQ_MailCUERPO: TBlobField;
+    ZQ_MailFECHA_Y_HORA: TDateTimeField;
+    ZQ_MailENVIADO: TStringField;
+    ZQ_MailTIPO: TStringField;
+    ZQ_Adjunto: TZQuery;
+    ZQ_AdjuntoID_ADJUNTO: TIntegerField;
+    ZQ_AdjuntoID_MAIL: TIntegerField;
+    ZQ_AdjuntoNOMBRE: TStringField;
+    ZQ_AdjuntoUBICACION_ARCHIVO: TStringField;
+    ZP_IDMail: TZStoredProc;
+    ZP_IDMailID: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -57,6 +98,13 @@ type
     procedure btnAdjuntarArchivoClick(Sender: TObject);
     procedure agregarAListaAdjuntos;
     procedure cargarDestinatario(destinatario: string);
+    procedure Button1Click(Sender: TObject);
+    procedure guardarMail();
+    procedure marcarEnvio(enviado: boolean);
+    function finalDireccionValida(direccion: string): boolean;
+    procedure EditParaExit(Sender: TObject);
+    procedure EditCCExit(Sender: TObject);
+    procedure EditBCCExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -71,7 +119,7 @@ const
 
 implementation
 
-uses UPrincipal, UDM, UUtilidades;
+uses UPrincipal, UDM, UUtilidades, UPanelNotificacion;
 
 {$R *.dfm}
 
@@ -113,8 +161,13 @@ begin
   EditBCC.Text:= '';
   EditAsunto.Text:= '';
   StatusBar1.Panels[0].text:= '';
-  
+
   conectado:= false;
+
+  ZQ_Cuentas.Close;
+  ZQ_Cuentas.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
+  ZQ_Cuentas.Open;
+  ZQ_Cuentas.Filtered:= true;
 end;
 
 
@@ -223,9 +276,6 @@ var
 begin
   Result:= false;
 
-  if not ValidarCampos then
-    exit;
-
   mailUsuario:= 'mdservicios@ciudad.com.ar';
 
   with IdMensaje do
@@ -262,20 +312,26 @@ end;
 
 procedure TFMailEnviar.btnEnviarClick(Sender: TObject);
 begin
+  if not ValidarCampos then
+    exit;
+
+  enviandoMail:= true;
   StatusBar1.Panels[0].text:= 'Enviando Mensaje...';
   Application.ProcessMessages;
-  mostrarOcupado(true);
+  guardarMail();
+  Release;
   if enviarMensaje then
   begin
-    mostrarOcupado(false);
-    ShowMessage('Mensaje enviado con exito!');
-    btnSalir.Click;
+    marcarEnvio(true);
+    FPanelNotificacion.ver_aviso_mensaje('El mensaje fue enviado con exito!!');
+    close;
   end
   else
   begin
-    mostrarOcupado(false);
-    ShowMessage('No se pudo enviar el mensaje!');
-  end
+    marcarEnvio(false);
+    FPanelNotificacion.ver_aviso_mensaje('No se pudo enviar el mensaje!!');
+    close;
+  end;
 end;
 
 
@@ -303,9 +359,114 @@ begin
       auxLista.ImageIndex := 8;
       auxLista.Caption := TIdAttachment(IdMensaje.MessageParts.Items[i]).Filename;
       auxLista.SubItems.Add(TIdAttachment(IdMensaje.MessageParts.Items[i]).ContentType);
+      auxLista.SubItems.Add(OpenDialog.GetNamePath);
     end;
   end;
 end;
 
+
+procedure TFMailEnviar.Button1Click(Sender: TObject);
+begin
+  ZQ_Cuentas.Filtered:= false;
+
+  EKListadoCuentas.SQL.Text:= 'select c.* '+
+                              'from mail_cuentas c '+
+                              'where id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
+
+  if EKListadoCuentas.Buscar then
+  begin
+    dm.configMailCuenta(StrToInt(EKListadoCuentas.Resultado));
+  end;
+end;
+
+
+procedure TFMailEnviar.guardarMail();
+var
+  indice: integer;
+begin
+  if dm.EKModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail, ZQ_Adjunto]) then
+  begin
+    ZP_IDMail.Close;
+    ZP_IDMail.ExecProc;
+
+    ZQ_Mail.Append;
+    ZQ_MailID_MAIL_MENSAJE.AsInteger:= ZP_IDMailID.AsInteger;
+    ZQ_MailID_CUENTA.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_MailCABECERA_PARA.AsString:= EditPara.Text;
+    ZQ_MailCABECERA_CC.AsString:= EditCC.Text;
+    ZQ_MailCABECERA_CCO.AsString:= EditBCC.Text;
+    ZQ_MailCABECERA_ASUNTO.AsString:= EditAsunto.Text;
+    ZQ_MailCABECERA_PRIORIDAD.AsString:= cBoxPrioridad.Text;
+    if chkAcuseRecibo.Checked then
+      ZQ_MailCABECERA_ACUSE_RECIBO.AsString:= 'S'
+    else
+      ZQ_MailCABECERA_ACUSE_RECIBO.AsString:= 'N';
+    ZQ_MailCUERPO.Value:= MemoCuerpo.Lines.Text;
+    ZQ_MailTIPO.AsString:= 'S'; //Salida
+
+//    for indice:= 0 to listaAdjuntos.Items.Count - 1 do
+//    begin
+//      ZQ_Adjunto.Append;
+//      ZQ_AdjuntoID_MAIL.AsInteger:= ZP_IDMailID.AsInteger;
+//      ZQ_AdjuntoNOMBRE.AsString:= listaAdjuntos.Items[0].SubItems.Text;
+//      ZQ_AdjuntoUBICACION_ARCHIVO.AsString:= listaAdjuntos.Items[0].SubItems.Text;
+//    end;
+
+    if not (dm.EKModelo.finalizar_transaccion('ENVIANDO MAIL')) then
+      dm.EKModelo.cancelar_transaccion('ENVIANDO MAIL');
+  end
+  else
+    exit;
+end;
+
+
+procedure TFMailEnviar.marcarEnvio(enviado: boolean);
+begin
+  if dm.EKModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail]) then
+  begin
+    ZQ_Mail.Edit;
+    if enviado then
+      ZQ_MailENVIADO.AsString:= 'S'
+    else
+      ZQ_MailENVIADO.AsString:= 'N';
+
+    if not (dm.EKModelo.finalizar_transaccion('ENVIANDO MAIL')) then
+      dm.EKModelo.cancelar_transaccion('ENVIANDO MAIL');
+  end;
+
+  enviandoMail:= false;
+end;
+
+Function TFMailEnviar.finalDireccionValida(direccion: string): boolean;
+var
+  tamanio: integer;
+begin
+  Result:= false;
+
+  tamanio:= Length(direccion);
+  if tamanio = 0 then
+    exit;
+
+  if direccion[tamanio] = ';' then
+    Result:= true;
+end;
+
+procedure TFMailEnviar.EditParaExit(Sender: TObject);
+begin
+  if (trim(EditPara.Text) <> '') and (not finalDireccionValida(EditPara.Text)) then
+    EditPara.Text:= EditPara.Text + ';';
+end;
+
+procedure TFMailEnviar.EditCCExit(Sender: TObject);
+begin
+  if (trim(EditCC.Text) <> '') and (not finalDireccionValida(EditCC.Text)) then
+    EditCC.Text:= EditCC.Text + ';';
+end;
+
+procedure TFMailEnviar.EditBCCExit(Sender: TObject);
+begin
+  if (trim(EditBCC.Text) <> '') and (not finalDireccionValida(EditBCC.Text)) then
+    EditBCC.Text:= EditBCC.Text + ';';
+end;
 
 end.

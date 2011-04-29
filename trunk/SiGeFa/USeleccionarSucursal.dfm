@@ -40,7 +40,7 @@ object FSeleccionarSucursal: TFSeleccionarSucursal
     Font.Name = 'Verdana'
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 0
+    TabOrder = 1
     OnClick = btnAceptarClick
   end
   object cBoxSucursales: TComboBox
@@ -55,7 +55,7 @@ object FSeleccionarSucursal: TFSeleccionarSucursal
     Font.Style = [fsBold]
     ItemHeight = 13
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 0
   end
   object btnSalir: TButton
     Left = 229
@@ -125,6 +125,7 @@ object FSeleccionarSucursal: TFSeleccionarSucursal
     combo = cBoxSucursales
     CampoClave = 'id_sucursal'
     CampoVer = 'nombre'
+    SelectClave = '0'
     Left = 328
     Top = 8
   end
