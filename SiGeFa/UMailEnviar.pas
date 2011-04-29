@@ -317,19 +317,20 @@ begin
 
   enviandoMail:= true;
   StatusBar1.Panels[0].text:= 'Enviando Mensaje...';
+  FPrincipal.BringToFront;
   Application.ProcessMessages;
-  guardarMail();
-  Release;
   if enviarMensaje then
   begin
     marcarEnvio(true);
     FPanelNotificacion.ver_aviso_mensaje('El mensaje fue enviado con exito!!');
+    guardarMail();
     close;
   end
   else
   begin
     marcarEnvio(false);
     FPanelNotificacion.ver_aviso_mensaje('No se pudo enviar el mensaje!!');
+    guardarMail();
     close;
   end;
 end;
@@ -384,39 +385,44 @@ procedure TFMailEnviar.guardarMail();
 var
   indice: integer;
 begin
-  if dm.EKModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail, ZQ_Adjunto]) then
-  begin
-    ZP_IDMail.Close;
-    ZP_IDMail.ExecProc;
+  try
+    if dm.EKModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail, ZQ_Adjunto]) then
+    begin
+      ZP_IDMail.Close;
+      ZP_IDMail.Open;
 
-    ZQ_Mail.Append;
-    ZQ_MailID_MAIL_MENSAJE.AsInteger:= ZP_IDMailID.AsInteger;
-    ZQ_MailID_CUENTA.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
-    ZQ_MailCABECERA_PARA.AsString:= EditPara.Text;
-    ZQ_MailCABECERA_CC.AsString:= EditCC.Text;
-    ZQ_MailCABECERA_CCO.AsString:= EditBCC.Text;
-    ZQ_MailCABECERA_ASUNTO.AsString:= EditAsunto.Text;
-    ZQ_MailCABECERA_PRIORIDAD.AsString:= cBoxPrioridad.Text;
-    if chkAcuseRecibo.Checked then
-      ZQ_MailCABECERA_ACUSE_RECIBO.AsString:= 'S'
-    else
-      ZQ_MailCABECERA_ACUSE_RECIBO.AsString:= 'N';
-    ZQ_MailCUERPO.Value:= MemoCuerpo.Lines.Text;
-    ZQ_MailTIPO.AsString:= 'S'; //Salida
+      ZQ_Mail.Append;
+      ZQ_MailID_MAIL_MENSAJE.AsInteger:= ZP_IDMailID.AsInteger;
+      ZQ_MailID_CUENTA.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+      ZQ_MailCABECERA_PARA.AsString:= EditPara.Text;
+      ZQ_MailCABECERA_CC.AsString:= EditCC.Text;
+      ZQ_MailCABECERA_CCO.AsString:= EditBCC.Text;
+      ZQ_MailCABECERA_ASUNTO.AsString:= EditAsunto.Text;
+      ZQ_MailCABECERA_PRIORIDAD.AsString:= cBoxPrioridad.Text;
+      if chkAcuseRecibo.Checked then
+        ZQ_MailCABECERA_ACUSE_RECIBO.AsString:= 'S'
+      else
+        ZQ_MailCABECERA_ACUSE_RECIBO.AsString:= 'N';
+      ZQ_MailCUERPO.Value:= MemoCuerpo.Lines.Text;
+      ZQ_MailTIPO.AsString:= 'S'; //Salida
 
-//    for indice:= 0 to listaAdjuntos.Items.Count - 1 do
-//    begin
-//      ZQ_Adjunto.Append;
-//      ZQ_AdjuntoID_MAIL.AsInteger:= ZP_IDMailID.AsInteger;
-//      ZQ_AdjuntoNOMBRE.AsString:= listaAdjuntos.Items[0].SubItems.Text;
-//      ZQ_AdjuntoUBICACION_ARCHIVO.AsString:= listaAdjuntos.Items[0].SubItems.Text;
-//    end;
+  //    for indice:= 0 to listaAdjuntos.Items.Count - 1 do
+  //    begin
+  //      ZQ_Adjunto.Append;
+  //      ZQ_AdjuntoID_MAIL.AsInteger:= ZP_IDMailID.AsInteger;
+  //      ZQ_AdjuntoNOMBRE.AsString:= listaAdjuntos.Items[0].SubItems.Text;
+  //      ZQ_AdjuntoUBICACION_ARCHIVO.AsString:= listaAdjuntos.Items[0].SubItems.Text;
+  //    end;
 
-    if not (dm.EKModelo.finalizar_transaccion('ENVIANDO MAIL')) then
-      dm.EKModelo.cancelar_transaccion('ENVIANDO MAIL');
+      if not (dm.EKModelo.finalizar_transaccion('ENVIANDO MAIL')) then
+        dm.EKModelo.cancelar_transaccion('ENVIANDO MAIL');
+    end
+  except
+    begin
+      FPanelNotificacion.ver_aviso_mensaje('No se pudo guardar el mail de salida!!');
+      exit;
+    end
   end
-  else
-    exit;
 end;
 
 
@@ -437,6 +443,7 @@ begin
   enviandoMail:= false;
 end;
 
+
 Function TFMailEnviar.finalDireccionValida(direccion: string): boolean;
 var
   tamanio: integer;
@@ -451,17 +458,20 @@ begin
     Result:= true;
 end;
 
+
 procedure TFMailEnviar.EditParaExit(Sender: TObject);
 begin
   if (trim(EditPara.Text) <> '') and (not finalDireccionValida(EditPara.Text)) then
     EditPara.Text:= EditPara.Text + ';';
 end;
 
+
 procedure TFMailEnviar.EditCCExit(Sender: TObject);
 begin
   if (trim(EditCC.Text) <> '') and (not finalDireccionValida(EditCC.Text)) then
     EditCC.Text:= EditCC.Text + ';';
 end;
+
 
 procedure TFMailEnviar.EditBCCExit(Sender: TObject);
 begin
