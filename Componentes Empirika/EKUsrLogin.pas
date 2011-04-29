@@ -54,7 +54,7 @@ type
     function PermisoAccion(Clave : String) : boolean ;
     function PermisoCaptionValor(Clave : String) : String ;
     function PermisoAccionValor(Clave : String) : String ;
-    function PermisoAccionValores(Clave : String) : TEKArrayPermisos ;
+    function PermisoAccionValorGrupo(Clave : String) : TEKArrayPermisos ;
     function PermisoCaption(Clave : String) : boolean ;
     function conectar: boolean;
     function configurar_conexion(conexion : TZConnection; aplicacion : string) : boolean; overload;
@@ -291,9 +291,9 @@ Begin
 
     EKSQLUsuarios.Connection:=EKUsrLogin1.Coneccion;
     EKSQLpermisos.Connection:=EKUsrLogin1.Coneccion;
+    EKSQLGrupo.Connection:=EKUsrLogin1.Coneccion;
 
     EKSQLpermisos.ParamByName('usu').AsString := EKLoginForm1.usuario.Text;
-
     EKSQLpermisos.ParamByName('aplica').AsString := FAplicacion;
 
     EKSQLUsuarios.Open;
@@ -318,9 +318,19 @@ Begin
         EKPermisos1[i].accion := EKSQLpermisosACCION.AsString;
         EKPermisos1[i].caption:= EKSQLpermisosCAPTION.AsString;
         EKPermisos1[i].valor  := EKSQLpermisosVALOR.AsString;
+
+        EKSQLGrupo.Close;
+        EKSQLGrupo.ParamByName('usr').AsString:= EKSQLpermisosUSUARIO.AsString;
+        EKSQLGrupo.Open;
+        if (EKSQLGrupoGRUPO.IsNull) or (EKSQLGrupoGRUPO.AsString = 'N') then
+          EKPermisos1[i].esGrupo:= 'N'
+        else
+          EKPermisos1[i].esGrupo:= 'S';
+
         inc(i);
         EKSQLpermisos.Next;
       end;
+      EKSQLGrupo.Close;
 
       if EKSQLUsuarios.Locate('usuario', VarArrayOf([usuario.Text]), [loCaseInsensitive]) then
       begin
@@ -603,7 +613,7 @@ end;
 
 //devuelve un array con el dato del campo valor del usuarios
 //y de los grupos al que pertenece el usuario
-function TEKUsrLogin.PermisoAccionValores(Clave: String): TEKArrayPermisos;
+function TEKUsrLogin.PermisoAccionValorGrupo(Clave: String): TEKArrayPermisos;
 var
   i : integer;
   indiceArray: integer;
@@ -612,21 +622,23 @@ var
 begin
   tamanio:= 0;
   for i := 0 to length(EKPermisos1)-1 do   //obtengo el tamanio del array
-    if EKPermisos1[i].accion = clave then  //contando todos los permisoso
-      if EKPermisos1[i].valor <> '' then   //que tienen valor asignado
-        tamanio:= tamanio + 1;
+    if EKPermisos1[i].accion = clave then  //contando todos los permisos
+      if EKPermisos1[i].esGrupo = 'S' then   //de los grupos a los q pertenece el usuario
+        if EKPermisos1[i].valor <> '' then   //que tiene un valor asignado en el campo
+          tamanio:= tamanio + 1;             //que se pasa como clave
 
   SetLength(auxArray, tamanio); //creo el array del tamanio obtenido anteriormente
 
   indiceArray:= 0;
   for i := 0 to length(EKPermisos1)-1 do
     if EKPermisos1[i].accion = clave then
-      if EKPermisos1[i].valor <> '' then
-      begin
-        auxArray[indiceArray].usuario:= EKPermisos1[i].usuario; //asigno los valores
-        auxArray[indiceArray].valor:= EKPermisos1[i].valor;     //al array
-        indiceArray:= indiceArray + 1;
-      end;
+      if EKPermisos1[i].esGrupo = 'S' then
+        if EKPermisos1[i].valor <> '' then
+        begin
+          auxArray[indiceArray].usuario:= EKPermisos1[i].usuario; //asigno los valores
+          auxArray[indiceArray].valor:= EKPermisos1[i].valor;     //al array
+          indiceArray:= indiceArray + 1;
+        end;
 
   Result:= auxArray;
 end;
