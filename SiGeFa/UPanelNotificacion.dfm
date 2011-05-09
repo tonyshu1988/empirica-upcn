@@ -1,9 +1,8 @@
 object FPanelNotificacion: TFPanelNotificacion
-  Left = 744
-  Top = 460
+  Left = 768
+  Top = 601
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'FPanelNotificacion'
   ClientHeight = 92
   ClientWidth = 228
   Color = clBtnFace

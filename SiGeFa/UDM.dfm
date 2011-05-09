@@ -1,13 +1,13 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 340
-  Top = 163
-  Height = 345
+  Left = 570
+  Top = 278
+  Height = 378
   Width = 350
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'C:\Sistemas\SiGeFa\Bases\SiGeFa Edicion.fdb'
+    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFa Edicion.fdb'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -1703,6 +1703,10 @@ object DM: TDM
       FieldName = 'POP3_SSL'
       Size = 100
     end
+    object ZQ_ConfigMailPOP3_AUTENTICACION: TStringField
+      FieldName = 'POP3_AUTENTICACION'
+      Size = 100
+    end
   end
   object Actualizar: TTimer
     Left = 214
@@ -1721,26 +1725,30 @@ object DM: TDM
     Left = 136
     Top = 200
   end
-  object POP3_SSL: TIdSSLIOHandlerSocketOpenSSL
-    Destination = ':110'
-    MaxLineAction = maException
-    Port = 110
-    DefaultPort = 0
-    SSLOptions.Mode = sslmUnassigned
-    SSLOptions.VerifyMode = []
-    SSLOptions.VerifyDepth = 0
-    Left = 48
-    Top = 248
-  end
   object SMTP_SSL: TIdSSLIOHandlerSocketOpenSSL
     Destination = ':25'
     MaxLineAction = maException
     Port = 25
     DefaultPort = 0
+    SSLOptions.Method = sslvSSLv23
+    SSLOptions.SSLVersions = [sslvSSLv2, sslvSSLv3, sslvTLSv1]
     SSLOptions.Mode = sslmUnassigned
     SSLOptions.VerifyMode = []
     SSLOptions.VerifyDepth = 0
     Left = 136
+    Top = 248
+  end
+  object POP3_SSL: TIdSSLIOHandlerSocketOpenSSL
+    Destination = ':110'
+    MaxLineAction = maSplit
+    Port = 110
+    DefaultPort = 0
+    SSLOptions.Method = sslvSSLv23
+    SSLOptions.SSLVersions = [sslvSSLv2, sslvSSLv3]
+    SSLOptions.Mode = sslmUnassigned
+    SSLOptions.VerifyMode = []
+    SSLOptions.VerifyDepth = 0
+    Left = 48
     Top = 248
   end
 end

@@ -87,6 +87,9 @@ type
     ZP_IDMailID: TIntegerField;
     btnCambiarCuenta: TBitBtn;
     ImageList: TImageList;
+    BitBtnBuscarPara: TBitBtn;
+    BitBtnBuscarCC: TBitBtn;
+    BitBtnBuscarCCO: TBitBtn;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -99,6 +102,7 @@ type
     procedure btnAdjuntarArchivoClick(Sender: TObject);
     procedure agregarAListaAdjuntos;
     procedure cargarDestinatario(destinatario: string);
+    procedure reenviar(destinatario, cc, cco, asunto, cuerpo: string; id_cuenta, id_mail: integer);
     procedure guardarMail();
     procedure marcarEnvio(enviado: boolean);
     function finalDireccionValida(direccion: string): boolean;
@@ -111,6 +115,7 @@ type
   public
     conectado: boolean;
     id_mensaje: integer;
+    reenviando: boolean;
   end;
 
 var
@@ -124,6 +129,23 @@ implementation
 uses UPrincipal, UDM, UUtilidades, UPanelNotificacion;
 
 {$R *.dfm}
+
+procedure TFMailEnviar.reenviar(destinatario, cc, cco, asunto, cuerpo: string; id_cuenta, id_mail: integer);
+begin
+  reenviando:= true;
+  id_mensaje:= id_mail;
+
+  ZQ_Cuentas.Filtered:= false; //filtro para que muestre la cuenta principal
+  ZQ_Cuentas.Locate('ID_CUENTA', VarArrayOf([inttostr(id_cuenta)]), []);
+//  ShowMessage(IntToStr(ZQ_Cuentas.RecordCount)+' '+ZQ_CuentasEMAIL.AsString);
+
+  dm.configMail('CUENTA', id_cuenta);
+  EditPara.Text:= destinatario;
+  EditCC.Text:= cc;
+  EditBCC.Text:= cco;
+  EditAsunto.Text:= asunto;
+  MemoCuerpo.Lines.Text:= cuerpo;
+end;
 
 procedure TFMailEnviar.mostrarOcupado(flag: boolean);
 begin
@@ -155,6 +177,7 @@ end;
 
 procedure TFMailEnviar.FormCreate(Sender: TObject);
 begin
+  reenviando:= false;
   MemoCuerpo.Clear;
   cBoxPrioridad.ItemIndex:= Ord(IdMensaje.Priority);
   ImageList.GetBitmap(0, btnCambiarCuenta.Glyph);
@@ -384,6 +407,9 @@ procedure TFMailEnviar.guardarMail();
 var
   indice: integer;
 begin
+  if reenviando then //si es el reenvio de un mail salgo
+    exit;
+
   try
     if dm.EKModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail, ZQ_Adjunto]) then
     begin
@@ -407,13 +433,13 @@ begin
       ZQ_MailCUERPO.Value:= MemoCuerpo.Lines.Text;
       ZQ_MailTIPO.AsString:= 'S'; //Salida
 
-//      for indice:= 0 to listaAdjuntos.Items.Count - 1 do
-//      begin
-//        ZQ_Adjunto.Append;
-//        ZQ_AdjuntoID_MAIL.AsInteger:= id_mensaje;
-//        ZQ_AdjuntoNOMBRE.AsString:= listaAdjuntos.Items[0].SubItems.Text;
-//        ZQ_AdjuntoUBICACION_ARCHIVO.AsString:= listaAdjuntos.Items[0].SubItems.Text;
-//      end;
+  //    for indice:= 0 to listaAdjuntos.Items.Count - 1 do
+  //    begin
+  //      ZQ_Adjunto.Append;
+  //      ZQ_AdjuntoID_MAIL.AsInteger:= id_mensaje;
+  //      ZQ_AdjuntoNOMBRE.AsString:= listaAdjuntos.Items[0].SubItems.Text;
+  //      ZQ_AdjuntoUBICACION_ARCHIVO.AsString:= listaAdjuntos.Items[0].SubItems.Text;
+  //    end;
 
       if not (dm.EKModelo.finalizar_transaccion('ENVIANDO MAIL')) then
         dm.EKModelo.cancelar_transaccion('ENVIANDO MAIL');

@@ -37,13 +37,6 @@ type
     Label9: TLabel;
     btnValidarPOP3: TButton;
     PanelSMTP: TPanel;
-    lblAuthenticationType: TLabel;
-    lbAccount: TLabel;
-    lbPassword: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    SMTPAuthType: TComboBox;
-    btnValidarSMTP: TButton;
     ZQ_Cuentas: TZQuery;
     Label3: TLabel;
     ZQ_CuentasID_CUENTA: TIntegerField;
@@ -64,25 +57,35 @@ type
     DBEditPOPUsuario: TDBEdit;
     DBEditPOPPassword: TDBEdit;
     DS_Cuentas: TDataSource;
+    DBEditEmail: TDBEdit;
+    EKLlenarCombo: TEKLlenarCombo;
+    ComboBoxCuenta: TComboBox;
+    validarPOP3: TIdPOP3;
+    validarSMTP: TIdSMTP;
+    Label7: TLabel;
+    POP3UseTLS: TComboBox;
+    Label5: TLabel;
+    MemoPOP3: TMemo;
+    lblAuthenticationType: TLabel;
+    lbAccount: TLabel;
+    lbPassword: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    SMTPAuthType: TComboBox;
+    btnValidarSMTP: TButton;
     DBEditSMTPServidor: TDBEdit;
     DBEditSMTPPuerto: TDBEdit;
     DBEditSMTPUsuario: TDBEdit;
     DBEditSMTPPassword: TDBEdit;
-    DBEditEmail: TDBEdit;
-    validarPOP3: TIdPOP3;
-    validarSMTP: TIdSMTP;
-    EKLlenarCombo: TEKLlenarCombo;
-    ComboBoxCuenta: TComboBox;
     MemoSMTP: TMemo;
-    MemoPOP3: TMemo;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
     SMTPUseTLS: TComboBox;
     ZQ_CuentasSMTP_SSL: TStringField;
-    Label7: TLabel;
-    POP3UseTLS: TComboBox;
     ZQ_CuentasPOP3_SSL: TStringField;
+    POPAuthType: TComboBox;
+    Label10: TLabel;
+    ZQ_CuentasPOP3_AUTENTICACION: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure conectarSMTP();
     procedure conectarPOP3();
@@ -106,12 +109,12 @@ type
       const AStatusText: String);
     procedure validarPOP3Status(ASender: TObject; const AStatus: TIdStatus;
       const AStatusText: String);
-    procedure manejadorSSLStatus(ASender: TObject;
-      const AStatus: TIdStatus; const AStatusText: String);
    private
     { Private declarations }
    public
      conectadoPOP3, conectadoSMTP: boolean;
+     hintPOP3_Autentic, hintPOP3_SSL,
+     hintSMTP_Autentic, hintSMTP_SSL: String;
    end;
 
 var
@@ -137,6 +140,27 @@ end;
 
 procedure TFMailConfigurar.FormCreate(Sender: TObject);
 begin
+  hintPOP3_Autentic:= 'Ejemplo: Gmail "patUserPass"'+#13+
+                      '         Ciudad "patUserPass"'#13+
+                      '         Arnet "patUserPass"'; //OK
+
+  hintPOP3_SSL:= 'Ejemplo: Gmail "utUseImplicitTLS"'+#13+
+                 '         Ciudad "utUseExplicitTLS"'#13+
+                 '         Arnet "utUseExplicitTLS"'; //OK
+
+  hintSMTP_Autentic:= 'Ejemplo: Gmail "satDefault"'+#13+
+                      '         Ciudad "satDefault"'+#13+
+                      '         Arnet ""';
+
+  hintSMTP_SSL:= 'Ejemplo: Gmail "utUseExplicitTLS"'+#13+
+                 '         Ciudad "utUseExplicitTLS"'+#13+
+                 '         Arnet ""';
+
+  SMTPAuthType.Hint:= hintSMTP_Autentic;
+  SMTPUseTLS.Hint:= hintSMTP_SSL;
+  POPAuthType.Hint:= hintPOP3_Autentic;
+  POP3UseTLS.Hint:= hintPOP3_SSL;
+
   IdSSLOpenSSLHeaders.Load;
 
   PageControlSetup.ActivePageIndex:= 0;
@@ -232,10 +256,10 @@ begin
   try
     if not conectadoSMTP then
     begin
-        mostrarOcupado(true);
-        validarSMTP.Connect;
-        conectadoSMTP:= true;
-        desconectarSMTP;
+      mostrarOcupado(true);
+      validarSMTP.Connect;
+      conectadoSMTP:= true;
+      desconectarSMTP;
     end
   except
     on E: EIdException do
@@ -275,12 +299,18 @@ begin
     Username:= DBEditPOPUsuario.Text;
     Password:= DBEditPOPPassword.Text;
 
+    case POPAuthType.ItemIndex of
+       0: AuthType := patAPOP;
+       1: AuthType := patSASL;
+       2: AuthType := patUserPass;
+    end;
+
     case POP3UseTLS.ItemIndex of
        0: UseTLS:= utNoTLSSupport;
        1: UseTLS:= utUseExplicitTLS;
        2: UseTLS:= utUseImplicitTLS;
        3: UseTLS:= utUseRequireTLS;
-    end;    
+    end;
   end;
 
   with dm.POP3_SSL do
@@ -312,6 +342,7 @@ begin
     Port:= StrToInt(DBEditSMTPPuerto.Text);
     Username:= DBEditSMTPUsuario.Text;
     Password:= DBEditSMTPPassword.Text;
+
     case SMTPAuthType.ItemIndex of
        0: AuthType := satDefault;
        1: AuthType := satNone;
@@ -335,13 +366,13 @@ begin
     Port:= StrToInt(DBEditSMTPPuerto.Text);
     Destination:= DBEditSMTPServidor.Text+':'+DBEditSMTPPuerto.Text;
 
-    RecvBufferSize:= 65000;
-    SendBufferSize:= 65000;
-    SSLOptions.Method:= sslvSSLv3;
-    SSLOptions.Mode:= sslmUnassigned;
-    SSLOptions.VerifyDepth:= 0;
-    SSLOptions.VerifyMode:= [];
-    UseNagle:= False;
+//    RecvBufferSize:= 65000;
+//    SendBufferSize:= 65000;
+//    SSLOptions.Method:= sslvSSLv3;
+//    SSLOptions.Mode:= sslmUnassigned;
+//    SSLOptions.VerifyDepth:= 0;
+//    SSLOptions.VerifyMode:= [];
+//    UseNagle:= False;
   end;
 
   conectarSMTP;
@@ -444,22 +475,28 @@ begin
   ZQ_Cuentas.Edit;
   case SMTPAuthType.ItemIndex of
      0: ZQ_CuentasSMTP_AUTENTICACION.AsString:= 'satDefault';
-     1: ZQ_CuentasSMTP_AUTENTICACION.AsString:= 'satNone'; {Simple Login}
-     2: ZQ_CuentasSMTP_AUTENTICACION.AsString:= 'satSASL'; {Simple Login}
+     1: ZQ_CuentasSMTP_AUTENTICACION.AsString:= 'satNone';
+     2: ZQ_CuentasSMTP_AUTENTICACION.AsString:= 'satSASL';
+  end;
+
+  case POPAuthType.ItemIndex of
+     0: ZQ_CuentasPOP3_AUTENTICACION.AsString:= 'patAPOP';
+     1: ZQ_CuentasPOP3_AUTENTICACION.AsString:= 'patSASL';
+     2: ZQ_CuentasPOP3_AUTENTICACION.AsString:= 'patUserPass';
   end;
 
   case SMTPUseTLS.ItemIndex of
      0: ZQ_CuentasSMTP_SSL.AsString:= 'utNoTLSSupport';
-     1: ZQ_CuentasSMTP_SSL.AsString:= 'utUseExplicitTLS'; {Simple Login}
-     2: ZQ_CuentasSMTP_SSL.AsString:= 'utUseImplicitTLS'; {Simple Login}
-     3: ZQ_CuentasSMTP_SSL.AsString:= 'utUseRequireTLS'; {Simple Login}
+     1: ZQ_CuentasSMTP_SSL.AsString:= 'utUseExplicitTLS';
+     2: ZQ_CuentasSMTP_SSL.AsString:= 'utUseImplicitTLS';
+     3: ZQ_CuentasSMTP_SSL.AsString:= 'utUseRequireTLS';
   end;
 
   case POP3UseTLS.ItemIndex of
      0: ZQ_CuentasPOP3_SSL.AsString:= 'utNoTLSSupport';
-     1: ZQ_CuentasPOP3_SSL.AsString:= 'utUseExplicitTLS'; {Simple Login}
-     2: ZQ_CuentasPOP3_SSL.AsString:= 'utUseImplicitTLS'; {Simple Login}
-     3: ZQ_CuentasPOP3_SSL.AsString:= 'utUseRequireTLS'; {Simple Login}
+     1: ZQ_CuentasPOP3_SSL.AsString:= 'utUseExplicitTLS';
+     2: ZQ_CuentasPOP3_SSL.AsString:= 'utUseImplicitTLS';
+     3: ZQ_CuentasPOP3_SSL.AsString:= 'utUseRequireTLS';
   end;
 
   recNo:= EKLlenarCombo.combo.ItemIndex;
@@ -564,6 +601,18 @@ begin
           SMTPUseTLS.ItemIndex := -1;
 
 
+  if ZQ_CuentasPOP3_AUTENTICACION.AsString = 'patAPOP' then
+    POPAuthType.ItemIndex := 0
+  else
+    if ZQ_CuentasPOP3_AUTENTICACION.AsString = 'patSASL' then
+      POPAuthType.ItemIndex := 1
+    else
+      if ZQ_CuentasPOP3_AUTENTICACION.AsString = 'patUserPass' then
+        POPAuthType.ItemIndex := 2
+      else
+        POPAuthType.ItemIndex := -1;
+
+
   if ZQ_CuentasPOP3_SSL.AsString = 'utNoTLSSupport' then
     POP3UseTLS.ItemIndex := 0
   else
@@ -590,22 +639,20 @@ begin
 //    DBEditEmail.Text:= DBEditEmail.Text + ';';
 end;
 
+
 procedure TFMailConfigurar.validarSMTPStatus(ASender: TObject;
   const AStatus: TIdStatus; const AStatusText: String);
 begin
   MemoSMTP.Lines.Insert(0,'Estado SMTP: ' + AStatusText);
+  Application.ProcessMessages;
 end;
 
-procedure TFMailConfigurar.manejadorSSLStatus(
-  ASender: TObject; const AStatus: TIdStatus; const AStatusText: String);
-begin
-  MemoSMTP.Lines.Insert(0,'Estado SSL: ' + AStatusText);
-end;
 
 procedure TFMailConfigurar.validarPOP3Status(ASender: TObject;
   const AStatus: TIdStatus; const AStatusText: String);
 begin
   MemoPOP3.Lines.Insert(0,'Estado POP3: ' + AStatusText);
+  Application.ProcessMessages;
 end;
 
 end.
