@@ -140,7 +140,7 @@ begin
   if SUCURSAL_LOGUEO = -1 then  //si no selecciono ninguna sucursal o el
     Application.Terminate;      //usuario no tiene asignada ninguna salgo del sistema
 
-  dm.configMailSucursal(SUCURSAL_LOGUEO);
+  dm.configMail('SUCURSAL', SUCURSAL_LOGUEO);
 
   baja:= $006A6AFF;    //ROJO = color de los registros dados de baja
   activo:= $00FB952F;  //AZUL = color de los registro comunes

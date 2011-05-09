@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   IdBaseComponent, IdMessage, IdException, ComCtrls, Buttons, EKListadoSQL,
-  ZStoredProcedure;
+  ZStoredProcedure, cxClasses, IdAttachmentFile, ImgList;
 
 type
   TFMailEnviar = class(TForm)
@@ -48,9 +48,8 @@ type
     btnAdjuntarArchivo: TBitBtn;
     Panel1: TPanel;
     Label6: TLabel;
-    btnCambiarCuenta: TButton;
     DS_Cuentas: TDataSource;
-    DBText1: TDBText;
+    DBTextCuenta: TDBText;
     EKListadoCuentas: TEKListadoSQL;
     ZQ_Cuentas: TZQuery;
     ZQ_CuentasID_CUENTA: TIntegerField;
@@ -86,6 +85,8 @@ type
     ZQ_AdjuntoUBICACION_ARCHIVO: TStringField;
     ZP_IDMail: TZStoredProc;
     ZP_IDMailID: TIntegerField;
+    btnCambiarCuenta: TBitBtn;
+    ImageList: TImageList;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -98,17 +99,18 @@ type
     procedure btnAdjuntarArchivoClick(Sender: TObject);
     procedure agregarAListaAdjuntos;
     procedure cargarDestinatario(destinatario: string);
-    procedure btnCambiarCuentaClick(Sender: TObject);
     procedure guardarMail();
     procedure marcarEnvio(enviado: boolean);
     function finalDireccionValida(direccion: string): boolean;
     procedure EditParaExit(Sender: TObject);
     procedure EditCCExit(Sender: TObject);
     procedure EditBCCExit(Sender: TObject);
+    procedure btnCambiarCuentaClick(Sender: TObject);
   private
     { Private declarations }
   public
     conectado: boolean;
+    id_mensaje: integer;
   end;
 
 var
@@ -155,7 +157,8 @@ procedure TFMailEnviar.FormCreate(Sender: TObject);
 begin
   MemoCuerpo.Clear;
   cBoxPrioridad.ItemIndex:= Ord(IdMensaje.Priority);
-
+  ImageList.GetBitmap(0, btnCambiarCuenta.Glyph);
+  
   EditPara.Text:= '';
   EditCC.Text:= '';
   EditBCC.Text:= '';
@@ -163,11 +166,14 @@ begin
   StatusBar1.Panels[0].text:= '';
 
   conectado:= false;
+  id_mensaje:= -1;
 
+  //busco todas las cuentas de la sucursal
   ZQ_Cuentas.Close;
   ZQ_Cuentas.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
   ZQ_Cuentas.Open;
-  ZQ_Cuentas.Filtered:= true;
+  ZQ_Cuentas.Filtered:= true; //filtro para que muestre la cuenta principal
+  dm.configMail('CUENTA', ZQ_CuentasID_CUENTA.AsInteger); //cargo los datos de la cuenta principal
 end;
 
 
@@ -193,30 +199,37 @@ begin
       conectado:= true;
     end
   except
-    ON E: EIdProtocolReplyError do
+//    ON E: EIdProtocolReplyError do
+//    begin
+//      ShowMessage(pchar('No se ha podido enviar el e-Mail' + #13 +
+//                        'Error de configuración de cuenta de usuario'));
+//      DesconectarServidor;
+//    end;
+//    on E: EFOpenError do
+//    begin
+//      ShowMessage(pchar('No se ha podido enviar el e-Mail' + #13 +
+//                        'Archivo adjunto desconocido o erróneo'));
+//      DesconectarServidor;
+//    end;
+//    on E: EIdSocketHandleError do
+//    begin
+//      ShowMessage(pchar('No se ha podido enviar el e-Mail'+ #13 +
+//                        'Host/Puerto desconocido o incorrecto'));
+//      DesconectarServidor;
+//    end
+//    else
+//    begin
+//      ShowMessage(pchar('No se ha podido enviar el e-Mail'+ #13 +
+//                        'Error desconocido'));
+//      DesconectarServidor;
+//    end;
+
+    on E: EIdException do
     begin
-      ShowMessage(pchar('No se ha podido enviar el e-Mail' + #13 +
-                        'Error de configuración de cuenta de usuario'));
-      DesconectarServidor;
-    end;
-    on E: EFOpenError do
-    begin
-      ShowMessage(pchar('No se ha podido enviar el e-Mail' + #13 +
-                        'Archivo adjunto desconocido o erróneo'));
-      DesconectarServidor;
-    end;
-    on E: EIdSocketError do
-    begin
-      ShowMessage(pchar('No se ha podido enviar el e-Mail'+ #13 +
-                        'Host/Puerto desconocido o incorrecto'));
+      ShowMessage(E.ClassName+' '+E.Message);
       DesconectarServidor;
     end
-    else
-    begin
-      ShowMessage(pchar('No se ha podido enviar el e-Mail'+ #13 +
-                        'Error desconocido'));
-      DesconectarServidor;
-    end;
+
   end;
 
   Result:= conectado;
@@ -322,16 +335,16 @@ begin
   Application.ProcessMessages;
   if enviarMensaje then
   begin
-    marcarEnvio(true);
     FPanelNotificacion.ver_aviso_mensaje('El mensaje fue enviado con exito!!');
     guardarMail();
+    marcarEnvio(true);
     close;
   end
   else
   begin
-    marcarEnvio(false);
     FPanelNotificacion.ver_aviso_mensaje('No se pudo enviar el mensaje!!');
     guardarMail();
+    marcarEnvio(false);    
     close;
   end;
 end;
@@ -341,7 +354,7 @@ procedure TFMailEnviar.btnAdjuntarArchivoClick(Sender: TObject);
 begin
   if OpenDialog.Execute then
   begin
-    TIdAttachment.Create(IdMensaje.MessageParts, OpenDialog.FileName);
+    TIdAttachmentFile.Create(IdMensaje.MessageParts, OpenDialog.FileName);
     agregarAListaAdjuntos;
   end;
 end;
@@ -356,28 +369,13 @@ begin
   for i := 0 to Pred(IdMensaje.MessageParts.Count) do
   begin
     auxLista:= listaAdjuntos.Items.Add;
-    if IdMensaje.MessageParts.Items[i] is TIdAttachment then
+    if IdMensaje.MessageParts.Items[i] is TIdAttachmentFile then
     begin
       auxLista.ImageIndex := 8;
-      auxLista.Caption := TIdAttachment(IdMensaje.MessageParts.Items[i]).Filename;
-      auxLista.SubItems.Add(TIdAttachment(IdMensaje.MessageParts.Items[i]).ContentType);
+      auxLista.Caption := TIdAttachmentFile(IdMensaje.MessageParts.Items[i]).Filename;
+      auxLista.SubItems.Add(TIdAttachmentFile(IdMensaje.MessageParts.Items[i]).ContentType);
       auxLista.SubItems.Add(OpenDialog.GetNamePath);
     end;
-  end;
-end;
-
-
-procedure TFMailEnviar.btnCambiarCuentaClick(Sender: TObject);
-begin
-  ZQ_Cuentas.Filtered:= false;
-
-  EKListadoCuentas.SQL.Text:= 'select c.* '+
-                              'from mail_cuentas c '+
-                              'where id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
-
-  if EKListadoCuentas.Buscar then
-  begin
-    dm.configMailCuenta(StrToInt(EKListadoCuentas.Resultado));
   end;
 end;
 
@@ -391,9 +389,11 @@ begin
     begin
       ZP_IDMail.Close;
       ZP_IDMail.Open;
+      id_mensaje:= ZP_IDMailID.AsInteger;
+      ZP_IDMail.Close;
 
       ZQ_Mail.Append;
-      ZQ_MailID_MAIL_MENSAJE.AsInteger:= ZP_IDMailID.AsInteger;
+      ZQ_MailID_MAIL_MENSAJE.AsInteger:= id_mensaje;
       ZQ_MailID_CUENTA.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
       ZQ_MailCABECERA_PARA.AsString:= EditPara.Text;
       ZQ_MailCABECERA_CC.AsString:= EditCC.Text;
@@ -407,13 +407,13 @@ begin
       ZQ_MailCUERPO.Value:= MemoCuerpo.Lines.Text;
       ZQ_MailTIPO.AsString:= 'S'; //Salida
 
-  //    for indice:= 0 to listaAdjuntos.Items.Count - 1 do
-  //    begin
-  //      ZQ_Adjunto.Append;
-  //      ZQ_AdjuntoID_MAIL.AsInteger:= ZP_IDMailID.AsInteger;
-  //      ZQ_AdjuntoNOMBRE.AsString:= listaAdjuntos.Items[0].SubItems.Text;
-  //      ZQ_AdjuntoUBICACION_ARCHIVO.AsString:= listaAdjuntos.Items[0].SubItems.Text;
-  //    end;
+//      for indice:= 0 to listaAdjuntos.Items.Count - 1 do
+//      begin
+//        ZQ_Adjunto.Append;
+//        ZQ_AdjuntoID_MAIL.AsInteger:= id_mensaje;
+//        ZQ_AdjuntoNOMBRE.AsString:= listaAdjuntos.Items[0].SubItems.Text;
+//        ZQ_AdjuntoUBICACION_ARCHIVO.AsString:= listaAdjuntos.Items[0].SubItems.Text;
+//      end;
 
       if not (dm.EKModelo.finalizar_transaccion('ENVIANDO MAIL')) then
         dm.EKModelo.cancelar_transaccion('ENVIANDO MAIL');
@@ -431,6 +431,10 @@ procedure TFMailEnviar.marcarEnvio(enviado: boolean);
 begin
   if dm.EKModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail]) then
   begin
+    ZQ_Mail.Close;
+    ZQ_Mail.ParamByName('id_mensaje').AsInteger:= id_mensaje;
+    ZQ_Mail.Open;
+
     ZQ_Mail.Edit;
     if enviado then
       ZQ_MailENVIADO.AsString:= 'S'
@@ -478,6 +482,21 @@ procedure TFMailEnviar.EditBCCExit(Sender: TObject);
 begin
   if (trim(EditBCC.Text) <> '') and (not finalDireccionValida(EditBCC.Text)) then
     EditBCC.Text:= EditBCC.Text + ';';
+end;
+
+
+procedure TFMailEnviar.btnCambiarCuentaClick(Sender: TObject);
+begin
+  ZQ_Cuentas.Filtered:= false;
+
+  EKListadoCuentas.SQL.Text:= 'select c.* '+
+                              'from mail_cuentas c '+
+                              'where id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
+
+  if EKListadoCuentas.Buscar then
+  begin
+    dm.configMail('CUENTA', StrToInt(EKListadoCuentas.Resultado));
+  end;
 end;
 
 end.

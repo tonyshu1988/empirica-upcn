@@ -1,13 +1,13 @@
 object DM: TDM
   OldCreateOrder = False
   Left = 340
-  Top = 147
-  Height = 298
+  Top = 163
+  Height = 345
   Width = 350
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFa Edicion.fdb'
+    Database = 'C:\Sistemas\SiGeFa\Bases\SiGeFa Edicion.fdb'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -1614,14 +1614,6 @@ object DM: TDM
     Left = 264
     Top = 80
   end
-  object IdSMTP: TIdSMTP
-    MaxLineAction = maException
-    ReadTimeout = 0
-    Port = 25
-    AuthenticationType = atLogin
-    Left = 48
-    Top = 200
-  end
   object ZQ_ConfigMail: TZQuery
     Connection = Conexion
     SQL.Strings = (
@@ -1703,15 +1695,52 @@ object DM: TDM
       FieldName = 'CUENTA_PRINCIPAL'
       Size = 1
     end
-  end
-  object IdPOP3: TIdPOP3
-    MaxLineAction = maException
-    ReadTimeout = 0
-    Left = 136
-    Top = 200
+    object ZQ_ConfigMailSMTP_SSL: TStringField
+      FieldName = 'SMTP_SSL'
+      Size = 100
+    end
+    object ZQ_ConfigMailPOP3_SSL: TStringField
+      FieldName = 'POP3_SSL'
+      Size = 100
+    end
   end
   object Actualizar: TTimer
     Left = 214
     Top = 144
+  end
+  object IdPOP3: TIdPOP3
+    IOHandler = POP3_SSL
+    AutoLogin = True
+    SASLMechanisms = <>
+    Left = 48
+    Top = 200
+  end
+  object IdSMTP: TIdSMTP
+    IOHandler = SMTP_SSL
+    SASLMechanisms = <>
+    Left = 136
+    Top = 200
+  end
+  object POP3_SSL: TIdSSLIOHandlerSocketOpenSSL
+    Destination = ':110'
+    MaxLineAction = maException
+    Port = 110
+    DefaultPort = 0
+    SSLOptions.Mode = sslmUnassigned
+    SSLOptions.VerifyMode = []
+    SSLOptions.VerifyDepth = 0
+    Left = 48
+    Top = 248
+  end
+  object SMTP_SSL: TIdSSLIOHandlerSocketOpenSSL
+    Destination = ':25'
+    MaxLineAction = maException
+    Port = 25
+    DefaultPort = 0
+    SSLOptions.Mode = sslmUnassigned
+    SSLOptions.VerifyMode = []
+    SSLOptions.VerifyDepth = 0
+    Left = 136
+    Top = 248
   end
 end

@@ -8,7 +8,7 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   IdMessage, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdMessageClient, IdPOP3, idsync, idglobal, Buttons, ImgList, Menus,
-  EKListadoSQL;
+  EKListadoSQL, cxClasses, IdAttachmentFile, IdText;
 
 type
   TFMailBandeja = class(TForm)
@@ -64,8 +64,7 @@ type
     EliminarMarcados1: TMenuItem;
     Panel1: TPanel;
     Label6: TLabel;
-    DBText1: TDBText;
-    Button1: TButton;
+    DBTxtCuenta: TDBText;
     EKListadoCuentas: TEKListadoSQL;
     ZQ_Cuentas: TZQuery;
     ZQ_CuentasID_CUENTA: TIntegerField;
@@ -82,10 +81,10 @@ type
     ZQ_CuentasSMTP_AUTENTICACION: TStringField;
     ZQ_CuentasCUENTA_PRINCIPAL: TStringField;
     DS_Cuentas: TDataSource;
-    DBText2: TDBText;
-    DBText3: TDBText;
-    DBText4: TDBText;
-    DBText5: TDBText;
+    DBTxtDe: TDBText;
+    DBTxtPara: TDBText;
+    DBTxtFecha: TDBText;
+    DBTxtAsunto: TDBText;
     ZQ_MailSalida: TZQuery;
     DS_MailSalida: TDataSource;
     DBGridMarca: TDBGrid;
@@ -104,6 +103,9 @@ type
     ZQ_MailSalidaEMAIL: TStringField;
     StatusBarBandejaSalida: TStatusBar;
     DBGrid1: TDBGrid;
+    btnCambiarCuenta: TBitBtn;
+    MarcarGuardar1: TMenuItem;
+    GuardarMails1: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -116,10 +118,11 @@ type
     procedure AbrirMail1Click(Sender: TObject);
     procedure MarcarEliminar1Click(Sender: TObject);
     procedure EliminarMarcados1Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnCambiarCuentaClick(Sender: TObject);
+    procedure MarcarGuardar1Click(Sender: TObject);
   private
     function BuscarIndiceAdjuntos(nombreArchivo: string): integer;
-    function BuscarAdjuntos(const nombreArchivo: string): TIdAttachment;
+    function BuscarAdjuntos(const nombreArchivo: string): TIdAttachmentFile;
     procedure mostrarOcupado(flag: boolean);
     procedure mostrarEstado(estado: string);
     procedure mostrarCantidadMsj(texto: string);
@@ -129,7 +132,9 @@ type
     procedure desconectar();
     procedure CargarMensaje();
     procedure marcarMensajeEliminar();
+    procedure marcarMensajeGuardar();
     procedure eliminarMarcados();
+    procedure guardarMarcados();
     procedure buscarCabeceraPOP3(inMsgCount: Integer);
   public
     MsgCount, FMailBoxSize: integer;
@@ -163,6 +168,8 @@ end;
 
 procedure TFMailBandeja.FormCreate(Sender: TObject);
 begin
+  ImageList.GetBitmap(0, btnCambiarCuenta.Glyph);
+
   PageControlBandeja.ActivePageIndex:= 0;
 
   lblMensajeEntradaPara.Caption:= '';
@@ -179,10 +186,12 @@ begin
   if not DirectoryExists(directorioAdjunto) then
     ForceDirectories(directorioAdjunto);
 
+  //busco todas las cuentas de la sucursal
   ZQ_Cuentas.Close;
   ZQ_Cuentas.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
   ZQ_Cuentas.Open;
-  ZQ_Cuentas.Filtered:= true;
+  ZQ_Cuentas.Filtered:= true; //filtro para que muestre la cuenta principal
+  dm.configMail('CUENTA', ZQ_CuentasID_CUENTA.AsInteger); //cargo los datos de la cuenta principal
 
   ZQ_MailSalida.Close;
   ZQ_MailSalida.ParamByName('id_cuenta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
@@ -193,11 +202,6 @@ end;
 
 procedure TFMailBandeja.cambiarEstado(const flag: Boolean);
 begin
-//   CheckMail.Enabled := not Status;
-//   Retrieve.Enabled := Status;
-//   Delete.Enabled := Status;
-//   Purge.Enabled := Status;
-//   Disconnect.Enabled := Status;
    if flag then
       mostrarEstado('Conectado')
    else
@@ -250,9 +254,9 @@ begin
    nombreArchivo:= UpperCase(nombreArchivo);
    repeat
       inc(i);
-      if (IdMessage.MessageParts.Items[i] is TIdAttachment) then
+      if (IdMessage.MessageParts.Items[i] is TIdAttachmentFile) then
          begin
-            if nombreArchivo = UpperCase(TIdAttachment(IdMessage.MessageParts.Items[i]).FileName) then
+            if nombreArchivo = UpperCase(TIdAttachmentFile(IdMessage.MessageParts.Items[i]).FileName) then
               encontrado:= true;
          end;
    until encontrado or (i > Pred(IdMessage.MessageParts.Count));
@@ -265,16 +269,16 @@ end;
 
 
 //Buscar los archivos adjuntos
-function TFMailBandeja.BuscarAdjuntos(const nombreArchivo: string): TIdAttachment;
+function TFMailBandeja.BuscarAdjuntos(const nombreArchivo: string): TIdAttachmentFile;
 var
   i: Integer;
-  Adjunto: TIdAttachment;
+  Adjunto: TIdAttachmentFile;
 begin
   for i := 0 to Pred(IdMessage.MessageParts.Count) do
   begin
-    if (IdMessage.MessageParts.Items[i] is TIdAttachment) then
+    if (IdMessage.MessageParts.Items[i] is TIdAttachmentFile) then
     begin
-      Adjunto:= TIdAttachment(IdMessage.MessageParts.Items[I]);
+      Adjunto:= TIdAttachmentFile(IdMessage.MessageParts.Items[I]);
       if nombreArchivo = Adjunto.FileName then
       begin
         Result := Adjunto;
@@ -299,13 +303,13 @@ begin
       iMensaje:= BuscarIndiceAdjuntos(listaArchivosAdjuntos.Items[iAdjunto].caption);
       if iMensaje > 0 then
       begin
-        nombreArchivo := directorioAdjunto + TIdAttachment(IdMessage.MessageParts.Items[iMensaje]).FileName;
+        nombreArchivo := directorioAdjunto + TIdAttachmentFile(IdMessage.MessageParts.Items[iMensaje]).FileName;
         SaveDialog.FileName:= nombreArchivo;
         if SaveDialog.Execute then
         begin
           mostrarOcupado(true);
           if not FileExists(SaveDialog.FileName) then
-            TIdAttachment(IdMessage.MessageParts.Items[iMensaje]).SaveToFile(SaveDialog.FileName)
+            TIdAttachmentFile(IdMessage.MessageParts.Items[iMensaje]).SaveToFile(SaveDialog.FileName)
           else
           begin
             ShowMessage('Ya existe un archivo con el nombre seleccionado');
@@ -338,9 +342,10 @@ begin
   lblMensajeEntradaAsunto.Caption:= '';
   lblMensajeEntradaFecha.Caption:= '';
 
-  mostrarAccion('Cargando Mensaje "'+listaBandejaEntrada.Selected.SubItems.Strings[0]+'"');
+  mostrarAccion('Cargando Mensaje "'+listaBandejaEntrada.Selected.SubItems.Strings[2]+'"'); //[2] = De
   Application.ProcessMessages;
   DM.IdPOP3.Retrieve(listaBandejaEntrada.Selected.Index + 1, IdMessage);
+  listaBandejaEntrada.Selected.ImageIndex := 7;
 
   lblMensajeEntradaPara.Caption:= IdMessage.Recipients.EMailAddresses;
   lblMensajeEntradaDe.caption:= IdMessage.From.Text;
@@ -349,12 +354,12 @@ begin
 
   for i := 0 to Pred(IdMessage.MessageParts.Count) do
   begin
-    if (IdMessage.MessageParts.Items[i] is TIdAttachment) then
+    if (IdMessage.MessageParts.Items[i] is TIdAttachmentFile) then
     begin
       auxLista:= listaArchivosAdjuntos.Items.Add;
       auxLista.ImageIndex:= 8;
-      auxLista.Caption := TIdAttachment(IdMessage.MessageParts.Items[i]).Filename;
-      auxLista.SubItems.Add(TIdAttachment(IdMessage.MessageParts.Items[i]).ContentType);
+      auxLista.Caption := TIdAttachmentFile(IdMessage.MessageParts.Items[i]).Filename;
+      auxLista.SubItems.Add(TIdAttachmentFile(IdMessage.MessageParts.Items[i]).ContentType);
     end
     else
     begin
@@ -372,9 +377,9 @@ begin
         memoMensajeEntrada.Lines.AddStrings(TIdText(IdMessage.MessageParts.Items[i]).Body);
       end
     end;
-  end;
+  end;                                 
 
-  mostrarAccion('');  
+  mostrarAccion('');
   mostrarOcupado(false);
 end;
 
@@ -403,7 +408,12 @@ begin
   end
   else
   begin
-    desconectar;
+//    desconectar;
+    try
+      DM.IdPOP3.Reset;
+    except
+      mostrarAccion('El Servidor POP no admite la función Reset');
+    end;
     CheckMail;
   end
 end;
@@ -472,10 +482,12 @@ begin
 
     dm.IdPOP3.RetrieveHeader(i, IdMessage);
     auxLista:= listaBandejaEntrada.Items.Add;
-    auxLista.Caption:= IdMessage.From.Text;
-    auxLista.SubItems.Add(IdMessage.Subject);
-    auxLista.SubItems.add(formatdatetime('dd/mm/yyy hh:mm:ss', IdMessage.Date));
-    auxLista.SubItems.Add(IntToStr(DM.IdPOP3.RetrieveMsgSize(i) div 1024) + ' Kb');
+    auxLista.Caption:= '';
+//    auxLista.SubItems.Add(IdMessage.UID); //
+    auxLista.SubItems.Add(IdMessage.From.Text); //de
+    auxLista.SubItems.Add(IdMessage.Subject); //asunto
+    auxLista.SubItems.add(formatdatetime('dd/mm/yyy hh:mm:ss', IdMessage.Date)); //fecha
+    auxLista.SubItems.Add(IntToStr(DM.IdPOP3.RetrieveMsgSize(i) div 1024) + ' Kb'); //tamanio
     auxLista.ImageIndex := 5;
   end;
 
@@ -486,6 +498,7 @@ end;
 
 procedure TFMailBandeja.btnRecibirClick(Sender: TObject);
 begin
+  PageControlBandeja.ActivePage:= TabBandejaEntrada;
   CheckMail;
 end;
 
@@ -498,7 +511,7 @@ end;
 
 procedure TFMailBandeja.btnEliminarClick(Sender: TObject);
 begin
-  eliminarMarcados;
+ eliminarMarcados;
 end;
 
 
@@ -532,23 +545,47 @@ begin
   eliminarMarcados;
 end;
 
-procedure TFMailBandeja.Button1Click(Sender: TObject);
+
+procedure TFMailBandeja.btnCambiarCuentaClick(Sender: TObject);
 begin
   ZQ_Cuentas.Filtered:= false;
-  
+
   EKListadoCuentas.SQL.Text:= 'select c.* '+
                               'from mail_cuentas c '+
                               'where id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
 
   if EKListadoCuentas.Buscar then
   begin
-    dm.configMailCuenta(StrToInt(EKListadoCuentas.Resultado));
+    dm.configMail('CUENTA', StrToInt(EKListadoCuentas.Resultado));
 
     ZQ_MailSalida.Close;
     ZQ_MailSalida.ParamByName('id_cuenta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
     ZQ_MailSalida.Open;
-    StatusBarBandejaSalida.Panels[1].text:= 'Total de Mensajes '+inttostr(ZQ_MailSalida.RecordCount);    
+    StatusBarBandejaSalida.Panels[1].text:= 'Total de Mensajes '+inttostr(ZQ_MailSalida.RecordCount);
   end;
+end;
+
+
+procedure TFMailBandeja.MarcarGuardar1Click(Sender: TObject);
+begin
+  marcarMensajeGuardar;
+end;
+
+
+procedure TFMailBandeja.marcarMensajeGuardar();
+begin
+  if listaBandejaEntrada.Selected <> nil then //si hay un elemento seleccionado de la bandeja de entrada
+  begin
+    listaBandejaEntrada.Selected.ImageIndex := 2;
+  end
+  else
+    showmessage('No hay ningún mensaje seleccionado');
+end;
+
+
+procedure TFMailBandeja.guardarMarcados();
+begin
+//
 end;
 
 end.
