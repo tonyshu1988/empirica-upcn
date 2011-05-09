@@ -7,7 +7,9 @@ uses
   ZAbstractDataset, ZDataset, EKUsrLogin, EKInformacion, EKModelo,
   EKAppEvnts, EKEventos, QRCtrls, QuickRpt, MidasLib, mxExport,
   mxNativeExcel, IdBaseComponent, IdComponent, IdTCPConnection,
-  IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage, ExtCtrls;
+  IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage, ExtCtrls,
+  IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
+  IdSMTPBase, IdExplicitTLSClientServerBase;
 
 type
   TDM = class(TDataModule)
@@ -28,9 +30,7 @@ type
     ZQ_ConfiguracionGRAFICO: TBlobField;
     ExcelNative: TmxNativeExcel;
     ExcelExport: TmxDBGridExport;
-    IdSMTP: TIdSMTP;
     ZQ_ConfigMail: TZQuery;
-    IdPOP3: TIdPOP3;
     ZQ_ConfigMailID_CUENTA: TIntegerField;
     ZQ_ConfigMailID_SUCURSAL: TIntegerField;
     ZQ_ConfigMailEMAIL: TStringField;
@@ -45,10 +45,17 @@ type
     ZQ_ConfigMailSMTP_AUTENTICACION: TStringField;
     ZQ_ConfigMailCUENTA_PRINCIPAL: TStringField;
     Actualizar: TTimer;
+    IdPOP3: TIdPOP3;
+    IdSMTP: TIdSMTP;
+    POP3_SSL: TIdSSLIOHandlerSocketOpenSSL;
+    ZQ_ConfigMailSMTP_SSL: TStringField;
+    SMTP_SSL: TIdSSLIOHandlerSocketOpenSSL;
+    ZQ_ConfigMailPOP3_SSL: TStringField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
-    procedure configMailSucursal(idSucursal: integer);
-    procedure configMailCuenta(idCuenta: integer);
+    procedure configMail(Tipo: String; id: integer);
+//    procedure configMailSucursal(idSucursal: integer);
+//    procedure configMailCuenta(idCuenta: integer);
   private
     auxDecimalSeparator, auxThousandSeparator: Char;
     auxCurrencyDecimals: Integer;
@@ -86,52 +93,173 @@ begin
 end;
 
 
-procedure TDM.configMailSucursal(idSucursal: integer);
+procedure TDM.configMail(Tipo: String; id: integer);
 begin
-  ZQ_ConfigMail.Close;
-  ZQ_ConfigMail.SQL[4]:= 'and c.id_sucursal = :id_sucursal';
-  ZQ_ConfigMail.SQL[5]:= '';
-  ZQ_ConfigMail.ParamByName('id_sucursal').AsInteger:= idSucursal;
-  ZQ_ConfigMail.Open;
+  if Tipo = 'SUCURSAL' then
+  begin
+    ZQ_ConfigMail.Close;
+    ZQ_ConfigMail.SQL[4]:= 'and c.id_sucursal = :id_sucursal';
+    ZQ_ConfigMail.SQL[5]:= '';
+    ZQ_ConfigMail.ParamByName('id_sucursal').AsInteger:= id;
+    ZQ_ConfigMail.Open;
+  end
+  else
+    if Tipo = 'CUENTA' then
+    begin
+      ZQ_ConfigMail.Close;
+      ZQ_ConfigMail.SQL[4]:= '';
+      ZQ_ConfigMail.SQL[5]:= 'and c.id_cuenta = :id_cuenta';
+      ZQ_ConfigMail.ParamByName('id_cuenta').AsInteger:= id;
+      ZQ_ConfigMail.Open;
+    end;
 
-  IdPOP3.Port:= ZQ_ConfigMailPOP3_PUERTO.AsInteger;
-  IdPOP3.Host:= ZQ_ConfigMailPOP3_HOST.AsString;
-  IdPOP3.Username:= ZQ_ConfigMailPOP3_USUARIO.AsString;
-  IdPOP3.Password:= ZQ_ConfigMailPOP3_PASSWORD.AsString;
+  with IdPOP3 do
+  begin
+    Port:= ZQ_ConfigMailPOP3_PUERTO.AsInteger;
+    Host:= ZQ_ConfigMailPOP3_HOST.AsString;
+    Username:= ZQ_ConfigMailPOP3_USUARIO.AsString;
+    Password:= ZQ_ConfigMailPOP3_PASSWORD.AsString;
 
-  IdSMTP.Port := ZQ_ConfigMailSMTP_PUERTO.AsInteger;
-  IdSMTP.Host := ZQ_ConfigMailSMTP_HOST.AsString;
-  IdSMTP.Username := ZQ_ConfigMailSMTP_USUARIO.AsString;
-  IdSMTP.Password := ZQ_ConfigMailSMTP_PASSWORD.AsString;
-  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atNone' then
-    IdSMTP.AuthenticationType := atNone;
-  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atLogin' then
-    IdSMTP.AuthenticationType := atLogin;
+    if ZQ_ConfigMailPOP3_SSL.AsString = 'utNoTLSSupport' then
+      UseTLS := utNoTLSSupport
+    else
+      if ZQ_ConfigMailPOP3_SSL.AsString = 'utUseExplicitTLS' then
+        UseTLS := utUseExplicitTLS
+      else
+        if ZQ_ConfigMailPOP3_SSL.AsString = 'utUseImplicitTLS' then
+          UseTLS := utUseImplicitTLS
+        else
+          if ZQ_ConfigMailPOP3_SSL.AsString = 'utUseRequireTLS' then
+            UseTLS := utUseRequireTLS;    
+  end;
+
+  with POP3_SSL do
+  begin
+    Host:= ZQ_ConfigMailPOP3_HOST.AsString;
+    Port:= ZQ_ConfigMailPOP3_PUERTO.AsInteger;
+    Destination:= ZQ_ConfigMailPOP3_HOST.AsString+':'+ZQ_ConfigMailPOP3_PUERTO.AsString;
+
+    RecvBufferSize:= 65000;
+    SendBufferSize:= 65000;
+    SSLOptions.Method:= sslvSSLv3;
+    SSLOptions.Mode:= sslmUnassigned;
+    SSLOptions.VerifyDepth:= 0;
+    SSLOptions.VerifyMode:= [];
+    UseNagle:= False;
+  end;
+
+  with IdSMTP do
+  begin
+    Host:= ZQ_ConfigMailSMTP_HOST.AsString;
+    Port:= ZQ_ConfigMailSMTP_PUERTO.AsInteger;
+    Username:= ZQ_ConfigMailSMTP_USUARIO.AsString;
+    Password:= ZQ_ConfigMailSMTP_PASSWORD.AsString;
+    if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'satDefault' then
+      AuthType := satDefault
+    else
+      if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'satNone' then
+        AuthType := satNone
+      else
+        if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'satSASL' then
+          AuthType := satSASL;
+
+    if ZQ_ConfigMailSMTP_SSL.AsString = 'utNoTLSSupport' then
+      UseTLS := utNoTLSSupport
+    else
+      if ZQ_ConfigMailSMTP_SSL.AsString = 'utUseExplicitTLS' then
+        UseTLS := utUseExplicitTLS
+      else
+        if ZQ_ConfigMailSMTP_SSL.AsString = 'utUseImplicitTLS' then
+          UseTLS := utUseImplicitTLS
+        else
+          if ZQ_ConfigMailSMTP_SSL.AsString = 'utUseRequireTLS' then
+            UseTLS := utUseRequireTLS;
+
+    PipeLine:=False;
+    UseEhlo:=True;
+  end;
+
+  with SMTP_SSL do
+  begin
+    Host:= ZQ_ConfigMailSMTP_HOST.AsString;
+    Port:= ZQ_ConfigMailSMTP_PUERTO.AsInteger;
+    Destination:= ZQ_ConfigMailSMTP_HOST.AsString+':'+ZQ_ConfigMailSMTP_PUERTO.AsString;
+
+    RecvBufferSize:= 65000;
+    SendBufferSize:= 65000;
+    SSLOptions.Method:= sslvSSLv3;
+    SSLOptions.Mode:= sslmUnassigned;
+    SSLOptions.VerifyDepth:= 0;
+    SSLOptions.VerifyMode:= [];
+    UseNagle:= False;
+  end;
 end;
 
 
-procedure TDM.configMailCuenta(idCuenta: integer);
-begin
-  ZQ_ConfigMail.Close;
-  ZQ_ConfigMail.SQL[4]:= '';
-  ZQ_ConfigMail.SQL[5]:= 'and c.id_cuenta = :id_cuenta';
-  ZQ_ConfigMail.ParamByName('id_cuenta').AsInteger:= idCuenta;
-  ZQ_ConfigMail.Open;
 
-  IdPOP3.Port:= ZQ_ConfigMailPOP3_PUERTO.AsInteger;
-  IdPOP3.Host:= ZQ_ConfigMailPOP3_HOST.AsString;
-  IdPOP3.Username:= ZQ_ConfigMailPOP3_USUARIO.AsString;
-  IdPOP3.Password:= ZQ_ConfigMailPOP3_PASSWORD.AsString;
+//procedure TDM.configMailCuenta(idCuenta: integer);
 
-  IdSMTP.Port := ZQ_ConfigMailSMTP_PUERTO.AsInteger;
-  IdSMTP.Host := ZQ_ConfigMailSMTP_HOST.AsString;
-  IdSMTP.Username := ZQ_ConfigMailSMTP_USUARIO.AsString;
-  IdSMTP.Password := ZQ_ConfigMailSMTP_PASSWORD.AsString;
-  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atNone' then
-    IdSMTP.AuthenticationType := atNone;
-  if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'atLogin' then
-    IdSMTP.AuthenticationType := atLogin;
-end;
+//begin
+//  ZQ_ConfigMail.Close;
+//  ZQ_ConfigMail.SQL[4]:= '';
+//  ZQ_ConfigMail.SQL[5]:= 'and c.id_cuenta = :id_cuenta';
+//  ZQ_ConfigMail.ParamByName('id_cuenta').AsInteger:= idCuenta;
+//  ZQ_ConfigMail.Open;
+//
+//  with IdPOP3 do
+//  begin
+//    Port:= ZQ_ConfigMailPOP3_PUERTO.AsInteger;
+//    Host:= ZQ_ConfigMailPOP3_HOST.AsString;
+//    Username:= ZQ_ConfigMailPOP3_USUARIO.AsString;
+//    Password:= ZQ_ConfigMailPOP3_PASSWORD.AsString;
+//  end;
+//
+//  with IdSMTP do
+//  begin
+//    Host:= ZQ_ConfigMailSMTP_HOST.AsString;
+//    Port:= ZQ_ConfigMailSMTP_PUERTO.AsInteger;
+//    Username:= ZQ_ConfigMailSMTP_USUARIO.AsString;
+//    Password:= ZQ_ConfigMailSMTP_PASSWORD.AsString;
+//    if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'satDefault' then
+//      AuthType := satDefault
+//    else
+//      if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'satNone' then
+//        AuthType := satNone
+//      else
+//        if ZQ_ConfigMailSMTP_AUTENTICACION.AsString = 'satSASL' then
+//          AuthType := satSASL;
+//
+//    if ZQ_ConfigMailSMTP_SSL.AsString = 'utNoTLSSupport' then
+//      UseTLS := utNoTLSSupport
+//    else
+//      if ZQ_ConfigMailSMTP_SSL.AsString = 'utUseExplicitTLS' then
+//        UseTLS := utUseExplicitTLS
+//      else
+//        if ZQ_ConfigMailSMTP_SSL.AsString = 'utUseImplicitTLS' then
+//          UseTLS := utUseImplicitTLS
+//        else
+//          if ZQ_ConfigMailSMTP_SSL.AsString = 'utUseRequireTLS' then
+//            UseTLS := utUseRequireTLS;
+//
+//    PipeLine:=False;
+//    UseEhlo:=True;
+//  end;
+//
+//  with manejadorSSL do
+//  begin
+//    Host:= ZQ_ConfigMailSMTP_HOST.AsString;
+//    Port:= ZQ_ConfigMailSMTP_PUERTO.AsInteger;
+//    Destination:= ZQ_ConfigMailSMTP_HOST.AsString+':'+ZQ_ConfigMailSMTP_PUERTO.AsString;
+//
+//    RecvBufferSize:= 65000;
+//    SendBufferSize:= 65000;
+//    SSLOptions.Method:= sslvSSLv3;
+//    SSLOptions.Mode:= sslmUnassigned;
+//    SSLOptions.VerifyDepth:= 0;
+//    SSLOptions.VerifyMode:= [];
+//    UseNagle:= False;
+//  end;
+//end;
 
 
 procedure TDM.VariablesReportes(Reporte: TQuickRep);
