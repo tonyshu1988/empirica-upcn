@@ -87,7 +87,7 @@ type
     DBTxtAsunto: TDBText;
     ZQ_MailSalida: TZQuery;
     DS_MailSalida: TDataSource;
-    DBGridMarca: TDBGrid;
+    DBGridMailSalida: TDBGrid;
     ZQ_MailSalidaID_MAIL_MENSAJE: TIntegerField;
     ZQ_MailSalidaID_CUENTA: TIntegerField;
     ZQ_MailSalidaCABECERA_PARA: TStringField;
@@ -104,8 +104,9 @@ type
     StatusBarBandejaSalida: TStatusBar;
     DBGrid1: TDBGrid;
     btnCambiarCuenta: TBitBtn;
-    MarcarGuardar1: TMenuItem;
-    GuardarMails1: TMenuItem;
+    btnDesconectar: TdxBarLargeButton;
+    PopupMenu2: TPopupMenu;
+    Reenviar1: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -118,8 +119,12 @@ type
     procedure AbrirMail1Click(Sender: TObject);
     procedure MarcarEliminar1Click(Sender: TObject);
     procedure EliminarMarcados1Click(Sender: TObject);
+
     procedure btnCambiarCuentaClick(Sender: TObject);
-    procedure MarcarGuardar1Click(Sender: TObject);
+    procedure btnDesconectarClick(Sender: TObject);
+    procedure DBGridMailSalidaDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure Reenviar1Click(Sender: TObject);
   private
     function BuscarIndiceAdjuntos(nombreArchivo: string): integer;
     function BuscarAdjuntos(const nombreArchivo: string): TIdAttachmentFile;
@@ -129,16 +134,17 @@ type
     procedure mostrarAccion(texto: string);
     procedure cambiarEstado(const flag: Boolean);
     procedure CheckMail();
+    function conectar(): boolean;
     procedure desconectar();
     procedure CargarMensaje();
     procedure marcarMensajeEliminar();
     procedure marcarMensajeGuardar();
     procedure eliminarMarcados();
-    procedure guardarMarcados();
     procedure buscarCabeceraPOP3(inMsgCount: Integer);
   public
     MsgCount, FMailBoxSize: integer;
     directorioAdjunto: string;
+    conectado: boolean;
   end;
 
 var
@@ -162,6 +168,7 @@ end;
 
 procedure TFMailBandeja.btnSalirClick(Sender: TObject);
 begin
+  desconectar;
   Close;
 end;
 
@@ -203,9 +210,15 @@ end;
 procedure TFMailBandeja.cambiarEstado(const flag: Boolean);
 begin
    if flag then
-      mostrarEstado('Conectado')
+   begin
+      mostrarEstado('Conectado');
+      conectado:= true;
+   end
    else
+   begin
       mostrarEstado('Desconectado');
+      conectado:= false;
+   end;
 end;
 
 //cambia el icono del mouse al normal o al de espera
@@ -332,6 +345,10 @@ begin
   if listaBandejaEntrada.Selected = nil then
     Exit;
 
+  if not conectado then  //si no estoy conectado
+    if not conectar then //pruebo conectarme y si no se conecta salgo
+      exit;
+
   //Inicialiso todo
   mostrarOcupado(true);
   IdMessage.Clear;
@@ -342,7 +359,7 @@ begin
   lblMensajeEntradaAsunto.Caption:= '';
   lblMensajeEntradaFecha.Caption:= '';
 
-  mostrarAccion('Cargando Mensaje "'+listaBandejaEntrada.Selected.SubItems.Strings[2]+'"'); //[2] = De
+  mostrarAccion('Cargando Mensaje "'+listaBandejaEntrada.Selected.SubItems.Strings[0]+'"');
   Application.ProcessMessages;
   DM.IdPOP3.Retrieve(listaBandejaEntrada.Selected.Index + 1, IdMessage);
   listaBandejaEntrada.Selected.ImageIndex := 7;
@@ -377,9 +394,9 @@ begin
         memoMensajeEntrada.Lines.AddStrings(TIdText(IdMessage.MessageParts.Items[i]).Body);
       end
     end;
-  end;                                 
+  end;
 
-  mostrarAccion('');
+  mostrarAccion('');  
   mostrarOcupado(false);
 end;
 
@@ -431,28 +448,39 @@ begin
 
     DM.IdPOP3.Disconnect;
     cambiarEstado(false);
+    mostrarOcupado(false);
+  end;
+end;
+
+
+function TFMailBandeja.conectar(): boolean;
+begin
+  if DM.IdPOP3.Connected then //si esta conectado me desconecto
+    DM.IdPOP3.Disconnect;
+
+  mostrarOcupado(true);
+  mostrarEstado('Conectando...');
+
+  //Conectar al Servidor
+  try
+    DM.IdPOP3.Connect;
+    cambiarEstado(true);
+    result:= true;
+  except
+//    mostrarEstado('No se pudo conectar');
+    cambiarEstado(false);
+    mostrarOcupado(false);
+    result:= false;
+    exit;
   end;
 end;
 
 
 procedure TFMailBandeja.CheckMail();
 begin
-  mostrarOcupado(true);
-  mostrarEstado('Conectando...');
-
-  if DM.IdPOP3.Connected then //si esta conectado me desconecto
-    DM.IdPOP3.Disconnect;
-
-  //Conectar al Servidor
-  try
-    DM.IdPOP3.Connect;
-  except
-    mostrarEstado('No se pudo conectar');
-    mostrarOcupado(false);
+  if not conectar then  //si no se puede conectar salgo
     exit;
-  end;
 
-  cambiarEstado(true);
   MsgCount := DM.IdPOP3.CheckMessages;
   FMailBoxSize := DM.IdPOP3.RetrieveMailBoxSize div 1024;
   mostrarCantidadMsj(inttostr(MsgCount));
@@ -511,7 +539,7 @@ end;
 
 procedure TFMailBandeja.btnEliminarClick(Sender: TObject);
 begin
- eliminarMarcados;
+  eliminarMarcados;
 end;
 
 
@@ -546,6 +574,17 @@ begin
 end;
 
 
+procedure TFMailBandeja.marcarMensajeGuardar();
+begin
+  if listaBandejaEntrada.Selected <> nil then //si hay un elemento seleccionado de la bandeja de entrada
+  begin
+    listaBandejaEntrada.Selected.ImageIndex := 2;
+  end
+  else
+    showmessage('No hay ningún mensaje seleccionado');
+end;
+
+
 procedure TFMailBandeja.btnCambiarCuentaClick(Sender: TObject);
 begin
   ZQ_Cuentas.Filtered:= false;
@@ -566,26 +605,60 @@ begin
 end;
 
 
-procedure TFMailBandeja.MarcarGuardar1Click(Sender: TObject);
+procedure TFMailBandeja.btnDesconectarClick(Sender: TObject);
 begin
-  marcarMensajeGuardar;
+  desconectar;
 end;
 
 
-procedure TFMailBandeja.marcarMensajeGuardar();
+procedure TFMailBandeja.DBGridMailSalidaDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
 begin
-  if listaBandejaEntrada.Selected <> nil then //si hay un elemento seleccionado de la bandeja de entrada
+  if ZQ_MailSalida.IsEmpty then
+    exit;
+
+  if (ZQ_MailSalidaENVIADO.AsString = 'N') then //si el registro esta dado de baja
   begin
-    listaBandejaEntrada.Selected.ImageIndex := 2;
+    DBGridMailSalida.Canvas.Font.Color := clBlack;
+    DBGridMailSalida.Canvas.Font.Style := DBGridMailSalida.Canvas.Font.Style + [fsBold];
+    DBGridMailSalida.Canvas.Brush.Color:= FPrincipal.baja;
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridMailSalida.Canvas.Font.Color := clwhite;
   end
-  else
-    showmessage('No hay ningún mensaje seleccionado');
+  else  //si el registro es comun
+  begin
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      DBGridMailSalida.Canvas.Font.Color := clwhite;
+      DBGridMailSalida.Canvas.Font.Style := DBGridMailSalida.Canvas.Font.Style + [fsBold];
+      DBGridMailSalida.Canvas.Brush.Color:= FPrincipal.activo;
+    end;
+  end;
+  DBGridMailSalida.DefaultDrawColumnCell(rect,datacol,column,state);
 end;
 
 
-procedure TFMailBandeja.guardarMarcados();
+procedure TFMailBandeja.Reenviar1Click(Sender: TObject);
+var
+  recNo: integer;
 begin
-//
+  if ZQ_MailSalida.IsEmpty then
+    exit;
+
+  Application.CreateForm(TFMailEnviar, FMailEnviar);
+  FMailEnviar.reenviar( ZQ_MailSalidaCABECERA_PARA.AsString,
+                        ZQ_MailSalidaCABECERA_CC.AsString,
+                        ZQ_MailSalidaCABECERA_CCO.AsString,
+                        ZQ_MailSalidaCABECERA_ASUNTO.AsString,
+                        ZQ_MailSalidaCUERPO.AsString,
+                        ZQ_CuentasID_CUENTA.AsInteger,
+                        ZQ_MailSalidaID_MAIL_MENSAJE.AsInteger);
+  FMailEnviar.ShowModal;
+
+  recNo:= ZQ_MailSalida.RecNo;
+  ZQ_MailSalida.Refresh;
+  ZQ_MailSalida.RecNo:= recNo;
 end;
 
 end.

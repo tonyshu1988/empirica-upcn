@@ -56,6 +56,7 @@ begin
   end;
 
   EKLlenarCombo.CargarCombo;
+  EKLlenarCombo.SetItem(0);
 end;
 
 procedure TFSeleccionarSucursal.btnAceptarClick(Sender: TObject);
