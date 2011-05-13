@@ -42,13 +42,13 @@ requires
   ZCore,
   ZDbc,
   ZPlain,
-  qrpt70,
   bdertl,
   dxBarD7,
   cxLibraryVCLD7,
   dxThemeD7,
   dxComnD7,
-  dxBarExtItemsD7;
+  dxBarExtItemsD7,
+  QR5RunD7;
 
 contains
   EKAppEvnts in 'EKAppEvnts.pas',
