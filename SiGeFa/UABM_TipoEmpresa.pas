@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, DBCtrls, ComCtrls, EKDBDateTimePicker, Mask, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset;
+  ZAbstractDataset, ZDataset, EKOrdenarGrilla;
 
 type
   TFABM_TipoEmpresa = class(TForm)
@@ -34,8 +34,9 @@ type
     DS_TipoEmpresa: TDataSource;
     ZQ_TipoEmpresaBAJA: TStringField;
     PBusqueda: TPanel;
-    Label16: TLabel;
-    StaticText3: TStaticText;
+    lblCantidadRegistros: TLabel;
+    StaticTxtBaja: TStaticText;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -81,8 +82,12 @@ begin
   end;
 end;
 
+
 procedure TFABM_TipoEmpresa.btnModificarClick(Sender: TObject);
 begin
+  if ZQ_TipoEmpresa.IsEmpty then
+    exit;
+
   if dm.EKModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
   begin
     DBGridTipoEmpresa.Enabled := false;
@@ -95,91 +100,122 @@ begin
   end;
 end;
 
+
 procedure TFABM_TipoEmpresa.btnGuardarClick(Sender: TObject);
+var
+  recNo: integer;
 begin
    Perform(WM_NEXTDLGCTL, 0, 0);
 
    if (trim(DBEApellidoNombre.Text) = '') then
     begin
-      Application.MessageBox('El campo "Descripcion" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox('El campo "Tipo Empresa" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
       DBEApellidoNombre.SetFocus;
       exit;
     end;
 
+  try
     if DM.EKModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa) then
     begin
-      DBGridTipoEmpresa.Enabled:=true;
-      GrupoEditando.Enabled:=true;
-      GrupoGuardarCancelar.Enabled:=false;
+      DBGridTipoEmpresa.Enabled:= true;
       DBGridTipoEmpresa.SetFocus;
+      GrupoEditando.Enabled := true;
+      GrupoGuardarCancelar.Enabled := false;
       PanelEdicion.Visible := false;
-    end;
+      recNo:= ZQ_TipoEmpresa.RecNo;
+      ZQ_TipoEmpresa.Refresh;
+      ZQ_TipoEmpresa.RecNo:= recNo;
+    end
+  except
+    begin
+      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
+      exit;
+    end
+  end;
+
+  dm.mostrarCantidadRegistro(ZQ_TipoEmpresa, lblCantidadRegistros);  
 end;
+
 
 procedure TFABM_TipoEmpresa.btnCancelarClick(Sender: TObject);
 begin
-  DM.EKModelo.cancelar_transaccion(Transaccion_ABM_TipoEmpresa);
-  DBGridTipoEmpresa.Enabled:=true;
-  GrupoEditando.Enabled:=true;
-  GrupoGuardarCancelar.Enabled:=false;
-  DBGridTipoEmpresa.SetFocus;
-  PanelEdicion.Visible := false;
+  if dm.EKModelo.cancelar_transaccion(Transaccion_ABM_TipoEmpresa) then
+  begin
+    DBGridTipoEmpresa.Enabled:=true;
+    DBGridTipoEmpresa.SetFocus;
+    GrupoEditando.Enabled := true;
+    GrupoGuardarCancelar.Enabled := false;
+    PanelEdicion.Visible := false;
+  end;
 end;
+
 
 procedure TFABM_TipoEmpresa.btnSalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFABM_TipoEmpresa.btnBajaClick(Sender: TObject);
+var
+  recNo: integer;
 begin
-  if  not(ZQ_TipoEmpresa.IsEmpty) then
+  if (ZQ_TipoEmpresa.IsEmpty) OR (ZQ_TipoEmpresaBAJA.AsString <> 'N') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Empresa" seleccionado?'), 'ABM Tipo Empresa', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if (ZQ_TipoEmpresaBAJA.AsString='S') then
+    if dm.EKModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
     begin
-      Application.MessageBox(PChar('El tipo empresa seleccionado ya fue dado de baja'),'Baja Empresa',MB_OK+MB_ICONWARNING);
+      ZQ_TipoEmpresa.Edit;
+      ZQ_TipoEmpresaBAJA.AsString:='S';
     end
     else
-    begin
-      if dm.EKModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa,[ZQ_TipoEmpresa]) then
-      begin
-        ZQ_TipoEmpresa.Edit;
-        ZQ_TipoEmpresaBAJA.AsString:='S';
-        if dm.EKModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa) then
-          Application.MessageBox(PChar('El tipo empresa seleccionado há sido dado de Baja'),'Atención',MB_OK+MB_ICONINFORMATION)
-      end
-    end
-  end;
+      exit;
 
+    if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa)) then
+      dm.EKModelo.cancelar_transaccion(Transaccion_ABM_TipoEmpresa);
+
+    recNo:= ZQ_TipoEmpresa.RecNo;
+    ZQ_TipoEmpresa.Refresh;
+    ZQ_TipoEmpresa.RecNo:= recNo;
+  end;
 end;
+
 
 procedure TFABM_TipoEmpresa.btnReactivarClick(Sender: TObject);
+var
+  recNo: integer;
 begin
-  if not(ZQ_TipoEmpresa.IsEmpty) then
+  if (ZQ_TipoEmpresa.IsEmpty) OR (ZQ_TipoEmpresaBAJA.AsString <> 'S') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea reactivar el "Tipo Empresa" seleccionado?'), 'ABM Tipo Empresa', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if (ZQ_TipoEmpresaBAJA.AsString='N') then
+    if dm.EKModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
     begin
-      Application.MessageBox(PChar('El tipo empresa seleccionado no figura como dado de Baja'),'Reactivar Empresa',MB_OK+MB_ICONWARNING);
+      ZQ_TipoEmpresa.Edit;
+      ZQ_TipoEmpresaBAJA.AsString:='N';
     end
     else
-    begin
-      if dm.EKModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa,[ZQ_TipoEmpresa]) then
-      begin
-        ZQ_TipoEmpresa.Edit;
-        ZQ_TipoEmpresaBAJA.AsString:='N';
-        if dm.EKModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa) then
-          Application.MessageBox(PChar('El tipo empresa seleccionado há sido Reactivado'),'Atención',MB_OK+MB_ICONINFORMATION)
-      end
-    end
-  end;
+      exit;
 
+    if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa)) then
+      dm.EKModelo.cancelar_transaccion(Transaccion_ABM_TipoEmpresa);
+
+    recNo:= ZQ_TipoEmpresa.RecNo;
+    ZQ_TipoEmpresa.Refresh;
+    ZQ_TipoEmpresa.RecNo:= recNo;
+  end;
 end;
+
 
 procedure TFABM_TipoEmpresa.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABM_TipoEmpresa);
 end;
+
 
 procedure TFABM_TipoEmpresa.DBGridTipoEmpresaDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -189,12 +225,15 @@ begin
     exit;
 
   FPrincipal.PintarFilasGrillasConBajas(DBGridTipoEmpresa, ZQ_TipoEmpresaBAJA.AsString, Rect, DataCol, Column, State);
-
 end;
+
 
 procedure TFABM_TipoEmpresa.FormCreate(Sender: TObject);
 begin
-dm.EKModelo.abrir(ZQ_TipoEmpresa);
+  StaticTxtBaja.Color:= FPrincipal.baja;
+  dm.EKModelo.abrir(ZQ_TipoEmpresa);
+
+  dm.mostrarCantidadRegistro(ZQ_TipoEmpresa, lblCantidadRegistros);
 end;
 
 end.

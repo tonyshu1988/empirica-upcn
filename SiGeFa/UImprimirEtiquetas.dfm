@@ -46,30 +46,35 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
         item
           Expanded = False
           FieldName = 'Producto'
+          Title.Alignment = taCenter
           Width = 249
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Medida'
+          Title.Alignment = taCenter
           Width = 107
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'CodCortoProd'
+          Title.Alignment = taCenter
           Width = 87
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'CodCortoCab'
+          Title.Alignment = taCenter
           Width = 72
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'CodBarra'
+          Title.Alignment = taCenter
           Width = 170
           Visible = True
         end
@@ -77,6 +82,8 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Color = 15856100
           Expanded = False
           FieldName = 'CANTIDAD'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cantidad'
           Width = 74
           Visible = True
         end>
@@ -124,13 +131,16 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
       ReportTitle = 'Etiquetas'
       SnapToGrid = True
@@ -138,6 +148,8 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       Zoom = 100
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBand1: TQRBand
         Tag = 99
         Left = 8
@@ -152,11 +164,14 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
         AlignToBottom = False
         BeforePrint = DetailBand1BeforePrint
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           238.125000000000000000
           2061.104166666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRShapeTapa: TQRShape
           Left = 1
@@ -3151,6 +3166,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = False
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBArticulo2: TQRDBText
@@ -3183,6 +3199,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = False
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBArticulo3: TQRDBText
@@ -3215,6 +3232,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = False
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText7: TQRDBText
@@ -3247,6 +3265,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = False
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText8: TQRDBText
@@ -3279,6 +3298,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = False
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText9: TQRDBText
@@ -3311,6 +3331,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = False
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText10: TQRDBText
@@ -3343,6 +3364,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = False
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText11: TQRDBText
@@ -3375,6 +3397,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = False
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText12: TQRDBText
@@ -3407,6 +3430,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = False
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel1: TQRLabel
@@ -3438,6 +3462,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel2: TQRLabel
@@ -3469,6 +3494,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel3: TQRLabel
@@ -3500,6 +3526,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBPrecio2: TQRDBText
@@ -3532,6 +3559,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 18
         end
         object QRDBPrecio3: TQRDBText
@@ -3564,6 +3592,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 18
         end
         object QRImagePrecio1: TQRImage
@@ -4092,6 +4121,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 18
         end
       end

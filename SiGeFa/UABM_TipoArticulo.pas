@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
-  ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  EKOrdenarGrilla;
 
 type
   TFABM_TipoArticulo = class(TForm)
@@ -30,6 +31,13 @@ type
     ZQ_TipoArtDESCRIPCION: TStringField;
     ZQ_TipoArtBAJA: TStringField;
     DBGridTipoArticulo: TDBGrid;
+    PanelEdicion: TPanel;
+    Label1: TLabel;
+    DBENombre: TDBEdit;
+    PBusqueda: TPanel;
+    lblCantidadRegistros: TLabel;
+    StaticTxtBaja: TStaticText;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -72,12 +80,17 @@ begin
   Close;
 end;
 
+
 procedure TFABM_TipoArticulo.btnNuevoClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
   begin
-    ZQ_TipoArt.Append; 
-    DBGridTipoArticulo.SetFocus;
+    DBGridTipoArticulo.Enabled := false;
+    PanelEdicion.Visible:= true;
+
+    ZQ_TipoArt.Append;
+    ZQ_TipoArtBAJA.AsString:= 'N';
+    DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -91,9 +104,11 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
   begin
-    ZQ_TipoArt.Edit;
+    DBGridTipoArticulo.Enabled := false;
+    PanelEdicion.Visible:= true;
 
-    DBGridTipoArticulo.SetFocus;
+    ZQ_TipoArt.Edit;
+    DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -107,7 +122,7 @@ begin
   if (ZQ_TipoArt.IsEmpty) OR (ZQ_TipoArtBAJA.AsString <> 'N') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea dar de baja la Medida seleccionada?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Artículo" seleccionado?'), 'ABM Tipo Artículo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
     begin
@@ -126,6 +141,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_TipoArticulo.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
@@ -133,7 +149,7 @@ begin
   if (ZQ_TipoArt.IsEmpty) OR (ZQ_TipoArtBAJA.AsString <> 'S') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea reactivar la Medida seleccionado?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea reactivar el "Tipo Artículo" seleccionado?'), 'ABM Tipo Artículo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
     begin
@@ -152,25 +168,28 @@ begin
   end;
 end;
 
+
 procedure TFABM_TipoArticulo.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-  if (trim(ZQ_TipoArtDESCRIPCION.AsString) = '') then
+  if (trim(DBENombre.Text) = '') then
   begin
-    Application.MessageBox('El campo no puede estar vacio. VERIFIQUE','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBGridTipoArticulo.SetFocus;
+    Application.MessageBox('El campo "Tipo Artículo" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBENombre.SetFocus;
     exit;
   end;
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
+      DBGridTipoArticulo.Enabled:= true;
       DBGridTipoArticulo.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
+      PanelEdicion.Visible := false;
       recNo:= ZQ_TipoArt.RecNo;
       ZQ_TipoArt.Refresh;
       ZQ_TipoArt.RecNo:= recNo;
@@ -180,7 +199,9 @@ begin
       Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
       exit;
     end
-  end
+  end;
+
+  dm.mostrarCantidadRegistro(ZQ_TipoArt, lblCantidadRegistros);
 end;
 
 
@@ -188,18 +209,25 @@ procedure TFABM_TipoArticulo.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
-    DBGridTipoArticulo.SetFocus;    
+    DBGridTipoArticulo.Enabled:=true;
+    DBGridTipoArticulo.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
+    PanelEdicion.Visible := false;
   end;
 end;
 
 
 procedure TFABM_TipoArticulo.FormCreate(Sender: TObject);
 begin
+  StaticTxtBaja.Color:= FPrincipal.baja;
+
   ZQ_TipoArt.Close;
   ZQ_TipoArt.open;
+
+  dm.mostrarCantidadRegistro(ZQ_TipoArt, lblCantidadRegistros);  
 end;
+
 
 procedure TFABM_TipoArticulo.DBGridTipoArticuloDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;

@@ -1,6 +1,6 @@
 object FBuscarPersona: TFBuscarPersona
-  Left = 283
-  Top = 183
+  Left = 413
+  Top = 305
   Width = 719
   Height = 442
   Caption = 'Buscar Personas'
@@ -17,17 +17,17 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 711
-    Height = 358
+    Width = 703
+    Height = 352
     Align = alClient
     TabOrder = 0
     object DBGridPersonas: TDBGrid
       Left = 1
       Top = 1
-      Width = 709
-      Height = 141
+      Width = 701
+      Height = 135
       Align = alClient
-      Color = 16112578
+      Color = 14606012
       DataSource = DS_Personas
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       ParentShowHint = False
@@ -44,66 +44,79 @@ object FBuscarPersona: TFBuscarPersona
         item
           Expanded = False
           FieldName = 'NOMBRE'
-          Title.Caption = 'NOMBRE Y APELLIDO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Apellido y Nombre'
           Width = 225
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'TELEFONO'
-          Width = 143
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'EMAIL'
-          Width = 157
-          Visible = True
-        end
-        item
-          Expanded = False
           FieldName = 'DIRECCION'
+          Title.Alignment = taCenter
+          Title.Caption = 'Direcci'#243'n'
           Width = 100
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'LOCALIDAD'
+          Title.Alignment = taCenter
+          Title.Caption = 'Localidad'
           Width = 100
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'CODIGO_POSTAL'
-          Title.Caption = 'COD.POSTAL'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cod. Postal'
           Width = 85
           Visible = True
         end
         item
           Expanded = False
+          FieldName = 'TELEFONO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tel'#233'fono'
+          Width = 143
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'EMAIL'
+          Title.Alignment = taCenter
+          Title.Caption = 'eMail'
+          Width = 157
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'NUMERO_DOC'
-          Title.Caption = 'NRO DOC'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. Documento'
           Width = 146
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'CUIT_CUIL'
-          Title.Caption = 'CUIT/CUIL'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cuit/Cuil'
           Width = 90
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'FECHA_NACIMIENTO'
-          Title.Caption = 'FECHA NACIMIENTO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fecha Nac.'
           Visible = True
         end>
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 142
-      Width = 709
+      Top = 136
+      Width = 701
       Height = 215
       Align = alBottom
       TabOrder = 1
@@ -188,9 +201,9 @@ object FBuscarPersona: TFBuscarPersona
       object Label8: TLabel
         Left = 326
         Top = 102
-        Width = 36
+        Width = 34
         Height = 13
-        Caption = 'Email:'
+        Caption = 'eMail:'
       end
       object Label11: TLabel
         Left = 11
@@ -453,7 +466,7 @@ object FBuscarPersona: TFBuscarPersona
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

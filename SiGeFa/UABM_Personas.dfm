@@ -490,22 +490,6 @@ object FABM_Personas: TFABM_Personas
             ParentFont = False
             TabOrder = 12
           end
-          object RadioButton1: TRadioButton
-            Left = 416
-            Top = 16
-            Width = 113
-            Height = 17
-            Caption = 'RadioButton1'
-            TabOrder = 13
-          end
-          object CheckBox1: TCheckBox
-            Left = 416
-            Top = 40
-            Width = 97
-            Height = 17
-            Caption = 'CheckBox1'
-            TabOrder = 14
-          end
         end
         object TabSheetDetalle: TTabSheet
           BorderWidth = 4
@@ -532,39 +516,32 @@ object FABM_Personas: TFABM_Personas
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
-      DesignSize = (
-        832
-        15)
       object lblResultadoBusqueda: TLabel
-        Left = 3
+        Left = 0
         Top = 0
-        Width = 143
-        Height = 13
-        Anchors = [akLeft, akBottom]
+        Width = 144
+        Height = 15
+        Align = alLeft
         Caption = 'lblResultadoBusqueda'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clNavy
         Font.Height = -11
         Font.Name = 'Verdana'
-        Font.Style = [fsBold]
+        Font.Style = [fsBold, fsItalic]
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 796
+        Left = 723
         Top = 0
-        Width = 33
-        Height = 17
+        Width = 109
+        Height = 15
+        Align = alRight
         Alignment = taCenter
-        Anchors = [akRight, akBottom]
-        Caption = 'Baja'
-        Color = 8421631
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'Dado de Baja'
+        Color = 6974207
         ParentColor = False
-        ParentFont = False
         TabOrder = 0
       end
     end

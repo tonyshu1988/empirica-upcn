@@ -52,8 +52,8 @@ type
     DBEdit5: TDBEdit;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     PBusqueda: TPanel;
-    Label16: TLabel;
-    StaticText3: TStaticText;
+    lblCantidadRegistros: TLabel;
+    StaticTxtBaja: TStaticText;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -99,8 +99,12 @@ begin
   end;
 end;
 
+
 procedure TFABM_Sucursal.btnModificarClick(Sender: TObject);
 begin
+  if ZQ_Sucursal.IsEmpty then
+    exit;
+
   if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
   begin
     DBGridSucursal.Enabled := false;
@@ -113,45 +117,54 @@ begin
   end;
 end;
 
+
 procedure TFABM_Sucursal.btnGuardarClick(Sender: TObject);
 begin
-   if (trim(DBEApellidoNombre.Text) = '') then
-    begin
-      Application.MessageBox('El campo "Nombre" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-      DBEApellidoNombre.SetFocus;
-      exit;
-    end;
+ if (trim(DBEApellidoNombre.Text) = '') then
+  begin
+    Application.MessageBox('El campo "Nombre" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    DBEApellidoNombre.SetFocus;
+    exit;
+  end;
 
-    if DM.EKModelo.finalizar_transaccion(Transaccion_ABMSucursal) then
-    begin
-      DBGridSucursal.Enabled:=true;
-      GrupoEditando.Enabled:=true;
-      GrupoGuardarCancelar.Enabled:=false;
-      DBGridSucursal.SetFocus;
-      PanelEdicion.Visible := false;
-    end;
+  if DM.EKModelo.finalizar_transaccion(Transaccion_ABMSucursal) then
+  begin
+    DBGridSucursal.Enabled:=true;
+    GrupoEditando.Enabled:=true;
+    GrupoGuardarCancelar.Enabled:=false;
+    DBGridSucursal.SetFocus;
+    PanelEdicion.Visible := false;
+  end;
+
+  dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);  
 end;
+
 
 procedure TFABM_Sucursal.btnCancelarClick(Sender: TObject);
 begin
-  DM.EKModelo.cancelar_transaccion(Transaccion_ABMSucursal);
-  DBGridSucursal.Enabled:=true;
-  GrupoEditando.Enabled:=true;
-  GrupoGuardarCancelar.Enabled:=false;
-  DBGridSucursal.SetFocus;
-  PanelEdicion.Visible := false;
+  if dm.EKModelo.cancelar_transaccion(Transaccion_ABMSucursal) then
+  begin
+    DBGridSucursal.Enabled:=true;
+    DBGridSucursal.SetFocus;
+    GrupoEditando.Enabled:=true;
+    GrupoGuardarCancelar.Enabled:=false;
+    PanelEdicion.Visible := false;
+  end;
 end;
+
 
 procedure TFABM_Sucursal.btnSalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFABM_Sucursal.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABMSucursal);
 end;
+
 
 procedure TFABM_Sucursal.DBGridSucursalDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -161,54 +174,69 @@ begin
     exit;
 
   FPrincipal.PintarFilasGrillasConBajas(DBGridSucursal, ZQ_SucursalBAJA.AsString, Rect, DataCol, Column, State);
-
 end;
+
 
 procedure TFABM_Sucursal.btnBajaClick(Sender: TObject);
+var
+  recNo: integer;
 begin
-  if  not(ZQ_Sucursal.IsEmpty) then
+  if (ZQ_Sucursal.IsEmpty) OR (ZQ_SucursalBAJA.AsString <> 'N') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea dar de baja la "Sucursal" seleccionada?'), 'ABM Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if (ZQ_SucursalBAJA.AsString='S') then
+    if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
     begin
-      Application.MessageBox(PChar('La sucursal seleccionado ya fue dado de baja'),'Baja Empresa',MB_OK+MB_ICONWARNING);
+      ZQ_Sucursal.Edit;
+      ZQ_SucursalBAJA.AsString:='S';
     end
     else
-    begin
-      if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal,[ZQ_Sucursal]) then
-      begin
-        ZQ_Sucursal.Edit;
-        ZQ_SucursalBAJA.AsString:='S';
-        if dm.EKModelo.finalizar_transaccion(Transaccion_ABMSucursal) then
-          Application.MessageBox(PChar('La sucursal seleccionado há sido dada de Baja'),'Atención',MB_OK+MB_ICONINFORMATION)
-      end
-    end
+      exit;
+
+    if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABMSucursal)) then
+      dm.EKModelo.cancelar_transaccion(Transaccion_ABMSucursal);
+
+    recNo:= ZQ_Sucursal.RecNo;
+    ZQ_Sucursal.Refresh;
+    ZQ_Sucursal.RecNo:= recNo;
   end;
 end;
 
+
 procedure TFABM_Sucursal.btnReactivarClick(Sender: TObject);
+var
+  recNo: integer;
 begin
-  if not(ZQ_Sucursal.IsEmpty) then
+  if (ZQ_Sucursal.IsEmpty) OR (ZQ_SucursalBAJA.AsString <> 'S') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea reactivar la "Sucursal" seleccionada?'), 'ABM Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if (ZQ_SucursalBAJA.AsString='N') then
+    if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
     begin
-      Application.MessageBox(PChar('La sucursal seleccionada no figura como dada de Baja'),'Reactivar Empresa',MB_OK+MB_ICONWARNING);
+      ZQ_Sucursal.Edit;
+      ZQ_SucursalBAJA.AsString:='N';
     end
     else
-    begin
-      if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal,[ZQ_Sucursal]) then
-      begin
-        ZQ_Sucursal.Edit;
-        ZQ_SucursalBAJA.AsString:='N';
-        if dm.EKModelo.finalizar_transaccion(Transaccion_ABMSucursal) then
-          Application.MessageBox(PChar('La sucursal seleccionada há sido Reactivada'),'Atención',MB_OK+MB_ICONINFORMATION)
-      end
-    end
+      exit;
+
+    if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABMSucursal)) then
+      dm.EKModelo.cancelar_transaccion(Transaccion_ABMSucursal);
+
+    recNo:= ZQ_Sucursal.RecNo;
+    ZQ_Sucursal.Refresh;
+    ZQ_Sucursal.RecNo:= recNo;
   end;
 end;
+
 
 procedure TFABM_Sucursal.FormCreate(Sender: TObject);
 begin
-dm.EKModelo.abrir(ZQ_Sucursal);
+  StaticTxtBaja.Color:= FPrincipal.baja;
+
+  dm.EKModelo.abrir(ZQ_Sucursal);
+  dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
 end;
 
 end.

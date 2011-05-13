@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
   ComCtrls, ImgList, ExtCtrls, jpeg, QPrinters,
-  Grids, DBGrids, EKImageList32, EKVentanas, EKInformacion;
+  Grids, DBGrids, EKImageList32, EKVentanas, EKInformacion, DB;
 
 type
   TFPrincipal = class(TForm)
@@ -103,6 +103,7 @@ type
 
 var
   FPrincipal: TFPrincipal;
+
 
 implementation
 
@@ -268,71 +269,85 @@ begin
   EKVentanas1.Abrir(Sender, TFABMEmpresas, FABMEmpresas);
 end;
 
+
 procedure TFPrincipal.AABM_ArticuloExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_Articulo, FABM_Articulo);
 end;
+
 
 procedure TFPrincipal.AABM_TipoArticuloExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_TipoArticulo, FABM_TipoArticulo);
 end;
 
+
 procedure TFPrincipal.AABM_MarcasExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_Marcas, FABM_Marcas);
 end;
+
 
 procedure TFPrincipal.AABM_ArticuloMedidaExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_ArticuloMedida, FABM_ArticuloMedida);
 end;
 
+
 procedure TFPrincipal.AABM_TipoEmpresaExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_TipoEmpresa, FABM_TipoEmpresa);
 end;
+
 
 procedure TFPrincipal.AABM_SucursalExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_Sucursal, FABM_Sucursal);
 end;
 
+
 procedure TFPrincipal.AABM_SucursalPosicionExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_SucursalPosicion, FABM_SucursalPosicion);
 end;
+
 
 procedure TFPrincipal.AABM_ProductoStockExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_ProductoStock, FABM_ProductoStock);
 end;
 
+
 procedure TFPrincipal.AABM_ProductoPosicionExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_ProductoPosicion, FABM_ProductoPosicion);
 end;
+
 
 procedure TFPrincipal.AABM_PersonasExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_Personas, FABM_Personas);
 end;
 
+
 procedure TFPrincipal.AImprimirEtiquetaExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFImprimirEtiquetas, FImprimirEtiquetas);
 end;
+
 
 procedure TFPrincipal.ABandejaMailExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFMailBandeja, FMailBandeja);
 end;
 
+
 procedure TFPrincipal.AConfigMailExecute(Sender: TObject);
 begin
   Application.CreateForm(TFMailConfigurar, FMailConfigurar);
   FMailConfigurar.ShowModal;
 end;
+
 
 procedure TFPrincipal.AEnviarMailExecute(Sender: TObject);
 begin

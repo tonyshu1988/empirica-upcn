@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKBusquedaAvanzada;
+  EKBusquedaAvanzada, EKOrdenarGrilla;
 
 type
   TFABM_Articulo = class(TForm)
@@ -44,6 +44,10 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     Label1: TLabel;
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
+    PBusqueda: TPanel;
+    lblCantidadRegistros: TLabel;
+    StaticTxtBaja: TStaticText;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -95,6 +99,7 @@ begin
     PanelEdicion.Visible:= true;
 
     ZQ_Articulo.Append;
+    ZQ_ArticuloBAJA.AsString:= 'N';
 
     DBEDescripcion.SetFocus;
     GrupoEditando.Enabled := false;
@@ -129,7 +134,7 @@ begin
   if (ZQ_Articulo.IsEmpty) OR (ZQ_ArticuloBAJA.AsString <> 'N') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea dar de baja la Medida seleccionada?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea dar de baja el "Artículo" seleccionado?'), 'ABM Artículo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Articulo]) then
     begin
@@ -148,6 +153,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_Articulo.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
@@ -155,7 +161,7 @@ begin
   if (ZQ_Articulo.IsEmpty) OR (ZQ_ArticuloBAJA.AsString <> 'S') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea reactivar la Medida seleccionado?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea reactivar el "Artículo" seleccionado?'), 'ABM Artículo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Articulo]) then
     begin
@@ -174,6 +180,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_Articulo.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
@@ -182,7 +189,7 @@ begin
 
   if (DBLookupComboBox1.Text = '') then
   begin
-    Application.MessageBox(pchar('El campo Tipo Articulo se encuentra vacío, Verifique'), 'Validación', MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox(pchar('El campo Tipo Artículo se encuentra vacío, Verifique'), 'Validación', MB_OK+MB_ICONINFORMATION);
     DBLookupComboBox1.SetFocus;
     Exit;
   end;
@@ -211,7 +218,9 @@ begin
       Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
       exit;
     end
-  end
+  end;
+
+  dm.mostrarCantidadRegistro(ZQ_Articulo, lblCantidadRegistros);  
 end;
 
 
@@ -230,9 +239,14 @@ end;
 
 procedure TFABM_Articulo.FormCreate(Sender: TObject);
 begin
+  StaticTxtBaja.Color:= FPrincipal.baja;
+
   ZQ_Articulo.Close;
   ZQ_Articulo.open;
+
+  dm.mostrarCantidadRegistro(ZQ_Articulo, lblCantidadRegistros);  
 end;
+
 
 procedure TFABM_Articulo.DBGridArticuloDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -244,9 +258,10 @@ begin
   FPrincipal.PintarFilasGrillasConBajas(DBGridArticulo, ZQ_ArticuloBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
+
 procedure TFABM_Articulo.btnBuscarClick(Sender: TObject);
 begin
-EKBusquedaAvanzada1.Buscar;
+  EKBusquedaAvanzada1.Buscar;
 end;
 
 end.

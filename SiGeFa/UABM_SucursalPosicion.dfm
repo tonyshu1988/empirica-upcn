@@ -1,6 +1,6 @@
 object FABM_SucursalPosicion: TFABM_SucursalPosicion
-  Left = 202
-  Top = 124
+  Left = 285
+  Top = 185
   Width = 1024
   Height = 646
   Caption = 'ABM Sucursal Posicion'
@@ -25,14 +25,15 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     Width = 1008
     Height = 537
     Align = alClient
+    BorderWidth = 5
     TabOrder = 0
     object DBGridPosicionSucursal: TDBGrid
-      Left = 1
-      Top = 1
-      Width = 1006
-      Height = 429
+      Left = 6
+      Top = 6
+      Width = 996
+      Height = 419
       Align = alClient
-      Color = 16112578
+      Color = 14606012
       DataSource = DS_PosicionSucursal
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
@@ -46,37 +47,46 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         item
           Expanded = False
           FieldName = 'sucursal'
-          Title.Caption = 'SUCURSAL'
+          Title.Alignment = taCenter
+          Title.Caption = 'Sucursal'
           Width = 272
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'SECCION'
+          Title.Alignment = taCenter
+          Title.Caption = 'Secci'#243'n'
           Width = 226
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'SECTOR'
+          Title.Alignment = taCenter
+          Title.Caption = 'Sector'
           Width = 219
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'FILA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fila'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'COLUMNA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Columna'
           Visible = True
         end>
     end
     object PanelEdicion: TPanel
-      Left = 1
-      Top = 430
-      Width = 1006
+      Left = 6
+      Top = 425
+      Width = 996
       Height = 106
       Align = alBottom
       BevelOuter = bvNone
@@ -253,20 +263,21 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     ParentShowHint = False
     ShowHint = False
     TabOrder = 5
-    object LabelRegistros: TLabel
-      Left = 11
-      Top = 3
-      Width = 72
-      Height = 14
-      Caption = '                  '
+    object lblCantidadRegistros: TLabel
+      Left = 1
+      Top = 1
+      Width = 134
+      Height = 17
+      Align = alLeft
+      Caption = 'lblCantidadRegistros'
       Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
+      Font.Color = clNavy
+      Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
     end
-    object StaticText3: TStaticText
+    object StaticTxtBaja: TStaticText
       Left = 898
       Top = 1
       Width = 109
@@ -891,7 +902,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   end
   object DS_PosicionSucursal: TDataSource
     DataSet = ZQ_PosicionSucursal
-    Left = 512
+    Left = 448
     Top = 120
   end
   object ZQ_Sucursal: TZQuery
@@ -944,7 +955,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   end
   object DS_Sucursal: TDataSource
     DataSet = ZQ_Sucursal
-    Left = 512
+    Left = 448
     Top = 208
   end
   object EKBusquedaAvanzada1: TEKBusquedaAvanzada
@@ -1036,5 +1047,13 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     CampoClave = 'id_sucursal'
     Left = 256
     Top = 160
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridPosicionSucursal
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    Left = 256
+    Top = 211
   end
 end

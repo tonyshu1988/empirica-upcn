@@ -1,6 +1,6 @@
 object FABM_Sucursal: TFABM_Sucursal
-  Left = 205
-  Top = 169
+  Left = 357
+  Top = 282
   Width = 870
   Height = 500
   Caption = 'ABM Sucursal'
@@ -24,14 +24,16 @@ object FABM_Sucursal: TFABM_Sucursal
     Width = 854
     Height = 391
     Align = alClient
+    BevelOuter = bvNone
+    BorderWidth = 5
     TabOrder = 0
     object DBGridSucursal: TDBGrid
-      Left = 1
-      Top = 1
-      Width = 852
-      Height = 223
+      Left = 5
+      Top = 5
+      Width = 844
+      Height = 215
       Align = alClient
-      Color = 16112578
+      Color = 14606012
       DataSource = DS_Sucursal
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
@@ -45,44 +47,55 @@ object FABM_Sucursal: TFABM_Sucursal
         item
           Expanded = False
           FieldName = 'NOMBRE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nombre'
           Width = 318
           Visible = True
         end
         item
           Expanded = False
+          FieldName = 'DIRECCION'
+          Title.Alignment = taCenter
+          Title.Caption = 'Direcci'#243'n'
+          Width = 198
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LOCALIDAD'
+          Title.Alignment = taCenter
+          Title.Caption = 'Localidad'
+          Width = 98
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CODIGO_POSTAL'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cod. Postal'
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'TELEFONO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tel'#233'fono'
           Width = 234
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'EMAIL'
+          Title.Alignment = taCenter
+          Title.Caption = 'eMail'
           Width = 192
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DIRECCION'
-          Width = 198
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CODIGO_POSTAL'
-          Title.Caption = 'COD.POSTAL'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'LOCALIDAD'
-          Width = 98
           Visible = True
         end>
     end
     object PanelEdicion: TPanel
-      Left = 1
-      Top = 224
-      Width = 852
+      Left = 5
+      Top = 220
+      Width = 844
       Height = 166
       Align = alBottom
       BevelOuter = bvNone
@@ -161,9 +174,9 @@ object FABM_Sucursal: TFABM_Sucursal
       object Label6: TLabel
         Left = 28
         Top = 139
-        Width = 36
+        Width = 34
         Height = 13
-        Caption = 'Email:'
+        Caption = 'eMail:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -278,13 +291,13 @@ object FABM_Sucursal: TFABM_Sucursal
     ParentShowHint = False
     ShowHint = False
     TabOrder = 5
-    object Label16: TLabel
+    object lblCantidadRegistros: TLabel
       Left = 1
       Top = 1
-      Width = 132
+      Width = 134
       Height = 17
       Align = alLeft
-      Caption = '                                 '
+      Caption = 'lblCantidadRegistros'
       Font.Charset = ANSI_CHARSET
       Font.Color = clNavy
       Font.Height = -11
@@ -292,7 +305,7 @@ object FABM_Sucursal: TFABM_Sucursal
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
     end
-    object StaticText3: TStaticText
+    object StaticTxtBaja: TStaticText
       Left = 744
       Top = 1
       Width = 109

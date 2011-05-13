@@ -1,6 +1,6 @@
 object FABM_Marcas: TFABM_Marcas
-  Left = 270
-  Top = 198
+  Left = 314
+  Top = 244
   Width = 870
   Height = 500
   Caption = 'ABM Marcas'
@@ -20,17 +20,17 @@ object FABM_Marcas: TFABM_Marcas
   TextHeight = 13
   object PanelFondo: TPanel
     Left = 0
-    Top = 0
-    Width = 862
-    Height = 416
+    Top = 19
+    Width = 854
+    Height = 391
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 862
-      Height = 416
+      Width = 854
+      Height = 391
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -44,10 +44,10 @@ object FABM_Marcas: TFABM_Marcas
       object DBGridMarca: TDBGrid
         Left = 5
         Top = 5
-        Width = 852
-        Height = 406
+        Width = 844
+        Height = 348
         Align = alClient
-        Color = 16112578
+        Color = 14606012
         DataSource = DS_Marcas
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
@@ -61,16 +61,95 @@ object FABM_Marcas: TFABM_Marcas
           item
             Expanded = False
             FieldName = 'NOMBRE_MARCA'
-            Title.Caption = 'MARCA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Marca'
             Visible = True
           end>
       end
+      object PanelEdicion: TPanel
+        Left = 5
+        Top = 353
+        Width = 844
+        Height = 33
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 1
+        Visible = False
+        object Label1: TLabel
+          Left = 6
+          Top = 11
+          Width = 39
+          Height = 13
+          Caption = 'Marca:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object DBENombre: TDBEdit
+          Left = 51
+          Top = 7
+          Width = 731
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'NOMBRE_MARCA'
+          DataSource = DS_Marcas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+    end
+  end
+  object PBusqueda: TPanel
+    Left = 0
+    Top = 0
+    Width = 854
+    Height = 19
+    Align = alTop
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 5
+    object lblCantidadRegistros: TLabel
+      Left = 1
+      Top = 1
+      Width = 134
+      Height = 17
+      Align = alLeft
+      Caption = 'lblCantidadRegistros'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+    end
+    object StaticTxtBaja: TStaticText
+      Left = 744
+      Top = 1
+      Width = 109
+      Height = 17
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'Dado de Baja'
+      Color = 6974207
+      ParentColor = False
+      TabOrder = 0
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -630,7 +709,8 @@ object FABM_Marcas: TFABM_Marcas
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from marca')
+      'from marca'
+      'order by NOMBRE_MARCA')
     Params = <>
     Left = 48
     Top = 72
@@ -650,5 +730,13 @@ object FABM_Marcas: TFABM_Marcas
     DataSet = ZQ_Marcas
     Left = 48
     Top = 128
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridMarca
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    Left = 48
+    Top = 187
   end
 end

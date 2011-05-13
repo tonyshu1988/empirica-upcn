@@ -77,8 +77,8 @@ type
     ZQ_EmpresaID_EMPRESA: TIntegerField;
     ZQ_EmpresaID_TIPO_EMPRESA: TIntegerField;
     PBusqueda: TPanel;
-    Label16: TLabel;
-    StaticText3: TStaticText;
+    lblResultadoBusqueda: TLabel;
+    StaticTxtBaja: TStaticText;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     PopupMenuContactos: TPopupMenu;
     AgregarContacto1: TMenuItem;
@@ -220,16 +220,16 @@ uses UDM, UPrincipal, UMailEnviar;
 
 function TFABMEmpresas.validarCampos():boolean;
 begin
-   result := true;
+ result := true;
 
-   if (trim(ZQ_EmpresaNOMBRE.AsString) = '') then
-    begin
-      Application.MessageBox('El campo "Nombre Empresa" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-      PageControlEdicion.ActivePageIndex:= 0;
-      dbNombre.SetFocus;
-      result := false;
-      exit;
-    end;
+ if (trim(ZQ_EmpresaNOMBRE.AsString) = '') then
+  begin
+    Application.MessageBox('El campo "Nombre Empresa" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    PageControlEdicion.ActivePageIndex:= 0;
+    dbNombre.SetFocus;
+    result := false;
+    exit;
+  end;
 end;
 
 
@@ -251,6 +251,7 @@ begin
   end;
 end;
 
+
 procedure TFABMEmpresas.BtModificarClick(Sender: TObject);
 begin
   if (ZQ_Empresa.IsEmpty) or (ZQ_EmpresaBAJA.AsString = 'S') then
@@ -267,6 +268,7 @@ begin
     PanelEdicion.Enabled := true;
   end;
 end;
+
 
 procedure TFABMEmpresas.BtGuardarClick(Sender: TObject);
 var
@@ -290,6 +292,7 @@ begin
     end;
   end;
 end;
+
 
 procedure TFABMEmpresas.BtCancelarClick(Sender: TObject);
 begin
@@ -316,10 +319,12 @@ begin
   PanelEdicion.Enabled := false;
 end;
 
+
 procedure TFABMEmpresas.btsalirClick(Sender: TObject);
 begin
-Close;
+  Close;
 end;
+
 
 procedure TFABMEmpresas.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
@@ -327,53 +332,66 @@ begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABMEmpresas);
 end;
 
+
 procedure TFABMEmpresas.btBuscarClick(Sender: TObject);
 begin
-EKBusquedaAvanzadaEmpresas.Buscar;
+  EKBusquedaAvanzadaEmpresas.Buscar;
 end;
+
 
 procedure TFABMEmpresas.btBajaClick(Sender: TObject);
+var
+  recNo: integer;
 begin
-  if  not(ZQ_Empresa.IsEmpty) then
+  if (ZQ_Empresa.IsEmpty) OR (ZQ_EmpresaBAJA.AsString <> 'N') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea dar de baja la "Empresa" seleccionado?'), 'ABM Empresas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if (ZQ_EmpresaBAJA.AsString='S') then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa]) then
     begin
-      Application.MessageBox(PChar('La empresa seleccionada ya fue dada de baja'),'Baja Empresa',MB_OK+MB_ICONWARNING);
+      ZQ_Empresa.Edit;
+      ZQ_EmpresaBAJA.AsString:='S';
     end
     else
-    begin
-      if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,[ZQ_Empresa]) then
-      begin
-        ZQ_Empresa.Edit;
-        ZQ_EmpresaBAJA.AsString:='S';
-        if dm.EKModelo.finalizar_transaccion(transaccion_ABMEmpresas) then
-          Application.MessageBox(PChar('La empresa seleccionada há sido dado de Baja'),'Atención',MB_OK+MB_ICONINFORMATION)
-      end
-    end
-  end;
+      exit;
 
+    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMEmpresas)) then
+      dm.EKModelo.cancelar_transaccion(transaccion_ABMEmpresas);
+
+    recNo:= ZQ_Empresa.RecNo;
+    ZQ_Empresa.Refresh;
+    ZQ_Empresa.RecNo:= recNo;
+  end;
 end;
+
 
 procedure TFABMEmpresas.btReactivarClick(Sender: TObject);
+var
+  recNo: integer;
 begin
-  if not(ZQ_Empresa.IsEmpty) then
+  if (ZQ_Empresa.IsEmpty) OR (ZQ_EmpresaBAJA.AsString <> 'S') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea reactivar la "Empresa" seleccionado?'), 'ABM Empresas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if (ZQ_EmpresaBAJA.AsString='N') then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa]) then
     begin
-      Application.MessageBox(PChar('La empresa seleccionada no figura como dado de Baja'),'Reactivar Empresa',MB_OK+MB_ICONWARNING);
+      ZQ_Empresa.Edit;
+      ZQ_EmpresaBAJA.AsString:='N';
     end
     else
-    begin
-      if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,[ZQ_Empresa]) then
-      begin
-        ZQ_Empresa.Edit;
-        ZQ_EmpresaBAJA.AsString:='N';
-        if dm.EKModelo.finalizar_transaccion(transaccion_ABMEmpresas) then
-          Application.MessageBox(PChar('La empresa seleccionada há sido Reactivada'),'Atención',MB_OK+MB_ICONINFORMATION)
-      end
-    end
+      exit;
+
+    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMEmpresas)) then
+      dm.EKModelo.cancelar_transaccion(transaccion_ABMEmpresas);
+
+    recNo:= ZQ_Empresa.RecNo;
+    ZQ_Empresa.Refresh;
+    ZQ_Empresa.RecNo:= recNo;
   end;
 end;
+
 
 procedure TFABMEmpresas.DBGridEmpresasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -385,11 +403,15 @@ begin
   FPrincipal.PintarFilasGrillasConBajas(DBGridEmpresas, ZQ_EmpresaBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
+
 procedure TFABMEmpresas.FormCreate(Sender: TObject);
 begin
-EKBusquedaAvanzadaEmpresas.Abrir;
-PageControlEdicion.TabIndex:=0;
+  StaticTxtBaja.Color:= FPrincipal.baja;
+
+  EKBusquedaAvanzadaEmpresas.Abrir;
+  PageControlEdicion.TabIndex:=0;
 end;
+
 
 procedure TFABMEmpresas.AgregarContacto1Click(Sender: TObject);
 begin
@@ -399,27 +421,28 @@ begin
     exit;
   end;
 
-    ZQ_PersonaRelacionContacto.Append;
-    contacto :=1;
+  ZQ_PersonaRelacionContacto.Append;
+  contacto :=1;
 
-    if not Assigned(vsel) then
-      vsel := TFBuscarPersona.Create(nil);
-    vsel.OnSeleccionar := OnSelPersona;
-    vsel.ShowModal;
+  if not Assigned(vsel) then
+    vsel := TFBuscarPersona.Create(nil);
+  vsel.OnSeleccionar := OnSelPersona;
+  vsel.ShowModal;
 
-    if ZQ_PersonaRelacionContactoID_PERSONA.AsInteger = 0 then
-    begin
-       Application.MessageBox(PChar('No se ha seleccionado ningun Contacto'),'Atención',MB_OK+MB_ICONINFORMATION);
-       exit;
-    end;
+  if ZQ_PersonaRelacionContactoID_PERSONA.AsInteger = 0 then
+  begin
+     Application.MessageBox(PChar('No se ha seleccionado ningun Contacto'),'Atención',MB_OK+MB_ICONINFORMATION);
+     exit;
+  end;
 
-    ZQ_PersonaRelacionContactoID_RELACION.AsInteger := 4;
-    ZQ_PersonaRelacionContactoID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
+  ZQ_PersonaRelacionContactoID_RELACION.AsInteger := 4;
+  ZQ_PersonaRelacionContactoID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
 end;
+
 
 procedure TFABMEmpresas.OnSelPersona;
 begin
-ZQ_Personas.Refresh;
+  ZQ_Personas.Refresh;
   if contacto = 1 then
     ZQ_PersonaRelacionContactoID_PERSONA.AsInteger := vsel.ZQ_PersonasID_PERSONA.AsInteger
   else
@@ -428,16 +451,18 @@ ZQ_Personas.Refresh;
   vsel.Close;
 end;
 
+
 procedure TFABMEmpresas.ZQ_EmpresaAfterScroll(DataSet: TDataSet);
 begin
-ZQ_PersonaRelacionContacto.Close;
-ZQ_PersonaRelacionContacto.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
-ZQ_PersonaRelacionContacto.Open;
+  ZQ_PersonaRelacionContacto.Close;
+  ZQ_PersonaRelacionContacto.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
+  ZQ_PersonaRelacionContacto.Open;
 
-ZQ_PersonaRelacionViajante.Close;
-ZQ_PersonaRelacionViajante.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
-ZQ_PersonaRelacionViajante.Open;
+  ZQ_PersonaRelacionViajante.Close;
+  ZQ_PersonaRelacionViajante.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
+  ZQ_PersonaRelacionViajante.Open;
 end;
+
 
 procedure TFABMEmpresas.AgregarViajante1Click(Sender: TObject);
 begin
@@ -447,23 +472,24 @@ begin
     exit;
   end;
 
-    ZQ_PersonaRelacionViajante.Append;
-    contacto :=0;
+  ZQ_PersonaRelacionViajante.Append;
+  contacto :=0;
 
-    if not Assigned(vsel) then
-      vsel := TFBuscarPersona.Create(nil);
-    vsel.OnSeleccionar := OnSelPersona;
-    vsel.ShowModal;
+  if not Assigned(vsel) then
+    vsel := TFBuscarPersona.Create(nil);
+  vsel.OnSeleccionar := OnSelPersona;
+  vsel.ShowModal;
 
-    if ZQ_PersonaRelacionViajanteID_PERSONA.AsInteger = 0 then
-    begin
-       Application.MessageBox(PChar('No se ha seleccionado ningun viajante'),'Atención',MB_OK+MB_ICONINFORMATION);
-       exit;
-    end;
+  if ZQ_PersonaRelacionViajanteID_PERSONA.AsInteger = 0 then
+  begin
+     Application.MessageBox(PChar('No se ha seleccionado ningun viajante'),'Atención',MB_OK+MB_ICONINFORMATION);
+     exit;
+  end;
 
-    ZQ_PersonaRelacionViajanteID_RELACION.AsInteger := 3;
-    ZQ_PersonaRelacionViajanteID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
+  ZQ_PersonaRelacionViajanteID_RELACION.AsInteger := 3;
+  ZQ_PersonaRelacionViajanteID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
 end;
+
 
 procedure TFABMEmpresas.QuitarContacto1Click(Sender: TObject);
 begin
@@ -473,6 +499,7 @@ begin
   ZQ_PersonaRelacionContacto.Delete;
 end;
 
+
 procedure TFABMEmpresas.QuitarViajante1Click(Sender: TObject);
 begin
   if ZQ_PersonaRelacionViajante.IsEmpty then
@@ -481,9 +508,10 @@ begin
   ZQ_PersonaRelacionViajante.Delete;
 end;
 
+
 procedure TFABMEmpresas.BtSkypeClick(Sender: TObject);
 var
-Telefono : string;
+  Telefono : string;
 begin
   case PageControlEdicion.TabIndex of
   0: begin
@@ -545,20 +573,19 @@ begin
         Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
       end;
   end;
-
 end;
+
 
 procedure TFABMEmpresas.llamar1Click(Sender: TObject);
 var
-telefono : string;
+  telefono : string;
 begin
-BtSkype.Click;
-
+  BtSkype.Click;
 end;
+
 
 procedure TFABMEmpresas.btEnviarMailClick(Sender: TObject);
 begin
-
   Application.CreateForm(TFMailEnviar, FMailEnviar);
 
   case PageControlEdicion.TabIndex of
@@ -612,13 +639,12 @@ begin
   end;
 
   FMailEnviar.ShowModal;
-
-
 end;
+
 
 procedure TFABMEmpresas.EnviarunMail1Click(Sender: TObject);
 begin
-btEnviarMail.Click;
+  btEnviarMail.Click;
 end;
 
 end.

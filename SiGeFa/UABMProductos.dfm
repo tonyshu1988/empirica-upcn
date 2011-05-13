@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 171
-  Top = 58
+  Left = 256
+  Top = 177
   Width = 999
   Height = 680
   Caption = 'FABMProductos'
@@ -36,9 +36,9 @@ object FABMProductos: TFABMProductos
     end
     object Grilla: TEKDBGrid
       Left = 1
-      Top = 17
+      Top = 20
       Width = 981
-      Height = 331
+      Height = 328
       Align = alClient
       Color = 14606012
       DataSource = DS_ProductoCabecera
@@ -114,7 +114,7 @@ object FABMProductos: TFABMProductos
       Top = 348
       Width = 981
       Height = 241
-      ActivePage = tabDetalle
+      ActivePage = tabCabecera
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -855,42 +855,36 @@ object FABMProductos: TFABMProductos
       Left = 1
       Top = 1
       Width = 981
-      Height = 16
+      Height = 19
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
       object lblResultadoBusqueda: TLabel
         Left = 0
         Top = 0
-        Width = 4
-        Height = 16
+        Width = 144
+        Height = 19
         Align = alLeft
-        Alignment = taCenter
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Caption = 'lblResultadoBusqueda'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
         Font.Height = -11
         Font.Name = 'Verdana'
-        Font.Style = [fsBold]
+        Font.Style = [fsBold, fsItalic]
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 896
+        Left = 872
         Top = 0
-        Width = 85
-        Height = 16
+        Width = 109
+        Height = 19
         Align = alRight
         Alignment = taCenter
         AutoSize = False
-        BorderStyle = sbsSingle
-        Caption = 'Baja'
-        Color = 8421631
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
+        BorderStyle = sbsSunken
+        Caption = 'Dado de Baja'
+        Color = 6974207
         ParentColor = False
-        ParentFont = False
         TabOrder = 0
       end
     end

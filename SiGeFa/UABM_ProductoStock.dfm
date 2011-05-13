@@ -1,8 +1,8 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 326
-  Top = 187
+  Left = 364
+  Top = 259
   Width = 870
-  Height = 500
+  Height = 507
   Caption = 'ABM Producto Stock'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
     Left = 0
     Top = 0
     Width = 854
-    Height = 410
+    Height = 417
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -32,7 +32,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       Left = 5
       Top = 5
       Width = 844
-      Height = 400
+      Height = 407
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
