@@ -135,7 +135,7 @@ begin
   reenviando:= true;
   id_mensaje:= id_mail;
 
-  ZQ_Cuentas.Filtered:= false; //filtro para que muestre la cuenta principal
+  ZQ_Cuentas.Filtered:= false; //desactivo el filtro para que muestre la cuenta principal
   ZQ_Cuentas.Locate('ID_CUENTA', VarArrayOf([inttostr(id_cuenta)]), []);
 //  ShowMessage(IntToStr(ZQ_Cuentas.RecordCount)+' '+ZQ_CuentasEMAIL.AsString);
 
@@ -354,7 +354,7 @@ begin
 
   enviandoMail:= true;
   StatusBar1.Panels[0].text:= 'Enviando Mensaje...';
-  FPrincipal.BringToFront;
+  //FPrincipal.BringToFront;
   Application.ProcessMessages;
   if enviarMensaje then
   begin
@@ -407,19 +407,28 @@ procedure TFMailEnviar.guardarMail();
 var
   indice: integer;
 begin
-  if reenviando then //si es el reenvio de un mail salgo
-    exit;
-
   try
     if dm.EKModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail, ZQ_Adjunto]) then
     begin
-      ZP_IDMail.Close;
-      ZP_IDMail.Open;
-      id_mensaje:= ZP_IDMailID.AsInteger;
-      ZP_IDMail.Close;
+      if not reenviando then //si se esta enviando por primera vez
+      begin
+        ZP_IDMail.Close;
+        ZP_IDMail.Open;
+        id_mensaje:= ZP_IDMailID.AsInteger;
+        ZP_IDMail.Close;
 
-      ZQ_Mail.Append;
-      ZQ_MailID_MAIL_MENSAJE.AsInteger:= id_mensaje;
+        ZQ_Mail.Append;
+        ZQ_MailID_MAIL_MENSAJE.AsInteger:= id_mensaje;
+      end
+      else //si se esta reenviando
+      begin
+        ZQ_Mail.Close;
+        ZQ_Mail.ParamByName('id_mensaje').AsInteger:= id_mensaje;
+        ZQ_Mail.Open;
+
+        ZQ_Mail.Edit;
+      end;
+
       ZQ_MailID_CUENTA.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
       ZQ_MailCABECERA_PARA.AsString:= EditPara.Text;
       ZQ_MailCABECERA_CC.AsString:= EditCC.Text;
