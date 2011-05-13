@@ -201,6 +201,9 @@ end;
 
 procedure TFImprimirEtiquetas.btnEliminarLineaClick(Sender: TObject);
 begin
+  if ZQ_Etiquetas.IsEmpty then
+    exit;
+    
   ZQ_Etiquetas.Delete;
 end;
 

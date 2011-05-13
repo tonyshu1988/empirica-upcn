@@ -55,8 +55,6 @@ type
     DBEdit7: TDBEdit;
     edDescripcion: TDBMemo;
     PanelCabecera: TPanel;
-    lblResultadoBusqueda: TLabel;
-    StaticTxtBaja: TStaticText;
     EKBuscar: TEKBusquedaAvanzada;
     EKOrdenar: TEKOrdenarGrilla;
     ZQ_DetalleProducto: TZQuery;
@@ -138,6 +136,8 @@ type
     buscarImagen: TOpenPictureDialog;
     ZQ_DetalleProductoLLEVAR_STOCK: TStringField;
     DBCheckLllevarStock: TDBCheckBox;
+    StaticTxtBaja: TStaticText;
+    lblResultadoBusqueda: TLabel;
     procedure btBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -207,6 +207,7 @@ end;
 
 procedure TFABMProductos.FormCreate(Sender: TObject);
 begin
+  StaticTxtBaja.Color:= FPrincipal.baja;
   dm.EKModelo.abrir(ZQ_Articulo);
   dm.EKModelo.abrir(ZQ_Marca);
   dm.EKModelo.abrir(ZQ_MedidaArticulo);

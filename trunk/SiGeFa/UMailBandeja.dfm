@@ -45,7 +45,7 @@ object FMailBandeja: TFMailBandeja
         Top = 0
         Width = 832
         Height = 501
-        ActivePage = TabBandejaSalida
+        ActivePage = TabBandejaEntrada
         Align = alClient
         TabOrder = 0
         object TabBandejaSalida: TTabSheet
@@ -64,7 +64,7 @@ object FMailBandeja: TFMailBandeja
               Width = 822
               Height = 168
               Align = alClient
-              Color = 16112578
+              Color = 14606012
               DataSource = DS_MailSalida
               Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
               PopupMenu = PopupMenu2
@@ -332,7 +332,7 @@ object FMailBandeja: TFMailBandeja
               Width = 822
               Height = 168
               Align = alClient
-              Color = 16112578
+              Color = 14606012
               Columns = <
                 item
                   Caption = ' '
@@ -584,7 +584,7 @@ object FMailBandeja: TFMailBandeja
     Width = 832
     Height = 36
     Align = alTop
-    TabOrder = 4
+    TabOrder = 3
     object Label6: TLabel
       Left = 96
       Top = 11

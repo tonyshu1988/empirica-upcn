@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKListadoSQL, EKBusquedaAvanzada;
+  EKListadoSQL, EKBusquedaAvanzada, EKOrdenarGrilla;
 
 type
   TFABM_SucursalPosicion = class(TForm)
@@ -62,8 +62,9 @@ type
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     EKListadoSucursal: TEKListadoSQL;
     PBusqueda: TPanel;
-    StaticText3: TStaticText;
-    LabelRegistros: TLabel;
+    StaticTxtBaja: TStaticText;
+    lblCantidadRegistros: TLabel;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -101,7 +102,7 @@ uses UDM, UPrincipal;
 
 procedure TFABM_SucursalPosicion.btnNuevoClick(Sender: TObject);
 begin
-   if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc, [ZQ_PosicionSucursal]) then
+  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc, [ZQ_PosicionSucursal]) then
   begin
     DBGridPosicionSucursal.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -114,8 +115,12 @@ begin
   end;
 end;
 
+
 procedure TFABM_SucursalPosicion.btnModificarClick(Sender: TObject);
 begin
+  if ZQ_PosicionSucursal.IsEmpty then
+    exit;
+
   if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc, [ZQ_PosicionSucursal]) then
   begin
     DBGridPosicionSucursal.Enabled := false;
@@ -128,74 +133,94 @@ begin
   end;
 end;
 
+
 procedure TFABM_SucursalPosicion.btnGuardarClick(Sender: TObject);
 begin
-    if DM.EKModelo.finalizar_transaccion(Transaccion_ABMPosicionSuc) then
-    begin
-      DBGridPosicionSucursal.Enabled:=true;
-      GrupoEditando.Enabled:=true;
-      GrupoGuardarCancelar.Enabled:=false;
-      DBGridPosicionSucursal.SetFocus;
-      PanelEdicion.Visible := false;
-    end;
+  if DM.EKModelo.finalizar_transaccion(Transaccion_ABMPosicionSuc) then
+  begin
+    DBGridPosicionSucursal.Enabled:=true;
+    GrupoEditando.Enabled:=true;
+    GrupoGuardarCancelar.Enabled:=false;
+    DBGridPosicionSucursal.SetFocus;
+    PanelEdicion.Visible := false;
+  end;
+
+  dm.mostrarCantidadRegistro(ZQ_PosicionSucursal, lblCantidadRegistros);  
 end;
+
 
 procedure TFABM_SucursalPosicion.btnCancelarClick(Sender: TObject);
 begin
-  DM.EKModelo.cancelar_transaccion(Transaccion_ABMPosicionSuc);
-  DBGridPosicionSucursal.Enabled:=true;
-  GrupoEditando.Enabled:=true;
-  GrupoGuardarCancelar.Enabled:=false;
-  DBGridPosicionSucursal.SetFocus;
-  PanelEdicion.Visible := false;
+  if dm.EKModelo.cancelar_transaccion(Transaccion_ABMPosicionSuc) then
+  begin
+    DBGridPosicionSucursal.Enabled:=true;
+    DBGridPosicionSucursal.SetFocus;
+    GrupoEditando.Enabled:=true;
+    GrupoGuardarCancelar.Enabled:=false;
+    PanelEdicion.Visible := false;
+  end;
 end;
+
 
 procedure TFABM_SucursalPosicion.btnSalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFABM_SucursalPosicion.btnBajaClick(Sender: TObject);
+var
+  recNo: integer;
 begin
-  if  not(ZQ_PosicionSucursal.IsEmpty) then
+  if (ZQ_PosicionSucursal.IsEmpty) OR (ZQ_PosicionSucursalBAJA.AsString <> 'N') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea dar de baja la "Posición Sucursal" seleccionada?'), 'ABM Posición Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if (ZQ_PosicionSucursalBAJA.AsString='S') then
+    if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc, [ZQ_PosicionSucursal]) then
     begin
-      Application.MessageBox(PChar('La Posicion seleccionada ya fue dado de baja'),'Baja Empresa',MB_OK+MB_ICONWARNING);
+      ZQ_PosicionSucursal.Edit;
+      ZQ_PosicionSucursalBAJA.AsString:='S';
     end
     else
-    begin
-      if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc,[ZQ_PosicionSucursal]) then
-      begin
-        ZQ_PosicionSucursal.Edit;
-        ZQ_PosicionSucursalBAJA.AsString:='S';
-        if dm.EKModelo.finalizar_transaccion(Transaccion_ABMPosicionSuc) then
-          Application.MessageBox(PChar('La Posicion seleccionada há sido dada de Baja'),'Atención',MB_OK+MB_ICONINFORMATION)
-      end
-    end
+      exit;
+
+    if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABMPosicionSuc)) then
+      dm.EKModelo.cancelar_transaccion(Transaccion_ABMPosicionSuc);
+
+    recNo:= ZQ_PosicionSucursal.RecNo;
+    ZQ_PosicionSucursal.Refresh;
+    ZQ_PosicionSucursal.RecNo:= recNo;
   end;
 end;
 
+
 procedure TFABM_SucursalPosicion.btnReactivarClick(Sender: TObject);
+var
+  recNo: integer;
 begin
-  if not(ZQ_PosicionSucursal.IsEmpty) then
+  if (ZQ_PosicionSucursal.IsEmpty) OR (ZQ_PosicionSucursalBAJA.AsString <> 'S') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea reactivar la "Posición Sucursal" seleccionada?'), 'ABM Posición Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if (ZQ_PosicionSucursalBAJA.AsString='N') then
+    if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc, [ZQ_PosicionSucursal]) then
     begin
-      Application.MessageBox(PChar('La Posicion seleccionada no figura como dada de Baja'),'Reactivar Empresa',MB_OK+MB_ICONWARNING);
+      ZQ_PosicionSucursal.Edit;
+      ZQ_PosicionSucursalBAJA.AsString:='N';
     end
     else
-    begin
-      if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc,[ZQ_PosicionSucursal]) then
-      begin
-        ZQ_PosicionSucursal.Edit;
-        ZQ_PosicionSucursalBAJA.AsString:='N';
-        if dm.EKModelo.finalizar_transaccion(Transaccion_ABMPosicionSuc) then
-          Application.MessageBox(PChar('La Posicion seleccionada há sido Reactivada'),'Atención',MB_OK+MB_ICONINFORMATION)
-      end
-    end
+      exit;
+
+    if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABMPosicionSuc)) then
+      dm.EKModelo.cancelar_transaccion(Transaccion_ABMPosicionSuc);
+
+    recNo:= ZQ_PosicionSucursal.RecNo;
+    ZQ_PosicionSucursal.Refresh;
+    ZQ_PosicionSucursal.RecNo:= recNo;
   end;
 end;
+
 
 procedure TFABM_SucursalPosicion.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
@@ -203,16 +228,18 @@ begin
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABMPosicionSuc);
 end;
 
+
 procedure TFABM_SucursalPosicion.DBLookupCBoxSucKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
-    if key = 112 then
-      if EKListadoSucursal.Buscar then
-      begin
-        ZQ_PosicionSucursal.Edit;
-        ZQ_PosicionSucursalID_SUCURSAL.AsInteger :=  StrToInt(EKListadoSucursal.Resultado);
-      end;
+  if key = 112 then
+    if EKListadoSucursal.Buscar then
+    begin
+      ZQ_PosicionSucursal.Edit;
+      ZQ_PosicionSucursalID_SUCURSAL.AsInteger :=  StrToInt(EKListadoSucursal.Resultado);
+    end;
 end;
+
 
 procedure TFABM_SucursalPosicion.DBGridPosicionSucursalDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -224,20 +251,26 @@ begin
   FPrincipal.PintarFilasGrillasConBajas(DBGridPosicionSucursal, ZQ_PosicionSucursalBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
+
 procedure TFABM_SucursalPosicion.btnBuscarClick(Sender: TObject);
 begin
-EKBusquedaAvanzada1.Buscar;
-LabelRegistros.Caption := 'Registros: '+IntToStr(ZQ_PosicionSucursal.RecordCount);
+  EKBusquedaAvanzada1.Buscar;
 end;
+
 
 procedure TFABM_SucursalPosicion.FormActivate(Sender: TObject);
 begin
-ZQ_Sucursal.Refresh;
+  ZQ_Sucursal.Refresh;
 end;
+
 
 procedure TFABM_SucursalPosicion.FormCreate(Sender: TObject);
 begin
-dm.EKModelo.abrir(ZQ_Sucursal);
+  StaticTxtBaja.Color:= FPrincipal.baja;
+
+  dm.EKModelo.abrir(ZQ_Sucursal);
+  EKBusquedaAvanzada1.Abrir;
+  dm.mostrarCantidadRegistro(ZQ_PosicionSucursal, lblCantidadRegistros);
 end;
 
 end.

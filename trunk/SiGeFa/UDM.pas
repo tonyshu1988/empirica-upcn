@@ -9,7 +9,7 @@ uses
   mxNativeExcel, IdBaseComponent, IdComponent, IdTCPConnection,
   IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage, ExtCtrls,
   IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
-  IdSMTPBase, IdExplicitTLSClientServerBase;
+  IdSMTPBase, IdExplicitTLSClientServerBase, StdCtrls;
 
 type
   TDM = class(TDataModule)
@@ -61,6 +61,7 @@ type
     auxCurrencyString: string;
   public
     procedure prepararParaExportar(query: TDataSet; valor: Boolean);
+    procedure mostrarCantidadRegistro(query: TDataSet; var etiqueta: TLabel);
   end;
 
 var
@@ -68,6 +69,7 @@ var
   SUCURSAL_LOGUEO: integer; //Mantiene el id de la sucursal con la cual me conecte
   enviandoMail: boolean; //TRUE si se esta enviado un mail; FALSE en caso contrario
   sucursales: TEKArrayPermisos; //array de permisos valores que tiene un campo usuario y un campo valor
+
 
 implementation
 
@@ -81,7 +83,7 @@ var
   i: integer;
 begin
   SkinData1.Active:= true;
-  Application.CreateForm(TFPrincipal, FPrincipal);  
+  Application.CreateForm(TFPrincipal, FPrincipal);
 
   auxDecimalSeparator:= DecimalSeparator;
   auxCurrencyDecimals:= CurrencyDecimals;
@@ -265,5 +267,10 @@ begin
   end;
 end;
 
+
+procedure TDM.mostrarCantidadRegistro(query: TDataSet; var etiqueta: TLabel);
+begin
+  etiqueta.Caption:= '    Cantidad de Registros: '+inttostr(query.RecordCount);
+end;
 
 end.

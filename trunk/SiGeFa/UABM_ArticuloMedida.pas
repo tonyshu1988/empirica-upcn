@@ -81,6 +81,12 @@ type
     MedidaArticuloBAJAID_ARTICULO: TIntegerField;
     MedidaArticuloBAJAID_MEDIDA: TIntegerField;
     MedidaArticuloBAJABAJA: TStringField;
+    PBusqueda: TPanel;
+    lblCantidadRegistros: TLabel;
+    StaticTxtBaja: TStaticText;
+    PanelEdicion: TPanel;
+    Label2: TLabel;
+    DBENombre: TDBEdit;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -146,8 +152,12 @@ procedure TFABM_ArticuloMedida.btnNuevoClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMMedida, [ZQ_Medida]) then
   begin
+    DBGridMedidas.Enabled := false;
+    PanelEdicion.Visible:= true;
+
     ZQ_Medida.Append;
-    DBGridMedidas.SetFocus;
+    ZQ_MedidaBAJA.AsString:= 'N';
+    DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -161,8 +171,11 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMMedida, [ZQ_Medida]) then
   begin
+    DBGridMedidas.Enabled := false;
+    PanelEdicion.Visible:= true;
+
     ZQ_Medida.Edit;
-    DBGridMedidas.SetFocus;
+    DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -176,7 +189,7 @@ begin
   if (ZQ_Medida.IsEmpty) OR (ZQ_MedidaBAJA.AsString <> 'N') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea dar de baja la Medida seleccionada?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea dar de baja la "Medida" seleccionada?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABMMedida, [ZQ_Medida, MedidaArticuloBAJA]) then
     begin
@@ -207,6 +220,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_ArticuloMedida.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
@@ -214,7 +228,7 @@ begin
   if (ZQ_Medida.IsEmpty) OR (ZQ_MedidaBAJA.AsString <> 'S') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea reactivar la Medida seleccionado?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea reactivar la "Medida" seleccionado?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABMMedida, [ZQ_Medida, MedidaArticuloBAJA]) then
     begin
@@ -245,15 +259,24 @@ begin
   end;
 end;
 
+
 procedure TFABM_ArticuloMedida.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
+  if (trim(DBENombre.Text) = '') then
+  begin
+    Application.MessageBox('El campo "Medida" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBENombre.SetFocus;
+    exit;
+  end;
+
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMMedida) then
     begin
+      DBGridMedidas.Enabled:= true;    
       DBGridMedidas.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
@@ -266,7 +289,9 @@ begin
       Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
       exit;
     end
-  end
+  end;
+
+  dm.mostrarCantidadRegistro(ZQ_Medida, lblCantidadRegistros);
 end;
 
 
@@ -274,23 +299,29 @@ procedure TFABM_ArticuloMedida.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABMMedida) then
   begin
-    DBGridMedidas.Enabled := true;
+    DBGridMedidas.Enabled:=true;
     DBGridMedidas.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
+    PanelEdicion.Visible := false;
   end;
 end;
 
 
 procedure TFABM_ArticuloMedida.FormCreate(Sender: TObject);
 begin
+  StaticTxtBaja.Color:= FPrincipal.baja;
+
   dm.EKModelo.abrir(ZQ_Medida);
   dm.EKModelo.abrir(ZQ_Articulo);
   CDSArticulo.CreateDataSet;
   CDSMedidas.CreateDataSet;
   PageControlEdicion.TabIndex := 0;
   EKLlenarComboArticulo.CargarCombo;
+
+  dm.mostrarCantidadRegistro(ZQ_Medida, lblCantidadRegistros);   
 end;
+
 
 procedure TFABM_ArticuloMedida.DBGridMedidasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -301,6 +332,7 @@ begin
 
   FPrincipal.PintarFilasGrillasConBajas(DBGridMedidas, ZQ_MedidaBAJA.AsString, Rect, DataCol, Column, State);
 end;
+
 
 procedure TFABM_ArticuloMedida.AgregarArticulo1Click(Sender: TObject);
 begin
@@ -322,11 +354,13 @@ begin
   end;
 end;
 
+
 procedure TFABM_ArticuloMedida.QuitarArticulo1Click(Sender: TObject);
 begin
   if not CDSArticulo.IsEmpty then
     CDSArticulo.Delete;
 end;
+
 
 procedure TFABM_ArticuloMedida.AgregarMedida1Click(Sender: TObject);
 begin
@@ -348,11 +382,13 @@ begin
   end;
 end;
 
+
 procedure TFABM_ArticuloMedida.QuitarMedida1Click(Sender: TObject);
 begin
   if not CDSMedidas.IsEmpty then
     CDSMedidas.Delete;
 end;
+
 
 procedure TFABM_ArticuloMedida.btProcesarClick(Sender: TObject);
 begin
@@ -387,6 +423,7 @@ begin
     DBGridMedida.Enabled := false;
   end;
 end;
+
 
 procedure TFABM_ArticuloMedida.PageControlEdicionChange(Sender: TObject);
 begin
@@ -441,12 +478,14 @@ begin
   end;
 end;
 
+
 procedure TFABM_ArticuloMedida.btCargarDatosClick(Sender: TObject);
 begin
-btCargarDatos.Enabled := false;
-btCancelarCarga.Enabled := true;
-btProcesar.Enabled := true;
+  btCargarDatos.Enabled := false;
+  btCancelarCarga.Enabled := true;
+  btProcesar.Enabled := true;
 end;
+
 
 procedure TFABM_ArticuloMedida.btGuardarCargaClick(Sender: TObject);
 begin
@@ -469,6 +508,7 @@ begin
   end
 end;
 
+
 procedure TFABM_ArticuloMedida.btCancelarCargaClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABMMedida) then
@@ -482,6 +522,7 @@ begin
     CDSMedidas.EmptyDataSet;
   end;
 end;
+
 
 procedure TFABM_ArticuloMedida.AgregarMedida2Click(Sender: TObject);
 begin
@@ -508,6 +549,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_ArticuloMedida.QuitarMedida2Click(Sender: TObject);
 begin
   if ZQ_MedidaArticulo.IsEmpty then
@@ -519,25 +561,27 @@ begin
     if not DM.EKModelo.finalizar_transaccion(transaccion_ABMMedida) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABMMedida);
   end;
-
 end;
+
 
 procedure TFABM_ArticuloMedida.btseleccionarArticuloClick(Sender: TObject);
 begin
-if (EKLlenarComboArticulo.SelectClave = '') then
-exit;
+  if (EKLlenarComboArticulo.SelectClave = '') then
+    exit;
 
-ZQ_MedidaArticulo.Close;
-ZQ_MedidaArticulo.ParamByName('ID_ARTICULO').AsInteger := strtoint(EKLlenarComboArticulo.SelectClave);
-ZQ_MedidaArticulo.Open;
+  ZQ_MedidaArticulo.Close;
+  ZQ_MedidaArticulo.ParamByName('ID_ARTICULO').AsInteger := strtoint(EKLlenarComboArticulo.SelectClave);
+  ZQ_MedidaArticulo.Open;
 
-DBGridMedidaARticulo.Enabled :=  true;
+  DBGridMedidaARticulo.Enabled :=  true;
 end;
+
 
 procedure TFABM_ArticuloMedida.CBArticuloExit(Sender: TObject);
 begin
-DBGridMedidaARticulo.Enabled :=  false;
+  DBGridMedidaARticulo.Enabled :=  false;
 end;
+
 
 procedure TFABM_ArticuloMedida.PageControlEdicionChanging(Sender: TObject;
   var AllowChange: Boolean);
@@ -547,6 +591,7 @@ begin
   else
     AllowChange := true;
 end;
+
 
 procedure TFABM_ArticuloMedida.DBGridMedidaARticuloDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;

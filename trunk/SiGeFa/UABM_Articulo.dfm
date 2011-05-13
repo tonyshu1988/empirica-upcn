@@ -1,9 +1,9 @@
 object FABM_Articulo: TFABM_Articulo
-  Left = 270
-  Top = 198
+  Left = 337
+  Top = 236
   Width = 870
   Height = 500
-  Caption = 'ABM Articulo'
+  Caption = 'ABM Art'#237'culo'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,9 +20,9 @@ object FABM_Articulo: TFABM_Articulo
   TextHeight = 13
   object PanelFondo: TPanel
     Left = 0
-    Top = 0
+    Top = 18
     Width = 854
-    Height = 410
+    Height = 392
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
@@ -34,7 +34,7 @@ object FABM_Articulo: TFABM_Articulo
     TabOrder = 0
     object PanelEdicion: TPanel
       Left = 0
-      Top = 352
+      Top = 334
       Width = 854
       Height = 58
       Align = alBottom
@@ -60,7 +60,7 @@ object FABM_Articulo: TFABM_Articulo
         Top = 8
         Width = 76
         Height = 13
-        Caption = 'Tipo Articulo:'
+        Caption = 'Tipo Art'#237'culo:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -108,7 +108,7 @@ object FABM_Articulo: TFABM_Articulo
       Left = 0
       Top = 0
       Width = 854
-      Height = 352
+      Height = 334
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -123,9 +123,9 @@ object FABM_Articulo: TFABM_Articulo
         Left = 5
         Top = 5
         Width = 844
-        Height = 342
+        Height = 324
         Align = alClient
-        Color = 16112578
+        Color = 14606012
         DataSource = DS_Articulo
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
@@ -138,19 +138,59 @@ object FABM_Articulo: TFABM_Articulo
         Columns = <
           item
             Expanded = False
-            FieldName = 'DESCRIPCION'
-            Title.Caption = 'ARTICULO'
-            Width = 400
+            FieldName = 'TipoArticulo'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tipo Art'#237'culo'
+            Width = 422
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'TipoArticulo'
-            Title.Caption = 'TIPO ARTICULO'
-            Width = 422
+            FieldName = 'DESCRIPCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Descripci'#243'n'
+            Width = 400
             Visible = True
           end>
       end
+    end
+  end
+  object PBusqueda: TPanel
+    Left = 0
+    Top = 0
+    Width = 854
+    Height = 18
+    Align = alTop
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 5
+    object lblCantidadRegistros: TLabel
+      Left = 1
+      Top = 1
+      Width = 134
+      Height = 16
+      Align = alLeft
+      Caption = 'lblCantidadRegistros'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+    end
+    object StaticTxtBaja: TStaticText
+      Left = 744
+      Top = 1
+      Width = 109
+      Height = 16
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'Dado de Baja'
+      Color = 6974207
+      ParentColor = False
+      TabOrder = 0
     end
   end
   object dxBarABM: TdxBarManager
@@ -722,7 +762,8 @@ object FABM_Articulo: TFABM_Articulo
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from articulo')
+      'from articulo'
+      'order by ID_TIPO_ARTICULO, DESCRIPCION')
     Params = <>
     Left = 48
     Top = 72
@@ -832,5 +873,13 @@ object FABM_Articulo: TFABM_Articulo
     PantallaReducida = True
     Left = 296
     Top = 72
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridArticulo
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    Left = 48
+    Top = 186
   end
 end

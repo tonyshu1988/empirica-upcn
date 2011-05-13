@@ -1,6 +1,6 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 204
-  Top = 74
+  Left = 342
+  Top = 221
   Width = 895
   Height = 656
   Caption = 'FABMEmpresas'
@@ -21,16 +21,16 @@ object FABMEmpresas: TFABMEmpresas
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 887
-    Height = 572
+    Width = 879
+    Height = 566
     Align = alClient
     TabOrder = 0
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 290
-      Width = 885
+      Top = 284
+      Width = 877
       Height = 281
-      ActivePage = TabContactos
+      ActivePage = TabEmpresa
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       TabOrder = 0
@@ -329,11 +329,11 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridContactos: TDBGrid
           Left = 0
           Top = 0
-          Width = 877
+          Width = 869
           Height = 133
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
-          Color = 16112578
+          Color = 14606012
           DataSource = DS_PersonaRelacionContacto
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -354,6 +354,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'nombre'
+              Title.Alignment = taCenter
               Title.Caption = 'Nombre y Apellido'
               Width = 278
               Visible = True
@@ -361,6 +362,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'telefono'
+              Title.Alignment = taCenter
               Title.Caption = 'Tel'#233'fono'
               Width = 200
               Visible = True
@@ -368,6 +370,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'email'
+              Title.Alignment = taCenter
               Title.Caption = 'Email'
               Width = 111
               Visible = True
@@ -375,6 +378,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'direccion'
+              Title.Alignment = taCenter
               Title.Caption = 'Direcci'#243'n'
               Width = 81
               Visible = True
@@ -382,6 +386,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'localidad'
+              Title.Alignment = taCenter
               Title.Caption = 'Localidad'
               Width = 117
               Visible = True
@@ -389,6 +394,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'cod_postal'
+              Title.Alignment = taCenter
               Title.Caption = 'Cod.Postal'
               Width = 57
               Visible = True
@@ -397,7 +403,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel1: TPanel
           Left = 0
           Top = 133
-          Width = 877
+          Width = 869
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -414,10 +420,10 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoContactos: TDBMemo
           Left = 0
           Top = 152
-          Width = 877
+          Width = 869
           Height = 100
           Align = alBottom
-          Color = 16112578
+          Color = clWhite
           DataField = 'descripcion'
           DataSource = DS_PersonaRelacionContacto
           PopupMenu = PopupMenuSkypeMail
@@ -430,11 +436,11 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridViajantes: TDBGrid
           Left = 0
           Top = 0
-          Width = 877
+          Width = 869
           Height = 133
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
-          Color = 16112578
+          Color = 14606012
           DataSource = DS_PersonaRelacionViajante
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -455,6 +461,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'nombre'
+              Title.Alignment = taCenter
               Title.Caption = 'Nombre y Apellido'
               Width = 249
               Visible = True
@@ -462,6 +469,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'telefono'
+              Title.Alignment = taCenter
               Title.Caption = 'Tel'#233'fono'
               Width = 161
               Visible = True
@@ -469,6 +477,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'email'
+              Title.Alignment = taCenter
               Title.Caption = 'Email'
               Width = 179
               Visible = True
@@ -476,6 +485,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'direccion'
+              Title.Alignment = taCenter
               Title.Caption = 'Direcci'#243'n'
               Width = 100
               Visible = True
@@ -483,6 +493,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'localidad'
+              Title.Alignment = taCenter
               Title.Caption = 'Localidad'
               Width = 84
               Visible = True
@@ -490,6 +501,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'cod_postal'
+              Title.Alignment = taCenter
               Title.Caption = 'Cod.Postal'
               Width = 57
               Visible = True
@@ -498,10 +510,10 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoViajantes: TDBMemo
           Left = 0
           Top = 152
-          Width = 877
+          Width = 869
           Height = 100
           Align = alBottom
-          Color = 16112578
+          Color = clWhite
           DataField = 'descripcion'
           DataSource = DS_PersonaRelacionViajante
           PopupMenu = PopupMenuSkypeMail
@@ -510,7 +522,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel2: TPanel
           Left = 0
           Top = 133
-          Width = 877
+          Width = 869
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -532,7 +544,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoDescripcion: TDBMemo
           Left = 0
           Top = 0
-          Width = 857
+          Width = 849
           Height = 232
           Align = alClient
           DataField = 'DESCRIPCION_PRIVADA'
@@ -545,11 +557,11 @@ object FABMEmpresas: TFABMEmpresas
     object DBGridEmpresas: TDBGrid
       Left = 1
       Top = 20
-      Width = 885
-      Height = 270
+      Width = 877
+      Height = 264
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
-      Color = 16112578
+      Color = 14606012
       DataSource = DS_Empresa
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -571,6 +583,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'NOMBRE'
+          Title.Alignment = taCenter
           Title.Caption = 'Nombre Empresa'
           Width = 226
           Visible = True
@@ -578,6 +591,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'TELEFONO'
+          Title.Alignment = taCenter
           Title.Caption = 'Tel'#233'fono'
           Width = 258
           Visible = True
@@ -585,6 +599,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'DIRECCION'
+          Title.Alignment = taCenter
           Title.Caption = 'Direcci'#243'n'
           Width = 199
           Visible = True
@@ -592,6 +607,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'EMAIL'
+          Title.Alignment = taCenter
           Title.Caption = 'Email'
           Width = 197
           Visible = True
@@ -599,6 +615,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'CUIT_CUIL'
+          Title.Alignment = taCenter
           Title.Caption = 'Cuit/Cuil'
           Width = 82
           Visible = True
@@ -606,6 +623,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'PAGINA_WEB'
+          Title.Alignment = taCenter
           Title.Caption = 'Pag.Web'
           Width = 176
           Visible = True
@@ -613,6 +631,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'provincia'
+          Title.Alignment = taCenter
           Title.Caption = 'Provincia'
           Width = 145
           Visible = True
@@ -620,6 +639,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'LOCALIDAD'
+          Title.Alignment = taCenter
           Title.Caption = 'Localidad'
           Width = 120
           Visible = True
@@ -627,6 +647,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'CODIGO_POSTAL'
+          Title.Alignment = taCenter
           Title.Caption = 'Cod.Postal'
           Width = 70
           Visible = True
@@ -634,6 +655,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'tipo_empresa'
+          Title.Alignment = taCenter
           Title.Caption = 'Tipo Empresa'
           Width = 92
           Visible = True
@@ -641,6 +663,7 @@ object FABMEmpresas: TFABMEmpresas
         item
           Expanded = False
           FieldName = 'tipo_IVA'
+          Title.Alignment = taCenter
           Title.Caption = 'Tipo I.V.A'
           Width = 50
           Visible = True
@@ -649,19 +672,19 @@ object FABMEmpresas: TFABMEmpresas
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 885
+      Width = 877
       Height = 19
       Align = alTop
       ParentShowHint = False
       ShowHint = False
       TabOrder = 2
-      object Label16: TLabel
+      object lblResultadoBusqueda: TLabel
         Left = 1
         Top = 1
-        Width = 132
+        Width = 144
         Height = 17
         Align = alLeft
-        Caption = '                                 '
+        Caption = 'lblResultadoBusqueda'
         Font.Charset = ANSI_CHARSET
         Font.Color = clNavy
         Font.Height = -11
@@ -669,8 +692,8 @@ object FABMEmpresas: TFABMEmpresas
         Font.Style = [fsBold, fsItalic]
         ParentFont = False
       end
-      object StaticText3: TStaticText
-        Left = 775
+      object StaticTxtBaja: TStaticText
+        Left = 767
         Top = 1
         Width = 109
         Height = 17
@@ -688,7 +711,7 @@ object FABMEmpresas: TFABMEmpresas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1771,6 +1794,7 @@ object FABMEmpresas: TFABMEmpresas
     SQL_Orden.Strings = (
       'order by e.nombre')
     UsarWhereOriginal = EK_Sin_Where
+    InfoRegistros = lblResultadoBusqueda
     PantallaReducida = True
     Left = 128
     Top = 120

@@ -1,6 +1,6 @@
 object FABM_ArticuloMedida: TFABM_ArticuloMedida
-  Left = 270
-  Top = 198
+  Left = 337
+  Top = 235
   Width = 870
   Height = 500
   Caption = 'ABM Articulo Medida'
@@ -21,16 +21,16 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PageControlEdicion: TPageControl
       Left = 0
       Top = 0
-      Width = 862
-      Height = 416
+      Width = 854
+      Height = 410
       ActivePage = TabABMMedidas
       Align = alClient
       TabOrder = 0
@@ -40,13 +40,13 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         Caption = 'ABM Medidas'
         object DBGridMedidas: TDBGrid
           Left = 0
-          Top = 0
-          Width = 854
-          Height = 388
+          Top = 18
+          Width = 846
+          Height = 331
           Align = alClient
-          Color = 16112578
+          Color = 14606012
           DataSource = DS_Medida
-          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -58,9 +58,89 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             item
               Expanded = False
               FieldName = 'MEDIDA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
               Width = 442
               Visible = True
             end>
+        end
+        object PBusqueda: TPanel
+          Left = 0
+          Top = 0
+          Width = 846
+          Height = 18
+          Align = alTop
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 1
+          object lblCantidadRegistros: TLabel
+            Left = 1
+            Top = 1
+            Width = 134
+            Height = 16
+            Align = alLeft
+            Caption = 'lblCantidadRegistros'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clNavy
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+          object StaticTxtBaja: TStaticText
+            Left = 736
+            Top = 1
+            Width = 109
+            Height = 16
+            Align = alRight
+            Alignment = taCenter
+            AutoSize = False
+            BorderStyle = sbsSunken
+            Caption = 'Dado de Baja'
+            Color = 6974207
+            ParentColor = False
+            TabOrder = 0
+          end
+        end
+        object PanelEdicion: TPanel
+          Left = 0
+          Top = 349
+          Width = 846
+          Height = 33
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 2
+          Visible = False
+          object Label2: TLabel
+            Left = 6
+            Top = 11
+            Width = 45
+            Height = 13
+            Caption = 'Medida:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = True
+          end
+          object DBENombre: TDBEdit
+            Left = 54
+            Top = 7
+            Width = 731
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'MEDIDA'
+            DataSource = DS_Medida
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+          end
         end
       end
       object TabMedidaArticulo: TTabSheet
@@ -69,16 +149,16 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object Splitter1: TSplitter
           Left = 487
           Top = 0
-          Height = 388
+          Height = 382
         end
         object DBGridMedida: TDBGrid
           Left = 490
           Top = 0
-          Width = 364
-          Height = 388
+          Width = 356
+          Height = 382
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
-          Color = 12320767
+          Color = 13431031
           DataSource = DSMedidas
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
@@ -94,7 +174,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             item
               Expanded = False
               FieldName = 'medida'
-              Title.Caption = 'Medidas'
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
               Width = 301
               Visible = True
             end>
@@ -103,10 +184,10 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Left = 0
           Top = 0
           Width = 487
-          Height = 388
+          Height = 382
           Hint = 'Presione el boton derecho del mouse para cargar un articulo'
           Align = alLeft
-          Color = 16112578
+          Color = 14606012
           DataSource = DSArticulo
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
@@ -122,7 +203,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             item
               Expanded = False
               FieldName = 'nombre_articulo'
-              Title.Caption = 'Nombres Articulos'
+              Title.Alignment = taCenter
+              Title.Caption = 'Nombre Art'#237'culo'
               Width = 253
               Visible = True
             end>
@@ -134,13 +216,13 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object PanelSeleccionarArticulo: TPanel
           Left = 0
           Top = 0
-          Width = 854
+          Width = 846
           Height = 39
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
           DesignSize = (
-            854
+            846
             39)
           object Label1: TLabel
             Left = 4
@@ -152,7 +234,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           object CBArticulo: TComboBox
             Left = 139
             Top = 8
-            Width = 214
+            Width = 206
             Height = 21
             Anchors = [akLeft, akTop, akRight]
             CharCase = ecUpperCase
@@ -162,7 +244,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             OnExit = CBArticuloExit
           end
           object btseleccionarArticulo: TButton
-            Left = 364
+            Left = 356
             Top = 6
             Width = 182
             Height = 25
@@ -175,11 +257,11 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object DBGridMedidaARticulo: TDBGrid
           Left = 0
           Top = 39
-          Width = 854
-          Height = 349
+          Width = 846
+          Height = 343
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
-          Color = 16112578
+          Color = 14606012
           DataSource = DS_MedidaArticulo
           Enabled = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -197,6 +279,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             item
               Expanded = False
               FieldName = 'medida'
+              Title.Alignment = taCenter
               Title.Caption = 'Medida'
               Width = 583
               Visible = True
@@ -208,7 +291,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -821,7 +904,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from medida')
+      'from medida'
+      'order by medida')
     Params = <>
     Left = 48
     Top = 72

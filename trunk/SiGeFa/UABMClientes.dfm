@@ -523,33 +523,29 @@ object FABMClientes: TFABMClientes
       object lblResultadoBusqueda: TLabel
         Left = 3
         Top = 0
-        Width = 143
+        Width = 144
         Height = 13
         Anchors = [akLeft, akBottom]
         Caption = 'lblResultadoBusqueda'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clNavy
         Font.Height = -11
         Font.Name = 'Verdana'
-        Font.Style = [fsBold]
+        Font.Style = [fsBold, fsItalic]
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 799
+        Left = 726
         Top = 0
-        Width = 33
-        Height = 17
+        Width = 109
+        Height = 15
+        Align = alRight
         Alignment = taCenter
-        Anchors = [akRight, akBottom]
-        Caption = 'Baja'
-        Color = 8421631
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'Dado de Baja'
+        Color = 6974207
         ParentColor = False
-        ParentFont = False
         TabOrder = 0
       end
     end
@@ -1486,6 +1482,7 @@ object FABMClientes: TFABMClientes
     FuenteNormal = []
     NombreGuardarConfig = 'ABM_Clientes'
     Ordenar = True
+    MoverColumna = True
     Left = 160
     Top = 120
   end

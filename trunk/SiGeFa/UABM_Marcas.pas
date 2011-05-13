@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
-  ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  EKOrdenarGrilla;
 
 type
   TFABM_Marcas = class(TForm)
@@ -30,6 +31,13 @@ type
     ZQ_MarcasID_MARCA: TIntegerField;
     ZQ_MarcasNOMBRE_MARCA: TStringField;
     ZQ_MarcasBAJA: TStringField;
+    PBusqueda: TPanel;
+    lblCantidadRegistros: TLabel;
+    StaticTxtBaja: TStaticText;
+    PanelEdicion: TPanel;
+    Label1: TLabel;
+    DBENombre: TDBEdit;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -76,9 +84,12 @@ procedure TFABM_Marcas.btnNuevoClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
   begin
-    ZQ_Marcas.Append;
+    DBGridMarca.Enabled := false;
+    PanelEdicion.Visible:= true;
 
-    DBGridMarca.SetFocus;
+    ZQ_Marcas.Append;
+    ZQ_MarcasBAJA.AsString:= 'N';
+    DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -92,9 +103,11 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
   begin
-    ZQ_Marcas.Edit;
+    DBGridMarca.Enabled := false;
+    PanelEdicion.Visible:= true;
 
-    DBGridMarca.SetFocus;
+    ZQ_Marcas.Edit;
+    DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -108,7 +121,7 @@ begin
   if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'N') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea dar de baja la Medida seleccionada?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea dar de baja la "Marca" seleccionado?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
     begin
@@ -127,6 +140,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_Marcas.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
@@ -134,7 +148,7 @@ begin
   if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'S') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea reactivar la Medida seleccionado?'), 'ABM Articulo Medida', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea reactivar la "Marca" seleccionado?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
     begin
@@ -153,25 +167,28 @@ begin
   end;
 end;
 
+
 procedure TFABM_Marcas.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-  if (trim(ZQ_MarcasNOMBRE_MARCA.AsString) = '') then
+  if (trim(DBENombre.Text) = '') then
   begin
-    Application.MessageBox('El campo no puede estar vacio. VERIFIQUE','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBGridMarca.SetFocus;
+    Application.MessageBox('El campo "Marca" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBENombre.SetFocus;
     exit;
   end;
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
+      DBGridMarca.Enabled:= true;
       DBGridMarca.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
+      PanelEdicion.Visible := false;
       recNo:= ZQ_Marcas.RecNo;
       ZQ_Marcas.Refresh;
       ZQ_Marcas.RecNo:= recNo;
@@ -181,7 +198,9 @@ begin
       Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
       exit;
     end
-  end
+  end;
+
+  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);    
 end;
 
 
@@ -189,18 +208,25 @@ procedure TFABM_Marcas.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
+    DBGridMarca.Enabled:=true;
     DBGridMarca.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
+    PanelEdicion.Visible := false;
   end;
 end;
 
 
 procedure TFABM_Marcas.FormCreate(Sender: TObject);
 begin
+  StaticTxtBaja.Color:= FPrincipal.baja;
+
   ZQ_Marcas.Close;
   ZQ_Marcas.open;
+
+  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);   
 end;
+
 
 procedure TFABM_Marcas.DBGridMarcaDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;

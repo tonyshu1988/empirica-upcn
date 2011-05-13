@@ -102,7 +102,6 @@ type
     ZU_Clientes: TZUpdateSQL;
     PanelCabecera: TPanel;
     lblResultadoBusqueda: TLabel;
-    StaticTxtBaja: TStaticText;
     ZQ_RelacionCliente: TZQuery;
     ZQ_RelacionClienteID_PERSONA_RELACION: TIntegerField;
     ZQ_RelacionClienteID_PERSONA: TIntegerField;
@@ -120,6 +119,7 @@ type
     ZQ_SucursalBAJA: TStringField;
     ZQ_SucursalAUD_UDUARIO: TStringField;
     ZQ_SucursalAUD_FECHA: TDateTimeField;
+    StaticTxtBaja: TStaticText;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -158,12 +158,12 @@ uses UDM, UPrincipal;
 
 procedure TFABMClientes.FormCreate(Sender: TObject);
 begin
+  StaticTxtBaja.Color:= FPrincipal.baja;
+
   EKOrdenar.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_Provincia);
   dm.EKModelo.abrir(ZQ_Iva);
   dm.EKModelo.abrir(ZQ_Documento);
-
-  StaticTxtBaja.Color:= FPrincipal.baja;
 
   EKBuscar.Abrir;
 end;
@@ -396,12 +396,13 @@ begin
     result := false;
   end;
 
-  if (ZQ_ClientesNUMERO_DOC.IsNull) then
-  begin
-    mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío, Verifique';
-    DBENroDocumento.Color:= color;
-    result := false;
-  end;
+  if (ZQ_ClientesID_TIPO_DOC.AsInteger <> 0) then
+    if (ZQ_ClientesNUMERO_DOC.IsNull) then
+    begin
+      mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío, Verifique';
+      DBENroDocumento.Color:= color;
+      result := false;
+    end;
 
   if Result = False then
     Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
