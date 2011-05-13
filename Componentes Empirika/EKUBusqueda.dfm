@@ -401,7 +401,6 @@ object FBusqueda: TFBusqueda
     Width = 49
     Height = 21
     ItemHeight = 13
-    ItemIndex = 0
     TabOrder = 1
     TabStop = False
     Text = 'Contiene'
@@ -411,7 +410,8 @@ object FBusqueda: TFBusqueda
       'Igual'
       'Empieza'
       'Termina'
-      'Distinto')
+      'Distinto'
+      'No Contiene')
   end
   object c_nro: TComboBox
     Left = 192

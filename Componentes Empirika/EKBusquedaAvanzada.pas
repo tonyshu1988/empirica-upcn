@@ -64,6 +64,7 @@ type
     FTipoCampo : TEKCriterioTipo;
     FTipoCampoIndice : integer;
     FTipoCampoIndiceTxt : string;
+    FVaciarValor : Boolean;
 
   public
     constructor Create(Collection: TCollection); override;
@@ -327,6 +328,7 @@ begin
   FTitulo := 'Sin Titulo';
   FTipoCampoIndice := 0;
   FCambiarCondicion := true;
+  FVaciarValor := true;
   FTipoCampoIndiceTxt := 'Contiene';
 end;
 
@@ -377,6 +379,7 @@ begin
       2: FTipoCampoIndiceTxt := 'Empieza';
       3: FTipoCampoIndiceTxt := 'Termina';
       4: FTipoCampoIndiceTxt := 'Distinto';
+      5: FTipoCampoIndiceTxt := 'No Contiene';      
     else
       FTipoCampoIndicetxt := 'Contiene';
       FTipoCampoIndice := 0;
@@ -1220,6 +1223,8 @@ begin
           txt:=txt +')';
       end;
 
+    if FTabla = '' then  // Para usar valores en memoria
+      txt := '';
   end;
   textovalor1.Free;
   textovalor2.Free;
@@ -1255,7 +1260,8 @@ begin
     armartexto :=  ' UPPER('+ TEKCriterioBA(FCriterios.Items[x]).FTabla+'.'+TEKCriterioBA(FCriterios.Items[x]).FCampo +')  LIKE ''%'+UpperCase(campo.Text)+'''';
   if operador.Items[operador.ItemIndex] = 'Contiene' then
     armartexto :=  ' UPPER('+ TEKCriterioBA(FCriterios.Items[x]).FTabla+'.'+TEKCriterioBA(FCriterios.Items[x]).FCampo +')  LIKE ''%'+UpperCase(campo.Text)+'%''';
-
+  if operador.Items[operador.ItemIndex] = 'No Contiene' then
+    armartexto :=  ' UPPER('+ TEKCriterioBA(FCriterios.Items[x]).FTabla+'.'+TEKCriterioBA(FCriterios.Items[x]).FCampo +')  NOT LIKE ''%'+UpperCase(campo.Text)+'%''';
 
 end;
 
@@ -1279,39 +1285,42 @@ begin
     begin
       with TEKCriterioBA(FCriterios.Items[i]) do
       begin
-        FBacCondicion1 := 0;
-        if FTipoCampoIndice = 6 then // desde hasta
+        if FVaciarValor then
         begin
-          Fcondicion1.ItemIndex := 2;
-          Fcondicion2.ItemIndex := 4;
-        end
-        else
-        begin
-          Fcondicion1.ItemIndex := FTipoCampoIndice;
-          Fcondicion2.ItemIndex := FTipoCampoIndice;
-        end;
-        if FTipoIngreso = EK_Edit then
-        begin
-          FTexto1.Text := '';
-          FTexto2.Text := '';
-          FBacTexto1 := '';
-          FBacTexto2 := '';
-        end;
+          FBacCondicion1 := 0;
+          if FTipoCampoIndice = 6 then // desde hasta
+          begin
+            Fcondicion1.ItemIndex := 2;
+            Fcondicion2.ItemIndex := 4;
+          end
+          else
+          begin
+            Fcondicion1.ItemIndex := FTipoCampoIndice;
+            Fcondicion2.ItemIndex := FTipoCampoIndice;
+          end;
 
-        if FTipoIngreso = EK_Combo then
-        begin
-          FTextoCombo1.ItemIndex := -1;
-          FBacTextoCombo1 := -1;
-          FTextoCombo2.ItemIndex := -1;
-          FBacTextoCombo2 := -1;
+          if FTipoIngreso = EK_Edit then
+          begin
+            FTexto1.Text := '';
+            FTexto2.Text := '';
+            FBacTexto1 := '';
+            FBacTexto2 := '';
+          end;
+
+          if FTipoIngreso = EK_Combo then
+          begin
+            FTextoCombo1.ItemIndex := -1;
+            FBacTextoCombo1 := -1;
+            FTextoCombo2.ItemIndex := -1;
+            FBacTextoCombo2 := -1;
+          end;
+
+          FBacyo := 0;
+          Fyo.ItemIndex := 0;
+          FBacCondicion2 := 0;
+          FBacOrdenar := false;
+          FOrdenar.Checked := false;
         end;
-
-        FBacyo := 0;
-        Fyo.ItemIndex := 0;
-        FBacCondicion2 := 0;
-
-        FBacOrdenar := false;
-        FOrdenar.Checked := false;
       end;
     end;
 end;

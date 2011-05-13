@@ -14,7 +14,7 @@ type
     FShowModal : Boolean;
     FBorderIcons : TBorderIcons;
     Fvp : TEKVistaPreviaQRForm;
-    FVerConfImpresora, FVerImprimir, FVerExpWord, FVerExpImagen, FVerGuardar, FVerExpExel : Boolean;
+    FVerConfImpresora, FVerImprimir, FVerExpPDF, FVerExpWord, FVerExpImagen, FVerGuardar, FVerExpExel : Boolean;
     FCaption : string;
     procedure SetReporte(const Value: TQuickRep);
   protected
@@ -28,14 +28,12 @@ type
 
   published
     { Published declarations }
-    property
-      Reporte : TQuickRep read FReporte write SetReporte;
-    property
-      ShowModal : Boolean read FShowModal write FShowModal;
-    property
-      BorderIcons : TBorderIcons read FBorderIcons write FBorderIcons default [biSystemMenu, biMinimize, biMaximize, biHelp];
+    property Reporte : TQuickRep read FReporte write SetReporte;
+    property ShowModal : Boolean read FShowModal write FShowModal;
+    property BorderIcons : TBorderIcons read FBorderIcons write FBorderIcons default [biSystemMenu, biMinimize, biMaximize, biHelp];
     property VerGuardar : Boolean read FVerGuardar write FVerGuardar default True;
     property VerExpImagen : Boolean read FVerExpImagen write FVerExpImagen default True;
+    property VerExpPDF : Boolean read FVerExpPDF write FVerExpPDF default True;
     property VerExpWord : Boolean read FVerExpWord write FVerExpWord default True;
     property VerExpExel : Boolean read FVerExpExel write FVerExpExel default True;
     property VerImprimir : Boolean read FVerImprimir write FVerImprimir default True;
@@ -64,19 +62,23 @@ begin
   VerExpExel := true;
   VerExpImagen  := true;
   VerGuardar := true;
+  VerExpPDF := true;
   Caption := '';
 end;
+
 
 destructor TEKVistaPreviaQR.destroy;
 begin
   inherited;
 end;
 
+
 procedure TEKVistaPreviaQR.dopreview(sender: TObject);
 begin
     FReporte.PrinterSettings.PrinterIndex := printer.PrinterIndex;
     Fvp.QRPreview1.QRPrinter := TQRPrinter(sender);
 end;
+
 
 procedure TEKVistaPreviaQR.SetReporte(const Value: TQuickRep);
 var
@@ -91,6 +93,7 @@ begin
     TQRBand(FReporte.BandList.Items[i]).Tag := 99;
 end;
 
+
 procedure TEKVistaPreviaQR.VistaPrevia;
 begin
   if not Assigned(FReporte) then
@@ -104,6 +107,7 @@ begin
     fvp.imagen.Visible := FVerExpImagen;
     fvp.word.Visible := FVerExpWord;
     fvp.Excel.Visible := FVerExpExel;
+//    fvp.pdf.Visible := VerExpPDF;
     fvp.guardar.Visible := FVerGuardar;
     if caption > '' then
       fvp.Caption := caption;
