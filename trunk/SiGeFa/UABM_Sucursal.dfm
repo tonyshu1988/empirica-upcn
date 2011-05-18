@@ -1,6 +1,6 @@
 object FABM_Sucursal: TFABM_Sucursal
-  Left = 357
-  Top = 282
+  Left = 336
+  Top = 223
   Width = 870
   Height = 500
   Caption = 'ABM Sucursal'
@@ -880,6 +880,7 @@ object FABM_Sucursal: TFABM_Sucursal
     SQL.Strings = (
       'select *'
       'from Sucursal s'
+      'where s.id_sucursal <> 0'
       'order by s.nombre')
     Params = <>
     Left = 408
