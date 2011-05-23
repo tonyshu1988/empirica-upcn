@@ -697,7 +697,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
     SQL.Strings = (
       
         'select sp.id_stock_producto, sp.id_sucursal, sp.id_producto, sp.' +
-        'llevar_stock, sp.stock_actual,'
+        'stock_actual,'
       
         '       sp.stock_min, sp.stock_max, sp.stock_repedido, sp.stock_m' +
         'in_alarma,'

@@ -162,6 +162,8 @@ type
     function validarcamposDetalle():Boolean;
     procedure CargaImagenProporcionado(Archivo: string);
     procedure tabsChanging(Sender: TObject; var AllowChange: Boolean);
+    procedure ZQ_DetalleProductoCOEF_GANANCIAChange(Sender: TField);
+    procedure ZQ_DetalleProductoPRECIO_VENTAChange(Sender: TField);
   private
     { Private declarations }
   public
@@ -438,16 +440,17 @@ begin
    grupoDetalle.Visible:=true;
    grillaDetalle.PopupMenu:=nil;
    ZQ_DetalleProducto.Append;
-   ZQ_DetalleProductoPRECIO_COSTO.AsFloat:=0;
-   ZQ_DetalleProductoPRECIO_VENTA.AsFloat:=0;
-   ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:=1;
-   ZQ_DetalleProductoCOEF_DESCUENTO.AsFloat:=0;
-   ZQ_DetalleProductoIMPUESTO_INTERNO.AsFloat:=0;
-   ZQ_DetalleProductoIMPUESTO_IVA.AsFloat:=0;
-   ZQ_DetalleProductoSTOCK_MIN.AsFloat:=0;
-   ZQ_DetalleProductoSTOCK_MAX.AsFloat:=0;
-   ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:=ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
-   GrupoEditando.Enabled :=false;
+   ZQ_DetalleProductoLLEVAR_STOCK.AsString:= 'S';
+   ZQ_DetalleProductoPRECIO_COSTO.AsFloat:= 0;
+   ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= 0;
+   ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:= 1;
+   ZQ_DetalleProductoCOEF_DESCUENTO.AsFloat:= 0;
+   ZQ_DetalleProductoIMPUESTO_INTERNO.AsFloat:= 0;
+   ZQ_DetalleProductoIMPUESTO_IVA.AsFloat:= 0;
+   ZQ_DetalleProductoSTOCK_MIN.AsFloat:= 0;
+   ZQ_DetalleProductoSTOCK_MAX.AsFloat:= 0;
+   ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
+   GrupoEditando.Enabled:= false;
 end;
 
 
@@ -606,6 +609,16 @@ procedure TFABMProductos.tabsChanging(Sender: TObject;
 begin
    if (ZQ_DetalleProducto.state=dsInsert)or(ZQ_DetalleProducto.state=dsEdit) then
       AllowChange:=False;
+end;
+
+procedure TFABMProductos.ZQ_DetalleProductoCOEF_GANANCIAChange(Sender: TField);
+begin
+  ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
+end;
+
+procedure TFABMProductos.ZQ_DetalleProductoPRECIO_VENTAChange(Sender: TField);
+begin
+//  ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
 end;
 
 end.
