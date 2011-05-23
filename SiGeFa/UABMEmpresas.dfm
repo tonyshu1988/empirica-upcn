@@ -1,6 +1,6 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 342
-  Top = 221
+  Left = 285
+  Top = 69
   Width = 895
   Height = 656
   Caption = 'FABMEmpresas'
@@ -30,7 +30,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 284
       Width = 877
       Height = 281
-      ActivePage = TabEmpresa
+      ActivePage = TabDescripcion
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       TabOrder = 0
@@ -157,7 +157,7 @@ object FABMEmpresas: TFABMEmpresas
             ParentFont = False
             TabOrder = 0
           end
-          object DBEdit1: TDBEdit
+          object DBEditTelefono: TDBEdit
             Left = 110
             Top = 36
             Width = 433
@@ -173,7 +173,7 @@ object FABMEmpresas: TFABMEmpresas
             ParentFont = False
             TabOrder = 1
           end
-          object DBLookupComboBox1: TDBLookupComboBox
+          object DBCBoxProvincia: TDBLookupComboBox
             Left = 110
             Top = 92
             Width = 215
@@ -189,9 +189,9 @@ object FABMEmpresas: TFABMEmpresas
             ListField = 'NOMBRE_PROVINCIA'
             ListSource = DS_Provincia
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 3
           end
-          object DBEdit2: TDBEdit
+          object DBEditCuitCuil: TDBEdit
             Left = 640
             Top = 8
             Width = 212
@@ -205,9 +205,9 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 3
+            TabOrder = 6
           end
-          object DBLookupComboBox2: TDBLookupComboBox
+          object DBCBoxTipoIva: TDBLookupComboBox
             Left = 640
             Top = 64
             Width = 215
@@ -223,9 +223,9 @@ object FABMEmpresas: TFABMEmpresas
             ListField = 'NOMBRE_TIPO_IVA'
             ListSource = DS_TipoIVA
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 8
           end
-          object DBLookupComboBox3: TDBLookupComboBox
+          object DBCBoxTipoEmpresa: TDBLookupComboBox
             Left = 640
             Top = 36
             Width = 215
@@ -241,9 +241,9 @@ object FABMEmpresas: TFABMEmpresas
             ListField = 'DESCRIPCION'
             ListSource = DS_TipoEmpresa
             ParentFont = False
-            TabOrder = 5
+            TabOrder = 7
           end
-          object DBEdit3: TDBEdit
+          object DBEditDireccion: TDBEdit
             Left = 110
             Top = 64
             Width = 432
@@ -257,9 +257,9 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 6
+            TabOrder = 2
           end
-          object DBEdit4: TDBEdit
+          object DBEditLocalidad: TDBEdit
             Left = 395
             Top = 92
             Width = 288
@@ -273,9 +273,9 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 7
+            TabOrder = 4
           end
-          object DBEdit5: TDBEdit
+          object DBEditCodPostal: TDBEdit
             Left = 762
             Top = 92
             Width = 95
@@ -289,9 +289,9 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 8
+            TabOrder = 5
           end
-          object DBEdit6: TDBEdit
+          object DBEditEmail: TDBEdit
             Left = 110
             Top = 120
             Width = 301
@@ -306,7 +306,7 @@ object FABMEmpresas: TFABMEmpresas
             ParentFont = False
             TabOrder = 9
           end
-          object DBEdit7: TDBEdit
+          object DBEditWeb: TDBEdit
             Left = 472
             Top = 120
             Width = 385

@@ -17,15 +17,11 @@ type
     tabSheetPop3: TTabSheet;
     tabSheetSmtp: TTabSheet;
     dxBarABM: TdxBarManager;
-    btnBuscar: TdxBarLargeButton;
-    btnVerDetalle: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
-    btnBaja: TdxBarLargeButton;
     btnPrincipal: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
-    btnImprimir: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
@@ -565,10 +561,11 @@ end;
 
 procedure TFMailConfigurar.ZQ_CuentasAfterScroll(DataSet: TDataSet);
 begin
-  if ZQ_CuentasCUENTA_PRINCIPAL.AsString = 'S' then
-    btnPrincipal.Enabled:= false
-  else
-    btnPrincipal.Enabled:= true;
+  if GrupoEditando.Enabled then
+    if ZQ_CuentasCUENTA_PRINCIPAL.AsString = 'S' then
+      btnPrincipal.Enabled:= false
+    else
+      btnPrincipal.Enabled:= true;
 end;
 
 
