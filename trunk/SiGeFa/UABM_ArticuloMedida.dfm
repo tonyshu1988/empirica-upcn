@@ -77,7 +77,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             Left = 1
             Top = 1
             Width = 134
-            Height = 16
+            Height = 13
             Align = alLeft
             Caption = 'lblCantidadRegistros'
             Font.Charset = ANSI_CHARSET
