@@ -88,16 +88,15 @@ end;
 
 procedure TFABM_ProductoStock.btnModificarClick(Sender: TObject);
 begin
+  if ZQ_Stock.IsEmpty then
+    exit;
+
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMStock, [ZQ_Stock]) then
   begin
     GrupoEditando.Enabled:= false;
     GrupoGuardarCancelar.Enabled:= true;
 
     DBGridStock.ReadOnly:= false;
-
-    ZQ_Stock.Close;
-    ZQ_Stock.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
-    ZQ_Stock.Open;
   end;
 end;
 
@@ -142,6 +141,7 @@ end;
 
 procedure TFABM_ProductoStock.FormCreate(Sender: TObject);
 begin
+  EKBuscarStock.SQL_Where.Text:= 'where sp.id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
   EKOrdenarGrilla.CargarConfigColunmas;
 
   //inicio transaccion
@@ -158,9 +158,10 @@ begin
   end;
 end;
 
+
 procedure TFABM_ProductoStock.btnBuscarClick(Sender: TObject);
 begin
-EKBuscarStock.Buscar;
+  EKBuscarStock.Buscar;
 end;
 
 end.
