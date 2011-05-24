@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 219
-  Top = 139
+  Left = 191
+  Top = 140
   Width = 871
   Height = 563
   Caption = 'Administrativo'

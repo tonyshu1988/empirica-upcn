@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 246
-  Top = 110
+  Left = 207
+  Top = 201
   Width = 999
   Height = 639
   Caption = 'FABMProductos'
@@ -128,7 +128,7 @@ object FABMProductos: TFABMProductos
       Top = 307
       Width = 981
       Height = 241
-      ActivePage = tabDetalle
+      ActivePage = tabCabecera
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -137,7 +137,7 @@ object FABMProductos: TFABMProductos
       object tabCabecera: TTabSheet
         Caption = 'Producto'
         ImageIndex = 34
-        object Panel2: TPanel
+        object PProducto: TPanel
           Left = 0
           Top = 0
           Width = 973
@@ -339,7 +339,7 @@ object FABMProductos: TFABMProductos
       object tabDetalle: TTabSheet
         Caption = 'Detalle de Producto'
         ImageIndex = 36
-        object Panel3: TPanel
+        object PDetalles: TPanel
           Left = 0
           Top = 0
           Width = 973
@@ -1908,6 +1908,7 @@ object FABMProductos: TFABMProductos
     end
     object ZQ_DetalleProductoPRECIO_COSTO: TFloatField
       FieldName = 'PRECIO_COSTO'
+      OnChange = ZQ_DetalleProductoPRECIO_COSTOChange
       currency = True
     end
     object ZQ_DetalleProductoPRECIO_VENTA: TFloatField

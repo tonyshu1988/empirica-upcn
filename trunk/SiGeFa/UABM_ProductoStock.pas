@@ -53,6 +53,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -155,6 +156,11 @@ begin
     if not DM.EKModelo.finalizar_transaccion(transaccion_ABMStock) then
       DM.EKModelo.cancelar_transaccion(transaccion_ABMStock);
   end;
+end;
+
+procedure TFABM_ProductoStock.btnBuscarClick(Sender: TObject);
+begin
+EKBuscarStock.Buscar;
 end;
 
 end.
