@@ -50,7 +50,6 @@ type
     AgregarMedida1: TMenuItem;
     QuitarMedida1: TMenuItem;
     btProcesar: TdxBarLargeButton;
-    EKListadoArticulos: TEKListadoSQL;
     EKListadoMedidas: TEKListadoSQL;
     ZQ_MedidaArticulo: TZQuery;
     ZQ_MedidaArticuloID_ARTICULO: TIntegerField;
@@ -63,7 +62,6 @@ type
     PanelSeleccionarArticulo: TPanel;
     DBGridMedidaARticulo: TDBGrid;
     CBArticulo: TComboBox;
-    btseleccionarArticulo: TButton;
     Label1: TLabel;
     ZQ_MedidaArticulomedida: TStringField;
     DS_MedidaArticulo: TDataSource;
@@ -87,6 +85,10 @@ type
     PanelEdicion: TPanel;
     Label2: TLabel;
     DBENombre: TDBEdit;
+    ZQ_ArticuloTIPO_ARTICULO: TStringField;
+    ZQ_ArticuloBUSQUEDA: TStringField;
+    EKListadoArticulo: TEKListadoSQL;
+    Label3: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -110,13 +112,14 @@ type
     procedure btCancelarCargaClick(Sender: TObject);
     procedure AgregarMedida2Click(Sender: TObject);
     procedure QuitarMedida2Click(Sender: TObject);
-    procedure btseleccionarArticuloClick(Sender: TObject);
-    procedure CBArticuloExit(Sender: TObject);
     procedure PageControlEdicionChanging(Sender: TObject;
       var AllowChange: Boolean);
     procedure DBGridMedidaARticuloDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure EKLlenarComboArticuloCambio(valor: String);
+    procedure CBArticuloKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -336,9 +339,9 @@ end;
 
 procedure TFABM_ArticuloMedida.AgregarArticulo1Click(Sender: TObject);
 begin
-  if EKListadoArticulos.Buscar then
+  if EKListadoArticulo.Buscar then
   begin
-    CDSArticulo.Filter:= 'id_articulo = '+EKListadoArticulos.Resultado;
+    CDSArticulo.Filter:= 'id_articulo = '+EKListadoArticulo.Resultado;
     CDSArticulo.Filtered := true;
     if not CDSArticulo.IsEmpty then
     begin
@@ -349,8 +352,8 @@ begin
 
     CDSArticulo.Filtered := false;
     CDSArticulo.Append;
-    CDSArticuloid_articulo.AsString := EKListadoArticulos.Resultado;
-    CDSArticulonombre_producto.AsString := EKListadoArticulos.Seleccion;
+    CDSArticuloid_articulo.AsString := EKListadoArticulo.Resultado;
+    CDSArticulonombre_producto.AsString := EKListadoArticulo.Seleccion;
   end;
 end;
 
@@ -564,25 +567,6 @@ begin
 end;
 
 
-procedure TFABM_ArticuloMedida.btseleccionarArticuloClick(Sender: TObject);
-begin
-  if (EKLlenarComboArticulo.SelectClave = '') then
-    exit;
-
-  ZQ_MedidaArticulo.Close;
-  ZQ_MedidaArticulo.ParamByName('ID_ARTICULO').AsInteger := strtoint(EKLlenarComboArticulo.SelectClave);
-  ZQ_MedidaArticulo.Open;
-
-  DBGridMedidaARticulo.Enabled :=  true;
-end;
-
-
-procedure TFABM_ArticuloMedida.CBArticuloExit(Sender: TObject);
-begin
-  DBGridMedidaARticulo.Enabled :=  false;
-end;
-
-
 procedure TFABM_ArticuloMedida.PageControlEdicionChanging(Sender: TObject;
   var AllowChange: Boolean);
 begin
@@ -601,6 +585,31 @@ begin
     exit;
 
   FPrincipal.PintarFilasGrillasConBajas(DBGridMedidaARticulo, ZQ_MedidaArticuloBAJA.AsString, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_ArticuloMedida.EKLlenarComboArticuloCambio(valor: String);
+begin
+  if (EKLlenarComboArticulo.SelectClave = '') then
+    exit;
+
+  ZQ_MedidaArticulo.Close;
+  ZQ_MedidaArticulo.ParamByName('ID_ARTICULO').AsInteger := strtoint(EKLlenarComboArticulo.SelectClave);
+  ZQ_MedidaArticulo.Open;
+end;
+
+
+procedure TFABM_ArticuloMedida.CBArticuloKeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+    if EKListadoArticulo.Buscar then
+    begin
+      ZQ_MedidaArticulo.Close;
+      ZQ_MedidaArticulo.ParamByName('ID_ARTICULO').AsInteger := strtoint(EKListadoArticulo.Resultado);
+      ZQ_MedidaArticulo.Open;
+
+      CBArticulo.Text:= EKListadoArticulo.Seleccion;
+    end;
 end;
 
 end.

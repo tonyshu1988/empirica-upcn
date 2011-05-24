@@ -7,7 +7,7 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   ExtCtrls, Grids, DBGrids, EKDBGrid, dxBar, dxBarExtItems, StdCtrls,
   DBCtrls, Mask, EKBusquedaAvanzada, EKOrdenarGrilla, EKLlenarCombo, Menus,
-  Buttons, ZStoredProcedure, jpeg, ExtDlgs;
+  Buttons, ZStoredProcedure, jpeg, ExtDlgs, EKListadoSQL;
 
 type
   TFABMProductos = class(TForm)
@@ -138,6 +138,13 @@ type
     DBCheckLllevarStock: TDBCheckBox;
     StaticTxtBaja: TStaticText;
     lblResultadoBusqueda: TLabel;
+    ZQ_ArticuloBAJA: TStringField;
+    ZQ_ArticuloBUSQUEDA: TStringField;
+    ZQ_MarcaBAJA: TStringField;
+    EKListadoMarca: TEKListadoSQL;
+    EKListadoArticulo: TEKListadoSQL;
+    ZQ_ArticuloTIPO_ARTICULO: TStringField;
+    ZQ_ProductoCabecera_tipoArticulo: TStringField;
     procedure btBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -164,6 +171,10 @@ type
     procedure tabsChanging(Sender: TObject; var AllowChange: Boolean);
     procedure ZQ_DetalleProductoCOEF_GANANCIAChange(Sender: TField);
     procedure ZQ_DetalleProductoPRECIO_VENTAChange(Sender: TField);
+    procedure cmbMarcaKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure cmbArticuloKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -619,6 +630,29 @@ end;
 procedure TFABMProductos.ZQ_DetalleProductoPRECIO_VENTAChange(Sender: TField);
 begin
 //  ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
+end;
+
+procedure TFABMProductos.cmbMarcaKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+    if EKListadoMarca.Buscar then
+    begin
+      ZQ_ProductoCabecera.Edit;
+      ZQ_ProductoCabeceraID_MARCA.AsInteger := StrToInt(EKListadoMarca.Resultado);
+      cmbMarca.setfocus;
+    end;
+end;
+
+
+procedure TFABMProductos.cmbArticuloKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+    if EKListadoArticulo.Buscar then
+    begin
+      ZQ_ProductoCabecera.Edit;
+      ZQ_ProductoCabeceraID_ARTICULO.AsInteger := StrToInt(EKListadoArticulo.Resultado);
+      cmbArticulo.setfocus;
+    end;
 end;
 
 end.

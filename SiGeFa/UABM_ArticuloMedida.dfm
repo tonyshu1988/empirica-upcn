@@ -1,6 +1,6 @@
 object FABM_ArticuloMedida: TFABM_ArticuloMedida
-  Left = 337
-  Top = 235
+  Left = 307
+  Top = 180
   Width = 870
   Height = 500
   Caption = 'ABM Articulo Medida'
@@ -176,7 +176,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
               FieldName = 'medida'
               Title.Alignment = taCenter
               Title.Caption = 'Medida'
-              Width = 301
+              Width = 551
               Visible = True
             end>
         end
@@ -205,7 +205,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
               FieldName = 'nombre_articulo'
               Title.Alignment = taCenter
               Title.Caption = 'Nombre Art'#237'culo'
-              Width = 253
+              Width = 457
               Visible = True
             end>
         end
@@ -221,37 +221,30 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
-          DesignSize = (
-            846
-            39)
           object Label1: TLabel
             Left = 4
             Top = 12
             Width = 130
             Height = 13
-            Caption = 'Seleccione un articulo:'
+            Caption = 'Seleccione un art'#237'culo:'
+          end
+          object Label3: TLabel
+            Left = 592
+            Top = 12
+            Width = 142
+            Height = 13
+            Caption = 'Presione F1 para buscar.'
           end
           object CBArticulo: TComboBox
             Left = 139
             Top = 8
-            Width = 206
+            Width = 446
             Height = 21
-            Anchors = [akLeft, akTop, akRight]
             CharCase = ecUpperCase
             ItemHeight = 13
             TabOrder = 0
             Text = 'CBARTICULO'
-            OnExit = CBArticuloExit
-          end
-          object btseleccionarArticulo: TButton
-            Left = 356
-            Top = 6
-            Width = 182
-            Height = 25
-            Anchors = [akTop, akRight]
-            Caption = 'Seleccionar Articulo'
-            TabOrder = 1
-            OnClick = btseleccionarArticuloClick
+            OnKeyUp = CBArticuloKeyUp
           end
         end
         object DBGridMedidaARticulo: TDBGrid
@@ -263,7 +256,6 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Align = alClient
           Color = 14606012
           DataSource = DS_MedidaArticulo
-          Enabled = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
           PopupMenu = PopupMenuArticuloMedida
@@ -992,18 +984,6 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       OnClick = QuitarMedida1Click
     end
   end
-  object EKListadoArticulos: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select *'
-      'from articulo a'
-      'where a.baja <> '#39'S'#39)
-    CampoBuscar = 'descripcion'
-    CampoClave = 'id_articulo'
-    TituloVentana = 'Buscar Articulo'
-    Left = 276
-    Top = 160
-  end
   object EKListadoMedidas: TEKListadoSQL
     Modelo = DM.EKModelo
     SQL.Strings = (
@@ -1064,17 +1044,23 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object EKLlenarComboArticulo: TEKLlenarCombo
     dataset = ZQ_Articulo
     combo = CBArticulo
+    OnCambio = EKLlenarComboArticuloCambio
     CampoClave = 'id_articulo'
-    CampoVer = 'descripcion'
+    CampoVer = 'busqueda'
     Left = 436
     Top = 88
   end
   object ZQ_Articulo: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select *'
+      
+        'select a.*, t.descripcion as tipo_articulo, t.descripcion||'#39' - '#39 +
+        '||a.descripcion as busqueda'
       'from articulo a'
-      'where a.baja <> '#39'S'#39)
+      
+        'left join tipo_articulo t on (a.id_tipo_articulo = t.id_tipo_art' +
+        'iculo)'
+      'where a.baja = '#39'N'#39)
     Params = <>
     Left = 52
     Top = 256
@@ -1093,6 +1079,15 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     object ZQ_ArticuloBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
+    end
+    object ZQ_ArticuloTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object ZQ_ArticuloBUSQUEDA: TStringField
+      FieldName = 'BUSQUEDA'
+      ReadOnly = True
+      Size = 403
     end
   end
   object PopupMenuArticuloMedida: TPopupMenu
@@ -1142,5 +1137,20 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       FieldName = 'BAJA'
       Size = 1
     end
+  end
+  object EKListadoArticulo: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select a.*, t.descripcion||'#39' - '#39'||a.descripcion as busqueda'
+      'from articulo a'
+      
+        'left join tipo_articulo t on (a.id_tipo_articulo = t.id_tipo_art' +
+        'iculo)'
+      'where a.baja = '#39'N'#39)
+    CampoBuscar = 'BUSQUEDA'
+    CampoClave = 'ID_ARTICULO'
+    TituloVentana = 'Buscar Art'#237'culo'
+    Left = 432
+    Top = 152
   end
 end
