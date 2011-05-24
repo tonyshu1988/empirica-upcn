@@ -9,7 +9,7 @@ uses
   DBClient, Menus, EKListadoSQL, EKLlenarCombo;
 
 type
-  TFABM_ArticuloMedida = class(TForm)
+  TFABM_ArticuloMedida = class(TForm) 
     PanelFondo: TPanel;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
