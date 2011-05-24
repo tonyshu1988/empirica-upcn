@@ -14,8 +14,8 @@ type
     tabs: TPageControl;
     tabCabecera: TTabSheet;
     tabDetalle: TTabSheet;
-    Panel2: TPanel;
-    Panel3: TPanel;
+    PProducto: TPanel;
+    PDetalles: TPanel;
     ZQ_ProductoCabecera: TZQuery;
     ZQ_ProductoCabeceraID_PROD_CABECERA: TIntegerField;
     ZQ_ProductoCabeceraID_MARCA: TIntegerField;
@@ -175,6 +175,7 @@ type
       Shift: TShiftState);
     procedure cmbArticuloKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure ZQ_DetalleProductoPRECIO_COSTOChange(Sender: TField);
   private
     { Private declarations }
   public
@@ -226,6 +227,7 @@ begin
   dm.EKModelo.abrir(ZQ_MedidaArticulo);
   grillaDetalle.PopupMenu:=nil;
   tabs.ActivePageIndex:=0;
+  PProducto.Enabled:=False;
 end;
 
 
@@ -237,11 +239,11 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     grilla.Enabled := false;
     tabs.Enabled:= true;
     tabs.ActivePageIndex:= 0;
-
+    PProducto.Enabled:=True;
     ZQ_ProductoCabecera.Append;
     ZQ_ProductoCabeceraBAJA.AsString:= 'N';
 
-    edNombre.SetFocus;
+    edCodCorto.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoVisualizando.Enabled := false;
 
@@ -328,6 +330,15 @@ begin
     result := false;
     exit;
   end;
+
+   if (ZQ_DetalleProductoID_MEDIDA.IsNull) then
+  begin
+    Application.MessageBox('El campo Medida se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    tabs.ActivePageIndex:= 1;
+    dpMedida.SetFocus;
+    result := false;
+    exit;
+  end;
 end;
 
 
@@ -348,6 +359,7 @@ begin
       GrupoEditando.Enabled := false;
       GrupoVisualizando.Enabled := true;
       tabs.Enabled:= true;
+      PProducto.Enabled:=False;
     end
   except
     begin
@@ -368,6 +380,7 @@ begin
     GrupoVisualizando.Enabled := true;
     GrupoEditando.Enabled := false;
     tabs.Enabled:= true;
+    PProducto.Enabled:=False;
   end;
 end;
 
@@ -382,7 +395,7 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
     tabs.Enabled:= true;
     tabs.ActivePageIndex:= 0;
-
+    PProducto.Enabled:=True;
     ZQ_ProductoCabecera.edit;
 
     edNombre.SetFocus;
@@ -624,6 +637,7 @@ end;
 
 procedure TFABMProductos.ZQ_DetalleProductoCOEF_GANANCIAChange(Sender: TField);
 begin
+if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull) then
   ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
 end;
 
@@ -653,6 +667,13 @@ begin
       ZQ_ProductoCabeceraID_ARTICULO.AsInteger := StrToInt(EKListadoArticulo.Resultado);
       cmbArticulo.setfocus;
     end;
+end;
+
+procedure TFABMProductos.ZQ_DetalleProductoPRECIO_COSTOChange(
+  Sender: TField);
+begin
+if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull) then
+  ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
 end;
 
 end.

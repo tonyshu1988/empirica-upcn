@@ -1,6 +1,6 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 364
-  Top = 259
+  Left = 227
+  Top = 344
   Width = 870
   Height = 507
   Caption = 'ABM Producto Stock'
@@ -574,6 +574,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       Hint = 'Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnVerDetalle: TdxBarLargeButton
@@ -873,7 +874,17 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object EKBuscarStock: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Sin Titulo'
+        Titulo = 'Cod. Prod. Cabecera'
+        Campo = 'cod_corto'
+        Tabla = 'producto_cabecera'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cod. Prod. Detalle'
+        Campo = 'cod_corto'
+        Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         ItemIndex = -1
@@ -884,7 +895,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
     SQL.Strings = (
       
         'select sp.id_stock_producto, sp.id_sucursal, sp.id_producto, sp.' +
-        'llevar_stock, sp.stock_actual,'
+        'stock_actual,'
       
         '       sp.stock_min, sp.stock_max, sp.stock_repedido, sp.stock_m' +
         'in_alarma,'
@@ -904,7 +915,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
     SQL_Select.Strings = (
       
         'select sp.id_stock_producto, sp.id_sucursal, sp.id_producto, sp.' +
-        'llevar_stock, sp.stock_actual,'
+        'stock_actual,'
       
         '       sp.stock_min, sp.stock_max, sp.stock_repedido, sp.stock_m' +
         'in_alarma,'
@@ -923,7 +934,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         'prod_cabecera)')
     SQL_Where.Strings = (
       'where sp.id_sucursal = :id_sucursal')
-    UsarWhereOriginal = EK_Con_Where
+    UsarWhereOriginal = EK_Sin_Where
     Left = 56
     Top = 304
   end
