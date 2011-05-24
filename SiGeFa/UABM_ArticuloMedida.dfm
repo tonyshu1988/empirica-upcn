@@ -31,7 +31,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       Top = 0
       Width = 854
       Height = 410
-      ActivePage = TabABMMedidas
+      ActivePage = TabMedidaArticuloUnico
       Align = alClient
       TabOrder = 0
       OnChange = PageControlEdicionChange
@@ -1151,6 +1151,6 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     CampoClave = 'ID_ARTICULO'
     TituloVentana = 'Buscar Art'#237'culo'
     Left = 432
-    Top = 152
+    Top = 144
   end
 end
