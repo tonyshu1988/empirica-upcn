@@ -1,8 +1,8 @@
 object FABMProductos: TFABMProductos
   Left = 246
-  Top = 69
+  Top = 110
   Width = 999
-  Height = 680
+  Height = 639
   Caption = 'FABMProductos'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -23,7 +23,7 @@ object FABMProductos: TFABMProductos
     Left = 0
     Top = 0
     Width = 983
-    Height = 590
+    Height = 549
     Align = alClient
     Caption = 'Panel4'
     TabOrder = 4
@@ -38,7 +38,7 @@ object FABMProductos: TFABMProductos
       Left = 1
       Top = 20
       Width = 981
-      Height = 328
+      Height = 287
       Align = alClient
       Color = 14606012
       DataSource = DS_ProductoCabecera
@@ -69,6 +69,7 @@ object FABMProductos: TFABMProductos
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
+          Title.Alignment = taCenter
           Title.Caption = 'C'#243'digo Corto'
           Width = 90
           Visible = True
@@ -76,6 +77,7 @@ object FABMProductos: TFABMProductos
         item
           Expanded = False
           FieldName = 'NOMBRE'
+          Title.Alignment = taCenter
           Title.Caption = 'Nombre'
           Width = 212
           Visible = True
@@ -83,13 +85,23 @@ object FABMProductos: TFABMProductos
         item
           Expanded = False
           FieldName = 'IMAGEN'
+          Title.Alignment = taCenter
           Title.Caption = 'Imagen'
           Width = 104
           Visible = True
         end
         item
           Expanded = False
+          FieldName = '_tipoArticulo'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo Art'#237'culo'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = '_articulo'
+          Title.Alignment = taCenter
           Title.Caption = 'Art'#237'culo'
           Width = 245
           Visible = True
@@ -97,6 +109,7 @@ object FABMProductos: TFABMProductos
         item
           Expanded = False
           FieldName = '_marca'
+          Title.Alignment = taCenter
           Title.Caption = 'Marca'
           Width = 183
           Visible = True
@@ -104,6 +117,7 @@ object FABMProductos: TFABMProductos
         item
           Expanded = False
           FieldName = 'DESCRIPCION'
+          Title.Alignment = taCenter
           Title.Caption = 'Descripci'#243'n'
           Width = 381
           Visible = True
@@ -111,7 +125,7 @@ object FABMProductos: TFABMProductos
     end
     object tabs: TPageControl
       Left = 1
-      Top = 348
+      Top = 307
       Width = 981
       Height = 241
       ActivePage = tabDetalle
@@ -133,9 +147,9 @@ object FABMProductos: TFABMProductos
           object Label1: TLabel
             Left = 16
             Top = 48
-            Width = 34
+            Width = 133
             Height = 13
-            Caption = 'Marca'
+            Caption = 'Marca (F1 para buscar)'
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -195,9 +209,9 @@ object FABMProductos: TFABMProductos
           object Label18: TLabel
             Left = 264
             Top = 48
-            Width = 43
+            Width = 181
             Height = 13
-            Caption = 'Art'#237'culo'
+            Caption = 'Tipo y Art'#237'culo (F1 para buscar)'
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -278,10 +292,11 @@ object FABMProductos: TFABMProductos
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             KeyField = 'ID_ARTICULO'
-            ListField = 'DESCRIPCION'
+            ListField = 'BUSQUEDA'
             ListSource = DS_Articulo
             ParentFont = False
             TabOrder = 3
+            OnKeyUp = cmbArticuloKeyUp
           end
           object cmbMarca: TDBLookupComboBox
             Left = 16
@@ -301,6 +316,7 @@ object FABMProductos: TFABMProductos
             ListSource = DS_Marca
             ParentFont = False
             TabOrder = 2
+            OnKeyUp = cmbMarcaKeyUp
           end
           object edCodCorto: TDBEdit
             Left = 16
@@ -953,11 +969,21 @@ object FABMProductos: TFABMProductos
     object ZQ_ProductoCabeceraCOD_CORTO: TStringField
       FieldName = 'COD_CORTO'
     end
+    object ZQ_ProductoCabecera_tipoArticulo: TStringField
+      FieldKind = fkLookup
+      FieldName = '_tipoArticulo'
+      LookupDataSet = ZQ_Articulo
+      LookupKeyFields = 'ID_ARTICULO'
+      LookupResultField = 'TIPO_ARTICULO'
+      KeyFields = 'ID_ARTICULO'
+      Size = 200
+      Lookup = True
+    end
   end
   object DS_ProductoCabecera: TDataSource
     DataSet = ZQ_ProductoCabecera
     Left = 192
-    Top = 144
+    Top = 152
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -1609,7 +1635,7 @@ object FABMProductos: TFABMProductos
     UseF10ForMenu = False
     UseSystemFont = False
     Left = 100
-    Top = 144
+    Top = 152
     DockControlHeights = (
       0
       0
@@ -1932,14 +1958,20 @@ object FABMProductos: TFABMProductos
   object DS_DetalleProducto: TDataSource
     DataSet = ZQ_DetalleProducto
     Left = 320
-    Top = 160
+    Top = 152
   end
   object ZQ_Articulo: TZQuery
     Connection = DM.Conexion
     AfterScroll = ZQ_ArticuloAfterScroll
     SQL.Strings = (
-      'select *'
-      'from articulo')
+      
+        'select a.*, t.descripcion as tipo_articulo, t.descripcion||'#39' - '#39 +
+        '||a.descripcion as busqueda'
+      'from articulo a'
+      
+        'left join tipo_articulo t on (a.id_tipo_articulo = t.id_tipo_art' +
+        'iculo)'
+      'where a.baja = '#39'N'#39)
     Params = <>
     Left = 440
     Top = 96
@@ -1954,6 +1986,19 @@ object FABMProductos: TFABMProductos
     object ZQ_ArticuloID_TIPO_ARTICULO: TIntegerField
       FieldName = 'ID_TIPO_ARTICULO'
     end
+    object ZQ_ArticuloBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_ArticuloBUSQUEDA: TStringField
+      FieldName = 'BUSQUEDA'
+      ReadOnly = True
+      Size = 403
+    end
+    object ZQ_ArticuloTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
   end
   object DS_Articulo: TDataSource
     DataSet = ZQ_Articulo
@@ -1964,7 +2009,8 @@ object FABMProductos: TFABMProductos
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from marca')
+      'from marca'
+      'where baja = '#39'N'#39)
     Params = <>
     Left = 528
     Top = 96
@@ -1976,6 +2022,10 @@ object FABMProductos: TFABMProductos
       FieldName = 'NOMBRE_MARCA'
       Size = 50
     end
+    object ZQ_MarcaBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
   end
   object DS_Marca: TDataSource
     DataSet = ZQ_Marca
@@ -1986,7 +2036,7 @@ object FABMProductos: TFABMProductos
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
     Left = 621
-    Top = 90
+    Top = 95
     object AgregaDetalle: TMenuItem
       Caption = 'Agregar Detalle'
       ImageIndex = 14
@@ -2015,8 +2065,8 @@ object FABMProductos: TFABMProductos
         Name = 'artic'
         ParamType = ptUnknown
       end>
-    Left = 728
-    Top = 128
+    Left = 624
+    Top = 152
     ParamData = <
       item
         DataType = ftUnknown
@@ -2050,7 +2100,7 @@ object FABMProductos: TFABMProductos
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_PRODUCTO_ID'
-    Left = 160
+    Left = 64
     Top = 216
     ParamData = <
       item
@@ -2071,8 +2121,8 @@ object FABMProductos: TFABMProductos
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_PRODUCTO_CABECERA_ID'
-    Left = 112
-    Top = 272
+    Left = 208
+    Top = 216
     ParamData = <
       item
         DataType = ftInteger
@@ -2088,7 +2138,36 @@ object FABMProductos: TFABMProductos
       'All (*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf)|*.jpg;*.jpeg;*.bmp|JP' +
       'EG Image File (*.jpg)|*.jpg|JPEG Image File (*.jpeg)|*.jpeg|Bitm' +
       'aps (*.bmp)|*.bmp'
-    Left = 280
-    Top = 272
+    Left = 320
+    Top = 216
+  end
+  object EKListadoMarca: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select *'
+      'from marca'
+      'where baja = '#39'N'#39)
+    CampoBuscar = 'NOMBRE_MARCA'
+    CampoClave = 'ID_MARCA'
+    BuscarEnQuery = ZQ_Marca
+    TituloVentana = 'Buscar Marca'
+    Left = 440
+    Top = 216
+  end
+  object EKListadoArticulo: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select a.*, t.descripcion||'#39' - '#39'||a.descripcion as busqueda'
+      'from articulo a'
+      
+        'left join tipo_articulo t on (a.id_tipo_articulo = t.id_tipo_art' +
+        'iculo)'
+      'where a.baja = '#39'N'#39)
+    CampoBuscar = 'BUSQUEDA'
+    CampoClave = 'ID_ARTICULO'
+    BuscarEnQuery = ZQ_Articulo
+    TituloVentana = 'Buscar Art'#237'culo'
+    Left = 528
+    Top = 216
   end
 end
