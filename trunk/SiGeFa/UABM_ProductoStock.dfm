@@ -1,6 +1,6 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 227
-  Top = 344
+  Left = 309
+  Top = 191
   Width = 870
   Height = 507
   Caption = 'ABM Producto Stock'
@@ -934,7 +934,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         'prod_cabecera)')
     SQL_Where.Strings = (
       'where sp.id_sucursal = :id_sucursal')
-    UsarWhereOriginal = EK_Sin_Where
+    UsarWhereOriginal = EK_Con_Where
     Left = 56
     Top = 304
   end
