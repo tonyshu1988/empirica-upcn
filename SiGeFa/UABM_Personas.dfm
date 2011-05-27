@@ -165,11 +165,11 @@ object FABM_Personas: TFABM_Personas
         Top = 0
         Width = 832
         Height = 168
-        ActivePage = TabSheetDatos
+        ActivePage = TabSheet1
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet
-          Caption = 'Datos Generales'
+          Caption = ' Datos Generales '
           object Label9: TLabel
             Left = 59
             Top = 93
@@ -493,7 +493,7 @@ object FABM_Personas: TFABM_Personas
         end
         object TabSheetDetalle: TTabSheet
           BorderWidth = 4
-          Caption = 'Detalle'
+          Caption = ' Detalle '
           ImageIndex = 1
           object DBMemoDetalle: TDBMemo
             Left = 0
@@ -504,6 +504,44 @@ object FABM_Personas: TFABM_Personas
             DataField = 'DESCRIPCION'
             DataSource = DS_Clientes
             TabOrder = 0
+          end
+        end
+        object TabSheet1: TTabSheet
+          Caption = ' Rol '
+          ImageIndex = 2
+          object DBGridRol: TDBGrid
+            Left = 0
+            Top = 0
+            Width = 824
+            Height = 140
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_RelacionPersona
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            OnDrawColumnCell = DBGridClientesDrawColumnCell
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'DESCRIPCION'
+                Title.Alignment = taCenter
+                Title.Caption = 'Rol'
+                Width = 178
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOMBRE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Sucursal / Empresa'
+                Width = 552
+                Visible = True
+              end>
           end
         end
       end
@@ -1120,21 +1158,17 @@ object FABM_Personas: TFABM_Personas
   end
   object ZQ_Persona: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_PersonaAfterScroll
     UpdateObject = ZU_Persona
     SQL.Strings = (
       
         'select cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv.nombre_p' +
-        'rovincia, tr.descripcion'
+        'rovincia'
       'from persona cl'
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
       'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
-      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
-      
-        'left join tipo_relacion tr on (pr.id_relacion = tr.id_tipo_relac' +
-        'ion)'
-      'order by cl.nombre'
-      '')
+      'order by cl.nombre')
     Params = <>
     Left = 64
     Top = 72
@@ -1184,10 +1218,6 @@ object FABM_Personas: TFABM_Personas
       FieldName = 'SEXO'
       Size = 1
     end
-    object ZQ_PersonaDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 500
-    end
     object ZQ_PersonaCUIT_CUIL: TStringField
       FieldName = 'CUIT_CUIL'
       Size = 30
@@ -1214,6 +1244,10 @@ object FABM_Personas: TFABM_Personas
     object ZQ_PersonaNOMBRE_PROVINCIA: TStringField
       FieldName = 'NOMBRE_PROVINCIA'
       Size = 100
+    end
+    object ZQ_PersonaDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
     end
   end
   object DS_Clientes: TDataSource
@@ -1355,30 +1389,22 @@ object FABM_Personas: TFABM_Personas
     SQL.Strings = (
       
         'select cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv.nombre_p' +
-        'rovincia, tr.descripcion'
+        'rovincia'
       'from persona cl'
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
       'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
-      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
-      
-        'left join tipo_relacion tr on (pr.id_relacion = tr.id_tipo_relac' +
-        'ion)'
       ''
       'order by cl.nombre')
     SQL_Select.Strings = (
       
         'select cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv.nombre_p' +
-        'rovincia, tr.descripcion')
+        'rovincia')
     SQL_From.Strings = (
       'from persona cl'
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
-      'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
-      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
-      
-        'left join tipo_relacion tr on (pr.id_relacion = tr.id_tipo_relac' +
-        'ion)')
+      'left join provincia pv on (cl.id_provincia = pv.id_provincia)')
     SQL_Where.Strings = (
       '')
     SQL_Orden.Strings = (
@@ -1639,12 +1665,32 @@ object FABM_Personas: TFABM_Personas
   object ZQ_RelacionPersona: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select pr.*'
+      'select pr.*, tr.descripcion,'
+      '       CASE'
+      '           WHEN (e.nombre IS not NULL) THEN e.nombre'
+      '           WHEN (s.nombre IS not NULL) THEN s.nombre'
+      '       END as nombre'
       'from persona_relacion pr'
-      '')
-    Params = <>
+      
+        'left join tipo_relacion tr on (pr.id_relacion = tr.id_tipo_relac' +
+        'ion)'
+      'left join empresa e on (pr.id_empresa = e.id_empresa)'
+      'left join sucursal s on (pr.id_sucursal = s.id_sucursal)'
+      'where pr.id_persona = :id_persona')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_persona'
+        ParamType = ptUnknown
+      end>
     Left = 256
     Top = 176
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_persona'
+        ParamType = ptUnknown
+      end>
     object ZQ_RelacionPersonaID_PERSONA_RELACION: TIntegerField
       FieldName = 'ID_PERSONA_RELACION'
     end
@@ -1660,5 +1706,18 @@ object FABM_Personas: TFABM_Personas
     object ZQ_RelacionPersonaID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
     end
+    object ZQ_RelacionPersonaDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
+    end
+    object ZQ_RelacionPersonaNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+  end
+  object DS_RelacionPersona: TDataSource
+    DataSet = ZQ_RelacionPersona
+    Left = 256
+    Top = 224
   end
 end

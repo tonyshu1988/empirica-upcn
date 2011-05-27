@@ -60,7 +60,6 @@ type
     ZQ_PersonaFECHA_NACIMIENTO: TDateField;
     ZQ_PersonaNUMERO_DOC: TStringField;
     ZQ_PersonaSEXO: TStringField;
-    ZQ_PersonaDESCRIPCION: TStringField;
     ZQ_PersonaCUIT_CUIL: TStringField;
     ZQ_PersonaBAJA: TStringField;
     ZQ_PersonaAUD_USUARIO: TStringField;
@@ -103,12 +102,18 @@ type
     PanelCabecera: TPanel;
     lblResultadoBusqueda: TLabel;
     ZQ_RelacionPersona: TZQuery;
+    StaticTxtBaja: TStaticText;
+    TabSheet1: TTabSheet;
+    DBGridRol: TDBGrid;
+    ZQ_PersonaDESCRIPCION: TStringField;
+    DS_RelacionPersona: TDataSource;
     ZQ_RelacionPersonaID_PERSONA_RELACION: TIntegerField;
     ZQ_RelacionPersonaID_PERSONA: TIntegerField;
     ZQ_RelacionPersonaID_RELACION: TIntegerField;
     ZQ_RelacionPersonaID_EMPRESA: TIntegerField;
     ZQ_RelacionPersonaID_SUCURSAL: TIntegerField;
-    StaticTxtBaja: TStaticText;
+    ZQ_RelacionPersonaDESCRIPCION: TStringField;
+    ZQ_RelacionPersonaNOMBRE: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -126,6 +131,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure btnVerDetalleClick(Sender: TObject);
+    procedure ZQ_PersonaAfterScroll(DataSet: TDataSet);
   private
     id_persona: integer;
   public
@@ -408,5 +414,14 @@ begin
 end;
 
 
+procedure TFABM_Personas.ZQ_PersonaAfterScroll(DataSet: TDataSet);
+begin
+  if ZQ_Persona.IsEmpty then
+    exit;
+
+  ZQ_RelacionPersona.Close;
+  ZQ_RelacionPersona.ParamByName('id_persona').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
+  ZQ_RelacionPersona.Open;
+end;
 
 end.
