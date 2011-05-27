@@ -45,14 +45,12 @@ type
     AABM_Sucursal: TAction;
     AABM_SucursalPosicion: TAction;
     AABM_ProductoStock: TAction;
-    AABM_ProductoPosicion: TAction;
     AABM_Personas: TAction;
     ABM_Articulos: TMenuItem;
     ABMMarcas1: TMenuItem;
     ABMTipoArticulo1: TMenuItem;
     ABMArticulosMedida1: TMenuItem;
     ABMProductoStock1: TMenuItem;
-    ABMProductoPosicion1: TMenuItem;
     ABMPersonas1: TMenuItem;
     ABMTipoEmpresa1: TMenuItem;
     ABMSucursal1: TMenuItem;
@@ -69,6 +67,8 @@ type
     BandejadeMail2: TMenuItem;
     EnviarMail1: TMenuItem;
     ConfigurarMail1: TMenuItem;
+    AABM_ProdStockPosic: TAction;
+    ABMProductoStockPosicin1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -86,12 +86,12 @@ type
     procedure AABM_SucursalExecute(Sender: TObject);
     procedure AABM_SucursalPosicionExecute(Sender: TObject);
     procedure AABM_ProductoStockExecute(Sender: TObject);
-    procedure AABM_ProductoPosicionExecute(Sender: TObject);
     procedure AABM_PersonasExecute(Sender: TObject);
     procedure AImprimirEtiquetaExecute(Sender: TObject);
     procedure ABandejaMailExecute(Sender: TObject);
     procedure AConfigMailExecute(Sender: TObject);
     procedure AEnviarMailExecute(Sender: TObject);
+    procedure AABM_ProdStockPosicExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -114,7 +114,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_TipoEmpresa, UABM_Sucursal, UABM_SucursalPosicion,
   UABM_ProductoStock, UABM_ProductoPosicion, UABM_Personas,
   UImprimirEtiquetas, UMailBandeja, USeleccionarSucursal, UMailConfigurar,
-  UMailEnviar;
+  UMailEnviar, UABMPorductoStockPosicion;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -318,12 +318,6 @@ begin
 end;
 
 
-procedure TFPrincipal.AABM_ProductoPosicionExecute(Sender: TObject);
-begin
-  EKVentanas1.Abrir(Sender, TFABM_ProductoPosicion, FABM_ProductoPosicion);
-end;
-
-
 procedure TFPrincipal.AABM_PersonasExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_Personas, FABM_Personas);
@@ -353,6 +347,11 @@ procedure TFPrincipal.AEnviarMailExecute(Sender: TObject);
 begin
   Application.CreateForm(TFMailEnviar, FMailEnviar);
   FMailEnviar.ShowModal;
+end;
+
+procedure TFPrincipal.AABM_ProdStockPosicExecute(Sender: TObject);
+begin
+ EKVentanas1.Abrir(Sender, TFABMProductoStockPosicion, FABMProductoStockPosicion);
 end;
 
 end.

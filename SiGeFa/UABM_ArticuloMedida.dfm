@@ -21,17 +21,17 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 416
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PageControlEdicion: TPageControl
       Left = 0
       Top = 0
-      Width = 854
-      Height = 410
-      ActivePage = TabMedidaArticuloUnico
+      Width = 862
+      Height = 416
+      ActivePage = TabMedidaArticulo
       Align = alClient
       TabOrder = 0
       OnChange = PageControlEdicionChange
@@ -149,13 +149,13 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object Splitter1: TSplitter
           Left = 487
           Top = 0
-          Height = 382
+          Height = 388
         end
         object DBGridMedida: TDBGrid
           Left = 490
           Top = 0
-          Width = 356
-          Height = 382
+          Width = 364
+          Height = 388
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
           Color = 13431031
@@ -184,7 +184,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Left = 0
           Top = 0
           Width = 487
-          Height = 382
+          Height = 388
           Hint = 'Presione el boton derecho del mouse para cargar un articulo'
           Align = alLeft
           Color = 14606012
@@ -216,7 +216,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object PanelSeleccionarArticulo: TPanel
           Left = 0
           Top = 0
-          Width = 846
+          Width = 854
           Height = 39
           Align = alTop
           BevelOuter = bvNone
@@ -240,18 +240,18 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             Top = 8
             Width = 446
             Height = 21
+            Style = csDropDownList
             CharCase = ecUpperCase
             ItemHeight = 13
             TabOrder = 0
-            Text = 'CBARTICULO'
             OnKeyUp = CBArticuloKeyUp
           end
         end
         object DBGridMedidaARticulo: TDBGrid
           Left = 0
           Top = 39
-          Width = 846
-          Height = 343
+          Width = 854
+          Height = 349
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
           Color = 14606012
@@ -283,7 +283,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

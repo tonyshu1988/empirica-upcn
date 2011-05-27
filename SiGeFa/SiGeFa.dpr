@@ -18,7 +18,6 @@ uses
   UABM_Sucursal in 'UABM_Sucursal.pas' {FABM_Sucursal},
   UABM_SucursalPosicion in 'UABM_SucursalPosicion.pas' {FABM_SucursalPosicion},
   UABM_ProductoStock in 'UABM_ProductoStock.pas' {FABM_ProductoStock},
-  UABM_ProductoPosicion in 'UABM_ProductoPosicion.pas' {FABM_ProductoPosicion},
   UABM_Personas in 'UABM_Personas.pas' {FABM_Personas},
   UABM_Articulo in 'UABM_Articulo.pas' {FABM_Articulo},
   UImprimirEtiquetas in 'UImprimirEtiquetas.pas' {FImprimirEtiquetas},
@@ -26,7 +25,8 @@ uses
   UMailConfigurar in 'UMailConfigurar.pas' {FMailConfigurar},
   UMailEnviar in 'UMailEnviar.pas' {FMailEnviar},
   USeleccionarSucursal in 'USeleccionarSucursal.pas' {FSeleccionarSucursal},
-  UPanelNotificacion in 'UPanelNotificacion.pas' {FPanelNotificacion};
+  UPanelNotificacion in 'UPanelNotificacion.pas' {FPanelNotificacion},
+  UABMPorductoStockPosicion in 'UABMPorductoStockPosicion.pas' {FABMProductoStockPosicion};
 
 {$R *.res}
 
