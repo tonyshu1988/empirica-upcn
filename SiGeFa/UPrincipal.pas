@@ -112,7 +112,7 @@ implementation
 Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_Articulo, UABM_TipoArticulo, UABM_Marcas, UABM_ArticuloMedida,
   UABM_TipoEmpresa, UABM_Sucursal, UABM_SucursalPosicion,
-  UABM_ProductoStock, UABM_ProductoPosicion, UABM_Personas,
+  UABM_ProductoStock, UABM_Personas,
   UImprimirEtiquetas, UMailBandeja, USeleccionarSucursal, UMailConfigurar,
   UMailEnviar, UABMPorductoStockPosicion;
 
