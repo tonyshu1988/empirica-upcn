@@ -153,6 +153,7 @@ uses UDM, UPrincipal;
 
 procedure TFABM_Personas.FormCreate(Sender: TObject);
 begin
+  PageControl.ActivePage:= TabSheetDatos;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   EKOrdenar.CargarConfigColunmas;

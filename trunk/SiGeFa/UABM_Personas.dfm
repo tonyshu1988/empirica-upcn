@@ -517,14 +517,13 @@ object FABM_Personas: TFABM_Personas
             Align = alClient
             Color = 14606012
             DataSource = DS_RelacionPersona
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
-            OnDrawColumnCell = DBGridClientesDrawColumnCell
             Columns = <
               item
                 Expanded = False
