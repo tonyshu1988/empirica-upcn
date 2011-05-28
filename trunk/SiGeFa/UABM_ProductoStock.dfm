@@ -1,8 +1,8 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 309
-  Top = 191
+  Left = 319
+  Top = 159
   Width = 870
-  Height = 507
+  Height = 546
   Caption = 'ABM Producto Stock'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,105 +23,319 @@ object FABM_ProductoStock: TFABM_ProductoStock
     Left = 0
     Top = 0
     Width = 854
-    Height = 417
+    Height = 456
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
     TabOrder = 4
-    object DBGridStock: TDBGrid
+    object PanelAsociar: TPanel
       Left = 5
       Top = 5
       Width = 844
-      Height = 407
+      Height = 446
       Align = alClient
-      Color = 14606012
-      DataSource = DS_Stock
-      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      BevelOuter = bvNone
+      TabOrder = 1
+      object Splitter1: TSplitter
+        Left = 465
+        Top = 21
+        Height = 425
+      end
+      object PanelAsociar_Producto: TPanel
+        Left = 468
+        Top = 21
+        Width = 376
+        Height = 425
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGridProducto: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 376
+          Height = 425
+          Align = alClient
+          Color = 13431031
+          DataSource = DS_Producto
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Producto
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'producto'
+              Title.Alignment = taCenter
+              Title.Caption = 'Producto'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'medida'
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'marca'
+              Title.Alignment = taCenter
+              Title.Caption = 'Marca'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'tipoArticulo'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo Art'#237'culo'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'articulo'
+              Title.Alignment = taCenter
+              Title.Caption = 'Art'#237'culo'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codigoBarra'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Barra'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codProducto'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Producto'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codCabecera'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Cabecera'
+              Width = 100
+              Visible = True
+            end>
+        end
+      end
+      object PanelAsociar_Sucursal: TPanel
+        Left = 0
+        Top = 21
+        Width = 465
+        Height = 425
+        Align = alLeft
+        BevelOuter = bvNone
+        TabOrder = 1
+        object DBGridSucursal: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 465
+          Height = 425
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_Sucursal
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Sucursal
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'nombre'
+              Title.Alignment = taCenter
+              Title.Caption = 'Sucursal'
+              Width = 475
+              Visible = True
+            end>
+        end
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 844
+        Height = 21
+        Align = alTop
+        BevelOuter = bvNone
+        Caption = 
+          'ASOCIAR LOS PRODUCTOS PERTENECIENTES A CADA UNA DE LAS SUCURSALE' +
+          'S'
+        TabOrder = 2
+      end
+    end
+    object PanelCarga: TPanel
+      Left = 5
+      Top = 5
+      Width = 844
+      Height = 446
+      Align = alClient
+      BevelOuter = bvNone
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'COD_CORTO_CABECERA'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd Cabecera'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COD_CORTO_PRODUCTO'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd Producto'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CODIGO_BARRA'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd Barra'
-          Width = 98
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Nombre'
-          Width = 133
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'MEDIDA'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Medida'
-          Visible = True
-        end
-        item
-          Color = 15856100
-          Expanded = False
-          FieldName = 'STOCK_ACTUAL'
-          Title.Alignment = taCenter
-          Title.Caption = 'Actual'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'STOCK_MIN'
-          Title.Alignment = taCenter
-          Title.Caption = 'Minimo'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'STOCK_MAX'
-          Title.Alignment = taCenter
-          Title.Caption = 'Maximo'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'STOCK_REPEDIDO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Repedido'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'STOCK_MIN_ALARMA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Alarma'
-          Visible = True
-        end>
+      object DBGridStock: TDBGrid
+        Left = 0
+        Top = 0
+        Width = 844
+        Height = 446
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_Stock
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'SUCURSAL'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal'
+            Width = 187
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'CODIGO_BARRA'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Barra'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Producto'
+            Width = 211
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MEDIDA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Medida'
+            Width = 113
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_MARCA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Marca'
+            Width = 150
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TIPO_ARTICULO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tipo Art'#237'culo'
+            Width = 136
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_ARTICULO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Art'#237'culo'
+            Width = 133
+            Visible = True
+          end
+          item
+            Color = 15921894
+            Expanded = False
+            FieldName = 'STOCK_ACTUAL'
+            Title.Alignment = taCenter
+            Title.Caption = 'Actual'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'STOCK_MIN'
+            Title.Alignment = taCenter
+            Title.Caption = 'Minimo'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'STOCK_MAX'
+            Title.Alignment = taCenter
+            Title.Caption = 'Maximo'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'STOCK_REPEDIDO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Pto Repedido'
+            Width = 100
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'STOCK_MIN_ALARMA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Alarma'
+            Width = 100
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'COD_CORTO_CABECERA'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Cabecera'
+            Width = -1
+            Visible = False
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'COD_CORTO_PRODUCTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Producto'
+            Width = -1
+            Visible = False
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'BAJA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Baja'
+            Width = -1
+            Visible = False
+          end>
+      end
     end
   end
   object dxBarABM: TdxBarManager
@@ -253,6 +467,14 @@ object FABM_ProductoStock: TFABM_ProductoStock
           end
           item
             BeginGroup = True
+            Item = btnAsociar
+            Visible = True
+          end
+          item
+            Item = btnProcesar
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -603,20 +825,27 @@ object FABM_ProductoStock: TFABM_ProductoStock
       OnClick = btnModificarClick
       AutoGrayScale = False
     end
-    object btnBaja: TdxBarLargeButton
-      Caption = 'Baja'
+    object btnProcesar: TdxBarLargeButton
+      Caption = 'Procesar'
       Category = 0
-      Hint = 'Da de baja un registro'
+      Enabled = False
+      Hint = 
+        'Asociar los Productos pertenecientes a cada una de las Sucursale' +
+        's'
       Visible = ivAlways
-      ImageIndex = 25
+      ImageIndex = 50
+      OnClick = btnProcesarClick
       AutoGrayScale = False
     end
-    object btnReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+    object btnAsociar: TdxBarLargeButton
+      Caption = 'Asociar'
       Category = 0
-      Hint = 'Reactiva un registro'
+      Hint = 
+        'Asociar los Productos pertenecientes a cada una de las Sucursale' +
+        's'
       Visible = ivAlways
-      ImageIndex = 24
+      ImageIndex = 12
+      OnClick = btnAsociarClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
@@ -658,13 +887,11 @@ object FABM_ProductoStock: TFABM_ProductoStock
     end
     object GrupoEditando: TdxBarGroup
       Items = (
-        'btnNuevo'
-        'btnModificar'
         'btnBuscar'
         'btnVerDetalle'
-        'btnBaja'
-        'btnSalir'
-        'btnReactivar'
+        'btnNuevo'
+        'btnModificar'
+        'btnAsociar'
         'btnImprimir')
     end
     object GrupoGuardarCancelar: TdxBarGroup
@@ -674,69 +901,40 @@ object FABM_ProductoStock: TFABM_ProductoStock
         'btnCancelar')
     end
   end
-  object ZP_GenerarStock: TZStoredProc
-    Connection = DM.Conexion
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_SUCURSAL'
-        ParamType = ptInput
-      end>
-    StoredProcName = 'GENERAR_STOCK_INICIAL'
-    Left = 56
-    Top = 136
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'ID_SUCURSAL'
-        ParamType = ptInput
-      end>
-  end
   object ZQ_Stock: TZQuery
     Connection = DM.Conexion
     UpdateObject = ZU_Stock
+    AfterInsert = ZQ_StockAfterInsert
     SQL.Strings = (
       
-        'select sp.id_stock_producto, sp.id_sucursal, sp.id_producto, sp.' +
-        'stock_actual,'
+        'select sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.s' +
+        'tock_max,'
+      '       sp.stock_repedido, sp.stock_min_alarma,'
+      '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
+      '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
+      '       md.medida, mc.nombre_marca, pc.baja,'
       
-        '       sp.stock_min, sp.stock_max, sp.stock_repedido, sp.stock_m' +
-        'in_alarma,'
-      
-        '       pc.nombre, pc.cod_corto as cod_corto_cabecera, pr.descrip' +
-        'cion,'
-      
-        '       pr.cod_corto as cod_corto_producto, pr.codigo_barra, m.me' +
-        'dida'
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      '       su.nombre as sucursal'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
-      'left join medida m on (pr.id_medida = m.id_medida)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
         'prod_cabecera)'
-      'where sp.id_sucursal = :id_sucursal')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_sucursal'
-        ParamType = ptUnknown
-      end>
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      'left join sucursal su on (sp.id_sucursal = su.id_sucursal)')
+    Params = <>
     Left = 152
     Top = 80
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_sucursal'
-        ParamType = ptUnknown
-      end>
     object ZQ_StockID_STOCK_PRODUCTO: TIntegerField
       FieldName = 'ID_STOCK_PRODUCTO'
-    end
-    object ZQ_StockID_SUCURSAL: TIntegerField
-      FieldName = 'ID_SUCURSAL'
-    end
-    object ZQ_StockID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
+      Required = True
     end
     object ZQ_StockSTOCK_ACTUAL: TFloatField
       FieldName = 'STOCK_ACTUAL'
@@ -761,10 +959,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object ZQ_StockCOD_CORTO_CABECERA: TStringField
       FieldName = 'COD_CORTO_CABECERA'
     end
-    object ZQ_StockDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 500
-    end
     object ZQ_StockCOD_CORTO_PRODUCTO: TStringField
       FieldName = 'COD_CORTO_PRODUCTO'
     end
@@ -775,6 +969,26 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object ZQ_StockMEDIDA: TStringField
       FieldName = 'MEDIDA'
       Size = 30
+    end
+    object ZQ_StockNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_StockBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_StockNOMBRE_ARTICULO: TStringField
+      FieldName = 'NOMBRE_ARTICULO'
+      Size = 200
+    end
+    object ZQ_StockTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object ZQ_StockSUCURSAL: TStringField
+      FieldName = 'SUCURSAL'
+      Size = 200
     end
   end
   object ZU_Stock: TZUpdateSQL
@@ -843,25 +1057,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
     Left = 152
     Top = 192
   end
-  object ZQ_GenerarStock: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'execute procedure generar_stock_inicial (:id_sucursal)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_sucursal'
-        ParamType = ptUnknown
-      end>
-    Left = 56
-    Top = 192
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_sucursal'
-        ParamType = ptUnknown
-      end>
-  end
   object EKOrdenarGrilla: TEKOrdenarGrilla
     Grilla = DBGridStock
     FuenteNormal = []
@@ -869,12 +1064,28 @@ object FABM_ProductoStock: TFABM_ProductoStock
     Ordenar = True
     MoverColumna = True
     Left = 56
-    Top = 248
+    Top = 136
   end
   object EKBuscarStock: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Cod. Prod. Cabecera'
+        Titulo = 'Sucursal'
+        Campo = 'nombre'
+        Tabla = 'sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Barra'
+        Campo = 'codigo_barra'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Cabecera'
         Campo = 'cod_corto'
         Tabla = 'producto_cabecera'
         TipoCampoIndiceVer = 'Contiene'
@@ -882,10 +1093,77 @@ object FABM_ProductoStock: TFABM_ProductoStock
         ItemIndex = -1
       end
       item
-        Titulo = 'Cod. Prod. Detalle'
+        Titulo = 'C'#243'd. Detalle'
         Campo = 'cod_corto'
         Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Producto'
+        Campo = 'nombre'
+        Tabla = 'producto_cabecera'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Medida'
+        Campo = 'medida'
+        Tabla = 'medida'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Marca'
+        Campo = 'nombre_marca'
+        Tabla = 'marca'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'tipo_articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Stock Actual'
+        Campo = 'stock_actual'
+        Tabla = 'stock_producto'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Stock Minimo'
+        Campo = 'stock_min'
+        Tabla = 'stock_producto'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Stock Maximo'
+        Campo = 'stock_max'
+        Tabla = 'stock_producto'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
         TipoComboEditable = False
         ItemIndex = -1
       end>
@@ -894,48 +1172,203 @@ object FABM_ProductoStock: TFABM_ProductoStock
     DataSet = ZQ_Stock
     SQL.Strings = (
       
-        'select sp.id_stock_producto, sp.id_sucursal, sp.id_producto, sp.' +
-        'stock_actual,'
+        'select sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.s' +
+        'tock_max,'
+      '       sp.stock_repedido, sp.stock_min_alarma,'
+      '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
+      '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
+      '       md.medida, mc.nombre_marca, pc.baja,'
       
-        '       sp.stock_min, sp.stock_max, sp.stock_repedido, sp.stock_m' +
-        'in_alarma,'
-      
-        '       pc.nombre, pc.cod_corto as cod_corto_cabecera, pr.descrip' +
-        'cion,'
-      
-        '       pr.cod_corto as cod_corto_producto, pr.codigo_barra, m.me' +
-        'dida'
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      '       su.nombre as sucursal'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
-      'left join medida m on (pr.id_medida = m.id_medida)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
         'prod_cabecera)'
-      'where sp.id_sucursal = :id_sucursal')
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      'left join sucursal su on (sp.id_sucursal = su.id_sucursal)')
     SQL_Select.Strings = (
       
-        'select sp.id_stock_producto, sp.id_sucursal, sp.id_producto, sp.' +
-        'stock_actual,'
+        'select sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.s' +
+        'tock_max,'
+      '       sp.stock_repedido, sp.stock_min_alarma,'
+      '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
+      '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
+      '       md.medida, mc.nombre_marca, pc.baja,'
       
-        '       sp.stock_min, sp.stock_max, sp.stock_repedido, sp.stock_m' +
-        'in_alarma,'
-      
-        '       pc.nombre, pc.cod_corto as cod_corto_cabecera, pr.descrip' +
-        'cion,'
-      
-        '       pr.cod_corto as cod_corto_producto, pr.codigo_barra, m.me' +
-        'dida')
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      '       su.nombre as sucursal')
     SQL_From.Strings = (
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
-      'left join medida m on (pr.id_medida = m.id_medida)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
-        'prod_cabecera)')
-    SQL_Where.Strings = (
-      'where sp.id_sucursal = :id_sucursal')
+        'prod_cabecera)'
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      'left join sucursal su on (sp.id_sucursal = su.id_sucursal)')
     UsarWhereOriginal = EK_Con_Where
     Left = 56
-    Top = 304
+    Top = 192
+  end
+  object Popup_Sucursal: TPopupMenu
+    Left = 288
+    Top = 77
+    object PopItemSucursal_Agregar: TMenuItem
+      Caption = 'Agregar Sucursal'
+      OnClick = PopItemSucursal_AgregarClick
+    end
+    object PopItemSucursal_Quitar: TMenuItem
+      Caption = 'Quitar Sucursal'
+      OnClick = PopItemSucursal_QuitarClick
+    end
+  end
+  object Popup_Producto: TPopupMenu
+    Left = 392
+    Top = 77
+    object PopItemProducto_Agregar: TMenuItem
+      Caption = 'Agregar Producto'
+      OnClick = PopItemProducto_AgregarClick
+    end
+    object PopItemProducto_Quitar: TMenuItem
+      Caption = 'Quitar Producto'
+      OnClick = PopItemProducto_QuitarClick
+    end
+  end
+  object CD_Sucursal: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 288
+    Top = 128
+    object CD_Sucursal_idSucursal: TIntegerField
+      FieldName = 'idSucursal'
+    end
+    object CD_Sucursal_nombre: TStringField
+      FieldName = 'nombre'
+      Size = 200
+    end
+  end
+  object DS_Sucursal: TDataSource
+    DataSet = CD_Sucursal
+    Left = 288
+    Top = 184
+  end
+  object EKListado_Sucursal: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      
+        'select s.id_sucursal, '#39'Sucursal: '#39'||s.nombre||'#39' - '#39'|| coalesce (' +
+        #39'Direcci'#243'n: '#39' || s.direccion, '#39'Direcci'#243'n: S/D'#39') as Busqueda'
+      'from sucursal s'
+      'where s.id_sucursal <> 0')
+    CampoBuscar = 'Busqueda'
+    CampoClave = 'id_sucursal'
+    TituloVentana = 'Buscar Sucursal'
+    Left = 288
+    Top = 240
+  end
+  object DS_Producto: TDataSource
+    DataSet = CD_Producto
+    Left = 392
+    Top = 184
+  end
+  object CD_Producto: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 392
+    Top = 128
+    object CD_Producto_idProducto: TIntegerField
+      FieldName = 'idProducto'
+    end
+    object CD_Producto_producto: TStringField
+      FieldName = 'producto'
+      Size = 30
+    end
+    object CD_Producto_medida: TStringField
+      FieldName = 'medida'
+      Size = 30
+    end
+    object CD_Producto_marca: TStringField
+      FieldName = 'marca'
+      Size = 50
+    end
+    object CD_Producto_tipoArticulo: TStringField
+      FieldName = 'tipoArticulo'
+      Size = 200
+    end
+    object CD_Producto_articulo: TStringField
+      FieldName = 'articulo'
+      Size = 200
+    end
+    object CD_Producto_codigoBarra: TStringField
+      FieldName = 'codigoBarra'
+      Size = 40
+    end
+    object CD_Producto_codProducto: TStringField
+      FieldName = 'codProducto'
+    end
+    object CD_Producto_codCabecera: TStringField
+      FieldName = 'codCabecera'
+    end
+  end
+  object vaciar_TempSucursal: TZSQLProcessor
+    Params = <>
+    Script.Strings = (
+      'delete from TEMP_SUCURSAL;')
+    Connection = DM.Conexion
+    Delimiter = ';'
+    Left = 288
+    Top = 296
+  end
+  object vaciar_TempProducto: TZSQLProcessor
+    Params = <>
+    Script.Strings = (
+      'delete from TEMP_PRODUCTO;')
+    Connection = DM.Conexion
+    Delimiter = ';'
+    Left = 392
+    Top = 240
+  end
+  object ZQ_TempSucursal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select * from temp_sucursal')
+    Params = <>
+    Left = 285
+    Top = 349
+    object ZQ_TempSucursalID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+  end
+  object ZQ_TempProducto: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select * from temp_producto')
+    Params = <>
+    Left = 395
+    Top = 295
+    object ZQ_TempProductoID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+  end
+  object ZQ_GenerarStock: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'execute procedure GENERAR_STOCK_INICIAL')
+    Params = <>
+    Left = 56
+    Top = 248
   end
 end
