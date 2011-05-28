@@ -9,7 +9,7 @@ uses
   mxNativeExcel, IdBaseComponent, IdComponent, IdTCPConnection,
   IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage, ExtCtrls,
   IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
-  IdSMTPBase, IdExplicitTLSClientServerBase, StdCtrls;
+  IdSMTPBase, IdExplicitTLSClientServerBase, StdCtrls, EKIni;
 
 type
   TDM = class(TDataModule)
@@ -52,6 +52,7 @@ type
     ZQ_ConfigMailSMTP_SSL: TStringField;
     ZQ_ConfigMailPOP3_SSL: TStringField;
     ZQ_ConfigMailPOP3_AUTENTICACION: TStringField;
+    EKIni: TEKIni;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure configMail(Tipo: String; id: integer);
@@ -73,13 +74,13 @@ var
 
 implementation
 
-uses UPrincipal, USeleccionarSucursal, UPanelNotificacion;
+uses UPrincipal, USeleccionarSucursal, UPanelNotificacion, IniFiles;
 
 {$R *.dfm}
 
 procedure TDM.LoginLogin(Sender: TObject);
 var
-  aux:string;
+  aux, logo_fondo:string;
   i: integer;
 begin
   SkinData1.Active:= true;
@@ -91,6 +92,15 @@ begin
   auxCurrencyString:= CurrencyString;
 
   enviandoMail:= false;
+
+  EKIni.abrir;
+  logo_fondo:= EKIni.Ini.ReadString('LOGO_FONDO', 'logo', '');
+  try
+    if logo_fondo <> '' then
+      FPrincipal.LogoFondo.Picture.LoadFromFile(logo_fondo);
+  except
+    exit;
+  end;
 end;
 
 

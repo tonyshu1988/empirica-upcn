@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'D:\Empirica\SiGeFa\Bases\SiGeFa.FDB'
+    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFaVacia.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -1750,5 +1750,10 @@ object DM: TDM
     SSLOptions.VerifyDepth = 0
     Left = 48
     Top = 248
+  end
+  object EKIni: TEKIni
+    Archivo = 'sistema.ini'
+    Left = 280
+    Top = 144
   end
 end
