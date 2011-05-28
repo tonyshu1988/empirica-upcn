@@ -3,7 +3,7 @@ object FPrincipal: TFPrincipal
   Top = 140
   Width = 871
   Height = 563
-  Caption = 'Administrativo'
+  Caption = 'SiGeFa - Sistema de Gesti'#243'n y Facturaci'#243'n'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 863
-    Height = 463
+    Width = 855
+    Height = 457
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 492
-    Width = 863
+    Top = 486
+    Width = 855
     Height = 19
     Panels = <
       item
@@ -4719,7 +4719,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 863
+    Width = 855
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 863
-    Height = 463
+    Width = 855
+    Height = 457
     Align = alClient
     Color = 16053492
     TabOrder = 2

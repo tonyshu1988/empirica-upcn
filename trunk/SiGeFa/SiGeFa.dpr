@@ -37,7 +37,7 @@ begin
   ThousandSeparator := ',';
   DateSeparator := '/';
   ShortDateFormat := 'dd/MM/yyyy';
-  Application.Title := 'SiGeFa';
+  Application.Title := 'SiGeFa - Sistema de Gestión y Facturación';
   Application.CreateForm(TDM, DM);
   Application.Run;
 end.
