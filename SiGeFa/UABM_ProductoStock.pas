@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, DB,
   ZAbstractRODataset, ZAbstractDataset, ZStoredProcedure, ZSqlUpdate,
-  ZDataset, EKDBGrid, EKOrdenarGrilla, EKBusquedaAvanzada;
+  ZDataset, EKDBGrid, EKOrdenarGrilla, EKBusquedaAvanzada, Menus,
+  EKListadoSQL, DBClient, UBuscarProducto, ZSqlProcessor;
 
 type
   TFABM_ProductoStock = class(TForm)
@@ -15,8 +16,8 @@ type
     btnVerDetalle: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
-    btnBaja: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
+    btnProcesar: TdxBarLargeButton;
+    btnAsociar: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
@@ -24,15 +25,50 @@ type
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     PanelFondo: TPanel;
-    ZP_GenerarStock: TZStoredProc;
     ZQ_Stock: TZQuery;
     ZU_Stock: TZUpdateSQL;
     DS_Stock: TDataSource;
-    ZQ_GenerarStock: TZQuery;
     DBGridStock: TDBGrid;
+    EKOrdenarGrilla: TEKOrdenarGrilla;
+    EKBuscarStock: TEKBusquedaAvanzada;
+    PanelCarga: TPanel;
+    PanelAsociar: TPanel;
+    PanelAsociar_Producto: TPanel;
+    PanelAsociar_Sucursal: TPanel;
+    DBGridSucursal: TDBGrid;
+    DBGridProducto: TDBGrid;
+    Popup_Sucursal: TPopupMenu;
+    Popup_Producto: TPopupMenu;
+    PopItemSucursal_Agregar: TMenuItem;
+    PopItemSucursal_Quitar: TMenuItem;
+    PopItemProducto_Agregar: TMenuItem;
+    PopItemProducto_Quitar: TMenuItem;
+    Splitter1: TSplitter;
+    CD_Sucursal: TClientDataSet;
+    CD_Sucursal_nombre: TStringField;
+    CD_Sucursal_idSucursal: TIntegerField;
+    DS_Sucursal: TDataSource;
+    EKListado_Sucursal: TEKListadoSQL;
+    DS_Producto: TDataSource;
+    CD_Producto: TClientDataSet;
+    CD_Producto_idProducto: TIntegerField;
+    CD_Producto_producto: TStringField;
+    CD_Producto_medida: TStringField;
+    CD_Producto_marca: TStringField;
+    CD_Producto_tipoArticulo: TStringField;
+    CD_Producto_articulo: TStringField;
+    CD_Producto_codigoBarra: TStringField;
+    CD_Producto_codProducto: TStringField;
+    CD_Producto_codCabecera: TStringField;
+    vaciar_TempSucursal: TZSQLProcessor;
+    vaciar_TempProducto: TZSQLProcessor;
+    ZQ_TempSucursal: TZQuery;
+    ZQ_TempProducto: TZQuery;
+    ZQ_TempProductoID_PRODUCTO: TIntegerField;
+    ZQ_TempSucursalID_SUCURSAL: TIntegerField;
+    ZQ_GenerarStock: TZQuery;
+    Panel1: TPanel;
     ZQ_StockID_STOCK_PRODUCTO: TIntegerField;
-    ZQ_StockID_SUCURSAL: TIntegerField;
-    ZQ_StockID_PRODUCTO: TIntegerField;
     ZQ_StockSTOCK_ACTUAL: TFloatField;
     ZQ_StockSTOCK_MIN: TFloatField;
     ZQ_StockSTOCK_MAX: TFloatField;
@@ -40,12 +76,14 @@ type
     ZQ_StockSTOCK_MIN_ALARMA: TStringField;
     ZQ_StockNOMBRE: TStringField;
     ZQ_StockCOD_CORTO_CABECERA: TStringField;
-    ZQ_StockDESCRIPCION: TStringField;
     ZQ_StockCOD_CORTO_PRODUCTO: TStringField;
     ZQ_StockCODIGO_BARRA: TStringField;
     ZQ_StockMEDIDA: TStringField;
-    EKOrdenarGrilla: TEKOrdenarGrilla;
-    EKBuscarStock: TEKBusquedaAvanzada;
+    ZQ_StockNOMBRE_MARCA: TStringField;
+    ZQ_StockBAJA: TStringField;
+    ZQ_StockNOMBRE_ARTICULO: TStringField;
+    ZQ_StockTIPO_ARTICULO: TStringField;
+    ZQ_StockSUCURSAL: TStringField;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -54,8 +92,16 @@ type
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
+    procedure PopItemProducto_AgregarClick(Sender: TObject);
+    procedure PopItemProducto_QuitarClick(Sender: TObject);
+    procedure PopItemSucursal_AgregarClick(Sender: TObject);
+    procedure PopItemSucursal_QuitarClick(Sender: TObject);
+    procedure btnProcesarClick(Sender: TObject);
+    procedure btnAsociarClick(Sender: TObject);
+    procedure ZQ_StockAfterInsert(DataSet: TDataSet);
   private
-    { Private declarations }
+    vsel: TFBuscarProducto;
+    procedure onSelProducto;
   public
     { Public declarations }
   end;
@@ -65,6 +111,7 @@ var
 
 const
   transaccion_ABMStock = 'ABM STOCK';
+  transaccion_Asociar = 'ABM STOCK - ASOCIAR';
 
 implementation
 
@@ -72,15 +119,13 @@ uses UDM, UPrincipal;
 
 {$R *.dfm}
 
-procedure TFABM_ProductoStock.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TFABM_ProductoStock.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrdenarGrilla.GuardarConfigColumnas;
 end;
 
 
-procedure TFABM_ProductoStock.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
+procedure TFABM_ProductoStock.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABMStock);
 end;
@@ -99,6 +144,7 @@ begin
     DBGridStock.ReadOnly:= false;
   end;
 end;
+
 
 
 procedure TFABM_ProductoStock.btnGuardarClick(Sender: TObject);
@@ -135,33 +181,175 @@ end;
 
 procedure TFABM_ProductoStock.btnSalirClick(Sender: TObject);
 begin
+  EKOrdenarGrilla.GuardarConfigColumnas;
   Close;
 end;
 
 
 procedure TFABM_ProductoStock.FormCreate(Sender: TObject);
 begin
-  EKBuscarStock.SQL_Where.Text:= 'where sp.id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
+  PanelAsociar.Visible:= false;
   EKOrdenarGrilla.CargarConfigColunmas;
 
-  //inicio transaccion
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMStock, []) then
-  begin
-    //genero el stock en 0 para los productos cargados recientemente
-    ZQ_GenerarStock.close;
-    ZQ_GenerarStock.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
-    ZQ_GenerarStock.ExecSQL;
-
-    //finalizo la transaccion
-    if not DM.EKModelo.finalizar_transaccion(transaccion_ABMStock) then
-      DM.EKModelo.cancelar_transaccion(transaccion_ABMStock);
-  end;
+  CD_Sucursal.CreateDataSet;
+  CD_Producto.CreateDataSet;
 end;
 
 
 procedure TFABM_ProductoStock.btnBuscarClick(Sender: TObject);
 begin
   EKBuscarStock.Buscar;
+end;
+
+
+procedure TFABM_ProductoStock.onSelProducto;
+begin
+  if not vsel.ZQ_Producto.IsEmpty then
+  begin
+    CD_Producto.Filter:= 'idProducto = ' +  vsel.ZQ_ProductoID_PRODUCTO.AsString;
+    CD_Producto.Filtered := true;
+    if not CD_Producto.IsEmpty then
+    begin
+      CD_Producto.Filtered := false;
+      Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
+      exit;
+    end;
+
+    CD_Producto.Filtered := false;
+    CD_Producto.Append;
+    CD_Producto_idProducto.AsInteger := vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
+    CD_Producto_producto.AsString := vsel.ZQ_ProductoNOMBRE.AsString;
+    CD_Producto_medida.AsString := vsel.ZQ_ProductoMEDIDA.AsString;
+    CD_Producto_marca.AsString := vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
+    CD_Producto_tipoArticulo.AsString := vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
+    CD_Producto_articulo.AsString := vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
+    CD_Producto_codigoBarra.AsString := vsel.ZQ_ProductoCODIGO_BARRA.AsString;
+    CD_Producto_codCabecera.AsString := vsel.ZQ_ProductoCOD_CORTO.AsString;
+    CD_Producto_codProducto.AsString := vsel.ZQ_ProductoCOD_CORTO_1.AsString;
+  end;
+
+  if vsel.SeleccionarYSalir then
+    vsel.Close;
+end;
+
+
+procedure TFABM_ProductoStock.PopItemProducto_AgregarClick(Sender: TObject);
+begin
+  if not Assigned(vsel) then
+    vsel:= TFBuscarProducto.Create(nil);
+  vsel.OnSeleccionar := onSelProducto;
+  vsel.ShowModal;
+end;
+
+
+procedure TFABM_ProductoStock.PopItemProducto_QuitarClick(Sender: TObject);
+begin
+  if not CD_Producto.IsEmpty then
+    CD_Producto.Delete;
+end;
+
+
+procedure TFABM_ProductoStock.PopItemSucursal_AgregarClick(Sender: TObject);
+begin
+  if EKListado_Sucursal.Buscar then
+  begin
+    CD_Sucursal.Filter:= 'idSucursal = '+EKListado_Sucursal.Resultado;
+    CD_Sucursal.Filtered := true;
+    if not CD_Sucursal.IsEmpty then
+    begin
+      CD_Sucursal.Filtered := false;
+      Application.MessageBox('La Sucursal seleccionada ya fue cargada','Carga Sucursal',MB_OK+MB_ICONINFORMATION);
+      exit;
+    end;
+
+    CD_Sucursal.Filtered := false;
+    CD_Sucursal.Append;
+    CD_Sucursal_idSucursal.AsString := EKListado_Sucursal.Resultado;
+    CD_Sucursal_nombre.AsString := EKListado_Sucursal.Seleccion;
+  end;
+end;
+
+
+procedure TFABM_ProductoStock.PopItemSucursal_QuitarClick(Sender: TObject);
+begin
+  if not CD_Sucursal.IsEmpty then
+    CD_Sucursal.Delete;
+end;
+
+
+procedure TFABM_ProductoStock.btnProcesarClick(Sender: TObject);
+var
+  estado: boolean;
+begin
+  estado:= false;
+  vaciar_TempSucursal.Execute; //vacio la tabla temporal de sucursal
+  vaciar_TempProducto.Execute; //vacio la tabla temporal de producto
+
+  if CD_Sucursal.IsEmpty or CD_Producto.IsEmpty then
+  begin
+    ShowMessage('Debe seleccionar al menos una Sucursal y al menos un Producto para ser asociados');
+    exit;
+  end;
+
+  if dm.EKModelo.iniciar_transaccion(transaccion_Asociar, [ZQ_TempSucursal, ZQ_TempProducto]) then
+  begin
+    CD_Sucursal.First;
+    while not CD_Sucursal.Eof do
+    begin
+      ZQ_TempSucursal.Append;
+      ZQ_TempSucursalID_SUCURSAL.AsInteger:= CD_Sucursal_idSucursal.AsInteger;
+      CD_Sucursal.Next;
+    end;
+
+    CD_Producto.First;
+    while not CD_Producto.Eof do
+    begin
+      ZQ_TempProducto.Append;
+      ZQ_TempProductoID_PRODUCTO.AsInteger:= CD_Producto_idProducto.AsInteger;
+      CD_Producto.Next;
+    end;
+
+    //finalizo la transaccion
+    if DM.EKModelo.finalizar_transaccion(transaccion_Asociar) then
+      estado:= true //si pudo llenar las tablas temporales entonces seteo que esta todo bien hasta el momento
+    else
+      DM.EKModelo.cancelar_transaccion(transaccion_Asociar);    
+  end;
+
+  if dm.EKModelo.iniciar_transaccion(transaccion_Asociar, []) and estado then
+  begin
+    //genero el stock en 0 para los productos cargados recientemente
+    ZQ_GenerarStock.close;
+    ZQ_GenerarStock.ExecSQL;
+
+    //finalizo la transaccion
+    if DM.EKModelo.finalizar_transaccion(transaccion_Asociar) then
+      ShowMessage('La Asosiación se realizo correctamente')
+    else
+      DM.EKModelo.cancelar_transaccion(transaccion_Asociar);
+  end;
+
+  GrupoEditando.Enabled:= true;
+  btnProcesar.Enabled:= false;
+
+  PanelAsociar.Visible:= false;
+  PanelCarga.Visible:= true;
+end;
+
+
+procedure TFABM_ProductoStock.btnAsociarClick(Sender: TObject);
+begin
+  GrupoEditando.Enabled:= false;
+  btnProcesar.Enabled:= true;
+
+  PanelAsociar.Visible:= true;
+  PanelCarga.Visible:= false;
+end;
+
+
+procedure TFABM_ProductoStock.ZQ_StockAfterInsert(DataSet: TDataSet);
+begin
+  ZQ_Stock.Delete;
 end;
 
 end.
