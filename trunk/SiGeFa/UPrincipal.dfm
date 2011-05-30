@@ -4771,6 +4771,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 10
       OnExecute = AABM_ArticuloExecute
     end
+    object AABM_Colores: TAction
+      Caption = 'ABM Colores'
+      ImageIndex = 3
+      OnExecute = AABM_ColoresExecute
+    end
     object AABM_TipoArticulo: TAction
       Caption = 'ABM Tipo Articulo'
       ImageIndex = 12
@@ -4853,11 +4858,9 @@ object FPrincipal: TFPrincipal
     Top = 72
     object Productos1: TMenuItem
       Caption = 'Productos'
-      object ABMProductos1: TMenuItem
-        Action = AABMProductos
-      end
       object ABM_Articulos: TMenuItem
-        Action = AABM_Articulo
+        Tag = 1
+        Action = AABM_Colores
       end
       object ABMMarcas1: TMenuItem
         Action = AABM_Marcas
@@ -4865,8 +4868,17 @@ object FPrincipal: TFPrincipal
       object ABMTipoArticulo1: TMenuItem
         Action = AABM_TipoArticulo
       end
+      object ABMArticulo1: TMenuItem
+        Action = AABM_Articulo
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
       object ABMArticulosMedida1: TMenuItem
         Action = AABM_ArticuloMedida
+      end
+      object ABMProductos1: TMenuItem
+        Action = AABMProductos
       end
     end
     object Clientes1: TMenuItem
@@ -4889,6 +4901,9 @@ object FPrincipal: TFPrincipal
       object ABMSucursal1: TMenuItem
         Action = AABM_Sucursal
       end
+      object N2: TMenuItem
+        Caption = '-'
+      end
       object ABMSucursalPosicion1: TMenuItem
         Action = AABM_SucursalPosicion
       end
@@ -4901,6 +4916,9 @@ object FPrincipal: TFPrincipal
       object ABMProductoStockPosicin1: TMenuItem
         Tag = 1
         Action = AABM_ProdStockPosic
+      end
+      object N3: TMenuItem
+        Caption = '-'
       end
       object ImprimirEtiquetas1: TMenuItem
         Tag = 1

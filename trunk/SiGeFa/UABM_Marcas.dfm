@@ -130,6 +130,7 @@ object FABM_Marcas: TFABM_Marcas
       Font.Name = 'Verdana'
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
+      Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
       Left = 744
