@@ -145,21 +145,6 @@ type
     grupoCancelar: TBitBtn;
     Label31: TLabel;
     DBEdit10: TDBEdit;
-    PAlta: TPanel;
-    GroupBox1: TGroupBox;
-    Label5: TLabel;
-    Label7: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    DBEdit12: TDBEdit;
-    DBEdit13: TDBEdit;
-    DBEdit14: TDBEdit;
-    DBCheckBox2: TDBCheckBox;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    DBEdit15: TDBEdit;
-    grillaMedidas: TDBGrid;
     PopMenuMedidas: TPopupMenu;
     MenuItem1: TMenuItem;
     MenuItem3: TMenuItem;
@@ -168,6 +153,11 @@ type
     CDMedidasmedida: TStringField;
     DS_Medidas: TDataSource;
     EKListadoMedidas: TEKListadoSQL;
+    Label5: TLabel;
+    grillaMedidas: TDBGrid;
+    PMedidas: TPanel;
+    Label6: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
     procedure btBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -430,7 +420,6 @@ begin
       GrupoVisualizando.Enabled := true;
       tabs.Enabled:= true;
       PProducto.Enabled:=False;
-      PAlta.Visible:=False;
       PEdicion.Visible:=False;
     end
   except
@@ -453,7 +442,6 @@ begin
     GrupoEditando.Enabled := false;
     tabs.Enabled:= true;
     PProducto.Enabled:=False;
-    PAlta.Visible:=False;
     PEdicion.Visible:=False;
   end;
 end;
@@ -550,7 +538,7 @@ begin
     ZQ_DetalleProductoSTOCK_MAX.AsFloat:= 0;
     ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
 
-   PAlta.Visible:=True;
+
    PEdicion.Visible:=False;
    grupoDetalle.Visible:=true;
    grillaDetalle.PopupMenu:=nil;
@@ -560,7 +548,7 @@ end;
 
 procedure TFABMProductos.EditarDetalleClick(Sender: TObject);
 begin
-   PAlta.Visible:=False;
+
    PEdicion.Visible:=True;
    grupoDetalle.Visible:=true;
    grillaDetalle.PopupMenu:=nil;
@@ -893,7 +881,7 @@ begin
      ZQ_DetalleProducto.Filtered := false;
      CDMedidas.Next;
   end;
-   PAlta.Visible:=False;
+
    PEdicion.Visible:=False;
    grupoDetalle.Visible:=false;
    grillaDetalle.PopupMenu:=PopupMenuDetalleProd;

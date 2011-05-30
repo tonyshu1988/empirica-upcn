@@ -37,7 +37,7 @@ type
     AABMClientes: TAction;
     AABMEmpresas: TAction;
     Iconos_Barra_32: TImageList;
-    AABM_Articulo: TAction;
+    AABM_Colores: TAction;
     AABM_TipoArticulo: TAction;
     AABM_Marcas: TAction;
     AABM_ArticuloMedida: TAction;
@@ -69,6 +69,11 @@ type
     ConfigurarMail1: TMenuItem;
     AABM_ProdStockPosic: TAction;
     ABMProductoStockPosicin1: TMenuItem;
+    AABM_Articulo: TAction;
+    ABMArticulo1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -78,7 +83,7 @@ type
     procedure AABMClientesExecute(Sender: TObject);
     procedure AABMEmpresasExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure AABM_ArticuloExecute(Sender: TObject);
+    procedure AABM_ColoresExecute(Sender: TObject);
     procedure AABM_TipoArticuloExecute(Sender: TObject);
     procedure AABM_MarcasExecute(Sender: TObject);
     procedure AABM_ArticuloMedidaExecute(Sender: TObject);
@@ -92,6 +97,7 @@ type
     procedure AConfigMailExecute(Sender: TObject);
     procedure AEnviarMailExecute(Sender: TObject);
     procedure AABM_ProdStockPosicExecute(Sender: TObject);
+    procedure AABM_ArticuloExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -114,7 +120,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_TipoEmpresa, UABM_Sucursal, UABM_SucursalPosicion,
   UABM_ProductoStock, UABM_Personas,
   UImprimirEtiquetas, UMailBandeja, USeleccionarSucursal, UMailConfigurar,
-  UMailEnviar, UABMPorductoStockPosicion;
+  UMailEnviar, UABMPorductoStockPosicion, UABM_Colores;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -270,9 +276,9 @@ begin
 end;
 
 
-procedure TFPrincipal.AABM_ArticuloExecute(Sender: TObject);
+procedure TFPrincipal.AABM_ColoresExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFABM_Articulo, FABM_Articulo);
+  EKVentanas1.Abrir(Sender, TFABM_Colores, FABM_Colores);
 end;
 
 
@@ -352,6 +358,11 @@ end;
 procedure TFPrincipal.AABM_ProdStockPosicExecute(Sender: TObject);
 begin
  EKVentanas1.Abrir(Sender, TFABMProductoStockPosicion, FABMProductoStockPosicion);
+end;
+
+procedure TFPrincipal.AABM_ArticuloExecute(Sender: TObject);
+begin
+    EKVentanas1.Abrir(Sender, TFABM_Articulo, FABM_Articulo);
 end;
 
 end.
