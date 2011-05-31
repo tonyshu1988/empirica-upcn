@@ -1,7 +1,7 @@
 object FABMProductos: TFABMProductos
-  Left = 201
-  Top = 122
-  Width = 1246
+  Left = 232
+  Top = 169
+  Width = 1024
   Height = 639
   Caption = 'FABMProductos'
   Color = clBtnFace
@@ -22,7 +22,7 @@ object FABMProductos: TFABMProductos
   object Panel4: TPanel
     Left = 0
     Top = 0
-    Width = 1230
+    Width = 1008
     Height = 549
     Align = alClient
     Caption = 'Panel4'
@@ -37,7 +37,7 @@ object FABMProductos: TFABMProductos
     object Grilla: TEKDBGrid
       Left = 1
       Top = 20
-      Width = 1228
+      Width = 1006
       Height = 306
       Align = alClient
       Color = 14606012
@@ -126,9 +126,9 @@ object FABMProductos: TFABMProductos
     object tabs: TPageControl
       Left = 1
       Top = 326
-      Width = 1228
+      Width = 1006
       Height = 222
-      ActivePage = tabCabecera
+      ActivePage = tabDetalle
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -140,7 +140,7 @@ object FABMProductos: TFABMProductos
         object PProducto: TPanel
           Left = 0
           Top = 0
-          Width = 1220
+          Width = 998
           Height = 191
           Align = alClient
           TabOrder = 0
@@ -173,7 +173,7 @@ object FABMProductos: TFABMProductos
           end
           object Label3: TLabel
             Left = 14
-            Top = 80
+            Top = 120
             Width = 66
             Height = 13
             Caption = 'Descripci'#243'n'
@@ -207,7 +207,7 @@ object FABMProductos: TFABMProductos
             FocusControl = DBEdit7
           end
           object Label18: TLabel
-            Left = 262
+            Left = 350
             Top = 39
             Width = 181
             Height = 13
@@ -228,8 +228,8 @@ object FABMProductos: TFABMProductos
             FocusControl = edCodCorto
           end
           object Label6: TLabel
-            Left = 590
-            Top = 39
+            Left = 14
+            Top = 79
             Width = 130
             Height = 13
             Caption = 'Color (F1 para buscar)'
@@ -240,6 +240,13 @@ object FABMProductos: TFABMProductos
             Font.Style = []
             ParentFont = False
           end
+          object Shape1: TShape
+            Left = 350
+            Top = 93
+            Width = 49
+            Height = 21
+            Shape = stRoundRect
+          end
           object edImagen: TDBImage
             Left = 743
             Top = 14
@@ -248,7 +255,7 @@ object FABMProductos: TFABMProductos
             DataField = 'IMAGEN'
             DataSource = DS_ProductoCabecera
             Stretch = True
-            TabOrder = 5
+            TabOrder = 6
             OnDblClick = edImagenDblClick
           end
           object edNombre: TDBEdit
@@ -274,13 +281,13 @@ object FABMProductos: TFABMProductos
             Height = 21
             DataField = 'ID_ARTICULO'
             DataSource = DS_ProductoCabecera
-            TabOrder = 6
+            TabOrder = 7
           end
           object edDescripcion: TDBMemo
             Left = 14
-            Top = 94
+            Top = 134
             Width = 715
-            Height = 87
+            Height = 45
             DataField = 'DESCRIPCION'
             DataSource = DS_ProductoCabecera
             Font.Charset = ANSI_CHARSET
@@ -289,12 +296,12 @@ object FABMProductos: TFABMProductos
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 5
           end
           object cmbArticulo: TDBLookupComboBox
-            Left = 262
+            Left = 350
             Top = 53
-            Width = 321
+            Width = 379
             Height = 21
             DataField = 'ID_ARTICULO'
             DataSource = DS_ProductoCabecera
@@ -314,7 +321,7 @@ object FABMProductos: TFABMProductos
           object cmbMarca: TDBLookupComboBox
             Left = 14
             Top = 53
-            Width = 241
+            Width = 331
             Height = 21
             DataField = 'ID_MARCA'
             DataSource = DS_ProductoCabecera
@@ -346,13 +353,14 @@ object FABMProductos: TFABMProductos
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 0
+            OnExit = edCodCortoExit
           end
-          object DBLookupComboBox1: TDBLookupComboBox
-            Left = 590
-            Top = 53
-            Width = 139
+          object cmbColor: TDBLookupComboBox
+            Left = 14
+            Top = 93
+            Width = 331
             Height = 21
-            DataField = 'ID_MARCA'
+            DataField = 'COLOR'
             DataSource = DS_ProductoCabecera
             DropDownRows = 5
             Font.Charset = ANSI_CHARSET
@@ -360,11 +368,11 @@ object FABMProductos: TFABMProductos
             Font.Height = -11
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
-            KeyField = 'ID_MARCA'
-            ListField = 'NOMBRE_MARCA'
-            ListSource = DS_Marca
+            KeyField = 'ID_COLOR'
+            ListField = 'RESUMEN'
+            ListSource = DS_Color
             ParentFont = False
-            TabOrder = 7
+            TabOrder = 4
             OnKeyUp = cmbMarcaKeyUp
           end
         end
@@ -375,14 +383,14 @@ object FABMProductos: TFABMProductos
         object PDetalles: TPanel
           Left = 0
           Top = 0
-          Width = 1220
+          Width = 998
           Height = 191
           Align = alClient
           TabOrder = 0
           object grillaDetalle: TEKDBGrid
             Left = 841
             Top = 1
-            Width = 378
+            Width = 156
             Height = 189
             Align = alClient
             Color = 14606012
@@ -511,8 +519,7 @@ object FABMProductos: TFABMProductos
               Height = 187
               Align = alClient
               Caption = 'Detalles Producto '
-              TabOrder = 0
-              Visible = False
+              TabOrder = 1
               object Label22: TLabel
                 Left = 8
                 Top = 112
@@ -532,7 +539,7 @@ object FABMProductos: TFABMProductos
                 Width = 76
                 Height = 13
                 Caption = 'C'#243'digo Corto'
-                FocusControl = DBEdit8
+                FocusControl = EDDCODCORTO
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -542,11 +549,11 @@ object FABMProductos: TFABMProductos
               end
               object Label30: TLabel
                 Left = 8
-                Top = 64
+                Top = 67
                 Width = 100
                 Height = 13
                 Caption = 'C'#243'digo de Barras'
-                FocusControl = DBEdit9
+                FocusControl = EDDCODBARRAS
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -582,7 +589,7 @@ object FABMProductos: TFABMProductos
                 Font.Style = []
                 ParentFont = False
               end
-              object DBEdit8: TDBEdit
+              object EDDCODCORTO: TDBEdit
                 Left = 8
                 Top = 40
                 Width = 124
@@ -598,9 +605,9 @@ object FABMProductos: TFABMProductos
                 ParentFont = False
                 TabOrder = 0
               end
-              object DBEdit9: TDBEdit
+              object EDDCODBARRAS: TDBEdit
                 Left = 8
-                Top = 80
+                Top = 83
                 Width = 297
                 Height = 21
                 CharCase = ecUpperCase
@@ -612,7 +619,7 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 3
+                TabOrder = 4
               end
               object DBEdit11: TDBEdit
                 Left = 137
@@ -628,7 +635,7 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 2
+                TabOrder = 1
               end
               object DBMemo1: TDBMemo
                 Left = 8
@@ -643,7 +650,7 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 4
+                TabOrder = 5
               end
               object DBCheckBox1: TDBCheckBox
                 Left = 318
@@ -653,27 +660,27 @@ object FABMProductos: TFABMProductos
                 Caption = 'Llevar '#13#10'Stock'
                 DataField = 'LLEVAR_STOCK'
                 DataSource = DS_DetalleProducto
-                TabOrder = 1
+                TabOrder = 3
                 ValueChecked = 'S'
                 ValueUnchecked = 'N'
                 WordWrap = True
               end
               object grupoAceptar: TBitBtn
-                Left = 315
+                Left = 318
                 Top = 128
                 Width = 75
                 Height = 21
                 Caption = 'Aceptar'
-                TabOrder = 5
+                TabOrder = 6
                 OnClick = grupoAceptarClick
               end
               object grupoCancelar: TBitBtn
-                Left = 315
+                Left = 318
                 Top = 156
                 Width = 75
                 Height = 21
                 Caption = 'Cancelar'
-                TabOrder = 6
+                TabOrder = 7
                 OnClick = grupoCancelarClick
               end
               object DBEdit10: TDBEdit
@@ -690,7 +697,7 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 7
+                TabOrder = 2
               end
               object PMedidas: TPanel
                 Left = 410
@@ -704,7 +711,7 @@ object FABMProductos: TFABMProductos
                 object Label5: TLabel
                   Left = 3
                   Top = 3
-                  Width = 104
+                  Width = 132
                   Height = 13
                   Align = alTop
                   Alignment = taCenter
@@ -749,8 +756,7 @@ object FABMProductos: TFABMProductos
               Height = 187
               Align = alLeft
               Caption = 'Detalles Producto '
-              TabOrder = 1
-              Visible = False
+              TabOrder = 0
               object Label23: TLabel
                 Left = 8
                 Top = 25
@@ -881,7 +887,7 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 2
+                TabOrder = 5
               end
               object DBEdit2: TDBEdit
                 Left = 8
@@ -897,7 +903,7 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 3
+                TabOrder = 2
               end
               object DBEdit4: TDBEdit
                 Left = 145
@@ -913,7 +919,7 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 4
+                TabOrder = 3
               end
               object DBEdit6: TDBEdit
                 Left = 8
@@ -929,7 +935,7 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 5
+                TabOrder = 4
               end
             end
           end
@@ -939,7 +945,7 @@ object FABMProductos: TFABMProductos
     object PanelCabecera: TPanel
       Left = 1
       Top = 1
-      Width = 1228
+      Width = 1006
       Height = 19
       Align = alTop
       BevelOuter = bvNone
@@ -959,7 +965,7 @@ object FABMProductos: TFABMProductos
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 1119
+        Left = 897
         Top = 0
         Width = 109
         Height = 19
@@ -1047,6 +1053,9 @@ object FABMProductos: TFABMProductos
       KeyFields = 'ID_ARTICULO'
       Size = 200
       Lookup = True
+    end
+    object ZQ_ProductoCabeceraCOLOR: TIntegerField
+      FieldName = 'COLOR'
     end
   end
   object DS_ProductoCabecera: TDataSource
@@ -2259,7 +2268,27 @@ object FABMProductos: TFABMProductos
   object CDMedidas: TClientDataSet
     Active = True
     Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'id_medida'
+        DataType = ftInteger
+      end
+      item
+        Name = 'medida'
+        DataType = ftString
+        Size = 20
+      end>
+    IndexDefs = <
+      item
+        Name = 'DEFAULT_ORDER'
+        Fields = 'medida'
+      end
+      item
+        Name = 'CHANGEINDEX'
+      end>
+    IndexFieldNames = 'medida'
     Params = <>
+    StoreDefs = True
     Left = 96
     Top = 216
     Data = {
@@ -2293,5 +2322,46 @@ object FABMProductos: TFABMProductos
     CampoClave = 'id_medida'
     Left = 756
     Top = 152
+  end
+  object ZQ_Color: TZQuery
+    Connection = DM.Conexion
+    AfterScroll = ZQ_ColorAfterScroll
+    SQL.Strings = (
+      'select c.*,(c.codigo||'#39' - '#39'||c.nombre) as resumen'
+      'from Color c'
+      'where c.baja = '#39'N'#39)
+    Params = <>
+    Left = 853
+    Top = 152
+    object ZQ_ColorID_COLOR: TIntegerField
+      FieldName = 'ID_COLOR'
+      Required = True
+    end
+    object ZQ_ColorCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 10
+    end
+    object ZQ_ColorNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 30
+    end
+    object ZQ_ColorREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+      Size = 30
+    end
+    object ZQ_ColorBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_ColorRESUMEN: TStringField
+      FieldName = 'RESUMEN'
+      ReadOnly = True
+      Size = 43
+    end
+  end
+  object DS_Color: TDataSource
+    DataSet = ZQ_Color
+    Left = 848
+    Top = 216
   end
 end
