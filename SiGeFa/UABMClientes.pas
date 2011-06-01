@@ -7,7 +7,8 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids,
   EKBusquedaAvanzada, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ZStoredProcedure, ComCtrls, EKDBDateTimePicker,
-  StdCtrls, DBCtrls, Mask, ZSqlUpdate, ActnList, XPStyleActnCtrls, ActnMan;
+  StdCtrls, DBCtrls, Mask, ZSqlUpdate, ActnList, XPStyleActnCtrls, ActnMan,
+  QRCtrls, QuickRpt, EKVistaPreviaQR;
 
 type
   TFABMClientes = class(TForm)
@@ -21,7 +22,7 @@ type
     btnReactivar: TdxBarLargeButton;
     btnVerDetalle: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    btnImprimir: TdxBarLargeButton;
+    btnImprimirListado: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     PanelFondo: TPanel;
@@ -129,6 +130,78 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
+    RepClientesListado: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepClientesListado_Subtitulo: TQRLabel;
+    RepClientesListado_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblPieDePaginaListado: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    EKVistaPreviaListado: TEKVistaPreviaQR;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRDBText6: TQRDBText;
+    QRLabel5: TQRLabel;
+    btnImprimirDetalle: TdxBarLargeButton;
+    EKVistaPreviaDetalle: TEKVistaPreviaQR;
+    QRBand1: TQRBand;
+    QRDBImage1: TQRDBImage;
+    QRLabel6: TQRLabel;
+    RepClientesDetalle_Subtitulo: TQRLabel;
+    RepClientesDetalle_Titulo: TQRLabel;
+    QRBand2: TQRBand;
+    QRBand3: TQRBand;
+    QRlblPieDePaginaDetalle: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRSysData2: TQRSysData;
+    RepClientesDetalle: TQuickRep;
+    ChildBand1: TQRChildBand;
+    QRLabel9: TQRLabel;
+    QRDBText7: TQRDBText;
+    QRLabel8: TQRLabel;
+    QRDBText8: TQRDBText;
+    QRLabel10: TQRLabel;
+    QRDBText9: TQRDBText;
+    QRDBText10: TQRDBText;
+    QRLabel11: TQRLabel;
+    QRDBText11: TQRDBText;
+    QRLabel12: TQRLabel;
+    QRDBText12: TQRDBText;
+    QRLabel13: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRDBText13: TQRDBText;
+    QRLabel15: TQRLabel;
+    QRDBText14: TQRDBText;
+    QRLabel16: TQRLabel;
+    QRDBText15: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRLabel18: TQRLabel;
+    QRDBText17: TQRDBText;
+    QRLabel19: TQRLabel;
+    QRDBText18: TQRDBText;
+    QRLabel20: TQRLabel;
+    QRDBText20: TQRDBText;
+    QRLabel21: TQRLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -137,7 +210,7 @@ type
     procedure btnReactivarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure btnImprimirClick(Sender: TObject);
+    procedure btnImprimirListadoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -152,6 +225,7 @@ type
     procedure AReactivarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
+    procedure btnImprimirDetalleClick(Sender: TObject);
   private
     id_cliente: integer;
   public
@@ -362,15 +436,26 @@ begin
 end;
 
 
-procedure TFABMClientes.btnImprimirClick(Sender: TObject);
+procedure TFABMClientes.btnImprimirListadoClick(Sender: TObject);
 begin
-  ShowMessage('Funcion no disponible en este momento');
-
   if ZQ_Clientes.IsEmpty then
     exit;
 
-//  dm.TitulosReportes(RepProv,CuentaNro);
-//  EKVistaPreviaQR1.VistaPrevia;
+  DM.VariablesReportes(RepClientesListado);
+  QRlblPieDePaginaListado.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  EKVistaPreviaListado.VistaPrevia;
+end;
+
+
+procedure TFABMClientes.btnImprimirDetalleClick(Sender: TObject);
+begin
+  if ZQ_Clientes.IsEmpty then
+    exit;
+
+  DM.VariablesReportes(RepClientesDetalle);
+  QRlblPieDePaginaDetalle.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  EKVistaPreviaDetalle.VistaPrevia;
 end;
 
 
@@ -481,5 +566,7 @@ end;
 //----------------------------------
 //  FIN TECLAS RAPIDAS
 //----------------------------------
+
+
 
 end.

@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
-  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada;
+  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
+  QRCtrls, QuickRpt, EKVistaPreviaQR;
 
 type
   TFABM_Colores = class(TForm)
@@ -57,6 +58,30 @@ type
     AGuardar: TAction;
     ACancelar: TAction;
     EKBuscar: TEKBusquedaAvanzada;
+    EKVistaPrevia: TEKVistaPreviaQR;
+    RepColor: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepColor_Subtitulo: TQRLabel;
+    RepColor_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblPieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel1: TQRLabel;
     procedure ZQ_ColoresAfterScroll(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
@@ -77,6 +102,7 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
   public
   end;
@@ -353,6 +379,17 @@ end;
 
 
 
+
+procedure TFABM_Colores.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_Colores.IsEmpty then
+    exit;
+
+  DM.VariablesReportes(RepColor);
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  EKVistaPrevia.VistaPrevia;
+end;
 
 end.
 

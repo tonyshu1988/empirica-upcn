@@ -1,8 +1,8 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 285
-  Top = 69
+  Left = 370
+  Top = 291
   Width = 895
-  Height = 656
+  Height = 559
   Caption = 'FABMEmpresas'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,15 +22,15 @@ object FABMEmpresas: TFABMEmpresas
     Left = 0
     Top = 0
     Width = 879
-    Height = 566
+    Height = 469
     Align = alClient
     TabOrder = 0
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 284
+      Top = 187
       Width = 877
       Height = 281
-      ActivePage = TabDescripcion
+      ActivePage = TabEmpresa
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       TabOrder = 0
@@ -558,7 +558,7 @@ object FABMEmpresas: TFABMEmpresas
       Left = 1
       Top = 20
       Width = 877
-      Height = 264
+      Height = 167
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -2159,8 +2159,8 @@ object FABMEmpresas: TFABMEmpresas
     end
   end
   object PopupMenuSkypeMail: TPopupMenu
-    Left = 229
-    Top = 467
+    Left = 197
+    Top = 419
     object llamar1: TMenuItem
       Caption = 'Llamar por Skype'
       OnClick = llamar1Click

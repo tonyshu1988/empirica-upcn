@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada;
+  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
+  EKVistaPreviaQR, QRCtrls, QuickRpt;
 
 type
   TFABM_Marcas = class(TForm)
@@ -53,6 +54,30 @@ type
     AGuardar: TAction;
     ACancelar: TAction;
     EKBuscar: TEKBusquedaAvanzada;
+    RepMarca: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepMarca_Subtitulo: TQRLabel;
+    RepMarca_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblPieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel1: TQRLabel;
+    EKVistaPrevia: TEKVistaPreviaQR;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -72,6 +97,7 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
   public
   end;
@@ -336,5 +362,16 @@ end;
 
 
 
+
+procedure TFABM_Marcas.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_Marcas.IsEmpty then
+    exit;
+
+  DM.VariablesReportes(RepMarca);
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  EKVistaPrevia.VistaPrevia;
+end;
 
 end.
