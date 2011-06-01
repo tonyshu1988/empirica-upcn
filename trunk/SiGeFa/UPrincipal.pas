@@ -148,7 +148,8 @@ begin
     Application.Terminate;      //usuario no tiene asignada ninguna salgo del sistema
 
   dm.configMail('SUCURSAL', SUCURSAL_LOGUEO);
-
+  dm.cargarReporteSucursal(SUCURSAL_LOGUEO);
+  
   baja:= $006A6AFF;    //ROJO = color de los registros dados de baja
   activo:= $00FB952F;  //AZUL = color de los registro comunes
 end;

@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, DBCtrls, ComCtrls, EKDBDateTimePicker, Mask, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKOrdenarGrilla, ActnList, XPStyleActnCtrls,
-  ActnMan, EKBusquedaAvanzada;
+  ActnMan, EKBusquedaAvanzada, QRCtrls, QuickRpt, EKVistaPreviaQR;
 
 type
   TFABM_TipoEmpresa = class(TForm)
@@ -48,6 +48,28 @@ type
     AGuardar: TAction;
     ACancelar: TAction;
     EKBuscar: TEKBusquedaAvanzada;
+    EKVistaPrevia: TEKVistaPreviaQR;
+    RepTipoEmpresa: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepTipoEmpresa_Subtitulo: TQRLabel;
+    RepTipoEmpresa_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblPieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel1: TQRLabel;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -67,6 +89,7 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -309,5 +332,16 @@ end;
 //  FIN TECLAS RAPIDAS
 //----------------------------------
 
+
+procedure TFABM_TipoEmpresa.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_TipoEmpresa.IsEmpty then
+    exit;
+
+  DM.VariablesReportes(RepTipoEmpresa);
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  EKVistaPrevia.VistaPrevia;
+end;
 
 end.

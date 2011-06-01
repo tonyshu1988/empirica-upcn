@@ -7,7 +7,7 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, ExtDlgs, jpeg,
-  EKBusquedaAvanzada;
+  EKBusquedaAvanzada, QRCtrls, QuickRpt, EKVistaPreviaQR;
 
 type
   TFABM_Sucursal = class(TForm)
@@ -69,6 +69,38 @@ type
     buscarImagen: TOpenPictureDialog;
     ZQ_SucursalLOGO: TBlobField;
     EKBuscar: TEKBusquedaAvanzada;
+    Label8: TLabel;
+    DBEdit6: TDBEdit;
+    DBEdit7: TDBEdit;
+    Label9: TLabel;
+    ZQ_SucursalREPORTE_TITULO: TStringField;
+    ZQ_SucursalREPORTE_SUBTITULO: TStringField;
+    EKVistaPrevia: TEKVistaPreviaQR;
+    RepSucursal: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepSucursal_Subtitulo: TQRLabel;
+    RepSucursal_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblPieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRLabel2: TQRLabel;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -90,6 +122,7 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure edImagenDblClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -123,6 +156,8 @@ begin
 
     ZQ_Sucursal.Append;
     ZQ_SucursalBAJA.AsString:= 'N';
+    ZQ_SucursalREPORTE_TITULO.AsString:= 'SIGEFA';
+    ZQ_SucursalREPORTE_SUBTITULO.AsString:= '';
     DBEApellidoNombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -211,7 +246,7 @@ procedure TFABM_Sucursal.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Sucursal.IsEmpty) OR (ZQ_SucursalBAJA.AsString <> 'N') then
+  if (ZQ_Sucursal.IsEmpty) OR (ZQ_SucursalBAJA.AsString <> 'N') OR (ZQ_SucursalID_SUCURSAL.AsInteger = 0)then
     exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja la "Sucursal" seleccionada?'), 'ABM Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -238,7 +273,7 @@ procedure TFABM_Sucursal.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Sucursal.IsEmpty) OR (ZQ_SucursalBAJA.AsString <> 'S') then
+  if (ZQ_Sucursal.IsEmpty) OR (ZQ_SucursalBAJA.AsString <> 'S') OR (ZQ_SucursalID_SUCURSAL.AsInteger = 0) then
     exit;
 
   if (application.MessageBox(pchar('¿Desea reactivar la "Sucursal" seleccionada?'), 'ABM Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -398,6 +433,17 @@ begin
     imagen.Free;
     auxBmp.Free;
   end;
+end;
+
+procedure TFABM_Sucursal.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_Sucursal.IsEmpty then
+    exit;
+
+  DM.VariablesReportes(RepSucursal);
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  EKVistaPrevia.VistaPrevia;
 end;
 
 end.

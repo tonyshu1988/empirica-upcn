@@ -1756,4 +1756,36 @@ object DM: TDM
     Left = 280
     Top = 144
   end
+  object ZQ_ConfigReporte: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select s.logo, s.reporte_titulo, s.reporte_subtitulo'
+      'from sucursal s'
+      'where s.id_sucursal = :id_sucursal')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 216
+    Top = 200
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ConfigReporteLOGO: TBlobField
+      FieldName = 'LOGO'
+    end
+    object ZQ_ConfigReporteREPORTE_TITULO: TStringField
+      FieldName = 'REPORTE_TITULO'
+      Size = 50
+    end
+    object ZQ_ConfigReporteREPORTE_SUBTITULO: TStringField
+      FieldName = 'REPORTE_SUBTITULO'
+      Size = 50
+    end
+  end
 end

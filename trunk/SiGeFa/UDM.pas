@@ -53,6 +53,10 @@ type
     ZQ_ConfigMailPOP3_SSL: TStringField;
     ZQ_ConfigMailPOP3_AUTENTICACION: TStringField;
     EKIni: TEKIni;
+    ZQ_ConfigReporte: TZQuery;
+    ZQ_ConfigReporteLOGO: TBlobField;
+    ZQ_ConfigReporteREPORTE_TITULO: TStringField;
+    ZQ_ConfigReporteREPORTE_SUBTITULO: TStringField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure configMail(Tipo: String; id: integer);
@@ -63,6 +67,7 @@ type
   public
     procedure prepararParaExportar(query: TDataSet; valor: Boolean);
     procedure mostrarCantidadRegistro(query: TDataSet; var etiqueta: TLabel);
+    procedure cargarReporteSucursal(idSucursal: integer);    
   end;
 
 var
@@ -70,7 +75,7 @@ var
   SUCURSAL_LOGUEO: integer; //Mantiene el id de la sucursal con la cual me conecte
   enviandoMail: boolean; //TRUE si se esta enviado un mail; FALSE en caso contrario
   sucursales: TEKArrayPermisos; //array de permisos valores que tiene un campo usuario y un campo valor
-
+  TextoPieDePagina: string;
 
 implementation
 
@@ -83,6 +88,8 @@ var
   aux, logo_fondo:string;
   i: integer;
 begin
+  TextoPieDePagina:= 'Sistema Gestión y Facturación - ';
+
   SkinData1.Active:= true;
   Application.CreateForm(TFPrincipal, FPrincipal);
 
@@ -221,30 +228,16 @@ end;
 
 procedure TDM.VariablesReportes(Reporte: TQuickRep);
 var
-  i : integer;
+//  i : integer;
   Etiqueta : TQRLabel;
   Form : TForm;
 begin
-  //--- SETEAR VARIABLE GLOBALES DESDE TABLA CONFIGURACION ---
-  ZQ_Configuracion.close;
-  ZQ_Configuracion.Open;
-  ZQ_Configuracion.First;
-
   Form := Tform(Reporte.Owner);
-  while not ZQ_Configuracion.Eof do
-  begin
-    Etiqueta := TQRLabel(Form.FindComponent(reporte.Name+'_'+ZQ_Configuracion.fieldbyname('clave').AsString));
-    i:=0;
-    while Assigned(Etiqueta) do
-    begin
-      Etiqueta.Enabled:= true;
-      Etiqueta.Caption:= ZQ_Configuracion.fieldbyname('texto').AsString;
-      inc(i);
-      Etiqueta := TQRLabel(Form.FindComponent(reporte.Name+'_'+ZQ_Configuracion.fieldbyname('clave').AsString+inttostr(i)));
-    end;
+  Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Titulo'));
+  Etiqueta.Caption:= ZQ_ConfigReporteREPORTE_TITULO.AsString;
 
-    ZQ_Configuracion.Next;
-  end;
+  Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Subtitulo'));
+  Etiqueta.Caption:= ZQ_ConfigReporteREPORTE_SUBTITULO.AsString;
 end;
 
 
@@ -283,4 +276,13 @@ begin
   etiqueta.Caption:= '    Cantidad de Registros: '+inttostr(query.RecordCount);
 end;
 
+
+procedure TDM.cargarReporteSucursal(idSucursal: integer);
+begin
+  ZQ_ConfigReporte.Close;
+  ZQ_ConfigReporte.ParamByName('id_sucursal').AsInteger:= idSucursal;
+  ZQ_ConfigReporte.open;
+end;
+
 end.
+
