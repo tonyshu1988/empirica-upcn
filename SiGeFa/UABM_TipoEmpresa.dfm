@@ -1,8 +1,8 @@
 object FABM_TipoEmpresa: TFABM_TipoEmpresa
-  Left = 439
-  Top = 355
-  Width = 870
-  Height = 500
+  Left = 360
+  Top = 193
+  Width = 801
+  Height = 498
   Caption = 'ABM Tipo Empresa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -21,8 +21,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 854
-    Height = 391
+    Width = 785
+    Height = 389
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -30,8 +30,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     object DBGridTipoEmpresa: TDBGrid
       Left = 5
       Top = 5
-      Width = 844
-      Height = 348
+      Width = 775
+      Height = 346
       Align = alClient
       Color = 14606012
       DataSource = DS_TipoEmpresa
@@ -54,8 +54,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     end
     object PanelEdicion: TPanel
       Left = 5
-      Top = 353
-      Width = 844
+      Top = 351
+      Width = 775
       Height = 33
       Align = alBottom
       BevelOuter = bvNone
@@ -96,7 +96,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 785
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -117,7 +117,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 744
+      Left = 675
       Top = 1
       Width = 109
       Height = 17
@@ -596,7 +596,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+      Caption = 'F2 - Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
@@ -605,7 +605,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+      Caption = 'F2 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
@@ -614,7 +614,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'Baja'
+      Caption = 'F5 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
@@ -623,7 +623,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+      Caption = 'F6 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
@@ -632,7 +632,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -642,7 +642,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -719,5 +719,48 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     MoverColumna = True
     Left = 336
     Top = 83
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 72
+    Top = 290
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+      OnExecute = ANuevoExecute
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+      OnExecute = ABajaExecute
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+      OnExecute = AReactivarExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
+    end
   end
 end

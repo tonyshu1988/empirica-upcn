@@ -89,6 +89,7 @@ type
     SP_ImprimirEtiquetasMedida: TStringField;
     ZQ_ProductosPRECIO_VENTA: TFloatField;
     SP_ImprimirEtiquetasPrecio: TFloatField;
+    Label1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word;
@@ -171,9 +172,15 @@ begin
   SP_ImprimirEtiquetas.Active := false;
   SP_ImprimirEtiquetas.ParamByName('desde_renglon').AsInteger := Filan;
   SP_ImprimirEtiquetas.Active := true;
+
   QRDBPrecio1.Enabled := false;
   QRDBPrecio2.Enabled := false;
   QRDBPrecio3.Enabled := false;
+
+  QRImagePrecio1.Enabled:= true;
+  QRImagePrecio2.Enabled:= true;
+  QRImagePrecio3.Enabled:= true;
+
   EKVistaPreviaQR1.VistaPrevia;
 end;
 
@@ -230,9 +237,15 @@ begin
   SP_ImprimirEtiquetas.Active := false;
   SP_ImprimirEtiquetas.ParamByName('desde_renglon').AsInteger := Filan;
   SP_ImprimirEtiquetas.Active := true;
+
   QRDBPrecio1.Enabled := true;
   QRDBPrecio2.Enabled := true;
   QRDBPrecio3.Enabled := true;
+
+  QRImagePrecio1.Enabled:= false;
+  QRImagePrecio2.Enabled:= false;
+  QRImagePrecio3.Enabled:= false;
+
   EKVistaPreviaQR1.VistaPrevia;
 end;
 

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla;
+  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada;
 
 type
   TFABM_Marcas = class(TForm)
@@ -38,8 +38,24 @@ type
     Label1: TLabel;
     DBENombre: TDBEdit;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    ZQ_MarcasCODIGO_MARCA: TIntegerField;
+    Label2: TLabel;
+    DBECodigo: TDBEdit;
+    ZQ_UltimoNro: TZQuery;
+    ZQ_UltimoNroCODIGO_MARCA: TIntegerField;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
+    EKBuscar: TEKBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);    
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnBajaClick(Sender: TObject);
@@ -47,12 +63,17 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridMarcaDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridMarcaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    //------TECLAS RAPIDAS
+    procedure ANuevoExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure ABajaExecute(Sender: TObject);
+    procedure AReactivarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
+    procedure ABuscarExecute(Sender: TObject);
   private
-    { Private declarations }
   public
-    { Public declarations }
   end;
 
 var
@@ -80,6 +101,12 @@ begin
 end;
 
 
+procedure TFABM_Marcas.btnBuscarClick(Sender: TObject);
+begin
+  EKBuscar.Buscar;
+end;
+
+
 procedure TFABM_Marcas.btnNuevoClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
@@ -87,9 +114,14 @@ begin
     DBGridMarca.Enabled := false;
     PanelEdicion.Visible:= true;
 
+    ZQ_UltimoNro.Close;
+    ZQ_UltimoNro.Open;
+
     ZQ_Marcas.Append;
     ZQ_MarcasBAJA.AsString:= 'N';
-    DBENombre.SetFocus;
+    ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
+
+    DBECodigo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -107,7 +139,14 @@ begin
     PanelEdicion.Visible:= true;
 
     ZQ_Marcas.Edit;
-    DBENombre.SetFocus;
+    if ZQ_MarcasCODIGO_MARCA.IsNull then
+    begin
+      ZQ_UltimoNro.Close;
+      ZQ_UltimoNro.Open;
+      ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
+    end;
+
+    DBECodigo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -174,6 +213,13 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
+  if (trim(DBECodigo.Text) = '') then
+  begin
+    Application.MessageBox('El campo "Código" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBECodigo.SetFocus;
+    exit;
+  end;
+
   if (trim(DBENombre.Text) = '') then
   begin
     Application.MessageBox('El campo "Marca" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
@@ -237,5 +283,58 @@ begin
 
   FPrincipal.PintarFilasGrillasConBajas(DBGridMarca, ZQ_MarcasBAJA.AsString, Rect, DataCol, Column, State);
 end;
+
+
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABM_Marcas.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
+procedure TFABM_Marcas.ANuevoExecute(Sender: TObject);
+begin
+  if btnNuevo.Enabled then
+    btnNuevo.Click;
+end;
+
+procedure TFABM_Marcas.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABM_Marcas.ABajaExecute(Sender: TObject);
+begin
+  if btnBaja.Enabled then
+    btnBaja.Click;
+end;
+
+procedure TFABM_Marcas.AReactivarExecute(Sender: TObject);
+begin
+  if btnReactivar.Enabled then
+    btnReactivar.Click;
+end;
+
+procedure TFABM_Marcas.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABM_Marcas.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
+
+
+
+
 
 end.

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
-  ZStoredProcedure;
+  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada;
 
 type
   TFABM_Colores = class(TForm)
@@ -35,18 +35,31 @@ type
     Label2: TLabel;
     ZQ_Colores: TZQuery;
     DS_Colores: TDataSource;
-    ZQ_ColoresID_COLOR: TIntegerField;
-    ZQ_ColoresNOMBRE: TStringField;
-    ZQ_ColoresREFERENCIA: TStringField;
     ColorBox1: TColorBox;
-    ZQ_ColoresBAJA: TStringField;
     Label3: TLabel;
     DBECodigo: TDBEdit;
-    ZQ_ColoresCODIGO: TStringField;
     ZSP_ID_COLOR: TZStoredProc;
     ZSP_ID_COLORID: TIntegerField;
+    ZQ_UltimoNro: TZQuery;
+    ZQ_UltimoNroCODIGO_COLOR: TIntegerField;
+    ZQ_ColoresID_COLOR: TIntegerField;
+    ZQ_ColoresCODIGO_COLOR: TIntegerField;
+    ZQ_ColoresNOMBRE: TStringField;
+    ZQ_ColoresREFERENCIA: TStringField;
+    ZQ_ColoresBAJA: TStringField;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
+    EKBuscar: TEKBusquedaAvanzada;
     procedure ZQ_ColoresAfterScroll(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnBajaClick(Sender: TObject);
@@ -55,13 +68,17 @@ type
     procedure btnReactivarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridColorDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-
+    procedure DBGridColorDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    //------TECLAS RAPIDAS
+    procedure ANuevoExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure ABajaExecute(Sender: TObject);
+    procedure AReactivarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
+    procedure ABuscarExecute(Sender: TObject);
   private
-    { Private declarations }
   public
-    { Public declarations }
   end;
 
 var
@@ -77,11 +94,12 @@ uses UDM, UPrincipal, UUtilidades;
 
 procedure TFABM_Colores.ZQ_ColoresAfterScroll(DataSet: TDataSet);
 begin
-if not(ZQ_ColoresREFERENCIA.IsNull) then
-       ColorBox1.Selected:=StringToColor(ZQ_ColoresREFERENCIA.AsString);
+  if not(ZQ_ColoresREFERENCIA.IsNull) then
+    ColorBox1.Selected:= StringToColor(ZQ_ColoresREFERENCIA.AsString);
 
- dm.mostrarCantidadRegistro(ZQ_Colores, lblCantidadRegistros);
+  dm.mostrarCantidadRegistro(ZQ_Colores, lblCantidadRegistros);
 end;
+
 
 procedure TFABM_Colores.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
@@ -89,10 +107,12 @@ begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
 
+
 procedure TFABM_Colores.btnSalirClick(Sender: TObject);
 begin
  Close;
 end;
+
 
 procedure TFABM_Colores.btnModificarClick(Sender: TObject);
 begin
@@ -105,11 +125,19 @@ if ZQ_Colores.IsEmpty then
     PanelEdicion.Visible:= true;
 
     ZQ_Colores.Edit;
+    if ZQ_ColoresCODIGO_COLOR.IsNull then
+    begin
+      ZQ_UltimoNro.Close;
+      ZQ_UltimoNro.Open;
+      ZQ_ColoresCODIGO_COLOR.AsInteger:= ZQ_UltimoNroCODIGO_COLOR.AsInteger + 1;
+    end;
+
     DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
 end;
+
 
 procedure TFABM_Colores.btnBajaClick(Sender: TObject);
 var
@@ -137,18 +165,20 @@ begin
   end;
 end;
 
+
 procedure TFABM_Colores.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  Perform(WM_NEXTDLGCTL, 0, 0);
+  DBECodigo.SetFocus;
 
   if (trim(DBECodigo.Text) = '') then
   begin
-    Application.MessageBox('El campo "Cod" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El campo "Código" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
     DBECodigo.SetFocus;
     exit;
   end;
+
   if (trim(DBENombre.Text) = '') then
   begin
     Application.MessageBox('El campo "Detalle" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
@@ -156,7 +186,8 @@ begin
     exit;
   end;
 
-  ZQ_ColoresREFERENCIA.AsString:=ColorToString(ColorBox1.Selected);
+  ZQ_ColoresREFERENCIA.AsString:= ColorToString(ColorBox1.Selected);
+
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
@@ -175,9 +206,8 @@ begin
       exit;
     end
   end;
-
- 
 end;
+
 
 procedure TFABM_Colores.btnCancelarClick(Sender: TObject);
 begin
@@ -190,6 +220,7 @@ begin
     PanelEdicion.Visible := false;
   end;
 end;
+
 
 procedure TFABM_Colores.btnReactivarClick(Sender: TObject);
 var
@@ -215,48 +246,113 @@ begin
     ZQ_Colores.Refresh;
     ZQ_Colores.RecNo:= recNo;
   end;
-
 end;
+
+
+procedure TFABM_Colores.btnBuscarClick(Sender: TObject);
+begin
+  EKBuscar.Buscar;
+end;
+
 
 procedure TFABM_Colores.btnNuevoClick(Sender: TObject);
 begin
-if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Colores]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Colores]) then
   begin
     DBGridColor.Enabled := false;
     PanelEdicion.Visible:= true;
 
-    ZQ_Colores.Append;
-    ZQ_ColoresBAJA.AsString:= 'N';
+    ZQ_UltimoNro.Close;
+    ZQ_UltimoNro.Open;
+
     ZSP_ID_COLOR.Active:=false;
     ZSP_ID_COLOR.Active:=True;
+
+    ZQ_Colores.Append;
     ZQ_ColoresID_COLOR.AsInteger:=ZSP_ID_COLORID.AsInteger;
-    ZQ_ColoresCODIGO.AsString:=rellenar(ZSP_ID_COLORID.AsString,'0',4);
-    DBECodigo.SetFocus;
+    ZQ_ColoresBAJA.AsString:= 'N';
+    ZQ_ColoresCODIGO_COLOR.AsInteger:= ZQ_UltimoNroCODIGO_COLOR.AsInteger + 1;
+
+    DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
 end;
 
+
 procedure TFABM_Colores.FormCreate(Sender: TObject);
 begin
-dm.EKModelo.abrir(ZQ_Colores);
+  dm.EKModelo.abrir(ZQ_Colores);
 end;
+
 
 procedure TFABM_Colores.DBGridColorDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
- if ZQ_Colores.IsEmpty then
+  if ZQ_Colores.IsEmpty then
     exit;
-  if (column.FieldName='REFERENCIA')and not(ZQ_ColoresREFERENCIA.IsNull) then
+
+  if (column.FieldName = 'REFERENCIA') and not(ZQ_ColoresREFERENCIA.IsNull) then
       begin
         DBGridColor.Canvas.Brush.Color:= StringToColor(ZQ_ColoresREFERENCIA.AsString);
       end;
-      
+
   FPrincipal.PintarFilasGrillasConBajas(DBGridColor, ZQ_ColoresBAJA.AsString, Rect, DataCol, Column, State);
-
-
 end;
+
+
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABM_Colores.ANuevoExecute(Sender: TObject);
+begin
+  if btnNuevo.Enabled then
+    btnNuevo.Click;
+end;
+
+procedure TFABM_Colores.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABM_Colores.ABajaExecute(Sender: TObject);
+begin
+  if btnBaja.Enabled then
+    btnBaja.Click;
+end;
+
+procedure TFABM_Colores.AReactivarExecute(Sender: TObject);
+begin
+  if btnReactivar.Enabled then
+    btnReactivar.Click;
+end;
+
+procedure TFABM_Colores.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABM_Colores.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+
+procedure TFABM_Colores.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
+
+
+
+
 
 end.
 

@@ -1,7 +1,7 @@
 object FABM_Sucursal: TFABM_Sucursal
   Left = 336
   Top = 223
-  Width = 870
+  Width = 814
   Height = 500
   Caption = 'ABM Sucursal'
   Color = clBtnFace
@@ -21,7 +21,7 @@ object FABM_Sucursal: TFABM_Sucursal
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 854
+    Width = 798
     Height = 391
     Align = alClient
     BevelOuter = bvNone
@@ -30,7 +30,7 @@ object FABM_Sucursal: TFABM_Sucursal
     object DBGridSucursal: TDBGrid
       Left = 5
       Top = 5
-      Width = 844
+      Width = 788
       Height = 215
       Align = alClient
       Color = 14606012
@@ -95,7 +95,7 @@ object FABM_Sucursal: TFABM_Sucursal
     object PanelEdicion: TPanel
       Left = 5
       Top = 220
-      Width = 844
+      Width = 788
       Height = 166
       Align = alBottom
       BevelOuter = bvNone
@@ -144,7 +144,7 @@ object FABM_Sucursal: TFABM_Sucursal
         Transparent = True
       end
       object Label4: TLabel
-        Left = 486
+        Left = 446
         Top = 75
         Width = 70
         Height = 13
@@ -185,10 +185,24 @@ object FABM_Sucursal: TFABM_Sucursal
         ParentFont = False
         Transparent = True
       end
+      object Label7: TLabel
+        Left = 650
+        Top = 11
+        Width = 32
+        Height = 13
+        Caption = 'Logo:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
       object DBEApellidoNombre: TDBEdit
         Left = 68
         Top = 7
-        Width = 605
+        Width = 565
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NOMBRE'
@@ -204,7 +218,7 @@ object FABM_Sucursal: TFABM_Sucursal
       object DBEdit1: TDBEdit
         Left = 68
         Top = 39
-        Width = 605
+        Width = 565
         Height = 21
         CharCase = ecUpperCase
         DataField = 'DIRECCION'
@@ -220,7 +234,7 @@ object FABM_Sucursal: TFABM_Sucursal
       object DBEdit2: TDBEdit
         Left = 68
         Top = 71
-        Width = 410
+        Width = 365
         Height = 21
         CharCase = ecUpperCase
         DataField = 'LOCALIDAD'
@@ -234,7 +248,7 @@ object FABM_Sucursal: TFABM_Sucursal
         TabOrder = 2
       end
       object DBEdit3: TDBEdit
-        Left = 558
+        Left = 518
         Top = 71
         Width = 115
         Height = 21
@@ -252,7 +266,7 @@ object FABM_Sucursal: TFABM_Sucursal
       object DBEdit4: TDBEdit
         Left = 68
         Top = 103
-        Width = 605
+        Width = 565
         Height = 21
         CharCase = ecUpperCase
         DataField = 'TELEFONO'
@@ -268,7 +282,7 @@ object FABM_Sucursal: TFABM_Sucursal
       object DBEdit5: TDBEdit
         Left = 68
         Top = 135
-        Width = 605
+        Width = 565
         Height = 21
         DataField = 'EMAIL'
         DataSource = DS_Sucursal
@@ -280,12 +294,23 @@ object FABM_Sucursal: TFABM_Sucursal
         ParentFont = False
         TabOrder = 5
       end
+      object edImagen: TDBImage
+        Left = 649
+        Top = 29
+        Width = 127
+        Height = 127
+        DataField = 'LOGO'
+        DataSource = DS_Sucursal
+        Stretch = True
+        TabOrder = 6
+        OnDblClick = edImagenDblClick
+      end
     end
   end
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 798
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -306,7 +331,7 @@ object FABM_Sucursal: TFABM_Sucursal
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 744
+      Left = 688
       Top = 1
       Width = 109
       Height = 17
@@ -760,7 +785,7 @@ object FABM_Sucursal: TFABM_Sucursal
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 696
+    Left = 496
     Top = 120
     DockControlHeights = (
       0
@@ -785,7 +810,7 @@ object FABM_Sucursal: TFABM_Sucursal
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+      Caption = 'F2 - Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
@@ -794,7 +819,7 @@ object FABM_Sucursal: TFABM_Sucursal
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+      Caption = 'F3 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
@@ -803,7 +828,7 @@ object FABM_Sucursal: TFABM_Sucursal
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'Baja'
+      Caption = 'F5 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
@@ -812,7 +837,7 @@ object FABM_Sucursal: TFABM_Sucursal
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+      Caption = 'F6 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
@@ -821,7 +846,7 @@ object FABM_Sucursal: TFABM_Sucursal
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -831,7 +856,7 @@ object FABM_Sucursal: TFABM_Sucursal
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -884,7 +909,7 @@ object FABM_Sucursal: TFABM_Sucursal
       'order by s.nombre')
     Params = <>
     Left = 408
-    Top = 40
+    Top = 64
     object ZQ_SucursalID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
     end
@@ -922,11 +947,14 @@ object FABM_Sucursal: TFABM_Sucursal
     object ZQ_SucursalAUD_FECHA: TDateTimeField
       FieldName = 'AUD_FECHA'
     end
+    object ZQ_SucursalLOGO: TBlobField
+      FieldName = 'LOGO'
+    end
   end
   object DS_Sucursal: TDataSource
     DataSet = ZQ_Sucursal
-    Left = 488
-    Top = 32
+    Left = 408
+    Top = 120
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridSucursal
@@ -934,6 +962,54 @@ object FABM_Sucursal: TFABM_Sucursal
     Ordenar = True
     MoverColumna = True
     Left = 152
-    Top = 56
+    Top = 72
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 152
+    Top = 122
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+      OnExecute = ANuevoExecute
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+      OnExecute = ABajaExecute
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+      OnExecute = AReactivarExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
+    end
+  end
+  object buscarImagen: TOpenPictureDialog
+    Filter = 'Bitmaps (*.bmp)|*.bmp'
+    Left = 704
+    Top = 272
   end
 end

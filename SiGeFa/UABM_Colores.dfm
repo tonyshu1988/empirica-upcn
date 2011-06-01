@@ -62,15 +62,18 @@ object FABM_Colores: TFABM_Colores
         Columns = <
           item
             Expanded = False
-            FieldName = 'CODIGO'
+            FieldName = 'CODIGO_COLOR'
+            Title.Alignment = taCenter
             Title.Caption = 'C'#243'digo'
+            Width = 107
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'NOMBRE'
+            Title.Alignment = taCenter
             Title.Caption = 'Nombre'
-            Width = 249
+            Width = 467
             Visible = True
           end
           item
@@ -81,14 +84,8 @@ object FABM_Colores: TFABM_Colores
             Font.Height = -11
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
+            Title.Alignment = taCenter
             Title.Caption = 'Referencia'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'BAJA'
-            Title.Caption = 'Baja'
-            Width = 45
             Visible = True
           end>
       end
@@ -176,7 +173,7 @@ object FABM_Colores: TFABM_Colores
           Width = 97
           Height = 21
           CharCase = ecUpperCase
-          DataField = 'CODIGO'
+          DataField = 'CODIGO_COLOR'
           DataSource = DS_Colores
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -333,6 +330,11 @@ object FABM_Colores: TFABM_Colores
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnNuevo
             Visible = True
           end
@@ -672,7 +674,7 @@ object FABM_Colores: TFABM_Colores
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 128
+    Left = 136
     Top = 128
     DockControlHeights = (
       0
@@ -680,11 +682,12 @@ object FABM_Colores: TFABM_Colores
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnVerDetalle: TdxBarLargeButton
@@ -697,7 +700,7 @@ object FABM_Colores: TFABM_Colores
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+      Caption = 'F2 - Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
@@ -706,7 +709,7 @@ object FABM_Colores: TFABM_Colores
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+      Caption = 'F3 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
@@ -715,7 +718,7 @@ object FABM_Colores: TFABM_Colores
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'Baja'
+      Caption = 'F4 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
@@ -724,7 +727,7 @@ object FABM_Colores: TFABM_Colores
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+      Caption = 'F5 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
@@ -733,7 +736,7 @@ object FABM_Colores: TFABM_Colores
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -743,7 +746,7 @@ object FABM_Colores: TFABM_Colores
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -789,7 +792,7 @@ object FABM_Colores: TFABM_Colores
   end
   object ZQ_Colores: TZQuery
     Connection = DM.Conexion
-    SortedFields = 'CODIGO;NOMBRE'
+    SortedFields = 'CODIGO_COLOR;NOMBRE'
     AfterScroll = ZQ_ColoresAfterScroll
     SQL.Strings = (
       'select *'
@@ -800,6 +803,11 @@ object FABM_Colores: TFABM_Colores
     Top = 72
     object ZQ_ColoresID_COLOR: TIntegerField
       FieldName = 'ID_COLOR'
+      Required = True
+    end
+    object ZQ_ColoresCODIGO_COLOR: TIntegerField
+      FieldName = 'CODIGO_COLOR'
+      DisplayFormat = '0000'
     end
     object ZQ_ColoresNOMBRE: TStringField
       FieldName = 'NOMBRE'
@@ -812,10 +820,6 @@ object FABM_Colores: TFABM_Colores
     object ZQ_ColoresBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
-    end
-    object ZQ_ColoresCODIGO: TStringField
-      FieldName = 'CODIGO'
-      Size = 10
     end
   end
   object DS_Colores: TDataSource
@@ -832,7 +836,7 @@ object FABM_Colores: TFABM_Colores
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_COLOR_ID'
-    Left = 64
+    Left = 48
     Top = 179
     ParamData = <
       item
@@ -843,5 +847,99 @@ object FABM_Colores: TFABM_Colores
     object ZSP_ID_COLORID: TIntegerField
       FieldName = 'ID'
     end
+  end
+  object ZQ_UltimoNro: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select first 1 CODIGO_COLOR'
+      'from COLOR'
+      'order by CODIGO_COLOR desc')
+    Params = <>
+    Left = 48
+    Top = 243
+    object ZQ_UltimoNroCODIGO_COLOR: TIntegerField
+      FieldName = 'CODIGO_COLOR'
+    end
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 48
+    Top = 298
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+      OnExecute = ANuevoExecute
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+      OnExecute = ABajaExecute
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+      OnExecute = AReactivarExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
+    end
+  end
+  object EKBuscar: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'digo'
+        Campo = 'CODIGO_COLOR'
+        Tabla = 'COLOR'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre'
+        Campo = 'NOMBRE'
+        Tabla = 'COLOR'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_Colores
+    SQL.Strings = (
+      'select *'
+      'from color'
+      'order by CODIGO_COLOR, NOMBRE')
+    SQL_Select.Strings = (
+      'select *')
+    SQL_From.Strings = (
+      'from color')
+    SQL_Orden.Strings = (
+      'order by CODIGO_COLOR, NOMBRE')
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 136
+    Top = 75
   end
 end

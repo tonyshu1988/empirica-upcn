@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
-  EKOrdenarGrilla;
+  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, ExtDlgs, jpeg;
 
 type
   TFABM_Sucursal = class(TForm)
@@ -54,18 +54,38 @@ type
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
+    edImagen: TDBImage;
+    Label7: TLabel;
+    buscarImagen: TOpenPictureDialog;
+    ZQ_SucursalLOGO: TBlobField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure DBGridSucursalDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridSucursalDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnBajaClick(Sender: TObject);
     procedure btnReactivarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure CargaImagenProporcionado(Archivo: string);
+    //------TECLAS RAPIDAS
+    procedure ANuevoExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure ABajaExecute(Sender: TObject);
+    procedure AReactivarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
+    procedure edImagenDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -237,6 +257,131 @@ begin
 
   dm.EKModelo.abrir(ZQ_Sucursal);
   dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
+end;
+
+
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABM_Sucursal.ANuevoExecute(Sender: TObject);
+begin
+  if btnNuevo.Enabled then
+    btnNuevo.Click;
+end;
+
+procedure TFABM_Sucursal.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABM_Sucursal.ABajaExecute(Sender: TObject);
+begin
+  if btnBaja.Enabled then
+    btnBaja.Click;
+end;
+
+procedure TFABM_Sucursal.AReactivarExecute(Sender: TObject);
+begin
+  if btnReactivar.Enabled then
+    btnReactivar.Click;
+end;
+
+procedure TFABM_Sucursal.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABM_Sucursal.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
+
+procedure TFABM_Sucursal.edImagenDblClick(Sender: TObject);
+var
+  jpg: TJpegImage;
+begin
+  try
+   if dm.EKModelo.verificar_transaccion(Transaccion_ABMSucursal) then
+    //si esta activa la transaccion
+    if buscarImagen.Execute then //abro para buscar la imagen
+     begin
+      CargaImagenProporcionado(buscarImagen.FileName);
+     end
+  except
+    showmessage('Formato de Imagen no soportado (debe bajar la resolución).');
+  end;
+end;
+
+procedure TFABM_Sucursal.CargaImagenProporcionado(Archivo: string);
+var
+  imagen: TGraphic; //contiene la imagen, es del tipo TGraphic poque puede ser jpg o bmp
+  auxBmp: TBitmap;
+  Rectangulo: TRect;
+  EscalaX,
+  EscalaY,
+  Escala: Single;
+begin
+  auxBMP:= TBitMap.Create;
+
+  //creo el tipo correcto dependiendo de la extencion del archivo
+  if pos('.jpg', archivo) > 0 then
+    imagen:= TJPEGImage.Create
+  else
+    if pos('.jpeg', archivo) > 0 then
+      imagen:= TJPEGImage.Create
+    else
+      if pos('.bmp', archivo) > 0 then
+        imagen:= TBitmap.Create;
+
+  try
+    //cargo la imagen
+    imagen.LoadFromFile(Archivo);
+
+//    //comprimo la imagen
+//    auxBMP.Assign(imagen);
+//    TJPEGImage (imagen).CompressionQuality:= 50;
+//    TJPEGImage (imagen).Compress;
+
+    //Por defecto, escala 1:1
+    EscalaX := 1.0;
+    EscalaY := 1.0;
+
+    //Hallamos la escala de reducción Horizontal
+    if edImagen.Width < imagen.Width then
+      EscalaX := edImagen.Width / imagen.Width;
+
+    //La escala vertical
+    if edImagen.Height < imagen.Height then
+      EscalaY := edImagen.Height / imagen.Height;
+
+    //Escogemos la menor de las 2
+    if EscalaY < EscalaX then Escala := EscalaY else Escala := EscalaX;
+
+    //Y la usamos para reducir el rectangulo destino
+    with Rectangulo do begin
+      Right := Trunc(imagen.Width * Escala);
+      Bottom := Trunc(imagen.Height * Escala);
+      Left := 0;
+      Top := 0;
+    end;
+
+    //Dibujamos el bitmap con el nuevo tamaño en el TImage destino
+    with edImagen.Picture.Bitmap do begin
+      Width := Rectangulo.Right;
+      Height := Rectangulo.Bottom;
+      Canvas.StretchDraw(Rectangulo, imagen);
+    end;
+
+  finally
+    imagen.Free;
+    auxBmp.Free;
+  end;
 end;
 
 end.

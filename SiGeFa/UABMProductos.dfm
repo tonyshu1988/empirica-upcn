@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 232
-  Top = 169
+  Left = 240
+  Top = 101
   Width = 1024
   Height = 639
   Caption = 'FABMProductos'
@@ -128,7 +128,7 @@ object FABMProductos: TFABMProductos
       Top = 326
       Width = 1006
       Height = 222
-      ActivePage = tabDetalle
+      ActivePage = tabCabecera
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -146,7 +146,7 @@ object FABMProductos: TFABMProductos
           TabOrder = 0
           object Label1: TLabel
             Left = 14
-            Top = 39
+            Top = 45
             Width = 133
             Height = 13
             Caption = 'Marca (F1 para buscar)'
@@ -159,7 +159,7 @@ object FABMProductos: TFABMProductos
           end
           object Label2: TLabel
             Left = 150
-            Top = -1
+            Top = 5
             Width = 45
             Height = 13
             Caption = 'Nombre'
@@ -173,7 +173,7 @@ object FABMProductos: TFABMProductos
           end
           object Label3: TLabel
             Left = 14
-            Top = 120
+            Top = 126
             Width = 66
             Height = 13
             Caption = 'Descripci'#243'n'
@@ -186,7 +186,7 @@ object FABMProductos: TFABMProductos
           end
           object Label4: TLabel
             Left = 742
-            Top = -1
+            Top = 3
             Width = 44
             Height = 13
             Caption = 'Imagen'
@@ -208,7 +208,7 @@ object FABMProductos: TFABMProductos
           end
           object Label18: TLabel
             Left = 350
-            Top = 39
+            Top = 45
             Width = 181
             Height = 13
             Caption = 'Tipo y Art'#237'culo (F1 para buscar)'
@@ -221,7 +221,7 @@ object FABMProductos: TFABMProductos
           end
           object Label20: TLabel
             Left = 14
-            Top = -1
+            Top = 5
             Width = 76
             Height = 13
             Caption = 'C'#243'digo Corto'
@@ -229,7 +229,7 @@ object FABMProductos: TFABMProductos
           end
           object Label6: TLabel
             Left = 14
-            Top = 79
+            Top = 85
             Width = 130
             Height = 13
             Caption = 'Color (F1 para buscar)'
@@ -242,14 +242,14 @@ object FABMProductos: TFABMProductos
           end
           object Shape1: TShape
             Left = 350
-            Top = 93
+            Top = 99
             Width = 49
             Height = 21
             Shape = stRoundRect
           end
           object edImagen: TDBImage
             Left = 743
-            Top = 14
+            Top = 18
             Width = 200
             Height = 167
             DataField = 'IMAGEN'
@@ -260,7 +260,7 @@ object FABMProductos: TFABMProductos
           end
           object edNombre: TDBEdit
             Left = 150
-            Top = 14
+            Top = 20
             Width = 579
             Height = 21
             CharCase = ecUpperCase
@@ -285,7 +285,7 @@ object FABMProductos: TFABMProductos
           end
           object edDescripcion: TDBMemo
             Left = 14
-            Top = 134
+            Top = 140
             Width = 715
             Height = 45
             DataField = 'DESCRIPCION'
@@ -300,7 +300,7 @@ object FABMProductos: TFABMProductos
           end
           object cmbArticulo: TDBLookupComboBox
             Left = 350
-            Top = 53
+            Top = 59
             Width = 379
             Height = 21
             DataField = 'ID_ARTICULO'
@@ -320,7 +320,7 @@ object FABMProductos: TFABMProductos
           end
           object cmbMarca: TDBLookupComboBox
             Left = 14
-            Top = 53
+            Top = 59
             Width = 331
             Height = 21
             DataField = 'ID_MARCA'
@@ -332,7 +332,7 @@ object FABMProductos: TFABMProductos
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             KeyField = 'ID_MARCA'
-            ListField = 'NOMBRE_MARCA'
+            ListField = 'BUSQUEDA'
             ListSource = DS_Marca
             ParentFont = False
             TabOrder = 2
@@ -340,7 +340,7 @@ object FABMProductos: TFABMProductos
           end
           object edCodCorto: TDBEdit
             Left = 14
-            Top = 14
+            Top = 20
             Width = 129
             Height = 21
             CharCase = ecUpperCase
@@ -357,7 +357,7 @@ object FABMProductos: TFABMProductos
           end
           object cmbColor: TDBLookupComboBox
             Left = 14
-            Top = 93
+            Top = 99
             Width = 331
             Height = 21
             DataField = 'COLOR'
@@ -373,7 +373,7 @@ object FABMProductos: TFABMProductos
             ListSource = DS_Color
             ParentFont = False
             TabOrder = 4
-            OnKeyUp = cmbMarcaKeyUp
+            OnKeyUp = cmbColorKeyUp
           end
         end
       end
@@ -711,7 +711,7 @@ object FABMProductos: TFABMProductos
                 object Label5: TLabel
                   Left = 3
                   Top = 3
-                  Width = 132
+                  Width = 104
                   Height = 13
                   Align = alTop
                   Alignment = taCenter
@@ -2087,9 +2087,12 @@ object FABMProductos: TFABMProductos
   object ZQ_Marca: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select *'
-      'from marca'
-      'where baja = '#39'N'#39)
+      
+        'select m.*,  lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_marca a' +
+        's busqueda'
+      'from marca m'
+      'where m.baja = '#39'N'#39
+      'order by m.codigo_marca, m.nombre_marca')
     Params = <>
     Left = 541
     Top = 96
@@ -2104,6 +2107,14 @@ object FABMProductos: TFABMProductos
     object ZQ_MarcaBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
+    end
+    object ZQ_MarcaCODIGO_MARCA: TIntegerField
+      FieldName = 'CODIGO_MARCA'
+    end
+    object ZQ_MarcaBUSQUEDA: TStringField
+      FieldName = 'BUSQUEDA'
+      ReadOnly = True
+      Size = 64
     end
   end
   object DS_Marca: TDataSource
@@ -2221,10 +2232,13 @@ object FABMProductos: TFABMProductos
   object EKListadoMarca: TEKListadoSQL
     Modelo = DM.EKModelo
     SQL.Strings = (
-      'select *'
-      'from marca'
-      'where baja = '#39'N'#39)
-    CampoBuscar = 'NOMBRE_MARCA'
+      
+        'select m.id_marca, lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_m' +
+        'arca as busqueda'
+      'from marca m'
+      'where m.baja = '#39'N'#39
+      'order by m.codigo_marca, m.nombre_marca')
+    CampoBuscar = 'busqueda'
     CampoClave = 'ID_MARCA'
     BuscarEnQuery = ZQ_Marca
     TituloVentana = 'Buscar Marca'
@@ -2327,7 +2341,9 @@ object FABMProductos: TFABMProductos
     Connection = DM.Conexion
     AfterScroll = ZQ_ColorAfterScroll
     SQL.Strings = (
-      'select c.*,(c.codigo||'#39' - '#39'||c.nombre) as resumen'
+      
+        'select c.*, (lpad(c.codigo_color,4,'#39'0'#39')||'#39' - '#39'||c.nombre) as res' +
+        'umen'
       'from Color c'
       'where c.baja = '#39'N'#39)
     Params = <>
@@ -2337,9 +2353,9 @@ object FABMProductos: TFABMProductos
       FieldName = 'ID_COLOR'
       Required = True
     end
-    object ZQ_ColorCODIGO: TStringField
-      FieldName = 'CODIGO'
-      Size = 10
+    object ZQ_ColorCODIGO_COLOR: TIntegerField
+      FieldName = 'CODIGO_COLOR'
+      DisplayFormat = '0000'
     end
     object ZQ_ColorNOMBRE: TStringField
       FieldName = 'NOMBRE'
@@ -2356,12 +2372,99 @@ object FABMProductos: TFABMProductos
     object ZQ_ColorRESUMEN: TStringField
       FieldName = 'RESUMEN'
       ReadOnly = True
-      Size = 43
+      Size = 288
     end
   end
   object DS_Color: TDataSource
     DataSet = ZQ_Color
     Left = 848
     Top = 216
+  end
+  object EKListadoColor: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      
+        'select c.*, (lpad(c.codigo_color,4,'#39'0'#39')||'#39' - '#39'||c.nombre) as res' +
+        'umen'
+      'from Color c'
+      'where c.baja = '#39'N'#39)
+    CampoBuscar = 'resumen'
+    CampoClave = 'id_color'
+    BuscarEnQuery = ZQ_Color
+    TituloVentana = 'Buscar Art'#237'culo'
+    Left = 845
+    Top = 96
+  end
+  object ZQ_ExisteCodigo: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from producto_cabecera pc'
+      'where pc.cod_corto = :codigo'
+      '  and pc.id_marca = :idMarca')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'codigo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'idMarca'
+        ParamType = ptUnknown
+      end>
+    Left = 40
+    Top = 152
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'codigo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'idMarca'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ExisteCodigoID_PROD_CABECERA: TIntegerField
+      FieldName = 'ID_PROD_CABECERA'
+      Required = True
+    end
+    object ZQ_ExisteCodigoID_MARCA: TIntegerField
+      FieldName = 'ID_MARCA'
+      Required = True
+    end
+    object ZQ_ExisteCodigoNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 100
+    end
+    object ZQ_ExisteCodigoDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object ZQ_ExisteCodigoIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object ZQ_ExisteCodigoBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_ExisteCodigoAUD_USUARIO: TStringField
+      FieldName = 'AUD_USUARIO'
+      Size = 10
+    end
+    object ZQ_ExisteCodigoAUD_FECHA: TDateTimeField
+      FieldName = 'AUD_FECHA'
+    end
+    object ZQ_ExisteCodigoID_ARTICULO: TIntegerField
+      FieldName = 'ID_ARTICULO'
+      Required = True
+    end
+    object ZQ_ExisteCodigoCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_ExisteCodigoCOLOR: TIntegerField
+      FieldName = 'COLOR'
+    end
   end
 end

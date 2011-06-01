@@ -1,6 +1,6 @@
 object FABM_Articulo: TFABM_Articulo
-  Left = 337
-  Top = 236
+  Left = 324
+  Top = 196
   Width = 870
   Height = 500
   Caption = 'ABM Art'#237'culo'
@@ -83,7 +83,7 @@ object FABM_Articulo: TFABM_Articulo
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 1
       end
       object DBLookupComboBox1: TDBLookupComboBox
         Left = 98
@@ -101,7 +101,8 @@ object FABM_Articulo: TFABM_Articulo
         ListField = 'DESCRIPCION'
         ListSource = DS_TipoArt
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
+        OnKeyUp = DBLookupComboBox1KeyUp
       end
     end
     object PanelGrilla: TPanel
@@ -642,19 +643,20 @@ object FABM_Articulo: TFABM_Articulo
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 552
-    Top = 136
+    Left = 296
+    Top = 128
     DockControlHeights = (
       0
       0
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      ShortCut = 112
       OnClick = btnBuscarClick
       AutoGrayScale = False
     end
@@ -668,58 +670,64 @@ object FABM_Articulo: TFABM_Articulo
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+      Caption = 'F2 - Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
       ImageIndex = 0
+      ShortCut = 113
       OnClick = btnNuevoClick
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+      Caption = 'F3 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
       ImageIndex = 1
+      ShortCut = 114
       OnClick = btnModificarClick
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'Baja'
+      Caption = 'F5 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
       ImageIndex = 25
+      ShortCut = 116
       OnClick = btnBajaClick
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+      Caption = 'F6 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
       ImageIndex = 24
+      ShortCut = 117
       OnClick = btnReactivarClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
       Visible = ivAlways
       ImageIndex = 3
+      ShortCut = 122
       OnClick = btnGuardarClick
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
       Visible = ivAlways
       ImageIndex = 4
+      ShortCut = 123
       OnClick = btnCancelarClick
       AutoGrayScale = False
     end
@@ -833,30 +841,34 @@ object FABM_Articulo: TFABM_Articulo
         ItemIndex = -1
       end
       item
-        Titulo = 'Baja'
-        Campo = 'baja'
-        Tabla = 'articulo'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
-          'Si'
-          'No')
-        TipoComboEditable = False
-        TipoComboValoresReales.Strings = (
-          'S'
-          'N')
-        ItemIndex = -1
-      end
-      item
         Titulo = 'Tipo Articulo'
         Campo = 'id_tipo_articulo'
         Tabla = 'articulo'
         TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
         TipoCombollenarSQL = ZQ_TipoArt
         TipoCombollenarCampo = 'descripcion'
         TipoCombollenarCampoReal = 'id_tipo_articulo'
         TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'articulo'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoComboValores.Strings = (
+          'SI'
+          'NO')
+        TipoComboEditable = False
+        CambiarCondicion = False
+        TipoComboValoresReales.Strings = (
+          'S'
+          'N')
         ItemIndex = -1
       end>
     CriteriosLocate = <>
@@ -881,5 +893,61 @@ object FABM_Articulo: TFABM_Articulo
     MoverColumna = True
     Left = 48
     Top = 186
+  end
+  object EKListadoTipo: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select *'
+      'from tipo_articulo'
+      'where baja = '#39'N'#39)
+    CampoBuscar = 'DESCRIPCION'
+    CampoClave = 'ID_TIPO_ARTICULO'
+    TituloVentana = 'Buscar Tipo Art'#237'culo'
+    Left = 45
+    Top = 240
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 48
+    Top = 290
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+      OnExecute = ANuevoExecute
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+      OnExecute = ABajaExecute
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+      OnExecute = AReactivarExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
+    end
   end
 end

@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKBusquedaAvanzada, EKOrdenarGrilla;
+  EKBusquedaAvanzada, EKOrdenarGrilla, EKListadoSQL, ActnList,
+  XPStyleActnCtrls, ActnMan;
 
 type
   TFABM_Articulo = class(TForm)
@@ -48,6 +49,16 @@ type
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    EKListadoTipo: TEKListadoSQL;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -57,13 +68,19 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridArticuloDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridArticuloDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnBuscarClick(Sender: TObject);
+    procedure DBLookupComboBox1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    //------TECLAS RAPIDAS
+    procedure ABuscarExecute(Sender: TObject);
+    procedure ANuevoExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure ABajaExecute(Sender: TObject);
+    procedure AReactivarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
   private
-    { Private declarations }
   public
-    { Public declarations }
   end;
 
 var
@@ -101,7 +118,7 @@ begin
     ZQ_Articulo.Append;
     ZQ_ArticuloBAJA.AsString:= 'N';
 
-    DBEDescripcion.SetFocus;
+    DBLookupComboBox1.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -120,7 +137,7 @@ begin
 
     ZQ_Articulo.Edit;
 
-    DBEDescripcion.SetFocus;
+    DBLookupComboBox1.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -263,5 +280,65 @@ procedure TFABM_Articulo.btnBuscarClick(Sender: TObject);
 begin
   EKBusquedaAvanzada1.Buscar;
 end;
+
+procedure TFABM_Articulo.DBLookupComboBox1KeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+    if EKListadoTipo.Buscar then
+    begin
+      ZQ_Articulo.Edit;
+      ZQ_ArticuloID_TIPO_ARTICULO.AsInteger := StrToInt(EKListadoTipo.Resultado);
+      DBLookupComboBox1.SetFocus;
+    end;
+end;
+
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABM_Articulo.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
+procedure TFABM_Articulo.ANuevoExecute(Sender: TObject);
+begin
+  if btnNuevo.Enabled then
+    btnNuevo.Click;
+end;
+
+procedure TFABM_Articulo.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABM_Articulo.ABajaExecute(Sender: TObject);
+begin
+  if btnBaja.Enabled then
+    btnBaja.Click;
+end;
+
+procedure TFABM_Articulo.AReactivarExecute(Sender: TObject);
+begin
+  if btnReactivar.Enabled then
+    btnReactivar.Click;
+end;
+
+procedure TFABM_Articulo.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABM_Articulo.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
 
 end.

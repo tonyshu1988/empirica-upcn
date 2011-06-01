@@ -1013,53 +1013,53 @@ object FABMEmpresas: TFABMEmpresas
         Font.Style = []
         ItemLinks = <
           item
-            Item = btBuscar
+            Item = btnBuscar
             Visible = True
           end
           item
             BeginGroup = True
-            Item = BtNuevo
+            Item = btnNuevo
             Visible = True
           end
           item
-            Item = BtModificar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btBaja
-            Visible = True
-          end
-          item
-            Item = btReactivar
+            Item = btnModificar
             Visible = True
           end
           item
             BeginGroup = True
-            Item = BtGuardar
+            Item = btnBaja
             Visible = True
           end
           item
-            Item = BtCancelar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = BtSkype
-            Visible = True
-          end
-          item
-            Item = btEnviarMail
+            Item = btnReactivar
             Visible = True
           end
           item
             BeginGroup = True
-            Item = BtImprimir
+            Item = btnGuardar
+            Visible = True
+          end
+          item
+            Item = btnCancelar
             Visible = True
           end
           item
             BeginGroup = True
-            Item = btsalir
+            Item = btnSkype
+            Visible = True
+          end
+          item
+            Item = btnEnviarMail
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnImprimir
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnSalir
             Visible = True
           end>
         Name = 'barra'
@@ -1373,62 +1373,63 @@ object FABMEmpresas: TFABMEmpresas
       0
       0
       52)
-    object BtNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+    object btnNuevo: TdxBarLargeButton
+      Caption = 'F2 - Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
       ImageIndex = 0
-      OnClick = BtNuevoClick
+      OnClick = btnNuevoClick
       AutoGrayScale = False
     end
-    object BtModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+    object btnModificar: TdxBarLargeButton
+      Caption = 'F3 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
       ImageIndex = 1
-      OnClick = BtModificarClick
+      OnClick = btnModificarClick
       AutoGrayScale = False
     end
-    object btBaja: TdxBarLargeButton
-      Caption = 'Baja'
+    object btnBaja: TdxBarLargeButton
+      Caption = 'F4 - Baja'
       Category = 0
+      Hint = 'F4 - Baja'
       Visible = ivAlways
       ImageIndex = 25
-      OnClick = btBajaClick
+      OnClick = btnBajaClick
       AutoGrayScale = False
     end
-    object btBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+    object btnBuscar: TdxBarLargeButton
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
-      OnClick = btBuscarClick
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object BtGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+    object btnGuardar: TdxBarLargeButton
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
       Visible = ivAlways
       ImageIndex = 3
-      OnClick = BtGuardarClick
+      OnClick = btnGuardarClick
       AutoGrayScale = False
     end
-    object BtCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+    object btnCancelar: TdxBarLargeButton
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
       Visible = ivAlways
       ImageIndex = 4
-      OnClick = BtCancelarClick
+      OnClick = btnCancelarClick
       AutoGrayScale = False
     end
-    object BtImprimir: TdxBarLargeButton
+    object btnImprimir: TdxBarLargeButton
       Align = iaRight
       Caption = 'Imprimir'
       Category = 0
@@ -1436,22 +1437,23 @@ object FABMEmpresas: TFABMEmpresas
       ImageIndex = 28
       AutoGrayScale = False
     end
-    object btReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+    object btnReactivar: TdxBarLargeButton
+      Caption = 'F5 - Reactivar'
       Category = 0
+      Hint = 'F5 - Reactivar'
       Visible = ivAlways
       ImageIndex = 24
-      OnClick = btReactivarClick
+      OnClick = btnReactivarClick
       AutoGrayScale = False
     end
-    object btsalir: TdxBarLargeButton
+    object btnSalir: TdxBarLargeButton
       Align = iaRight
       Caption = 'Salir'
       Category = 0
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
       ImageIndex = 6
-      OnClick = btsalirClick
+      OnClick = btnSalirClick
       AutoGrayScale = False
     end
     object btverbajados: TdxBarLargeButton
@@ -1489,13 +1491,13 @@ object FABMEmpresas: TFABMEmpresas
       ImageIndex = 42
       AutoGrayScale = False
     end
-    object BtSkype: TdxBarLargeButton
+    object btnSkype: TdxBarLargeButton
       Caption = 'Skype'
       Category = 0
       Hint = 'Skype'
       Visible = ivAlways
       ImageIndex = 73
-      OnClick = BtSkypeClick
+      OnClick = btnSkypeClick
       AutoGrayScale = False
     end
     object bt: TdxBarLargeButton
@@ -1504,23 +1506,23 @@ object FABMEmpresas: TFABMEmpresas
       Hint = 'sk'
       Visible = ivAlways
     end
-    object btEnviarMail: TdxBarLargeButton
+    object btnEnviarMail: TdxBarLargeButton
       Caption = 'Enviar Mail'
       Category = 0
       Hint = 'Enviar Mail'
       Visible = ivAlways
       ImageIndex = 77
-      OnClick = btEnviarMailClick
+      OnClick = btnEnviarMailClick
       AutoGrayScale = False
     end
     object GrupoVisualizando: TdxBarGroup
       Items = (
-        'BtNuevo'
-        'BtModificar'
-        'btBuscar'
-        'BtImprimir'
-        'btBaja'
-        'btReactivar'
+        'btnNuevo'
+        'btnModificar'
+        'btnBuscar'
+        'btnImprimir'
+        'btnBaja'
+        'btnReactivar'
         'btverbajados'
         'btnSiguiente'
         'btnAnterior')
@@ -1528,8 +1530,8 @@ object FABMEmpresas: TFABMEmpresas
     object GrupoEditando: TdxBarGroup
       Enabled = False
       Items = (
-        'BtGuardar'
-        'BtCancelar')
+        'btnGuardar'
+        'btnCancelar')
     end
   end
   object ZQ_Empresa: TZQuery
@@ -2166,6 +2168,50 @@ object FABMEmpresas: TFABMEmpresas
     object EnviarunMail1: TMenuItem
       Caption = 'Enviar un Mail'
       OnClick = EnviarunMail1Click
+    end
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 128
+    Top = 178
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+      OnExecute = ANuevoExecute
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+      OnExecute = ABajaExecute
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+      OnExecute = AReactivarExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
     end
   end
 end

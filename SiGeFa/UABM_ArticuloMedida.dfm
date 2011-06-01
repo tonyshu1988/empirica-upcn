@@ -21,17 +21,17 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PageControlEdicion: TPageControl
       Left = 0
       Top = 0
-      Width = 862
-      Height = 416
-      ActivePage = TabMedidaArticulo
+      Width = 854
+      Height = 410
+      ActivePage = TabMedidaArticuloUnico
       Align = alClient
       TabOrder = 0
       OnChange = PageControlEdicionChange
@@ -60,7 +60,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
               FieldName = 'MEDIDA'
               Title.Alignment = taCenter
               Title.Caption = 'Medida'
-              Width = 442
+              Width = 729
               Visible = True
             end>
         end
@@ -149,13 +149,13 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object Splitter1: TSplitter
           Left = 487
           Top = 0
-          Height = 388
+          Height = 382
         end
         object DBGridMedida: TDBGrid
           Left = 490
           Top = 0
-          Width = 364
-          Height = 388
+          Width = 356
+          Height = 382
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
           Color = 13431031
@@ -184,7 +184,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Left = 0
           Top = 0
           Width = 487
-          Height = 388
+          Height = 382
           Hint = 'Presione el boton derecho del mouse para cargar un articulo'
           Align = alLeft
           Color = 14606012
@@ -216,7 +216,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object PanelSeleccionarArticulo: TPanel
           Left = 0
           Top = 0
-          Width = 854
+          Width = 846
           Height = 39
           Align = alTop
           BevelOuter = bvNone
@@ -250,8 +250,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object DBGridMedidaARticulo: TDBGrid
           Left = 0
           Top = 39
-          Width = 854
-          Height = 349
+          Width = 846
+          Height = 343
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
           Color = 14606012
@@ -283,7 +283,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -764,7 +764,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+      Caption = 'F2 - Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
@@ -773,7 +773,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+      Caption = 'F3 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
@@ -782,7 +782,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'Baja'
+      Caption = 'F5 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
@@ -791,7 +791,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+      Caption = 'F6 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
@@ -800,7 +800,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -810,7 +810,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -1152,5 +1152,48 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     TituloVentana = 'Buscar Art'#237'culo'
     Left = 432
     Top = 144
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 48
+    Top = 194
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+      OnExecute = ANuevoExecute
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+      OnExecute = ABajaExecute
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+      OnExecute = AReactivarExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
+    end
   end
 end
