@@ -711,7 +711,7 @@ object FABMProductos: TFABMProductos
                 object Label5: TLabel
                   Left = 3
                   Top = 3
-                  Width = 104
+                  Width = 132
                   Height = 13
                   Align = alTop
                   Alignment = taCenter
