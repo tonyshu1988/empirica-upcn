@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, ExtDlgs, jpeg;
+  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, ExtDlgs, jpeg,
+  EKBusquedaAvanzada;
 
 type
   TFABM_Sucursal = class(TForm)
@@ -67,8 +68,10 @@ type
     Label7: TLabel;
     buscarImagen: TOpenPictureDialog;
     ZQ_SucursalLOGO: TBlobField;
+    EKBuscar: TEKBusquedaAvanzada;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -86,6 +89,7 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure edImagenDblClick(Sender: TObject);
+    procedure ABuscarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -103,6 +107,12 @@ implementation
 uses  UDM, UPrincipal;
 
 {$R *.dfm}
+
+procedure TFABM_Sucursal.btnBuscarClick(Sender: TObject);
+begin
+  EKBuscar.Buscar
+end;
+
 
 procedure TFABM_Sucursal.btnNuevoClick(Sender: TObject);
 begin
@@ -263,6 +273,12 @@ end;
 //----------------------------------
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
+procedure TFABM_Sucursal.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
 procedure TFABM_Sucursal.ANuevoExecute(Sender: TObject);
 begin
   if btnNuevo.Enabled then

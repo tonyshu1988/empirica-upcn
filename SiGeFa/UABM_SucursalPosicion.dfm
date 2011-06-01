@@ -1,6 +1,6 @@
 object FABM_SucursalPosicion: TFABM_SucursalPosicion
-  Left = 265
-  Top = 150
+  Left = 293
+  Top = 287
   Width = 981
   Height = 549
   Caption = 'ABM Sucursal Posicion'

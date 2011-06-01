@@ -1,6 +1,6 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 319
-  Top = 159
+  Left = 465
+  Top = 300
   Width = 870
   Height = 546
   Caption = 'ABM Producto Stock'
@@ -314,7 +314,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
             FieldName = 'COD_CORTO_CABECERA'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Cabecera'
-            Width = -1
             Visible = False
           end
           item
@@ -323,7 +322,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
             FieldName = 'COD_CORTO_PRODUCTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Producto'
-            Width = -1
             Visible = False
           end
           item
@@ -332,7 +330,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
             FieldName = 'BAJA'
             Title.Alignment = taCenter
             Title.Caption = 'Baja'
-            Width = -1
             Visible = False
           end>
       end
@@ -462,16 +459,16 @@ object FABM_ProductoStock: TFABM_ProductoStock
           end
           item
             BeginGroup = True
-            Item = btnImprimir
-            Visible = True
-          end
-          item
-            BeginGroup = True
             Item = btnAsociar
             Visible = True
           end
           item
             Item = btnProcesar
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnImprimir
             Visible = True
           end
           item
@@ -791,9 +788,9 @@ object FABM_ProductoStock: TFABM_ProductoStock
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
@@ -817,7 +814,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+      Caption = 'F3 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
@@ -826,7 +823,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       AutoGrayScale = False
     end
     object btnProcesar: TdxBarLargeButton
-      Caption = 'Procesar'
+      Caption = 'F8 - Procesar'
       Category = 0
       Enabled = False
       Hint = 
@@ -838,7 +835,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       AutoGrayScale = False
     end
     object btnAsociar: TdxBarLargeButton
-      Caption = 'Asociar'
+      Caption = 'F7 - Asociar'
       Category = 0
       Hint = 
         'Asociar los Productos pertenecientes a cada una de las Sucursale' +
@@ -849,7 +846,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -859,7 +856,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -1224,26 +1221,32 @@ object FABM_ProductoStock: TFABM_ProductoStock
     Top = 192
   end
   object Popup_Sucursal: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
     Left = 288
     Top = 77
     object PopItemSucursal_Agregar: TMenuItem
       Caption = 'Agregar Sucursal'
+      ImageIndex = 14
       OnClick = PopItemSucursal_AgregarClick
     end
     object PopItemSucursal_Quitar: TMenuItem
       Caption = 'Quitar Sucursal'
+      ImageIndex = 15
       OnClick = PopItemSucursal_QuitarClick
     end
   end
   object Popup_Producto: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
     Left = 392
     Top = 77
     object PopItemProducto_Agregar: TMenuItem
       Caption = 'Agregar Producto'
+      ImageIndex = 14
       OnClick = PopItemProducto_AgregarClick
     end
     object PopItemProducto_Quitar: TMenuItem
       Caption = 'Quitar Producto'
+      ImageIndex = 15
       OnClick = PopItemProducto_QuitarClick
     end
   end
@@ -1370,5 +1373,56 @@ object FABM_ProductoStock: TFABM_ProductoStock
     Params = <>
     Left = 56
     Top = 248
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 56
+    Top = 306
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
+    end
+    object AAsociar: TAction
+      Caption = 'AAsociar'
+      ShortCut = 118
+      OnExecute = AAsociarExecute
+    end
+    object AProcesar: TAction
+      Caption = 'AProcesar'
+      ShortCut = 119
+      OnExecute = AProcesarExecute
+    end
   end
 end

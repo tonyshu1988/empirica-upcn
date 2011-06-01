@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   DBClient, Menus, EKListadoSQL, EKLlenarCombo, ActnList, XPStyleActnCtrls,
-  ActnMan;
+  ActnMan, EKBusquedaAvanzada;
 
 type
   TFABM_ArticuloMedida = class(TForm) 
@@ -50,15 +50,15 @@ type
     QuitarArticulo1: TMenuItem;
     AgregarMedida1: TMenuItem;
     QuitarMedida1: TMenuItem;
-    btProcesar: TdxBarLargeButton;
+    btnProcesar: TdxBarLargeButton;
     EKListadoMedidas: TEKListadoSQL;
     ZQ_MedidaArticulo: TZQuery;
     ZQ_MedidaArticuloID_ARTICULO: TIntegerField;
     ZQ_MedidaArticuloID_MEDIDA: TIntegerField;
     CDSArticuloid_articulo: TIntegerField;
     btCargarDatos: TdxBarLargeButton;
-    btGuardarCarga: TdxBarLargeButton;
-    btCancelarCarga: TdxBarLargeButton;
+    btnGuardarCarga: TdxBarLargeButton;
+    btnCancelarCarga: TdxBarLargeButton;
     TabMedidaArticuloUnico: TTabSheet;
     PanelSeleccionarArticulo: TPanel;
     DBGridMedidaARticulo: TDBGrid;
@@ -99,6 +99,10 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
+    EKBuscar: TEKBusquedaAvanzada;
+    AProcesar: TAction;
+    AGuardarAsociar: TAction;
+    ACancelarAsociar: TAction;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -106,6 +110,7 @@ type
     procedure btnBajaClick(Sender: TObject);
     procedure btnReactivarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DBGridMedidasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -113,11 +118,11 @@ type
     procedure QuitarArticulo1Click(Sender: TObject);
     procedure AgregarMedida1Click(Sender: TObject);
     procedure QuitarMedida1Click(Sender: TObject);
-    procedure btProcesarClick(Sender: TObject);
+    procedure btnProcesarClick(Sender: TObject);
     procedure PageControlEdicionChange(Sender: TObject);
     procedure btCargarDatosClick(Sender: TObject);
-    procedure btGuardarCargaClick(Sender: TObject);
-    procedure btCancelarCargaClick(Sender: TObject);
+    procedure btnGuardarCargaClick(Sender: TObject);
+    procedure btnCancelarCargaClick(Sender: TObject);
     procedure AgregarMedida2Click(Sender: TObject);
     procedure QuitarMedida2Click(Sender: TObject);
     procedure PageControlEdicionChanging(Sender: TObject; var AllowChange: Boolean);
@@ -125,12 +130,16 @@ type
     procedure EKLlenarComboArticuloCambio(valor: String);
     procedure CBArticuloKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     //------TECLAS RAPIDAS
+    procedure ABuscarExecute(Sender: TObject);
     procedure ANuevoExecute(Sender: TObject);
     procedure AModificarExecute(Sender: TObject);
     procedure ABajaExecute(Sender: TObject);
     procedure AReactivarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
+    procedure AProcesarExecute(Sender: TObject);
+    procedure AGuardarAsociarExecute(Sender: TObject);
+    procedure ACancelarAsociarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -161,6 +170,13 @@ procedure TFABM_ArticuloMedida.btnSalirClick(Sender: TObject);
 begin
   Close;
 end;
+
+
+procedure TFABM_ArticuloMedida.btnBuscarClick(Sender: TObject);
+begin
+  EKBuscar.Buscar;
+end;
+
 
 procedure TFABM_ArticuloMedida.btnNuevoClick(Sender: TObject);
 begin
@@ -404,7 +420,7 @@ begin
 end;
 
 
-procedure TFABM_ArticuloMedida.btProcesarClick(Sender: TObject);
+procedure TFABM_ArticuloMedida.btnProcesarClick(Sender: TObject);
 begin
   if CDSArticulo.IsEmpty or CDSMedidas.IsEmpty then
   begin
@@ -430,9 +446,9 @@ begin
       CDSArticulo.Next;
     end;
 
-    btGuardarCarga.Enabled := true;
-    btCancelarCarga.Enabled := true;
-    btProcesar.Enabled := false;
+    btnGuardarCarga.Enabled := true;
+    btnCancelarCarga.Enabled := true;
+    btnProcesar.Enabled := false;
     DBGridArticulo.Enabled := false;
     DBGridMedida.Enabled := false;
   end;
@@ -445,11 +461,12 @@ begin
 
   case PageControlEdicion.TabIndex of
   0:begin
-      btProcesar.Visible := ivNever;
+      btnProcesar.Visible := ivNever;
       btCargarDatos.Visible := ivNever;
-      btGuardarCarga.Visible := ivNever;
-      btCancelarCarga.Visible := ivNever;
+      btnGuardarCarga.Visible := ivNever;
+      btnCancelarCarga.Visible := ivNever;
 
+      btnBuscar.Visible := ivAlways;
       btnGuardar.Visible := ivAlways;
       btnCancelar.Visible := ivAlways;
       btnNuevo.Visible := ivAlways;
@@ -460,11 +477,12 @@ begin
     end;
 
   1:begin
-      btProcesar.Visible := ivAlways;
+      btnProcesar.Visible := ivAlways;
       btCargarDatos.Visible := ivAlways;
-      btGuardarCarga.Visible := ivAlways;
-      btCancelarCarga.Visible := ivAlways;
-      
+      btnGuardarCarga.Visible := ivAlways;
+      btnCancelarCarga.Visible := ivAlways;
+
+      btnBuscar.Visible := ivNever;
       btnGuardar.Visible := ivNever;
       btnCancelar.Visible := ivNever;
       btnModificar.Visible := ivNever;
@@ -475,11 +493,12 @@ begin
     end;
 
   2:begin
-      btProcesar.Visible := ivNever;
+      btnProcesar.Visible := ivNever;
       btCargarDatos.Visible := ivNever;
-      btGuardarCarga.Visible := ivNever;
-      btCancelarCarga.Visible := ivNever;
-      
+      btnGuardarCarga.Visible := ivNever;
+      btnCancelarCarga.Visible := ivNever;
+
+      btnBuscar.Visible := ivNever;
       btnGuardar.Visible := ivNever;
       btnCancelar.Visible := ivNever;
       btnModificar.Visible := ivNever;
@@ -496,19 +515,19 @@ end;
 procedure TFABM_ArticuloMedida.btCargarDatosClick(Sender: TObject);
 begin
   btCargarDatos.Enabled := false;
-  btCancelarCarga.Enabled := true;
-  btProcesar.Enabled := true;
+  btnCancelarCarga.Enabled := true;
+  btnProcesar.Enabled := true;
 end;
 
 
-procedure TFABM_ArticuloMedida.btGuardarCargaClick(Sender: TObject);
+procedure TFABM_ArticuloMedida.btnGuardarCargaClick(Sender: TObject);
 begin
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMMedida) then
     begin
-      btGuardarCarga.Enabled := false;
-      btCancelarCarga.Enabled := false;
-      btProcesar.Enabled := true;
+      btnGuardarCarga.Enabled := false;
+      btnCancelarCarga.Enabled := false;
+      btnProcesar.Enabled := true;
       DBGridArticulo.Enabled := true;
       DBGridMedida.Enabled := true;
       CDSArticulo.EmptyDataSet;
@@ -523,13 +542,13 @@ begin
 end;
 
 
-procedure TFABM_ArticuloMedida.btCancelarCargaClick(Sender: TObject);
+procedure TFABM_ArticuloMedida.btnCancelarCargaClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABMMedida) then
   begin
-    btGuardarCarga.Enabled := false;
-    btCancelarCarga.Enabled := false;
-    btProcesar.Enabled := true;
+    btnGuardarCarga.Enabled := false;
+    btnCancelarCarga.Enabled := false;
+    btnProcesar.Enabled := true;
     DBGridArticulo.Enabled := true;
     DBGridMedida.Enabled := true;
     CDSArticulo.EmptyDataSet;
@@ -581,7 +600,7 @@ end;
 procedure TFABM_ArticuloMedida.PageControlEdicionChanging(Sender: TObject;
   var AllowChange: Boolean);
 begin
-  if (btGuardarCarga.Enabled = true) or (btnGuardar.Enabled = true) then
+  if (btnGuardarCarga.Enabled = true) or (btnGuardar.Enabled = true) then
     AllowChange := false
   else
     AllowChange := true;
@@ -627,6 +646,12 @@ end;
 //----------------------------------
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
+procedure TFABM_ArticuloMedida.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
 procedure TFABM_ArticuloMedida.ANuevoExecute(Sender: TObject);
 begin
   if btnNuevo.Enabled then
@@ -661,6 +686,24 @@ procedure TFABM_ArticuloMedida.ACancelarExecute(Sender: TObject);
 begin
   if btnCancelar.Enabled then
     btnCancelar.Click;
+end;
+
+procedure TFABM_ArticuloMedida.AProcesarExecute(Sender: TObject);
+begin
+  if btnProcesar.Enabled then
+    btnProcesar.Click;
+end;
+
+procedure TFABM_ArticuloMedida.AGuardarAsociarExecute(Sender: TObject);
+begin
+  if btnGuardarCarga.Enabled then
+    btnGuardarCarga.Click;
+end;
+
+procedure TFABM_ArticuloMedida.ACancelarAsociarExecute(Sender: TObject);
+begin
+  if btnCancelarCarga.Enabled then
+    btnCancelarCarga.Click;
 end;
 //----------------------------------
 //  FIN TECLAS RAPIDAS
