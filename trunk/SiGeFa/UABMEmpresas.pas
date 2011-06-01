@@ -8,21 +8,22 @@ uses
   DBCtrls, StdCtrls, Mask, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla, Menus,UBuscarPersona,
   ZStoredProcedure,ShellAPI, IdMessage, IdBaseComponent, IdComponent,
-  IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP;
+  IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, ActnList,
+  XPStyleActnCtrls, ActnMan;
 
 type
   TFABMEmpresas = class(TForm)
     PanelContenedor: TPanel;
     dxBarABM: TdxBarManager;
-    BtNuevo: TdxBarLargeButton;
-    BtModificar: TdxBarLargeButton;
-    btBaja: TdxBarLargeButton;
-    btBuscar: TdxBarLargeButton;
-    BtGuardar: TdxBarLargeButton;
-    BtCancelar: TdxBarLargeButton;
-    BtImprimir: TdxBarLargeButton;
-    btReactivar: TdxBarLargeButton;
-    btsalir: TdxBarLargeButton;
+    btnNuevo: TdxBarLargeButton;
+    btnModificar: TdxBarLargeButton;
+    btnBaja: TdxBarLargeButton;
+    btnBuscar: TdxBarLargeButton;
+    btnGuardar: TdxBarLargeButton;
+    btnCancelar: TdxBarLargeButton;
+    btnImprimir: TdxBarLargeButton;
+    btnReactivar: TdxBarLargeButton;
+    btnSalir: TdxBarLargeButton;
     btverbajados: TdxBarLargeButton;
     BtBusquedaNueva: TdxBarLargeButton;
     btnSiguiente: TdxBarLargeButton;
@@ -139,10 +140,10 @@ type
     Label13: TLabel;
     ZPID_Empresa: TZStoredProc;
     ZPID_EmpresaID: TIntegerField;
-    BtSkype: TdxBarLargeButton;
+    btnSkype: TdxBarLargeButton;
     bt: TdxBarLargeButton;
     ZQ_PersonaRelacionViajantetelefono: TStringField;
-    btEnviarMail: TdxBarLargeButton;
+    btnEnviarMail: TdxBarLargeButton;
     ZQ_EmpresaDESCRIPCION_PRIVADA: TStringField;
     TabDescripcion: TTabSheet;
     DBMemoDescripcion: TDBMemo;
@@ -173,15 +174,24 @@ type
     DBEditEmail: TDBEdit;
     DBEditWeb: TDBEdit;
     ZQ_PersonaRelacionViajanteemail: TStringField;
-    procedure BtNuevoClick(Sender: TObject);
-    procedure BtModificarClick(Sender: TObject);
-    procedure BtGuardarClick(Sender: TObject);
-    procedure BtCancelarClick(Sender: TObject);
-    procedure btsalirClick(Sender: TObject);
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
+    procedure btnNuevoClick(Sender: TObject);
+    procedure btnModificarClick(Sender: TObject);
+    procedure btnGuardarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnSalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure btBuscarClick(Sender: TObject);
-    procedure btBajaClick(Sender: TObject);
-    procedure btReactivarClick(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
+    procedure btnBajaClick(Sender: TObject);
+    procedure btnReactivarClick(Sender: TObject);
     procedure DBGridEmpresasDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
@@ -192,11 +202,18 @@ type
     procedure QuitarContacto1Click(Sender: TObject);
     function validarCampos():boolean;
     procedure QuitarViajante1Click(Sender: TObject);
-    procedure BtSkypeClick(Sender: TObject);
+    procedure btnSkypeClick(Sender: TObject);
     procedure llamar1Click(Sender: TObject);
-    procedure btEnviarMailClick(Sender: TObject);
+    procedure btnEnviarMailClick(Sender: TObject);
     procedure EnviarunMail1Click(Sender: TObject);
-
+    //------TECLAS RAPIDAS
+    procedure ABuscarExecute(Sender: TObject);
+    procedure ANuevoExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure ABajaExecute(Sender: TObject);
+    procedure AReactivarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
@@ -233,7 +250,7 @@ begin
 end;
 
 
-procedure TFABMEmpresas.BtNuevoClick(Sender: TObject);
+procedure TFABMEmpresas.btnNuevoClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,[ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante]) then
   begin
@@ -252,7 +269,7 @@ begin
 end;
 
 
-procedure TFABMEmpresas.BtModificarClick(Sender: TObject);
+procedure TFABMEmpresas.btnModificarClick(Sender: TObject);
 begin
   if (ZQ_Empresa.IsEmpty) or (ZQ_EmpresaBAJA.AsString = 'S') then
    exit;
@@ -270,7 +287,7 @@ begin
 end;
 
 
-procedure TFABMEmpresas.BtGuardarClick(Sender: TObject);
+procedure TFABMEmpresas.btnGuardarClick(Sender: TObject);
 var
 recno:integer;
 begin
@@ -294,7 +311,7 @@ begin
 end;
 
 
-procedure TFABMEmpresas.BtCancelarClick(Sender: TObject);
+procedure TFABMEmpresas.btnCancelarClick(Sender: TObject);
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
   DBGridEmpresas.Enabled:=true;
@@ -320,7 +337,7 @@ begin
 end;
 
 
-procedure TFABMEmpresas.btsalirClick(Sender: TObject);
+procedure TFABMEmpresas.btnSalirClick(Sender: TObject);
 begin
   Close;
 end;
@@ -333,13 +350,13 @@ begin
 end;
 
 
-procedure TFABMEmpresas.btBuscarClick(Sender: TObject);
+procedure TFABMEmpresas.btnBuscarClick(Sender: TObject);
 begin
   EKBusquedaAvanzadaEmpresas.Buscar;
 end;
 
 
-procedure TFABMEmpresas.btBajaClick(Sender: TObject);
+procedure TFABMEmpresas.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
@@ -366,7 +383,7 @@ begin
 end;
 
 
-procedure TFABMEmpresas.btReactivarClick(Sender: TObject);
+procedure TFABMEmpresas.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
@@ -509,7 +526,7 @@ begin
 end;
 
 
-procedure TFABMEmpresas.BtSkypeClick(Sender: TObject);
+procedure TFABMEmpresas.btnSkypeClick(Sender: TObject);
 var
   Telefono : string;
 begin
@@ -580,11 +597,11 @@ procedure TFABMEmpresas.llamar1Click(Sender: TObject);
 var
   telefono : string;
 begin
-  BtSkype.Click;
+  btnSkype.Click;
 end;
 
 
-procedure TFABMEmpresas.btEnviarMailClick(Sender: TObject);
+procedure TFABMEmpresas.btnEnviarMailClick(Sender: TObject);
 begin
   Application.CreateForm(TFMailEnviar, FMailEnviar);
 
@@ -644,7 +661,55 @@ end;
 
 procedure TFABMEmpresas.EnviarunMail1Click(Sender: TObject);
 begin
-  btEnviarMail.Click;
+  btnEnviarMail.Click;
 end;
+
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABMEmpresas.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
+procedure TFABMEmpresas.ANuevoExecute(Sender: TObject);
+begin
+  if btnNuevo.Enabled then
+    btnNuevo.Click;
+end;
+
+procedure TFABMEmpresas.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABMEmpresas.ABajaExecute(Sender: TObject);
+begin
+  if btnBaja.Enabled then
+    btnBaja.Click;
+end;
+
+procedure TFABMEmpresas.AReactivarExecute(Sender: TObject);
+begin
+  if btnReactivar.Enabled then
+    btnReactivar.Click;
+end;
+
+procedure TFABMEmpresas.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABMEmpresas.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
 
 end.

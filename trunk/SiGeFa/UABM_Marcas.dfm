@@ -45,7 +45,7 @@ object FABM_Marcas: TFABM_Marcas
         Left = 5
         Top = 5
         Width = 844
-        Height = 348
+        Height = 323
         Align = alClient
         Color = 14606012
         DataSource = DS_Marcas
@@ -60,24 +60,33 @@ object FABM_Marcas: TFABM_Marcas
         Columns = <
           item
             Expanded = False
+            FieldName = 'CODIGO_MARCA'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'digo'
+            Width = 90
+            Visible = True
+          end
+          item
+            Expanded = False
             FieldName = 'NOMBRE_MARCA'
             Title.Alignment = taCenter
             Title.Caption = 'Marca'
+            Width = 720
             Visible = True
           end>
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 353
+        Top = 328
         Width = 844
-        Height = 33
+        Height = 58
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
         Visible = False
         object Label1: TLabel
-          Left = 6
-          Top = 11
+          Left = 12
+          Top = 37
           Width = 39
           Height = 13
           Caption = 'Marca:'
@@ -89,13 +98,44 @@ object FABM_Marcas: TFABM_Marcas
           ParentFont = False
           Transparent = True
         end
+        object Label2: TLabel
+          Left = 6
+          Top = 12
+          Width = 45
+          Height = 13
+          Caption = 'C'#243'digo:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
         object DBENombre: TDBEdit
-          Left = 51
-          Top = 7
-          Width = 731
+          Left = 56
+          Top = 33
+          Width = 718
           Height = 21
           CharCase = ecUpperCase
           DataField = 'NOMBRE_MARCA'
+          DataSource = DS_Marcas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+        end
+        object DBECodigo: TDBEdit
+          Left = 56
+          Top = 6
+          Width = 81
+          Height = 21
+          CharCase = ecUpperCase
+          Color = clMenuBar
+          DataField = 'CODIGO_MARCA'
           DataSource = DS_Marcas
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -252,6 +292,11 @@ object FABM_Marcas: TFABM_Marcas
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnNuevo
             Visible = True
           end
@@ -591,19 +636,20 @@ object FABM_Marcas: TFABM_Marcas
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 552
-    Top = 136
+    Left = 136
+    Top = 120
     DockControlHeights = (
       0
       0
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnVerDetalle: TdxBarLargeButton
@@ -616,7 +662,7 @@ object FABM_Marcas: TFABM_Marcas
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+      Caption = 'F2 - Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
@@ -625,7 +671,7 @@ object FABM_Marcas: TFABM_Marcas
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+      Caption = 'F3 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
@@ -634,7 +680,7 @@ object FABM_Marcas: TFABM_Marcas
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'Baja'
+      Caption = 'F4 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
@@ -643,7 +689,7 @@ object FABM_Marcas: TFABM_Marcas
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+      Caption = 'F5 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
@@ -652,7 +698,7 @@ object FABM_Marcas: TFABM_Marcas
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -662,7 +708,7 @@ object FABM_Marcas: TFABM_Marcas
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -714,9 +760,13 @@ object FABM_Marcas: TFABM_Marcas
       'order by NOMBRE_MARCA')
     Params = <>
     Left = 48
-    Top = 72
+    Top = 64
     object ZQ_MarcasID_MARCA: TIntegerField
       FieldName = 'ID_MARCA'
+    end
+    object ZQ_MarcasCODIGO_MARCA: TIntegerField
+      FieldName = 'CODIGO_MARCA'
+      DisplayFormat = '0000'
     end
     object ZQ_MarcasNOMBRE_MARCA: TStringField
       FieldName = 'NOMBRE_MARCA'
@@ -730,7 +780,7 @@ object FABM_Marcas: TFABM_Marcas
   object DS_Marcas: TDataSource
     DataSet = ZQ_Marcas
     Left = 48
-    Top = 128
+    Top = 120
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridMarca
@@ -738,6 +788,100 @@ object FABM_Marcas: TFABM_Marcas
     Ordenar = True
     MoverColumna = True
     Left = 48
-    Top = 187
+    Top = 179
+  end
+  object ZQ_UltimoNro: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select first 1 CODIGO_MARCA'
+      'from MARCA'
+      'order by CODIGO_MARCA desc')
+    Params = <>
+    Left = 48
+    Top = 235
+    object ZQ_UltimoNroCODIGO_MARCA: TIntegerField
+      FieldName = 'CODIGO_MARCA'
+    end
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 48
+    Top = 290
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+      OnExecute = ANuevoExecute
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+      OnExecute = ABajaExecute
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+      OnExecute = AReactivarExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
+    end
+  end
+  object EKBuscar: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'digo'
+        Campo = 'CODIGO_MARCA'
+        Tabla = 'marca'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Marca'
+        Campo = 'NOMBRE_MARCA'
+        Tabla = 'marca'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_Marcas
+    SQL.Strings = (
+      'select *'
+      'from marca'
+      'order by NOMBRE_MARCA')
+    SQL_Select.Strings = (
+      'select *')
+    SQL_From.Strings = (
+      'from marca')
+    SQL_Orden.Strings = (
+      'order by NOMBRE_MARCA')
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 136
+    Top = 67
   end
 end

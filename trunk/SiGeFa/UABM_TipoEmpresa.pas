@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, DBCtrls, ComCtrls, EKDBDateTimePicker, Mask, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, EKOrdenarGrilla;
+  ZAbstractDataset, ZDataset, EKOrdenarGrilla, ActnList, XPStyleActnCtrls,
+  ActnMan;
 
 type
   TFABM_TipoEmpresa = class(TForm)
@@ -37,6 +38,15 @@ type
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -45,10 +55,15 @@ type
     procedure btnBajaClick(Sender: TObject);
     procedure btnReactivarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure DBGridTipoEmpresaDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridTipoEmpresaDrawColumnCell(Sender: TObject;  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure FormCreate(Sender: TObject);
+    //------TECLAS RAPIDAS
+    procedure ANuevoExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure ABajaExecute(Sender: TObject);
+    procedure AReactivarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -235,5 +250,48 @@ begin
 
   dm.mostrarCantidadRegistro(ZQ_TipoEmpresa, lblCantidadRegistros);
 end;
+
+
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABM_TipoEmpresa.ANuevoExecute(Sender: TObject);
+begin
+  if btnNuevo.Enabled then
+    btnNuevo.Click;
+end;
+
+procedure TFABM_TipoEmpresa.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABM_TipoEmpresa.ABajaExecute(Sender: TObject);
+begin
+  if btnBaja.Enabled then
+    btnBaja.Click;
+end;
+
+procedure TFABM_TipoEmpresa.AReactivarExecute(Sender: TObject);
+begin
+  if btnReactivar.Enabled then
+    btnReactivar.Click;
+end;
+
+procedure TFABM_TipoEmpresa.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABM_TipoEmpresa.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
 
 end.

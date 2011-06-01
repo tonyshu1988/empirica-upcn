@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
-  DBClient, Menus, EKListadoSQL, EKLlenarCombo;
+  DBClient, Menus, EKListadoSQL, EKLlenarCombo, ActnList, XPStyleActnCtrls,
+  ActnMan;
 
 type
   TFABM_ArticuloMedida = class(TForm) 
@@ -89,6 +90,15 @@ type
     ZQ_ArticuloBUSQUEDA: TStringField;
     EKListadoArticulo: TEKListadoSQL;
     Label3: TLabel;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -98,9 +108,7 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridMedidasDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridMedidasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure AgregarArticulo1Click(Sender: TObject);
     procedure QuitarArticulo1Click(Sender: TObject);
     procedure AgregarMedida1Click(Sender: TObject);
@@ -112,14 +120,17 @@ type
     procedure btCancelarCargaClick(Sender: TObject);
     procedure AgregarMedida2Click(Sender: TObject);
     procedure QuitarMedida2Click(Sender: TObject);
-    procedure PageControlEdicionChanging(Sender: TObject;
-      var AllowChange: Boolean);
-    procedure DBGridMedidaARticuloDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure PageControlEdicionChanging(Sender: TObject; var AllowChange: Boolean);
+    procedure DBGridMedidaARticuloDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure EKLlenarComboArticuloCambio(valor: String);
-    procedure CBArticuloKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure CBArticuloKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    //------TECLAS RAPIDAS
+    procedure ANuevoExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure ABajaExecute(Sender: TObject);
+    procedure AReactivarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -611,5 +622,48 @@ begin
 //      CBArticulo.Text:= EKListadoArticulo.Seleccion;
 //    end;
 end;
+
+
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABM_ArticuloMedida.ANuevoExecute(Sender: TObject);
+begin
+  if btnNuevo.Enabled then
+    btnNuevo.Click;
+end;
+
+procedure TFABM_ArticuloMedida.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABM_ArticuloMedida.ABajaExecute(Sender: TObject);
+begin
+  if btnBaja.Enabled then
+    btnBaja.Click;
+end;
+
+procedure TFABM_ArticuloMedida.AReactivarExecute(Sender: TObject);
+begin
+  if btnReactivar.Enabled then
+    btnReactivar.Click;
+end;
+
+procedure TFABM_ArticuloMedida.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABM_ArticuloMedida.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
 
 end.

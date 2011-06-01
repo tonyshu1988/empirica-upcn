@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla;
+  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFABM_TipoArticulo = class(TForm)
@@ -38,6 +38,15 @@ type
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -47,9 +56,14 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridTipoArticuloDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridTipoArticuloDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    //------TECLAS RAPIDAS
+    procedure ANuevoExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure ABajaExecute(Sender: TObject);
+    procedure AReactivarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);    
   private
     { Private declarations }
   public
@@ -238,5 +252,48 @@ begin
 
   FPrincipal.PintarFilasGrillasConBajas(DBGridTipoArticulo, ZQ_TipoArtBAJA.AsString, Rect, DataCol, Column, State);
 end;
+
+
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABM_TipoArticulo.ANuevoExecute(Sender: TObject);
+begin
+  if btnNuevo.Enabled then
+    btnNuevo.Click;
+end;
+
+procedure TFABM_TipoArticulo.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABM_TipoArticulo.ABajaExecute(Sender: TObject);
+begin
+  if btnBaja.Enabled then
+    btnBaja.Click;
+end;
+
+procedure TFABM_TipoArticulo.AReactivarExecute(Sender: TObject);
+begin
+  if btnReactivar.Enabled then
+    btnReactivar.Click;
+end;
+
+procedure TFABM_TipoArticulo.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABM_TipoArticulo.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
 
 end.

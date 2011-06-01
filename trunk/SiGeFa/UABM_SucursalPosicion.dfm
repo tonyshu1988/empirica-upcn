@@ -1,8 +1,8 @@
 object FABM_SucursalPosicion: TFABM_SucursalPosicion
-  Left = 285
-  Top = 185
-  Width = 1024
-  Height = 646
+  Left = 265
+  Top = 150
+  Width = 981
+  Height = 549
   Caption = 'ABM Sucursal Posicion'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,16 +22,16 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 1008
-    Height = 537
+    Width = 965
+    Height = 440
     Align = alClient
     BorderWidth = 5
     TabOrder = 0
     object DBGridPosicionSucursal: TDBGrid
       Left = 6
       Top = 6
-      Width = 996
-      Height = 419
+      Width = 953
+      Height = 322
       Align = alClient
       Color = 14606012
       DataSource = DS_PosicionSucursal
@@ -85,8 +85,8 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     end
     object PanelEdicion: TPanel
       Left = 6
-      Top = 425
-      Width = 996
+      Top = 328
+      Width = 953
       Height = 106
       Align = alBottom
       BevelOuter = bvNone
@@ -257,7 +257,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 1008
+    Width = 965
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -278,7 +278,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 898
+      Left = 855
       Top = 1
       Width = 109
       Height = 17
@@ -745,9 +745,9 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
@@ -763,7 +763,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+      Caption = 'F2 - Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
@@ -772,7 +772,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+      Caption = 'F3 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
@@ -781,7 +781,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'Baja'
+      Caption = 'F5 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
@@ -790,7 +790,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+      Caption = 'F6 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
@@ -799,7 +799,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -809,7 +809,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -1055,5 +1055,49 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     MoverColumna = True
     Left = 256
     Top = 211
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 80
+    Top = 242
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+      OnExecute = ANuevoExecute
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+      OnExecute = ABajaExecute
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+      OnExecute = AReactivarExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
+    end
   end
 end

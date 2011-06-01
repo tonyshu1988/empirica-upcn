@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids,
   EKBusquedaAvanzada, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ZStoredProcedure, ComCtrls, EKDBDateTimePicker,
-  StdCtrls, DBCtrls, Mask, ZSqlUpdate;
+  StdCtrls, DBCtrls, Mask, ZSqlUpdate, ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFABMClientes = class(TForm)
@@ -120,6 +120,15 @@ type
     ZQ_SucursalAUD_UDUARIO: TStringField;
     ZQ_SucursalAUD_FECHA: TDateTimeField;
     StaticTxtBaja: TStaticText;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -133,10 +142,16 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     function  validarcampos():boolean;
-    procedure DBGridClientesDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridClientesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnVerDetalleClick(Sender: TObject);
+    //------TECLAS RAPIDAS
+    procedure ABuscarExecute(Sender: TObject);
+    procedure ANuevoExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure ABajaExecute(Sender: TObject);
+    procedure AReactivarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
   private
     id_cliente: integer;
   public
@@ -419,6 +434,52 @@ begin
   FPrincipal.PintarFilasGrillasConBajas(DBGridClientes, ZQ_ClientesBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABMClientes.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
 
+procedure TFABMClientes.ANuevoExecute(Sender: TObject);
+begin
+  if btnNuevo.Enabled then
+    btnNuevo.Click;
+end;
+
+procedure TFABMClientes.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABMClientes.ABajaExecute(Sender: TObject);
+begin
+  if btnBaja.Enabled then
+    btnBaja.Click;
+end;
+
+procedure TFABMClientes.AReactivarExecute(Sender: TObject);
+begin
+  if btnReactivar.Enabled then
+    btnReactivar.Click;
+end;
+
+procedure TFABMClientes.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABMClientes.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
 
 end.

@@ -1012,9 +1012,9 @@ object FABMClientes: TFABMClientes
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
@@ -1031,7 +1031,7 @@ object FABMClientes: TFABMClientes
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+      Caption = 'F2 - Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
@@ -1040,7 +1040,7 @@ object FABMClientes: TFABMClientes
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+      Caption = 'F3 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
@@ -1049,7 +1049,7 @@ object FABMClientes: TFABMClientes
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'Baja'
+      Caption = 'F4 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
@@ -1058,7 +1058,7 @@ object FABMClientes: TFABMClientes
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+      Caption = 'F5 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
@@ -1067,7 +1067,7 @@ object FABMClientes: TFABMClientes
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -1077,7 +1077,7 @@ object FABMClientes: TFABMClientes
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -1713,6 +1713,50 @@ object FABMClientes: TFABMClientes
     end
     object ZQ_SucursalAUD_FECHA: TDateTimeField
       FieldName = 'AUD_FECHA'
+    end
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 64
+    Top = 226
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+      OnExecute = ANuevoExecute
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+      OnExecute = ABajaExecute
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+      OnExecute = AReactivarExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
     end
   end
 end

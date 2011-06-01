@@ -159,15 +159,30 @@ type
     Label6: TLabel;
     cmbColor: TDBLookupComboBox;
     ZQ_Color: TZQuery;
+    ZQ_ProductoCabeceraCOLOR: TIntegerField;
+    DS_Color: TDataSource;
+    Shape1: TShape;
+    EKListadoColor: TEKListadoSQL;
+    ZQ_MarcaCODIGO_MARCA: TIntegerField;
+    ZQ_MarcaBUSQUEDA: TStringField;
+    ZQ_ExisteCodigo: TZQuery;
+    ZQ_ExisteCodigoID_PROD_CABECERA: TIntegerField;
+    ZQ_ExisteCodigoID_MARCA: TIntegerField;
+    ZQ_ExisteCodigoNOMBRE: TStringField;
+    ZQ_ExisteCodigoDESCRIPCION: TStringField;
+    ZQ_ExisteCodigoIMAGEN: TBlobField;
+    ZQ_ExisteCodigoBAJA: TStringField;
+    ZQ_ExisteCodigoAUD_USUARIO: TStringField;
+    ZQ_ExisteCodigoAUD_FECHA: TDateTimeField;
+    ZQ_ExisteCodigoID_ARTICULO: TIntegerField;
+    ZQ_ExisteCodigoCOD_CORTO: TStringField;
+    ZQ_ExisteCodigoCOLOR: TIntegerField;
     ZQ_ColorID_COLOR: TIntegerField;
-    ZQ_ColorCODIGO: TStringField;
+    ZQ_ColorCODIGO_COLOR: TIntegerField;
     ZQ_ColorNOMBRE: TStringField;
     ZQ_ColorREFERENCIA: TStringField;
     ZQ_ColorBAJA: TStringField;
-    ZQ_ProductoCabeceraCOLOR: TIntegerField;
-    DS_Color: TDataSource;
     ZQ_ColorRESUMEN: TStringField;
-    Shape1: TShape;
     procedure btBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -206,6 +221,8 @@ type
     procedure ZQ_ColorAfterScroll(DataSet: TDataSet);
     function armarCodBarras(cod1,cod2,cod3:String):String ;
     procedure edCodCortoExit(Sender: TObject);
+    procedure cmbColorKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -329,7 +346,7 @@ begin
     exit;
   end;
 
-   if (ZQ_ProductoCabeceraCOLOR.IsNull) then
+  if (ZQ_ProductoCabeceraCOLOR.IsNull) then
   begin
     Application.MessageBox('El campo Color se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
     tabs.ActivePageIndex:= 0;
@@ -337,7 +354,24 @@ begin
     result := false;
     exit;
   end;
-end;
+
+  ZQ_ExisteCodigo.Close;
+  ZQ_ExisteCodigo.ParamByName('codigo').AsString:= edCodCorto.Text;
+  ZQ_ExisteCodigo.ParamByName('idMarca').AsInteger:= ZQ_ProductoCabeceraID_MARCA.AsInteger;
+  ZQ_ExisteCodigo.Open;
+
+  if not ZQ_ExisteCodigo.IsEmpty then
+    if (application.MessageBox(pchar('El Codigo Corto '+ZQ_ProductoCabeceraCOD_CORTO.AsString+ ' ya existe para la marca '+ZQ_ProductoCabecera_marca.AsString+#13+'¿Desea cargarlo igualmente?'), 'Código Corto Repetido', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+      exit
+    else
+    begin
+      tabs.ActivePageIndex:= 0;
+      edCodCorto.SetFocus;
+      result := false;
+      exit;
+    end;
+
+    end;
 
 
 function TFABMProductos.validarcamposDetalle():Boolean;
@@ -611,7 +645,7 @@ begin
     if ZQ_DetalleProductoCOD_CORTO.AsString='' then
        ZQ_DetalleProductoCOD_CORTO.AsString:=rellenar(CDMedidasmedida.AsString,'0',5);
 
-    ZQ_DetalleProductoCODIGO_BARRA.AsString:=armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
+    //ZQ_DetalleProductoCODIGO_BARRA.AsString:=armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
 
     ZQ_DetalleProducto.Filtered := false;
     ZQ_DetalleProducto.Filter:= Format('id_medida = %d',[CDMedidasid_medida.AsInteger]);
@@ -658,7 +692,7 @@ begin
         if ZQ_DetalleProductoCOD_CORTO.AsString='' then
            ZQ_DetalleProductoCOD_CORTO.AsString:=rellenar(CDMedidasmedida.AsString,'0',5);
 
-        ZQ_DetalleProductoCODIGO_BARRA.AsString:=armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
+       //ZQ_DetalleProductoCODIGO_BARRA.AsString:=armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
        //Si inserto uno nuevo genero un id nuevo
        if (ZQ_DetalleProducto.State=dsInsert) then
        begin
@@ -834,23 +868,27 @@ begin
   FPrincipal.PintarFilasGrillasConBajas(Grilla, ZQ_ProductoCabeceraBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
+
 procedure TFABMProductos.tabsChanging(Sender: TObject;
   var AllowChange: Boolean);
 begin
-   if (ZQ_DetalleProducto.state=dsInsert)or(ZQ_DetalleProducto.state=dsEdit) then
-      AllowChange:=False;
+ if (ZQ_DetalleProducto.state=dsInsert)or(ZQ_DetalleProducto.state=dsEdit) then
+    AllowChange:=False;
 end;
+
 
 procedure TFABMProductos.ZQ_DetalleProductoCOEF_GANANCIAChange(Sender: TField);
 begin
-if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull) then
-  ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
+  if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull) then
+    ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
 end;
+
 
 procedure TFABMProductos.ZQ_DetalleProductoPRECIO_VENTAChange(Sender: TField);
 begin
 //  ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
 end;
+
 
 procedure TFABMProductos.cmbMarcaKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
@@ -875,36 +913,39 @@ begin
     end;
 end;
 
+
 procedure TFABMProductos.ZQ_DetalleProductoPRECIO_COSTOChange(
   Sender: TField);
 begin
-if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull) then
-  ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
+  if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull) then
+    ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
 end;
+
 
 procedure TFABMProductos.MenuItem1Click(Sender: TObject);
 begin
-EKListadoMedidas.SQL.Clear;
-EKListadoMedidas.SQL.Add(Format('select m.* from medida_articulo ma '+
-                             'join medida m on (ma.id_medida=m.id_medida)'+
-                             'where (ma.id_articulo=%d)and(ma.baja<>%s)',[ZQ_ArticuloID_ARTICULO.AsInteger,QuotedStr('S')]));
-if EKListadoMedidas.Buscar then
-  begin
-    CDMedidas.Filter:= 'id_medida = '+EKListadoMedidas.Resultado;
-    CDMedidas.Filtered := true;
-    if not CDMedidas.IsEmpty then
-     begin
+  EKListadoMedidas.SQL.Clear;
+  EKListadoMedidas.SQL.Add(Format('select m.* from medida_articulo ma '+
+                               'join medida m on (ma.id_medida=m.id_medida)'+
+                               'where (ma.id_articulo=%d)and(ma.baja<>%s)',[ZQ_ArticuloID_ARTICULO.AsInteger,QuotedStr('S')]));
+  if EKListadoMedidas.Buscar then
+    begin
+      CDMedidas.Filter:= 'id_medida = '+EKListadoMedidas.Resultado;
+      CDMedidas.Filtered := true;
+      if not CDMedidas.IsEmpty then
+       begin
+        CDMedidas.Filtered := false;
+        Application.MessageBox('Esta medida ya fue cargada','Carga medida',MB_OK+MB_ICONINFORMATION);
+        exit;
+       end;
       CDMedidas.Filtered := false;
-      Application.MessageBox('Esta medida ya fue cargada','Carga medida',MB_OK+MB_ICONINFORMATION);
-      exit;
-     end;
-    CDMedidas.Filtered := false;
-    CDMedidas.Append;
-    CDMedidasid_medida.AsString := EKListadoMedidas.Resultado;
-    CDMedidasmedida.AsString := EKListadoMedidas.Seleccion;
-    CDMedidas.Post;
-  end;
+      CDMedidas.Append;
+      CDMedidasid_medida.AsString := EKListadoMedidas.Resultado;
+      CDMedidasmedida.AsString := EKListadoMedidas.Seleccion;
+      CDMedidas.Post;
+    end;
 end;
+
 
 procedure TFABMProductos.MenuItem3Click(Sender: TObject);
 begin
@@ -912,28 +953,47 @@ begin
     CDMedidas.Delete;
 end;
 
+
 procedure TFABMProductos.QuitarDetalleClick(Sender: TObject);
 begin
-ZQ_DetalleProducto.Delete;
+  ZQ_DetalleProducto.Delete;
 end;
+
 
 procedure TFABMProductos.ZQ_ColorAfterScroll(DataSet: TDataSet);
 begin
-if not(ZQ_ColorREFERENCIA.IsNull) then
-  Shape1.Brush.Color:=StringToColor(ZQ_ColorREFERENCIA.AsString);
+  if not(ZQ_ColorREFERENCIA.IsNull) then
+    Shape1.Brush.Color:=StringToColor(ZQ_ColorREFERENCIA.AsString);
 end;
+
 
 function TFABMProductos.armarCodBarras(cod1,cod2,cod3:String):String ;
 begin
-    //asdasd
-    Result:=cod1+cod2+cod3;
+  //asdasd
+  Result:=cod1+cod2+cod3;
 end;
+
 
 procedure TFABMProductos.edCodCortoExit(Sender: TObject);
 begin
-if edCodCorto.Text<>'' then
-   edCodCorto.Text:=rellenar(edCodCorto.Text,'0',5);
+  if edCodCorto.Text <> '' then
+    edCodCorto.Text:= rellenar(edCodCorto.Text,'0',5);
 
+  if ZQ_ProductoCabeceraNOMBRE.IsNull then
+    ZQ_ProductoCabeceraNOMBRE.AsString:= edCodCorto.Text;
+end;
+
+
+procedure TFABMProductos.cmbColorKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key = 112 then
+    if EKListadoColor.Buscar then
+    begin
+      ZQ_ProductoCabecera.Edit;
+      ZQ_ProductoCabeceraCOLOR.AsInteger := StrToInt(EKListadoColor.Resultado);
+      cmbColor.setfocus;
+    end;
 end;
 
 end.
