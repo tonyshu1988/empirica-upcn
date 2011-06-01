@@ -7,7 +7,8 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKBusquedaAvanzada, EKOrdenarGrilla, EKListadoSQL, ActnList,
-  XPStyleActnCtrls, ActnMan, QRCtrls, QuickRpt, EKVistaPreviaQR;
+  XPStyleActnCtrls, ActnMan, QRCtrls, QuickRpt, EKVistaPreviaQR, Menus,
+  ZSqlUpdate;
 
 type
   TFABM_Articulo = class(TForm)
@@ -83,6 +84,14 @@ type
     QRLabel29: TQRLabel;
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
+    DBGridMedidas: TDBGrid;
+    ZQ_Medidas: TZQuery;
+    DS_Medidas: TDataSource;
+    ZQ_MedidasMEDIDA: TStringField;
+    ZQ_MedidasBAJA: TStringField;
+    PopupMenuMedida: TPopupMenu;
+    QuitarMedida1: TMenuItem;
+    ZU_Medidas: TZUpdateSQL;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -104,6 +113,8 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure ZQ_ArticuloAfterScroll(DataSet: TDataSet);
+    procedure QuitarMedida1Click(Sender: TObject);
   private
   public
   end;
@@ -135,8 +146,9 @@ end;
 
 procedure TFABM_Articulo.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Articulo]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Articulo, ZQ_Medidas]) then
   begin
+    DBGridMedidas.PopupMenu:= PopupMenuMedida;
     DBGridArticulo.Enabled := false;
     PanelEdicion.Visible:= true;
 
@@ -155,8 +167,9 @@ begin
   if ZQ_Articulo.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Articulo]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Articulo, ZQ_Medidas]) then
   begin
+    DBGridMedidas.PopupMenu:= PopupMenuMedida;
     DBGridArticulo.Enabled := false;
     PanelEdicion.Visible:= true;
 
@@ -246,6 +259,7 @@ begin
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
+      DBGridMedidas.PopupMenu:= nil;
       DBGridArticulo.Enabled := true;
       DBGridArticulo.SetFocus;
       GrupoEditando.Enabled := true;
@@ -270,6 +284,7 @@ procedure TFABM_Articulo.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
+    DBGridMedidas.PopupMenu:= nil;  
     DBGridArticulo.Enabled := true;
     DBGridArticulo.SetFocus;
     GrupoEditando.Enabled := true;
@@ -376,6 +391,23 @@ begin
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBusquedaAvanzada1.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
+end;
+
+
+procedure TFABM_Articulo.ZQ_ArticuloAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_Medidas.Close;
+  ZQ_Medidas.ParamByName('idArticulo').AsInteger:= ZQ_ArticuloID_ARTICULO.AsInteger;
+  ZQ_Medidas.Open;
+end;
+
+
+procedure TFABM_Articulo.QuitarMedida1Click(Sender: TObject);
+begin
+  if ZQ_Medidas.IsEmpty then
+    exit;
+
+  ZQ_Medidas.Delete;
 end;
 
 end.

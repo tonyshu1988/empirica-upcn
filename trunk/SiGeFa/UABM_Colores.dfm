@@ -1,6 +1,6 @@
 object FABM_Colores: TFABM_Colores
-  Left = 297
-  Top = 208
+  Left = 397
+  Top = 317
   Width = 870
   Height = 500
   Caption = 'FABM_Colores'

@@ -807,7 +807,7 @@ object FABM_Articulo: TFABM_Articulo
       object DBGridArticulo: TDBGrid
         Left = 5
         Top = 5
-        Width = 844
+        Width = 595
         Height = 324
         Align = alClient
         Color = 14606012
@@ -826,7 +826,7 @@ object FABM_Articulo: TFABM_Articulo
             FieldName = 'TipoArticulo'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Art'#237'culo'
-            Width = 422
+            Width = 264
             Visible = True
           end
           item
@@ -835,6 +835,31 @@ object FABM_Articulo: TFABM_Articulo
             Title.Alignment = taCenter
             Title.Caption = 'Descripci'#243'n'
             Width = 400
+            Visible = True
+          end>
+      end
+      object DBGridMedidas: TDBGrid
+        Left = 600
+        Top = 5
+        Width = 249
+        Height = 324
+        Align = alRight
+        Color = 14606012
+        DataSource = DS_Medidas
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'MEDIDA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Medidas Asociadas'
+            Width = 242
             Visible = True
           end>
       end
@@ -1453,6 +1478,7 @@ object FABM_Articulo: TFABM_Articulo
   end
   object ZQ_Articulo: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_ArticuloAfterScroll
     SQL.Strings = (
       'select *'
       'from articulo'
@@ -1640,5 +1666,102 @@ object FABM_Articulo: TFABM_Articulo
     ShowModal = False
     Left = 296
     Top = 178
+  end
+  object ZQ_Medidas: TZQuery
+    Connection = DM.Conexion
+    UpdateObject = ZU_Medidas
+    SQL.Strings = (
+      'select m.medida, m.baja'
+      'from medida m'
+      'left join medida_articulo ma on (m.id_medida = ma.id_medida)'
+      'where ma.id_articulo = :idArticulo'
+      'order by m.medida')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idArticulo'
+        ParamType = ptUnknown
+      end>
+    Left = 136
+    Top = 186
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idArticulo'
+        ParamType = ptUnknown
+      end>
+    object ZQ_MedidasMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_MedidasBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+  end
+  object DS_Medidas: TDataSource
+    DataSet = ZQ_Medidas
+    Left = 136
+    Top = 242
+  end
+  object PopupMenuMedida: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 716
+    Top = 80
+    object QuitarMedida1: TMenuItem
+      Caption = 'Quitar Medida'
+      ImageIndex = 15
+      OnClick = QuitarMedida1Click
+    end
+  end
+  object ZU_Medidas: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM MEDIDA_ARTICULO'
+      'WHERE'
+      '  MEDIDA_ARTICULO.ID_ARTICULO = :OLD_ID_ARTICULO AND'
+      '  MEDIDA_ARTICULO.ID_MEDIDA = :OLD_ID_MEDIDA')
+    InsertSQL.Strings = (
+      'INSERT INTO MEDIDA_ARTICULO'
+      
+        '  (MEDIDA_ARTICULO.ID_ARTICULO, MEDIDA_ARTICULO.ID_MEDIDA, MEDID' +
+        'A_ARTICULO.BAJA)'
+      'VALUES'
+      '  (:ID_ARTICULO, :ID_MEDIDA, :BAJA)')
+    ModifySQL.Strings = (
+      'UPDATE MEDIDA_ARTICULO SET'
+      '  MEDIDA_ARTICULO.ID_ARTICULO = :ID_ARTICULO,'
+      '  MEDIDA_ARTICULO.ID_MEDIDA = :ID_MEDIDA,'
+      '  MEDIDA_ARTICULO.BAJA = :BAJA'
+      'WHERE'
+      '  MEDIDA_ARTICULO.ID_ARTICULO = :OLD_ID_ARTICULO AND'
+      '  MEDIDA_ARTICULO.ID_MEDIDA = :OLD_ID_MEDIDA')
+    Left = 136
+    Top = 290
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ARTICULO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_MEDIDA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BAJA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_ID_ARTICULO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_ID_MEDIDA'
+        ParamType = ptUnknown
+      end>
   end
 end

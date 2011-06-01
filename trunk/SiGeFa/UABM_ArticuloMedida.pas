@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   DBClient, Menus, EKListadoSQL, EKLlenarCombo, ActnList, XPStyleActnCtrls,
-  ActnMan, EKBusquedaAvanzada;
+  ActnMan, EKBusquedaAvanzada, EKVistaPreviaQR, QRCtrls, QuickRpt;
 
 type
   TFABM_ArticuloMedida = class(TForm) 
@@ -103,6 +103,28 @@ type
     AProcesar: TAction;
     AGuardarAsociar: TAction;
     ACancelarAsociar: TAction;
+    RepMedida: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepMedida_Subtitulo: TQRLabel;
+    RepMedida_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblPieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel1: TQRLabel;
+    EKVistaPrevia: TEKVistaPreviaQR;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -140,6 +162,7 @@ type
     procedure AProcesarExecute(Sender: TObject);
     procedure AGuardarAsociarExecute(Sender: TObject);
     procedure ACancelarAsociarExecute(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -708,5 +731,16 @@ end;
 //----------------------------------
 //  FIN TECLAS RAPIDAS
 //----------------------------------
+
+procedure TFABM_ArticuloMedida.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_Medida.IsEmpty then
+    exit;
+
+  DM.VariablesReportes(RepMedida);
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  EKVistaPrevia.VistaPrevia;
+end;
 
 end.
