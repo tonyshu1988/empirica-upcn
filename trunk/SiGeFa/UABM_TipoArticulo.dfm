@@ -1,6 +1,6 @@
 object FABM_TipoArticulo: TFABM_TipoArticulo
-  Left = 315
-  Top = 224
+  Left = 374
+  Top = 243
   Width = 870
   Height = 500
   Caption = 'ABM Tipo Articulo'
@@ -252,6 +252,11 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnNuevo
             Visible = True
           end
@@ -600,11 +605,12 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnVerDetalle: TdxBarLargeButton
@@ -748,6 +754,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
     object ABuscar: TAction
       Caption = 'ABuscar'
       ShortCut = 112
+      OnExecute = ABuscarExecute
     end
     object ANuevo: TAction
       Caption = 'ANuevo'
@@ -783,5 +790,33 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
+  end
+  object EKBuscar: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Tipo Art'#237'culo'
+        Campo = 'DESCRIPCION'
+        Tabla = 'tipo_articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_TipoArt
+    SQL.Strings = (
+      'select *'
+      'from tipo_articulo'
+      'order by DESCRIPCION')
+    SQL_Select.Strings = (
+      'select *')
+    SQL_From.Strings = (
+      'from tipo_articulo')
+    SQL_Orden.Strings = (
+      'order by DESCRIPCION')
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 136
+    Top = 75
   end
 end

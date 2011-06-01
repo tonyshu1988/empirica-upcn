@@ -1,6 +1,6 @@
 object FABM_ArticuloMedida: TFABM_ArticuloMedida
-  Left = 307
-  Top = 180
+  Left = 349
+  Top = 265
   Width = 870
   Height = 500
   Caption = 'ABM Articulo Medida'
@@ -385,6 +385,11 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnNuevo
             Visible = True
           end
@@ -412,21 +417,21 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           end
           item
             BeginGroup = True
+            Item = btnProcesar
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnGuardarCarga
+            Visible = True
+          end
+          item
+            Item = btnCancelarCarga
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnImprimir
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btProcesar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btGuardarCarga
-            Visible = True
-          end
-          item
-            Item = btCancelarCarga
             Visible = True
           end
           item
@@ -739,19 +744,20 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 552
-    Top = 136
+    Left = 48
+    Top = 344
     DockControlHeights = (
       0
       0
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnVerDetalle: TdxBarLargeButton
@@ -836,13 +842,13 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
-    object btProcesar: TdxBarLargeButton
-      Caption = 'Procesar'
+    object btnProcesar: TdxBarLargeButton
+      Caption = 'F8 - Procesar'
       Category = 0
-      Hint = 'Procesar'
+      Hint = 'F8 - Procesar'
       Visible = ivNever
       ImageIndex = 35
-      OnClick = btProcesarClick
+      OnClick = btnProcesarClick
       AutoGrayScale = False
     end
     object btCargarDatos: TdxBarLargeButton
@@ -854,24 +860,24 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       OnClick = btCargarDatosClick
       AutoGrayScale = False
     end
-    object btGuardarCarga: TdxBarLargeButton
-      Caption = 'Guardar Carga'
+    object btnGuardarCarga: TdxBarLargeButton
+      Caption = 'F9 - Guardar'
       Category = 0
       Enabled = False
-      Hint = 'Guardar Carga'
+      Hint = 'F9 - Guardar'
       Visible = ivNever
       ImageIndex = 5
-      OnClick = btGuardarCargaClick
+      OnClick = btnGuardarCargaClick
       AutoGrayScale = False
     end
-    object btCancelarCarga: TdxBarLargeButton
-      Caption = 'Cancelar Carga'
+    object btnCancelarCarga: TdxBarLargeButton
+      Caption = 'F10 - Cancelar'
       Category = 0
       Enabled = False
-      Hint = 'Cancelar Carga'
+      Hint = 'F10 - Cancelar'
       Visible = ivNever
       ImageIndex = 9
-      OnClick = btCancelarCargaClick
+      OnClick = btnCancelarCargaClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -900,7 +906,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       'order by medida')
     Params = <>
     Left = 48
-    Top = 72
+    Top = 112
     object ZQ_MedidaID_MEDIDA: TIntegerField
       FieldName = 'ID_MEDIDA'
     end
@@ -916,13 +922,13 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object DS_Medida: TDataSource
     DataSet = ZQ_Medida
     Left = 48
-    Top = 128
+    Top = 160
   end
   object CDSArticulo: TClientDataSet
     Aggregates = <>
     Params = <>
     Left = 180
-    Top = 88
+    Top = 104
     object CDSArticulonombre_producto: TStringField
       FieldName = 'nombre_articulo'
       Size = 200
@@ -934,8 +940,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object CDSMedidas: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 644
-    Top = 72
+    Left = 276
+    Top = 104
     object CDSMedidasid_medida: TIntegerField
       FieldName = 'id_medida'
     end
@@ -947,40 +953,40 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object DSArticulo: TDataSource
     DataSet = CDSArticulo
     Left = 180
-    Top = 152
+    Top = 160
   end
   object DSMedidas: TDataSource
     DataSet = CDSMedidas
-    Left = 652
-    Top = 128
+    Left = 276
+    Top = 160
   end
   object PopupMenuArticulo: TPopupMenu
-    Images = FPrincipal.EKImageMenu24
-    Left = 276
-    Top = 96
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 180
+    Top = 56
     object AgregarArticulo1: TMenuItem
       Caption = 'Agregar Articulo'
-      ImageIndex = 22
+      ImageIndex = 14
       OnClick = AgregarArticulo1Click
     end
     object QuitarArticulo1: TMenuItem
       Caption = 'Quitar Articulo'
-      ImageIndex = 23
+      ImageIndex = 15
       OnClick = QuitarArticulo1Click
     end
   end
   object PopupMenuMedida: TPopupMenu
-    Images = FPrincipal.EKImageMenu24
-    Left = 756
-    Top = 72
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 276
+    Top = 56
     object AgregarMedida1: TMenuItem
       Caption = 'Agregar Medida'
-      ImageIndex = 22
+      ImageIndex = 14
       OnClick = AgregarMedida1Click
     end
     object QuitarMedida1: TMenuItem
       Caption = 'Quitar Medida'
-      ImageIndex = 23
+      ImageIndex = 15
       OnClick = QuitarMedida1Click
     end
   end
@@ -992,8 +998,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       'where m.baja <> '#39'S'#39)
     CampoBuscar = 'medida'
     CampoClave = 'id_medida'
-    Left = 764
-    Top = 136
+    Left = 276
+    Top = 216
   end
   object ZQ_MedidaArticulo: TZQuery
     Connection = DM.Conexion
@@ -1007,8 +1013,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         Name = 'ID_ARTICULO'
         ParamType = ptUnknown
       end>
-    Left = 316
-    Top = 264
+    Left = 396
+    Top = 104
     ParamData = <
       item
         DataType = ftUnknown
@@ -1038,8 +1044,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   end
   object DS_MedidaArticulo: TDataSource
     DataSet = ZQ_MedidaArticulo
-    Left = 416
-    Top = 264
+    Left = 392
+    Top = 160
   end
   object EKLlenarComboArticulo: TEKLlenarCombo
     dataset = ZQ_Articulo
@@ -1047,8 +1053,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     OnCambio = EKLlenarComboArticuloCambio
     CampoClave = 'id_articulo'
     CampoVer = 'busqueda'
-    Left = 436
-    Top = 88
+    Left = 396
+    Top = 216
   end
   object ZQ_Articulo: TZQuery
     Connection = DM.Conexion
@@ -1062,8 +1068,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         'iculo)'
       'where a.baja = '#39'N'#39)
     Params = <>
-    Left = 52
-    Top = 256
+    Left = 396
+    Top = 272
     object ZQ_ArticuloID_ARTICULO: TIntegerField
       FieldName = 'ID_ARTICULO'
       Required = True
@@ -1091,17 +1097,17 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     end
   end
   object PopupMenuArticuloMedida: TPopupMenu
-    Images = FPrincipal.EKImageMenu24
-    Left = 604
-    Top = 264
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 396
+    Top = 56
     object AgregarMedida2: TMenuItem
       Caption = 'Agregar Medida'
-      ImageIndex = 22
+      ImageIndex = 14
       OnClick = AgregarMedida2Click
     end
     object QuitarMedida2: TMenuItem
       Caption = 'Quitar Medida'
-      ImageIndex = 23
+      ImageIndex = 15
       OnClick = QuitarMedida2Click
     end
   end
@@ -1117,8 +1123,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         Name = 'ID_MEDIDA'
         ParamType = ptUnknown
       end>
-    Left = 52
-    Top = 320
+    Left = 276
+    Top = 328
     ParamData = <
       item
         DataType = ftUnknown
@@ -1150,16 +1156,17 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     CampoBuscar = 'BUSQUEDA'
     CampoClave = 'ID_ARTICULO'
     TituloVentana = 'Buscar Art'#237'culo'
-    Left = 432
-    Top = 144
+    Left = 184
+    Top = 216
   end
   object ATeclasRapidas: TActionManager
     Left = 48
-    Top = 194
+    Top = 218
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
       ShortCut = 112
+      OnExecute = ABuscarExecute
     end
     object ANuevo: TAction
       Caption = 'ANuevo'
@@ -1195,5 +1202,48 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
+    object AProcesar: TAction
+      Caption = 'AProcesar'
+      ShortCut = 119
+      OnExecute = AProcesarExecute
+    end
+    object AGuardarAsociar: TAction
+      Caption = 'AGuardarAsociar'
+      ShortCut = 120
+      OnExecute = AGuardarAsociarExecute
+    end
+    object ACancelarAsociar: TAction
+      Caption = 'ACancelarAsociar'
+      ShortCut = 121
+      OnExecute = ACancelarAsociarExecute
+    end
+  end
+  object EKBuscar: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Medida'
+        Campo = 'Medida'
+        Tabla = 'Medida'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_Medida
+    SQL.Strings = (
+      'select *'
+      'from medida'
+      'order by medida')
+    SQL_Select.Strings = (
+      'select *')
+    SQL_From.Strings = (
+      'from medida')
+    SQL_Orden.Strings = (
+      'order by medida')
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 48
+    Top = 59
   end
 end

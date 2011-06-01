@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan;
+  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada;
 
 type
   TFABM_TipoArticulo = class(TForm)
@@ -47,6 +47,7 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
+    EKBuscar: TEKBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -56,6 +57,7 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
     procedure DBGridTipoArticuloDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     //------TECLAS RAPIDAS
     procedure ANuevoExecute(Sender: TObject);
@@ -63,7 +65,8 @@ type
     procedure ABajaExecute(Sender: TObject);
     procedure AReactivarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
-    procedure ACancelarExecute(Sender: TObject);    
+    procedure ACancelarExecute(Sender: TObject);
+    procedure ABuscarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -92,6 +95,12 @@ end;
 procedure TFABM_TipoArticulo.btnSalirClick(Sender: TObject);
 begin
   Close;
+end;
+
+
+procedure TFABM_TipoArticulo.btnBuscarClick(Sender: TObject);
+begin
+  EKbuscar.buscar;
 end;
 
 
@@ -257,6 +266,12 @@ end;
 //----------------------------------
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
+procedure TFABM_TipoArticulo.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
 procedure TFABM_TipoArticulo.ANuevoExecute(Sender: TObject);
 begin
   if btnNuevo.Enabled then
@@ -295,5 +310,6 @@ end;
 //----------------------------------
 //  FIN TECLAS RAPIDAS
 //----------------------------------
+
 
 end.

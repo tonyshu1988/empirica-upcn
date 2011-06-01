@@ -450,6 +450,11 @@ object FABM_Sucursal: TFABM_Sucursal
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnNuevo
             Visible = True
           end
@@ -793,11 +798,12 @@ object FABM_Sucursal: TFABM_Sucursal
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnVerDetalle: TdxBarLargeButton
@@ -971,6 +977,7 @@ object FABM_Sucursal: TFABM_Sucursal
     object ABuscar: TAction
       Caption = 'ABuscar'
       ShortCut = 112
+      OnExecute = ABuscarExecute
     end
     object ANuevo: TAction
       Caption = 'ANuevo'
@@ -1011,5 +1018,76 @@ object FABM_Sucursal: TFABM_Sucursal
     Filter = 'Bitmaps (*.bmp)|*.bmp'
     Left = 704
     Top = 272
+  end
+  object EKBuscar: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Nombre'
+        Campo = 'NOMBRE'
+        Tabla = 'SUCURSAL'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Direcci'#243'n'
+        Campo = 'DIRECCION'
+        Tabla = 'SUCURSAL'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Localidad'
+        Campo = 'LOCALIDAD'
+        Tabla = 'SUCURSAL'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo Postal'
+        Campo = 'CODIGO_POSTAL'
+        Tabla = 'SUCURSAL'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tel'#233'fono'
+        Campo = 'TELEFONO'
+        Tabla = 'SUCURSAL'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'eMail'
+        Campo = 'EMAIL'
+        Tabla = 'SUCURSAL'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_Sucursal
+    SQL.Strings = (
+      'select *'
+      'from Sucursal s'
+      'where s.id_sucursal <> 0'
+      'order by s.nombre')
+    SQL_Select.Strings = (
+      'select *')
+    SQL_From.Strings = (
+      'from Sucursal s')
+    SQL_Where.Strings = (
+      'where s.id_sucursal <> 0')
+    SQL_Orden.Strings = (
+      'order by s.nombre')
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 288
+    Top = 67
   end
 end

@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, DBCtrls, ComCtrls, EKDBDateTimePicker, Mask, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKOrdenarGrilla, ActnList, XPStyleActnCtrls,
-  ActnMan;
+  ActnMan, EKBusquedaAvanzada;
 
 type
   TFABM_TipoEmpresa = class(TForm)
@@ -47,6 +47,8 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
+    EKBuscar: TEKBusquedaAvanzada;
+    procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -64,6 +66,7 @@ type
     procedure AReactivarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
+    procedure ABuscarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -81,6 +84,12 @@ implementation
 uses UDM, UPrincipal;
 
 {$R *.dfm}
+
+procedure TFABM_TipoEmpresa.btnBuscarClick(Sender: TObject);
+begin
+  EKBuscar.Buscar;
+end;
+
 
 procedure TFABM_TipoEmpresa.btnNuevoClick(Sender: TObject);
 begin
@@ -255,6 +264,12 @@ end;
 //----------------------------------
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
+procedure TFABM_TipoEmpresa.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
 procedure TFABM_TipoEmpresa.ANuevoExecute(Sender: TObject);
 begin
   if btnNuevo.Enabled then
@@ -293,5 +308,6 @@ end;
 //----------------------------------
 //  FIN TECLAS RAPIDAS
 //----------------------------------
+
 
 end.

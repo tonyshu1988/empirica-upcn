@@ -7,7 +7,8 @@ uses
   Dialogs, Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, DB,
   ZAbstractRODataset, ZAbstractDataset, ZStoredProcedure, ZSqlUpdate,
   ZDataset, EKDBGrid, EKOrdenarGrilla, EKBusquedaAvanzada, Menus,
-  EKListadoSQL, DBClient, UBuscarProducto, ZSqlProcessor;
+  EKListadoSQL, DBClient, UBuscarProducto, ZSqlProcessor, ActnList,
+  XPStyleActnCtrls, ActnMan;
 
 type
   TFABM_ProductoStock = class(TForm)
@@ -84,6 +85,17 @@ type
     ZQ_StockNOMBRE_ARTICULO: TStringField;
     ZQ_StockTIPO_ARTICULO: TStringField;
     ZQ_StockSUCURSAL: TStringField;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
+    AAsociar: TAction;
+    AProcesar: TAction;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -99,6 +111,13 @@ type
     procedure btnProcesarClick(Sender: TObject);
     procedure btnAsociarClick(Sender: TObject);
     procedure ZQ_StockAfterInsert(DataSet: TDataSet);
+    //------TECLAS RAPIDAS
+    procedure ABuscarExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
+    procedure AAsociarExecute(Sender: TObject);
+    procedure AProcesarExecute(Sender: TObject);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -351,5 +370,49 @@ procedure TFABM_ProductoStock.ZQ_StockAfterInsert(DataSet: TDataSet);
 begin
   ZQ_Stock.Delete;
 end;
+
+
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABM_ProductoStock.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
+procedure TFABM_ProductoStock.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABM_ProductoStock.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABM_ProductoStock.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+
+procedure TFABM_ProductoStock.AAsociarExecute(Sender: TObject);
+begin
+  if btnAsociar.Enabled then
+    btnAsociar.Click;
+end;
+
+procedure TFABM_ProductoStock.AProcesarExecute(Sender: TObject);
+begin
+  if btnProcesar.Enabled then
+    btnProcesar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
+
 
 end.

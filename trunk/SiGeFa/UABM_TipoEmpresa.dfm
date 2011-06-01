@@ -1,6 +1,6 @@
 object FABM_TipoEmpresa: TFABM_TipoEmpresa
-  Left = 360
-  Top = 193
+  Left = 348
+  Top = 283
   Width = 801
   Height = 498
   Caption = 'ABM Tipo Empresa'
@@ -236,6 +236,11 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnNuevo
             Visible = True
           end
@@ -571,19 +576,20 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 696
-    Top = 120
+    Left = 136
+    Top = 168
     DockControlHeights = (
       0
       0
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnVerDetalle: TdxBarLargeButton
@@ -721,12 +727,13 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     Top = 83
   end
   object ATeclasRapidas: TActionManager
-    Left = 72
-    Top = 290
+    Left = 136
+    Top = 218
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
       ShortCut = 112
+      OnExecute = ABuscarExecute
     end
     object ANuevo: TAction
       Caption = 'ANuevo'
@@ -762,5 +769,33 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
+  end
+  object EKBuscar: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Tipo Empresa'
+        Campo = 'DESCRIPCION'
+        Tabla = 'TIPO_EMPRESA'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_TipoEmpresa
+    SQL.Strings = (
+      'select *'
+      'from tipo_empresa te'
+      'order by te.descripcion')
+    SQL_Select.Strings = (
+      'select *')
+    SQL_From.Strings = (
+      'from tipo_empresa te')
+    SQL_Orden.Strings = (
+      'order by te.descripcion')
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 432
+    Top = 139
   end
 end
