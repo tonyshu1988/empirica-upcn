@@ -7,7 +7,9 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   ExtCtrls, Grids, DBGrids, EKDBGrid, dxBar, dxBarExtItems, StdCtrls,
   DBCtrls, Mask, EKBusquedaAvanzada, EKOrdenarGrilla, EKLlenarCombo, Menus,
-  Buttons, ZStoredProcedure, jpeg, ExtDlgs, EKListadoSQL, DBClient;
+  Buttons, ZStoredProcedure, jpeg, ExtDlgs, EKListadoSQL, DBClient,
+  EKVistaPreviaQR, ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls,
+  qrFramelines;
 
 type
   TFABMProductos = class(TForm)
@@ -29,15 +31,15 @@ type
     DS_ProductoCabecera: TDataSource;
     Grilla: TEKDBGrid;
     dxBarABM: TdxBarManager;
-    BtNuevo: TdxBarLargeButton;
-    BtModificar: TdxBarLargeButton;
-    btBaja: TdxBarLargeButton;
-    btBuscar: TdxBarLargeButton;
-    BtGuardar: TdxBarLargeButton;
-    BtCancelar: TdxBarLargeButton;
-    BtImprimir: TdxBarLargeButton;
-    btReactivar: TdxBarLargeButton;
-    btsalir: TdxBarLargeButton;
+    btnNuevo: TdxBarLargeButton;
+    btnModificar: TdxBarLargeButton;
+    btnBaja: TdxBarLargeButton;
+    btnBuscar: TdxBarLargeButton;
+    btnGuardar: TdxBarLargeButton;
+    btnCancelar: TdxBarLargeButton;
+    btnImprimirListado: TdxBarLargeButton;
+    btnReactivar: TdxBarLargeButton;
+    btnSalir: TdxBarLargeButton;
     btverbajados: TdxBarLargeButton;
     BtBusquedaNueva: TdxBarLargeButton;
     btnSiguiente: TdxBarLargeButton;
@@ -183,17 +185,83 @@ type
     ZQ_ColorREFERENCIA: TStringField;
     ZQ_ColorBAJA: TStringField;
     ZQ_ColorRESUMEN: TStringField;
-    procedure btBuscarClick(Sender: TObject);
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    AModificar: TAction;
+    AEliminar: TAction;
+    ABaja: TAction;
+    AReactivar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
+    EKVistaPreviaListado: TEKVistaPreviaQR;
+    EKVistaPreviaQR2: TEKVistaPreviaQR;
+    EKVistaPreviaQR3: TEKVistaPreviaQR;
+    RepProductoListado: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLblTituloListado: TQRLabel;
+    RepProductoListado_Subtitulo: TQRLabel;
+    RepProductoListado_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblPieDePaginaListado: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    BandaMedidasDatos: TQRSubDetail;
+    QRDBText21: TQRDBText;
+    QRDBText22: TQRDBText;
+    BandaMedidasTitulo: TQRChildBand;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    ZQ_ProductoCabecera_color: TStringField;
+    QRFrameline1: TQRFrameline;
+    QRShape1: TQRShape;
+    QRFrameline2: TQRFrameline;
+    QRFrameline3: TQRFrameline;
+    QRFrameline4: TQRFrameline;
+    EKOrdenarDetalle: TEKOrdenarGrilla;
+    QRLabel10: TQRLabel;
+    panelImprimirListado: TPanel;
+    Panel1: TPanel;
+    RadioGroupImprimirListado: TRadioGroup;
+    btnImprimirListado_Aceptar: TButton;
+    btnImprimirListado_Salir: TButton;
+    procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btsalirClick(Sender: TObject);
+    procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure BtNuevoClick(Sender: TObject);
-    procedure BtGuardarClick(Sender: TObject);
-    procedure BtCancelarClick(Sender: TObject);
-    procedure BtModificarClick(Sender: TObject);
-    procedure btBajaClick(Sender: TObject);
-    procedure btReactivarClick(Sender: TObject);
+    procedure btnNuevoClick(Sender: TObject);
+    procedure btnGuardarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnModificarClick(Sender: TObject);
+    procedure btnBajaClick(Sender: TObject);
+    procedure btnReactivarClick(Sender: TObject);
     procedure AgregaDetalleClick(Sender: TObject);
     procedure EditarDetalleClick(Sender: TObject);
     procedure grupoAceptarClick(Sender: TObject);
@@ -201,18 +269,15 @@ type
     procedure ZQ_ProductoCabeceraAfterScroll(DataSet: TDataSet);
     procedure ZQ_ArticuloAfterScroll(DataSet: TDataSet);
     procedure edImagenDblClick(Sender: TObject);
-    procedure GrillaDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GrillaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     function validarcampos():Boolean;
     function validarcamposDetalle():Boolean;
     procedure CargaImagenProporcionado(Archivo: string);
     procedure tabsChanging(Sender: TObject; var AllowChange: Boolean);
     procedure ZQ_DetalleProductoCOEF_GANANCIAChange(Sender: TField);
     procedure ZQ_DetalleProductoPRECIO_VENTAChange(Sender: TField);
-    procedure cmbMarcaKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure cmbArticuloKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure cmbMarcaKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure cmbArticuloKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure ZQ_DetalleProductoPRECIO_COSTOChange(Sender: TField);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem3Click(Sender: TObject);
@@ -221,8 +286,18 @@ type
     procedure ZQ_ColorAfterScroll(DataSet: TDataSet);
     function armarCodBarras(cod1,cod2,cod3:String):String ;
     procedure edCodCortoExit(Sender: TObject);
-    procedure cmbColorKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure cmbColorKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    //------TECLAS RAPIDAS
+    procedure ABuscarExecute(Sender: TObject);
+    procedure ANuevoExecute(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure ABajaExecute(Sender: TObject);
+    procedure AReactivarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
+    procedure btnImprimirListadoClick(Sender: TObject);
+    procedure btnImprimirListado_SalirClick(Sender: TObject);
+    procedure btnImprimirListado_AceptarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -242,9 +317,9 @@ uses UDM, UPrincipal, UUtilidades;
 
 {$R *.dfm}
 
-procedure TFABMProductos.btBuscarClick(Sender: TObject);
+procedure TFABMProductos.btnBuscarClick(Sender: TObject);
 begin
-    EKBuscar.Buscar;
+  EKBuscar.Buscar;
 end;
 
 
@@ -260,7 +335,7 @@ begin
 end;
 
 
-procedure TFABMProductos.btsalirClick(Sender: TObject);
+procedure TFABMProductos.btnSalirClick(Sender: TObject);
 begin
   close;
 end;
@@ -268,18 +343,21 @@ end;
 
 procedure TFABMProductos.FormCreate(Sender: TObject);
 begin
+  panelImprimirListado.Visible:= false;
   StaticTxtBaja.Color:= FPrincipal.baja;
+
   dm.EKModelo.abrir(ZQ_Articulo);
   dm.EKModelo.abrir(ZQ_Marca);
-  dm.EKModelo.abrir(ZQ_Color);  
+  dm.EKModelo.abrir(ZQ_Color);
   dm.EKModelo.abrir(ZQ_MedidaArticulo);
-  grillaDetalle.PopupMenu:=nil;
-  tabs.ActivePageIndex:=0;
-  PProducto.Enabled:=False;
+
+  grillaDetalle.PopupMenu:= nil;
+  tabs.ActivePageIndex:= 0;
+  PProducto.Enabled:= False;
 end;
 
 
-procedure TFABMProductos.BtNuevoClick(Sender: TObject);
+procedure TFABMProductos.btnNuevoClick(Sender: TObject);
 begin
 if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera,ZQ_DetalleProducto]) then
   begin
@@ -450,7 +528,7 @@ begin
 end;
 
 
-procedure TFABMProductos.BtGuardarClick(Sender: TObject);
+procedure TFABMProductos.btnGuardarClick(Sender: TObject);
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
@@ -478,7 +556,7 @@ begin
 end;
 
 
-procedure TFABMProductos.BtCancelarClick(Sender: TObject);
+procedure TFABMProductos.btnCancelarClick(Sender: TObject);
 begin
  if dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos) then
   begin
@@ -493,7 +571,7 @@ begin
 end;
 
 
-procedure TFABMProductos.BtModificarClick(Sender: TObject);
+procedure TFABMProductos.btnModificarClick(Sender: TObject);
 begin
 if ZQ_ProductoCabecera.IsEmpty then exit;
 
@@ -513,7 +591,7 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
 end;
 
 
-procedure TFABMProductos.btBajaClick(Sender: TObject);
+procedure TFABMProductos.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
@@ -540,7 +618,7 @@ begin
 end;
 
 
-procedure TFABMProductos.btReactivarClick(Sender: TObject);
+procedure TFABMProductos.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
@@ -994,6 +1072,95 @@ begin
       ZQ_ProductoCabeceraCOLOR.AsInteger := StrToInt(EKListadoColor.Resultado);
       cmbColor.setfocus;
     end;
+end;
+
+
+//----------------------------------
+//  INICIO TECLAS RAPIDAS
+//----------------------------------
+procedure TFABMProductos.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
+procedure TFABMProductos.ANuevoExecute(Sender: TObject);
+begin
+  if btnNuevo.Enabled then
+    btnNuevo.Click;
+end;
+
+procedure TFABMProductos.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled then
+    btnModificar.Click;
+end;
+
+procedure TFABMProductos.ABajaExecute(Sender: TObject);
+begin
+  if btnBaja.Enabled then
+    btnBaja.Click;
+end;
+
+procedure TFABMProductos.AReactivarExecute(Sender: TObject);
+begin
+  if btnReactivar.Enabled then
+    btnReactivar.Click;
+end;
+
+procedure TFABMProductos.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFABMProductos.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+//----------------------------------
+//  FIN TECLAS RAPIDAS
+//----------------------------------
+
+
+procedure TFABMProductos.btnImprimirListadoClick(Sender: TObject);
+begin
+  if ZQ_ProductoCabecera.IsEmpty then
+    exit;
+
+  panelImprimirListado.Visible:= true;
+  panelImprimirListado.BringToFront;
+  GrupoVisualizando.Enabled:= false;
+end;
+
+
+procedure TFABMProductos.btnImprimirListado_SalirClick(Sender: TObject);
+begin
+  panelImprimirListado.Visible:= false;
+  GrupoVisualizando.Enabled:= true;
+end;
+
+
+procedure TFABMProductos.btnImprimirListado_AceptarClick(Sender: TObject);
+begin
+  case RadioGroupImprimirListado.ItemIndex of
+    0: begin
+        BandaMedidasDatos.Enabled:= true;
+        BandaMedidasTitulo.Enabled:= true;
+       end;
+    1: begin
+        BandaMedidasDatos.Enabled:= false;
+        BandaMedidasTitulo.Enabled:= false;
+       end;
+  end;
+
+  DM.VariablesReportes(RepProductoListado);
+  QRlblPieDePaginaListado.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  EKVistaPreviaListado.VistaPrevia;
+
+  GrupoVisualizando.Enabled:= true;
 end;
 
 end.

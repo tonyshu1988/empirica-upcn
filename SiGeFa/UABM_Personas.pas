@@ -215,6 +215,7 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnImprimirDetalleClick(Sender: TObject);
+    procedure btnImprimirListadoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -230,7 +231,6 @@ type
     procedure AReactivarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
-    procedure btnImprimirListadoClick(Sender: TObject);
   private
     id_persona: integer;
   public
