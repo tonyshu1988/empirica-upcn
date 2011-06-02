@@ -137,6 +137,7 @@ object FABMProductos: TFABMProductos
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
+          DataSet = DM.ZQ_ConfigReporte
           Stretch = True
         end
         object QRLblTituloListado: TQRLabel

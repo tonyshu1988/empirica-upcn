@@ -1159,7 +1159,8 @@ begin
   QRlblPieDePaginaListado.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPreviaListado.VistaPrevia;
-
+  
+  panelImprimirListado.Visible:= false;
   GrupoVisualizando.Enabled:= true;
 end;
 
