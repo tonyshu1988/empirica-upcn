@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 240
-  Top = 101
+  Left = 228
+  Top = 117
   Width = 1024
   Height = 639
   Caption = 'FABMProductos'
@@ -13,6 +13,7 @@ object FABMProductos: TFABMProductos
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Position = poDefault
+  Scaled = False
   Visible = True
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -27,12 +28,1363 @@ object FABMProductos: TFABMProductos
     Align = alClient
     Caption = 'Panel4'
     TabOrder = 4
+    DesignSize = (
+      1008
+      549)
     object Label19: TLabel
       Left = 144
       Top = 216
       Width = 43
       Height = 13
       Caption = '_marca'
+    end
+    object RepProductoListado: TQuickRep
+      Tag = 99
+      Left = 29
+      Top = 51
+      Width = 1123
+      Height = 794
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      DataSet = ZQ_ProductoCabecera
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      Functions.Strings = (
+        'PAGENUMBER'
+        'COLUMNNUMBER'
+        'REPORTTITLE')
+      Functions.DATA = (
+        '0'
+        '0'
+        #39#39)
+      Options = [FirstPageHeader, LastPageFooter]
+      Page.Columns = 1
+      Page.Orientation = poLandscape
+      Page.PaperSize = A4
+      Page.Values = (
+        100.000000000000000000
+        2100.000000000000000000
+        100.000000000000000000
+        2970.000000000000000000
+        100.000000000000000000
+        100.000000000000000000
+        0.000000000000000000)
+      PrinterSettings.Copies = 1
+      PrinterSettings.OutputBin = Auto
+      PrinterSettings.Duplex = False
+      PrinterSettings.FirstPage = 0
+      PrinterSettings.LastPage = 0
+      PrinterSettings.UseStandardprinter = False
+      PrinterSettings.UseCustomBinCode = False
+      PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
+      PrinterSettings.UseCustomPaperCode = False
+      PrinterSettings.CustomPaperCode = 0
+      PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
+      PrintIfEmpty = True
+      ReportTitle = '+'
+      SnapToGrid = True
+      Units = MM
+      Zoom = 100
+      PrevFormStyle = fsNormal
+      PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
+      object QRBand9: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 38
+        Width = 1047
+        Height = 72
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          190.500000000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbPageHeader
+        object QRDBLogo: TQRDBImage
+          Left = 210
+          Top = 2
+          Width = 64
+          Height = 64
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            169.333333333333300000
+            555.625000000000000000
+            5.291666666666667000
+            169.333333333333300000)
+          DataField = 'LOGO'
+          Stretch = True
+        end
+        object QRLblTituloListado: TQRLabel
+          Left = 466
+          Top = 47
+          Width = 115
+          Height = 19
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            50.270833333333330000
+            1232.958333333333000000
+            124.354166666666700000
+            304.270833333333300000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'PRODUCTOS'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 12
+        end
+        object RepProductoListado_Subtitulo: TQRLabel
+          Left = 422
+          Top = 26
+          Width = 203
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            1116.541666666667000000
+            68.791666666666670000
+            537.104166666666700000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'RepProductoListado_Subtitulo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic, fsUnderline]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 9
+        end
+        object RepProductoListado_Titulo: TQRLabel
+          Left = 404
+          Top = 2
+          Width = 239
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            1068.916666666667000000
+            5.291666666666667000
+            632.354166666666700000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'RepProductoListado_Titulo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsUnderline]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 12
+        end
+      end
+      object QRBand10: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 159
+        Width = 1047
+        Height = 13
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -9
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ForceNewColumn = False
+        ForceNewPage = False
+        ParentFont = False
+        Size.Values = (
+          34.395833333333330000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbDetail
+        object QRDBText19: TQRDBText
+          Left = 4
+          Top = 1
+          Width = 100
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            10.583333333333330000
+            2.645833333333333000
+            264.583333333333300000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_ProductoCabecera
+          DataField = 'COD_CORTO'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText1: TQRDBText
+          Left = 117
+          Top = 1
+          Width = 234
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            309.562500000000000000
+            2.645833333333333000
+            619.125000000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_ProductoCabecera
+          DataField = 'NOMBRE'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText2: TQRDBText
+          Left = 1014
+          Top = 1
+          Width = 30
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            2682.875000000000000000
+            2.645833333333333000
+            79.375000000000000000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_ProductoCabecera
+          DataField = 'BAJA'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText3: TQRDBText
+          Left = 357
+          Top = 1
+          Width = 170
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            944.562500000000000000
+            2.645833333333333000
+            449.791666666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_ProductoCabecera
+          DataField = '_marca'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText4: TQRDBText
+          Left = 532
+          Top = 1
+          Width = 219
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            1407.583333333333000000
+            2.645833333333333000
+            579.437500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_ProductoCabecera
+          DataField = '_tipoArticulo'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText5: TQRDBText
+          Left = 756
+          Top = 1
+          Width = 251
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            2000.250000000000000000
+            2.645833333333333000
+            664.104166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_ProductoCabecera
+          DataField = '_color'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+      end
+      object QRBand11: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 220
+        Width = 1047
+        Height = 24
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          63.500000000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbPageFooter
+        object QRlblPieDePaginaListado: TQRLabel
+          Left = 4
+          Top = 3
+          Width = 115
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            10.583333333333330000
+            7.937500000000000000
+            304.270833333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'QRlblPieDePaginaListado'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabel43: TQRLabel
+          Left = 957
+          Top = 3
+          Width = 39
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            2532.062500000000000000
+            7.937500000000000000
+            103.187500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'P'#225'gina:'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRSysData1: TQRSysData
+          Left = 999
+          Top = 3
+          Width = 45
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            2643.187500000000000000
+            7.937500000000000000
+            119.062500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          Color = clWhite
+          Data = qrsPageNumber
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+      end
+      object QRBand12: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 198
+        Width = 1047
+        Height = 22
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          58.208333333333330000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbSummary
+        object QRExpr18: TQRExpr
+          Left = 4
+          Top = 4
+          Width = 195
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            10.583333333333330000
+            10.583333333333330000
+            515.937500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Color = clWhite
+          ResetAfterPrint = False
+          Transparent = False
+          WordWrap = True
+          Expression = #39'Cantidad de Productos: '#39'+COUNT'
+          ExportAs = exptText
+          FontSize = 8
+        end
+      end
+      object TitleBand2: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 110
+        Width = 1047
+        Height = 31
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          82.020833333333330000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbTitle
+        object QRLabelCritBusqueda: TQRLabel
+          Left = 5
+          Top = 16
+          Width = 692
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            13.229166666666670000
+            42.333333333333330000
+            1830.916666666667000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'QRLabelCritBusqueda'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabel48: TQRLabel
+          Left = 5
+          Top = 2
+          Width = 126
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            13.229166666666670000
+            5.291666666666667000
+            333.375000000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Criterios de Busqueda:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = False
+          WordWrap = False
+          ExportAs = exptText
+          FontSize = 7
+        end
+      end
+      object ColumnHeaderBand2: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 141
+        Width = 1047
+        Height = 18
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clSilver
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          47.625000000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbColumnHeader
+        object QRLabel29: TQRLabel
+          Left = 4
+          Top = 2
+          Width = 100
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            10.583333333333330000
+            5.291666666666667000
+            264.583333333333300000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'C'#243'd. Corto'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel30: TQRLabel
+          Left = 117
+          Top = 2
+          Width = 52
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            309.562500000000000000
+            5.291666666666667000
+            137.583333333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Nombre'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel1: TQRLabel
+          Left = 1014
+          Top = 2
+          Width = 30
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2682.875000000000000000
+            5.291666666666667000
+            79.375000000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Baja'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel2: TQRLabel
+          Left = 357
+          Top = 2
+          Width = 40
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            944.562500000000000000
+            5.291666666666667000
+            105.833333333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Marca'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel3: TQRLabel
+          Left = 532
+          Top = 2
+          Width = 84
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1407.583333333333000000
+            5.291666666666667000
+            222.250000000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Tipo Art'#237'culo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel4: TQRLabel
+          Left = 756
+          Top = 2
+          Width = 35
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2000.250000000000000000
+            5.291666666666667000
+            92.604166666666670000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Color'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+      end
+      object BandaMedidasDatos: TQRSubDetail
+        Tag = 99
+        Left = 38
+        Top = 184
+        Width = 1047
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          37.041666666666670000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        Master = RepProductoListado
+        DataSet = ZQ_DetalleProducto
+        PrintBefore = False
+        PrintIfEmpty = True
+        object QRDBText21: TQRDBText
+          Left = 132
+          Top = 0
+          Width = 91
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            349.250000000000000000
+            0.000000000000000000
+            240.770833333333300000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_DetalleProducto
+          DataField = 'COD_CORTO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText22: TQRDBText
+          Left = 227
+          Top = 0
+          Width = 209
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            600.604166666666700000
+            0.000000000000000000
+            552.979166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_DetalleProducto
+          DataField = '_medida'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText6: TQRDBText
+          Left = 475
+          Top = 0
+          Width = 117
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            1256.770833333333000000
+            0.000000000000000000
+            309.562500000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_DetalleProducto
+          DataField = 'STOCK_MAX'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText7: TQRDBText
+          Left = 596
+          Top = 0
+          Width = 117
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            1576.916666666667000000
+            0.000000000000000000
+            309.562500000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_DetalleProducto
+          DataField = 'STOCK_MIN'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText8: TQRDBText
+          Left = 440
+          Top = 0
+          Width = 30
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            1164.166666666667000000
+            0.000000000000000000
+            79.375000000000000000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_DetalleProducto
+          DataField = 'LLEVAR_STOCK'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRFrameline4: TQRFrameline
+          Left = 469
+          Top = -5
+          Width = 9
+          Height = 26
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            68.791666666666670000
+            1240.895833333333000000
+            -13.229166666666670000
+            23.812500000000000000)
+        end
+        object QRFrameline3: TQRFrameline
+          Left = 590
+          Top = -5
+          Width = 9
+          Height = 26
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            68.791666666666670000
+            1561.041666666667000000
+            -13.229166666666670000
+            23.812500000000000000)
+        end
+        object QRFrameline2: TQRFrameline
+          Left = 434
+          Top = -5
+          Width = 9
+          Height = 26
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            68.791666666666670000
+            1148.291666666667000000
+            -13.229166666666670000
+            23.812500000000000000)
+        end
+        object QRFrameline1: TQRFrameline
+          Left = 220
+          Top = -5
+          Width = 9
+          Height = 26
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            68.791666666666670000
+            582.083333333333300000
+            -13.229166666666670000
+            23.812500000000000000)
+        end
+      end
+      object BandaMedidasTitulo: TQRChildBand
+        Tag = 99
+        Left = 38
+        Top = 172
+        Width = 1047
+        Height = 12
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          31.750000000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        ParentBand = QRBand10
+        PrintOrder = cboAfterParent
+        object QRLabel5: TQRLabel
+          Left = 132
+          Top = 1
+          Width = 91
+          Height = 11
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            29.104166666666670000
+            349.250000000000000000
+            2.645833333333333000
+            240.770833333333300000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'C'#243'd. Corto'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRLabel6: TQRLabel
+          Left = 228
+          Top = 1
+          Width = 34
+          Height = 11
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            29.104166666666670000
+            603.250000000000000000
+            2.645833333333333000
+            89.958333333333330000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Medida'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRLabel7: TQRLabel
+          Left = 440
+          Top = 1
+          Width = 30
+          Height = 11
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            29.104166666666670000
+            1164.166666666667000000
+            2.645833333333333000
+            79.375000000000000000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'LLevar'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRLabel8: TQRLabel
+          Left = 475
+          Top = 1
+          Width = 117
+          Height = 11
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            29.104166666666670000
+            1256.770833333333000000
+            2.645833333333333000
+            309.562500000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Stock Maximo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRLabel9: TQRLabel
+          Left = 596
+          Top = 1
+          Width = 117
+          Height = 11
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            29.104166666666670000
+            1576.916666666667000000
+            2.645833333333333000
+            309.562500000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Stock Minimo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRShape1: TQRShape
+          Left = 131
+          Top = 11
+          Width = 585
+          Height = 1
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            2.645833333333333000
+            346.604166666666700000
+            29.104166666666670000
+            1547.812500000000000000)
+          Shape = qrsHorLine
+          VertAdjust = 0
+        end
+        object QRLabel10: TQRLabel
+          Left = 38
+          Top = 1
+          Width = 91
+          Height = 11
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            29.104166666666670000
+            100.541666666666700000
+            2.645833333333333000
+            240.770833333333300000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'MEDIDAS:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+      end
     end
     object Grilla: TEKDBGrid
       Left = 1
@@ -92,6 +1444,14 @@ object FABMProductos: TFABMProductos
         end
         item
           Expanded = False
+          FieldName = '_marca'
+          Title.Alignment = taCenter
+          Title.Caption = 'Marca'
+          Width = 183
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = '_tipoArticulo'
           Title.Alignment = taCenter
           Title.Caption = 'Tipo Art'#237'culo'
@@ -108,10 +1468,9 @@ object FABMProductos: TFABMProductos
         end
         item
           Expanded = False
-          FieldName = '_marca'
+          FieldName = '_color'
           Title.Alignment = taCenter
-          Title.Caption = 'Marca'
-          Width = 183
+          Title.Caption = 'Color'
           Visible = True
         end
         item
@@ -128,7 +1487,7 @@ object FABMProductos: TFABMProductos
       Top = 326
       Width = 1006
       Height = 222
-      ActivePage = tabCabecera
+      ActivePage = tabDetalle
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -417,6 +1776,7 @@ object FABMProductos: TFABMProductos
                 Color = 15132364
                 Expanded = False
                 FieldName = 'COD_CORTO'
+                Title.Alignment = taCenter
                 Title.Caption = 'C'#243'd. Corto'
                 Width = 90
                 Visible = True
@@ -424,6 +1784,7 @@ object FABMProductos: TFABMProductos
               item
                 Expanded = False
                 FieldName = '_medida'
+                Title.Alignment = taCenter
                 Title.Caption = 'Medida'
                 Width = 106
                 Visible = True
@@ -431,6 +1792,7 @@ object FABMProductos: TFABMProductos
               item
                 Expanded = False
                 FieldName = 'DESCRIPCION'
+                Title.Alignment = taCenter
                 Title.Caption = 'Descripci'#243'n'
                 Width = 434
                 Visible = True
@@ -438,6 +1800,7 @@ object FABMProductos: TFABMProductos
               item
                 Expanded = False
                 FieldName = 'CODIGO_BARRA'
+                Title.Alignment = taCenter
                 Title.Caption = 'C'#243'd. Barras'
                 Width = 158
                 Visible = True
@@ -445,54 +1808,57 @@ object FABMProductos: TFABMProductos
               item
                 Expanded = False
                 FieldName = 'PRECIO_COSTO'
+                Title.Alignment = taCenter
                 Title.Caption = 'Precio Costo'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'PRECIO_VENTA'
+                Title.Alignment = taCenter
                 Title.Caption = 'Precio Venta'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'COEF_GANANCIA'
+                Title.Alignment = taCenter
                 Title.Caption = 'Ganancia'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'COEF_DESCUENTO'
+                Title.Alignment = taCenter
                 Title.Caption = 'Descuento'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'IMPUESTO_INTERNO'
+                Title.Alignment = taCenter
                 Title.Caption = 'Impuesto Interno'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'IMPUESTO_IVA'
+                Title.Alignment = taCenter
                 Title.Caption = 'Impuesto IVA'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'STOCK_MAX'
+                Title.Alignment = taCenter
                 Title.Caption = 'Stock M'#225'ximo'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'STOCK_MIN'
+                Title.Alignment = taCenter
                 Title.Caption = 'Stock M'#237'nimo'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = '_medida'
                 Visible = True
               end
               item
@@ -979,6 +2345,55 @@ object FABMProductos: TFABMProductos
         TabOrder = 0
       end
     end
+    object panelImprimirListado: TPanel
+      Left = 387
+      Top = 92
+      Width = 233
+      Height = 121
+      Anchors = []
+      BorderWidth = 6
+      TabOrder = 4
+      object Panel1: TPanel
+        Left = 7
+        Top = 73
+        Width = 219
+        Height = 41
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 0
+        object btnImprimirListado_Aceptar: TButton
+          Left = 24
+          Top = 8
+          Width = 75
+          Height = 25
+          Caption = 'Aceptar'
+          TabOrder = 0
+          OnClick = btnImprimirListado_AceptarClick
+        end
+        object btnImprimirListado_Salir: TButton
+          Left = 120
+          Top = 8
+          Width = 75
+          Height = 25
+          Caption = 'Salir'
+          TabOrder = 1
+          OnClick = btnImprimirListado_SalirClick
+        end
+      end
+      object RadioGroupImprimirListado: TRadioGroup
+        Left = 7
+        Top = 7
+        Width = 219
+        Height = 66
+        Align = alClient
+        Caption = ' Opciones Impresi'#243'n  '
+        ItemIndex = 0
+        Items.Strings = (
+          'Imprimir con medidas'
+          'Imprimir sin medidas')
+        TabOrder = 1
+      end
+    end
   end
   object ZQ_ProductoCabecera: TZQuery
     Connection = DM.Conexion
@@ -1021,6 +2436,12 @@ object FABMProductos: TFABMProductos
     object ZQ_ProductoCabeceraID_ARTICULO: TIntegerField
       FieldName = 'ID_ARTICULO'
     end
+    object ZQ_ProductoCabeceraCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_ProductoCabeceraCOLOR: TIntegerField
+      FieldName = 'COLOR'
+    end
     object ZQ_ProductoCabecera_articulo: TStringField
       FieldKind = fkLookup
       FieldName = '_articulo'
@@ -1041,9 +2462,6 @@ object FABMProductos: TFABMProductos
       Size = 100
       Lookup = True
     end
-    object ZQ_ProductoCabeceraCOD_CORTO: TStringField
-      FieldName = 'COD_CORTO'
-    end
     object ZQ_ProductoCabecera_tipoArticulo: TStringField
       FieldKind = fkLookup
       FieldName = '_tipoArticulo'
@@ -1054,8 +2472,15 @@ object FABMProductos: TFABMProductos
       Size = 200
       Lookup = True
     end
-    object ZQ_ProductoCabeceraCOLOR: TIntegerField
-      FieldName = 'COLOR'
+    object ZQ_ProductoCabecera_color: TStringField
+      FieldKind = fkLookup
+      FieldName = '_color'
+      LookupDataSet = ZQ_Color
+      LookupKeyFields = 'ID_COLOR'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'COLOR'
+      Size = 30
+      Lookup = True
     end
   end
   object DS_ProductoCabecera: TDataSource
@@ -1368,44 +2793,44 @@ object FABMProductos: TFABMProductos
         Font.Style = []
         ItemLinks = <
           item
-            Item = btBuscar
+            Item = btnBuscar
             Visible = True
           end
           item
             BeginGroup = True
-            Item = BtNuevo
+            Item = btnNuevo
             Visible = True
           end
           item
-            Item = BtModificar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btBaja
-            Visible = True
-          end
-          item
-            Item = btReactivar
+            Item = btnModificar
             Visible = True
           end
           item
             BeginGroup = True
-            Item = BtGuardar
+            Item = btnBaja
             Visible = True
           end
           item
-            Item = BtCancelar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = BtImprimir
+            Item = btnReactivar
             Visible = True
           end
           item
             BeginGroup = True
-            Item = btsalir
+            Item = btnGuardar
+            Visible = True
+          end
+          item
+            Item = btnCancelar
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnImprimirListado
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnSalir
             Visible = True
           end>
         Name = 'barra'
@@ -1719,78 +3144,82 @@ object FABMProductos: TFABMProductos
       0
       0
       52)
-    object BtNuevo: TdxBarLargeButton
-      Caption = 'Nuevo'
+    object btnNuevo: TdxBarLargeButton
+      Caption = 'F2 - Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
       ImageIndex = 0
-      OnClick = BtNuevoClick
+      OnClick = btnNuevoClick
       AutoGrayScale = False
     end
-    object BtModificar: TdxBarLargeButton
-      Caption = 'Modificar'
+    object btnModificar: TdxBarLargeButton
+      Caption = 'F3 - Modificar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
       ImageIndex = 1
-      OnClick = BtModificarClick
+      OnClick = btnModificarClick
       AutoGrayScale = False
     end
-    object btBaja: TdxBarLargeButton
-      Caption = 'Baja'
+    object btnBaja: TdxBarLargeButton
+      Caption = 'F5 - Baja'
       Category = 0
+      Hint = 'F5 - Baja'
       Visible = ivAlways
       ImageIndex = 25
-      OnClick = btBajaClick
+      OnClick = btnBajaClick
       AutoGrayScale = False
     end
-    object btBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+    object btnBuscar: TdxBarLargeButton
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
-      OnClick = btBuscarClick
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object BtGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+    object btnGuardar: TdxBarLargeButton
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
       Visible = ivAlways
       ImageIndex = 3
-      OnClick = BtGuardarClick
+      OnClick = btnGuardarClick
       AutoGrayScale = False
     end
-    object BtCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+    object btnCancelar: TdxBarLargeButton
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
       Visible = ivAlways
       ImageIndex = 4
-      OnClick = BtCancelarClick
+      OnClick = btnCancelarClick
       AutoGrayScale = False
     end
-    object BtImprimir: TdxBarLargeButton
+    object btnImprimirListado: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Imprimir'
+      Caption = 'Listado'
       Category = 0
+      Hint = 'Listado'
       Visible = ivAlways
       ImageIndex = 28
+      OnClick = btnImprimirListadoClick
       AutoGrayScale = False
     end
-    object btReactivar: TdxBarLargeButton
-      Caption = 'Reactivar'
+    object btnReactivar: TdxBarLargeButton
+      Caption = 'F6 - Reactivar'
       Category = 0
+      Hint = 'F6 - Reactivar'
       Visible = ivAlways
       ImageIndex = 24
-      OnClick = btReactivarClick
+      OnClick = btnReactivarClick
       AutoGrayScale = False
     end
-    object btsalir: TdxBarLargeButton
+    object btnSalir: TdxBarLargeButton
       Align = iaRight
       Caption = 'Salir'
       Category = 0
@@ -1798,7 +3227,7 @@ object FABMProductos: TFABMProductos
       Visible = ivAlways
       ImageIndex = 6
       ShortCut = 123
-      OnClick = btsalirClick
+      OnClick = btnSalirClick
       AutoGrayScale = False
     end
     object btverbajados: TdxBarLargeButton
@@ -1838,12 +3267,12 @@ object FABMProductos: TFABMProductos
     end
     object GrupoVisualizando: TdxBarGroup
       Items = (
-        'BtNuevo'
-        'BtModificar'
-        'btBuscar'
-        'BtImprimir'
-        'btBaja'
-        'btReactivar'
+        'btnNuevo'
+        'btnModificar'
+        'btnBuscar'
+        'btnImprimirListado'
+        'btnBaja'
+        'btnReactivar'
         'btverbajados'
         'btnSiguiente'
         'btnAnterior')
@@ -1851,8 +3280,8 @@ object FABMProductos: TFABMProductos
     object GrupoEditando: TdxBarGroup
       Enabled = False
       Items = (
-        'BtGuardar'
-        'BtCancelar')
+        'btnGuardar'
+        'btnCancelar')
     end
   end
   object EKBuscar: TEKBusquedaAvanzada
@@ -1886,9 +3315,10 @@ object FABMProductos: TFABMProductos
         Campo = 'id_articulo'
         Tabla = 'producto_cabecera'
         TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
         TipoCombollenarSQL = ZQ_Articulo
-        TipoCombollenarCampo = 'descripcion'
+        TipoCombollenarCampo = 'busqueda'
         TipoCombollenarCampoReal = 'id_articulo'
         TipoComboEditable = False
         CambiarCondicion = False
@@ -1899,10 +3329,25 @@ object FABMProductos: TFABMProductos
         Campo = 'id_marca'
         Tabla = 'producto_cabecera'
         TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
         TipoCombollenarSQL = ZQ_Marca
         TipoCombollenarCampo = 'nombre_marca'
         TipoCombollenarCampoReal = 'id_marca'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Color'
+        Campo = 'color'
+        Tabla = 'producto_cabecera'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoCombollenarSQL = ZQ_Color
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_color'
         TipoComboEditable = False
         CambiarCondicion = False
         ItemIndex = -1
@@ -1914,8 +3359,8 @@ object FABMProductos: TFABMProductos
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
         TipoComboValores.Strings = (
-          'S'
-          'N')
+          'SI'
+          'NO')
         TipoComboEditable = False
         CambiarCondicion = False
         TipoComboValoresReales.Strings = (
@@ -2145,6 +3590,7 @@ object FABMProductos: TFABMProductos
   end
   object ZQ_MedidaArticulo: TZQuery
     Connection = DM.Conexion
+    SortedFields = 'MEDIDA'
     SQL.Strings = (
       'select ma.id_articulo,ma.id_medida,m.medida, ma.baja'
       'from medida_articulo ma'
@@ -2466,5 +3912,67 @@ object FABMProductos: TFABMProductos
     object ZQ_ExisteCodigoCOLOR: TIntegerField
       FieldName = 'COLOR'
     end
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 936
+    Top = 98
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+    end
+    object ANuevo: TAction
+      Caption = 'ANuevo'
+      ShortCut = 113
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 115
+    end
+    object ABaja: TAction
+      Caption = 'ABaja'
+      ShortCut = 116
+    end
+    object AReactivar: TAction
+      Caption = 'AReactivar'
+      ShortCut = 117
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+    end
+  end
+  object EKVistaPreviaListado: TEKVistaPreviaQR
+    Reporte = RepProductoListado
+    ShowModal = False
+    Left = 936
+    Top = 152
+  end
+  object EKVistaPreviaQR2: TEKVistaPreviaQR
+    ShowModal = False
+    Left = 936
+    Top = 208
+  end
+  object EKVistaPreviaQR3: TEKVistaPreviaQR
+    ShowModal = False
+    Left = 936
+    Top = 264
+  end
+  object EKOrdenarDetalle: TEKOrdenarGrilla
+    Grilla = grillaDetalle
+    FuenteNormal = []
+    NombreGuardarConfig = 'ABM_ProductosDetalle'
+    Ordenar = True
+    MoverColumna = True
+    Left = 880
+    Top = 416
   end
 end

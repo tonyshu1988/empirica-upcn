@@ -1,6 +1,6 @@
 object FABMClientes: TFABMClientes
-  Left = 306
-  Top = 317
+  Left = 290
+  Top = 150
   Width = 863
   Height = 572
   Caption = 'FABMClientes'
@@ -1155,6 +1155,7 @@ object FABMClientes: TFABMClientes
         end
       end
       object ChildBand1: TQRChildBand
+        Tag = 99
         Left = 38
         Top = 280
         Width = 718
@@ -3258,7 +3259,8 @@ object FABMClientes: TFABMClientes
         'btnBaja'
         'btnSalir'
         'btnReactivar'
-        'btnImprimirListado')
+        'btnImprimirListado'
+        'btnImprimirDetalle')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False

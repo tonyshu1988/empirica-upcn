@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 390
-  Top = 266
+  Left = 257
+  Top = 140
   Width = 862
   Height = 530
   Caption = 'ABM Personas'
@@ -585,8 +585,8 @@ object FABM_Personas: TFABM_Personas
     end
     object RepPersonaDetalle: TQuickRep
       Tag = 99
-      Left = -216
-      Top = 18
+      Left = 80
+      Top = 122
       Width = 794
       Height = 1123
       Frame.Color = clBlack
@@ -1954,8 +1954,8 @@ object FABM_Personas: TFABM_Personas
     end
     object RepPersonaListado: TQuickRep
       Tag = 99
-      Left = -545
-      Top = 195
+      Left = 39
+      Top = 227
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -3602,7 +3602,8 @@ object FABM_Personas: TFABM_Personas
         'btnBaja'
         'btnSalir'
         'btnReactivar'
-        'btnImprimirDetalle')
+        'btnImprimirDetalle'
+        'btnImprimirListado')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
