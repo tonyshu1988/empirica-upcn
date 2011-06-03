@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, QRPrntr, ToolWin, ComCtrls, Buttons, ImgList, StdCtrls, QRExport,
   ActnList, ActnMan, ActnCtrls, XPStyleActnCtrls, EKImageList32,
-  ExtCtrls, QRPDFFilt;
+  ExtCtrls, QRPDFFilt, QuickRpt;
 
 type
   TEKVistaPreviaQRForm = class(TForm)
