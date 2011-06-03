@@ -444,7 +444,7 @@ end;
 
 procedure TEKVistaPreviaQRForm.ImprimirExecute(Sender: TObject);
 begin
-  QRPreview1.QRPrinter.Print;
+  (QRPreview1.QRPrinter.Master as TQuickRep).Print;
 end;
 
 
@@ -668,7 +668,7 @@ end;
 
 procedure TEKVistaPreviaQRForm.Conf_impresoraExecute(Sender: TObject);
 begin
-    QRPreview1.QRPrinter.PrintSetup;
+  (QRPreview1.QRPrinter.Master as TQuickRep).PrinterSetup;
 end;
 
 
