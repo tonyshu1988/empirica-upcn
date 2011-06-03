@@ -433,21 +433,24 @@ begin
     exit;
   end;
 
-  ZQ_ExisteCodigo.Close;
-  ZQ_ExisteCodigo.ParamByName('codigo').AsString:= edCodCorto.Text;
-  ZQ_ExisteCodigo.ParamByName('idMarca').AsInteger:= ZQ_ProductoCabeceraID_MARCA.AsInteger;
-  ZQ_ExisteCodigo.Open;
+  if (ZQ_ProductoCabecera.State=dsInsert) then
+  begin
+    ZQ_ExisteCodigo.Close;
+    ZQ_ExisteCodigo.ParamByName('codigo').AsString:= edCodCorto.Text;
+    ZQ_ExisteCodigo.ParamByName('idMarca').AsInteger:= ZQ_ProductoCabeceraID_MARCA.AsInteger;
+    ZQ_ExisteCodigo.Open;
 
-  if not ZQ_ExisteCodigo.IsEmpty then
-    if (application.MessageBox(pchar('El Codigo Corto '+ZQ_ProductoCabeceraCOD_CORTO.AsString+ ' ya existe para la marca '+ZQ_ProductoCabecera_marca.AsString+#13+'¿Desea cargarlo igualmente?'), 'Código Corto Repetido', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-      exit
-    else
-    begin
-      tabs.ActivePageIndex:= 0;
-      edCodCorto.SetFocus;
-      result := false;
-      exit;
-    end;
+    if not ZQ_ExisteCodigo.IsEmpty then
+      if (application.MessageBox(pchar('El Codigo Corto '+ZQ_ProductoCabeceraCOD_CORTO.AsString+ ' ya existe para la marca '+ZQ_ProductoCabecera_marca.AsString+#13+'¿Desea cargarlo igualmente?'), 'Código Corto Repetido', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+        exit
+      else
+      begin
+        tabs.ActivePageIndex:= 0;
+        edCodCorto.SetFocus;
+        result := false;
+        exit;
+    end;  end;
+
 
     end;
 
@@ -724,19 +727,20 @@ begin
        ZQ_DetalleProductoCOD_CORTO.AsString:=rellenar(CDMedidasmedida.AsString,'0',5);
 
     //ZQ_DetalleProductoCODIGO_BARRA.AsString:=armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
-
+    ZQ_DetalleProducto.Post;
     ZQ_DetalleProducto.Filtered := false;
     ZQ_DetalleProducto.Filter:= Format('id_medida = %d',[CDMedidasid_medida.AsInteger]);
     ZQ_DetalleProducto.Filtered := true;
     //Si existe cancelo el registro actual
-    if not(ZQ_DetalleProducto.IsEmpty) then
+
+    if (ZQ_DetalleProducto.RecordCount>1) then
      begin
+      ZQ_DetalleProducto.Locate('ID_PRODUCTO',ZSP_GenerarIDProdDeralleID.AsInteger,[]);
       ZQ_DetalleProducto.Delete;
       Application.MessageBox('Esta medida ya fue cargada','Carga medida',MB_OK+MB_ICONINFORMATION);
-     end
-    else
-      //Guardo el que abrí primero.
-      ZQ_DetalleProducto.Post;
+     end;
+
+
 
     ZQ_DetalleProducto.Filtered:=False;
 
@@ -778,8 +782,18 @@ begin
         ZSP_GenerarIDProdDeralle.Active:=True;
         ZQ_DetalleProductoID_PRODUCTO.AsInteger:=ZSP_GenerarIDProdDeralleID.AsInteger;
        end;
-
         ZQ_DetalleProducto.Post;
+        ZQ_DetalleProducto.Filtered := false;
+        ZQ_DetalleProducto.Filter:= Format('id_medida = %d',[CDMedidasid_medida.AsInteger]);
+        ZQ_DetalleProducto.Filtered := true;
+        //Si existe cancelo el registro actual
+
+        if (ZQ_DetalleProducto.RecordCount>1) then
+         begin
+          ZQ_DetalleProducto.Locate('ID_PRODUCTO',ZSP_GenerarIDProdDeralleID.AsInteger,[]);
+          ZQ_DetalleProducto.Delete;
+          Application.MessageBox('Esta medida ya fue cargada','Carga medida',MB_OK+MB_ICONINFORMATION);
+         end;
      end;
      ZQ_DetalleProducto.Filtered:=False;
      CDMedidas.Next;
@@ -1005,7 +1019,8 @@ begin
   EKListadoMedidas.SQL.Clear;
   EKListadoMedidas.SQL.Add(Format('select m.* from medida_articulo ma '+
                                'join medida m on (ma.id_medida=m.id_medida)'+
-                               'where (ma.id_articulo=%d)and(ma.baja<>%s)',[ZQ_ArticuloID_ARTICULO.AsInteger,QuotedStr('S')]));
+                               'where (ma.id_articulo=%d)and(ma.baja<>%s)' +
+                               ' order by m.medida',[ZQ_ArticuloID_ARTICULO.AsInteger,QuotedStr('S')]));
   if EKListadoMedidas.Buscar then
     begin
       CDMedidas.Filter:= 'id_medida = '+EKListadoMedidas.Resultado;
