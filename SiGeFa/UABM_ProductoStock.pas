@@ -96,6 +96,11 @@ type
     ACancelar: TAction;
     AAsociar: TAction;
     AProcesar: TAction;
+    ZQ_StockSECCION: TStringField;
+    ZQ_StockSECTOR: TStringField;
+    ZQ_StockFILA: TStringField;
+    ZQ_StockCOLUMNA: TStringField;
+    ZQ_StockPOSICSUCURSAL: TStringField;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -306,7 +311,7 @@ begin
 
   if CD_Sucursal.IsEmpty or CD_Producto.IsEmpty then
   begin
-    ShowMessage('Debe seleccionar al menos una Sucursal y al menos un Producto para ser asociados');
+    ShowMessage('Debe seleccionar al menos una Posición en la Sucursal y al menos un Producto para ser asociados');
     exit;
   end;
 
@@ -332,7 +337,7 @@ begin
     if DM.EKModelo.finalizar_transaccion(transaccion_Asociar) then
       estado:= true //si pudo llenar las tablas temporales entonces seteo que esta todo bien hasta el momento
     else
-      DM.EKModelo.cancelar_transaccion(transaccion_Asociar);    
+      DM.EKModelo.cancelar_transaccion(transaccion_Asociar);
   end;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_Asociar, []) and estado then
@@ -343,7 +348,7 @@ begin
 
     //finalizo la transaccion
     if DM.EKModelo.finalizar_transaccion(transaccion_Asociar) then
-      ShowMessage('La Asosiación se realizo correctamente')
+      ShowMessage('La Asociación se realizó correctamente')
     else
       DM.EKModelo.cancelar_transaccion(transaccion_Asociar);
   end;

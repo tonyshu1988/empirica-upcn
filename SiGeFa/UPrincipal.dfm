@@ -4846,11 +4846,6 @@ object FPrincipal: TFPrincipal
       ImageIndex = 25
       OnExecute = AEnviarMailExecute
     end
-    object AABM_ProdStockPosic: TAction
-      Caption = 'ABM Producto Stock Posici'#243'n'
-      ImageIndex = 17
-      OnExecute = AABM_ProdStockPosicExecute
-    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -4912,10 +4907,6 @@ object FPrincipal: TFPrincipal
       Caption = 'Control Stock'
       object ABMProductoStock1: TMenuItem
         Action = AABM_ProductoStock
-      end
-      object ABMProductoStockPosicin1: TMenuItem
-        Tag = 1
-        Action = AABM_ProdStockPosic
       end
       object N3: TMenuItem
         Caption = '-'

@@ -1,6 +1,6 @@
 object FABM_SucursalPosicion: TFABM_SucursalPosicion
-  Left = 293
-  Top = 287
+  Left = 223
+  Top = 109
   Width = 981
   Height = 549
   Caption = 'ABM Sucursal Posicion'
@@ -28,232 +28,6 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     Align = alClient
     BorderWidth = 5
     TabOrder = 0
-    object DBGridPosicionSucursal: TDBGrid
-      Left = 6
-      Top = 6
-      Width = 953
-      Height = 322
-      Align = alClient
-      Color = 14606012
-      DataSource = DS_PosicionSucursal
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-      TabOrder = 0
-      TitleFont.Charset = ANSI_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-      OnDrawColumnCell = DBGridPosicionSucursalDrawColumnCell
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'sucursal'
-          Title.Alignment = taCenter
-          Title.Caption = 'Sucursal'
-          Width = 272
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SECCION'
-          Title.Alignment = taCenter
-          Title.Caption = 'Secci'#243'n'
-          Width = 226
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SECTOR'
-          Title.Alignment = taCenter
-          Title.Caption = 'Sector'
-          Width = 219
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'FILA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Fila'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COLUMNA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Columna'
-          Visible = True
-        end>
-    end
-    object PanelEdicion: TPanel
-      Left = 6
-      Top = 328
-      Width = 953
-      Height = 106
-      Align = alBottom
-      BevelOuter = bvNone
-      TabOrder = 1
-      Visible = False
-      object Label1: TLabel
-        Left = 9
-        Top = 11
-        Width = 54
-        Height = 13
-        Caption = 'Sucursal:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label2: TLabel
-        Left = 14
-        Top = 43
-        Width = 49
-        Height = 13
-        Caption = 'Secci'#243'n:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label3: TLabel
-        Left = 493
-        Top = 43
-        Width = 42
-        Height = 13
-        Caption = 'Sector:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label5: TLabel
-        Left = 39
-        Top = 75
-        Width = 24
-        Height = 13
-        Caption = 'Fila:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label6: TLabel
-        Left = 479
-        Top = 75
-        Width = 56
-        Height = 13
-        Caption = 'Columna:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label4: TLabel
-        Left = 549
-        Top = 11
-        Width = 208
-        Height = 13
-        Caption = 'Presione F1 para desplegar una lista'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object DBEdit1: TDBEdit
-        Left = 68
-        Top = 39
-        Width = 400
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'SECCION'
-        DataSource = DS_PosicionSucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-      end
-      object DBEdit2: TDBEdit
-        Left = 540
-        Top = 39
-        Width = 400
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'SECTOR'
-        DataSource = DS_PosicionSucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 2
-      end
-      object DBEdit4: TDBEdit
-        Left = 68
-        Top = 71
-        Width = 400
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'FILA'
-        DataSource = DS_PosicionSucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 3
-      end
-      object DBEdit5: TDBEdit
-        Left = 540
-        Top = 71
-        Width = 400
-        Height = 21
-        DataField = 'COLUMNA'
-        DataSource = DS_PosicionSucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 4
-      end
-      object DBLookupCBoxSuc: TDBLookupComboBox
-        Left = 68
-        Top = 9
-        Width = 469
-        Height = 21
-        DataField = 'ID_SUCURSAL'
-        DataSource = DS_PosicionSucursal
-        KeyField = 'ID_SUCURSAL'
-        ListField = 'NOMBRE'
-        ListSource = DS_Sucursal
-        TabOrder = 0
-        OnKeyUp = DBLookupCBoxSucKeyUp
-      end
-    end
     object RepSucPosicion: TQuickRep
       Tag = 99
       Left = 84
@@ -1114,6 +888,233 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         end
       end
     end
+    object DBGridPosicionSucursal: TDBGrid
+      Left = 6
+      Top = 6
+      Width = 953
+      Height = 322
+      Align = alClient
+      Color = 14606012
+      DataSource = DS_PosicionSucursal
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      OnDrawColumnCell = DBGridPosicionSucursalDrawColumnCell
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'sucursal'
+          Title.Alignment = taCenter
+          Title.Caption = 'Sucursal'
+          Width = 272
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SECCION'
+          Title.Alignment = taCenter
+          Title.Caption = 'Secci'#243'n'
+          Width = 226
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SECTOR'
+          Title.Alignment = taCenter
+          Title.Caption = 'Sector'
+          Width = 219
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FILA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fila'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COLUMNA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Columna'
+          Width = 64
+          Visible = True
+        end>
+    end
+    object PanelEdicion: TPanel
+      Left = 6
+      Top = 328
+      Width = 953
+      Height = 106
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 1
+      Visible = False
+      object Label1: TLabel
+        Left = 9
+        Top = 11
+        Width = 54
+        Height = 13
+        Caption = 'Sucursal:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object Label2: TLabel
+        Left = 14
+        Top = 43
+        Width = 49
+        Height = 13
+        Caption = 'Secci'#243'n:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object Label3: TLabel
+        Left = 493
+        Top = 43
+        Width = 42
+        Height = 13
+        Caption = 'Sector:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object Label5: TLabel
+        Left = 39
+        Top = 75
+        Width = 24
+        Height = 13
+        Caption = 'Fila:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object Label6: TLabel
+        Left = 479
+        Top = 75
+        Width = 56
+        Height = 13
+        Caption = 'Columna:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object Label4: TLabel
+        Left = 549
+        Top = 11
+        Width = 208
+        Height = 13
+        Caption = 'Presione F1 para desplegar una lista'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+      end
+      object DBEdit1: TDBEdit
+        Left = 68
+        Top = 39
+        Width = 400
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'SECCION'
+        DataSource = DS_PosicionSucursal
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+      end
+      object DBEdit2: TDBEdit
+        Left = 540
+        Top = 39
+        Width = 400
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'SECTOR'
+        DataSource = DS_PosicionSucursal
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+      end
+      object DBEdit4: TDBEdit
+        Left = 68
+        Top = 71
+        Width = 400
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'FILA'
+        DataSource = DS_PosicionSucursal
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+      end
+      object DBEdit5: TDBEdit
+        Left = 540
+        Top = 71
+        Width = 400
+        Height = 21
+        DataField = 'COLUMNA'
+        DataSource = DS_PosicionSucursal
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 4
+      end
+      object DBLookupCBoxSuc: TDBLookupComboBox
+        Left = 68
+        Top = 9
+        Width = 469
+        Height = 21
+        DataField = 'ID_SUCURSAL'
+        DataSource = DS_PosicionSucursal
+        KeyField = 'ID_SUCURSAL'
+        ListField = 'NOMBRE'
+        ListSource = DS_Sucursal
+        TabOrder = 0
+        OnKeyUp = DBLookupCBoxSucKeyUp
+      end
+    end
   end
   object PBusqueda: TPanel
     Left = 0
@@ -1733,23 +1734,6 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     end
     object ZQ_PosicionSucursalID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
-      Required = True
-    end
-    object ZQ_PosicionSucursalSECCION: TStringField
-      FieldName = 'SECCION'
-      Size = 10
-    end
-    object ZQ_PosicionSucursalSECTOR: TStringField
-      FieldName = 'SECTOR'
-      Size = 10
-    end
-    object ZQ_PosicionSucursalFILA: TStringField
-      FieldName = 'FILA'
-      Size = 10
-    end
-    object ZQ_PosicionSucursalCOLUMNA: TStringField
-      FieldName = 'COLUMNA'
-      Size = 10
     end
     object ZQ_PosicionSucursalsucursal: TStringField
       FieldKind = fkLookup
@@ -1764,6 +1748,22 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     object ZQ_PosicionSucursalBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
+    end
+    object ZQ_PosicionSucursalSECCION: TStringField
+      FieldName = 'SECCION'
+      Size = 50
+    end
+    object ZQ_PosicionSucursalSECTOR: TStringField
+      FieldName = 'SECTOR'
+      Size = 10
+    end
+    object ZQ_PosicionSucursalFILA: TStringField
+      FieldName = 'FILA'
+      Size = 10
+    end
+    object ZQ_PosicionSucursalCOLUMNA: TStringField
+      FieldName = 'COLUMNA'
+      Size = 10
     end
   end
   object DS_PosicionSucursal: TDataSource

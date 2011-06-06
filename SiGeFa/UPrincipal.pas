@@ -67,8 +67,6 @@ type
     BandejadeMail2: TMenuItem;
     EnviarMail1: TMenuItem;
     ConfigurarMail1: TMenuItem;
-    AABM_ProdStockPosic: TAction;
-    ABMProductoStockPosicin1: TMenuItem;
     AABM_Articulo: TAction;
     ABMArticulo1: TMenuItem;
     N1: TMenuItem;
@@ -96,7 +94,6 @@ type
     procedure ABandejaMailExecute(Sender: TObject);
     procedure AConfigMailExecute(Sender: TObject);
     procedure AEnviarMailExecute(Sender: TObject);
-    procedure AABM_ProdStockPosicExecute(Sender: TObject);
     procedure AABM_ArticuloExecute(Sender: TObject);
   private
     { Private declarations }
@@ -120,7 +117,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_TipoEmpresa, UABM_Sucursal, UABM_SucursalPosicion,
   UABM_ProductoStock, UABM_Personas,
   UImprimirEtiquetas, UMailBandeja, USeleccionarSucursal, UMailConfigurar,
-  UMailEnviar, UABMPorductoStockPosicion, UABM_Colores;
+  UMailEnviar, UABM_Colores;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -354,11 +351,6 @@ procedure TFPrincipal.AEnviarMailExecute(Sender: TObject);
 begin
   Application.CreateForm(TFMailEnviar, FMailEnviar);
   FMailEnviar.ShowModal;
-end;
-
-procedure TFPrincipal.AABM_ProdStockPosicExecute(Sender: TObject);
-begin
- EKVentanas1.Abrir(Sender, TFABMProductoStockPosicion, FABMProductoStockPosicion);
 end;
 
 procedure TFPrincipal.AABM_ArticuloExecute(Sender: TObject);
