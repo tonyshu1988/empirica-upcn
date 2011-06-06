@@ -1,6 +1,6 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 465
-  Top = 300
+  Left = 265
+  Top = 148
   Width = 870
   Height = 546
   Caption = 'ABM Producto Stock'
@@ -214,7 +214,32 @@ object FABM_ProductoStock: TFABM_ProductoStock
             FieldName = 'SUCURSAL'
             Title.Alignment = taCenter
             Title.Caption = 'Sucursal'
-            Width = 187
+            Width = 138
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SECCION'
+            Title.Caption = 'Secci'#243'n'
+            Width = 108
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SECTOR'
+            Title.Caption = 'Sector'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FILA'
+            Title.Caption = 'Fila'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLUMNA'
+            Title.Caption = 'Columna'
             Visible = True
           end
           item
@@ -913,7 +938,16 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
-      '       su.nombre as sucursal'
+      
+        '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
+        'umna,'
+      '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
+      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      
+        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
+        'al'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
@@ -925,13 +959,17 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
         'articulo)'
-      'left join sucursal su on (sp.id_sucursal = su.id_sucursal)')
+      
+        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
+        'id_posicion_sucursal)'
+      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      ''
+      '')
     Params = <>
     Left = 152
     Top = 80
     object ZQ_StockID_STOCK_PRODUCTO: TIntegerField
       FieldName = 'ID_STOCK_PRODUCTO'
-      Required = True
     end
     object ZQ_StockSTOCK_ACTUAL: TFloatField
       FieldName = 'STOCK_ACTUAL'
@@ -986,6 +1024,27 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object ZQ_StockSUCURSAL: TStringField
       FieldName = 'SUCURSAL'
       Size = 200
+    end
+    object ZQ_StockSECCION: TStringField
+      FieldName = 'SECCION'
+      Size = 50
+    end
+    object ZQ_StockSECTOR: TStringField
+      FieldName = 'SECTOR'
+      Size = 10
+    end
+    object ZQ_StockFILA: TStringField
+      FieldName = 'FILA'
+      Size = 10
+    end
+    object ZQ_StockCOLUMNA: TStringField
+      FieldName = 'COLUMNA'
+      Size = 10
+    end
+    object ZQ_StockPOSICSUCURSAL: TStringField
+      FieldName = 'POSICSUCURSAL'
+      ReadOnly = True
+      Size = 334
     end
   end
   object ZU_Stock: TZUpdateSQL
@@ -1069,6 +1128,38 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Titulo = 'Sucursal'
         Campo = 'nombre'
         Tabla = 'sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Secci'#243'n'
+        Campo = 'Seccion'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sector'
+        Campo = 'sector'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fila'
+        Campo = 'Fila'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Columna'
+        Campo = 'columna'
+        Tabla = 'posicion_sucursal'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         ItemIndex = -1
@@ -1178,7 +1269,19 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
-      '       su.nombre as sucursal'
+      
+        '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
+        'umna,'
+      '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
+      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      
+        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
+        'al'
+      ''
+      ''
+      ''
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
@@ -1190,7 +1293,13 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
         'articulo)'
-      'left join sucursal su on (sp.id_sucursal = su.id_sucursal)')
+      
+        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
+        'id_posicion_sucursal)'
+      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      ''
+      ''
+      '')
     SQL_Select.Strings = (
       
         'select sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.s' +
@@ -1202,7 +1311,19 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
-      '       su.nombre as sucursal')
+      
+        '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
+        'umna,'
+      '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
+      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      
+        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
+        'al'
+      ''
+      ''
+      '')
     SQL_From.Strings = (
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
@@ -1215,7 +1336,13 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
         'articulo)'
-      'left join sucursal su on (sp.id_sucursal = su.id_sucursal)')
+      
+        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
+        'id_posicion_sucursal)'
+      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      ''
+      ''
+      '')
     UsarWhereOriginal = EK_Con_Where
     Left = 56
     Top = 192
@@ -1271,13 +1398,20 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object EKListado_Sucursal: TEKListadoSQL
     Modelo = DM.EKModelo
     SQL.Strings = (
-      
-        'select s.id_sucursal, '#39'Sucursal: '#39'||s.nombre||'#39' - '#39'|| coalesce (' +
-        #39'Direcci'#243'n: '#39' || s.direccion, '#39'Direcci'#243'n: S/D'#39') as Busqueda'
-      'from sucursal s'
-      'where s.id_sucursal <> 0')
+      'SELECT ps.id_posicion_sucursal, '#39'Sucursal: '#39'||s.nombre||'#39' '#39'||'
+      'COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS Busqueda'
+      'FROM posicion_sucursal ps'
+      'LEFT JOIN sucursal s ON (s.id_sucursal=ps.id_sucursal)'
+      'WHERE s.id_sucursal <> 0'
+      ''
+      ''
+      ''
+      '')
     CampoBuscar = 'Busqueda'
-    CampoClave = 'id_sucursal'
+    CampoClave = 'id_posicion_sucursal'
     TituloVentana = 'Buscar Sucursal'
     Left = 288
     Top = 240

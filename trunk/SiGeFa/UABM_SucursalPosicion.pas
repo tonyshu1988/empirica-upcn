@@ -42,10 +42,6 @@ type
     DS_PosicionSucursal: TDataSource;
     ZQ_PosicionSucursalID_POSICION_SUCURSAL: TIntegerField;
     ZQ_PosicionSucursalID_SUCURSAL: TIntegerField;
-    ZQ_PosicionSucursalSECCION: TStringField;
-    ZQ_PosicionSucursalSECTOR: TStringField;
-    ZQ_PosicionSucursalFILA: TStringField;
-    ZQ_PosicionSucursalCOLUMNA: TStringField;
     ZQ_Sucursal: TZQuery;
     ZQ_PosicionSucursalsucursal: TStringField;
     ZQ_SucursalID_SUCURSAL: TIntegerField;
@@ -105,6 +101,10 @@ type
     QRDBText3: TQRDBText;
     QRDBText4: TQRDBText;
     QRDBText5: TQRDBText;
+    ZQ_PosicionSucursalSECCION: TStringField;
+    ZQ_PosicionSucursalSECTOR: TStringField;
+    ZQ_PosicionSucursalFILA: TStringField;
+    ZQ_PosicionSucursalCOLUMNA: TStringField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
