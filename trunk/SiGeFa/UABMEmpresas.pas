@@ -9,7 +9,7 @@ uses
   ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla, Menus,UBuscarPersona,
   ZStoredProcedure,ShellAPI, IdMessage, IdBaseComponent, IdComponent,
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, ActnList,
-  XPStyleActnCtrls, ActnMan;
+  XPStyleActnCtrls, ActnMan, EKListadoSQL;
 
 type
   TFABMEmpresas = class(TForm)
@@ -183,6 +183,28 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
+    TabMarcas: TTabSheet;
+    GrillaMarcas: TDBGrid;
+    PopupMenuMarcas: TPopupMenu;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    ZQ_EmpresaMarca: TZQuery;
+    ZQ_EmpresaMarcaID: TIntegerField;
+    ZQ_EmpresaMarcaID_EMPRESA: TIntegerField;
+    ZQ_EmpresaMarcaID_MARCA: TIntegerField;
+    ZQ_Marcas: TZQuery;
+    ZQ_MarcasID_MARCA: TIntegerField;
+    ZQ_MarcasNOMBRE_MARCA: TStringField;
+    ZQ_MarcasBAJA: TStringField;
+    ZQ_MarcasCODIGO_MARCA: TIntegerField;
+    ZQ_EmpresaMarca_marca: TStringField;
+    ZQ_EmpresaMarca_codMarca: TStringField;
+    DS_EmpresaMarca: TDataSource;
+    DBMemo1: TDBMemo;
+    Panel3: TPanel;
+    Label14: TLabel;
+    ZQ_EmpresaMarcaDESCRIPCION: TStringField;
+    EKListadoMarca: TEKListadoSQL;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -214,6 +236,7 @@ type
     procedure AReactivarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
@@ -252,7 +275,8 @@ end;
 
 procedure TFABMEmpresas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,[ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,
+                                      [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante,ZQ_EmpresaMarca]) then
   begin
     GrupoVisualizando.Enabled:=false;
     GrupoEditando.Enabled:=true;
@@ -264,7 +288,10 @@ begin
     ZQ_EmpresaID_EMPRESA.AsInteger := ZPID_EmpresaID.AsInteger;    
     DBGridViajantes.PopupMenu := PopupMenuViajantes;
     DBGridContactos.PopupMenu := PopupMenuContactos;
+    GrillaMarcas.PopupMenu := PopupMenuMarcas;
     PanelEdicion.Enabled := true;
+    PageControlEdicion.ActivePageIndex:=0;
+    dbNombre.SetFocus;
   end;
 end;
 
@@ -274,7 +301,8 @@ begin
   if (ZQ_Empresa.IsEmpty) or (ZQ_EmpresaBAJA.AsString = 'S') then
    exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,[ZQ_Empresa, ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,
+                                      [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante,ZQ_EmpresaMarca]) then
   begin
     DBGridEmpresas.Enabled:=false;
     ZQ_Empresa.Edit;
@@ -282,6 +310,7 @@ begin
     GrupoEditando.Enabled:=true;
     DBGridViajantes.PopupMenu := PopupMenuViajantes;
     DBGridContactos.PopupMenu := PopupMenuContactos;
+    GrillaMarcas.PopupMenu := PopupMenuMarcas;
     PanelEdicion.Enabled := true;
   end;
 end;
@@ -305,6 +334,7 @@ begin
       DBGridEmpresas.SetFocus;
       DBGridViajantes.PopupMenu := nil;
       DBGridContactos.PopupMenu := nil;
+      GrillaMarcas.PopupMenu := nil;
       PanelEdicion.Enabled := false;
     end;
   end;
@@ -333,6 +363,7 @@ begin
   DBGridEmpresas.SetFocus;
   DBGridViajantes.PopupMenu := nil;
   DBGridContactos.PopupMenu := nil;
+  GrillaMarcas.PopupMenu := nil;
   PanelEdicion.Enabled := false;
 end;
 
@@ -424,7 +455,8 @@ end;
 procedure TFABMEmpresas.FormCreate(Sender: TObject);
 begin
   StaticTxtBaja.Color:= FPrincipal.baja;
-
+  dm.EKModelo.abrir(ZQ_Marcas);
+  dm.EKModelo.abrir(ZQ_Personas);
   EKBusquedaAvanzadaEmpresas.Abrir;
   PageControlEdicion.TabIndex:=0;
 end;
@@ -478,6 +510,10 @@ begin
   ZQ_PersonaRelacionViajante.Close;
   ZQ_PersonaRelacionViajante.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
   ZQ_PersonaRelacionViajante.Open;
+
+  ZQ_EmpresaMarca.Close;
+  ZQ_EmpresaMarca.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
+  ZQ_EmpresaMarca.Open;
 end;
 
 
@@ -711,5 +747,25 @@ end;
 //----------------------------------
 //  FIN TECLAS RAPIDAS
 //----------------------------------
+
+procedure TFABMEmpresas.MenuItem1Click(Sender: TObject);
+begin
+  if EKListadoMarca.Buscar then
+  begin
+    ZQ_EmpresaMarca.Filter:= 'id_marca = '+ZQ_MarcasID_MARCA.AsString;
+    ZQ_EmpresaMarca.Filtered := true;
+    if not ZQ_EmpresaMarca.IsEmpty then
+    begin
+      ZQ_EmpresaMarca.Filtered := false;
+      Application.MessageBox('Esta Marca ya fue cargada','Carga Marca',MB_OK+MB_ICONINFORMATION);
+      exit;
+    end;
+
+    ZQ_EmpresaMarca.Filtered := false;
+    ZQ_EmpresaMarca.Append;
+    ZQ_EmpresaMarcaID_MARCA.AsInteger := ZQ_MarcasID_MARCA.AsInteger;
+    ZQ_EmpresaMarcaID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
+  end;
+end;
 
 end.

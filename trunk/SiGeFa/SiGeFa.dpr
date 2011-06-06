@@ -26,7 +26,6 @@ uses
   UMailEnviar in 'UMailEnviar.pas' {FMailEnviar},
   USeleccionarSucursal in 'USeleccionarSucursal.pas' {FSeleccionarSucursal},
   UPanelNotificacion in 'UPanelNotificacion.pas' {FPanelNotificacion},
-  UABMPorductoStockPosicion in 'UABMPorductoStockPosicion.pas' {FABMProductoStockPosicion},
   UABM_Colores in 'UABM_Colores.pas' {FABM_Colores};
 
 {$R *.res}

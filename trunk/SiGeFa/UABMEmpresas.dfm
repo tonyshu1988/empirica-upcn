@@ -1,6 +1,6 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 370
-  Top = 291
+  Left = 240
+  Top = 120
   Width = 895
   Height = 559
   Caption = 'FABMEmpresas'
@@ -53,7 +53,7 @@ object FABMEmpresas: TFABMEmpresas
           DataField = 'DESCRIPCION'
           DataSource = DS_Empresa
           PopupMenu = PopupMenuSkypeMail
-          TabOrder = 0
+          TabOrder = 1
         end
         object PanelEdicion: TPanel
           Left = 0
@@ -63,7 +63,7 @@ object FABMEmpresas: TFABMEmpresas
           BevelOuter = bvNone
           Caption = 'PanelEdicion'
           Enabled = False
-          TabOrder = 1
+          TabOrder = 0
           object Label5: TLabel
             Left = 5
             Top = 12
@@ -171,7 +171,7 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 2
           end
           object DBCBoxProvincia: TDBLookupComboBox
             Left = 110
@@ -189,7 +189,7 @@ object FABMEmpresas: TFABMEmpresas
             ListField = 'NOMBRE_PROVINCIA'
             ListSource = DS_Provincia
             ParentFont = False
-            TabOrder = 3
+            TabOrder = 6
           end
           object DBEditCuitCuil: TDBEdit
             Left = 640
@@ -205,7 +205,7 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 6
+            TabOrder = 1
           end
           object DBCBoxTipoIva: TDBLookupComboBox
             Left = 640
@@ -223,7 +223,7 @@ object FABMEmpresas: TFABMEmpresas
             ListField = 'NOMBRE_TIPO_IVA'
             ListSource = DS_TipoIVA
             ParentFont = False
-            TabOrder = 8
+            TabOrder = 5
           end
           object DBCBoxTipoEmpresa: TDBLookupComboBox
             Left = 640
@@ -241,7 +241,7 @@ object FABMEmpresas: TFABMEmpresas
             ListField = 'DESCRIPCION'
             ListSource = DS_TipoEmpresa
             ParentFont = False
-            TabOrder = 7
+            TabOrder = 3
           end
           object DBEditDireccion: TDBEdit
             Left = 110
@@ -257,7 +257,7 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 4
           end
           object DBEditLocalidad: TDBEdit
             Left = 395
@@ -273,7 +273,7 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 7
           end
           object DBEditCodPostal: TDBEdit
             Left = 762
@@ -289,7 +289,7 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 5
+            TabOrder = 8
           end
           object DBEditEmail: TDBEdit
             Left = 110
@@ -529,6 +529,78 @@ object FABMEmpresas: TFABMEmpresas
           ShowHint = False
           TabOrder = 2
           object Label13: TLabel
+            Left = 3
+            Top = 3
+            Width = 106
+            Height = 13
+            Caption = 'Datos Adicionales:'
+          end
+        end
+      end
+      object TabMarcas: TTabSheet
+        Caption = 'Marcas'
+        ImageIndex = 4
+        object GrillaMarcas: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 869
+          Height = 133
+          Hint = 'Presione sobre el titulo de la columna para modificar el orden'
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_EmpresaMarca
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = '_codMarca'
+              Title.Caption = 'C'#243'digo'
+              Width = 101
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = '_marca'
+              Title.Caption = 'Nombre'
+              Visible = True
+            end>
+        end
+        object DBMemo1: TDBMemo
+          Left = 0
+          Top = 152
+          Width = 869
+          Height = 100
+          Align = alBottom
+          Color = clWhite
+          DataField = 'DESCRIPCION'
+          DataSource = DS_EmpresaMarca
+          PopupMenu = PopupMenuSkypeMail
+          TabOrder = 1
+        end
+        object Panel3: TPanel
+          Left = 0
+          Top = 133
+          Width = 869
+          Height = 19
+          Align = alBottom
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 2
+          object Label14: TLabel
             Left = 3
             Top = 3
             Width = 106
@@ -1639,8 +1711,8 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_Empresa: TDataSource
     DataSet = ZQ_Empresa
-    Left = 256
-    Top = 176
+    Left = 192
+    Top = 256
   end
   object ZQ_Provincia: TZQuery
     Connection = DM.Conexion
@@ -1937,8 +2009,8 @@ object FABMEmpresas: TFABMEmpresas
       'select *'
       'from Persona')
     Params = <>
-    Left = 525
-    Top = 378
+    Left = 253
+    Top = 282
     object ZQ_PersonasID_PERSONA: TIntegerField
       FieldName = 'ID_PERSONA'
       Required = True
@@ -2213,5 +2285,116 @@ object FABMEmpresas: TFABMEmpresas
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
+  end
+  object PopupMenuMarcas: TPopupMenu
+    MenuAnimation = [maLeftToRight]
+    Left = 341
+    Top = 266
+    object MenuItem1: TMenuItem
+      Caption = 'Agregar Marca'
+      OnClick = MenuItem1Click
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Quitar Marca'
+    end
+  end
+  object ZQ_EmpresaMarca: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from empresa_marca'
+      'where id_empresa=:id_empresa')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_empresa'
+        ParamType = ptUnknown
+      end>
+    Left = 613
+    Top = 282
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_empresa'
+        ParamType = ptUnknown
+      end>
+    object ZQ_EmpresaMarcaID: TIntegerField
+      FieldName = 'ID'
+    end
+    object ZQ_EmpresaMarcaID_EMPRESA: TIntegerField
+      FieldName = 'ID_EMPRESA'
+    end
+    object ZQ_EmpresaMarcaID_MARCA: TIntegerField
+      FieldName = 'ID_MARCA'
+    end
+    object ZQ_EmpresaMarca_marca: TStringField
+      FieldKind = fkLookup
+      FieldName = '_marca'
+      LookupDataSet = ZQ_Marcas
+      LookupKeyFields = 'ID_MARCA'
+      LookupResultField = 'NOMBRE_MARCA'
+      KeyFields = 'ID_MARCA'
+      Size = 50
+      Lookup = True
+    end
+    object ZQ_EmpresaMarca_codMarca: TStringField
+      FieldKind = fkLookup
+      FieldName = '_codMarca'
+      LookupDataSet = ZQ_Marcas
+      LookupKeyFields = 'ID_MARCA'
+      LookupResultField = 'CODIGO_MARCA'
+      KeyFields = 'ID_MARCA'
+      Size = 10
+      Lookup = True
+    end
+    object ZQ_EmpresaMarcaDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+  end
+  object ZQ_Marcas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from Marca')
+    Params = <>
+    Left = 125
+    Top = 274
+    object ZQ_MarcasID_MARCA: TIntegerField
+      FieldName = 'ID_MARCA'
+      Required = True
+    end
+    object ZQ_MarcasNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_MarcasBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_MarcasCODIGO_MARCA: TIntegerField
+      FieldName = 'CODIGO_MARCA'
+    end
+  end
+  object DS_EmpresaMarca: TDataSource
+    DataSet = ZQ_EmpresaMarca
+    Left = 448
+    Top = 240
+  end
+  object EKListadoMarca: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      
+        'select m.id_marca, lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_m' +
+        'arca as busqueda'
+      'from marca m'
+      'where m.baja = '#39'N'#39
+      'order by m.codigo_marca, m.nombre_marca')
+    CampoBuscar = 'busqueda'
+    CampoClave = 'ID_MARCA'
+    BuscarEnQuery = ZQ_Marcas
+    TituloVentana = 'Buscar Marca'
+    Left = 565
+    Top = 232
   end
 end
