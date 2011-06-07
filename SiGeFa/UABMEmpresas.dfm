@@ -30,9 +30,14 @@ object FABMEmpresas: TFABMEmpresas
       Top = 187
       Width = 877
       Height = 281
-      ActivePage = TabDescripcion
+      ActivePage = TabEmpresa
       Align = alBottom
-      Images = FPrincipal.Iconos_Menu_16
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 0
       object TabEmpresa: TTabSheet
         Caption = 'Empresa'
@@ -52,6 +57,12 @@ object FABMEmpresas: TFABMEmpresas
           Hint = 'Seleccione un Telefono/Mail y haga click derecho'
           DataField = 'DESCRIPCION'
           DataSource = DS_Empresa
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
           PopupMenu = PopupMenuSkypeMail
           TabOrder = 1
         end
@@ -330,7 +341,7 @@ object FABMEmpresas: TFABMEmpresas
           Left = 0
           Top = 0
           Width = 869
-          Height = 133
+          Height = 134
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
           Color = 14606012
@@ -402,7 +413,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object Panel1: TPanel
           Left = 0
-          Top = 133
+          Top = 134
           Width = 869
           Height = 19
           Align = alBottom
@@ -419,13 +430,19 @@ object FABMEmpresas: TFABMEmpresas
         end
         object DBMemoContactos: TDBMemo
           Left = 0
-          Top = 152
+          Top = 153
           Width = 869
           Height = 100
           Align = alBottom
           Color = clWhite
           DataField = 'descripcion'
           DataSource = DS_PersonaRelacionContacto
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
           PopupMenu = PopupMenuSkypeMail
           TabOrder = 2
         end
@@ -437,7 +454,7 @@ object FABMEmpresas: TFABMEmpresas
           Left = 0
           Top = 0
           Width = 869
-          Height = 133
+          Height = 134
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
           Color = 14606012
@@ -509,7 +526,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object DBMemoViajantes: TDBMemo
           Left = 0
-          Top = 152
+          Top = 153
           Width = 869
           Height = 100
           Align = alBottom
@@ -521,7 +538,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object Panel2: TPanel
           Left = 0
-          Top = 133
+          Top = 134
           Width = 869
           Height = 19
           Align = alBottom
@@ -544,7 +561,7 @@ object FABMEmpresas: TFABMEmpresas
           Left = 0
           Top = 0
           Width = 869
-          Height = 133
+          Height = 134
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
           Color = 14606012
@@ -581,19 +598,25 @@ object FABMEmpresas: TFABMEmpresas
         end
         object DBMemo1: TDBMemo
           Left = 0
-          Top = 152
+          Top = 153
           Width = 869
           Height = 100
           Align = alBottom
           Color = clWhite
           DataField = 'DESCRIPCION'
           DataSource = DS_EmpresaMarca
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
           PopupMenu = PopupMenuSkypeMail
           TabOrder = 1
         end
         object Panel3: TPanel
           Left = 0
-          Top = 133
+          Top = 134
           Width = 869
           Height = 19
           Align = alBottom
@@ -617,10 +640,16 @@ object FABMEmpresas: TFABMEmpresas
           Left = 0
           Top = 0
           Width = 849
-          Height = 232
+          Height = 233
           Align = alClient
           DataField = 'DESCRIPCION_PRIVADA'
           DataSource = DS_Empresa
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
           PopupMenu = PopupMenuSkypeMail
           TabOrder = 0
         end
