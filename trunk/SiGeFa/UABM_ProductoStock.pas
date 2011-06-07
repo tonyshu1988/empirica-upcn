@@ -14,7 +14,7 @@ type
   TFABM_ProductoStock = class(TForm)
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btnVerDetalle: TdxBarLargeButton;
+    btVolver: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnProcesar: TdxBarLargeButton;
@@ -123,6 +123,7 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure AAsociarExecute(Sender: TObject);
     procedure AProcesarExecute(Sender: TObject);
+    procedure btVolverClick(Sender: TObject);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -179,7 +180,7 @@ begin
     begin
       GrupoEditando.Enabled:= true;
       GrupoGuardarCancelar.Enabled:= false;
-
+      ZQ_Stock.Refresh;
       DBGridStock.ReadOnly := true;
     end
   except
@@ -355,7 +356,7 @@ begin
 
   GrupoEditando.Enabled:= true;
   btnProcesar.Enabled:= false;
-
+  btVolver.Enabled:=false;
   PanelAsociar.Visible:= false;
   PanelCarga.Visible:= true;
 end;
@@ -365,7 +366,7 @@ procedure TFABM_ProductoStock.btnAsociarClick(Sender: TObject);
 begin
   GrupoEditando.Enabled:= false;
   btnProcesar.Enabled:= true;
-
+  btVolver.Enabled:=True;
   PanelAsociar.Visible:= true;
   PanelCarga.Visible:= false;
 end;
@@ -419,5 +420,19 @@ end;
 //  FIN TECLAS RAPIDAS
 //----------------------------------
 
+
+procedure TFABM_ProductoStock.btVolverClick(Sender: TObject);
+begin
+if dm.EKModelo.verificar_transaccion(transaccion_Asociar) then
+ dm.EKModelo.cancelar_transaccion(transaccion_Asociar);
+ if not CD_Sucursal.IsEmpty then CD_Sucursal.EmptyDataSet;
+ if not CD_Producto.IsEmpty then CD_Producto.EmptyDataSet;
+
+  GrupoEditando.Enabled:= true;
+  btnProcesar.Enabled:= false;
+    btVolver.Enabled:=false;
+  PanelAsociar.Visible:= false;
+  PanelCarga.Visible:= true;
+end;
 
 end.
