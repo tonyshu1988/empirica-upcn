@@ -9,7 +9,7 @@ uses
   ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla, Menus,UBuscarPersona,
   ZStoredProcedure,ShellAPI, IdMessage, IdBaseComponent, IdComponent,
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, ActnList,
-  XPStyleActnCtrls, ActnMan, EKListadoSQL;
+  XPStyleActnCtrls, ActnMan, EKListadoSQL, DBClient, Provider;
 
 type
   TFABMEmpresas = class(TForm)
@@ -205,6 +205,7 @@ type
     Label14: TLabel;
     ZQ_EmpresaMarcaDESCRIPCION: TStringField;
     EKListadoMarca: TEKListadoSQL;
+    DataSetProvider1: TDataSetProvider;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -237,6 +238,7 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
@@ -323,6 +325,7 @@ begin
   Perform(WM_NEXTDLGCTL, 0, 0);
   if validarcampos() then
   begin
+
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMEmpresas) then
     begin
       DBGridEmpresas.Enabled:=true;
@@ -754,6 +757,7 @@ begin
   begin
     ZQ_EmpresaMarca.Filter:= 'id_marca = '+ZQ_MarcasID_MARCA.AsString;
     ZQ_EmpresaMarca.Filtered := true;
+
     if not ZQ_EmpresaMarca.IsEmpty then
     begin
       ZQ_EmpresaMarca.Filtered := false;
@@ -765,7 +769,15 @@ begin
     ZQ_EmpresaMarca.Append;
     ZQ_EmpresaMarcaID_MARCA.AsInteger := ZQ_MarcasID_MARCA.AsInteger;
     ZQ_EmpresaMarcaID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
+    ZQ_EmpresaMarca.Post;
   end;
+end;
+
+procedure TFABMEmpresas.MenuItem2Click(Sender: TObject);
+begin
+if not ZQ_EmpresaMarca.IsEmpty then
+ ZQ_EmpresaMarca.Delete;
+
 end;
 
 end.

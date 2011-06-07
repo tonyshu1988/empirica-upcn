@@ -30,7 +30,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 187
       Width = 877
       Height = 281
-      ActivePage = TabEmpresa
+      ActivePage = TabDescripcion
       Align = alBottom
       Images = FPrincipal.Iconos_Menu_16
       TabOrder = 0
@@ -145,14 +145,14 @@ object FABMEmpresas: TFABMEmpresas
             Left = 110
             Top = 8
             Width = 433
-            Height = 21
+            Height = 22
             CharCase = ecUpperCase
             DataField = 'NOMBRE'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
-            Font.Name = 'MS Sans Serif'
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 0
@@ -161,14 +161,14 @@ object FABMEmpresas: TFABMEmpresas
             Left = 110
             Top = 36
             Width = 433
-            Height = 21
+            Height = 22
             CharCase = ecUpperCase
             DataField = 'TELEFONO'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
-            Font.Name = 'MS Sans Serif'
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 2
@@ -177,13 +177,13 @@ object FABMEmpresas: TFABMEmpresas
             Left = 110
             Top = 92
             Width = 215
-            Height = 21
+            Height = 22
             DataField = 'ID_PROVINCIA'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
+            Font.Height = -12
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             KeyField = 'ID_PROVINCIA'
             ListField = 'NOMBRE_PROVINCIA'
@@ -195,14 +195,14 @@ object FABMEmpresas: TFABMEmpresas
             Left = 640
             Top = 8
             Width = 212
-            Height = 21
+            Height = 22
             CharCase = ecUpperCase
             DataField = 'CUIT_CUIL'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
-            Font.Name = 'MS Sans Serif'
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 1
@@ -211,13 +211,13 @@ object FABMEmpresas: TFABMEmpresas
             Left = 640
             Top = 64
             Width = 215
-            Height = 21
+            Height = 22
             DataField = 'ID_TIPO_IVA'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
+            Font.Height = -12
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             KeyField = 'ID_TIPO_IVA'
             ListField = 'NOMBRE_TIPO_IVA'
@@ -229,13 +229,13 @@ object FABMEmpresas: TFABMEmpresas
             Left = 640
             Top = 36
             Width = 215
-            Height = 21
+            Height = 22
             DataField = 'ID_TIPO_EMPRESA'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
+            Font.Height = -12
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             KeyField = 'ID_TIPO_EMPRESA'
             ListField = 'DESCRIPCION'
@@ -247,14 +247,14 @@ object FABMEmpresas: TFABMEmpresas
             Left = 110
             Top = 64
             Width = 432
-            Height = 21
+            Height = 22
             CharCase = ecUpperCase
             DataField = 'DIRECCION'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
-            Font.Name = 'MS Sans Serif'
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 4
@@ -263,14 +263,14 @@ object FABMEmpresas: TFABMEmpresas
             Left = 395
             Top = 92
             Width = 288
-            Height = 21
+            Height = 22
             CharCase = ecUpperCase
             DataField = 'LOCALIDAD'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
-            Font.Name = 'MS Sans Serif'
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 7
@@ -279,14 +279,14 @@ object FABMEmpresas: TFABMEmpresas
             Left = 762
             Top = 92
             Width = 95
-            Height = 21
+            Height = 22
             CharCase = ecUpperCase
             DataField = 'CODIGO_POSTAL'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
-            Font.Name = 'MS Sans Serif'
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 8
@@ -295,13 +295,13 @@ object FABMEmpresas: TFABMEmpresas
             Left = 110
             Top = 120
             Width = 301
-            Height = 21
+            Height = 22
             DataField = 'EMAIL'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
-            Font.Name = 'MS Sans Serif'
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 9
@@ -310,13 +310,13 @@ object FABMEmpresas: TFABMEmpresas
             Left = 472
             Top = 120
             Width = 385
-            Height = 21
+            Height = 22
             DataField = 'PAGINA_WEB'
             DataSource = DS_Empresa
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
-            Font.Name = 'MS Sans Serif'
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 10
@@ -645,10 +645,10 @@ object FABMEmpresas: TFABMEmpresas
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
-      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Name = 'Verdana'
       TitleFont.Style = []
       OnDrawColumnCell = DBGridEmpresasDrawColumnCell
       Columns = <
@@ -2296,6 +2296,7 @@ object FABMEmpresas: TFABMEmpresas
     end
     object MenuItem2: TMenuItem
       Caption = 'Quitar Marca'
+      OnClick = MenuItem2Click
     end
   end
   object ZQ_EmpresaMarca: TZQuery
@@ -2354,6 +2355,7 @@ object FABMEmpresas: TFABMEmpresas
   end
   object ZQ_Marcas: TZQuery
     Connection = DM.Conexion
+    Active = True
     SQL.Strings = (
       'select *'
       'from Marca')
@@ -2396,5 +2398,10 @@ object FABMEmpresas: TFABMEmpresas
     TituloVentana = 'Buscar Marca'
     Left = 565
     Top = 232
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = ZQ_EmpresaMarca
+    Left = 757
+    Top = 284
   end
 end
