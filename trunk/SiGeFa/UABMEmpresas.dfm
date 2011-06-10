@@ -21,16 +21,16 @@ object FABMEmpresas: TFABMEmpresas
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 879
-    Height = 469
+    Width = 887
+    Height = 475
     Align = alClient
     TabOrder = 0
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 187
-      Width = 877
+      Top = 193
+      Width = 885
       Height = 281
-      ActivePage = TabEmpresa
+      ActivePage = TabViajantes
       Align = alBottom
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -41,7 +41,6 @@ object FABMEmpresas: TFABMEmpresas
       TabOrder = 0
       object TabEmpresa: TTabSheet
         Caption = 'Empresa'
-        ImageIndex = 35
         object Label10: TLabel
           Left = 33
           Top = 147
@@ -449,12 +448,12 @@ object FABMEmpresas: TFABMEmpresas
       end
       object TabViajantes: TTabSheet
         Caption = 'Viajantes'
-        ImageIndex = 20
+        ImageIndex = 9
         object DBGridViajantes: TDBGrid
           Left = 0
           Top = 0
-          Width = 869
-          Height = 134
+          Width = 877
+          Height = 133
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
           Color = 14606012
@@ -526,8 +525,8 @@ object FABMEmpresas: TFABMEmpresas
         end
         object DBMemoViajantes: TDBMemo
           Left = 0
-          Top = 153
-          Width = 869
+          Top = 152
+          Width = 877
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -538,8 +537,8 @@ object FABMEmpresas: TFABMEmpresas
         end
         object Panel2: TPanel
           Left = 0
-          Top = 134
-          Width = 869
+          Top = 133
+          Width = 877
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -658,8 +657,8 @@ object FABMEmpresas: TFABMEmpresas
     object DBGridEmpresas: TDBGrid
       Left = 1
       Top = 20
-      Width = 877
-      Height = 167
+      Width = 885
+      Height = 173
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -773,7 +772,7 @@ object FABMEmpresas: TFABMEmpresas
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 877
+      Width = 885
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -794,7 +793,7 @@ object FABMEmpresas: TFABMEmpresas
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 767
+        Left = 775
         Top = 1
         Width = 109
         Height = 17
@@ -812,7 +811,7 @@ object FABMEmpresas: TFABMEmpresas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1911,17 +1910,20 @@ object FABMEmpresas: TFABMEmpresas
     Top = 72
   end
   object PopupMenuContactos: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
     Left = 277
     Top = 378
     object AgregarContacto1: TMenuItem
       Caption = 'Agregar Contacto'
       Hint = 'Agregar un contacto al listado de contactos'
+      ImageIndex = 14
       OnClick = AgregarContacto1Click
     end
     object QuitarContacto1: TMenuItem
       Caption = 'Quitar Contacto'
       Hint = 'Quita un contacto del listado'
+      ImageIndex = 15
       OnClick = QuitarContacto1Click
     end
   end
@@ -2118,14 +2120,17 @@ object FABMEmpresas: TFABMEmpresas
     Top = 426
   end
   object PopupMenuViajantes: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
     Left = 757
     Top = 378
     object AgregarViajante1: TMenuItem
       Caption = 'Agregar Viajante'
+      ImageIndex = 14
       OnClick = AgregarViajante1Click
     end
     object QuitarViajante1: TMenuItem
       Caption = 'Quitar Viajante'
+      ImageIndex = 15
       OnClick = QuitarViajante1Click
     end
   end
@@ -2316,15 +2321,18 @@ object FABMEmpresas: TFABMEmpresas
     end
   end
   object PopupMenuMarcas: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
     Left = 341
     Top = 266
     object MenuItem1: TMenuItem
       Caption = 'Agregar Marca'
+      ImageIndex = 14
       OnClick = MenuItem1Click
     end
     object MenuItem2: TMenuItem
       Caption = 'Quitar Marca'
+      ImageIndex = 15
       OnClick = MenuItem2Click
     end
   end
@@ -2384,7 +2392,6 @@ object FABMEmpresas: TFABMEmpresas
   end
   object ZQ_Marcas: TZQuery
     Connection = DM.Conexion
-    Active = True
     SQL.Strings = (
       'select *'
       'from Marca')
