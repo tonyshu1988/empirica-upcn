@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 191
-  Top = 140
+  Left = 300
+  Top = 209
   Width = 871
   Height = 563
   Caption = 'SiGeFa - Sistema de Gesti'#243'n y Facturaci'#243'n'
@@ -4846,6 +4846,22 @@ object FPrincipal: TFPrincipal
       ImageIndex = 25
       OnExecute = AEnviarMailExecute
     end
+    object AABM_TipoIva: TAction
+      Caption = 'ABM Tipo Iva'
+      OnExecute = AABM_TipoIvaExecute
+    end
+    object AABM_TipoComprobante: TAction
+      Caption = 'ABM Tipo Comprobante'
+      OnExecute = AABM_TipoComprobanteExecute
+    end
+    object AABM_TipoMedioPago: TAction
+      Caption = 'ABM Tipo Medio Pago'
+      OnExecute = AABM_TipoMedioPagoExecute
+    end
+    object AABM_Cuenta: TAction
+      Caption = 'ABM Cuenta'
+      OnExecute = AABM_CuentaExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -4950,6 +4966,25 @@ object FPrincipal: TFPrincipal
         Caption = '&Salir'
         ImageIndex = 8
         OnClick = SalirClick
+      end
+    end
+    object PantallasNuevas1: TMenuItem
+      Caption = 'Pantallas Nuevas'
+      object ABMTipoIva1: TMenuItem
+        Tag = 1
+        Action = AABM_TipoIva
+      end
+      object ABMTipoComprobante1: TMenuItem
+        Tag = 1
+        Action = AABM_TipoComprobante
+      end
+      object ABMTipo1: TMenuItem
+        Tag = 1
+        Action = AABM_TipoMedioPago
+      end
+      object ABMCuentas1: TMenuItem
+        Tag = 1
+        Action = AABM_Cuenta
       end
     end
   end
