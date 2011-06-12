@@ -26,7 +26,11 @@ uses
   UMailEnviar in 'UMailEnviar.pas' {FMailEnviar},
   USeleccionarSucursal in 'USeleccionarSucursal.pas' {FSeleccionarSucursal},
   UPanelNotificacion in 'UPanelNotificacion.pas' {FPanelNotificacion},
-  UABM_Colores in 'UABM_Colores.pas' {FABM_Colores};
+  UABM_Colores in 'UABM_Colores.pas' {FABM_Colores},
+  UABM_TipoIVA in 'UABM_TipoIVA.pas' {FABM_TipoIVA},
+  UABM_TipoFormaPago in 'UABM_TipoFormaPago.pas' {FABM_TipoFormaPago},
+  UABM_TipoComprobante in 'UABM_TipoComprobante.pas' {FABM_TipoComprobante},
+  UABM_Cuentas in 'UABM_Cuentas.pas' {FABM_Cuentas};
 
 {$R *.res}
 

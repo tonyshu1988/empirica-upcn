@@ -72,6 +72,15 @@ type
     N1: TMenuItem;
     N2: TMenuItem;
     N3: TMenuItem;
+    PantallasNuevas1: TMenuItem;
+    ABMTipoIva1: TMenuItem;
+    ABMTipoComprobante1: TMenuItem;
+    ABMTipo1: TMenuItem;
+    ABMCuentas1: TMenuItem;
+    AABM_TipoIva: TAction;
+    AABM_TipoComprobante: TAction;
+    AABM_TipoMedioPago: TAction;
+    AABM_Cuenta: TAction;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -95,6 +104,10 @@ type
     procedure AConfigMailExecute(Sender: TObject);
     procedure AEnviarMailExecute(Sender: TObject);
     procedure AABM_ArticuloExecute(Sender: TObject);
+    procedure AABM_TipoIvaExecute(Sender: TObject);
+    procedure AABM_TipoComprobanteExecute(Sender: TObject);
+    procedure AABM_TipoMedioPagoExecute(Sender: TObject);
+    procedure AABM_CuentaExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -117,7 +130,8 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_TipoEmpresa, UABM_Sucursal, UABM_SucursalPosicion,
   UABM_ProductoStock, UABM_Personas,
   UImprimirEtiquetas, UMailBandeja, USeleccionarSucursal, UMailConfigurar,
-  UMailEnviar, UABM_Colores;
+  UMailEnviar, UABM_Colores, UABM_TipoIVA, UABM_TipoFormaPago,
+  UABM_Cuentas, UABM_TipoComprobante;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -356,6 +370,26 @@ end;
 procedure TFPrincipal.AABM_ArticuloExecute(Sender: TObject);
 begin
     EKVentanas1.Abrir(Sender, TFABM_Articulo, FABM_Articulo);
+end;
+
+procedure TFPrincipal.AABM_TipoIvaExecute(Sender: TObject);
+begin
+    EKVentanas1.Abrir(Sender, TFABM_TipoIVA, FABM_TipoIVA);
+end;
+
+procedure TFPrincipal.AABM_TipoComprobanteExecute(Sender: TObject);
+begin
+    EKVentanas1.Abrir(Sender, TFABM_TipoComprobante, FABM_TipoComprobante);
+end;
+
+procedure TFPrincipal.AABM_TipoMedioPagoExecute(Sender: TObject);
+begin
+    EKVentanas1.Abrir(Sender, TFABM_TipoFormaPago, FABM_TipoFormaPago);
+end;
+
+procedure TFPrincipal.AABM_CuentaExecute(Sender: TObject);
+begin
+    EKVentanas1.Abrir(Sender, TFABM_Cuentas, FABM_Cuentas);
 end;
 
 end.
