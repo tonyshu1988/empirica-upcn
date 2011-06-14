@@ -145,7 +145,10 @@ begin
 
     ZQ_Marcas.Append;
     ZQ_MarcasBAJA.AsString:= 'N';
-    ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
+    if ZQ_UltimoNro.IsEmpty then
+      ZQ_MarcasCODIGO_MARCA.AsInteger:= 1
+    else
+      ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
 
     DBECodigo.SetFocus;
     GrupoEditando.Enabled := false;
@@ -169,7 +172,10 @@ begin
     begin
       ZQ_UltimoNro.Close;
       ZQ_UltimoNro.Open;
-      ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
+      if ZQ_UltimoNro.IsEmpty then
+        ZQ_MarcasCODIGO_MARCA.AsInteger:= 1
+      else
+        ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
     end;
 
     DBECodigo.SetFocus;

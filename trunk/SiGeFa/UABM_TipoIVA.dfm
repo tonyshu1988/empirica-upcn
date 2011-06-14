@@ -532,7 +532,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
         object QRExpr18: TQRExpr
           Left = 4
           Top = 4
-          Width = 234
+          Width = 212
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -543,7 +543,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            619.125000000000000000)
+            560.916666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -552,7 +552,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
           ResetAfterPrint = False
           Transparent = False
           WordWrap = True
-          Expression = #39'Cantidad de Tipos de Art'#237'culo: '#39'+COUNT'
+          Expression = #39'Cantidad de Tipos de IVA: '#39'+COUNT'
           ExportAs = exptText
           FontSize = 8
         end
