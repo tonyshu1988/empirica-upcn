@@ -7,13 +7,13 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  QRCtrls, QuickRpt, EKVistaPreviaQR;
+  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla;
 
 type
   TFABM_Cuentas = class(TForm)
     PanelFondo: TPanel;
     PanelGrilla: TPanel;
-    DBGridColor: TDBGrid;
+    DBGridCuentas: TDBGrid;
     PanelEdicion: TPanel;
     Label1: TLabel;
     DBENombre: TDBEdit;
@@ -34,20 +34,10 @@ type
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     Label2: TLabel;
-    ZQ_Colores: TZQuery;
-    DS_Colores: TDataSource;
-    ColorBox1: TColorBox;
+    ZQ_Cuentas: TZQuery;
+    DS_Cuentas: TDataSource;
     Label3: TLabel;
     DBECodigo: TDBEdit;
-    ZSP_ID_COLOR: TZStoredProc;
-    ZSP_ID_COLORID: TIntegerField;
-    ZQ_UltimoNro: TZQuery;
-    ZQ_UltimoNroCODIGO_COLOR: TIntegerField;
-    ZQ_ColoresID_COLOR: TIntegerField;
-    ZQ_ColoresCODIGO_COLOR: TIntegerField;
-    ZQ_ColoresNOMBRE: TStringField;
-    ZQ_ColoresREFERENCIA: TStringField;
-    ZQ_ColoresBAJA: TStringField;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -59,12 +49,12 @@ type
     ACancelar: TAction;
     EKBuscar: TEKBusquedaAvanzada;
     EKVistaPrevia: TEKVistaPreviaQR;
-    RepColor: TQuickRep;
+    RepCuentas: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
     QRLabel17: TQRLabel;
-    RepColor_Subtitulo: TQRLabel;
-    RepColor_Titulo: TQRLabel;
+    RepCuentas_Subtitulo: TQRLabel;
+    RepCuentas_Titulo: TQRLabel;
     QRBand10: TQRBand;
     QRDBText19: TQRDBText;
     QRDBText1: TQRDBText;
@@ -82,7 +72,28 @@ type
     QRLabel29: TQRLabel;
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
-    procedure ZQ_ColoresAfterScroll(DataSet: TDataSet);
+    Label4: TLabel;
+    DBENro_Cuenta: TDBEdit;
+    ZQ_MedioPago: TZQuery;
+    ZQ_Cuentas_medio: TStringField;
+    ZQ_MedioPagoID_TIPO_FORMAPAGO: TIntegerField;
+    ZQ_MedioPagoDESCRIPCION: TStringField;
+    ZQ_MedioPagoBAJA: TStringField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    QRDBText3: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRDBText4: TQRDBText;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DS_MedioPago: TDataSource;
+    ZQ_CuentasID_CUENTA: TIntegerField;
+    ZQ_CuentasCODIGO: TStringField;
+    ZQ_CuentasNOMBRE_CUENTA: TStringField;
+    ZQ_CuentasNRO_CTA_BANCARIA: TStringField;
+    ZQ_CuentasMEDIO_DEFECTO: TIntegerField;
+    ZQ_CuentasBAJA: TStringField;
+    ZQ_UltimoNro: TZQuery;
+    ZQ_UltimoNroCODIGO: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -93,7 +104,7 @@ type
     procedure btnReactivarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridColorDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridCuentasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     //------TECLAS RAPIDAS
     procedure ANuevoExecute(Sender: TObject);
     procedure AModificarExecute(Sender: TObject);
@@ -111,24 +122,14 @@ var
   FABM_Cuentas: TFABM_Cuentas;
 
 const
-  transaccion_ABM = 'ABM COLOR';
+  transaccion_ABM = 'ABM CUENTA';
 implementation
 
 uses UDM, UPrincipal, UUtilidades;
 
 {$R *.dfm}
 
-procedure TFABM_Cuentas.ZQ_ColoresAfterScroll(DataSet: TDataSet);
-begin
-  if not(ZQ_ColoresREFERENCIA.IsNull) then
-    ColorBox1.Selected:= StringToColor(ZQ_ColoresREFERENCIA.AsString);
-
-  dm.mostrarCantidadRegistro(ZQ_Colores, lblCantidadRegistros);
-end;
-
-
-procedure TFABM_Cuentas.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
+procedure TFABM_Cuentas.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
@@ -142,20 +143,23 @@ end;
 
 procedure TFABM_Cuentas.btnModificarClick(Sender: TObject);
 begin
-if ZQ_Colores.IsEmpty then
-    exit;
+  if ZQ_Cuentas.IsEmpty then
+      exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Colores]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
   begin
-    DBGridColor.Enabled := false;
+    DBGridCuentas.Enabled := false;
     PanelEdicion.Visible:= true;
 
-    ZQ_Colores.Edit;
-    if ZQ_ColoresCODIGO_COLOR.IsNull then
+    ZQ_Cuentas.Edit;
+    if ZQ_CuentasCODIGO.IsNull then
     begin
       ZQ_UltimoNro.Close;
       ZQ_UltimoNro.Open;
-      ZQ_ColoresCODIGO_COLOR.AsInteger:= ZQ_UltimoNroCODIGO_COLOR.AsInteger + 1;
+      if ZQ_UltimoNro.IsEmpty then
+        ZQ_CuentasCODIGO.AsInteger:= 1
+      else
+        ZQ_CuentasCODIGO.AsInteger:= ZQ_UltimoNroCODIGO.AsInteger + 1;
     end;
 
     DBENombre.SetFocus;
@@ -169,15 +173,15 @@ procedure TFABM_Cuentas.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Colores.IsEmpty) OR (ZQ_ColoresBAJA.AsString <> 'N') then
+  if (ZQ_Cuentas.IsEmpty) OR (ZQ_CuentasBAJA.AsString <> 'N') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea dar de baja el Color seleccionado?'), 'ABM Colores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea dar de baja la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Colores]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
     begin
-      ZQ_Colores.Edit;
-      ZQ_ColoresBAJA.AsString:='S';
+      ZQ_Cuentas.Edit;
+      ZQ_CuentasBAJA.AsString:='S';
     end
     else
       exit;
@@ -185,9 +189,9 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
 
-    recNo:= ZQ_Colores.RecNo;
-    ZQ_Colores.Refresh;
-    ZQ_Colores.RecNo:= recNo;
+    recNo:= ZQ_Cuentas.RecNo;
+    ZQ_Cuentas.Refresh;
+    ZQ_Cuentas.RecNo:= recNo;
   end;
 end;
 
@@ -207,24 +211,22 @@ begin
 
   if (trim(DBENombre.Text) = '') then
   begin
-    Application.MessageBox('El campo "Detalle" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El campo "Nombre" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
     DBENombre.SetFocus;
     exit;
   end;
 
-  ZQ_ColoresREFERENCIA.AsString:= ColorToString(ColorBox1.Selected);
-
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
-      DBGridColor.Enabled:= true;
-      DBGridColor.SetFocus;
+      DBGridCuentas.Enabled:= true;
+      DBGridCuentas.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
       PanelEdicion.Visible := false;
-      recNo:= ZQ_Colores.RecNo;
-      ZQ_Colores.Refresh;
-      ZQ_Colores.RecNo:= recNo;
+      recNo:= ZQ_Cuentas.RecNo;
+      ZQ_Cuentas.Refresh;
+      ZQ_Cuentas.RecNo:= recNo;
     end
   except
     begin
@@ -232,6 +234,8 @@ begin
       exit;
     end
   end;
+
+  dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);  
 end;
 
 
@@ -239,8 +243,8 @@ procedure TFABM_Cuentas.btnCancelarClick(Sender: TObject);
 begin
  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
-    DBGridColor.Enabled:=true;
-    DBGridColor.SetFocus;
+    DBGridCuentas.Enabled:=true;
+    DBGridCuentas.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
     PanelEdicion.Visible := false;
@@ -252,15 +256,15 @@ procedure TFABM_Cuentas.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Colores.IsEmpty) OR (ZQ_ColoresBAJA.AsString <> 'S') then
+  if (ZQ_Cuentas.IsEmpty) OR (ZQ_CuentasBAJA.AsString <> 'S') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea reactivar el Color seleccionado?'), 'ABM Colores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea reactivar la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Colores]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
     begin
-      ZQ_Colores.Edit;
-      ZQ_ColoresBAJA.AsString:='N';
+      ZQ_Cuentas.Edit;
+      ZQ_CuentasBAJA.AsString:='N';
     end
     else
       exit;
@@ -268,9 +272,9 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
 
-    recNo:= ZQ_Colores.RecNo;
-    ZQ_Colores.Refresh;
-    ZQ_Colores.RecNo:= recNo;
+    recNo:= ZQ_Cuentas.RecNo;
+    ZQ_Cuentas.Refresh;
+    ZQ_Cuentas.RecNo:= recNo;
   end;
 end;
 
@@ -283,21 +287,20 @@ end;
 
 procedure TFABM_Cuentas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Colores]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
   begin
-    DBGridColor.Enabled := false;
+    DBGridCuentas.Enabled := false;
     PanelEdicion.Visible:= true;
 
     ZQ_UltimoNro.Close;
     ZQ_UltimoNro.Open;
 
-    ZSP_ID_COLOR.Active:=false;
-    ZSP_ID_COLOR.Active:=True;
-
-    ZQ_Colores.Append;
-    ZQ_ColoresID_COLOR.AsInteger:=ZSP_ID_COLORID.AsInteger;
-    ZQ_ColoresBAJA.AsString:= 'N';
-    ZQ_ColoresCODIGO_COLOR.AsInteger:= ZQ_UltimoNroCODIGO_COLOR.AsInteger + 1;
+    ZQ_Cuentas.Append;
+    if ZQ_UltimoNro.IsEmpty then
+      ZQ_CuentasCODIGO.AsInteger:= 1
+    else
+      ZQ_CuentasCODIGO.AsInteger:= ZQ_UltimoNroCODIGO.AsInteger + 1;
+    ZQ_CuentasBAJA.AsString:= 'N';
 
     DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
@@ -308,23 +311,20 @@ end;
 
 procedure TFABM_Cuentas.FormCreate(Sender: TObject);
 begin
-  dm.EKModelo.abrir(ZQ_Colores);
+  dm.EKModelo.abrir(ZQ_Cuentas);
+  dm.EKModelo.abrir(ZQ_MedioPago);
+  dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
 end;
 
 
-procedure TFABM_Cuentas.DBGridColorDrawColumnCell(Sender: TObject;
+procedure TFABM_Cuentas.DBGridCuentasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_Colores.IsEmpty then
+  if ZQ_Cuentas.IsEmpty then
     exit;
 
-  if (column.FieldName = 'REFERENCIA') and not(ZQ_ColoresREFERENCIA.IsNull) then
-      begin
-        DBGridColor.Canvas.Brush.Color:= StringToColor(ZQ_ColoresREFERENCIA.AsString);
-      end;
-
-  FPrincipal.PintarFilasGrillasConBajas(DBGridColor, ZQ_ColoresBAJA.AsString, Rect, DataCol, Column, State);
+  FPrincipal.PintarFilasGrillasConBajas(DBGridCuentas, ZQ_CuentasBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
 
@@ -377,15 +377,12 @@ end;
 //----------------------------------
 
 
-
-
-
 procedure TFABM_Cuentas.btnImprimirClick(Sender: TObject);
 begin
-  if ZQ_Colores.IsEmpty then
+  if ZQ_Cuentas.IsEmpty then
     exit;
 
-  DM.VariablesReportes(RepColor);
+  DM.VariablesReportes(RepCuentas);
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;

@@ -1,6 +1,6 @@
 object FABM_TipoComprobante: TFABM_TipoComprobante
-  Left = 374
-  Top = 243
+  Left = 305
+  Top = 145
   Width = 870
   Height = 500
   Caption = 'ABM Tipo Comprobante'
@@ -27,7 +27,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object RepTipoArticulo: TQuickRep
+    object RepTipoCpb: TQuickRep
       Tag = 99
       Left = 54
       Top = 36
@@ -38,7 +38,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
       Frame.DrawBottom = False
       Frame.DrawLeft = False
       Frame.DrawRight = False
-      DataSet = ZQ_TipoArt
+      DataSet = ZQ_TipoComprobante
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -130,9 +130,9 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Stretch = True
         end
         object QRLabel17: TQRLabel
-          Left = 266
+          Left = 243
           Top = 47
-          Width = 186
+          Width = 232
           Height = 19
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -141,14 +141,14 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            703.791666666666700000
+            642.937500000000000000
             124.354166666666700000
-            492.125000000000000000)
+            613.833333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'TIPOS DE ARTICULO'
+          Caption = 'TIPOS DE COMPROBANTE'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -161,10 +161,10 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           ExportAs = exptText
           FontSize = 12
         end
-        object RepTipoArticulo_Subtitulo: TQRLabel
-          Left = 271
+        object RepTipoCpb_Subtitulo: TQRLabel
+          Left = 285
           Top = 26
-          Width = 175
+          Width = 148
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -173,14 +173,14 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            717.020833333333300000
+            754.062500000000000000
             68.791666666666670000
-            463.020833333333300000)
+            391.583333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepTipoArticulo_Subtitulo'
+          Caption = 'RepTipoCpb_Subtitulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -193,10 +193,10 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           ExportAs = exptText
           FontSize = 9
         end
-        object RepTipoArticulo_Titulo: TQRLabel
-          Left = 259
+        object RepTipoCpb_Titulo: TQRLabel
+          Left = 275
           Top = 2
-          Width = 200
+          Width = 168
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -205,14 +205,14 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            685.270833333333300000
+            727.604166666666700000
             5.291666666666667000
-            529.166666666666700000)
+            444.500000000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepTipoArticulo_Titulo'
+          Caption = 'RepTipoCpb_Titulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -257,7 +257,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
         object QRDBText19: TQRDBText
           Left = 5
           Top = 0
-          Width = 660
+          Width = 260
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -268,13 +268,13 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
             37.041666666666670000
             13.229166666666670000
             0.000000000000000000
-            1746.250000000000000000)
+            687.916666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_TipoArt
+          DataSet = ZQ_TipoComprobante
           DataField = 'DESCRIPCION'
           Transparent = False
           WordWrap = True
@@ -301,8 +301,116 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_TipoArt
+          DataSet = ZQ_TipoComprobante
           DataField = 'BAJA'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText1: TQRDBText
+          Left = 477
+          Top = 0
+          Width = 99
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1262.062500000000000000
+            0.000000000000000000
+            261.937500000000000000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_TipoComprobante
+          DataField = 'DESCRIPCION'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText3: TQRDBText
+          Left = 394
+          Top = 0
+          Width = 77
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1042.458333333333000000
+            0.000000000000000000
+            203.729166666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_TipoComprobante
+          DataField = 'DESCRIPCION'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText4: TQRDBText
+          Left = 271
+          Top = 0
+          Width = 119
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            717.020833333333300000
+            0.000000000000000000
+            314.854166666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_TipoComprobante
+          DataField = 'DESCRIPCION'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText5: TQRDBText
+          Left = 581
+          Top = 0
+          Width = 98
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1537.229166666667000000
+            0.000000000000000000
+            259.291666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_TipoComprobante
+          DataField = 'DESCRIPCION'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -451,7 +559,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
         object QRExpr18: TQRExpr
           Left = 4
           Top = 4
-          Width = 234
+          Width = 275
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -462,7 +570,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            619.125000000000000000)
+            727.604166666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -471,7 +579,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           ResetAfterPrint = False
           Transparent = False
           WordWrap = True
-          Expression = #39'Cantidad de Tipos de Art'#237'culo: '#39'+COUNT'
+          Expression = #39'Cantidad de Tipos de Comprobantes: '#39'+COUNT'
           ExportAs = exptText
           FontSize = 8
         end
@@ -604,7 +712,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Tipo Art'#237'culo'
+          Caption = 'Nombre'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -649,6 +757,134 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           ExportAs = exptText
           FontSize = 8
         end
+        object QRLabel2: TQRLabel
+          Left = 271
+          Top = 2
+          Width = 119
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            717.020833333333300000
+            5.291666666666667000
+            314.854166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Signo Cobro/Pago'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel3: TQRLabel
+          Left = 394
+          Top = 2
+          Width = 77
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1042.458333333333000000
+            5.291666666666667000
+            203.729166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Signo Stock'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel4: TQRLabel
+          Left = 477
+          Top = 2
+          Width = 99
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1262.062500000000000000
+            5.291666666666667000
+            261.937500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Signo Cta.vCte.'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel5: TQRLabel
+          Left = 581
+          Top = 2
+          Width = 98
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1537.229166666667000000
+            5.291666666666667000
+            259.291666666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Ultimo N'#250'mero'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
       end
     end
     object PanelGrilla: TPanel
@@ -666,14 +902,14 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      object DBGridTipoArticulo: TDBGrid
+      object DBGridTipo: TDBGrid
         Left = 5
         Top = 5
         Width = 844
-        Height = 348
+        Height = 323
         Align = alClient
         Color = 14606012
-        DataSource = DS_TipoArt
+        DataSource = DS_TipoComprobante
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -681,22 +917,53 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
-        OnDrawColumnCell = DBGridTipoArticuloDrawColumnCell
+        OnDrawColumnCell = DBGridTipoDrawColumnCell
         Columns = <
           item
             Expanded = False
-            FieldName = 'DESCRIPCION'
+            FieldName = 'NOMBRE_TIPO_CPB'
             Title.Alignment = taCenter
-            Title.Caption = 'Tipo Art'#237'culo'
-            Width = 442
+            Title.Caption = 'Nombre'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SIGNO_COBRO_PAGO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Signo Cobro/Pago'
+            Width = 124
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SIGNO_STOCK'
+            Title.Alignment = taCenter
+            Title.Caption = 'Signo Stock'
+            Width = 96
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SIGNO_CTA_CTE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Signo Cta. Cte.'
+            Width = 114
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ULTIMO_NUMERO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Ultimo N'#250'mero'
+            Width = 98
             Visible = True
           end>
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 353
+        Top = 328
         Width = 844
-        Height = 33
+        Height = 58
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
@@ -704,9 +971,65 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
         object Label1: TLabel
           Left = 6
           Top = 11
-          Width = 76
+          Width = 50
           Height = 13
-          Caption = 'Tipo Art'#237'culo:'
+          Caption = 'Nombre:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label2: TLabel
+          Left = 454
+          Top = 11
+          Width = 90
+          Height = 13
+          Caption = 'Ultimo N'#250'mero:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label3: TLabel
+          Left = 6
+          Top = 35
+          Width = 109
+          Height = 13
+          Caption = 'Signo Cobro/Pago:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label4: TLabel
+          Left = 266
+          Top = 35
+          Width = 73
+          Height = 13
+          Caption = 'Signo Stock:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label5: TLabel
+          Left = 464
+          Top = 35
+          Width = 140
+          Height = 13
+          Caption = 'Signo Cuenta Corriente:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -716,13 +1039,13 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Transparent = True
         end
         object DBENombre: TDBEdit
-          Left = 94
+          Left = 58
           Top = 7
-          Width = 731
+          Width = 387
           Height = 21
           CharCase = ecUpperCase
-          DataField = 'DESCRIPCION'
-          DataSource = DS_TipoArt
+          DataField = 'NOMBRE_TIPO_CPB'
+          DataSource = DS_TipoComprobante
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -730,6 +1053,67 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
+        end
+        object DBEUltimoNro: TDBEdit
+          Left = 546
+          Top = 7
+          Width = 167
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'ULTIMO_NUMERO'
+          DataSource = DS_TipoComprobante
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+        end
+        object DBCBoxSignoCP: TDBComboBox
+          Left = 119
+          Top = 32
+          Width = 105
+          Height = 21
+          Style = csDropDownList
+          DataField = 'SIGNO_COBRO_PAGO'
+          DataSource = DS_TipoComprobante
+          ItemHeight = 13
+          Items.Strings = (
+            '1'
+            '0'
+            '-1')
+          TabOrder = 2
+        end
+        object DBCBoxSignoStock: TDBComboBox
+          Left = 341
+          Top = 32
+          Width = 105
+          Height = 21
+          Style = csDropDownList
+          DataField = 'SIGNO_STOCK'
+          DataSource = DS_TipoComprobante
+          ItemHeight = 13
+          Items.Strings = (
+            '1'
+            '0'
+            '-1')
+          TabOrder = 3
+        end
+        object DBCBoxSignoCC: TDBComboBox
+          Left = 608
+          Top = 32
+          Width = 105
+          Height = 21
+          Style = csDropDownList
+          DataField = 'SIGNO_CTA_CTE'
+          DataSource = DS_TipoComprobante
+          ItemHeight = 13
+          Items.Strings = (
+            '1'
+            '0'
+            '-1')
+          TabOrder = 4
         end
       end
     end
@@ -1222,8 +1606,8 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 48
-    Top = 184
+    Left = 54
+    Top = 173
     DockControlHeights = (
       0
       0
@@ -1339,43 +1723,55 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
         'btnCancelar')
     end
   end
-  object ZQ_TipoArt: TZQuery
+  object ZQ_TipoComprobante: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from tipo_articulo'
-      'order by DESCRIPCION')
+      'from tipo_comprobante'
+      'order by nombre_tipo_cpb')
     Params = <>
-    Left = 48
-    Top = 72
-    object ZQ_TipoArtID_TIPO_ARTICULO: TIntegerField
-      FieldName = 'ID_TIPO_ARTICULO'
+    Left = 54
+    Top = 61
+    object ZQ_TipoComprobanteID_TIPO_CPB: TIntegerField
+      FieldName = 'ID_TIPO_CPB'
     end
-    object ZQ_TipoArtDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 200
+    object ZQ_TipoComprobanteNOMBRE_TIPO_CPB: TStringField
+      FieldName = 'NOMBRE_TIPO_CPB'
+      Size = 50
     end
-    object ZQ_TipoArtBAJA: TStringField
+    object ZQ_TipoComprobanteSIGNO_COBRO_PAGO: TIntegerField
+      FieldName = 'SIGNO_COBRO_PAGO'
+    end
+    object ZQ_TipoComprobanteSIGNO_STOCK: TIntegerField
+      FieldName = 'SIGNO_STOCK'
+    end
+    object ZQ_TipoComprobanteSIGNO_CTA_CTE: TIntegerField
+      FieldName = 'SIGNO_CTA_CTE'
+    end
+    object ZQ_TipoComprobanteULTIMO_NUMERO: TIntegerField
+      FieldName = 'ULTIMO_NUMERO'
+    end
+    object ZQ_TipoComprobanteBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
     end
   end
-  object DS_TipoArt: TDataSource
-    DataSet = ZQ_TipoArt
-    Left = 48
-    Top = 128
+  object DS_TipoComprobante: TDataSource
+    DataSet = ZQ_TipoComprobante
+    Left = 54
+    Top = 117
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridTipoArticulo
+    Grilla = DBGridTipo
     FuenteNormal = []
     Ordenar = True
     MoverColumna = True
-    Left = 48
-    Top = 243
+    Left = 54
+    Top = 232
   end
   object ATeclasRapidas: TActionManager
-    Left = 48
-    Top = 298
+    Left = 54
+    Top = 287
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -1420,35 +1816,35 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Tipo Art'#237'culo'
-        Campo = 'DESCRIPCION'
-        Tabla = 'tipo_articulo'
+        Titulo = 'Nombre'
+        Campo = 'nombre_tipo_cpb'
+        Tabla = 'tipo_comprobante'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         ItemIndex = -1
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
-    DataSet = ZQ_TipoArt
+    DataSet = ZQ_TipoComprobante
     SQL.Strings = (
       'select *'
-      'from tipo_articulo'
-      'order by DESCRIPCION')
+      'from tipo_comprobante'
+      'order by nombre_tipo_cpb')
     SQL_Select.Strings = (
       'select *')
     SQL_From.Strings = (
-      'from tipo_articulo')
+      'from tipo_comprobante')
     SQL_Orden.Strings = (
-      'order by DESCRIPCION')
+      'order by nombre_tipo_cpb')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
-    Left = 136
-    Top = 75
+    Left = 142
+    Top = 64
   end
   object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = RepTipoArticulo
+    Reporte = RepTipoCpb
     ShowModal = False
-    Left = 136
-    Top = 128
+    Left = 142
+    Top = 117
   end
 end

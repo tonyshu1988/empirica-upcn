@@ -1,6 +1,6 @@
 object FABM_Cuentas: TFABM_Cuentas
-  Left = 307
-  Top = 238
+  Left = 318
+  Top = 216
   Width = 870
   Height = 500
   Caption = 'ABM Cuentas'
@@ -28,7 +28,7 @@ object FABM_Cuentas: TFABM_Cuentas
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object RepColor: TQuickRep
+    object RepCuentas: TQuickRep
       Tag = 99
       Left = 28
       Top = 44
@@ -39,7 +39,7 @@ object FABM_Cuentas: TFABM_Cuentas
       Frame.DrawBottom = False
       Frame.DrawLeft = False
       Frame.DrawRight = False
-      DataSet = ZQ_Colores
+      DataSet = ZQ_Cuentas
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -127,13 +127,12 @@ object FABM_Cuentas: TFABM_Cuentas
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
-          DataSet = DM.ZQ_ConfigReporte
           Stretch = True
         end
         object QRLabel17: TQRLabel
           Left = 316
           Top = 47
-          Width = 86
+          Width = 85
           Height = 19
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -144,12 +143,12 @@ object FABM_Cuentas: TFABM_Cuentas
             50.270833333333330000
             836.083333333333300000
             124.354166666666700000
-            227.541666666666700000)
+            224.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'COLORES'
+          Caption = 'CUENTAS'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -162,10 +161,10 @@ object FABM_Cuentas: TFABM_Cuentas
           ExportAs = exptText
           FontSize = 12
         end
-        object RepColor_Subtitulo: TQRLabel
-          Left = 294
+        object RepCuentas_Subtitulo: TQRLabel
+          Left = 284
           Top = 26
-          Width = 130
+          Width = 150
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -174,14 +173,14 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            777.875000000000000000
+            751.416666666666700000
             68.791666666666670000
-            343.958333333333300000)
+            396.875000000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepColor_Subtitulo'
+          Caption = 'RepCuentas_Subtitulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -194,10 +193,10 @@ object FABM_Cuentas: TFABM_Cuentas
           ExportAs = exptText
           FontSize = 9
         end
-        object RepColor_Titulo: TQRLabel
-          Left = 288
+        object RepCuentas_Titulo: TQRLabel
+          Left = 275
           Top = 2
-          Width = 142
+          Width = 168
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -206,14 +205,14 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            762.000000000000000000
+            727.604166666666700000
             5.291666666666667000
-            375.708333333333300000)
+            444.500000000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepColor_Titulo'
+          Caption = 'RepCuentas_Titulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -258,7 +257,7 @@ object FABM_Cuentas: TFABM_Cuentas
         object QRDBText19: TQRDBText
           Left = 5
           Top = 0
-          Width = 132
+          Width = 65
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -269,23 +268,23 @@ object FABM_Cuentas: TFABM_Cuentas
             37.041666666666670000
             13.229166666666670000
             0.000000000000000000
-            349.250000000000000000)
+            171.979166666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Colores
-          DataField = 'CODIGO_COLOR'
+          DataSet = ZQ_Cuentas
+          DataField = 'CODIGO'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText1: TQRDBText
-          Left = 148
+          Left = 76
           Top = 0
-          Width = 525
+          Width = 309
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -294,16 +293,16 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            391.583333333333300000
+            201.083333333333300000
             0.000000000000000000
-            1389.062500000000000000)
+            817.562500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Colores
-          DataField = 'NOMBRE'
+          DataSet = ZQ_Cuentas
+          DataField = 'NOMBRE_CUENTA'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -329,8 +328,62 @@ object FABM_Cuentas: TFABM_Cuentas
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Colores
+          DataSet = ZQ_Cuentas
           DataField = 'BAJA'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText3: TQRDBText
+          Left = 391
+          Top = 0
+          Width = 141
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1034.520833333333000000
+            0.000000000000000000
+            373.062500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Cuentas
+          DataField = 'NRO_CTA_BANCARIA'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText4: TQRDBText
+          Left = 538
+          Top = 0
+          Width = 141
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1423.458333333333000000
+            0.000000000000000000
+            373.062500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Cuentas
+          DataField = '_medio'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -479,7 +532,7 @@ object FABM_Cuentas: TFABM_Cuentas
         object QRExpr18: TQRExpr
           Left = 4
           Top = 4
-          Width = 183
+          Width = 186
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -490,7 +543,7 @@ object FABM_Cuentas: TFABM_Cuentas
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            484.187500000000000000)
+            492.125000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -499,7 +552,7 @@ object FABM_Cuentas: TFABM_Cuentas
           ResetAfterPrint = False
           Transparent = False
           WordWrap = True
-          Expression = #39'Cantidad de Colores: '#39'+COUNT'
+          Expression = #39'Cantidad de Cuentas: '#39'+COUNT'
           ExportAs = exptText
           FontSize = 8
         end
@@ -616,7 +669,7 @@ object FABM_Cuentas: TFABM_Cuentas
         object QRLabel29: TQRLabel
           Left = 4
           Top = 2
-          Width = 117
+          Width = 65
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -627,7 +680,7 @@ object FABM_Cuentas: TFABM_Cuentas
             37.041666666666670000
             10.583333333333330000
             5.291666666666667000
-            309.562500000000000000)
+            171.979166666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -646,7 +699,7 @@ object FABM_Cuentas: TFABM_Cuentas
           FontSize = 8
         end
         object QRLabel30: TQRLabel
-          Left = 148
+          Left = 76
           Top = 2
           Width = 143
           Height = 14
@@ -657,7 +710,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            391.583333333333300000
+            201.083333333333300000
             5.291666666666667000
             378.354166666666700000)
           Alignment = taLeftJustify
@@ -709,6 +762,70 @@ object FABM_Cuentas: TFABM_Cuentas
           ExportAs = exptText
           FontSize = 8
         end
+        object QRLabel2: TQRLabel
+          Left = 391
+          Top = 2
+          Width = 143
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1034.520833333333000000
+            5.291666666666667000
+            378.354166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Nro. Cta. Bancaria'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel3: TQRLabel
+          Left = 538
+          Top = 2
+          Width = 143
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1423.458333333333000000
+            5.291666666666667000
+            378.354166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Medio Cobro/Pago'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
       end
     end
     object PanelGrilla: TPanel
@@ -726,14 +843,14 @@ object FABM_Cuentas: TFABM_Cuentas
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      object DBGridColor: TDBGrid
+      object DBGridCuentas: TDBGrid
         Left = 5
         Top = 5
         Width = 844
-        Height = 353
+        Height = 299
         Align = alClient
         Color = 14606012
-        DataSource = DS_Colores
+        DataSource = DS_Cuentas
         DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
@@ -742,52 +859,55 @@ object FABM_Cuentas: TFABM_Cuentas
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
-        OnDrawColumnCell = DBGridColorDrawColumnCell
+        OnDrawColumnCell = DBGridCuentasDrawColumnCell
         Columns = <
           item
             Expanded = False
-            FieldName = 'CODIGO_COLOR'
+            FieldName = 'CODIGO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'digo'
-            Width = 107
+            Width = 118
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'NOMBRE'
+            FieldName = 'NOMBRE_CUENTA'
             Title.Alignment = taCenter
             Title.Caption = 'Nombre'
-            Width = 467
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'REFERENCIA'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
+            FieldName = 'NRO_CTA_BANCARIA'
             Title.Alignment = taCenter
-            Title.Caption = 'Referencia'
+            Title.Caption = 'Nro. Cta. Bancaria'
+            Width = 213
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = '_medio'
+            Title.Alignment = taCenter
+            Title.Caption = 'Medio Cobro/Pago'
+            Width = 189
             Visible = True
           end>
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 358
+        Top = 304
         Width = 844
-        Height = 28
+        Height = 82
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
         Visible = False
         object Label1: TLabel
-          Left = 198
-          Top = 11
-          Width = 45
+          Left = 67
+          Top = 36
+          Width = 50
           Height = 13
-          Caption = 'Detalle:'
+          Caption = 'Nombre:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -797,11 +917,11 @@ object FABM_Cuentas: TFABM_Cuentas
           Transparent = True
         end
         object Label2: TLabel
-          Left = 614
-          Top = 11
-          Width = 66
+          Left = 486
+          Top = 36
+          Width = 110
           Height = 13
-          Caption = 'Referencia:'
+          Caption = 'Medio Cobro/Pago:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -811,7 +931,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Transparent = True
         end
         object Label3: TLabel
-          Left = 6
+          Left = 72
           Top = 11
           Width = 45
           Height = 13
@@ -824,14 +944,45 @@ object FABM_Cuentas: TFABM_Cuentas
           ParentFont = False
           Transparent = True
         end
+        object Label4: TLabel
+          Left = 6
+          Top = 62
+          Width = 111
+          Height = 13
+          Caption = 'Nro. Cta. Bancaria:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
         object DBENombre: TDBEdit
-          Left = 248
-          Top = 7
+          Left = 120
+          Top = 32
           Width = 353
           Height = 21
           CharCase = ecUpperCase
-          DataField = 'NOMBRE'
-          DataSource = DS_Colores
+          DataField = 'NOMBRE_CUENTA'
+          DataSource = DS_Cuentas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+        end
+        object DBECodigo: TDBEdit
+          Left = 120
+          Top = 7
+          Width = 97
+          Height = 21
+          CharCase = ecUpperCase
+          Color = clMenuBar
+          DataField = 'CODIGO'
+          DataSource = DS_Cuentas
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -840,25 +991,14 @@ object FABM_Cuentas: TFABM_Cuentas
           ParentFont = False
           TabOrder = 0
         end
-        object ColorBox1: TColorBox
-          Left = 688
-          Top = 6
-          Width = 145
-          Height = 22
-          DefaultColorColor = clNone
-          Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbIncludeNone, cbIncludeDefault, cbCustomColor, cbPrettyNames]
-          DropDownCount = 5
-          ItemHeight = 16
-          TabOrder = 1
-        end
-        object DBECodigo: TDBEdit
-          Left = 56
-          Top = 7
-          Width = 97
+        object DBENro_Cuenta: TDBEdit
+          Left = 120
+          Top = 58
+          Width = 353
           Height = 21
           CharCase = ecUpperCase
-          DataField = 'CODIGO_COLOR'
-          DataSource = DS_Colores
+          DataField = 'NRO_CTA_BANCARIA'
+          DataSource = DS_Cuentas
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -866,6 +1006,18 @@ object FABM_Cuentas: TFABM_Cuentas
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 2
+        end
+        object DBLookupComboBox1: TDBLookupComboBox
+          Left = 599
+          Top = 32
+          Width = 162
+          Height = 21
+          DataField = 'MEDIO_DEFECTO'
+          DataSource = DS_Cuentas
+          KeyField = 'ID_TIPO_FORMAPAGO'
+          ListField = 'DESCRIPCION'
+          ListSource = DS_MedioPago
+          TabOrder = 3
         end
       end
     end
@@ -1359,7 +1511,7 @@ object FABM_Cuentas: TFABM_Cuentas
     UseF10ForMenu = False
     UseSystemFont = False
     Left = 136
-    Top = 128
+    Top = 125
     DockControlHeights = (
       0
       0
@@ -1475,80 +1627,56 @@ object FABM_Cuentas: TFABM_Cuentas
         'btnCancelar')
     end
   end
-  object ZQ_Colores: TZQuery
+  object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
-    SortedFields = 'CODIGO_COLOR;NOMBRE'
-    AfterScroll = ZQ_ColoresAfterScroll
     SQL.Strings = (
-      'select *'
-      'from color'
-      'order by NOMBRE')
+      'select c.*'
+      'from cuenta c'
+      'order by c.nombre_cuenta')
     Params = <>
     Left = 48
     Top = 72
-    object ZQ_ColoresID_COLOR: TIntegerField
-      FieldName = 'ID_COLOR'
-      Required = True
+    object ZQ_Cuentas_medio: TStringField
+      FieldKind = fkLookup
+      FieldName = '_medio'
+      LookupDataSet = ZQ_MedioPago
+      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'MEDIO_DEFECTO'
+      Size = 50
+      Lookup = True
     end
-    object ZQ_ColoresCODIGO_COLOR: TIntegerField
-      FieldName = 'CODIGO_COLOR'
-      DisplayFormat = '0000'
+    object ZQ_CuentasID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
     end
-    object ZQ_ColoresNOMBRE: TStringField
-      FieldName = 'NOMBRE'
-      Size = 30
+    object ZQ_CuentasCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 10
     end
-    object ZQ_ColoresREFERENCIA: TStringField
-      FieldName = 'REFERENCIA'
-      Size = 30
+    object ZQ_CuentasNOMBRE_CUENTA: TStringField
+      FieldName = 'NOMBRE_CUENTA'
+      Size = 50
     end
-    object ZQ_ColoresBAJA: TStringField
+    object ZQ_CuentasNRO_CTA_BANCARIA: TStringField
+      FieldName = 'NRO_CTA_BANCARIA'
+      Size = 10
+    end
+    object ZQ_CuentasMEDIO_DEFECTO: TIntegerField
+      FieldName = 'MEDIO_DEFECTO'
+    end
+    object ZQ_CuentasBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
     end
   end
-  object DS_Colores: TDataSource
-    DataSet = ZQ_Colores
+  object DS_Cuentas: TDataSource
+    DataSet = ZQ_Cuentas
     Left = 48
-    Top = 128
-  end
-  object ZSP_ID_COLOR: TZStoredProc
-    Connection = DM.Conexion
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptResult
-      end>
-    StoredProcName = 'SP_GEN_COLOR_ID'
-    Left = 48
-    Top = 179
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptResult
-      end>
-    object ZSP_ID_COLORID: TIntegerField
-      FieldName = 'ID'
-    end
-  end
-  object ZQ_UltimoNro: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select first 1 CODIGO_COLOR'
-      'from COLOR'
-      'order by CODIGO_COLOR desc')
-    Params = <>
-    Left = 48
-    Top = 243
-    object ZQ_UltimoNroCODIGO_COLOR: TIntegerField
-      FieldName = 'CODIGO_COLOR'
-    end
+    Top = 125
   end
   object ATeclasRapidas: TActionManager
     Left = 48
-    Top = 298
+    Top = 178
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -1594,8 +1722,8 @@ object FABM_Cuentas: TFABM_Cuentas
     CriteriosBusqueda = <
       item
         Titulo = 'C'#243'digo'
-        Campo = 'CODIGO_COLOR'
-        Tabla = 'COLOR'
+        Campo = 'CODIGO'
+        Tabla = 'CUENTA'
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
@@ -1603,34 +1731,105 @@ object FABM_Cuentas: TFABM_Cuentas
       end
       item
         Titulo = 'Nombre'
-        Campo = 'NOMBRE'
-        Tabla = 'COLOR'
+        Campo = 'NOMBRE_CUENTA'
+        Tabla = 'CUENTA'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nro.Cta. Bancaria'
+        Campo = 'NRO_CTA_BANCARIA'
+        Tabla = 'CUENTA'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Medio Cobro/Pago'
+        Campo = 'MEDIO_DEFECTO'
+        Tabla = 'CUENTA'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoCombollenarSQL = ZQ_MedioPago
+        TipoCombollenarCampo = 'DESCRIPCION'
+        TipoCombollenarCampoReal = 'ID_TIPO_FORMAPAGO'
+        TipoComboEditable = False
+        CambiarCondicion = False
         ItemIndex = -1
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
-    DataSet = ZQ_Colores
+    DataSet = ZQ_Cuentas
     SQL.Strings = (
-      'select *'
-      'from color'
-      'order by CODIGO_COLOR, NOMBRE')
+      'select c.*'
+      'from cuenta c'
+      'order by c.nombre_cuenta')
     SQL_Select.Strings = (
-      'select *')
+      'select c.*')
     SQL_From.Strings = (
-      'from color')
+      'from cuenta c')
     SQL_Orden.Strings = (
-      'order by CODIGO_COLOR, NOMBRE')
-    UsarWhereOriginal = EK_Con_Where
+      'order by c.nombre_cuenta')
+    UsarWhereOriginal = EK_Sin_Where
     PantallaReducida = True
     Left = 136
-    Top = 75
+    Top = 72
   end
   object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = RepColor
+    Reporte = RepCuentas
     ShowModal = False
     Left = 136
-    Top = 176
+    Top = 178
+  end
+  object ZQ_MedioPago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from tipo_formapago'
+      'order by descripcion')
+    Params = <>
+    Left = 48
+    Top = 235
+    object ZQ_MedioPagoID_TIPO_FORMAPAGO: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAGO'
+      Required = True
+    end
+    object ZQ_MedioPagoDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 50
+    end
+    object ZQ_MedioPagoBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridCuentas
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    Left = 136
+    Top = 235
+  end
+  object DS_MedioPago: TDataSource
+    DataSet = ZQ_MedioPago
+    Left = 216
+    Top = 235
+  end
+  object ZQ_UltimoNro: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select first 1 CODIGO'
+      'from cuenta'
+      'order by CODIGO desc')
+    Params = <>
+    Left = 216
+    Top = 179
+    object ZQ_UltimoNroCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 10
+    end
   end
 end

@@ -27,88 +27,6 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object PanelGrilla: TPanel
-      Left = 0
-      Top = 0
-      Width = 854
-      Height = 391
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 5
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      object DBGridTipoFPago: TDBGrid
-        Left = 5
-        Top = 5
-        Width = 844
-        Height = 348
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_TipoFPago
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridTipoFPagoDrawColumnCell
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'DESCRIPCION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Tipo Medio Pago'
-            Width = 700
-            Visible = True
-          end>
-      end
-      object PanelEdicion: TPanel
-        Left = 5
-        Top = 353
-        Width = 844
-        Height = 33
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 1
-        Visible = False
-        object Label1: TLabel
-          Left = 6
-          Top = 11
-          Width = 98
-          Height = 13
-          Caption = 'Tipo Medio Pago:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object DBENombre: TDBEdit
-          Left = 108
-          Top = 7
-          Width = 469
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'DESCRIPCION'
-          DataSource = DS_TipoFPago
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 0
-        end
-      end
-    end
     object RepTipoFPago: TQuickRep
       Tag = 99
       Left = 54
@@ -533,7 +451,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
         object QRExpr18: TQRExpr
           Left = 4
           Top = 4
-          Width = 234
+          Width = 274
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -544,7 +462,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            619.125000000000000000)
+            724.958333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -553,7 +471,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           ResetAfterPrint = False
           Transparent = False
           WordWrap = True
-          Expression = #39'Cantidad de Tipos de Art'#237'culo: '#39'+COUNT'
+          Expression = #39'Cantidad de Tipos de Medio de Pago: '#39'+COUNT'
           ExportAs = exptText
           FontSize = 8
         end
@@ -730,6 +648,88 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           WordWrap = True
           ExportAs = exptText
           FontSize = 8
+        end
+      end
+    end
+    object PanelGrilla: TPanel
+      Left = 0
+      Top = 0
+      Width = 854
+      Height = 391
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 5
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object DBGridTipoFPago: TDBGrid
+        Left = 5
+        Top = 5
+        Width = 844
+        Height = 348
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_TipoFPago
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridTipoFPagoDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'DESCRIPCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tipo Medio Pago'
+            Width = 700
+            Visible = True
+          end>
+      end
+      object PanelEdicion: TPanel
+        Left = 5
+        Top = 353
+        Width = 844
+        Height = 33
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 1
+        Visible = False
+        object Label1: TLabel
+          Left = 6
+          Top = 11
+          Width = 98
+          Height = 13
+          Caption = 'Tipo Medio Pago:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object DBENombre: TDBEdit
+          Left = 108
+          Top = 7
+          Width = 469
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'DESCRIPCION'
+          DataSource = DS_TipoFPago
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
         end
       end
     end

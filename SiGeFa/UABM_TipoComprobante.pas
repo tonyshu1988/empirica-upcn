@@ -26,12 +26,9 @@ type
     btnSalir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
-    ZQ_TipoArt: TZQuery;
-    DS_TipoArt: TDataSource;
-    ZQ_TipoArtID_TIPO_ARTICULO: TIntegerField;
-    ZQ_TipoArtDESCRIPCION: TStringField;
-    ZQ_TipoArtBAJA: TStringField;
-    DBGridTipoArticulo: TDBGrid;
+    ZQ_TipoComprobante: TZQuery;
+    DS_TipoComprobante: TDataSource;
+    DBGridTipo: TDBGrid;
     PanelEdicion: TPanel;
     Label1: TLabel;
     DBENombre: TDBEdit;
@@ -49,12 +46,12 @@ type
     AGuardar: TAction;
     ACancelar: TAction;
     EKBuscar: TEKBusquedaAvanzada;
-    RepTipoArticulo: TQuickRep;
+    RepTipoCpb: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
     QRLabel17: TQRLabel;
-    RepTipoArticulo_Subtitulo: TQRLabel;
-    RepTipoArticulo_Titulo: TQRLabel;
+    RepTipoCpb_Subtitulo: TQRLabel;
+    RepTipoCpb_Titulo: TQRLabel;
     QRBand10: TQRBand;
     QRDBText19: TQRDBText;
     QRDBText2: TQRDBText;
@@ -71,6 +68,29 @@ type
     QRLabel29: TQRLabel;
     QRLabel1: TQRLabel;
     EKVistaPrevia: TEKVistaPreviaQR;
+    ZQ_TipoComprobanteID_TIPO_CPB: TIntegerField;
+    ZQ_TipoComprobanteNOMBRE_TIPO_CPB: TStringField;
+    ZQ_TipoComprobanteSIGNO_COBRO_PAGO: TIntegerField;
+    ZQ_TipoComprobanteSIGNO_STOCK: TIntegerField;
+    ZQ_TipoComprobanteSIGNO_CTA_CTE: TIntegerField;
+    ZQ_TipoComprobanteULTIMO_NUMERO: TIntegerField;
+    Label2: TLabel;
+    DBEUltimoNro: TDBEdit;
+    DBCBoxSignoCP: TDBComboBox;
+    DBCBoxSignoStock: TDBComboBox;
+    DBCBoxSignoCC: TDBComboBox;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    ZQ_TipoComprobanteBAJA: TStringField;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRDBText1: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -81,7 +101,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
-    procedure DBGridTipoArticuloDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridTipoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     //------TECLAS RAPIDAS
     procedure ANuevoExecute(Sender: TObject);
     procedure AModificarExecute(Sender: TObject);
@@ -101,7 +121,7 @@ var
   FABM_TipoComprobante: TFABM_TipoComprobante;
 
 const
-  transaccion_ABM = 'ABM TIPO ARTICULO';
+  transaccion_ABM = 'ABM TIPO COMPRONAMTE';
 
 implementation
 
@@ -130,13 +150,13 @@ end;
 
 procedure TFABM_TipoComprobante.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
   begin
-    DBGridTipoArticulo.Enabled := false;
+    DBGridTipo.Enabled := false;
     PanelEdicion.Visible:= true;
 
-    ZQ_TipoArt.Append;
-    ZQ_TipoArtBAJA.AsString:= 'N';
+    ZQ_TipoComprobante.Append;
+    ZQ_TipoComprobanteBAJA.AsString:= 'N';
     DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -146,15 +166,15 @@ end;
 
 procedure TFABM_TipoComprobante.btnModificarClick(Sender: TObject);
 begin
-  if ZQ_TipoArt.IsEmpty then
+  if ZQ_TipoComprobante.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
   begin
-    DBGridTipoArticulo.Enabled := false;
+    DBGridTipo.Enabled := false;
     PanelEdicion.Visible:= true;
 
-    ZQ_TipoArt.Edit;
+    ZQ_TipoComprobante.Edit;
     DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -166,15 +186,15 @@ procedure TFABM_TipoComprobante.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_TipoArt.IsEmpty) OR (ZQ_TipoArtBAJA.AsString <> 'N') then
+  if (ZQ_TipoComprobante.IsEmpty) OR (ZQ_TipoComprobanteBAJA.AsString <> 'N') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Artículo" seleccionado?'), 'ABM Tipo Artículo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Comprobante" seleccionado?'), 'ABM Tipo Comprobante', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
     begin
-      ZQ_TipoArt.Edit;
-      ZQ_TipoArtBAJA.AsString:='S';
+      ZQ_TipoComprobante.Edit;
+      ZQ_TipoComprobanteBAJA.AsString:='S';
     end
     else
       exit;
@@ -182,9 +202,9 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
 
-    recNo:= ZQ_TipoArt.RecNo;
-    ZQ_TipoArt.Refresh;
-    ZQ_TipoArt.RecNo:= recNo;
+    recNo:= ZQ_TipoComprobante.RecNo;
+    ZQ_TipoComprobante.Refresh;
+    ZQ_TipoComprobante.RecNo:= recNo;
   end;
 end;
 
@@ -193,15 +213,15 @@ procedure TFABM_TipoComprobante.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_TipoArt.IsEmpty) OR (ZQ_TipoArtBAJA.AsString <> 'S') then
+  if (ZQ_TipoComprobante.IsEmpty) OR (ZQ_TipoComprobanteBAJA.AsString <> 'S') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea reactivar el "Tipo Artículo" seleccionado?'), 'ABM Tipo Artículo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea reactivar el "Tipo Comprobante" seleccionado?'), 'ABM Tipo Comprobante', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
     begin
-      ZQ_TipoArt.Edit;
-      ZQ_TipoArtBAJA.AsString:='N';
+      ZQ_TipoComprobante.Edit;
+      ZQ_TipoComprobanteBAJA.AsString:='N';
     end
     else
       exit;
@@ -209,9 +229,9 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
 
-    recNo:= ZQ_TipoArt.RecNo;
-    ZQ_TipoArt.Refresh;
-    ZQ_TipoArt.RecNo:= recNo;
+    recNo:= ZQ_TipoComprobante.RecNo;
+    ZQ_TipoComprobante.Refresh;
+    ZQ_TipoComprobante.RecNo:= recNo;
   end;
 end;
 
@@ -224,7 +244,7 @@ begin
 
   if (trim(DBENombre.Text) = '') then
   begin
-    Application.MessageBox('El campo "Tipo Artículo" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El campo "Tipo Comprobante" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
     DBENombre.SetFocus;
     exit;
   end;
@@ -232,14 +252,14 @@ begin
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
-      DBGridTipoArticulo.Enabled:= true;
-      DBGridTipoArticulo.SetFocus;
+      DBGridTipo.Enabled:= true;
+      DBGridTipo.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
       PanelEdicion.Visible := false;
-      recNo:= ZQ_TipoArt.RecNo;
-      ZQ_TipoArt.Refresh;
-      ZQ_TipoArt.RecNo:= recNo;
+      recNo:= ZQ_TipoComprobante.RecNo;
+      ZQ_TipoComprobante.Refresh;
+      ZQ_TipoComprobante.RecNo:= recNo;
     end
   except
     begin
@@ -248,7 +268,7 @@ begin
     end
   end;
 
-  dm.mostrarCantidadRegistro(ZQ_TipoArt, lblCantidadRegistros);
+  dm.mostrarCantidadRegistro(ZQ_TipoComprobante, lblCantidadRegistros);
 end;
 
 
@@ -256,8 +276,8 @@ procedure TFABM_TipoComprobante.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
-    DBGridTipoArticulo.Enabled:=true;
-    DBGridTipoArticulo.SetFocus;
+    DBGridTipo.Enabled:=true;
+    DBGridTipo.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
     PanelEdicion.Visible := false;
@@ -269,21 +289,21 @@ procedure TFABM_TipoComprobante.FormCreate(Sender: TObject);
 begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  ZQ_TipoArt.Close;
-  ZQ_TipoArt.open;
+  ZQ_TipoComprobante.Close;
+  ZQ_TipoComprobante.open;
 
-  dm.mostrarCantidadRegistro(ZQ_TipoArt, lblCantidadRegistros);  
+  dm.mostrarCantidadRegistro(ZQ_TipoComprobante, lblCantidadRegistros);
 end;
 
 
-procedure TFABM_TipoComprobante.DBGridTipoArticuloDrawColumnCell(Sender: TObject;
+procedure TFABM_TipoComprobante.DBGridTipoDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_TipoArt.IsEmpty then
+  if ZQ_TipoComprobante.IsEmpty then
     exit;
 
-  FPrincipal.PintarFilasGrillasConBajas(DBGridTipoArticulo, ZQ_TipoArtBAJA.AsString, Rect, DataCol, Column, State);
+  FPrincipal.PintarFilasGrillasConBajas(DBGridTipo, ZQ_TipoComprobanteBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
 
@@ -338,10 +358,10 @@ end;
 
 procedure TFABM_TipoComprobante.btnImprimirClick(Sender: TObject);
 begin
-  if ZQ_TipoArt.IsEmpty then
+  if ZQ_TipoComprobante.IsEmpty then
     exit;
 
-  DM.VariablesReportes(RepTipoArticulo);
+  DM.VariablesReportes(RepTipoCpb);
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;

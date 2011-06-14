@@ -155,10 +155,13 @@ if ZQ_Colores.IsEmpty then
     begin
       ZQ_UltimoNro.Close;
       ZQ_UltimoNro.Open;
-      ZQ_ColoresCODIGO_COLOR.AsInteger:= ZQ_UltimoNroCODIGO_COLOR.AsInteger + 1;
+      if ZQ_UltimoNro.IsEmpty then
+        ZQ_ColoresCODIGO_COLOR.AsInteger:= 1
+      else
+        ZQ_ColoresCODIGO_COLOR.AsInteger:= ZQ_UltimoNroCODIGO_COLOR.AsInteger + 1;
     end;
 
-    DBENombre.SetFocus;
+    DBECodigo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -232,6 +235,8 @@ begin
       exit;
     end
   end;
+
+  dm.mostrarCantidadRegistro(ZQ_Colores, lblCantidadRegistros);   
 end;
 
 
@@ -297,7 +302,10 @@ begin
     ZQ_Colores.Append;
     ZQ_ColoresID_COLOR.AsInteger:=ZSP_ID_COLORID.AsInteger;
     ZQ_ColoresBAJA.AsString:= 'N';
-    ZQ_ColoresCODIGO_COLOR.AsInteger:= ZQ_UltimoNroCODIGO_COLOR.AsInteger + 1;
+    if ZQ_UltimoNro.IsEmpty then
+      ZQ_ColoresCODIGO_COLOR.AsInteger:= 1
+    else
+      ZQ_ColoresCODIGO_COLOR.AsInteger:= ZQ_UltimoNroCODIGO_COLOR.AsInteger + 1;
 
     DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
@@ -309,6 +317,7 @@ end;
 procedure TFABM_Colores.FormCreate(Sender: TObject);
 begin
   dm.EKModelo.abrir(ZQ_Colores);
+  dm.mostrarCantidadRegistro(ZQ_Colores, lblCantidadRegistros);  
 end;
 
 

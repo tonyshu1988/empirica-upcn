@@ -1,6 +1,6 @@
 object FABM_Colores: TFABM_Colores
-  Left = 397
-  Top = 317
+  Left = 343
+  Top = 169
   Width = 870
   Height = 500
   Caption = 'FABM_Colores'
@@ -857,6 +857,7 @@ object FABM_Colores: TFABM_Colores
           Width = 97
           Height = 21
           CharCase = ecUpperCase
+          Color = clMenuBar
           DataField = 'CODIGO_COLOR'
           DataSource = DS_Colores
           Font.Charset = DEFAULT_CHARSET
