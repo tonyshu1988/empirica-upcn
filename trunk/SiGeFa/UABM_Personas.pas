@@ -252,6 +252,11 @@ uses UDM, UPrincipal;
 
 procedure TFABM_Personas.FormCreate(Sender: TObject);
 begin
+  DBEApellidoNombre.Color:= dm.colorCampoRequido;
+  DBEDireccion.Color:= dm.colorCampoRequido;
+  DBLCBoxTipoDoc.Color:= dm.colorCampoRequido;
+  DBENroDocumento.Color:= dm.colorCampoRequido;
+
   PageControl.ActivePage:= TabSheetDatos;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
@@ -469,35 +474,26 @@ var
   mensaje: string;
   color: TColor;
 begin
-  DBEApellidoNombre.Color:= clWhite;
-  DBEDireccion.Color:= clWhite;
-  DBLCBoxTipoDoc.Color:= clWhite;
-  DBENroDocumento.Color:= clWhite;
-
   PageControl.ActivePageIndex:= 0;
   result:= true;
   mensaje:= '';
-  color:= $00B3FFFF;
   DBEApellidoNombre.SetFocus;
 
   if (ZQ_PersonaNOMBRE.IsNull) then
   begin
     mensaje:= 'El campo Apellido y Nombre se encuentra vacío, Verifique';
-    DBEApellidoNombre.Color:= color;
     result := false;
   end;
 
   if (ZQ_PersonaDIRECCION.IsNull) then
   begin
     mensaje:= mensaje+#13+'El campo Dirección se encuentra vacío, Verifique';
-    DBEDireccion.Color:= color;
     result := false;
   end;
 
   if (ZQ_PersonaID_TIPO_DOC.IsNull) then
   begin
     mensaje:= mensaje+#13+'El campo Tipo Documento se encuentra vacío, Verifique';
-    DBLCBoxTipoDoc.Color:= color;
     result := false;
   end;
 
@@ -505,7 +501,6 @@ begin
     if (ZQ_PersonaNUMERO_DOC.IsNull) then
     begin
       mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío, Verifique';
-      DBENroDocumento.Color:= color;
       result := false;
     end;
 

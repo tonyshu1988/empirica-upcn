@@ -247,6 +247,11 @@ uses UDM, UPrincipal;
 
 procedure TFABMClientes.FormCreate(Sender: TObject);
 begin
+  DBEApellidoNombre.Color:= dm.colorCampoRequido;
+  DBEDireccion.Color:= dm.colorCampoRequido;
+  DBLCBoxTipoDoc.Color:= dm.colorCampoRequido;
+  DBENroDocumento.Color:= dm.colorCampoRequido;
+
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   EKOrdenar.CargarConfigColunmas;
@@ -462,37 +467,27 @@ end;
 function TFABMClientes.validarcampos():boolean;
 var
   mensaje: string;
-  color: TColor;
 begin
-  DBEApellidoNombre.Color:= clWhite;
-  DBEDireccion.Color:= clWhite;
-  DBLCBoxTipoDoc.Color:= clWhite;
-  DBENroDocumento.Color:= clWhite;
-
   PageControl.ActivePageIndex:= 0;
   result:= true;
   mensaje:= '';
-  color:= $00B3FFFF;
   DBEApellidoNombre.SetFocus;
 
   if (ZQ_ClientesNOMBRE.IsNull) then
   begin
     mensaje:= 'El campo Apellido y Nombre se encuentra vacío, Verifique';
-    DBEApellidoNombre.Color:= color;
     result := false;
   end;
 
   if (ZQ_ClientesDIRECCION.IsNull) then
   begin
     mensaje:= mensaje+#13+'El campo Dirección se encuentra vacío, Verifique';
-    DBEDireccion.Color:= color;
     result := false;
   end;
 
   if (ZQ_ClientesID_TIPO_DOC.IsNull) then
   begin
     mensaje:= mensaje+#13+'El campo Tipo Documento se encuentra vacío, Verifique';
-    DBLCBoxTipoDoc.Color:= color;
     result := false;
   end;
 
@@ -500,7 +495,6 @@ begin
     if (ZQ_ClientesNUMERO_DOC.IsNull) then
     begin
       mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío, Verifique';
-      DBENroDocumento.Color:= color;
       result := false;
     end;
 
