@@ -47,7 +47,7 @@ type
     Label1: TLabel;
     DBLookupComboBox2: TDBLookupComboBox;
     Label3: TLabel;
-    DBEdit3: TDBEdit;
+    DBEDireccion: TDBEdit;
     Label6: TLabel;
     DBEdit4: TDBEdit;
     Label7: TLabel;
@@ -106,6 +106,7 @@ type
     procedure BtCrearPersonaClick(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);
     procedure BtCancelarClick(Sender: TObject);
+    function validarcampos():boolean;
   private
     { Private declarations }
   public
@@ -124,6 +125,47 @@ implementation
 uses UDM;
 
 {$R *.dfm}
+
+
+function TFBuscarPersona.validarcampos():boolean;
+var
+  mensaje: string;
+  color: TColor;
+begin
+
+
+  result:= true;
+  mensaje:= '';
+  dbNombre.SetFocus;
+
+  if (ZQ_PersonasNOMBRE.IsNull) then
+  begin
+    mensaje:= 'El campo Apellido y Nombre se encuentra vacío, Verifique';
+    result := false;
+  end;
+
+  if (ZQ_PersonasDIRECCION.IsNull) then
+  begin
+    mensaje:= mensaje+#13+'El campo Dirección se encuentra vacío, Verifique';
+    result := false;
+  end;
+
+  if (ZQ_PersonasID_TIPO_DOC.IsNull) then
+  begin
+    mensaje:= mensaje+#13+'El campo Tipo Documento se encuentra vacío, Verifique';
+    result := false;
+  end;
+
+  if (ZQ_PersonasID_TIPO_DOC.AsInteger <> 0) then
+    if (ZQ_PersonasNUMERO_DOC.IsNull) then
+    begin
+      mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío, Verifique';
+      result := false;
+    end;
+
+  if Result = False then
+    Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
+end;
 
 procedure TFBuscarPersona.BtSeleccionarClick(Sender: TObject);
 begin
@@ -155,6 +197,12 @@ begin
   DM.EKModelo.abrir(ZQ_Provincia);
   DM.EKModelo.abrir(ZQ_TipoIVA);
   DM.EKModelo.abrir(ZQ_TipoDoc);
+
+  dbNombre.Color:= dm.colorCampoRequido;
+  DBEDireccion.Color:= dm.colorCampoRequido;
+  dblkTipoDoc.Color:= dm.colorCampoRequido;
+  dbNroDocu.Color:= dm.colorCampoRequido;
+
   EKBusquedaAvanzada1.Buscar;
 end;
 
@@ -195,6 +243,9 @@ procedure TFBuscarPersona.BtGuardarClick(Sender: TObject);
 var
   id : integer;
 begin
+    if not validarcampos then
+    exit;
+
     id:= ZQ_PersonasID_PERSONA.AsInteger;
     if DM.EKModelo.finalizar_transaccion(Transaccion_CrearPersona) then
     begin

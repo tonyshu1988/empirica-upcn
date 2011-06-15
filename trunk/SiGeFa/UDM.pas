@@ -65,9 +65,10 @@ type
     auxCurrencyDecimals: Integer;
     auxCurrencyString: string;
   public
+    colorCampoRequido: TColor;
     procedure prepararParaExportar(query: TDataSet; valor: Boolean);
     procedure mostrarCantidadRegistro(query: TDataSet; var etiqueta: TLabel);
-    procedure cargarReporteSucursal(idSucursal: integer);    
+    procedure cargarReporteSucursal(idSucursal: integer);
   end;
 
 var
@@ -76,7 +77,6 @@ var
   enviandoMail: boolean; //TRUE si se esta enviado un mail; FALSE en caso contrario
   sucursales: TEKArrayPermisos; //array de permisos valores que tiene un campo usuario y un campo valor
   TextoPieDePagina: string;
-  colorCampoRequido: TColor;
 
 implementation
 

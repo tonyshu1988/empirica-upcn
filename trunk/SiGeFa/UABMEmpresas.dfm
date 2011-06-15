@@ -30,7 +30,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 193
       Width = 885
       Height = 281
-      ActivePage = TabViajantes
+      ActivePage = TabContactos
       Align = alBottom
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -339,7 +339,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridContactos: TDBGrid
           Left = 0
           Top = 0
-          Width = 869
+          Width = 877
           Height = 134
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
@@ -413,7 +413,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel1: TPanel
           Left = 0
           Top = 134
-          Width = 869
+          Width = 877
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -430,7 +430,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoContactos: TDBMemo
           Left = 0
           Top = 153
-          Width = 869
+          Width = 877
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -453,7 +453,7 @@ object FABMEmpresas: TFABMEmpresas
           Left = 0
           Top = 0
           Width = 877
-          Height = 133
+          Height = 134
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
           Color = 14606012
@@ -525,7 +525,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object DBMemoViajantes: TDBMemo
           Left = 0
-          Top = 152
+          Top = 153
           Width = 877
           Height = 100
           Align = alBottom
@@ -537,7 +537,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object Panel2: TPanel
           Left = 0
-          Top = 133
+          Top = 134
           Width = 877
           Height = 19
           Align = alBottom
