@@ -478,6 +478,7 @@ begin
 
   if not Assigned(vsel) then
     vsel := TFBuscarPersona.Create(nil);
+    
   vsel.OnSeleccionar := OnSelPersona;
   vsel.ShowModal;
 
