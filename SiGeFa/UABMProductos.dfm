@@ -1536,7 +1536,7 @@ object FABMProductos: TFABMProductos
       Top = 326
       Width = 1006
       Height = 222
-      ActivePage = tabDetalle
+      ActivePage = tabCabecera
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -3980,7 +3980,7 @@ object FABMProductos: TFABMProductos
     NombreGuardarConfig = 'ABM_ProductosDetalle'
     Ordenar = True
     MoverColumna = True
-    Left = 880
-    Top = 416
+    Left = 832
+    Top = 392
   end
 end

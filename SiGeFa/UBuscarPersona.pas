@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, ComCtrls,
   ISDBEditDateTimePicker, StdCtrls, Mask, DBCtrls, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, EKBusquedaAvanzada;
+  ZAbstractDataset, ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla,
+  ZStoredProcedure;
 
 type
   TFBuscarPersona = class(TForm)
@@ -94,6 +95,9 @@ type
     ZQ_TipoDocID_TIPO_DOC: TIntegerField;
     ZQ_TipoDocNOMBRE_TIPO_DOC: TStringField;
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    Nro_Persona: TZStoredProc;
+    Nro_PersonaID: TIntegerField;
     procedure BtSeleccionarClick(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
@@ -105,7 +109,7 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    id_persona: integer;
     OnSeleccionar : procedure() of object;
   end;
 
@@ -129,28 +133,31 @@ begin
       OnSeleccionar
   end
   else
-    Application.MessageBox(PChar('Debe seleccionar algúna Persona.')
-                                   ,'Datos Incompletos',MB_OK+MB_ICONWARNING);
+    Application.MessageBox(PChar('Debe seleccionar algúna Persona.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
 end;
+
 
 procedure TFBuscarPersona.btBuscarClick(Sender: TObject);
 begin
-EKBusquedaAvanzada1.Buscar;
+  EKBusquedaAvanzada1.Buscar;
 end;
+
 
 procedure TFBuscarPersona.btsalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFBuscarPersona.FormCreate(Sender: TObject);
 begin
-DM.EKModelo.abrir(ZQ_Provincia);
-DM.EKModelo.abrir(ZQ_TipoIVA);
-DM.EKModelo.abrir(ZQ_TipoDoc);
-
-EKBusquedaAvanzada1.Buscar;
+  PanelEdicion.Visible:= false;
+  DM.EKModelo.abrir(ZQ_Provincia);
+  DM.EKModelo.abrir(ZQ_TipoIVA);
+  DM.EKModelo.abrir(ZQ_TipoDoc);
+  EKBusquedaAvanzada1.Buscar;
 end;
+
 
 procedure TFBuscarPersona.DBGridPersonasDblClick(Sender: TObject);
 begin
@@ -160,9 +167,9 @@ begin
       OnSeleccionar
   end
   else
-    Application.MessageBox(PChar('Debe seleccionar algúna Persona.')
-                                   ,'Datos Incompletos',MB_OK+MB_ICONWARNING);
+    Application.MessageBox(PChar('Debe seleccionar algúna Persona.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
 end;
+
 
 procedure TFBuscarPersona.BtCrearPersonaClick(Sender: TObject);
 begin
@@ -171,7 +178,13 @@ begin
     GrupoVisualizando.Enabled:=false;
     GrupoEditando.Enabled:=true;
     DBGridPersonas.Enabled:= false;
+
+    Nro_Persona.Active:= True;
+    id_persona:= Nro_PersonaID.AsInteger;
+    Nro_Persona.Active:= false;
+
     ZQ_Personas.Append;
+    ZQ_PersonasID_PERSONA.AsInteger:= id_persona;
     ZQ_PersonasBAJA.AsString := 'N';
     PanelEdicion.Visible := true;
     dbNombre.SetFocus;
@@ -180,20 +193,24 @@ end;
 
 procedure TFBuscarPersona.BtGuardarClick(Sender: TObject);
 var
-recno : integer;
+  id : integer;
 begin
+    id:= ZQ_PersonasID_PERSONA.AsInteger;
     if DM.EKModelo.finalizar_transaccion(Transaccion_CrearPersona) then
     begin
       DBGridPersonas.Enabled:=true;
       GrupoVisualizando.Enabled:=true;
       GrupoEditando.Enabled:=false;
-      recno:=ZQ_Personas.RecNo;
-      ZQ_Personas.Refresh;
-      ZQ_Personas.RecNo:=recno;
       DBGridPersonas.SetFocus;
       PanelEdicion.Visible := false;
+
+      ZQ_Personas.Refresh;
+      ZQ_Personas.Locate('ID_PERSONA',id,[]);
+      if Assigned(OnSeleccionar) then
+        OnSeleccionar
     end;
 end;
+
 
 procedure TFBuscarPersona.BtCancelarClick(Sender: TObject);
 begin

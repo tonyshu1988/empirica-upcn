@@ -159,7 +159,7 @@ end;
 
 procedure TFABM_Marcas.btnModificarClick(Sender: TObject);
 begin
-  if ZQ_Marcas.IsEmpty then
+  if (ZQ_Marcas.IsEmpty) or (ZQ_MarcasID_MARCA.AsInteger = 0) then
     exit;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
@@ -189,7 +189,7 @@ procedure TFABM_Marcas.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'N') then
+  if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'N') or (ZQ_MarcasID_MARCA.AsInteger = 0)then
     exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja la "Marca" seleccionada?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -216,7 +216,7 @@ procedure TFABM_Marcas.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'S') then
+  if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'S') or (ZQ_MarcasID_MARCA.AsInteger = 0) then
     exit;
 
   if (application.MessageBox(pchar('¿Desea reactivar la "Marca" seleccionada?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then

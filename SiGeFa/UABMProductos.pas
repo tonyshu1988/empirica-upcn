@@ -366,8 +366,11 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     tabs.Enabled:= true;
     tabs.ActivePageIndex:= 0;
     PProducto.Enabled:=True;
+
     ZQ_ProductoCabecera.Append;
     ZQ_ProductoCabeceraBAJA.AsString:= 'N';
+    ZQ_ProductoCabeceraCOLOR.AsInteger:= 0;
+    ZQ_ProductoCabeceraID_MARCA.AsInteger:= 0;
 
     edCodCorto.SetFocus;
     GrupoEditando.Enabled := true;
@@ -415,7 +418,7 @@ begin
     exit;
   end;
 
-  if (ZQ_ProductoCabeceraID_MARCA.IsNull) then
+  if (ZQ_ProductoCabeceraID_ARTICULO.IsNull) then
   begin
     Application.MessageBox('El campo Artículo se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
     tabs.ActivePageIndex:= 0;
@@ -449,10 +452,9 @@ begin
         edCodCorto.SetFocus;
         result := false;
         exit;
-    end;  end;
-
-
-    end;
+      end;
+  end;
+end;
 
 
 function TFABMProductos.validarcamposDetalle():Boolean;

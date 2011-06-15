@@ -142,7 +142,7 @@ end;
 
 procedure TFABM_Colores.btnModificarClick(Sender: TObject);
 begin
-if ZQ_Colores.IsEmpty then
+  if (ZQ_Colores.IsEmpty) or (ZQ_ColoresID_COLOR.AsInteger = 0) then
     exit;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Colores]) then
@@ -172,7 +172,7 @@ procedure TFABM_Colores.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Colores.IsEmpty) OR (ZQ_ColoresBAJA.AsString <> 'N') then
+  if (ZQ_Colores.IsEmpty) OR (ZQ_ColoresBAJA.AsString <> 'N') or (ZQ_ColoresID_COLOR.AsInteger = 0) then
     exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja el Color seleccionado?'), 'ABM Colores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -257,7 +257,7 @@ procedure TFABM_Colores.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Colores.IsEmpty) OR (ZQ_ColoresBAJA.AsString <> 'S') then
+  if (ZQ_Colores.IsEmpty) OR (ZQ_ColoresBAJA.AsString <> 'S') or (ZQ_ColoresID_COLOR.AsInteger = 0) then
     exit;
 
   if (application.MessageBox(pchar('¿Desea reactivar el Color seleccionado?'), 'ABM Colores', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
