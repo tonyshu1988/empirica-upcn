@@ -9,7 +9,7 @@ uses
   mxNativeExcel, IdBaseComponent, IdComponent, IdTCPConnection,
   IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage, ExtCtrls,
   IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
-  IdSMTPBase, IdExplicitTLSClientServerBase, StdCtrls, EKIni;
+  IdSMTPBase, IdExplicitTLSClientServerBase, StdCtrls, EKIni, Graphics;
 
 type
   TDM = class(TDataModule)
@@ -76,6 +76,7 @@ var
   enviandoMail: boolean; //TRUE si se esta enviado un mail; FALSE en caso contrario
   sucursales: TEKArrayPermisos; //array de permisos valores que tiene un campo usuario y un campo valor
   TextoPieDePagina: string;
+  colorCampoRequido: TColor;
 
 implementation
 
@@ -97,6 +98,8 @@ begin
   auxCurrencyDecimals:= CurrencyDecimals;
   auxThousandSeparator:= ThousandSeparator;
   auxCurrencyString:= CurrencyString;
+
+  colorCampoRequido:= $00B3FFFF;
 
   enviandoMail:= false;
 
