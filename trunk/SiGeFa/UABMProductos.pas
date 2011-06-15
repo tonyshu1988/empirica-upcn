@@ -298,8 +298,10 @@ type
     procedure btnImprimirListadoClick(Sender: TObject);
     procedure btnImprimirListado_SalirClick(Sender: TObject);
     procedure btnImprimirListado_AceptarClick(Sender: TObject);
+    procedure DBEdit2Enter(Sender: TObject);
+    procedure DBEdit3Enter(Sender: TObject);
   private
-    { Private declarations }
+    cambioAuto: string;  //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
   public
     { Public declarations }
   end;
@@ -664,7 +666,7 @@ if ZQ_ProductoCabeceraID_ARTICULO.IsNull then
   ZQ_DetalleProductoLLEVAR_STOCK.AsString:= 'S';
   ZQ_DetalleProductoPRECIO_COSTO.AsFloat:= 0;
   ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= 0;
-  ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:= 1;
+  ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:= 0;
   ZQ_DetalleProductoCOEF_DESCUENTO.AsFloat:= 0;
   ZQ_DetalleProductoIMPUESTO_INTERNO.AsFloat:= 0;
   ZQ_DetalleProductoIMPUESTO_IVA.AsFloat:= 0;
@@ -971,16 +973,51 @@ begin
 end;
 
 
+procedure TFABMProductos.ZQ_DetalleProductoPRECIO_COSTOChange(Sender: TField);
+begin
+  if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull)then
+  begin
+    cambioAuto:= 'PV';  //si cambio el precio de costo se cambia el precio de venta automaticamente
+    ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
+  end;
+end;
+
+
 procedure TFABMProductos.ZQ_DetalleProductoCOEF_GANANCIAChange(Sender: TField);
 begin
+  if cambioAuto = 'CG' then
+    exit;
+
   if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull) then
+  begin
+    cambioAuto:= 'PV';  //si cambio el coeficiente de ganancia se cambia el precio de venta automaticamente
     ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
+  end;
 end;
 
 
 procedure TFABMProductos.ZQ_DetalleProductoPRECIO_VENTAChange(Sender: TField);
 begin
-//  ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
+  if cambioAuto = 'PV' then
+    exit;
+
+  if (not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoPRECIO_VENTA.IsNull)) then
+  begin
+    cambioAuto:= 'CG';   //si cambio el precio de venta se cambia el coef  de ganancia automaticamente
+    ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:= (ZQ_DetalleProductoPRECIO_VENTA.AsFloat/ZQ_DetalleProductoPRECIO_COSTO.AsFloat) - 1;
+  end
+end;
+
+
+procedure TFABMProductos.DBEdit2Enter(Sender: TObject);
+begin
+  cambioAuto:= 'CG'; //cuando entro al campo precio de venta seteo que se tiene q cambiar el coef de ganancia
+end;
+
+
+procedure TFABMProductos.DBEdit3Enter(Sender: TObject);
+begin
+  cambioAuto:= 'PV'; //cuando entro al campo coef de gan seteo que se tiene q cambiar el precio de venta
 end;
 
 
@@ -1005,14 +1042,6 @@ begin
       ZQ_ProductoCabeceraID_ARTICULO.AsInteger := StrToInt(EKListadoArticulo.Resultado);
       cmbArticulo.setfocus;
     end;
-end;
-
-
-procedure TFABMProductos.ZQ_DetalleProductoPRECIO_COSTOChange(
-  Sender: TField);
-begin
-  if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull) then
-    ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
 end;
 
 
@@ -1180,5 +1209,6 @@ begin
   panelImprimirListado.Visible:= false;
   GrupoVisualizando.Enabled:= true;
 end;
+
 
 end.

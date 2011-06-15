@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 209
-  Top = 64
+  Left = 248
+  Top = 115
   Width = 1024
   Height = 639
   Caption = 'FABMProductos'
@@ -1536,7 +1536,7 @@ object FABMProductos: TFABMProductos
       Top = 326
       Width = 1006
       Height = 222
-      ActivePage = tabCabecera
+      ActivePage = tabDetalle
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -2275,7 +2275,7 @@ object FABMProductos: TFABMProductos
               object DBEdit3: TDBEdit
                 Left = 145
                 Top = 41
-                Width = 105
+                Width = 124
                 Height = 21
                 CharCase = ecUpperCase
                 DataField = 'COEF_GANANCIA'
@@ -2287,6 +2287,7 @@ object FABMProductos: TFABMProductos
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnEnter = DBEdit3Enter
               end
               object DBEdit5: TDBEdit
                 Left = 145
@@ -2319,11 +2320,12 @@ object FABMProductos: TFABMProductos
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 2
+                OnEnter = DBEdit2Enter
               end
               object DBEdit4: TDBEdit
                 Left = 145
                 Top = 82
-                Width = 105
+                Width = 124
                 Height = 21
                 CharCase = ecUpperCase
                 DataField = 'COEF_DESCUENTO'
@@ -3443,9 +3445,11 @@ object FABMProductos: TFABMProductos
     object ZQ_DetalleProductoCOEF_GANANCIA: TFloatField
       FieldName = 'COEF_GANANCIA'
       OnChange = ZQ_DetalleProductoCOEF_GANANCIAChange
+      DisplayFormat = '0.0000'
     end
     object ZQ_DetalleProductoCOEF_DESCUENTO: TFloatField
       FieldName = 'COEF_DESCUENTO'
+      DisplayFormat = '0.0000'
     end
     object ZQ_DetalleProductoIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
