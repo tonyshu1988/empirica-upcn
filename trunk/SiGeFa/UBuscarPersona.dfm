@@ -1,6 +1,6 @@
 object FBuscarPersona: TFBuscarPersona
-  Left = 413
-  Top = 305
+  Left = 369
+  Top = 210
   Width = 719
   Height = 442
   Caption = 'Buscar Personas'
@@ -1098,8 +1098,8 @@ object FBuscarPersona: TFBuscarPersona
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 548
-    Top = 160
+    Left = 180
+    Top = 16
     DockControlHeights = (
       0
       0
@@ -1479,6 +1479,34 @@ object FBuscarPersona: TFBuscarPersona
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 72
-    Top = 56
+    Top = 64
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    Left = 184
+    Top = 64
+  end
+  object Nro_Persona: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    StoredProcName = 'SP_GEN_PERSONA_ID'
+    Left = 72
+    Top = 16
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    object Nro_PersonaID: TIntegerField
+      FieldName = 'ID'
+    end
   end
 end
