@@ -137,30 +137,52 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
 procedure TFPrincipal.FormCreate(Sender: TObject);
 var
   i: integer;
+  pertenece: boolean;
 begin
+  pertenece:= false;
   SUCURSAL_LOGUEO:= -1;
 
-  if DM.EKUsrLogin.PermisoAccionValorGrupo('ACCESO') <> nil then
-  begin
-    sucursales:= DM.EKUsrLogin.PermisoAccionValorGrupo('ACCESO'); //obtengo todas las sucursales
-  end;                                                         //a las q tiene acceso el usuario
+  dm.ZQ_Configuracion.Close;
+  dm.ZQ_Configuracion.Open;
 
-  if Length(sucursales) = 1 then //si hay una sola sucursal
+  if not dm.ZQ_ConfiguracionDB_SUCURSAL.IsNull  then
   begin
-    SUCURSAL_LOGUEO:= strtoint(sucursales[0].valor);
-  end
-  else  //si hay mas de una sucursal abro la pantalla para q seleccione una
-  begin
-    FSeleccionarSucursal:= TFSeleccionarSucursal.Create(nil);
-    FSeleccionarSucursal.ShowModal;
+    SUCURSAL_LOGUEO:= dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger; //cargo la sucursal a la cual pertenece la base de datos
+
+    if DM.EKUsrLogin.PermisoAccionValorGrupo('ACCESO') <> nil then
+    begin
+      sucursales:= DM.EKUsrLogin.PermisoAccionValorGrupo('ACCESO'); //obtengo todas las sucursales
+    end;                                                            //a las q tiene acceso el usuario
+
+    for  i:= 0 to Length(sucursales) - 1 do //Recorro todas las sucursales
+    begin                                   //del usuario seleccionado
+      if (SUCURSAL_LOGUEO = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0)then
+        pertenece:= true;
+    end;
   end;
 
-  if SUCURSAL_LOGUEO = -1 then  //si no selecciono ninguna sucursal o el
+//  if Length(sucursales) = 1 then //si hay una sola sucursal
+//  begin
+//    SUCURSAL_LOGUEO:= strtoint(sucursales[0].valor);
+//  end
+//  else  //si hay mas de una sucursal abro la pantalla para q seleccione una
+//  begin
+//    FSeleccionarSucursal:= TFSeleccionarSucursal.Create(nil);
+//    FSeleccionarSucursal.ShowModal;
+//  end;
+
+  if not pertenece then  //si no selecciono ninguna sucursal o el
+  begin
+    if SUCURSAL_LOGUEO = -1 then
+      ShowMessage('La Base de Datos no tiene asociada una sucursal, verifique.')
+    else
+      ShowMessage('El usuario ingresado no tiene permisos en esta sucursal, verifique.');
     Application.Terminate;      //usuario no tiene asignada ninguna salgo del sistema
+  end;
 
   dm.configMail('SUCURSAL', SUCURSAL_LOGUEO);
   dm.cargarReporteSucursal(SUCURSAL_LOGUEO);
-  
+  StatusBar1.Panels[0].text:= 'SUCURSAL: '+inttostr(SUCURSAL_LOGUEO);
   baja:= $006A6AFF;    //ROJO = color de los registros dados de baja
   activo:= $00FB952F;  //AZUL = color de los registro comunes
 end;

@@ -20,14 +20,6 @@ type
     EKInformacion1: TEKInformacion;
     EKUsrLogin: TEKUsrLogin;
     ZQ_Configuracion: TZQuery;
-    ZQ_ConfiguracionCLAVE: TStringField;
-    ZQ_ConfiguracionFECHA: TDateField;
-    ZQ_ConfiguracionNUMERO: TFloatField;
-    ZQ_ConfiguracionTEXTO: TStringField;
-    ZQ_ConfiguracionNIVEL: TSmallintField;
-    ZQ_ConfiguracionGRUPO: TStringField;
-    ZQ_ConfiguracionDESCRIPCION: TStringField;
-    ZQ_ConfiguracionGRAFICO: TBlobField;
     ExcelNative: TmxNativeExcel;
     ExcelExport: TmxDBGridExport;
     ZQ_ConfigMail: TZQuery;
@@ -57,6 +49,8 @@ type
     ZQ_ConfigReporteLOGO: TBlobField;
     ZQ_ConfigReporteREPORTE_TITULO: TStringField;
     ZQ_ConfigReporteREPORTE_SUBTITULO: TStringField;
+    ZQ_ConfiguracionDB_SUCURSAL: TIntegerField;
+    ZQ_ConfiguracionULTIMA_FECHA: TDateTimeField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure configMail(Tipo: String; id: integer);
@@ -89,8 +83,6 @@ var
   aux, logo_fondo:string;
   i: integer;
 begin
-  TextoPieDePagina:= 'Sistema Gestión y Facturación - ';
-
   SkinData1.Active:= true;
   Application.CreateForm(TFPrincipal, FPrincipal);
 
@@ -99,10 +91,11 @@ begin
   auxThousandSeparator:= ThousandSeparator;
   auxCurrencyString:= CurrencyString;
 
-  colorCampoRequido:= $00B3FFFF;
-
-  enviandoMail:= false;
-
+  //seteo de variables globales
+  colorCampoRequido:= $00B3FFFF; //amarillo, indica los campos obligatorios
+  enviandoMail:= false;          //setea la bandera en false indicando q no se esta enviando mail
+  TextoPieDePagina:= 'Sistema Gestión y Facturación - '; //pie de pagina izquierdo de todos los reportes
+  //cargo la imagen de fondo del sistema
   EKIni.abrir;
   logo_fondo:= EKIni.Ini.ReadString('LOGO_FONDO', 'logo', '');
   try
@@ -111,6 +104,7 @@ begin
   except
     exit;
   end;
+
 end;
 
 
