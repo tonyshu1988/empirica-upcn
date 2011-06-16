@@ -2428,13 +2428,6 @@ object FABMProductos: TFABMProductos
       FieldName = 'BAJA'
       Size = 1
     end
-    object ZQ_ProductoCabeceraAUD_USUARIO: TStringField
-      FieldName = 'AUD_USUARIO'
-      Size = 10
-    end
-    object ZQ_ProductoCabeceraAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
-    end
     object ZQ_ProductoCabeceraID_ARTICULO: TIntegerField
       FieldName = 'ID_ARTICULO'
     end
@@ -3899,13 +3892,6 @@ object FABMProductos: TFABMProductos
     object ZQ_ExisteCodigoBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
-    end
-    object ZQ_ExisteCodigoAUD_USUARIO: TStringField
-      FieldName = 'AUD_USUARIO'
-      Size = 10
-    end
-    object ZQ_ExisteCodigoAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
     end
     object ZQ_ExisteCodigoID_ARTICULO: TIntegerField
       FieldName = 'ID_ARTICULO'

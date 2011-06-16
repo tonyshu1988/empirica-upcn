@@ -1,6 +1,6 @@
 object FABM_Sucursal: TFABM_Sucursal
-  Left = 338
-  Top = 260
+  Left = 331
+  Top = 171
   Width = 814
   Height = 500
   Caption = 'ABM Sucursal'
@@ -15,6 +15,7 @@ object FABM_Sucursal: TFABM_Sucursal
   Position = poDefault
   Scaled = False
   Visible = True
+  WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -127,7 +128,6 @@ object FABM_Sucursal: TFABM_Sucursal
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
-          DataSet = DM.ZQ_ConfigReporte
           Stretch = True
         end
         object QRLabel17: TQRLabel
@@ -1751,13 +1751,6 @@ object FABM_Sucursal: TFABM_Sucursal
     object ZQ_SucursalBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
-    end
-    object ZQ_SucursalAUD_UDUARIO: TStringField
-      FieldName = 'AUD_UDUARIO'
-      Size = 10
-    end
-    object ZQ_SucursalAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
     end
     object ZQ_SucursalLOGO: TBlobField
       FieldName = 'LOGO'

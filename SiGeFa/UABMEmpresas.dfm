@@ -21,14 +21,14 @@ object FABMEmpresas: TFABMEmpresas
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 887
-    Height = 475
+    Width = 879
+    Height = 469
     Align = alClient
     TabOrder = 0
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 193
-      Width = 885
+      Top = 187
+      Width = 877
       Height = 281
       ActivePage = TabContactos
       Align = alBottom
@@ -339,7 +339,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridContactos: TDBGrid
           Left = 0
           Top = 0
-          Width = 877
+          Width = 869
           Height = 134
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
@@ -413,7 +413,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel1: TPanel
           Left = 0
           Top = 134
-          Width = 877
+          Width = 869
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -430,7 +430,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoContactos: TDBMemo
           Left = 0
           Top = 153
-          Width = 877
+          Width = 869
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -657,8 +657,8 @@ object FABMEmpresas: TFABMEmpresas
     object DBGridEmpresas: TDBGrid
       Left = 1
       Top = 20
-      Width = 885
-      Height = 173
+      Width = 877
+      Height = 167
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -772,7 +772,7 @@ object FABMEmpresas: TFABMEmpresas
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 885
+      Width = 877
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -793,7 +793,7 @@ object FABMEmpresas: TFABMEmpresas
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 775
+        Left = 767
         Top = 1
         Width = 109
         Height = 17
@@ -811,7 +811,7 @@ object FABMEmpresas: TFABMEmpresas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1685,13 +1685,6 @@ object FABMEmpresas: TFABMEmpresas
       FieldName = 'BAJA'
       Size = 1
     end
-    object ZQ_EmpresaAUD_USUARIO: TStringField
-      FieldName = 'AUD_USUARIO'
-      Size = 10
-    end
-    object ZQ_EmpresaAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
-    end
     object ZQ_EmpresaDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       Size = 500
@@ -1932,8 +1925,14 @@ object FABMEmpresas: TFABMEmpresas
     SQL.Strings = (
       'select *'
       'from persona_relacion pr'
-      'where pr.id_relacion = 4 and pr.id_empresa = :id_empresa')
+      'where pr.id_relacion = :relacion'
+      '   and pr.id_empresa = :id_empresa')
     Params = <
+      item
+        DataType = ftUnknown
+        Name = 'relacion'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'id_empresa'
@@ -1942,6 +1941,11 @@ object FABMEmpresas: TFABMEmpresas
     Left = 405
     Top = 378
     ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'relacion'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'id_empresa'
@@ -2093,13 +2097,6 @@ object FABMEmpresas: TFABMEmpresas
       FieldName = 'BAJA'
       Size = 1
     end
-    object ZQ_PersonasAUD_USUARIO: TStringField
-      FieldName = 'AUD_USUARIO'
-      Size = 10
-    end
-    object ZQ_PersonasAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
-    end
     object ZQ_PersonasDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       Size = 500
@@ -2139,8 +2136,14 @@ object FABMEmpresas: TFABMEmpresas
     SQL.Strings = (
       'select *'
       'from persona_relacion pr'
-      'where pr.id_relacion = 3 and pr.id_empresa = :id_empresa')
+      'where pr.id_relacion = :relacion'
+      '   and pr.id_empresa = :id_empresa')
     Params = <
+      item
+        DataType = ftUnknown
+        Name = 'relacion'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'id_empresa'
@@ -2149,6 +2152,11 @@ object FABMEmpresas: TFABMEmpresas
     Left = 629
     Top = 378
     ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'relacion'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'id_empresa'

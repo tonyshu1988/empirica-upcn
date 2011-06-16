@@ -38,8 +38,6 @@ type
     ZQ_SucursalTELEFONO: TStringField;
     ZQ_SucursalEMAIL: TStringField;
     ZQ_SucursalBAJA: TStringField;
-    ZQ_SucursalAUD_UDUARIO: TStringField;
-    ZQ_SucursalAUD_FECHA: TDateTimeField;
     DS_Sucursal: TDataSource;
     DBEdit1: TDBEdit;
     Label2: TLabel;

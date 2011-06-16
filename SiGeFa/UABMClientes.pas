@@ -64,8 +64,6 @@ type
     ZQ_ClientesDESCRIPCION: TStringField;
     ZQ_ClientesCUIT_CUIL: TStringField;
     ZQ_ClientesBAJA: TStringField;
-    ZQ_ClientesAUD_USUARIO: TStringField;
-    ZQ_ClientesAUD_FECHA: TDateTimeField;
     ZQ_ClientesNOMBRE_TIPO_DOC: TStringField;
     ZQ_ClientesNOMBRE_TIPO_IVA: TStringField;
     ZQ_ClientesNOMBRE_PROVINCIA: TStringField;
@@ -118,8 +116,6 @@ type
     ZQ_SucursalTELEFONO: TStringField;
     ZQ_SucursalEMAIL: TStringField;
     ZQ_SucursalBAJA: TStringField;
-    ZQ_SucursalAUD_UDUARIO: TStringField;
-    ZQ_SucursalAUD_FECHA: TDateTimeField;
     StaticTxtBaja: TStaticText;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
@@ -309,12 +305,13 @@ begin
 
     ZQ_RelacionCliente.Append;
     ZQ_RelacionClienteID_PERSONA.AsInteger:= id_cliente;
-    ZQ_RelacionClienteID_RELACION.AsInteger:= 1; //cliente
+    ZQ_RelacionClienteID_RELACION.AsInteger:= RELACION_CLIENTE; //cliente
     ZQ_RelacionClienteID_SUCURSAL.clear;//AsInteger:= id_sucursal;
     ZQ_RelacionClienteID_EMPRESA.Clear;
 
     ZQ_Clientes.Append;
     ZQ_ClientesID_PERSONA.AsInteger:= id_cliente;
+    ZQ_ClientesID_PROVINCIA.AsInteger:= dm.provinciaPorDefecto;  //por defecto santa fe
     ZQ_ClientesBAJA.AsString:= 'N';
 
     DBEApellidoNombre.SetFocus;
@@ -404,10 +401,10 @@ procedure TFABMClientes.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
+  Perform(WM_NEXTDLGCTL, 0, 0);
+
   if not validarcampos() then
     exit;
-
-  Perform(WM_NEXTDLGCTL, 0, 0);
   
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMCliente) then

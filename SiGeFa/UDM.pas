@@ -60,6 +60,7 @@ type
     auxCurrencyString: string;
   public
     colorCampoRequido: TColor;
+    provinciaPorDefecto: integer;
     procedure prepararParaExportar(query: TDataSet; valor: Boolean);
     procedure mostrarCantidadRegistro(query: TDataSet; var etiqueta: TLabel);
     procedure cargarReporteSucursal(idSucursal: integer);
@@ -71,6 +72,12 @@ var
   enviandoMail: boolean; //TRUE si se esta enviado un mail; FALSE en caso contrario
   sucursales: TEKArrayPermisos; //array de permisos valores que tiene un campo usuario y un campo valor
   TextoPieDePagina: string;
+
+Const
+  RELACION_CLIENTE  = 11;
+  RELACION_EMPLEADO = 12;
+  RELACION_CONTACTO = 13;
+  RELACION_VIAJANTE = 14;
 
 implementation
 
@@ -95,6 +102,7 @@ begin
   colorCampoRequido:= $00B3FFFF; //amarillo, indica los campos obligatorios
   enviandoMail:= false;          //setea la bandera en false indicando q no se esta enviando mail
   TextoPieDePagina:= 'Sistema Gestión y Facturación - '; //pie de pagina izquierdo de todos los reportes
+  provinciaPorDefecto:= 1; //por ahora SANTA FE, despues se puede tomar de la configuracion
   //cargo la imagen de fondo del sistema
   EKIni.abrir;
   logo_fondo:= EKIni.Ini.ReadString('LOGO_FONDO', 'logo', '');
@@ -104,7 +112,6 @@ begin
   except
     exit;
   end;
-
 end;
 
 

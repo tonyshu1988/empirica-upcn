@@ -52,8 +52,6 @@ type
     ZQ_SucursalTELEFONO: TStringField;
     ZQ_SucursalEMAIL: TStringField;
     ZQ_SucursalBAJA: TStringField;
-    ZQ_SucursalAUD_UDUARIO: TStringField;
-    ZQ_SucursalAUD_FECHA: TDateTimeField;
     DS_Sucursal: TDataSource;
     ZQ_PosicionSucursalBAJA: TStringField;
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;

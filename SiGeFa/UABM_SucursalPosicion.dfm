@@ -941,7 +941,6 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           FieldName = 'COLUMNA'
           Title.Alignment = taCenter
           Title.Caption = 'Columna'
-          Width = 64
           Visible = True
         end>
     end
@@ -1810,13 +1809,6 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     object ZQ_SucursalBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
-    end
-    object ZQ_SucursalAUD_UDUARIO: TStringField
-      FieldName = 'AUD_UDUARIO'
-      Size = 10
-    end
-    object ZQ_SucursalAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
     end
   end
   object DS_Sucursal: TDataSource
