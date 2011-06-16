@@ -17,8 +17,8 @@ object DM: TDM
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
     SQLHourGlass = True
-    Left = 46
-    Top = 14
+    Left = 38
+    Top = 16
   end
   object SkinData1: TSkinData
     Active = False
@@ -132,8 +132,8 @@ object DM: TDM
     Version = '5.40.07.15'
     MenuUpdate = True
     MenuMerge = False
-    Left = 192
-    Top = 80
+    Left = 208
+    Top = 82
     SkinStream = {
       B2A200001D420400FE6771B8CDB63F0AFE7DDBA97F4F18038F007701BED1C07C
       75C80BD9C9F5D70591A9FECC5240394623B2CA86E4171CB29CAD627055451458
@@ -1440,20 +1440,20 @@ object DM: TDM
   end
   object EKEventos1: TEKEventos
     EnterPorTab = True
-    Left = 46
-    Top = 80
+    Left = 38
+    Top = 82
   end
   object EKModelo: TEKModeloTransaccion
     Coneccion = Conexion
     Left = 120
-    Top = 14
+    Top = 16
   end
   object EKInformacion1: TEKInformacion
     IndiceUsuario = 0
     IndiceTransaccion = 2
     IndiceVersion = 1
     Left = 120
-    Top = 80
+    Top = 82
   end
   object EKUsrLogin: TEKUsrLogin
     OnLogin = LoginLogin
@@ -1466,8 +1466,8 @@ object DM: TDM
     Caption = 'SIGEFA'
     Modo = EKLoginAutomatico
     ModoPermiso = EKPermisoAction
-    Left = 192
-    Top = 14
+    Left = 208
+    Top = 16
   end
   object ZQ_Configuracion: TZQuery
     Connection = Conexion
@@ -1475,36 +1475,13 @@ object DM: TDM
       'select *'
       'from configuracion')
     Params = <>
-    Left = 48
-    Top = 144
-    object ZQ_ConfiguracionCLAVE: TStringField
-      FieldName = 'CLAVE'
-      Required = True
+    Left = 38
+    Top = 146
+    object ZQ_ConfiguracionDB_SUCURSAL: TIntegerField
+      FieldName = 'DB_SUCURSAL'
     end
-    object ZQ_ConfiguracionFECHA: TDateField
-      FieldName = 'FECHA'
-    end
-    object ZQ_ConfiguracionNUMERO: TFloatField
-      FieldName = 'NUMERO'
-    end
-    object ZQ_ConfiguracionTEXTO: TStringField
-      FieldName = 'TEXTO'
-      Required = True
-      Size = 100
-    end
-    object ZQ_ConfiguracionNIVEL: TSmallintField
-      FieldName = 'NIVEL'
-    end
-    object ZQ_ConfiguracionGRUPO: TStringField
-      FieldName = 'GRUPO'
-      Size = 40
-    end
-    object ZQ_ConfiguracionDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 1000
-    end
-    object ZQ_ConfiguracionGRAFICO: TBlobField
-      FieldName = 'GRAFICO'
+    object ZQ_ConfiguracionULTIMA_FECHA: TDateTimeField
+      FieldName = 'ULTIMA_FECHA'
     end
   end
   object ExcelNative: TmxNativeExcel
@@ -1512,8 +1489,8 @@ object DM: TDM
     Borders = []
     Shading = False
     Version = '1.24'
-    Left = 264
-    Top = 14
+    Left = 280
+    Top = 16
   end
   object ExcelExport: TmxDBGridExport
     DateFormat = 'dd/MM/yyyy'
@@ -1611,8 +1588,8 @@ object DM: TDM
     EXCEL.RightMargin = 0.300000000000000000
     Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
     Version = '2.37'
-    Left = 264
-    Top = 80
+    Left = 280
+    Top = 82
   end
   object ZQ_ConfigMail: TZQuery
     Connection = Conexion
@@ -1634,8 +1611,8 @@ object DM: TDM
         Name = 'id_cuenta'
         ParamType = ptUnknown
       end>
-    Left = 136
-    Top = 144
+    Left = 120
+    Top = 146
     ParamData = <
       item
         DataType = ftUnknown
@@ -1709,21 +1686,21 @@ object DM: TDM
     end
   end
   object Actualizar: TTimer
-    Left = 214
-    Top = 144
+    Left = 208
+    Top = 146
   end
   object IdPOP3: TIdPOP3
     IOHandler = POP3_SSL
     AutoLogin = True
     SASLMechanisms = <>
-    Left = 48
-    Top = 200
+    Left = 38
+    Top = 207
   end
   object IdSMTP: TIdSMTP
     IOHandler = SMTP_SSL
     SASLMechanisms = <>
-    Left = 136
-    Top = 200
+    Left = 120
+    Top = 207
   end
   object SMTP_SSL: TIdSSLIOHandlerSocketOpenSSL
     Destination = ':25'
@@ -1735,8 +1712,8 @@ object DM: TDM
     SSLOptions.Mode = sslmUnassigned
     SSLOptions.VerifyMode = []
     SSLOptions.VerifyDepth = 0
-    Left = 136
-    Top = 248
+    Left = 120
+    Top = 263
   end
   object POP3_SSL: TIdSSLIOHandlerSocketOpenSSL
     Destination = ':110'
@@ -1748,13 +1725,13 @@ object DM: TDM
     SSLOptions.Mode = sslmUnassigned
     SSLOptions.VerifyMode = []
     SSLOptions.VerifyDepth = 0
-    Left = 48
-    Top = 248
+    Left = 38
+    Top = 263
   end
   object EKIni: TEKIni
     Archivo = 'sistema.ini'
     Left = 280
-    Top = 144
+    Top = 146
   end
   object ZQ_ConfigReporte: TZQuery
     Connection = Conexion
@@ -1768,8 +1745,8 @@ object DM: TDM
         Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
-    Left = 216
-    Top = 200
+    Left = 208
+    Top = 207
     ParamData = <
       item
         DataType = ftUnknown
