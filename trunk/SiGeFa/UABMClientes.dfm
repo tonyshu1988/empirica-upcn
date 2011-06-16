@@ -3344,13 +3344,6 @@ object FABMClientes: TFABMClientes
       FieldName = 'BAJA'
       Size = 1
     end
-    object ZQ_ClientesAUD_USUARIO: TStringField
-      FieldName = 'AUD_USUARIO'
-      Size = 10
-    end
-    object ZQ_ClientesAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
-    end
     object ZQ_ClientesNOMBRE_TIPO_DOC: TStringField
       FieldName = 'NOMBRE_TIPO_DOC'
       Size = 100
@@ -3853,13 +3846,6 @@ object FABMClientes: TFABMClientes
     object ZQ_SucursalBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
-    end
-    object ZQ_SucursalAUD_UDUARIO: TStringField
-      FieldName = 'AUD_UDUARIO'
-      Size = 10
-    end
-    object ZQ_SucursalAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
     end
   end
   object ATeclasRapidas: TActionManager

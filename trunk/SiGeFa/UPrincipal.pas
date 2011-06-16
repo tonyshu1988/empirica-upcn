@@ -30,7 +30,6 @@ type
     Productos1: TMenuItem;
     ABMProductos1: TMenuItem;
     Clientes1: TMenuItem;
-    ABMClientes1: TMenuItem;
     Empresas1: TMenuItem;
     ABMEmpresas1: TMenuItem;
     AABMProductos: TAction;
@@ -300,7 +299,7 @@ end;
 
 procedure TFPrincipal.AABMClientesExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFABMClientes, FABMClientes);
+//  EKVentanas1.Abrir(Sender, TFABMClientes, FABMClientes);
 end;
 
 

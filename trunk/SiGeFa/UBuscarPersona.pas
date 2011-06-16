@@ -73,8 +73,6 @@ type
     ZQ_PersonasNUMERO_DOC: TStringField;
     ZQ_PersonasSEXO: TStringField;
     ZQ_PersonasBAJA: TStringField;
-    ZQ_PersonasAUD_USUARIO: TStringField;
-    ZQ_PersonasAUD_FECHA: TDateTimeField;
     ZQ_PersonasDESCRIPCION: TStringField;
     ZQ_PersonasCUIT_CUIL: TStringField;
     DS_Personas: TDataSource;

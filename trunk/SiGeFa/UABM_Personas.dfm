@@ -2,7 +2,7 @@ object FABM_Personas: TFABM_Personas
   Left = 257
   Top = 140
   Width = 862
-  Height = 530
+  Height = 536
   Caption = 'ABM Personas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -25,7 +25,7 @@ object FABM_Personas: TFABM_Personas
     Left = 0
     Top = 0
     Width = 846
-    Height = 440
+    Height = 446
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -2477,7 +2477,7 @@ object FABM_Personas: TFABM_Personas
       Left = 5
       Top = 20
       Width = 836
-      Height = 247
+      Height = 216
       Align = alClient
       Color = 14606012
       DataSource = DS_Clientes
@@ -2597,9 +2597,9 @@ object FABM_Personas: TFABM_Personas
     end
     object PanelEdicion: TPanel
       Left = 5
-      Top = 267
+      Top = 236
       Width = 836
-      Height = 168
+      Height = 205
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 1
@@ -2608,7 +2608,7 @@ object FABM_Personas: TFABM_Personas
         Left = 0
         Top = 0
         Width = 836
-        Height = 168
+        Height = 205
         ActivePage = TabSheetDatos
         Align = alClient
         TabOrder = 0
@@ -2934,6 +2934,19 @@ object FABM_Personas: TFABM_Personas
             ParentFont = False
             TabOrder = 12
           end
+          object RadioGroupRelacionCliente: TRadioGroup
+            Left = 8
+            Top = 137
+            Width = 382
+            Height = 37
+            Caption = ' Es Cliente '
+            Columns = 2
+            ItemIndex = 0
+            Items.Strings = (
+              'No Es Cliente'
+              'Es Cliente')
+            TabOrder = 13
+          end
         end
         object TabSheetDetalle: TTabSheet
           BorderWidth = 4
@@ -2957,7 +2970,7 @@ object FABM_Personas: TFABM_Personas
             Left = 0
             Top = 0
             Width = 828
-            Height = 140
+            Height = 177
             Align = alClient
             Color = 14606012
             DataSource = DS_RelacionPersona
@@ -3682,13 +3695,6 @@ object FABM_Personas: TFABM_Personas
       FieldName = 'BAJA'
       Size = 1
     end
-    object ZQ_PersonaAUD_USUARIO: TStringField
-      FieldName = 'AUD_USUARIO'
-      Size = 10
-    end
-    object ZQ_PersonaAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
-    end
     object ZQ_PersonaNOMBRE_TIPO_DOC: TStringField
       FieldName = 'NOMBRE_TIPO_DOC'
       Size = 100
@@ -4223,13 +4229,49 @@ object FABM_Personas: TFABM_Personas
   object EKVistaPreviaListado: TEKVistaPreviaQR
     Reporte = RepPersonaListado
     ShowModal = False
-    Left = 498
+    Left = 522
     Top = 121
   end
   object EKVistaPreviaDetalle: TEKVistaPreviaQR
     Reporte = RepPersonaDetalle
     ShowModal = False
-    Left = 498
-    Top = 169
+    Left = 522
+    Top = 177
+  end
+  object ZQ_RelacionCliente: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select pr.*'
+      'from persona_relacion pr'
+      'where  pr.ID_PERSONA_RELACION = :idRelacion')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idRelacion'
+        ParamType = ptUnknown
+      end>
+    Left = 408
+    Top = 176
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idRelacion'
+        ParamType = ptUnknown
+      end>
+    object ZQ_RelacionClienteID_PERSONA_RELACION: TIntegerField
+      FieldName = 'ID_PERSONA_RELACION'
+    end
+    object ZQ_RelacionClienteID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_RelacionClienteID_RELACION: TIntegerField
+      FieldName = 'ID_RELACION'
+    end
+    object ZQ_RelacionClienteID_EMPRESA: TIntegerField
+      FieldName = 'ID_EMPRESA'
+    end
+    object ZQ_RelacionClienteID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
   end
 end

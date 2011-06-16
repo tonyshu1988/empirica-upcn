@@ -52,8 +52,6 @@ type
     ZQ_EmpresaEMAIL: TStringField;
     ZQ_EmpresaPAGINA_WEB: TStringField;
     ZQ_EmpresaBAJA: TStringField;
-    ZQ_EmpresaAUD_USUARIO: TStringField;
-    ZQ_EmpresaAUD_FECHA: TDateTimeField;
     ZQ_EmpresaDESCRIPCION: TStringField;
     ZQ_Provincia: TZQuery;
     ZQ_ProvinciaID_PROVINCIA: TIntegerField;
@@ -106,8 +104,6 @@ type
     ZQ_PersonasNUMERO_DOC: TStringField;
     ZQ_PersonasSEXO: TStringField;
     ZQ_PersonasBAJA: TStringField;
-    ZQ_PersonasAUD_USUARIO: TStringField;
-    ZQ_PersonasAUD_FECHA: TDateTimeField;
     ZQ_PersonasDESCRIPCION: TStringField;
     ZQ_PersonasCUIT_CUIL: TStringField;
     ZQ_PersonaRelacionContactonombre: TStringField;
@@ -261,24 +257,56 @@ uses UDM, UPrincipal, UMailEnviar;
 {$R *.dfm}
 
 function TFABMEmpresas.validarCampos():boolean;
+var
+  mensaje: string;
+  color: TColor;
 begin
- result := true;
-
- if (trim(ZQ_EmpresaNOMBRE.AsString) = '') then
-  begin
-    Application.MessageBox('El campo "Nombre Empresa" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    PageControlEdicion.ActivePageIndex:= 0;
-    dbNombre.SetFocus;
-    result := false;
-    exit;
-  end;
+  result:= true;
+  mensaje:= '';
+//  PageControl.ActivePageIndex:= 0;
+//
+//
+//  if (ZQ_PersonaNOMBRE.IsNull) then
+//  begin
+//    mensaje:= 'El campo Apellido y Nombre se encuentra vacío, Verifique';
+//    result := false;
+//  end;
+//
+//  if (ZQ_PersonaDIRECCION.IsNull) then
+//  begin
+//    mensaje:= mensaje+#13+'El campo Dirección se encuentra vacío, Verifique';
+//    result := false;
+//  end;
+//
+//  if (ZQ_PersonaID_TIPO_DOC.IsNull) then
+//  begin
+//    mensaje:= mensaje+#13+'El campo Tipo Documento se encuentra vacío, Verifique';
+//    result := false;
+//  end;
+//
+//  if (ZQ_PersonaID_TIPO_DOC.AsInteger <> 0) then
+//    if (ZQ_PersonaNUMERO_DOC.IsNull) then
+//    begin
+//      mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío, Verifique';
+//      result := false;
+//    end;
+//
+//  if Result = False then
+//  begin
+//    Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
+//    DBEApellidoNombre.SetFocus;
+//  end;
 end;
 
 
 procedure TFABMEmpresas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,
-                                      [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante,ZQ_EmpresaMarca]) then
+  Perform(WM_NEXTDLGCTL, 0, 0);
+
+  if not validarcampos() then
+    exit;
+
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante,ZQ_EmpresaMarca]) then
   begin
     GrupoVisualizando.Enabled:=false;
     GrupoEditando.Enabled:=true;
@@ -303,8 +331,7 @@ begin
   if (ZQ_Empresa.IsEmpty) or (ZQ_EmpresaBAJA.AsString = 'S') then
    exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas,
-                                      [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante,ZQ_EmpresaMarca]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante,ZQ_EmpresaMarca]) then
   begin
     DBGridEmpresas.Enabled:=false;
     ZQ_Empresa.Edit;
@@ -488,7 +515,7 @@ begin
      exit;
   end;
 
-  ZQ_PersonaRelacionContactoID_RELACION.AsInteger := 4;
+  ZQ_PersonaRelacionContactoID_RELACION.AsInteger := RELACION_CONTACTO;
   ZQ_PersonaRelacionContactoID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
 end;
 
@@ -508,10 +535,12 @@ end;
 procedure TFABMEmpresas.ZQ_EmpresaAfterScroll(DataSet: TDataSet);
 begin
   ZQ_PersonaRelacionContacto.Close;
+  ZQ_PersonaRelacionContacto.ParamByName('relacion').AsInteger := RELACION_CONTACTO;
   ZQ_PersonaRelacionContacto.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
   ZQ_PersonaRelacionContacto.Open;
 
   ZQ_PersonaRelacionViajante.Close;
+  ZQ_PersonaRelacionViajante.ParamByName('relacion').AsInteger := RELACION_VIAJANTE;
   ZQ_PersonaRelacionViajante.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
   ZQ_PersonaRelacionViajante.Open;
 
@@ -543,7 +572,7 @@ begin
      exit;
   end;
 
-  ZQ_PersonaRelacionViajanteID_RELACION.AsInteger := 3;
+  ZQ_PersonaRelacionViajanteID_RELACION.AsInteger := RELACION_VIAJANTE;
   ZQ_PersonaRelacionViajanteID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
 end;
 

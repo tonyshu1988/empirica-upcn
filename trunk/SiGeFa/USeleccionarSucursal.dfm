@@ -112,13 +112,6 @@ object FSeleccionarSucursal: TFSeleccionarSucursal
       FieldName = 'BAJA'
       Size = 1
     end
-    object ZQ_SucursalAUD_UDUARIO: TStringField
-      FieldName = 'AUD_UDUARIO'
-      Size = 10
-    end
-    object ZQ_SucursalAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
-    end
   end
   object EKLlenarCombo: TEKLlenarCombo
     dataset = ZQ_Sucursal

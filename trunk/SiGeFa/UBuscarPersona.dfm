@@ -17,15 +17,15 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 711
-    Height = 358
+    Width = 703
+    Height = 352
     Align = alClient
     TabOrder = 0
     object DBGridPersonas: TDBGrid
       Left = 1
       Top = 1
-      Width = 709
-      Height = 141
+      Width = 701
+      Height = 135
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
@@ -115,8 +115,8 @@ object FBuscarPersona: TFBuscarPersona
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 142
-      Width = 709
+      Top = 136
+      Width = 701
       Height = 215
       Align = alBottom
       TabOrder = 1
@@ -466,7 +466,7 @@ object FBuscarPersona: TFBuscarPersona
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1298,13 +1298,6 @@ object FBuscarPersona: TFBuscarPersona
     object ZQ_PersonasBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
-    end
-    object ZQ_PersonasAUD_USUARIO: TStringField
-      FieldName = 'AUD_USUARIO'
-      Size = 10
-    end
-    object ZQ_PersonasAUD_FECHA: TDateTimeField
-      FieldName = 'AUD_FECHA'
     end
     object ZQ_PersonasDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'

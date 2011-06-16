@@ -4893,10 +4893,7 @@ object FPrincipal: TFPrincipal
       end
     end
     object Clientes1: TMenuItem
-      Caption = 'Clientes'
-      object ABMClientes1: TMenuItem
-        Action = AABMClientes
-      end
+      Caption = 'Personas'
       object ABMPersonas1: TMenuItem
         Action = AABM_Personas
       end

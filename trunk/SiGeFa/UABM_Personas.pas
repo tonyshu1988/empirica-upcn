@@ -63,8 +63,6 @@ type
     ZQ_PersonaSEXO: TStringField;
     ZQ_PersonaCUIT_CUIL: TStringField;
     ZQ_PersonaBAJA: TStringField;
-    ZQ_PersonaAUD_USUARIO: TStringField;
-    ZQ_PersonaAUD_FECHA: TDateTimeField;
     ZQ_PersonaNOMBRE_TIPO_DOC: TStringField;
     ZQ_PersonaNOMBRE_TIPO_IVA: TStringField;
     ZQ_PersonaNOMBRE_PROVINCIA: TStringField;
@@ -206,6 +204,13 @@ type
     QRDBText23: TQRDBText;
     QRLabel25: TQRLabel;
     QRDBText24: TQRDBText;
+    ZQ_RelacionCliente: TZQuery;
+    ZQ_RelacionClienteID_PERSONA_RELACION: TIntegerField;
+    ZQ_RelacionClienteID_PERSONA: TIntegerField;
+    ZQ_RelacionClienteID_RELACION: TIntegerField;
+    ZQ_RelacionClienteID_EMPRESA: TIntegerField;
+    ZQ_RelacionClienteID_SUCURSAL: TIntegerField;
+    RadioGroupRelacionCliente: TRadioGroup;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -235,6 +240,7 @@ type
     id_persona: integer;
   public
     id_sucursal: integer;
+    existeRelacionCliente: boolean;
   end;
 
 var
@@ -300,8 +306,10 @@ end;
 
 procedure TFABM_Personas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionPersona]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente]) then
   begin
+    existeRelacionCliente:= false;
+
     DBGridClientes.Enabled := false;
     PanelEdicion.Visible:= true;
     TabSheetDatos.Enabled:= true;
@@ -312,14 +320,9 @@ begin
     id_persona:= Nro_PersonaID.AsInteger;
     Nro_Persona.Active:= false;
 
-//    ZQ_RelacionCliente.Append;
-//    ZQ_RelacionClienteID_PERSONA.AsInteger:= id_cliente;
-//    ZQ_RelacionClienteID_RELACION.AsInteger:= 1; //cliente
-//    ZQ_RelacionClienteID_SUCURSAL.clear; //AsInteger:= id_sucursal;
-//    ZQ_RelacionClienteID_EMPRESA.Clear;
-
     ZQ_Persona.Append;
     ZQ_PersonaID_PERSONA.AsInteger:= id_persona;
+    ZQ_PersonaID_PROVINCIA.AsInteger:= dm.provinciaPorDefecto;  //por defecto santa fe  
     ZQ_PersonaBAJA.AsString:= 'N';
 
     DBEApellidoNombre.SetFocus;
@@ -334,7 +337,7 @@ begin
   if ZQ_Persona.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente]) then
   begin
     DBGridClientes.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -342,6 +345,7 @@ begin
     PageControl.Visible:= true;
     PageControl.ActivePageIndex:= 0;
 
+    id_persona:= ZQ_PersonaID_PERSONA.AsInteger;
     ZQ_Persona.Edit;
 
     DBEApellidoNombre.SetFocus;
@@ -409,11 +413,35 @@ procedure TFABM_Personas.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
+  Perform(WM_NEXTDLGCTL, 0, 0);
+
   if not validarcampos() then
     exit;
 
-  Perform(WM_NEXTDLGCTL, 0, 0);
-  
+  if not existeRelacionCliente then //si la relacion no existe todavia
+  begin
+    if (RadioGroupRelacionCliente.ItemIndex = 1) then //si esta marcado como que es cliente
+    begin
+      ZQ_RelacionCliente.Append;
+      ZQ_RelacionClienteID_PERSONA.AsInteger:= id_persona;
+      ZQ_RelacionClienteID_RELACION.AsInteger:= RELACION_CLIENTE; //cliente
+      ZQ_RelacionClienteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+      ZQ_RelacionClienteID_EMPRESA.Clear;
+    end
+  end
+  else //si existe la relacion
+  begin
+    if (RadioGroupRelacionCliente.ItemIndex = 0) then //si esta marcado como que ya no es cliente
+    begin
+      ZQ_RelacionPersona.Locate('ID_PERSONA; ID_SUCURSAL', VarArrayOf([ZQ_PersonaID_PERSONA.AsString,inttostr(SUCURSAL_LOGUEO)]), []);
+      ZQ_RelacionCliente.Close;
+      ZQ_RelacionCliente.ParamByName('idRelacion').AsInteger:= ZQ_RelacionPersonaID_PERSONA_RELACION.AsInteger;
+      ZQ_RelacionCliente.Open;
+
+      ZQ_RelacionCliente.Delete;
+    end
+  end;
+
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMPersona) then
     begin
@@ -477,7 +505,6 @@ begin
   PageControl.ActivePageIndex:= 0;
   result:= true;
   mensaje:= '';
-  DBEApellidoNombre.SetFocus;
 
   if (ZQ_PersonaNOMBRE.IsNull) then
   begin
@@ -505,7 +532,10 @@ begin
     end;
 
   if Result = False then
+  begin
     Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
+    DBEApellidoNombre.SetFocus;
+  end;
 end;
 
 
@@ -528,6 +558,17 @@ begin
   ZQ_RelacionPersona.Close;
   ZQ_RelacionPersona.ParamByName('id_persona').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
   ZQ_RelacionPersona.Open;
+
+  if ZQ_RelacionPersona.Locate('ID_PERSONA; ID_SUCURSAL', VarArrayOf([ZQ_PersonaID_PERSONA.AsString,inttostr(SUCURSAL_LOGUEO)]), []) then
+  begin
+    existeRelacionCliente:= true;
+    RadioGroupRelacionCliente.ItemIndex:= 1;
+  end
+  else
+  begin
+    existeRelacionCliente:= False;
+    RadioGroupRelacionCliente.ItemIndex:= 0;
+  end
 end;
 
 

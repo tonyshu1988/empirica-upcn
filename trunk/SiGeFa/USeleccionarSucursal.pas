@@ -21,8 +21,6 @@ type
     ZQ_SucursalTELEFONO: TStringField;
     ZQ_SucursalEMAIL: TStringField;
     ZQ_SucursalBAJA: TStringField;
-    ZQ_SucursalAUD_UDUARIO: TStringField;
-    ZQ_SucursalAUD_FECHA: TDateTimeField;
     EKLlenarCombo: TEKLlenarCombo;
     btnSalir: TButton;
     procedure FormCreate(Sender: TObject);
@@ -58,6 +56,7 @@ begin
   EKLlenarCombo.CargarCombo;
   EKLlenarCombo.SetItem(0);
 end;
+
 
 procedure TFSeleccionarSucursal.btnAceptarClick(Sender: TObject);
 begin

@@ -25,8 +25,6 @@ type
     ZQ_ProductoCabeceraDESCRIPCION: TStringField;
     ZQ_ProductoCabeceraIMAGEN: TBlobField;
     ZQ_ProductoCabeceraBAJA: TStringField;
-    ZQ_ProductoCabeceraAUD_USUARIO: TStringField;
-    ZQ_ProductoCabeceraAUD_FECHA: TDateTimeField;
     ZQ_ProductoCabeceraID_ARTICULO: TIntegerField;
     DS_ProductoCabecera: TDataSource;
     Grilla: TEKDBGrid;
@@ -174,8 +172,6 @@ type
     ZQ_ExisteCodigoDESCRIPCION: TStringField;
     ZQ_ExisteCodigoIMAGEN: TBlobField;
     ZQ_ExisteCodigoBAJA: TStringField;
-    ZQ_ExisteCodigoAUD_USUARIO: TStringField;
-    ZQ_ExisteCodigoAUD_FECHA: TDateTimeField;
     ZQ_ExisteCodigoID_ARTICULO: TIntegerField;
     ZQ_ExisteCodigoCOD_CORTO: TStringField;
     ZQ_ExisteCodigoCOLOR: TIntegerField;
