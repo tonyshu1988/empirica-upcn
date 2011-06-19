@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 855
-    Height = 457
+    Width = 863
+    Height = 463
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 486
-    Width = 855
+    Top = 492
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -4719,7 +4719,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 457
+    Width = 863
+    Height = 463
     Align = alClient
     Color = 16053492
     TabOrder = 2
@@ -4862,6 +4862,10 @@ object FPrincipal: TFPrincipal
       Caption = 'ABM Cuenta'
       OnExecute = AABM_CuentaExecute
     end
+    object AABM_Precios: TAction
+      Caption = 'ABM Precios'
+      OnExecute = AABM_PreciosExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -4927,6 +4931,13 @@ object FPrincipal: TFPrincipal
       object ImprimirEtiquetas1: TMenuItem
         Tag = 1
         Action = AImprimirEtiqueta
+      end
+      object N4: TMenuItem
+        Caption = '-'
+      end
+      object ABMPrecios1: TMenuItem
+        Tag = 1
+        Action = AABM_Precios
       end
     end
     object BandejadeMail1: TMenuItem

@@ -80,6 +80,9 @@ type
     AABM_TipoComprobante: TAction;
     AABM_TipoMedioPago: TAction;
     AABM_Cuenta: TAction;
+    AABM_Precios: TAction;
+    ABMPrecios1: TMenuItem;
+    N4: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -107,6 +110,7 @@ type
     procedure AABM_TipoComprobanteExecute(Sender: TObject);
     procedure AABM_TipoMedioPagoExecute(Sender: TObject);
     procedure AABM_CuentaExecute(Sender: TObject);
+    procedure AABM_PreciosExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -130,7 +134,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_ProductoStock, UABM_Personas,
   UImprimirEtiquetas, UMailBandeja, USeleccionarSucursal, UMailConfigurar,
   UMailEnviar, UABM_Colores, UABM_TipoIVA, UABM_TipoFormaPago,
-  UABM_Cuentas, UABM_TipoComprobante;
+  UABM_Cuentas, UABM_TipoComprobante, UABM_Precios;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -411,6 +415,11 @@ end;
 procedure TFPrincipal.AABM_CuentaExecute(Sender: TObject);
 begin
     EKVentanas1.Abrir(Sender, TFABM_Cuentas, FABM_Cuentas);
+end;
+
+procedure TFPrincipal.AABM_PreciosExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABM_Precios, FABM_Precios);
 end;
 
 end.
