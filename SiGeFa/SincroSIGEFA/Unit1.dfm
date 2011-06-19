@@ -11,154 +11,296 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object DBGrid1: TDBGrid
-    Left = 96
-    Top = 25
-    Width = 329
-    Height = 96
-    DataSource = DS_SincroTabla
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 854
+    Height = 462
+    Align = alClient
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'ID'
-        Visible = True
+    object DBGrid3: TDBGrid
+      Left = 1
+      Top = 95
+      Width = 852
+      Height = 113
+      Align = alBottom
+      DataSource = DataSource1
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'LOG_TABLES_ID'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'KEY_FIELD'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'KEY_VALUE'
+          Visible = True
+        end>
+    end
+    object DBGrid2: TDBGrid
+      Left = 452
+      Top = 1
+      Width = 401
+      Height = 94
+      Align = alRight
+      DataSource = DS_SincroCampo
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Width = 32
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TABLE_NAME'
+          Width = 195
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'OPERATION'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATE_TIME'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'USER_NAME'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LOG_TABLES_ID'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'KEY_FIELD'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'KEY_VALUE'
+          Visible = True
+        end>
+    end
+    object DBGrid1: TDBGrid
+      Left = 1
+      Top = 1
+      Width = 451
+      Height = 94
+      Align = alLeft
+      DataSource = DS_SincroTabla
+      TabOrder = 2
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TABLE_NAME'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'OPERATION'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATE_TIME'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'USER_NAME'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SINCRONIZADO'
+          Visible = True
+        end>
+    end
+    object Panel3: TPanel
+      Left = 1
+      Top = 208
+      Width = 852
+      Height = 253
+      Align = alBottom
+      Caption = 'Panel3'
+      TabOrder = 3
+      object Panel1: TPanel
+        Left = 1
+        Top = 1
+        Width = 479
+        Height = 251
+        Align = alClient
+        TabOrder = 0
+        object Label2: TLabel
+          Left = 16
+          Top = 30
+          Width = 64
+          Height = 13
+          Caption = 'Base Remota'
+        end
+        object Label3: TLabel
+          Left = 16
+          Top = 54
+          Width = 53
+          Height = 13
+          Caption = 'Base Local'
+        end
+        object Label4: TLabel
+          Left = 88
+          Top = 16
+          Width = 24
+          Height = 13
+          Caption = 'Base'
+        end
+        object Label5: TLabel
+          Left = 88
+          Top = 78
+          Width = 36
+          Height = 13
+          Caption = 'Usuario'
+        end
+        object Label6: TLabel
+          Left = 232
+          Top = 78
+          Width = 46
+          Height = 13
+          Caption = 'Password'
+        end
+        object Label7: TLabel
+          Left = 365
+          Top = 58
+          Width = 41
+          Height = 13
+          Caption = 'Intervalo'
+        end
+        object Rbase: TEdit
+          Left = 88
+          Top = 30
+          Width = 265
+          Height = 21
+          TabOrder = 0
+          Text = 'Rbase'
+        end
+        object LBase: TEdit
+          Left = 88
+          Top = 54
+          Width = 265
+          Height = 21
+          TabOrder = 1
+          Text = 'LBase'
+        end
+        object RUser: TEdit
+          Left = 88
+          Top = 94
+          Width = 121
+          Height = 21
+          TabOrder = 2
+          Text = 'RUser'
+        end
+        object LUser: TEdit
+          Left = 88
+          Top = 118
+          Width = 121
+          Height = 21
+          TabOrder = 3
+          Text = 'LUser'
+        end
+        object RPassword: TEdit
+          Left = 232
+          Top = 94
+          Width = 121
+          Height = 21
+          PasswordChar = '*'
+          TabOrder = 4
+          Text = 'RPassword'
+        end
+        object LPassword: TEdit
+          Left = 232
+          Top = 118
+          Width = 121
+          Height = 21
+          PasswordChar = '*'
+          TabOrder = 5
+          Text = 'LPassword'
+        end
+        object cuenta: TEdit
+          Left = 413
+          Top = 54
+          Width = 41
+          Height = 21
+          TabOrder = 6
+          Text = '60'
+        end
+        object RadioGroup1: TRadioGroup
+          Left = 365
+          Top = 78
+          Width = 89
+          Height = 62
+          Caption = 'Tiempo en'
+          ItemIndex = 0
+          Items.Strings = (
+            'Segundos'
+            'Minutos')
+          TabOrder = 7
+        end
       end
-      item
-        Expanded = False
-        FieldName = 'TABLE_NAME'
-        Visible = True
+      object Memo1: TMemo
+        Left = 480
+        Top = 1
+        Width = 371
+        Height = 251
+        Align = alRight
+        Lines.Strings = (
+          'Memo1')
+        TabOrder = 1
       end
-      item
-        Expanded = False
-        FieldName = 'OPERATION'
-        Visible = True
+      object btSincronizar: TButton
+        Left = 368
+        Top = 216
+        Width = 83
+        Height = 25
+        Caption = 'Sincronizar'
+        TabOrder = 2
+        OnClick = btSincronizarClick
       end
-      item
-        Expanded = False
-        FieldName = 'DATE_TIME'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'USER_NAME'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'SINCRONIZADO'
-        Visible = True
-      end>
-  end
-  object Button1: TButton
-    Left = 704
-    Top = 240
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
-    TabOrder = 1
-    OnClick = Button1Click
-  end
-  object Memo1: TMemo
-    Left = 120
-    Top = 232
-    Width = 569
-    Height = 201
-    Lines.Strings = (
-      'Memo1')
-    TabOrder = 2
-  end
-  object DBGrid2: TDBGrid
-    Left = 432
-    Top = 24
-    Width = 401
-    Height = 145
-    DataSource = DS_SincroCampo
-    TabOrder = 3
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'ID'
-        Width = 32
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'TABLE_NAME'
-        Width = 195
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'OPERATION'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DATE_TIME'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'USER_NAME'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'LOG_TABLES_ID'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'KEY_FIELD'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'KEY_VALUE'
-        Visible = True
-      end>
-  end
-  object DBGrid3: TDBGrid
-    Left = 96
-    Top = 129
-    Width = 329
-    Height = 96
-    DataSource = DataSource1
-    TabOrder = 4
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'LOG_TABLES_ID'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'KEY_FIELD'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'KEY_VALUE'
-        Visible = True
-      end>
+    end
   end
   object ZC_Remoto: TZConnection
     Protocol = 'firebird-1.5'
@@ -167,9 +309,8 @@ object Form1: TForm1
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
-    Connected = True
-    Left = 64
-    Top = 96
+    Left = 48
+    Top = 104
   end
   object ZC_Local: TZConnection
     Protocol = 'firebird-1.5'
@@ -178,9 +319,8 @@ object Form1: TForm1
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
-    Connected = True
-    Left = 64
-    Top = 184
+    Left = 32
+    Top = 24
   end
   object ZQ_SincroTabla: TZQuery
     Connection = ZC_Remoto
@@ -192,7 +332,7 @@ object Form1: TForm1
       '')
     Params = <>
     Left = 192
-    Top = 160
+    Top = 48
     object ZQ_SincroTablaTABLE_NAME: TStringField
       FieldName = 'TABLE_NAME'
       Required = True
@@ -223,20 +363,20 @@ object Form1: TForm1
   end
   object DS_SincroTabla: TDataSource
     DataSet = ZQ_SincroTabla
-    Left = 208
-    Top = 240
+    Left = 272
+    Top = 48
   end
   object Local: TZQuery
     Connection = ZC_Local
     Params = <>
-    Left = 224
-    Top = 312
+    Left = 96
+    Top = 24
   end
   object Remoto: TZQuery
     Connection = ZC_Remoto
     Params = <>
-    Left = 296
-    Top = 312
+    Left = 104
+    Top = 104
   end
   object ZQ_SincroCampo: TZQuery
     Connection = ZC_Remoto
@@ -250,8 +390,8 @@ object Form1: TForm1
         Name = 'id'
         ParamType = ptUnknown
       end>
-    Left = 376
-    Top = 176
+    Left = 496
+    Top = 72
     ParamData = <
       item
         DataType = ftUnknown
@@ -278,8 +418,8 @@ object Form1: TForm1
   end
   object DS_SincroCampo: TDataSource
     DataSet = ZQ_SincroCampo
-    Left = 344
-    Top = 240
+    Left = 416
+    Top = 72
   end
   object ZQ_SincroTablaPrimary: TZQuery
     Connection = ZC_Remoto
@@ -293,8 +433,8 @@ object Form1: TForm1
         Name = 'id'
         ParamType = ptUnknown
       end>
-    Left = 280
-    Top = 160
+    Left = 200
+    Top = 104
     ParamData = <
       item
         DataType = ftUnknown
@@ -317,7 +457,17 @@ object Form1: TForm1
   end
   object DataSource1: TDataSource
     DataSet = ZQ_SincroTablaPrimary
-    Left = 88
-    Top = 272
+    Left = 296
+    Top = 104
+  end
+  object inicio: TEKIni
+    Archivo = 'sistema.ini'
+    Left = 576
+    Top = 80
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 416
+    Top = 136
   end
 end
