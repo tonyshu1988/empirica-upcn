@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, Grids, DBGrids, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, ZConnection, StdCtrls, ZSqlUpdate;
+  ZDataset, ZConnection, StdCtrls, ZSqlUpdate, EKIni, ExtCtrls;
 
 type
   TForm1 = class(TForm)
@@ -16,7 +16,7 @@ type
     DS_SincroTabla: TDataSource;
     Local: TZQuery;
     Remoto: TZQuery;
-    Button1: TButton;
+    btSincronizar: TButton;
     Memo1: TMemo;
     ZQ_SincroCampo: TZQuery;
     DBGrid2: TDBGrid;
@@ -37,8 +37,30 @@ type
     ZQ_SincroTablaSINCRONIZADO: TStringField;
     ZQ_SincroTablaID: TLargeintField;
     ZQ_SincroTablaPrimaryLOG_TABLES_ID: TLargeintField;
-    procedure Button1Click(Sender: TObject);
+    inicio: TEKIni;
+    Panel1: TPanel;
+    Label2: TLabel;
+    Rbase: TEdit;
+    Label3: TLabel;
+    LBase: TEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    RUser: TEdit;
+    LUser: TEdit;
+    Label6: TLabel;
+    RPassword: TEdit;
+    LPassword: TEdit;
+    Label7: TLabel;
+    cuenta: TEdit;
+    RadioGroup1: TRadioGroup;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Timer1: TTimer;
+    procedure btSincronizarClick(Sender: TObject);
     procedure ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
+    procedure FormCreate(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure Sincronizar();
   private
     { Private declarations }
   public
@@ -47,71 +69,93 @@ type
 
 var
   Form1: TForm1;
-
+  unidad : string;
+  intervalo, lote_commit : integer;
 implementation
+
+uses Unit2;
 
 {$R *.dfm}
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.btSincronizarClick(Sender: TObject);
+begin
+   Sincronizar;
+end;
+
+procedure TForm1.Sincronizar();
 begin
 
- ZC_Remoto.Connected:=False;
- ZC_Remoto.Connected:=true;
- ZC_Local.Connected:=False;
- ZC_Local.Connected:=true;
- ZQ_SincroTabla.close;
- ZQ_SincroTabla.Open;
- memo1.Lines.Clear;
-while not ZQ_SincroTabla.Eof do
-    begin
-      memo1.Lines.Add('Tabla:'+ZQ_SincroTablaTABLE_NAME.AsString+' ID:'+ZQ_SincroTablaID.AsString);
-
-      ZQ_SincroCampo.close;
-      ZQ_SincroCampo.ParamByName('id').AsInteger:=ZQ_SincroTablaID.AsInteger;
-      ZQ_SincroCampo.open;
-
-      Remoto.SQL.Clear;
-      Remoto.SQL.Add(
-              'select * from '+ZQ_SincroTablaTABLE_NAME.AsString+
-              ' where '+ZQ_SincroTablaPrimaryKEY_FIELD.AsString+'='+ZQ_SincroTablaPrimaryKEY_VALUE.AsString);
-      Remoto.Open;
-
-      Local.SQL.Clear;
-      Local.SQL.Add(
-              'select * from '+ZQ_SincroTablaTABLE_NAME.AsString+
-              ' where '+ZQ_SincroTablaPrimaryKEY_FIELD.AsString+'='+ZQ_SincroTablaPrimaryKEY_VALUE.AsString);
-      Local.Open;
-
-      if (ZQ_SincroTablaOPERATION.AsString='I') or (ZQ_SincroTablaOPERATION.AsString='U') then
-      begin
-        if Local.RecordCount=0 then
-          Local.Append
-        else
-          Local.Edit;
-        while not ZQ_SincroCampo.Eof do
+  try
+   begin
+     ZC_Remoto.Connected:=False;
+     ZC_Remoto.Connected:=true;
+     ZC_Local.Connected:=False;
+     ZC_Local.Connected:=true;
+     ZQ_SincroTabla.close;
+     ZQ_SincroTabla.Open;
+     memo1.Lines.Clear;
+    while not ZQ_SincroTabla.Eof do
         begin
-          Local.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).AsString:=Remoto.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).AsString;
-          ZQ_SincroCampo.Next;
-        end;
-      end;
+          memo1.Lines.Add('Tabla:'+ZQ_SincroTablaTABLE_NAME.AsString+' ID:'+ZQ_SincroTablaID.AsString);
 
-      if ZQ_SincroTablaOPERATION.AsString='D' then
-      begin
-        if Local.RecordCount=1 then
-          Local.Delete;
-      end;
-      if (ZQ_SincroTablaSINCRONIZADO.AsString='N')or(ZQ_SincroTablaSINCRONIZADO.IsNull) then
+          ZQ_SincroCampo.close;
+          ZQ_SincroCampo.ParamByName('id').AsInteger:=ZQ_SincroTablaID.AsInteger;
+          ZQ_SincroCampo.open;
+
+          Remoto.SQL.Clear;
+          Remoto.SQL.Add(
+                  'select * from '+ZQ_SincroTablaTABLE_NAME.AsString+
+                  ' where '+ZQ_SincroTablaPrimaryKEY_FIELD.AsString+'='+ZQ_SincroTablaPrimaryKEY_VALUE.AsString);
+          Remoto.Open;
+
+          Local.SQL.Clear;
+          Local.SQL.Add(
+                  'select * from '+ZQ_SincroTablaTABLE_NAME.AsString+
+                  ' where '+ZQ_SincroTablaPrimaryKEY_FIELD.AsString+'='+ZQ_SincroTablaPrimaryKEY_VALUE.AsString);
+          Local.Open;
+
+          if (ZQ_SincroTablaOPERATION.AsString='I') or (ZQ_SincroTablaOPERATION.AsString='U') then
           begin
-            ZQ_SincroTabla.Edit;
-            ZQ_SincroTablaSINCRONIZADO.AsString:='S';
-            ZQ_SincroTabla.Post;
+            if Local.RecordCount=0 then
+              Local.Append
+            else
+              Local.Edit;
+            while not ZQ_SincroCampo.Eof do
+            begin
+              Local.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).AsString:=Remoto.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).AsString;
+              ZQ_SincroCampo.Next;
+            end;
           end;
-      Local.ApplyUpdates;
-      ZQ_SincroTabla.Next;
-    end;
-    ZQ_SincroTabla.ApplyUpdates;
-    ZC_Remoto.Commit;
-    ZC_Local.Commit;
+
+          if ZQ_SincroTablaOPERATION.AsString='D' then
+          begin
+            if Local.RecordCount=1 then
+              Local.Delete;
+          end;
+          if (ZQ_SincroTablaSINCRONIZADO.AsString='N')or(ZQ_SincroTablaSINCRONIZADO.IsNull) then
+              begin
+                ZQ_SincroTabla.Edit;
+                ZQ_SincroTablaSINCRONIZADO.AsString:='S';
+                ZQ_SincroTabla.Post;
+              end;
+          Local.ApplyUpdates;
+          ZQ_SincroTabla.Next;
+        end;
+        ZQ_SincroTabla.ApplyUpdates;
+        ZC_Remoto.Commit;
+        ZC_Local.Commit;
+   end
+  except
+     on E: Exception do
+      begin
+
+        ZC_Remoto.Disconnect;
+        ZC_Local.Disconnect;
+
+        memo1.Lines.Add(E.Message);
+        memo1.Lines.Add('ERROR Act. Histórico - Fin Actualización');
+      end;
+  end;
 end;
 
 procedure TForm1.ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
@@ -120,6 +164,69 @@ ZQ_SincroTablaPrimary.close;
 ZQ_SincroTablaPrimary.ParamByName('id').value:=ZQ_SincroTablaID.Value;
 ZQ_SincroTablaPrimary.open;
 
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+var
+  dir : string;
+begin
+  dir:=Application.ExeName;
+
+  if ParamCount=0 then
+  begin
+    if IsProcess('Sincronizador.exe') then
+    begin
+      Application.MessageBox('Ya hay una instancia del programa ejecutandose.','Atención');
+      Application.Terminate;
+    end;
+  end;
+  
+  inicio.abrir;
+
+  ZC_Remoto.Database:=inicio.Ini.ReadString('bases', 'remoto','');
+  ZC_Remoto.User:=inicio.Ini.ReadString('bases', 'remoto_user','');
+  ZC_Remoto.Password:=inicio.Desencripta(inicio.Ini.ReadString('bases', 'remoto_password',''));
+
+  Rbase.Text:=ZC_Remoto.Database;
+  RUser.Text:=ZC_Remoto.User;
+  RPassword.Text:=ZC_Remoto.Password;
+
+
+  ZC_Local.Database:=inicio.Ini.ReadString('bases', 'local','');
+  ZC_Local.User:=inicio.Ini.ReadString('bases', 'local_user','');
+  ZC_Local.Password:=inicio.Desencripta(inicio.Ini.ReadString('bases', 'local_password',''));
+
+  Lbase.Text:=ZC_Local.Database;
+  LUser.Text:=ZC_Local.User;
+  LPassword.Text:=ZC_Local.Password;
+
+  unidad:=inicio.Ini.ReadString('SINCRONIZACION', 'unidad','minutos');
+  intervalo:=strtoint(inicio.Ini.ReadString('SINCRONIZACION', 'intervalo','15'));
+  lote_commit:=strtoint(inicio.Ini.ReadString('SINCRONIZACION', 'lote_commit','100'));
+
+  cuenta.Text:=inttostr(intervalo);
+  if unidad='segundos' then
+    RadioGroup1.ItemIndex:=0
+  else
+    RadioGroup1.ItemIndex:=1;
+
+  inicio.cerrar;
+
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+var
+  cu : integer;
+begin
+
+  cu := strtoint(cuenta.text);
+  cu := cu-1;
+  cuenta.Text:=inttostr(cu);
+  if cu=0 then
+  begin
+    timer1.Enabled:=False;
+    Sincronizar();
+  end;
 end;
 
 end.
