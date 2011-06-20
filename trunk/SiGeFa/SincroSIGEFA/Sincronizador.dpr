@@ -10,7 +10,8 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(TFPrincipal, FPrincipal);
+  Application.Title := 'Sincronizador SiGeFa';
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(TFPrincipal, FPrincipal);
   Application.Run;
 end.

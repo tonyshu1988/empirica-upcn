@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, Grids, DBGrids, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, ZConnection, StdCtrls, ZSqlUpdate, EKIni, ExtCtrls, EKEdit,
-  ZStoredProcedure, dxBar, dxBarExtItems;
+  ZStoredProcedure, dxBar, dxBarExtItems, EKIconizacion;
 
 type
   TFPrincipal = class(TForm)
@@ -70,7 +70,7 @@ type
     ZQ_ConfiguracionULTIMA_FECHA: TDateTimeField;
     dxBarABM: TdxBarManager;
     btnSincronizar: TdxBarLargeButton;
-    btnVerDetalle: TdxBarLargeButton;
+    btnOcultar: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnBaja: TdxBarLargeButton;
@@ -81,6 +81,7 @@ type
     btnSalir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
+    EKIconizacion1: TEKIconizacion;
     procedure ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -90,6 +91,8 @@ type
     procedure btnSincronizarClick(Sender: TObject);
     procedure btnBorrarLogClick(Sender: TObject);
     procedure guardarArchivoLog();
+    procedure btnOcultarClick(Sender: TObject);
+    procedure EKIconizacion1DblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -108,7 +111,6 @@ uses Unit2, UDM;
 
 procedure TFPrincipal.Sincronizar();
 begin
-
   try
    begin
      DM.ZC_Remoto.Connected:=False;
@@ -124,7 +126,7 @@ begin
      DM.ZC_Local.Connected:=true;
      memo1.Lines.Add('...Conectado.');
      
-     //Genero el lote de sincronizacion y guardo los cambios
+     // Genero el lote de sincronizacion y guardo los cambios
      ZSP_GenerarLoteSinc.ExecProc;
      DM.ZC_Local.Commit;
 
@@ -132,12 +134,12 @@ begin
      Sincronizacion.Open;
      // Me dá el último lote sincronizado
      Sincronizacion.Last;
+     ultLote:=SincronizacionULTIMO_LOTE_SINC.AsInteger;
+
      // Busco el lote que le sigue a la sincronización
      ZQ_SincroTabla.close;
      ZQ_SincroTabla.ParamByName('ultimo').AsInteger:=ultLote;
      ZQ_SincroTabla.Open;
-
-
 
     while not ZQ_SincroTabla.Eof do
         begin
@@ -146,9 +148,6 @@ begin
           ZQ_SincroCampo.close;
           ZQ_SincroCampo.ParamByName('id').AsInteger:=ZQ_SincroTablaID.AsInteger;
           ZQ_SincroCampo.open;
-
-
-          ultLote:=SincronizacionULTIMO_LOTE_SINC.AsInteger;
 
           Remoto.SQL.Clear;
           Remoto.SQL.Add(
@@ -211,8 +210,9 @@ begin
       end;
   end;
 
-  //Creo el archivo LOG para futuros chequeos...
+  // Creo el archivo LOG para futuros chequeos...
   guardarArchivoLog();
+
 end;
 
 procedure TFPrincipal.ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
@@ -227,7 +227,7 @@ procedure TFPrincipal.FormCreate(Sender: TObject);
 var
   dir : string;
 begin
-  //Obtengo el num de mi sucursal
+  // Obtengo el num de mi sucursal
   ZQ_Configuracion.Close;
   ZQ_Configuracion.Open;
   ZQ_Configuracion.Last;
@@ -243,7 +243,7 @@ begin
   begin
     if IsProcess('Sincronizador.exe') then
     begin
-      Application.MessageBox('Ya hay una instancia del programa ejecutandose.','Atención');
+      Application.MessageBox('Ya hay una instancia del programa ejecutándose.','Atención');
       Application.Terminate;
     end;
   end;
@@ -298,26 +298,18 @@ end;
 
 procedure TFPrincipal.guardarArchivoLog();
 var
-   f: TextFile;
    nombre:String;
 begin
-
-   try
       try
         begin
-         nombre:=Format('LOG_%s.TXT',[DateToStr(dm.ModeloLocal.FechayHora)]);
-         AssignFile(f,nombre);
-         Rewrite(f);
-         Memo1.Lines.SaveToFile(nombre);
+         nombre:=Format('LOG_%s.TXT',[FormatDateTime('dd-mm-yyyy(hh_nn_ss)',dm.ModeloLocal.FechayHora)]);
+         memo1.Lines.SaveToFile(nombre);
         end
       except
        begin
          Application.MessageBox('Se produjo un error al crear el archivo de Log.','Atención',MB_OK+MB_ICONINFORMATION);
        end
       end
-   finally
-    CloseFile(f);
-   end;
 end;
 
 procedure TFPrincipal.RadioGroup1Click(Sender: TObject);
@@ -330,7 +322,11 @@ end;
 
 procedure TFPrincipal.btnSalirClick(Sender: TObject);
 begin
-  Visible:=False;
+  if Application.MessageBox('Si apaga el sincronizador dejará de actualizar la BD.', 'Atención', MB_OKCANCEL)= IDOK then
+  begin
+    EKIconizacion1.Visible:=false;
+    Application.Terminate;
+  end;
 end;
 
 procedure TFPrincipal.btnSincronizarClick(Sender: TObject);
@@ -341,6 +337,16 @@ end;
 procedure TFPrincipal.btnBorrarLogClick(Sender: TObject);
 begin
  memo1.Lines.Clear;
+end;
+
+procedure TFPrincipal.btnOcultarClick(Sender: TObject);
+begin
+  Visible:=False;
+end;
+
+procedure TFPrincipal.EKIconizacion1DblClick(Sender: TObject);
+begin
+Visible:=true;
 end;
 
 end.
