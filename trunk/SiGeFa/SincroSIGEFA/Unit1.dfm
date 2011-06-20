@@ -463,7 +463,7 @@ object Form1: TForm1
         Name = 'id'
         ParamType = ptUnknown
       end>
-    Left = 200
+    Left = 192
     Top = 104
     ParamData = <
       item
@@ -499,5 +499,11 @@ object Form1: TForm1
     OnTimer = Timer1Timer
     Left = 416
     Top = 136
+  end
+  object UltimoNro: TZQuery
+    Connection = ZC_Remoto
+    Params = <>
+    Left = 393
+    Top = 248
   end
 end
