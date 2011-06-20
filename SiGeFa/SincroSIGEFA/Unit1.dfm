@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 310
-  Top = 196
+  Left = 303
+  Top = 175
   Width = 870
   Height = 500
   Caption = 'Form1'
@@ -164,113 +164,20 @@ object Form1: TForm1
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 479
+        Width = 368
         Height = 251
-        Align = alClient
+        Align = alLeft
         TabOrder = 0
-        object Label2: TLabel
-          Left = 16
-          Top = 30
-          Width = 64
-          Height = 13
-          Caption = 'Base Remota'
-        end
-        object Label3: TLabel
-          Left = 16
-          Top = 54
-          Width = 53
-          Height = 13
-          Caption = 'Base Local'
-        end
-        object Label4: TLabel
-          Left = 88
-          Top = 16
-          Width = 24
-          Height = 13
-          Caption = 'Base'
-        end
-        object Label5: TLabel
-          Left = 88
-          Top = 78
-          Width = 36
-          Height = 13
-          Caption = 'Usuario'
-        end
-        object Label6: TLabel
-          Left = 232
-          Top = 78
-          Width = 46
-          Height = 13
-          Caption = 'Password'
-        end
         object Label7: TLabel
-          Left = 365
-          Top = 58
-          Width = 41
+          Left = 109
+          Top = 201
+          Width = 127
           Height = 13
-          Caption = 'Intervalo'
-        end
-        object Rbase: TEdit
-          Left = 88
-          Top = 30
-          Width = 265
-          Height = 21
-          TabOrder = 0
-          Text = 'Rbase'
-        end
-        object LBase: TEdit
-          Left = 88
-          Top = 54
-          Width = 265
-          Height = 21
-          TabOrder = 1
-          Text = 'LBase'
-        end
-        object RUser: TEdit
-          Left = 88
-          Top = 94
-          Width = 121
-          Height = 21
-          TabOrder = 2
-          Text = 'RUser'
-        end
-        object LUser: TEdit
-          Left = 88
-          Top = 118
-          Width = 121
-          Height = 21
-          TabOrder = 3
-          Text = 'LUser'
-        end
-        object RPassword: TEdit
-          Left = 232
-          Top = 94
-          Width = 121
-          Height = 21
-          PasswordChar = '*'
-          TabOrder = 4
-          Text = 'RPassword'
-        end
-        object LPassword: TEdit
-          Left = 232
-          Top = 118
-          Width = 121
-          Height = 21
-          PasswordChar = '*'
-          TabOrder = 5
-          Text = 'LPassword'
-        end
-        object cuenta: TEdit
-          Left = 413
-          Top = 54
-          Width = 41
-          Height = 21
-          TabOrder = 6
-          Text = '60'
+          Caption = 'Pr'#243'xima Sincronizaci'#243'n en:'
         end
         object RadioGroup1: TRadioGroup
-          Left = 365
-          Top = 78
+          Left = 16
+          Top = 184
           Width = 89
           Height = 62
           Caption = 'Tiempo en'
@@ -278,39 +185,162 @@ object Form1: TForm1
           Items.Strings = (
             'Segundos'
             'Minutos')
-          TabOrder = 7
+          TabOrder = 0
+          OnClick = RadioGroup1Click
+        end
+        object cuenta: TEKEdit
+          Tag = 99
+          Left = 241
+          Top = 197
+          Width = 40
+          Height = 21
+          AutoSize = False
+          CharCase = ecUpperCase
+          TabOrder = 1
+          Text = '10'
+          DataType = ftInteger
+        end
+        object btSincronizar: TButton
+          Left = 296
+          Top = 216
+          Width = 67
+          Height = 33
+          Caption = 'Sincronizar'
+          TabOrder = 2
+          OnClick = btSincronizarClick
+        end
+        object GroupBox1: TGroupBox
+          Left = 1
+          Top = 1
+          Width = 366
+          Height = 89
+          Align = alTop
+          Caption = ' Base Remota '
+          TabOrder = 3
+          object Label4: TLabel
+            Left = 24
+            Top = 14
+            Width = 24
+            Height = 13
+            Caption = 'Base'
+          end
+          object Label5: TLabel
+            Left = 24
+            Top = 49
+            Width = 36
+            Height = 13
+            Caption = 'Usuario'
+          end
+          object Label6: TLabel
+            Left = 168
+            Top = 49
+            Width = 46
+            Height = 13
+            Caption = 'Password'
+          end
+          object Rbase: TEdit
+            Left = 24
+            Top = 27
+            Width = 265
+            Height = 21
+            TabOrder = 0
+            Text = 'Rbase'
+          end
+          object RUser: TEdit
+            Left = 24
+            Top = 62
+            Width = 121
+            Height = 21
+            TabOrder = 1
+            Text = 'RUser'
+          end
+          object RPassword: TEdit
+            Left = 168
+            Top = 62
+            Width = 121
+            Height = 21
+            PasswordChar = '*'
+            TabOrder = 2
+            Text = 'RPassword'
+          end
+        end
+        object GroupBox2: TGroupBox
+          Left = 1
+          Top = 90
+          Width = 366
+          Height = 88
+          Align = alTop
+          Caption = ' Base Local '
+          TabOrder = 4
+          object Label1: TLabel
+            Left = 23
+            Top = 48
+            Width = 36
+            Height = 13
+            Caption = 'Usuario'
+          end
+          object Label2: TLabel
+            Left = 167
+            Top = 48
+            Width = 46
+            Height = 13
+            Caption = 'Password'
+          end
+          object Label3: TLabel
+            Left = 24
+            Top = 14
+            Width = 24
+            Height = 13
+            Caption = 'Base'
+          end
+          object LBase: TEdit
+            Left = 24
+            Top = 27
+            Width = 265
+            Height = 21
+            TabOrder = 0
+            Text = 'LBase'
+          end
+          object LUser: TEdit
+            Left = 23
+            Top = 61
+            Width = 121
+            Height = 21
+            TabOrder = 1
+            Text = 'LUser'
+          end
+          object LPassword: TEdit
+            Left = 167
+            Top = 61
+            Width = 121
+            Height = 21
+            PasswordChar = '*'
+            TabOrder = 2
+            Text = 'LPassword'
+          end
         end
       end
       object Memo1: TMemo
-        Left = 480
+        Left = 369
         Top = 1
-        Width = 371
+        Width = 482
         Height = 251
-        Align = alRight
+        Align = alClient
         Lines.Strings = (
           'Memo1')
         TabOrder = 1
-      end
-      object btSincronizar: TButton
-        Left = 368
-        Top = 216
-        Width = 83
-        Height = 25
-        Caption = 'Sincronizar'
-        TabOrder = 2
-        OnClick = btSincronizarClick
       end
     end
   end
   object ZC_Remoto: TZConnection
     Protocol = 'firebird-1.5'
-    HostName = '192.168.1.104'
-    Database = 'D:\Empirica\SiGeFa\Bases\SIGEFA.FDB'
+    HostName = '127.0.0.1'
+    Database = 'E:\SIGEFA\SiGeFa.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
-    Left = 48
-    Top = 104
+    Left = 528
+    Top = 240
   end
   object ZC_Local: TZConnection
     Protocol = 'firebird-1.5'
@@ -319,8 +349,8 @@ object Form1: TForm1
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
-    Left = 32
-    Top = 24
+    Left = 528
+    Top = 296
   end
   object ZQ_SincroTabla: TZQuery
     Connection = ZC_Remoto
@@ -363,20 +393,20 @@ object Form1: TForm1
   end
   object DS_SincroTabla: TDataSource
     DataSet = ZQ_SincroTabla
-    Left = 272
+    Left = 320
     Top = 48
   end
   object Local: TZQuery
     Connection = ZC_Local
     Params = <>
-    Left = 96
-    Top = 24
+    Left = 608
+    Top = 296
   end
   object Remoto: TZQuery
     Connection = ZC_Remoto
     Params = <>
-    Left = 104
-    Top = 104
+    Left = 608
+    Top = 240
   end
   object ZQ_SincroCampo: TZQuery
     Connection = ZC_Remoto
@@ -457,7 +487,7 @@ object Form1: TForm1
   end
   object DataSource1: TDataSource
     DataSet = ZQ_SincroTablaPrimary
-    Left = 296
+    Left = 320
     Top = 104
   end
   object inicio: TEKIni

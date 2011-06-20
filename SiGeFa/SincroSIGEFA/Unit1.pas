@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, Grids, DBGrids, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, ZConnection, StdCtrls, ZSqlUpdate, EKIni, ExtCtrls;
+  ZDataset, ZConnection, StdCtrls, ZSqlUpdate, EKIni, ExtCtrls, EKEdit;
 
 type
   TForm1 = class(TForm)
@@ -39,28 +39,32 @@ type
     ZQ_SincroTablaPrimaryLOG_TABLES_ID: TLargeintField;
     inicio: TEKIni;
     Panel1: TPanel;
-    Label2: TLabel;
-    Rbase: TEdit;
-    Label3: TLabel;
-    LBase: TEdit;
-    Label4: TLabel;
-    Label5: TLabel;
-    RUser: TEdit;
-    LUser: TEdit;
-    Label6: TLabel;
-    RPassword: TEdit;
-    LPassword: TEdit;
     Label7: TLabel;
-    cuenta: TEdit;
     RadioGroup1: TRadioGroup;
     Panel2: TPanel;
     Panel3: TPanel;
     Timer1: TTimer;
+    cuenta: TEKEdit;
+    GroupBox1: TGroupBox;
+    Rbase: TEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    RUser: TEdit;
+    Label6: TLabel;
+    RPassword: TEdit;
+    GroupBox2: TGroupBox;
+    LBase: TEdit;
+    LUser: TEdit;
+    LPassword: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
     procedure btSincronizarClick(Sender: TObject);
     procedure ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure Sincronizar();
+    procedure RadioGroup1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -170,6 +174,10 @@ procedure TForm1.FormCreate(Sender: TObject);
 var
   dir : string;
 begin
+  ZC_Remoto.Connected:=False;
+  ZC_Local.Connected:=False;
+  ZQ_SincroTabla.close;
+  memo1.Lines.Clear;
   dir:=Application.ExeName;
 
   if ParamCount=0 then
@@ -182,19 +190,19 @@ begin
   end;
   
   inicio.abrir;
-
+  ZC_Remoto.HostName:=inicio.Ini.ReadString('bases', 'ipremoto','');
   ZC_Remoto.Database:=inicio.Ini.ReadString('bases', 'remoto','');
   ZC_Remoto.User:=inicio.Ini.ReadString('bases', 'remoto_user','');
-  ZC_Remoto.Password:=inicio.Desencripta(inicio.Ini.ReadString('bases', 'remoto_password',''));
+  ZC_Remoto.Password:=inicio.Ini.ReadString('bases', 'remoto_password','');
 
   Rbase.Text:=ZC_Remoto.Database;
   RUser.Text:=ZC_Remoto.User;
   RPassword.Text:=ZC_Remoto.Password;
 
-
+  ZC_Local.HostName:='127.0.0.1';
   ZC_Local.Database:=inicio.Ini.ReadString('bases', 'local','');
   ZC_Local.User:=inicio.Ini.ReadString('bases', 'local_user','');
-  ZC_Local.Password:=inicio.Desencripta(inicio.Ini.ReadString('bases', 'local_password',''));
+  ZC_Local.Password:=inicio.Ini.ReadString('bases', 'local_password','');
 
   Lbase.Text:=ZC_Local.Database;
   LUser.Text:=ZC_Local.User;
@@ -210,6 +218,7 @@ begin
   else
     RadioGroup1.ItemIndex:=1;
 
+  RadioGroup1Click(self);
   inicio.cerrar;
 
 end;
@@ -219,6 +228,7 @@ var
   cu : integer;
 begin
 
+
   cu := strtoint(cuenta.text);
   cu := cu-1;
   cuenta.Text:=inttostr(cu);
@@ -227,6 +237,14 @@ begin
     timer1.Enabled:=False;
     Sincronizar();
   end;
+end;
+
+procedure TForm1.RadioGroup1Click(Sender: TObject);
+begin
+if RadioGroup1.ItemIndex=0 then
+    timer1.Interval:=1000
+  else
+    timer1.Interval:=60000;  
 end;
 
 end.
