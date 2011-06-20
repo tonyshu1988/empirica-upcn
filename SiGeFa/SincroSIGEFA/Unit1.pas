@@ -59,6 +59,7 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    UltimoNro: TZQuery;
     procedure btSincronizarClick(Sender: TObject);
     procedure ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
