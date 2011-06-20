@@ -5,18 +5,16 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, Grids, DBGrids, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, ZConnection, StdCtrls, ZSqlUpdate, EKIni, ExtCtrls, EKEdit;
+  ZDataset, ZConnection, StdCtrls, ZSqlUpdate, EKIni, ExtCtrls, EKEdit,
+  ZStoredProcedure, dxBar, dxBarExtItems;
 
 type
-  TForm1 = class(TForm)
-    ZC_Remoto: TZConnection;
-    ZC_Local: TZConnection;
+  TFPrincipal = class(TForm)
     ZQ_SincroTabla: TZQuery;
     DBGrid1: TDBGrid;
     DS_SincroTabla: TDataSource;
     Local: TZQuery;
     Remoto: TZQuery;
-    btSincronizar: TButton;
     Memo1: TMemo;
     ZQ_SincroCampo: TZQuery;
     DBGrid2: TDBGrid;
@@ -30,12 +28,6 @@ type
     ZQ_SincroTablaPrimaryKEY_FIELD: TStringField;
     ZQ_SincroTablaPrimaryKEY_VALUE: TStringField;
     DataSource1: TDataSource;
-    ZQ_SincroTablaTABLE_NAME: TStringField;
-    ZQ_SincroTablaOPERATION: TStringField;
-    ZQ_SincroTablaDATE_TIME: TDateTimeField;
-    ZQ_SincroTablaUSER_NAME: TStringField;
-    ZQ_SincroTablaSINCRONIZADO: TStringField;
-    ZQ_SincroTablaID: TLargeintField;
     ZQ_SincroTablaPrimaryLOG_TABLES_ID: TLargeintField;
     inicio: TEKIni;
     Panel1: TPanel;
@@ -59,13 +51,45 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    UltimoNro: TZQuery;
-    procedure btSincronizarClick(Sender: TObject);
+    Sincronizacion: TZQuery;
+    ZQ_SincroTablaID: TLargeintField;
+    ZQ_SincroTablaTABLE_NAME: TStringField;
+    ZQ_SincroTablaOPERATION: TStringField;
+    ZQ_SincroTablaDATE_TIME: TDateTimeField;
+    ZQ_SincroTablaUSER_NAME: TStringField;
+    ZQ_SincroTablaLOTE_SINC: TIntegerField;
+    SincronizacionID: TIntegerField;
+    SincronizacionFECHA: TDateField;
+    SincronizacionHORA: TTimeField;
+    SincronizacionULTIMO_LOTE_SINC: TIntegerField;
+    ZSP_GenerarLoteSinc: TZStoredProc;
+    Panel4: TPanel;
+    ZQ_Configuracion: TZQuery;
+    ZQ_ConfiguracionDB_SUCURSAL: TIntegerField;
+    ZQ_ConfiguracionID_SUCURSAL: TIntegerField;
+    ZQ_ConfiguracionULTIMA_FECHA: TDateTimeField;
+    dxBarABM: TdxBarManager;
+    btnSincronizar: TdxBarLargeButton;
+    btnVerDetalle: TdxBarLargeButton;
+    btnNuevo: TdxBarLargeButton;
+    btnModificar: TdxBarLargeButton;
+    btnBaja: TdxBarLargeButton;
+    btnReactivar: TdxBarLargeButton;
+    btnGuardar: TdxBarLargeButton;
+    btnCancelar: TdxBarLargeButton;
+    btnBorrarLog: TdxBarLargeButton;
+    btnSalir: TdxBarLargeButton;
+    GrupoEditando: TdxBarGroup;
+    GrupoGuardarCancelar: TdxBarGroup;
     procedure ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure Sincronizar();
     procedure RadioGroup1Click(Sender: TObject);
+    procedure btnSalirClick(Sender: TObject);
+    procedure btnSincronizarClick(Sender: TObject);
+    procedure btnBorrarLogClick(Sender: TObject);
+    procedure guardarArchivoLog();
   private
     { Private declarations }
   public
@@ -73,32 +97,48 @@ type
   end;
 
 var
-  Form1: TForm1;
+  FPrincipal: TFPrincipal;
   unidad : string;
-  intervalo, lote_commit : integer;
+  intervalo, lote_commit,ultLote,idSucursal : integer;
 implementation
 
-uses Unit2;
+uses Unit2, UDM;
 
 {$R *.dfm}
 
-procedure TForm1.btSincronizarClick(Sender: TObject);
-begin
-   Sincronizar;
-end;
-
-procedure TForm1.Sincronizar();
+procedure TFPrincipal.Sincronizar();
 begin
 
   try
    begin
-     ZC_Remoto.Connected:=False;
-     ZC_Remoto.Connected:=true;
-     ZC_Local.Connected:=False;
-     ZC_Local.Connected:=true;
-     ZQ_SincroTabla.close;
-     ZQ_SincroTabla.Open;
+     DM.ZC_Remoto.Connected:=False;
+     DM.ZC_Local.Connected:=False;
+
      memo1.Lines.Clear;
+     memo1.Lines.Add('...### Sincronización SiGeFa ###...');
+     memo1.Lines.Add('Conectando Base Servidor: '+DM.ZC_Remoto.HostName+':'+DM.ZC_Remoto.Database);
+     DM.ZC_Remoto.Connected:=true;
+     memo1.Lines.Add('...Conectado.');
+
+     memo1.Lines.Add('Conectando Base Local: '+DM.ZC_Local.HostName+':'+DM.ZC_Local.Database);
+     DM.ZC_Local.Connected:=true;
+     memo1.Lines.Add('...Conectado.');
+     
+     //Genero el lote de sincronizacion y guardo los cambios
+     ZSP_GenerarLoteSinc.ExecProc;
+     DM.ZC_Local.Commit;
+
+     Sincronizacion.Close;
+     Sincronizacion.Open;
+     // Me dá el último lote sincronizado
+     Sincronizacion.Last;
+     // Busco el lote que le sigue a la sincronización
+     ZQ_SincroTabla.close;
+     ZQ_SincroTabla.ParamByName('ultimo').AsInteger:=ultLote;
+     ZQ_SincroTabla.Open;
+
+
+
     while not ZQ_SincroTabla.Eof do
         begin
           memo1.Lines.Add('Tabla:'+ZQ_SincroTablaTABLE_NAME.AsString+' ID:'+ZQ_SincroTablaID.AsString);
@@ -106,6 +146,9 @@ begin
           ZQ_SincroCampo.close;
           ZQ_SincroCampo.ParamByName('id').AsInteger:=ZQ_SincroTablaID.AsInteger;
           ZQ_SincroCampo.open;
+
+
+          ultLote:=SincronizacionULTIMO_LOTE_SINC.AsInteger;
 
           Remoto.SQL.Clear;
           Remoto.SQL.Add(
@@ -137,33 +180,42 @@ begin
             if Local.RecordCount=1 then
               Local.Delete;
           end;
-          if (ZQ_SincroTablaSINCRONIZADO.AsString='N')or(ZQ_SincroTablaSINCRONIZADO.IsNull) then
-              begin
-                ZQ_SincroTabla.Edit;
-                ZQ_SincroTablaSINCRONIZADO.AsString:='S';
-                ZQ_SincroTabla.Post;
-              end;
+//          if (ZQ_SincroTablaSINCRONIZADO.AsString='N')or(ZQ_SincroTablaSINCRONIZADO.IsNull) then
+//              begin
+//                ZQ_SincroTabla.Edit;
+//                ZQ_SincroTablaSINCRONIZADO.AsString:='S';
+//                ZQ_SincroTabla.Post;
+//              end;
           Local.ApplyUpdates;
           ZQ_SincroTabla.Next;
         end;
         ZQ_SincroTabla.ApplyUpdates;
-        ZC_Remoto.Commit;
-        ZC_Local.Commit;
+
+        Sincronizacion.Close;
+        Sincronizacion.Append;
+        SincronizacionULTIMO_LOTE_SINC.AsInteger:=ultLote;
+        Sincronizacion.ApplyUpdates;
+
+        DM.ZC_Remoto.Commit;
+        DM.ZC_Local.Commit;
    end
   except
      on E: Exception do
       begin
 
-        ZC_Remoto.Disconnect;
-        ZC_Local.Disconnect;
+        DM.ZC_Remoto.Disconnect;
+        DM.ZC_Local.Disconnect;
 
         memo1.Lines.Add(E.Message);
-        memo1.Lines.Add('ERROR Act. Histórico - Fin Actualización');
+        memo1.Lines.Add('ERROR Sincronización!!...');
       end;
   end;
+
+  //Creo el archivo LOG para futuros chequeos...
+  guardarArchivoLog();
 end;
 
-procedure TForm1.ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
+procedure TFPrincipal.ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
 begin
 ZQ_SincroTablaPrimary.close;
 ZQ_SincroTablaPrimary.ParamByName('id').value:=ZQ_SincroTablaID.Value;
@@ -171,12 +223,18 @@ ZQ_SincroTablaPrimary.open;
 
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TFPrincipal.FormCreate(Sender: TObject);
 var
   dir : string;
 begin
-  ZC_Remoto.Connected:=False;
-  ZC_Local.Connected:=False;
+  //Obtengo el num de mi sucursal
+  ZQ_Configuracion.Close;
+  ZQ_Configuracion.Open;
+  ZQ_Configuracion.Last;
+  idSucursal:=ZQ_ConfiguracionID_SUCURSAL.AsInteger;
+
+  DM.ZC_Remoto.Connected:=False;
+  DM.ZC_Local.Connected:=False;
   ZQ_SincroTabla.close;
   memo1.Lines.Clear;
   dir:=Application.ExeName;
@@ -189,25 +247,25 @@ begin
       Application.Terminate;
     end;
   end;
-  
+
   inicio.abrir;
-  ZC_Remoto.HostName:=inicio.Ini.ReadString('bases', 'ipremoto','');
-  ZC_Remoto.Database:=inicio.Ini.ReadString('bases', 'remoto','');
-  ZC_Remoto.User:=inicio.Ini.ReadString('bases', 'remoto_user','');
-  ZC_Remoto.Password:=inicio.Ini.ReadString('bases', 'remoto_password','');
+  DM.ZC_Remoto.HostName:=inicio.Ini.ReadString('bases', 'ipremoto','');
+  DM.ZC_Remoto.Database:=inicio.Ini.ReadString('bases', 'remoto','');
+  DM.ZC_Remoto.User:=inicio.Ini.ReadString('bases', 'remoto_user','');
+  DM.ZC_Remoto.Password:=inicio.Ini.ReadString('bases', 'remoto_password','');
 
-  Rbase.Text:=ZC_Remoto.Database;
-  RUser.Text:=ZC_Remoto.User;
-  RPassword.Text:=ZC_Remoto.Password;
+  Rbase.Text:=DM.ZC_Remoto.Database;
+  RUser.Text:=DM.ZC_Remoto.User;
+  RPassword.Text:=DM.ZC_Remoto.Password;
 
-  ZC_Local.HostName:='127.0.0.1';
-  ZC_Local.Database:=inicio.Ini.ReadString('bases', 'local','');
-  ZC_Local.User:=inicio.Ini.ReadString('bases', 'local_user','');
-  ZC_Local.Password:=inicio.Ini.ReadString('bases', 'local_password','');
+  DM.ZC_Local.HostName:='127.0.0.1';
+  DM.ZC_Local.Database:=inicio.Ini.ReadString('bases', 'local','');
+  DM.ZC_Local.User:=inicio.Ini.ReadString('bases', 'local_user','');
+  DM.ZC_Local.Password:=inicio.Ini.ReadString('bases', 'local_password','');
 
-  Lbase.Text:=ZC_Local.Database;
-  LUser.Text:=ZC_Local.User;
-  LPassword.Text:=ZC_Local.Password;
+  Lbase.Text:=DM.ZC_Local.Database;
+  LUser.Text:=DM.ZC_Local.User;
+  LPassword.Text:=DM.ZC_Local.Password;
 
   unidad:=inicio.Ini.ReadString('SINCRONIZACION', 'unidad','minutos');
   intervalo:=strtoint(inicio.Ini.ReadString('SINCRONIZACION', 'intervalo','15'));
@@ -224,12 +282,10 @@ begin
 
 end;
 
-procedure TForm1.Timer1Timer(Sender: TObject);
+procedure TFPrincipal.Timer1Timer(Sender: TObject);
 var
   cu : integer;
 begin
-
-
   cu := strtoint(cuenta.text);
   cu := cu-1;
   cuenta.Text:=inttostr(cu);
@@ -240,12 +296,51 @@ begin
   end;
 end;
 
-procedure TForm1.RadioGroup1Click(Sender: TObject);
+procedure TFPrincipal.guardarArchivoLog();
+var
+   f: TextFile;
+   nombre:String;
+begin
+
+   try
+      try
+        begin
+         nombre:=Format('LOG_%s.TXT',[DateToStr(dm.ModeloLocal.FechayHora)]);
+         AssignFile(f,nombre);
+         Rewrite(f);
+         Memo1.Lines.SaveToFile(nombre);
+        end
+      except
+       begin
+         Application.MessageBox('Se produjo un error al crear el archivo de Log.','Atención',MB_OK+MB_ICONINFORMATION);
+       end
+      end
+   finally
+    CloseFile(f);
+   end;
+end;
+
+procedure TFPrincipal.RadioGroup1Click(Sender: TObject);
 begin
 if RadioGroup1.ItemIndex=0 then
     timer1.Interval:=1000
   else
     timer1.Interval:=60000;  
+end;
+
+procedure TFPrincipal.btnSalirClick(Sender: TObject);
+begin
+  Visible:=False;
+end;
+
+procedure TFPrincipal.btnSincronizarClick(Sender: TObject);
+begin
+  Sincronizar;
+end;
+
+procedure TFPrincipal.btnBorrarLogClick(Sender: TObject);
+begin
+ memo1.Lines.Clear;
 end;
 
 end.
