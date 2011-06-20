@@ -6,13 +6,14 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
-  ZStoredProcedure, ZSqlUpdate;
+  ZStoredProcedure, ZSqlUpdate, EKOrdenarGrilla, mxNativeExcel, mxExport, UBuscarPersona,
+  QRCtrls, QuickRpt, EKVistaPreviaQR;
 
 type
   TFABM_Precios = class(TForm)
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btnVerDetalle: TdxBarLargeButton;
+    btnExportarXLS: TdxBarLargeButton;
     btnEditarGrilla: TdxBarLargeButton;
     btnProcesarImportes: TdxBarLargeButton;
     btnSeleccionar: TdxBarLargeButton;
@@ -55,6 +56,72 @@ type
     RadioGroupTipoCalculo: TRadioGroup;
     LabelTipo2: TLabel;
     LabelTipo1: TLabel;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    mxDBGridExport: TmxDBGridExport;
+    mxNativeExcel1: TmxNativeExcel;
+    ZQ_Clientes: TZQuery;
+    RepListaPrecios: TQuickRep;
+    QRBand5: TQRBand;
+    QRDBImage1: TQRDBImage;
+    QRLabel11: TQRLabel;
+    RepCtas_Reporte_Titulo_2: TQRLabel;
+    RepCtas_Reporte_Titulo_1: TQRLabel;
+    QRBandDetalle: TQRBand;
+    QRDBTextCoefGanancia: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRChildBandCleinte: TQRChildBand;
+    QRBand7: TQRBand;
+    QRLabel24: TQRLabel;
+    QRSysData2: TQRSysData;
+    QRBand1: TQRBand;
+    QRExpr15: TQRExpr;
+    ChildBand1: TQRChildBand;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabelimporteVenta: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabelmporteCosto: TQRLabel;
+    QRLabelCoefGanancia: TQRLabel;
+    QRDBTextPrecioCosto: TQRDBText;
+    QRDBTextPrecioVenta: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText5: TQRDBText;
+    EKVistaPreviaListaPrecios: TEKVistaPreviaQR;
+    QRDBText8: TQRDBText;
+    ZQ_Productosimporte_venta_cliente: TFloatField;
+    ZQ_ClientesNOMBRE: TStringField;
+    ZQ_ClientesDIRECCION: TStringField;
+    ZQ_ClientesTELEFONO: TStringField;
+    ZQ_ClientesEMAIL: TStringField;
+    ZQ_ClientesCODIGO_POSTAL: TStringField;
+    ZQ_ClientesLOCALIDAD: TStringField;
+    ZQ_ClientesNOMBRE_PROVINCIA: TStringField;
+    ZQ_ClientesNOMBRE_TIPO_DOC: TStringField;
+    ZQ_ClientesNUMERO_DOC: TStringField;
+    ZQ_ClientesNOMBRE_TIPO_IVA: TStringField;
+    ZQ_ClientesDESCUENTO_ESPECIAL: TFloatField;
+    QRLabel5: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRLabel6: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRLabel7: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRLabel8: TQRLabel;
+    QRDBText10: TQRDBText;
+    QRLabel10: TQRLabel;
+    QRDBText11: TQRDBText;
+    QRLabel12: TQRLabel;
+    QRDBText13: TQRDBText;
+    QRLabel13: TQRLabel;
+    QRDBText12: TQRDBText;
+    ZQ_ClientesCUIT_CUIL: TStringField;
+    QRLabel14: TQRLabel;
+    QRDBText14: TQRDBText;
+    QRDBText15: TQRDBText;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -63,8 +130,14 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
     procedure RadioGroupTipoCalculoClick(Sender: TObject);
+    procedure btnExportarXLSClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure btnImprimirClick(Sender: TObject);
+    procedure ZQ_ProductosCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
+    vsel : TFBuscarPersona;
+    procedure OnSelPersona;
   public
     { Public declarations }
   end;
@@ -72,15 +145,31 @@ type
 var
   FABM_Precios: TFABM_Precios;
   EditandoGrilla : integer;
+  DescuentoCliente : real;
 
 const
   Transaccion_ABMImportes = 'ABM IMPORTES';
 
 implementation
 
-uses UDM, UUtilidades;
+uses UDM, UUtilidades, UPrincipal;
 
 {$R *.dfm}
+
+procedure TFABM_Precios.OnSelPersona;
+begin
+  ZQ_Clientes.Close;
+  ZQ_Clientes.ParamByName('ID_PERSONA').AsInteger := vsel.ZQ_PersonasID_PERSONA.AsInteger;
+  ZQ_Clientes.Open;
+
+  if ZQ_ClientesDESCUENTO_ESPECIAL.AsFloat <> 0 then
+    if (application.MessageBox('Este Cliente tiene un descuento especial, Desea aplicarlo?','Lista de precios',MB_YESNO+MB_ICONQUESTION)= IDYES) then
+      DescuentoCliente := ZQ_ClientesDESCUENTO_ESPECIAL.AsFloat
+    else
+      DescuentoCliente := 0;
+
+  vsel.Close;
+end;
 
 procedure TFABM_Precios.btnBuscarClick(Sender: TObject);
 begin
@@ -96,7 +185,6 @@ procedure TFABM_Precios.btnEditarGrillaClick(Sender: TObject);
 begin
   if ZQ_Productos.IsEmpty then
   exit;
-
 
   if EditandoGrilla <> 1 then
   begin
@@ -248,6 +336,67 @@ begin
     LabelTipo1.Caption := '$';
     LabelTipo2.Caption := '$';
   end;
+
+end;
+
+procedure TFABM_Precios.btnExportarXLSClick(Sender: TObject);
+begin
+  if not ZQ_Productos.IsEmpty then
+
+    mxDBGridExport.Select;
+end;
+
+procedure TFABM_Precios.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABMImportes);
+end;
+
+procedure TFABM_Precios.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_Productos.IsEmpty then
+    exit;
+
+  if (Application.MessageBox('Desea Selecionar algun cliente en particular para imprimir esta lista de precios?','ABM Precios',MB_YESNO+MB_ICONQUESTION) = IDYES) then
+  begin
+    if not Assigned(vsel) then
+    vsel := TFBuscarPersona.Create(nil);
+    
+    vsel.OnSeleccionar := OnSelPersona;
+    vsel.ShowModal;
+
+    QRLabelCoefGanancia.Enabled := false;
+    QRDBTextCoefGanancia.Enabled := false;
+    QRLabelmporteCosto.Enabled := false;
+    QRDBTextPrecioCosto.Enabled := false;
+    QRLabelimporteVenta.Left := 942;
+    QRDBTextPrecioVenta.Left := 942;
+
+
+    QRChildBandCleinte.Enabled := true;
+
+    EKVistaPreviaListaPrecios.VistaPrevia;
+  end
+  else
+  begin
+    QRLabelCoefGanancia.Enabled := true;
+    QRDBTextCoefGanancia.Enabled := true;
+    QRLabelmporteCosto.Enabled := true;
+    QRDBTextPrecioCosto.Enabled := true;
+    QRLabelimporteVenta.Left := 736;
+    QRDBTextPrecioVenta.Left := 736;
+
+    QRChildBandCleinte.Enabled := false;
+
+    EKVistaPreviaListaPrecios.VistaPrevia;
+  end;
+
+
+end;
+
+procedure TFABM_Precios.ZQ_ProductosCalcFields(DataSet: TDataSet);
+begin
+ZQ_Productosimporte_venta_cliente.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat-(ZQ_ProductosPRECIO_VENTA.AsFloat*DescuentoCliente);
 
 end;
 
