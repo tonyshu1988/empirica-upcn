@@ -48,7 +48,8 @@ requires
   dxThemeD7,
   dxComnD7,
   dxBarExtItemsD7,
-  QR5RunD7;
+  QR5RunD7,
+  InterSol;
 
 contains
   EKAppEvnts in 'EKAppEvnts.pas',
@@ -83,6 +84,6 @@ contains
   EKDBGrid in 'EKDBGrid.pas',
   EKFiltrarColumna in 'EKFiltrarColumna.pas',
   EKCodigoBarra in 'EKCodigoBarra.pas',
-  bcchksum;
+  EKIconizacion in 'EKIconizacion.pas';
 
 end.
