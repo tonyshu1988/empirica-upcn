@@ -9,7 +9,8 @@ uses
   ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla, Menus,UBuscarPersona,
   ZStoredProcedure,ShellAPI, IdMessage, IdBaseComponent, IdComponent,
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, ActnList,
-  XPStyleActnCtrls, ActnMan, EKListadoSQL, DBClient, Provider;
+  XPStyleActnCtrls, ActnMan, EKListadoSQL, DBClient, Provider, QuickRpt,
+  QRCtrls, EKVistaPreviaQR;
 
 type
   TFABMEmpresas = class(TForm)
@@ -202,6 +203,86 @@ type
     ZQ_EmpresaMarcaDESCRIPCION: TStringField;
     EKListadoMarca: TEKListadoSQL;
     DataSetProvider1: TDataSetProvider;
+    RepListaEmpresas: TQuickRep;
+    QRBand5: TQRBand;
+    QRDBImage1: TQRDBImage;
+    QRLabel11: TQRLabel;
+    RepCtas_Reporte_Titulo_2: TQRLabel;
+    RepCtas_Reporte_Titulo_1: TQRLabel;
+    QRBandDetalle: TQRBand;
+    QRDBTextCoefGanancia: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBTextPrecioCosto: TQRDBText;
+    QRDBTextPrecioVenta: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRBand7: TQRBand;
+    QRLabel24: TQRLabel;
+    QRSysData2: TQRSysData;
+    QRBand1: TQRBand;
+    QRExpr15: TQRExpr;
+    QRChildBandCleinte: TQRChildBand;
+    QRLabel1: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel14: TQRLabel;
+    EKVistaPreviaListaEmpresas: TEKVistaPreviaQR;
+    RepDetalleEmpresa: TQuickRep;
+    QRBand2: TQRBand;
+    QRDBImage2: TQRDBImage;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRBand3: TQRBand;
+    QRDBText3: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRDBText10: TQRDBText;
+    QRDBText11: TQRDBText;
+    QRBand4: TQRBand;
+    QRLabel5: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand6: TQRBand;
+    QRExpr1: TQRExpr;
+    QRChildBand1: TQRChildBand;
+    ChildBand1: TQRChildBand;
+    QRLabel13: TQRLabel;
+    QRLabel17: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRLabel20: TQRLabel;
+    ZQ_RelacionEmpresa: TZQuery;
+    ZQ_RelacionEmpresaRELACION: TStringField;
+    ZQ_RelacionEmpresaNOMBRE: TStringField;
+    ZQ_RelacionEmpresaTELEFONO: TStringField;
+    ZQ_RelacionEmpresaEMAIL: TStringField;
+    ZQ_RelacionEmpresaCUIT_CUIL: TStringField;
+    QRLabel9: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRLabel18: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText12: TQRDBText;
+    QRDBText13: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRDBText15: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRLabel25: TQRLabel;
+    QRLabel26: TQRLabel;
+    QRDBText17: TQRDBText;
+    QRLabel27: TQRLabel;
+    QRDBText18: TQRDBText;
+    btImprimirDetalle: TdxBarLargeButton;
+    EKVistaPreviaDetalleEmpresa: TEKVistaPreviaQR;
+    QRDBText19: TQRDBText;
+    QRLabel28: TQRLabel;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -235,6 +316,8 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
+    procedure btImprimirDetalleClick(Sender: TObject);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
@@ -808,6 +891,26 @@ begin
 if not ZQ_EmpresaMarca.IsEmpty then
  ZQ_EmpresaMarca.Delete;
 
+end;
+
+procedure TFABMEmpresas.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_Empresa.IsEmpty then
+    exit;
+
+  EKVistaPreviaListaEmpresas.VistaPrevia;
+end;
+
+procedure TFABMEmpresas.btImprimirDetalleClick(Sender: TObject);
+begin
+  if ZQ_Empresa.IsEmpty then
+    exit;
+
+  ZQ_RelacionEmpresa.Close;
+  ZQ_RelacionEmpresa.ParamByName('ID_EMPRESA').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
+  ZQ_RelacionEmpresa.Open;
+
+  EKVistaPreviaDetalleEmpresa.VistaPrevia;  
 end;
 
 end.
