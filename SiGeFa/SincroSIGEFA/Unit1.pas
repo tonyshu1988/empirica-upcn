@@ -88,6 +88,7 @@ type
     SincronizacionLocalFECHA: TDateField;
     SincronizacionLocalHORA: TTimeField;
     SincronizacionLocalULTIMO_LOTE_SINC: TIntegerField;
+    Splitter1: TSplitter;
     procedure ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -131,10 +132,7 @@ begin
      memo1.Lines.Add('Conectando Base Local: '+DM.ZC_Local.HostName+':'+DM.ZC_Local.Database);
      DM.ZC_Local.Connected:=true;
      memo1.Lines.Add('...Conectado.');
-     
-     // Genero el lote de sincronizacion y guardo los cambios
-     ZSP_GenerarLoteSinc.ExecProc;
-     DM.ZC_Local.Commit;
+
 
      SincronizacionRemoto.Close;
      SincronizacionRemoto.Open;
@@ -144,10 +142,12 @@ begin
      SincronizacionRemoto.Close;
      SincronizacionLocal.Close;
      SincronizacionLocal.Open;
-     // Me dá el último lote sincronizado desde el server
+     // Me dá el último lote sincronizado desde el Cliente
      SincronizacionLocal.Last;
      ultLoteL:=SincronizacionLocalULTIMO_LOTE_SINC.AsInteger;
      SincronizacionLocal.Close;
+
+     //######################### SECCION DESCARGA DE NOVEDADES #####################################
      // Busco el lote que le sigue a la sincronización que no sea de mi sucursal y mayor al ultLocal
      ZQ_SincroTabla.close;
      ZQ_SincroTabla.ParamByName('ultimo').AsInteger:=ultLoteL;
@@ -197,6 +197,12 @@ begin
           ZQ_SincroTabla.Next;
         end;
         ZQ_SincroTabla.ApplyUpdates;
+
+        //######################### SECCION SUBIDA DE NOVEDADES #####################################
+        
+        // Genero el lote de sincronizacion y guardo los cambios
+        ZSP_GenerarLoteSinc.ExecProc;
+        DM.ZC_Local.Commit;
 
         SincronizacionLocal.Close;
         SincronizacionLocal.Open;

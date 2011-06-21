@@ -1,8 +1,8 @@
 object FPrincipal: TFPrincipal
-  Left = 295
-  Top = 126
+  Left = 274
+  Top = 119
   Width = 870
-  Height = 580
+  Height = 654
   Caption = 'Sincronizador SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -18,12 +18,20 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 0
     Width = 854
-    Height = 490
+    Height = 564
     Align = alClient
     TabOrder = 0
+    object Splitter1: TSplitter
+      Left = 1
+      Top = 304
+      Width = 852
+      Height = 6
+      Cursor = crVSplit
+      Align = alBottom
+    end
     object Panel3: TPanel
       Left = 1
-      Top = 236
+      Top = 310
       Width = 852
       Height = 253
       Align = alBottom
@@ -187,6 +195,7 @@ object FPrincipal: TFPrincipal
         Color = 10026692
         Lines.Strings = (
           '')
+        ScrollBars = ssBoth
         TabOrder = 1
       end
     end
@@ -194,16 +203,16 @@ object FPrincipal: TFPrincipal
       Left = 1
       Top = 1
       Width = 852
-      Height = 235
+      Height = 303
       Align = alClient
       Caption = 'Panel4'
       TabOrder = 1
       object DBGrid3: TDBGrid
-        Left = 1
-        Top = 121
-        Width = 850
-        Height = 113
-        Align = alBottom
+        Left = 512
+        Top = 1
+        Width = 339
+        Height = 169
+        Align = alRight
         Color = 15915716
         DataSource = DataSource1
         Font.Charset = ANSI_CHARSET
@@ -222,25 +231,28 @@ object FPrincipal: TFPrincipal
           item
             Expanded = False
             FieldName = 'KEY_FIELD'
+            Width = 133
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'KEY_VALUE'
+            Width = 124
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'LOG_TABLES_ID'
+            Width = 102
             Visible = True
           end>
       end
       object DBGrid2: TDBGrid
-        Left = 450
-        Top = 1
-        Width = 401
-        Height = 120
-        Align = alRight
+        Left = 1
+        Top = 170
+        Width = 850
+        Height = 132
+        Align = alBottom
         Color = 15915716
         DataSource = DS_SincroCampo
         Font.Charset = ANSI_CHARSET
@@ -259,11 +271,13 @@ object FPrincipal: TFPrincipal
           item
             Expanded = False
             FieldName = 'LOG_TABLES_ID'
+            Width = 53
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'FIELD_NAME'
+            Width = 173
             Visible = True
           end
           item
@@ -280,9 +294,9 @@ object FPrincipal: TFPrincipal
       object DBGrid1: TDBGrid
         Left = 1
         Top = 1
-        Width = 451
-        Height = 120
-        Align = alLeft
+        Width = 511
+        Height = 169
+        Align = alClient
         Color = 15915716
         DataSource = DS_SincroTabla
         Font.Charset = ANSI_CHARSET
@@ -301,7 +315,7 @@ object FPrincipal: TFPrincipal
           item
             Expanded = False
             FieldName = 'ID'
-            Width = 47
+            Width = 35
             Visible = True
           end
           item
@@ -324,6 +338,7 @@ object FPrincipal: TFPrincipal
           item
             Expanded = False
             FieldName = 'USER_NAME'
+            Width = 120
             Visible = True
           end
           item
@@ -411,13 +426,13 @@ object FPrincipal: TFPrincipal
     Connection = DM.ZC_Local
     Params = <>
     Left = 608
-    Top = 296
+    Top = 376
   end
   object Remoto: TZQuery
     Connection = DM.ZC_Remoto
     Params = <>
     Left = 608
-    Top = 248
+    Top = 328
   end
   object ZQ_SincroCampo: TZQuery
     Connection = DM.ZC_Remoto
@@ -431,8 +446,8 @@ object FPrincipal: TFPrincipal
         Name = 'id'
         ParamType = ptUnknown
       end>
-    Left = 528
-    Top = 48
+    Left = 192
+    Top = 96
     ParamData = <
       item
         DataType = ftUnknown
@@ -474,8 +489,8 @@ object FPrincipal: TFPrincipal
         Name = 'id'
         ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 104
+    Left = 88
+    Top = 48
     ParamData = <
       item
         DataType = ftUnknown
@@ -499,17 +514,17 @@ object FPrincipal: TFPrincipal
   object DataSource1: TDataSource
     DataSet = ZQ_SincroTablaPrimary
     Left = 320
-    Top = 104
+    Top = 96
   end
   object inicio: TEKIni
     Archivo = 'sistema.ini'
     Left = 608
-    Top = 360
+    Top = 432
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 704
-    Top = 360
+    Left = 696
+    Top = 432
   end
   object SincronizacionRemoto: TZQuery
     Connection = DM.ZC_Remoto
@@ -519,7 +534,7 @@ object FPrincipal: TFPrincipal
       'order by fecha,hora,ultimo_lote_sinc')
     Params = <>
     Left = 401
-    Top = 256
+    Top = 336
     object SincronizacionRemotoID: TIntegerField
       FieldName = 'ID'
     end
@@ -537,8 +552,8 @@ object FPrincipal: TFPrincipal
     Connection = DM.ZC_Local
     Params = <>
     StoredProcName = 'GENERAR_LOTE_SINC'
-    Left = 705
-    Top = 248
+    Left = 697
+    Top = 328
   end
   object ZQ_Configuracion: TZQuery
     Connection = DM.ZC_Local
@@ -547,7 +562,7 @@ object FPrincipal: TFPrincipal
       'from configuracion')
     Params = <>
     Left = 521
-    Top = 296
+    Top = 328
     object ZQ_ConfiguracionDB_SUCURSAL: TIntegerField
       FieldName = 'DB_SUCURSAL'
     end
@@ -984,8 +999,8 @@ object FPrincipal: TFPrincipal
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 704
-    Top = 296
+    Left = 696
+    Top = 376
     DockControlHeights = (
       0
       0
@@ -15449,7 +15464,7 @@ object FPrincipal: TFPrincipal
     Hint = 'Sincronizador SiGeFa'
     OnDblClick = EKIconizacion1DblClick
     Left = 521
-    Top = 361
+    Top = 385
   end
   object SincronizacionLocal: TZQuery
     Connection = DM.ZC_Local
@@ -15459,7 +15474,7 @@ object FPrincipal: TFPrincipal
       'order by fecha,hora,ultimo_lote_sinc')
     Params = <>
     Left = 401
-    Top = 312
+    Top = 392
     object SincronizacionLocalID: TIntegerField
       FieldName = 'ID'
     end
