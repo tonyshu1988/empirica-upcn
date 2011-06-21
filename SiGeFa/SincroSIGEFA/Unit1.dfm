@@ -1,14 +1,14 @@
 object FPrincipal: TFPrincipal
-  Left = 299
-  Top = 144
+  Left = 295
+  Top = 126
   Width = 870
   Height = 580
   Caption = 'Sincronizador SiGeFa'
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
@@ -37,9 +37,9 @@ object FPrincipal: TFPrincipal
         Align = alLeft
         TabOrder = 0
         object Label7: TLabel
-          Left = 109
+          Left = 113
           Top = 201
-          Width = 127
+          Width = 156
           Height = 13
           Caption = 'Pr'#243'xima Sincronizaci'#243'n en:'
         end
@@ -58,7 +58,7 @@ object FPrincipal: TFPrincipal
         end
         object cuenta: TEKEdit
           Tag = 99
-          Left = 241
+          Left = 273
           Top = 197
           Width = 40
           Height = 21
@@ -78,21 +78,21 @@ object FPrincipal: TFPrincipal
           object Label4: TLabel
             Left = 24
             Top = 14
-            Width = 24
+            Width = 28
             Height = 13
             Caption = 'Base'
           end
           object Label5: TLabel
             Left = 24
             Top = 49
-            Width = 36
+            Width = 43
             Height = 13
             Caption = 'Usuario'
           end
           object Label6: TLabel
             Left = 168
             Top = 49
-            Width = 46
+            Width = 54
             Height = 13
             Caption = 'Password'
           end
@@ -133,21 +133,21 @@ object FPrincipal: TFPrincipal
           object Label1: TLabel
             Left = 23
             Top = 48
-            Width = 36
+            Width = 43
             Height = 13
             Caption = 'Usuario'
           end
           object Label2: TLabel
             Left = 167
             Top = 48
-            Width = 46
+            Width = 54
             Height = 13
             Caption = 'Password'
           end
           object Label3: TLabel
             Left = 24
             Top = 14
-            Width = 24
+            Width = 28
             Height = 13
             Caption = 'Base'
           end
@@ -184,6 +184,7 @@ object FPrincipal: TFPrincipal
         Width = 514
         Height = 251
         Align = alClient
+        Color = 10026692
         Lines.Strings = (
           '')
         TabOrder = 1
@@ -203,19 +204,21 @@ object FPrincipal: TFPrincipal
         Width = 850
         Height = 113
         Align = alBottom
+        Color = 15915716
         DataSource = DataSource1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Charset = ANSI_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Name = 'Verdana'
         TitleFont.Style = []
         Columns = <
-          item
-            Expanded = False
-            FieldName = 'LOG_TABLES_ID'
-            Visible = True
-          end
           item
             Expanded = False
             FieldName = 'KEY_FIELD'
@@ -224,6 +227,11 @@ object FPrincipal: TFPrincipal
           item
             Expanded = False
             FieldName = 'KEY_VALUE'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'LOG_TABLES_ID'
             Visible = True
           end>
       end
@@ -233,41 +241,21 @@ object FPrincipal: TFPrincipal
         Width = 401
         Height = 120
         Align = alRight
+        Color = 15915716
         DataSource = DS_SincroCampo
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Charset = ANSI_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Name = 'Verdana'
         TitleFont.Style = []
         Columns = <
-          item
-            Expanded = False
-            FieldName = 'ID'
-            Width = 32
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TABLE_NAME'
-            Width = 195
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'OPERATION'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DATE_TIME'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'USER_NAME'
-            Visible = True
-          end
           item
             Expanded = False
             FieldName = 'LOG_TABLES_ID'
@@ -275,12 +263,17 @@ object FPrincipal: TFPrincipal
           end
           item
             Expanded = False
-            FieldName = 'KEY_FIELD'
+            FieldName = 'FIELD_NAME'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'KEY_VALUE'
+            FieldName = 'OLD_VALUE'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NEW_VALUE'
             Visible = True
           end>
       end
@@ -290,22 +283,31 @@ object FPrincipal: TFPrincipal
         Width = 451
         Height = 120
         Align = alLeft
+        Color = 15915716
         DataSource = DS_SincroTabla
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 2
-        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Charset = ANSI_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Name = 'Verdana'
         TitleFont.Style = []
         Columns = <
           item
             Expanded = False
             FieldName = 'ID'
+            Width = 47
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'TABLE_NAME'
+            Width = 151
             Visible = True
           end
           item
@@ -316,6 +318,7 @@ object FPrincipal: TFPrincipal
           item
             Expanded = False
             FieldName = 'DATE_TIME'
+            Width = 74
             Visible = True
           end
           item
@@ -325,7 +328,12 @@ object FPrincipal: TFPrincipal
           end
           item
             Expanded = False
-            FieldName = 'SINCRONIZADO'
+            FieldName = 'LOTE_SINC'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SUCURSAL'
             Visible = True
           end>
       end
@@ -337,12 +345,18 @@ object FPrincipal: TFPrincipal
     SQL.Strings = (
       'select st.*'
       'from z_sinc_tabla st'
-      'where (st.lote_sinc>:ultimo)'
+      'where ((st.lote_sinc>:ultimo)'
+      'and(st.sucursal<>:suc))'
       '')
     Params = <
       item
         DataType = ftUnknown
         Name = 'ultimo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'suc'
         ParamType = ptUnknown
       end>
     Left = 192
@@ -351,6 +365,11 @@ object FPrincipal: TFPrincipal
       item
         DataType = ftUnknown
         Name = 'ultimo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'suc'
         ParamType = ptUnknown
       end>
     object ZQ_SincroTablaID: TLargeintField
@@ -378,6 +397,9 @@ object FPrincipal: TFPrincipal
     end
     object ZQ_SincroTablaLOTE_SINC: TIntegerField
       FieldName = 'LOTE_SINC'
+    end
+    object ZQ_SincroTablaSUCURSAL: TIntegerField
+      FieldName = 'SUCURSAL'
     end
   end
   object DS_SincroTabla: TDataSource
@@ -481,34 +503,33 @@ object FPrincipal: TFPrincipal
   end
   object inicio: TEKIni
     Archivo = 'sistema.ini'
-    Left = 616
-    Top = 56
+    Left = 608
+    Top = 360
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 696
-    Top = 56
+    Left = 704
+    Top = 360
   end
-  object Sincronizacion: TZQuery
+  object SincronizacionRemoto: TZQuery
     Connection = DM.ZC_Remoto
     SQL.Strings = (
       'select id, fecha, hora, ultimo_lote_sinc'
       'from sincronizacion'
       'order by fecha,hora,ultimo_lote_sinc')
     Params = <>
-    Left = 521
-    Top = 248
-    object SincronizacionID: TIntegerField
+    Left = 401
+    Top = 256
+    object SincronizacionRemotoID: TIntegerField
       FieldName = 'ID'
-      Required = True
     end
-    object SincronizacionFECHA: TDateField
+    object SincronizacionRemotoFECHA: TDateField
       FieldName = 'FECHA'
     end
-    object SincronizacionHORA: TTimeField
+    object SincronizacionRemotoHORA: TTimeField
       FieldName = 'HORA'
     end
-    object SincronizacionULTIMO_LOTE_SINC: TIntegerField
+    object SincronizacionRemotoULTIMO_LOTE_SINC: TIntegerField
       FieldName = 'ULTIMO_LOTE_SINC'
     end
   end
@@ -964,7 +985,7 @@ object FPrincipal: TFPrincipal
     UseF10ForMenu = False
     UseSystemFont = False
     Left = 704
-    Top = 304
+    Top = 296
     DockControlHeights = (
       0
       0
@@ -15427,7 +15448,29 @@ object FPrincipal: TFPrincipal
       0000F81F0000FC3F0000FC7F0000FEFF0000FFFF0000}
     Hint = 'Sincronizador SiGeFa'
     OnDblClick = EKIconizacion1DblClick
-    Left = 449
-    Top = 169
+    Left = 521
+    Top = 361
+  end
+  object SincronizacionLocal: TZQuery
+    Connection = DM.ZC_Local
+    SQL.Strings = (
+      'select id, fecha, hora, ultimo_lote_sinc'
+      'from sincronizacion'
+      'order by fecha,hora,ultimo_lote_sinc')
+    Params = <>
+    Left = 401
+    Top = 312
+    object SincronizacionLocalID: TIntegerField
+      FieldName = 'ID'
+    end
+    object SincronizacionLocalFECHA: TDateField
+      FieldName = 'FECHA'
+    end
+    object SincronizacionLocalHORA: TTimeField
+      FieldName = 'HORA'
+    end
+    object SincronizacionLocalULTIMO_LOTE_SINC: TIntegerField
+      FieldName = 'ULTIMO_LOTE_SINC'
+    end
   end
 end

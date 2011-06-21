@@ -51,17 +51,7 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    Sincronizacion: TZQuery;
-    ZQ_SincroTablaID: TLargeintField;
-    ZQ_SincroTablaTABLE_NAME: TStringField;
-    ZQ_SincroTablaOPERATION: TStringField;
-    ZQ_SincroTablaDATE_TIME: TDateTimeField;
-    ZQ_SincroTablaUSER_NAME: TStringField;
-    ZQ_SincroTablaLOTE_SINC: TIntegerField;
-    SincronizacionID: TIntegerField;
-    SincronizacionFECHA: TDateField;
-    SincronizacionHORA: TTimeField;
-    SincronizacionULTIMO_LOTE_SINC: TIntegerField;
+    SincronizacionRemoto: TZQuery;
     ZSP_GenerarLoteSinc: TZStoredProc;
     Panel4: TPanel;
     ZQ_Configuracion: TZQuery;
@@ -82,6 +72,22 @@ type
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     EKIconizacion1: TEKIconizacion;
+    SincronizacionRemotoID: TIntegerField;
+    SincronizacionRemotoFECHA: TDateField;
+    SincronizacionRemotoHORA: TTimeField;
+    SincronizacionRemotoULTIMO_LOTE_SINC: TIntegerField;
+    ZQ_SincroTablaID: TLargeintField;
+    ZQ_SincroTablaTABLE_NAME: TStringField;
+    ZQ_SincroTablaOPERATION: TStringField;
+    ZQ_SincroTablaDATE_TIME: TDateTimeField;
+    ZQ_SincroTablaUSER_NAME: TStringField;
+    ZQ_SincroTablaLOTE_SINC: TIntegerField;
+    ZQ_SincroTablaSUCURSAL: TIntegerField;
+    SincronizacionLocal: TZQuery;
+    SincronizacionLocalID: TIntegerField;
+    SincronizacionLocalFECHA: TDateField;
+    SincronizacionLocalHORA: TTimeField;
+    SincronizacionLocalULTIMO_LOTE_SINC: TIntegerField;
     procedure ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -102,7 +108,7 @@ type
 var
   FPrincipal: TFPrincipal;
   unidad : string;
-  intervalo, lote_commit,ultLote,idSucursal : integer;
+  intervalo, lote_commit,ultLoteR,ultLoteL,idSucursal : integer;
 implementation
 
 uses Unit2, UDM;
@@ -113,8 +119,8 @@ procedure TFPrincipal.Sincronizar();
 begin
   try
    begin
-     DM.ZC_Remoto.Connected:=False;
-     DM.ZC_Local.Connected:=False;
+     DM.ZC_Remoto.Disconnect;
+     DM.ZC_Local.Disconnect;
 
      memo1.Lines.Clear;
      memo1.Lines.Add('...### Sincronización SiGeFa ###...');
@@ -130,15 +136,22 @@ begin
      ZSP_GenerarLoteSinc.ExecProc;
      DM.ZC_Local.Commit;
 
-     Sincronizacion.Close;
-     Sincronizacion.Open;
-     // Me dá el último lote sincronizado
-     Sincronizacion.Last;
-     ultLote:=SincronizacionULTIMO_LOTE_SINC.AsInteger;
-
-     // Busco el lote que le sigue a la sincronización
+     SincronizacionRemoto.Close;
+     SincronizacionRemoto.Open;
+     // Me dá el último lote sincronizado desde el server
+     SincronizacionRemoto.Last;
+     ultLoteR:=SincronizacionRemotoULTIMO_LOTE_SINC.AsInteger;
+     SincronizacionRemoto.Close;
+     SincronizacionLocal.Close;
+     SincronizacionLocal.Open;
+     // Me dá el último lote sincronizado desde el server
+     SincronizacionLocal.Last;
+     ultLoteL:=SincronizacionLocalULTIMO_LOTE_SINC.AsInteger;
+     SincronizacionLocal.Close;
+     // Busco el lote que le sigue a la sincronización que no sea de mi sucursal y mayor al ultLocal
      ZQ_SincroTabla.close;
-     ZQ_SincroTabla.ParamByName('ultimo').AsInteger:=ultLote;
+     ZQ_SincroTabla.ParamByName('ultimo').AsInteger:=ultLoteL;
+     ZQ_SincroTabla.ParamByName('suc').AsInteger:=idSucursal;
      ZQ_SincroTabla.Open;
 
     while not ZQ_SincroTabla.Eof do
@@ -169,7 +182,7 @@ begin
               Local.Edit;
             while not ZQ_SincroCampo.Eof do
             begin
-              Local.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).AsString:=Remoto.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).AsString;
+              Local.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).value:=Remoto.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).value;
               ZQ_SincroCampo.Next;
             end;
           end;
@@ -179,24 +192,26 @@ begin
             if Local.RecordCount=1 then
               Local.Delete;
           end;
-//          if (ZQ_SincroTablaSINCRONIZADO.AsString='N')or(ZQ_SincroTablaSINCRONIZADO.IsNull) then
-//              begin
-//                ZQ_SincroTabla.Edit;
-//                ZQ_SincroTablaSINCRONIZADO.AsString:='S';
-//                ZQ_SincroTabla.Post;
-//              end;
+
           Local.ApplyUpdates;
           ZQ_SincroTabla.Next;
         end;
         ZQ_SincroTabla.ApplyUpdates;
 
-        Sincronizacion.Close;
-        Sincronizacion.Append;
-        SincronizacionULTIMO_LOTE_SINC.AsInteger:=ultLote;
-        Sincronizacion.ApplyUpdates;
+        SincronizacionLocal.Close;
+        SincronizacionLocal.Open;
+        SincronizacionLocal.Append;
+        SincronizacionLocalULTIMO_LOTE_SINC.AsInteger:=ultLoteR;
+        SincronizacionLocal.ApplyUpdates;
 
         DM.ZC_Remoto.Commit;
         DM.ZC_Local.Commit;
+
+        Local.Close;
+        Remoto.Close;
+
+        // Creo el archivo LOG para futuros chequeos...
+        guardarArchivoLog();
    end
   except
      on E: Exception do
@@ -210,8 +225,7 @@ begin
       end;
   end;
 
-  // Creo el archivo LOG para futuros chequeos...
-  guardarArchivoLog();
+
 
 end;
 
