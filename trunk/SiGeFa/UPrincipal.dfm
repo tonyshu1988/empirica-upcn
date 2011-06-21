@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 863
-    Height = 463
+    Width = 855
+    Height = 457
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 492
-    Width = 863
+    Top = 486
+    Width = 855
     Height = 19
     Panels = <
       item
@@ -4719,7 +4719,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 863
+    Width = 855
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 863
-    Height = 463
+    Width = 855
+    Height = 457
     Align = alClient
     Color = 16053492
     TabOrder = 2
@@ -4846,6 +4846,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 25
       OnExecute = AEnviarMailExecute
     end
+    object AABM_Precios: TAction
+      Caption = 'ABM Precios'
+      ImageIndex = 27
+      OnExecute = AABM_PreciosExecute
+    end
     object AABM_TipoIva: TAction
       Caption = 'ABM Tipo Iva'
       OnExecute = AABM_TipoIvaExecute
@@ -4862,10 +4867,9 @@ object FPrincipal: TFPrincipal
       Caption = 'ABM Cuenta'
       OnExecute = AABM_CuentaExecute
     end
-    object AABM_Precios: TAction
-      Caption = 'ABM Precios'
-      ImageIndex = 27
-      OnExecute = AABM_PreciosExecute
+    object AABM_Comprobante: TAction
+      Caption = 'ABM Comprobante'
+      OnExecute = AABM_ComprobanteExecute
     end
   end
   object MainMenuPrincipal: TMainMenu
@@ -4994,6 +4998,10 @@ object FPrincipal: TFPrincipal
       object ABMCuentas1: TMenuItem
         Tag = 1
         Action = AABM_Cuenta
+      end
+      object ABMComprobante1: TMenuItem
+        Tag = 1
+        Action = AABM_Comprobante
       end
     end
   end
