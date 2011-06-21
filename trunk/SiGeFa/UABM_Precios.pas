@@ -144,7 +144,6 @@ type
 
 var
   FABM_Precios: TFABM_Precios;
-  EditandoGrilla : integer;
   DescuentoCliente : real;
 
 const
@@ -186,13 +185,11 @@ begin
   if ZQ_Productos.IsEmpty then
   exit;
 
-  if EditandoGrilla <> 1 then
+  if not (dgEditing	in DBGridProductos.Options) then
   begin
     DBGridProductos.Options := DBGridProductos.Options - [dgRowSelect];
     DBGridProductos.Options := DBGridProductos.Options + [dgEditing];
-    EditandoGrilla :=1;
   end;
-
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
   begin
@@ -273,11 +270,12 @@ end;
 
 procedure TFABM_Precios.btnGuardarClick(Sender: TObject);
 begin
-  if EditandoGrilla = 1 then
+  if (ZQ_ProductosID_PRODUCTO.AsInteger = 0) then ZQ_Productos.Delete; //Borro los renglones vacios
+
+  if (dgEditing	in DBGridProductos.Options) then
   begin
     DBGridProductos.Options := DBGridProductos.Options - [dgEditing];
     DBGridProductos.Options := DBGridProductos.Options + [dgRowSelect];
-    EditandoGrilla:=0;
   end;
 
   if DM.EKModelo.finalizar_transaccion(Transaccion_ABMImportes) then
@@ -299,6 +297,13 @@ end;
 
 procedure TFABM_Precios.btnCancelarClick(Sender: TObject);
 begin
+
+  if (dgEditing	in DBGridProductos.Options) then
+  begin
+    DBGridProductos.Options := DBGridProductos.Options - [dgEditing];
+    DBGridProductos.Options := DBGridProductos.Options + [dgRowSelect];
+  end;
+
   if dm.EKModelo.cancelar_transaccion(Transaccion_ABMImportes) then
   begin
     DBGridProductos.Enabled := true;
