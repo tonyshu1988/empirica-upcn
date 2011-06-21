@@ -31,7 +31,8 @@ uses
   UABM_TipoFormaPago in 'UABM_TipoFormaPago.pas' {FABM_TipoFormaPago},
   UABM_TipoComprobante in 'UABM_TipoComprobante.pas' {FABM_TipoComprobante},
   UABM_Cuentas in 'UABM_Cuentas.pas' {FABM_Cuentas},
-  UABM_Precios in 'UABM_Precios.pas' {FABM_Precios};
+  UABM_Precios in 'UABM_Precios.pas' {FABM_Precios},
+  UABM_Comprobantes in 'UABM_Comprobantes.pas' {FABM_Comprobantes};
 
 {$R *.res}
 
