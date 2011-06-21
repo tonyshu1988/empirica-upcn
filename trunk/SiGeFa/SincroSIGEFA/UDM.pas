@@ -3,7 +3,7 @@ unit UDM;
 interface
 
 uses
-  SysUtils, Classes, ZConnection, ImgList, Controls, EKModelo;
+  SysUtils, Classes, ZConnection, ImgList, Controls, EKModelo, WinSkinData;
 
 type
   TDM = class(TDataModule)
@@ -12,6 +12,7 @@ type
     Iconos_Barra_32: TImageList;
     ModeloLocal: TEKModeloTransaccion;
     ModeloRemoto: TEKModeloTransaccion;
+    SkinData1: TSkinData;
   private
     { Private declarations }
   public
