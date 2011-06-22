@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 274
-  Top = 119
+  Left = 307
+  Top = 215
   Width = 870
   Height = 654
   Caption = 'Sincronizador SiGeFa'
@@ -46,7 +46,7 @@ object FPrincipal: TFPrincipal
         TabOrder = 0
         object Label7: TLabel
           Left = 113
-          Top = 201
+          Top = 225
           Width = 156
           Height = 13
           Caption = 'Pr'#243'xima Sincronizaci'#243'n en:'
@@ -67,7 +67,7 @@ object FPrincipal: TFPrincipal
         object cuenta: TEKEdit
           Tag = 99
           Left = 273
-          Top = 197
+          Top = 221
           Width = 40
           Height = 21
           AutoSize = False
@@ -184,6 +184,14 @@ object FPrincipal: TFPrincipal
             TabOrder = 2
             Text = 'LPassword'
           end
+        end
+        object chkTimer: TCheckBox
+          Left = 112
+          Top = 200
+          Width = 193
+          Height = 17
+          Caption = 'Sincronizaci'#243'n Programada'
+          TabOrder = 4
         end
       end
       object Memo1: TMemo
@@ -360,18 +368,18 @@ object FPrincipal: TFPrincipal
     SQL.Strings = (
       'select st.*'
       'from z_sinc_tabla st'
-      'where ((st.lote_sinc>:ultimo)'
-      'and(st.sucursal<>:suc))'
+      'where (st.sucursal<>:suc)'
+      'and (st.date_time>=:fecha)'
       '')
     Params = <
       item
         DataType = ftUnknown
-        Name = 'ultimo'
+        Name = 'suc'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'suc'
+        Name = 'fecha'
         ParamType = ptUnknown
       end>
     Left = 192
@@ -379,12 +387,12 @@ object FPrincipal: TFPrincipal
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'ultimo'
+        Name = 'suc'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'suc'
+        Name = 'fecha'
         ParamType = ptUnknown
       end>
     object ZQ_SincroTablaID: TLargeintField
@@ -517,7 +525,7 @@ object FPrincipal: TFPrincipal
     Top = 96
   end
   object inicio: TEKIni
-    Archivo = 'sistema.ini'
+    Archivo = 'configSincro.ini'
     Left = 608
     Top = 432
   end
@@ -526,34 +534,41 @@ object FPrincipal: TFPrincipal
     Left = 696
     Top = 432
   end
-  object SincronizacionRemoto: TZQuery
-    Connection = DM.ZC_Remoto
-    SQL.Strings = (
-      'select id, fecha, hora, ultimo_lote_sinc'
-      'from sincronizacion'
-      'order by fecha,hora,ultimo_lote_sinc')
-    Params = <>
-    Left = 401
-    Top = 336
-    object SincronizacionRemotoID: TIntegerField
-      FieldName = 'ID'
-    end
-    object SincronizacionRemotoFECHA: TDateField
-      FieldName = 'FECHA'
-    end
-    object SincronizacionRemotoHORA: TTimeField
-      FieldName = 'HORA'
-    end
-    object SincronizacionRemotoULTIMO_LOTE_SINC: TIntegerField
-      FieldName = 'ULTIMO_LOTE_SINC'
-    end
-  end
-  object ZSP_GenerarLoteSinc: TZStoredProc
+  object estaSincronizado: TZQuery
     Connection = DM.ZC_Local
-    Params = <>
-    StoredProcName = 'GENERAR_LOTE_SINC'
-    Left = 697
-    Top = 328
+    SQL.Strings = (
+      'select count(s.id)'
+      'from sincronizacion s'
+      'where (s.sucursal=:suc)and(s.ultimo_lote_sinc=:lote)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'suc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'lote'
+        ParamType = ptUnknown
+      end>
+    Left = 385
+    Top = 336
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'suc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'lote'
+        ParamType = ptUnknown
+      end>
+    object estaSincronizadoCOUNT: TIntegerField
+      FieldName = 'COUNT'
+      ReadOnly = True
+      Required = True
+    end
   end
   object ZQ_Configuracion: TZQuery
     Connection = DM.ZC_Local
@@ -15469,9 +15484,10 @@ object FPrincipal: TFPrincipal
   object SincronizacionLocal: TZQuery
     Connection = DM.ZC_Local
     SQL.Strings = (
-      'select id, fecha, hora, ultimo_lote_sinc'
+      'select *'
       'from sincronizacion'
-      'order by fecha,hora,ultimo_lote_sinc')
+      'order by fecha,hora,ultimo_lote_sinc'
+      '')
     Params = <>
     Left = 401
     Top = 392
@@ -15486,6 +15502,153 @@ object FPrincipal: TFPrincipal
     end
     object SincronizacionLocalULTIMO_LOTE_SINC: TIntegerField
       FieldName = 'ULTIMO_LOTE_SINC'
+    end
+    object SincronizacionLocalSUCURSAL: TIntegerField
+      FieldName = 'SUCURSAL'
+    end
+  end
+  object ZSP_GenerarLoteSinc: TZStoredProc
+    Connection = DM.ZC_Local
+    Params = <>
+    StoredProcName = 'GENERAR_LOTE_SINC'
+    Left = 705
+    Top = 334
+    object ZSP_GenerarLoteSincLOTESINC: TIntegerField
+      FieldName = 'LOTESINC'
+    end
+  end
+  object ZQ_SincTablaLocal: TZQuery
+    Connection = DM.ZC_Local
+    AfterScroll = ZQ_SincTablaLocalAfterScroll
+    SQL.Strings = (
+      'select st.*'
+      'from z_sinc_tabla st'
+      'where (st.lote_sinc=:lote)and(st.sucursal=:suc)'
+      '')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'lote'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'suc'
+        ParamType = ptUnknown
+      end>
+    Left = 144
+    Top = 208
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'lote'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'suc'
+        ParamType = ptUnknown
+      end>
+    object ZQ_SincTablaLocalID: TLargeintField
+      FieldName = 'ID'
+      Required = True
+    end
+    object ZQ_SincTablaLocalTABLE_NAME: TStringField
+      FieldName = 'TABLE_NAME'
+      Required = True
+      Size = 201
+    end
+    object ZQ_SincTablaLocalOPERATION: TStringField
+      FieldName = 'OPERATION'
+      Required = True
+      Size = 1
+    end
+    object ZQ_SincTablaLocalDATE_TIME: TDateTimeField
+      FieldName = 'DATE_TIME'
+      Required = True
+    end
+    object ZQ_SincTablaLocalUSER_NAME: TStringField
+      FieldName = 'USER_NAME'
+      Required = True
+      Size = 67
+    end
+    object ZQ_SincTablaLocalLOTE_SINC: TIntegerField
+      FieldName = 'LOTE_SINC'
+    end
+    object ZQ_SincTablaLocalSUCURSAL: TIntegerField
+      FieldName = 'SUCURSAL'
+    end
+  end
+  object ZQ_SincPTLocal: TZQuery
+    Connection = DM.ZC_Local
+    SQL.Strings = (
+      'select sc.*'
+      'from z_sinc_clave sc '
+      'where  (:id = sc.log_tables_id)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    Left = 240
+    Top = 208
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object ZQ_SincPTLocalLOG_TABLES_ID: TLargeintField
+      FieldName = 'LOG_TABLES_ID'
+      Required = True
+    end
+    object ZQ_SincPTLocalKEY_FIELD: TStringField
+      FieldName = 'KEY_FIELD'
+      Required = True
+      Size = 201
+    end
+    object ZQ_SincPTLocalKEY_VALUE: TStringField
+      FieldName = 'KEY_VALUE'
+      Size = 765
+    end
+  end
+  object ZQ_SincCampo: TZQuery
+    Connection = DM.ZC_Local
+    SQL.Strings = (
+      'select *'
+      'from z_sinc_campo sc'
+      'where sc.log_tables_id=:id')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    Left = 328
+    Top = 208
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object ZQ_SincCampoLOG_TABLES_ID: TLargeintField
+      FieldName = 'LOG_TABLES_ID'
+      Required = True
+    end
+    object ZQ_SincCampoFIELD_NAME: TStringField
+      FieldName = 'FIELD_NAME'
+      Required = True
+      Size = 201
+    end
+    object ZQ_SincCampoOLD_VALUE: TStringField
+      FieldName = 'OLD_VALUE'
+      Size = 765
+    end
+    object ZQ_SincCampoNEW_VALUE: TStringField
+      FieldName = 'NEW_VALUE'
+      Size = 765
     end
   end
 end
