@@ -1,7 +1,7 @@
 object FPrincipal: TFPrincipal
-  Left = 307
-  Top = 215
-  Width = 870
+  Left = 271
+  Top = 106
+  Width = 872
   Height = 654
   Caption = 'Sincronizador SiGeFa'
   Color = clBtnFace
@@ -11,20 +11,21 @@ object FPrincipal: TFPrincipal
   Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 856
     Height = 564
     Align = alClient
     TabOrder = 0
     object Splitter1: TSplitter
       Left = 1
       Top = 304
-      Width = 852
+      Width = 854
       Height = 6
       Cursor = crVSplit
       Align = alBottom
@@ -32,7 +33,7 @@ object FPrincipal: TFPrincipal
     object Panel3: TPanel
       Left = 1
       Top = 310
-      Width = 852
+      Width = 854
       Height = 253
       Align = alBottom
       Caption = 'Panel3'
@@ -197,7 +198,7 @@ object FPrincipal: TFPrincipal
       object Memo1: TMemo
         Left = 337
         Top = 1
-        Width = 514
+        Width = 516
         Height = 251
         Align = alClient
         Color = 10026692
@@ -210,13 +211,13 @@ object FPrincipal: TFPrincipal
     object Panel4: TPanel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 854
       Height = 303
       Align = alClient
       Caption = 'Panel4'
       TabOrder = 1
       object DBGrid3: TDBGrid
-        Left = 512
+        Left = 514
         Top = 1
         Width = 339
         Height = 169
@@ -258,7 +259,7 @@ object FPrincipal: TFPrincipal
       object DBGrid2: TDBGrid
         Left = 1
         Top = 170
-        Width = 850
+        Width = 852
         Height = 132
         Align = alBottom
         Color = 15915716
@@ -302,7 +303,7 @@ object FPrincipal: TFPrincipal
       object DBGrid1: TDBGrid
         Left = 1
         Top = 1
-        Width = 511
+        Width = 513
         Height = 169
         Align = alClient
         Color = 15915716
@@ -693,6 +694,18 @@ object FPrincipal: TFPrincipal
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnConectar
+            Visible = True
+          end
+          item
+            Item = btnSubir
+            Visible = True
+          end
+          item
+            Item = btnBajar
+            Visible = True
+          end
+          item
             Item = btnSincronizar
             Visible = True
           end
@@ -1041,31 +1054,32 @@ object FPrincipal: TFPrincipal
       OnClick = btnOcultarClick
       AutoGrayScale = False
     end
-    object btnNuevo: TdxBarLargeButton
-      Caption = 'F2 - Nuevo'
+    object btnConectar: TdxBarLargeButton
+      Caption = 'Conectar BD'
       Category = 0
-      Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
-      ImageIndex = 0
+      ImageIndex = 5
       ShortCut = 113
+      OnClick = btnConectarClick
       AutoGrayScale = False
     end
-    object btnModificar: TdxBarLargeButton
-      Caption = 'F3 - Modificar'
+    object btnSubir: TdxBarLargeButton
+      Caption = 'Subir Novedades'
       Category = 0
-      Hint = 'Modifica el registro actual'
+      Hint = 'Subir Novedades'
       Visible = ivAlways
       ImageIndex = 1
       ShortCut = 114
+      OnClick = btnSubirClick
       AutoGrayScale = False
     end
-    object btnBaja: TdxBarLargeButton
-      Caption = 'F5 - Baja'
+    object btnBajar: TdxBarLargeButton
+      Caption = 'Bajar Novedades'
       Category = 0
-      Hint = 'Da de baja un registro'
       Visible = ivAlways
       ImageIndex = 25
       ShortCut = 116
+      OnClick = btnBajarClick
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
@@ -1117,11 +1131,11 @@ object FPrincipal: TFPrincipal
     end
     object GrupoEditando: TdxBarGroup
       Items = (
-        'btnNuevo'
-        'btnModificar'
+        'btnConectar'
+        'btnSubir'
         'btnSincronizar'
         'btnOcultar'
-        'btnBaja'
+        'btnBajar'
         'btnSalir'
         'btnReactivar'
         'btnBorrarLog')
