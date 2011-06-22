@@ -1,6 +1,6 @@
 object FConceptos: TFConceptos
-  Left = 760
-  Top = 254
+  Left = 313
+  Top = 200
   Width = 870
   Height = 500
   Caption = 'ABM Conceptos'
@@ -12,7 +12,7 @@ object FConceptos: TFConceptos
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   OnClose = FormClose
@@ -23,8 +23,8 @@ object FConceptos: TFConceptos
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 4
@@ -70,13 +70,16 @@ object FConceptos: TFConceptos
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
       ReportTitle = 'Reporte de Libro Banco'
       SnapToGrid = True
@@ -84,6 +87,8 @@ object FConceptos: TFConceptos
       Zoom = 100
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBand5: TQRBand
         Tag = 99
         Left = 38
@@ -97,11 +102,14 @@ object FConceptos: TFConceptos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           230.187500000000000000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageHeader
         object QRDBImage1: TQRDBImage
           Left = 78
@@ -134,7 +142,7 @@ object FConceptos: TFConceptos
             50.270833333333330000
             801.687500000000000000
             158.750000000000000000
-            296.333333333333400000)
+            296.333333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -149,6 +157,7 @@ object FConceptos: TFConceptos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
         object RepCptos_Reporte_Titulo_2: TQRLabel
@@ -180,6 +189,7 @@ object FConceptos: TFConceptos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
         object RepCptos_Reporte_Titulo_1: TQRLabel
@@ -211,6 +221,7 @@ object FConceptos: TFConceptos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
       end
@@ -227,6 +238,7 @@ object FConceptos: TFConceptos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -9
@@ -238,6 +250,8 @@ object FConceptos: TFConceptos
         Size.Values = (
           39.687500000000000000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRDBText30: TQRDBText
           Left = 683
@@ -263,6 +277,7 @@ object FConceptos: TFConceptos
           DataField = 'BAJA'
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText6: TQRDBText
@@ -289,6 +304,7 @@ object FConceptos: TFConceptos
           DataField = 'IMPORTE'
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText4: TQRDBText
@@ -315,6 +331,7 @@ object FConceptos: TFConceptos
           DataField = 'NOMBRE_CONCEPTO'
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText5: TQRDBText
@@ -341,6 +358,7 @@ object FConceptos: TFConceptos
           DataField = 'COD_CORTO'
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -357,12 +375,16 @@ object FConceptos: TFConceptos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clSilver
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           39.687500000000000000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         ParentBand = QRBand5
+        PrintOrder = cboAfterParent
         object QRLabel27: TQRLabel
           Left = 683
           Top = 0
@@ -392,6 +414,7 @@ object FConceptos: TFConceptos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel21: TQRLabel
@@ -423,6 +446,7 @@ object FConceptos: TFConceptos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel16: TQRLabel
@@ -454,6 +478,7 @@ object FConceptos: TFConceptos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel18: TQRLabel
@@ -485,6 +510,7 @@ object FConceptos: TFConceptos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -501,11 +527,14 @@ object FConceptos: TFConceptos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageFooter
         object QRLabel24: TQRLabel
           Left = 637
@@ -518,7 +547,7 @@ object FConceptos: TFConceptos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1685.395833333333000000
             2.645833333333333000
             103.187500000000000000)
@@ -536,6 +565,7 @@ object FConceptos: TFConceptos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRSysData2: TQRSysData
@@ -549,7 +579,7 @@ object FConceptos: TFConceptos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -565,6 +595,7 @@ object FConceptos: TFConceptos
           Font.Style = []
           ParentFont = False
           Transparent = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -581,11 +612,14 @@ object FConceptos: TFConceptos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           47.625000000000000000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbSummary
         object QRExpr15: TQRExpr
           Left = 519
@@ -601,7 +635,7 @@ object FConceptos: TFConceptos
             37.041666666666670000
             1373.187500000000000000
             5.291666666666667000
-            526.520833333333400000)
+            526.520833333333300000)
           Alignment = taRightJustify
           AlignToBand = True
           AutoSize = True
@@ -611,6 +645,7 @@ object FConceptos: TFConceptos
           Transparent = False
           WordWrap = True
           Expression = #39'Cantidad de Conceptos: '#39'+COUNT'
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -618,8 +653,8 @@ object FConceptos: TFConceptos
     object Grilla: TDBGrid
       Left = 1
       Top = 20
-      Width = 860
-      Height = 325
+      Width = 852
+      Height = 319
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Conceptos
@@ -661,7 +696,7 @@ object FConceptos: TFConceptos
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 852
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -682,7 +717,7 @@ object FConceptos: TFConceptos
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 750
+        Left = 742
         Top = 1
         Width = 109
         Height = 17
@@ -698,8 +733,8 @@ object FConceptos: TFConceptos
     end
     object pDatos: TPanel
       Left = 1
-      Top = 345
-      Width = 860
+      Top = 339
+      Width = 852
       Height = 70
       Align = alBottom
       BevelOuter = bvNone
@@ -827,7 +862,7 @@ object FConceptos: TFConceptos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1199,6 +1234,7 @@ object FConceptos: TFConceptos
     FuenteNormal = []
     NombreGuardarConfig = 'UConceptos'
     Ordenar = False
+    MoverColumna = True
     Left = 552
     Top = 80
   end

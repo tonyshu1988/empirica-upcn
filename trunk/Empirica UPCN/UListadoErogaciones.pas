@@ -117,8 +117,6 @@ type
     ZQ_Libro_erogacionesCONCILIADO: TStringField;
     ZQ_Libro_erogacionesFECHA_CONCILIADO: TDateField;
     ZQ_Libro_erogacionesCMOV_ANULADO: TStringField;
-    mxDBGridExport: TmxDBGridExport;
-    mxNativeExcel1: TmxNativeExcel;
     btexportarExel: TdxBarLargeButton;
     ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Libro_erogacionesTIPO_PROVEEDOR: TStringField;
@@ -552,9 +550,13 @@ end;
 
 procedure TFListadoErogaciones.btexportarExelClick(Sender: TObject);
 begin
-  if not ZQ_Libro_erogaciones.IsEmpty then
+  if ZQ_Libro_erogaciones.IsEmpty then
+    exit;
 
-    mxDBGridExport.Select;
+  dm.prepararParaExportar(ZQ_Libro_erogaciones, false); //desactivo el currency y seteo los parametros para exportar
+  dm.ExcelExport.DBGrid:= DBGridListaErogacion;
+  dm.ExcelExport.Select;
+  dm.prepararParaExportar(ZQ_Libro_erogaciones, true); //activo el currency y vuelvo a los parametros anteriores
 end;
 
 procedure TFListadoErogaciones.QRBandDetalleBeforePrint(

@@ -1,9 +1,9 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 737
-  Top = 472
-  Height = 283
-  Width = 279
+  Left = 509
+  Top = 183
+  Height = 302
+  Width = 300
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
@@ -17,8 +17,8 @@ object DM: TDM
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
     SQLHourGlass = True
-    Left = 54
-    Top = 22
+    Left = 30
+    Top = 14
   end
   object SkinData1: TSkinData
     Active = False
@@ -133,7 +133,7 @@ object DM: TDM
     MenuUpdate = True
     MenuMerge = False
     Left = 200
-    Top = 104
+    Top = 80
     SkinStream = {
       B2A200001D420400FE6771B8CDB63F0AFE7DDBA97F4F18038F007701BED1C07C
       75C80BD9C9F5D70591A9FECC5240394623B2CA86E4171CB29CAD627055451458
@@ -1440,21 +1440,21 @@ object DM: TDM
   end
   object EKEventos1: TEKEventos
     EnterPorTab = True
-    Left = 56
-    Top = 104
+    Left = 32
+    Top = 80
   end
   object EKModelo: TEKModeloTransaccion
     Coneccion = Conexion
     Left = 120
-    Top = 24
+    Top = 14
   end
   object EKInformacion1: TEKInformacion
     StatusBar = FPrincipal.StatusBar1
     IndiceUsuario = 0
     IndiceTransaccion = 2
     IndiceVersion = 1
-    Left = 128
-    Top = 104
+    Left = 120
+    Top = 80
   end
   object EKUsrLogin1: TEKUsrLogin
     OnLogin = LoginLogin
@@ -1468,8 +1468,8 @@ object DM: TDM
     Caption = 'UPCN'
     Modo = EKLoginAutomatico
     ModoPermiso = EKPermisoAction
-    Left = 184
-    Top = 24
+    Left = 200
+    Top = 14
   end
   object ZQ_Configuracion: TZQuery
     Connection = Conexion
@@ -1477,8 +1477,8 @@ object DM: TDM
       'select *'
       'from configuracion')
     Params = <>
-    Left = 56
-    Top = 176
+    Left = 200
+    Top = 150
     object ZQ_ConfiguracionCLAVE: TStringField
       FieldName = 'CLAVE'
       Required = True
@@ -1521,8 +1521,8 @@ object DM: TDM
         Name = 'cta'
         ParamType = ptUnknown
       end>
-    Left = 176
-    Top = 176
+    Left = 120
+    Top = 200
     ParamData = <
       item
         DataType = ftUnknown
@@ -1558,5 +1558,112 @@ object DM: TDM
     object BlobField1: TBlobField
       FieldName = 'GRAFICO'
     end
+  end
+  object ExcelNative: TmxNativeExcel
+    ActiveFont = 0
+    Borders = []
+    Shading = False
+    Version = '1.24'
+    Left = 32
+    Top = 150
+  end
+  object ExcelExport: TmxDBGridExport
+    DateFormat = 'dd/MM/yyyy'
+    TimeFormat = 'hh:mm AMPM'
+    DateTimeFormat = 'hh:mm AMPM dd/MM/yyyy'
+    ExportType = xtExcel
+    ExportTypes = [xtHTML, xtExcel, xtTXT]
+    ExportStyle = xsView
+    HTML.CustomColors.Background = clWhite
+    HTML.CustomColors.DefaultLink = clRed
+    HTML.CustomColors.DefaultFontFace = 'Arial,Helvetica'
+    HTML.CustomColors.VisitedLink = clAqua
+    HTML.CustomColors.ActiveLink = clBlue
+    HTML.CustomColors.DefaultText = clBlack
+    HTML.CustomColors.TableFontColor = clBlack
+    HTML.CustomColors.TableFontFace = 'Arial,Helvetica'
+    HTML.CustomColors.TableBackground = 16777167
+    HTML.CustomColors.TableOddBackground = clWhite
+    HTML.CustomColors.HeaderBackground = 3368601
+    HTML.CustomColors.HeadersFontColor = clWhite
+    HTML.Options = [hoShowGridLines, hoBoldHeaders, hoAutoLink, hoOddRowColoring, hoDisplayTitle]
+    HTML.Template = ctStandard
+    Messages.Caption = 'Exportar datos'
+    Messages.CopiedToClipboard = 'Data was copied to clipboard!'
+    Messages.CancelCaption = '&Cancelar'
+    Messages.CreatedText = 'Exportando:'
+    Messages.DocumentFilter.HTML = 'HTML Documents'
+    Messages.DocumentFilter.Excel = 'Excel Files'
+    Messages.DocumentFilter.Word = 'Word Documents'
+    Messages.DocumentFilter.Text = 'Text Files'
+    Messages.DocumentFilter.Comma = 'CSV (Comma delimited)'
+    Messages.DocumentFilter.Tab = 'Text (Tab delimited)'
+    Messages.DocumentFilter.RTF = 'Rich Text Format'
+    Messages.DocumentFilter.DIF = 'Data Interchange Format'
+    Messages.DocumentFilter.SYLK = 'SYLK Files'
+    Messages.ExportCaption = '&Aceptar'
+    Messages.ExportToFile = '&Guardar'
+    Messages.FalseText = 'False'
+    Messages.Height = 80
+    Messages.SaveTitle = 'Guardar'
+    Messages.SelectFormat = 'Opciones'
+    Messages.Text = 'Procesando...'
+    Messages.TrueText = 'True'
+    Messages.Width = 300
+    Messages.ViewOnly = '&Ver'
+    TruncateSymbol = '...'
+    RowNumberFormat = '%d'
+    DOC_RTF.Template = rtStandard
+    DOC_RTF.Options = [roShowGridLines, roOddRowColoring]
+    DOC_RTF.CustomSettings.TableBackground = 16777167
+    DOC_RTF.CustomSettings.TableOddBackground = clWhite
+    DOC_RTF.CustomSettings.HeaderBackground = 3368601
+    DOC_RTF.CustomSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    DOC_RTF.CustomSettings.DefaultFont.Color = clWindowText
+    DOC_RTF.CustomSettings.DefaultFont.Height = -11
+    DOC_RTF.CustomSettings.DefaultFont.Name = 'MS Sans Serif'
+    DOC_RTF.CustomSettings.DefaultFont.Style = []
+    DOC_RTF.CustomSettings.HeaderFont.Charset = DEFAULT_CHARSET
+    DOC_RTF.CustomSettings.HeaderFont.Color = clWindowText
+    DOC_RTF.CustomSettings.HeaderFont.Height = -11
+    DOC_RTF.CustomSettings.HeaderFont.Name = 'MS Sans Serif'
+    DOC_RTF.CustomSettings.HeaderFont.Style = [fsBold]
+    DOC_RTF.CustomSettings.TableFont.Charset = DEFAULT_CHARSET
+    DOC_RTF.CustomSettings.TableFont.Color = clWindowText
+    DOC_RTF.CustomSettings.TableFont.Height = -11
+    DOC_RTF.CustomSettings.TableFont.Name = 'MS Sans Serif'
+    DOC_RTF.CustomSettings.TableFont.Style = []
+    DOC_RTF.CellWidth = 1400
+    DOC_RTF.TopMargin = 101
+    DOC_RTF.BottomMargin = 101
+    DOC_RTF.LeftMargin = 461
+    DOC_RTF.RightMargin = 562
+    EXCEL.Options = [reSetColumnWidths, reSetMargins, reUseBorders]
+    EXCEL.ColumnWidth = 30
+    EXCEL.Protected = False
+    EXCEL.Footer = '&P'
+    EXCEL.DefaultFont.Charset = DEFAULT_CHARSET
+    EXCEL.DefaultFont.Color = clWindowText
+    EXCEL.DefaultFont.Height = -11
+    EXCEL.DefaultFont.Name = 'MS Sans Serif'
+    EXCEL.DefaultFont.Style = []
+    EXCEL.HeaderFont.Charset = DEFAULT_CHARSET
+    EXCEL.HeaderFont.Color = clWindowText
+    EXCEL.HeaderFont.Height = -12
+    EXCEL.HeaderFont.Name = 'Verdana'
+    EXCEL.HeaderFont.Style = [fsBold]
+    EXCEL.TableFont.Charset = DEFAULT_CHARSET
+    EXCEL.TableFont.Color = clWindowText
+    EXCEL.TableFont.Height = -11
+    EXCEL.TableFont.Name = 'MS Sans Serif'
+    EXCEL.TableFont.Style = []
+    EXCEL.TopMargin = 0.300000000000000000
+    EXCEL.BottomMargin = 0.300000000000000000
+    EXCEL.LeftMargin = 0.300000000000000000
+    EXCEL.RightMargin = 0.300000000000000000
+    Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
+    Version = '2.37'
+    Left = 120
+    Top = 150
   end
 end

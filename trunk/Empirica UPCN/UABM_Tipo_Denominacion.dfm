@@ -1,6 +1,6 @@
 object FABM_Tipo_Denominacion: TFABM_Tipo_Denominacion
-  Left = 400
-  Top = 306
+  Left = 319
+  Top = 184
   Width = 870
   Height = 500
   Caption = 'ABM Tipo Denominacion'
@@ -12,7 +12,7 @@ object FABM_Tipo_Denominacion: TFABM_Tipo_Denominacion
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   OnCloseQuery = FormCloseQuery
@@ -22,16 +22,16 @@ object FABM_Tipo_Denominacion: TFABM_Tipo_Denominacion
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 0
     object Grilla: TDBGrid
       Left = 1
       Top = 1
-      Width = 860
-      Height = 380
+      Width = 852
+      Height = 374
       Align = alClient
       Color = 16772842
       DataSource = DS_tipo_proveedor
@@ -53,8 +53,8 @@ object FABM_Tipo_Denominacion: TFABM_Tipo_Denominacion
     end
     object pDatos: TPanel
       Left = 1
-      Top = 381
-      Width = 860
+      Top = 375
+      Width = 852
       Height = 34
       Align = alBottom
       BevelOuter = bvNone
@@ -94,7 +94,7 @@ object FABM_Tipo_Denominacion: TFABM_Tipo_Denominacion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

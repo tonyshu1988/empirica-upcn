@@ -126,8 +126,6 @@ type
     BtAnularOrden: TdxBarLargeButton;
     BtAnularMov: TdxBarLargeButton;
     BtExportarExel: TdxBarLargeButton;
-    mxNativeExcel1: TmxNativeExcel;
-    mxDBGridExport: TmxDBGridExport;
     PanelImpresion: TPanel;
     Label19: TLabel;
     Label20: TLabel;
@@ -1314,8 +1312,13 @@ end;
 
 procedure TFMovimientos.BtExportarExelClick(Sender: TObject);
 begin
-  if not LIBRO_BANCO.IsEmpty then
-    mxDBGridExport.Select;
+  if LIBRO_BANCO.IsEmpty then
+    exit;
+
+  dm.prepararParaExportar(LIBRO_BANCO, false); //desactivo el currency y seteo los parametros para exportar
+  dm.ExcelExport.DBGrid:= DBGridLibroBanco;
+  dm.ExcelExport.Select;
+  dm.prepararParaExportar(LIBRO_BANCO, true); //activo el currency y vuelvo a los parametros anteriores
 end;
 
 

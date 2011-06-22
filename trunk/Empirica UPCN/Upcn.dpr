@@ -2,6 +2,7 @@ program Upcn;
 
 uses
   Forms,
+  SYSUTILS,
   UPrincipal in 'UPrincipal.pas' {FPrincipal},
   UDM in 'UDM.pas' {DM: TDataModule},
   UUtilidades in 'UUtilidades.pas',
@@ -26,6 +27,12 @@ uses
 
 begin
   Application.Initialize;
+  CurrencyDecimals := 2;
+  CurrencyString := '$';
+  DecimalSeparator := '.';
+  ThousandSeparator := ',';
+  DateSeparator := '/';
+  ShortDateFormat := 'dd/MM/yyyy';
   Application.Title := 'Sistema de Libro Banco';
   Application.CreateForm(TDM, DM);
   Application.Run;

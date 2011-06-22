@@ -127,8 +127,6 @@ type
     ZSP_ConciliacionFECHA_CONCILIADO: TDateField;
     ZSP_LibroBancoTIPO_PROVEEDOR: TStringField;
     ZSP_ConciliacionTIPO_PROVEEDOR: TStringField;
-    mxDBGridExport: TmxDBGridExport;
-    mxNativeExcel1: TmxNativeExcel;
     QRShapeV2: TQRShape;
     QRShapeV3: TQRShape;
     QRShapeV4: TQRShape;
@@ -350,8 +348,13 @@ end;
 
 procedure TFConciliacion.btnExcelClick(Sender: TObject);
 begin
-  if not ZSP_Conciliacion.IsEmpty then
-    mxDBGridExport.Select;
+  if ZSP_Conciliacion.IsEmpty then
+    exit;
+
+  dm.prepararParaExportar(ZSP_Conciliacion, false); //desactivo el currency y seteo los parametros para exportar
+  dm.ExcelExport.DBGrid:= DBGridConciliacion;
+  dm.ExcelExport.Select;
+  dm.prepararParaExportar(ZSP_Conciliacion, true); //activo el currency y vuelvo a los parametros anteriores
 end;
 
 procedure TFConciliacion.RepConciliacionBeforePrint(

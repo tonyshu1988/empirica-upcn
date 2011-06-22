@@ -12,7 +12,7 @@ object FSaldoInicial: TFSaldoInicial
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   WindowState = wsMaximized
@@ -971,6 +971,7 @@ object FSaldoInicial: TFSaldoInicial
     FuenteNormal = []
     NombreGuardarConfig = 'USaldoInicial'
     Ordenar = False
+    MoverColumna = True
     Left = 224
     Top = 232
   end

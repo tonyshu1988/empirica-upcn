@@ -179,8 +179,6 @@ type
     QRLabel12: TQRLabel;
     EKDbSuma: TEKDbSuma;
     btExportarExel: TdxBarLargeButton;
-    mxDBGridExport: TmxDBGridExport;
-    mxNativeExcel1: TmxNativeExcel;
     ZQ_MovimientoProveedoresNRO_CUENTA: TIntegerField;
     ZQ_Cuenta: TZQuery;
     ZQ_CuentaID_CUENTA: TIntegerField;
@@ -323,8 +321,13 @@ end;
 
 procedure TFReporteMovProveedor.btExportarExelClick(Sender: TObject);
 begin
-  if not ZQ_MovimientoProveedores.IsEmpty then
-    mxDBGridExport.Select;
+  if ZQ_MovimientoProveedores.IsEmpty then
+    exit;
+
+  dm.prepararParaExportar(ZQ_MovimientoProveedores, false); //desactivo el currency y seteo los parametros para exportar
+  dm.ExcelExport.DBGrid:= DBGridMercaderiaVendida;
+  dm.ExcelExport.Select;
+  dm.prepararParaExportar(ZQ_MovimientoProveedores, true); //activo el currency y vuelvo a los parametros anteriores
 end;
 
 end.

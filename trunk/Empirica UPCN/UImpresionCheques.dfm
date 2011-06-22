@@ -1,6 +1,6 @@
 object FImpresionCheques: TFImpresionCheques
-  Left = 269
-  Top = 175
+  Left = 233
+  Top = 41
   Width = 987
   Height = 720
   Caption = 'Impresion de Cheques'
@@ -12,7 +12,7 @@ object FImpresionCheques: TFImpresionCheques
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   OnCreate = FormCreate
@@ -191,13 +191,16 @@ object FImpresionCheques: TFImpresionCheques
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = False
       ReportTitle = '+'
       SnapToGrid = True
@@ -205,6 +208,8 @@ object FImpresionCheques: TFImpresionCheques
       Zoom = 100
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBandCorriente: TQRBand
         Tag = 99
         Left = 0
@@ -219,11 +224,14 @@ object FImpresionCheques: TFImpresionCheques
         AlignToBottom = False
         BeforePrint = QRBandCorrienteBeforePrint
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           748.770833333333300000
           1820.333333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRImageChequeCorriente: TQRImage
           Left = 1
@@ -3897,6 +3905,7 @@ object FImpresionCheques: TFImpresionCheques
           DataField = 'Importe'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText4: TQRDBText
@@ -3923,6 +3932,7 @@ object FImpresionCheques: TFImpresionCheques
           DataField = 'proveedor'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabelNumeroLetraCorriente1: TQRLabel
@@ -3956,6 +3966,7 @@ object FImpresionCheques: TFImpresionCheques
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText2: TQRDBText
@@ -3988,6 +3999,7 @@ object FImpresionCheques: TFImpresionCheques
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabelmesCheque: TQRLabel
@@ -4013,6 +4025,7 @@ object FImpresionCheques: TFImpresionCheques
           Color = clWhite
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabelDiaCheque: TQRLabel
@@ -4038,6 +4051,7 @@ object FImpresionCheques: TFImpresionCheques
           Color = clWhite
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabelanioCheque: TQRLabel
@@ -4063,6 +4077,7 @@ object FImpresionCheques: TFImpresionCheques
           Color = clWhite
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -4109,13 +4124,16 @@ object FImpresionCheques: TFImpresionCheques
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = False
       ReportTitle = '+'
       SnapToGrid = True
@@ -4123,6 +4141,8 @@ object FImpresionCheques: TFImpresionCheques
       Zoom = 100
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBandDiferido: TQRBand
         Tag = 99
         Left = 0
@@ -4137,11 +4157,14 @@ object FImpresionCheques: TFImpresionCheques
         AlignToBottom = False
         BeforePrint = QRBandDiferidoBeforePrint
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           748.770833333333300000
           1820.333333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRImageChequeDiferido: TQRImage
           Left = 0
@@ -7815,6 +7838,7 @@ object FImpresionCheques: TFImpresionCheques
           DataField = 'Importe'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText5: TQRDBText
@@ -7841,6 +7865,7 @@ object FImpresionCheques: TFImpresionCheques
           DataField = 'proveedor'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabelNumeroLetraDiferido1: TQRLabel
@@ -7874,6 +7899,7 @@ object FImpresionCheques: TFImpresionCheques
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText6: TQRDBText
@@ -7906,6 +7932,7 @@ object FImpresionCheques: TFImpresionCheques
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabelmesChequedif: TQRLabel
@@ -7931,6 +7958,7 @@ object FImpresionCheques: TFImpresionCheques
           Color = clWhite
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabelDiaChequeDif: TQRLabel
@@ -7956,6 +7984,7 @@ object FImpresionCheques: TFImpresionCheques
           Color = clWhite
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabelanioChequedif: TQRLabel
@@ -7981,6 +8010,7 @@ object FImpresionCheques: TFImpresionCheques
           Color = clWhite
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabeldiaPD: TQRLabel
@@ -8006,6 +8036,7 @@ object FImpresionCheques: TFImpresionCheques
           Color = clWhite
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabelmesPD: TQRLabel
@@ -8031,6 +8062,7 @@ object FImpresionCheques: TFImpresionCheques
           Color = clWhite
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabelanioPD: TQRLabel
@@ -8056,6 +8088,7 @@ object FImpresionCheques: TFImpresionCheques
           Color = clWhite
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -8771,6 +8804,7 @@ object FImpresionCheques: TFImpresionCheques
     Grilla = DBGridCheques
     FuenteNormal = []
     Ordenar = True
+    MoverColumna = True
     Left = 128
     Top = 88
   end
