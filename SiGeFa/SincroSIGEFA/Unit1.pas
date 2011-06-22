@@ -51,8 +51,7 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    SincronizacionRemoto: TZQuery;
-    ZSP_GenerarLoteSinc: TZStoredProc;
+    estaSincronizado: TZQuery;
     Panel4: TPanel;
     ZQ_Configuracion: TZQuery;
     ZQ_ConfiguracionDB_SUCURSAL: TIntegerField;
@@ -72,10 +71,6 @@ type
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     EKIconizacion1: TEKIconizacion;
-    SincronizacionRemotoID: TIntegerField;
-    SincronizacionRemotoFECHA: TDateField;
-    SincronizacionRemotoHORA: TTimeField;
-    SincronizacionRemotoULTIMO_LOTE_SINC: TIntegerField;
     ZQ_SincroTablaID: TLargeintField;
     ZQ_SincroTablaTABLE_NAME: TStringField;
     ZQ_SincroTablaOPERATION: TStringField;
@@ -89,6 +84,28 @@ type
     SincronizacionLocalHORA: TTimeField;
     SincronizacionLocalULTIMO_LOTE_SINC: TIntegerField;
     Splitter1: TSplitter;
+    estaSincronizadoCOUNT: TIntegerField;
+    SincronizacionLocalSUCURSAL: TIntegerField;
+    ZSP_GenerarLoteSinc: TZStoredProc;
+    ZSP_GenerarLoteSincLOTESINC: TIntegerField;
+    ZQ_SincTablaLocal: TZQuery;
+    ZQ_SincPTLocal: TZQuery;
+    ZQ_SincCampo: TZQuery;
+    ZQ_SincTablaLocalID: TLargeintField;
+    ZQ_SincTablaLocalTABLE_NAME: TStringField;
+    ZQ_SincTablaLocalOPERATION: TStringField;
+    ZQ_SincTablaLocalDATE_TIME: TDateTimeField;
+    ZQ_SincTablaLocalUSER_NAME: TStringField;
+    ZQ_SincTablaLocalLOTE_SINC: TIntegerField;
+    ZQ_SincTablaLocalSUCURSAL: TIntegerField;
+    ZQ_SincPTLocalLOG_TABLES_ID: TLargeintField;
+    ZQ_SincPTLocalKEY_FIELD: TStringField;
+    ZQ_SincPTLocalKEY_VALUE: TStringField;
+    ZQ_SincCampoLOG_TABLES_ID: TLargeintField;
+    ZQ_SincCampoFIELD_NAME: TStringField;
+    ZQ_SincCampoOLD_VALUE: TStringField;
+    ZQ_SincCampoNEW_VALUE: TStringField;
+    chkTimer: TCheckBox;
     procedure ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -100,6 +117,8 @@ type
     procedure guardarArchivoLog();
     procedure btnOcultarClick(Sender: TObject);
     procedure EKIconizacion1DblClick(Sender: TObject);
+    function estaEnBDLocal():Boolean ;
+    procedure ZQ_SincTablaLocalAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -108,8 +127,9 @@ type
 
 var
   FPrincipal: TFPrincipal;
-  unidad : string;
-  intervalo, lote_commit,ultLoteR,ultLoteL,idSucursal : integer;
+  unidad,encendido : string;
+  ultFecha:TDate;
+  intervalo, lote_commit,loteGenerado,ultLoteR,ultLoteL,ultSuc,idSucursal : integer;
 implementation
 
 uses Unit2, UDM;
@@ -134,81 +154,154 @@ begin
      memo1.Lines.Add('...Conectado.');
 
 
-     SincronizacionRemoto.Close;
-     SincronizacionRemoto.Open;
-     // Me dá el último lote sincronizado desde el server
-     SincronizacionRemoto.Last;
-     ultLoteR:=SincronizacionRemotoULTIMO_LOTE_SINC.AsInteger;
-     SincronizacionRemoto.Close;
      SincronizacionLocal.Close;
      SincronizacionLocal.Open;
-     // Me dá el último lote sincronizado desde el Cliente
+     // Me dá el último lote subido desde el Cliente
      SincronizacionLocal.Last;
      ultLoteL:=SincronizacionLocalULTIMO_LOTE_SINC.AsInteger;
+     ultFecha:=SincronizacionLocalFECHA.AsDateTime;
      SincronizacionLocal.Close;
 
+
+
+
      //######################### SECCION DESCARGA DE NOVEDADES #####################################
-     // Busco el lote que le sigue a la sincronización que no sea de mi sucursal y mayor al ultLocal
+     // Busco el lote que le sigue a la sincronización que no sea de mi sucursal y fecha mayor/igual al ultimo procesado
+     //
+     ultLoteR:=0;
+     ultSuc:=0;
      ZQ_SincroTabla.close;
-     ZQ_SincroTabla.ParamByName('ultimo').AsInteger:=ultLoteL;
      ZQ_SincroTabla.ParamByName('suc').AsInteger:=idSucursal;
+     ZQ_SincroTabla.ParamByName('fecha').AsDate:=ultFecha;
      ZQ_SincroTabla.Open;
 
-    while not ZQ_SincroTabla.Eof do
+     while not ZQ_SincroTabla.Eof do
         begin
-          memo1.Lines.Add('Tabla:'+ZQ_SincroTablaTABLE_NAME.AsString+' ID:'+ZQ_SincroTablaID.AsString);
+             if not(estaEnBDLocal()) then
+              begin
+                memo1.Lines.Add('Tabla:'+ZQ_SincroTablaTABLE_NAME.AsString+' ID:'+ZQ_SincroTablaID.AsString);
 
-          ZQ_SincroCampo.close;
-          ZQ_SincroCampo.ParamByName('id').AsInteger:=ZQ_SincroTablaID.AsInteger;
-          ZQ_SincroCampo.open;
+                ZQ_SincroCampo.close;
+                ZQ_SincroCampo.ParamByName('id').AsInteger:=ZQ_SincroTablaID.AsInteger;
+                ZQ_SincroCampo.open;
 
-          Remoto.SQL.Clear;
-          Remoto.SQL.Add(
-                  'select * from '+ZQ_SincroTablaTABLE_NAME.AsString+
-                  ' where '+ZQ_SincroTablaPrimaryKEY_FIELD.AsString+'='+ZQ_SincroTablaPrimaryKEY_VALUE.AsString);
-          Remoto.Open;
+                Local.SQL.Clear;
+                Local.SQL.Add(
+                        'select * from '+ZQ_SincroTablaTABLE_NAME.AsString+
+                        ' where '+ZQ_SincroTablaPrimaryKEY_FIELD.AsString+'='+ZQ_SincroTablaPrimaryKEY_VALUE.AsString);
+                Local.Open;
 
-          Local.SQL.Clear;
-          Local.SQL.Add(
-                  'select * from '+ZQ_SincroTablaTABLE_NAME.AsString+
-                  ' where '+ZQ_SincroTablaPrimaryKEY_FIELD.AsString+'='+ZQ_SincroTablaPrimaryKEY_VALUE.AsString);
-          Local.Open;
+                if (ZQ_SincroTablaOPERATION.AsString='I') or (ZQ_SincroTablaOPERATION.AsString='U') then
+                begin
+                  if Local.RecordCount=0 then
+                    Local.Append
+                  else
+                    Local.Edit;
+                  while not ZQ_SincroCampo.Eof do
+                  begin
+                    Local.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).value:=ZQ_SincroCampoNEW_VALUE.value;
+                    Local.Post;
+                    ZQ_SincroCampo.Next;
+                  end;
+                end;
 
-          if (ZQ_SincroTablaOPERATION.AsString='I') or (ZQ_SincroTablaOPERATION.AsString='U') then
-          begin
-            if Local.RecordCount=0 then
-              Local.Append
-            else
-              Local.Edit;
-            while not ZQ_SincroCampo.Eof do
-            begin
-              Local.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).value:=Remoto.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).value;
-              ZQ_SincroCampo.Next;
-            end;
-          end;
-
-          if ZQ_SincroTablaOPERATION.AsString='D' then
-          begin
-            if Local.RecordCount=1 then
-              Local.Delete;
-          end;
-
-          Local.ApplyUpdates;
+                if ZQ_SincroTablaOPERATION.AsString='D' then
+                begin
+                  if Local.RecordCount=1 then
+                    Local.Delete;
+                end;
+                // Verifico si va cambiando el lote/sucursal, y lo voy guardando para saber cual procesé y cual no
+                if ((ultLoteR<>ZQ_SincroTablaLOTE_SINC.AsInteger)and(ultSuc<>ZQ_SincroTablaSUCURSAL.AsInteger)) then
+                begin
+                  SincronizacionLocal.Open;
+                  SincronizacionLocal.Append;
+                  SincronizacionLocalULTIMO_LOTE_SINC.AsInteger:=ultLoteR;
+                  SincronizacionLocalSUCURSAL.AsInteger:=ultSuc;
+                  SincronizacionLocal.Post;
+                end;
+                ultLoteR:=ZQ_SincroTablaLOTE_SINC.AsInteger;
+                ultSuc:=ZQ_SincroTablaSUCURSAL.AsInteger;
+                Local.ApplyUpdates;
+              end;
           ZQ_SincroTabla.Next;
         end;
         ZQ_SincroTabla.ApplyUpdates;
+        SincronizacionLocal.ApplyUpdates;
+
+
+        //###########################################################################################
 
         //######################### SECCION SUBIDA DE NOVEDADES #####################################
-        
+
         // Genero el lote de sincronizacion y guardo los cambios
-        ZSP_GenerarLoteSinc.ExecProc;
+        ZSP_GenerarLoteSinc.Active:=True;
+        loteGenerado:=ZSP_GenerarLoteSincLOTESINC.AsInteger;
+        ZSP_GenerarLoteSinc.Active:=False;
         DM.ZC_Local.Commit;
 
+        //subo los datos al server (el lote nuevo generado)
+        ZQ_SincTablaLocal.Close;
+        ZQ_SincTablaLocal.ParamByName('lote').AsInteger:=loteGenerado;
+        ZQ_SincTablaLocal.ParamByName('suc').AsInteger:=idSucursal;
+        ZQ_SincTablaLocal.Open;
+
+        // Un garrón pero dpes hay que ver si se puede mejorar, quizas con el comparador de DATOS
+        while not(ZQ_SincTablaLocal.Eof) do
+         begin
+            ZQ_SincroTabla.Append;
+            ZQ_SincroTablaID.Value:=ZQ_SincTablaLocalID.Value;
+            ZQ_SincroTablaTABLE_NAME.Value:=ZQ_SincTablaLocalTABLE_NAME.Value;
+            ZQ_SincroTablaOPERATION.Value:=ZQ_SincTablaLocalOPERATION.Value;
+            ZQ_SincroTablaDATE_TIME.Value:=ZQ_SincTablaLocalDATE_TIME.Value;
+            ZQ_SincroTablaUSER_NAME.Value:=ZQ_SincTablaLocalUSER_NAME.Value;
+            ZQ_SincroTablaLOTE_SINC.Value:=ZQ_SincTablaLocalLOTE_SINC.Value;
+            ZQ_SincroTablaSUCURSAL.Value:=ZQ_SincTablaLocalSUCURSAL.Value;
+
+              //Guardo las demas tablas hijas
+              ZQ_SincPTLocal.First;
+              while not(ZQ_SincPTLocal.Eof)
+              do
+                begin
+                    ZQ_SincroTablaPrimary.Append;
+                    ZQ_SincroTablaPrimaryKEY_FIELD.Value:=ZQ_SincPTLocalKEY_FIELD.Value;
+                    ZQ_SincroTablaPrimaryKEY_VALUE.Value:=ZQ_SincPTLocalKEY_VALUE.Value;
+                    ZQ_SincroTablaPrimaryLOG_TABLES_ID.Value:=ZQ_SincPTLocalLOG_TABLES_ID.Value;
+                    ZQ_SincroTablaPrimary.Post;
+
+                    ZQ_SincPTLocal.Next;
+                end;
+              ZQ_SincCampo.First;
+              while not(ZQ_SincCampo.Eof)
+              do
+                begin
+                    ZQ_SincroCampo.Append;
+                    ZQ_SincroCampoLOG_TABLES_ID.Value:=ZQ_SincCampoLOG_TABLES_ID.Value;
+                    ZQ_SincroCampoFIELD_NAME.Value:=ZQ_SincCampoFIELD_NAME.Value;
+                    ZQ_SincroCampoOLD_VALUE.Value:=ZQ_SincCampoOLD_VALUE.Value;
+                    ZQ_SincroCampoNEW_VALUE.Value:=ZQ_SincCampoNEW_VALUE.Value;
+                    ZQ_SincroCampo.Post;
+
+                    ZQ_SincCampo.Next;
+                end;
+
+            ZQ_SincroTabla.Post;
+            ZQ_SincTablaLocal.Next;
+         end;
+
+        ZQ_SincroTabla.ApplyUpdates;
+        ZQ_SincroTablaPrimary.ApplyUpdates;
+        ZQ_SincroCampo.ApplyUpdates;
+
+        // Marco como que lo subí al server (por si necesito saber lo que subí)
         SincronizacionLocal.Close;
         SincronizacionLocal.Open;
         SincronizacionLocal.Append;
-        SincronizacionLocalULTIMO_LOTE_SINC.AsInteger:=ultLoteR;
+        SincronizacionLocalULTIMO_LOTE_SINC.AsInteger:=loteGenerado;
+        SincronizacionLocalSUCURSAL.AsInteger:=idSucursal;
         SincronizacionLocal.ApplyUpdates;
+
+        //###########################################################################################333
+
 
         DM.ZC_Remoto.Commit;
         DM.ZC_Local.Commit;
@@ -231,8 +324,6 @@ begin
       end;
   end;
 
-
-
 end;
 
 procedure TFPrincipal.ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
@@ -240,6 +331,10 @@ begin
 ZQ_SincroTablaPrimary.close;
 ZQ_SincroTablaPrimary.ParamByName('id').value:=ZQ_SincroTablaID.Value;
 ZQ_SincroTablaPrimary.open;
+
+ZQ_SincroCampo.close;
+ZQ_SincroCampo.ParamByName('id').value:=ZQ_SincroTablaID.Value;
+ZQ_SincroCampo.open;
 
 end;
 
@@ -253,20 +348,21 @@ begin
   ZQ_Configuracion.Last;
   idSucursal:=ZQ_ConfiguracionID_SUCURSAL.AsInteger;
 
+  FPrincipal.Caption:='Sincronizador SiGeFa - Sucursal: '+ZQ_ConfiguracionID_SUCURSAL.AsString;
   DM.ZC_Remoto.Connected:=False;
   DM.ZC_Local.Connected:=False;
   ZQ_SincroTabla.close;
   memo1.Lines.Clear;
   dir:=Application.ExeName;
 
-  if ParamCount=0 then
-  begin
-    if IsProcess('Sincronizador.exe') then
-    begin
-      Application.MessageBox('Ya hay una instancia del programa ejecutándose.','Atención');
-      Application.Terminate;
-    end;
-  end;
+//  if ParamCount=0 then
+//  begin
+//    if IsProcess('Sincronizador.exe') then
+//    begin
+//      Application.MessageBox('Ya hay una instancia del programa ejecutándose.','Atención');
+//      Application.Terminate;
+//    end;
+//  end;
 
   inicio.abrir;
   DM.ZC_Remoto.HostName:=inicio.Ini.ReadString('bases', 'ipremoto','');
@@ -290,6 +386,9 @@ begin
   unidad:=inicio.Ini.ReadString('SINCRONIZACION', 'unidad','minutos');
   intervalo:=strtoint(inicio.Ini.ReadString('SINCRONIZACION', 'intervalo','15'));
   lote_commit:=strtoint(inicio.Ini.ReadString('SINCRONIZACION', 'lote_commit','100'));
+  encendido:=inicio.Ini.ReadString('SINCRONIZACION', 'encendido','S');
+
+  chkTimer.Checked:=(encendido='S');
 
   cuenta.Text:=inttostr(intervalo);
   if unidad='segundos' then
@@ -306,14 +405,17 @@ procedure TFPrincipal.Timer1Timer(Sender: TObject);
 var
   cu : integer;
 begin
-  cu := strtoint(cuenta.text);
-  cu := cu-1;
-  cuenta.Text:=inttostr(cu);
-  if cu=0 then
-  begin
-    timer1.Enabled:=False;
-    Sincronizar();
-  end;
+  if chkTimer.Checked then
+   begin
+    cu := strtoint(cuenta.text);
+    cu := cu-1;
+    cuenta.Text:=inttostr(cu);
+    if cu=0 then
+    begin
+      timer1.Enabled:=False;
+      Sincronizar();
+    end;
+   end;
 end;
 
 procedure TFPrincipal.guardarArchivoLog();
@@ -367,6 +469,30 @@ end;
 procedure TFPrincipal.EKIconizacion1DblClick(Sender: TObject);
 begin
 Visible:=true;
+end;
+
+function TFPrincipal.estaEnBDLocal():Boolean ;
+begin
+
+estaSincronizado.Close;
+estaSincronizado.ParamByName('suc').AsInteger:=ZQ_SincroTablaSUCURSAL.AsInteger;
+estaSincronizado.ParamByName('lote').AsInteger:=ZQ_SincroTablaLOTE_SINC.AsInteger;
+estaSincronizado.Open;
+
+Result:=estaSincronizadoCOUNT.AsInteger>0;
+
+end;
+
+
+procedure TFPrincipal.ZQ_SincTablaLocalAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_SincPTLocal.close;
+  ZQ_SincPTLocal.ParamByName('id').value:=ZQ_SincTablaLocalID.Value;
+  ZQ_SincPTLocal.open;
+
+  ZQ_SincCampo.close;
+  ZQ_SincCampo.ParamByName('id').value:=ZQ_SincTablaLocalID.Value;
+  ZQ_SincCampo.open;
 end;
 
 end.
