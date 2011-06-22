@@ -60,9 +60,9 @@ type
     dxBarABM: TdxBarManager;
     btnSincronizar: TdxBarLargeButton;
     btnOcultar: TdxBarLargeButton;
-    btnNuevo: TdxBarLargeButton;
-    btnModificar: TdxBarLargeButton;
-    btnBaja: TdxBarLargeButton;
+    btnConectar: TdxBarLargeButton;
+    btnSubir: TdxBarLargeButton;
+    btnBajar: TdxBarLargeButton;
     btnReactivar: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
@@ -119,6 +119,13 @@ type
     procedure EKIconizacion1DblClick(Sender: TObject);
     function estaEnBDLocal():Boolean ;
     procedure ZQ_SincTablaLocalAfterScroll(DataSet: TDataSet);
+    procedure descargaNovedades();
+    procedure conectar();
+    procedure btnConectarClick(Sender: TObject);
+    procedure btnBajarClick(Sender: TObject);
+    procedure subirNovedades();
+    procedure btnSubirClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -143,27 +150,24 @@ begin
      DM.ZC_Remoto.Disconnect;
      DM.ZC_Local.Disconnect;
 
-     memo1.Lines.Clear;
-     memo1.Lines.Add('...### Sincronización SiGeFa ###...');
-     memo1.Lines.Add('Conectando Base Servidor: '+DM.ZC_Remoto.HostName+':'+DM.ZC_Remoto.Database);
-     DM.ZC_Remoto.Connected:=true;
-     memo1.Lines.Add('...Conectado.');
+      memo1.Lines.Clear;
+      memo1.Lines.Clear;
+      memo1.Lines.Add('...### Sincronización SiGeFa ###...');
+      DM.ZC_Local.Disconnect;
+      memo1.Lines.Add('Conectando Base Local: '+DM.ZC_Local.HostName+':'+DM.ZC_Local.Database);
+      DM.ZC_Local.Connected:=true;
+      memo1.Lines.Add('...Conectado.');
+      memo1.Lines.Add('Conectando Base Servidor: '+DM.ZC_Remoto.HostName+':'+DM.ZC_Remoto.Database);
+      DM.ZC_Remoto.Connected:=true;
+      memo1.Lines.Add('...Conectado.');
 
-     memo1.Lines.Add('Conectando Base Local: '+DM.ZC_Local.HostName+':'+DM.ZC_Local.Database);
-     DM.ZC_Local.Connected:=true;
-     memo1.Lines.Add('...Conectado.');
-
-
-     SincronizacionLocal.Close;
-     SincronizacionLocal.Open;
-     // Me dá el último lote subido desde el Cliente
-     SincronizacionLocal.Last;
-     ultLoteL:=SincronizacionLocalULTIMO_LOTE_SINC.AsInteger;
-     ultFecha:=SincronizacionLocalFECHA.AsDateTime;
-     SincronizacionLocal.Close;
-
-
-
+      SincronizacionLocal.Close;
+      SincronizacionLocal.Open;
+      // Me dá el último lote subido desde el Cliente
+      SincronizacionLocal.Last;
+      ultLoteL:=SincronizacionLocalULTIMO_LOTE_SINC.AsInteger;
+      ultFecha:=SincronizacionLocalFECHA.AsDateTime;
+      SincronizacionLocal.Close;
 
      //######################### SECCION DESCARGA DE NOVEDADES #####################################
      // Busco el lote que le sigue a la sincronización que no sea de mi sucursal y fecha mayor/igual al ultimo procesado
@@ -191,19 +195,18 @@ begin
                         ' where '+ZQ_SincroTablaPrimaryKEY_FIELD.AsString+'='+ZQ_SincroTablaPrimaryKEY_VALUE.AsString);
                 Local.Open;
 
-                if (ZQ_SincroTablaOPERATION.AsString='I') or (ZQ_SincroTablaOPERATION.AsString='U') then
-                begin
-                  if Local.RecordCount=0 then
+                if (ZQ_SincroTablaOPERATION.AsString='I') then
                     Local.Append
-                  else
-                    Local.Edit;
-                  while not ZQ_SincroCampo.Eof do
+                else
+                  if (ZQ_SincroTablaOPERATION.AsString='U') then
+                      Local.Edit;
+
+                while not ZQ_SincroCampo.Eof do
                   begin
                     Local.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).value:=ZQ_SincroCampoNEW_VALUE.value;
-                    Local.Post;
                     ZQ_SincroCampo.Next;
                   end;
-                end;
+
 
                 if ZQ_SincroTablaOPERATION.AsString='D' then
                 begin
@@ -215,8 +218,8 @@ begin
                 begin
                   SincronizacionLocal.Open;
                   SincronizacionLocal.Append;
-                  SincronizacionLocalULTIMO_LOTE_SINC.AsInteger:=ultLoteR;
-                  SincronizacionLocalSUCURSAL.AsInteger:=ultSuc;
+                  SincronizacionLocalULTIMO_LOTE_SINC.AsInteger:=ZQ_SincroTablaLOTE_SINC.AsInteger;
+                  SincronizacionLocalSUCURSAL.AsInteger:=ZQ_SincroTablaSUCURSAL.AsInteger;
                   SincronizacionLocal.Post;
                 end;
                 ultLoteR:=ZQ_SincroTablaLOTE_SINC.AsInteger;
@@ -239,15 +242,17 @@ begin
         ZSP_GenerarLoteSinc.Active:=False;
         DM.ZC_Local.Commit;
 
-        //subo los datos al server (el lote nuevo generado)
-        ZQ_SincTablaLocal.Close;
-        ZQ_SincTablaLocal.ParamByName('lote').AsInteger:=loteGenerado;
-        ZQ_SincTablaLocal.ParamByName('suc').AsInteger:=idSucursal;
-        ZQ_SincTablaLocal.Open;
-
-        // Un garrón pero dpes hay que ver si se puede mejorar, quizas con el comparador de DATOS
-        while not(ZQ_SincTablaLocal.Eof) do
+        if loteGenerado>0 then
          begin
+          //subo los datos al server (el lote nuevo generado)
+          ZQ_SincTablaLocal.Close;
+          ZQ_SincTablaLocal.ParamByName('lote').AsInteger:=loteGenerado;
+          ZQ_SincTablaLocal.ParamByName('suc').AsInteger:=idSucursal;
+          ZQ_SincTablaLocal.Open;
+
+          // Un garrón pero dpes hay que ver si se puede mejorar, quizas con el comparador de DATOS
+          while not(ZQ_SincTablaLocal.Eof) do
+           begin
             ZQ_SincroTabla.Append;
             ZQ_SincroTablaID.Value:=ZQ_SincTablaLocalID.Value;
             ZQ_SincroTablaTABLE_NAME.Value:=ZQ_SincTablaLocalTABLE_NAME.Value;
@@ -286,22 +291,22 @@ begin
 
             ZQ_SincroTabla.Post;
             ZQ_SincTablaLocal.Next;
-         end;
+          end;
 
-        ZQ_SincroTabla.ApplyUpdates;
-        ZQ_SincroTablaPrimary.ApplyUpdates;
-        ZQ_SincroCampo.ApplyUpdates;
+          ZQ_SincroTabla.ApplyUpdates;
+          ZQ_SincroTablaPrimary.ApplyUpdates;
+          ZQ_SincroCampo.ApplyUpdates;
 
-        // Marco como que lo subí al server (por si necesito saber lo que subí)
-        SincronizacionLocal.Close;
-        SincronizacionLocal.Open;
-        SincronizacionLocal.Append;
-        SincronizacionLocalULTIMO_LOTE_SINC.AsInteger:=loteGenerado;
-        SincronizacionLocalSUCURSAL.AsInteger:=idSucursal;
-        SincronizacionLocal.ApplyUpdates;
+          // Marco como que lo subí al server (por si necesito saber lo que subí)
+          SincronizacionLocal.Close;
+          SincronizacionLocal.Open;
+          SincronizacionLocal.Append;
+          SincronizacionLocalULTIMO_LOTE_SINC.AsInteger:=loteGenerado;
+          SincronizacionLocalSUCURSAL.AsInteger:=idSucursal;
+          SincronizacionLocal.ApplyUpdates;
 
-        //###########################################################################################333
-
+          //###########################################################################################333
+        end;
 
         DM.ZC_Remoto.Commit;
         DM.ZC_Local.Commit;
@@ -342,17 +347,12 @@ procedure TFPrincipal.FormCreate(Sender: TObject);
 var
   dir : string;
 begin
-  // Obtengo el num de mi sucursal
-  ZQ_Configuracion.Close;
-  ZQ_Configuracion.Open;
-  ZQ_Configuracion.Last;
-  idSucursal:=ZQ_ConfiguracionID_SUCURSAL.AsInteger;
 
-  FPrincipal.Caption:='Sincronizador SiGeFa - Sucursal: '+ZQ_ConfiguracionID_SUCURSAL.AsString;
   DM.ZC_Remoto.Connected:=False;
   DM.ZC_Local.Connected:=False;
+
   ZQ_SincroTabla.close;
-  memo1.Lines.Clear;
+
   dir:=Application.ExeName;
 
 //  if ParamCount=0 then
@@ -398,6 +398,39 @@ begin
 
   RadioGroup1Click(self);
   inicio.cerrar;
+
+
+
+  try
+    begin
+      DM.ZC_Local.Disconnect;
+
+      memo1.Lines.Clear;
+      memo1.Lines.Add('...### Sincronización SiGeFa ###...');
+      DM.ZC_Local.Disconnect;
+      memo1.Lines.Add('Conectando Base Local: '+DM.ZC_Local.HostName+':'+DM.ZC_Local.Database);
+      DM.ZC_Local.Connect;
+      memo1.Lines.Add('...Conectado.');
+
+      // Obtengo el num de mi sucursal
+      ZQ_Configuracion.Close;
+      ZQ_Configuracion.Open;
+      ZQ_Configuracion.Last;
+      idSucursal:=ZQ_ConfiguracionID_SUCURSAL.AsInteger;
+
+      FPrincipal.Caption:='Sincronizador SiGeFa - Sucursal: '+ZQ_ConfiguracionID_SUCURSAL.AsString;
+    end
+    except
+     on E: Exception do
+      begin
+
+        DM.ZC_Remoto.Disconnect;
+        DM.ZC_Local.Disconnect;
+
+        memo1.Lines.Add(E.Message);
+        memo1.Lines.Add('ERROR Conexión Local!!');
+      end;
+  end;
 
 end;
 
@@ -495,4 +528,261 @@ begin
   ZQ_SincCampo.open;
 end;
 
+procedure TFPrincipal.descargaNovedades;
+begin
+if (dm.ZC_Remoto.Connected and dm.ZC_Local.Connected) then
+  try
+   begin
+
+     SincronizacionLocal.Close;
+     SincronizacionLocal.Open;
+     // Me dá el último lote subido desde el Cliente
+     SincronizacionLocal.Last;
+     ultLoteL:=SincronizacionLocalULTIMO_LOTE_SINC.AsInteger;
+     ultFecha:=SincronizacionLocalFECHA.AsDateTime;
+     SincronizacionLocal.Close;
+
+     //######################### SECCION DESCARGA DE NOVEDADES #####################################
+     // Busco el lote que le sigue a la sincronización que no sea de mi sucursal y fecha mayor/igual al ultimo procesado
+     //
+     ultLoteR:=0;
+     ultSuc:=0;
+     ZQ_SincroTabla.close;
+     ZQ_SincroTabla.ParamByName('suc').AsInteger:=idSucursal;
+     ZQ_SincroTabla.ParamByName('fecha').AsDate:=ultFecha;
+     ZQ_SincroTabla.Open;
+
+     while not ZQ_SincroTabla.Eof do
+        begin
+             if not(estaEnBDLocal()) then
+              begin
+                memo1.Lines.Add('Tabla:'+ZQ_SincroTablaTABLE_NAME.AsString+' ID:'+ZQ_SincroTablaID.AsString);
+
+                ZQ_SincroCampo.close;
+                ZQ_SincroCampo.ParamByName('id').AsInteger:=ZQ_SincroTablaID.AsInteger;
+                ZQ_SincroCampo.open;
+
+                Local.SQL.Clear;
+                Local.SQL.Add(
+                        'select * from '+ZQ_SincroTablaTABLE_NAME.AsString+
+                        ' where '+ZQ_SincroTablaPrimaryKEY_FIELD.AsString+'='+ZQ_SincroTablaPrimaryKEY_VALUE.AsString);
+                Local.Open;
+
+                if (ZQ_SincroTablaOPERATION.AsString='I') then
+                    Local.Append
+                else
+                  if (ZQ_SincroTablaOPERATION.AsString='U') then
+                      Local.Edit;
+
+                while not ZQ_SincroCampo.Eof do
+                  begin
+                    Local.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).value:=ZQ_SincroCampoNEW_VALUE.value;
+                    ZQ_SincroCampo.Next;
+                  end;
+
+
+                if ZQ_SincroTablaOPERATION.AsString='D' then
+                begin
+                  if Local.RecordCount=1 then
+                    Local.Delete;
+                end;
+                // Verifico si va cambiando el lote/sucursal, y lo voy guardando para saber cual procesé y cual no
+                if ((ultLoteR<>ZQ_SincroTablaLOTE_SINC.AsInteger)and(ultSuc<>ZQ_SincroTablaSUCURSAL.AsInteger)) then
+                begin
+                  SincronizacionLocal.Open;
+                  SincronizacionLocal.Append;
+                  SincronizacionLocalULTIMO_LOTE_SINC.AsInteger:=ZQ_SincroTablaLOTE_SINC.AsInteger;
+                  SincronizacionLocalSUCURSAL.AsInteger:=ZQ_SincroTablaSUCURSAL.AsInteger;
+                  SincronizacionLocal.Post;
+                end;
+                ultLoteR:=ZQ_SincroTablaLOTE_SINC.AsInteger;
+                ultSuc:=ZQ_SincroTablaSUCURSAL.AsInteger;
+                Local.ApplyUpdates;
+              end;
+          ZQ_SincroTabla.Next;
+        end;
+        ZQ_SincroTabla.ApplyUpdates;
+        SincronizacionLocal.ApplyUpdates;
+
+        DM.ZC_Remoto.Commit;
+        DM.ZC_Local.Commit;
+
+        Local.Close;
+        Remoto.Close;
+
+        // Creo el archivo LOG para futuros chequeos...
+        guardarArchivoLog();
+   end
+  except
+     on E: Exception do
+      begin
+
+        DM.ZC_Remoto.Disconnect;
+        DM.ZC_Local.Disconnect;
+
+        memo1.Lines.Add(E.Message);
+        memo1.Lines.Add('ERROR Sincronización!!...');
+      end;
+  end;
+
+end;
+
+procedure TFPrincipal.conectar;
+begin
+    try
+     begin
+        DM.ZC_Remoto.Disconnect;
+        memo1.Lines.Clear;
+        memo1.Lines.Add('...### Sincronización SiGeFa ###...');
+        DM.ZC_Local.Disconnect;
+        memo1.Lines.Add('Conectando Base Local: '+DM.ZC_Local.HostName+':'+DM.ZC_Local.Database);
+        DM.ZC_Local.Connect;
+        memo1.Lines.Add('...Conectado.');
+        memo1.Lines.Add('Conectando Base Servidor: '+DM.ZC_Remoto.HostName+':'+DM.ZC_Remoto.Database);
+        DM.ZC_Remoto.Connect;
+        memo1.Lines.Add('...Conectado.');
+     end
+    except
+      on E: Exception do
+      begin
+
+        DM.ZC_Remoto.Disconnect;
+        DM.ZC_Local.Disconnect;
+
+        memo1.Lines.Add(E.Message);
+        memo1.Lines.Add('ERROR Sincronización!!...');
+      end;
+    end;
+end;
+
+procedure TFPrincipal.btnConectarClick(Sender: TObject);
+begin
+  conectar();
+end;
+
+procedure TFPrincipal.btnBajarClick(Sender: TObject);
+begin
+  descargaNovedades();
+end;
+
+procedure TFPrincipal.subirNovedades;
+begin
+ if (dm.ZC_Remoto.Connected and dm.ZC_Local.Connected) then
+  begin
+      try
+      begin
+      // Genero el lote de sincronizacion y guardo los cambios
+      ZSP_GenerarLoteSinc.Active:=True;
+      loteGenerado:=ZSP_GenerarLoteSincLOTESINC.AsInteger;
+      ZSP_GenerarLoteSinc.Active:=False;
+      DM.ZC_Local.Commit;
+
+      if loteGenerado>0 then
+       begin
+        //subo los datos al server (el lote nuevo generado)
+        ZQ_SincTablaLocal.Close;
+        ZQ_SincTablaLocal.ParamByName('lote').AsInteger:=loteGenerado;
+        ZQ_SincTablaLocal.ParamByName('suc').AsInteger:=idSucursal;
+        ZQ_SincTablaLocal.Open;
+
+        ZQ_SincroTabla.Close;
+        ZQ_SincroTabla.Open;
+        ZQ_SincroTablaPrimary.Close;
+        ZQ_SincroTablaPrimary.Open;
+        ZQ_SincroCampo.Close;
+        ZQ_SincroCampo.Open;
+
+        // Un garrón pero dpes hay que ver si se puede mejorar, quizas con el comparador de DATOS
+        while not(ZQ_SincTablaLocal.Eof) do
+         begin
+          ZQ_SincroTabla.Append;
+          ZQ_SincroTablaID.Value:=ZQ_SincTablaLocalID.Value;
+          ZQ_SincroTablaTABLE_NAME.Value:=ZQ_SincTablaLocalTABLE_NAME.Value;
+          ZQ_SincroTablaOPERATION.Value:=ZQ_SincTablaLocalOPERATION.Value;
+          ZQ_SincroTablaDATE_TIME.Value:=ZQ_SincTablaLocalDATE_TIME.Value;
+          ZQ_SincroTablaUSER_NAME.Value:=ZQ_SincTablaLocalUSER_NAME.Value;
+          ZQ_SincroTablaLOTE_SINC.Value:=ZQ_SincTablaLocalLOTE_SINC.Value;
+          ZQ_SincroTablaSUCURSAL.Value:=ZQ_SincTablaLocalSUCURSAL.Value;
+
+            //Guardo las demas tablas hijas
+            ZQ_SincPTLocal.First;
+            while not(ZQ_SincPTLocal.Eof)
+            do
+              begin
+                  ZQ_SincroTablaPrimary.Append;
+                  ZQ_SincroTablaPrimaryKEY_FIELD.Value:=ZQ_SincPTLocalKEY_FIELD.Value;
+                  ZQ_SincroTablaPrimaryKEY_VALUE.Value:=ZQ_SincPTLocalKEY_VALUE.Value;
+                  ZQ_SincroTablaPrimaryLOG_TABLES_ID.Value:=ZQ_SincPTLocalLOG_TABLES_ID.Value;
+                  ZQ_SincroTablaPrimary.Post;
+
+                  ZQ_SincPTLocal.Next;
+              end;
+            ZQ_SincCampo.First;
+            while not(ZQ_SincCampo.Eof)
+            do
+              begin
+                  ZQ_SincroCampo.Append;
+                  ZQ_SincroCampoLOG_TABLES_ID.Value:=ZQ_SincCampoLOG_TABLES_ID.Value;
+                  ZQ_SincroCampoFIELD_NAME.Value:=ZQ_SincCampoFIELD_NAME.Value;
+                  ZQ_SincroCampoOLD_VALUE.Value:=ZQ_SincCampoOLD_VALUE.Value;
+                  ZQ_SincroCampoNEW_VALUE.Value:=ZQ_SincCampoNEW_VALUE.Value;
+                  ZQ_SincroCampo.Post;
+
+                  ZQ_SincCampo.Next;
+              end;
+
+          ZQ_SincroTabla.Post;
+          ZQ_SincTablaLocal.Next;
+        end;
+
+        ZQ_SincroTabla.ApplyUpdates;
+        ZQ_SincroTablaPrimary.ApplyUpdates;
+        ZQ_SincroCampo.ApplyUpdates;
+
+        // Marco como que lo subí al server (por si necesito saber lo que subí)
+        SincronizacionLocal.Close;
+        SincronizacionLocal.Open;
+        SincronizacionLocal.Append;
+        SincronizacionLocalULTIMO_LOTE_SINC.AsInteger:=loteGenerado;
+        SincronizacionLocalSUCURSAL.AsInteger:=idSucursal;
+        SincronizacionLocal.ApplyUpdates;
+
+        DM.ZC_Remoto.Commit;
+        DM.ZC_Local.Commit;
+
+        Local.Close;
+        Remoto.Close;
+
+        // Creo el archivo LOG para futuros chequeos...
+        guardarArchivoLog();
+      end;
+      end;
+      except
+        on E: Exception do
+        begin
+        DM.ZC_Remoto.Disconnect;
+        DM.ZC_Local.Disconnect;
+        memo1.Lines.Add(E.Message);
+        memo1.Lines.Add('ERROR Sincronización!!...');
+      end;
+      end;
+
+  end;
+
+end;
+
+procedure TFPrincipal.btnSubirClick(Sender: TObject);
+begin
+subirNovedades();
+end;
+
+procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   dm.ZC_Remoto.Disconnect;
+   dm.ZC_Local.Disconnect;
+end;
+
 end.
+
+
+
