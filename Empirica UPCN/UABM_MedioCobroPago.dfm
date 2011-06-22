@@ -13,7 +13,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   OnCloseQuery = FormCloseQuery
@@ -23,16 +23,16 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 0
     object Grilla: TDBGrid
       Left = 1
       Top = 20
-      Width = 860
-      Height = 357
+      Width = 852
+      Height = 351
       Align = alClient
       Color = 16772842
       DataSource = DS_MedioCobroPago
@@ -90,7 +90,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 852
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -113,8 +113,8 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     end
     object pDatos: TPanel
       Left = 1
-      Top = 377
-      Width = 860
+      Top = 371
+      Width = 852
       Height = 38
       Align = alBottom
       BevelOuter = bvNone
@@ -202,7 +202,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -520,6 +520,7 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
     Grilla = Grilla
     FuenteNormal = []
     Ordenar = True
+    MoverColumna = True
     Left = 224
     Top = 144
   end

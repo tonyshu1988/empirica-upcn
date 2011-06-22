@@ -5,7 +5,8 @@ interface
 uses
   Forms, SysUtils, Classes, ZConnection, WinSkinData, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKUsrLogin, EKInformacion, EKModelo,
-  EKAppEvnts, EKEventos, QRCtrls, QuickRpt, MidasLib;
+  EKAppEvnts, EKEventos, QRCtrls, QuickRpt, MidasLib, mxExport,
+  mxNativeExcel;
 
 type
   TDM = class(TDataModule)
@@ -33,11 +34,16 @@ type
     StringField3: TStringField;
     StringField4: TStringField;
     BlobField1: TBlobField;
+    ExcelNative: TmxNativeExcel;
+    ExcelExport: TmxDBGridExport;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure TitulosReportes(Reporte: TQuickRep;Cuenta:Integer);
+    procedure prepararParaExportar(query: TDataSet; valor: Boolean);
   private
-    { Private declarations }
+    auxDecimalSeparator, auxThousandSeparator: Char;
+    auxCurrencyDecimals: Integer;
+    auxCurrencyString: string;
   public
     { Public declarations }
   end;
@@ -55,6 +61,12 @@ uses UPrincipal;
 
 procedure TDM.LoginLogin(Sender: TObject);
 begin
+  //seteo variables por defecto
+  auxDecimalSeparator:= DecimalSeparator;
+  auxCurrencyDecimals:= CurrencyDecimals;
+  auxThousandSeparator:= ThousandSeparator;
+  auxCurrencyString:= CurrencyString;
+
   SkinData1.Active:= true;
   Application.CreateForm(TFPrincipal, FPrincipal);
 
@@ -127,5 +139,34 @@ begin
     ZQ_Configuracion_Cuenta.Next;
   end;
 end;
+
+
+procedure TDM.prepararParaExportar(query: TDataSet; valor: Boolean);
+var
+  i:integer;
+  c: char;
+begin
+  for i := 0 to (query.ComponentCount - 1) do
+  begin
+    if query.Components[i].ClassType = TFloatField then
+      TFloatField(query.Components[i]).currency:= valor; //activo o desactivo el currency
+  end;
+
+  if (valor = false) then  //seteo para exportar a excel
+  begin
+    CurrencyDecimals:= 2;
+    DecimalSeparator:= '.';
+    ThousandSeparator:= c;
+    CurrencyString:= '';
+  end
+  else
+  begin //vuelvo a la configuracion original antes de exportar
+    DecimalSeparator:= auxDecimalSeparator;
+    CurrencyDecimals:= auxCurrencyDecimals;
+    ThousandSeparator:= auxThousandSeparator;
+    CurrencyString:= auxCurrencyString;
+  end;
+end;
+
 
 end.

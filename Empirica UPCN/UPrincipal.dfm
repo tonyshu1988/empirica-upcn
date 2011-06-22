@@ -13,6 +13,7 @@ object FPrincipal: TFPrincipal
   FormStyle = fsMDIForm
   Menu = MainMenu1
   OldCreateOrder = False
+  Position = poScreenCenter
   Visible = True
   WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
@@ -21,7 +22,7 @@ object FPrincipal: TFPrincipal
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 567
+    Top = 563
     Width = 855
     Height = 19
     Panels = <
@@ -53,7 +54,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 29
     Width = 855
-    Height = 538
+    Height = 534
     Align = alClient
     TabOrder = 2
   end

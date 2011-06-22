@@ -12,7 +12,7 @@ object FABM_Cuentas: TFABM_Cuentas
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   WindowState = wsMaximized
@@ -24,8 +24,8 @@ object FABM_Cuentas: TFABM_Cuentas
   object pContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 883
-    Height = 416
+    Width = 875
+    Height = 410
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
@@ -72,13 +72,16 @@ object FABM_Cuentas: TFABM_Cuentas
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
       ReportTitle = 'Reporte de Libro Banco'
       SnapToGrid = True
@@ -86,6 +89,8 @@ object FABM_Cuentas: TFABM_Cuentas
       Zoom = 100
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBand5: TQRBand
         Tag = 99
         Left = 38
@@ -99,11 +104,14 @@ object FABM_Cuentas: TFABM_Cuentas
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           230.187500000000000000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageHeader
         object QRDBImage1: TQRDBImage
           Left = 78
@@ -134,7 +142,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            836.083333333333400000
+            836.083333333333300000
             158.750000000000000000
             224.895833333333300000)
           Alignment = taCenter
@@ -151,6 +159,7 @@ object FABM_Cuentas: TFABM_Cuentas
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
         object RepCtas_Reporte_Titulo_2: TQRLabel
@@ -167,7 +176,7 @@ object FABM_Cuentas: TFABM_Cuentas
             52.916666666666670000
             709.083333333333300000
             95.250000000000000000
-            478.895833333333400000)
+            478.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -182,6 +191,7 @@ object FABM_Cuentas: TFABM_Cuentas
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
         object RepCtas_Reporte_Titulo_1: TQRLabel
@@ -213,6 +223,7 @@ object FABM_Cuentas: TFABM_Cuentas
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
       end
@@ -229,6 +240,7 @@ object FABM_Cuentas: TFABM_Cuentas
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -9
@@ -240,6 +252,8 @@ object FABM_Cuentas: TFABM_Cuentas
         Size.Values = (
           39.687500000000000000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRDBText6: TQRDBText
           Left = 532
@@ -266,6 +280,7 @@ object FABM_Cuentas: TFABM_Cuentas
           DataField = 'medioPago'
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText4: TQRDBText
@@ -292,6 +307,7 @@ object FABM_Cuentas: TFABM_Cuentas
           DataField = 'NRO_CUENTA_BANCARIA'
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText5: TQRDBText
@@ -318,6 +334,7 @@ object FABM_Cuentas: TFABM_Cuentas
           DataField = 'NOMBRE_CUENTA'
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText1: TQRDBText
@@ -344,6 +361,7 @@ object FABM_Cuentas: TFABM_Cuentas
           DataField = 'ID_CUENTA'
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -360,12 +378,16 @@ object FABM_Cuentas: TFABM_Cuentas
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clSilver
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           39.687500000000000000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         ParentBand = QRBand5
+        PrintOrder = cboAfterParent
         object QRLabel21: TQRLabel
           Left = 532
           Top = 0
@@ -396,6 +418,7 @@ object FABM_Cuentas: TFABM_Cuentas
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel16: TQRLabel
@@ -427,6 +450,7 @@ object FABM_Cuentas: TFABM_Cuentas
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel18: TQRLabel
@@ -458,6 +482,7 @@ object FABM_Cuentas: TFABM_Cuentas
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel1: TQRLabel
@@ -489,6 +514,7 @@ object FABM_Cuentas: TFABM_Cuentas
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -505,11 +531,14 @@ object FABM_Cuentas: TFABM_Cuentas
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageFooter
         object QRLabel24: TQRLabel
           Left = 637
@@ -522,7 +551,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1685.395833333333000000
             2.645833333333333000
             103.187500000000000000)
@@ -540,6 +569,7 @@ object FABM_Cuentas: TFABM_Cuentas
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRSysData2: TQRSysData
@@ -553,7 +583,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -569,6 +599,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Font.Style = []
           ParentFont = False
           Transparent = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -585,11 +616,14 @@ object FABM_Cuentas: TFABM_Cuentas
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           47.625000000000000000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbSummary
         object QRExpr15: TQRExpr
           Left = 532
@@ -615,14 +649,15 @@ object FABM_Cuentas: TFABM_Cuentas
           Transparent = False
           WordWrap = True
           Expression = #39'Cantidad de Cuentas: '#39'+COUNT'
+          ExportAs = exptText
           FontSize = 8
         end
       end
     end
     object pDatos: TPanel
       Left = 2
-      Top = 324
-      Width = 879
+      Top = 318
+      Width = 871
       Height = 90
       Align = alBottom
       BevelOuter = bvNone
@@ -723,8 +758,8 @@ object FABM_Cuentas: TFABM_Cuentas
     object dbGridCuentas: TDBGrid
       Left = 2
       Top = 2
-      Width = 879
-      Height = 322
+      Width = 871
+      Height = 316
       Align = alClient
       Color = 16772842
       DataSource = DS_Cuentas
@@ -773,7 +808,7 @@ object FABM_Cuentas: TFABM_Cuentas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1124,6 +1159,7 @@ object FABM_Cuentas: TFABM_Cuentas
     FuenteNormal = []
     NombreGuardarConfig = 'UABM_Cuentas'
     Ordenar = True
+    MoverColumna = True
     Left = 152
     Top = 40
   end

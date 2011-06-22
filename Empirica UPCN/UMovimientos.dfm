@@ -153,13 +153,16 @@ object FMovimientos: TFMovimientos
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
       ReportTitle = 'Orden de Pago'
       SnapToGrid = True
@@ -167,6 +170,8 @@ object FMovimientos: TFMovimientos
       Zoom = 120
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBand13: TQRBand
         Tag = 99
         Left = 45
@@ -180,11 +185,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           701.145833333333300000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRDBText30: TQRDBText
           Left = 134
@@ -216,6 +224,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel17: TQRLabel
@@ -247,6 +256,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel10: TQRLabel
@@ -278,6 +288,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText41: TQRDBText
@@ -310,6 +321,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText46: TQRDBText
@@ -342,6 +354,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel1: TQRLabel
@@ -373,6 +386,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText1: TQRDBText
@@ -405,6 +419,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRShape1: TQRShape
@@ -455,6 +470,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel2: TQRLabel
@@ -486,6 +502,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRShape3: TQRShape
@@ -536,6 +553,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel3: TQRLabel
@@ -567,6 +585,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel6: TQRLabel
@@ -598,6 +617,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText2: TQRDBText
@@ -630,6 +650,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel7: TQRLabel
@@ -661,6 +682,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText4: TQRDBText
@@ -693,6 +715,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRShape16: TQRShape
@@ -760,6 +783,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText64: TQRDBText
@@ -792,6 +816,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = False
+          ExportAs = exptText
           FontSize = 8
         end
         object qrtImporteTotal: TQRLabel
@@ -823,6 +848,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
         object QRLabel32: TQRLabel
@@ -854,6 +880,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText22: TQRDBText
@@ -886,6 +913,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText63: TQRDBText
@@ -918,6 +946,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -934,11 +963,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           295.451388888888900000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageHeader
         object QRDBText65: TQRDBText
           Left = 614
@@ -970,6 +1002,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRShape2: TQRShape
@@ -1019,6 +1052,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel95: TQRLabel
@@ -1050,6 +1084,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText66: TQRDBText
@@ -1082,6 +1117,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 36
         end
         object QRLabel102: TQRLabel
@@ -1113,6 +1149,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 22
         end
         object QRLabel106: TQRLabel
@@ -1144,6 +1181,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 22
         end
         object QRLabelImpresion: TQRLabel
@@ -1175,6 +1213,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 10
         end
       end
@@ -1191,11 +1230,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           48.506944444444440000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         Master = QR_OrdenPago
         PrintBefore = False
         PrintIfEmpty = True
@@ -1228,6 +1270,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
       end
@@ -1244,12 +1287,16 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clSilver
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           39.687500000000000000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         ParentBand = QRSubDetail14
+        PrintOrder = cboAfterParent
         object QRLabel110: TQRLabel
           Left = 112
           Top = 1
@@ -1279,6 +1326,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel111: TQRLabel
@@ -1310,6 +1358,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel112: TQRLabel
@@ -1341,6 +1390,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel113: TQRLabel
@@ -1372,6 +1422,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel116: TQRLabel
@@ -1403,6 +1454,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -1419,11 +1471,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           48.506944444444440000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         Master = QR_OrdenPago
         DataSet = ZQ_Cuenta_Movimiento
         PrintBefore = False
@@ -1458,6 +1513,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBTextImporte: TQRDBText
@@ -1490,6 +1546,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBTextFechaE: TQRDBText
@@ -1522,6 +1579,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBTextNroCheque: TQRDBText
@@ -1554,6 +1612,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBTextFechaCMD: TQRDBText
@@ -1586,6 +1645,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -1602,11 +1662,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           573.263888888888900000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         Master = QR_OrdenPago
         PrintBefore = False
         PrintIfEmpty = True
@@ -1639,6 +1702,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLblAutorizo: TQRLabel
@@ -1665,6 +1729,7 @@ object FMovimientos: TFMovimientos
           Color = clWhite
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLblConfecciona: TQRLabel
@@ -1691,6 +1756,7 @@ object FMovimientos: TFMovimientos
           Color = clWhite
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -1708,11 +1774,14 @@ object FMovimientos: TFMovimientos
         AlignToBottom = False
         Color = clWhite
         Enabled = False
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           41.892361111111110000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageFooter
       end
     end
@@ -1758,13 +1827,16 @@ object FMovimientos: TFMovimientos
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
       ReportTitle = 'Reporte de Libro Banco'
       SnapToGrid = True
@@ -1772,6 +1844,8 @@ object FMovimientos: TFMovimientos
       Zoom = 100
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBand5: TQRBand
         Tag = 99
         Left = 38
@@ -1785,11 +1859,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           272.520833333333300000
           2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageHeader
         object QRLabel41: TQRLabel
           Left = 7
@@ -1820,6 +1897,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBImage1: TQRDBImage
@@ -1868,6 +1946,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
         object RepLibroB_Reporte_Titulo_2: TQRLabel
@@ -1899,6 +1978,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
         object RepLibroB_Reporte_Titulo_1: TQRLabel
@@ -1930,6 +2010,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
         object QRLabel8: TQRLabel
@@ -1961,6 +2042,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel9: TQRLabel
@@ -1992,6 +2074,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel13: TQRLabel
@@ -2023,6 +2106,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object lblLibBco_FDesde: TQRLabel
@@ -2054,6 +2138,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object lblLibBco_FHasta: TQRLabel
@@ -2085,6 +2170,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object lblLibBco_Oden: TQRLabel
@@ -2116,6 +2202,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object lblLibBco_Cuenta: TQRLabel
@@ -2147,6 +2234,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -2163,6 +2251,7 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -9
@@ -2174,6 +2263,8 @@ object FMovimientos: TFMovimientos
         Size.Values = (
           37.041666666666670000
           2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRDBText5: TQRDBText
           Left = 2
@@ -2199,6 +2290,7 @@ object FMovimientos: TFMovimientos
           DataField = 'FECHA'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText8: TQRDBText
@@ -2225,6 +2317,7 @@ object FMovimientos: TFMovimientos
           DataField = 'NRO_ORDEN_STRING'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText12: TQRDBText
@@ -2251,6 +2344,7 @@ object FMovimientos: TFMovimientos
           DataField = 'SALDO'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText13: TQRDBText
@@ -2277,6 +2371,7 @@ object FMovimientos: TFMovimientos
           DataField = 'DEBE'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText14: TQRDBText
@@ -2303,6 +2398,7 @@ object FMovimientos: TFMovimientos
           DataField = 'NRO_MEDIO'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText6: TQRDBText
@@ -2329,6 +2425,7 @@ object FMovimientos: TFMovimientos
           DataField = 'FECHA_PD'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText16: TQRDBText
@@ -2355,6 +2452,7 @@ object FMovimientos: TFMovimientos
           DataField = 'MEDIO'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText17: TQRDBText
@@ -2381,6 +2479,7 @@ object FMovimientos: TFMovimientos
           DataField = 'HABER'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBTxtConciliado: TQRDBText
@@ -2407,6 +2506,7 @@ object FMovimientos: TFMovimientos
           DataField = 'CONCILIADO'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRShape11: TQRShape
@@ -2595,6 +2695,7 @@ object FMovimientos: TFMovimientos
           DataField = 'PROVEEDOR'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -2611,12 +2712,16 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = True
         AlignToBottom = False
         Color = clSilver
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           42.333333333333330000
           2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         ParentBand = QRBand5
+        PrintOrder = cboAfterParent
         object QRLabel18: TQRLabel
           Left = 2
           Top = 1
@@ -2646,6 +2751,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel19: TQRLabel
@@ -2677,6 +2783,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel20: TQRLabel
@@ -2708,6 +2815,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel21: TQRLabel
@@ -2739,6 +2847,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel22: TQRLabel
@@ -2770,6 +2879,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel23: TQRLabel
@@ -2801,6 +2911,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel26: TQRLabel
@@ -2832,6 +2943,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel14: TQRLabel
@@ -2863,6 +2975,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel16: TQRLabel
@@ -2894,6 +3007,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel15: TQRLabel
@@ -2925,6 +3039,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -2941,11 +3056,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           39.687500000000000000
           2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageFooter
         object QRLabel24: TQRLabel
           Left = 965
@@ -2976,6 +3094,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRSysData2: TQRSysData
@@ -3005,6 +3124,7 @@ object FMovimientos: TFMovimientos
           Font.Style = []
           ParentFont = False
           Transparent = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -3021,11 +3141,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           58.208333333333330000
           2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbSummary
         object QRExpr15: TQRExpr
           Left = 6
@@ -3051,6 +3174,7 @@ object FMovimientos: TFMovimientos
           Transparent = False
           WordWrap = True
           Expression = #39'Cantidad de Registros: '#39'+COUNT'
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel47: TQRLabel
@@ -3083,6 +3207,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRExpr3: TQRExpr
@@ -3115,6 +3240,7 @@ object FMovimientos: TFMovimientos
           Transparent = False
           WordWrap = True
           Expression = 'FORMATNUMERIC('#39'$###,###,###,##0.00'#39',SUM(LIBRO_BANCO.HABER))'
+          ExportAs = exptText
           FontSize = 7
         end
         object QRExpr4: TQRExpr
@@ -3147,6 +3273,7 @@ object FMovimientos: TFMovimientos
           Transparent = False
           WordWrap = True
           Expression = 'FORMATNUMERIC('#39'$###,###,###,##0.00'#39',SUM(LIBRO_BANCO.DEBE))'
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -3193,13 +3320,16 @@ object FMovimientos: TFMovimientos
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
       ReportTitle = 'Reporte Car'#225'tula OPs'
       SnapToGrid = True
@@ -3207,6 +3337,8 @@ object FMovimientos: TFMovimientos
       Zoom = 100
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBand4: TQRBand
         Tag = 99
         Left = 38
@@ -3220,11 +3352,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           388.937500000000000000
           2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageHeader
         object QRLabel12: TQRLabel
           Left = 7
@@ -3255,6 +3390,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel37: TQRLabel
@@ -3286,6 +3422,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel38: TQRLabel
@@ -3317,6 +3454,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel44: TQRLabel
@@ -3348,6 +3486,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object qrDesde: TQRLabel
@@ -3379,6 +3518,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object qrHasta: TQRLabel
@@ -3410,6 +3550,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object qrOrden: TQRLabel
@@ -3441,6 +3582,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object qrCuenta: TQRLabel
@@ -3472,6 +3614,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel34: TQRLabel
@@ -3503,6 +3646,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 22
         end
         object QRLabel33: TQRLabel
@@ -3534,6 +3678,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 22
         end
       end
@@ -3550,6 +3695,7 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -9
@@ -3561,6 +3707,8 @@ object FMovimientos: TFMovimientos
         Size.Values = (
           37.041666666666670000
           2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRDBText24: TQRDBText
           Left = 2
@@ -3586,6 +3734,7 @@ object FMovimientos: TFMovimientos
           DataField = 'FECHA'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText25: TQRDBText
@@ -3612,6 +3761,7 @@ object FMovimientos: TFMovimientos
           DataField = 'NRO_ORDEN_STRING'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText32: TQRDBText
@@ -3638,6 +3788,7 @@ object FMovimientos: TFMovimientos
           DataField = 'NRO_MEDIO'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText33: TQRDBText
@@ -3664,6 +3815,7 @@ object FMovimientos: TFMovimientos
           DataField = 'FECHA_PD'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText34: TQRDBText
@@ -3690,6 +3842,7 @@ object FMovimientos: TFMovimientos
           DataField = 'MEDIO'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText35: TQRDBText
@@ -3716,6 +3869,7 @@ object FMovimientos: TFMovimientos
           DataField = 'NRO_FACTURA'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText37: TQRDBText
@@ -3742,6 +3896,7 @@ object FMovimientos: TFMovimientos
           DataField = 'PROVEEDOR'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText28: TQRDBText
@@ -3768,6 +3923,7 @@ object FMovimientos: TFMovimientos
           DataField = 'NOMBRE_CONCEPTO'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRExpr2: TQRExpr
@@ -3795,6 +3951,7 @@ object FMovimientos: TFMovimientos
           WordWrap = True
           Expression = 'if(LIBRO_BANCO.DEBE=0,LIBRO_BANCO.HABER,LIBRO_BANCO.DEBE)'
           Mask = '$ #,##0.00'
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText27: TQRDBText
@@ -3821,6 +3978,7 @@ object FMovimientos: TFMovimientos
           DataField = 'NRO_RECIBO'
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -3837,12 +3995,16 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = True
         AlignToBottom = False
         Color = clSilver
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           42.333333333333330000
           2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         ParentBand = QRBand4
+        PrintOrder = cboAfterParent
         object QRLabel51: TQRLabel
           Left = 2
           Top = 1
@@ -3872,6 +4034,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel52: TQRLabel
@@ -3903,6 +4066,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel53: TQRLabel
@@ -3934,6 +4098,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel54: TQRLabel
@@ -3965,6 +4130,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel55: TQRLabel
@@ -3996,6 +4162,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel56: TQRLabel
@@ -4027,6 +4194,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel57: TQRLabel
@@ -4058,6 +4226,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel58: TQRLabel
@@ -4089,6 +4258,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel59: TQRLabel
@@ -4120,6 +4290,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel35: TQRLabel
@@ -4151,6 +4322,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -4167,11 +4339,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           95.250000000000000000
           2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageFooter
         object QRExpr9: TQRExpr
           Left = 928
@@ -4203,6 +4378,7 @@ object FMovimientos: TFMovimientos
           Transparent = False
           WordWrap = True
           Expression = #39'Pag.: '#39'+PAGENUMBER'
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -4219,11 +4395,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           216.958333333333300000
           2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbSummary
         object QRExpr1: TQRExpr
           Left = 6
@@ -4249,6 +4428,7 @@ object FMovimientos: TFMovimientos
           Transparent = False
           WordWrap = True
           Expression = #39'Cantidad de Movimientos: '#39'+COUNT'
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel62: TQRLabel
@@ -4275,6 +4455,7 @@ object FMovimientos: TFMovimientos
           Color = clWhite
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel63: TQRLabel
@@ -4301,6 +4482,7 @@ object FMovimientos: TFMovimientos
           Color = clWhite
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRExpr19: TQRExpr
@@ -4335,6 +4517,7 @@ object FMovimientos: TFMovimientos
           Expression = 
             'FORMATNUMERIC('#39'$###,###,###,##0.00'#39',SUM(LIBRO_BANCO.DEBE)+SUM(LI' +
             'BRO_BANCO.HABER))'
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel45: TQRLabel
@@ -4367,6 +4550,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -4587,13 +4771,16 @@ object FMovimientos: TFMovimientos
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
       ReportTitle = 'Reporte Solicitud Compra/Pago'
       SnapToGrid = True
@@ -4601,6 +4788,8 @@ object FMovimientos: TFMovimientos
       Zoom = 100
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBand1: TQRBand
         Tag = 99
         Left = 38
@@ -4614,11 +4803,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           322.791666666666700000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRDBText9: TQRDBText
           Left = 97
@@ -4650,6 +4842,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel4: TQRLabel
@@ -4681,6 +4874,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel5: TQRLabel
@@ -4712,6 +4906,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText10: TQRDBText
@@ -4744,6 +4939,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText11: TQRDBText
@@ -4776,6 +4972,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText18: TQRDBText
@@ -4808,6 +5005,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel25: TQRLabel
@@ -4839,6 +5037,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel27: TQRLabel
@@ -4870,6 +5069,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText19: TQRDBText
@@ -4902,6 +5102,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRShape4: TQRShape
@@ -4952,6 +5153,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel28: TQRLabel
@@ -4983,6 +5185,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRShape6: TQRShape
@@ -5033,6 +5236,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel29: TQRLabel
@@ -5064,6 +5268,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel31: TQRLabel
@@ -5095,6 +5300,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRDBText23: TQRDBText
@@ -5127,6 +5333,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRShape17: TQRShape
@@ -5194,6 +5401,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 10
         end
         object QRLabel30: TQRLabel
@@ -5225,6 +5433,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -5241,11 +5450,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = True
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           296.333333333333300000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageHeader
         object QRLabel36: TQRLabel
           Left = 17
@@ -5276,6 +5488,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 19
         end
       end
@@ -5292,11 +5505,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           58.208333333333330000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         Master = QR_SolicitudCompra
         PrintBefore = False
         PrintIfEmpty = True
@@ -5329,6 +5545,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
       end
@@ -5345,12 +5562,16 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clSilver
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           39.687500000000000000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         ParentBand = QRSubDetail1
+        PrintOrder = cboAfterParent
         object QRLabel40: TQRLabel
           Left = 68
           Top = 1
@@ -5380,6 +5601,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel42: TQRLabel
@@ -5411,6 +5633,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
         object QRLabel46: TQRLabel
@@ -5442,6 +5665,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -5458,11 +5682,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           47.625000000000000000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         Master = QR_SolicitudCompra
         DataSet = ZQ_Cuenta_Movimiento
         PrintBefore = False
@@ -5497,6 +5724,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText29: TQRDBText
@@ -5529,6 +5757,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRDBText31: TQRDBText
@@ -5561,6 +5790,7 @@ object FMovimientos: TFMovimientos
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -5577,11 +5807,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           550.333333333333300000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         Master = QR_SolicitudCompra
         PrintBefore = False
         PrintIfEmpty = True
@@ -5609,6 +5842,7 @@ object FMovimientos: TFMovimientos
           Color = clWhite
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -5625,11 +5859,14 @@ object FMovimientos: TFMovimientos
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           42.333333333333330000
           1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageFooter
         object qrDatosNombreyFecha: TQRSysData
           Left = 0
@@ -5658,6 +5895,7 @@ object FMovimientos: TFMovimientos
           Font.Style = [fsItalic]
           ParentFont = False
           Transparent = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -8066,114 +8304,6 @@ object FMovimientos: TFMovimientos
     Left = 305
     Top = 265
   end
-  object mxNativeExcel1: TmxNativeExcel
-    ActiveFont = 0
-    Borders = []
-    Shading = False
-    Version = '1.24'
-    Left = 696
-    Top = 168
-  end
-  object mxDBGridExport: TmxDBGridExport
-    DateFormat = 'dd/MM/yyyy'
-    TimeFormat = 'hh:mm AMPM'
-    DateTimeFormat = 'hh:mm AMPM dd/MM/yyyy'
-    ExportType = xtExcel
-    ExportTypes = [xtHTML, xtExcel, xtWord, xtTXT]
-    ExportStyle = xsView
-    HTML.CustomColors.Background = clWhite
-    HTML.CustomColors.DefaultLink = clRed
-    HTML.CustomColors.DefaultFontFace = 'Arial,Helvetica'
-    HTML.CustomColors.VisitedLink = clAqua
-    HTML.CustomColors.ActiveLink = clBlue
-    HTML.CustomColors.DefaultText = clBlack
-    HTML.CustomColors.TableFontColor = clBlack
-    HTML.CustomColors.TableFontFace = 'Arial,Helvetica'
-    HTML.CustomColors.TableBackground = 16777167
-    HTML.CustomColors.TableOddBackground = clWhite
-    HTML.CustomColors.HeaderBackground = 3368601
-    HTML.CustomColors.HeadersFontColor = clWhite
-    HTML.Options = [hoShowGridLines, hoBoldHeaders, hoAutoLink, hoOddRowColoring, hoDisplayTitle]
-    HTML.Template = ctStandard
-    Messages.Caption = 'Exportar datos'
-    Messages.CopiedToClipboard = 'Data was copied to clipboard!'
-    Messages.CancelCaption = '&Cancelar'
-    Messages.CreatedText = 'Exportando:'
-    Messages.DocumentFilter.HTML = 'HTML Documents'
-    Messages.DocumentFilter.Excel = 'Excel Files'
-    Messages.DocumentFilter.Word = 'Word Documents'
-    Messages.DocumentFilter.Text = 'Text Files'
-    Messages.DocumentFilter.Comma = 'CSV (Comma delimited)'
-    Messages.DocumentFilter.Tab = 'Text (Tab delimited)'
-    Messages.DocumentFilter.RTF = 'Rich Text Format'
-    Messages.DocumentFilter.DIF = 'Data Interchange Format'
-    Messages.DocumentFilter.SYLK = 'SYLK Files'
-    Messages.ExportCaption = '&Aceptar'
-    Messages.ExportToFile = '&Guardar'
-    Messages.FalseText = 'False'
-    Messages.Height = 80
-    Messages.SaveTitle = 'Guardar'
-    Messages.SelectFormat = 'Opciones'
-    Messages.Text = 'Proceseando...'
-    Messages.TrueText = 'True'
-    Messages.Width = 300
-    Messages.ViewOnly = '&Ver'
-    TruncateSymbol = '...'
-    RowNumberFormat = '%d'
-    DOC_RTF.Template = rtStandard
-    DOC_RTF.Options = [roShowGridLines, roOddRowColoring]
-    DOC_RTF.CustomSettings.TableBackground = 16777167
-    DOC_RTF.CustomSettings.TableOddBackground = clWhite
-    DOC_RTF.CustomSettings.HeaderBackground = 3368601
-    DOC_RTF.CustomSettings.DefaultFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.DefaultFont.Color = clWindowText
-    DOC_RTF.CustomSettings.DefaultFont.Height = -11
-    DOC_RTF.CustomSettings.DefaultFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.DefaultFont.Style = []
-    DOC_RTF.CustomSettings.HeaderFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.HeaderFont.Color = clWindowText
-    DOC_RTF.CustomSettings.HeaderFont.Height = -11
-    DOC_RTF.CustomSettings.HeaderFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.HeaderFont.Style = [fsBold]
-    DOC_RTF.CustomSettings.TableFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.TableFont.Color = clWindowText
-    DOC_RTF.CustomSettings.TableFont.Height = -11
-    DOC_RTF.CustomSettings.TableFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.TableFont.Style = []
-    DOC_RTF.CellWidth = 1400
-    DOC_RTF.TopMargin = 101
-    DOC_RTF.BottomMargin = 101
-    DOC_RTF.LeftMargin = 461
-    DOC_RTF.RightMargin = 562
-    EXCEL.Options = [reSetColumnWidths, reSetMargins, reUseBorders]
-    EXCEL.ColumnWidth = 30
-    EXCEL.Protected = False
-    EXCEL.Footer = '&P'
-    EXCEL.DefaultFont.Charset = DEFAULT_CHARSET
-    EXCEL.DefaultFont.Color = clWindowText
-    EXCEL.DefaultFont.Height = -11
-    EXCEL.DefaultFont.Name = 'MS Sans Serif'
-    EXCEL.DefaultFont.Style = []
-    EXCEL.HeaderFont.Charset = DEFAULT_CHARSET
-    EXCEL.HeaderFont.Color = clWindowText
-    EXCEL.HeaderFont.Height = -12
-    EXCEL.HeaderFont.Name = 'Verdana'
-    EXCEL.HeaderFont.Style = [fsBold]
-    EXCEL.TableFont.Charset = DEFAULT_CHARSET
-    EXCEL.TableFont.Color = clWindowText
-    EXCEL.TableFont.Height = -11
-    EXCEL.TableFont.Name = 'MS Sans Serif'
-    EXCEL.TableFont.Style = []
-    EXCEL.TopMargin = 0.300000000000000000
-    EXCEL.BottomMargin = 0.300000000000000000
-    EXCEL.LeftMargin = 0.300000000000000000
-    EXCEL.RightMargin = 0.300000000000000000
-    Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
-    Version = '2.37'
-    DBGrid = DBGridLibroBanco
-    Left = 692
-    Top = 106
-  end
   object EKIni_Impresion: TEKIni
     Left = 906
     Top = 64
@@ -8227,6 +8357,7 @@ object FMovimientos: TFMovimientos
     FuenteNormal = []
     NombreGuardarConfig = 'UMovimientos'
     Ordenar = False
+    MoverColumna = True
     Left = 184
     Top = 48
   end

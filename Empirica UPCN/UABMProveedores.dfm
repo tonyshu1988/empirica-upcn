@@ -12,7 +12,7 @@ object FABMProveedores: TFABMProveedores
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   WindowState = wsMaximized
@@ -25,7 +25,7 @@ object FABMProveedores: TFABMProveedores
     Left = 0
     Top = 0
     Width = 1022
-    Height = 583
+    Height = 579
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
@@ -75,19 +75,24 @@ object FABMProveedores: TFABMProveedores
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
       SnapToGrid = True
       Units = MM
       Zoom = 120
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBand7: TQRBand
         Tag = 99
         Left = 45
@@ -101,11 +106,14 @@ object FABMProveedores: TFABMProveedores
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           227.100694444444400000
           2769.305555555556000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageHeader
         object QRDBImage1: TQRDBImage
           Left = 148
@@ -153,6 +161,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
         object RepProv_Reporte_Titulo_2: TQRLabel
@@ -184,6 +193,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
         object RepProv_Reporte_Titulo_1: TQRLabel
@@ -215,6 +225,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
       end
@@ -232,11 +243,14 @@ object FABMProveedores: TFABMProveedores
         Frame.Style = psInsideFrame
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           35.277777777777780000
           2769.305555555556000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRDBText63: TQRDBText
           Left = 749
@@ -268,6 +282,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText67: TQRDBText
@@ -300,6 +315,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText69: TQRDBText
@@ -332,6 +348,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText1: TQRDBText
@@ -364,6 +381,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText2: TQRDBText
@@ -396,6 +414,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText4: TQRDBText
@@ -428,6 +447,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText3: TQRDBText
@@ -460,6 +480,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText5: TQRDBText
@@ -492,6 +513,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
       end
@@ -508,12 +530,16 @@ object FABMProveedores: TFABMProveedores
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clSilver
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           37.482638888888890000
           2769.305555555556000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         ParentBand = QRBand7
+        PrintOrder = cboAfterParent
         object QRLabel18: TQRLabel
           Left = 5
           Top = 2
@@ -543,6 +569,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel77: TQRLabel
@@ -574,6 +601,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel87: TQRLabel
@@ -605,6 +633,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel88: TQRLabel
@@ -636,6 +665,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel89: TQRLabel
@@ -667,6 +697,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel2: TQRLabel
@@ -698,6 +729,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -714,11 +746,14 @@ object FABMProveedores: TFABMProveedores
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           46.302083333333330000
           2769.305555555556000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbSummary
         object QRExpr15: TQRExpr
           Left = 1066
@@ -750,6 +785,7 @@ object FABMProveedores: TFABMProveedores
           Transparent = False
           WordWrap = True
           Expression = #39'Cantidad de Registros: '#39'+COUNT'
+          ExportAs = exptText
           FontSize = 8
         end
       end
@@ -766,11 +802,14 @@ object FABMProveedores: TFABMProveedores
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           41.892361111111110000
           2769.305555555556000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageFooter
         object QRSysData2: TQRSysData
           Left = 1128
@@ -800,6 +839,7 @@ object FABMProveedores: TFABMProveedores
           ParentFont = False
           Text = 'P'#225'gina: '
           Transparent = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -808,7 +848,7 @@ object FABMProveedores: TFABMProveedores
       Left = 1
       Top = 20
       Width = 1020
-      Height = 369
+      Height = 365
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -910,7 +950,7 @@ object FABMProveedores: TFABMProveedores
     end
     object PageControl1: TPageControl
       Left = 1
-      Top = 389
+      Top = 385
       Width = 1020
       Height = 193
       ActivePage = TabSheet1
@@ -1827,6 +1867,7 @@ object FABMProveedores: TFABMProveedores
     FuenteNormal = []
     NombreGuardarConfig = 'UABMProveedores'
     Ordenar = True
+    MoverColumna = True
     Left = 144
     Top = 72
   end
@@ -1887,6 +1928,7 @@ object FABMProveedores: TFABMProveedores
     Grilla = DBGridCuentas
     FuenteNormal = []
     Ordenar = True
+    MoverColumna = True
     Left = 101
     Top = 308
   end
@@ -1894,6 +1936,7 @@ object FABMProveedores: TFABMProveedores
     Grilla = DBGridConceptos
     FuenteNormal = []
     Ordenar = True
+    MoverColumna = True
     Left = 566
     Top = 252
   end

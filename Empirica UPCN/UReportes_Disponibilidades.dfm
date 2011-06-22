@@ -12,7 +12,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   OnClose = FormClose
@@ -22,15 +22,15 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   object pFondo: TPanel
     Left = 0
     Top = 0
-    Width = 1074
-    Height = 501
+    Width = 1066
+    Height = 495
     Align = alClient
     TabOrder = 4
     object pLibroBanco: TPanel
       Left = 1
       Top = 1
-      Width = 1072
-      Height = 445
+      Width = 1064
+      Height = 439
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 3
@@ -38,8 +38,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object DBGridLibroBanco: TDBGrid
         Left = 3
         Top = 34
-        Width = 1066
-        Height = 408
+        Width = 1058
+        Height = 402
         Align = alClient
         Color = 16772842
         DataSource = DS_LIBRO_BANCO
@@ -205,13 +205,13 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       object Panel1: TPanel
         Left = 3
         Top = 3
-        Width = 1066
+        Width = 1058
         Height = 31
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
         DesignSize = (
-          1066
+          1058
           31)
         object Shape1: TShape
           Left = 1
@@ -267,7 +267,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Transparent = True
         end
         object Panel3: TPanel
-          Left = 980
+          Left = 972
           Top = 0
           Width = 86
           Height = 31
@@ -337,13 +337,16 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         PrinterSettings.Duplex = False
         PrinterSettings.FirstPage = 0
         PrinterSettings.LastPage = 0
-        PrinterSettings.ExtendedDuplex = 0
         PrinterSettings.UseStandardprinter = False
         PrinterSettings.UseCustomBinCode = False
         PrinterSettings.CustomBinCode = 0
+        PrinterSettings.ExtendedDuplex = 0
         PrinterSettings.UseCustomPaperCode = False
         PrinterSettings.CustomPaperCode = 0
         PrinterSettings.PrintMetaFile = False
+        PrinterSettings.PrintQuality = 0
+        PrinterSettings.Collate = 0
+        PrinterSettings.ColorOption = 0
         PrintIfEmpty = True
         ReportTitle = 'Reporte de Libro Banco'
         SnapToGrid = True
@@ -351,6 +354,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Zoom = 100
         PrevFormStyle = fsNormal
         PreviewInitialState = wsNormal
+        PrevInitialZoom = qrZoomToFit
+        PreviewDefaultSaveType = stQRP
         object QRBand1: TQRBand
           Tag = 99
           Left = 38
@@ -364,11 +369,14 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Frame.DrawRight = False
           AlignToBottom = False
           Color = clWhite
+          TransparentBand = False
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            272.520833333333400000
+            272.520833333333300000
             2770.187500000000000000)
+          PreCaluculateBandHeight = False
+          KeepOnOnePage = False
           BandType = rbPageHeader
           object QRLabel5: TQRLabel
             Left = 7
@@ -399,6 +407,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRDBImage1: TQRDBImage
@@ -447,10 +456,11 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = False
             WordWrap = True
+            ExportAs = exptText
             FontSize = 12
           end
           object RepLibroB_Reporte_Titulo_2: TQRLabel
-            Left = -90
+            Left = 426
             Top = 36
             Width = 195
             Height = 20
@@ -478,6 +488,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 9
           end
           object RepLibroB_Reporte_Titulo_1: TQRLabel
@@ -494,7 +505,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               52.916666666666670000
               1045.104166666667000000
               31.750000000000000000
-              679.979166666666800000)
+              679.979166666666700000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -509,6 +520,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 12
           end
           object QRLabel8: TQRLabel
@@ -540,6 +552,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel9: TQRLabel
@@ -571,6 +584,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel13: TQRLabel
@@ -602,6 +616,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object lblLibBco_FDesde: TQRLabel
@@ -618,7 +633,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
               37.041666666666670000
               190.500000000000000000
               230.187500000000000000
-              256.645833333333400000)
+              256.645833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -633,6 +648,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = False
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object lblLibBco_FHasta: TQRLabel
@@ -647,7 +663,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              637.645833333333400000
+              637.645833333333300000
               230.187500000000000000
               254.000000000000000000)
             Alignment = taLeftJustify
@@ -664,6 +680,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = False
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object lblLibBco_Oden: TQRLabel
@@ -695,6 +712,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = False
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object lblLibBco_Cuenta: TQRLabel
@@ -726,6 +744,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = False
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
         end
@@ -742,6 +761,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Frame.DrawRight = True
           AlignToBottom = False
           Color = clWhite
+          TransparentBand = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -9
@@ -753,6 +773,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Size.Values = (
             37.041666666666670000
             2770.187500000000000000)
+          PreCaluculateBandHeight = False
+          KeepOnOnePage = False
           BandType = rbDetail
           object QRDBText1: TQRDBText
             Left = 2
@@ -778,6 +800,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             DataField = 'FECHA'
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object QRDBText2: TQRDBText
@@ -804,6 +827,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             DataField = 'NRO_ORDEN_STRING'
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object QRDBText3: TQRDBText
@@ -830,6 +854,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             DataField = 'SALDO'
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object QRDBText4: TQRDBText
@@ -856,6 +881,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             DataField = 'DEBE'
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object QRDBText6: TQRDBText
@@ -882,6 +908,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             DataField = 'NRO_MEDIO'
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object QRDBText7: TQRDBText
@@ -908,6 +935,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             DataField = 'FECHA_PD'
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object QRDBText9: TQRDBText
@@ -934,6 +962,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             DataField = 'MEDIO'
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object QRDBText10: TQRDBText
@@ -960,6 +989,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             DataField = 'HABER'
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object QRDBTxtConciliado: TQRDBText
@@ -986,6 +1016,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             DataField = 'CONCILIADO'
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object QRShape9: TQRShape
@@ -1174,6 +1205,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             DataField = 'PROVEEDOR'
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
         end
@@ -1190,12 +1222,16 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Frame.DrawRight = True
           AlignToBottom = False
           Color = clSilver
+          TransparentBand = False
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             2770.187500000000000000)
+          PreCaluculateBandHeight = False
+          KeepOnOnePage = False
           ParentBand = QRBand1
+          PrintOrder = cboAfterParent
           object QRLabel17: TQRLabel
             Left = 2
             Top = 1
@@ -1225,6 +1261,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel25: TQRLabel
@@ -1256,6 +1293,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel28: TQRLabel
@@ -1287,6 +1325,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel29: TQRLabel
@@ -1318,6 +1357,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel30: TQRLabel
@@ -1349,6 +1389,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel31: TQRLabel
@@ -1380,6 +1421,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel32: TQRLabel
@@ -1411,6 +1453,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel33: TQRLabel
@@ -1442,6 +1485,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel34: TQRLabel
@@ -1473,6 +1517,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
           object QRLabel36: TQRLabel
@@ -1504,6 +1549,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 8
           end
         end
@@ -1520,11 +1566,14 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Frame.DrawRight = False
           AlignToBottom = False
           Color = clWhite
+          TransparentBand = False
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
             39.687500000000000000
             2770.187500000000000000)
+          PreCaluculateBandHeight = False
+          KeepOnOnePage = False
           BandType = rbPageFooter
           object QRLabel37: TQRLabel
             Left = 965
@@ -1537,7 +1586,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               2553.229166666667000000
               2.645833333333333000
               103.187500000000000000)
@@ -1555,6 +1604,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             ParentFont = False
             Transparent = True
             WordWrap = True
+            ExportAs = exptText
             FontSize = 7
           end
           object QRSysData1: TQRSysData
@@ -1568,7 +1618,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               2661.708333333333000000
               2.645833333333333000
               108.479166666666700000)
@@ -1584,6 +1634,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Font.Style = []
             ParentFont = False
             Transparent = True
+            ExportAs = exptText
             FontSize = 7
           end
         end
@@ -1600,11 +1651,14 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           Frame.DrawRight = False
           AlignToBottom = False
           Color = clWhite
+          TransparentBand = False
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333340000
+            58.208333333333330000
             2770.187500000000000000)
+          PreCaluculateBandHeight = False
+          KeepOnOnePage = False
           BandType = rbSummary
           object QRExpr1: TQRExpr
             Left = 6
@@ -1630,6 +1684,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
             Transparent = False
             WordWrap = True
             Expression = #39'Cantidad de Registros: '#39'+COUNT'
+            ExportAs = exptText
             FontSize = 8
           end
         end
@@ -1638,8 +1693,8 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     object PFiltrosColumnas: TPanel
       Tag = 99
       Left = 1
-      Top = 446
-      Width = 1072
+      Top = 440
+      Width = 1064
       Height = 54
       Align = alBottom
       BevelInner = bvLowered
@@ -1813,7 +1868,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2289,119 +2344,12 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
     FuenteNormal = []
     NombreGuardarConfig = 'UR_DisponibilidadesLB'
     Ordenar = False
+    MoverColumna = True
     Left = 62
     Top = 113
   end
   object EKIniGuardarFiltros: TEKIni
     Left = 181
     Top = 112
-  end
-  object mxDBGridExport: TmxDBGridExport
-    DateFormat = 'dd/MM/yyyy'
-    TimeFormat = 'hh:mm AMPM'
-    DateTimeFormat = 'hh:mm AMPM dd/MM/yyyy'
-    ExportType = xtExcel
-    ExportTypes = [xtHTML, xtExcel, xtWord, xtTXT]
-    ExportStyle = xsView
-    HTML.CustomColors.Background = clWhite
-    HTML.CustomColors.DefaultLink = clRed
-    HTML.CustomColors.DefaultFontFace = 'Arial,Helvetica'
-    HTML.CustomColors.VisitedLink = clAqua
-    HTML.CustomColors.ActiveLink = clBlue
-    HTML.CustomColors.DefaultText = clBlack
-    HTML.CustomColors.TableFontColor = clBlack
-    HTML.CustomColors.TableFontFace = 'Arial,Helvetica'
-    HTML.CustomColors.TableBackground = 16777167
-    HTML.CustomColors.TableOddBackground = clWhite
-    HTML.CustomColors.HeaderBackground = 3368601
-    HTML.CustomColors.HeadersFontColor = clWhite
-    HTML.Options = [hoShowGridLines, hoBoldHeaders, hoAutoLink, hoOddRowColoring, hoDisplayTitle]
-    HTML.Template = ctStandard
-    Messages.Caption = 'Exportar datos'
-    Messages.CopiedToClipboard = 'Data was copied to clipboard!'
-    Messages.CancelCaption = '&Cancelar'
-    Messages.CreatedText = 'Exportando:'
-    Messages.DocumentFilter.HTML = 'HTML Documents'
-    Messages.DocumentFilter.Excel = 'Excel Files'
-    Messages.DocumentFilter.Word = 'Word Documents'
-    Messages.DocumentFilter.Text = 'Text Files'
-    Messages.DocumentFilter.Comma = 'CSV (Comma delimited)'
-    Messages.DocumentFilter.Tab = 'Text (Tab delimited)'
-    Messages.DocumentFilter.RTF = 'Rich Text Format'
-    Messages.DocumentFilter.DIF = 'Data Interchange Format'
-    Messages.DocumentFilter.SYLK = 'SYLK Files'
-    Messages.ExportCaption = '&Aceptar'
-    Messages.ExportToFile = '&Guardar'
-    Messages.FalseText = 'False'
-    Messages.Height = 80
-    Messages.SaveTitle = 'Guardar'
-    Messages.SelectFormat = 'Opciones'
-    Messages.Text = 'Proceseando...'
-    Messages.TrueText = 'True'
-    Messages.Width = 300
-    Messages.ViewOnly = '&Ver'
-    TruncateSymbol = '...'
-    RowNumberFormat = '%d'
-    DOC_RTF.Template = rtStandard
-    DOC_RTF.Options = [roShowGridLines, roOddRowColoring]
-    DOC_RTF.CustomSettings.TableBackground = 16777167
-    DOC_RTF.CustomSettings.TableOddBackground = clWhite
-    DOC_RTF.CustomSettings.HeaderBackground = 3368601
-    DOC_RTF.CustomSettings.DefaultFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.DefaultFont.Color = clWindowText
-    DOC_RTF.CustomSettings.DefaultFont.Height = -11
-    DOC_RTF.CustomSettings.DefaultFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.DefaultFont.Style = []
-    DOC_RTF.CustomSettings.HeaderFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.HeaderFont.Color = clWindowText
-    DOC_RTF.CustomSettings.HeaderFont.Height = -11
-    DOC_RTF.CustomSettings.HeaderFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.HeaderFont.Style = [fsBold]
-    DOC_RTF.CustomSettings.TableFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.TableFont.Color = clWindowText
-    DOC_RTF.CustomSettings.TableFont.Height = -11
-    DOC_RTF.CustomSettings.TableFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.TableFont.Style = []
-    DOC_RTF.CellWidth = 1400
-    DOC_RTF.TopMargin = 101
-    DOC_RTF.BottomMargin = 101
-    DOC_RTF.LeftMargin = 461
-    DOC_RTF.RightMargin = 562
-    EXCEL.Options = [reSetColumnWidths, reSetMargins, reUseBorders]
-    EXCEL.ColumnWidth = 30
-    EXCEL.Protected = False
-    EXCEL.Footer = '&P'
-    EXCEL.DefaultFont.Charset = DEFAULT_CHARSET
-    EXCEL.DefaultFont.Color = clWindowText
-    EXCEL.DefaultFont.Height = -11
-    EXCEL.DefaultFont.Name = 'MS Sans Serif'
-    EXCEL.DefaultFont.Style = []
-    EXCEL.HeaderFont.Charset = DEFAULT_CHARSET
-    EXCEL.HeaderFont.Color = clWindowText
-    EXCEL.HeaderFont.Height = -12
-    EXCEL.HeaderFont.Name = 'Verdana'
-    EXCEL.HeaderFont.Style = [fsBold]
-    EXCEL.TableFont.Charset = DEFAULT_CHARSET
-    EXCEL.TableFont.Color = clWindowText
-    EXCEL.TableFont.Height = -11
-    EXCEL.TableFont.Name = 'MS Sans Serif'
-    EXCEL.TableFont.Style = []
-    EXCEL.TopMargin = 0.300000000000000000
-    EXCEL.BottomMargin = 0.300000000000000000
-    EXCEL.LeftMargin = 0.300000000000000000
-    EXCEL.RightMargin = 0.300000000000000000
-    Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
-    Version = '2.37'
-    DBGrid = DBGridLibroBanco
-    Left = 57
-    Top = 322
-  end
-  object mxNativeExcel1: TmxNativeExcel
-    ActiveFont = 0
-    Borders = []
-    Shading = False
-    Version = '1.24'
-    Left = 181
-    Top = 320
   end
 end

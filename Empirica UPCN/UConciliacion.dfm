@@ -1,6 +1,6 @@
 object FConciliacion: TFConciliacion
-  Left = 180
-  Top = 119
+  Left = 251
+  Top = 134
   Width = 1109
   Height = 619
   Caption = 'Conciliaci'#243'n Bancaria'
@@ -12,7 +12,7 @@ object FConciliacion: TFConciliacion
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   WindowState = wsMaximized
@@ -72,13 +72,16 @@ object FConciliacion: TFConciliacion
       PrinterSettings.Duplex = False
       PrinterSettings.FirstPage = 0
       PrinterSettings.LastPage = 0
-      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseStandardprinter = False
       PrinterSettings.UseCustomBinCode = False
       PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
       PrinterSettings.UseCustomPaperCode = False
       PrinterSettings.CustomPaperCode = 0
       PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
       ReportTitle = 'Reporte de Libro Banco'
       SnapToGrid = True
@@ -86,6 +89,8 @@ object FConciliacion: TFConciliacion
       Zoom = 120
       PrevFormStyle = fsNormal
       PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
       object QRBand5: TQRBand
         Tag = 99
         Left = 45
@@ -99,11 +104,14 @@ object FConciliacion: TFConciliacion
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           359.392361111111100000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageHeader
         object QRDBImage1: TQRDBImage
           Left = 94
@@ -151,6 +159,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
         object RepConciliacion_Reporte_Titulo_2: TQRLabel
@@ -182,6 +191,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
         object RepConciliacion_Reporte_Titulo_1: TQRLabel
@@ -213,6 +223,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
         object qrSaldoLibroBanco: TQRLabel
@@ -244,6 +255,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
         object QRLabel2: TQRLabel
@@ -275,6 +287,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
         object qrCuenta: TQRLabel
@@ -306,6 +319,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 12
         end
         object QRLabel3: TQRLabel
@@ -337,6 +351,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = False
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
       end
@@ -353,12 +368,16 @@ object FConciliacion: TFConciliacion
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           39.687500000000000000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         ParentBand = QRBand5
+        PrintOrder = cboAfterParent
         object QRShape9: TQRShape
           Left = 0
           Top = 0
@@ -479,6 +498,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel6: TQRLabel
@@ -510,6 +530,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel7: TQRLabel
@@ -541,6 +562,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel8: TQRLabel
@@ -572,6 +594,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel9: TQRLabel
@@ -603,6 +626,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRLabel1: TQRLabel
@@ -634,6 +658,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRShape12: TQRShape
@@ -668,11 +693,14 @@ object FConciliacion: TFConciliacion
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           39.687500000000000000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbPageFooter
         object QRLabel24: TQRLabel
           Left = 764
@@ -703,6 +731,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 7
         end
         object QRSysData2: TQRSysData
@@ -732,6 +761,7 @@ object FConciliacion: TFConciliacion
           Font.Style = []
           ParentFont = False
           Transparent = True
+          ExportAs = exptText
           FontSize = 7
         end
       end
@@ -748,11 +778,14 @@ object FConciliacion: TFConciliacion
         Frame.DrawRight = False
         AlignToBottom = False
         Color = clWhite
+        TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
           264.583333333333300000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbSummary
         object QRShape10: TQRShape
           Left = 674
@@ -837,6 +870,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 11
         end
         object qrsaldoEB: TQRLabel
@@ -868,6 +902,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 11
         end
         object QRLabel10: TQRLabel
@@ -899,6 +934,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
         object qrTotalHaber: TQRLabel
@@ -930,6 +966,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 9
         end
         object QRShape1: TQRShape
@@ -983,6 +1020,7 @@ object FConciliacion: TFConciliacion
         AlignToBottom = False
         BeforePrint = QRBandDetalleBeforePrint
         Color = clWhite
+        TransparentBand = False
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -9
@@ -994,6 +1032,8 @@ object FConciliacion: TFConciliacion
         Size.Values = (
           39.687500000000000000
           1898.385416666667000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
         BandType = rbDetail
         object QRShapeV2: TQRShape
           Left = 57
@@ -1115,6 +1155,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText3: TQRDBText
@@ -1147,6 +1188,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText4: TQRDBText
@@ -1179,6 +1221,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText5: TQRDBText
@@ -1211,6 +1254,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRlblMesEmision: TQRLabel
@@ -1242,6 +1286,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = False
           WordWrap = False
+          ExportAs = exptText
           FontSize = 6
         end
         object QRDBText1: TQRDBText
@@ -1274,6 +1319,7 @@ object FConciliacion: TFConciliacion
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExportAs = exptText
           FontSize = 6
         end
         object QRShapeV1: TQRShape
@@ -2614,115 +2660,8 @@ object FConciliacion: TFConciliacion
     FuenteNormal = []
     NombreGuardarConfig = 'UConciliacion'
     Ordenar = False
+    MoverColumna = True
     Left = 136
-    Top = 144
-  end
-  object mxDBGridExport: TmxDBGridExport
-    DateFormat = 'dd/MM/yyyy'
-    TimeFormat = 'hh:mm AMPM'
-    DateTimeFormat = 'hh:mm AMPM dd/MM/yyyy'
-    ExportType = xtExcel
-    ExportTypes = [xtHTML, xtExcel, xtWord, xtTXT]
-    ExportStyle = xsView
-    HTML.CustomColors.Background = clWhite
-    HTML.CustomColors.DefaultLink = clRed
-    HTML.CustomColors.DefaultFontFace = 'Arial,Helvetica'
-    HTML.CustomColors.VisitedLink = clAqua
-    HTML.CustomColors.ActiveLink = clBlue
-    HTML.CustomColors.DefaultText = clBlack
-    HTML.CustomColors.TableFontColor = clBlack
-    HTML.CustomColors.TableFontFace = 'Arial,Helvetica'
-    HTML.CustomColors.TableBackground = 16777167
-    HTML.CustomColors.TableOddBackground = clWhite
-    HTML.CustomColors.HeaderBackground = 3368601
-    HTML.CustomColors.HeadersFontColor = clWhite
-    HTML.Options = [hoShowGridLines, hoBoldHeaders, hoAutoLink, hoOddRowColoring, hoDisplayTitle]
-    HTML.Template = ctStandard
-    Messages.Caption = 'Exportar datos'
-    Messages.CopiedToClipboard = 'Data was copied to clipboard!'
-    Messages.CancelCaption = '&Cancelar'
-    Messages.CreatedText = 'Exportando:'
-    Messages.DocumentFilter.HTML = 'HTML Documents'
-    Messages.DocumentFilter.Excel = 'Excel Files'
-    Messages.DocumentFilter.Word = 'Word Documents'
-    Messages.DocumentFilter.Text = 'Text Files'
-    Messages.DocumentFilter.Comma = 'CSV (Comma delimited)'
-    Messages.DocumentFilter.Tab = 'Text (Tab delimited)'
-    Messages.DocumentFilter.RTF = 'Rich Text Format'
-    Messages.DocumentFilter.DIF = 'Data Interchange Format'
-    Messages.DocumentFilter.SYLK = 'SYLK Files'
-    Messages.ExportCaption = '&Aceptar'
-    Messages.ExportToFile = '&Guardar'
-    Messages.FalseText = 'False'
-    Messages.Height = 80
-    Messages.SaveTitle = 'Guardar'
-    Messages.SelectFormat = 'Opciones'
-    Messages.Text = 'Proceseando...'
-    Messages.TrueText = 'True'
-    Messages.Width = 300
-    Messages.ViewOnly = '&Ver'
-    TruncateSymbol = '...'
-    RowNumberFormat = '%d'
-    DOC_RTF.Template = rtStandard
-    DOC_RTF.Options = [roShowGridLines, roOddRowColoring]
-    DOC_RTF.CustomSettings.TableBackground = 16777167
-    DOC_RTF.CustomSettings.TableOddBackground = clWhite
-    DOC_RTF.CustomSettings.HeaderBackground = 3368601
-    DOC_RTF.CustomSettings.DefaultFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.DefaultFont.Color = clWindowText
-    DOC_RTF.CustomSettings.DefaultFont.Height = -11
-    DOC_RTF.CustomSettings.DefaultFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.DefaultFont.Style = []
-    DOC_RTF.CustomSettings.HeaderFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.HeaderFont.Color = clWindowText
-    DOC_RTF.CustomSettings.HeaderFont.Height = -11
-    DOC_RTF.CustomSettings.HeaderFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.HeaderFont.Style = [fsBold]
-    DOC_RTF.CustomSettings.TableFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.TableFont.Color = clWindowText
-    DOC_RTF.CustomSettings.TableFont.Height = -11
-    DOC_RTF.CustomSettings.TableFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.TableFont.Style = []
-    DOC_RTF.CellWidth = 1400
-    DOC_RTF.TopMargin = 101
-    DOC_RTF.BottomMargin = 101
-    DOC_RTF.LeftMargin = 461
-    DOC_RTF.RightMargin = 562
-    EXCEL.Options = [reSetColumnWidths, reSetMargins, reUseBorders]
-    EXCEL.ColumnWidth = 30
-    EXCEL.Protected = False
-    EXCEL.Footer = '&P'
-    EXCEL.DefaultFont.Charset = DEFAULT_CHARSET
-    EXCEL.DefaultFont.Color = clWindowText
-    EXCEL.DefaultFont.Height = -11
-    EXCEL.DefaultFont.Name = 'MS Sans Serif'
-    EXCEL.DefaultFont.Style = []
-    EXCEL.HeaderFont.Charset = DEFAULT_CHARSET
-    EXCEL.HeaderFont.Color = clWindowText
-    EXCEL.HeaderFont.Height = -12
-    EXCEL.HeaderFont.Name = 'Verdana'
-    EXCEL.HeaderFont.Style = [fsBold]
-    EXCEL.TableFont.Charset = DEFAULT_CHARSET
-    EXCEL.TableFont.Color = clWindowText
-    EXCEL.TableFont.Height = -11
-    EXCEL.TableFont.Name = 'MS Sans Serif'
-    EXCEL.TableFont.Style = []
-    EXCEL.TopMargin = 0.300000000000000000
-    EXCEL.BottomMargin = 0.300000000000000000
-    EXCEL.LeftMargin = 0.300000000000000000
-    EXCEL.RightMargin = 0.300000000000000000
-    Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
-    Version = '2.37'
-    DBGrid = DBGridConciliacion
-    Left = 228
-    Top = 90
-  end
-  object mxNativeExcel1: TmxNativeExcel
-    ActiveFont = 0
-    Borders = []
-    Shading = False
-    Version = '1.24'
-    Left = 224
     Top = 144
   end
 end

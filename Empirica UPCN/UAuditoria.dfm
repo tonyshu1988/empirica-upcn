@@ -12,7 +12,7 @@ object FAuditoria: TFAuditoria
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Visible = True
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -20,8 +20,8 @@ object FAuditoria: TFAuditoria
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 912
-    Height = 556
+    Width = 904
+    Height = 550
     ActivePage = TabSheet12
     Align = alClient
     MultiLine = True
@@ -364,15 +364,15 @@ object FAuditoria: TFAuditoria
       object Panel19: TPanel
         Left = 0
         Top = 0
-        Width = 904
-        Height = 528
+        Width = 896
+        Height = 522
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object panelArriba: TPanel
           Left = 0
           Top = 0
-          Width = 904
+          Width = 896
           Height = 333
           Align = alTop
           BevelOuter = bvNone
@@ -381,7 +381,7 @@ object FAuditoria: TFAuditoria
           object DBChartMov: TDBChart
             Left = 0
             Top = 29
-            Width = 904
+            Width = 896
             Height = 304
             BackWall.Brush.Color = clWhite
             BackWall.Brush.Style = bsClear
@@ -462,7 +462,7 @@ object FAuditoria: TFAuditoria
           object Panel1: TPanel
             Left = 0
             Top = 0
-            Width = 904
+            Width = 896
             Height = 29
             Align = alTop
             BevelOuter = bvNone
@@ -512,8 +512,8 @@ object FAuditoria: TFAuditoria
         object panelAbajo: TPanel
           Left = 0
           Top = 333
-          Width = 904
-          Height = 195
+          Width = 896
+          Height = 189
           Align = alClient
           BevelOuter = bvNone
           Caption = 'panelAbajo'
@@ -521,7 +521,7 @@ object FAuditoria: TFAuditoria
           object Panel2: TPanel
             Left = 0
             Top = 0
-            Width = 904
+            Width = 896
             Height = 29
             Align = alTop
             BevelOuter = bvNone
@@ -595,8 +595,8 @@ object FAuditoria: TFAuditoria
           object DBChartUserTipoMov: TDBChart
             Left = 0
             Top = 29
-            Width = 904
-            Height = 166
+            Width = 896
+            Height = 160
             BackWall.Brush.Color = clWhite
             BackWall.Brush.Style = bsClear
             Gradient.EndColor = clGray
@@ -912,7 +912,7 @@ object FAuditoria: TFAuditoria
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
