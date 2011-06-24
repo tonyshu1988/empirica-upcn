@@ -25,9 +25,9 @@ object FCajero: TFCajero
     TabOrder = 0
     object PanelDetalleProducto: TPanel
       Left = 1
-      Top = 1
+      Top = 42
       Width = 327
-      Height = 614
+      Height = 573
       Align = alLeft
       BevelInner = bvSpace
       Caption = 'PanelDetalleProducto'
@@ -44,17 +44,17 @@ object FCajero: TFCajero
         TabOrder = 0
       end
     end
-    object Panel2: TPanel
+    object PanelContenedorDerecha: TPanel
       Left = 328
-      Top = 1
+      Top = 42
       Width = 663
-      Height = 614
+      Height = 573
       Align = alClient
-      Caption = 'Panel2'
+      Caption = 'PanelContenedorDerecha'
       TabOrder = 1
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 472
+        Top = 431
         Width = 661
         Height = 141
         Align = alBottom
@@ -155,7 +155,7 @@ object FCajero: TFCajero
         Left = 1
         Top = 88
         Width = 661
-        Height = 384
+        Height = 343
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 1
@@ -163,7 +163,7 @@ object FCajero: TFCajero
           Left = 1
           Top = 1
           Width = 659
-          Height = 332
+          Height = 291
           Align = alClient
           Color = 14606012
           DataSource = DS_ComprobanteDetalle
@@ -213,7 +213,7 @@ object FCajero: TFCajero
         end
         object PieGrilla: TPanel
           Left = 1
-          Top = 333
+          Top = 292
           Width = 659
           Height = 50
           Align = alBottom
@@ -537,6 +537,15 @@ object FCajero: TFCajero
           end
         end
       end
+    end
+    object PanelStatusBar: TPanel
+      Left = 1
+      Top = 1
+      Width = 990
+      Height = 41
+      Align = alTop
+      Caption = 'PanelStatusBar'
+      TabOrder = 2
     end
   end
   object ZQ_Productos: TZQuery

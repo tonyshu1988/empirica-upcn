@@ -29,7 +29,7 @@ type
     ZQ_ProductosID_PRODUCTO: TIntegerField;
     DS_Productos: TDataSource;
     PanelDetalleProducto: TPanel;
-    Panel2: TPanel;
+    PanelContenedorDerecha: TPanel;
     PanelFormaPago: TPanel;
     PanelListadoProducto: TPanel;
     PanelCabeceraFactura: TPanel;
@@ -114,6 +114,7 @@ type
     GrupoBuscarCliente: TdxBarGroup;
     GrupoLeerCodigo: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
+    PanelStatusBar: TPanel;
     procedure btsalirClick(Sender: TObject);
   private
     { Private declarations }
