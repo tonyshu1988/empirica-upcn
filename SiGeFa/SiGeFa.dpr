@@ -33,7 +33,8 @@ uses
   UABM_Cuentas in 'UABM_Cuentas.pas' {FABM_Cuentas},
   UABM_Precios in 'UABM_Precios.pas' {FABM_Precios},
   UABM_Comprobantes in 'UABM_Comprobantes.pas' {FABM_Comprobantes},
-  UCajero in 'UCajero.pas' {FCajero};
+  UCajero in 'UCajero.pas' {FCajero},
+  UBuscarProducto in 'UBuscarProducto.pas' {FBuscarProducto};
 
 {$R *.res}
 
