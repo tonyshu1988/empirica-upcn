@@ -156,7 +156,7 @@ begin
     begin
       ZQ_UltimoNro.Close;
       ZQ_UltimoNro.Open;
-      if ZQ_UltimoNro.IsEmpty then
+      if ZQ_UltimoNro.IsEmpty or (ZQ_UltimoNroCODIGO.AsString = '') then
         ZQ_CuentasCODIGO.AsInteger:= 1
       else
         ZQ_CuentasCODIGO.AsInteger:= ZQ_UltimoNroCODIGO.AsInteger + 1;
