@@ -21,7 +21,6 @@ object DM: TDM
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
-    Connected = True
     Left = 40
     Top = 64
   end

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids,
-  sEdit;
+  EKEdit,UBuscarProducto, Mask, Provider, DBClient;
 
 type
   TFCajero = class(TForm)
@@ -36,33 +36,11 @@ type
     edImagen: TDBImage;
     DBGridListadoProductos: TDBGrid;
     PieGrilla: TPanel;
-    EditImporteaCobrar: TsEdit;
     DBGridFormaPago: TDBGrid;
     btQuitarProducto: TButton;
     PieGrillaFormaPago: TPanel;
-    sEdit1: TsEdit;
     btQuitarFormaPago: TButton;
     PanelEditar_DatosGralCliente: TPanel;
-    DBText7: TDBText;
-    Label2: TLabel;
-    Label3: TLabel;
-    DBText8: TDBText;
-    Label4: TLabel;
-    DBText9: TDBText;
-    Label5: TLabel;
-    DBText10: TDBText;
-    Label6: TLabel;
-    DBText11: TDBText;
-    Label7: TLabel;
-    DBText12: TDBText;
-    Label8: TLabel;
-    DBText13: TDBText;
-    Label9: TLabel;
-    DBText14: TDBText;
-    Label10: TLabel;
-    DBText15: TDBText;
-    Label11: TLabel;
-    DBText16: TDBText;
     ZQ_ComprobanteDetalle: TZQuery;
     ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField;
     ZQ_ComprobanteDetalleID_COMPROBANTE: TIntegerField;
@@ -115,15 +93,82 @@ type
     GrupoLeerCodigo: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     PanelStatusBar: TPanel;
+    EKEdit1: TEKEdit;
+    ZQ_Comprobante: TZQuery;
+    ZQ_ComprobanteID_COMPROBANTE: TIntegerField;
+    ZQ_ComprobanteID_SUCURSAL: TIntegerField;
+    ZQ_ComprobanteID_PROVEEDOR: TIntegerField;
+    ZQ_ComprobanteID_CLIENTE: TIntegerField;
+    ZQ_ComprobanteID_TIPO_CPB: TIntegerField;
+    ZQ_ComprobanteID_VENDEDOR: TIntegerField;
+    ZQ_ComprobanteID_COMP_ESTADO: TIntegerField;
+    ZQ_ComprobanteCODIGO: TStringField;
+    ZQ_ComprobanteFECHA: TDateTimeField;
+    ZQ_ComprobanteOBSERVACION: TStringField;
+    ZQ_ComprobanteBASE_IMPONIBLE: TFloatField;
+    ZQ_ComprobanteSALDO: TFloatField;
+    ZQ_ComprobanteIMPORTE_TOTAL: TFloatField;
+    ZQ_ComprobantePORC_IVA: TFloatField;
+    ZQ_ComprobanteIMPORTE_IVA: TFloatField;
+    ZQ_ComprobantePORC_DESCUENTO: TFloatField;
+    ZQ_ComprobanteIMPORTE_DESCUENTO: TFloatField;
+    ZQ_ComprobanteENCABEZADO: TStringField;
+    ZQ_ComprobantePIE: TStringField;
+    ZQ_ComprobanteFECHA_COBRADA: TDateField;
+    ZQ_ComprobanteFECHA_ENVIADA: TDateField;
+    ZQ_ComprobanteFECHA_IMPRESA: TDateField;
+    ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField;
+    DS_Comprobante: TDataSource;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Label5: TLabel;
+    DBEdit5: TDBEdit;
+    Label6: TLabel;
+    DBEdit6: TDBEdit;
+    Label7: TLabel;
+    DBEdit7: TDBEdit;
+    Label4: TLabel;
+    DBEdit4: TDBEdit;
+    Label8: TLabel;
+    DBEdit8: TDBEdit;
+    codBarras: TEdit;
+    CD_DetalleFactura: TClientDataSet;
+    DS_DetalleFactura: TDataSource;
+    DataSetProvider1: TDataSetProvider;
+    CD_DetalleFacturaID_COMPROBANTE_DETALLE: TIntegerField;
+    CD_DetalleFacturaID_COMPROBANTE: TIntegerField;
+    CD_DetalleFacturaID_PRODUCTO: TIntegerField;
+    CD_DetalleFacturaDETALLE: TStringField;
+    CD_DetalleFacturaCANTIDAD: TFloatField;
+    CD_DetalleFacturaIMPORTE_FINAL: TFloatField;
+    CD_DetalleFacturaPORC_DESCUENTO: TFloatField;
+    CD_DetalleFacturaBASE_IMPONIBLE: TFloatField;
+    CD_DetalleFacturaIMPORTE_UNITARIO: TFloatField;
+    CD_DetalleFacturaIMPUESTO_INTERNO: TFloatField;
+    CD_DetalleFacturaPORC_IVA: TFloatField;
     procedure btsalirClick(Sender: TObject);
+    procedure BtBuscarClienteClick(Sender: TObject);
+    procedure BtAgregarPagoClick(Sender: TObject);
+
   private
+    vsel: TFBuscarProducto;
+    procedure onSelProducto;
     { Private declarations }
   public
+
+
     { Public declarations }
   end;
 
 var
   FCajero: TFCajero;
+
+const
+  abmComprobante='ABM Factura-Cajero';
 
 implementation
 
@@ -134,6 +179,57 @@ uses UDM, UPrincipal;
 procedure TFCajero.btsalirClick(Sender: TObject);
 begin
 close;
+end;
+
+procedure TFCajero.BtBuscarClienteClick(Sender: TObject);
+begin
+if not Assigned(vsel) then
+    vsel:= TFBuscarProducto.Create(nil);
+  vsel.OnSeleccionar := onSelProducto;
+  vsel.ShowModal;
+end;
+
+procedure TFCajero.onSelProducto;
+begin
+  if dm.EKModelo.verificar_transaccion(abmComprobante) then
+  begin
+    if not vsel.ZQ_Producto.IsEmpty then
+    begin
+      ZQ_ComprobanteDetalle.Filter:= 'idProducto = ' +  vsel.ZQ_ProductoID_PRODUCTO.AsString;
+      ZQ_ComprobanteDetalle.Filtered := true;
+      if not ZQ_ComprobanteDetalle.IsEmpty then
+      begin
+        ZQ_ComprobanteDetalle.Filtered := false;
+        Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
+        exit;
+      end;
+
+      ZQ_ComprobanteDetalle.Filtered := false;
+      ZQ_ComprobanteDetalle.Append;
+      ZQ_ComprobanteDetalleID_PRODUCTO.AsInteger:=vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
+    end;
+
+    if vsel.SeleccionarYSalir then
+      vsel.Close;
+  end;
+end;
+
+procedure TFCajero.BtAgregarPagoClick(Sender: TObject);
+begin
+if not(ZQ_Productos.IsEmpty) then
+  begin
+    CD_DetalleFactura.Append;
+    CD_DetalleFacturaID_PRODUCTO.AsInteger:=ZQ_ProductosID_PRODUCTO.AsInteger;
+    CD_DetalleFacturaDETALLE.AsString:='';
+    CD_DetalleFacturaCANTIDAD.AsFloat:=00;
+    CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=00;
+    CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=00;
+    CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:=00;
+    CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=00;
+    CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:=00;
+    CD_DetalleFacturaPORC_IVA.AsFloat:=00;
+    CD_DetalleFactura.Post;
+  end;
 end;
 
 end.

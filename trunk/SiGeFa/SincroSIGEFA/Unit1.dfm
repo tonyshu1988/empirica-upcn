@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 271
-  Top = 106
+  Left = 297
+  Top = 161
   Width = 872
   Height = 654
   Caption = 'Sincronizador SiGeFa'
