@@ -1571,6 +1571,7 @@ object FCajero: TFCajero
       Hint = '(Ctrl+X) Cierre X'
       Visible = ivAlways
       ImageIndex = 57
+      AutoGrayScale = False
     end
     object GrupoBuscarCliente: TdxBarGroup
       Items = (
