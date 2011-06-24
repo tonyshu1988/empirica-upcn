@@ -399,8 +399,6 @@ begin
   RadioGroup1Click(self);
   inicio.cerrar;
 
-
-
   try
     begin
       DM.ZC_Local.Disconnect;
@@ -491,7 +489,7 @@ end;
 
 procedure TFPrincipal.btnBorrarLogClick(Sender: TObject);
 begin
- memo1.Lines.Clear;
+  memo1.Lines.Clear;
 end;
 
 procedure TFPrincipal.btnOcultarClick(Sender: TObject);
@@ -501,7 +499,7 @@ end;
 
 procedure TFPrincipal.EKIconizacion1DblClick(Sender: TObject);
 begin
-Visible:=true;
+  Visible:=true;
 end;
 
 function TFPrincipal.estaEnBDLocal():Boolean ;
@@ -645,10 +643,8 @@ begin
     except
       on E: Exception do
       begin
-
         DM.ZC_Remoto.Disconnect;
         DM.ZC_Local.Disconnect;
-
         memo1.Lines.Add(E.Message);
         memo1.Lines.Add('ERROR Sincronización!!...');
       end;
@@ -773,7 +769,7 @@ end;
 
 procedure TFPrincipal.btnSubirClick(Sender: TObject);
 begin
-subirNovedades();
+  subirNovedades();
 end;
 
 procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
