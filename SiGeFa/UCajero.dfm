@@ -1,61 +1,727 @@
 object FCajero: TFCajero
-  Left = 192
-  Top = 112
-  Width = 870
-  Height = 500
+  Left = 194
+  Top = 70
+  Width = 1000
+  Height = 700
   Caption = 'FCajero'
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
+  Position = poDefault
+  Visible = True
   PixelsPerInch = 96
   TextHeight = 13
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 992
+    Height = 616
     Align = alClient
     TabOrder = 0
-    object Panel1: TPanel
+    object PanelDetalleProducto: TPanel
       Left = 1
       Top = 1
-      Width = 355
-      Height = 414
+      Width = 327
+      Height = 614
       Align = alLeft
-      Caption = 'Panel1'
+      BevelInner = bvSpace
+      Caption = 'PanelDetalleProducto'
       TabOrder = 0
+      object edImagen: TDBImage
+        Left = 2
+        Top = 2
+        Width = 323
+        Height = 167
+        Align = alTop
+        Color = 14737632
+        DataSource = DS_Productos
+        Stretch = True
+        TabOrder = 0
+      end
     end
     object Panel2: TPanel
-      Left = 356
+      Left = 328
       Top = 1
-      Width = 505
-      Height = 414
+      Width = 663
+      Height = 614
       Align = alClient
       Caption = 'Panel2'
       TabOrder = 1
-      object GroupBox1: TGroupBox
+      object PanelFormaPago: TPanel
         Left = 1
-        Top = 225
-        Width = 503
-        Height = 188
+        Top = 472
+        Width = 661
+        Height = 141
         Align = alBottom
-        Caption = 'GroupBox1'
+        Caption = 'PanelFormaPago'
         TabOrder = 0
+        object DBGridFormaPago: TDBGrid
+          Left = 1
+          Top = 1
+          Width = 659
+          Height = 87
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_Comprobante_FormaPago
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID_TIPO_FORMAPAG'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MDCP_FECHA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MDCP_BANCO'
+              Width = 103
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MDCP_CHEQUE'
+              Width = 97
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE'
+              Visible = True
+            end>
+        end
+        object PieGrillaFormaPago: TPanel
+          Left = 1
+          Top = 88
+          Width = 659
+          Height = 52
+          Align = alBottom
+          Caption = 'PieGrillaFormaPago'
+          TabOrder = 1
+          DesignSize = (
+            659
+            52)
+          object sEdit1: TsEdit
+            Left = 427
+            Top = 4
+            Width = 227
+            Height = 40
+            Anchors = [akRight]
+            Color = 16112578
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -27
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+            TabOrder = 0
+            SkinData.CustomColor = True
+            SkinData.SkinSection = 'EDIT'
+            BoundLabel.Indent = 0
+            BoundLabel.Font.Charset = DEFAULT_CHARSET
+            BoundLabel.Font.Color = clWindowText
+            BoundLabel.Font.Height = -11
+            BoundLabel.Font.Name = 'MS Sans Serif'
+            BoundLabel.Font.Style = []
+            BoundLabel.Layout = sclLeft
+            BoundLabel.MaxWidth = 0
+            BoundLabel.UseSkinColor = True
+          end
+          object btQuitarFormaPago: TButton
+            Left = 16
+            Top = 16
+            Width = 116
+            Height = 25
+            Caption = 'Quitar Pago'
+            TabOrder = 1
+          end
+        end
       end
-      object GroupBox2: TGroupBox
+      object PanelListadoProducto: TPanel
+        Left = 1
+        Top = 88
+        Width = 661
+        Height = 384
+        Align = alClient
+        Caption = 'PanelListadoProducto'
+        TabOrder = 1
+        object DBGridListadoProductos: TDBGrid
+          Left = 1
+          Top = 1
+          Width = 659
+          Height = 332
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_ComprobanteDetalle
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID_PRODUCTO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_UNITARIO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PORC_IVA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_FINAL'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PORC_DESCUENTO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPUESTO_INTERNO'
+              Visible = True
+            end>
+        end
+        object PieGrilla: TPanel
+          Left = 1
+          Top = 333
+          Width = 659
+          Height = 50
+          Align = alBottom
+          Caption = 'PieGrillaListaProductos'
+          TabOrder = 1
+          DesignSize = (
+            659
+            50)
+          object EditImporteaCobrar: TsEdit
+            Left = 427
+            Top = 3
+            Width = 227
+            Height = 40
+            Anchors = [akRight]
+            Color = 16112578
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -27
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+            TabOrder = 0
+            SkinData.CustomColor = True
+            SkinData.SkinSection = 'EDIT'
+            BoundLabel.Indent = 0
+            BoundLabel.Font.Charset = DEFAULT_CHARSET
+            BoundLabel.Font.Color = clWindowText
+            BoundLabel.Font.Height = -11
+            BoundLabel.Font.Name = 'MS Sans Serif'
+            BoundLabel.Font.Style = []
+            BoundLabel.Layout = sclLeft
+            BoundLabel.MaxWidth = 0
+            BoundLabel.UseSkinColor = True
+          end
+          object btQuitarProducto: TButton
+            Left = 16
+            Top = 16
+            Width = 116
+            Height = 25
+            Caption = 'Quitar Producto'
+            TabOrder = 1
+          end
+        end
+      end
+      object PanelCabeceraFactura: TPanel
         Left = 1
         Top = 1
-        Width = 503
-        Height = 224
-        Align = alClient
-        Caption = 'GroupBox2'
-        TabOrder = 1
+        Width = 661
+        Height = 87
+        Align = alTop
+        Caption = 'PanelCabeceraFactura'
+        TabOrder = 2
+        object PanelEditar_DatosGralCliente: TPanel
+          Left = 1
+          Top = 1
+          Width = 659
+          Height = 85
+          Align = alClient
+          BevelOuter = bvNone
+          Color = clScrollBar
+          TabOrder = 0
+          object DBText7: TDBText
+            Left = 76
+            Top = 5
+            Width = 65
+            Height = 13
+            DataField = 'CODIGO_CORTO'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label2: TLabel
+            Left = 30
+            Top = 5
+            Width = 45
+            Height = 13
+            Caption = 'C'#243'digo:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label3: TLabel
+            Left = 150
+            Top = 5
+            Width = 50
+            Height = 13
+            Caption = 'Nombre:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText8: TDBText
+            Left = 201
+            Top = 5
+            Width = 420
+            Height = 13
+            DataField = 'NOMBRE'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label4: TLabel
+            Left = 17
+            Top = 22
+            Width = 58
+            Height = 13
+            Caption = 'Direcci'#243'n:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText9: TDBText
+            Left = 76
+            Top = 22
+            Width = 545
+            Height = 13
+            DataField = 'DIRECCION'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label5: TLabel
+            Left = 5
+            Top = 40
+            Width = 70
+            Height = 13
+            Caption = 'C'#243'd. Postal:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText10: TDBText
+            Left = 77
+            Top = 40
+            Width = 57
+            Height = 13
+            DataField = 'CODIGO_POSTAL'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label6: TLabel
+            Left = 142
+            Top = 40
+            Width = 58
+            Height = 13
+            Caption = 'Localidad:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText11: TDBText
+            Left = 202
+            Top = 40
+            Width = 232
+            Height = 13
+            DataField = 'LOCALIDAD'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label7: TLabel
+            Left = 438
+            Top = 40
+            Width = 57
+            Height = 13
+            Caption = 'Provincia:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText12: TDBText
+            Left = 496
+            Top = 40
+            Width = 133
+            Height = 13
+            DataField = 'NOMBRE_PROVINCIA'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label8: TLabel
+            Left = 16
+            Top = 58
+            Width = 59
+            Height = 13
+            Caption = 'Tipo Doc.:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText13: TDBText
+            Left = 77
+            Top = 58
+            Width = 80
+            Height = 13
+            DataField = 'NOMBRE_TIPO_DOC'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label9: TLabel
+            Left = 161
+            Top = 58
+            Width = 50
+            Height = 13
+            Caption = 'N'#250'mero:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText14: TDBText
+            Left = 213
+            Top = 58
+            Width = 70
+            Height = 13
+            DataField = 'NUMERO_DOC'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label10: TLabel
+            Left = 289
+            Top = 58
+            Width = 26
+            Height = 13
+            Caption = 'IVA:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText15: TDBText
+            Left = 316
+            Top = 58
+            Width = 147
+            Height = 13
+            DataField = 'NOMBRE_TIPO_IVA'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label11: TLabel
+            Left = 469
+            Top = 58
+            Width = 55
+            Height = 13
+            Caption = 'Cuit/Cuil:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText16: TDBText
+            Left = 526
+            Top = 58
+            Width = 104
+            Height = 13
+            DataField = 'CUIT_CUIL'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
       end
     end
+  end
+  object ZQ_Productos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
+        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
+        'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
+        'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
+        'p.cod_corto, p.codigo_barra'
+      'from producto p'
+      'left join medida m on (p.id_medida = m.id_medida)'
+      
+        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
+        'od_cabecera)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      
+        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
+        'rticulo)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'where pc.baja <> '#39'S'#39)
+    Params = <>
+    Left = 128
+    Top = 120
+    object ZQ_ProductosNOMBRE_PRODUCTO: TStringField
+      FieldName = 'NOMBRE_PRODUCTO'
+      Size = 100
+    end
+    object ZQ_ProductosMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_ProductosARTICULO: TStringField
+      FieldName = 'ARTICULO'
+      Size = 200
+    end
+    object ZQ_ProductosTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object ZQ_ProductosNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_ProductosDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object ZQ_ProductosPRECIO_COSTO: TFloatField
+      FieldName = 'PRECIO_COSTO'
+      currency = True
+    end
+    object ZQ_ProductosPRECIO_VENTA: TFloatField
+      FieldName = 'PRECIO_VENTA'
+      currency = True
+    end
+    object ZQ_ProductosCOEF_GANANCIA: TFloatField
+      FieldName = 'COEF_GANANCIA'
+    end
+    object ZQ_ProductosCOEF_DESCUENTO: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+    end
+    object ZQ_ProductosIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_ProductosIMPUESTO_IVA: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+    object ZQ_ProductosCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_ProductosCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ProductosID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+  end
+  object DS_Productos: TDataSource
+    DataSet = ZQ_Productos
+    Left = 216
+    Top = 120
+  end
+  object ZQ_ComprobanteDetalle: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from comprobante_detalle')
+    Params = <>
+    Left = 441
+    Top = 201
+    object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+      Required = True
+    end
+    object ZQ_ComprobanteDetalleID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+      Required = True
+    end
+    object ZQ_ComprobanteDetalleID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_ComprobanteDetalleDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object ZQ_ComprobanteDetalleCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+    end
+    object ZQ_ComprobanteDetallePORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+    end
+    object ZQ_ComprobanteDetalleIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_ComprobanteDetallePORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+  end
+  object DS_ComprobanteDetalle: TDataSource
+    DataSet = ZQ_ComprobanteDetalle
+    Left = 561
+    Top = 201
+  end
+  object ZQ_Comprobante_FormaPago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from comprobante_forma_pago')
+    Params = <>
+    Left = 473
+    Top = 521
+    object ZQ_Comprobante_FormaPagoID_COMPROB_FP: TIntegerField
+      FieldName = 'ID_COMPROB_FP'
+      Required = True
+    end
+    object ZQ_Comprobante_FormaPagoID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+      Required = True
+    end
+    object ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAG'
+      Required = True
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_FECHA: TDateField
+      FieldName = 'MDCP_FECHA'
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_BANCO: TStringField
+      FieldName = 'MDCP_BANCO'
+      Size = 50
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_CHEQUE: TStringField
+      FieldName = 'MDCP_CHEQUE'
+      Size = 50
+    end
+    object ZQ_Comprobante_FormaPagoIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+    end
+    object ZQ_Comprobante_FormaPagoCONCILIADO: TDateField
+      FieldName = 'CONCILIADO'
+    end
+    object ZQ_Comprobante_FormaPagoCUENTA_INGRESO: TIntegerField
+      FieldName = 'CUENTA_INGRESO'
+    end
+    object ZQ_Comprobante_FormaPagoCUENTA_EGRESO: TIntegerField
+      FieldName = 'CUENTA_EGRESO'
+    end
+  end
+  object DS_Comprobante_FormaPago: TDataSource
+    DataSet = ZQ_Comprobante_FormaPago
+    Left = 593
+    Top = 521
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -64,82 +730,282 @@ object FCajero: TFCajero
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
-      66090000424D660900000000000036000000280000001C0000001C0000000100
-      1800000000003009000000000000000000000000000000000000E0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0
-      A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
-      E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
-      8DE0A48DE0A48DE0A48D}
+      7A220000424D7A22000000000000360000002800000039000000330000000100
+      1800000000004422000000000000000000000000000000000000FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5
+      FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6
+      A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FA
+      B6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A5FAB6A500}
     Bars = <
       item
         AllowClose = False
@@ -162,43 +1028,40 @@ object FCajero: TFCajero
         Font.Style = []
         ItemLinks = <
           item
-            Item = btnBuscar
+            Item = BtBuscarCliente
             Visible = True
           end
           item
             BeginGroup = True
-            Item = btnNuevo
+            Item = BtLeerCodigo
             Visible = True
           end
           item
-            Item = btnModificar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnBaja
-            Visible = True
-          end
-          item
-            Item = btnReactivar
+            Item = BtAgregarPago
             Visible = True
           end
           item
             BeginGroup = True
-            Item = btnGuardar
+            Item = BtAceptarPago
             Visible = True
           end
           item
-            Item = btnCancelar
+            Item = BtCancelarPago
             Visible = True
           end
           item
             BeginGroup = True
-            Item = btnImprimir
+            Item = Bt_Cierre_Z
             Visible = True
           end
           item
-            Item = btnSalir
+            BeginGroup = True
+            Item = bt_cierre_X
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btsalir
             Visible = True
           end>
         Name = 'barra'
@@ -495,7 +1358,6 @@ object FCajero: TFCajero
     Categories.Visibles = (
       True)
     HideFloatingBarsWhenInactive = False
-    Images = FPrincipal.Iconos_Barra_32
     LargeImages = FPrincipal.Iconos_Barra_32
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
@@ -506,202 +1368,214 @@ object FCajero: TFCajero
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 600
-    Top = 221
+    Left = 896
+    Top = 192
     DockControlHeights = (
       0
       0
       0
       52)
-    object btnBuscar: TdxBarLargeButton
-      Caption = 'F1 - Buscar'
+    object BtBuscarCliente: TdxBarLargeButton
+      Caption = 'F2 Buscar Cliente'
       Category = 0
-      Hint = 'F1 - Buscar'
+      Hint = 'Buscar Cliente'
       Visible = ivAlways
       ImageIndex = 29
+      ShortCut = 113
       AutoGrayScale = False
     end
-    object btnVerDetalle: TdxBarLargeButton
-      Align = iaRight
-      Caption = 'Ver Detalle'
-      Category = 0
-      Hint = 'Ver Detalle'
-      Visible = ivAlways
-      ImageIndex = 69
-      AutoGrayScale = False
-    end
-    object btnNuevo: TdxBarLargeButton
-      Caption = 'F2 - Nuevo'
-      Category = 0
-      Hint = 'Inserta un nuevo registro'
-      Visible = ivAlways
-      ImageIndex = 0
-      AutoGrayScale = False
-    end
-    object btnModificar: TdxBarLargeButton
-      Caption = 'F3 - Modificar'
+    object BtModificar: TdxBarLargeButton
+      Caption = 'Cancelar'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
-      ImageIndex = 1
+      ImageIndex = 4
+      ShortCut = 114
       AutoGrayScale = False
     end
-    object btnBaja: TdxBarLargeButton
-      Caption = 'F4 - Baja'
+    object BtEliminar: TdxBarLargeButton
+      Caption = 'Baja/Alta'
       Category = 0
-      Hint = 'Da de baja un registro'
+      Hint = 'Da de baja/alta un registro '
       Visible = ivAlways
-      ImageIndex = 25
+      ImageIndex = 47
+      ShortCut = 115
       AutoGrayScale = False
     end
-    object btnReactivar: TdxBarLargeButton
-      Caption = 'F5 - Reactivar'
-      Category = 0
-      Hint = 'Reactiva un registro'
-      Visible = ivAlways
-      ImageIndex = 24
-      AutoGrayScale = False
-    end
-    object btnGuardar: TdxBarLargeButton
-      Caption = 'F11 - Guardar'
+    object BtAgregarPago: TdxBarLargeButton
+      Caption = 'F9 Agregar Pago'
       Category = 0
       Enabled = False
-      Hint = 'Guarda los cambios'
+      Hint = 'Espesificar filtros para visualizaci'#243'n de deuda'
+      Visible = ivAlways
+      ImageIndex = 5
+      AutoGrayScale = False
+    end
+    object BtAceptarPago: TdxBarLargeButton
+      Caption = 'F10 Aceptar pagos'
+      Category = 0
+      Enabled = False
+      Hint = 'Guarda e Imprime la liquidaci'#243'n'
       Visible = ivAlways
       ImageIndex = 3
       AutoGrayScale = False
     end
-    object btnCancelar: TdxBarLargeButton
-      Caption = 'F12 - Cancelar'
+    object BtCancelarPago: TdxBarLargeButton
+      Caption = 'F11 Cancelar'
       Category = 0
       Enabled = False
-      Hint = 'Cancela los cambios'
+      Hint = 'Cancela la liquidaci'#243'n'
       Visible = ivAlways
       ImageIndex = 4
       AutoGrayScale = False
     end
-    object btnImprimir: TdxBarLargeButton
-      Caption = 'Imprimir'
+    object BtDuplicar: TdxBarLargeButton
+      Caption = 'Duplicar'
       Category = 0
-      Hint = 'Imprimir'
+      Hint = 'Crea una copia del registro actual'
       Visible = ivAlways
-      ImageIndex = 28
-    end
-    object btnSalir: TdxBarLargeButton
-      Align = iaRight
-      Caption = 'Salir'
-      Category = 0
-      Hint = 'Salir sin seleccionar'
-      Visible = ivAlways
-      ImageIndex = 6
+      ImageIndex = 3
+      ShortCut = 116
       AutoGrayScale = False
     end
-    object GrupoEditando: TdxBarGroup
+    object Bt_Cierre_Z: TdxBarLargeButton
+      Align = iaRight
+      Caption = '(Ctrl+Z) Cierre Z'
+      Category = 0
+      Hint = 'Aplica el cierre Z de la impresora Fiscal'
+      Visible = ivAlways
+      ImageIndex = 70
+      AutoGrayScale = False
+    end
+    object btBajar: TdxBarLargeButton
+      Caption = 'Bajar'
+      Category = 0
+      Hint = 'Da de Baja o Reactiva el Inmueble'
+      Visible = ivNever
+      ImageIndex = 9
+      AutoGrayScale = False
+    end
+    object btsalir: TdxBarLargeButton
+      Align = iaRight
+      Caption = 'F12 Salir'
+      Category = 0
+      Hint = 'F12 Salir'
+      Visible = ivAlways
+      ImageIndex = 6
+      OnClick = btsalirClick
+      AutoGrayScale = False
+    end
+    object bt_accion: TdxBarControlContainerItem
+      Caption = 'Acci'#243'n: '
+      Category = 0
+      Hint = 'Acci'#243'n: '
+      Visible = ivAlways
+    end
+    object bt_motivo_baja: TdxBarControlContainerItem
+      Caption = 'Motivo: '
+      Category = 0
+      Hint = 'Motivo de la Baja '
+      Visible = ivNever
+    end
+    object bt_VerDetalle: TdxBarLargeButton
+      Caption = 'Ver Detalle'
+      Category = 0
+      Enabled = False
+      Hint = 'Ver Detalle'
+      Visible = ivAlways
+      ImageIndex = 13
+      AutoGrayScale = False
+    end
+    object Bt_Informe: TdxBarLargeButton
+      Caption = 'Informe'
+      Category = 0
+      Enabled = False
+      Hint = 'Informe'
+      Visible = ivAlways
+      ImageIndex = 58
+      AutoGrayScale = False
+    end
+    object Bt_Detalle: TdxBarLargeButton
+      Caption = 'Detalle'
+      Category = 0
+      Enabled = False
+      Hint = 'Detalle'
+      Visible = ivAlways
+      ImageIndex = 31
+      AutoGrayScale = False
+    end
+    object Bt_Imprimir_Arqueo: TdxBarLargeButton
+      Caption = 'Imprimir Arqueo'
+      Category = 0
+      Hint = 'Imprimir Arqueo'
+      Visible = ivAlways
+      ImageIndex = 20
+      AutoGrayScale = False
+    end
+    object Bt_Imprimir_convenio: TdxBarLargeButton
+      Caption = 'Imprimir Convenio'
+      Category = 0
+      Enabled = False
+      Hint = 'Imprimir Convenio'
+      Visible = ivAlways
+      ImageIndex = 20
+      AutoGrayScale = False
+    end
+    object BtLeerCodigo: TdxBarLargeButton
+      Caption = 'F8 Leer C'#243'digo'
+      Category = 0
+      Enabled = False
+      Hint = 'Leer Codigo'
+      Visible = ivAlways
+      ImageIndex = 1
+      AutoGrayScale = False
+    end
+    object BtBuscar: TdxBarLargeButton
+      Caption = 'Buscar Cuota'
+      Category = 0
+      Hint = 'Buscar Boleta'
+      Visible = ivAlways
+      ImageIndex = 17
+      AutoGrayScale = False
+    end
+    object btLiquidar: TdxBarLargeButton
+      Caption = 'Buscar Cuota'
+      Category = 0
+      Enabled = False
+      Hint = 'Buscar Cuota'
+      Visible = ivAlways
+      ImageIndex = 62
+      AutoGrayScale = False
+    end
+    object Bt_imprimir_listadoFP: TdxBarLargeButton
+      Caption = 'Imprimir Listado FP'
+      Category = 0
+      Enabled = False
+      Hint = 'Imprimir Listado FP'
+      Visible = ivNever
+      ImageIndex = 20
+      AutoGrayScale = False
+    end
+    object bt_cierre_X: TdxBarLargeButton
+      Caption = '(Ctrl+X) Cierre X'
+      Category = 0
+      Hint = '(Ctrl+X) Cierre X'
+      Visible = ivAlways
+      ImageIndex = 57
+    end
+    object GrupoBuscarCliente: TdxBarGroup
       Items = (
-        'btnNuevo'
-        'btnModificar'
-        'btnBuscar'
-        'btnVerDetalle'
-        'btnBaja'
-        'btnSalir'
-        'btnReactivar'
-        'btnImprimir')
+        'BtBuscarCliente')
+    end
+    object GrupoLeerCodigo: TdxBarGroup
+      Items = (
+        'BtLeerCodigo'
+        'BtAgregarPago')
     end
     object GrupoGuardarCancelar: TdxBarGroup
-      Enabled = False
       Items = (
-        'btnGuardar'
-        'btnCancelar')
+        'BtAceptarPago'
+        'BtCancelarPago')
     end
-  end
-  object ZQ_Productos: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      
-        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
-        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
-        'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
-        'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
-        'p.cod_corto, p.codigo_barra'
-      'from producto p'
-      'left join medida m on (p.id_medida = m.id_medida)'
-      
-        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
-        'od_cabecera)'
-      'left join articulo a on (pc.id_articulo = a.id_articulo)'
-      
-        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
-        'rticulo)'
-      'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'where pc.baja <> '#39'S'#39)
-    Params = <>
-    Left = 128
-    Top = 120
-    object ZQ_ProductosNOMBRE_PRODUCTO: TStringField
-      FieldName = 'NOMBRE_PRODUCTO'
-      Size = 100
-    end
-    object ZQ_ProductosMEDIDA: TStringField
-      FieldName = 'MEDIDA'
-      Size = 30
-    end
-    object ZQ_ProductosARTICULO: TStringField
-      FieldName = 'ARTICULO'
-      Size = 200
-    end
-    object ZQ_ProductosTIPO_ARTICULO: TStringField
-      FieldName = 'TIPO_ARTICULO'
-      Size = 200
-    end
-    object ZQ_ProductosNOMBRE_MARCA: TStringField
-      FieldName = 'NOMBRE_MARCA'
-      Size = 50
-    end
-    object ZQ_ProductosDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 500
-    end
-    object ZQ_ProductosPRECIO_COSTO: TFloatField
-      FieldName = 'PRECIO_COSTO'
-      currency = True
-    end
-    object ZQ_ProductosPRECIO_VENTA: TFloatField
-      FieldName = 'PRECIO_VENTA'
-      currency = True
-    end
-    object ZQ_ProductosCOEF_GANANCIA: TFloatField
-      FieldName = 'COEF_GANANCIA'
-    end
-    object ZQ_ProductosCOEF_DESCUENTO: TFloatField
-      FieldName = 'COEF_DESCUENTO'
-    end
-    object ZQ_ProductosIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object ZQ_ProductosIMPUESTO_IVA: TFloatField
-      FieldName = 'IMPUESTO_IVA'
-    end
-    object ZQ_ProductosCOD_CORTO: TStringField
-      FieldName = 'COD_CORTO'
-    end
-    object ZQ_ProductosCODIGO_BARRA: TStringField
-      FieldName = 'CODIGO_BARRA'
-      Size = 40
-    end
-    object ZQ_ProductosID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-      Required = True
-    end
-    object ZQ_Productosimporte_venta_cliente: TFloatField
-      FieldKind = fkCalculated
-      FieldName = 'importe_venta_cliente'
-      currency = True
-      Calculated = True
-    end
-  end
-  object DS_Productos: TDataSource
-    DataSet = ZQ_Productos
-    Left = 216
-    Top = 120
   end
 end
