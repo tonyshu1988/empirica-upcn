@@ -10,6 +10,13 @@ interface
   -Sacar el not null de los campos id_proveedor, id_cliente, id_vendedor
   -Agregar CODIGO_CORTO a tabla de personas y empresa
   -Agregar PUNTO VENTA y NUMERO a la tabla de comprobantes
+
+
+  ALTER TABLE COMPROBANTE ADD PUNTO_VENTA INTEGER;
+  ALTER TABLE COMPROBANTE ADD NUMERO_CPB INTEGER;
+  ALTER TABLE COMPROBANTE ADD FECHA_ANULADO DATE;
+  ALTER TABLE EMPRESA ADD CODIGO_CORTO INTEGER;
+  ALTER TABLE PERSONA ADD CODIGO_CORTO INTEGER;
 }
 
 
@@ -20,7 +27,7 @@ uses
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma;
+  EKDbSuma, DBClient, Menus, UBuscarProducto;
 
 type
   TFABM_Comprobantes = class(TForm)
@@ -381,6 +388,33 @@ type
     ZQ_NumeroCpbBAJA: TStringField;
     lblTotalFormaPago: TLabel;
     EKSuma_FPago: TEKDbSuma;
+    Panel1: TPanel;
+    edImagen: TDBImage;
+    DS_Producto: TDataSource;
+    CD_Producto: TClientDataSet;
+    CD_Producto_idProducto: TIntegerField;
+    CD_Producto_producto: TStringField;
+    CD_Producto_medida: TStringField;
+    CD_Producto_marca: TStringField;
+    CD_Producto_tipoArticulo: TStringField;
+    CD_Producto_articulo: TStringField;
+    CD_Producto_codigoBarra: TStringField;
+    CD_Producto_codProducto: TStringField;
+    CD_Producto_codCabecera: TStringField;
+    Popup_Producto: TPopupMenu;
+    PopItemProducto_Agregar: TMenuItem;
+    PopItemProducto_Quitar: TMenuItem;
+    CD_Producto_precioCosto: TFloatField;
+    CD_Producto_precioVenta: TFloatField;
+    CD_Producto_coefGanancia: TFloatField;
+    CD_Producto_coefDescuento: TFloatField;
+    CD_Producto_impuestoInterno: TFloatField;
+    CD_Producto_impuestoIVA: TFloatField;
+    ZQ_CpbProducto_Nombre: TStringField;
+    ZQ_CpbProducto_Medida: TStringField;
+    ZQ_CpbProducto_Color: TStringField;
+    ZQ_CpbProducto_CodBarra: TStringField;
+    CD_Producto_color: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -416,10 +450,18 @@ type
     procedure configFormaPago(tipo: integer; edicion: boolean);
     procedure DBGridEditar_FpagoKeyPress(Sender: TObject; var Key: Char);
     procedure EKSuma_FPagoSumListChanged(Sender: TObject);
+    procedure PopItemProducto_AgregarClick(Sender: TObject);
+    procedure PopItemProducto_QuitarClick(Sender: TObject);
+    procedure btnEliminarProductoClick(Sender: TObject);
+    procedure DBGridEditar_ProductoKeyPress(Sender: TObject; var Key: Char);
+    procedure DBGridEditar_ProductoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure agregarProducto();    
   private
     estadoPantalla: string;
     tipoComprobante: integer;
     id_comprobante: integer;
+    vsel: TFBuscarProducto;
+    procedure onSelProducto;    
     function getColumnIndex(Grid: TDBGrid; Nombre: string): Integer;
   public
     { Public declarations }
@@ -510,6 +552,8 @@ begin
   ZQ_VerCpb.Close;
   ZQ_VerCpb.open;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+
+  CD_Producto.CreateDataSet;  
 end;
 
 
@@ -670,6 +714,9 @@ begin
     ZQ_CpbProducto.Close;
     ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= -1;
     ZQ_CpbProducto.Open;
+
+    if not CD_Producto.IsEmpty then
+      CD_Producto.EmptyDataSet;
 
     case RadioGroupTipoComprobante.ItemIndex of
       0: tipoComprobante:= CPB_PRESUPUESTO;
@@ -1006,12 +1053,14 @@ begin
                'order by emp.nombre', [QuotedStr(' - '), QuotedStr(''), QuotedStr('N')]);
 
   EKListadoEntidad.SQL.Text:= sql;
-  PanelEditar_DatosGralProveedor.BringToFront;
 
   if EKListadoEntidad.Buscar then
   begin
     if (EKListadoEntidad.Resultado <> '') then
     begin
+      ZQ_Cliente.Close;
+      PanelEditar_DatosGralProveedor.BringToFront;
+
       ZQ_Proveedor.Close;
       ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= StrToInt(EKListadoEntidad.Resultado);
       ZQ_Proveedor.Open;
@@ -1039,12 +1088,14 @@ begin
                'order by per.nombre', [QuotedStr('N'), RELACION_CLIENTE]);
 
   EKListadoEntidad.SQL.Text:= sql;
-  PanelEditar_DatosGralCliente.BringToFront;
 
   if EKListadoEntidad.Buscar then
   begin
     if (EKListadoEntidad.Resultado <> '') then
     begin
+      ZQ_Proveedor.Close;
+      PanelEditar_DatosGralCliente.BringToFront;
+
       ZQ_Cliente.Close;
       ZQ_Cliente.ParamByName('id_persona').AsInteger:= StrToInt(EKListadoEntidad.Resultado);
       ZQ_Cliente.Open;
@@ -1186,7 +1237,7 @@ begin
         else
           if tipoComprobante = CPB_ORDEN_PAGO then
             Col := 2;
-            
+
         SetFocus;
       end;
     end;
@@ -1194,11 +1245,108 @@ begin
 end;
 
 
-
 procedure TFABM_Comprobantes.EKSuma_FPagoSumListChanged(Sender: TObject);
 begin
   if EKSuma_FPago.SumCollection[0].SumValue <> 0 then
     lblTotalFormaPago.Caption := 'Total Forma de Pago: ' + FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
+end;
+
+
+//----------------------
+//    DETALLE PRODUCTO
+//----------------------
+procedure TFABM_Comprobantes.onSelProducto;
+begin
+  if not vsel.ZQ_Producto.IsEmpty then
+  begin
+    CD_Producto.Append;
+    CD_Producto_idProducto.AsInteger := vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
+    CD_Producto_producto.AsString := vsel.ZQ_ProductoNOMBRE.AsString;
+    CD_Producto_medida.AsString := vsel.ZQ_ProductoMEDIDA.AsString;
+    CD_Producto_color.AsString := vsel.ZQ_ProductoCOLOR.AsString;
+    CD_Producto_marca.AsString := vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
+    CD_Producto_tipoArticulo.AsString := vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
+    CD_Producto_articulo.AsString := vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
+    CD_Producto_codigoBarra.AsString := vsel.ZQ_ProductoCODIGO_BARRA.AsString;
+    CD_Producto_codCabecera.AsString := vsel.ZQ_ProductoCOD_CORTO.AsString;
+    CD_Producto_codProducto.AsString := vsel.ZQ_ProductoCOD_CORTO_1.AsString;
+    CD_Producto_precioCosto.AsFloat := vsel.ZQ_ProductoPRECIO_COSTO.AsFloat;
+    CD_Producto_precioVenta.AsFloat := vsel.ZQ_ProductoPRECIO_VENTA.AsFloat;
+    CD_Producto_coefGanancia.AsFloat := vsel.ZQ_ProductoCOEF_GANANCIA.AsFloat;
+    CD_Producto_coefDescuento.AsFloat := vsel.ZQ_ProductoCOEF_DESCUENTO.AsFloat;
+    CD_Producto_impuestoInterno.AsFloat := vsel.ZQ_ProductoIMPUESTO_INTERNO.AsFloat;
+    CD_Producto_impuestoIVA.AsFloat := vsel.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+
+    ZQ_CpbProducto.Append;
+    ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
+    ZQ_CpbProductoID_PRODUCTO.AsInteger:= vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
+    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vsel.ZQ_ProductoPRECIO_VENTA.AsFloat;
+    ZQ_CpbProductoIMPUESTO_INTERNO.AsFloat:= vsel.ZQ_ProductoIMPUESTO_INTERNO.AsFloat;
+    ZQ_CpbProductoPORC_IVA.AsFloat:= vsel.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+  end;
+
+  vsel.Close;
+end;
+
+
+procedure TFABM_Comprobantes.PopItemProducto_AgregarClick(Sender: TObject);
+begin
+  agregarProducto;
+end;
+
+
+procedure TFABM_Comprobantes.agregarProducto();
+begin
+  if not Assigned(vsel) then
+    vsel:= TFBuscarProducto.Create(nil);
+  vsel.OnSeleccionar := onSelProducto;
+  vsel.SeleccionarYSalir:= true;
+  vsel.ShowModal;
+end;
+
+
+procedure TFABM_Comprobantes.PopItemProducto_QuitarClick(Sender: TObject);
+begin
+  if not ZQ_CpbProducto.IsEmpty then
+    ZQ_CpbProducto.Delete;
+end;
+
+
+procedure TFABM_Comprobantes.btnEliminarProductoClick(Sender: TObject);
+begin
+  if not ZQ_CpbProducto.IsEmpty then
+    ZQ_CpbProducto.Delete;
+end;
+
+procedure TFABM_Comprobantes.DBGridEditar_ProductoKeyPress(Sender: TObject; var Key: Char);
+begin
+//  if ((sender as tdbgrid).SelectedField.FullName = 'IMPORTE') then
+//  begin
+//    if (Key = #13) or (key = #9) then  { if it's an enter key }
+//    begin
+//      Key := #0;  { eat enter key }
+//      with TStringGrid(DBGridEditar_Producto) do
+//      begin
+//        if tipoComprobante = CPB_RECIBO_COBRO then
+//          Col := 0
+//        else
+//          if tipoComprobante = CPB_ORDEN_PAGO then
+//            Col := 2;
+//
+//        SetFocus;
+//      end;
+//    end;
+//  end;
+end;
+
+procedure TFABM_Comprobantes.DBGridEditar_ProductoKeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  begin
+    if key = 112 then
+      agregarProducto;
+  end;
 end;
 
 end.

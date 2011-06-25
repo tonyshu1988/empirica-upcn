@@ -2477,10 +2477,10 @@ object FABM_Personas: TFABM_Personas
       Left = 5
       Top = 20
       Width = 836
-      Height = 216
+      Height = 183
       Align = alClient
       Color = 14606012
-      DataSource = DS_Clientes
+      DataSource = DS_Persona
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -2490,6 +2490,13 @@ object FABM_Personas: TFABM_Personas
       TitleFont.Style = []
       OnDrawColumnCell = DBGridClientesDrawColumnCell
       Columns = <
+        item
+          Expanded = False
+          FieldName = 'CODIGO_CORTO'
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd. Corto'
+          Visible = True
+        end
         item
           Expanded = False
           FieldName = 'NOMBRE'
@@ -2597,9 +2604,9 @@ object FABM_Personas: TFABM_Personas
     end
     object PanelEdicion: TPanel
       Left = 5
-      Top = 236
+      Top = 203
       Width = 836
-      Height = 205
+      Height = 238
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 1
@@ -2608,7 +2615,7 @@ object FABM_Personas: TFABM_Personas
         Left = 0
         Top = 0
         Width = 836
-        Height = 205
+        Height = 238
         ActivePage = TabSheetDatos
         Align = alClient
         TabOrder = 0
@@ -2616,7 +2623,7 @@ object FABM_Personas: TFABM_Personas
           Caption = ' Datos Generales '
           object Label9: TLabel
             Left = 59
-            Top = 93
+            Top = 119
             Width = 57
             Height = 13
             Caption = 'Provincia:'
@@ -2624,7 +2631,7 @@ object FABM_Personas: TFABM_Personas
           end
           object Label8: TLabel
             Left = 289
-            Top = 63
+            Top = 89
             Width = 29
             Height = 13
             Caption = 'C.P.:'
@@ -2632,7 +2639,7 @@ object FABM_Personas: TFABM_Personas
           end
           object Label6: TLabel
             Left = 410
-            Top = 63
+            Top = 89
             Width = 133
             Height = 13
             Caption = 'Tipo y Nro Documento:'
@@ -2640,7 +2647,7 @@ object FABM_Personas: TFABM_Personas
           end
           object Label5: TLabel
             Left = 58
-            Top = 37
+            Top = 63
             Width = 58
             Height = 13
             Caption = 'Direcci'#243'n:'
@@ -2648,7 +2655,7 @@ object FABM_Personas: TFABM_Personas
           end
           object Label4: TLabel
             Left = 483
-            Top = 11
+            Top = 37
             Width = 60
             Height = 13
             Caption = 'Tel'#233'fonos:'
@@ -2656,7 +2663,7 @@ object FABM_Personas: TFABM_Personas
           end
           object Label3: TLabel
             Left = 504
-            Top = 37
+            Top = 63
             Width = 39
             Height = 13
             Caption = 'E-Mail:'
@@ -2664,7 +2671,7 @@ object FABM_Personas: TFABM_Personas
           end
           object Label16: TLabel
             Left = 58
-            Top = 63
+            Top = 89
             Width = 58
             Height = 13
             Caption = 'Localidad:'
@@ -2672,7 +2679,7 @@ object FABM_Personas: TFABM_Personas
           end
           object Label10: TLabel
             Left = 457
-            Top = 93
+            Top = 119
             Width = 86
             Height = 13
             Caption = 'Condici'#243'n IVA:'
@@ -2680,7 +2687,7 @@ object FABM_Personas: TFABM_Personas
           end
           object Label1: TLabel
             Left = 6
-            Top = 11
+            Top = 37
             Width = 110
             Height = 13
             Caption = 'Apellido y Nombre:'
@@ -2694,7 +2701,7 @@ object FABM_Personas: TFABM_Personas
           end
           object Label13: TLabel
             Left = 10
-            Top = 117
+            Top = 143
             Width = 105
             Height = 13
             Caption = 'Fecha Nacimiento:'
@@ -2702,7 +2709,7 @@ object FABM_Personas: TFABM_Personas
           end
           object Label14: TLabel
             Left = 286
-            Top = 117
+            Top = 143
             Width = 34
             Height = 13
             Caption = 'Sexo:'
@@ -2710,19 +2717,41 @@ object FABM_Personas: TFABM_Personas
           end
           object Label2: TLabel
             Left = 488
-            Top = 117
+            Top = 143
             Width = 55
             Height = 13
             Caption = 'Cuit/Cuil:'
             Transparent = True
           end
+          object Label7: TLabel
+            Left = 35
+            Top = 13
+            Width = 81
+            Height = 13
+            Caption = 'Codigo Corto:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = True
+          end
+          object Label11: TLabel
+            Left = 428
+            Top = 169
+            Width = 115
+            Height = 13
+            Caption = 'Descuento Especial:'
+            Transparent = True
+          end
           object DBLCBoxProvincia: TDBLookupComboBox
             Left = 120
-            Top = 87
+            Top = 113
             Width = 270
             Height = 21
             DataField = 'ID_PROVINCIA'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2736,11 +2765,11 @@ object FABM_Personas: TFABM_Personas
           end
           object DBLCBoxCondIva: TDBLookupComboBox
             Left = 548
-            Top = 87
+            Top = 113
             Width = 270
             Height = 21
             DataField = 'ID_TIPO_IVA'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2754,12 +2783,12 @@ object FABM_Personas: TFABM_Personas
           end
           object DBETelefonos: TDBEdit
             Left = 548
-            Top = 7
+            Top = 33
             Width = 270
             Height = 21
             CharCase = ecUpperCase
             DataField = 'TELEFONO'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2770,12 +2799,12 @@ object FABM_Personas: TFABM_Personas
           end
           object DBEApellidoNombre: TDBEdit
             Left = 120
-            Top = 7
+            Top = 33
             Width = 270
             Height = 21
             CharCase = ecUpperCase
             DataField = 'NOMBRE'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2786,12 +2815,12 @@ object FABM_Personas: TFABM_Personas
           end
           object DBENroDocumento: TDBEdit
             Left = 667
-            Top = 60
+            Top = 86
             Width = 151
             Height = 21
             CharCase = ecUpperCase
             DataField = 'NUMERO_DOC'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2802,12 +2831,12 @@ object FABM_Personas: TFABM_Personas
           end
           object DBELocalidad: TDBEdit
             Left = 120
-            Top = 60
+            Top = 86
             Width = 161
             Height = 21
             CharCase = ecUpperCase
             DataField = 'LOCALIDAD'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2818,11 +2847,11 @@ object FABM_Personas: TFABM_Personas
           end
           object DBEEmail: TDBEdit
             Left = 548
-            Top = 33
+            Top = 59
             Width = 270
             Height = 21
             DataField = 'EMAIL'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2833,12 +2862,12 @@ object FABM_Personas: TFABM_Personas
           end
           object DBEDireccion: TDBEdit
             Left = 120
-            Top = 33
+            Top = 59
             Width = 270
             Height = 21
             CharCase = ecUpperCase
             DataField = 'DIRECCION'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2849,12 +2878,12 @@ object FABM_Personas: TFABM_Personas
           end
           object DBECodPostal: TDBEdit
             Left = 323
-            Top = 60
+            Top = 86
             Width = 67
             Height = 21
             CharCase = ecUpperCase
             DataField = 'CODIGO_POSTAL'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2865,12 +2894,12 @@ object FABM_Personas: TFABM_Personas
           end
           object DBCBoxSexo: TDBComboBox
             Left = 325
-            Top = 114
+            Top = 140
             Width = 65
             Height = 21
             CharCase = ecUpperCase
             DataField = 'SEXO'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2886,7 +2915,7 @@ object FABM_Personas: TFABM_Personas
           end
           object EKDBFechaNacimiento: TEKDBDateTimePicker
             Left = 120
-            Top = 114
+            Top = 140
             Width = 153
             Height = 21
             Date = 40616.799864351850000000
@@ -2899,15 +2928,15 @@ object FABM_Personas: TFABM_Personas
             ParentFont = False
             TabOrder = 5
             DataField = 'FECHA_NACIMIENTO'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
           end
           object DBLCBoxTipoDoc: TDBLookupComboBox
             Left = 548
-            Top = 60
+            Top = 86
             Width = 106
             Height = 21
             DataField = 'ID_TIPO_DOC'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2921,11 +2950,11 @@ object FABM_Personas: TFABM_Personas
           end
           object DBECuit_Cuil: TDBEdit
             Left = 548
-            Top = 114
+            Top = 140
             Width = 270
             Height = 21
             DataField = 'CUIT_CUIL'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2936,7 +2965,7 @@ object FABM_Personas: TFABM_Personas
           end
           object RadioGroupRelacionCliente: TRadioGroup
             Left = 8
-            Top = 137
+            Top = 163
             Width = 382
             Height = 37
             Caption = ' Es Cliente '
@@ -2946,6 +2975,37 @@ object FABM_Personas: TFABM_Personas
               'No Es Cliente'
               'Es Cliente')
             TabOrder = 13
+          end
+          object DBEditCodigo: TDBEdit
+            Left = 120
+            Top = 9
+            Width = 105
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'CODIGO_CORTO'
+            DataSource = DS_Persona
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 14
+          end
+          object DBEdit1: TDBEdit
+            Left = 548
+            Top = 166
+            Width = 270
+            Height = 21
+            DataField = 'DESCUENTO_ESPECIAL'
+            DataSource = DS_Persona
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 15
           end
         end
         object TabSheetDetalle: TTabSheet
@@ -2959,7 +3019,7 @@ object FABM_Personas: TFABM_Personas
             Height = 132
             Align = alClient
             DataField = 'DESCRIPCION'
-            DataSource = DS_Clientes
+            DataSource = DS_Persona
             TabOrder = 0
           end
         end
@@ -3711,8 +3771,14 @@ object FABM_Personas: TFABM_Personas
       FieldName = 'DESCRIPCION'
       Size = 500
     end
+    object ZQ_PersonaDESCUENTO_ESPECIAL: TFloatField
+      FieldName = 'DESCUENTO_ESPECIAL'
+    end
+    object ZQ_PersonaCODIGO_CORTO: TIntegerField
+      FieldName = 'CODIGO_CORTO'
+    end
   end
-  object DS_Clientes: TDataSource
+  object DS_Persona: TDataSource
     DataSet = ZQ_Persona
     Left = 64
     Top = 120
@@ -4006,7 +4072,8 @@ object FABM_Personas: TFABM_Personas
         'rsona.NUMERO_DOC, '
       
         '   persona.SEXO, persona.BAJA, persona.DESCRIPCION, persona.CUIT' +
-        '_CUIL)'
+        '_CUIL, '
+      '   persona.DESCUENTO_ESPECIAL, persona.CODIGO_CORTO)'
       'VALUES'
       
         '  (:ID_PERSONA, :ID_PROVINCIA, :ID_TIPO_DOC, :ID_TIPO_IVA, :NOMB' +
@@ -4014,7 +4081,9 @@ object FABM_Personas: TFABM_Personas
       
         '   :LOCALIDAD, :CODIGO_POSTAL, :TELEFONO, :EMAIL, :FECHA_NACIMIE' +
         'NTO, :NUMERO_DOC, '
-      '   :SEXO, :BAJA, :DESCRIPCION, :CUIT_CUIL)')
+      
+        '   :SEXO, :BAJA, :DESCRIPCION, :CUIT_CUIL, :DESCUENTO_ESPECIAL, ' +
+        ':CODIGO_CORTO)')
     ModifySQL.Strings = (
       'UPDATE persona SET'
       '  persona.ID_PERSONA = :ID_PERSONA,'
@@ -4032,7 +4101,9 @@ object FABM_Personas: TFABM_Personas
       '  persona.SEXO = :SEXO,'
       '  persona.BAJA = :BAJA,'
       '  persona.DESCRIPCION = :DESCRIPCION,'
-      '  persona.CUIT_CUIL = :CUIT_CUIL'
+      '  persona.CUIT_CUIL = :CUIT_CUIL,'
+      '  persona.DESCUENTO_ESPECIAL = :DESCUENTO_ESPECIAL,'
+      '  persona.CODIGO_CORTO = :CODIGO_CORTO'
       'WHERE'
       '  persona.ID_PERSONA = :OLD_ID_PERSONA')
     Left = 64
@@ -4116,6 +4187,16 @@ object FABM_Personas: TFABM_Personas
       item
         DataType = ftUnknown
         Name = 'CUIT_CUIL'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DESCUENTO_ESPECIAL'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CODIGO_CORTO'
         ParamType = ptUnknown
       end
       item
@@ -4272,6 +4353,19 @@ object FABM_Personas: TFABM_Personas
     end
     object ZQ_RelacionClienteID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
+    end
+  end
+  object ZQ_UltimoNro: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select first 1 p.codigo_corto'
+      'from persona p'
+      'order by p.codigo_corto desc')
+    Params = <>
+    Left = 64
+    Top = 283
+    object ZQ_UltimoNroCODIGO_CORTO: TIntegerField
+      FieldName = 'CODIGO_CORTO'
     end
   end
 end
