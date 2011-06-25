@@ -415,6 +415,39 @@ type
     ZQ_CpbProducto_Color: TStringField;
     ZQ_CpbProducto_CodBarra: TStringField;
     CD_Producto_color: TStringField;
+    Panel2: TPanel;
+    DBImage1: TDBImage;
+    ZQ_VerCpb_ProductoCODIGO_BARRA: TStringField;
+    ZQ_VerCpb_ProductoPRECIO_COSTO: TFloatField;
+    ZQ_VerCpb_ProductoPRECIO_VENTA: TFloatField;
+    ZQ_VerCpb_ProductoCOEF_GANANCIA: TFloatField;
+    ZQ_VerCpb_ProductoCOEF_DESCUENTO: TFloatField;
+    ZQ_VerCpb_ProductoIMPUESTO_INTERNO_1: TFloatField;
+    ZQ_VerCpb_ProductoIMPUESTO_IVA: TFloatField;
+    ZQ_Imagen: TZQuery;
+    DS_Imagen: TDataSource;
+    ZQ_ImagenIMAGEN: TBlobField;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    DBText21: TDBText;
+    Label32: TLabel;
+    Label33: TLabel;
+    DBText26: TDBText;
+    Label34: TLabel;
+    DBText27: TDBText;
+    Label35: TLabel;
+    DBText28: TDBText;
+    Label36: TLabel;
+    DBText29: TDBText;
+    Label37: TLabel;
+    DBText30: TDBText;
+    Label38: TLabel;
+    DBText31: TDBText;
+    PopupGridFpago: TPopupMenu;
+    PopUpItem_FPagoAgrandar: TMenuItem;
+    PopupGridProducto: TPopupMenu;
+    PopUpItem_ProductoAgrandar: TMenuItem;
+    PopUpItem_ProductoOcultarDetalle: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -448,20 +481,31 @@ type
     procedure DBGridEditar_FpagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnEliminarFPagoClick(Sender: TObject);
     procedure configFormaPago(tipo: integer; edicion: boolean);
+    procedure configDetalleProducto(tipo: integer);    
     procedure DBGridEditar_FpagoKeyPress(Sender: TObject; var Key: Char);
     procedure EKSuma_FPagoSumListChanged(Sender: TObject);
     procedure PopItemProducto_AgregarClick(Sender: TObject);
     procedure PopItemProducto_QuitarClick(Sender: TObject);
     procedure btnEliminarProductoClick(Sender: TObject);
-    procedure DBGridEditar_ProductoKeyPress(Sender: TObject; var Key: Char);
     procedure DBGridEditar_ProductoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure agregarProducto();    
+    procedure agregarProducto();
+    procedure cargarProductosClienDataset();
+    procedure cargarImagen(id_prducto: integer);
+    procedure ZQ_CpbProductoAfterScroll(DataSet: TDataSet);
+    procedure calcularImporteProducto(Sender: TField);
+    procedure mostrarPanelCompleto(panel: Tpanel; valor: boolean);
+    procedure PopUpItem_FPagoAgrandarClick(Sender: TObject);
+    procedure PopUpItem_ProductoAgrandarClick(Sender: TObject);
+    procedure PopUpItem_ProductoOcultarDetalleClick(Sender: TObject);
   private
     estadoPantalla: string;
     tipoComprobante: integer;
     id_comprobante: integer;
     vsel: TFBuscarProducto;
-    procedure onSelProducto;    
+    alignAnterior: TAlign;
+    grillaActual: string;
+    agrandarPanel: boolean;
+    procedure onSelProducto;
     function getColumnIndex(Grid: TDBGrid; Nombre: string): Integer;
   public
     { Public declarations }
@@ -481,7 +525,7 @@ const
   CPB_REMITO_VENTA = 20; //se entrega al CLIENTE para documentar la entrega y/o remisión de la mercadería. AUTONUMERADO
   CPB_RECIBO_COBRO = 19; //se entrega al CLIENTE como comprobante de un pago efectuado por este. AUTONUMERADO
   CPB_ORDEN_PAGO   = 18; //se entrega al CLIENTE como comprobante de un pago efectuado a este. AUTONUMERADO (comprobante de tercero).
-//  CPB_REMITO_COMPRA = ; //(comprobante de tercero).
+//  CPB_FACTURA = ; //.
 
 implementation
 
@@ -541,6 +585,8 @@ end;
 
 procedure TFABM_Comprobantes.FormCreate(Sender: TObject);
 begin
+  agrandarPanel:=false;
+
   dm.EKModelo.abrir(ZQ_Cuenta); //abro las cuentas bancarias
   dm.EKModelo.abrir(ZQ_TipoFPago); //abro los tipos de forma de pago  
 
@@ -666,6 +712,35 @@ begin
 end;
 
 
+procedure TFABM_Comprobantes.configDetalleProducto(tipo: integer);
+begin
+  case tipo of
+    CPB_PRESUPUESTO:  begin //Usa la cuenta de ingreso
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_UNITARIO')].Visible:= true;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_DESCUENTO')].Visible:= true;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'BASE_IMPONIBLE')].Visible:= true;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPUESTO_INTERNO')].Visible:= true;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_IVA')].Visible:= true;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_FINAL')].Visible:= true;
+                      end;
+    CPB_REMITO_VENTA: begin //Usu la cuenta de egreso
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_UNITARIO')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_DESCUENTO')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'BASE_IMPONIBLE')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPUESTO_INTERNO')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_IVA')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_FINAL')].Visible:= false;
+                      end;
+    CPB_NOTA_PEDIDO:  begin //Usu la cuenta de egreso
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_UNITARIO')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_DESCUENTO')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'BASE_IMPONIBLE')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPUESTO_INTERNO')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_IVA')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_FINAL')].Visible:= false;
+                      end;
+  end;
+end;
 
 procedure TFABM_Comprobantes.mostrarNumeroCpbBase(flag: boolean);
 begin
@@ -728,6 +803,7 @@ begin
 
     cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
     configFormaPago(tipoComprobante, true); //acomodo la grilla de forma de pago segun el tipo de comprobante que es
+    configDetalleProducto(tipoComprobante); //acomodo la grilla de los productos segun el tipo de comprobante que es
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - NUEVO';
 
     ZP_CpbID.Active:=false;
@@ -781,6 +857,10 @@ begin
     PanelTipoCpb.Visible:= false;
     modoEdicion(true);
 
+    if not CD_Producto.IsEmpty then
+      CD_Producto.EmptyDataSet;
+    cargarProductosClienDataset();
+
     ZQ_Comprobante.Close;
     ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
     ZQ_Comprobante.Open;
@@ -811,6 +891,7 @@ begin
 
     cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
     configFormaPago(tipoComprobante, true); //acomodo la grilla de forma de pago segun el tipo de comprobante que es
+    configDetalleProducto(tipoComprobante); //acomodo la grilla de los productos segun el tipo de comprobante que es
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
 
     ZQ_Comprobante.Edit;
@@ -1255,6 +1336,36 @@ end;
 //----------------------
 //    DETALLE PRODUCTO
 //----------------------
+procedure TFABM_Comprobantes.cargarProductosClienDataset();
+begin
+  if ZQ_VerCpb_Producto.IsEmpty then
+    exit;
+
+  ZQ_VerCpb_Producto.First;
+  while not ZQ_VerCpb_Producto.Eof do
+  begin
+    CD_Producto.Append;
+    CD_Producto_idProducto.AsInteger := ZQ_VerCpb_ProductoID_PRODUCTO.AsInteger;
+    CD_Producto_producto.AsString := ZQ_VerCpb_ProductoPRODUCTO.AsString;
+    CD_Producto_medida.AsString := ZQ_VerCpb_ProductoMEDIDA.AsString;
+    CD_Producto_color.AsString := ZQ_VerCpb_ProductoCOLOR.AsString;
+    CD_Producto_marca.AsString := ZQ_VerCpb_ProductoMARCA.AsString;
+    CD_Producto_tipoArticulo.AsString := ZQ_VerCpb_ProductoTIPO_ARTICULO.AsString;
+    CD_Producto_articulo.AsString := ZQ_VerCpb_ProductoARTICULO.AsString;
+    CD_Producto_codigoBarra.AsString := ZQ_VerCpb_ProductoCODIGO_BARRA.AsString;
+    CD_Producto_codCabecera.AsString := ZQ_VerCpb_ProductoCOD_CABECERA.AsString;
+    CD_Producto_codProducto.AsString := ZQ_VerCpb_ProductoCOD_PRODUCTO.AsString;
+    CD_Producto_precioCosto.AsFloat := ZQ_VerCpb_ProductoPRECIO_COSTO.AsFloat;
+    CD_Producto_precioVenta.AsFloat := ZQ_VerCpb_ProductoPRECIO_VENTA.AsFloat;
+    CD_Producto_coefGanancia.AsFloat := ZQ_VerCpb_ProductoCOEF_GANANCIA.AsFloat;
+    CD_Producto_coefDescuento.AsFloat := ZQ_VerCpb_ProductoCOEF_DESCUENTO.AsFloat;
+    CD_Producto_impuestoInterno.AsFloat := ZQ_VerCpb_ProductoIMPUESTO_INTERNO.AsFloat;
+    CD_Producto_impuestoIVA.AsFloat := ZQ_VerCpb_ProductoIMPUESTO_IVA.AsFloat;
+
+    ZQ_VerCpb_Producto.Next;
+  end;
+end;
+
 procedure TFABM_Comprobantes.onSelProducto;
 begin
   if not vsel.ZQ_Producto.IsEmpty then
@@ -1283,6 +1394,8 @@ begin
     ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vsel.ZQ_ProductoPRECIO_VENTA.AsFloat;
     ZQ_CpbProductoIMPUESTO_INTERNO.AsFloat:= vsel.ZQ_ProductoIMPUESTO_INTERNO.AsFloat;
     ZQ_CpbProductoPORC_IVA.AsFloat:= vsel.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+
+    cargarImagen(vsel.ZQ_ProductoID_PRODUCTO.AsInteger);
   end;
 
   vsel.Close;
@@ -1318,26 +1431,6 @@ begin
     ZQ_CpbProducto.Delete;
 end;
 
-procedure TFABM_Comprobantes.DBGridEditar_ProductoKeyPress(Sender: TObject; var Key: Char);
-begin
-//  if ((sender as tdbgrid).SelectedField.FullName = 'IMPORTE') then
-//  begin
-//    if (Key = #13) or (key = #9) then  { if it's an enter key }
-//    begin
-//      Key := #0;  { eat enter key }
-//      with TStringGrid(DBGridEditar_Producto) do
-//      begin
-//        if tipoComprobante = CPB_RECIBO_COBRO then
-//          Col := 0
-//        else
-//          if tipoComprobante = CPB_ORDEN_PAGO then
-//            Col := 2;
-//
-//        SetFocus;
-//      end;
-//    end;
-//  end;
-end;
 
 procedure TFABM_Comprobantes.DBGridEditar_ProductoKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
@@ -1347,6 +1440,139 @@ begin
     if key = 112 then
       agregarProducto;
   end;
+end;
+
+
+procedure TFABM_Comprobantes.cargarImagen(id_prducto: integer);
+begin
+  ZQ_Imagen.Close;
+  ZQ_Imagen.ParamByName('id_producto').AsInteger:= id_prducto;
+  ZQ_Imagen.Open;
+end;
+
+
+procedure TFABM_Comprobantes.ZQ_CpbProductoAfterScroll(DataSet: TDataSet);
+begin
+  if ZQ_CpbProducto.IsEmpty then
+  begin
+    ZQ_Imagen.Close;
+    exit;
+  end;
+
+  cargarImagen(ZQ_CpbProductoID_PRODUCTO.AsInteger);
+end;
+
+//procedimiento para calcular automaticamente el importe final y la base imponible
+//para los comprobantes de tipo PRESUPUESTO 
+procedure TFABM_Comprobantes.calcularImporteProducto(Sender: TField);
+var
+  cantidad,
+  precio_unitario,
+  coef_descuento,
+  iva,
+  impuesto_interno: double;
+  imponible: double;
+  final: double;
+begin
+  if tipoComprobante <> CPB_PRESUPUESTO then
+    exit;
+
+  cantidad:= 0;
+  precio_unitario:= 0;
+  coef_descuento:= 0;
+  iva:= 0;
+  impuesto_interno:= 0;
+
+  if not ZQ_CpbProductoCANTIDAD.IsNull then
+    cantidad:= ZQ_CpbProductoCANTIDAD.AsFloat;
+
+  if not ZQ_CpbProductoIMPORTE_UNITARIO.IsNull then
+    precio_unitario:= ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat;
+
+  if not ZQ_CpbProductoPORC_DESCUENTO.IsNull then
+    coef_descuento:= ZQ_CpbProductoPORC_DESCUENTO.AsFloat;
+
+  if not ZQ_CpbProductoPORC_IVA.IsNull then
+    iva:= ZQ_CpbProductoPORC_IVA.AsFloat;
+
+  if not ZQ_CpbProductoIMPUESTO_INTERNO.IsNull then
+    impuesto_interno:= ZQ_CpbProductoIMPUESTO_INTERNO.AsFloat;
+
+  imponible:= cantidad * (precio_unitario - (precio_unitario * coef_descuento));
+  final:= imponible;
+
+  ZQ_CpbProductoBASE_IMPONIBLE.AsFloat:= imponible;
+  ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= final;
+end;
+
+
+procedure TFABM_Comprobantes.mostrarPanelCompleto(panel: Tpanel; valor: boolean);
+begin
+  PanelCpbActual_Producto.Visible:= False;
+  PanelCpbActual_FPago.Visible:= False;
+
+  if valor then
+  begin
+    alignAnterior:= panel.Align;
+    panel.Align:= alClient;
+    panel.Visible:= true;
+  end
+  else
+  begin
+    panel.Align:= alignAnterior;
+    PanelCpbActual_FPago.Visible:= true;
+    PanelCpbActual_FPago.Height:= 100;
+    PanelCpbActual_Producto.Visible:= true;
+  end
+end;
+
+
+procedure TFABM_Comprobantes.PopUpItem_FPagoAgrandarClick(Sender: TObject);
+begin
+  if agrandarPanel = false then
+  begin
+    agrandarPanel:= true;
+    mostrarPanelCompleto(PanelCpbActual_FPago, true);
+    PopUpItem_FPagoAgrandar.Caption:= 'Reducir';
+    PopUpItem_FPagoAgrandar.ImageIndex:= 15;
+  end
+  else
+  begin
+    agrandarPanel:= false;
+    mostrarPanelCompleto(PanelCpbActual_FPago, false);
+    PopUpItem_FPagoAgrandar.Caption:= 'Agrandar';
+    PopUpItem_FPagoAgrandar.ImageIndex:= 14;
+  end
+end;
+
+
+procedure TFABM_Comprobantes.PopUpItem_ProductoAgrandarClick(Sender: TObject);
+begin
+  if agrandarPanel = false then
+  begin
+    agrandarPanel:= true;
+    mostrarPanelCompleto(PanelCpbActual_Producto, true);
+    PopUpItem_ProductoAgrandar.Caption:= 'Reducir';
+    PopUpItem_ProductoAgrandar.ImageIndex:= 15;
+  end
+  else
+  begin
+    agrandarPanel:= false;
+    mostrarPanelCompleto(PanelCpbActual_Producto, false);
+    PopUpItem_ProductoAgrandar.Caption:= 'Agrandar';
+    PopUpItem_ProductoAgrandar.ImageIndex:= 14;
+  end
+end;
+
+
+procedure TFABM_Comprobantes.PopUpItem_ProductoOcultarDetalleClick(Sender: TObject);
+begin
+  if PanelCpbActual_ProductoDetalle.Visible then
+    PopUpItem_ProductoOcultarDetalle.Caption:= 'Ver Detalle'
+  else
+    PopUpItem_ProductoOcultarDetalle.Caption:= 'Ocultar Detalle';
+
+  PanelCpbActual_ProductoDetalle.Visible:= not PanelCpbActual_ProductoDetalle.Visible;
 end;
 
 end.
