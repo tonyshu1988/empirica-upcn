@@ -28,7 +28,7 @@ type
     PanelFondo: TPanel;
     DBGridClientes: TDBGrid;
     ZQ_Persona: TZQuery;
-    DS_Clientes: TDataSource;
+    DS_Persona: TDataSource;
     EKBuscar: TEKBusquedaAvanzada;
     ZQ_Provincia: TZQuery;
     DS_Provincia: TDataSource;
@@ -211,6 +211,14 @@ type
     ZQ_RelacionClienteID_EMPRESA: TIntegerField;
     ZQ_RelacionClienteID_SUCURSAL: TIntegerField;
     RadioGroupRelacionCliente: TRadioGroup;
+    Label7: TLabel;
+    DBEditCodigo: TDBEdit;
+    ZQ_UltimoNro: TZQuery;
+    ZQ_UltimoNroCODIGO_CORTO: TIntegerField;
+    ZQ_PersonaDESCUENTO_ESPECIAL: TFloatField;
+    ZQ_PersonaCODIGO_CORTO: TIntegerField;
+    Label11: TLabel;
+    DBEdit1: TDBEdit;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -266,7 +274,7 @@ begin
   PageControl.ActivePage:= TabSheetDatos;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKOrdenar.CargarConfigColunmas;
+//  EKOrdenar.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_Provincia);
   dm.EKModelo.abrir(ZQ_Iva);
   dm.EKModelo.abrir(ZQ_Documento);
@@ -322,8 +330,15 @@ begin
 
     ZQ_Persona.Append;
     ZQ_PersonaID_PERSONA.AsInteger:= id_persona;
-    ZQ_PersonaID_PROVINCIA.AsInteger:= dm.provinciaPorDefecto;  //por defecto santa fe  
+    ZQ_PersonaID_PROVINCIA.AsInteger:= dm.provinciaPorDefecto;  //por defecto santa fe
     ZQ_PersonaBAJA.AsString:= 'N';
+
+    ZQ_UltimoNro.Close;
+    ZQ_UltimoNro.Open;
+    if ZQ_UltimoNro.IsEmpty then
+      ZQ_PersonaCODIGO_CORTO.AsInteger:= 1
+    else
+      ZQ_PersonaCODIGO_CORTO.AsInteger:= ZQ_UltimoNroCODIGO_CORTO.AsInteger + 1;
 
     DBEApellidoNombre.SetFocus;
     GrupoEditando.Enabled := false;
@@ -347,6 +362,15 @@ begin
 
     id_persona:= ZQ_PersonaID_PERSONA.AsInteger;
     ZQ_Persona.Edit;
+    if ZQ_PersonaCODIGO_CORTO.IsNull then
+    begin
+      ZQ_UltimoNro.Close;
+      ZQ_UltimoNro.Open;
+      if ZQ_UltimoNro.IsEmpty then
+        ZQ_PersonaCODIGO_CORTO.AsInteger:= 1
+      else
+        ZQ_PersonaCODIGO_CORTO.AsInteger:= ZQ_UltimoNroCODIGO_CORTO.AsInteger + 1;
+    end;
 
     DBEApellidoNombre.SetFocus;
     GrupoEditando.Enabled := false;
