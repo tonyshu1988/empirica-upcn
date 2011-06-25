@@ -101,6 +101,7 @@ type
     ZQ_StockFILA: TStringField;
     ZQ_StockCOLUMNA: TStringField;
     ZQ_StockPOSICSUCURSAL: TStringField;
+    CD_Producto_color: TStringField;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -245,6 +246,7 @@ begin
     CD_Producto_idProducto.AsInteger := vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
     CD_Producto_producto.AsString := vsel.ZQ_ProductoNOMBRE.AsString;
     CD_Producto_medida.AsString := vsel.ZQ_ProductoMEDIDA.AsString;
+    CD_Producto_color.AsString := vsel.ZQ_ProductoCOLOR.AsString;
     CD_Producto_marca.AsString := vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
     CD_Producto_tipoArticulo.AsString := vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
     CD_Producto_articulo.AsString := vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
@@ -263,6 +265,7 @@ begin
   if not Assigned(vsel) then
     vsel:= TFBuscarProducto.Create(nil);
   vsel.OnSeleccionar := onSelProducto;
+  vsel.SeleccionarYSalir:= false;
   vsel.ShowModal;
 end;
 
