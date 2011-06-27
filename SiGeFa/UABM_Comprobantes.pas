@@ -497,6 +497,7 @@ type
     procedure PopUpItem_FPagoAgrandarClick(Sender: TObject);
     procedure PopUpItem_ProductoAgrandarClick(Sender: TObject);
     procedure PopUpItem_ProductoOcultarDetalleClick(Sender: TObject);
+    procedure configVisualizacion(); //configuro la pantalla de visualizacion segun el tipo de comprobante
   private
     estadoPantalla: string;
     tipoComprobante: integer;
@@ -504,7 +505,8 @@ type
     vsel: TFBuscarProducto;
     alignAnterior: TAlign;
     grillaActual: string;
-    agrandarPanel: boolean;
+    agrandarPanelFPago: boolean;
+    agrandarPanelProducto: boolean;
     procedure onSelProducto;
     function getColumnIndex(Grid: TDBGrid; Nombre: string): Integer;
   public
@@ -585,7 +587,8 @@ end;
 
 procedure TFABM_Comprobantes.FormCreate(Sender: TObject);
 begin
-  agrandarPanel:=false;
+  agrandarPanelFPago:=false;
+  agrandarPanelProducto:=false;
 
   dm.EKModelo.abrir(ZQ_Cuenta); //abro las cuentas bancarias
   dm.EKModelo.abrir(ZQ_TipoFPago); //abro los tipos de forma de pago  
@@ -1078,6 +1081,41 @@ end;
 //----------------------------------
 
 
+procedure TFABM_Comprobantes.configVisualizacion(); //configuro la pantalla de visualizacion segun el tipo de comprobante
+begin
+  if (ZQ_VerCpbID_TIPO_CPB.AsInteger = CPB_PRESUPUESTO)
+    or (ZQ_VerCpbID_TIPO_CPB.AsInteger = CPB_NOTA_PEDIDO)
+    or (ZQ_VerCpbID_TIPO_CPB.AsInteger = CPB_REMITO_VENTA) then
+  begin
+    ZQ_VerCpb_Producto.Close;
+    ZQ_VerCpb_Producto.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+    ZQ_VerCpb_Producto.Open;
+
+    if agrandarPanelProducto = false then
+    begin
+      agrandarPanelProducto:= true;
+      agrandarPanelFPago:= false;
+      mostrarPanelCompleto(PanelCpbActual_FPago, false);
+      mostrarPanelCompleto(PanelCpbActual_Producto, true);
+    end
+  end
+  else
+  begin
+    ZQ_VerCpb_Fpago.Close;
+    ZQ_VerCpb_Fpago.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+    ZQ_VerCpb_Fpago.Open;
+    configFormaPago(ZQ_VerCpbID_TIPO_CPB.AsInteger, false);
+
+    if agrandarPanelFPago = false then
+    begin
+      agrandarPanelFPago:= true;
+      agrandarPanelProducto:= False;
+      mostrarPanelCompleto(PanelCpbActual_Producto, false);
+      mostrarPanelCompleto(PanelCpbActual_FPago, true);
+    end
+  end;
+end;
+
 
 //------------------------------------------------------------------------------
 //      VISUALIZACION  DE COMPROBANTES
@@ -1085,22 +1123,11 @@ end;
 procedure TFABM_Comprobantes.ZQ_VerCpbAfterScroll(DataSet: TDataSet);
 begin
   if ZQ_VerCpb.IsEmpty then
-  begin
-    ZQ_VerCpb_Fpago.Close;
-    ZQ_VerCpb_Producto.Close;
-
     exit;
-  end;
-
-  ZQ_VerCpb_Producto.Close;
-  ZQ_VerCpb_Producto.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
-  ZQ_VerCpb_Producto.Open;
 
   ZQ_VerCpb_Fpago.Close;
-  ZQ_VerCpb_Fpago.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
-  ZQ_VerCpb_Fpago.Open;
-  configFormaPago(ZQ_VerCpbID_TIPO_CPB.AsInteger, false);
-
+  ZQ_VerCpb_Producto.Close;
+  configVisualizacion;
 end;
 
 
@@ -1511,34 +1538,58 @@ begin
   PanelCpbActual_Producto.Visible:= False;
   PanelCpbActual_FPago.Visible:= False;
 
-  if valor then
+  if valor then //AGRANDAR
   begin
     alignAnterior:= panel.Align;
     panel.Align:= alClient;
     panel.Visible:= true;
+
+    if PopUpItem_FPagoAgrandar.ImageIndex = 14 then
+    begin
+      PopUpItem_FPagoAgrandar.Caption:= 'Reducir';
+      PopUpItem_FPagoAgrandar.ImageIndex:= 15;
+    end;
+
+    if PopUpItem_ProductoAgrandar.ImageIndex = 14 then
+    begin
+      PopUpItem_ProductoAgrandar.Caption:= 'Reducir';
+      PopUpItem_ProductoAgrandar.ImageIndex:= 15;
+    end;
   end
   else
-  begin
+  begin //REDUCIR
     panel.Align:= alignAnterior;
     PanelCpbActual_FPago.Visible:= true;
     PanelCpbActual_FPago.Height:= 100;
     PanelCpbActual_Producto.Visible:= true;
+
+    if PopUpItem_FPagoAgrandar.ImageIndex = 15 then
+    begin
+      PopUpItem_FPagoAgrandar.Caption:= 'Agrandar';
+      PopUpItem_FPagoAgrandar.ImageIndex:= 14;
+    end;
+
+    if PopUpItem_ProductoAgrandar.ImageIndex = 15 then
+    begin
+      PopUpItem_ProductoAgrandar.Caption:= 'Agrandar';
+      PopUpItem_ProductoAgrandar.ImageIndex:= 14;
+    end;
   end
 end;
 
 
 procedure TFABM_Comprobantes.PopUpItem_FPagoAgrandarClick(Sender: TObject);
 begin
-  if agrandarPanel = false then
+  if agrandarPanelFPago = false then
   begin
-    agrandarPanel:= true;
+    agrandarPanelFPago:= true;
     mostrarPanelCompleto(PanelCpbActual_FPago, true);
     PopUpItem_FPagoAgrandar.Caption:= 'Reducir';
     PopUpItem_FPagoAgrandar.ImageIndex:= 15;
   end
   else
   begin
-    agrandarPanel:= false;
+    agrandarPanelFPago:= false;
     mostrarPanelCompleto(PanelCpbActual_FPago, false);
     PopUpItem_FPagoAgrandar.Caption:= 'Agrandar';
     PopUpItem_FPagoAgrandar.ImageIndex:= 14;
@@ -1548,16 +1599,16 @@ end;
 
 procedure TFABM_Comprobantes.PopUpItem_ProductoAgrandarClick(Sender: TObject);
 begin
-  if agrandarPanel = false then
+  if agrandarPanelProducto = false then
   begin
-    agrandarPanel:= true;
+    agrandarPanelProducto:= true;
     mostrarPanelCompleto(PanelCpbActual_Producto, true);
     PopUpItem_ProductoAgrandar.Caption:= 'Reducir';
     PopUpItem_ProductoAgrandar.ImageIndex:= 15;
   end
   else
   begin
-    agrandarPanel:= false;
+    agrandarPanelProducto:= false;
     mostrarPanelCompleto(PanelCpbActual_Producto, false);
     PopUpItem_ProductoAgrandar.Caption:= 'Agrandar';
     PopUpItem_ProductoAgrandar.ImageIndex:= 14;
