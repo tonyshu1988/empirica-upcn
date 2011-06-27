@@ -521,17 +521,9 @@ const
   EDITANDO = 'EDITANDO';
   VIENDO   = 'VIENDO';
 
-//  TIPOS DE COMPROBANTES
-  CPB_PRESUPUESTO  = 14; //se entrega al CLIENTE con los productos cargados para una posible venta. AUTONUMERADO
-  CPB_NOTA_PEDIDO  = 15; //se envia al PROVEEDOR con los productos encargados para una compra. AUTONUMERADO
-  CPB_REMITO_VENTA = 20; //se entrega al CLIENTE para documentar la entrega y/o remisión de la mercadería. AUTONUMERADO
-  CPB_RECIBO_COBRO = 19; //se entrega al CLIENTE como comprobante de un pago efectuado por este. AUTONUMERADO
-  CPB_ORDEN_PAGO   = 18; //se entrega al CLIENTE como comprobante de un pago efectuado a este. AUTONUMERADO (comprobante de tercero).
-//  CPB_FACTURA = ; //.
-
 implementation
 
-uses UPrincipal, UDM, EKModelo;
+uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes;
 
 {$R *.dfm}
 
@@ -591,7 +583,7 @@ begin
   agrandarPanelProducto:=false;
 
   dm.EKModelo.abrir(ZQ_Cuenta); //abro las cuentas bancarias
-  dm.EKModelo.abrir(ZQ_TipoFPago); //abro los tipos de forma de pago  
+  dm.EKModelo.abrir(ZQ_TipoFPago); //abro los tipos de forma de pago
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
@@ -1022,13 +1014,12 @@ end;
 
 procedure TFABM_Comprobantes.btnImprimirClick(Sender: TObject);
 begin
-//  if ZQ_TipoFPago.IsEmpty then
-//    exit;
-//
-//  DM.VariablesReportes(RepTipoFPago);
-//  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-//  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-//  EKVistaPrevia.VistaPrevia;
+  if ZQ_VerCpb.IsEmpty then
+    exit;
+
+  if not Assigned(FImpresion_Comprobantes) then
+    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger);
 end;
 
 
