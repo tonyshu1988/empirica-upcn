@@ -8,7 +8,6 @@ uses
   UUtilidades in 'UUtilidades.pas',
   UAcerca_De in 'UAcerca_De.pas' {FAcerca_De},
   UABMProductos in 'UABMProductos.pas' {FABMProductos},
-  UABMClientes in 'UABMClientes.pas' {FABMClientes},
   UABMEmpresas in 'UABMEmpresas.pas' {FABMEmpresas},
   UBuscarPersona in 'UBuscarPersona.pas' {FBuscarPersona},
   UABM_ArticuloMedida in 'UABM_ArticuloMedida.pas' {FABM_ArticuloMedida},
@@ -34,7 +33,8 @@ uses
   UABM_Precios in 'UABM_Precios.pas' {FABM_Precios},
   UABM_Comprobantes in 'UABM_Comprobantes.pas' {FABM_Comprobantes},
   UCajero in 'UCajero.pas' {FCajero},
-  UBuscarProducto in 'UBuscarProducto.pas' {FBuscarProducto};
+  UBuscarProducto in 'UBuscarProducto.pas' {FBuscarProducto},
+  UImpresion_Comprobantes in 'UImpresion_Comprobantes.pas' {FImpresion_Comprobantes};
 
 {$R *.res}
 
