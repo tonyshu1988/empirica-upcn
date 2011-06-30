@@ -1,6 +1,6 @@
 object FABM_Comprobantes: TFABM_Comprobantes
-  Left = 296
-  Top = 174
+  Left = 314
+  Top = 170
   Width = 892
   Height = 586
   Caption = 'ABM Comprobantes'
@@ -28,7 +28,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
     Width = 265
     Height = 163
     BorderWidth = 4
-    TabOrder = 6
+    TabOrder = 5
     Visible = False
     object RadioGroupTipoComprobante: TRadioGroup
       Left = 5
@@ -76,9 +76,9 @@ object FABM_Comprobantes: TFABM_Comprobantes
   end
   object PanelFondo: TPanel
     Left = 0
-    Top = 19
+    Top = 43
     Width = 876
-    Height = 477
+    Height = 453
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -86,7 +86,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
       Left = 0
       Top = 0
       Width = 876
-      Height = 477
+      Height = 453
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -101,14 +101,14 @@ object FABM_Comprobantes: TFABM_Comprobantes
         Left = 340
         Top = 5
         Width = 6
-        Height = 467
+        Height = 443
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
         Width = 335
-        Height = 467
+        Height = 443
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -116,7 +116,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
           Left = 0
           Top = 0
           Width = 335
-          Height = 467
+          Height = 443
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -278,7 +278,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
         Left = 346
         Top = 5
         Width = 525
-        Height = 467
+        Height = 443
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -287,7 +287,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
           Left = 0
           Top = 0
           Width = 525
-          Height = 205
+          Height = 181
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -295,7 +295,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
             Left = 0
             Top = 0
             Width = 525
-            Height = 67
+            Height = 43
             Align = alClient
             Color = 14606012
             DataSource = DS_VerCpb_Producto
@@ -351,7 +351,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
           end
           object PanelCpbActual_ProductoDetalle: TPanel
             Left = 0
-            Top = 67
+            Top = 43
             Width = 525
             Height = 138
             Align = alBottom
@@ -609,7 +609,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
         end
         object PanelCpbActual_FPago: TPanel
           Left = 0
-          Top = 205
+          Top = 181
           Width = 525
           Height = 100
           Align = alBottom
@@ -624,7 +624,6 @@ object FABM_Comprobantes: TFABM_Comprobantes
             Color = 14606012
             DataSource = DS_VerCpb_Fpago
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            PopupMenu = PopupGridFpago
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
@@ -707,7 +706,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 305
+          Top = 281
           Width = 525
           Height = 162
           Align = alBottom
@@ -903,7 +902,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
       Left = 0
       Top = 0
       Width = 876
-      Height = 477
+      Height = 453
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -959,19 +958,21 @@ object FABM_Comprobantes: TFABM_Comprobantes
           Transparent = False
         end
         object btnBuscarEmpresa: TSpeedButton
-          Left = 11
-          Top = 4
+          Left = 7
+          Top = 11
           Width = 50
           Height = 50
           Hint = 'Buscar una empresa para asociar al comprobante'
+          GroupIndex = 2
           OnClick = btnBuscarEmpresaClick
         end
         object btnBuscarPersona: TSpeedButton
-          Left = 11
-          Top = 55
+          Left = 7
+          Top = 62
           Width = 50
           Height = 50
           Hint = 'Buscar una persona para asociar al comprobante'
+          GroupIndex = 2
           OnClick = btnBuscarPersonaClick
         end
         object Label12: TLabel
@@ -1047,71 +1048,6 @@ object FABM_Comprobantes: TFABM_Comprobantes
           ParentColor = False
           ParentFont = False
           Transparent = True
-        end
-        object Label23: TLabel
-          Left = 66
-          Top = 85
-          Width = 44
-          Height = 13
-          Caption = 'Emisi'#243'n'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label25: TLabel
-          Left = 198
-          Top = 85
-          Width = 49
-          Height = 13
-          Caption = 'Cobrado'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label29: TLabel
-          Left = 330
-          Top = 85
-          Width = 45
-          Height = 13
-          Caption = 'Enviado'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label30: TLabel
-          Left = 462
-          Top = 85
-          Width = 48
-          Height = 13
-          Caption = 'Impreso'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label31: TLabel
-          Left = 594
-          Top = 85
-          Width = 70
-          Height = 13
-          Caption = 'Vencimiento'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
         end
         object PanelEditar_DatosGralProveedor: TPanel
           Left = 66
@@ -1654,79 +1590,197 @@ object FABM_Comprobantes: TFABM_Comprobantes
           DataField = 'OBSERVACION'
           DataSource = DS_Comprobante
           ScrollBars = ssVertical
-          TabOrder = 7
-        end
-        object EKDBDateEmision: TEKDBDateTimePicker
-          Left = 66
-          Top = 99
-          Width = 105
-          Height = 21
-          Date = 40717.702273252320000000
-          Time = 40717.702273252320000000
-          TabOrder = 2
-          DataField = 'FECHA'
-          DataSource = DS_Comprobante
-        end
-        object EKDBDateEnviado: TEKDBDateTimePicker
-          Left = 330
-          Top = 99
-          Width = 105
-          Height = 21
-          Date = 40717.702273252320000000
-          Time = 40717.702273252320000000
           TabOrder = 3
-          DataField = 'FECHA_ENVIADA'
-          DataSource = DS_Comprobante
         end
-        object EKDBDateImpreso: TEKDBDateTimePicker
-          Left = 462
-          Top = 99
-          Width = 105
-          Height = 21
-          Date = 40717.702273252320000000
-          Time = 40717.702273252320000000
-          TabOrder = 5
-          DataField = 'FECHA_IMPRESA'
-          DataSource = DS_Comprobante
-        end
-        object EKDBDateVencimiento: TEKDBDateTimePicker
-          Left = 594
-          Top = 99
-          Width = 105
-          Height = 21
-          Date = 40717.702273252320000000
-          Time = 40717.702273252320000000
-          TabOrder = 6
-          DataField = 'FECHA_VENCIMIENTO'
-          DataSource = DS_Comprobante
-        end
-        object EKDBDateCobrado: TEKDBDateTimePicker
-          Left = 198
-          Top = 99
-          Width = 105
-          Height = 21
-          Date = 40717.702273252320000000
-          Time = 40717.702273252320000000
-          TabOrder = 4
-          DataField = 'FECHA_COBRADA'
-          DataSource = DS_Comprobante
+        object PanelFechas: TPanel
+          Left = 64
+          Top = 82
+          Width = 637
+          Height = 42
+          BevelOuter = bvNone
+          TabOrder = 2
+          object PanelFechaVencimiento: TPanel
+            Left = 508
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 4
+            object Label31: TLabel
+              Left = 11
+              Top = 1
+              Width = 70
+              Height = 13
+              Caption = 'Vencimiento'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateVencimiento: TEKDBDateTimePicker
+              Left = 11
+              Top = 14
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA_VENCIMIENTO'
+              DataSource = DS_Comprobante
+            end
+          end
+          object PanelFechaImpreso: TPanel
+            Left = 381
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 3
+            object Label30: TLabel
+              Left = 11
+              Top = 1
+              Width = 48
+              Height = 13
+              Caption = 'Impreso'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateImpreso: TEKDBDateTimePicker
+              Left = 11
+              Top = 14
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA_IMPRESA'
+              DataSource = DS_Comprobante
+            end
+          end
+          object PanelFechaEnviado: TPanel
+            Left = 254
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 2
+            object Label29: TLabel
+              Left = 11
+              Top = 1
+              Width = 45
+              Height = 13
+              Caption = 'Enviado'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateEnviado: TEKDBDateTimePicker
+              Left = 11
+              Top = 14
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA_ENVIADA'
+              DataSource = DS_Comprobante
+            end
+          end
+          object PanelFechaCobrado: TPanel
+            Left = 127
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 1
+            object Label25: TLabel
+              Left = 11
+              Top = 1
+              Width = 49
+              Height = 13
+              Caption = 'Cobrado'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateCobrado: TEKDBDateTimePicker
+              Left = 11
+              Top = 14
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA_COBRADA'
+              DataSource = DS_Comprobante
+            end
+          end
+          object PanelFechaEmision: TPanel
+            Left = 0
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 0
+            object Label23: TLabel
+              Left = 12
+              Top = 1
+              Width = 44
+              Height = 13
+              Caption = 'Emisi'#243'n'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateEmision: TEKDBDateTimePicker
+              Left = 11
+              Top = 14
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA'
+              DataSource = DS_Comprobante
+            end
+          end
         end
       end
       object PanelEditar_Producto: TPanel
         Left = 5
         Top = 182
         Width = 866
-        Height = 136
+        Height = 112
         Align = alClient
         TabOrder = 1
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
-          Top = 115
+          Top = 91
           Width = 864
           Height = 20
           Align = alBottom
           BevelOuter = bvNone
-          TabOrder = 0
+          TabOrder = 1
           object btnEliminarProducto: TButton
             Left = 164
             Top = 1
@@ -1741,13 +1795,13 @@ object FABM_Comprobantes: TFABM_Comprobantes
           Left = 164
           Top = 1
           Width = 701
-          Height = 114
+          Height = 90
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbProducto
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = Popup_Producto
-          TabOrder = 1
+          TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
@@ -1819,8 +1873,8 @@ object FABM_Comprobantes: TFABM_Comprobantes
               Expanded = False
               FieldName = 'PORC_DESCUENTO'
               Title.Alignment = taCenter
-              Title.Caption = '% Desc.'
-              Width = 52
+              Title.Caption = 'Desc.'
+              Width = 40
               Visible = True
             end
             item
@@ -1860,17 +1914,17 @@ object FABM_Comprobantes: TFABM_Comprobantes
           Left = 1
           Top = 1
           Width = 163
-          Height = 114
+          Height = 90
           Align = alLeft
           BevelOuter = bvNone
           Caption = 'Panel1'
           TabOrder = 2
           DesignSize = (
             163
-            114)
+            90)
           object edImagen: TDBImage
             Left = 3
-            Top = 1
+            Top = -11
             Width = 156
             Height = 112
             Anchors = []
@@ -1878,12 +1932,13 @@ object FABM_Comprobantes: TFABM_Comprobantes
             DataSource = DS_Imagen
             Stretch = True
             TabOrder = 0
+            TabStop = False
           end
         end
       end
       object PanelEditar_FPago: TPanel
         Left = 5
-        Top = 318
+        Top = 294
         Width = 866
         Height = 154
         Align = alBottom
@@ -1895,7 +1950,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
           Height = 20
           Align = alBottom
           BevelOuter = bvNone
-          TabOrder = 0
+          TabOrder = 1
           object lblTotalFormaPago: TLabel
             Left = 515
             Top = 3
@@ -1936,7 +1991,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
           Color = 14606012
           DataSource = DS_CpbFormaPago
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 1
+          TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
@@ -2076,6 +2131,84 @@ object FABM_Comprobantes: TFABM_Comprobantes
       Color = 6974207
       ParentColor = False
       TabOrder = 0
+    end
+  end
+  object PanelFiltro: TPanel
+    Left = 0
+    Top = 19
+    Width = 876
+    Height = 24
+    Align = alTop
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 7
+    object BtnFiltro_Todos: TSpeedButton
+      Left = 55
+      Top = 3
+      Width = 94
+      Height = 18
+      GroupIndex = 1
+      Down = True
+      Caption = 'Todos'
+      Layout = blGlyphBottom
+      OnClick = AplicarFiltro
+    end
+    object BtnFiltro_Presupuesto: TSpeedButton
+      Left = 151
+      Top = 3
+      Width = 94
+      Height = 18
+      GroupIndex = 1
+      Caption = 'Presupuestos'
+      Layout = blGlyphBottom
+      OnClick = AplicarFiltro
+    end
+    object BtnFiltro_NotaPedido: TSpeedButton
+      Left = 247
+      Top = 3
+      Width = 94
+      Height = 18
+      GroupIndex = 1
+      Caption = 'Notas Pedido'
+      Layout = blGlyphBottom
+      OnClick = AplicarFiltro
+    end
+    object BtnFiltro_OrdenPago: TSpeedButton
+      Left = 343
+      Top = 3
+      Width = 94
+      Height = 18
+      GroupIndex = 1
+      Caption = 'Ordenes Pago'
+      Layout = blGlyphBottom
+      OnClick = AplicarFiltro
+    end
+    object BtnFiltro_Remito: TSpeedButton
+      Left = 439
+      Top = 3
+      Width = 94
+      Height = 18
+      GroupIndex = 1
+      Caption = 'Remitos'
+      Layout = blGlyphBottom
+      OnClick = AplicarFiltro
+    end
+    object BtnFiltro_Recibo: TSpeedButton
+      Left = 535
+      Top = 3
+      Width = 94
+      Height = 18
+      GroupIndex = 1
+      Caption = 'Recibos'
+      Layout = blGlyphBottom
+      OnClick = AplicarFiltro
+    end
+    object Label39: TLabel
+      Left = 19
+      Top = 5
+      Width = 33
+      Height = 13
+      Caption = 'Filtro:'
     end
   end
   object dxBarABM: TdxBarManager
@@ -2606,9 +2739,9 @@ object FABM_Comprobantes: TFABM_Comprobantes
       AutoGrayScale = False
     end
     object btnImprimir: TdxBarLargeButton
-      Caption = 'Imprimir'
+      Caption = 'Comprobante'
       Category = 0
-      Hint = 'Imprimir'
+      Hint = 'Imprimir el comprobante seleccionado'
       Visible = ivAlways
       ImageIndex = 28
       OnClick = btnImprimirClick
@@ -3908,7 +4041,8 @@ object FABM_Comprobantes: TFABM_Comprobantes
         'po_cpb)'
       
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
-        '_comp_estado)')
+        '_comp_estado)'
+      'order by cpb.fecha desc')
     Params = <>
     Left = 34
     Top = 52
@@ -3937,9 +4071,6 @@ object FABM_Comprobantes: TFABM_Comprobantes
       FieldName = 'CODIGO'
       Size = 50
     end
-    object ZQ_VerCpbFECHA: TDateTimeField
-      FieldName = 'FECHA'
-    end
     object ZQ_VerCpbOBSERVACION: TStringField
       FieldName = 'OBSERVACION'
       Size = 500
@@ -3956,18 +4087,21 @@ object FABM_Comprobantes: TFABM_Comprobantes
       FieldName = 'IMPORTE_TOTAL'
       currency = True
     end
-    object ZQ_VerCpbPORC_IVA: TFloatField
-      FieldName = 'PORC_IVA'
-    end
     object ZQ_VerCpbIMPORTE_IVA: TFloatField
       FieldName = 'IMPORTE_IVA'
       currency = True
     end
-    object ZQ_VerCpbPORC_DESCUENTO: TFloatField
-      FieldName = 'PORC_DESCUENTO'
-    end
     object ZQ_VerCpbIMPORTE_DESCUENTO: TFloatField
       FieldName = 'IMPORTE_DESCUENTO'
+      currency = True
+    end
+    object ZQ_VerCpbPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+      DisplayFormat = '0.00'
+    end
+    object ZQ_VerCpbPORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+      DisplayFormat = '0.00'
     end
     object ZQ_VerCpbENCABEZADO: TStringField
       FieldName = 'ENCABEZADO'
@@ -3976,6 +4110,9 @@ object FABM_Comprobantes: TFABM_Comprobantes
     object ZQ_VerCpbPIE: TStringField
       FieldName = 'PIE'
       Size = 500
+    end
+    object ZQ_VerCpbFECHA: TDateTimeField
+      FieldName = 'FECHA'
     end
     object ZQ_VerCpbFECHA_COBRADA: TDateField
       FieldName = 'FECHA_COBRADA'
@@ -3988,6 +4125,9 @@ object FABM_Comprobantes: TFABM_Comprobantes
     end
     object ZQ_VerCpbFECHA_VENCIMIENTO: TDateField
       FieldName = 'FECHA_VENCIMIENTO'
+    end
+    object ZQ_VerCpbFECHA_ANULADO: TDateField
+      FieldName = 'FECHA_ANULADO'
     end
     object ZQ_VerCpbSUCURSAL: TStringField
       FieldName = 'SUCURSAL'
@@ -4032,9 +4172,6 @@ object FABM_Comprobantes: TFABM_Comprobantes
     object ZQ_VerCpbNUMERO_CPB: TIntegerField
       FieldName = 'NUMERO_CPB'
       DisplayFormat = '00000000'
-    end
-    object ZQ_VerCpbFECHA_ANULADO: TDateField
-      FieldName = 'FECHA_ANULADO'
     end
   end
   object ZQ_VerCpb_Fpago: TZQuery
@@ -4277,7 +4414,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
   object EKOrd_VerCpb: TEKOrdenarGrilla
     Grilla = DBGridListaCpb
     FuenteNormal = []
-    Ordenar = True
+    Ordenar = False
     MoverColumna = True
     Left = 34
     Top = 152
@@ -4285,15 +4422,15 @@ object FABM_Comprobantes: TFABM_Comprobantes
   object EKOrd_VerCpb_Fpago: TEKOrdenarGrilla
     Grilla = DBGridCpbActual_FPago
     FuenteNormal = []
-    Ordenar = True
+    Ordenar = False
     MoverColumna = True
     Left = 769
     Top = 296
   end
   object EKOrd_VerCpb_Producto: TEKOrdenarGrilla
-    Grilla = DBGridCpbActual_FPago
+    Grilla = DBGridCpbActual_Producto
     FuenteNormal = []
-    Ordenar = True
+    Ordenar = False
     MoverColumna = True
     Left = 769
     Top = 132
@@ -5247,11 +5384,6 @@ object FABM_Comprobantes: TFABM_Comprobantes
     Images = FPrincipal.Iconos_Menu_16
     Left = 656
     Top = 263
-    object PopUpItem_ProductoAgrandar: TMenuItem
-      Caption = 'Agrandar'
-      ImageIndex = 14
-      OnClick = PopUpItem_ProductoAgrandarClick
-    end
     object PopUpItem_ProductoOcultarDetalle: TMenuItem
       Caption = 'Ocultar Detalle'
       OnClick = PopUpItem_ProductoOcultarDetalleClick

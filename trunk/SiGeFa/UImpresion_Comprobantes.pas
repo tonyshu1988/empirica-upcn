@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, jpeg, ExtCtrls;
+  EKVistaPreviaQR, QRCtrls, QuickRpt, jpeg, ExtCtrls, EKNumeroATexto,
+  EKDbSuma;
 
 type
   TFImpresion_Comprobantes = class(TForm)
@@ -23,7 +24,6 @@ type
     RepRemito_DIRECCION: TQRLabel;
     RepRemitos_EMPRESA: TQRLabel;
     QRShape1: TQRShape;
-    QRLabel146: TQRLabel;
     QRLabel74: TQRLabel;
     QRLabel75: TQRLabel;
     RepRemito_DUENIO: TQRLabel;
@@ -38,16 +38,6 @@ type
     QRLabel73: TQRLabel;
     QRLabel76: TQRLabel;
     RepPresupuesto_DUENIO: TQRLabel;
-    QRSubDetail9: TQRSubDetail;
-    QRDBText31: TQRDBText;
-    QRDBText32: TQRDBText;
-    pre_unitario: TQRDBText;
-    QRDBText33: TQRDBText;
-    QRDBText34: TQRDBText;
-    QRDBText35: TQRDBText;
-    QRDBText36: TQRDBText;
-    QRDBText37: TQRDBText;
-    QRBand7: TQRBand;
     RepRecibo: TQuickRep;
     QRBand10: TQRBand;
     RepRecibo_SITUACIONIVAYCUIT: TQRLabel;
@@ -201,62 +191,114 @@ type
     QRDBText89: TQRDBText;
     QRDBText90: TQRDBText;
     QRDBText91: TQRDBText;
+    ZQ_FpagoNOMBRE_TIPO: TStringField;
+    ChildBand1: TQRChildBand;
+    QRBand9: TQRBand;
     ChildBand2: TQRChildBand;
+    QRSubDetail3: TQRSubDetail;
+    QRBand18: TQRBand;
+    QRBand19: TQRBand;
+    QRLabel19: TQRLabel;
+    QRLabel32: TQRLabel;
+    QRDBText57: TQRDBText;
+    QRDBText72: TQRDBText;
+    QRLabel34: TQRLabel;
+    QRlblRecibo_PiePagina: TQRLabel;
+    QRDBText73: TQRDBText;
+    QRDBText81: TQRDBText;
+    QRDBText83: TQRDBText;
+    QRDBText84: TQRDBText;
+    QRLabel100: TQRLabel;
+    QRlblRecibo_ImporteTotal: TQRLabel;
+    EKDbSumaFpago: TEKDbSuma;
+    EKNumeroALetras: TEKNumeroALetras;
+    QRLblRecibo_ImporteEnLetras: TQRLabel;
+    ChildBand4: TQRChildBand;
+    QRLabel99: TQRLabel;
+    QRLabel98: TQRLabel;
+    QRLabel97: TQRLabel;
     QRLabel89: TQRLabel;
-    QRDBText11: TQRDBText;
-    ChildBand3: TQRChildBand;
+    QRLabel33: TQRLabel;
+    QRLabel36: TQRLabel;
+    QRBand7: TQRBand;
     QRLabel4: TQRLabel;
     QRDBText7: TQRDBText;
-    ChildBand5: TQRChildBand;
-    QRLabel9: TQRLabel;
-    QRDBText15: TQRDBText;
-    ColumnHeaderBand1: TQRBand;
+    ChildBand3: TQRChildBand;
     ChildBand6: TQRChildBand;
-    QRLabel108: TQRLabel;
-    QRLabel120: TQRLabel;
-    QRLabel115: TQRLabel;
-    QRLabel122: TQRLabel;
-    QRLabel121: TQRLabel;
-    QRLabel118: TQRLabel;
-    QRLabel119: TQRLabel;
-    PageFooterBand1: TQRBand;
-    SummaryBand1: TQRBand;
-    QRSubDetail5: TQRSubDetail;
-    QRDBText81: TQRDBText;
-    QRDBText72: TQRDBText;
-    QRDBText84: TQRDBText;
-    QRDBText82: TQRDBText;
-    QRDBText83: TQRDBText;
-    QRDBText73: TQRDBText;
-    ZQ_FpagoNOMBRE_TIPO: TStringField;
-    QRlblPieDePaginaRecibo: TQRLabel;
-    ColumnHeaderBand2: TQRBand;
-    SummaryBand2: TQRBand;
-    QrtImporteProductosPresupuesto: TQRLabel;
-    QRLabel56: TQRLabel;
-    QRLabel52: TQRLabel;
+    QRBand12: TQRBand;
     QRLabel26: TQRLabel;
+    QRLabel49: TQRLabel;
+    QRlblPresupuesto_ImporteTotal: TQRLabel;
+    QRBand13: TQRBand;
+    QRlblPresupuesto_PiePagina: TQRLabel;
+    QRLabel52: TQRLabel;
+    QRLabel55: TQRLabel;
     QRLabel57: TQRLabel;
-    pre_tit_bonif: TQRLabel;
-    pre_tit_unitario: TQRLabel;
+    QRLabel59: TQRLabel;
+    QRLabel62: TQRLabel;
+    QRLabel64: TQRLabel;
+    QRSubDetail4: TQRSubDetail;
+    QRDBText11: TQRDBText;
+    QRDBText31: TQRDBText;
+    QRDBText33: TQRDBText;
+    QRDBText34: TQRDBText;
+    QRDBText35: TQRDBText;
+    QRDBText36: TQRDBText;
+    QRDBText37: TQRDBText;
+    QRLabel50: TQRLabel;
     QRLabel51: TQRLabel;
-    QRlblPieDePaginaPresupuesto: TQRLabel;
+    QRLabel54: TQRLabel;
     QRDBText17: TQRDBText;
+    EKDbSumaProducto: TEKDbSuma;
+    QRDBLogo: TQRDBImage;
+    QRDBImage1: TQRDBImage;
+    QRDBImage3: TQRDBImage;
+    QRBand5: TQRBand;
+    QRLabel3: TQRLabel;
+    QRDBText15: TQRDBText;
+    ChildBand5: TQRChildBand;
+    ChildBand7: TQRChildBand;
+    QRBand14: TQRBand;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRlblRemito_CantidadTotal: TQRLabel;
+    QRBand15: TQRBand;
+    QRlblRemito_PiePagina: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRLabel18: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRLabel67: TQRLabel;
+    QRDBText54: TQRDBText;
+    QRLabel70: TQRLabel;
+    QRSubDetail2: TQRSubDetail;
+    QRDBText43: TQRDBText;
+    QRDBText47: TQRDBText;
+    QRDBText48: TQRDBText;
+    QRDBText32: TQRDBText;
+    QRDBText50: TQRDBText;
+    QRDBText52: TQRDBText;
+    QRLabel10: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRLabel56: TQRLabel;
     RepNotaPedido: TQuickRep;
     QRBand1: TQRBand;
-    RepNotaPedido_SITUACIONIVAYCUIT: TQRLabel;
-    RepNotaPedido_TELEFONOS: TQRLabel;
-    RepNotaPedido_DIRECCION: TQRLabel;
-    RepNotaPedido_EMPRESA: TQRLabel;
     QRShape2: TQRShape;
-    QRLabel13: TQRLabel;
-    QRLabel14: TQRLabel;
-    RepNotaPedido_DUENIO: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRLabel24: TQRLabel;
     QRDBText5: TQRDBText;
     QRDBText6: TQRDBText;
     QRDBText8: TQRDBText;
-    QRLabel17: TQRLabel;
-    QRSubDetail6: TQRSubDetail;
+    QRLabel27: TQRLabel;
+    QRDBImage2: TQRDBImage;
+    QRBand2: TQRBand;
+    QRLabel28: TQRLabel;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel31: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRLabel44: TQRLabel;
+    QRLabel45: TQRLabel;
     QRDBText9: TQRDBText;
     QRDBText18: TQRDBText;
     QRDBText19: TQRDBText;
@@ -264,63 +306,102 @@ type
     QRDBText21: TQRDBText;
     QRDBText22: TQRDBText;
     QRDBText23: TQRDBText;
-    QRDBText24: TQRDBText;
-    QRDBText25: TQRDBText;
-    QRBand2: TQRBand;
-    QRlblPieDePaginaNotaPedido: TQRLabel;
     QRBand3: TQRBand;
-    QRLabel20: TQRLabel;
-    QRLabel21: TQRLabel;
-    QRLabel22: TQRLabel;
-    QRLabel24: TQRLabel;
-    QRLabel25: TQRLabel;
-    QRLabel27: TQRLabel;
-    QRLabel28: TQRLabel;
+    QRLabel46: TQRLabel;
+    QRDBText24: TQRDBText;
+    QRChildBand2: TQRChildBand;
+    QRLabel47: TQRLabel;
+    QRDBText25: TQRDBText;
+    QRChildBand3: TQRChildBand;
+    QRLabel102: TQRLabel;
+    QRLabel106: TQRLabel;
+    QRLabel115: TQRLabel;
+    QRLabel116: TQRLabel;
+    QRLabel117: TQRLabel;
+    QRLabel118: TQRLabel;
+    QRBand4: TQRBand;
+    QRLabel119: TQRLabel;
+    QRLabel120: TQRLabel;
+    QRlblNotaPedido_CantidadTotal: TQRLabel;
+    QRBand8: TQRBand;
+    QRlblNotaPedido_PiePagina: TQRLabel;
+    QRSubDetail5: TQRSubDetail;
     QRDBText26: TQRDBText;
     QRDBText27: TQRDBText;
     QRDBText29: TQRDBText;
     QRDBText30: TQRDBText;
     QRDBText38: TQRDBText;
     QRDBText39: TQRDBText;
+    QRLabel21: TQRLabel;
+    QRLabel124: TQRLabel;
+    RepNotaPedido_SITUACIONIVAYCUIT: TQRLabel;
+    RepNotaPedido_TELEFONOS: TQRLabel;
+    RepNotaPedido_DIRECCION: TQRLabel;
+    RepNotaPedido_EMPRESA: TQRLabel;
+    RepNotaPedido_DUENIO: TQRLabel;
+    RepOrdenPago: TQuickRep;
+    QRBand16: TQRBand;
+    RepOrdenPago_SITUACIONIVAYCUIT: TQRLabel;
+    RepOrdenPago_TELEFONOS: TQRLabel;
+    RepOrdenPago_DIRECCION: TQRLabel;
     QRDBText41: TQRDBText;
-    QRChildBand3: TQRChildBand;
-    QRLabel29: TQRLabel;
-    QRDBText42: TQRDBText;
-    QRBand4: TQRBand;
-    QRLabel30: TQRLabel;
-    QRLabel31: TQRLabel;
-    QRLabel43: TQRLabel;
-    QRLabel44: TQRLabel;
-    QRLabel45: TQRLabel;
-    QRLabel46: TQRLabel;
-    QRLabel47: TQRLabel;
-    QRBand8: TQRBand;
+    RepOrdenPago_EMPRESA: TQRLabel;
+    QRShape5: TQRShape;
     QRLabel48: TQRLabel;
-    QRLabel102: TQRLabel;
-    QRLabel106: TQRLabel;
-    QRBand5: TQRBand;
-    QRLabel3: TQRLabel;
-    QRLabel8: TQRLabel;
-    QRLabel10: TQRLabel;
-    QRLabel11: TQRLabel;
-    QRLabel12: TQRLabel;
-    QRLabel15: TQRLabel;
-    QRLabel18: TQRLabel;
-    QRSubDetail1: TQRSubDetail;
-    SummaryBand3: TQRBand;
-    PageFooterBand2: TQRBand;
-    QRlblPieDePaginaRemito: TQRLabel;
-    QRDBText43: TQRDBText;
-    QRDBText47: TQRDBText;
-    QRDBText48: TQRDBText;
-    QRDBText50: TQRDBText;
-    QRDBText52: TQRDBText;
+    QRLabel65: TQRLabel;
+    QRDBText42: TQRDBText;
+    RepOrdenPago_DUENIO: TQRLabel;
     QRDBText53: TQRDBText;
-    QRDBText54: TQRDBText;
+    QRLabel71: TQRLabel;
+    QRDBImage4: TQRDBImage;
+    QRBand17: TQRBand;
+    QRLabel77: TQRLabel;
+    QRLabel78: TQRLabel;
+    QRLabel80: TQRLabel;
+    QRLabel81: TQRLabel;
+    QRLabel82: TQRLabel;
+    QRLabel83: TQRLabel;
+    QRLabel84: TQRLabel;
     QRDBText55: TQRDBText;
     QRDBText56: TQRDBText;
-    QRLabel23: TQRLabel;
-    QRLabel32: TQRLabel;
+    QRDBText64: TQRDBText;
+    QRDBText65: TQRDBText;
+    QRDBText66: TQRDBText;
+    QRDBText67: TQRDBText;
+    QRDBText69: TQRDBText;
+    QRChildBand1: TQRChildBand;
+    QRLabel88: TQRLabel;
+    QRlblOrdenPago_ImporteEnLetras: TQRLabel;
+    QRBand20: TQRBand;
+    QRLabel91: TQRLabel;
+    QRDBText70: TQRDBText;
+    QRChildBand4: TQRChildBand;
+    QRLabel92: TQRLabel;
+    QRSubDetail1: TQRSubDetail;
+    QRDBText71: TQRDBText;
+    QRDBText74: TQRDBText;
+    QRDBText75: TQRDBText;
+    QRDBText76: TQRDBText;
+    QRDBText77: TQRDBText;
+    QRBand21: TQRBand;
+    QRLabel93: TQRLabel;
+    QRLabel94: TQRLabel;
+    QRlblOrdenPago_ImporteTotal: TQRLabel;
+    QRBand22: TQRBand;
+    QRlblOrdenPago_PiePagina: TQRLabel;
+    QRChildBand5: TQRChildBand;
+    QRLabel105: TQRLabel;
+    QRLabel107: TQRLabel;
+    QRLabel108: TQRLabel;
+    QRLabel109: TQRLabel;
+    QRLabel110: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRLabel17: TQRLabel;
+    QRLabel20: TQRLabel;
+    QRLabel25: TQRLabel;
+    QRLabel66: TQRLabel;
+    QRLabel90: TQRLabel;
   private
     { Private declarations }
   public
@@ -386,63 +467,94 @@ begin
 end;
 
 
+//RECIBOS
 procedure TFImpresion_Comprobantes.imprimirRecibo();
+var
+  ImporteTotal: double;
 begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  QRlblPieDePaginaRecibo.Caption:= '';
+  ImporteTotal:= EKDbSumaFpago.SumCollection[0].sumvalue;
+  EKNumeroALetras.Numero := ImporteTotal;
+  QRLblRecibo_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+  QRlblRecibo_ImporteTotal.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
+
+  QRlblRecibo_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   //DM.VariablesReportes(RepRecibo);
   EKVistaPrevia.Reporte:= RepRecibo;
   EKVistaPrevia.VistaPrevia;
 end;
 
 
+//PRESUPUESTO
 procedure TFImpresion_Comprobantes.imprimirPresupuesto();
 begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  QRlblPieDePaginaPresupuesto.Caption:= '';
+  QRlblPresupuesto_ImporteTotal.Caption := FormatFloat('$ ###,###,###,##0.00', ZQ_ComprobanteBASE_IMPONIBLE.AsFloat);
+
+  QRlblPresupuesto_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   //DM.VariablesReportes(RepPresupuesto);
   EKVistaPrevia.Reporte:= RepPresupuesto;
   EKVistaPrevia.VistaPrevia;
 end;
 
 
-procedure TFImpresion_Comprobantes.imprimirNotaPedido();
-begin
-  if ZQ_Comprobante.IsEmpty then
-    exit;
-
-  QRlblPieDePaginaNotaPedido.Caption:= '';
-  //DM.VariablesReportes(RepNotaPedido);
-  EKVistaPrevia.Reporte:= RepNotaPedido;
-  EKVistaPrevia.VistaPrevia;
-end;
-
-
+//REMITO
 procedure TFImpresion_Comprobantes.imprimirRemito();
+var
+  cantidadProductos: Double;
 begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  QRlblPieDePaginaRemito.Caption:= '';
+  cantidadProductos:= EKDbSumaProducto.SumCollection[0].sumvalue;
+  QRlblRemito_CantidadTotal.Caption := FormatFloat('0.00', cantidadProductos);
+
+  QRlblRemito_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   //DM.VariablesReportes(RepRemito);
   EKVistaPrevia.Reporte:= RepRemito;
   EKVistaPrevia.VistaPrevia;
 end;
 
 
-procedure TFImpresion_Comprobantes.imprimirOrdenPago();
+//NOTA PEDIDO
+procedure TFImpresion_Comprobantes.imprimirNotaPedido();
+var
+  cantidadProductos: Double;
 begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-//  QRlblPieDePaginaRecibo.Caption:= '';
-//  DM.VariablesReportes(RepRecibo);
-//  EKVistaPrevia.Reporte:= RepRecibo;
-//  EKVistaPrevia.VistaPrevia;
+  cantidadProductos:= EKDbSumaProducto.SumCollection[0].sumvalue;
+  QRlblNotaPedido_CantidadTotal.Caption := FormatFloat('0.00', cantidadProductos);
+
+  QRlblNotaPedido_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  //DM.VariablesReportes(RepNotaPedido);
+  EKVistaPrevia.Reporte:= RepNotaPedido;
+  EKVistaPrevia.VistaPrevia;
+end;
+
+
+//ORDEN PAGO
+procedure TFImpresion_Comprobantes.imprimirOrdenPago();
+var
+  ImporteTotal: double;
+begin
+  if ZQ_Comprobante.IsEmpty then
+    exit;
+
+  ImporteTotal:= EKDbSumaFpago.SumCollection[0].sumvalue;
+  EKNumeroALetras.Numero := ImporteTotal;
+  QRlblOrdenPago_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+  QRlblOrdenPago_ImporteTotal.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
+
+  QRlblOrdenPago_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  //DM.VariablesReportes(RepNotaPedido);
+  EKVistaPrevia.Reporte:= RepOrdenPago;
+  EKVistaPrevia.VistaPrevia;
 end;
 
 
