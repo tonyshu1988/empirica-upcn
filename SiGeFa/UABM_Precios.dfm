@@ -16,6 +16,7 @@ object FABM_Precios: TFABM_Precios
   Scaled = False
   Visible = True
   OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PanelContenedor: TPanel
@@ -198,8 +199,8 @@ object FABM_Precios: TFABM_Precios
     end
     object RepListaPrecios: TQuickRep
       Tag = 99
-      Left = 49
-      Top = 89
+      Left = 113
+      Top = 65
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -207,7 +208,7 @@ object FABM_Precios: TFABM_Precios
       Frame.DrawBottom = False
       Frame.DrawLeft = False
       Frame.DrawRight = False
-      DataSet = ZQ_Productos
+      DataSet = CDSZQ_Productos
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -342,7 +343,7 @@ object FABM_Precios: TFABM_Precios
             52.916666666666670000
             1145.645833333333000000
             95.250000000000000000
-            478.895833333333300000)
+            478.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -441,8 +442,8 @@ object FABM_Precios: TFABM_Precios
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Productos
-          DataField = 'COEF_GANANCIA'
+          DataSet = CDSZQ_Productos
+          DataField = 'coef_ganancia'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -468,7 +469,7 @@ object FABM_Precios: TFABM_Precios
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Productos
+          DataSet = CDSZQ_Productos
           DataField = 'NOMBRE_PRODUCTO'
           Transparent = False
           WordWrap = True
@@ -495,7 +496,7 @@ object FABM_Precios: TFABM_Precios
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Productos
+          DataSet = CDSZQ_Productos
           DataField = 'PRECIO_COSTO'
           Transparent = False
           WordWrap = True
@@ -522,7 +523,7 @@ object FABM_Precios: TFABM_Precios
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Productos
+          DataSet = CDSZQ_Productos
           DataField = 'importe_venta_cliente'
           Transparent = False
           WordWrap = True
@@ -549,7 +550,7 @@ object FABM_Precios: TFABM_Precios
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Productos
+          DataSet = CDSZQ_Productos
           DataField = 'MEDIDA'
           Transparent = False
           WordWrap = True
@@ -576,7 +577,7 @@ object FABM_Precios: TFABM_Precios
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Productos
+          DataSet = CDSZQ_Productos
           DataField = 'ARTICULO'
           Transparent = False
           WordWrap = True
@@ -603,7 +604,7 @@ object FABM_Precios: TFABM_Precios
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Productos
+          DataSet = CDSZQ_Productos
           DataField = 'TIPO_ARTICULO'
           Transparent = False
           WordWrap = True
@@ -2739,5 +2740,39 @@ object FABM_Precios: TFABM_Precios
     ShowModal = False
     Left = 73
     Top = 425
+  end
+  object CDSZQ_Productos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProvider1'
+    Left = 577
+    Top = 481
+    object CDSZQ_Productosnombre_producto: TStringField
+      FieldName = 'nombre_producto'
+      Size = 50
+    end
+    object CDSZQ_Productostipo_articulo: TStringField
+      FieldName = 'tipo_articulo'
+      Size = 50
+    end
+    object CDSZQ_Productosarticulo: TStringField
+      FieldName = 'articulo'
+      Size = 50
+    end
+    object CDSZQ_Productosmedida: TStringField
+      FieldName = 'medida'
+      Size = 30
+    end
+    object CDSZQ_Productosimporte_venta_cliente: TFloatField
+      FieldName = 'importe_venta_cliente'
+      currency = True
+    end
+    object CDSZQ_Productosprecio_costo: TFloatField
+      FieldName = 'precio_costo'
+      currency = True
+    end
+    object CDSZQ_Productoscoef_ganancia: TFloatField
+      FieldName = 'coef_ganancia'
+    end
   end
 end

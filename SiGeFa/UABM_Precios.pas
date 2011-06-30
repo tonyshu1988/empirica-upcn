@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
   ZStoredProcedure, ZSqlUpdate, EKOrdenarGrilla, mxNativeExcel, mxExport, UBuscarPersona,
-  QRCtrls, QuickRpt, EKVistaPreviaQR;
+  QRCtrls, QuickRpt, EKVistaPreviaQR, DBClient, Provider;
 
 type
   TFABM_Precios = class(TForm)
@@ -122,6 +122,14 @@ type
     QRLabel14: TQRLabel;
     QRDBText14: TQRDBText;
     QRDBText15: TQRDBText;
+    CDSZQ_Productos: TClientDataSet;
+    CDSZQ_Productosnombre_producto: TStringField;
+    CDSZQ_Productostipo_articulo: TStringField;
+    CDSZQ_Productosarticulo: TStringField;
+    CDSZQ_Productosmedida: TStringField;
+    CDSZQ_Productosimporte_venta_cliente: TFloatField;
+    CDSZQ_Productosprecio_costo: TFloatField;
+    CDSZQ_Productoscoef_ganancia: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -134,6 +142,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnImprimirClick(Sender: TObject);
     procedure ZQ_ProductosCalcFields(DataSet: TDataSet);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
@@ -322,9 +331,15 @@ end;
 procedure TFABM_Precios.btnSeleccionarClick(Sender: TObject);
 begin
   if (dgMultiSelect	in DBGridProductos.Options) then
-    DBGridProductos.Options:=DBGridProductos.Options - [dgMultiSelect]
+  begin
+    DBGridProductos.Options:=DBGridProductos.Options - [dgMultiSelect];
+    btnSeleccionar.AutoGrayScale := false;
+  end
   else
+  begin
     DBGridProductos.Options:=DBGridProductos.Options + [dgMultiSelect];
+    btnSeleccionar.AutoGrayScale := true;
+  end;
 
   DBGridProductos.SetFocus;
 end;
@@ -358,9 +373,48 @@ CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABMImportes);
 end;
 
 procedure TFABM_Precios.btnImprimirClick(Sender: TObject);
+var
+i : integer;
 begin
   if ZQ_Productos.IsEmpty then
     exit;
+
+  if (dgMultiSelect	in DBGridProductos.Options) then
+  begin
+    if DBGridProductos.SelectedRows.Count>0 then
+    begin
+      with DBGridProductos.DataSource.DataSet do
+        for i:=0 to DBGridProductos.SelectedRows.Count-1 do
+        begin
+          GotoBookmark(pointer(DBGridProductos.SelectedRows.Items[i]));
+          CDSZQ_Productos.Append;
+          CDSZQ_Productosnombre_producto.AsString := ZQ_ProductosNOMBRE_PRODUCTO.AsString;
+          CDSZQ_Productostipo_articulo.AsString := ZQ_ProductosTIPO_ARTICULO.AsString;
+          CDSZQ_Productosarticulo.AsString := ZQ_ProductosARTICULO.AsString;
+          CDSZQ_Productosmedida.AsString := ZQ_ProductosMEDIDA.AsString;
+          CDSZQ_Productosimporte_venta_cliente.AsFloat := ZQ_Productosimporte_venta_cliente.AsFloat;
+          CDSZQ_Productosprecio_costo.AsFloat := ZQ_ProductosPRECIO_COSTO.AsFloat;
+          CDSZQ_Productoscoef_ganancia.AsFloat := ZQ_ProductosCOEF_GANANCIA.AsFloat;
+        end;
+    end
+  end
+  else
+  begin
+    ZQ_Productos.First;
+    while not(ZQ_Productos.Eof) do
+    begin
+      CDSZQ_Productos.Append;
+      CDSZQ_Productosnombre_producto.AsString := ZQ_ProductosNOMBRE_PRODUCTO.AsString;
+      CDSZQ_Productostipo_articulo.AsString := ZQ_ProductosTIPO_ARTICULO.AsString;
+      CDSZQ_Productosarticulo.AsString := ZQ_ProductosARTICULO.AsString;
+      CDSZQ_Productosmedida.AsString := ZQ_ProductosMEDIDA.AsString;
+      CDSZQ_Productosimporte_venta_cliente.AsFloat := ZQ_Productosimporte_venta_cliente.AsFloat;
+      CDSZQ_Productosprecio_costo.AsFloat := ZQ_ProductosPRECIO_COSTO.AsFloat;
+      CDSZQ_Productoscoef_ganancia.AsFloat := ZQ_ProductosCOEF_GANANCIA.AsFloat;
+      ZQ_Productos.Next;
+    end;
+  end;
+
 
   if (Application.MessageBox('Desea Selecionar algun cliente en particular para imprimir esta lista de precios?','ABM Precios',MB_YESNO+MB_ICONQUESTION) = IDYES) then
   begin
@@ -396,13 +450,18 @@ begin
     EKVistaPreviaListaPrecios.VistaPrevia;
   end;
 
-
+  CDSZQ_Productos.EmptyDataSet;
 end;
 
 procedure TFABM_Precios.ZQ_ProductosCalcFields(DataSet: TDataSet);
 begin
 ZQ_Productosimporte_venta_cliente.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat-(ZQ_ProductosPRECIO_VENTA.AsFloat*DescuentoCliente);
 
+end;
+
+procedure TFABM_Precios.FormCreate(Sender: TObject);
+begin
+CDSZQ_Productos.CreateDataSet;
 end;
 
 end.
