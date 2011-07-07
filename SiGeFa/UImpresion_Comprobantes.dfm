@@ -19,7 +19,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     Top = 0
     Width = 977
     Height = 553
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -105,7 +105,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
           BandType = rbPageHeader
-          object RepRecibo_SITUACIONIVAYCUIT: TQRLabel
+          object RepRecibo_RENGLON4: TQRLabel
             Left = 112
             Top = 71
             Width = 280
@@ -124,7 +124,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRecibo_SITUACIONIVAYCUIT'
+            Caption = 'RepRecibo_RENGLON4'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -137,7 +137,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepRecibo_TELEFONOS: TQRLabel
+          object RepRecibo_RENGLON3: TQRLabel
             Left = 112
             Top = 58
             Width = 280
@@ -156,7 +156,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRecibo_TELEFONOS'
+            Caption = 'RepRecibo_RENGLON3'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -169,7 +169,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepRecibo_DIRECCION: TQRLabel
+          object RepRecibo_RENGLON2: TQRLabel
             Left = 112
             Top = 45
             Width = 280
@@ -188,7 +188,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRecibo_DIRECCION'
+            Caption = 'RepRecibo_RENGLON2'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -234,7 +234,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 7
           end
-          object RepRecibo_EMPRESA: TQRLabel
+          object RepRecibo_TITULO: TQRLabel
             Left = 112
             Top = 9
             Width = 280
@@ -253,7 +253,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRecibo_EMPRESA'
+            Caption = 'RepRecibo_TITULO'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -413,7 +413,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 7
           end
-          object RepRecibo_DUENIO: TQRLabel
+          object RepRecibo_RENGLON1: TQRLabel
             Left = 112
             Top = 32
             Width = 280
@@ -432,7 +432,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRecibo_DUENIO'
+            Caption = 'RepRecibo_RENGLON1'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -1894,7 +1894,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
           BandType = rbPageHeader
-          object RepOrdenPago_SITUACIONIVAYCUIT: TQRLabel
+          object RepOrdenPago_RENGLON4: TQRLabel
             Left = 112
             Top = 71
             Width = 280
@@ -1913,7 +1913,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepOrdenPago_SITUACIONIVAYCUIT'
+            Caption = 'RepOrdenPago_RENGLON4'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -1926,7 +1926,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepOrdenPago_TELEFONOS: TQRLabel
+          object RepOrdenPago_RENGLON3: TQRLabel
             Left = 112
             Top = 58
             Width = 280
@@ -1945,7 +1945,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepOrdenPago_TELEFONOS'
+            Caption = 'RepOrdenPago_RENGLON3'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -1958,7 +1958,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepOrdenPago_DIRECCION: TQRLabel
+          object RepOrdenPago_RENGLON2: TQRLabel
             Left = 112
             Top = 45
             Width = 280
@@ -1977,7 +1977,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepOrdenPago_DIRECCION'
+            Caption = 'RepOrdenPago_RENGLON2'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -2023,7 +2023,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 7
           end
-          object RepOrdenPago_EMPRESA: TQRLabel
+          object RepOrdenPago_TITULO: TQRLabel
             Left = 112
             Top = 9
             Width = 280
@@ -2042,7 +2042,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepOrdenPago_EMPRESA'
+            Caption = 'RepOrdenPago_TITULO'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -2170,7 +2170,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 7
           end
-          object RepOrdenPago_DUENIO: TQRLabel
+          object RepOrdenPago_RENGLON1: TQRLabel
             Left = 112
             Top = 32
             Width = 280
@@ -2189,7 +2189,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepOrdenPago_DUENIO'
+            Caption = 'RepOrdenPago_RENGLON1'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -3715,7 +3715,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
           BandType = rbPageHeader
-          object RepPresupuesto_SITUACIONIVAYCUIT: TQRLabel
+          object RepPresupuesto_RENGLON4: TQRLabel
             Left = 112
             Top = 71
             Width = 280
@@ -3734,7 +3734,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepPresupuesto_SITUACIONIVAYCUIT'
+            Caption = 'RepPresupuesto_RENGLON4'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -3747,7 +3747,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepPresupuesto_TELEFONOS: TQRLabel
+          object RepPresupuesto_RENGLON3: TQRLabel
             Left = 112
             Top = 58
             Width = 280
@@ -3766,7 +3766,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepPresupuesto_TELEFONOS'
+            Caption = 'RepPresupuesto_RENGLON3'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -3779,7 +3779,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepPresupuesto_DIRECCION: TQRLabel
+          object RepPresupuesto_RENGLON2: TQRLabel
             Left = 112
             Top = 45
             Width = 280
@@ -3798,7 +3798,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepPresupuesto_DIRECCION'
+            Caption = 'RepPresupuesto_RENGLON2'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -3811,7 +3811,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepPresupuesto_EMPRESA: TQRLabel
+          object RepPresupuesto_TITULO: TQRLabel
             Left = 112
             Top = 9
             Width = 280
@@ -3830,7 +3830,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepPresupuesto_EMPRESA'
+            Caption = 'RepPresupuesto_TITULO'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -3957,7 +3957,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 7
           end
-          object RepPresupuesto_DUENIO: TQRLabel
+          object RepPresupuesto_RENGLON1: TQRLabel
             Left = 112
             Top = 32
             Width = 280
@@ -3976,7 +3976,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepPresupuesto_DUENIO'
+            Caption = 'RepPresupuesto_RENGLON1'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -5652,7 +5652,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 25
           end
-          object RepRemito_SITUACIONIVAYCUIT: TQRLabel
+          object RepRemito_RENGLON4: TQRLabel
             Left = 112
             Top = 71
             Width = 280
@@ -5671,7 +5671,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRemito_SITUACIONIVAYCUIT'
+            Caption = 'RepRemito_RENGLON4'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -5684,7 +5684,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepRemito_TELEFONOS: TQRLabel
+          object RepRemito_RENGLON3: TQRLabel
             Left = 112
             Top = 58
             Width = 280
@@ -5703,7 +5703,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRemito_TELEFONOS'
+            Caption = 'RepRemito_RENGLON3'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -5716,7 +5716,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepRemito_DIRECCION: TQRLabel
+          object RepRemito_RENGLON2: TQRLabel
             Left = 112
             Top = 45
             Width = 280
@@ -5735,7 +5735,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRemito_DIRECCION'
+            Caption = 'RepRemito_RENGLON2'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -5748,7 +5748,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepRemitos_EMPRESA: TQRLabel
+          object RepRemitos_TITULO: TQRLabel
             Left = 112
             Top = 9
             Width = 280
@@ -5767,7 +5767,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRemitos_EMPRESA'
+            Caption = 'RepRemitos_TITULO'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -5862,7 +5862,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 7
           end
-          object RepRemito_DUENIO: TQRLabel
+          object RepRemito_RENGLON1: TQRLabel
             Left = 112
             Top = 32
             Width = 280
@@ -5881,7 +5881,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRemito_DUENIO'
+            Caption = 'RepRemito_RENGLON1'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -7785,7 +7785,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 17
           end
-          object RepNotaPedido_SITUACIONIVAYCUIT: TQRLabel
+          object RepNotaPedido_RENGLON4: TQRLabel
             Left = 112
             Top = 71
             Width = 280
@@ -7804,7 +7804,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepNotaPedido_SITUACIONIVAYCUIT'
+            Caption = 'RepNotaPedido_RENGLON4'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -7817,7 +7817,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepNotaPedido_TELEFONOS: TQRLabel
+          object RepNotaPedido_RENGLON3: TQRLabel
             Left = 112
             Top = 58
             Width = 280
@@ -7836,7 +7836,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepNotaPedido_TELEFONOS'
+            Caption = 'RepNotaPedido_RENGLON3'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -7849,7 +7849,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepNotaPedido_DIRECCION: TQRLabel
+          object RepNotaPedido_RENGLON2: TQRLabel
             Left = 112
             Top = 45
             Width = 280
@@ -7868,7 +7868,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepNotaPedido_DIRECCION'
+            Caption = 'RepNotaPedido_RENGLON2'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -7881,7 +7881,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepNotaPedido_EMPRESA: TQRLabel
+          object RepNotaPedido_TITULO: TQRLabel
             Left = 112
             Top = 9
             Width = 280
@@ -7900,7 +7900,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepNotaPedido_EMPRESA'
+            Caption = 'RepNotaPedido_TITULO'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -7913,7 +7913,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 14
           end
-          object RepNotaPedido_DUENIO: TQRLabel
+          object RepNotaPedido_RENGLON1: TQRLabel
             Left = 112
             Top = 32
             Width = 280
@@ -7932,7 +7932,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepNotaPedido_DUENIO'
+            Caption = 'RepNotaPedido_RENGLON1'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText

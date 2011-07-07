@@ -1,8 +1,8 @@
 object FABM_Sucursal: TFABM_Sucursal
-  Left = 331
-  Top = 171
-  Width = 814
-  Height = 500
+  Left = 265
+  Top = 175
+  Width = 877
+  Height = 573
   Caption = 'ABM Sucursal'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -23,8 +23,8 @@ object FABM_Sucursal: TFABM_Sucursal
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 798
-    Height = 391
+    Width = 861
+    Height = 464
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -773,8 +773,8 @@ object FABM_Sucursal: TFABM_Sucursal
     object DBGridSucursal: TDBGrid
       Left = 5
       Top = 5
-      Width = 788
-      Height = 163
+      Width = 851
+      Height = 208
       Align = alClient
       Color = 14606012
       DataSource = DS_Sucursal
@@ -835,284 +835,474 @@ object FABM_Sucursal: TFABM_Sucursal
           Visible = True
         end>
     end
-    object PanelEdicion: TPanel
+    object PageControl1: TPageControl
       Left = 5
-      Top = 168
-      Width = 788
-      Height = 218
+      Top = 213
+      Width = 851
+      Height = 246
+      ActivePage = TabSheetDatosReportes
       Align = alBottom
-      BevelOuter = bvNone
-      TabOrder = 1
+      TabOrder = 2
       Visible = False
-      object Label1: TLabel
-        Left = 14
-        Top = 11
-        Width = 50
-        Height = 13
-        Caption = 'Nombre:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
+      object TabSheetDatosGral: TTabSheet
+        Caption = 'Datos Sucursal'
+        object PanelEdicion: TPanel
+          Left = 0
+          Top = 0
+          Width = 843
+          Height = 218
+          Align = alClient
+          BevelOuter = bvNone
+          TabOrder = 0
+          object GroupBox3: TGroupBox
+            Left = 0
+            Top = 0
+            Width = 843
+            Height = 218
+            Align = alClient
+            Caption = '  Datos de la Sucursal  '
+            TabOrder = 0
+            object Label1: TLabel
+              Left = 19
+              Top = 42
+              Width = 50
+              Height = 13
+              Caption = 'Nombre:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+            end
+            object Label2: TLabel
+              Left = 11
+              Top = 74
+              Width = 58
+              Height = 13
+              Caption = 'Direcci'#243'n:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+            end
+            object Label3: TLabel
+              Left = 11
+              Top = 106
+              Width = 58
+              Height = 13
+              Caption = 'Localidad:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+            end
+            object Label4: TLabel
+              Left = 451
+              Top = 106
+              Width = 70
+              Height = 13
+              Caption = 'Cod. Postal:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+            end
+            object Label5: TLabel
+              Left = 15
+              Top = 138
+              Width = 54
+              Height = 13
+              Caption = 'Tel'#233'fono:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+            end
+            object Label6: TLabel
+              Left = 33
+              Top = 170
+              Width = 34
+              Height = 13
+              Caption = 'eMail:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+            end
+            object Label7: TLabel
+              Left = 655
+              Top = 42
+              Width = 32
+              Height = 13
+              Caption = 'Logo:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+            end
+            object DBEApellidoNombre: TDBEdit
+              Left = 73
+              Top = 38
+              Width = 565
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'NOMBRE'
+              DataSource = DS_Sucursal
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 0
+            end
+            object DBEdit1: TDBEdit
+              Left = 73
+              Top = 70
+              Width = 565
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'DIRECCION'
+              DataSource = DS_Sucursal
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 1
+            end
+            object DBEdit2: TDBEdit
+              Left = 73
+              Top = 102
+              Width = 365
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'LOCALIDAD'
+              DataSource = DS_Sucursal
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 2
+            end
+            object DBEdit3: TDBEdit
+              Left = 523
+              Top = 102
+              Width = 115
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'CODIGO_POSTAL'
+              DataSource = DS_Sucursal
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 3
+            end
+            object DBEdit4: TDBEdit
+              Left = 73
+              Top = 134
+              Width = 565
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'TELEFONO'
+              DataSource = DS_Sucursal
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 4
+            end
+            object DBEdit5: TDBEdit
+              Left = 73
+              Top = 166
+              Width = 565
+              Height = 21
+              DataField = 'EMAIL'
+              DataSource = DS_Sucursal
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 5
+            end
+            object edImagen: TDBImage
+              Left = 654
+              Top = 60
+              Width = 127
+              Height = 127
+              DataField = 'LOGO'
+              DataSource = DS_Sucursal
+              Stretch = True
+              TabOrder = 6
+              OnDblClick = edImagenDblClick
+            end
+          end
+        end
       end
-      object Label2: TLabel
-        Left = 6
-        Top = 43
-        Width = 58
-        Height = 13
-        Caption = 'Direcci'#243'n:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label3: TLabel
-        Left = 6
-        Top = 75
-        Width = 58
-        Height = 13
-        Caption = 'Localidad:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label4: TLabel
-        Left = 446
-        Top = 75
-        Width = 70
-        Height = 13
-        Caption = 'Cod. Postal:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label5: TLabel
-        Left = 10
-        Top = 107
-        Width = 54
-        Height = 13
-        Caption = 'Tel'#233'fono:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label6: TLabel
-        Left = 28
-        Top = 139
-        Width = 34
-        Height = 13
-        Caption = 'eMail:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label7: TLabel
-        Left = 650
-        Top = 11
-        Width = 32
-        Height = 13
-        Caption = 'Logo:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label8: TLabel
-        Left = 4
-        Top = 198
-        Width = 104
-        Height = 13
-        Caption = 'Subtitulo Reporte:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Label9: TLabel
-        Left = 23
-        Top = 169
-        Width = 85
-        Height = 13
-        Caption = 'Titulo Reporte:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object DBEApellidoNombre: TDBEdit
-        Left = 68
-        Top = 7
-        Width = 565
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'NOMBRE'
-        DataSource = DS_Sucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-      end
-      object DBEdit1: TDBEdit
-        Left = 68
-        Top = 39
-        Width = 565
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'DIRECCION'
-        DataSource = DS_Sucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-      end
-      object DBEdit2: TDBEdit
-        Left = 68
-        Top = 71
-        Width = 365
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'LOCALIDAD'
-        DataSource = DS_Sucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 2
-      end
-      object DBEdit3: TDBEdit
-        Left = 518
-        Top = 71
-        Width = 115
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'CODIGO_POSTAL'
-        DataSource = DS_Sucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 3
-      end
-      object DBEdit4: TDBEdit
-        Left = 68
-        Top = 103
-        Width = 565
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'TELEFONO'
-        DataSource = DS_Sucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 4
-      end
-      object DBEdit5: TDBEdit
-        Left = 68
-        Top = 135
-        Width = 565
-        Height = 21
-        DataField = 'EMAIL'
-        DataSource = DS_Sucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 5
-      end
-      object edImagen: TDBImage
-        Left = 649
-        Top = 29
-        Width = 127
-        Height = 127
-        DataField = 'LOGO'
-        DataSource = DS_Sucursal
-        Stretch = True
-        TabOrder = 8
-        OnDblClick = edImagenDblClick
-      end
-      object DBEdit6: TDBEdit
-        Left = 112
-        Top = 194
-        Width = 521
-        Height = 21
-        DataField = 'REPORTE_SUBTITULO'
-        DataSource = DS_Sucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 7
-      end
-      object DBEdit7: TDBEdit
-        Left = 112
-        Top = 165
-        Width = 521
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'REPORTE_TITULO'
-        DataSource = DS_Sucursal
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 6
+      object TabSheetDatosReportes: TTabSheet
+        Caption = 'Reportes y Comprobantes'
+        ImageIndex = 1
+        object GroupBox1: TGroupBox
+          Left = 0
+          Top = 76
+          Width = 843
+          Height = 142
+          Align = alClient
+          Caption = '  Configuraci'#243'n de Comprobantes  '
+          TabOrder = 0
+          object Label9: TLabel
+            Left = 81
+            Top = 20
+            Width = 36
+            Height = 13
+            Caption = 'Titulo:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = True
+          end
+          object Label8: TLabel
+            Left = 55
+            Top = 69
+            Width = 62
+            Height = 13
+            Caption = 'Renglon 2:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = True
+          end
+          object Label12: TLabel
+            Left = 55
+            Top = 93
+            Width = 62
+            Height = 13
+            Caption = 'Renglon 3:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = True
+          end
+          object Label13: TLabel
+            Left = 55
+            Top = 118
+            Width = 62
+            Height = 13
+            Caption = 'Renglon 4:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = True
+          end
+          object Label14: TLabel
+            Left = 55
+            Top = 44
+            Width = 62
+            Height = 13
+            Caption = 'Renglon 1:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = True
+          end
+          object DBEdit7: TDBEdit
+            Left = 120
+            Top = 16
+            Width = 521
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'COMPROBANTE_TITULO'
+            DataSource = DS_Sucursal
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+          end
+          object DBEdit6: TDBEdit
+            Left = 120
+            Top = 65
+            Width = 521
+            Height = 21
+            DataField = 'COMPROBANTE_RENGLON2'
+            DataSource = DS_Sucursal
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+          end
+          object DBEdit10: TDBEdit
+            Left = 120
+            Top = 114
+            Width = 521
+            Height = 21
+            DataField = 'COMPROBANTE_RENGLON4'
+            DataSource = DS_Sucursal
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 2
+          end
+          object DBEdit11: TDBEdit
+            Left = 120
+            Top = 89
+            Width = 521
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'COMPROBANTE_RENGLON3'
+            DataSource = DS_Sucursal
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 3
+          end
+          object DBEdit12: TDBEdit
+            Left = 120
+            Top = 40
+            Width = 521
+            Height = 21
+            DataField = 'COMPROBANTE_RENGLON1'
+            DataSource = DS_Sucursal
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 4
+          end
+        end
+        object GroupBox2: TGroupBox
+          Left = 0
+          Top = 0
+          Width = 843
+          Height = 76
+          Align = alTop
+          Caption = '  Configuraci'#243'n de Reportes  '
+          TabOrder = 1
+          object Label10: TLabel
+            Left = 81
+            Top = 22
+            Width = 36
+            Height = 13
+            Caption = 'Titulo:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = True
+          end
+          object Label11: TLabel
+            Left = 62
+            Top = 49
+            Width = 55
+            Height = 13
+            Caption = 'Subtitulo:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = True
+          end
+          object DBEdit8: TDBEdit
+            Left = 120
+            Top = 18
+            Width = 521
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'REPORTE_TITULO'
+            DataSource = DS_Sucursal
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+          end
+          object DBEdit9: TDBEdit
+            Left = 120
+            Top = 45
+            Width = 521
+            Height = 21
+            DataField = 'REPORTE_SUBTITULO'
+            DataSource = DS_Sucursal
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+          end
+        end
       end
     end
   end
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 798
+    Width = 861
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1133,7 +1323,7 @@ object FABM_Sucursal: TFABM_Sucursal
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 688
+      Left = 751
       Top = 1
       Width = 109
       Height = 17
@@ -1763,6 +1953,26 @@ object FABM_Sucursal: TFABM_Sucursal
       FieldName = 'REPORTE_SUBTITULO'
       Size = 50
     end
+    object ZQ_SucursalCOMPROBANTE_TITULO: TStringField
+      FieldName = 'COMPROBANTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField
+      FieldName = 'COMPROBANTE_RENGLON1'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField
+      FieldName = 'COMPROBANTE_RENGLON2'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField
+      FieldName = 'COMPROBANTE_RENGLON3'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField
+      FieldName = 'COMPROBANTE_RENGLON4'
+      Size = 50
+    end
   end
   object DS_Sucursal: TDataSource
     DataSet = ZQ_Sucursal
@@ -1824,7 +2034,7 @@ object FABM_Sucursal: TFABM_Sucursal
   object buscarImagen: TOpenPictureDialog
     Filter = 'Bitmaps (*.bmp)|*.bmp'
     Left = 704
-    Top = 272
+    Top = 352
   end
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
