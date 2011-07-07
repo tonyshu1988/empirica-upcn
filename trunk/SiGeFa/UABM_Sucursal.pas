@@ -7,15 +7,12 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, ExtDlgs, jpeg,
-  EKBusquedaAvanzada, QRCtrls, QuickRpt, EKVistaPreviaQR;
+  EKBusquedaAvanzada, QRCtrls, QuickRpt, EKVistaPreviaQR, ComCtrls;
 
 type
   TFABM_Sucursal = class(TForm)
     PContenedor: TPanel;
     DBGridSucursal: TDBGrid;
-    PanelEdicion: TPanel;
-    Label1: TLabel;
-    DBEApellidoNombre: TDBEdit;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
     btnVerDetalle: TdxBarLargeButton;
@@ -39,16 +36,6 @@ type
     ZQ_SucursalEMAIL: TStringField;
     ZQ_SucursalBAJA: TStringField;
     DS_Sucursal: TDataSource;
-    DBEdit1: TDBEdit;
-    Label2: TLabel;
-    Label3: TLabel;
-    DBEdit2: TDBEdit;
-    Label4: TLabel;
-    DBEdit3: TDBEdit;
-    Label5: TLabel;
-    DBEdit4: TDBEdit;
-    Label6: TLabel;
-    DBEdit5: TDBEdit;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
@@ -62,15 +49,9 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    edImagen: TDBImage;
-    Label7: TLabel;
     buscarImagen: TOpenPictureDialog;
     ZQ_SucursalLOGO: TBlobField;
     EKBuscar: TEKBusquedaAvanzada;
-    Label8: TLabel;
-    DBEdit6: TDBEdit;
-    DBEdit7: TDBEdit;
-    Label9: TLabel;
     ZQ_SucursalREPORTE_TITULO: TStringField;
     ZQ_SucursalREPORTE_SUBTITULO: TStringField;
     EKVistaPrevia: TEKVistaPreviaQR;
@@ -99,6 +80,46 @@ type
     QRLabel1: TQRLabel;
     QRDBText3: TQRDBText;
     QRLabel2: TQRLabel;
+    PageControl1: TPageControl;
+    TabSheetDatosGral: TTabSheet;
+    TabSheetDatosReportes: TTabSheet;
+    PanelEdicion: TPanel;
+    GroupBox1: TGroupBox;
+    Label9: TLabel;
+    DBEdit7: TDBEdit;
+    DBEdit6: TDBEdit;
+    Label8: TLabel;
+    GroupBox2: TGroupBox;
+    Label10: TLabel;
+    Label11: TLabel;
+    DBEdit8: TDBEdit;
+    DBEdit9: TDBEdit;
+    DBEdit10: TDBEdit;
+    DBEdit11: TDBEdit;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    DBEdit12: TDBEdit;
+    GroupBox3: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    DBEApellidoNombre: TDBEdit;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    edImagen: TDBImage;
+    ZQ_SucursalCOMPROBANTE_TITULO: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -150,7 +171,8 @@ begin
   if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
   begin
     DBGridSucursal.Enabled := false;
-    PanelEdicion.Visible:= true;
+    PageControl1.Visible:= true;
+    PageControl1.ActivePageIndex:= 0;    
 
     ZQ_Sucursal.Append;
     ZQ_SucursalBAJA.AsString:= 'N';
@@ -171,7 +193,8 @@ begin
   if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
   begin
     DBGridSucursal.Enabled := false;
-    PanelEdicion.Visible:= true;
+    PageControl1.Visible:= true;
+    PageControl1.ActivePageIndex:= 0;
 
     ZQ_Sucursal.Edit;
     DBEApellidoNombre.SetFocus;
@@ -186,6 +209,7 @@ begin
  if (trim(DBEApellidoNombre.Text) = '') then
   begin
     Application.MessageBox('El campo "Nombre" se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    PageControl1.ActivePageIndex:= 0;
     DBEApellidoNombre.SetFocus;
     exit;
   end;
@@ -196,7 +220,7 @@ begin
     GrupoEditando.Enabled:=true;
     GrupoGuardarCancelar.Enabled:=false;
     DBGridSucursal.SetFocus;
-    PanelEdicion.Visible := false;
+    PageControl1.Visible := false;
   end;
 
   dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);  
@@ -211,7 +235,7 @@ begin
     DBGridSucursal.SetFocus;
     GrupoEditando.Enabled:=true;
     GrupoGuardarCancelar.Enabled:=false;
-    PanelEdicion.Visible := false;
+    PageControl1.Visible := false;
   end;
 end;
 
@@ -367,6 +391,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_Sucursal.CargaImagenProporcionado(Archivo: string);
 var
   imagen: TGraphic; //contiene la imagen, es del tipo TGraphic poque puede ser jpg o bmp
@@ -432,6 +457,8 @@ begin
     auxBmp.Free;
   end;
 end;
+
+
 
 procedure TFABM_Sucursal.btnImprimirClick(Sender: TObject);
 begin
