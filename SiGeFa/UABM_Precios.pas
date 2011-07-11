@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
   ZStoredProcedure, ZSqlUpdate, EKOrdenarGrilla, mxNativeExcel, mxExport, UBuscarPersona,
-  QRCtrls, QuickRpt, EKVistaPreviaQR, DBClient, Provider;
+  QRCtrls, QuickRpt, EKVistaPreviaQR, DBClient, Provider, ShellApi;
 
 type
   TFABM_Precios = class(TForm)
@@ -130,6 +130,7 @@ type
     CDSZQ_Productosimporte_venta_cliente: TFloatField;
     CDSZQ_Productosprecio_costo: TFloatField;
     CDSZQ_Productoscoef_ganancia: TFloatField;
+    btBuscarGoogle: TdxBarLargeButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -143,6 +144,7 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure ZQ_ProductosCalcFields(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
+    procedure btBuscarGoogleClick(Sender: TObject);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
@@ -462,6 +464,15 @@ end;
 procedure TFABM_Precios.FormCreate(Sender: TObject);
 begin
 CDSZQ_Productos.CreateDataSet;
+end;
+
+procedure TFABM_Precios.btBuscarGoogleClick(Sender: TObject);
+begin
+  if ZQ_Productos.IsEmpty then
+  exit;
+
+  ShellExecute(self.handle, 'open', pchar('http://www.google.com.ar/#hl=es-419&q='+ZQ_ProductosNOMBRE_PRODUCTO.AsString+'&oq'), nil, nil,
+  SW_SHOWNORMAL);
 end;
 
 end.
