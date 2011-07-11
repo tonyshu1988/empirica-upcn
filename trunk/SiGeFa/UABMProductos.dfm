@@ -1269,7 +1269,7 @@ object FABMProductos: TFABMProductos
             29.104166666666670000
             603.250000000000000000
             2.645833333333333000
-            89.958333333333320000)
+            89.958333333333340000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -2126,7 +2126,7 @@ object FABMProductos: TFABMProductos
                 object Label5: TLabel
                   Left = 3
                   Top = 3
-                  Width = 132
+                  Width = 104
                   Height = 13
                   Align = alTop
                   Alignment = taCenter
@@ -2820,6 +2820,11 @@ object FABMProductos: TFABMProductos
           end
           item
             BeginGroup = True
+            Item = btBuscarEnGoogle
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnImprimirListado
             Visible = True
           end
@@ -3260,6 +3265,15 @@ object FABMProductos: TFABMProductos
       ImageIndex = 42
       AutoGrayScale = False
     end
+    object btBuscarEnGoogle: TdxBarLargeButton
+      Caption = 'Buscar en Google'
+      Category = 0
+      Hint = 'Buscar en Google'
+      Visible = ivAlways
+      ImageIndex = 80
+      OnClick = btBuscarEnGoogleClick
+      AutoGrayScale = False
+    end
     object GrupoVisualizando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -3270,7 +3284,8 @@ object FABMProductos: TFABMProductos
         'btnReactivar'
         'btverbajados'
         'btnSiguiente'
-        'btnAnterior')
+        'btnAnterior'
+        'btBuscarEnGoogle')
     end
     object GrupoEditando: TdxBarGroup
       Enabled = False

@@ -9,7 +9,7 @@ uses
   DBCtrls, Mask, EKBusquedaAvanzada, EKOrdenarGrilla, EKLlenarCombo, Menus,
   Buttons, ZStoredProcedure, jpeg, ExtDlgs, EKListadoSQL, DBClient,
   EKVistaPreviaQR, ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls,
-  qrFramelines;
+  qrFramelines, shellapi;
 
 type
   TFABMProductos = class(TForm)
@@ -247,6 +247,7 @@ type
     RadioGroupImprimirListado: TRadioGroup;
     btnImprimirListado_Aceptar: TButton;
     btnImprimirListado_Salir: TButton;
+    btBuscarEnGoogle: TdxBarLargeButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -296,6 +297,7 @@ type
     procedure btnImprimirListado_AceptarClick(Sender: TObject);
     procedure DBEdit2Enter(Sender: TObject);
     procedure DBEdit3Enter(Sender: TObject);
+    procedure btBuscarEnGoogleClick(Sender: TObject);
   private
     cambioAuto: string;  //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
   public
@@ -1206,5 +1208,14 @@ begin
   GrupoVisualizando.Enabled:= true;
 end;
 
+
+procedure TFABMProductos.btBuscarEnGoogleClick(Sender: TObject);
+begin
+  if ZQ_ProductoCabecera.IsEmpty then
+  exit;
+
+  ShellExecute(self.handle, 'open', pchar('http://www.google.com.ar/#hl=es-419&q='+ZQ_ProductoCabeceraNOMBRE.AsString+'&oq'), nil, nil,
+  SW_SHOWNORMAL);
+end;
 
 end.
