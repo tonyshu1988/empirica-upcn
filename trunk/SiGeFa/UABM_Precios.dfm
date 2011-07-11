@@ -1815,6 +1815,11 @@ object FABM_Precios: TFABM_Precios
             Visible = True
           end
           item
+            BeginGroup = True
+            Item = btBuscarGoogle
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -2221,6 +2226,15 @@ object FABM_Precios: TFABM_Precios
       Visible = ivAlways
       ImageIndex = 6
       OnClick = btnSalirClick
+      AutoGrayScale = False
+    end
+    object btBuscarGoogle: TdxBarLargeButton
+      Caption = 'Buscar en Google'
+      Category = 0
+      Hint = 'Buscar en Google'
+      Visible = ivAlways
+      ImageIndex = 80
+      OnClick = btBuscarGoogleClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
