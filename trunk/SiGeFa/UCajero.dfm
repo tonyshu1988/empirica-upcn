@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 73
-  Top = 87
+  Left = 99
+  Top = 112
   Width = 1188
   Height = 685
   Caption = 'FCajero'
@@ -2252,6 +2252,7 @@ object FCajero: TFCajero
   end
   object ZQ_Personas: TZQuery
     Connection = DM.Conexion
+    Active = True
     SQL.Strings = (
       
         'select p.*,prov.nombre_provincia as prov,td.nombre_tipo_doc as t' +

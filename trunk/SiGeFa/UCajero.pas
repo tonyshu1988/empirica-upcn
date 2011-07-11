@@ -408,6 +408,7 @@ procedure TFCajero.ISDbSumaListaSumListChanged(Sender: TObject);
 begin
   acumulado := ISDbSumaLista.SumCollection[0].SumValue;
   importe.Text := FormatFloat('$ ##,###,##0.00 ', acumulado);
+  CD_ComprobanteBASE_IMPONIBLE.AsFloat:=acumulado;
 end;
 
 procedure TFCajero.ISDbSumaFpagoSumListChanged(Sender: TObject);
@@ -702,6 +703,8 @@ end;
 
 procedure TFCajero.BtAceptarPagoClick(Sender: TObject);
 begin
+
+//Hacer las validaciones correspondientes (por ej formas de pago=acumulado)
 if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_ComprobanteDetalle]) then
    begin
       ZQ_Comprobante.Append;
