@@ -40,7 +40,7 @@ type
     PanelVer: TPanel;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btnVerDetalle: TdxBarLargeButton;
+    btnEnviarMail: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnBaja: TdxBarLargeButton;
@@ -466,6 +466,8 @@ type
     Label29: TLabel;
     Label30: TLabel;
     Label31: TLabel;
+    ZQ_BuscarMail: TZQuery;
+    ZQ_BuscarMailEMAIL: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -518,6 +520,7 @@ type
     procedure configVisualizacion();
     procedure AplicarFiltro(Sender: TObject); //configuro la pantalla de visualizacion segun el tipo de comprobante
     procedure configPanelFechas(panel: TPanel; Activar: boolean);
+    procedure btnEnviarMailClick(Sender: TObject);
   private
     estadoPantalla: string;
     tipoComprobante: integer;
@@ -545,7 +548,7 @@ const
 
 implementation
 
-uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes;
+uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar;
 
 {$R *.dfm}
 
@@ -1112,6 +1115,7 @@ begin
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
   FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger);
+  FImpresion_Comprobantes.imprimir;
 end;
 
 
@@ -1776,6 +1780,45 @@ begin
 
   ZQ_VerCpb.Refresh;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+end;
+
+
+procedure TFABM_Comprobantes.btnEnviarMailClick(Sender: TObject);
+var
+  destino, archivoPDF: string;
+begin
+  destino:= '';
+  archivoPDF:= '';
+
+  if ZQ_VerCpb.IsEmpty then
+    exit;
+
+  ZQ_BuscarMail.Close;
+  if ZQ_VerCpbID_PROVEEDOR.IsNull then //si es un CLIENTE
+  begin
+      ZQ_BuscarMail.SQL.Text:= Format('select p.email from persona p where p.id_persona = %s',
+                                       [QuotedStr(ZQ_VerCpbID_CLIENTE.AsString)]);
+  end
+  else
+    if ZQ_VerCpbID_CLIENTE.IsNull then //si es un PROVEEDOR
+    begin
+      ZQ_BuscarMail.SQL.Text:= Format('select e.email from empresa e where e.id_empresa = = %s',
+                                       [QuotedStr(ZQ_VerCpbID_CLIENTE.AsString)]);
+    end;
+
+  ZQ_BuscarMail.Open;
+  if (not ZQ_BuscarMailEMAIL.IsNull) or (ZQ_BuscarMailEMAIL.AsString <> '') then
+    destino:= ZQ_BuscarMailEMAIL.AsString;
+
+  if not Assigned(FImpresion_Comprobantes) then
+    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger);
+  archivoPDF:= FImpresion_Comprobantes.generarPDF;
+
+  //if not Assigned(TFMailEnviar) then
+    Application.CreateForm(TFMailEnviar, FMailEnviar);
+  FMailEnviar.enviarConAdjunto(destino, dm.ZQ_SucursalNOMBRE.AsString, archivoPDF);
+  FMailEnviar.ShowModal;
 end;
 
 end.

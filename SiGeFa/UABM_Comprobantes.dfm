@@ -28,7 +28,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
     Width = 265
     Height = 163
     BorderWidth = 4
-    TabOrder = 5
+    TabOrder = 3
     Visible = False
     object RadioGroupTipoComprobante: TRadioGroup
       Left = 5
@@ -2349,6 +2349,10 @@ object FABM_Comprobantes: TFABM_Comprobantes
           end
           item
             BeginGroup = True
+            Item = btnEnviarMail
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -2673,14 +2677,16 @@ object FABM_Comprobantes: TFABM_Comprobantes
       OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object btnVerDetalle: TdxBarLargeButton
+    object btnEnviarMail: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Ver Detalle'
+      Caption = 'Mail'
       Category = 0
-      Hint = 'Ver Detalle'
+      Hint = 
+        'Enviar mail al cliente/proveedor con el comprobante adjunto en P' +
+        'DF'
       Visible = ivAlways
-      ImageIndex = 69
-      AutoGrayScale = False
+      ImageIndex = 76
+      OnClick = btnEnviarMailClick
     end
     object btnNuevo: TdxBarLargeButton
       Caption = 'F2 - Nuevo'
@@ -2761,7 +2767,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
         'btnNuevo'
         'btnModificar'
         'btnBuscar'
-        'btnVerDetalle'
+        'btnEnviarMail'
         'btnBaja'
         'btnSalir'
         'btnReactivar'
@@ -5387,6 +5393,19 @@ object FABM_Comprobantes: TFABM_Comprobantes
     object PopUpItem_ProductoOcultarDetalle: TMenuItem
       Caption = 'Ocultar Detalle'
       OnClick = PopUpItem_ProductoOcultarDetalleClick
+    end
+  end
+  object ZQ_BuscarMail: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select e.email'
+      'from empresa e')
+    Params = <>
+    Left = 37
+    Top = 369
+    object ZQ_BuscarMailEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
     end
   end
 end

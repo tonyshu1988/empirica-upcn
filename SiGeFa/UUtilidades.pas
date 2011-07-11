@@ -2,8 +2,8 @@ unit UUtilidades;
 
 interface
 
-uses
-  Math;
+uses SysUtils, Math, ZDataset, DateUtils, Messages, Variants, Classes, Dialogs,
+     StdCtrls, DB, strutils, Jpeg, Graphics;
 
 
 function SonTodasLetras(cad:string):Boolean;
@@ -14,14 +14,20 @@ function rellenar(texto: string; caracter: Char; cantidad: integer):String;
 function Redondear(Valor: Real; Redondeo: Integer): Real;
 function EsEmailValido(const Value: String): boolean;
 function EsEmailValido2(email: string): boolean;
+procedure Split(const Delimiter: Char; Input: string; const Strings: TStrings);
 
 implementation
-
-uses SysUtils, Graphics, Jpeg;
 
 const
     TablaMul:Array[1..10] of Integer=(5,4,3,2,7,6,5,4,3,2); {Tabla Arbitraria}
 
+procedure Split(const Delimiter: Char; Input: string; const Strings: TStrings);
+begin
+   Assert(Assigned(Strings)) ;
+   Strings.Clear;
+   Strings.Delimiter := Delimiter;
+   Strings.DelimitedText := Input;
+end;
 
 function EsEmailValido(const Value: String): boolean;
 

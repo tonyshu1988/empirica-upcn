@@ -8,7 +8,7 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   IdMessage, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdMessageClient, IdPOP3, idsync, idglobal, Buttons, ImgList, Menus,
-  EKListadoSQL, cxClasses, IdAttachmentFile, IdText;
+  EKListadoSQL, cxClasses, IdAttachmentFile, IdText, EKIni, EKDBGrid;
 
 type
   TFMailBandeja = class(TForm)
@@ -57,11 +57,11 @@ type
     btnGuardarAdjunto: TBitBtn;
     SaveDialog: TSaveDialog;
     ImageList: TImageList;
-    PopupMenu1: TPopupMenu;
-    MarcarEliminar1: TMenuItem;
-    AbrirMail1: TMenuItem;
-    Recibir1: TMenuItem;
-    EliminarMarcados1: TMenuItem;
+    PopupMenuEntrada: TPopupMenu;
+    ItemPUEntrada_MarcarEliminar: TMenuItem;
+    ItemPUEntrada_AbrirMail: TMenuItem;
+    ItemPUEntrada_Recibir: TMenuItem;
+    ItemPUEntrada_EliminarMarcados: TMenuItem;
     Panel1: TPanel;
     Label6: TLabel;
     DBTxtCuenta: TDBText;
@@ -105,8 +105,11 @@ type
     DBGrid1: TDBGrid;
     btnCambiarCuenta: TBitBtn;
     btnDesconectar: TdxBarLargeButton;
-    PopupMenu2: TPopupMenu;
-    Reenviar1: TMenuItem;
+    PopupMenuSalida: TPopupMenu;
+    ItemPUSalida_Reenviar: TMenuItem;
+    ItemPUEntrada_Responder: TMenuItem;
+    ZQuery1: TZQuery;
+    ListView1: TListView;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -115,16 +118,17 @@ type
     procedure btnGuardarAdjuntoClick(Sender: TObject);
     procedure listaBandejaEntradaDblClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
-    procedure Recibir1Click(Sender: TObject);
-    procedure AbrirMail1Click(Sender: TObject);
-    procedure MarcarEliminar1Click(Sender: TObject);
-    procedure EliminarMarcados1Click(Sender: TObject);
+    procedure ItemPUEntrada_RecibirClick(Sender: TObject);
+    procedure ItemPUEntrada_AbrirMailClick(Sender: TObject);
+    procedure ItemPUEntrada_MarcarEliminarClick(Sender: TObject);
+    procedure ItemPUEntrada_EliminarMarcadosClick(Sender: TObject);
 
     procedure btnCambiarCuentaClick(Sender: TObject);
     procedure btnDesconectarClick(Sender: TObject);
     procedure DBGridMailSalidaDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure Reenviar1Click(Sender: TObject);
+    procedure ItemPUSalida_ReenviarClick(Sender: TObject);
+    procedure ItemPUEntrada_ResponderClick(Sender: TObject);
   private
     function BuscarIndiceAdjuntos(nombreArchivo: string): integer;
     function BuscarAdjuntos(const nombreArchivo: string): TIdAttachmentFile;
@@ -141,10 +145,13 @@ type
     procedure marcarMensajeGuardar();
     procedure eliminarMarcados();
     procedure buscarCabeceraPOP3(inMsgCount: Integer);
+    procedure aux();
   public
     MsgCount, FMailBoxSize: integer;
     directorioAdjunto: string;
     conectado: boolean;
+    listaUID: TStringList;    //contiene todos los uid de la casilla de correo
+    mensajeUID: TStringList;  //contiene un uid solo con la posicion del mensaje
   end;
 
 var
@@ -155,7 +162,8 @@ const
 
 implementation
 
-uses UPrincipal, UDM, IdEMailAddress, UMailConfigurar, UMailEnviar;
+uses UPrincipal, UDM, IdEMailAddress, UMailConfigurar, UMailEnviar,
+  IdIMAP4, UUtilidades;
 
 {$R *.dfm}
 
@@ -175,6 +183,9 @@ end;
 
 procedure TFMailBandeja.FormCreate(Sender: TObject);
 begin
+  listaUID:= TStringList.Create;  //contiene todos los uid de la casilla de correo
+  mensajeUID:= TStringList.Create; //contiene un uid solo con la posicion del mensaje
+
   ImageList.GetBitmap(0, btnCambiarCuenta.Glyph);
 
   PageControlBandeja.ActivePageIndex:= 0;
@@ -481,7 +492,7 @@ begin
   if not conectar then  //si no se puede conectar salgo
     exit;
 
-  MsgCount := DM.IdPOP3.CheckMessages;
+  MsgCount := DM.IdPOP3.CheckMessages; //obtengo la cantidad de mensaje en el servidor
   FMailBoxSize := DM.IdPOP3.RetrieveMailBoxSize div 1024;
   mostrarCantidadMsj(inttostr(MsgCount));
 
@@ -494,6 +505,24 @@ begin
 end;
 
 
+procedure TFMailBandeja.aux();
+var
+  i: integer;
+  auxLista: TListItem;
+begin
+  listaUID.clear;
+  mensajeUID.clear;
+  dm.IdPOP3.UIDL(listaUID, -1); //obtengo la lista de los UID de todos los mensajes en el servidor
+
+  for i := 0 to listaUID.Count - 1 do
+  begin
+    auxLista:= ListView1.Items.Add;
+    Split(' ', listaUID.Strings[i], mensajeUID);
+    auxLista.SubItems.Add(mensajeUID[0]);
+    auxLista.SubItems.Add(mensajeUID[1]);
+  end
+end;
+
 procedure TFMailBandeja.buscarCabeceraPOP3(inMsgCount: Integer);
 var
   i: integer;
@@ -501,21 +530,22 @@ var
   auxLista: TListItem;
 begin
   listaBandejaEntrada.Items.Clear;
+  aux();
+
   for i:= 1 to inMsgCount do
   begin
     mostrarAccion(format('Descargando Mensaje... %d de %d', [i, inMsgCount]));
     Application.ProcessMessages;
     IdMessage.Clear;
-    DM.IdPOP3.RetrieveHeader(i, IdMessage);
 
-    dm.IdPOP3.RetrieveHeader(i, IdMessage);
+    DM.IdPOP3.RetrieveHeader(i, IdMessage); //obtengo la cabecera del mensaje
     auxLista:= listaBandejaEntrada.Items.Add;
     auxLista.Caption:= '';
-//    auxLista.SubItems.Add(IdMessage.UID); //
     auxLista.SubItems.Add(IdMessage.From.Text); //de
     auxLista.SubItems.Add(IdMessage.Subject); //asunto
     auxLista.SubItems.add(formatdatetime('dd/mm/yyy hh:mm:ss', IdMessage.Date)); //fecha
     auxLista.SubItems.Add(IntToStr(DM.IdPOP3.RetrieveMsgSize(i) div 1024) + ' Kb'); //tamanio
+    auxLista.SubItems.Add(ListView1.Items.Item[i-1].SubItems.Strings[1]); //identificador unico del mensaje
     auxLista.ImageIndex := 5;
   end;
 
@@ -545,30 +575,31 @@ end;
 
 procedure TFMailBandeja.btnNuevoClick(Sender: TObject);
 begin
+  desconectar;
   Application.CreateForm(TFMailEnviar, FMailEnviar);
   FMailEnviar.ShowModal;
 end;
 
 
-procedure TFMailBandeja.Recibir1Click(Sender: TObject);
+procedure TFMailBandeja.ItemPUEntrada_RecibirClick(Sender: TObject);
 begin
   CheckMail;  
 end;
 
 
-procedure TFMailBandeja.AbrirMail1Click(Sender: TObject);
+procedure TFMailBandeja.ItemPUEntrada_AbrirMailClick(Sender: TObject);
 begin
   CargarMensaje;
 end;
 
 
-procedure TFMailBandeja.MarcarEliminar1Click(Sender: TObject);
+procedure TFMailBandeja.ItemPUEntrada_MarcarEliminarClick(Sender: TObject);
 begin
   marcarMensajeEliminar;
 end;
 
 
-procedure TFMailBandeja.EliminarMarcados1Click(Sender: TObject);
+procedure TFMailBandeja.ItemPUEntrada_EliminarMarcadosClick(Sender: TObject);
 begin
   eliminarMarcados;
 end;
@@ -587,6 +618,7 @@ end;
 
 procedure TFMailBandeja.btnCambiarCuentaClick(Sender: TObject);
 begin
+  desconectar;
   ZQ_Cuentas.Filtered:= false;
 
   EKListadoCuentas.SQL.Text:= 'select c.* '+
@@ -639,14 +671,16 @@ begin
 end;
 
 
-procedure TFMailBandeja.Reenviar1Click(Sender: TObject);
+procedure TFMailBandeja.ItemPUSalida_ReenviarClick(Sender: TObject);
 var
   recNo: integer;
 begin
   if ZQ_MailSalida.IsEmpty then
     exit;
 
-  Application.CreateForm(TFMailEnviar, FMailEnviar);
+  //if not Assigned(TFMailEnviar) then
+    Application.CreateForm(TFMailEnviar, FMailEnviar);
+
   FMailEnviar.reenviar( ZQ_MailSalidaCABECERA_PARA.AsString,
                         ZQ_MailSalidaCABECERA_CC.AsString,
                         ZQ_MailSalidaCABECERA_CCO.AsString,
@@ -659,6 +693,27 @@ begin
   recNo:= ZQ_MailSalida.RecNo;
   ZQ_MailSalida.Refresh;
   ZQ_MailSalida.RecNo:= recNo;
+end;
+
+
+procedure TFMailBandeja.ItemPUEntrada_ResponderClick(Sender: TObject);
+begin
+  if listaBandejaEntrada.Selected <> nil then //si hay un elemento seleccionado de la bandeja de entrada
+  begin
+    //if not Assigned(TFMailEnviar) then
+      Application.CreateForm(TFMailEnviar, FMailEnviar);
+
+    DM.IdPOP3.Retrieve(listaBandejaEntrada.Selected.Index + 1, IdMessage);
+
+    FMailEnviar.responder(IdMessage.From.Text,
+                          IdMessage.CCList.EMailAddresses,
+                          IdMessage.BccList.EMailAddresses,
+                          IdMessage.Subject,
+                          ZQ_CuentasID_CUENTA.AsInteger);
+    FMailEnviar.ShowModal;
+  end
+  else
+    showmessage('No hay ningún mensaje seleccionado');
 end;
 
 end.

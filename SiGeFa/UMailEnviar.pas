@@ -110,6 +110,8 @@ type
     procedure EditCCExit(Sender: TObject);
     procedure EditBCCExit(Sender: TObject);
     procedure btnCambiarCuentaClick(Sender: TObject);
+    procedure responder(destinatario, cc, cco, asunto: string; id_cuenta: integer);
+    procedure enviarConAdjunto(destinatario, asunto, archivo: string);
   private
     { Private declarations }
   public
@@ -130,6 +132,7 @@ uses UPrincipal, UDM, UUtilidades, UPanelNotificacion;
 
 {$R *.dfm}
 
+//REENVIAR MAIL
 procedure TFMailEnviar.reenviar(destinatario, cc, cco, asunto, cuerpo: string; id_cuenta, id_mail: integer);
 begin
   reenviando:= true;
@@ -137,7 +140,6 @@ begin
 
   ZQ_Cuentas.Filtered:= false; //desactivo el filtro para que muestre la cuenta principal
   ZQ_Cuentas.Locate('ID_CUENTA', VarArrayOf([inttostr(id_cuenta)]), []);
-//  ShowMessage(IntToStr(ZQ_Cuentas.RecordCount)+' '+ZQ_CuentasEMAIL.AsString);
 
   dm.configMail('CUENTA', id_cuenta);
   EditPara.Text:= destinatario;
@@ -146,6 +148,33 @@ begin
   EditAsunto.Text:= asunto;
   MemoCuerpo.Lines.Text:= cuerpo;
 end;
+
+//ENVIAR MAIL CON ADJUNTO
+procedure TFMailEnviar.enviarConAdjunto(destinatario, asunto, archivo: string);
+begin
+  if FileExists(archivo) then
+  begin
+    TIdAttachmentFile.Create(IdMensaje.MessageParts, archivo);
+    agregarAListaAdjuntos;
+  end;
+
+  EditPara.Text:= destinatario;
+  EditAsunto.Text:= asunto;
+end;
+
+//RESPONDER MAIL
+procedure TFMailEnviar.responder(destinatario, cc, cco, asunto: string; id_cuenta: integer);
+begin
+  ZQ_Cuentas.Filtered:= false; //desactivo el filtro para que muestre la cuenta principal
+  ZQ_Cuentas.Locate('ID_CUENTA', VarArrayOf([inttostr(id_cuenta)]), []);
+
+  dm.configMail('CUENTA', id_cuenta);
+  EditPara.Text:= destinatario;
+  EditCC.Text:= cc;
+  EditBCC.Text:= cco;
+  EditAsunto.Text:= 'RE: '+asunto;
+end;
+
 
 procedure TFMailEnviar.mostrarOcupado(flag: boolean);
 begin

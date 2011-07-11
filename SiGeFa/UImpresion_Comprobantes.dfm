@@ -19,7 +19,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     Top = 0
     Width = 977
     Height = 553
-    ActivePage = TabSheet3
+    ActivePage = TabSheet5
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -526,6 +526,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               29.104166666666670000
               169.333333333333300000)
             DataField = 'LOGO'
+            DataSet = DM.ZQ_ConfigCpb
             Stretch = True
           end
         end
@@ -2283,6 +2284,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               29.104166666666670000
               169.333333333333300000)
             DataField = 'LOGO'
+            DataSet = DM.ZQ_ConfigCpb
             Stretch = True
           end
           object QRLabel13: TQRLabel
@@ -4136,6 +4138,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               29.104166666666670000
               169.333333333333300000)
             DataField = 'LOGO'
+            DataSet = DM.ZQ_ConfigCpb
             Stretch = True
           end
           object QRLabel66: TQRLabel
@@ -5748,7 +5751,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object RepRemitos_TITULO: TQRLabel
+          object RepRemito_TITULO: TQRLabel
             Left = 112
             Top = 9
             Width = 280
@@ -5767,7 +5770,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'RepRemitos_TITULO'
+            Caption = 'RepRemito_TITULO'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -6041,6 +6044,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               29.104166666666670000
               169.333333333333300000)
             DataField = 'LOGO'
+            DataSet = DM.ZQ_ConfigCpb
             Stretch = True
           end
           object QRLabel90: TQRLabel
@@ -7719,6 +7723,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               29.104166666666670000
               169.333333333333300000)
             DataField = 'LOGO'
+            DataSet = DM.ZQ_ConfigCpb
             Stretch = True
           end
           object QRLabel21: TQRLabel
@@ -7947,6 +7952,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           end
         end
         object QRBand2: TQRBand
+          Tag = 99
           Left = 38
           Top = 136
           Width = 718
@@ -8424,6 +8430,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           end
         end
         object QRBand3: TQRBand
+          Tag = 99
           Left = 38
           Top = 207
           Width = 718
@@ -8511,6 +8518,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           end
         end
         object QRChildBand2: TQRChildBand
+          Tag = 99
           Left = 38
           Top = 234
           Width = 718
@@ -8599,6 +8607,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           end
         end
         object QRChildBand3: TQRChildBand
+          Tag = 99
           Left = 38
           Top = 272
           Width = 718
@@ -8814,6 +8823,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           end
         end
         object QRBand4: TQRBand
+          Tag = 99
           Left = 38
           Top = 305
           Width = 718
@@ -8934,6 +8944,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           end
         end
         object QRBand8: TQRBand
+          Tag = 99
           Left = 38
           Top = 396
           Width = 718
@@ -8988,6 +8999,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           end
         end
         object QRSubDetail5: TQRSubDetail
+          Tag = 99
           Left = 38
           Top = 288
           Width = 718
@@ -9216,11 +9228,6 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       Caption = 'FACTURA'
       ImageIndex = 5
     end
-  end
-  object EKVistaPrevia: TEKVistaPreviaQR
-    ShowModal = False
-    Left = 41
-    Top = 280
   end
   object ZQ_Fpago: TZQuery
     Connection = DM.Conexion
@@ -9664,5 +9671,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     DataSet = ZQ_Producto
     Left = 44
     Top = 440
+  end
+  object EKVistaPrevia: TEKVistaPreviaQR
+    ShowModal = False
+    Left = 44
+    Top = 280
   end
 end
