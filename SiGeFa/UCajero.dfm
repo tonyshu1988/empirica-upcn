@@ -461,7 +461,7 @@ object FCajero: TFCajero
             Alignment = taCenter
             AutoSize = False
             Caption = 'Formas de Pago'
-            Color = 13565902
+            Color = 16769217
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
@@ -532,7 +532,7 @@ object FCajero: TFCajero
           Align = alBottom
           Alignment = taCenter
           Caption = 'Listado de Productos a Cobrar'
-          Color = 14548957
+          Color = 16769217
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
@@ -551,7 +551,7 @@ object FCajero: TFCajero
           Align = alTop
           Alignment = taCenter
           Caption = 'Detalles Cliente'
-          Color = 14548957
+          Color = 16769217
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
@@ -2252,7 +2252,6 @@ object FCajero: TFCajero
   end
   object ZQ_Personas: TZQuery
     Connection = DM.Conexion
-    Active = True
     SQL.Strings = (
       
         'select p.*,prov.nombre_provincia as prov,td.nombre_tipo_doc as t' +
