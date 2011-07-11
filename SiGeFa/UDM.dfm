@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFa.FDB'
+    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SIGEFA LOPEZ.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -1716,12 +1716,12 @@ object DM: TDM
     Top = 263
   end
   object POP3_SSL: TIdSSLIOHandlerSocketOpenSSL
-    Destination = ':110'
+    Destination = ':143'
     MaxLineAction = maSplit
-    Port = 110
+    Port = 143
     DefaultPort = 0
-    SSLOptions.Method = sslvSSLv23
-    SSLOptions.SSLVersions = [sslvSSLv2, sslvSSLv3]
+    SSLOptions.Method = sslvSSLv2
+    SSLOptions.SSLVersions = [sslvSSLv2]
     SSLOptions.Mode = sslmUnassigned
     SSLOptions.VerifyMode = []
     SSLOptions.VerifyDepth = 0
@@ -1733,10 +1733,10 @@ object DM: TDM
     Left = 280
     Top = 146
   end
-  object ZQ_ConfigReporte: TZQuery
+  object ZQ_Sucursal: TZQuery
     Connection = Conexion
     SQL.Strings = (
-      'select s.logo, s.reporte_titulo, s.reporte_subtitulo'
+      'select s.*'
       'from sucursal s'
       'where s.id_sucursal = :id_sucursal')
     Params = <
@@ -1753,15 +1753,66 @@ object DM: TDM
         Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
-    object ZQ_ConfigReporteLOGO: TBlobField
+    object ZQ_SucursalID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
+    end
+    object ZQ_SucursalNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_SucursalDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_SucursalLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_SucursalCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_SucursalTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_SucursalEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_SucursalBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_SucursalLOGO: TBlobField
       FieldName = 'LOGO'
     end
-    object ZQ_ConfigReporteREPORTE_TITULO: TStringField
+    object ZQ_SucursalREPORTE_TITULO: TStringField
       FieldName = 'REPORTE_TITULO'
       Size = 50
     end
-    object ZQ_ConfigReporteREPORTE_SUBTITULO: TStringField
+    object ZQ_SucursalREPORTE_SUBTITULO: TStringField
       FieldName = 'REPORTE_SUBTITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_TITULO: TStringField
+      FieldName = 'COMPROBANTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField
+      FieldName = 'COMPROBANTE_RENGLON1'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField
+      FieldName = 'COMPROBANTE_RENGLON2'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField
+      FieldName = 'COMPROBANTE_RENGLON3'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField
+      FieldName = 'COMPROBANTE_RENGLON4'
       Size = 50
     end
   end
