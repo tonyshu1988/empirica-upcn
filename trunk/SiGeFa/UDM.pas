@@ -9,7 +9,8 @@ uses
   mxNativeExcel, IdBaseComponent, IdComponent, IdTCPConnection,
   IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage, ExtCtrls,
   IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
-  IdSMTPBase, IdExplicitTLSClientServerBase, StdCtrls, EKIni, Graphics;
+  IdSMTPBase, IdExplicitTLSClientServerBase, StdCtrls, EKIni, Graphics,
+  IdIMAP4;
 
 type
   TDM = class(TDataModule)
@@ -45,14 +46,28 @@ type
     ZQ_ConfigMailPOP3_SSL: TStringField;
     ZQ_ConfigMailPOP3_AUTENTICACION: TStringField;
     EKIni: TEKIni;
-    ZQ_ConfigReporte: TZQuery;
-    ZQ_ConfigReporteLOGO: TBlobField;
-    ZQ_ConfigReporteREPORTE_TITULO: TStringField;
-    ZQ_ConfigReporteREPORTE_SUBTITULO: TStringField;
+    ZQ_Sucursal: TZQuery;
     ZQ_ConfiguracionDB_SUCURSAL: TIntegerField;
     ZQ_ConfiguracionULTIMA_FECHA: TDateTimeField;
+    ZQ_SucursalID_SUCURSAL: TIntegerField;
+    ZQ_SucursalNOMBRE: TStringField;
+    ZQ_SucursalDIRECCION: TStringField;
+    ZQ_SucursalLOCALIDAD: TStringField;
+    ZQ_SucursalCODIGO_POSTAL: TStringField;
+    ZQ_SucursalTELEFONO: TStringField;
+    ZQ_SucursalEMAIL: TStringField;
+    ZQ_SucursalBAJA: TStringField;
+    ZQ_SucursalLOGO: TBlobField;
+    ZQ_SucursalREPORTE_TITULO: TStringField;
+    ZQ_SucursalREPORTE_SUBTITULO: TStringField;
+    ZQ_SucursalCOMPROBANTE_TITULO: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
+    procedure VariablesComprobantes(Reporte: TQuickRep);
     procedure configMail(Tipo: String; id: integer);
   private
     auxDecimalSeparator, auxThousandSeparator: Char;
@@ -247,10 +262,33 @@ var
 begin
   Form := Tform(Reporte.Owner);
   Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Titulo'));
-  Etiqueta.Caption:= ZQ_ConfigReporteREPORTE_TITULO.AsString;
+  Etiqueta.Caption:= ZQ_SucursalREPORTE_TITULO.AsString;
 
   Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Subtitulo'));
-  Etiqueta.Caption:= ZQ_ConfigReporteREPORTE_SUBTITULO.AsString;
+  Etiqueta.Caption:= ZQ_SucursalREPORTE_SUBTITULO.AsString;
+end;
+
+
+procedure TDM.VariablesComprobantes(Reporte: TQuickRep);
+var
+  Etiqueta : TQRLabel;
+  Form : TForm;
+begin
+  Form := Tform(Reporte.Owner);
+  Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Titulo'));
+  Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_TITULO.AsString;
+
+  Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Renglon1'));
+  Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_RENGLON1.AsString;
+
+  Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Renglon2'));
+  Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_RENGLON2.AsString;
+
+  Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Renglon3'));
+  Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_RENGLON3.AsString;
+
+  Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Renglon4'));
+  Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_RENGLON4.AsString;
 end;
 
 
@@ -292,9 +330,9 @@ end;
 
 procedure TDM.cargarReporteSucursal(idSucursal: integer);
 begin
-  ZQ_ConfigReporte.Close;
-  ZQ_ConfigReporte.ParamByName('id_sucursal').AsInteger:= idSucursal;
-  ZQ_ConfigReporte.open;
+  ZQ_Sucursal.Close;
+  ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:= idSucursal;
+  ZQ_Sucursal.open;
 end;
 
 end.
