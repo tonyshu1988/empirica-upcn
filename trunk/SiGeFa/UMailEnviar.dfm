@@ -1,6 +1,6 @@
 object FMailEnviar: TFMailEnviar
-  Left = 363
-  Top = 274
+  Left = 289
+  Top = 129
   BorderStyle = bsDialog
   Caption = 'Enviar Mail'
   ClientHeight = 562
@@ -738,7 +738,7 @@ object FMailEnviar: TFMailEnviar
       Category = 0
       Hint = 'Enviar el Mail'
       Visible = ivAlways
-      ImageIndex = 77
+      ImageIndex = 76
       OnClick = btnEnviarClick
       AutoGrayScale = False
     end

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKVistaPreviaQR, QRCtrls, QuickRpt, jpeg, ExtCtrls, EKNumeroATexto,
-  EKDbSuma;
+  EKDbSuma, QRPDFFilt;
 
 type
   TFImpresion_Comprobantes = class(TForm)
@@ -22,7 +22,7 @@ type
     RepRemito_RENGLON4: TQRLabel;
     RepRemito_RENGLON3: TQRLabel;
     RepRemito_RENGLON2: TQRLabel;
-    RepRemitos_TITULO: TQRLabel;
+    RepRemito_TITULO: TQRLabel;
     QRShape1: TQRShape;
     QRLabel74: TQRLabel;
     QRLabel75: TQRLabel;
@@ -51,7 +51,6 @@ type
     QRLabel104: TQRLabel;
     QRDBText68: TQRDBText;
     RepRecibo_RENGLON1: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     ZQ_Fpago: TZQuery;
     ZQ_FpagoID_COMPROB_FP: TIntegerField;
     ZQ_FpagoID_COMPROBANTE: TIntegerField;
@@ -402,15 +401,19 @@ type
     QRLabel25: TQRLabel;
     QRLabel66: TQRLabel;
     QRLabel90: TQRLabel;
+    EKVistaPrevia: TEKVistaPreviaQR;
   private
-    { Private declarations }
+    reporte: TQuickRep;
+    archivoPDF: string;
   public
     procedure cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer);
-    procedure imprimirRecibo();
-    procedure imprimirPresupuesto();
-    procedure imprimirNotaPedido();
-    procedure imprimirRemito();
-    procedure imprimirOrdenPago();
+    procedure configRecibo();
+    procedure configPresupuesto();
+    procedure configNotaPedido();
+    procedure configRemito();
+    procedure configOrdenPago();
+    procedure imprimir();
+    function  generarPDF(): string;
   end;
 
 var
@@ -449,26 +452,53 @@ begin
 
   case ZQ_ComprobanteID_TIPO_CPB.AsInteger of
     CPB_PRESUPUESTO:  begin //CPB_PRESUPUESTO
-                        imprimirPresupuesto;
+                        configPresupuesto;
+                        reporte:= RepPresupuesto;
+                        archivoPDF:= 'Presupuesto.pdf';
                       end;
     CPB_NOTA_PEDIDO:  begin //CPB_NOTA_PEDIDO
-                        imprimirNotaPedido;
+                        configNotaPedido;
+                        reporte:= RepNotaPedido;
+                        archivoPDF:= 'NotaPedido.pdf';
                       end;
     CPB_REMITO_VENTA: begin //CPB_REMITO_VENTA
-                        imprimirRemito;
+                        configRemito;
+                        reporte:= RepRemito;
+                        archivoPDF:= 'Remito.pdf';
                       end;
     CPB_RECIBO_COBRO: begin //CPB_RECIBO_COBRO
-                        imprimirRecibo;
+                        configRecibo;
+                        reporte:= RepRecibo;
+                        archivoPDF:= 'Recibo.pdf';
                       end;
     CPB_ORDEN_PAGO:   begin //CPB_ORDEN_PAGO
-                        imprimirOrdenPago;
+                        configOrdenPago;
+                        reporte:= RepOrdenPago;
+                        archivoPDF:= 'OrdenPago.pdf';
                       end;
   end;
 end;
 
+procedure TFImpresion_Comprobantes.imprimir();
+begin
+  EKVistaPrevia.VistaPrevia;
+end;
+
+
+function TFImpresion_Comprobantes.generarPDF(): string;
+var
+  aPDF: TQRPDFDocumentFilter;
+begin
+  aPDF := TQRPDFDocumentFilter.Create(ExtractFilePath(Application.ExeName)+archivoPDF); //creo el archivo
+  reporte.ExportToFilter(aPDF);
+  aPDF.free;
+
+  Result:= archivoPDF;
+end;
+
 
 //RECIBOS
-procedure TFImpresion_Comprobantes.imprimirRecibo();
+procedure TFImpresion_Comprobantes.configRecibo();
 var
   ImporteTotal: double;
 begin
@@ -481,14 +511,13 @@ begin
   QRlblRecibo_ImporteTotal.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
 
   QRlblRecibo_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  //DM.VariablesReportes(RepRecibo);
+  DM.VariablesComprobantes(RepRecibo);
   EKVistaPrevia.Reporte:= RepRecibo;
-  EKVistaPrevia.VistaPrevia;
 end;
 
 
 //PRESUPUESTO
-procedure TFImpresion_Comprobantes.imprimirPresupuesto();
+procedure TFImpresion_Comprobantes.configPresupuesto();
 begin
   if ZQ_Comprobante.IsEmpty then
     exit;
@@ -496,14 +525,13 @@ begin
   QRlblPresupuesto_ImporteTotal.Caption := FormatFloat('$ ###,###,###,##0.00', ZQ_ComprobanteBASE_IMPONIBLE.AsFloat);
 
   QRlblPresupuesto_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  //DM.VariablesReportes(RepPresupuesto);
+  DM.VariablesComprobantes(RepPresupuesto);
   EKVistaPrevia.Reporte:= RepPresupuesto;
-  EKVistaPrevia.VistaPrevia;
 end;
 
 
 //REMITO
-procedure TFImpresion_Comprobantes.imprimirRemito();
+procedure TFImpresion_Comprobantes.configRemito();
 var
   cantidadProductos: Double;
 begin
@@ -514,14 +542,13 @@ begin
   QRlblRemito_CantidadTotal.Caption := FormatFloat('0.00', cantidadProductos);
 
   QRlblRemito_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  //DM.VariablesReportes(RepRemito);
+  DM.VariablesComprobantes(RepRemito);
   EKVistaPrevia.Reporte:= RepRemito;
-  EKVistaPrevia.VistaPrevia;
 end;
 
 
 //NOTA PEDIDO
-procedure TFImpresion_Comprobantes.imprimirNotaPedido();
+procedure TFImpresion_Comprobantes.configNotaPedido();
 var
   cantidadProductos: Double;
 begin
@@ -532,14 +559,13 @@ begin
   QRlblNotaPedido_CantidadTotal.Caption := FormatFloat('0.00', cantidadProductos);
 
   QRlblNotaPedido_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  //DM.VariablesReportes(RepNotaPedido);
+  DM.VariablesComprobantes(RepNotaPedido);
   EKVistaPrevia.Reporte:= RepNotaPedido;
-  EKVistaPrevia.VistaPrevia;
 end;
 
 
 //ORDEN PAGO
-procedure TFImpresion_Comprobantes.imprimirOrdenPago();
+procedure TFImpresion_Comprobantes.configOrdenPago();
 var
   ImporteTotal: double;
 begin
@@ -552,9 +578,8 @@ begin
   QRlblOrdenPago_ImporteTotal.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
 
   QRlblOrdenPago_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  //DM.VariablesReportes(RepNotaPedido);
+  DM.VariablesComprobantes(RepOrdenPago);
   EKVistaPrevia.Reporte:= RepOrdenPago;
-  EKVistaPrevia.VistaPrevia;
 end;
 
 

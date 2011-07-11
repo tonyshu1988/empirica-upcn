@@ -1,6 +1,6 @@
 object FMailBandeja: TFMailBandeja
-  Left = 409
-  Top = 221
+  Left = 329
+  Top = 105
   Width = 848
   Height = 627
   Caption = 'Bandeja de Mail'
@@ -45,7 +45,7 @@ object FMailBandeja: TFMailBandeja
         Top = 0
         Width = 832
         Height = 501
-        ActivePage = TabBandejaEntrada
+        ActivePage = TabBandejaSalida
         Align = alClient
         TabOrder = 0
         object TabBandejaSalida: TTabSheet
@@ -67,7 +67,7 @@ object FMailBandeja: TFMailBandeja
               Color = 14606012
               DataSource = DS_MailSalida
               Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-              PopupMenu = PopupMenu2
+              PopupMenu = PopupMenuSalida
               TabOrder = 0
               TitleFont.Charset = DEFAULT_CHARSET
               TitleFont.Color = clWindowText
@@ -352,11 +352,15 @@ object FMailBandeja: TFMailBandeja
                 item
                   Caption = 'Tama'#241'o'
                   Width = 90
+                end
+                item
+                  Caption = 'UID'
+                  Width = 250
                 end>
               FlatScrollBars = True
               ReadOnly = True
               RowSelect = True
-              PopupMenu = PopupMenu1
+              PopupMenu = PopupMenuEntrada
               SmallImages = FPrincipal.Iconos_Mail
               StateImages = FPrincipal.Iconos_Mail
               TabOrder = 0
@@ -584,7 +588,7 @@ object FMailBandeja: TFMailBandeja
     Width = 832
     Height = 36
     Align = alTop
-    TabOrder = 3
+    TabOrder = 1
     object Label6: TLabel
       Left = 96
       Top = 11
@@ -614,8 +618,35 @@ object FMailBandeja: TFMailBandeja
     Width = 80
     Height = 27
     Caption = 'Cambiar'
-    TabOrder = 6
+    TabOrder = 5
     OnClick = btnCambiarCuentaClick
+  end
+  object ListView1: TListView
+    Left = 273
+    Top = 355
+    Width = 280
+    Height = 134
+    Align = alCustom
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    Columns = <
+      item
+        Width = 2
+      end
+      item
+        Alignment = taCenter
+        Caption = 'Nro.'
+        Width = 70
+      end
+      item
+        Alignment = taCenter
+        Caption = 'UID'
+        Width = 200
+      end>
+    ReadOnly = True
+    RowSelect = True
+    TabOrder = 7
+    ViewStyle = vsReport
+    Visible = False
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -1056,7 +1087,7 @@ object FMailBandeja: TFMailBandeja
       Category = 0
       Hint = 'Verificar si hay mail nuevos en la bandeja de entrada'
       Visible = ivAlways
-      ImageIndex = 76
+      ImageIndex = 75
       OnClick = btnRecibirClick
       AutoGrayScale = False
     end
@@ -1065,7 +1096,7 @@ object FMailBandeja: TFMailBandeja
       Category = 0
       Hint = 'Redactar un nuevo mail'
       Visible = ivAlways
-      ImageIndex = 77
+      ImageIndex = 76
       OnClick = btnNuevoClick
       AutoGrayScale = False
     end
@@ -1095,7 +1126,7 @@ object FMailBandeja: TFMailBandeja
       Category = 0
       Hint = 'Desconectar'
       Visible = ivAlways
-      ImageIndex = 68
+      ImageIndex = 67
       OnClick = btnDesconectarClick
       AutoGrayScale = False
     end
@@ -1667,29 +1698,34 @@ object FMailBandeja: TFMailBandeja
       80FFF80FE07FF83FC3FFFFFFF03FF83F00000000000000000000000000000000
       000000000000}
   end
-  object PopupMenu1: TPopupMenu
+  object PopupMenuEntrada: TPopupMenu
     Images = FPrincipal.Iconos_Mail
-    Left = 92
+    Left = 60
     Top = 96
-    object Recibir1: TMenuItem
+    object ItemPUEntrada_Recibir: TMenuItem
       Caption = 'Recibir'
       ImageIndex = 0
-      OnClick = Recibir1Click
+      OnClick = ItemPUEntrada_RecibirClick
     end
-    object AbrirMail1: TMenuItem
+    object ItemPUEntrada_AbrirMail: TMenuItem
       Caption = 'Abrir Mail'
       ImageIndex = 7
-      OnClick = AbrirMail1Click
+      OnClick = ItemPUEntrada_AbrirMailClick
     end
-    object MarcarEliminar1: TMenuItem
+    object ItemPUEntrada_MarcarEliminar: TMenuItem
       Caption = 'Marcar para Eliminar'
       ImageIndex = 3
-      OnClick = MarcarEliminar1Click
+      OnClick = ItemPUEntrada_MarcarEliminarClick
     end
-    object EliminarMarcados1: TMenuItem
+    object ItemPUEntrada_EliminarMarcados: TMenuItem
       Caption = 'Eliminar Marcados'
       ImageIndex = 4
-      OnClick = EliminarMarcados1Click
+      OnClick = ItemPUEntrada_EliminarMarcadosClick
+    end
+    object ItemPUEntrada_Responder: TMenuItem
+      Caption = 'Responder'
+      ImageIndex = 7
+      OnClick = ItemPUEntrada_ResponderClick
     end
   end
   object EKListadoCuentas: TEKListadoSQL
@@ -1853,14 +1889,19 @@ object FMailBandeja: TFMailBandeja
     Left = 356
     Top = 148
   end
-  object PopupMenu2: TPopupMenu
+  object PopupMenuSalida: TPopupMenu
     Images = FPrincipal.Iconos_Mail
-    Left = 92
+    Left = 60
     Top = 152
-    object Reenviar1: TMenuItem
+    object ItemPUSalida_Reenviar: TMenuItem
       Caption = 'Reenviar'
       ImageIndex = 5
-      OnClick = Reenviar1Click
+      OnClick = ItemPUSalida_ReenviarClick
     end
+  end
+  object ZQuery1: TZQuery
+    Params = <>
+    Left = 92
+    Top = 378
   end
 end
