@@ -7,7 +7,8 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids,
   EKEdit,UBuscarProducto, Mask, Provider, DBClient, ActnList,
-  XPStyleActnCtrls, ActnMan, EKListadoSQL, ISDbSuma,UBuscarPersona, Buttons;
+  XPStyleActnCtrls, ActnMan, EKListadoSQL, ISDbSuma,UBuscarPersona, Buttons,
+  EKDbSuma;
 
 type
   TFCajero = class(TForm)
@@ -84,7 +85,7 @@ type
     Bt_Imprimir_Arqueo: TdxBarLargeButton;
     Bt_Imprimir_convenio: TdxBarLargeButton;
     BtLeerCodigo: TdxBarLargeButton;
-    BtBuscar: TdxBarLargeButton;
+    btIVA: TdxBarLargeButton;
     btLiquidar: TdxBarLargeButton;
     Bt_imprimir_listadoFP: TdxBarLargeButton;
     bt_cierre_X: TdxBarLargeButton;
@@ -136,18 +137,16 @@ type
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
-    AModificar: TAction;
-    AEliminar: TAction;
-    ABaja: TAction;
-    AReactivar: TAction;
+    ATipoIVA: TAction;
+    ACliente: TAction;
+    APago: TAction;
+    ASalir: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
     ZQ_ProductosIMAGEN: TBlobField;
     btnBorrarPago: TButton;
-    ISDbSumaLista: TISDbSuma;
     CD_Fpago: TClientDataSet;
     DSFpago: TDataSource;
-    ISDbSumaFpago: TISDbSuma;
     CD_FpagoID_COMPROB_FP: TIntegerField;
     CD_FpagoID_COMPROBANTE: TIntegerField;
     CD_FpagoID_TIPO_FORMAPAG: TIntegerField;
@@ -263,11 +262,27 @@ type
     CD_Comprobantepers_direccion: TStringField;
     CD_DetalleFacturaproducto: TStringField;
     ZQ_ProductosDETALLE_PROD: TStringField;
+    DBText7: TDBText;
+    DBText8: TDBText;
+    ZQ_TipoIVA: TZQuery;
+    ZQ_TipoIVAID_TIPO_IVA: TIntegerField;
+    ZQ_TipoIVANOMBRE_TIPO_IVA: TStringField;
+    ZQ_TipoIVAABREVIATURA: TStringField;
+    ZQ_TipoIVADISCRIMINAR: TStringField;
+    ZQ_TipoIVALETRA: TStringField;
+    ZQ_TipoIVAFISCAL: TStringField;
+    CD_ComprobanteID_TIPO_IVA: TIntegerField;
+    ZQ_ComprobantePUNTO_VENTA: TIntegerField;
+    ZQ_ComprobanteNUMERO_CPB: TIntegerField;
+    ZQ_ComprobanteFECHA_ANULADO: TDateField;
+    ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
+    CD_ComprobantetipoIVA: TStringField;
+    EKListadoIVA: TEKListadoSQL;
+    EKDbSuma1: TEKDbSuma;
+    EKDbSuma2: TEKDbSuma;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
-    procedure ISDbSumaListaSumListChanged(Sender: TObject);
-    procedure ISDbSumaFpagoSumListChanged(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
     procedure BtAgregarPagoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -287,6 +302,16 @@ type
     procedure BtAceptarPagoClick(Sender: TObject);
     procedure BtCancelarPagoClick(Sender: TObject);
     procedure crearComprobante();
+    procedure btIVAClick(Sender: TObject);
+    procedure ANuevoExecute(Sender: TObject);
+    procedure ASalirExecute(Sender: TObject);
+    procedure ATipoIVAExecute(Sender: TObject);
+    procedure AClienteExecute(Sender: TObject);
+    procedure APagoExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
+    procedure EKDbSuma1SumListChanged(Sender: TObject);
+    procedure EKDbSuma2SumListChanged(Sender: TObject);
   private
     vsel: TFBuscarProducto;
     vsel2 : TFBuscarPersona;
@@ -304,7 +329,7 @@ var
   FCajero: TFCajero;
   importeacob, punitoriosacob, acumulado, acumFpago: double;
   IdProd:Integer;
-  cliente,cajero:Integer;
+  cliente,ClienteIVA,cajero:Integer;
   descCliente:double;
 const
   abmComprobante='ABM Factura-Cajero';
@@ -347,7 +372,7 @@ end;
 procedure TFCajero.BtBuscarProductoClick(Sender: TObject);
 begin
 if not Assigned(vsel) then
-    vsel:= TFBuscarProducto.Create(nil);
+  vsel:= TFBuscarProducto.Create(nil);
   vsel.OnSeleccionar := onSelProducto;
   vsel.ShowModal;
 end;
@@ -402,19 +427,6 @@ begin
      codBarras.Text:=ZQ_ProductosCODIGO_BARRA.AsString;
      edCantidad.SetFocus;
    end
-end;
-
-procedure TFCajero.ISDbSumaListaSumListChanged(Sender: TObject);
-begin
-  acumulado := ISDbSumaLista.SumCollection[0].SumValue;
-  importe.Text := FormatFloat('$ ##,###,##0.00 ', acumulado);
-  CD_ComprobanteBASE_IMPONIBLE.AsFloat:=acumulado;
-end;
-
-procedure TFCajero.ISDbSumaFpagoSumListChanged(Sender: TObject);
-begin
-  acumFpago := ISDbSumaFpago.SumCollection[0].SumValue;
-  importeFpago.Text := FormatFloat('$ ##,###,##0.00 ', acumFpago);
 end;
 
 procedure TFCajero.BtAgregarPagoClick(Sender: TObject);
@@ -689,8 +701,11 @@ begin
   if not(vsel2.ZQ_PersonasID_PERSONA.IsNull) then
    begin
     Cliente:=vsel2.ZQ_PersonasID_PERSONA.AsInteger;
+    ClienteIVA:=vsel2.ZQ_PersonasID_TIPO_IVA.AsInteger;
     CD_ComprobanteID_CLIENTE.AsInteger:=Cliente;
+    CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
     vsel2.Close;
+
    end;
 end;
 
@@ -707,6 +722,9 @@ begin
 //Hacer las validaciones correspondientes (por ej formas de pago=acumulado)
 if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_ComprobanteDetalle]) then
    begin
+      CD_ComprobanteIMPORTE_TOTAL.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat-CD_ComprobanteIMPORTE_DESCUENTO.AsFloat+CD_ComprobanteIMPORTE_IVA.AsFloat;
+      CD_ComprobanteSALDO.AsFloat:=CD_ComprobanteIMPORTE_TOTAL.AsFloat;
+
       ZQ_Comprobante.Append;
       ZQ_ComprobanteID_SUCURSAL.Value:=CD_ComprobanteID_SUCURSAL.Value;
       ZQ_ComprobanteID_PROVEEDOR.Clear;
@@ -726,6 +744,7 @@ if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_Comprobante
       ZQ_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteIMPORTE_DESCUENTO.AsFloat;
       ZQ_ComprobanteENCABEZADO.AsString:=CD_ComprobanteENCABEZADO.AsString;
       ZQ_ComprobantePIE.AsString:=CD_ComprobantePIE.AsString;
+      ZQ_ComprobanteID_TIPO_IVA.AsInteger:=CD_ComprobanteID_TIPO_IVA.AsInteger;
       ZQ_ComprobanteFECHA_COBRADA.Clear;
       ZQ_ComprobanteFECHA_ENVIADA.Clear;
       ZQ_ComprobanteFECHA_IMPRESA.Clear;
@@ -738,12 +757,16 @@ if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_Comprobante
       Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
      end;
 
-
       CD_DetalleFactura.EmptyDataSet;
       CD_Fpago.EmptyDataSet;
+      LimpiarCodigo();
+      crearComprobante();
+      CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
+      CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
       BtAgregarPago.Enabled := true;
       BtAceptarPago.Enabled := false;
       BtCancelarPago.Enabled := false;
+
 end;
 
 procedure TFCajero.BtCancelarPagoClick(Sender: TObject);
@@ -751,12 +774,7 @@ begin
   crearComprobante();
   CD_DetalleFactura.EmptyDataSet;
   CD_Fpago.EmptyDataSet;
-  acumulado := 0;
-  importe.Text := '';
-  acumFpago := 0;
-  ImporteFpago.Text := '';
-  ISDbSumaLista.SumCollection[0].SumValue := 0;
-  ISDbSumaFpago.SumCollection[0].SumValue := 0;
+
   BtAgregarPago.Enabled := true;
   BtAceptarPago.Enabled := false;
   BtCancelarPago.Enabled := false;
@@ -764,13 +782,18 @@ end;
 
 procedure TFCajero.crearComprobante;
 begin
-  cliente:=-1;
+
   importeacob:=0;
   punitoriosacob:=0;
   acumulado:=0;
   acumFpago:=0;
   IdProd:=-1;
   descCliente:=0;
+  EKDbSuma1.SumCollection[0].SumValue := 0;
+  EKDbSuma2.SumCollection[0].SumValue := 0;
+  importe.Text := '';
+  acumFpago := 0;
+  ImporteFpago.Text := '';
 
   CD_Comprobante.EmptyDataSet;
   CD_Comprobante.Append;
@@ -796,6 +819,64 @@ begin
   CD_ComprobanteFECHA_IMPRESA.Clear;
   CD_ComprobanteFECHA_VENCIMIENTO.Clear
 
+end;
+
+
+
+procedure TFCajero.btIVAClick(Sender: TObject);
+begin
+if (CD_Comprobante.State=dsInsert) then
+  if EKListadoIVA.Buscar then
+    CD_ComprobanteID_TIPO_IVA.AsInteger:=StrToInt(EKListadoIVA.Resultado);
+end;
+
+procedure TFCajero.ANuevoExecute(Sender: TObject);
+begin
+BtBuscarProducto.Click;
+end;
+
+procedure TFCajero.ASalirExecute(Sender: TObject);
+begin
+btsalir.Click;
+end;
+
+procedure TFCajero.ATipoIVAExecute(Sender: TObject);
+begin
+btIVA.Click;
+end;
+
+procedure TFCajero.AClienteExecute(Sender: TObject);
+begin
+bt_BuscarCliente.Click;
+end;
+
+procedure TFCajero.APagoExecute(Sender: TObject);
+begin
+BtAgregarPago.Click;
+end;
+
+procedure TFCajero.AGuardarExecute(Sender: TObject);
+begin
+BtAceptarPago.Click;
+end;
+
+procedure TFCajero.ACancelarExecute(Sender: TObject);
+begin
+BtCancelarPago.Click;
+end;
+
+procedure TFCajero.EKDbSuma1SumListChanged(Sender: TObject);
+begin
+acumulado := EKDbSuma1.SumCollection[0].SumValue;
+  importe.Text := FormatFloat('$ ##,###,##0.00 ', acumulado);
+  if (CD_Comprobante.state=dsInsert) then
+    CD_ComprobanteBASE_IMPONIBLE.AsFloat:=acumulado;
+end;
+
+procedure TFCajero.EKDbSuma2SumListChanged(Sender: TObject);
+begin
+  acumFpago := EKDbSuma2.SumCollection[0].SumValue;
+  importeFpago.Text := FormatFloat('$ ##,###,##0.00 ', acumFpago);
 end;
 
 end.
