@@ -87,6 +87,10 @@ type
     ABMComprobante1: TMenuItem;
     ACajero: TAction;
     Cajero1: TMenuItem;
+    AMovInternos: TAction;
+    MovimientosInternos1: TMenuItem;
+    AABM_TipoMov: TAction;
+    ABMTipoMovimiento1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -117,6 +121,8 @@ type
     procedure AABM_PreciosExecute(Sender: TObject);
     procedure AABM_ComprobanteExecute(Sender: TObject);
     procedure ACajeroExecute(Sender: TObject);
+    procedure AMovInternosExecute(Sender: TObject);
+    procedure AABM_TipoMovExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -141,7 +147,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UImprimirEtiquetas, UMailBandeja, USeleccionarSucursal, UMailConfigurar,
   UMailEnviar, UABM_Colores, UABM_TipoIVA, UABM_TipoFormaPago,
   UABM_Cuentas, UABM_TipoComprobante, UABM_Precios, UABM_Comprobantes,
-  UCajero;
+  UCajero, UMovimientosInternos, UABM_TipoMovimiento;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -437,6 +443,16 @@ end;
 procedure TFPrincipal.ACajeroExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFCajero, FCajero);
+end;
+
+procedure TFPrincipal.AMovInternosExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFMovimientosInternos, FMovimientosInternos);
+end;
+
+procedure TFPrincipal.AABM_TipoMovExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABM_TipoMovimiento, FABM_TipoMovimiento);
 end;
 
 end.
