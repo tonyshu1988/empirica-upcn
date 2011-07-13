@@ -333,8 +333,15 @@ object FListadoSQL: TFListadoSQL
     Top = 40
     Width = 649
     Height = 241
+    Color = 16768185
     DataSource = D_Datos
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Verdana'
+    Font.Style = []
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    ParentFont = False
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -381,6 +388,7 @@ object FListadoSQL: TFListadoSQL
     Width = 489
     Height = 21
     CharCase = ecUpperCase
+    Color = 13828095
     TabOrder = 3
     OnKeyUp = buscarKeyUp
   end
