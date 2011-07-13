@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 257
-  Top = 140
+  Left = 274
+  Top = 161
   Width = 862
   Height = 536
   Caption = 'ABM Personas'
@@ -12,10 +12,9 @@ object FABM_Personas: TFABM_Personas
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
-  WindowState = wsMaximized
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -3603,7 +3602,7 @@ object FABM_Personas: TFABM_Personas
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'F4 - Baja'
+      Caption = 'F5 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
@@ -3612,7 +3611,7 @@ object FABM_Personas: TFABM_Personas
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'F5 - Reactivar'
+      Caption = 'F6 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways

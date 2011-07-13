@@ -12,7 +12,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   OnCloseQuery = FormCloseQuery
@@ -126,7 +126,6 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
-          DataSet = DM.ZQ_ConfigReporte
           Stretch = True
         end
         object QRLabel17: TQRLabel
@@ -1650,7 +1649,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'F4 - Baja'
+      Caption = 'F5 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
@@ -1659,7 +1658,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'F5 - Reactivar'
+      Caption = 'F6 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways

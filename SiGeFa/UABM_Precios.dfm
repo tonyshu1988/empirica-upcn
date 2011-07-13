@@ -12,7 +12,7 @@ object FABM_Precios: TFABM_Precios
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   OnCloseQuery = FormCloseQuery
@@ -22,181 +22,10 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1016
-    Height = 684
+    Width = 1008
+    Height = 678
     Align = alClient
     TabOrder = 4
-    object DBGridProductos: TDBGrid
-      Left = 1
-      Top = 1
-      Width = 1014
-      Height = 648
-      Align = alClient
-      Color = 14606012
-      DataSource = DS_Productos
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-      TabOrder = 0
-      TitleFont.Charset = ANSI_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_PRODUCTO'
-          ReadOnly = True
-          Title.Caption = 'Nombre Producto'
-          Width = 135
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TIPO_ARTICULO'
-          ReadOnly = True
-          Title.Caption = 'Tipo Articulo'
-          Width = 89
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'ARTICULO'
-          ReadOnly = True
-          Title.Caption = 'Articulo'
-          Width = 83
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'MEDIDA'
-          ReadOnly = True
-          Title.Caption = 'Medida'
-          Width = 57
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_MARCA'
-          ReadOnly = True
-          Title.Caption = 'Marca'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'PRECIO_COSTO'
-          Title.Caption = 'Importe Costo'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'PRECIO_VENTA'
-          Title.Caption = 'Importe Venta'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COEF_GANANCIA'
-          Title.Caption = 'Coef. Ganancia'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'IMPUESTO_IVA'
-          Title.Caption = 'I.V.A.'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COEF_DESCUENTO'
-          Title.Caption = 'Coef. Descuento'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'IMPUESTO_INTERNO'
-          Title.Caption = 'Impuesto Interno'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COD_CORTO'
-          ReadOnly = True
-          Title.Caption = 'Cod. Corto'
-          Width = 88
-          Visible = True
-        end>
-    end
-    object PanelEdicion: TPanel
-      Left = 1
-      Top = 649
-      Width = 1014
-      Height = 34
-      Align = alBottom
-      TabOrder = 1
-      object Label1: TLabel
-        Left = 3
-        Top = 10
-        Width = 320
-        Height = 13
-        Caption = 'Seleccione el tipo de calculo para actualizar su importe:'
-      end
-      object Label2: TLabel
-        Left = 525
-        Top = 10
-        Width = 101
-        Height = 13
-        Caption = 'Importe S/Costo:'
-      end
-      object Label3: TLabel
-        Left = 725
-        Top = 10
-        Width = 101
-        Height = 13
-        Caption = 'Importe S/Venta:'
-      end
-      object LabelTipo2: TLabel
-        Left = 831
-        Top = 10
-        Width = 12
-        Height = 13
-        Caption = '%'
-      end
-      object LabelTipo1: TLabel
-        Left = 630
-        Top = 10
-        Width = 12
-        Height = 13
-        Caption = '%'
-      end
-      object EditCosto: TEdit
-        Left = 643
-        Top = 5
-        Width = 63
-        Height = 21
-        TabOrder = 0
-      end
-      object EditVenta: TEdit
-        Left = 843
-        Top = 6
-        Width = 63
-        Height = 21
-        TabOrder = 1
-      end
-      object RadioGroupTipoCalculo: TRadioGroup
-        Left = 329
-        Top = -1
-        Width = 185
-        Height = 29
-        Columns = 2
-        ItemIndex = 0
-        Items.Strings = (
-          'Porcentaje'
-          'Dinero')
-        TabOrder = 2
-        OnClick = RadioGroupTipoCalculoClick
-      end
-    end
     object RepListaPrecios: TQuickRep
       Tag = 99
       Left = 113
@@ -275,7 +104,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333400000
+          320.145833333333300000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -343,7 +172,7 @@ object FABM_Precios: TFABM_Precios
             52.916666666666670000
             1145.645833333333000000
             95.250000000000000000
-            478.895833333333400000)
+            478.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1304,7 +1133,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1352,7 +1181,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -1439,7 +1268,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1671,11 +1500,182 @@ object FABM_Precios: TFABM_Precios
         end
       end
     end
+    object DBGridProductos: TDBGrid
+      Left = 1
+      Top = 1
+      Width = 1006
+      Height = 642
+      Align = alClient
+      Color = 14606012
+      DataSource = DS_Productos
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_PRODUCTO'
+          ReadOnly = True
+          Title.Caption = 'Nombre Producto'
+          Width = 135
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TIPO_ARTICULO'
+          ReadOnly = True
+          Title.Caption = 'Tipo Articulo'
+          Width = 89
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ARTICULO'
+          ReadOnly = True
+          Title.Caption = 'Articulo'
+          Width = 83
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'MEDIDA'
+          ReadOnly = True
+          Title.Caption = 'Medida'
+          Width = 57
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_MARCA'
+          ReadOnly = True
+          Title.Caption = 'Marca'
+          Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRECIO_COSTO'
+          Title.Caption = 'Importe Costo'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRECIO_VENTA'
+          Title.Caption = 'Importe Venta'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COEF_GANANCIA'
+          Title.Caption = 'Coef. Ganancia'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IMPUESTO_IVA'
+          Title.Caption = 'I.V.A.'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COEF_DESCUENTO'
+          Title.Caption = 'Coef. Descuento'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IMPUESTO_INTERNO'
+          Title.Caption = 'Impuesto Interno'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COD_CORTO'
+          ReadOnly = True
+          Title.Caption = 'Cod. Corto'
+          Width = 88
+          Visible = True
+        end>
+    end
+    object PanelEdicion: TPanel
+      Left = 1
+      Top = 643
+      Width = 1006
+      Height = 34
+      Align = alBottom
+      TabOrder = 1
+      object Label1: TLabel
+        Left = 3
+        Top = 10
+        Width = 320
+        Height = 13
+        Caption = 'Seleccione el tipo de calculo para actualizar su importe:'
+      end
+      object Label2: TLabel
+        Left = 525
+        Top = 10
+        Width = 101
+        Height = 13
+        Caption = 'Importe S/Costo:'
+      end
+      object Label3: TLabel
+        Left = 725
+        Top = 10
+        Width = 101
+        Height = 13
+        Caption = 'Importe S/Venta:'
+      end
+      object LabelTipo2: TLabel
+        Left = 831
+        Top = 10
+        Width = 12
+        Height = 13
+        Caption = '%'
+      end
+      object LabelTipo1: TLabel
+        Left = 630
+        Top = 10
+        Width = 12
+        Height = 13
+        Caption = '%'
+      end
+      object EditCosto: TEdit
+        Left = 643
+        Top = 5
+        Width = 63
+        Height = 21
+        TabOrder = 0
+      end
+      object EditVenta: TEdit
+        Left = 843
+        Top = 6
+        Width = 63
+        Height = 21
+        TabOrder = 1
+      end
+      object RadioGroupTipoCalculo: TRadioGroup
+        Left = 329
+        Top = -1
+        Width = 185
+        Height = 29
+        Columns = 2
+        ItemIndex = 0
+        Items.Strings = (
+          'Porcentaje'
+          'Dinero')
+        TabOrder = 2
+        OnClick = RadioGroupTipoCalculoClick
+      end
+    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

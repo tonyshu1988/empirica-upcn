@@ -12,7 +12,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   OnCloseQuery = FormCloseQuery
@@ -126,7 +126,6 @@ object FABM_TipoIVA: TFABM_TipoIVA
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
-          DataSet = DM.ZQ_ConfigReporte
           Stretch = True
         end
         object QRLabel17: TQRLabel

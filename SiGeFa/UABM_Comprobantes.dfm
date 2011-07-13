@@ -28,7 +28,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
     Width = 265
     Height = 163
     BorderWidth = 4
-    TabOrder = 3
+    TabOrder = 2
     Visible = False
     object RadioGroupTipoComprobante: TRadioGroup
       Left = 5
@@ -2707,7 +2707,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'F4 - Anular'
+      Caption = 'F5 - Anular'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways

@@ -34,7 +34,9 @@ uses
   UABM_Comprobantes in 'UABM_Comprobantes.pas' {FABM_Comprobantes},
   UCajero in 'UCajero.pas' {FCajero},
   UBuscarProducto in 'UBuscarProducto.pas' {FBuscarProducto},
-  UImpresion_Comprobantes in 'UImpresion_Comprobantes.pas' {FImpresion_Comprobantes};
+  UImpresion_Comprobantes in 'UImpresion_Comprobantes.pas' {FImpresion_Comprobantes},
+  UMovimientosInternos in 'UMovimientosInternos.pas' {FMovimientosInternos},
+  UABM_TipoMovimiento in 'UABM_TipoMovimiento.pas' {FABM_TipoMovimiento};
 
 {$R *.res}
 
