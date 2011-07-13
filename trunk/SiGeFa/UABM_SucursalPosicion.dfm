@@ -1,6 +1,6 @@
 object FABM_SucursalPosicion: TFABM_SucursalPosicion
-  Left = 223
-  Top = 109
+  Left = 244
+  Top = 169
   Width = 981
   Height = 549
   Caption = 'ABM Sucursal Posicion'
@@ -12,7 +12,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
   OnActivate = FormActivate
@@ -127,7 +127,6 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
-          DataSet = DM.ZQ_ConfigReporte
           Stretch = True
         end
         object QRLabel17: TQRLabel

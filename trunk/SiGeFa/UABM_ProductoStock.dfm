@@ -12,7 +12,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Visible = True
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery

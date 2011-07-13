@@ -1,9 +1,9 @@
-object FABM_TipoArticulo: TFABM_TipoArticulo
-  Left = 374
-  Top = 243
+object FABM_TipoMovimiento: TFABM_TipoMovimiento
+  Left = 317
+  Top = 168
   Width = 870
   Height = 500
-  Caption = 'ABM Tipo Articulo'
+  Caption = 'ABM Tipo Movimiento'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,7 +27,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object RepTipoArticulo: TQuickRep
+    object RepTipoMov: TQuickRep
       Tag = 99
       Left = 54
       Top = 36
@@ -38,7 +38,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
       Frame.DrawBottom = False
       Frame.DrawLeft = False
       Frame.DrawRight = False
-      DataSet = ZQ_TipoArt
+      DataSet = ZQ_TipoMov
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -129,9 +129,9 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Stretch = True
         end
         object QRLabel17: TQRLabel
-          Left = 266
+          Left = 297
           Top = 47
-          Width = 186
+          Width = 124
           Height = 19
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -140,14 +140,14 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            703.791666666666700000
+            785.812500000000000000
             124.354166666666700000
-            492.125000000000000000)
+            328.083333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'TIPOS DE ARTICULO'
+          Caption = 'TIPOS DE IVA'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -160,10 +160,10 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           ExportAs = exptText
           FontSize = 12
         end
-        object RepTipoArticulo_Subtitulo: TQRLabel
-          Left = 271
+        object RepTipoIva_Subtitulo: TQRLabel
+          Left = 286
           Top = 26
-          Width = 175
+          Width = 146
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -172,14 +172,14 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            717.020833333333300000
+            756.708333333333300000
             68.791666666666670000
-            463.020833333333300000)
+            386.291666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepTipoArticulo_Subtitulo'
+          Caption = 'RepTipoIva_Subtitulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -192,10 +192,10 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           ExportAs = exptText
           FontSize = 9
         end
-        object RepTipoArticulo_Titulo: TQRLabel
-          Left = 259
+        object RepTipoIva_Titulo: TQRLabel
+          Left = 277
           Top = 2
-          Width = 200
+          Width = 163
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -204,14 +204,14 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            685.270833333333300000
+            732.895833333333300000
             5.291666666666667000
-            529.166666666666700000)
+            431.270833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepTipoArticulo_Titulo'
+          Caption = 'RepTipoIva_Titulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -256,7 +256,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         object QRDBText19: TQRDBText
           Left = 5
           Top = 0
-          Width = 660
+          Width = 412
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -267,23 +267,23 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
             37.041666666666670000
             13.229166666666670000
             0.000000000000000000
-            1746.250000000000000000)
+            1090.083333333333000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_TipoArt
-          DataField = 'DESCRIPCION'
+          DataSet = ZQ_TipoMov
+          DataField = 'NOMBRE_TIPO_IVA'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText2: TQRDBText
-          Left = 684
+          Left = 428
           Top = 0
-          Width = 30
+          Width = 79
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -292,16 +292,97 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1809.750000000000000000
+            1132.416666666667000000
             0.000000000000000000
-            79.375000000000000000)
+            209.020833333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_TipoMov
+          DataField = 'ABREVIATURA'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText1: TQRDBText
+          Left = 521
+          Top = 0
+          Width = 35
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1378.479166666667000000
+            0.000000000000000000
+            92.604166666666670000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_TipoMov
+          DataField = 'LETRA'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText3: TQRDBText
+          Left = 636
+          Top = 0
+          Width = 76
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1682.750000000000000000
+            0.000000000000000000
+            201.083333333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_TipoArt
-          DataField = 'BAJA'
+          DataSet = ZQ_TipoMov
+          DataField = 'DISCRIMINAR'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText4: TQRDBText
+          Left = 580
+          Top = 0
+          Width = 39
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1534.583333333333000000
+            0.000000000000000000
+            103.187500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_TipoMov
+          DataField = 'FISCAL'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -450,7 +531,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         object QRExpr18: TQRExpr
           Left = 4
           Top = 4
-          Width = 234
+          Width = 212
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -461,7 +542,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            619.125000000000000000)
+            560.916666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -470,7 +551,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           ResetAfterPrint = False
           Transparent = False
           WordWrap = True
-          Expression = #39'Cantidad de Tipos de Art'#237'culo: '#39'+COUNT'
+          Expression = #39'Cantidad de Tipos de IVA: '#39'+COUNT'
           ExportAs = exptText
           FontSize = 8
         end
@@ -603,7 +684,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Tipo Art'#237'culo'
+          Caption = 'Nombre'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -617,9 +698,9 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           FontSize = 8
         end
         object QRLabel1: TQRLabel
-          Left = 684
+          Left = 636
           Top = 2
-          Width = 30
+          Width = 76
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -628,14 +709,110 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1809.750000000000000000
+            1682.750000000000000000
             5.291666666666667000
-            79.375000000000000000)
+            201.083333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
-          Caption = 'Baja'
+          Caption = 'Discriminar'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel2: TQRLabel
+          Left = 428
+          Top = 2
+          Width = 79
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1132.416666666667000000
+            5.291666666666667000
+            209.020833333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Abreviatura'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel3: TQRLabel
+          Left = 580
+          Top = 2
+          Width = 39
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1534.583333333333000000
+            5.291666666666667000
+            103.187500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Fiscal'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel4: TQRLabel
+          Left = 521
+          Top = 2
+          Width = 35
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1378.479166666667000000
+            5.291666666666667000
+            92.604166666666670000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Letra'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -665,14 +842,14 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      object DBGridTipoArticulo: TDBGrid
+      object DBGridTipo: TDBGrid
         Left = 5
         Top = 5
         Width = 844
-        Height = 348
+        Height = 351
         Align = alClient
         Color = 14606012
-        DataSource = DS_TipoArt
+        DataSource = DS_TipoMov
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -680,22 +857,22 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
-        OnDrawColumnCell = DBGridTipoArticuloDrawColumnCell
+        OnDrawColumnCell = DBGridTipoDrawColumnCell
         Columns = <
           item
             Expanded = False
-            FieldName = 'DESCRIPCION'
+            FieldName = 'NOMBRE_MOVIMIENTO'
             Title.Alignment = taCenter
-            Title.Caption = 'Tipo Art'#237'culo'
-            Width = 442
+            Title.Caption = 'Tipo Movimiento'
+            Width = 751
             Visible = True
           end>
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 353
+        Top = 356
         Width = 844
-        Height = 33
+        Height = 30
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
@@ -703,9 +880,9 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         object Label1: TLabel
           Left = 6
           Top = 11
-          Width = 76
+          Width = 50
           Height = 13
-          Caption = 'Tipo Art'#237'culo:'
+          Caption = 'Nombre:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -715,13 +892,13 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Transparent = True
         end
         object DBENombre: TDBEdit
-          Left = 94
+          Left = 60
           Top = 7
-          Width = 731
+          Width = 493
           Height = 21
           CharCase = ecUpperCase
-          DataField = 'DESCRIPCION'
-          DataSource = DS_TipoArt
+          DataField = 'NOMBRE_MOVIMIENTO'
+          DataSource = DS_TipoMov
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -1338,34 +1515,34 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         'btnCancelar')
     end
   end
-  object ZQ_TipoArt: TZQuery
+  object ZQ_TipoMov: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from tipo_articulo'
-      'order by DESCRIPCION')
+      'from tipo_movimiento'
+      'order by NOMBRE_movimiento')
     Params = <>
     Left = 48
     Top = 72
-    object ZQ_TipoArtID_TIPO_ARTICULO: TIntegerField
-      FieldName = 'ID_TIPO_ARTICULO'
+    object ZQ_TipoMovID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
     end
-    object ZQ_TipoArtDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 200
-    end
-    object ZQ_TipoArtBAJA: TStringField
+    object ZQ_TipoMovBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
     end
+    object ZQ_TipoMovNOMBRE_MOVIMIENTO: TStringField
+      FieldName = 'NOMBRE_MOVIMIENTO'
+      Size = 200
+    end
   end
-  object DS_TipoArt: TDataSource
-    DataSet = ZQ_TipoArt
+  object DS_TipoMov: TDataSource
+    DataSet = ZQ_TipoMov
     Left = 48
     Top = 128
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridTipoArticulo
+    Grilla = DBGridTipo
     FuenteNormal = []
     Ordenar = True
     MoverColumna = True
@@ -1373,8 +1550,8 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
     Top = 243
   end
   object ATeclasRapidas: TActionManager
-    Left = 48
-    Top = 298
+    Left = 136
+    Top = 183
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -1419,33 +1596,33 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Tipo Art'#237'culo'
-        Campo = 'DESCRIPCION'
-        Tabla = 'tipo_articulo'
+        Titulo = 'Nombre'
+        Campo = 'nombre_movimiento'
+        Tabla = 'TIPO_MOVIMIENTO'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         ItemIndex = -1
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
-    DataSet = ZQ_TipoArt
+    DataSet = ZQ_TipoMov
     SQL.Strings = (
       'select *'
-      'from tipo_articulo'
-      'order by DESCRIPCION')
+      'from tipo_movimiento'
+      'order by NOMBRE_movimiento')
     SQL_Select.Strings = (
       'select *')
     SQL_From.Strings = (
-      'from tipo_articulo')
+      'from tipo_movimiento')
     SQL_Orden.Strings = (
-      'order by DESCRIPCION')
-    UsarWhereOriginal = EK_Con_Where
+      'order by NOMBRE_movimiento')
+    UsarWhereOriginal = EK_Sin_Where
     PantallaReducida = True
     Left = 136
     Top = 75
   end
   object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = RepTipoArticulo
+    Reporte = RepTipoMov
     ShowModal = False
     Left = 136
     Top = 128

@@ -12,10 +12,9 @@ object FABM_Cuentas: TFABM_Cuentas
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   Visible = True
-  WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -1554,7 +1553,7 @@ object FABM_Cuentas: TFABM_Cuentas
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'F4 - Baja'
+      Caption = 'F5 - Baja'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
@@ -1563,7 +1562,7 @@ object FABM_Cuentas: TFABM_Cuentas
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
-      Caption = 'F5 - Reactivar'
+      Caption = 'F6 - Reactivar'
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
