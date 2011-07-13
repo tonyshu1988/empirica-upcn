@@ -1536,7 +1536,7 @@ object FABMProductos: TFABMProductos
       Top = 332
       Width = 1014
       Height = 222
-      ActivePage = tabCabecera
+      ActivePage = tabDetalle
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -1821,6 +1821,12 @@ object FABMProductos: TFABMProductos
             DefaultRowHeight = 20
             TitleHeight = 17
             Columns = <
+              item
+                Expanded = False
+                FieldName = 'ID_PRODUCTO'
+                Title.Caption = 'ID'
+                Visible = True
+              end
               item
                 Color = 15132364
                 Expanded = False
@@ -2126,7 +2132,7 @@ object FABMProductos: TFABMProductos
                 object Label5: TLabel
                   Left = 3
                   Top = 3
-                  Width = 104
+                  Width = 132
                   Height = 13
                   Align = alTop
                   Alignment = taCenter
