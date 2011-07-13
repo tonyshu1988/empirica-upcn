@@ -15,6 +15,7 @@ object FABM_Precios: TFABM_Precios
   Position = poScreenCenter
   Scaled = False
   Visible = True
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -22,8 +23,8 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 678
+    Width = 1016
+    Height = 684
     Align = alClient
     TabOrder = 4
     object RepListaPrecios: TQuickRep
@@ -104,7 +105,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333300000
+          320.145833333333400000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -172,7 +173,7 @@ object FABM_Precios: TFABM_Precios
             52.916666666666670000
             1145.645833333333000000
             95.250000000000000000
-            478.895833333333300000)
+            478.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1133,7 +1134,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1181,7 +1182,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -1268,7 +1269,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1502,9 +1503,9 @@ object FABM_Precios: TFABM_Precios
     end
     object DBGridProductos: TDBGrid
       Left = 1
-      Top = 1
-      Width = 1006
-      Height = 642
+      Top = 44
+      Width = 1014
+      Height = 605
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1516,6 +1517,12 @@ object FABM_Precios: TFABM_Precios
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
       Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_PRODUCTO'
+          Title.Caption = 'ID'
+          Visible = True
+        end
         item
           Expanded = False
           FieldName = 'NOMBRE_PRODUCTO'
@@ -1603,8 +1610,8 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 643
-      Width = 1006
+      Top = 649
+      Width = 1014
       Height = 34
       Align = alBottom
       TabOrder = 1
@@ -1671,11 +1678,103 @@ object FABM_Precios: TFABM_Precios
         OnClick = RadioGroupTipoCalculoClick
       end
     end
+    object PanelFiltros: TPanel
+      Left = 1
+      Top = 15
+      Width = 1014
+      Height = 29
+      Align = alTop
+      TabOrder = 3
+      Visible = False
+      DesignSize = (
+        1014
+        29)
+      object btAplicarFiltros: TButton
+        Left = 906
+        Top = 3
+        Width = 102
+        Height = 22
+        Anchors = [akTop, akRight]
+        Caption = 'Aplicar Filtros'
+        TabOrder = 0
+        OnClick = btAplicarFiltrosClick
+      end
+      object CBIVA: TCheckBox
+        Left = 485
+        Top = 9
+        Width = 54
+        Height = 17
+        Caption = 'I.V.A.'
+        Checked = True
+        State = cbChecked
+        TabOrder = 1
+      end
+      object CBCoefDescuento: TCheckBox
+        Left = 544
+        Top = 9
+        Width = 116
+        Height = 17
+        Caption = 'Coef. Descuento'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+      end
+      object CBImpuestoInterno: TCheckBox
+        Left = 665
+        Top = 9
+        Width = 122
+        Height = 17
+        Caption = 'Impuesto Interno'
+        Checked = True
+        State = cbChecked
+        TabOrder = 3
+      end
+      object CBCoefGanancia: TCheckBox
+        Left = 372
+        Top = 9
+        Width = 108
+        Height = 17
+        Caption = 'Coef. Ganancia'
+        Checked = True
+        State = cbChecked
+        TabOrder = 4
+      end
+      object CBImporteVenta: TCheckBox
+        Left = 265
+        Top = 9
+        Width = 102
+        Height = 17
+        Caption = 'Importe Venta'
+        Checked = True
+        State = cbChecked
+        TabOrder = 5
+      end
+      object CBImporteCosto: TCheckBox
+        Left = 159
+        Top = 9
+        Width = 102
+        Height = 17
+        Caption = 'Importe costo'
+        Checked = True
+        State = cbChecked
+        TabOrder = 6
+      end
+    end
+    object HabilitarFiltros: TPanel
+      Left = 1
+      Top = 1
+      Width = 1014
+      Height = 14
+      Align = alTop
+      Caption = 'FILTROS'
+      TabOrder = 4
+      OnClick = HabilitarFiltrosClick
+    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2788,5 +2887,19 @@ object FABM_Precios: TFABM_Precios
     object CDSZQ_Productoscoef_ganancia: TFloatField
       FieldName = 'coef_ganancia'
     end
+  end
+  object EKUsrPermisos1: TEKUsrPermisos
+    Objetos = <
+      item
+        Objeto = HabilitarFiltros
+        Clave = 'HABILITAR_FILTROS'
+        Accion = EKEnabled
+      end>
+    Left = 736
+    Top = 136
+  end
+  object EKIniGuardarFiltros: TEKIni
+    Left = 904
+    Top = 128
   end
 end
