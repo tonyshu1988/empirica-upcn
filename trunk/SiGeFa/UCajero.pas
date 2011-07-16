@@ -280,6 +280,11 @@ type
     EKListadoIVA: TEKListadoSQL;
     EKDbSuma1: TEKDbSuma;
     EKDbSuma2: TEKDbSuma;
+    EKListadoClientes: TEKListadoSQL;
+    Label21: TLabel;
+    DBText9: TDBText;
+    ZQ_PersonasPORCDESC: TFloatField;
+    CD_Comprobantepers_desc: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -351,7 +356,7 @@ begin
   CD_Fpago.CreateDataSet;
   dm.EKModelo.abrir(ZQ_FormasPago);
   dm.EKModelo.abrir(ZQ_Personas);
-  cliente:=0;
+  Cliente:=-1;
   descCliente:=0;
   try
     cajero := strtoint(dm.EKUsrLogin.PermisoAccionValor('CAJA_NRO'));
@@ -687,26 +692,42 @@ LimpiarCodigo;
 end;
 
 procedure TFCajero.bt_BuscarClienteClick(Sender: TObject);
+var
+  sql:string;
 begin
-  if not Assigned(vsel2) then
-    vsel2 := TFBuscarPersona.Create(nil);
+  sql:= Format('select per.id_persona, per.nombre||'+
+               ' COALESCE('' | Nro.Doc: '' || per.numero_doc,'''')||'+
+               ' COALESCE('' | CUIT/CUIL: '' || per.cuit_cuil,'''') As busqueda'+
+               ' from persona per'+
+               ' left join persona_relacion rel on (per.id_persona = rel.id_persona)'+
+               ' where per.baja = %s '+
+               ' and rel.id_relacion = %d '+
+               ' order by per.nombre', [QuotedStr('N'), RELACION_CLIENTE]);
 
-  vsel2.OnSeleccionar := OnSelCliente;
-  vsel2.ShowModal;
+  EKListadoClientes.SQL.Text:= sql;
 
+  if EKListadoClientes.Buscar then
+    if (EKListadoClientes.Resultado <> '') then
+    begin
+      Cliente:=StrToInt(EKListadoClientes.Resultado);
+      ClienteIVA:=ZQ_PersonasID_TIPO_IVA.AsInteger;
+      CD_ComprobanteID_CLIENTE.AsInteger:=Cliente;
+      CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
+
+      descCliente:= 0;
+      if (not ZQ_PersonasDESCUENTO_ESPECIAL.IsNull) or (ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat <> 0) then
+          if (application.MessageBox(pchar('El cliente seleccionado posee un descuento especial del '+FloatToStr(ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat*100)+'%.'+
+              #13+'Desea aplicar este descuento para todos los productos que se carguen?'), 'Descuento Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+          begin
+            descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat;
+            CD_ComprobantePORC_DESCUENTO.AsFloat:=descCliente;
+          end;
+    end
 end;
 
 procedure TFCajero.OnSelCliente;
 begin
-  if not(vsel2.ZQ_PersonasID_PERSONA.IsNull) then
-   begin
-    Cliente:=vsel2.ZQ_PersonasID_PERSONA.AsInteger;
-    ClienteIVA:=vsel2.ZQ_PersonasID_TIPO_IVA.AsInteger;
-    CD_ComprobanteID_CLIENTE.AsInteger:=Cliente;
-    CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
-    vsel2.Close;
 
-   end;
 end;
 
 
@@ -722,6 +743,8 @@ begin
 //Hacer las validaciones correspondientes (por ej formas de pago=acumulado)
 if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_ComprobanteDetalle]) then
    begin
+      CD_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat;
+      CD_ComprobanteIMPORTE_IVA.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat*CD_ComprobantePORC_IVA.AsFloat;
       CD_ComprobanteIMPORTE_TOTAL.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat-CD_ComprobanteIMPORTE_DESCUENTO.AsFloat+CD_ComprobanteIMPORTE_IVA.AsFloat;
       CD_ComprobanteSALDO.AsFloat:=CD_ComprobanteIMPORTE_TOTAL.AsFloat;
 
@@ -774,7 +797,8 @@ begin
   crearComprobante();
   CD_DetalleFactura.EmptyDataSet;
   CD_Fpago.EmptyDataSet;
-
+  Cliente:=-1;
+  descCliente:=0;
   BtAgregarPago.Enabled := true;
   BtAceptarPago.Enabled := false;
   BtCancelarPago.Enabled := false;
@@ -788,7 +812,7 @@ begin
   acumulado:=0;
   acumFpago:=0;
   IdProd:=-1;
-  descCliente:=0;
+
   EKDbSuma1.SumCollection[0].SumValue := 0;
   EKDbSuma2.SumCollection[0].SumValue := 0;
   importe.Text := '';
@@ -798,7 +822,7 @@ begin
   CD_Comprobante.EmptyDataSet;
   CD_Comprobante.Append;
   CD_ComprobanteID_SUCURSAL.AsInteger:=SUCURSAL_LOGUEO;
-  CD_ComprobanteID_CLIENTE.AsInteger:=-1;
+  CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
   CD_ComprobanteID_TIPO_CPB.AsInteger:=11; //FACTURA
   CD_ComprobanteID_VENDEDOR.AsInteger:=113;//Aca va el cajero, buscar el logueado
   CD_ComprobanteID_COMP_ESTADO.AsInteger:=0;//PENDIENTE
@@ -810,7 +834,7 @@ begin
   CD_ComprobanteIMPORTE_TOTAL.AsFloat:=0;
   CD_ComprobantePORC_IVA.AsFloat:=0;
   CD_ComprobanteIMPORTE_IVA.AsInteger:=0;
-  CD_ComprobantePORC_DESCUENTO.AsFloat:=0;
+  CD_ComprobantePORC_DESCUENTO.AsFloat:=descCliente;
   CD_ComprobanteIMPORTE_DESCUENTO.AsInteger:=0;
   CD_ComprobanteENCABEZADO.AsString:='';
   CD_ComprobantePIE.AsString:='';
