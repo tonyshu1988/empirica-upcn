@@ -1716,9 +1716,9 @@ object DM: TDM
     Top = 263
   end
   object POP3_SSL: TIdSSLIOHandlerSocketOpenSSL
-    Destination = ':143'
+    Destination = ':110'
     MaxLineAction = maSplit
-    Port = 143
+    Port = 110
     DefaultPort = 0
     SSLOptions.Method = sslvSSLv2
     SSLOptions.SSLVersions = [sslvSSLv2]

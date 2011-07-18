@@ -96,12 +96,13 @@ Const
   RELACION_VIAJANTE = 14;
 
 //  TIPOS DE COMPROBANTES
-  CPB_PRESUPUESTO  = 14; //se entrega al CLIENTE con los productos cargados para una posible venta. AUTONUMERADO
-  CPB_NOTA_PEDIDO  = 15; //se envia al PROVEEDOR con los productos encargados para una compra. AUTONUMERADO
-  CPB_REMITO_VENTA = 20; //se entrega al CLIENTE para documentar la entrega y/o remisión de la mercadería. AUTONUMERADO
-  CPB_RECIBO_COBRO = 19; //se entrega al CLIENTE como comprobante de un pago efectuado por este. AUTONUMERADO
-  CPB_ORDEN_PAGO   = 18; //se entrega al CLIENTE como comprobante de un pago efectuado a este. AUTONUMERADO (comprobante de tercero).
-//  CPB_FACTURA = ; //.
+  CPB_PRESUPUESTO    = 14; //se entrega al CLIENTE con los productos cargados para una posible venta. AUTONUMERADO
+  CPB_NOTA_PEDIDO    = 15; //se envia al PROVEEDOR con los productos encargados para una compra. AUTONUMERADO
+  CPB_REMITO_VENTA   = 20; //se entrega al CLIENTE para documentar la entrega y/o remisión de la mercadería. AUTONUMERADO
+  CPB_RECIBO_COBRO   = 19; //se entrega al CLIENTE como comprobante de un pago efectuado por este. AUTONUMERADO
+  CPB_ORDEN_PAGO     = 18; //se entrega al CLIENTE como comprobante de un pago efectuado a este. AUTONUMERADO (comprobante de tercero).
+  CPB_OTROS_EGRESOS  = 17;
+  CPB_OTROS_INGRESOS = 16;
 
 implementation
 
