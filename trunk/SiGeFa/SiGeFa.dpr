@@ -37,7 +37,8 @@ uses
   UImpresion_Comprobantes in 'UImpresion_Comprobantes.pas' {FImpresion_Comprobantes},
   UMovimientosInternos in 'UMovimientosInternos.pas' {FMovimientosInternos},
   UABM_TipoMovimiento in 'UABM_TipoMovimiento.pas' {FABM_TipoMovimiento},
-  UTransferirStock in 'UTransferirStock.pas' {FTransferirStock};
+  UTransferirStock in 'UTransferirStock.pas' {FTransferirStock},
+  UBuscarProductoStock in 'UBuscarProductoStock.pas' {FBuscarProductoStock};
 
 {$R *.res}
 
