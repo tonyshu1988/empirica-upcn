@@ -36,7 +36,8 @@ uses
   UBuscarProducto in 'UBuscarProducto.pas' {FBuscarProducto},
   UImpresion_Comprobantes in 'UImpresion_Comprobantes.pas' {FImpresion_Comprobantes},
   UMovimientosInternos in 'UMovimientosInternos.pas' {FMovimientosInternos},
-  UABM_TipoMovimiento in 'UABM_TipoMovimiento.pas' {FABM_TipoMovimiento};
+  UABM_TipoMovimiento in 'UABM_TipoMovimiento.pas' {FABM_TipoMovimiento},
+  UTransferirStock in 'UTransferirStock.pas' {FTransferirStock};
 
 {$R *.res}
 
