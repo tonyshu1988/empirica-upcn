@@ -43,6 +43,7 @@ uses
 begin
   Application.Initialize;
   CurrencyDecimals := 2;
+  CurrencyString := '$';
   DecimalSeparator := '.';
   ThousandSeparator := ',';
   DateSeparator := '/';
