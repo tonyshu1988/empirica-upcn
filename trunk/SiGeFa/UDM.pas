@@ -257,7 +257,6 @@ end;
 
 procedure TDM.VariablesReportes(Reporte: TQuickRep);
 var
-//  i : integer;
   Etiqueta : TQRLabel;
   Form : TForm;
 begin
@@ -297,27 +296,27 @@ end;
 //LO QUE HACE ES SACAR LOS CURRENCIS DE LOS CAMPOS FLOAT Y DESPUES
 //LOS VUELVE A SETEAR
 procedure TDM.prepararParaExportar(query: TDataSet; valor: Boolean);
-var
-  i:integer;
+//var
+//  i:integer;
 begin
-  for i := 0 to (query.ComponentCount - 1) do
-  begin
-    if query.Components[i].ClassType = TFloatField then
-      TFloatField(query.Components[i]).currency := valor; //activo o desactivo el currency
-  end;
+//  for i := 0 to (query.ComponentCount - 1) do
+//  begin
+//    if query.Components[i].ClassType = TFloatField then
+//      TFloatField(query.Components[i]).currency := valor; //activo o desactivo el currency
+//  end;
 
   if (valor = false) then  //seteo para exportar a excel
   begin
-    CurrencyDecimals := 2;
-    DecimalSeparator := ',';
-    ThousandSeparator := '.';
-    CurrencyString := '';
+    CurrencyDecimals:= 2;
+    DecimalSeparator:= '.';
+    ThousandSeparator:= #0;
+    CurrencyString:= #0;
   end
   else
   begin //vuelvo a la configuracion original antes de exportar
-    DecimalSeparator := auxDecimalSeparator;
-    CurrencyDecimals := auxCurrencyDecimals;
-    ThousandSeparator := auxThousandSeparator;
+    CurrencyDecimals:= auxCurrencyDecimals;
+    DecimalSeparator:= auxDecimalSeparator;
+    ThousandSeparator:= auxThousandSeparator;
     CurrencyString:= auxCurrencyString;
   end;
 end;
