@@ -8,7 +8,7 @@ uses
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, ComCtrls,
-  EKDBDateTimePicker, EKListadoSQL, EKDbSuma;
+  EKDBDateTimePicker, EKListadoSQL, EKDbSuma, Buttons;
 
 type
   TFMovimientosInternos = class(TForm)
@@ -61,14 +61,13 @@ type
     QRLabel3: TQRLabel;
     QRDBText4: TQRDBText;
     PanelCalendario: TPanel;
-    Calendario: TMonthCalendar;
     PanelMes: TPanel;
     PanelDia_Lista: TPanel;
     PanelMes_Info: TPanel;
     PanelDia_Movimiento: TPanel;
     PanelDia_InfoMovimiento: TPanel;
     PanelDia_InfoLista: TPanel;
-    Label1: TLabel;
+    lblBalanceMensual: TLabel;
     lblFechaHoy: TLabel;
     Label2: TLabel;
     GroupBox1: TGroupBox;
@@ -204,6 +203,12 @@ type
     ZS_BalanceSALDO: TFloatField;
     ZS_BalanceSALDODIARIO: TFloatField;
     Label7: TLabel;
+    PanelManejoCalendario: TPanel;
+    SpeedBtn_AnioAnterior: TSpeedButton;
+    SpeedBtn_MesAnterior: TSpeedButton;
+    SpeedBtn_MesSiguiente: TSpeedButton;
+    SpeedBtn_AnioSiguiente: TSpeedButton;
+    SpeedBtn_Hoy: TSpeedButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -211,7 +216,6 @@ type
     procedure btnEliminarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure btnReactivarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DBGridCuentasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -226,11 +230,9 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure ZQ_MovHoyAfterScroll(DataSet: TDataSet);
-    procedure CalendarioClick(Sender: TObject);
     procedure RadioButtonIngresoClick(Sender: TObject);
     procedure RadioButtonEgresoClick(Sender: TObject);
     procedure ZS_BalanceAfterScroll(DataSet: TDataSet);
-    procedure DBGridFormaPagoKeyPress(Sender: TObject; var Key: Char);
     procedure DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure EKSuma_FPagoSumListChanged(Sender: TObject);
@@ -238,9 +240,20 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGrid_DiaDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure ZQ_ComprobanteID_TIPO_CPBChange(Sender: TField);
+    procedure DBGridFormaPagoExit(Sender: TObject);
+    procedure SpeedBtn_HoyClick(Sender: TObject);
+    procedure abrirBalance(fecha: TDate);
+    procedure SpeedBtn_AnioAnteriorClick(Sender: TObject);
+    procedure SpeedBtn_MesAnteriorClick(Sender: TObject);
+    procedure SpeedBtn_MesSiguienteClick(Sender: TObject);
+    procedure SpeedBtn_AnioSiguienteClick(Sender: TObject);
   private
+    fechaActual: TDate;
     id_comprobante: integer;
     tipoComprobante: integer;
+    tipoMovimiento: integer;
+    columnaActual: string;
     function getColumnIndex(Grid: TDBGrid; Nombre: string): Integer;
   public
   end;
@@ -250,6 +263,8 @@ var
 
 const
   transaccion_ABM = 'MOVIMIENTOS INTERNOS';
+  TIPO_INGRESO = 0;
+  TIPO_EGRESO  = 1;
 
 implementation
 
@@ -286,185 +301,11 @@ end;
 
 procedure TFMovimientosInternos.tituloFecha(fecha: Tdate);
 begin
-  lblFechaHoy.Caption := 'Movimientos del '+ FormatDateTime('dddd dd "de" mmmm "de" yyyy', fecha);
+  lblFechaHoy.Caption:= 'Movimientos del '+ FormatDateTime('dddd dd "de" mmmm "de" yyyy', fecha);
+  lblBalanceMensual.Caption:= 'BALANCE '+ UpperCase(FormatDateTime('mmmm yyyy', fecha));
+  PanelManejoCalendario.Caption:= UpperCase(FormatDateTime('mmmm yyyy', fecha));
 end;
 
-
-procedure TFMovimientosInternos.btnModificarClick(Sender: TObject);
-begin
-//  if ZQ_Cuentas.IsEmpty then
-//      exit;
-//
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
-//  begin
-//    DBGridCuentas.Enabled := false;
-//    PanelEdicion.Visible:= true;
-//
-//    ZQ_Cuentas.Edit;
-//    if ZQ_CuentasCODIGO.IsNull then
-//    begin
-//      ZQ_UltimoNro.Close;
-//      ZQ_UltimoNro.Open;
-//      if ZQ_UltimoNro.IsEmpty or (ZQ_UltimoNroCODIGO.AsString = '') then
-//        ZQ_CuentasCODIGO.AsInteger:= 1
-//      else
-//        ZQ_CuentasCODIGO.AsInteger:= ZQ_UltimoNroCODIGO.AsInteger + 1;
-//    end;
-//
-//    DBENombre.SetFocus;
-//    GrupoEditando.Enabled := false;
-//    GrupoGuardarCancelar.Enabled := true;
-//  end;
-end;
-
-
-procedure TFMovimientosInternos.btnEliminarClick(Sender: TObject);
-var
-  recNo: integer;
-begin
-//  if (ZQ_Cuentas.IsEmpty) OR (ZQ_CuentasBAJA.AsString <> 'N') then
-//    exit;
-//
-//  if (application.MessageBox(pchar('¿Desea dar de baja la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//  begin
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
-//    begin
-//      ZQ_Cuentas.Edit;
-//      ZQ_CuentasBAJA.AsString:='S';
-//    end
-//    else
-//      exit;
-//
-//    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-//      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
-//
-//    recNo:= ZQ_Cuentas.RecNo;
-//    ZQ_Cuentas.Refresh;
-//    ZQ_Cuentas.RecNo:= recNo;
-//  end;
-end;
-
-
-procedure TFMovimientosInternos.btnGuardarClick(Sender: TObject);
-var
-  recNo: integer;
-  fecha: TDate;
-begin
-  Perform(WM_NEXTDLGCTL, 0, 0);
-
-  if ZQ_ComprobanteID_TIPO_MOVIMIENTO.IsNull then
-  begin
-    Application.MessageBox('Debe asociar un Tipo de Movimiento, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBLookupComboBox1.SetFocus;
-    exit;
-  end;
-
-  if ZQ_CpbFormaPago.IsEmpty then
-  begin
-    Application.MessageBox('Debe cargar una forma de pago, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBGridFormaPago.SetFocus;
-    exit;
-  end;
-
-  if RadioButtonEgreso.Checked then //Egreso
-    tipoComprobante:= CPB_OTROS_EGRESOS
-  else
-    if RadioButtonIngreso.Checked then //Ingreso
-      tipoComprobante:= CPB_OTROS_INGRESOS;
-
-  if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante
-  begin
-    ZQ_ComprobanteID_TIPO_CPB.AsInteger:= tipoComprobante;
-
-    //busco de nuevo cual es el ultimo numero
-    ZQ_NumeroCpb.Close;
-    ZQ_NumeroCpb.ParamByName('id_tipo').AsInteger:= tipoComprobante;
-    ZQ_NumeroCpb.Open;
-
-    ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
-    ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
-
-    ZQ_NumeroCpb.Edit;
-    ZQ_NumeroCpbULTIMO_NUMERO.AsInteger:= ZQ_ComprobanteNUMERO_CPB.AsInteger;
-  end;
-
-  EKSuma_FPago.RecalcAll;
-  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue;
-
-  fecha:= ZQ_ComprobanteFECHA.AsDateTime;
-  try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-    begin
-      PanelDia_Movimiento.Enabled:= false;
-      PanelDia_Lista.Enabled:= true;
-      PanelMes.Enabled:= true;
-
-      GrupoEditando.Enabled := true;
-      GrupoGuardarCancelar.Enabled := false;
-
-      ZS_Balance.Refresh;
-      ZS_Balance.Locate('FECHA', VarArrayOf([DateToStr(fecha)]), []);
-
-      ZQ_MovHoy.Refresh;
-
-      ZQ_Comprobante.Close;
-      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= ZQ_MovHoyID_COMPROBANTE.AsInteger;
-      ZQ_Comprobante.open;
-    end
-  except
-    begin
-      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
-      exit;
-    end
-  end;
-end;
-
-
-procedure TFMovimientosInternos.btnCancelarClick(Sender: TObject);
-begin
- if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
-  begin
-    PanelDia_Movimiento.Enabled:= false;
-    PanelDia_Lista.Enabled:= true;
-    PanelMes.Enabled:= true;
-
-    GrupoEditando.Enabled := true;
-    GrupoGuardarCancelar.Enabled := false;
-  end;
-end;
-
-
-procedure TFMovimientosInternos.btnReactivarClick(Sender: TObject);
-var
-  recNo: integer;
-begin
-//  if (ZQ_Cuentas.IsEmpty) OR (ZQ_CuentasBAJA.AsString <> 'S') then
-//    exit;
-//
-//  if (application.MessageBox(pchar('¿Desea reactivar la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//  begin
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
-//    begin
-//      ZQ_Cuentas.Edit;
-//      ZQ_CuentasBAJA.AsString:='N';
-//    end
-//    else
-//      exit;
-//
-//    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-//      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
-//
-//    recNo:= ZQ_Cuentas.RecNo;
-//    ZQ_Cuentas.Refresh;
-//    ZQ_Cuentas.RecNo:= recNo;
-//  end;
-end;
-
-
-procedure TFMovimientosInternos.btnBuscarClick(Sender: TObject);
-begin
-//  EKBuscar.Buscar;
-end;
 
 
 procedure TFMovimientosInternos.btnNuevoClick(Sender: TObject);
@@ -472,6 +313,7 @@ begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb]) then
   begin
     lblTotalFormaPago.Caption:= '$ 0.00';
+    tipoComprobante:= CPB_OTROS_INGRESOS;
 
     ZQ_Comprobante.Close;
     ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= -1;
@@ -496,6 +338,7 @@ begin
     ZQ_ComprobanteFECHA_IMPRESA.Clear;
     ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
     ZQ_ComprobanteFECHA_ANULADO.Clear;
+    RadioButtonIngresoClick(Sender);
 
     PanelDia_Movimiento.Enabled:= true;
     PanelDia_Lista.Enabled:= false;
@@ -509,20 +352,155 @@ begin
 end;
 
 
+procedure TFMovimientosInternos.btnModificarClick(Sender: TObject);
+begin
+  if ZQ_MovHoy.IsEmpty then
+    exit;
+
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
+  begin
+    PanelDia_Movimiento.Enabled:= true;
+    PanelDia_Lista.Enabled:= false;
+    panelMes.Enabled:= false;
+
+    GrupoEditando.Enabled := false;
+    GrupoGuardarCancelar.Enabled := true;
+
+    id_comprobante:= ZQ_MovHoyID_COMPROBANTE.AsInteger;
+
+    EKDBDateTimePicker1.SetFocus;
+
+    ZQ_Comprobante.Edit;
+  end;
+end;
+
+
+procedure TFMovimientosInternos.btnEliminarClick(Sender: TObject);
+var
+  recNo: integer;
+begin
+  if (ZQ_MovHoy.IsEmpty) OR (ZQ_Comprobante.IsEmpty) then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea eliminar el movimiento seleccionado?'+#13+
+                                    '('+FormatDateTime('dd/mm/yyyy', ZQ_ComprobanteFECHA.AsDateTime)+
+                                    ' - $ '+ZQ_ComprobanteIMPORTE_TOTAL.AsString+
+                                    ')'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  begin
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_CpbFormaPago, ZQ_Comprobante]) then
+    begin
+      ZQ_CpbFormaPago.First;
+      while not ZQ_CpbFormaPago.Eof do
+        ZQ_CpbFormaPago.Delete;
+
+      ZQ_Comprobante.Delete;
+    end
+    else
+      exit;
+
+    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+
+    abrirBalance(fechaActual);
+  end;
+end;
+
+
+procedure TFMovimientosInternos.btnGuardarClick(Sender: TObject);
+var
+  recNo: integer;
+  fecha: string;
+begin
+  Perform(WM_NEXTDLGCTL, 0, 0);
+
+  if ZQ_ComprobanteID_TIPO_MOVIMIENTO.IsNull then
+  begin
+    Application.MessageBox('Debe asociar un Tipo de Movimiento, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBLookupComboBox1.SetFocus;
+    exit;
+  end;
+
+  if ZQ_CpbFormaPago.IsEmpty then
+  begin
+    Application.MessageBox('Debe cargar una forma de pago, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBGridFormaPago.SetFocus;
+    exit;
+  end;
+
+  if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante
+  begin
+    //busco de nuevo cual es el ultimo numero
+    ZQ_NumeroCpb.Close;
+    ZQ_NumeroCpb.ParamByName('id_tipo').AsInteger:= tipoComprobante;
+    ZQ_NumeroCpb.Open;
+
+    ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
+    ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
+
+    ZQ_NumeroCpb.Edit;
+    ZQ_NumeroCpbULTIMO_NUMERO.AsInteger:= ZQ_ComprobanteNUMERO_CPB.AsInteger;
+  end;
+
+  EKSuma_FPago.RecalcAll;
+  EKSuma_FPago.RecalcAll;
+  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue;
+
+  fecha:= FormatDateTime('DD/MM/YYYY' ,ZQ_ComprobanteFECHA.AsDateTime);
+  try
+    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    begin
+      PanelDia_Movimiento.Enabled:= false;
+      PanelDia_Lista.Enabled:= true;
+      PanelMes.Enabled:= true;
+
+      GrupoEditando.Enabled := true;
+      GrupoGuardarCancelar.Enabled := false;
+
+      ZS_Balance.Refresh;
+      ZS_Balance.Last;
+//      ZS_Balance.Locate('FECHA', VarArrayOf([fecha]), []);
+//      ZS_Balance.Locate('FECHA', DateOf(ZS_BalanceFECHA.AsDateTime), []);
+//      ShowMessage('Variable: '+fecha+' Campo: '+ZS_BalanceFECHA.AsString);
+    end
+  except
+    begin
+      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
+      exit;
+    end
+  end;
+end;
+
+
+procedure TFMovimientosInternos.btnCancelarClick(Sender: TObject);
+begin
+ if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  begin
+    PanelDia_Movimiento.Enabled:= false;
+    PanelDia_Lista.Enabled:= true;
+    PanelMes.Enabled:= true;
+
+    GrupoEditando.Enabled := true;
+    GrupoGuardarCancelar.Enabled := false;
+
+    ZQ_MovHoy.Refresh;
+  end;
+end;
+
+
+procedure TFMovimientosInternos.btnBuscarClick(Sender: TObject);
+begin
+//  EKBuscar.Buscar;
+end;
+
+
 procedure TFMovimientosInternos.FormCreate(Sender: TObject);
 begin
   configFormaPago(CPB_OTROS_INGRESOS);
   RadioButtonIngreso.Checked:= true;
   RadioButtonEgreso.Checked:= false;
 
-  ZS_Balance.Close;
-  ZS_Balance.ParamByName('MES').AsInteger:= MonthOf(Calendario.Date);
-  ZS_Balance.ParamByName('ANIO').AsInteger:= YearOf(Calendario.Date);
-  ZS_Balance.Open;
-
-//  ZS_BalanceDiarioPorMes.Last;
-//  lblSaldoMensualBalanceDiario.Caption:= 'TOTAL SALDO '+FormatDateTime('MMMM YYYY', calendarioMensual.CalendarDate)+' = '+ FormatFloat('$  ###,###,##0.00', ZS_BalanceDiarioPorMesSALDO.AsFloat);
-//  ZS_BalanceDiarioPorMes.First;
+  fechaActual:= dm.EKModelo.Fecha;
+  abrirBalance(fechaActual);
 
   PanelDia_Movimiento.Enabled:= false;
   PanelDia_Lista.Enabled:= true;
@@ -531,15 +509,6 @@ begin
   dm.EKModelo.abrir(ZQ_TipoMovimiento);
 //  dm.EKModelo.abrir(ZQ_TipoFPago);
 //  dm.EKModelo.abrir(ZQ_Cuenta);
-
-  //providorio
-  ZQ_MovHoy.Close;
-  ZQ_MovHoy.ParamByName('fecha').AsDate:= Now;
-  ZQ_MovHoy.Open;
-
-  tituloFecha(now);
-
-//  dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
 end;
 
 
@@ -611,6 +580,9 @@ end;
 
 procedure TFMovimientosInternos.ZQ_MovHoyAfterScroll(DataSet: TDataSet);
 begin
+//  ShowScrollBar(DBGridFormaPago.Handle, SB_VERT, False);
+//  ShowScrollBar(DBGridFormaPago.Handle, SB_HORZ, False);
+
   ZQ_CpbFormaPago.Close;
   ZQ_Comprobante.Close;
 
@@ -640,17 +612,11 @@ begin
 end;
 
 
-procedure TFMovimientosInternos.CalendarioClick(Sender: TObject);
-begin
-//  ZS_Balance.Close;
-//  ZS_Balance.ParamByName('MES').AsInteger:= MonthOf(Calendario.Date);
-//  ZS_Balance.ParamByName('ANIO').AsInteger:= YearOf(Calendario.Date);
-//  ZS_Balance.Open;
-end;
-
-
 procedure TFMovimientosInternos.configFormaPago(tipo: integer);
 begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    ZQ_ComprobanteID_TIPO_CPB.AsInteger:= tipo;
+
   case tipo of
     CPB_OTROS_INGRESOS: begin //Usa la cuenta de ingreso
                           DBGridFormaPago.Columns[getColumnIndex(DBGridFormaPago, '_CuentaIngreso_Nombre')].Visible:= true;
@@ -672,19 +638,23 @@ end;
 
 procedure TFMovimientosInternos.RadioButtonIngresoClick(Sender: TObject);
 begin
-  configFormaPago(CPB_OTROS_INGRESOS);
+  tipoComprobante:= CPB_OTROS_INGRESOS;
+  configFormaPago(tipoComprobante);
 end;
 
 
 procedure TFMovimientosInternos.RadioButtonEgresoClick(Sender: TObject);
 begin
-  configFormaPago(CPB_OTROS_EGRESOS);
+  tipoComprobante:= CPB_OTROS_EGRESOS;
+  configFormaPago(tipoComprobante);
 end;
 
 
 procedure TFMovimientosInternos.ZS_BalanceAfterScroll(DataSet: TDataSet);
 begin
   ZQ_MovHoy.Close;
+  ZQ_Comprobante.Close;
+  ZQ_CpbFormaPago.Close;
 
   if ZS_Balance.IsEmpty then
     exit;
@@ -693,28 +663,6 @@ begin
   ZQ_MovHoy.Open;
 
   tituloFecha(ZS_BalanceFECHA.AsDateTime);
-end;
-
-
-procedure TFMovimientosInternos.DBGridFormaPagoKeyPress(Sender: TObject; var Key: Char);
-begin
-  if ((sender as tdbgrid).SelectedField.FullName = 'IMPORTE') then
-  begin
-    if (Key = #13) or (key = #9) then  { if it's an enter key }
-    begin
-      Key := #0;  { eat enter key }
-      with TStringGrid(DBGridFormaPago) do
-      begin
-        if tipoComprobante = CPB_OTROS_INGRESOS then
-          Col := 0
-        else
-          if tipoComprobante = CPB_OTROS_EGRESOS then
-            Col := 2;
-
-        SetFocus;
-      end;
-    end;
-  end;
 end;
 
 
@@ -827,6 +775,108 @@ begin
   DBGrid_Dia.DefaultDrawColumnCell(rect,datacol,column,state);
 end;
 
+
+procedure TFMovimientosInternos.ZQ_ComprobanteID_TIPO_CPBChange(Sender: TField);
+begin
+  if ZQ_CpbFormaPago.IsEmpty or (not dm.EKModelo.verificar_transaccion(transaccion_ABM))then
+    exit;
+
+  ZQ_CpbFormaPago.First;
+  while not ZQ_CpbFormaPago.Eof do
+  begin
+    ZQ_CpbFormaPago.Edit;
+
+    if tipoComprobante = CPB_OTROS_EGRESOS then //si es un egreso
+    begin
+      ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger;
+      ZQ_CpbFormaPagoCUENTA_INGRESO.Clear;
+    end;
+
+    if tipoComprobante = CPB_OTROS_INGRESOS then //si es un egreso
+    begin
+      ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger;
+      ZQ_CpbFormaPagoCUENTA_EGRESO.Clear;
+    end;
+
+    ZQ_CpbFormaPago.Post;
+    ZQ_CpbFormaPago.Next;
+  end;
+end;
+
+
+procedure TFMovimientosInternos.DBGridFormaPagoExit(Sender: TObject);
+begin
+//  if ((sender as tdbgrid).SelectedField.FullName = 'IMPORTE') then
+//  begin
+//    KeyPress((char)Keys.Enter);
+//  end;
+end;
+
+
+procedure TFMovimientosInternos.abrirBalance(fecha: TDate);
+begin
+  ZS_Balance.Close;
+  ZS_Balance.ParamByName('MES').AsInteger:= MonthOf(fecha);
+  ZS_Balance.ParamByName('ANIO').AsInteger:= YearOf(fecha);
+  ZS_Balance.Open;
+  ZS_Balance.last;
+
+  if ZS_Balance.IsEmpty then
+    tituloFecha(StartOfTheMonth(fecha))
+  else
+    tituloFecha(ZS_BalanceFECHA.AsDateTime);
+end;
+
+
+//--------------------------------------------
+//     BOTONES PARA EL CALENDARIO
+//--------------------------------------------
+procedure TFMovimientosInternos.SpeedBtn_HoyClick(Sender: TObject);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    exit;
+
+  fechaActual:= dm.EKModelo.Fecha;
+  abrirBalance(fechaActual);
+end;
+
+procedure TFMovimientosInternos.SpeedBtn_AnioAnteriorClick(Sender: TObject);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    exit;
+
+  fechaActual:= IncYear(fechaActual, -1);
+  abrirBalance(fechaActual);
+end;
+
+procedure TFMovimientosInternos.SpeedBtn_AnioSiguienteClick(Sender: TObject);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    exit;
+
+  fechaActual:= IncYear(fechaActual, 1);
+  abrirBalance(fechaActual);
+end;
+
+procedure TFMovimientosInternos.SpeedBtn_MesAnteriorClick(Sender: TObject);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    exit;
+
+  fechaActual:= IncMonth(fechaActual, -1);
+  abrirBalance(fechaActual);
+end;
+
+procedure TFMovimientosInternos.SpeedBtn_MesSiguienteClick(Sender: TObject);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    exit;
+
+  fechaActual:= IncMonth(fechaActual, 1);
+  abrirBalance(fechaActual);
+end;
+
+                              
 end.
 
 

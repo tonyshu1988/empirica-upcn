@@ -1,6 +1,6 @@
 object FMovimientosInternos: TFMovimientosInternos
-  Left = 194
-  Top = 194
+  Left = 173
+  Top = 146
   Width = 1056
   Height = 559
   Caption = 'Movimientos Internos'
@@ -828,35 +828,120 @@ object FMovimientosInternos: TFMovimientosInternos
     ParentFont = False
     TabOrder = 4
     object PanelCalendario: TPanel
+      Tag = 99
       Left = 6
       Top = 6
       Width = 1028
-      Height = 21
+      Height = 25
       Align = alTop
       BevelOuter = bvNone
       Color = clTeal
       TabOrder = 0
       DesignSize = (
         1028
-        21)
-      object Calendario: TMonthCalendar
-        Left = 419
-        Top = -4
-        Width = 190
-        Height = 153
-        Cursor = crHandPoint
-        Anchors = [akTop]
-        CalColors.TitleBackColor = clTeal
-        Date = 40735.817507534720000000
+        25)
+      object PanelManejoCalendario: TPanel
+        Tag = 99
+        Left = 326
+        Top = -1
+        Width = 377
+        Height = 29
+        Anchors = []
+        BevelOuter = bvNone
+        Caption = 'SEPTIEMBRE 2011'
+        Color = clTeal
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 0
-        OnClick = CalendarioClick
+        DesignSize = (
+          377
+          29)
+        object SpeedBtn_AnioAnterior: TSpeedButton
+          Left = 2
+          Top = 2
+          Width = 30
+          Height = 23
+          Anchors = []
+          Caption = '<<'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          OnClick = SpeedBtn_AnioAnteriorClick
+        end
+        object SpeedBtn_MesAnterior: TSpeedButton
+          Left = 34
+          Top = 2
+          Width = 30
+          Height = 23
+          Anchors = []
+          Caption = '<'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          OnClick = SpeedBtn_MesAnteriorClick
+        end
+        object SpeedBtn_MesSiguiente: TSpeedButton
+          Left = 312
+          Top = 2
+          Width = 30
+          Height = 23
+          Anchors = []
+          Caption = '>'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          OnClick = SpeedBtn_MesSiguienteClick
+        end
+        object SpeedBtn_AnioSiguiente: TSpeedButton
+          Left = 344
+          Top = 2
+          Width = 30
+          Height = 23
+          Anchors = []
+          Caption = '>>'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          OnClick = SpeedBtn_AnioSiguienteClick
+        end
+        object SpeedBtn_Hoy: TSpeedButton
+          Left = 66
+          Top = 2
+          Width = 30
+          Height = 23
+          Anchors = []
+          Caption = 'Hoy'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          OnClick = SpeedBtn_HoyClick
+        end
       end
     end
     object PanelMes: TPanel
       Left = 682
-      Top = 27
+      Top = 31
       Width = 352
-      Height = 436
+      Height = 432
       Align = alClient
       TabOrder = 1
       object PanelMes_Info: TPanel
@@ -867,7 +952,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        object Label1: TLabel
+        object lblBalanceMensual: TLabel
           Left = 0
           Top = 0
           Width = 350
@@ -887,7 +972,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Left = 1
         Top = 21
         Width = 350
-        Height = 414
+        Height = 410
         Align = alClient
         Color = 14606012
         DataSource = DS_Balance
@@ -944,9 +1029,9 @@ object FMovimientosInternos: TFMovimientosInternos
     end
     object PanelDia: TPanel
       Left = 6
-      Top = 27
+      Top = 31
       Width = 676
-      Height = 436
+      Height = 432
       Align = alLeft
       Caption = 'PanelDia'
       TabOrder = 2
@@ -954,7 +1039,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Left = 1
         Top = 181
         Width = 674
-        Height = 254
+        Height = 250
         Align = alClient
         TabOrder = 0
         object PanelDia_InfoLista: TPanel
@@ -985,7 +1070,7 @@ object FMovimientosInternos: TFMovimientosInternos
           Left = 1
           Top = 15
           Width = 672
-          Height = 238
+          Height = 234
           Align = alClient
           Color = 14606012
           DataSource = DS_MovHoy
@@ -1046,7 +1131,7 @@ object FMovimientosInternos: TFMovimientosInternos
           Height = 14
           Align = alTop
           BevelOuter = bvNone
-          TabOrder = 0
+          TabOrder = 1
           object Label2: TLabel
             Left = 0
             Top = 0
@@ -1069,7 +1154,7 @@ object FMovimientosInternos: TFMovimientosInternos
           Width = 672
           Height = 164
           Align = alClient
-          TabOrder = 1
+          TabOrder = 0
           DesignSize = (
             672
             164)
@@ -1110,7 +1195,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Anchors = [akLeft, akTop, akRight, akBottom]
             BevelOuter = bvNone
             BorderWidth = 2
-            TabOrder = 0
+            TabOrder = 5
             object DBGridFormaPago: TDBGrid
               Left = 2
               Top = 2
@@ -1126,15 +1211,15 @@ object FMovimientosInternos: TFMovimientosInternos
               TitleFont.Height = -11
               TitleFont.Name = 'Verdana'
               TitleFont.Style = []
-              OnKeyPress = DBGridFormaPagoKeyPress
+              OnExit = DBGridFormaPagoExit
               OnKeyUp = DBGridFormaPagoKeyUp
               Columns = <
                 item
                   Expanded = False
                   FieldName = '_CuentaIngreso_Codigo'
                   Title.Alignment = taCenter
-                  Title.Caption = 'C'#243'd.'
-                  Width = 79
+                  Title.Caption = 'C'#243'digo'
+                  Width = 80
                   Visible = True
                 end
                 item
@@ -1142,15 +1227,15 @@ object FMovimientosInternos: TFMovimientosInternos
                   FieldName = '_CuentaIngreso_Nombre'
                   Title.Alignment = taCenter
                   Title.Caption = 'Cuenta'
-                  Width = 268
+                  Width = 250
                   Visible = True
                 end
                 item
                   Expanded = False
                   FieldName = '_CuentaEgreso_Codigo'
                   Title.Alignment = taCenter
-                  Title.Caption = 'C'#243'd.'
-                  Width = 79
+                  Title.Caption = 'C'#243'digo'
+                  Width = 80
                   Visible = True
                 end
                 item
@@ -1158,7 +1243,7 @@ object FMovimientosInternos: TFMovimientosInternos
                   FieldName = '_CuentaEgreso_Nombre'
                   Title.Alignment = taCenter
                   Title.Caption = 'Cuenta'
-                  Width = 268
+                  Width = 250
                   Visible = True
                 end
                 item
@@ -1174,7 +1259,7 @@ object FMovimientosInternos: TFMovimientosInternos
                   FieldName = 'IMPORTE'
                   Title.Alignment = taCenter
                   Title.Caption = 'Importe'
-                  Width = 101
+                  Width = 100
                   Visible = True
                 end>
             end
@@ -1239,7 +1324,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Height = 21
             Date = 40735.843744895840000000
             Time = 40735.843744895840000000
-            TabOrder = 1
+            TabOrder = 0
             DataField = 'FECHA'
             DataSource = DS_Comprobante
           end
@@ -1251,7 +1336,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Anchors = [akLeft, akTop, akRight]
             DataField = 'OBSERVACION'
             DataSource = DS_Comprobante
-            TabOrder = 2
+            TabOrder = 4
           end
           object RadioButtonEgreso: TRadioButton
             Left = 430
@@ -1259,7 +1344,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Width = 70
             Height = 17
             Caption = 'Egreso'
-            TabOrder = 3
+            TabOrder = 2
             OnClick = RadioButtonEgresoClick
           end
           object RadioButtonIngreso: TRadioButton
@@ -1269,7 +1354,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Height = 17
             Caption = 'Ingreso'
             Checked = True
-            TabOrder = 4
+            TabOrder = 1
             TabStop = True
             OnClick = RadioButtonIngresoClick
           end
@@ -1283,7 +1368,7 @@ object FMovimientosInternos: TFMovimientosInternos
             KeyField = 'ID_TIPO_MOVIMIENTO'
             ListField = 'NOMBRE_MOVIMIENTO'
             ListSource = DS_TipoMovimiento
-            TabOrder = 5
+            TabOrder = 3
           end
         end
       end
@@ -1940,6 +2025,7 @@ object FMovimientosInternos: TFMovimientosInternos
     end
     object ZQ_ComprobanteID_TIPO_CPB: TIntegerField
       FieldName = 'ID_TIPO_CPB'
+      OnChange = ZQ_ComprobanteID_TIPO_CPBChange
     end
     object ZQ_ComprobanteID_VENDEDOR: TIntegerField
       FieldName = 'ID_VENDEDOR'
@@ -2143,6 +2229,7 @@ object FMovimientosInternos: TFMovimientosInternos
     end
     object ZQ_MovHoyIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
+      currency = True
     end
     object ZQ_MovHoyPUNTO_VENTA: TIntegerField
       FieldName = 'PUNTO_VENTA'
@@ -2249,15 +2336,19 @@ object FMovimientosInternos: TFMovimientosInternos
     end
     object ZS_BalanceINGRESO: TFloatField
       FieldName = 'INGRESO'
+      currency = True
     end
     object ZS_BalanceEGRESO: TFloatField
       FieldName = 'EGRESO'
+      currency = True
     end
     object ZS_BalanceSALDO: TFloatField
       FieldName = 'SALDO'
+      currency = True
     end
     object ZS_BalanceSALDODIARIO: TFloatField
       FieldName = 'SALDODIARIO'
+      currency = True
     end
   end
   object DS_Balance: TDataSource
