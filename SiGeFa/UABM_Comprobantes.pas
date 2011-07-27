@@ -58,7 +58,7 @@ type
     ABuscar: TAction;
     ANuevo: TAction;
     AModificar: TAction;
-    AEliminar: TAction;
+    AConfirmar: TAction;
     ABaja: TAction;
     AReactivar: TAction;
     AGuardar: TAction;
@@ -468,6 +468,8 @@ type
     Label31: TLabel;
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
+    btnConfirmar: TdxBarLargeButton;
+    ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -481,6 +483,7 @@ type
     //------TECLAS RAPIDAS
     procedure ANuevoExecute(Sender: TObject);
     procedure AModificarExecute(Sender: TObject);
+    procedure AConfirmarExecute(Sender: TObject);
     procedure ABajaExecute(Sender: TObject);
     procedure AReactivarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
@@ -521,7 +524,9 @@ type
     procedure AplicarFiltro(Sender: TObject); //configuro la pantalla de visualizacion segun el tipo de comprobante
     procedure configPanelFechas(panel: TPanel; Activar: boolean);
     procedure btnEnviarMailClick(Sender: TObject);
+    procedure btnConfirmarClick(Sender: TObject);
   private
+    confirmarComprobante: boolean;
     estadoPantalla: string;
     tipoComprobante: integer;
     id_comprobante: integer;
@@ -813,6 +818,7 @@ end;
 
 procedure TFABM_Comprobantes.btnNuevoClick(Sender: TObject);
 begin
+  confirmarComprobante:= false;
   PanelTipoCpb.left:= (FABM_Comprobantes.width div 2) - PanelTipoCpb.width div 2;
   PanelTipoCpb.top := (FABM_Comprobantes.height div 2) - PanelTipoCpb.height;
   PanelTipoCpb.Visible:= true;
@@ -924,6 +930,7 @@ begin
   if ZQ_VerCpb.IsEmpty then
     exit;
 
+  confirmarComprobante:= false;
   preguntarPorDescuento:= true;
 
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
@@ -1140,6 +1147,12 @@ begin
     btnModificar.Click;
 end;
 
+procedure TFABM_Comprobantes.AConfirmarExecute(Sender: TObject);
+begin
+  if btnConfirmar.Enabled then
+    btnConfirmar.Click;
+end;
+
 procedure TFABM_Comprobantes.ABajaExecute(Sender: TObject);
 begin
   if btnBaja.Enabled then
@@ -1216,6 +1229,11 @@ begin
     exit;
 
   configVisualizacion;
+
+  if ZQ_VerCpbID_TIPO_CPB.AsInteger = CPB_NOTA_PEDIDO then
+    btnConfirmar.Visible:=  ivAlways
+  else
+    btnConfirmar.Visible:=  ivNever;
 end;
 
 
@@ -1752,30 +1770,35 @@ begin
   begin
     ZQ_VerCpb.Filter:= Format('ID_TIPO_CPB = %d', [CPB_PRESUPUESTO]);
     ZQ_VerCpb.Filtered:= true;
+    btnConfirmar.Visible:=  ivNever;
   end;
 
   if TSpeedButton (Sender).Name = 'BtnFiltro_OrdenPago' then
   begin
     ZQ_VerCpb.Filter:= Format('ID_TIPO_CPB = %d', [CPB_ORDEN_PAGO]);
     ZQ_VerCpb.Filtered:= true;
+    btnConfirmar.Visible:=  ivNever;
   end;
 
   if TSpeedButton (Sender).Name = 'BtnFiltro_Remito' then
   begin
     ZQ_VerCpb.Filter:= Format('ID_TIPO_CPB = %d', [CPB_REMITO_VENTA]);
     ZQ_VerCpb.Filtered:= true;
+    btnConfirmar.Visible:=  ivNever;
   end;
 
   if TSpeedButton (Sender).Name = 'BtnFiltro_Recibo' then
   begin
     ZQ_VerCpb.Filter:= Format('ID_TIPO_CPB = %d', [CPB_RECIBO_COBRO]);
     ZQ_VerCpb.Filtered:= true;
+    btnConfirmar.Visible:=  ivNever;
   end;
 
   if TSpeedButton (Sender).Name = 'BtnFiltro_NotaPedido' then
   begin
     ZQ_VerCpb.Filter:= Format('ID_TIPO_CPB = %d', [CPB_NOTA_PEDIDO]);
     ZQ_VerCpb.Filtered:= true;
+    btnConfirmar.Visible:=  ivAlways;
   end;
 
   ZQ_VerCpb.Refresh;
@@ -1796,14 +1819,14 @@ begin
   ZQ_BuscarMail.Close;
   if ZQ_VerCpbID_PROVEEDOR.IsNull then //si es un CLIENTE
   begin
-      ZQ_BuscarMail.SQL.Text:= Format('select p.email from persona p where p.id_persona = %s',
-                                       [QuotedStr(ZQ_VerCpbID_CLIENTE.AsString)]);
+      ZQ_BuscarMail.SQL.Text:= Format('select p.email from persona p where p.id_persona = %d',
+                                       [ZQ_VerCpbID_CLIENTE.AsInteger]);
   end
   else
     if ZQ_VerCpbID_CLIENTE.IsNull then //si es un PROVEEDOR
     begin
-      ZQ_BuscarMail.SQL.Text:= Format('select e.email from empresa e where e.id_empresa = = %s',
-                                       [QuotedStr(ZQ_VerCpbID_CLIENTE.AsString)]);
+      ZQ_BuscarMail.SQL.Text:= Format('select e.email from empresa e where e.id_empresa = %d',
+                                       [ZQ_VerCpbID_PROVEEDOR.AsInteger]);
     end;
 
   ZQ_BuscarMail.Open;
@@ -1819,6 +1842,12 @@ begin
     Application.CreateForm(TFMailEnviar, FMailEnviar);
   FMailEnviar.enviarConAdjunto(destino, dm.ZQ_SucursalNOMBRE.AsString, archivoPDF);
   FMailEnviar.ShowModal;
+end;
+
+
+procedure TFABM_Comprobantes.btnConfirmarClick(Sender: TObject);
+begin
+  confirmarComprobante:= true;
 end;
 
 end.

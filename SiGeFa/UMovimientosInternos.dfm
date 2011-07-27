@@ -972,7 +972,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Left = 1
         Top = 21
         Width = 350
-        Height = 410
+        Height = 323
         Align = alClient
         Color = 14606012
         DataSource = DS_Balance
@@ -1025,6 +1025,15 @@ object FMovimientosInternos: TFMovimientosInternos
             Width = 114
             Visible = True
           end>
+      end
+      object PanelMes_Resumen: TPanel
+        Left = 1
+        Top = 344
+        Width = 350
+        Height = 87
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 2
       end
     end
     object PanelDia: TPanel

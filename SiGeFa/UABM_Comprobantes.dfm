@@ -1,6 +1,6 @@
 object FABM_Comprobantes: TFABM_Comprobantes
-  Left = 314
-  Top = 170
+  Left = 317
+  Top = 143
   Width = 892
   Height = 586
   Caption = 'ABM Comprobantes'
@@ -129,6 +129,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
           TitleFont.Style = []
           Columns = <
             item
+              Alignment = taCenter
               Expanded = False
               FieldName = 'FECHA'
               Title.Alignment = taCenter
@@ -237,6 +238,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
               Visible = True
             end
             item
+              Alignment = taCenter
               Expanded = False
               FieldName = 'FECHA_COBRADA'
               Title.Alignment = taCenter
@@ -244,6 +246,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
               Visible = True
             end
             item
+              Alignment = taCenter
               Expanded = False
               FieldName = 'FECHA_ENVIADA'
               Title.Alignment = taCenter
@@ -251,6 +254,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
               Visible = True
             end
             item
+              Alignment = taCenter
               Expanded = False
               FieldName = 'FECHA_IMPRESA'
               Title.Alignment = taCenter
@@ -258,6 +262,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
               Visible = True
             end
             item
+              Alignment = taCenter
               Expanded = False
               FieldName = 'FECHA_VENCIMIENTO'
               Title.Alignment = taCenter
@@ -1863,6 +1868,14 @@ object FABM_Comprobantes: TFABM_Comprobantes
             end
             item
               Expanded = False
+              FieldName = 'CANTIDAD_RECIBIDA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Recibido'
+              Width = 61
+              Visible = True
+            end
+            item
+              Expanded = False
               FieldName = 'IMPORTE_UNITARIO'
               Title.Alignment = taCenter
               Title.Caption = 'Precio Unitario'
@@ -2329,6 +2342,10 @@ object FABM_Comprobantes: TFABM_Comprobantes
             Visible = True
           end
           item
+            Item = btnConfirmar
+            Visible = True
+          end
+          item
             BeginGroup = True
             Item = btnBaja
             Visible = True
@@ -2762,6 +2779,15 @@ object FABM_Comprobantes: TFABM_Comprobantes
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnConfirmar: TdxBarLargeButton
+      Caption = 'F4 - Confirmar'
+      Category = 0
+      Hint = 'Confirmar el comprobante seleccionado'
+      Visible = ivNever
+      ImageIndex = 5
+      OnClick = btnConfirmarClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -2799,9 +2825,10 @@ object FABM_Comprobantes: TFABM_Comprobantes
       ShortCut = 114
       OnExecute = AModificarExecute
     end
-    object AEliminar: TAction
-      Caption = 'AEliminar'
+    object AConfirmar: TAction
+      Caption = 'AConfirmar'
       ShortCut = 115
+      OnExecute = AConfirmarExecute
     end
     object ABaja: TAction
       Caption = 'ABaja'
@@ -4119,21 +4146,27 @@ object FABM_Comprobantes: TFABM_Comprobantes
     end
     object ZQ_VerCpbFECHA: TDateTimeField
       FieldName = 'FECHA'
+      DisplayFormat = 'dd/MM/yyyy'
     end
     object ZQ_VerCpbFECHA_COBRADA: TDateField
       FieldName = 'FECHA_COBRADA'
+      DisplayFormat = 'dd/MM/yyyy'
     end
     object ZQ_VerCpbFECHA_ENVIADA: TDateField
       FieldName = 'FECHA_ENVIADA'
+      DisplayFormat = 'dd/MM/yyyy'
     end
     object ZQ_VerCpbFECHA_IMPRESA: TDateField
       FieldName = 'FECHA_IMPRESA'
+      DisplayFormat = 'dd/MM/yyyy'
     end
     object ZQ_VerCpbFECHA_VENCIMIENTO: TDateField
       FieldName = 'FECHA_VENCIMIENTO'
+      DisplayFormat = 'dd/MM/yyyy'
     end
     object ZQ_VerCpbFECHA_ANULADO: TDateField
       FieldName = 'FECHA_ANULADO'
+      DisplayFormat = 'dd/MM/yyyy'
     end
     object ZQ_VerCpbSUCURSAL: TStringField
       FieldName = 'SUCURSAL'
@@ -4979,6 +5012,9 @@ object FABM_Comprobantes: TFABM_Comprobantes
     object ZQ_CpbProductoCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
       OnChange = calcularImporteProducto
+    end
+    object ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
     end
     object ZQ_CpbProductoIMPORTE_FINAL: TFloatField
       FieldName = 'IMPORTE_FINAL'

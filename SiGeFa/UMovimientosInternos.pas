@@ -209,6 +209,7 @@ type
     SpeedBtn_MesSiguiente: TSpeedButton;
     SpeedBtn_AnioSiguiente: TSpeedButton;
     SpeedBtn_Hoy: TSpeedButton;
+    PanelMes_Resumen: TPanel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
