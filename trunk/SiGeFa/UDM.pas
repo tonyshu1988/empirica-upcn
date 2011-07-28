@@ -104,6 +104,9 @@ Const
   CPB_OTROS_EGRESOS  = 17;
   CPB_OTROS_INGRESOS = 16;
 
+  ESTADO_SIN_CONFIRMADO = 1;
+  ESTADO_CONFIRMADO     = 2;
+
 implementation
 
 uses UPrincipal, USeleccionarSucursal, UPanelNotificacion, IniFiles;
