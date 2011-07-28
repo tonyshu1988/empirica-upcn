@@ -12,45 +12,50 @@ uses
 type
   TFBuscarProductoStock = class(TForm)
     Panel1: TPanel;
-    DBGrid: TDBGrid;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
     btnSeleccionar: TdxBarLargeButton;
-    ZQ_Producto: TZQuery;
-    DS_Producto: TDataSource;
     EKOrdenarGrilla: TEKOrdenarGrilla;
-    EKBuscarProducto: TEKBusquedaAvanzada;
-    ZQ_ProductoNOMBRE: TStringField;
-    ZQ_ProductoCOD_CORTO: TStringField;
-    ZQ_ProductoID_PRODUCTO: TIntegerField;
-    ZQ_ProductoCOD_CORTO_1: TStringField;
-    ZQ_ProductoCODIGO_BARRA: TStringField;
-    ZQ_ProductoLLEVAR_STOCK: TStringField;
-    ZQ_ProductoMEDIDA: TStringField;
-    ZQ_ProductoNOMBRE_MARCA: TStringField;
-    ZQ_ProductoBAJA: TStringField;
-    ZQ_ProductoNOMBRE_ARTICULO: TStringField;
-    ZQ_ProductoTIPO_ARTICULO: TStringField;
     btnSeleccinarYSalir: TdxBarLargeButton;
-    ZQ_ProductoPRECIO_COSTO: TFloatField;
-    ZQ_ProductoPRECIO_VENTA: TFloatField;
-    ZQ_ProductoCOEF_GANANCIA: TFloatField;
-    ZQ_ProductoCOEF_DESCUENTO: TFloatField;
-    ZQ_ProductoIMPUESTO_INTERNO: TFloatField;
-    ZQ_ProductoIMPUESTO_IVA: TFloatField;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ASeleccionar: TAction;
     ASalir: TAction;
-    ZQ_ProductoCOLOR: TStringField;
+    EKBuscarStock: TEKBusquedaAvanzada;
+    ZQ_Stock: TZQuery;
+    ZQ_StockID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_StockSTOCK_ACTUAL: TFloatField;
+    ZQ_StockSTOCK_MIN: TFloatField;
+    ZQ_StockSTOCK_MAX: TFloatField;
+    ZQ_StockSTOCK_REPEDIDO: TFloatField;
+    ZQ_StockSTOCK_MIN_ALARMA: TStringField;
+    ZQ_StockNOMBRE: TStringField;
+    ZQ_StockCOD_CORTO_CABECERA: TStringField;
+    ZQ_StockCOD_CORTO_PRODUCTO: TStringField;
+    ZQ_StockCODIGO_BARRA: TStringField;
+    ZQ_StockMEDIDA: TStringField;
+    ZQ_StockNOMBRE_MARCA: TStringField;
+    ZQ_StockBAJA: TStringField;
+    ZQ_StockNOMBRE_ARTICULO: TStringField;
+    ZQ_StockTIPO_ARTICULO: TStringField;
+    ZQ_StockSUCURSAL: TStringField;
+    ZQ_StockSECCION: TStringField;
+    ZQ_StockSECTOR: TStringField;
+    ZQ_StockFILA: TStringField;
+    ZQ_StockCOLUMNA: TStringField;
+    ZQ_StockPOSICSUCURSAL: TStringField;
+    DS_Stock: TDataSource;
+    DBGridStock: TDBGrid;
+    ZQ_StockID_PRODUCTO: TIntegerField;
+    ZQ_StockCOLOR: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
-    procedure btnSeleccionarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
     procedure ASeleccionarExecute(Sender: TObject);
     procedure ASalirExecute(Sender: TObject);
+    procedure DBGridStockDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -76,25 +81,13 @@ end;
 
 procedure TFBuscarProductoStock.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscarProducto.Buscar;
-end;
-
-
-procedure TFBuscarProductoStock.btnSeleccionarClick(Sender: TObject);
-begin
-  if ((not(DBGrid.SelectedRows.Count > 0)) and (not(ZQ_Producto.IsEmpty))) then
-  begin
-    if Assigned(OnSeleccionar) then
-      OnSeleccionar
-  end
-  else
-    Application.MessageBox(PChar('Debe seleccionar algún Producto.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
+  EKBuscarStock.Buscar;
 end;
 
 
 procedure TFBuscarProductoStock.FormActivate(Sender: TObject);
 begin
-  if ZQ_Producto.IsEmpty then
+  if ZQ_Stock.IsEmpty then
     btnBuscar.Click;
 end;
 
@@ -114,6 +107,17 @@ procedure TFBuscarProductoStock.ASalirExecute(Sender: TObject);
 begin
   if btnSalir.Enabled then
     btnSalir.Click;
+end;
+
+procedure TFBuscarProductoStock.DBGridStockDblClick(Sender: TObject);
+begin
+  if ((not(DBGridStock.SelectedRows.Count > 0)) and (not(ZQ_Stock.IsEmpty))) then
+  begin
+    if Assigned(OnSeleccionar) then
+      OnSeleccionar
+  end
+  else
+    Application.MessageBox(PChar('Debe seleccionar algún Producto.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
 end;
 
 end.
