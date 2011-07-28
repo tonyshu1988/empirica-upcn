@@ -1612,7 +1612,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 4
-            object Label31: TLabel
+            object lblTituloFecha_Vencimiento: TLabel
               Left = 11
               Top = 1
               Width = 70
@@ -1645,7 +1645,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 3
-            object Label30: TLabel
+            object lblTituloFecha_Impreso: TLabel
               Left = 11
               Top = 1
               Width = 48
@@ -1678,7 +1678,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 2
-            object Label29: TLabel
+            object lblTituloFecha_Enviado: TLabel
               Left = 11
               Top = 1
               Width = 45
@@ -1711,7 +1711,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 1
-            object Label25: TLabel
+            object lblTituloFecha_Cobrado: TLabel
               Left = 11
               Top = 1
               Width = 49
@@ -1744,7 +1744,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
-            object Label23: TLabel
+            object lblTituloFecha_Emision: TLabel
               Left = 12
               Top = 1
               Width = 44
@@ -2797,7 +2797,8 @@ object FABM_Comprobantes: TFABM_Comprobantes
         'btnBaja'
         'btnSalir'
         'btnReactivar'
-        'btnImprimir')
+        'btnImprimir'
+        'btnConfirmar')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -4978,6 +4979,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
   object ZQ_CpbProducto: TZQuery
     Connection = DM.Conexion
     AfterScroll = ZQ_CpbProductoAfterScroll
+    BeforeDelete = ZQ_CpbProductoBeforeDelete
     SQL.Strings = (
       'select pr.*'
       'from comprobante_detalle pr'
@@ -5015,6 +5017,10 @@ object FABM_Comprobantes: TFABM_Comprobantes
     end
     object ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField
       FieldName = 'CANTIDAD_RECIBIDA'
+      OnChange = ZQ_CpbProductoCANTIDAD_RECIBIDAChange
+    end
+    object ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
     end
     object ZQ_CpbProductoIMPORTE_FINAL: TFloatField
       FieldName = 'IMPORTE_FINAL'

@@ -457,19 +457,20 @@ type
     PanelFechaCobrado: TPanel;
     PanelFechaEmision: TPanel;
     EKDBDateEmision: TEKDBDateTimePicker;
-    Label23: TLabel;
+    lblTituloFecha_Emision: TLabel;
     EKDBDateCobrado: TEKDBDateTimePicker;
     EKDBDateEnviado: TEKDBDateTimePicker;
     EKDBDateImpreso: TEKDBDateTimePicker;
     EKDBDateVencimiento: TEKDBDateTimePicker;
-    Label25: TLabel;
-    Label29: TLabel;
-    Label30: TLabel;
-    Label31: TLabel;
+    lblTituloFecha_Cobrado: TLabel;
+    lblTituloFecha_Enviado: TLabel;
+    lblTituloFecha_Impreso: TLabel;
+    lblTituloFecha_Vencimiento: TLabel;
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
     btnConfirmar: TdxBarLargeButton;
     ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -525,6 +526,9 @@ type
     procedure configPanelFechas(panel: TPanel; Activar: boolean);
     procedure btnEnviarMailClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
+    procedure confirmarCpb(tipo: integer);
+    procedure ZQ_CpbProductoCANTIDAD_RECIBIDAChange(Sender: TField);
+    procedure ZQ_CpbProductoBeforeDelete(DataSet: TDataSet);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -666,6 +670,7 @@ end;
 
 procedure TFABM_Comprobantes.cargarTipoComprobante(tipo: integer);
 begin
+  lblTituloFecha_Impreso.Caption:=  'Impreso';
   configPanelFechas(PanelFechaCobrado, false);
   configPanelFechas(PanelFechaEnviado, false);
   configPanelFechas(PanelFechaImpreso, false);
@@ -691,6 +696,12 @@ begin
                         PanelEditar_FPago.Align:= alClient;
 
                         configPanelFechas(PanelFechaEnviado, true);
+
+                        if confirmarComprobante then
+                        begin
+                          configPanelFechas(PanelFechaImpreso, true);
+                          lblTituloFecha_Impreso.Caption:=  'Recibido';
+                        end;
                       end;
     CPB_REMITO_VENTA: begin //CPB_REMITO_VENTA; COMPROBANTE_DETALLE
                         lblTipoComprobante.Caption:= 'REMITO DE VENTA';
@@ -775,6 +786,7 @@ begin
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPUESTO_INTERNO')].Visible:= true;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_IVA')].Visible:= true;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_FINAL')].Visible:= true;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD_RECIBIDA')].Visible:= false;
                       end;
     CPB_REMITO_VENTA: begin //Usu la cuenta de egreso
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_UNITARIO')].Visible:= false;
@@ -783,6 +795,7 @@ begin
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPUESTO_INTERNO')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_IVA')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_FINAL')].Visible:= false;
+                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD_RECIBIDA')].Visible:= false;
                       end;
     CPB_NOTA_PEDIDO:  begin //Usu la cuenta de egreso
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_UNITARIO')].Visible:= false;
@@ -791,9 +804,14 @@ begin
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPUESTO_INTERNO')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_IVA')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_FINAL')].Visible:= false;
+                        if confirmarComprobante then
+                          DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD_RECIBIDA')].Visible:= true
+                        else
+                          DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD_RECIBIDA')].Visible:= false;                        
                       end;
   end;
 end;
+
 
 procedure TFABM_Comprobantes.mostrarNumeroCpbBase(flag: boolean);
 begin
@@ -869,6 +887,7 @@ begin
     configFormaPago(tipoComprobante, true); //acomodo la grilla de forma de pago segun el tipo de comprobante que es
     configDetalleProducto(tipoComprobante); //acomodo la grilla de los productos segun el tipo de comprobante que es
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - NUEVO';
+    confirmarCpb(tipoComprobante);
 
     ZP_CpbID.Active:=false;
     ZP_CpbID.Active:=true;
@@ -927,7 +946,7 @@ end;
 
 procedure TFABM_Comprobantes.btnModificarClick(Sender: TObject);
 begin
-  if ZQ_VerCpb.IsEmpty then
+  if ((ZQ_VerCpb.IsEmpty) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO)) then
     exit;
 
   confirmarComprobante:= false;
@@ -988,6 +1007,7 @@ begin
     configFormaPago(tipoComprobante, true); //acomodo la grilla de forma de pago segun el tipo de comprobante que es
     configDetalleProducto(tipoComprobante); //acomodo la grilla de los productos segun el tipo de comprobante que es
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
+    confirmarCpb(tipoComprobante);
 
     ZQ_Comprobante.Edit;
 
@@ -1083,6 +1103,11 @@ begin
 
   EKSuma_FPago.RecalcAll;
   ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue;
+
+  if confirmarComprobante then
+    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO
+  else
+      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMADO;
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
@@ -1260,6 +1285,9 @@ procedure TFABM_Comprobantes.btnBuscarEmpresaClick(Sender: TObject);
 var
   sql: string;
 begin
+  if confirmarComprobante then
+    exit;
+
   sql:= Format('select emp.id_empresa as id, emp.nombre||%s|| coalesce(tipo.descripcion, %s) as busqueda '+
                'from empresa emp '+
                'left join tipo_empresa tipo on (emp.id_tipo_empresa = tipo.id_tipo_empresa) '+
@@ -1303,6 +1331,9 @@ procedure TFABM_Comprobantes.btnBuscarPersonaClick(Sender: TObject);
 var
   sql:string;
 begin
+  if confirmarComprobante then
+    exit;
+
   sql:= Format('select per.id_persona as id, per.nombre as busqueda '+
                'from persona per '+
                'left join persona_relacion rel on (per.id_persona = rel.id_persona) '+
@@ -1553,6 +1584,7 @@ begin
     ZQ_CpbProductoIMPUESTO_INTERNO.AsFloat:= vsel.ZQ_ProductoIMPUESTO_INTERNO.AsFloat;
     ZQ_CpbProductoPORC_IVA.AsFloat:= vsel.ZQ_ProductoIMPUESTO_IVA.AsFloat;
     ZQ_CpbProductoPORC_DESCUENTO.AsFloat:= descuentoCliente;
+    ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
 
     cargarImagen(vsel.ZQ_ProductoID_PRODUCTO.AsInteger);
   end;
@@ -1847,7 +1879,97 @@ end;
 
 procedure TFABM_Comprobantes.btnConfirmarClick(Sender: TObject);
 begin
+  if ((ZQ_VerCpb.IsEmpty) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO)) then
+    exit;
+
   confirmarComprobante:= true;
+  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+  tipoComprobante:= ZQ_VerCpbID_TIPO_CPB.AsInteger;
+
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbProducto]) then
+  begin
+    PanelTipoCpb.Visible:= false;
+    modoEdicion(true);
+
+    if not CD_Producto.IsEmpty then
+      CD_Producto.EmptyDataSet;
+    cargarProductosClienDataset();
+
+    ZQ_Comprobante.Close;
+    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_Comprobante.Open;
+
+    ZQ_CpbFormaPago.Close;
+    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_CpbFormaPago.Open;
+
+    ZQ_CpbProducto.Close;
+    ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_CpbProducto.Open;
+
+    if ZQ_ComprobanteID_CLIENTE.IsNull then
+    begin
+      PanelEditar_DatosGralProveedor.BringToFront;
+      ZQ_Proveedor.Close;
+      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= ZQ_ComprobanteID_PROVEEDOR.AsInteger;
+      ZQ_Proveedor.Open;
+      ZQ_Cliente.Close;
+    end;
+
+    if ZQ_ComprobanteID_PROVEEDOR.IsNull then
+    begin
+      PanelEditar_DatosGralCliente.BringToFront;
+      ZQ_Cliente.Close;
+      ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_ComprobanteID_CLIENTE.AsInteger;
+      ZQ_Cliente.Open;
+      ZQ_Proveedor.Close;
+    end;
+
+    cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
+    configFormaPago(tipoComprobante, true); //acomodo la grilla de forma de pago segun el tipo de comprobante que es
+    configDetalleProducto(tipoComprobante); //acomodo la grilla de los productos segun el tipo de comprobante que es
+    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - CONFIRMAR';
+    confirmarCpb(tipoComprobante);
+
+    ZQ_Comprobante.Edit;
+    ZQ_ComprobanteFECHA_IMPRESA.AsDateTime:= dm.EKModelo.FechayHora;
+
+    EKDBDateImpreso.SetFocus;
+  end;
+end;
+
+
+procedure TFABM_Comprobantes.confirmarCpb(tipo: integer);
+begin
+  case tipo of
+    CPB_NOTA_PEDIDO:  begin //CPB_NOTA_PEDIDO; COMPROBANTE_DETALLE
+                        if confirmarComprobante then
+                        begin
+                          PanelFechaEmision.Enabled:= false;
+                          PanelFechaEnviado.Enabled:= false;
+                          DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD')].ReadOnly:= true;
+                        end
+                        else
+                        begin
+                          PanelFechaEmision.Enabled:= true;
+                          PanelFechaEnviado.Enabled:= true;
+                          DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD')].ReadOnly:= false;                          
+                        end;
+                      end;
+  end;
+end;
+
+
+procedure TFABM_Comprobantes.ZQ_CpbProductoCANTIDAD_RECIBIDAChange(Sender: TField);
+begin
+  ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= ZQ_CpbProductoCANTIDAD_RECIBIDA.AsFloat;
+end;
+
+
+procedure TFABM_Comprobantes.ZQ_CpbProductoBeforeDelete(DataSet: TDataSet);
+begin
+//  if confirmarComprobante and (ZQ_CpbProductoCANTIDAD.AsFloat <> 0) then
+//    ZQ_CpbProducto.Cancel;
 end;
 
 end.
