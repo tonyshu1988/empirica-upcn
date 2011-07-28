@@ -32,6 +32,15 @@ object FTransferirStock: TFTransferirStock
       Align = alTop
       Caption = 'Panel1'
       TabOrder = 0
+      object CBoxSucursal: TComboBox
+        Left = 24
+        Top = 24
+        Width = 481
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 0
+        Text = 'CBoxSucursal'
+      end
     end
     object DBGridProducto: TDBGrid
       Left = 1
@@ -41,8 +50,7 @@ object FTransferirStock: TFTransferirStock
       Align = alClient
       Color = 13431031
       DataSource = DS_Producto
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-      ReadOnly = True
+      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 1
       TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
@@ -53,6 +61,7 @@ object FTransferirStock: TFTransferirStock
         item
           Expanded = False
           FieldName = 'producto'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Producto'
           Width = 100
@@ -61,6 +70,7 @@ object FTransferirStock: TFTransferirStock
         item
           Expanded = False
           FieldName = 'medida'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Medida'
           Width = 100
@@ -69,6 +79,7 @@ object FTransferirStock: TFTransferirStock
         item
           Expanded = False
           FieldName = 'color'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Color'
           Width = 128
@@ -77,6 +88,7 @@ object FTransferirStock: TFTransferirStock
         item
           Expanded = False
           FieldName = 'marca'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Marca'
           Width = 100
@@ -85,6 +97,7 @@ object FTransferirStock: TFTransferirStock
         item
           Expanded = False
           FieldName = 'tipoArticulo'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Tipo Art'#237'culo'
           Width = 100
@@ -93,6 +106,7 @@ object FTransferirStock: TFTransferirStock
         item
           Expanded = False
           FieldName = 'articulo'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Art'#237'culo'
           Width = 100
@@ -102,6 +116,7 @@ object FTransferirStock: TFTransferirStock
           Alignment = taRightJustify
           Expanded = False
           FieldName = 'codigoBarra'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Barra'
           Width = 100
@@ -111,6 +126,7 @@ object FTransferirStock: TFTransferirStock
           Alignment = taRightJustify
           Expanded = False
           FieldName = 'codProducto'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Producto'
           Width = 100
@@ -120,9 +136,23 @@ object FTransferirStock: TFTransferirStock
           Alignment = taRightJustify
           Expanded = False
           FieldName = 'codCabecera'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Cabecera'
           Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'stockactual'
+          ReadOnly = True
+          Title.Caption = 'Stock Actual'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'cantidad'
+          Title.Caption = 'Cantidad'
           Visible = True
         end>
     end
@@ -616,6 +646,7 @@ object FTransferirStock: TFTransferirStock
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
       ImageIndex = 1
+      OnClick = btnModificarClick
       AutoGrayScale = False
     end
     object btnProcesar: TdxBarLargeButton
@@ -731,13 +762,70 @@ object FTransferirStock: TFTransferirStock
       FieldName = 'color'
       Size = 30
     end
-    object CD_ProductoCantidad: TFloatField
-      FieldName = 'Cantidad'
+    object CD_Productostockactual: TFloatField
+      FieldName = 'stockactual'
+    end
+    object CD_Productocantidad: TFloatField
+      FieldName = 'cantidad'
+      OnValidate = CD_ProductocantidadValidate
     end
   end
   object DS_Producto: TDataSource
     DataSet = CD_Producto
     Left = 328
     Top = 288
+  end
+  object EKListado_Sucursal: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'SELECT ps.id_posicion_sucursal, '#39'Sucursal: '#39'||s.nombre||'#39' '#39'||'
+      'COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS Busqueda'
+      'FROM posicion_sucursal ps'
+      'LEFT JOIN sucursal s ON (s.id_sucursal=ps.id_sucursal)'
+      'WHERE s.id_sucursal <> 0'
+      ''
+      ''
+      ''
+      '')
+    CampoBuscar = 'Busqueda'
+    CampoClave = 'id_posicion_sucursal'
+    TituloVentana = 'Buscar Sucursal'
+    Left = 648
+    Top = 16
+  end
+  object ZQ_Sucursal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'SELECT ps.id_posicion_sucursal, '#39'Sucursal: '#39'||s.nombre||'#39' '#39'||'
+      'COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS Busqueda'
+      'FROM posicion_sucursal ps'
+      'LEFT JOIN sucursal s ON (s.id_sucursal=ps.id_sucursal)'
+      'WHERE s.id_sucursal <> 0')
+    Params = <>
+    Left = 705
+    Top = 17
+    object ZQ_SucursalID_POSICION_SUCURSAL: TIntegerField
+      FieldName = 'ID_POSICION_SUCURSAL'
+      Required = True
+    end
+    object ZQ_SucursalBUSQUEDA: TStringField
+      FieldName = 'BUSQUEDA'
+      ReadOnly = True
+      Size = 334
+    end
+  end
+  object EKLlenarComboSucursal: TEKLlenarCombo
+    dataset = ZQ_Sucursal
+    combo = CBoxSucursal
+    CampoClave = 'ID_POSICION_SUCURSAL'
+    CampoVer = 'BUSQUEDA'
+    Left = 577
+    Top = 17
   end
 end

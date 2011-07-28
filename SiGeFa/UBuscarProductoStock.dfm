@@ -18,31 +18,61 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 342
     Align = alClient
     TabOrder = 0
-    object DBGrid: TDBGrid
+    object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 712
-      Height = 334
-      Hint = 'Presione sobre el titulo de la columna para modificar el orden'
+      Width = 720
+      Height = 340
       Align = alClient
       Color = 14606012
-      DataSource = DS_Producto
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-      ParentShowHint = False
-      ReadOnly = True
-      ShowHint = True
+      DataSource = DS_Stock
+      FixedColor = 14145495
+      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
-      OnDblClick = btnSeleccionarClick
+      OnDblClick = DBGridStockDblClick
       Columns = <
+        item
+          Expanded = False
+          FieldName = 'SUCURSAL'
+          Title.Alignment = taCenter
+          Title.Caption = 'Sucursal'
+          Width = 138
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SECCION'
+          Title.Caption = 'Secci'#243'n'
+          Width = 108
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SECTOR'
+          Title.Caption = 'Sector'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FILA'
+          Title.Caption = 'Fila'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COLUMNA'
+          Title.Caption = 'Columna'
+          Visible = True
+        end
         item
           Alignment = taRightJustify
           Expanded = False
@@ -57,7 +87,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
           FieldName = 'NOMBRE'
           Title.Alignment = taCenter
           Title.Caption = 'Producto'
-          Width = 214
+          Width = 211
           Visible = True
         end
         item
@@ -65,15 +95,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
           FieldName = 'MEDIDA'
           Title.Alignment = taCenter
           Title.Caption = 'Medida'
-          Width = 90
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COLOR'
-          Title.Alignment = taCenter
-          Title.Caption = 'Color'
-          Width = 111
+          Width = 113
           Visible = True
         end
         item
@@ -81,65 +103,128 @@ object FBuscarProductoStock: TFBuscarProductoStock
           FieldName = 'NOMBRE_MARCA'
           Title.Alignment = taCenter
           Title.Caption = 'Marca'
-          Width = 174
+          Width = 150
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'TIPO_ARTICULO'
           Title.Alignment = taCenter
-          Title.Caption = 'Tipo Articulo'
-          Width = 162
+          Title.Caption = 'Tipo Art'#237'culo'
+          Width = 136
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'NOMBRE_ARTICULO'
           Title.Alignment = taCenter
-          Title.Caption = 'Articulo'
-          Width = 190
+          Title.Caption = 'Art'#237'culo'
+          Width = 133
+          Visible = True
+        end
+        item
+          Color = 15921894
+          Expanded = False
+          FieldName = 'STOCK_ACTUAL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Title.Alignment = taCenter
+          Title.Caption = 'Actual'
+          Width = 100
+          Visible = True
+        end
+        item
+          Color = 11140856
+          Expanded = False
+          FieldName = 'STOCK_MIN'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Title.Alignment = taCenter
+          Title.Caption = 'Minimo'
+          Width = 100
+          Visible = True
+        end
+        item
+          Color = 11796403
+          Expanded = False
+          FieldName = 'STOCK_MAX'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Title.Alignment = taCenter
+          Title.Caption = 'Maximo'
+          Width = 100
+          Visible = True
+        end
+        item
+          Color = 5197823
+          Expanded = False
+          FieldName = 'STOCK_REPEDIDO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Title.Alignment = taCenter
+          Title.Caption = 'Pto Repedido'
+          Width = 100
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'STOCK_MIN_ALARMA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          PickList.Strings = (
+            'S'
+            'N')
+          Title.Alignment = taCenter
+          Title.Caption = 'Alarma'
+          Width = 100
           Visible = True
         end
         item
           Alignment = taRightJustify
           Expanded = False
-          FieldName = 'COD_CORTO'
+          FieldName = 'COD_CORTO_CABECERA'
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Cabecera'
-          Width = 93
-          Visible = True
+          Visible = False
         end
         item
           Alignment = taRightJustify
           Expanded = False
-          FieldName = 'COD_CORTO_1'
+          FieldName = 'COD_CORTO_PRODUCTO'
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Producto'
-          Width = 87
-          Visible = True
+          Visible = False
         end
         item
-          Expanded = False
-          FieldName = 'LLEVAR_STOCK'
-          Title.Alignment = taCenter
-          Title.Caption = 'Llevar Stock'
-          Width = 79
-          Visible = True
-        end
-        item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'BAJA'
           Title.Alignment = taCenter
           Title.Caption = 'Baja'
-          Width = 47
-          Visible = True
+          Visible = False
         end>
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -779,7 +864,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
       Hint = 'F2 - Seleccionar'
       Visible = ivAlways
       ImageIndex = 5
-      OnClick = btnSeleccionarClick
       AutoGrayScale = False
     end
     object btnSeleccinarYSalir: TdxBarLargeButton
@@ -789,7 +873,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
       Visible = ivAlways
       ButtonStyle = bsChecked
       ImageIndex = 5
-      OnClick = btnSeleccionarClick
       AutoGrayScale = False
     end
     object btnSalir: TdxBarLargeButton
@@ -803,237 +886,13 @@ object FBuscarProductoStock: TFBuscarProductoStock
       AutoGrayScale = False
     end
   end
-  object ZQ_Producto: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      
-        'select pc.nombre, pc.cod_corto, pr.id_producto, pr.cod_corto, pr' +
-        '.codigo_barra,'
-      '       pr.llevar_stock, md.medida, mc.nombre_marca, pc.baja,'
-      
-        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
-        '_articulo,'
-      
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
-      'from producto pr'
-      
-        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
-        'rod_cabecera)'
-      'left join medida md on (pr.id_medida = md.id_medida)'
-      'left join marca mc on (pc.id_marca = mc.id_marca)'
-      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
-      
-        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
-        'articulo)'
-      'left join color co on (pc.color = co.id_color)'
-      'where pc.baja = '#39'N'#39
-      'order by pc.nombre, ta.descripcion, ar.descripcion')
-    Params = <>
-    Left = 136
-    Top = 48
-    object ZQ_ProductoNOMBRE: TStringField
-      FieldName = 'NOMBRE'
-      Size = 100
-    end
-    object ZQ_ProductoCOD_CORTO: TStringField
-      FieldName = 'COD_CORTO'
-    end
-    object ZQ_ProductoID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-    end
-    object ZQ_ProductoCOD_CORTO_1: TStringField
-      FieldName = 'COD_CORTO_1'
-    end
-    object ZQ_ProductoCODIGO_BARRA: TStringField
-      FieldName = 'CODIGO_BARRA'
-      Size = 40
-    end
-    object ZQ_ProductoLLEVAR_STOCK: TStringField
-      FieldName = 'LLEVAR_STOCK'
-      Size = 1
-    end
-    object ZQ_ProductoMEDIDA: TStringField
-      FieldName = 'MEDIDA'
-      Size = 30
-    end
-    object ZQ_ProductoNOMBRE_MARCA: TStringField
-      FieldName = 'NOMBRE_MARCA'
-      Size = 50
-    end
-    object ZQ_ProductoBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_ProductoNOMBRE_ARTICULO: TStringField
-      FieldName = 'NOMBRE_ARTICULO'
-      Size = 200
-    end
-    object ZQ_ProductoTIPO_ARTICULO: TStringField
-      FieldName = 'TIPO_ARTICULO'
-      Size = 200
-    end
-    object ZQ_ProductoPRECIO_COSTO: TFloatField
-      FieldName = 'PRECIO_COSTO'
-    end
-    object ZQ_ProductoPRECIO_VENTA: TFloatField
-      FieldName = 'PRECIO_VENTA'
-    end
-    object ZQ_ProductoCOEF_GANANCIA: TFloatField
-      FieldName = 'COEF_GANANCIA'
-    end
-    object ZQ_ProductoCOEF_DESCUENTO: TFloatField
-      FieldName = 'COEF_DESCUENTO'
-    end
-    object ZQ_ProductoIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object ZQ_ProductoIMPUESTO_IVA: TFloatField
-      FieldName = 'IMPUESTO_IVA'
-    end
-    object ZQ_ProductoCOLOR: TStringField
-      FieldName = 'COLOR'
-      Size = 30
-    end
-  end
-  object DS_Producto: TDataSource
-    DataSet = ZQ_Producto
-    Left = 136
-    Top = 104
-  end
   object EKOrdenarGrilla: TEKOrdenarGrilla
-    Grilla = DBGrid
+    Grilla = DBGridStock
     FuenteNormal = []
     Ordenar = True
     MoverColumna = True
     Left = 32
     Top = 48
-  end
-  object EKBuscarProducto: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'C'#243'd. Barra'
-        Campo = 'codigo_barra'
-        Tabla = 'producto'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Producto'
-        Campo = 'nombre'
-        Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Medida'
-        Campo = 'medida'
-        Tabla = 'Medida'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Marca'
-        Campo = 'nombre_marca'
-        Tabla = 'Marca'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Tipo Art'#237'culo'
-        Campo = 'descripcion'
-        Tabla = 'Tipo_Articulo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Art'#237'culo'
-        Campo = 'descripcion'
-        Tabla = 'Articulo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Baja'
-        Campo = 'baja'
-        Tabla = 'producto_cabecera'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
-          'NO'
-          'SI')
-        TipoComboEditable = False
-        TipoComboValoresReales.Strings = (
-          'N'
-          'S')
-        ItemIndex = -1
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_Producto
-    SQL.Strings = (
-      
-        'select pc.nombre, pc.cod_corto, pr.id_producto, pr.cod_corto, pr' +
-        '.codigo_barra,'
-      '       pr.llevar_stock, md.medida, mc.nombre_marca, pc.baja,'
-      
-        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
-        '_articulo,'
-      
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
-      'from producto pr'
-      
-        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
-        'rod_cabecera)'
-      'left join medida md on (pr.id_medida = md.id_medida)'
-      'left join marca mc on (pc.id_marca = mc.id_marca)'
-      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
-      
-        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
-        'articulo)'
-      'left join color co on (pc.color = co.id_color)'
-      'where pc.baja = '#39'N'#39
-      'order by pc.nombre, ta.descripcion, ar.descripcion')
-    SQL_Select.Strings = (
-      
-        'select pc.nombre, pc.cod_corto, pr.id_producto, pr.cod_corto, pr' +
-        '.codigo_barra,'
-      '       pr.llevar_stock, md.medida, mc.nombre_marca, pc.baja,'
-      
-        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
-        '_articulo,'
-      
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color')
-    SQL_From.Strings = (
-      'from producto pr'
-      
-        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
-        'rod_cabecera)'
-      'left join medida md on (pr.id_medida = md.id_medida)'
-      'left join marca mc on (pc.id_marca = mc.id_marca)'
-      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
-      
-        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
-        'articulo)'
-      'left join color co on (pc.color = co.id_color)')
-    SQL_Where.Strings = (
-      'where pc.baja = '#39'N'#39)
-    SQL_Orden.Strings = (
-      'order by pc.nombre, ta.descripcion, ar.descripcion')
-    UsarWhereOriginal = EK_Con_Where
-    Left = 136
-    Top = 160
   end
   object ATeclasRapidas: TActionManager
     Left = 32
@@ -1054,5 +913,364 @@ object FBuscarProductoStock: TFBuscarProductoStock
       ShortCut = 27
       OnExecute = ASalirExecute
     end
+  end
+  object EKBuscarStock: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Sucursal'
+        Campo = 'nombre'
+        Tabla = 'sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Secci'#243'n'
+        Campo = 'Seccion'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sector'
+        Campo = 'sector'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fila'
+        Campo = 'Fila'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Columna'
+        Campo = 'columna'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Barra'
+        Campo = 'codigo_barra'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Cabecera'
+        Campo = 'cod_corto'
+        Tabla = 'producto_cabecera'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Detalle'
+        Campo = 'cod_corto'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Producto'
+        Campo = 'nombre'
+        Tabla = 'producto_cabecera'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Medida'
+        Campo = 'medida'
+        Tabla = 'medida'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Marca'
+        Campo = 'nombre_marca'
+        Tabla = 'marca'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'tipo_articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Stock Actual'
+        Campo = 'stock_actual'
+        Tabla = 'stock_producto'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Stock Minimo'
+        Campo = 'stock_min'
+        Tabla = 'stock_producto'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Stock Maximo'
+        Campo = 'stock_max'
+        Tabla = 'stock_producto'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_Stock
+    SQL.Strings = (
+      
+        'select c.nombre as color, sp.id_producto, sp.id_stock_producto, ' +
+        'sp.stock_actual, sp.stock_min, sp.stock_max,'
+      '       sp.stock_repedido, sp.stock_min_alarma,'
+      '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
+      '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
+      '       md.medida, mc.nombre_marca, pc.baja,'
+      
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      
+        '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
+        'umna,'
+      '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
+      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      
+        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
+        'al'
+      ''
+      ''
+      ''
+      'from stock_producto sp'
+      'left join producto pr on (sp.id_producto =  pr.id_producto)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
+      
+        'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
+        'prod_cabecera)'
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      
+        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
+        'id_posicion_sucursal)'
+      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'left join color c on (pc.color = c.id_color)'
+      ''
+      '')
+    SQL_Select.Strings = (
+      
+        'select c.nombre as color, sp.id_producto, sp.id_stock_producto, ' +
+        'sp.stock_actual, sp.stock_min, sp.stock_max,'
+      '       sp.stock_repedido, sp.stock_min_alarma,'
+      '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
+      '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
+      '       md.medida, mc.nombre_marca, pc.baja,'
+      
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      
+        '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
+        'umna,'
+      '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
+      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      
+        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
+        'al'
+      ''
+      ''
+      '')
+    SQL_From.Strings = (
+      'from stock_producto sp'
+      'left join producto pr on (sp.id_producto =  pr.id_producto)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
+      
+        'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
+        'prod_cabecera)'
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      
+        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
+        'id_posicion_sucursal)'
+      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'left join color c on (pc.color = c.id_color)'
+      ''
+      '')
+    UsarWhereOriginal = EK_Con_Where
+    Left = 32
+    Top = 216
+  end
+  object ZQ_Stock: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select c.nombre as color, sp.id_producto, sp.id_stock_producto, ' +
+        'sp.stock_actual, sp.stock_min, sp.stock_max,'
+      '       sp.stock_repedido, sp.stock_min_alarma,'
+      '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
+      '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
+      '       md.medida, mc.nombre_marca, pc.baja,'
+      
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      
+        '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
+        'umna,'
+      '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
+      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      
+        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
+        'al'
+      'from stock_producto sp'
+      'left join producto pr on (sp.id_producto =  pr.id_producto)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
+      
+        'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
+        'prod_cabecera)'
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      
+        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
+        'id_posicion_sucursal)'
+      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'left join color c on (pc.color = c.id_color)')
+    Params = <>
+    Left = 120
+    Top = 96
+    object ZQ_StockID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_StockSTOCK_ACTUAL: TFloatField
+      FieldName = 'STOCK_ACTUAL'
+    end
+    object ZQ_StockSTOCK_MIN: TFloatField
+      FieldName = 'STOCK_MIN'
+    end
+    object ZQ_StockSTOCK_MAX: TFloatField
+      FieldName = 'STOCK_MAX'
+    end
+    object ZQ_StockSTOCK_REPEDIDO: TFloatField
+      FieldName = 'STOCK_REPEDIDO'
+    end
+    object ZQ_StockSTOCK_MIN_ALARMA: TStringField
+      FieldName = 'STOCK_MIN_ALARMA'
+      Size = 1
+    end
+    object ZQ_StockNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 100
+    end
+    object ZQ_StockCOD_CORTO_CABECERA: TStringField
+      FieldName = 'COD_CORTO_CABECERA'
+    end
+    object ZQ_StockCOD_CORTO_PRODUCTO: TStringField
+      FieldName = 'COD_CORTO_PRODUCTO'
+    end
+    object ZQ_StockCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_StockMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_StockNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_StockBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_StockNOMBRE_ARTICULO: TStringField
+      FieldName = 'NOMBRE_ARTICULO'
+      Size = 200
+    end
+    object ZQ_StockTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object ZQ_StockSUCURSAL: TStringField
+      FieldName = 'SUCURSAL'
+      Size = 200
+    end
+    object ZQ_StockSECCION: TStringField
+      FieldName = 'SECCION'
+      Size = 50
+    end
+    object ZQ_StockSECTOR: TStringField
+      FieldName = 'SECTOR'
+      Size = 10
+    end
+    object ZQ_StockFILA: TStringField
+      FieldName = 'FILA'
+      Size = 10
+    end
+    object ZQ_StockCOLUMNA: TStringField
+      FieldName = 'COLUMNA'
+      Size = 10
+    end
+    object ZQ_StockPOSICSUCURSAL: TStringField
+      FieldName = 'POSICSUCURSAL'
+      ReadOnly = True
+      Size = 334
+    end
+    object ZQ_StockID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_StockCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
+  end
+  object DS_Stock: TDataSource
+    DataSet = ZQ_Stock
+    Left = 120
+    Top = 160
   end
 end
