@@ -1052,8 +1052,9 @@ object FBuscarProductoStock: TFBuscarProductoStock
     DataSet = ZQ_Stock
     SQL.Strings = (
       
-        'select c.nombre as color, sp.id_producto, sp.id_stock_producto, ' +
-        'sp.stock_actual, sp.stock_min, sp.stock_max,'
+        'select sp.id_posicion_sucursal ,c.nombre as color, sp.id_product' +
+        'o, sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.stock' +
+        '_max,'
       '       sp.stock_repedido, sp.stock_min_alarma,'
       '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
       '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
@@ -1071,9 +1072,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
         'al'
-      ''
-      ''
-      ''
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
@@ -1094,8 +1092,9 @@ object FBuscarProductoStock: TFBuscarProductoStock
       '')
     SQL_Select.Strings = (
       
-        'select c.nombre as color, sp.id_producto, sp.id_stock_producto, ' +
-        'sp.stock_actual, sp.stock_min, sp.stock_max,'
+        'select sp.id_posicion_sucursal ,c.nombre as color, sp.id_product' +
+        'o, sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.stock' +
+        '_max,'
       '       sp.stock_repedido, sp.stock_min_alarma,'
       '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
       '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
@@ -1112,10 +1111,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
       '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
-        'al'
-      ''
-      ''
-      '')
+        'al')
     SQL_From.Strings = (
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
@@ -1143,8 +1139,9 @@ object FBuscarProductoStock: TFBuscarProductoStock
     Connection = DM.Conexion
     SQL.Strings = (
       
-        'select c.nombre as color, sp.id_producto, sp.id_stock_producto, ' +
-        'sp.stock_actual, sp.stock_min, sp.stock_max,'
+        'select sp.id_posicion_sucursal , c.nombre as color, sp.id_produc' +
+        'to, sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.stoc' +
+        'k_max,'
       '       sp.stock_repedido, sp.stock_min_alarma,'
       '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
       '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
@@ -1183,6 +1180,14 @@ object FBuscarProductoStock: TFBuscarProductoStock
     Top = 96
     object ZQ_StockID_STOCK_PRODUCTO: TIntegerField
       FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_StockID_POSICION_SUCURSAL: TIntegerField
+      FieldName = 'ID_POSICION_SUCURSAL'
+      Required = True
+    end
+    object ZQ_StockID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
     end
     object ZQ_StockSTOCK_ACTUAL: TFloatField
       FieldName = 'STOCK_ACTUAL'
@@ -1258,10 +1263,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
       FieldName = 'POSICSUCURSAL'
       ReadOnly = True
       Size = 334
-    end
-    object ZQ_StockID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-      Required = True
     end
     object ZQ_StockCOLOR: TStringField
       FieldName = 'COLOR'
