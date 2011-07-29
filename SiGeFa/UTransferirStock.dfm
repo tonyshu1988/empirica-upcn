@@ -24,137 +24,170 @@ object FTransferirStock: TFTransferirStock
     Height = 416
     Align = alClient
     TabOrder = 0
-    object Panel1: TPanel
+    object PageControlTransferir: TPageControl
       Left = 1
       Top = 1
       Width = 860
-      Height = 72
-      Align = alTop
-      Caption = 'Panel1'
-      TabOrder = 0
-      object CBoxSucursal: TComboBox
-        Left = 24
-        Top = 24
-        Width = 481
-        Height = 21
-        ItemHeight = 13
-        TabOrder = 0
-        Text = 'CBoxSucursal'
-      end
-    end
-    object DBGridProducto: TDBGrid
-      Left = 1
-      Top = 73
-      Width = 860
-      Height = 342
+      Height = 414
+      ActivePage = TabSTransferirStock
       Align = alClient
-      Color = 13431031
-      DataSource = DS_Producto
-      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-      TabOrder = 1
-      TitleFont.Charset = ANSI_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'producto'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Producto'
-          Width = 100
-          Visible = True
+      TabOrder = 0
+      object TabSTransferirStock: TTabSheet
+        Caption = 'Transferir Stock'
+        object PanelSeleccionarDeposito: TPanel
+          Left = 0
+          Top = 0
+          Width = 852
+          Height = 33
+          Align = alTop
+          TabOrder = 0
+          object CBoxSucursal: TComboBox
+            Left = 5
+            Top = 6
+            Width = 481
+            Height = 21
+            Style = csDropDownList
+            ItemHeight = 13
+            TabOrder = 0
+          end
         end
-        item
-          Expanded = False
-          FieldName = 'medida'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Medida'
-          Width = 100
-          Visible = True
+        object DBGridProducto: TDBGrid
+          Left = 0
+          Top = 33
+          Width = 852
+          Height = 331
+          Align = alClient
+          Color = 13431031
+          DataSource = DS_Producto
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 1
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'producto'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Producto'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'medida'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'color'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Color'
+              Width = 128
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'marca'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Marca'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'tipoArticulo'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo Art'#237'culo'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'articulo'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Art'#237'culo'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codigoBarra'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Barra'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codProducto'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Producto'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codCabecera'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Cabecera'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'stockactual'
+              ReadOnly = True
+              Title.Caption = 'Stock Actual'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cantidad'
+              Title.Caption = 'Cantidad'
+              Visible = True
+            end>
         end
-        item
-          Expanded = False
-          FieldName = 'color'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Color'
-          Width = 128
-          Visible = True
+        object Panel1: TPanel
+          Left = 0
+          Top = 364
+          Width = 852
+          Height = 22
+          Align = alBottom
+          Caption = 'Panel1'
+          TabOrder = 2
+          object btBorrarLinea: TButton
+            Left = 10
+            Top = 3
+            Width = 103
+            Height = 17
+            Caption = 'Borrar Linea'
+            TabOrder = 0
+            OnClick = btBorrarLineaClick
+          end
         end
-        item
-          Expanded = False
-          FieldName = 'marca'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Marca'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'tipoArticulo'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Tipo Art'#237'culo'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'articulo'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Art'#237'culo'
-          Width = 100
-          Visible = True
-        end
-        item
-          Alignment = taRightJustify
-          Expanded = False
-          FieldName = 'codigoBarra'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Barra'
-          Width = 100
-          Visible = True
-        end
-        item
-          Alignment = taRightJustify
-          Expanded = False
-          FieldName = 'codProducto'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Producto'
-          Width = 100
-          Visible = True
-        end
-        item
-          Alignment = taRightJustify
-          Expanded = False
-          FieldName = 'codCabecera'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Cabecera'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'stockactual'
-          ReadOnly = True
-          Title.Caption = 'Stock Actual'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'cantidad'
-          Title.Caption = 'Cantidad'
-          Visible = True
-        end>
+      end
+      object TabSAsociarNotaPedido: TTabSheet
+        Caption = 'Asociar Nota Pedido'
+        ImageIndex = 1
+      end
     end
   end
   object dxBarABM: TdxBarManager
@@ -267,20 +300,7 @@ object FTransferirStock: TFTransferirStock
           end
           item
             BeginGroup = True
-            Item = btnModificar
-            Visible = True
-          end
-          item
-            BeginGroup = True
             Item = btnAsociar
-            Visible = True
-          end
-          item
-            Item = btnProcesar
-            Visible = True
-          end
-          item
-            Item = btVolver
             Visible = True
           end
           item
@@ -294,10 +314,6 @@ object FTransferirStock: TFTransferirStock
           end
           item
             BeginGroup = True
-            Item = btnImprimir
-            Visible = True
-          end
-          item
             Item = btnSalir
             Visible = True
           end>
@@ -626,7 +642,6 @@ object FTransferirStock: TFTransferirStock
       Align = iaRight
       Caption = 'Volver'
       Category = 0
-      Enabled = False
       Hint = 'Volver'
       Visible = ivAlways
       ImageIndex = 69
@@ -668,6 +683,7 @@ object FTransferirStock: TFTransferirStock
         's'
       Visible = ivAlways
       ImageIndex = 12
+      OnClick = btnAsociarClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
@@ -677,6 +693,7 @@ object FTransferirStock: TFTransferirStock
       Hint = 'Guarda los cambios'
       Visible = ivAlways
       ImageIndex = 3
+      OnClick = btnGuardarClick
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
@@ -686,6 +703,7 @@ object FTransferirStock: TFTransferirStock
       Hint = 'Cancela los cambios'
       Visible = ivAlways
       ImageIndex = 4
+      OnClick = btnCancelarClick
       AutoGrayScale = False
     end
     object btnImprimir: TdxBarLargeButton
@@ -702,6 +720,7 @@ object FTransferirStock: TFTransferirStock
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
       ImageIndex = 6
+      OnClick = btnSalirClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -710,8 +729,8 @@ object FTransferirStock: TFTransferirStock
         'btVolver'
         'btnNuevo'
         'btnModificar'
-        'btnAsociar'
-        'btnImprimir')
+        'btnImprimir'
+        'btnAsociar')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -727,6 +746,12 @@ object FTransferirStock: TFTransferirStock
     Top = 232
     object CD_Producto_idProducto: TIntegerField
       FieldName = 'idProducto'
+    end
+    object CD_ProductoidStockProducto: TIntegerField
+      FieldName = 'idStockProducto'
+    end
+    object CD_ProductoidPosicionSucursal: TIntegerField
+      FieldName = 'idPosicionSucursal'
     end
     object CD_Producto_producto: TStringField
       FieldName = 'producto'
@@ -762,6 +787,15 @@ object FTransferirStock: TFTransferirStock
       FieldName = 'color'
       Size = 30
     end
+    object CD_ProductostockMin: TFloatField
+      FieldName = 'stockMin'
+    end
+    object CD_ProductostockMax: TFloatField
+      FieldName = 'stockMax'
+    end
+    object CD_ProductostockRepedido: TFloatField
+      FieldName = 'stockRepedido'
+    end
     object CD_Productostockactual: TFloatField
       FieldName = 'stockactual'
     end
@@ -793,8 +827,8 @@ object FTransferirStock: TFTransferirStock
     CampoBuscar = 'Busqueda'
     CampoClave = 'id_posicion_sucursal'
     TituloVentana = 'Buscar Sucursal'
-    Left = 648
-    Top = 16
+    Left = 360
+    Top = 64
   end
   object ZQ_Sucursal: TZQuery
     Connection = DM.Conexion
@@ -808,8 +842,8 @@ object FTransferirStock: TFTransferirStock
       'LEFT JOIN sucursal s ON (s.id_sucursal=ps.id_sucursal)'
       'WHERE s.id_sucursal <> 0')
     Params = <>
-    Left = 705
-    Top = 17
+    Left = 433
+    Top = 65
     object ZQ_SucursalID_POSICION_SUCURSAL: TIntegerField
       FieldName = 'ID_POSICION_SUCURSAL'
       Required = True
@@ -825,7 +859,115 @@ object FTransferirStock: TFTransferirStock
     combo = CBoxSucursal
     CampoClave = 'ID_POSICION_SUCURSAL'
     CampoVer = 'BUSQUEDA'
-    Left = 577
-    Top = 17
+    Left = 265
+    Top = 65
+  end
+  object ZQ_Stock_Origen: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from stock_producto sp'
+      'where sp.id_stock_producto = :ID_STOCK_PROD')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_STOCK_PROD'
+        ParamType = ptUnknown
+      end>
+    Left = 208
+    Top = 240
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_STOCK_PROD'
+        ParamType = ptUnknown
+      end>
+    object ZQ_Stock_OrigenID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_Stock_OrigenID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_Stock_OrigenID_POSICION_SUCURSAL: TIntegerField
+      FieldName = 'ID_POSICION_SUCURSAL'
+      Required = True
+    end
+    object ZQ_Stock_OrigenSTOCK_ACTUAL: TFloatField
+      FieldName = 'STOCK_ACTUAL'
+    end
+    object ZQ_Stock_OrigenSTOCK_MIN: TFloatField
+      FieldName = 'STOCK_MIN'
+    end
+    object ZQ_Stock_OrigenSTOCK_MAX: TFloatField
+      FieldName = 'STOCK_MAX'
+    end
+    object ZQ_Stock_OrigenSTOCK_REPEDIDO: TFloatField
+      FieldName = 'STOCK_REPEDIDO'
+    end
+    object ZQ_Stock_OrigenSTOCK_MIN_ALARMA: TStringField
+      FieldName = 'STOCK_MIN_ALARMA'
+      Size = 1
+    end
+  end
+  object ZQ_Stock_Destino: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from stock_producto sp'
+      
+        'where (sp.id_producto = :ID_PRODUCTO) and (sp.id_posicion_sucurs' +
+        'al = :ID_POS_SUC)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PRODUCTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_POS_SUC'
+        ParamType = ptUnknown
+      end>
+    Left = 208
+    Top = 296
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PRODUCTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_POS_SUC'
+        ParamType = ptUnknown
+      end>
+    object ZQ_Stock_DestinoID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_Stock_DestinoID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_Stock_DestinoID_POSICION_SUCURSAL: TIntegerField
+      FieldName = 'ID_POSICION_SUCURSAL'
+      Required = True
+    end
+    object ZQ_Stock_DestinoSTOCK_ACTUAL: TFloatField
+      FieldName = 'STOCK_ACTUAL'
+    end
+    object ZQ_Stock_DestinoSTOCK_MIN: TFloatField
+      FieldName = 'STOCK_MIN'
+    end
+    object ZQ_Stock_DestinoSTOCK_MAX: TFloatField
+      FieldName = 'STOCK_MAX'
+    end
+    object ZQ_Stock_DestinoSTOCK_REPEDIDO: TFloatField
+      FieldName = 'STOCK_REPEDIDO'
+    end
+    object ZQ_Stock_DestinoSTOCK_MIN_ALARMA: TStringField
+      FieldName = 'STOCK_MIN_ALARMA'
+      Size = 1
+    end
   end
 end

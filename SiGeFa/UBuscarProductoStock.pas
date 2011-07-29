@@ -49,6 +49,7 @@ type
     DBGridStock: TDBGrid;
     ZQ_StockID_PRODUCTO: TIntegerField;
     ZQ_StockCOLOR: TStringField;
+    ZQ_StockID_POSICION_SUCURSAL: TIntegerField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
