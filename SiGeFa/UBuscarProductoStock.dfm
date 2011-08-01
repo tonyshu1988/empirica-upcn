@@ -1,6 +1,6 @@
 object FBuscarProductoStock: TFBuscarProductoStock
-  Left = 378
-  Top = 215
+  Left = 540
+  Top = 244
   Width = 730
   Height = 426
   Caption = 'Buscar Producto'
@@ -18,15 +18,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 722
-    Height = 342
+    Width = 714
+    Height = 336
     Align = alClient
     TabOrder = 0
     object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 720
-      Height = 340
+      Width = 712
+      Height = 334
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -224,7 +224,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1052,9 +1052,9 @@ object FBuscarProductoStock: TFBuscarProductoStock
     DataSet = ZQ_Stock
     SQL.Strings = (
       
-        'select sp.id_posicion_sucursal ,c.nombre as color, sp.id_product' +
-        'o, sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.stock' +
-        '_max,'
+        'select sp.id_posicion_sucursal , c.nombre as color, sp.id_produc' +
+        'to, sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.stoc' +
+        'k_max,'
       '       sp.stock_repedido, sp.stock_min_alarma,'
       '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
       '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
@@ -1071,7 +1071,10 @@ object FBuscarProductoStock: TFBuscarProductoStock
       '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
-        'al'
+        'al,ps.punto_salida'
+      ''
+      ''
+      ''
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
@@ -1092,9 +1095,9 @@ object FBuscarProductoStock: TFBuscarProductoStock
       '')
     SQL_Select.Strings = (
       
-        'select sp.id_posicion_sucursal ,c.nombre as color, sp.id_product' +
-        'o, sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.stock' +
-        '_max,'
+        'select sp.id_posicion_sucursal , c.nombre as color, sp.id_produc' +
+        'to, sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.stoc' +
+        'k_max,'
       '       sp.stock_repedido, sp.stock_min_alarma,'
       '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
       '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
@@ -1111,7 +1114,10 @@ object FBuscarProductoStock: TFBuscarProductoStock
       '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
-        'al')
+        'al,ps.punto_salida'
+      ''
+      ''
+      '')
     SQL_From.Strings = (
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
@@ -1158,7 +1164,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
       '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
-        'al'
+        'al,ps.punto_salida'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
@@ -1174,7 +1180,8 @@ object FBuscarProductoStock: TFBuscarProductoStock
         'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      'left join color c on (pc.color = c.id_color)')
+      'left join color c on (pc.color = c.id_color)'
+      '')
     Params = <>
     Left = 120
     Top = 96
@@ -1267,6 +1274,10 @@ object FBuscarProductoStock: TFBuscarProductoStock
     object ZQ_StockCOLOR: TStringField
       FieldName = 'COLOR'
       Size = 30
+    end
+    object ZQ_StockPUNTO_SALIDA: TStringField
+      FieldName = 'PUNTO_SALIDA'
+      Size = 1
     end
   end
   object DS_Stock: TDataSource

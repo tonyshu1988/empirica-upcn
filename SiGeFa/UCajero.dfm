@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 195
-  Top = 85
+  Left = 377
+  Top = 153
   Width = 1006
   Height = 685
   Caption = 'FCajero'
@@ -90,7 +90,7 @@ object FCajero: TFCajero
         Left = 146
         Top = 254
         Width = 17
-        Height = 14
+        Height = 16
         Caption = '%'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -2763,8 +2763,8 @@ object FCajero: TFCajero
       'select *'
       'from tipo_IVA')
     Params = <>
-    Left = 125
-    Top = 298
+    Left = 93
+    Top = 322
     object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True

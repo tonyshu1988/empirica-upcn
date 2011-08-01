@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids,
-  EKEdit,UBuscarProducto, Mask, Provider, DBClient, ActnList,
+  EKEdit,UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
   XPStyleActnCtrls, ActnMan, EKListadoSQL, ISDbSuma,UBuscarPersona, Buttons,
   EKDbSuma, ZStoredProcedure;
 
@@ -339,7 +339,7 @@ type
     procedure DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
   private
-    vsel: TFBuscarProducto;
+    vsel: TFBuscarProductoStock;
     vsel2 : TFBuscarPersona;
     procedure OnSelCliente;
 
@@ -369,6 +369,7 @@ uses UDM, UPrincipal,strutils, EKModelo, Math;
 
 procedure TFCajero.FormCreate(Sender: TObject);
 begin
+
   CurrencyDecimals := 2;
   DecimalSeparator := '.';
   ThousandSeparator := ',';
@@ -384,13 +385,7 @@ begin
   Cliente:=-1;
   IdVendedor:=-1;
   descCliente:=0;
-  try
-    cajero := strtoint(dm.EKUsrLogin.PermisoAccionValor('CAJA_NRO'));
-  except
-    Application.MessageBox('El usuario no tiene Caja definida', 'Error');
-    //Busco al Cajero correspondiente
-    
-  end;
+ 
   crearComprobante();
 
 end;
@@ -403,17 +398,17 @@ end;
 procedure TFCajero.BtBuscarProductoClick(Sender: TObject);
 begin
 if not Assigned(vsel) then
-  vsel:= TFBuscarProducto.Create(nil);
+  vsel:= TFBuscarProductoStock.Create(nil);
   vsel.OnSeleccionar := OnSeleccionar;
   vsel.ShowModal;
 end;
 
 procedure TFCajero.OnSeleccionar;
 begin
-    if not vsel.ZQ_Producto.IsEmpty then
+    if not vsel.ZQ_Stock.IsEmpty then
     begin
       CD_DetalleFactura.Filtered := false;
-      CD_DetalleFactura.Filter:= 'id_producto = ' +  vsel.ZQ_ProductoID_PRODUCTO.AsString;
+      CD_DetalleFactura.Filter:= 'id_producto = ' +  vsel.ZQ_StockID_PRODUCTO.AsString;
       CD_DetalleFactura.Filtered := true;
       if not CD_DetalleFactura.IsEmpty then
       begin
@@ -422,10 +417,10 @@ begin
         exit;
       end;
       CD_DetalleFactura.Filtered := false;
-      codBarras.Text:=vsel.ZQ_ProductoID_PRODUCTO.AsString;
+      codBarras.Text:=vsel.ZQ_StockID_PRODUCTO.AsString;
       IdentificarCodigo;
       edCantidad.SetFocus;
-
+      vsel.ZQ_Stock.Filtered:=False;
     vsel.Close;
   end;
 end;
@@ -1074,7 +1069,6 @@ if not(ZQ_Productos.IsEmpty) then
   if (edDesc.AsFloat<0) then edDesc.AsFloat:=0;
 
   desc:=edDesc.AsFloat/100;
-
 
   edImporte.AsFloat:=edCantidad.AsInteger*(ZQ_ProductosPRECIO_VENTA.AsFloat - (ZQ_ProductosPRECIO_VENTA.AsFloat*desc) );
 
