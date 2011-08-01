@@ -149,9 +149,9 @@ type
     CD_NotaPedidoDetalleid_comprobante: TIntegerField;
     ZQ_NotaPedidoUpdateEstado: TZQuery;
     ZQ_ProcesarStock: TZQuery;
+    Label1: TLabel;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btnModificarClick(Sender: TObject);
     procedure btnAsociarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -162,6 +162,8 @@ type
     procedure CD_NotaPedidoDetalleCalcFields(DataSet: TDataSet);
     procedure PageControlTransferirChange(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure CBoxSucursalKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -239,39 +241,36 @@ begin
 end;
 
 
-procedure TFTransferirStock.btnModificarClick(Sender: TObject);
-begin
-  if CD_Producto.IsEmpty then
-    exit;
-
-  //if dm.EKModelo.iniciar_transaccion(Transaccion_TransferirStock, []) then
-  begin
-    //GrupoEditando.Enabled:= false;
-    //GrupoGuardarCancelar.Enabled:= true;
-
-    CD_Producto.Edit;
-    DBGridProducto.ReadOnly:= false;
-  end;
-end;
-
-
 procedure TFTransferirStock.btnAsociarClick(Sender: TObject);
 begin
     if PageControlTransferir.TabIndex = 0 then
     begin
+      CD_Producto.First;
+      while not CD_Producto.Eof do
+      begin
+        if CD_ProductoidStockProducto.IsNull then
+          CD_Producto.Delete;
+
+        CD_Producto.Next;
+      end;
+           
       if CD_Producto.IsEmpty then
       exit;
-
-      if CD_ProductoidStockProducto.IsNull then
-        CD_Producto.Delete;
     end
     else
     begin
+
+      CD_NotaPedidoDetalle.First;
+      while not CD_NotaPedidoDetalle.Eof do
+      begin
+        if CD_NotaPedidoDetalleid_comprobante.IsNull then
+          CD_NotaPedidoDetalle.Delete;
+
+        CD_NotaPedidoDetalle.Next;
+      end;
+
       if CD_NotaPedidoDetalle.IsEmpty then
       exit;
-
-      if CD_NotaPedidoDetalleid_comprobante.IsNull then
-        CD_NotaPedidoDetalle.Delete;
     end;
 
 
@@ -458,6 +457,19 @@ end;
 procedure TFTransferirStock.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_TransferirStock);
+end;
+
+procedure TFTransferirStock.CBoxSucursalKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = 113 then
+  begin
+    if EKListado_Sucursal.Buscar then
+    begin
+      EKLlenarComboSucursal.SelectClave := EKListado_Sucursal.Resultado;
+      //CBoxSucursal.Text := EKListado_Sucursal.Resultado;
+    end;
+  end; 
 end;
 
 end.

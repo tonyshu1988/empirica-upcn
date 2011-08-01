@@ -21,16 +21,16 @@ object FTransferirStock: TFTransferirStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 416
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 852
-      Height = 375
-      ActivePage = TabSTransferirStock
+      Width = 860
+      Height = 381
+      ActivePage = TabSAsociarNotaPedido
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -39,8 +39,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 325
+          Width = 852
+          Height = 331
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -152,8 +152,8 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 325
-          Width = 844
+          Top = 331
+          Width = 852
           Height = 22
           Align = alBottom
           TabOrder = 1
@@ -171,69 +171,11 @@ object FTransferirStock: TFTransferirStock
       object TabSAsociarNotaPedido: TTabSheet
         Caption = 'Asociar Nota Pedido'
         ImageIndex = 1
-        object DBGridNotaPedido: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 844
-          Height = 347
-          Align = alClient
-          Color = 13431031
-          DataSource = DS_VerCpb
-          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 0
-          TitleFont.Charset = ANSI_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnDblClick = DBGridNotaPedidoDblClick
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'NUMERO_CPB'
-              Title.Caption = 'Nota Pedido'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SUCURSAL'
-              Title.Caption = 'Sucursal'
-              Width = 155
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PROVEEDOR'
-              Title.Caption = 'Proveedor'
-              Width = 109
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CUIT_PROVEEDOR'
-              Title.Caption = 'Cuit Proveedor'
-              Width = 127
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VENDEDOR'
-              Title.Caption = 'Vendedor'
-              Width = 110
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PUNTO_VENTA'
-              Title.Caption = 'Punto Vta'
-              Visible = True
-            end>
-        end
         object DBGridNotaPedidoDetalle: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 347
+          Width = 852
+          Height = 353
           Align = alClient
           Color = 16511963
           DataSource = DS_Nota_Pedido_Detalle
@@ -352,15 +294,83 @@ object FTransferirStock: TFTransferirStock
               Visible = True
             end>
         end
+        object DBGridNotaPedido: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 852
+          Height = 353
+          Hint = 
+            'Haga doble click en la nota de pedido que desea cargar al sistem' +
+            'a'
+          Align = alClient
+          Color = 13431031
+          DataSource = DS_VerCpb
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDblClick = DBGridNotaPedidoDblClick
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'NUMERO_CPB'
+              Title.Caption = 'Nota Pedido'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUCURSAL'
+              Title.Caption = 'Sucursal'
+              Width = 155
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PROVEEDOR'
+              Title.Caption = 'Proveedor'
+              Width = 109
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CUIT_PROVEEDOR'
+              Title.Caption = 'Cuit Proveedor'
+              Width = 127
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VENDEDOR'
+              Title.Caption = 'Vendedor'
+              Width = 110
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PUNTO_VENTA'
+              Title.Caption = 'Punto Vta'
+              Visible = True
+            end>
+        end
       end
     end
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 860
       Height = 33
       Align = alTop
       TabOrder = 1
+      object Label1: TLabel
+        Left = 494
+        Top = 10
+        Width = 293
+        Height = 13
+        Caption = 'Presione F1 para desplegar el listado de sucursales'
+      end
       object CBoxSucursal: TComboBox
         Left = 5
         Top = 6
@@ -369,13 +379,14 @@ object FTransferirStock: TFTransferirStock
         Style = csDropDownList
         ItemHeight = 13
         TabOrder = 0
+        OnKeyDown = CBoxSucursalKeyDown
       end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -817,9 +828,9 @@ object FTransferirStock: TFTransferirStock
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'F1 - Buscar'
+      Caption = 'Buscar'
       Category = 0
-      Hint = 'F1 - Buscar'
+      Hint = 'Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
@@ -849,7 +860,6 @@ object FTransferirStock: TFTransferirStock
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
       ImageIndex = 1
-      OnClick = btnModificarClick
       AutoGrayScale = False
     end
     object btnProcesar: TdxBarLargeButton
@@ -864,18 +874,16 @@ object FTransferirStock: TFTransferirStock
       AutoGrayScale = False
     end
     object btnAsociar: TdxBarLargeButton
-      Caption = 'F7 - Asociar'
+      Caption = 'Asociar'
       Category = 0
-      Hint = 
-        'Asociar los Productos pertenecientes a cada una de las Sucursale' +
-        's'
+      Hint = 'Asociar Transferencias de productos'
       Visible = ivAlways
       ImageIndex = 12
       OnClick = btnAsociarClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'F11 - Guardar'
+      Caption = 'Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -885,7 +893,7 @@ object FTransferirStock: TFTransferirStock
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'F12 - Cancelar'
+      Caption = 'Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
