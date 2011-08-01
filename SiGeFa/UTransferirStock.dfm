@@ -14,21 +14,22 @@ object FTransferirStock: TFTransferirStock
   OldCreateOrder = False
   Position = poDefault
   Visible = True
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 860
-      Height = 381
+      Width = 852
+      Height = 375
       ActivePage = TabSAsociarNotaPedido
       Align = alClient
       TabOrder = 0
@@ -174,8 +175,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedido: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 353
+          Width = 844
+          Height = 347
           Align = alClient
           Color = 13431031
           DataSource = DS_VerCpb
@@ -232,8 +233,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedidoDetalle: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 353
+          Width = 844
+          Height = 347
           Align = alClient
           Color = 16511963
           DataSource = DS_Nota_Pedido_Detalle
@@ -357,7 +358,7 @@ object FTransferirStock: TFTransferirStock
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 852
       Height = 33
       Align = alTop
       TabOrder = 1
@@ -375,7 +376,7 @@ object FTransferirStock: TFTransferirStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

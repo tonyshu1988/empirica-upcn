@@ -181,6 +181,7 @@ type
     procedure btNotaPedidoClick(Sender: TObject);
     procedure CD_NotaPedidoDetalleCalcFields(DataSet: TDataSet);
     procedure PageControlTransferirChange(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -197,7 +198,7 @@ const
 
 implementation
 
-uses UDM;
+uses UDM, UPrincipal;
 
 {$R *.dfm}
 procedure TFTransferirStock.onSelProducto;
@@ -356,8 +357,6 @@ begin
           CD_Producto.Next;
         end;
 
-        GrupoEditando.Enabled := false;
-        GrupoGuardarCancelar.Enabled := true;
         CD_Producto.EmptyDataSet;
       end
       else
@@ -407,6 +406,10 @@ begin
           CD_NotaPedidoDetalle.Next;
         end;
       end;
+
+      
+        GrupoEditando.Enabled := false;
+        GrupoGuardarCancelar.Enabled := true;
     end;
 
 
@@ -527,6 +530,12 @@ begin
     btnBuscar.Visible := ivNever;
     btNotaPedido.Visible := ivAlways;
   end;
+end;
+
+procedure TFTransferirStock.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  CanClose:= FPrincipal.cerrar_ventana(Transaccion_TransferirStock);
 end;
 
 end.
