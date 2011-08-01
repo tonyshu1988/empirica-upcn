@@ -42,6 +42,21 @@ object FBuscarProductoStock: TFBuscarProductoStock
       Columns = <
         item
           Expanded = False
+          FieldName = 'ID_PRODUCTO'
+          Title.Caption = 'ID'
+          Width = 43
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Producto'
+          Width = 211
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'SUCURSAL'
           Title.Alignment = taCenter
           Title.Caption = 'Sucursal'
@@ -80,14 +95,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Barra'
           Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE'
-          Title.Alignment = taCenter
-          Title.Caption = 'Producto'
-          Width = 211
           Visible = True
         end
         item
