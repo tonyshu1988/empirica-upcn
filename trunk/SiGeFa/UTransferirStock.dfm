@@ -1,6 +1,6 @@
 object FTransferirStock: TFTransferirStock
-  Left = 356
-  Top = 126
+  Left = 287
+  Top = 132
   Width = 870
   Height = 500
   Caption = 'Transferir Stock'
@@ -30,7 +30,7 @@ object FTransferirStock: TFTransferirStock
       Top = 34
       Width = 852
       Height = 375
-      ActivePage = TabSAsociarNotaPedido
+      ActivePage = TabSTransferirStock
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -39,8 +39,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 331
+          Width = 844
+          Height = 325
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -152,11 +152,10 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 331
-          Width = 852
+          Top = 325
+          Width = 844
           Height = 22
           Align = alBottom
-          Caption = 'Panel1'
           TabOrder = 1
           object btBorrarLinea: TButton
             Left = 10
@@ -990,7 +989,6 @@ object FTransferirStock: TFTransferirStock
     end
     object CD_Productocantidad: TFloatField
       FieldName = 'cantidad'
-      OnValidate = CD_ProductocantidadValidate
     end
   end
   object DS_Producto: TDataSource
@@ -1051,114 +1049,6 @@ object FTransferirStock: TFTransferirStock
     Left = 265
     Top = 65
   end
-  object ZQ_Stock_Origen: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select *'
-      'from stock_producto sp'
-      'where sp.id_stock_producto = :ID_STOCK_PROD')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_STOCK_PROD'
-        ParamType = ptUnknown
-      end>
-    Left = 208
-    Top = 240
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_STOCK_PROD'
-        ParamType = ptUnknown
-      end>
-    object ZQ_Stock_OrigenID_STOCK_PRODUCTO: TIntegerField
-      FieldName = 'ID_STOCK_PRODUCTO'
-    end
-    object ZQ_Stock_OrigenID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-      Required = True
-    end
-    object ZQ_Stock_OrigenID_POSICION_SUCURSAL: TIntegerField
-      FieldName = 'ID_POSICION_SUCURSAL'
-      Required = True
-    end
-    object ZQ_Stock_OrigenSTOCK_ACTUAL: TFloatField
-      FieldName = 'STOCK_ACTUAL'
-    end
-    object ZQ_Stock_OrigenSTOCK_MIN: TFloatField
-      FieldName = 'STOCK_MIN'
-    end
-    object ZQ_Stock_OrigenSTOCK_MAX: TFloatField
-      FieldName = 'STOCK_MAX'
-    end
-    object ZQ_Stock_OrigenSTOCK_REPEDIDO: TFloatField
-      FieldName = 'STOCK_REPEDIDO'
-    end
-    object ZQ_Stock_OrigenSTOCK_MIN_ALARMA: TStringField
-      FieldName = 'STOCK_MIN_ALARMA'
-      Size = 1
-    end
-  end
-  object ZQ_Stock_Destino: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select *'
-      'from stock_producto sp'
-      
-        'where (sp.id_producto = :ID_PRODUCTO) and (sp.id_posicion_sucurs' +
-        'al = :ID_POS_SUC)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_PRODUCTO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID_POS_SUC'
-        ParamType = ptUnknown
-      end>
-    Left = 208
-    Top = 296
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_PRODUCTO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID_POS_SUC'
-        ParamType = ptUnknown
-      end>
-    object ZQ_Stock_DestinoID_STOCK_PRODUCTO: TIntegerField
-      FieldName = 'ID_STOCK_PRODUCTO'
-    end
-    object ZQ_Stock_DestinoID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-      Required = True
-    end
-    object ZQ_Stock_DestinoID_POSICION_SUCURSAL: TIntegerField
-      FieldName = 'ID_POSICION_SUCURSAL'
-      Required = True
-    end
-    object ZQ_Stock_DestinoSTOCK_ACTUAL: TFloatField
-      FieldName = 'STOCK_ACTUAL'
-    end
-    object ZQ_Stock_DestinoSTOCK_MIN: TFloatField
-      FieldName = 'STOCK_MIN'
-    end
-    object ZQ_Stock_DestinoSTOCK_MAX: TFloatField
-      FieldName = 'STOCK_MAX'
-    end
-    object ZQ_Stock_DestinoSTOCK_REPEDIDO: TFloatField
-      FieldName = 'STOCK_REPEDIDO'
-    end
-    object ZQ_Stock_DestinoSTOCK_MIN_ALARMA: TStringField
-      FieldName = 'STOCK_MIN_ALARMA'
-      Size = 1
-    end
-  end
   object ZQ_Nota_Pedido_Detalle: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -1200,7 +1090,7 @@ object FTransferirStock: TFTransferirStock
         Name = 'ID_COMPROBANTE'
         ParamType = ptUnknown
       end>
-    Left = 653
+    Left = 629
     Top = 121
     ParamData = <
       item
@@ -1559,42 +1449,6 @@ object FTransferirStock: TFTransferirStock
       FieldName = 'stock_min'
     end
   end
-  object ZQ_NotaPedidoUpdateAlmacenado: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select *'
-      'from comprobante_detalle cd'
-      
-        'where (cd.id_comprobante = :ID_COMPROBANTE) and (cd.id_producto ' +
-        '= :ID_PRODUCTO)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_COMPROBANTE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID_PRODUCTO'
-        ParamType = ptUnknown
-      end>
-    Left = 781
-    Top = 146
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_COMPROBANTE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID_PRODUCTO'
-        ParamType = ptUnknown
-      end>
-    object ZQ_NotaPedidoUpdateAlmacenadoCANTIDAD_ALMACENADA: TFloatField
-      FieldName = 'CANTIDAD_ALMACENADA'
-    end
-  end
   object ZQ_NotaPedidoUpdateEstado: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -1605,9 +1459,101 @@ object FTransferirStock: TFTransferirStock
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 789
-    Top = 218
+    Left = 773
+    Top = 122
     ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+  end
+  object ZQ_ProcesarStock: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'execute procedure procesar_stock(:id_stock_prod, :id_producto, :' +
+        'id_pos_suc, :cantidad_almacenar, :stock_min, :stock_max,'
+      '    :stock_repedido, :id_comprobante)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_stock_prod'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_producto'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_pos_suc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'cantidad_almacenar'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'stock_min'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'stock_max'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'stock_repedido'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 133
+    Top = 146
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_stock_prod'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_producto'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_pos_suc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'cantidad_almacenar'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'stock_min'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'stock_max'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'stock_repedido'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'id_comprobante'
