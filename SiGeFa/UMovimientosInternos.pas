@@ -210,6 +210,22 @@ type
     SpeedBtn_AnioSiguiente: TSpeedButton;
     SpeedBtn_Hoy: TSpeedButton;
     PanelMes_Resumen: TPanel;
+    Label11: TLabel;
+    Label1: TLabel;
+    Label12: TLabel;
+    Label9: TLabel;
+    Shape1: TShape;
+    EKSuma_Balance: TEKDbSuma;
+    lblTotalIngresos: TLabel;
+    lblTotalEgresos: TLabel;
+    lblSaldoFinal: TLabel;
+    lblSaldoInicial: TLabel;
+    ZS_CalcSaldos: TZStoredProc;
+    ZS_CalcSaldosFECHA: TDateField;
+    ZS_CalcSaldosINGRESO: TFloatField;
+    ZS_CalcSaldosEGRESO: TFloatField;
+    ZS_CalcSaldosSALDO: TFloatField;
+    ZS_CalcSaldosSALDODIARIO: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -249,6 +265,7 @@ type
     procedure SpeedBtn_MesAnteriorClick(Sender: TObject);
     procedure SpeedBtn_MesSiguienteClick(Sender: TObject);
     procedure SpeedBtn_AnioSiguienteClick(Sender: TObject);
+    procedure calcularResumenBalance(fecha: TDate);
   private
     fechaActual: TDate;
     id_comprobante: integer;
@@ -766,12 +783,23 @@ procedure TFMovimientosInternos.DBGrid_DiaDrawColumnCell(Sender: TObject;
 begin
   DBGrid_Dia.Canvas.Font.Color := clBlack;
   if (ZQ_MovHoyID_TIPO_CPB.AsInteger = CPB_OTROS_EGRESOS) then
-    DBGrid_Dia.Canvas.Brush.Color:= $008080FF
+  begin
+    DBGrid_Dia.Canvas.Brush.Color:= $00B0B0FF;
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      DBGrid_Dia.Canvas.Brush.Color:= $008080FF;
+      DBGrid_Dia.Canvas.Font.Style := DBGrid_Dia.Canvas.Font.Style + [fsBold];
+    end
+  end
   else
-    DBGrid_Dia.Canvas.Brush.Color:= $0080FF00;
-
-  if (gdFocused in State) or (gdSelected in State) then
-    DBGrid_Dia.Canvas.Font.Style := DBGrid_Dia.Canvas.Font.Style + [fsBold];
+  begin
+    DBGrid_Dia.Canvas.Brush.Color:= $00D1FFA4;
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      DBGrid_Dia.Canvas.Brush.Color:= $0080FF00;
+      DBGrid_Dia.Canvas.Font.Style := DBGrid_Dia.Canvas.Font.Style + [fsBold];
+    end
+  end;
 
   DBGrid_Dia.DefaultDrawColumnCell(rect,datacol,column,state);
 end;
@@ -826,6 +854,38 @@ begin
     tituloFecha(StartOfTheMonth(fecha))
   else
     tituloFecha(ZS_BalanceFECHA.AsDateTime);
+
+  calcularResumenBalance(fecha);
+end;
+
+
+procedure TFMovimientosInternos.calcularResumenBalance(fecha: TDate);
+var
+  inicial, final: double;
+  fecha_anterior: tdate;
+begin
+  fecha_anterior:= IncMonth(fecha, -1);
+  ZS_CalcSaldos.Close;
+  ZS_CalcSaldos.ParamByName('MES').AsInteger:= MonthOf(fecha_anterior);
+  ZS_CalcSaldos.ParamByName('ANIO').AsInteger:= YearOf(fecha_anterior);
+  ZS_CalcSaldos.Open;
+  ZS_CalcSaldos.Last;
+  inicial:= ZS_CalcSaldosSALDO.AsFloat;
+
+  ZS_CalcSaldos.Close;
+  ZS_CalcSaldos.ParamByName('MES').AsInteger:= MonthOf(fecha);
+  ZS_CalcSaldos.ParamByName('ANIO').AsInteger:= YearOf(fecha);
+  ZS_CalcSaldos.Open;
+  ZS_CalcSaldos.Last;
+  final:= ZS_CalcSaldosSALDO.AsFloat;
+  ZS_CalcSaldos.Close;
+
+  EKSuma_Balance.RecalcAll;
+
+  lblTotalIngresos.Caption:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Balance.SumCollection[0].SumValue);
+  lblTotalEgresos.Caption:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Balance.SumCollection[1].SumValue);
+  lblSaldoInicial.Caption:= FormatFloat('$ ###,###,###,##0.00', inicial);
+  lblSaldoFinal.Caption:= FormatFloat('$ ###,###,###,##0.00', final);
 end;
 
 
@@ -841,6 +901,7 @@ begin
   abrirBalance(fechaActual);
 end;
 
+
 procedure TFMovimientosInternos.SpeedBtn_AnioAnteriorClick(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
@@ -849,6 +910,7 @@ begin
   fechaActual:= IncYear(fechaActual, -1);
   abrirBalance(fechaActual);
 end;
+
 
 procedure TFMovimientosInternos.SpeedBtn_AnioSiguienteClick(Sender: TObject);
 begin
@@ -859,6 +921,7 @@ begin
   abrirBalance(fechaActual);
 end;
 
+
 procedure TFMovimientosInternos.SpeedBtn_MesAnteriorClick(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
@@ -867,6 +930,7 @@ begin
   fechaActual:= IncMonth(fechaActual, -1);
   abrirBalance(fechaActual);
 end;
+
 
 procedure TFMovimientosInternos.SpeedBtn_MesSiguienteClick(Sender: TObject);
 begin

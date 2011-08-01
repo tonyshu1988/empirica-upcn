@@ -127,6 +127,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridListaCpbDrawColumnCell
           Columns = <
             item
               Alignment = taCenter
@@ -1770,6 +1771,20 @@ object FABM_Comprobantes: TFABM_Comprobantes
             end
           end
         end
+        object Button1: TButton
+          Left = 720
+          Top = 128
+          Width = 75
+          Height = 25
+          Caption = 'Button1'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 1631450
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 4
+        end
       end
       object PanelEditar_Producto: TPanel
         Left = 5
@@ -1812,6 +1827,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnKeyDown = DBGridEditar_ProductoKeyDown
           OnKeyUp = DBGridEditar_ProductoKeyUp
           Columns = <
             item
@@ -4980,7 +4996,6 @@ object FABM_Comprobantes: TFABM_Comprobantes
   object ZQ_CpbProducto: TZQuery
     Connection = DM.Conexion
     AfterScroll = ZQ_CpbProductoAfterScroll
-    BeforeDelete = ZQ_CpbProductoBeforeDelete
     SQL.Strings = (
       'select pr.*'
       'from comprobante_detalle pr'

@@ -1,6 +1,6 @@
 object FMovimientosInternos: TFMovimientosInternos
-  Left = 173
-  Top = 146
+  Left = 294
+  Top = 190
   Width = 1056
   Height = 559
   Caption = 'Movimientos Internos'
@@ -1034,6 +1034,141 @@ object FMovimientosInternos: TFMovimientosInternos
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 2
+        DesignSize = (
+          350
+          87)
+        object Label11: TLabel
+          Left = 110
+          Top = 7
+          Width = 85
+          Height = 16
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          Caption = 'Saldo Inicial:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 118
+          Top = 62
+          Width = 77
+          Height = 16
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          Caption = 'Saldo Final:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label12: TLabel
+          Left = 94
+          Top = 24
+          Width = 101
+          Height = 16
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          Caption = 'Total Ingresos:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label9: TLabel
+          Left = 99
+          Top = 42
+          Width = 96
+          Height = 16
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          Caption = 'Total Egresos:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Shape1: TShape
+          Left = 72
+          Top = 60
+          Width = 276
+          Height = 1
+          Anchors = [akTop, akRight]
+          Pen.Color = clGray
+        end
+        object lblTotalIngresos: TLabel
+          Left = 195
+          Top = 24
+          Width = 140
+          Height = 16
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          AutoSize = False
+          Caption = 'lblTotalIngresos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGreen
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblTotalEgresos: TLabel
+          Left = 195
+          Top = 42
+          Width = 140
+          Height = 16
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          AutoSize = False
+          Caption = 'lblTotalEgresos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblSaldoFinal: TLabel
+          Left = 195
+          Top = 62
+          Width = 140
+          Height = 16
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          AutoSize = False
+          Caption = 'lblSaldoFinal'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clNavy
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblSaldoInicial: TLabel
+          Left = 195
+          Top = 7
+          Width = 140
+          Height = 16
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          AutoSize = False
+          Caption = 'lblSaldoInicial'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
       end
     end
     object PanelDia: TPanel
@@ -1113,7 +1248,7 @@ object FMovimientosInternos: TFMovimientosInternos
               FieldName = 'OBSERVACION'
               Title.Alignment = taCenter
               Title.Caption = 'Detalle'
-              Width = 303
+              Width = 278
               Visible = True
             end
             item
@@ -1121,7 +1256,7 @@ object FMovimientosInternos: TFMovimientosInternos
               FieldName = 'IMPORTE_TOTAL'
               Title.Alignment = taCenter
               Title.Caption = 'Importe'
-              Width = 77
+              Width = 121
               Visible = True
             end>
         end
@@ -2668,5 +2803,113 @@ object FMovimientosInternos: TFMovimientosInternos
     SumListChanged = EKSuma_FPagoSumListChanged
     Left = 117
     Top = 321
+  end
+  object EKSuma_Balance: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'INGRESO'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'EGRESO'
+      end>
+    DataSet = ZS_Balance
+    Left = 826
+    Top = 215
+  end
+  object ZS_CalcSaldos: TZStoredProc
+    Connection = DM.Conexion
+    AfterScroll = ZS_BalanceAfterScroll
+    Params = <
+      item
+        DataType = ftDate
+        Name = 'FECHA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'INGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'EGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDODIARIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'MES'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ANIO'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'BALANCE_MENSUAL_DETALLE'
+    Left = 930
+    Top = 99
+    ParamData = <
+      item
+        DataType = ftDate
+        Name = 'FECHA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'INGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'EGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDODIARIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'MES'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ANIO'
+        ParamType = ptInput
+      end>
+    object ZS_CalcSaldosFECHA: TDateField
+      FieldName = 'FECHA'
+    end
+    object ZS_CalcSaldosINGRESO: TFloatField
+      FieldName = 'INGRESO'
+    end
+    object ZS_CalcSaldosEGRESO: TFloatField
+      FieldName = 'EGRESO'
+    end
+    object ZS_CalcSaldosSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
+    object ZS_CalcSaldosSALDODIARIO: TFloatField
+      FieldName = 'SALDODIARIO'
+    end
   end
 end
