@@ -1,6 +1,6 @@
 object FBuscarProductoStock: TFBuscarProductoStock
-  Left = 540
-  Top = 244
+  Left = 524
+  Top = 227
   Width = 730
   Height = 426
   Caption = 'Buscar Producto'

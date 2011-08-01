@@ -64,6 +64,7 @@ type
     { Public declarations }
     OnSeleccionar : procedure() of object;
     SeleccionarYSalir: boolean;
+    usaCajero:String;
   end;
 
 var
@@ -82,7 +83,21 @@ end;
 
 
 procedure TFBuscarProductoStock.btnBuscarClick(Sender: TObject);
+var
+sql:String;
 begin
+  if (usaCajero='S') then
+     begin
+       sql:=Format('where (PUNTO_SALIDA=%s)',[QuotedStr('S')]);
+       EKBuscarStock.SQL_Where.Text:=sql;
+       ZQ_Stock.Close;
+       ZQ_Stock.SQL[22]:=sql;
+     end
+  else
+    begin
+       ZQ_Stock.SQL[22]:='';
+       EKBuscarStock.SQL_Where.Clear;
+    end;
   EKBuscarStock.Buscar;
 end;
 

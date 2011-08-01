@@ -399,8 +399,10 @@ procedure TFCajero.BtBuscarProductoClick(Sender: TObject);
 begin
 if not Assigned(vsel) then
   vsel:= TFBuscarProductoStock.Create(nil);
+  vsel.usaCajero:='S';
   vsel.OnSeleccionar := OnSeleccionar;
   vsel.ShowModal;
+  vsel.usaCajero:='N';
 end;
 
 procedure TFCajero.OnSeleccionar;
