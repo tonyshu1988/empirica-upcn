@@ -471,6 +471,7 @@ type
     btnConfirmar: TdxBarLargeButton;
     ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField;
     ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField;
+    Button1: TButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -528,7 +529,11 @@ type
     procedure btnConfirmarClick(Sender: TObject);
     procedure confirmarCpb(tipo: integer);
     procedure ZQ_CpbProductoCANTIDAD_RECIBIDAChange(Sender: TField);
-    procedure ZQ_CpbProductoBeforeDelete(DataSet: TDataSet);
+    procedure DBGridListaCpbDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridEditar_ProductoKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -1618,6 +1623,9 @@ end;
 
 procedure TFABM_Comprobantes.btnEliminarProductoClick(Sender: TObject);
 begin
+  if confirmarComprobante and (ZQ_CpbProductoCANTIDAD.AsFloat <> 0) then
+    exit;
+
   if not ZQ_CpbProducto.IsEmpty then
     ZQ_CpbProducto.Delete;
 end;
@@ -1879,8 +1887,8 @@ end;
 
 procedure TFABM_Comprobantes.btnConfirmarClick(Sender: TObject);
 begin
-  if ((ZQ_VerCpb.IsEmpty) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO)) then
-    exit;
+//  if ((ZQ_VerCpb.IsEmpty) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO)) then
+//    exit;
 
   confirmarComprobante:= true;
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
@@ -1966,10 +1974,42 @@ begin
 end;
 
 
-procedure TFABM_Comprobantes.ZQ_CpbProductoBeforeDelete(DataSet: TDataSet);
+procedure TFABM_Comprobantes.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-//  if confirmarComprobante and (ZQ_CpbProductoCANTIDAD.AsFloat <> 0) then
-//    ZQ_CpbProducto.Cancel;
+  DBGridListaCpb.Canvas.Font.Color:= clBlack;
+
+  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) then //si el registro esta dado de baja
+  begin
+    DBGridListaCpb.Canvas.Brush.Color:= $0098F8F3;
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
+      DBGridListaCpb.Canvas.Brush.Color:= $0062FFFF;
+    end;
+  end
+  else  //si el registro es comun
+  begin
+    DBGridListaCpb.Canvas.Brush.Color:= $00DEDEBC;
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
+      DBGridListaCpb.Canvas.Brush.Color:= $00E8C08C;
+    end;
+  end;
+
+  DBGridListaCpb.DefaultDrawColumnCell(rect,datacol,column,state);
 end;
+
+
+//Para renombrar el procedimiento Ctrl+Del que viene por defecto en las grillas
+procedure TFABM_Comprobantes.DBGridEditar_ProductoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if (Shift = [ssCtrl]) and (Key = VK_DELETE) then
+  begin
+    Key := 0; {ignore}
+    btnEliminarProducto.Click;
+  end
+end;
+
 
 end.
