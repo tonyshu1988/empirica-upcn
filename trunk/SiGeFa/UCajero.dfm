@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 245
-  Top = 107
+  Left = 253
+  Top = 117
   Width = 1006
   Height = 685
   Caption = 'FCajero'
@@ -1122,12 +1122,25 @@ object FCajero: TFCajero
         'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'where (pc.baja <> '#39'S'#39')and(ps.punto_salida='#39'S'#39')'
+      
+        'where (pc.baja <> '#39'S'#39')and(ps.punto_salida='#39'S'#39') and (p.id_product' +
+        'o=:prod)'
       ''
       '')
-    Params = <>
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'prod'
+        ParamType = ptUnknown
+      end>
     Left = 160
     Top = 56
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'prod'
+        ParamType = ptUnknown
+      end>
     object ZQ_ProductosNOMBRE_PRODUCTO: TStringField
       FieldName = 'NOMBRE_PRODUCTO'
       Size = 100

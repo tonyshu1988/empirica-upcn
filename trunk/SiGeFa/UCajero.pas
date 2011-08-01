@@ -495,6 +495,7 @@ if (not(ZQ_Productos.IsEmpty)and(edCantidad.AsInteger>0)) then
   if agregar('',ZQ_ProductosID_PRODUCTO.AsInteger) then
     begin
       LimpiarCodigo;
+      codBarras.SetFocus;
       BtAgregarPago.Enabled := true;
       BtAceptarPago.Enabled := true;
       BtCancelarPago.Enabled := true;
@@ -547,11 +548,8 @@ end;
 
 procedure TFCajero.LimpiarCodigo;
 begin
-  //-----------------------------------
 
-  //ZQ_Productos.Locate('id_producto',-1,[]);
   ZQ_Productos.Close;
-
   importeacob := 0;
   edCantidad.AsInteger := 1;
   edDesc.AsFloat:=descCliente*100;
@@ -638,111 +636,15 @@ begin
   //DigVerif:= MidStr(codBarras.Text, StrLen(PChar(codBarras.Text)), 1);
 
   ZQ_Productos.Close;
+  ZQ_Productos.ParamByName('prod').AsInteger:=IdProd;
   ZQ_Productos.Open;
-  ZQ_Productos.Locate('id_producto',IdProd,[]);
 
-  edDesc.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat+descCliente)*100;
+  if not(ZQ_Productos.IsEmpty) then
+   begin
+      edDesc.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat+descCliente)*100;
+      calcularMonto();
+   end
 
-  calcularMonto();
-
-//  if (digito_verificador(LeftStr(Codigo.Text, 47)) <> DigVerif.Text) then
-//  begin
-//    Application.MessageBox('Dígito verificador incorrecto', 'Error');
-//    exit;
-//  end;
-//
-//  try
-//    f1 := strtodate(midstr(Vencim1.text, 1, 2) + '/' +
-//      midstr(Vencim1.text, 3, 2) + '/' +
-//      midstr(Vencim1.text, 5, 2));
-//    FVen1.Text := datetostr(f1);
-//
-//    f2 := strtodate(midstr(Vencim2.text, 1, 2) + '/' +
-//      midstr(Vencim2.text, 3, 2) + '/' +
-//      midstr(Vencim2.text, 5, 2));
-//    FVen2.Text := datetostr(f2);
-//
-//    FVen1.Font.Color := clBlack;
-//    FVen2.Font.Color := clBlack;
-//
-//    Importe1.Text := FormatFloat('$ ##,###,##0.00', StrToFloat(Impo1.Text) / 100);
-//    Importe2.Text := FormatFloat('$ ##,###,##0.00', StrToFloat(Impo2.Text) / 100);
-//
-//    if no_blk_ven.Checked then
-//      diasm := strtoint(dias_m.text)
-//    else
-//      diasm := 0;
-//
-//    if (f1 >= fecha - diasm) then
-//    begin
-//      FechaVen := f1;
-//      importeacob := StrToFloat(Impo1.Text) / 100;
-//      BtAgregar.Enabled := true;
-//    end
-//    else
-//    begin
-//      FVen1.Font.Color := clRed;
-//      if (f2 >= fecha - diasm) then
-//      begin
-//        FechaVen := f2;
-//        importeacob := StrToFloat(Impo2.Text) / 100;
-//        BtAgregar.Enabled := true;
-//      end
-//      else
-//        FVen2.Font.Color := clRed;
-//    end;
-//
-//    if Tributo.Text = '999' then
-//      NTributo.Text := 'LIQUIDACION'
-//    else
-//      if Tributos.Locate('id_tributo', VarArrayOf([strtoint(Tributo.Text)]), []) then
-//      begin
-//        NTributo.Text := TributosDESCRIPCION.AsString;
-//        if TributosCAJAIMPORTE.AsString = 'S' then
-//        begin
-//          impoacob.Text := '0.00';
-//          impoacob.Enabled := true;
-//          puniacob.Enabled := true;
-//          impoacob.SetFocus;
-//        end
-//      end
-//      else
-//        NTributo.Text := '--NO DEFINIDO--';
-//
-//    if Actualizar.Checked then
-//      if (f1 < fecha - diasm) and (f2 < fecha - diasm) then
-//        if Tributo.Text <> '999' then
-//        begin
-//          msj_actualizado.Visible := true;
-//          punit := StrToFloat(punitorio.Text) / 100 / 30;
-//          importeacob := StrToFloat(Impo1.Text) / 100;
-//          importeacob := importeacob * (1 + DaysBetween(f1, dm.ISModeloT.Fecha) * punit);
-//          importeacob := roundto(importeacob, -2);
-//          impoacob.Text := floattostr(importeacob);
-//          BtAgregar.Enabled := true;
-//          //Actualizar.Checked:=false;
-//        end
-//        else
-//          Application.MessageBox('Las liquidaciones no se pueden actualizar', 'Error');
-//
-//    if ModificarImporte.Checked then
-//    begin
-//      impoacob.Text := floattostr(importeacob);
-//      impoacob.Enabled := true;
-//      puniacob.Enabled := true;
-//      Application.ProcessMessages;
-//      impoacob.SetFocus;
-//    end;
-//
-//    if Tributo.Text = '006' then
-//    begin
-//      puniacob.Text := FloatToStr((StrToFloat(impo2.Text) - StrToFloat(impo1.Text)) / 100);
-//      punitoriosacob := (StrToFloat(impo2.Text) - StrToFloat(impo1.Text)) / 100;
-//      importeacob := StrToFloat(Impo2.Text) / 100;
-//      impoacob.Text := floattostr(importeacob);
-//    end;
-//  except
-//  end;
 end;
 
 
