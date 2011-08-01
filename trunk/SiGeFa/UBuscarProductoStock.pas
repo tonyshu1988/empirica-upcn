@@ -50,6 +50,7 @@ type
     ZQ_StockID_PRODUCTO: TIntegerField;
     ZQ_StockCOLOR: TStringField;
     ZQ_StockID_POSICION_SUCURSAL: TIntegerField;
+    ZQ_StockPUNTO_SALIDA: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -89,7 +90,9 @@ end;
 procedure TFBuscarProductoStock.FormActivate(Sender: TObject);
 begin
   if ZQ_Stock.IsEmpty then
-    btnBuscar.Click;
+    btnBuscar.Click
+  else
+    ZQ_Stock.Refresh;
 end;
 
 procedure TFBuscarProductoStock.ABuscarExecute(Sender: TObject);
