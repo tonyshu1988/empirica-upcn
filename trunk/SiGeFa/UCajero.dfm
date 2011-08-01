@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 253
-  Top = 117
+  Left = 243
+  Top = 77
   Width = 1006
   Height = 685
   Caption = 'FCajero'
@@ -1123,8 +1123,8 @@ object FCajero: TFCajero
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
       
-        'where (pc.baja <> '#39'S'#39')and(ps.punto_salida='#39'S'#39') and (p.id_product' +
-        'o=:prod)'
+        'where (pc.baja <> '#39'S'#39')and(ps.punto_salida='#39'S'#39')and(p.id_producto=' +
+        ':prod)and(sp.stock_actual>0)'
       ''
       '')
     Params = <
