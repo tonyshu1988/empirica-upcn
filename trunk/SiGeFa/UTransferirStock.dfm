@@ -1,6 +1,6 @@
 object FTransferirStock: TFTransferirStock
-  Left = 192
-  Top = 112
+  Left = 356
+  Top = 126
   Width = 870
   Height = 500
   Caption = 'Transferir Stock'
@@ -26,41 +26,25 @@ object FTransferirStock: TFTransferirStock
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
-      Top = 1
+      Top = 34
       Width = 860
-      Height = 414
-      ActivePage = TabSTransferirStock
+      Height = 381
+      ActivePage = TabSAsociarNotaPedido
       Align = alClient
       TabOrder = 0
+      OnChange = PageControlTransferirChange
       object TabSTransferirStock: TTabSheet
         Caption = 'Transferir Stock'
-        object PanelSeleccionarDeposito: TPanel
-          Left = 0
-          Top = 0
-          Width = 852
-          Height = 33
-          Align = alTop
-          TabOrder = 0
-          object CBoxSucursal: TComboBox
-            Left = 5
-            Top = 6
-            Width = 481
-            Height = 21
-            Style = csDropDownList
-            ItemHeight = 13
-            TabOrder = 0
-          end
-        end
         object DBGridProducto: TDBGrid
           Left = 0
-          Top = 33
+          Top = 0
           Width = 852
           Height = 331
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 1
+          TabOrder = 0
           TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
@@ -167,12 +151,12 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 364
+          Top = 331
           Width = 852
           Height = 22
           Align = alBottom
           Caption = 'Panel1'
-          TabOrder = 2
+          TabOrder = 1
           object btBorrarLinea: TButton
             Left = 10
             Top = 3
@@ -187,6 +171,204 @@ object FTransferirStock: TFTransferirStock
       object TabSAsociarNotaPedido: TTabSheet
         Caption = 'Asociar Nota Pedido'
         ImageIndex = 1
+        object DBGridNotaPedido: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 852
+          Height = 353
+          Align = alClient
+          Color = 13431031
+          DataSource = DS_VerCpb
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDblClick = DBGridNotaPedidoDblClick
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'NUMERO_CPB'
+              Title.Caption = 'Nota Pedido'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUCURSAL'
+              Title.Caption = 'Sucursal'
+              Width = 155
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PROVEEDOR'
+              Title.Caption = 'Proveedor'
+              Width = 109
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CUIT_PROVEEDOR'
+              Title.Caption = 'Cuit Proveedor'
+              Width = 127
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VENDEDOR'
+              Title.Caption = 'Vendedor'
+              Width = 110
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PUNTO_VENTA'
+              Title.Caption = 'Punto Vta'
+              Visible = True
+            end>
+        end
+        object DBGridNotaPedidoDetalle: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 852
+          Height = 353
+          Align = alClient
+          Color = 16511963
+          DataSource = DS_Nota_Pedido_Detalle
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 1
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Visible = False
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'cantidad'
+              ReadOnly = True
+              Title.Caption = 'Cantidad Pedida'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cantidad_recibida'
+              ReadOnly = True
+              Title.Caption = 'Cantidad Recibida'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cantidad_almacenada'
+              ReadOnly = True
+              Title.Caption = 'Cantidad Almacenada'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cantidad_a_almacenar'
+              Title.Caption = 'Cantidad por Almacenar'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'almacenar'
+              Title.Caption = 'Almacenar'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'producto'
+              ReadOnly = True
+              Title.Caption = 'Producto'
+              Width = 116
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'articulo'
+              ReadOnly = True
+              Title.Caption = 'Articulo'
+              Width = 65
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'tipo_articulo'
+              ReadOnly = True
+              Title.Caption = 'Tipo Articulo'
+              Width = 79
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'marca'
+              ReadOnly = True
+              Title.Caption = 'Marca'
+              Width = 52
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'medida'
+              ReadOnly = True
+              Title.Caption = 'Medida'
+              Width = 58
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'color'
+              ReadOnly = True
+              Title.Caption = 'Color'
+              Width = 51
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cod_cabecera'
+              ReadOnly = True
+              Title.Caption = 'Cod Cabecera'
+              Width = 88
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cod_producto'
+              ReadOnly = True
+              Title.Caption = 'Cod Producto'
+              Width = 82
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'codigo_barra'
+              ReadOnly = True
+              Title.Caption = 'Cod Barra'
+              Width = 66
+              Visible = True
+            end>
+        end
+      end
+    end
+    object PanelSeleccionarDeposito: TPanel
+      Left = 1
+      Top = 1
+      Width = 860
+      Height = 33
+      Align = alTop
+      TabOrder = 1
+      object CBoxSucursal: TComboBox
+        Left = 5
+        Top = 6
+        Width = 481
+        Height = 21
+        Style = csDropDownList
+        ItemHeight = 13
+        TabOrder = 0
       end
     end
   end
@@ -296,6 +478,11 @@ object FTransferirStock: TFTransferirStock
         ItemLinks = <
           item
             Item = btnBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btNotaPedido
             Visible = True
           end
           item
@@ -622,8 +809,8 @@ object FTransferirStock: TFTransferirStock
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 736
-    Top = 304
+    Left = 600
+    Top = 320
     DockControlHeights = (
       0
       0
@@ -638,13 +825,14 @@ object FTransferirStock: TFTransferirStock
       OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object btVolver: TdxBarLargeButton
+    object btNotaPedido: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Volver'
+      Caption = 'Nota de Pedido'
       Category = 0
-      Hint = 'Volver'
-      Visible = ivAlways
-      ImageIndex = 69
+      Hint = 'Nota de Pedido'
+      Visible = ivNever
+      ImageIndex = 19
+      OnClick = btNotaPedidoClick
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
@@ -726,7 +914,7 @@ object FTransferirStock: TFTransferirStock
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnBuscar'
-        'btVolver'
+        'btNotaPedido'
         'btnNuevo'
         'btnModificar'
         'btnImprimir'
@@ -969,5 +1157,460 @@ object FTransferirStock: TFTransferirStock
       FieldName = 'STOCK_MIN_ALARMA'
       Size = 1
     end
+  end
+  object ZQ_Nota_Pedido_Detalle: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select cpbd.*, cab.cod_corto as cod_cabecera, cab.nombre as prod' +
+        'ucto, cab.imagen,'
+      
+        '       med.medida, color.nombre as color, marca.nombre_marca as ' +
+        'marca,'
+      
+        '       art.descripcion as articulo, tart.descripcion as tipo_art' +
+        'iculo,'
+      '       pro.cod_corto as cod_producto, pro.codigo_barra,'
+      
+        '       pro.precio_costo, pro.precio_venta, pro.coef_ganancia, pr' +
+        'o.coef_descuento,'
+      
+        '       pro.impuesto_interno, pro.impuesto_iva, pro.stock_max, pr' +
+        'o.stock_min'
+      'from comprobante_detalle cpbd'
+      
+        'left join comprobante c on (cpbd.id_comprobante = c.id_comproban' +
+        'te)'
+      'left join producto pro on (cpbd.id_producto = pro.id_producto)'
+      
+        'left join producto_cabecera cab on (pro.id_prod_cabecera = cab.i' +
+        'd_prod_cabecera)'
+      'left join marca on (cab.id_marca = marca.id_marca)'
+      'left join color on (cab.color = color.id_color)'
+      'left join articulo art on (cab.id_articulo = art.id_articulo)'
+      
+        'left join tipo_articulo tart on (art.id_tipo_articulo = tart.id_' +
+        'tipo_articulo)'
+      'left join medida med on (pro.id_medida = med.id_medida)'
+      'where (c.id_comprobante = :ID_COMPROBANTE) ')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_COMPROBANTE'
+        ParamType = ptUnknown
+      end>
+    Left = 653
+    Top = 121
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_COMPROBANTE'
+        ParamType = ptUnknown
+      end>
+    object ZQ_Nota_Pedido_DetalleID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+      Required = True
+    end
+    object ZQ_Nota_Pedido_DetalleID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+      Required = True
+    end
+    object ZQ_Nota_Pedido_DetalleID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_Nota_Pedido_DetalleDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object ZQ_Nota_Pedido_DetalleCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_Nota_Pedido_DetalleIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+    end
+    object ZQ_Nota_Pedido_DetallePORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_Nota_Pedido_DetalleBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_Nota_Pedido_DetalleIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+    end
+    object ZQ_Nota_Pedido_DetalleIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_Nota_Pedido_DetallePORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_Nota_Pedido_DetalleCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_Nota_Pedido_DetalleCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+    object ZQ_Nota_Pedido_DetalleCOD_CABECERA: TStringField
+      FieldName = 'COD_CABECERA'
+    end
+    object ZQ_Nota_Pedido_DetallePRODUCTO: TStringField
+      FieldName = 'PRODUCTO'
+      Size = 100
+    end
+    object ZQ_Nota_Pedido_DetalleIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object ZQ_Nota_Pedido_DetalleMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_Nota_Pedido_DetalleCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
+    object ZQ_Nota_Pedido_DetalleMARCA: TStringField
+      FieldName = 'MARCA'
+      Size = 50
+    end
+    object ZQ_Nota_Pedido_DetalleARTICULO: TStringField
+      FieldName = 'ARTICULO'
+      Size = 200
+    end
+    object ZQ_Nota_Pedido_DetalleTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object ZQ_Nota_Pedido_DetalleCOD_PRODUCTO: TStringField
+      FieldName = 'COD_PRODUCTO'
+    end
+    object ZQ_Nota_Pedido_DetalleCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_Nota_Pedido_DetallePRECIO_COSTO: TFloatField
+      FieldName = 'PRECIO_COSTO'
+    end
+    object ZQ_Nota_Pedido_DetallePRECIO_VENTA: TFloatField
+      FieldName = 'PRECIO_VENTA'
+    end
+    object ZQ_Nota_Pedido_DetalleCOEF_GANANCIA: TFloatField
+      FieldName = 'COEF_GANANCIA'
+    end
+    object ZQ_Nota_Pedido_DetalleCOEF_DESCUENTO: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+    end
+    object ZQ_Nota_Pedido_DetalleIMPUESTO_INTERNO_1: TFloatField
+      FieldName = 'IMPUESTO_INTERNO_1'
+    end
+    object ZQ_Nota_Pedido_DetalleIMPUESTO_IVA: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+    object ZQ_Nota_Pedido_DetalleSTOCK_MAX: TFloatField
+      FieldName = 'STOCK_MAX'
+    end
+    object ZQ_Nota_Pedido_DetalleSTOCK_MIN: TFloatField
+      FieldName = 'STOCK_MIN'
+    end
+  end
+  object ZQ_VerCpb: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
+      
+        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
+        'iente_cuil,'
+      
+        '        ven.nombre as vendedor, tcpb.nombre_tipo_cpb, est.descri' +
+        'pcion as estado'
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
+      'left join persona ven on (cpb.id_vendedor = ven.id_persona)'
+      
+        'left join tipo_comprobante tcpb on (cpb.id_tipo_cpb = tcpb.id_ti' +
+        'po_cpb)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)'
+      'where ((cpb.id_tipo_cpb = 15) and (cpb.id_comp_estado = 2))'
+      'order by cpb.fecha desc'
+      '')
+    Params = <>
+    Left = 658
+    Top = 196
+    object ZQ_VerCpbID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_VerCpbID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_VerCpbID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_VerCpbID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object ZQ_VerCpbID_TIPO_CPB: TIntegerField
+      FieldName = 'ID_TIPO_CPB'
+    end
+    object ZQ_VerCpbID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object ZQ_VerCpbID_COMP_ESTADO: TIntegerField
+      FieldName = 'ID_COMP_ESTADO'
+    end
+    object ZQ_VerCpbCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_VerCpbOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
+    end
+    object ZQ_VerCpbBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+      currency = True
+    end
+    object ZQ_VerCpbSALDO: TFloatField
+      FieldName = 'SALDO'
+      currency = True
+    end
+    object ZQ_VerCpbIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+      currency = True
+    end
+    object ZQ_VerCpbIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+      currency = True
+    end
+    object ZQ_VerCpbIMPORTE_DESCUENTO: TFloatField
+      FieldName = 'IMPORTE_DESCUENTO'
+      currency = True
+    end
+    object ZQ_VerCpbPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+      DisplayFormat = '0.00'
+    end
+    object ZQ_VerCpbPORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+      DisplayFormat = '0.00'
+    end
+    object ZQ_VerCpbENCABEZADO: TStringField
+      FieldName = 'ENCABEZADO'
+      Size = 500
+    end
+    object ZQ_VerCpbPIE: TStringField
+      FieldName = 'PIE'
+      Size = 500
+    end
+    object ZQ_VerCpbFECHA: TDateTimeField
+      FieldName = 'FECHA'
+      DisplayFormat = 'dd/MM/yyyy'
+    end
+    object ZQ_VerCpbFECHA_COBRADA: TDateField
+      FieldName = 'FECHA_COBRADA'
+      DisplayFormat = 'dd/MM/yyyy'
+    end
+    object ZQ_VerCpbFECHA_ENVIADA: TDateField
+      FieldName = 'FECHA_ENVIADA'
+      DisplayFormat = 'dd/MM/yyyy'
+    end
+    object ZQ_VerCpbFECHA_IMPRESA: TDateField
+      FieldName = 'FECHA_IMPRESA'
+      DisplayFormat = 'dd/MM/yyyy'
+    end
+    object ZQ_VerCpbFECHA_VENCIMIENTO: TDateField
+      FieldName = 'FECHA_VENCIMIENTO'
+      DisplayFormat = 'dd/MM/yyyy'
+    end
+    object ZQ_VerCpbFECHA_ANULADO: TDateField
+      FieldName = 'FECHA_ANULADO'
+      DisplayFormat = 'dd/MM/yyyy'
+    end
+    object ZQ_VerCpbSUCURSAL: TStringField
+      FieldName = 'SUCURSAL'
+      Size = 200
+    end
+    object ZQ_VerCpbPROVEEDOR: TStringField
+      FieldName = 'PROVEEDOR'
+      Size = 200
+    end
+    object ZQ_VerCpbCUIT_PROVEEDOR: TStringField
+      FieldName = 'CUIT_PROVEEDOR'
+      Size = 30
+    end
+    object ZQ_VerCpbCLIENTE: TStringField
+      FieldName = 'CLIENTE'
+      Size = 200
+    end
+    object ZQ_VerCpbCLIENTE_DOCUMENTO: TStringField
+      FieldName = 'CLIENTE_DOCUMENTO'
+      Size = 50
+    end
+    object ZQ_VerCpbCLIENTE_CUIL: TStringField
+      FieldName = 'CLIENTE_CUIL'
+      Size = 30
+    end
+    object ZQ_VerCpbVENDEDOR: TStringField
+      FieldName = 'VENDEDOR'
+      Size = 200
+    end
+    object ZQ_VerCpbNOMBRE_TIPO_CPB: TStringField
+      FieldName = 'NOMBRE_TIPO_CPB'
+      Size = 50
+    end
+    object ZQ_VerCpbESTADO: TStringField
+      FieldName = 'ESTADO'
+      Size = 50
+    end
+    object ZQ_VerCpbPUNTO_VENTA: TIntegerField
+      FieldName = 'PUNTO_VENTA'
+      DisplayFormat = '0000'
+    end
+    object ZQ_VerCpbNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
+      DisplayFormat = '00000000'
+    end
+  end
+  object DS_VerCpb: TDataSource
+    DataSet = ZQ_VerCpb
+    Left = 658
+    Top = 244
+  end
+  object DS_Nota_Pedido_Detalle: TDataSource
+    DataSet = CD_NotaPedidoDetalle
+    Left = 773
+    Top = 73
+  end
+  object CD_NotaPedidoDetalle: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    OnCalcFields = CD_NotaPedidoDetalleCalcFields
+    Left = 653
+    Top = 73
+    object CD_NotaPedidoDetallecantidad: TFloatField
+      FieldName = 'cantidad'
+    end
+    object CD_NotaPedidoDetallecantidad_recibida: TFloatField
+      FieldName = 'cantidad_recibida'
+    end
+    object CD_NotaPedidoDetallecantidad_almacenada: TFloatField
+      FieldName = 'cantidad_almacenada'
+    end
+    object CD_NotaPedidoDetallealmacenar: TFloatField
+      FieldName = 'almacenar'
+    end
+    object CD_NotaPedidoDetallecod_cabecera: TStringField
+      FieldName = 'cod_cabecera'
+      Size = 50
+    end
+    object CD_NotaPedidoDetalleproducto: TStringField
+      FieldName = 'producto'
+      Size = 100
+    end
+    object CD_NotaPedidoDetallemedida: TStringField
+      FieldName = 'medida'
+      Size = 50
+    end
+    object CD_NotaPedidoDetallecolor: TStringField
+      FieldName = 'color'
+      Size = 50
+    end
+    object CD_NotaPedidoDetallemarca: TStringField
+      DisplayWidth = 100
+      FieldName = 'marca'
+      Size = 50
+    end
+    object CD_NotaPedidoDetallearticulo: TStringField
+      DisplayWidth = 100
+      FieldName = 'articulo'
+      Size = 50
+    end
+    object CD_NotaPedidoDetalletipo_articulo: TStringField
+      FieldName = 'tipo_articulo'
+      Size = 100
+    end
+    object CD_NotaPedidoDetallecod_producto: TStringField
+      FieldName = 'cod_producto'
+      Size = 50
+    end
+    object CD_NotaPedidoDetallecodigo_barra: TStringField
+      FieldName = 'codigo_barra'
+      Size = 100
+    end
+    object CD_NotaPedidoDetalleid_producto: TIntegerField
+      FieldName = 'id_producto'
+    end
+    object CD_NotaPedidoDetalleid_comprobante: TIntegerField
+      FieldName = 'id_comprobante'
+    end
+    object CD_NotaPedidoDetallecantidad_a_almacenar: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'cantidad_a_almacenar'
+      Calculated = True
+    end
+    object CD_NotaPedidoDetallestock_max: TFloatField
+      FieldName = 'stock_max'
+    end
+    object CD_NotaPedidoDetallestock_min: TFloatField
+      FieldName = 'stock_min'
+    end
+  end
+  object ZQ_NotaPedidoUpdateAlmacenado: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from comprobante_detalle cd'
+      
+        'where (cd.id_comprobante = :ID_COMPROBANTE) and (cd.id_producto ' +
+        '= :ID_PRODUCTO)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_COMPROBANTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_PRODUCTO'
+        ParamType = ptUnknown
+      end>
+    Left = 781
+    Top = 146
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_COMPROBANTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_PRODUCTO'
+        ParamType = ptUnknown
+      end>
+    object ZQ_NotaPedidoUpdateAlmacenadoCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+  end
+  object ZQ_NotaPedidoUpdateEstado: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'execute procedure nota_pedido_update_estado (:id_comprobante)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 789
+    Top = 218
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
   end
 end
