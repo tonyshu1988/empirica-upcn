@@ -296,6 +296,24 @@ type
     EKListadoVendedores: TEKListadoSQL;
     CD_ComprobantenVendedor: TStringField;
     EK_ListadoMedCobroPago: TEKListadoSQL;
+    ZQ_DetalleProd: TZQuery;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    FloatField1: TFloatField;
+    FloatField2: TFloatField;
+    FloatField3: TFloatField;
+    FloatField4: TFloatField;
+    FloatField5: TFloatField;
+    FloatField6: TFloatField;
+    StringField7: TStringField;
+    StringField8: TStringField;
+    IntegerField1: TIntegerField;
+    BlobField1: TBlobField;
+    StringField9: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -381,7 +399,7 @@ begin
   CD_DetalleFactura.CreateDataSet;
   CD_Fpago.CreateDataSet;
   dm.EKModelo.abrir(ZQ_FormasPago);
-  dm.EKModelo.abrir(ZQ_Personas);
+  dm.EKModelo.abrir(ZQ_DetalleProd);
   Cliente:=-1;
   IdVendedor:=-1;
   descCliente:=0;
@@ -531,6 +549,7 @@ procedure TFCajero.LimpiarCodigo;
 begin
   //-----------------------------------
 
+  //ZQ_Productos.Locate('id_producto',-1,[]);
   ZQ_Productos.Close;
 
   importeacob := 0;

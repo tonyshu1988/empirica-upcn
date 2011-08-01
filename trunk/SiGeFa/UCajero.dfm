@@ -2287,7 +2287,7 @@ object FCajero: TFCajero
     object CD_DetalleFacturaproducto: TStringField
       FieldKind = fkLookup
       FieldName = 'producto'
-      LookupDataSet = ZQ_Productos
+      LookupDataSet = ZQ_DetalleProd
       LookupKeyFields = 'ID_PRODUCTO'
       LookupResultField = 'DETALLE_PROD'
       KeyFields = 'ID_PRODUCTO'
@@ -2872,5 +2872,97 @@ object FCajero: TFCajero
     TituloVentana = 'Forma de Pago'
     Left = 392
     Top = 329
+  end
+  object ZQ_DetalleProd: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
+        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
+        'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
+        'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
+        'p.cod_corto, p.codigo_barra,pc.imagen'
+      
+        ',pc.nombre||'#39'  -  M: '#39'||coalesce(m.medida,'#39#39')||'#39'  -  CB:'#39'||coale' +
+        'sce(p.codigo_barra,'#39#39') DETALLE_PROD'
+      'from producto p'
+      'left join medida m on (p.id_medida = m.id_medida)'
+      
+        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
+        'od_cabecera)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      
+        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
+        'rticulo)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'where pc.baja <> '#39'S'#39
+      ''
+      '')
+    Params = <>
+    Left = 560
+    Top = 72
+    object StringField1: TStringField
+      FieldName = 'NOMBRE_PRODUCTO'
+      Size = 100
+    end
+    object StringField2: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object StringField3: TStringField
+      FieldName = 'ARTICULO'
+      Size = 200
+    end
+    object StringField4: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object StringField5: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object StringField6: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object FloatField1: TFloatField
+      FieldName = 'PRECIO_COSTO'
+      currency = True
+    end
+    object FloatField2: TFloatField
+      FieldName = 'PRECIO_VENTA'
+      currency = True
+    end
+    object FloatField3: TFloatField
+      FieldName = 'COEF_GANANCIA'
+    end
+    object FloatField4: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+    end
+    object FloatField5: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object FloatField6: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+    object StringField7: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object StringField8: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object BlobField1: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object StringField9: TStringField
+      FieldName = 'DETALLE_PROD'
+      ReadOnly = True
+      Size = 186
+    end
   end
 end
