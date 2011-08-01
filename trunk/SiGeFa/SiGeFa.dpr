@@ -38,7 +38,8 @@ uses
   UMovimientosInternos in 'UMovimientosInternos.pas' {FMovimientosInternos},
   UABM_TipoMovimiento in 'UABM_TipoMovimiento.pas' {FABM_TipoMovimiento},
   UTransferirStock in 'UTransferirStock.pas' {FTransferirStock},
-  UBuscarProductoStock in 'UBuscarProductoStock.pas' {FBuscarProductoStock};
+  UBuscarProductoStock in 'UBuscarProductoStock.pas' {FBuscarProductoStock},
+  UEstadisticaMovInternos in 'UEstadisticaMovInternos.pas' {FEstadisticaMovInternos};
 
 {$R *.res}
 
