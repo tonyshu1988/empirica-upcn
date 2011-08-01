@@ -227,7 +227,6 @@ type
     procedure SetSQL_Where(const Value: TStrings);
     function EjecutarSql(): boolean;
     procedure BlanquearDatosBusqueda(Sender: TObject);
-    function ArmarConsulta(): TStrings;
     // funciones de armar la query  //
     function convertir_y_o (_Y: TComboBox) :String;
     function armartexto (x: integer; operador: TComboBox; campo: TEdit) : string;
@@ -240,6 +239,7 @@ type
     { Protected declarations }
   public
     { Public declarations }
+    function ArmarConsulta(): TStrings;
     function Abrir() : boolean;
     procedure Siguiente();
     procedure Anterior();
