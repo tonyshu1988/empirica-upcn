@@ -1,0 +1,68 @@
+create procedure procesar_stock (
+    id_stock_prod integer,
+    id_producto integer,
+    id_pos_suc integer,
+    cantidad_almacenar float,
+    stock_min float,
+    stock_max float,
+    stock_repedido float,
+    id_comprobante integer)
+as
+declare variable id_stock_producto integer;
+declare variable id_stock_producto_origen integer;
+begin
+-- Descuento el stock Acutal de origen----------------------------
+   if (ID_STOCK_PROD is not null) then
+   begin
+        id_stock_producto_origen = null;
+    
+        select id_stock_producto
+        from stock_producto sp
+        where (sp.id_stock_producto = :ID_STOCK_PROD)
+        into :id_stock_producto_origen;
+    
+    
+        if (:id_stock_producto_origen is not null) then
+        begin
+          update stock_producto sp
+          set sp.stock_actual = stock_actual-:cantidad_almacenar
+          where (sp.id_stock_producto = :ID_STOCK_PROD);
+        end
+   end
+--------------------------------------------------------------------
+
+-- Aumento el stock Acutal de destino----------------------------
+   if ((id_producto is not null) and (id_pos_suc is not null)) then
+   begin
+        id_stock_producto = null;
+    
+        select id_stock_producto
+        from stock_producto sp
+        where (sp.id_producto = :id_producto) and (sp.id_posicion_sucursal = :id_pos_suc)
+        into :id_stock_producto;
+    
+        if (:id_stock_producto is null) then
+        begin
+          insert into stock_producto (id_producto, stock_actual, stock_min, stock_max, stock_repedido,  id_posicion_sucursal)
+          values (:id_producto, :cantidad_almacenar, :stock_min, :stock_max, :stock_repedido,  :id_pos_suc);
+        end
+        else
+        begin
+          update stock_producto sp
+          set sp.stock_actual = stock_actual+:cantidad_almacenar
+          where (sp.id_producto = :id_producto) and (sp.id_posicion_sucursal = :id_pos_suc);
+        end
+
+        if (id_comprobante is not null) then
+        begin
+            update comprobante_detalle cd
+            set cd.cantidad_almacenada = cantidad_almacenada+:CANTIDAD_ALMACENAR
+            where (cd.id_comprobante = :ID_COMPROBANTE) and (cd.id_producto = :ID_PRODUCTO);
+        end
+
+   end
+--------------------------------------------------------------------
+
+
+  suspend;
+end
