@@ -624,6 +624,7 @@ begin
 
   //fecha := dateof(FechaPago.DateTime);
   LimpiarCodigo;
+  IdProd:=-1;
   try
     IdProd:= strToInt(codBarras.Text);
   except

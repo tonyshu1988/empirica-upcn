@@ -1109,6 +1109,10 @@ object FCajero: TFCajero
         ',pc.nombre||'#39'  -  M: '#39'||coalesce(m.medida,'#39#39')||'#39'  -  CB:'#39'||coale' +
         'sce(p.codigo_barra,'#39#39') DETALLE_PROD'
       'from producto p'
+      'join stock_producto sp on (sp.id_producto=p.id_producto)'
+      
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal=sp.id_posi' +
+        'cion_sucursal)'
       'left join medida m on (p.id_medida = m.id_medida)'
       
         'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
@@ -1118,7 +1122,7 @@ object FCajero: TFCajero
         'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'where pc.baja <> '#39'S'#39
+      'where (pc.baja <> '#39'S'#39')and(ps.punto_salida='#39'S'#39')'
       ''
       '')
     Params = <>
@@ -2309,17 +2313,19 @@ object FCajero: TFCajero
     end
     object CD_DetalleFacturaIMPORTE_FINAL: TFloatField
       FieldName = 'IMPORTE_FINAL'
-      EditFormat = '$ ##,###,##0.00'
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object CD_DetalleFacturaPORC_DESCUENTO: TFloatField
       FieldName = 'PORC_DESCUENTO'
     end
     object CD_DetalleFacturaBASE_IMPONIBLE: TFloatField
       FieldName = 'BASE_IMPONIBLE'
+      DisplayFormat = '$ ##,###,##0.00'
       EditFormat = '$ ##,###,##0.00'
     end
     object CD_DetalleFacturaIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
+      DisplayFormat = '$ ##,###,##0.00'
       EditFormat = '$ ##,###,##0.00'
     end
     object CD_DetalleFacturaIMPUESTO_INTERNO: TFloatField
@@ -2442,6 +2448,7 @@ object FCajero: TFCajero
     end
     object CD_FpagoIMPORTE: TFloatField
       FieldName = 'IMPORTE'
+      DisplayFormat = '$ ##,###,##0.00'
       EditFormat = '$ ##,###,##0.00'
     end
     object CD_FpagoCONCILIADO: TDateField
