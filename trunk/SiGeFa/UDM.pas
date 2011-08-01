@@ -106,6 +106,7 @@ Const
 
   ESTADO_SIN_CONFIRMADO = 1;
   ESTADO_CONFIRMADO     = 2;
+  ESTADO_ALMACENADO     = 3;  
 
 implementation
 
