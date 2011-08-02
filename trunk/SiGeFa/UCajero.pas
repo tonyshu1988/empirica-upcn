@@ -316,6 +316,8 @@ type
     StringField9: TStringField;
     lblSinStock: TLabel;
     ZQ_ProductosSTOCK_ACTUAL: TFloatField;
+    Label26: TLabel;
+    DBEdit8: TDBEdit;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -358,11 +360,9 @@ type
     procedure DBGridFormaPagoColExit(Sender: TObject);
     procedure DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    function ProductoYaCargado(id:Integer):Boolean ;
   private
     vsel: TFBuscarProductoStock;
-    vsel2 : TFBuscarPersona;
-    procedure OnSelCliente;
-
     procedure OnSeleccionar;
     { Private declarations }
   public
@@ -405,7 +405,7 @@ begin
   Cliente:=-1;
   IdVendedor:=-1;
   descCliente:=0;
- 
+
   crearComprobante();
 
 end;
@@ -427,47 +427,42 @@ end;
 
 procedure TFCajero.OnSeleccionar;
 begin
-    if not vsel.ZQ_Stock.IsEmpty then
-    begin
-      CD_DetalleFactura.Filtered := false;
-      CD_DetalleFactura.Filter:= 'id_producto = ' +  vsel.ZQ_StockID_PRODUCTO.AsString;
-      CD_DetalleFactura.Filtered := true;
-      if not CD_DetalleFactura.IsEmpty then
+ if not vsel.ZQ_Stock.IsEmpty then
+  begin
+      if not(ProductoYaCargado(vsel.ZQ_StockID_PRODUCTO.AsInteger)) then
       begin
-        CD_DetalleFactura.Filtered := false;
-        Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
-        exit;
+        codBarras.Text:=vsel.ZQ_StockID_PRODUCTO.AsString;
+        IdentificarCodigo;
+        edCantidad.SetFocus;
       end;
-      CD_DetalleFactura.Filtered := false;
-      codBarras.Text:=vsel.ZQ_StockID_PRODUCTO.AsString;
-      IdentificarCodigo;
-      edCantidad.SetFocus;
-      vsel.ZQ_Stock.Filtered:=False;
+    vsel.ZQ_Stock.Filtered:=False;
     vsel.Close;
   end;
 end;
 
 function TFCajero.agregar(detalle: string;prod:integer):Boolean;
 begin
+  if not(ProductoYaCargado(prod)) then
+    begin
+        calcularMonto();
+        CD_DetalleFactura.Append;
+        CD_DetalleFacturaID_PRODUCTO.AsInteger:=prod;
+        CD_DetalleFacturaDETALLE.AsString:=detalle;
+        CD_DetalleFacturaCANTIDAD.AsInteger:=edCantidad.AsInteger;
+        CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=ZQ_ProductosPRECIO_VENTA.AsFloat;
+        CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=(edDesc.AsFloat)/100;
+        CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:=00;
+        CD_DetalleFacturaPORC_IVA.AsFloat:=00;
+        CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:=(CD_DetalleFacturaCANTIDAD.AsInteger*CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
 
-  calcularMonto();
-  CD_DetalleFactura.Append;
-  CD_DetalleFacturaID_PRODUCTO.AsInteger:=prod;
-  CD_DetalleFacturaDETALLE.AsString:=detalle;
-  CD_DetalleFacturaCANTIDAD.AsInteger:=edCantidad.AsInteger;
-  CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=ZQ_ProductosPRECIO_VENTA.AsFloat;
-  CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=(edDesc.AsFloat)/100;
-  CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:=00;
-  CD_DetalleFacturaPORC_IVA.AsFloat:=00;
-  CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:=(CD_DetalleFacturaCANTIDAD.AsInteger*CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
-
-  CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=edImporte.AsFloat;
+        CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=edImporte.AsFloat;
 
 
-  CD_DetalleFactura.Post;
+        CD_DetalleFactura.Post;
 
-  lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
-  Result:=True;
+        lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
+        Result:=True;
+    end
 end;
 procedure TFCajero.ABuscarExecute(Sender: TObject);
 begin
@@ -491,6 +486,13 @@ if IdVendedor<0 then
  begin
    Application.MessageBox('Debe seleccionar el Vendedor.', 'Atención');
    btVendedor.Click;
+   exit;
+ end;
+
+if edImporte.AsFloat<=0 then
+ begin
+   Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
+   edImporte.SetFocus;
    exit;
  end;
 
@@ -703,13 +705,6 @@ begin
     end
 end;
 
-procedure TFCajero.OnSelCliente;
-begin
-
-end;
-
-
-
 procedure TFCajero.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
  CanClose:= FPrincipal.cerrar_ventana(abmComprobante);
@@ -810,7 +805,7 @@ begin
   edCantidad.AsInteger:=1;
   edDesc.AsFloat:=(descCliente*100);
   edImporte.AsFloat:=0;
-
+  lblSinStock.Visible:=False;
   EKDbSuma1.SumCollection[0].SumValue := 0;
   EKDbSuma2.SumCollection[0].SumValue := 0;
   importe.Text := '';
@@ -1066,6 +1061,23 @@ if key = 112 then
             CD_FpagoID_TIPO_FORMAPAG.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
           end;
     end;
+end;
+
+function TFCajero.ProductoYaCargado(id:Integer):Boolean ;
+begin
+    Result:=False;
+    CD_DetalleFactura.Filtered := false;
+    CD_DetalleFactura.Filter:= Format('id_producto = %d ',[id]);
+    CD_DetalleFactura.Filtered := true;
+    if not CD_DetalleFactura.IsEmpty then
+    begin
+      CD_DetalleFactura.Filtered := false;
+      Result:=True;
+      Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
+      codBarras.SetFocus;
+      exit;
+    end;
+    CD_DetalleFactura.Filtered := false;
 end;
 
 end.

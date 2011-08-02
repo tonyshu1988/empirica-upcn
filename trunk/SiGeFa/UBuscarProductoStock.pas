@@ -58,6 +58,7 @@ type
     procedure ASeleccionarExecute(Sender: TObject);
     procedure ASalirExecute(Sender: TObject);
     procedure DBGridStockDblClick(Sender: TObject);
+    procedure btnSeleccionarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -129,6 +130,17 @@ begin
 end;
 
 procedure TFBuscarProductoStock.DBGridStockDblClick(Sender: TObject);
+begin
+  if ((not(DBGridStock.SelectedRows.Count > 0)) and (not(ZQ_Stock.IsEmpty))) then
+  begin
+    if Assigned(OnSeleccionar) then
+      OnSeleccionar
+  end
+  else
+    Application.MessageBox(PChar('Debe seleccionar algún Producto.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
+end;
+
+procedure TFBuscarProductoStock.btnSeleccionarClick(Sender: TObject);
 begin
   if ((not(DBGridStock.SelectedRows.Count > 0)) and (not(ZQ_Stock.IsEmpty))) then
   begin

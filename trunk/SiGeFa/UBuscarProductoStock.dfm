@@ -871,6 +871,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
       Hint = 'F2 - Seleccionar'
       Visible = ivAlways
       ImageIndex = 5
+      OnClick = btnSeleccionarClick
       AutoGrayScale = False
     end
     object btnSeleccinarYSalir: TdxBarLargeButton
