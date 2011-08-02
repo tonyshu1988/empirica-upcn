@@ -1,6 +1,6 @@
 object FTransferirStock: TFTransferirStock
-  Left = 287
-  Top = 132
+  Left = 289
+  Top = 130
   Width = 870
   Height = 500
   Caption = 'Transferir Stock'

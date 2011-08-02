@@ -1,6 +1,6 @@
 object FABM_TipoEmpresa: TFABM_TipoEmpresa
   Left = 371
-  Top = 209
+  Top = 196
   Width = 801
   Height = 498
   Caption = 'ABM Tipo Empresa'
@@ -153,7 +153,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
         FontSize = 12
       end
       object RepTipoEmpresa_Subtitulo: TQRLabel
-        Left = 268
+        Left = -83
         Top = 26
         Width = 182
         Height = 20
@@ -164,8 +164,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          709.083333333333300000
-          68.791666666666670000
+          709.083333333333200000
+          68.791666666666680000
           481.541666666666700000)
         Alignment = taCenter
         AlignToBand = True
@@ -196,9 +196,9 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          669.395833333333300000
+          669.395833333333400000
           5.291666666666667000
-          558.270833333333300000)
+          558.270833333333400000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
@@ -434,7 +434,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        58.208333333333330000
+        58.208333333333340000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -453,7 +453,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
           37.041666666666670000
           10.583333333333330000
           10.583333333333330000
-          637.645833333333300000)
+          637.645833333333200000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -484,7 +484,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        82.020833333333330000
+        82.020833333333340000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -645,8 +645,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 785
-    Height = 389
+    Width = 793
+    Height = 395
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -654,8 +654,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     object DBGridTipoEmpresa: TDBGrid
       Left = 5
       Top = 5
-      Width = 775
-      Height = 346
+      Width = 783
+      Height = 352
       Align = alClient
       Color = 14606012
       DataSource = DS_TipoEmpresa
@@ -678,8 +678,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     end
     object PanelEdicion: TPanel
       Left = 5
-      Top = 351
-      Width = 775
+      Top = 357
+      Width = 783
       Height = 33
       Align = alBottom
       BevelOuter = bvNone
@@ -720,7 +720,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 785
+    Width = 793
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -741,7 +741,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 675
+      Left = 683
       Top = 1
       Width = 109
       Height = 17
@@ -758,7 +758,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1350,9 +1350,16 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridTipoEmpresa
+    Filtros = <
+      item
+        TituloColumna = 'Tipo Empresa'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 336
     Top = 83
   end

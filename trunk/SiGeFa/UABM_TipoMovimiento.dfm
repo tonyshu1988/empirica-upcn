@@ -1,6 +1,6 @@
 object FABM_TipoMovimiento: TFABM_TipoMovimiento
-  Left = 317
-  Top = 168
+  Left = 309
+  Top = 178
   Width = 870
   Height = 500
   Caption = 'ABM Tipo Movimiento'
@@ -22,8 +22,8 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 854
-    Height = 391
+    Width = 862
+    Height = 397
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -142,7 +142,7 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
             50.270833333333330000
             785.812500000000000000
             124.354166666666700000
-            328.083333333333300000)
+            328.083333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -172,8 +172,8 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            756.708333333333300000
-            68.791666666666670000
+            756.708333333333400000
+            68.791666666666680000
             386.291666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -204,9 +204,9 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            732.895833333333300000
+            732.895833333333200000
             5.291666666666667000
-            431.270833333333300000)
+            431.270833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -321,7 +321,7 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
             37.041666666666670000
             1378.479166666667000000
             0.000000000000000000
-            92.604166666666670000)
+            92.604166666666680000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -523,7 +523,7 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -573,7 +573,7 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -621,7 +621,7 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -807,7 +807,7 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
             37.041666666666670000
             1378.479166666667000000
             5.291666666666667000
-            92.604166666666670000)
+            92.604166666666680000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -830,8 +830,8 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 854
-      Height = 391
+      Width = 862
+      Height = 397
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -845,8 +845,8 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
       object DBGridTipo: TDBGrid
         Left = 5
         Top = 5
-        Width = 844
-        Height = 351
+        Width = 852
+        Height = 357
         Align = alClient
         Color = 14606012
         DataSource = DS_TipoMov
@@ -870,8 +870,8 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 356
-        Width = 844
+        Top = 362
+        Width = 852
         Height = 30
         Align = alBottom
         BevelOuter = bvNone
@@ -913,7 +913,7 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 862
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -934,7 +934,7 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 744
+      Left = 752
       Top = 1
       Width = 109
       Height = 17
@@ -951,7 +951,7 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1543,9 +1543,16 @@ object FABM_TipoMovimiento: TFABM_TipoMovimiento
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridTipo
+    Filtros = <
+      item
+        TituloColumna = 'Tipo Movimiento'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 48
     Top = 243
   end
