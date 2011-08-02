@@ -13,20 +13,22 @@ object FBuscarProductoStock: TFBuscarProductoStock
   OldCreateOrder = False
   Position = poMainFormCenter
   OnActivate = FormActivate
+  OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 342
     Align = alClient
     TabOrder = 0
     object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 712
-      Height = 334
+      Width = 720
+      Height = 340
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -208,7 +210,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
           FieldName = 'COD_CORTO_CABECERA'
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Cabecera'
-          Visible = False
+          Visible = True
         end
         item
           Alignment = taRightJustify
@@ -216,7 +218,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
           FieldName = 'COD_CORTO_PRODUCTO'
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Producto'
-          Visible = False
+          Visible = True
         end
         item
           Alignment = taCenter
@@ -224,14 +226,14 @@ object FBuscarProductoStock: TFBuscarProductoStock
           FieldName = 'BAJA'
           Title.Alignment = taCenter
           Title.Caption = 'Baja'
-          Visible = False
+          Visible = True
         end>
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -896,9 +898,93 @@ object FBuscarProductoStock: TFBuscarProductoStock
   end
   object EKOrdenarGrilla: TEKOrdenarGrilla
     Grilla = DBGridStock
+    Filtros = <
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Secci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sector'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fila'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Columna'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Actual'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Minimo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Maximo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Pto Repedido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Alarma'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cabecera'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Baja'
+        Visible = True
+      end>
+    NombreGuardar = 'BuscarProductoStock'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 32
     Top = 48
   end

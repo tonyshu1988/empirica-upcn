@@ -132,17 +132,6 @@ type
     CDSZQ_Productosprecio_costo: TFloatField;
     CDSZQ_Productoscoef_ganancia: TFloatField;
     btBuscarGoogle: TdxBarLargeButton;
-    EKUsrPermisos1: TEKUsrPermisos;
-    PanelFiltros: TPanel;
-    btAplicarFiltros: TButton;
-    CBIVA: TCheckBox;
-    HabilitarFiltros: TPanel;
-    CBCoefDescuento: TCheckBox;
-    CBImpuestoInterno: TCheckBox;
-    CBCoefGanancia: TCheckBox;
-    CBImporteVenta: TCheckBox;
-    CBImporteCosto: TCheckBox;
-    EKIniGuardarFiltros: TEKIni;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -157,15 +146,11 @@ type
     procedure ZQ_ProductosCalcFields(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure btBuscarGoogleClick(Sender: TObject);
-    procedure btAplicarFiltrosClick(Sender: TObject);
-    procedure HabilitarFiltrosClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
     procedure OnSelPersona;
-    procedure GuardarOpcionesFiltrado;
-    procedure LeerOpcionesFiltrado;
   public
     { Public declarations }
   end;
@@ -481,9 +466,7 @@ end;
 procedure TFABM_Precios.FormCreate(Sender: TObject);
 begin
 CDSZQ_Productos.CreateDataSet;
-LeerOpcionesFiltrado;
-BtAplicarFiltros.Click;
-EKUsrPermisos1.Validar;
+EKOrdenarGrilla1.CargarFiltro;
 end;
 
 procedure TFABM_Precios.btBuscarGoogleClick(Sender: TObject);
@@ -495,110 +478,11 @@ begin
   SW_SHOWNORMAL);
 end;
 
-procedure TFABM_Precios.btAplicarFiltrosClick(Sender: TObject);
-begin
-  if not CBImporteCosto.Checked then
-    DBGridProductos.Columns[6].Visible := false
-  else
-    DBGridProductos.Columns[6].Visible := true;
-
-  if not CBImporteVenta.Checked then
-    DBGridProductos.Columns[7].Visible := false
-  else
-    DBGridProductos.Columns[7].Visible := true;
-
-  if not CBCoefGanancia.Checked then
-    DBGridProductos.Columns[8].Visible := false
-  else
-    DBGridProductos.Columns[8].Visible := true;
-
-  if not CBIVA.Checked then
-    DBGridProductos.Columns[9].Visible := false
-  else
-    DBGridProductos.Columns[9].Visible := true;
-
-  if not CBCoefDescuento.Checked then
-    DBGridProductos.Columns[10].Visible := false
-  else
-    DBGridProductos.Columns[10].Visible := true;
-
-  if not CBImpuestoInterno.Checked then
-    DBGridProductos.Columns[11].Visible := false
-  else
-    DBGridProductos.Columns[11].Visible := true;
-
-end;
-
-procedure TFABM_Precios.HabilitarFiltrosClick(Sender: TObject);
-begin
-  if PanelFiltros.Visible then
-    PanelFiltros.Visible := false
-  else
-    PanelFiltros.Visible := true;
-end;
-
-procedure TFABM_Precios.GuardarOpcionesFiltrado();
-begin
-  if CBImporteCosto.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\ImporteCosto', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\ImporteCosto', 'FALSE');
-
-  if CBImporteVenta.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\ImporteVenta', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\ImporteVenta', 'FALSE');
-
-  if CBIVA.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\IVA', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\IVA', 'FALSE');
-
-  if CBCoefDescuento.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\CoefDescuento', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\CoefDescuento', 'FALSE');
-
-  if CBImpuestoInterno.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\ImpuestoInterno', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\ImpuestoInterno', 'FALSE');
-
-  if CBCoefGanancia.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\CoefGanancia', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UABM_Precios\Filtro\CoefGanancia', 'FALSE');
-
-end;
-
-
-procedure TFABM_Precios.LeerOpcionesFiltrado();
-begin
-  if EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\ImporteCosto') <> '' then
-    CBImporteCosto.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\ImporteCosto'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\ImporteVenta') <> '' then
-    CBImporteVenta.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\ImporteVenta'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\IVA') <> '' then
-    CBIVA.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\IVA'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\CoefDescuento') <> '' then
-    CBCoefDescuento.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\CoefDescuento'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\ImpuestoInterno') <> '' then
-    CBImpuestoInterno.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\ImpuestoInterno'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\CoefGanancia') <> '' then
-    CBCoefGanancia.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UABM_Precios\Filtro\CoefGanancia'));
-end;
-
 
 procedure TFABM_Precios.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
-  GuardarOpcionesFiltrado;
+  EKOrdenarGrilla1.GuardarFiltro;
 end;
 
 end.

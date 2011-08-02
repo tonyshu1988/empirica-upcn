@@ -59,6 +59,8 @@ type
     procedure ASalirExecute(Sender: TObject);
     procedure DBGridStockDblClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -149,6 +151,17 @@ begin
   end
   else
     Application.MessageBox(PChar('Debe seleccionar algún Producto.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
+end;
+
+procedure TFBuscarProductoStock.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+EKOrdenarGrilla.GuardarFiltro;
+end;
+
+procedure TFBuscarProductoStock.FormCreate(Sender: TObject);
+begin
+EKOrdenarGrilla.CargarFiltro;
 end;
 
 end.
