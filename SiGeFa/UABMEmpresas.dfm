@@ -1,6 +1,6 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 238
-  Top = 10
+  Left = 225
+  Top = 41
   Width = 1024
   Height = 768
   Caption = 'FABMEmpresas'
@@ -22,8 +22,8 @@ object FABMEmpresas: TFABMEmpresas
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 678
+    Width = 1016
+    Height = 684
     Align = alClient
     TabOrder = 0
     object RepDetalleEmpresa: TQuickRep
@@ -104,7 +104,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333300000
+          320.145833333333400000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -138,7 +138,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            759.354166666666700000
+            759.354166666666800000
             158.750000000000000000
             381.000000000000000000)
           Alignment = taCenter
@@ -170,9 +170,9 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            709.083333333333300000
+            709.083333333333200000
             95.250000000000000000
-            478.895833333333300000)
+            478.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -202,7 +202,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            632.354166666666700000
+            632.354166666666800000
             31.750000000000000000
             635.000000000000000000)
           Alignment = taCenter
@@ -434,7 +434,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -482,7 +482,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -1489,7 +1489,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333300000
+          320.145833333333400000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1525,7 +1525,7 @@ object FABMEmpresas: TFABMEmpresas
             50.270833333333330000
             1209.145833333333000000
             158.750000000000000000
-            351.895833333333300000)
+            351.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1557,7 +1557,7 @@ object FABMEmpresas: TFABMEmpresas
             52.916666666666670000
             1145.645833333333000000
             95.250000000000000000
-            478.895833333333300000)
+            478.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1885,7 +1885,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1933,7 +1933,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -2254,8 +2254,8 @@ object FABMEmpresas: TFABMEmpresas
     end
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 396
-      Width = 1006
+      Top = 402
+      Width = 1014
       Height = 281
       ActivePage = TabEmpresa
       Align = alBottom
@@ -2884,8 +2884,8 @@ object FABMEmpresas: TFABMEmpresas
     object DBGridEmpresas: TDBGrid
       Left = 1
       Top = 20
-      Width = 1006
-      Height = 376
+      Width = 1014
+      Height = 382
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -2999,7 +2999,7 @@ object FABMEmpresas: TFABMEmpresas
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1006
+      Width = 1014
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -3020,7 +3020,7 @@ object FABMEmpresas: TFABMEmpresas
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 896
+        Left = 904
         Top = 1
         Width = 109
         Height = 17
@@ -3038,7 +3038,7 @@ object FABMEmpresas: TFABMEmpresas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4142,9 +4142,56 @@ object FABMEmpresas: TFABMEmpresas
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridEmpresas
+    Filtros = <
+      item
+        TituloColumna = 'Nombre Empresa'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fono'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Email'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit/Cuil'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Pag.Web'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Provincia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod.Postal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Empresa'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo I.V.A'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 328
     Top = 72
   end

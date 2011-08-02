@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 248
-  Top = 115
+  Left = 190
+  Top = 116
   Width = 1024
   Height = 639
   Caption = 'FABMProductos'

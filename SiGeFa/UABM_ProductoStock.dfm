@@ -1,6 +1,6 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 265
-  Top = 148
+  Left = 272
+  Top = 159
   Width = 870
   Height = 546
   Caption = 'ABM Producto Stock'
@@ -214,7 +214,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             FieldName = 'COD_CORTO_CABECERA'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Cabecera'
-            Visible = False
+            Visible = True
           end
           item
             Alignment = taRightJustify
@@ -222,7 +222,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             FieldName = 'COD_CORTO_PRODUCTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Producto'
-            Visible = False
+            Visible = True
           end
           item
             Alignment = taCenter
@@ -230,7 +230,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             FieldName = 'BAJA'
             Title.Alignment = taCenter
             Title.Caption = 'Baja'
-            Visible = False
+            Visible = True
           end>
       end
     end
@@ -1161,10 +1161,88 @@ object FABM_ProductoStock: TFABM_ProductoStock
   end
   object EKOrdenarGrilla: TEKOrdenarGrilla
     Grilla = DBGridStock
+    Filtros = <
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Secci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sector'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fila'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Columna'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Actual'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Minimo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Maximo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Pto Repedido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Alarma'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cabecera'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Baja'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'ABM_ProductoStock'
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 56
     Top = 136
   end

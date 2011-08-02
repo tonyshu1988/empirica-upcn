@@ -1,6 +1,6 @@
 object FBuscarProducto: TFBuscarProducto
-  Left = 378
-  Top = 215
+  Left = 388
+  Top = 234
   Width = 730
   Height = 426
   Caption = 'Buscar Producto'
@@ -18,15 +18,15 @@ object FBuscarProducto: TFBuscarProducto
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 342
     Align = alClient
     TabOrder = 0
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 712
-      Height = 334
+      Width = 720
+      Height = 340
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -139,7 +139,7 @@ object FBuscarProducto: TFBuscarProducto
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -904,9 +904,56 @@ object FBuscarProducto: TFBuscarProducto
   end
   object EKOrdenarGrilla: TEKOrdenarGrilla
     Grilla = DBGrid
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Articulo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Articulo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cabecera'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Llevar Stock'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Baja'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 32
     Top = 48
   end

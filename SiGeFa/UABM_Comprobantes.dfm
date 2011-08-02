@@ -1,6 +1,6 @@
 object FABM_Comprobantes: TFABM_Comprobantes
-  Left = 317
-  Top = 143
+  Left = 299
+  Top = 144
   Width = 892
   Height = 586
   Caption = 'ABM Comprobantes'
@@ -77,16 +77,16 @@ object FABM_Comprobantes: TFABM_Comprobantes
   object PanelFondo: TPanel
     Left = 0
     Top = 43
-    Width = 876
-    Height = 453
+    Width = 884
+    Height = 459
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 876
-      Height = 453
+      Width = 884
+      Height = 459
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -98,25 +98,25 @@ object FABM_Comprobantes: TFABM_Comprobantes
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 340
+        Left = 348
         Top = 5
         Width = 6
-        Height = 443
+        Height = 449
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 335
-        Height = 443
+        Width = 343
+        Height = 449
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 335
-          Height = 443
+          Width = 343
+          Height = 449
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -281,10 +281,10 @@ object FABM_Comprobantes: TFABM_Comprobantes
         end
       end
       object PanelCpbActual: TPanel
-        Left = 346
+        Left = 354
         Top = 5
         Width = 525
-        Height = 443
+        Height = 449
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -293,7 +293,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
           Left = 0
           Top = 0
           Width = 525
-          Height = 181
+          Height = 187
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -301,7 +301,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
             Left = 0
             Top = 0
             Width = 525
-            Height = 43
+            Height = 49
             Align = alClient
             Color = 14606012
             DataSource = DS_VerCpb_Producto
@@ -357,7 +357,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
           end
           object PanelCpbActual_ProductoDetalle: TPanel
             Left = 0
-            Top = 43
+            Top = 49
             Width = 525
             Height = 138
             Align = alBottom
@@ -615,7 +615,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
         end
         object PanelCpbActual_FPago: TPanel
           Left = 0
-          Top = 181
+          Top = 187
           Width = 525
           Height = 100
           Align = alBottom
@@ -712,7 +712,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 281
+          Top = 287
           Width = 525
           Height = 162
           Align = alBottom
@@ -907,8 +907,8 @@ object FABM_Comprobantes: TFABM_Comprobantes
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 876
-      Height = 453
+      Width = 884
+      Height = 459
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -922,12 +922,12 @@ object FABM_Comprobantes: TFABM_Comprobantes
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 866
+        Width = 874
         Height = 177
         Align = alTop
         TabOrder = 0
         DesignSize = (
-          866
+          874
           177)
         object DBTxtCPB_PuntoVenta: TDBText
           Left = 709
@@ -1789,14 +1789,14 @@ object FABM_Comprobantes: TFABM_Comprobantes
       object PanelEditar_Producto: TPanel
         Left = 5
         Top = 182
-        Width = 866
-        Height = 112
+        Width = 874
+        Height = 118
         Align = alClient
         TabOrder = 1
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
-          Top = 91
-          Width = 864
+          Top = 97
+          Width = 872
           Height = 20
           Align = alBottom
           BevelOuter = bvNone
@@ -1814,8 +1814,8 @@ object FABM_Comprobantes: TFABM_Comprobantes
         object DBGridEditar_Producto: TDBGrid
           Left = 164
           Top = 1
-          Width = 701
-          Height = 90
+          Width = 709
+          Height = 96
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbProducto
@@ -1943,14 +1943,14 @@ object FABM_Comprobantes: TFABM_Comprobantes
           Left = 1
           Top = 1
           Width = 163
-          Height = 90
+          Height = 96
           Align = alLeft
           BevelOuter = bvNone
           Caption = 'Panel1'
           TabOrder = 2
           DesignSize = (
             163
-            90)
+            96)
           object edImagen: TDBImage
             Left = 3
             Top = -11
@@ -1967,15 +1967,15 @@ object FABM_Comprobantes: TFABM_Comprobantes
       end
       object PanelEditar_FPago: TPanel
         Left = 5
-        Top = 294
-        Width = 866
+        Top = 300
+        Width = 874
         Height = 154
         Align = alBottom
         TabOrder = 2
         object PanelEditar_FPagoInfo: TPanel
           Left = 1
           Top = 133
-          Width = 864
+          Width = 872
           Height = 20
           Align = alBottom
           BevelOuter = bvNone
@@ -2014,7 +2014,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
         object DBGridEditar_Fpago: TDBGrid
           Left = 1
           Top = 1
-          Width = 864
+          Width = 872
           Height = 132
           Align = alClient
           Color = 14606012
@@ -2110,7 +2110,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 876
+    Width = 884
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -2148,7 +2148,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 766
+      Left = 774
       Top = 1
       Width = 109
       Height = 17
@@ -2165,7 +2165,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
   object PanelFiltro: TPanel
     Left = 0
     Top = 19
-    Width = 876
+    Width = 884
     Height = 24
     Align = alTop
     ParentShowHint = False
@@ -2243,7 +2243,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4470,25 +4470,170 @@ object FABM_Comprobantes: TFABM_Comprobantes
   end
   object EKOrd_VerCpb: TEKOrdenarGrilla
     Grilla = DBGridListaCpb
+    Filtros = <
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Cpb.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'PV'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Proveedor'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Saldo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'BASE_IMPONIBLE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'PORC_IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IMPORTE_IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'PORC_DESCUENTO'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IMPORTE_DESCUENTO'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Cobro'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Envio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Impreso'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Vencim.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Vendedor'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = False
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 34
     Top = 152
   end
   object EKOrd_VerCpb_Fpago: TEKOrdenarGrilla
     Grilla = DBGridCpbActual_FPago
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Cta.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cta.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Banco'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'm. Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = False
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 769
     Top = 296
   end
   object EKOrd_VerCpb_Producto: TEKOrdenarGrilla
     Grilla = DBGridCpbActual_Producto
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Final'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = False
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 769
     Top = 132
   end

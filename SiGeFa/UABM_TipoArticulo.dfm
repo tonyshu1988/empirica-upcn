@@ -1,5 +1,5 @@
 object FABM_TipoArticulo: TFABM_TipoArticulo
-  Left = 374
+  Left = 367
   Top = 243
   Width = 870
   Height = 500
@@ -22,8 +22,8 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 854
-    Height = 391
+    Width = 862
+    Height = 397
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -140,7 +140,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            703.791666666666700000
+            703.791666666666800000
             124.354166666666700000
             492.125000000000000000)
           Alignment = taCenter
@@ -172,9 +172,9 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            717.020833333333300000
-            68.791666666666670000
-            463.020833333333300000)
+            717.020833333333200000
+            68.791666666666680000
+            463.020833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -204,7 +204,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            685.270833333333300000
+            685.270833333333400000
             5.291666666666667000
             529.166666666666700000)
           Alignment = taCenter
@@ -442,7 +442,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -492,7 +492,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -540,7 +540,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -653,8 +653,8 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 854
-      Height = 391
+      Width = 862
+      Height = 397
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -668,8 +668,8 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
       object DBGridTipoArticulo: TDBGrid
         Left = 5
         Top = 5
-        Width = 844
-        Height = 348
+        Width = 852
+        Height = 354
         Align = alClient
         Color = 14606012
         DataSource = DS_TipoArt
@@ -693,8 +693,8 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 353
-        Width = 844
+        Top = 359
+        Width = 852
         Height = 33
         Align = alBottom
         BevelOuter = bvNone
@@ -736,7 +736,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 862
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -757,7 +757,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 744
+      Left = 752
       Top = 1
       Width = 109
       Height = 17
@@ -774,7 +774,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1366,9 +1366,16 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridTipoArticulo
+    Filtros = <
+      item
+        TituloColumna = 'Tipo Art'#237'culo'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 48
     Top = 243
   end
