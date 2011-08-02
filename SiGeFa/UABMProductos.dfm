@@ -3405,10 +3405,44 @@ object FABMProductos: TFABMProductos
   end
   object EKOrdenar: TEKOrdenarGrilla
     Grilla = Grilla
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo Corto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Imagen'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Descripci'#243'n'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'ABM_Productos'
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = False
+    PermitirFiltrar = True
     Left = 96
     Top = 96
   end
@@ -3987,10 +4021,68 @@ object FABMProductos: TFABMProductos
   end
   object EKOrdenarDetalle: TEKOrdenarGrilla
     Grilla = grillaDetalle
+    Filtros = <
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Corto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Descripci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barras'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Costo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Ganancia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Descuento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Impuesto Interno'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Impuesto IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Stock M'#225'ximo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Stock M'#237'nimo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Llevar Stock'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'ABM_ProductosDetalle'
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 832
     Top = 392
   end
