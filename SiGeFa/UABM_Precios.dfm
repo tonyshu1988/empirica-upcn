@@ -1503,9 +1503,9 @@ object FABM_Precios: TFABM_Precios
     end
     object DBGridProductos: TDBGrid
       Left = 1
-      Top = 44
+      Top = 1
       Width = 1014
-      Height = 605
+      Height = 648
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1677,98 +1677,6 @@ object FABM_Precios: TFABM_Precios
         TabOrder = 2
         OnClick = RadioGroupTipoCalculoClick
       end
-    end
-    object PanelFiltros: TPanel
-      Left = 1
-      Top = 15
-      Width = 1014
-      Height = 29
-      Align = alTop
-      TabOrder = 3
-      Visible = False
-      DesignSize = (
-        1014
-        29)
-      object btAplicarFiltros: TButton
-        Left = 906
-        Top = 3
-        Width = 102
-        Height = 22
-        Anchors = [akTop, akRight]
-        Caption = 'Aplicar Filtros'
-        TabOrder = 0
-        OnClick = btAplicarFiltrosClick
-      end
-      object CBIVA: TCheckBox
-        Left = 485
-        Top = 9
-        Width = 54
-        Height = 17
-        Caption = 'I.V.A.'
-        Checked = True
-        State = cbChecked
-        TabOrder = 1
-      end
-      object CBCoefDescuento: TCheckBox
-        Left = 544
-        Top = 9
-        Width = 116
-        Height = 17
-        Caption = 'Coef. Descuento'
-        Checked = True
-        State = cbChecked
-        TabOrder = 2
-      end
-      object CBImpuestoInterno: TCheckBox
-        Left = 665
-        Top = 9
-        Width = 122
-        Height = 17
-        Caption = 'Impuesto Interno'
-        Checked = True
-        State = cbChecked
-        TabOrder = 3
-      end
-      object CBCoefGanancia: TCheckBox
-        Left = 372
-        Top = 9
-        Width = 108
-        Height = 17
-        Caption = 'Coef. Ganancia'
-        Checked = True
-        State = cbChecked
-        TabOrder = 4
-      end
-      object CBImporteVenta: TCheckBox
-        Left = 265
-        Top = 9
-        Width = 102
-        Height = 17
-        Caption = 'Importe Venta'
-        Checked = True
-        State = cbChecked
-        TabOrder = 5
-      end
-      object CBImporteCosto: TCheckBox
-        Left = 159
-        Top = 9
-        Width = 102
-        Height = 17
-        Caption = 'Importe costo'
-        Checked = True
-        State = cbChecked
-        TabOrder = 6
-      end
-    end
-    object HabilitarFiltros: TPanel
-      Left = 1
-      Top = 1
-      Width = 1014
-      Height = 14
-      Align = alTop
-      Caption = 'FILTROS'
-      TabOrder = 4
-      OnClick = HabilitarFiltrosClick
     end
   end
   object dxBarABM: TdxBarManager
@@ -2662,9 +2570,65 @@ object FABM_Precios: TFABM_Precios
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridProductos
+    Filtros = <
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Articulo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Articulo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Costo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Coef. Ganancia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'I.V.A.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Coef. Descuento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Impuesto Interno'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod. Corto'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_Precios'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = False
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 616
     Top = 136
   end
@@ -2887,19 +2851,5 @@ object FABM_Precios: TFABM_Precios
     object CDSZQ_Productoscoef_ganancia: TFloatField
       FieldName = 'coef_ganancia'
     end
-  end
-  object EKUsrPermisos1: TEKUsrPermisos
-    Objetos = <
-      item
-        Objeto = HabilitarFiltros
-        Clave = 'HABILITAR_FILTROS'
-        Accion = EKEnabled
-      end>
-    Left = 736
-    Top = 136
-  end
-  object EKIniGuardarFiltros: TEKIni
-    Left = 904
-    Top = 128
   end
 end
