@@ -314,6 +314,8 @@ type
     IntegerField1: TIntegerField;
     BlobField1: TBlobField;
     StringField9: TStringField;
+    lblSinStock: TLabel;
+    ZQ_ProductosSTOCK_ACTUAL: TFloatField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -448,6 +450,7 @@ end;
 function TFCajero.agregar(detalle: string;prod:integer):Boolean;
 begin
 
+  calcularMonto();
   CD_DetalleFactura.Append;
   CD_DetalleFacturaID_PRODUCTO.AsInteger:=prod;
   CD_DetalleFacturaDETALLE.AsString:=detalle;
@@ -491,15 +494,24 @@ if IdVendedor<0 then
    exit;
  end;
 
-if (not(ZQ_Productos.IsEmpty)and(edCantidad.AsInteger>0)) then
-  if agregar('',ZQ_ProductosID_PRODUCTO.AsInteger) then
-    begin
+if ((not(ZQ_Productos.IsEmpty))and(edCantidad.AsInteger>0)) then
+ if (ZQ_ProductosSTOCK_ACTUAL.AsFloat>=edCantidad.AsInteger) then
+   begin
+    if agregar('',ZQ_ProductosID_PRODUCTO.AsInteger) then
+     begin
       LimpiarCodigo;
       codBarras.SetFocus;
       BtAgregarPago.Enabled := true;
       BtAceptarPago.Enabled := true;
       BtCancelarPago.Enabled := true;
-    end
+     end
+   end
+  else
+    begin
+    Application.MessageBox('El stock actual del producto es insuficiente para la cantidad ingresada.', 'Atención');
+    edCantidad.SetFocus;
+    exit;
+ end;
 end;
 
 
@@ -555,7 +567,7 @@ begin
   edDesc.AsFloat:=descCliente*100;
   edImporte.AsFloat:=0;
   codBarras.SetFocus;
-
+  lblSinStock.Visible:=false;
 end;
 
 procedure TFCajero.codBarrasExit(Sender: TObject);
@@ -620,7 +632,8 @@ var
 begin
   
 
-  //fecha := dateof(FechaPago.DateTime);
+  lblSinStock.Visible:=False;
+
   LimpiarCodigo;
   IdProd:=-1;
   try
@@ -641,6 +654,7 @@ begin
 
   if not(ZQ_Productos.IsEmpty) then
    begin
+      lblSinStock.Visible:=ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0;
       edDesc.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat+descCliente)*100;
       calcularMonto();
    end
