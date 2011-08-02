@@ -1,6 +1,6 @@
 object FABM_Sucursal: TFABM_Sucursal
-  Left = 265
-  Top = 175
+  Left = 258
+  Top = 166
   Width = 877
   Height = 573
   Caption = 'ABM Sucursal'
@@ -22,8 +22,8 @@ object FABM_Sucursal: TFABM_Sucursal
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 861
-    Height = 464
+    Width = 869
+    Height = 470
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -143,7 +143,7 @@ object FABM_Sucursal: TFABM_Sucursal
             50.270833333333330000
             793.750000000000000000
             124.354166666666700000
-            312.208333333333300000)
+            312.208333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -174,7 +174,7 @@ object FABM_Sucursal: TFABM_Sucursal
           Size.Values = (
             52.916666666666670000
             746.125000000000000000
-            68.791666666666670000
+            68.791666666666680000
             404.812500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -205,7 +205,7 @@ object FABM_Sucursal: TFABM_Sucursal
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            724.958333333333300000
+            724.958333333333400000
             5.291666666666667000
             449.791666666666700000)
           Alignment = taCenter
@@ -268,7 +268,7 @@ object FABM_Sucursal: TFABM_Sucursal
             37.041666666666670000
             13.229166666666670000
             0.000000000000000000
-            645.583333333333300000)
+            645.583333333333200000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -293,9 +293,9 @@ object FABM_Sucursal: TFABM_Sucursal
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            672.041666666666700000
+            672.041666666666800000
             0.000000000000000000
-            621.770833333333300000)
+            621.770833333333200000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -497,7 +497,7 @@ object FABM_Sucursal: TFABM_Sucursal
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -547,7 +547,7 @@ object FABM_Sucursal: TFABM_Sucursal
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -595,7 +595,7 @@ object FABM_Sucursal: TFABM_Sucursal
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -683,7 +683,7 @@ object FABM_Sucursal: TFABM_Sucursal
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            672.041666666666700000
+            672.041666666666800000
             5.291666666666667000
             378.354166666666700000)
           Alignment = taLeftJustify
@@ -772,8 +772,8 @@ object FABM_Sucursal: TFABM_Sucursal
     object DBGridSucursal: TDBGrid
       Left = 5
       Top = 5
-      Width = 851
-      Height = 208
+      Width = 859
+      Height = 214
       Align = alClient
       Color = 14606012
       DataSource = DS_Sucursal
@@ -836,8 +836,8 @@ object FABM_Sucursal: TFABM_Sucursal
     end
     object PageControl1: TPageControl
       Left = 5
-      Top = 213
-      Width = 851
+      Top = 219
+      Width = 859
       Height = 246
       ActivePage = TabSheetDatosReportes
       Align = alBottom
@@ -1074,7 +1074,7 @@ object FABM_Sucursal: TFABM_Sucursal
         object GroupBox1: TGroupBox
           Left = 0
           Top = 76
-          Width = 843
+          Width = 851
           Height = 142
           Align = alClient
           Caption = '  Configuraci'#243'n de Comprobantes  '
@@ -1230,7 +1230,7 @@ object FABM_Sucursal: TFABM_Sucursal
         object GroupBox2: TGroupBox
           Left = 0
           Top = 0
-          Width = 843
+          Width = 851
           Height = 76
           Align = alTop
           Caption = '  Configuraci'#243'n de Reportes  '
@@ -1301,7 +1301,7 @@ object FABM_Sucursal: TFABM_Sucursal
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 861
+    Width = 869
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1322,7 +1322,7 @@ object FABM_Sucursal: TFABM_Sucursal
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 751
+      Left = 759
       Top = 1
       Width = 109
       Height = 17
@@ -1339,7 +1339,7 @@ object FABM_Sucursal: TFABM_Sucursal
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1980,9 +1980,36 @@ object FABM_Sucursal: TFABM_Sucursal
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridSucursal
+    Filtros = <
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod. Postal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fono'
+        Visible = True
+      end
+      item
+        TituloColumna = 'eMail'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 152
     Top = 72
   end
