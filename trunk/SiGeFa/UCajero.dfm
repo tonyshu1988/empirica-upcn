@@ -52,10 +52,10 @@ object FCajero: TFCajero
         Width = 160
         Height = 13
         Caption = 'LEER CODIGO DE BARRAS'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clRed
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
         Visible = False
@@ -111,6 +111,21 @@ object FCajero: TFCajero
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
+      end
+      object lblSinStock: TLabel
+        Left = 96
+        Top = 286
+        Width = 98
+        Height = 18
+        Caption = 'SIN STOCK'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+        Visible = False
       end
       object edImagen: TDBImage
         Left = 2
@@ -1107,7 +1122,7 @@ object FCajero: TFCajero
         'p.cod_corto, p.codigo_barra,pc.imagen'
       
         ',pc.nombre||'#39'  -  M: '#39'||coalesce(m.medida,'#39#39')||'#39'  -  CB:'#39'||coale' +
-        'sce(p.codigo_barra,'#39#39') DETALLE_PROD'
+        'sce(p.codigo_barra,'#39#39') DETALLE_PROD, sp.stock_actual'
       'from producto p'
       'join stock_producto sp on (sp.id_producto=p.id_producto)'
       
@@ -1124,8 +1139,7 @@ object FCajero: TFCajero
       'left join marca ma on (pc.id_marca = ma.id_marca)'
       
         'where (pc.baja <> '#39'S'#39')and(ps.punto_salida='#39'S'#39')and(p.id_producto=' +
-        ':prod)and(sp.stock_actual>0)'
-      ''
+        ':prod)'
       '')
     Params = <
       item
@@ -1203,6 +1217,9 @@ object FCajero: TFCajero
       FieldName = 'DETALLE_PROD'
       ReadOnly = True
       Size = 186
+    end
+    object ZQ_ProductosSTOCK_ACTUAL: TFloatField
+      FieldName = 'STOCK_ACTUAL'
     end
   end
   object DS_Productos: TDataSource
