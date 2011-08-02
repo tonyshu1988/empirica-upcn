@@ -1,0 +1,12 @@
+C = 250
+Cant = 5
+	50
+	50
+	50
+	50
+	50
+FP = 40
+(50*0,16)
+K = (40/250)  = 0,16 = FP/C
+
+Al ultimo en vez de hacerle (50*0,16) hago Valor-(Valor*K)
