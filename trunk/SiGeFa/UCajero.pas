@@ -445,6 +445,14 @@ begin
   if not(ProductoYaCargado(prod)) then
     begin
         calcularMonto();
+
+        if edImporte.AsFloat<=0 then
+         begin
+           Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
+           edImporte.SetFocus;
+           Result:=False;
+           exit;
+         end;
         CD_DetalleFactura.Append;
         CD_DetalleFacturaID_PRODUCTO.AsInteger:=prod;
         CD_DetalleFacturaDETALLE.AsString:=detalle;
@@ -489,12 +497,7 @@ if IdVendedor<0 then
    exit;
  end;
 
-if edImporte.AsFloat<=0 then
- begin
-   Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
-   edImporte.SetFocus;
-   exit;
- end;
+
 
 if ((not(ZQ_Productos.IsEmpty))and(edCantidad.AsInteger>0)) then
  if (ZQ_ProductosSTOCK_ACTUAL.AsFloat>=edCantidad.AsInteger) then
@@ -598,14 +601,14 @@ begin
   end
   else
     // POR NUMERO DE ProductoDetalle
-    if Length(cod) < 20 then
+    if (Length(cod) <= LONG_CODIGO) then
       begin
         //LeerCodigoID(strtoint(Cod));
         LeerCodigo
       end
     else
       // POR CODIGO DE BARRAS PRODUCTO
-      if Length(cod) = 20 then
+      if (Length(cod) <= LONG_COD_BARRAS) then
       begin
         // Verificar Sucursal (Primeros 3 digitos del codigo de barra)
     //    codSuc := UpperCase(MidStr(Cod, 1, 3));
@@ -617,7 +620,7 @@ begin
         LeerCodigo;
       end
       else
-       if (Length(codBarras.Text) > 20) then
+       if (Length(cod) > LONG_COD_BARRAS) then
         begin
           Application.MessageBox('Longitud de código incorrecta', 'Error');
           LimpiarCodigo;
