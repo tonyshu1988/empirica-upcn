@@ -108,6 +108,8 @@ Const
   ESTADO_CONFIRMADO     = 2;
   ESTADO_ALMACENADO     = 3;  
 
+  LONG_COD_BARRAS       = 40;
+  LONG_CODIGO           = 14;
 implementation
 
 uses UPrincipal, USeleccionarSucursal, UPanelNotificacion, IniFiles;
