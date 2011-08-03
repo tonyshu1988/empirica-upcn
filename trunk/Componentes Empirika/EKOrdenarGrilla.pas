@@ -262,6 +262,7 @@ begin
   begin
     try
       aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
+      aplicacion:= LeftStr(aplicacion, (Length(aplicacion)-4));
       Registro:= TRegistry.Create;
       Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\FiltrarGrilla\'+FGrilla.Name, TRUE);
                     //Ej: \Software\EmpiriKa\Sigefa\FiltrarGrilla\DBGridComprobante\
@@ -294,6 +295,7 @@ begin
   begin
     try
       aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
+      aplicacion:= LeftStr(aplicacion, (Length(aplicacion)-4));
       Registro:= TRegistry.Create;
       Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\FiltrarGrilla\'+FGrilla.Name, TRUE);
 
@@ -335,6 +337,7 @@ begin
   begin
     try
       aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
+      aplicacion:= LeftStr(aplicacion, (Length(aplicacion)-4));
       Registro:= TRegistry.Create;
       Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\OrdenarGrilla\'+FGrilla.Name, TRUE);
                   //Ej: \Software\EmpiriKa\Sigefa\OrdenarGrilla\DBGridComprobante\
@@ -364,6 +367,7 @@ begin
   begin
     try
       aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
+      aplicacion:= LeftStr(aplicacion, (Length(aplicacion)-4));
       Registro:= TRegistry.Create;
       Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\OrdenarGrilla\'+FGrilla.Name, TRUE);
                   //Ej: \Software\EmpiriKa\Sigefa\OrdenarGrilla\DBGridComprobante\
