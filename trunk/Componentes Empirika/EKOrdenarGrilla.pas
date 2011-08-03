@@ -76,6 +76,7 @@ type //El componente ordenar grilla
     procedure DBGridGiraLaRueda(var Message: TMessage); //para usar la rueda del mouse para desplazarce por la grilla
   protected
     { Protected declarations }
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -255,20 +256,23 @@ procedure TEKOrdenarGrilla.GuardarFiltro();
 var
   Registro :TRegistry;
   F        :Byte;
+  aplicacion: string;
 begin
   if FNombreGuardar > '' then //si puse un nombre para guardar
   begin
     try
+      aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
       Registro:= TRegistry.Create;
-      Registro.OpenKey('\Software\EmpiriKa\'+ExtractFileName(Application.Exename)+'\FiltroGrilla', TRUE);
+      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\FiltrarGrilla\'+FGrilla.Name, TRUE);
+                    //Ej: \Software\EmpiriKa\Sigefa\FiltrarGrilla\DBGridComprobante\
 
       for F:= 0 to FFiltros.Count - 1 do //Por cada uno de los filtros cargados
       begin
         with TEKColumna(FFiltros.Items[F]) do
           if FVisible then //si la columna esta visible
-            Registro.WriteString(FNombreGuardar+FGrilla.Name+'['+IntToStr(F)+']', 'TRUE')
+            Registro.WriteString(FNombreGuardar+'_'+FTituloColumna, 'TRUE')
           else //si la columna no esta visible
-            Registro.WriteString(FNombreGuardar+FGrilla.Name+'['+IntToStr(F)+']', 'FALSE');
+            Registro.WriteString(FNombreGuardar+'_'+FTituloColumna, 'FALSE')
       end;
 
       Registro.Free;
@@ -283,22 +287,105 @@ procedure TEKOrdenarGrilla.CargarFiltro();
 var
   Registro: TRegistry;
   F: Byte;
+  aplicacion, titulo: string;
+  columna: integer;
 begin
   if FNombreGuardar > '' then //si puse un nombre para guardar
   begin
     try
+      aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
       Registro:= TRegistry.Create;
-      Registro.OpenKey('\Software\EmpiriKa\'+ExtractFileName(Application.Exename)+'\FiltroGrilla', TRUE);
+      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\FiltrarGrilla\'+FGrilla.Name, TRUE);
 
       for F:= 0 to FFiltros.Count - 1 do //Por cada uno de los filtros cargados
       begin
         with TEKColumna(FFiltros.Items[F]) do
-          if Registro.ReadString(FNombreGuardar+Grilla.Name+'['+IntToStr(F)+']') <> '' then
+          if Registro.ValueExists(FNombreGuardar+'_'+FTituloColumna) then //si existe el registro
           begin
-            FVisible:= StrToBool(Registro.ReadString(FNombreGuardar+Grilla.Name+'['+IntToStr(F)+']'));
-            FGrilla.Columns[F].Visible:= FVisible;
-            FPopupMenu.Items[F].Checked:= FVisible;
+            FVisible:= StrToBool(Registro.ReadString(FNombreGuardar+'_'+FTituloColumna));
+
+            titulo:= FTituloColumna;
+            delete(titulo, pos('&', titulo), 1);
+            columna:= GetIndex(FGrilla, titulo); //busco el indice en la grilla del titulo pasado como parametro
+            if columna >= 0 then //si encuentro la columna
+            begin
+              FGrilla.Columns[columna].Visible:= FVisible; //seteo el estado de la columna a visible o no
+              FPopupMenu.Items[F].Checked:= FVisible;
+            end
+            else //si no encuentro la columna
+              FPopupMenu.Items.Delete(F); //elimino la opcion correspondiente del popup
           end
+      end;
+
+      Registro.Free;
+    except
+    end;
+  end;
+end;
+
+
+//Guarda el tamaño de las columnas y las posiciones de las mismas en la PC
+procedure TEKOrdenarGrilla.GuardarConfigColumnas();
+var
+  Registro :TRegistry;
+  F        :Byte;
+  aplicacion: string;
+begin
+  if FNombreGuardar > '' then //si puse un nombre para guardar
+  begin
+    try
+      aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
+      Registro:= TRegistry.Create;
+      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\OrdenarGrilla\'+FGrilla.Name, TRUE);
+                  //Ej: \Software\EmpiriKa\Sigefa\OrdenarGrilla\DBGridComprobante\
+
+      for F:=0 to FGrilla.Columns.Count-1 do //por cada una de las columnas de la grilla
+      begin
+        Registro.WriteInteger(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Width', FGrilla.Columns[F].Width); //guardo el tamaño
+        Registro.WriteInteger(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Index', F); //guardo el indice
+      end;
+
+      Registro.Free;
+    except
+    end;
+  end;
+end;
+
+
+//Carga el tamaño de las columnas y las posiciones de las mismas desde la PC
+procedure TEKOrdenarGrilla.CargarConfigColunmas();
+var
+  Registro: TRegistry;
+  F: Byte;
+  aplicacion: string;
+  auxTitulos: array of String;
+begin
+  if FNombreGuardar > '' then //si puse un nombre para guardar
+  begin
+    try
+      aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
+      Registro:= TRegistry.Create;
+      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\OrdenarGrilla\'+FGrilla.Name, TRUE);
+                  //Ej: \Software\EmpiriKa\Sigefa\OrdenarGrilla\DBGridComprobante\
+
+      //para cargar el tamaño de la columna
+      for F:=0 to FGrilla.Columns.Count-1 do //por cada uno de las columnas de la grilla
+      begin
+        if Registro.ValueExists(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Width') then //si existe el valor en el registro
+          FGrilla.Columns[F].Width:= Registro.ReadInteger(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Width');
+      end;
+
+      SetLength(auxTitulos, FGrilla.Columns.Count);
+      for F:= 0 to Length(auxTitulos)-1 do
+      begin
+        auxTitulos[F]:= (FGrilla.Columns[F].Title.Caption);
+      end;
+
+      //para cargar el indice de la columna
+      for F:=0 to Length(auxTitulos)-1 do //por cada uno de las columnas de la grilla
+      begin
+        if Registro.ValueExists(FNombreGuardar+'_'+auxTitulos[F]+'_Index') then //si existe el valor en el registro
+          FGrilla.Columns[GetIndex(FGrilla, auxTitulos[F])].Index:= Registro.ReadInteger(FNombreGuardar+'_'+auxTitulos[F]+'_index');
       end;
 
       Registro.Free;
@@ -387,6 +474,11 @@ begin
   for i:= 0 to grilla.Columns.Count - 1 do
   begin
     TEKColumna(FFiltros.Add).FTituloColumna:= grilla.Columns[i].Title.Caption;
+    FFiltros[i].FVisible:= grilla.Columns[i].Visible;
+//    itemNuevo:= TEKColumna.Create(nil);
+//    itemNuevo.FTituloColumna:= grilla.Columns[i].Title.Caption;
+//    itemNuevo.FVisible:= grilla.Columns[i].Visible;
+//    TEKColumna(FFiltros.Add):= itemNuevo;
   end
 end;
 
@@ -450,61 +542,6 @@ begin
 end;
 
 
-//Guarda el tamaño de las columnas y las posiciones de las mismas en la PC
-procedure TEKOrdenarGrilla.GuardarConfigColumnas();
-var
-  Registro :TRegistry;
-  F        :Byte;
-begin
-//  if FNombreGuardar > '' then //si puse un nombre para guardar
-//  begin
-//    try
-//      Registro:= TRegistry.Create;
-//      Registro.OpenKey('\Software\EmpiriKa\'+ExtractFileName(Application.Exename)+'\OrdenarGrilla', TRUE);
-//
-//      for F:=0 to Grilla.Columns.Count-1 do //por cada una de las columnas de la grilla
-//        Registro.WriteInteger(FNombreGuardar+Grilla.Name+'['+IntToStr(F)+']',Grilla.Columns[F].Width);
-//      Registro.Free;
-//
-////      for F:= 0 to FFiltros.Count - 1 do //Por cada uno de los filtros cargados
-////      begin
-////        with TEKColumna(FFiltros.Items[F]) do
-////          if FVisible then //si la columna esta visible
-////            Registro.WriteString(FNombreGuardar+FGrilla.Name+'['+IntToStr(F)+']', 'TRUE')
-////          else //si la columna no esta visible
-////            Registro.WriteString(FNombreGuardar+FGrilla.Name+'['+IntToStr(F)+']', 'FALSE');
-////      end;
-//
-//      Registro.Free;
-//    except
-//    end;
-//  end;
-end;
-
-
-//Carga el tamaño de las columnas y las posiciones de las mismas desde la PC
-procedure TEKOrdenarGrilla.CargarConfigColunmas();
-var
-  Registro :TRegistry;
-  F        :Byte;
-begin
-//  if FNombreGuardar > '' then
-//  begin
-//    Registro:=TRegistry.Create;
-//    Registro.OpenKey( '\Software\EmpiriKa\'+ ExtractFileName(Application.Exename)+'\Grids', False);
-//    if Registro.ValueExists(FNombreGuardar+Grilla.Name+'[0]') then
-//      for F:=0 to Grilla.Columns.Count-1 do
-//      begin
-//        try
-//          Grilla.Columns[F].Width:=Registro.ReadInteger(FNombreGuardar+Grilla.Name+'['+IntToStr(F)+']');
-//        except
-//        end;
-//      end;
-//    Registro.Free;
-//  end;
-end;
-
-
 //Cuando hago click en el titulo de la grilla
 procedure TEKOrdenarGrilla.TitleClick(Column: TColumn);
 var
@@ -513,6 +550,12 @@ var
     buscar : string;
     PulsoOk : boolean;
 begin
+    if not Assigned(column.Field) then
+    begin
+      ShowMessage('No se puede ordenar ni buscar sobre este tipo de campo');
+      exit;
+    end;
+
     if column.Field.FieldKind = fkLookup then   // saco los lockup porque dan error
     begin
       ShowMessage('No se puede ordenar ni buscar sobre este tipo de campo (lookup)');
@@ -569,6 +612,23 @@ begin
       TClientDataSet(FGrilla.DataSource.DataSet).IndexFieldNames := filtro
     else
        TZQuery(FGrilla.DataSource.DataSet).SortedFields := filtro;
+end;
+
+
+procedure TEKOrdenarGrilla.Notification(AComponent: TComponent; Operation: TOperation);
+var
+  I: Integer;
+  NeedLayout: Boolean;
+begin
+  inherited Notification(AComponent, Operation);
+
+  if (Operation = opRemove) then
+  begin
+    if (AComponent is TDBGrid) then
+    begin
+      FGrilla:= nil;
+    end
+  end;
 end;
 
 end.
