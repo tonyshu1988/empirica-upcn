@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB, DBClient, UBuscarProductoStock,
   EKLlenarCombo, ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls,
-  EKListadoSQL, ComCtrls, ZSqlUpdate, ZStoredProcedure;
+  EKListadoSQL, ComCtrls, ZSqlUpdate, ZStoredProcedure, EKOrdenarGrilla;
 
 type
   TFTransferirStock = class(TForm)
@@ -41,11 +41,9 @@ type
     CD_Productostockactual: TFloatField;
     CD_Productocantidad: TFloatField;
     EKListado_Sucursal: TEKListadoSQL;
-    CBoxSucursal: TComboBox;
     ZQ_Sucursal: TZQuery;
     ZQ_SucursalID_POSICION_SUCURSAL: TIntegerField;
     ZQ_SucursalBUSQUEDA: TStringField;
-    EKLlenarComboSucursal: TEKLlenarCombo;
     CD_ProductoidStockProducto: TIntegerField;
     CD_ProductoidPosicionSucursal: TIntegerField;
     CD_ProductostockMin: TFloatField;
@@ -150,6 +148,9 @@ type
     ZQ_NotaPedidoUpdateEstado: TZQuery;
     ZQ_ProcesarStock: TZQuery;
     Label1: TLabel;
+    EditSucursal: TEdit;
+    EKOrdenarGrillaProductos: TEKOrdenarGrilla;
+    EKOrdenarGrillaNotaPedidoDetalle: TEKOrdenarGrilla;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAsociarClick(Sender: TObject);
@@ -162,7 +163,7 @@ type
     procedure CD_NotaPedidoDetalleCalcFields(DataSet: TDataSet);
     procedure PageControlTransferirChange(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure CBoxSucursalKeyDown(Sender: TObject; var Key: Word;
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
   private
     vsel: TFBuscarProductoStock;
@@ -173,6 +174,7 @@ type
 
 var
   FTransferirStock: TFTransferirStock;
+  id_pos_sucursal : integer;
 
 const
   Transaccion_TransferirStock = 'TRANSFERIR STOCK';
@@ -233,16 +235,25 @@ end;
 
 procedure TFTransferirStock.FormCreate(Sender: TObject);
 begin
-  EKLlenarComboSucursal.CargarCombo;
-  EKLlenarComboSucursal.SetItem(0);
   PageControlTransferir.TabIndex := 0;
   CD_Producto.CreateDataSet;
   CD_NotaPedidoDetalle.CreateDataSet;
+
+  EKOrdenarGrillaProductos.CargarFiltro;
+  EKOrdenarGrillaProductos.CargarConfigColunmas;
+  EKOrdenarGrillaNotaPedidoDetalle.CargarFiltro;
+  EKOrdenarGrillaNotaPedidoDetalle.CargarConfigColunmas;
 end;
 
 
 procedure TFTransferirStock.btnAsociarClick(Sender: TObject);
 begin
+    if id_pos_sucursal = 0 then
+    begin
+      ShowMessage('Debe Seleccionar una sucural a la cual transferir los productos.'+#13+'PRESIONE F1 para desplegar el Listado');
+      exit;
+    end;
+
     if PageControlTransferir.TabIndex = 0 then
     begin
       CD_Producto.First;
@@ -253,7 +264,7 @@ begin
 
         CD_Producto.Next;
       end;
-           
+
       if CD_Producto.IsEmpty then
       exit;
     end
@@ -284,7 +295,7 @@ begin
           ZQ_ProcesarStock.Close;
           ZQ_ProcesarStock.ParamByName('id_stock_prod').AsInteger:= CD_ProductoidStockProducto.AsInteger;
           ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_Producto_idProducto.AsInteger;
-          ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= StrToInt(EKLlenarComboSucursal.SelectClave);
+          ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
 
           if CD_Productocantidad.AsFloat <= CD_Productostockactual.AsFloat then
             ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_Productocantidad.AsFloat
@@ -310,7 +321,7 @@ begin
           ZQ_ProcesarStock.Close;
           ZQ_ProcesarStock.ParamByName('id_stock_prod').Clear;
           ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_NotaPedidoDetalleid_producto.AsInteger;
-          ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= StrToInt(EKLlenarComboSucursal.SelectClave);
+          ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
 
           if CD_NotaPedidoDetallecantidad_a_almacenar.AsFloat >= 0 then
             ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_NotaPedidoDetallealmacenar.AsFloat
@@ -456,20 +467,24 @@ end;
 
 procedure TFTransferirStock.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
+  EKOrdenarGrillaProductos.GuardarFiltro;
+  EKOrdenarGrillaProductos.GuardarConfigColumnas;
+  EKOrdenarGrillaNotaPedidoDetalle.GuardarFiltro;
+  EKOrdenarGrillaNotaPedidoDetalle.GuardarConfigColumnas;
+
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_TransferirStock);
 end;
 
-procedure TFTransferirStock.CBoxSucursalKeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
+procedure TFTransferirStock.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if key = 113 then
+  if key = 112 then
   begin
     if EKListado_Sucursal.Buscar then
     begin
-      EKLlenarComboSucursal.SelectClave := EKListado_Sucursal.Resultado;
-      //CBoxSucursal.Text := EKListado_Sucursal.Resultado;
+      id_pos_sucursal := StrToInt(EKListado_Sucursal.Resultado);
+      EditSucursal.Text := EKListado_Sucursal.Seleccion;
     end;
-  end; 
+  end;
 end;
 
 end.

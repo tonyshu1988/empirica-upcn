@@ -16,6 +16,7 @@ object FTransferirStock: TFTransferirStock
   Visible = True
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object PanelContenedor: TPanel
@@ -52,6 +53,26 @@ object FTransferirStock: TFTransferirStock
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           Columns = <
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codCabecera'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Cabecera'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codProducto'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Producto'
+              Width = 100
+              Visible = True
+            end
             item
               Expanded = False
               FieldName = 'producto'
@@ -117,26 +138,7 @@ object FTransferirStock: TFTransferirStock
               Visible = True
             end
             item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = 'codProducto'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Producto'
-              Width = 100
-              Visible = True
-            end
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = 'codCabecera'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Cabecera'
-              Width = 100
-              Visible = True
-            end
-            item
+              Color = 16767411
               Expanded = False
               FieldName = 'stockactual'
               ReadOnly = True
@@ -144,6 +146,7 @@ object FTransferirStock: TFTransferirStock
               Visible = True
             end
             item
+              Color = 11796403
               Expanded = False
               FieldName = 'cantidad'
               Title.Caption = 'Cantidad'
@@ -196,6 +199,7 @@ object FTransferirStock: TFTransferirStock
               Visible = True
             end
             item
+              Color = 10813348
               Expanded = False
               FieldName = 'cantidad_recibida'
               ReadOnly = True
@@ -203,6 +207,7 @@ object FTransferirStock: TFTransferirStock
               Visible = True
             end
             item
+              Color = 12058623
               Expanded = False
               FieldName = 'cantidad_almacenada'
               ReadOnly = True
@@ -216,6 +221,7 @@ object FTransferirStock: TFTransferirStock
               Visible = True
             end
             item
+              Color = 12900349
               Expanded = False
               FieldName = 'almacenar'
               Title.Caption = 'Almacenar'
@@ -322,36 +328,23 @@ object FTransferirStock: TFTransferirStock
             end
             item
               Expanded = False
-              FieldName = 'SUCURSAL'
-              Title.Caption = 'Sucursal'
-              Width = 155
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'PROVEEDOR'
               Title.Caption = 'Proveedor'
-              Width = 109
+              Width = 276
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CUIT_PROVEEDOR'
               Title.Caption = 'Cuit Proveedor'
-              Width = 127
+              Width = 105
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'VENDEDOR'
-              Title.Caption = 'Vendedor'
-              Width = 110
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PUNTO_VENTA'
-              Title.Caption = 'Punto Vta'
+              FieldName = 'SUCURSAL'
+              Title.Caption = 'Sucursal'
+              Width = 213
               Visible = True
             end>
         end
@@ -365,21 +358,25 @@ object FTransferirStock: TFTransferirStock
       Align = alTop
       TabOrder = 1
       object Label1: TLabel
-        Left = 494
-        Top = 10
-        Width = 293
-        Height = 13
-        Caption = 'Presione F1 para desplegar el listado de sucursales'
+        Left = 508
+        Top = 7
+        Width = 277
+        Height = 16
+        Caption = 'Presione F1 para seleccionar una sucursal'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
       end
-      object CBoxSucursal: TComboBox
-        Left = 5
-        Top = 6
-        Width = 481
+      object EditSucursal: TEdit
+        Left = 7
+        Top = 4
+        Width = 490
         Height = 21
-        Style = csDropDownList
-        ItemHeight = 13
+        ReadOnly = True
         TabOrder = 0
-        OnKeyDown = CBoxSucursalKeyDown
       end
     end
   end
@@ -1049,14 +1046,6 @@ object FTransferirStock: TFTransferirStock
       Size = 334
     end
   end
-  object EKLlenarComboSucursal: TEKLlenarCombo
-    dataset = ZQ_Sucursal
-    combo = CBoxSucursal
-    CampoClave = 'ID_POSICION_SUCURSAL'
-    CampoVer = 'BUSQUEDA'
-    Left = 265
-    Top = 65
-  end
   object ZQ_Nota_Pedido_Detalle: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -1567,5 +1556,129 @@ object FTransferirStock: TFTransferirStock
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
+  end
+  object EKOrdenarGrillaProductos: TEKOrdenarGrilla
+    Grilla = DBGridProducto
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Cabecera'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Stock Actual'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end>
+    NombreGuardar = 'TransferirStock_Productos'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 117
+    Top = 258
+  end
+  object EKOrdenarGrillaNotaPedidoDetalle: TEKOrdenarGrilla
+    Grilla = DBGridNotaPedidoDetalle
+    Filtros = <
+      item
+        TituloColumna = 'Cantidad Pedida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad Recibida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad Almacenada'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad por Almacenar'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Almacenar'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Articulo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Articulo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod Cabecera'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod Barra'
+        Visible = True
+      end>
+    NombreGuardar = 'TransferirStock_NotaPedido'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 117
+    Top = 210
   end
 end

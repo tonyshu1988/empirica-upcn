@@ -1519,8 +1519,10 @@ object FABM_Precios: TFABM_Precios
       Columns = <
         item
           Expanded = False
-          FieldName = 'ID_PRODUCTO'
-          Title.Caption = 'ID'
+          FieldName = 'COD_CORTO'
+          ReadOnly = True
+          Title.Caption = 'Cod. Corto'
+          Width = 88
           Visible = True
         end
         item
@@ -1597,14 +1599,6 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'IMPUESTO_INTERNO'
           Title.Caption = 'Impuesto Interno'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COD_CORTO'
-          ReadOnly = True
-          Title.Caption = 'Cod. Corto'
-          Width = 88
           Visible = True
         end>
     end
