@@ -14,15 +14,15 @@ type
     PanelContenedor: TPanel;
     DBGridPersonas: TDBGrid;
     dxBarABM: TdxBarManager;
-    BtSeleccionar: TdxBarLargeButton;
-    BtCrearPersona: TdxBarLargeButton;
+    btnSeleccionar: TdxBarLargeButton;
+    btnCrearPersona: TdxBarLargeButton;
     btBaja: TdxBarLargeButton;
-    btBuscar: TdxBarLargeButton;
-    BtGuardar: TdxBarLargeButton;
-    BtCancelar: TdxBarLargeButton;
+    btnBuscar: TdxBarLargeButton;
+    btnGuardar: TdxBarLargeButton;
+    btnCancelar: TdxBarLargeButton;
     BtImprimir: TdxBarLargeButton;
     btReactivar: TdxBarLargeButton;
-    btsalir: TdxBarLargeButton;
+    btnSalir: TdxBarLargeButton;
     btverbajados: TdxBarLargeButton;
     BtBusquedaNueva: TdxBarLargeButton;
     btnSiguiente: TdxBarLargeButton;
@@ -92,18 +92,19 @@ type
     DS_TipoDoc: TDataSource;
     ZQ_TipoDocID_TIPO_DOC: TIntegerField;
     ZQ_TipoDocNOMBRE_TIPO_DOC: TStringField;
-    EKBusquedaAvanzada1: TEKBusquedaAvanzada;
+    EKBusqueda: TEKBusquedaAvanzada;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     Nro_Persona: TZStoredProc;
     Nro_PersonaID: TIntegerField;
-    procedure BtSeleccionarClick(Sender: TObject);
-    procedure btBuscarClick(Sender: TObject);
-    procedure btsalirClick(Sender: TObject);
+    procedure btnSeleccionarClick(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
+    procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DBGridPersonasDblClick(Sender: TObject);
-    procedure BtCrearPersonaClick(Sender: TObject);
-    procedure BtGuardarClick(Sender: TObject);
-    procedure BtCancelarClick(Sender: TObject);
+    procedure btnCrearPersonaClick(Sender: TObject);
+    procedure btnGuardarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure configCliente();
     function validarcampos():boolean;
   private
     { Private declarations }
@@ -130,8 +131,6 @@ var
   mensaje: string;
   color: TColor;
 begin
-
-
   result:= true;
   mensaje:= '';
   dbNombre.SetFocus;
@@ -165,7 +164,8 @@ begin
     Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
 end;
 
-procedure TFBuscarPersona.BtSeleccionarClick(Sender: TObject);
+
+procedure TFBuscarPersona.btnSeleccionarClick(Sender: TObject);
 begin
   if ((not(DBGridPersonas.SelectedRows.Count > 0)) and (not(ZQ_Personas.IsEmpty))) then
   begin
@@ -177,13 +177,19 @@ begin
 end;
 
 
-procedure TFBuscarPersona.btBuscarClick(Sender: TObject);
+procedure TFBuscarPersona.DBGridPersonasDblClick(Sender: TObject);
 begin
-  EKBusquedaAvanzada1.Buscar;
+  btnSeleccionar.Click;
 end;
 
 
-procedure TFBuscarPersona.btsalirClick(Sender: TObject);
+procedure TFBuscarPersona.btnBuscarClick(Sender: TObject);
+begin
+  EKBusqueda.Buscar;
+end;
+
+
+procedure TFBuscarPersona.btnSalirClick(Sender: TObject);
 begin
   close;
 end;
@@ -191,6 +197,13 @@ end;
 
 procedure TFBuscarPersona.FormCreate(Sender: TObject);
 begin
+  FBuscarPersona.Caption:= 'Buscar Persona';
+
+  EKBusqueda.SQL_Select.Text:= 'select p.*';
+  EKBusqueda.SQL_From.Text:= 'from persona p';
+  EKBusqueda.SQL_Where.Text:= format('where p.baja <> %s', [QuotedStr('S')]);
+  EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
+
   PanelEdicion.Visible:= false;
   DM.EKModelo.abrir(ZQ_Provincia);
   DM.EKModelo.abrir(ZQ_TipoIVA);
@@ -200,24 +213,10 @@ begin
   DBEDireccion.Color:= dm.colorCampoRequido;
   dblkTipoDoc.Color:= dm.colorCampoRequido;
   dbNroDocu.Color:= dm.colorCampoRequido;
-
-  EKBusquedaAvanzada1.Buscar;
 end;
 
 
-procedure TFBuscarPersona.DBGridPersonasDblClick(Sender: TObject);
-begin
-  if ((not(DBGridPersonas.SelectedRows.Count > 0)) and (not(ZQ_Personas.IsEmpty))) then
-  begin
-    if Assigned(OnSeleccionar) then
-      OnSeleccionar
-  end
-  else
-    Application.MessageBox(PChar('Debe seleccionar algúna Persona.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
-end;
-
-
-procedure TFBuscarPersona.BtCrearPersonaClick(Sender: TObject);
+procedure TFBuscarPersona.btnCrearPersonaClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(Transaccion_CrearPersona,[ZQ_Personas]) then
   begin
@@ -237,7 +236,8 @@ begin
   end;
 end;
 
-procedure TFBuscarPersona.BtGuardarClick(Sender: TObject);
+
+procedure TFBuscarPersona.btnGuardarClick(Sender: TObject);
 var
   id : integer;
 begin
@@ -255,21 +255,38 @@ begin
 
       ZQ_Personas.Refresh;
       ZQ_Personas.Locate('ID_PERSONA',id,[]);
+      
       if Assigned(OnSeleccionar) then
         OnSeleccionar
     end;
 end;
 
 
-procedure TFBuscarPersona.BtCancelarClick(Sender: TObject);
+procedure TFBuscarPersona.btnCancelarClick(Sender: TObject);
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
-  DBGridPersonas.Enabled:=true;
-  dm.EKModelo.cancelar_transaccion(Transaccion_CrearPersona);
-  GrupoVisualizando.Enabled:=true;
-  GrupoEditando.Enabled:=false;
-  DBGridPersonas.SetFocus;
-  PanelEdicion.Visible := false;
+  
+  if dm.EKModelo.cancelar_transaccion(Transaccion_CrearPersona) then
+  begin
+    DBGridPersonas.Enabled:=true;
+    GrupoVisualizando.Enabled:=true;
+    GrupoEditando.Enabled:=false;
+    DBGridPersonas.SetFocus;
+    PanelEdicion.Visible := false;
+  end;
+end;
+
+procedure TFBuscarPersona.configCliente();
+begin
+  FBuscarPersona.Caption:= 'Buscar Cliente';
+  btnCrearPersona.Visible:= ivNever;
+  btnGuardar.Visible:= ivNever;
+  btnCancelar.Visible:= ivNever;
+
+  EKBusqueda.SQL_Select.Text:= 'select p.*';
+  EKBusqueda.SQL_From.Text:= 'from persona p left join persona_relacion pr on (p.id_persona = pr.id_persona)';
+  EKBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d)', [QuotedStr('S'), RELACION_CLIENTE]);
+  EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
 end;
 
 end.
