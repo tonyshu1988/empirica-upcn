@@ -74,6 +74,11 @@ type //El componente ordenar grilla
     procedure MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer); //habilita el popup de los filtros cuando me posiciono en el titulo de la grilla
     procedure TitleClick(Column: TColumn); //evento para cuando se preciona en el tiulo que ordene o busque
     procedure DBGridGiraLaRueda(var Message: TMessage); //para usar la rueda del mouse para desplazarce por la grilla
+
+    procedure GuardarFiltro(); //guardo los filtros en la pc
+    procedure CargarFiltro();  //cargo los filtros guardados
+    procedure GuardarOrdenar(); //guardo el orden en la pc
+    procedure CargarOrdenar();  //cargo el orden guardados
   protected
     { Protected declarations }
     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
@@ -82,10 +87,8 @@ type //El componente ordenar grilla
     constructor Create(AOwner: TComponent); override;
     destructor destroy ; override;
 
-    procedure GuardarFiltro(); //guardo los filtros seleccionados en la pc
-    procedure CargarFiltro();  //cargo los filtros guardados
-    procedure GuardarConfigColumnas(); //guardo el tamaño y la posicion de las columnas en la pc
-    procedure CargarConfigColunmas();  //cargo el tamaño y la posicion de las columnas desde la pc
+    procedure GuardarConfigColumnas(); //guardo toda la configuracion de las columnas en la pc
+    procedure CargarConfigColumnas();  //cargo toda la configuracion de las columnas desde la pc
   published
     Property Grilla: TDBGrid read FGrilla write SetFGrilla;
     Property Filtros: TEKColumnas read FFiltros write FFiltros;
@@ -327,7 +330,7 @@ end;
 
 
 //Guarda el tamaño de las columnas y las posiciones de las mismas en la PC
-procedure TEKOrdenarGrilla.GuardarConfigColumnas();
+procedure TEKOrdenarGrilla.GuardarOrdenar();
 var
   Registro :TRegistry;
   F        :Byte;
@@ -356,7 +359,7 @@ end;
 
 
 //Carga el tamaño de las columnas y las posiciones de las mismas desde la PC
-procedure TEKOrdenarGrilla.CargarConfigColunmas();
+procedure TEKOrdenarGrilla.CargarOrdenar();
 var
   Registro: TRegistry;
   F: Byte;
@@ -399,6 +402,26 @@ begin
 end;
 
 
+procedure TEKOrdenarGrilla.GuardarConfigColumnas();
+begin
+  if PermitirFiltrar then
+    GuardarFiltro;
+
+  if PermitirOrdenar or PermitirMover then
+    GuardarOrdenar;
+end;
+
+
+procedure TEKOrdenarGrilla.CargarConfigColumnas();
+begin
+  if PermitirFiltrar then
+    CargarFiltro;
+
+  if PermitirOrdenar or PermitirMover then
+    CargarOrdenar;
+end;
+
+
 //devuelve el indice en la grilla de la columna pasada como parametro
 function TEKOrdenarGrilla.GetIndex(grilla: TDBGrid; Nombre: string): Integer;
 var
@@ -435,13 +458,13 @@ begin
     if grilla.Columns[columna].Visible then
     begin
       grilla.Columns[columna].Visible:= false;
-      TEKColumna(FFiltros.Items[columna]).FVisible:= false;
+      TEKColumna(FFiltros.Items[indice]).FVisible:= false;
       Result:= false;
     end
     else
     begin
       grilla.Columns[columna].Visible:= true;
-      TEKColumna(FFiltros.Items[columna]).FVisible:= true;
+      TEKColumna(FFiltros.Items[indice]).FVisible:= true;
       Result:= true;
     end
 end;
