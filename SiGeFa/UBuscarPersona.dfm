@@ -1,6 +1,6 @@
 object FBuscarPersona: TFBuscarPersona
-  Left = 372
-  Top = 192
+  Left = 358
+  Top = 189
   Width = 719
   Height = 442
   Caption = 'Buscar Personas'
@@ -11,21 +11,22 @@ object FBuscarPersona: TFBuscarPersona
   Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 711
-    Height = 358
+    Width = 703
+    Height = 352
     Align = alClient
     TabOrder = 0
     object DBGridPersonas: TDBGrid
       Left = 1
       Top = 1
-      Width = 709
-      Height = 141
+      Width = 701
+      Height = 135
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
@@ -115,8 +116,8 @@ object FBuscarPersona: TFBuscarPersona
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 142
-      Width = 709
+      Top = 136
+      Width = 701
       Height = 215
       Align = alBottom
       TabOrder = 1
@@ -466,7 +467,7 @@ object FBuscarPersona: TFBuscarPersona
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -768,30 +769,29 @@ object FBuscarPersona: TFBuscarPersona
         Font.Style = []
         ItemLinks = <
           item
-            Item = btBuscar
+            Item = btnBuscar
             Visible = True
           end
           item
             BeginGroup = True
-            Item = BtSeleccionar
+            Item = btnSeleccionar
             Visible = True
           end
           item
-            Item = BtCrearPersona
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = BtGuardar
-            Visible = True
-          end
-          item
-            Item = BtCancelar
+            Item = btnCrearPersona
             Visible = True
           end
           item
             BeginGroup = True
-            Item = btsalir
+            Item = btnGuardar
+            Visible = True
+          end
+          item
+            Item = btnCancelar
+            Visible = True
+          end
+          item
+            Item = btnSalir
             Visible = True
           end>
         Name = 'barra'
@@ -1098,29 +1098,29 @@ object FBuscarPersona: TFBuscarPersona
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 180
-    Top = 16
+    Left = 184
+    Top = 22
     DockControlHeights = (
       0
       0
       0
       52)
-    object BtSeleccionar: TdxBarLargeButton
+    object btnSeleccionar: TdxBarLargeButton
       Caption = 'Seleccionar'
       Category = 0
       Hint = 'Selecciona una persona'
       Visible = ivAlways
       ImageIndex = 32
-      OnClick = BtSeleccionarClick
+      OnClick = btnSeleccionarClick
       AutoGrayScale = False
     end
-    object BtCrearPersona: TdxBarLargeButton
+    object btnCrearPersona: TdxBarLargeButton
       Caption = 'Crear Persona'
       Category = 0
       Hint = 'Crear Persona'
       Visible = ivAlways
       ImageIndex = 52
-      OnClick = BtCrearPersonaClick
+      OnClick = btnCrearPersonaClick
       AutoGrayScale = False
     end
     object btBaja: TdxBarLargeButton
@@ -1130,33 +1130,33 @@ object FBuscarPersona: TFBuscarPersona
       ImageIndex = 53
       AutoGrayScale = False
     end
-    object btBuscar: TdxBarLargeButton
+    object btnBuscar: TdxBarLargeButton
       Caption = 'Buscar'
       Category = 0
       Hint = 'Buscar'
       Visible = ivAlways
       ImageIndex = 29
-      OnClick = btBuscarClick
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object BtGuardar: TdxBarLargeButton
+    object btnGuardar: TdxBarLargeButton
       Caption = 'Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
       Visible = ivAlways
       ImageIndex = 3
-      OnClick = BtGuardarClick
+      OnClick = btnGuardarClick
       AutoGrayScale = False
     end
-    object BtCancelar: TdxBarLargeButton
+    object btnCancelar: TdxBarLargeButton
       Caption = 'Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
       Visible = ivAlways
       ImageIndex = 4
-      OnClick = BtCancelarClick
+      OnClick = btnCancelarClick
       AutoGrayScale = False
     end
     object BtImprimir: TdxBarLargeButton
@@ -1174,7 +1174,7 @@ object FBuscarPersona: TFBuscarPersona
       ImageIndex = 52
       AutoGrayScale = False
     end
-    object btsalir: TdxBarLargeButton
+    object btnSalir: TdxBarLargeButton
       Align = iaRight
       Caption = 'Salir'
       Category = 0
@@ -1182,7 +1182,7 @@ object FBuscarPersona: TFBuscarPersona
       Visible = ivAlways
       ImageIndex = 6
       ShortCut = 123
-      OnClick = btsalirClick
+      OnClick = btnSalirClick
       AutoGrayScale = False
     end
     object btverbajados: TdxBarLargeButton
@@ -1222,9 +1222,9 @@ object FBuscarPersona: TFBuscarPersona
     end
     object GrupoVisualizando: TdxBarGroup
       Items = (
-        'BtSeleccionar'
-        'BtCrearPersona'
-        'btBuscar'
+        'btnSeleccionar'
+        'btnCrearPersona'
+        'btnBuscar'
         'BtImprimir'
         'btBaja'
         'btReactivar'
@@ -1235,20 +1235,22 @@ object FBuscarPersona: TFBuscarPersona
     object GrupoEditando: TdxBarGroup
       Enabled = False
       Items = (
-        'BtGuardar'
-        'BtCancelar')
+        'btnGuardar'
+        'btnCancelar')
     end
   end
   object ZQ_Personas: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select *'
+      'select p.*'
       'from persona p'
+      'left join persona_relacion pr on (p.id_persona = pr.id_persona)'
       'where p.baja <> '#39'S'#39
+      '  and pr.id_relacion = 11'
       'order by p.nombre')
     Params = <>
-    Left = 264
-    Top = 64
+    Left = 368
+    Top = 22
     object ZQ_PersonasID_PERSONA: TIntegerField
       FieldName = 'ID_PERSONA'
     end
@@ -1310,8 +1312,8 @@ object FBuscarPersona: TFBuscarPersona
   end
   object DS_Personas: TDataSource
     DataSet = ZQ_Personas
-    Left = 344
-    Top = 64
+    Left = 368
+    Top = 69
   end
   object ZQ_Provincia: TZQuery
     Connection = DM.Conexion
@@ -1319,8 +1321,8 @@ object FBuscarPersona: TFBuscarPersona
       'select *'
       'from provincia p')
     Params = <>
-    Left = 432
-    Top = 24
+    Left = 448
+    Top = 22
     object ZQ_ProvinciaID_PROVINCIA: TIntegerField
       FieldName = 'ID_PROVINCIA'
       Required = True
@@ -1332,13 +1334,13 @@ object FBuscarPersona: TFBuscarPersona
   end
   object DS_Provincia: TDataSource
     DataSet = ZQ_Provincia
-    Left = 432
-    Top = 88
+    Left = 448
+    Top = 69
   end
   object DS_TipoIVA: TDataSource
     DataSet = ZQ_TipoIVA
-    Left = 560
-    Top = 88
+    Left = 600
+    Top = 69
   end
   object ZQ_TipoIVA: TZQuery
     Connection = DM.Conexion
@@ -1346,8 +1348,8 @@ object FBuscarPersona: TFBuscarPersona
       'select *'
       'from tipo_iva ti')
     Params = <>
-    Left = 560
-    Top = 24
+    Left = 600
+    Top = 22
     object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True
@@ -1379,8 +1381,8 @@ object FBuscarPersona: TFBuscarPersona
       'select *'
       'from tipo_documento td')
     Params = <>
-    Left = 496
-    Top = 24
+    Left = 528
+    Top = 22
     object ZQ_TipoDocID_TIPO_DOC: TIntegerField
       FieldName = 'ID_TIPO_DOC'
       Required = True
@@ -1391,10 +1393,10 @@ object FBuscarPersona: TFBuscarPersona
   end
   object DS_TipoDoc: TDataSource
     DataSet = ZQ_TipoDoc
-    Left = 496
-    Top = 88
+    Left = 528
+    Top = 69
   end
-  object EKBusquedaAvanzada1: TEKBusquedaAvanzada
+  object EKBusqueda: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
         Titulo = 'Nombre y Apellido:'
@@ -1472,7 +1474,7 @@ object FBuscarPersona: TFBuscarPersona
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 72
-    Top = 64
+    Top = 69
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Filtros = <>
@@ -1482,7 +1484,7 @@ object FBuscarPersona: TFBuscarPersona
     PermitirMover = True
     PermitirFiltrar = True
     Left = 184
-    Top = 64
+    Top = 69
   end
   object Nro_Persona: TZStoredProc
     Connection = DM.Conexion
@@ -1494,7 +1496,7 @@ object FBuscarPersona: TFBuscarPersona
       end>
     StoredProcName = 'SP_GEN_PERSONA_ID'
     Left = 72
-    Top = 16
+    Top = 22
     ParamData = <
       item
         DataType = ftInteger

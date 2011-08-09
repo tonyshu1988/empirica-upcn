@@ -588,15 +588,12 @@ begin
 
   if not Assigned(vsel) then
     vsel := TFBuscarPersona.Create(nil);
-    
+  vsel.btnBuscar.Click;    
   vsel.OnSeleccionar := OnSelPersona;
   vsel.ShowModal;
 
   if ZQ_PersonaRelacionContactoID_PERSONA.AsInteger = 0 then
-  begin
-     Application.MessageBox(PChar('No se ha seleccionado ningun Contacto'),'Atención',MB_OK+MB_ICONINFORMATION);
-     exit;
-  end;
+    exit;
 
   ZQ_PersonaRelacionContactoID_RELACION.AsInteger := RELACION_CONTACTO;
   ZQ_PersonaRelacionContactoID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
@@ -646,14 +643,12 @@ begin
 
   if not Assigned(vsel) then
     vsel := TFBuscarPersona.Create(nil);
+  vsel.btnBuscar.Click;
   vsel.OnSeleccionar := OnSelPersona;
   vsel.ShowModal;
 
   if ZQ_PersonaRelacionViajanteID_PERSONA.AsInteger = 0 then
-  begin
-     Application.MessageBox(PChar('No se ha seleccionado ningun viajante'),'Atención',MB_OK+MB_ICONINFORMATION);
-     exit;
-  end;
+    exit;
 
   ZQ_PersonaRelacionViajanteID_RELACION.AsInteger := RELACION_VIAJANTE;
   ZQ_PersonaRelacionViajanteID_EMPRESA.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;

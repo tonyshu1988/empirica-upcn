@@ -67,6 +67,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 65
         Height = 13
         DataField = 'CODIGO_CORTO'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -106,6 +107,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 420
         Height = 13
         DataField = 'NOMBRE'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -132,6 +134,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 545
         Height = 13
         DataField = 'DIRECCION'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -158,6 +161,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 77
         Height = 13
         DataField = 'CODIGO_POSTAL'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -184,6 +188,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 232
         Height = 13
         DataField = 'LOCALIDAD'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -210,6 +215,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 133
         Height = 13
         DataField = 'NOMBRE_PROVINCIA'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -236,6 +242,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 80
         Height = 13
         DataField = 'NOMBRE_TIPO_DOC'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -262,6 +269,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 70
         Height = 13
         DataField = 'NUMERO_DOC'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -288,6 +296,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 147
         Height = 13
         DataField = 'ea'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -314,6 +323,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 104
         Height = 13
         DataField = 'CUIT_CUIL'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -340,6 +350,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 68
         Height = 13
         DataField = '23/23/1234'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -366,6 +377,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 117
         Height = 13
         DataField = 'ea'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -392,6 +404,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Width = 147
         Height = 13
         DataField = 'NOMBRE_TIPO_IVA'
+        DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -858,8 +871,8 @@ object FCuentaCorriente: TFCuentaCorriente
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 136
-    Top = 120
+    Left = 48
+    Top = 216
     DockControlHeights = (
       0
       0
@@ -977,7 +990,7 @@ object FCuentaCorriente: TFCuentaCorriente
   end
   object ATeclasRapidas: TActionManager
     Left = 48
-    Top = 290
+    Top = 266
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -1018,5 +1031,16 @@ object FCuentaCorriente: TFCuentaCorriente
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
+  end
+  object ZQ_Cliente: TZQuery
+    Connection = DM.Conexion
+    Params = <>
+    Left = 715
+    Top = 6
+  end
+  object DS_Cliente: TDataSource
+    DataSet = ZQ_Cliente
+    Left = 715
+    Top = 54
   end
 end

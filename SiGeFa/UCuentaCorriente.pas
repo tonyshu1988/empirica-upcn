@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+  EKVistaPreviaQR, QRCtrls, QuickRpt, UBuscarPersona;
 
 type
   TFCuentaCorriente = class(TForm)
@@ -64,6 +64,8 @@ type
     Label13: TLabel;
     DBText3: TDBText;
     PanelResumen: TPanel;
+    ZQ_Cliente: TZQuery;
+    DS_Cliente: TDataSource;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -85,6 +87,8 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
   private
+    vsel: TFBuscarPersona;
+    procedure onSelCliente;
   public
   end;
 
@@ -113,9 +117,40 @@ begin
 end;
 
 
+procedure TFCuentaCorriente.onSelCliente;
+begin
+//  ZQ_Proveedores.Close;
+//  ZQ_Proveedores.ParamByName('id_prov').AsInteger:= vsel.ZQ_ProveedoresID_PROVEEDOR.AsInteger;
+//  ZQ_Proveedores.Open;
+
+  vsel.Close;
+end;
+
+
 procedure TFCuentaCorriente.btnBuscarClick(Sender: TObject);
 begin
-//  EKBuscar.Buscar;
+  if not Assigned(vsel) then
+    vsel:= TFBuscarPersona.Create(nil);
+  vsel.configCliente;
+  vsel.btnBuscar.Click;
+  vsel.OnSeleccionar := onSelCliente;
+  vsel.ShowModal;
+  
+  if (not (vsel.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
+  begin
+//    porComprobante:= true;
+//    ctacte_simple:= false;
+//    DBGridCtaCte.DataSource:= DS_CtaCteProveedor;
+//    ZS_CtaCteProveedor.Close;
+//    ZS_CtaCteProveedor.ParamByName('ID_PROVEEDOR').AsInteger:= vsel.ZQ_ProveedoresID_PROVEEDOR.AsInteger;
+//    ZS_CtaCteProveedor.ParamByName('TIPO').AsInteger:= 1;
+//    ZS_CtaCteProveedor.Open;
+
+//    porFechaCarga:= true;
+//    porComprobante:= false;
+//    ctacte_simple:= false;
+//    btnAceptarFiltro.Click;
+  end;
 end;
 
 

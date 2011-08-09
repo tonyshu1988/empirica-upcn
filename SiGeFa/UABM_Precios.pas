@@ -183,20 +183,23 @@ begin
   vsel.Close;
 end;
 
+
 procedure TFABM_Precios.btnBuscarClick(Sender: TObject);
 begin
-EKBusquedaAvanzada1.Buscar;
+  EKBusquedaAvanzada1.Buscar;
 end;
+
 
 procedure TFABM_Precios.btnSalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFABM_Precios.btnEditarGrillaClick(Sender: TObject);
 begin
   if ZQ_Productos.IsEmpty then
-  exit;
+    exit;
 
   if not (dgEditing	in DBGridProductos.Options) then
   begin
@@ -214,8 +217,8 @@ begin
     EditCosto.Enabled := false;
     EditVenta.Enabled := false;
   end;
-
 end;
+
 
 procedure TFABM_Precios.btnProcesarImportesClick(Sender: TObject);
 var
@@ -231,7 +234,6 @@ begin
     Application.MessageBox('Se ingresaron datos no validos'+#13+'Verifique que no haya campos numéricos mal ingresados','Validar',MB_OK+MB_ICONINFORMATION);
     exit;
   end;
-
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
   begin
@@ -281,6 +283,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_Precios.btnGuardarClick(Sender: TObject);
 begin
   if (ZQ_ProductosID_PRODUCTO.AsInteger = 0) then ZQ_Productos.Delete; //Borro los renglones vacios
@@ -305,8 +308,8 @@ begin
     DBGridProductos.Options:=DBGridProductos.Options - [dgMultiSelect];
     DBGridProductos.SetFocus;
   end;
-
 end;
+
 
 procedure TFABM_Precios.btnCancelarClick(Sender: TObject);
 begin
@@ -332,6 +335,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_Precios.btnSeleccionarClick(Sender: TObject);
 begin
   if (dgMultiSelect	in DBGridProductos.Options) then
@@ -348,6 +352,7 @@ begin
   DBGridProductos.SetFocus;
 end;
 
+
 procedure TFABM_Precios.RadioGroupTipoCalculoClick(Sender: TObject);
 begin
   if RadioGroupTipoCalculo.ItemIndex = 0 then
@@ -360,21 +365,21 @@ begin
     LabelTipo1.Caption := '$';
     LabelTipo2.Caption := '$';
   end;
-
 end;
+
 
 procedure TFABM_Precios.btnExportarXLSClick(Sender: TObject);
 begin
   if not ZQ_Productos.IsEmpty then
-
     mxDBGridExport.Select;
 end;
 
-procedure TFABM_Precios.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
+
+procedure TFABM_Precios.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
-CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABMImportes);
+  CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABMImportes);
 end;
+
 
 procedure TFABM_Precios.btnImprimirClick(Sender: TObject);
 var
@@ -419,12 +424,11 @@ begin
     end;
   end;
 
-
   if (Application.MessageBox('Desea Selecionar algun cliente en particular para imprimir esta lista de precios?','ABM Precios',MB_YESNO+MB_ICONQUESTION) = IDYES) then
   begin
     if not Assigned(vsel) then
-    vsel := TFBuscarPersona.Create(nil);
-    
+      vsel:= TFBuscarPersona.Create(nil);
+    vsel.btnBuscar.Click;
     vsel.OnSeleccionar := OnSelPersona;
     vsel.ShowModal;
 
@@ -457,30 +461,30 @@ begin
   CDSZQ_Productos.EmptyDataSet;
 end;
 
+
 procedure TFABM_Precios.ZQ_ProductosCalcFields(DataSet: TDataSet);
 begin
-ZQ_Productosimporte_venta_cliente.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat-(ZQ_ProductosPRECIO_VENTA.AsFloat*DescuentoCliente);
-
+  ZQ_Productosimporte_venta_cliente.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat-(ZQ_ProductosPRECIO_VENTA.AsFloat*DescuentoCliente);
 end;
+
 
 procedure TFABM_Precios.FormCreate(Sender: TObject);
 begin
-CDSZQ_Productos.CreateDataSet;
-EKOrdenarGrilla1.CargarConfigColumnas;
+  CDSZQ_Productos.CreateDataSet;
+  EKOrdenarGrilla1.CargarConfigColumnas;
 end;
+
 
 procedure TFABM_Precios.btBuscarGoogleClick(Sender: TObject);
 begin
   if ZQ_Productos.IsEmpty then
   exit;
 
-  ShellExecute(self.handle, 'open', pchar('http://www.google.com.ar/#hl=es-419&q='+ZQ_ProductosNOMBRE_PRODUCTO.AsString+'&oq'), nil, nil,
-  SW_SHOWNORMAL);
+  ShellExecute(self.handle, 'open', pchar('http://www.google.com.ar/#hl=es-419&q='+ZQ_ProductosNOMBRE_PRODUCTO.AsString+'&oq'), nil, nil, SW_SHOWNORMAL);
 end;
 
 
-procedure TFABM_Precios.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TFABM_Precios.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
