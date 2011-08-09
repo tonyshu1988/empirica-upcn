@@ -1,6 +1,6 @@
 object FMovimientosInternos: TFMovimientosInternos
-  Left = 294
-  Top = 190
+  Left = 172
+  Top = 116
   Width = 1056
   Height = 559
   Caption = 'Movimientos Internos'
@@ -1654,6 +1654,11 @@ object FMovimientosInternos: TFMovimientosInternos
             Visible = True
           end
           item
+            BeginGroup = True
+            Item = btnEstadisticas
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -2041,6 +2046,15 @@ object FMovimientosInternos: TFMovimientosInternos
       Visible = ivAlways
       ImageIndex = 6
       OnClick = btnSalirClick
+      AutoGrayScale = False
+    end
+    object btnEstadisticas: TdxBarLargeButton
+      Caption = 'Estadisticas'
+      Category = 0
+      Hint = 'Estadisticas'
+      Visible = ivAlways
+      ImageIndex = 44
+      OnClick = btnEstadisticasClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup

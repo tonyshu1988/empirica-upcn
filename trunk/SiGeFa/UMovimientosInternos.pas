@@ -226,6 +226,7 @@ type
     ZS_CalcSaldosEGRESO: TFloatField;
     ZS_CalcSaldosSALDO: TFloatField;
     ZS_CalcSaldosSALDODIARIO: TFloatField;
+    btnEstadisticas: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -266,6 +267,7 @@ type
     procedure SpeedBtn_MesSiguienteClick(Sender: TObject);
     procedure SpeedBtn_AnioSiguienteClick(Sender: TObject);
     procedure calcularResumenBalance(fecha: TDate);
+    procedure btnEstadisticasClick(Sender: TObject);
   private
     fechaActual: TDate;
     id_comprobante: integer;
@@ -286,7 +288,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal, UUtilidades, DateUtils;
+uses UDM, UPrincipal, UUtilidades, DateUtils, UEstadisticaMovInternos;
 
 {$R *.dfm}
 
@@ -942,6 +944,11 @@ begin
 end;
 
                               
+procedure TFMovimientosInternos.btnEstadisticasClick(Sender: TObject);
+begin
+  FPrincipal.AEstadisticaMovInternos.Execute;
+end;
+
 end.
 
 
