@@ -1,7 +1,7 @@
 object FBuscarPersona: TFBuscarPersona
-  Left = 358
-  Top = 189
-  Width = 719
+  Left = 254
+  Top = 196
+  Width = 869
   Height = 442
   Caption = 'Buscar Personas'
   Color = clBtnFace
@@ -18,14 +18,14 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 703
+    Width = 853
     Height = 352
     Align = alClient
     TabOrder = 0
     object DBGridPersonas: TDBGrid
       Left = 1
       Top = 1
-      Width = 701
+      Width = 851
       Height = 135
       Align = alClient
       Color = 14606012
@@ -117,7 +117,7 @@ object FBuscarPersona: TFBuscarPersona
     object PanelEdicion: TPanel
       Left = 1
       Top = 136
-      Width = 701
+      Width = 851
       Height = 215
       Align = alBottom
       TabOrder = 1
@@ -1106,7 +1106,7 @@ object FBuscarPersona: TFBuscarPersona
       0
       52)
     object btnSeleccionar: TdxBarLargeButton
-      Caption = 'Seleccionar'
+      Caption = 'F2 Seleccionar'
       Category = 0
       Hint = 'Selecciona una persona'
       Visible = ivAlways
@@ -1131,9 +1131,9 @@ object FBuscarPersona: TFBuscarPersona
       AutoGrayScale = False
     end
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
@@ -1505,6 +1505,21 @@ object FBuscarPersona: TFBuscarPersona
       end>
     object Nro_PersonaID: TIntegerField
       FieldName = 'ID'
+    end
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 272
+    Top = 42
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = btnBuscarClick
+    end
+    object ASeleccionar: TAction
+      Caption = 'ASeleccionar'
+      ShortCut = 113
+      OnExecute = btnSeleccionarClick
     end
   end
 end

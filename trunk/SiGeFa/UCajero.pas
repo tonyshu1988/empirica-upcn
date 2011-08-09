@@ -69,7 +69,7 @@ type
     dxBarABM: TdxBarManager;
     BtBuscarProducto: TdxBarLargeButton;
     BtModificar: TdxBarLargeButton;
-    BtEliminar: TdxBarLargeButton;
+    btBuscProd: TdxBarLargeButton;
     BtAgregarPago: TdxBarLargeButton;
     BtAceptarPago: TdxBarLargeButton;
     BtCancelarPago: TdxBarLargeButton;
@@ -225,7 +225,6 @@ type
     Label14: TLabel;
     Label15: TLabel;
     Label16: TLabel;
-    btVendedor: TBitBtn;
     Label17: TLabel;
     DBText3: TDBText;
     CD_Comprobante: TClientDataSet;
@@ -318,6 +317,17 @@ type
     ZQ_ProductosSTOCK_ACTUAL: TFloatField;
     Label26: TLabel;
     DBEdit8: TDBEdit;
+    EKListadoCuenta: TEKListadoSQL;
+    ZQ_ListadoCuenta: TZQuery;
+    ZQ_ListadoCuentaID_CUENTA: TIntegerField;
+    ZQ_ListadoCuentaMEDIO_DEFECTO: TIntegerField;
+    ZQ_ListadoCuentaCODIGO: TStringField;
+    ZQ_ListadoCuentaNOMBRE_CUENTA: TStringField;
+    ZQ_ListadoCuentaNRO_CTA_BANCARIA: TStringField;
+    ZQ_ListadoCuentaBAJA: TStringField;
+    CD_Fpago_ctaIngreso: TStringField;
+    CD_Fpago_esCtaCorr: TStringField;
+    ZQ_ListadoCuentaA_CTA_CORRIENTE: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -326,14 +336,13 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btQuitarProductoClick(Sender: TObject);
     procedure btnBorrarPagoClick(Sender: TObject);
-    procedure DBGridFormaPagoColEnter(Sender: TObject);
     procedure codBarrasEnter(Sender: TObject);
     procedure LimpiarCodigo;
     procedure codBarrasExit(Sender: TObject);
     procedure codBarrasKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure IdentificarCodigo();
-    procedure LeerCodigo();
+    procedure LeerCodigo(id:string;cod:String);
     procedure BtLeerCodigoClick(Sender: TObject);
     procedure bt_BuscarClienteClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -357,13 +366,16 @@ type
     procedure calcularMonto();
     procedure btVendedorClick(Sender: TObject);
     procedure edImporteExit(Sender: TObject);
-    procedure DBGridFormaPagoColExit(Sender: TObject);
-    procedure DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     function ProductoYaCargado(id:Integer):Boolean ;
+    procedure DBGridFormaPagoColExit(Sender: TObject);
+    function calcularSaldoCtaCorr():Double;
   private
     vsel: TFBuscarProductoStock;
-    procedure OnSeleccionar;
+    vsel2: TFBuscarPersona;
+    vsel3: TFBuscarPersona;
+    procedure OnSelProd;
+    procedure OnSelPers;
+    procedure OnSelVendedor;
     { Private declarations }
   public
 
@@ -374,7 +386,7 @@ type
 var
   FCajero: TFCajero;
   importeacob, punitoriosacob, acumulado, acumFpago: double;
-  IdProd:Integer;
+  IdProd:String;
   cliente,IdVendedor,ClienteIVA,cajero:Integer;
   descCliente:double;
 const
@@ -382,7 +394,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal,strutils, EKModelo, Math;
+uses UDM, UPrincipal,strutils, EKModelo, Math, UUtilidades;
 
 {$R *.dfm}
 
@@ -402,6 +414,7 @@ begin
   CD_Fpago.CreateDataSet;
   dm.EKModelo.abrir(ZQ_FormasPago);
   dm.EKModelo.abrir(ZQ_DetalleProd);
+  dm.EKModelo.abrir(ZQ_ListadoCuenta);
   Cliente:=-1;
   IdVendedor:=-1;
   descCliente:=0;
@@ -420,18 +433,18 @@ begin
 if not Assigned(vsel) then
   vsel:= TFBuscarProductoStock.Create(nil);
   vsel.usaCajero:='S';
-  vsel.OnSeleccionar := OnSeleccionar;
+  vsel.OnSeleccionar := OnSelProd;
   vsel.ShowModal;
   vsel.usaCajero:='N';
 end;
 
-procedure TFCajero.OnSeleccionar;
+procedure TFCajero.OnSelProd;
 begin
  if not vsel.ZQ_Stock.IsEmpty then
   begin
       if not(ProductoYaCargado(vsel.ZQ_StockID_PRODUCTO.AsInteger)) then
       begin
-        codBarras.Text:=vsel.ZQ_StockID_PRODUCTO.AsString;
+        codBarras.Text:='I'+vsel.ZQ_StockID_PRODUCTO.AsString;
         IdentificarCodigo;
         edCantidad.SetFocus;
       end;
@@ -493,7 +506,7 @@ if cliente<0 then
 if IdVendedor<0 then
  begin
    Application.MessageBox('Debe seleccionar el Vendedor.', 'Atención');
-   btVendedor.Click;
+   btVendedorClick(self);
    exit;
  end;
 
@@ -537,25 +550,6 @@ if not(CD_Fpago.IsEmpty) then
 codBarras.SetFocus;
 end;
 
-procedure TFCajero.DBGridFormaPagoColEnter(Sender: TObject);
-begin
- if (DBGridFormaPago.SelectedIndex = 1) then
-    if CD_FpagoID_TIPO_FORMAPAG.IsNull then
-    begin
-//      keybd_event(VK_F2, 0, 0, 0);
-//      keybd_event(VK_F2, 0, KEYEVENTF_KEYUP, 0);
-//      keybd_event(VK_MENU, 0, 0, 0);
-//      keybd_event(VK_DOWN, 0, 0, 0);
-//      keybd_event(VK_DOWN, 0, KEYEVENTF_KEYUP, 0);
-//      keybd_event(VK_MENU, 0, KEYEVENTF_KEYUP, 0);
-
-    end;
-
-  if (DBGridFormaPago.SelectedIndex = 2) then
-    if (CD_FpagoID_TIPO_FORMAPAG.AsInteger = 1) then
-      DBGridFormaPago.SelectedIndex := 5;
-end;
-
 procedure TFCajero.codBarrasEnter(Sender: TObject);
 begin
   LeerCodBar.Visible := true;
@@ -594,55 +588,57 @@ begin
 
   cod := codBarras.Text;
 
+  if not(sonTodosNumeros(MidStr(cod,2,Length(cod)-1))) then
+               begin
+                Application.MessageBox('El código de ingresado es incorrecto', 'Error');
+                LimpiarCodigo;
+                exit;
+              end;
   // POR NRO DE PRESUPUESTO (EJ. P9494)
-  if UpperCase(MidStr(Cod, 1, 1)) = 'P' then
+  if MidStr(Cod, 1, 1) = 'P' then
   begin
 //    CargarPresup(strtoint(MidStr(Cod, 2, Length(cod) - 1)));
   end
   else
-    // POR NUMERO DE ProductoDetalle
-    if (Length(cod) <= LONG_CODIGO) then
-      begin
-        //LeerCodigoID(strtoint(Cod));
-        LeerCodigo
-      end
+   if MidStr(Cod, 1, 1) = 'C' then
+    begin
+     LeerCodigo('C',Cod);
+    end
     else
-      // POR CODIGO DE BARRAS PRODUCTO
-      if (Length(cod) <= LONG_COD_BARRAS) then
+     if MidStr(Cod, 1, 1) = 'I' then
       begin
-        // Verificar Sucursal (Primeros 3 digitos del codigo de barra)
-    //    codSuc := UpperCase(MidStr(Cod, 1, 3));
-    //    if StrToInt(codmuni) = StrToInt(org_id) then
-    //      org_id:=''
-    //    else
-    //
-    //      Org_msg.Visible:=true;
-        LeerCodigo;
+       LeerCodigo('I',Cod);
       end
-      else
-       if (Length(cod) > LONG_COD_BARRAS) then
+       else
+        // POR CODIGO DE BARRAS PRODUCTO
+        if (Length(cod) <= LONG_COD_BARRAS) then
         begin
-          Application.MessageBox('Longitud de código incorrecta', 'Error');
-          LimpiarCodigo;
-          codBarras.Clear;
-          exit;
-        end;
+          LeerCodigo('B',Cod);
+        end
+        else
+         if (Length(cod) > LONG_COD_BARRAS) then
+          begin
+            Application.MessageBox('Longitud de código incorrecta', 'Error');
+            LimpiarCodigo;
+            codBarras.Clear;
+            exit;
+          end;
 end;
 
-procedure TFCajero.LeerCodigo();
+
+
+procedure TFCajero.LeerCodigo(id:string;cod:String);
 var
   f1, f2, fecha: tdate;
   punit: double;
   diasm: integer;
 begin
-  
-
-  lblSinStock.Visible:=False;
 
   LimpiarCodigo;
-  IdProd:=-1;
-  try
-    IdProd:= strToInt(codBarras.Text);
+  lblSinStock.Visible:=False;
+
+   try
+    IdProd:= MidStr(cod, 2, Length(cod) - 1);
   except
     begin
       Application.MessageBox('Código incorrecto', 'Error');
@@ -651,18 +647,44 @@ begin
       exit;
     end
   end;
-  //DigVerif:= MidStr(codBarras.Text, StrLen(PChar(codBarras.Text)), 1);
+  //Codigo Corto
+  if id='C' then
+   begin
+      ZQ_Productos.Close;
+      ZQ_Productos.sql[11]:=Format('and(p.cod_corto=%s)',[IdProd]);
+      ZQ_Productos.Open;
+   end
+    else
+    //ID Producto
+     if id='I' then
+      begin
+        ZQ_Productos.Close;
+        ZQ_Productos.sql[11]:=Format('and(p.id_producto=%s)',[IdProd]);
+        ZQ_Productos.Open;
+      end
+       else
+         //Codigo de Barras
+         if id='B' then
+           begin
+              ZQ_Productos.Close;
+              ZQ_Productos.sql[11]:=Format('and(p.codigo_barra=%s)',[cod]);
+              ZQ_Productos.Open;
+           end;
 
-  ZQ_Productos.Close;
-  ZQ_Productos.ParamByName('prod').AsInteger:=IdProd;
-  ZQ_Productos.Open;
+  if ZQ_Productos.RecordCount>1 then
+    begin
+      Application.MessageBox('El código ingresado corresponde a más de un producto'+char(13)+
+                              '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Error');
+      LimpiarCodigo;
+      exit;
+    end;
 
   if not(ZQ_Productos.IsEmpty) then
    begin
       lblSinStock.Visible:=ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0;
       edDesc.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat+descCliente)*100;
       calcularMonto();
-   end
+   end;
 
 end;
 
@@ -674,38 +696,13 @@ LimpiarCodigo;
 end;
 
 procedure TFCajero.bt_BuscarClienteClick(Sender: TObject);
-var
-  sql:string;
 begin
-  sql:= Format('select per.id_persona, per.nombre||'+
-               ' COALESCE('' | Nro.Doc: '' || per.numero_doc,'''')||'+
-               ' COALESCE('' | CUIT/CUIL: '' || per.cuit_cuil,'''') As busqueda'+
-               ' from persona per'+
-               ' left join persona_relacion rel on (per.id_persona = rel.id_persona)'+
-               ' where per.baja = %s '+
-               ' and rel.id_relacion = %d '+
-               ' order by per.nombre', [QuotedStr('N'), RELACION_CLIENTE]);
-
-  EKListadoClientes.SQL.Text:= sql;
-
-  if EKListadoClientes.Buscar then
-    if (EKListadoClientes.Resultado <> '') then
-    begin
-      Cliente:=StrToInt(EKListadoClientes.Resultado);
-      ClienteIVA:=ZQ_PersonasID_TIPO_IVA.AsInteger;
-      CD_ComprobanteID_CLIENTE.AsInteger:=Cliente;
-      CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
-
-      descCliente:= 0;
-      if (not ZQ_PersonasDESCUENTO_ESPECIAL.IsNull) or (ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat <> 0) then
-          if (application.MessageBox(pchar('El cliente seleccionado posee un descuento especial del '+FloatToStr(ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat*100)+'%.'+
-              #13+'Desea aplicar este descuento para todos los productos que se carguen?'), 'Descuento Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-          begin
-            descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat;
-            edDesc.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat+descCliente)*100;
-            CD_ComprobantePORC_DESCUENTO.AsFloat:=(edDesc.AsFloat)/100;
-          end;
-    end
+if not Assigned(vsel2) then
+  vsel2:= TFBuscarPersona.Create(nil);
+  vsel2.configRelacion(RELACION_CLIENTE);
+  vsel2.EKBusqueda.Abrir;
+  vsel2.OnSeleccionar := OnSelPers;
+  vsel2.ShowModal;
 end;
 
 procedure TFCajero.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -724,7 +721,7 @@ if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_Comprobante
       CD_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat;
       CD_ComprobanteIMPORTE_IVA.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat*CD_ComprobantePORC_IVA.AsFloat;
       CD_ComprobanteIMPORTE_TOTAL.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat+CD_ComprobanteIMPORTE_IVA.AsFloat;
-      CD_ComprobanteSALDO.AsFloat:=CD_ComprobanteIMPORTE_TOTAL.AsFloat;
+      CD_ComprobanteSALDO.AsFloat:=calcularSaldoCtaCorr();
       CD_Comprobante.Post;
 
       ZSP_Comprobante.Close;
@@ -804,7 +801,7 @@ begin
   punitoriosacob:=0;
   acumulado:=0;
   acumFpago:=0;
-  IdProd:=-1;
+  IdProd:='';
   edCantidad.AsInteger:=1;
   edDesc.AsFloat:=(descCliente*100);
   edImporte.AsFloat:=0;
@@ -1012,58 +1009,19 @@ if not(ZQ_Productos.IsEmpty) then
 end;
 
 procedure TFCajero.btVendedorClick(Sender: TObject);
-var
-  sql:string;
 begin
-  sql:= Format('select per.id_persona, per.nombre||'+
-               ' COALESCE('' | Nro.Doc: '' || per.numero_doc,'''')||'+
-               ' COALESCE('' | CUIT/CUIL: '' || per.cuit_cuil,'''') As busqueda'+
-               ' from persona per'+
-               ' left join persona_relacion rel on (per.id_persona = rel.id_persona)'+
-               ' where per.baja = %s '+
-               ' and rel.id_relacion = %d '+
-               ' order by per.nombre', [QuotedStr('N'), RELACION_EMPLEADO]);
-  EKListadoVendedores.SQL.Text:= sql;
-
-  if EKListadoVendedores.Buscar then
-    if (EKListadoVendedores.Resultado <> '') then
-    begin
-      IdVendedor:=StrToInt(EKListadoVendedores.Resultado);
-      CD_ComprobanteID_VENDEDOR.AsInteger:=IdVendedor;
-    end;
+  if not Assigned(vsel3) then
+  vsel3:= TFBuscarPersona.Create(nil);
+  vsel3.configRelacion(RELACION_EMPLEADO);
+  vsel3.EKBusqueda.Abrir;
+  vsel3.OnSeleccionar := OnSelVendedor;
+  vsel3.ShowModal;
 
 end;
 
 procedure TFCajero.edImporteExit(Sender: TObject);
 begin
 edCantidad.SetFocus;
-end;
-
-procedure TFCajero.DBGridFormaPagoColExit(Sender: TObject);
-begin
- if CD_Fpago.State<>dsBrowse then //SI ESTOY DANDO DE ALTA O EDITANDO
-  begin
-    if ((sender as tdbgrid).SelectedField.FullName = 'ID_TIPO_FORMAPAG')then
-      begin
-        if EK_ListadoMedCobroPago.Buscar then
-        begin
-          CD_FpagoID_TIPO_FORMAPAG.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
-        end
-      end
-  end;
-end;
-
-procedure TFCajero.DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-if key = 112 then
-    begin
-      if (((sender as tdbgrid).SelectedField.FullName = 'ID_TIPO_FORMAPAG')or ((sender as tdbgrid).SelectedField.FullName = 'medioPago')) then
-          if EK_ListadoMedCobroPago.Buscar then
-          begin
-            CD_FpagoID_TIPO_FORMAPAG.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
-          end;
-    end;
 end;
 
 function TFCajero.ProductoYaCargado(id:Integer):Boolean ;
@@ -1081,6 +1039,70 @@ begin
       exit;
     end;
     CD_DetalleFactura.Filtered := false;
+end;
+
+procedure TFCajero.DBGridFormaPagoColExit(Sender: TObject);
+begin
+if (((sender as tdbgrid).SelectedField.FullName = 'CUENTA_INGRESO') or
+          ((sender as tdbgrid).SelectedField.FullName = '_ctaIngreso')) then
+      begin
+          if not(CD_Fpago_ctaIngreso.IsNull) then
+            begin
+               CD_Fpago.Edit;
+               ZQ_ListadoCuenta.Locate('id_cuenta',CD_FpagoCUENTA_INGRESO.AsInteger,[]);
+               CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
+               CD_Fpago_esCtaCorr.AsString:=ZQ_ListadoCuentaA_CTA_CORRIENTE.Asstring;
+            end
+      end;
+end;
+
+procedure TFCajero.OnSelPers;
+begin
+     if not(vsel2.ZQ_Personas.IsEmpty) then
+      begin
+      ZQ_Personas.Locate('id_persona',vsel2.ZQ_PersonasID_PERSONA.AsInteger,[]);
+      Cliente:=ZQ_PersonasID_PERSONA.AsInteger;
+      ClienteIVA:=ZQ_PersonasID_TIPO_IVA.AsInteger;
+      CD_ComprobanteID_CLIENTE.AsInteger:=Cliente;
+      CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
+
+      descCliente:= 0;
+      if (not ZQ_PersonasDESCUENTO_ESPECIAL.IsNull) or (ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat <> 0) then
+          if (application.MessageBox(pchar('El cliente seleccionado posee un descuento especial del '+FloatToStr(ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat*100)+'%.'+
+              #13+'Desea aplicar este descuento para todos los productos que se carguen?'), 'Descuento Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+          begin
+            descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat;
+            edDesc.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat+descCliente)*100;
+            CD_ComprobantePORC_DESCUENTO.AsFloat:=(edDesc.AsFloat)/100;
+          end;
+     end;
+     vsel2.Close;
+end;
+
+procedure TFCajero.OnSelVendedor;
+begin
+     if not(vsel3.ZQ_Personas.IsEmpty) then
+      begin
+        ZQ_Personas.Locate('id_persona',vsel3.ZQ_PersonasID_PERSONA.AsInteger,[]);
+        IdVendedor:=vsel3.ZQ_PersonasID_PERSONA.AsInteger;
+        CD_ComprobanteID_VENDEDOR.AsInteger:=IdVendedor;
+      end;
+      vsel3.Close;
+end;
+
+function TFCajero.calcularSaldoCtaCorr(): Double;
+var
+acum:Double;
+begin
+    acum:=0;
+    CD_Fpago.First;
+      while not CD_Fpago.Eof do
+      begin
+       if (CD_Fpago_esCtaCorr.AsString='S') then
+        acum:=acum+CD_FpagoIMPORTE.AsFloat;
+       CD_Fpago.Next;
+      end;
+    Result:=acum;
 end;
 
 end.
