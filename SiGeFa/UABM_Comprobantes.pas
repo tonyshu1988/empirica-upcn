@@ -471,7 +471,6 @@ type
     btnConfirmar: TdxBarLargeButton;
     ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField;
     ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField;
-    Button1: TButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -950,8 +949,11 @@ end;
 
 
 procedure TFABM_Comprobantes.btnModificarClick(Sender: TObject);
+var
+  estado: integer;
 begin
-  if ((ZQ_VerCpb.IsEmpty) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO)) then
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO))) then
     exit;
 
   confirmarComprobante:= false;
@@ -1590,6 +1592,7 @@ begin
     ZQ_CpbProductoPORC_IVA.AsFloat:= vsel.ZQ_ProductoIMPUESTO_IVA.AsFloat;
     ZQ_CpbProductoPORC_DESCUENTO.AsFloat:= descuentoCliente;
     ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
+    ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= 0;
 
     cargarImagen(vsel.ZQ_ProductoID_PRODUCTO.AsInteger);
   end;
@@ -1886,9 +1889,12 @@ end;
 
 
 procedure TFABM_Comprobantes.btnConfirmarClick(Sender: TObject);
+var
+  estado: Integer;
 begin
-//  if ((ZQ_VerCpb.IsEmpty) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO)) then
-//    exit;
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO))) then
+    exit;
 
   confirmarComprobante:= true;
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
@@ -1970,7 +1976,7 @@ end;
 
 procedure TFABM_Comprobantes.ZQ_CpbProductoCANTIDAD_RECIBIDAChange(Sender: TField);
 begin
-  ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= ZQ_CpbProductoCANTIDAD_RECIBIDA.AsFloat;
+//  ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= ZQ_CpbProductoCANTIDAD_RECIBIDA.AsFloat;
 end;
 
 
@@ -1978,7 +1984,7 @@ procedure TFABM_Comprobantes.DBGridListaCpbDrawColumnCell(Sender: TObject; const
 begin
   DBGridListaCpb.Canvas.Font.Color:= clBlack;
 
-  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) then //si el registro esta dado de baja
+  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ALMACENADO) then //si el registro esta dado de baja
   begin
     DBGridListaCpb.Canvas.Brush.Color:= $0098F8F3;
     if (gdFocused in State) or (gdSelected in State) then

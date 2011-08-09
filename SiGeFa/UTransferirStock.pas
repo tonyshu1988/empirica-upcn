@@ -239,10 +239,8 @@ begin
   CD_Producto.CreateDataSet;
   CD_NotaPedidoDetalle.CreateDataSet;
 
-  EKOrdenarGrillaProductos.CargarFiltro;
-  EKOrdenarGrillaProductos.CargarConfigColunmas;
-  EKOrdenarGrillaNotaPedidoDetalle.CargarFiltro;
-  EKOrdenarGrillaNotaPedidoDetalle.CargarConfigColunmas;
+  EKOrdenarGrillaProductos.CargarConfigColumnas;
+  EKOrdenarGrillaNotaPedidoDetalle.CargarConfigColumnas;
 end;
 
 
@@ -467,9 +465,7 @@ end;
 
 procedure TFTransferirStock.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
-  EKOrdenarGrillaProductos.GuardarFiltro;
   EKOrdenarGrillaProductos.GuardarConfigColumnas;
-  EKOrdenarGrillaNotaPedidoDetalle.GuardarFiltro;
   EKOrdenarGrillaNotaPedidoDetalle.GuardarConfigColumnas;
 
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_TransferirStock);

@@ -128,7 +128,6 @@ object FABMClientes: TFABMClientes
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
-          DataSet = DM.ZQ_ConfigReporte
           Stretch = True
         end
         object QRLabel6: TQRLabel
@@ -1343,7 +1342,6 @@ object FABMClientes: TFABMClientes
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
-          DataSet = DM.ZQ_ConfigReporte
           Stretch = True
         end
         object QRLabel17: TQRLabel
@@ -3619,10 +3617,64 @@ object FABMClientes: TFABMClientes
   end
   object EKOrdenar: TEKOrdenarGrilla
     Grilla = DBGridClientes
+    Filtros = <
+      item
+        TituloColumna = 'Apellido y Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C.P.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Provincia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Telefonos'
+        Visible = True
+      end
+      item
+        TituloColumna = 'E-Mail'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Nac.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Doc.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Doc.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sexo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit/Cuil'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'ABM_Clientes'
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 160
     Top = 120
   end

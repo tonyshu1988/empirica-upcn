@@ -156,12 +156,12 @@ end;
 procedure TFBuscarProductoStock.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-EKOrdenarGrilla.GuardarFiltro;
+EKOrdenarGrilla.GuardarConfigColumnas;
 end;
 
 procedure TFBuscarProductoStock.FormCreate(Sender: TObject);
 begin
-EKOrdenarGrilla.CargarFiltro;
+EKOrdenarGrilla.CargarConfigColumnas;
 end;
 
 end.

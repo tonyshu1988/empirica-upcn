@@ -215,7 +215,7 @@ end;
 procedure TFABM_ProductoStock.FormCreate(Sender: TObject);
 begin
   PanelAsociar.Visible:= false;
-  EKOrdenarGrilla.CargarConfigColunmas;
+  EKOrdenarGrilla.CargarConfigColumnas;
 
   CD_Sucursal.CreateDataSet;
   CD_Producto.CreateDataSet;
