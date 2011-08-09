@@ -7,7 +7,7 @@ uses
   Dialogs, Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, ComCtrls,
   ISDBEditDateTimePicker, StdCtrls, Mask, DBCtrls, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla,
-  ZStoredProcedure;
+  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFBuscarPersona = class(TForm)
@@ -96,6 +96,9 @@ type
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     Nro_Persona: TZStoredProc;
     Nro_PersonaID: TIntegerField;
+    ATeclasRapidas: TActionManager;
+    ASeleccionar: TAction;
+    ABuscar: TAction;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
