@@ -250,7 +250,7 @@ begin
 
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKOrdenar.CargarConfigColunmas;
+  EKOrdenar.CargarConfigColumnas;
   dm.EKModelo.abrir(ZQ_Provincia);
   dm.EKModelo.abrir(ZQ_Iva);
   dm.EKModelo.abrir(ZQ_Documento);

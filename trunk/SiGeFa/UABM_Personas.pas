@@ -266,6 +266,8 @@ uses UDM, UPrincipal;
 
 procedure TFABM_Personas.FormCreate(Sender: TObject);
 begin
+  EKOrdenar.CargarConfigColumnas;
+
   DBEApellidoNombre.Color:= dm.colorCampoRequido;
   DBEDireccion.Color:= dm.colorCampoRequido;
   DBLCBoxTipoDoc.Color:= dm.colorCampoRequido;
@@ -284,7 +286,7 @@ end;
 
 procedure TFABM_Personas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenar.GuardarConfigColumnas
+  EKOrdenar.GuardarConfigColumnas;
 end;
 
 

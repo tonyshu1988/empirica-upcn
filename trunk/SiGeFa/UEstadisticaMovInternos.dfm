@@ -15,6 +15,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
   Position = poScreenCenter
   Scaled = False
   Visible = True
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
@@ -35,7 +36,21 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        object DBGridIngresoVsEgresos: TDBGrid
+        object Label1: TLabel
+          Left = 64
+          Top = 24
+          Width = 32
+          Height = 13
+          Caption = 'Label1'
+        end
+        object Label2: TLabel
+          Left = 64
+          Top = 48
+          Width = 32
+          Height = 13
+          Caption = 'Label2'
+        end
+        object DBGridEgresos: TDBGrid
           Left = 546
           Top = 0
           Width = 300
@@ -50,6 +65,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridEgresosDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -68,7 +84,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
               Visible = True
             end>
         end
-        object DBGrid1: TDBGrid
+        object DBGridIngresos: TDBGrid
           Left = 246
           Top = 0
           Width = 300
@@ -83,6 +99,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridIngresosDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -154,6 +171,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           BevelOuter = bvNone
           BevelWidth = 0
           TabOrder = 0
+          OnMouseMove = DBChartEgresosMouseMove
           object Series1: TPieSeries
             Marks.Arrow.Visible = False
             Marks.ArrowLength = 8
@@ -216,7 +234,6 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           Title.Font.Style = [fsBold]
           Title.Text.Strings = (
             'INGRESOS')
-          OnClickSeries = DBChartIngresosClickSeries
           AxisVisible = False
           BackColor = clSilver
           ClipPoints = False
@@ -238,6 +255,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           BevelOuter = bvNone
           BevelWidth = 0
           TabOrder = 2
+          OnMouseMove = DBChartIngresosMouseMove
           object PieSeries1: TPieSeries
             Marks.Arrow.Visible = False
             Marks.ArrowLength = 8

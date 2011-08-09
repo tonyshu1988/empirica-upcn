@@ -23,8 +23,8 @@ object FABM_Personas: TFABM_Personas
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 452
+    Width = 846
+    Height = 446
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -173,8 +173,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            687.916666666666800000
-            68.791666666666680000
+            687.916666666666700000
+            68.791666666666670000
             521.229166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -205,9 +205,9 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            645.583333333333400000
+            645.583333333333300000
             5.291666666666667000
-            608.541666666666800000)
+            608.541666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -265,8 +265,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             29.104166666666670000
             267.229166666666700000)
           Alignment = taLeftJustify
@@ -330,8 +330,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             113.770833333333300000
             134.937500000000000000)
           Alignment = taLeftJustify
@@ -428,7 +428,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             762.000000000000000000
             113.770833333333300000
             164.041666666666700000)
@@ -493,8 +493,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            963.083333333333400000
+            34.395833333333330000
+            963.083333333333300000
             113.770833333333300000
             142.875000000000000000)
           Alignment = taLeftJustify
@@ -558,7 +558,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1397.000000000000000000
             113.770833333333300000
             142.875000000000000000)
@@ -590,8 +590,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             198.437500000000000000
             124.354166666666700000)
           Alignment = taLeftJustify
@@ -655,10 +655,10 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            941.916666666666800000
+            34.395833333333330000
+            941.916666666666700000
             198.437500000000000000
-            92.604166666666680000)
+            92.604166666666670000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -720,8 +720,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             283.104166666666700000
             254.000000000000000000)
           Alignment = taLeftJustify
@@ -818,8 +818,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            359.833333333333400000
+            34.395833333333330000
+            359.833333333333300000
             283.104166666666700000
             227.541666666666700000)
           Alignment = taLeftJustify
@@ -883,7 +883,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             762.000000000000000000
             283.104166666666700000
             277.812500000000000000)
@@ -948,8 +948,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             362.479166666666700000
             203.729166666666700000)
           Alignment = taLeftJustify
@@ -1013,7 +1013,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             529.166666666666700000
             362.479166666666700000
             150.812500000000000000)
@@ -1169,7 +1169,7 @@ object FABM_Personas: TFABM_Personas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1186,8 +1186,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             5.291666666666667000
             105.833333333333300000)
           Alignment = taLeftJustify
@@ -1258,7 +1258,7 @@ object FABM_Personas: TFABM_Personas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1277,10 +1277,10 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             5.291666666666667000
-            60.854166666666680000)
+            60.854166666666670000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1342,7 +1342,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             555.625000000000000000
             5.291666666666667000
             293.687500000000000000)
@@ -1544,7 +1544,7 @@ object FABM_Personas: TFABM_Personas
           Size.Values = (
             52.916666666666670000
             1121.833333333333000000
-            68.791666666666680000
+            68.791666666666670000
             523.875000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -1577,7 +1577,7 @@ object FABM_Personas: TFABM_Personas
             52.916666666666670000
             1076.854166666667000000
             5.291666666666667000
-            613.833333333333400000)
+            613.833333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1850,7 +1850,7 @@ object FABM_Personas: TFABM_Personas
             52.916666666666670000
             10.583333333333330000
             7.937500000000000000
-            304.270833333333400000)
+            304.270833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1948,7 +1948,7 @@ object FABM_Personas: TFABM_Personas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1998,7 +1998,7 @@ object FABM_Personas: TFABM_Personas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -2046,7 +2046,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -2200,7 +2200,7 @@ object FABM_Personas: TFABM_Personas
             37.041666666666670000
             1164.166666666667000000
             5.291666666666667000
-            66.145833333333340000)
+            66.145833333333330000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -2417,10 +2417,10 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             388.937500000000000000
             2.645833333333333000
-            60.854166666666680000)
+            60.854166666666670000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -2449,8 +2449,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            902.229166666666800000
+            34.395833333333330000
+            902.229166666666700000
             2.645833333333333000
             293.687500000000000000)
           Alignment = taLeftJustify
@@ -2475,8 +2475,8 @@ object FABM_Personas: TFABM_Personas
     object DBGridClientes: TDBGrid
       Left = 5
       Top = 20
-      Width = 844
-      Height = 189
+      Width = 836
+      Height = 183
       Align = alClient
       Color = 14606012
       DataSource = DS_Persona
@@ -2603,8 +2603,8 @@ object FABM_Personas: TFABM_Personas
     end
     object PanelEdicion: TPanel
       Left = 5
-      Top = 209
-      Width = 844
+      Top = 203
+      Width = 836
       Height = 238
       Align = alBottom
       BevelOuter = bvNone
@@ -2613,7 +2613,7 @@ object FABM_Personas: TFABM_Personas
       object PageControl: TPageControl
         Left = 0
         Top = 0
-        Width = 844
+        Width = 836
         Height = 238
         ActivePage = TabSheetDatos
         Align = alClient
@@ -3064,7 +3064,7 @@ object FABM_Personas: TFABM_Personas
     object PanelCabecera: TPanel
       Left = 5
       Top = 5
-      Width = 844
+      Width = 836
       Height = 15
       Align = alTop
       BevelOuter = bvNone
@@ -3084,7 +3084,7 @@ object FABM_Personas: TFABM_Personas
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 735
+        Left = 727
         Top = 0
         Width = 109
         Height = 15
@@ -3102,7 +3102,7 @@ object FABM_Personas: TFABM_Personas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4082,6 +4082,7 @@ object FABM_Personas: TFABM_Personas
         TituloColumna = 'Cuit/Cuil'
         Visible = True
       end>
+    NombreGuardar = 'ABM_Personas'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True

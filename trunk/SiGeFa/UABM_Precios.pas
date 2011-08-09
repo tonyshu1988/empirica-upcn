@@ -466,7 +466,7 @@ end;
 procedure TFABM_Precios.FormCreate(Sender: TObject);
 begin
 CDSZQ_Productos.CreateDataSet;
-EKOrdenarGrilla1.CargarFiltro;
+EKOrdenarGrilla1.CargarConfigColumnas;
 end;
 
 procedure TFABM_Precios.btBuscarGoogleClick(Sender: TObject);
@@ -482,7 +482,7 @@ end;
 procedure TFABM_Precios.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarFiltro;
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

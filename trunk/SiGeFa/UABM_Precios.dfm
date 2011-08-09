@@ -23,8 +23,8 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1016
-    Height = 684
+    Width = 1008
+    Height = 678
     Align = alClient
     TabOrder = 4
     object RepListaPrecios: TQuickRep
@@ -105,7 +105,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333400000
+          320.145833333333300000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -173,7 +173,7 @@ object FABM_Precios: TFABM_Precios
             52.916666666666670000
             1145.645833333333000000
             95.250000000000000000
-            478.895833333333400000)
+            478.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1134,7 +1134,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1182,7 +1182,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -1269,7 +1269,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1504,8 +1504,8 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 1
-      Width = 1014
-      Height = 648
+      Width = 1006
+      Height = 642
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1604,8 +1604,8 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 649
-      Width = 1014
+      Top = 643
+      Width = 1006
       Height = 34
       Align = alBottom
       TabOrder = 1
@@ -1676,7 +1676,7 @@ object FABM_Precios: TFABM_Precios
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2566,7 +2566,7 @@ object FABM_Precios: TFABM_Precios
     Grilla = DBGridProductos
     Filtros = <
       item
-        TituloColumna = 'ID'
+        TituloColumna = 'Cod. Corto'
         Visible = True
       end
       item
@@ -2611,10 +2611,6 @@ object FABM_Precios: TFABM_Precios
       end
       item
         TituloColumna = 'Impuesto Interno'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cod. Corto'
         Visible = True
       end>
     NombreGuardar = 'ABM_Precios'
