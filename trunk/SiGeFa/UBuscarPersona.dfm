@@ -1399,7 +1399,7 @@ object FBuscarPersona: TFBuscarPersona
   object EKBusqueda: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Nombre y Apellido:'
+        Titulo = 'Nombre y Apellido'
         Campo = 'nombre'
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
@@ -1407,7 +1407,7 @@ object FBuscarPersona: TFBuscarPersona
         ItemIndex = -1
       end
       item
-        Titulo = 'Direcci'#243'n:'
+        Titulo = 'Direcci'#243'n'
         Campo = 'direccion'
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
@@ -1415,7 +1415,7 @@ object FBuscarPersona: TFBuscarPersona
         ItemIndex = -1
       end
       item
-        Titulo = 'Email:'
+        Titulo = 'Email'
         Campo = 'email'
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
@@ -1423,7 +1423,7 @@ object FBuscarPersona: TFBuscarPersona
         ItemIndex = -1
       end
       item
-        Titulo = 'Tel'#233'fono:'
+        Titulo = 'Tel'#233'fono'
         Campo = 'telefono'
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
@@ -1431,7 +1431,7 @@ object FBuscarPersona: TFBuscarPersona
         ItemIndex = -1
       end
       item
-        Titulo = 'Fecha Nacimiento:'
+        Titulo = 'Fecha Nacimiento'
         Campo = 'fecha_nacimiento'
         Tabla = 'p'
         TipoCampo = EK_Fecha
