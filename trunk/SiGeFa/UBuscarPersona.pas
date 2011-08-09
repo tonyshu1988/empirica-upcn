@@ -104,7 +104,7 @@ type
     procedure btnCrearPersonaClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure configCliente();
+    procedure configRelacion(relacion:Integer);
     function validarcampos():boolean;
   private
     { Private declarations }
@@ -276,7 +276,7 @@ begin
   end;
 end;
 
-procedure TFBuscarPersona.configCliente();
+procedure TFBuscarPersona.configRelacion(relacion:Integer);
 begin
   FBuscarPersona.Caption:= 'Buscar Cliente';
   btnCrearPersona.Visible:= ivNever;
@@ -285,7 +285,7 @@ begin
 
   EKBusqueda.SQL_Select.Text:= 'select p.*';
   EKBusqueda.SQL_From.Text:= 'from persona p left join persona_relacion pr on (p.id_persona = pr.id_persona)';
-  EKBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d)', [QuotedStr('S'), RELACION_CLIENTE]);
+  EKBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d)', [QuotedStr('S'), relacion]);
   EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
 end;
 
