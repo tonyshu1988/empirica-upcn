@@ -130,6 +130,7 @@ end;
 procedure TFABM_Marcas.btnBuscarClick(Sender: TObject);
 begin
   EKBuscar.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
 end;
 
 
@@ -299,10 +300,8 @@ procedure TFABM_Marcas.FormCreate(Sender: TObject);
 begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  ZQ_Marcas.Close;
-  ZQ_Marcas.open;
-
-  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);   
+  EKBuscar.Abrir;
+  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
 end;
 
 

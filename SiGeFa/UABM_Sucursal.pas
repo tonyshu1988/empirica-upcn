@@ -162,7 +162,8 @@ uses  UDM, UPrincipal;
 
 procedure TFABM_Sucursal.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscar.Buscar
+  EKBuscar.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
 end;
 
 
@@ -249,6 +250,7 @@ end;
 procedure TFABM_Sucursal.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABMSucursal);
 end;
 
@@ -320,9 +322,11 @@ end;
 
 procedure TFABM_Sucursal.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
+
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  dm.EKModelo.abrir(ZQ_Sucursal);
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
 end;
 

@@ -22,8 +22,8 @@ object FABM_Sucursal: TFABM_Sucursal
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 869
-    Height = 470
+    Width = 861
+    Height = 464
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -143,7 +143,7 @@ object FABM_Sucursal: TFABM_Sucursal
             50.270833333333330000
             793.750000000000000000
             124.354166666666700000
-            312.208333333333400000)
+            312.208333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -174,7 +174,7 @@ object FABM_Sucursal: TFABM_Sucursal
           Size.Values = (
             52.916666666666670000
             746.125000000000000000
-            68.791666666666680000
+            68.791666666666670000
             404.812500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -205,7 +205,7 @@ object FABM_Sucursal: TFABM_Sucursal
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            724.958333333333400000
+            724.958333333333300000
             5.291666666666667000
             449.791666666666700000)
           Alignment = taCenter
@@ -497,7 +497,7 @@ object FABM_Sucursal: TFABM_Sucursal
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -547,7 +547,7 @@ object FABM_Sucursal: TFABM_Sucursal
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -595,7 +595,7 @@ object FABM_Sucursal: TFABM_Sucursal
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -772,8 +772,8 @@ object FABM_Sucursal: TFABM_Sucursal
     object DBGridSucursal: TDBGrid
       Left = 5
       Top = 5
-      Width = 859
-      Height = 214
+      Width = 851
+      Height = 208
       Align = alClient
       Color = 14606012
       DataSource = DS_Sucursal
@@ -836,8 +836,8 @@ object FABM_Sucursal: TFABM_Sucursal
     end
     object PageControl1: TPageControl
       Left = 5
-      Top = 219
-      Width = 859
+      Top = 213
+      Width = 851
       Height = 246
       ActivePage = TabSheetDatosReportes
       Align = alBottom
@@ -1074,7 +1074,7 @@ object FABM_Sucursal: TFABM_Sucursal
         object GroupBox1: TGroupBox
           Left = 0
           Top = 76
-          Width = 851
+          Width = 843
           Height = 142
           Align = alClient
           Caption = '  Configuraci'#243'n de Comprobantes  '
@@ -1230,7 +1230,7 @@ object FABM_Sucursal: TFABM_Sucursal
         object GroupBox2: TGroupBox
           Left = 0
           Top = 0
-          Width = 851
+          Width = 843
           Height = 76
           Align = alTop
           Caption = '  Configuraci'#243'n de Reportes  '
@@ -1301,7 +1301,7 @@ object FABM_Sucursal: TFABM_Sucursal
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 869
+    Width = 861
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1322,7 +1322,7 @@ object FABM_Sucursal: TFABM_Sucursal
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 759
+      Left = 751
       Top = 1
       Width = 109
       Height = 17
@@ -1339,7 +1339,7 @@ object FABM_Sucursal: TFABM_Sucursal
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2005,6 +2005,7 @@ object FABM_Sucursal: TFABM_Sucursal
         TituloColumna = 'eMail'
         Visible = True
       end>
+    NombreGuardar = 'ABM_Sucursal'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True

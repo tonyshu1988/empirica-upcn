@@ -1,8 +1,8 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 225
-  Top = 41
+  Left = 207
+  Top = 78
   Width = 1024
-  Height = 768
+  Height = 713
   Caption = 'FABMEmpresas'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -23,7 +23,7 @@ object FABMEmpresas: TFABMEmpresas
     Left = 0
     Top = 0
     Width = 1008
-    Height = 678
+    Height = 623
     Align = alClient
     TabOrder = 0
     object RepDetalleEmpresa: TQuickRep
@@ -2254,7 +2254,7 @@ object FABMEmpresas: TFABMEmpresas
     end
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 396
+      Top = 341
       Width = 1006
       Height = 281
       ActivePage = TabContactos
@@ -2679,7 +2679,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridViajantes: TDBGrid
           Left = 0
           Top = 0
-          Width = 877
+          Width = 998
           Height = 134
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
@@ -2753,7 +2753,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoViajantes: TDBMemo
           Left = 0
           Top = 153
-          Width = 877
+          Width = 998
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -2765,7 +2765,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel2: TPanel
           Left = 0
           Top = 134
-          Width = 877
+          Width = 998
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -2786,7 +2786,7 @@ object FABMEmpresas: TFABMEmpresas
         object GrillaMarcas: TDBGrid
           Left = 0
           Top = 0
-          Width = 869
+          Width = 998
           Height = 134
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
@@ -2825,7 +2825,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemo1: TDBMemo
           Left = 0
           Top = 153
-          Width = 869
+          Width = 998
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -2843,7 +2843,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel3: TPanel
           Left = 0
           Top = 134
-          Width = 869
+          Width = 998
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -2865,7 +2865,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoDescripcion: TDBMemo
           Left = 0
           Top = 0
-          Width = 849
+          Width = 978
           Height = 233
           Align = alClient
           DataField = 'DESCRIPCION_PRIVADA'
@@ -2885,7 +2885,7 @@ object FABMEmpresas: TFABMEmpresas
       Left = 1
       Top = 20
       Width = 1006
-      Height = 376
+      Height = 321
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -3005,13 +3005,13 @@ object FABMEmpresas: TFABMEmpresas
       ParentShowHint = False
       ShowHint = False
       TabOrder = 2
-      object lblResultadoBusqueda: TLabel
+      object lblCantidadRegistros: TLabel
         Left = 1
         Top = 1
-        Width = 144
+        Width = 134
         Height = 17
         Align = alLeft
-        Caption = 'lblResultadoBusqueda'
+        Caption = 'lblCantidadRegistros'
         Font.Charset = ANSI_CHARSET
         Font.Color = clNavy
         Font.Height = -11
@@ -3697,8 +3697,8 @@ object FABMEmpresas: TFABMEmpresas
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 748
-    Top = 192
+    Left = 92
+    Top = 208
     DockControlHeights = (
       0
       0
@@ -3888,8 +3888,8 @@ object FABMEmpresas: TFABMEmpresas
       'from empresa e'
       'order by e.nombre')
     Params = <>
-    Left = 256
-    Top = 120
+    Left = 264
+    Top = 56
     object ZQ_EmpresaCUIT_CUIL: TStringField
       FieldName = 'CUIT_CUIL'
       Size = 30
@@ -3978,8 +3978,8 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_Empresa: TDataSource
     DataSet = ZQ_Empresa
-    Left = 192
-    Top = 256
+    Left = 264
+    Top = 120
   end
   object ZQ_Provincia: TZQuery
     Connection = DM.Conexion
@@ -3987,8 +3987,8 @@ object FABMEmpresas: TFABMEmpresas
       'select *'
       'from provincia p')
     Params = <>
-    Left = 424
-    Top = 112
+    Left = 400
+    Top = 56
     object ZQ_ProvinciaID_PROVINCIA: TIntegerField
       FieldName = 'ID_PROVINCIA'
       Required = True
@@ -4000,8 +4000,8 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_Provincia: TDataSource
     DataSet = ZQ_Provincia
-    Left = 424
-    Top = 176
+    Left = 400
+    Top = 120
   end
   object ZQ_TipoEmpresa: TZQuery
     Connection = DM.Conexion
@@ -4010,8 +4010,8 @@ object FABMEmpresas: TFABMEmpresas
       'from tipo_empresa te'
       'where te.baja <> '#39'S'#39)
     Params = <>
-    Left = 488
-    Top = 112
+    Left = 480
+    Top = 56
     object ZQ_TipoEmpresaID_TIPO_EMPRESA: TIntegerField
       FieldName = 'ID_TIPO_EMPRESA'
       Required = True
@@ -4023,8 +4023,8 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_TipoEmpresa: TDataSource
     DataSet = ZQ_TipoEmpresa
-    Left = 488
-    Top = 176
+    Left = 480
+    Top = 120
   end
   object ZQ_TipoIVA: TZQuery
     Connection = DM.Conexion
@@ -4032,8 +4032,8 @@ object FABMEmpresas: TFABMEmpresas
       'select *'
       'from tipo_iva ti')
     Params = <>
-    Left = 552
-    Top = 112
+    Left = 560
+    Top = 56
     object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True
@@ -4061,8 +4061,8 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_TipoIVA: TDataSource
     DataSet = ZQ_TipoIVA
-    Left = 552
-    Top = 176
+    Left = 560
+    Top = 120
   end
   object EKBusquedaAvanzadaEmpresas: TEKBusquedaAvanzada
     CriteriosBusqueda = <
@@ -4135,12 +4135,11 @@ object FABMEmpresas: TFABMEmpresas
     SQL_Orden.Strings = (
       'order by e.nombre')
     UsarWhereOriginal = EK_Sin_Where
-    InfoRegistros = lblResultadoBusqueda
     PantallaReducida = True
-    Left = 128
-    Top = 120
+    Left = 88
+    Top = 56
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
+  object EKOrdenarEmpresas: TEKOrdenarGrilla
     Grilla = DBGridEmpresas
     Filtros = <
       item
@@ -4187,19 +4186,20 @@ object FABMEmpresas: TFABMEmpresas
         TituloColumna = 'Tipo I.V.A'
         Visible = True
       end>
+    NombreGuardar = 'ABM_Empresa'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 328
-    Top = 72
+    Left = 88
+    Top = 104
   end
   object PopupMenuContactos: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
-    Left = 277
-    Top = 378
+    Left = 316
+    Top = 396
     object AgregarContacto1: TMenuItem
       Caption = 'Agregar Contacto'
       Hint = 'Agregar un contacto al listado de contactos'
@@ -4231,8 +4231,8 @@ object FABMEmpresas: TFABMEmpresas
         Name = 'id_empresa'
         ParamType = ptUnknown
       end>
-    Left = 405
-    Top = 378
+    Left = 781
+    Top = 394
     ParamData = <
       item
         DataType = ftUnknown
@@ -4337,8 +4337,8 @@ object FABMEmpresas: TFABMEmpresas
       'select *'
       'from Persona')
     Params = <>
-    Left = 253
-    Top = 282
+    Left = 837
+    Top = 58
     object ZQ_PersonasID_PERSONA: TIntegerField
       FieldName = 'ID_PERSONA'
       Required = True
@@ -4401,18 +4401,18 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_PersonaRelacionContacto: TDataSource
     DataSet = ZQ_PersonaRelacionContacto
-    Left = 405
-    Top = 426
+    Left = 781
+    Top = 442
   end
   object DS_PersonaRelacionViajante: TDataSource
     DataSet = ZQ_PersonaRelacionViajante
     Left = 629
-    Top = 426
+    Top = 442
   end
   object PopupMenuViajantes: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
-    Left = 757
-    Top = 378
+    Left = 436
+    Top = 396
     object AgregarViajante1: TMenuItem
       Caption = 'Agregar Viajante'
       ImageIndex = 14
@@ -4443,7 +4443,7 @@ object FABMEmpresas: TFABMEmpresas
         ParamType = ptUnknown
       end>
     Left = 629
-    Top = 378
+    Top = 394
     ParamData = <
       item
         DataType = ftUnknown
@@ -4553,8 +4553,8 @@ object FABMEmpresas: TFABMEmpresas
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_EMPRESA_ID'
-    Left = 656
-    Top = 120
+    Left = 264
+    Top = 184
     ParamData = <
       item
         DataType = ftInteger
@@ -4566,8 +4566,8 @@ object FABMEmpresas: TFABMEmpresas
     end
   end
   object PopupMenuSkypeMail: TPopupMenu
-    Left = 197
-    Top = 419
+    Left = 196
+    Top = 396
     object llamar1: TMenuItem
       Caption = 'Llamar por Skype'
       OnClick = llamar1Click
@@ -4578,8 +4578,8 @@ object FABMEmpresas: TFABMEmpresas
     end
   end
   object ATeclasRapidas: TActionManager
-    Left = 128
-    Top = 178
+    Left = 88
+    Top = 154
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -4624,8 +4624,8 @@ object FABMEmpresas: TFABMEmpresas
   object PopupMenuMarcas: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
-    Left = 341
-    Top = 266
+    Left = 84
+    Top = 396
     object MenuItem1: TMenuItem
       Caption = 'Agregar Marca'
       ImageIndex = 14
@@ -4649,8 +4649,8 @@ object FABMEmpresas: TFABMEmpresas
         Name = 'id_empresa'
         ParamType = ptUnknown
       end>
-    Left = 613
-    Top = 282
+    Left = 741
+    Top = 56
     ParamData = <
       item
         DataType = ftUnknown
@@ -4697,8 +4697,8 @@ object FABMEmpresas: TFABMEmpresas
       'select *'
       'from Marca')
     Params = <>
-    Left = 125
-    Top = 274
+    Left = 645
+    Top = 56
     object ZQ_MarcasID_MARCA: TIntegerField
       FieldName = 'ID_MARCA'
       Required = True
@@ -4717,8 +4717,8 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_EmpresaMarca: TDataSource
     DataSet = ZQ_EmpresaMarca
-    Left = 448
-    Top = 240
+    Left = 744
+    Top = 120
   end
   object EKListadoMarca: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -4733,19 +4733,19 @@ object FABMEmpresas: TFABMEmpresas
     CampoClave = 'ID_MARCA'
     BuscarEnQuery = ZQ_Marcas
     TituloVentana = 'Buscar Marca'
-    Left = 565
-    Top = 232
+    Left = 837
+    Top = 120
   end
   object DataSetProvider1: TDataSetProvider
     DataSet = ZQ_EmpresaMarca
-    Left = 757
-    Top = 284
+    Left = 837
+    Top = 180
   end
   object EKVistaPreviaListaEmpresas: TEKVistaPreviaQR
     Reporte = RepListaEmpresas
     ShowModal = False
-    Left = 53
-    Top = 558
+    Left = 397
+    Top = 184
   end
   object ZQ_RelacionEmpresa: TZQuery
     Connection = DM.Conexion
@@ -4768,8 +4768,8 @@ object FABMEmpresas: TFABMEmpresas
         Name = 'ID_EMPRESA'
         ParamType = ptUnknown
       end>
-    Left = 468
-    Top = 570
+    Left = 644
+    Top = 120
     ParamData = <
       item
         DataType = ftUnknown
@@ -4800,7 +4800,79 @@ object FABMEmpresas: TFABMEmpresas
   object EKVistaPreviaDetalleEmpresa: TEKVistaPreviaQR
     Reporte = RepDetalleEmpresa
     ShowModal = False
-    Left = 53
-    Top = 486
+    Left = 565
+    Top = 184
+  end
+  object EKOrdenarContactos: TEKOrdenarGrilla
+    Grilla = DBGridContactos
+    Filtros = <
+      item
+        TituloColumna = 'Nombre y Apellido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fono'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Email'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod.Postal'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_EmpresaContactos'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 85
+    Top = 445
+  end
+  object EKOrdenarViajantes: TEKOrdenarGrilla
+    Grilla = DBGridViajantes
+    Filtros = <
+      item
+        TituloColumna = 'Nombre y Apellido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fono'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Email'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod.Postal'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_EmpresaViajantes'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 197
+    Top = 445
   end
 end

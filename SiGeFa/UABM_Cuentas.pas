@@ -132,6 +132,7 @@ uses UDM, UPrincipal, UUtilidades;
 procedure TFABM_Cuentas.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 
@@ -282,6 +283,7 @@ end;
 procedure TFABM_Cuentas.btnBuscarClick(Sender: TObject);
 begin
   EKBuscar.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
 end;
 
 
@@ -311,8 +313,11 @@ end;
 
 procedure TFABM_Cuentas.FormCreate(Sender: TObject);
 begin
-  dm.EKModelo.abrir(ZQ_Cuentas);
+  EKOrdenarGrilla1.CargarConfigColumnas;
+
   dm.EKModelo.abrir(ZQ_MedioPago);
+
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
 end;
 

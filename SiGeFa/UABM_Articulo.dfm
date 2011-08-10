@@ -22,8 +22,8 @@ object FABM_Articulo: TFABM_Articulo
   object PanelFondo: TPanel
     Left = 0
     Top = 18
-    Width = 862
-    Height = 398
+    Width = 854
+    Height = 392
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
@@ -148,7 +148,7 @@ object FABM_Articulo: TFABM_Articulo
             50.270833333333330000
             809.625000000000000000
             124.354166666666700000
-            280.458333333333400000)
+            280.458333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -179,7 +179,7 @@ object FABM_Articulo: TFABM_Articulo
           Size.Values = (
             52.916666666666670000
             754.062500000000000000
-            68.791666666666680000
+            68.791666666666670000
             388.937500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -210,7 +210,7 @@ object FABM_Articulo: TFABM_Articulo
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            735.541666666666800000
+            735.541666666666700000
             5.291666666666667000
             428.625000000000000000)
           Alignment = taCenter
@@ -475,7 +475,7 @@ object FABM_Articulo: TFABM_Articulo
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -525,7 +525,7 @@ object FABM_Articulo: TFABM_Articulo
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -573,7 +573,7 @@ object FABM_Articulo: TFABM_Articulo
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -717,8 +717,8 @@ object FABM_Articulo: TFABM_Articulo
     end
     object PanelEdicion: TPanel
       Left = 0
-      Top = 340
-      Width = 862
+      Top = 334
+      Width = 854
       Height = 58
       Align = alBottom
       BevelOuter = bvNone
@@ -791,8 +791,8 @@ object FABM_Articulo: TFABM_Articulo
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 862
-      Height = 340
+      Width = 854
+      Height = 334
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -806,8 +806,8 @@ object FABM_Articulo: TFABM_Articulo
       object DBGridArticulo: TDBGrid
         Left = 5
         Top = 5
-        Width = 603
-        Height = 330
+        Width = 595
+        Height = 324
         Align = alClient
         Color = 14606012
         DataSource = DS_Articulo
@@ -838,10 +838,10 @@ object FABM_Articulo: TFABM_Articulo
           end>
       end
       object DBGridMedidas: TDBGrid
-        Left = 608
+        Left = 600
         Top = 5
         Width = 249
-        Height = 330
+        Height = 324
         Align = alRight
         Color = 14606012
         DataSource = DS_Medidas
@@ -867,7 +867,7 @@ object FABM_Articulo: TFABM_Articulo
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 862
+    Width = 854
     Height = 18
     Align = alTop
     ParentShowHint = False
@@ -888,7 +888,7 @@ object FABM_Articulo: TFABM_Articulo
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 752
+      Left = 744
       Top = 1
       Width = 109
       Height = 16
@@ -905,7 +905,7 @@ object FABM_Articulo: TFABM_Articulo
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1610,8 +1610,8 @@ object FABM_Articulo: TFABM_Articulo
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
+    PermitirMover = False
+    PermitirFiltrar = False
     Left = 48
     Top = 186
   end

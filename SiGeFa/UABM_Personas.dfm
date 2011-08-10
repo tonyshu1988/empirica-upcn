@@ -3069,13 +3069,13 @@ object FABM_Personas: TFABM_Personas
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
-      object lblResultadoBusqueda: TLabel
+      object lblCantidadRegistros: TLabel
         Left = 0
         Top = 0
-        Width = 144
+        Width = 134
         Height = 15
         Align = alLeft
-        Caption = 'lblResultadoBusqueda'
+        Caption = 'lblCantidadRegistros'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clNavy
         Font.Height = -11
@@ -3690,12 +3690,13 @@ object FABM_Personas: TFABM_Personas
     UpdateObject = ZU_Persona
     SQL.Strings = (
       
-        'select cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv.nombre_p' +
-        'rovincia'
+        'select distinct cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv' +
+        '.nombre_provincia'
       'from persona cl'
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
       'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
+      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
       'order by cl.nombre')
     Params = <>
     Left = 64
@@ -3784,6 +3785,20 @@ object FABM_Personas: TFABM_Personas
   end
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
+      item
+        Titulo = 'Relaci'#243'n'
+        Campo = 'id_relacion'
+        Tabla = 'persona_relacion'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoCombollenarSQL = ZQ_TipoRelacion
+        TipoCombollenarCampo = 'descripcion'
+        TipoCombollenarCampoReal = 'id_tipo_relacion'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
       item
         Titulo = 'Apellido y Nombre'
         Campo = 'NOMBRE'
@@ -3915,29 +3930,30 @@ object FABM_Personas: TFABM_Personas
     DataSet = ZQ_Persona
     SQL.Strings = (
       
-        'select cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv.nombre_p' +
-        'rovincia'
+        'select distinct cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv' +
+        '.nombre_provincia'
       'from persona cl'
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
       'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
+      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
       ''
       'order by cl.nombre')
     SQL_Select.Strings = (
       
-        'select cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv.nombre_p' +
-        'rovincia')
+        'select distinct cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv' +
+        '.nombre_provincia')
     SQL_From.Strings = (
       'from persona cl'
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
-      'left join provincia pv on (cl.id_provincia = pv.id_provincia)')
+      'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
+      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)')
     SQL_Where.Strings = (
       '')
     SQL_Orden.Strings = (
       'order by cl.nombre')
     UsarWhereOriginal = EK_Sin_Where
-    InfoRegistros = lblResultadoBusqueda
     Left = 160
     Top = 72
   end
@@ -4424,6 +4440,23 @@ object FABM_Personas: TFABM_Personas
     Top = 283
     object ZQ_UltimoNroCODIGO_CORTO: TIntegerField
       FieldName = 'CODIGO_CORTO'
+    end
+  end
+  object ZQ_TipoRelacion: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select id_tipo_relacion, descripcion'
+      'from tipo_relacion')
+    Params = <>
+    Left = 520
+    Top = 72
+    object ZQ_TipoRelacionID_TIPO_RELACION: TIntegerField
+      FieldName = 'ID_TIPO_RELACION'
+      Required = True
+    end
+    object ZQ_TipoRelacionDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
     end
   end
 end

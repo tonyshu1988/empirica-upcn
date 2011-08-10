@@ -125,6 +125,7 @@ uses UPrincipal, UDM;
 procedure TFABM_TipoIVA.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
 
@@ -138,6 +139,7 @@ end;
 procedure TFABM_TipoIVA.btnBuscarClick(Sender: TObject);
 begin
   EKbuscar.buscar;
+  dm.mostrarCantidadRegistro(ZQ_TipoIva, lblCantidadRegistros);
 end;
 
 
@@ -225,12 +227,12 @@ end;
 
 procedure TFABM_TipoIVA.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
+
   StaticTxtBaja.Visible:= false;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  ZQ_TipoIva.Close;
-  ZQ_TipoIva.open;
-
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoIva, lblCantidadRegistros);
 end;
 

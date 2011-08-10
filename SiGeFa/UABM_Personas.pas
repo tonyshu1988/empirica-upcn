@@ -99,7 +99,7 @@ type
     DBECuit_Cuil: TDBEdit;
     ZU_Persona: TZUpdateSQL;
     PanelCabecera: TPanel;
-    lblResultadoBusqueda: TLabel;
+    lblCantidadRegistros: TLabel;
     ZQ_RelacionPersona: TZQuery;
     StaticTxtBaja: TStaticText;
     TabSheet1: TTabSheet;
@@ -219,6 +219,9 @@ type
     ZQ_PersonaCODIGO_CORTO: TIntegerField;
     Label11: TLabel;
     DBEdit1: TDBEdit;
+    ZQ_TipoRelacion: TZQuery;
+    ZQ_TipoRelacionID_TIPO_RELACION: TIntegerField;
+    ZQ_TipoRelacionDESCRIPCION: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -276,11 +279,13 @@ begin
   PageControl.ActivePage:= TabSheetDatos;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-//  EKOrdenar.CargarConfigColunmas;
   dm.EKModelo.abrir(ZQ_Provincia);
   dm.EKModelo.abrir(ZQ_Iva);
   dm.EKModelo.abrir(ZQ_Documento);
+  dm.EKModelo.abrir(ZQ_TipoRelacion);
+
   EKBuscar.Abrir;
+  dm.mostrarCantidadRegistro(ZQ_Persona, lblCantidadRegistros);
 end;
 
 
@@ -305,6 +310,7 @@ end;
 procedure TFABM_Personas.btnBuscarClick(Sender: TObject);
 begin
   EKBuscar.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_Persona, lblCantidadRegistros);
 end;
 
 
@@ -484,7 +490,9 @@ begin
       Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
       exit;
     end
-  end
+  end;
+
+  dm.mostrarCantidadRegistro(ZQ_Persona, lblCantidadRegistros);
 end;
 
 
@@ -585,7 +593,7 @@ begin
   ZQ_RelacionPersona.ParamByName('id_persona').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
   ZQ_RelacionPersona.Open;
 
-  if ZQ_RelacionPersona.Locate('ID_PERSONA; ID_SUCURSAL', VarArrayOf([ZQ_PersonaID_PERSONA.AsString,inttostr(SUCURSAL_LOGUEO)]), []) then
+  if ZQ_RelacionPersona.Locate('ID_RELACION; ID_SUCURSAL', VarArrayOf([RELACION_CLIENTE, inttostr(SUCURSAL_LOGUEO)]), []) then
   begin
     existeRelacionCliente:= true;
     RadioGroupRelacionCliente.ItemIndex:= 1;

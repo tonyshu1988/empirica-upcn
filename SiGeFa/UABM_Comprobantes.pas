@@ -32,7 +32,7 @@ uses
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UBuscarProducto;
+  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona;
 
 type
   TFABM_Comprobantes = class(TForm)
@@ -538,13 +538,15 @@ type
     estadoPantalla: string;
     tipoComprobante: integer;
     id_comprobante: integer;
-    vsel: TFBuscarProducto;
     alignAnterior: TAlign;
     grillaActual: string;
     agrandarPanelFPago: boolean;
     agrandarPanelProducto: boolean;
     descuentoCliente: double;
     preguntarPorDescuento: boolean;
+    vselProducto: TFBuscarProducto;
+    vselPersona: TFBuscarPersona;
+    procedure onSelPersona;
     procedure onSelProducto;
     function getColumnIndex(Grid: TDBGrid; Nombre: string): Integer;
   public
@@ -1334,57 +1336,52 @@ begin
 end;
 
 
-procedure TFABM_Comprobantes.btnBuscarPersonaClick(Sender: TObject);
-var
-  sql:string;
+procedure TFABM_Comprobantes.onSelPersona;
 begin
-  if confirmarComprobante then
-    exit;
-
-  sql:= Format('select per.id_persona as id, per.nombre as busqueda '+
-               'from persona per '+
-               'left join persona_relacion rel on (per.id_persona = rel.id_persona) '+
-               'where per.baja = %s '+
-               '  and rel.id_relacion = %d '+
-               'order by per.nombre', [QuotedStr('N'), RELACION_CLIENTE]);
-
-  EKListadoEntidad.SQL.Text:= sql;
-
-  if EKListadoEntidad.Buscar then
+  if (not (vselPersona.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
   begin
-    if (EKListadoEntidad.Resultado <> '') then
-    begin
-      btnBuscarPersona.Down:= true;
-      ZQ_Proveedor.Close;
-      PanelEditar_DatosGralCliente.BringToFront;
+    btnBuscarPersona.Down:= true;
+    ZQ_Proveedor.Close;
+    PanelEditar_DatosGralCliente.BringToFront;
 
-      ZQ_Cliente.Close;
-      ZQ_Cliente.ParamByName('id_persona').AsInteger:= StrToInt(EKListadoEntidad.Resultado);
-      ZQ_Cliente.Open;
+    ZQ_Cliente.Close;
+    ZQ_Cliente.ParamByName('id_persona').AsInteger:= vselPersona.ZQ_PersonasID_PERSONA.AsInteger;
+    ZQ_Cliente.Open;
 
-      descuentoCliente:= 0;
-      if tipoComprobante = CPB_PRESUPUESTO then //si es un presupuesto pregunto si deseo aplicar el descuento especial del cliente
-        if (not ZQ_ClienteDESCUENTO_ESPECIAL.IsNull) or (ZQ_ClienteDESCUENTO_ESPECIAL.AsFloat <> 0) then
-          if (application.MessageBox(pchar('El cliente seleccionado posee un descuento especial del '+FloatToStr(ZQ_ClienteDESCUENTO_ESPECIAL.AsFloat*100)+'%.'+
-              #13+'Desea aplicar este descuento para todos los productos que se carguen?'), 'Descuento Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-          begin
-            descuentoCliente:= ZQ_ClienteDESCUENTO_ESPECIAL.AsFloat;
-          end;
+    descuentoCliente:= 0;
+    if tipoComprobante = CPB_PRESUPUESTO then //si es un presupuesto pregunto si deseo aplicar el descuento especial del cliente
+      if (not ZQ_ClienteDESCUENTO_ESPECIAL.IsNull) or (ZQ_ClienteDESCUENTO_ESPECIAL.AsFloat <> 0) then
+        if (application.MessageBox(pchar('El cliente seleccionado posee un descuento especial del '+FloatToStr(ZQ_ClienteDESCUENTO_ESPECIAL.AsFloat*100)+'%.'+
+            #13+'Desea aplicar este descuento para todos los productos que se carguen?'), 'Descuento Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+        begin
+          descuentoCliente:= ZQ_ClienteDESCUENTO_ESPECIAL.AsFloat;
+        end;
 
-      if ZQ_Comprobante.State = dsBrowse then
-        ZQ_Comprobante.Edit;    
-      ZQ_ComprobanteID_PROVEEDOR.Clear;
-      ZQ_ComprobanteID_CLIENTE.AsInteger:= ZQ_ClienteID_PERSONA.AsInteger;
-    end
-    else
-      if not ZQ_ComprobanteID_PROVEEDOR.IsNull then
-        btnBuscarEmpresa.Down:= true;
+    if ZQ_Comprobante.State = dsBrowse then
+      ZQ_Comprobante.Edit;
+    ZQ_ComprobanteID_PROVEEDOR.Clear;
+    ZQ_ComprobanteID_CLIENTE.AsInteger:= ZQ_ClienteID_PERSONA.AsInteger;
   end
   else
     if not ZQ_ComprobanteID_PROVEEDOR.IsNull then
       btnBuscarEmpresa.Down:= true;
 
   EKDBDateEmision.SetFocus;
+  
+  vselPersona.Close;
+end;
+
+
+procedure TFABM_Comprobantes.btnBuscarPersonaClick(Sender: TObject);
+begin
+  if confirmarComprobante then  //si estoy confirmando un comprobante salgo
+    exit;
+
+  if not Assigned(vselPersona) then
+    vselPersona:= TFBuscarPersona.Create(nil);
+  vselPersona.btnBuscar.Click;
+  vselPersona.OnSeleccionar := onSelPersona;
+  vselPersona.ShowModal;
 end;
 
 
@@ -1564,40 +1561,40 @@ end;
 
 procedure TFABM_Comprobantes.onSelProducto;
 begin
-  if not vsel.ZQ_Producto.IsEmpty then
+  if not vselProducto.ZQ_Producto.IsEmpty then
   begin
     CD_Producto.Append;
-    CD_Producto_idProducto.AsInteger := vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
-    CD_Producto_producto.AsString := vsel.ZQ_ProductoNOMBRE.AsString;
-    CD_Producto_medida.AsString := vsel.ZQ_ProductoMEDIDA.AsString;
-    CD_Producto_color.AsString := vsel.ZQ_ProductoCOLOR.AsString;
-    CD_Producto_marca.AsString := vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
-    CD_Producto_tipoArticulo.AsString := vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
-    CD_Producto_articulo.AsString := vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
-    CD_Producto_codigoBarra.AsString := vsel.ZQ_ProductoCODIGO_BARRA.AsString;
-    CD_Producto_codCabecera.AsString := vsel.ZQ_ProductoCOD_CORTO.AsString;
-    CD_Producto_codProducto.AsString := vsel.ZQ_ProductoCOD_CORTO_1.AsString;
-    CD_Producto_precioCosto.AsFloat := vsel.ZQ_ProductoPRECIO_COSTO.AsFloat;
-    CD_Producto_precioVenta.AsFloat := vsel.ZQ_ProductoPRECIO_VENTA.AsFloat;
-    CD_Producto_coefGanancia.AsFloat := vsel.ZQ_ProductoCOEF_GANANCIA.AsFloat;
-    CD_Producto_coefDescuento.AsFloat := vsel.ZQ_ProductoCOEF_DESCUENTO.AsFloat;
-    CD_Producto_impuestoInterno.AsFloat := vsel.ZQ_ProductoIMPUESTO_INTERNO.AsFloat;
-    CD_Producto_impuestoIVA.AsFloat := vsel.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+    CD_Producto_idProducto.AsInteger := vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    CD_Producto_producto.AsString := vselProducto.ZQ_ProductoNOMBRE.AsString;
+    CD_Producto_medida.AsString := vselProducto.ZQ_ProductoMEDIDA.AsString;
+    CD_Producto_color.AsString := vselProducto.ZQ_ProductoCOLOR.AsString;
+    CD_Producto_marca.AsString := vselProducto.ZQ_ProductoNOMBRE_MARCA.AsString;
+    CD_Producto_tipoArticulo.AsString := vselProducto.ZQ_ProductoTIPO_ARTICULO.AsString;
+    CD_Producto_articulo.AsString := vselProducto.ZQ_ProductoNOMBRE_ARTICULO.AsString;
+    CD_Producto_codigoBarra.AsString := vselProducto.ZQ_ProductoCODIGO_BARRA.AsString;
+    CD_Producto_codCabecera.AsString := vselProducto.ZQ_ProductoCOD_CORTO.AsString;
+    CD_Producto_codProducto.AsString := vselProducto.ZQ_ProductoCOD_CORTO_1.AsString;
+    CD_Producto_precioCosto.AsFloat := vselProducto.ZQ_ProductoPRECIO_COSTO.AsFloat;
+    CD_Producto_precioVenta.AsFloat := vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
+    CD_Producto_coefGanancia.AsFloat := vselProducto.ZQ_ProductoCOEF_GANANCIA.AsFloat;
+    CD_Producto_coefDescuento.AsFloat := vselProducto.ZQ_ProductoCOEF_DESCUENTO.AsFloat;
+    CD_Producto_impuestoInterno.AsFloat := vselProducto.ZQ_ProductoIMPUESTO_INTERNO.AsFloat;
+    CD_Producto_impuestoIVA.AsFloat := vselProducto.ZQ_ProductoIMPUESTO_IVA.AsFloat;
 
     ZQ_CpbProducto.Append;
     ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
-    ZQ_CpbProductoID_PRODUCTO.AsInteger:= vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
-    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vsel.ZQ_ProductoPRECIO_VENTA.AsFloat;
-    ZQ_CpbProductoIMPUESTO_INTERNO.AsFloat:= vsel.ZQ_ProductoIMPUESTO_INTERNO.AsFloat;
-    ZQ_CpbProductoPORC_IVA.AsFloat:= vsel.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+    ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
+    ZQ_CpbProductoIMPUESTO_INTERNO.AsFloat:= vselProducto.ZQ_ProductoIMPUESTO_INTERNO.AsFloat;
+    ZQ_CpbProductoPORC_IVA.AsFloat:= vselProducto.ZQ_ProductoIMPUESTO_IVA.AsFloat;
     ZQ_CpbProductoPORC_DESCUENTO.AsFloat:= descuentoCliente;
     ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
     ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= 0;
 
-    cargarImagen(vsel.ZQ_ProductoID_PRODUCTO.AsInteger);
+    cargarImagen(vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger);
   end;
 
-  vsel.Close;
+  vselProducto.Close;
 end;
 
 
@@ -1609,11 +1606,11 @@ end;
 
 procedure TFABM_Comprobantes.agregarProducto();
 begin
-  if not Assigned(vsel) then
-    vsel:= TFBuscarProducto.Create(nil);
-  vsel.OnSeleccionar := onSelProducto;
-  vsel.SeleccionarYSalir:= true;
-  vsel.ShowModal;
+  if not Assigned(vselProducto) then
+    vselProducto:= TFBuscarProducto.Create(nil);
+  vselProducto.OnSeleccionar := onSelProducto;
+  vselProducto.SeleccionarYSalir:= true;
+  vselProducto.ShowModal;
 end;
 
 

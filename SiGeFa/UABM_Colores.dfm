@@ -3,7 +3,7 @@ object FABM_Colores: TFABM_Colores
   Top = 169
   Width = 870
   Height = 500
-  Caption = 'FABM_Colores'
+  Caption = 'ABM Colores'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -1631,5 +1631,29 @@ object FABM_Colores: TFABM_Colores
     ShowModal = False
     Left = 136
     Top = 176
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridColor
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Referencia'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_Colores'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 136
+    Top = 243
   end
 end

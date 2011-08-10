@@ -125,6 +125,7 @@ end;
 procedure TFABM_TipoFormaPago.btnBuscarClick(Sender: TObject);
 begin
   EKbuscar.buscar;
+  dm.mostrarCantidadRegistro(ZQ_TipoFPago, lblCantidadRegistros);
 end;
 
 
@@ -269,9 +270,7 @@ procedure TFABM_TipoFormaPago.FormCreate(Sender: TObject);
 begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  ZQ_TipoFPago.Close;
-  ZQ_TipoFPago.open;
-
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoFPago, lblCantidadRegistros);
 end;
 

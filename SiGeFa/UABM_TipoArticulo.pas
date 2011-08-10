@@ -125,6 +125,7 @@ end;
 procedure TFABM_TipoArticulo.btnBuscarClick(Sender: TObject);
 begin
   EKbuscar.buscar;
+  dm.mostrarCantidadRegistro(ZQ_TipoArt, lblCantidadRegistros);
 end;
 
 
@@ -269,16 +270,12 @@ procedure TFABM_TipoArticulo.FormCreate(Sender: TObject);
 begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  ZQ_TipoArt.Close;
-  ZQ_TipoArt.open;
-
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoArt, lblCantidadRegistros);  
 end;
 
 
-procedure TFABM_TipoArticulo.DBGridTipoArticuloDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFABM_TipoArticulo.DBGridTipoArticuloDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   if ZQ_TipoArt.IsEmpty then
     exit;

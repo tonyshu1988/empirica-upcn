@@ -64,7 +64,7 @@ object FCuentaCorriente: TFCuentaCorriente
       object DBText7: TDBText
         Left = 95
         Top = 5
-        Width = 65
+        Width = 97
         Height = 13
         DataField = 'CODIGO_CORTO'
         DataSource = DS_Cliente
@@ -89,7 +89,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object Label3: TLabel
-        Left = 196
+        Left = 220
         Top = 5
         Width = 50
         Height = 13
@@ -102,7 +102,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object DBText8: TDBText
-        Left = 248
+        Left = 272
         Top = 5
         Width = 420
         Height = 13
@@ -158,7 +158,7 @@ object FCuentaCorriente: TFCuentaCorriente
       object DBText10: TDBText
         Left = 96
         Top = 40
-        Width = 77
+        Width = 97
         Height = 13
         DataField = 'CODIGO_POSTAL'
         DataSource = DS_Cliente
@@ -170,7 +170,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object Label6: TLabel
-        Left = 188
+        Left = 212
         Top = 40
         Width = 58
         Height = 13
@@ -183,7 +183,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object DBText11: TDBText
-        Left = 248
+        Left = 272
         Top = 40
         Width = 232
         Height = 13
@@ -197,7 +197,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object Label7: TLabel
-        Left = 502
+        Left = 607
         Top = 40
         Width = 57
         Height = 13
@@ -210,9 +210,9 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object DBText12: TDBText
-        Left = 561
+        Left = 666
         Top = 40
-        Width = 133
+        Width = 175
         Height = 13
         DataField = 'NOMBRE_PROVINCIA'
         DataSource = DS_Cliente
@@ -239,7 +239,7 @@ object FCuentaCorriente: TFCuentaCorriente
       object DBText13: TDBText
         Left = 96
         Top = 58
-        Width = 80
+        Width = 97
         Height = 13
         DataField = 'NOMBRE_TIPO_DOC'
         DataSource = DS_Cliente
@@ -251,7 +251,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object Label9: TLabel
-        Left = 196
+        Left = 220
         Top = 58
         Width = 50
         Height = 13
@@ -264,7 +264,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object DBText14: TDBText
-        Left = 247
+        Left = 271
         Top = 58
         Width = 70
         Height = 13
@@ -278,7 +278,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object Label10: TLabel
-        Left = 324
+        Left = 348
         Top = 58
         Width = 26
         Height = 13
@@ -291,11 +291,11 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object DBText15: TDBText
-        Left = 352
+        Left = 376
         Top = 58
-        Width = 147
+        Width = 201
         Height = 13
-        DataField = 'ea'
+        DataField = 'NOMBRE_TIPO_IVA'
         DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -305,7 +305,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object Label11: TLabel
-        Left = 504
+        Left = 609
         Top = 58
         Width = 55
         Height = 13
@@ -318,9 +318,9 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object DBText16: TDBText
-        Left = 561
+        Left = 666
         Top = 58
-        Width = 104
+        Width = 175
         Height = 13
         DataField = 'CUIT_CUIL'
         DataSource = DS_Cliente
@@ -347,9 +347,9 @@ object FCuentaCorriente: TFCuentaCorriente
       object DBText1: TDBText
         Left = 96
         Top = 76
-        Width = 68
+        Width = 97
         Height = 13
-        DataField = '23/23/1234'
+        DataField = 'FECHA_ALTA'
         DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -359,7 +359,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object Label12: TLabel
-        Left = 178
+        Left = 202
         Top = 76
         Width = 68
         Height = 13
@@ -372,11 +372,11 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object DBText2: TDBText
-        Left = 247
+        Left = 271
         Top = 76
         Width = 117
         Height = 13
-        DataField = 'ea'
+        DataField = 'FECHA_BAJA'
         DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -386,7 +386,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object Label13: TLabel
-        Left = 479
+        Left = 584
         Top = 76
         Width = 80
         Height = 13
@@ -399,11 +399,11 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object DBText3: TDBText
-        Left = 559
+        Left = 666
         Top = 76
-        Width = 147
+        Width = 175
         Height = 13
-        DataField = 'NOMBRE_TIPO_IVA'
+        DataField = 'LIMITE_DEUDA'
         DataSource = DS_Cliente
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1034,9 +1034,128 @@ object FCuentaCorriente: TFCuentaCorriente
   end
   object ZQ_Cliente: TZQuery
     Connection = DM.Conexion
-    Params = <>
+    SQL.Strings = (
+      'select cli.*, pro.nombre_provincia, iva.nombre_tipo_iva,'
+      '       iva.abreviatura as cod_iva, doc.nombre_tipo_doc, cc.*'
+      'from persona cli'
+      
+        'left join tipo_documento doc on (cli.id_tipo_doc = doc.id_tipo_d' +
+        'oc)'
+      'left join tipo_iva iva on (cli.id_tipo_iva = iva.id_tipo_iva)'
+      'left join provincia pro on (cli.id_provincia = pro.id_provincia)'
+      
+        'left join cuenta_corriente cc on (cli.id_persona = cc.id_persona' +
+        ')'
+      'where cli.id_persona = :id_persona')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_persona'
+        ParamType = ptUnknown
+      end>
     Left = 715
     Top = 6
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_persona'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ClienteID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_ClienteID_PROVINCIA: TIntegerField
+      FieldName = 'ID_PROVINCIA'
+    end
+    object ZQ_ClienteID_TIPO_DOC: TIntegerField
+      FieldName = 'ID_TIPO_DOC'
+    end
+    object ZQ_ClienteID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_ClienteNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_ClienteDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_ClienteLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_ClienteCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_ClienteTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_ClienteEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_ClienteFECHA_NACIMIENTO: TDateField
+      FieldName = 'FECHA_NACIMIENTO'
+    end
+    object ZQ_ClienteNUMERO_DOC: TStringField
+      FieldName = 'NUMERO_DOC'
+      Size = 50
+    end
+    object ZQ_ClienteSEXO: TStringField
+      FieldName = 'SEXO'
+      Size = 1
+    end
+    object ZQ_ClienteBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_ClienteDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object ZQ_ClienteCUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
+    end
+    object ZQ_ClienteDESCUENTO_ESPECIAL: TFloatField
+      FieldName = 'DESCUENTO_ESPECIAL'
+    end
+    object ZQ_ClienteCODIGO_CORTO: TIntegerField
+      FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_ClienteNOMBRE_PROVINCIA: TStringField
+      FieldName = 'NOMBRE_PROVINCIA'
+      Size = 50
+    end
+    object ZQ_ClienteNOMBRE_TIPO_IVA: TStringField
+      FieldName = 'NOMBRE_TIPO_IVA'
+      Size = 50
+    end
+    object ZQ_ClienteCOD_IVA: TStringField
+      FieldName = 'COD_IVA'
+      Size = 10
+    end
+    object ZQ_ClienteNOMBRE_TIPO_DOC: TStringField
+      FieldName = 'NOMBRE_TIPO_DOC'
+    end
+    object ZQ_ClienteID_CTA_CTE: TIntegerField
+      FieldName = 'ID_CTA_CTE'
+    end
+    object ZQ_ClienteSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
+    object ZQ_ClienteLIMITE_DEUDA: TFloatField
+      FieldName = 'LIMITE_DEUDA'
+      currency = True
+    end
+    object ZQ_ClienteFECHA_ALTA: TDateField
+      FieldName = 'FECHA_ALTA'
+    end
+    object ZQ_ClienteFECHA_BAJA: TDateField
+      FieldName = 'FECHA_BAJA'
+    end
   end
   object DS_Cliente: TDataSource
     DataSet = ZQ_Cliente
