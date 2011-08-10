@@ -153,7 +153,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
         FontSize = 12
       end
       object RepTipoEmpresa_Subtitulo: TQRLabel
-        Left = -83
+        Left = 268
         Top = 26
         Width = 182
         Height = 20
@@ -164,8 +164,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          709.083333333333200000
-          68.791666666666680000
+          709.083333333333300000
+          68.791666666666670000
           481.541666666666700000)
         Alignment = taCenter
         AlignToBand = True
@@ -196,9 +196,9 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          669.395833333333400000
+          669.395833333333300000
           5.291666666666667000
-          558.270833333333400000)
+          558.270833333333300000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
@@ -434,7 +434,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        58.208333333333340000
+        58.208333333333330000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -484,7 +484,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        82.020833333333340000
+        82.020833333333330000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -645,8 +645,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 793
-    Height = 395
+    Width = 785
+    Height = 389
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -654,8 +654,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     object DBGridTipoEmpresa: TDBGrid
       Left = 5
       Top = 5
-      Width = 783
-      Height = 352
+      Width = 775
+      Height = 346
       Align = alClient
       Color = 14606012
       DataSource = DS_TipoEmpresa
@@ -678,8 +678,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     end
     object PanelEdicion: TPanel
       Left = 5
-      Top = 357
-      Width = 783
+      Top = 351
+      Width = 775
       Height = 33
       Align = alBottom
       BevelOuter = bvNone
@@ -720,7 +720,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 793
+    Width = 785
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -741,7 +741,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 683
+      Left = 675
       Top = 1
       Width = 109
       Height = 17
@@ -758,7 +758,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1358,8 +1358,8 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
+    PermitirMover = False
+    PermitirFiltrar = False
     Left = 336
     Top = 83
   end

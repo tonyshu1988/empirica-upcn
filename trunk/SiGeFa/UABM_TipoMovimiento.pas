@@ -131,6 +131,7 @@ end;
 procedure TFABM_TipoMovimiento.btnBuscarClick(Sender: TObject);
 begin
   EKbuscar.buscar;
+  dm.mostrarCantidadRegistro(ZQ_TipoMov, lblCantidadRegistros);
 end;
 
 
@@ -224,7 +225,6 @@ begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   EKBuscar.Abrir;
-
   dm.mostrarCantidadRegistro(ZQ_TipoMov, lblCantidadRegistros);
 end;
 

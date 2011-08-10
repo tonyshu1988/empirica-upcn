@@ -22,8 +22,8 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 862
-    Height = 397
+    Width = 854
+    Height = 391
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -142,7 +142,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
             50.270833333333330000
             642.937500000000000000
             124.354166666666700000
-            613.833333333333400000)
+            613.833333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -173,8 +173,8 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Size.Values = (
             52.916666666666670000
             754.062500000000000000
-            68.791666666666680000
-            391.583333333333400000)
+            68.791666666666670000
+            391.583333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -204,7 +204,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            727.604166666666800000
+            727.604166666666700000
             5.291666666666667000
             444.500000000000000000)
           Alignment = taCenter
@@ -550,7 +550,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -569,7 +569,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            727.604166666666800000)
+            727.604166666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -600,7 +600,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -648,7 +648,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -768,7 +768,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            717.020833333333200000
+            717.020833333333300000
             5.291666666666667000
             314.854166666666700000)
           Alignment = taLeftJustify
@@ -889,8 +889,8 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 862
-      Height = 397
+      Width = 854
+      Height = 391
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -904,8 +904,8 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
       object DBGridTipo: TDBGrid
         Left = 5
         Top = 5
-        Width = 852
-        Height = 329
+        Width = 844
+        Height = 323
         Align = alClient
         Color = 14606012
         DataSource = DS_TipoComprobante
@@ -960,8 +960,8 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 334
-        Width = 852
+        Top = 328
+        Width = 844
         Height = 58
         Align = alBottom
         BevelOuter = bvNone
@@ -1120,7 +1120,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 862
+    Width = 854
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1141,7 +1141,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 752
+      Left = 744
       Top = 1
       Width = 109
       Height = 17
@@ -1158,7 +1158,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1783,6 +1783,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
         TituloColumna = 'Ultimo N'#250'mero'
         Visible = True
       end>
+    NombreGuardar = 'ABM_TipoComprobante'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True

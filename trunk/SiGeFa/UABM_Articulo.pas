@@ -298,10 +298,8 @@ procedure TFABM_Articulo.FormCreate(Sender: TObject);
 begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  ZQ_Articulo.Close;
-  ZQ_Articulo.open;
-
-  dm.mostrarCantidadRegistro(ZQ_Articulo, lblCantidadRegistros);  
+  EKBusquedaAvanzada1.Abrir;
+  dm.mostrarCantidadRegistro(ZQ_Articulo, lblCantidadRegistros);
 end;
 
 
@@ -319,6 +317,7 @@ end;
 procedure TFABM_Articulo.btnBuscarClick(Sender: TObject);
 begin
   EKBusquedaAvanzada1.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_Articulo, lblCantidadRegistros);
 end;
 
 procedure TFABM_Articulo.DBLookupComboBox1KeyUp(Sender: TObject;

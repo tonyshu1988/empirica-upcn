@@ -7,7 +7,7 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  QRCtrls, QuickRpt, EKVistaPreviaQR;
+  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla;
 
 type
   TFABM_Colores = class(TForm)
@@ -82,6 +82,7 @@ type
     QRLabel29: TQRLabel;
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure ZQ_ColoresAfterScroll(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
@@ -127,10 +128,10 @@ begin
 end;
 
 
-procedure TFABM_Colores.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
+procedure TFABM_Colores.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 
@@ -283,6 +284,7 @@ end;
 procedure TFABM_Colores.btnBuscarClick(Sender: TObject);
 begin
   EKBuscar.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_Colores, lblCantidadRegistros); 
 end;
 
 
@@ -316,7 +318,9 @@ end;
 
 procedure TFABM_Colores.FormCreate(Sender: TObject);
 begin
-  dm.EKModelo.abrir(ZQ_Colores);
+  EKOrdenarGrilla1.CargarConfigColumnas;
+  
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Colores, lblCantidadRegistros);  
 end;
 

@@ -198,6 +198,7 @@ end;
 procedure TFABM_ArticuloMedida.btnBuscarClick(Sender: TObject);
 begin
   EKBuscar.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_Medida, lblCantidadRegistros);
 end;
 
 
@@ -365,13 +366,13 @@ procedure TFABM_ArticuloMedida.FormCreate(Sender: TObject);
 begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  dm.EKModelo.abrir(ZQ_Medida);
   dm.EKModelo.abrir(ZQ_Articulo);
   CDSArticulo.CreateDataSet;
   CDSMedidas.CreateDataSet;
   PageControlEdicion.TabIndex := 0;
   EKLlenarComboArticulo.CargarCombo;
 
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Medida, lblCantidadRegistros);   
 end;
 

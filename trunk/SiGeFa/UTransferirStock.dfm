@@ -31,7 +31,7 @@ object FTransferirStock: TFTransferirStock
       Top = 34
       Width = 852
       Height = 375
-      ActivePage = TabSAsociarNotaPedido
+      ActivePage = TabSTransferirStock
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -40,8 +40,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 331
+          Width = 844
+          Height = 325
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -155,8 +155,8 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 331
-          Width = 852
+          Top = 325
+          Width = 844
           Height = 22
           Align = alBottom
           TabOrder = 1

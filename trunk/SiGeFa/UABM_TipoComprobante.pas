@@ -132,6 +132,7 @@ uses UPrincipal, UDM;
 procedure TFABM_TipoComprobante.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
 
@@ -145,6 +146,7 @@ end;
 procedure TFABM_TipoComprobante.btnBuscarClick(Sender: TObject);
 begin
   EKbuscar.buscar;
+  dm.mostrarCantidadRegistro(ZQ_TipoComprobante, lblCantidadRegistros);  
 end;
 
 
@@ -287,11 +289,11 @@ end;
 
 procedure TFABM_TipoComprobante.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
+
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  ZQ_TipoComprobante.Close;
-  ZQ_TipoComprobante.open;
-
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoComprobante, lblCantidadRegistros);
 end;
 

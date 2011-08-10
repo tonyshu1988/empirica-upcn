@@ -66,6 +66,33 @@ type
     PanelResumen: TPanel;
     ZQ_Cliente: TZQuery;
     DS_Cliente: TDataSource;
+    ZQ_ClienteID_PERSONA: TIntegerField;
+    ZQ_ClienteID_PROVINCIA: TIntegerField;
+    ZQ_ClienteID_TIPO_DOC: TIntegerField;
+    ZQ_ClienteID_TIPO_IVA: TIntegerField;
+    ZQ_ClienteNOMBRE: TStringField;
+    ZQ_ClienteDIRECCION: TStringField;
+    ZQ_ClienteLOCALIDAD: TStringField;
+    ZQ_ClienteCODIGO_POSTAL: TStringField;
+    ZQ_ClienteTELEFONO: TStringField;
+    ZQ_ClienteEMAIL: TStringField;
+    ZQ_ClienteFECHA_NACIMIENTO: TDateField;
+    ZQ_ClienteNUMERO_DOC: TStringField;
+    ZQ_ClienteSEXO: TStringField;
+    ZQ_ClienteBAJA: TStringField;
+    ZQ_ClienteDESCRIPCION: TStringField;
+    ZQ_ClienteCUIT_CUIL: TStringField;
+    ZQ_ClienteDESCUENTO_ESPECIAL: TFloatField;
+    ZQ_ClienteCODIGO_CORTO: TIntegerField;
+    ZQ_ClienteNOMBRE_PROVINCIA: TStringField;
+    ZQ_ClienteNOMBRE_TIPO_IVA: TStringField;
+    ZQ_ClienteCOD_IVA: TStringField;
+    ZQ_ClienteNOMBRE_TIPO_DOC: TStringField;
+    ZQ_ClienteID_CTA_CTE: TIntegerField;
+    ZQ_ClienteSALDO: TFloatField;
+    ZQ_ClienteLIMITE_DEUDA: TFloatField;
+    ZQ_ClienteFECHA_ALTA: TDateField;
+    ZQ_ClienteFECHA_BAJA: TDateField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -119,9 +146,12 @@ end;
 
 procedure TFCuentaCorriente.onSelCliente;
 begin
-//  ZQ_Proveedores.Close;
-//  ZQ_Proveedores.ParamByName('id_prov').AsInteger:= vsel.ZQ_ProveedoresID_PROVEEDOR.AsInteger;
-//  ZQ_Proveedores.Open;
+  if (not (vsel.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
+  begin
+    ZQ_Cliente.Close;
+    ZQ_Cliente.ParamByName('ID_PERSONA').AsInteger:= vsel.ZQ_PersonasID_PERSONA.AsInteger;
+    ZQ_Cliente.Open;
+  end;
 
   vsel.Close;
 end;
@@ -131,26 +161,10 @@ procedure TFCuentaCorriente.btnBuscarClick(Sender: TObject);
 begin
   if not Assigned(vsel) then
     vsel:= TFBuscarPersona.Create(nil);
-  vsel.configCliente;
+  vsel.configRelacion(RELACION_CLIENTE);
   vsel.btnBuscar.Click;
   vsel.OnSeleccionar := onSelCliente;
   vsel.ShowModal;
-  
-  if (not (vsel.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
-  begin
-//    porComprobante:= true;
-//    ctacte_simple:= false;
-//    DBGridCtaCte.DataSource:= DS_CtaCteProveedor;
-//    ZS_CtaCteProveedor.Close;
-//    ZS_CtaCteProveedor.ParamByName('ID_PROVEEDOR').AsInteger:= vsel.ZQ_ProveedoresID_PROVEEDOR.AsInteger;
-//    ZS_CtaCteProveedor.ParamByName('TIPO').AsInteger:= 1;
-//    ZS_CtaCteProveedor.Open;
-
-//    porFechaCarga:= true;
-//    porComprobante:= false;
-//    ctacte_simple:= false;
-//    btnAceptarFiltro.Click;
-  end;
 end;
 
 

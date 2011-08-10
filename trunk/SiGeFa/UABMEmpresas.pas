@@ -77,9 +77,9 @@ type
     ZQ_EmpresaID_EMPRESA: TIntegerField;
     ZQ_EmpresaID_TIPO_EMPRESA: TIntegerField;
     PBusqueda: TPanel;
-    lblResultadoBusqueda: TLabel;
+    lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    EKOrdenarEmpresas: TEKOrdenarGrilla;
     PopupMenuContactos: TPopupMenu;
     AgregarContacto1: TMenuItem;
     QuitarContacto1: TMenuItem;
@@ -283,6 +283,8 @@ type
     EKVistaPreviaDetalleEmpresa: TEKVistaPreviaQR;
     QRDBText19: TQRDBText;
     QRLabel28: TQRLabel;
+    EKOrdenarContactos: TEKOrdenarGrilla;
+    EKOrdenarViajantes: TEKOrdenarGrilla;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -451,6 +453,8 @@ begin
       PanelEdicion.Enabled := false;
     end;
   end;
+  
+  dm.mostrarCantidadRegistro(ZQ_Empresa, lblCantidadRegistros);
 end;
 
 
@@ -490,6 +494,10 @@ end;
 procedure TFABMEmpresas.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
+  EKOrdenarEmpresas.GuardarConfigColumnas;
+  EKOrdenarContactos.GuardarConfigColumnas;
+  EKOrdenarViajantes.GuardarConfigColumnas;
+
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABMEmpresas);
 end;
 
@@ -497,6 +505,7 @@ end;
 procedure TFABMEmpresas.btnBuscarClick(Sender: TObject);
 begin
   EKBusquedaAvanzadaEmpresas.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_Empresa, lblCantidadRegistros);
 end;
 
 
@@ -567,11 +576,18 @@ end;
 
 procedure TFABMEmpresas.FormCreate(Sender: TObject);
 begin
+  EKOrdenarEmpresas.CargarConfigColumnas;
+  EKOrdenarContactos.CargarConfigColumnas;
+  EKOrdenarViajantes.CargarConfigColumnas;
+
   StaticTxtBaja.Color:= FPrincipal.baja;
   dm.EKModelo.abrir(ZQ_Marcas);
   dm.EKModelo.abrir(ZQ_Personas);
-  EKBusquedaAvanzadaEmpresas.Abrir;
+
   PageControlEdicion.TabIndex:=0;
+
+  EKBusquedaAvanzadaEmpresas.Abrir;
+  dm.mostrarCantidadRegistro(ZQ_Empresa, lblCantidadRegistros);
 end;
 
 

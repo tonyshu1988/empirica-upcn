@@ -23,8 +23,8 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 973
-    Height = 446
+    Width = 965
+    Height = 440
     Align = alClient
     BorderWidth = 5
     TabOrder = 0
@@ -141,7 +141,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            693.208333333333200000
+            693.208333333333300000
             124.354166666666700000
             510.645833333333300000)
           Alignment = taCenter
@@ -173,9 +173,9 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            717.020833333333200000
-            68.791666666666680000
-            463.020833333333400000)
+            717.020833333333300000
+            68.791666666666670000
+            463.020833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -205,7 +205,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            687.916666666666800000
+            687.916666666666700000
             5.291666666666667000
             523.875000000000000000)
           Alignment = taCenter
@@ -551,7 +551,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -601,7 +601,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -649,7 +649,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -737,7 +737,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            653.520833333333400000
+            653.520833333333300000
             5.291666666666667000
             134.937500000000000000)
           Alignment = taLeftJustify
@@ -867,7 +867,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
             37.041666666666670000
             1460.500000000000000000
             5.291666666666667000
-            66.145833333333340000)
+            66.145833333333330000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -890,8 +890,8 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     object DBGridPosicionSucursal: TDBGrid
       Left = 6
       Top = 6
-      Width = 961
-      Height = 328
+      Width = 953
+      Height = 322
       Align = alClient
       Color = 14606012
       DataSource = DS_PosicionSucursal
@@ -945,8 +945,8 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     end
     object PanelEdicion: TPanel
       Left = 6
-      Top = 334
-      Width = 961
+      Top = 328
+      Width = 953
       Height = 106
       Align = alBottom
       BevelOuter = bvNone
@@ -1117,7 +1117,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 973
+    Width = 965
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1138,7 +1138,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 863
+      Left = 855
       Top = 1
       Width = 109
       Height = 17
@@ -1155,7 +1155,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1602,7 +1602,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     UseF10ForMenu = False
     UseSystemFont = False
     Left = 696
-    Top = 120
+    Top = 160
     DockControlHeights = (
       0
       0
@@ -1726,7 +1726,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       'order by ps.id_sucursal')
     Params = <>
     Left = 584
-    Top = 120
+    Top = 160
     object ZQ_PosicionSucursalID_POSICION_SUCURSAL: TIntegerField
       FieldName = 'ID_POSICION_SUCURSAL'
     end
@@ -1767,7 +1767,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object DS_PosicionSucursal: TDataSource
     DataSet = ZQ_PosicionSucursal
     Left = 448
-    Top = 120
+    Top = 160
   end
   object ZQ_Sucursal: TZQuery
     Connection = DM.Conexion
@@ -1815,7 +1815,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     Left = 448
     Top = 208
   end
-  object EKBusquedaAvanzada1: TEKBusquedaAvanzada
+  object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
         Titulo = 'Sucursal'
@@ -1928,6 +1928,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         TituloColumna = 'Columna'
         Visible = True
       end>
+    NombreGuardar = 'ABM_SucPosicion'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -1938,7 +1939,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   end
   object ATeclasRapidas: TActionManager
     Left = 80
-    Top = 242
+    Top = 210
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -1983,7 +1984,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object EKVistaPrevia: TEKVistaPreviaQR
     Reporte = RepSucPosicion
     ShowModal = False
-    Left = 82
-    Top = 78
+    Left = 80
+    Top = 110
   end
 end

@@ -54,12 +54,11 @@ type
     ZQ_SucursalBAJA: TStringField;
     DS_Sucursal: TDataSource;
     ZQ_PosicionSucursalBAJA: TStringField;
-    EKBusquedaAvanzada1: TEKBusquedaAvanzada;
+    EKBuscar: TEKBusquedaAvanzada;
     EKListadoSucursal: TEKListadoSQL;
     PBusqueda: TPanel;
     StaticTxtBaja: TStaticText;
     lblCantidadRegistros: TLabel;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -103,6 +102,7 @@ type
     ZQ_PosicionSucursalSECTOR: TStringField;
     ZQ_PosicionSucursalFILA: TStringField;
     ZQ_PosicionSucursalCOLUMNA: TStringField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -269,6 +269,7 @@ end;
 procedure TFABM_SucursalPosicion.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABMPosicionSuc);
 end;
 
@@ -298,7 +299,8 @@ end;
 
 procedure TFABM_SucursalPosicion.btnBuscarClick(Sender: TObject);
 begin
-  EKBusquedaAvanzada1.Buscar;
+  EKBuscar.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_PosicionSucursal, lblCantidadRegistros);
 end;
 
 
@@ -310,10 +312,13 @@ end;
 
 procedure TFABM_SucursalPosicion.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
+
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   dm.EKModelo.abrir(ZQ_Sucursal);
-  EKBusquedaAvanzada1.Abrir;
+
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_PosicionSucursal, lblCantidadRegistros);
 end;
 
@@ -372,7 +377,7 @@ begin
 
   DM.VariablesReportes(RepSucPosicion);
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBusquedaAvanzada1.ParametrosBuscados;
+  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
 end;
 

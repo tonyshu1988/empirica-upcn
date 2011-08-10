@@ -111,6 +111,7 @@ uses UDM, UPrincipal;
 procedure TFABM_TipoEmpresa.btnBuscarClick(Sender: TObject);
 begin
   EKBuscar.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_TipoEmpresa, lblCantidadRegistros);
 end;
 
 
@@ -278,8 +279,8 @@ end;
 procedure TFABM_TipoEmpresa.FormCreate(Sender: TObject);
 begin
   StaticTxtBaja.Color:= FPrincipal.baja;
-  dm.EKModelo.abrir(ZQ_TipoEmpresa);
 
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoEmpresa, lblCantidadRegistros);
 end;
 
