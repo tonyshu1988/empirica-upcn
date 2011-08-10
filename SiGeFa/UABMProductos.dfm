@@ -2152,7 +2152,7 @@ object FABMProductos: TFABMProductos
                   Align = alClient
                   Color = 14606012
                   DataSource = DS_Medidas
-                  Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+                  Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
                   PopupMenu = PopMenuMedidas
                   TabOrder = 0
                   TitleFont.Charset = ANSI_CHARSET
