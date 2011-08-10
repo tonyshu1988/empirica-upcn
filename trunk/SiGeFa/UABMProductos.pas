@@ -652,7 +652,10 @@ end;
 
 procedure TFABMProductos.AgregaDetalleClick(Sender: TObject);
 begin
-if ZQ_ProductoCabeceraID_ARTICULO.IsNull then
+ if  (ZQ_ProductoCabecera.State <> dsedit) and (ZQ_ProductoCabecera.State <> dsinsert) then
+   exit;
+
+ if ZQ_ProductoCabeceraID_ARTICULO.IsNull then
  begin
     showmessage('Debe cargar algún artículo!');
     exit;
@@ -682,8 +685,11 @@ end;
 
 procedure TFABMProductos.EditarDetalleClick(Sender: TObject);
 begin
-if ZQ_DetalleProducto.IsEmpty then
- exit;
+  if ZQ_DetalleProducto.IsEmpty then
+   exit;
+
+ if  (ZQ_ProductoCabecera.State <> dsedit) and (ZQ_ProductoCabecera.State <> dsinsert) then
+   exit;
 
    PEdicion.Visible:=True;
    PMedidas.Visible:=False;
@@ -726,9 +732,11 @@ begin
     ZQ_DetalleProductoID_PRODUCTO.AsInteger:=ZSP_GenerarIDProdDeralleID.AsInteger;
 
     if ZQ_DetalleProductoCOD_CORTO.AsString='' then
-       ZQ_DetalleProductoCOD_CORTO.AsString:=rellenar(CDMedidasmedida.AsString,'0',5);
+       ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZSP_GenerarIDProdDeralleID.AsInteger);//rellenar(CDMedidasmedida.AsString,'0',5);
 
-    //ZQ_DetalleProductoCODIGO_BARRA.AsString:=armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
+    if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
+      ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZSP_GenerarIDProdDeralleID.AsString,'0',13);//armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
+
     ZQ_DetalleProducto.Post;
     ZQ_DetalleProducto.Filtered := false;
     ZQ_DetalleProducto.Filter:= Format('id_medida = %d',[CDMedidasid_medida.AsInteger]);
@@ -760,8 +768,8 @@ begin
         ZQ_DetalleProducto.Append;
         //Cada detalle tiene los mismos datos precargados
         ZQ_DetalleProductoLLEVAR_STOCK.AsString:=llevarStock;
-        ZQ_DetalleProductoCOD_CORTO.AsString:=codc;
-        ZQ_DetalleProductoCODIGO_BARRA.AsString:=codb;
+        //ZQ_DetalleProductoCOD_CORTO.AsString:=codc;
+        //ZQ_DetalleProductoCODIGO_BARRA.AsString:=codb;
         ZQ_DetalleProductoPRECIO_COSTO.AsFloat:=pc;
         ZQ_DetalleProductoPRECIO_VENTA.AsFloat:=pv;
         ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:=cg;
@@ -773,16 +781,18 @@ begin
         ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
         ZQ_DetalleProductoID_MEDIDA.AsInteger:=CDMedidasid_medida.AsInteger;
         ZQ_DetalleProductoDESCRIPCION.AsString:=descr;
-        if ZQ_DetalleProductoCOD_CORTO.AsString='' then
-           ZQ_DetalleProductoCOD_CORTO.AsString:=rellenar(CDMedidasmedida.AsString,'0',5);
 
-       //ZQ_DetalleProductoCODIGO_BARRA.AsString:=armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
        //Si inserto uno nuevo genero un id nuevo
        if (ZQ_DetalleProducto.State=dsInsert) then
        begin
         ZSP_GenerarIDProdDeralle.Active:=False;
         ZSP_GenerarIDProdDeralle.Active:=True;
         ZQ_DetalleProductoID_PRODUCTO.AsInteger:=ZSP_GenerarIDProdDeralleID.AsInteger;
+        if ZQ_DetalleProductoCOD_CORTO.AsString='' then
+           ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
+
+        if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
+           ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',13);
        end;
         ZQ_DetalleProducto.Post;
         ZQ_DetalleProducto.Filtered := false;
@@ -805,6 +815,13 @@ else
   begin
    if not(validarcamposDetalle) then
     exit;
+
+  if ZQ_DetalleProductoCOD_CORTO.AsString='' then
+     ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
+
+  if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
+     ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',13);
+
    ZQ_DetalleProducto.Post;
   end;
 
@@ -1070,9 +1087,19 @@ end;
 
 
 procedure TFABMProductos.MenuItem3Click(Sender: TObject);
+var
+i : integer;
 begin
-  if not CDMedidas.IsEmpty then
-    CDMedidas.Delete;
+  if grillaMedidas.SelectedRows.Count>0 then
+  begin
+    with grillaMedidas.DataSource.DataSet do
+      for i:=0 to grillaMedidas.SelectedRows.Count-1 do
+      begin
+        GotoBookmark(pointer(grillaMedidas.SelectedRows.Items[i]));
+        if not CDMedidas.IsEmpty then
+          CDMedidas.Delete;
+      end;
+  end;
 end;
 
 
