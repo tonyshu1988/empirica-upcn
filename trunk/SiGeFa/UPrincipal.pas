@@ -99,6 +99,10 @@ type
     Movimientos1: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;
+    AEstadisticaFacturacion: TAction;
+    Estadisticas1: TMenuItem;
+    EstadisticaMovimientosInt1: TMenuItem;
+    EstadisticaFacturacion1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -134,6 +138,7 @@ type
     procedure ATransferirStockExecute(Sender: TObject);
     procedure ACuentaCorrienteExecute(Sender: TObject);
     procedure AEstadisticaMovInternosExecute(Sender: TObject);
+    procedure AEstadisticaFacturacionExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -159,7 +164,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UMailEnviar, UABM_Colores, UABM_TipoIVA, UABM_TipoFormaPago,
   UABM_Cuentas, UABM_TipoComprobante, UABM_Precios, UABM_Comprobantes,
   UCajero, UMovimientosInternos, UABM_TipoMovimiento, UTransferirStock,
-  UCuentaCorriente, UEstadisticaMovInternos;
+  UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -480,6 +485,11 @@ end;
 procedure TFPrincipal.AEstadisticaMovInternosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFEstadisticaMovInternos, FEstadisticaMovInternos);
+end;
+
+procedure TFPrincipal.AEstadisticaFacturacionExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFEstadisticasFacturacion, FEstadisticasFacturacion);
 end;
 
 end.

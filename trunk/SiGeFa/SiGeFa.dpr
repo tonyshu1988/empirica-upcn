@@ -40,7 +40,8 @@ uses
   UTransferirStock in 'UTransferirStock.pas' {FTransferirStock},
   UBuscarProductoStock in 'UBuscarProductoStock.pas' {FBuscarProductoStock},
   UEstadisticaMovInternos in 'UEstadisticaMovInternos.pas' {FEstadisticaMovInternos},
-  UCuentaCorriente in 'UCuentaCorriente.pas' {FCuentaCorriente};
+  UCuentaCorriente in 'UCuentaCorriente.pas' {FCuentaCorriente},
+  UEstadisticaFacturacion in 'UEstadisticaFacturacion.pas' {FEstadisticasFacturacion};
 
 {$R *.res}
 
