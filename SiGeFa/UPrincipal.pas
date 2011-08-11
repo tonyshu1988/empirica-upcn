@@ -96,6 +96,9 @@ type
     ACuentaCorriente: TAction;
     CuentaCorriente1: TMenuItem;
     AEstadisticaMovInternos: TAction;
+    Movimientos1: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);

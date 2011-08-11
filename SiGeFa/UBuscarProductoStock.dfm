@@ -20,15 +20,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 342
     Align = alClient
     TabOrder = 0
     object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 712
-      Height = 334
+      Width = 720
+      Height = 340
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -42,6 +42,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
       TitleFont.Style = []
       OnDblClick = DBGridStockDblClick
       Columns = <
+        item
+          Alignment = taRightJustify
+          Expanded = False
+          FieldName = 'COD_CORTO_PRODUCTO'
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd. Producto'
+          Width = 86
+          Visible = True
+        end
         item
           Expanded = False
           FieldName = 'ID_PRODUCTO'
@@ -63,31 +72,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
           Title.Alignment = taCenter
           Title.Caption = 'Sucursal'
           Width = 138
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SECCION'
-          Title.Caption = 'Secci'#243'n'
-          Width = 108
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SECTOR'
-          Title.Caption = 'Sector'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'FILA'
-          Title.Caption = 'Fila'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COLUMNA'
-          Title.Caption = 'Columna'
           Visible = True
         end
         item
@@ -213,11 +197,28 @@ object FBuscarProductoStock: TFBuscarProductoStock
           Visible = True
         end
         item
-          Alignment = taRightJustify
           Expanded = False
-          FieldName = 'COD_CORTO_PRODUCTO'
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Producto'
+          FieldName = 'SECCION'
+          Title.Caption = 'Secci'#243'n'
+          Width = 108
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SECTOR'
+          Title.Caption = 'Sector'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FILA'
+          Title.Caption = 'Fila'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COLUMNA'
+          Title.Caption = 'Columna'
           Visible = True
         end
         item
@@ -233,7 +234,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -900,6 +901,10 @@ object FBuscarProductoStock: TFBuscarProductoStock
     Grilla = DBGridStock
     Filtros = <
       item
+        TituloColumna = 'C'#243'd. Producto'
+        Visible = True
+      end
+      item
         TituloColumna = 'ID'
         Visible = True
       end
@@ -969,10 +974,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
       end
       item
         TituloColumna = 'C'#243'd. Cabecera'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Producto'
         Visible = True
       end
       item

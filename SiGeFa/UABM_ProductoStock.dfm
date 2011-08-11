@@ -22,8 +22,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 456
+    Width = 862
+    Height = 462
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -31,16 +31,16 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 844
-      Height = 446
+      Width = 852
+      Height = 452
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
       object DBGridStock: TDBGrid
         Left = 0
         Top = 0
-        Width = 844
-        Height = 446
+        Width = 852
+        Height = 452
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
@@ -54,45 +54,12 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TitleFont.Style = []
         Columns = <
           item
-            Expanded = False
-            FieldName = 'SUCURSAL'
-            Title.Alignment = taCenter
-            Title.Caption = 'Sucursal'
-            Width = 138
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SECCION'
-            Title.Caption = 'Secci'#243'n'
-            Width = 108
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SECTOR'
-            Title.Caption = 'Sector'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FILA'
-            Title.Caption = 'Fila'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'COLUMNA'
-            Title.Caption = 'Columna'
-            Visible = True
-          end
-          item
             Alignment = taRightJustify
             Expanded = False
-            FieldName = 'CODIGO_BARRA'
+            FieldName = 'COD_CORTO_PRODUCTO'
             Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Barra'
-            Width = 100
+            Title.Caption = 'C'#243'd. Producto'
+            Width = 94
             Visible = True
           end
           item
@@ -209,6 +176,39 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Visible = True
           end
           item
+            Expanded = False
+            FieldName = 'SUCURSAL'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal'
+            Width = 138
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SECCION'
+            Title.Caption = 'Secci'#243'n'
+            Width = 108
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SECTOR'
+            Title.Caption = 'Sector'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FILA'
+            Title.Caption = 'Fila'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLUMNA'
+            Title.Caption = 'Columna'
+            Visible = True
+          end
+          item
             Alignment = taRightJustify
             Expanded = False
             FieldName = 'COD_CORTO_CABECERA'
@@ -219,9 +219,10 @@ object FABM_ProductoStock: TFABM_ProductoStock
           item
             Alignment = taRightJustify
             Expanded = False
-            FieldName = 'COD_CORTO_PRODUCTO'
+            FieldName = 'CODIGO_BARRA'
             Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Producto'
+            Title.Caption = 'C'#243'd. Barra'
+            Width = 100
             Visible = True
           end
           item
@@ -237,29 +238,29 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelAsociar: TPanel
       Left = 5
       Top = 5
-      Width = 844
-      Height = 446
+      Width = 852
+      Height = 452
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Splitter1: TSplitter
         Left = 465
         Top = 21
-        Height = 425
+        Height = 431
       end
       object PanelAsociar_Producto: TPanel
         Left = 468
         Top = 21
-        Width = 376
-        Height = 425
+        Width = 384
+        Height = 431
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 376
-          Height = 425
+          Width = 384
+          Height = 431
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -273,6 +274,15 @@ object FABM_ProductoStock: TFABM_ProductoStock
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           Columns = <
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codProducto'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Producto'
+              Width = 88
+              Visible = True
+            end
             item
               Expanded = False
               FieldName = 'producto'
@@ -333,15 +343,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
             item
               Alignment = taRightJustify
               Expanded = False
-              FieldName = 'codProducto'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Producto'
-              Width = 100
-              Visible = True
-            end
-            item
-              Alignment = taRightJustify
-              Expanded = False
               FieldName = 'codCabecera'
               Title.Alignment = taCenter
               Title.Caption = 'C'#243'd. Cabecera'
@@ -354,7 +355,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 21
         Width = 465
-        Height = 425
+        Height = 431
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -362,7 +363,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Left = 0
           Top = 0
           Width = 465
-          Height = 425
+          Height = 431
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
@@ -389,7 +390,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 844
+        Width = 852
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -403,7 +404,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1163,27 +1164,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
     Grilla = DBGridStock
     Filtros = <
       item
-        TituloColumna = 'Sucursal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Secci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sector'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fila'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Columna'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Barra'
+        TituloColumna = 'C'#243'd. Producto'
         Visible = True
       end
       item
@@ -1227,11 +1208,31 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Visible = True
       end
       item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Secci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sector'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fila'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Columna'
+        Visible = True
+      end
+      item
         TituloColumna = 'C'#243'd. Cabecera'
         Visible = True
       end
       item
-        TituloColumna = 'C'#243'd. Producto'
+        TituloColumna = 'C'#243'd. Barra'
         Visible = True
       end
       item
