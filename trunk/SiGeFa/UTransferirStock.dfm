@@ -22,15 +22,15 @@ object FTransferirStock: TFTransferirStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 416
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 852
-      Height = 375
+      Width = 860
+      Height = 381
       ActivePage = TabSTransferirStock
       Align = alClient
       TabOrder = 0
@@ -40,8 +40,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 325
+          Width = 852
+          Height = 331
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -53,16 +53,6 @@ object FTransferirStock: TFTransferirStock
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           Columns = <
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = 'codCabecera'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Cabecera'
-              Width = 100
-              Visible = True
-            end
             item
               Alignment = taRightJustify
               Expanded = False
@@ -128,16 +118,6 @@ object FTransferirStock: TFTransferirStock
               Visible = True
             end
             item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = 'codigoBarra'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Barra'
-              Width = 100
-              Visible = True
-            end
-            item
               Color = 16767411
               Expanded = False
               FieldName = 'stockactual'
@@ -151,12 +131,32 @@ object FTransferirStock: TFTransferirStock
               FieldName = 'cantidad'
               Title.Caption = 'Cantidad'
               Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codigoBarra'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Barra'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codCabecera'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Cabecera'
+              Width = 100
+              Visible = True
             end>
         end
         object Panel1: TPanel
           Left = 0
-          Top = 325
-          Width = 844
+          Top = 331
+          Width = 852
           Height = 22
           Align = alBottom
           TabOrder = 1
@@ -177,8 +177,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedidoDetalle: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 347
+          Width = 852
+          Height = 353
           Align = alClient
           Color = 16511963
           DataSource = DS_Nota_Pedido_Detalle
@@ -303,8 +303,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedido: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 347
+          Width = 852
+          Height = 353
           Hint = 
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
@@ -353,7 +353,7 @@ object FTransferirStock: TFTransferirStock
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 860
       Height = 33
       Align = alTop
       TabOrder = 1
@@ -383,7 +383,7 @@ object FTransferirStock: TFTransferirStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

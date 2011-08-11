@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 855
-    Height = 457
+    Width = 863
+    Height = 463
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 486
-    Width = 855
+    Top = 492
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -4719,7 +4719,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 457
+    Width = 863
+    Height = 463
     Align = alClient
     Color = 16053492
     TabOrder = 2
@@ -4911,6 +4911,28 @@ object FPrincipal: TFPrincipal
     Images = EKImageMenu24
     Left = 288
     Top = 72
+    object PantallasNuevas1: TMenuItem
+      Caption = 'Facturacion'
+      object ABMTipoIva1: TMenuItem
+        Tag = 1
+        Action = AABM_TipoIva
+      end
+      object ABMTipo1: TMenuItem
+        Tag = 1
+        Action = AABM_TipoMedioPago
+      end
+      object ABMCuentas1: TMenuItem
+        Tag = 1
+        Action = AABM_Cuenta
+      end
+      object N6: TMenuItem
+        Caption = '-'
+      end
+      object Cajero1: TMenuItem
+        Tag = 1
+        Action = ACajero
+      end
+    end
     object Productos1: TMenuItem
       Caption = 'Productos'
       object ABM_Articulos: TMenuItem
@@ -5000,6 +5022,26 @@ object FPrincipal: TFPrincipal
         Action = AConfigMail
       end
     end
+    object Movimientos1: TMenuItem
+      Caption = 'Movimientos'
+      object ABMTipoComprobante1: TMenuItem
+        Tag = 1
+        Action = AABM_TipoComprobante
+      end
+      object ABMTipoMovimiento1: TMenuItem
+        Action = AABM_TipoMov
+      end
+      object N5: TMenuItem
+        Caption = '-'
+      end
+      object ABMComprobante1: TMenuItem
+        Tag = 1
+        Action = AABM_Comprobante
+      end
+      object MovimientosInternos1: TMenuItem
+        Action = AMovInternos
+      end
+    end
     object Salir1: TMenuItem
       Caption = 'Sistema'
       object CambiarContrasenia: TMenuItem
@@ -5021,39 +5063,6 @@ object FPrincipal: TFPrincipal
         Caption = '&Salir'
         ImageIndex = 8
         OnClick = SalirClick
-      end
-    end
-    object PantallasNuevas1: TMenuItem
-      Caption = 'Pantallas Nuevas'
-      object ABMTipoIva1: TMenuItem
-        Tag = 1
-        Action = AABM_TipoIva
-      end
-      object ABMTipoComprobante1: TMenuItem
-        Tag = 1
-        Action = AABM_TipoComprobante
-      end
-      object ABMTipo1: TMenuItem
-        Tag = 1
-        Action = AABM_TipoMedioPago
-      end
-      object ABMCuentas1: TMenuItem
-        Tag = 1
-        Action = AABM_Cuenta
-      end
-      object ABMComprobante1: TMenuItem
-        Tag = 1
-        Action = AABM_Comprobante
-      end
-      object Cajero1: TMenuItem
-        Tag = 1
-        Action = ACajero
-      end
-      object MovimientosInternos1: TMenuItem
-        Action = AMovInternos
-      end
-      object ABMTipoMovimiento1: TMenuItem
-        Action = AABM_TipoMov
       end
     end
   end
@@ -16063,7 +16072,7 @@ object FPrincipal: TFPrincipal
     Left = 72
     Top = 138
     Bitmap = {
-      494C010152005400040020002000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010152005400040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000080000000A002000001002000000000000040
       050000000000000000000000000000000000EEF7FAFF9AD1E1FF2BA2CAFF2498
       C7FF2997C7FF2997C7FF2B97C9FF2B97CAFF2C97CAFF2E97CAFF3194C6FF50A0
@@ -27155,7 +27164,8 @@ object FPrincipal: TFPrincipal
       E00001FFF00000FFE00003FFE00003FFE00003FFF00001FFE00003FFE00003FF
       F00007FFF80003FFF00007FFF00007FFFC000FFFFC0007FFFC001FFFFC001FFF
       FF003FFFFF803FFFFF007FFFFF007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
   object EKInformacion1: TEKInformacion
     StatusBar = StatusBar1
