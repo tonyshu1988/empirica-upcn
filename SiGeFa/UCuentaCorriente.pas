@@ -7,7 +7,8 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, UBuscarPersona;
+  EKVistaPreviaQR, QRCtrls, QuickRpt, UBuscarPersona, EKEdit, Buttons,
+  EKDbSuma;
 
 type
   TFCuentaCorriente = class(TForm)
@@ -33,10 +34,10 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    PanelContenedor: TPanel;
-    PanelDatosCtaCte: TPanel;
-    DBGridCtaCte: TDBGrid;
-    PanelEditar_DatosGralCliente: TPanel;
+    PanelCliente: TPanel;
+    PanelCliente_CtaCte: TPanel;
+    DBGridCliente_CtaCte: TDBGrid;
+    PanelCliente_Datos: TPanel;
     DBText7: TDBText;
     Label2: TLabel;
     Label3: TLabel;
@@ -63,7 +64,7 @@ type
     DBText2: TDBText;
     Label13: TLabel;
     DBText3: TDBText;
-    PanelResumen: TPanel;
+    PanelCliente_Resumen: TPanel;
     ZQ_Cliente: TZQuery;
     DS_Cliente: TDataSource;
     ZQ_ClienteID_PERSONA: TIntegerField;
@@ -93,6 +94,62 @@ type
     ZQ_ClienteLIMITE_DEUDA: TFloatField;
     ZQ_ClienteFECHA_ALTA: TDateField;
     ZQ_ClienteFECHA_BAJA: TDateField;
+    PanelResumen: TPanel;
+    PanelResumen_Abajo: TPanel;
+    DBGridResumen_CtaCtes: TDBGrid;
+    PanelResumen_Arriba: TPanel;
+    ZQ_CtaCte_Gral: TZQuery;
+    ZQ_CtaCte_GralID_PERSONA: TIntegerField;
+    ZQ_CtaCte_GralLIMITE_DEUDA: TFloatField;
+    ZQ_CtaCte_GralSALDO: TFloatField;
+    ZQ_CtaCte_GralFECHA_ALTA: TDateField;
+    ZQ_CtaCte_GralFECHA_BAJA: TDateField;
+    ZQ_CtaCte_GralDEBE: TFloatField;
+    ZQ_CtaCte_GralHABER: TFloatField;
+    ZQ_CtaCte_GralNOMBRE: TStringField;
+    ZQ_CtaCte_GralNUMERO_DOC: TStringField;
+    ZQ_CtaCte_GralLOCALIDAD: TStringField;
+    ZQ_CtaCte_GralCODIGO_POSTAL: TStringField;
+    ZQ_CtaCte_GralCUIT_CUIL: TStringField;
+    ZQ_CtaCte_GralBAJA: TStringField;
+    ZQ_CtaCte_GralNOMBRE_PROVINCIA: TStringField;
+    ZQ_CtaCte_GralNOMBRE_TIPO_IVA: TStringField;
+    ZQ_CtaCte_GralCOD_IVA: TStringField;
+    ZQ_CtaCte_GralNOMBRE_TIPO_DOC: TStringField;
+    DS_CtaCte_Gral: TDataSource;
+    ZQ_CtaCte_Cliente: TZQuery;
+    ZQ_CtaCte_ClienteID_COMPROBANTE: TIntegerField;
+    ZQ_CtaCte_ClienteID_CUENTA: TIntegerField;
+    ZQ_CtaCte_ClienteID_VENDEDOR: TIntegerField;
+    ZQ_CtaCte_ClienteID_TIPO_IVA: TIntegerField;
+    ZQ_CtaCte_ClienteID_TIPO_FP: TIntegerField;
+    ZQ_CtaCte_ClienteFECHA: TDateTimeField;
+    ZQ_CtaCte_ClienteOBSERVACION: TStringField;
+    ZQ_CtaCte_ClienteFECHA_FP: TDateTimeField;
+    ZQ_CtaCte_ClienteDEBE: TFloatField;
+    ZQ_CtaCte_ClienteHABER: TFloatField;
+    ZQ_CtaCte_ClienteSALDO_CPB: TFloatField;
+    DS_CtaCte_Cliente: TDataSource;
+    EKOrdenar_CtaCteGral: TEKOrdenarGrilla;
+    EKOrdenar_CtaCteCliente: TEKOrdenarGrilla;
+    ZQ_CtaCte_GralCODIGO_CORTO: TIntegerField;
+    ZQ_CtaCte_ClienteTIPO_COMPROBANTE: TStringField;
+    EKEditTotalRegistros: TEKEdit;
+    EKEditDebe: TEKEdit;
+    EKEditHaber: TEKEdit;
+    EKEditSaldo: TEKEdit;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    PanelFiltro: TPanel;
+    BtnFiltro_Todos: TSpeedButton;
+    BtnFiltro_Hoy: TSpeedButton;
+    BtnFiltro_EstaSemana: TSpeedButton;
+    BtnFiltro_EsteMes: TSpeedButton;
+    BtnFiltro_EsteAnio: TSpeedButton;
+    Label39: TLabel;
+    EKDbSumaCtaCte_Cliente: TEKDbSuma;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -103,7 +160,6 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridMarcaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     //------TECLAS RAPIDAS
     procedure ANuevoExecute(Sender: TObject);
     procedure AModificarExecute(Sender: TObject);
@@ -112,7 +168,10 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
+
     procedure btnImprimirClick(Sender: TObject);
+    procedure DBGridResumen_CtaCtesDblClick(Sender: TObject);
+    procedure AplicarFiltro(Sender: TObject);
   private
     vsel: TFBuscarPersona;
     procedure onSelCliente;
@@ -127,13 +186,15 @@ const
 
 implementation
 
-uses UPrincipal, UDM;
+uses UPrincipal, UDM, DateUtils;
 
 {$R *.dfm}
 
-procedure TFCuentaCorriente.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
+procedure TFCuentaCorriente.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
+  EKOrdenar_CtaCteGral.GuardarConfigColumnas;
+  EKOrdenar_CtaCteCliente.GuardarConfigColumnas;
+
   CanClose:= FPrincipal.cerrar_ventana(transaccion);
 end;
 
@@ -148,9 +209,9 @@ procedure TFCuentaCorriente.onSelCliente;
 begin
   if (not (vsel.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
   begin
-    ZQ_Cliente.Close;
-    ZQ_Cliente.ParamByName('ID_PERSONA').AsInteger:= vsel.ZQ_PersonasID_PERSONA.AsInteger;
-    ZQ_Cliente.Open;
+    ZQ_CtaCte_Gral.Close;
+    ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= vsel.ZQ_PersonasID_PERSONA.AsInteger;
+    ZQ_CtaCte_Gral.Open;
   end;
 
   vsel.Close;
@@ -332,20 +393,21 @@ end;
 
 procedure TFCuentaCorriente.FormCreate(Sender: TObject);
 begin
+  EKOrdenar_CtaCteGral.CargarConfigColumnas;
+  EKOrdenar_CtaCteCliente.CargarConfigColumnas;
+
+  PanelResumen.BringToFront;
+
+  ZQ_CtaCte_Gral.Close;
+  ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= -1;
+  ZQ_CtaCte_Gral.Open;
+
 //  StaticTxtBaja.Color:= FPrincipal.baja;
 //
 //  ZQ_Marcas.Close;
 //  ZQ_Marcas.open;
 //
 //  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
-end;
-
-
-procedure TFCuentaCorriente.DBGridMarcaDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-
 end;
 
 
@@ -398,11 +460,11 @@ end;
 //----------------------------------
 
 
-
-
-
 procedure TFCuentaCorriente.btnImprimirClick(Sender: TObject);
 begin
+  ZQ_Cliente.Close;
+  PanelResumen.BringToFront;
+
 //  if ZQ_Marcas.IsEmpty then
 //    exit;
 //
@@ -412,4 +474,71 @@ begin
 //  EKVistaPrevia.VistaPrevia;
 end;
 
+
+procedure TFCuentaCorriente.DBGridResumen_CtaCtesDblClick(Sender: TObject);
+begin
+  PanelCliente.BringToFront;
+
+  ZQ_Cliente.Close;
+  ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_CtaCte_GralID_PERSONA.AsInteger;
+  ZQ_Cliente.Open;
+
+  AplicarFiltro(BtnFiltro_Todos);
+end;
+
+
+procedure TFCuentaCorriente.AplicarFiltro(Sender: TObject);
+var
+  hoy: Tdate;
+  diasDesdeUltimaSemana, diasDesdeUltimoMes, diasDesdeUltimoAnio: integer;
+  debe, haber, saldo: Double;
+begin
+  hoy:= dm.EKModelo.Fecha;
+
+  ZQ_CtaCte_Cliente.Close;
+  ZQ_CtaCte_Cliente.ParamByName('id_persona').AsInteger:= ZQ_CtaCte_GralID_PERSONA.AsInteger;
+  ZQ_CtaCte_Cliente.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
+
+  if TSpeedButton (Sender).Name = 'BtnFiltro_Todos' then
+  begin
+    ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= EncodeDate(1000,1,1);
+    ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= EncodeDate(3000,1,1);
+  end;
+
+  if TSpeedButton (Sender).Name = 'BtnFiltro_Hoy' then
+  begin
+    ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= hoy;
+    ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= hoy;
+  end;
+
+  if TSpeedButton (Sender).Name = 'BtnFiltro_EstaSemana' then //la semana comienza el lunesa
+  begin
+    diasDesdeUltimaSemana:= DayOfTheWeek(hoy) - 1;
+    ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= IncDay(hoy, -diasDesdeUltimaSemana);
+    ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= hoy;
+  end;
+
+  if TSpeedButton (Sender).Name = 'BtnFiltro_EsteMes' then
+  begin
+    ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= EncodeDate(YearOf(hoy), MonthOf(hoy), 1);
+    ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= hoy;
+  end;
+
+  if TSpeedButton (Sender).Name = 'BtnFiltro_EsteAnio' then
+  begin
+    ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= EncodeDate(YearOf(hoy), 1, 1);
+    ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= hoy;
+  end;
+
+  //ShowMessage(DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate)+' - '+DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate));
+
+  ZQ_CtaCte_Cliente.Open;
+
+  EKDbSumaCtaCte_Cliente.RecalcAll;
+
+  EKEditTotalRegistros.Text:= IntToStr(ZQ_CtaCte_Cliente.RecordCount);
+  EKEditDebe.Text:=  FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Cliente.SumCollection.Items[0].SumValue);
+  EKEditHaber.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Cliente.SumCollection.Items[1].SumValue);
+  EKEditSaldo.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Cliente.SumCollection.Items[2].SumValue);
+end;
 end.
