@@ -28,11 +28,11 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
     TabOrder = 0
     object TabIngresoVsEgresos: TTabSheet
       Caption = 'Ingresos Vs. Egresos'
-      object Panel1: TPanel
+      object PanelDatos: TPanel
         Left = 0
         Top = 0
         Width = 846
-        Height = 118
+        Height = 428
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -50,233 +50,271 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           Height = 13
           Caption = 'Label2'
         end
-        object DBGridEgresos: TDBGrid
-          Left = 546
-          Top = 0
-          Width = 300
-          Height = 118
-          Align = alRight
-          Color = 14606012
-          DataSource = DS_Egresos
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridEgresosDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'NOMBRE_MOVIMIENTO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Movimiento'
-              Width = 200
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SUM'
-              Title.Alignment = taCenter
-              Title.Caption = 'Total Egresos'
-              Width = 71
-              Visible = True
-            end>
-        end
-        object DBGridIngresos: TDBGrid
-          Left = 246
-          Top = 0
-          Width = 300
-          Height = 118
-          Align = alRight
-          Color = 14606012
-          DataSource = DS_Ingresos
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridIngresosDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'NOMBRE_MOVIMIENTO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Movimiento'
-              Width = 200
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SUM'
-              Title.Alignment = taCenter
-              Title.Caption = 'Total Ingresos'
-              Visible = True
-            end>
-        end
-      end
-      object Panel2: TPanel
-        Left = 0
-        Top = 118
-        Width = 846
-        Height = 310
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 1
-        object DBChartEgresos: TDBChart
-          Left = 546
-          Top = 0
-          Width = 300
-          Height = 310
-          AllowPanning = pmNone
-          AllowZoom = False
-          BackWall.Brush.Color = clWhite
-          BackWall.Brush.Style = bsClear
-          BackWall.Color = clSilver
-          BackWall.Pen.Visible = False
-          Gradient.EndColor = clSilver
-          Gradient.StartColor = clBlack
-          Gradient.Visible = True
-          LeftWall.Brush.Color = clWhite
-          Title.Brush.Color = clWhite
-          Title.Brush.Style = bsClear
-          Title.Color = clWhite
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clBlack
-          Title.Font.Height = -11
-          Title.Font.Name = 'Arial'
-          Title.Font.Style = [fsBold]
-          Title.Text.Strings = (
-            'EGRESOS')
-          AxisVisible = False
-          BackColor = clSilver
-          ClipPoints = False
-          Frame.Visible = False
-          LeftAxis.MinorTickLength = 1
-          Legend.Alignment = laBottom
-          Legend.Frame.Visible = False
-          Legend.ResizeChart = False
-          Legend.ShadowSize = 1
-          Legend.TextStyle = ltsPlain
-          Legend.TopPos = 11
-          View3DOptions.Elevation = 315
-          View3DOptions.Orthogonal = False
-          View3DOptions.Perspective = 0
-          View3DOptions.Rotation = 360
-          View3DWalls = False
-          Align = alRight
-          BevelOuter = bvNone
-          BevelWidth = 0
-          TabOrder = 0
-          OnMouseMove = DBChartEgresosMouseMove
-          object Series1: TPieSeries
-            Marks.Arrow.Visible = False
-            Marks.ArrowLength = 8
-            Marks.Frame.Visible = False
-            Marks.Style = smsPercent
-            Marks.Transparent = True
-            Marks.Visible = False
-            DataSource = ZQ_Egresos
-            SeriesColor = clRed
-            ShowInLegend = False
-            XLabelsSource = 'NOMBRE_MOVIMIENTO'
-            Circled = True
-            ExplodeBiggest = 10
-            OtherSlice.Text = 'Other'
-            PieValues.DateTime = False
-            PieValues.Name = 'Pie'
-            PieValues.Multiplier = 1.000000000000000000
-            PieValues.Order = loAscending
-            PieValues.ValueSource = 'SUM'
-            RotationAngle = 135
-          end
-        end
-        object DBChart3: TDBChart
+        object Panel3: TPanel
           Left = 0
           Top = 0
           Width = 246
-          Height = 310
-          BackWall.Brush.Color = clWhite
-          Title.Text.Strings = (
-            'TDBChart')
-          View3DOptions.Elevation = 315
-          View3DOptions.Orthogonal = False
-          View3DOptions.Perspective = 0
-          View3DOptions.Rotation = 360
+          Height = 428
           Align = alClient
-          TabOrder = 1
+          TabOrder = 0
+          object Label5: TLabel
+            Left = 64
+            Top = 88
+            Width = 32
+            Height = 13
+            Caption = 'Label5'
+          end
         end
-        object DBChartIngresos: TDBChart
+        object PanelIngresos: TPanel
           Left = 246
           Top = 0
           Width = 300
-          Height = 310
-          AllowPanning = pmNone
-          AllowZoom = False
-          BackWall.Brush.Color = clWhite
-          BackWall.Brush.Style = bsClear
-          BackWall.Color = clSilver
-          BackWall.Pen.Visible = False
-          Gradient.EndColor = clSilver
-          Gradient.StartColor = clBlack
-          Gradient.Visible = True
-          LeftWall.Brush.Color = clWhite
-          Title.Brush.Color = clWhite
-          Title.Brush.Style = bsClear
-          Title.Color = clWhite
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clBlack
-          Title.Font.Height = -11
-          Title.Font.Name = 'Arial'
-          Title.Font.Style = [fsBold]
-          Title.Text.Strings = (
-            'INGRESOS')
-          AxisVisible = False
-          BackColor = clSilver
-          ClipPoints = False
-          Frame.Visible = False
-          LeftAxis.MinorTickLength = 1
-          Legend.Alignment = laBottom
-          Legend.Frame.Visible = False
-          Legend.ResizeChart = False
-          Legend.ShadowSize = 1
-          Legend.TextStyle = ltsPlain
-          Legend.Visible = False
-          ScaleLastPage = False
-          View3DOptions.Elevation = 315
-          View3DOptions.Orthogonal = False
-          View3DOptions.Perspective = 0
-          View3DOptions.Rotation = 360
-          View3DWalls = False
+          Height = 428
           Align = alRight
-          BevelOuter = bvNone
-          BevelWidth = 0
+          TabOrder = 1
+          object Label4: TLabel
+            Left = 1
+            Top = 1
+            Width = 298
+            Height = 13
+            Align = alTop
+            Alignment = taCenter
+            Caption = 'INGRESOS'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBGridIngresos: TDBGrid
+            Left = 1
+            Top = 14
+            Width = 298
+            Height = 73
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_Ingresos
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnDrawColumnCell = DBGridIngresosDrawColumnCell
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'NOMBRE_MOVIMIENTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Movimiento'
+                Width = 200
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'SUM'
+                Title.Alignment = taCenter
+                Title.Caption = 'Total Ingresos'
+                Width = 88
+                Visible = True
+              end>
+          end
+          object DBChartIngresos: TDBChart
+            Left = 1
+            Top = 87
+            Width = 298
+            Height = 340
+            AllowPanning = pmNone
+            AllowZoom = False
+            BackWall.Brush.Color = clWhite
+            BackWall.Brush.Style = bsClear
+            BackWall.Color = clSilver
+            BackWall.Pen.Visible = False
+            Gradient.EndColor = clSilver
+            Gradient.StartColor = clBlack
+            Gradient.Visible = True
+            LeftWall.Brush.Color = clWhite
+            Title.Brush.Color = clWhite
+            Title.Brush.Style = bsClear
+            Title.Color = clWhite
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clBlack
+            Title.Font.Height = -11
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Title.Text.Strings = (
+              'INGRESOS')
+            AxisVisible = False
+            BackColor = clSilver
+            ClipPoints = False
+            Frame.Visible = False
+            LeftAxis.MinorTickLength = 1
+            Legend.Alignment = laBottom
+            Legend.Frame.Visible = False
+            Legend.ResizeChart = False
+            Legend.ShadowSize = 1
+            Legend.TextStyle = ltsPlain
+            Legend.Visible = False
+            ScaleLastPage = False
+            View3DOptions.Elevation = 315
+            View3DOptions.Orthogonal = False
+            View3DOptions.Perspective = 0
+            View3DOptions.Rotation = 360
+            View3DWalls = False
+            Align = alBottom
+            BevelOuter = bvNone
+            BevelWidth = 0
+            TabOrder = 1
+            OnMouseMove = DBChartIngresosMouseMove
+            object PieSeries1: TPieSeries
+              Marks.Arrow.Visible = False
+              Marks.ArrowLength = 8
+              Marks.Frame.Visible = False
+              Marks.Style = smsPercent
+              Marks.Transparent = True
+              Marks.Visible = False
+              DataSource = ZQ_Ingresos
+              SeriesColor = clRed
+              Title = 'Ingresos'
+              XLabelsSource = 'NOMBRE_MOVIMIENTO'
+              Circled = True
+              CircleBackColor = 33023
+              ExplodeBiggest = 10
+              OtherSlice.Text = 'Other'
+              PieValues.DateTime = False
+              PieValues.Name = 'Pie'
+              PieValues.Multiplier = 1.000000000000000000
+              PieValues.Order = loAscending
+              PieValues.ValueSource = 'SUM'
+              RotationAngle = 135
+            end
+          end
+        end
+        object PanelEgresos: TPanel
+          Left = 546
+          Top = 0
+          Width = 300
+          Height = 428
+          Align = alRight
           TabOrder = 2
-          OnMouseMove = DBChartIngresosMouseMove
-          object PieSeries1: TPieSeries
-            Marks.Arrow.Visible = False
-            Marks.ArrowLength = 8
-            Marks.Frame.Visible = False
-            Marks.Style = smsPercent
-            Marks.Transparent = True
-            Marks.Visible = False
-            DataSource = ZQ_Ingresos
-            SeriesColor = clRed
-            Title = 'Ingresos'
-            XLabelsSource = 'NOMBRE_MOVIMIENTO'
-            Circled = True
-            CircleBackColor = 33023
-            ExplodeBiggest = 10
-            OtherSlice.Text = 'Other'
-            PieValues.DateTime = False
-            PieValues.Name = 'Pie'
-            PieValues.Multiplier = 1.000000000000000000
-            PieValues.Order = loAscending
-            PieValues.ValueSource = 'SUM'
-            RotationAngle = 135
+          object Label3: TLabel
+            Left = 1
+            Top = 1
+            Width = 298
+            Height = 13
+            Align = alTop
+            Alignment = taCenter
+            Caption = 'EGRESOS'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBGridEgresos: TDBGrid
+            Left = 1
+            Top = 14
+            Width = 298
+            Height = 73
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_Egresos
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnDrawColumnCell = DBGridEgresosDrawColumnCell
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'NOMBRE_MOVIMIENTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Movimiento'
+                Width = 200
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'SUM'
+                Title.Alignment = taCenter
+                Title.Caption = 'Total Egresos'
+                Width = 88
+                Visible = True
+              end>
+          end
+          object DBChartEgresos: TDBChart
+            Left = 1
+            Top = 87
+            Width = 298
+            Height = 340
+            AllowPanning = pmNone
+            AllowZoom = False
+            BackWall.Brush.Color = clWhite
+            BackWall.Brush.Style = bsClear
+            BackWall.Color = clSilver
+            BackWall.Pen.Visible = False
+            Gradient.EndColor = clSilver
+            Gradient.StartColor = clBlack
+            Gradient.Visible = True
+            LeftWall.Brush.Color = clWhite
+            Title.Brush.Color = clWhite
+            Title.Brush.Style = bsClear
+            Title.Color = clWhite
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clBlack
+            Title.Font.Height = -11
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Title.Text.Strings = (
+              'EGRESOS')
+            AxisVisible = False
+            BackColor = clSilver
+            ClipPoints = False
+            Frame.Visible = False
+            LeftAxis.MinorTickLength = 1
+            Legend.Alignment = laBottom
+            Legend.Frame.Visible = False
+            Legend.ResizeChart = False
+            Legend.ShadowSize = 1
+            Legend.TextStyle = ltsPlain
+            Legend.TopPos = 11
+            View3DOptions.Elevation = 315
+            View3DOptions.Orthogonal = False
+            View3DOptions.Perspective = 0
+            View3DOptions.Rotation = 360
+            View3DWalls = False
+            Align = alBottom
+            BevelOuter = bvNone
+            BevelWidth = 0
+            TabOrder = 1
+            OnMouseMove = DBChartEgresosMouseMove
+            object Series1: TPieSeries
+              Marks.Arrow.Visible = False
+              Marks.ArrowLength = 8
+              Marks.Frame.Visible = False
+              Marks.Style = smsPercent
+              Marks.Transparent = True
+              Marks.Visible = False
+              DataSource = ZQ_Egresos
+              SeriesColor = clRed
+              ShowInLegend = False
+              XLabelsSource = 'NOMBRE_MOVIMIENTO'
+              Circled = True
+              ExplodeBiggest = 10
+              OtherSlice.Text = 'Other'
+              PieValues.DateTime = False
+              PieValues.Name = 'Pie'
+              PieValues.Multiplier = 1.000000000000000000
+              PieValues.Order = loAscending
+              PieValues.ValueSource = 'SUM'
+              RotationAngle = 135
+            end
           end
         end
       end
@@ -817,7 +855,6 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
     Connection = DM.Conexion
     AfterOpen = ZQ_IngresosAfterOpen
     AfterScroll = ZQ_IngresosAfterScroll
-    Active = True
     SQL.Strings = (
       
         'select c.id_tipo_movimiento, m.nombre_movimiento, sum(c.importe_' +
@@ -849,7 +886,6 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
     Connection = DM.Conexion
     AfterOpen = ZQ_EgresosAfterOpen
     AfterScroll = ZQ_EgresosAfterScroll
-    Active = True
     SQL.Strings = (
       
         'select c.id_tipo_movimiento, m.nombre_movimiento, sum(c.importe_' +

@@ -1,8 +1,8 @@
 object FCuentaCorriente: TFCuentaCorriente
-  Left = 322
-  Top = 196
+  Left = 329
+  Top = 163
   Width = 871
-  Height = 500
+  Height = 549
   Caption = 'Cuenta Corriente'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,30 +19,159 @@ object FCuentaCorriente: TFCuentaCorriente
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object PanelContenedor: TPanel
+  object PanelResumen: TPanel
     Left = 0
     Top = 0
     Width = 855
-    Height = 410
+    Height = 459
+    Align = alClient
+    TabOrder = 5
+    object PanelResumen_Abajo: TPanel
+      Left = 1
+      Top = 360
+      Width = 853
+      Height = 98
+      Align = alBottom
+      TabOrder = 0
+    end
+    object DBGridResumen_CtaCtes: TDBGrid
+      Left = 1
+      Top = 89
+      Width = 853
+      Height = 271
+      Align = alClient
+      Color = 14606012
+      DataSource = DS_CtaCte_Gral
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      OnDblClick = DBGridResumen_CtaCtesDblClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'CODIGO_CORTO'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE'
+          Width = 135
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA_ALTA'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LIMITE_DEUDA'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DEBE'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'HABER'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SALDO'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA_BAJA'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CODIGO_POSTAL'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LOCALIDAD'
+          Width = 107
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_PROVINCIA'
+          Width = 135
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COD_IVA'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_TIPO_IVA'
+          Width = 121
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CUIT_CUIL'
+          Width = 74
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_TIPO_DOC'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NUMERO_DOC'
+          Width = 124
+          Visible = True
+        end>
+    end
+    object PanelResumen_Arriba: TPanel
+      Left = 1
+      Top = 1
+      Width = 853
+      Height = 88
+      Align = alTop
+      TabOrder = 2
+    end
+  end
+  object PanelCliente: TPanel
+    Left = 0
+    Top = 0
+    Width = 855
+    Height = 459
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
-    TabOrder = 4
-    object PanelDatosCtaCte: TPanel
+    TabOrder = 3
+    object PanelCliente_CtaCte: TPanel
       Left = 3
-      Top = 102
+      Top = 126
       Width = 849
-      Height = 243
+      Height = 242
       Align = alClient
       BorderWidth = 3
       TabOrder = 0
-      object DBGridCtaCte: TDBGrid
+      object DBGridCliente_CtaCte: TDBGrid
         Left = 4
         Top = 4
         Width = 841
-        Height = 235
+        Height = 234
         Align = alClient
         Color = 14606012
+        DataSource = DS_CtaCte_Cliente
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -50,9 +179,47 @@ object FCuentaCorriente: TFCuentaCorriente
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'TIPO_COMPROBANTE'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FECHA'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FECHA_FP'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DEBE'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'HABER'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SALDO_CPB'
+            Width = 96
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'OBSERVACION'
+            Width = 155
+            Visible = True
+          end>
       end
     end
-    object PanelEditar_DatosGralCliente: TPanel
+    object PanelCliente_Datos: TPanel
       Left = 3
       Top = 3
       Width = 849
@@ -413,13 +580,189 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
     end
-    object PanelResumen: TPanel
+    object PanelCliente_Resumen: TPanel
       Left = 3
-      Top = 345
+      Top = 368
       Width = 849
-      Height = 62
+      Height = 88
       Align = alBottom
       TabOrder = 2
+      object Label14: TLabel
+        Left = 15
+        Top = 16
+        Width = 145
+        Height = 13
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = 'CANTIDAD'
+      end
+      object Label15: TLabel
+        Left = 168
+        Top = 16
+        Width = 145
+        Height = 13
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = 'DEBE'
+      end
+      object Label16: TLabel
+        Left = 472
+        Top = 16
+        Width = 145
+        Height = 13
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = 'SALDO'
+      end
+      object Label17: TLabel
+        Left = 319
+        Top = 16
+        Width = 145
+        Height = 13
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = 'HABER'
+      end
+      object EKEditTotalRegistros: TEKEdit
+        Tag = 99
+        Left = 15
+        Top = 32
+        Width = 145
+        Height = 26
+        AutoSize = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+        Text = '1'
+        DataType = ftUnknown
+      end
+      object EKEditDebe: TEKEdit
+        Tag = 99
+        Left = 168
+        Top = 32
+        Width = 145
+        Height = 26
+        AutoSize = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 1
+        Text = '2'
+        DataType = ftUnknown
+      end
+      object EKEditHaber: TEKEdit
+        Tag = 99
+        Left = 320
+        Top = 32
+        Width = 145
+        Height = 26
+        AutoSize = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 2
+        Text = '3'
+        DataType = ftUnknown
+      end
+      object EKEditSaldo: TEKEdit
+        Tag = 99
+        Left = 472
+        Top = 32
+        Width = 145
+        Height = 26
+        AutoSize = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 3
+        Text = '4'
+        DataType = ftUnknown
+      end
+    end
+    object PanelFiltro: TPanel
+      Left = 3
+      Top = 102
+      Width = 849
+      Height = 24
+      Align = alTop
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 3
+      object BtnFiltro_Todos: TSpeedButton
+        Left = 55
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Down = True
+        Caption = 'Todos'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+      object BtnFiltro_Hoy: TSpeedButton
+        Left = 151
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Caption = 'Hoy'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+      object BtnFiltro_EstaSemana: TSpeedButton
+        Left = 247
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Caption = 'Esta Semana'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+      object BtnFiltro_EsteMes: TSpeedButton
+        Left = 343
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Caption = 'Este Mes'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+      object BtnFiltro_EsteAnio: TSpeedButton
+        Left = 439
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Caption = 'Este A'#241'o'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+      object Label39: TLabel
+        Left = 19
+        Top = 5
+        Width = 33
+        Height = 13
+        Caption = 'Filtro:'
+      end
     end
   end
   object dxBarABM: TdxBarManager
@@ -871,8 +1214,8 @@ object FCuentaCorriente: TFCuentaCorriente
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 48
-    Top = 216
+    Left = 43
+    Top = 256
     DockControlHeights = (
       0
       0
@@ -989,8 +1332,8 @@ object FCuentaCorriente: TFCuentaCorriente
     end
   end
   object ATeclasRapidas: TActionManager
-    Left = 48
-    Top = 266
+    Left = 43
+    Top = 306
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -1053,8 +1396,8 @@ object FCuentaCorriente: TFCuentaCorriente
         Name = 'id_persona'
         ParamType = ptUnknown
       end>
-    Left = 715
-    Top = 6
+    Left = 43
+    Top = 158
     ParamData = <
       item
         DataType = ftUnknown
@@ -1159,7 +1502,340 @@ object FCuentaCorriente: TFCuentaCorriente
   end
   object DS_Cliente: TDataSource
     DataSet = ZQ_Cliente
-    Left = 715
-    Top = 54
+    Left = 43
+    Top = 206
+  end
+  object ZQ_CtaCte_Gral: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select cc.id_persona, cc.limite_deuda, cc.saldo, cc.fecha_alta, ' +
+        'cc.fecha_baja, cc.debe, cc.haber, cc.nombre,'
+      
+        '       cc.numero_doc, cc.localidad, cc.codigo_postal, cc.cuit_cu' +
+        'il, cc.baja, cc.nombre_provincia, cc.nombre_tipo_iva,'
+      '       cc.cod_iva, cc.nombre_tipo_doc, cc.codigo_corto'
+      'from ctacte_general(:id_cliente) cc')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    Left = 136
+    Top = 160
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    object ZQ_CtaCte_GralID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_CtaCte_GralLIMITE_DEUDA: TFloatField
+      FieldName = 'LIMITE_DEUDA'
+    end
+    object ZQ_CtaCte_GralSALDO: TFloatField
+      FieldName = 'SALDO'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object ZQ_CtaCte_GralFECHA_ALTA: TDateField
+      FieldName = 'FECHA_ALTA'
+    end
+    object ZQ_CtaCte_GralFECHA_BAJA: TDateField
+      FieldName = 'FECHA_BAJA'
+    end
+    object ZQ_CtaCte_GralDEBE: TFloatField
+      FieldName = 'DEBE'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object ZQ_CtaCte_GralHABER: TFloatField
+      FieldName = 'HABER'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object ZQ_CtaCte_GralNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_CtaCte_GralNUMERO_DOC: TStringField
+      FieldName = 'NUMERO_DOC'
+      Size = 50
+    end
+    object ZQ_CtaCte_GralLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_CtaCte_GralCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_CtaCte_GralCUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
+    end
+    object ZQ_CtaCte_GralBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_CtaCte_GralNOMBRE_PROVINCIA: TStringField
+      FieldName = 'NOMBRE_PROVINCIA'
+      Size = 50
+    end
+    object ZQ_CtaCte_GralNOMBRE_TIPO_IVA: TStringField
+      FieldName = 'NOMBRE_TIPO_IVA'
+      Size = 50
+    end
+    object ZQ_CtaCte_GralCOD_IVA: TStringField
+      FieldName = 'COD_IVA'
+      Size = 10
+    end
+    object ZQ_CtaCte_GralNOMBRE_TIPO_DOC: TStringField
+      FieldName = 'NOMBRE_TIPO_DOC'
+    end
+    object ZQ_CtaCte_GralCODIGO_CORTO: TIntegerField
+      FieldName = 'CODIGO_CORTO'
+    end
+  end
+  object DS_CtaCte_Gral: TDataSource
+    DataSet = ZQ_CtaCte_Gral
+    Left = 136
+    Top = 208
+  end
+  object ZQ_CtaCte_Cliente: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select cc.id_comprobante, cc.id_cuenta, cc.id_vendedor, cc.id_ti' +
+        'po_iva, cc.id_tipo_fp, cc.fecha, cc.observacion,'
+      
+        '       cc.fecha_fp, cc.debe, cc.haber, cc.saldo_cpb, cc.tipo_com' +
+        'probante'
+      
+        'from calc_ctacte_individual(:id_sucursal, :id_persona, :fecha_de' +
+        'sde, :fecha_hasta) cc')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_persona'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fecha_desde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fecha_hasta'
+        ParamType = ptUnknown
+      end>
+    Left = 272
+    Top = 160
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_persona'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fecha_desde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fecha_hasta'
+        ParamType = ptUnknown
+      end>
+    object ZQ_CtaCte_ClienteID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_CtaCte_ClienteID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+    end
+    object ZQ_CtaCte_ClienteID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object ZQ_CtaCte_ClienteID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_CtaCte_ClienteID_TIPO_FP: TIntegerField
+      FieldName = 'ID_TIPO_FP'
+    end
+    object ZQ_CtaCte_ClienteFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_CtaCte_ClienteOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
+    end
+    object ZQ_CtaCte_ClienteFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_CtaCte_ClienteDEBE: TFloatField
+      FieldName = 'DEBE'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object ZQ_CtaCte_ClienteHABER: TFloatField
+      FieldName = 'HABER'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object ZQ_CtaCte_ClienteSALDO_CPB: TFloatField
+      FieldName = 'SALDO_CPB'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object ZQ_CtaCte_ClienteTIPO_COMPROBANTE: TStringField
+      FieldName = 'TIPO_COMPROBANTE'
+      Size = 30
+    end
+  end
+  object DS_CtaCte_Cliente: TDataSource
+    DataSet = ZQ_CtaCte_Cliente
+    Left = 272
+    Top = 208
+  end
+  object EKOrdenar_CtaCteGral: TEKOrdenarGrilla
+    Grilla = DBGridResumen_CtaCtes
+    Filtros = <
+      item
+        TituloColumna = 'CODIGO_CORTO'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NOMBRE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FECHA_ALTA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'LIMITE_DEUDA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'DEBE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'HABER'
+        Visible = True
+      end
+      item
+        TituloColumna = 'SALDO'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FECHA_BAJA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'CODIGO_POSTAL'
+        Visible = True
+      end
+      item
+        TituloColumna = 'LOCALIDAD'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NOMBRE_PROVINCIA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'COD_IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NOMBRE_TIPO_IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'CUIT_CUIL'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NOMBRE_TIPO_DOC'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NUMERO_DOC'
+        Visible = True
+      end>
+    NombreGuardar = 'CtaCorriente_General'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 139
+    Top = 262
+  end
+  object EKOrdenar_CtaCteCliente: TEKOrdenarGrilla
+    Grilla = DBGridCliente_CtaCte
+    Filtros = <
+      item
+        TituloColumna = 'TIPO_COMPROBANTE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FECHA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FECHA_FP'
+        Visible = True
+      end
+      item
+        TituloColumna = 'DEBE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'HABER'
+        Visible = True
+      end
+      item
+        TituloColumna = 'SALDO_CPB'
+        Visible = True
+      end
+      item
+        TituloColumna = 'OBSERVACION'
+        Visible = True
+      end>
+    NombreGuardar = 'CtaCorriente_Cliente'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 275
+    Top = 262
+  end
+  object EKDbSumaCtaCte_Cliente: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'debe'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'haber'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'saldo_cpb'
+      end>
+    DataSet = ZQ_CtaCte_Cliente
+    Left = 275
+    Top = 310
   end
 end
