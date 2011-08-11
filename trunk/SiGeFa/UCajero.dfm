@@ -1,8 +1,8 @@
 object FCajero: TFCajero
-  Left = 232
-  Top = 76
+  Left = 195
+  Top = 122
   Width = 1004
-  Height = 692
+  Height = 676
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,14 +22,14 @@ object FCajero: TFCajero
     Left = 88
     Top = 0
     Width = 900
-    Height = 602
+    Height = 586
     Align = alClient
     TabOrder = 0
     object PanelDetalleProducto: TPanel
       Left = 1
       Top = 41
       Width = 322
-      Height = 560
+      Height = 544
       Align = alLeft
       BevelInner = bvSpace
       TabOrder = 0
@@ -158,7 +158,7 @@ object FCajero: TFCajero
       end
       object GroupBox1: TGroupBox
         Left = 2
-        Top = 324
+        Top = 308
         Width = 318
         Height = 234
         Align = alBottom
@@ -450,13 +450,13 @@ object FCajero: TFCajero
       Left = 323
       Top = 41
       Width = 576
-      Height = 560
+      Height = 544
       Align = alClient
       Caption = 'PanelContenedorDerecha'
       TabOrder = 1
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 336
+        Top = 320
         Width = 574
         Height = 223
         Align = alBottom
@@ -583,7 +583,7 @@ object FCajero: TFCajero
         Left = 1
         Top = 93
         Width = 574
-        Height = 243
+        Height = 227
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 1
@@ -598,7 +598,7 @@ object FCajero: TFCajero
           Left = 1
           Top = 1
           Width = 572
-          Height = 147
+          Height = 131
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -680,7 +680,7 @@ object FCajero: TFCajero
         end
         object PieGrilla: TPanel
           Left = 1
-          Top = 148
+          Top = 132
           Width = 572
           Height = 94
           Align = alBottom
@@ -1085,8 +1085,8 @@ object FCajero: TFCajero
         Name = 'prod'
         ParamType = ptUnknown
       end>
-    Left = 160
-    Top = 56
+    Left = 184
+    Top = 32
     ParamData = <
       item
         DataType = ftUnknown
@@ -4135,7 +4135,7 @@ object FCajero: TFCajero
     object CD_FpagoIMPORTE: TFloatField
       FieldName = 'IMPORTE'
       DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
     end
     object CD_FpagoCONCILIADO: TDateField
       FieldName = 'CONCILIADO'
