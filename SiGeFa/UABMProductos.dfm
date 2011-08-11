@@ -1,8 +1,8 @@
 object FABMProductos: TFABMProductos
-  Left = -4
-  Top = -4
-  Width = 1288
-  Height = 779
+  Left = 286
+  Top = 100
+  Width = 986
+  Height = 654
   Caption = 'FABMProductos'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -23,14 +23,14 @@ object FABMProductos: TFABMProductos
   object Panel4: TPanel
     Left = 0
     Top = 0
-    Width = 1280
-    Height = 695
+    Width = 978
+    Height = 570
     Align = alClient
     Caption = 'Panel4'
     TabOrder = 4
     DesignSize = (
-      1280
-      695)
+      978
+      570)
     object Label19: TLabel
       Left = 144
       Top = 216
@@ -39,8 +39,8 @@ object FABMProductos: TFABMProductos
       Caption = '_marca'
     end
     object panelImprimirListado: TPanel
-      Left = 518
-      Top = 130
+      Left = 368
+      Top = 96
       Width = 233
       Height = 121
       Anchors = []
@@ -1438,8 +1438,8 @@ object FABMProductos: TFABMProductos
     object Grilla: TEKDBGrid
       Left = 1
       Top = 20
-      Width = 1278
-      Height = 452
+      Width = 976
+      Height = 327
       Align = alClient
       Color = 14606012
       DataSource = DS_ProductoCabecera
@@ -1533,8 +1533,8 @@ object FABMProductos: TFABMProductos
     end
     object tabs: TPageControl
       Left = 1
-      Top = 472
-      Width = 1278
+      Top = 347
+      Width = 976
       Height = 222
       ActivePage = tabDetalle
       Align = alBottom
@@ -1548,7 +1548,7 @@ object FABMProductos: TFABMProductos
         object PProducto: TPanel
           Left = 0
           Top = 0
-          Width = 1270
+          Width = 968
           Height = 191
           Align = alClient
           TabOrder = 0
@@ -1791,14 +1791,14 @@ object FABMProductos: TFABMProductos
         object PDetalles: TPanel
           Left = 0
           Top = 0
-          Width = 1270
+          Width = 968
           Height = 191
           Align = alClient
           TabOrder = 0
           object grillaDetalle: TEKDBGrid
             Left = 841
             Top = 1
-            Width = 428
+            Width = 126
             Height = 189
             Align = alClient
             Color = 14606012
@@ -2370,7 +2370,7 @@ object FABMProductos: TFABMProductos
     object PanelCabecera: TPanel
       Left = 1
       Top = 1
-      Width = 1278
+      Width = 976
       Height = 19
       Align = alTop
       BevelOuter = bvNone
@@ -2390,7 +2390,7 @@ object FABMProductos: TFABMProductos
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 1169
+        Left = 867
         Top = 0
         Width = 109
         Height = 19
