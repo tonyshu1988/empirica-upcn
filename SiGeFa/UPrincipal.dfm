@@ -4906,6 +4906,10 @@ object FPrincipal: TFPrincipal
       ImageIndex = 38
       OnExecute = AEstadisticaMovInternosExecute
     end
+    object AEstadisticaFacturacion: TAction
+      Caption = 'Estadistica Facturacion'
+      OnExecute = AEstadisticaFacturacionExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5040,6 +5044,16 @@ object FPrincipal: TFPrincipal
       end
       object MovimientosInternos1: TMenuItem
         Action = AMovInternos
+      end
+    end
+    object Estadisticas1: TMenuItem
+      Caption = 'Estadisticas'
+      object EstadisticaMovimientosInt1: TMenuItem
+        Caption = 'Estadistica Movimientos Int.'
+      end
+      object EstadisticaFacturacion1: TMenuItem
+        Tag = 1
+        Action = AEstadisticaFacturacion
       end
     end
     object Salir1: TMenuItem
