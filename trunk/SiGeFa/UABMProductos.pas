@@ -661,6 +661,7 @@ begin
     exit;
  end;
 
+  //Deshabilito el cod corto cuando inserto un nuevo producto, lo genera solo el sistema
   LabelCodCorto.Enabled:= false;
   EDDCODCORTO.Enabled := false;
 
