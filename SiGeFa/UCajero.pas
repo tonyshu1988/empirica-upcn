@@ -424,7 +424,7 @@ begin
   descCliente:=0;
 
   crearComprobante();
-
+  edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
 end;
 
 procedure TFCajero.btsalirClick(Sender: TObject);
