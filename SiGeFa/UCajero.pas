@@ -716,7 +716,8 @@ begin
 //Hacer las validaciones correspondientes (por ej formas de pago=acumulado)
 if not(validarFPago()) then exit;
 
-if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_ComprobanteDetalle,ZQ_Comprobante_FormaPago]) then
+if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
+ if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_Comprobante_FormaPago,ZQ_ComprobanteDetalle]) then
    begin
       CD_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat;
       CD_ComprobanteIMPORTE_IVA.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat*CD_ComprobantePORC_IVA.AsFloat;
@@ -724,11 +725,12 @@ if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_Comprobante
       CD_ComprobanteSALDO.AsFloat:=calcularSaldoCtaCorr();
       CD_Comprobante.Post;
 
-      ZSP_Comprobante.Close;
-      ZSP_Comprobante.Open;
+
 
       ZQ_Comprobante.Append;
+      ZSP_Comprobante.Active:=True;
       ZQ_ComprobanteID_COMPROBANTE.AsInteger:=ZSP_ComprobanteID.AsInteger;
+      ZSP_Comprobante.Active:=False;
       ZQ_ComprobanteID_SUCURSAL.Value:=CD_ComprobanteID_SUCURSAL.Value;
       ZQ_ComprobanteID_PROVEEDOR.Clear;
       ZQ_ComprobanteID_CLIENTE.AsInteger:=CD_ComprobanteID_CLIENTE.AsInteger;
@@ -757,26 +759,37 @@ if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_Comprobante
       grabarDetallesFactura();
       grabarPagos();
    end;
-   if not(dm.EKModelo.finalizar_transaccion(abmComprobante)) then
-     begin
-      dm.EKModelo.cancelar_transaccion(abmComprobante);
-      Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
-     end;
 
-      CD_DetalleFactura.EmptyDataSet;
-      CD_Fpago.EmptyDataSet;
-      LimpiarCodigo();
-      crearComprobante();
-      CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
-      CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
-      BtAgregarPago.Enabled := true;
-      BtAceptarPago.Enabled := false;
-      BtCancelarPago.Enabled := false;
+   try
+     begin
+      if not(dm.EKModelo.finalizar_transaccion(abmComprobante)) then
+       begin
+        dm.EKModelo.cancelar_transaccion(abmComprobante);
+        Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
+       end;
+        CD_DetalleFactura.EmptyDataSet;
+        CD_Fpago.EmptyDataSet;
+        LimpiarCodigo();
+        crearComprobante();
+        CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
+        CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
+        BtAgregarPago.Enabled := true;
+        BtAceptarPago.Enabled := false;
+        BtCancelarPago.Enabled := false;
+     end
+   except
+    begin
+        Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
+    end;
+   end;
+
 
 end;
 
 procedure TFCajero.BtCancelarPagoClick(Sender: TObject);
 begin
+ if dm.EKModelo.verificar_transaccion(abmComprobante) then
+  dm.EKModelo.cancelar_transaccion(abmComprobante);
 
   CD_DetalleFactura.EmptyDataSet;
   CD_Fpago.EmptyDataSet;
@@ -817,7 +830,7 @@ begin
   CD_ComprobanteID_SUCURSAL.AsInteger:=SUCURSAL_LOGUEO;
   CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
   CD_ComprobanteID_TIPO_CPB.AsInteger:=11; //FACTURA
-  CD_ComprobanteID_VENDEDOR.AsInteger:=IdVendedor;//Aca va el cajero, buscar el logueado
+  CD_ComprobanteID_VENDEDOR.AsInteger:=IdVendedor;
   CD_ComprobanteID_COMP_ESTADO.AsInteger:=0;//PENDIENTE
   CD_ComprobanteCODIGO.AsString:='';
   CD_ComprobanteFECHA.AsDateTime:=dm.EKModelo.Fecha();
@@ -908,7 +921,7 @@ begin
     exit;
   end;
 
-  if (acumFpago > 0) and (CompareValue(acumulado, acumFpago, 0.001) <> 0) then
+  if (acumFpago <= 0) or (CompareValue(acumulado, acumFpago, 0.001) <> 0) then
   begin
     Application.MessageBox('El monto en las Formas de Pago es incorrecto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
     result := false;
@@ -921,42 +934,36 @@ end;
 procedure TFCajero.grabarPagos;
 begin
 //---------------- FORMA DE PAGO -------------------------------------
-    // Si no se cargo forma de pago asume todo en EFECTIVO
-    if CD_Fpago.IsEmpty then
-    begin
-      ZQ_Comprobante_FormaPago.Open;
-      ZQ_Comprobante_FormaPago.Append;
-      ZQ_Comprobante_FormaPagoID_COMPROBANTE.AsInteger := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-      ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger := 11;
-      ZQ_Comprobante_FormaPagoIMPORTE.AsFloat := acumulado;
-      ZQ_Comprobante_FormaPago.Post;
-    end
-    else
-    begin
+//    // Si no se cargo forma de pago asume todo en EFECTIVO
+//    if CD_Fpago.IsEmpty then
+//    begin
+//      ZQ_Comprobante_FormaPago.Open;
+//      ZQ_Comprobante_FormaPago.Append;
+//      ZQ_Comprobante_FormaPagoID_COMPROBANTE.AsInteger := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+//      ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger :=;
+//      ZQ_Comprobante_FormaPagoIMPORTE.AsFloat := acumulado;
+//      ZQ_Comprobante_FormaPagoCUENTA_INGRESO.AsInteger:=;
+//      ZQ_Comprobante_FormaPago.Post;
+//    end
+//    else
+//    begin
+
       CD_Fpago.First;
       while not CD_Fpago.Eof do
       begin
         ZQ_Comprobante_FormaPago.Open;
         ZQ_Comprobante_FormaPago.Append;
+        ZQ_Comprobante_FormaPagoID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
         ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger := CD_FpagoID_TIPO_FORMAPAG.AsInteger;
-        if ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger <> 11 then
-        begin
-          ZQ_Comprobante_FormaPagoMDCP_FECHA.AsDateTime := CD_FpagoMDCP_FECHA.AsDateTime;
-          ZQ_Comprobante_FormaPagoMDCP_BANCO.AsString := CD_FpagoMDCP_BANCO.AsString;
-          ZQ_Comprobante_FormaPagoMDCP_CHEQUE.AsString := CD_FpagoMDCP_CHEQUE.AsString;
-        end
-        else
-        begin
-          ZQ_Comprobante_FormaPagoMDCP_CHEQUE.Clear;
-          ZQ_Comprobante_FormaPagoMDCP_BANCO.Clear;
-          ZQ_Comprobante_FormaPagoMDCP_FECHA.Clear;
-        end;
+        ZQ_Comprobante_FormaPagoMDCP_FECHA.AsDateTime := CD_FpagoMDCP_FECHA.AsDateTime;
+        ZQ_Comprobante_FormaPagoMDCP_BANCO.AsString := CD_FpagoMDCP_BANCO.AsString;
+        ZQ_Comprobante_FormaPagoMDCP_CHEQUE.AsString := CD_FpagoMDCP_CHEQUE.AsString;
         ZQ_Comprobante_FormaPagoIMPORTE.AsFloat := CD_FpagoIMPORTE.AsFloat;
+        ZQ_Comprobante_FormaPagoCUENTA_INGRESO.AsInteger:=CD_FpagoCUENTA_INGRESO.AsInteger;
         ZQ_Comprobante_FormaPago.Post;
-
         CD_Fpago.Next;
       end;
-    end;
+    //end;
     //---------------------------------------------------------------------
 end;
 
@@ -1000,6 +1007,7 @@ if not(ZQ_Productos.IsEmpty) then
   if (edCantidad.AsInteger<0) then edCantidad.AsInteger:=1;
 
   if (edDesc.AsFloat<0) then edDesc.AsFloat:=0;
+
 
   desc:=edDesc.AsFloat/100;
 
