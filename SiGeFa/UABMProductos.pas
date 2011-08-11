@@ -120,7 +120,7 @@ type
     ZQ_ProductoCabecera_tipoArticulo: TStringField;
     grupoDetalle: TGroupBox;
     Label22: TLabel;
-    Label29: TLabel;
+    LabelCodCorto: TLabel;
     Label30: TLabel;
     Label32: TLabel;
     EDDCODCORTO: TDBEdit;
@@ -661,6 +661,9 @@ begin
     exit;
  end;
 
+  LabelCodCorto.Enabled:= false;
+  EDDCODCORTO.Enabled := false;
+
   ZQ_Articulo.Refresh;
 
   ZQ_DetalleProducto.Append;
@@ -697,6 +700,8 @@ begin
    grillaDetalle.Enabled:=false;
    GrupoEditando.Enabled :=false;
    ZQ_DetalleProducto.Edit;
+   LabelCodCorto.Enabled:= true;
+   EDDCODCORTO.Enabled := true;
 end;
 
 
@@ -1087,19 +1092,9 @@ end;
 
 
 procedure TFABMProductos.MenuItem3Click(Sender: TObject);
-var
-i : integer;
 begin
-  if grillaMedidas.SelectedRows.Count>0 then
-  begin
-    with grillaMedidas.DataSource.DataSet do
-      for i:=0 to grillaMedidas.SelectedRows.Count-1 do
-      begin
-        GotoBookmark(pointer(grillaMedidas.SelectedRows.Items[i]));
-        if not CDMedidas.IsEmpty then
-          CDMedidas.Delete;
-      end;
-  end;
+  if not CDMedidas.IsEmpty then
+    CDMedidas.Delete;
 end;
 
 
