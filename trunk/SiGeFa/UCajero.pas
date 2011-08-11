@@ -35,7 +35,6 @@ type
     PanelFormaPago: TPanel;
     PanelListadoProducto: TPanel;
     PanelCabeceraFactura: TPanel;
-    edImagen: TDBImage;
     DBGridListadoProductos: TDBGrid;
     PieGrilla: TPanel;
     DBGridFormaPago: TDBGrid;
@@ -118,7 +117,6 @@ type
     ZQ_ComprobanteFECHA_IMPRESA: TDateField;
     ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField;
     DS_Comprobante: TDataSource;
-    codBarras: TEdit;
     CD_DetalleFactura: TClientDataSet;
     DS_DetalleFactura: TDataSource;
     DataSetProvider1: TDataSetProvider;
@@ -160,7 +158,6 @@ type
     Label11: TLabel;
     Label10: TLabel;
     lblCantProductos: TLabel;
-    Label1: TLabel;
     Label19: TLabel;
     Importe: TEdit;
     Label20: TLabel;
@@ -184,8 +181,6 @@ type
     DBEdit6: TDBEdit;
     Label8: TLabel;
     DBEdit7: TDBEdit;
-    edCantidad: TEKEdit;
-    LeerCodBar: TLabel;
     Label9: TLabel;
     CD_FpagomedioPago: TStringField;
     ZQ_Personas: TZQuery;
@@ -286,12 +281,6 @@ type
     CD_Comprobantepers_desc: TStringField;
     ZSP_Comprobante: TZStoredProc;
     ZSP_ComprobanteID: TIntegerField;
-    Label22: TLabel;
-    edImporte: TEKEdit;
-    Label23: TLabel;
-    edDesc: TEKEdit;
-    Label24: TLabel;
-    Label25: TLabel;
     EKListadoVendedores: TEKListadoSQL;
     CD_ComprobantenVendedor: TStringField;
     EK_ListadoMedCobroPago: TEKListadoSQL;
@@ -313,7 +302,6 @@ type
     IntegerField1: TIntegerField;
     BlobField1: TBlobField;
     StringField9: TStringField;
-    lblSinStock: TLabel;
     ZQ_ProductosSTOCK_ACTUAL: TFloatField;
     Label26: TLabel;
     DBEdit8: TDBEdit;
@@ -328,6 +316,21 @@ type
     CD_Fpago_ctaIngreso: TStringField;
     CD_Fpago_esCtaCorr: TStringField;
     ZQ_ListadoCuentaA_CTA_CORRIENTE: TStringField;
+    Panel1: TPanel;
+    edImagen: TDBImage;
+    Image1: TImage;
+    Panel2: TPanel;
+    Label1: TLabel;
+    LeerCodBar: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    lblSinStock: TLabel;
+    codBarras: TEdit;
+    edCantidad: TEKEdit;
+    edImporte: TEKEdit;
+    edDesc: TEKEdit;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -369,6 +372,7 @@ type
     function ProductoYaCargado(id:Integer):Boolean ;
     procedure DBGridFormaPagoColExit(Sender: TObject);
     function calcularSaldoCtaCorr():Double;
+    procedure ZQ_ProductosAfterScroll(DataSet: TDataSet);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -567,6 +571,8 @@ begin
   edImporte.AsFloat:=0;
   codBarras.SetFocus;
   lblSinStock.Visible:=false;
+  edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
+
 end;
 
 procedure TFCajero.codBarrasExit(Sender: TObject);
@@ -1111,6 +1117,11 @@ begin
        CD_Fpago.Next;
       end;
     Result:=acum;
+end;
+
+procedure TFCajero.ZQ_ProductosAfterScroll(DataSet: TDataSet);
+begin
+     edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
 end;
 
 end.
