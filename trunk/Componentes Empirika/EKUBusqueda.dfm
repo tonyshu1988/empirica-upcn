@@ -434,31 +434,51 @@ object FBusqueda: TFBusqueda
   object Buscar: TButton
     Left = 24
     Top = 194
-    Width = 75
+    Width = 100
     Height = 25
     Anchors = [akLeft, akBottom]
-    Caption = '&Buscar'
+    Caption = '&Buscar (F1)'
     TabOrder = 3
     OnClick = BuscarClick
   end
   object Salir: TButton
-    Left = 598
+    Left = 573
     Top = 194
-    Width = 75
+    Width = 100
     Height = 25
     Anchors = [akLeft, akBottom]
-    Caption = '&Cancelar'
+    Caption = '&Cancelar (F3)'
     TabOrder = 4
     OnClick = SalirClick
   end
   object Bot_Vaciar: TButton
-    Left = 288
-    Top = 195
+    Left = 285
+    Top = 194
     Width = 129
     Height = 25
     Anchors = [akLeft, akBottom]
-    Caption = 'Vaciar Valores'
+    Caption = 'Vaciar Valores (F2)'
     TabOrder = 5
     TabStop = False
+  end
+  object ActionManager1: TActionManager
+    Left = 48
+    Top = 136
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object AVaciar: TAction
+      Caption = 'AVaciar'
+      ShortCut = 113
+      OnExecute = AVaciarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 114
+      OnExecute = ACancelarExecute
+    end
   end
 end
