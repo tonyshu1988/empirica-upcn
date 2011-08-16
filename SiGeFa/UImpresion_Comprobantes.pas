@@ -524,16 +524,91 @@ type
     QRLabel206: TQRLabel;
     QRLabel202: TQRLabel;
     QRLabel203: TQRLabel;
+    RepReciboCtaCte: TQuickRep;
+    QRBand28: TQRBand;
+    RepReciboCtaCte_RENGLON4: TQRLabel;
+    RepReciboCtaCte_RENGLON3: TQRLabel;
+    RepReciboCtaCte_RENGLON2: TQRLabel;
+    QRDBText101: TQRDBText;
+    RepReciboCtaCte_TITULO: TQRLabel;
+    QRShape6: TQRShape;
+    QRLabel218: TQRLabel;
+    RepReciboCtaCte_RENGLON1: TQRLabel;
+    QRDBImage6: TQRDBImage;
+    QRBand29: TQRBand;
+    QRLabel221: TQRLabel;
+    QRLabel222: TQRLabel;
+    QRLabel223: TQRLabel;
+    QRLabel224: TQRLabel;
+    QRLabel225: TQRLabel;
+    QRLabel226: TQRLabel;
+    QRLabel227: TQRLabel;
+    QRDBText106: TQRDBText;
+    QRDBText107: TQRDBText;
+    QRDBText108: TQRDBText;
+    QRDBText109: TQRDBText;
+    QRDBText110: TQRDBText;
+    QRDBText111: TQRDBText;
+    QRDBText112: TQRDBText;
+    QRLabel228: TQRLabel;
+    QRChildBand8: TQRChildBand;
+    QRLabel229: TQRLabel;
+    QRLblReciboCtaCte_ImporteEnLetras: TQRLabel;
+    QRBand30: TQRBand;
+    QRLabel231: TQRLabel;
+    QRChildBand9: TQRChildBand;
+    QRLabel232: TQRLabel;
+    QRSubDetail7: TQRSubDetail;
+    QRDBText114: TQRDBText;
+    QRDBText115: TQRDBText;
+    QRDBText116: TQRDBText;
+    QRDBText117: TQRDBText;
+    QRDBText118: TQRDBText;
+    QRBand31: TQRBand;
+    QRLabel233: TQRLabel;
+    QRLabel234: TQRLabel;
+    QRlblReciboCtaCte_ImporteTotal: TQRLabel;
+    QRBand32: TQRBand;
+    QRlblReciboCtaCte_PiePagina: TQRLabel;
+    QRChildBand10: TQRChildBand;
+    QRLabel237: TQRLabel;
+    QRLabel238: TQRLabel;
+    QRLabel239: TQRLabel;
+    QRLabel240: TQRLabel;
+    QRLabel241: TQRLabel;
+    QRLabel216: TQRLabel;
+    QRLabel242: TQRLabel;
+    QRLabel217: TQRLabel;
+    QRLblReciboCtaCte_ConceptoPago: TQRLabel;
+    ZQ_FPagoCtaCte: TZQuery;
+    IntegerField1: TIntegerField;
+    IntegerField2: TIntegerField;
+    IntegerField3: TIntegerField;
+    DateField1: TDateField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    FloatField1: TFloatField;
+    DateField2: TDateField;
+    IntegerField4: TIntegerField;
+    IntegerField5: TIntegerField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    StringField7: TStringField;
+    ZQ_FPagoCtaCteFECHA_FP: TDateTimeField;
+    EKDbSumaFPagoCtaCte: TEKDbSuma;
   private
     reporte: TQuickRep;
     archivoPDF: string;
   public
-    procedure cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer);
+    procedure cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer; cta_cte: boolean);
     procedure configRecibo();
     procedure configPresupuesto();
     procedure configNotaPedido();
     procedure configRemito();
     procedure configOrdenPago();
+    procedure configReciboCtaCte();
     procedure imprimir();
     function  generarPDF(): string;
   end;
@@ -547,20 +622,8 @@ uses UDM;
 
 {$R *.dfm}
 
-procedure TFImpresion_Comprobantes.cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer);
+procedure TFImpresion_Comprobantes.cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer; cta_cte: boolean);
 begin
-  ZQ_Comprobante.Close;
-  ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-  ZQ_Comprobante.Open;
-
-  ZQ_Fpago.Close;
-  ZQ_Fpago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-  ZQ_Fpago.Open;
-
-  ZQ_Producto.Close;
-  ZQ_Producto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-  ZQ_Producto.Open;
-
   ZQ_Destino.Close;
   if id_persona = 0 then
     ZQ_Destino.ParamByName('id_persona').Clear
@@ -572,34 +635,61 @@ begin
     ZQ_Destino.ParamByName('id_empresa').AsInteger:= id_empresa;
   ZQ_Destino.Open;
 
-  case ZQ_ComprobanteID_TIPO_CPB.AsInteger of
-    CPB_PRESUPUESTO:  begin //CPB_PRESUPUESTO
-                        configPresupuesto;
-                        reporte:= RepPresupuesto;
-                        archivoPDF:= 'Presupuesto.pdf';
-                      end;
-    CPB_NOTA_PEDIDO:  begin //CPB_NOTA_PEDIDO
-                        configNotaPedido;
-                        reporte:= RepNotaPedido;
-                        archivoPDF:= 'NotaPedido.pdf';
-                      end;
-    CPB_REMITO_VENTA: begin //CPB_REMITO_VENTA
-                        configRemito;
-                        reporte:= RepRemito;
-                        archivoPDF:= 'Remito.pdf';
-                      end;
-    CPB_RECIBO_COBRO: begin //CPB_RECIBO_COBRO
-                        configRecibo;
-                        reporte:= RepRecibo;
-                        archivoPDF:= 'Recibo.pdf';
-                      end;
-    CPB_ORDEN_PAGO:   begin //CPB_ORDEN_PAGO
-                        configOrdenPago;
-                        reporte:= RepOrdenPago;
-                        archivoPDF:= 'OrdenPago.pdf';
-                      end;
-  end;
+  if not cta_cte then //si no es un comprobante de cuenta corriente
+  begin
+    ZQ_Comprobante.Close;
+    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_Comprobante.Open;
+
+    ZQ_Fpago.Close;
+    ZQ_Fpago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_Fpago.Open;
+
+    ZQ_Producto.Close;
+    ZQ_Producto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_Producto.Open;
+
+    case ZQ_ComprobanteID_TIPO_CPB.AsInteger of
+      CPB_PRESUPUESTO:  begin //CPB_PRESUPUESTO
+                          configPresupuesto;
+                          reporte:= RepPresupuesto;
+                          archivoPDF:= 'Presupuesto.pdf';
+                        end;
+      CPB_NOTA_PEDIDO:  begin //CPB_NOTA_PEDIDO
+                          configNotaPedido;
+                          reporte:= RepNotaPedido;
+                          archivoPDF:= 'NotaPedido.pdf';
+                        end;
+      CPB_REMITO_VENTA: begin //CPB_REMITO_VENTA
+                          configRemito;
+                          reporte:= RepRemito;
+                          archivoPDF:= 'Remito.pdf';
+                        end;
+      CPB_RECIBO_COBRO: begin //CPB_RECIBO_COBRO
+                          configRecibo;
+                          reporte:= RepRecibo;
+                          archivoPDF:= 'Recibo.pdf';
+                        end;
+      CPB_ORDEN_PAGO:   begin //CPB_ORDEN_PAGO
+                          configOrdenPago;
+                          reporte:= RepOrdenPago;
+                          archivoPDF:= 'OrdenPago.pdf';
+                        end;
+    end;
+  end
+  else //si es un comprobante de cuenta corriente
+  begin
+    //para los recibos de cuenta corriente el id_comprobante hace referencia al id_comprob_fp
+    ZQ_FPagoCtaCte.Close;
+    ZQ_FPagoCtaCte.ParamByName('id_forma_pago').AsInteger:= id_comprobante;
+    ZQ_FPagoCtaCte.Open;
+
+    configReciboCtaCte;
+    reporte:= RepReciboCtaCte;
+    archivoPDF:= 'ReciboCuentaCorriente.pdf';
+  end
 end;
+
 
 procedure TFImpresion_Comprobantes.imprimir();
 begin
@@ -616,6 +706,27 @@ begin
   aPDF.free;
 
   Result:= archivoPDF;
+end;
+
+
+//RECIBOS CUENTA CORRIENTE
+procedure TFImpresion_Comprobantes.configReciboCtaCte();
+var
+  ImporteTotal: double;
+begin
+  if ZQ_Destino.IsEmpty then
+    exit;
+
+  ImporteTotal:= EKDbSumaFPagoCtaCte.SumCollection[0].sumvalue;
+  EKNumeroALetras.Numero := ImporteTotal;
+  QRLblReciboCtaCte_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+  QRlblReciboCtaCte_ImporteTotal.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
+
+  QRLblReciboCtaCte_ConceptoPago.Caption := '';
+
+  QRlblReciboCtaCte_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  DM.VariablesComprobantes(RepReciboCtaCte);
+  EKVistaPrevia.Reporte:= RepReciboCtaCte;
 end;
 
 
