@@ -69,6 +69,7 @@ type
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
     procedure configMail(Tipo: String; id: integer);
+    procedure centrarPanel(form: TForm; panel: TPanel);
   private
     auxDecimalSeparator, auxThousandSeparator: Char;
     auxCurrencyDecimals: Integer;
@@ -261,6 +262,7 @@ begin
 end;
 
 
+//configuro los reportes para la impresion
 procedure TDM.VariablesReportes(Reporte: TQuickRep);
 var
   Etiqueta : TQRLabel;
@@ -275,6 +277,7 @@ begin
 end;
 
 
+//configuro los comprobantes para la impresion (PRESUPUESTOS, RECIBOS, ORDEN PAGO, etc)
 procedure TDM.VariablesComprobantes(Reporte: TQuickRep);
 var
   Etiqueta : TQRLabel;
@@ -302,15 +305,7 @@ end;
 //LO QUE HACE ES SACAR LOS CURRENCIS DE LOS CAMPOS FLOAT Y DESPUES
 //LOS VUELVE A SETEAR
 procedure TDM.prepararParaExportar(query: TDataSet; valor: Boolean);
-//var
-//  i:integer;
 begin
-//  for i := 0 to (query.ComponentCount - 1) do
-//  begin
-//    if query.Components[i].ClassType = TFloatField then
-//      TFloatField(query.Components[i]).currency := valor; //activo o desactivo el currency
-//  end;
-
   if (valor = false) then  //seteo para exportar a excel
   begin
     CurrencyDecimals:= 2;
@@ -334,12 +329,21 @@ begin
 end;
 
 
+//cargo los datos de la sucursal
 procedure TDM.cargarReporteSucursal(idSucursal: integer);
 begin
   ZQ_Sucursal.Close;
   ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:= idSucursal;
   ZQ_Sucursal.open;
 end;
+
+
+procedure TDM.centrarPanel(form: TForm; panel: TPanel);
+begin
+  panel.Left:= (form.Width div 2)  - (panel.Width div 2);
+  panel.Top:=  (form.Height div 2) - (panel.Height);
+end;
+
 
 end.
 
