@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 217
-  Top = 65
+  Left = 198
+  Top = 15
   Width = 1004
   Height = 750
   Caption = 'Cajero SiGeFa'

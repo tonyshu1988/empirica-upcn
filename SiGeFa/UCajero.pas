@@ -541,10 +541,12 @@ procedure TFCajero.btQuitarProductoClick(Sender: TObject);
 begin
 if not(CD_DetalleFactura.IsEmpty) then
   begin
+  CD_DetalleFactura.SaveToFile('JUANMA',dfXML);
   CD_DetalleFactura.Delete;
   lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
   end;
   codBarras.SetFocus;
+  
 end;
 
 procedure TFCajero.btnBorrarPagoClick(Sender: TObject);
