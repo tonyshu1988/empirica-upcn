@@ -224,7 +224,8 @@ begin
     PageControl1.Visible := false;
   end;
 
-  dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);  
+  dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
+  dm.ZQ_Sucursal.Refresh;  
 end;
 
 

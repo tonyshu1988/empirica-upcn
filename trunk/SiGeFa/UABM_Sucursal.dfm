@@ -1178,7 +1178,7 @@ object FABM_Sucursal: TFABM_Sucursal
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 2
           end
           object DBEdit10: TDBEdit
             Left = 120
@@ -1193,7 +1193,7 @@ object FABM_Sucursal: TFABM_Sucursal
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 4
           end
           object DBEdit11: TDBEdit
             Left = 120
@@ -1224,7 +1224,7 @@ object FABM_Sucursal: TFABM_Sucursal
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 1
           end
         end
         object GroupBox2: TGroupBox

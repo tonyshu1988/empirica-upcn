@@ -4078,7 +4078,9 @@ object FABM_Comprobantes: TFABM_Comprobantes
       
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
         '_comp_estado)'
-      'where ((cpb.id_tipo_cpb <> 16) and (cpb.id_tipo_cpb <> 17))'
+      
+        'where ((cpb.id_tipo_cpb <> 11) and (cpb.id_tipo_cpb <> 16) and (' +
+        'cpb.id_tipo_cpb <> 17))'
       'order by cpb.fecha desc')
     Params = <>
     Left = 34

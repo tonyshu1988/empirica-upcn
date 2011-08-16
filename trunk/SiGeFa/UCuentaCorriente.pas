@@ -8,26 +8,26 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, UBuscarPersona, EKEdit, Buttons,
-  EKDbSuma;
+  EKDbSuma, ComCtrls, EKDBDateTimePicker;
 
 type
   TFCuentaCorriente = class(TForm)
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
     btnVerDetalle: TdxBarLargeButton;
-    btnNuevo: TdxBarLargeButton;
+    btnVerCtaCte: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnBaja: TdxBarLargeButton;
     btnReactivar: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
-    btnImprimir: TdxBarLargeButton;
+    btnImprimirRecibo: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
-    ANuevo: TAction;
+    AVerCtaCte: TAction;
     AModificar: TAction;
     AEliminar: TAction;
     ABaja: TAction;
@@ -118,30 +118,10 @@ type
     ZQ_CtaCte_GralNOMBRE_TIPO_DOC: TStringField;
     DS_CtaCte_Gral: TDataSource;
     ZQ_CtaCte_Cliente: TZQuery;
-    ZQ_CtaCte_ClienteID_COMPROBANTE: TIntegerField;
-    ZQ_CtaCte_ClienteID_CUENTA: TIntegerField;
-    ZQ_CtaCte_ClienteID_VENDEDOR: TIntegerField;
-    ZQ_CtaCte_ClienteID_TIPO_IVA: TIntegerField;
-    ZQ_CtaCte_ClienteID_TIPO_FP: TIntegerField;
-    ZQ_CtaCte_ClienteFECHA: TDateTimeField;
-    ZQ_CtaCte_ClienteOBSERVACION: TStringField;
-    ZQ_CtaCte_ClienteFECHA_FP: TDateTimeField;
-    ZQ_CtaCte_ClienteDEBE: TFloatField;
-    ZQ_CtaCte_ClienteHABER: TFloatField;
-    ZQ_CtaCte_ClienteSALDO_CPB: TFloatField;
     DS_CtaCte_Cliente: TDataSource;
     EKOrdenar_CtaCteGral: TEKOrdenarGrilla;
     EKOrdenar_CtaCteCliente: TEKOrdenarGrilla;
     ZQ_CtaCte_GralCODIGO_CORTO: TIntegerField;
-    ZQ_CtaCte_ClienteTIPO_COMPROBANTE: TStringField;
-    EKEditTotalRegistros: TEKEdit;
-    EKEditDebe: TEKEdit;
-    EKEditHaber: TEKEdit;
-    EKEditSaldo: TEKEdit;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
     PanelFiltro: TPanel;
     BtnFiltro_Todos: TSpeedButton;
     BtnFiltro_Hoy: TSpeedButton;
@@ -150,18 +130,159 @@ type
     BtnFiltro_EsteAnio: TSpeedButton;
     Label39: TLabel;
     EKDbSumaCtaCte_Cliente: TEKDbSuma;
+    BtnFiltro_PorFecha: TSpeedButton;
+    PanelFiltroFechas: TPanel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    EKDBDateTime_FiltroDesde: TEKDBDateTimePicker;
+    EKDBDateTime_FiltroHasta: TEKDBDateTimePicker;
+    btnFiltroFecha_Aceptar: TBitBtn;
+    btnFiltroFecha_Cancelar: TBitBtn;
+    lblFiltro_Fechas: TLabel;
+    EKDbSumaCtaCte_Gral: TEKDbSuma;
+    Panel1: TPanel;
+    EKEditResumen_Saldo: TEKEdit;
+    Label23: TLabel;
+    Label22: TLabel;
+    EKEditResumen_Haber: TEKEdit;
+    EKEditResumen_Debe: TEKEdit;
+    Label24: TLabel;
+    Label25: TLabel;
+    EKEditResumen_Cantidad: TEKEdit;
+    PanelCliente_ResumenFiltro: TPanel;
+    Label21: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
+    EKEditCliente_SaldoFiltro: TEKEdit;
+    EKEditCliente_HaberFiltro: TEKEdit;
+    EKEditCliente_DebeFiltro: TEKEdit;
+    EKEditCliente_CantidadFiltro: TEKEdit;
+    ZQ_CtaCte_ClienteTIPO_COMPROBANTE: TStringField;
+    ZQ_CtaCte_ClienteID_COMPROBANTE: TIntegerField;
+    ZQ_CtaCte_ClienteID_CUENTA: TIntegerField;
+    ZQ_CtaCte_ClienteID_VENDEDOR: TIntegerField;
+    ZQ_CtaCte_ClienteID_TIPO_IVA: TIntegerField;
+    ZQ_CtaCte_ClienteID_TIPO_FP: TIntegerField;
+    ZQ_CtaCte_ClienteFECHA: TDateField;
+    ZQ_CtaCte_ClienteOBSERVACION: TStringField;
+    ZQ_CtaCte_ClienteFECHA_FP: TDateField;
+    ZQ_CtaCte_ClienteDEBE: TFloatField;
+    ZQ_CtaCte_ClienteHABER: TFloatField;
+    ZQ_CtaCte_ClienteSALDO_CPB: TFloatField;
+    ZQ_CtaCte_ClienteSALDO: TFloatField;
+    PanelCliente_ResumenTotales: TPanel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    EKEditCliente_SaldoTotal: TEKEdit;
+    EKEditCliente_HaberTotal: TEKEdit;
+    EKEditCliente_DebeTotal: TEKEdit;
+    ZQ_CtaCte_ClienteID_COMPROB_FP: TIntegerField;
+    EKBuscarCliente: TEKBusquedaAvanzada;
+    RepCtasCtes: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepCtasCtes_Subtitulo: TQRLabel;
+    RepCtasCtes_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblPieDePaginaCtasCtes: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRLabelCritBusquedaCtasCtes: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRCtasCtes_TotalSaldo: TQRLabel;
+    QRCtasCtes_TotalHaber: TQRLabel;
+    QRCtasCtes_TotalDebe: TQRLabel;
+    QRLabel8: TQRLabel;
+    EKVistaCtasCtes: TEKVistaPreviaQR;
+    btnImprimir: TdxBarLargeButton;
+    RepCliente: TQuickRep;
+    QRBand1: TQRBand;
+    QRDBImage1: TQRDBImage;
+    QRLabel1: TQRLabel;
+    RepCliente_Subtitulo: TQRLabel;
+    RepCliente_Titulo: TQRLabel;
+    QRBand2: TQRBand;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRDBText10: TQRDBText;
+    QRDBText11: TQRDBText;
+    QRBand3: TQRBand;
+    QRlblPieDePaginaCliente: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRSysData2: TQRSysData;
+    QRBand4: TQRBand;
+    QRExpr1: TQRExpr;
+    QRClienteSaldoFiltro: TQRLabel;
+    QRClienteHaberFiltro: TQRLabel;
+    QRClienteDebeFiltro: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRBand5: TQRBand;
+    QRBand6: TQRBand;
+    QRLabel18: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRLabel23: TQRLabel;
+    ChildBand1: TQRChildBand;
+    QRLabel15: TQRLabel;
+    QRDBText12: TQRDBText;
+    QRLabel16: TQRLabel;
+    QRDBText13: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRLabel24: TQRLabel;
+    QRDBText15: TQRDBText;
+    QRLabel25: TQRLabel;
+    QRDBText16: TQRDBText;
+    QRLabel26: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRDBText17: TQRDBText;
+    QRDBText21: TQRDBText;
+    QRLabel32: TQRLabel;
+    QRDBText22: TQRDBText;
+    QRLabel33: TQRLabel;
+    QRDBText23: TQRDBText;
+    QRLabel34: TQRLabel;
+    QRDBText24: TQRDBText;
+    QRLabel35: TQRLabel;
+    QRLabel36: TQRLabel;
+    QRDBText25: TQRDBText;
+    QRlblClienteFiltro: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRClienteDebe: TQRLabel;
+    QRClienteHaber: TQRLabel;
+    QRClienteSaldo: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRDBText8: TQRDBText;
+    EKVistaClientes: TEKVistaPreviaQR;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
-    procedure btnNuevoClick(Sender: TObject);
-    procedure btnModificarClick(Sender: TObject);
-    procedure btnBajaClick(Sender: TObject);
-    procedure btnReactivarClick(Sender: TObject);
-    procedure btnGuardarClick(Sender: TObject);
-    procedure btnCancelarClick(Sender: TObject);
+    procedure btnVerCtaCteClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     //------TECLAS RAPIDAS
-    procedure ANuevoExecute(Sender: TObject);
+    procedure AVerCtaCteExecute(Sender: TObject);
     procedure AModificarExecute(Sender: TObject);
     procedure ABajaExecute(Sender: TObject);
     procedure AReactivarExecute(Sender: TObject);
@@ -169,11 +290,17 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
 
-    procedure btnImprimirClick(Sender: TObject);
+    procedure btnImprimirReciboClick(Sender: TObject);
     procedure DBGridResumen_CtaCtesDblClick(Sender: TObject);
     procedure AplicarFiltro(Sender: TObject);
+    procedure btnFiltroFecha_CancelarClick(Sender: TObject);
+    procedure btnFiltroFecha_AceptarClick(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure calcularTotales(tipo: string);
+    procedure btnImprimirClick(Sender: TObject);
   private
     vsel: TFBuscarPersona;
+    viendoResumen: boolean;
     procedure onSelCliente;
   public
   end;
@@ -186,7 +313,7 @@ const
 
 implementation
 
-uses UPrincipal, UDM, DateUtils;
+uses UPrincipal, UDM, DateUtils, UImpresion_Comprobantes;
 
 {$R *.dfm}
 
@@ -220,174 +347,38 @@ end;
 
 procedure TFCuentaCorriente.btnBuscarClick(Sender: TObject);
 begin
-  if not Assigned(vsel) then
-    vsel:= TFBuscarPersona.Create(nil);
-  vsel.configRelacion(RELACION_CLIENTE);
-  vsel.btnBuscar.Click;
-  vsel.OnSeleccionar := onSelCliente;
-  vsel.ShowModal;
+  EKBuscarCliente.Buscar;
+
+  calcularTotales('GENERAL');
 end;
 
 
-procedure TFCuentaCorriente.btnNuevoClick(Sender: TObject);
+procedure TFCuentaCorriente.btnVerCtaCteClick(Sender: TObject);
 begin
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
-//  begin
-//    DBGridMarca.Enabled := false;
-//    PanelEdicion.Visible:= true;
-//
-//    ZQ_UltimoNro.Close;
-//    ZQ_UltimoNro.Open;
-//
-//    ZQ_Marcas.Append;
-//    ZQ_MarcasBAJA.AsString:= 'N';
-//    if ZQ_UltimoNro.IsEmpty then
-//      ZQ_MarcasCODIGO_MARCA.AsInteger:= 1
-//    else
-//      ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
-//
-//    DBECodigo.SetFocus;
-//    GrupoEditando.Enabled := false;
-//    GrupoGuardarCancelar.Enabled := true;
-//  end;
-end;
+  if viendoResumen then
+  begin
+    PanelCliente.BringToFront;
+    viendoResumen:= false;
+    btnVerCtaCte.Caption:= 'F2 - Ver Resumen';
+    btnVerCtaCte.Hint:= 'Ver el resumen de cuenta corriente de todos los clientes';
 
+    ZQ_Cliente.Close;
+    ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_CtaCte_GralID_PERSONA.AsInteger;
+    ZQ_Cliente.Open;
 
-procedure TFCuentaCorriente.btnModificarClick(Sender: TObject);
-begin
-//  if (ZQ_Marcas.IsEmpty) or (ZQ_MarcasID_MARCA.AsInteger = 0) then
-//    exit;
-//
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
-//  begin
-//    DBGridMarca.Enabled := false;
-//    PanelEdicion.Visible:= true;
-//
-//    ZQ_Marcas.Edit;
-//    if ZQ_MarcasCODIGO_MARCA.IsNull then
-//    begin
-//      ZQ_UltimoNro.Close;
-//      ZQ_UltimoNro.Open;
-//      if ZQ_UltimoNro.IsEmpty then
-//        ZQ_MarcasCODIGO_MARCA.AsInteger:= 1
-//      else
-//        ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
-//    end;
-//
-//    DBECodigo.SetFocus;
-//    GrupoEditando.Enabled := false;
-//    GrupoGuardarCancelar.Enabled := true;
-//  end;
-end;
+    AplicarFiltro(BtnFiltro_Todos);
 
+    DBGridCliente_CtaCte.SetFocus;
+  end
+  else
+  begin
+    PanelResumen.BringToFront;
+    viendoResumen:= true;
+    btnVerCtaCte.Caption:= 'F2 - Ver Cta Cte';
+    btnVerCtaCte.Hint:= 'Ver la cuenta corriente del cliente seleccionado';
 
-procedure TFCuentaCorriente.btnBajaClick(Sender: TObject);
-var
-  recNo: integer;
-begin
-//  if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'N') or (ZQ_MarcasID_MARCA.AsInteger = 0)then
-//    exit;
-//
-//  if (application.MessageBox(pchar('¿Desea dar de baja la "Marca" seleccionada?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//  begin
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
-//    begin
-//      ZQ_Marcas.Edit;
-//      ZQ_MarcasBAJA.AsString:='S';
-//    end
-//    else
-//      exit;
-//
-//    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-//      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
-//
-//    recNo:= ZQ_Marcas.RecNo;
-//    ZQ_Marcas.Refresh;
-//    ZQ_Marcas.RecNo:= recNo;
-//  end;
-end;
-
-
-procedure TFCuentaCorriente.btnReactivarClick(Sender: TObject);
-var
-  recNo: integer;
-begin
-//  if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'S') or (ZQ_MarcasID_MARCA.AsInteger = 0) then
-//    exit;
-//
-//  if (application.MessageBox(pchar('¿Desea reactivar la "Marca" seleccionada?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//  begin
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
-//    begin
-//      ZQ_Marcas.Edit;
-//      ZQ_MarcasBAJA.AsString:='N';
-//    end
-//    else
-//      exit;
-//
-//    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-//      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
-//
-//    recNo:= ZQ_Marcas.RecNo;
-//    ZQ_Marcas.Refresh;
-//    ZQ_Marcas.RecNo:= recNo;
-//  end;
-end;
-
-
-procedure TFCuentaCorriente.btnGuardarClick(Sender: TObject);
-var
-  recNo: integer;
-begin
-//  Perform(WM_NEXTDLGCTL, 0, 0);
-//
-//  if (trim(DBECodigo.Text) = '') then
-//  begin
-//    Application.MessageBox('El campo "Código" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-//    DBECodigo.SetFocus;
-//    exit;
-//  end;
-//
-//  if (trim(DBENombre.Text) = '') then
-//  begin
-//    Application.MessageBox('El campo "Marca" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-//    DBENombre.SetFocus;
-//    exit;
-//  end;
-//
-//  try
-//    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-//    begin
-//      DBGridMarca.Enabled:= true;
-//      DBGridMarca.SetFocus;
-//      GrupoEditando.Enabled := true;
-//      GrupoGuardarCancelar.Enabled := false;
-//      PanelEdicion.Visible := false;
-//      recNo:= ZQ_Marcas.RecNo;
-//      ZQ_Marcas.Refresh;
-//      ZQ_Marcas.RecNo:= recNo;
-//    end
-//  except
-//    begin
-//      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
-//      exit;
-//    end
-//  end;
-//
-//  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
-end;
-
-
-procedure TFCuentaCorriente.btnCancelarClick(Sender: TObject);
-begin
-//  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
-//  begin
-//    DBGridMarca.Enabled:=true;
-//    DBGridMarca.SetFocus;
-//    GrupoEditando.Enabled := true;
-//    GrupoGuardarCancelar.Enabled := false;
-//    PanelEdicion.Visible := false;
-//  end;
+    DBGridResumen_CtaCtes.SetFocus;    
+  end;
 end;
 
 
@@ -396,18 +387,20 @@ begin
   EKOrdenar_CtaCteGral.CargarConfigColumnas;
   EKOrdenar_CtaCteCliente.CargarConfigColumnas;
 
+  FPrincipal.Iconos_Menu_16.GetBitmap(0, btnFiltroFecha_Cancelar.Glyph);
+  FPrincipal.Iconos_Menu_16.GetBitmap(1, btnFiltroFecha_Aceptar.Glyph);
+
+  EKDBDateTime_FiltroDesde.Date:= dm.EKModelo.Fecha;
+  EKDBDateTime_FiltroHasta.Date:= dm.EKModelo.Fecha;
+
   PanelResumen.BringToFront;
+  viendoResumen:= true;
 
   ZQ_CtaCte_Gral.Close;
   ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= -1;
   ZQ_CtaCte_Gral.Open;
 
-//  StaticTxtBaja.Color:= FPrincipal.baja;
-//
-//  ZQ_Marcas.Close;
-//  ZQ_Marcas.open;
-//
-//  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
+  calcularTotales('GENERAL');
 end;
 
 
@@ -420,10 +413,10 @@ begin
     btnBuscar.Click;
 end;
 
-procedure TFCuentaCorriente.ANuevoExecute(Sender: TObject);
+procedure TFCuentaCorriente.AVerCtaCteExecute(Sender: TObject);
 begin
-  if btnNuevo.Enabled then
-    btnNuevo.Click;
+  if btnVerCtaCte.Enabled then
+    btnVerCtaCte.Click;
 end;
 
 procedure TFCuentaCorriente.AModificarExecute(Sender: TObject);
@@ -460,30 +453,21 @@ end;
 //----------------------------------
 
 
-procedure TFCuentaCorriente.btnImprimirClick(Sender: TObject);
+procedure TFCuentaCorriente.btnImprimirReciboClick(Sender: TObject);
 begin
-  ZQ_Cliente.Close;
-  PanelResumen.BringToFront;
+  if ZQ_CtaCte_Cliente.IsEmpty or ZQ_CtaCte_ClienteID_COMPROB_FP.IsNull then
+    exit;
 
-//  if ZQ_Marcas.IsEmpty then
-//    exit;
-//
-//  DM.VariablesReportes(RepMarca);
-//  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-//  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-//  EKVistaPrevia.VistaPrevia;
+  if not Assigned(FImpresion_Comprobantes) then
+    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
+  FImpresion_Comprobantes.cargarDatos(ZQ_CtaCte_ClienteID_COMPROB_FP.AsInteger, ZQ_ClienteID_PERSONA.AsInteger, 0, true);
+  FImpresion_Comprobantes.imprimir;
 end;
 
 
 procedure TFCuentaCorriente.DBGridResumen_CtaCtesDblClick(Sender: TObject);
 begin
-  PanelCliente.BringToFront;
-
-  ZQ_Cliente.Close;
-  ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_CtaCte_GralID_PERSONA.AsInteger;
-  ZQ_Cliente.Open;
-
-  AplicarFiltro(BtnFiltro_Todos);
+  btnVerCtaCte.Click;
 end;
 
 
@@ -495,7 +479,7 @@ var
 begin
   hoy:= dm.EKModelo.Fecha;
 
-  ZQ_CtaCte_Cliente.Close;
+//  ZQ_CtaCte_Cliente.Close;
   ZQ_CtaCte_Cliente.ParamByName('id_persona').AsInteger:= ZQ_CtaCte_GralID_PERSONA.AsInteger;
   ZQ_CtaCte_Cliente.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
 
@@ -530,15 +514,137 @@ begin
     ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= hoy;
   end;
 
-  //ShowMessage(DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate)+' - '+DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate));
+  if TSpeedButton (Sender).Name = 'BtnFiltro_PorFecha' then
+  begin
+    PanelCliente.Enabled:= false;
 
+    dm.centrarPanel(FCuentaCorriente, PanelFiltroFechas);
+
+    PanelFiltroFechas.BringToFront;
+    PanelFiltroFechas.Visible:= true;
+
+    EKDBDateTime_FiltroDesde.SetFocus;
+    exit;
+  end;
+
+  if TSpeedButton (Sender).Name = 'BtnFiltro_Todos' then
+    lblFiltro_Fechas.Caption:= 'Viendo Todo'  
+  else
+    lblFiltro_Fechas.Caption:= 'Viendo Desde: '+DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate)+' - Hasta: '+DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate);
+
+  ZQ_CtaCte_Cliente.Close;
   ZQ_CtaCte_Cliente.Open;
 
-  EKDbSumaCtaCte_Cliente.RecalcAll;
-
-  EKEditTotalRegistros.Text:= IntToStr(ZQ_CtaCte_Cliente.RecordCount);
-  EKEditDebe.Text:=  FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Cliente.SumCollection.Items[0].SumValue);
-  EKEditHaber.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Cliente.SumCollection.Items[1].SumValue);
-  EKEditSaldo.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Cliente.SumCollection.Items[2].SumValue);
+  calcularTotales('CLIENTE');
 end;
+
+
+procedure TFCuentaCorriente.calcularTotales(tipo: string);
+var
+  debeFilro, haberFiltro, saldoFiltro: Double;
+  debeTotal, haberTotal, saldoTotal: Double;
+begin
+  if tipo = 'GENERAL' then
+  begin
+    EKDbSumaCtaCte_Gral.RecalcAll;
+    EKEditResumen_Cantidad.Text:= IntToStr(ZQ_CtaCte_Gral.RecordCount);
+    EKEditResumen_Debe.Text:=  FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[0].SumValue);
+    EKEditResumen_Haber.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[1].SumValue);
+    EKEditResumen_Saldo.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[2].SumValue);
+  end;
+
+  if tipo = 'CLIENTE' then
+  begin
+    debeFilro:= EKDbSumaCtaCte_Cliente.SumCollection.Items[0].SumValue;
+    haberFiltro:= EKDbSumaCtaCte_Cliente.SumCollection.Items[1].SumValue;
+    saldoFiltro:= debeFilro - haberFiltro;
+
+    ZQ_CtaCte_Gral.Locate('id_persona', ZQ_CtaCte_Cliente.ParamByName('id_persona').AsInteger, []);
+    debeTotal:= ZQ_CtaCte_GralDEBE.AsFloat;
+    haberTotal:= ZQ_CtaCte_GralHABER.AsFloat;
+    saldoTotal:= ZQ_CtaCte_GralSALDO.AsFloat;
+
+    EKDbSumaCtaCte_Cliente.RecalcAll;
+    EKEditCliente_CantidadFiltro.Text:= IntToStr(ZQ_CtaCte_Cliente.RecordCount);
+    EKEditCliente_DebeFiltro.Text:=  FormatFloat('$ ###,###,##0.00', debeFilro);
+    EKEditCliente_HaberFiltro.Text:= FormatFloat('$ ###,###,##0.00', haberFiltro);
+    EKEditCliente_SaldoFiltro.Text:= FormatFloat('$ ###,###,##0.00', saldoFiltro);
+
+    EKEditCliente_DebeTotal.Text:=  FormatFloat('$ ###,###,##0.00', debeTotal);
+    EKEditCliente_HaberTotal.Text:= FormatFloat('$ ###,###,##0.00', haberTotal);
+    EKEditCliente_SaldoTotal.Text:= FormatFloat('$ ###,###,##0.00', saldoTotal);
+  end;
+end;
+
+
+procedure TFCuentaCorriente.btnFiltroFecha_CancelarClick(Sender: TObject);
+begin
+  PanelFiltroFechas.Visible:= false;
+  PanelCliente.Enabled:= true;
+end;
+
+
+procedure TFCuentaCorriente.btnFiltroFecha_AceptarClick(Sender: TObject);
+begin
+  ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= EKDBDateTime_FiltroDesde.Date;
+  ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= EKDBDateTime_FiltroHasta.Date;
+  ZQ_CtaCte_Cliente.Close;
+  ZQ_CtaCte_Cliente.Open;
+
+  calcularTotales('CLIENTE');
+
+  lblFiltro_Fechas.Caption:= 'Viendo Desde: '+DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate)+' - Hasta: '+DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate);
+
+  PanelFiltroFechas.Visible:= false;
+  PanelCliente.Enabled:= true;  
+end;
+
+
+procedure TFCuentaCorriente.FormResize(Sender: TObject);
+begin
+  if PanelFiltroFechas.Visible then
+    dm.centrarPanel(FCuentaCorriente, PanelFiltroFechas);
+end;
+
+
+procedure TFCuentaCorriente.btnImprimirClick(Sender: TObject);
+begin
+  if viendoResumen then
+  begin
+    if ZQ_CtaCte_Gral.IsEmpty then
+      exit;
+
+    DM.VariablesReportes(RepCtasCtes);
+    QRlblPieDePaginaCtasCtes.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    QRLabelCritBusquedaCtasCtes.Caption := EKBuscarCliente.ParametrosBuscados;
+
+    QRCtasCtes_TotalDebe.Caption:=  FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[0].SumValue);
+    QRCtasCtes_TotalHaber.Caption:=  FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[1].SumValue);
+    QRCtasCtes_TotalSaldo.Caption:=  FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[2].SumValue);
+
+    EKVistaCtasCtes.VistaPrevia;
+  end
+  else
+  begin
+    if ZQ_CtaCte_Cliente.IsEmpty then
+      exit;
+
+    DM.VariablesReportes(RepCliente);
+    QRlblPieDePaginaCliente.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+
+    QRlblClienteFiltro.Caption:= lblFiltro_Fechas.Caption;
+
+    QRClienteDebeFiltro.Caption:= EKEditCliente_DebeFiltro.Text;
+    QRClienteHaberFiltro.Caption:= EKEditCliente_HaberFiltro.Text;
+    QRClienteSaldoFiltro.Caption:= EKEditCliente_SaldoFiltro.Text;
+
+    QRClienteDebe.Caption:= EKEditCliente_DebeTotal.Text;
+    QRClienteHaber.Caption:= EKEditCliente_HaberTotal.Text;
+    QRClienteSaldo.Caption:= EKEditCliente_SaldoTotal.Text;
+
+    EKVistaClientes.VistaPrevia;
+  end
+
+end;
+
 end.
