@@ -4763,151 +4763,182 @@ object FPrincipal: TFPrincipal
     end
     object AABMProductos: TAction
       Caption = 'ABM Productos'
+      Hint = 'ABM Productos'
       ImageIndex = 11
       OnExecute = AABMProductosExecute
     end
     object AABM_Articulo: TAction
       Caption = 'ABM Articulo'
+      Hint = 'ABM Articulo'
       ImageIndex = 10
       OnExecute = AABM_ArticuloExecute
     end
     object AABM_Colores: TAction
       Caption = 'ABM Colores'
+      Hint = 'ABM Colores'
       ImageIndex = 3
       OnExecute = AABM_ColoresExecute
     end
     object AABM_TipoArticulo: TAction
       Caption = 'ABM Tipo Articulo'
+      Hint = 'ABM Tipo Articulo'
       ImageIndex = 12
       OnExecute = AABM_TipoArticuloExecute
     end
     object AABM_ArticuloMedida: TAction
       Caption = 'ABM Articulo Medida'
+      Hint = 'ABM Articulo Medida'
       ImageIndex = 14
       OnExecute = AABM_ArticuloMedidaExecute
     end
     object AABM_Marcas: TAction
       Caption = 'ABM Marcas'
+      Hint = 'ABM Marcas'
       ImageIndex = 15
       OnExecute = AABM_MarcasExecute
     end
     object AABM_ProductoStock: TAction
       Caption = 'ABM Producto Stock'
+      Hint = 'ABM Producto Stock'
       ImageIndex = 16
       OnExecute = AABM_ProductoStockExecute
     end
     object AABMEmpresas: TAction
       Caption = 'ABM Empresas'
+      Hint = 'ABM Empresas'
       ImageIndex = 13
       OnExecute = AABMEmpresasExecute
     end
     object AABM_TipoEmpresa: TAction
       Caption = 'ABM Tipo Empresa'
+      Hint = 'ABM Tipo Empresa'
       ImageIndex = 19
       OnExecute = AABM_TipoEmpresaExecute
     end
     object AABM_Sucursal: TAction
       Caption = 'ABM Sucursal'
+      Hint = 'ABM Sucursal'
       ImageIndex = 20
       OnExecute = AABM_SucursalExecute
     end
     object AABM_SucursalPosicion: TAction
       Caption = 'ABM Sucursal Posicion'
+      Hint = 'ABM Sucursal Posicion'
       ImageIndex = 21
       OnExecute = AABM_SucursalPosicionExecute
     end
     object AABMClientes: TAction
       Caption = 'ABM Clientes'
+      Hint = 'ABM Clientes'
       ImageIndex = 1
       OnExecute = AABMClientesExecute
     end
     object AABM_Personas: TAction
       Caption = 'ABM Personas'
+      Hint = 'ABM Personas'
       ImageIndex = 0
       OnExecute = AABM_PersonasExecute
     end
     object AImprimirEtiqueta: TAction
       Caption = 'Imprimir Etiquetas'
+      Hint = 'Imprimir Etiquetas'
       ImageIndex = 18
       OnExecute = AImprimirEtiquetaExecute
     end
     object ABandejaMail: TAction
       Caption = 'Bandeja de Mail'
+      Hint = 'Bandeja de Mail'
       ImageIndex = 24
       OnExecute = ABandejaMailExecute
     end
     object AConfigMail: TAction
       Caption = 'Configurar Mail'
+      Hint = 'Configurar Mail'
       ImageIndex = 26
       OnExecute = AConfigMailExecute
     end
     object AEnviarMail: TAction
       Caption = 'Enviar Mail'
+      Hint = 'Enviar Mail'
       ImageIndex = 25
       OnExecute = AEnviarMailExecute
     end
     object AABM_Precios: TAction
       Caption = 'ABM Precios'
+      Hint = 'ABM Precios'
       ImageIndex = 27
       OnExecute = AABM_PreciosExecute
     end
     object AABM_TipoIva: TAction
       Caption = 'ABM Tipo Iva'
+      Hint = 'ABM Tipo Iva'
       ImageIndex = 33
       OnExecute = AABM_TipoIvaExecute
     end
     object AABM_TipoComprobante: TAction
       Caption = 'ABM Tipo Comprobante'
+      Hint = 'ABM Tipo Comprobante'
       ImageIndex = 28
       OnExecute = AABM_TipoComprobanteExecute
     end
     object AABM_TipoMedioPago: TAction
       Caption = 'ABM Tipo Medio Pago'
+      Hint = 'ABM Tipo Medio Pago'
       ImageIndex = 32
       OnExecute = AABM_TipoMedioPagoExecute
     end
     object AABM_Cuenta: TAction
       Caption = 'ABM Cuenta'
+      Hint = 'ABM Cuenta'
       ImageIndex = 30
       OnExecute = AABM_CuentaExecute
     end
     object AABM_Comprobante: TAction
       Caption = 'ABM Comprobante'
+      Hint = 'ABM Comprobante'
       ImageIndex = 29
       OnExecute = AABM_ComprobanteExecute
     end
     object ACajero: TAction
       Caption = 'Cajero'
+      Hint = 'Cajero'
       ImageIndex = 34
       OnExecute = ACajeroExecute
     end
     object AMovInternos: TAction
       Caption = 'Movimientos Internos'
+      Hint = 'Movimientos Internos'
       ImageIndex = 36
       OnExecute = AMovInternosExecute
     end
     object AABM_TipoMov: TAction
       Caption = 'ABM Tipo Movimiento'
+      Hint = 'ABM Tipo Movimiento'
       ImageIndex = 35
       OnExecute = AABM_TipoMovExecute
     end
     object ATransferirStock: TAction
       Caption = 'Transferir Stock'
+      Hint = 'Transferir Stock'
       ImageIndex = 37
       OnExecute = ATransferirStockExecute
     end
     object ACuentaCorriente: TAction
       Caption = 'Cuenta Corriente'
+      Hint = 'Cuenta Corriente'
       ImageIndex = 31
       OnExecute = ACuentaCorrienteExecute
     end
     object AEstadisticaMovInternos: TAction
-      Caption = 'Estadisticas Movimientos Internos'
+      Caption = 'Estadisticas Mov. Internos'
+      Hint = 'Estadisticas Movimientos Internos'
       ImageIndex = 38
       OnExecute = AEstadisticaMovInternosExecute
     end
     object AEstadisticaFacturacion: TAction
       Caption = 'Estadistica Facturacion'
+      Hint = 'Estadistica Facturacion'
+      ImageIndex = 38
       OnExecute = AEstadisticaFacturacionExecute
     end
   end
@@ -4952,11 +4983,11 @@ object FPrincipal: TFPrincipal
       object ABMArticulo1: TMenuItem
         Action = AABM_Articulo
       end
-      object N1: TMenuItem
-        Caption = '-'
-      end
       object ABMArticulosMedida1: TMenuItem
         Action = AABM_ArticuloMedida
+      end
+      object N1: TMenuItem
+        Caption = '-'
       end
       object ABMProductos1: TMenuItem
         Action = AABMProductos
@@ -4967,23 +4998,26 @@ object FPrincipal: TFPrincipal
       object ABMPersonas1: TMenuItem
         Action = AABM_Personas
       end
+      object N7: TMenuItem
+        Caption = '-'
+      end
       object CuentaCorriente1: TMenuItem
         Action = ACuentaCorriente
       end
     end
     object Empresas1: TMenuItem
       Caption = 'Empresas'
-      object ABMEmpresas1: TMenuItem
-        Action = AABMEmpresas
-      end
       object ABMTipoEmpresa1: TMenuItem
         Action = AABM_TipoEmpresa
       end
-      object ABMSucursal1: TMenuItem
-        Action = AABM_Sucursal
+      object ABMEmpresas1: TMenuItem
+        Action = AABMEmpresas
       end
       object N2: TMenuItem
         Caption = '-'
+      end
+      object ABMSucursal1: TMenuItem
+        Action = AABM_Sucursal
       end
       object ABMSucursalPosicion1: TMenuItem
         Action = AABM_SucursalPosicion
@@ -5001,29 +5035,26 @@ object FPrincipal: TFPrincipal
       object N3: TMenuItem
         Caption = '-'
       end
-      object ImprimirEtiquetas1: TMenuItem
-        Tag = 1
-        Action = AImprimirEtiqueta
-      end
-      object N4: TMenuItem
-        Caption = '-'
-      end
       object ABMPrecios1: TMenuItem
         Tag = 1
         Action = AABM_Precios
+      end
+      object ImprimirEtiquetas1: TMenuItem
+        Tag = 1
+        Action = AImprimirEtiqueta
       end
     end
     object BandejadeMail1: TMenuItem
       Tag = 1
       Caption = 'Mail'
+      object ConfigurarMail1: TMenuItem
+        Action = AConfigMail
+      end
       object EnviarMail1: TMenuItem
         Action = AEnviarMail
       end
       object BandejadeMail2: TMenuItem
         Action = ABandejaMail
-      end
-      object ConfigurarMail1: TMenuItem
-        Action = AConfigMail
       end
     end
     object Movimientos1: TMenuItem
@@ -5032,25 +5063,26 @@ object FPrincipal: TFPrincipal
         Tag = 1
         Action = AABM_TipoComprobante
       end
-      object ABMTipoMovimiento1: TMenuItem
-        Action = AABM_TipoMov
-      end
-      object N5: TMenuItem
-        Caption = '-'
-      end
       object ABMComprobante1: TMenuItem
         Tag = 1
         Action = AABM_Comprobante
       end
+      object N5: TMenuItem
+        Caption = '-'
+      end
+      object ABMTipoMovimiento1: TMenuItem
+        Action = AABM_TipoMov
+      end
       object MovimientosInternos1: TMenuItem
         Action = AMovInternos
+        Caption = 'ABM Movimientos Internos'
       end
     end
     object Estadisticas1: TMenuItem
       Caption = 'Estadisticas'
-      Visible = False
       object EstadisticaMovimientosInt1: TMenuItem
-        Caption = 'Estadistica Movimientos Int.'
+        Caption = 'Estadistica Mov. Internos'
+        ImageIndex = 38
       end
       object EstadisticaFacturacion1: TMenuItem
         Tag = 1
