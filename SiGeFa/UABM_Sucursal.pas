@@ -5,9 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
-  dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
+  dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls, UBuscarPersona,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, ExtDlgs, jpeg,
-  EKBusquedaAvanzada, QRCtrls, QuickRpt, EKVistaPreviaQR, ComCtrls;
+  EKBusquedaAvanzada, QRCtrls, QuickRpt, EKVistaPreviaQR, ComCtrls, Menus;
 
 type
   TFABM_Sucursal = class(TForm)
@@ -36,7 +36,7 @@ type
     ZQ_SucursalEMAIL: TStringField;
     ZQ_SucursalBAJA: TStringField;
     DS_Sucursal: TDataSource;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    EKOrdenarSucursal: TEKOrdenarGrilla;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
@@ -120,6 +120,45 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
+    TabSheetVendedores: TTabSheet;
+    ZQ_PersonaRelacionVendedor: TZQuery;
+    ZQ_PersonaRelacionVendedorID_PERSONA_RELACION: TIntegerField;
+    ZQ_PersonaRelacionVendedorID_PERSONA: TIntegerField;
+    ZQ_PersonaRelacionVendedorID_RELACION: TIntegerField;
+    ZQ_PersonaRelacionVendedorID_EMPRESA: TIntegerField;
+    ZQ_PersonaRelacionVendedorID_SUCURSAL: TIntegerField;
+    ZQ_PersonaRelacionVendedornombre: TStringField;
+    ZQ_PersonaRelacionVendedordireccion: TStringField;
+    ZQ_PersonaRelacionVendedortelefono: TStringField;
+    ZQ_PersonaRelacionVendedoremail: TStringField;
+    ZQ_PersonaRelacionVendedordescripcion: TStringField;
+    ZQ_PersonaRelacionVendedorlocalidad: TStringField;
+    ZQ_PersonaRelacionVendedorcod_postal: TStringField;
+    DS_PersonaRelacionVendedor: TDataSource;
+    ZQ_Personas: TZQuery;
+    ZQ_PersonasID_PERSONA: TIntegerField;
+    ZQ_PersonasID_PROVINCIA: TIntegerField;
+    ZQ_PersonasID_TIPO_DOC: TIntegerField;
+    ZQ_PersonasID_TIPO_IVA: TIntegerField;
+    ZQ_PersonasNOMBRE: TStringField;
+    ZQ_PersonasDIRECCION: TStringField;
+    ZQ_PersonasLOCALIDAD: TStringField;
+    ZQ_PersonasCODIGO_POSTAL: TStringField;
+    ZQ_PersonasTELEFONO: TStringField;
+    ZQ_PersonasEMAIL: TStringField;
+    ZQ_PersonasFECHA_NACIMIENTO: TDateField;
+    ZQ_PersonasNUMERO_DOC: TStringField;
+    ZQ_PersonasSEXO: TStringField;
+    ZQ_PersonasBAJA: TStringField;
+    ZQ_PersonasDESCRIPCION: TStringField;
+    ZQ_PersonasCUIT_CUIL: TStringField;
+    PopupMenuVendedor: TPopupMenu;
+    AgregarContacto1: TMenuItem;
+    QuitarContacto1: TMenuItem;
+    DBMemoVendedor: TDBMemo;
+    DBGridVendedor: TDBGrid;
+    Label15: TLabel;
+    EKOrdenarEmpleado: TEKOrdenarGrilla;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -142,8 +181,13 @@ type
     procedure edImagenDblClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure AgregarContacto1Click(Sender: TObject);
+    procedure QuitarContacto1Click(Sender: TObject);
+    procedure ZQ_SucursalAfterScroll(DataSet: TDataSet);
+    procedure btnVerDetalleClick(Sender: TObject);
   private
-    { Private declarations }
+    vsel : TFBuscarPersona;
+    procedure OnSelVendedor;
   public
     { Public declarations }
   end;
@@ -169,7 +213,7 @@ end;
 
 procedure TFABM_Sucursal.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
+  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal, ZQ_PersonaRelacionVendedor]) then
   begin
     DBGridSucursal.Enabled := false;
     PageControl1.Visible:= true;
@@ -182,6 +226,8 @@ begin
     DBEApellidoNombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
+
+    EKOrdenarEmpleado.PopUpGrilla:= PopupMenuVendedor;
   end;
 end;
 
@@ -191,7 +237,7 @@ begin
   if ZQ_Sucursal.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
+  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal, ZQ_PersonaRelacionVendedor]) then
   begin
     DBGridSucursal.Enabled := false;
     PageControl1.Visible:= true;
@@ -201,6 +247,8 @@ begin
     DBEApellidoNombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
+
+    EKOrdenarEmpleado.PopUpGrilla:= PopupMenuVendedor;
   end;
 end;
 
@@ -222,6 +270,7 @@ begin
     GrupoGuardarCancelar.Enabled:=false;
     DBGridSucursal.SetFocus;
     PageControl1.Visible := false;
+    EKOrdenarEmpleado.PopUpGrilla:= nil;
   end;
 
   dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
@@ -231,6 +280,12 @@ end;
 
 procedure TFABM_Sucursal.btnCancelarClick(Sender: TObject);
 begin
+  if (ZQ_Sucursal.State = dsinsert) then
+  begin
+     if not ZQ_PersonaRelacionVendedor.IsEmpty then
+       ZQ_PersonaRelacionVendedor.CancelUpdates;
+  end;
+
   if dm.EKModelo.cancelar_transaccion(Transaccion_ABMSucursal) then
   begin
     DBGridSucursal.Enabled:=true;
@@ -238,6 +293,7 @@ begin
     GrupoEditando.Enabled:=true;
     GrupoGuardarCancelar.Enabled:=false;
     PageControl1.Visible := false;
+    EKOrdenarEmpleado.PopUpGrilla:= nil;
   end;
 end;
 
@@ -251,7 +307,9 @@ end;
 procedure TFABM_Sucursal.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  EKOrdenarSucursal.GuardarConfigColumnas;
+  EKOrdenarEmpleado.GuardarConfigColumnas;
+
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABMSucursal);
 end;
 
@@ -323,12 +381,18 @@ end;
 
 procedure TFABM_Sucursal.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  EKOrdenarSucursal.CargarConfigColumnas;
+  EKOrdenarEmpleado.CargarConfigColumnas;
+
+  EKOrdenarEmpleado.PopUpGrilla:= nil;
 
   StaticTxtBaja.Color:= FPrincipal.baja;
 
+  dm.EKModelo.abrir(ZQ_Personas);
+  
   EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
+  PageControl1.ActivePageIndex:= 0;
 end;
 
 
@@ -474,6 +538,71 @@ begin
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
+end;
+
+procedure TFABM_Sucursal.AgregarContacto1Click(Sender: TObject);
+begin
+  if ZQ_SucursalID_SUCURSAL.AsInteger = 0 then
+  begin
+    Application.MessageBox(PChar('Debe seleccionar una sucursal a la cual asignarle un Vendedor'),'Atención',MB_OK+MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if not Assigned(vsel) then
+    vsel := TFBuscarPersona.Create(nil);
+  vsel.btnBuscar.Click;
+  vsel.OnSeleccionar := OnSelVendedor;
+  vsel.ShowModal;
+end;
+
+
+procedure TFABM_Sucursal.OnSelVendedor;
+begin
+  if vsel.ZQ_Personas.IsEmpty then
+    exit;
+
+  ZQ_PersonaRelacionVendedor.Filter:= 'id_persona = '+vsel.ZQ_PersonasID_PERSONA.AsString;
+  ZQ_PersonaRelacionVendedor.Filtered := true;
+
+  if not ZQ_PersonaRelacionVendedor.IsEmpty then
+  begin
+    ZQ_PersonaRelacionVendedor.Filtered := false;
+    Application.MessageBox('La Persona seleccionada ya figura como Empleado de la Empresa','Carga Empleado',MB_OK+MB_ICONINFORMATION);
+    exit;
+  end;
+
+  ZQ_PersonaRelacionVendedor.Append;
+  ZQ_PersonaRelacionVendedorID_PERSONA.AsInteger := vsel.ZQ_PersonasID_PERSONA.AsInteger;
+  ZQ_PersonaRelacionVendedorID_RELACION.AsInteger := RELACION_EMPLEADO;
+  ZQ_PersonaRelacionVendedorID_SUCURSAL.AsInteger := ZQ_SucursalID_SUCURSAL.AsInteger;
+  ZQ_PersonaRelacionVendedor.Post;
+  
+  vsel.Close;
+  ZQ_Personas.Refresh;
+end;
+
+
+procedure TFABM_Sucursal.QuitarContacto1Click(Sender: TObject);
+begin
+  if ZQ_PersonaRelacionVendedor.IsEmpty then
+    exit;
+
+  ZQ_PersonaRelacionVendedor.Delete;
+end;
+
+
+procedure TFABM_Sucursal.ZQ_SucursalAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_PersonaRelacionVendedor.Close;
+  ZQ_PersonaRelacionVendedor.ParamByName('relacion').AsInteger := RELACION_EMPLEADO;
+  ZQ_PersonaRelacionVendedor.ParamByName('id_sucursal').AsInteger := ZQ_SucursalID_SUCURSAL.AsInteger;
+  ZQ_PersonaRelacionVendedor.Open;
+end;
+
+
+procedure TFABM_Sucursal.btnVerDetalleClick(Sender: TObject);
+begin
+  PageControl1.Visible:= not PageControl1.Visible;
 end;
 
 end.
