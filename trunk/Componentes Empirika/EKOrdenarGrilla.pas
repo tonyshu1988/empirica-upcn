@@ -99,6 +99,7 @@ type //El componente ordenar grilla
     property PermitirOrdenar : Boolean read FOrdenar write FOrdenar;
     property PermitirMover : Boolean read FMoverColumna write FMoverColumna;
     property PermitirFiltrar : Boolean read FFiltrar write FFiltrar;
+    property PopUpGrilla: TPopupMenu read FPopUpMenuOriginal write FPopUpMenuOriginal;
   end;
 
 procedure Register;
@@ -209,10 +210,10 @@ begin
 
   SetFPopUpMenu();
 
-  if Assigned(FGrilla.PopupMenu) then //si la grilla ya tiene un popup asignado lo guardo para que no se pierda
-    FPopUpMenuOriginal:= FGrilla.PopupMenu
-  else
-    FPopUpMenuOriginal:= nil;
+//  if Assigned(FGrilla.PopupMenu) then //si la grilla ya tiene un popup asignado lo guardo para que no se pierda
+//    FPopUpMenuOriginal:= FGrilla.PopupMenu
+//  else
+//    FPopUpMenuOriginal:= nil;
 
   if not ((csDesigning in ComponentState)) then
   begin
