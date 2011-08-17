@@ -839,7 +839,7 @@ object FABM_Sucursal: TFABM_Sucursal
       Top = 213
       Width = 851
       Height = 246
-      ActivePage = TabSheetDatosReportes
+      ActivePage = TabSheetVendedores
       Align = alBottom
       TabOrder = 2
       Visible = False
@@ -1296,6 +1296,109 @@ object FABM_Sucursal: TFABM_Sucursal
           end
         end
       end
+      object TabSheetVendedores: TTabSheet
+        Caption = 'Empleados'
+        ImageIndex = 2
+        object Label15: TLabel
+          Left = 0
+          Top = 105
+          Width = 843
+          Height = 13
+          Align = alBottom
+          Caption = 'Datos Adicionales:'
+        end
+        object DBMemoVendedor: TDBMemo
+          Left = 0
+          Top = 118
+          Width = 843
+          Height = 100
+          Align = alBottom
+          Color = clWhite
+          DataField = 'descripcion'
+          DataSource = DS_PersonaRelacionVendedor
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+        end
+        object DBGridVendedor: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 843
+          Height = 105
+          Hint = 'Haga click derecho para agregar o quitar un Contacto'
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_PersonaRelacionVendedor
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'nombre'
+              Title.Alignment = taCenter
+              Title.Caption = 'Nombre y Apellido'
+              Width = 278
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'telefono'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tel'#233'fono'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'email'
+              Title.Alignment = taCenter
+              Title.Caption = 'Email'
+              Width = 111
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'direccion'
+              Title.Alignment = taCenter
+              Title.Caption = 'Direcci'#243'n'
+              Width = 81
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'localidad'
+              Title.Alignment = taCenter
+              Title.Caption = 'Localidad'
+              Width = 117
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cod_postal'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cod.Postal'
+              Width = 57
+              Visible = True
+            end>
+        end
+      end
     end
   end
   object PBusqueda: TPanel
@@ -1442,6 +1545,11 @@ object FABM_Sucursal: TFABM_Sucursal
         ItemLinks = <
           item
             Item = btnBuscar
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnVerDetalle
             Visible = True
           end
           item
@@ -1807,7 +1915,8 @@ object FABM_Sucursal: TFABM_Sucursal
       Category = 0
       Hint = 'Ver Detalle'
       Visible = ivAlways
-      ImageIndex = 69
+      ImageIndex = 12
+      OnClick = btnVerDetalleClick
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
@@ -1904,6 +2013,7 @@ object FABM_Sucursal: TFABM_Sucursal
   end
   object ZQ_Sucursal: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_SucursalAfterScroll
     SQL.Strings = (
       'select *'
       'from Sucursal s'
@@ -1978,7 +2088,7 @@ object FABM_Sucursal: TFABM_Sucursal
     Left = 408
     Top = 120
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
+  object EKOrdenarSucursal: TEKOrdenarGrilla
     Grilla = DBGridSucursal
     Filtros = <
       item
@@ -2139,5 +2249,251 @@ object FABM_Sucursal: TFABM_Sucursal
     ShowModal = False
     Left = 288
     Top = 123
+  end
+  object ZQ_PersonaRelacionVendedor: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from persona_relacion pr'
+      'where pr.id_relacion = :relacion'
+      '   and pr.id_sucursal = :id_sucursal')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'relacion'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 501
+    Top = 314
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'relacion'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    object ZQ_PersonaRelacionVendedorID_PERSONA_RELACION: TIntegerField
+      FieldName = 'ID_PERSONA_RELACION'
+    end
+    object ZQ_PersonaRelacionVendedorID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_PersonaRelacionVendedorID_RELACION: TIntegerField
+      FieldName = 'ID_RELACION'
+    end
+    object ZQ_PersonaRelacionVendedorID_EMPRESA: TIntegerField
+      FieldName = 'ID_EMPRESA'
+    end
+    object ZQ_PersonaRelacionVendedorID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_PersonaRelacionVendedornombre: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nombre'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionVendedordireccion: TStringField
+      FieldKind = fkLookup
+      FieldName = 'direccion'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'DIRECCION'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionVendedortelefono: TStringField
+      FieldKind = fkLookup
+      FieldName = 'telefono'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'TELEFONO'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionVendedoremail: TStringField
+      FieldKind = fkLookup
+      FieldName = 'email'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'EMAIL'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionVendedordescripcion: TStringField
+      DisplayWidth = 500
+      FieldKind = fkLookup
+      FieldName = 'descripcion'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'ID_PERSONA'
+      Size = 500
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionVendedorlocalidad: TStringField
+      FieldKind = fkLookup
+      FieldName = 'localidad'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'LOCALIDAD'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_PersonaRelacionVendedorcod_postal: TStringField
+      FieldKind = fkLookup
+      FieldName = 'cod_postal'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'CODIGO_POSTAL'
+      KeyFields = 'ID_PERSONA'
+      Size = 100
+      Lookup = True
+    end
+  end
+  object DS_PersonaRelacionVendedor: TDataSource
+    DataSet = ZQ_PersonaRelacionVendedor
+    Left = 501
+    Top = 362
+  end
+  object ZQ_Personas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from Persona')
+    Params = <>
+    Left = 501
+    Top = 266
+    object ZQ_PersonasID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+      Required = True
+    end
+    object ZQ_PersonasID_PROVINCIA: TIntegerField
+      FieldName = 'ID_PROVINCIA'
+    end
+    object ZQ_PersonasID_TIPO_DOC: TIntegerField
+      FieldName = 'ID_TIPO_DOC'
+    end
+    object ZQ_PersonasID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_PersonasNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_PersonasDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_PersonasLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_PersonasCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_PersonasTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_PersonasEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_PersonasFECHA_NACIMIENTO: TDateField
+      FieldName = 'FECHA_NACIMIENTO'
+    end
+    object ZQ_PersonasNUMERO_DOC: TStringField
+      FieldName = 'NUMERO_DOC'
+      Size = 50
+    end
+    object ZQ_PersonasSEXO: TStringField
+      FieldName = 'SEXO'
+      Size = 1
+    end
+    object ZQ_PersonasBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_PersonasDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object ZQ_PersonasCUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
+    end
+  end
+  object PopupMenuVendedor: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    MenuAnimation = [maLeftToRight]
+    Left = 348
+    Top = 280
+    object AgregarContacto1: TMenuItem
+      Caption = 'Agregar Vendedor'
+      Hint = 'Agregar un contacto al listado de contactos'
+      ImageIndex = 14
+      OnClick = AgregarContacto1Click
+    end
+    object QuitarContacto1: TMenuItem
+      Caption = 'Quitar Vendedor'
+      Hint = 'Quita un contacto del listado'
+      ImageIndex = 15
+      OnClick = QuitarContacto1Click
+    end
+  end
+  object EKOrdenarEmpleado: TEKOrdenarGrilla
+    Grilla = DBGridVendedor
+    Filtros = <
+      item
+        TituloColumna = 'Nombre y Apellido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fono'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Email'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod.Postal'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_SucursalEmpleado'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    PopUpGrilla = PopupMenuVendedor
+    Left = 241
+    Top = 280
   end
 end

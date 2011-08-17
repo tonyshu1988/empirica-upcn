@@ -1,6 +1,6 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 207
-  Top = 78
+  Left = 198
+  Top = 59
   Width = 1024
   Height = 713
   Caption = 'FABMEmpresas'
@@ -2257,7 +2257,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 341
       Width = 1006
       Height = 281
-      ActivePage = TabContactos
+      ActivePage = TabMarcas
       Align = alBottom
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -2647,10 +2647,11 @@ object FABMEmpresas: TFABMEmpresas
           ShowHint = False
           TabOrder = 1
           object Label12: TLabel
-            Left = 3
-            Top = 3
-            Width = 106
+            Left = 1
+            Top = 5
+            Width = 996
             Height = 13
+            Align = alBottom
             Caption = 'Datos Adicionales:'
           end
         end
@@ -2693,7 +2694,7 @@ object FABMEmpresas: TFABMEmpresas
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           ParentShowHint = False
-          ShowHint = True
+          ShowHint = False
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -2772,10 +2773,11 @@ object FABMEmpresas: TFABMEmpresas
           ShowHint = False
           TabOrder = 2
           object Label13: TLabel
-            Left = 3
-            Top = 3
-            Width = 106
+            Left = 1
+            Top = 5
+            Width = 996
             Height = 13
+            Align = alBottom
             Caption = 'Datos Adicionales:'
           end
         end
@@ -2850,10 +2852,11 @@ object FABMEmpresas: TFABMEmpresas
           ShowHint = False
           TabOrder = 2
           object Label14: TLabel
-            Left = 3
-            Top = 3
-            Width = 106
+            Left = 1
+            Top = 5
+            Width = 996
             Height = 13
+            Align = alBottom
             Caption = 'Datos Adicionales:'
           end
         end
@@ -4626,15 +4629,15 @@ object FABMEmpresas: TFABMEmpresas
     MenuAnimation = [maLeftToRight]
     Left = 84
     Top = 396
-    object MenuItem1: TMenuItem
+    object AgregarMarca: TMenuItem
       Caption = 'Agregar Marca'
       ImageIndex = 14
-      OnClick = MenuItem1Click
+      OnClick = AgregarMarcaClick
     end
-    object MenuItem2: TMenuItem
+    object QuitarMarca: TMenuItem
       Caption = 'Quitar Marca'
       ImageIndex = 15
-      OnClick = MenuItem2Click
+      OnClick = QuitarMarcaClick
     end
   end
   object ZQ_EmpresaMarca: TZQuery
@@ -4836,7 +4839,8 @@ object FABMEmpresas: TFABMEmpresas
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 85
+    PopUpGrilla = PopupMenuContactos
+    Left = 317
     Top = 445
   end
   object EKOrdenarViajantes: TEKOrdenarGrilla
@@ -4872,6 +4876,7 @@ object FABMEmpresas: TFABMEmpresas
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
+    PopUpGrilla = PopupMenuViajantes
     Left = 197
     Top = 445
   end

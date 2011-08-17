@@ -307,6 +307,7 @@ begin
   DBEDireccion.Color:= dm.colorCampoRequido;
   DBLCBoxTipoDoc.Color:= dm.colorCampoRequido;
   DBENroDocumento.Color:= dm.colorCampoRequido;
+  DBLCBoxCondIva.Color:= dm.colorCampoRequido;  
 
   PageControl.ActivePage:= TabSheetDatos;
   StaticTxtBaja.Color:= FPrincipal.baja;
@@ -601,6 +602,12 @@ begin
       mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío, Verifique';
       result := false;
     end;
+
+  if (ZQ_PersonaID_TIPO_IVA.IsNull) then
+  begin
+    mensaje:= mensaje+#13+'El campo Condición IVA se encuentra vacío, Verifique';
+    result := false;
+  end;
 
   if Result = False then
   begin
