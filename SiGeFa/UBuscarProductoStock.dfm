@@ -20,15 +20,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 722
-    Height = 342
+    Width = 714
+    Height = 336
     Align = alClient
     TabOrder = 0
     object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 720
-      Height = 340
+      Width = 712
+      Height = 334
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -234,7 +234,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -917,22 +917,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
         Visible = True
       end
       item
-        TituloColumna = 'Secci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sector'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fila'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Columna'
-        Visible = True
-      end
-      item
         TituloColumna = 'C'#243'd. Barra'
         Visible = True
       end
@@ -974,6 +958,22 @@ object FBuscarProductoStock: TFBuscarProductoStock
       end
       item
         TituloColumna = 'C'#243'd. Cabecera'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Secci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sector'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fila'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Columna'
         Visible = True
       end
       item

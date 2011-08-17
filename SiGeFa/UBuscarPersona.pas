@@ -99,6 +99,9 @@ type
     ATeclasRapidas: TActionManager;
     ASeleccionar: TAction;
     ABuscar: TAction;
+    ASalir: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -109,6 +112,12 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure configRelacion(relacion:Integer);
     function validarcampos():boolean;
+    procedure ABuscarExecute(Sender: TObject);
+    procedure ASeleccionarExecute(Sender: TObject);
+    procedure ASalirExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -200,6 +209,8 @@ end;
 
 procedure TFBuscarPersona.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
+
   FBuscarPersona.Caption:= 'Buscar Persona';
 
   EKBusqueda.SQL_Select.Text:= 'select p.*';
@@ -290,6 +301,41 @@ begin
   EKBusqueda.SQL_From.Text:= 'from persona p left join persona_relacion pr on (p.id_persona = pr.id_persona)';
   EKBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d)', [QuotedStr('S'), relacion]);
   EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
+end;
+
+procedure TFBuscarPersona.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
+procedure TFBuscarPersona.ASeleccionarExecute(Sender: TObject);
+begin
+  if btnSeleccionar.Enabled then
+    btnSeleccionar.Click;
+end;
+
+procedure TFBuscarPersona.ASalirExecute(Sender: TObject);
+begin
+  if btnSalir.Enabled then
+    btnSalir.Click;
+end;
+
+procedure TFBuscarPersona.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFBuscarPersona.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
+
+procedure TFBuscarPersona.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

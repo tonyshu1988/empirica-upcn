@@ -51,6 +51,8 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure ASeleccionarExecute(Sender: TObject);
     procedure ASalirExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -114,6 +116,16 @@ procedure TFBuscarProducto.ASalirExecute(Sender: TObject);
 begin
   if btnSalir.Enabled then
     btnSalir.Click;
+end;
+
+procedure TFBuscarProducto.FormCreate(Sender: TObject);
+begin
+  EKOrdenarGrilla.CargarConfigColumnas;
+end;
+
+procedure TFBuscarProducto.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  EKOrdenarGrilla.GuardarConfigColumnas;
 end;
 
 end.

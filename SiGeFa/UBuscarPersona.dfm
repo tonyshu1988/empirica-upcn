@@ -12,6 +12,7 @@ object FBuscarPersona: TFBuscarPersona
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -1106,11 +1107,11 @@ object FBuscarPersona: TFBuscarPersona
       0
       52)
     object btnSeleccionar: TdxBarLargeButton
-      Caption = 'F2 Seleccionar'
+      Caption = 'F2 - Seleccionar'
       Category = 0
       Hint = 'Selecciona una persona'
       Visible = ivAlways
-      ImageIndex = 32
+      ImageIndex = 5
       OnClick = btnSeleccionarClick
       AutoGrayScale = False
     end
@@ -1119,7 +1120,7 @@ object FBuscarPersona: TFBuscarPersona
       Category = 0
       Hint = 'Crear Persona'
       Visible = ivAlways
-      ImageIndex = 52
+      ImageIndex = 32
       OnClick = btnCrearPersonaClick
       AutoGrayScale = False
     end
@@ -1131,16 +1132,16 @@ object FBuscarPersona: TFBuscarPersona
       AutoGrayScale = False
     end
     object btnBuscar: TdxBarLargeButton
-      Caption = 'F1 Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'F1 Buscar'
+      Hint = 'Buscar una persona'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -1150,7 +1151,7 @@ object FBuscarPersona: TFBuscarPersona
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -1176,7 +1177,7 @@ object FBuscarPersona: TFBuscarPersona
     end
     object btnSalir: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Salir'
+      Caption = 'ESC - Salir'
       Category = 0
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
@@ -1477,7 +1478,45 @@ object FBuscarPersona: TFBuscarPersona
     Top = 69
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Filtros = <>
+    Grilla = DBGridPersonas
+    Filtros = <
+      item
+        TituloColumna = 'Apellido y Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod. Postal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fono'
+        Visible = True
+      end
+      item
+        TituloColumna = 'eMail'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Documento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit/Cuil'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Nac.'
+        Visible = True
+      end>
+    NombreGuardar = 'BuscarPersonas'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -1514,12 +1553,27 @@ object FBuscarPersona: TFBuscarPersona
     object ABuscar: TAction
       Caption = 'ABuscar'
       ShortCut = 112
-      OnExecute = btnBuscarClick
+      OnExecute = ABuscarExecute
     end
     object ASeleccionar: TAction
       Caption = 'ASeleccionar'
       ShortCut = 113
-      OnExecute = btnSeleccionarClick
+      OnExecute = ASeleccionarExecute
+    end
+    object ASalir: TAction
+      Caption = 'ASalir'
+      ShortCut = 27
+      OnExecute = ASalirExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
     end
   end
 end
