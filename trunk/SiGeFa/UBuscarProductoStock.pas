@@ -154,15 +154,14 @@ begin
     Application.MessageBox(PChar('Debe seleccionar algún Producto.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
 end;
 
-procedure TFBuscarProductoStock.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TFBuscarProductoStock.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-EKOrdenarGrilla.GuardarConfigColumnas;
+  EKOrdenarGrilla.GuardarConfigColumnas;
 end;
 
 procedure TFBuscarProductoStock.FormCreate(Sender: TObject);
 begin
-EKOrdenarGrilla.CargarConfigColumnas;
+  EKOrdenarGrilla.CargarConfigColumnas;
 end;
 
 end.
