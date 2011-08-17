@@ -82,7 +82,6 @@ type
     AABM_Cuenta: TAction;
     AABM_Precios: TAction;
     ABMPrecios1: TMenuItem;
-    N4: TMenuItem;
     AABM_Comprobante: TAction;
     ABMComprobante1: TMenuItem;
     ACajero: TAction;
@@ -103,6 +102,7 @@ type
     Estadisticas1: TMenuItem;
     EstadisticaMovimientosInt1: TMenuItem;
     EstadisticaFacturacion1: TMenuItem;
+    N7: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -484,12 +484,12 @@ end;
 
 procedure TFPrincipal.AEstadisticaMovInternosExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFEstadisticaMovInternos, FEstadisticaMovInternos);
+//  EKVentanas1.Abrir(Sender, TFEstadisticaMovInternos, FEstadisticaMovInternos);
 end;
 
 procedure TFPrincipal.AEstadisticaFacturacionExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFEstadisticasFacturacion, FEstadisticasFacturacion);
+//  EKVentanas1.Abrir(Sender, TFEstadisticasFacturacion, FEstadisticasFacturacion);
 end;
 
 end.
