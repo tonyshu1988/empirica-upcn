@@ -91,6 +91,7 @@ sql:String;
 begin
   if (usaCajero='S') then
      begin
+       //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo
        sql:=Format('where (PUNTO_SALIDA=%s)and(STOCK_ACTUAL>0)',[QuotedStr('S')]);
        EKBuscarStock.SQL_Where.Text:=sql;
        ZQ_Stock.Close;
