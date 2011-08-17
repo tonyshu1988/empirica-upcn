@@ -331,6 +331,8 @@ type
     edCantidad: TEKEdit;
     edImporte: TEKEdit;
     edDesc: TEKEdit;
+    DBMemo1: TDBMemo;
+    Label27: TLabel;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -425,6 +427,7 @@ begin
 
   crearComprobante();
   edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
+
 end;
 
 procedure TFCajero.btsalirClick(Sender: TObject);
@@ -493,8 +496,12 @@ procedure TFCajero.ABuscarExecute(Sender: TObject);
 begin
   if EKListadoProducto.Buscar then
    begin
-     codBarras.Text:=ZQ_ProductosCODIGO_BARRA.AsString;
+     if (EKListadoProducto.Resultado<>'') then
+     begin
+     codBarras.Text:='I'+EKListadoProducto.Resultado;
+     IdentificarCodigo;
      edCantidad.SetFocus;
+     end
    end
 end;
 
@@ -1123,7 +1130,8 @@ end;
 
 procedure TFCajero.ZQ_ProductosAfterScroll(DataSet: TDataSet);
 begin
-     edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
+     edImagen.Visible:=not((ZQ_ProductosIMAGEN.IsNull) or (ZQ_ProductosIMAGEN.AsString=''));
+     edImagen.BringToFront;
 end;
 
 end.

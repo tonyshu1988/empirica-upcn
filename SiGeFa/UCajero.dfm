@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 306
-  Top = 83
+  Left = 234
+  Top = 65
   Width = 1004
   Height = 750
   Caption = 'Cajero SiGeFa'
@@ -27,23 +27,23 @@ object FCajero: TFCajero
     TabOrder = 0
     object PanelDetalleProducto: TPanel
       Left = 1
-      Top = 41
+      Top = 31
       Width = 322
-      Height = 618
+      Height = 628
       Align = alLeft
       BevelInner = bvSpace
       TabOrder = 0
       object GroupBox1: TGroupBox
         Left = 2
-        Top = 382
+        Top = 370
         Width = 318
-        Height = 234
+        Height = 256
         Align = alBottom
         Caption = 'Detalle Producto'
         TabOrder = 0
         object Label2: TLabel
           Left = 5
-          Top = 62
+          Top = 55
           Width = 46
           Height = 13
           Caption = 'Medida'
@@ -57,7 +57,7 @@ object FCajero: TFCajero
         end
         object Label3: TLabel
           Left = 5
-          Top = 171
+          Top = 164
           Width = 51
           Height = 13
           Caption = 'Art'#237'culo'
@@ -71,7 +71,7 @@ object FCajero: TFCajero
         end
         object Label4: TLabel
           Left = 5
-          Top = 133
+          Top = 126
           Width = 83
           Height = 13
           Caption = 'Tipo Art'#237'culo'
@@ -85,7 +85,7 @@ object FCajero: TFCajero
         end
         object Label5: TLabel
           Left = 5
-          Top = 97
+          Top = 90
           Width = 39
           Height = 13
           Caption = 'Marca'
@@ -99,7 +99,7 @@ object FCajero: TFCajero
         end
         object Label6: TLabel
           Left = 5
-          Top = 24
+          Top = 17
           Width = 51
           Height = 13
           Caption = 'Nombre'
@@ -112,8 +112,8 @@ object FCajero: TFCajero
           ParentFont = False
         end
         object Label7: TLabel
-          Left = 203
-          Top = 62
+          Left = 214
+          Top = 55
           Width = 83
           Height = 13
           Caption = 'C'#243'digo Corto'
@@ -126,8 +126,8 @@ object FCajero: TFCajero
           ParentFont = False
         end
         object Label8: TLabel
-          Left = 203
-          Top = 97
+          Left = 214
+          Top = 90
           Width = 97
           Height = 13
           Caption = 'Precio Unitario'
@@ -140,8 +140,8 @@ object FCajero: TFCajero
           ParentFont = False
         end
         object Label26: TLabel
-          Left = 203
-          Top = 133
+          Left = 214
+          Top = 126
           Width = 81
           Height = 13
           Caption = 'Stock Actual'
@@ -154,14 +154,28 @@ object FCajero: TFCajero
           ParentFont = False
           Layout = tlCenter
         end
+        object Label27: TLabel
+          Left = 5
+          Top = 202
+          Width = 76
+          Height = 13
+          Caption = 'Descripci'#243'n'
+          FocusControl = DBEdit2
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object DBEdit1: TDBEdit
           Left = 5
-          Top = 75
+          Top = 68
           Width = 191
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
-          Color = clBtnFace
+          Color = 16767959
           DataField = 'MEDIDA'
           DataSource = DS_Productos
           ReadOnly = True
@@ -169,25 +183,25 @@ object FCajero: TFCajero
         end
         object DBEdit2: TDBEdit
           Left = 5
-          Top = 184
-          Width = 200
+          Top = 177
+          Width = 309
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
-          Color = clBtnFace
+          Color = 16767959
           DataField = 'ARTICULO'
           DataSource = DS_Productos
           ReadOnly = True
-          TabOrder = 6
+          TabOrder = 7
         end
         object DBEdit3: TDBEdit
           Left = 5
-          Top = 147
+          Top = 140
           Width = 191
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
-          Color = clBtnFace
+          Color = 16767959
           DataField = 'TIPO_ARTICULO'
           DataSource = DS_Productos
           ReadOnly = True
@@ -195,12 +209,12 @@ object FCajero: TFCajero
         end
         object DBEdit4: TDBEdit
           Left = 5
-          Top = 111
+          Top = 104
           Width = 191
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
-          Color = clBtnFace
+          Color = 16767959
           DataField = 'NOMBRE_MARCA'
           DataSource = DS_Productos
           ReadOnly = True
@@ -208,38 +222,38 @@ object FCajero: TFCajero
         end
         object DBEdit5: TDBEdit
           Left = 5
-          Top = 38
+          Top = 31
           Width = 309
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
-          Color = clBtnFace
+          Color = 16767959
           DataField = 'NOMBRE_PRODUCTO'
           DataSource = DS_Productos
           ReadOnly = True
           TabOrder = 0
         end
         object DBEdit6: TDBEdit
-          Left = 203
-          Top = 75
+          Left = 214
+          Top = 68
           Width = 100
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
-          Color = clBtnFace
+          Color = 16767959
           DataField = 'COD_CORTO'
           DataSource = DS_Productos
           ReadOnly = True
           TabOrder = 2
         end
         object DBEdit7: TDBEdit
-          Left = 203
-          Top = 111
+          Left = 214
+          Top = 104
           Width = 100
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
-          Color = clBtnFace
+          Color = 16767959
           DataField = 'PRECIO_VENTA'
           DataSource = DS_Productos
           Font.Charset = ANSI_CHARSET
@@ -252,13 +266,13 @@ object FCajero: TFCajero
           TabOrder = 4
         end
         object DBEdit8: TDBEdit
-          Left = 203
-          Top = 147
+          Left = 214
+          Top = 140
           Width = 100
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
-          Color = clBtnFace
+          Color = 16767959
           DataField = 'STOCK_ACTUAL'
           DataSource = DS_Productos
           Font.Charset = ANSI_CHARSET
@@ -268,7 +282,17 @@ object FCajero: TFCajero
           Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
-          TabOrder = 7
+          TabOrder = 6
+        end
+        object DBMemo1: TDBMemo
+          Left = 5
+          Top = 216
+          Width = 309
+          Height = 33
+          Color = 16767959
+          DataField = 'DESCRIPCION'
+          DataSource = DS_Productos
+          TabOrder = 8
         end
       end
       object Panel1: TPanel
@@ -9031,7 +9055,7 @@ object FCajero: TFCajero
         Width = 318
         Height = 153
         Align = alTop
-        BevelInner = bvRaised
+        BevelOuter = bvNone
         TabOrder = 2
         object Label1: TLabel
           Left = 7
@@ -9132,6 +9156,8 @@ object FCajero: TFCajero
           Top = 32
           Width = 304
           Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
           Color = 16119285
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -9150,6 +9176,8 @@ object FCajero: TFCajero
           Top = 82
           Width = 57
           Height = 24
+          BevelInner = bvNone
+          BevelOuter = bvNone
           Color = 16119285
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -9167,6 +9195,8 @@ object FCajero: TFCajero
           Top = 82
           Width = 90
           Height = 24
+          BevelInner = bvNone
+          BevelOuter = bvNone
           Color = 16119285
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -9174,7 +9204,7 @@ object FCajero: TFCajero
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 3
           OnExit = edImporteExit
           DataType = ftFloat
         end
@@ -9184,6 +9214,8 @@ object FCajero: TFCajero
           Top = 82
           Width = 54
           Height = 24
+          BevelInner = bvNone
+          BevelOuter = bvNone
           Color = 16119285
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -9191,7 +9223,7 @@ object FCajero: TFCajero
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 2
           OnExit = edCantidadExit
           DataType = ftFloat
         end
@@ -9199,15 +9231,15 @@ object FCajero: TFCajero
     end
     object PanelContenedorDerecha: TPanel
       Left = 323
-      Top = 41
+      Top = 31
       Width = 576
-      Height = 618
+      Height = 628
       Align = alClient
       Caption = 'PanelContenedorDerecha'
       TabOrder = 1
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 394
+        Top = 404
         Width = 574
         Height = 223
         Align = alBottom
@@ -9272,7 +9304,7 @@ object FCajero: TFCajero
             item
               Expanded = False
               FieldName = 'MDCP_CHEQUE'
-              Title.Caption = 'Nro. Cheque'
+              Title.Caption = 'N'#250'mero'
               Width = 97
               Visible = True
             end
@@ -9316,6 +9348,8 @@ object FCajero: TFCajero
             Width = 249
             Height = 46
             Anchors = [akTop, akRight]
+            BevelInner = bvNone
+            BevelOuter = bvNone
             BiDiMode = bdRightToLeft
             Color = 12189695
             Font.Charset = DEFAULT_CHARSET
@@ -9334,7 +9368,7 @@ object FCajero: TFCajero
         Left = 1
         Top = 93
         Width = 574
-        Height = 301
+        Height = 311
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 1
@@ -9349,7 +9383,7 @@ object FCajero: TFCajero
           Left = 1
           Top = 1
           Width = 572
-          Height = 205
+          Height = 215
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -9391,9 +9425,9 @@ object FCajero: TFCajero
             end
             item
               Expanded = False
-              FieldName = 'PORC_IVA'
-              Title.Caption = 'IVA'
-              Width = 36
+              FieldName = 'IMPORTE_FINAL'
+              Title.Caption = 'Importe'
+              Width = 80
               Visible = True
             end
             item
@@ -9412,9 +9446,9 @@ object FCajero: TFCajero
             end
             item
               Expanded = False
-              FieldName = 'IMPORTE_FINAL'
-              Title.Caption = 'Importe'
-              Width = 80
+              FieldName = 'PORC_IVA'
+              Title.Caption = 'IVA'
+              Width = 36
               Visible = True
             end
             item
@@ -9423,15 +9457,11 @@ object FCajero: TFCajero
               Title.Caption = 'Detalle'
               Width = 469
               Visible = True
-            end
-            item
-              Expanded = False
-              Visible = True
             end>
         end
         object PieGrilla: TPanel
           Left = 1
-          Top = 206
+          Top = 216
           Width = 572
           Height = 94
           Align = alBottom
@@ -9490,6 +9520,8 @@ object FCajero: TFCajero
             Width = 248
             Height = 46
             Anchors = [akTop, akRight]
+            BevelInner = bvNone
+            BevelOuter = bvNone
             BiDiMode = bdRightToLeft
             Color = 12189695
             Font.Charset = DEFAULT_CHARSET
@@ -9762,15 +9794,15 @@ object FCajero: TFCajero
       Left = 1
       Top = 1
       Width = 898
-      Height = 40
+      Height = 30
       Align = alTop
       TabOrder = 2
       object DBText7: TDBText
-        Left = 8
-        Top = 8
+        Left = 1
+        Top = 1
         Width = 481
-        Height = 21
-        Align = alCustom
+        Height = 28
+        Align = alLeft
         DataField = 'nVendedor'
         DataSource = DS_Comprobante
         Font.Charset = ANSI_CHARSET
@@ -9782,13 +9814,12 @@ object FCajero: TFCajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 507
-        Top = 7
+        Left = 519
+        Top = 1
         Width = 378
-        Height = 24
-        Align = alCustom
+        Height = 28
+        Align = alRight
         Alignment = taRightJustify
-        Anchors = [akTop, akRight]
         DataField = 'tipoIVA'
         DataSource = DS_Comprobante
         Font.Charset = ANSI_CHARSET
@@ -12786,16 +12817,27 @@ object FCajero: TFCajero
   object EKListadoProducto: TEKListadoSQL
     Modelo = DM.EKModelo
     SQL.Strings = (
+      'select sp.id_producto,'
+      '       '#39'C'#243'digo: '#39'||pr.cod_corto||'#39' '#39'||'
+      '       COALESCE ('#39'| Producto: '#39' || pc.nombre,'#39#39')||'#39' '#39'||'
+      '       COALESCE ('#39'| Sucursal: '#39' || su.nombre,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
       
-        'select p.id_producto, pc.nombre||'#39'  -  M: '#39'||coalesce(m.medida,'#39 +
-        #39')||'#39'  -  CB:'#39'||coalesce(p.codigo_barra,'#39#39') DESCRIPCION'
-      'from producto p'
-      'left join medida m on (p.id_medida = m.id_medida)'
+        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
+        'al'
+      'from stock_producto sp'
+      'left join producto pr on (sp.id_producto =  pr.id_producto)'
       
-        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
-        'od_cabecera)'
-      'order by pc.nombre')
-    CampoBuscar = 'descripcion'
+        'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
+        'prod_cabecera)'
+      
+        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
+        'id_posicion_sucursal)'
+      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'order by 2')
+    CampoBuscar = 'posicSucursal'
     CampoClave = 'id_producto'
     BuscarEnQuery = ZQ_Productos
     TituloVentana = 'Buscar Producto'
