@@ -160,7 +160,6 @@ type
     lblCantProductos: TLabel;
     Label19: TLabel;
     Importe: TEdit;
-    Label20: TLabel;
     ImporteFpago: TEdit;
     ZQ_FormasPago: TZQuery;       
     ZQ_FormasPagoID_TIPO_FORMAPAGO: TIntegerField;
@@ -207,21 +206,15 @@ type
     ZQ_PersonasTDOC: TStringField;
     ZQ_PersonasTIVA: TStringField;
     DataSource1: TDataSource;
-    DBText1: TDBText;
     DS_Personas: TDataSource;
-    DBText2: TDBText;
-    DBText4: TDBText;
-    DBText6: TDBText;
     ZQ_Comprobantepers_nombre: TStringField;
     ZQ_Comprobantepers_direccion: TStringField;
     ZQ_Comprobantepers_cuit: TStringField;
     ZQ_Comprobantepers_codigo: TStringField;
     Label13: TLabel;
     Label14: TLabel;
-    Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
-    DBText3: TDBText;
     CD_Comprobante: TClientDataSet;
     CD_ComprobanteID_COMPROBANTE: TIntegerField;
     CD_ComprobanteID_SUCURSAL: TIntegerField;
@@ -251,7 +244,6 @@ type
     CD_Comprobantepers_codigo: TStringField;
     CD_Comprobantepers_iva: TStringField;
     Label18: TLabel;
-    DBText5: TDBText;
     CD_Comprobantepers_tel: TStringField;
     CD_Comprobantepers_direccion: TStringField;
     CD_DetalleFacturaproducto: TStringField;
@@ -276,7 +268,6 @@ type
     EKDbSuma2: TEKDbSuma;
     EKListadoClientes: TEKListadoSQL;
     Label21: TLabel;
-    DBText9: TDBText;
     ZQ_PersonasPORCDESC: TFloatField;
     CD_Comprobantepers_desc: TStringField;
     ZSP_Comprobante: TZStoredProc;
@@ -318,7 +309,6 @@ type
     ZQ_ListadoCuentaA_CTA_CORRIENTE: TStringField;
     Panel1: TPanel;
     edImagen: TDBImage;
-    Image1: TImage;
     Panel2: TPanel;
     Label1: TLabel;
     LeerCodBar: TLabel;
@@ -333,6 +323,17 @@ type
     edDesc: TEKEdit;
     DBMemo1: TDBMemo;
     Label27: TLabel;
+    DBImage1: TDBImage;
+    DS_Sucursal: TDataSource;
+    DBEdit9: TDBEdit;
+    Label20: TLabel;
+    DBEdit10: TDBEdit;
+    DBEdit11: TDBEdit;
+    Label28: TLabel;
+    DBEdit12: TDBEdit;
+    DBEdit13: TDBEdit;
+    DBEdit14: TDBEdit;
+    DBEdit15: TDBEdit;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -393,7 +394,7 @@ var
   FCajero: TFCajero;
   importeacob, punitoriosacob, acumulado, acumFpago: double;
   IdProd:String;
-  cliente,IdVendedor,ClienteIVA,cajero:Integer;
+  cliente,IdVendedor,ClienteIVA,cajero,idSucursal:Integer;
   descCliente:double;
 const
   abmComprobante='ABM Factura-Cajero';
@@ -415,6 +416,7 @@ begin
   ShortDateFormat := 'dd/MM/yyyy';
   dm.ZQ_Configuracion.Close;
   dm.ZQ_Configuracion.Open;
+  idSucursal:=dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger;
   CD_Comprobante.CreateDataSet;
   CD_DetalleFactura.CreateDataSet;
   CD_Fpago.CreateDataSet;
@@ -426,6 +428,11 @@ begin
   descCliente:=0;
 
   crearComprobante();
+
+  //Logo de fondo si no tiene imagen el producto
+  DM.ZQ_Sucursal.Close;
+  DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:=idSucursal;
+  DM.ZQ_Sucursal.Open;
   edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
 
 end;
@@ -1088,7 +1095,6 @@ begin
       ClienteIVA:=ZQ_PersonasID_TIPO_IVA.AsInteger;
       CD_ComprobanteID_CLIENTE.AsInteger:=Cliente;
       CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
-
       descCliente:= 0;
       if (not ZQ_PersonasDESCUENTO_ESPECIAL.IsNull) or (ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat <> 0) then
           if (application.MessageBox(pchar('El cliente seleccionado posee un descuento especial del '+FloatToStr(ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat*100)+'%.'+
