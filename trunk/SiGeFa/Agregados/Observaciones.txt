@@ -1,0 +1,49 @@
+* Descuento para cada tipo de pago (Ej: EFECTIVO -10%, TARJETA +5%, etc).
+* Remitos con importe total (Indica el valor total de la mercaderia enviada).
+* Nota Pedido apaisada (pedir ejemplo).
+* Nota Pedido, una vez recibido el pedido se puede modificar y se confirma
+  la recepcion.
+* Levantar presupuesto con el cajero.
+* Cajero, ver lo que va en negro en la forma de pago. Por ejemplo,
+  vende una zapa que vale $100 y se paga $50 en efectivo y $50 con
+  tarjeta, entonces solamente se tiene q facturar lo de la tarjeta
+  y lo efectivo va en negro.
+  
+---------------------17/08/2011-------------------------------------------
+*Agregar la carga de las fotos del producto desde un JPG
+
+* en la pantalla de ABM Precios poder imprimir las etiquetas de codigo de barra
+directamente de los productos modificados.
+
+* Orden de compra, igual a la nota de pedido pero que tenga los precios de costo
+y la asignacion de donde salio la plata para comprar la mercaderia. Productos y Cuentas.
+cuando se guarda se pregunta si se quieren modificar los precios de costo de los productos.
+Permitir la carga del comprobante del banco de la transeferencia bancaria.
+
+* Agregar al producto 2 coeficientes de impuestos que son configurables las variables
+dependiendo de cada negocio (Lopez: Percepcion IB 2.5% y Res. 3337 3%). 
+El precio de costo mas el coeficiente de ganancia + iva + estos dos impuestos
+conforman el precio de venta. Tenemos dos precios de costo uno con los impuestos incluidos
+y el otro con los impuestos incluidos
+
+* Cajero: Poner un hint en el edit donde se ingresan los codigo para que indique las diferentes
+formas de buscar.
+
+* Alerta de dias para la cuenta corriente. Cuando un cliente esta atrasado en una cancelacion de
+la facutra en 30 dias por ejemplo que avise y muestre los datos del cliente.
+
+* Cuando un cliente se demora en un pago de la cuenta corriente permitir cobrar un porcentaje
+de recargo por ejemplo debe $50 pero como se atraso le cobro $60. Contemplar esa situacion.
+
+* Ver las notas de creditos y debitos cuando se devuelve mercaderia. Hay que ver como se 
+incrementa el stock del zapato q se devolvio y como se decrementa el zapato que se llevo.
+Tambien ver el tema de los movimientos de las cuentas.
+
+* Juanma, ver si chequea q la cantidad se mayor a 0.
+
+* Busqueda de productos, poner un boton seleccionar todo.
+
+* Cajero, chequear que cuando cambio el importe del producto no le da bola. Poner un acceso
+rapido para buscar la forma de pago. El F10 no anda.
+
+* Tabla entidad_telefono para llevar varios telefonos de las empresas, personas, etc.
