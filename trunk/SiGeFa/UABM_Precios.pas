@@ -132,6 +132,9 @@ type
     CDSZQ_Productosprecio_costo: TFloatField;
     CDSZQ_Productoscoef_ganancia: TFloatField;
     btBuscarGoogle: TdxBarLargeButton;
+    ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField;
+    ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField;
+    ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -147,6 +150,10 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btBuscarGoogleClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ZQ_ProductosIMPUESTO_IVAChange(Sender: TField);
+    procedure ZQ_ProductosIMPUESTO_ADICIONAL1Change(Sender: TField);
+    procedure ZQ_ProductosIMPUESTO_ADICIONAL2Change(Sender: TField);
+    procedure ZQ_ProductosPRECIO_COSTOChange(Sender: TField);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
@@ -465,6 +472,7 @@ end;
 procedure TFABM_Precios.ZQ_ProductosCalcFields(DataSet: TDataSet);
 begin
   ZQ_Productosimporte_venta_cliente.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat-(ZQ_ProductosPRECIO_VENTA.AsFloat*DescuentoCliente);
+
 end;
 
 
@@ -487,6 +495,28 @@ end;
 procedure TFABM_Precios.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
+end;
+
+procedure TFABM_Precios.ZQ_ProductosIMPUESTO_IVAChange(Sender: TField);
+begin
+ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.AsFloat := ZQ_ProductosPRECIO_COSTO.AsFloat +((ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_IVA.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL1.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL2.AsFloat/100)));
+end;
+
+procedure TFABM_Precios.ZQ_ProductosIMPUESTO_ADICIONAL1Change(
+  Sender: TField);
+begin
+ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.AsFloat := ZQ_ProductosPRECIO_COSTO.AsFloat +((ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_IVA.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL1.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL2.AsFloat/100)));
+end;
+
+procedure TFABM_Precios.ZQ_ProductosIMPUESTO_ADICIONAL2Change(
+  Sender: TField);
+begin
+ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.AsFloat := ZQ_ProductosPRECIO_COSTO.AsFloat +((ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_IVA.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL1.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL2.AsFloat/100)));
+end;
+
+procedure TFABM_Precios.ZQ_ProductosPRECIO_COSTOChange(Sender: TField);
+begin
+ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.AsFloat := ZQ_ProductosPRECIO_COSTO.AsFloat +((ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_IVA.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL1.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL2.AsFloat/100)));
 end;
 
 end.

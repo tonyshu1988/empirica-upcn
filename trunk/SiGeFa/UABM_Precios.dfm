@@ -23,8 +23,8 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 678
+    Width = 1016
+    Height = 684
     Align = alClient
     TabOrder = 4
     object RepListaPrecios: TQuickRep
@@ -105,7 +105,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333300000
+          320.145833333333400000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -173,7 +173,7 @@ object FABM_Precios: TFABM_Precios
             52.916666666666670000
             1145.645833333333000000
             95.250000000000000000
-            478.895833333333300000)
+            478.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1134,7 +1134,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1182,7 +1182,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -1269,7 +1269,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1504,8 +1504,8 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 1
-      Width = 1006
-      Height = 642
+      Width = 1014
+      Height = 648
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1567,12 +1567,6 @@ object FABM_Precios: TFABM_Precios
         end
         item
           Expanded = False
-          FieldName = 'PRECIO_COSTO'
-          Title.Caption = 'Importe Costo'
-          Visible = True
-        end
-        item
-          Expanded = False
           FieldName = 'PRECIO_VENTA'
           Title.Caption = 'Importe Venta'
           Visible = True
@@ -1581,12 +1575,6 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'COEF_GANANCIA'
           Title.Caption = 'Coef. Ganancia'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'IMPUESTO_IVA'
-          Title.Caption = 'I.V.A.'
           Visible = True
         end
         item
@@ -1600,12 +1588,43 @@ object FABM_Precios: TFABM_Precios
           FieldName = 'IMPUESTO_INTERNO'
           Title.Caption = 'Impuesto Interno'
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRECIO_COSTO'
+          Title.Caption = 'Importe Costo'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IMPUESTO_IVA'
+          Title.Caption = 'I.V.A.'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IMPUESTO_ADICIONAL1'
+          Title.Caption = 'Impuesto 1'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IMPUESTO_ADICIONAL2'
+          Title.Caption = 'Per. I. Brutos'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+          ReadOnly = True
+          Title.Caption = 'Importe Costo c/Imp.'
+          Visible = True
         end>
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 643
-      Width = 1006
+      Top = 649
+      Width = 1014
       Height = 34
       Align = alBottom
       TabOrder = 1
@@ -1676,7 +1695,7 @@ object FABM_Precios: TFABM_Precios
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2266,7 +2285,8 @@ object FABM_Precios: TFABM_Precios
         'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
         'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
         'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
-        'p.cod_corto, p.codigo_barra'
+        'p.cod_corto, p.codigo_barra, p.precio_costo_cimpuestos, p.impues' +
+        'to_adicional1, p.impuesto_adicional2'
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
       
@@ -2305,10 +2325,6 @@ object FABM_Precios: TFABM_Precios
       FieldName = 'DESCRIPCION'
       Size = 500
     end
-    object ZQ_ProductosPRECIO_COSTO: TFloatField
-      FieldName = 'PRECIO_COSTO'
-      currency = True
-    end
     object ZQ_ProductosPRECIO_VENTA: TFloatField
       FieldName = 'PRECIO_VENTA'
       currency = True
@@ -2321,9 +2337,6 @@ object FABM_Precios: TFABM_Precios
     end
     object ZQ_ProductosIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
-    end
-    object ZQ_ProductosIMPUESTO_IVA: TFloatField
-      FieldName = 'IMPUESTO_IVA'
     end
     object ZQ_ProductosCOD_CORTO: TStringField
       FieldName = 'COD_CORTO'
@@ -2341,6 +2354,27 @@ object FABM_Precios: TFABM_Precios
       FieldName = 'importe_venta_cliente'
       currency = True
       Calculated = True
+    end
+    object ZQ_ProductosPRECIO_COSTO: TFloatField
+      FieldName = 'PRECIO_COSTO'
+      OnChange = ZQ_ProductosPRECIO_COSTOChange
+      currency = True
+    end
+    object ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField
+      FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+      currency = True
+    end
+    object ZQ_ProductosIMPUESTO_IVA: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+      OnChange = ZQ_ProductosIMPUESTO_IVAChange
+    end
+    object ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL1'
+      OnChange = ZQ_ProductosIMPUESTO_ADICIONAL1Change
+    end
+    object ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL2'
+      OnChange = ZQ_ProductosIMPUESTO_ADICIONAL2Change
     end
   end
   object DS_Productos: TDataSource
@@ -2407,7 +2441,8 @@ object FABM_Precios: TFABM_Precios
         'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
         'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
         'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
-        'p.cod_corto, p.codigo_barra'
+        'p.cod_corto, p.codigo_barra, p.precio_costo_cimpuestos, p.impues' +
+        'to_adicional1, p.impuesto_adicional2'
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
       
@@ -2425,7 +2460,8 @@ object FABM_Precios: TFABM_Precios
         'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
         'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
         'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
-        'p.cod_corto, p.codigo_barra')
+        'p.cod_corto, p.codigo_barra, p.precio_costo_cimpuestos, p.impues' +
+        'to_adicional1, p.impuesto_adicional2')
     SQL_From.Strings = (
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
@@ -2507,12 +2543,17 @@ object FABM_Precios: TFABM_Precios
         'ANANCIA, '
       
         '   producto.COEF_DESCUENTO, producto.IMPUESTO_INTERNO, producto.' +
-        'IMPUESTO_IVA)'
+        'IMPUESTO_IVA, '
+      
+        '   producto.PRECIO_COSTO_CIMPUESTOS, producto.IMPUESTO_ADICIONAL' +
+        '1, producto.IMPUESTO_ADICIONAL2)'
       'VALUES'
       
         '  (:PRECIO_COSTO, :PRECIO_VENTA, :COEF_GANANCIA, :COEF_DESCUENTO' +
         ', :IMPUESTO_INTERNO, '
-      '   :IMPUESTO_IVA)')
+      
+        '   :IMPUESTO_IVA, :PRECIO_COSTO_CIMPUESTOS, :IMPUESTO_ADICIONAL1' +
+        ', :IMPUESTO_ADICIONAL2)')
     ModifySQL.Strings = (
       'UPDATE producto SET'
       '  producto.PRECIO_COSTO = :PRECIO_COSTO,'
@@ -2520,7 +2561,11 @@ object FABM_Precios: TFABM_Precios
       '  producto.COEF_GANANCIA = :COEF_GANANCIA,'
       '  producto.COEF_DESCUENTO = :COEF_DESCUENTO,'
       '  producto.IMPUESTO_INTERNO = :IMPUESTO_INTERNO,'
-      '  producto.IMPUESTO_IVA = :IMPUESTO_IVA'
+      '  producto.IMPUESTO_IVA = :IMPUESTO_IVA,'
+      '  producto.PRECIO_COSTO_CIMPUESTOS = '
+      ':PRECIO_COSTO_CIMPUESTOS,'
+      '  producto.IMPUESTO_ADICIONAL1 = :IMPUESTO_ADICIONAL1,'
+      '  producto.IMPUESTO_ADICIONAL2 = :IMPUESTO_ADICIONAL2'
       'WHERE'
       '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
     Left = 504
@@ -2554,6 +2599,21 @@ object FABM_Precios: TFABM_Precios
       item
         DataType = ftUnknown
         Name = 'IMPUESTO_IVA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO_COSTO_CIMPUESTOS'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPUESTO_ADICIONAL1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPUESTO_ADICIONAL2'
         ParamType = ptUnknown
       end
       item
