@@ -72,7 +72,7 @@ type
     BtAgregarPago: TdxBarLargeButton;
     BtAceptarPago: TdxBarLargeButton;
     BtCancelarPago: TdxBarLargeButton;
-    BtDuplicar: TdxBarLargeButton;
+    BtVendedor: TdxBarLargeButton;
     Bt_Cierre_Z: TdxBarLargeButton;
     btBajar: TdxBarLargeButton;
     btsalir: TdxBarLargeButton;
@@ -334,6 +334,9 @@ type
     DBEdit13: TDBEdit;
     DBEdit14: TDBEdit;
     DBEdit15: TDBEdit;
+    AVendedor: TAction;
+    ANuevoProd: TAction;
+    ANuevaFormaPago: TAction;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -376,6 +379,10 @@ type
     procedure DBGridFormaPagoColExit(Sender: TObject);
     function calcularSaldoCtaCorr():Double;
     procedure ZQ_ProductosAfterScroll(DataSet: TDataSet);
+    procedure AVendedorExecute(Sender: TObject);
+    procedure ANuevoProdExecute(Sender: TObject);
+    procedure ANuevaFormaPagoExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -435,6 +442,7 @@ begin
   DM.ZQ_Sucursal.Open;
   edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
 
+  
 end;
 
 procedure TFCajero.btsalirClick(Sender: TObject);
@@ -607,44 +615,55 @@ procedure TFCajero.IdentificarCodigo();
 var
   cod, num: string;
 begin
-
-  cod := codBarras.Text;
-
-  if not(sonTodosNumeros(MidStr(cod,2,Length(cod)-1))) then
-               begin
-                Application.MessageBox('El código de ingresado es incorrecto', 'Error');
-                LimpiarCodigo;
-                exit;
-              end;
-  // POR NRO DE PRESUPUESTO (EJ. P9494)
-  if MidStr(Cod, 1, 1) = 'P' then
-  begin
-//    CargarPresup(strtoint(MidStr(Cod, 2, Length(cod) - 1)));
-  end
-  else
-   if MidStr(Cod, 1, 1) = 'C' then
-    begin
-     LeerCodigo('C',Cod);
-    end
-    else
-     if MidStr(Cod, 1, 1) = 'I' then
+     cod := codBarras.Text;
+     try
       begin
-       LeerCodigo('I',Cod);
-      end
-       else
-        // POR CODIGO DE BARRAS PRODUCTO
-        if (Length(cod) <= LONG_COD_BARRAS) then
+        if not(sonTodosNumeros(MidStr(cod,2,Length(cod)-1))) then
+                     begin
+                      Application.MessageBox('El código de ingresado es incorrecto', 'Error');
+                      LimpiarCodigo;
+                      exit;
+                    end;
+        // POR NRO DE PRESUPUESTO (EJ. P9494)
+        if MidStr(Cod, 1, 1) = 'P' then
         begin
-          LeerCodigo('B',Cod);
+      //    CargarPresup(strtoint(MidStr(Cod, 2, Length(cod) - 1)));
         end
         else
-         if (Length(cod) > LONG_COD_BARRAS) then
+         if MidStr(Cod, 1, 1) = 'C' then
           begin
-            Application.MessageBox('Longitud de código incorrecta', 'Error');
-            LimpiarCodigo;
-            codBarras.Clear;
-            exit;
-          end;
+           LeerCodigo('C',Cod);
+          end
+          else
+           if MidStr(Cod, 1, 1) = 'I' then
+            begin
+             LeerCodigo('I',Cod);
+            end
+             else
+              // POR CODIGO DE BARRAS PRODUCTO
+              if (Length(cod) <= LONG_COD_BARRAS) then
+              begin
+                LeerCodigo('B',Cod);
+              end
+              else
+               if (Length(cod) > LONG_COD_BARRAS) then
+                begin
+                  Application.MessageBox('Longitud de código incorrecta', 'Error');
+                  LimpiarCodigo;
+                  codBarras.Clear;
+                  exit;
+                end;
+      end
+     except
+      begin
+        Application.MessageBox('El código de ingresado es incorrecto', 'Error');
+        LimpiarCodigo;
+        exit;
+      end;
+     end;
+
+
+
 end;
 
 
@@ -1031,6 +1050,7 @@ if not(ZQ_Productos.IsEmpty) then
   if (edDesc.AsFloat<0) then edDesc.AsFloat:=0;
 
 
+
   desc:=edDesc.AsFloat/100;
 
   edImporte.AsFloat:=edCantidad.AsInteger*(ZQ_ProductosPRECIO_VENTA.AsFloat - (ZQ_ProductosPRECIO_VENTA.AsFloat*desc) );
@@ -1082,6 +1102,23 @@ if (((sender as tdbgrid).SelectedField.FullName = 'CUENTA_INGRESO') or
                ZQ_ListadoCuenta.Locate('id_cuenta',CD_FpagoCUENTA_INGRESO.AsInteger,[]);
                CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
                CD_Fpago_esCtaCorr.AsString:=ZQ_ListadoCuentaA_CTA_CORRIENTE.Asstring;
+            end
+          else
+            begin
+               if EKListadoCuenta.Buscar then
+                if EKListadoCuenta.Resultado<>'' then
+                  CD_FpagoCUENTA_INGRESO.AsInteger:=StrToInt(EKListadoCuenta.Resultado);
+            end
+      end;
+
+if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
+          ((sender as tdbgrid).SelectedField.FullName = 'ID_TIPO_FORMAPAG')) then
+      begin
+          if (CD_FpagomedioPago.IsNull) then
+            begin
+               if EK_ListadoMedCobroPago.Buscar then
+                if EK_ListadoMedCobroPago.Resultado<>'' then
+                  CD_FpagoID_TIPO_FORMAPAG.AsInteger:=StrToInt(EK_ListadoMedCobroPago.Resultado);
             end
       end;
 end;
@@ -1138,6 +1175,27 @@ procedure TFCajero.ZQ_ProductosAfterScroll(DataSet: TDataSet);
 begin
      edImagen.Visible:=not((ZQ_ProductosIMAGEN.IsNull) or (ZQ_ProductosIMAGEN.AsString=''));
      edImagen.BringToFront;
+end;
+
+procedure TFCajero.AVendedorExecute(Sender: TObject);
+begin
+BtVendedor.Click;
+end;
+
+procedure TFCajero.ANuevoProdExecute(Sender: TObject);
+begin
+  LimpiarCodigo();
+end;
+
+procedure TFCajero.ANuevaFormaPagoExecute(Sender: TObject);
+begin
+ DBGridFormaPago.SetFocus;
+ CD_Fpago.Append;
+end;
+
+procedure TFCajero.FormShow(Sender: TObject);
+begin
+ANuevoProd.Execute;
 end;
 
 end.
