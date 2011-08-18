@@ -351,7 +351,7 @@ begin
   dm.EKModelo.abrir(ZQ_Color);
   dm.EKModelo.abrir(ZQ_MedidaArticulo);
 
-  grillaDetalle.PopupMenu:= nil;
+  EKOrdenarDetalle.PopUpGrilla:= nil;
   tabs.ActivePageIndex:= 0;
   PProducto.Enabled:= False;
 end;
@@ -361,7 +361,7 @@ procedure TFABMProductos.btnNuevoClick(Sender: TObject);
 begin
 if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera,ZQ_DetalleProducto]) then
   begin
-    grillaDetalle.PopupMenu:=PopupMenuDetalleProd;;
+    EKOrdenarDetalle.PopUpGrilla:=PopupMenuDetalleProd;;
     grilla.Enabled := false;
     tabs.Enabled:= true;
     tabs.ActivePageIndex:= 0;
@@ -545,7 +545,7 @@ begin
     begin
       Grilla.Enabled := true;
       tabs.Enabled:= false;
-      grillaDetalle.PopupMenu:=nil;
+      EKOrdenarDetalle.PopUpGrilla:= nil;
       GrupoEditando.Enabled := false;
       GrupoVisualizando.Enabled := true;
       tabs.Enabled:= true;
@@ -566,7 +566,7 @@ begin
  if dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos) then
   begin
     Grilla.Enabled := true;
-    grillaDetalle.PopupMenu:=nil;
+    EKOrdenarDetalle.PopUpGrilla:=nil;
     GrupoVisualizando.Enabled := true;
     GrupoEditando.Enabled := false;
     tabs.Enabled:= true;
@@ -583,7 +583,7 @@ if ZQ_ProductoCabecera.IsEmpty then exit;
 if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera,ZQ_DetalleProducto]) then
   begin
     grilla.Enabled := false;
-    grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
+    EKOrdenarDetalle.PopUpGrilla:=PopupMenuDetalleProd;
     tabs.Enabled:= true;
     tabs.ActivePageIndex:= 0;
     PProducto.Enabled:=True;
@@ -681,7 +681,7 @@ begin
 
   PEdicion.Visible:=True;
   PMedidas.Visible:=True;
-  grillaDetalle.PopupMenu:=nil;
+  EKOrdenarDetalle.PopUpGrilla:=nil;
   grillaDetalle.Enabled:=False;
   GrupoEditando.Enabled:= false;
 end;
@@ -697,7 +697,7 @@ begin
 
    PEdicion.Visible:=True;
    PMedidas.Visible:=False;
-   grillaDetalle.PopupMenu:=nil;
+   EKOrdenarDetalle.PopUpGrilla:=nil;
    grillaDetalle.Enabled:=false;
    GrupoEditando.Enabled :=false;
    ZQ_DetalleProducto.Edit;
@@ -832,7 +832,7 @@ else
   end;
 
    PEdicion.Visible:=False;
-   grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
+   EKOrdenarDetalle.PopUpGrilla:=PopupMenuDetalleProd;
    grillaDetalle.Enabled:=True;
    GrupoEditando.Enabled :=true;
 end;
@@ -840,7 +840,7 @@ end;
 
 procedure TFABMProductos.grupoCancelarClick(Sender: TObject);
 begin
-  grillaDetalle.PopupMenu:=PopupMenuDetalleProd;
+  EKOrdenarDetalle.PopUpGrilla:=PopupMenuDetalleProd;
   ZQ_DetalleProducto.RevertRecord;
   GrupoEditando.Enabled :=true;
   grillaDetalle.Enabled:=True;
@@ -934,9 +934,10 @@ begin
     imagen.LoadFromFile(Archivo);
 
 //    //comprimo la imagen
-//    auxBMP.Assign(imagen);
-//    TJPEGImage (imagen).CompressionQuality:= 50;
-//    TJPEGImage (imagen).Compress;
+    auxBMP.Assign(imagen);
+//    TJPEGImage (imagen).Palette:= TIcon(FPrincipal.Iconos_Menu_32.Components[1]).Palette;
+    TJPEGImage (imagen).CompressionQuality:= 50;
+    TJPEGImage (imagen).Compress;
 
     //Por defecto, escala 1:1
     EscalaX := 1.0;
