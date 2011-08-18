@@ -337,6 +337,8 @@ object FCajero: TFCajero
         Height = 153
         Align = alTop
         BevelOuter = bvNone
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 2
         object Label1: TLabel
           Left = 7
@@ -353,7 +355,7 @@ object FCajero: TFCajero
         end
         object LeerCodBar: TLabel
           Left = 69
-          Top = 14
+          Top = 10
           Width = 181
           Height = 16
           Caption = 'LEER CODIGO DE BARRAS'
@@ -440,7 +442,7 @@ object FCajero: TFCajero
           Top = 32
           Width = 304
           Height = 21
-          Hint = #39'I'#39'+IdProd. || C+C'#243'dProd. || C'#243'dBarrasProd'
+          Hint = 'Opciones de B'#250'squeda: '#39'I'#39'+IdProd // C+C'#243'dProd // C'#243'dBarrasProd'
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 16119285
