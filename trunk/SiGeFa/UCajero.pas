@@ -7,9 +7,8 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids,
   EKEdit,UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
-  XPStyleActnCtrls, ActnMan, EKListadoSQL, StoredProcedure, EKDbSuma,
-  ZStoredProcedure,UBuscarPersona, Buttons,
-  EKDbSuma, ZStoredProcedure;
+  XPStyleActnCtrls, ActnMan, EKListadoSQL, EKDbSuma,
+  ZStoredProcedure,UBuscarPersona, Buttons;
 
 type
   TFCajero = class(TForm)
