@@ -195,6 +195,9 @@ end;
 
 procedure TFABM_ProductoStock.btnCancelarClick(Sender: TObject);
 begin
+  if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Producto Stock', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+    exit;
+
   if dm.EKModelo.cancelar_transaccion(transaccion_ABMStock) then
   begin
     GrupoEditando.Enabled:= true;

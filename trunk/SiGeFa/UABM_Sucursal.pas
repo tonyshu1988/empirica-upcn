@@ -280,6 +280,9 @@ end;
 
 procedure TFABM_Sucursal.btnCancelarClick(Sender: TObject);
 begin
+  if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+    exit;
+
   if (ZQ_Sucursal.State = dsinsert) then
   begin
      if not ZQ_PersonaRelacionVendedor.IsEmpty then

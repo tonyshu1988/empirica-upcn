@@ -3,7 +3,7 @@ object FABMEmpresas: TFABMEmpresas
   Top = 59
   Width = 1024
   Height = 713
-  Caption = 'FABMEmpresas'
+  Caption = 'ABM Empresas'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -2649,7 +2649,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label12: TLabel
             Left = 1
             Top = 5
-            Width = 996
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2775,7 +2775,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label13: TLabel
             Left = 1
             Top = 5
-            Width = 996
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'

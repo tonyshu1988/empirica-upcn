@@ -461,6 +461,9 @@ end;
 
 procedure TFABMEmpresas.btnCancelarClick(Sender: TObject);
 begin
+  if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Empresas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+    exit;
+
   Perform(WM_NEXTDLGCTL, 0, 0);
   DBGridEmpresas.Enabled:=true;
 
