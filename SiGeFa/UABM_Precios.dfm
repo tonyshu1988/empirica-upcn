@@ -23,8 +23,8 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 556
+    Width = 1016
+    Height = 562
     Align = alClient
     TabOrder = 4
     object RepListaPrecios: TQuickRep
@@ -105,7 +105,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333300000
+          320.145833333333400000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -173,7 +173,7 @@ object FABM_Precios: TFABM_Precios
             52.916666666666670000
             1145.645833333333000000
             95.250000000000000000
-            478.895833333333300000)
+            478.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1134,7 +1134,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1182,7 +1182,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -1269,7 +1269,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1504,8 +1504,8 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 19
-      Width = 1006
-      Height = 442
+      Width = 1014
+      Height = 448
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1623,8 +1623,8 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 461
-      Width = 1006
+      Top = 467
+      Width = 1014
       Height = 94
       Hint = '`'
       Align = alBottom
@@ -1790,7 +1790,7 @@ object FABM_Precios: TFABM_Precios
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1006
+      Width = 1014
       Height = 18
       Align = alTop
       ParentShowHint = False
@@ -1815,7 +1815,7 @@ object FABM_Precios: TFABM_Precios
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1952,6 +1952,11 @@ object FABM_Precios: TFABM_Precios
           item
             BeginGroup = True
             Item = btnImprimir
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btImprimirEtiquetas
             Visible = True
           end
           item
@@ -2377,6 +2382,15 @@ object FABM_Precios: TFABM_Precios
       OnClick = btBuscarGoogleClick
       AutoGrayScale = False
     end
+    object btImprimirEtiquetas: TdxBarLargeButton
+      Caption = 'Imprimir Etiquetas'
+      Category = 0
+      Hint = 'Imprimir Etiquetas'
+      Visible = ivAlways
+      ImageIndex = 28
+      OnClick = btImprimirEtiquetasClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnEditarGrilla'
@@ -2386,7 +2400,8 @@ object FABM_Precios: TFABM_Precios
         'btnSeleccionar'
         'btnSalir'
         'btnReactivar'
-        'btnImprimir')
+        'btnImprimir'
+        'btImprimirEtiquetas')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -3085,6 +3100,21 @@ object FABM_Precios: TFABM_Precios
     end
     object CDSZQ_Productoscoef_ganancia: TFloatField
       FieldName = 'coef_ganancia'
+    end
+  end
+  object ZQ_ImprimirEtiquetas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from imprimir_etiquetas ie')
+    Params = <>
+    Left = 744
+    Top = 328
+    object ZQ_ImprimirEtiquetasID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+    object ZQ_ImprimirEtiquetasCANTIDAD: TIntegerField
+      FieldName = 'CANTIDAD'
     end
   end
 end

@@ -147,6 +147,10 @@ type
     EditImpAdicional2: TEdit;
     Label5: TLabel;
     RadioGroupImpuestos: TRadioGroup;
+    btImprimirEtiquetas: TdxBarLargeButton;
+    ZQ_ImprimirEtiquetas: TZQuery;
+    ZQ_ImprimirEtiquetasID_PRODUCTO: TIntegerField;
+    ZQ_ImprimirEtiquetasCANTIDAD: TIntegerField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -171,6 +175,7 @@ type
     procedure ZQ_ProductosCOEF_GANANCIAChange(Sender: TField);
     procedure DBGridProductosColEnter(Sender: TObject);
     procedure RadioGroupImpuestosClick(Sender: TObject);
+    procedure btImprimirEtiquetasClick(Sender: TObject);
   private
     { Private declarations }
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
@@ -186,10 +191,11 @@ var
 
 const
   Transaccion_ABMImportes = 'ABM IMPORTES';
+  Transaccion_ImprimirEtiquetas = 'IMPRIMIR ETIQUETAS';
 
 implementation
 
-uses UDM, UUtilidades, UPrincipal;
+uses UDM, UUtilidades, UPrincipal, UImprimirEtiquetas;
 
 {$R *.dfm}
 
@@ -653,6 +659,28 @@ begin
   begin
     GroupBox2.Enabled:= false;
   end;
+end;
+
+procedure TFABM_Precios.btImprimirEtiquetasClick(Sender: TObject);
+begin
+  if dm.EKModelo.iniciar_transaccion(Transaccion_ImprimirEtiquetas, [ZQ_ImprimirEtiquetas]) then
+  begin
+    ZQ_Productos.First;
+    while not(ZQ_Productos.Eof) do
+    begin
+      ZQ_ImprimirEtiquetas.Append;
+      ZQ_ImprimirEtiquetasID_PRODUCTO.AsInteger := ZQ_ProductosID_PRODUCTO.AsInteger;
+      ZQ_ImprimirEtiquetas.Post;
+      ZQ_Productos.Next;
+    end;
+
+    if dm.EKModelo.finalizar_transaccion(Transaccion_ImprimirEtiquetas) then
+    begin
+      FPrincipal.AImprimirEtiqueta.Execute;
+      FImprimirEtiquetas.btnEditar.Click;
+    end;
+  end;
+
 end;
 
 end.
