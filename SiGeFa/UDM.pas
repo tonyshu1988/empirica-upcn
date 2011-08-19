@@ -97,13 +97,19 @@ Const
   RELACION_CONTACTO = 14;
 
 //  TIPOS DE COMPROBANTES
+  //CAJERO
+  CPB_FACTURA        = 11;
+  //ABM COMPROBANTES
+  CPB_NOTA_CREDITO   = 12; //origina una disminución en la cuenta del comprador o deudor.
+  CPB_NOTA_DEBITO    = 13; //origina un incremento en la cuenta del comprador o deudor.
   CPB_PRESUPUESTO    = 14; //se entrega al CLIENTE con los productos cargados para una posible venta. AUTONUMERADO
   CPB_NOTA_PEDIDO    = 15; //se envia al PROVEEDOR con los productos encargados para una compra. AUTONUMERADO
-  CPB_REMITO_VENTA   = 20; //se entrega al CLIENTE para documentar la entrega y/o remisión de la mercadería. AUTONUMERADO
-  CPB_RECIBO_COBRO   = 19; //se entrega al CLIENTE como comprobante de un pago efectuado por este. AUTONUMERADO
   CPB_ORDEN_PAGO     = 18; //se entrega al CLIENTE como comprobante de un pago efectuado a este. AUTONUMERADO (comprobante de tercero).
-  CPB_OTROS_EGRESOS  = 17;
-  CPB_OTROS_INGRESOS = 16;
+  CPB_RECIBO_COBRO   = 19; //se entrega al CLIENTE como comprobante de un pago efectuado por este. AUTONUMERADO
+  CPB_REMITO_VENTA   = 20; //se entrega al CLIENTE para documentar la entrega y/o remisión de la mercadería. AUTONUMERADO
+  //MOVIMIENTOS INTERNOS
+  CPB_OTROS_INGRESOS = 16; //Se utilizan en la pantallas Movimientos Internos
+  CPB_OTROS_EGRESOS  = 17; //Se utilizan en la pantallas Movimientos Internos
 
   ESTADO_SIN_CONFIRMADO = 1;
   ESTADO_CONFIRMADO     = 2;
