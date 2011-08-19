@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 230
-  Top = 84
+  Left = 473
+  Top = 118
   Width = 1004
   Height = 713
   Caption = 'Cajero SiGeFa'
@@ -316,6 +316,7 @@ object FCajero: TFCajero
           DataSource = DS_Productos
           QuickDraw = False
           TabOrder = 0
+          Visible = False
         end
         object DBImage1: TDBImage
           Left = 0
@@ -629,6 +630,22 @@ object FCajero: TFCajero
             Font.Style = [fsBold]
             ParentFont = False
           end
+          object lblMaxVenta: TLabel
+            Left = 15
+            Top = 42
+            Width = 289
+            Height = 20
+            Caption = 'M'#193'XIMO DE VENTA EXCEDIDO'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clRed
+            Font.Height = -17
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            Layout = tlCenter
+            Visible = False
+          end
           object btnBorrarPago: TButton
             Left = 4
             Top = 7
@@ -849,9 +866,9 @@ object FCajero: TFCajero
         TabOrder = 2
         object Label11: TLabel
           Left = 1
-          Top = 106
+          Top = 107
           Width = 572
-          Height = 15
+          Height = 14
           Align = alBottom
           Alignment = taCenter
           Caption = 'Listado de Productos a Cobrar  [F6]'
@@ -870,7 +887,7 @@ object FCajero: TFCajero
           Left = 1
           Top = 1
           Width = 572
-          Height = 15
+          Height = 14
           Align = alTop
           Alignment = taCenter
           Caption = 'Detalles Cliente  [F3]'
@@ -983,7 +1000,7 @@ object FCajero: TFCajero
           Left = 66
           Top = 39
           Width = 314
-          Height = 19
+          Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 16771302
@@ -996,7 +1013,7 @@ object FCajero: TFCajero
           Left = 66
           Top = 18
           Width = 314
-          Height = 19
+          Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 16771302
@@ -1009,7 +1026,7 @@ object FCajero: TFCajero
           Left = 383
           Top = 82
           Width = 186
-          Height = 19
+          Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 16771302
@@ -1022,7 +1039,7 @@ object FCajero: TFCajero
           Left = 328
           Top = 82
           Width = 52
-          Height = 19
+          Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 16771302
@@ -1035,7 +1052,7 @@ object FCajero: TFCajero
           Left = 66
           Top = 60
           Width = 314
-          Height = 19
+          Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 16771302
@@ -1048,7 +1065,7 @@ object FCajero: TFCajero
           Left = 66
           Top = 82
           Width = 185
-          Height = 19
+          Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 16771302
@@ -1061,7 +1078,7 @@ object FCajero: TFCajero
           Left = 383
           Top = 39
           Width = 186
-          Height = 19
+          Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 16771302
@@ -1154,8 +1171,8 @@ object FCajero: TFCajero
         Name = 'prod'
         ParamType = ptUnknown
       end>
-    Left = 184
-    Top = 32
+    Left = 352
+    Top = 224
     ParamData = <
       item
         DataType = ftUnknown
@@ -4825,5 +4842,17 @@ object FCajero: TFCajero
     DataSet = DM.ZQ_Sucursal
     Left = 115
     Top = 153
+  end
+  object RelojStock: TTimer
+    Enabled = False
+    OnTimer = RelojStockTimer
+    Left = 868
+    Top = 454
+  end
+  object RelojMaximoV: TTimer
+    Enabled = False
+    OnTimer = RelojMaximoVTimer
+    Left = 868
+    Top = 518
   end
 end

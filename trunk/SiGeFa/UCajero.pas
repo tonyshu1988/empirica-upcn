@@ -337,6 +337,9 @@ type
     AVendedor: TAction;
     ANuevoProd: TAction;
     ANuevaFormaPago: TAction;
+    lblMaxVenta: TLabel;
+    RelojStock: TTimer;
+    RelojMaximoV: TTimer;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -383,6 +386,8 @@ type
     procedure ANuevoProdExecute(Sender: TObject);
     procedure ANuevaFormaPagoExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure RelojStockTimer(Sender: TObject);
+    procedure RelojMaximoVTimer(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -440,9 +445,6 @@ begin
   DM.ZQ_Sucursal.Close;
   DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:=idSucursal;
   DM.ZQ_Sucursal.Open;
-  edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
-
-  
 end;
 
 procedure TFCajero.btsalirClick(Sender: TObject);
@@ -479,7 +481,7 @@ function TFCajero.agregar(detalle: string;prod:integer):Boolean;
 begin
   if not(ProductoYaCargado(prod)) then
     begin
-        calcularMonto();
+        //calcularMonto();
 
         if edImporte.AsFloat<=0 then
          begin
@@ -594,9 +596,11 @@ begin
   edDesc.AsFloat:=descCliente*100;
   edImporte.AsFloat:=0;
   codBarras.SetFocus;
-  lblSinStock.Visible:=false;
+  RelojStock.Enabled:=false;
+  lblSinStock.Visible:=False;
+  lblMaxVenta.Visible:=False;
   edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
-
+  DBImage1.BringToFront;
 end;
 
 procedure TFCajero.codBarrasExit(Sender: TObject);
@@ -674,9 +678,10 @@ var
   punit: double;
   diasm: integer;
 begin
-
-  LimpiarCodigo;
+  LimpiarCodigo();
+  RelojStock.Enabled:=false;
   lblSinStock.Visible:=False;
+  lblMaxVenta.Visible:=False;
 
    try
     IdProd:= MidStr(cod, 2, Length(cod) - 1);
@@ -720,9 +725,11 @@ begin
       exit;
     end;
 
+
+
   if not(ZQ_Productos.IsEmpty) then
    begin
-      lblSinStock.Visible:=ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0;
+      RelojStock.Enabled:=ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0;
       edDesc.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat+descCliente)*100;
       calcularMonto();
    end;
@@ -859,6 +866,8 @@ begin
   edCantidad.AsInteger:=1;
   edDesc.AsFloat:=(descCliente*100);
   edImporte.AsFloat:=0;
+  RelojStock.Enabled:=false;
+  lblMaxVenta.Visible:=False;
   lblSinStock.Visible:=False;
   EKDbSuma1.SumCollection[0].SumValue := 0;
   EKDbSuma2.SumCollection[0].SumValue := 0;
@@ -949,6 +958,15 @@ procedure TFCajero.EKDbSuma2SumListChanged(Sender: TObject);
 begin
   acumFpago := EKDbSuma2.SumCollection[0].SumValue;
   importeFpago.Text := FormatFloat('$ ##,###,##0.00 ', acumFpago);
+
+  if acumFpago>MONTO_MAX_VENTA then
+     RelojMaximoV.Enabled:=True
+  else
+    begin
+      lblMaxVenta.Visible:=False;
+      RelojMaximoV.Enabled:=False;
+    end
+
 end;
 
 function TFCajero.validarFPago: Boolean;
@@ -1039,9 +1057,9 @@ begin
 
 end;
 
-procedure TFCajero.calcularMonto;
+procedure TFCajero.calcularMonto();
 var
-desc:double;
+desc,importe:double;
 begin
 if not(ZQ_Productos.IsEmpty) then
  begin
@@ -1049,12 +1067,9 @@ if not(ZQ_Productos.IsEmpty) then
 
   if (edDesc.AsFloat<0) then edDesc.AsFloat:=0;
 
-
-
   desc:=edDesc.AsFloat/100;
 
   edImporte.AsFloat:=edCantidad.AsInteger*(ZQ_ProductosPRECIO_VENTA.AsFloat - (ZQ_ProductosPRECIO_VENTA.AsFloat*desc) );
-
  end
 end;
 
@@ -1119,7 +1134,14 @@ if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
                if EK_ListadoMedCobroPago.Buscar then
                 if EK_ListadoMedCobroPago.Resultado<>'' then
                   CD_FpagoID_TIPO_FORMAPAG.AsInteger:=StrToInt(EK_ListadoMedCobroPago.Resultado);
-            end
+            end;
+
+          //Si es una sola forma de pago le pongo el valor del total por defecto
+          if (acumulado>0)and((acumulado-acumFpago)>=0) then
+          begin
+          CD_Fpago.Edit;
+          CD_FpagoIMPORTE.AsFloat:=acumulado-acumFpago;
+          end
       end;
 end;
 
@@ -1196,6 +1218,17 @@ end;
 procedure TFCajero.FormShow(Sender: TObject);
 begin
 ANuevoProd.Execute;
+end;
+
+procedure TFCajero.RelojStockTimer(Sender: TObject);
+begin
+  lblSinStock.Visible:=not(lblSinStock.Visible);
+
+end;
+
+procedure TFCajero.RelojMaximoVTimer(Sender: TObject);
+begin
+  lblMaxVenta.Visible:=not(lblMaxVenta.Visible);
 end;
 
 end.
