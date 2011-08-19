@@ -1505,7 +1505,7 @@ object FABM_Precios: TFABM_Precios
       Left = 1
       Top = 19
       Width = 1006
-      Height = 497
+      Height = 442
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1623,77 +1623,168 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 516
+      Top = 461
       Width = 1006
-      Height = 39
+      Height = 94
       Hint = '`'
       Align = alBottom
       TabOrder = 1
       object Label1: TLabel
         Left = 8
-        Top = 14
+        Top = 18
         Width = 317
         Height = 13
         Caption = 'Seleccione el tipo de calculo para actualizar sus precio:'
       end
-      object Label2: TLabel
-        Left = 536
-        Top = 14
-        Width = 90
+      object Label5: TLabel
+        Left = 8
+        Top = 64
+        Width = 324
         Height = 13
-        Caption = 'Precio S/Costo:'
-      end
-      object Label3: TLabel
-        Left = 737
-        Top = 14
-        Width = 90
-        Height = 13
-        Caption = 'Precio S/Venta:'
-      end
-      object LabelTipo2: TLabel
-        Left = 831
-        Top = 14
-        Width = 12
-        Height = 13
-        Caption = '%'
-      end
-      object LabelTipo1: TLabel
-        Left = 630
-        Top = 14
-        Width = 12
-        Height = 13
-        Caption = '%'
-      end
-      object EditCosto: TEdit
-        Left = 643
-        Top = 10
-        Width = 63
-        Height = 21
-        Hint = 'Valor con el que se incrementa/decrementa el precio de costo'
-        TabOrder = 0
-        Text = '0'
-      end
-      object EditVenta: TEdit
-        Left = 843
-        Top = 10
-        Width = 63
-        Height = 21
-        Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
-        TabOrder = 1
-        Text = '0'
+        Caption = 'Seleccione si desea actualizar los diferentes impuestos::'
       end
       object RadioGroupTipoCalculo: TRadioGroup
         Left = 329
         Top = 2
-        Width = 185
-        Height = 31
+        Width = 188
+        Height = 43
+        Caption = ' Tipo  '
         Columns = 2
         ItemIndex = 0
         Items.Strings = (
           'Porcentaje'
           'Dinero')
-        TabOrder = 2
+        TabOrder = 0
         OnClick = RadioGroupTipoCalculoClick
+      end
+      object GroupBox1: TGroupBox
+        Left = 520
+        Top = 2
+        Width = 422
+        Height = 43
+        Caption = ' Incrementar/Decrementar Precios  '
+        TabOrder = 1
+        object Label2: TLabel
+          Left = 13
+          Top = 20
+          Width = 90
+          Height = 13
+          Caption = 'S/Precio Costo:'
+        end
+        object Label3: TLabel
+          Left = 215
+          Top = 20
+          Width = 90
+          Height = 13
+          Caption = 'S/Precio Venta:'
+        end
+        object LabelTipo2: TLabel
+          Left = 307
+          Top = 20
+          Width = 12
+          Height = 13
+          Caption = '%'
+        end
+        object LabelTipo1: TLabel
+          Left = 105
+          Top = 20
+          Width = 12
+          Height = 13
+          Caption = '%'
+        end
+        object EditCosto: TEdit
+          Left = 124
+          Top = 16
+          Width = 83
+          Height = 21
+          Hint = 'Valor con el que se incrementa/decrementa el precio de costo'
+          AutoSize = False
+          TabOrder = 0
+          Text = '0'
+        end
+        object EditVenta: TEdit
+          Left = 324
+          Top = 16
+          Width = 83
+          Height = 21
+          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+          AutoSize = False
+          TabOrder = 1
+          Text = '0'
+        end
+      end
+      object GroupBox2: TGroupBox
+        Left = 520
+        Top = 46
+        Width = 422
+        Height = 44
+        Caption = ' Impuestos  '
+        Enabled = False
+        TabOrder = 3
+        object Label4: TLabel
+          Left = 7
+          Top = 22
+          Width = 24
+          Height = 13
+          Caption = 'Iva:'
+        end
+        object lblImpAdicional1: TLabel
+          Left = 79
+          Top = 22
+          Width = 125
+          Height = 13
+          AutoSize = False
+          Caption = 'Impuesto Adicional 1:'
+        end
+        object lblImpAdicional2: TLabel
+          Left = 247
+          Top = 22
+          Width = 125
+          Height = 13
+          AutoSize = False
+          Caption = 'Impuesto Adicional 2:'
+        end
+        object EditIVA: TEdit
+          Left = 33
+          Top = 18
+          Width = 35
+          Height = 21
+          AutoSize = False
+          TabOrder = 0
+          Text = '0'
+        end
+        object EditImpAdicional1: TEdit
+          Left = 206
+          Top = 18
+          Width = 35
+          Height = 21
+          AutoSize = False
+          TabOrder = 1
+          Text = '0'
+        end
+        object EditImpAdicional2: TEdit
+          Left = 374
+          Top = 18
+          Width = 35
+          Height = 21
+          AutoSize = False
+          TabOrder = 2
+          Text = '0'
+        end
+      end
+      object RadioGroupImpuestos: TRadioGroup
+        Left = 329
+        Top = 46
+        Width = 188
+        Height = 44
+        Caption = ' Tipo  '
+        Columns = 2
+        ItemIndex = 1
+        Items.Strings = (
+          'SI'
+          'NO')
+        TabOrder = 2
+        OnClick = RadioGroupImpuestosClick
       end
     end
     object PBusqueda: TPanel
@@ -2516,6 +2607,11 @@ object FABM_Precios: TFABM_Precios
     Connection = DM.Conexion
     Params = <
       item
+        DataType = ftInteger
+        Name = 'SALIDA'
+        ParamType = ptResult
+      end
+      item
         DataType = ftFloat
         Name = 'COEF_AUMENTO_COSTO'
         ParamType = ptInput
@@ -2533,6 +2629,26 @@ object FABM_Precios: TFABM_Precios
       item
         DataType = ftInteger
         Name = 'TIPOCALCULO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ACTUALIZAR_IMPUESTOS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_IVA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_ADICIONAL1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_ADICIONAL2'
         ParamType = ptInput
       end>
     StoredProcName = 'ACTUALIZAR_IMPORTES'
@@ -2540,6 +2656,11 @@ object FABM_Precios: TFABM_Precios
     Top = 176
     ParamData = <
       item
+        DataType = ftInteger
+        Name = 'SALIDA'
+        ParamType = ptResult
+      end
+      item
         DataType = ftFloat
         Name = 'COEF_AUMENTO_COSTO'
         ParamType = ptInput
@@ -2557,6 +2678,26 @@ object FABM_Precios: TFABM_Precios
       item
         DataType = ftInteger
         Name = 'TIPOCALCULO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ACTUALIZAR_IMPUESTOS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_IVA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_ADICIONAL1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_ADICIONAL2'
         ParamType = ptInput
       end>
     object ZSPActualizarImporteSALIDA: TIntegerField

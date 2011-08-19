@@ -49,14 +49,8 @@ type
     ZU_Productos: TZUpdateSQL;
     ZSPActualizarImporteSALIDA: TIntegerField;
     PanelEdicion: TPanel;
-    EditCosto: TEdit;
-    EditVenta: TEdit;
     Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
     RadioGroupTipoCalculo: TRadioGroup;
-    LabelTipo2: TLabel;
-    LabelTipo1: TLabel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     mxDBGridExport: TmxDBGridExport;
     mxNativeExcel1: TmxNativeExcel;
@@ -137,6 +131,22 @@ type
     ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
+    GroupBox1: TGroupBox;
+    Label2: TLabel;
+    Label3: TLabel;
+    LabelTipo2: TLabel;
+    LabelTipo1: TLabel;
+    EditCosto: TEdit;
+    EditVenta: TEdit;
+    GroupBox2: TGroupBox;
+    Label4: TLabel;
+    lblImpAdicional1: TLabel;
+    EditIVA: TEdit;
+    EditImpAdicional1: TEdit;
+    lblImpAdicional2: TLabel;
+    EditImpAdicional2: TEdit;
+    Label5: TLabel;
+    RadioGroupImpuestos: TRadioGroup;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -160,6 +170,7 @@ type
     procedure ZQ_ProductosPRECIO_VENTAChange(Sender: TField);
     procedure ZQ_ProductosCOEF_GANANCIAChange(Sender: TField);
     procedure DBGridProductosColEnter(Sender: TObject);
+    procedure RadioGroupImpuestosClick(Sender: TObject);
   private
     { Private declarations }
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
@@ -240,17 +251,20 @@ var
 i: integer;
 begin
   if ZQ_Productos.IsEmpty then
-  exit;
+    exit;
 
   try
     StrToFloat(EditCosto.Text);
     StrToFloat(EditVenta.Text);
+    StrToFloat(EditIVA.Text);
+    StrToFloat(EditImpAdicional1.Text);
+    StrToFloat(EditImpAdicional2.Text);
   except
     Application.MessageBox('Se ingresaron datos no validos'+#13+'Verifique que no haya campos numéricos mal ingresados','Validar',MB_OK+MB_ICONINFORMATION);
     exit;
   end;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
+  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, []) then
   begin
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -258,7 +272,26 @@ begin
     EditCosto.Enabled := false;
     EditVenta.Enabled := false;
 
-    if DBGridProductos.SelectedRows.Count>0 then
+//    ZSPActualizarImporte.Close;
+//    ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat := StrToFloat(EditCosto.Text);
+//    ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat := StrToFloat(EditVenta.Text);
+//
+//    if RadioGroupTipoCalculo.ItemIndex = 0 then
+//      ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger := 1
+//    else
+//      ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger := 0;
+//    if RadioGroupImpuestos.ItemIndex = 0 then
+//
+//    begin
+//      ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 1;
+//      ZSPActualizarImporte.ParamByName('IMPUESTO_IVA').AsFloat := StrToFloat(EditIVA.Text);
+//      ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL1').AsFloat := StrToFloat(EditImpAdicional1.Text);
+//      ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL2').AsFloat := StrToFloat(EditImpAdicional2.Text);
+//    end
+//    else
+//      ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 0;
+
+    if DBGridProductos.SelectedRows.Count > 0 then
     begin
       with DBGridProductos.DataSource.DataSet do
         for i:=0 to DBGridProductos.SelectedRows.Count-1 do
@@ -268,10 +301,22 @@ begin
           ZSPActualizarImporte.ParamByName('ID_PRODUCTO').AsInteger := ZQ_ProductosID_PRODUCTO.AsInteger;
           ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat := StrToFloat(EditCosto.Text);
           ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat := StrToFloat(EditVenta.Text);
+
           if RadioGroupTipoCalculo.ItemIndex = 0 then
             ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger := 1
           else
             ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger := 0;
+
+          if RadioGroupImpuestos.ItemIndex = 0 then
+          begin
+            ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 1;
+            ZSPActualizarImporte.ParamByName('IMPUESTO_IVA').AsFloat := StrToFloat(EditIVA.Text);
+            ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL1').AsFloat := StrToFloat(EditImpAdicional1.Text);
+            ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL2').AsFloat := StrToFloat(EditImpAdicional2.Text);
+          end
+          else
+            ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 0;
+
           ZSPActualizarImporte.Open;
         end;
     end
@@ -283,10 +328,22 @@ begin
         ZSPActualizarImporte.ParamByName('ID_PRODUCTO').AsInteger := ZQ_ProductosID_PRODUCTO.AsInteger;
         ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat := StrToFloat(EditCosto.Text);
         ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat := StrToFloat(EditVenta.Text);
+
         if RadioGroupTipoCalculo.ItemIndex = 0 then
           ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger := 1
         else
           ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger := 0;
+
+        if RadioGroupImpuestos.ItemIndex = 0 then
+        begin
+          ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 1;
+          ZSPActualizarImporte.ParamByName('IMPUESTO_IVA').AsFloat := StrToFloat(EditIVA.Text);
+          ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL1').AsFloat := StrToFloat(EditImpAdicional1.Text);
+          ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL2').AsFloat := StrToFloat(EditImpAdicional2.Text);
+        end
+        else
+          ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 0;
+
         ZSPActualizarImporte.Open;
 
         ZQ_Productos.Next;
@@ -584,6 +641,18 @@ begin
   else
   if ((sender as tdbgrid).SelectedField.FieldName = 'COEF_GANANCIA') then
     campoQueCambia:= 'PRECIO_VENTA';
+end;
+
+procedure TFABM_Precios.RadioGroupImpuestosClick(Sender: TObject);
+begin
+  if RadioGroupImpuestos.ItemIndex = 0 then
+  begin
+    GroupBox2.Enabled:= true;
+  end
+  else
+  begin
+    GroupBox2.Enabled:= false;
+  end;
 end;
 
 end.
