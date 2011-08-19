@@ -47,24 +47,12 @@ type
     QRShapeTapa: TQRShape;
     QRCodigoBarra1: TQRImage;
     QRCodigoBarra2: TQRImage;
-    QRImagePrecio2: TQRImage;
     QRCodigoBarra3: TQRImage;
-    QRImagePrecio3: TQRImage;
     QRDBArticulo1: TQRDBText;
     QRDBArticulo2: TQRDBText;
     QRDBArticulo3: TQRDBText;
-    QRDBText7: TQRDBText;
-    QRDBText8: TQRDBText;
-    QRDBText9: TQRDBText;
-    QRDBText10: TQRDBText;
-    QRDBText11: TQRDBText;
-    QRDBText12: TQRDBText;
-    QRLabel1: TQRLabel;
-    QRLabel2: TQRLabel;
-    QRLabel3: TQRLabel;
     QRDBPrecio2: TQRDBText;
     QRDBPrecio3: TQRDBText;
-    QRImagePrecio1: TQRImage;
     QRDBPrecio1: TQRDBText;
     SP_ImprimirEtiquetasCODIGOBARRA: TStringField;
     SP_ImprimirEtiquetasMedida: TStringField;
@@ -76,7 +64,6 @@ type
     EKCodigoBarra3: TEKCodigoBarra;
     btnEditar: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure SP_ImprimirEtiquetasAfterScroll(DataSet: TDataSet);
@@ -90,9 +77,11 @@ type
     procedure btnEditarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure agregarProducto();
+    procedure cargarProductos();
   private
     vselProducto: TFBuscarProducto;
     procedure onSelProducto;
+    procedure onSelTodosProducto;
   public
     { Public declarations }
   end;
@@ -111,18 +100,16 @@ uses UDM, StrUtils, UPrincipal;
 
 procedure TFImprimirEtiquetas.FormCreate(Sender: TObject);
 begin
-  GrupoEditando.Visible:= ivNever;
-  GrupoVisualizando.Visible:= ivAlways;
+  GrupoEditando.Enabled:= False;
+  GrupoVisualizando.Enabled:= True;
 
-//  borrar.Execute;
   ZQ_Productos.Open;
 end;
 
 
-procedure TFImprimirEtiquetas.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFImprimirEtiquetas.cargarProductos();
 begin
-//  dm.EKModelo.cancelar_transaccion(transaccion_Etiquetas);
-//  Release;
+  ZQ_Etiquetas.Open;
 end;
 
 
@@ -134,14 +121,6 @@ begin
     if key = 112 then
       agregarProducto;
   end;
-
-//  if ((sender as tdbgrid).SelectedField.FullName = 'Producto') then
-//    if key = 112 then
-//      if EKListado.Buscar then
-//      begin
-//        ZQ_Etiquetas.Edit;
-//        ZQ_EtiquetasID_PRODUCTO.AsString := EKListado.Resultado;
-//      end;
 end;
 
 procedure TFImprimirEtiquetas.agregarProducto();
@@ -149,7 +128,9 @@ begin
   if not Assigned(vselProducto) then
     vselProducto:= TFBuscarProducto.Create(nil);
   vselProducto.OnSeleccionar := onSelProducto;
-  vselProducto.SeleccionarYSalir:= true;
+  vselProducto.OnSeleccionarTodos := onSelTodosProducto;
+  vselProducto.btnSeleccionarTodos.Visible:= ivAlways;
+  vselProducto.SeleccionarYSalir:= false;
   vselProducto.ShowModal;
 end;
 
@@ -160,6 +141,23 @@ begin
   begin
     ZQ_Etiquetas.Append;
     ZQ_EtiquetasID_PRODUCTO.AsInteger := vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+  end;
+
+  if vselProducto.SeleccionarYSalir then
+    vselProducto.Close;
+end;
+
+
+procedure TFImprimirEtiquetas.onSelTodosProducto;
+begin
+  vselProducto.ZQ_Producto.First;
+  while not vselProducto.ZQ_Producto.Eof do
+  begin
+    ZQ_Etiquetas.Append;
+    ZQ_EtiquetasID_PRODUCTO.AsInteger := vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    ZQ_Etiquetas.Post;
+
+    vselProducto.ZQ_Producto.Next;
   end;
 
   vselProducto.Close;
@@ -199,10 +197,6 @@ begin
   QRDBPrecio2.Enabled := false;
   QRDBPrecio3.Enabled := false;
 
-  QRImagePrecio1.Enabled:= true;
-  QRImagePrecio2.Enabled:= true;
-  QRImagePrecio3.Enabled:= true;
-
   EKVistaPreviaQR1.VistaPrevia;
 end;
 
@@ -240,14 +234,15 @@ end;
 procedure TFImprimirEtiquetas.btnVaciaClick(Sender: TObject);
 begin
   borrar.Execute;
-  ZQ_Etiquetas.Refresh;
 
-  if dm.EKModelo.cancelar_transaccion(transaccion_Etiquetas) then
+  if dm.EKModelo.finalizar_transaccion(transaccion_Etiquetas) then
   begin
     DBGridEtiquetas.Enabled:= false;
 
-    GrupoEditando.Visible:= ivNever;
+    GrupoEditando.Enabled:= false;
     GrupoVisualizando.Enabled:= True;
+
+    ZQ_Etiquetas.Refresh;
   end;
 end;
 
@@ -276,10 +271,6 @@ begin
   QRDBPrecio2.Enabled := true;
   QRDBPrecio3.Enabled := true;
 
-  QRImagePrecio1.Enabled:= false;
-  QRImagePrecio2.Enabled:= false;
-  QRImagePrecio3.Enabled:= false;
-
   EKVistaPreviaQR1.VistaPrevia;
 end;
 
@@ -292,7 +283,7 @@ begin
   DBGridEtiquetas.Enabled:= true;
   DBGridEtiquetas.SetFocus;
 
-  GrupoEditando.Visible:= ivAlways;
+  GrupoEditando.Enabled:= True;
   GrupoVisualizando.Enabled:= false;
 end;
 

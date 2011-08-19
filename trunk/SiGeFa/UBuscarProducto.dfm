@@ -452,6 +452,10 @@ object FBuscarProducto: TFBuscarProducto
             Visible = True
           end
           item
+            Item = btnSeleccionarTodos
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -804,6 +808,15 @@ object FBuscarProducto: TFBuscarProducto
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnSeleccionarTodos: TdxBarLargeButton
+      Caption = 'F3 - Seleccionar Todos'
+      Category = 0
+      Hint = 'F3 - Seleccionar Todos'
+      Visible = ivNever
+      ImageIndex = 12
+      OnClick = btnSeleccionarTodosClick
+      AutoGrayScale = False
+    end
   end
   object ZQ_Producto: TZQuery
     Connection = DM.Conexion
@@ -1098,6 +1111,10 @@ object FBuscarProducto: TFBuscarProducto
       Caption = 'ASeleccionar'
       ShortCut = 113
       OnExecute = ASeleccionarExecute
+    end
+    object ASelTodos: TAction
+      Caption = 'ASelTodos'
+      ShortCut = 114
     end
     object ASalir: TAction
       Caption = 'ASalir'

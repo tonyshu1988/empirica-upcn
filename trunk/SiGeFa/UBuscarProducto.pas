@@ -44,6 +44,8 @@ type
     ASeleccionar: TAction;
     ASalir: TAction;
     ZQ_ProductoCOLOR: TStringField;
+    btnSeleccionarTodos: TdxBarLargeButton;
+    ASelTodos: TAction;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
@@ -53,11 +55,13 @@ type
     procedure ASalirExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnSeleccionarTodosClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     OnSeleccionar : procedure() of object;
+    OnSeleccionarTodos : procedure() of object;
     SeleccionarYSalir: boolean;
   end;
 
@@ -100,11 +104,13 @@ begin
     btnBuscar.Click;
 end;
 
+
 procedure TFBuscarProducto.ABuscarExecute(Sender: TObject);
 begin
   if btnBuscar.Enabled then
     btnBuscar.Click;
 end;
+
 
 procedure TFBuscarProducto.ASeleccionarExecute(Sender: TObject);
 begin
@@ -112,20 +118,35 @@ begin
     btnSeleccionar.Click;
 end;
 
+
 procedure TFBuscarProducto.ASalirExecute(Sender: TObject);
 begin
   if btnSalir.Enabled then
     btnSalir.Click;
 end;
 
+
 procedure TFBuscarProducto.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla.CargarConfigColumnas;
 end;
 
+
 procedure TFBuscarProducto.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrdenarGrilla.GuardarConfigColumnas;
+end;
+
+
+procedure TFBuscarProducto.btnSeleccionarTodosClick(Sender: TObject);
+begin
+  if (not (ZQ_Producto.IsEmpty)) then
+  begin
+    if Assigned(OnSeleccionarTodos) then
+      OnSeleccionarTodos
+  end
+  else
+    Application.MessageBox(PChar('No hay ningún producto para seleccionar.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
 end;
 
 end.
