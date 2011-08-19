@@ -764,7 +764,7 @@ begin
        ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZSP_GenerarIDProdDeralleID.AsInteger);//rellenar(CDMedidasmedida.AsString,'0',5);
 
     if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
-      ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZSP_GenerarIDProdDeralleID.AsString,'0',13);//armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
+      ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZSP_GenerarIDProdDeralleID.AsString,'0',20);//armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
 
     ZQ_DetalleProducto.Post;
     ZQ_DetalleProducto.Filtered := false;
@@ -824,7 +824,7 @@ begin
            ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
 
         if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
-           ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',13);
+           ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
        end;
         ZQ_DetalleProducto.Post;
         ZQ_DetalleProducto.Filtered := false;
@@ -852,7 +852,7 @@ else
      ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
 
   if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
-     ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',13);
+     ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
 
    ZQ_DetalleProducto.Post;
   end;
