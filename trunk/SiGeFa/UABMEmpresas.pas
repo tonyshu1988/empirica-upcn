@@ -682,8 +682,8 @@ begin
     ZQ_PersonaRelacionViajante.Post;
   end;
 
-  vsel.Close;
   ZQ_Personas.Refresh;
+  vsel.Close;
 end;
 
 

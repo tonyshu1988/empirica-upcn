@@ -46,7 +46,7 @@ type
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     ZSPActualizarImporte: TZStoredProc;
     ZQ_ProductosID_PRODUCTO: TIntegerField;
-    ZUpdateSQL1: TZUpdateSQL;
+    ZU_Productos: TZUpdateSQL;
     ZSPActualizarImporteSALIDA: TIntegerField;
     PanelEdicion: TPanel;
     EditCosto: TEdit;
@@ -135,6 +135,8 @@ type
     ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField;
     ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField;
     ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField;
+    PBusqueda: TPanel;
+    lblCantidadRegistros: TLabel;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -154,8 +156,13 @@ type
     procedure ZQ_ProductosIMPUESTO_ADICIONAL1Change(Sender: TField);
     procedure ZQ_ProductosIMPUESTO_ADICIONAL2Change(Sender: TField);
     procedure ZQ_ProductosPRECIO_COSTOChange(Sender: TField);
+    procedure actualizarPrecios(llamador: string);
+    procedure ZQ_ProductosPRECIO_VENTAChange(Sender: TField);
+    procedure ZQ_ProductosCOEF_GANANCIAChange(Sender: TField);
+    procedure DBGridProductosColEnter(Sender: TObject);
   private
     { Private declarations }
+    campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
     vsel : TFBuscarPersona;
     procedure OnSelPersona;
   public
@@ -194,6 +201,7 @@ end;
 procedure TFABM_Precios.btnBuscarClick(Sender: TObject);
 begin
   EKBusquedaAvanzada1.Buscar;
+  dm.mostrarCantidadRegistro(ZQ_Productos, lblCantidadRegistros);
 end;
 
 
@@ -309,8 +317,8 @@ begin
     RadioGroupTipoCalculo.Enabled := true;
     EditCosto.Enabled := true;
     EditVenta.Enabled := true;
-    EditCosto.Clear;
-    EditVenta.Clear;
+    EditCosto.Text:= '0';
+    EditVenta.Text:= '0';
     ZQ_Productos.Refresh;
     DBGridProductos.Options:=DBGridProductos.Options - [dgMultiSelect];
     DBGridProductos.SetFocus;
@@ -335,8 +343,8 @@ begin
     RadioGroupTipoCalculo.Enabled := true;
     EditCosto.Enabled := true;
     EditVenta.Enabled := true;
-    EditCosto.Clear;
-    EditVenta.Clear;
+    EditCosto.Text:= '0';
+    EditVenta.Text:= '0';
     ZQ_Productos.Refresh;
     DBGridProductos.SetFocus;
   end;
@@ -348,12 +356,18 @@ begin
   if (dgMultiSelect	in DBGridProductos.Options) then
   begin
     DBGridProductos.Options:=DBGridProductos.Options - [dgMultiSelect];
-    btnSeleccionar.AutoGrayScale := false;
+    btnSeleccionar.Caption:= 'Seleccionar';
+    btnSeleccionar.Hint:= 'Seleccionar de la grilla los productos a actualizar';
+    btnSeleccionar.ImageIndex:= 5;
+//    btnSeleccionar.AutoGrayScale := false;
   end
   else
   begin
     DBGridProductos.Options:=DBGridProductos.Options + [dgMultiSelect];
-    btnSeleccionar.AutoGrayScale := true;
+    btnSeleccionar.Caption:= 'Todos';
+    btnSeleccionar.Hint:= 'Se actualizan todos los productos de la grilla';
+    btnSeleccionar.ImageIndex:= 78;
+//    btnSeleccionar.AutoGrayScale := true;
   end;
 
   DBGridProductos.SetFocus;
@@ -480,6 +494,7 @@ procedure TFABM_Precios.FormCreate(Sender: TObject);
 begin
   CDSZQ_Productos.CreateDataSet;
   EKOrdenarGrilla1.CargarConfigColumnas;
+  lblCantidadRegistros.Caption:= '';
 end;
 
 
@@ -499,24 +514,74 @@ end;
 
 procedure TFABM_Precios.ZQ_ProductosIMPUESTO_IVAChange(Sender: TField);
 begin
-ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.AsFloat := ZQ_ProductosPRECIO_COSTO.AsFloat +((ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_IVA.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL1.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL2.AsFloat/100)));
+  actualizarPrecios('IMP_IVA');
 end;
 
-procedure TFABM_Precios.ZQ_ProductosIMPUESTO_ADICIONAL1Change(
-  Sender: TField);
+procedure TFABM_Precios.ZQ_ProductosIMPUESTO_ADICIONAL1Change(Sender: TField);
 begin
-ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.AsFloat := ZQ_ProductosPRECIO_COSTO.AsFloat +((ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_IVA.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL1.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL2.AsFloat/100)));
+  actualizarPrecios('IMP_ADICIONAL1');
 end;
 
-procedure TFABM_Precios.ZQ_ProductosIMPUESTO_ADICIONAL2Change(
-  Sender: TField);
+procedure TFABM_Precios.ZQ_ProductosIMPUESTO_ADICIONAL2Change(Sender: TField);
 begin
-ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.AsFloat := ZQ_ProductosPRECIO_COSTO.AsFloat +((ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_IVA.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL1.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL2.AsFloat/100)));
+  actualizarPrecios('IMP_ADICIONAL2');
 end;
 
 procedure TFABM_Precios.ZQ_ProductosPRECIO_COSTOChange(Sender: TField);
 begin
-ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.AsFloat := ZQ_ProductosPRECIO_COSTO.AsFloat +((ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_IVA.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL1.AsFloat/100)) + (ZQ_ProductosPRECIO_COSTO.AsFloat * (ZQ_ProductosIMPUESTO_ADICIONAL2.AsFloat/100)));
+  actualizarPrecios('PRECIO_COSTO');
+end;
+
+procedure TFABM_Precios.ZQ_ProductosPRECIO_VENTAChange(Sender: TField);
+begin
+  if campoQueCambia <> 'PRECIO_VENTA' then
+    actualizarPrecios('PRECIO_VENTA');
+end;
+
+procedure TFABM_Precios.ZQ_ProductosCOEF_GANANCIAChange(Sender: TField);
+begin
+  if campoQueCambia <> 'COEF_GANANCIA' then
+    actualizarPrecios('COEF_GANANCIA');
+end;
+
+procedure TFABM_Precios.actualizarPrecios(llamador: string);
+var
+  costo_neto, costo_con_impuestos, imp_adicional_1,
+  imp_adicional_2, imp_iva, coef_ganancia, precio_venta: double;
+begin
+  costo_neto:= ZQ_ProductosPRECIO_COSTO.AsFloat;
+  costo_con_impuestos:= ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.AsFloat;
+  imp_adicional_1:= ZQ_ProductosIMPUESTO_ADICIONAL1.AsFloat;
+  imp_adicional_2:= ZQ_ProductosIMPUESTO_ADICIONAL2.AsFloat;
+  imp_iva:= ZQ_ProductosIMPUESTO_IVA.AsFloat;
+  coef_ganancia:= ZQ_ProductosCOEF_GANANCIA.AsFloat;
+  precio_venta:= ZQ_ProductosPRECIO_VENTA.AsFloat;
+
+  if llamador <> 'PRECIO_VENTA' then
+  begin
+    campoQueCambia:= 'PRECIO_VENTA';
+    costo_con_impuestos:= costo_neto + (costo_neto * (imp_adicional_1/100)) + (costo_neto * (imp_adicional_2/100)) + (costo_neto * (imp_iva/100));
+    precio_venta:= costo_con_impuestos * (1 + coef_ganancia);
+
+    ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.AsFloat:= costo_con_impuestos;
+    ZQ_ProductosPRECIO_VENTA.AsFloat:= precio_venta;
+  end
+  else
+  begin
+    campoQueCambia:= 'COEF_GANANCIA';
+    coef_ganancia:= (precio_venta / costo_con_impuestos) - 1;
+    ZQ_ProductosCOEF_GANANCIA.AsFloat:= coef_ganancia;
+  end
+end;
+
+
+procedure TFABM_Precios.DBGridProductosColEnter(Sender: TObject);
+begin
+  if ((sender as tdbgrid).SelectedField.FieldName = 'PRECIO_VENTA') then
+    campoQueCambia:= 'COEF_GANANCIA'
+  else
+  if ((sender as tdbgrid).SelectedField.FieldName = 'COEF_GANANCIA') then
+    campoQueCambia:= 'PRECIO_VENTA';
 end;
 
 end.

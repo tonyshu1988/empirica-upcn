@@ -265,7 +265,7 @@ object FBuscarPersona: TFBuscarPersona
         ListSource = DS_TipoDoc
         NullValueKey = 46
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 3
       end
       object dbNombre: TDBEdit
         Left = 127
@@ -298,28 +298,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Style = [fsBold]
         MaxLength = 18
         ParentFont = False
-        TabOrder = 5
-      end
-      object ISDBEditDateTimePicker1: TISDBEditDateTimePicker
-        Left = 539
-        Top = 27
-        Width = 159
-        Height = 21
-        Date = 3654.436158275457000000
-        Time = 3654.436158275457000000
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        MinDate = 3654.000000000000000000
-        ParentFont = False
-        TabOrder = 3
-        DataField = 'FECHA_NACIMIENTO'
-        DataSource = DS_Personas
-        ReadOnly = False
-        DefaultEditMask = '!99/99/9999;1;_'
-        AutoApplyEditMask = True
+        TabOrder = 4
       end
       object DBEdit1: TDBEdit
         Left = 106
@@ -335,7 +314,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 12
+        TabOrder = 11
       end
       object DBLookupComboBox1: TDBLookupComboBox
         Left = 320
@@ -354,7 +333,7 @@ object FBuscarPersona: TFBuscarPersona
         ListSource = DS_Provincia
         NullValueKey = 46
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 7
       end
       object DBLookupComboBox2: TDBLookupComboBox
         Left = 507
@@ -373,7 +352,7 @@ object FBuscarPersona: TFBuscarPersona
         ListSource = DS_TipoIVA
         NullValueKey = 46
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 5
       end
       object DBEDireccion: TDBEdit
         Left = 71
@@ -405,7 +384,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 10
+        TabOrder = 9
       end
       object DBEdit5: TDBEdit
         Left = 604
@@ -421,7 +400,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 8
       end
       object DBEdit2: TDBEdit
         Left = 366
@@ -436,7 +415,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 11
+        TabOrder = 10
       end
       object DBEdit6: TDBEdit
         Left = 71
@@ -452,7 +431,7 @@ object FBuscarPersona: TFBuscarPersona
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 6
       end
       object DBMemo1: TDBMemo
         Left = 56
@@ -461,7 +440,18 @@ object FBuscarPersona: TFBuscarPersona
         Height = 65
         DataField = 'DESCRIPCION'
         DataSource = DS_Personas
+        TabOrder = 12
+      end
+      object EKDBDateTimePicker1: TEKDBDateTimePicker
+        Left = 539
+        Top = 27
+        Width = 159
+        Height = 21
+        Date = 40773.000000000000000000
+        Time = 40773.000000000000000000
         TabOrder = 13
+        DataField = 'FECHA_NACIMIENTO'
+        DataSource = DS_Personas
       end
     end
   end

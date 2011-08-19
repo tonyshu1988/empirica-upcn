@@ -5,9 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, ComCtrls,
-  ISDBEditDateTimePicker, StdCtrls, Mask, DBCtrls, DB, ZAbstractRODataset,
+  StdCtrls, Mask, DBCtrls, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla,
-  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan;
+  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKDBDateTimePicker;
 
 type
   TFBuscarPersona = class(TForm)
@@ -41,7 +41,6 @@ type
     dblkTipoDoc: TDBLookupComboBox;
     dbNombre: TDBEdit;
     dbNroDocu: TDBEdit;
-    ISDBEditDateTimePicker1: TISDBEditDateTimePicker;
     DBEdit1: TDBEdit;
     DBLookupComboBox1: TDBLookupComboBox;
     Label1: TLabel;
@@ -102,6 +101,7 @@ type
     ASalir: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
+    EKDBDateTimePicker1: TEKDBDateTimePicker;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
