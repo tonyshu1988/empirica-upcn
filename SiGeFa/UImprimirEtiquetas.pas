@@ -6,41 +6,22 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, jpeg, QRCtrls, QuickRpt, StdCtrls,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, ZStoredProcedure,
-  ZSqlProcessor, EKVistaPreviaQR, EKListadoSQL, ISBarcode;
+  ZDataset, Grids, DBGrids, ZStoredProcedure, UBuscarProducto,
+  ZSqlProcessor, EKVistaPreviaQR, EKListadoSQL, EKCodigoBarra;
 
 type
   TFImprimirEtiquetas = class(TForm)
     PanelFondo: TPanel;
     dxBarABM: TdxBarManager;
-    BtNuevo: TdxBarLargeButton;
-    BtModificar: TdxBarLargeButton;
-    BtEliminar: TdxBarLargeButton;
-    btAutoComit: TdxBarLargeButton;
-    BtGuardar: TdxBarLargeButton;
-    BtCancelar: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
-    BtDuplicar: TdxBarLargeButton;
-    Bt_Cerrar: TdxBarLargeButton;
-    btVentas: TdxBarLargeButton;
-    bTAlquiler: TdxBarLargeButton;
-    btDeBaja: TdxBarLargeButton;
-    dxBarver: TdxBarStatic;
-    btBajar: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    bt_buscar: TdxBarLargeButton;
     GrupoVisualizando: TdxBarGroup;
     GrupoEditando: TdxBarGroup;
-    GrupoModEspecial: TdxBarGroup;
-    GrupoBuscar: TdxBarGroup;
     ZQ_Etiquetas: TZQuery;
     DBGridEtiquetas: TDBGrid;
     ZQ_Productos: TZQuery;
     DS_Etiquetas: TDataSource;
     SP_ImprimirEtiquetas: TZStoredProc;
-    ISBarcode1: TISBarcode;
-    ISBarcode2: TISBarcode;
-    ISBarcode3: TISBarcode;
     borrar: TZSQLProcessor;
     btnEliminarLinea: TdxBarLargeButton;
     btnVacia: TdxBarLargeButton;
@@ -90,6 +71,10 @@ type
     ZQ_ProductosPRECIO_VENTA: TFloatField;
     SP_ImprimirEtiquetasPrecio: TFloatField;
     Label1: TLabel;
+    EKCodigoBarra1: TEKCodigoBarra;
+    EKCodigoBarra2: TEKCodigoBarra;
+    EKCodigoBarra3: TEKCodigoBarra;
+    btnEditar: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word;
@@ -102,8 +87,12 @@ type
     procedure btnEliminarLineaClick(Sender: TObject);
     procedure btnVaciaClick(Sender: TObject);
     procedure btnConPrecioClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure agregarProducto();
   private
-    { Private declarations }
+    vselProducto: TFBuscarProducto;
+    procedure onSelProducto;
   public
     { Public declarations }
   end;
@@ -116,43 +105,72 @@ const
 
 implementation
 
-uses UDM, StrUtils;
+uses UDM, StrUtils, UPrincipal;
 
 {$R *.dfm}
 
 procedure TFImprimirEtiquetas.FormCreate(Sender: TObject);
 begin
-  borrar.Execute;
-  dm.EKModelo.iniciar_transaccion(transaccion_Etiquetas, [ZQ_Etiquetas]);
+  GrupoEditando.Visible:= ivNever;
+  GrupoVisualizando.Visible:= ivAlways;
+
+//  borrar.Execute;
   ZQ_Productos.Open;
 end;
 
 
 procedure TFImprimirEtiquetas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  dm.EKModelo.cancelar_transaccion(transaccion_Etiquetas);
-  Release;
+//  dm.EKModelo.cancelar_transaccion(transaccion_Etiquetas);
+//  Release;
 end;
 
 
 procedure TFImprimirEtiquetas.DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if ((sender as tdbgrid).SelectedField.FullName = 'Producto') then
+  if dm.EKModelo.verificar_transaccion(transaccion_Etiquetas) then
+  begin
     if key = 112 then
-      if EKListado.Buscar then
-      begin
-        ZQ_Etiquetas.Edit;
-        ZQ_EtiquetasID_PRODUCTO.AsString := EKListado.Resultado;
-      end;
+      agregarProducto;
+  end;
+
+//  if ((sender as tdbgrid).SelectedField.FullName = 'Producto') then
+//    if key = 112 then
+//      if EKListado.Buscar then
+//      begin
+//        ZQ_Etiquetas.Edit;
+//        ZQ_EtiquetasID_PRODUCTO.AsString := EKListado.Resultado;
+//      end;
+end;
+
+procedure TFImprimirEtiquetas.agregarProducto();
+begin
+  if not Assigned(vselProducto) then
+    vselProducto:= TFBuscarProducto.Create(nil);
+  vselProducto.OnSeleccionar := onSelProducto;
+  vselProducto.SeleccionarYSalir:= true;
+  vselProducto.ShowModal;
+end;
+
+
+procedure TFImprimirEtiquetas.onSelProducto;
+begin
+  if not vselProducto.ZQ_Producto.IsEmpty then
+  begin
+    ZQ_Etiquetas.Append;
+    ZQ_EtiquetasID_PRODUCTO.AsInteger := vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+  end;
+
+  vselProducto.Close;
 end;
 
 
 procedure TFImprimirEtiquetas.SP_ImprimirEtiquetasAfterScroll(DataSet: TDataSet);
 begin
-  ISBarcode1.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
-  ISBarcode2.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
-  ISBarcode3.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  EKCodigoBarra1.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  EKCodigoBarra2.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  EKCodigoBarra3.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
 end;
 
 
@@ -161,7 +179,10 @@ var
     Fila: string;
     Filan : integer;
 begin
-  fila := InputBox('Ingrese','Desde que fila?','0');
+  if ZQ_Etiquetas.IsEmpty then
+    exit;
+
+  fila := InputBox('Configurar Pagina','Indique la fila de la pagina desde donde empezar:','0');
   try
     filan := StrToInt(fila);
   except
@@ -169,6 +190,7 @@ begin
   end;
 
   dm.EKModelo.aplicar_modificaciones(transaccion_Etiquetas);
+  
   SP_ImprimirEtiquetas.Active := false;
   SP_ImprimirEtiquetas.ParamByName('desde_renglon').AsInteger := Filan;
   SP_ImprimirEtiquetas.Active := true;
@@ -219,6 +241,14 @@ procedure TFImprimirEtiquetas.btnVaciaClick(Sender: TObject);
 begin
   borrar.Execute;
   ZQ_Etiquetas.Refresh;
+
+  if dm.EKModelo.cancelar_transaccion(transaccion_Etiquetas) then
+  begin
+    DBGridEtiquetas.Enabled:= false;
+
+    GrupoEditando.Visible:= ivNever;
+    GrupoVisualizando.Enabled:= True;
+  end;
 end;
 
 
@@ -226,7 +256,10 @@ procedure TFImprimirEtiquetas.btnConPrecioClick(Sender: TObject);
 var Fila: string;
     Filan : integer;
 begin
-  fila := InputBox('Ingrese','Desde que fila?','0');
+  if ZQ_Etiquetas.IsEmpty then
+    exit;
+
+  fila := InputBox('Configurar Pagina','Indique la fila de la pagina desde donde empezar:','0');
   try
     filan := StrToInt(fila);
   except
@@ -234,6 +267,7 @@ begin
   end;
 
   dm.EKModelo.aplicar_modificaciones(transaccion_Etiquetas);
+  
   SP_ImprimirEtiquetas.Active := false;
   SP_ImprimirEtiquetas.ParamByName('desde_renglon').AsInteger := Filan;
   SP_ImprimirEtiquetas.Active := true;
@@ -248,5 +282,25 @@ begin
 
   EKVistaPreviaQR1.VistaPrevia;
 end;
+
+
+procedure TFImprimirEtiquetas.btnEditarClick(Sender: TObject);
+begin
+  if not dm.EKModelo.iniciar_transaccion(transaccion_Etiquetas, [ZQ_Etiquetas]) then
+    exit;
+
+  DBGridEtiquetas.Enabled:= true;
+  DBGridEtiquetas.SetFocus;
+
+  GrupoEditando.Visible:= ivAlways;
+  GrupoVisualizando.Enabled:= false;
+end;
+
+
+procedure TFImprimirEtiquetas.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  CanClose:= FPrincipal.cerrar_ventana(transaccion_Etiquetas);
+end;
+
 
 end.
