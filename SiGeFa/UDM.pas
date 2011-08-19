@@ -111,6 +111,8 @@ Const
 
   LONG_COD_BARRAS       = 40;
   LONG_CODIGO           = 14;
+
+  MONTO_MAX_VENTA       = 15000;
 implementation
 
 uses UPrincipal, USeleccionarSucursal, UPanelNotificacion, IniFiles;
