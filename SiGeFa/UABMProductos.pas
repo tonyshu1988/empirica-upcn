@@ -129,17 +129,17 @@ type
     DBMemo1: TDBMemo;
     DBCheckBox1: TDBCheckBox;
     Label23: TLabel;
-    DBEdit1: TDBEdit;
+    DBEditPrecioCostoNeto: TDBEdit;
     Label25: TLabel;
-    DBEdit3: TDBEdit;
+    DBEditCoefGanancia: TDBEdit;
     Label27: TLabel;
-    DBEdit5: TDBEdit;
+    DBEditImpuestoInterno: TDBEdit;
     Label24: TLabel;
-    DBEdit2: TDBEdit;
+    DBEditPrecioVenta: TDBEdit;
     Label26: TLabel;
-    DBEdit4: TDBEdit;
+    DBEditCoefDescuento: TDBEdit;
     Label28: TLabel;
-    DBEdit6: TDBEdit;
+    DBEditImpuestoIva: TDBEdit;
     PEdicion: TPanel;
     grupoAceptar: TBitBtn;
     grupoCancelar: TBitBtn;
@@ -248,6 +248,15 @@ type
     btnImprimirListado_Aceptar: TButton;
     btnImprimirListado_Salir: TButton;
     btBuscarEnGoogle: TdxBarLargeButton;
+    lblImpuesto_Adicional2: TLabel;
+    lblImpuesto_Adicional1: TLabel;
+    DBEditImpuestoAdicional2: TDBEdit;
+    DBEditImpuestoAdicional1: TDBEdit;
+    DBEditPrecioCostoCImpuestos: TDBEdit;
+    Label10: TLabel;
+    ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS: TFloatField;
+    ZQ_DetalleProductoIMPUESTO_ADICIONAL1: TFloatField;
+    ZQ_DetalleProductoIMPUESTO_ADICIONAL2: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -295,11 +304,15 @@ type
     procedure btnImprimirListadoClick(Sender: TObject);
     procedure btnImprimirListado_SalirClick(Sender: TObject);
     procedure btnImprimirListado_AceptarClick(Sender: TObject);
-    procedure DBEdit2Enter(Sender: TObject);
-    procedure DBEdit3Enter(Sender: TObject);
     procedure btBuscarEnGoogleClick(Sender: TObject);
+    procedure actualizarPrecios(llamador: string);
+    procedure ZQ_DetalleProductoIMPUESTO_IVAChange(Sender: TField);
+    procedure ZQ_DetalleProductoIMPUESTO_ADICIONAL1Change(Sender: TField);
+    procedure ZQ_DetalleProductoIMPUESTO_ADICIONAL2Change(Sender: TField);
+    procedure DBEditCoefGananciaEnter(Sender: TObject);
+    procedure DBEditPrecioVentaEnter(Sender: TObject);
   private
-    cambioAuto: string;  //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
+    campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
   public
     { Public declarations }
   end;
@@ -670,11 +683,14 @@ begin
   ZQ_DetalleProducto.Append;
   ZQ_DetalleProductoLLEVAR_STOCK.AsString:= 'S';
   ZQ_DetalleProductoPRECIO_COSTO.AsFloat:= 0;
+  ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS.AsFloat:= 0;
   ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= 0;
   ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:= 0;
   ZQ_DetalleProductoCOEF_DESCUENTO.AsFloat:= 0;
   ZQ_DetalleProductoIMPUESTO_INTERNO.AsFloat:= 0;
   ZQ_DetalleProductoIMPUESTO_IVA.AsFloat:= 0;
+  ZQ_DetalleProductoIMPUESTO_ADICIONAL1.AsFloat:= 0;
+  ZQ_DetalleProductoIMPUESTO_ADICIONAL2.AsFloat:= 0;
   ZQ_DetalleProductoSTOCK_MIN.AsFloat:= 0;
   ZQ_DetalleProductoSTOCK_MAX.AsFloat:= 0;
   ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
@@ -684,32 +700,36 @@ begin
   EKOrdenarDetalle.PopUpGrilla:=nil;
   grillaDetalle.Enabled:=False;
   GrupoEditando.Enabled:= false;
+
+  campoQueCambia:= '';
 end;
 
 
 procedure TFABMProductos.EditarDetalleClick(Sender: TObject);
 begin
   if ZQ_DetalleProducto.IsEmpty then
-   exit;
+    exit;
 
- if  (ZQ_ProductoCabecera.State <> dsedit) and (ZQ_ProductoCabecera.State <> dsinsert) then
-   exit;
+  if  (ZQ_ProductoCabecera.State <> dsedit) and (ZQ_ProductoCabecera.State <> dsinsert) then
+    exit;
 
-   PEdicion.Visible:=True;
-   PMedidas.Visible:=False;
-   EKOrdenarDetalle.PopUpGrilla:=nil;
-   grillaDetalle.Enabled:=false;
-   GrupoEditando.Enabled :=false;
-   ZQ_DetalleProducto.Edit;
-   LabelCodCorto.Enabled:= true;
-   EDDCODCORTO.Enabled := true;
+  PEdicion.Visible:=True;
+  PMedidas.Visible:=False;
+  EKOrdenarDetalle.PopUpGrilla:=nil;
+  grillaDetalle.Enabled:=false;
+  GrupoEditando.Enabled :=false;
+  ZQ_DetalleProducto.Edit;
+  LabelCodCorto.Enabled:= true;
+  EDDCODCORTO.Enabled := true;
+  
+  campoQueCambia:= '';
 end;
 
 
 procedure TFABMProductos.grupoAceptarClick(Sender: TObject);
   var
 codc,codb,descr,llevarStock:String;
-pc,pv,cg,cd,iint,iiva,smin,smax:Real;
+pc,pv,cg,cd,iint,iiva,smin,smax, iad1, iad2, pci:Real;
 begin
 
  //Si inserto uno nuevo genero un id nuevo y meto las medidas
@@ -723,11 +743,14 @@ begin
     codc:=ZQ_DetalleProductoCOD_CORTO.AsString;
     codb:=ZQ_DetalleProductoCODIGO_BARRA.AsString;
     pc:=ZQ_DetalleProductoPRECIO_COSTO.AsFloat;
+    pci:=ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS.AsFloat;
     pv:=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
     cg:=ZQ_DetalleProductoCOEF_GANANCIA.AsFloat;
     cd:=ZQ_DetalleProductoCOEF_DESCUENTO.AsFloat;
     iint:=ZQ_DetalleProductoIMPUESTO_INTERNO.AsFloat;
     iiva:=ZQ_DetalleProductoIMPUESTO_IVA.AsFloat;
+    iad1:=ZQ_DetalleProductoIMPUESTO_ADICIONAL1.AsFloat;
+    iad2:=ZQ_DetalleProductoIMPUESTO_ADICIONAL2.AsFloat;
     smin:=ZQ_DetalleProductoSTOCK_MIN.AsFloat;
     smax:=ZQ_DetalleProductoSTOCK_MAX.AsFloat;
     descr:=ZQ_DetalleProductoDESCRIPCION.AsString;
@@ -777,11 +800,14 @@ begin
         //ZQ_DetalleProductoCOD_CORTO.AsString:=codc;
         //ZQ_DetalleProductoCODIGO_BARRA.AsString:=codb;
         ZQ_DetalleProductoPRECIO_COSTO.AsFloat:=pc;
+        ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS.AsFloat:=pci;
         ZQ_DetalleProductoPRECIO_VENTA.AsFloat:=pv;
         ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:=cg;
         ZQ_DetalleProductoCOEF_DESCUENTO.AsFloat:=cd;
         ZQ_DetalleProductoIMPUESTO_INTERNO.AsFloat:=iint;
         ZQ_DetalleProductoIMPUESTO_IVA.AsFloat:=iiva;
+        ZQ_DetalleProductoIMPUESTO_ADICIONAL1.AsFloat:=iad1;
+        ZQ_DetalleProductoIMPUESTO_ADICIONAL2.AsFloat:=iad2;
         ZQ_DetalleProductoSTOCK_MIN.AsFloat:=smin;
         ZQ_DetalleProductoSTOCK_MAX.AsFloat:=smax;
         ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
@@ -995,54 +1021,6 @@ begin
 end;
 
 
-procedure TFABMProductos.ZQ_DetalleProductoPRECIO_COSTOChange(Sender: TField);
-begin
-  if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull)then
-  begin
-    cambioAuto:= 'PV';  //si cambio el precio de costo se cambia el precio de venta automaticamente
-    ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
-  end;
-end;
-
-
-procedure TFABMProductos.ZQ_DetalleProductoCOEF_GANANCIAChange(Sender: TField);
-begin
-  if cambioAuto = 'CG' then
-    exit;
-
-  if not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoCOEF_GANANCIA.IsNull) then
-  begin
-    cambioAuto:= 'PV';  //si cambio el coeficiente de ganancia se cambia el precio de venta automaticamente
-    ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat * (1 + ZQ_DetalleProductoCOEF_GANANCIA.AsFloat);
-  end;
-end;
-
-
-procedure TFABMProductos.ZQ_DetalleProductoPRECIO_VENTAChange(Sender: TField);
-begin
-  if cambioAuto = 'PV' then
-    exit;
-
-  if (not(ZQ_DetalleProductoPRECIO_COSTO.IsNull or ZQ_DetalleProductoPRECIO_VENTA.IsNull)) then
-  begin
-    cambioAuto:= 'CG';   //si cambio el precio de venta se cambia el coef  de ganancia automaticamente
-    ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:= (ZQ_DetalleProductoPRECIO_VENTA.AsFloat/ZQ_DetalleProductoPRECIO_COSTO.AsFloat) - 1;
-  end
-end;
-
-
-procedure TFABMProductos.DBEdit2Enter(Sender: TObject);
-begin
-  cambioAuto:= 'CG'; //cuando entro al campo precio de venta seteo que se tiene q cambiar el coef de ganancia
-end;
-
-
-procedure TFABMProductos.DBEdit3Enter(Sender: TObject);
-begin
-  cambioAuto:= 'PV'; //cuando entro al campo coef de gan seteo que se tiene q cambiar el precio de venta
-end;
-
-
 procedure TFABMProductos.cmbMarcaKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if key = 112 then
@@ -1240,6 +1218,86 @@ begin
 
   ShellExecute(self.handle, 'open', pchar('http://www.google.com.ar/#hl=es-419&q='+ZQ_ProductoCabeceraNOMBRE.AsString+'&oq'), nil, nil,
   SW_SHOWNORMAL);
+end;
+
+
+procedure TFABMProductos.actualizarPrecios(llamador: string);
+var
+  costo_neto, costo_con_impuestos, imp_adicional_1,
+  imp_adicional_2, imp_iva, coef_ganancia, precio_venta: double;
+begin
+  costo_neto:= ZQ_DetalleProductoPRECIO_COSTO.AsFloat;
+  costo_con_impuestos:= ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS.AsFloat;
+  imp_adicional_1:= ZQ_DetalleProductoIMPUESTO_ADICIONAL1.AsFloat;
+  imp_adicional_2:= ZQ_DetalleProductoIMPUESTO_ADICIONAL2.AsFloat;
+  imp_iva:= ZQ_DetalleProductoIMPUESTO_IVA.AsFloat;
+  coef_ganancia:= ZQ_DetalleProductoCOEF_GANANCIA.AsFloat;
+  precio_venta:= ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+
+  if llamador <> 'PRECIO_VENTA' then
+  begin
+    campoQueCambia:= 'PRECIO_VENTA';
+    costo_con_impuestos:= costo_neto + (costo_neto * (imp_adicional_1/100)) + (costo_neto * (imp_adicional_2/100)) + (costo_neto * (imp_iva/100));
+    precio_venta:= costo_con_impuestos * (1 + coef_ganancia);
+
+    ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS.AsFloat:= costo_con_impuestos;
+    ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= precio_venta;
+  end
+  else
+  begin
+    campoQueCambia:= 'COEF_GANANCIA';
+    coef_ganancia:= (precio_venta / costo_con_impuestos) - 1;
+    ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:= coef_ganancia;
+  end
+end;
+
+
+procedure TFABMProductos.ZQ_DetalleProductoPRECIO_COSTOChange(Sender: TField);
+begin
+  actualizarPrecios('PRECIO_COSTO');
+end;
+
+
+procedure TFABMProductos.ZQ_DetalleProductoCOEF_GANANCIAChange(Sender: TField);
+begin
+  if campoQueCambia <> 'COEF_GANANCIA' then
+    actualizarPrecios('COEF_GANANCIA');
+end;
+
+
+procedure TFABMProductos.ZQ_DetalleProductoPRECIO_VENTAChange(Sender: TField);
+begin
+  if campoQueCambia <> 'PRECIO_VENTA' then
+    actualizarPrecios('PRECIO_VENTA');
+end;
+
+
+procedure TFABMProductos.ZQ_DetalleProductoIMPUESTO_IVAChange(
+  Sender: TField);
+begin
+  actualizarPrecios('IMP_IVA');
+end;
+
+procedure TFABMProductos.ZQ_DetalleProductoIMPUESTO_ADICIONAL1Change(
+  Sender: TField);
+begin
+  actualizarPrecios('IMP_ADICIONAL1');
+end;
+
+procedure TFABMProductos.ZQ_DetalleProductoIMPUESTO_ADICIONAL2Change(
+  Sender: TField);
+begin
+  actualizarPrecios('IMP_ADICIONAL2');
+end;
+
+procedure TFABMProductos.DBEditCoefGananciaEnter(Sender: TObject);
+begin
+  campoQueCambia:= 'PRECIO_VENTA';
+end;
+
+procedure TFABMProductos.DBEditPrecioVentaEnter(Sender: TObject);
+begin
+  campoQueCambia:= 'COEF_GANANCIA';
 end;
 
 end.

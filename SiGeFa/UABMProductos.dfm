@@ -1536,7 +1536,7 @@ object FABMProductos: TFABMProductos
       Top = 341
       Width = 968
       Height = 222
-      ActivePage = tabCabecera
+      ActivePage = tabDetalle
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -2133,7 +2133,7 @@ object FABMProductos: TFABMProductos
                 object Label5: TLabel
                   Left = 3
                   Top = 3
-                  Width = 104
+                  Width = 132
                   Height = 13
                   Align = alTop
                   Alignment = taCenter
@@ -2181,11 +2181,11 @@ object FABMProductos: TFABMProductos
               TabOrder = 0
               object Label23: TLabel
                 Left = 8
-                Top = 25
-                Width = 72
+                Top = 14
+                Width = 102
                 Height = 13
-                Caption = 'Precio Costo'
-                FocusControl = DBEdit1
+                Caption = 'Precio Costo Neto'
+                FocusControl = DBEditPrecioCostoNeto
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -2194,12 +2194,12 @@ object FABMProductos: TFABMProductos
                 ParentFont = False
               end
               object Label25: TLabel
-                Left = 145
-                Top = 25
+                Left = 9
+                Top = 116
                 Width = 88
                 Height = 13
                 Caption = 'Coef. Ganancia'
-                FocusControl = DBEdit3
+                FocusControl = DBEditCoefGanancia
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -2209,11 +2209,11 @@ object FABMProductos: TFABMProductos
               end
               object Label27: TLabel
                 Left = 145
-                Top = 116
+                Top = 48
                 Width = 100
                 Height = 13
                 Caption = 'Impuesto Interno'
-                FocusControl = DBEdit5
+                FocusControl = DBEditImpuestoInterno
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -2222,12 +2222,12 @@ object FABMProductos: TFABMProductos
                 ParentFont = False
               end
               object Label24: TLabel
-                Left = 8
-                Top = 69
+                Left = 144
+                Top = 150
                 Width = 72
                 Height = 13
                 Caption = 'Precio Venta'
-                FocusControl = DBEdit2
+                FocusControl = DBEditPrecioVenta
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -2237,11 +2237,11 @@ object FABMProductos: TFABMProductos
               end
               object Label26: TLabel
                 Left = 145
-                Top = 69
+                Top = 116
                 Width = 95
                 Height = 13
                 Caption = 'Coef. Descuento'
-                FocusControl = DBEdit4
+                FocusControl = DBEditCoefDescuento
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -2251,11 +2251,11 @@ object FABMProductos: TFABMProductos
               end
               object Label28: TLabel
                 Left = 8
-                Top = 116
+                Top = 48
                 Width = 79
                 Height = 13
                 Caption = 'Impuesto IVA'
-                FocusControl = DBEdit6
+                FocusControl = DBEditImpuestoIva
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -2263,9 +2263,51 @@ object FABMProductos: TFABMProductos
                 Font.Style = []
                 ParentFont = False
               end
-              object DBEdit1: TDBEdit
+              object lblImpuesto_Adicional2: TLabel
+                Left = 145
+                Top = 83
+                Width = 118
+                Height = 13
+                Caption = 'impuesto Adicional 2'
+                FocusControl = DBEditImpuestoAdicional2
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = []
+                ParentFont = False
+              end
+              object lblImpuesto_Adicional1: TLabel
                 Left = 8
-                Top = 41
+                Top = 83
+                Width = 118
+                Height = 13
+                Caption = 'impuesto Adicional 1'
+                FocusControl = DBEditImpuestoAdicional1
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = []
+                ParentFont = False
+              end
+              object Label10: TLabel
+                Left = 8
+                Top = 150
+                Width = 117
+                Height = 13
+                Caption = 'Precio Costo C/Imp.'
+                FocusControl = DBEditPrecioCostoCImpuestos
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = []
+                ParentFont = False
+              end
+              object DBEditPrecioCostoNeto: TDBEdit
+                Left = 8
+                Top = 27
                 Width = 124
                 Height = 21
                 CharCase = ecUpperCase
@@ -2279,9 +2321,9 @@ object FABMProductos: TFABMProductos
                 ParentFont = False
                 TabOrder = 0
               end
-              object DBEdit3: TDBEdit
-                Left = 145
-                Top = 41
+              object DBEditCoefGanancia: TDBEdit
+                Left = 9
+                Top = 129
                 Width = 124
                 Height = 21
                 CharCase = ecUpperCase
@@ -2293,12 +2335,12 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 1
-                OnEnter = DBEdit3Enter
+                TabOrder = 5
+                OnEnter = DBEditCoefGananciaEnter
               end
-              object DBEdit5: TDBEdit
+              object DBEditImpuestoInterno: TDBEdit
                 Left = 145
-                Top = 128
+                Top = 60
                 Width = 124
                 Height = 21
                 CharCase = ecUpperCase
@@ -2310,11 +2352,11 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 5
+                TabOrder = 2
               end
-              object DBEdit2: TDBEdit
-                Left = 8
-                Top = 82
+              object DBEditPrecioVenta: TDBEdit
+                Left = 144
+                Top = 163
                 Width = 124
                 Height = 21
                 CharCase = ecUpperCase
@@ -2326,12 +2368,12 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 2
-                OnEnter = DBEdit2Enter
+                TabOrder = 8
+                OnEnter = DBEditPrecioVentaEnter
               end
-              object DBEdit4: TDBEdit
+              object DBEditCoefDescuento: TDBEdit
                 Left = 145
-                Top = 82
+                Top = 129
                 Width = 124
                 Height = 21
                 CharCase = ecUpperCase
@@ -2343,11 +2385,11 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
-                TabOrder = 3
+                TabOrder = 6
               end
-              object DBEdit6: TDBEdit
+              object DBEditImpuestoIva: TDBEdit
                 Left = 8
-                Top = 128
+                Top = 60
                 Width = 124
                 Height = 21
                 CharCase = ecUpperCase
@@ -2359,7 +2401,55 @@ object FABMProductos: TFABMProductos
                 Font.Name = 'Verdana'
                 Font.Style = [fsBold]
                 ParentFont = False
+                TabOrder = 1
+              end
+              object DBEditImpuestoAdicional2: TDBEdit
+                Left = 145
+                Top = 95
+                Width = 124
+                Height = 21
+                CharCase = ecUpperCase
+                DataField = 'IMPUESTO_ADICIONAL2'
+                DataSource = DS_DetalleProducto
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
+                ParentFont = False
                 TabOrder = 4
+              end
+              object DBEditImpuestoAdicional1: TDBEdit
+                Left = 8
+                Top = 95
+                Width = 124
+                Height = 21
+                CharCase = ecUpperCase
+                DataField = 'IMPUESTO_ADICIONAL1'
+                DataSource = DS_DetalleProducto
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 3
+              end
+              object DBEditPrecioCostoCImpuestos: TDBEdit
+                Left = 8
+                Top = 163
+                Width = 124
+                Height = 21
+                CharCase = ecUpperCase
+                DataField = 'PRECIO_COSTO_CIMPUESTOS'
+                DataSource = DS_DetalleProducto
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 7
               end
             end
           end
@@ -3505,6 +3595,7 @@ object FABMProductos: TFABMProductos
     end
     object ZQ_DetalleProductoIMPUESTO_IVA: TFloatField
       FieldName = 'IMPUESTO_IVA'
+      OnChange = ZQ_DetalleProductoIMPUESTO_IVAChange
     end
     object ZQ_DetalleProductoCOD_CORTO: TStringField
       FieldName = 'COD_CORTO'
@@ -3531,6 +3622,18 @@ object FABMProductos: TFABMProductos
     object ZQ_DetalleProductoLLEVAR_STOCK: TStringField
       FieldName = 'LLEVAR_STOCK'
       Size = 1
+    end
+    object ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS: TFloatField
+      FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+      ReadOnly = True
+    end
+    object ZQ_DetalleProductoIMPUESTO_ADICIONAL1: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL1'
+      OnChange = ZQ_DetalleProductoIMPUESTO_ADICIONAL1Change
+    end
+    object ZQ_DetalleProductoIMPUESTO_ADICIONAL2: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL2'
+      OnChange = ZQ_DetalleProductoIMPUESTO_ADICIONAL2Change
     end
   end
   object DS_DetalleProducto: TDataSource
