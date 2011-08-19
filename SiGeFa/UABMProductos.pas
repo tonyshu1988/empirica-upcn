@@ -576,16 +576,17 @@ end;
 
 procedure TFABMProductos.btnCancelarClick(Sender: TObject);
 begin
- if dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos) then
-  begin
-    Grilla.Enabled := true;
-    EKOrdenarDetalle.PopUpGrilla:=nil;
-    GrupoVisualizando.Enabled := true;
-    GrupoEditando.Enabled := false;
-    tabs.Enabled:= true;
-    PProducto.Enabled:=False;
-    PEdicion.Visible:=False;
-  end;
+  if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+   if dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos) then
+    begin
+      Grilla.Enabled := true;
+      EKOrdenarDetalle.PopUpGrilla:=nil;
+      GrupoVisualizando.Enabled := true;
+      GrupoEditando.Enabled := false;
+      tabs.Enabled:= true;
+      PProducto.Enabled:=False;
+      PEdicion.Visible:=False;
+    end;
 end;
 
 

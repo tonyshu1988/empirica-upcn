@@ -535,14 +535,15 @@ end;
 
 procedure TFABM_Personas.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABMPersona) then
-  begin
-    TabSheetDatos.Enabled:= false;
-    TabSheetCtaCte.Enabled:= false;
-    DBGridClientes.Enabled := true;
-    GrupoEditando.Enabled := true;
-    GrupoGuardarCancelar.Enabled := false;
-  end;
+  if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Personas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.cancelar_transaccion(transaccion_ABMPersona) then
+    begin
+      TabSheetDatos.Enabled:= false;
+      TabSheetCtaCte.Enabled:= false;
+      DBGridClientes.Enabled := true;
+      GrupoEditando.Enabled := true;
+      GrupoGuardarCancelar.Enabled := false;
+    end;
 end;
 
 

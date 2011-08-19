@@ -22,8 +22,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 462
+    Width = 854
+    Height = 456
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -31,16 +31,16 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 452
+      Width = 844
+      Height = 446
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
       object DBGridStock: TDBGrid
         Left = 0
         Top = 0
-        Width = 852
-        Height = 452
+        Width = 844
+        Height = 446
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
@@ -238,29 +238,29 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelAsociar: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 452
+      Width = 844
+      Height = 446
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Splitter1: TSplitter
         Left = 465
         Top = 21
-        Height = 431
+        Height = 425
       end
       object PanelAsociar_Producto: TPanel
         Left = 468
         Top = 21
-        Width = 384
-        Height = 431
+        Width = 376
+        Height = 425
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 384
-          Height = 431
+          Width = 376
+          Height = 425
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -355,7 +355,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 21
         Width = 465
-        Height = 431
+        Height = 425
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -363,7 +363,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Left = 0
           Top = 0
           Width = 465
-          Height = 431
+          Height = 425
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
@@ -390,7 +390,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 852
+        Width = 844
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -404,7 +404,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

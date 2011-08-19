@@ -1140,11 +1140,12 @@ end;
 
 procedure TFABM_Comprobantes.btnCancelarClick(Sender: TObject);
 begin
+  if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
-  begin
-    modoEdicion(false);
-    DBGridListaCpb.SetFocus;    
-  end;
+    begin
+      modoEdicion(false);
+      DBGridListaCpb.SetFocus;
+    end;
 end;
 
 
