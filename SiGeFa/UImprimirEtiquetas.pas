@@ -7,7 +7,8 @@ uses
   Dialogs, dxBar, dxBarExtItems, jpeg, QRCtrls, QuickRpt, StdCtrls,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Grids, DBGrids, ZStoredProcedure, UBuscarProducto,
-  ZSqlProcessor, EKVistaPreviaQR, EKListadoSQL, EKCodigoBarra;
+  ZSqlProcessor, EKVistaPreviaQR, EKListadoSQL, EKCodigoBarra,
+  EKOrdenarGrilla, Menus;
 
 type
   TFImprimirEtiquetas = class(TForm)
@@ -63,6 +64,11 @@ type
     EKCodigoBarra2: TEKCodigoBarra;
     EKCodigoBarra3: TEKCodigoBarra;
     btnEditar: TdxBarLargeButton;
+    Popup_Producto: TPopupMenu;
+    PopItemProducto_Agregar: TMenuItem;
+    PopItemProducto_Quitar: TMenuItem;
+    PopItemProducto_QuitarTodos: TMenuItem;
+    EKOrdenarGrilla: TEKOrdenarGrilla;
     procedure FormCreate(Sender: TObject);
     procedure DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -78,6 +84,9 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure agregarProducto();
     procedure cargarProductos();
+    procedure PopItemProducto_AgregarClick(Sender: TObject);
+    procedure PopItemProducto_QuitarClick(Sender: TObject);
+    procedure PopItemProducto_QuitarTodosClick(Sender: TObject);
   private
     vselProducto: TFBuscarProducto;
     procedure onSelProducto;
@@ -100,6 +109,7 @@ uses UDM, StrUtils, UPrincipal;
 
 procedure TFImprimirEtiquetas.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla.PopUpGrilla:= nil;
   GrupoEditando.Enabled:= False;
   GrupoVisualizando.Enabled:= True;
 
@@ -237,6 +247,8 @@ begin
 
   if dm.EKModelo.finalizar_transaccion(transaccion_Etiquetas) then
   begin
+    EKOrdenarGrilla.PopUpGrilla:= nil;
+
     DBGridEtiquetas.Enabled:= false;
 
     GrupoEditando.Enabled:= false;
@@ -280,6 +292,8 @@ begin
   if not dm.EKModelo.iniciar_transaccion(transaccion_Etiquetas, [ZQ_Etiquetas]) then
     exit;
 
+  EKOrdenarGrilla.PopUpGrilla:= Popup_Producto;
+
   DBGridEtiquetas.Enabled:= true;
   DBGridEtiquetas.SetFocus;
 
@@ -293,5 +307,33 @@ begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_Etiquetas);
 end;
 
+
+procedure TFImprimirEtiquetas.PopItemProducto_AgregarClick(
+  Sender: TObject);
+begin
+  agregarProducto;
+end;
+
+
+procedure TFImprimirEtiquetas.PopItemProducto_QuitarClick(Sender: TObject);
+begin
+  if not ZQ_Etiquetas.IsEmpty then
+    ZQ_Etiquetas.Delete;
+end;
+
+
+procedure TFImprimirEtiquetas.PopItemProducto_QuitarTodosClick(
+  Sender: TObject);
+begin
+  if (application.MessageBox(pchar('¿Seguro que desea eliminar todos los productos cargados'), 'ATENCION - Imprimir Etiquetas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+    exit;
+
+  if not ZQ_Etiquetas.IsEmpty then
+  begin
+    ZQ_Etiquetas.First;
+    while not ZQ_Etiquetas.Eof do
+      ZQ_Etiquetas.Delete;
+  end;
+end;
 
 end.
