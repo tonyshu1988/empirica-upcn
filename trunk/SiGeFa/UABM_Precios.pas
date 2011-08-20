@@ -680,7 +680,6 @@ begin
       FImprimirEtiquetas.btnEditar.Click;
     end;
   end;
-
 end;
 
 end.

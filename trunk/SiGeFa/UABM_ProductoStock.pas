@@ -8,7 +8,7 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZStoredProcedure, ZSqlUpdate,
   ZDataset, EKDBGrid, EKOrdenarGrilla, EKBusquedaAvanzada, Menus,
   EKListadoSQL, DBClient, UBuscarProducto, ZSqlProcessor, ActnList,
-  XPStyleActnCtrls, ActnMan;
+  XPStyleActnCtrls, ActnMan, StdCtrls, EKDbSuma;
 
 type
   TFABM_ProductoStock = class(TForm)
@@ -30,7 +30,7 @@ type
     ZU_Stock: TZUpdateSQL;
     DS_Stock: TDataSource;
     DBGridStock: TDBGrid;
-    EKOrdenarGrilla: TEKOrdenarGrilla;
+    EKOrdenarGrillaStock: TEKOrdenarGrilla;
     EKBuscarStock: TEKBusquedaAvanzada;
     PanelCarga: TPanel;
     PanelAsociar: TPanel;
@@ -102,6 +102,11 @@ type
     ZQ_StockCOLUMNA: TStringField;
     ZQ_StockPOSICSUCURSAL: TStringField;
     CD_Producto_color: TStringField;
+    PopItemProducto_QuitarTodos: TMenuItem;
+    EKOrdenarGrillaProducto: TEKOrdenarGrilla;
+    Panel2: TPanel;
+    lblResumen: TLabel;
+    EKDbSuma1: TEKDbSuma;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -125,12 +130,21 @@ type
     procedure AAsociarExecute(Sender: TObject);
     procedure AProcesarExecute(Sender: TObject);
     procedure btVolverClick(Sender: TObject);
+    procedure PopItemProducto_QuitarTodosClick(Sender: TObject);
+    procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure ZQ_StockAfterScroll(DataSet: TDataSet);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
+    procedure onSelTodosProducto;    
   public
     { Public declarations }
   end;
+
+type
+  THackDBGrid = class(TDBGrid);
+
 
 var
   FABM_ProductoStock: TFABM_ProductoStock;
@@ -147,7 +161,8 @@ uses UDM, UPrincipal;
 
 procedure TFABM_ProductoStock.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla.GuardarConfigColumnas;
+  EKOrdenarGrillaStock.GuardarConfigColumnas;
+  EKOrdenarGrillaProducto.GuardarConfigColumnas;
 end;
 
 
@@ -210,7 +225,6 @@ end;
 
 procedure TFABM_ProductoStock.btnSalirClick(Sender: TObject);
 begin
-  EKOrdenarGrilla.GuardarConfigColumnas;
   Close;
 end;
 
@@ -218,7 +232,10 @@ end;
 procedure TFABM_ProductoStock.FormCreate(Sender: TObject);
 begin
   PanelAsociar.Visible:= false;
-  EKOrdenarGrilla.CargarConfigColumnas;
+  lblResumen.Caption:= '';
+
+  EKOrdenarGrillaStock.CargarConfigColumnas;
+  EKOrdenarGrillaProducto.CargarConfigColumnas;
 
   CD_Sucursal.CreateDataSet;
   CD_Producto.CreateDataSet;
@@ -263,11 +280,48 @@ begin
 end;
 
 
+procedure TFABM_ProductoStock.onSelTodosProducto;
+begin
+  if not vsel.ZQ_Producto.IsEmpty then
+  begin
+    vsel.ZQ_Producto.First;
+    while not vsel.ZQ_Producto.Eof do
+    begin
+      CD_Producto.Filter:= 'idProducto = ' +  vsel.ZQ_ProductoID_PRODUCTO.AsString;
+      CD_Producto.Filtered := true;
+      if not CD_Producto.IsEmpty then //si el producto ya esta cargado, paso al proximo
+      begin
+        CD_Producto.Filtered := false;
+        vsel.ZQ_Producto.Next;
+      end;
+
+      CD_Producto.Filtered := false;
+      CD_Producto.Append;
+      CD_Producto_idProducto.AsInteger := vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
+      CD_Producto_producto.AsString := vsel.ZQ_ProductoNOMBRE.AsString;
+      CD_Producto_medida.AsString := vsel.ZQ_ProductoMEDIDA.AsString;
+      CD_Producto_color.AsString := vsel.ZQ_ProductoCOLOR.AsString;
+      CD_Producto_marca.AsString := vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
+      CD_Producto_tipoArticulo.AsString := vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
+      CD_Producto_articulo.AsString := vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
+      CD_Producto_codigoBarra.AsString := vsel.ZQ_ProductoCODIGO_BARRA.AsString;
+      CD_Producto_codCabecera.AsString := vsel.ZQ_ProductoCOD_CORTO.AsString;
+      CD_Producto_codProducto.AsString := vsel.ZQ_ProductoCOD_CORTO_1.AsString;
+
+      vsel.ZQ_Producto.Next;
+    end;
+  end;
+
+  vsel.Close;
+end;
+
 procedure TFABM_ProductoStock.PopItemProducto_AgregarClick(Sender: TObject);
 begin
   if not Assigned(vsel) then
     vsel:= TFBuscarProducto.Create(nil);
   vsel.OnSeleccionar := onSelProducto;
+  vsel.OnSeleccionarTodos := onSelTodosProducto;
+  vsel.btnSeleccionarTodos.Visible:= ivAlways;
   vsel.SeleccionarYSalir:= false;
   vsel.ShowModal;
 end;
@@ -277,6 +331,16 @@ procedure TFABM_ProductoStock.PopItemProducto_QuitarClick(Sender: TObject);
 begin
   if not CD_Producto.IsEmpty then
     CD_Producto.Delete;
+end;
+
+
+procedure TFABM_ProductoStock.PopItemProducto_QuitarTodosClick(  Sender: TObject);
+begin
+  if (application.MessageBox(pchar('¿Seguro que desea eliminar todos los productos cargados'), 'ATENCION - ABM Producto Stock', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+    exit;
+
+  if not CD_Producto.IsEmpty then
+    CD_Producto.EmptyDataSet;
 end;
 
 
@@ -439,6 +503,31 @@ if dm.EKModelo.verificar_transaccion(transaccion_Asociar) then
     btVolver.Enabled:=false;
   PanelAsociar.Visible:= false;
   PanelCarga.Visible:= true;
+end;
+
+
+procedure TFABM_ProductoStock.DBGridStockDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if (THackDBGrid(DBGridStock).DataLink.ActiveRecord + 1 = THackDBGrid(DBGridStock).Row) then
+  begin
+    DBGridStock.Canvas.Font.Color := clWhite;
+    DBGridStock.Canvas.Brush.Color := clBlack;
+    DBGridStock.Canvas.Font.Style := DBGridStock.Canvas.Font.Style + [fsBold];
+  end;
+
+  if (gdFocused in State) or (gdSelected in State) then
+  begin
+    DBGridStock.Canvas.Brush.Color := clRed;
+    DBGridStock.Canvas.Font.Style := DBGridStock.Canvas.Font.Style + [fsBold];
+  end;
+
+  DBGridStock.DefaultDrawColumnCell(Rect, DataCol, Column, state);
+end;
+
+procedure TFABM_ProductoStock.ZQ_StockAfterScroll(DataSet: TDataSet);
+begin
+  lblResumen.Caption:= 'Total Stock: '+FloatToStr(EKDbSuma1.SumCollection.Items[0].SumValue);
 end;
 
 end.

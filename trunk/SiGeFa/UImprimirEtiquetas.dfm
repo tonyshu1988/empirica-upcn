@@ -4469,4 +4469,60 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
     Left = 536
     Top = 144
   end
+  object Popup_Producto: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 48
+    Top = 141
+    object PopItemProducto_Agregar: TMenuItem
+      Caption = 'Agregar Producto'
+      ImageIndex = 14
+      OnClick = PopItemProducto_AgregarClick
+    end
+    object PopItemProducto_Quitar: TMenuItem
+      Caption = 'Quitar Producto'
+      ImageIndex = 15
+      OnClick = PopItemProducto_QuitarClick
+    end
+    object PopItemProducto_QuitarTodos: TMenuItem
+      Caption = 'Quitar Todos'
+      ImageIndex = 0
+      OnClick = PopItemProducto_QuitarTodosClick
+    end
+  end
+  object EKOrdenarGrilla: TEKOrdenarGrilla
+    Grilla = DBGridEtiquetas
+    Filtros = <
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'CodCortoProd'
+        Visible = True
+      end
+      item
+        TituloColumna = 'CodCortoCab'
+        Visible = True
+      end
+      item
+        TituloColumna = 'CodBarra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    PopUpGrilla = Popup_Producto
+    Left = 248
+    Top = 144
+  end
 end
