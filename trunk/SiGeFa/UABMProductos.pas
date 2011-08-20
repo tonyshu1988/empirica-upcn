@@ -344,7 +344,8 @@ end;
 
 procedure TFABMProductos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenar.GuardarConfigColumnas
+  EKOrdenar.GuardarConfigColumnas;
+  EKOrdenarDetalle.GuardarConfigColumnas;
 end;
 
 
@@ -356,6 +357,15 @@ end;
 
 procedure TFABMProductos.FormCreate(Sender: TObject);
 begin
+  EKOrdenar.CargarConfigColumnas;
+  EKOrdenarDetalle.CargarConfigColumnas;
+
+  lblImpuesto_Adicional1.Caption:= imp_ad1_nombre;
+  lblImpuesto_Adicional2.Caption:= imp_ad2_nombre;
+
+  grillaDetalle.Columns[GetIndexField(grillaDetalle, 'IMPUESTO_ADICIONAL1')].Title.Caption:= imp_ad1_nombre;
+  grillaDetalle.Columns[GetIndexField(grillaDetalle, 'IMPUESTO_ADICIONAL2')].Title.Caption:= imp_ad2_nombre;
+
   panelImprimirListado.Visible:= false;
   StaticTxtBaja.Color:= FPrincipal.baja;
 

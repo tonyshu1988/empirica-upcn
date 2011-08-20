@@ -424,7 +424,6 @@ begin
     btnSeleccionar.Caption:= 'Seleccionar';
     btnSeleccionar.Hint:= 'Seleccionar de la grilla los productos a actualizar';
     btnSeleccionar.ImageIndex:= 5;
-//    btnSeleccionar.AutoGrayScale := false;
   end
   else
   begin
@@ -432,7 +431,6 @@ begin
     btnSeleccionar.Caption:= 'Todos';
     btnSeleccionar.Hint:= 'Se actualizan todos los productos de la grilla';
     btnSeleccionar.ImageIndex:= 78;
-//    btnSeleccionar.AutoGrayScale := true;
   end;
 
   DBGridProductos.SetFocus;
@@ -557,6 +555,12 @@ end;
 
 procedure TFABM_Precios.FormCreate(Sender: TObject);
 begin
+  lblImpAdicional1.Caption:= imp_ad1_nombre+':';
+  lblImpAdicional2.Caption:= imp_ad2_nombre+':';
+
+  DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL1')].Title.Caption:= imp_ad1_nombre;
+  DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL2')].Title.Caption:= imp_ad2_nombre;
+
   CDSZQ_Productos.CreateDataSet;
   EKOrdenarGrilla1.CargarConfigColumnas;
   lblCantidadRegistros.Caption:= '';
@@ -669,7 +673,8 @@ begin
     while not(ZQ_Productos.Eof) do
     begin
       ZQ_ImprimirEtiquetas.Append;
-      ZQ_ImprimirEtiquetasID_PRODUCTO.AsInteger := ZQ_ProductosID_PRODUCTO.AsInteger;
+      ZQ_ImprimirEtiquetasID_PRODUCTO.AsInteger:= ZQ_ProductosID_PRODUCTO.AsInteger;
+      ZQ_ImprimirEtiquetasCANTIDAD.AsInteger:= 1;
       ZQ_ImprimirEtiquetas.Post;
       ZQ_Productos.Next;
     end;

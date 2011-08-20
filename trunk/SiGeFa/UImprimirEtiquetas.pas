@@ -325,15 +325,15 @@ end;
 procedure TFImprimirEtiquetas.PopItemProducto_QuitarTodosClick(
   Sender: TObject);
 begin
+  if ZQ_Etiquetas.IsEmpty then
+    exit;
+
   if (application.MessageBox(pchar('¿Seguro que desea eliminar todos los productos cargados'), 'ATENCION - Imprimir Etiquetas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
     exit;
 
-  if not ZQ_Etiquetas.IsEmpty then
-  begin
-    ZQ_Etiquetas.First;
-    while not ZQ_Etiquetas.Eof do
-      ZQ_Etiquetas.Delete;
-  end;
+  ZQ_Etiquetas.First;
+  while not ZQ_Etiquetas.Eof do
+   ZQ_Etiquetas.Delete;
 end;
 
 end.

@@ -14,7 +14,7 @@ type
   TFABM_ProductoStock = class(TForm)
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btVolver: TdxBarLargeButton;
+    btnVolver: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnProcesar: TdxBarLargeButton;
@@ -107,6 +107,7 @@ type
     Panel2: TPanel;
     lblResumen: TLabel;
     EKDbSuma1: TEKDbSuma;
+    AVolver: TAction;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -129,11 +130,12 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure AAsociarExecute(Sender: TObject);
     procedure AProcesarExecute(Sender: TObject);
-    procedure btVolverClick(Sender: TObject);
+    procedure btnVolverClick(Sender: TObject);
     procedure PopItemProducto_QuitarTodosClick(Sender: TObject);
     procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ZQ_StockAfterScroll(DataSet: TDataSet);
+    procedure AVolverExecute(Sender: TObject);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -336,11 +338,13 @@ end;
 
 procedure TFABM_ProductoStock.PopItemProducto_QuitarTodosClick(  Sender: TObject);
 begin
+  if CD_Producto.IsEmpty then
+    exit;
+
   if (application.MessageBox(pchar('¿Seguro que desea eliminar todos los productos cargados'), 'ATENCION - ABM Producto Stock', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
     exit;
 
-  if not CD_Producto.IsEmpty then
-    CD_Producto.EmptyDataSet;
+  CD_Producto.EmptyDataSet;
 end;
 
 
@@ -419,16 +423,21 @@ begin
 
     //finalizo la transaccion
     if DM.EKModelo.finalizar_transaccion(transaccion_Asociar) then
-      ShowMessage('La Asociación se realizó correctamente')
+    begin
+      ShowMessage('La Asociación se realizó correctamente');
+
+      CD_Sucursal.EmptyDataSet;
+      CD_Producto.EmptyDataSet;
+
+      GrupoEditando.Enabled:= true;
+      btnProcesar.Enabled:= false;
+      btnVolver.Enabled:=false;
+      PanelAsociar.Visible:= false;
+      PanelCarga.Visible:= true;
+    end
     else
       DM.EKModelo.cancelar_transaccion(transaccion_Asociar);
   end;
-
-  GrupoEditando.Enabled:= true;
-  btnProcesar.Enabled:= false;
-  btVolver.Enabled:=false;
-  PanelAsociar.Visible:= false;
-  PanelCarga.Visible:= true;
 end;
 
 
@@ -436,7 +445,7 @@ procedure TFABM_ProductoStock.btnAsociarClick(Sender: TObject);
 begin
   GrupoEditando.Enabled:= false;
   btnProcesar.Enabled:= true;
-  btVolver.Enabled:=True;
+  btnVolver.Enabled:=True;
   PanelAsociar.Visible:= true;
   PanelCarga.Visible:= false;
 end;
@@ -486,21 +495,31 @@ begin
   if btnProcesar.Enabled then
     btnProcesar.Click;
 end;
+
+procedure TFABM_ProductoStock.AVolverExecute(Sender: TObject);
+begin
+  if btnVolver.Enabled then
+    btnVolver.Click;
+end;
 //----------------------------------
 //  FIN TECLAS RAPIDAS
 //----------------------------------
 
 
-procedure TFABM_ProductoStock.btVolverClick(Sender: TObject);
+procedure TFABM_ProductoStock.btnVolverClick(Sender: TObject);
 begin
-if dm.EKModelo.verificar_transaccion(transaccion_Asociar) then
- dm.EKModelo.cancelar_transaccion(transaccion_Asociar);
- if not CD_Sucursal.IsEmpty then CD_Sucursal.EmptyDataSet;
- if not CD_Producto.IsEmpty then CD_Producto.EmptyDataSet;
+  if dm.EKModelo.verificar_transaccion(transaccion_Asociar) then
+    dm.EKModelo.cancelar_transaccion(transaccion_Asociar);
+
+  if not CD_Sucursal.IsEmpty then
+    CD_Sucursal.EmptyDataSet;
+
+  if not CD_Producto.IsEmpty then
+    CD_Producto.EmptyDataSet;
 
   GrupoEditando.Enabled:= true;
   btnProcesar.Enabled:= false;
-    btVolver.Enabled:=false;
+  btnVolver.Enabled:=false;
   PanelAsociar.Visible:= false;
   PanelCarga.Visible:= true;
 end;
@@ -529,5 +548,7 @@ procedure TFABM_ProductoStock.ZQ_StockAfterScroll(DataSet: TDataSet);
 begin
   lblResumen.Caption:= 'Total Stock: '+FloatToStr(EKDbSuma1.SumCollection.Items[0].SumValue);
 end;
+
+
 
 end.

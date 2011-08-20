@@ -88,6 +88,8 @@ var
   enviandoMail: boolean; //TRUE si se esta enviado un mail; FALSE en caso contrario
   sucursales: TEKArrayPermisos; //array de permisos valores que tiene un campo usuario y un campo valor
   TextoPieDePagina: string;
+  imp_ad1_nombre: string;  //nombre del label para el impuesto adicional 1 de los productos
+  imp_ad2_nombre: string;  //nombre del label para el impuesto adicional 2 de los productos
 
 Const
 //  TIPOS DE RELACION
@@ -143,6 +145,10 @@ begin
   enviandoMail:= false;          //setea la bandera en false indicando q no se esta enviando mail
   TextoPieDePagina:= 'Sistema Gestión y Facturación - '; //pie de pagina izquierdo de todos los reportes
   provinciaPorDefecto:= 1; //por ahora SANTA FE, despues se puede tomar de la configuracion
+
+  imp_ad1_nombre:= 'Per. IB';
+  imp_ad2_nombre:= 'Res. 3337';  
+
   //cargo la imagen de fondo del sistema
   EKIni.abrir;
   logo_fondo:= EKIni.Ini.ReadString('LOGO_FONDO', 'logo', '');

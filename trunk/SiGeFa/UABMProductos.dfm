@@ -1823,6 +1823,7 @@ object FABMProductos: TFABMProductos
               item
                 Expanded = False
                 FieldName = 'ID_PRODUCTO'
+                Title.Alignment = taCenter
                 Title.Caption = 'ID'
                 Visible = True
               end
@@ -1868,27 +1869,6 @@ object FABMProductos: TFABMProductos
               end
               item
                 Expanded = False
-                FieldName = 'PRECIO_VENTA'
-                Title.Alignment = taCenter
-                Title.Caption = 'Precio Venta'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'COEF_GANANCIA'
-                Title.Alignment = taCenter
-                Title.Caption = 'Ganancia'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'COEF_DESCUENTO'
-                Title.Alignment = taCenter
-                Title.Caption = 'Descuento'
-                Visible = True
-              end
-              item
-                Expanded = False
                 FieldName = 'IMPUESTO_INTERNO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Impuesto Interno'
@@ -1899,6 +1879,46 @@ object FABMProductos: TFABMProductos
                 FieldName = 'IMPUESTO_IVA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Impuesto IVA'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPUESTO_ADICIONAL1'
+                Title.Alignment = taCenter
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPUESTO_ADICIONAL2'
+                Title.Alignment = taCenter
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+                Title.Alignment = taCenter
+                Title.Caption = 'Precio Costo c/Imp.'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'COEF_GANANCIA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Coef. Ganancia'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'COEF_DESCUENTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Coef. Descuento'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'PRECIO_VENTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Precio Venta'
                 Visible = True
               end
               item
@@ -3529,10 +3549,11 @@ object FABMProductos: TFABMProductos
         TituloColumna = 'Descripci'#243'n'
         Visible = True
       end>
+    NombreGuardar = 'ABMProductos_Cabeceras'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
-    PermitirMover = False
+    PermitirMover = True
     PermitirFiltrar = True
     Left = 96
     Top = 96
@@ -4151,23 +4172,35 @@ object FABMProductos: TFABMProductos
         Visible = True
       end
       item
-        TituloColumna = 'Precio Venta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Ganancia'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Descuento'
-        Visible = True
-      end
-      item
         TituloColumna = 'Impuesto Interno'
         Visible = True
       end
       item
         TituloColumna = 'Impuesto IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IMPUESTO_ADICIONAL1'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IMPUESTO_ADICIONAL2'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Costo c/Imp.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Coef. Ganancia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Coef. Descuento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Venta'
         Visible = True
       end
       item
@@ -4182,6 +4215,7 @@ object FABMProductos: TFABMProductos
         TituloColumna = 'Llevar Stock'
         Visible = True
       end>
+    NombreGuardar = 'ABMProductos_Detalles'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True

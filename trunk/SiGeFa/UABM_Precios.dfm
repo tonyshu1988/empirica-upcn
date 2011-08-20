@@ -1522,6 +1522,7 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'COD_CORTO'
           ReadOnly = True
+          Title.Alignment = taCenter
           Title.Caption = 'Cod. Corto'
           Width = 88
           Visible = True
@@ -1530,6 +1531,7 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'NOMBRE_PRODUCTO'
           ReadOnly = True
+          Title.Alignment = taCenter
           Title.Caption = 'Nombre Producto'
           Width = 135
           Visible = True
@@ -1538,6 +1540,7 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'TIPO_ARTICULO'
           ReadOnly = True
+          Title.Alignment = taCenter
           Title.Caption = 'Tipo Articulo'
           Width = 89
           Visible = True
@@ -1546,6 +1549,7 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'ARTICULO'
           ReadOnly = True
+          Title.Alignment = taCenter
           Title.Caption = 'Articulo'
           Width = 83
           Visible = True
@@ -1554,6 +1558,7 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'MEDIDA'
           ReadOnly = True
+          Title.Alignment = taCenter
           Title.Caption = 'Medida'
           Width = 57
           Visible = True
@@ -1562,6 +1567,7 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'NOMBRE_MARCA'
           ReadOnly = True
+          Title.Alignment = taCenter
           Title.Caption = 'Marca'
           Width = 100
           Visible = True
@@ -1569,54 +1575,63 @@ object FABM_Precios: TFABM_Precios
         item
           Expanded = False
           FieldName = 'PRECIO_COSTO'
+          Title.Alignment = taCenter
           Title.Caption = 'Precio Costo'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'IMPUESTO_IVA'
+          Title.Alignment = taCenter
           Title.Caption = 'I.V.A.'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'IMPUESTO_INTERNO'
+          Title.Alignment = taCenter
           Title.Caption = 'Imp. Interno'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'IMPUESTO_ADICIONAL1'
+          Title.Alignment = taCenter
           Title.Caption = 'Imp. Adicional 1'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'IMPUESTO_ADICIONAL2'
+          Title.Alignment = taCenter
           Title.Caption = 'Imp. Adicional 2'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+          Title.Alignment = taCenter
           Title.Caption = 'Precio Costo c/Imp.'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'COEF_GANANCIA'
+          Title.Alignment = taCenter
           Title.Caption = 'Coef. Ganancia'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'COEF_DESCUENTO'
+          Title.Alignment = taCenter
           Title.Caption = 'Coef. Descuento'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'PRECIO_VENTA'
+          Title.Alignment = taCenter
           Title.Caption = 'Precio Venta'
           Visible = True
         end>
@@ -1733,6 +1748,7 @@ object FABM_Precios: TFABM_Precios
           Top = 22
           Width = 125
           Height = 13
+          Alignment = taRightJustify
           AutoSize = False
           Caption = 'Impuesto Adicional 1:'
         end
@@ -1741,6 +1757,7 @@ object FABM_Precios: TFABM_Precios
           Top = 22
           Width = 125
           Height = 13
+          Alignment = taRightJustify
           AutoSize = False
           Caption = 'Impuesto Adicional 2:'
         end
