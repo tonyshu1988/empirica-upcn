@@ -447,7 +447,7 @@ object FBusqueda: TFBusqueda
     Width = 100
     Height = 25
     Anchors = [akLeft, akBottom]
-    Caption = '&Cancelar (F3)'
+    Caption = '&Cancelar (Esc)'
     TabOrder = 4
     OnClick = SalirClick
   end
@@ -477,7 +477,7 @@ object FBusqueda: TFBusqueda
     end
     object ACancelar: TAction
       Caption = 'ACancelar'
-      ShortCut = 114
+      ShortCut = 27
       OnExecute = ACancelarExecute
     end
   end
