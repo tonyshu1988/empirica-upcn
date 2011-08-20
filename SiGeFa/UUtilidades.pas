@@ -3,7 +3,7 @@ unit UUtilidades;
 interface
 
 uses SysUtils, Math, ZDataset, DateUtils, Messages, Variants, Classes, Dialogs,
-     StdCtrls, DB, strutils, Jpeg, Graphics;
+     StdCtrls, DB, strutils, Jpeg, Graphics, DBGrids;
 
 
 function SonTodasLetras(cad:string):Boolean;
@@ -14,6 +14,8 @@ function rellenar(texto: string; caracter: Char; cantidad: integer):String;
 function Redondear(Valor: Real; Redondeo: Integer): Real;
 function EsEmailValido(const Value: String): boolean;
 function EsEmailValido2(email: string): boolean;
+function GetIndexField(grilla: TDBGrid; NombreCampo: string): Integer;
+function GetIndexTitle(grilla: TDBGrid; NombreTitulo: string): Integer;
 procedure Split(const Delimiter: Char; Input: string; const Strings: TStrings);
 
 implementation
@@ -342,6 +344,38 @@ begin
     dev:=texto;
 
    result:=dev;
+end;
+
+
+//devuelve el indice en la grilla de la columna pasada como parametro
+function GetIndexField(grilla: TDBGrid; NombreCampo: string): Integer;
+var
+  i: Integer;
+begin
+  Result:= -1;
+
+  for i:= 0 to grilla.Columns.Count -1 do
+    if NombreCampo = grilla.Columns[i].FieldName then
+    begin
+      Result:= i;
+      Exit;
+    end;
+end;
+
+
+//devuelve el indice en la grilla de la columna pasada como parametro
+function GetIndexTitle(grilla: TDBGrid; NombreTitulo: string): Integer;
+var
+  i: Integer;
+begin
+  Result:= -1;
+
+  for i:= 0 to grilla.Columns.Count -1 do
+    if NombreTitulo = grilla.Columns[i].Title.Caption then
+    begin
+      Result:= i;
+      Exit;
+    end;
 end;
 
 end.

@@ -32,7 +32,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
-      FixedColor = 14145495
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET
@@ -1012,46 +1011,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object EKBuscarStock: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Sucursal'
-        Campo = 'nombre'
-        Tabla = 'sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Secci'#243'n'
-        Campo = 'Seccion'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Sector'
-        Campo = 'sector'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Fila'
-        Campo = 'Fila'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Columna'
-        Campo = 'columna'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
         Titulo = 'C'#243'd. Barra'
         Campo = 'codigo_barra'
         Tabla = 'producto'
@@ -1076,7 +1035,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         ItemIndex = -1
       end
       item
-        Titulo = 'Producto'
+        Titulo = 'Nombre Producto'
         Campo = 'nombre'
         Tabla = 'producto_cabecera'
         TipoCampoIndiceVer = 'Contiene'
@@ -1139,6 +1098,46 @@ object FBuscarProductoStock: TFBuscarProductoStock
         Tabla = 'stock_producto'
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'nombre'
+        Tabla = 'sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Secci'#243'n'
+        Campo = 'Seccion'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sector'
+        Campo = 'sector'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fila'
+        Campo = 'Fila'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Columna'
+        Campo = 'columna'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         ItemIndex = -1
       end>

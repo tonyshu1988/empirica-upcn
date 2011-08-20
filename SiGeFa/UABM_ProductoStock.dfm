@@ -28,171 +28,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
     BevelOuter = bvNone
     BorderWidth = 5
     TabOrder = 4
-    object PanelAsociar: TPanel
-      Left = 5
-      Top = 5
-      Width = 844
-      Height = 446
-      Align = alClient
-      BevelOuter = bvNone
-      TabOrder = 1
-      object Splitter1: TSplitter
-        Left = 465
-        Top = 21
-        Height = 425
-      end
-      object PanelAsociar_Producto: TPanel
-        Left = 468
-        Top = 21
-        Width = 376
-        Height = 425
-        Align = alClient
-        BevelOuter = bvNone
-        TabOrder = 0
-        object DBGridProducto: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 376
-          Height = 425
-          Align = alClient
-          Color = 13431031
-          DataSource = DS_Producto
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          PopupMenu = Popup_Producto
-          ReadOnly = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = 'codProducto'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Producto'
-              Width = 88
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'producto'
-              Title.Alignment = taCenter
-              Title.Caption = 'Producto'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'medida'
-              Title.Alignment = taCenter
-              Title.Caption = 'Medida'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'color'
-              Title.Alignment = taCenter
-              Title.Caption = 'Color'
-              Width = 128
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'marca'
-              Title.Alignment = taCenter
-              Title.Caption = 'Marca'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'tipoArticulo'
-              Title.Alignment = taCenter
-              Title.Caption = 'Tipo Art'#237'culo'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'articulo'
-              Title.Alignment = taCenter
-              Title.Caption = 'Art'#237'culo'
-              Width = 100
-              Visible = True
-            end
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = 'codigoBarra'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Barra'
-              Width = 100
-              Visible = True
-            end
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = 'codCabecera'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Cabecera'
-              Width = 100
-              Visible = True
-            end>
-        end
-      end
-      object PanelAsociar_Sucursal: TPanel
-        Left = 0
-        Top = 21
-        Width = 465
-        Height = 425
-        Align = alLeft
-        BevelOuter = bvNone
-        TabOrder = 1
-        object DBGridSucursal: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 465
-          Height = 425
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_Sucursal
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          PopupMenu = Popup_Sucursal
-          ReadOnly = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'nombre'
-              Title.Alignment = taCenter
-              Title.Caption = 'Sucursal'
-              Width = 475
-              Visible = True
-            end>
-        end
-      end
-      object Panel1: TPanel
-        Left = 0
-        Top = 0
-        Width = 844
-        Height = 21
-        Align = alTop
-        BevelOuter = bvNone
-        Caption = 
-          'ASOCIAR LOS PRODUCTOS PERTENECIENTES A CADA UNA DE LAS SUCURSALE' +
-          'S'
-        TabOrder = 2
-      end
-    end
     object PanelCarga: TPanel
       Left = 5
       Top = 5
@@ -205,7 +40,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 0
         Width = 844
-        Height = 405
+        Height = 421
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
@@ -402,16 +237,16 @@ object FABM_ProductoStock: TFABM_ProductoStock
       end
       object Panel2: TPanel
         Left = 0
-        Top = 405
+        Top = 421
         Width = 844
-        Height = 41
+        Height = 25
         Align = alBottom
         TabOrder = 1
         object lblResumen: TLabel
           Left = 1
           Top = 1
           Width = 842
-          Height = 15
+          Height = 14
           Align = alTop
           Alignment = taCenter
           Caption = 'lblResumen'
@@ -422,6 +257,171 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Font.Style = [fsBold]
           ParentFont = False
         end
+      end
+    end
+    object PanelAsociar: TPanel
+      Left = 5
+      Top = 5
+      Width = 844
+      Height = 446
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 1
+      object Splitter1: TSplitter
+        Left = 423
+        Top = 21
+        Height = 425
+      end
+      object PanelAsociar_Producto: TPanel
+        Left = 426
+        Top = 21
+        Width = 418
+        Height = 425
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGridProducto: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 418
+          Height = 425
+          Align = alClient
+          Color = 13431031
+          DataSource = DS_Producto
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Producto
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codProducto'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Producto'
+              Width = 88
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'producto'
+              Title.Alignment = taCenter
+              Title.Caption = 'Producto'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'medida'
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'color'
+              Title.Alignment = taCenter
+              Title.Caption = 'Color'
+              Width = 128
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'marca'
+              Title.Alignment = taCenter
+              Title.Caption = 'Marca'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'tipoArticulo'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo Art'#237'culo'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'articulo'
+              Title.Alignment = taCenter
+              Title.Caption = 'Art'#237'culo'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codigoBarra'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Barra'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codCabecera'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Cabecera'
+              Width = 100
+              Visible = True
+            end>
+        end
+      end
+      object PanelAsociar_Sucursal: TPanel
+        Left = 0
+        Top = 21
+        Width = 423
+        Height = 425
+        Align = alLeft
+        BevelOuter = bvNone
+        TabOrder = 1
+        object DBGridSucursal: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 423
+          Height = 425
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_Sucursal
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Sucursal
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'nombre'
+              Title.Alignment = taCenter
+              Title.Caption = 'Sucursal'
+              Width = 475
+              Visible = True
+            end>
+        end
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 844
+        Height = 21
+        Align = alTop
+        BevelOuter = bvNone
+        Caption = 
+          'ASOCIAR LOS PRODUCTOS PERTENECIENTES A CADA UNA DE LAS SUCURSALE' +
+          'S'
+        TabOrder = 2
       end
     end
   end
@@ -548,7 +548,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Visible = True
           end
           item
-            Item = btVolver
+            Item = btnVolver
             Visible = True
           end
           item
@@ -890,15 +890,15 @@ object FABM_ProductoStock: TFABM_ProductoStock
       OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object btVolver: TdxBarLargeButton
+    object btnVolver: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Volver'
+      Caption = 'F9 - Volver'
       Category = 0
       Enabled = False
-      Hint = 'Volver'
+      Hint = 'Cancelar la asociaci'#243'n y volver a la pantalla de stock'
       Visible = ivAlways
-      ImageIndex = 69
-      OnClick = btVolverClick
+      ImageIndex = 67
+      OnClick = btnVolverClick
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
@@ -981,7 +981,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnBuscar'
-        'btVolver'
+        'btnVolver'
         'btnNuevo'
         'btnModificar'
         'btnAsociar'
@@ -1276,46 +1276,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object EKBuscarStock: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Sucursal'
-        Campo = 'nombre'
-        Tabla = 'sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Secci'#243'n'
-        Campo = 'Seccion'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Sector'
-        Campo = 'sector'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Fila'
-        Campo = 'Fila'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Columna'
-        Campo = 'columna'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        ItemIndex = -1
-      end
-      item
         Titulo = 'C'#243'd. Barra'
         Campo = 'codigo_barra'
         Tabla = 'producto'
@@ -1340,7 +1300,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         ItemIndex = -1
       end
       item
-        Titulo = 'Producto'
+        Titulo = 'Nombre Producto'
         Campo = 'nombre'
         Tabla = 'producto_cabecera'
         TipoCampoIndiceVer = 'Contiene'
@@ -1403,6 +1363,46 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Tabla = 'stock_producto'
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'nombre'
+        Tabla = 'sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Secci'#243'n'
+        Campo = 'Seccion'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sector'
+        Campo = 'sector'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fila'
+        Campo = 'Fila'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Columna'
+        Campo = 'columna'
+        Tabla = 'posicion_sucursal'
+        TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         ItemIndex = -1
       end>
@@ -1717,6 +1717,11 @@ object FABM_ProductoStock: TFABM_ProductoStock
       Caption = 'AProcesar'
       ShortCut = 119
       OnExecute = AProcesarExecute
+    end
+    object AVolver: TAction
+      Caption = 'AVolver'
+      ShortCut = 120
+      OnExecute = AVolverExecute
     end
   end
   object EKOrdenarGrillaProducto: TEKOrdenarGrilla
