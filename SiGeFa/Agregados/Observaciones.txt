@@ -9,9 +9,14 @@ OK * Cajero, ver lo que va en negro en la forma de pago. Por ejemplo,
   y lo efectivo va en negro.
   
 ---------------------17/08/2011-------------------------------------------
+* ABM STOCK PRODUCTO: poner alguna forma para quitar un producto de una sucursal.
+
 OK * Agregar la carga de las fotos del producto desde un JPG
 
-* en la pantalla de ABM Precios poder imprimir las etiquetas de codigo de barra
+OK * Cajero: cuando selecciono la forma de pago que se cargue solo el importe
+con el restante a pagar.
+
+OK * en la pantalla de ABM Precios poder imprimir las etiquetas de codigo de barra
 directamente de los productos modificados.
 
 * Orden de compra, igual a la nota de pedido pero que tenga los precios de costo
@@ -19,19 +24,21 @@ y la asignacion de donde salio la plata para comprar la mercaderia. Productos y 
 cuando se guarda se pregunta si se quieren modificar los precios de costo de los productos.
 Permitir la carga del comprobante del banco de la transeferencia bancaria.
 
-OK* Agregar al producto 2 coeficientes de impuestos que son configurables las variables
+OK * Agregar al producto 2 coeficientes de impuestos que son configurables las variables
 dependiendo de cada negocio (Lopez: Percepcion IB 2.5% y Res. 3337 3%). 
 El precio de costo mas el coeficiente de ganancia + iva + estos dos impuestos
 conforman el precio de venta. Tenemos dos precios de costo uno con los impuestos incluidos
 y el otro con los impuestos incluidos
 
-* Cajero: Poner un hint en el edit donde se ingresan los codigo para que indique las diferentes
+OK * Cajero: Poner un hint en el edit donde se ingresan los codigo para que indique las diferentes
 formas de buscar.
 
-* Varieble configuracion que indique el tope de facturacion por ticket.
+
+OK * Varieble configuracion que indique el tope de facturacion por ticket.
 
 * Alerta de dias para la cuenta corriente. Cuando un cliente esta atrasado en una cancelacion de
-la facutra en 30 dias por ejemplo que avise y muestre los datos del cliente.
+la facutra en 30 dias por ejemplo que avise y muestre los datos del cliente. PROCEDURE LISTO, 
+FALTA IMPLEMENTARLO
 
 * Cuando un cliente se demora en un pago de la cuenta corriente permitir cobrar un porcentaje
 de recargo por ejemplo debe $50 pero como se atraso le cobro $60. Contemplar esa situacion.
@@ -40,8 +47,8 @@ de recargo por ejemplo debe $50 pero como se atraso le cobro $60. Contemplar esa
 incrementa el stock del zapato q se devolvio y como se decrementa el zapato que se llevo.
 Tambien ver el tema de los movimientos de las cuentas.
 
-* Juanma, ver si chequea q la cantidad se mayor a 0.
+OK * Juanma, ver si chequea q la cantidad se mayor a 0.
 
-* Busqueda de productos, poner un boton seleccionar todo.
+OK * Busqueda de productos, poner un boton seleccionar todo.
 
 * Tabla entidad_telefono para llevar varios telefonos de las empresas, personas, etc.
