@@ -981,11 +981,10 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnBuscar'
-        'btnVolver'
-        'btnNuevo'
         'btnModificar'
         'btnAsociar'
-        'btnImprimir')
+        'btnImprimir'
+        'btnSalir')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False

@@ -1023,8 +1023,8 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         Transparent = True
       end
       object Label4: TLabel
-        Left = 549
-        Top = 11
+        Left = 472
+        Top = 12
         Width = 208
         Height = 13
         Caption = 'Presione F1 para desplegar una lista'
@@ -1102,7 +1102,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       object DBLookupCBoxSuc: TDBLookupComboBox
         Left = 68
         Top = 9
-        Width = 469
+        Width = 400
         Height = 21
         DataField = 'ID_SUCURSAL'
         DataSource = DS_PosicionSucursal
