@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 207
-  Top = 120
+  Left = 190
+  Top = 42
   Width = 1004
   Height = 713
   Caption = 'Cajero SiGeFa'
@@ -853,15 +853,6 @@ object FCajero: TFCajero
             ParentFont = False
             ReadOnly = True
             TabOrder = 1
-          end
-          object Button1: TButton
-            Left = 48
-            Top = 40
-            Width = 75
-            Height = 25
-            Caption = 'Prorrateo'
-            TabOrder = 2
-            OnClick = Button1Click
           end
         end
       end
@@ -4864,6 +4855,7 @@ object FCajero: TFCajero
     end
   end
   object DS_Sucursal: TDataSource
+    DataSet = DM.ZQ_Sucursal
     Left = 115
     Top = 153
   end

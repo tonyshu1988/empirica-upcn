@@ -343,7 +343,6 @@ type
     ZQ_FormasPagoIF: TStringField;
     ZQ_FormasPagoDESC_REC: TFloatField;
     ZQ_FormasPagoCOD_CORTO: TIntegerField;
-    Button1: TButton;
     ZQ_Comprobante_FormaPagoFECHA_FP: TDateTimeField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
@@ -455,6 +454,8 @@ begin
   DM.ZQ_Sucursal.Close;
   DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:=idSucursal;
   DM.ZQ_Sucursal.Open;
+  edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
+  DBImage1.BringToFront;
 end;
 
 procedure TFCajero.btsalirClick(Sender: TObject);
