@@ -71,6 +71,15 @@ type
     ZQ_TipoFPagoID_TIPO_FORMAPAGO: TIntegerField;
     ZQ_TipoFPagoDESCRIPCION: TStringField;
     ZQ_TipoFPagoBAJA: TStringField;
+    Label3: TLabel;
+    DBECodigo: TDBEdit;
+    Label2: TLabel;
+    DBEditDescRec: TDBEdit;
+    ZQ_TipoFPagoIF: TStringField;
+    ZQ_TipoFPagoDESC_REC: TFloatField;
+    ZQ_TipoFPagoCOD_CORTO: TIntegerField;
+    ZQ_UltimoNro: TZQuery;
+    ZQ_UltimoNroCOD_CORTO: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -112,6 +121,7 @@ uses UPrincipal, UDM;
 procedure TFABM_TipoFormaPago.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
 
@@ -136,8 +146,16 @@ begin
     DBGridTipoFPago.Enabled := false;
     PanelEdicion.Visible:= true;
 
+    ZQ_UltimoNro.Close;
+    ZQ_UltimoNro.Open;
+
     ZQ_TipoFPago.Append;
     ZQ_TipoFPagoBAJA.AsString:= 'N';
+    if ZQ_UltimoNro.IsEmpty then
+      ZQ_TipoFPagoCOD_CORTO.AsInteger:= 1
+    else
+      ZQ_TipoFPagoCOD_CORTO.AsInteger:= ZQ_UltimoNroCOD_CORTO.AsInteger + 1;
+
     DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -156,6 +174,16 @@ begin
     PanelEdicion.Visible:= true;
 
     ZQ_TipoFPago.Edit;
+    if ZQ_TipoFPagoCOD_CORTO.IsNull then
+    begin
+      ZQ_UltimoNro.Close;
+      ZQ_UltimoNro.Open;
+      if ZQ_UltimoNro.IsEmpty then
+        ZQ_TipoFPagoCOD_CORTO.AsInteger:= 1
+      else
+        ZQ_TipoFPagoCOD_CORTO.AsInteger:= ZQ_UltimoNroCOD_CORTO.AsInteger + 1;
+    end;
+
     DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -268,6 +296,8 @@ end;
 
 procedure TFABM_TipoFormaPago.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
+
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   EKBuscar.Abrir;

@@ -1,7 +1,7 @@
 object FABM_TipoFormaPago: TFABM_TipoFormaPago
-  Left = 349
-  Top = 218
-  Width = 870
+  Left = 279
+  Top = 137
+  Width = 806
   Height = 500
   Caption = 'ABM Tipo Forma Pago'
   Color = clBtnFace
@@ -22,7 +22,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 854
+    Width = 790
     Height = 391
     Align = alClient
     BevelOuter = bvNone
@@ -653,7 +653,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 854
+      Width = 790
       Height = 391
       Align = alClient
       BevelOuter = bvNone
@@ -668,8 +668,8 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       object DBGridTipoFPago: TDBGrid
         Left = 5
         Top = 5
-        Width = 844
-        Height = 348
+        Width = 780
+        Height = 325
         Align = alClient
         Color = 14606012
         DataSource = DS_TipoFPago
@@ -684,28 +684,78 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
         Columns = <
           item
             Expanded = False
+            FieldName = 'COD_CORTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'digo'
+            Width = 87
+            Visible = True
+          end
+          item
+            Expanded = False
             FieldName = 'DESCRIPCION'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Medio Pago'
-            Width = 700
+            Width = 356
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DESC_REC'
+            Title.Alignment = taCenter
+            Title.Caption = 'Descuento/Recargo'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'IF'
+            Title.Alignment = taCenter
+            Width = 27
             Visible = True
           end>
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 353
-        Width = 844
-        Height = 33
+        Top = 330
+        Width = 780
+        Height = 56
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
         Visible = False
         object Label1: TLabel
-          Left = 6
-          Top = 11
-          Width = 98
+          Left = 11
+          Top = 38
+          Width = 50
           Height = 13
-          Caption = 'Tipo Medio Pago:'
+          Caption = 'Nombre:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label3: TLabel
+          Left = 16
+          Top = 11
+          Width = 45
+          Height = 13
+          Caption = 'C'#243'digo:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label2: TLabel
+          Left = 467
+          Top = 38
+          Width = 117
+          Height = 13
+          Caption = 'Descuento/Recargo:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -715,9 +765,9 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           Transparent = True
         end
         object DBENombre: TDBEdit
-          Left = 108
-          Top = 7
-          Width = 469
+          Left = 63
+          Top = 33
+          Width = 386
           Height = 21
           CharCase = ecUpperCase
           DataField = 'DESCRIPCION'
@@ -728,7 +778,40 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
+          TabOrder = 1
+        end
+        object DBECodigo: TDBEdit
+          Left = 63
+          Top = 6
+          Width = 97
+          Height = 21
+          CharCase = ecUpperCase
+          Color = clMenuBar
+          DataField = 'COD_CORTO'
+          DataSource = DS_TipoFPago
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 0
+        end
+        object DBEditDescRec: TDBEdit
+          Left = 588
+          Top = 33
+          Width = 114
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'DESC_REC'
+          DataSource = DS_TipoFPago
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
         end
       end
     end
@@ -736,7 +819,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 790
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -757,7 +840,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 744
+      Left = 680
       Top = 1
       Width = 109
       Height = 17
@@ -1358,6 +1441,16 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       FieldName = 'BAJA'
       Size = 1
     end
+    object ZQ_TipoFPagoIF: TStringField
+      FieldName = 'IF'
+      Size = 1
+    end
+    object ZQ_TipoFPagoDESC_REC: TFloatField
+      FieldName = 'DESC_REC'
+    end
+    object ZQ_TipoFPagoCOD_CORTO: TIntegerField
+      FieldName = 'COD_CORTO'
+    end
   end
   object DS_TipoFPago: TDataSource
     DataSet = ZQ_TipoFPago
@@ -1368,14 +1461,27 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
     Grilla = DBGridTipoFPago
     Filtros = <
       item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
         TituloColumna = 'Tipo Medio Pago'
         Visible = True
+      end
+      item
+        TituloColumna = 'Descuento/Recargo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IF'
+        Visible = True
       end>
+    NombreGuardar = 'ABMTipoFPago'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
     PermitirMover = False
-    PermitirFiltrar = False
+    PermitirFiltrar = True
     Left = 48
     Top = 243
   end
@@ -1456,5 +1562,18 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
     ShowModal = False
     Left = 136
     Top = 128
+  end
+  object ZQ_UltimoNro: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select first 1 t.cod_corto'
+      'from tipo_formapago t'
+      'order by t.cod_corto desc')
+    Params = <>
+    Left = 136
+    Top = 187
+    object ZQ_UltimoNroCOD_CORTO: TIntegerField
+      FieldName = 'COD_CORTO'
+    end
   end
 end
