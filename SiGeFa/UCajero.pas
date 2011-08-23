@@ -1025,7 +1025,10 @@ begin
         ZQ_Comprobante_FormaPago.Append;
         ZQ_Comprobante_FormaPagoID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
         ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger := CD_FpagoID_TIPO_FORMAPAG.AsInteger;
-        ZQ_Comprobante_FormaPagoMDCP_FECHA.AsDateTime := CD_FpagoMDCP_FECHA.AsDateTime;
+        if CD_FpagoMDCP_FECHA.IsNull then
+           ZQ_Comprobante_FormaPagoMDCP_FECHA.Clear
+        else
+           ZQ_Comprobante_FormaPagoMDCP_FECHA.AsDateTime := CD_FpagoMDCP_FECHA.AsDateTime;
         ZQ_Comprobante_FormaPagoMDCP_BANCO.AsString := CD_FpagoMDCP_BANCO.AsString;
         ZQ_Comprobante_FormaPagoMDCP_CHEQUE.AsString := CD_FpagoMDCP_CHEQUE.AsString;
         ZQ_Comprobante_FormaPagoIMPORTE.AsFloat := CD_FpagoIMPORTE.AsFloat;
@@ -1157,7 +1160,8 @@ if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
       end;
 
    //Si es una sola forma de pago le pongo el valor del total por defecto
-      if ((acumulado>0)and((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat=0))) then
+      if ((acumulado>0)and((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat=0)))
+          and not(CD_FpagoID_TIPO_FORMAPAG.IsNull and CD_FpagoCUENTA_INGRESO.IsNull ) then
       begin
       CD_Fpago.Edit;
       CD_FpagoIMPORTE.AsFloat:=acumulado-acumFpago;

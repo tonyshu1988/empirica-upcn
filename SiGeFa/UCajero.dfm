@@ -1,5 +1,5 @@
 object FCajero: TFCajero
-  Left = 190
+  Left = 230
   Top = 42
   Width = 1004
   Height = 713
