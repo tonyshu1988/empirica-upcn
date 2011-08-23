@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 473
-  Top = 118
+  Left = 207
+  Top = 120
   Width = 1004
   Height = 713
   Caption = 'Cajero SiGeFa'
@@ -854,6 +854,15 @@ object FCajero: TFCajero
             ReadOnly = True
             TabOrder = 1
           end
+          object Button1: TButton
+            Left = 48
+            Top = 40
+            Width = 75
+            Height = 25
+            Caption = 'Prorrateo'
+            TabOrder = 2
+            OnClick = Button1Click
+          end
         end
       end
       object PanelCabeceraFactura: TPanel
@@ -1338,6 +1347,9 @@ object FCajero: TFCajero
     end
     object ZQ_Comprobante_FormaPagoCUENTA_EGRESO: TIntegerField
       FieldName = 'CUENTA_EGRESO'
+    end
+    object ZQ_Comprobante_FormaPagoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
     end
   end
   object DS_Comprobante_FormaPago: TDataSource
@@ -4298,6 +4310,16 @@ object FCajero: TFCajero
       FieldName = 'BAJA'
       Size = 1
     end
+    object ZQ_FormasPagoIF: TStringField
+      FieldName = 'IF'
+      Size = 1
+    end
+    object ZQ_FormasPagoDESC_REC: TFloatField
+      FieldName = 'DESC_REC'
+    end
+    object ZQ_FormasPagoCOD_CORTO: TIntegerField
+      FieldName = 'COD_CORTO'
+    end
   end
   object ZQ_Personas: TZQuery
     Connection = DM.Conexion
@@ -4684,9 +4706,12 @@ object FCajero: TFCajero
   object EK_ListadoMedCobroPago: TEKListadoSQL
     Modelo = DM.EKModelo
     SQL.Strings = (
-      'SELECT *'
-      'FROM TIPO_FORMAPAGO')
-    CampoBuscar = 'descripcion'
+      'SELECT tf.id_tipo_formapago,tf.descripcion||'#39' '#39'||'
+      '       COALESCE ('#39'| C'#243'digo: '#39' || tf.cod_corto,'#39#39')||'#39' '#39'||'
+      '       COALESCE ('#39'| Descuento: '#39' || tf.desc_rec,'#39#39') AS descr'
+      'FROM TIPO_FORMAPAGO tf'
+      'where tf.baja<>'#39'S'#39)
+    CampoBuscar = 'descr'
     CampoClave = 'id_tipo_formapago'
     TituloVentana = 'Forma de Pago'
     Left = 392
@@ -4839,7 +4864,6 @@ object FCajero: TFCajero
     end
   end
   object DS_Sucursal: TDataSource
-    DataSet = DM.ZQ_Sucursal
     Left = 115
     Top = 153
   end
