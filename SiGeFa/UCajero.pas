@@ -340,6 +340,11 @@ type
     lblMaxVenta: TLabel;
     RelojStock: TTimer;
     RelojMaximoV: TTimer;
+    ZQ_FormasPagoIF: TStringField;
+    ZQ_FormasPagoDESC_REC: TFloatField;
+    ZQ_FormasPagoCOD_CORTO: TIntegerField;
+    Button1: TButton;
+    ZQ_Comprobante_FormaPagoFECHA_FP: TDateTimeField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -388,6 +393,9 @@ type
     procedure FormShow(Sender: TObject);
     procedure RelojStockTimer(Sender: TObject);
     procedure RelojMaximoVTimer(Sender: TObject);
+    procedure cargarClientePorDefecto();
+    procedure Prorrateo();
+    procedure Button1Click(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -441,6 +449,8 @@ begin
 
   crearComprobante();
 
+  cargarClientePorDefecto();
+  
   //Logo de fondo si no tiene imagen el producto
   DM.ZQ_Sucursal.Close;
   DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:=idSucursal;
@@ -1122,7 +1132,10 @@ if (((sender as tdbgrid).SelectedField.FullName = 'CUENTA_INGRESO') or
             begin
                if EKListadoCuenta.Buscar then
                 if EKListadoCuenta.Resultado<>'' then
-                  CD_FpagoCUENTA_INGRESO.AsInteger:=StrToInt(EKListadoCuenta.Resultado);
+                  begin
+                    CD_Fpago.Edit;
+                    CD_FpagoCUENTA_INGRESO.AsInteger:=StrToInt(EKListadoCuenta.Resultado);
+                  end
             end
       end;
 
@@ -1133,16 +1146,33 @@ if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
             begin
                if EK_ListadoMedCobroPago.Buscar then
                 if EK_ListadoMedCobroPago.Resultado<>'' then
-                  CD_FpagoID_TIPO_FORMAPAG.AsInteger:=StrToInt(EK_ListadoMedCobroPago.Resultado);
+                 begin
+                    CD_Fpago.Edit;
+                    CD_FpagoID_TIPO_FORMAPAG.AsInteger:=StrToInt(EK_ListadoMedCobroPago.Resultado);
+                 end
             end;
 
-          //Si es una sola forma de pago le pongo el valor del total por defecto
-          if (acumulado>0)and((acumulado-acumFpago)>=0) then
-          begin
-          CD_Fpago.Edit;
-          CD_FpagoIMPORTE.AsFloat:=acumulado-acumFpago;
-          end
+
       end;
+
+   //Si es una sola forma de pago le pongo el valor del total por defecto
+      if ((acumulado>0)and((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat=0))) then
+      begin
+      CD_Fpago.Edit;
+      CD_FpagoIMPORTE.AsFloat:=acumulado-acumFpago;
+      CD_Fpago.Post;
+      end
+end;
+
+procedure TFCajero.cargarClientePorDefecto();
+begin
+  // Cargo Consumidor Final por defecto Id=0
+  ZQ_Personas.Locate('id_persona',0,[]);
+  Cliente:=ZQ_PersonasID_PERSONA.AsInteger;
+  ClienteIVA:=ZQ_PersonasID_TIPO_IVA.AsInteger;
+  CD_ComprobanteID_CLIENTE.AsInteger:=Cliente;
+  CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
+  descCliente:= 0;
 end;
 
 procedure TFCajero.OnSelPers;
@@ -1229,6 +1259,45 @@ end;
 procedure TFCajero.RelojMaximoVTimer(Sender: TObject);
 begin
   lblMaxVenta.Visible:=not(lblMaxVenta.Visible);
+end;
+
+procedure TFCajero.Prorrateo();
+var
+totalProds,totalFP,coefic:Double;
+cant:Integer;
+begin
+  //Can Productos
+  cant:=CD_DetalleFactura.RecordCount;
+  totalProds:=acumulado;
+  totalFP:=0;
+
+  CD_Fpago.First;
+  while not(CD_Fpago.Eof) do
+   begin
+      ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
+      if (ZQ_FormasPagoIF.AsString='S') then
+       totalFP:=totalFP + CD_FpagoIMPORTE.AsFloat;
+      CD_Fpago.Next;
+   end;
+   coefic:= totalFP/totalProds;
+   if (totalFP>0) then
+    begin
+      CD_DetalleFactura.First;
+       while not(CD_DetalleFactura.Eof) do
+       begin
+          CD_DetalleFactura.Edit;
+          CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=CD_DetalleFacturaIMPORTE_FINAL.AsFloat * coefic;
+          CD_DetalleFactura.Post;
+          CD_DetalleFactura.Next;
+       end;
+
+
+    end
+end;
+
+procedure TFCajero.Button1Click(Sender: TObject);
+begin
+Prorrateo();
 end;
 
 end.
