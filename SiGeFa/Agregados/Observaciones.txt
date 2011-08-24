@@ -1,4 +1,4 @@
-* Descuento para cada tipo de pago (Ej: EFECTIVO -10%, TARJETA +5%, etc).
+OK * Descuento para cada tipo de pago (Ej: EFECTIVO -10%, TARJETA +5%, etc).
 * Remitos con importe total (Indica el valor total de la mercaderia enviada).
 NO * Nota Pedido apaisada (pedir ejemplo).
 OK * Nota Pedido, una vez recibido el pedido se puede modificar y se confirma la recepcion.
