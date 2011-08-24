@@ -344,6 +344,14 @@ type
     ZQ_FormasPagoDESC_REC: TFloatField;
     ZQ_FormasPagoCOD_CORTO: TIntegerField;
     ZQ_Comprobante_FormaPagoFECHA_FP: TDateTimeField;
+    ZQ_Comprobante_FormaPagoIMPORTE_REAL: TFloatField;
+    ZQ_ComprobanteDetalleCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_ComprobanteDetalleCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_ComprobanteDetalleID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField;
+    CD_Fpago_desc_rec: TFloatField;
+    CD_Fpago_importeVenta: TFloatField;
+    EKDbSuma3: TEKDbSuma;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -394,7 +402,7 @@ type
     procedure RelojMaximoVTimer(Sender: TObject);
     procedure cargarClientePorDefecto();
     procedure Prorrateo();
-    procedure Button1Click(Sender: TObject);
+    procedure RecalcularMontoPago();
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -411,7 +419,7 @@ type
 
 var
   FCajero: TFCajero;
-  importeacob, punitoriosacob, acumulado, acumFpago: double;
+  importeacob, punitoriosacob, acumulado, acumFpago,acumFpagoReal: double;
   IdProd:String;
   cliente,IdVendedor,ClienteIVA,cajero,idSucursal:Integer;
   descCliente:double;
@@ -537,14 +545,14 @@ procedure TFCajero.BtAgregarPagoClick(Sender: TObject);
 begin
 if cliente<0 then
  begin
-   Application.MessageBox('Debe seleccionar el Cliente.', 'Atención');
+   //Application.MessageBox('Debe seleccionar el Cliente.', 'Atención');
    bt_BuscarCliente.Click;
    exit;
  end;
 
 if IdVendedor<0 then
  begin
-   Application.MessageBox('Debe seleccionar el Vendedor.', 'Atención');
+   //Application.MessageBox('Debe seleccionar el Vendedor.', 'Atención');
    btVendedorClick(self);
    exit;
  end;
@@ -873,6 +881,7 @@ begin
   punitoriosacob:=0;
   acumulado:=0;
   acumFpago:=0;
+  acumFpagoReal:=0;
   IdProd:='';
   edCantidad.AsInteger:=1;
   edDesc.AsFloat:=(descCliente*100);
@@ -883,7 +892,6 @@ begin
   EKDbSuma1.SumCollection[0].SumValue := 0;
   EKDbSuma2.SumCollection[0].SumValue := 0;
   importe.Text := '';
-  acumFpago := 0;
   ImporteFpago.Text := '';
 
   CD_Comprobante.EmptyDataSet;
@@ -967,17 +975,7 @@ end;
 
 procedure TFCajero.EKDbSuma2SumListChanged(Sender: TObject);
 begin
-  acumFpago := EKDbSuma2.SumCollection[0].SumValue;
-  importeFpago.Text := FormatFloat('$ ##,###,##0.00 ', acumFpago);
-
-  if acumFpago>MONTO_MAX_VENTA then
-     RelojMaximoV.Enabled:=True
-  else
-    begin
-      lblMaxVenta.Visible:=False;
-      RelojMaximoV.Enabled:=False;
-    end
-
+  recalcularMontoPago();
 end;
 
 function TFCajero.validarFPago: Boolean;
@@ -997,6 +995,23 @@ begin
     result := false;
     exit;
   end;
+end;
+
+procedure TFCajero.RecalcularMontoPago();
+begin
+
+  acumFpago := EKDbSuma2.SumCollection[0].SumValue;
+
+  acumFpagoReal :=EKDbSuma3.SumCollection[0].SumValue;
+  importeFpago.Text := FormatFloat('$ ##,###,##0.00 ', acumFpagoReal);
+
+  if acumFpagoReal>MONTO_MAX_VENTA then
+     RelojMaximoV.Enabled:=True
+  else
+    begin
+      lblMaxVenta.Visible:=False;
+      RelojMaximoV.Enabled:=False;
+    end
 end;
 
 
@@ -1129,8 +1144,10 @@ if (((sender as tdbgrid).SelectedField.FullName = 'CUENTA_INGRESO') or
             begin
                CD_Fpago.Edit;
                ZQ_ListadoCuenta.Locate('id_cuenta',CD_FpagoCUENTA_INGRESO.AsInteger,[]);
-               CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
+               if CD_FpagoID_TIPO_FORMAPAG.IsNull then
+                  CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
                CD_Fpago_esCtaCorr.AsString:=ZQ_ListadoCuentaA_CTA_CORRIENTE.Asstring;
+               CD_Fpago.Post;
             end
           else
             begin
@@ -1139,6 +1156,7 @@ if (((sender as tdbgrid).SelectedField.FullName = 'CUENTA_INGRESO') or
                   begin
                     CD_Fpago.Edit;
                     CD_FpagoCUENTA_INGRESO.AsInteger:=StrToInt(EKListadoCuenta.Resultado);
+                    CD_Fpago.Post;
                   end
             end
       end;
@@ -1153,6 +1171,7 @@ if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
                  begin
                     CD_Fpago.Edit;
                     CD_FpagoID_TIPO_FORMAPAG.AsInteger:=StrToInt(EK_ListadoMedCobroPago.Resultado);
+                    CD_Fpago.Post;
                  end
             end;
 
@@ -1163,10 +1182,16 @@ if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
       if ((acumulado>0)and((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat=0)))
           and not(CD_FpagoID_TIPO_FORMAPAG.IsNull and CD_FpagoCUENTA_INGRESO.IsNull ) then
       begin
-      CD_Fpago.Edit;
-      CD_FpagoIMPORTE.AsFloat:=acumulado-acumFpago;
-      CD_Fpago.Post;
-      end
+       CD_Fpago.edit;
+        CD_FpagoIMPORTE.AsFloat:=acumulado-acumFpago;
+        CD_Fpago.Post;
+      end;
+
+    CD_Fpago.Edit;
+    CD_Fpago_importeVenta.AsFloat:=CD_FpagoIMPORTE.AsFloat + (CD_FpagoIMPORTE.AsFloat*CD_Fpago_desc_rec.AsFloat);
+    CD_Fpago.Post;
+    RecalcularMontoPago();
+
 end;
 
 procedure TFCajero.cargarClientePorDefecto();
@@ -1295,14 +1320,7 @@ begin
           CD_DetalleFactura.Post;
           CD_DetalleFactura.Next;
        end;
-
-
     end
-end;
-
-procedure TFCajero.Button1Click(Sender: TObject);
-begin
-Prorrateo();
 end;
 
 end.
