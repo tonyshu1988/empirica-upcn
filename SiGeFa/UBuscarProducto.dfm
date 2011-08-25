@@ -1000,6 +1000,14 @@ object FBuscarProducto: TFBuscarProducto
         ItemIndex = -1
       end
       item
+        Titulo = 'Color'
+        Campo = 'nombre '
+        Tabla = 'color'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Marca'
         Campo = 'nombre_marca'
         Tabla = 'Marca'
@@ -1121,5 +1129,249 @@ object FBuscarProducto: TFBuscarProducto
       ShortCut = 27
       OnExecute = ASalirExecute
     end
+  end
+  object ZQ_ProductosProveedor: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select pc.nombre, pc.cod_corto, pr.id_producto, pr.cod_corto, pr' +
+        '.codigo_barra,'
+      '       pr.llevar_stock, md.medida, mc.nombre_marca, pc.baja,'
+      
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      
+        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
+        'ef_descuento,'
+      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
+      'from producto pr'
+      
+        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
+        'rod_cabecera)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join empresa_marca emk on (mc.id_marca = emk.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      'left join color co on (pc.color = co.id_color)'
+      'where pc.baja = '#39'N'#39
+      '  and emk.id_empresa = :id_empresa'
+      'order by pc.nombre, ta.descripcion, ar.descripcion')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_empresa'
+        ParamType = ptUnknown
+      end>
+    Left = 248
+    Top = 48
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_empresa'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ProductosProveedorNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 100
+    end
+    object ZQ_ProductosProveedorCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_ProductosProveedorID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+    object ZQ_ProductosProveedorCOD_CORTO_1: TStringField
+      FieldName = 'COD_CORTO_1'
+    end
+    object ZQ_ProductosProveedorCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ProductosProveedorLLEVAR_STOCK: TStringField
+      FieldName = 'LLEVAR_STOCK'
+      Size = 1
+    end
+    object ZQ_ProductosProveedorMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_ProductosProveedorNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_ProductosProveedorBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_ProductosProveedorNOMBRE_ARTICULO: TStringField
+      FieldName = 'NOMBRE_ARTICULO'
+      Size = 200
+    end
+    object ZQ_ProductosProveedorTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object ZQ_ProductosProveedorPRECIO_COSTO: TFloatField
+      FieldName = 'PRECIO_COSTO'
+    end
+    object ZQ_ProductosProveedorPRECIO_VENTA: TFloatField
+      FieldName = 'PRECIO_VENTA'
+    end
+    object ZQ_ProductosProveedorCOEF_GANANCIA: TFloatField
+      FieldName = 'COEF_GANANCIA'
+    end
+    object ZQ_ProductosProveedorCOEF_DESCUENTO: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+    end
+    object ZQ_ProductosProveedorIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_ProductosProveedorIMPUESTO_IVA: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+    object ZQ_ProductosProveedorCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
+  end
+  object EKBusquedaProductoEmpresa: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'd. Barra'
+        Campo = 'codigo_barra'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Producto'
+        Campo = 'nombre'
+        Tabla = 'producto_cabecera'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Medida'
+        Campo = 'medida'
+        Tabla = 'Medida'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Color'
+        Campo = 'nombre '
+        Tabla = 'color'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Marca'
+        Campo = 'nombre_marca'
+        Tabla = 'Marca'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'Tipo_Articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'Articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'producto_cabecera'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'NO'
+          'SI')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'N'
+          'S')
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_Producto
+    SQL.Strings = (
+      
+        'select pc.nombre, pc.cod_corto, pr.id_producto, pr.cod_corto, pr' +
+        '.codigo_barra,'
+      '       pr.llevar_stock, md.medida, mc.nombre_marca, pc.baja,'
+      
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      
+        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
+        'ef_descuento,'
+      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
+      'from producto pr'
+      
+        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
+        'rod_cabecera)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      'left join color co on (pc.color = co.id_color)'
+      'left join empresa_marca emk on (mc.id_marca = emk.id_marca)'
+      'where pc.baja = '#39'N'#39
+      'and emk.id_empresa = '
+      'order by pc.nombre, ta.descripcion, ar.descripcion')
+    SQL_Select.Strings = (
+      
+        'select pc.nombre, pc.cod_corto, pr.id_producto, pr.cod_corto, pr' +
+        '.codigo_barra,'
+      '       pr.llevar_stock, md.medida, mc.nombre_marca, pc.baja,'
+      
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      
+        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
+        'ef_descuento,'
+      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color')
+    SQL_From.Strings = (
+      'from producto pr'
+      
+        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
+        'rod_cabecera)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      'left join color co on (pc.color = co.id_color)'
+      'left join empresa_marca emk on (mc.id_marca = emk.id_marca)')
+    SQL_Where.Strings = (
+      'where pc.baja = '#39'N'#39
+      'and emk.id_empresa = ')
+    SQL_Orden.Strings = (
+      'order by pc.nombre, ta.descripcion, ar.descripcion')
+    UsarWhereOriginal = EK_Con_Where
+    Left = 248
+    Top = 104
   end
 end

@@ -19,7 +19,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     Top = 0
     Width = 977
     Height = 553
-    ActivePage = TabSheet6
+    ActivePage = TabSheet4
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -4942,7 +4942,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel59: TQRLabel
-            Left = 518
+            Left = 595
             Top = 1
             Width = 45
             Height = 14
@@ -4953,7 +4953,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1370.541666666667000000
+              1574.270833333333000000
               2.645833333333333000
               119.062500000000000000)
             Alignment = taRightJustify
@@ -4974,7 +4974,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel62: TQRLabel
-            Left = 567
+            Left = 518
             Top = 1
             Width = 72
             Height = 14
@@ -4985,7 +4985,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1500.187500000000000000
+              1370.541666666667000000
               2.645833333333333000
               190.500000000000000000)
             Alignment = taRightJustify
@@ -5190,9 +5190,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRlblPresupuesto_ImporteTotal: TQRLabel
-            Left = 408
+            Left = 136
             Top = 3
-            Width = 304
+            Width = 576
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -5201,9 +5201,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1079.500000000000000000
+              359.833333333333300000
               7.937500000000000000
-              804.333333333333300000)
+              1524.000000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -5435,7 +5435,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRDBText35: TQRDBText
-            Left = 518
+            Left = 595
             Top = 1
             Width = 45
             Height = 14
@@ -5446,7 +5446,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1370.541666666667000000
+              1574.270833333333000000
               2.645833333333333000
               119.062500000000000000)
             Alignment = taRightJustify
@@ -5468,7 +5468,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRDBText36: TQRDBText
-            Left = 567
+            Left = 518
             Top = 1
             Width = 72
             Height = 14
@@ -5479,7 +5479,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1500.187500000000000000
+              1370.541666666667000000
               2.645833333333333000
               190.500000000000000000)
             Alignment = taRightJustify
@@ -5521,7 +5521,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AutoStretch = False
             Color = clWhite
             DataSet = ZQ_Producto
-            DataField = 'BASE_IMPONIBLE'
+            DataField = 'IMPORTE_FINAL'
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -15212,8 +15212,12 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
   object EKDbSumaProducto: TEKDbSuma
     SumCollection = <
       item
-        Operacion = goCount
+        Operacion = goSum
         NombreCampo = 'CANTIDAD'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_FINAL'
       end>
     DataSet = ZQ_Producto
     Left = 44

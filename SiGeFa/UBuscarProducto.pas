@@ -46,6 +46,26 @@ type
     ZQ_ProductoCOLOR: TStringField;
     btnSeleccionarTodos: TdxBarLargeButton;
     ASelTodos: TAction;
+    ZQ_ProductosProveedor: TZQuery;
+    ZQ_ProductosProveedorNOMBRE: TStringField;
+    ZQ_ProductosProveedorCOD_CORTO: TStringField;
+    ZQ_ProductosProveedorID_PRODUCTO: TIntegerField;
+    ZQ_ProductosProveedorCOD_CORTO_1: TStringField;
+    ZQ_ProductosProveedorCODIGO_BARRA: TStringField;
+    ZQ_ProductosProveedorLLEVAR_STOCK: TStringField;
+    ZQ_ProductosProveedorMEDIDA: TStringField;
+    ZQ_ProductosProveedorNOMBRE_MARCA: TStringField;
+    ZQ_ProductosProveedorBAJA: TStringField;
+    ZQ_ProductosProveedorNOMBRE_ARTICULO: TStringField;
+    ZQ_ProductosProveedorTIPO_ARTICULO: TStringField;
+    ZQ_ProductosProveedorPRECIO_COSTO: TFloatField;
+    ZQ_ProductosProveedorPRECIO_VENTA: TFloatField;
+    ZQ_ProductosProveedorCOEF_GANANCIA: TFloatField;
+    ZQ_ProductosProveedorCOEF_DESCUENTO: TFloatField;
+    ZQ_ProductosProveedorIMPUESTO_INTERNO: TFloatField;
+    ZQ_ProductosProveedorIMPUESTO_IVA: TFloatField;
+    ZQ_ProductosProveedorCOLOR: TStringField;
+    EKBusquedaProductoEmpresa: TEKBusquedaAvanzada;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
@@ -56,6 +76,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnSeleccionarTodosClick(Sender: TObject);
+    procedure filtrarEmpresa(idEmpresa: integer);
   private
     { Private declarations }
   public
@@ -63,6 +84,7 @@ type
     OnSeleccionar : procedure() of object;
     OnSeleccionarTodos : procedure() of object;
     SeleccionarYSalir: boolean;
+    buscarDeEmpresas: boolean;
   end;
 
 var
@@ -79,10 +101,18 @@ begin
   close;
 end;
 
+procedure TFBuscarProducto.filtrarEmpresa(idEmpresa: integer);
+begin
+  buscarDeEmpresas:= true;
+  EKBusquedaProductoEmpresa.SQL_Where.ValueFromIndex[1]:= IntToStr(idEmpresa)//format('and emk.id_empresa = %d', [idEmpresa]);
+end;
 
 procedure TFBuscarProducto.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscarProducto.Buscar;
+  if buscarDeEmpresas then
+    EKBusquedaProductoEmpresa.Buscar
+  else
+    EKBuscarProducto.Buscar;
 end;
 
 
@@ -101,7 +131,10 @@ end;
 procedure TFBuscarProducto.FormActivate(Sender: TObject);
 begin
   if ZQ_Producto.IsEmpty then
+  begin
+    Application.ProcessMessages;
     btnBuscar.Click;
+  end;
 end;
 
 
@@ -129,6 +162,7 @@ end;
 procedure TFBuscarProducto.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla.CargarConfigColumnas;
+  buscarDeEmpresas:= false;
 end;
 
 

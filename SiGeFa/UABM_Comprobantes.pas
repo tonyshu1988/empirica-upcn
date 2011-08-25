@@ -94,16 +94,9 @@ type
     ZQ_VerCpbID_TIPO_CPB: TIntegerField;
     ZQ_VerCpbID_VENDEDOR: TIntegerField;
     ZQ_VerCpbID_COMP_ESTADO: TIntegerField;
-    ZQ_VerCpbCODIGO: TStringField;
     ZQ_VerCpbFECHA: TDateTimeField;
     ZQ_VerCpbOBSERVACION: TStringField;
-    ZQ_VerCpbBASE_IMPONIBLE: TFloatField;
-    ZQ_VerCpbSALDO: TFloatField;
     ZQ_VerCpbIMPORTE_TOTAL: TFloatField;
-    ZQ_VerCpbPORC_IVA: TFloatField;
-    ZQ_VerCpbIMPORTE_IVA: TFloatField;
-    ZQ_VerCpbPORC_DESCUENTO: TFloatField;
-    ZQ_VerCpbIMPORTE_DESCUENTO: TFloatField;
     ZQ_VerCpbENCABEZADO: TStringField;
     ZQ_VerCpbPIE: TStringField;
     ZQ_VerCpbFECHA_COBRADA: TDateField;
@@ -131,7 +124,6 @@ type
     ZQ_VerCpb_ProductoPORC_DESCUENTO: TFloatField;
     ZQ_VerCpb_ProductoBASE_IMPONIBLE: TFloatField;
     ZQ_VerCpb_ProductoIMPORTE_UNITARIO: TFloatField;
-    ZQ_VerCpb_ProductoIMPUESTO_INTERNO: TFloatField;
     ZQ_VerCpb_ProductoPORC_IVA: TFloatField;
     ZQ_VerCpb_ProductoCOD_CABECERA: TStringField;
     ZQ_VerCpb_ProductoPRODUCTO: TStringField;
@@ -169,8 +161,6 @@ type
     Label28: TLabel;
     Label27: TLabel;
     Label24: TLabel;
-    Label19: TLabel;
-    DBTxtSaldo: TDBText;
     DBTxtMonto: TDBText;
     DBText5: TDBText;
     DBText4: TDBText;
@@ -338,7 +328,6 @@ type
     ZQ_CpbProductoPORC_DESCUENTO: TFloatField;
     ZQ_CpbProductoBASE_IMPONIBLE: TFloatField;
     ZQ_CpbProductoIMPORTE_UNITARIO: TFloatField;
-    ZQ_CpbProductoIMPUESTO_INTERNO: TFloatField;
     ZQ_CpbProductoPORC_IVA: TFloatField;
     ZQ_Cuenta: TZQuery;
     DS_Cuenta: TDataSource;
@@ -403,7 +392,6 @@ type
     CD_Producto_precioVenta: TFloatField;
     CD_Producto_coefGanancia: TFloatField;
     CD_Producto_coefDescuento: TFloatField;
-    CD_Producto_impuestoInterno: TFloatField;
     CD_Producto_impuestoIVA: TFloatField;
     ZQ_CpbProducto_Nombre: TStringField;
     ZQ_CpbProducto_Medida: TStringField;
@@ -417,7 +405,6 @@ type
     ZQ_VerCpb_ProductoPRECIO_VENTA: TFloatField;
     ZQ_VerCpb_ProductoCOEF_GANANCIA: TFloatField;
     ZQ_VerCpb_ProductoCOEF_DESCUENTO: TFloatField;
-    ZQ_VerCpb_ProductoIMPUESTO_INTERNO_1: TFloatField;
     ZQ_VerCpb_ProductoIMPUESTO_IVA: TFloatField;
     ZQ_Imagen: TZQuery;
     DS_Imagen: TDataSource;
@@ -471,6 +458,10 @@ type
     btnConfirmar: TdxBarLargeButton;
     ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField;
     ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField;
+    lblCantidadProductos: TLabel;
+    EKSuma_Productos: TEKDbSuma;
+    EKOrd_EditarProducto: TEKOrdenarGrilla;
+    EKOrd_EditarFpago: TEKOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -533,6 +524,8 @@ type
       State: TGridDrawState);
     procedure DBGridEditar_ProductoKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure EKSuma_ProductosSumListChanged(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -552,6 +545,9 @@ type
   public
     { Public declarations }
   end;
+
+type
+  THackDBGrid = class(TDBGrid);
 
 var
   FABM_Comprobantes: TFABM_Comprobantes;
@@ -621,6 +617,12 @@ end;
 
 procedure TFABM_Comprobantes.FormCreate(Sender: TObject);
 begin
+  EKOrd_VerCpb.CargarConfigColumnas;
+  EKOrd_VerCpb_Fpago.CargarConfigColumnas;
+  EKOrd_VerCpb_Producto.CargarConfigColumnas;
+  EKOrd_EditarProducto.CargarConfigColumnas;
+  EKOrd_EditarFpago.CargarConfigColumnas;
+
   agrandarPanelFPago:=false;
   agrandarPanelProducto:=false;
 
@@ -789,7 +791,6 @@ begin
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_UNITARIO')].Visible:= true;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_DESCUENTO')].Visible:= true;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'BASE_IMPONIBLE')].Visible:= true;
-                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPUESTO_INTERNO')].Visible:= true;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_IVA')].Visible:= true;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_FINAL')].Visible:= true;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD_RECIBIDA')].Visible:= false;
@@ -798,7 +799,6 @@ begin
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_UNITARIO')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_DESCUENTO')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'BASE_IMPONIBLE')].Visible:= false;
-                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPUESTO_INTERNO')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_IVA')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_FINAL')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD_RECIBIDA')].Visible:= false;
@@ -807,13 +807,12 @@ begin
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_UNITARIO')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_DESCUENTO')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'BASE_IMPONIBLE')].Visible:= false;
-                        DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPUESTO_INTERNO')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'PORC_IVA')].Visible:= false;
                         DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'IMPORTE_FINAL')].Visible:= false;
                         if confirmarComprobante then
                           DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD_RECIBIDA')].Visible:= true
                         else
-                          DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD_RECIBIDA')].Visible:= false;                        
+                          DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD_RECIBIDA')].Visible:= false;
                       end;
   end;
 end;
@@ -895,10 +894,10 @@ begin
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - NUEVO';
     confirmarCpb(tipoComprobante);
 
-    ZP_CpbID.Active:=false;
-    ZP_CpbID.Active:=true;
+    ZP_CpbID.Active:= false;
+    ZP_CpbID.Active:= true;
     id_comprobante:= ZP_CpbIDID.AsInteger;
-    ZP_CpbID.Active:=false;
+    ZP_CpbID.Active:= false;
 
     ZQ_NumeroCpb.Close;
     ZQ_NumeroCpb.ParamByName('id_tipo').AsInteger:= tipoComprobante;
@@ -908,7 +907,7 @@ begin
     ZQ_ComprobanteID_COMPROBANTE.AsInteger:= id_comprobante;
     ZQ_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
     ZQ_ComprobanteID_TIPO_CPB.AsInteger:= tipoComprobante;
-//    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= 0;
+    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMADO;
 
     ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
     ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
@@ -1110,8 +1109,18 @@ begin
     ZQ_NumeroCpbULTIMO_NUMERO.AsInteger:= ZQ_ComprobanteNUMERO_CPB.AsInteger;
   end;
 
-  EKSuma_FPago.RecalcAll;
-  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue;
+  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= 0;
+  if (tipoComprobante = CPB_PRESUPUESTO) then
+  begin
+    EKSuma_Productos.RecalcAll;
+    ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
+  end
+  else
+    if (tipoComprobante = CPB_ORDEN_PAGO) or  (tipoComprobante = CPB_RECIBO_COBRO) then
+    begin
+      EKSuma_FPago.RecalcAll;
+      ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue;
+    end;
 
   if confirmarComprobante then
     ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO
@@ -1266,9 +1275,15 @@ begin
   configVisualizacion;
 
   if ZQ_VerCpbID_TIPO_CPB.AsInteger = CPB_NOTA_PEDIDO then
-    btnConfirmar.Visible:=  ivAlways
+  begin
+    btnConfirmar.Visible:=  ivAlways;
+    lblVerFecha_Cpb_Dev.Caption:= 'F. Confirm.:';
+  end
   else
+  begin
     btnConfirmar.Visible:=  ivNever;
+    lblVerFecha_Cpb_Dev.Caption:= 'F. Impreso:';
+  end
 end;
 
 
@@ -1393,28 +1408,13 @@ procedure TFABM_Comprobantes.DBGridEditar_FpagoColExit(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then //SI ESTOY DANDO DE ALTA O EDITANDO
   begin
-//    if ((sender as tdbgrid).SelectedField.FullName = 'ID_MEDIO') and (ZQ_Cuenta_MovimientoID_MEDIO.IsNull) then
-//      begin
-//        if EK_ListadoMedCobroPago.Buscar then
-//        begin
-//          ZQ_Cuenta_Movimiento.Edit;
-//          ZQ_Cuenta_MovimientoID_MEDIO.AsInteger := StrToInt(EK_ListadoMedCobroPago.Resultado);
-//        end
-//      end
-  end;
-end;
-
-
-procedure TFABM_Comprobantes.DBGridEditar_FpagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
-  begin
-    if key = 112 then
-    begin
-      //CUENTA DE INGRESO
+      //PARA LOS RECIBOS - CUENTA INGRESO
       if (((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Codigo') or
           ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre')) then
       begin
+        if (not ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull) or (tipoComprobante <> CPB_RECIBO_COBRO) then
+          exit;
+
         if EKListadoCuenta.Buscar then
         begin
           if EKListadoCuenta.Resultado <> '' then
@@ -1435,10 +1435,101 @@ begin
         end;
       end;
 
-      //CUENTA DE EGRESO
+      //ORDEN DE PAGO - CUENTA DE EGRESO
       if (((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Codigo') or
           ((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Nombre')) then
       begin
+        if (not ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull)  or (tipoComprobante <> CPB_ORDEN_PAGO) then
+          exit;
+
+        if EKListadoCuenta.Buscar then
+        begin
+          if EKListadoCuenta.Resultado <> '' then
+          begin
+            ZQ_ListadoCuenta.Close;
+            ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= StrToInt(EKListadoCuenta.Resultado);
+            ZQ_ListadoCuenta.Open;
+
+            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
+              ZQ_CpbFormaPago.Append //pongo en modo edicion
+            else
+              ZQ_CpbFormaPago.edit; //pongo en modo edicion
+
+            ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
+            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
+            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
+          end;
+        end;
+      end;
+
+      //MEDIO
+      if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
+      begin
+        if not ZQ_CpbFormaPagoID_TIPO_FORMAPAG.IsNull then
+          exit;
+
+        if EKListadoMedio.Buscar then
+        begin
+          if EKListadoMedio.Resultado <> '' then
+          begin
+            ZQ_ListadoMedio.Close;
+            ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= StrToInt(EKListadoMedio.Resultado);
+            ZQ_ListadoMedio.Open;
+
+            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
+              ZQ_CpbFormaPago.Append //pongo en modo edicion
+            else
+              ZQ_CpbFormaPago.edit; //pongo en modo edicion
+
+            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoMedioID_TIPO_FORMAPAGO.AsInteger;
+            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
+          end;
+        end;
+      end;
+  end;
+end;
+
+
+procedure TFABM_Comprobantes.DBGridEditar_FpagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  begin
+    if key = 112 then
+    begin
+      //PARA LOS RECIBOS - CUENTA INGRESO
+      if (((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Codigo') or
+          ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre')) then
+      begin
+        if (tipoComprobante <> CPB_RECIBO_COBRO) then
+          exit;
+
+        if EKListadoCuenta.Buscar then
+        begin
+          if EKListadoCuenta.Resultado <> '' then
+          begin
+            ZQ_ListadoCuenta.Close;
+            ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= StrToInt(EKListadoCuenta.Resultado);
+            ZQ_ListadoCuenta.Open;
+
+            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
+              ZQ_CpbFormaPago.Append //pongo en modo edicion
+            else
+              ZQ_CpbFormaPago.edit; //pongo en modo edicion
+
+            ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
+            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
+            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
+          end;
+        end;
+      end;
+
+      //ORDEN DE PAGO - CUENTA DE EGRESO
+      if (((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Codigo') or
+          ((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Nombre')) then
+      begin
+        if (tipoComprobante <> CPB_ORDEN_PAGO) then
+          exit;
+
         if EKListadoCuenta.Buscar then
         begin
           if EKListadoCuenta.Resultado <> '' then
@@ -1480,7 +1571,6 @@ begin
           end;
         end;
       end;
-
     end;
   end;
 end;
@@ -1494,36 +1584,41 @@ begin
       ZQ_CpbFormaPago.Delete;
 
     DBGridEditar_Fpago.SetFocus;
+    
+    EKSuma_FPago.RecalcAll;
   end;
 end;
 
 
 procedure TFABM_Comprobantes.DBGridEditar_FpagoKeyPress(Sender: TObject; var Key: Char);
+var
+  columna: string;
 begin
-  if ((sender as tdbgrid).SelectedField.FullName = 'IMPORTE') then
-  begin
-    if (Key = #13) or (key = #9) then  { if it's an enter key }
-    begin
-      Key := #0;  { eat enter key }
-      with TStringGrid(DBGridEditar_Fpago) do
-      begin
-        if tipoComprobante = CPB_RECIBO_COBRO then
-          Col := 0
-        else
-          if tipoComprobante = CPB_ORDEN_PAGO then
-            Col := 2;
-
-        SetFocus;
-      end;
-    end;
-  end;
+//  columna:= (sender as tdbgrid).SelectedField.FullName;
+//
+//  if (columna = 'IMPORTE') then
+//  begin
+//    if (Key = #13) or (key = #9) then  { if it's an enter key }
+//    begin
+//      Key := #0;  { eat enter key }
+//      with TStringGrid(DBGridEditar_Fpago) do
+//      begin
+//        if tipoComprobante = CPB_RECIBO_COBRO then
+//          Col := 0
+//        else
+//          if tipoComprobante = CPB_ORDEN_PAGO then
+//            Col := 2;
+//
+//        SetFocus;
+//      end;
+//    end;
+//  end;
 end;
 
 
 procedure TFABM_Comprobantes.EKSuma_FPagoSumListChanged(Sender: TObject);
 begin
-  if EKSuma_FPago.SumCollection[0].SumValue <> 0 then
-    lblTotalFormaPago.Caption := 'Total Forma de Pago: ' + FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
+  lblTotalFormaPago.Caption := 'Total Forma de Pago: ' + FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
 end;
 
 
@@ -1553,7 +1648,6 @@ begin
     CD_Producto_precioVenta.AsFloat := ZQ_VerCpb_ProductoPRECIO_VENTA.AsFloat;
     CD_Producto_coefGanancia.AsFloat := ZQ_VerCpb_ProductoCOEF_GANANCIA.AsFloat;
     CD_Producto_coefDescuento.AsFloat := ZQ_VerCpb_ProductoCOEF_DESCUENTO.AsFloat;
-    CD_Producto_impuestoInterno.AsFloat := ZQ_VerCpb_ProductoIMPUESTO_INTERNO.AsFloat;
     CD_Producto_impuestoIVA.AsFloat := ZQ_VerCpb_ProductoIMPUESTO_IVA.AsFloat;
 
     ZQ_VerCpb_Producto.Next;
@@ -1579,14 +1673,12 @@ begin
     CD_Producto_precioVenta.AsFloat := vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
     CD_Producto_coefGanancia.AsFloat := vselProducto.ZQ_ProductoCOEF_GANANCIA.AsFloat;
     CD_Producto_coefDescuento.AsFloat := vselProducto.ZQ_ProductoCOEF_DESCUENTO.AsFloat;
-    CD_Producto_impuestoInterno.AsFloat := vselProducto.ZQ_ProductoIMPUESTO_INTERNO.AsFloat;
     CD_Producto_impuestoIVA.AsFloat := vselProducto.ZQ_ProductoIMPUESTO_IVA.AsFloat;
 
     ZQ_CpbProducto.Append;
     ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
     ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
     ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
-    ZQ_CpbProductoIMPUESTO_INTERNO.AsFloat:= vselProducto.ZQ_ProductoIMPUESTO_INTERNO.AsFloat;
     ZQ_CpbProductoPORC_IVA.AsFloat:= vselProducto.ZQ_ProductoIMPUESTO_IVA.AsFloat;
     ZQ_CpbProductoPORC_DESCUENTO.AsFloat:= descuentoCliente;
     ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
@@ -1609,6 +1701,10 @@ procedure TFABM_Comprobantes.agregarProducto();
 begin
   if not Assigned(vselProducto) then
     vselProducto:= TFBuscarProducto.Create(nil);
+
+  if not ZQ_ComprobanteID_PROVEEDOR.IsNull then
+    vselProducto.filtrarEmpresa(ZQ_ComprobanteID_PROVEEDOR.AsInteger);
+
   vselProducto.OnSeleccionar := onSelProducto;
   vselProducto.SeleccionarYSalir:= true;
   vselProducto.ShowModal;
@@ -1674,7 +1770,9 @@ var
   final: double;
 begin
   if tipoComprobante <> CPB_PRESUPUESTO then
+  begin
     exit;
+  end;
 
   cantidad:= 0;
   precio_unitario:= 0;
@@ -1694,11 +1792,8 @@ begin
   if not ZQ_CpbProductoPORC_IVA.IsNull then
     iva:= ZQ_CpbProductoPORC_IVA.AsFloat;
 
-  if not ZQ_CpbProductoIMPUESTO_INTERNO.IsNull then
-    impuesto_interno:= ZQ_CpbProductoIMPUESTO_INTERNO.AsFloat;
-
-  imponible:= cantidad * (precio_unitario - (precio_unitario * coef_descuento));
-  final:= imponible;
+  imponible:= cantidad * precio_unitario;
+  final:= imponible - (imponible * coef_descuento);
 
   ZQ_CpbProductoBASE_IMPONIBLE.AsFloat:= imponible;
   ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= final;
@@ -1965,7 +2060,7 @@ begin
                         begin
                           PanelFechaEmision.Enabled:= true;
                           PanelFechaEnviado.Enabled:= true;
-                          DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD')].ReadOnly:= false;                          
+                          DBGridEditar_Producto.Columns[getColumnIndex(DBGridEditar_Producto, 'CANTIDAD')].ReadOnly:= false;
                         end;
                       end;
   end;
@@ -1980,25 +2075,33 @@ end;
 
 procedure TFABM_Comprobantes.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  DBGridListaCpb.Canvas.Font.Color:= clBlack;
+  DBGridListaCpb.Canvas.Font.Color := clBlack;
 
   if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ALMACENADO) then //si el registro esta dado de baja
   begin
     DBGridListaCpb.Canvas.Brush.Color:= $0098F8F3;
-    if (gdFocused in State) or (gdSelected in State) then
+
+    if (THackDBGrid(DBGridListaCpb).DataLink.ActiveRecord + 1 = THackDBGrid(DBGridListaCpb).Row) then
     begin
-      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
-      DBGridListaCpb.Canvas.Brush.Color:= $0062FFFF;
+      DBGridListaCpb.Canvas.Brush.Color := $0062FFFF;
+//      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
     end;
+
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
   end
   else  //si el registro es comun
   begin
     DBGridListaCpb.Canvas.Brush.Color:= $00DEDEBC;
-    if (gdFocused in State) or (gdSelected in State) then
+
+    if (THackDBGrid(DBGridListaCpb).DataLink.ActiveRecord + 1 = THackDBGrid(DBGridListaCpb).Row) then
     begin
-      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
-      DBGridListaCpb.Canvas.Brush.Color:= $00E8C08C;
+      DBGridListaCpb.Canvas.Brush.Color := $00E8C08C;
+//      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
     end;
+
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
   end;
 
   DBGridListaCpb.DefaultDrawColumnCell(rect,datacol,column,state);
@@ -2007,7 +2110,39 @@ end;
 
 //Para renombrar el procedimiento Ctrl+Del que viene por defecto en las grillas
 procedure TFABM_Comprobantes.DBGridEditar_ProductoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  columna: string;
 begin
+  columna:= (sender as tdbgrid).SelectedField.FullName;
+
+  if (Key = 13) or (key = 9) then  { if it's an enter key }
+  begin
+    Key := 0; {ignore}
+    if (columna = 'IMPORTE_FINAL') and (tipoComprobante = CPB_PRESUPUESTO) then
+    begin
+      DBGridEditar_Producto.SelectedIndex:= 0;//getColumnIndex(DBGridEditar_Producto, '_CodBarra');
+      ZQ_CpbProducto.Append;
+    end;
+
+    if (columna = 'CANTIDAD') and (tipoComprobante = CPB_NOTA_PEDIDO) and (not confirmarComprobante) then
+    begin
+      DBGridEditar_Producto.SelectedIndex:= 0;
+      ZQ_CpbProducto.Append;
+    end;
+
+    if (columna = 'CANTIDAD_RECIBIDA') and (tipoComprobante = CPB_NOTA_PEDIDO)  and (confirmarComprobante) then
+    begin
+      DBGridEditar_Producto.SelectedIndex:= 0;
+      ZQ_CpbProducto.Append;
+    end;
+
+    if (columna = 'CANTIDAD') and (tipoComprobante = CPB_REMITO_VENTA) then
+    begin
+      DBGridEditar_Producto.SelectedIndex:= 0;
+      ZQ_CpbProducto.Append;
+    end;
+  end;
+
   if (Shift = [ssCtrl]) and (Key = VK_DELETE) then
   begin
     Key := 0; {ignore}
@@ -2015,5 +2150,25 @@ begin
   end
 end;
 
+
+procedure TFABM_Comprobantes.EKSuma_ProductosSumListChanged(Sender: TObject);
+var
+  cantidad, precio: string;
+begin
+  cantidad := 'Cantidad Productos: ' + FormatFloat('###,###,###,##0.00', EKSuma_Productos.SumCollection[0].SumValue);
+  precio := 'Importe Total: ' + FormatFloat('$ ###,###,###,##0.00', EKSuma_Productos.SumCollection[1].SumValue);
+
+  lblCantidadProductos.Caption:= cantidad+' - '+precio;
+end;
+
+
+procedure TFABM_Comprobantes.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  EKOrd_VerCpb.GuardarConfigColumnas;
+  EKOrd_VerCpb_Fpago.GuardarConfigColumnas;
+  EKOrd_VerCpb_Producto.GuardarConfigColumnas;
+  EKOrd_EditarProducto.GuardarConfigColumnas;
+  EKOrd_EditarFpago.GuardarConfigColumnas;  
+end;
 
 end.
