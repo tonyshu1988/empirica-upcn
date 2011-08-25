@@ -109,7 +109,10 @@ end;
 procedure TFBuscarProductoStock.FormActivate(Sender: TObject);
 begin
   if ZQ_Stock.IsEmpty then
-    btnBuscar.Click
+  begin
+    Application.ProcessMessages;
+    btnBuscar.Click;
+  end
   else
     ZQ_Stock.Refresh;
 end;

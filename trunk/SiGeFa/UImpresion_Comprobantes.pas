@@ -751,11 +751,15 @@ end;
 
 //PRESUPUESTO
 procedure TFImpresion_Comprobantes.configPresupuesto();
+var
+  ImporteTotal, cantidad: double;
 begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  QRlblPresupuesto_ImporteTotal.Caption := FormatFloat('$ ###,###,###,##0.00', ZQ_ComprobanteBASE_IMPONIBLE.AsFloat);
+  cantidad:= EKDbSumaProducto.SumCollection[0].sumvalue;
+  ImporteTotal:= EKDbSumaProducto.SumCollection[1].sumvalue;
+  QRlblPresupuesto_ImporteTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidad)+' - IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
 
   QRlblPresupuesto_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   DM.VariablesComprobantes(RepPresupuesto);
@@ -772,7 +776,7 @@ begin
     exit;
 
   cantidadProductos:= EKDbSumaProducto.SumCollection[0].sumvalue;
-  QRlblRemito_CantidadTotal.Caption := FormatFloat('0.00', cantidadProductos);
+  QRlblRemito_CantidadTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidadProductos);
 
   QRlblRemito_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   DM.VariablesComprobantes(RepRemito);
@@ -789,7 +793,7 @@ begin
     exit;
 
   cantidadProductos:= EKDbSumaProducto.SumCollection[0].sumvalue;
-  QRlblNotaPedido_CantidadTotal.Caption := FormatFloat('0.00', cantidadProductos);
+  QRlblNotaPedido_CantidadTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidadProductos);
 
   QRlblNotaPedido_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   DM.VariablesComprobantes(RepNotaPedido);
