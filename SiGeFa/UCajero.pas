@@ -160,7 +160,6 @@ type
     lblCantProductos: TLabel;
     Label19: TLabel;
     Importe: TEdit;
-    ImporteFpago: TEdit;
     ZQ_FormasPago: TZQuery;       
     ZQ_FormasPagoID_TIPO_FORMAPAGO: TIntegerField;
     ZQ_FormasPagoDESCRIPCION: TStringField;
@@ -326,7 +325,6 @@ type
     DBImage1: TDBImage;
     DS_Sucursal: TDataSource;
     DBEdit9: TDBEdit;
-    Label20: TLabel;
     DBEdit10: TDBEdit;
     DBEdit11: TDBEdit;
     Label28: TLabel;
@@ -352,6 +350,11 @@ type
     CD_Fpago_desc_rec: TFloatField;
     CD_Fpago_importeVenta: TFloatField;
     EKDbSuma3: TEKDbSuma;
+    ZQ_ListadoCuentaID_SUCURSAL: TIntegerField;
+    CD_DetalleFacturaIMPORTE_VENTA: TFloatField;
+    Label15: TLabel;
+    ImporteFPago: TEdit;
+    lblTotAPagar: TLabel;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -457,6 +460,8 @@ begin
   crearComprobante();
 
   cargarClientePorDefecto();
+
+  DS_Sucursal.DataSet:=dm.ZQ_Sucursal;
   
   //Logo de fondo si no tiene imagen el producto
   DM.ZQ_Sucursal.Close;
@@ -515,8 +520,8 @@ begin
         CD_DetalleFacturaCANTIDAD.AsInteger:=edCantidad.AsInteger;
         CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=ZQ_ProductosPRECIO_VENTA.AsFloat;
         CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=(edDesc.AsFloat)/100;
-        CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:=00;
-        CD_DetalleFacturaPORC_IVA.AsFloat:=00;
+        CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:=ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
+        CD_DetalleFacturaPORC_IVA.AsFloat:=ZQ_ProductosIMPUESTO_IVA.AsInteger;
         CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:=(CD_DetalleFacturaCANTIDAD.AsInteger*CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
 
         CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=edImporte.AsFloat;
@@ -584,7 +589,6 @@ procedure TFCajero.btQuitarProductoClick(Sender: TObject);
 begin
 if not(CD_DetalleFactura.IsEmpty) then
   begin
-  CD_DetalleFactura.SaveToFile('JUANMA',dfXML);
   CD_DetalleFactura.Delete;
   lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
   end;
@@ -883,16 +887,20 @@ begin
   acumFpago:=0;
   acumFpagoReal:=0;
   IdProd:='';
+
   edCantidad.AsInteger:=1;
   edDesc.AsFloat:=(descCliente*100);
   edImporte.AsFloat:=0;
+
   RelojStock.Enabled:=false;
   lblMaxVenta.Visible:=False;
   lblSinStock.Visible:=False;
   EKDbSuma1.SumCollection[0].SumValue := 0;
   EKDbSuma2.SumCollection[0].SumValue := 0;
-  importe.Text := '';
+  EKDbSuma3.SumCollection[0].SumValue := 0;
+  Importe.Text := '';
   ImporteFpago.Text := '';
+  lblTotAPagar.Caption := '';
 
   CD_Comprobante.EmptyDataSet;
   CD_Comprobante.Append;
@@ -1001,9 +1009,10 @@ procedure TFCajero.RecalcularMontoPago();
 begin
 
   acumFpago := EKDbSuma2.SumCollection[0].SumValue;
+  importeFpago.Text := FormatFloat('$ ##,###,##0.00 ', acumFpago);
 
   acumFpagoReal :=EKDbSuma3.SumCollection[0].SumValue;
-  importeFpago.Text := FormatFloat('$ ##,###,##0.00 ', acumFpagoReal);
+  lblTotAPagar.Caption :='Total a Pagar: '+ FormatFloat('$ ##,###,##0.00 ', acumFpagoReal);
 
   if acumFpagoReal>MONTO_MAX_VENTA then
      RelojMaximoV.Enabled:=True
@@ -1047,7 +1056,8 @@ begin
         ZQ_Comprobante_FormaPagoMDCP_BANCO.AsString := CD_FpagoMDCP_BANCO.AsString;
         ZQ_Comprobante_FormaPagoMDCP_CHEQUE.AsString := CD_FpagoMDCP_CHEQUE.AsString;
         ZQ_Comprobante_FormaPagoIMPORTE.AsFloat := CD_FpagoIMPORTE.AsFloat;
-        ZQ_Comprobante_FormaPagoCUENTA_INGRESO.AsInteger:=CD_FpagoCUENTA_INGRESO.AsInteger;
+        ZQ_Comprobante_FormaPagoCUENTA_INGRESO.AsInteger := CD_FpagoCUENTA_INGRESO.AsInteger;
+        ZQ_Comprobante_FormaPagoIMPORTE_REAL.AsFloat := CD_Fpago_importeVenta.AsFloat;
         ZQ_Comprobante_FormaPago.Post;
         CD_Fpago.Next;
       end;
@@ -1057,6 +1067,9 @@ end;
 
 procedure TFCajero.grabarDetallesFactura;
 begin
+
+    Prorrateo();
+
     CD_DetalleFactura.First;
       while not CD_DetalleFactura.Eof do
       begin
@@ -1072,7 +1085,7 @@ begin
         ZQ_ComprobanteDetalleIMPORTE_UNITARIO.AsFloat:=CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
         ZQ_ComprobanteDetalleIMPUESTO_INTERNO.AsFloat:=CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat;
         ZQ_ComprobanteDetallePORC_IVA.AsFloat := CD_DetalleFacturaPORC_IVA.AsFloat;
-
+        ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
         ZQ_ComprobanteDetalle.Post;
 
         CD_DetalleFactura.Next;
@@ -1293,32 +1306,44 @@ end;
 
 procedure TFCajero.Prorrateo();
 var
-totalProds,totalFP,coefic:Double;
-cant:Integer;
+totalProds,totalFP,coefic,acum:Double;
+cant,i:Integer;
 begin
   //Can Productos
   cant:=CD_DetalleFactura.RecordCount;
   totalProds:=acumulado;
-  totalFP:=0;
+  totalFP:=acumFpagoReal;
+  acum:=0;
+//  CD_Fpago.First;
+//  while not(CD_Fpago.Eof) do
+//   begin
+//      ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
+//      if (ZQ_FormasPagoIF.AsString='S') then
+//       totalFP:=totalFP + CD_FpagoIMPORTE.AsFloat;
+//      CD_Fpago.Next;
+//   end;
+   coefic:= (totalFP/totalProds);
 
-  CD_Fpago.First;
-  while not(CD_Fpago.Eof) do
-   begin
-      ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
-      if (ZQ_FormasPagoIF.AsString='S') then
-       totalFP:=totalFP + CD_FpagoIMPORTE.AsFloat;
-      CD_Fpago.Next;
-   end;
-   coefic:= totalFP/totalProds;
    if (totalFP>0) then
     begin
       CD_DetalleFactura.First;
+       i:=1;
        while not(CD_DetalleFactura.Eof) do
        begin
           CD_DetalleFactura.Edit;
-          CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=CD_DetalleFacturaIMPORTE_FINAL.AsFloat * coefic;
+          //Si es el último
+          if (i=cant) then
+              begin
+                CD_DetalleFacturaIMPORTE_VENTA.AsFloat := totalFP - acum;
+              end
+          else
+              CD_DetalleFacturaIMPORTE_VENTA.AsFloat := CD_DetalleFacturaIMPORTE_FINAL.AsFloat * coefic;
+
+          acum:= acum+CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
           CD_DetalleFactura.Post;
           CD_DetalleFactura.Next;
+          i:=i+1;
+
        end;
     end
 end;
