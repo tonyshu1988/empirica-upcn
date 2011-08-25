@@ -151,16 +151,13 @@ type
     Label5: TLabel;
     Label2: TLabel;
     Label11: TLabel;
-    Label15: TLabel;
     Label1: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    Label8: TLabel;
     Label9: TLabel;
     dbNombre: TDBEdit;
-    DBEditTelefono: TDBEdit;
     DBCBoxProvincia: TDBLookupComboBox;
     DBEditCuitCuil: TDBEdit;
     DBCBoxTipoIva: TDBLookupComboBox;
@@ -168,7 +165,6 @@ type
     DBEditDireccion: TDBEdit;
     DBEditLocalidad: TDBEdit;
     DBEditCodPostal: TDBEdit;
-    DBEditEmail: TDBEdit;
     DBEditWeb: TDBEdit;
     ZQ_PersonaRelacionViajanteemail: TStringField;
     ATeclasRapidas: TActionManager;
