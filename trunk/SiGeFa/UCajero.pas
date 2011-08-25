@@ -355,6 +355,13 @@ type
     Label15: TLabel;
     ImporteFPago: TEdit;
     lblTotAPagar: TLabel;
+    ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
+    ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
+    CD_ComprobantePUNTO_VENTA: TIntegerField;
+    CD_ComprobanteNUMERO_CPB: TIntegerField;
+    CD_ComprobanteFECHA_ANULADO: TDateField;
+    CD_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
+    CD_ComprobanteIMPORTE_VENTA: TFloatField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -794,6 +801,7 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
       CD_ComprobanteIMPORTE_IVA.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat*CD_ComprobantePORC_IVA.AsFloat;
       CD_ComprobanteIMPORTE_TOTAL.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat+CD_ComprobanteIMPORTE_IVA.AsFloat;
       CD_ComprobanteSALDO.AsFloat:=calcularSaldoCtaCorr();
+      CD_ComprobanteIMPORTE_VENTA.AsFloat := acumFpagoReal;
       CD_Comprobante.Post;
 
 
@@ -818,6 +826,7 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
       ZQ_ComprobanteIMPORTE_IVA.AsFloat:=CD_ComprobanteIMPORTE_IVA.AsFloat;
       ZQ_ComprobantePORC_DESCUENTO.AsFloat:=CD_ComprobantePORC_DESCUENTO.AsFloat;
       ZQ_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteIMPORTE_DESCUENTO.AsFloat;
+      ZQ_ComprobanteIMPORTE_VENTA.AsFloat := CD_ComprobanteIMPORTE_VENTA.AsFloat;
       ZQ_ComprobanteENCABEZADO.AsString:=CD_ComprobanteENCABEZADO.AsString;
       ZQ_ComprobantePIE.AsString:=CD_ComprobantePIE.AsString;
       ZQ_ComprobanteID_TIPO_IVA.AsInteger:=CD_ComprobanteID_TIPO_IVA.AsInteger;
