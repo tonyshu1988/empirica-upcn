@@ -22,8 +22,8 @@ object FABMEmpresas: TFABMEmpresas
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 623
+    Width = 1016
+    Height = 629
     Align = alClient
     TabOrder = 0
     object RepDetalleEmpresa: TQuickRep
@@ -104,7 +104,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333300000
+          320.145833333333400000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -138,7 +138,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            759.354166666666700000
+            759.354166666666800000
             158.750000000000000000
             381.000000000000000000)
           Alignment = taCenter
@@ -170,9 +170,9 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            709.083333333333300000
+            709.083333333333400000
             95.250000000000000000
-            478.895833333333300000)
+            478.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -202,7 +202,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            632.354166666666700000
+            632.354166666666800000
             31.750000000000000000
             635.000000000000000000)
           Alignment = taCenter
@@ -434,7 +434,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -482,7 +482,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -1489,7 +1489,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333300000
+          320.145833333333400000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1525,7 +1525,7 @@ object FABMEmpresas: TFABMEmpresas
             50.270833333333330000
             1209.145833333333000000
             158.750000000000000000
-            351.895833333333300000)
+            351.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1557,7 +1557,7 @@ object FABMEmpresas: TFABMEmpresas
             52.916666666666670000
             1145.645833333333000000
             95.250000000000000000
-            478.895833333333300000)
+            478.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1885,7 +1885,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1933,7 +1933,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -2254,10 +2254,10 @@ object FABMEmpresas: TFABMEmpresas
     end
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 341
-      Width = 1006
+      Top = 347
+      Width = 1014
       Height = 281
-      ActivePage = TabMarcas
+      ActivePage = TabTelMail
       Align = alBottom
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -2560,13 +2560,64 @@ object FABMEmpresas: TFABMEmpresas
           end
         end
       end
+      object TabTelMail: TTabSheet
+        Caption = 'Tel'#233'fonos/Mails'
+        ImageIndex = 5
+        object DBGridEntidadTelefonoEmpresa: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 1006
+          Height = 253
+          Hint = 'Haga click derecho para agregar o quitar un Contacto'
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_EntidadTelefonoEmpresa
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Caption = 'Descripcion'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TELEFONO'
+              Title.Caption = 'Tel'#233'fono'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MAIL'
+              Title.Caption = 'Mail'
+              Width = 200
+              Visible = True
+            end>
+        end
+      end
       object TabContactos: TTabSheet
         Caption = 'Contactos'
         ImageIndex = 18
         object DBGridContactos: TDBGrid
           Left = 0
           Top = 0
-          Width = 998
+          Width = 552
           Height = 134
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
@@ -2598,22 +2649,6 @@ object FABMEmpresas: TFABMEmpresas
             end
             item
               Expanded = False
-              FieldName = 'telefono'
-              Title.Alignment = taCenter
-              Title.Caption = 'Tel'#233'fono'
-              Width = 200
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'email'
-              Title.Alignment = taCenter
-              Title.Caption = 'Email'
-              Width = 111
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'direccion'
               Title.Alignment = taCenter
               Title.Caption = 'Direcci'#243'n'
@@ -2640,7 +2675,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel1: TPanel
           Left = 0
           Top = 134
-          Width = 998
+          Width = 1006
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -2649,7 +2684,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label12: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 1004
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2658,7 +2693,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoContactos: TDBMemo
           Left = 0
           Top = 153
-          Width = 998
+          Width = 1006
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -2673,6 +2708,53 @@ object FABMEmpresas: TFABMEmpresas
           PopupMenu = PopupMenuSkypeMail
           TabOrder = 2
         end
+        object DBGridContactoTelMail: TDBGrid
+          Left = 552
+          Top = 0
+          Width = 454
+          Height = 134
+          Hint = 'Haga click derecho para agregar o quitar un Contacto'
+          Align = alRight
+          Color = 14606012
+          DataSource = DS_EntidadTelefonoContacto
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Caption = 'Descripcion'
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TELEFONO'
+              Title.Caption = 'Tel'#233'fono'
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MAIL'
+              Title.Caption = 'Mail'
+              Width = 150
+              Visible = True
+            end>
+        end
       end
       object TabViajantes: TTabSheet
         Caption = 'Viajantes'
@@ -2680,7 +2762,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridViajantes: TDBGrid
           Left = 0
           Top = 0
-          Width = 998
+          Width = 544
           Height = 134
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
@@ -2712,22 +2794,6 @@ object FABMEmpresas: TFABMEmpresas
             end
             item
               Expanded = False
-              FieldName = 'telefono'
-              Title.Alignment = taCenter
-              Title.Caption = 'Tel'#233'fono'
-              Width = 161
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'email'
-              Title.Alignment = taCenter
-              Title.Caption = 'Email'
-              Width = 179
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'direccion'
               Title.Alignment = taCenter
               Title.Caption = 'Direcci'#243'n'
@@ -2754,7 +2820,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoViajantes: TDBMemo
           Left = 0
           Top = 153
-          Width = 998
+          Width = 1006
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -2766,7 +2832,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel2: TPanel
           Left = 0
           Top = 134
-          Width = 998
+          Width = 1006
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -2775,11 +2841,58 @@ object FABMEmpresas: TFABMEmpresas
           object Label13: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 1004
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
           end
+        end
+        object DBGridViajanteTelMail: TDBGrid
+          Left = 544
+          Top = 0
+          Width = 462
+          Height = 134
+          Hint = 'Haga click derecho para agregar o quitar un Contacto'
+          Align = alRight
+          Color = 14606012
+          DataSource = DS_EntidadTelefonoViajantes
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Caption = 'Descripcion'
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TELEFONO'
+              Title.Caption = 'Tel'#233'fono'
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MAIL'
+              Title.Caption = 'Mail'
+              Width = 150
+              Visible = True
+            end>
         end
       end
       object TabMarcas: TTabSheet
@@ -2788,7 +2901,7 @@ object FABMEmpresas: TFABMEmpresas
         object GrillaMarcas: TDBGrid
           Left = 0
           Top = 0
-          Width = 998
+          Width = 1006
           Height = 134
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
@@ -2827,7 +2940,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemo1: TDBMemo
           Left = 0
           Top = 153
-          Width = 998
+          Width = 1006
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -2845,7 +2958,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel3: TPanel
           Left = 0
           Top = 134
-          Width = 998
+          Width = 1006
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -2854,7 +2967,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label14: TLabel
             Left = 1
             Top = 5
-            Width = 996
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2868,7 +2981,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoDescripcion: TDBMemo
           Left = 0
           Top = 0
-          Width = 978
+          Width = 986
           Height = 233
           Align = alClient
           DataField = 'DESCRIPCION_PRIVADA'
@@ -2887,8 +3000,8 @@ object FABMEmpresas: TFABMEmpresas
     object DBGridEmpresas: TDBGrid
       Left = 1
       Top = 20
-      Width = 1006
-      Height = 321
+      Width = 1014
+      Height = 327
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -3002,7 +3115,7 @@ object FABMEmpresas: TFABMEmpresas
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1006
+      Width = 1014
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -3023,7 +3136,7 @@ object FABMEmpresas: TFABMEmpresas
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 896
+        Left = 904
         Top = 1
         Width = 109
         Height = 17
@@ -3041,7 +3154,7 @@ object FABMEmpresas: TFABMEmpresas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4218,6 +4331,7 @@ object FABMEmpresas: TFABMEmpresas
   end
   object ZQ_PersonaRelacionContacto: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_PersonaRelacionContactoAfterScroll
     SQL.Strings = (
       'select *'
       'from persona_relacion pr'
@@ -4429,6 +4543,7 @@ object FABMEmpresas: TFABMEmpresas
   end
   object ZQ_PersonaRelacionViajante: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_PersonaRelacionViajanteAfterScroll
     SQL.Strings = (
       'select *'
       'from persona_relacion pr'
@@ -4814,14 +4929,6 @@ object FABMEmpresas: TFABMEmpresas
         Visible = True
       end
       item
-        TituloColumna = 'Tel'#233'fono'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Email'
-        Visible = True
-      end
-      item
         TituloColumna = 'Direcci'#243'n'
         Visible = True
       end
@@ -4851,14 +4958,6 @@ object FABMEmpresas: TFABMEmpresas
         Visible = True
       end
       item
-        TituloColumna = 'Tel'#233'fono'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Email'
-        Visible = True
-      end
-      item
         TituloColumna = 'Direcci'#243'n'
         Visible = True
       end
@@ -4879,5 +4978,168 @@ object FABMEmpresas: TFABMEmpresas
     PopUpGrilla = PopupMenuViajantes
     Left = 197
     Top = 445
+  end
+  object ZQ_EntidadTelefonoContacto: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from entidad_telefonos et'
+      'where et.id_persona = :ID_PERSONA')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PERSONA'
+        ParamType = ptUnknown
+      end>
+    Left = 600
+    Top = 256
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PERSONA'
+        ParamType = ptUnknown
+      end>
+    object ZQ_EntidadTelefonoContactoID_ENTIDAD_TELEFONO: TIntegerField
+      FieldName = 'ID_ENTIDAD_TELEFONO'
+    end
+    object ZQ_EntidadTelefonoContactoID_ENTIDAD: TIntegerField
+      FieldName = 'ID_ENTIDAD'
+    end
+    object ZQ_EntidadTelefonoContactoTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_EntidadTelefonoContactoMAIL: TStringField
+      FieldName = 'MAIL'
+      Size = 100
+    end
+    object ZQ_EntidadTelefonoContactoID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_EntidadTelefonoContactoDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
+    end
+  end
+  object DS_EntidadTelefonoContacto: TDataSource
+    DataSet = ZQ_EntidadTelefonoContacto
+    Left = 600
+    Top = 304
+  end
+  object ZQ_EntidadTelefonoEmpresa: TZQuery
+    Connection = DM.Conexion
+    BeforePost = ZQ_EntidadTelefonoEmpresaBeforePost
+    SQL.Strings = (
+      'select *'
+      'from entidad_telefonos et'
+      'where et.id_entidad = :ID_ENTIDAD')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ENTIDAD'
+        ParamType = ptUnknown
+      end>
+    Left = 72
+    Top = 512
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ENTIDAD'
+        ParamType = ptUnknown
+      end>
+    object ZQ_EntidadTelefonoEmpresaID_ENTIDAD_TELEFONO: TIntegerField
+      FieldName = 'ID_ENTIDAD_TELEFONO'
+    end
+    object ZQ_EntidadTelefonoEmpresaID_ENTIDAD: TIntegerField
+      FieldName = 'ID_ENTIDAD'
+    end
+    object ZQ_EntidadTelefonoEmpresaID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_EntidadTelefonoEmpresaTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_EntidadTelefonoEmpresaMAIL: TStringField
+      FieldName = 'MAIL'
+      Size = 100
+    end
+    object ZQ_EntidadTelefonoEmpresaDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
+    end
+  end
+  object DS_EntidadTelefonoEmpresa: TDataSource
+    DataSet = ZQ_EntidadTelefonoEmpresa
+    Left = 72
+    Top = 560
+  end
+  object PopupMenuTelmail: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    MenuAnimation = [maLeftToRight]
+    Left = 204
+    Top = 516
+    object AgregarTelMail: TMenuItem
+      Caption = 'Agregar Telefono/Mail'
+      ImageIndex = 14
+      OnClick = AgregarTelMailClick
+    end
+    object EditarTelMail: TMenuItem
+      Caption = 'Editar Telefono/Mail'
+      ImageIndex = 4
+      OnClick = EditarTelMailClick
+    end
+    object EliminarTelMail: TMenuItem
+      Caption = 'Eliminar Telefono/Mail'
+      ImageIndex = 15
+    end
+  end
+  object ZQ_EntidadTelefonoViajantes: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from entidad_telefonos et'
+      'where et.id_persona = :ID_PERSONA')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PERSONA'
+        ParamType = ptUnknown
+      end>
+    Left = 768
+    Top = 256
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PERSONA'
+        ParamType = ptUnknown
+      end>
+    object ZQ_EntidadTelefonoViajantesID_ENTIDAD_TELEFONO: TIntegerField
+      FieldName = 'ID_ENTIDAD_TELEFONO'
+      Required = True
+    end
+    object ZQ_EntidadTelefonoViajantesID_ENTIDAD: TIntegerField
+      FieldName = 'ID_ENTIDAD'
+    end
+    object ZQ_EntidadTelefonoViajantesID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_EntidadTelefonoViajantesTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_EntidadTelefonoViajantesMAIL: TStringField
+      FieldName = 'MAIL'
+      Size = 100
+    end
+    object ZQ_EntidadTelefonoViajantesDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
+    end
+  end
+  object DS_EntidadTelefonoViajantes: TDataSource
+    DataSet = ZQ_EntidadTelefonoViajantes
+    Left = 768
+    Top = 304
   end
 end

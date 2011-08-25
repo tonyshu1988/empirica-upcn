@@ -8,7 +8,8 @@ uses
   EKBusquedaAvanzada, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ZStoredProcedure, ComCtrls, EKDBDateTimePicker,
   StdCtrls, DBCtrls, Mask, ZSqlUpdate, EKFiltrarColumna, ActnList,
-  XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons;
+  XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons,
+  Menus;
 
 type
   TFABM_Personas = class(TForm)
@@ -74,18 +75,14 @@ type
     Label8: TLabel;
     Label6: TLabel;
     Label5: TLabel;
-    Label4: TLabel;
-    Label3: TLabel;
     Label16: TLabel;
     Label10: TLabel;
     Label1: TLabel;
     DBLCBoxProvincia: TDBLookupComboBox;
     DBLCBoxCondIva: TDBLookupComboBox;
-    DBETelefonos: TDBEdit;
     DBEApellidoNombre: TDBEdit;
     DBENroDocumento: TDBEdit;
     DBELocalidad: TDBEdit;
-    DBEEmail: TDBEdit;
     DBEDireccion: TDBEdit;
     DBECodPostal: TDBEdit;
     TabSheetDetalle: TTabSheet;
@@ -243,6 +240,20 @@ type
     btnCtaCte_Modificar: TButton;
     DBRadioGroup1: TDBRadioGroup;
     Label17: TLabel;
+    TabSheetcTel: TTabSheet;
+    DBGridTelMail: TDBGrid;
+    ZQ_EntidadTelefono: TZQuery;
+    DS_EntidadTelefono: TDataSource;
+    ZQ_EntidadTelefonoID_ENTIDAD_TELEFONO: TIntegerField;
+    ZQ_EntidadTelefonoID_ENTIDAD: TIntegerField;
+    ZQ_EntidadTelefonoTELEFONO: TStringField;
+    ZQ_EntidadTelefonoMAIL: TStringField;
+    PopupMenuTelmail: TPopupMenu;
+    AgregarTelMail: TMenuItem;
+    EliminarTelMail: TMenuItem;
+    EditarTelMail: TMenuItem;
+    ZQ_EntidadTelefonoID_PERSONA: TIntegerField;
+    ZQ_EntidadTelefonoDESCRIPCION: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -274,6 +285,10 @@ type
     procedure btnCtaCte_ModificarClick(Sender: TObject);
     procedure btnCtaCte_AceptarClick(Sender: TObject);
     procedure btnCtaCte_CancelarClick(Sender: TObject);
+    procedure AgregarTelMailClick(Sender: TObject);
+    procedure EditarTelMailClick(Sender: TObject);
+    procedure EliminarTelMailClick(Sender: TObject);
+    procedure ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
   private
     id_persona: integer;
   public
@@ -355,7 +370,7 @@ end;
 
 procedure TFABM_Personas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono]) then
   begin
     existeRelacionCliente:= false;
     tieneCuentaCorriente:= false;
@@ -386,6 +401,8 @@ begin
     DBEApellidoNombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
+
+    DBGridTelMail.PopupMenu:=PopupMenuTelmail;    
   end;
 end;
 
@@ -395,7 +412,7 @@ begin
   if ZQ_Persona.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono]) then
   begin
     DBGridClientes.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -419,6 +436,8 @@ begin
     DBEApellidoNombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
+
+    DBGridTelMail.PopupMenu:=PopupMenuTelmail;
   end;
 end;
 
@@ -530,6 +549,14 @@ begin
   end;
 
   dm.mostrarCantidadRegistro(ZQ_Persona, lblCantidadRegistros);
+  
+  if (dgEditing	in DBGridTelMail.Options) then
+  begin
+    DBGridTelMail.Options := DBGridTelMail.Options - [dgEditing];
+    DBGridTelMail.Options := DBGridTelMail.Options + [dgRowSelect];
+  end;
+
+  DBGridTelMail.PopupMenu:=nil;
 end;
 
 
@@ -544,6 +571,14 @@ begin
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
     end;
+
+  if (dgEditing	in DBGridTelMail.Options) then
+  begin
+    DBGridTelMail.Options := DBGridTelMail.Options - [dgEditing];
+    DBGridTelMail.Options := DBGridTelMail.Options + [dgRowSelect];
+  end;
+
+  DBGridTelMail.PopupMenu:=nil;    
 end;
 
 
@@ -659,6 +694,11 @@ begin
     TabSheetCtaCte.TabVisible:= true
   else
     TabSheetCtaCte.TabVisible:= false;
+
+  ZQ_EntidadTelefono.Close;
+  ZQ_EntidadTelefono.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
+  ZQ_EntidadTelefono.Open;
+
 end;
 
 
@@ -768,6 +808,40 @@ procedure TFABM_Personas.btnCtaCte_CancelarClick(Sender: TObject);
 begin
   ZQ_CtaCte.RevertRecord;
   habilitarCtaCte(false);
+end;
+
+procedure TFABM_Personas.AgregarTelMailClick(Sender: TObject);
+begin
+  if not (dgEditing	in DBGridTelMail.Options) then
+  begin
+    DBGridTelMail.Options := DBGridTelMail.Options - [dgRowSelect];
+    DBGridTelMail.Options := DBGridTelMail.Options + [dgEditing];
+    ZQ_EntidadTelefono.Append;
+  end;
+end;
+
+procedure TFABM_Personas.EditarTelMailClick(Sender: TObject);
+begin
+  if not (dgEditing	in DBGridTelMail.Options) then
+  begin
+    DBGridTelMail.Options := DBGridTelMail.Options - [dgRowSelect];
+    DBGridTelMail.Options := DBGridTelMail.Options + [dgEditing];
+    ZQ_EntidadTelefono.Edit;
+  end;
+end;
+
+procedure TFABM_Personas.EliminarTelMailClick(Sender: TObject);
+begin
+ if not ZQ_EntidadTelefono.IsEmpty then
+ begin
+    ZQ_EntidadTelefono.Delete;
+ end
+
+end;
+
+procedure TFABM_Personas.ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
+begin
+ZQ_EntidadTelefonoID_PERSONA.AsInteger := ZQ_PersonaID_PERSONA.AsInteger;
 end;
 
 end.

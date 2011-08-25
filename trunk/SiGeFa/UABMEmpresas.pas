@@ -285,6 +285,38 @@ type
     QRLabel28: TQRLabel;
     EKOrdenarContactos: TEKOrdenarGrilla;
     EKOrdenarViajantes: TEKOrdenarGrilla;
+    DBGridContactoTelMail: TDBGrid;
+    ZQ_EntidadTelefonoContacto: TZQuery;
+    ZQ_EntidadTelefonoContactoID_ENTIDAD_TELEFONO: TIntegerField;
+    ZQ_EntidadTelefonoContactoID_ENTIDAD: TIntegerField;
+    ZQ_EntidadTelefonoContactoTELEFONO: TStringField;
+    ZQ_EntidadTelefonoContactoMAIL: TStringField;
+    DS_EntidadTelefonoContacto: TDataSource;
+    DBGridViajanteTelMail: TDBGrid;
+    TabTelMail: TTabSheet;
+    DBGridEntidadTelefonoEmpresa: TDBGrid;
+    ZQ_EntidadTelefonoEmpresa: TZQuery;
+    DS_EntidadTelefonoEmpresa: TDataSource;
+    PopupMenuTelmail: TPopupMenu;
+    AgregarTelMail: TMenuItem;
+    EditarTelMail: TMenuItem;
+    EliminarTelMail: TMenuItem;
+    ZQ_EntidadTelefonoEmpresaID_ENTIDAD_TELEFONO: TIntegerField;
+    ZQ_EntidadTelefonoEmpresaID_ENTIDAD: TIntegerField;
+    ZQ_EntidadTelefonoEmpresaID_PERSONA: TIntegerField;
+    ZQ_EntidadTelefonoEmpresaTELEFONO: TStringField;
+    ZQ_EntidadTelefonoEmpresaMAIL: TStringField;
+    ZQ_EntidadTelefonoViajantes: TZQuery;
+    DS_EntidadTelefonoViajantes: TDataSource;
+    ZQ_EntidadTelefonoViajantesID_ENTIDAD_TELEFONO: TIntegerField;
+    ZQ_EntidadTelefonoViajantesID_ENTIDAD: TIntegerField;
+    ZQ_EntidadTelefonoViajantesID_PERSONA: TIntegerField;
+    ZQ_EntidadTelefonoViajantesTELEFONO: TStringField;
+    ZQ_EntidadTelefonoViajantesMAIL: TStringField;
+    ZQ_EntidadTelefonoViajantesDESCRIPCION: TStringField;
+    ZQ_EntidadTelefonoContactoID_PERSONA: TIntegerField;
+    ZQ_EntidadTelefonoContactoDESCRIPCION: TStringField;
+    ZQ_EntidadTelefonoEmpresaDESCRIPCION: TStringField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -320,6 +352,11 @@ type
     procedure QuitarMarcaClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btImprimirDetalleClick(Sender: TObject);
+    procedure ZQ_PersonaRelacionContactoAfterScroll(DataSet: TDataSet);
+    procedure ZQ_PersonaRelacionViajanteAfterScroll(DataSet: TDataSet);
+    procedure AgregarTelMailClick(Sender: TObject);
+    procedure EditarTelMailClick(Sender: TObject);
+    procedure ZQ_EntidadTelefonoEmpresaBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
@@ -386,7 +423,7 @@ end;
 
 procedure TFABMEmpresas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca, ZQ_EntidadTelefonoEmpresa]) then
   begin
     GrupoVisualizando.Enabled:=false;
     GrupoEditando.Enabled:=true;
@@ -400,6 +437,7 @@ begin
     EKOrdenarViajantes.PopUpGrilla := PopupMenuViajantes;
     EKOrdenarContactos.PopUpGrilla := PopupMenuContactos;
     GrillaMarcas.PopupMenu := PopupMenuMarcas;
+    DBGridEntidadTelefonoEmpresa.PopupMenu:=PopupMenuTelmail;
 
     PanelEdicion.Enabled := true;
     PageControlEdicion.ActivePageIndex:=0;
@@ -413,7 +451,7 @@ begin
   if (ZQ_Empresa.IsEmpty) or (ZQ_EmpresaBAJA.AsString = 'S') then
    exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca, ZQ_EntidadTelefonoEmpresa]) then
   begin
     DBGridEmpresas.Enabled:=false;
     ZQ_Empresa.Edit;
@@ -423,6 +461,7 @@ begin
     EKOrdenarViajantes.PopUpGrilla := PopupMenuViajantes;
     EKOrdenarContactos.PopUpGrilla := PopupMenuContactos;
     GrillaMarcas.PopupMenu := PopupMenuMarcas;
+    DBGridEntidadTelefonoEmpresa.PopupMenu:=PopupMenuTelmail;
 
     PanelEdicion.Enabled := true;
   end;
@@ -450,12 +489,20 @@ begin
       EKOrdenarViajantes.PopUpGrilla := nil;
       EKOrdenarContactos.PopUpGrilla := nil;
       GrillaMarcas.PopupMenu := nil;
+      DBGridEntidadTelefonoEmpresa.PopupMenu:=nil;
 
       PanelEdicion.Enabled := false;
     end;
   end;
   
   dm.mostrarCantidadRegistro(ZQ_Empresa, lblCantidadRegistros);
+
+  if (dgEditing	in DBGridEntidadTelefonoEmpresa.Options) then
+  begin
+    DBGridEntidadTelefonoEmpresa.Options := DBGridEntidadTelefonoEmpresa.Options - [dgEditing];
+    DBGridEntidadTelefonoEmpresa.Options := DBGridEntidadTelefonoEmpresa.Options + [dgRowSelect];
+  end;  
+
 end;
 
 
@@ -490,9 +537,16 @@ begin
     EKOrdenarViajantes.PopUpGrilla := nil;
     EKOrdenarContactos.PopUpGrilla := nil;
     GrillaMarcas.PopupMenu := nil;
+    DBGridEntidadTelefonoEmpresa.PopupMenu:=nil;
 
     PanelEdicion.Enabled := false;
-  end
+  end;
+
+  if (dgEditing	in DBGridEntidadTelefonoEmpresa.Options) then
+  begin
+    DBGridEntidadTelefonoEmpresa.Options := DBGridEntidadTelefonoEmpresa.Options - [dgEditing];
+    DBGridEntidadTelefonoEmpresa.Options := DBGridEntidadTelefonoEmpresa.Options + [dgRowSelect];
+  end;
 end;
 
 
@@ -705,6 +759,10 @@ begin
   ZQ_EmpresaMarca.Close;
   ZQ_EmpresaMarca.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
   ZQ_EmpresaMarca.Open;
+
+  ZQ_EntidadTelefonoEmpresa.Close;
+  ZQ_EntidadTelefonoEmpresa.ParamByName('ID_ENTIDAD').AsInteger:= ZQ_EmpresaID_EMPRESA.AsInteger;
+  ZQ_EntidadTelefonoEmpresa.Open;
 end;
 
 
@@ -731,25 +789,18 @@ var
   Telefono : string;
 begin
   case PageControlEdicion.TabIndex of
-  0: begin
-        if ZQ_Empresa.IsEmpty then
+  1:  begin
+        if ZQ_EntidadTelefonoEmpresa.IsEmpty then
         exit;
 
-        if DBMemoEmpresa.SelText <> '' then
-        begin
-          Telefono:= '"callto://+'+DBMemoEmpresa.SelText+'"';
-          DBMemoEmpresa.SetFocus;
-        end
-
-        else
-          Telefono:= '"callto://+'+ZQ_EmpresaTELEFONO.AsString+'"';
+        Telefono:= '"callto://+'+ZQ_EntidadTelefonoEmpresaTELEFONO.AsString+'"';
 
         if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
         Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
-     end;
+    end;
 
-  1:  begin
-        if ZQ_PersonaRelacionContacto.IsEmpty then
+   2: begin
+        if ZQ_EntidadTelefonoContacto.IsEmpty then
         exit;
 
         if DBMemoContactos.SelText <> '' then
@@ -758,14 +809,14 @@ begin
           DBMemoContactos.SetFocus;
         end
         else
-          Telefono:= '"callto://+'+ZQ_PersonaRelacionContactotelefono.AsString+'"';
+          Telefono:= '"callto://+'+ZQ_EntidadTelefonoContactoTELEFONO.AsString+'"';
 
         if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
         Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
-    end;
+      end;
 
-   2: begin
-        if ZQ_PersonaRelacionViajante.IsEmpty then
+   3: begin
+        if ZQ_EntidadTelefonoViajantes.IsEmpty then
         exit;
 
         if DBMemoViajantes.SelText <> '' then
@@ -774,13 +825,13 @@ begin
           DBMemoViajantes.SetFocus;
         end
         else
-          Telefono:= '"callto://+'+ZQ_PersonaRelacionViajantetelefono.AsString+'"';
+          Telefono:= '"callto://+'+ZQ_EntidadTelefonoViajantesTELEFONO.AsString+'"';
 
         if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
         Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
       end;
 
-   3: begin
+   5: begin
         if ZQ_Empresa.IsEmpty then
         exit;
 
@@ -806,21 +857,15 @@ begin
   Application.CreateForm(TFMailEnviar, FMailEnviar);
 
   case PageControlEdicion.TabIndex of
-  0: begin
-        if ZQ_Empresa.IsEmpty then
+  1: begin
+        if ZQ_EntidadTelefonoEmpresa.IsEmpty then
         exit;
 
-        if DBMemoEmpresa.SelText <> '' then
-        begin
-          FMailEnviar.cargarDestinatario(DBMemoEmpresa.SelText+';');
-          DBMemoEmpresa.SetFocus;
-        end
-        else
-          FMailEnviar.cargarDestinatario(ZQ_EmpresaEMAIL.AsString+';');
+        FMailEnviar.cargarDestinatario(ZQ_EntidadTelefonoEmpresaMAIL.AsString+';');
      end;
 
-  1:  begin
-        if ZQ_PersonaRelacionContacto.IsEmpty then
+  2:  begin
+        if ZQ_EntidadTelefonoContacto.IsEmpty then
         exit;
 
         if DBMemoContactos.SelText <> '' then
@@ -829,11 +874,11 @@ begin
           DBMemoContactos.SetFocus;
         end
         else
-          FMailEnviar.cargarDestinatario(ZQ_PersonaRelacionContactoemail.AsString+';');
+          FMailEnviar.cargarDestinatario(ZQ_EntidadTelefonoContactoMAIL.AsString+';');
       end;
 
-   2: begin
-        if ZQ_PersonaRelacionViajante.IsEmpty then
+   3: begin
+        if ZQ_EntidadTelefonoViajantes.IsEmpty then
         exit;
 
         if DBMemoViajantes.SelText <> '' then
@@ -842,11 +887,11 @@ begin
           DBMemoViajantes.SetFocus;
         end
         else
-          FMailEnviar.cargarDestinatario(ZQ_PersonaRelacionViajanteemail.AsString+';');
+          FMailEnviar.cargarDestinatario(ZQ_EntidadTelefonoViajantesMAIL.AsString+';');
 
       end;
 
-   3: begin
+   5: begin
         if ZQ_Empresa.IsEmpty then
         exit;
 
@@ -856,6 +901,7 @@ begin
   end;
 
   FMailEnviar.ShowModal;
+
 end;
 
 
@@ -960,6 +1006,48 @@ begin
   ZQ_RelacionEmpresa.Open;
 
   EKVistaPreviaDetalleEmpresa.VistaPrevia;  
+end;
+
+procedure TFABMEmpresas.ZQ_PersonaRelacionContactoAfterScroll(
+  DataSet: TDataSet);
+begin
+  ZQ_EntidadTelefonoContacto.Close;
+  ZQ_EntidadTelefonoContacto.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaRelacionContactoID_PERSONA.AsInteger;
+  ZQ_EntidadTelefonoContacto.Open;
+end;
+
+procedure TFABMEmpresas.ZQ_PersonaRelacionViajanteAfterScroll(
+  DataSet: TDataSet);
+begin
+  ZQ_EntidadTelefonoViajantes.Close;
+  ZQ_EntidadTelefonoViajantes.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaRelacionViajanteID_PERSONA.AsInteger;
+  ZQ_EntidadTelefonoViajantes.Open;
+end;
+
+procedure TFABMEmpresas.AgregarTelMailClick(Sender: TObject);
+begin
+  if not (dgEditing	in DBGridEntidadTelefonoEmpresa.Options) then
+  begin
+    DBGridEntidadTelefonoEmpresa.Options := DBGridEntidadTelefonoEmpresa.Options - [dgRowSelect];
+    DBGridEntidadTelefonoEmpresa.Options := DBGridEntidadTelefonoEmpresa.Options + [dgEditing];
+    ZQ_EntidadTelefonoEmpresa.Append;
+  end;
+end;
+
+procedure TFABMEmpresas.EditarTelMailClick(Sender: TObject);
+begin
+  if not (dgEditing	in DBGridEntidadTelefonoEmpresa.Options) then
+  begin
+    DBGridEntidadTelefonoEmpresa.Options := DBGridEntidadTelefonoEmpresa.Options - [dgRowSelect];
+    DBGridEntidadTelefonoEmpresa.Options := DBGridEntidadTelefonoEmpresa.Options + [dgEditing];
+    ZQ_EntidadTelefonoEmpresa.Edit;
+  end;
+end;
+
+procedure TFABMEmpresas.ZQ_EntidadTelefonoEmpresaBeforePost(
+  DataSet: TDataSet);
+begin
+ZQ_EntidadTelefonoEmpresaID_ENTIDAD.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
 end;
 
 end.
