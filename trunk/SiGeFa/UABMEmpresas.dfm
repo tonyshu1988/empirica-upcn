@@ -2257,7 +2257,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 347
       Width = 1014
       Height = 281
-      ActivePage = TabTelMail
+      ActivePage = TabEmpresa
       Align = alBottom
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -2270,16 +2270,16 @@ object FABMEmpresas: TFABMEmpresas
         Caption = 'Empresa'
         object Label10: TLabel
           Left = 33
-          Top = 147
+          Top = 129
           Width = 89
-          Height = 13
+          Height = 47
           Caption = 'Observaciones:'
         end
         object DBMemoEmpresa: TDBMemo
           Left = 32
-          Top = 162
+          Top = 144
           Width = 825
-          Height = 73
+          Height = 107
           Hint = 'Seleccione un Telefono/Mail y haga click derecho'
           DataField = 'DESCRIPCION'
           DataSource = DS_Empresa
@@ -2296,9 +2296,8 @@ object FABMEmpresas: TFABMEmpresas
           Left = 0
           Top = 4
           Width = 877
-          Height = 144
+          Height = 125
           BevelOuter = bvNone
-          Caption = 'PanelEdicion'
           Enabled = False
           TabOrder = 0
           object Label5: TLabel
@@ -2321,13 +2320,6 @@ object FABMEmpresas: TFABMEmpresas
             Width = 55
             Height = 13
             Caption = 'Cuit/Cuil:'
-          end
-          object Label15: TLabel
-            Left = 14
-            Top = 40
-            Width = 95
-            Height = 13
-            Caption = 'Nro Tel/Cel/Fax:'
           end
           object Label1: TLabel
             Left = 582
@@ -2364,16 +2356,9 @@ object FABMEmpresas: TFABMEmpresas
             Height = 13
             Caption = 'Cod.Postal:'
           end
-          object Label8: TLabel
-            Left = 73
-            Top = 124
-            Width = 36
-            Height = 13
-            Caption = 'Email:'
-          end
           object Label9: TLabel
-            Left = 415
-            Top = 124
+            Left = 53
+            Top = 41
             Width = 55
             Height = 13
             Caption = 'Pag.Web:'
@@ -2393,22 +2378,6 @@ object FABMEmpresas: TFABMEmpresas
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 0
-          end
-          object DBEditTelefono: TDBEdit
-            Left = 110
-            Top = 36
-            Width = 433
-            Height = 22
-            CharCase = ecUpperCase
-            DataField = 'TELEFONO'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 2
           end
           object DBCBoxProvincia: TDBLookupComboBox
             Left = 110
@@ -2528,25 +2497,10 @@ object FABMEmpresas: TFABMEmpresas
             ParentFont = False
             TabOrder = 8
           end
-          object DBEditEmail: TDBEdit
-            Left = 110
-            Top = 120
-            Width = 301
-            Height = 22
-            DataField = 'EMAIL'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 9
-          end
           object DBEditWeb: TDBEdit
-            Left = 472
-            Top = 120
-            Width = 385
+            Left = 110
+            Top = 37
+            Width = 432
             Height = 22
             DataField = 'PAGINA_WEB'
             DataSource = DS_Empresa
@@ -2556,7 +2510,7 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 10
+            TabOrder = 2
           end
         end
       end
@@ -2684,7 +2638,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label12: TLabel
             Left = 1
             Top = 5
-            Width = 1004
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2841,7 +2795,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label13: TLabel
             Left = 1
             Top = 5
-            Width = 1004
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
