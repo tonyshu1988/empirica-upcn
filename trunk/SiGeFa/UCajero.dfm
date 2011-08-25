@@ -1,7 +1,7 @@
 object FCajero: TFCajero
-  Left = 178
-  Top = 16
-  Width = 1094
+  Left = 373
+  Top = 78
+  Width = 1108
   Height = 749
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
@@ -22,7 +22,7 @@ object FCajero: TFCajero
   object PanelContenedor: TPanel
     Left = 88
     Top = 0
-    Width = 990
+    Width = 1004
     Height = 659
     Align = alClient
     TabOrder = 0
@@ -522,24 +522,24 @@ object FCajero: TFCajero
     object PanelContenedorDerecha: TPanel
       Left = 323
       Top = 31
-      Width = 666
+      Width = 680
       Height = 627
       Align = alClient
       Caption = 'PanelContenedorDerecha'
       TabOrder = 1
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 403
-        Width = 664
-        Height = 223
+        Top = 408
+        Width = 678
+        Height = 218
         Align = alBottom
         Caption = 'PanelFormaPago'
         TabOrder = 0
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 662
-          Height = 159
+          Width = 676
+          Height = 124
           Align = alClient
           Color = 16762303
           DataSource = DSFpago
@@ -615,32 +615,18 @@ object FCajero: TFCajero
         end
         object PieGrillaFormaPago: TPanel
           Left = 1
-          Top = 160
-          Width = 662
-          Height = 62
+          Top = 125
+          Width = 676
+          Height = 92
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 1
           DesignSize = (
-            662
-            62)
-          object Label20: TLabel
-            Left = 253
-            Top = 21
-            Width = 152
-            Height = 23
-            Anchors = [akTop, akRight]
-            Caption = 'Total a Pagar:'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -19
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
+            676
+            92)
           object lblMaxVenta: TLabel
-            Left = 15
-            Top = 42
+            Left = 137
+            Top = 5
             Width = 289
             Height = 20
             Caption = 'M'#193'XIMO DE VENTA EXCEDIDO'
@@ -654,6 +640,40 @@ object FCajero: TFCajero
             Layout = tlCenter
             Visible = False
           end
+          object Label15: TLabel
+            Left = 451
+            Top = 5
+            Width = 81
+            Height = 16
+            Anchors = [akTop, akRight]
+            Caption = 'Total Pago:'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblTotAPagar: TLabel
+            Left = 1
+            Top = 48
+            Width = 674
+            Height = 43
+            Align = alBottom
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Total a Pagar: $ 0.00 '
+            Color = clNavy
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -21
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
           object btnBorrarPago: TButton
             Left = 4
             Top = 7
@@ -663,20 +683,20 @@ object FCajero: TFCajero
             TabOrder = 0
             OnClick = btnBorrarPagoClick
           end
-          object ImporteFpago: TEdit
-            Left = 408
-            Top = 9
-            Width = 249
-            Height = 46
+          object ImporteFPago: TEdit
+            Left = 534
+            Top = 5
+            Width = 129
+            Height = 19
             Anchors = [akTop, akRight]
             BevelInner = bvNone
             BevelOuter = bvNone
             BiDiMode = bdRightToLeft
             Color = 12189695
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -27
-            Font.Name = 'Arial Black'
+            Font.Height = -13
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentBiDiMode = False
             ParentFont = False
@@ -688,8 +708,8 @@ object FCajero: TFCajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 123
-        Width = 664
-        Height = 280
+        Width = 678
+        Height = 285
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 1
@@ -703,8 +723,8 @@ object FCajero: TFCajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 662
-          Height = 195
+          Width = 676
+          Height = 224
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -769,7 +789,7 @@ object FCajero: TFCajero
               Expanded = False
               FieldName = 'PORC_IVA'
               Title.Caption = 'IVA'
-              Width = 36
+              Width = 56
               Visible = True
             end
             item
@@ -782,19 +802,19 @@ object FCajero: TFCajero
         end
         object PieGrilla: TPanel
           Left = 1
-          Top = 196
-          Width = 662
-          Height = 83
+          Top = 225
+          Width = 676
+          Height = 59
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 1
           DesignSize = (
-            662
-            83)
+            676
+            59)
           object Label10: TLabel
             Left = 1
-            Top = 67
-            Width = 660
+            Top = 43
+            Width = 674
             Height = 15
             Align = alBottom
             Alignment = taCenter
@@ -811,24 +831,24 @@ object FCajero: TFCajero
             Layout = tlCenter
           end
           object lblCantProductos: TLabel
-            Left = 427
-            Top = 2
-            Width = 228
+            Left = 1
+            Top = 30
+            Width = 674
             Height = 13
+            Align = alBottom
             Alignment = taRightJustify
-            Anchors = [akTop, akRight]
             AutoSize = False
           end
           object Label19: TLabel
-            Left = 229
-            Top = 29
-            Width = 177
-            Height = 23
+            Left = 403
+            Top = 5
+            Width = 118
+            Height = 16
             Anchors = [akTop, akRight]
             Caption = 'Total Productos:'
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -19
+            Font.Height = -13
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
@@ -843,19 +863,19 @@ object FCajero: TFCajero
             OnClick = btQuitarProductoClick
           end
           object Importe: TEdit
-            Left = 408
-            Top = 17
-            Width = 249
-            Height = 46
+            Left = 526
+            Top = 5
+            Width = 137
+            Height = 19
             Anchors = [akTop, akRight]
             BevelInner = bvNone
             BevelOuter = bvNone
             BiDiMode = bdRightToLeft
             Color = 12189695
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -27
-            Font.Name = 'Arial Black'
+            Font.Height = -13
+            Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentBiDiMode = False
             ParentFont = False
@@ -867,7 +887,7 @@ object FCajero: TFCajero
       object PanelCabeceraFactura: TPanel
         Left = 1
         Top = 1
-        Width = 664
+        Width = 678
         Height = 122
         Align = alTop
         BevelOuter = bvLowered
@@ -875,7 +895,7 @@ object FCajero: TFCajero
         object Label11: TLabel
           Left = 1
           Top = 107
-          Width = 662
+          Width = 676
           Height = 14
           Align = alBottom
           Alignment = taCenter
@@ -894,7 +914,7 @@ object FCajero: TFCajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 662
+          Width = 676
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -1100,7 +1120,7 @@ object FCajero: TFCajero
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 988
+      Width = 1002
       Height = 30
       Align = alTop
       TabOrder = 2
@@ -1123,7 +1143,7 @@ object FCajero: TFCajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 609
+        Left = 623
         Top = 1
         Width = 378
         Height = 28
@@ -4132,6 +4152,9 @@ object FCajero: TFCajero
     object CD_DetalleFacturaPORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
     end
+    object CD_DetalleFacturaIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
   end
   object DS_DetalleFactura: TDataSource
     DataSet = CD_DetalleFactura
@@ -4736,7 +4759,9 @@ object FCajero: TFCajero
     SQL.Strings = (
       'SELECT tf.id_tipo_formapago,tf.descripcion||'#39' '#39'||'
       '       COALESCE ('#39'| C'#243'digo: '#39' || tf.cod_corto,'#39#39')||'#39' '#39'||'
-      '       COALESCE ('#39'| Descuento: '#39' || tf.desc_rec,'#39#39') AS descr'
+      
+        '       COALESCE ('#39'| Desc/Rec: '#39' || (tf.desc_rec*100)||'#39'% '#39','#39#39') A' +
+        'S descr'
       'FROM TIPO_FORMAPAGO tf'
       'where tf.baja<>'#39'S'#39)
     CampoBuscar = 'descr'
@@ -4889,6 +4914,9 @@ object FCajero: TFCajero
     object ZQ_ListadoCuentaA_CTA_CORRIENTE: TStringField
       FieldName = 'A_CTA_CORRIENTE'
       Size = 1
+    end
+    object ZQ_ListadoCuentaID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
     end
   end
   object DS_Sucursal: TDataSource
