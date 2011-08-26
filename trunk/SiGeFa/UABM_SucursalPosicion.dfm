@@ -1823,10 +1823,11 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         Tabla = 'ps'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Sucursal
-        TipoCombollenarCampo = 'nombre'
-        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1835,6 +1836,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         Tabla = 'ps'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1843,6 +1845,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         Tabla = 'ps'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1851,6 +1854,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         Tabla = 'ps'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1859,6 +1863,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         Tabla = 'ps'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1867,13 +1872,14 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         Tabla = 'ps'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
-          'Si'
-          'No')
         TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'SI'
+          'NO')
         TipoComboValoresReales.Strings = (
           'S'
           'N')
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

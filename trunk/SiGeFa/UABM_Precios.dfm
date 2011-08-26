@@ -2545,6 +2545,7 @@ object FABM_Precios: TFABM_Precios
         Tabla = 'pc'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2553,6 +2554,7 @@ object FABM_Precios: TFABM_Precios
         Tabla = 'ta'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2561,6 +2563,7 @@ object FABM_Precios: TFABM_Precios
         Tabla = 'a'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2569,6 +2572,7 @@ object FABM_Precios: TFABM_Precios
         Tabla = 'm'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2577,6 +2581,7 @@ object FABM_Precios: TFABM_Precios
         Tabla = 'ma'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2585,6 +2590,7 @@ object FABM_Precios: TFABM_Precios
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

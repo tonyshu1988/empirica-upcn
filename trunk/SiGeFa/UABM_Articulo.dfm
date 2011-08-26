@@ -1548,6 +1548,7 @@ object FABM_Articulo: TFABM_Articulo
         Tabla = 'articulo'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1557,10 +1558,11 @@ object FABM_Articulo: TFABM_Articulo
         TipoCampoIngreso = EK_Combo
         TipoCampoIndice = 1
         TipoCampoIndiceVer = 'Igual'
-        TipoCombollenarSQL = ZQ_TipoArt
-        TipoCombollenarCampo = 'descripcion'
-        TipoCombollenarCampoReal = 'id_tipo_articulo'
+        TipoComboSQL = ZQ_TipoArt
+        TipoComboSQLCampoVer = 'DESCRIPCION'
+        TipoComboSQLCampoReal = 'ID_TIPO_ARTICULO'
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end
@@ -1571,14 +1573,15 @@ object FABM_Articulo: TFABM_Articulo
         TipoCampoIngreso = EK_Combo
         TipoCampoIndice = 1
         TipoCampoIndiceVer = 'Igual'
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
           'SI'
           'NO')
-        TipoComboEditable = False
-        CambiarCondicion = False
         TipoComboValoresReales.Strings = (
           'S'
           'N')
+        TipoComboAncho = 200
+        CambiarCondicion = False
         ItemIndex = -1
       end>
     CriteriosLocate = <>

@@ -94,9 +94,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           TabOrder = 1
           object lblSaldo_Encabezado2: TLabel
             Left = 5
-            Top = 21
+            Top = 18
             Width = 875
-            Height = 16
+            Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
             Font.Charset = DEFAULT_CHARSET
@@ -110,7 +110,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             Left = 5
             Top = 5
             Width = 875
-            Height = 16
+            Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
             Font.Charset = DEFAULT_CHARSET
@@ -133,7 +133,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             Left = 5
             Top = 5
             Width = 875
-            Height = 18
+            Height = 13
             Align = alTop
             Alignment = taRightJustify
             Caption = 'lblSaldo_Total'
@@ -158,9 +158,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           BorderWidth = 4
           TabOrder = 0
           object Label1: TLabel
-            Left = 5
+            Left = 787
             Top = 5
-            Width = 875
+            Width = 93
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -184,7 +184,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Label2: TLabel
             Left = 5
             Top = 18
-            Width = 875
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -198,7 +198,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Label3: TLabel
             Left = 5
             Top = 5
-            Width = 875
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -238,9 +238,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           BorderWidth = 4
           TabOrder = 0
           object Label4: TLabel
-            Left = 5
+            Left = 787
             Top = 5
-            Width = 875
+            Width = 93
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -264,7 +264,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Label5: TLabel
             Left = 5
             Top = 18
-            Width = 875
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -278,7 +278,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Label6: TLabel
             Left = 5
             Top = 5
-            Width = 875
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -955,10 +955,11 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         Titulo = 'Sucursal'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Sucursal
-        TipoCombollenarCampo = 'nombre'
-        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -967,6 +968,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end>

@@ -217,8 +217,8 @@ end;
 
 procedure TFABM_Precios.btnBuscarClick(Sender: TObject);
 begin
-  EKBusquedaAvanzada1.Buscar;
-  dm.mostrarCantidadRegistro(ZQ_Productos, lblCantidadRegistros);
+  if EKBusquedaAvanzada1.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_Productos, lblCantidadRegistros);
 end;
 
 

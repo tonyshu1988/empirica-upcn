@@ -3419,6 +3419,7 @@ object FABMProductos: TFABMProductos
         Tabla = 'producto_cabecera'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -3427,6 +3428,7 @@ object FABMProductos: TFABMProductos
         Tabla = 'producto_cabecera'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -3435,6 +3437,7 @@ object FABMProductos: TFABMProductos
         Tabla = 'producto_cabecera'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -3444,10 +3447,11 @@ object FABMProductos: TFABMProductos
         TipoCampoIngreso = EK_Combo
         TipoCampoIndice = 1
         TipoCampoIndiceVer = 'Igual'
-        TipoCombollenarSQL = ZQ_Articulo
-        TipoCombollenarCampo = 'busqueda'
-        TipoCombollenarCampoReal = 'id_articulo'
+        TipoComboSQL = ZQ_Articulo
+        TipoComboSQLCampoVer = 'BUSQUEDA'
+        TipoComboSQLCampoReal = 'ID_ARTICULO'
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end
@@ -3458,10 +3462,11 @@ object FABMProductos: TFABMProductos
         TipoCampoIngreso = EK_Combo
         TipoCampoIndice = 1
         TipoCampoIndiceVer = 'Igual'
-        TipoCombollenarSQL = ZQ_Marca
-        TipoCombollenarCampo = 'nombre_marca'
-        TipoCombollenarCampoReal = 'id_marca'
+        TipoComboSQL = ZQ_Marca
+        TipoComboSQLCampoVer = 'NOMBRE_MARCA'
+        TipoComboSQLCampoReal = 'ID_MARCA'
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end
@@ -3472,10 +3477,11 @@ object FABMProductos: TFABMProductos
         TipoCampoIngreso = EK_Combo
         TipoCampoIndice = 1
         TipoCampoIndiceVer = 'Igual'
-        TipoCombollenarSQL = ZQ_Color
-        TipoCombollenarCampo = 'nombre'
-        TipoCombollenarCampoReal = 'id_color'
+        TipoComboSQL = ZQ_Color
+        TipoComboSQLCampoVer = 'NOMBRE'
+        TipoComboSQLCampoReal = 'ID_COLOR'
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end
@@ -3485,14 +3491,15 @@ object FABMProductos: TFABMProductos
         Tabla = 'producto_cabecera'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
           'SI'
           'NO')
-        TipoComboEditable = False
-        CambiarCondicion = False
         TipoComboValoresReales.Strings = (
           'S'
           'N')
+        TipoComboAncho = 200
+        CambiarCondicion = False
         ItemIndex = -1
       end>
     CriteriosLocate = <>
