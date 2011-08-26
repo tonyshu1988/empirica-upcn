@@ -1,3 +1,5 @@
+CUANDO EXPLOTA AMB PROD STOCK ES POR EL ORDENAR GRILLA, TOMA INVENTO
+
 OK * Descuento para cada tipo de pago (Ej: EFECTIVO -10%, TARJETA +5%, etc).
 * Remitos con importe total (Indica el valor total de la mercaderia enviada).
 NO * Nota Pedido apaisada (pedir ejemplo).
