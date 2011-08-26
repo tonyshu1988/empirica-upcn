@@ -1395,6 +1395,7 @@ object FBuscarPersona: TFBuscarPersona
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1403,6 +1404,7 @@ object FBuscarPersona: TFBuscarPersona
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1411,6 +1413,7 @@ object FBuscarPersona: TFBuscarPersona
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1419,6 +1422,7 @@ object FBuscarPersona: TFBuscarPersona
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1429,6 +1433,7 @@ object FBuscarPersona: TFBuscarPersona
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1437,13 +1442,14 @@ object FBuscarPersona: TFBuscarPersona
         Tabla = 'p'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'SI'
+          'NO')
+        TipoComboValoresReales.Strings = (
           'S'
           'N')
-        TipoComboEditable = False
-        TipoComboValoresReales.Strings = (
-          'Si'
-          'No')
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

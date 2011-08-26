@@ -1726,6 +1726,7 @@ object FABM_Cuentas: TFABM_Cuentas
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1734,6 +1735,7 @@ object FABM_Cuentas: TFABM_Cuentas
         Tabla = 'CUENTA'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1742,6 +1744,7 @@ object FABM_Cuentas: TFABM_Cuentas
         Tabla = 'CUENTA'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1751,10 +1754,11 @@ object FABM_Cuentas: TFABM_Cuentas
         TipoCampoIngreso = EK_Combo
         TipoCampoIndice = 1
         TipoCampoIndiceVer = 'Igual'
-        TipoCombollenarSQL = ZQ_MedioPago
-        TipoCombollenarCampo = 'DESCRIPCION'
-        TipoCombollenarCampoReal = 'ID_TIPO_FORMAPAGO'
+        TipoComboSQL = ZQ_MedioPago
+        TipoComboSQLCampoVer = 'DESCRIPCION'
+        TipoComboSQLCampoReal = 'ID_TIPO_FORMAPAGO'
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end>

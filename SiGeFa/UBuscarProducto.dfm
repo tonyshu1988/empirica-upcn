@@ -981,6 +981,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -989,6 +990,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'producto_cabecera'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -997,6 +999,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'Medida'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1005,6 +1008,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'color'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1013,6 +1017,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'Marca'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1021,6 +1026,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'Tipo_Articulo'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1029,6 +1035,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'Articulo'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1037,13 +1044,14 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'producto_cabecera'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
           'NO'
           'SI')
-        TipoComboEditable = False
         TipoComboValoresReales.Strings = (
           'N'
           'S')
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>
@@ -1245,6 +1253,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1253,6 +1262,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'producto_cabecera'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1261,6 +1271,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'Medida'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1269,6 +1280,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'color'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1277,6 +1289,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'Marca'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1285,6 +1298,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'Tipo_Articulo'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1293,6 +1307,7 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'Articulo'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1301,13 +1316,14 @@ object FBuscarProducto: TFBuscarProducto
         Tabla = 'producto_cabecera'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
           'NO'
           'SI')
-        TipoComboEditable = False
         TipoComboValoresReales.Strings = (
           'N'
           'S')
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

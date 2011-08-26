@@ -4929,17 +4929,22 @@ object FPrincipal: TFPrincipal
       ImageIndex = 31
       OnExecute = ACuentaCorrienteExecute
     end
-    object AEstadisticaMovInternos: TAction
+    object AEstad_MovInternos: TAction
       Caption = 'Estadisticas Mov. Internos'
       Hint = 'Estadisticas Movimientos Internos'
       ImageIndex = 38
-      OnExecute = AEstadisticaMovInternosExecute
+      OnExecute = AEstad_MovInternosExecute
     end
-    object AEstadisticaFacturacion: TAction
+    object AEstad_Facturacion: TAction
       Caption = 'Estadistica Facturacion'
       Hint = 'Estadistica Facturacion'
       ImageIndex = 38
-      OnExecute = AEstadisticaFacturacionExecute
+      OnExecute = AEstad_FacturacionExecute
+    end
+    object AEstad_Disponib: TAction
+      Caption = 'Estadistica Disponibilidades'
+      ImageIndex = 38
+      OnExecute = AEstad_DisponibExecute
     end
   end
   object MainMenuPrincipal: TMainMenu
@@ -5086,7 +5091,10 @@ object FPrincipal: TFPrincipal
       end
       object EstadisticaFacturacion1: TMenuItem
         Tag = 1
-        Action = AEstadisticaFacturacion
+        Action = AEstad_Facturacion
+      end
+      object EstadisticaDisponibilidades1: TMenuItem
+        Action = AEstad_Disponib
       end
     end
     object Salir1: TMenuItem

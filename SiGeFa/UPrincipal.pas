@@ -94,15 +94,17 @@ type
     ransferirStock1: TMenuItem;
     ACuentaCorriente: TAction;
     CuentaCorriente1: TMenuItem;
-    AEstadisticaMovInternos: TAction;
+    AEstad_MovInternos: TAction;
     Movimientos1: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;
-    AEstadisticaFacturacion: TAction;
+    AEstad_Facturacion: TAction;
     Estadisticas1: TMenuItem;
     EstadisticaMovimientosInt1: TMenuItem;
     EstadisticaFacturacion1: TMenuItem;
     N7: TMenuItem;
+    AEstad_Disponib: TAction;
+    EstadisticaDisponibilidades1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -137,8 +139,9 @@ type
     procedure AABM_TipoMovExecute(Sender: TObject);
     procedure ATransferirStockExecute(Sender: TObject);
     procedure ACuentaCorrienteExecute(Sender: TObject);
-    procedure AEstadisticaMovInternosExecute(Sender: TObject);
-    procedure AEstadisticaFacturacionExecute(Sender: TObject);
+    procedure AEstad_MovInternosExecute(Sender: TObject);
+    procedure AEstad_FacturacionExecute(Sender: TObject);
+    procedure AEstad_DisponibExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -164,7 +167,8 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UMailEnviar, UABM_Colores, UABM_TipoIVA, UABM_TipoFormaPago,
   UABM_Cuentas, UABM_TipoComprobante, UABM_Precios, UABM_Comprobantes,
   UCajero, UMovimientosInternos, UABM_TipoMovimiento, UTransferirStock,
-  UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion;
+  UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion,
+  UEstadisticaDisponibilidades;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -482,14 +486,19 @@ begin
   EKVentanas1.Abrir(Sender, TFCuentaCorriente, FCuentaCorriente);
 end;
 
-procedure TFPrincipal.AEstadisticaMovInternosExecute(Sender: TObject);
+procedure TFPrincipal.AEstad_MovInternosExecute(Sender: TObject);
 begin
-//  EKVentanas1.Abrir(Sender, TFEstadisticaMovInternos, FEstadisticaMovInternos);
+  EKVentanas1.Abrir(Sender, TFEstadisticaMovInternos, FEstadisticaMovInternos);
 end;
 
-procedure TFPrincipal.AEstadisticaFacturacionExecute(Sender: TObject);
+procedure TFPrincipal.AEstad_FacturacionExecute(Sender: TObject);
 begin
-//  EKVentanas1.Abrir(Sender, TFEstadisticasFacturacion, FEstadisticasFacturacion);
+  EKVentanas1.Abrir(Sender, TFEstadisticasFacturacion, FEstadisticasFacturacion);
+end;
+
+procedure TFPrincipal.AEstad_DisponibExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFEstadisticaDisponibilidades, FEstadisticaDisponibilidades);
 end;
 
 end.

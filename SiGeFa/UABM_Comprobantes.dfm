@@ -1,6 +1,6 @@
 object FABM_Comprobantes: TFABM_Comprobantes
-  Left = 552
-  Top = 241
+  Left = 341
+  Top = 141
   Width = 892
   Height = 586
   Caption = 'ABM Comprobantes'
