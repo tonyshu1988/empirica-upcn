@@ -462,6 +462,8 @@ type
     EKSuma_Productos: TEKDbSuma;
     EKOrd_EditarProducto: TEKOrdenarGrilla;
     EKOrd_EditarFpago: TEKOrdenarGrilla;
+    ZQ_CpbFormaPagoFECHA_FP: TDateTimeField;
+    ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1089,6 +1091,19 @@ begin
     Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
     EKDBDateEmision.SetFocus;
     exit;
+  end;
+
+  if not ZQ_CpbFormaPago.IsEmpty then
+  begin
+    ZQ_CpbFormaPago.First;
+    while not ZQ_CpbFormaPago.Eof do
+    begin
+      ZQ_CpbFormaPago.Edit;
+      ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat;
+      ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+
+      ZQ_CpbFormaPago.Next;
+    end;
   end;
 
   if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante

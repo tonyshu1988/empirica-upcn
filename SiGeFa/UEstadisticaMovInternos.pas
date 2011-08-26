@@ -54,7 +54,6 @@ type
     Series1: TPieSeries;
     Label3: TLabel;
     Label4: TLabel;
-    Label5: TLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_EgresosAfterScroll(DataSet: TDataSet);
     procedure ZQ_EgresosAfterOpen(DataSet: TDataSet);
@@ -147,8 +146,6 @@ begin
   begin
     Application.ActivateHint(Mouse.CursorPos);
 
-    Label5.Caption:= IntToStr(indice);
-
     ZQ_Ingresos.Locate('NOMBRE_MOVIMIENTO', serie.XLabel[indice], []);
     porcentaje:= (serie.ValuesLists[1].Value[indice] * 100) / serie.ValuesLists[1].Total;
     DBChartIngresos.Hint := ( 'Tipo Movimiento: '+serie.XLabel[indice]+#13
@@ -171,8 +168,6 @@ begin
   if DBChartEgresos.ShowHint then
   begin
     Application.ActivateHint(Mouse.CursorPos);
-
-    Label5.Caption:= IntToStr(indice);
 
     ZQ_Egresos.Locate('NOMBRE_MOVIMIENTO', serie.XLabel[indice], []);
     porcentaje:= (serie.ValuesLists[1].Value[indice] * 100) / serie.ValuesLists[1].Total;

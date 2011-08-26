@@ -17,7 +17,7 @@ type
     btnBuscar: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
-    btnEliminar: TdxBarLargeButton;
+    btnAnular: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
@@ -28,9 +28,7 @@ type
     ABuscar: TAction;
     ANuevo: TAction;
     AModificar: TAction;
-    AEliminar: TAction;
-    ABaja: TAction;
-    AReactivar: TAction;
+    AAnular: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
     EKVistaPrevia: TEKVistaPreviaQR;
@@ -226,12 +224,18 @@ type
     ZS_CalcSaldosEGRESO: TFloatField;
     ZS_CalcSaldosSALDO: TFloatField;
     ZS_CalcSaldosSALDODIARIO: TFloatField;
-    btnEstadisticas: TdxBarLargeButton;
+    ZQ_CpbFormaPagoFECHA_FP: TDateTimeField;
+    ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField;
+    ZQ_MovHoyFECHA_ANULADO: TDateField;
+    Panel2: TPanel;
+    Label10: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
-    procedure btnEliminarClick(Sender: TObject);
+    procedure btnAnularClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -267,7 +271,6 @@ type
     procedure SpeedBtn_MesSiguienteClick(Sender: TObject);
     procedure SpeedBtn_AnioSiguienteClick(Sender: TObject);
     procedure calcularResumenBalance(fecha: TDate);
-    procedure btnEstadisticasClick(Sender: TObject);
   private
     fechaActual: TDate;
     id_comprobante: integer;
@@ -395,25 +398,26 @@ begin
 end;
 
 
-procedure TFMovimientosInternos.btnEliminarClick(Sender: TObject);
+procedure TFMovimientosInternos.btnAnularClick(Sender: TObject);
 var
   recNo: integer;
 begin
   if (ZQ_MovHoy.IsEmpty) OR (ZQ_Comprobante.IsEmpty) then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea eliminar el movimiento seleccionado?'+#13+
+  if (application.MessageBox(pchar('¿Desea Anular el movimiento seleccionado?'+#13+
                                     '('+FormatDateTime('dd/mm/yyyy', ZQ_ComprobanteFECHA.AsDateTime)+
                                     ' - $ '+ZQ_ComprobanteIMPORTE_TOTAL.AsString+
                                     ')'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_CpbFormaPago, ZQ_Comprobante]) then
     begin
-      ZQ_CpbFormaPago.First;
-      while not ZQ_CpbFormaPago.Eof do
-        ZQ_CpbFormaPago.Delete;
+//      ZQ_CpbFormaPago.First;
+//      while not ZQ_CpbFormaPago.Eof do
+//        ZQ_CpbFormaPago.Delete;
 
-      ZQ_Comprobante.Delete;
+      ZQ_Comprobante.Edit;
+      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
     end
     else
       exit;
@@ -445,6 +449,16 @@ begin
     Application.MessageBox('Debe cargar una forma de pago, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
     DBGridFormaPago.SetFocus;
     exit;
+  end;
+
+  ZQ_CpbFormaPago.First;
+  while not ZQ_CpbFormaPago.Eof do
+  begin
+    ZQ_CpbFormaPago.Edit;
+    ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat;
+    ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+
+    ZQ_CpbFormaPago.Next;
   end;
 
   if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante
@@ -512,6 +526,7 @@ end;
 
 procedure TFMovimientosInternos.btnBuscarClick(Sender: TObject);
 begin
+ShowMessage('Todavia no disponible');
 //  EKBuscar.Buscar;
 end;
 
@@ -563,8 +578,8 @@ end;
 
 procedure TFMovimientosInternos.ABajaExecute(Sender: TObject);
 begin
-  if btnEliminar.Enabled then
-    btnEliminar.Click;
+  if btnAnular.Enabled then
+    btnAnular.Click;
 end;
 
 procedure TFMovimientosInternos.AGuardarExecute(Sender: TObject);
@@ -591,6 +606,8 @@ end;
 
 procedure TFMovimientosInternos.btnImprimirClick(Sender: TObject);
 begin
+ShowMessage('Todavia no disponible');
+
 //  if ZQ_Cuentas.IsEmpty then
 //    exit;
 //
@@ -787,24 +804,36 @@ procedure TFMovimientosInternos.DBGrid_DiaDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;  State: TGridDrawState);
 begin
   DBGrid_Dia.Canvas.Font.Color := clBlack;
-  if (ZQ_MovHoyID_TIPO_CPB.AsInteger = CPB_OTROS_EGRESOS) then
-  begin
-    DBGrid_Dia.Canvas.Brush.Color:= $00B0B0FF;
-    if (gdFocused in State) or (gdSelected in State) then
+
+  if ZQ_MovHoyFECHA_ANULADO.IsNull then //si los mov no estan anulados
+    if (ZQ_MovHoyID_TIPO_CPB.AsInteger = CPB_OTROS_EGRESOS) then
     begin
-      DBGrid_Dia.Canvas.Brush.Color:= $008080FF;
-      DBGrid_Dia.Canvas.Font.Style := DBGrid_Dia.Canvas.Font.Style + [fsBold];
+      DBGrid_Dia.Canvas.Brush.Color:= $00B0B0FF;
+      if (gdFocused in State) or (gdSelected in State) then
+      begin
+        DBGrid_Dia.Canvas.Brush.Color:= $008080FF;
+        DBGrid_Dia.Canvas.Font.Style := DBGrid_Dia.Canvas.Font.Style + [fsBold];
+      end
     end
-  end
-  else
+    else
+    begin
+      DBGrid_Dia.Canvas.Brush.Color:= $00D1FFA4;
+      if (gdFocused in State) or (gdSelected in State) then
+      begin
+        DBGrid_Dia.Canvas.Brush.Color:= $0080FF00;
+        DBGrid_Dia.Canvas.Font.Style := DBGrid_Dia.Canvas.Font.Style + [fsBold];
+      end
+    end
+  else //si estan anulados
   begin
-    DBGrid_Dia.Canvas.Brush.Color:= $00D1FFA4;
+    DBGrid_Dia.Canvas.Brush.Color:= $00FFBC79;
     if (gdFocused in State) or (gdSelected in State) then
     begin
-      DBGrid_Dia.Canvas.Brush.Color:= $0080FF00;
+      DBGrid_Dia.Canvas.Brush.Color:= $00FFA042;
       DBGrid_Dia.Canvas.Font.Style := DBGrid_Dia.Canvas.Font.Style + [fsBold];
     end
   end;
+
 
   DBGrid_Dia.DefaultDrawColumnCell(rect,datacol,column,state);
 end;
@@ -947,11 +976,6 @@ begin
 end;
 
                               
-procedure TFMovimientosInternos.btnEstadisticasClick(Sender: TObject);
-begin
-  FPrincipal.AEstadisticaMovInternos.Execute;
-end;
-
 end.
 
 

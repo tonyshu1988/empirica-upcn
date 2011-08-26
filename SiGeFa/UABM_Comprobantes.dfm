@@ -1,6 +1,6 @@
 object FABM_Comprobantes: TFABM_Comprobantes
-  Left = 299
-  Top = 144
+  Left = 552
+  Top = 241
   Width = 892
   Height = 586
   Caption = 'ABM Comprobantes'
@@ -5009,6 +5009,12 @@ object FABM_Comprobantes: TFABM_Comprobantes
       Size = 50
       Lookup = True
     end
+    object ZQ_CpbFormaPagoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+    end
   end
   object DS_CpbFormaPago: TDataSource
     DataSet = ZQ_CpbFormaPago
@@ -5540,7 +5546,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
         Visible = True
       end
       item
-        TituloColumna = '% IVA'
+        TituloColumna = 'IVA'
         Visible = True
       end
       item
