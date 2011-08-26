@@ -19,7 +19,7 @@ type
   TEKCriterioBA = class(TCollectionItem)
   private
     procedure SetTipoCampo(const Value: TEKCriterioTipo);
-    function GetDisplayName : string; override;
+    function  GetDisplayName : string; override;
     procedure SetTipoIngreso(const Value: TEKTipoIngreso);
     procedure SetTipoComboValores(const Value: TStrings);
     procedure SetTipoComboValoresReales(const Value: TStrings);
@@ -28,7 +28,6 @@ type
     procedure SetearCampo;
    protected
     Fcondicion1 : TComboBox;
-//    FTexto1 : TEdit;
     FTexto1 : TMaskEdit;
     FTextoCombo1 : TComboBox;
     Fyo : TComboBox;
@@ -37,7 +36,7 @@ type
     FTextoCombo2 : TComboBox;
     FTextoCheck2 : TCheckBox;
     FOrdenar : TCheckBox;
-    FNOmbreCampo : TLabel;
+    FNombreCampo : TLabel;
 
     FBacCondicion1 : integer;
     FBacTexto1 : string;
@@ -55,9 +54,9 @@ type
     FCampo : String;
     FTipoComboValores : TStrings;
     FTipoComboValoresReales : TStrings;
-    FTipoCombollenarSQL : TDataSet;
-    FTipoCombollenarCampo : String;
-    FTipoCombollenarCampoReal : String;
+    FTipoComboSQL : TDataSet;
+    FTipoComboSQLCampoVer : String;
+    FTipoComboSQLCampoReal : String;
     FTipoComboEditable : Boolean;
     FCambiarCondicion : Boolean;
     FTipoIngreso : TEKTipoIngreso;
@@ -65,6 +64,7 @@ type
     FTipoCampoIndice : integer;
     FTipoCampoIndiceTxt : string;
     FVaciarValor : Boolean;
+    FAnchoComboBox : integer;
 
   public
     constructor Create(Collection: TCollection); override;
@@ -79,17 +79,19 @@ type
     Property TipoCampoIndice : Integer read FTipoCampoIndice write setTipoCampoIndice default 0;
     Property TipoCampoIndiceVer : string read FTipoCampoIndiceTxt write setTipoCampoIndiceTxt;
 
-    Property TipoComboValores : TStrings read FTipoComboValores write SetTipoComboValores;
-    Property TipoCombollenarSQL : TDataSet read FTipoCombollenarSQL write FTipoCombollenarSQL;
-    Property TipoCombollenarCampo : String read FTipoCombollenarCampo write FTipoCombollenarCampo;
-    Property TipoCombollenarCampoReal : string read FTipoCombollenarCampoReal write FTipoCombollenarCampoReal;
-    Property TipoComboEditable : Boolean read FTipoComboEditable write FTipoComboEditable;
-    Property CambiarCondicion : Boolean read FCambiarCondicion write FCambiarCondicion default true;
 
+    Property TipoComboSQL : TDataSet read FTipoComboSQL write FTipoComboSQL;
+    Property TipoComboSQLCampoVer : String read FTipoComboSQLCampoVer write FTipoComboSQLCampoVer;
+    Property TipoComboSQLCampoReal : string read FTipoComboSQLCampoReal write FTipoComboSQLCampoReal;
+    Property TipoComboEditable : Boolean read FTipoComboEditable write FTipoComboEditable;
+    Property TipoComboValoresVer : TStrings read FTipoComboValores write SetTipoComboValores;
     Property TipoComboValoresReales : TStrings read FTipoComboValoresReales write SetTipoComboValoresReales;
+    property TipoComboAncho: integer read FAnchoComboBox write FAnchoComboBox;
+    Property CambiarCondicion : Boolean read FCambiarCondicion write FCambiarCondicion default true;
 
     Property Valor : string read  FBacTexto1 write FBacTexto1;
     Property ItemIndex : integer read FBacTextoCombo1 write FBacTextoCombo1;
+    property VaciarValor: Boolean read FVaciarValor write FVaciarValor default true;
   end;
 
   TEKCriterioLocate = class(TCollectionItem)
@@ -237,6 +239,7 @@ type
     procedure ContarRegistros;
   protected
     { Protected declarations }
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
     { Public declarations }
     function ArmarConsulta(): TStrings;
@@ -330,6 +333,7 @@ begin
   FCambiarCondicion := true;
   FVaciarValor := true;
   FTipoCampoIndiceTxt := 'Contiene';
+  FAnchoComboBox := 200;
 end;
 
 destructor TEKCriterioBA.destroy;
@@ -835,15 +839,15 @@ begin
       top := 48 +(i*ofset);
       with TEKCriterioBA(FCriterios.Items[i]) do
       begin
-        FNOmbreCampo := TLabel.Create(Self);
-        FNOmbreCampo.Width := 157;
-        FNOmbreCampo.AutoSize := False;
-        FNOmbreCampo.Font.Style := [fsBold];
-        FNOmbreCampo.Alignment := taRightJustify;
-        FNOmbreCampo.Parent := Fbusqueda;
-        FNOmbreCampo.Caption := FTitulo+':';
-        FNOmbreCampo.Top := top+3;
-        FNOmbreCampo.Left := 16;
+        FNombreCampo := TLabel.Create(Self);
+        FNombreCampo.Width := 157;
+        FNombreCampo.AutoSize := False;
+        FNombreCampo.Font.Style := [fsBold];
+        FNombreCampo.Alignment := taRightJustify;
+        FNombreCampo.Parent := Fbusqueda;
+        FNombreCampo.Caption := FTitulo+':';
+        FNombreCampo.Top := top+3;
+        FNombreCampo.Left := 16;
 
         Fcondicion1 := TComboBox.Create(self);
         Fcondicion1.Parent := FBusqueda;
@@ -863,7 +867,6 @@ begin
 
         if ((FTipoIngreso = EK_Edit)) then
         begin
-///          FTexto1 := TEdit.Create(self);
           FTexto1 := TmaskEdit.Create(self);
           FTexto1.parent := Fbusqueda;
           FTexto1.Top := top;
@@ -891,27 +894,29 @@ begin
             FTextoCombo1.Style := csDropDown
           else
             FTextoCombo1.Style := csDropDownList;
-          if (Assigned(FTipoCombollenarSQL) and (FTipoCombollenarCampo > ''))then
+          if (Assigned(FTipoComboSQL) and (FTipoComboSQLCampoVer > ''))then
           begin
-            if not (TipoCombollenarSQL.Active) then
-              TipoCombollenarSQL.Active := true;
-            TipoCombollenarSQL.First;
+            if not (TipoComboSQL.Active) then
+              TipoComboSQL.Active := true;
+            TipoComboSQL.First;
             FTipoComboValores.Clear;
             FTipoComboValoresReales.Clear;
-            for x := 1 to TipoCombollenarSQL.recordcount do
+            for x := 1 to TipoComboSQL.recordcount do
             begin
-              FTipoComboValores.Add((TipoCombollenarSQL.Fieldbyname(FTipoCombollenarCampo).asstring));
-              if FTipoCombollenarCampoReal > '' then
-                FTipoComboValoresReales.Add((TipoCombollenarSQL.Fieldbyname(FTipoCombollenarCampoReal).asstring));
-              FTextoCombo1.Items.Add(TipoCombollenarSQL.Fieldbyname(FTipoCombollenarCampo).asstring);
-              TipoCombollenarSQL.Next;
+              FTipoComboValores.Add((TipoComboSQL.Fieldbyname(FTipoComboSQLCampoVer).asstring));
+              if FTipoComboSQLCampoReal > '' then
+                FTipoComboValoresReales.Add((TipoComboSQL.Fieldbyname(FTipoComboSQLCampoReal).asstring));
+              FTextoCombo1.Items.Add(TipoComboSQL.Fieldbyname(FTipoComboSQLCampoVer).asstring);
+              TipoComboSQL.Next;
             end;
           end
           else
             if Assigned(FTipoComboValores) then
               FTextoCombo1.Items := FTipoComboValores;
+
           FTextoCombo1.ItemIndex := FBacTextoCombo1;
           FTextoCombo1.OnEnter := ComboBoxEnter;
+          FTextoCombo1.Tag:= TipoComboAncho;
         End;
 
         Fyo := TComboBox.Create(self);
@@ -974,22 +979,24 @@ begin
             FTextoCombo2.Style := csDropDown
           else
             FTextoCombo2.Style := csDropDownList;
-          if (Assigned(FTipoCombollenarSQL) and (FTipoCombollenarCampo > ''))then
+          if (Assigned(FTipoComboSQL) and (FTipoComboSQLCampoVer > ''))then
           begin
-            if not (TipoCombollenarSQL.Active) then
-              TipoCombollenarSQL.Active := true;
-            TipoCombollenarSQL.First;
-            for x := 1 to TipoCombollenarSQL.recordcount do
+            if not (TipoComboSQL.Active) then
+              TipoComboSQL.Active := true;
+            TipoComboSQL.First;
+            for x := 1 to TipoComboSQL.recordcount do
             begin
-              FTextoCombo2.Items.Add(TipoCombollenarSQL.Fieldbyname(FTipoCombollenarCampo).asstring);
-              TipoCombollenarSQL.Next;
+              FTextoCombo2.Items.Add(TipoComboSQL.Fieldbyname(FTipoComboSQLCampoVer).asstring);
+              TipoComboSQL.Next;
             end;
           end
           else
             if Assigned(FTipoComboValores) then
               FTextoCombo2.Items := FTipoComboValores;
+
           FTextoCombo2.ItemIndex := FBacTextoCombo2;
           FTextoCombo2.OnEnter := ComboBoxEnter;
+          FTextoCombo2.Tag:= TipoComboAncho;
         End;
 
         FOrdenar := TCheckBox.Create(self);
@@ -1404,11 +1411,10 @@ end;
 
 procedure TEKBusquedaAvanzada.ComboBoxEnter(Sender: TObject);
 begin
-  TComboBox(sender).Perform(CB_SetDroppedWidth,200,0);
+  TComboBox(sender).Perform(CB_SetDroppedWidth, TComboBox(sender).Tag, 0);
 end;
 
 { TEKStandar }
-
 procedure TEKStandar.SetFBotonAnterior(const Value: TButton);
 begin
   FBotonAnterior := Value;
@@ -1439,4 +1445,21 @@ end;
         FDXBarbotonSiguiente.OnClick := FOwner.fonclicksiguiente;
     end;
 {$ENDIF}
+
+procedure TEKBusquedaAvanzada.Notification(AComponent: TComponent; Operation: TOperation);
+var
+  I: Integer;
+  NeedLayout: Boolean;
+begin
+  inherited Notification(AComponent, Operation);
+
+  if (Operation = opRemove) then
+  begin
+    if (AComponent is TLabel) then
+    begin
+      FInfoRegistros:= nil;
+    end
+  end;
+end;
+
 end.
