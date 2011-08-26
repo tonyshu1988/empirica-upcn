@@ -1,6 +1,6 @@
 object FMovimientosInternos: TFMovimientosInternos
-  Left = 172
-  Top = 116
+  Left = 470
+  Top = 181
   Width = 1056
   Height = 559
   Caption = 'Movimientos Internos'
@@ -1190,7 +1190,7 @@ object FMovimientosInternos: TFMovimientosInternos
           Left = 1
           Top = 1
           Width = 672
-          Height = 14
+          Height = 32
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
@@ -1198,7 +1198,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Left = 0
             Top = 0
             Width = 672
-            Height = 14
+            Height = 19
             Align = alClient
             Alignment = taCenter
             Caption = 'DIA DE HOY'
@@ -1209,12 +1209,75 @@ object FMovimientosInternos: TFMovimientosInternos
             Font.Style = [fsBold, fsItalic]
             ParentFont = False
           end
+          object Panel2: TPanel
+            Left = 0
+            Top = 19
+            Width = 672
+            Height = 13
+            Align = alBottom
+            BevelOuter = bvNone
+            TabOrder = 0
+            object Label10: TLabel
+              Left = 528
+              Top = 0
+              Width = 144
+              Height = 13
+              Align = alRight
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'ANULADOS'
+              Color = 16759929
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label13: TLabel
+              Left = 240
+              Top = 0
+              Width = 144
+              Height = 13
+              Align = alRight
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'INGRESOS'
+              Color = 13762468
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label14: TLabel
+              Left = 384
+              Top = 0
+              Width = 144
+              Height = 13
+              Align = alRight
+              Alignment = taCenter
+              AutoSize = False
+              Caption = 'EGRESOS'
+              Color = 11579647
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+          end
         end
         object DBGrid_Dia: TDBGrid
           Left = 1
-          Top = 15
+          Top = 33
           Width = 672
-          Height = 234
+          Height = 216
           Align = alClient
           Color = 14606012
           DataSource = DS_MovHoy
@@ -1636,7 +1699,8 @@ object FMovimientosInternos: TFMovimientosInternos
             Visible = True
           end
           item
-            Item = btnEliminar
+            BeginGroup = True
+            Item = btnAnular
             Visible = True
           end
           item
@@ -1651,11 +1715,6 @@ object FMovimientosInternos: TFMovimientosInternos
           item
             BeginGroup = True
             Item = btnImprimir
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnEstadisticas
             Visible = True
           end
           item
@@ -2001,13 +2060,13 @@ object FMovimientosInternos: TFMovimientosInternos
       OnClick = btnModificarClick
       AutoGrayScale = False
     end
-    object btnEliminar: TdxBarLargeButton
-      Caption = 'F4 - Eliminar'
+    object btnAnular: TdxBarLargeButton
+      Caption = 'F5 - Anular'
       Category = 0
-      Hint = 'Eliminar un registro'
+      Hint = 'Anular un movimiento'
       Visible = ivAlways
-      ImageIndex = 2
-      OnClick = btnEliminarClick
+      ImageIndex = 25
+      OnClick = btnAnularClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
@@ -2048,21 +2107,12 @@ object FMovimientosInternos: TFMovimientosInternos
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
-    object btnEstadisticas: TdxBarLargeButton
-      Caption = 'Estadisticas'
-      Category = 0
-      Hint = 'Estadisticas'
-      Visible = ivAlways
-      ImageIndex = 44
-      OnClick = btnEstadisticasClick
-      AutoGrayScale = False
-    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
         'btnModificar'
         'btnBuscar'
-        'btnEliminar'
+        'btnAnular'
         'btnSalir'
         'btnImprimir')
     end
@@ -2092,18 +2142,9 @@ object FMovimientosInternos: TFMovimientosInternos
       ShortCut = 114
       OnExecute = AModificarExecute
     end
-    object AEliminar: TAction
-      Caption = 'AEliminar'
-      ShortCut = 115
-    end
-    object ABaja: TAction
-      Caption = 'ABaja'
+    object AAnular: TAction
+      Caption = 'AAnular'
       ShortCut = 116
-      OnExecute = ABajaExecute
-    end
-    object AReactivar: TAction
-      Caption = 'AReactivar'
-      ShortCut = 117
     end
     object AGuardar: TAction
       Caption = 'AGuardar'
@@ -2404,6 +2445,9 @@ object FMovimientosInternos: TFMovimientosInternos
       KeyFields = 'ID_TIPO_MOVIMIENTO'
       Size = 200
       Lookup = True
+    end
+    object ZQ_MovHoyFECHA_ANULADO: TDateField
+      FieldName = 'FECHA_ANULADO'
     end
   end
   object DS_MovHoy: TDataSource
@@ -2805,6 +2849,12 @@ object FMovimientosInternos: TFMovimientosInternos
       KeyFields = 'ID_TIPO_FORMAPAG'
       Size = 50
       Lookup = True
+    end
+    object ZQ_CpbFormaPagoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
     end
   end
   object EKSuma_FPago: TEKDbSuma

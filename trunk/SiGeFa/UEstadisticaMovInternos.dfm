@@ -1,6 +1,6 @@
 object FEstadisticaMovInternos: TFEstadisticaMovInternos
-  Left = 305
-  Top = 183
+  Left = 513
+  Top = 216
   Width = 870
   Height = 546
   Caption = 'Estadistica Movimientos Internos'
@@ -23,7 +23,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
     Top = 0
     Width = 854
     Height = 456
-    ActivePage = TabIngresoVsEgresos
+    ActivePage = TabTipoMovimiento
     Align = alClient
     TabOrder = 0
     object TabIngresoVsEgresos: TTabSheet
@@ -57,13 +57,6 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           Height = 428
           Align = alClient
           TabOrder = 0
-          object Label5: TLabel
-            Left = 64
-            Top = 88
-            Width = 32
-            Height = 13
-            Caption = 'Label5'
-          end
         end
         object PanelIngresos: TPanel
           Left = 246
@@ -813,8 +806,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       'where ((c.id_tipo_cpb = 16) or (c.id_tipo_cpb = 17))'
       'order by c.fecha')
     Params = <>
-    Left = 196
-    Top = 42
+    Left = 148
+    Top = 194
     object ZQ_MovimientosFECHA: TDateTimeField
       FieldName = 'FECHA'
     end
@@ -848,8 +841,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
   end
   object DS_Movimientos: TDataSource
     DataSet = ZQ_Movimientos
-    Left = 196
-    Top = 90
+    Left = 148
+    Top = 242
   end
   object ZQ_Ingresos: TZQuery
     Connection = DM.Conexion
@@ -867,8 +860,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       'group by c.id_tipo_movimiento, m.nombre_movimiento'
       'order by c.id_tipo_movimiento, m.nombre_movimiento')
     Params = <>
-    Left = 44
-    Top = 158
+    Left = 436
+    Top = 182
     object ZQ_IngresosID_TIPO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_TIPO_MOVIMIENTO'
     end
@@ -898,8 +891,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       'group by c.id_tipo_movimiento, m.nombre_movimiento'
       'order by c.id_tipo_movimiento, m.nombre_movimiento')
     Params = <>
-    Left = 116
-    Top = 158
+    Left = 692
+    Top = 182
     object ZQ_EgresosID_TIPO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_TIPO_MOVIMIENTO'
     end
@@ -915,12 +908,12 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
   end
   object DS_Ingresos: TDataSource
     DataSet = ZQ_Ingresos
-    Left = 44
-    Top = 210
+    Left = 436
+    Top = 234
   end
   object DS_Egresos: TDataSource
     DataSet = ZQ_Egresos
-    Left = 116
-    Top = 210
+    Left = 692
+    Top = 234
   end
 end

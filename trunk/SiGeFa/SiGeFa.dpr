@@ -41,7 +41,8 @@ uses
   UBuscarProductoStock in 'UBuscarProductoStock.pas' {FBuscarProductoStock},
   UEstadisticaMovInternos in 'UEstadisticaMovInternos.pas' {FEstadisticaMovInternos},
   UCuentaCorriente in 'UCuentaCorriente.pas' {FCuentaCorriente},
-  UEstadisticaFacturacion in 'UEstadisticaFacturacion.pas' {FEstadisticasFacturacion};
+  UEstadisticaFacturacion in 'UEstadisticaFacturacion.pas' {FEstadisticasFacturacion},
+  UEstadisticaDisponibilidades in 'UEstadisticaDisponibilidades.pas' {FEstadisticaDisponibilidades};
 
 {$R *.res}
 
