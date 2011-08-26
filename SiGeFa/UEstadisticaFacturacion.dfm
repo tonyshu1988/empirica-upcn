@@ -1,6 +1,6 @@
 object FEstadisticasFacturacion: TFEstadisticasFacturacion
-  Left = 236
-  Top = 142
+  Left = 382
+  Top = 263
   Width = 911
   Height = 500
   Caption = 'Estadisticas Facturacion'
@@ -19,16 +19,16 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 903
-    Height = 416
+    Width = 895
+    Height = 410
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object PageControl: TPageControl
       Left = 1
       Top = 1
-      Width = 901
-      Height = 414
+      Width = 893
+      Height = 408
       ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
@@ -37,11 +37,11 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 893
-          Height = 386
+          Width = 885
+          Height = 380
           Align = alClient
           Color = 13431031
-          DataSource = DataSource1
+          DataSource = DS_Comprobante
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           ReadOnly = True
           TabOrder = 0
@@ -53,23 +53,50 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
           Columns = <
             item
               Expanded = False
-              FieldName = 'ID_PRODUCTO'
-              Width = 87
+              FieldName = 'ID_COMPROBANTE'
+              Width = 66
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'CANTIDAD'
+              FieldName = 'CODIGO'
+              Width = 108
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'IMPORTE_FINAL'
+              FieldName = 'FECHA'
+              Width = 79
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'IMPORTE_UNITARIO'
+              FieldName = 'BASE_IMPONIBLE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_TOTAL'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PORC_IVA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_IVA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PORC_DESCUENTO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_DESCUENTO'
               Visible = True
             end
             item
@@ -79,19 +106,97 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             end
             item
               Expanded = False
-              FieldName = 'COD_CORTO'
+              FieldName = 'FECHA_ENVIADA'
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'NOMBRE_MARCA'
-              Width = 125
+              FieldName = 'FECHA_IMPRESA'
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'ARTICULO'
-              Width = 78
+              FieldName = 'ENCABEZADO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PIE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_PROVEEDOR'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_CLIENTE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_TIPO_CPB'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_VENCIMIENTO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_SUCURSAL'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_VENDEDOR'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_COMP_ESTADO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SALDO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PUNTO_VENTA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NUMERO_CPB'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_ANULADO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_TIPO_IVA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_TIPO_MOVIMIENTO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_VENTA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'OBSERVACION'
               Visible = True
             end>
         end
@@ -109,7 +214,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -555,8 +660,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 296
-    Top = 128
+    Left = 456
+    Top = 216
     DockControlHeights = (
       0
       0
@@ -742,9 +847,113 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       Size = 200
     end
   end
-  object DataSource1: TDataSource
-    DataSet = ZQuery1
-    Left = 517
-    Top = 137
+  object DS_Comprobante: TDataSource
+    DataSet = ZQ_Comprobante
+    Left = 173
+    Top = 185
+  end
+  object ZQ_Comprobante: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select c.*'
+      'from comprobante c'
+      'where c.id_tipo_cpb=11')
+    Params = <>
+    Left = 109
+    Top = 113
+    object ZQ_ComprobanteID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+      Required = True
+    end
+    object ZQ_ComprobanteCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_ComprobanteFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_ComprobanteOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
+    end
+    object ZQ_ComprobanteBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_ComprobanteIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+    end
+    object ZQ_ComprobantePORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_ComprobanteIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_ComprobantePORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_ComprobanteIMPORTE_DESCUENTO: TFloatField
+      FieldName = 'IMPORTE_DESCUENTO'
+    end
+    object ZQ_ComprobanteFECHA_COBRADA: TDateField
+      FieldName = 'FECHA_COBRADA'
+    end
+    object ZQ_ComprobanteFECHA_ENVIADA: TDateField
+      FieldName = 'FECHA_ENVIADA'
+    end
+    object ZQ_ComprobanteFECHA_IMPRESA: TDateField
+      FieldName = 'FECHA_IMPRESA'
+    end
+    object ZQ_ComprobanteENCABEZADO: TStringField
+      FieldName = 'ENCABEZADO'
+      Size = 500
+    end
+    object ZQ_ComprobantePIE: TStringField
+      FieldName = 'PIE'
+      Size = 500
+    end
+    object ZQ_ComprobanteID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_ComprobanteID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object ZQ_ComprobanteID_TIPO_CPB: TIntegerField
+      FieldName = 'ID_TIPO_CPB'
+      Required = True
+    end
+    object ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField
+      FieldName = 'FECHA_VENCIMIENTO'
+    end
+    object ZQ_ComprobanteID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
+    end
+    object ZQ_ComprobanteID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object ZQ_ComprobanteID_COMP_ESTADO: TIntegerField
+      FieldName = 'ID_COMP_ESTADO'
+    end
+    object ZQ_ComprobanteSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
+    object ZQ_ComprobantePUNTO_VENTA: TIntegerField
+      FieldName = 'PUNTO_VENTA'
+    end
+    object ZQ_ComprobanteNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
+    end
+    object ZQ_ComprobanteFECHA_ANULADO: TDateField
+      FieldName = 'FECHA_ANULADO'
+    end
+    object ZQ_ComprobanteID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
+    object ZQ_ComprobanteIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
   end
 end
