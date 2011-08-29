@@ -412,10 +412,6 @@ begin
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_CpbFormaPago, ZQ_Comprobante]) then
     begin
-//      ZQ_CpbFormaPago.First;
-//      while not ZQ_CpbFormaPago.Eof do
-//        ZQ_CpbFormaPago.Delete;
-
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
