@@ -116,7 +116,7 @@ Const
   ESTADO_SIN_CONFIRMAR = 0;
   ESTADO_CONFIRMADO    = 1;
   ESTADO_ALMACENADO    = 2;
-  ESTADO_ANULADO       = 4;
+  ESTADO_ANULADO       = 3;
 
   LONG_COD_BARRAS       = 40;
   LONG_CODIGO           = 14;
