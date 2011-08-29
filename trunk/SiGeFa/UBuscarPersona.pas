@@ -7,7 +7,8 @@ uses
   Dialogs, Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, ComCtrls,
   StdCtrls, Mask, DBCtrls, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla,
-  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKDBDateTimePicker;
+  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKDBDateTimePicker,
+  Menus;
 
 type
   TFBuscarPersona = class(TForm)
@@ -29,34 +30,6 @@ type
     btnAnterior: TdxBarLargeButton;
     GrupoVisualizando: TdxBarGroup;
     GrupoEditando: TdxBarGroup;
-    PanelEdicion: TPanel;
-    Label5: TLabel;
-    Label4: TLabel;
-    Label2: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label18: TLabel;
-    dbcSexo: TDBComboBox;
-    dblkTipoDoc: TDBLookupComboBox;
-    dbNombre: TDBEdit;
-    dbNroDocu: TDBEdit;
-    DBEdit1: TDBEdit;
-    DBLookupComboBox1: TDBLookupComboBox;
-    Label1: TLabel;
-    DBLookupComboBox2: TDBLookupComboBox;
-    Label3: TLabel;
-    DBEDireccion: TDBEdit;
-    Label6: TLabel;
-    DBEdit4: TDBEdit;
-    Label7: TLabel;
-    DBEdit5: TDBEdit;
-    DBEdit2: TDBEdit;
-    Label8: TLabel;
-    Label11: TLabel;
-    DBEdit6: TDBEdit;
-    Label9: TLabel;
-    DBMemo1: TDBMemo;
     ZQ_Personas: TZQuery;
     ZQ_PersonasID_PERSONA: TIntegerField;
     ZQ_PersonasID_PROVINCIA: TIntegerField;
@@ -101,7 +74,51 @@ type
     ASalir: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
+    PageControlEdicion: TPageControl;
+    TabDatosPersonas: TTabSheet;
+    TabDatosTelMail: TTabSheet;
+    PanelEdicion: TPanel;
+    Label5: TLabel;
+    Label4: TLabel;
+    Label2: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label18: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label11: TLabel;
+    Label9: TLabel;
+    dbcSexo: TDBComboBox;
+    dblkTipoDoc: TDBLookupComboBox;
+    dbNombre: TDBEdit;
+    dbNroDocu: TDBEdit;
+    DBEdit1: TDBEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DBLookupComboBox2: TDBLookupComboBox;
+    DBEDireccion: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit6: TDBEdit;
+    DBMemo1: TDBMemo;
     EKDBDateTimePicker1: TEKDBDateTimePicker;
+    DBGridTelMail: TDBGrid;
+    PopupMenuTelmail: TPopupMenu;
+    AgregarTelMail: TMenuItem;
+    EditarTelMail: TMenuItem;
+    EliminarTelMail: TMenuItem;
+    ZQ_EntidadTelefono: TZQuery;
+    ZQ_EntidadTelefonoID_ENTIDAD_TELEFONO: TIntegerField;
+    ZQ_EntidadTelefonoID_ENTIDAD: TIntegerField;
+    ZQ_EntidadTelefonoTELEFONO: TStringField;
+    ZQ_EntidadTelefonoMAIL: TStringField;
+    ZQ_EntidadTelefonoID_PERSONA: TIntegerField;
+    ZQ_EntidadTelefonoDESCRIPCION: TStringField;
+    DS_EntidadTelefono: TDataSource;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -118,6 +135,10 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure AgregarTelMailClick(Sender: TObject);
+    procedure EditarTelMailClick(Sender: TObject);
+    procedure EliminarTelMailClick(Sender: TObject);
+    procedure ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -232,11 +253,12 @@ end;
 
 procedure TFBuscarPersona.btnCrearPersonaClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(Transaccion_CrearPersona,[ZQ_Personas]) then
+  if dm.EKModelo.iniciar_transaccion(Transaccion_CrearPersona,[ZQ_Personas, ZQ_EntidadTelefono]) then
   begin
     GrupoVisualizando.Enabled:=false;
     GrupoEditando.Enabled:=true;
     DBGridPersonas.Enabled:= false;
+    PageControlEdicion.TabIndex := 0;
 
     Nro_Persona.Active:= True;
     id_persona:= Nro_PersonaID.AsInteger;
@@ -336,6 +358,43 @@ end;
 procedure TFBuscarPersona.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
+end;
+
+procedure TFBuscarPersona.AgregarTelMailClick(Sender: TObject);
+begin
+  if not (dgEditing	in DBGridTelMail.Options) then
+  begin
+    DBGridTelMail.Options := DBGridTelMail.Options - [dgRowSelect];
+    DBGridTelMail.Options := DBGridTelMail.Options + [dgEditing];
+    ZQ_EntidadTelefono.Append;
+  end;
+
+
+
+  ZQ_EntidadTelefono.Append;
+end;
+
+procedure TFBuscarPersona.EditarTelMailClick(Sender: TObject);
+begin
+  if not (dgEditing	in DBGridTelMail.Options) then
+  begin
+    DBGridTelMail.Options := DBGridTelMail.Options - [dgRowSelect];
+    DBGridTelMail.Options := DBGridTelMail.Options + [dgEditing];
+    ZQ_EntidadTelefono.Edit;
+  end;
+end;
+
+procedure TFBuscarPersona.EliminarTelMailClick(Sender: TObject);
+begin
+ if not ZQ_EntidadTelefono.IsEmpty then
+ begin
+    ZQ_EntidadTelefono.Delete;
+ end
+end;
+
+procedure TFBuscarPersona.ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
+begin
+ZQ_EntidadTelefonoID_PERSONA.AsInteger := ZQ_PersonasID_PERSONA.AsInteger;
 end;
 
 end.

@@ -19,15 +19,15 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 853
-    Height = 352
+    Width = 861
+    Height = 116
     Align = alClient
     TabOrder = 0
     object DBGridPersonas: TDBGrid
       Left = 1
       Top = 1
-      Width = 851
-      Height = 135
+      Width = 859
+      Height = 114
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
@@ -115,350 +115,402 @@ object FBuscarPersona: TFBuscarPersona
           Visible = True
         end>
     end
-    object PanelEdicion: TPanel
+  end
+  object PanelEdicion: TPanel
+    Left = 0
+    Top = 116
+    Width = 861
+    Height = 242
+    Align = alBottom
+    TabOrder = 5
+    Visible = False
+    object PageControlEdicion: TPageControl
       Left = 1
-      Top = 136
-      Width = 851
-      Height = 215
+      Top = 0
+      Width = 859
+      Height = 241
+      ActivePage = TabDatosPersonas
       Align = alBottom
-      TabOrder = 1
-      Visible = False
-      object Label5: TLabel
-        Left = 11
-        Top = 8
-        Width = 110
-        Height = 13
-        Caption = 'Apellido y Nombre:'
+      TabOrder = 0
+      object TabDatosPersonas: TTabSheet
+        Caption = 'Datos Generales'
+        object Label5: TLabel
+          Left = 11
+          Top = 8
+          Width = 110
+          Height = 13
+          Caption = 'Apellido y Nombre:'
+        end
+        object Label4: TLabel
+          Left = 605
+          Top = 7
+          Width = 34
+          Height = 13
+          Caption = 'Sexo:'
+        end
+        object Label2: TLabel
+          Left = 11
+          Top = 55
+          Width = 55
+          Height = 13
+          Caption = 'Tipo Doc:'
+        end
+        object Label13: TLabel
+          Left = 212
+          Top = 54
+          Width = 50
+          Height = 13
+          Caption = 'N'#250'mero:'
+        end
+        object Label14: TLabel
+          Left = 451
+          Top = 29
+          Width = 85
+          Height = 13
+          Caption = 'Fecha de Nac.:'
+        end
+        object Label15: TLabel
+          Left = 10
+          Top = 124
+          Width = 95
+          Height = 13
+          Caption = 'Nro Tel/Cel/Fax:'
+        end
+        object Label18: TLabel
+          Left = 259
+          Top = 78
+          Width = 57
+          Height = 13
+          Caption = 'Provincia:'
+        end
+        object Label1: TLabel
+          Left = 448
+          Top = 54
+          Width = 54
+          Height = 13
+          Caption = 'Tipo IVA:'
+        end
+        object Label3: TLabel
+          Left = 11
+          Top = 31
+          Width = 58
+          Height = 13
+          Caption = 'Direcci'#243'n:'
+        end
+        object Label6: TLabel
+          Left = 11
+          Top = 101
+          Width = 58
+          Height = 13
+          Caption = 'Localidad:'
+        end
+        object Label7: TLabel
+          Left = 535
+          Top = 80
+          Width = 66
+          Height = 13
+          Caption = 'Cod.Postal:'
+        end
+        object Label8: TLabel
+          Left = 326
+          Top = 102
+          Width = 34
+          Height = 13
+          Caption = 'eMail:'
+        end
+        object Label11: TLabel
+          Left = 11
+          Top = 78
+          Width = 55
+          Height = 13
+          Caption = 'Cuit/Cuil:'
+        end
+        object Label9: TLabel
+          Left = 10
+          Top = 144
+          Width = 45
+          Height = 13
+          Caption = 'Detalle:'
+        end
+        object dbcSexo: TDBComboBox
+          Left = 641
+          Top = 3
+          Width = 57
+          Height = 21
+          Style = csDropDownList
+          AutoComplete = False
+          AutoDropDown = True
+          CharCase = ecUpperCase
+          DataField = 'SEXO'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ItemHeight = 13
+          Items.Strings = (
+            'F'
+            'M'
+            'N')
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          Sorted = True
+          TabOrder = 1
+        end
+        object dblkTipoDoc: TDBLookupComboBox
+          Left = 71
+          Top = 51
+          Width = 131
+          Height = 21
+          DataField = 'ID_TIPO_DOC'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          KeyField = 'ID_TIPO_DOC'
+          ListField = 'NOMBRE_TIPO_DOC'
+          ListSource = DS_TipoDoc
+          NullValueKey = 46
+          ParentFont = False
+          TabOrder = 4
+        end
+        object dbNombre: TDBEdit
+          Left = 127
+          Top = 4
+          Width = 469
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'NOMBRE'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+        end
+        object dbNroDocu: TDBEdit
+          Left = 263
+          Top = 50
+          Width = 182
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'NUMERO_DOC'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          MaxLength = 18
+          ParentFont = False
+          TabOrder = 5
+        end
+        object DBEdit1: TDBEdit
+          Left = 106
+          Top = 120
+          Width = 595
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'TELEFONO'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 12
+        end
+        object DBLookupComboBox1: TDBLookupComboBox
+          Left = 320
+          Top = 74
+          Width = 207
+          Height = 21
+          DataField = 'ID_PROVINCIA'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          KeyField = 'ID_PROVINCIA'
+          ListField = 'NOMBRE_PROVINCIA'
+          ListSource = DS_Provincia
+          NullValueKey = 46
+          ParentFont = False
+          TabOrder = 8
+        end
+        object DBLookupComboBox2: TDBLookupComboBox
+          Left = 507
+          Top = 50
+          Width = 191
+          Height = 21
+          DataField = 'ID_TIPO_IVA'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          KeyField = 'ID_TIPO_IVA'
+          ListField = 'NOMBRE_TIPO_IVA'
+          ListSource = DS_TipoIVA
+          NullValueKey = 46
+          ParentFont = False
+          TabOrder = 6
+        end
+        object DBEDireccion: TDBEdit
+          Left = 71
+          Top = 27
+          Width = 371
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'DIRECCION'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+        end
+        object DBEdit4: TDBEdit
+          Left = 71
+          Top = 97
+          Width = 250
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'LOCALIDAD'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 10
+        end
+        object DBEdit5: TDBEdit
+          Left = 604
+          Top = 74
+          Width = 97
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'CODIGO_POSTAL'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 9
+        end
+        object DBEdit2: TDBEdit
+          Left = 366
+          Top = 97
+          Width = 335
+          Height = 21
+          DataField = 'EMAIL'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 11
+        end
+        object DBEdit6: TDBEdit
+          Left = 71
+          Top = 74
+          Width = 178
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'CUIT_CUIL'
+          DataSource = DS_Personas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 7
+        end
+        object DBMemo1: TDBMemo
+          Left = 56
+          Top = 145
+          Width = 645
+          Height = 65
+          DataField = 'DESCRIPCION'
+          DataSource = DS_Personas
+          TabOrder = 13
+        end
+        object EKDBDateTimePicker1: TEKDBDateTimePicker
+          Left = 539
+          Top = 27
+          Width = 159
+          Height = 21
+          Date = 40773.000000000000000000
+          Time = 40773.000000000000000000
+          TabOrder = 3
+          DataField = 'FECHA_NACIMIENTO'
+          DataSource = DS_Personas
+        end
       end
-      object Label4: TLabel
-        Left = 605
-        Top = 7
-        Width = 34
-        Height = 13
-        Caption = 'Sexo:'
-      end
-      object Label2: TLabel
-        Left = 11
-        Top = 55
-        Width = 55
-        Height = 13
-        Caption = 'Tipo Doc:'
-      end
-      object Label13: TLabel
-        Left = 212
-        Top = 54
-        Width = 50
-        Height = 13
-        Caption = 'N'#250'mero:'
-      end
-      object Label14: TLabel
-        Left = 451
-        Top = 29
-        Width = 85
-        Height = 13
-        Caption = 'Fecha de Nac.:'
-      end
-      object Label15: TLabel
-        Left = 10
-        Top = 124
-        Width = 95
-        Height = 13
-        Caption = 'Nro Tel/Cel/Fax:'
-      end
-      object Label18: TLabel
-        Left = 259
-        Top = 78
-        Width = 57
-        Height = 13
-        Caption = 'Provincia:'
-      end
-      object Label1: TLabel
-        Left = 448
-        Top = 54
-        Width = 54
-        Height = 13
-        Caption = 'Tipo IVA:'
-      end
-      object Label3: TLabel
-        Left = 11
-        Top = 31
-        Width = 58
-        Height = 13
-        Caption = 'Direcci'#243'n:'
-      end
-      object Label6: TLabel
-        Left = 11
-        Top = 101
-        Width = 58
-        Height = 13
-        Caption = 'Localidad:'
-      end
-      object Label7: TLabel
-        Left = 535
-        Top = 80
-        Width = 66
-        Height = 13
-        Caption = 'Cod.Postal:'
-      end
-      object Label8: TLabel
-        Left = 326
-        Top = 102
-        Width = 34
-        Height = 13
-        Caption = 'eMail:'
-      end
-      object Label11: TLabel
-        Left = 11
-        Top = 78
-        Width = 55
-        Height = 13
-        Caption = 'Cuit/Cuil:'
-      end
-      object Label9: TLabel
-        Left = 10
-        Top = 144
-        Width = 45
-        Height = 13
-        Caption = 'Detalle:'
-      end
-      object dbcSexo: TDBComboBox
-        Left = 641
-        Top = 3
-        Width = 57
-        Height = 21
-        Style = csDropDownList
-        AutoComplete = False
-        AutoDropDown = True
-        CharCase = ecUpperCase
-        DataField = 'SEXO'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ItemHeight = 13
-        Items.Strings = (
-          'F'
-          'M'
-          'N')
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        Sorted = True
-        TabOrder = 1
-      end
-      object dblkTipoDoc: TDBLookupComboBox
-        Left = 71
-        Top = 51
-        Width = 131
-        Height = 21
-        DataField = 'ID_TIPO_DOC'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        KeyField = 'ID_TIPO_DOC'
-        ListField = 'NOMBRE_TIPO_DOC'
-        ListSource = DS_TipoDoc
-        NullValueKey = 46
-        ParentFont = False
-        TabOrder = 3
-      end
-      object dbNombre: TDBEdit
-        Left = 127
-        Top = 4
-        Width = 469
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'NOMBRE'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-      end
-      object dbNroDocu: TDBEdit
-        Left = 263
-        Top = 50
-        Width = 182
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'NUMERO_DOC'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        MaxLength = 18
-        ParentFont = False
-        TabOrder = 4
-      end
-      object DBEdit1: TDBEdit
-        Left = 106
-        Top = 120
-        Width = 595
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'TELEFONO'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 11
-      end
-      object DBLookupComboBox1: TDBLookupComboBox
-        Left = 320
-        Top = 74
-        Width = 207
-        Height = 21
-        DataField = 'ID_PROVINCIA'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        KeyField = 'ID_PROVINCIA'
-        ListField = 'NOMBRE_PROVINCIA'
-        ListSource = DS_Provincia
-        NullValueKey = 46
-        ParentFont = False
-        TabOrder = 7
-      end
-      object DBLookupComboBox2: TDBLookupComboBox
-        Left = 507
-        Top = 50
-        Width = 191
-        Height = 21
-        DataField = 'ID_TIPO_IVA'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        KeyField = 'ID_TIPO_IVA'
-        ListField = 'NOMBRE_TIPO_IVA'
-        ListSource = DS_TipoIVA
-        NullValueKey = 46
-        ParentFont = False
-        TabOrder = 5
-      end
-      object DBEDireccion: TDBEdit
-        Left = 71
-        Top = 27
-        Width = 371
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'DIRECCION'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 2
-      end
-      object DBEdit4: TDBEdit
-        Left = 71
-        Top = 97
-        Width = 250
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'LOCALIDAD'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 9
-      end
-      object DBEdit5: TDBEdit
-        Left = 604
-        Top = 74
-        Width = 97
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'CODIGO_POSTAL'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 8
-      end
-      object DBEdit2: TDBEdit
-        Left = 366
-        Top = 97
-        Width = 335
-        Height = 21
-        DataField = 'EMAIL'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 10
-      end
-      object DBEdit6: TDBEdit
-        Left = 71
-        Top = 74
-        Width = 178
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'CUIT_CUIL'
-        DataSource = DS_Personas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 6
-      end
-      object DBMemo1: TDBMemo
-        Left = 56
-        Top = 145
-        Width = 645
-        Height = 65
-        DataField = 'DESCRIPCION'
-        DataSource = DS_Personas
-        TabOrder = 12
-      end
-      object EKDBDateTimePicker1: TEKDBDateTimePicker
-        Left = 539
-        Top = 27
-        Width = 159
-        Height = 21
-        Date = 40773.000000000000000000
-        Time = 40773.000000000000000000
-        TabOrder = 13
-        DataField = 'FECHA_NACIMIENTO'
-        DataSource = DS_Personas
+      object TabDatosTelMail: TTabSheet
+        Caption = 'Tel'#233'fonos/Mail'
+        ImageIndex = 1
+        object DBGridTelMail: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 851
+          Height = 213
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_EntidadTelefono
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = PopupMenuTelmail
+          TabOrder = 0
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Width = 252
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TELEFONO'
+              Width = 250
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MAIL'
+              Width = 250
+              Visible = True
+            end>
+        end
       end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1571,5 +1623,74 @@ object FBuscarPersona: TFBuscarPersona
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
+  end
+  object PopupMenuTelmail: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    MenuAnimation = [maLeftToRight]
+    Left = 100
+    Top = 196
+    object AgregarTelMail: TMenuItem
+      Caption = 'Agregar Telefono/Mail'
+      ImageIndex = 14
+      OnClick = AgregarTelMailClick
+    end
+    object EditarTelMail: TMenuItem
+      Caption = 'Editar Telefono/Mail'
+      ImageIndex = 4
+      OnClick = EditarTelMailClick
+    end
+    object EliminarTelMail: TMenuItem
+      Caption = 'Eliminar Telefono/Mail'
+      ImageIndex = 15
+      OnClick = EliminarTelMailClick
+    end
+  end
+  object ZQ_EntidadTelefono: TZQuery
+    Connection = DM.Conexion
+    BeforePost = ZQ_EntidadTelefonoBeforePost
+    SQL.Strings = (
+      'select *'
+      'from entidad_telefonos et'
+      'where et.id_persona = :ID_PERSONA')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PERSONA'
+        ParamType = ptUnknown
+      end>
+    Left = 240
+    Top = 176
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PERSONA'
+        ParamType = ptUnknown
+      end>
+    object ZQ_EntidadTelefonoID_ENTIDAD_TELEFONO: TIntegerField
+      FieldName = 'ID_ENTIDAD_TELEFONO'
+    end
+    object ZQ_EntidadTelefonoID_ENTIDAD: TIntegerField
+      FieldName = 'ID_ENTIDAD'
+    end
+    object ZQ_EntidadTelefonoTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_EntidadTelefonoMAIL: TStringField
+      FieldName = 'MAIL'
+      Size = 100
+    end
+    object ZQ_EntidadTelefonoID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_EntidadTelefonoDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
+    end
+  end
+  object DS_EntidadTelefono: TDataSource
+    DataSet = ZQ_EntidadTelefono
+    Left = 248
+    Top = 232
   end
 end
