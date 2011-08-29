@@ -1269,7 +1269,7 @@ begin
       while not CD_Fpago.Eof do
       begin
        if (CD_Fpago_esCtaCorr.AsString='S') then
-        acum:=acum+CD_FpagoIMPORTE.AsFloat;
+        acum:=acum+CD_Fpago_importeVenta.AsFloat;
        CD_Fpago.Next;
       end;
     Result:=acum;
