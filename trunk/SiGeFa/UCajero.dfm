@@ -3785,8 +3785,9 @@ object FCajero: TFCajero
       AutoGrayScale = False
     end
     object BtAgregarPago: TdxBarLargeButton
-      Caption = 'F9 Agregar Pago'
+      Caption = 'F9 Agregar Producto'
       Category = 0
+      Hint = 'F9 Agregar Producto'
       Visible = ivAlways
       ImageIndex = 0
       OnClick = BtAgregarPagoClick
