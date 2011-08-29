@@ -1,8 +1,8 @@
 object FCajero: TFCajero
-  Left = 225
-  Top = 122
-  Width = 1311
-  Height = 813
+  Left = 286
+  Top = 109
+  Width = 1127
+  Height = 661
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,21 +22,21 @@ object FCajero: TFCajero
   object PanelContenedor: TPanel
     Left = 88
     Top = 0
-    Width = 1207
-    Height = 723
+    Width = 1023
+    Height = 571
     Align = alClient
     TabOrder = 0
     object PanelDetalleProducto: TPanel
       Left = 1
       Top = 31
       Width = 322
-      Height = 691
+      Height = 539
       Align = alLeft
       BevelInner = bvSpace
       TabOrder = 0
       object GroupBox1: TGroupBox
         Left = 2
-        Top = 433
+        Top = 281
         Width = 318
         Height = 256
         Align = alBottom
@@ -522,15 +522,15 @@ object FCajero: TFCajero
     object PanelContenedorDerecha: TPanel
       Left = 323
       Top = 31
-      Width = 883
-      Height = 691
+      Width = 699
+      Height = 539
       Align = alClient
       Caption = 'PanelContenedorDerecha'
       TabOrder = 1
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 472
-        Width = 881
+        Top = 320
+        Width = 697
         Height = 218
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -538,7 +538,7 @@ object FCajero: TFCajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 879
+          Width = 695
           Height = 140
           Align = alClient
           Color = 16762303
@@ -616,13 +616,13 @@ object FCajero: TFCajero
         object PieGrillaFormaPago: TPanel
           Left = 1
           Top = 141
-          Width = 879
+          Width = 695
           Height = 76
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 1
           DesignSize = (
-            879
+            695
             76)
           object lblMaxVenta: TLabel
             Left = 137
@@ -641,7 +641,7 @@ object FCajero: TFCajero
             Visible = False
           end
           object Label15: TLabel
-            Left = 654
+            Left = 485
             Top = 6
             Width = 81
             Height = 16
@@ -657,7 +657,7 @@ object FCajero: TFCajero
           object lblTotAPagar: TLabel
             Left = 1
             Top = 32
-            Width = 877
+            Width = 693
             Height = 43
             Align = alBottom
             Alignment = taRightJustify
@@ -684,7 +684,7 @@ object FCajero: TFCajero
             OnClick = btnBorrarPagoClick
           end
           object ImporteFPago: TEdit
-            Left = 737
+            Left = 568
             Top = 5
             Width = 129
             Height = 19
@@ -709,8 +709,8 @@ object FCajero: TFCajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 123
-        Width = 881
-        Height = 349
+        Width = 697
+        Height = 197
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 1
@@ -724,8 +724,8 @@ object FCajero: TFCajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 879
-          Height = 293
+          Width = 695
+          Height = 141
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -803,19 +803,19 @@ object FCajero: TFCajero
         end
         object PieGrilla: TPanel
           Left = 1
-          Top = 294
-          Width = 879
+          Top = 142
+          Width = 695
           Height = 54
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 1
           DesignSize = (
-            879
+            695
             54)
           object Label10: TLabel
             Left = 1
             Top = 38
-            Width = 877
+            Width = 693
             Height = 15
             Align = alBottom
             Alignment = taCenter
@@ -834,7 +834,7 @@ object FCajero: TFCajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 22
-            Width = 877
+            Width = 693
             Height = 16
             Align = alBottom
             Alignment = taRightJustify
@@ -842,7 +842,7 @@ object FCajero: TFCajero
             Layout = tlCenter
           end
           object Label19: TLabel
-            Left = 606
+            Left = 437
             Top = 5
             Width = 118
             Height = 16
@@ -865,7 +865,7 @@ object FCajero: TFCajero
             OnClick = btQuitarProductoClick
           end
           object Importe: TEdit
-            Left = 729
+            Left = 560
             Top = 4
             Width = 137
             Height = 19
@@ -890,7 +890,7 @@ object FCajero: TFCajero
       object PanelCabeceraFactura: TPanel
         Left = 1
         Top = 1
-        Width = 881
+        Width = 697
         Height = 122
         Align = alTop
         BevelOuter = bvLowered
@@ -898,7 +898,7 @@ object FCajero: TFCajero
         object Label11: TLabel
           Left = 1
           Top = 107
-          Width = 879
+          Width = 695
           Height = 14
           Align = alBottom
           Alignment = taCenter
@@ -917,7 +917,7 @@ object FCajero: TFCajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 879
+          Width = 695
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -1123,7 +1123,7 @@ object FCajero: TFCajero
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 1205
+      Width = 1021
       Height = 30
       Align = alTop
       TabOrder = 2
@@ -1146,7 +1146,7 @@ object FCajero: TFCajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 826
+        Left = 642
         Top = 1
         Width = 378
         Height = 28
@@ -4383,7 +4383,6 @@ object FCajero: TFCajero
   end
   object ZQ_Personas: TZQuery
     Connection = DM.Conexion
-    Active = True
     SQL.Strings = (
       
         'select p.*,prov.nombre_provincia as prov,td.nombre_tipo_doc as t' +
