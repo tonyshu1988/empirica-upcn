@@ -22,15 +22,15 @@ object FTransferirStock: TFTransferirStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 860
-      Height = 381
+      Width = 852
+      Height = 375
       ActivePage = TabSTransferirStock
       Align = alClient
       TabOrder = 0
@@ -40,8 +40,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 331
+          Width = 844
+          Height = 325
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -155,8 +155,8 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 331
-          Width = 852
+          Top = 325
+          Width = 844
           Height = 22
           Align = alBottom
           TabOrder = 1
@@ -353,16 +353,16 @@ object FTransferirStock: TFTransferirStock
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 852
       Height = 33
       Align = alTop
       TabOrder = 1
       object Label1: TLabel
         Left = 508
         Top = 7
-        Width = 277
+        Width = 338
         Height = 16
-        Caption = 'Presione F1 para seleccionar una sucursal'
+        Caption = 'Presione F1 para seleccionar la sucursal de destino'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -383,7 +383,7 @@ object FTransferirStock: TFTransferirStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1561,10 +1561,6 @@ object FTransferirStock: TFTransferirStock
     Grilla = DBGridProducto
     Filtros = <
       item
-        TituloColumna = 'C'#243'd. Cabecera'
-        Visible = True
-      end
-      item
         TituloColumna = 'C'#243'd. Producto'
         Visible = True
       end
@@ -1593,15 +1589,19 @@ object FTransferirStock: TFTransferirStock
         Visible = True
       end
       item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end
-      item
         TituloColumna = 'Stock Actual'
         Visible = True
       end
       item
         TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cabecera'
         Visible = True
       end>
     NombreGuardar = 'TransferirStock_Productos'
