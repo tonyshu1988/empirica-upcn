@@ -349,7 +349,8 @@ begin
       for F:=0 to FGrilla.Columns.Count-1 do //por cada una de las columnas de la grilla
       begin
         Registro.WriteInteger(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Width', FGrilla.Columns[F].Width); //guardo el tamaño
-        Registro.WriteInteger(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Index', F); //guardo el indice
+        if FGrilla.Columns[F].Visible then
+          Registro.WriteInteger(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Index', F); //guardo el indice
       end;
 
       Registro.Free;
@@ -379,8 +380,9 @@ begin
       //para cargar el tamaño de la columna
       for F:=0 to FGrilla.Columns.Count-1 do //por cada uno de las columnas de la grilla
       begin
-        if Registro.ValueExists(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Width') then //si existe el valor en el registro
-          FGrilla.Columns[F].Width:= Registro.ReadInteger(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Width');
+        if FGrilla.Columns[F].Visible then
+          if Registro.ValueExists(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Width') then //si existe el valor en el registro
+            FGrilla.Columns[F].Width:= Registro.ReadInteger(FNombreGuardar+'_'+FGrilla.Columns[F].Title.Caption+'_Width');
       end;
 
       SetLength(auxTitulos, FGrilla.Columns.Count);
@@ -558,6 +560,9 @@ procedure TEKOrdenarGrilla.DBGridGiraLaRueda(var Message: TMessage);
 var
   Cuanto: short;
 begin
+  if not Assigned(FGrilla) then
+    exit;
+
   if (Message.Msg = WM_MOUSEWHEEL) then
   begin
     Cuanto:= HIWORD(Message.WParam);
