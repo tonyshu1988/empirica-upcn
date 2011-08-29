@@ -1,6 +1,6 @@
 object FMovimientosInternos: TFMovimientosInternos
-  Left = 470
-  Top = 181
+  Left = 315
+  Top = 156
   Width = 1056
   Height = 559
   Caption = 'Movimientos Internos'
