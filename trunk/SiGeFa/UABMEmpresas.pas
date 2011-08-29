@@ -313,6 +313,7 @@ type
     ZQ_EntidadTelefonoContactoID_PERSONA: TIntegerField;
     ZQ_EntidadTelefonoContactoDESCRIPCION: TStringField;
     ZQ_EntidadTelefonoEmpresaDESCRIPCION: TStringField;
+    btIrWeb: TButton;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -353,6 +354,7 @@ type
     procedure AgregarTelMailClick(Sender: TObject);
     procedure EditarTelMailClick(Sender: TObject);
     procedure ZQ_EntidadTelefonoEmpresaBeforePost(DataSet: TDataSet);
+    procedure btIrWebClick(Sender: TObject);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
@@ -1044,6 +1046,14 @@ procedure TFABMEmpresas.ZQ_EntidadTelefonoEmpresaBeforePost(
   DataSet: TDataSet);
 begin
 ZQ_EntidadTelefonoEmpresaID_ENTIDAD.AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
+end;
+
+procedure TFABMEmpresas.btIrWebClick(Sender: TObject);
+begin
+  if trim(ZQ_EmpresaPAGINA_WEB.AsString) = '' then
+    exit;
+
+  ShellExecute(self.handle, 'open', pchar('http://'+ZQ_EmpresaPAGINA_WEB.AsString), nil, nil, SW_SHOWNORMAL);
 end;
 
 end.
