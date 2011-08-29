@@ -108,9 +108,11 @@ type
     lblResumen: TLabel;
     EKDbSuma1: TEKDbSuma;
     AVolver: TAction;
+    PopUpDesasociar: TPopupMenu;
+    PopUpStock_Desasociar: TMenuItem;
+    PopUpStock_DesasociarTodos: TMenuItem;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -136,6 +138,8 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ZQ_StockAfterScroll(DataSet: TDataSet);
     procedure AVolverExecute(Sender: TObject);
+    procedure PopUpStock_DesasociarClick(Sender: TObject);
+    procedure PopUpStock_DesasociarTodosClick(Sender: TObject);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -161,15 +165,10 @@ uses UDM, UPrincipal;
 
 {$R *.dfm}
 
-procedure TFABM_ProductoStock.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFABM_ProductoStock.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   EKOrdenarGrillaStock.GuardarConfigColumnas;
   EKOrdenarGrillaProducto.GuardarConfigColumnas;
-end;
-
-
-procedure TFABM_ProductoStock.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABMStock);
 end;
 
@@ -184,6 +183,7 @@ begin
     GrupoEditando.Enabled:= false;
     GrupoGuardarCancelar.Enabled:= true;
 
+    EKOrdenarGrillaStock.PopUpGrilla:= nil;
     DBGridStock.ReadOnly:= false;
   end;
 end;
@@ -200,6 +200,8 @@ begin
       GrupoGuardarCancelar.Enabled:= false;
       ZQ_Stock.Refresh;
       DBGridStock.ReadOnly := true;
+
+      EKOrdenarGrillaStock.PopUpGrilla:= PopUpDesasociar;
     end
   except
     begin
@@ -221,6 +223,8 @@ begin
     GrupoGuardarCancelar.Enabled:= false;
 
     DBGridStock.ReadOnly := true;
+
+    EKOrdenarGrillaStock.PopUpGrilla:= PopUpDesasociar;
   end;
 end;
 
@@ -544,11 +548,86 @@ begin
   DBGridStock.DefaultDrawColumnCell(Rect, DataCol, Column, state);
 end;
 
+
 procedure TFABM_ProductoStock.ZQ_StockAfterScroll(DataSet: TDataSet);
 begin
   lblResumen.Caption:= 'Total Stock: '+FloatToStr(EKDbSuma1.SumCollection.Items[0].SumValue);
 end;
 
 
+procedure TFABM_ProductoStock.PopUpStock_DesasociarClick(Sender: TObject);
+var
+  sucursal: string;
+begin
+  if ZQ_Stock.IsEmpty then
+    exit;
+
+  if ZQ_StockSTOCK_ACTUAL.AsFloat <> 0 then
+  begin
+    Application.MessageBox('No se puede desasociar el producto seleccionado porque actualmente tiene stock, por favor verifique.','Validación',MB_OK+MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMStock, [ZQ_Stock]) then
+  begin
+    sucursal:= ZQ_StockSUCURSAL.AsString;
+    if not ZQ_StockSECCION.IsNull then
+      sucursal:= sucursal + ' Sección: ' + ZQ_StockSECCION.AsString;
+    if not ZQ_StockFILA.IsNull then
+      sucursal:= sucursal + ' Fila: ' + ZQ_StockFILA.AsString;
+    if not ZQ_StockCOLUMNA.IsNull then
+      sucursal:= sucursal + ' Columna: ' + ZQ_StockCOLUMNA.AsString;
+
+    if (application.MessageBox(pchar('¿Seguro que desea quitar el producto seleccionado de '+sucursal+'?'), 'ATENCION - ABM Producto Stock', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+      exit;
+
+    ZQ_Stock.Delete;
+
+    if not DM.EKModelo.finalizar_transaccion(transaccion_ABMStock) then
+      DM.EKModelo.cancelar_transaccion(transaccion_ABMStock);
+  end;
+end;
+
+
+procedure TFABM_ProductoStock.PopUpStock_DesasociarTodosClick(Sender: TObject);
+var
+  sucursal: string;
+  tieneStock: boolean;
+begin
+  if ZQ_Stock.IsEmpty then
+    exit;
+
+  tieneStock:= false;
+
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMStock, [ZQ_Stock]) then
+  begin
+    sucursal:= ZQ_StockSUCURSAL.AsString;
+    if not ZQ_StockSECCION.IsNull then
+      sucursal:= sucursal + ' Sección: ' + ZQ_StockSECCION.AsString;
+    if not ZQ_StockFILA.IsNull then
+      sucursal:= sucursal + ' Fila: ' + ZQ_StockFILA.AsString;
+    if not ZQ_StockCOLUMNA.IsNull then
+      sucursal:= sucursal + ' Columna: ' + ZQ_StockCOLUMNA.AsString;
+
+    if (application.MessageBox(pchar('¿Seguro que desea quitar todos los productos listados de '+sucursal+'?'), 'ATENCION - ABM Producto Stock', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+      exit;
+
+    ZQ_Stock.First;
+    while not ZQ_Stock.Eof do
+    begin
+      if ZQ_StockSTOCK_ACTUAL.AsFloat <> 0 then
+      begin
+        Application.MessageBox('No se puede completar la acción porque un producto de la lista actualmente tiene stock, por favor verifique.','Validación',MB_OK+MB_ICONINFORMATION);
+        DM.EKModelo.cancelar_transaccion(transaccion_ABMStock);
+        exit;
+      end;
+
+      ZQ_Stock.Delete;
+    end;
+
+    if not DM.EKModelo.finalizar_transaccion(transaccion_ABMStock) then
+      DM.EKModelo.cancelar_transaccion(transaccion_ABMStock);
+  end;
+end;
 
 end.
