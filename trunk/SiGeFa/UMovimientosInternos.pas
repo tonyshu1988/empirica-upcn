@@ -418,6 +418,7 @@ begin
 
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
     end
     else
       exit;
