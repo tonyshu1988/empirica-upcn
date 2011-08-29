@@ -104,18 +104,19 @@ Const
   //ABM COMPROBANTES
   CPB_NOTA_CREDITO   = 12; //origina una disminución en la cuenta del comprador o deudor.
   CPB_NOTA_DEBITO    = 13; //origina un incremento en la cuenta del comprador o deudor.
-  CPB_PRESUPUESTO    = 14; //se entrega al CLIENTE con los productos cargados para una posible venta. AUTONUMERADO
-  CPB_NOTA_PEDIDO    = 15; //se envia al PROVEEDOR con los productos encargados para una compra. AUTONUMERADO
-  CPB_ORDEN_PAGO     = 18; //se entrega al CLIENTE como comprobante de un pago efectuado a este. AUTONUMERADO (comprobante de tercero).
-  CPB_RECIBO_COBRO   = 19; //se entrega al CLIENTE como comprobante de un pago efectuado por este. AUTONUMERADO
+  CPB_PRESUPUESTO    = 14; //OK se entrega al CLIENTE con los productos cargados para una posible venta. AUTONUMERADO
+  CPB_NOTA_PEDIDO    = 15; //OK se envia al PROVEEDOR con los productos encargados para una compra. AUTONUMERADO
+  CPB_ORDEN_PAGO     = 18; //OK se entrega al CLIENTE como comprobante de un pago efectuado a este. AUTONUMERADO (comprobante de tercero).
+  CPB_RECIBO_COBRO   = 19; //OK se entrega al CLIENTE como comprobante de un pago efectuado por este. AUTONUMERADO
   CPB_REMITO_VENTA   = 20; //se entrega al CLIENTE para documentar la entrega y/o remisión de la mercadería. AUTONUMERADO
   //MOVIMIENTOS INTERNOS
-  CPB_OTROS_INGRESOS = 16; //Se utilizan en la pantallas Movimientos Internos
-  CPB_OTROS_EGRESOS  = 17; //Se utilizan en la pantallas Movimientos Internos
+  CPB_OTROS_INGRESOS = 16; //OK Se utilizan en la pantallas Movimientos Internos
+  CPB_OTROS_EGRESOS  = 17; //OK Se utilizan en la pantallas Movimientos Internos
 
-  ESTADO_SIN_CONFIRMADO = 1;
-  ESTADO_CONFIRMADO     = 2;
-  ESTADO_ALMACENADO     = 3;  
+  ESTADO_SIN_CONFIRMAR = 0;
+  ESTADO_CONFIRMADO    = 1;
+  ESTADO_ALMACENADO    = 2;
+  ESTADO_ANULADO       = 4;
 
   LONG_COD_BARRAS       = 40;
   LONG_CODIGO           = 14;
