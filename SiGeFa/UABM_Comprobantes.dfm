@@ -4223,6 +4223,12 @@ object FABM_Comprobantes: TFABM_Comprobantes
       FieldName = 'CTA_INGRESO'
       Size = 50
     end
+    object ZQ_VerCpb_FpagoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_VerCpb_FpagoIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+    end
   end
   object ZQ_VerCpb_Producto: TZQuery
     Connection = DM.Conexion
@@ -4353,6 +4359,21 @@ object FABM_Comprobantes: TFABM_Comprobantes
     end
     object ZQ_VerCpb_ProductoIMPUESTO_IVA: TFloatField
       FieldName = 'IMPUESTO_IVA'
+    end
+    object ZQ_VerCpb_ProductoIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_VerCpb_ProductoCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_VerCpb_ProductoCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+    object ZQ_VerCpb_ProductoID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_VerCpb_ProductoIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
     end
   end
   object DS_VerCpb: TDataSource
@@ -4763,7 +4784,7 @@ object FABM_Comprobantes: TFABM_Comprobantes
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 109
+    Left = 112
     Top = 217
     ParamData = <
       item
@@ -4792,6 +4813,12 @@ object FABM_Comprobantes: TFABM_Comprobantes
     object ZQ_ComprobanteID_COMP_ESTADO: TIntegerField
       FieldName = 'ID_COMP_ESTADO'
     end
+    object ZQ_ComprobanteID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
     object ZQ_ComprobanteCODIGO: TStringField
       FieldName = 'CODIGO'
       Size = 50
@@ -4809,9 +4836,6 @@ object FABM_Comprobantes: TFABM_Comprobantes
     object ZQ_ComprobanteSALDO: TFloatField
       FieldName = 'SALDO'
     end
-    object ZQ_ComprobanteIMPORTE_TOTAL: TFloatField
-      FieldName = 'IMPORTE_TOTAL'
-    end
     object ZQ_ComprobantePORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
     end
@@ -4823,6 +4847,12 @@ object FABM_Comprobantes: TFABM_Comprobantes
     end
     object ZQ_ComprobanteIMPORTE_DESCUENTO: TFloatField
       FieldName = 'IMPORTE_DESCUENTO'
+    end
+    object ZQ_ComprobanteIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+    end
+    object ZQ_ComprobanteIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
     end
     object ZQ_ComprobanteENCABEZADO: TStringField
       FieldName = 'ENCABEZADO'
@@ -5123,6 +5153,15 @@ object FABM_Comprobantes: TFABM_Comprobantes
     end
     object ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField
       FieldName = 'CANTIDAD_ALMACENADA'
+    end
+    object ZQ_CpbProductoIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_CpbProductoID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_CpbProductoIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
     end
   end
   object DS_CpbProducto: TDataSource

@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZStoredProcedure,
-  EKBusquedaAvanzada, StdCtrls;
+  EKBusquedaAvanzada, StdCtrls, EKDbSuma, QRCtrls, QuickRpt,
+  EKVistaPreviaQR;
 
 type
   TFEstadisticaDisponibilidades = class(TForm)
@@ -71,9 +72,38 @@ type
     Label5: TLabel;
     Label6: TLabel;
     DBGrid2: TDBGrid;
+    EKDbSuma_Saldo: TEKDbSuma;
+    RepSaldo: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepSaldo_Subtitulo: TQRLabel;
+    RepSaldo_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblRepSaldo_PieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRlblRepSaldo_CritBusqueda: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRLabel48: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRlblRepSaldo_SaldoTotal: TQRLabel;
+    EKVista_RepSaldo: TEKVistaPreviaQR;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -91,6 +121,9 @@ uses UDM;
 
 procedure TFEstadisticaDisponibilidades.FormCreate(Sender: TObject);
 begin
+  TabSheet2.TabVisible:= false;
+  TabSheet3.TabVisible:= false;
+
   PageControl.ActivePageIndex:= 0;
   dm.EKModelo.abrir(ZQ_Sucursal);
 
@@ -130,11 +163,28 @@ begin
 
         lblSaldo_Encabezado1.Caption:= 'Saldo Cuentas al '+EKBuscarSaldo.ParametrosSeleccionados1[1];
         lblSaldo_Encabezado2.Caption:= 'Sucursal: '+EKBuscarSaldo.ParametrosSelecReales1[0];
+        lblSaldo_Total.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_Saldo.SumCollection.Items[0].SumValue);
       end;
   end;
 end;
 
 
 
+
+procedure TFEstadisticaDisponibilidades.btnImprimirClick(Sender: TObject);
+begin
+  if PageControl.ActivePage.Name = 'TabSaldosCuentas' then
+  begin
+    if ZP_SaldosCuentas.IsEmpty then
+      exit;
+
+    DM.VariablesReportes(RepSaldo);
+    QRlblRepSaldo_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    QRlblRepSaldo_SaldoTotal.Caption:= lblSaldo_Total.Caption;
+    QRlblRepSaldo_CritBusqueda.Caption := EKBuscarSaldo.ParametrosBuscados;
+
+    EKVista_RepSaldo.VistaPrevia;
+  end;
+end;
 
 end.
