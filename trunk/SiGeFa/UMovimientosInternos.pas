@@ -2,6 +2,9 @@ unit UMovimientosInternos;
 
 interface
 
+//que ponemos en la fecha de anulacion, la del comprobante o la de hoy?
+//si queremos llevar el historico tendria que ser la de hoy.
+
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
@@ -354,7 +357,6 @@ begin
     ZQ_Comprobante.Append;
     ZQ_ComprobanteID_COMPROBANTE.AsInteger:= id_comprobante;
     ZQ_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
-    ZQ_ComprobanteIMPORTE_TOTAL.AsInteger:= 0;
     ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
     ZQ_ComprobanteFECHA_COBRADA.Clear;
     ZQ_ComprobanteFECHA_ENVIADA.Clear;
@@ -414,6 +416,7 @@ begin
     begin
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+//      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
     end
     else
@@ -474,7 +477,8 @@ begin
 
   EKSuma_FPago.RecalcAll;
   EKSuma_FPago.RecalcAll;
-  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue;
+  ZQ_ComprobanteBASE_IMPONIBLE.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue;
+  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= ZQ_ComprobanteBASE_IMPONIBLE.AsFloat;
 
   fecha:= FormatDateTime('DD/MM/YYYY' ,ZQ_ComprobanteFECHA.AsDateTime);
   try

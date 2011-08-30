@@ -464,6 +464,19 @@ type
     EKOrd_EditarFpago: TEKOrdenarGrilla;
     ZQ_CpbFormaPagoFECHA_FP: TDateTimeField;
     ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField;
+    ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
+    ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
+    ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
+    ZQ_VerCpb_FpagoFECHA_FP: TDateTimeField;
+    ZQ_VerCpb_FpagoIMPORTE_REAL: TFloatField;
+    ZQ_CpbProductoIMPUESTO_INTERNO: TFloatField;
+    ZQ_CpbProductoID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_CpbProductoIMPORTE_VENTA: TFloatField;
+    ZQ_VerCpb_ProductoIMPUESTO_INTERNO: TFloatField;
+    ZQ_VerCpb_ProductoCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_VerCpb_ProductoCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_VerCpb_ProductoID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_VerCpb_ProductoIMPORTE_VENTA: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1096,11 +1109,11 @@ begin
   if not ZQ_CpbFormaPago.IsEmpty then
   begin
     ZQ_CpbFormaPago.First;
-    while not ZQ_CpbFormaPago.Eof do
+    while not ZQ_CpbFormaPago.Eof do  //por cada una de las formas de pago cargadas
     begin
       ZQ_CpbFormaPago.Edit;
-      ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat;
-      ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+      ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat; //pongo el mismo importe cargado al importe_real
+      ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
 
       ZQ_CpbFormaPago.Next;
     end;
@@ -1125,16 +1138,19 @@ begin
   end;
 
   ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= 0;
-  if (tipoComprobante = CPB_PRESUPUESTO) then
+  ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= 0;
+  if (tipoComprobante = CPB_PRESUPUESTO) then //si es un presupuesto
   begin
-    EKSuma_Productos.RecalcAll;
+    EKSuma_Productos.RecalcAll; //el importe del comprobante es igual a la suma del importe de los productos
     ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
+    ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteIMPORTE_TOTAL.AsFloat;
   end
   else
     if (tipoComprobante = CPB_ORDEN_PAGO) or  (tipoComprobante = CPB_RECIBO_COBRO) then
     begin
-      EKSuma_FPago.RecalcAll;
-      ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue;
+      EKSuma_FPago.RecalcAll; //si es un recibo o una orden de pago el importe del comprobante es igual a la
+      ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue; //suma de las formas de pago
+      ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteIMPORTE_TOTAL.AsFloat;
     end;
 
   if confirmarComprobante then

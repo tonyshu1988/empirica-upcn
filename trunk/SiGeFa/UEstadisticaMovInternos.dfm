@@ -1,6 +1,6 @@
 object FEstadisticaMovInternos: TFEstadisticaMovInternos
-  Left = 513
-  Top = 216
+  Left = 311
+  Top = 145
   Width = 870
   Height = 546
   Caption = 'Estadistica Movimientos Internos'
@@ -23,7 +23,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
     Top = 0
     Width = 854
     Height = 456
-    ActivePage = TabTipoMovimiento
+    ActivePage = TabIngresoVsEgresos
     Align = alClient
     TabOrder = 0
     object TabIngresoVsEgresos: TTabSheet

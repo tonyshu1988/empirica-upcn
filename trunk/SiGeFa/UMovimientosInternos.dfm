@@ -1,5 +1,5 @@
 object FMovimientosInternos: TFMovimientosInternos
-  Left = 315
+  Left = 197
   Top = 156
   Width = 1056
   Height = 559
