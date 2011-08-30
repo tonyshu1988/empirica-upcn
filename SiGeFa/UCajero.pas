@@ -362,6 +362,7 @@ type
     CD_ComprobanteFECHA_ANULADO: TDateField;
     CD_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
     CD_ComprobanteIMPORTE_VENTA: TFloatField;
+    ZSP_ComprobanteCODIGO: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -809,6 +810,7 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
       ZQ_Comprobante.Append;
       ZSP_Comprobante.Active:=True;
       ZQ_ComprobanteID_COMPROBANTE.AsInteger:=ZSP_ComprobanteID.AsInteger;
+      ZQ_ComprobanteCODIGO.AsString:=ZSP_ComprobanteCODIGO.AsString;
       ZSP_Comprobante.Active:=False;
       ZQ_ComprobanteID_SUCURSAL.Value:=CD_ComprobanteID_SUCURSAL.Value;
       ZQ_ComprobanteID_PROVEEDOR.Clear;
@@ -816,7 +818,6 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
       ZQ_ComprobanteID_TIPO_CPB.value:=CD_ComprobanteID_TIPO_CPB.Value;
       ZQ_ComprobanteID_VENDEDOR.Value:=CD_ComprobanteID_VENDEDOR.Value;
       ZQ_ComprobanteID_COMP_ESTADO.Value:=CD_ComprobanteID_COMP_ESTADO.Value;;
-      ZQ_ComprobanteCODIGO.Value:=CD_ComprobanteCODIGO.Value;
       ZQ_ComprobanteFECHA.AsDateTime:=CD_ComprobanteFECHA.AsDateTime;
       ZQ_ComprobanteOBSERVACION.Value:=CD_ComprobanteOBSERVACION.Value;
       ZQ_ComprobanteBASE_IMPONIBLE.Value:=CD_ComprobanteBASE_IMPONIBLE.Value;
@@ -919,7 +920,7 @@ begin
   CD_ComprobanteID_VENDEDOR.AsInteger:=IdVendedor;
   CD_ComprobanteID_COMP_ESTADO.AsInteger:=0;//PENDIENTE
   CD_ComprobanteCODIGO.AsString:='';
-  CD_ComprobanteFECHA.AsDateTime:=dm.EKModelo.Fecha();
+  CD_ComprobanteFECHA.AsDateTime:=dm.EKModelo.FechayHora();
   CD_ComprobanteOBSERVACION.AsString:='';
   CD_ComprobanteBASE_IMPONIBLE.AsFloat:=0;
   CD_ComprobanteSALDO.AsFloat:=0;
@@ -1050,11 +1051,10 @@ begin
 //    end
 //    else
 //    begin
-
+      ZQ_Comprobante_FormaPago.Open;
       CD_Fpago.First;
       while not CD_Fpago.Eof do
       begin
-        ZQ_Comprobante_FormaPago.Open;
         ZQ_Comprobante_FormaPago.Append;
         ZQ_Comprobante_FormaPagoID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
         ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger := CD_FpagoID_TIPO_FORMAPAG.AsInteger;

@@ -1,8 +1,8 @@
 object FEstadisticasFacturacion: TFEstadisticasFacturacion
-  Left = 382
-  Top = 263
-  Width = 911
-  Height = 500
+  Left = 179
+  Top = 112
+  Width = 1061
+  Height = 668
   Caption = 'Estadisticas Facturacion'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,200 +14,283 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   OldCreateOrder = False
   Position = poDefault
   Visible = True
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 895
-    Height = 410
+    Width = 1045
+    Height = 578
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
-    object PageControl: TPageControl
+    object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 893
-      Height = 408
-      ActivePage = TabSheet1
+      Width = 1043
+      Height = 576
       Align = alClient
+      Caption = 'Panel5'
       TabOrder = 0
-      object TabSheet1: TTabSheet
-        Caption = 'TabSheet1'
+      object Splitter1: TSplitter
+        Left = 697
+        Top = 1
+        Width = 8
+        Height = 574
+        Align = alRight
+      end
+      object Panel1: TPanel
+        Left = 1
+        Top = 1
+        Width = 696
+        Height = 574
+        Align = alClient
+        Caption = 'Panel1'
+        TabOrder = 0
+        object lblComprobantes: TLabel
+          Left = 1
+          Top = 555
+          Width = 694
+          Height = 18
+          Align = alBottom
+          Alignment = taRightJustify
+          Caption = 'Total Comprobantes: $ 0.00 '
+          Color = 16729670
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
         object DBGridProducto: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 885
-          Height = 380
+          Left = 1
+          Top = 1
+          Width = 694
+          Height = 554
           Align = alClient
-          Color = 13431031
+          Color = 16762303
           DataSource = DS_Comprobante
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
           ReadOnly = True
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           Columns = <
             item
               Expanded = False
-              FieldName = 'ID_COMPROBANTE'
-              Width = 66
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'CODIGO'
-              Width = 108
+              Title.Caption = 'C'#243'digo'
+              Width = 85
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'FECHA'
-              Width = 79
+              Title.Caption = 'Fecha'
+              Width = 72
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'BASE_IMPONIBLE'
+              FieldName = 'TIPOCOMPR_'
+              Title.Caption = 'Tipo'
+              Width = 113
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'IMPORTE_TOTAL'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PORC_IVA'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_IVA'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PORC_DESCUENTO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_DESCUENTO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_COBRADA'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_ENVIADA'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_IMPRESA'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ENCABEZADO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PIE'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_PROVEEDOR'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_CLIENTE'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_TIPO_CPB'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_VENCIMIENTO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_SUCURSAL'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_VENDEDOR'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_COMP_ESTADO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SALDO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PUNTO_VENTA'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NUMERO_CPB'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_ANULADO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_TIPO_IVA'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_TIPO_MOVIMIENTO'
+              FieldName = 'CLIENTE_'
+              Title.Caption = 'Cliente'
+              Width = 168
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'IMPORTE_VENTA'
+              Title.Caption = 'Importe Venta'
+              Width = 95
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'OBSERVACION'
+              FieldName = 'SUC_'
+              Title.Caption = 'Sucursal'
+              Width = 163
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TIVA_'
+              Title.Caption = 'Tipo IVA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VENDEDOR_'
+              Title.Caption = 'Vendedor'
+              Width = 193
               Visible = True
             end>
         end
       end
-      object TabSheet2: TTabSheet
-        Caption = 'TabSheet2'
-        ImageIndex = 1
-      end
-      object TabSheet3: TTabSheet
-        Caption = 'TabSheet3'
-        ImageIndex = 2
+      object Panel2: TPanel
+        Left = 705
+        Top = 1
+        Width = 337
+        Height = 574
+        Align = alRight
+        Caption = 'Panel2'
+        TabOrder = 1
+        object Splitter2: TSplitter
+          Left = 1
+          Top = 434
+          Width = 335
+          Height = 8
+          Cursor = crVSplit
+          Align = alBottom
+        end
+        object Panel3: TPanel
+          Left = 1
+          Top = 1
+          Width = 335
+          Height = 433
+          Align = alClient
+          Caption = 'Panel3'
+          TabOrder = 0
+          object DBGridListadoProductos: TDBGrid
+            Left = 1
+            Top = 1
+            Width = 333
+            Height = 431
+            Align = alClient
+            Color = 16762303
+            DataSource = DS_ComprobanteDetalle
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'ID_PRODUCTO'
+                Title.Caption = 'ID'
+                Width = 46
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DETALLE_PROD'
+                Title.Caption = 'Producto'
+                Width = 174
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CANTIDAD'
+                Title.Caption = 'Cant.'
+                Width = 40
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_VENTA'
+                Title.Caption = 'Importe Venta'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'PORC_DESCUENTO'
+                Title.Caption = 'Desc.'
+                Width = 57
+                Visible = True
+              end>
+          end
+        end
+        object Panel4: TPanel
+          Left = 1
+          Top = 442
+          Width = 335
+          Height = 131
+          Align = alBottom
+          Caption = 'Panel4'
+          TabOrder = 1
+          object DBGridFormaPago: TDBGrid
+            Left = 1
+            Top = 1
+            Width = 333
+            Height = 129
+            Align = alClient
+            Color = 16762303
+            DataSource = DS_Comprobante_FormaPago
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'TFORMAPAGO_'
+                Title.Caption = 'Forma de Pago'
+                Width = 169
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_REAL'
+                Title.Caption = 'Importe Venta'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_FECHA'
+                Title.Caption = 'MDP Fecha'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_BANCO'
+                Title.Caption = 'Banco'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_CHEQUE'
+                Title.Caption = 'N'#250'mero'
+                Visible = True
+              end>
+          end
+        end
       end
     end
   end
@@ -321,37 +404,6 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
           end
           item
             BeginGroup = True
-            Item = btnNuevo
-            Visible = True
-          end
-          item
-            Item = btnModificar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnBaja
-            Visible = True
-          end
-          item
-            Item = btnReactivar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnGuardar
-            Visible = True
-          end
-          item
-            Item = btnCancelar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnImprimir
-            Visible = True
-          end
-          item
             Item = btnSalir
             Visible = True
           end>
@@ -777,93 +829,189 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         'btnCancelar')
     end
   end
-  object ZQuery1: TZQuery
+  object DS_Comprobante: TDataSource
+    DataSet = ZQ_Comprobante
+    Left = 213
+    Top = 241
+  end
+  object ZQ_Comprobante_FormaPago: TZQuery
     Connection = DM.Conexion
+    Filter = 'id_comprobante=-1'
+    Filtered = True
+    SQL.Strings = (
+      'select cfp.*, tfp.descripcion as tFormaPago_'
+      'from comprobante_forma_pago cfp'
+      
+        'left join tipo_formapago tfp on (tfp.id_tipo_formapago=cfp.id_ti' +
+        'po_formapag)'
+      ''
+      '')
+    Params = <>
+    Left = 585
+    Top = 337
+    object ZQ_Comprobante_FormaPagoID_COMPROB_FP: TIntegerField
+      FieldName = 'ID_COMPROB_FP'
+      Required = True
+    end
+    object ZQ_Comprobante_FormaPagoID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAG'
+      Required = True
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_FECHA: TDateField
+      FieldName = 'MDCP_FECHA'
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_BANCO: TStringField
+      FieldName = 'MDCP_BANCO'
+      Size = 50
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_CHEQUE: TStringField
+      FieldName = 'MDCP_CHEQUE'
+      Size = 50
+    end
+    object ZQ_Comprobante_FormaPagoIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+      DisplayFormat = '$ #,###,##0.00'
+    end
+    object ZQ_Comprobante_FormaPagoCONCILIADO: TDateField
+      FieldName = 'CONCILIADO'
+    end
+    object ZQ_Comprobante_FormaPagoCUENTA_INGRESO: TIntegerField
+      FieldName = 'CUENTA_INGRESO'
+    end
+    object ZQ_Comprobante_FormaPagoCUENTA_EGRESO: TIntegerField
+      FieldName = 'CUENTA_EGRESO'
+    end
+    object ZQ_Comprobante_FormaPagoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_Comprobante_FormaPagoIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+      DisplayFormat = '$ #,###,##0.00'
+    end
+    object ZQ_Comprobante_FormaPagoTFORMAPAGO_: TStringField
+      FieldName = 'TFORMAPAGO_'
+      Size = 50
+    end
+  end
+  object ZQ_ComprobanteDetalle: TZQuery
+    Connection = DM.Conexion
+    Filter = 'id_comprobante=-1'
+    Filtered = True
     SQL.Strings = (
       
-        'select cd.id_producto, cd.cantidad, cd.importe_final, cd.importe' +
-        '_unitario, c.fecha_cobrada, p.cod_corto, m.nombre_marca ,a.descr' +
-        'ipcion as articulo'
-      'from comprobante c'
+        'select cd.*,pc.nombre||'#39' - COD: '#39'||coalesce(p.cod_corto,'#39#39') DETA' +
+        'LLE_PROD'
+      'from comprobante_detalle cd'
+      'left join producto p on (cd.id_producto=p.id_producto)'
       
-        'inner join comprobante_detalle cd on (c.id_comprobante = cd.id_c' +
-        'omprobante)'
-      'inner join producto p on (cd.id_producto = p.id_producto)'
-      
-        'inner join producto_cabecera pc on (p.id_prod_cabecera = pc.id_p' +
-        'rod_cabecera)'
-      'inner join marca m on (p.id_medida = m.id_marca)'
-      'inner join articulo a on (pc.id_articulo = a.id_articulo)'
-      'where c.fecha_cobrada between :FechaDesde and :FechaHasta')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'FechaDesde'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'FechaHasta'
-        ParamType = ptUnknown
-      end>
-    Left = 453
-    Top = 137
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'FechaDesde'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'FechaHasta'
-        ParamType = ptUnknown
-      end>
-    object ZQuery1ID_PRODUCTO: TIntegerField
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
+      '')
+    Params = <>
+    Left = 601
+    Top = 153
+    object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+      Required = True
+    end
+    object ZQ_ComprobanteDetalleID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_ComprobanteDetalleID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
       Required = True
     end
-    object ZQuery1CANTIDAD: TFloatField
-      FieldName = 'CANTIDAD'
-    end
-    object ZQuery1IMPORTE_FINAL: TFloatField
-      FieldName = 'IMPORTE_FINAL'
-    end
-    object ZQuery1IMPORTE_UNITARIO: TFloatField
-      FieldName = 'IMPORTE_UNITARIO'
-    end
-    object ZQuery1FECHA_COBRADA: TDateField
-      FieldName = 'FECHA_COBRADA'
-    end
-    object ZQuery1COD_CORTO: TStringField
-      FieldName = 'COD_CORTO'
-    end
-    object ZQuery1NOMBRE_MARCA: TStringField
-      FieldName = 'NOMBRE_MARCA'
-      Size = 50
-    end
-    object ZQuery1ARTICULO: TStringField
-      FieldName = 'ARTICULO'
+    object ZQ_ComprobanteDetalleDETALLE: TStringField
+      FieldName = 'DETALLE'
       Size = 200
     end
-  end
-  object DS_Comprobante: TDataSource
-    DataSet = ZQ_Comprobante
-    Left = 173
-    Top = 185
+    object ZQ_ComprobanteDetalleCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+      DisplayFormat = '$ #,###,##0.00'
+    end
+    object ZQ_ComprobanteDetallePORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+    end
+    object ZQ_ComprobanteDetalleIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_ComprobanteDetallePORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_ComprobanteDetalleCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_ComprobanteDetalleCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+    object ZQ_ComprobanteDetalleID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      DisplayFormat = '$ #,###,##0.00'
+    end
+    object ZQ_ComprobanteDetalleDETALLE_PROD: TStringField
+      FieldName = 'DETALLE_PROD'
+      ReadOnly = True
+      Size = 128
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+      DisplayFormat = '$ #,###,##0.00'
+    end
   end
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_ComprobanteAfterScroll
     SQL.Strings = (
-      'select c.*'
+      'select c.*,'
+      
+        's.nombre as suc_,p1.nombre as Vendedor_,iva.abreviatura as tiva_' +
+        ','
+      'tc.nombre_tipo_cpb as tipoCompr_,p2.nombre as cliente_'
       'from comprobante c'
-      'where c.id_tipo_cpb=11')
+      'join sucursal s on (c.id_sucursal=s.id_sucursal)'
+      'join persona p1 on (p1.id_persona=c.id_vendedor)'
+      'join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
+      'join tipo_comprobante tc on (tc.id_tipo_cpb=c.id_tipo_cpb)'
+      'join persona p2 on (p2.id_persona=c.id_cliente)'
+      'where (c.ID_TIPO_CPB=11)')
     Params = <>
-    Left = 109
-    Top = 113
+    Left = 210
+    Top = 130
     object ZQ_ComprobanteID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
-      Required = True
+    end
+    object ZQ_ComprobanteID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_ComprobanteID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_ComprobanteID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object ZQ_ComprobanteID_TIPO_CPB: TIntegerField
+      FieldName = 'ID_TIPO_CPB'
+    end
+    object ZQ_ComprobanteID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object ZQ_ComprobanteID_COMP_ESTADO: TIntegerField
+      FieldName = 'ID_COMP_ESTADO'
     end
     object ZQ_ComprobanteCODIGO: TStringField
       FieldName = 'CODIGO'
@@ -879,20 +1027,35 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     object ZQ_ComprobanteBASE_IMPONIBLE: TFloatField
       FieldName = 'BASE_IMPONIBLE'
     end
+    object ZQ_ComprobanteSALDO: TFloatField
+      FieldName = 'SALDO'
+      DisplayFormat = '$ #,###,##0.00'
+    end
     object ZQ_ComprobanteIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
+      DisplayFormat = '$ #,###,##0.00'
     end
     object ZQ_ComprobantePORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
     end
     object ZQ_ComprobanteIMPORTE_IVA: TFloatField
       FieldName = 'IMPORTE_IVA'
+      DisplayFormat = '$ #,###,##0.00'
     end
     object ZQ_ComprobantePORC_DESCUENTO: TFloatField
       FieldName = 'PORC_DESCUENTO'
     end
     object ZQ_ComprobanteIMPORTE_DESCUENTO: TFloatField
       FieldName = 'IMPORTE_DESCUENTO'
+      DisplayFormat = '$ #,###,##0.00'
+    end
+    object ZQ_ComprobanteENCABEZADO: TStringField
+      FieldName = 'ENCABEZADO'
+      Size = 500
+    end
+    object ZQ_ComprobantePIE: TStringField
+      FieldName = 'PIE'
+      Size = 500
     end
     object ZQ_ComprobanteFECHA_COBRADA: TDateField
       FieldName = 'FECHA_COBRADA'
@@ -903,39 +1066,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     object ZQ_ComprobanteFECHA_IMPRESA: TDateField
       FieldName = 'FECHA_IMPRESA'
     end
-    object ZQ_ComprobanteENCABEZADO: TStringField
-      FieldName = 'ENCABEZADO'
-      Size = 500
-    end
-    object ZQ_ComprobantePIE: TStringField
-      FieldName = 'PIE'
-      Size = 500
-    end
-    object ZQ_ComprobanteID_PROVEEDOR: TIntegerField
-      FieldName = 'ID_PROVEEDOR'
-    end
-    object ZQ_ComprobanteID_CLIENTE: TIntegerField
-      FieldName = 'ID_CLIENTE'
-    end
-    object ZQ_ComprobanteID_TIPO_CPB: TIntegerField
-      FieldName = 'ID_TIPO_CPB'
-      Required = True
-    end
     object ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField
       FieldName = 'FECHA_VENCIMIENTO'
-    end
-    object ZQ_ComprobanteID_SUCURSAL: TIntegerField
-      FieldName = 'ID_SUCURSAL'
-      Required = True
-    end
-    object ZQ_ComprobanteID_VENDEDOR: TIntegerField
-      FieldName = 'ID_VENDEDOR'
-    end
-    object ZQ_ComprobanteID_COMP_ESTADO: TIntegerField
-      FieldName = 'ID_COMP_ESTADO'
-    end
-    object ZQ_ComprobanteSALDO: TFloatField
-      FieldName = 'SALDO'
     end
     object ZQ_ComprobantePUNTO_VENTA: TIntegerField
       FieldName = 'PUNTO_VENTA'
@@ -954,6 +1086,369 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     end
     object ZQ_ComprobanteIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
+      DisplayFormat = '$ #,###,##0.00'
     end
+    object ZQ_ComprobanteSUC_: TStringField
+      FieldName = 'SUC_'
+      Size = 200
+    end
+    object ZQ_ComprobanteVENDEDOR_: TStringField
+      FieldName = 'VENDEDOR_'
+      Size = 200
+    end
+    object ZQ_ComprobanteTIVA_: TStringField
+      FieldName = 'TIVA_'
+      Size = 10
+    end
+    object ZQ_ComprobanteTIPOCOMPR_: TStringField
+      FieldName = 'TIPOCOMPR_'
+      Size = 50
+    end
+    object ZQ_ComprobanteCLIENTE_: TStringField
+      FieldName = 'CLIENTE_'
+      Size = 200
+    end
+  end
+  object DS_Comprobante_FormaPago: TDataSource
+    DataSet = ZQ_Comprobante_FormaPago
+    Left = 325
+    Top = 177
+  end
+  object DS_ComprobanteDetalle: TDataSource
+    DataSet = ZQ_ComprobanteDetalle
+    Left = 325
+    Top = 241
+  end
+  object EKDbSuma1: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'importe_venta'
+      end>
+    DataSet = ZQ_Comprobante
+    SumListChanged = EKDbSuma1SumListChanged
+    Left = 301
+    Top = 329
+  end
+  object EKBuscarComprobantes: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'digo'
+        Campo = 'codigo'
+        Tabla = 'comprobante'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha'
+        Campo = 'fecha'
+        Tabla = 'comprobante'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Comprobante'
+        Campo = 'nombre_tipo_cpb'
+        Tabla = 'tipo_comprobante'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cliente'
+        Campo = 'nombre'
+        Tabla = 'p2'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe Venta'
+        Campo = 'importe_venta'
+        Tabla = 'comprobante'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_Comprobante
+    SQL.Strings = (
+      'select c.*,'
+      
+        's.nombre as suc_,p1.nombre as Vendedor_,iva.abreviatura as tiva_' +
+        ','
+      'tc.nombre_tipo_cpb as tipoCompr_,p2.nombre as cliente_'
+      ''
+      'from comprobante c'
+      'join sucursal s on (c.id_sucursal=s.id_sucursal)'
+      'join persona p1 on (p1.id_persona=c.id_vendedor)'
+      'join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
+      'join tipo_comprobante tc on (tc.id_tipo_cpb=c.id_tipo_cpb)'
+      'join persona p2 on (p2.id_persona=c.id_cliente)'
+      ''
+      'where (c.ID_TIPO_CPB=11)')
+    SQL_Select.Strings = (
+      'select c.*,'
+      
+        's.nombre as suc_,p1.nombre as Vendedor_,iva.abreviatura as tiva_' +
+        ','
+      'tc.nombre_tipo_cpb as tipoCompr_,p2.nombre as cliente_'
+      '')
+    SQL_From.Strings = (
+      'from comprobante c'
+      'join sucursal s on (c.id_sucursal=s.id_sucursal)'
+      'join persona p1 on (p1.id_persona=c.id_vendedor)'
+      'join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
+      'join tipo_comprobante tc on (tc.id_tipo_cpb=c.id_tipo_cpb)'
+      'join persona p2 on (p2.id_persona=c.id_cliente)'
+      '')
+    SQL_Where.Strings = (
+      'where (c.ID_TIPO_CPB=11)')
+    UsarWhereOriginal = EK_Con_Where
+    Left = 69
+    Top = 161
+  end
+  object ZQ_Sucursal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from Sucursal s'
+      'order by s.nombre')
+    Params = <>
+    Left = 68
+    Top = 240
+    object ZQ_SucursalID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_SucursalNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_SucursalDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_SucursalLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_SucursalCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_SucursalTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_SucursalEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_SucursalBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_SucursalLOGO: TBlobField
+      FieldName = 'LOGO'
+    end
+    object ZQ_SucursalREPORTE_TITULO: TStringField
+      FieldName = 'REPORTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalREPORTE_SUBTITULO: TStringField
+      FieldName = 'REPORTE_SUBTITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_TITULO: TStringField
+      FieldName = 'COMPROBANTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField
+      FieldName = 'COMPROBANTE_RENGLON1'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField
+      FieldName = 'COMPROBANTE_RENGLON2'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField
+      FieldName = 'COMPROBANTE_RENGLON3'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField
+      FieldName = 'COMPROBANTE_RENGLON4'
+      Size = 50
+    end
+  end
+  object ZQ_TipoIVA: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from tipo_IVA')
+    Params = <>
+    Left = 141
+    Top = 322
+    object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+      Required = True
+    end
+    object ZQ_TipoIVANOMBRE_TIPO_IVA: TStringField
+      FieldName = 'NOMBRE_TIPO_IVA'
+      Size = 50
+    end
+    object ZQ_TipoIVAABREVIATURA: TStringField
+      FieldName = 'ABREVIATURA'
+      Size = 10
+    end
+    object ZQ_TipoIVADISCRIMINAR: TStringField
+      FieldName = 'DISCRIMINAR'
+      Size = 1
+    end
+    object ZQ_TipoIVALETRA: TStringField
+      FieldName = 'LETRA'
+      Size = 1
+    end
+    object ZQ_TipoIVAFISCAL: TStringField
+      FieldName = 'FISCAL'
+      Size = 1
+    end
+    object ZQ_TipoIVACOEFICIENTE: TFloatField
+      FieldName = 'COEFICIENTE'
+    end
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridProducto
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Vendedor'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 378
+    Top = 106
+  end
+  object EKOrdenarGrilla2: TEKOrdenarGrilla
+    Grilla = DBGridListadoProductos
+    Filtros = <
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cant.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Desc.'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 858
+    Top = 98
+  end
+  object EKOrdenarGrilla3: TEKOrdenarGrilla
+    Grilla = DBGridFormaPago
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'MP'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio Pago'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Banco'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'mero'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 850
+    Top = 474
   end
 end
