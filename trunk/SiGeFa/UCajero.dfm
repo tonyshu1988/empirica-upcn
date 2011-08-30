@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 286
-  Top = 109
+  Left = 327
+  Top = 97
   Width = 1127
   Height = 661
   Caption = 'Cajero SiGeFa'
@@ -4768,6 +4768,10 @@ object FCajero: TFCajero
       end>
     object ZSP_ComprobanteID: TIntegerField
       FieldName = 'ID'
+    end
+    object ZSP_ComprobanteCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 30
     end
   end
   object EKListadoVendedores: TEKListadoSQL
