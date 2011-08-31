@@ -515,7 +515,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
-          AutoStretch = False
+          AutoStretch = True
           Caption = 'QRLabelCritBusqueda'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
@@ -1431,6 +1431,7 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         Tabla = 'tipo_articulo'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

@@ -134,8 +134,8 @@ end;
 
 procedure TFABM_TipoFormaPago.btnBuscarClick(Sender: TObject);
 begin
-  EKbuscar.buscar;
-  dm.mostrarCantidadRegistro(ZQ_TipoFPago, lblCantidadRegistros);
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_TipoFPago, lblCantidadRegistros);
 end;
 
 

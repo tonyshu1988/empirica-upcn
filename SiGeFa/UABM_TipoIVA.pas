@@ -138,8 +138,8 @@ end;
 
 procedure TFABM_TipoIVA.btnBuscarClick(Sender: TObject);
 begin
-  EKbuscar.buscar;
-  dm.mostrarCantidadRegistro(ZQ_TipoIva, lblCantidadRegistros);
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_TipoIva, lblCantidadRegistros);
 end;
 
 

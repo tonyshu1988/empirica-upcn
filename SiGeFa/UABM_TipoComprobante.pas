@@ -145,8 +145,8 @@ end;
 
 procedure TFABM_TipoComprobante.btnBuscarClick(Sender: TObject);
 begin
-  EKbuscar.buscar;
-  dm.mostrarCantidadRegistro(ZQ_TipoComprobante, lblCantidadRegistros);  
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_TipoComprobante, lblCantidadRegistros);  
 end;
 
 

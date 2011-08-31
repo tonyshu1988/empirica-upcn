@@ -3516,7 +3516,6 @@ object FABMProductos: TFABMProductos
     SQL_Orden.Strings = (
       '')
     UsarWhereOriginal = EK_Sin_Where
-    InfoRegistros = lblResultadoBusqueda
     PantallaReducida = True
     Left = 40
     Top = 96

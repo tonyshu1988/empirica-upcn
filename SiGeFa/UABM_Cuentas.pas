@@ -282,8 +282,8 @@ end;
 
 procedure TFABM_Cuentas.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscar.Buscar;
-  dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
 end;
 
 

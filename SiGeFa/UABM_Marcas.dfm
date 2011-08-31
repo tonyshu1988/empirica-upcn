@@ -542,7 +542,7 @@ object FABM_Marcas: TFABM_Marcas
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
-          AutoStretch = False
+          AutoStretch = True
           Caption = 'QRLabelCritBusqueda'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
@@ -1551,6 +1551,7 @@ object FABM_Marcas: TFABM_Marcas
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1559,6 +1560,7 @@ object FABM_Marcas: TFABM_Marcas
         Tabla = 'marca'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

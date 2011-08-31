@@ -347,9 +347,8 @@ end;
 
 procedure TFCuentaCorriente.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscarCliente.Buscar;
-
-  calcularTotales('GENERAL');
+  if EKBuscarCliente.Buscar then
+    calcularTotales('GENERAL');
 end;
 
 

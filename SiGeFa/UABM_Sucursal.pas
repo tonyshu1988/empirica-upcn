@@ -206,8 +206,8 @@ uses  UDM, UPrincipal;
 
 procedure TFABM_Sucursal.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscar.Buscar;
-  dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
 end;
 
 

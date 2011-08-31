@@ -567,8 +567,8 @@ end;
 
 procedure TFABMEmpresas.btnBuscarClick(Sender: TObject);
 begin
-  EKBusquedaAvanzadaEmpresas.Buscar;
-  dm.mostrarCantidadRegistro(ZQ_Empresa, lblCantidadRegistros);
+  if EKBusquedaAvanzadaEmpresas.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_Empresa, lblCantidadRegistros);
 end;
 
 

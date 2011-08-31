@@ -515,7 +515,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
-          AutoStretch = False
+          AutoStretch = True
           Caption = 'QRLabelCritBusqueda'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
@@ -701,7 +701,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             Left = 1
             Top = 1
             Width = 134
-            Height = 16
+            Height = 13
             Align = alLeft
             Caption = 'lblCantidadRegistros'
             Font.Charset = ANSI_CHARSET
@@ -866,7 +866,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             Height = 21
             Style = csDropDownList
             CharCase = ecUpperCase
-            ItemHeight = 13
+            ItemHeight = 0
             TabOrder = 0
             OnKeyUp = CBArticuloKeyUp
           end
@@ -1851,6 +1851,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         Tabla = 'Medida'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

@@ -110,8 +110,8 @@ uses UDM, UPrincipal;
 
 procedure TFABM_TipoEmpresa.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscar.Buscar;
-  dm.mostrarCantidadRegistro(ZQ_TipoEmpresa, lblCantidadRegistros);
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_TipoEmpresa, lblCantidadRegistros);
 end;
 
 

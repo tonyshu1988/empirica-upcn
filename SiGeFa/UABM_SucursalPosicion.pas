@@ -299,8 +299,8 @@ end;
 
 procedure TFABM_SucursalPosicion.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscar.Buscar;
-  dm.mostrarCantidadRegistro(ZQ_PosicionSucursal, lblCantidadRegistros);
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_PosicionSucursal, lblCantidadRegistros);
 end;
 
 
