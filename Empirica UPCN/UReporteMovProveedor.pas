@@ -7,7 +7,7 @@ uses
   Dialogs, QuickRpt, QRCtrls, Grids, DBGrids, ExtCtrls, dxBar,
   dxBarExtItems, EKVistaPreviaQR, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, EKBusquedaAvanzada, DBCtrls, StdCtrls, EKDbSuma, mxNativeExcel,
-  mxExport;
+  mxExport, EKOrdenarGrilla;
 
 type
   TFReporteMovProveedor = class(TForm)
@@ -191,6 +191,7 @@ type
     ZQ_CuentaCOLOR_CONSILIADO: TStringField;
     ZQ_CuentaBUSQUEDA: TStringField;
     ZQ_MovimientoProveedoresID_OBJETO_MOVIMIENTO: TIntegerField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -198,6 +199,7 @@ type
     procedure EKDbSumaSumListChanged(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btExportarExelClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -306,6 +308,8 @@ end;
 
 procedure TFReporteMovProveedor.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
+
   dm.EKModelo.abrir(ZQ_Cuenta);
   
   if CuentaNro <> 0 then //si me logueo como un usuario que tiene asignada una cuenta
@@ -328,6 +332,12 @@ begin
   dm.ExcelExport.DBGrid:= DBGridMercaderiaVendida;
   dm.ExcelExport.Select;
   dm.prepararParaExportar(ZQ_MovimientoProveedores, true); //activo el currency y vuelvo a los parametros anteriores
+end;
+
+procedure TFReporteMovProveedor.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

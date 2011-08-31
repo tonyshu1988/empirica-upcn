@@ -33,6 +33,7 @@ type
     ZQ_AutoridadID_AUTORIDAD: TIntegerField;
     ZQ_AutoridadNOMBE: TStringField;
     ZQ_AutoridadPRIORIDAD: TIntegerField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnEliminarClick(Sender: TObject);

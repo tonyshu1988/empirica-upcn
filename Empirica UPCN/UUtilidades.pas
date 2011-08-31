@@ -1,11 +1,15 @@
 unit UUtilidades;
 
 interface
+
+uses DBGrids;
+
 function SonTodasLetras(cad:string):Boolean;
 function sonTodosNumeros(cad:string):Boolean;
 function EsCUITValido(Num:String):boolean;
 function contiene(AString, Pattern: string): boolean;
 function rellenar(texto: string; caracter: Char; cantidad: integer):String;
+function GetIndex(grilla: TDBGrid; Nombre: string): Integer;
 
 implementation
 
@@ -14,6 +18,23 @@ uses SysUtils;
 const
     TablaMul:Array[1..10] of Integer=(5,4,3,2,7,6,5,4,3,2); {Tabla Arbitraria}
 
+
+function GetIndex(grilla: TDBGrid; Nombre: string): Integer;
+var
+  i: Integer;
+begin
+  Result:= -1;
+
+  if not Assigned(grilla) then //si no cargue ninguna grilla, entoces salgo
+    exit;
+
+  for i:= 0 to grilla.Columns.Count -1 do
+    if Nombre = grilla.Columns[i].Title.Caption then
+    begin
+      Result:= i;
+      Exit;
+    end;
+end;
 
 function SonTodasLetras(cad:string):Boolean;
 var i,cant:integer;

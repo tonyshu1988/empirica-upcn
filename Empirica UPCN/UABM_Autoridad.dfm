@@ -401,4 +401,23 @@ object FABM_Autoridad: TFABM_Autoridad
       FieldName = 'PRIORIDAD'
     end
   end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = dbGridAutoridad
+    Filtros = <
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Prioridad'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = False
+    Left = 40
+    Top = 104
+  end
 end

@@ -15,6 +15,7 @@ object FImpresionCheques: TFImpresionCheques
   Position = poScreenCenter
   Scaled = False
   Visible = True
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -8476,10 +8477,11 @@ object FImpresionCheques: TFImpresionCheques
         Tabla = 'mov'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Cuenta
-        TipoCombollenarCampo = 'BUSQUEDA'
-        TipoCombollenarCampoReal = 'id_cuenta'
+        TipoComboSQL = ZQ_Cuenta
+        TipoComboSQLCampoVer = 'BUSQUEDA'
+        TipoComboSQLCampoReal = 'id_cuenta'
         TipoComboEditable = False
+        TipoComboAncho = 400
         ItemIndex = -1
       end
       item
@@ -8491,6 +8493,7 @@ object FImpresionCheques: TFImpresionCheques
         TipoCampoIndice = 2
         TipoCampoIndiceVer = '>='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8502,6 +8505,7 @@ object FImpresionCheques: TFImpresionCheques
         TipoCampoIndice = 4
         TipoCampoIndiceVer = '<='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8513,6 +8517,7 @@ object FImpresionCheques: TFImpresionCheques
         TipoCampoIndice = 2
         TipoCampoIndiceVer = '>='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8524,6 +8529,7 @@ object FImpresionCheques: TFImpresionCheques
         TipoCampoIndice = 4
         TipoCampoIndiceVer = '<='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8532,6 +8538,7 @@ object FImpresionCheques: TFImpresionCheques
         Tabla = 'cta_mov'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8540,13 +8547,14 @@ object FImpresionCheques: TFImpresionCheques
         Tabla = 'cta_mov'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
           'SI'
           'NO')
-        TipoComboEditable = False
         TipoComboValoresReales.Strings = (
           'S'
           'N')
+        TipoComboAncho = 200
         ItemIndex = 1
       end
       item
@@ -8555,6 +8563,7 @@ object FImpresionCheques: TFImpresionCheques
         Tabla = 'mov'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8563,6 +8572,7 @@ object FImpresionCheques: TFImpresionCheques
         Tabla = 'tp'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8571,6 +8581,7 @@ object FImpresionCheques: TFImpresionCheques
         Tabla = 'prov'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8579,6 +8590,7 @@ object FImpresionCheques: TFImpresionCheques
         Tabla = 'cpto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>
@@ -8802,9 +8814,49 @@ object FImpresionCheques: TFImpresionCheques
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridCheques
+    Filtros = <
+      item
+        TituloColumna = 'Fecha Emision'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha PD'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Denominaci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Concepto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Cheque'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Orden de Impresion'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Impreso'
+        Visible = True
+      end>
+    NombreGuardar = 'ImprimirCheques'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 128
     Top = 88
   end

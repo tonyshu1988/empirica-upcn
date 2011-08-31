@@ -968,10 +968,37 @@ object FSaldoInicial: TFSaldoInicial
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridSaldosIniciales
+    Filtros = <
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Cheque/Transf.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Descripci'#243'n'
+        Visible = True
+      end>
+    NombreGuardar = 'SaldoInicial'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'USaldoInicial'
-    Ordenar = False
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 224
     Top = 232
   end

@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 196
-  Top = 112
+  Left = 170
+  Top = 130
   Width = 1118
   Height = 643
   Color = clBtnFace
@@ -104,13 +104,13 @@ object FMovimientos: TFMovimientos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1014
+    Width = 1000
     Height = 553
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
-      1014
+      1000
       553)
     object QR_OrdenPago: TQuickRep
       Tag = 99
@@ -4556,7 +4556,7 @@ object FMovimientos: TFMovimientos
       end
     end
     object PanelImpresion: TPanel
-      Left = 395
+      Left = 386
       Top = 189
       Width = 494
       Height = 281
@@ -4565,7 +4565,7 @@ object FMovimientos: TFMovimientos
       BevelOuter = bvNone
       BevelWidth = 3
       BorderWidth = 3
-      TabOrder = 3
+      TabOrder = 2
       Visible = False
       DesignSize = (
         494
@@ -5903,7 +5903,7 @@ object FMovimientos: TFMovimientos
     object PParametrosLibroBanco: TPanel
       Left = 0
       Top = 0
-      Width = 1014
+      Width = 1000
       Height = 51
       Align = alTop
       BevelOuter = bvNone
@@ -5978,7 +5978,7 @@ object FMovimientos: TFMovimientos
           'Fecha PD')
       end
       object Panel1: TPanel
-        Left = 933
+        Left = 919
         Top = 0
         Width = 81
         Height = 51
@@ -6048,188 +6048,14 @@ object FMovimientos: TFMovimientos
           00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       end
     end
-    object PFiltrosColumnas: TPanel
-      Tag = 99
-      Left = 0
-      Top = 499
-      Width = 1014
-      Height = 54
-      Align = alBottom
-      BevelInner = bvLowered
-      Color = 11004820
-      TabOrder = 2
-      Visible = False
-      object BtAplicarFiltrosColumnas: TButton
-        Left = 756
-        Top = 14
-        Width = 85
-        Height = 26
-        Caption = 'Aplicar'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        OnClick = BtAplicarFiltrosColumnasClick
-      end
-      object CBFechaEmi: TCheckBox
-        Tag = 99
-        Left = 8
-        Top = 8
-        Width = 103
-        Height = 17
-        Caption = 'Fecha Emision'
-        Checked = True
-        State = cbChecked
-        TabOrder = 1
-      end
-      object CBFechaPD: TCheckBox
-        Tag = 99
-        Left = 120
-        Top = 8
-        Width = 78
-        Height = 17
-        Caption = 'Fecha PD'
-        Checked = True
-        State = cbChecked
-        TabOrder = 2
-      end
-      object CBNroMov: TCheckBox
-        Tag = 99
-        Left = 201
-        Top = 8
-        Width = 111
-        Height = 17
-        Caption = 'Nro. Movimiento'
-        Checked = True
-        State = cbChecked
-        TabOrder = 3
-      end
-      object CBMedio: TCheckBox
-        Tag = 99
-        Left = 415
-        Top = 8
-        Width = 62
-        Height = 17
-        Caption = 'Medio'
-        Checked = True
-        State = cbChecked
-        TabOrder = 4
-      end
-      object CBNroMedio: TCheckBox
-        Tag = 99
-        Left = 508
-        Top = 8
-        Width = 81
-        Height = 17
-        Caption = 'Nro. Medio'
-        Checked = True
-        State = cbChecked
-        TabOrder = 5
-      end
-      object CBProveedor: TCheckBox
-        Tag = 99
-        Left = 8
-        Top = 32
-        Width = 102
-        Height = 17
-        Caption = 'Denominaci'#243'n'
-        Checked = True
-        State = cbChecked
-        TabOrder = 6
-      end
-      object CBConcepto: TCheckBox
-        Tag = 99
-        Left = 201
-        Top = 32
-        Width = 81
-        Height = 17
-        Caption = 'Concepto'
-        Checked = True
-        State = cbChecked
-        TabOrder = 7
-      end
-      object CBNroOrden: TCheckBox
-        Tag = 99
-        Left = 319
-        Top = 8
-        Width = 81
-        Height = 17
-        Caption = 'Nro. Orden'
-        Checked = True
-        State = cbChecked
-        TabOrder = 8
-      end
-      object CBRecibo: TCheckBox
-        Tag = 99
-        Left = 415
-        Top = 32
-        Width = 80
-        Height = 17
-        Caption = 'Nro Recibo'
-        Checked = True
-        State = cbChecked
-        TabOrder = 9
-      end
-      object CBNroFactura: TCheckBox
-        Tag = 99
-        Left = 319
-        Top = 32
-        Width = 88
-        Height = 17
-        Caption = 'Nro Factura'
-        Checked = True
-        State = cbChecked
-        TabOrder = 10
-      end
-      object CBFechaConciliado: TCheckBox
-        Tag = 99
-        Left = 508
-        Top = 32
-        Width = 117
-        Height = 17
-        Caption = 'Fecha Conciliado'
-        Checked = True
-        State = cbChecked
-        TabOrder = 11
-      end
-      object verAnulados: TCheckBox
-        Tag = 99
-        Left = 640
-        Top = 19
-        Width = 110
-        Height = 17
-        Caption = 'Ver Anulados'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 12
-      end
-      object CBTipo: TCheckBox
-        Tag = 99
-        Left = 120
-        Top = 32
-        Width = 49
-        Height = 17
-        Caption = 'Tipo'
-        Checked = True
-        State = cbChecked
-        TabOrder = 13
-      end
-    end
     object PIngresos: TPanel
       Left = 0
-      Top = 383
-      Width = 1014
+      Top = 437
+      Width = 1000
       Height = 116
       Align = alBottom
       BevelOuter = bvNone
-      TabOrder = 5
+      TabOrder = 4
       Visible = False
       object Label16: TLabel
         Left = 229
@@ -6446,7 +6272,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 1014
+        Width = 1000
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -6501,8 +6327,8 @@ object FMovimientos: TFMovimientos
     object DBGridLibroBanco: TDBGrid
       Left = 0
       Top = 51
-      Width = 1014
-      Height = 190
+      Width = 1000
+      Height = 244
       Align = alClient
       Color = 16772842
       DataSource = DS_LIBRO_BANCO
@@ -6666,12 +6492,12 @@ object FMovimientos: TFMovimientos
     end
     object PEgresos: TPanel
       Left = 0
-      Top = 267
-      Width = 1014
+      Top = 321
+      Width = 1000
       Height = 116
       Align = alBottom
       BevelOuter = bvNone
-      TabOrder = 6
+      TabOrder = 5
       Visible = False
       object Label2: TLabel
         Left = 235
@@ -6881,7 +6707,7 @@ object FMovimientos: TFMovimientos
         Tag = 99
         Left = 0
         Top = 0
-        Width = 1014
+        Width = 1000
         Height = 32
         Align = alTop
         Alignment = taLeftJustify
@@ -6920,15 +6746,15 @@ object FMovimientos: TFMovimientos
     end
     object Panel5: TPanel
       Left = 0
-      Top = 241
-      Width = 1014
+      Top = 295
+      Width = 1000
       Height = 26
       Align = alBottom
       BevelOuter = bvLowered
       Caption = ' '
-      TabOrder = 9
+      TabOrder = 8
       object Panel6: TPanel
-        Left = 279
+        Left = 265
         Top = 1
         Width = 734
         Height = 24
@@ -7238,7 +7064,7 @@ object FMovimientos: TFMovimientos
     Top = 232
     DockControlHeights = (
       0
-      88
+      102
       0
       52)
     object BtIngresos: TdxBarLargeButton
@@ -7316,9 +7142,9 @@ object FMovimientos: TFMovimientos
       AutoGrayScale = False
     end
     object btnFiltrar: TdxBarLargeButton
-      Caption = 'Filtrar'
+      Caption = 'Ver/Ocultar An.'
       Category = 0
-      Hint = 'Filtrar las columnas'
+      Hint = 'Ver/Ocultar los movimientos Anulados'
       Visible = ivAlways
       ImageIndex = 7
       OnClick = btnFiltrarClick
@@ -8130,6 +7956,7 @@ object FMovimientos: TFMovimientos
         TipoCampoIndice = 6
         TipoCampoIndiceVer = 'Desde - Hasta'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8141,6 +7968,7 @@ object FMovimientos: TFMovimientos
         TipoCampoIndice = 6
         TipoCampoIndiceVer = 'Desde - Hasta'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8150,6 +7978,7 @@ object FMovimientos: TFMovimientos
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8158,6 +7987,7 @@ object FMovimientos: TFMovimientos
         Tabla = 'ie'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8166,10 +7996,11 @@ object FMovimientos: TFMovimientos
         Tabla = 'ie'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Medios_Cobro_Pago
-        TipoCombollenarCampo = 'NOMBRE_MEDIO_COBRO_PAGO'
-        TipoCombollenarCampoReal = 'NOMBRE_MEDIO_COBRO_PAGO'
+        TipoComboSQL = ZQ_Medios_Cobro_Pago
+        TipoComboSQLCampoVer = 'NOMBRE_MEDIO_COBRO_PAGO'
+        TipoComboSQLCampoReal = 'id_medio'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8178,6 +8009,7 @@ object FMovimientos: TFMovimientos
         Tabla = 'ie'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8186,6 +8018,7 @@ object FMovimientos: TFMovimientos
         Tabla = 'ie'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8194,6 +8027,7 @@ object FMovimientos: TFMovimientos
         Tabla = 'ie'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8202,6 +8036,7 @@ object FMovimientos: TFMovimientos
         Tabla = 'ie'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8210,6 +8045,7 @@ object FMovimientos: TFMovimientos
         Tabla = 'ie'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8218,6 +8054,7 @@ object FMovimientos: TFMovimientos
         Tabla = 'ie'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8226,6 +8063,7 @@ object FMovimientos: TFMovimientos
         Tabla = 'ie'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8237,6 +8075,7 @@ object FMovimientos: TFMovimientos
         TipoCampoIndice = 6
         TipoCampoIndiceVer = 'Desde - Hasta'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -8245,6 +8084,7 @@ object FMovimientos: TFMovimientos
         Tabla = 'ie'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>
@@ -8354,10 +8194,66 @@ object FMovimientos: TFMovimientos
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridLibroBanco
+    Filtros = <
+      item
+        TituloColumna = 'Fecha Emisi'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha PD'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Movimiento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Cheque/Transf'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Denominaci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Anulado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Concepto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Factura'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Recibo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'F. Conciliado'
+        Visible = True
+      end>
+    NombreGuardar = 'Movimientos'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'UMovimientos'
-    Ordenar = False
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    PopUpGrilla = MenuGrilla
     Left = 184
     Top = 48
   end

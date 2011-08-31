@@ -1101,17 +1101,17 @@ object FAuditoria: TFAuditoria
         Tabla = 'audit_movimientos'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
           'ALTA'
           'EDICION'
-          'BAJA'
-          '')
-        TipoComboEditable = False
+          'BAJA')
         TipoComboValoresReales.Strings = (
           'ALTA'
           'EDICION'
           'BAJA'
           '')
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1122,6 +1122,7 @@ object FAuditoria: TFAuditoria
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1130,6 +1131,7 @@ object FAuditoria: TFAuditoria
         Tabla = 'audit_movimientos'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1138,6 +1140,7 @@ object FAuditoria: TFAuditoria
         Tabla = 'ie_proveedores'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1146,6 +1149,7 @@ object FAuditoria: TFAuditoria
         Tabla = 'ie_conceptos'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1154,6 +1158,7 @@ object FAuditoria: TFAuditoria
         Tabla = 'objeto_movimientos'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

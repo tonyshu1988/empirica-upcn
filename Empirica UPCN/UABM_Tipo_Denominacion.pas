@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids,
   QRCtrls, QuickRpt, ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset;
+  ZDataset, EKOrdenarGrilla;
 
 type
   TFABM_Tipo_Denominacion = class(TForm)
@@ -33,6 +33,7 @@ type
     DS_tipo_proveedor: TDataSource;
     ZQ_tipo_proveedorID_TIPO: TIntegerField;
     ZQ_tipo_proveedorDESCRIPCION: TStringField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure BtNuevoClick(Sender: TObject);
     procedure BtModificarClick(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);

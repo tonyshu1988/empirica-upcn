@@ -104,7 +104,7 @@ uses UDM;
 
 procedure TFConceptos.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColunmas;
+  EKOrdenarGrilla1.CargarConfigColumnas;
   dm.EKModelo.abrir(ZQ_IE_Conceptos);
 end;
 
