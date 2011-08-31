@@ -6,24 +6,11 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
-  StdCtrls, EKDbSuma, EKOrdenarGrilla;
+  StdCtrls, EKDbSuma, EKOrdenarGrilla, Buttons, mxNativeExcel, mxExport;
 
 type
   TFEstadisticasFacturacion = class(TForm)
     PanelContenedor: TPanel;
-    dxBarABM: TdxBarManager;
-    btnBuscar: TdxBarLargeButton;
-    btnVerDetalle: TdxBarLargeButton;
-    btnNuevo: TdxBarLargeButton;
-    btnModificar: TdxBarLargeButton;
-    btnBaja: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
-    btnGuardar: TdxBarLargeButton;
-    btnCancelar: TdxBarLargeButton;
-    btnImprimir: TdxBarLargeButton;
-    btnSalir: TdxBarLargeButton;
-    GrupoEditando: TdxBarGroup;
-    GrupoGuardarCancelar: TdxBarGroup;
     DS_Comprobante: TDataSource;
     Panel1: TPanel;
     DBGridProducto: TDBGrid;
@@ -35,35 +22,6 @@ type
     ZQ_Comprobante_FormaPago: TZQuery;
     ZQ_ComprobanteDetalle: TZQuery;
     ZQ_Comprobante: TZQuery;
-    ZQ_ComprobanteID_COMPROBANTE: TIntegerField;
-    ZQ_ComprobanteID_SUCURSAL: TIntegerField;
-    ZQ_ComprobanteID_PROVEEDOR: TIntegerField;
-    ZQ_ComprobanteID_CLIENTE: TIntegerField;
-    ZQ_ComprobanteID_TIPO_CPB: TIntegerField;
-    ZQ_ComprobanteID_VENDEDOR: TIntegerField;
-    ZQ_ComprobanteID_COMP_ESTADO: TIntegerField;
-    ZQ_ComprobanteCODIGO: TStringField;
-    ZQ_ComprobanteFECHA: TDateTimeField;
-    ZQ_ComprobanteOBSERVACION: TStringField;
-    ZQ_ComprobanteBASE_IMPONIBLE: TFloatField;
-    ZQ_ComprobanteSALDO: TFloatField;
-    ZQ_ComprobanteIMPORTE_TOTAL: TFloatField;
-    ZQ_ComprobantePORC_IVA: TFloatField;
-    ZQ_ComprobanteIMPORTE_IVA: TFloatField;
-    ZQ_ComprobantePORC_DESCUENTO: TFloatField;
-    ZQ_ComprobanteIMPORTE_DESCUENTO: TFloatField;
-    ZQ_ComprobanteENCABEZADO: TStringField;
-    ZQ_ComprobantePIE: TStringField;
-    ZQ_ComprobanteFECHA_COBRADA: TDateField;
-    ZQ_ComprobanteFECHA_ENVIADA: TDateField;
-    ZQ_ComprobanteFECHA_IMPRESA: TDateField;
-    ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField;
-    ZQ_ComprobantePUNTO_VENTA: TIntegerField;
-    ZQ_ComprobanteNUMERO_CPB: TIntegerField;
-    ZQ_ComprobanteFECHA_ANULADO: TDateField;
-    ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
-    ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
-    ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
     DS_Comprobante_FormaPago: TDataSource;
     DS_ComprobanteDetalle: TDataSource;
     ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField;
@@ -94,11 +52,6 @@ type
     ZQ_TipoIVALETRA: TStringField;
     ZQ_TipoIVAFISCAL: TStringField;
     ZQ_TipoIVACOEFICIENTE: TFloatField;
-    ZQ_ComprobanteSUC_: TStringField;
-    ZQ_ComprobanteVENDEDOR_: TStringField;
-    ZQ_ComprobanteTIVA_: TStringField;
-    ZQ_ComprobanteTIPOCOMPR_: TStringField;
-    ZQ_ComprobanteCLIENTE_: TStringField;
     Panel5: TPanel;
     ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField;
     ZQ_ComprobanteDetalleDETALLE_PROD: TStringField;
@@ -118,11 +71,48 @@ type
     ZQ_Comprobante_FormaPagoFECHA_FP: TDateTimeField;
     ZQ_Comprobante_FormaPagoIMPORTE_REAL: TFloatField;
     ZQ_Comprobante_FormaPagoTFORMAPAGO_: TStringField;
+    ZQ_ComprobanteCODIGO: TStringField;
+    ZQ_ComprobanteID_COMPROBANTE: TIntegerField;
+    ZQ_ComprobanteFECHA: TDateTimeField;
+    ZQ_ComprobantePORC_IVA: TFloatField;
+    ZQ_ComprobanteIMPORTEVENTA_: TFloatField;
+    ZQ_ComprobanteSUC_: TStringField;
+    ZQ_ComprobanteVENDEDOR_: TStringField;
+    ZQ_ComprobanteTIVA_: TStringField;
+    ZQ_ComprobanteTIPOCOMPR_: TStringField;
+    ZQ_ComprobanteCLIENTE_: TStringField;
+    ZQ_Comprobante_FormaPagoIF: TStringField;
+    PanelFiltro: TPanel;
+    BtnFiltro_Todos: TSpeedButton;
+    BtnFiltro_Hoy: TSpeedButton;
+    BtnFiltro_EstaSemana: TSpeedButton;
+    Label39: TLabel;
+    dxBarABM: TdxBarManager;
+    btnBuscar: TdxBarLargeButton;
+    btnExportarXLS: TdxBarLargeButton;
+    btnEditarGrilla: TdxBarLargeButton;
+    btnProcesarImportes: TdxBarLargeButton;
+    btnSeleccionar: TdxBarLargeButton;
+    btnReactivar: TdxBarLargeButton;
+    btnGuardar: TdxBarLargeButton;
+    btnCancelar: TdxBarLargeButton;
+    btnImprimir: TdxBarLargeButton;
+    btnSalir: TdxBarLargeButton;
+    btBuscarGoogle: TdxBarLargeButton;
+    btImprimirEtiquetas: TdxBarLargeButton;
+    GrupoEditando: TdxBarGroup;
+    GrupoGuardarCancelar: TdxBarGroup;
+    mxDBGridExport: TmxDBGridExport;
+    mxNativeExcel1: TmxNativeExcel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
+    procedure BtnFiltro_TodosClick(Sender: TObject);
+    procedure BtnFiltro_HoyClick(Sender: TObject);
+    procedure BtnFiltro_EstaSemanaClick(Sender: TObject);
+    procedure btnExportarXLSClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -131,7 +121,7 @@ type
 
 var
   FEstadisticasFacturacion: TFEstadisticasFacturacion;
-
+  where:String;
 implementation
 
 uses UDM;
@@ -145,19 +135,30 @@ end;
 
 procedure TFEstadisticasFacturacion.btnBuscarClick(Sender: TObject);
 begin
-EKBuscarComprobantes.Buscar;
+
+  ZQ_Comprobante.Close;
+  ZQ_Comprobante.SQL[11]:=Format('where (c.ID_TIPO_CPB=11) %s',[where]);
+  EKBuscarComprobantes.SQL_Where[0]:=ZQ_Comprobante.SQL[11];
+
+  EKBuscarComprobantes.Buscar;
 end;
 
 procedure TFEstadisticasFacturacion.ZQ_ComprobanteAfterScroll(
   DataSet: TDataSet);
+var
+filtro:String;
 begin
-
+  if where<>'' then
+   filtro:=Format('(id_comprobante=%d) and ("IF"=%s)',[ZQ_ComprobanteID_COMPROBANTE.AsInteger,QuotedStr('N')])
+  else
+   filtro:=Format('(id_comprobante=%d)',[ZQ_ComprobanteID_COMPROBANTE.AsInteger]);
+   
   ZQ_Comprobante_FormaPago.Filtered:=False;
-  ZQ_Comprobante_FormaPago.Filter:=Format('id_comprobante=%d',[ZQ_ComprobanteID_COMPROBANTE.AsInteger]);
+  ZQ_Comprobante_FormaPago.Filter:=filtro;
   ZQ_Comprobante_FormaPago.Filtered:=True;
 
   ZQ_ComprobanteDetalle.Filtered:=False;
-  ZQ_ComprobanteDetalle.Filter:=Format('id_comprobante=%d',[ZQ_ComprobanteID_COMPROBANTE.AsInteger]);
+  ZQ_ComprobanteDetalle.Filter:=Format('(id_comprobante=%d)',[ZQ_ComprobanteID_COMPROBANTE.AsInteger]);
   ZQ_ComprobanteDetalle.Filtered:=True;
 
 end;
@@ -167,12 +168,43 @@ procedure TFEstadisticasFacturacion.FormCreate(Sender: TObject);
 begin
 ZQ_Comprobante_FormaPago.Open;
 ZQ_ComprobanteDetalle.Open;
+
+// Permiso para ver o no los filtros de Fiscal
+//PanelFiltro.Visible:=dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
+BtnFiltro_Hoy.Click;
 end;
 
 procedure TFEstadisticasFacturacion.EKDbSuma1SumListChanged(
   Sender: TObject);
 begin
 lblComprobantes.Caption := FormatFloat('Total Comprobantes: $ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+end;
+
+procedure TFEstadisticasFacturacion.BtnFiltro_TodosClick(Sender: TObject);
+begin
+  where:='';
+end;
+
+procedure TFEstadisticasFacturacion.BtnFiltro_HoyClick(Sender: TObject);
+begin
+  where:=Format(' and (tfp."IF"=%s)',[QuotedStr('S')]);
+end;
+
+procedure TFEstadisticasFacturacion.BtnFiltro_EstaSemanaClick(
+  Sender: TObject);
+begin
+  where:=Format(' and (tfp."IF"=%s)',[QuotedStr('N')]);
+end;
+
+procedure TFEstadisticasFacturacion.btnExportarXLSClick(Sender: TObject);
+begin
+
+  if not ZQ_Comprobante.IsEmpty then
+  begin
+    //dm.prepararParaExportar(true);
+    mxDBGridExport.Select;
+    //dm.prepararParaExportar(false);
+  end
 end;
 
 end.

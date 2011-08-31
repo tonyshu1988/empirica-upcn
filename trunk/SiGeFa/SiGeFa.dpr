@@ -50,6 +50,7 @@ begin
   Application.Initialize;
   CurrencyDecimals := 2;
   CurrencyString := '$';
+  CurrencyFormat := 2;
   DecimalSeparator := '.';
   ThousandSeparator := ',';
   DateSeparator := '/';
