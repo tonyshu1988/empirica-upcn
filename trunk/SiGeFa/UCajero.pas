@@ -363,6 +363,8 @@ type
     CD_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
     CD_ComprobanteIMPORTE_VENTA: TFloatField;
     ZSP_ComprobanteCODIGO: TStringField;
+    ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField;
+    CD_DetalleFacturaIMPORTE_IVA: TFloatField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -414,6 +416,7 @@ type
     procedure cargarClientePorDefecto();
     procedure Prorrateo();
     procedure RecalcularMontoPago();
+    procedure verPermisos();
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -430,7 +433,7 @@ type
 
 var
   FCajero: TFCajero;
-  importeacob, punitoriosacob, acumulado, acumFpago,acumFpagoReal: double;
+  importeacob, punitoriosacob, acumulado,acumuladoIVA, acumFpago,acumFpagoReal: double;
   IdProd:String;
   cliente,IdVendedor,ClienteIVA,cajero,idSucursal:Integer;
   descCliente:double;
@@ -470,12 +473,14 @@ begin
   cargarClientePorDefecto();
 
   DS_Sucursal.DataSet:=dm.ZQ_Sucursal;
-  
+  DBImage1.DataField:='LOGO';
   //Logo de fondo si no tiene imagen el producto
   DM.ZQ_Sucursal.Close;
   DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:=idSucursal;
   DM.ZQ_Sucursal.Open;
+
   edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
+  DBImage1.Visible:=True;
   DBImage1.BringToFront;
 end;
 
@@ -529,11 +534,11 @@ begin
         CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=ZQ_ProductosPRECIO_VENTA.AsFloat;
         CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=(edDesc.AsFloat)/100;
         CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:=ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
-        CD_DetalleFacturaPORC_IVA.AsFloat:=ZQ_ProductosIMPUESTO_IVA.AsInteger;
+        CD_DetalleFacturaPORC_IVA.AsFloat:=ZQ_ProductosIMPUESTO_IVA.AsFloat;
         CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:=(CD_DetalleFacturaCANTIDAD.AsInteger*CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
 
         CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=edImporte.AsFloat;
-
+        CD_DetalleFacturaIMPORTE_IVA.AsFloat:=CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
 
         CD_DetalleFactura.Post;
 
@@ -805,8 +810,6 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
       CD_ComprobanteIMPORTE_VENTA.AsFloat := acumFpagoReal;
       CD_Comprobante.Post;
 
-
-
       ZQ_Comprobante.Append;
       ZSP_Comprobante.Active:=True;
       ZQ_ComprobanteID_COMPROBANTE.AsInteger:=ZSP_ComprobanteID.AsInteger;
@@ -828,6 +831,7 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
       ZQ_ComprobantePORC_DESCUENTO.AsFloat:=CD_ComprobantePORC_DESCUENTO.AsFloat;
       ZQ_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteIMPORTE_DESCUENTO.AsFloat;
       ZQ_ComprobanteIMPORTE_VENTA.AsFloat := CD_ComprobanteIMPORTE_VENTA.AsFloat;
+      ZQ_ComprobanteIMPORTE_IVA.AsFloat := CD_ComprobanteIMPORTE_IVA.AsFloat;
       ZQ_ComprobanteENCABEZADO.AsString:=CD_ComprobanteENCABEZADO.AsString;
       ZQ_ComprobantePIE.AsString:=CD_ComprobantePIE.AsString;
       ZQ_ComprobanteID_TIPO_IVA.AsInteger:=CD_ComprobanteID_TIPO_IVA.AsInteger;
@@ -894,6 +898,7 @@ begin
   importeacob:=0;
   punitoriosacob:=0;
   acumulado:=0;
+  acumuladoIVA:=0;
   acumFpago:=0;
   acumFpagoReal:=0;
   IdProd:='';
@@ -919,13 +924,12 @@ begin
   CD_ComprobanteID_TIPO_CPB.AsInteger:=11; //FACTURA
   CD_ComprobanteID_VENDEDOR.AsInteger:=IdVendedor;
   CD_ComprobanteID_COMP_ESTADO.AsInteger:=0;//PENDIENTE
-  CD_ComprobanteCODIGO.AsString:='';
   CD_ComprobanteFECHA.AsDateTime:=dm.EKModelo.FechayHora();
   CD_ComprobanteOBSERVACION.AsString:='';
   CD_ComprobanteBASE_IMPONIBLE.AsFloat:=0;
   CD_ComprobanteSALDO.AsFloat:=0;
   CD_ComprobanteIMPORTE_TOTAL.AsFloat:=0;
-  CD_ComprobantePORC_IVA.AsFloat:=0;
+  CD_ComprobantePORC_IVA.AsFloat:=0.21;
   CD_ComprobanteIMPORTE_IVA.AsInteger:=0;
   CD_ComprobantePORC_DESCUENTO.AsFloat:=descCliente;
   CD_ComprobanteIMPORTE_DESCUENTO.AsInteger:=0;
@@ -986,7 +990,8 @@ procedure TFCajero.EKDbSuma1SumListChanged(Sender: TObject);
 begin
   acumulado := EKDbSuma1.SumCollection[0].SumValue;
   importe.Text := FormatFloat('$ ##,###,##0.00 ', acumulado);
-  
+  acumuladoIVA := EKDbSuma1.SumCollection[1].SumValue;
+
   if (CD_Comprobante.state=dsInsert) then
     CD_ComprobanteBASE_IMPONIBLE.AsFloat:=acumulado;
 end;
@@ -1355,6 +1360,15 @@ begin
 
        end;
     end
+end;
+
+procedure TFCajero.verPermisos;
+begin
+//if xxxx then
+// begin
+//
+// end;
+
 end;
 
 end.
