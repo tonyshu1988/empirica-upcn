@@ -158,11 +158,14 @@ begin
     else
       dm.EKModelo.cancelar_transaccion(Transaccion_Medios);
   end;
+
+  EKOrdenarGrilla1.GuardarConfigColumnas;  
 end;
 
 
 procedure TFABM_MedioCobroPago.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
   dm.EKModelo.abrir(ZQ_MedioCobroPago);
 end;
 

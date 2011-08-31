@@ -518,9 +518,33 @@ object FABM_MedioCobroPago: TFABM_MedioCobroPago
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = Grilla
+    Filtros = <
+      item
+        TituloColumna = 'Nro. ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo Corto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Editable'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Incluir en Libro Banco'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_MedioCobroPago'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 224
     Top = 144
   end

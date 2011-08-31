@@ -1,6 +1,6 @@
 object FABMProveedores: TFABMProveedores
-  Left = 190
-  Top = 101
+  Left = 391
+  Top = 99
   Width = 1038
   Height = 669
   Caption = 'ABM Listado General'
@@ -953,7 +953,7 @@ object FABMProveedores: TFABMProveedores
       Top = 385
       Width = 1020
       Height = 193
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alBottom
       TabOrder = 3
       object TabSheet1: TTabSheet
@@ -1741,6 +1741,7 @@ object FABMProveedores: TFABMProveedores
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1749,6 +1750,7 @@ object FABMProveedores: TFABMProveedores
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1757,10 +1759,11 @@ object FABMProveedores: TFABMProveedores
         Tabla = 'ie_proveedores'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_TipoProveedor
-        TipoCombollenarCampo = 'descripcion'
-        TipoCombollenarCampoReal = 'id_tipo'
+        TipoComboSQL = ZQ_TipoProveedor
+        TipoComboSQLCampoVer = 'DESCRIPCION'
+        TipoComboSQLCampoReal = 'id_tipo'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1769,10 +1772,11 @@ object FABMProveedores: TFABMProveedores
         Tabla = 'ie_proveedores'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_CondicIVA
-        TipoCombollenarCampo = 'id_tipo_iva'
-        TipoCombollenarCampoReal = 'descripcion'
+        TipoComboSQL = ZQ_CondicIVA
+        TipoComboSQLCampoVer = 'DESCRIPCION'
+        TipoComboSQLCampoReal = 'id_tipo_iva'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1781,10 +1785,11 @@ object FABMProveedores: TFABMProveedores
         Tabla = 'ie_proveedores'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_TipoFactura
-        TipoCombollenarCampo = 'descripcion'
-        TipoCombollenarCampoReal = 'id_tipo_factura'
+        TipoComboSQL = ZQ_TipoFactura
+        TipoComboSQLCampoVer = 'DESCRIPCION'
+        TipoComboSQLCampoReal = 'id_tipo_factura'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1793,6 +1798,7 @@ object FABMProveedores: TFABMProveedores
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1801,6 +1807,7 @@ object FABMProveedores: TFABMProveedores
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1809,6 +1816,7 @@ object FABMProveedores: TFABMProveedores
         Tabla = 'ie_proveedores'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1817,13 +1825,14 @@ object FABMProveedores: TFABMProveedores
         Tabla = 'p'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
           'SI'
           'NO')
-        TipoComboEditable = False
         TipoComboValoresReales.Strings = (
           'S'
           'N')
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>
@@ -1859,15 +1868,42 @@ object FABMProveedores: TFABMProveedores
     ShowModal = False
     VerGuardar = False
     VerExpImagen = False
-    Left = 256
-    Top = 96
+    Left = 168
+    Top = 128
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridProveedores
+    Filtros = <
+      item
+        TituloColumna = 'Denominaci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre de Fantasia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direccion'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Telefono'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Email'
+        Visible = True
+      end>
+    NombreGuardar = 'ABMProveedor'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'UABMProveedores'
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 144
     Top = 72
   end
@@ -1926,17 +1962,33 @@ object FABMProveedores: TFABMProveedores
   end
   object EKOrdenarCuentas: TEKOrdenarGrilla
     Grilla = DBGridCuentas
+    Filtros = <
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = False
+    PermitirFiltrar = False
+    PopUpGrilla = MenuCtas
     Left = 101
     Top = 308
   end
   object EKOrdenarConceptos: TEKOrdenarGrilla
     Grilla = DBGridConceptos
+    Filtros = <
+      item
+        TituloColumna = 'Concepto'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
     FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = False
+    PermitirFiltrar = False
+    PopUpGrilla = MenuConc
     Left = 566
     Top = 252
   end

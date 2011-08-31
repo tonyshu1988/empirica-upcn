@@ -1,6 +1,6 @@
 object FReporteMovProveedor: TFReporteMovProveedor
-  Left = 198
-  Top = 45
+  Left = 263
+  Top = 76
   Width = 969
   Height = 689
   Caption = 'Reporte Movimientos'
@@ -15,6 +15,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
   Position = poScreenCenter
   Scaled = False
   Visible = True
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -2218,10 +2219,11 @@ object FReporteMovProveedor: TFReporteMovProveedor
         Tabla = 'm'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Cuenta
-        TipoCombollenarCampo = 'BUSQUEDA'
-        TipoCombollenarCampoReal = 'id_cuenta'
+        TipoComboSQL = ZQ_Cuenta
+        TipoComboSQLCampoVer = 'busqueda'
+        TipoComboSQLCampoReal = 'id_cuenta'
         TipoComboEditable = False
+        TipoComboAncho = 400
         ItemIndex = -1
       end
       item
@@ -2230,10 +2232,11 @@ object FReporteMovProveedor: TFReporteMovProveedor
         Tabla = 'mc'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Medio
-        TipoCombollenarCampo = 'nombre_medio_cobro_pago'
-        TipoCombollenarCampoReal = 'id_medio'
+        TipoComboSQL = ZQ_Medio
+        TipoComboSQLCampoVer = 'NOMBRE_MEDIO_COBRO_PAGO'
+        TipoComboSQLCampoReal = 'id_medio'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2242,10 +2245,11 @@ object FReporteMovProveedor: TFReporteMovProveedor
         Tabla = 'c'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Concepto
-        TipoCombollenarCampo = 'nombre_concepto'
-        TipoCombollenarCampoReal = 'id_concepto'
+        TipoComboSQL = ZQ_Concepto
+        TipoComboSQLCampoVer = 'NOMBRE_CONCEPTO'
+        TipoComboSQLCampoReal = 'id_concepto'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2254,10 +2258,11 @@ object FReporteMovProveedor: TFReporteMovProveedor
         Tabla = 'm'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Objeto_Movimiento
-        TipoCombollenarCampo = 'descripcion'
-        TipoCombollenarCampoReal = 'ID_objeto_movimiento'
+        TipoComboSQL = ZQ_Objeto_Movimiento
+        TipoComboSQLCampoVer = 'descripcion'
+        TipoComboSQLCampoReal = 'ID_OBJETO_MOVIMIENTO'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2269,6 +2274,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         TipoCampoIndice = 2
         TipoCampoIndiceVer = '>='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2280,6 +2286,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         TipoCampoIndice = 4
         TipoCampoIndiceVer = '<='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2291,6 +2298,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         TipoCampoIndice = 2
         TipoCampoIndiceVer = '>='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2302,6 +2310,7 @@ object FReporteMovProveedor: TFReporteMovProveedor
         TipoCampoIndice = 4
         TipoCampoIndiceVer = '<='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2310,13 +2319,14 @@ object FReporteMovProveedor: TFReporteMovProveedor
         Tabla = 'cm'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
           'SI'
           'NO')
-        TipoComboEditable = False
         TipoComboValoresReales.Strings = (
           'S'
           'N')
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2326,10 +2336,11 @@ object FReporteMovProveedor: TFReporteMovProveedor
         TipoCampo = EK_Numero
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = '='
-        TipoCombollenarSQL = ZQ_Tipo_Denominacion
-        TipoCombollenarCampo = 'descripcion'
-        TipoCombollenarCampoReal = 'id_tipo'
+        TipoComboSQL = ZQ_Tipo_Denominacion
+        TipoComboSQLCampoVer = 'descripcion'
+        TipoComboSQLCampoReal = 'id_tipo'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -2339,10 +2350,11 @@ object FReporteMovProveedor: TFReporteMovProveedor
         TipoCampo = EK_Numero
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = '='
-        TipoCombollenarSQL = ZQ_BuscarProveedor
-        TipoCombollenarCampo = 'APELLIDO_Y_NOMBRE'
-        TipoCombollenarCampoReal = 'nro_proveedor'
+        TipoComboSQL = ZQ_BuscarProveedor
+        TipoComboSQLCampoVer = 'APELLIDO_Y_NOMBRE'
+        TipoComboSQLCampoReal = 'nro_proveedor'
         TipoComboEditable = False
+        TipoComboAncho = 300
         ItemIndex = -1
       end>
     CriteriosLocate = <>
@@ -2741,5 +2753,69 @@ object FReporteMovProveedor: TFReporteMovProveedor
       ReadOnly = True
       Size = 207
     end
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridMercaderiaVendida
+    Filtros = <
+      item
+        TituloColumna = 'Denominaci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha emision'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha PD'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Cheque/Transf'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Concepto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Anulado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Debe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Haber'
+        Visible = True
+      end>
+    NombreGuardar = 'RepMovimientos'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 64
+    Top = 400
   end
 end

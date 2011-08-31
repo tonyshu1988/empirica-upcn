@@ -15,7 +15,6 @@ type
     btnListadoErogaciones: TdxBarLargeButton;
     btnLibroBanco: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    btnFiltrar: TdxBarLargeButton;
     btImprimir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
@@ -78,18 +77,6 @@ type
     QRlblTotalDiferidos: TQRLabel;
     QRlblTotalCorrientes: TQRLabel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
-    PFiltrosColumnas: TPanel;
-    BtAplicarFiltrosColumnas: TButton;
-    CBFechaEmi: TCheckBox;
-    CBFechaPD: TCheckBox;
-    CBMedio: TCheckBox;
-    CBNroMedio: TCheckBox;
-    CBProveedor: TCheckBox;
-    CBConcepto: TCheckBox;
-    CBNroOrden: TCheckBox;
-    CBRecibo: TCheckBox;
-    CBNroFactura: TCheckBox;
-    CBFechaConciliado: TCheckBox;
     EKIniGuardarFiltros: TEKIni;
     QRDBText2: TQRDBText;
     ZQ_Libro_erogaciones_nombreConcepto: TStringField;
@@ -120,7 +107,6 @@ type
     btexportarExel: TdxBarLargeButton;
     ZQ_Libro_erogacionesNRO_CHEQUE_TRANSF: TStringField;
     ZQ_Libro_erogacionesTIPO_PROVEEDOR: TStringField;
-    cbTipo: TCheckBox;
     ChildBandFactura: TQRChildBand;
     QRLabel7: TQRLabel;
     QRDBText7: TQRDBText;
@@ -170,10 +156,6 @@ type
     procedure EKDbSumaSumListChanged(Sender: TObject);
     procedure btImprimirClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btnFiltrarClick(Sender: TObject);
-    procedure GuardarOpcionesFiltrado();
-    procedure LeerOpcionesFiltrado();
-    procedure BtAplicarFiltrosColumnasClick(Sender: TObject);
     procedure ZQ_Libro_erogacionesAfterScroll(DataSet: TDataSet);
     procedure btexportarExelClick(Sender: TObject);
     procedure QRBandDetalleBeforePrint(Sender: TQRCustomBand;
@@ -214,7 +196,7 @@ end;
 
 procedure TFListadoErogaciones.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColunmas;
+  EKOrdenarGrilla1.CargarConfigColumnas;
   dm.EKModelo.abrir(ZQ_Libro_erogaciones);
   dm.EKModelo.abrir(ZQ_Cuentas);
   TEKCriterioBA(EKBAvanzadaListadoErog.CriteriosBusqueda.Items[1]).ItemIndex:= MonthOf(DM.EKModelo.Fecha)-1;
@@ -234,9 +216,6 @@ begin
   lblNombreCuenta.Caption:= '';
   lblFechaDesde.Caption:= '';
   lblFechaHasta.Caption:= '';
-
-  LeerOpcionesFiltrado;
-  BtAplicarFiltrosColumnas.Click;
 end;
 
 
@@ -368,174 +347,6 @@ procedure TFListadoErogaciones.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
-end;
-
-
-procedure TFListadoErogaciones.btnFiltrarClick(Sender: TObject);
-begin
-  if PFiltrosColumnas.Visible = false then
-    PFiltrosColumnas.Visible:=true
-  else
-    PFiltrosColumnas.Visible:=false;
-end;
-
-
-procedure TFListadoErogaciones.BtAplicarFiltrosColumnasClick(Sender: TObject);
-begin
-  if not CBFechaEmi.Checked then  //fecha emision
-    DBGridListaErogacion.Columns[0].Visible := false
-  else
-    DBGridListaErogacion.Columns[0].Visible := true;
-
-  if not CBFechaPD.Checked then  //fecha postdata
-    DBGridListaErogacion.Columns[1].Visible := false
-  else
-    DBGridListaErogacion.Columns[1].Visible := true;
-
-  if not CBNroOrden.Checked then //Nro Orden
-    DBGridListaErogacion.Columns[2].Visible := false
-  else
-    DBGridListaErogacion.Columns[2].Visible := true;
-
-  if not CBFechaConciliado.Checked then //fecha conciliado
-    DBGridListaErogacion.Columns[3].Visible := false
-  else
-    DBGridListaErogacion.Columns[3].Visible := true;
-
-  if not CBProveedor.Checked then  //proveedor
-    DBGridListaErogacion.Columns[4].Visible := false
-  else
-    DBGridListaErogacion.Columns[4].Visible := true;
-
-  if not cbTipo.Checked then  //Tipo
-    DBGridListaErogacion.Columns[5].Visible := false
-  else
-    DBGridListaErogacion.Columns[5].Visible := true;
-
-  if not CBConcepto.Checked then  //concepto
-    DBGridListaErogacion.Columns[6].Visible := false
-  else
-    DBGridListaErogacion.Columns[6].Visible := true;
-
-  if not CBMedio.Checked then  //medio
-    DBGridListaErogacion.Columns[7].Visible := false
-  else
-    DBGridListaErogacion.Columns[7].Visible := true;
-
-  if not CBNroMedio.Checked then  //nro cheque/transf
-    DBGridListaErogacion.Columns[8].Visible := false
-  else
-    DBGridListaErogacion.Columns[8].Visible := true;
-
-  if not CBNroFactura.Checked then //factura
-    DBGridListaErogacion.Columns[9].Visible := false
-  else
-    DBGridListaErogacion.Columns[9].Visible := true;
-
-  if not CBrecibo.Checked then //Recibo
-    DBGridListaErogacion.Columns[10].Visible := false
-  else
-    DBGridListaErogacion.Columns[10].Visible := true;
-
-  PFiltrosColumnas.Visible:= false;
-
-  GuardarOpcionesFiltrado;
-end;
-
-
-procedure TFListadoErogaciones.GuardarOpcionesFiltrado();
-begin
-  if CBFechaEmi.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\FechaEmision', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\FechaEmision', 'FALSE');
-
-  if CBFechaPD.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\FechaPD', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\FechaPD', 'FALSE');
-
-  if CBMedio.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Medio', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Medio', 'FALSE');
-
-  if CBNroMedio.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\NroMedio', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\NroMedio', 'FALSE');
-
-  if CBProveedor.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Proveedor', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Proveedor', 'FALSE');
-
-  if cbTipo.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Tipo', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Tipo', 'FALSE');
-
-  if CBConcepto.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Concepto', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Concepto', 'FALSE');
-
-  if CBNroOrden.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\NroOrden', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\NroOrden', 'FALSE');
-
-  if CBRecibo.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Otros', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\Otros', 'FALSE');
-
-  if CBNroFactura.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\NroFactura', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\NroFactura', 'FALSE');
-
-  if CBFechaConciliado.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\FechaConciliado', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UListadoErogaciones\Filtro\FechaConciliado', 'FALSE');
-end;
-
-
-procedure TFListadoErogaciones.LeerOpcionesFiltrado();
-begin
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\FechaEmision') <> '' then
-    CBFechaEmi.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\FechaEmision'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\FechaPD') <> '' then
-    CBFechaPD.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\FechaPD'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Medio') <> '' then
-    CBMedio.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Medio'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\NroMedio') <> '' then
-    CBNroMedio.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\NroMedio'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Proveedor') <> '' then
-    CBProveedor.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Proveedor'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Tipo') <> '' then
-    cbTipo.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Tipo'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Concepto') <> '' then
-    CBConcepto.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Concepto'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\NroOrden') <> '' then
-    CBNroOrden.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\NroOrden'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Otros') <> '' then
-    CBRecibo.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\Otros'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\NroFactura') <> '' then
-    CBNroFactura.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\NroFactura'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\FechaConciliado') <> '' then
-    CBFechaConciliado.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UListadoErogaciones\Filtro\FechaConciliado'));
 end;
 
 

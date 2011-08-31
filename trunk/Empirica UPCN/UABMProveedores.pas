@@ -236,8 +236,8 @@ begin
     DBENombreApellido.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
-    DBGridCuentas.PopupMenu:=MenuCtas;
-    DBGridConceptos.PopupMenu:=MenuConc;
+    EKOrdenarCuentas.PopUpGrilla:=MenuCtas;
+    EKOrdenarConceptos.PopUpGrilla:=MenuConc;
   end;
 end;
 
@@ -254,8 +254,8 @@ begin
     PageControl1.Visible:=true;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
-    DBGridCuentas.PopupMenu:=MenuCtas;
-    DBGridConceptos.PopupMenu:=MenuConc;
+    EKOrdenarCuentas.PopUpGrilla:=MenuCtas;
+    EKOrdenarConceptos.PopUpGrilla:=MenuConc;
 
     if (ZQ_IE_ProveedoresEDITABLE.AsString='N') then
     begin
@@ -341,8 +341,8 @@ begin
       ZQ_IE_Proveedores.Refresh;
       ZQ_IE_Proveedores.RecNo:= recNo;
       actualizar_permisos(ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger);
-      DBGridCuentas.PopupMenu:=nil;
-      DBGridConceptos.PopupMenu:=nil;
+      EKOrdenarCuentas.PopUpGrilla:=nil;
+      EKOrdenarConceptos.PopUpGrilla:=nil;
       end
      except
         begin
@@ -364,8 +364,8 @@ begin
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
     actualizar_permisos(ZQ_IE_ProveedoresNRO_PROVEEDOR.AsInteger);
-    DBGridCuentas.PopupMenu:=nil;
-    DBGridConceptos.PopupMenu:=nil;
+    EKOrdenarCuentas.PopUpGrilla:=nil;
+    EKOrdenarConceptos.PopUpGrilla:=nil;
   end;
 end;
 
@@ -391,11 +391,17 @@ end;
 
 procedure TFABMProveedores.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColunmas;
+  EKOrdenarGrilla1.CargarConfigColumnas;
+
+  EKOrdenarCuentas.PopUpGrilla:=nil;
+  EKOrdenarConceptos.PopUpGrilla:=nil;
+
   cargarQuerys();
   EKBusquedaAvanzada1.Abrir;
   PageControl1.ActivePageIndex:= 0;
 end;
+
+
 procedure TFABMProveedores.cargarQuerys();
 begin
   ZQ_TipoDocumento.Active:=False;

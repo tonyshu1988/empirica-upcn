@@ -1717,7 +1717,7 @@ object FListadoErogaciones: TFListadoErogaciones
       Left = 3
       Top = 58
       Width = 971
-      Height = 344
+      Height = 396
       Align = alClient
       Color = 16772842
       DataSource = DS_Libro_erogaciones
@@ -1993,7 +1993,7 @@ object FListadoErogaciones: TFListadoErogaciones
     end
     object pResumen: TPanel
       Left = 3
-      Top = 402
+      Top = 454
       Width = 971
       Height = 18
       Align = alBottom
@@ -2012,153 +2012,6 @@ object FListadoErogaciones: TFListadoErogaciones
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
-      end
-    end
-    object PFiltrosColumnas: TPanel
-      Tag = 99
-      Left = 3
-      Top = 420
-      Width = 971
-      Height = 52
-      Align = alBottom
-      Color = 11004820
-      TabOrder = 3
-      Visible = False
-      object BtAplicarFiltrosColumnas: TButton
-        Left = 659
-        Top = 13
-        Width = 93
-        Height = 26
-        Caption = 'Aplicar'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        OnClick = BtAplicarFiltrosColumnasClick
-      end
-      object CBFechaEmi: TCheckBox
-        Tag = 99
-        Left = 7
-        Top = 7
-        Width = 103
-        Height = 17
-        Caption = 'Fecha Emision'
-        Checked = True
-        State = cbChecked
-        TabOrder = 1
-      end
-      object CBFechaPD: TCheckBox
-        Tag = 99
-        Left = 112
-        Top = 7
-        Width = 78
-        Height = 17
-        Caption = 'Fecha PD'
-        Checked = True
-        State = cbChecked
-        TabOrder = 2
-      end
-      object CBMedio: TCheckBox
-        Tag = 99
-        Left = 112
-        Top = 31
-        Width = 62
-        Height = 17
-        Caption = 'Medio'
-        Checked = True
-        State = cbChecked
-        TabOrder = 3
-      end
-      object CBNroMedio: TCheckBox
-        Tag = 99
-        Left = 196
-        Top = 31
-        Width = 81
-        Height = 17
-        Caption = 'Nro. Medio'
-        Checked = True
-        State = cbChecked
-        TabOrder = 4
-      end
-      object CBProveedor: TCheckBox
-        Tag = 99
-        Left = 410
-        Top = 7
-        Width = 111
-        Height = 17
-        Caption = 'Denominaci'#243'n'
-        Checked = True
-        State = cbChecked
-        TabOrder = 5
-      end
-      object CBConcepto: TCheckBox
-        Tag = 99
-        Left = 7
-        Top = 31
-        Width = 81
-        Height = 17
-        Caption = 'Concepto'
-        Checked = True
-        State = cbChecked
-        TabOrder = 6
-      end
-      object CBNroOrden: TCheckBox
-        Tag = 99
-        Left = 196
-        Top = 7
-        Width = 81
-        Height = 17
-        Caption = 'Nro. Orden'
-        Checked = True
-        State = cbChecked
-        TabOrder = 7
-      end
-      object CBRecibo: TCheckBox
-        Tag = 99
-        Left = 287
-        Top = 31
-        Width = 80
-        Height = 17
-        Caption = 'Nro Recibo'
-        Checked = True
-        State = cbChecked
-        TabOrder = 8
-      end
-      object CBNroFactura: TCheckBox
-        Tag = 99
-        Left = 410
-        Top = 31
-        Width = 88
-        Height = 17
-        Caption = 'Nro Factura'
-        Checked = True
-        State = cbChecked
-        TabOrder = 9
-      end
-      object CBFechaConciliado: TCheckBox
-        Tag = 99
-        Left = 287
-        Top = 7
-        Width = 117
-        Height = 17
-        Caption = 'Fecha Conciliado'
-        Checked = True
-        State = cbChecked
-        TabOrder = 10
-      end
-      object cbTipo: TCheckBox
-        Tag = 99
-        Left = 530
-        Top = 7
-        Width = 55
-        Height = 17
-        Caption = 'Tipo'
-        Checked = True
-        State = cbChecked
-        TabOrder = 11
       end
     end
   end
@@ -2272,11 +2125,6 @@ object FListadoErogaciones: TFListadoErogaciones
           end
           item
             BeginGroup = True
-            Item = btnFiltrar
-            Visible = True
-          end
-          item
-            BeginGroup = True
             Item = btImprimir
             Visible = True
           end
@@ -2351,15 +2199,6 @@ object FListadoErogaciones: TFListadoErogaciones
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
-    object btnFiltrar: TdxBarLargeButton
-      Caption = 'Filtrar'
-      Category = 0
-      Hint = 'Filtrar'
-      Visible = ivAlways
-      ImageIndex = 7
-      OnClick = btnFiltrarClick
-      AutoGrayScale = False
-    end
     object btImprimir: TdxBarLargeButton
       Caption = 'Imprimir'
       Category = 0
@@ -2381,8 +2220,7 @@ object FListadoErogaciones: TFListadoErogaciones
       Items = (
         'btImprimir'
         'btnLibroBanco'
-        'btnSalir'
-        'btnFiltrar')
+        'btnSalir')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -2545,10 +2383,11 @@ object FListadoErogaciones: TFListadoErogaciones
         Titulo = 'Cuenta Bancaria'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Cuentas
-        TipoCombollenarCampo = 'BUSQUEDA'
-        TipoCombollenarCampoReal = 'ID_CUENTA'
+        TipoComboSQL = ZQ_Cuentas
+        TipoComboSQLCampoVer = 'BUSQUEDA'
+        TipoComboSQLCampoReal = 'ID_CUENTA'
         TipoComboEditable = False
+        TipoComboAncho = 400
         CambiarCondicion = False
         ItemIndex = 0
       end
@@ -2557,7 +2396,8 @@ object FListadoErogaciones: TFListadoErogaciones
         TipoCampo = EK_Numero
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = '='
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
           '1'
           '2'
           '3'
@@ -2570,8 +2410,6 @@ object FListadoErogaciones: TFListadoErogaciones
           '10'
           '11'
           '12')
-        TipoComboEditable = False
-        CambiarCondicion = False
         TipoComboValoresReales.Strings = (
           '1'
           '2'
@@ -2585,6 +2423,8 @@ object FListadoErogaciones: TFListadoErogaciones
           '10'
           '11'
           '12')
+        TipoComboAncho = 200
+        CambiarCondicion = False
         ItemIndex = -1
       end
       item
@@ -2593,6 +2433,7 @@ object FListadoErogaciones: TFListadoErogaciones
         Mascara = '####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end>
@@ -2676,10 +2517,57 @@ object FListadoErogaciones: TFListadoErogaciones
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridListaErogacion
+    Filtros = <
+      item
+        TituloColumna = 'Fecha Emisi'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha PD'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'F. Conciliado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Denominaci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Concepto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio Pago'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Cheq/Trans'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Factura'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Recibo'
+        Visible = True
+      end>
+    NombreGuardar = 'ListadoErogaciones'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'UListadoErogaciones'
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 176
     Top = 144
   end

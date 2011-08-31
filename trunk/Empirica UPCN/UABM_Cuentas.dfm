@@ -1156,10 +1156,29 @@ object FABM_Cuentas: TFABM_Cuentas
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = dbGridCuentas
+    Filtros = <
+      item
+        TituloColumna = 'Nro. ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio por Defecto'
+        Visible = False
+      end>
+    NombreGuardar = 'ABMCuentas'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'UABM_Cuentas'
-    Ordenar = True
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = False
     Left = 152
     Top = 40
   end

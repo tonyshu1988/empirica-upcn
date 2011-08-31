@@ -373,7 +373,7 @@ end;
 
 procedure TFSaldoInicial.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColunmas;
+  EKOrdenarGrilla1.CargarConfigColumnas;
   dm.EKModelo.abrir(ZQ_CuentaIngreso);
   dm.EKModelo.abrir(ZQ_VerSaldos);
   dm.EKModelo.abrir(ZQ_Medio);

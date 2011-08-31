@@ -104,18 +104,6 @@ type
     ComboOrden: TComboBox;
     Label10: TLabel;
     btnFiltrar: TdxBarLargeButton;
-    PFiltrosColumnas: TPanel;
-    BtAplicarFiltrosColumnas: TButton;
-    CBFechaEmi: TCheckBox;
-    CBFechaPD: TCheckBox;
-    CBNroMov: TCheckBox;
-    CBMedio: TCheckBox;
-    CBNroMedio: TCheckBox;
-    CBProveedor: TCheckBox;
-    CBConcepto: TCheckBox;
-    CBNroOrden: TCheckBox;
-    CBRecibo: TCheckBox;
-    CBNroFactura: TCheckBox;
     ZQ_CuentasBUSQUEDA: TStringField;
     EKListado_Proveedores: TEKListadoSQL;
     EKListado_Conceptos: TEKListadoSQL;
@@ -261,7 +249,6 @@ type
     QRExpr15: TQRExpr;
     EKVistaPrevia_LibroBco: TEKVistaPreviaQR;
     LIBRO_BANCOPROVEEDOR: TStringField;
-    CBFechaConciliado: TCheckBox;
     btnAltaOrdenPago: TdxBarLargeButton;
     EKDbSuma1: TEKDbSuma;
     DBLookupCBoxIngreso_Proveedor: TDBLookupComboBox;
@@ -328,7 +315,6 @@ type
     ConciliarMovimiento1: TMenuItem;
     Panel1: TPanel;
     StaticText1: TStaticText;
-    verAnulados: TCheckBox;
     dxBarStatic1: TdxBarStatic;
     dxBarButton1: TdxBarButton;
     dxBarFontNameCombo1: TdxBarFontNameCombo;
@@ -419,7 +405,6 @@ type
     EKDbSumaLibroBanco: TEKDbSuma;
     QRLabel43: TQRLabel;
     QRDBText64: TQRDBText;
-    CBTipo: TCheckBox;
     QRLabel32: TQRLabel;
     QRDBText22: TQRDBText;
     PanelConciliar: TPanel;
@@ -510,7 +495,7 @@ type
     procedure btBuscarClick(Sender: TObject);
     procedure EKLlenarCuentasCambio(valor: String);
     procedure BtEditarMovimientoClick(Sender: TObject);
-    procedure BtAplicarFiltrosColumnasClick(Sender: TObject);
+    procedure verAnulados(valor: boolean);
     procedure btnFiltrarClick(Sender: TObject);
     procedure DBGridLibroBancoDblClick(Sender: TObject);
     procedure DBGridLibroBancoDrawColumnCell(Sender: TObject;
@@ -630,7 +615,7 @@ end;
 
 procedure TFMovimientos.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColunmas;
+  EKOrdenarGrilla1.CargarConfigColumnas;
   refrescarConsultas();
 
   DTPFechaDesde.Date:= StartOfTheMonth(DM.EKModelo.Fecha);
@@ -658,7 +643,6 @@ begin
 
   btaplicar.Click;
   LeerOpcionesFiltrado;
-  BtAplicarFiltrosColumnas.Click;
 end;
 
 
@@ -1044,15 +1028,6 @@ begin
         end;
       end;
   end;
-end;
-
-
-procedure TFMovimientos.btnFiltrarClick(Sender: TObject);
-begin
-  if PFiltrosColumnas.Visible = false then
-    PFiltrosColumnas.Visible:=true
-  else
-    PFiltrosColumnas.Visible:=false;
 end;
 
 
@@ -1495,150 +1470,39 @@ begin
 end;
 
 
-procedure TFMovimientos.BtAplicarFiltrosColumnasClick(Sender: TObject);
+procedure TFMovimientos.btnFiltrarClick(Sender: TObject);
 begin
-  if not CBFechaEmi.Checked then  //fecha emision
-    DBGridLibroBanco.Columns[0].Visible := false
-  else
-    DBGridLibroBanco.Columns[0].Visible := true;
+  if LIBRO_BANCO.Filtered then  //si esta filtrado es porque no veo los anulados
+    VerAnulados(true)
+  else //si no esta filtrado es porque estoy viendo todoscf
+    VerAnulados(false);
+end;
 
-  if not CBFechaPD.Checked then  //fecha postdata
-    DBGridLibroBanco.Columns[1].Visible := false
-  else
-    DBGridLibroBanco.Columns[1].Visible := true;
 
-  if not CBNroMov.Checked then //nro movimiento
-    DBGridLibroBanco.Columns[2].Visible := false
-  else
-    DBGridLibroBanco.Columns[2].Visible := true;
-
-  if not CBNroOrden.Checked then //Nro Orden
-    DBGridLibroBanco.Columns[3].Visible := false
-  else
-    DBGridLibroBanco.Columns[3].Visible := true;
-
-  if not CBMedio.Checked then  //medio
-    DBGridLibroBanco.Columns[4].Visible := false
-  else
-    DBGridLibroBanco.Columns[4].Visible := true;
-
-  if not CBNroMedio.Checked then  //nro cheque/transf
-    DBGridLibroBanco.Columns[5].Visible := false
-  else
-    DBGridLibroBanco.Columns[5].Visible := true;
-
-  if not CBProveedor.Checked then  //Denominacion
-    DBGridLibroBanco.Columns[6].Visible := false
-  else
-    DBGridLibroBanco.Columns[6].Visible := true;
-
-  if not CBTipo.Checked then  //Tipo
-    DBGridLibroBanco.Columns[7].Visible := false
-  else
-    DBGridLibroBanco.Columns[7].Visible := true;
-
-  if not CBConcepto.Checked then  //concepto
-    DBGridLibroBanco.Columns[9].Visible := false
-  else
-    DBGridLibroBanco.Columns[9].Visible := true;
-
-  if not CBNroFactura.Checked then //factura
-    DBGridLibroBanco.Columns[10].Visible := false
-  else
-    DBGridLibroBanco.Columns[10].Visible := true;
-
-  if not CBrecibo.Checked then //Recibo
-    DBGridLibroBanco.Columns[11].Visible := false
-  else
-    DBGridLibroBanco.Columns[11].Visible := true;
-
-  if not CBFechaConciliado.Checked then //conciliado
-    DBGridLibroBanco.Columns[16].Visible := false
-  else
-    DBGridLibroBanco.Columns[16].Visible := true;
-
+procedure TFMovimientos.verAnulados(valor: boolean);
+begin
   //filtro los anulados para que se vean o no
-  if verAnulados.Checked then
+  if valor then //si es true veo los anulados
     begin
       LIBRO_BANCO.Filtered:=False;
       LIBRO_BANCO.Filter:='';
-      DBGridLibroBanco.Columns[8].Visible := true;
-    end
-  else
-    begin
-      LIBRO_BANCO.Filtered:= False;
-      LIBRO_BANCO.Filter:= Format('CTA_MOV_ANULADO <> %s',[quotedStr('A')]);
-      LIBRO_BANCO.Filtered:= True;
-      DBGridLibroBanco.Columns[8].Visible:= false;
-    end;
 
-  PFiltrosColumnas.Visible:=false;
+      DBGridLibroBanco.Columns[GetIndex(DBGridLibroBanco, 'Anulado')].Visible:= true;
+    end
+  else //si es false oculto los anulados
+    begin
+      LIBRO_BANCO.Filtered:=False;
+      LIBRO_BANCO.Filter:= Format('CTA_MOV_ANULADO<>%s',[quotedStr('A')]);
+      LIBRO_BANCO.Filtered:=True;
+
+      DBGridLibroBanco.Columns[GetIndex(DBGridLibroBanco, 'Anulado')].Visible:= false;
+    end;
 end;
 
 
 procedure TFMovimientos.GuardarOpcionesFiltrado();
 begin
-  if CBFechaEmi.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaEmision', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaEmision', 'FALSE');
-
-  if CBFechaPD.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaPD', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaPD', 'FALSE');
-
-  if CBNroMov.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroMov', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroMov', 'FALSE');
-
-  if CBMedio.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Medio', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Medio', 'FALSE');
-
-  if CBNroMedio.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroMedio', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroMedio', 'FALSE');
-
-  if CBProveedor.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Proveedor', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Proveedor', 'FALSE');
-
-  if CBConcepto.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Concepto', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Concepto', 'FALSE');
-
-  if CBNroOrden.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroOrden', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroOrden', 'FALSE');
-
-  if CBRecibo.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Otros', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Otros', 'FALSE');
-
-  if CBNroFactura.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroFactura', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\NroFactura', 'FALSE');
-
-  if CBFechaConciliado.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaConciliado', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\FechaConciliado', 'FALSE');
-
-  if CBTipo.Checked then
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Tipo', 'TRUE')
-  else
-    EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\Tipo', 'FALSE');
-
-  if verAnulados.Checked then
+  if not LIBRO_BANCO.Filtered then //si no esta filtrado ver anulados es TRUE, los veo
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\verAnulados', 'TRUE')
   else
     EKIniGuardarFiltros.EsribirRegString('\UMovimiento\Filtro\verAnulados', 'FALSE');
@@ -1647,44 +1511,10 @@ end;
 
 procedure TFMovimientos.LeerOpcionesFiltrado();
 begin
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\FechaEmision') <> '' then
-    CBFechaEmi.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\FechaEmision'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\FechaPD') <> '' then
-    CBFechaPD.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\FechaPD'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroMov') <> '' then
-    CBNroMov.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroMov'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Medio') <> '' then
-    CBMedio.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Medio'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroMedio') <> '' then
-    CBNroMedio.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroMedio'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Proveedor') <> '' then
-    CBProveedor.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Proveedor'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Tipo') <> '' then
-    CBTipo.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Tipo'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Concepto') <> '' then
-    CBConcepto.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Concepto'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroOrden') <> '' then
-    CBNroOrden.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroOrden'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Otros') <> '' then
-    CBRecibo.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\Otros'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroFactura') <> '' then
-    CBNroFactura.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\NroFactura'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\FechaConciliado') <> '' then
-    CBFechaConciliado.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\FechaConciliado'));
-
-  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\verAnulados') <> '' then
-    verAnulados.Checked:= StrToBool(EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\verAnulados'));
+  if EKIniGuardarFiltros.LeerRegString('\UMovimiento\Filtro\verAnulados') = 'TRUE' then
+    VerAnulados(true)
+  else
+    VerAnulados(false);
 end;
 
 

@@ -1,6 +1,6 @@
 object FReportes_Disponibilidades: TFReportes_Disponibilidades
-  Left = 246
-  Top = 163
+  Left = 200
+  Top = 148
   Width = 1082
   Height = 585
   Caption = 'Reportes Disponibilidades'
@@ -30,7 +30,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       Left = 1
       Top = 1
       Width = 1064
-      Height = 439
+      Height = 493
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 3
@@ -39,7 +39,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Left = 3
         Top = 34
         Width = 1058
-        Height = 402
+        Height = 456
         Align = alClient
         Color = 16772842
         DataSource = DS_LIBRO_BANCO
@@ -1690,180 +1690,6 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         end
       end
     end
-    object PFiltrosColumnas: TPanel
-      Tag = 99
-      Left = 1
-      Top = 440
-      Width = 1064
-      Height = 54
-      Align = alBottom
-      BevelInner = bvLowered
-      Color = 11004820
-      TabOrder = 1
-      Visible = False
-      object BtAplicarFiltrosColumnas: TButton
-        Left = 732
-        Top = 14
-        Width = 85
-        Height = 26
-        Caption = 'Aplicar'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        OnClick = BtAplicarFiltrosColumnasClick
-      end
-      object CBFechaEmi: TCheckBox
-        Tag = 99
-        Left = 8
-        Top = 8
-        Width = 103
-        Height = 17
-        Caption = 'Fecha Emision'
-        Checked = True
-        State = cbChecked
-        TabOrder = 1
-      end
-      object CBFechaPD: TCheckBox
-        Tag = 99
-        Left = 112
-        Top = 8
-        Width = 78
-        Height = 17
-        Caption = 'Fecha PD'
-        Checked = True
-        State = cbChecked
-        TabOrder = 2
-      end
-      object CBNroMov: TCheckBox
-        Tag = 99
-        Left = 193
-        Top = 8
-        Width = 111
-        Height = 17
-        Caption = 'Nro. Movimiento'
-        Checked = True
-        State = cbChecked
-        TabOrder = 3
-      end
-      object CBMedio: TCheckBox
-        Tag = 99
-        Left = 390
-        Top = 8
-        Width = 62
-        Height = 17
-        Caption = 'Medio'
-        Checked = True
-        State = cbChecked
-        TabOrder = 4
-      end
-      object CBNroMedio: TCheckBox
-        Tag = 99
-        Left = 476
-        Top = 8
-        Width = 81
-        Height = 17
-        Caption = 'Nro. Medio'
-        Checked = True
-        State = cbChecked
-        TabOrder = 5
-      end
-      object CBProveedor: TCheckBox
-        Tag = 99
-        Left = 8
-        Top = 32
-        Width = 89
-        Height = 17
-        Caption = 'Denominaci'#243'n'
-        Checked = True
-        State = cbChecked
-        TabOrder = 6
-      end
-      object CBConcepto: TCheckBox
-        Tag = 99
-        Left = 193
-        Top = 32
-        Width = 81
-        Height = 17
-        Caption = 'Concepto'
-        Checked = True
-        State = cbChecked
-        TabOrder = 7
-      end
-      object CBNroOrden: TCheckBox
-        Tag = 99
-        Left = 302
-        Top = 8
-        Width = 81
-        Height = 17
-        Caption = 'Nro. Orden'
-        Checked = True
-        State = cbChecked
-        TabOrder = 8
-      end
-      object CBRecibo: TCheckBox
-        Tag = 99
-        Left = 390
-        Top = 32
-        Width = 80
-        Height = 17
-        Caption = 'Nro Recibo'
-        Checked = True
-        State = cbChecked
-        TabOrder = 9
-      end
-      object CBNroFactura: TCheckBox
-        Tag = 99
-        Left = 302
-        Top = 32
-        Width = 88
-        Height = 17
-        Caption = 'Nro Factura'
-        Checked = True
-        State = cbChecked
-        TabOrder = 10
-      end
-      object CBFechaConciliado: TCheckBox
-        Tag = 99
-        Left = 476
-        Top = 32
-        Width = 117
-        Height = 17
-        Caption = 'Fecha Conciliado'
-        Checked = True
-        State = cbChecked
-        TabOrder = 11
-      end
-      object verAnulados: TCheckBox
-        Tag = 99
-        Left = 612
-        Top = 19
-        Width = 117
-        Height = 17
-        Caption = 'Ver Anulados'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 12
-      end
-      object cbTipo: TCheckBox
-        Tag = 99
-        Left = 112
-        Top = 32
-        Width = 73
-        Height = 17
-        Caption = 'Tipo'
-        Checked = True
-        State = cbChecked
-        TabOrder = 13
-      end
-    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -1975,7 +1801,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
           end
           item
             BeginGroup = True
-            Item = btnFiltrat
+            Item = btnFiltrar
             Visible = True
           end
           item
@@ -2053,13 +1879,13 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
       ImageIndex = 28
       OnClick = btImprimirClick
     end
-    object btnFiltrat: TdxBarLargeButton
-      Caption = 'Filtrar'
+    object btnFiltrar: TdxBarLargeButton
+      Caption = 'Ver/Ocultar Anulados'
       Category = 0
-      Hint = 'Filtrar'
+      Hint = 'Ver/Ocultar los movimientos Anulados'
       Visible = ivAlways
       ImageIndex = 7
-      OnClick = btnFiltratClick
+      OnClick = btnFiltrarClick
       AutoGrayScale = False
     end
     object btnExel: TdxBarLargeButton
@@ -2284,10 +2110,11 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Titulo = 'Cuenta Bancaria'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Cuentas
-        TipoCombollenarCampo = 'BUSQUEDA'
-        TipoCombollenarCampoReal = 'ID_CUENTA'
+        TipoComboSQL = ZQ_Cuentas
+        TipoComboSQLCampoVer = 'BUSQUEDA'
+        TipoComboSQLCampoReal = 'ID_CUENTA'
         TipoComboEditable = False
+        TipoComboAncho = 400
         CambiarCondicion = False
         ItemIndex = 0
       end
@@ -2297,6 +2124,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end
@@ -2306,6 +2134,7 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end
@@ -2313,14 +2142,15 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
         Titulo = 'Ordenamiento'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
           'FECHA EMISION'
           'FECHA POSTDATA')
-        TipoComboEditable = False
-        CambiarCondicion = False
         TipoComboValoresReales.Strings = (
           '0'
           '1')
+        TipoComboAncho = 200
+        CambiarCondicion = False
         ItemIndex = 0
       end>
     CriteriosLocate = <>
@@ -2341,10 +2171,65 @@ object FReportes_Disponibilidades: TFReportes_Disponibilidades
   end
   object EKOrdenarGrillaLB: TEKOrdenarGrilla
     Grilla = DBGridLibroBanco
+    Filtros = <
+      item
+        TituloColumna = 'Fecha Emisi'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha PD'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Movimiento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Orden Pago'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Cheque/Transf'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Denominaci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Anulado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Concepto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Factura'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Recibo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'F. Conciliado'
+        Visible = True
+      end>
+    NombreGuardar = 'Rep_Disponibilidad'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'UR_DisponibilidadesLB'
-    Ordenar = False
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 62
     Top = 113
   end

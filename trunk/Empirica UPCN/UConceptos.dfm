@@ -1165,6 +1165,7 @@ object FConceptos: TFConceptos
         Tabla = 'ie_conceptos'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1173,6 +1174,7 @@ object FConceptos: TFConceptos
         Tabla = 'ie_conceptos'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1182,6 +1184,7 @@ object FConceptos: TFConceptos
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1190,13 +1193,14 @@ object FConceptos: TFConceptos
         Tabla = 'ie_conceptos'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboValores.Strings = (
-          'Si'
-          'No')
         TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'SI'
+          'NO')
         TipoComboValoresReales.Strings = (
           'S'
           'N')
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>
@@ -1231,10 +1235,25 @@ object FConceptos: TFConceptos
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = Grilla
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_Conceptos'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'UConceptos'
-    Ordenar = False
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = False
     Left = 552
     Top = 80
   end

@@ -2285,10 +2285,11 @@ object FConciliacion: TFConciliacion
         Titulo = 'Cuenta Bancaria'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoCombollenarSQL = ZQ_Cuentas
-        TipoCombollenarCampo = 'BUSQUEDA'
-        TipoCombollenarCampoReal = 'ID_CUENTA'
+        TipoComboSQL = ZQ_Cuentas
+        TipoComboSQLCampoVer = 'BUSQUEDA'
+        TipoComboSQLCampoReal = 'id_cuenta'
         TipoComboEditable = False
+        TipoComboAncho = 400
         CambiarCondicion = False
         ItemIndex = 0
       end
@@ -2298,6 +2299,7 @@ object FConciliacion: TFConciliacion
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end
@@ -2306,6 +2308,7 @@ object FConciliacion: TFConciliacion
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
       end>
@@ -2657,10 +2660,37 @@ object FConciliacion: TFConciliacion
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridConciliacion
+    Filtros = <
+      item
+        TituloColumna = 'Fecha PD'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro Cheque/Trans'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Denominaci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardar = 'Conciliacion'
+    AltoTituloColumna = 15
     FuenteNormal = []
-    NombreGuardarConfig = 'UConciliacion'
-    Ordenar = False
-    MoverColumna = True
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 136
     Top = 144
   end

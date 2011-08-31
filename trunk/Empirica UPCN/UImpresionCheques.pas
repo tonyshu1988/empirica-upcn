@@ -118,6 +118,7 @@ type
       var PrintBand: Boolean);
     procedure QRBandDiferidoBeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -205,6 +206,7 @@ end;
 
 procedure TFImpresionCheques.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
   dm.EKModelo.abrir(ZQ_Cuenta);
   ClientZQ_movimientos.CreateDataSet;
   ajustarMargenes;
@@ -456,6 +458,12 @@ begin
   QRLabeldiaPD.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_Pd.AsDateTime);
   QRLabelmesPD.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_Pd.AsDateTime);
   QRLabelanioPD.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_Pd.AsDateTime);
+end;
+
+procedure TFImpresionCheques.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

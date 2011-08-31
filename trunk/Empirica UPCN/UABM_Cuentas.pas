@@ -213,7 +213,7 @@ end;
 
 procedure TFABM_Cuentas.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColunmas;
+  EKOrdenarGrilla1.CargarConfigColumnas;
   dm.ekModelo.abrir(ZQ_Cuentas);
   dm.ekModelo.abrir(ZQ_Medios);
 end;

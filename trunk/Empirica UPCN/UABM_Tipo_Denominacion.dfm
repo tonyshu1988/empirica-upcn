@@ -393,4 +393,14 @@ object FABM_Tipo_Denominacion: TFABM_Tipo_Denominacion
     Left = 400
     Top = 112
   end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Filtros = <>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = False
+    PermitirFiltrar = False
+    Left = 232
+    Top = 112
+  end
 end
