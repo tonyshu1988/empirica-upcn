@@ -542,7 +542,7 @@ object FABM_Colores: TFABM_Colores
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
-          AutoStretch = False
+          AutoStretch = True
           Caption = 'QRLabelCritBusqueda'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
@@ -1598,6 +1598,7 @@ object FABM_Colores: TFABM_Colores
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -1606,6 +1607,7 @@ object FABM_Colores: TFABM_Colores
         Tabla = 'COLOR'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

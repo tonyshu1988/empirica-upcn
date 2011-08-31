@@ -130,8 +130,8 @@ end;
 
 procedure TFABM_TipoMovimiento.btnBuscarClick(Sender: TObject);
 begin
-  EKbuscar.buscar;
-  dm.mostrarCantidadRegistro(ZQ_TipoMov, lblCantidadRegistros);
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_TipoMov, lblCantidadRegistros);
 end;
 
 

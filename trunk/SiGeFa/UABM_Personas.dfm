@@ -2021,7 +2021,7 @@ object FABM_Personas: TFABM_Personas
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
-          AutoStretch = False
+          AutoStretch = True
           Caption = 'QRLabelCritBusqueda'
           Color = clWhite
           Font.Charset = ANSI_CHARSET

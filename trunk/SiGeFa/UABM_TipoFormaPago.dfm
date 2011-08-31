@@ -515,7 +515,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
-          AutoStretch = False
+          AutoStretch = True
           Caption = 'QRLabelCritBusqueda'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
@@ -1540,6 +1540,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
         Tabla = 'TIPO_FORMAPAGO'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

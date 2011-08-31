@@ -94,7 +94,7 @@ object FCuentaCorriente: TFCuentaCorriente
     Width = 934
     Height = 485
     Align = alClient
-    TabOrder = 2
+    TabOrder = 1
     object RepCtasCtes: TQuickRep
       Tag = 99
       Left = 68
@@ -5058,6 +5058,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -5066,6 +5067,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Tabla = 'cc'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -5074,6 +5076,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Tabla = 'cc'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -5082,6 +5085,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Tabla = 'cc'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -5090,6 +5094,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Tabla = 'cc'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -5100,6 +5105,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -5109,6 +5115,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end
       item
@@ -5118,6 +5125,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

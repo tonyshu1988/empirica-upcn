@@ -124,8 +124,8 @@ end;
 
 procedure TFABM_TipoArticulo.btnBuscarClick(Sender: TObject);
 begin
-  EKbuscar.buscar;
-  dm.mostrarCantidadRegistro(ZQ_TipoArt, lblCantidadRegistros);
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_TipoArt, lblCantidadRegistros);
 end;
 
 

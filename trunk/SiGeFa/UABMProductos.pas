@@ -332,7 +332,8 @@ uses UDM, UPrincipal, UUtilidades;
 
 procedure TFABMProductos.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscar.Buscar;
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_ProductoCabecera, lblResultadoBusqueda);
 end;
 
 
@@ -377,6 +378,7 @@ begin
   EKOrdenarDetalle.PopUpGrilla:= nil;
   tabs.ActivePageIndex:= 0;
   PProducto.Enabled:= False;
+  dm.mostrarCantidadRegistro(ZQ_ProductoCabecera, lblResultadoBusqueda);
 end;
 
 

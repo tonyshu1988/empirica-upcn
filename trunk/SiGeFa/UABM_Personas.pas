@@ -357,8 +357,8 @@ end;
 
 procedure TFABM_Personas.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscar.Buscar;
-  dm.mostrarCantidadRegistro(ZQ_Persona, lblCantidadRegistros);
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_Persona, lblCantidadRegistros);
 end;
 
 

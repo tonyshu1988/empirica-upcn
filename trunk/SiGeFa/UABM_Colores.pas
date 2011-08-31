@@ -283,8 +283,8 @@ end;
 
 procedure TFABM_Colores.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscar.Buscar;
-  dm.mostrarCantidadRegistro(ZQ_Colores, lblCantidadRegistros); 
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_Colores, lblCantidadRegistros);
 end;
 
 

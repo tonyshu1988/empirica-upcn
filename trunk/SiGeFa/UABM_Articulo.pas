@@ -316,8 +316,8 @@ end;
 
 procedure TFABM_Articulo.btnBuscarClick(Sender: TObject);
 begin
-  EKBusquedaAvanzada1.Buscar;
-  dm.mostrarCantidadRegistro(ZQ_Articulo, lblCantidadRegistros);
+  if EKBusquedaAvanzada1.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_Articulo, lblCantidadRegistros);
 end;
 
 procedure TFABM_Articulo.DBLookupComboBox1KeyUp(Sender: TObject;

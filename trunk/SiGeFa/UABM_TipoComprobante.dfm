@@ -623,7 +623,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
-          AutoStretch = False
+          AutoStretch = True
           Caption = 'QRLabelCritBusqueda'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
@@ -1844,6 +1844,7 @@ object FABM_TipoComprobante: TFABM_TipoComprobante
         Tabla = 'tipo_comprobante'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

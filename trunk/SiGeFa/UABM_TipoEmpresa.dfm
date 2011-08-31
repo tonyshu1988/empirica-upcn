@@ -507,7 +507,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
-        AutoStretch = False
+        AutoStretch = True
         Caption = 'QRLabelCritBusqueda'
         Color = clWhite
         Font.Charset = ANSI_CHARSET
@@ -1415,6 +1415,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
         Tabla = 'TIPO_EMPRESA'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
         ItemIndex = -1
       end>
     CriteriosLocate = <>

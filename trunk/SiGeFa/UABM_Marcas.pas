@@ -129,8 +129,8 @@ end;
 
 procedure TFABM_Marcas.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscar.Buscar;
-  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
+  if EKBuscar.Buscar then
+    dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
 end;
 
 
