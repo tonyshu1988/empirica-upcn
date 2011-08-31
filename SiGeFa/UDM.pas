@@ -77,7 +77,7 @@ type
   public
     colorCampoRequido: TColor;
     provinciaPorDefecto: integer;
-    procedure prepararParaExportar(query: TDataSet; valor: Boolean);
+    procedure prepararParaExportar(valor: Boolean);
     procedure mostrarCantidadRegistro(query: TDataSet; var etiqueta: TLabel);
     procedure cargarReporteSucursal(idSucursal: integer);
   end;
@@ -319,21 +319,19 @@ end;
 //PROCEDIMIENTO PARA EJECUTAR ANTES DE EXPORTAR LAS GRILLAS A EXCEL.
 //LO QUE HACE ES SACAR LOS CURRENCIS DE LOS CAMPOS FLOAT Y DESPUES
 //LOS VUELVE A SETEAR
-procedure TDM.prepararParaExportar(query: TDataSet; valor: Boolean);
+procedure TDM.prepararParaExportar(valor: Boolean);
 begin
-  if (valor = false) then  //seteo para exportar a excel
+  if (valor = true) then  //seteo para exportar a excel
   begin
-    CurrencyDecimals:= 2;
-    DecimalSeparator:= '.';
     ThousandSeparator:= #0;
     CurrencyString:= #0;
+    CurrencyFormat := 0;
   end
   else
   begin //vuelvo a la configuracion original antes de exportar
-    CurrencyDecimals:= auxCurrencyDecimals;
-    DecimalSeparator:= auxDecimalSeparator;
-    ThousandSeparator:= auxThousandSeparator;
-    CurrencyString:= auxCurrencyString;
+    CurrencyString := '$';
+    CurrencyFormat := 2;
+    ThousandSeparator := ',';
   end;
 end;
 
