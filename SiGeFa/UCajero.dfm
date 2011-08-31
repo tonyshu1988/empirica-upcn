@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 327
-  Top = 97
+  Left = 122
+  Top = 76
   Width = 1127
   Height = 661
   Caption = 'Cajero SiGeFa'
@@ -781,16 +781,9 @@ object FCajero: TFCajero
             end
             item
               Expanded = False
-              FieldName = 'IMPUESTO_INTERNO'
-              Title.Caption = 'Imp.I.'
-              Width = 44
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PORC_IVA'
+              FieldName = 'IMPORTE_IVA'
               Title.Caption = 'IVA'
-              Width = 56
+              Width = 77
               Visible = True
             end
             item
@@ -1335,6 +1328,9 @@ object FCajero: TFCajero
     end
     object ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
     end
   end
   object DS_ComprobanteDetalle: TDataSource
@@ -4164,6 +4160,11 @@ object FCajero: TFCajero
     end
     object CD_DetalleFacturaIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
+      DisplayFormat = '$ ##,###,##0.00'
+    end
+    object CD_DetalleFacturaIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+      DisplayFormat = '$ ##,###,##0.00'
     end
   end
   object DS_DetalleFactura: TDataSource
@@ -4723,6 +4724,10 @@ object FCajero: TFCajero
       item
         Operacion = goSum
         NombreCampo = 'importe_final'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'importe_iva'
       end>
     DataSet = CD_DetalleFactura
     SumListChanged = EKDbSuma1SumListChanged
@@ -4949,6 +4954,7 @@ object FCajero: TFCajero
     end
   end
   object DS_Sucursal: TDataSource
+    DataSet = DM.ZQ_Sucursal
     Left = 115
     Top = 153
   end

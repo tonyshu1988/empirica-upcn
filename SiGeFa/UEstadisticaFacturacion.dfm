@@ -50,9 +50,9 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         TabOrder = 0
         object lblComprobantes: TLabel
           Left = 1
-          Top = 555
+          Top = 544
           Width = 694
-          Height = 18
+          Height = 29
           Align = alBottom
           Alignment = taRightJustify
           Caption = 'Total Comprobantes: $ 0.00 '
@@ -71,7 +71,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
           Left = 1
           Top = 1
           Width = 694
-          Height = 554
+          Height = 543
           Align = alClient
           Color = 16762303
           DataSource = DS_Comprobante
@@ -136,6 +136,12 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
               Expanded = False
               FieldName = 'TIVA_'
               Title.Caption = 'Tipo IVA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_IVA'
+              Title.Caption = 'Importe IVA'
               Visible = True
             end
             item
@@ -218,6 +224,12 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
                 Expanded = False
                 FieldName = 'IMPORTE_VENTA'
                 Title.Caption = 'Importe Venta'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_IVA'
+                Title.Caption = 'Importe IVA'
                 Visible = True
               end
               item
@@ -975,6 +987,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   end
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
+    SortedFields = 'FECHA'
     AfterScroll = ZQ_ComprobanteAfterScroll
     SQL.Strings = (
       'select c.*,'
@@ -1219,77 +1232,6 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     Left = 69
     Top = 161
   end
-  object ZQ_Sucursal: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select *'
-      'from Sucursal s'
-      'order by s.nombre')
-    Params = <>
-    Left = 68
-    Top = 240
-    object ZQ_SucursalID_SUCURSAL: TIntegerField
-      FieldName = 'ID_SUCURSAL'
-    end
-    object ZQ_SucursalNOMBRE: TStringField
-      FieldName = 'NOMBRE'
-      Size = 200
-    end
-    object ZQ_SucursalDIRECCION: TStringField
-      FieldName = 'DIRECCION'
-      Size = 200
-    end
-    object ZQ_SucursalLOCALIDAD: TStringField
-      FieldName = 'LOCALIDAD'
-      Size = 200
-    end
-    object ZQ_SucursalCODIGO_POSTAL: TStringField
-      FieldName = 'CODIGO_POSTAL'
-    end
-    object ZQ_SucursalTELEFONO: TStringField
-      FieldName = 'TELEFONO'
-      Size = 100
-    end
-    object ZQ_SucursalEMAIL: TStringField
-      FieldName = 'EMAIL'
-      Size = 100
-    end
-    object ZQ_SucursalBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_SucursalLOGO: TBlobField
-      FieldName = 'LOGO'
-    end
-    object ZQ_SucursalREPORTE_TITULO: TStringField
-      FieldName = 'REPORTE_TITULO'
-      Size = 50
-    end
-    object ZQ_SucursalREPORTE_SUBTITULO: TStringField
-      FieldName = 'REPORTE_SUBTITULO'
-      Size = 50
-    end
-    object ZQ_SucursalCOMPROBANTE_TITULO: TStringField
-      FieldName = 'COMPROBANTE_TITULO'
-      Size = 50
-    end
-    object ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField
-      FieldName = 'COMPROBANTE_RENGLON1'
-      Size = 50
-    end
-    object ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField
-      FieldName = 'COMPROBANTE_RENGLON2'
-      Size = 50
-    end
-    object ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField
-      FieldName = 'COMPROBANTE_RENGLON3'
-      Size = 50
-    end
-    object ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField
-      FieldName = 'COMPROBANTE_RENGLON4'
-      Size = 50
-    end
-  end
   object ZQ_TipoIVA: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -1358,10 +1300,6 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         Visible = True
       end
       item
-        TituloColumna = 'Importe IVA'
-        Visible = True
-      end
-      item
         TituloColumna = 'Vendedor'
         Visible = True
       end>
@@ -1408,23 +1346,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     Grilla = DBGridFormaPago
     Filtros = <
       item
-        TituloColumna = 'C'#243'd'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuenta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'MP'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medio Pago'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
+        TituloColumna = 'Forma de Pago'
         Visible = True
       end
       item
@@ -1432,7 +1354,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         Visible = True
       end
       item
-        TituloColumna = 'Fecha'
+        TituloColumna = 'MDP Fecha'
         Visible = True
       end
       item
