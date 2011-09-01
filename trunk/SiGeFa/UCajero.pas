@@ -851,6 +851,7 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
        begin
         dm.EKModelo.cancelar_transaccion(abmComprobante);
         Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
+        dm.EKModelo.cancelar_transaccion(abmComprobante);
        end;
         CD_DetalleFactura.EmptyDataSet;
         CD_Fpago.EmptyDataSet;

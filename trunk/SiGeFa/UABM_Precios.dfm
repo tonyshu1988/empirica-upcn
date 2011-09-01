@@ -1,6 +1,6 @@
 object FABM_Precios: TFABM_Precios
-  Left = 217
-  Top = 98
+  Left = 381
+  Top = 138
   Width = 1024
   Height = 646
   Caption = 'ABM Precios'

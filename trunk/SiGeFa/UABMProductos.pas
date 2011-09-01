@@ -378,7 +378,7 @@ begin
   EKOrdenarDetalle.PopUpGrilla:= nil;
   tabs.ActivePageIndex:= 0;
   PProducto.Enabled:= False;
-  dm.mostrarCantidadRegistro(ZQ_ProductoCabecera, lblResultadoBusqueda);
+  lblResultadoBusqueda.Caption:= '';
 end;
 
 

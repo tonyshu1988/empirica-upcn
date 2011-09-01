@@ -4954,7 +4954,6 @@ object FCajero: TFCajero
     end
   end
   object DS_Sucursal: TDataSource
-    DataSet = DM.ZQ_Sucursal
     Left = 115
     Top = 153
   end
