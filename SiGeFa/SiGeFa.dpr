@@ -43,7 +43,8 @@ uses
   UCuentaCorriente in 'UCuentaCorriente.pas' {FCuentaCorriente},
   UEstadisticaFacturacion in 'UEstadisticaFacturacion.pas' {FEstadisticasFacturacion},
   UEstadisticaDisponibilidades in 'UEstadisticaDisponibilidades.pas' {FEstadisticaDisponibilidades},
-  UArqueo_Caja in 'UArqueo_Caja.pas' {FArqueo_Caja};
+  UArqueo_Caja in 'UArqueo_Caja.pas' {FArqueo_Caja},
+  UCargarPreventa in 'UCargarPreventa.pas' {FPreventa};
 
 {$R *.res}
 

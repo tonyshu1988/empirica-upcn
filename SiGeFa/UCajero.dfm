@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 123
-  Top = 169
+  Left = 228
+  Top = 133
   Width = 1127
   Height = 661
   Caption = 'Cajero SiGeFa'
@@ -2027,6 +2027,7 @@ object FCajero: TFCajero
             Visible = True
           end
           item
+            BeginGroup = True
             Item = bt_BuscarCliente
             Visible = True
           end
@@ -2036,6 +2037,11 @@ object FCajero: TFCajero
           end
           item
             Item = BtVendedor
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btPreventa
             Visible = True
           end>
         Name = 'vertical'
@@ -3744,8 +3750,8 @@ object FCajero: TFCajero
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 520
-    Top = 504
+    Left = 592
+    Top = 432
     DockControlHeights = (
       88
       0
@@ -3828,12 +3834,13 @@ object FCajero: TFCajero
       ImageIndex = 70
       AutoGrayScale = False
     end
-    object btBajar: TdxBarLargeButton
-      Caption = 'Bajar'
+    object btPreventa: TdxBarLargeButton
+      Caption = 'F8 Preventa'
       Category = 0
-      Hint = 'Da de Baja o Reactiva el Inmueble'
-      Visible = ivNever
-      ImageIndex = 9
+      Hint = 'F8 Preventa'
+      Visible = ivAlways
+      ImageIndex = 79
+      OnClick = btPreventaClick
       AutoGrayScale = False
     end
     object btsalir: TdxBarLargeButton
@@ -4265,6 +4272,11 @@ object FCajero: TFCajero
       Caption = 'ANuevaFormaPago'
       ShortCut = 118
       OnExecute = ANuevaFormaPagoExecute
+    end
+    object APreventa: TAction
+      Caption = 'Preventa'
+      ShortCut = 119
+      OnExecute = APreventaExecute
     end
   end
   object CD_Fpago: TClientDataSet
