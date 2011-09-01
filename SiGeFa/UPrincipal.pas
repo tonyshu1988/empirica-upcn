@@ -105,6 +105,8 @@ type
     N7: TMenuItem;
     AEstad_Disponib: TAction;
     EstadisticaDisponibilidades1: TMenuItem;
+    AArqueo_Caja: TAction;
+    ArqueodeCaja1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -142,6 +144,7 @@ type
     procedure AEstad_MovInternosExecute(Sender: TObject);
     procedure AEstad_FacturacionExecute(Sender: TObject);
     procedure AEstad_DisponibExecute(Sender: TObject);
+    procedure AArqueo_CajaExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -168,7 +171,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_Cuentas, UABM_TipoComprobante, UABM_Precios, UABM_Comprobantes,
   UCajero, UMovimientosInternos, UABM_TipoMovimiento, UTransferirStock,
   UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion,
-  UEstadisticaDisponibilidades;
+  UEstadisticaDisponibilidades, UArqueo_Caja;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -499,6 +502,11 @@ end;
 procedure TFPrincipal.AEstad_DisponibExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFEstadisticaDisponibilidades, FEstadisticaDisponibilidades);
+end;
+
+procedure TFPrincipal.AArqueo_CajaExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFArqueo_Caja, FArqueo_Caja);
 end;
 
 end.
