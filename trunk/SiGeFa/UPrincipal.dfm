@@ -4946,6 +4946,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 38
       OnExecute = AEstad_DisponibExecute
     end
+    object AArqueo_Caja: TAction
+      Caption = 'Arqueo de Caja'
+      ImageIndex = 31
+      OnExecute = AArqueo_CajaExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -4971,6 +4976,9 @@ object FPrincipal: TFPrincipal
       object Cajero1: TMenuItem
         Tag = 1
         Action = ACajero
+      end
+      object ArqueodeCaja1: TMenuItem
+        Action = AArqueo_Caja
       end
     end
     object Productos1: TMenuItem
