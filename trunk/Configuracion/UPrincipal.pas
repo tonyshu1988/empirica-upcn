@@ -84,6 +84,8 @@ type
     LabelDBUser: TLabel;
     Shape1: TShape;
     SkinData1: TSkinData;
+    sBtnCrearBase: TSpeedButton;
+    CheckIBE_Objets: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure BtnSeleccionarBDClick(Sender: TObject);
     procedure LogNextLine(Sender: TObject; LogLine: String);
@@ -97,9 +99,11 @@ type
     procedure crearLogin();
     procedure leerDatos();
     procedure setearAplicaBD();
+    procedure crearBaseDatos();
     procedure sBtnUsuarioLoginClick(Sender: TObject);
     procedure sBtnConfigClick(Sender: TObject);
-    procedure habilitar(flag: boolean);
+    procedure habilitar(flag: boolean);             
+    procedure sBtnCrearBaseClick(Sender: TObject);
   private
     { Private declarations }
     servidor,
@@ -209,6 +213,53 @@ begin
 end;
 
 
+//CREAR LA BASE DE DATOS DE LA APLICACION A PARTIR DE LA BASE VACIA
+procedure TFPrincipal.crearBaseDatos();
+var
+  db_vacia, renombrar: string;
+begin
+  db_vacia:= db_aplicacion;
+  delete(db_vacia, pos('.FDB', db_vacia), 4);
+  db_vacia:= db_vacia+'-VACIA.FDB';
+
+  if not FileExists(db_vacia) then //si no existe la base vacia de la aplicacion
+  begin
+    ShowMessage('La base de datos '+db_vacia+' no existe, VERIFIQUE');
+    exit;
+  end;
+
+  if FileExists(db_aplicacion) then //si existe la base de la aplicacion
+  begin
+    renombrar:= db_aplicacion;
+    if InputQuery('ERROR BASE DATOS', 'La base de datos '+db_aplicacion+' ya existe, Desea renombrarla?'+#13
+                  +'Ingrese la nueva dirección y nombre: ', renombrar) then
+    begin
+      if renombrar = db_aplicacion then
+      begin
+        ShowMessage('No se pudo completar la acción.'+#13
+                   +'La nueva dirección y nombre ingresado es igual al anterior, VERIFIQUE');
+        exit;
+      end;
+
+      if not RenameFile(pchar(db_aplicacion), pchar(renombrar)) then
+      begin
+        ShowMessage('No se pudo cambiar el nombre de la base '+db_aplicacion+#13
+                   +' por el nombre '+renombrar+', VERIFIQUE');
+        exit;
+      end;
+    end
+    else
+      exit;
+  end;
+
+  if not CopyFile(pchar(db_vacia), pchar(db_aplicacion), false) then
+  begin
+    ShowMessage('No se pudo realizar la acción por motivos desconocidos');
+    exit;
+  end;
+end;
+
+
 procedure TFPrincipal.sBtnUsuarioLoginClick(Sender: TObject);
 begin
   crearLogin;
@@ -221,12 +272,18 @@ begin
 end;
 
 
+procedure TFPrincipal.sBtnCrearBaseClick(Sender: TObject);
+begin
+  crearBaseDatos;
+end;
+
+
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
   leerDatos;
 
-  LabelAplicacion.Caption:= aplicacion;
-  LabelServidor.Caption:= servidor;
+  LabelAplicacion.Caption:= 'Aplicación: '+aplicacion;
+  LabelServidor.Caption:= 'Servidor: '+servidor;
   LabelDBAplica.Caption:= db_aplicacion;
   LabelDBUser.Caption:= db_usuario;
 
@@ -394,6 +451,17 @@ begin
     DBComparer1.CompareObjects:= DBComparer1.CompareObjects + [coDescription]
   else
     DBComparer1.CompareObjects:= DBComparer1.CompareObjects - [coDescription];
+
+  if CheckIBE_Objets.Checked then
+  begin
+    DBComparer1.IBServerOptions.IBCompareOptions.IgnoreIBEObjects:= false;
+    IBSQLExec.IBServerOptions.IBCompareOptions.IgnoreIBEObjects:= false;
+  end
+  else
+  begin
+    DBComparer1.IBServerOptions.IBCompareOptions.IgnoreIBEObjects:= true;
+    IBSQLExec.IBServerOptions.IBCompareOptions.IgnoreIBEObjects:= true;
+  end;
 end;
 
 //AL COMPARAR LAS BASES PRIMERO EXTRAIGO LOS METADATAS Y DESPUES COMPARO
@@ -491,4 +559,5 @@ end;
 
 initialization
   dbcCompObj.AddToLog := AddToExtrLog;
+
 end.
