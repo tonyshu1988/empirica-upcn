@@ -58,3 +58,16 @@ OK * Juanma, ver si chequea q la cantidad se mayor a 0.
 OK * Busqueda de productos, poner un boton seleccionar todo.
 
 OK * Tabla entidad_telefono para llevar varios telefonos de las empresas, personas, etc.
+
+ABM Precios => listado de precios, poner en el encabezado del cliente seleccionado el porcentaje de descuento asignado.
+			=> Ver la busqueda, que se puede filtrar por precio de costo, venta, iva, impuestos, etc...
+			=> Listado de precios, agregarle la columna del codigo de barra al reporte y la grilla.
+			
+ABM Personas => Hint para el porcentaje de descuento, cuando es recargo ver si admite el signo negativo.
+			 => Ver un porcentaje de descuento pero que sea temporal entre una fecha desde y hasta.
+			 => 
+			 
+ABM Mov Internos => terminar la busqueda y la impresion. Ver el filtrado de los movimientos y la estadistica.
+
+ABM Productos => Buscar imagen, que por defecto este jpg en lugar de bmp. O por defecto las 2 cosas y sino el filtrado individual.
+
