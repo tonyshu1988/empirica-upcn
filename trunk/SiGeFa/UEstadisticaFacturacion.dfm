@@ -1,6 +1,6 @@
 object FEstadisticasFacturacion: TFEstadisticasFacturacion
-  Left = 351
-  Top = 65
+  Left = 168
+  Top = 57
   Width = 1061
   Height = 668
   Caption = 'Estadisticas Facturacion'

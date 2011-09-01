@@ -8,7 +8,7 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids,
   EKEdit,UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
   XPStyleActnCtrls, ActnMan, EKListadoSQL, EKDbSuma,
-  ZStoredProcedure,UBuscarPersona, Buttons;
+  ZStoredProcedure,UBuscarPersona,UCargarPreventa, Buttons;
 
 type
   TFCajero = class(TForm)
@@ -74,7 +74,7 @@ type
     BtCancelarPago: TdxBarLargeButton;
     BtVendedor: TdxBarLargeButton;
     Bt_Cierre_Z: TdxBarLargeButton;
-    btBajar: TdxBarLargeButton;
+    btPreventa: TdxBarLargeButton;
     btsalir: TdxBarLargeButton;
     bt_accion: TdxBarControlContainerItem;
     bt_motivo_baja: TdxBarControlContainerItem;
@@ -365,6 +365,7 @@ type
     ZSP_ComprobanteCODIGO: TStringField;
     ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField;
     CD_DetalleFacturaIMPORTE_IVA: TFloatField;
+    APreventa: TAction;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -417,13 +418,17 @@ type
     procedure Prorrateo();
     procedure RecalcularMontoPago();
     procedure verPermisos();
+    procedure APreventaExecute(Sender: TObject);
+    procedure btPreventaClick(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
     vsel3: TFBuscarPersona;
+    vsel4: TFPreventa;
     procedure OnSelProd;
     procedure OnSelPers;
     procedure OnSelVendedor;
+    procedure OnSelPreventa;
     { Private declarations }
   public
 
@@ -1371,6 +1376,34 @@ begin
 //
 // end;
 
+end;
+
+procedure TFCajero.APreventaExecute(Sender: TObject);
+begin
+  btPreventa.Click;
+end;
+
+procedure TFCajero.btPreventaClick(Sender: TObject);
+begin
+if not Assigned(vsel) then
+  vsel4:= TFPreventa.Create(nil);
+  vsel4.OnSeleccionar := OnSelPreventa;
+  vsel4.ShowModal;
+end;
+
+procedure TFCajero.OnSelPreventa;
+begin
+//  if not vsel4.ZQ_Comprobante.IsEmpty then
+//  begin
+//      if not(CD_DetalleFactura.IsEmpty) then
+//      begin
+//        codBarras.Text:='I'+vsel.ZQ_StockID_PRODUCTO.AsString;
+//        IdentificarCodigo;
+//        edCantidad.SetFocus;
+//      end;
+//    vsel.ZQ_Stock.Filtered:=False;
+//    vsel.Close;
+//  end;
 end;
 
 end.
