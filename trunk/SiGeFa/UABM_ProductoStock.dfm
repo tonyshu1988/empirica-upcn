@@ -272,6 +272,13 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Visible = True
           end
           item
+            Expanded = False
+            FieldName = 'COLOR'
+            Title.Alignment = taCenter
+            Title.Caption = 'Color'
+            Visible = True
+          end
+          item
             Color = 15921894
             Expanded = False
             FieldName = 'STOCK_ACTUAL'
@@ -1014,7 +1021,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
         '_articulo,'
       
         '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
-        'umna,'
+        'umna, '
+      '       c.nombre as color,'
       '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
       '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
       '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
@@ -1037,7 +1045,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      ''
+      'left join color c on (pc.color = c.id_color)'
       '')
     Params = <>
     Left = 152
@@ -1119,6 +1127,10 @@ object FABM_ProductoStock: TFABM_ProductoStock
       FieldName = 'POSICSUCURSAL'
       ReadOnly = True
       Size = 334
+    end
+    object ZQ_StockCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
     end
   end
   object ZU_Stock: TZUpdateSQL
@@ -1212,6 +1224,10 @@ object FABM_ProductoStock: TFABM_ProductoStock
       end
       item
         TituloColumna = 'Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
         Visible = True
       end
       item
@@ -1351,6 +1367,15 @@ object FABM_ProductoStock: TFABM_ProductoStock
         ItemIndex = -1
       end
       item
+        Titulo = 'Color'
+        Campo = 'nombre'
+        Tabla = 'color'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Stock Actual'
         Campo = 'stock_actual'
         Tabla = 'stock_producto'
@@ -1424,6 +1449,22 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'producto_cabecera'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'NO'
+          'SI')
+        TipoComboValoresReales.Strings = (
+          'N'
+          'S')
+        TipoComboAncho = 200
+        ItemIndex = -1
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1442,6 +1483,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
         'umna,'
+      '       c.nombre as color,'
       '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
       '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
       '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
@@ -1467,7 +1509,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      ''
+      'left join color c on (pc.color = c.id_color)'
       ''
       '')
     SQL_Select.Strings = (
@@ -1484,6 +1526,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
         'umna,'
+      '       c.nombre as color,'
       '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
       '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
       '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
@@ -1510,7 +1553,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      ''
+      'left join color c on (pc.color = c.id_color)'
       ''
       '')
     UsarWhereOriginal = EK_Con_Where

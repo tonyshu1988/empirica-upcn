@@ -33,7 +33,8 @@ object FBuscarProducto: TFBuscarProducto
       Align = alClient
       Color = 14606012
       DataSource = DS_Producto
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      DefaultDrawing = False
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       ParentShowHint = False
       ReadOnly = True
       ShowHint = True
@@ -43,6 +44,7 @@ object FBuscarProducto: TFBuscarProducto
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGridDrawColumnCell
       OnDblClick = btnSeleccionarClick
       Columns = <
         item
@@ -985,7 +987,25 @@ object FBuscarProducto: TFBuscarProducto
         ItemIndex = -1
       end
       item
-        Titulo = 'Producto'
+        Titulo = 'C'#243'd. Cabecera'
+        Campo = 'cod_corto'
+        Tabla = 'producto_cabecera'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Detalle'
+        Campo = 'cod_corto'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre Producto'
         Campo = 'nombre'
         Tabla = 'producto_cabecera'
         TipoCampoIndiceVer = 'Contiene'
@@ -997,15 +1017,6 @@ object FBuscarProducto: TFBuscarProducto
         Titulo = 'Medida'
         Campo = 'medida'
         Tabla = 'Medida'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Color'
-        Campo = 'nombre '
-        Tabla = 'color'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -1033,6 +1044,15 @@ object FBuscarProducto: TFBuscarProducto
         Titulo = 'Art'#237'culo'
         Campo = 'descripcion'
         Tabla = 'Articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Color'
+        Campo = 'nombre '
+        Tabla = 'color'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -1250,6 +1270,24 @@ object FBuscarProducto: TFBuscarProducto
       item
         Titulo = 'C'#243'd. Barra'
         Campo = 'codigo_barra'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Cabecera'
+        Campo = 'cod_corto'
+        Tabla = 'producto_cabecera'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Detalle'
+        Campo = 'cod_corto'
         Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False

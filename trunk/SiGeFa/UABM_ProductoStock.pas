@@ -111,6 +111,7 @@ type
     PopUpDesasociar: TPopupMenu;
     PopUpStock_Desasociar: TMenuItem;
     PopUpStock_DesasociarTodos: TMenuItem;
+    ZQ_StockCOLOR: TStringField;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnGuardarClick(Sender: TObject);

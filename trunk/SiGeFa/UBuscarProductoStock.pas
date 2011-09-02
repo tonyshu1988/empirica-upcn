@@ -61,6 +61,8 @@ type
     procedure btnSeleccionarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -165,6 +167,13 @@ end;
 procedure TFBuscarProductoStock.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla.CargarConfigColumnas;
+end;
+
+procedure TFBuscarProductoStock.DBGridStockDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridStock, Rect, DataCol, Column, State);
 end;
 
 end.
