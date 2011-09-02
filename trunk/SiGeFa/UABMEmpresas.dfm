@@ -1,8 +1,8 @@
 object FABMEmpresas: TFABMEmpresas
   Left = 198
-  Top = 59
+  Top = 109
   Width = 1024
-  Height = 713
+  Height = 663
   Caption = 'ABM Empresas'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -23,7 +23,7 @@ object FABMEmpresas: TFABMEmpresas
     Left = 0
     Top = 0
     Width = 1008
-    Height = 623
+    Height = 573
     Align = alClient
     TabOrder = 0
     object RepDetalleEmpresa: TQuickRep
@@ -2254,10 +2254,10 @@ object FABMEmpresas: TFABMEmpresas
     end
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 341
+      Top = 291
       Width = 1006
       Height = 281
-      ActivePage = TabEmpresa
+      ActivePage = TabMarcas
       Align = alBottom
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -2529,12 +2529,13 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridEntidadTelefonoEmpresa: TDBGrid
           Left = 0
           Top = 0
-          Width = 1006
+          Width = 998
           Height = 253
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
           Color = 14606012
           DataSource = DS_EntidadTelefonoEmpresa
+          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -2550,6 +2551,7 @@ object FABMEmpresas: TFABMEmpresas
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridEntidadTelefonoEmpresaDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -2577,21 +2579,29 @@ object FABMEmpresas: TFABMEmpresas
       object TabContactos: TTabSheet
         Caption = 'Contactos'
         ImageIndex = 18
+        object Splitter1: TSplitter
+          Left = 536
+          Top = 0
+          Width = 8
+          Height = 134
+          Align = alRight
+        end
         object DBGridContactos: TDBGrid
           Left = 0
           Top = 0
-          Width = 552
+          Width = 536
           Height = 134
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
           Color = 14606012
           DataSource = DS_PersonaRelacionContacto
+          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
@@ -2601,6 +2611,7 @@ object FABMEmpresas: TFABMEmpresas
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridContactosDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -2638,7 +2649,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel1: TPanel
           Left = 0
           Top = 134
-          Width = 1006
+          Width = 998
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -2647,7 +2658,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label12: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 996
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2656,7 +2667,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoContactos: TDBMemo
           Left = 0
           Top = 153
-          Width = 1006
+          Width = 998
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -2672,7 +2683,7 @@ object FABMEmpresas: TFABMEmpresas
           TabOrder = 2
         end
         object DBGridContactoTelMail: TDBGrid
-          Left = 552
+          Left = 544
           Top = 0
           Width = 454
           Height = 134
@@ -2680,6 +2691,7 @@ object FABMEmpresas: TFABMEmpresas
           Align = alRight
           Color = 14606012
           DataSource = DS_EntidadTelefonoContacto
+          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -2695,6 +2707,7 @@ object FABMEmpresas: TFABMEmpresas
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridContactoTelMailDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -2722,21 +2735,29 @@ object FABMEmpresas: TFABMEmpresas
       object TabViajantes: TTabSheet
         Caption = 'Viajantes'
         ImageIndex = 9
+        object Splitter2: TSplitter
+          Left = 528
+          Top = 0
+          Width = 8
+          Height = 134
+          Align = alRight
+        end
         object DBGridViajantes: TDBGrid
           Left = 0
           Top = 0
-          Width = 544
+          Width = 528
           Height = 134
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
           Color = 14606012
           DataSource = DS_PersonaRelacionViajante
+          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           ParentShowHint = False
           ShowHint = False
@@ -2746,6 +2767,7 @@ object FABMEmpresas: TFABMEmpresas
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridViajantesDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -2783,7 +2805,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoViajantes: TDBMemo
           Left = 0
           Top = 153
-          Width = 1006
+          Width = 998
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -2795,7 +2817,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel2: TPanel
           Left = 0
           Top = 134
-          Width = 1006
+          Width = 998
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -2804,14 +2826,14 @@ object FABMEmpresas: TFABMEmpresas
           object Label13: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 996
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
           end
         end
         object DBGridViajanteTelMail: TDBGrid
-          Left = 544
+          Left = 536
           Top = 0
           Width = 462
           Height = 134
@@ -2819,6 +2841,7 @@ object FABMEmpresas: TFABMEmpresas
           Align = alRight
           Color = 14606012
           DataSource = DS_EntidadTelefonoViajantes
+          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -2834,6 +2857,7 @@ object FABMEmpresas: TFABMEmpresas
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridViajanteTelMailDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -2864,12 +2888,13 @@ object FABMEmpresas: TFABMEmpresas
         object GrillaMarcas: TDBGrid
           Left = 0
           Top = 0
-          Width = 1006
+          Width = 998
           Height = 134
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
           Color = 14606012
           DataSource = DS_EmpresaMarca
+          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -2885,6 +2910,7 @@ object FABMEmpresas: TFABMEmpresas
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDrawColumnCell = GrillaMarcasDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -2903,7 +2929,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemo1: TDBMemo
           Left = 0
           Top = 153
-          Width = 1006
+          Width = 998
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -2921,7 +2947,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel3: TPanel
           Left = 0
           Top = 134
-          Width = 1006
+          Width = 998
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -2930,7 +2956,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label14: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 996
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2944,7 +2970,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoDescripcion: TDBMemo
           Left = 0
           Top = 0
-          Width = 986
+          Width = 978
           Height = 233
           Align = alClient
           DataField = 'DESCRIPCION_PRIVADA'
@@ -2964,17 +2990,18 @@ object FABMEmpresas: TFABMEmpresas
       Left = 1
       Top = 20
       Width = 1006
-      Height = 321
+      Height = 271
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
       DataSource = DS_Empresa
+      DefaultDrawing = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = []
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
       ParentFont = False
       ParentShowHint = False
       ShowHint = True

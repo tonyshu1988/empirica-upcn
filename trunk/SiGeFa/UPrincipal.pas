@@ -107,6 +107,12 @@ type
     EstadisticaDisponibilidades1: TMenuItem;
     AArqueo_Caja: TAction;
     ArqueodeCaja1: TMenuItem;
+    colorBaja: TPanel;
+    colorBajaFocus: TPanel;
+    colorActivo: TPanel;
+    colorActivoFocus: TPanel;
+    colorResaltado: TPanel;
+    colorResaltadoFocus: TPanel;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -148,7 +154,9 @@ type
   private
     { Private declarations }
   public
-    baja, activo: Tcolor;
+    baja, bajaFocus,
+    activo, activoFocus,
+    resaltado, resaltadoFocus: Tcolor;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure PintarFilasGrillasConBajas(grilla: TDBGrid; valor: string; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     function  cerrar_ventana(transaccion: string): boolean;
@@ -157,6 +165,8 @@ type
 var
   FPrincipal: TFPrincipal;
 
+type
+  THackDBGrid = class(TDBGrid);  
 
 implementation
 
@@ -171,7 +181,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_Cuentas, UABM_TipoComprobante, UABM_Precios, UABM_Comprobantes,
   UCajero, UMovimientosInternos, UABM_TipoMovimiento, UTransferirStock,
   UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion,
-  UEstadisticaDisponibilidades, UArqueo_Caja;
+  UEstadisticaDisponibilidades, UArqueo_Caja, Types;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -201,16 +211,6 @@ begin
     end;
   end;
 
-//  if Length(sucursales) = 1 then //si hay una sola sucursal
-//  begin
-//    SUCURSAL_LOGUEO:= strtoint(sucursales[0].valor);
-//  end
-//  else  //si hay mas de una sucursal abro la pantalla para q seleccione una
-//  begin
-//    FSeleccionarSucursal:= TFSeleccionarSucursal.Create(nil);
-//    FSeleccionarSucursal.ShowModal;
-//  end;
-
   if not pertenece then  //si no selecciono ninguna sucursal o el
   begin
     if SUCURSAL_LOGUEO = -1 then
@@ -223,8 +223,12 @@ begin
   dm.configMail('SUCURSAL', SUCURSAL_LOGUEO);
   dm.cargarReporteSucursal(SUCURSAL_LOGUEO);
   StatusBar1.Panels[0].text:= 'SUCURSAL: '+inttostr(SUCURSAL_LOGUEO);
-  baja:= $006A6AFF;    //ROJO = color de los registros dados de baja
-  activo:= $00FB952F;  //AZUL = color de los registro comunes
+  baja:= colorBaja.Color;    //ROJO = color de los registros dados de baja
+  bajafocus:= colorBajaFocus.Color;    //ROJO OSCURO = color del registro seleccionado dado de baja
+  activo:= colorActivo.Color;  //AZUL = color de los registro activos
+  activofocus:= colorActivoFocus.Color;  //AZUL OSCURO = color del registro seleccionado activo
+  resaltado:= colorResaltado.Color; //
+  resaltadofocus:= colorResaltadoFocus.Color; //
 end;
 
 
@@ -261,39 +265,70 @@ end;
 
 //PROCEDURE PARA PINTAR LAS FILAS DE LA GRILLA QUE SE PASA POR PARAMETROS.
 procedure TFPrincipal.PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  a: TRect;
 begin
-  if (gdFocused in State) or (gdSelected in State) then
-   begin
-     grilla.Canvas.Font.Color := clwhite;
-     grilla.Canvas.Brush.Color:= $00FB952F; //ver de poner el color en la configuracion
-     grilla.Canvas.Font.Style := grilla.Canvas.Font.Style + [fsBold];
-   end;
-  grilla.DefaultDrawColumnCell(rect,datacol,column,state);
+  if grilla.DataSource.DataSet.IsEmpty then
+    exit;
+    
+  a:= Rect;
+
+  if (THackDBGrid(grilla).DataLink.ActiveRecord + 1 = THackDBGrid(grilla).Row) then
+  begin
+    a.Top:= a.Top + 1;
+    a.Bottom:= a.Bottom - 1;
+
+    grilla.Canvas.Font.Color:= clWhite;
+    grilla.Canvas.Brush.Color:= resaltado;
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      grilla.Canvas.Brush.Color:= resaltadoFocus;
+      grilla.Canvas.Font.Style := grilla.Canvas.Font.Style + [fsBold];
+    end;
+  end;
+
+  grilla.DefaultDrawColumnCell(a,datacol,column,state);
 end;
 
 
 //PROCEDURE PARA PINTAR LAS FILAS DE LA GRILLA QUE SE PASA POR PARAMETROS.
 //Y SI EL PARAMETRO VALOR ES 'S' SE PINTA LA FILA EN ROJO
 procedure TFPrincipal.PintarFilasGrillasConBajas(grilla: TDBGrid; valor:string; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  a: TRect;
 begin
+  if grilla.DataSource.DataSet.IsEmpty then
+    exit;
+
+  a:= Rect;
+
   if (valor = 'S') then //si el registro esta dado de baja
   begin
     grilla.Canvas.Font.Color := clBlack;
-    grilla.Canvas.Font.Style := grilla.Canvas.Font.Style + [fsBold];
     grilla.Canvas.Brush.Color:= baja;
-    if (gdFocused in State) or (gdSelected in State) then
-      grilla.Canvas.Font.Color := clwhite;
-  end
-  else  //si el registro es comun
-  begin
     if (gdFocused in State) or (gdSelected in State) then
     begin
       grilla.Canvas.Font.Color := clwhite;
+      grilla.Canvas.Brush.Color:= bajaFocus;
       grilla.Canvas.Font.Style := grilla.Canvas.Font.Style + [fsBold];
-      grilla.Canvas.Brush.Color:= activo;
+    end
+  end;
+
+  if (THackDBGrid(grilla).DataLink.ActiveRecord + 1 = THackDBGrid(grilla).Row) then
+  begin
+    a.Top:= a.Top + 1;
+    a.Bottom:= a.Bottom - 1;
+
+    grilla.Canvas.Font.Color:= clWhite;
+    grilla.Canvas.Brush.Color:= resaltado;
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      grilla.Canvas.Brush.Color:= resaltadoFocus;
+      grilla.Canvas.Font.Style := grilla.Canvas.Font.Style + [fsBold];
     end;
   end;
-  grilla.DefaultDrawColumnCell(rect,datacol,column,state);
+
+  grilla.DefaultDrawColumnCell(a,datacol,column,state);
 end;
 
 

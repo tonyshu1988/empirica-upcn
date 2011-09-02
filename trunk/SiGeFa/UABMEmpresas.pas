@@ -314,6 +314,8 @@ type
     ZQ_EntidadTelefonoContactoDESCRIPCION: TStringField;
     ZQ_EntidadTelefonoEmpresaDESCRIPCION: TStringField;
     btIrWeb: TButton;
+    Splitter1: TSplitter;
+    Splitter2: TSplitter;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -355,6 +357,24 @@ type
     procedure EditarTelMailClick(Sender: TObject);
     procedure ZQ_EntidadTelefonoEmpresaBeforePost(DataSet: TDataSet);
     procedure btIrWebClick(Sender: TObject);
+    procedure DBGridEntidadTelefonoEmpresaDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridContactosDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridContactoTelMailDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridViajantesDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridViajanteTelMailDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure GrillaMarcasDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
     vsel : TFBuscarPersona;
@@ -630,9 +650,6 @@ procedure TFABMEmpresas.DBGridEmpresasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_Empresa.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridEmpresas, ZQ_EmpresaBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
@@ -1054,6 +1071,48 @@ begin
     exit;
 
   ShellExecute(self.handle, 'open', pchar('http://'+ZQ_EmpresaPAGINA_WEB.AsString), nil, nil, SW_SHOWNORMAL);
+end;
+
+procedure TFABMEmpresas.DBGridEntidadTelefonoEmpresaDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridEntidadTelefonoEmpresa, Rect, DataCol, Column, State);
+end;
+
+procedure TFABMEmpresas.DBGridContactosDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridContactos, Rect, DataCol, Column, State);
+end;
+
+procedure TFABMEmpresas.DBGridContactoTelMailDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridContactoTelMail, Rect, DataCol, Column, State);
+end;
+
+procedure TFABMEmpresas.DBGridViajantesDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridViajantes, Rect, DataCol, Column, State);
+end;
+
+procedure TFABMEmpresas.DBGridViajanteTelMailDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridViajanteTelMail, Rect, DataCol, Column, State);
+end;
+
+procedure TFABMEmpresas.GrillaMarcasDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(GrillaMarcas, Rect, DataCol, Column, State);
 end;
 
 end.

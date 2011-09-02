@@ -2480,6 +2480,7 @@ object FABM_Personas: TFABM_Personas
       Align = alClient
       Color = 14606012
       DataSource = DS_Persona
+      DefaultDrawing = False
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -2615,7 +2616,7 @@ object FABM_Personas: TFABM_Personas
         Top = 0
         Width = 836
         Height = 200
-        ActivePage = TabSheetcTel
+        ActivePage = TabSheetDatos
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet
@@ -2973,6 +2974,7 @@ object FABM_Personas: TFABM_Personas
             Align = alClient
             Color = 14606012
             DataSource = DS_EntidadTelefono
+            DefaultDrawing = False
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
@@ -2980,6 +2982,7 @@ object FABM_Personas: TFABM_Personas
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
+            OnDrawColumnCell = DBGridTelMailDrawColumnCell
             Columns = <
               item
                 Expanded = False
@@ -3008,7 +3011,7 @@ object FABM_Personas: TFABM_Personas
           object DBMemoDetalle: TDBMemo
             Left = 0
             Top = 0
-            Width = 828
+            Width = 820
             Height = 164
             Align = alClient
             DataField = 'DESCRIPCION'
@@ -3022,11 +3025,12 @@ object FABM_Personas: TFABM_Personas
           object DBGridRol: TDBGrid
             Left = 0
             Top = 0
-            Width = 836
+            Width = 828
             Height = 172
             Align = alClient
             Color = 14606012
             DataSource = DS_VerRelacionPersona
+            DefaultDrawing = False
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
@@ -3034,6 +3038,7 @@ object FABM_Personas: TFABM_Personas
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
+            OnDrawColumnCell = DBGridRolDrawColumnCell
             Columns = <
               item
                 Expanded = False

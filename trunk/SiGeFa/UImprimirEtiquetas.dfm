@@ -34,6 +34,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       Align = alClient
       Color = 14606012
       DataSource = DS_Etiquetas
+      DefaultDrawing = False
       Enabled = False
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
@@ -42,6 +43,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGridEtiquetasDrawColumnCell
       OnKeyUp = DBGridEtiquetasKeyUp
       Columns = <
         item

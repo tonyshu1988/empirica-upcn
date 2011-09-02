@@ -241,10 +241,7 @@ procedure TFABM_TipoIVA.DBGridTipoIvaDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_TipoIva.IsEmpty then
-    exit;
-
-//  FPrincipal.PintarFilasGrillasConBajas(DBGridTipoArticulo, ZQ_TipoArtBAJA.AsString, Rect, DataCol, Column, State);
+  FPrincipal.PintarFilasGrillas(DBGridTipoIva, Rect, DataCol, Column, State);
 end;
 
 

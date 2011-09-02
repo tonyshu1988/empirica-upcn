@@ -1,8 +1,8 @@
 object FABM_TipoFormaPago: TFABM_TipoFormaPago
-  Left = 486
-  Top = 207
+  Left = 386
+  Top = 196
   Width = 807
-  Height = 500
+  Height = 503
   Caption = 'ABM Tipo Forma Pago'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
     Left = 0
     Top = 19
     Width = 791
-    Height = 391
+    Height = 394
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -654,7 +654,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       Left = 0
       Top = 0
       Width = 791
-      Height = 391
+      Height = 394
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -669,10 +669,11 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
         Left = 5
         Top = 5
         Width = 781
-        Height = 325
+        Height = 328
         Align = alClient
         Color = 14606012
         DataSource = DS_TipoFPago
+        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -715,7 +716,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 330
+        Top = 333
         Width = 781
         Height = 56
         Align = alBottom

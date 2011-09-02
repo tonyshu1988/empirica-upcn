@@ -269,9 +269,6 @@ procedure TFABM_TipoEmpresa.DBGridTipoEmpresaDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_TipoEmpresa.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridTipoEmpresa, ZQ_TipoEmpresaBAJA.AsString, Rect, DataCol, Column, State);
 end;
 

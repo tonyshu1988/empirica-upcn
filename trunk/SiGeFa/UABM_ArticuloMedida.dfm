@@ -1,8 +1,8 @@
 object FABM_ArticuloMedida: TFABM_ArticuloMedida
-  Left = 349
-  Top = 265
+  Left = 290
+  Top = 186
   Width = 870
-  Height = 500
+  Height = 525
   Caption = 'ABM Articulo Medida'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     Left = 0
     Top = 0
     Width = 854
-    Height = 410
+    Height = 435
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -654,8 +654,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       Left = 0
       Top = 0
       Width = 854
-      Height = 410
-      ActivePage = TabMedidaArticulo
+      Height = 435
+      ActivePage = TabABMMedidas
       Align = alClient
       TabOrder = 0
       OnChange = PageControlEdicionChange
@@ -666,10 +666,11 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Left = 0
           Top = 18
           Width = 846
-          Height = 331
+          Height = 356
           Align = alClient
           Color = 14606012
           DataSource = DS_Medida
+          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -701,7 +702,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             Left = 1
             Top = 1
             Width = 134
-            Height = 13
+            Height = 16
             Align = alLeft
             Caption = 'lblCantidadRegistros'
             Font.Charset = ANSI_CHARSET
@@ -728,7 +729,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         end
         object PanelEdicion: TPanel
           Left = 0
-          Top = 349
+          Top = 374
           Width = 846
           Height = 33
           Align = alBottom
@@ -773,17 +774,18 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object Splitter1: TSplitter
           Left = 487
           Top = 0
-          Height = 382
+          Height = 407
         end
         object DBGridMedida: TDBGrid
           Left = 490
           Top = 0
           Width = 356
-          Height = 382
+          Height = 407
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
           Color = 13431031
           DataSource = DSMedidas
+          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
           PopupMenu = PopupMenuMedida
@@ -794,6 +796,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridMedidaDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -808,11 +811,12 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Left = 0
           Top = 0
           Width = 487
-          Height = 382
+          Height = 407
           Hint = 'Presione el boton derecho del mouse para cargar un articulo'
           Align = alLeft
           Color = 14606012
           DataSource = DSArticulo
+          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
           PopupMenu = PopupMenuArticulo
@@ -823,6 +827,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridArticuloDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -866,7 +871,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             Height = 21
             Style = csDropDownList
             CharCase = ecUpperCase
-            ItemHeight = 0
+            ItemHeight = 13
             TabOrder = 0
             OnKeyUp = CBArticuloKeyUp
           end
@@ -875,11 +880,12 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Left = 0
           Top = 39
           Width = 846
-          Height = 343
+          Height = 368
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
           Color = 14606012
           DataSource = DS_MedidaArticulo
+          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
           PopupMenu = PopupMenuArticuloMedida

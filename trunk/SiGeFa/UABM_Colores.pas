@@ -329,13 +329,8 @@ procedure TFABM_Colores.DBGridColorDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_Colores.IsEmpty then
-    exit;
-
   if (column.FieldName = 'REFERENCIA') and not(ZQ_ColoresREFERENCIA.IsNull) then
-      begin
-        DBGridColor.Canvas.Brush.Color:= StringToColor(ZQ_ColoresREFERENCIA.AsString);
-      end;
+    DBGridColor.Canvas.Brush.Color:= StringToColor(ZQ_ColoresREFERENCIA.AsString);
 
   FPrincipal.PintarFilasGrillasConBajas(DBGridColor, ZQ_ColoresBAJA.AsString, Rect, DataCol, Column, State);
 end;

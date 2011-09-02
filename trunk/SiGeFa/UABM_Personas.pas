@@ -289,6 +289,11 @@ type
     procedure EditarTelMailClick(Sender: TObject);
     procedure EliminarTelMailClick(Sender: TObject);
     procedure ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
+    procedure DBGridTelMailDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridRolDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     id_persona: integer;
   public
@@ -655,9 +660,6 @@ end;
 
 procedure TFABM_Personas.DBGridClientesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if ZQ_Persona.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridClientes, ZQ_PersonaBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
@@ -841,7 +843,21 @@ end;
 
 procedure TFABM_Personas.ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
 begin
-ZQ_EntidadTelefonoID_PERSONA.AsInteger := ZQ_PersonaID_PERSONA.AsInteger;
+  ZQ_EntidadTelefonoID_PERSONA.AsInteger := ZQ_PersonaID_PERSONA.AsInteger;
+end;
+
+procedure TFABM_Personas.DBGridTelMailDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridTelMail, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_Personas.DBGridRolDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridTelMail, Rect, DataCol, Column, State);
 end;
 
 end.

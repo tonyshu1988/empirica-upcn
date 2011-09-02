@@ -309,9 +309,6 @@ procedure TFABM_TipoFormaPago.DBGridTipoFPagoDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_TipoFPago.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridTipoFPago, ZQ_TipoFPagoBAJA.AsString, Rect, DataCol, Column, State);
 end;
 

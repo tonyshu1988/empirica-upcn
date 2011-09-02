@@ -185,6 +185,9 @@ type
     procedure QuitarContacto1Click(Sender: TObject);
     procedure ZQ_SucursalAfterScroll(DataSet: TDataSet);
     procedure btnVerDetalleClick(Sender: TObject);
+    procedure DBGridVendedorDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     vsel : TFBuscarPersona;
     procedure OnSelVendedor;
@@ -321,9 +324,6 @@ procedure TFABM_Sucursal.DBGridSucursalDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_Sucursal.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridSucursal, ZQ_SucursalBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
@@ -606,6 +606,13 @@ end;
 procedure TFABM_Sucursal.btnVerDetalleClick(Sender: TObject);
 begin
   PageControl1.Visible:= not PageControl1.Visible;
+end;
+
+procedure TFABM_Sucursal.DBGridVendedorDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridVendedor, Rect, DataCol, Column, State);
 end;
 
 end.

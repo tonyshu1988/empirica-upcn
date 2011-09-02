@@ -140,6 +140,12 @@ type
     procedure AVolverExecute(Sender: TObject);
     procedure PopUpStock_DesasociarClick(Sender: TObject);
     procedure PopUpStock_DesasociarTodosClick(Sender: TObject);
+    procedure DBGridProductoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridSucursalDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -532,20 +538,7 @@ end;
 procedure TFABM_ProductoStock.DBGridStockDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if (THackDBGrid(DBGridStock).DataLink.ActiveRecord + 1 = THackDBGrid(DBGridStock).Row) then
-  begin
-    DBGridStock.Canvas.Font.Color := clWhite;
-    DBGridStock.Canvas.Brush.Color := clBlack;
-    DBGridStock.Canvas.Font.Style := DBGridStock.Canvas.Font.Style + [fsBold];
-  end;
-
-  if (gdFocused in State) or (gdSelected in State) then
-  begin
-    DBGridStock.Canvas.Brush.Color := clRed;
-    DBGridStock.Canvas.Font.Style := DBGridStock.Canvas.Font.Style + [fsBold];
-  end;
-
-  DBGridStock.DefaultDrawColumnCell(Rect, DataCol, Column, state);
+  FPrincipal.PintarFilasGrillas(DBGridStock, Rect, DataCol, Column, State);
 end;
 
 
@@ -628,6 +621,20 @@ begin
     if not DM.EKModelo.finalizar_transaccion(transaccion_ABMStock) then
       DM.EKModelo.cancelar_transaccion(transaccion_ABMStock);
   end;
+end;
+
+procedure TFABM_ProductoStock.DBGridProductoDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridProducto, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_ProductoStock.DBGridSucursalDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridSucursal, Rect, DataCol, Column, State);
 end;
 
 end.

@@ -176,6 +176,9 @@ type
     procedure DBGridProductosColEnter(Sender: TObject);
     procedure RadioGroupImpuestosClick(Sender: TObject);
     procedure btImprimirEtiquetasClick(Sender: TObject);
+    procedure DBGridProductosDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
@@ -685,6 +688,13 @@ begin
       FImprimirEtiquetas.btnEditar.Click;
     end;
   end;
+end;
+
+procedure TFABM_Precios.DBGridProductosDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridProductos, Rect, DataCol, Column, State);
 end;
 
 end.

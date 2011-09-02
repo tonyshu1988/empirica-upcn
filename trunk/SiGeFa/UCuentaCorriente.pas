@@ -298,6 +298,12 @@ type
     procedure FormResize(Sender: TObject);
     procedure calcularTotales(tipo: string);
     procedure btnImprimirClick(Sender: TObject);
+    procedure DBGridCliente_CtaCteDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridResumen_CtaCtesDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     vsel: TFBuscarPersona;
     viendoResumen: boolean;
@@ -360,6 +366,7 @@ begin
     viendoResumen:= false;
     btnVerCtaCte.Caption:= 'F2 - Ver Resumen';
     btnVerCtaCte.Hint:= 'Ver el resumen de cuenta corriente de todos los clientes';
+    btnBuscar.Enabled:= false;
 
     ZQ_Cliente.Close;
     ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_CtaCte_GralID_PERSONA.AsInteger;
@@ -375,6 +382,7 @@ begin
     viendoResumen:= true;
     btnVerCtaCte.Caption:= 'F2 - Ver Cta Cte';
     btnVerCtaCte.Hint:= 'Ver la cuenta corriente del cliente seleccionado';
+    btnBuscar.Enabled:= true;
 
     DBGridResumen_CtaCtes.SetFocus;    
   end;
@@ -644,6 +652,21 @@ begin
     EKVistaClientes.VistaPrevia;
   end
 
+end;
+
+procedure TFCuentaCorriente.DBGridCliente_CtaCteDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridCliente_CtaCte, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFCuentaCorriente.DBGridResumen_CtaCtesDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridResumen_CtaCtes, Rect, DataCol, Column, State);
 end;
 
 end.

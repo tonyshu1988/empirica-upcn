@@ -163,6 +163,12 @@ type
     procedure AGuardarAsociarExecute(Sender: TObject);
     procedure ACancelarAsociarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure DBGridArticuloDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridMedidaDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -381,9 +387,6 @@ procedure TFABM_ArticuloMedida.DBGridMedidasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_Medida.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridMedidas, ZQ_MedidaBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
@@ -635,9 +638,6 @@ procedure TFABM_ArticuloMedida.DBGridMedidaARticuloDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_MedidaArticulo.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridMedidaARticulo, ZQ_MedidaArticuloBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
@@ -742,6 +742,20 @@ begin
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
+end;
+
+procedure TFABM_ArticuloMedida.DBGridArticuloDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridArticulo, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_ArticuloMedida.DBGridMedidaDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridMedida, Rect, DataCol, Column, State);
 end;
 
 end.

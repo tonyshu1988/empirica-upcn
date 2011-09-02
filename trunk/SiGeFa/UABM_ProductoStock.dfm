@@ -56,6 +56,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
+          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = Popup_Producto
           ReadOnly = True
@@ -65,6 +66,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridProductoDrawColumnCell
           Columns = <
             item
               Alignment = taRightJustify
@@ -159,6 +161,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
+          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = Popup_Sucursal
           ReadOnly = True
@@ -168,6 +171,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridSucursalDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -208,7 +212,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
-        FixedColor = 14145495
+        DefaultDrawing = False
         Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET

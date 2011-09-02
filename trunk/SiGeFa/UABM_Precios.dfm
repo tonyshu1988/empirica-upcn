@@ -1,6 +1,6 @@
 object FABM_Precios: TFABM_Precios
-  Left = 381
-  Top = 138
+  Left = 270
+  Top = 102
   Width = 1024
   Height = 646
   Caption = 'ABM Precios'
@@ -1509,7 +1509,8 @@ object FABM_Precios: TFABM_Precios
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      DefaultDrawing = False
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
@@ -1517,6 +1518,7 @@ object FABM_Precios: TFABM_Precios
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
       OnColEnter = DBGridProductosColEnter
+      OnDrawColumnCell = DBGridProductosDrawColumnCell
       Columns = <
         item
           Expanded = False

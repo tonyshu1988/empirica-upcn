@@ -277,9 +277,6 @@ end;
 
 procedure TFABM_TipoArticulo.DBGridTipoArticuloDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if ZQ_TipoArt.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridTipoArticulo, ZQ_TipoArtBAJA.AsString, Rect, DataCol, Column, State);
 end;
 

@@ -2,7 +2,7 @@ object FCuentaCorriente: TFCuentaCorriente
   Left = 259
   Top = 103
   Width = 950
-  Height = 575
+  Height = 597
   Caption = 'Cuenta Corriente'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -92,7 +92,7 @@ object FCuentaCorriente: TFCuentaCorriente
     Left = 0
     Top = 0
     Width = 934
-    Height = 485
+    Height = 507
     Align = alClient
     TabOrder = 1
     object RepCtasCtes: TQuickRep
@@ -1084,7 +1084,7 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object PanelResumen_Abajo: TPanel
       Left = 1
-      Top = 417
+      Top = 439
       Width = 932
       Height = 67
       Align = alBottom
@@ -1214,10 +1214,11 @@ object FCuentaCorriente: TFCuentaCorriente
       Left = 1
       Top = 89
       Width = 932
-      Height = 328
+      Height = 350
       Align = alClient
       Color = 14606012
       DataSource = DS_CtaCte_Gral
+      DefaultDrawing = False
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
@@ -1225,6 +1226,7 @@ object FCuentaCorriente: TFCuentaCorriente
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGridResumen_CtaCtesDrawColumnCell
       OnDblClick = DBGridResumen_CtaCtesDblClick
       Columns = <
         item
@@ -1364,7 +1366,7 @@ object FCuentaCorriente: TFCuentaCorriente
     Left = 0
     Top = 0
     Width = 934
-    Height = 485
+    Height = 507
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -3201,7 +3203,7 @@ object FCuentaCorriente: TFCuentaCorriente
       Left = 3
       Top = 126
       Width = 928
-      Height = 238
+      Height = 260
       Align = alClient
       BorderWidth = 3
       TabOrder = 0
@@ -3209,10 +3211,11 @@ object FCuentaCorriente: TFCuentaCorriente
         Left = 4
         Top = 4
         Width = 920
-        Height = 230
+        Height = 252
         Align = alClient
         Color = 14606012
         DataSource = DS_CtaCte_Cliente
+        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -3220,6 +3223,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
+        OnDrawColumnCell = DBGridCliente_CtaCteDrawColumnCell
         Columns = <
           item
             Alignment = taCenter
@@ -3650,7 +3654,7 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object PanelCliente_Resumen: TPanel
       Left = 3
-      Top = 364
+      Top = 386
       Width = 928
       Height = 118
       Align = alBottom

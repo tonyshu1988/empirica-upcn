@@ -165,6 +165,15 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure DBGridProductoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridNotaPedidoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridNotaPedidoDetalleDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -481,6 +490,27 @@ begin
       EditSucursal.Text := EKListado_Sucursal.Seleccion;
     end;
   end;
+end;
+
+procedure TFTransferirStock.DBGridProductoDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridProducto, Rect, DataCol, Column, State);
+end;
+
+procedure TFTransferirStock.DBGridNotaPedidoDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridNotaPedido, Rect, DataCol, Column, State);
+end;
+
+procedure TFTransferirStock.DBGridNotaPedidoDetalleDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridNotaPedidoDetalle, Rect, DataCol, Column, State);
 end;
 
 end.
