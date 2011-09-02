@@ -1,5 +1,5 @@
 object FABM_Precios: TFABM_Precios
-  Left = 270
+  Left = 248
   Top = 102
   Width = 1024
   Height = 646
@@ -29,8 +29,8 @@ object FABM_Precios: TFABM_Precios
     TabOrder = 4
     object RepListaPrecios: TQuickRep
       Tag = 99
-      Left = 113
-      Top = 65
+      Left = -175
+      Top = 57
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -1086,7 +1086,7 @@ object FABM_Precios: TFABM_Precios
         object QRDBText15: TQRDBText
           Left = 659
           Top = 36
-          Width = 93
+          Width = 118
           Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1094,10 +1094,10 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1743.604166666667000000
             95.250000000000000000
-            246.062500000000000000)
+            312.208333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -1105,6 +1105,71 @@ object FABM_Precios: TFABM_Precios
           Color = clWhite
           DataSet = ZQ_Clientes
           DataField = 'NUMERO_DOC'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabel15: TQRLabel
+          Left = 787
+          Top = 35
+          Width = 122
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2082.270833333333000000
+            92.604166666666670000
+            322.791666666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Coef. Desc./Rec.:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRDBText16: TQRDBText
+          Left = 912
+          Top = 36
+          Width = 112
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            2413.000000000000000000
+            95.250000000000000000
+            296.333333333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Clientes
+          DataField = 'DESCUENTO_ESPECIAL'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -9
@@ -1390,7 +1455,7 @@ object FABM_Precios: TFABM_Precios
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Importe Venta'
+          Caption = 'Precio Venta'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -1454,7 +1519,7 @@ object FABM_Precios: TFABM_Precios
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Importe Costo'
+          Caption = 'Precio Costo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText

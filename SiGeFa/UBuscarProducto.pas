@@ -77,6 +77,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnSeleccionarTodosClick(Sender: TObject);
     procedure filtrarEmpresa(idEmpresa: integer);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -181,6 +183,13 @@ begin
   end
   else
     Application.MessageBox(PChar('No hay ningún producto para seleccionar.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
+end;
+
+procedure TFBuscarProducto.DBGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGrid, Rect, DataCol, Column, State);
 end;
 
 end.

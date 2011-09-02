@@ -151,6 +151,8 @@ type
     ZQ_ImprimirEtiquetas: TZQuery;
     ZQ_ImprimirEtiquetasID_PRODUCTO: TIntegerField;
     ZQ_ImprimirEtiquetasCANTIDAD: TIntegerField;
+    QRLabel15: TQRLabel;
+    QRDBText16: TQRDBText;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);

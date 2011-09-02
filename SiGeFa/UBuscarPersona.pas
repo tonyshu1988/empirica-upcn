@@ -139,6 +139,12 @@ type
     procedure EditarTelMailClick(Sender: TObject);
     procedure EliminarTelMailClick(Sender: TObject);
     procedure ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
+    procedure DBGridPersonasDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridTelMailDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -154,7 +160,7 @@ const
 
 implementation
 
-uses UDM;
+uses UDM, UPrincipal;
 
 {$R *.dfm}
 
@@ -395,6 +401,20 @@ end;
 procedure TFBuscarPersona.ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
 begin
 ZQ_EntidadTelefonoID_PERSONA.AsInteger := ZQ_PersonasID_PERSONA.AsInteger;
+end;
+
+procedure TFBuscarPersona.DBGridPersonasDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridPersonas, Rect, DataCol, Column, State);
+end;
+
+procedure TFBuscarPersona.DBGridTelMailDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridTelMail, Rect, DataCol, Column, State);
 end;
 
 end.

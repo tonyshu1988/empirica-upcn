@@ -19,19 +19,20 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 861
-    Height = 116
+    Width = 853
+    Height = 110
     Align = alClient
     TabOrder = 0
     object DBGridPersonas: TDBGrid
       Left = 1
       Top = 1
-      Width = 859
-      Height = 114
+      Width = 851
+      Height = 108
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      DefaultDrawing = False
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       ParentShowHint = False
       ReadOnly = True
       ShowHint = True
@@ -41,6 +42,7 @@ object FBuscarPersona: TFBuscarPersona
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGridPersonasDrawColumnCell
       OnDblClick = DBGridPersonasDblClick
       Columns = <
         item
@@ -118,8 +120,8 @@ object FBuscarPersona: TFBuscarPersona
   end
   object PanelEdicion: TPanel
     Left = 0
-    Top = 116
-    Width = 861
+    Top = 162
+    Width = 853
     Height = 242
     Align = alBottom
     TabOrder = 5
@@ -127,9 +129,9 @@ object FBuscarPersona: TFBuscarPersona
     object PageControlEdicion: TPageControl
       Left = 1
       Top = 0
-      Width = 859
+      Width = 851
       Height = 241
-      ActivePage = TabDatosPersonas
+      ActivePage = TabDatosTelMail
       Align = alBottom
       TabOrder = 0
       object TabDatosPersonas: TTabSheet
@@ -471,12 +473,13 @@ object FBuscarPersona: TFBuscarPersona
         object DBGridTelMail: TDBGrid
           Left = 0
           Top = 0
-          Width = 851
+          Width = 843
           Height = 213
           Align = alClient
           Color = 14606012
           DataSource = DS_EntidadTelefono
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          DefaultDrawing = False
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = PopupMenuTelmail
           TabOrder = 0
           TitleFont.Charset = ANSI_CHARSET
@@ -484,6 +487,7 @@ object FBuscarPersona: TFBuscarPersona
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridTelMailDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -510,7 +514,7 @@ object FBuscarPersona: TFBuscarPersona
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
