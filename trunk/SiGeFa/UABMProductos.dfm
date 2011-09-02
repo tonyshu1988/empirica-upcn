@@ -1443,12 +1443,13 @@ object FABMProductos: TFABMProductos
       Align = alClient
       Color = 14606012
       DataSource = DS_ProductoCabecera
+      DefaultDrawing = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = []
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       ParentFont = False
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET
@@ -1803,12 +1804,13 @@ object FABMProductos: TFABMProductos
             Align = alClient
             Color = 14606012
             DataSource = DS_DetalleProducto
+            DefaultDrawing = False
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'Verdana'
             Font.Style = []
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
             TabOrder = 0
             TitleFont.Charset = ANSI_CHARSET
@@ -1816,6 +1818,7 @@ object FABMProductos: TFABMProductos
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
+            OnDrawColumnCell = grillaDetalleDrawColumnCell
             Cellstyle = csNone
             DefaultRowHeight = 20
             TitleHeight = 17

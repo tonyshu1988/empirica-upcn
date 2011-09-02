@@ -311,6 +311,9 @@ type
     procedure ZQ_DetalleProductoIMPUESTO_ADICIONAL2Change(Sender: TField);
     procedure DBEditCoefGananciaEnter(Sender: TObject);
     procedure DBEditPrecioVentaEnter(Sender: TObject);
+    procedure grillaDetalleDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
   public
@@ -1019,9 +1022,6 @@ procedure TFABMProductos.GrillaDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_ProductoCabecera.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(Grilla, ZQ_ProductoCabeceraBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
@@ -1311,6 +1311,13 @@ end;
 procedure TFABMProductos.DBEditPrecioVentaEnter(Sender: TObject);
 begin
   campoQueCambia:= 'COEF_GANANCIA';
+end;
+
+procedure TFABMProductos.grillaDetalleDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(grillaDetalle, Rect, DataCol, Column, State);
 end;
 
 end.
