@@ -777,7 +777,8 @@ object FABM_Sucursal: TFABM_Sucursal
       Align = alClient
       Color = 14606012
       DataSource = DS_Sucursal
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      DefaultDrawing = False
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
@@ -1333,12 +1334,13 @@ object FABM_Sucursal: TFABM_Sucursal
           Align = alClient
           Color = 14606012
           DataSource = DS_PersonaRelacionVendedor
+          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
@@ -1348,6 +1350,7 @@ object FABM_Sucursal: TFABM_Sucursal
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridVendedorDrawColumnCell
           Columns = <
             item
               Expanded = False

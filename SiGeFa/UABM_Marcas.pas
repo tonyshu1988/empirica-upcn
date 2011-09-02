@@ -309,9 +309,6 @@ procedure TFABM_Marcas.DBGridMarcaDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_Marcas.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridMarca, ZQ_MarcasBAJA.AsString, Rect, DataCol, Column, State);
 end;
 

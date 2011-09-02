@@ -895,7 +895,8 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       Align = alClient
       Color = 14606012
       DataSource = DS_PosicionSucursal
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      DefaultDrawing = False
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText

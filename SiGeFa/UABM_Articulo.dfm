@@ -811,6 +811,7 @@ object FABM_Articulo: TFABM_Articulo
         Align = alClient
         Color = 14606012
         DataSource = DS_Articulo
+        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -845,6 +846,7 @@ object FABM_Articulo: TFABM_Articulo
         Align = alRight
         Color = 14606012
         DataSource = DS_Medidas
+        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
@@ -852,6 +854,7 @@ object FABM_Articulo: TFABM_Articulo
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
+        OnDrawColumnCell = DBGridMedidasDrawColumnCell
         Columns = <
           item
             Expanded = False

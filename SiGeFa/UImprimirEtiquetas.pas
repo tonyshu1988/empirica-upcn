@@ -87,6 +87,9 @@ type
     procedure PopItemProducto_AgregarClick(Sender: TObject);
     procedure PopItemProducto_QuitarClick(Sender: TObject);
     procedure PopItemProducto_QuitarTodosClick(Sender: TObject);
+    procedure DBGridEtiquetasDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     vselProducto: TFBuscarProducto;
     procedure onSelProducto;
@@ -334,6 +337,13 @@ begin
   ZQ_Etiquetas.First;
   while not ZQ_Etiquetas.Eof do
    ZQ_Etiquetas.Delete;
+end;
+
+procedure TFImprimirEtiquetas.DBGridEtiquetasDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridEtiquetas, Rect, DataCol, Column, State);
 end;
 
 end.

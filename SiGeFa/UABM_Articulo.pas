@@ -115,6 +115,9 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure ZQ_ArticuloAfterScroll(DataSet: TDataSet);
     procedure QuitarMedida1Click(Sender: TObject);
+    procedure DBGridMedidasDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
   public
   end;
@@ -307,9 +310,6 @@ procedure TFABM_Articulo.DBGridArticuloDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_Articulo.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridArticulo, ZQ_ArticuloBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
@@ -407,6 +407,13 @@ begin
     exit;
 
   ZQ_Medidas.Delete;
+end;
+
+procedure TFABM_Articulo.DBGridMedidasDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridMedidas, Rect, DataCol, Column, State);
 end;
 
 end.

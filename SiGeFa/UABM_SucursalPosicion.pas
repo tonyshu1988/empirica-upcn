@@ -290,9 +290,6 @@ procedure TFABM_SucursalPosicion.DBGridPosicionSucursalDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if ZQ_PosicionSucursal.IsEmpty then
-    exit;
-
   FPrincipal.PintarFilasGrillasConBajas(DBGridPosicionSucursal, ZQ_PosicionSucursalBAJA.AsString, Rect, DataCol, Column, State);
 end;
 

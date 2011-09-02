@@ -659,6 +659,7 @@ object FABM_TipoEmpresa: TFABM_TipoEmpresa
       Align = alClient
       Color = 14606012
       DataSource = DS_TipoEmpresa
+      DefaultDrawing = False
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET

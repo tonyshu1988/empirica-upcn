@@ -4739,6 +4739,84 @@ object FPrincipal: TFPrincipal
     Color = 16053492
     TabOrder = 2
     Visible = False
+    object colorBaja: TPanel
+      Left = 584
+      Top = 24
+      Width = 233
+      Height = 41
+      Caption = 'Registo dado Baja'
+      Color = 6974207
+      TabOrder = 0
+      Visible = False
+    end
+    object colorBajaFocus: TPanel
+      Left = 584
+      Top = 64
+      Width = 233
+      Height = 41
+      Caption = 'Registro Dado de Baja Con Focus'
+      Color = 2237183
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      Visible = False
+    end
+    object colorActivo: TPanel
+      Left = 584
+      Top = 104
+      Width = 233
+      Height = 41
+      Caption = 'Registo Activo'
+      Color = 16487727
+      TabOrder = 2
+      Visible = False
+    end
+    object colorActivoFocus: TPanel
+      Left = 584
+      Top = 144
+      Width = 233
+      Height = 41
+      Caption = 'Registro Activo Con Focus'
+      Color = 13986820
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      Visible = False
+    end
+    object colorResaltado: TPanel
+      Left = 584
+      Top = 184
+      Width = 233
+      Height = 41
+      Caption = 'Registro Resaltado'
+      Color = 8487297
+      TabOrder = 4
+      Visible = False
+    end
+    object colorResaltadoFocus: TPanel
+      Left = 584
+      Top = 224
+      Width = 233
+      Height = 41
+      Caption = 'Registro Resaltado Con Focus'
+      Color = 3020545
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+      Visible = False
+    end
   end
   object ActionPrincipal: TActionManager
     ActionBars = <

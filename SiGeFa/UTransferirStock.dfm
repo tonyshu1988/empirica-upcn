@@ -31,7 +31,7 @@ object FTransferirStock: TFTransferirStock
       Top = 34
       Width = 852
       Height = 375
-      ActivePage = TabSTransferirStock
+      ActivePage = TabSAsociarNotaPedido
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -45,6 +45,7 @@ object FTransferirStock: TFTransferirStock
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
+          DefaultDrawing = False
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
           TitleFont.Charset = ANSI_CHARSET
@@ -52,6 +53,7 @@ object FTransferirStock: TFTransferirStock
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridProductoDrawColumnCell
           Columns = <
             item
               Alignment = taRightJustify
@@ -177,11 +179,12 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedidoDetalle: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 353
+          Width = 844
+          Height = 347
           Align = alClient
           Color = 16511963
           DataSource = DS_Nota_Pedido_Detalle
+          DefaultDrawing = False
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 1
           TitleFont.Charset = ANSI_CHARSET
@@ -190,6 +193,7 @@ object FTransferirStock: TFTransferirStock
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           Visible = False
+          OnDrawColumnCell = DBGridNotaPedidoDetalleDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -303,21 +307,23 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedido: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 353
+          Width = 844
+          Height = 347
           Hint = 
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
           Align = alClient
           Color = 13431031
           DataSource = DS_VerCpb
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          DefaultDrawing = False
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
           TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridNotaPedidoDrawColumnCell
           OnDblClick = DBGridNotaPedidoDblClick
           Columns = <
             item
