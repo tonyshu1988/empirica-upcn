@@ -44,7 +44,8 @@ uses
   UEstadisticaFacturacion in 'UEstadisticaFacturacion.pas' {FEstadisticasFacturacion},
   UEstadisticaDisponibilidades in 'UEstadisticaDisponibilidades.pas' {FEstadisticaDisponibilidades},
   UArqueo_Caja in 'UArqueo_Caja.pas' {FArqueo_Caja},
-  UCargarPreventa in 'UCargarPreventa.pas' {FPreventa};
+  UCargarPreventa in 'UCargarPreventa.pas' {FPreventa},
+  UEstadisticaStock in 'UEstadisticaStock.pas' {FEstadisticaStock};
 
 {$R *.res}
 

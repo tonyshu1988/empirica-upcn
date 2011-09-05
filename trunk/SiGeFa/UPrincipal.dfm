@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 855
-    Height = 457
+    Width = 863
+    Height = 463
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 486
-    Width = 855
+    Top = 492
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -4719,7 +4719,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 457
+    Width = 863
+    Height = 463
     Align = alClient
     Color = 16053492
     TabOrder = 2
@@ -5029,6 +5029,10 @@ object FPrincipal: TFPrincipal
       ImageIndex = 31
       OnExecute = AArqueo_CajaExecute
     end
+    object AEstad_Stock: TAction
+      Caption = 'Estadistica Stock'
+      OnExecute = AEstad_StockExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5181,6 +5185,10 @@ object FPrincipal: TFPrincipal
       end
       object EstadisticaDisponibilidades1: TMenuItem
         Action = AEstad_Disponib
+      end
+      object EstadisticaStock1: TMenuItem
+        Tag = 1
+        Action = AEstad_Stock
       end
     end
     object Salir1: TMenuItem
