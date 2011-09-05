@@ -104,6 +104,9 @@ type
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure DBGridSaldoCuentasDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -115,7 +118,7 @@ var
 
 implementation
 
-uses UDM;
+uses UDM, UPrincipal;
 
 {$R *.dfm}
 
@@ -185,6 +188,13 @@ begin
 
     EKVista_RepSaldo.VistaPrevia;
   end;
+end;
+
+procedure TFEstadisticaDisponibilidades.DBGridSaldoCuentasDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas (DBGridSaldoCuentas, Rect, DataCol, Column, State);
 end;
 
 end.
