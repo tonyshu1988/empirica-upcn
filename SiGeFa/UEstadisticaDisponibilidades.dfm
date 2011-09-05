@@ -817,13 +817,15 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           Align = alClient
           Color = 14606012
           DataSource = DS_SaldosCuentas
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          DefaultDrawing = False
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridSaldoCuentasDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -932,9 +934,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           BorderWidth = 4
           TabOrder = 0
           object Label1: TLabel
-            Left = 5
+            Left = 787
             Top = 5
-            Width = 875
+            Width = 93
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -958,7 +960,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Label2: TLabel
             Left = 5
             Top = 18
-            Width = 875
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -972,7 +974,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Label3: TLabel
             Left = 5
             Top = 5
-            Width = 875
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -1012,9 +1014,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           BorderWidth = 4
           TabOrder = 0
           object Label4: TLabel
-            Left = 5
+            Left = 787
             Top = 5
-            Width = 875
+            Width = 93
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -1038,7 +1040,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Label5: TLabel
             Left = 5
             Top = 18
-            Width = 875
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -1052,7 +1054,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Label6: TLabel
             Left = 5
             Top = 5
-            Width = 875
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
