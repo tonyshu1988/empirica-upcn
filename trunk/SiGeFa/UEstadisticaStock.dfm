@@ -916,6 +916,15 @@ object FEstadisticaStock: TFEstadisticaStock
   object EKBuscarStock: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'C'#243'd. Corto'
+        Campo = 'cod_corto'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
         Titulo = 'C'#243'd. Barra'
         Campo = 'codigo_barra'
         Tabla = 'producto'
@@ -928,15 +937,6 @@ object FEstadisticaStock: TFEstadisticaStock
         Titulo = 'C'#243'd. Cabecera'
         Campo = 'cod_corto'
         Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'C'#243'd. Corto'
-        Campo = 'cod_corto'
-        Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200

@@ -2607,6 +2607,15 @@ object FABM_Precios: TFABM_Precios
   object EKBusquedaAvanzada1: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'Cod. Corto'
+        Campo = 'cod_corto'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Nombre Producto'
         Campo = 'nombre'
         Tabla = 'pc'
@@ -2646,15 +2655,6 @@ object FABM_Precios: TFABM_Precios
         Titulo = 'Marca'
         Campo = 'nombre_marca'
         Tabla = 'ma'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Cod. Corto'
-        Campo = 'cod_corto'
-        Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
