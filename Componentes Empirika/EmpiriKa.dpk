@@ -48,7 +48,8 @@ requires
   dxThemeD7,
   dxComnD7,
   dxBarExtItemsD7,
-  QR5RunD7;
+  QR5RunD7,
+  InterSol;
 
 contains
   EKAppEvnts in 'EKAppEvnts.pas',

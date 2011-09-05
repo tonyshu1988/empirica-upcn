@@ -353,13 +353,13 @@ object FListadoSQL: TFListadoSQL
       item
         Expanded = False
         Title.Caption = 'Clave'
-        Width = 111
+        Width = 124
         Visible = True
       end
       item
         Expanded = False
         Title.Caption = 'Campo de Busqueda'
-        Width = 505
+        Width = 1000
         Visible = True
       end>
   end
