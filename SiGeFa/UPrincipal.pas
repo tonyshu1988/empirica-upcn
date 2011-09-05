@@ -113,6 +113,8 @@ type
     colorActivoFocus: TPanel;
     colorResaltado: TPanel;
     colorResaltadoFocus: TPanel;
+    AEstad_Stock: TAction;
+    EstadisticaStock1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -151,6 +153,7 @@ type
     procedure AEstad_FacturacionExecute(Sender: TObject);
     procedure AEstad_DisponibExecute(Sender: TObject);
     procedure AArqueo_CajaExecute(Sender: TObject);
+    procedure AEstad_StockExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -181,7 +184,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_Cuentas, UABM_TipoComprobante, UABM_Precios, UABM_Comprobantes,
   UCajero, UMovimientosInternos, UABM_TipoMovimiento, UTransferirStock,
   UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion,
-  UEstadisticaDisponibilidades, UArqueo_Caja, Types;
+  UEstadisticaDisponibilidades, UArqueo_Caja, Types, UEstadisticaStock;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -542,6 +545,11 @@ end;
 procedure TFPrincipal.AArqueo_CajaExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFArqueo_Caja, FArqueo_Caja);
+end;
+
+procedure TFPrincipal.AEstad_StockExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFEstadisticaStock, FEstadisticaStock);
 end;
 
 end.
