@@ -541,6 +541,9 @@ type
       Shift: TShiftState);
     procedure EKSuma_ProductosSumListChanged(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGridEditar_ProductoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -556,6 +559,7 @@ type
     vselPersona: TFBuscarPersona;
     procedure onSelPersona;
     procedure onSelProducto;
+    procedure onSelTodosProducto;
     function getColumnIndex(Grid: TDBGrid; Nombre: string): Integer;
   public
     { Public declarations }
@@ -1722,6 +1726,46 @@ begin
 end;
 
 
+procedure TFABM_Comprobantes.onSelTodosProducto;
+begin
+  vselProducto.ZQ_Producto.First;
+  while not vselProducto.ZQ_Producto.Eof do
+  begin
+    CD_Producto.Append;
+    CD_Producto_idProducto.AsInteger := vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    CD_Producto_producto.AsString := vselProducto.ZQ_ProductoNOMBRE.AsString;
+    CD_Producto_medida.AsString := vselProducto.ZQ_ProductoMEDIDA.AsString;
+    CD_Producto_color.AsString := vselProducto.ZQ_ProductoCOLOR.AsString;
+    CD_Producto_marca.AsString := vselProducto.ZQ_ProductoNOMBRE_MARCA.AsString;
+    CD_Producto_tipoArticulo.AsString := vselProducto.ZQ_ProductoTIPO_ARTICULO.AsString;
+    CD_Producto_articulo.AsString := vselProducto.ZQ_ProductoNOMBRE_ARTICULO.AsString;
+    CD_Producto_codigoBarra.AsString := vselProducto.ZQ_ProductoCODIGO_BARRA.AsString;
+    CD_Producto_codCabecera.AsString := vselProducto.ZQ_ProductoCOD_CORTO.AsString;
+    CD_Producto_codProducto.AsString := vselProducto.ZQ_ProductoCOD_CORTO_1.AsString;
+    CD_Producto_precioCosto.AsFloat := vselProducto.ZQ_ProductoPRECIO_COSTO.AsFloat;
+    CD_Producto_precioVenta.AsFloat := vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
+    CD_Producto_coefGanancia.AsFloat := vselProducto.ZQ_ProductoCOEF_GANANCIA.AsFloat;
+    CD_Producto_coefDescuento.AsFloat := vselProducto.ZQ_ProductoCOEF_DESCUENTO.AsFloat;
+    CD_Producto_impuestoIVA.AsFloat := vselProducto.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+
+    ZQ_CpbProducto.Append;
+    ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
+    ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
+    ZQ_CpbProductoPORC_IVA.AsFloat:= vselProducto.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+    ZQ_CpbProductoPORC_DESCUENTO.AsFloat:= descuentoCliente;
+    ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
+    ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= 0;
+
+    cargarImagen(vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger);
+
+    vselProducto.ZQ_Producto.Next;
+  end;
+
+  vselProducto.Close;
+end;
+
+
 procedure TFABM_Comprobantes.PopItemProducto_AgregarClick(Sender: TObject);
 begin
   agregarProducto;
@@ -1733,11 +1777,13 @@ begin
   if not Assigned(vselProducto) then
     vselProducto:= TFBuscarProducto.Create(nil);
 
-  if not ZQ_ComprobanteID_PROVEEDOR.IsNull then
-    vselProducto.filtrarEmpresa(ZQ_ComprobanteID_PROVEEDOR.AsInteger);
+  //if not ZQ_ComprobanteID_PROVEEDOR.IsNull then
+  //  vselProducto.filtrarEmpresa(ZQ_ComprobanteID_PROVEEDOR.AsInteger);
 
   vselProducto.OnSeleccionar := onSelProducto;
-  vselProducto.SeleccionarYSalir:= true;
+  vselProducto.OnSeleccionarTodos := onSelTodosProducto;
+  vselProducto.btnSeleccionarTodos.Visible:= ivAlways;
+  vselProducto.SeleccionarYSalir:= false;
   vselProducto.ShowModal;
 end;
 
@@ -2200,6 +2246,26 @@ begin
   EKOrd_VerCpb_Producto.GuardarConfigColumnas;
   EKOrd_EditarProducto.GuardarConfigColumnas;
   EKOrd_EditarFpago.GuardarConfigColumnas;  
+end;
+
+procedure TFABM_Comprobantes.DBGridEditar_ProductoDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if (THackDBGrid(DBGridEditar_Producto).DataLink.ActiveRecord + 1 = THackDBGrid(DBGridEditar_Producto).Row) then
+  begin
+    DBGridEditar_Producto.Canvas.Font.Color := clWhite;
+    DBGridEditar_Producto.Canvas.Brush.Color := clBlack;
+    DBGridEditar_Producto.Canvas.Font.Style := DBGridEditar_Producto.Canvas.Font.Style + [fsBold];
+  end;
+
+  if (gdFocused in State) or (gdSelected in State) then
+  begin
+    DBGridEditar_Producto.Canvas.Brush.Color := clRed;
+    DBGridEditar_Producto.Canvas.Font.Style := DBGridEditar_Producto.Canvas.Font.Style + [fsBold];
+  end;
+
+  DBGridEditar_Producto.DefaultDrawColumnCell(Rect, DataCol, Column, state);
 end;
 
 end.
