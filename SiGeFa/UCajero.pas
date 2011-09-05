@@ -420,6 +420,7 @@ type
     procedure verPermisos();
     procedure APreventaExecute(Sender: TObject);
     procedure btPreventaClick(Sender: TObject);
+
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -719,7 +720,7 @@ var
   punit: double;
   diasm: integer;
 begin
-  LimpiarCodigo();
+
   RelojStock.Enabled:=false;
   lblSinStock.Visible:=False;
   lblMaxVenta.Visible:=False;
@@ -1205,6 +1206,10 @@ if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
                  begin
                     CD_Fpago.Edit;
                     CD_FpagoID_TIPO_FORMAPAG.AsInteger:=StrToInt(EK_ListadoMedCobroPago.Resultado);
+                    ZQ_ListadoCuenta.Locate('id_cuenta',CD_FpagoCUENTA_INGRESO.AsInteger,[]);
+                    if CD_FpagoID_TIPO_FORMAPAG.IsNull then
+                       CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
+                    CD_Fpago_esCtaCorr.AsString:=ZQ_ListadoCuentaA_CTA_CORRIENTE.Asstring;
                     CD_Fpago.Post;
                  end
             end;
@@ -1216,10 +1221,20 @@ if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
       if ((acumulado>0)and((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat=0)))
           and not(CD_FpagoID_TIPO_FORMAPAG.IsNull and CD_FpagoCUENTA_INGRESO.IsNull ) then
       begin
-       CD_Fpago.edit;
+        CD_Fpago.edit;
         CD_FpagoIMPORTE.AsFloat:=acumulado-acumFpago;
         CD_Fpago.Post;
       end;
+
+   if CD_FpagoCUENTA_INGRESO.IsNull then
+    if EKListadoCuenta.Buscar then
+      if EKListadoCuenta.Resultado<>'' then
+      begin
+        CD_Fpago.Edit;
+        CD_FpagoCUENTA_INGRESO.AsInteger:=StrToInt(EKListadoCuenta.Resultado);
+        CD_Fpago.Post;
+      end;
+
 
     CD_Fpago.Edit;
     CD_Fpago_importeVenta.AsFloat:=CD_FpagoIMPORTE.AsFloat + (CD_FpagoIMPORTE.AsFloat*CD_Fpago_desc_rec.AsFloat);

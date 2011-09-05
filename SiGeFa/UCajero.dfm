@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 228
-  Top = 133
+  Left = 348
+  Top = 125
   Width = 1127
   Height = 661
   Caption = 'Cajero SiGeFa'
@@ -4188,15 +4188,15 @@ object FCajero: TFCajero
     Modelo = DM.EKModelo
     SQL.Strings = (
       'select sp.id_producto,'
-      '       '#39'C'#243'digo: '#39'||pr.cod_corto||'#39' '#39'||'
-      '       COALESCE ('#39'| Producto: '#39' || pc.nombre,'#39#39')||'#39' '#39'||'
-      '       COALESCE ('#39'| Sucursal: '#39' || su.nombre,'#39#39')||'#39' '#39'||'
-      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
-      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
-      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
-      
-        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
-        'al'
+      '       '#39'C'#243'digo: '#39'||pr.cod_corto||'
+      '       COALESCE ('#39' | Producto: '#39' || pc.nombre,'#39#39')||'
+      '       COALESCE ('#39' | Stock: '#39' || sp.stock_actual,'#39#39')||'
+      '       COALESCE ('#39' | Sucursal: '#39' || su.nombre,'#39#39')||'
+      '        COALESCE ('#39' | Secci'#243'n: '#39' || ps.seccion,'#39#39')||'
+      '        COALESCE ('#39' | Sector: '#39' || ps.sector,'#39#39')||'
+      '        COALESCE ('#39' | Fila: '#39' || ps.fila,'#39#39')||'
+      '        COALESCE ('#39' | Columna: '#39' || ps.columna,'#39#39')'
+      '         AS posicSucursal'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
       
@@ -4206,6 +4206,7 @@ object FCajero: TFCajero
         'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'where (ps.punto_salida='#39'S'#39')'
       'order by 2')
     CampoBuscar = 'posicSucursal'
     CampoClave = 'id_producto'
