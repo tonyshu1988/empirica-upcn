@@ -1,6 +1,6 @@
 object FEstadisticaMovInternos: TFEstadisticaMovInternos
-  Left = 311
-  Top = 145
+  Left = 326
+  Top = 160
   Width = 870
   Height = 546
   Caption = 'Estadistica Movimientos Internos'
@@ -8,317 +8,559 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Position = poScreenCenter
   Scaled = False
   Visible = True
+  OnCanResize = FormCanResize
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object PageControl1: TPageControl
+  object PageControl: TPageControl
     Left = 0
     Top = 0
     Width = 854
     Height = 456
-    ActivePage = TabIngresoVsEgresos
+    ActivePage = TabMovimientos
     Align = alClient
     TabOrder = 0
-    object TabIngresoVsEgresos: TTabSheet
-      Caption = 'Ingresos Vs. Egresos'
-      object PanelDatos: TPanel
+    object TabMovimientos: TTabSheet
+      Caption = 'Listado Movimientos'
+      object PanelMov_Datos: TPanel
         Left = 0
         Top = 0
         Width = 846
         Height = 428
         Align = alClient
-        BevelOuter = bvNone
         TabOrder = 0
-        object Label1: TLabel
-          Left = 64
-          Top = 24
-          Width = 32
-          Height = 13
-          Caption = 'Label1'
+        object lblMov_TotalEgresos: TLabel
+          Left = 1
+          Top = 399
+          Width = 844
+          Height = 14
+          Align = alBottom
+          Alignment = taRightJustify
+          Caption = 'Total: 0.00'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
         end
-        object Label2: TLabel
-          Left = 64
-          Top = 48
-          Width = 32
-          Height = 13
-          Caption = 'Label2'
+        object lblMov_TotalIngresos: TLabel
+          Left = 1
+          Top = 413
+          Width = 844
+          Height = 14
+          Align = alBottom
+          Alignment = taRightJustify
+          Caption = 'Total: 0.00'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
         end
-        object Panel3: TPanel
-          Left = 0
-          Top = 0
-          Width = 246
-          Height = 428
+        object DBGridMovimientos: TDBGrid
+          Left = 1
+          Top = 1
+          Width = 844
+          Height = 398
           Align = alClient
+          Color = 14606012
+          DataSource = DS_Movimientos
+          DefaultDrawing = False
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridMovimientosDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'FECHA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha'
+              Width = 164
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_MOVIMIENTO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo Movimiento'
+              Width = 308
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'INGRESOS'
+              Title.Alignment = taCenter
+              Title.Caption = 'Ingresos'
+              Width = 123
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'EGRESOS'
+              Title.Alignment = taCenter
+              Title.Caption = 'Egresos'
+              Width = 127
+              Visible = True
+            end>
         end
-        object PanelIngresos: TPanel
-          Left = 246
-          Top = 0
-          Width = 300
-          Height = 428
-          Align = alRight
+      end
+    end
+    object TabIngresos_Egresos: TTabSheet
+      Caption = 'Ingresos vs. Egresos'
+      ImageIndex = 1
+      object PanelIngresos: TPanel
+        Left = 424
+        Top = 0
+        Width = 422
+        Height = 428
+        Align = alRight
+        TabOrder = 0
+        object Label4: TLabel
+          Left = 1
+          Top = 1
+          Width = 65
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'INGRESOS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblTotalIngresos: TLabel
+          Left = 1
+          Top = 74
+          Width = 69
+          Height = 13
+          Align = alBottom
+          Alignment = taCenter
+          Caption = 'Total: 0.00'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+        end
+        object DBGridIngresos: TDBGrid
+          Left = 1
+          Top = 14
+          Width = 420
+          Height = 60
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_Ingresos
+          DefaultDrawing = False
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridIngresosDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_MOVIMIENTO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Movimiento'
+              Width = 276
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUM'
+              Title.Alignment = taCenter
+              Title.Caption = 'Total Ingresos'
+              Width = 135
+              Visible = True
+            end>
+        end
+        object DBChartIngresos: TDBChart
+          Left = 1
+          Top = 87
+          Width = 420
+          Height = 340
+          AllowPanning = pmNone
+          AllowZoom = False
+          BackWall.Brush.Color = clWhite
+          BackWall.Brush.Style = bsClear
+          BackWall.Color = clSilver
+          BackWall.Pen.Visible = False
+          Gradient.EndColor = clSilver
+          Gradient.StartColor = clBlack
+          Gradient.Visible = True
+          LeftWall.Brush.Color = clWhite
+          Title.Brush.Color = clWhite
+          Title.Brush.Style = bsClear
+          Title.Color = clWhite
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -11
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Title.Text.Strings = (
+            'INGRESOS')
+          AxisVisible = False
+          BackColor = clSilver
+          ClipPoints = False
+          Frame.Visible = False
+          LeftAxis.MinorTickLength = 1
+          Legend.Alignment = laBottom
+          Legend.Frame.Visible = False
+          Legend.ResizeChart = False
+          Legend.ShadowSize = 1
+          Legend.TextStyle = ltsPlain
+          Legend.Visible = False
+          ScaleLastPage = False
+          View3DOptions.Elevation = 315
+          View3DOptions.Orthogonal = False
+          View3DOptions.Perspective = 0
+          View3DOptions.Rotation = 360
+          View3DWalls = False
+          Align = alBottom
+          BevelOuter = bvNone
+          BevelWidth = 0
           TabOrder = 1
-          object Label4: TLabel
-            Left = 1
-            Top = 1
-            Width = 298
-            Height = 13
-            Align = alTop
-            Alignment = taCenter
-            Caption = 'INGRESOS'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBGridIngresos: TDBGrid
-            Left = 1
-            Top = 14
-            Width = 298
-            Height = 73
-            Align = alClient
-            Color = 14606012
-            DataSource = DS_Ingresos
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-            TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            OnDrawColumnCell = DBGridIngresosDrawColumnCell
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'NOMBRE_MOVIMIENTO'
-                Title.Alignment = taCenter
-                Title.Caption = 'Movimiento'
-                Width = 200
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'SUM'
-                Title.Alignment = taCenter
-                Title.Caption = 'Total Ingresos'
-                Width = 88
-                Visible = True
-              end>
-          end
-          object DBChartIngresos: TDBChart
-            Left = 1
-            Top = 87
-            Width = 298
-            Height = 340
-            AllowPanning = pmNone
-            AllowZoom = False
-            BackWall.Brush.Color = clWhite
-            BackWall.Brush.Style = bsClear
-            BackWall.Color = clSilver
-            BackWall.Pen.Visible = False
-            Gradient.EndColor = clSilver
-            Gradient.StartColor = clBlack
-            Gradient.Visible = True
-            LeftWall.Brush.Color = clWhite
-            Title.Brush.Color = clWhite
-            Title.Brush.Style = bsClear
-            Title.Color = clWhite
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clBlack
-            Title.Font.Height = -11
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Title.Text.Strings = (
-              'INGRESOS')
-            AxisVisible = False
-            BackColor = clSilver
-            ClipPoints = False
-            Frame.Visible = False
-            LeftAxis.MinorTickLength = 1
-            Legend.Alignment = laBottom
-            Legend.Frame.Visible = False
-            Legend.ResizeChart = False
-            Legend.ShadowSize = 1
-            Legend.TextStyle = ltsPlain
-            Legend.Visible = False
-            ScaleLastPage = False
-            View3DOptions.Elevation = 315
-            View3DOptions.Orthogonal = False
-            View3DOptions.Perspective = 0
-            View3DOptions.Rotation = 360
-            View3DWalls = False
-            Align = alBottom
-            BevelOuter = bvNone
-            BevelWidth = 0
-            TabOrder = 1
-            OnMouseMove = DBChartIngresosMouseMove
-            object PieSeries1: TPieSeries
-              Marks.Arrow.Visible = False
-              Marks.ArrowLength = 8
-              Marks.Frame.Visible = False
-              Marks.Style = smsPercent
-              Marks.Transparent = True
-              Marks.Visible = False
-              DataSource = ZQ_Ingresos
-              SeriesColor = clRed
-              Title = 'Ingresos'
-              XLabelsSource = 'NOMBRE_MOVIMIENTO'
-              Circled = True
-              CircleBackColor = 33023
-              ExplodeBiggest = 10
-              OtherSlice.Text = 'Other'
-              PieValues.DateTime = False
-              PieValues.Name = 'Pie'
-              PieValues.Multiplier = 1.000000000000000000
-              PieValues.Order = loAscending
-              PieValues.ValueSource = 'SUM'
-              RotationAngle = 135
-            end
+          OnMouseMove = DBChartIngresosMouseMove
+          object PieSeries1: TPieSeries
+            Marks.Arrow.Visible = False
+            Marks.ArrowLength = 8
+            Marks.Frame.Visible = False
+            Marks.Style = smsPercent
+            Marks.Transparent = True
+            Marks.Visible = False
+            DataSource = ZQ_Ingresos
+            SeriesColor = clRed
+            Title = 'Ingresos'
+            XLabelsSource = 'NOMBRE_MOVIMIENTO'
+            Circled = True
+            CircleBackColor = 33023
+            ExplodeBiggest = 10
+            OtherSlice.Text = 'Other'
+            PieValues.DateTime = False
+            PieValues.Name = 'Pie'
+            PieValues.Multiplier = 1.000000000000000000
+            PieValues.Order = loAscending
+            PieValues.ValueSource = 'SUM'
+            RotationAngle = 135
           end
         end
-        object PanelEgresos: TPanel
-          Left = 546
-          Top = 0
-          Width = 300
-          Height = 428
-          Align = alRight
-          TabOrder = 2
-          object Label3: TLabel
-            Left = 1
-            Top = 1
-            Width = 298
-            Height = 13
-            Align = alTop
-            Alignment = taCenter
-            Caption = 'EGRESOS'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBGridEgresos: TDBGrid
-            Left = 1
-            Top = 14
-            Width = 298
-            Height = 73
-            Align = alClient
-            Color = 14606012
-            DataSource = DS_Egresos
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-            TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            OnDrawColumnCell = DBGridEgresosDrawColumnCell
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'NOMBRE_MOVIMIENTO'
-                Title.Alignment = taCenter
-                Title.Caption = 'Movimiento'
-                Width = 200
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'SUM'
-                Title.Alignment = taCenter
-                Title.Caption = 'Total Egresos'
-                Width = 88
-                Visible = True
-              end>
-          end
-          object DBChartEgresos: TDBChart
-            Left = 1
-            Top = 87
-            Width = 298
-            Height = 340
-            AllowPanning = pmNone
-            AllowZoom = False
-            BackWall.Brush.Color = clWhite
-            BackWall.Brush.Style = bsClear
-            BackWall.Color = clSilver
-            BackWall.Pen.Visible = False
-            Gradient.EndColor = clSilver
-            Gradient.StartColor = clBlack
-            Gradient.Visible = True
-            LeftWall.Brush.Color = clWhite
-            Title.Brush.Color = clWhite
-            Title.Brush.Style = bsClear
-            Title.Color = clWhite
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clBlack
-            Title.Font.Height = -11
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Title.Text.Strings = (
-              'EGRESOS')
-            AxisVisible = False
-            BackColor = clSilver
-            ClipPoints = False
-            Frame.Visible = False
-            LeftAxis.MinorTickLength = 1
-            Legend.Alignment = laBottom
-            Legend.Frame.Visible = False
-            Legend.ResizeChart = False
-            Legend.ShadowSize = 1
-            Legend.TextStyle = ltsPlain
-            Legend.TopPos = 11
-            View3DOptions.Elevation = 315
-            View3DOptions.Orthogonal = False
-            View3DOptions.Perspective = 0
-            View3DOptions.Rotation = 360
-            View3DWalls = False
-            Align = alBottom
-            BevelOuter = bvNone
-            BevelWidth = 0
-            TabOrder = 1
-            OnMouseMove = DBChartEgresosMouseMove
-            object Series1: TPieSeries
-              Marks.Arrow.Visible = False
-              Marks.ArrowLength = 8
-              Marks.Frame.Visible = False
-              Marks.Style = smsPercent
-              Marks.Transparent = True
-              Marks.Visible = False
-              DataSource = ZQ_Egresos
-              SeriesColor = clRed
-              ShowInLegend = False
-              XLabelsSource = 'NOMBRE_MOVIMIENTO'
-              Circled = True
-              ExplodeBiggest = 10
-              OtherSlice.Text = 'Other'
-              PieValues.DateTime = False
-              PieValues.Name = 'Pie'
-              PieValues.Multiplier = 1.000000000000000000
-              PieValues.Order = loAscending
-              PieValues.ValueSource = 'SUM'
-              RotationAngle = 135
+      end
+      object PanelEgresos: TPanel
+        Left = 0
+        Top = 0
+        Width = 424
+        Height = 428
+        Align = alClient
+        TabOrder = 1
+        object Label3: TLabel
+          Left = 1
+          Top = 1
+          Width = 58
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'EGRESOS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblTotalEgresos: TLabel
+          Left = 1
+          Top = 74
+          Width = 69
+          Height = 13
+          Align = alBottom
+          Alignment = taCenter
+          Caption = 'Total: 0.00'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+        end
+        object DBGridEgresos: TDBGrid
+          Left = 1
+          Top = 14
+          Width = 422
+          Height = 60
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_Egresos
+          DefaultDrawing = False
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridEgresosDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_MOVIMIENTO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Movimiento'
+              Width = 266
+              Visible = True
             end
+            item
+              Expanded = False
+              FieldName = 'SUM'
+              Title.Alignment = taCenter
+              Title.Caption = 'Total Egresos'
+              Width = 141
+              Visible = True
+            end>
+        end
+        object DBChartEgresos: TDBChart
+          Left = 1
+          Top = 87
+          Width = 422
+          Height = 340
+          AllowPanning = pmNone
+          AllowZoom = False
+          BackWall.Brush.Color = clWhite
+          BackWall.Brush.Style = bsClear
+          BackWall.Color = clSilver
+          BackWall.Pen.Visible = False
+          Gradient.EndColor = clSilver
+          Gradient.StartColor = clBlack
+          Gradient.Visible = True
+          LeftWall.Brush.Color = clWhite
+          Title.Brush.Color = clWhite
+          Title.Brush.Style = bsClear
+          Title.Color = clWhite
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -11
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Title.Text.Strings = (
+            'EGRESOS')
+          AxisVisible = False
+          BackColor = clSilver
+          ClipPoints = False
+          Frame.Visible = False
+          LeftAxis.MinorTickLength = 1
+          Legend.Alignment = laBottom
+          Legend.Frame.Visible = False
+          Legend.ResizeChart = False
+          Legend.ShadowSize = 1
+          Legend.TextStyle = ltsPlain
+          Legend.TopPos = 11
+          View3DOptions.Elevation = 315
+          View3DOptions.Orthogonal = False
+          View3DOptions.Perspective = 0
+          View3DOptions.Rotation = 360
+          View3DWalls = False
+          Align = alBottom
+          BevelOuter = bvNone
+          BevelWidth = 0
+          TabOrder = 1
+          OnMouseMove = DBChartEgresosMouseMove
+          object Series1: TPieSeries
+            Marks.Arrow.Visible = False
+            Marks.ArrowLength = 8
+            Marks.Frame.Visible = False
+            Marks.Style = smsPercent
+            Marks.Transparent = True
+            Marks.Visible = False
+            DataSource = ZQ_Egresos
+            SeriesColor = clRed
+            ShowInLegend = False
+            XLabelsSource = 'NOMBRE_MOVIMIENTO'
+            Circled = True
+            ExplodeBiggest = 10
+            OtherSlice.Text = 'Other'
+            PieValues.DateTime = False
+            PieValues.Name = 'Pie'
+            PieValues.Multiplier = 1.000000000000000000
+            PieValues.Order = loAscending
+            PieValues.ValueSource = 'SUM'
+            RotationAngle = 135
           end
         end
       end
     end
-    object TabTipoMovimiento: TTabSheet
-      Caption = 'Tipo Movimiento'
-      ImageIndex = 1
-    end
-    object TabCuentas: TTabSheet
-      Caption = 'Cuentas'
+    object TabResumenDiario: TTabSheet
+      Caption = 'Resumen Diario'
       ImageIndex = 2
+      object DBChartResumen: TDBChart
+        Left = 0
+        Top = 121
+        Width = 846
+        Height = 307
+        BackWall.Brush.Color = clWhite
+        BackWall.Brush.Style = bsClear
+        BackWall.Color = clSilver
+        Gradient.EndColor = 14737632
+        Gradient.StartColor = 4473924
+        Gradient.Visible = True
+        LeftWall.Brush.Color = clWhite
+        Title.Brush.Color = clWhite
+        Title.Brush.Style = bsClear
+        Title.Color = clWhite
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clBlack
+        Title.Font.Height = -11
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsBold]
+        Title.Text.Strings = (
+          '')
+        BackColor = clSilver
+        LeftAxis.Grid.Color = 13290186
+        LeftAxis.MinorTickLength = 1
+        LeftAxis.Ticks.Color = clSilver
+        LeftAxis.TicksInner.Color = clSilver
+        Legend.Alignment = laBottom
+        Legend.Frame.Visible = False
+        Legend.ResizeChart = False
+        Legend.ShadowSize = 1
+        Legend.TextStyle = ltsPlain
+        Legend.TopPos = 11
+        Legend.Visible = False
+        View3D = False
+        View3DOptions.Elevation = 315
+        View3DOptions.Perspective = 0
+        View3DOptions.Rotation = 360
+        View3DWalls = False
+        Align = alBottom
+        BevelOuter = bvNone
+        BevelWidth = 0
+        TabOrder = 0
+        OnMouseMove = DBChartEgresosMouseMove
+        object Series4: TFastLineSeries
+          Marks.ArrowLength = 8
+          Marks.Visible = False
+          SeriesColor = clRed
+          ShowInLegend = False
+          Title = 'Egresos linea'
+          LinePen.Color = clRed
+          LinePen.Width = 2
+          XValues.DateTime = True
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'FECHA'
+          YValues.DateTime = False
+          YValues.Name = 'Y'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'EGRESOS'
+        end
+        object Series2: TPointSeries
+          Marks.Arrow.Visible = False
+          Marks.ArrowLength = 6
+          Marks.Font.Charset = DEFAULT_CHARSET
+          Marks.Font.Color = clBlack
+          Marks.Font.Height = -8
+          Marks.Font.Name = 'Arial'
+          Marks.Font.Style = []
+          Marks.Style = smsValue
+          Marks.Visible = False
+          SeriesColor = clRed
+          ShowInLegend = False
+          Title = 'Egresos ptos'
+          Pointer.Draw3D = False
+          Pointer.InflateMargins = True
+          Pointer.Style = psRectangle
+          Pointer.Visible = True
+          XValues.DateTime = True
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'FECHA'
+          YValues.DateTime = False
+          YValues.Name = 'Y'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'EGRESOS'
+        end
+        object Series5: TFastLineSeries
+          Marks.ArrowLength = 8
+          Marks.Style = smsValue
+          Marks.Visible = False
+          SeriesColor = clLime
+          ShowInLegend = False
+          Title = 'Ingresos linea'
+          LinePen.Color = clLime
+          LinePen.Width = 2
+          XValues.DateTime = True
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'FECHA'
+          YValues.DateTime = False
+          YValues.Name = 'Y'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'INGRESOS'
+        end
+        object Series3: TPointSeries
+          Marks.ArrowLength = 8
+          Marks.Style = smsValue
+          Marks.Visible = False
+          SeriesColor = clLime
+          ShowInLegend = False
+          Title = 'Ingresos ptos'
+          Pointer.Draw3D = False
+          Pointer.InflateMargins = True
+          Pointer.Style = psRectangle
+          Pointer.Visible = True
+          XValues.DateTime = True
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'FECHA'
+          YValues.DateTime = False
+          YValues.Name = 'Y'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'INGRESOS'
+        end
+      end
+      object DBGridResumen: TDBGrid
+        Left = 0
+        Top = 0
+        Width = 846
+        Height = 121
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_Resumen
+        DefaultDrawing = False
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+      end
     end
   end
   object dxBarABM: TdxBarManager
@@ -756,6 +998,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       Hint = 'Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnImprimir: TdxBarLargeButton
@@ -790,7 +1033,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
     SQL.Strings = (
       
         'select c.fecha, c.id_comprobante, c.id_tipo_cpb, c.id_tipo_movim' +
-        'iento, c.id_sucursal, m.nombre_movimiento,'
+        'iento,'
+      '       c.id_sucursal, m.nombre_movimiento,'
       '        CASE'
       '            WHEN (c.id_tipo_cpb = 16) THEN c.importe_total'
       '            WHEN (c.id_tipo_cpb = 17) THEN 0'
@@ -804,10 +1048,48 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         'left join tipo_movimiento m on (c.id_tipo_movimiento = m.id_tipo' +
         '_movimiento)'
       'where ((c.id_tipo_cpb = 16) or (c.id_tipo_cpb = 17))'
+      
+        '  and (cast (c.fecha as date) between :fecha_desde and :fecha_ha' +
+        'sta)'
+      
+        '  and ((c.fecha_anulado is null) or (c.fecha_anulado > :fecha_ha' +
+        'sta))'
+      '  and ((c.id_sucursal = :id_sucursal) or (:id_sucursal = -1))'
       'order by c.fecha')
-    Params = <>
-    Left = 148
-    Top = 194
+    Params = <
+      item
+        DataType = ftTime
+        Name = 'fecha_desde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftTime
+        Name = 'fecha_hasta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 52
+    Top = 66
+    ParamData = <
+      item
+        DataType = ftTime
+        Name = 'fecha_desde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftTime
+        Name = 'fecha_hasta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
     object ZQ_MovimientosFECHA: TDateTimeField
       FieldName = 'FECHA'
     end
@@ -841,8 +1123,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
   end
   object DS_Movimientos: TDataSource
     DataSet = ZQ_Movimientos
-    Left = 148
-    Top = 242
+    Left = 52
+    Top = 114
   end
   object ZQ_Ingresos: TZQuery
     Connection = DM.Conexion
@@ -857,11 +1139,49 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         'left join tipo_movimiento m on (c.id_tipo_movimiento = m.id_tipo' +
         '_movimiento)'
       'where (c.id_tipo_cpb = 16)'
+      
+        '  and (cast (c.fecha as date) between :fecha_desde and :fecha_ha' +
+        'sta)'
+      
+        '  and ((c.fecha_anulado is null) or (c.fecha_anulado > :fecha_ha' +
+        'sta))'
+      '  and ((c.id_sucursal = :id_sucursal) or (:id_sucursal = -1))'
       'group by c.id_tipo_movimiento, m.nombre_movimiento'
       'order by c.id_tipo_movimiento, m.nombre_movimiento')
-    Params = <>
-    Left = 436
-    Top = 182
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'fecha_desde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fecha_hasta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 162
+    Top = 66
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'fecha_desde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fecha_hasta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
     object ZQ_IngresosID_TIPO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_TIPO_MOVIMIENTO'
     end
@@ -888,11 +1208,49 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         'left join tipo_movimiento m on (c.id_tipo_movimiento = m.id_tipo' +
         '_movimiento)'
       'where (c.id_tipo_cpb = 17)'
+      
+        '  and (cast (c.fecha as date) between :fecha_desde and :fecha_ha' +
+        'sta)'
+      
+        '  and ((c.fecha_anulado is null) or (c.fecha_anulado > :fecha_ha' +
+        'sta))'
+      '  and ((c.id_sucursal = :id_sucursal) or (:id_sucursal = -1))'
       'group by c.id_tipo_movimiento, m.nombre_movimiento'
       'order by c.id_tipo_movimiento, m.nombre_movimiento')
-    Params = <>
-    Left = 692
-    Top = 182
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'fecha_desde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fecha_hasta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 276
+    Top = 66
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'fecha_desde'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fecha_hasta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
     object ZQ_EgresosID_TIPO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_TIPO_MOVIMIENTO'
     end
@@ -908,12 +1266,325 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
   end
   object DS_Ingresos: TDataSource
     DataSet = ZQ_Ingresos
-    Left = 436
-    Top = 234
+    Left = 162
+    Top = 114
   end
   object DS_Egresos: TDataSource
     DataSet = ZQ_Egresos
-    Left = 692
-    Top = 234
+    Left = 276
+    Top = 114
+  end
+  object EKDbSuma_Ingresos: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'sum'
+      end>
+    DataSet = ZQ_Ingresos
+    SumListChanged = EKDbSuma_IngresosSumListChanged
+    Left = 163
+    Top = 167
+  end
+  object EKDbSuma_Egresos: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'sum'
+      end>
+    DataSet = ZQ_Egresos
+    SumListChanged = EKDbSuma_EgresosSumListChanged
+    Left = 277
+    Top = 167
+  end
+  object EKDbSuma_Mov: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'ingresos'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'egresos'
+      end>
+    DataSet = ZQ_Movimientos
+    SumListChanged = EKDbSuma_MovSumListChanged
+    Left = 53
+    Top = 167
+  end
+  object ZS_Resumen: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftDate
+        Name = 'FECHA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'INGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'EGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDODIARIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'MES'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ANIO'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'BALANCE_MENSUAL_DETALLE'
+    Left = 402
+    Top = 66
+    ParamData = <
+      item
+        DataType = ftDate
+        Name = 'FECHA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'INGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'EGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDODIARIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'MES'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ANIO'
+        ParamType = ptInput
+      end>
+    object ZS_ResumenFECHA: TDateField
+      FieldName = 'FECHA'
+    end
+    object ZS_ResumenINGRESO: TFloatField
+      FieldName = 'INGRESO'
+      currency = True
+    end
+    object ZS_ResumenEGRESO: TFloatField
+      FieldName = 'EGRESO'
+      currency = True
+    end
+    object ZS_ResumenSALDO: TFloatField
+      FieldName = 'SALDO'
+      currency = True
+    end
+    object ZS_ResumenSALDODIARIO: TFloatField
+      FieldName = 'SALDODIARIO'
+      currency = True
+    end
+  end
+  object DS_Resumen: TDataSource
+    DataSet = ZS_Resumen
+    Left = 402
+    Top = 114
+  end
+  object EKSuma_Resumen: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'INGRESO'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'EGRESO'
+      end>
+    DataSet = ZS_Resumen
+    Left = 402
+    Top = 167
+  end
+  object EKBuscar_Mov: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Fecha Desde'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
+      end
+      item
+        Titulo = 'Fecha Hasta'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
+      end
+      item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Movimiento'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'INGRESOS'
+          'EGRESOS')
+        TipoComboValoresReales.Strings = (
+          '16'
+          '17')
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    UsarWhereOriginal = EK_Sin_Where
+    PantallaReducida = True
+    Left = 52
+    Top = 216
+  end
+  object EKBuscar_IngEgr: TEKBusquedaAvanzada
+    CriteriosBusqueda = <>
+    CriteriosLocate = <>
+    UsarWhereOriginal = EK_Con_Where
+    Left = 220
+    Top = 216
+  end
+  object EKBuscar_Resumen: TEKBusquedaAvanzada
+    CriteriosBusqueda = <>
+    CriteriosLocate = <>
+    UsarWhereOriginal = EK_Con_Where
+    Left = 404
+    Top = 216
+  end
+  object ZQ_Sucursal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from Sucursal s'
+      'order by s.nombre')
+    Params = <>
+    Left = 52
+    Top = 272
+    object ZQ_SucursalID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_SucursalNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_SucursalDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_SucursalLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_SucursalCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_SucursalTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_SucursalEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_SucursalBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_SucursalLOGO: TBlobField
+      FieldName = 'LOGO'
+    end
+    object ZQ_SucursalREPORTE_TITULO: TStringField
+      FieldName = 'REPORTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalREPORTE_SUBTITULO: TStringField
+      FieldName = 'REPORTE_SUBTITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_TITULO: TStringField
+      FieldName = 'COMPROBANTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField
+      FieldName = 'COMPROBANTE_RENGLON1'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField
+      FieldName = 'COMPROBANTE_RENGLON2'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField
+      FieldName = 'COMPROBANTE_RENGLON3'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField
+      FieldName = 'COMPROBANTE_RENGLON4'
+      Size = 50
+    end
   end
 end
