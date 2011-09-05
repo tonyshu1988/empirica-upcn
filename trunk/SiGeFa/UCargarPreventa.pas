@@ -73,7 +73,7 @@ begin
  if ZQ_Comprobante.IsEmpty then
   begin
     Application.ProcessMessages;
-    btnBuscar.Click;
+    ZQ_Comprobante.Open;
   end;
 end;
 
