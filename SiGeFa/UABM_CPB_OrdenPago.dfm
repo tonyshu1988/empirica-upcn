@@ -1,9 +1,9 @@
-object FABM_CPB_Recibo: TFABM_CPB_Recibo
-  Left = 494
-  Top = 224
+object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
+  Left = 489
+  Top = 273
   Width = 892
   Height = 586
-  Caption = 'ABM Recibos'
+  Caption = 'ABM Orden Pago'
   Color = clBtnFace
   Constraints.MinHeight = 586
   Constraints.MinWidth = 870
@@ -971,7 +971,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             item
               Alignment = taRightJustify
               Expanded = False
-              FieldName = '_CuentaIngreso_Codigo'
+              FieldName = '_CuentaEgreso_Codigo'
               Title.Alignment = taCenter
               Title.Caption = 'C'#243'digo'
               Width = 55
@@ -979,7 +979,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             end
             item
               Expanded = False
-              FieldName = '_CuentaIngreso_Nombre'
+              FieldName = '_CuentaEgreso_Nombre'
               Title.Alignment = taCenter
               Title.Caption = 'Cuenta'
               Width = 205
@@ -1085,6 +1085,14 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               Visible = True
             end
             item
+              Expanded = False
+              FieldName = 'NOMBRE_TIPO_CPB'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo Cpb.'
+              Width = 107
+              Visible = True
+            end
+            item
               Alignment = taCenter
               Expanded = False
               FieldName = 'PUNTO_VENTA'
@@ -1186,7 +1194,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Left = 0
           Top = 0
           Width = 525
-          Height = 271
+          Height = 279
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -1194,7 +1202,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             Left = 0
             Top = 0
             Width = 525
-            Height = 271
+            Height = 279
             Align = alClient
             Color = 14606012
             DataSource = DS_VerCpb_Fpago
@@ -1210,7 +1218,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             Columns = <
               item
                 Expanded = False
-                FieldName = 'CTA_INGRESO_CODIGO'
+                FieldName = 'CTA_EGRESO_CODIGO'
                 Title.Alignment = taCenter
                 Title.Caption = 'C'#243'd. Cta.'
                 Width = 70
@@ -1218,7 +1226,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               end
               item
                 Expanded = False
-                FieldName = 'CTA_INGRESO'
+                FieldName = 'CTA_EGRESO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Cuenta'
                 Width = 170
@@ -1267,9 +1275,9 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 271
+          Top = 279
           Width = 525
-          Height = 207
+          Height = 199
           Align = alBottom
           BevelOuter = bvNone
           BorderWidth = 2
@@ -1278,13 +1286,13 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             Left = 2
             Top = 2
             Width = 521
-            Height = 203
+            Height = 195
             Align = alClient
             Caption = '  Datos Comprobante  '
             TabOrder = 0
             DesignSize = (
               521
-              203)
+              195)
             object lblVerFecha_Ven_Ejec: TLabel
               Left = 381
               Top = 19
@@ -1449,7 +1457,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     ShowHint = False
     TabOrder = 1
     object lblTipoComprobante: TLabel
-      Left = 1
+      Left = 9
       Top = 1
       Width = 874
       Height = 17
@@ -1457,7 +1465,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       Alignment = taCenter
       Anchors = [akLeft, akRight]
       AutoSize = False
-      Caption = 'RECIBO'
+      Caption = 'ORDEN DE PAGO'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clHotLight
       Font.Height = -15
@@ -1981,7 +1989,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
       ImageIndex = 0
-      OnClick = btnNuevoClick
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
@@ -2123,7 +2130,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
   object ImageListEntidad: TImageList
     Height = 48
     Width = 48
-    Left = 707
+    Left = 715
     Top = 370
     Bitmap = {
       494C010102000400040030003000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
@@ -3345,7 +3352,8 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
         '_comp_estado)'
       'where (cpb.id_tipo_cpb = :tipo_comprobante)'
-      'order by cpb.fecha desc')
+      'order by cpb.fecha desc'
+      '')
     Params = <
       item
         DataType = ftUnknown
@@ -3466,16 +3474,104 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       DisplayFormat = '00000000'
     end
   end
+  object ZQ_VerCpb_Fpago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select cpbf.*, tipo.descripcion as nombtr_tipo,'
+      
+        '       egr.codigo as cta_egreso_codigo, egr.nombre_cuenta as cta' +
+        '_egreso,'
+      
+        '       ing.codigo as cta_ingreso_codigo, ing.nombre_cuenta as ct' +
+        'a_ingreso'
+      'from comprobante_forma_pago cpbf'
+      
+        'left join tipo_formapago tipo on (cpbf.id_tipo_formapag = tipo.i' +
+        'd_tipo_formapago)'
+      'left join cuenta egr on (cpbf.cuenta_egreso  = egr.id_cuenta)'
+      'left join cuenta ing on (cpbf.cuenta_ingreso = ing.id_cuenta)'
+      'where cpbf.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 769
+    Top = 196
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_VerCpb_FpagoID_COMPROB_FP: TIntegerField
+      FieldName = 'ID_COMPROB_FP'
+    end
+    object ZQ_VerCpb_FpagoID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_VerCpb_FpagoID_TIPO_FORMAPAG: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAG'
+    end
+    object ZQ_VerCpb_FpagoMDCP_FECHA: TDateField
+      FieldName = 'MDCP_FECHA'
+    end
+    object ZQ_VerCpb_FpagoMDCP_BANCO: TStringField
+      FieldName = 'MDCP_BANCO'
+      Size = 50
+    end
+    object ZQ_VerCpb_FpagoMDCP_CHEQUE: TStringField
+      FieldName = 'MDCP_CHEQUE'
+      Size = 50
+    end
+    object ZQ_VerCpb_FpagoIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+      currency = True
+    end
+    object ZQ_VerCpb_FpagoCONCILIADO: TDateField
+      FieldName = 'CONCILIADO'
+    end
+    object ZQ_VerCpb_FpagoCUENTA_EGRESO: TIntegerField
+      FieldName = 'CUENTA_EGRESO'
+    end
+    object ZQ_VerCpb_FpagoNOMBTR_TIPO: TStringField
+      FieldName = 'NOMBTR_TIPO'
+      Size = 50
+    end
+    object ZQ_VerCpb_FpagoCTA_EGRESO_CODIGO: TStringField
+      FieldName = 'CTA_EGRESO_CODIGO'
+      Size = 10
+    end
+    object ZQ_VerCpb_FpagoCTA_EGRESO: TStringField
+      FieldName = 'CTA_EGRESO'
+      Size = 50
+    end
+    object ZQ_VerCpb_FpagoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_VerCpb_FpagoIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+    end
+  end
   object DS_VerCpb: TDataSource
     DataSet = ZQ_VerCpb
     Left = 34
     Top = 100
   end
+  object DS_VerCpb_Fpago: TDataSource
+    DataSet = ZQ_VerCpb_Fpago
+    Left = 769
+    Top = 244
+  end
   object EKOrd_VerCpb: TEKOrdenarGrilla
-    Grilla = DBGridListaCpb
     Filtros = <
       item
         TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Cpb.'
         Visible = True
       end
       item
@@ -3530,6 +3626,53 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     PermitirFiltrar = True
     Left = 34
     Top = 152
+  end
+  object EKOrd_VerCpb_Fpago: TEKOrdenarGrilla
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Cta.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cta.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Banco'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'm. Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_Cpb_VerFpago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 769
+    Top = 296
   end
   object EKListadoEntidad: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -3979,26 +4122,26 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     object ZQ_CpbFormaPagoCONCILIADO: TDateField
       FieldName = 'CONCILIADO'
     end
-    object ZQ_CpbFormaPagoCUENTA_INGRESO: TIntegerField
-      FieldName = 'CUENTA_INGRESO'
+    object ZQ_CpbFormaPagoCUENTA_EGRESO: TIntegerField
+      FieldName = 'CUENTA_EGRESO'
     end
-    object ZQ_CpbFormaPago_CuentaIngreso_Nombre: TStringField
+    object ZQ_CpbFormaPago_CuentaEgreso_Nombre: TStringField
       FieldKind = fkLookup
-      FieldName = '_CuentaIngreso_Nombre'
+      FieldName = '_CuentaEgreso_Nombre'
       LookupDataSet = ZQ_Cuenta
       LookupKeyFields = 'ID_CUENTA'
       LookupResultField = 'NOMBRE_CUENTA'
-      KeyFields = 'CUENTA_INGRESO'
+      KeyFields = 'CUENTA_EGRESO'
       Size = 50
       Lookup = True
     end
-    object ZQ_CpbFormaPago_CuentaIngreso_Codigo: TStringField
+    object ZQ_CpbFormaPago_CuentaEgreso_Codigo: TStringField
       FieldKind = fkLookup
-      FieldName = '_CuentaIngreso_Codigo'
+      FieldName = '_CuentaEgreso_Codigo'
       LookupDataSet = ZQ_Cuenta
       LookupKeyFields = 'ID_CUENTA'
       LookupResultField = 'CODIGO'
-      KeyFields = 'CUENTA_INGRESO'
+      KeyFields = 'CUENTA_EGRESO'
       Size = 10
       Lookup = True
     end
@@ -4037,7 +4180,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         'po_formapago)'
       'where cta.baja = '#39'N'#39)
     Params = <>
-    Left = 373
+    Left = 365
     Top = 369
     object ZQ_CuentaID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
@@ -4073,7 +4216,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
   end
   object DS_Cuenta: TDataSource
     DataSet = ZQ_Cuenta
-    Left = 373
+    Left = 365
     Top = 417
   end
   object ZQ_TipoFPago: TZQuery
@@ -4253,7 +4396,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     end
   end
   object EKOrd_EditarFpago: TEKOrdenarGrilla
-    Grilla = DBGridEditar_Fpago
     Filtros = <
       item
         TituloColumna = 'C'#243'digo'
@@ -4291,130 +4433,5 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     PermitirFiltrar = False
     Left = 141
     Top = 416
-  end
-  object ZQ_VerCpb_Fpago: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select cpbf.*, tipo.descripcion as nombtr_tipo,'
-      
-        '       egr.codigo as cta_egreso_codigo, egr.nombre_cuenta as cta' +
-        '_egreso,'
-      
-        '       ing.codigo as cta_ingreso_codigo, ing.nombre_cuenta as ct' +
-        'a_ingreso'
-      'from comprobante_forma_pago cpbf'
-      
-        'left join tipo_formapago tipo on (cpbf.id_tipo_formapag = tipo.i' +
-        'd_tipo_formapago)'
-      'left join cuenta egr on (cpbf.cuenta_egreso  = egr.id_cuenta)'
-      'left join cuenta ing on (cpbf.cuenta_ingreso = ing.id_cuenta)'
-      'where cpbf.id_comprobante = :id_comprobante')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_comprobante'
-        ParamType = ptUnknown
-      end>
-    Left = 769
-    Top = 196
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_comprobante'
-        ParamType = ptUnknown
-      end>
-    object ZQ_VerCpb_FpagoID_COMPROB_FP: TIntegerField
-      FieldName = 'ID_COMPROB_FP'
-    end
-    object ZQ_VerCpb_FpagoID_COMPROBANTE: TIntegerField
-      FieldName = 'ID_COMPROBANTE'
-    end
-    object ZQ_VerCpb_FpagoID_TIPO_FORMAPAG: TIntegerField
-      FieldName = 'ID_TIPO_FORMAPAG'
-    end
-    object ZQ_VerCpb_FpagoMDCP_FECHA: TDateField
-      FieldName = 'MDCP_FECHA'
-    end
-    object ZQ_VerCpb_FpagoMDCP_BANCO: TStringField
-      FieldName = 'MDCP_BANCO'
-      Size = 50
-    end
-    object ZQ_VerCpb_FpagoMDCP_CHEQUE: TStringField
-      FieldName = 'MDCP_CHEQUE'
-      Size = 50
-    end
-    object ZQ_VerCpb_FpagoIMPORTE: TFloatField
-      FieldName = 'IMPORTE'
-      currency = True
-    end
-    object ZQ_VerCpb_FpagoCONCILIADO: TDateField
-      FieldName = 'CONCILIADO'
-    end
-    object ZQ_VerCpb_FpagoCUENTA_INGRESO: TIntegerField
-      FieldName = 'CUENTA_INGRESO'
-    end
-    object ZQ_VerCpb_FpagoNOMBTR_TIPO: TStringField
-      FieldName = 'NOMBTR_TIPO'
-      Size = 50
-    end
-    object ZQ_VerCpb_FpagoCTA_INGRESO_CODIGO: TStringField
-      FieldName = 'CTA_INGRESO_CODIGO'
-      Size = 10
-    end
-    object ZQ_VerCpb_FpagoCTA_INGRESO: TStringField
-      FieldName = 'CTA_INGRESO'
-      Size = 50
-    end
-    object ZQ_VerCpb_FpagoFECHA_FP: TDateTimeField
-      FieldName = 'FECHA_FP'
-    end
-    object ZQ_VerCpb_FpagoIMPORTE_REAL: TFloatField
-      FieldName = 'IMPORTE_REAL'
-    end
-  end
-  object DS_VerCpb_Fpago: TDataSource
-    DataSet = ZQ_VerCpb_Fpago
-    Left = 769
-    Top = 244
-  end
-  object EKOrd_VerCpb_Fpago: TEKOrdenarGrilla
-    Grilla = DBGridCpbActual_FPago
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Cta.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuenta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Banco'
-        Visible = True
-      end
-      item
-        TituloColumna = 'N'#250'm. Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Cpb_VerFpago'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 769
-    Top = 296
   end
 end
