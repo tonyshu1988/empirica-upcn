@@ -49,7 +49,8 @@ uses
   UABM_CPB_Recibo in 'UABM_CPB_Recibo.pas' {FABM_CPB_Recibo},
   UABM_CPB_OrdenPago in 'UABM_CPB_OrdenPago.pas' {FABM_CPB_OrdenPago},
   UABM_CPB_Remito in 'UABM_CPB_Remito.pas' {FABM_CPB_Remito},
-  UABM_CPB_Presupuesto in 'UABM_CPB_Presupuesto.pas' {FABM_CPB_Presupuesto};
+  UABM_CPB_Presupuesto in 'UABM_CPB_Presupuesto.pas' {FABM_CPB_Presupuesto},
+  UABM_CPB_NotaPedido in 'UABM_CPB_NotaPedido.pas' {FABM_CPB_NotaPedido};
 
 {$R *.res}
 

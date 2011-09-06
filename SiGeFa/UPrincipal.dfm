@@ -5047,8 +5047,12 @@ object FPrincipal: TFPrincipal
       OnExecute = AABM_CPB_OrdenPagoExecute
     end
     object AABM_CPB_Presupuesto: TAction
-      Caption = 'ABM_Presupuesto'
+      Caption = 'ABM Presupuesto'
       OnExecute = AABM_CPB_PresupuestoExecute
+    end
+    object AABM_CPB_NotaPedido: TAction
+      Caption = 'ABM Nota de Pedido'
+      OnExecute = AABM_CPB_NotaPedidoExecute
     end
   end
   object MainMenuPrincipal: TMainMenu
@@ -5243,6 +5247,9 @@ object FPrincipal: TFPrincipal
       end
       object ABMPresupuesto1: TMenuItem
         Action = AABM_CPB_Presupuesto
+      end
+      object ABMPresupuesto2: TMenuItem
+        Action = AABM_CPB_NotaPedido
       end
     end
   end
