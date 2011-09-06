@@ -8,7 +8,7 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids,
   EKEdit,UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
   XPStyleActnCtrls, ActnMan, EKListadoSQL, EKDbSuma,
-  ZStoredProcedure,UBuscarPersona,UCargarPreventa, Buttons;
+  ZStoredProcedure,UBuscarPersona,UCargarPreventa, Buttons, jpeg;
 
 type
   TFCajero = class(TForm)
@@ -164,7 +164,7 @@ type
     ZQ_FormasPagoID_TIPO_FORMAPAGO: TIntegerField;
     ZQ_FormasPagoDESCRIPCION: TStringField;
     ZQ_FormasPagoBAJA: TStringField;
-    GroupBox1: TGroupBox;
+    grupoDetalle: TGroupBox;
     Label2: TLabel;
     DBEdit1: TDBEdit;
     Label3: TLabel;
@@ -366,6 +366,9 @@ type
     ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField;
     CD_DetalleFacturaIMPORTE_IVA: TFloatField;
     APreventa: TAction;
+    Panel3: TPanel;
+    barcode2: TImage;
+    barcode1: TImage;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -625,6 +628,8 @@ end;
 procedure TFCajero.codBarrasEnter(Sender: TObject);
 begin
   LeerCodBar.Visible := true;
+  barcode1.Visible:=true;
+  barcode2.Visible:=true;
   codBarras.Text := '';
   LimpiarCodigo;
 end;
@@ -648,6 +653,8 @@ end;
 procedure TFCajero.codBarrasExit(Sender: TObject);
 begin
   LeerCodBar.Visible := false;
+  barcode2.Visible:=false;
+  barcode1.Visible:=false;
 end;
 
 procedure TFCajero.codBarrasKeyDown(Sender: TObject; var Key: Word;
