@@ -1,8 +1,8 @@
 object FCajero: TFCajero
-  Left = 348
-  Top = 125
-  Width = 1127
-  Height = 661
+  Left = 156
+  Top = 38
+  Width = 1060
+  Height = 774
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,22 +22,22 @@ object FCajero: TFCajero
   object PanelContenedor: TPanel
     Left = 88
     Top = 0
-    Width = 1023
-    Height = 571
+    Width = 956
+    Height = 684
     Align = alClient
     TabOrder = 0
     object PanelDetalleProducto: TPanel
       Left = 1
       Top = 31
-      Width = 322
-      Height = 539
+      Width = 307
+      Height = 652
       Align = alLeft
       BevelInner = bvSpace
       TabOrder = 0
-      object GroupBox1: TGroupBox
+      object grupoDetalle: TGroupBox
         Left = 2
-        Top = 281
-        Width = 318
+        Top = 394
+        Width = 303
         Height = 256
         Align = alBottom
         Caption = ' Detalle del Producto seleccionado '
@@ -113,7 +113,7 @@ object FCajero: TFCajero
           ParentFont = False
         end
         object Label7: TLabel
-          Left = 214
+          Left = 197
           Top = 55
           Width = 83
           Height = 13
@@ -127,7 +127,7 @@ object FCajero: TFCajero
           ParentFont = False
         end
         object Label8: TLabel
-          Left = 214
+          Left = 197
           Top = 90
           Width = 97
           Height = 13
@@ -141,7 +141,7 @@ object FCajero: TFCajero
           ParentFont = False
         end
         object Label26: TLabel
-          Left = 214
+          Left = 197
           Top = 126
           Width = 81
           Height = 13
@@ -185,7 +185,7 @@ object FCajero: TFCajero
         object DBEdit2: TDBEdit
           Left = 5
           Top = 177
-          Width = 309
+          Width = 293
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -224,7 +224,7 @@ object FCajero: TFCajero
         object DBEdit5: TDBEdit
           Left = 5
           Top = 31
-          Width = 309
+          Width = 293
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -235,7 +235,7 @@ object FCajero: TFCajero
           TabOrder = 0
         end
         object DBEdit6: TDBEdit
-          Left = 214
+          Left = 197
           Top = 68
           Width = 100
           Height = 21
@@ -248,7 +248,7 @@ object FCajero: TFCajero
           TabOrder = 2
         end
         object DBEdit7: TDBEdit
-          Left = 214
+          Left = 197
           Top = 104
           Width = 100
           Height = 21
@@ -267,7 +267,7 @@ object FCajero: TFCajero
           TabOrder = 4
         end
         object DBEdit8: TDBEdit
-          Left = 214
+          Left = 197
           Top = 140
           Width = 100
           Height = 21
@@ -288,7 +288,7 @@ object FCajero: TFCajero
         object DBMemo1: TDBMemo
           Left = 5
           Top = 216
-          Width = 309
+          Width = 293
           Height = 33
           Color = 16767959
           DataField = 'DESCRIPCION'
@@ -298,8 +298,8 @@ object FCajero: TFCajero
       end
       object Panel1: TPanel
         Left = 2
-        Top = 155
-        Width = 318
+        Top = 135
+        Width = 303
         Height = 174
         Align = alTop
         BevelOuter = bvNone
@@ -308,7 +308,7 @@ object FCajero: TFCajero
         object edImagen: TDBImage
           Left = 0
           Top = 0
-          Width = 318
+          Width = 303
           Height = 174
           Align = alClient
           Color = 14737632
@@ -321,7 +321,7 @@ object FCajero: TFCajero
         object DBImage1: TDBImage
           Left = 0
           Top = 0
-          Width = 318
+          Width = 303
           Height = 174
           Align = alClient
           Color = 14737632
@@ -334,15 +334,15 @@ object FCajero: TFCajero
       object Panel2: TPanel
         Left = 2
         Top = 2
-        Width = 318
-        Height = 153
+        Width = 303
+        Height = 133
         Align = alTop
         BevelOuter = bvNone
         ParentShowHint = False
         ShowHint = True
         TabOrder = 2
         object Label1: TLabel
-          Left = 7
+          Left = 3
           Top = 65
           Width = 58
           Height = 16
@@ -354,25 +354,8 @@ object FCajero: TFCajero
           Font.Style = []
           ParentFont = False
         end
-        object LeerCodBar: TLabel
-          Left = 69
-          Top = 10
-          Width = 181
-          Height = 16
-          Caption = 'LEER CODIGO DE BARRAS'
-          Color = 16729670
-          Font.Charset = ANSI_CHARSET
-          Font.Color = 16729670
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = True
-          Visible = False
-        end
         object Label22: TLabel
-          Left = 205
+          Left = 209
           Top = 65
           Width = 86
           Height = 16
@@ -385,7 +368,7 @@ object FCajero: TFCajero
           ParentFont = False
         end
         object Label23: TLabel
-          Left = 95
+          Left = 78
           Top = 65
           Width = 70
           Height = 16
@@ -398,8 +381,8 @@ object FCajero: TFCajero
           ParentFont = False
         end
         object Label24: TLabel
-          Left = 153
-          Top = 86
+          Left = 136
+          Top = 85
           Width = 17
           Height = 16
           Caption = '%'
@@ -411,8 +394,8 @@ object FCajero: TFCajero
           ParentFont = False
         end
         object Label25: TLabel
-          Left = 193
-          Top = 86
+          Left = 197
+          Top = 85
           Width = 9
           Height = 16
           Caption = '$'
@@ -424,8 +407,8 @@ object FCajero: TFCajero
           ParentFont = False
         end
         object lblSinStock: TLabel
-          Left = 47
-          Top = 111
+          Left = 40
+          Top = 109
           Width = 223
           Height = 20
           Caption = 'STOCK NO DISPONIBLE'
@@ -438,33 +421,46 @@ object FCajero: TFCajero
           Transparent = True
           Visible = False
         end
-        object codBarras: TEdit
-          Left = 7
-          Top = 32
-          Width = 304
-          Height = 21
-          Hint = 'Opciones de B'#250'squeda: '#39'I'#39'+IdProd // C+C'#243'dProd // C'#243'dBarrasProd'
+        object edCantidad: TEKEdit
+          Left = 3
+          Top = 81
+          Width = 57
+          Height = 24
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 16119285
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
           TabOrder = 0
-          OnEnter = codBarrasEnter
-          OnExit = codBarrasExit
-          OnKeyDown = codBarrasKeyDown
+          OnExit = edCantidadExit
+          DataType = ftInteger
         end
-        object edCantidad: TEKEdit
-          Tag = 99
-          Left = 7
-          Top = 82
-          Width = 57
+        object edImporte: TEKEdit
+          Left = 209
+          Top = 81
+          Width = 90
+          Height = 24
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 16119285
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+          OnExit = edImporteExit
+          DataType = ftFloat
+        end
+        object edDesc: TEKEdit
+          Left = 78
+          Top = 81
+          Width = 54
           Height = 24
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -477,60 +473,165 @@ object FCajero: TFCajero
           ParentFont = False
           TabOrder = 1
           OnExit = edCantidadExit
-          DataType = ftInteger
+          DataType = ftFloat
         end
-        object edImporte: TEKEdit
-          Tag = 99
-          Left = 205
-          Top = 82
-          Width = 90
-          Height = 24
-          BevelInner = bvNone
+        object Panel3: TPanel
+          Left = 0
+          Top = 0
+          Width = 303
+          Height = 65
+          Align = alTop
           BevelOuter = bvNone
-          Color = 16119285
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
           TabOrder = 3
-          OnExit = edImporteExit
-          DataType = ftFloat
-        end
-        object edDesc: TEKEdit
-          Tag = 99
-          Left = 95
-          Top = 82
-          Width = 54
-          Height = 24
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 16119285
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-          OnExit = edCantidadExit
-          DataType = ftFloat
+          object LeerCodBar: TLabel
+            Left = 56
+            Top = 13
+            Width = 192
+            Height = 16
+            Alignment = taCenter
+            Caption = 'LEER CODIGO BARRAS [F6]'
+            Color = clNavy
+            Font.Charset = ANSI_CHARSET
+            Font.Color = 16729670
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = True
+            Layout = tlCenter
+            Visible = False
+          end
+          object barcode2: TImage
+            Left = 272
+            Top = 5
+            Width = 32
+            Height = 32
+            AutoSize = True
+            Center = True
+            Picture.Data = {
+              0A544A504547496D61676557040000FFD8FFE000104A46494600010101006000
+              600000FFDB0043000503040404030504040405050506070C08070707070F0B0B
+              090C110F1212110F111113161C1713141A1511111821181A1D1D1F1F1F131722
+              24221E241C1E1F1EFFDB0043010505050706070E08080E1E1411141E1E1E1E1E
+              1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E
+              1E1E1E1E1E1E1E1E1E1E1E1E1EFFC00011080020002003012200021101031101
+              FFC4001F0000010501010101010100000000000000000102030405060708090A
+              0BFFC400B5100002010303020403050504040000017D01020300041105122131
+              410613516107227114328191A1082342B1C11552D1F02433627282090A161718
+              191A25262728292A3435363738393A434445464748494A535455565758595A63
+              6465666768696A737475767778797A838485868788898A92939495969798999A
+              A2A3A4A5A6A7A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6
+              D7D8D9DAE1E2E3E4E5E6E7E8E9EAF1F2F3F4F5F6F7F8F9FAFFC4001F01000301
+              01010101010101010000000000000102030405060708090A0BFFC400B5110002
+              0102040403040705040400010277000102031104052131061241510761711322
+              328108144291A1B1C109233352F0156272D10A162434E125F11718191A262728
+              292A35363738393A434445464748494A535455565758595A636465666768696A
+              737475767778797A82838485868788898A92939495969798999AA2A3A4A5A6A7
+              A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6D7D8D9DAE2E3
+              E4E5E6E7E8E9EAF2F3F4F5F6F7F8F9FAFFDA000C03010002110311003F00D9D3
+              FC59E2A6F037C3EB86F12EB4D35DFC40F0BDA5CC86FA5DD3413689652CB139DD
+              964791DDD94F0CCC4904926BACFD967C43AFEB3F187E36D8EAFAE6A7A8DA69BE
+              2010D8417576F2C76A9F68BC1B22562422E114617030A3D0579CE9BFF24FBE1A
+              FF00D949F08FFE982C2BB3FD907FE4B7FC7DFF00B1907FE94DF50069FEC59E21
+              D7F5FF000BC536BDAE6A7AACA7C3F69317BDBB799B79D4F5842F9727E629144A
+              4F5C4683A28C727FF09678ABFE865D6BFE4DFF00FB5BFE3FA5FF008FEFF9FAFB
+              DFEBBFE9A7DEF7AD9FD83BFE45187FEC5BB3FF00D3B6B75C67FF00436D001A6F
+              FC93EF86BFF6527C23FF00A60B0AECFF00641FF92DFF001F7FEC641FFA537D59
+              9E0AFF0084DF4FD05741BAF036A7786CEC7C3D71A746FE198DA4B5B85B6D2EDA
+              5B88A69A348D6EE3596E76B4AF2ED36FF388238089F6BE1D49F1174A5D6F517F
+              0D4DA75DEB363A6DCDF5DDB786E286E378834E7D4273B2152F70A6F2FA444717
+              06492375544F25A39C020FD83BFE45187FEC5BB3FF00D3B6B75C67FF00436D7A
+              6DF2F8B3C2F65AB45F0FF45BDB6F27449574D8E0F0D456EB2D9A69D2DC4374C1
+              604C5E9D4A578FECBF2E16476FB30DC64AE7FC41A778A2EA1D72CA5D07538226
+              F8777FA6E8DF62F0D2A3DEA07BF5B782664B326166B74B494C025B70B2B2A887
+              2E51003FFFD9}
+            Proportional = True
+          end
+          object barcode1: TImage
+            Left = 2
+            Top = 5
+            Width = 32
+            Height = 32
+            AutoSize = True
+            Center = True
+            Picture.Data = {
+              0A544A504547496D61676557040000FFD8FFE000104A46494600010101006000
+              600000FFDB0043000503040404030504040405050506070C08070707070F0B0B
+              090C110F1212110F111113161C1713141A1511111821181A1D1D1F1F1F131722
+              24221E241C1E1F1EFFDB0043010505050706070E08080E1E1411141E1E1E1E1E
+              1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E1E
+              1E1E1E1E1E1E1E1E1E1E1E1E1EFFC00011080020002003012200021101031101
+              FFC4001F0000010501010101010100000000000000000102030405060708090A
+              0BFFC400B5100002010303020403050504040000017D01020300041105122131
+              410613516107227114328191A1082342B1C11552D1F02433627282090A161718
+              191A25262728292A3435363738393A434445464748494A535455565758595A63
+              6465666768696A737475767778797A838485868788898A92939495969798999A
+              A2A3A4A5A6A7A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6
+              D7D8D9DAE1E2E3E4E5E6E7E8E9EAF1F2F3F4F5F6F7F8F9FAFFC4001F01000301
+              01010101010101010000000000000102030405060708090A0BFFC400B5110002
+              0102040403040705040400010277000102031104052131061241510761711322
+              328108144291A1B1C109233352F0156272D10A162434E125F11718191A262728
+              292A35363738393A434445464748494A535455565758595A636465666768696A
+              737475767778797A82838485868788898A92939495969798999AA2A3A4A5A6A7
+              A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6D7D8D9DAE2E3
+              E4E5E6E7E8E9EAF2F3F4F5F6F7F8F9FAFFDA000C03010002110311003F00D9D3
+              FC59E2A6F037C3EB86F12EB4D35DFC40F0BDA5CC86FA5DD3413689652CB139DD
+              964791DDD94F0CCC4904926BACFD967C43AFEB3F187E36D8EAFAE6A7A8DA69BE
+              2010D8417576F2C76A9F68BC1B22562422E114617030A3D0579CE9BFF24FBE1A
+              FF00D949F08FFE982C2BB3FD907FE4B7FC7DFF00B1907FE94DF50069FEC59E21
+              D7F5FF000BC536BDAE6A7AACA7C3F69317BDBB799B79D4F5842F9727E629144A
+              4F5C4683A28C727FF09678ABFE865D6BFE4DFF00FB5BFE3FA5FF008FEFF9FAFB
+              DFEBBFE9A7DEF7AD9FD83BFE45187FEC5BB3FF00D3B6B75C67FF00436D001A6F
+              FC93EF86BFF6527C23FF00A60B0AECFF00641FF92DFF001F7FEC641FFA537D59
+              9E0AFF0084DF4FD05741BAF036A7786CEC7C3D71A746FE198DA4B5B85B6D2EDA
+              5B88A69A348D6EE3596E76B4AF2ED36FF388238089F6BE1D49F1174A5D6F517F
+              0D4DA75DEB363A6DCDF5DDB786E286E378834E7D4273B2152F70A6F2FA444717
+              06492375544F25A39C020FD83BFE45187FEC5BB3FF00D3B6B75C67FF00436D7A
+              6DF2F8B3C2F65AB45F0FF45BDB6F27449574D8E0F0D456EB2D9A69D2DC4374C1
+              604C5E9D4A578FECBF2E16476FB30DC64AE7FC41A778A2EA1D72CA5D07538226
+              F8777FA6E8DF62F0D2A3DEA07BF5B782664B326166B74B494C025B70B2B2A887
+              2E51003FFFD9}
+            Proportional = True
+          end
+          object codBarras: TEdit
+            Left = 2
+            Top = 41
+            Width = 298
+            Height = 21
+            Hint = 'Opciones de B'#250'squeda: '#39'I'#39'+IdProd // C+C'#243'dProd // C'#243'dBarrasProd'
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            CharCase = ecUpperCase
+            Color = 16119285
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnEnter = codBarrasEnter
+            OnExit = codBarrasExit
+            OnKeyDown = codBarrasKeyDown
+          end
         end
       end
     end
     object PanelContenedorDerecha: TPanel
-      Left = 323
+      Left = 308
       Top = 31
-      Width = 699
-      Height = 539
+      Width = 647
+      Height = 652
       Align = alClient
       Caption = 'PanelContenedorDerecha'
       TabOrder = 1
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 320
-        Width = 697
+        Top = 433
+        Width = 645
         Height = 218
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -538,7 +639,7 @@ object FCajero: TFCajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 695
+          Width = 643
           Height = 140
           Align = alClient
           Color = 16762303
@@ -616,20 +717,20 @@ object FCajero: TFCajero
         object PieGrillaFormaPago: TPanel
           Left = 1
           Top = 141
-          Width = 695
+          Width = 643
           Height = 76
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 1
           DesignSize = (
-            695
+            643
             76)
           object lblMaxVenta: TLabel
-            Left = 137
-            Top = 5
-            Width = 289
+            Left = 144
+            Top = 7
+            Width = 267
             Height = 20
-            Caption = 'M'#193'XIMO DE VENTA EXCEDIDO'
+            Caption = 'MONTO M'#193'XIMO SUPERADO'
             Font.Charset = ANSI_CHARSET
             Font.Color = clRed
             Font.Height = -17
@@ -641,8 +742,8 @@ object FCajero: TFCajero
             Visible = False
           end
           object Label15: TLabel
-            Left = 485
-            Top = 6
+            Left = 433
+            Top = 9
             Width = 81
             Height = 16
             Anchors = [akTop, akRight]
@@ -657,13 +758,13 @@ object FCajero: TFCajero
           object lblTotAPagar: TLabel
             Left = 1
             Top = 32
-            Width = 693
+            Width = 641
             Height = 43
             Align = alBottom
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Total a Pagar: $ 0.00 '
-            Color = clNavy
+            Color = 12648448
             Font.Charset = ANSI_CHARSET
             Font.Color = clWhite
             Font.Height = -21
@@ -684,8 +785,8 @@ object FCajero: TFCajero
             OnClick = btnBorrarPagoClick
           end
           object ImporteFPago: TEdit
-            Left = 568
-            Top = 5
+            Left = 516
+            Top = 8
             Width = 129
             Height = 19
             Anchors = [akTop, akRight]
@@ -709,8 +810,8 @@ object FCajero: TFCajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 123
-        Width = 697
-        Height = 197
+        Width = 645
+        Height = 310
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 1
@@ -724,8 +825,8 @@ object FCajero: TFCajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 695
-          Height = 141
+          Width = 643
+          Height = 254
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -796,25 +897,25 @@ object FCajero: TFCajero
         end
         object PieGrilla: TPanel
           Left = 1
-          Top = 142
-          Width = 695
+          Top = 255
+          Width = 643
           Height = 54
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 1
           DesignSize = (
-            695
+            643
             54)
           object Label10: TLabel
             Left = 1
-            Top = 38
-            Width = 693
-            Height = 15
+            Top = 37
+            Width = 641
+            Height = 16
             Align = alBottom
             Alignment = taCenter
             AutoSize = False
             Caption = 'Formas de Pago  [F7]'
-            Color = 16729670
+            Color = 12648448
             Font.Charset = ANSI_CHARSET
             Font.Color = clWhite
             Font.Height = -12
@@ -827,16 +928,16 @@ object FCajero: TFCajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 22
-            Width = 693
-            Height = 16
+            Width = 641
+            Height = 15
             Align = alBottom
             Alignment = taRightJustify
             AutoSize = False
             Layout = tlCenter
           end
           object Label19: TLabel
-            Left = 437
-            Top = 5
+            Left = 385
+            Top = 6
             Width = 118
             Height = 16
             Anchors = [akTop, akRight]
@@ -850,7 +951,7 @@ object FCajero: TFCajero
           end
           object btQuitarProducto: TButton
             Left = 4
-            Top = 5
+            Top = 4
             Width = 108
             Height = 20
             Caption = 'Quitar Producto'
@@ -858,8 +959,8 @@ object FCajero: TFCajero
             OnClick = btQuitarProductoClick
           end
           object Importe: TEdit
-            Left = 560
-            Top = 4
+            Left = 508
+            Top = 5
             Width = 137
             Height = 19
             Anchors = [akTop, akRight]
@@ -883,20 +984,20 @@ object FCajero: TFCajero
       object PanelCabeceraFactura: TPanel
         Left = 1
         Top = 1
-        Width = 697
+        Width = 645
         Height = 122
         Align = alTop
         BevelOuter = bvLowered
         TabOrder = 2
         object Label11: TLabel
           Left = 1
-          Top = 107
-          Width = 695
-          Height = 14
+          Top = 105
+          Width = 643
+          Height = 16
           Align = alBottom
           Alignment = taCenter
           Caption = 'Listado de Productos a Cobrar  [F6]'
-          Color = 16729670
+          Color = 12648448
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -12
@@ -910,12 +1011,12 @@ object FCajero: TFCajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 695
-          Height = 14
+          Width = 643
+          Height = 16
           Align = alTop
           Alignment = taCenter
           Caption = 'Detalles Cliente  [F3]'
-          Color = 16729670
+          Color = 12648448
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -12
@@ -1116,7 +1217,7 @@ object FCajero: TFCajero
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 1021
+      Width = 954
       Height = 30
       Align = alTop
       TabOrder = 2
@@ -1139,7 +1240,7 @@ object FCajero: TFCajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 642
+        Left = 575
         Top = 1
         Width = 378
         Height = 28
