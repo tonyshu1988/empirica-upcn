@@ -115,6 +115,15 @@ type
     colorResaltadoFocus: TPanel;
     AEstad_Stock: TAction;
     EstadisticaStock1: TMenuItem;
+    Comprobantes1: TMenuItem;
+    AABM_CPB_Recibo: TAction;
+    AABM_CPB_Remito: TAction;
+    AABM_CPB_OrdenPago: TAction;
+    ABMRecibo1: TMenuItem;
+    ABMOrdendePago1: TMenuItem;
+    ABMRemito1: TMenuItem;
+    AABM_CPB_Presupuesto: TAction;
+    ABMPresupuesto1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -154,6 +163,10 @@ type
     procedure AEstad_DisponibExecute(Sender: TObject);
     procedure AArqueo_CajaExecute(Sender: TObject);
     procedure AEstad_StockExecute(Sender: TObject);
+    procedure AABM_CPB_ReciboExecute(Sender: TObject);
+    procedure AABM_CPB_RemitoExecute(Sender: TObject);
+    procedure AABM_CPB_OrdenPagoExecute(Sender: TObject);
+    procedure AABM_CPB_PresupuestoExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -184,7 +197,9 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_Cuentas, UABM_TipoComprobante, UABM_Precios, UABM_Comprobantes,
   UCajero, UMovimientosInternos, UABM_TipoMovimiento, UTransferirStock,
   UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion,
-  UEstadisticaDisponibilidades, UArqueo_Caja, Types, UEstadisticaStock;
+  UEstadisticaDisponibilidades, UArqueo_Caja, Types, UEstadisticaStock,
+  UABM_CPB_Recibo, UABM_CPB_OrdenPago, UABM_CPB_Remito,
+  UABM_CPB_Presupuesto;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -550,6 +565,26 @@ end;
 procedure TFPrincipal.AEstad_StockExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFEstadisticaStock, FEstadisticaStock);
+end;
+
+procedure TFPrincipal.AABM_CPB_ReciboExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABM_CPB_Recibo, FABM_CPB_Recibo);
+end;
+
+procedure TFPrincipal.AABM_CPB_RemitoExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABM_CPB_Remito, FABM_CPB_Remito);
+end;
+
+procedure TFPrincipal.AABM_CPB_OrdenPagoExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABM_CPB_OrdenPago, FABM_CPB_OrdenPago);
+end;
+
+procedure TFPrincipal.AABM_CPB_PresupuestoExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABM_CPB_Presupuesto, FABM_CPB_Presupuesto);
 end;
 
 end.
