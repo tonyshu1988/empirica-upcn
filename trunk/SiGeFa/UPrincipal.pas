@@ -124,6 +124,8 @@ type
     ABMRemito1: TMenuItem;
     AABM_CPB_Presupuesto: TAction;
     ABMPresupuesto1: TMenuItem;
+    AABM_CPB_NotaPedido: TAction;
+    ABMPresupuesto2: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -167,6 +169,7 @@ type
     procedure AABM_CPB_RemitoExecute(Sender: TObject);
     procedure AABM_CPB_OrdenPagoExecute(Sender: TObject);
     procedure AABM_CPB_PresupuestoExecute(Sender: TObject);
+    procedure AABM_CPB_NotaPedidoExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -199,7 +202,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion,
   UEstadisticaDisponibilidades, UArqueo_Caja, Types, UEstadisticaStock,
   UABM_CPB_Recibo, UABM_CPB_OrdenPago, UABM_CPB_Remito,
-  UABM_CPB_Presupuesto;
+  UABM_CPB_Presupuesto, UABM_CPB_NotaPedido;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -585,6 +588,11 @@ end;
 procedure TFPrincipal.AABM_CPB_PresupuestoExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_Presupuesto, FABM_CPB_Presupuesto);
+end;
+
+procedure TFPrincipal.AABM_CPB_NotaPedidoExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABM_CPB_NotaPedido, FABM_CPB_NotaPedido);
 end;
 
 end.
