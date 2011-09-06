@@ -1,4 +1,4 @@
-unit UABM_CPB_Recibo;
+unit UABM_CPB_Remito;
 
 interface
 
@@ -12,7 +12,7 @@ uses
   EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona;
 
 type
-  TFABM_CPB_Recibo = class(TForm)
+  TFABM_CPB_Remito = class(TForm)
     PanelFondo: TPanel;
     PanelVer: TPanel;
     dxBarABM: TdxBarManager;
@@ -44,17 +44,19 @@ type
     PanelListaCpb: TPanel;
     PanelCpbActual: TPanel;
     Splitter1: TSplitter;
-    PanelCpbActual_FPago: TPanel;
+    PanelCpbActual_Producto: TPanel;
     PanelCpbActual_Info: TPanel;
     PanelEditar_DatosGral: TPanel;
-    PanelEditar_FPago: TPanel;
-    PanelEditar_FPagoInfo: TPanel;
-    DBGridEditar_Fpago: TDBGrid;
-    btnEliminarFPago: TButton;
+    PanelEditar_Producto: TPanel;
+    PanelEditar_ProductoInfo: TPanel;
+    DBGridEditar_Producto: TDBGrid;
+    btnEliminarProducto: TButton;
     btnBuscarEmpresa: TSpeedButton;
     ImageListEntidad: TImageList;
     ZQ_VerCpb: TZQuery;
+    ZQ_VerCpb_Producto: TZQuery;
     DS_VerCpb: TDataSource;
+    DS_VerCpb_Producto: TDataSource;
     ZQ_VerCpbID_COMPROBANTE: TIntegerField;
     ZQ_VerCpbID_SUCURSAL: TIntegerField;
     ZQ_VerCpbID_PROVEEDOR: TIntegerField;
@@ -81,9 +83,32 @@ type
     ZQ_VerCpbNOMBRE_TIPO_CPB: TStringField;
     ZQ_VerCpbESTADO: TStringField;
     DBGridListaCpb: TDBGrid;
-    DBGridCpbActual_FPago: TDBGrid;
+    DBGridCpbActual_Producto: TDBGrid;
+    ZQ_VerCpb_ProductoID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_VerCpb_ProductoID_COMPROBANTE: TIntegerField;
+    ZQ_VerCpb_ProductoID_PRODUCTO: TIntegerField;
+    ZQ_VerCpb_ProductoDETALLE: TStringField;
+    ZQ_VerCpb_ProductoCANTIDAD: TFloatField;
+    ZQ_VerCpb_ProductoIMPORTE_FINAL: TFloatField;
+    ZQ_VerCpb_ProductoPORC_DESCUENTO: TFloatField;
+    ZQ_VerCpb_ProductoBASE_IMPONIBLE: TFloatField;
+    ZQ_VerCpb_ProductoIMPORTE_UNITARIO: TFloatField;
+    ZQ_VerCpb_ProductoPORC_IVA: TFloatField;
+    ZQ_VerCpb_ProductoCOD_CABECERA: TStringField;
+    ZQ_VerCpb_ProductoPRODUCTO: TStringField;
+    ZQ_VerCpb_ProductoIMAGEN: TBlobField;
+    ZQ_VerCpb_ProductoMEDIDA: TStringField;
+    ZQ_VerCpb_ProductoCOLOR: TStringField;
+    ZQ_VerCpb_ProductoMARCA: TStringField;
+    ZQ_VerCpb_ProductoARTICULO: TStringField;
+    ZQ_VerCpb_ProductoTIPO_ARTICULO: TStringField;
+    ZQ_VerCpb_ProductoCOD_PRODUCTO: TStringField;
     EKOrd_VerCpb: TEKOrdenarGrilla;
+    EKOrd_VerCpb_Producto: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
+    PanelCpbActual_ProductoDetalle: TPanel;
+    GroupBox2: TGroupBox;
+    DBMemoCpbActual_Producto: TDBMemo;
     lblVerFecha_Ven_Ejec: TLabel;
     lblVerFecha_Cpb_Dev: TLabel;
     Label28: TLabel;
@@ -228,48 +253,15 @@ type
     ZQ_NumeroCpb: TZQuery;
     ZQ_NumeroCpbULTIMO_NUMERO: TIntegerField;
     ZQ_VerCpbFECHA_ANULADO: TDateField;
-    ZQ_CpbFormaPago: TZQuery;
-    DS_CpbFormaPago: TDataSource;
-    ZQ_CpbFormaPagoID_COMPROB_FP: TIntegerField;
-    ZQ_CpbFormaPagoID_COMPROBANTE: TIntegerField;
-    ZQ_CpbFormaPagoID_TIPO_FORMAPAG: TIntegerField;
-    ZQ_CpbFormaPagoMDCP_FECHA: TDateField;
-    ZQ_CpbFormaPagoMDCP_BANCO: TStringField;
-    ZQ_CpbFormaPagoMDCP_CHEQUE: TStringField;
-    ZQ_CpbFormaPagoIMPORTE: TFloatField;
-    ZQ_CpbFormaPagoCONCILIADO: TDateField;
-    ZQ_CpbFormaPagoCUENTA_INGRESO: TIntegerField;
-    ZQ_Cuenta: TZQuery;
-    DS_Cuenta: TDataSource;
-    ZQ_CuentaID_CUENTA: TIntegerField;
-    ZQ_CuentaMEDIO_DEFECTO: TIntegerField;
-    ZQ_CuentaCODIGO: TStringField;
-    ZQ_CuentaNOMBRE_CUENTA: TStringField;
-    ZQ_CuentaNRO_CTA_BANCARIA: TStringField;
-    ZQ_CuentaBAJA: TStringField;
-    ZQ_CuentaDESCRIPCION: TStringField;
-    ZQ_CuentaBUSQUEDA: TStringField;
-    ZQ_CpbFormaPago_CuentaIngreso_Nombre: TStringField;
-    ZQ_CpbFormaPago_CuentaIngreso_Codigo: TStringField;
-    ZQ_TipoFPago: TZQuery;
-    DS_TipoFPago: TDataSource;
-    ZQ_TipoFPagoID_TIPO_FORMAPAGO: TIntegerField;
-    ZQ_TipoFPagoDESCRIPCION: TStringField;
-    ZQ_TipoFPagoBAJA: TStringField;
-    ZQ_CpbFormaPago_TipoFormaPago: TStringField;
-    EKListadoCuenta: TEKListadoSQL;
-    ZQ_ListadoCuenta: TZQuery;
-    ZQ_ListadoCuentaID_CUENTA: TIntegerField;
-    ZQ_ListadoCuentaMEDIO_DEFECTO: TIntegerField;
-    ZQ_ListadoCuentaCODIGO: TStringField;
-    ZQ_ListadoCuentaNOMBRE_CUENTA: TStringField;
-    ZQ_ListadoCuentaNRO_CTA_BANCARIA: TStringField;
-    ZQ_ListadoCuentaBAJA: TStringField;
-    EKListadoMedio: TEKListadoSQL;
-    ZQ_ListadoMedio: TZQuery;
-    ZQ_ListadoMedioID_TIPO_FORMAPAGO: TIntegerField;
-    ZQ_ListadoMedioDESCRIPCION: TStringField;
-    ZQ_ListadoMedioBAJA: TStringField;
+    ZQ_CpbProducto: TZQuery;
+    DS_CpbProducto: TDataSource;
+    ZQ_CpbProductoID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_CpbProductoID_COMPROBANTE: TIntegerField;
+    ZQ_CpbProductoID_PRODUCTO: TIntegerField;
+    ZQ_CpbProductoDETALLE: TStringField;
+    ZQ_CpbProductoCANTIDAD: TFloatField;
+    ZQ_CpbProductoIMPORTE_FINAL: TFloatField;
+    ZQ_CpbProductoIMPORTE_UNITARIO: TFloatField;
     ZP_CpbID: TZStoredProc;
     ZP_CpbIDID: TIntegerField;
     ZQ_NumeroCpbID_TIPO_CPB: TIntegerField;
@@ -278,8 +270,57 @@ type
     ZQ_NumeroCpbSIGNO_STOCK: TIntegerField;
     ZQ_NumeroCpbSIGNO_CTA_CTE: TIntegerField;
     ZQ_NumeroCpbBAJA: TStringField;
-    lblTotalFormaPago: TLabel;
-    EKSuma_FPago: TEKDbSuma;
+    Panel1: TPanel;
+    edImagen: TDBImage;
+    DS_Producto: TDataSource;
+    CD_Producto: TClientDataSet;
+    CD_Producto_idProducto: TIntegerField;
+    CD_Producto_producto: TStringField;
+    CD_Producto_medida: TStringField;
+    CD_Producto_marca: TStringField;
+    CD_Producto_tipoArticulo: TStringField;
+    CD_Producto_articulo: TStringField;
+    CD_Producto_codigoBarra: TStringField;
+    CD_Producto_codProducto: TStringField;
+    CD_Producto_codCabecera: TStringField;
+    Popup_Producto: TPopupMenu;
+    PopItemProducto_Agregar: TMenuItem;
+    PopItemProducto_Quitar: TMenuItem;
+    CD_Producto_precioVenta: TFloatField;
+    ZQ_CpbProducto_Nombre: TStringField;
+    ZQ_CpbProducto_Medida: TStringField;
+    ZQ_CpbProducto_Color: TStringField;
+    ZQ_CpbProducto_CodBarra: TStringField;
+    CD_Producto_color: TStringField;
+    Panel2: TPanel;
+    DBImage1: TDBImage;
+    ZQ_VerCpb_ProductoCODIGO_BARRA: TStringField;
+    ZQ_VerCpb_ProductoPRECIO_COSTO: TFloatField;
+    ZQ_VerCpb_ProductoPRECIO_VENTA: TFloatField;
+    ZQ_VerCpb_ProductoCOEF_GANANCIA: TFloatField;
+    ZQ_VerCpb_ProductoCOEF_DESCUENTO: TFloatField;
+    ZQ_VerCpb_ProductoIMPUESTO_IVA: TFloatField;
+    ZQ_Imagen: TZQuery;
+    DS_Imagen: TDataSource;
+    ZQ_ImagenIMAGEN: TBlobField;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    DBText21: TDBText;
+    Label32: TLabel;
+    Label33: TLabel;
+    DBText26: TDBText;
+    Label34: TLabel;
+    DBText27: TDBText;
+    Label35: TLabel;
+    DBText28: TDBText;
+    Label36: TLabel;
+    DBText29: TDBText;
+    Label37: TLabel;
+    DBText30: TDBText;
+    Label38: TLabel;
+    DBText31: TDBText;
+    PopupGridProducto: TPopupMenu;
+    PopUpItem_ProductoOcultarDetalle: TMenuItem;
     PanelFechas: TPanel;
     PanelFechaVencimiento: TPanel;
     PanelFechaImpreso: TPanel;
@@ -299,29 +340,18 @@ type
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
     btnConfirmar: TdxBarLargeButton;
-    EKOrd_EditarFpago: TEKOrdenarGrilla;
-    ZQ_CpbFormaPagoFECHA_FP: TDateTimeField;
-    ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField;
+    lblCantidadProductos: TLabel;
+    EKSuma_Productos: TEKDbSuma;
+    EKOrd_EditarProducto: TEKOrdenarGrilla;
     ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
     ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
-    ZQ_VerCpb_Fpago: TZQuery;
-    ZQ_VerCpb_FpagoID_COMPROB_FP: TIntegerField;
-    ZQ_VerCpb_FpagoID_COMPROBANTE: TIntegerField;
-    ZQ_VerCpb_FpagoID_TIPO_FORMAPAG: TIntegerField;
-    ZQ_VerCpb_FpagoMDCP_FECHA: TDateField;
-    ZQ_VerCpb_FpagoMDCP_BANCO: TStringField;
-    ZQ_VerCpb_FpagoMDCP_CHEQUE: TStringField;
-    ZQ_VerCpb_FpagoIMPORTE: TFloatField;
-    ZQ_VerCpb_FpagoCONCILIADO: TDateField;
-    ZQ_VerCpb_FpagoCUENTA_INGRESO: TIntegerField;
-    ZQ_VerCpb_FpagoNOMBTR_TIPO: TStringField;
-    ZQ_VerCpb_FpagoCTA_INGRESO_CODIGO: TStringField;
-    ZQ_VerCpb_FpagoCTA_INGRESO: TStringField;
-    ZQ_VerCpb_FpagoFECHA_FP: TDateTimeField;
-    ZQ_VerCpb_FpagoIMPORTE_REAL: TFloatField;
-    DS_VerCpb_Fpago: TDataSource;
-    EKOrd_VerCpb_Fpago: TEKOrdenarGrilla;
+    ZQ_CpbProductoID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_VerCpb_ProductoIMPUESTO_INTERNO: TFloatField;
+    ZQ_VerCpb_ProductoCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_VerCpb_ProductoCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_VerCpb_ProductoID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_VerCpb_ProductoIMPORTE_VENTA: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -343,20 +373,30 @@ type
     procedure ZQ_VerCpbAfterScroll(DataSet: TDataSet);
     procedure modoEdicion(flag: boolean);
     procedure cargarTipoComprobante(tipo: integer);
+    procedure btnTipoCpb_CancelarClick(Sender: TObject);
     procedure btnBuscarEmpresaClick(Sender: TObject);
     procedure btnBuscarPersonaClick(Sender: TObject);
-    procedure DBGridEditar_FpagoColExit(Sender: TObject);
-    procedure DBGridEditar_FpagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure btnEliminarFPagoClick(Sender: TObject);    
-    procedure DBGridEditar_FpagoKeyPress(Sender: TObject; var Key: Char);
-    procedure EKSuma_FPagoSumListChanged(Sender: TObject); //configuro la pantalla de visualizacion segun el tipo de comprobante
+    procedure PopItemProducto_AgregarClick(Sender: TObject);
+    procedure PopItemProducto_QuitarClick(Sender: TObject);
+    procedure btnEliminarProductoClick(Sender: TObject);
+    procedure DBGridEditar_ProductoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure agregarProducto();
+    procedure cargarProductosClienDataset();
+    procedure cargarImagen(id_prducto: integer);
+    procedure ZQ_CpbProductoAfterScroll(DataSet: TDataSet);
+    procedure calcularImporteProducto(Sender: TField);
+    procedure PopUpItem_ProductoOcultarDetalleClick(Sender: TObject);
     procedure configPanelFechas(panel: TPanel; Activar: boolean);
     procedure btnEnviarMailClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridEditar_ProductoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure EKSuma_ProductosSumListChanged(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure DBGridCpbActual_FPagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure DBGridEditar_FpagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridEditar_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridCpbActual_ProductoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     estadoPantalla: string;
     tipoComprobante: integer;
@@ -364,6 +404,8 @@ type
     vselProducto: TFBuscarProducto;
     vselPersona: TFBuscarPersona;
     procedure onSelPersona;
+    procedure onSelProducto;
+    procedure onSelTodosProducto;
   public
     { Public declarations }
   end;
@@ -372,10 +414,10 @@ type
   THackDBGrid = class(TDBGrid);
 
 var
-  FABM_CPB_Recibo: TFABM_CPB_Recibo;
+  FABM_CPB_Remito: TFABM_CPB_Remito;
 
 const
-  transaccion_ABM = 'ABM RECIBOS';
+  transaccion_ABM = 'ABM REMITO';
   EDITANDO = 'EDITANDO';
   VIENDO   = 'VIENDO';
 
@@ -385,7 +427,7 @@ uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar;
 
 {$R *.dfm}
 
-procedure TFABM_CPB_Recibo.modoEdicion(flag:boolean);
+procedure TFABM_CPB_Remito.modoEdicion(flag:boolean);
 begin
   if flag then //si estoy en modo edicion
   begin
@@ -418,16 +460,13 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.FormCreate(Sender: TObject);
+procedure TFABM_CPB_Remito.FormCreate(Sender: TObject);
 begin
-  tipoComprobante:= CPB_RECIBO_COBRO;
+  tipoComprobante:= CPB_REMITO_VENTA;
 
   EKOrd_VerCpb.CargarConfigColumnas;
-  EKOrd_VerCpb_Fpago.CargarConfigColumnas;
-  EKOrd_EditarFpago.CargarConfigColumnas;
-
-  dm.EKModelo.abrir(ZQ_Cuenta); //abro las cuentas bancarias
-  dm.EKModelo.abrir(ZQ_TipoFPago); //abro los tipos de forma de pago
+  EKOrd_VerCpb_Producto.CargarConfigColumnas;
+  EKOrd_EditarProducto.CargarConfigColumnas;
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
@@ -440,28 +479,30 @@ begin
   ZQ_VerCpb.open;
 
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+
+  CD_Producto.CreateDataSet;  
 end;
 
 
-procedure TFABM_CPB_Recibo.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+procedure TFABM_CPB_Remito.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
 
 
-procedure TFABM_CPB_Recibo.btnSalirClick(Sender: TObject);
+procedure TFABM_CPB_Remito.btnSalirClick(Sender: TObject);
 begin
   Close;
 end;
 
 
-procedure TFABM_CPB_Recibo.btnBuscarClick(Sender: TObject);
+procedure TFABM_CPB_Remito.btnBuscarClick(Sender: TObject);
 begin
 //  EKbuscar.buscar;
 end;
 
 
-procedure TFABM_CPB_Recibo.configPanelFechas(panel: TPanel; Activar: boolean);
+procedure TFABM_CPB_Remito.configPanelFechas(panel: TPanel; Activar: boolean);
 begin
   if activar then
   begin
@@ -476,30 +517,33 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.cargarTipoComprobante(tipo: integer);
+procedure TFABM_CPB_Remito.cargarTipoComprobante(tipo: integer);
 begin
   lblTituloFecha_Impreso.Caption:=  'Impreso';
   configPanelFechas(PanelFechaCobrado, false);
-  configPanelFechas(PanelFechaEnviado, false);
+  configPanelFechas(PanelFechaEnviado, true);
   configPanelFechas(PanelFechaImpreso, false);
   configPanelFechas(PanelFechaVencimiento, false);
-
-  lblTipoComprobante.Caption:= 'RECIBO';
+  lblTipoComprobante.Caption:= 'REMITO';
 end;
 
 
-procedure TFABM_CPB_Recibo.btnNuevoClick(Sender: TObject);
+procedure TFABM_CPB_Remito.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_NumeroCpb]) then
   begin
     modoEdicion(true);
 
     ZQ_Proveedor.Close;
     ZQ_Cliente.Close;
+    ZQ_Imagen.Close;
 
-    ZQ_CpbFormaPago.Close;
-    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= -1;
-    ZQ_CpbFormaPago.Open;
+    ZQ_CpbProducto.Close;
+    ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= -1;
+    ZQ_CpbProducto.Open;
+
+    if not CD_Producto.IsEmpty then
+      CD_Producto.EmptyDataSet;
 
     cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - NUEVO';
@@ -522,17 +566,23 @@ begin
     ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
     ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
     ZQ_ComprobanteFECHA_COBRADA.Clear;
-    ZQ_ComprobanteFECHA_ENVIADA.Clear;
     ZQ_ComprobanteFECHA_IMPRESA.Clear;
     ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
     ZQ_ComprobanteFECHA_ANULADO.Clear;
+    ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.EKModelo.FechayHora;
 
     EKDBDateEmision.SetFocus;
   end;
 end;
 
 
-procedure TFABM_CPB_Recibo.btnModificarClick(Sender: TObject);
+procedure TFABM_CPB_Remito.btnTipoCpb_CancelarClick(Sender: TObject);
+begin
+  modoEdicion(false);
+end;
+
+
+procedure TFABM_CPB_Remito.btnModificarClick(Sender: TObject);
 var
   estado: integer;
 begin
@@ -542,17 +592,21 @@ begin
 
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
   begin
     modoEdicion(true);
+
+    if not CD_Producto.IsEmpty then
+      CD_Producto.EmptyDataSet;
+    cargarProductosClienDataset();
 
     ZQ_Comprobante.Close;
     ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
     ZQ_Comprobante.Open;
 
-    ZQ_CpbFormaPago.Close;
-    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-    ZQ_CpbFormaPago.Open;
+    ZQ_CpbProducto.Close;
+    ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_CpbProducto.Open;
 
     if ZQ_ComprobanteID_CLIENTE.IsNull then
     begin
@@ -572,7 +626,7 @@ begin
       ZQ_Proveedor.Close;
     end;
 
-    cargarTipoComprobante(tipoComprobante);
+    cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
 
     ZQ_Comprobante.Edit;
@@ -582,7 +636,7 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.btnGuardarClick(Sender: TObject);
+procedure TFABM_CPB_Remito.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
@@ -593,19 +647,6 @@ begin
     Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
     EKDBDateEmision.SetFocus;
     exit;
-  end;
-
-  if not ZQ_CpbFormaPago.IsEmpty then
-  begin
-    ZQ_CpbFormaPago.First;
-    while not ZQ_CpbFormaPago.Eof do  //por cada una de las formas de pago cargadas
-    begin
-      ZQ_CpbFormaPago.Edit;
-      ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat; //pongo el mismo importe cargado al importe_real
-      ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
-
-      ZQ_CpbFormaPago.Next;
-    end;
   end;
 
   if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante
@@ -626,8 +667,8 @@ begin
     ZQ_NumeroCpbULTIMO_NUMERO.AsInteger:= ZQ_ComprobanteNUMERO_CPB.AsInteger;
   end;
 
-  EKSuma_FPago.RecalcAll; //es un recibo, el importe del comprobante es igual a la
-  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue; //suma de las formas de pago
+  EKSuma_Productos.RecalcAll; //el importe del comprobante es igual a la suma del importe de los productos
+  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
   ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteIMPORTE_TOTAL.AsFloat;
   ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
 
@@ -651,7 +692,7 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.btnCancelarClick(Sender: TObject);
+procedure TFABM_CPB_Remito.btnCancelarClick(Sender: TObject);
 begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
     if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
@@ -662,7 +703,7 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.btnImprimirClick(Sender: TObject);
+procedure TFABM_CPB_Remito.btnImprimirClick(Sender: TObject);
 begin
   if ZQ_VerCpb.IsEmpty then
     exit;
@@ -677,49 +718,49 @@ end;
 //----------------------------------
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
-procedure TFABM_CPB_Recibo.ABuscarExecute(Sender: TObject);
+procedure TFABM_CPB_Remito.ABuscarExecute(Sender: TObject);
 begin
   if btnBuscar.Enabled then
     btnBuscar.Click;
 end;
 
-procedure TFABM_CPB_Recibo.ANuevoExecute(Sender: TObject);
+procedure TFABM_CPB_Remito.ANuevoExecute(Sender: TObject);
 begin
   if btnNuevo.Enabled then
     btnNuevo.Click;
 end;
 
-procedure TFABM_CPB_Recibo.AModificarExecute(Sender: TObject);
+procedure TFABM_CPB_Remito.AModificarExecute(Sender: TObject);
 begin
   if btnModificar.Enabled then
     btnModificar.Click;
 end;
 
-procedure TFABM_CPB_Recibo.AConfirmarExecute(Sender: TObject);
+procedure TFABM_CPB_Remito.AConfirmarExecute(Sender: TObject);
 begin
   if btnConfirmar.Enabled then
     btnConfirmar.Click;
 end;
 
-procedure TFABM_CPB_Recibo.ABajaExecute(Sender: TObject);
+procedure TFABM_CPB_Remito.ABajaExecute(Sender: TObject);
 begin
   if btnBaja.Enabled then
     btnBaja.Click;
 end;
 
-procedure TFABM_CPB_Recibo.AReactivarExecute(Sender: TObject);
+procedure TFABM_CPB_Remito.AReactivarExecute(Sender: TObject);
 begin
   if btnReactivar.Enabled then
     btnReactivar.Click;
 end;
 
-procedure TFABM_CPB_Recibo.AGuardarExecute(Sender: TObject);
+procedure TFABM_CPB_Remito.AGuardarExecute(Sender: TObject);
 begin
   if btnGuardar.Enabled then
     btnGuardar.Click;
 end;
 
-procedure TFABM_CPB_Recibo.ACancelarExecute(Sender: TObject);
+procedure TFABM_CPB_Remito.ACancelarExecute(Sender: TObject);
 begin
   if btnCancelar.Enabled then
     btnCancelar.Click;
@@ -728,19 +769,21 @@ end;
 //  FIN TECLAS RAPIDAS
 //----------------------------------
 
-procedure TFABM_CPB_Recibo.ZQ_VerCpbAfterScroll(DataSet: TDataSet);
+
+procedure TFABM_CPB_Remito.ZQ_VerCpbAfterScroll(DataSet: TDataSet);
 begin
-  ZQ_VerCpb_Fpago.Close;
+  ZQ_VerCpb_Producto.Close;
 
   if ZQ_VerCpb.IsEmpty then
     exit;
 
-  ZQ_VerCpb_Fpago.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
-  ZQ_VerCpb_Fpago.Open;
+  ZQ_VerCpb_Producto.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+  ZQ_VerCpb_Producto.Open;
 end;
 
 
-procedure TFABM_CPB_Recibo.btnBuscarEmpresaClick(Sender: TObject);
+//PINTAR GRILLAS VISUALIZACION
+procedure TFABM_CPB_Remito.btnBuscarEmpresaClick(Sender: TObject);
 var
   sql: string;
 begin
@@ -781,7 +824,7 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.btnBuscarPersonaClick(Sender: TObject);
+procedure TFABM_CPB_Remito.btnBuscarPersonaClick(Sender: TObject);
 begin
   if not Assigned(vselPersona) then
     vselPersona:= TFBuscarPersona.Create(nil);
@@ -791,7 +834,7 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.onSelPersona;
+procedure TFABM_CPB_Remito.onSelPersona;
 begin
   if (not (vselPersona.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
   begin
@@ -819,173 +862,193 @@ end;
 
 
 //----------------------
-//    FORMA DE PAGO
+//    DETALLE PRODUCTO
 //----------------------
-procedure TFABM_CPB_Recibo.DBGridEditar_FpagoColExit(Sender: TObject);
+procedure TFABM_CPB_Remito.cargarProductosClienDataset();
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then //SI ESTOY DANDO DE ALTA O EDITANDO
+  if ZQ_VerCpb_Producto.IsEmpty then
+    exit;
+
+  ZQ_VerCpb_Producto.First;
+  while not ZQ_VerCpb_Producto.Eof do
   begin
-      //PARA LOS RECIBOS - CUENTA INGRESO
-      if (((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Codigo') or
-          ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre')) then
-      begin
-        if (not ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull) or (tipoComprobante <> CPB_RECIBO_COBRO) then
-          exit;
+    CD_Producto.Append;
+    CD_Producto_idProducto.AsInteger := ZQ_VerCpb_ProductoID_PRODUCTO.AsInteger;
+    CD_Producto_producto.AsString := ZQ_VerCpb_ProductoPRODUCTO.AsString;
+    CD_Producto_medida.AsString := ZQ_VerCpb_ProductoMEDIDA.AsString;
+    CD_Producto_color.AsString := ZQ_VerCpb_ProductoCOLOR.AsString;
+    CD_Producto_marca.AsString := ZQ_VerCpb_ProductoMARCA.AsString;
+    CD_Producto_tipoArticulo.AsString := ZQ_VerCpb_ProductoTIPO_ARTICULO.AsString;
+    CD_Producto_articulo.AsString := ZQ_VerCpb_ProductoARTICULO.AsString;
+    CD_Producto_codigoBarra.AsString := ZQ_VerCpb_ProductoCODIGO_BARRA.AsString;
+    CD_Producto_codCabecera.AsString := ZQ_VerCpb_ProductoCOD_CABECERA.AsString;
+    CD_Producto_codProducto.AsString := ZQ_VerCpb_ProductoCOD_PRODUCTO.AsString;
+    CD_Producto_precioVenta.AsFloat := ZQ_VerCpb_ProductoPRECIO_VENTA.AsFloat;
 
-        if EKListadoCuenta.Buscar then
-        begin
-          if EKListadoCuenta.Resultado <> '' then
-          begin
-            ZQ_ListadoCuenta.Close;
-            ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= StrToInt(EKListadoCuenta.Resultado);
-            ZQ_ListadoCuenta.Open;
-
-            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
-              ZQ_CpbFormaPago.Append //pongo en modo edicion
-            else
-              ZQ_CpbFormaPago.edit; //pongo en modo edicion
-
-            ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
-            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
-            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
-          end;
-        end;
-      end;
-
-      //MEDIO
-      if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
-      begin
-        if not ZQ_CpbFormaPagoID_TIPO_FORMAPAG.IsNull then
-          exit;
-
-        if EKListadoMedio.Buscar then
-        begin
-          if EKListadoMedio.Resultado <> '' then
-          begin
-            ZQ_ListadoMedio.Close;
-            ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= StrToInt(EKListadoMedio.Resultado);
-            ZQ_ListadoMedio.Open;
-
-            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
-              ZQ_CpbFormaPago.Append //pongo en modo edicion
-            else
-              ZQ_CpbFormaPago.edit; //pongo en modo edicion
-
-            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoMedioID_TIPO_FORMAPAGO.AsInteger;
-            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
-          end;
-        end;
-      end;
+    ZQ_VerCpb_Producto.Next;
   end;
 end;
 
+procedure TFABM_CPB_Remito.onSelProducto;
+begin
+  if not vselProducto.ZQ_Producto.IsEmpty then
+  begin
+    CD_Producto.Append;
+    CD_Producto_idProducto.AsInteger := vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    CD_Producto_producto.AsString := vselProducto.ZQ_ProductoNOMBRE.AsString;
+    CD_Producto_medida.AsString := vselProducto.ZQ_ProductoMEDIDA.AsString;
+    CD_Producto_color.AsString := vselProducto.ZQ_ProductoCOLOR.AsString;
+    CD_Producto_marca.AsString := vselProducto.ZQ_ProductoNOMBRE_MARCA.AsString;
+    CD_Producto_tipoArticulo.AsString := vselProducto.ZQ_ProductoTIPO_ARTICULO.AsString;
+    CD_Producto_articulo.AsString := vselProducto.ZQ_ProductoNOMBRE_ARTICULO.AsString;
+    CD_Producto_codigoBarra.AsString := vselProducto.ZQ_ProductoCODIGO_BARRA.AsString;
+    CD_Producto_codCabecera.AsString := vselProducto.ZQ_ProductoCOD_CORTO.AsString;
+    CD_Producto_codProducto.AsString := vselProducto.ZQ_ProductoCOD_CORTO_1.AsString;
+    CD_Producto_precioVenta.AsFloat := vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
 
-procedure TFABM_CPB_Recibo.DBGridEditar_FpagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    ZQ_CpbProducto.Append;
+    ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
+    ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
+    ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
+
+    cargarImagen(vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger);
+  end;
+
+  vselProducto.Close;
+end;
+
+
+procedure TFABM_CPB_Remito.onSelTodosProducto;
+begin
+  vselProducto.ZQ_Producto.First;
+  while not vselProducto.ZQ_Producto.Eof do
+  begin
+    CD_Producto.Append;
+    CD_Producto_idProducto.AsInteger := vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    CD_Producto_producto.AsString := vselProducto.ZQ_ProductoNOMBRE.AsString;
+    CD_Producto_medida.AsString := vselProducto.ZQ_ProductoMEDIDA.AsString;
+    CD_Producto_color.AsString := vselProducto.ZQ_ProductoCOLOR.AsString;
+    CD_Producto_marca.AsString := vselProducto.ZQ_ProductoNOMBRE_MARCA.AsString;
+    CD_Producto_tipoArticulo.AsString := vselProducto.ZQ_ProductoTIPO_ARTICULO.AsString;
+    CD_Producto_articulo.AsString := vselProducto.ZQ_ProductoNOMBRE_ARTICULO.AsString;
+    CD_Producto_codigoBarra.AsString := vselProducto.ZQ_ProductoCODIGO_BARRA.AsString;
+    CD_Producto_codCabecera.AsString := vselProducto.ZQ_ProductoCOD_CORTO.AsString;
+    CD_Producto_codProducto.AsString := vselProducto.ZQ_ProductoCOD_CORTO_1.AsString;
+    CD_Producto_precioVenta.AsFloat := vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
+
+    ZQ_CpbProducto.Append;
+    ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
+    ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
+    ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
+
+    cargarImagen(vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger);
+
+    vselProducto.ZQ_Producto.Next;
+  end;
+
+  vselProducto.Close;
+end;
+
+
+procedure TFABM_CPB_Remito.PopItemProducto_AgregarClick(Sender: TObject);
+begin
+  agregarProducto;
+end;
+
+
+procedure TFABM_CPB_Remito.agregarProducto();
+begin
+  if not Assigned(vselProducto) then
+    vselProducto:= TFBuscarProducto.Create(nil);
+
+  //if not ZQ_ComprobanteID_PROVEEDOR.IsNull then
+  //  vselProducto.filtrarEmpresa(ZQ_ComprobanteID_PROVEEDOR.AsInteger);
+
+  vselProducto.OnSeleccionar := onSelProducto;
+  vselProducto.OnSeleccionarTodos := onSelTodosProducto;
+  vselProducto.btnSeleccionarTodos.Visible:= ivAlways;
+  vselProducto.SeleccionarYSalir:= false;
+  vselProducto.ShowModal;
+end;
+
+
+procedure TFABM_CPB_Remito.PopItemProducto_QuitarClick(Sender: TObject);
+begin
+  if not ZQ_CpbProducto.IsEmpty then
+    ZQ_CpbProducto.Delete;
+end;
+
+
+procedure TFABM_CPB_Remito.btnEliminarProductoClick(Sender: TObject);
+begin
+  if not ZQ_CpbProducto.IsEmpty then
+    ZQ_CpbProducto.Delete;
+end;
+
+
+procedure TFABM_CPB_Remito.DBGridEditar_ProductoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
   begin
     if key = 112 then
-    begin
-      //PARA LOS RECIBOS - CUENTA INGRESO
-      if (((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Codigo') or
-          ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre')) then
-      begin
-        if (tipoComprobante <> CPB_RECIBO_COBRO) then
-          exit;
-
-        if EKListadoCuenta.Buscar then
-        begin
-          if EKListadoCuenta.Resultado <> '' then
-          begin
-            ZQ_ListadoCuenta.Close;
-            ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= StrToInt(EKListadoCuenta.Resultado);
-            ZQ_ListadoCuenta.Open;
-
-            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
-              ZQ_CpbFormaPago.Append //pongo en modo edicion
-            else
-              ZQ_CpbFormaPago.edit; //pongo en modo edicion
-
-            ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
-            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
-            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
-          end;
-        end;
-      end;
-
-      //MEDIO
-      if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
-      begin
-        if EKListadoMedio.Buscar then
-        begin
-          if EKListadoMedio.Resultado <> '' then
-          begin
-            ZQ_ListadoMedio.Close;
-            ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= StrToInt(EKListadoMedio.Resultado);
-            ZQ_ListadoMedio.Open;
-
-            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
-              ZQ_CpbFormaPago.Append //pongo en modo edicion
-            else
-              ZQ_CpbFormaPago.edit; //pongo en modo edicion
-
-            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoMedioID_TIPO_FORMAPAGO.AsInteger;
-            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
-          end;
-        end;
-      end;
-    end;
+      agregarProducto;
   end;
 end;
 
 
-procedure TFABM_CPB_Recibo.btnEliminarFPagoClick(Sender: TObject);
+procedure TFABM_CPB_Remito.cargarImagen(id_prducto: integer);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
-  begin
-    if not ZQ_CpbFormaPago.IsEmpty then
-      ZQ_CpbFormaPago.Delete;
-
-    DBGridEditar_Fpago.SetFocus;
-    
-    EKSuma_FPago.RecalcAll;
-  end;
+  ZQ_Imagen.Close;
+  ZQ_Imagen.ParamByName('id_producto').AsInteger:= id_prducto;
+  ZQ_Imagen.Open;
 end;
 
 
-procedure TFABM_CPB_Recibo.DBGridEditar_FpagoKeyPress(Sender: TObject; var Key: Char);
+procedure TFABM_CPB_Remito.ZQ_CpbProductoAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_Imagen.Close;
+
+  if ZQ_CpbProducto.IsEmpty then
+    exit;
+
+  cargarImagen(ZQ_CpbProductoID_PRODUCTO.AsInteger);
+end;
+
+//procedimiento para calcular automaticamente el importe final y la base imponible
+procedure TFABM_CPB_Remito.calcularImporteProducto(Sender: TField);
 var
-  columna: string;
+  cantidad,
+  precio_unitario,
+  final: double;
 begin
-//  columna:= (sender as tdbgrid).SelectedField.FullName;
-//
-//  if (columna = 'IMPORTE') then
-//  begin
-//    if (Key = #13) or (key = #9) then  { if it's an enter key }
-//    begin
-//      Key := #0;  { eat enter key }
-//      with TStringGrid(DBGridEditar_Fpago) do
-//      begin
-//        if tipoComprobante = CPB_RECIBO_COBRO then
-//          Col := 0
-//        else
-//          if tipoComprobante = CPB_ORDEN_PAGO then
-//            Col := 2;
-//
-//        SetFocus;
-//      end;
-//    end;
-//  end;
+  cantidad:= 0;
+  precio_unitario:= 0;
+
+  if not ZQ_CpbProductoCANTIDAD.IsNull then
+    cantidad:= ZQ_CpbProductoCANTIDAD.AsFloat;
+
+  if not ZQ_CpbProductoIMPORTE_UNITARIO.IsNull then
+    precio_unitario:= ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat;
+
+  final:= cantidad * precio_unitario;
+  ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= final;
 end;
 
 
-procedure TFABM_CPB_Recibo.EKSuma_FPagoSumListChanged(Sender: TObject);
+procedure TFABM_CPB_Remito.PopUpItem_ProductoOcultarDetalleClick(Sender: TObject);
 begin
-  lblTotalFormaPago.Caption := 'Total Forma de Pago: ' + FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
+  if PanelCpbActual_ProductoDetalle.Visible then
+    PopUpItem_ProductoOcultarDetalle.Caption:= 'Ver Detalle'
+  else
+    PopUpItem_ProductoOcultarDetalle.Caption:= 'Ocultar Detalle';
+
+  PanelCpbActual_ProductoDetalle.Visible:= not PanelCpbActual_ProductoDetalle.Visible;
 end;
 
 
-procedure TFABM_CPB_Recibo.btnEnviarMailClick(Sender: TObject);
+procedure TFABM_CPB_Remito.btnEnviarMailClick(Sender: TObject);
 var
   destino, archivoPDF: string;
 begin
@@ -1024,7 +1087,7 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.btnConfirmarClick(Sender: TObject);
+procedure TFABM_CPB_Remito.btnConfirmarClick(Sender: TObject);
 var
   estado: Integer;
 begin
@@ -1036,9 +1099,14 @@ begin
 //  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 //  tipoComprobante:= ZQ_VerCpbID_TIPO_CPB.AsInteger;
 //
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
+//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbProducto]) then
 //  begin
+//    PanelTipoCpb.Visible:= false;
 //    modoEdicion(true);
+//
+//    if not CD_Producto.IsEmpty then
+//      CD_Producto.EmptyDataSet;
+//    cargarProductosClienDataset();
 //
 //    ZQ_Comprobante.Close;
 //    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
@@ -1047,6 +1115,10 @@ begin
 //    ZQ_CpbFormaPago.Close;
 //    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
 //    ZQ_CpbFormaPago.Open;
+//
+//    ZQ_CpbProducto.Close;
+//    ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+//    ZQ_CpbProducto.Open;
 //
 //    if ZQ_ComprobanteID_CLIENTE.IsNull then
 //    begin
@@ -1078,7 +1150,7 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure TFABM_CPB_Remito.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   DBGridListaCpb.Canvas.Font.Color := clBlack;
 
@@ -1095,23 +1167,64 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.DBGridCpbActual_FPagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+//Para renombrar el procedimiento Ctrl+Del que viene por defecto en las grillas
+procedure TFABM_CPB_Remito.DBGridEditar_ProductoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  columna: string;
 begin
-  FPrincipal.PintarFilasGrillas(DBGridCpbActual_FPago, Rect, DataCol, Column, State);
+  columna:= (sender as tdbgrid).SelectedField.FullName;
+
+  if (Key = 13) or (key = 9) then  { if it's an enter key }
+  begin
+    Key := 0; {ignore}
+
+//    if (columna = 'IMPORTE_FINAL') then
+//    begin
+//      DBGridEditar_Producto.SelectedIndex:= 0;//getColumnIndex(DBGridEditar_Producto, '_CodBarra');
+//      ZQ_CpbProducto.Append;
+//    end;
+
+    if (columna = 'CANTIDAD') then
+    begin
+      DBGridEditar_Producto.SelectedIndex:= 0;
+      ZQ_CpbProducto.Append;
+    end;
+  end;
+
+  if (Shift = [ssCtrl]) and (Key = VK_DELETE) then
+  begin
+    Key := 0; {ignore}
+    btnEliminarProducto.Click;
+  end
 end;
 
 
-procedure TFABM_CPB_Recibo.DBGridEditar_FpagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure TFABM_CPB_Remito.EKSuma_ProductosSumListChanged(Sender: TObject);
+var
+  cantidad, precio: string;
 begin
-  FPrincipal.PintarFilasGrillas(DBGridEditar_Fpago, Rect, DataCol, Column, State);
+  cantidad := 'Cantidad Productos: ' + FormatFloat('###,###,###,##0.00', EKSuma_Productos.SumCollection[0].SumValue);
+  precio := 'Importe Total: ' + FormatFloat('$ ###,###,###,##0.00', EKSuma_Productos.SumCollection[1].SumValue);
+
+  lblCantidadProductos.Caption:= cantidad+' - '+precio;
 end;
 
 
-procedure TFABM_CPB_Recibo.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFABM_CPB_Remito.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrd_VerCpb.GuardarConfigColumnas;
-  EKOrd_VerCpb_Fpago.GuardarConfigColumnas;
-  EKOrd_EditarFpago.GuardarConfigColumnas;
+  EKOrd_VerCpb_Producto.GuardarConfigColumnas;
+  EKOrd_EditarProducto.GuardarConfigColumnas;
+end;
+
+procedure TFABM_CPB_Remito.DBGridEditar_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridEditar_Producto, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_CPB_Remito.DBGridCpbActual_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridCpbActual_Producto, Rect, DataCol, Column, State);
 end;
 
 end.

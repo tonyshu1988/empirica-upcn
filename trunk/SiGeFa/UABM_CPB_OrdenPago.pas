@@ -342,7 +342,6 @@ type
     procedure ZQ_VerCpbAfterScroll(DataSet: TDataSet);
     procedure modoEdicion(flag: boolean);
     procedure cargarTipoComprobante(tipo: integer);
-    procedure btnTipoCpb_AceptarClick(Sender: TObject);
     procedure btnBuscarEmpresaClick(Sender: TObject);
     procedure btnBuscarPersonaClick(Sender: TObject);
     procedure DBGridEditar_FpagoColExit(Sender: TObject);
@@ -363,6 +362,7 @@ type
     procedure DBGridCpbActual_FPagoDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure btnNuevoClick(Sender: TObject);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -449,7 +449,7 @@ begin
 
   //abro todos los recibos del sistema
   ZQ_VerCpb.Close;
-  ZQ_VerCpb.ParamByName('tipo_comprobante').AsInteger:= CPB_ORDEN_PAGO;
+  ZQ_VerCpb.ParamByName('tipo_comprobante').AsInteger:= tipoComprobante;
   ZQ_VerCpb.open;
 
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
@@ -501,7 +501,7 @@ begin
 end;
 
 
-procedure TFABM_CPB_OrdenPago.btnTipoCpb_AceptarClick(Sender: TObject);
+procedure TFABM_CPB_OrdenPago.btnNuevoClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb]) then
   begin
@@ -543,7 +543,6 @@ begin
     EKDBDateEmision.SetFocus;
   end;
 end;
-
 
 procedure TFABM_CPB_OrdenPago.btnModificarClick(Sender: TObject);
 var
@@ -1137,5 +1136,7 @@ procedure TFABM_CPB_OrdenPago.DBGridCpbActual_FPagoDrawColumnCell(
 begin
   FPrincipal.PintarFilasGrillas(DBGridCpbActual_FPago, Rect, DataCol, Column, State);
 end;
+
+
 
 end.
