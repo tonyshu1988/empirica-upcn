@@ -8,7 +8,7 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids,
   EKEdit,UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
   XPStyleActnCtrls, ActnMan, EKListadoSQL, EKDbSuma,
-  ZStoredProcedure,UBuscarPersona,UCargarPreventa, Buttons, jpeg;
+  ZStoredProcedure,UBuscarPersona,UCargarPreventa, Buttons, jpeg, Menus;
 
 type
   TFCajero = class(TForm)
@@ -369,6 +369,9 @@ type
     Panel3: TPanel;
     barcode2: TImage;
     barcode1: TImage;
+    PopUpProductos: TPopupMenu;
+    AgregaProd: TMenuItem;
+    QuitarProd: TMenuItem;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -423,6 +426,7 @@ type
     procedure verPermisos();
     procedure APreventaExecute(Sender: TObject);
     procedure btPreventaClick(Sender: TObject);
+    procedure VerDetalles(sino:Boolean);
 
   private
     vsel: TFBuscarProductoStock;
@@ -514,6 +518,7 @@ begin
   begin
       if not(ProductoYaCargado(vsel.ZQ_StockID_PRODUCTO.AsInteger)) then
       begin
+        VerDetalles(True);
         codBarras.Text:='I'+vsel.ZQ_StockID_PRODUCTO.AsString;
         IdentificarCodigo;
         edCantidad.SetFocus;
@@ -561,6 +566,7 @@ begin
    begin
      if (EKListadoProducto.Resultado<>'') then
      begin
+     VerDetalles(True);
      codBarras.Text:='I'+EKListadoProducto.Resultado;
      IdentificarCodigo;
      edCantidad.SetFocus;
@@ -584,6 +590,11 @@ if IdVendedor<0 then
    exit;
  end;
 
+ if not(PanelDetalleProducto.Visible) then
+  begin
+   VerDetalles(True);
+   codBarras.SetFocus;
+  end;
 
 
 if ((not(ZQ_Productos.IsEmpty))and(edCantidad.AsInteger>0)) then
@@ -596,6 +607,7 @@ if ((not(ZQ_Productos.IsEmpty))and(edCantidad.AsInteger>0)) then
       BtAgregarPago.Enabled := true;
       BtAceptarPago.Enabled := true;
       BtCancelarPago.Enabled := true;
+      VerDetalles(False);
      end
    end
   else
@@ -1322,6 +1334,7 @@ end;
 
 procedure TFCajero.ANuevoProdExecute(Sender: TObject);
 begin
+  VerDetalles(True);
   LimpiarCodigo();
 end;
 
@@ -1407,6 +1420,14 @@ end;
 
 procedure TFCajero.btPreventaClick(Sender: TObject);
 begin
+if not(CD_DetalleFactura.IsEmpty) then
+ begin
+    Application.MessageBox('Debe cargar la Venta en un Comprobante vacio.'+
+                  char(13)+'(Borre los productos previamente cargados).','Carga de PreVenta ',MB_OK+MB_ICONINFORMATION);
+    codBarras.SetFocus;
+    exit;
+ end;
+
 if not Assigned(vsel) then
   vsel4:= TFPreventa.Create(nil);
   vsel4.OnSeleccionar := OnSelPreventa;
@@ -1415,6 +1436,7 @@ end;
 
 procedure TFCajero.OnSelPreventa;
 begin
+  VerDetalles(False);
 //  if not vsel4.ZQ_Comprobante.IsEmpty then
 //  begin
 //      if not(CD_DetalleFactura.IsEmpty) then
@@ -1426,6 +1448,11 @@ begin
 //    vsel.ZQ_Stock.Filtered:=False;
 //    vsel.Close;
 //  end;
+end;
+
+procedure TFCajero.VerDetalles(sino: Boolean);
+begin
+     PanelDetalleProducto.Visible:=sino;
 end;
 
 end.

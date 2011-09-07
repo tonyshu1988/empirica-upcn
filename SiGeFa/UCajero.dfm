@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 171
-  Top = 35
+  Left = 190
+  Top = 32
   Width = 1060
   Height = 774
   Caption = 'Cajero SiGeFa'
@@ -834,6 +834,7 @@ object FCajero: TFCajero
           Color = 16762303
           DataSource = DS_DetalleFactura
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = PopUpProductos
           TabOrder = 0
           TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clWindowText
@@ -5096,5 +5097,22 @@ object FCajero: TFCajero
     SumListChanged = EKDbSuma2SumListChanged
     Left = 868
     Top = 282
+  end
+  object PopUpProductos: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    MenuAnimation = [maLeftToRight]
+    Left = 792
+    Top = 248
+    object AgregaProd: TMenuItem
+      Caption = 'Agregar Producto'
+      ImageIndex = 11
+      ShortCut = 117
+      OnClick = ANuevoProdExecute
+    end
+    object QuitarProd: TMenuItem
+      Caption = 'Quitar Producto'
+      ImageIndex = 12
+      OnClick = btQuitarProductoClick
+    end
   end
 end
