@@ -257,6 +257,11 @@ type
     ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS: TFloatField;
     ZQ_DetalleProductoIMPUESTO_ADICIONAL1: TFloatField;
     ZQ_DetalleProductoIMPUESTO_ADICIONAL2: TFloatField;
+    ZQ_DetalleProductoPRECIO1: TFloatField;
+    ZQ_DetalleProductoPRECIO2: TFloatField;
+    ZQ_DetalleProductoPRECIO3: TFloatField;
+    ZQ_DetalleProductoPRECIO4: TFloatField;
+    ZQ_DetalleProductoPRECIO5: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

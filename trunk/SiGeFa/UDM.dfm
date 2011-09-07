@@ -1816,4 +1816,43 @@ object DM: TDM
       Size = 50
     end
   end
+  object ZQ_Configuracion_Variables: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select *'
+      'from configuracion_variables')
+    Params = <>
+    Left = 238
+    Top = 266
+    object ZQ_Configuracion_VariablesCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Required = True
+      Size = 50
+    end
+    object ZQ_Configuracion_VariablesFECHA: TDateField
+      FieldName = 'FECHA'
+    end
+    object ZQ_Configuracion_VariablesNUMERO: TFloatField
+      FieldName = 'NUMERO'
+    end
+    object ZQ_Configuracion_VariablesTEXTO: TStringField
+      FieldName = 'TEXTO'
+      Required = True
+      Size = 100
+    end
+    object ZQ_Configuracion_VariablesNIVEL: TSmallintField
+      FieldName = 'NIVEL'
+    end
+    object ZQ_Configuracion_VariablesGRUPO: TStringField
+      FieldName = 'GRUPO'
+      Size = 50
+    end
+    object ZQ_Configuracion_VariablesDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object ZQ_Configuracion_VariablesGRAFICO: TBlobField
+      FieldName = 'GRAFICO'
+    end
+  end
 end
