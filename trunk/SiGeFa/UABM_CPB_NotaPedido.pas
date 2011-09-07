@@ -1216,23 +1216,6 @@ begin
 end;
 
 
-procedure TFABM_CPB_NotaPedido.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  DBGridListaCpb.Canvas.Font.Color := clBlack;
-
-  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ALMACENADO) then //si el registro esta dado de baja
-  begin
-    DBGridListaCpb.Canvas.Brush.Color:= $0098F8F3;
-    if (gdFocused in State) or (gdSelected in State) then
-      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
-  end;
-
-  DBGridListaCpb.DefaultDrawColumnCell(rect,datacol,column,state);
-
-  FPrincipal.PintarFilasGrillas(DBGridListaCpb, Rect, DataCol, Column, State);
-end;
-
-
 //Para renombrar el procedimiento Ctrl+Del que viene por defecto en las grillas
 procedure TFABM_CPB_NotaPedido.DBGridEditar_ProductoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
@@ -1283,14 +1266,31 @@ begin
   EKOrd_EditarProducto.GuardarConfigColumnas;
 end;
 
+
 procedure TFABM_CPB_NotaPedido.DBGridEditar_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridEditar_Producto, Rect, DataCol, Column, State);
 end;
 
+
 procedure TFABM_CPB_NotaPedido.DBGridCpbActual_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridCpbActual_Producto, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFABM_CPB_NotaPedido.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ALMACENADO) then //si el registro esta dado de baja
+  begin
+    DBGridListaCpb.Canvas.Brush.Color:= $0098F8F3;
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
+  end;
+
+  DBGridListaCpb.DefaultDrawColumnCell(rect,datacol,column,state);
+
+  FPrincipal.PintarFilasGrillas(DBGridListaCpb, Rect, DataCol, Column, State);
 end;
 
 end.

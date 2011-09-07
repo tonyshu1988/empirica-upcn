@@ -10,7 +10,7 @@ uses
   ZStoredProcedure,ShellAPI, IdMessage, IdBaseComponent, IdComponent,
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, ActnList,
   XPStyleActnCtrls, ActnMan, EKListadoSQL, DBClient, Provider, QuickRpt,
-  QRCtrls, EKVistaPreviaQR;
+  QRCtrls, EKVistaPreviaQR, Buttons, EKDBDateTimePicker;
 
 type
   TFABMEmpresas = class(TForm)
@@ -316,6 +316,33 @@ type
     btIrWeb: TButton;
     Splitter1: TSplitter;
     Splitter2: TSplitter;
+    TabCtaCte: TTabSheet;
+    btnCtaCte_Alta: TButton;
+    btnCtaCte_Modificar: TButton;
+    btnCtaCte_Baja: TButton;
+    btnCtaCte_Reactivar: TButton;
+    gBoxCuentaCorriente: TGroupBox;
+    Label15: TLabel;
+    Label8: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    EKDBFechaCtaCte: TEKDBDateTimePicker;
+    DBEditLimiteDeuda: TDBEdit;
+    btnCtaCte_Aceptar: TBitBtn;
+    btnCtaCte_Cancelar: TBitBtn;
+    DBEditVencimDia: TDBEdit;
+    EKDBDateTimePicker1: TEKDBDateTimePicker;
+    ZQ_CtaCte: TZQuery;
+    ZQ_CtaCteID_CTA_CTE: TIntegerField;
+    ZQ_CtaCteID_PERSONA: TIntegerField;
+    ZQ_CtaCteSALDO: TFloatField;
+    ZQ_CtaCteLIMITE_DEUDA: TFloatField;
+    ZQ_CtaCteFECHA_ALTA: TDateField;
+    ZQ_CtaCteFECHA_BAJA: TDateField;
+    ZQ_CtaCteBAJA: TStringField;
+    ZQ_CtaCteID_PROVEEDOR: TIntegerField;
+    ZQ_CtaCteVENCIMIENTO_DIAS: TIntegerField;
+    DS_CtaCte: TDataSource;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -325,9 +352,7 @@ type
     procedure btnBuscarClick(Sender: TObject);
     procedure btnBajaClick(Sender: TObject);
     procedure btnReactivarClick(Sender: TObject);
-    procedure DBGridEmpresasDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridEmpresasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure FormCreate(Sender: TObject);
     procedure AgregarContacto1Click(Sender: TObject);
     procedure ZQ_EmpresaAfterScroll(DataSet: TDataSet);
@@ -357,30 +382,21 @@ type
     procedure EditarTelMailClick(Sender: TObject);
     procedure ZQ_EntidadTelefonoEmpresaBeforePost(DataSet: TDataSet);
     procedure btIrWebClick(Sender: TObject);
-    procedure DBGridEntidadTelefonoEmpresaDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure DBGridContactosDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure DBGridContactoTelMailDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure DBGridViajantesDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure DBGridViajanteTelMailDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure GrillaMarcasDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure habilitarCtaCte(flag: boolean);
+    procedure DBGridEntidadTelefonoEmpresaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridContactosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridContactoTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridViajantesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridViajanteTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GrillaMarcasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnCtaCte_AceptarClick(Sender: TObject);
+    procedure btnCtaCte_CancelarClick(Sender: TObject);
+    procedure btnCtaCte(Sender: TObject);
   private
-    { Private declarations }
     vsel : TFBuscarPersona;
     procedure OnSelPersona;
   public
-    { Public declarations }
+    tieneCuentaCorriente, altaCtaCte: boolean;
   end;
 
 var
@@ -441,8 +457,10 @@ end;
 
 procedure TFABMEmpresas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca, ZQ_EntidadTelefonoEmpresa]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca, ZQ_EntidadTelefonoEmpresa, ZQ_CtaCte]) then
   begin
+    tieneCuentaCorriente:= false;
+    
     GrupoVisualizando.Enabled:=false;
     GrupoEditando.Enabled:=true;
     DBGridEmpresas.Enabled:= false;
@@ -459,6 +477,7 @@ begin
 
     PanelEdicion.Enabled := true;
     PageControlEdicion.ActivePageIndex:=0;
+    TabCtaCte.Enabled:= true;
     dbNombre.SetFocus;
   end;
 end;
@@ -469,7 +488,7 @@ begin
   if (ZQ_Empresa.IsEmpty) or (ZQ_EmpresaBAJA.AsString = 'S') then
    exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca, ZQ_EntidadTelefonoEmpresa]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca, ZQ_EntidadTelefonoEmpresa, ZQ_CtaCte]) then
   begin
     DBGridEmpresas.Enabled:=false;
     ZQ_Empresa.Edit;
@@ -481,6 +500,7 @@ begin
     GrillaMarcas.PopupMenu := PopupMenuMarcas;
     DBGridEntidadTelefonoEmpresa.PopupMenu:=PopupMenuTelmail;
 
+    TabCtaCte.Enabled:= true;
     PanelEdicion.Enabled := true;
   end;
 end;
@@ -510,6 +530,8 @@ begin
       DBGridEntidadTelefonoEmpresa.PopupMenu:=nil;
 
       PanelEdicion.Enabled := false;
+      TabCtaCte.Enabled:= false;
+      habilitarCtaCte(false);
     end;
   end;
   
@@ -558,6 +580,8 @@ begin
     DBGridEntidadTelefonoEmpresa.PopupMenu:=nil;
 
     PanelEdicion.Enabled := false;
+    TabCtaCte.Enabled:= false;
+    habilitarCtaCte(false);
   end;
 
   if (dgEditing	in DBGridEntidadTelefonoEmpresa.Options) then
@@ -656,6 +680,10 @@ end;
 
 procedure TFABMEmpresas.FormCreate(Sender: TObject);
 begin
+
+  TabCtaCte.Enabled:= false;
+  habilitarCtaCte(false);
+
   EKOrdenarEmpresas.CargarConfigColumnas;
   EKOrdenarContactos.CargarConfigColumnas;
   EKOrdenarViajantes.CargarConfigColumnas;
@@ -761,23 +789,35 @@ end;
 
 procedure TFABMEmpresas.ZQ_EmpresaAfterScroll(DataSet: TDataSet);
 begin
+  ZQ_CtaCte.Close;
   ZQ_PersonaRelacionContacto.Close;
+  ZQ_PersonaRelacionViajante.Close;
+  ZQ_EmpresaMarca.Close;
+  ZQ_EntidadTelefonoEmpresa.Close;
+
+  if ZQ_Empresa.IsEmpty then
+    exit;
+
   ZQ_PersonaRelacionContacto.ParamByName('relacion').AsInteger := RELACION_CONTACTO;
   ZQ_PersonaRelacionContacto.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
   ZQ_PersonaRelacionContacto.Open;
 
-  ZQ_PersonaRelacionViajante.Close;
   ZQ_PersonaRelacionViajante.ParamByName('relacion').AsInteger := RELACION_VIAJANTE;
   ZQ_PersonaRelacionViajante.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
   ZQ_PersonaRelacionViajante.Open;
 
-  ZQ_EmpresaMarca.Close;
   ZQ_EmpresaMarca.ParamByName('id_empresa').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
   ZQ_EmpresaMarca.Open;
 
-  ZQ_EntidadTelefonoEmpresa.Close;
   ZQ_EntidadTelefonoEmpresa.ParamByName('ID_ENTIDAD').AsInteger:= ZQ_EmpresaID_EMPRESA.AsInteger;
   ZQ_EntidadTelefonoEmpresa.Open;
+
+  ZQ_CtaCte.ParamByName('id_proveedor').AsInteger:= ZQ_EmpresaID_EMPRESA.AsInteger;
+  ZQ_CtaCte.Open;
+
+  tieneCuentaCorriente:= false;
+  if not ZQ_CtaCte.IsEmpty then
+    tieneCuentaCorriente:= true;
 end;
 
 
@@ -1073,46 +1113,145 @@ begin
   ShellExecute(self.handle, 'open', pchar('http://'+ZQ_EmpresaPAGINA_WEB.AsString), nil, nil, SW_SHOWNORMAL);
 end;
 
-procedure TFABMEmpresas.DBGridEntidadTelefonoEmpresaDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFABMEmpresas.DBGridEntidadTelefonoEmpresaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridEntidadTelefonoEmpresa, Rect, DataCol, Column, State);
 end;
 
-procedure TFABMEmpresas.DBGridContactosDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFABMEmpresas.DBGridContactosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridContactos, Rect, DataCol, Column, State);
 end;
 
-procedure TFABMEmpresas.DBGridContactoTelMailDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFABMEmpresas.DBGridContactoTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridContactoTelMail, Rect, DataCol, Column, State);
 end;
 
-procedure TFABMEmpresas.DBGridViajantesDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFABMEmpresas.DBGridViajantesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridViajantes, Rect, DataCol, Column, State);
 end;
 
-procedure TFABMEmpresas.DBGridViajanteTelMailDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFABMEmpresas.DBGridViajanteTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridViajanteTelMail, Rect, DataCol, Column, State);
 end;
 
-procedure TFABMEmpresas.GrillaMarcasDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFABMEmpresas.GrillaMarcasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(GrillaMarcas, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFABMEmpresas.habilitarCtaCte(flag: boolean);
+begin
+  gBoxCuentaCorriente.Enabled:= flag;
+  if flag then
+  begin
+    FPrincipal.Iconos_Menu_16.GetBitmap(0, btnCtaCte_Cancelar.Glyph);
+    FPrincipal.Iconos_Menu_16.GetBitmap(1, btnCtaCte_Aceptar.Glyph);
+  end
+  else
+  begin
+    btnCtaCte_Aceptar.Glyph:= nil;
+    btnCtaCte_Cancelar.Glyph:= nil;
+  end;
+
+  btnCtaCte_Alta.Enabled:= not flag;
+  btnCtaCte_Modificar.Enabled:= not flag;
+  btnCtaCte_Baja.Enabled:= not flag;
+  btnCtaCte_Reactivar.Enabled:= not flag;
+end;
+
+
+procedure TFABMEmpresas.btnCtaCte(Sender: TObject);
+var
+   btn: TButton;
+begin
+  altaCtaCte:= false;
+  btn:= Sender as TButton;
+
+  if btn.Caption = 'Alta' then
+  begin
+    if tieneCuentaCorriente then
+      exit;
+
+    altaCtaCte:= true;
+    habilitarCtaCte(true);
+
+    ZQ_CtaCte.Append;
+    ZQ_CtaCteID_PERSONA.Clear;
+    ZQ_CtaCteID_PROVEEDOR.AsInteger:= ZQ_EmpresaID_EMPRESA.AsInteger;
+    ZQ_CtaCteFECHA_ALTA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_CtaCteFECHA_BAJA.Clear;
+    ZQ_CtaCteLIMITE_DEUDA.AsFloat:= ctacte_credito; //por defecto lo de la configuracion
+    ZQ_CtaCteVENCIMIENTO_DIAS.AsInteger:= ctacte_diasVencimiento; //por defecto lo de la configuracion
+    ZQ_CtaCteSALDO.AsFloat:= 0;
+    ZQ_CtaCteBAJA.AsString:= 'N';
+
+    EKDBFechaCtaCte.SetFocus;
+    GrupoEditando.Enabled:= false;
+  end;
+
+  if btn.Caption = 'Modificar' then
+  begin
+    if not tieneCuentaCorriente then
+      exit;
+
+    habilitarCtaCte(true);
+    ZQ_CtaCte.Edit;
+    EKDBFechaCtaCte.SetFocus;
+    GrupoEditando.Enabled:= false;
+  end;
+
+  if btn.Caption = 'Baja' then
+  begin
+    if (not tieneCuentaCorriente) or (ZQ_CtaCteBAJA.AsString = 'S') then
+      exit;
+
+    if (application.MessageBox(pchar('¿Desea dar de baja la "Cuenta Corriente"?'), 'ABM Persona', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    begin
+      ZQ_CtaCte.Edit;
+      ZQ_CtaCteBAJA.AsString:= 'S';
+      ZQ_CtaCteFECHA_BAJA.AsDateTime:= dm.EKModelo.FechayHora;
+    end;
+  end;
+
+  if btn.Caption = 'Reactivar' then
+  begin
+    if (not tieneCuentaCorriente) or (ZQ_CtaCteBAJA.AsString = 'N') then
+      exit;
+
+    if (application.MessageBox(pchar('¿Desea reactivar la "Cuenta Corriente"?'), 'ABM Persona', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    begin
+      ZQ_CtaCte.Edit;
+      ZQ_CtaCteBAJA.AsString:= 'N';
+      ZQ_CtaCteFECHA_BAJA.clear;
+    end;
+  end;
+end;
+
+
+procedure TFABMEmpresas.btnCtaCte_AceptarClick(Sender: TObject);
+begin
+  if altaCtaCte then
+    tieneCuentaCorriente:= true;
+
+  ZQ_CtaCte.Post;
+  habilitarCtaCte(false);
+  GrupoEditando.Enabled:= true;
+end;
+
+
+procedure TFABMEmpresas.btnCtaCte_CancelarClick(Sender: TObject);
+begin
+  if altaCtaCte then
+    tieneCuentaCorriente:= false;
+
+  ZQ_CtaCte.RevertRecord;
+  habilitarCtaCte(false);
+  GrupoEditando.Enabled:= true;
 end;
 
 end.

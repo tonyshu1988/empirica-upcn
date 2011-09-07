@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'E:\Empirica\empirica-upcn\SiGeFa\Bases\SiGeFa.FDB'
+    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFaVacia.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -1823,7 +1823,7 @@ object DM: TDM
       'from configuracion_variables')
     Params = <>
     Left = 238
-    Top = 266
+    Top = 258
     object ZQ_Configuracion_VariablesCLAVE: TStringField
       FieldName = 'CLAVE'
       Required = True

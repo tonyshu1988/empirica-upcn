@@ -99,6 +99,9 @@ var
   TextoPieDePagina: string;
   imp_ad1_nombre: string;  //nombre del label para el impuesto adicional 1 de los productos
   imp_ad2_nombre: string;  //nombre del label para el impuesto adicional 2 de los productos
+  ctacte_diasVencimiento: integer;
+  ctacte_credito: double;  
+  monto_max_venta: double;
 
 Const
 //  TIPOS DE RELACION
@@ -111,8 +114,8 @@ Const
   //CAJERO
   CPB_FACTURA        = 11;
   //ABM COMPROBANTES
-  CPB_NOTA_CREDITO   = 12; //origina una disminución en la cuenta del comprador o deudor.
-  CPB_NOTA_DEBITO    = 13; //origina un incremento en la cuenta del comprador o deudor.
+  CPB_DEVOLUCION     = 12; //
+  CPB_FACTURA_COMPRA = 13; //
   CPB_PRESUPUESTO    = 14; //OK se entrega al CLIENTE con los productos cargados para una posible venta. AUTONUMERADO
   CPB_NOTA_PEDIDO    = 15; //OK se envia al PROVEEDOR con los productos encargados para una compra. AUTONUMERADO
   CPB_ORDEN_PAGO     = 18; //OK se entrega al CLIENTE como comprobante de un pago efectuado a este. AUTONUMERADO (comprobante de tercero).
@@ -129,17 +132,16 @@ Const
 
   LONG_COD_BARRAS       = 40;
   LONG_CODIGO           = 14;
-
-  MONTO_MAX_VENTA       = 15000;
 implementation
 
-uses UPrincipal, USeleccionarSucursal, UPanelNotificacion, IniFiles;
+uses UPrincipal, USeleccionarSucursal, UPanelNotificacion, IniFiles,
+  UUtilidades;
 
 {$R *.dfm}
 
 procedure TDM.LoginLogin(Sender: TObject);
 var
-  aux, logo_fondo:string;
+  aux, logo_fondo: string;
   i: integer;
 begin
   SkinData1.Active:= true;
@@ -151,23 +153,18 @@ begin
   auxCurrencyString:= CurrencyString;
 
   //seteo de variables globales
-  ZQ_Configuracion_Variables.Open;
-
-  ZQ_Configuracion_Variables.Locate('clave','colorCampoRequido',[]);
-  colorCampoRequido:= StringToColor(ZQ_Configuracion_VariablesTEXTO.AsString); //amarillo, indica los campos obligatorios
   enviandoMail:= false;          //setea la bandera en false indicando q no se esta enviando mail
 
-  ZQ_Configuracion_Variables.Locate('clave','TextoPieDePagina',[]);
-  TextoPieDePagina:= ZQ_Configuracion_VariablesTEXTO.AsString; //pie de pagina izquierdo de todos los reportes
-
-  ZQ_Configuracion_Variables.Locate('clave','provinciaPorDefecto',[]);
-  provinciaPorDefecto:= ZQ_Configuracion_VariablesNUMERO.AsInteger;
-
-  ZQ_Configuracion_Variables.Locate('clave','imp_ad1_nombre',[]);
-  imp_ad1_nombre:= ZQ_Configuracion_VariablesTEXTO.AsString;
-
-  ZQ_Configuracion_Variables.Locate('clave','imp_ad2_nombre',[]);
-  imp_ad2_nombre:= ZQ_Configuracion_VariablesTEXTO.AsString;
+  ZQ_Configuracion_Variables.Open;
+  configurarColor(ZQ_Configuracion_Variables, 'clave', 'texto', 'colorCampoRequido', colorCampoRequido);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'TextoPieDePagina', TextoPieDePagina);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'imp_ad1_nombre', imp_ad1_nombre);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'imp_ad2_nombre', imp_ad2_nombre);
+  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'provinciaPorDefecto', provinciaPorDefecto);
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'monto_max_venta', monto_max_venta);
+  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_diasVencimiento', ctacte_diasVencimiento);
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_credito', ctacte_credito);
+  ZQ_Configuracion_Variables.Close;
 
   //cargo la imagen de fondo del sistema
   EKIni.abrir;

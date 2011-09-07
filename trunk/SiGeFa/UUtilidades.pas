@@ -17,6 +17,12 @@ function EsEmailValido2(email: string): boolean;
 function GetIndexField(grilla: TDBGrid; NombreCampo: string): Integer;
 function GetIndexTitle(grilla: TDBGrid; NombreTitulo: string): Integer;
 procedure Split(const Delimiter: Char; Input: string; const Strings: TStrings);
+procedure configurarString(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: string);
+procedure configurarBoolean(Query: TZQuery; clave: string; campo: string; busqueda: string; valorCompara: string; var variable: Boolean);
+procedure configurarInteger(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: Integer);
+procedure configurarReal(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: double);
+procedure configurarDate(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: TDateTime);
+procedure configurarColor(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: TColor);
 
 implementation
 
@@ -376,6 +382,64 @@ begin
       Result:= i;
       Exit;
     end;
+end;
+
+
+procedure configurarString(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: string);
+begin
+  busqueda:= UpperCase(busqueda);
+  clave:= UpperCase(clave);
+  if Query.Locate(clave, VarArrayOf([busqueda]), [loCaseInsensitive]) then
+    variable:= Query.fieldbyname(campo).AsString;
+end;
+
+
+procedure configurarBoolean(Query: TZQuery; clave: string; campo: string; busqueda: string; valorCompara: string; var variable: Boolean);
+begin
+  busqueda:= UpperCase(busqueda);
+  clave:= UpperCase(clave);
+  valorCompara:= UpperCase(valorCompara);
+  if Query.Locate(clave, VarArrayOf([busqueda]), [loCaseInsensitive]) then //si existe la clave
+    if upperCase(Query.fieldbyname(campo).AsString) = valorCompara then //si el campo es 'SI' la vairable es True
+      variable:= True
+    else //si el campo es distinto de 'SI' variable es False
+      variable:= False;
+end;
+
+
+procedure configurarInteger(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: Integer);
+begin
+  busqueda:= UpperCase(busqueda);
+  clave:= UpperCase(clave);
+  if Query.Locate(clave, VarArrayOf([busqueda]), [loCaseInsensitive]) then
+    variable:= Query.fieldbyname(campo).AsInteger
+end;
+
+
+procedure configurarReal(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: double);
+begin
+  busqueda:= UpperCase(busqueda);
+  clave:= UpperCase(clave);
+  if Query.Locate(clave, VarArrayOf([busqueda]), [loCaseInsensitive]) then
+    variable:= Query.fieldbyname(campo).AsFloat;
+end;
+
+
+procedure configurarDate(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: TDateTime);
+begin
+  busqueda:= UpperCase(busqueda);
+  clave:= UpperCase(clave);    
+  if Query.Locate(clave, VarArrayOf([busqueda]), [loCaseInsensitive]) then
+    variable:= Query.fieldbyname(campo).AsDateTime;
+end;
+
+
+procedure configurarColor(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: TColor);
+begin
+  busqueda:= UpperCase(busqueda);
+  clave:= UpperCase(clave);
+  if Query.Locate(clave, VarArrayOf([busqueda]), [loCaseInsensitive]) then
+    variable:= StringToColor(Query.fieldbyname(campo).AsString);
 end;
 
 end.
