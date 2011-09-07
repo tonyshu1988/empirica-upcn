@@ -1,8 +1,8 @@
 object FCajero: TFCajero
-  Left = 190
-  Top = 32
-  Width = 1060
-  Height = 774
+  Left = 207
+  Top = 103
+  Width = 1040
+  Height = 692
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,21 +22,21 @@ object FCajero: TFCajero
   object PanelContenedor: TPanel
     Left = 88
     Top = 0
-    Width = 956
-    Height = 684
+    Width = 936
+    Height = 602
     Align = alClient
     TabOrder = 0
     object PanelDetalleProducto: TPanel
       Left = 1
       Top = 31
       Width = 307
-      Height = 652
+      Height = 570
       Align = alLeft
       BevelInner = bvSpace
       TabOrder = 0
       object grupoDetalle: TGroupBox
         Left = 2
-        Top = 394
+        Top = 312
         Width = 303
         Height = 256
         Align = alBottom
@@ -626,15 +626,15 @@ object FCajero: TFCajero
     object PanelContenedorDerecha: TPanel
       Left = 308
       Top = 31
-      Width = 647
-      Height = 652
+      Width = 627
+      Height = 570
       Align = alClient
       Caption = 'PanelContenedorDerecha'
       TabOrder = 1
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 433
-        Width = 645
+        Top = 351
+        Width = 625
         Height = 218
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -642,7 +642,7 @@ object FCajero: TFCajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 643
+          Width = 623
           Height = 140
           Align = alClient
           Color = 16762303
@@ -720,13 +720,13 @@ object FCajero: TFCajero
         object PieGrillaFormaPago: TPanel
           Left = 1
           Top = 141
-          Width = 643
+          Width = 623
           Height = 76
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 1
           DesignSize = (
-            643
+            623
             76)
           object lblMaxVenta: TLabel
             Left = 144
@@ -745,7 +745,7 @@ object FCajero: TFCajero
             Visible = False
           end
           object Label15: TLabel
-            Left = 433
+            Left = 413
             Top = 9
             Width = 81
             Height = 16
@@ -761,7 +761,7 @@ object FCajero: TFCajero
           object lblTotAPagar: TLabel
             Left = 1
             Top = 32
-            Width = 641
+            Width = 621
             Height = 43
             Align = alBottom
             Alignment = taRightJustify
@@ -788,7 +788,7 @@ object FCajero: TFCajero
             OnClick = btnBorrarPagoClick
           end
           object ImporteFPago: TEdit
-            Left = 516
+            Left = 496
             Top = 8
             Width = 129
             Height = 19
@@ -813,8 +813,8 @@ object FCajero: TFCajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 123
-        Width = 645
-        Height = 310
+        Width = 625
+        Height = 228
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 1
@@ -828,8 +828,8 @@ object FCajero: TFCajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 643
-          Height = 254
+          Width = 623
+          Height = 172
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -901,19 +901,19 @@ object FCajero: TFCajero
         end
         object PieGrilla: TPanel
           Left = 1
-          Top = 255
-          Width = 643
+          Top = 173
+          Width = 623
           Height = 54
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 1
           DesignSize = (
-            643
+            623
             54)
           object Label10: TLabel
             Left = 1
             Top = 37
-            Width = 641
+            Width = 621
             Height = 16
             Align = alBottom
             Alignment = taCenter
@@ -932,7 +932,7 @@ object FCajero: TFCajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 22
-            Width = 641
+            Width = 621
             Height = 15
             Align = alBottom
             Alignment = taRightJustify
@@ -940,7 +940,7 @@ object FCajero: TFCajero
             Layout = tlCenter
           end
           object Label19: TLabel
-            Left = 385
+            Left = 365
             Top = 6
             Width = 118
             Height = 16
@@ -963,7 +963,7 @@ object FCajero: TFCajero
             OnClick = btQuitarProductoClick
           end
           object Importe: TEdit
-            Left = 508
+            Left = 488
             Top = 5
             Width = 137
             Height = 19
@@ -988,16 +988,16 @@ object FCajero: TFCajero
       object PanelCabeceraFactura: TPanel
         Left = 1
         Top = 1
-        Width = 645
+        Width = 625
         Height = 122
         Align = alTop
         BevelOuter = bvLowered
         TabOrder = 2
         object Label11: TLabel
           Left = 1
-          Top = 107
-          Width = 643
-          Height = 14
+          Top = 105
+          Width = 623
+          Height = 16
           Align = alBottom
           Alignment = taCenter
           Caption = 'Listado de Productos a Cobrar  [F6]'
@@ -1015,8 +1015,8 @@ object FCajero: TFCajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 643
-          Height = 14
+          Width = 623
+          Height = 16
           Align = alTop
           Alignment = taCenter
           Caption = 'Detalles Cliente  [F3]'
@@ -1221,7 +1221,7 @@ object FCajero: TFCajero
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 954
+      Width = 934
       Height = 30
       Align = alTop
       TabOrder = 2
@@ -1244,7 +1244,7 @@ object FCajero: TFCajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 575
+        Left = 555
         Top = 1
         Width = 378
         Height = 28

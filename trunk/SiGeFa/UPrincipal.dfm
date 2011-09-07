@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 197
-  Top = 146
+  Left = 237
+  Top = 151
   Width = 871
   Height = 563
   Caption = 'SiGeFa - Sistema de Gesti'#243'n y Facturaci'#243'n'
@@ -5029,6 +5029,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 38
       OnExecute = AEstad_DisponibExecute
     end
+    object APreventa: TAction
+      Caption = 'Venta de Mostrador'
+      ImageIndex = 34
+      OnExecute = APreventaExecute
+    end
     object AEstad_Stock: TAction
       Caption = 'Estadistica Stock'
       ImageIndex = 38
@@ -5076,52 +5081,39 @@ object FPrincipal: TFPrincipal
     Top = 80
     object PantallasNuevas1: TMenuItem
       Caption = 'Facturacion'
-      object ABMTipoIva1: TMenuItem
-        Tag = 1
-        Action = AABM_TipoIva
-      end
-      object ABMTipo1: TMenuItem
-        Tag = 1
-        Action = AABM_TipoMedioPago
-      end
-      object ABMCuentas1: TMenuItem
-        Tag = 1
-        Action = AABM_Cuenta
-      end
-      object N6: TMenuItem
-        Caption = '-'
-      end
       object Cajero1: TMenuItem
         Tag = 1
         Action = ACajero
       end
-      object ArqueodeCaja1: TMenuItem
-        Action = AArqueo_Caja
+      object VentadeMostrador1: TMenuItem
+        Action = APreventa
       end
     end
     object Productos1: TMenuItem
       Caption = 'Productos'
-      object ABM_Articulos: TMenuItem
-        Tag = 1
-        Action = AABM_Colores
-      end
-      object ABMMarcas1: TMenuItem
-        Action = AABM_Marcas
-      end
-      object ABMTipoArticulo1: TMenuItem
-        Action = AABM_TipoArticulo
-      end
-      object ABMArticulo1: TMenuItem
-        Action = AABM_Articulo
-      end
-      object ABMArticulosMedida1: TMenuItem
-        Action = AABM_ArticuloMedida
-      end
-      object N1: TMenuItem
-        Caption = '-'
-      end
       object ABMProductos1: TMenuItem
         Action = AABMProductos
+      end
+      object ControlStock1: TMenuItem
+        Caption = 'Control Stock'
+        object ABMProductoStock1: TMenuItem
+          Action = AABM_ProductoStock
+        end
+        object ransferirStock1: TMenuItem
+          Tag = 1
+          Action = ATransferirStock
+        end
+      end
+      object N6: TMenuItem
+        Caption = '-'
+      end
+      object ABMPrecios1: TMenuItem
+        Tag = 1
+        Action = AABM_Precios
+      end
+      object ImprimirEtiquetas1: TMenuItem
+        Tag = 1
+        Action = AImprimirEtiqueta
       end
     end
     object Clientes1: TMenuItem
@@ -5134,45 +5126,6 @@ object FPrincipal: TFPrincipal
       end
       object CuentaCorriente1: TMenuItem
         Action = ACuentaCorriente
-      end
-    end
-    object Empresas1: TMenuItem
-      Caption = 'Empresas'
-      object ABMTipoEmpresa1: TMenuItem
-        Action = AABM_TipoEmpresa
-      end
-      object ABMEmpresas1: TMenuItem
-        Action = AABMEmpresas
-      end
-      object N2: TMenuItem
-        Caption = '-'
-      end
-      object ABMSucursal1: TMenuItem
-        Action = AABM_Sucursal
-      end
-      object ABMSucursalPosicion1: TMenuItem
-        Action = AABM_SucursalPosicion
-      end
-    end
-    object ControlStock1: TMenuItem
-      Caption = 'Control Stock'
-      object ABMProductoStock1: TMenuItem
-        Action = AABM_ProductoStock
-      end
-      object ransferirStock1: TMenuItem
-        Tag = 1
-        Action = ATransferirStock
-      end
-      object N3: TMenuItem
-        Caption = '-'
-      end
-      object ABMPrecios1: TMenuItem
-        Tag = 1
-        Action = AABM_Precios
-      end
-      object ImprimirEtiquetas1: TMenuItem
-        Tag = 1
-        Action = AImprimirEtiqueta
       end
     end
     object BandejadeMail1: TMenuItem
@@ -5255,6 +5208,77 @@ object FPrincipal: TFPrincipal
         Tag = 1
         Action = AEstad_Stock
       end
+      object Caja1: TMenuItem
+        Caption = 'Caja'
+        object ArqueodeCaja1: TMenuItem
+          Action = AArqueo_Caja
+        end
+      end
+    end
+    object ABM1: TMenuItem
+      Caption = 'Configuraci'#243'n'
+      object Facturacin1: TMenuItem
+        Caption = 'Facturaci'#243'n'
+        object ABMCuentas1: TMenuItem
+          Tag = 1
+          Action = AABM_Cuenta
+        end
+        object ABMTipoIva1: TMenuItem
+          Tag = 1
+          Action = AABM_TipoIva
+        end
+        object ABMTipo1: TMenuItem
+          Tag = 1
+          Action = AABM_TipoMedioPago
+        end
+      end
+      object Productos2: TMenuItem
+        Caption = 'Productos'
+        object ABM_Articulos: TMenuItem
+          Tag = 1
+          Action = AABM_Colores
+        end
+        object ABMMarcas1: TMenuItem
+          Action = AABM_Marcas
+        end
+        object N3: TMenuItem
+          Caption = '-'
+        end
+        object ABMArticulo1: TMenuItem
+          Action = AABM_Articulo
+        end
+        object ABMTipoArticulo1: TMenuItem
+          Action = AABM_TipoArticulo
+        end
+        object ABMArticulosMedida1: TMenuItem
+          Action = AABM_ArticuloMedida
+        end
+      end
+      object Empresas1: TMenuItem
+        Caption = 'Empresa/Sucursal'
+        object ABMTipoEmpresa1: TMenuItem
+          Action = AABM_TipoEmpresa
+        end
+        object ABMEmpresas1: TMenuItem
+          Action = AABMEmpresas
+        end
+        object N2: TMenuItem
+          Caption = '-'
+        end
+        object ABMSucursal1: TMenuItem
+          Action = AABM_Sucursal
+        end
+        object ABMSucursalPosicion1: TMenuItem
+          Action = AABM_SucursalPosicion
+        end
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object ConfigurarImpresora: TMenuItem
+        Tag = 1
+        Action = AConfigImpresora
+      end
     end
     object Salir1: TMenuItem
       Caption = 'Sistema'
@@ -5263,10 +5287,6 @@ object FPrincipal: TFPrincipal
         Caption = 'Cambiar &Password'
         ImageIndex = 7
         OnClick = CambiarContraseniaClick
-      end
-      object ConfigurarImpresora: TMenuItem
-        Tag = 1
-        Action = AConfigImpresora
       end
       object AcercaDe: TMenuItem
         Tag = 1

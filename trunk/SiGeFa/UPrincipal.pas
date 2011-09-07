@@ -68,9 +68,7 @@ type
     ConfigurarMail1: TMenuItem;
     AABM_Articulo: TAction;
     ABMArticulo1: TMenuItem;
-    N1: TMenuItem;
     N2: TMenuItem;
-    N3: TMenuItem;
     PantallasNuevas1: TMenuItem;
     ABMTipoIva1: TMenuItem;
     ABMTipoComprobante1: TMenuItem;
@@ -97,7 +95,6 @@ type
     AEstad_MovInternos: TAction;
     Movimientos1: TMenuItem;
     N5: TMenuItem;
-    N6: TMenuItem;
     AEstad_Facturacion: TAction;
     Estadisticas1: TMenuItem;
     EstadisticaMovimientosInt1: TMenuItem;
@@ -132,6 +129,15 @@ type
     ABMFacturaCompra1: TMenuItem;
     N4: TMenuItem;
     N8: TMenuItem;
+    APreventa: TAction;
+    VentadeMostrador1: TMenuItem;
+    ABM1: TMenuItem;
+    Facturacin1: TMenuItem;
+    Productos2: TMenuItem;
+    Caja1: TMenuItem;
+    N1: TMenuItem;
+    N3: TMenuItem;
+    N6: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -178,6 +184,7 @@ type
     procedure AABM_CPB_NotaPedidoExecute(Sender: TObject);
     procedure AABM_CPB_FacturaCompraExecute(Sender: TObject);
     procedure AABM_CPB_DevolucionExecute(Sender: TObject);
+    procedure APreventaExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -210,7 +217,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion,
   UEstadisticaDisponibilidades, UArqueo_Caja, Types, UEstadisticaStock,
   UABM_CPB_Recibo, UABM_CPB_OrdenPago, UABM_CPB_Remito,
-  UABM_CPB_Presupuesto, UABM_CPB_NotaPedido;
+  UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -611,6 +618,11 @@ end;
 procedure TFPrincipal.AABM_CPB_DevolucionExecute(Sender: TObject);
 begin
 //
+end;
+
+procedure TFPrincipal.APreventaExecute(Sender: TObject);
+begin
+   EKVentanas1.Abrir(Sender, TFABM_Preventa, FABM_Preventa);
 end;
 
 end.
