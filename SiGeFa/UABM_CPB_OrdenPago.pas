@@ -1098,10 +1098,29 @@ begin
 end;
 
 
+//Para renombrar el procedimiento Ctrl+Del que viene por defecto en las grillas
+procedure TFABM_CPB_OrdenPago.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  EKOrd_VerCpb.GuardarConfigColumnas;
+  EKOrd_VerCpb_Fpago.GuardarConfigColumnas;
+  EKOrd_EditarFpago.GuardarConfigColumnas;  
+end;
+
+
+procedure TFABM_CPB_OrdenPago.DBGridEditar_FpagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridEditar_Fpago, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFABM_CPB_OrdenPago.DBGridCpbActual_FPagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridCpbActual_FPago, Rect, DataCol, Column, State);
+end;
+
+
 procedure TFABM_CPB_OrdenPago.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  DBGridListaCpb.Canvas.Font.Color := clBlack;
-
   if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ALMACENADO) then //si el registro esta dado de baja
   begin
     DBGridListaCpb.Canvas.Brush.Color:= $0098F8F3;
@@ -1113,30 +1132,5 @@ begin
 
   FPrincipal.PintarFilasGrillas(DBGridListaCpb, Rect, DataCol, Column, State);
 end;
-
-
-//Para renombrar el procedimiento Ctrl+Del que viene por defecto en las grillas
-procedure TFABM_CPB_OrdenPago.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  EKOrd_VerCpb.GuardarConfigColumnas;
-  EKOrd_VerCpb_Fpago.GuardarConfigColumnas;
-  EKOrd_EditarFpago.GuardarConfigColumnas;  
-end;
-
-procedure TFABM_CPB_OrdenPago.DBGridEditar_FpagoDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  FPrincipal.PintarFilasGrillas(DBGridEditar_Fpago, Rect, DataCol, Column, State);
-end;
-
-procedure TFABM_CPB_OrdenPago.DBGridCpbActual_FPagoDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  FPrincipal.PintarFilasGrillas(DBGridCpbActual_FPago, Rect, DataCol, Column, State);
-end;
-
-
 
 end.

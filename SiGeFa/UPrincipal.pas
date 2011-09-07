@@ -126,6 +126,12 @@ type
     ABMPresupuesto1: TMenuItem;
     AABM_CPB_NotaPedido: TAction;
     ABMPresupuesto2: TMenuItem;
+    AABM_CPB_FacturaCompra: TAction;
+    AABM_CPB_Devolucion: TAction;
+    ABMDevolucin1: TMenuItem;
+    ABMFacturaCompra1: TMenuItem;
+    N4: TMenuItem;
+    N8: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -170,6 +176,8 @@ type
     procedure AABM_CPB_OrdenPagoExecute(Sender: TObject);
     procedure AABM_CPB_PresupuestoExecute(Sender: TObject);
     procedure AABM_CPB_NotaPedidoExecute(Sender: TObject);
+    procedure AABM_CPB_FacturaCompraExecute(Sender: TObject);
+    procedure AABM_CPB_DevolucionExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -593,6 +601,16 @@ end;
 procedure TFPrincipal.AABM_CPB_NotaPedidoExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_NotaPedido, FABM_CPB_NotaPedido);
+end;
+
+procedure TFPrincipal.AABM_CPB_FacturaCompraExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFPrincipal.AABM_CPB_DevolucionExecute(Sender: TObject);
+begin
+//
 end;
 
 end.

@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 311
-  Top = 98
+  Left = 317
+  Top = 113
   Width = 862
   Height = 631
   Caption = 'ABM Personas'
@@ -2616,7 +2616,7 @@ object FABM_Personas: TFABM_Personas
         Top = 0
         Width = 836
         Height = 200
-        ActivePage = TabSheetDatos
+        ActivePage = TabSheetCtaCte
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet
@@ -3064,39 +3064,46 @@ object FABM_Personas: TFABM_Personas
           ImageIndex = 3
           object gBoxCuentaCorriente: TGroupBox
             Left = 88
-            Top = 4
-            Width = 265
-            Height = 153
+            Top = 1
+            Width = 276
+            Height = 170
             Caption = ' Cuenta Corriente '
             TabOrder = 0
             object Label15: TLabel
-              Left = 32
+              Left = 49
               Top = 22
               Width = 64
               Height = 13
               Caption = 'Fecha Alta:'
             end
             object Label12: TLabel
-              Left = 16
-              Top = 51
-              Width = 80
+              Left = 66
+              Top = 77
+              Width = 47
               Height = 13
-              Caption = 'Limite Deuda:'
+              Caption = 'Credito:'
             end
-            object Label17: TLabel
-              Left = 56
-              Top = 83
-              Width = 40
+            object Label3: TLabel
+              Left = 9
+              Top = 107
+              Width = 104
               Height = 13
-              Caption = 'Activa:'
+              Caption = 'Dias Vencimiento:'
+            end
+            object Label4: TLabel
+              Left = 45
+              Top = 50
+              Width = 68
+              Height = 13
+              Caption = 'Fecha Baja:'
             end
             object EKDBFechaCtaCte: TEKDBDateTimePicker
-              Left = 99
+              Left = 115
               Top = 18
               Width = 153
               Height = 21
-              Date = 40771.441277488440000000
-              Time = 40771.441277488440000000
+              Date = 40793.391464837970000000
+              Time = 40793.391464837970000000
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3108,8 +3115,8 @@ object FABM_Personas: TFABM_Personas
               DataSource = DS_CtaCte
             end
             object DBEditLimiteDeuda: TDBEdit
-              Left = 99
-              Top = 49
+              Left = 115
+              Top = 75
               Width = 153
               Height = 21
               DataField = 'LIMITE_DEUDA'
@@ -3123,8 +3130,8 @@ object FABM_Personas: TFABM_Personas
               TabOrder = 1
             end
             object btnCtaCte_Aceptar: TBitBtn
-              Left = 11
-              Top = 116
+              Left = 21
+              Top = 135
               Width = 40
               Height = 29
               TabOrder = 2
@@ -3132,27 +3139,44 @@ object FABM_Personas: TFABM_Personas
             end
             object btnCtaCte_Cancelar: TBitBtn
               Left = 212
-              Top = 116
+              Top = 135
               Width = 40
               Height = 29
               TabOrder = 3
               OnClick = btnCtaCte_CancelarClick
             end
-            object DBRadioGroup1: TDBRadioGroup
-              Left = 99
-              Top = 72
+            object DBEditVencimDia: TDBEdit
+              Left = 115
+              Top = 105
               Width = 153
-              Height = 38
-              Columns = 2
-              DataField = 'BAJA'
+              Height = 21
+              DataField = 'VENCIMIENTO_DIAS'
               DataSource = DS_CtaCte
-              Items.Strings = (
-                'SI'
-                'NO')
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
               TabOrder = 4
-              Values.Strings = (
-                'N'
-                'S')
+            end
+            object EKDBDateTimePicker1: TEKDBDateTimePicker
+              Left = 115
+              Top = 46
+              Width = 153
+              Height = 21
+              Date = 40793.391464837970000000
+              Time = 40793.391464837970000000
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 5
+              DataField = 'FECHA_BAJA'
+              DataSource = DS_CtaCte
             end
           end
           object btnCtaCte_Alta: TButton
@@ -3162,7 +3186,7 @@ object FABM_Personas: TFABM_Personas
             Height = 25
             Caption = 'Alta'
             TabOrder = 1
-            OnClick = btnCtaCte_AltaClick
+            OnClick = btnCtaCte
           end
           object btnCtaCte_Modificar: TButton
             Left = 8
@@ -3171,7 +3195,25 @@ object FABM_Personas: TFABM_Personas
             Height = 25
             Caption = 'Modificar'
             TabOrder = 2
-            OnClick = btnCtaCte_ModificarClick
+            OnClick = btnCtaCte
+          end
+          object btnCtaCte_Reactivar: TButton
+            Left = 8
+            Top = 104
+            Width = 75
+            Height = 25
+            Caption = 'Reactivar'
+            TabOrder = 3
+            OnClick = btnCtaCte
+          end
+          object btnCtaCte_Baja: TButton
+            Left = 8
+            Top = 72
+            Width = 75
+            Height = 25
+            Caption = 'Baja'
+            TabOrder = 4
+            OnClick = btnCtaCte
           end
         end
       end
@@ -4630,6 +4672,12 @@ object FABM_Personas: TFABM_Personas
       FieldName = 'BAJA'
       Size = 1
     end
+    object ZQ_CtaCteID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_CtaCteVENCIMIENTO_DIAS: TIntegerField
+      FieldName = 'VENCIMIENTO_DIAS'
+    end
   end
   object DS_CtaCte: TDataSource
     DataSet = ZQ_CtaCte
@@ -4687,8 +4735,8 @@ object FABM_Personas: TFABM_Personas
   object PopupMenuTelmail: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
-    Left = 84
-    Top = 396
+    Left = 412
+    Top = 236
     object AgregarTelMail: TMenuItem
       Caption = 'Agregar Telefono/Mail'
       ImageIndex = 14

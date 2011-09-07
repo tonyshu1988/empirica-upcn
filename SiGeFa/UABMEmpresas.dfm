@@ -1,6 +1,6 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 198
-  Top = 109
+  Left = 174
+  Top = 54
   Width = 1024
   Height = 663
   Caption = 'ABM Empresas'
@@ -2257,7 +2257,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 291
       Width = 1006
       Height = 281
-      ActivePage = TabMarcas
+      ActivePage = TabCtaCte
       Align = alBottom
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -2983,6 +2983,163 @@ object FABMEmpresas: TFABMEmpresas
           ParentFont = False
           PopupMenu = PopupMenuSkypeMail
           TabOrder = 0
+        end
+      end
+      object TabCtaCte: TTabSheet
+        Caption = 'Cuenta Corriente'
+        ImageIndex = 6
+        object btnCtaCte_Alta: TButton
+          Left = 8
+          Top = 8
+          Width = 75
+          Height = 25
+          Caption = 'Alta'
+          TabOrder = 0
+          OnClick = btnCtaCte
+        end
+        object btnCtaCte_Modificar: TButton
+          Left = 8
+          Top = 40
+          Width = 75
+          Height = 25
+          Caption = 'Modificar'
+          TabOrder = 1
+          OnClick = btnCtaCte
+        end
+        object btnCtaCte_Baja: TButton
+          Left = 8
+          Top = 72
+          Width = 75
+          Height = 25
+          Caption = 'Baja'
+          TabOrder = 2
+          OnClick = btnCtaCte
+        end
+        object btnCtaCte_Reactivar: TButton
+          Left = 8
+          Top = 104
+          Width = 75
+          Height = 25
+          Caption = 'Reactivar'
+          TabOrder = 3
+          OnClick = btnCtaCte
+        end
+        object gBoxCuentaCorriente: TGroupBox
+          Left = 88
+          Top = 1
+          Width = 276
+          Height = 170
+          Caption = ' Cuenta Corriente '
+          TabOrder = 4
+          object Label15: TLabel
+            Left = 49
+            Top = 22
+            Width = 64
+            Height = 13
+            Caption = 'Fecha Alta:'
+          end
+          object Label8: TLabel
+            Left = 66
+            Top = 77
+            Width = 47
+            Height = 13
+            Caption = 'Credito:'
+          end
+          object Label16: TLabel
+            Left = 9
+            Top = 107
+            Width = 104
+            Height = 13
+            Caption = 'Dias Vencimiento:'
+          end
+          object Label17: TLabel
+            Left = 45
+            Top = 50
+            Width = 68
+            Height = 13
+            Caption = 'Fecha Baja:'
+          end
+          object EKDBFechaCtaCte: TEKDBDateTimePicker
+            Left = 115
+            Top = 18
+            Width = 153
+            Height = 21
+            Date = 40793.391464837970000000
+            Time = 40793.391464837970000000
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+            DataField = 'FECHA_ALTA'
+            DataSource = DS_CtaCte
+          end
+          object DBEditLimiteDeuda: TDBEdit
+            Left = 115
+            Top = 75
+            Width = 153
+            Height = 21
+            DataField = 'LIMITE_DEUDA'
+            DataSource = DS_CtaCte
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+          end
+          object btnCtaCte_Aceptar: TBitBtn
+            Left = 21
+            Top = 135
+            Width = 40
+            Height = 29
+            TabOrder = 2
+            OnClick = btnCtaCte_AceptarClick
+          end
+          object btnCtaCte_Cancelar: TBitBtn
+            Left = 212
+            Top = 135
+            Width = 40
+            Height = 29
+            TabOrder = 3
+            OnClick = btnCtaCte_CancelarClick
+          end
+          object DBEditVencimDia: TDBEdit
+            Left = 115
+            Top = 105
+            Width = 153
+            Height = 21
+            DataField = 'VENCIMIENTO_DIAS'
+            DataSource = DS_CtaCte
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 4
+          end
+          object EKDBDateTimePicker1: TEKDBDateTimePicker
+            Left = 115
+            Top = 46
+            Width = 153
+            Height = 21
+            Date = 40793.391464837970000000
+            Time = 40793.391464837970000000
+            Enabled = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 5
+            DataField = 'FECHA_BAJA'
+            DataSource = DS_CtaCte
+          end
         end
       end
     end
@@ -5137,5 +5294,60 @@ object FABMEmpresas: TFABMEmpresas
     DataSet = ZQ_EntidadTelefonoViajantes
     Left = 768
     Top = 304
+  end
+  object ZQ_CtaCte: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select cc.*'
+      'from cuenta_corriente cc'
+      'where  cc.id_proveedor = :id_proveedor')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_proveedor'
+        ParamType = ptUnknown
+      end>
+    Left = 936
+    Top = 56
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_proveedor'
+        ParamType = ptUnknown
+      end>
+    object ZQ_CtaCteID_CTA_CTE: TIntegerField
+      FieldName = 'ID_CTA_CTE'
+    end
+    object ZQ_CtaCteID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_CtaCteSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
+    object ZQ_CtaCteLIMITE_DEUDA: TFloatField
+      FieldName = 'LIMITE_DEUDA'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object ZQ_CtaCteFECHA_ALTA: TDateField
+      FieldName = 'FECHA_ALTA'
+    end
+    object ZQ_CtaCteFECHA_BAJA: TDateField
+      FieldName = 'FECHA_BAJA'
+    end
+    object ZQ_CtaCteBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_CtaCteID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_CtaCteVENCIMIENTO_DIAS: TIntegerField
+      FieldName = 'VENCIMIENTO_DIAS'
+    end
+  end
+  object DS_CtaCte: TDataSource
+    DataSet = ZQ_CtaCte
+    Left = 936
+    Top = 104
   end
 end

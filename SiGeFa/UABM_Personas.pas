@@ -238,8 +238,6 @@ type
     btnCtaCte_Aceptar: TBitBtn;
     btnCtaCte_Cancelar: TBitBtn;
     btnCtaCte_Modificar: TButton;
-    DBRadioGroup1: TDBRadioGroup;
-    Label17: TLabel;
     TabSheetcTel: TTabSheet;
     DBGridTelMail: TDBGrid;
     ZQ_EntidadTelefono: TZQuery;
@@ -254,6 +252,14 @@ type
     EditarTelMail: TMenuItem;
     ZQ_EntidadTelefonoID_PERSONA: TIntegerField;
     ZQ_EntidadTelefonoDESCRIPCION: TStringField;
+    Label3: TLabel;
+    DBEditVencimDia: TDBEdit;
+    btnCtaCte_Reactivar: TButton;
+    btnCtaCte_Baja: TButton;
+    ZQ_CtaCteID_PROVEEDOR: TIntegerField;
+    ZQ_CtaCteVENCIMIENTO_DIAS: TIntegerField;
+    EKDBDateTimePicker1: TEKDBDateTimePicker;
+    Label4: TLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -281,24 +287,20 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure RadioGroupRelacionClienteClick(Sender: TObject);
     procedure habilitarCtaCte(flag: boolean);
-    procedure btnCtaCte_AltaClick(Sender: TObject);
-    procedure btnCtaCte_ModificarClick(Sender: TObject);
     procedure btnCtaCte_AceptarClick(Sender: TObject);
     procedure btnCtaCte_CancelarClick(Sender: TObject);
+    procedure btnCtaCte(Sender: TObject);
     procedure AgregarTelMailClick(Sender: TObject);
     procedure EditarTelMailClick(Sender: TObject);
     procedure EliminarTelMailClick(Sender: TObject);
     procedure ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
-    procedure DBGridTelMailDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure DBGridRolDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridRolDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     id_persona: integer;
   public
     id_sucursal: integer;
-    existeRelacionCliente, tieneCuentaCorriente: boolean;
+    existeRelacionCliente, tieneCuentaCorriente, altaCtaCte: boolean;
   end;
 
 var
@@ -316,9 +318,6 @@ uses UDM, UPrincipal, EKModelo;
 
 procedure TFABM_Personas.FormCreate(Sender: TObject);
 begin
-  FPrincipal.Iconos_Menu_16.GetBitmap(0, btnCtaCte_Cancelar.Glyph);
-  FPrincipal.Iconos_Menu_16.GetBitmap(1, btnCtaCte_Aceptar.Glyph);
-
   habilitarCtaCte(false);
 
   EKOrdenar.CargarConfigColumnas;
@@ -765,52 +764,23 @@ end;
 procedure TFABM_Personas.habilitarCtaCte(flag: boolean);
 begin
   gBoxCuentaCorriente.Enabled:= flag;
+  if flag then
+  begin
+    FPrincipal.Iconos_Menu_16.GetBitmap(0, btnCtaCte_Cancelar.Glyph);
+    FPrincipal.Iconos_Menu_16.GetBitmap(1, btnCtaCte_Aceptar.Glyph);
+  end
+  else
+  begin
+    btnCtaCte_Aceptar.Glyph:= nil;
+    btnCtaCte_Cancelar.Glyph:= nil;
+  end;
+
   btnCtaCte_Alta.Enabled:= not flag;
   btnCtaCte_Modificar.Enabled:= not flag;
+  btnCtaCte_Baja.Enabled:= not flag;
+  btnCtaCte_Reactivar.Enabled:= not flag;
 end;
 
-
-procedure TFABM_Personas.btnCtaCte_AltaClick(Sender: TObject);
-begin
-  if tieneCuentaCorriente then
-    exit;
-
-  habilitarCtaCte(true);
-
-  ZQ_CtaCte.Append;
-  ZQ_CtaCteID_PERSONA.AsInteger:= id_persona;
-  ZQ_CtaCteFECHA_ALTA.AsDateTime:= dm.EKModelo.FechayHora;
-  ZQ_CtaCteLIMITE_DEUDA.AsFloat:= 0;
-  ZQ_CtaCteSALDO.AsFloat:= 0;
-  ZQ_CtaCteBAJA.AsString:= 'N';
-
-  EKDBFechaCtaCte.SetFocus;
-end;
-
-
-procedure TFABM_Personas.btnCtaCte_ModificarClick(Sender: TObject);
-begin
-  if not tieneCuentaCorriente then
-    exit;
-
-  habilitarCtaCte(true);
-  ZQ_CtaCte.Edit;
-  EKDBFechaCtaCte.SetFocus;
-end;
-
-
-procedure TFABM_Personas.btnCtaCte_AceptarClick(Sender: TObject);
-begin
-  ZQ_CtaCte.Post;
-  habilitarCtaCte(false);
-end;
-
-
-procedure TFABM_Personas.btnCtaCte_CancelarClick(Sender: TObject);
-begin
-  ZQ_CtaCte.RevertRecord;
-  habilitarCtaCte(false);
-end;
 
 procedure TFABM_Personas.AgregarTelMailClick(Sender: TObject);
 begin
@@ -822,6 +792,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_Personas.EditarTelMailClick(Sender: TObject);
 begin
   if not (dgEditing	in DBGridTelMail.Options) then
@@ -832,14 +803,13 @@ begin
   end;
 end;
 
+
 procedure TFABM_Personas.EliminarTelMailClick(Sender: TObject);
 begin
- if not ZQ_EntidadTelefono.IsEmpty then
- begin
-    ZQ_EntidadTelefono.Delete;
- end
-
+if not ZQ_EntidadTelefono.IsEmpty then
+  ZQ_EntidadTelefono.Delete;
 end;
+
 
 procedure TFABM_Personas.ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
 begin
@@ -858,6 +828,96 @@ procedure TFABM_Personas.DBGridRolDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridTelMail, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFABM_Personas.btnCtaCte(Sender: TObject);
+var
+   btn: TButton;
+begin
+  altaCtaCte:= false;
+  btn:= Sender as TButton;
+
+  if btn.Caption = 'Alta' then
+  begin
+    if tieneCuentaCorriente then
+      exit;
+
+    altaCtaCte:= true;
+    habilitarCtaCte(true);
+
+    ZQ_CtaCte.Append;
+    ZQ_CtaCteID_PERSONA.AsInteger:= id_persona;
+    ZQ_CtaCteID_PROVEEDOR.Clear;
+    ZQ_CtaCteFECHA_ALTA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_CtaCteFECHA_BAJA.Clear;
+    ZQ_CtaCteLIMITE_DEUDA.AsFloat:= ctacte_credito; //por defecto lo de la configuracion
+    ZQ_CtaCteVENCIMIENTO_DIAS.AsInteger:= ctacte_diasVencimiento; //por defecto lo de la configuracion
+    ZQ_CtaCteSALDO.AsFloat:= 0;
+    ZQ_CtaCteBAJA.AsString:= 'N';
+
+    EKDBFechaCtaCte.SetFocus;
+    GrupoGuardarCancelar.Enabled:= false;
+  end;
+
+  if btn.Caption = 'Modificar' then
+  begin
+    if not tieneCuentaCorriente then
+      exit;
+
+    habilitarCtaCte(true);
+    ZQ_CtaCte.Edit;
+    EKDBFechaCtaCte.SetFocus;
+    GrupoGuardarCancelar.Enabled:= false;
+  end;
+
+  if btn.Caption = 'Baja' then
+  begin
+    if (not tieneCuentaCorriente) or (ZQ_CtaCteBAJA.AsString = 'S') then
+      exit;
+
+    if (application.MessageBox(pchar('¿Desea dar de baja la "Cuenta Corriente"?'), 'ABM Persona', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    begin
+      ZQ_CtaCte.Edit;
+      ZQ_CtaCteBAJA.AsString:= 'S';
+      ZQ_CtaCteFECHA_BAJA.AsDateTime:= dm.EKModelo.FechayHora;
+    end;
+  end;
+
+  if btn.Caption = 'Reactivar' then
+  begin
+    if (not tieneCuentaCorriente) or (ZQ_CtaCteBAJA.AsString = 'N') then
+      exit;
+
+    if (application.MessageBox(pchar('¿Desea reactivar la "Cuenta Corriente"?'), 'ABM Persona', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    begin
+      ZQ_CtaCte.Edit;
+      ZQ_CtaCteBAJA.AsString:= 'N';
+      ZQ_CtaCteFECHA_BAJA.clear;
+    end;
+  end;
+end;
+
+
+procedure TFABM_Personas.btnCtaCte_AceptarClick(Sender: TObject);
+begin
+  if altaCtaCte then
+    tieneCuentaCorriente:= true;
+
+  ZQ_CtaCte.Post;
+  habilitarCtaCte(false);
+  GrupoGuardarCancelar.Enabled:= true;
+end;
+
+
+procedure TFABM_Personas.btnCtaCte_CancelarClick(Sender: TObject);
+begin
+  if altaCtaCte then
+    tieneCuentaCorriente:= false;
+
+  ZQ_CtaCte.RevertRecord;
+  habilitarCtaCte(false);
+  GrupoGuardarCancelar.Enabled:= true;  
 end;
 
 end.
