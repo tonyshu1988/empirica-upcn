@@ -2658,7 +2658,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label12: TLabel
             Left = 1
             Top = 5
-            Width = 996
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2826,7 +2826,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label13: TLabel
             Left = 1
             Top = 5
-            Width = 996
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2956,7 +2956,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label14: TLabel
             Left = 1
             Top = 5
-            Width = 996
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -4237,6 +4237,9 @@ object FABMEmpresas: TFABMEmpresas
     object ZQ_EmpresaDESCRIPCION_PRIVADA: TStringField
       FieldName = 'DESCRIPCION_PRIVADA'
       Size = 1000
+    end
+    object ZQ_EmpresaCODIGO_CORTO: TIntegerField
+      FieldName = 'CODIGO_CORTO'
     end
   end
   object DS_Empresa: TDataSource
