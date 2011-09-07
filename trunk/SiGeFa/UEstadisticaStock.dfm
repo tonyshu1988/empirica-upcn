@@ -1,6 +1,6 @@
 object FEstadisticaStock: TFEstadisticaStock
-  Left = 318
-  Top = 143
+  Left = 264
+  Top = 93
   Width = 870
   Height = 500
   Caption = 'FEstadisticaStock'
@@ -823,9 +823,11 @@ object FEstadisticaStock: TFEstadisticaStock
     Top = 80
     object ZQ_StockPRECIO_COSTO: TFloatField
       FieldName = 'PRECIO_COSTO'
+      currency = True
     end
     object ZQ_StockPRECIO_VENTA: TFloatField
       FieldName = 'PRECIO_VENTA'
+      currency = True
     end
     object ZQ_StockID_STOCK_PRODUCTO: TIntegerField
       FieldName = 'ID_STOCK_PRODUCTO'
@@ -1168,7 +1170,7 @@ object FEstadisticaStock: TFEstadisticaStock
         NombreCampo = 'precioventastock'
       end>
     DataSet = ZQ_Stock
-    Left = 189
+    Left = 197
     Top = 81
   end
   object mxDBGridExport: TmxDBGridExport
