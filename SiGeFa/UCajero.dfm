@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 156
-  Top = 38
+  Left = 171
+  Top = 35
   Width = 1060
   Height = 774
   Caption = 'Cajero SiGeFa'
@@ -422,6 +422,7 @@ object FCajero: TFCajero
           Visible = False
         end
         object edCantidad: TEKEdit
+          Tag = 99
           Left = 3
           Top = 81
           Width = 57
@@ -440,6 +441,7 @@ object FCajero: TFCajero
           DataType = ftInteger
         end
         object edImporte: TEKEdit
+          Tag = 99
           Left = 209
           Top = 81
           Width = 90
@@ -458,6 +460,7 @@ object FCajero: TFCajero
           DataType = ftFloat
         end
         object edDesc: TEKEdit
+          Tag = 99
           Left = 78
           Top = 81
           Width = 54
@@ -484,7 +487,7 @@ object FCajero: TFCajero
           BevelOuter = bvNone
           TabOrder = 3
           object LeerCodBar: TLabel
-            Left = 56
+            Left = 55
             Top = 13
             Width = 192
             Height = 16
@@ -503,7 +506,7 @@ object FCajero: TFCajero
             Visible = False
           end
           object barcode2: TImage
-            Left = 272
+            Left = 268
             Top = 5
             Width = 32
             Height = 32
@@ -991,9 +994,9 @@ object FCajero: TFCajero
         TabOrder = 2
         object Label11: TLabel
           Left = 1
-          Top = 105
+          Top = 107
           Width = 643
-          Height = 16
+          Height = 14
           Align = alBottom
           Alignment = taCenter
           Caption = 'Listado de Productos a Cobrar  [F6]'
@@ -1012,7 +1015,7 @@ object FCajero: TFCajero
           Left = 1
           Top = 1
           Width = 643
-          Height = 16
+          Height = 14
           Align = alTop
           Alignment = taCenter
           Caption = 'Detalles Cliente  [F3]'

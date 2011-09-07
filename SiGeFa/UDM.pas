@@ -65,6 +65,15 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
+    ZQ_Configuracion_Variables: TZQuery;
+    ZQ_Configuracion_VariablesCLAVE: TStringField;
+    ZQ_Configuracion_VariablesFECHA: TDateField;
+    ZQ_Configuracion_VariablesNUMERO: TFloatField;
+    ZQ_Configuracion_VariablesTEXTO: TStringField;
+    ZQ_Configuracion_VariablesNIVEL: TSmallintField;
+    ZQ_Configuracion_VariablesGRUPO: TStringField;
+    ZQ_Configuracion_VariablesDESCRIPCION: TStringField;
+    ZQ_Configuracion_VariablesGRAFICO: TBlobField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
@@ -142,13 +151,23 @@ begin
   auxCurrencyString:= CurrencyString;
 
   //seteo de variables globales
-  colorCampoRequido:= $00B3FFFF; //amarillo, indica los campos obligatorios
-  enviandoMail:= false;          //setea la bandera en false indicando q no se esta enviando mail
-  TextoPieDePagina:= 'Sistema Gestión y Facturación - '; //pie de pagina izquierdo de todos los reportes
-  provinciaPorDefecto:= 1; //por ahora SANTA FE, despues se puede tomar de la configuracion
+  ZQ_Configuracion_Variables.Open;
 
-  imp_ad1_nombre:= 'Per. IB';
-  imp_ad2_nombre:= 'Res. 3337';  
+  ZQ_Configuracion_Variables.Locate('clave','colorCampoRequido',[]);
+  colorCampoRequido:= StringToColor(ZQ_Configuracion_VariablesTEXTO.AsString); //amarillo, indica los campos obligatorios
+  enviandoMail:= false;          //setea la bandera en false indicando q no se esta enviando mail
+
+  ZQ_Configuracion_Variables.Locate('clave','TextoPieDePagina',[]);
+  TextoPieDePagina:= ZQ_Configuracion_VariablesTEXTO.AsString; //pie de pagina izquierdo de todos los reportes
+
+  ZQ_Configuracion_Variables.Locate('clave','provinciaPorDefecto',[]);
+  provinciaPorDefecto:= ZQ_Configuracion_VariablesNUMERO.AsInteger;
+
+  ZQ_Configuracion_Variables.Locate('clave','imp_ad1_nombre',[]);
+  imp_ad1_nombre:= ZQ_Configuracion_VariablesTEXTO.AsString;
+
+  ZQ_Configuracion_Variables.Locate('clave','imp_ad2_nombre',[]);
+  imp_ad2_nombre:= ZQ_Configuracion_VariablesTEXTO.AsString;
 
   //cargo la imagen de fondo del sistema
   EKIni.abrir;

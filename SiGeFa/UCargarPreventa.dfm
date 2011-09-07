@@ -1,6 +1,6 @@
 object FPreventa: TFPreventa
-  Left = 357
-  Top = 226
+  Left = 433
+  Top = 243
   Width = 712
   Height = 411
   Caption = 'Cargar Preventa'
@@ -70,18 +70,7 @@ object FPreventa: TFPreventa
           Expanded = False
           FieldName = 'IMPORTETOTAL'
           Title.Caption = 'Importe'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TIVA_'
-          Title.Caption = 'Tipo IVA'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'PORC_IVA'
-          Title.Caption = 'IVA'
+          Width = 92
           Visible = True
         end
         item
