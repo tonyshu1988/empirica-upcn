@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
-  StdCtrls, EKDbSuma, mxNativeExcel, mxExport, EKOrdenarGrilla;
+  StdCtrls, EKDbSuma, mxNativeExcel, mxExport, EKOrdenarGrilla, QRCtrls,
+  QuickRpt, EKVistaPreviaQR;
 
 type
   TFEstadisticaStock = class(TForm)
@@ -23,7 +24,7 @@ type
     btnImprimir: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
     btBuscarGoogle: TdxBarLargeButton;
-    btImprimirEtiquetas: TdxBarLargeButton;
+    btImprimir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     DBGridStock: TDBGrid;
@@ -58,6 +59,46 @@ type
     mxDBGridExport: TmxDBGridExport;
     mxNativeExcel1: TmxNativeExcel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    RepEstadisticaStock: TQuickRep;
+    QRBand5: TQRBand;
+    QRDBImage1: TQRDBImage;
+    QRLabel11: TQRLabel;
+    RepCtas_Reporte_Titulo_2: TQRLabel;
+    RepCtas_Reporte_Titulo_1: TQRLabel;
+    QRBandDetalle: TQRBand;
+    QRDBTextCoefGanancia: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBTextPrecioCosto: TQRDBText;
+    QRDBTextPrecioVenta: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRChildBandCleinte: TQRChildBand;
+    QRBand7: TQRBand;
+    QRLabel24: TQRLabel;
+    QRSysData2: TQRSysData;
+    QRBand1: TQRBand;
+    ChildBand1: TQRChildBand;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabelimporteVenta: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabelmporteCosto: TQRLabel;
+    QRLabelCoefGanancia: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRLabel5: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRLabel6: TQRLabel;
+    QRDBText8: TQRDBText;
+    QRLabel7: TQRLabel;
+    QRExpr1: TQRExpr;
+    EKVistaPreviaQR1: TEKVistaPreviaQR;
+    QRExpr2: TQRExpr;
+    QRLabel8: TQRLabel;
+    QRLabel10: TQRLabel;
     procedure ZQ_StockCalcFields(DataSet: TDataSet);
     procedure btnBuscarClick(Sender: TObject);
     procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -66,6 +107,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnSalirClick(Sender: TObject);
+    procedure btImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -120,6 +162,11 @@ end;
 procedure TFEstadisticaStock.btnSalirClick(Sender: TObject);
 begin
 close;
+end;
+
+procedure TFEstadisticaStock.btImprimirClick(Sender: TObject);
+begin
+EKVistaPreviaQR1.VistaPrevia;
 end;
 
 end.
