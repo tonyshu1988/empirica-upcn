@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFaVacia.FDB'
+    Database = 'E:\Empirica\empirica-upcn\SiGeFa\Bases\SiGeFa.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -16,6 +16,7 @@ object DM: TDM
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
+    Connected = True
     SQLHourGlass = True
     Left = 38
     Top = 16

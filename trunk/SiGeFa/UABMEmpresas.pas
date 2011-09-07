@@ -343,6 +343,7 @@ type
     ZQ_CtaCteID_PROVEEDOR: TIntegerField;
     ZQ_CtaCteVENCIMIENTO_DIAS: TIntegerField;
     DS_CtaCte: TDataSource;
+    ZQ_EmpresaCODIGO_CORTO: TIntegerField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
