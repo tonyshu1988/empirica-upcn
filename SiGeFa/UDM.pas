@@ -102,6 +102,11 @@ var
   ctacte_diasVencimiento: integer;
   ctacte_credito: double;  
   monto_max_venta: double;
+  precio1 : string;
+  precio2 : string;
+  precio3 : string;
+  precio4 : string;
+  precio5 : string;
 
 Const
 //  TIPOS DE RELACION
@@ -164,6 +169,13 @@ begin
   configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'monto_max_venta', monto_max_venta);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_diasVencimiento', ctacte_diasVencimiento);
   configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_credito', ctacte_credito);
+
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO1', precio1);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO2', precio2);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO3', precio3);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO4', precio4);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO5', precio5);
+
   ZQ_Configuracion_Variables.Close;
 
   //cargo la imagen de fondo del sistema
