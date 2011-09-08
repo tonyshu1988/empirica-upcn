@@ -3949,7 +3949,7 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
         TituloColumna = 'Vendedor'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_VerCpb'
+    NombreGuardar = 'ABM_RM_VerCpb'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -3981,7 +3981,7 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
         TituloColumna = 'Importe Final'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_VerProductos'
+    NombreGuardar = 'ABM_RM_VerProductos'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -4676,7 +4676,7 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
         TituloColumna = 'Precio Final'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_EditarProductos'
+    NombreGuardar = 'ABM_RM_EditarProductos'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True

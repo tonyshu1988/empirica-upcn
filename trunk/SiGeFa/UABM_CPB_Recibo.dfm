@@ -3522,7 +3522,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TituloColumna = 'Vendedor'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_VerCpb'
+    NombreGuardar = 'ABM_RC_VerCpb'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -4283,7 +4283,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TituloColumna = 'Importe'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_EditarFPago'
+    NombreGuardar = 'ABM_RC_EditarFPago'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -4408,7 +4408,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TituloColumna = 'Importe'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_VerFpago'
+    NombreGuardar = 'ABM_RC_VerFpago'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True

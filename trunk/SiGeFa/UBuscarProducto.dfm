@@ -1428,4 +1428,38 @@ object FBuscarProducto: TFBuscarProducto
     Left = 248
     Top = 104
   end
+  object ZQ_EmpresaMarca: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select e.*'
+      'from empresa_marca e'
+      'where e.id_empresa = :id_empresa')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_empresa'
+        ParamType = ptUnknown
+      end>
+    Left = 248
+    Top = 160
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_empresa'
+        ParamType = ptUnknown
+      end>
+    object ZQ_EmpresaMarcaID: TIntegerField
+      FieldName = 'ID'
+    end
+    object ZQ_EmpresaMarcaID_EMPRESA: TIntegerField
+      FieldName = 'ID_EMPRESA'
+    end
+    object ZQ_EmpresaMarcaID_MARCA: TIntegerField
+      FieldName = 'ID_MARCA'
+    end
+    object ZQ_EmpresaMarcaDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+  end
 end

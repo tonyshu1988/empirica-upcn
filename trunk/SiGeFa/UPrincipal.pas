@@ -222,7 +222,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UEstadisticaDisponibilidades, UArqueo_Caja, Types, UEstadisticaStock,
   UABM_CPB_Recibo, UABM_CPB_OrdenPago, UABM_CPB_Remito,
   UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa,
-  UCuentaCorriente_Proveedor;
+  UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -617,12 +617,12 @@ end;
 
 procedure TFPrincipal.AABM_CPB_FacturaCompraExecute(Sender: TObject);
 begin
-//
+   EKVentanas1.Abrir(Sender, TFABM_CPB_FacturaCompra, FABM_CPB_FacturaCompra);
 end;
 
 procedure TFPrincipal.AABM_CPB_DevolucionExecute(Sender: TObject);
 begin
-//
+//   EKVentanas1.Abrir(Sender, TFABM_CPB_FacturaCompra, FABM_CPB_FacturaCompra);
 end;
 
 procedure TFPrincipal.APreventaExecute(Sender: TObject);
