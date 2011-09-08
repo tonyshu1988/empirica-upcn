@@ -910,31 +910,27 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TabOrder = 1
         object PanelEditar_FPagoInfo: TPanel
           Left = 0
-          Top = 270
+          Top = 249
           Width = 866
-          Height = 20
+          Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
-          object lblTotalFormaPago: TLabel
-            Left = 517
+          DesignSize = (
+            866
+            41)
+          object Label29: TLabel
+            Left = 729
             Top = 3
-            Width = 349
-            Height = 14
-            Align = alCustom
-            Alignment = taRightJustify
+            Width = 28
+            Height = 13
             Anchors = [akTop, akRight]
-            AutoSize = False
-            BiDiMode = bdLeftToRight
-            Caption = 'Total Forma Pago'
-            Color = cl3DLight
+            Caption = 'Total'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentBiDiMode = False
-            ParentColor = False
+            Font.Style = []
             ParentFont = False
           end
           object btnEliminarFPago: TButton
@@ -946,12 +942,33 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             TabOrder = 0
             OnClick = btnEliminarFPagoClick
           end
+          object editTotalFinal: TEdit
+            Left = 728
+            Top = 17
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 1
+          end
         end
         object DBGridEditar_Fpago: TDBGrid
           Left = 0
           Top = 0
           Width = 866
-          Height = 270
+          Height = 249
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbFormaPago
@@ -1130,46 +1147,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               Title.Alignment = taCenter
               Title.Caption = 'Importe'
               Visible = True
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA_COBRADA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Cobro'
-              Visible = False
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA_ENVIADA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Envio'
-              Visible = False
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA_IMPRESA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Impreso'
-              Visible = False
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA_VENCIMIENTO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Vencim.'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'VENDEDOR'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vendedor'
-              Width = 300
-              Visible = True
             end>
         end
       end
@@ -1186,7 +1163,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Left = 0
           Top = 0
           Width = 525
-          Height = 260
+          Height = 305
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -1194,7 +1171,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             Left = 0
             Top = 0
             Width = 525
-            Height = 260
+            Height = 305
             Align = alClient
             Color = 14606012
             DataSource = DS_VerCpb_Fpago
@@ -1267,9 +1244,9 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 260
+          Top = 305
           Width = 525
-          Height = 207
+          Height = 162
           Align = alBottom
           BevelOuter = bvNone
           BorderWidth = 2
@@ -1278,50 +1255,13 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             Left = 2
             Top = 2
             Width = 521
-            Height = 203
+            Height = 158
             Align = alClient
             Caption = '  Datos Comprobante  '
             TabOrder = 0
             DesignSize = (
               521
-              203)
-            object lblVerFecha_Ven_Ejec: TLabel
-              Left = 381
-              Top = 19
-              Width = 51
-              Height = 13
-              Alignment = taRightJustify
-              Caption = 'F. Venc.:'
-            end
-            object lblVerFecha_Cpb_Dev: TLabel
-              Left = 189
-              Top = 19
-              Width = 67
-              Height = 13
-              Alignment = taRightJustify
-              Caption = 'F. Impreso:'
-            end
-            object Label28: TLabel
-              Left = 213
-              Top = 38
-              Width = 43
-              Height = 13
-              Caption = 'Estado:'
-            end
-            object Label27: TLabel
-              Left = 8
-              Top = 38
-              Width = 50
-              Height = 13
-              Caption = 'F.Cobro:'
-            end
-            object Label24: TLabel
-              Left = 8
-              Top = 19
-              Width = 50
-              Height = 13
-              Caption = 'F. Envio:'
-            end
+              158)
             object DBTxtMonto: TDBText
               Left = 332
               Top = 130
@@ -1338,84 +1278,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               Font.Style = [fsBold]
               ParentFont = False
             end
-            object DBText5: TDBText
-              Left = 257
-              Top = 38
-              Width = 256
-              Height = 13
-              DataField = 'ESTADO'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object DBText4: TDBText
-              Left = 59
-              Top = 38
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA_COBRADA'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object DBText3: TDBText
-              Left = 433
-              Top = 19
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA_VENCIMIENTO'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object DBText2: TDBText
-              Left = 257
-              Top = 19
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA_IMPRESA'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object DBText1: TDBText
-              Left = 59
-              Top = 19
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA_ENVIADA'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
             object Label1: TLabel
               Left = 463
               Top = 118
@@ -1423,6 +1285,75 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               Height = 13
               Alignment = taRightJustify
               Caption = 'Importe'
+            end
+            object lblDatos_Proveedor: TLabel
+              Left = 8
+              Top = 19
+              Width = 64
+              Height = 13
+              Caption = 'Proveedor:'
+            end
+            object DBTxtDatos_Proveedor: TDBText
+              Left = 78
+              Top = 19
+              Width = 427
+              Height = 13
+              Color = 14342874
+              DataField = 'PROVEEDOR'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object lblDatos_Cliente: TLabel
+              Left = 27
+              Top = 19
+              Width = 45
+              Height = 13
+              Caption = 'Cliente:'
+            end
+            object DBTxtDatos_Cliente: TDBText
+              Left = 78
+              Top = 19
+              Width = 427
+              Height = 13
+              Color = 14342874
+              DataField = 'CLIENTE'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label30: TLabel
+              Left = 18
+              Top = 36
+              Width = 54
+              Height = 13
+              Caption = 'F. Carga:'
+            end
+            object DBText33: TDBText
+              Left = 78
+              Top = 36
+              Width = 80
+              Height = 13
+              Color = 14342874
+              DataField = 'FECHA'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
             end
             object DBMemoCpbActual_Info: TDBMemo
               Left = 8
@@ -1492,6 +1423,20 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       Color = 6974207
       ParentColor = False
       TabOrder = 0
+    end
+    object StaticTxtConfirmado: TStaticText
+      Left = 657
+      Top = 1
+      Width = 109
+      Height = 17
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'CONFIRMADO'
+      Color = 10025203
+      ParentColor = False
+      TabOrder = 1
     end
   end
   object dxBarABM: TdxBarManager
@@ -1999,6 +1944,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       Hint = 'Da de baja un registro'
       Visible = ivAlways
       ImageIndex = 25
+      OnClick = btnBajaClick
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
@@ -2051,7 +1997,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       Caption = 'F4 - Confirmar'
       Category = 0
       Hint = 'Confirmar el comprobante seleccionado'
-      Visible = ivNever
+      Visible = ivAlways
       ImageIndex = 5
       OnClick = btnConfirmarClick
       AutoGrayScale = False
@@ -3401,22 +3347,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       FieldName = 'FECHA'
       DisplayFormat = 'dd/MM/yyyy'
     end
-    object ZQ_VerCpbFECHA_COBRADA: TDateField
-      FieldName = 'FECHA_COBRADA'
-      DisplayFormat = 'dd/MM/yyyy'
-    end
-    object ZQ_VerCpbFECHA_ENVIADA: TDateField
-      FieldName = 'FECHA_ENVIADA'
-      DisplayFormat = 'dd/MM/yyyy'
-    end
-    object ZQ_VerCpbFECHA_IMPRESA: TDateField
-      FieldName = 'FECHA_IMPRESA'
-      DisplayFormat = 'dd/MM/yyyy'
-    end
-    object ZQ_VerCpbFECHA_VENCIMIENTO: TDateField
-      FieldName = 'FECHA_VENCIMIENTO'
-      DisplayFormat = 'dd/MM/yyyy'
-    end
     object ZQ_VerCpbFECHA_ANULADO: TDateField
       FieldName = 'FECHA_ANULADO'
       DisplayFormat = 'dd/MM/yyyy'
@@ -3448,10 +3378,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     object ZQ_VerCpbVENDEDOR: TStringField
       FieldName = 'VENDEDOR'
       Size = 200
-    end
-    object ZQ_VerCpbNOMBRE_TIPO_CPB: TStringField
-      FieldName = 'NOMBRE_TIPO_CPB'
-      Size = 50
     end
     object ZQ_VerCpbESTADO: TStringField
       FieldName = 'ESTADO'
@@ -3500,26 +3426,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       end
       item
         TituloColumna = 'Importe'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Cobro'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Fecha Envio'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Fecha Impreso'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Fecha Vencim.'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Vendedor'
         Visible = True
       end>
     NombreGuardar = 'ABM_RC_VerCpb'

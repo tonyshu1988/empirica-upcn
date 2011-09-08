@@ -69,10 +69,7 @@ type
     ZQ_VerCpbIMPORTE_TOTAL: TFloatField;
     ZQ_VerCpbENCABEZADO: TStringField;
     ZQ_VerCpbPIE: TStringField;
-    ZQ_VerCpbFECHA_COBRADA: TDateField;
     ZQ_VerCpbFECHA_ENVIADA: TDateField;
-    ZQ_VerCpbFECHA_IMPRESA: TDateField;
-    ZQ_VerCpbFECHA_VENCIMIENTO: TDateField;
     ZQ_VerCpbSUCURSAL: TStringField;
     ZQ_VerCpbPROVEEDOR: TStringField;
     ZQ_VerCpbCUIT_PROVEEDOR: TStringField;
@@ -80,7 +77,6 @@ type
     ZQ_VerCpbCLIENTE_DOCUMENTO: TStringField;
     ZQ_VerCpbCLIENTE_CUIL: TStringField;
     ZQ_VerCpbVENDEDOR: TStringField;
-    ZQ_VerCpbNOMBRE_TIPO_CPB: TStringField;
     ZQ_VerCpbESTADO: TStringField;
     DBGridListaCpb: TDBGrid;
     DBGridCpbActual_Producto: TDBGrid;
@@ -109,18 +105,8 @@ type
     PanelCpbActual_ProductoDetalle: TPanel;
     GroupBox2: TGroupBox;
     DBMemoCpbActual_Producto: TDBMemo;
-    lblVerFecha_Ven_Ejec: TLabel;
-    lblVerFecha_Cpb_Dev: TLabel;
-    Label28: TLabel;
-    Label27: TLabel;
-    Label24: TLabel;
     DBTxtMonto: TDBText;
-    DBText5: TDBText;
-    DBText4: TDBText;
-    DBText3: TDBText;
-    DBText2: TDBText;
     DBMemoCpbActual_Info: TDBMemo;
-    DBText1: TDBText;
     Label1: TLabel;
     ZQ_VerCpbPUNTO_VENTA: TIntegerField;
     ZQ_VerCpbNUMERO_CPB: TIntegerField;
@@ -271,7 +257,6 @@ type
     ZQ_NumeroCpbSIGNO_CTA_CTE: TIntegerField;
     ZQ_NumeroCpbBAJA: TStringField;
     Panel1: TPanel;
-    edImagen: TDBImage;
     DS_Producto: TDataSource;
     CD_Producto: TClientDataSet;
     CD_Producto_idProducto: TIntegerField;
@@ -322,25 +307,15 @@ type
     PopupGridProducto: TPopupMenu;
     PopUpItem_ProductoOcultarDetalle: TMenuItem;
     PanelFechas: TPanel;
-    PanelFechaVencimiento: TPanel;
-    PanelFechaImpreso: TPanel;
     PanelFechaEnviado: TPanel;
-    PanelFechaCobrado: TPanel;
     PanelFechaEmision: TPanel;
     EKDBDateEmision: TEKDBDateTimePicker;
     lblTituloFecha_Emision: TLabel;
-    EKDBDateCobrado: TEKDBDateTimePicker;
     EKDBDateEnviado: TEKDBDateTimePicker;
-    EKDBDateImpreso: TEKDBDateTimePicker;
-    EKDBDateVencimiento: TEKDBDateTimePicker;
-    lblTituloFecha_Cobrado: TLabel;
     lblTituloFecha_Enviado: TLabel;
-    lblTituloFecha_Impreso: TLabel;
-    lblTituloFecha_Vencimiento: TLabel;
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
     btnConfirmar: TdxBarLargeButton;
-    lblCantidadProductos: TLabel;
     EKSuma_Productos: TEKDbSuma;
     EKOrd_EditarProducto: TEKOrdenarGrilla;
     ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
@@ -352,6 +327,30 @@ type
     ZQ_VerCpb_ProductoCANTIDAD_ALMACENADA: TFloatField;
     ZQ_VerCpb_ProductoID_STOCK_PRODUCTO: TIntegerField;
     ZQ_VerCpb_ProductoIMPORTE_VENTA: TFloatField;
+    Label30: TLabel;
+    editTotalProductos: TEdit;
+    editTotalFinal: TEdit;
+    Label29: TLabel;
+    ImagenProducto: TDBImage;
+    ImagenSucursal: TDBImage;
+    DBTxtCodBarra: TDBText;
+    DBTxtNombre: TDBText;
+    DBTxtMedida: TDBText;
+    DBTxtColor: TDBText;
+    DBTxtMarca: TDBText;
+    DS_ImagenSuc: TDataSource;
+    ZQ_CpbProducto_Marca: TStringField;
+    ZQ_CpbProducto_TipoArticulo: TStringField;
+    ZQ_CpbProducto_Articulo: TStringField;
+    lblDatos_Proveedor: TLabel;
+    DBTxtDatos_Proveedor: TDBText;
+    lblDatos_Cliente: TLabel;
+    DBTxtDatos_Cliente: TDBText;
+    Label19: TLabel;
+    DBText33: TDBText;
+    Label31: TLabel;
+    DBText34: TDBText;
+    StaticTxtConfirmado: TStaticText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -397,6 +396,7 @@ type
     procedure DBGridCpbActual_ProductoDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure btnBajaClick(Sender: TObject);
   private
     estadoPantalla: string;
     tipoComprobante: integer;
@@ -438,6 +438,7 @@ begin
 
     lblCantidadRegistros.Visible:= false;
     StaticTxtBaja.Visible:= false;
+    StaticTxtConfirmado.Visible:= false;
     lblTipoComprobante.Visible:= true;
 
     GrupoEditando.Enabled := false;
@@ -452,6 +453,7 @@ begin
 
     lblCantidadRegistros.Visible:= true;
     StaticTxtBaja.Visible:= true;
+    StaticTxtConfirmado.Visible:= true;
     lblTipoComprobante.Visible:= false;
 
     GrupoEditando.Enabled := true;
@@ -480,7 +482,12 @@ begin
 
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 
-  CD_Producto.CreateDataSet;  
+  CD_Producto.CreateDataSet;
+
+  DS_ImagenSuc.DataSet:= dm.ZQ_Sucursal;
+  ImagenSucursal.DataField:= 'LOGO';
+  ImagenProducto.Visible:= false;
+  ImagenSucursal.Visible:= true;
 end;
 
 
@@ -519,11 +526,6 @@ end;
 
 procedure TFABM_CPB_Remito.cargarTipoComprobante(tipo: integer);
 begin
-  lblTituloFecha_Impreso.Caption:=  'Impreso';
-  configPanelFechas(PanelFechaCobrado, false);
-  configPanelFechas(PanelFechaEnviado, true);
-  configPanelFechas(PanelFechaImpreso, false);
-  configPanelFechas(PanelFechaVencimiento, false);
   lblTipoComprobante.Caption:= 'REMITO';
 end;
 
@@ -779,6 +781,21 @@ begin
 
   ZQ_VerCpb_Producto.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   ZQ_VerCpb_Producto.Open;
+
+  if ZQ_VerCpbID_CLIENTE.IsNull then
+  begin
+    DBTxtDatos_Proveedor.Visible:= true;
+    lblDatos_Proveedor.Visible:= true;
+    DBTxtDatos_Cliente.Visible:= false;
+    lblDatos_Cliente.Visible:= false;
+  end
+  else
+  begin
+    DBTxtDatos_Proveedor.Visible:= false;
+    lblDatos_Proveedor.Visible:= false;
+    DBTxtDatos_Cliente.Visible:= true;
+    lblDatos_Cliente.Visible:= true;
+  end;
 end;
 
 
@@ -1003,6 +1020,17 @@ begin
   ZQ_Imagen.Close;
   ZQ_Imagen.ParamByName('id_producto').AsInteger:= id_prducto;
   ZQ_Imagen.Open;
+
+  if ZQ_ImagenIMAGEN.Value = '' then
+  begin
+    ImagenProducto.Visible:= false;
+    ImagenSucursal.Visible:= true;
+  end
+  else
+  begin
+    ImagenProducto.Visible:= true;
+    ImagenSucursal.Visible:= false;
+  end  
 end;
 
 
@@ -1089,64 +1117,40 @@ end;
 
 procedure TFABM_CPB_Remito.btnConfirmarClick(Sender: TObject);
 var
-  estado: Integer;
+  recno, estado: Integer;
 begin
-//  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-//  if ((ZQ_VerCpb.IsEmpty) or ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO))) then
-//    exit;
-//
-//  confirmarComprobante:= true;
-//  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
-//  tipoComprobante:= ZQ_VerCpbID_TIPO_CPB.AsInteger;
-//
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbProducto]) then
-//  begin
-//    PanelTipoCpb.Visible:= false;
-//    modoEdicion(true);
-//
-//    if not CD_Producto.IsEmpty then
-//      CD_Producto.EmptyDataSet;
-//    cargarProductosClienDataset();
-//
-//    ZQ_Comprobante.Close;
-//    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_Comprobante.Open;
-//
-//    ZQ_CpbFormaPago.Close;
-//    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_CpbFormaPago.Open;
-//
-//    ZQ_CpbProducto.Close;
-//    ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_CpbProducto.Open;
-//
-//    if ZQ_ComprobanteID_CLIENTE.IsNull then
-//    begin
-//      PanelEditar_DatosGralProveedor.BringToFront;
-//      ZQ_Proveedor.Close;
-//      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= ZQ_ComprobanteID_PROVEEDOR.AsInteger;
-//      ZQ_Proveedor.Open;
-//      ZQ_Cliente.Close;
-//    end;
-//
-//    if ZQ_ComprobanteID_PROVEEDOR.IsNull then
-//    begin
-//      PanelEditar_DatosGralCliente.BringToFront;
-//      ZQ_Cliente.Close;
-//      ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_ComprobanteID_CLIENTE.AsInteger;
-//      ZQ_Cliente.Open;
-//      ZQ_Proveedor.Close;
-//    end;
-//
-//    cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
-//    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - CONFIRMAR';
-//    confirmarCpb(tipoComprobante);
-//
-//    ZQ_Comprobante.Edit;
-//    ZQ_ComprobanteFECHA_IMPRESA.AsDateTime:= dm.EKModelo.FechayHora;
-//
-//    EKDBDateImpreso.SetFocus;
-//  end;
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or
+     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
+    exit;
+
+  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+
+  if (application.MessageBox(pchar('¿Desea confirmar el Remito seleccionada?'), 'ABM Remito', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    begin
+      ZQ_Comprobante.Close;
+      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_Comprobante.Open;
+
+      ZQ_Comprobante.Edit;
+      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo confirmar el Remito.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_VerCpb.RecNo;
+  ZQ_VerCpb.Refresh;
+  ZQ_VerCpb.RecNo:= recNo;
+  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 end;
 
 
@@ -1186,10 +1190,11 @@ procedure TFABM_CPB_Remito.EKSuma_ProductosSumListChanged(Sender: TObject);
 var
   cantidad, precio: string;
 begin
-  cantidad := 'Cantidad Productos: ' + FormatFloat('###,###,###,##0.00', EKSuma_Productos.SumCollection[0].SumValue);
-  precio := 'Importe Total: ' + FormatFloat('$ ###,###,###,##0.00', EKSuma_Productos.SumCollection[1].SumValue);
+  cantidad:= FormatFloat('###,###,###,##0.00', EKSuma_Productos.SumCollection[0].SumValue);
+  precio:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Productos.SumCollection[1].SumValue);
 
-  lblCantidadProductos.Caption:= cantidad+' - '+precio;
+  editTotalProductos.Text:= cantidad;
+  editTotalFinal.Text:= precio;
 end;
 
 
@@ -1219,13 +1224,59 @@ begin
 
   if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ALMACENADO) then //si el registro esta dado de baja
   begin
-    DBGridListaCpb.Canvas.Brush.Color:= $0098F8F3;
+    DBGridListaCpb.Canvas.Brush.Color:= StaticTxtConfirmado.Color;
     if (gdFocused in State) or (gdSelected in State) then
       DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
   end;
+
+  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ANULADO) then //si el registro esta dado de baja
+  begin
+    DBGridListaCpb.Canvas.Brush.Color:= StaticTxtBaja.Color;
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
+  end;  
 
   DBGridListaCpb.DefaultDrawColumnCell(rect,datacol,column,state);
 
   FPrincipal.PintarFilasGrillas(DBGridListaCpb, Rect, DataCol, Column, State);
 end;
+procedure TFABM_CPB_Remito.btnBajaClick(Sender: TObject);
+var
+  recno, estado: Integer;
+begin
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or
+     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
+    exit;
+
+  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+
+  if (application.MessageBox(pchar('¿Desea anular el Remito seleccionado?'), 'ABM Remito', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    begin
+      ZQ_Comprobante.Close;
+      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_Comprobante.Open;
+
+      ZQ_Comprobante.Edit;
+      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
+      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo anular el Remito.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_VerCpb.RecNo;
+  ZQ_VerCpb.Refresh;
+  ZQ_VerCpb.RecNo:= recNo;
+  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+end;
+
 end.

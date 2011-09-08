@@ -1357,717 +1357,6 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
     BevelOuter = bvNone
     BorderWidth = 3
     TabOrder = 0
-    object PanelProveedor_CtaCte: TPanel
-      Left = 3
-      Top = 126
-      Width = 928
-      Height = 260
-      Align = alClient
-      BorderWidth = 3
-      TabOrder = 0
-      object DBGridProveedor_CtaCte: TDBGrid
-        Left = 4
-        Top = 4
-        Width = 920
-        Height = 252
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_CtaCte_Proveedor
-        DefaultDrawing = False
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridProveedor_CtaCteDrawColumnCell
-        Columns = <
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'FECHA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Fecha'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FECHA_FP'
-            Title.Alignment = taCenter
-            Title.Caption = 'Fecha Pago'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'TIPO_COMPROBANTE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Comprobante'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DEBE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Debe'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'HABER'
-            Title.Alignment = taCenter
-            Title.Caption = 'Haber'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SALDO_CPB'
-            Title.Alignment = taCenter
-            Title.Caption = 'Saldo Cpb.'
-            Width = 96
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SALDO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Saldo Total'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'OBSERVACION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Observacion Comprobante'
-            Width = 416
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ID_COMPROBANTE'
-            Visible = True
-          end>
-      end
-    end
-    object PanelProveedor_Datos: TPanel
-      Left = 3
-      Top = 3
-      Width = 928
-      Height = 99
-      Align = alTop
-      BevelInner = bvRaised
-      BevelOuter = bvNone
-      TabOrder = 1
-      object DBText7: TDBText
-        Left = 95
-        Top = 5
-        Width = 97
-        Height = 13
-        DataField = 'CODIGO_CORTO'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label2: TLabel
-        Left = 49
-        Top = 5
-        Width = 45
-        Height = 13
-        Caption = 'C'#243'digo:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label3: TLabel
-        Left = 220
-        Top = 5
-        Width = 50
-        Height = 13
-        Caption = 'Nombre:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBText8: TDBText
-        Left = 272
-        Top = 5
-        Width = 420
-        Height = 13
-        DataField = 'NOMBRE'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label4: TLabel
-        Left = 36
-        Top = 22
-        Width = 58
-        Height = 13
-        Caption = 'Direcci'#243'n:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBText9: TDBText
-        Left = 95
-        Top = 22
-        Width = 545
-        Height = 13
-        DataField = 'DIRECCION'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label5: TLabel
-        Left = 24
-        Top = 40
-        Width = 70
-        Height = 13
-        Caption = 'C'#243'd. Postal:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBText10: TDBText
-        Left = 96
-        Top = 40
-        Width = 97
-        Height = 13
-        DataField = 'CODIGO_POSTAL'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label6: TLabel
-        Left = 212
-        Top = 40
-        Width = 58
-        Height = 13
-        Caption = 'Localidad:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBText11: TDBText
-        Left = 272
-        Top = 40
-        Width = 232
-        Height = 13
-        DataField = 'LOCALIDAD'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label7: TLabel
-        Left = 607
-        Top = 40
-        Width = 57
-        Height = 13
-        Caption = 'Provincia:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBText12: TDBText
-        Left = 666
-        Top = 40
-        Width = 175
-        Height = 13
-        DataField = 'NOMBRE_PROVINCIA'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label10: TLabel
-        Left = 68
-        Top = 58
-        Width = 26
-        Height = 13
-        Caption = 'IVA:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBText15: TDBText
-        Left = 96
-        Top = 58
-        Width = 201
-        Height = 13
-        DataField = 'NOMBRE_TIPO_IVA'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label11: TLabel
-        Left = 358
-        Top = 58
-        Width = 55
-        Height = 13
-        Caption = 'Cuit/Cuil:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBText16: TDBText
-        Left = 415
-        Top = 58
-        Width = 175
-        Height = 13
-        DataField = 'CUIT_CUIL'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label1: TLabel
-        Left = 30
-        Top = 76
-        Width = 64
-        Height = 13
-        Caption = 'Fecha Alta:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBText1: TDBText
-        Left = 96
-        Top = 76
-        Width = 97
-        Height = 13
-        DataField = 'FECHA_ALTA'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label12: TLabel
-        Left = 202
-        Top = 76
-        Width = 68
-        Height = 13
-        Caption = 'Fecha Baja:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBText2: TDBText
-        Left = 271
-        Top = 76
-        Width = 117
-        Height = 13
-        DataField = 'FECHA_BAJA'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label13: TLabel
-        Left = 584
-        Top = 76
-        Width = 80
-        Height = 13
-        Caption = 'Limite Deuda:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBText3: TDBText
-        Left = 666
-        Top = 76
-        Width = 175
-        Height = 13
-        DataField = 'LIMITE_DEUDA'
-        DataSource = DS_Proveedor
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-    end
-    object PanelProveedor_Resumen: TPanel
-      Left = 3
-      Top = 386
-      Width = 928
-      Height = 118
-      Align = alBottom
-      TabOrder = 2
-      DesignSize = (
-        928
-        118)
-      object lblFiltro_Fechas: TLabel
-        Left = 1
-        Top = 1
-        Width = 926
-        Height = 17
-        Align = alTop
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Viendo Desde: 12/12/2010 - Hasta: 20/12/2010'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clNavy
-        Font.Height = -15
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object PanelCliente_ResumenFiltro: TPanel
-        Left = 165
-        Top = 20
-        Width = 597
-        Height = 45
-        Anchors = []
-        BevelOuter = bvNone
-        TabOrder = 0
-        object Label21: TLabel
-          Left = 444
-          Top = 4
-          Width = 145
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'SALDO (FILTRO)'
-        end
-        object Label26: TLabel
-          Left = 296
-          Top = 4
-          Width = 145
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'HABER (FILTRO)'
-        end
-        object Label27: TLabel
-          Left = 150
-          Top = 4
-          Width = 145
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'DEBE (FILTRO)'
-        end
-        object Label28: TLabel
-          Left = 2
-          Top = 4
-          Width = 145
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'CANTIDAD (FILTRO)'
-        end
-        object EKEditProv_SaldoFiltro: TEKEdit
-          Tag = 99
-          Left = 444
-          Top = 18
-          Width = 145
-          Height = 26
-          AutoSize = False
-          Color = 12910591
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 0
-          DataType = ftUnknown
-        end
-        object EKEditProv_HaberFiltro: TEKEdit
-          Tag = 99
-          Left = 296
-          Top = 18
-          Width = 145
-          Height = 26
-          AutoSize = False
-          Color = 12910591
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 1
-          DataType = ftUnknown
-        end
-        object EKEditProv_DebeFiltro: TEKEdit
-          Tag = 99
-          Left = 150
-          Top = 18
-          Width = 145
-          Height = 26
-          AutoSize = False
-          Color = 12910591
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 2
-          DataType = ftUnknown
-        end
-        object EKEditProv_CantidadFiltro: TEKEdit
-          Tag = 99
-          Left = 2
-          Top = 18
-          Width = 145
-          Height = 26
-          AutoSize = False
-          Color = 12910591
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 3
-          DataType = ftUnknown
-        end
-      end
-      object PanelCliente_ResumenTotales: TPanel
-        Left = 165
-        Top = 65
-        Width = 597
-        Height = 46
-        Anchors = []
-        BevelOuter = bvNone
-        TabOrder = 1
-        object Label15: TLabel
-          Left = 444
-          Top = 4
-          Width = 145
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'TOTAL SALDO'
-        end
-        object Label16: TLabel
-          Left = 296
-          Top = 4
-          Width = 145
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'TOTAL HABER'
-        end
-        object Label17: TLabel
-          Left = 150
-          Top = 4
-          Width = 145
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'TOTAL DEBE'
-        end
-        object EKEditProv_SaldoTotal: TEKEdit
-          Tag = 99
-          Left = 444
-          Top = 18
-          Width = 145
-          Height = 26
-          AutoSize = False
-          Color = 12910591
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 0
-          DataType = ftUnknown
-        end
-        object EKEditProv_HaberTotal: TEKEdit
-          Tag = 99
-          Left = 296
-          Top = 18
-          Width = 145
-          Height = 26
-          AutoSize = False
-          Color = 12910591
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 1
-          DataType = ftUnknown
-        end
-        object EKEditProv_DebeTotal: TEKEdit
-          Tag = 99
-          Left = 150
-          Top = 18
-          Width = 145
-          Height = 26
-          AutoSize = False
-          Color = 12910591
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 2
-          DataType = ftUnknown
-        end
-      end
-    end
-    object PanelFiltro: TPanel
-      Left = 3
-      Top = 102
-      Width = 928
-      Height = 24
-      Align = alTop
-      ParentShowHint = False
-      ShowHint = False
-      TabOrder = 3
-      object BtnFiltro_Todos: TSpeedButton
-        Left = 55
-        Top = 3
-        Width = 94
-        Height = 18
-        GroupIndex = 1
-        Down = True
-        Caption = 'Todos'
-        Layout = blGlyphBottom
-        OnClick = AplicarFiltro
-      end
-      object BtnFiltro_Hoy: TSpeedButton
-        Left = 151
-        Top = 3
-        Width = 94
-        Height = 18
-        GroupIndex = 1
-        Caption = 'Hoy'
-        Layout = blGlyphBottom
-        OnClick = AplicarFiltro
-      end
-      object BtnFiltro_EstaSemana: TSpeedButton
-        Left = 247
-        Top = 3
-        Width = 94
-        Height = 18
-        GroupIndex = 1
-        Caption = 'Esta Semana'
-        Layout = blGlyphBottom
-        OnClick = AplicarFiltro
-      end
-      object BtnFiltro_EsteMes: TSpeedButton
-        Left = 343
-        Top = 3
-        Width = 94
-        Height = 18
-        GroupIndex = 1
-        Caption = 'Este Mes'
-        Layout = blGlyphBottom
-        OnClick = AplicarFiltro
-      end
-      object BtnFiltro_EsteAnio: TSpeedButton
-        Left = 439
-        Top = 3
-        Width = 94
-        Height = 18
-        GroupIndex = 1
-        Caption = 'Este A'#241'o'
-        Layout = blGlyphBottom
-        OnClick = AplicarFiltro
-      end
-      object Label39: TLabel
-        Left = 19
-        Top = 5
-        Width = 33
-        Height = 13
-        Caption = 'Filtro:'
-      end
-      object BtnFiltro_PorFecha: TSpeedButton
-        Left = 535
-        Top = 3
-        Width = 94
-        Height = 18
-        GroupIndex = 1
-        Caption = 'Por Fecha'
-        Layout = blGlyphBottom
-        OnClick = AplicarFiltro
-      end
-    end
     object RepProveedor: TQuickRep
       Tag = 99
       Left = 76
@@ -3766,6 +3055,717 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
         end
       end
     end
+    object PanelProveedor_CtaCte: TPanel
+      Left = 3
+      Top = 126
+      Width = 928
+      Height = 260
+      Align = alClient
+      BorderWidth = 3
+      TabOrder = 0
+      object DBGridProveedor_CtaCte: TDBGrid
+        Left = 4
+        Top = 4
+        Width = 920
+        Height = 252
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_CtaCte_Proveedor
+        DefaultDrawing = False
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridProveedor_CtaCteDrawColumnCell
+        Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'FECHA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Fecha'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FECHA_FP'
+            Title.Alignment = taCenter
+            Title.Caption = 'Fecha Pago'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'TIPO_COMPROBANTE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Comprobante'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DEBE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Debe'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'HABER'
+            Title.Alignment = taCenter
+            Title.Caption = 'Haber'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SALDO_CPB'
+            Title.Alignment = taCenter
+            Title.Caption = 'Saldo Cpb.'
+            Width = 96
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SALDO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Saldo Total'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'OBSERVACION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Observacion Comprobante'
+            Width = 416
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_COMPROBANTE'
+            Visible = True
+          end>
+      end
+    end
+    object PanelProveedor_Datos: TPanel
+      Left = 3
+      Top = 3
+      Width = 928
+      Height = 99
+      Align = alTop
+      BevelInner = bvRaised
+      BevelOuter = bvNone
+      TabOrder = 1
+      object DBText7: TDBText
+        Left = 95
+        Top = 5
+        Width = 97
+        Height = 13
+        DataField = 'CODIGO_CORTO'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 49
+        Top = 5
+        Width = 45
+        Height = 13
+        Caption = 'C'#243'digo:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 220
+        Top = 5
+        Width = 50
+        Height = 13
+        Caption = 'Nombre:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText8: TDBText
+        Left = 272
+        Top = 5
+        Width = 420
+        Height = 13
+        DataField = 'NOMBRE'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 36
+        Top = 22
+        Width = 58
+        Height = 13
+        Caption = 'Direcci'#243'n:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText9: TDBText
+        Left = 95
+        Top = 22
+        Width = 545
+        Height = 13
+        DataField = 'DIRECCION'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label5: TLabel
+        Left = 24
+        Top = 40
+        Width = 70
+        Height = 13
+        Caption = 'C'#243'd. Postal:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText10: TDBText
+        Left = 96
+        Top = 40
+        Width = 97
+        Height = 13
+        DataField = 'CODIGO_POSTAL'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 212
+        Top = 40
+        Width = 58
+        Height = 13
+        Caption = 'Localidad:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText11: TDBText
+        Left = 272
+        Top = 40
+        Width = 232
+        Height = 13
+        DataField = 'LOCALIDAD'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 607
+        Top = 40
+        Width = 57
+        Height = 13
+        Caption = 'Provincia:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText12: TDBText
+        Left = 666
+        Top = 40
+        Width = 175
+        Height = 13
+        DataField = 'NOMBRE_PROVINCIA'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label10: TLabel
+        Left = 68
+        Top = 58
+        Width = 26
+        Height = 13
+        Caption = 'IVA:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText15: TDBText
+        Left = 96
+        Top = 58
+        Width = 201
+        Height = 13
+        DataField = 'NOMBRE_TIPO_IVA'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label11: TLabel
+        Left = 358
+        Top = 58
+        Width = 55
+        Height = 13
+        Caption = 'Cuit/Cuil:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText16: TDBText
+        Left = 415
+        Top = 58
+        Width = 175
+        Height = 13
+        DataField = 'CUIT_CUIL'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label1: TLabel
+        Left = 30
+        Top = 76
+        Width = 64
+        Height = 13
+        Caption = 'Fecha Alta:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText1: TDBText
+        Left = 96
+        Top = 76
+        Width = 97
+        Height = 13
+        DataField = 'FECHA_ALTA'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label12: TLabel
+        Left = 202
+        Top = 76
+        Width = 68
+        Height = 13
+        Caption = 'Fecha Baja:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText2: TDBText
+        Left = 271
+        Top = 76
+        Width = 117
+        Height = 13
+        DataField = 'FECHA_BAJA'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label13: TLabel
+        Left = 584
+        Top = 76
+        Width = 80
+        Height = 13
+        Caption = 'Limite Deuda:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText3: TDBText
+        Left = 666
+        Top = 76
+        Width = 175
+        Height = 13
+        DataField = 'LIMITE_DEUDA'
+        DataSource = DS_Proveedor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    object PanelProveedor_Resumen: TPanel
+      Left = 3
+      Top = 386
+      Width = 928
+      Height = 118
+      Align = alBottom
+      TabOrder = 2
+      DesignSize = (
+        928
+        118)
+      object lblFiltro_Fechas: TLabel
+        Left = 1
+        Top = 1
+        Width = 926
+        Height = 17
+        Align = alTop
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Viendo Desde: 12/12/2010 - Hasta: 20/12/2010'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -15
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object PanelCliente_ResumenFiltro: TPanel
+        Left = 165
+        Top = 20
+        Width = 597
+        Height = 45
+        Anchors = []
+        BevelOuter = bvNone
+        TabOrder = 0
+        object Label21: TLabel
+          Left = 444
+          Top = 4
+          Width = 145
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'SALDO (FILTRO)'
+        end
+        object Label26: TLabel
+          Left = 296
+          Top = 4
+          Width = 145
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'HABER (FILTRO)'
+        end
+        object Label27: TLabel
+          Left = 150
+          Top = 4
+          Width = 145
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'DEBE (FILTRO)'
+        end
+        object Label28: TLabel
+          Left = 2
+          Top = 4
+          Width = 145
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'CANTIDAD (FILTRO)'
+        end
+        object EKEditProv_SaldoFiltro: TEKEdit
+          Tag = 99
+          Left = 444
+          Top = 18
+          Width = 145
+          Height = 26
+          AutoSize = False
+          Color = 12910591
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          DataType = ftUnknown
+        end
+        object EKEditProv_HaberFiltro: TEKEdit
+          Tag = 99
+          Left = 296
+          Top = 18
+          Width = 145
+          Height = 26
+          AutoSize = False
+          Color = 12910591
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 1
+          DataType = ftUnknown
+        end
+        object EKEditProv_DebeFiltro: TEKEdit
+          Tag = 99
+          Left = 150
+          Top = 18
+          Width = 145
+          Height = 26
+          AutoSize = False
+          Color = 12910591
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 2
+          DataType = ftUnknown
+        end
+        object EKEditProv_CantidadFiltro: TEKEdit
+          Tag = 99
+          Left = 2
+          Top = 18
+          Width = 145
+          Height = 26
+          AutoSize = False
+          Color = 12910591
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 3
+          DataType = ftUnknown
+        end
+      end
+      object PanelCliente_ResumenTotales: TPanel
+        Left = 165
+        Top = 65
+        Width = 597
+        Height = 46
+        Anchors = []
+        BevelOuter = bvNone
+        TabOrder = 1
+        object Label15: TLabel
+          Left = 444
+          Top = 4
+          Width = 145
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'TOTAL SALDO'
+        end
+        object Label16: TLabel
+          Left = 296
+          Top = 4
+          Width = 145
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'TOTAL HABER'
+        end
+        object Label17: TLabel
+          Left = 150
+          Top = 4
+          Width = 145
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'TOTAL DEBE'
+        end
+        object EKEditProv_SaldoTotal: TEKEdit
+          Tag = 99
+          Left = 444
+          Top = 18
+          Width = 145
+          Height = 26
+          AutoSize = False
+          Color = 12910591
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          DataType = ftUnknown
+        end
+        object EKEditProv_HaberTotal: TEKEdit
+          Tag = 99
+          Left = 296
+          Top = 18
+          Width = 145
+          Height = 26
+          AutoSize = False
+          Color = 12910591
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 1
+          DataType = ftUnknown
+        end
+        object EKEditProv_DebeTotal: TEKEdit
+          Tag = 99
+          Left = 150
+          Top = 18
+          Width = 145
+          Height = 26
+          AutoSize = False
+          Color = 12910591
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 2
+          DataType = ftUnknown
+        end
+      end
+    end
+    object PanelFiltro: TPanel
+      Left = 3
+      Top = 102
+      Width = 928
+      Height = 24
+      Align = alTop
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 3
+      object BtnFiltro_Todos: TSpeedButton
+        Left = 55
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Down = True
+        Caption = 'Todos'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+      object BtnFiltro_Hoy: TSpeedButton
+        Left = 151
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Caption = 'Hoy'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+      object BtnFiltro_EstaSemana: TSpeedButton
+        Left = 247
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Caption = 'Esta Semana'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+      object BtnFiltro_EsteMes: TSpeedButton
+        Left = 343
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Caption = 'Este Mes'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+      object BtnFiltro_EsteAnio: TSpeedButton
+        Left = 439
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Caption = 'Este A'#241'o'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+      object Label39: TLabel
+        Left = 19
+        Top = 5
+        Width = 33
+        Height = 13
+        Caption = 'Filtro:'
+      end
+      object BtnFiltro_PorFecha: TSpeedButton
+        Left = 535
+        Top = 3
+        Width = 94
+        Height = 18
+        GroupIndex = 1
+        Caption = 'Por Fecha'
+        Layout = blGlyphBottom
+        OnClick = AplicarFiltro
+      end
+    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -4751,6 +4751,10 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
       end
       item
         TituloColumna = 'Observacion Comprobante'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID_COMPROBANTE'
         Visible = True
       end>
     NombreGuardar = 'CtaCorriente_Cliente'
