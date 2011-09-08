@@ -1665,14 +1665,14 @@ object FABM_Precios: TFABM_Precios
           FieldName = 'IMPUESTO_ADICIONAL1'
           Title.Alignment = taCenter
           Title.Caption = 'Imp. Adicional 1'
-          Visible = True
+          Visible = False
         end
         item
           Expanded = False
           FieldName = 'IMPUESTO_ADICIONAL2'
           Title.Alignment = taCenter
           Title.Caption = 'Imp. Adicional 2'
-          Visible = True
+          Visible = False
         end
         item
           Expanded = False
@@ -1701,6 +1701,31 @@ object FABM_Precios: TFABM_Precios
           Title.Alignment = taCenter
           Title.Caption = 'Precio Venta'
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRECIO1'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'PRECIO2'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'PRECIO3'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'PRECIO4'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'PRECIO5'
+          Visible = False
         end>
     end
     object PanelEdicion: TPanel
@@ -2505,7 +2530,8 @@ object FABM_Precios: TFABM_Precios
         'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
         'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
         'p.cod_corto, p.codigo_barra, p.precio_costo_cimpuestos, p.impues' +
-        'to_adicional1, p.impuesto_adicional2'
+        'to_adicional1, p.impuesto_adicional2, p.precio1, p.precio2, p.pr' +
+        'ecio3, p.precio4, p.precio5'
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
       
@@ -2598,6 +2624,26 @@ object FABM_Precios: TFABM_Precios
       FieldName = 'IMPUESTO_ADICIONAL2'
       OnChange = ZQ_ProductosIMPUESTO_ADICIONAL2Change
     end
+    object ZQ_ProductosPRECIO1: TFloatField
+      FieldName = 'PRECIO1'
+      currency = True
+    end
+    object ZQ_ProductosPRECIO2: TFloatField
+      FieldName = 'PRECIO2'
+      currency = True
+    end
+    object ZQ_ProductosPRECIO3: TFloatField
+      FieldName = 'PRECIO3'
+      currency = True
+    end
+    object ZQ_ProductosPRECIO4: TFloatField
+      FieldName = 'PRECIO4'
+      currency = True
+    end
+    object ZQ_ProductosPRECIO5: TFloatField
+      FieldName = 'PRECIO5'
+      currency = True
+    end
   end
   object DS_Productos: TDataSource
     DataSet = ZQ_Productos
@@ -2670,7 +2716,8 @@ object FABM_Precios: TFABM_Precios
         'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
         'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
         'p.cod_corto, p.codigo_barra, p.precio_costo_cimpuestos, p.impues' +
-        'to_adicional1, p.impuesto_adicional2'
+        'to_adicional1, p.impuesto_adicional2, p.precio1, p.precio2, p.pr' +
+        'ecio3, p.precio4, p.precio5'
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
       
@@ -2689,7 +2736,8 @@ object FABM_Precios: TFABM_Precios
         'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
         'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
         'p.cod_corto, p.codigo_barra, p.precio_costo_cimpuestos, p.impues' +
-        'to_adicional1, p.impuesto_adicional2')
+        'to_adicional1, p.impuesto_adicional2, p.precio1, p.precio2, p.pr' +
+        'ecio3, p.precio4, p.precio5')
     SQL_From.Strings = (
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
