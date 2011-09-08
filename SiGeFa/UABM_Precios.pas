@@ -153,6 +153,11 @@ type
     ZQ_ImprimirEtiquetasCANTIDAD: TIntegerField;
     QRLabel15: TQRLabel;
     QRDBText16: TQRDBText;
+    ZQ_ProductosPRECIO1: TFloatField;
+    ZQ_ProductosPRECIO2: TFloatField;
+    ZQ_ProductosPRECIO3: TFloatField;
+    ZQ_ProductosPRECIO4: TFloatField;
+    ZQ_ProductosPRECIO5: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -178,6 +183,7 @@ type
     procedure DBGridProductosColEnter(Sender: TObject);
     procedure RadioGroupImpuestosClick(Sender: TObject);
     procedure btImprimirEtiquetasClick(Sender: TObject);
+    procedure HabilitarCampos();
     procedure DBGridProductosDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
@@ -203,6 +209,58 @@ implementation
 uses UDM, UUtilidades, UPrincipal, UImprimirEtiquetas;
 
 {$R *.dfm}
+
+procedure TFABM_Precios.HabilitarCampos();
+begin
+  if (imp_ad1_nombre <> '') then
+  begin
+    lblImpAdicional1.Caption := imp_ad1_nombre+':';
+//    lblImpuesto_Adicional1.Visible := true;
+//    DBEditImpuestoAdicional1.Visible := true;
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL1')].Title.Caption:= imp_ad1_nombre;
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL1')].Visible := true;
+  end;
+
+  if (imp_ad2_nombre <> '') then
+  begin
+    lblImpAdicional2.Caption := imp_ad2_nombre+':';
+//    lblImpuesto_Adicional2.Visible := true;
+//    DBEditImpuestoAdicional2.Visible := true;
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL2')].Title.Caption:= imp_ad2_nombre;
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL2')].Visible := true;
+  end;
+
+  if (precio1 <> '') then
+  begin
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO1')].Title.Caption:= precio1;
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO1')].Visible := true;
+  end;
+
+  if (precio2 <> '') then
+  begin
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO2')].Title.Caption:= precio2;
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO2')].Visible := true;
+  end;
+
+  if (precio3 <> '') then
+  begin
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO3')].Title.Caption:= precio3;
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO3')].Visible := true;
+  end;
+
+  if (precio4 <> '') then
+  begin
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO4')].Title.Caption:= precio4;
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO4')].Visible := true;
+  end;
+
+  if (precio5 <> '') then
+  begin
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO5')].Title.Caption:= precio5;
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO5')].Visible := true;
+  end;
+
+end;
 
 procedure TFABM_Precios.OnSelPersona;
 begin
@@ -560,15 +618,11 @@ end;
 
 procedure TFABM_Precios.FormCreate(Sender: TObject);
 begin
-  lblImpAdicional1.Caption:= imp_ad1_nombre+':';
-  lblImpAdicional2.Caption:= imp_ad2_nombre+':';
-
-  DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL1')].Title.Caption:= imp_ad1_nombre;
-  DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL2')].Title.Caption:= imp_ad2_nombre;
-
   CDSZQ_Productos.CreateDataSet;
   EKOrdenarGrilla1.CargarConfigColumnas;
   lblCantidadRegistros.Caption:= '';
+
+  HabilitarCampos;
 end;
 
 
