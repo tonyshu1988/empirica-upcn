@@ -67,10 +67,6 @@ type
     ZQ_VerCpbIMPORTE_TOTAL: TFloatField;
     ZQ_VerCpbENCABEZADO: TStringField;
     ZQ_VerCpbPIE: TStringField;
-    ZQ_VerCpbFECHA_COBRADA: TDateField;
-    ZQ_VerCpbFECHA_ENVIADA: TDateField;
-    ZQ_VerCpbFECHA_IMPRESA: TDateField;
-    ZQ_VerCpbFECHA_VENCIMIENTO: TDateField;
     ZQ_VerCpbSUCURSAL: TStringField;
     ZQ_VerCpbPROVEEDOR: TStringField;
     ZQ_VerCpbCUIT_PROVEEDOR: TStringField;
@@ -78,24 +74,13 @@ type
     ZQ_VerCpbCLIENTE_DOCUMENTO: TStringField;
     ZQ_VerCpbCLIENTE_CUIL: TStringField;
     ZQ_VerCpbVENDEDOR: TStringField;
-    ZQ_VerCpbNOMBRE_TIPO_CPB: TStringField;
     ZQ_VerCpbESTADO: TStringField;
     DBGridListaCpb: TDBGrid;
     DBGridCpbActual_FPago: TDBGrid;
     EKOrd_VerCpb: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
-    lblVerFecha_Ven_Ejec: TLabel;
-    lblVerFecha_Cpb_Dev: TLabel;
-    Label28: TLabel;
-    Label27: TLabel;
-    Label24: TLabel;
     DBTxtMonto: TDBText;
-    DBText5: TDBText;
-    DBText4: TDBText;
-    DBText3: TDBText;
-    DBText2: TDBText;
     DBMemoCpbActual_Info: TDBMemo;
-    DBText1: TDBText;
     Label1: TLabel;
     ZQ_VerCpbPUNTO_VENTA: TIntegerField;
     ZQ_VerCpbNUMERO_CPB: TIntegerField;
@@ -278,7 +263,6 @@ type
     ZQ_NumeroCpbSIGNO_STOCK: TIntegerField;
     ZQ_NumeroCpbSIGNO_CTA_CTE: TIntegerField;
     ZQ_NumeroCpbBAJA: TStringField;
-    lblTotalFormaPago: TLabel;
     EKSuma_FPago: TEKDbSuma;
     PanelFechas: TPanel;
     PanelFechaVencimiento: TPanel;
@@ -322,6 +306,15 @@ type
     ZQ_VerCpb_FpagoIMPORTE_REAL: TFloatField;
     DS_VerCpb_Fpago: TDataSource;
     EKOrd_VerCpb_Fpago: TEKOrdenarGrilla;
+    editTotalFinal: TEdit;
+    Label29: TLabel;
+    lblDatos_Proveedor: TLabel;
+    DBTxtDatos_Proveedor: TDBText;
+    lblDatos_Cliente: TLabel;
+    DBTxtDatos_Cliente: TDBText;
+    Label30: TLabel;
+    DBText33: TDBText;
+    StaticTxtConfirmado: TStaticText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -357,6 +350,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBGridCpbActual_FPagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridEditar_FpagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnBajaClick(Sender: TObject);
   private
     estadoPantalla: string;
     tipoComprobante: integer;
@@ -396,6 +390,7 @@ begin
 
     lblCantidadRegistros.Visible:= false;
     StaticTxtBaja.Visible:= false;
+    StaticTxtConfirmado.Visible:= false;
     lblTipoComprobante.Visible:= true;
 
     GrupoEditando.Enabled := false;
@@ -410,6 +405,7 @@ begin
 
     lblCantidadRegistros.Visible:= true;
     StaticTxtBaja.Visible:= true;
+    StaticTxtConfirmado.Visible:= true;
     lblTipoComprobante.Visible:= false;
 
     GrupoEditando.Enabled := true;
@@ -601,11 +597,19 @@ begin
     while not ZQ_CpbFormaPago.Eof do  //por cada una de las formas de pago cargadas
     begin
       ZQ_CpbFormaPago.Edit;
+      if ZQ_CpbFormaPagoIMPORTE.IsNull then
+        ZQ_CpbFormaPagoIMPORTE.AsFloat:=0;
       ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat; //pongo el mismo importe cargado al importe_real
       ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
 
       ZQ_CpbFormaPago.Next;
     end;
+  end
+  else
+  begin
+    Application.MessageBox('No selecciono ninguna forma de pago, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBGridEditar_Fpago.SetFocus;
+    exit;
   end;
 
   if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante
@@ -737,6 +741,21 @@ begin
 
   ZQ_VerCpb_Fpago.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   ZQ_VerCpb_Fpago.Open;
+
+  if ZQ_VerCpbID_CLIENTE.IsNull then
+  begin
+    DBTxtDatos_Proveedor.Visible:= true;
+    lblDatos_Proveedor.Visible:= true;
+    DBTxtDatos_Cliente.Visible:= false;
+    lblDatos_Cliente.Visible:= false;
+  end
+  else
+  begin
+    DBTxtDatos_Proveedor.Visible:= false;
+    lblDatos_Proveedor.Visible:= false;
+    DBTxtDatos_Cliente.Visible:= true;
+    lblDatos_Cliente.Visible:= true;
+  end;
 end;
 
 
@@ -981,7 +1000,7 @@ end;
 
 procedure TFABM_CPB_Recibo.EKSuma_FPagoSumListChanged(Sender: TObject);
 begin
-  lblTotalFormaPago.Caption := 'Total Forma de Pago: ' + FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
+  editTotalFinal.Text := FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
 end;
 
 
@@ -1026,55 +1045,40 @@ end;
 
 procedure TFABM_CPB_Recibo.btnConfirmarClick(Sender: TObject);
 var
-  estado: Integer;
+  recno, estado: Integer;
 begin
-//  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-//  if ((ZQ_VerCpb.IsEmpty) or ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO))) then
-//    exit;
-//
-//  confirmarComprobante:= true;
-//  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
-//  tipoComprobante:= ZQ_VerCpbID_TIPO_CPB.AsInteger;
-//
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
-//  begin
-//    modoEdicion(true);
-//
-//    ZQ_Comprobante.Close;
-//    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_Comprobante.Open;
-//
-//    ZQ_CpbFormaPago.Close;
-//    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_CpbFormaPago.Open;
-//
-//    if ZQ_ComprobanteID_CLIENTE.IsNull then
-//    begin
-//      PanelEditar_DatosGralProveedor.BringToFront;
-//      ZQ_Proveedor.Close;
-//      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= ZQ_ComprobanteID_PROVEEDOR.AsInteger;
-//      ZQ_Proveedor.Open;
-//      ZQ_Cliente.Close;
-//    end;
-//
-//    if ZQ_ComprobanteID_PROVEEDOR.IsNull then
-//    begin
-//      PanelEditar_DatosGralCliente.BringToFront;
-//      ZQ_Cliente.Close;
-//      ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_ComprobanteID_CLIENTE.AsInteger;
-//      ZQ_Cliente.Open;
-//      ZQ_Proveedor.Close;
-//    end;
-//
-//    cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
-//    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - CONFIRMAR';
-//    confirmarCpb(tipoComprobante);
-//
-//    ZQ_Comprobante.Edit;
-//    ZQ_ComprobanteFECHA_IMPRESA.AsDateTime:= dm.EKModelo.FechayHora;
-//
-//    EKDBDateImpreso.SetFocus;
-//  end;
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or
+     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
+    exit;
+
+  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+
+  if (application.MessageBox(pchar('¿Desea confirmar el Recibo seleccionado?'), 'ABM Recibo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    begin
+      ZQ_Comprobante.Close;
+      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_Comprobante.Open;
+
+      ZQ_Comprobante.Edit;
+      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo confirmar el Recibo.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_VerCpb.RecNo;
+  ZQ_VerCpb.Refresh;
+  ZQ_VerCpb.RecNo:= recNo;
+  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 end;
 
 
@@ -1084,10 +1088,17 @@ begin
 
   if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ALMACENADO) then //si el registro esta dado de baja
   begin
-    DBGridListaCpb.Canvas.Brush.Color:= $0098F8F3;
+    DBGridListaCpb.Canvas.Brush.Color:= StaticTxtConfirmado.Color;
     if (gdFocused in State) or (gdSelected in State) then
       DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
   end;
+
+  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ANULADO) then //si el registro esta dado de baja
+  begin
+    DBGridListaCpb.Canvas.Brush.Color:= StaticTxtBaja.Color;
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
+  end;  
 
   DBGridListaCpb.DefaultDrawColumnCell(rect,datacol,column,state);
 
@@ -1112,6 +1123,45 @@ begin
   EKOrd_VerCpb.GuardarConfigColumnas;
   EKOrd_VerCpb_Fpago.GuardarConfigColumnas;
   EKOrd_EditarFpago.GuardarConfigColumnas;
+end;
+
+procedure TFABM_CPB_Recibo.btnBajaClick(Sender: TObject);
+var
+  recno, estado: Integer;
+begin
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or
+     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
+    exit;
+
+  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+
+  if (application.MessageBox(pchar('¿Desea anular el Recibo seleccionado?'), 'ABM Recibo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    begin
+      ZQ_Comprobante.Close;
+      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_Comprobante.Open;
+
+      ZQ_Comprobante.Edit;
+      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
+      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo anular el Recibo.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_VerCpb.RecNo;
+  ZQ_VerCpb.Refresh;
+  ZQ_VerCpb.RecNo:= recNo;
+  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 end;
 
 end.
