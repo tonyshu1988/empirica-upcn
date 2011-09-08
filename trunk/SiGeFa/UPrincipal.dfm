@@ -5001,11 +5001,17 @@ object FPrincipal: TFPrincipal
       ImageIndex = 37
       OnExecute = ATransferirStockExecute
     end
-    object ACuentaCorriente: TAction
-      Caption = 'Cuenta Corriente'
-      Hint = 'Cuenta Corriente'
+    object ACtaCte_Cliente: TAction
+      Caption = 'Cta Cte Cliente'
+      Hint = 'Cuenta Corriente Cliente'
       ImageIndex = 31
-      OnExecute = ACuentaCorrienteExecute
+      OnExecute = ACtaCte_ClienteExecute
+    end
+    object ACtaCte_Proveedor: TAction
+      Caption = 'Cta Cte Proveedor'
+      Hint = 'Cuenta Corriente Proveedor'
+      ImageIndex = 31
+      OnExecute = ACtaCte_ProveedorExecute
     end
     object AArqueo_Caja: TAction
       Caption = 'Arqueo de Caja'
@@ -5117,53 +5123,32 @@ object FPrincipal: TFPrincipal
       end
     end
     object Clientes1: TMenuItem
-      Caption = 'Personas'
+      Caption = 'Entidades'
       object ABMPersonas1: TMenuItem
         Action = AABM_Personas
       end
-      object N7: TMenuItem
-        Caption = '-'
-      end
-      object CuentaCorriente1: TMenuItem
-        Action = ACuentaCorriente
-      end
-    end
-    object BandejadeMail1: TMenuItem
-      Tag = 1
-      Caption = 'Mail'
-      object ConfigurarMail1: TMenuItem
-        Action = AConfigMail
-      end
-      object EnviarMail1: TMenuItem
-        Action = AEnviarMail
-      end
-      object BandejadeMail2: TMenuItem
-        Action = ABandejaMail
-      end
-    end
-    object Movimientos1: TMenuItem
-      Caption = 'Movimientos'
-      object ABMTipoComprobante1: TMenuItem
-        Tag = 1
-        Action = AABM_TipoComprobante
-      end
-      object ABMComprobante1: TMenuItem
-        Tag = 1
-        Action = AABM_Comprobante
+      object ABMEmpresas1: TMenuItem
+        Action = AABMEmpresas
       end
       object N5: TMenuItem
         Caption = '-'
       end
-      object ABMTipoMovimiento1: TMenuItem
-        Action = AABM_TipoMov
+      object CtaCteCliente1: TMenuItem
+        Action = ACtaCte_Cliente
       end
-      object MovimientosInternos1: TMenuItem
-        Action = AMovInternos
-        Caption = 'ABM Movimientos Internos'
+      object CtaCteProveedor1: TMenuItem
+        Action = ACtaCte_Proveedor
       end
     end
     object Comprobantes1: TMenuItem
       Caption = 'Comprobantes'
+      object MovimientosInternos1: TMenuItem
+        Action = AMovInternos
+        Caption = 'ABM Movimientos Internos'
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
       object ABMRecibo1: TMenuItem
         Action = AABM_CPB_Recibo
       end
@@ -5215,6 +5200,16 @@ object FPrincipal: TFPrincipal
         end
       end
     end
+    object BandejadeMail1: TMenuItem
+      Tag = 1
+      Caption = 'Mail'
+      object BandejadeMail2: TMenuItem
+        Action = ABandejaMail
+      end
+      object EnviarMail1: TMenuItem
+        Action = AEnviarMail
+      end
+    end
     object ABM1: TMenuItem
       Caption = 'Configuraci'#243'n'
       object Facturacin1: TMenuItem
@@ -5255,21 +5250,37 @@ object FPrincipal: TFPrincipal
         end
       end
       object Empresas1: TMenuItem
-        Caption = 'Empresa/Sucursal'
+        Caption = 'Empresa'
         object ABMTipoEmpresa1: TMenuItem
           Action = AABM_TipoEmpresa
         end
-        object ABMEmpresas1: TMenuItem
-          Action = AABMEmpresas
-        end
-        object N2: TMenuItem
-          Caption = '-'
-        end
+      end
+      object Sucursal1: TMenuItem
+        Caption = 'Sucursal'
         object ABMSucursal1: TMenuItem
           Action = AABM_Sucursal
         end
         object ABMSucursalPosicion1: TMenuItem
           Action = AABM_SucursalPosicion
+        end
+      end
+      object Comprobantes2: TMenuItem
+        Caption = 'Comprobantes'
+        object ABMTipoComprobante1: TMenuItem
+          Tag = 1
+          Action = AABM_TipoComprobante
+        end
+      end
+      object MovInternos1: TMenuItem
+        Caption = 'Mov. Internos'
+        object ABMTipoMovimiento1: TMenuItem
+          Action = AABM_TipoMov
+        end
+      end
+      object Mail1: TMenuItem
+        Caption = 'Mail'
+        object ConfigurarMail1: TMenuItem
+          Action = AConfigMail
         end
       end
       object N1: TMenuItem

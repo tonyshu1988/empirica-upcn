@@ -51,7 +51,8 @@ uses
   UABM_CPB_Remito in 'UABM_CPB_Remito.pas' {FABM_CPB_Remito},
   UABM_CPB_Presupuesto in 'UABM_CPB_Presupuesto.pas' {FABM_CPB_Presupuesto},
   UABM_CPB_NotaPedido in 'UABM_CPB_NotaPedido.pas' {FABM_CPB_NotaPedido},
-  UABM_Preventa in 'UABM_Preventa.pas' {FABM_Preventa};
+  UABM_Preventa in 'UABM_Preventa.pas' {FABM_Preventa},
+  UCuentaCorriente_Proveedor in 'UCuentaCorriente_Proveedor.pas' {FCuentaCorriente_Proveedor};
 
 {$R *.res}
 
