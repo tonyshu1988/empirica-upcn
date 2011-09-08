@@ -3100,14 +3100,6 @@ object FABM_Precios: TFABM_Precios
         Visible = True
       end
       item
-        TituloColumna = 'Imp. Adicional 1'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Imp. Adicional 2'
-        Visible = False
-      end
-      item
         TituloColumna = 'Precio Costo c/Imp.'
         Visible = True
       end
@@ -3122,26 +3114,6 @@ object FABM_Precios: TFABM_Precios
       item
         TituloColumna = 'Precio Venta'
         Visible = True
-      end
-      item
-        TituloColumna = 'PRECIO1'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO2'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO3'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO4'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO5'
-        Visible = False
       end>
     NombreGuardar = 'ABM_Precios'
     AltoTituloColumna = 15
