@@ -1,8 +1,8 @@
 object FABM_Precios: TFABM_Precios
-  Left = 248
-  Top = 102
+  Left = 176
+  Top = 0
   Width = 1024
-  Height = 646
+  Height = 768
   Caption = 'ABM Precios'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -24,7 +24,7 @@ object FABM_Precios: TFABM_Precios
     Left = 0
     Top = 0
     Width = 1016
-    Height = 562
+    Height = 684
     Align = alClient
     TabOrder = 4
     object RepListaPrecios: TQuickRep
@@ -1570,7 +1570,7 @@ object FABM_Precios: TFABM_Precios
       Left = 1
       Top = 19
       Width = 1014
-      Height = 448
+      Height = 499
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1730,33 +1730,32 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 467
+      Top = 518
       Width = 1014
-      Height = 94
+      Height = 165
       Hint = '`'
       Align = alBottom
       TabOrder = 1
       object Label1: TLabel
         Left = 8
-        Top = 18
+        Top = 5
         Width = 317
         Height = 13
         Caption = 'Seleccione el tipo de calculo para actualizar sus precio:'
       end
       object Label5: TLabel
         Left = 8
-        Top = 64
-        Width = 324
+        Top = 99
+        Width = 319
         Height = 13
-        Caption = 'Seleccione si desea actualizar los diferentes impuestos::'
+        Caption = 'Seleccione si desea actualizar los diferentes impuestos:'
       end
       object RadioGroupTipoCalculo: TRadioGroup
-        Left = 329
-        Top = 2
+        Left = 8
+        Top = 23
         Width = 188
-        Height = 43
+        Height = 73
         Caption = ' Tipo  '
-        Columns = 2
         ItemIndex = 0
         Items.Strings = (
           'Porcentaje'
@@ -1764,11 +1763,11 @@ object FABM_Precios: TFABM_Precios
         TabOrder = 0
         OnClick = RadioGroupTipoCalculoClick
       end
-      object GroupBox1: TGroupBox
-        Left = 520
-        Top = 2
-        Width = 422
-        Height = 43
+      object GBoxIncDecImportes: TGroupBox
+        Left = 199
+        Top = 23
+        Width = 785
+        Height = 74
         Caption = ' Incrementar/Decrementar Precios  '
         TabOrder = 1
         object Label2: TLabel
@@ -1779,30 +1778,125 @@ object FABM_Precios: TFABM_Precios
           Caption = 'S/Precio Costo:'
         end
         object Label3: TLabel
-          Left = 215
-          Top = 20
+          Left = 13
+          Top = 46
           Width = 90
           Height = 13
+          Alignment = taRightJustify
+          BiDiMode = bdLeftToRight
           Caption = 'S/Precio Venta:'
+          ParentBiDiMode = False
         end
         object LabelTipo2: TLabel
-          Left = 307
-          Top = 20
+          Left = 105
+          Top = 47
           Width = 12
           Height = 13
           Caption = '%'
         end
         object LabelTipo1: TLabel
           Left = 105
-          Top = 20
+          Top = 21
           Width = 12
           Height = 13
           Caption = '%'
         end
+        object lblPrecio1: TLabel
+          Left = 186
+          Top = 20
+          Width = 120
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'S/Precio Venta:'
+          Visible = False
+        end
+        object lblPrecio2: TLabel
+          Left = 186
+          Top = 47
+          Width = 120
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'S/Precio Venta:'
+          Visible = False
+        end
+        object lblPrecio3: TLabel
+          Left = 380
+          Top = 20
+          Width = 120
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'S/Precio Venta:'
+          Visible = False
+        end
+        object lblPrecio4: TLabel
+          Left = 380
+          Top = 44
+          Width = 120
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'S/Precio Venta:'
+          Visible = False
+        end
+        object lblPrecio5: TLabel
+          Left = 576
+          Top = 20
+          Width = 120
+          Height = 13
+          Alignment = taRightJustify
+          AutoSize = False
+          BiDiMode = bdLeftToRight
+          Caption = 'S/Precio Venta:'
+          ParentBiDiMode = False
+          Visible = False
+        end
+        object LabelTipoP2: TLabel
+          Left = 308
+          Top = 47
+          Width = 12
+          Height = 13
+          Caption = '%'
+          Visible = False
+        end
+        object LabelTipoP1: TLabel
+          Left = 307
+          Top = 21
+          Width = 12
+          Height = 13
+          Caption = '%'
+          Visible = False
+        end
+        object LabelTipoP3: TLabel
+          Left = 502
+          Top = 21
+          Width = 12
+          Height = 13
+          Caption = '%'
+          Visible = False
+        end
+        object LabelTipoP4: TLabel
+          Left = 502
+          Top = 47
+          Width = 12
+          Height = 13
+          Caption = '%'
+          Visible = False
+        end
+        object LabelTipoP5: TLabel
+          Left = 697
+          Top = 21
+          Width = 12
+          Height = 13
+          Caption = '%'
+          Visible = False
+        end
         object EditCosto: TEdit
-          Left = 124
+          Left = 121
           Top = 16
-          Width = 83
+          Width = 60
           Height = 21
           Hint = 'Valor con el que se incrementa/decrementa el precio de costo'
           AutoSize = False
@@ -1810,19 +1904,74 @@ object FABM_Precios: TFABM_Precios
           Text = '0'
         end
         object EditVenta: TEdit
-          Left = 324
-          Top = 16
-          Width = 83
+          Left = 121
+          Top = 42
+          Width = 60
           Height = 21
           Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
           AutoSize = False
           TabOrder = 1
           Text = '0'
         end
+        object EditPrecio1: TEdit
+          Left = 321
+          Top = 16
+          Width = 60
+          Height = 21
+          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+          AutoSize = False
+          TabOrder = 2
+          Text = '0'
+          Visible = False
+        end
+        object EditPrecio2: TEdit
+          Left = 321
+          Top = 41
+          Width = 60
+          Height = 21
+          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+          AutoSize = False
+          TabOrder = 3
+          Text = '0'
+          Visible = False
+        end
+        object EditPrecio3: TEdit
+          Left = 516
+          Top = 16
+          Width = 60
+          Height = 21
+          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+          AutoSize = False
+          TabOrder = 4
+          Text = '0'
+          Visible = False
+        end
+        object EditPrecio4: TEdit
+          Left = 516
+          Top = 40
+          Width = 60
+          Height = 21
+          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+          AutoSize = False
+          TabOrder = 5
+          Text = '0'
+          Visible = False
+        end
+        object EditPrecio5: TEdit
+          Left = 712
+          Top = 16
+          Width = 60
+          Height = 21
+          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+          AutoSize = False
+          TabOrder = 6
+          Text = '0'
+          Visible = False
+        end
       end
-      object GroupBox2: TGroupBox
-        Left = 520
-        Top = 46
+      object GboxImpuestos: TGroupBox
+        Left = 200
+        Top = 117
         Width = 422
         Height = 44
         Caption = ' Impuestos  '
@@ -1843,6 +1992,7 @@ object FABM_Precios: TFABM_Precios
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Impuesto Adicional 1:'
+          Visible = False
         end
         object lblImpAdicional2: TLabel
           Left = 247
@@ -1852,6 +2002,7 @@ object FABM_Precios: TFABM_Precios
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'Impuesto Adicional 2:'
+          Visible = False
         end
         object EditIVA: TEdit
           Left = 33
@@ -1870,6 +2021,7 @@ object FABM_Precios: TFABM_Precios
           AutoSize = False
           TabOrder = 1
           Text = '0'
+          Visible = False
         end
         object EditImpAdicional2: TEdit
           Left = 374
@@ -1879,11 +2031,12 @@ object FABM_Precios: TFABM_Precios
           AutoSize = False
           TabOrder = 2
           Text = '0'
+          Visible = False
         end
       end
       object RadioGroupImpuestos: TRadioGroup
-        Left = 329
-        Top = 46
+        Left = 9
+        Top = 117
         Width = 188
         Height = 44
         Caption = ' Tipo  '
@@ -2803,6 +2956,31 @@ object FABM_Precios: TFABM_Precios
         DataType = ftFloat
         Name = 'IMPUESTO_ADICIONAL2'
         ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO3'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO4'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO5'
+        ParamType = ptInput
       end>
     StoredProcName = 'ACTUALIZAR_IMPORTES'
     Left = 264
@@ -2852,101 +3030,35 @@ object FABM_Precios: TFABM_Precios
         DataType = ftFloat
         Name = 'IMPUESTO_ADICIONAL2'
         ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO3'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO4'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO5'
+        ParamType = ptInput
       end>
     object ZSPActualizarImporteSALIDA: TIntegerField
       FieldName = 'SALIDA'
     end
-  end
-  object ZU_Productos: TZUpdateSQL
-    DeleteSQL.Strings = (
-      'DELETE FROM producto'
-      'WHERE'
-      '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
-    InsertSQL.Strings = (
-      'INSERT INTO producto'
-      
-        '  (producto.PRECIO_COSTO, producto.PRECIO_VENTA, producto.COEF_G' +
-        'ANANCIA, '
-      
-        '   producto.COEF_DESCUENTO, producto.IMPUESTO_INTERNO, producto.' +
-        'IMPUESTO_IVA, '
-      
-        '   producto.PRECIO_COSTO_CIMPUESTOS, producto.IMPUESTO_ADICIONAL' +
-        '1, producto.IMPUESTO_ADICIONAL2)'
-      'VALUES'
-      
-        '  (:PRECIO_COSTO, :PRECIO_VENTA, :COEF_GANANCIA, :COEF_DESCUENTO' +
-        ', :IMPUESTO_INTERNO, '
-      
-        '   :IMPUESTO_IVA, :PRECIO_COSTO_CIMPUESTOS, :IMPUESTO_ADICIONAL1' +
-        ', :IMPUESTO_ADICIONAL2)')
-    ModifySQL.Strings = (
-      'UPDATE producto SET'
-      '  producto.PRECIO_COSTO = :PRECIO_COSTO,'
-      '  producto.PRECIO_VENTA = :PRECIO_VENTA,'
-      '  producto.COEF_GANANCIA = :COEF_GANANCIA,'
-      '  producto.COEF_DESCUENTO = :COEF_DESCUENTO,'
-      '  producto.IMPUESTO_INTERNO = :IMPUESTO_INTERNO,'
-      '  producto.IMPUESTO_IVA = :IMPUESTO_IVA,'
-      '  producto.PRECIO_COSTO_CIMPUESTOS = '
-      ':PRECIO_COSTO_CIMPUESTOS,'
-      '  producto.IMPUESTO_ADICIONAL1 = :IMPUESTO_ADICIONAL1,'
-      '  producto.IMPUESTO_ADICIONAL2 = :IMPUESTO_ADICIONAL2'
-      'WHERE'
-      '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
-    Left = 168
-    Top = 232
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'PRECIO_COSTO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'PRECIO_VENTA'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'COEF_GANANCIA'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'COEF_DESCUENTO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'IMPUESTO_INTERNO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'IMPUESTO_IVA'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'PRECIO_COSTO_CIMPUESTOS'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'IMPUESTO_ADICIONAL1'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'IMPUESTO_ADICIONAL2'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_ID_PRODUCTO'
-        ParamType = ptUnknown
-      end>
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridProductos
@@ -2989,11 +3101,11 @@ object FABM_Precios: TFABM_Precios
       end
       item
         TituloColumna = 'Imp. Adicional 1'
-        Visible = True
+        Visible = False
       end
       item
         TituloColumna = 'Imp. Adicional 2'
-        Visible = True
+        Visible = False
       end
       item
         TituloColumna = 'Precio Costo c/Imp.'
@@ -3010,6 +3122,26 @@ object FABM_Precios: TFABM_Precios
       item
         TituloColumna = 'Precio Venta'
         Visible = True
+      end
+      item
+        TituloColumna = 'PRECIO1'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO2'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO3'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO4'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO5'
+        Visible = False
       end>
     NombreGuardar = 'ABM_Precios'
     AltoTituloColumna = 15
@@ -3254,5 +3386,131 @@ object FABM_Precios: TFABM_Precios
     object ZQ_ImprimirEtiquetasCANTIDAD: TIntegerField
       FieldName = 'CANTIDAD'
     end
+  end
+  object ZU_Productos: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM producto'
+      'WHERE'
+      '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
+    InsertSQL.Strings = (
+      'INSERT INTO producto'
+      
+        '  (producto.PRECIO_COSTO, producto.PRECIO_VENTA, producto.COEF_G' +
+        'ANANCIA, '
+      
+        '   producto.COEF_DESCUENTO, producto.IMPUESTO_INTERNO, producto.' +
+        'IMPUESTO_IVA, '
+      
+        '   producto.PRECIO_COSTO_CIMPUESTOS, producto.IMPUESTO_ADICIONAL' +
+        '1, producto.IMPUESTO_ADICIONAL2, '
+      
+        '   producto.PRECIO1, producto.PRECIO2, producto.PRECIO3, product' +
+        'o.PRECIO4, '
+      '   producto.PRECIO5)'
+      'VALUES'
+      
+        '  (:PRECIO_COSTO, :PRECIO_VENTA, :COEF_GANANCIA, :COEF_DESCUENTO' +
+        ', :IMPUESTO_INTERNO, '
+      
+        '   :IMPUESTO_IVA, :PRECIO_COSTO_CIMPUESTOS, :IMPUESTO_ADICIONAL1' +
+        ', :IMPUESTO_ADICIONAL2, '
+      '   :PRECIO1, :PRECIO2, :PRECIO3, :PRECIO4, :PRECIO5)')
+    ModifySQL.Strings = (
+      'UPDATE producto SET'
+      '  producto.PRECIO_COSTO = :PRECIO_COSTO,'
+      '  producto.PRECIO_VENTA = :PRECIO_VENTA,'
+      '  producto.COEF_GANANCIA = :COEF_GANANCIA,'
+      '  producto.COEF_DESCUENTO = :COEF_DESCUENTO,'
+      '  producto.IMPUESTO_INTERNO = :IMPUESTO_INTERNO,'
+      '  producto.IMPUESTO_IVA = :IMPUESTO_IVA,'
+      '  producto.PRECIO_COSTO_CIMPUESTOS = '
+      ':PRECIO_COSTO_CIMPUESTOS,'
+      '  producto.IMPUESTO_ADICIONAL1 = :IMPUESTO_ADICIONAL1,'
+      '  producto.IMPUESTO_ADICIONAL2 = :IMPUESTO_ADICIONAL2,'
+      '  producto.PRECIO1 = :PRECIO1,'
+      '  producto.PRECIO2 = :PRECIO2,'
+      '  producto.PRECIO3 = :PRECIO3,'
+      '  producto.PRECIO4 = :PRECIO4,'
+      '  producto.PRECIO5 = :PRECIO5'
+      'WHERE'
+      '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
+    Left = 168
+    Top = 240
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO_COSTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO_VENTA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'COEF_GANANCIA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'COEF_DESCUENTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPUESTO_INTERNO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPUESTO_IVA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO_COSTO_CIMPUESTOS'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPUESTO_ADICIONAL1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPUESTO_ADICIONAL2'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO2'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO3'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO4'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO5'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_ID_PRODUCTO'
+        ParamType = ptUnknown
+      end>
   end
 end
