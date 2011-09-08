@@ -166,7 +166,10 @@ end;
 
 procedure TFEstadisticaStock.btImprimirClick(Sender: TObject);
 begin
-EKVistaPreviaQR1.VistaPrevia;
+  if ZQ_Stock.IsEmpty then
+  exit;
+  
+  EKVistaPreviaQR1.VistaPrevia;
 end;
 
 end.
