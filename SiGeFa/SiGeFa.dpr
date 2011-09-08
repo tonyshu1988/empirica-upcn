@@ -53,7 +53,8 @@ uses
   UABM_CPB_NotaPedido in 'UABM_CPB_NotaPedido.pas' {FABM_CPB_NotaPedido},
   UABM_Preventa in 'UABM_Preventa.pas' {FABM_Preventa},
   UCuentaCorriente_Proveedor in 'UCuentaCorriente_Proveedor.pas' {FCuentaCorriente_Proveedor},
-  UABM_CPB_FacturaCompra in 'UABM_CPB_FacturaCompra.pas' {FABM_CPB_FacturaCompra};
+  UABM_CPB_FacturaCompra in 'UABM_CPB_FacturaCompra.pas' {FABM_CPB_FacturaCompra},
+  UAuditoria in 'UAuditoria.pas' {FAuditoria};
 
 {$R *.res}
 
