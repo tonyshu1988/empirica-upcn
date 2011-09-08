@@ -66,6 +66,11 @@ type
     ZQ_ProductosProveedorIMPUESTO_IVA: TFloatField;
     ZQ_ProductosProveedorCOLOR: TStringField;
     EKBusquedaProductoEmpresa: TEKBusquedaAvanzada;
+    ZQ_EmpresaMarca: TZQuery;
+    ZQ_EmpresaMarcaID: TIntegerField;
+    ZQ_EmpresaMarcaID_EMPRESA: TIntegerField;
+    ZQ_EmpresaMarcaID_MARCA: TIntegerField;
+    ZQ_EmpresaMarcaDESCRIPCION: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
@@ -105,8 +110,18 @@ end;
 
 procedure TFBuscarProducto.filtrarEmpresa(idEmpresa: integer);
 begin
+  ZQ_EmpresaMarca.Close;
+  ZQ_EmpresaMarca.ParamByName('id_empresa').AsInteger:= idEmpresa;
+  ZQ_EmpresaMarca.Open;
+
+  if ZQ_EmpresaMarca.IsEmpty then
+  begin
+    buscarDeEmpresas:= false;
+    exit;
+  end;
+
   buscarDeEmpresas:= true;
-  EKBusquedaProductoEmpresa.SQL_Where.ValueFromIndex[1]:= IntToStr(idEmpresa)//format('and emk.id_empresa = %d', [idEmpresa]);
+  EKBusquedaProductoEmpresa.SQL_Where.ValueFromIndex[1]:= IntToStr(idEmpresa)
 end;
 
 procedure TFBuscarProducto.btnBuscarClick(Sender: TObject);

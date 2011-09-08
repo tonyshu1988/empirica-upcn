@@ -3608,7 +3608,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TituloColumna = 'Vendedor'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_VerCpb'
+    NombreGuardar = 'ABM_OP_VerCpb'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -3648,7 +3648,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TituloColumna = 'Importe'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_VerFpago'
+    NombreGuardar = 'ABM_OP_VerFpago'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -4409,7 +4409,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TituloColumna = 'Importe'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_EditarFPago'
+    NombreGuardar = 'ABM_OP_EditarFPago'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True

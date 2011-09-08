@@ -4012,7 +4012,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TituloColumna = 'Fecha Cobro'
         Visible = False
       end>
-    NombreGuardar = 'ABM_Cpb_VerCpb'
+    NombreGuardar = 'ABM_PR_VerCpb'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -4044,7 +4044,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TituloColumna = 'Importe Final'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_VerProductos'
+    NombreGuardar = 'ABM_PR_VerProductos'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -4779,7 +4779,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TituloColumna = 'Precio Final'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_EditarProductos'
+    NombreGuardar = 'ABM_PR_EditarProductos'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
