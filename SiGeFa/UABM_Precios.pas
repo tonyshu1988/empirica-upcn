@@ -46,7 +46,6 @@ type
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     ZSPActualizarImporte: TZStoredProc;
     ZQ_ProductosID_PRODUCTO: TIntegerField;
-    ZU_Productos: TZUpdateSQL;
     ZSPActualizarImporteSALIDA: TIntegerField;
     PanelEdicion: TPanel;
     Label1: TLabel;
@@ -131,14 +130,14 @@ type
     ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
-    GroupBox1: TGroupBox;
+    GBoxIncDecImportes: TGroupBox;
     Label2: TLabel;
     Label3: TLabel;
     LabelTipo2: TLabel;
     LabelTipo1: TLabel;
     EditCosto: TEdit;
     EditVenta: TEdit;
-    GroupBox2: TGroupBox;
+    GboxImpuestos: TGroupBox;
     Label4: TLabel;
     lblImpAdicional1: TLabel;
     EditIVA: TEdit;
@@ -158,6 +157,22 @@ type
     ZQ_ProductosPRECIO3: TFloatField;
     ZQ_ProductosPRECIO4: TFloatField;
     ZQ_ProductosPRECIO5: TFloatField;
+    ZU_Productos: TZUpdateSQL;
+    lblPrecio1: TLabel;
+    EditPrecio1: TEdit;
+    lblPrecio2: TLabel;
+    EditPrecio2: TEdit;
+    lblPrecio3: TLabel;
+    EditPrecio3: TEdit;
+    lblPrecio4: TLabel;
+    EditPrecio4: TEdit;
+    lblPrecio5: TLabel;
+    EditPrecio5: TEdit;
+    LabelTipoP2: TLabel;
+    LabelTipoP1: TLabel;
+    LabelTipoP3: TLabel;
+    LabelTipoP4: TLabel;
+    LabelTipoP5: TLabel;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -215,8 +230,9 @@ begin
   if (imp_ad1_nombre <> '') then
   begin
     lblImpAdicional1.Caption := imp_ad1_nombre+':';
-//    lblImpuesto_Adicional1.Visible := true;
-//    DBEditImpuestoAdicional1.Visible := true;
+    lblImpAdicional1.Visible := true;
+    EditImpAdicional1.Visible := true;
+    GboxImpuestos.Width := 257;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL1')].Title.Caption:= imp_ad1_nombre;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL1')].Visible := true;
   end;
@@ -224,40 +240,66 @@ begin
   if (imp_ad2_nombre <> '') then
   begin
     lblImpAdicional2.Caption := imp_ad2_nombre+':';
-//    lblImpuesto_Adicional2.Visible := true;
-//    DBEditImpuestoAdicional2.Visible := true;
+    lblImpAdicional2.Visible := true;
+    GboxImpuestos.Width := 422;
+    EditImpAdicional2.Visible := true;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL2')].Title.Caption:= imp_ad2_nombre;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL2')].Visible := true;
   end;
 
   if (precio1 <> '') then
   begin
+    lblPrecio1.Caption := precio1+':';
+    lblPrecio1.Visible := true;
+    LabelTipoP1.Visible := true;
+    EditPrecio1.Visible := true;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO1')].Title.Caption:= precio1;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO1')].Visible := true;
+    GBoxIncDecImportes.Width := 394;
   end;
 
   if (precio2 <> '') then
   begin
+    lblPrecio2.Caption := precio2+':';
+    lblPrecio2.Visible := true;
+    LabelTipoP2.Visible := true;
+    EditPrecio2.Visible := true;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO2')].Title.Caption:= precio2;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO2')].Visible := true;
+    GBoxIncDecImportes.Width := 394;
   end;
 
   if (precio3 <> '') then
   begin
+    lblPrecio3.Caption := precio3+':';
+    lblPrecio3.Visible := true;
+    LabelTipoP3.Visible := true;
+    EditPrecio3.Visible := true;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO3')].Title.Caption:= precio3;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO3')].Visible := true;
+    GBoxIncDecImportes.Width := 594;
   end;
 
   if (precio4 <> '') then
   begin
+    lblPrecio4.Caption := precio4+':';
+    lblPrecio4.Visible := true;
+    LabelTipoP4.Visible := true;
+    EditPrecio4.Visible := true;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO4')].Title.Caption:= precio4;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO4')].Visible := true;
+    GBoxIncDecImportes.Width := 594;
   end;
 
   if (precio5 <> '') then
   begin
+    lblPrecio5.Caption := precio5+':';
+    lblPrecio5.Visible := true;
+    LabelTipoP5.Visible := true;
+    EditPrecio5.Visible := true;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO5')].Title.Caption:= precio5;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'PRECIO5')].Visible := true;
+    GBoxIncDecImportes.Width := 800;
   end;
 
 end;
@@ -311,6 +353,11 @@ begin
     RadioGroupTipoCalculo.Enabled := false;
     EditCosto.Enabled := false;
     EditVenta.Enabled := false;
+    EditPrecio1.Enabled:= false;
+    EditPrecio2.Enabled:= false;
+    EditPrecio3.Enabled:= false;
+    EditPrecio4.Enabled:= false;
+    EditPrecio5.Enabled:= false;
   end;
 end;
 
@@ -325,6 +372,11 @@ begin
   try
     StrToFloat(EditCosto.Text);
     StrToFloat(EditVenta.Text);
+    StrToFloat(EditPrecio1.Text);
+    StrToFloat(EditPrecio2.Text);
+    StrToFloat(EditPrecio3.Text);
+    StrToFloat(EditPrecio4.Text);
+    StrToFloat(EditPrecio5.Text);
     StrToFloat(EditIVA.Text);
     StrToFloat(EditImpAdicional1.Text);
     StrToFloat(EditImpAdicional2.Text);
@@ -340,6 +392,11 @@ begin
     RadioGroupTipoCalculo.Enabled := false;
     EditCosto.Enabled := false;
     EditVenta.Enabled := false;
+    EditPrecio1.Enabled:= false;
+    EditPrecio2.Enabled:= false;
+    EditPrecio3.Enabled:= false;
+    EditPrecio4.Enabled:= false;
+    EditPrecio5.Enabled:= false;    
 
 //    ZSPActualizarImporte.Close;
 //    ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat := StrToFloat(EditCosto.Text);
@@ -370,6 +427,11 @@ begin
           ZSPActualizarImporte.ParamByName('ID_PRODUCTO').AsInteger := ZQ_ProductosID_PRODUCTO.AsInteger;
           ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat := StrToFloat(EditCosto.Text);
           ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat := StrToFloat(EditVenta.Text);
+          ZSPActualizarImporte.ParamByName('PRECIO1').AsFloat := StrToFloat(EditPrecio1.Text);
+          ZSPActualizarImporte.ParamByName('PRECIO2').AsFloat := StrToFloat(EditPrecio2.Text);
+          ZSPActualizarImporte.ParamByName('PRECIO3').AsFloat := StrToFloat(EditPrecio3.Text);
+          ZSPActualizarImporte.ParamByName('PRECIO4').AsFloat := StrToFloat(EditPrecio4.Text);
+          ZSPActualizarImporte.ParamByName('PRECIO5').AsFloat := StrToFloat(EditPrecio5.Text);
 
           if RadioGroupTipoCalculo.ItemIndex = 0 then
             ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger := 1
@@ -397,6 +459,11 @@ begin
         ZSPActualizarImporte.ParamByName('ID_PRODUCTO').AsInteger := ZQ_ProductosID_PRODUCTO.AsInteger;
         ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat := StrToFloat(EditCosto.Text);
         ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat := StrToFloat(EditVenta.Text);
+        ZSPActualizarImporte.ParamByName('PRECIO1').AsFloat := StrToFloat(EditPrecio1.Text);
+        ZSPActualizarImporte.ParamByName('PRECIO2').AsFloat := StrToFloat(EditPrecio2.Text);
+        ZSPActualizarImporte.ParamByName('PRECIO3').AsFloat := StrToFloat(EditPrecio3.Text);
+        ZSPActualizarImporte.ParamByName('PRECIO4').AsFloat := StrToFloat(EditPrecio4.Text);
+        ZSPActualizarImporte.ParamByName('PRECIO5').AsFloat := StrToFloat(EditPrecio5.Text);
 
         if RadioGroupTipoCalculo.ItemIndex = 0 then
           ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger := 1
@@ -443,8 +510,18 @@ begin
     RadioGroupTipoCalculo.Enabled := true;
     EditCosto.Enabled := true;
     EditVenta.Enabled := true;
+    EditPrecio1.Enabled:= true;
+    EditPrecio2.Enabled:= true;
+    EditPrecio3.Enabled:= true;
+    EditPrecio4.Enabled:= true;
+    EditPrecio5.Enabled:= true;
     EditCosto.Text:= '0';
     EditVenta.Text:= '0';
+    EditPrecio1.Text:= '0';
+    EditPrecio2.Text:= '0';
+    EditPrecio3.Text:= '0';
+    EditPrecio4.Text:= '0';
+    EditPrecio5.Text:= '0';
     ZQ_Productos.Refresh;
     DBGridProductos.Options:=DBGridProductos.Options - [dgMultiSelect];
     DBGridProductos.SetFocus;
@@ -471,8 +548,18 @@ begin
     RadioGroupTipoCalculo.Enabled := true;
     EditCosto.Enabled := true;
     EditVenta.Enabled := true;
+    EditPrecio1.Enabled:= true;
+    EditPrecio2.Enabled:= true;
+    EditPrecio3.Enabled:= true;
+    EditPrecio4.Enabled:= true;
+    EditPrecio5.Enabled:= true;    
     EditCosto.Text:= '0';
     EditVenta.Text:= '0';
+    EditPrecio1.Text:= '0';
+    EditPrecio2.Text:= '0';
+    EditPrecio3.Text:= '0';
+    EditPrecio4.Text:= '0';
+    EditPrecio5.Text:= '0';
     ZQ_Productos.Refresh;
     DBGridProductos.SetFocus;
   end;
@@ -506,11 +593,21 @@ begin
   begin
     LabelTipo1.Caption := '%';
     LabelTipo2.Caption := '%';
+    LabelTipoP1.Caption := '%';
+    LabelTipoP2.Caption := '%';
+    LabelTipoP3.Caption := '%';
+    LabelTipoP4.Caption := '%';
+    LabelTipoP5.Caption := '%';
   end
   else
   begin
     LabelTipo1.Caption := '$';
     LabelTipo2.Caption := '$';
+    LabelTipoP1.Caption := '$';
+    LabelTipoP2.Caption := '$';
+    LabelTipoP3.Caption := '$';
+    LabelTipoP4.Caption := '$';
+    LabelTipoP5.Caption := '$';
   end;
 end;
 
@@ -621,7 +718,8 @@ begin
   CDSZQ_Productos.CreateDataSet;
   EKOrdenarGrilla1.CargarConfigColumnas;
   lblCantidadRegistros.Caption:= '';
-
+  GBoxIncDecImportes.Width := 250;
+  GboxImpuestos.Width := 97;
   HabilitarCampos;
 end;
 
@@ -697,7 +795,12 @@ begin
   else
   begin
     campoQueCambia:= 'COEF_GANANCIA';
-    coef_ganancia:= (precio_venta / costo_con_impuestos) - 1;
+
+    if costo_con_impuestos = 0 then
+      coef_ganancia := 0
+    else
+      coef_ganancia:= (precio_venta / costo_con_impuestos) - 1;
+
     ZQ_ProductosCOEF_GANANCIA.AsFloat:= coef_ganancia;
   end
 end;
@@ -716,11 +819,11 @@ procedure TFABM_Precios.RadioGroupImpuestosClick(Sender: TObject);
 begin
   if RadioGroupImpuestos.ItemIndex = 0 then
   begin
-    GroupBox2.Enabled:= true;
+    GboxImpuestos.Enabled:= true;
   end
   else
   begin
-    GroupBox2.Enabled:= false;
+    GboxImpuestos.Enabled:= false;
   end;
 end;
 
