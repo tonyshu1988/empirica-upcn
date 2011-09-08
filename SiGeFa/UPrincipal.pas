@@ -68,7 +68,6 @@ type
     ConfigurarMail1: TMenuItem;
     AABM_Articulo: TAction;
     ABMArticulo1: TMenuItem;
-    N2: TMenuItem;
     PantallasNuevas1: TMenuItem;
     ABMTipoIva1: TMenuItem;
     ABMTipoComprobante1: TMenuItem;
@@ -81,7 +80,6 @@ type
     AABM_Precios: TAction;
     ABMPrecios1: TMenuItem;
     AABM_Comprobante: TAction;
-    ABMComprobante1: TMenuItem;
     ACajero: TAction;
     Cajero1: TMenuItem;
     AMovInternos: TAction;
@@ -90,16 +88,12 @@ type
     ABMTipoMovimiento1: TMenuItem;
     ATransferirStock: TAction;
     ransferirStock1: TMenuItem;
-    ACuentaCorriente: TAction;
-    CuentaCorriente1: TMenuItem;
+    ACtaCte_Cliente: TAction;
     AEstad_MovInternos: TAction;
-    Movimientos1: TMenuItem;
-    N5: TMenuItem;
     AEstad_Facturacion: TAction;
     Estadisticas1: TMenuItem;
     EstadisticaMovimientosInt1: TMenuItem;
     EstadisticaFacturacion1: TMenuItem;
-    N7: TMenuItem;
     AEstad_Disponib: TAction;
     EstadisticaDisponibilidades1: TMenuItem;
     AArqueo_Caja: TAction;
@@ -138,6 +132,15 @@ type
     N1: TMenuItem;
     N3: TMenuItem;
     N6: TMenuItem;
+    ACtaCte_Proveedor: TAction;
+    CtaCteCliente1: TMenuItem;
+    CtaCteProveedor1: TMenuItem;
+    Sucursal1: TMenuItem;
+    Mail1: TMenuItem;
+    Comprobantes2: TMenuItem;
+    MovInternos1: TMenuItem;
+    N2: TMenuItem;
+    N5: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -171,7 +174,7 @@ type
     procedure AMovInternosExecute(Sender: TObject);
     procedure AABM_TipoMovExecute(Sender: TObject);
     procedure ATransferirStockExecute(Sender: TObject);
-    procedure ACuentaCorrienteExecute(Sender: TObject);
+    procedure ACtaCte_ClienteExecute(Sender: TObject);
     procedure AEstad_MovInternosExecute(Sender: TObject);
     procedure AEstad_FacturacionExecute(Sender: TObject);
     procedure AEstad_DisponibExecute(Sender: TObject);
@@ -185,6 +188,7 @@ type
     procedure AABM_CPB_FacturaCompraExecute(Sender: TObject);
     procedure AABM_CPB_DevolucionExecute(Sender: TObject);
     procedure APreventaExecute(Sender: TObject);
+    procedure ACtaCte_ProveedorExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -217,7 +221,8 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion,
   UEstadisticaDisponibilidades, UArqueo_Caja, Types, UEstadisticaStock,
   UABM_CPB_Recibo, UABM_CPB_OrdenPago, UABM_CPB_Remito,
-  UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa;
+  UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa,
+  UCuentaCorriente_Proveedor;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -555,7 +560,7 @@ begin
   EKVentanas1.Abrir(Sender, TFTransferirStock, FTransferirStock);
 end;
 
-procedure TFPrincipal.ACuentaCorrienteExecute(Sender: TObject);
+procedure TFPrincipal.ACtaCte_ClienteExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFCuentaCorriente, FCuentaCorriente);
 end;
@@ -623,6 +628,11 @@ end;
 procedure TFPrincipal.APreventaExecute(Sender: TObject);
 begin
    EKVentanas1.Abrir(Sender, TFABM_Preventa, FABM_Preventa);
+end;
+
+procedure TFPrincipal.ACtaCte_ProveedorExecute(Sender: TObject);
+begin
+   EKVentanas1.Abrir(Sender, TFCuentaCorriente_Proveedor, FCuentaCorriente_Proveedor);
 end;
 
 end.
