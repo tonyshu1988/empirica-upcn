@@ -5080,6 +5080,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 39
       OnExecute = AABM_CPB_DevolucionExecute
     end
+    object AAuditoria: TAction
+      Caption = 'Auditoria'
+      ImageIndex = 1
+      OnExecute = AAuditoriaExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5293,6 +5298,9 @@ object FPrincipal: TFPrincipal
     end
     object Salir1: TMenuItem
       Caption = 'Sistema'
+      object Auditoria1: TMenuItem
+        Action = AAuditoria
+      end
       object CambiarContrasenia: TMenuItem
         Tag = 1
         Caption = 'Cambiar &Password'
