@@ -1209,7 +1209,7 @@ begin
           begin
               txt:= txt + ' AND ((' + armarfecha(x, FCondicion1, textovalor1)+')';
               if  (textovalor2.Text > '') then
-                txt:=txt +' '+ convertir_y_o(Fyo) + ' ('+ armarfecha(x, FCondicion2, textovalor2)+')';
+                txt:=txt +' '+ convertir_y_o(Fyo) + ' ('+armarfecha(x, FCondicion2, textovalor2)+')';
           end;
 
           if TipoCampo = EK_Numero then
@@ -1239,19 +1239,23 @@ begin
   armalinea := txt;
 end;
 
-function TEKBusquedaAvanzada.armarfecha(x: integer; operador: TComboBox;
-  campo: TEdit): string;
-  VAR   fecha : tdate;
-        txt : string;
+function TEKBusquedaAvanzada.armarfecha(x: integer; operador: TComboBox; campo: TEdit): string;
+var
+  fecha : tdate;
+  txt_fecha : string;
+  txt_campo: string;
+  txt_condicion: string;
 begin
-    try
-      fecha := strtodate(campo.Text);
-    except
-      ShowMessage('Hay un error en los parametros ingresados');
-      exit;
-    end;
-    txt := inttostr(monthof(fecha))+'/'+ inttostr(dayof(fecha))+'/'+inttostr(yearof(fecha));
-    armarfecha :=  ' '+ TEKCriterioBA(FCriterios.Items[x]).FTabla+'.'+TEKCriterioBA(FCriterios.Items[x]).FCampo +' '+operador.Items[operador.ItemIndex]+' '''+txt+'''';
+  try
+    fecha := strtodate(campo.Text);
+  except
+    ShowMessage('Hay un error en los parametros ingresados');
+    exit;
+  end;
+  txt_fecha:= inttostr(monthof(fecha))+'/'+ inttostr(dayof(fecha))+'/'+inttostr(yearof(fecha));
+  txt_campo:= TEKCriterioBA(FCriterios.Items[x]).FTabla+'.'+TEKCriterioBA(FCriterios.Items[x]).FCampo;
+  txt_condicion:= operador.Items[operador.ItemIndex];
+  armarfecha:=  Format('cast('+txt_campo+' as Date) '+txt_condicion+' %s', [QuotedStr(txt_fecha)]);
 end;
 
 function TEKBusquedaAvanzada.armartexto(x: integer; operador: TComboBox;
