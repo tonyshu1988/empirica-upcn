@@ -75,7 +75,6 @@ type
     ZQ_VerCpbCLIENTE: TStringField;
     ZQ_VerCpbCLIENTE_DOCUMENTO: TStringField;
     ZQ_VerCpbCLIENTE_CUIL: TStringField;
-    ZQ_VerCpbVENDEDOR: TStringField;
     ZQ_VerCpbESTADO: TStringField;
     DBGridListaCpb: TDBGrid;
     DBGridCpbActual_FPago: TDBGrid;
@@ -303,6 +302,7 @@ type
     Label30: TLabel;
     DBText33: TDBText;
     StaticTxtConfirmado: TStaticText;
+    EKBuscar: TEKBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -432,10 +432,7 @@ begin
   ImageListEntidad.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
 
   //abro todos los recibos del sistema
-  ZQ_VerCpb.Close;
-  ZQ_VerCpb.ParamByName('tipo_comprobante').AsInteger:= tipoComprobante;
-  ZQ_VerCpb.open;
-
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 end;
 
@@ -454,7 +451,11 @@ end;
 
 procedure TFABM_CPB_OrdenPago.btnBuscarClick(Sender: TObject);
 begin
-//  EKbuscar.buscar;
+  if EKbuscar.buscar then
+  begin
+    ZQ_VerCpb.Refresh;
+    dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+  end
 end;
 
 
