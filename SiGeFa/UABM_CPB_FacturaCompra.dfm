@@ -1,7 +1,7 @@
 object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
-  Left = 310
+  Left = 344
   Top = 144
-  Width = 890
+  Width = 870
   Height = 586
   Caption = 'ABM Factura Compra'
   Color = clBtnFace
@@ -26,7 +26,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 874
+    Width = 854
     Height = 477
     Align = alClient
     BevelOuter = bvNone
@@ -34,7 +34,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 874
+      Width = 854
       Height = 477
       Align = alClient
       BevelOuter = bvNone
@@ -49,12 +49,12 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 864
+        Width = 844
         Height = 177
         Align = alTop
         TabOrder = 0
         DesignSize = (
-          864
+          844
           177)
         object btnBuscarEmpresa: TSpeedButton
           Left = 7
@@ -462,23 +462,23 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       object PanelEditar_Producto: TPanel
         Left = 5
         Top = 182
-        Width = 864
+        Width = 844
         Height = 290
         Align = alClient
         TabOrder = 1
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
           Top = 248
-          Width = 862
+          Width = 842
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            862
+            842
             41)
           object Label25: TLabel
-            Left = 320
+            Left = 300
             Top = 3
             Width = 111
             Height = 13
@@ -492,7 +492,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             ParentFont = False
           end
           object Label26: TLabel
-            Left = 456
+            Left = 436
             Top = 3
             Width = 121
             Height = 13
@@ -506,7 +506,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             ParentFont = False
           end
           object Label29: TLabel
-            Left = 729
+            Left = 709
             Top = 3
             Width = 58
             Height = 13
@@ -520,7 +520,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             ParentFont = False
           end
           object Label30: TLabel
-            Left = 593
+            Left = 573
             Top = 3
             Width = 51
             Height = 13
@@ -543,7 +543,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             OnClick = btnEliminarProductoClick
           end
           object editTotalProductos: TEdit
-            Left = 320
+            Left = 300
             Top = 17
             Width = 129
             Height = 19
@@ -564,7 +564,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             TabOrder = 1
           end
           object editTotalImponible: TEdit
-            Left = 456
+            Left = 436
             Top = 17
             Width = 129
             Height = 19
@@ -585,7 +585,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             TabOrder = 2
           end
           object editTotalIva: TEdit
-            Left = 592
+            Left = 572
             Top = 17
             Width = 129
             Height = 19
@@ -606,7 +606,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             TabOrder = 3
           end
           object editTotalFinal: TEdit
-            Left = 728
+            Left = 708
             Top = 17
             Width = 129
             Height = 19
@@ -630,7 +630,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         object DBGridEditar_Producto: TDBGrid
           Left = 164
           Top = 1
-          Width = 699
+          Width = 679
           Height = 247
           Align = alClient
           Color = 14606012
@@ -860,7 +860,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 874
+      Width = 854
       Height = 477
       Align = alClient
       BevelOuter = bvNone
@@ -873,7 +873,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 338
+        Left = 318
         Top = 5
         Width = 6
         Height = 467
@@ -882,7 +882,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 333
+        Width = 313
         Height = 467
         Align = alClient
         BevelOuter = bvNone
@@ -890,7 +890,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 333
+          Width = 313
           Height = 467
           Align = alClient
           Color = 14606012
@@ -972,7 +972,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         end
       end
       object PanelCpbActual: TPanel
-        Left = 344
+        Left = 324
         Top = 5
         Width = 525
         Height = 467
@@ -1502,7 +1502,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 874
+    Width = 854
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1511,7 +1511,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     object lblTipoComprobante: TLabel
       Left = 1
       Top = 1
-      Width = 872
+      Width = 852
       Height = 17
       Align = alCustom
       Alignment = taCenter
@@ -1540,7 +1540,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 764
+      Left = 744
       Top = 1
       Width = 109
       Height = 17
@@ -1554,7 +1554,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 655
+      Left = 635
       Top = 1
       Width = 109
       Height = 17
@@ -3401,40 +3401,20 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     AfterScroll = ZQ_VerCpbAfterScroll
     SQL.Strings = (
       'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
-      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
       
-        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
-        'iente_cuil,'
-      
-        '        ven.nombre as vendedor, tcpb.nombre_tipo_cpb, est.descri' +
-        'pcion as estado'
+        '        pro.cuit_cuil as cuit_proveedor, est.descripcion as esta' +
+        'do'
       'from comprobante cpb'
       'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
       'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
-      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
-      'left join persona ven on (cpb.id_vendedor = ven.id_persona)'
-      
-        'left join tipo_comprobante tcpb on (cpb.id_tipo_cpb = tcpb.id_ti' +
-        'po_cpb)'
       
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
         '_comp_estado)'
-      'where (cpb.id_tipo_cpb = :tipo_comprobante)'
+      'where (cpb.id_tipo_cpb = 13)'
       'order by cpb.fecha desc')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'tipo_comprobante'
-        ParamType = ptUnknown
-      end>
+    Params = <>
     Left = 34
     Top = 52
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'tipo_comprobante'
-        ParamType = ptUnknown
-      end>
     object ZQ_VerCpbID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
@@ -3492,10 +3472,6 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     object ZQ_VerCpbCUIT_PROVEEDOR: TStringField
       FieldName = 'CUIT_PROVEEDOR'
       Size = 30
-    end
-    object ZQ_VerCpbVENDEDOR: TStringField
-      FieldName = 'VENDEDOR'
-      Size = 200
     end
     object ZQ_VerCpbESTADO: TStringField
       FieldName = 'ESTADO'
@@ -4309,6 +4285,10 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         Visible = True
       end
       item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
         TituloColumna = 'Color'
         Visible = True
       end
@@ -4354,5 +4334,123 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     DataSet = DM.ZQ_Sucursal
     Left = 30
     Top = 266
+  end
+  object EKBuscar: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Fecha'
+        Campo = 'FECHA'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Factura'
+        Campo = 'FECHA_ENVIADA'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'PV'
+        Campo = 'PUNTO_VENTA'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'N'#250'mero'
+        Campo = 'NUMERO_CPB'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'nombre'
+        Tabla = 'sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Proveedor'
+        Campo = 'nombre'
+        Tabla = 'empresa'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe Final'
+        Campo = 'IMPORTE_TOTAL'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Saldo'
+        Campo = 'SALDO'
+        Tabla = 'comprobante'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_VerCpb
+    SQL.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      
+        '        pro.cuit_cuil as cuit_proveedor, est.descripcion as esta' +
+        'do'
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)'
+      'where (cpb.id_tipo_cpb = 15)'
+      'order by cpb.fecha desc')
+    SQL_Select.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      
+        '        pro.cuit_cuil as cuit_proveedor, est.descripcion as esta' +
+        'do')
+    SQL_From.Strings = (
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)')
+    SQL_Where.Strings = (
+      'where (cpb.id_tipo_cpb = 15)')
+    SQL_Orden.Strings = (
+      'order by cpb.fecha desc')
+    UsarWhereOriginal = EK_Con_Where
+    Left = 29
+    Top = 320
   end
 end

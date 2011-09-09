@@ -72,7 +72,6 @@ type
     ZQ_VerCpbSUCURSAL: TStringField;
     ZQ_VerCpbPROVEEDOR: TStringField;
     ZQ_VerCpbCUIT_PROVEEDOR: TStringField;
-    ZQ_VerCpbVENDEDOR: TStringField;
     ZQ_VerCpbESTADO: TStringField;
     DBGridListaCpb: TDBGrid;
     DBGridCpbActual_Producto: TDBGrid;
@@ -303,6 +302,7 @@ type
     ZQ_CpbProducto_TipoArticulo: TStringField;
     ZQ_CpbProducto_Articulo: TStringField;
     StaticTxtConfirmado: TStaticText;
+    EKBuscar: TEKBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -439,9 +439,7 @@ begin
   ImageListEntidad.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
 
   //abro todos los recibos del sistema
-  ZQ_VerCpb.Close;
-  ZQ_VerCpb.ParamByName('tipo_comprobante').AsInteger:= tipoComprobante;
-  ZQ_VerCpb.open;
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 
   CD_Producto.CreateDataSet;
@@ -467,7 +465,11 @@ end;
 
 procedure TFABM_CPB_FacturaCompra.btnBuscarClick(Sender: TObject);
 begin
-//  EKbuscar.buscar;
+  if EKbuscar.buscar then
+  begin
+    ZQ_VerCpb.Refresh;
+    dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+  end
 end;
 
 

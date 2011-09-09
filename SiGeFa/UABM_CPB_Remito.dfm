@@ -1201,41 +1201,9 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
             item
               Alignment = taCenter
               Expanded = False
-              FieldName = 'FECHA_COBRADA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Cobro'
-              Visible = False
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
               FieldName = 'FECHA_ENVIADA'
               Title.Alignment = taCenter
               Title.Caption = 'Fecha Envio'
-              Visible = True
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA_IMPRESA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Impreso'
-              Visible = False
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA_VENCIMIENTO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Vencim.'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'VENDEDOR'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vendedor'
-              Width = 300
               Visible = True
             end>
         end
@@ -3632,37 +3600,20 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
       
         '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
         'iente_cuil,'
-      
-        '        ven.nombre as vendedor, tcpb.nombre_tipo_cpb, est.descri' +
-        'pcion as estado'
+      '        est.descripcion as estado'
       'from comprobante cpb'
       'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
       'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
       'left join persona cli on (cpb.id_cliente = cli.id_persona)'
-      'left join persona ven on (cpb.id_vendedor = ven.id_persona)'
-      
-        'left join tipo_comprobante tcpb on (cpb.id_tipo_cpb = tcpb.id_ti' +
-        'po_cpb)'
       
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
         '_comp_estado)'
-      'where (cpb.id_tipo_cpb = :tipo_comprobante)'
+      'where (cpb.id_tipo_cpb = 20)'
       'order by cpb.fecha desc'
       '')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'tipo_comprobante'
-        ParamType = ptUnknown
-      end>
+    Params = <>
     Left = 34
     Top = 52
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'tipo_comprobante'
-        ParamType = ptUnknown
-      end>
     object ZQ_VerCpbID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
@@ -3735,10 +3686,6 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
     object ZQ_VerCpbCLIENTE_CUIL: TStringField
       FieldName = 'CLIENTE_CUIL'
       Size = 30
-    end
-    object ZQ_VerCpbVENDEDOR: TStringField
-      FieldName = 'VENDEDOR'
-      Size = 200
     end
     object ZQ_VerCpbESTADO: TStringField
       FieldName = 'ESTADO'
@@ -4032,8 +3979,8 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
         Name = 'id_empresa'
         ParamType = ptUnknown
       end>
-    Left = 125
-    Top = 32
+    Left = 117
+    Top = 56
     ParamData = <
       item
         DataType = ftUnknown
@@ -4232,7 +4179,7 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
   object DS_Proveedor: TDataSource
     DataSet = ZQ_Proveedor
     Left = 197
-    Top = 32
+    Top = 56
   end
   object DS_Cliente: TDataSource
     DataSet = ZQ_Cliente
@@ -4731,5 +4678,128 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
     DataSet = DM.ZQ_Sucursal
     Left = 30
     Top = 266
+  end
+  object EKBuscar: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Fecha'
+        Campo = 'FECHA'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Envio'
+        Campo = 'FECHA_ENVIADA'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'PV'
+        Campo = 'PUNTO_VENTA'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'N'#250'mero'
+        Campo = 'NUMERO_CPB'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'nombre'
+        Tabla = 'sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cliente'
+        Campo = 'nombre'
+        Tabla = 'persona'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Proveedor'
+        Campo = 'nombre'
+        Tabla = 'empresa'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe Final'
+        Campo = 'IMPORTE_TOTAL'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_VerCpb
+    SQL.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
+      
+        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
+        'iente_cuil,'
+      '        est.descripcion as estado'
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)'
+      'where (cpb.id_tipo_cpb = 20)'
+      'order by cpb.fecha desc')
+    SQL_Select.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
+      
+        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
+        'iente_cuil,'
+      '        est.descripcion as estado')
+    SQL_From.Strings = (
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)')
+    SQL_Where.Strings = (
+      'where (cpb.id_tipo_cpb = 20)')
+    SQL_Orden.Strings = (
+      'order by cpb.fecha desc')
+    UsarWhereOriginal = EK_Con_Where
+    Left = 29
+    Top = 320
   end
 end
