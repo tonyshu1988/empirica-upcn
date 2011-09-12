@@ -137,7 +137,6 @@ type
     procedure PopItemProducto_QuitarTodosClick(Sender: TObject);
     procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure ZQ_StockAfterScroll(DataSet: TDataSet);
     procedure AVolverExecute(Sender: TObject);
     procedure PopUpStock_DesasociarClick(Sender: TObject);
     procedure PopUpStock_DesasociarTodosClick(Sender: TObject);
@@ -147,6 +146,9 @@ type
     procedure DBGridSucursalDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure EKDbSuma1SumListChanged(Sender: TObject);
+    procedure DBGridStockKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -168,7 +170,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal;
+uses UDM, UPrincipal, UUtilidades;
 
 {$R *.dfm}
 
@@ -542,12 +544,6 @@ begin
 end;
 
 
-procedure TFABM_ProductoStock.ZQ_StockAfterScroll(DataSet: TDataSet);
-begin
-  lblResumen.Caption:= 'Total Stock: '+FloatToStr(EKDbSuma1.SumCollection.Items[0].SumValue);
-end;
-
-
 procedure TFABM_ProductoStock.PopUpStock_DesasociarClick(Sender: TObject);
 var
   sucursal: string;
@@ -635,6 +631,35 @@ procedure TFABM_ProductoStock.DBGridSucursalDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridSucursal, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_ProductoStock.EKDbSuma1SumListChanged(Sender: TObject);
+begin
+  lblResumen.Caption:= 'Total Stock: '+FloatToStr(EKDbSuma1.SumCollection.Items[0].SumValue);
+end;
+
+procedure TFABM_ProductoStock.DBGridStockKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  campo, fila, cantidad: integer;
+begin
+//  campo:= GetIndexField(DBGridStock, 'STOCK_ACTUAL') - 1;
+//  cantidad:= ZQ_Stock.RecordCount;
+//  fila:= ZQ_Stock.RecNo + 1;
+//
+//  if (Key = 13) or (key = 9) then  { if it's an enter key }
+//  begin
+//    Key := 0; {ignore}
+//    if ((sender as tdbgrid).SelectedField.FullName = 'STOCK_ACTUAL') then //si estoy en la columna almacenar
+//    begin
+//      if fila <= cantidad then //si no estoy en la ultima fila entonces paso a la siguiente
+//        ZQ_Stock.RecNo:= fila;
+////      else //si estoy en la ultima fila
+////        if ZQ_Stock.State = dsEdit then //y estoy en modo edicion
+////          ZQ_Stock.Post; //hago un post para que recalcule el EKDBSuma
+//      DBGridStock.SelectedField:= DBGridStock.Fields[campo]; //sigo en la misma columna
+//    end;
+//  end;
+
 end;
 
 end.

@@ -1,6 +1,6 @@
 object FBuscarProducto: TFBuscarProducto
-  Left = 388
-  Top = 234
+  Left = 491
+  Top = 125
   Width = 730
   Height = 426
   Caption = 'Buscar Producto'
@@ -790,6 +790,15 @@ object FBuscarProducto: TFBuscarProducto
       OnClick = btnSeleccionarClick
       AutoGrayScale = False
     end
+    object btnSeleccionarTodos: TdxBarLargeButton
+      Caption = 'F3 - Seleccionar Todos'
+      Category = 0
+      Hint = 'F3 - Seleccionar Todos'
+      Visible = ivNever
+      ImageIndex = 12
+      OnClick = btnSeleccionarTodosClick
+      AutoGrayScale = False
+    end
     object btnSeleccinarYSalir: TdxBarLargeButton
       Caption = 'Seleccionar y Salir'
       Category = 0
@@ -808,15 +817,6 @@ object FBuscarProducto: TFBuscarProducto
       Visible = ivAlways
       ImageIndex = 6
       OnClick = btnSalirClick
-      AutoGrayScale = False
-    end
-    object btnSeleccionarTodos: TdxBarLargeButton
-      Caption = 'F3 - Seleccionar Todos'
-      Category = 0
-      Hint = 'F3 - Seleccionar Todos'
-      Visible = ivNever
-      ImageIndex = 12
-      OnClick = btnSeleccionarTodosClick
       AutoGrayScale = False
     end
   end
