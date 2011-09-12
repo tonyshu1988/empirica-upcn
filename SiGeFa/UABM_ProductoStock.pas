@@ -642,24 +642,24 @@ procedure TFABM_ProductoStock.DBGridStockKeyDown(Sender: TObject; var Key: Word;
 var
   campo, fila, cantidad: integer;
 begin
-//  campo:= GetIndexField(DBGridStock, 'STOCK_ACTUAL') - 1;
-//  cantidad:= ZQ_Stock.RecordCount;
-//  fila:= ZQ_Stock.RecNo + 1;
-//
-//  if (Key = 13) or (key = 9) then  { if it's an enter key }
-//  begin
-//    Key := 0; {ignore}
-//    if ((sender as tdbgrid).SelectedField.FullName = 'STOCK_ACTUAL') then //si estoy en la columna almacenar
-//    begin
-//      if fila <= cantidad then //si no estoy en la ultima fila entonces paso a la siguiente
-//        ZQ_Stock.RecNo:= fila;
-////      else //si estoy en la ultima fila
-////        if ZQ_Stock.State = dsEdit then //y estoy en modo edicion
-////          ZQ_Stock.Post; //hago un post para que recalcule el EKDBSuma
-//      DBGridStock.SelectedField:= DBGridStock.Fields[campo]; //sigo en la misma columna
-//    end;
-//  end;
+  campo:= GetIndexField(DBGridStock, 'STOCK_ACTUAL') - 1;
+  cantidad:= ZQ_Stock.RecordCount;
+  fila:= ZQ_Stock.RecNo + 1;
 
+  if (Key = 13) or (key = 9) then  { if it's an enter key }
+  begin
+    Key := 0; {ignore}
+    if ((sender as tdbgrid).SelectedField.FullName = 'STOCK_ACTUAL') //si estoy en la columna almacenar
+      or ((sender as tdbgrid).SelectedField.FullName = 'STOCK_MIN_ALARMA') then //o en alarma
+    begin
+      if fila <= cantidad then //si no estoy en la ultima fila entonces paso a la siguiente
+        ZQ_Stock.Next
+      else //si estoy en la ultima fila
+        if ZQ_Stock.State = dsEdit then //y estoy en modo edicion
+          ZQ_Stock.Post; //hago un post para que recalcule el EKDBSuma
+      DBGridStock.SelectedField:= DBGridStock.Fields[campo]; //sigo en la misma columna
+    end;
+  end;
 end;
 
 end.
