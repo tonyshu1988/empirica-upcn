@@ -24,7 +24,7 @@ type
     btnReactivar: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
-    btnImprimir: TdxBarLargeButton;
+    btnImprimirListado: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
@@ -303,6 +303,37 @@ type
     ZQ_CpbProducto_Articulo: TStringField;
     StaticTxtConfirmado: TStaticText;
     EKBuscar: TEKBusquedaAvanzada;
+    RepListado: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepListado_Subtitulo: TQRLabel;
+    RepListado_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblPieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRLabel3: TQRLabel;
+    QRDBText5: TQRDBText;
+    QRLabel4: TQRLabel;
+    QRDBText6: TQRDBText;
+    EKVistaPrevia: TEKVistaPreviaQR;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -320,7 +351,7 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
-    procedure btnImprimirClick(Sender: TObject);
+    procedure btnImprimirListadoClick(Sender: TObject);
     procedure ZQ_VerCpbAfterScroll(DataSet: TDataSet);
     procedure modoEdicion(flag: boolean);
     procedure cargarTipoComprobante(tipo: integer);
@@ -636,15 +667,15 @@ begin
 end;
 
 
-procedure TFABM_CPB_FacturaCompra.btnImprimirClick(Sender: TObject);
+procedure TFABM_CPB_FacturaCompra.btnImprimirListadoClick(Sender: TObject);
 begin
   if ZQ_VerCpb.IsEmpty then
     exit;
 
-//  if not Assigned(FImpresion_Comprobantes) then
-//    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
-//  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, false);
-//  FImpresion_Comprobantes.imprimir;
+  DM.VariablesReportes(RepListado);
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  EKVistaPrevia.VistaPrevia;
 end;
 
 
