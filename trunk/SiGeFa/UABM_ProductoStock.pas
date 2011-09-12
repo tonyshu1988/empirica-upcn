@@ -196,7 +196,6 @@ begin
 end;
 
 
-
 procedure TFABM_ProductoStock.btnGuardarClick(Sender: TObject);
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);

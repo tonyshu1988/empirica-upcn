@@ -35,15 +35,16 @@ object FTransferirStock: TFTransferirStock
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
+      OnChanging = PageControlTransferirChanging
       object TabSTransferirStock: TTabSheet
         Caption = 'Transferir Stock'
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
           Width = 844
-          Height = 325
+          Height = 306
           Align = alClient
-          Color = 13431031
+          Color = 14606012
           DataSource = DS_Producto
           DefaultDrawing = False
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -120,10 +121,11 @@ object FTransferirStock: TFTransferirStock
               Visible = True
             end
             item
-              Color = 16767411
+              Color = 15856100
               Expanded = False
               FieldName = 'stockactual'
               ReadOnly = True
+              Title.Alignment = taCenter
               Title.Caption = 'Stock Actual'
               Visible = True
             end
@@ -131,7 +133,8 @@ object FTransferirStock: TFTransferirStock
               Color = 11796403
               Expanded = False
               FieldName = 'cantidad'
-              Title.Caption = 'Cantidad'
+              Title.Alignment = taCenter
+              Title.Caption = 'Transferir'
               Visible = True
             end
             item
@@ -157,11 +160,29 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 325
+          Top = 306
           Width = 844
-          Height = 22
+          Height = 41
           Align = alBottom
+          BevelOuter = bvNone
           TabOrder = 1
+          DesignSize = (
+            844
+            41)
+          object Label25: TLabel
+            Left = 712
+            Top = 7
+            Width = 99
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Total a Transferir'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
           object btBorrarLinea: TButton
             Left = 10
             Top = 3
@@ -171,144 +192,37 @@ object FTransferirStock: TFTransferirStock
             TabOrder = 0
             OnClick = btBorrarLineaClick
           end
+          object editTotalProductos: TEdit
+            Left = 712
+            Top = 21
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 1
+          end
         end
       end
       object TabSAsociarNotaPedido: TTabSheet
         Caption = 'Asociar Nota Pedido'
         ImageIndex = 1
-        object DBGridNotaPedidoDetalle: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 844
-          Height = 347
-          Align = alClient
-          Color = 16511963
-          DataSource = DS_Nota_Pedido_Detalle
-          DefaultDrawing = False
-          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 1
-          TitleFont.Charset = ANSI_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Visible = False
-          OnDrawColumnCell = DBGridNotaPedidoDetalleDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'cantidad'
-              ReadOnly = True
-              Title.Caption = 'Cantidad Pedida'
-              Visible = True
-            end
-            item
-              Color = 10813348
-              Expanded = False
-              FieldName = 'cantidad_recibida'
-              ReadOnly = True
-              Title.Caption = 'Cantidad Recibida'
-              Visible = True
-            end
-            item
-              Color = 12058623
-              Expanded = False
-              FieldName = 'cantidad_almacenada'
-              ReadOnly = True
-              Title.Caption = 'Cantidad Almacenada'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'cantidad_a_almacenar'
-              Title.Caption = 'Cantidad por Almacenar'
-              Visible = True
-            end
-            item
-              Color = 12900349
-              Expanded = False
-              FieldName = 'almacenar'
-              Title.Caption = 'Almacenar'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'producto'
-              ReadOnly = True
-              Title.Caption = 'Producto'
-              Width = 116
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'articulo'
-              ReadOnly = True
-              Title.Caption = 'Articulo'
-              Width = 65
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'tipo_articulo'
-              ReadOnly = True
-              Title.Caption = 'Tipo Articulo'
-              Width = 79
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'marca'
-              ReadOnly = True
-              Title.Caption = 'Marca'
-              Width = 52
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'medida'
-              ReadOnly = True
-              Title.Caption = 'Medida'
-              Width = 58
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'color'
-              ReadOnly = True
-              Title.Caption = 'Color'
-              Width = 51
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'cod_cabecera'
-              ReadOnly = True
-              Title.Caption = 'Cod Cabecera'
-              Width = 88
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'cod_producto'
-              ReadOnly = True
-              Title.Caption = 'Cod Producto'
-              Width = 82
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'codigo_barra'
-              ReadOnly = True
-              Title.Caption = 'Cod Barra'
-              Width = 66
-              Visible = True
-            end>
-        end
         object DBGridNotaPedido: TDBGrid
           Left = 0
           Top = 0
           Width = 844
-          Height = 347
+          Height = 306
           Hint = 
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
@@ -328,13 +242,32 @@ object FTransferirStock: TFTransferirStock
           Columns = <
             item
               Expanded = False
+              FieldName = 'FECHA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha'
+              Width = 109
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PUNTO_VENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'PV'
+              Width = 48
+              Visible = True
+            end
+            item
+              Expanded = False
               FieldName = 'NUMERO_CPB'
-              Title.Caption = 'Nota Pedido'
+              Title.Alignment = taCenter
+              Title.Caption = 'N'#250'mero'
+              Width = 95
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'PROVEEDOR'
+              Title.Alignment = taCenter
               Title.Caption = 'Proveedor'
               Width = 276
               Visible = True
@@ -342,6 +275,7 @@ object FTransferirStock: TFTransferirStock
             item
               Expanded = False
               FieldName = 'CUIT_PROVEEDOR'
+              Title.Alignment = taCenter
               Title.Caption = 'Cuit Proveedor'
               Width = 105
               Visible = True
@@ -349,10 +283,207 @@ object FTransferirStock: TFTransferirStock
             item
               Expanded = False
               FieldName = 'SUCURSAL'
+              Title.Alignment = taCenter
               Title.Caption = 'Sucursal'
               Width = 213
               Visible = True
             end>
+        end
+        object DBGridNotaPedidoDetalle: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 844
+          Height = 306
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_Nota_Pedido_Detalle
+          DefaultDrawing = False
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 1
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Visible = False
+          OnDrawColumnCell = DBGridNotaPedidoDetalleDrawColumnCell
+          Columns = <
+            item
+              Color = 15856100
+              Expanded = False
+              FieldName = 'cantidad'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C. Pedido'
+              Width = 102
+              Visible = True
+            end
+            item
+              Color = 15856100
+              Expanded = False
+              FieldName = 'cantidad_recibida'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C. Recibido'
+              Width = 102
+              Visible = True
+            end
+            item
+              Color = 15856100
+              Expanded = False
+              FieldName = 'cantidad_almacenada'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C. Almacenado'
+              Width = 102
+              Visible = True
+            end
+            item
+              Color = 13290239
+              Expanded = False
+              FieldName = 'cantidad_a_almacenar'
+              Title.Alignment = taCenter
+              Title.Caption = 'C. Pendiente'
+              Width = 102
+              Visible = True
+            end
+            item
+              Color = 10813348
+              Expanded = False
+              FieldName = 'almacenar'
+              Title.Alignment = taCenter
+              Title.Caption = 'Almacenar'
+              Width = 102
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'producto'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Producto'
+              Width = 116
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'articulo'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Articulo'
+              Width = 65
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'tipo_articulo'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo Articulo'
+              Width = 79
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'marca'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Marca'
+              Width = 52
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'medida'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Width = 58
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'color'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Color'
+              Width = 51
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cod_cabecera'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Cod Cabecera'
+              Width = 88
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cod_producto'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Cod Producto'
+              Width = 82
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'codigo_barra'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Cod Barra'
+              Width = 66
+              Visible = True
+            end>
+        end
+        object PanelNotaPedidoDetalle: TPanel
+          Left = 0
+          Top = 306
+          Width = 844
+          Height = 41
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 2
+          DesignSize = (
+            844
+            41)
+          object Label2: TLabel
+            Left = 712
+            Top = 7
+            Width = 104
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Total a Almacenar'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object editTotalAlmacenar: TEdit
+            Left = 712
+            Top = 21
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 0
+          end
         end
       end
     end
@@ -841,9 +972,9 @@ object FTransferirStock: TFTransferirStock
     end
     object btNotaPedido: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Notas Pedido Pendientes'
+      Caption = 'Abrir Nota Pedido'
       Category = 0
-      Hint = 'Notas Pedido Pendientes'
+      Hint = 'Abrir Nota Pedido'
       Visible = ivNever
       ImageIndex = 82
       OnClick = btNotaPedidoClick
@@ -1720,5 +1851,27 @@ object FTransferirStock: TFTransferirStock
     PermitirFiltrar = True
     Left = 101
     Top = 162
+  end
+  object EKSumaTransferir: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'cantidad'
+      end>
+    DataSet = CD_Producto
+    SumListChanged = EKSumaTransferirSumListChanged
+    Left = 549
+    Top = 154
+  end
+  object EKSumaNotaPedido: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'almacenar'
+      end>
+    DataSet = CD_NotaPedidoDetalle
+    SumListChanged = EKSumaNotaPedidoSumListChanged
+    Left = 549
+    Top = 210
   end
 end
