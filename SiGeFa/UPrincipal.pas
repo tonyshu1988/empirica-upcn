@@ -143,6 +143,8 @@ type
     N5: TMenuItem;
     AAuditoria: TAction;
     Auditoria1: TMenuItem;
+    AConfigGral: TAction;
+    AConfiguracionGeneral1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -192,6 +194,7 @@ type
     procedure APreventaExecute(Sender: TObject);
     procedure ACtaCte_ProveedorExecute(Sender: TObject);
     procedure AAuditoriaExecute(Sender: TObject);
+    procedure AConfigGralExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -225,7 +228,8 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UEstadisticaDisponibilidades, UArqueo_Caja, Types, UEstadisticaStock,
   UABM_CPB_Recibo, UABM_CPB_OrdenPago, UABM_CPB_Remito,
   UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa,
-  UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria;
+  UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
+  UConfiguracion;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -641,6 +645,13 @@ end;
 procedure TFPrincipal.AAuditoriaExecute(Sender: TObject);
 begin
    EKVentanas1.Abrir(Sender, TFAuditoria, FAuditoria);
+end;
+
+procedure TFPrincipal.AConfigGralExecute(Sender: TObject);
+begin
+   Application.CreateForm(TFConfiguracion, FConfiguracion);
+   FConfiguracion.ShowModal;
+   FConfiguracion.Release;
 end;
 
 end.

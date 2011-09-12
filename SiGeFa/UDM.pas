@@ -89,6 +89,7 @@ type
     procedure prepararParaExportar(valor: Boolean);
     procedure mostrarCantidadRegistro(query: TDataSet; var etiqueta: TLabel);
     procedure cargarReporteSucursal(idSucursal: integer);
+    procedure configVariables();
   end;
 
 var
@@ -100,8 +101,9 @@ var
   imp_ad1_nombre: string;  //nombre del label para el impuesto adicional 1 de los productos
   imp_ad2_nombre: string;  //nombre del label para el impuesto adicional 2 de los productos
   ctacte_diasVencimiento: integer;
-  ctacte_credito: double;  
+  ctacte_credito: double;
   monto_max_venta: double;
+  confirmarNotaPedido: string;
   precio1 : string;
   precio2 : string;
   precio3 : string;
@@ -144,6 +146,28 @@ uses UPrincipal, USeleccionarSucursal, UPanelNotificacion, IniFiles,
 
 {$R *.dfm}
 
+procedure TDM.configVariables();
+begin
+  ZQ_Configuracion_Variables.Open;
+  configurarColor(ZQ_Configuracion_Variables, 'clave', 'texto', 'colorCampoRequido', colorCampoRequido);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'confirmarNotaPedido', confirmarNotaPedido);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'TextoPieDePagina', TextoPieDePagina);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'imp_ad1_nombre', imp_ad1_nombre);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'imp_ad2_nombre', imp_ad2_nombre);
+  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'provinciaPorDefecto', provinciaPorDefecto);
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'monto_max_venta', monto_max_venta);
+  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_diasVencimiento', ctacte_diasVencimiento);
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_credito', ctacte_credito);
+
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO1', precio1);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO2', precio2);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO3', precio3);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO4', precio4);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO5', precio5);
+  ZQ_Configuracion_Variables.Close;
+end;
+
+
 procedure TDM.LoginLogin(Sender: TObject);
 var
   aux, logo_fondo: string;
@@ -159,24 +183,7 @@ begin
 
   //seteo de variables globales
   enviandoMail:= false;          //setea la bandera en false indicando q no se esta enviando mail
-
-  ZQ_Configuracion_Variables.Open;
-  configurarColor(ZQ_Configuracion_Variables, 'clave', 'texto', 'colorCampoRequido', colorCampoRequido);
-  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'TextoPieDePagina', TextoPieDePagina);
-  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'imp_ad1_nombre', imp_ad1_nombre);
-  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'imp_ad2_nombre', imp_ad2_nombre);
-  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'provinciaPorDefecto', provinciaPorDefecto);
-  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'monto_max_venta', monto_max_venta);
-  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_diasVencimiento', ctacte_diasVencimiento);
-  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_credito', ctacte_credito);
-
-  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO1', precio1);
-  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO2', precio2);
-  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO3', precio3);
-  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO4', precio4);
-  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO5', precio5);
-
-  ZQ_Configuracion_Variables.Close;
+  configVariables;
 
   //cargo la imagen de fondo del sistema
   EKIni.abrir;
