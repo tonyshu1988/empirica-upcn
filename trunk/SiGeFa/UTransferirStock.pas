@@ -428,22 +428,24 @@ begin
 
       if PageControlTransferir.ActivePage = TabSAsociarNotaPedido then
       begin
-        if dm.EKModelo.iniciar_transaccion('Update Estado', []) then
-        begin
-          ZQ_NotaPedidoUpdateEstado.Close;
-          ZQ_NotaPedidoUpdateEstado.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
-          ZQ_NotaPedidoUpdateEstado.ParamByName('ID_ESTADO').AsInteger := ESTADO_ALMACENADO;
-          ZQ_NotaPedidoUpdateEstado.ExecSQL;
+        if confirmarNotaPedido = 'SI' then //si esta configurado para no editar mas las notas de pedido una vez confirmadas
+          if dm.EKModelo.iniciar_transaccion('Update Estado', []) then
+          begin
+            ZQ_NotaPedidoUpdateEstado.Close;
+            ZQ_NotaPedidoUpdateEstado.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
+            ZQ_NotaPedidoUpdateEstado.ParamByName('ID_ESTADO').AsInteger := ESTADO_ALMACENADO;
+            ZQ_NotaPedidoUpdateEstado.ExecSQL;
 
-          if not DM.EKModelo.finalizar_transaccion('Update Estado') then
-            DM.EKModelo.cancelar_transaccion('Update Estado')
-        end;
+            if not DM.EKModelo.finalizar_transaccion('Update Estado') then
+              DM.EKModelo.cancelar_transaccion('Update Estado')
+          end;
 
         DBGridNotaPedido.Visible:= true;
         DBGridNotaPedidoDetalle.Visible:= False;
         PanelNotaPedidoDetalle.Visible:= False;
         ZQ_VerCpb.Refresh;
         CD_NotaPedidoDetalle.EmptyDataSet;
+        EKSumaNotaPedido.RecalcAll;
       end;
     end;
   except
@@ -469,6 +471,7 @@ begin
       PanelNotaPedidoDetalle.Visible:= False;
       ZQ_VerCpb.Refresh;
       CD_NotaPedidoDetalle.EmptyDataSet;
+      EKSumaNotaPedido.RecalcAll;
     end;
   end;
 end;

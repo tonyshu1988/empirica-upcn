@@ -354,6 +354,7 @@ type
     DBText34: TDBText;
     StaticTxtConfirmado: TStaticText;
     EKBuscar: TEKBusquedaAvanzada;
+    StaticTxtAlmacenado: TStaticText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -458,6 +459,7 @@ begin
     lblCantidadRegistros.Visible:= false;
     StaticTxtBaja.Visible:= false;
     StaticTxtConfirmado.Visible:= false;
+    StaticTxtAlmacenado.Visible:= false;
     lblTipoComprobante.Visible:= true;
 
     GrupoEditando.Enabled := false;
@@ -473,6 +475,7 @@ begin
     lblCantidadRegistros.Visible:= true;
     StaticTxtBaja.Visible:= true;
     StaticTxtConfirmado.Visible:= true;
+    StaticTxtAlmacenado.Visible:= true;    
     lblTipoComprobante.Visible:= false;
 
     GrupoEditando.Enabled := true;
@@ -546,7 +549,6 @@ end;
 
 procedure TFABM_CPB_NotaPedido.cargarTipoComprobante(tipo: integer);
 begin
-  lblTituloFecha_Impreso.Caption:=  'Impreso';
   configPanelFechas(PanelFechaEnviado, true);
   configPanelFechas(PanelFechaImpreso, false);
   lblTipoComprobante.Caption:= 'NOTA DE PEDIDO';
@@ -1163,7 +1165,8 @@ var
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
   if ((ZQ_VerCpb.IsEmpty) or
-     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
+     ((estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO)) or
+     ((estado = ESTADO_CONFIRMADO) and (confirmarNotaPedido = 'SI'))) then
     exit;
 
   confirmarComprobante:= true;
@@ -1299,24 +1302,32 @@ end;
 
 procedure TFABM_CPB_NotaPedido.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ALMACENADO) then //si el registro esta dado de baja
+  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) then //si el registro esta confirmado
   begin
     DBGridListaCpb.Canvas.Brush.Color:= StaticTxtConfirmado.Color;
     if (gdFocused in State) or (gdSelected in State) then
       DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
-  end;
-
-  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ANULADO) then //si el registro esta dado de baja
-  begin
-    DBGridListaCpb.Canvas.Brush.Color:= StaticTxtBaja.Color;
-    if (gdFocused in State) or (gdSelected in State) then
-      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
-  end;
+  end
+  else
+    if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ALMACENADO) then //si el registro esta almacenado
+    begin
+      DBGridListaCpb.Canvas.Brush.Color:= StaticTxtAlmacenado.Color;
+      if (gdFocused in State) or (gdSelected in State) then
+        DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
+    end
+    else
+      if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ANULADO) then //si el registro esta anulado
+      begin
+        DBGridListaCpb.Canvas.Brush.Color:= StaticTxtBaja.Color;
+        if (gdFocused in State) or (gdSelected in State) then
+          DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
+      end;
 
   DBGridListaCpb.DefaultDrawColumnCell(rect,datacol,column,state);
 
   FPrincipal.PintarFilasGrillas(DBGridListaCpb, Rect, DataCol, Column, State);
 end;
+
 
 procedure TFABM_CPB_NotaPedido.btnBajaClick(Sender: TObject);
 var
@@ -1354,7 +1365,7 @@ begin
   recNo:= ZQ_VerCpb.RecNo;
   ZQ_VerCpb.Refresh;
   ZQ_VerCpb.RecNo:= recNo;
-  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);  
+  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 end;
 
 end.

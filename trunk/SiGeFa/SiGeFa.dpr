@@ -54,7 +54,8 @@ uses
   UABM_Preventa in 'UABM_Preventa.pas' {FABM_Preventa},
   UCuentaCorriente_Proveedor in 'UCuentaCorriente_Proveedor.pas' {FCuentaCorriente_Proveedor},
   UABM_CPB_FacturaCompra in 'UABM_CPB_FacturaCompra.pas' {FABM_CPB_FacturaCompra},
-  UAuditoria in 'UAuditoria.pas' {FAuditoria};
+  UAuditoria in 'UAuditoria.pas' {FAuditoria},
+  UConfiguracion in 'UConfiguracion.pas' {FConfiguracion};
 
 {$R *.res}
 
