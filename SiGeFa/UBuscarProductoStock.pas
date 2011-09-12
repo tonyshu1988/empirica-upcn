@@ -51,6 +51,8 @@ type
     ZQ_StockCOLOR: TStringField;
     ZQ_StockID_POSICION_SUCURSAL: TIntegerField;
     ZQ_StockPUNTO_SALIDA: TStringField;
+    btnSeleccionarTodos: TdxBarLargeButton;
+    ASelTodos: TAction;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -63,11 +65,14 @@ type
     procedure FormCreate(Sender: TObject);
     procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnSeleccionarTodosClick(Sender: TObject);
+    procedure ASelTodosExecute(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     OnSeleccionar : procedure() of object;
+    OnSeleccionarTodos : procedure() of object;
     SeleccionarYSalir: boolean;
     usaCajero:String;
   end;
@@ -131,6 +136,12 @@ begin
     btnSeleccionar.Click;
 end;
 
+procedure TFBuscarProductoStock.ASelTodosExecute(Sender: TObject);
+begin
+  if btnSeleccionarTodos.Enabled then
+    btnSeleccionarTodos.Click;
+end;
+
 procedure TFBuscarProductoStock.ASalirExecute(Sender: TObject);
 begin
   if btnSalir.Enabled then
@@ -175,5 +186,18 @@ procedure TFBuscarProductoStock.DBGridStockDrawColumnCell(Sender: TObject;
 begin
   FPrincipal.PintarFilasGrillas(DBGridStock, Rect, DataCol, Column, State);
 end;
+
+procedure TFBuscarProductoStock.btnSeleccionarTodosClick(Sender: TObject);
+begin
+  if (not (ZQ_Stock.IsEmpty)) then
+  begin
+    if Assigned(OnSeleccionarTodos) then
+      OnSeleccionarTodos
+  end
+  else
+    Application.MessageBox(PChar('No hay ningún producto para seleccionar.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
+end;
+
+
 
 end.

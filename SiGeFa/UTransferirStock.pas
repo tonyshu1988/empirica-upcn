@@ -186,11 +186,18 @@ type
       var AllowChange: Boolean);
     procedure EKSumaTransferirSumListChanged(Sender: TObject);
     procedure EKSumaNotaPedidoSumListChanged(Sender: TObject);
+    procedure CD_NotaPedidoDetalleAfterInsert(DataSet: TDataSet);
+    procedure DBGridNotaPedidoDetalleKeyDown(Sender: TObject;
+      var Key: Word; Shift: TShiftState);
+    procedure DBGridProductoKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
+    procedure onSelTodosProducto;
     { Private declarations }
   public
+    permitirInsertar: boolean;
   end;
 
 var
@@ -202,7 +209,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal;
+uses UDM, UPrincipal, UUtilidades;
 
 {$R *.dfm}
 procedure TFTransferirStock.onSelProducto;
@@ -237,10 +244,55 @@ begin
     CD_ProductostockMin.AsFloat := vsel.ZQ_StockSTOCK_MIN.AsFloat;
     CD_ProductostockMax.AsFloat := vsel.ZQ_StockSTOCK_MAX.AsFloat;
     CD_ProductostockRepedido.AsFloat := vsel.ZQ_StockSTOCK_REPEDIDO.AsFloat;
+    CD_Producto.Post;    
   end;
 
   if vsel.SeleccionarYSalir then
     vsel.Close;
+end;
+
+
+procedure TFTransferirStock.onSelTodosProducto;
+begin
+  vsel.ZQ_Stock.First;
+  while not vsel.ZQ_Stock.Eof do
+  begin
+    CD_Producto.Filter:= 'idProducto = ' +  vsel.ZQ_StockID_PRODUCTO.AsString;
+    CD_Producto.Filtered:= true; //filtro el client para ver si ya cargue el producto
+    if not CD_Producto.IsEmpty then //si el client no esta vacio es porque ya esta cargado
+    begin
+      CD_Producto.Filtered := false;
+      vsel.ZQ_Stock.Next; //paso al proximo
+    end
+    else //si el client esta vacio entonces lo cargo
+    begin
+      CD_Producto.Filtered := false;
+      CD_Producto.Append;
+      CD_ProductoidStockProducto.AsInteger := vsel.ZQ_StockID_STOCK_PRODUCTO.AsInteger;
+      CD_ProductoidPosicionSucursal.AsInteger := vsel.ZQ_StockID_POSICION_SUCURSAL.AsInteger;
+      CD_Producto_idProducto.AsInteger := vsel.ZQ_StockID_PRODUCTO.AsInteger;
+      CD_Producto_producto.AsString := vsel.ZQ_StockNOMBRE.AsString;
+      CD_Producto_medida.AsString := vsel.ZQ_StockMEDIDA.AsString;
+      CD_Producto_color.AsString := vsel.ZQ_StockCOLOR.AsString;
+      CD_Producto_marca.AsString := vsel.ZQ_StockNOMBRE_MARCA.AsString;
+      CD_Producto_tipoArticulo.AsString := vsel.ZQ_StockTIPO_ARTICULO.AsString;
+      CD_Producto_articulo.AsString := vsel.ZQ_StockNOMBRE_ARTICULO.AsString;
+      CD_Producto_codigoBarra.AsString := vsel.ZQ_StockCODIGO_BARRA.AsString;
+      CD_Producto_codCabecera.AsString := vsel.ZQ_StockCOD_CORTO_CABECERA.AsString;
+      CD_Producto_codProducto.AsString := vsel.ZQ_StockCOD_CORTO_PRODUCTO.AsString;
+      CD_Productostockactual.AsFloat := vsel.ZQ_StockSTOCK_ACTUAL.AsFloat;
+      CD_Productocantidad.AsFloat := vsel.ZQ_StockSTOCK_ACTUAL.AsFloat;
+      CD_ProductostockMin.AsFloat := vsel.ZQ_StockSTOCK_MIN.AsFloat;
+      CD_ProductostockMax.AsFloat := vsel.ZQ_StockSTOCK_MAX.AsFloat;
+      CD_ProductostockRepedido.AsFloat := vsel.ZQ_StockSTOCK_REPEDIDO.AsFloat;
+
+      vsel.ZQ_Stock.Next;
+    end;
+  end;
+
+  vsel.Close;
+  CD_Producto.Post;
+  DBGridProducto.SetFocus;
 end;
 
 
@@ -249,7 +301,9 @@ begin
   if not Assigned(vsel) then
     vsel:= TFBuscarProductoStock.Create(nil);
   vsel.OnSeleccionar := onSelProducto;
+  vsel.OnSeleccionarTodos := onSelTodosProducto;
   vsel.SeleccionarYSalir:= false;
+  vsel.btnSeleccionarTodos.Visible:= ivAlways;
   vsel.ShowModal;
 end;
 
@@ -455,6 +509,7 @@ begin
 
       if not ZQ_Nota_Pedido_Detalle.IsEmpty then
       begin
+        permitirInsertar:= true;
         ZQ_Nota_Pedido_Detalle.First;
         while not ZQ_Nota_Pedido_Detalle.Eof do
         begin
@@ -485,7 +540,14 @@ begin
         btNotaPedido.Caption:= 'Cerrar Nota Pedido';
         DBGridNotaPedido.Visible:= false;
         DBGridNotaPedidoDetalle.Visible:= true;
+        DBGridNotaPedidoDetalle.SetFocus;
         PanelNotaPedidoDetalle.Visible:= true;
+
+        //inicialmente me posiciono en la primer fila en la columna almacenar
+        CD_NotaPedidoDetalle.First;
+        DBGridNotaPedidoDetalle.SelectedField:= DBGridNotaPedidoDetalle.Fields[GetIndexField(DBGridNotaPedidoDetalle, 'almacenar')];
+
+        permitirInsertar:= false;
       end;
     end;
   end
@@ -588,6 +650,59 @@ var
 begin
   cantidad:= FormatFloat('###,###,###,##0.00', EKSumaNotaPedido.SumCollection[0].SumValue);
   editTotalAlmacenar.Text:= cantidad;
+end;
+
+procedure TFTransferirStock.CD_NotaPedidoDetalleAfterInsert(DataSet: TDataSet);
+begin
+  if not permitirInsertar then
+    CD_NotaPedidoDetalle.Delete;
+end;
+
+
+procedure TFTransferirStock.DBGridNotaPedidoDetalleKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  campo, fila, cantidad: integer;
+begin
+  campo:= GetIndexField(DBGridNotaPedidoDetalle, 'almacenar') - 1;
+  cantidad:= CD_NotaPedidoDetalle.RecordCount;
+  fila:= CD_NotaPedidoDetalle.RecNo + 1;
+
+  if (Key = 13) or (key = 9) then  { if it's an enter key }
+  begin
+    Key := 0; {ignore}
+    if ((sender as tdbgrid).SelectedField.FullName = 'almacenar') then //si estoy en la columna almacenar
+    begin
+      if fila <= cantidad then //si no estoy en la ultima fila entonces paso a la siguiente
+        CD_NotaPedidoDetalle.RecNo:= fila
+      else //si estoy en la ultima fila
+        if CD_NotaPedidoDetalle.State = dsEdit then //y estoy en modo edicion
+          CD_NotaPedidoDetalle.Post; //hago un post para que recalcule el EKDBSuma
+      DBGridNotaPedidoDetalle.SelectedField:= DBGridNotaPedidoDetalle.Fields[campo]; //sigo en la misma columna
+    end;
+  end;
+end;
+
+procedure TFTransferirStock.DBGridProductoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  campo, fila, cantidad: integer;
+begin
+  campo:= GetIndexField(DBGridProducto, 'cantidad') - 1;
+  cantidad:= CD_Producto.RecordCount;
+  fila:= CD_Producto.RecNo + 1;
+
+  if (Key = 13) or (key = 9) then  { if it's an enter key }
+  begin
+    Key := 0; {ignore}
+    if ((sender as tdbgrid).SelectedField.FullName = 'cantidad') then //si estoy en la columna almacenar
+    begin
+      if fila <= cantidad then //si no estoy en la ultima fila entonces paso a la siguiente
+        CD_Producto.RecNo:= fila
+      else //si estoy en la ultima fila
+        if CD_Producto.State = dsEdit then //y estoy en modo edicion
+          CD_Producto.Post; //hago un post para que recalcule el EKDBSuma
+      DBGridProducto.SelectedField:= DBGridProducto.Fields[campo]; //sigo en la misma columna
+    end;
+  end;
 end;
 
 end.
