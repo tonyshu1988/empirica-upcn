@@ -21,8 +21,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 462
+    Width = 854
+    Height = 456
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -30,29 +30,29 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelAsociar: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 452
+      Width = 844
+      Height = 446
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Splitter1: TSplitter
         Left = 423
         Top = 21
-        Height = 431
+        Height = 425
       end
       object PanelAsociar_Producto: TPanel
         Left = 426
         Top = 21
-        Width = 426
-        Height = 431
+        Width = 418
+        Height = 425
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 426
-          Height = 431
+          Width = 418
+          Height = 425
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -149,7 +149,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 21
         Width = 423
-        Height = 431
+        Height = 425
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -157,7 +157,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Left = 0
           Top = 0
           Width = 423
-          Height = 431
+          Height = 425
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
@@ -186,7 +186,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 852
+        Width = 844
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -199,16 +199,16 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 452
+      Width = 844
+      Height = 446
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
       object DBGridStock: TDBGrid
         Left = 0
         Top = 0
-        Width = 852
-        Height = 427
+        Width = 844
+        Height = 421
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
@@ -226,6 +226,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Alignment = taRightJustify
             Expanded = False
             FieldName = 'COD_CORTO_PRODUCTO'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Producto'
             Width = 94
@@ -234,6 +235,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           item
             Expanded = False
             FieldName = 'NOMBRE'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'Producto'
             Width = 211
@@ -242,6 +244,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           item
             Expanded = False
             FieldName = 'MEDIDA'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'Medida'
             Width = 113
@@ -250,6 +253,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           item
             Expanded = False
             FieldName = 'NOMBRE_MARCA'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'Marca'
             Width = 150
@@ -258,6 +262,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           item
             Expanded = False
             FieldName = 'TIPO_ARTICULO'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Art'#237'culo'
             Width = 136
@@ -266,6 +271,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           item
             Expanded = False
             FieldName = 'NOMBRE_ARTICULO'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'Art'#237'culo'
             Width = 133
@@ -274,6 +280,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           item
             Expanded = False
             FieldName = 'COLOR'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'Color'
             Visible = True
@@ -354,6 +361,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           item
             Expanded = False
             FieldName = 'SUCURSAL'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'Sucursal'
             Width = 138
@@ -362,6 +370,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           item
             Expanded = False
             FieldName = 'SECCION'
+            ReadOnly = True
             Title.Caption = 'Secci'#243'n'
             Width = 108
             Visible = True
@@ -369,18 +378,21 @@ object FABM_ProductoStock: TFABM_ProductoStock
           item
             Expanded = False
             FieldName = 'SECTOR'
+            ReadOnly = True
             Title.Caption = 'Sector'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'FILA'
+            ReadOnly = True
             Title.Caption = 'Fila'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'COLUMNA'
+            ReadOnly = True
             Title.Caption = 'Columna'
             Visible = True
           end
@@ -388,6 +400,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Alignment = taRightJustify
             Expanded = False
             FieldName = 'COD_CORTO_CABECERA'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Cabecera'
             Visible = True
@@ -396,6 +409,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Alignment = taRightJustify
             Expanded = False
             FieldName = 'CODIGO_BARRA'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Barra'
             Width = 100
@@ -405,6 +419,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Alignment = taCenter
             Expanded = False
             FieldName = 'BAJA'
+            ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'Baja'
             Visible = True
@@ -412,15 +427,15 @@ object FABM_ProductoStock: TFABM_ProductoStock
       end
       object Panel2: TPanel
         Left = 0
-        Top = 427
-        Width = 852
+        Top = 421
+        Width = 844
         Height = 25
         Align = alBottom
         TabOrder = 1
         object lblResumen: TLabel
           Left = 1
           Top = 1
-          Width = 850
+          Width = 842
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -438,7 +453,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1125,7 +1140,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
     end
     object ZQ_StockPOSICSUCURSAL: TStringField
       FieldName = 'POSICSUCURSAL'
-      ReadOnly = True
       Size = 334
     end
     object ZQ_StockCOLOR: TStringField
@@ -1137,19 +1151,17 @@ object FABM_ProductoStock: TFABM_ProductoStock
     DeleteSQL.Strings = (
       'DELETE FROM STOCK_PRODUCTO'
       'WHERE'
-      '  STOCK_PRODUCTO.ID_STOCK_PRODUCTO = :OLD_ID_STOCK_PRODUCTO')
+      '  STOCK_PRODUCTO.ID_STOCK_PRODUCTO = '
+      ':OLD_ID_STOCK_PRODUCTO')
     InsertSQL.Strings = (
       'INSERT INTO STOCK_PRODUCTO'
-      
-        '  (STOCK_PRODUCTO.STOCK_ACTUAL, STOCK_PRODUCTO.STOCK_MIN, STOCK_' +
-        'PRODUCTO.STOCK_MAX, '
-      
-        '   STOCK_PRODUCTO.STOCK_REPEDIDO, STOCK_PRODUCTO.STOCK_MIN_ALARM' +
-        'A)'
+      '  (STOCK_PRODUCTO.STOCK_ACTUAL, '
+      'STOCK_PRODUCTO.STOCK_MIN, STOCK_PRODUCTO.STOCK_MAX, '
+      '   STOCK_PRODUCTO.STOCK_REPEDIDO, '
+      'STOCK_PRODUCTO.STOCK_MIN_ALARMA)'
       'VALUES'
-      
-        '  (:STOCK_ACTUAL, :STOCK_MIN, :STOCK_MAX, :STOCK_REPEDIDO, :STOC' +
-        'K_MIN_ALARMA)')
+      '  (:STOCK_ACTUAL, :STOCK_MIN, :STOCK_MAX, :STOCK_REPEDIDO, '
+      ':STOCK_MIN_ALARMA)')
     ModifySQL.Strings = (
       'UPDATE STOCK_PRODUCTO SET'
       '  STOCK_PRODUCTO.STOCK_ACTUAL = :STOCK_ACTUAL,'
@@ -1727,12 +1739,12 @@ object FABM_ProductoStock: TFABM_ProductoStock
     SQL.Strings = (
       'execute procedure GENERAR_STOCK_INICIAL')
     Params = <>
-    Left = 56
-    Top = 248
+    Left = 496
+    Top = 77
   end
   object ATeclasRapidas: TActionManager
     Left = 56
-    Top = 309
+    Top = 245
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -1832,8 +1844,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
     PermitirMover = True
     PermitirFiltrar = True
     PopUpGrilla = Popup_Producto
-    Left = 392
-    Top = 352
+    Left = 400
+    Top = 344
   end
   object EKDbSuma1: TEKDbSuma
     SumCollection = <

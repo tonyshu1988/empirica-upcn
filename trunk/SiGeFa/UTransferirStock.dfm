@@ -366,9 +366,9 @@ object FTransferirStock: TFTransferirStock
       object Label1: TLabel
         Left = 508
         Top = 7
-        Width = 338
+        Width = 258
         Height = 16
-        Caption = 'Presione F1 para seleccionar la sucursal de destino'
+        Caption = 'Presione F1 para seleccionar el destino'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -823,8 +823,8 @@ object FTransferirStock: TFTransferirStock
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 600
-    Top = 320
+    Left = 544
+    Top = 96
     DockControlHeights = (
       0
       0
@@ -841,11 +841,11 @@ object FTransferirStock: TFTransferirStock
     end
     object btNotaPedido: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Nota de Pedido'
+      Caption = 'Notas Pedido Pendientes'
       Category = 0
-      Hint = 'Nota de Pedido'
+      Hint = 'Notas Pedido Pendientes'
       Visible = ivNever
-      ImageIndex = 19
+      ImageIndex = 82
       OnClick = btNotaPedidoClick
       AutoGrayScale = False
     end
@@ -941,8 +941,8 @@ object FTransferirStock: TFTransferirStock
   object CD_Producto: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 328
-    Top = 232
+    Left = 216
+    Top = 104
     object CD_Producto_idProducto: TIntegerField
       FieldName = 'idProducto'
     end
@@ -1004,8 +1004,8 @@ object FTransferirStock: TFTransferirStock
   end
   object DS_Producto: TDataSource
     DataSet = CD_Producto
-    Left = 328
-    Top = 288
+    Left = 224
+    Top = 168
   end
   object EKListado_Sucursal: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -1025,8 +1025,8 @@ object FTransferirStock: TFTransferirStock
     CampoBuscar = 'Busqueda'
     CampoClave = 'id_posicion_sucursal'
     TituloVentana = 'Buscar Sucursal'
-    Left = 360
-    Top = 64
+    Left = 104
+    Top = 272
   end
   object ZQ_Sucursal: TZQuery
     Connection = DM.Conexion
@@ -1040,8 +1040,8 @@ object FTransferirStock: TFTransferirStock
       'LEFT JOIN sucursal s ON (s.id_sucursal=ps.id_sucursal)'
       'WHERE s.id_sucursal <> 0')
     Params = <>
-    Left = 433
-    Top = 65
+    Left = 105
+    Top = 321
     object ZQ_SucursalID_POSICION_SUCURSAL: TIntegerField
       FieldName = 'ID_POSICION_SUCURSAL'
       Required = True
@@ -1093,8 +1093,8 @@ object FTransferirStock: TFTransferirStock
         Name = 'ID_COMPROBANTE'
         ParamType = ptUnknown
       end>
-    Left = 629
-    Top = 121
+    Left = 357
+    Top = 225
     ParamData = <
       item
         DataType = ftUnknown
@@ -1228,12 +1228,34 @@ object FTransferirStock: TFTransferirStock
       
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
         '_comp_estado)'
-      'where ((cpb.id_tipo_cpb = 15) and (cpb.id_comp_estado = 2))'
+      'where (cpb.id_tipo_cpb = :id_tipo_cpb) '
+      '    and (cpb.id_comp_estado = :id_estado)'
       'order by cpb.fecha desc'
       '')
-    Params = <>
-    Left = 658
-    Top = 196
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_tipo_cpb'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_estado'
+        ParamType = ptUnknown
+      end>
+    Left = 226
+    Top = 228
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_tipo_cpb'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_estado'
+        ParamType = ptUnknown
+      end>
     object ZQ_VerCpbID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
@@ -1370,20 +1392,20 @@ object FTransferirStock: TFTransferirStock
   end
   object DS_VerCpb: TDataSource
     DataSet = ZQ_VerCpb
-    Left = 658
-    Top = 244
+    Left = 226
+    Top = 284
   end
   object DS_Nota_Pedido_Detalle: TDataSource
     DataSet = CD_NotaPedidoDetalle
-    Left = 773
-    Top = 73
+    Left = 357
+    Top = 169
   end
   object CD_NotaPedidoDetalle: TClientDataSet
     Aggregates = <>
     Params = <>
     OnCalcFields = CD_NotaPedidoDetalleCalcFields
-    Left = 653
-    Top = 73
+    Left = 357
+    Top = 105
     object CD_NotaPedidoDetallecantidad: TFloatField
       FieldName = 'cantidad'
     end
@@ -1455,19 +1477,31 @@ object FTransferirStock: TFTransferirStock
   object ZQ_NotaPedidoUpdateEstado: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'execute procedure nota_pedido_update_estado (:id_comprobante)')
+      
+        'execute procedure nota_pedido_update_estado (:id_comprobante, :i' +
+        'd_estado)')
     Params = <
       item
         DataType = ftUnknown
         Name = 'id_comprobante'
         ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_estado'
+        ParamType = ptUnknown
       end>
-    Left = 773
-    Top = 122
+    Left = 357
+    Top = 282
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_estado'
         ParamType = ptUnknown
       end>
   end
@@ -1519,8 +1553,8 @@ object FTransferirStock: TFTransferirStock
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 133
-    Top = 146
+    Left = 101
+    Top = 106
     ParamData = <
       item
         DataType = ftUnknown
@@ -1616,8 +1650,8 @@ object FTransferirStock: TFTransferirStock
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 117
-    Top = 258
+    Left = 101
+    Top = 218
   end
   object EKOrdenarGrillaNotaPedidoDetalle: TEKOrdenarGrilla
     Grilla = DBGridNotaPedidoDetalle
@@ -1684,7 +1718,7 @@ object FTransferirStock: TFTransferirStock
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 117
-    Top = 210
+    Left = 101
+    Top = 162
   end
 end
