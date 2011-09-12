@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB, DBClient, UBuscarProductoStock,
   EKLlenarCombo, ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls,
-  EKListadoSQL, ComCtrls, ZSqlUpdate, ZStoredProcedure, EKOrdenarGrilla;
+  EKListadoSQL, ComCtrls, ZSqlUpdate, ZStoredProcedure, EKOrdenarGrilla,
+  EKDbSuma;
 
 type
   TFTransferirStock = class(TForm)
@@ -151,6 +152,13 @@ type
     EditSucursal: TEdit;
     EKOrdenarGrillaProductos: TEKOrdenarGrilla;
     EKOrdenarGrillaNotaPedidoDetalle: TEKOrdenarGrilla;
+    Label25: TLabel;
+    editTotalProductos: TEdit;
+    EKSumaTransferir: TEKDbSuma;
+    PanelNotaPedidoDetalle: TPanel;
+    Label2: TLabel;
+    editTotalAlmacenar: TEdit;
+    EKSumaNotaPedido: TEKDbSuma;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAsociarClick(Sender: TObject);
@@ -174,6 +182,10 @@ type
     procedure DBGridNotaPedidoDetalleDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure PageControlTransferirChanging(Sender: TObject;
+      var AllowChange: Boolean);
+    procedure EKSumaTransferirSumListChanged(Sender: TObject);
+    procedure EKSumaNotaPedidoSumListChanged(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -250,6 +262,11 @@ begin
 
   EKOrdenarGrillaProductos.CargarConfigColumnas;
   EKOrdenarGrillaNotaPedidoDetalle.CargarConfigColumnas;
+
+  ZQ_VerCpb.Close;
+  ZQ_VerCpb.ParamByName('id_tipo_cpb').AsInteger:= CPB_NOTA_PEDIDO;
+  ZQ_VerCpb.ParamByName('id_estado').AsInteger:= ESTADO_CONFIRMADO;
+  ZQ_VerCpb.Open;
 end;
 
 
@@ -365,19 +382,24 @@ begin
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
 
-      if PageControlTransferir.TabIndex = 1 then
+      if PageControlTransferir.ActivePage = TabSAsociarNotaPedido then
       begin
         if dm.EKModelo.iniciar_transaccion('Update Estado', []) then
         begin
           ZQ_NotaPedidoUpdateEstado.Close;
           ZQ_NotaPedidoUpdateEstado.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
-          ZQ_NotaPedidoUpdateEstado.ParamByName('ID_ESTADO').AsInteger := ESTADO_ALMACENADO;         
+          ZQ_NotaPedidoUpdateEstado.ParamByName('ID_ESTADO').AsInteger := ESTADO_ALMACENADO;
           ZQ_NotaPedidoUpdateEstado.ExecSQL;
 
           if not DM.EKModelo.finalizar_transaccion('Update Estado') then
             DM.EKModelo.cancelar_transaccion('Update Estado')
-       end;
-       btNotaPedido.Click;
+        end;
+
+        DBGridNotaPedido.Visible:= true;
+        DBGridNotaPedidoDetalle.Visible:= False;
+        PanelNotaPedidoDetalle.Visible:= False;
+        ZQ_VerCpb.Refresh;
+        CD_NotaPedidoDetalle.EmptyDataSet;
       end;
     end;
   except
@@ -386,8 +408,6 @@ begin
       exit;
     end
   end;
-
-
 end;
 
 
@@ -397,6 +417,15 @@ begin
   begin
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
+
+    if PageControlTransferir.ActivePage = TabSAsociarNotaPedido then
+    begin
+      DBGridNotaPedido.Visible:= true;
+      DBGridNotaPedidoDetalle.Visible:= False;
+      PanelNotaPedidoDetalle.Visible:= False;
+      ZQ_VerCpb.Refresh;
+      CD_NotaPedidoDetalle.EmptyDataSet;
+    end;
   end;
 end;
 
@@ -410,56 +439,65 @@ end;
 
 procedure TFTransferirStock.DBGridNotaPedidoDblClick(Sender: TObject);
 begin
-  if not ZQ_VerCpb.IsEmpty then
-  begin
-    ZQ_Nota_Pedido_Detalle.Close;
-    ZQ_Nota_Pedido_Detalle.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
-    ZQ_Nota_Pedido_Detalle.Open;
-
-    if not ZQ_Nota_Pedido_Detalle.IsEmpty then
-    begin
-      ZQ_Nota_Pedido_Detalle.First;
-      while not ZQ_Nota_Pedido_Detalle.Eof do
-      begin
-        if (ZQ_Nota_Pedido_DetalleCANTIDAD_RECIBIDA.AsFloat <> 0) and (ZQ_Nota_Pedido_DetalleCANTIDAD_RECIBIDA.AsFloat <> ZQ_Nota_Pedido_DetalleCANTIDAD_ALMACENADA.AsFloat) then
-        begin
-          CD_NotaPedidoDetalle.Append;
-          CD_NotaPedidoDetallecantidad.AsFloat := ZQ_Nota_Pedido_DetalleCANTIDAD.AsFloat;
-          CD_NotaPedidoDetallecantidad_recibida.AsFloat:= ZQ_Nota_Pedido_DetalleCANTIDAD_RECIBIDA.AsFloat;
-          CD_NotaPedidoDetallecantidad_almacenada.AsFloat:= ZQ_Nota_Pedido_DetalleCANTIDAD_ALMACENADA.AsFloat;
-          CD_NotaPedidoDetallecod_cabecera.AsString:= ZQ_Nota_Pedido_DetalleCOD_CABECERA.AsString;
-          CD_NotaPedidoDetalleproducto.AsString:= ZQ_Nota_Pedido_DetallePRODUCTO.AsString;
-          CD_NotaPedidoDetallemedida.AsString:= ZQ_Nota_Pedido_DetalleMEDIDA.AsString;
-          CD_NotaPedidoDetallecolor.AsString:= ZQ_Nota_Pedido_DetalleCOLOR.AsString;
-          CD_NotaPedidoDetallemarca.AsString:= ZQ_Nota_Pedido_DetalleMARCA.AsString;
-          CD_NotaPedidoDetallearticulo.AsString:= ZQ_Nota_Pedido_DetalleARTICULO.AsString;
-          CD_NotaPedidoDetalletipo_articulo.AsString:= ZQ_Nota_Pedido_DetalleTIPO_ARTICULO.AsString;
-          CD_NotaPedidoDetallecod_producto.AsString:= ZQ_Nota_Pedido_DetalleCOD_PRODUCTO.AsString;
-          CD_NotaPedidoDetallecodigo_barra.AsString:= ZQ_Nota_Pedido_DetalleCODIGO_BARRA.AsString;
-          CD_NotaPedidoDetalleid_producto.AsInteger:= ZQ_Nota_Pedido_DetalleID_PRODUCTO.AsInteger;
-          CD_NotaPedidoDetalleid_comprobante.AsInteger:= ZQ_Nota_Pedido_DetalleID_COMPROBANTE.AsInteger;
-          CD_NotaPedidoDetallealmacenar.AsFloat := ZQ_Nota_Pedido_DetalleCANTIDAD_RECIBIDA.AsFloat- ZQ_Nota_Pedido_DetalleCANTIDAD_ALMACENADA.AsFloat;
-          CD_NotaPedidoDetalle.Post;
-        end;
-
-        ZQ_Nota_Pedido_Detalle.Next;
-      end;
-      DBGridNotaPedido.Visible := false;
-      DBGridNotaPedidoDetalle.Visible := true;
-    end;
-  end;
+  btNotaPedido.Click;
 end;
 
 
 procedure TFTransferirStock.btNotaPedidoClick(Sender: TObject);
 begin
-  CD_NotaPedidoDetalle.EmptyDataSet;
-  DBGridNotaPedidoDetalle.Visible:=false;
-  DBGridNotaPedido.Visible:= true;
-  ZQ_VerCpb.Close;
-  ZQ_VerCpb.ParamByName('id_tipo_cpb').AsInteger:= CPB_NOTA_PEDIDO;
-  ZQ_VerCpb.ParamByName('id_estado').AsInteger:= ESTADO_CONFIRMADO;
-  ZQ_VerCpb.Open;
+  if DBGridNotaPedido.Visible then //si estoy viendo las Notas de Pedidos
+  begin
+    if not ZQ_VerCpb.IsEmpty then
+    begin
+      ZQ_Nota_Pedido_Detalle.Close;
+      ZQ_Nota_Pedido_Detalle.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
+      ZQ_Nota_Pedido_Detalle.Open;
+
+      if not ZQ_Nota_Pedido_Detalle.IsEmpty then
+      begin
+        ZQ_Nota_Pedido_Detalle.First;
+        while not ZQ_Nota_Pedido_Detalle.Eof do
+        begin
+          if (ZQ_Nota_Pedido_DetalleCANTIDAD_RECIBIDA.AsFloat <> 0) and (ZQ_Nota_Pedido_DetalleCANTIDAD_RECIBIDA.AsFloat <> ZQ_Nota_Pedido_DetalleCANTIDAD_ALMACENADA.AsFloat) then
+          begin
+            CD_NotaPedidoDetalle.Append;
+            CD_NotaPedidoDetallecantidad.AsFloat := ZQ_Nota_Pedido_DetalleCANTIDAD.AsFloat;
+            CD_NotaPedidoDetallecantidad_recibida.AsFloat:= ZQ_Nota_Pedido_DetalleCANTIDAD_RECIBIDA.AsFloat;
+            CD_NotaPedidoDetallecantidad_almacenada.AsFloat:= ZQ_Nota_Pedido_DetalleCANTIDAD_ALMACENADA.AsFloat;
+            CD_NotaPedidoDetallecod_cabecera.AsString:= ZQ_Nota_Pedido_DetalleCOD_CABECERA.AsString;
+            CD_NotaPedidoDetalleproducto.AsString:= ZQ_Nota_Pedido_DetallePRODUCTO.AsString;
+            CD_NotaPedidoDetallemedida.AsString:= ZQ_Nota_Pedido_DetalleMEDIDA.AsString;
+            CD_NotaPedidoDetallecolor.AsString:= ZQ_Nota_Pedido_DetalleCOLOR.AsString;
+            CD_NotaPedidoDetallemarca.AsString:= ZQ_Nota_Pedido_DetalleMARCA.AsString;
+            CD_NotaPedidoDetallearticulo.AsString:= ZQ_Nota_Pedido_DetalleARTICULO.AsString;
+            CD_NotaPedidoDetalletipo_articulo.AsString:= ZQ_Nota_Pedido_DetalleTIPO_ARTICULO.AsString;
+            CD_NotaPedidoDetallecod_producto.AsString:= ZQ_Nota_Pedido_DetalleCOD_PRODUCTO.AsString;
+            CD_NotaPedidoDetallecodigo_barra.AsString:= ZQ_Nota_Pedido_DetalleCODIGO_BARRA.AsString;
+            CD_NotaPedidoDetalleid_producto.AsInteger:= ZQ_Nota_Pedido_DetalleID_PRODUCTO.AsInteger;
+            CD_NotaPedidoDetalleid_comprobante.AsInteger:= ZQ_Nota_Pedido_DetalleID_COMPROBANTE.AsInteger;
+            CD_NotaPedidoDetallealmacenar.AsFloat := ZQ_Nota_Pedido_DetalleCANTIDAD_RECIBIDA.AsFloat- ZQ_Nota_Pedido_DetalleCANTIDAD_ALMACENADA.AsFloat;
+            CD_NotaPedidoDetalle.Post;
+          end;
+
+          ZQ_Nota_Pedido_Detalle.Next;
+        end;
+
+        btNotaPedido.Caption:= 'Cerrar Nota Pedido';
+        DBGridNotaPedido.Visible:= false;
+        DBGridNotaPedidoDetalle.Visible:= true;
+        PanelNotaPedidoDetalle.Visible:= true;
+      end;
+    end;
+  end
+  else //si estoy examinando la nota de pedido con todos sus productos
+  begin
+    btNotaPedido.Caption:= 'Abrir Nota Pedido';
+    DBGridNotaPedido.Visible:= true;
+    DBGridNotaPedidoDetalle.Visible:= False;
+    PanelNotaPedidoDetalle.Visible:= False;
+    CD_NotaPedidoDetalle.EmptyDataSet;
+    ZQ_VerCpb.Refresh;
+  end;
 end;
 
 
@@ -471,15 +509,18 @@ end;
 
 procedure TFTransferirStock.PageControlTransferirChange(Sender: TObject);
 begin
-  if PageControlTransferir.TabIndex = 0 then
+  if PageControlTransferir.ActivePage = TabSTransferirStock then
   begin
     btnBuscar.Visible := ivAlways;
     btNotaPedido.Visible := ivNever;
-  end
-  else
+  end;
+
+  if PageControlTransferir.ActivePage = TabSAsociarNotaPedido then
   begin
     btnBuscar.Visible := ivNever;
     btNotaPedido.Visible := ivAlways;
+
+    ZQ_VerCpb.Refresh;
   end;
 end;
 
@@ -491,6 +532,7 @@ begin
 
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_TransferirStock);
 end;
+
 
 procedure TFTransferirStock.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
@@ -504,25 +546,48 @@ begin
   end;
 end;
 
-procedure TFTransferirStock.DBGridProductoDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFTransferirStock.DBGridProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridProducto, Rect, DataCol, Column, State);
 end;
 
-procedure TFTransferirStock.DBGridNotaPedidoDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFTransferirStock.DBGridNotaPedidoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridNotaPedido, Rect, DataCol, Column, State);
 end;
 
-procedure TFTransferirStock.DBGridNotaPedidoDetalleDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFTransferirStock.DBGridNotaPedidoDetalleDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridNotaPedidoDetalle, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFTransferirStock.PageControlTransferirChanging(Sender: TObject; var AllowChange: Boolean);
+begin
+  AllowChange:= true;
+  if (dm.EKModelo.verificar_transaccion(Transaccion_TransferirStock)) or (DBGridNotaPedido.Visible = false) then
+    AllowChange:= False;
+end;
+
+
+procedure TFTransferirStock.EKSumaTransferirSumListChanged(Sender: TObject);
+var
+  cantidad: string;
+begin
+  cantidad:= FormatFloat('###,###,###,##0.00', EKSumaTransferir.SumCollection[0].SumValue);
+  editTotalProductos.Text:= cantidad;
+end;
+
+
+procedure TFTransferirStock.EKSumaNotaPedidoSumListChanged(Sender: TObject);
+var
+  cantidad: string;
+begin
+  cantidad:= FormatFloat('###,###,###,##0.00', EKSumaNotaPedido.SumCollection[0].SumValue);
+  editTotalAlmacenar.Text:= cantidad;
 end;
 
 end.
