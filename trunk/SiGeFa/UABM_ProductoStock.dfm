@@ -221,6 +221,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
         OnDrawColumnCell = DBGridStockDrawColumnCell
+        OnKeyDown = DBGridStockKeyDown
         Columns = <
           item
             Alignment = taRightJustify
@@ -1020,7 +1021,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
   end
   object ZQ_Stock: TZQuery
     Connection = DM.Conexion
-    AfterScroll = ZQ_StockAfterScroll
     UpdateObject = ZU_Stock
     AfterInsert = ZQ_StockAfterInsert
     SQL.Strings = (
@@ -1854,13 +1854,14 @@ object FABM_ProductoStock: TFABM_ProductoStock
         NombreCampo = 'STOCK_ACTUAL'
       end>
     DataSet = ZQ_Stock
+    SumListChanged = EKDbSuma1SumListChanged
     Left = 149
     Top = 245
   end
   object PopUpDesasociar: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     Left = 152
-    Top = 309
+    Top = 301
     object PopUpStock_Desasociar: TMenuItem
       Caption = 'Desasociar Producto'
       ImageIndex = 15
