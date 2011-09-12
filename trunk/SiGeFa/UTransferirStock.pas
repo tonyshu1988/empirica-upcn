@@ -663,7 +663,7 @@ begin
     if ((sender as tdbgrid).SelectedField.FullName = 'almacenar') then //si estoy en la columna almacenar
     begin
       if fila <= cantidad then //si no estoy en la ultima fila entonces paso a la siguiente
-        CD_NotaPedidoDetalle.RecNo:= fila
+        CD_NotaPedidoDetalle.Next
       else //si estoy en la ultima fila
         if CD_NotaPedidoDetalle.State = dsEdit then //y estoy en modo edicion
           CD_NotaPedidoDetalle.Post; //hago un post para que recalcule el EKDBSuma
@@ -671,6 +671,7 @@ begin
     end;
   end;
 end;
+
 
 procedure TFTransferirStock.DBGridProductoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
@@ -686,7 +687,7 @@ begin
     if ((sender as tdbgrid).SelectedField.FullName = 'cantidad') then //si estoy en la columna almacenar
     begin
       if fila <= cantidad then //si no estoy en la ultima fila entonces paso a la siguiente
-        CD_Producto.RecNo:= fila
+        CD_Producto.Next
       else //si estoy en la ultima fila
         if CD_Producto.State = dsEdit then //y estoy en modo edicion
           CD_Producto.Post; //hago un post para que recalcule el EKDBSuma
