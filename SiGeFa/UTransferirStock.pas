@@ -257,7 +257,7 @@ procedure TFTransferirStock.btnAsociarClick(Sender: TObject);
 begin
     if id_pos_sucursal = 0 then
     begin
-      ShowMessage('Debe Seleccionar una sucural a la cual transferir los productos.'+#13+'PRESIONE F1 para desplegar el Listado');
+      ShowMessage('Debe Seleccionar un destino al cual transferir los productos');
       exit;
     end;
 
@@ -359,25 +359,35 @@ end;
 
 procedure TFTransferirStock.btnGuardarClick(Sender: TObject);
 begin
-  if dm.EKModelo.finalizar_transaccion(Transaccion_TransferirStock) then
-  begin
-    GrupoEditando.Enabled := true;
-    GrupoGuardarCancelar.Enabled := false;
-
-    if PageControlTransferir.TabIndex = 1 then
+  try
+    if dm.EKModelo.finalizar_transaccion(Transaccion_TransferirStock) then
     begin
-      if dm.EKModelo.iniciar_transaccion('Update Estado', []) then
-      begin
-        ZQ_NotaPedidoUpdateEstado.Close;
-        ZQ_NotaPedidoUpdateEstado.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
-        ZQ_NotaPedidoUpdateEstado.ExecSQL;
+      GrupoEditando.Enabled := true;
+      GrupoGuardarCancelar.Enabled := false;
 
-        if not DM.EKModelo.finalizar_transaccion('Update Estado') then
-          DM.EKModelo.cancelar_transaccion('Update Estado')
-     end;
-     btNotaPedido.Click;
+      if PageControlTransferir.TabIndex = 1 then
+      begin
+        if dm.EKModelo.iniciar_transaccion('Update Estado', []) then
+        begin
+          ZQ_NotaPedidoUpdateEstado.Close;
+          ZQ_NotaPedidoUpdateEstado.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
+          ZQ_NotaPedidoUpdateEstado.ParamByName('ID_ESTADO').AsInteger := ESTADO_ALMACENADO;         
+          ZQ_NotaPedidoUpdateEstado.ExecSQL;
+
+          if not DM.EKModelo.finalizar_transaccion('Update Estado') then
+            DM.EKModelo.cancelar_transaccion('Update Estado')
+       end;
+       btNotaPedido.Click;
+      end;
     end;
+  except
+    begin
+      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
+      exit;
+    end
   end;
+
+
 end;
 
 
@@ -447,6 +457,8 @@ begin
   DBGridNotaPedidoDetalle.Visible:=false;
   DBGridNotaPedido.Visible:= true;
   ZQ_VerCpb.Close;
+  ZQ_VerCpb.ParamByName('id_tipo_cpb').AsInteger:= CPB_NOTA_PEDIDO;
+  ZQ_VerCpb.ParamByName('id_estado').AsInteger:= ESTADO_CONFIRMADO;
   ZQ_VerCpb.Open;
 end;
 

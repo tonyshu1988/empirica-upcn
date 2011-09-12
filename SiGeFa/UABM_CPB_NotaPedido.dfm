@@ -2380,7 +2380,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       Caption = 'F4 - Confirmar'
       Category = 0
       Hint = 'Confirmar el comprobante seleccionado'
-      Visible = ivNever
+      Visible = ivAlways
       ImageIndex = 5
       OnClick = btnConfirmarClick
       AutoGrayScale = False
@@ -3914,10 +3914,6 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         Visible = True
       end
       item
-        TituloColumna = 'Tipo Cpb.'
-        Visible = True
-      end
-      item
         TituloColumna = 'PV'
         Visible = True
       end
@@ -3943,10 +3939,6 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       end
       item
         TituloColumna = 'Fecha Impreso'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Vendedor'
         Visible = True
       end>
     NombreGuardar = 'ABM_NP_VerCpb'
