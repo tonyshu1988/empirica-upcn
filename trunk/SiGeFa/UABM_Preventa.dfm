@@ -1,6 +1,6 @@
 object FABM_Preventa: TFABM_Preventa
-  Left = 162
-  Top = 99
+  Left = 299
+  Top = 166
   Width = 1024
   Height = 650
   Caption = 'Venta de Mostrador'
@@ -2220,7 +2220,7 @@ object FABM_Preventa: TFABM_Preventa
       Left = 254
       Top = 124
       Width = 86
-      Height = 11
+      Height = 12
       Caption = '(ESC - Para Salir)'
       Font.Charset = ANSI_CHARSET
       Font.Color = clNavy
