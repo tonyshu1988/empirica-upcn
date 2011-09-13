@@ -110,6 +110,7 @@ type
     DBEdit14: TDBEdit;
     DBEdit15: TDBEdit;
     DS_General: TDataSource;
+    ColorDialog: TColorDialog;
     procedure btnSalirClick(Sender: TObject);
     procedure habilitarCarga(flag: boolean);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -124,6 +125,7 @@ type
     procedure guardarTexto(clave: string; busqueda: string; valor: string);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ZQ_VariablesAfterScroll(DataSet: TDataSet);
+    procedure panelColorClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -320,6 +322,17 @@ begin
     end;
     panelColor.color:= color;
   end
+end;
+
+
+procedure TFConfiguracion.panelColorClick(Sender: TObject);
+begin
+  if dm.EKModelo.verificar_transaccion(abmConfiguracion) then
+    if ColorDialog.Execute then
+    begin
+      panelColor.Color:= ColorDialog.Color;
+      ZQ_VariablesTEXTO.AsString:= ColorToString(panelColor.Color);
+    end
 end;
 
 end.

@@ -100,9 +100,9 @@ object FConfiguracion: TFConfiguracion
           object Label25: TLabel
             Left = 14
             Top = 145
-            Width = 35
+            Width = 42
             Height = 13
-            Caption = 'CUIT:'
+            Caption = 'E-mail'
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -187,8 +187,9 @@ object FConfiguracion: TFConfiguracion
           object DBEdit7: TDBEdit
             Left = 14
             Top = 160
-            Width = 200
+            Width = 499
             Height = 21
+            DataField = 'EMAIL'
             DataSource = DS_General
             TabOrder = 4
           end
@@ -628,6 +629,8 @@ object FConfiguracion: TFConfiguracion
               Date = 40798.805124953700000000
               Time = 40798.805124953700000000
               TabOrder = 4
+              DataField = 'FECHA'
+              DataSource = DS_Variables
             end
             object panelColor: TPanel
               Tag = 99
@@ -636,6 +639,7 @@ object FConfiguracion: TFConfiguracion
               Width = 35
               Height = 36
               TabOrder = 5
+              OnClick = panelColorClick
             end
           end
         end
@@ -1323,5 +1327,9 @@ object FConfiguracion: TFConfiguracion
     DataSet = ZQ_General
     Left = 324
     Top = 227
+  end
+  object ColorDialog: TColorDialog
+    Left = 178
+    Top = 230
   end
 end
