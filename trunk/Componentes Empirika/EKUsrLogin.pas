@@ -59,6 +59,7 @@ type
     function conectar: boolean;
     function configurar_conexion(conexion : TZConnection; aplicacion : string) : boolean; overload;
     function configurar_conexion(conexion : TZConnection; aplicacion, ip, alias, usuario, password  : String): boolean; overload;
+    //function habilitarMenu(menu: TMenuItem): boolean;
   published
     { Published declarations }
     Property OnLogin : TNotifyEvent read FOnLogin write FOnLogin;
@@ -124,36 +125,132 @@ begin
 end;
 
 
+//function TEKUsrLogin.habilitarMenu(menu: TMenuItem): boolean;
+//var
+//  long, indice: integer;
+//  resultado: boolean;
+//begin
+//  resultado:= false; //por defecto no se muestran las opciones
+//  long:= menu.Count;
+//  for indice:= 0 to (long - 1) do //recorro una por una las opciones menu
+//  begin
+//    if menu.Items[indice].Tag = 1 then //si el tag de la opcion actual es = 1
+//      resultado:= true //las opciones se tiene q mostrar
+//    else //si el tag es distinto de 1 tengo que preguntar por los permisos
+//    begin //si estoy en modo action y tiene una accion asignada
+//      if (ModoPermiso = EKPermisoAction) and Assigned(Menu.Items[indice].Action) then
+//        if PermisoAccion(Menu.items[indice].Action.Name) then //si tengo permiso para la accion de la opcion
+//          resultado:= true //las opciones se tiene q mostrar
+//      else
+//        Menu.Items[indice].visible:= false //la opcion no se muestra
+//    end;
+//  end;
+//
+//  Result:= resultado;
+//end;
+
+
 procedure TEKUsrLogin.chequear_permisos;
 var
-  i, j : integer;
-  menuvacio : boolean;
-begin
-  if Assigned(FMenu) then
-    for i := menu.Items.Count-1 downto 0 do
-    begin
-      menuvacio := true;
-      for j := menu.items[i].Count-1 downto 0 do
-      begin
-        if menu.Items[i].Items[j].Tag <> 1 then
-        begin
-          if menu.Items[i].Items[j].Tag <> 2 then
+  n1, n2, n3: integer;
+  long_n1, long_n2, long_n3: integer;
+  hab_n1, hab_n2: boolean;
 
-            if (ModoPermiso=EKPermisoAction) and Assigned(Menu.items[i].Items[j].Action) then
-              if not PermisoAccion(Menu.items[i].Items[j].Action.Name) then
-                if not PermisoCaption(Menu.items[i].Items[j].Caption) then
-                  Menu.Items[i].Items[j].visible := false
-                else
-                  menuvacio := false
-              else
-                menuvacio := false;
-        end
+  function habilitarOpcion(opcion: TMenuItem): boolean;
+  begin
+    Result:= false; //por defecto no se muestra la opcion
+    if opcion.Caption <> '-' then
+      if opcion.Tag = 1 then //si el tag de la opcion es = 1
+        Result:= true //la opcion se tiene q mostrar
+      else //si el tag es distinto de 1 tengo que preguntar por los permisos
+      begin
+        if (ModoPermiso = EKPermisoAction) and Assigned(opcion.Action) then //si estoy en modo action y tiene una accion asignada
+          if PermisoAccion(opcion.Action.Name) then //si tengo permiso para la accion
+            Result:= true //la opcion se tiene q mostrar
         else
-            menuvacio := false;
+          opcion.Visible:= false //la opcion no se muestra
       end;
-      if menuvacio then
-        menu.Items[i].Enabled := false;
-    end;
+  end;
+
+  function habilitarNivel(menu: TMenuItem): boolean;
+  var
+    long, indice: integer;
+  begin
+    Result:= false; //por defecto no se muestran las opciones
+    long:= menu.Count;
+    for indice:= 0 to (long - 1) do //recorro una por una las opciones del menu
+    begin
+      if habilitarOpcion(menu.Items[indice]) then
+        Result:= true; //si hay una opcion en true, entonces devuelvo true
+    end
+  end;
+
+begin
+  if Assigned(FMenu) then //si esta asignado el menu
+  begin
+    long_n1:= menu.Items.Count - 1; //tamanio del menu principal (nivel 1)
+    for n1:= 0 to long_n1 do //recorro una por una las opciones del menu principal (nivel 1)
+    begin
+      hab_n1:= false; //por defecto el nivel 1 esta desactivado
+      long_n2:= menu.Items[n1].Count - 1; //tamanio del nivel 2
+      if long_n2 = -1 then //si el nivel 1 no tiene subniveles
+      begin
+        if habilitarOpcion(menu.Items[n1]) then //si tengo permiso para la accion
+          hab_n1:= true; //habilito la opcion del nivel 1
+      end
+      else //si el nivel 1 tiene subniveles
+      begin
+        for n2:= 0 to long_n2 do //recorro una por una las opciones (nivel 2)
+        begin
+          hab_n2:= false; //por defecto el nivel 2 esta desactivado
+          long_n3:= menu.Items[n1].Items[n2].Count - 1; //tamanio del nivel 3
+          if long_n3 = -1 then //si el nivel 2 no tiene subniveles
+          begin
+            if habilitarOpcion(menu.Items[n1].Items[n2]) then //si tengo permiso para la accion
+              hab_n1:= true; //habilito la opcion del nivel 1
+          end
+          else //si el nivel 3 tiene subniveles
+          begin
+            if habilitarNivel(menu.Items[n1].Items[n2]) then //habilito las opciones del nivel 3
+              hab_n2:= true;
+
+            if not hab_n2 then
+              menu.Items[n1].Items[n2].Enabled:= false;
+          end;
+        end
+      end;
+
+      if not hab_n1 then
+        menu.Items[n1].Enabled:= false;
+    end
+  end;
+
+//  if Assigned(FMenu) then //si el menu esta asignado
+//    for i := menu.Items.Count-1 downto 0 do //recorro el nivel 0 del menu
+//    begin
+//      menuvacio := true; //por defecto todos los menu estan vacio
+//
+//      for j := menu.items[i].Count-1 downto 0 do //recorro el nivel 1 del menu
+//      begin
+//        if menu.Items[i].Items[j].Tag <> 1 then //si el tag del nivel 1 de la opcion actual es <> 1
+//        begin
+//          if menu.Items[i].Items[j].Tag <> 2 then //si el tag del nivel 1 de la opcion actual es <> 1
+//            if (ModoPermiso = EKPermisoAction) and Assigned(Menu.items[i].Items[j].Action) then //si estoy en modo action y tiene una accion asignada
+//              if not PermisoAccion(Menu.items[i].Items[j].Action.Name) then //si no tengo permiso para la accion del menu
+//                if not PermisoCaption(Menu.items[i].Items[j].Caption) then //si no tengo permiso para de caption del menu
+//                  Menu.Items[i].Items[j].visible := false //oculto el menu
+//                else
+//                  menuvacio := false //seteo que no esta vacio
+//              else //si tengo permiso para la accion del menu
+//                menuvacio := false; //seteo que no esta vacio
+//        end
+//        else //si el tag del nivel 1 de la opcion actual es igual a 1
+//            menuvacio := false;
+//      end;
+//
+//      if menuvacio then //si el menu esta vacio entonces lo deshabilito
+//        menu.Items[i].Enabled := false;
+//    end;
 end;
 
 
