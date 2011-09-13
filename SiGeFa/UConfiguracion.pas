@@ -331,6 +331,7 @@ begin
     if ColorDialog.Execute then
     begin
       panelColor.Color:= ColorDialog.Color;
+      ZQ_Variables.Edit;
       ZQ_VariablesTEXTO.AsString:= ColorToString(panelColor.Color);
     end
 end;
