@@ -372,6 +372,7 @@ type
     PopUpProductos: TPopupMenu;
     AgregaProd: TMenuItem;
     QuitarProd: TMenuItem;
+    PConfirmarVenta: TPanel;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -462,7 +463,6 @@ uses UDM, UPrincipal,strutils, EKModelo, Math, UUtilidades;
 
 procedure TFCajero.FormCreate(Sender: TObject);
 begin
-
   CurrencyDecimals := 2;
   DecimalSeparator := '.';
   ThousandSeparator := ',';
@@ -480,13 +480,12 @@ begin
   Cliente:=-1;
   IdVendedor:=-1;
   descCliente:=0;
-
   crearComprobante();
-
   cargarClientePorDefecto();
 
   DS_Sucursal.DataSet:=dm.ZQ_Sucursal;
   DBImage1.DataField:='LOGO';
+
   //Logo de fondo si no tiene imagen el producto
   DM.ZQ_Sucursal.Close;
   DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:=idSucursal;
@@ -499,7 +498,7 @@ end;
 
 procedure TFCajero.btsalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
 
 procedure TFCajero.BtBuscarProductoClick(Sender: TObject);
@@ -523,8 +522,8 @@ begin
         IdentificarCodigo;
         edCantidad.SetFocus;
       end;
-    vsel.ZQ_Stock.Filtered:=False;
-    vsel.Close;
+      vsel.ZQ_Stock.Filtered:=False;
+      vsel.Close;
   end;
 end;
 
@@ -533,14 +532,13 @@ begin
   if not(ProductoYaCargado(prod)) then
     begin
         //calcularMonto();
-
-        if edImporte.AsFloat<=0 then
-         begin
+       if edImporte.AsFloat<=0 then
+        begin
            Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
            edImporte.SetFocus;
            Result:=False;
            exit;
-         end;
+        end;
         CD_DetalleFactura.Append;
         CD_DetalleFacturaID_PRODUCTO.AsInteger:=prod;
         CD_DetalleFacturaDETALLE.AsString:=detalle;
@@ -611,11 +609,11 @@ if ((not(ZQ_Productos.IsEmpty))and(edCantidad.AsInteger>0)) then
      end
    end
   else
-    begin
+   begin
     Application.MessageBox('El stock actual del producto es insuficiente para la cantidad ingresada.', 'Atención');
     edCantidad.SetFocus;
     exit;
- end;
+   end;
 end;
 
 
@@ -648,7 +646,6 @@ end;
 
 procedure TFCajero.LimpiarCodigo;
 begin
-
   ZQ_Productos.Close;
   importeacob := 0;
   edCantidad.AsInteger := 1;
@@ -726,12 +723,7 @@ begin
         exit;
       end;
      end;
-
-
-
 end;
-
-
 
 procedure TFCajero.LeerCodigo(id:string;cod:String);
 var
@@ -786,8 +778,6 @@ begin
       exit;
     end;
 
-
-
   if not(ZQ_Productos.IsEmpty) then
    begin
       RelojStock.Enabled:=ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0;
@@ -796,8 +786,6 @@ begin
    end;
 
 end;
-
-
 
 procedure TFCajero.BtLeerCodigoClick(Sender: TObject);
 begin
@@ -1270,7 +1258,7 @@ begin
   ClienteIVA:=ZQ_PersonasID_TIPO_IVA.AsInteger;
   CD_ComprobanteID_CLIENTE.AsInteger:=Cliente;
   CD_ComprobanteID_TIPO_IVA.AsInteger:=ClienteIVA;
-  descCliente:= 0;
+  descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat;
 end;
 
 procedure TFCajero.OnSelPers;

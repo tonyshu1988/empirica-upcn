@@ -1,7 +1,7 @@
 object FCajero: TFCajero
-  Left = 207
-  Top = 103
-  Width = 1040
+  Left = 352
+  Top = 72
+  Width = 1024
   Height = 692
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
@@ -19,10 +19,19 @@ object FCajero: TFCajero
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object PConfirmarVenta: TPanel
+    Left = 88
+    Top = 0
+    Width = 920
+    Height = 602
+    Align = alClient
+    TabOrder = 5
+    Visible = False
+  end
   object PanelContenedor: TPanel
     Left = 88
     Top = 0
-    Width = 936
+    Width = 920
     Height = 602
     Align = alClient
     TabOrder = 0
@@ -626,7 +635,7 @@ object FCajero: TFCajero
     object PanelContenedorDerecha: TPanel
       Left = 308
       Top = 31
-      Width = 627
+      Width = 611
       Height = 570
       Align = alClient
       Caption = 'PanelContenedorDerecha'
@@ -634,7 +643,7 @@ object FCajero: TFCajero
       object PanelFormaPago: TPanel
         Left = 1
         Top = 351
-        Width = 625
+        Width = 609
         Height = 218
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -642,7 +651,7 @@ object FCajero: TFCajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 623
+          Width = 607
           Height = 140
           Align = alClient
           Color = 16762303
@@ -656,13 +665,15 @@ object FCajero: TFCajero
           OnColExit = DBGridFormaPagoColExit
           Columns = <
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'CUENTA_INGRESO'
               Title.Caption = 'C'#243'd'
-              Width = 49
+              Width = 30
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = '_ctaIngreso'
               Title.Caption = 'Cuenta'
@@ -670,26 +681,31 @@ object FCajero: TFCajero
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'ID_TIPO_FORMAPAG'
               Title.Caption = 'MP'
-              Width = 55
+              Width = 29
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'medioPago'
               Title.Caption = 'Medio Pago'
-              Width = 245
+              Width = 226
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'IMPORTE'
               Title.Caption = 'Importe'
+              Width = 59
               Visible = True
             end
             item
+              Color = clWhite
               Expanded = False
               FieldName = '_importeVenta'
               ReadOnly = True
@@ -697,12 +713,14 @@ object FCajero: TFCajero
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'MDCP_FECHA'
               Title.Caption = 'Fecha'
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'MDCP_BANCO'
               Title.Caption = 'Banco'
@@ -710,6 +728,7 @@ object FCajero: TFCajero
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'MDCP_CHEQUE'
               Title.Caption = 'N'#250'mero'
@@ -720,13 +739,13 @@ object FCajero: TFCajero
         object PieGrillaFormaPago: TPanel
           Left = 1
           Top = 141
-          Width = 623
+          Width = 607
           Height = 76
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 1
           DesignSize = (
-            623
+            607
             76)
           object lblMaxVenta: TLabel
             Left = 144
@@ -745,7 +764,7 @@ object FCajero: TFCajero
             Visible = False
           end
           object Label15: TLabel
-            Left = 413
+            Left = 397
             Top = 9
             Width = 81
             Height = 16
@@ -761,7 +780,7 @@ object FCajero: TFCajero
           object lblTotAPagar: TLabel
             Left = 1
             Top = 32
-            Width = 621
+            Width = 605
             Height = 43
             Align = alBottom
             Alignment = taRightJustify
@@ -788,7 +807,7 @@ object FCajero: TFCajero
             OnClick = btnBorrarPagoClick
           end
           object ImporteFPago: TEdit
-            Left = 496
+            Left = 480
             Top = 8
             Width = 129
             Height = 19
@@ -797,6 +816,7 @@ object FCajero: TFCajero
             BevelInner = bvNone
             BevelOuter = bvNone
             BiDiMode = bdRightToLeft
+            BorderStyle = bsNone
             Color = 12189695
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -813,7 +833,7 @@ object FCajero: TFCajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 123
-        Width = 625
+        Width = 609
         Height = 228
         Align = alClient
         Caption = 'PanelListadoProducto'
@@ -828,7 +848,7 @@ object FCajero: TFCajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 623
+          Width = 607
           Height = 172
           Align = alClient
           Color = 16762303
@@ -843,6 +863,7 @@ object FCajero: TFCajero
           TitleFont.Style = []
           Columns = <
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'ID_PRODUCTO'
               Title.Caption = 'ID'
@@ -850,6 +871,7 @@ object FCajero: TFCajero
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'producto'
               Title.Caption = 'Producto'
@@ -857,6 +879,7 @@ object FCajero: TFCajero
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'IMPORTE_UNITARIO'
               Title.Caption = 'Importe Unit.'
@@ -864,6 +887,7 @@ object FCajero: TFCajero
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'CANTIDAD'
               Title.Caption = 'Cant.'
@@ -871,13 +895,20 @@ object FCajero: TFCajero
               Visible = True
             end
             item
+              Color = clWhite
               Expanded = False
               FieldName = 'IMPORTE_FINAL'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
               Title.Caption = 'Importe'
               Width = 80
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'PORC_DESCUENTO'
               Title.Caption = 'Desc.'
@@ -885,6 +916,7 @@ object FCajero: TFCajero
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'IMPORTE_IVA'
               Title.Caption = 'IVA'
@@ -892,6 +924,7 @@ object FCajero: TFCajero
               Visible = True
             end
             item
+              Color = 16772332
               Expanded = False
               FieldName = 'DETALLE'
               Title.Caption = 'Detalle'
@@ -902,18 +935,18 @@ object FCajero: TFCajero
         object PieGrilla: TPanel
           Left = 1
           Top = 173
-          Width = 623
+          Width = 607
           Height = 54
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 1
           DesignSize = (
-            623
+            607
             54)
           object Label10: TLabel
             Left = 1
             Top = 37
-            Width = 621
+            Width = 605
             Height = 16
             Align = alBottom
             Alignment = taCenter
@@ -932,7 +965,7 @@ object FCajero: TFCajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 22
-            Width = 621
+            Width = 605
             Height = 15
             Align = alBottom
             Alignment = taRightJustify
@@ -940,7 +973,7 @@ object FCajero: TFCajero
             Layout = tlCenter
           end
           object Label19: TLabel
-            Left = 365
+            Left = 349
             Top = 6
             Width = 118
             Height = 16
@@ -963,7 +996,7 @@ object FCajero: TFCajero
             OnClick = btQuitarProductoClick
           end
           object Importe: TEdit
-            Left = 488
+            Left = 472
             Top = 5
             Width = 137
             Height = 19
@@ -972,6 +1005,7 @@ object FCajero: TFCajero
             BevelInner = bvNone
             BevelOuter = bvNone
             BiDiMode = bdRightToLeft
+            BorderStyle = bsNone
             Color = 12189695
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -988,16 +1022,16 @@ object FCajero: TFCajero
       object PanelCabeceraFactura: TPanel
         Left = 1
         Top = 1
-        Width = 625
+        Width = 609
         Height = 122
         Align = alTop
         BevelOuter = bvLowered
         TabOrder = 2
         object Label11: TLabel
           Left = 1
-          Top = 105
-          Width = 623
-          Height = 16
+          Top = 107
+          Width = 607
+          Height = 14
           Align = alBottom
           Alignment = taCenter
           Caption = 'Listado de Productos a Cobrar  [F6]'
@@ -1015,8 +1049,8 @@ object FCajero: TFCajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 623
-          Height = 16
+          Width = 607
+          Height = 14
           Align = alTop
           Alignment = taCenter
           Caption = 'Detalles Cliente  [F3]'
@@ -1221,7 +1255,7 @@ object FCajero: TFCajero
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 934
+      Width = 918
       Height = 30
       Align = alTop
       TabOrder = 2
@@ -1244,7 +1278,7 @@ object FCajero: TFCajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 555
+        Left = 539
         Top = 1
         Width = 378
         Height = 28
@@ -4286,8 +4320,8 @@ object FCajero: TFCajero
   end
   object DataSetProvider1: TDataSetProvider
     DataSet = ZQ_Comprobante
-    Left = 202
-    Top = 147
+    Left = 186
+    Top = 139
   end
   object EKListadoProducto: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -4513,8 +4547,8 @@ object FCajero: TFCajero
       'left join tipo_documento td on (td.id_tipo_doc=p.id_tipo_doc)'
       'left join tipo_iva ti on (ti.id_tipo_iva=p.id_tipo_iva)')
     Params = <>
-    Left = 269
-    Top = 170
+    Left = 293
+    Top = 202
     object ZQ_PersonasID_PERSONA: TIntegerField
       FieldName = 'ID_PERSONA'
       Required = True
