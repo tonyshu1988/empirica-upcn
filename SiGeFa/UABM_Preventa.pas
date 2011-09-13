@@ -1039,7 +1039,7 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
       ZQ_ComprobanteFECHA_COBRADA.Clear;
       ZQ_ComprobanteFECHA_ENVIADA.Clear;
       ZQ_ComprobanteFECHA_IMPRESA.Clear;
-      ZQ_ComprobanteFECHA_VENCIMIENTO.Clear:=;
+      ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
       ZQ_Comprobante.Post;
 
       //grabarDetallesFactura();
