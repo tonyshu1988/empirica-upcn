@@ -42,7 +42,7 @@ type
     AABM_ArticuloMedida: TAction;
     AABM_TipoEmpresa: TAction;
     AABM_Sucursal: TAction;
-    AABM_SucursalPosicion: TAction;
+    AABM_SucursalPosic: TAction;
     AABM_ProductoStock: TAction;
     AABM_Personas: TAction;
     ABM_Articulos: TMenuItem;
@@ -117,7 +117,7 @@ type
     ABMPresupuesto1: TMenuItem;
     AABM_CPB_NotaPedido: TAction;
     ABMPresupuesto2: TMenuItem;
-    AABM_CPB_FacturaCompra: TAction;
+    AABM_CPB_FacturaComp: TAction;
     AABM_CPB_Devolucion: TAction;
     ABMDevolucin1: TMenuItem;
     ABMFacturaCompra1: TMenuItem;
@@ -160,7 +160,7 @@ type
     procedure AABM_ArticuloMedidaExecute(Sender: TObject);
     procedure AABM_TipoEmpresaExecute(Sender: TObject);
     procedure AABM_SucursalExecute(Sender: TObject);
-    procedure AABM_SucursalPosicionExecute(Sender: TObject);
+    procedure AABM_SucursalPosicExecute(Sender: TObject);
     procedure AABM_ProductoStockExecute(Sender: TObject);
     procedure AABM_PersonasExecute(Sender: TObject);
     procedure AImprimirEtiquetaExecute(Sender: TObject);
@@ -189,7 +189,7 @@ type
     procedure AABM_CPB_OrdenPagoExecute(Sender: TObject);
     procedure AABM_CPB_PresupuestoExecute(Sender: TObject);
     procedure AABM_CPB_NotaPedidoExecute(Sender: TObject);
-    procedure AABM_CPB_FacturaCompraExecute(Sender: TObject);
+    procedure AABM_CPB_FacturaCompExecute(Sender: TObject);
     procedure AABM_CPB_DevolucionExecute(Sender: TObject);
     procedure APreventaExecute(Sender: TObject);
     procedure ACtaCte_ProveedorExecute(Sender: TObject);
@@ -469,7 +469,7 @@ begin
 end;
 
 
-procedure TFPrincipal.AABM_SucursalPosicionExecute(Sender: TObject);
+procedure TFPrincipal.AABM_SucursalPosicExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_SucursalPosicion, FABM_SucursalPosicion);
 end;
@@ -622,7 +622,7 @@ begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_NotaPedido, FABM_CPB_NotaPedido);
 end;
 
-procedure TFPrincipal.AABM_CPB_FacturaCompraExecute(Sender: TObject);
+procedure TFPrincipal.AABM_CPB_FacturaCompExecute(Sender: TObject);
 begin
    EKVentanas1.Abrir(Sender, TFABM_CPB_FacturaCompra, FABM_CPB_FacturaCompra);
 end;
