@@ -1,6 +1,6 @@
 object FConfiguracion: TFConfiguracion
-  Left = 602
-  Top = 229
+  Left = 444
+  Top = 129
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Configuraci'#243'n General del Sistema'
@@ -24,7 +24,7 @@ object FConfiguracion: TFConfiguracion
     Top = 0
     Width = 539
     Height = 506
-    ActivePage = TabSheetGeneral
+    ActivePage = TabSheetVariables
     Align = alClient
     TabOrder = 4
     object TabSheetGeneral: TTabSheet
@@ -666,7 +666,7 @@ object FConfiguracion: TFConfiguracion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
