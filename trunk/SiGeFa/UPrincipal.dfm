@@ -4899,11 +4899,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 20
       OnExecute = AABM_SucursalExecute
     end
-    object AABM_SucursalPosicion: TAction
+    object AABM_SucursalPosic: TAction
       Caption = 'ABM Sucursal Posicion'
       Hint = 'ABM Sucursal Posicion'
       ImageIndex = 21
-      OnExecute = AABM_SucursalPosicionExecute
+      OnExecute = AABM_SucursalPosicExecute
     end
     object AABMClientes: TAction
       Caption = 'ABM Clientes'
@@ -5070,10 +5070,10 @@ object FPrincipal: TFPrincipal
       ImageIndex = 41
       OnExecute = AABM_CPB_NotaPedidoExecute
     end
-    object AABM_CPB_FacturaCompra: TAction
+    object AABM_CPB_FacturaComp: TAction
       Caption = 'ABM Factura Compra'
       ImageIndex = 40
-      OnExecute = AABM_CPB_FacturaCompraExecute
+      OnExecute = AABM_CPB_FacturaCompExecute
     end
     object AABM_CPB_Devolucion: TAction
       Caption = 'ABM Devoluci'#243'n'
@@ -5184,7 +5184,7 @@ object FPrincipal: TFPrincipal
         Action = AABM_CPB_NotaPedido
       end
       object ABMFacturaCompra1: TMenuItem
-        Action = AABM_CPB_FacturaCompra
+        Action = AABM_CPB_FacturaComp
       end
     end
     object Estadisticas1: TMenuItem
@@ -5271,7 +5271,7 @@ object FPrincipal: TFPrincipal
           Action = AABM_Sucursal
         end
         object ABMSucursalPosicion1: TMenuItem
-          Action = AABM_SucursalPosicion
+          Action = AABM_SucursalPosic
         end
       end
       object Comprobantes2: TMenuItem
