@@ -1,6 +1,6 @@
 object FABM_Preventa: TFABM_Preventa
-  Left = 215
-  Top = 131
+  Left = 181
+  Top = 105
   Width = 1024
   Height = 650
   Caption = 'Venta de Mostrador'
@@ -27,7 +27,7 @@ object FABM_Preventa: TFABM_Preventa
     BevelInner = bvLowered
     BevelWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 4
+    TabOrder = 3
     Visible = False
     object LeerCodBar: TLabel
       Left = 4
@@ -3232,8 +3232,8 @@ object FABM_Preventa: TFABM_Preventa
     end
   end
   object PConfirmarVenta: TPanel
-    Left = 320
-    Top = 69
+    Left = 288
+    Top = 29
     Width = 513
     Height = 372
     BevelInner = bvLowered
@@ -3253,6 +3253,7 @@ object FABM_Preventa: TFABM_Preventa
       Width = 193
       Height = 149
       Align = alRight
+      Center = True
       Picture.Data = {
         0A544A504547496D616765AA2B0000FFD8FFE000104A46494600010101006000
         600000FFDB0043000403030403030404030405040405060A07060606060D090A
@@ -3640,7 +3641,7 @@ object FABM_Preventa: TFABM_Preventa
     end
     object Label31: TLabel
       Left = 14
-      Top = 74
+      Top = 73
       Width = 62
       Height = 13
       Caption = 'Vendedor'
@@ -3653,7 +3654,7 @@ object FABM_Preventa: TFABM_Preventa
     end
     object Label32: TLabel
       Left = 14
-      Top = 111
+      Top = 109
       Width = 45
       Height = 13
       Caption = 'Cliente'
@@ -3664,9 +3665,35 @@ object FABM_Preventa: TFABM_Preventa
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label34: TLabel
+      Left = 14
+      Top = 154
+      Width = 121
+      Height = 13
+      Caption = 'Descuento Cliente:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label35: TLabel
+      Left = 214
+      Top = 154
+      Width = 14
+      Height = 13
+      Caption = '%'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object DBEdit7: TDBEdit
       Left = 14
-      Top = 87
+      Top = 86
       Width = 279
       Height = 21
       BevelInner = bvNone
@@ -3692,7 +3719,7 @@ object FABM_Preventa: TFABM_Preventa
     end
     object DBEdit15: TDBEdit
       Left = 14
-      Top = 124
+      Top = 122
       Width = 279
       Height = 21
       BevelInner = bvNone
@@ -3726,6 +3753,7 @@ object FABM_Preventa: TFABM_Preventa
           Caption = 'Aceptar Venta'
           ParentBiDiMode = False
           TabOrder = 0
+          OnClick = btnConfirmarVentaClick
         end
         object btnCancelarVenta: TBitBtn
           Left = 15
@@ -3747,24 +3775,24 @@ object FABM_Preventa: TFABM_Preventa
         TabOrder = 1
         object Bevel2: TBevel
           Left = 0
-          Top = 78
+          Top = 72
           Width = 295
-          Height = 7
+          Height = 4
           Align = alTop
           Shape = bsBottomLine
         end
         object lblVtaDesc: TLabel
           Left = 0
-          Top = 60
+          Top = 56
           Width = 295
-          Height = 18
+          Height = 16
           Align = alTop
           Alignment = taRightJustify
           Caption = '$ 0.00'
           Color = 12566527
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -13
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentColor = False
@@ -3773,16 +3801,16 @@ object FABM_Preventa: TFABM_Preventa
         end
         object lblVtaIVA: TLabel
           Left = 0
-          Top = 98
+          Top = 89
           Width = 295
-          Height = 18
+          Height = 16
           Align = alTop
           Alignment = taRightJustify
           Caption = '$ 0.00'
           Color = 16706765
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -13
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentColor = False
@@ -3791,7 +3819,7 @@ object FABM_Preventa: TFABM_Preventa
         end
         object lblVtaTotal: TLabel
           Left = 0
-          Top = 136
+          Top = 130
           Width = 295
           Height = 18
           Align = alTop
@@ -3809,15 +3837,15 @@ object FABM_Preventa: TFABM_Preventa
         end
         object Bevel3: TBevel
           Left = 0
-          Top = 40
+          Top = 38
           Width = 295
-          Height = 7
+          Height = 5
           Align = alTop
           Shape = bsBottomLine
         end
         object Bevel4: TBevel
           Left = 0
-          Top = 116
+          Top = 105
           Width = 295
           Height = 7
           Align = alTop
@@ -3833,23 +3861,23 @@ object FABM_Preventa: TFABM_Preventa
         end
         object Bevel7: TBevel
           Left = 0
-          Top = 154
+          Top = 148
           Width = 295
-          Height = 7
+          Height = 4
           Align = alTop
           Shape = bsBottomLine
         end
         object Label37: TLabel
           Left = 0
-          Top = 123
+          Top = 112
           Width = 295
-          Height = 13
+          Height = 18
           Align = alTop
           Caption = 'Total Venta:'
           Color = 9568200
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -16
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentColor = False
@@ -3858,7 +3886,7 @@ object FABM_Preventa: TFABM_Preventa
         end
         object Label38: TLabel
           Left = 0
-          Top = 85
+          Top = 76
           Width = 295
           Height = 13
           Align = alTop
@@ -3875,7 +3903,7 @@ object FABM_Preventa: TFABM_Preventa
         end
         object Label39: TLabel
           Left = 0
-          Top = 47
+          Top = 43
           Width = 295
           Height = 13
           Align = alTop
@@ -3894,14 +3922,14 @@ object FABM_Preventa: TFABM_Preventa
           Left = 0
           Top = 22
           Width = 295
-          Height = 18
+          Height = 16
           Align = alTop
           Alignment = taRightJustify
           Caption = '$ 0.00'
-          Color = 12189625
+          Color = 12713983
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -13
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentColor = False
@@ -3915,7 +3943,7 @@ object FABM_Preventa: TFABM_Preventa
           Height = 13
           Align = alTop
           Caption = 'SubTotal:'
-          Color = 12189625
+          Color = 12713983
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -3926,6 +3954,25 @@ object FABM_Preventa: TFABM_Preventa
           Layout = tlCenter
         end
       end
+    end
+    object DBEdit16: TDBEdit
+      Left = 144
+      Top = 150
+      Width = 65
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 14671871
+      DataField = 'PORC_DESCUENTO'
+      DataSource = DS_Comprobante
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      OnExit = DBEdit16Exit
     end
   end
   object dxBarABM: TdxBarManager
