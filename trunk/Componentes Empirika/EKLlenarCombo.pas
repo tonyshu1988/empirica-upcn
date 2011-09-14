@@ -20,7 +20,7 @@ type
     procedure FNewOnChange (sender : TObject);
     procedure setcombo(const Value: TComboBox);
   protected
-    { Protected declarations }
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
     { Public declarations }
     procedure CargarCombo;
@@ -34,6 +34,8 @@ type
     property SelectClave : String read FSelecClave write FSelecClave;
 
     procedure SetItem(item : integer);
+    procedure setItemNombre(nombre: string);
+    procedure setItemID(id: integer);
   end;
 
 procedure Register;
@@ -69,6 +71,7 @@ begin
   FCombo.ItemIndex := -1;
 end;
 
+
 procedure TEKLlenarCombo.FNewOnChange(sender: TObject);
 begin
   if FDataset.FieldByName(FCampoVer).ClassType = tdatefield then
@@ -97,16 +100,56 @@ begin
   end;
 end;
 
+
 procedure TEKLlenarCombo.setcombo(const Value: TComboBox);
 begin
   FCombo := Value;
   FCombo.OnChange := FNewOnChange;
 end;
 
+
 procedure TEKLlenarCombo.SetItem(item: integer);
 begin
   combo.ItemIndex:=item;
   FNewOnChange(nil);
+end;
+
+
+procedure TEKLlenarCombo.SetItemID(id: integer);
+var
+  nombre: string;
+begin
+  nombre:= '';
+  if dataset.Locate(FCampoClave, id, []) then
+    nombre:= FDataset.fieldbyname(FCampoVer).AsString;
+
+  if nombre <> '' then
+    combo.ItemIndex:= combo.Items.IndexOf(nombre);
+  FNewOnChange(nil);
+end;
+
+
+procedure TEKLlenarCombo.setItemNombre(nombre: string);
+begin
+  combo.ItemIndex:= combo.Items.IndexOf(nombre);
+  FNewOnChange(nil);
+end;
+
+
+procedure TEKLlenarCombo.Notification(AComponent: TComponent; Operation: TOperation);
+var
+  I: Integer;
+  NeedLayout: Boolean;
+begin
+  inherited Notification(AComponent, Operation);
+
+  if (Operation = opRemove) then
+  begin
+    if (AComponent is TcomboBox) then
+    begin
+      FCombo:= nil;
+    end
+  end;
 end;
 
 end.
