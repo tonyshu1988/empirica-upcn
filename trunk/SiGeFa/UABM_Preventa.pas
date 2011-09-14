@@ -98,7 +98,6 @@ type
     ZQ_ProductosSTOCK_ACTUAL: TFloatField;
     DS_Productos: TDataSource;
     RelojStock: TTimer;
-    RelojMaximoV: TTimer;
     lblMaxVenta: TLabel;
     ZQ_Personas: TZQuery;
     ZQ_PersonasID_PERSONA: TIntegerField;
@@ -214,10 +213,6 @@ type
     DBText8: TDBText;
     DS_DetalleFactura: TDataSource;
     Panel3: TPanel;
-    DBText1: TDBText;
-    DBText2: TDBText;
-    DBText3: TDBText;
-    DBText4: TDBText;
     DBImage1: TDBImage;
     edImagen: TDBImage;
     PanelDetalleProducto: TPanel;
@@ -300,6 +295,46 @@ type
     ZQ_ComprobanteDetalleID_STOCK_PRODUCTO: TIntegerField;
     ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField;
     ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    Label25: TLabel;
+    Label26: TLabel;
+    DBEdit6: TDBEdit;
+    Label27: TLabel;
+    PConfirmarVenta: TPanel;
+    Image1: TImage;
+    Label29: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    Label32: TLabel;
+    DBEdit7: TDBEdit;
+    DBEdit8: TDBEdit;
+    DBEdit15: TDBEdit;
+    Bevel1: TBevel;
+    Panel2: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Bevel2: TBevel;
+    lblVtaDesc: TLabel;
+    lblVtaIVA: TLabel;
+    lblVtaTotal: TLabel;
+    Bevel3: TBevel;
+    Bevel4: TBevel;
+    Bevel6: TBevel;
+    Bevel7: TBevel;
+    Label37: TLabel;
+    Label38: TLabel;
+    Label39: TLabel;
+    lblVtaSubtotal: TLabel;
+    Label33: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
     procedure btBuscProdClick(Sender: TObject);
     procedure VerLectorCB(sino: Boolean);
     procedure IdentificarCodigo();
@@ -313,7 +348,6 @@ type
     procedure cargarClientePorDefecto();
     procedure ZQ_ProductosAfterScroll(DataSet: TDataSet);
     procedure RelojStockTimer(Sender: TObject);
-    procedure RelojMaximoVTimer(Sender: TObject);
     procedure codBarrasEnter(Sender: TObject);
     procedure codBarrasKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -345,6 +379,7 @@ type
     procedure BtAceptarPagoClick(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
     procedure guardarComprobante();
+    procedure BitBtn2Click(Sender: TObject);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -395,7 +430,6 @@ if EKListadoProducto.Buscar then
      begin
        codBarras.Text:='I'+EKListadoProducto.Resultado;
        IdentificarCodigo;
-       edCantidad.SetFocus;
      end
    end
 end;
@@ -485,8 +519,8 @@ begin
   //lblSinStock.Visible:=False;
   lblMaxVenta.Visible:=False;
 
-   try
-    IdProd:= MidStr(cod, 2, Length(cod) - 1);
+  try
+      IdProd:= MidStr(cod, 2, Length(cod) - 1);
   except
     begin
       Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
@@ -495,46 +529,56 @@ begin
     end
   end;
   //Codigo Corto
-  if id='C' then
-   begin
-      ZQ_Productos.Close;
-      ZQ_Productos.sql[11]:=Format('and(p.cod_corto=%s)',[IdProd]);
-      ZQ_Productos.Open;
-   end;
+     if id='C' then
+      begin
+        ZQ_Productos.Close;
+        ZQ_Productos.sql[11]:=Format('and(p.cod_corto=%s)',[IdProd]);
+        ZQ_Productos.Open;
+      end;
 
-   if id='I' then
-    begin
-      ZQ_Productos.Close;
-      ZQ_Productos.sql[11]:=Format('and(p.id_producto=%s)',[IdProd]);
-      ZQ_Productos.Open;
-    end;
-   //Codigo de Barras
-   if id='B' then
-     begin
+     if id='I' then
+      begin
+        ZQ_Productos.Close;
+        ZQ_Productos.sql[11]:=Format('and(p.id_producto=%s)',[IdProd]);
+        ZQ_Productos.Open;
+      end;
+     //Codigo de Barras
+     if id='B' then
+       begin
         ZQ_Productos.Close;
         ZQ_Productos.sql[11]:=Format('and(p.codigo_barra=%s)',[cod]);
         ZQ_Productos.Open;
+       end;
+
+    if ZQ_Productos.RecordCount>1 then
+      begin
+        Application.MessageBox('El código ingresado corresponde a más de un producto'+char(13)+
+                                '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Producto Repetido');
+        LimpiarCodigo;
+        exit;
+      end;
+
+    if not(ZQ_Productos.IsEmpty) then
+     begin
+        if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
+         begin
+           Application.MessageBox('El Stock del Producto es Insuficiente.', 'Stock Producto');
+           LimpiarCodigo;
+           exit;
+         end;
      end;
 
-  if ZQ_Productos.RecordCount>1 then
-    begin
-      Application.MessageBox('El código ingresado corresponde a más de un producto'+char(13)+
-                              '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Producto Repetido');
-      LimpiarCodigo;
-      exit;
-    end;
-
-  if not(ZQ_Productos.IsEmpty) then
-   begin
-       agregar('',ZQ_ProductosID_PRODUCTO.AsInteger);
-   end
-  else
-   begin
-      Application.MessageBox('El producto no pudo ser encontrado.'+char(13)+
-                              '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Código incorrecto');
-      LimpiarCodigo;
-      exit;
-   end;
+    if not(ZQ_Productos.IsEmpty) then
+       begin
+        agregar('',ZQ_ProductosID_PRODUCTO.AsInteger);
+       end
+    else
+       begin
+        Application.MessageBox('El producto no pudo ser encontrado.'+char(13)+
+                                  '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Código incorrecto');
+        LimpiarCodigo;
+        exit;
+       end;
 
 end;
 
@@ -588,7 +632,7 @@ begin
   DBImage1.DataField:='LOGO';
 
   modoLecturaProd();
-
+  PConfirmarVenta.Visible:=False;
   DM.ZQ_Sucursal.Close;
   DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:=idSucursal;
   DM.ZQ_Sucursal.Open;
@@ -661,11 +705,6 @@ begin
 // lblSinStock.Visible:=not(lblSinStock.Visible);
 end;
 
-procedure TFABM_Preventa.RelojMaximoVTimer(Sender: TObject);
-begin
- lblMaxVenta.Visible:=not(lblMaxVenta.Visible);
-end;
-
 procedure TFABM_Preventa.codBarrasEnter(Sender: TObject);
 begin
   LimpiarCodigo;
@@ -675,7 +714,10 @@ procedure TFABM_Preventa.codBarrasKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key = 13 then
-    IdentificarCodigo
+   begin
+    IdentificarCodigo;
+
+   end
   else
    if key = 27 then
     begin
@@ -787,7 +829,7 @@ if IdVendedor<0 then
 
   modoLecturaProd();
   VerLectorCB(true);
-  LimpiarCodigo();
+  LimpiarCodigo();      
   codBarras.SetFocus;
 end;
 
@@ -804,6 +846,7 @@ end;
 
 function TFABM_Preventa.agregar(detalle: string;prod:integer):Boolean;
 begin
+ Result:=False;
  if not(ProductoYaCargado(prod)) then
     begin
 
@@ -811,7 +854,7 @@ begin
         CD_DetalleFacturaID_PRODUCTO.AsInteger:=prod;
         CD_DetalleFacturaDETALLE.AsString:=detalle;
         CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=ZQ_ProductosPRECIO_VENTA.AsFloat;
-        CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=descCliente;
+        CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat*100)+descCliente;
         CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:=ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
         CD_DetalleFacturaPORC_IVA.AsFloat:=ZQ_ProductosIMPUESTO_IVA.AsFloat;
         CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:=(CD_DetalleFacturaCANTIDAD.AsInteger*CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
@@ -842,9 +885,20 @@ begin
        exit;
     end;
 
+ if ((not(ZQ_Productos.IsEmpty))and(CD_DetalleFacturaCANTIDAD.AsFloat>0)) then
+  if (ZQ_ProductosSTOCK_ACTUAL.AsFloat>=CD_DetalleFacturaCANTIDAD.AsFloat) then
+   begin
     CD_DetalleFactura.Post;
     lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
     modoLecturaProd();
+   end
+  else
+   begin
+    Application.MessageBox('El stock actual del producto es insuficiente para la cantidad ingresada.', 'Atención');
+    edCantidad.SetFocus;
+    exit;
+   end;
+
 end;
 
 procedure TFABM_Preventa.btnCancelarProdClick(Sender: TObject);
@@ -870,6 +924,7 @@ begin
    Panel1.Enabled:=False;
    grupoVertical.Enabled:=False;
    PanelDetalleProducto.Color:=$0080FFFF;
+   edCantidad.SetFocus;
 end;
 procedure TFABM_Preventa.btQuitarProductoClick(Sender: TObject);
 begin
@@ -974,14 +1029,22 @@ end;
 procedure TFABM_Preventa.BtCancelarPagoClick(Sender: TObject);
 begin
 if (CD_DetalleFactura.State=dsBrowse) then
-if (application.MessageBox(pchar('Desea Cancelar la Boleta Actual y quitar todos sus Productos?'), 'Borrar Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-  CD_DetalleFactura.EmptyDataSet;
+ if (application.MessageBox(pchar('Desea Cancelar la Boleta Actual y quitar todos sus Productos?'), 'Borrar Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  begin
+   CD_DetalleFactura.EmptyDataSet;
+
+   lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
+  end
 end;
 
 procedure TFABM_Preventa.BtAceptarPagoClick(Sender: TObject);
 begin
 //if (CD_DetalleFactura.State=dsBrowse) then
 //Guarda la Venta
+  PConfirmarVenta.Visible:=True;
+  PConfirmarVenta.BringToFront;
+  dm.centrarPanel(FABM_Preventa, PConfirmarVenta);
+  PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
 end;
 
 procedure TFABM_Preventa.EKDbSuma1SumListChanged(Sender: TObject);
@@ -994,6 +1057,17 @@ begin
 
   if (CD_Comprobante.state=dsInsert) then
     CD_ComprobanteBASE_IMPONIBLE.AsFloat:=acumulado;
+
+  if acumulado>MONTO_MAX_VENTA then
+     begin
+       lblTotAPagar.Color:=clRed;
+       lblMaxVenta.Visible:=true;
+     end
+  else
+    begin
+    lblTotAPagar.Color:=$00C10000;
+    lblMaxVenta.Visible:=false;
+    end
 end;
 
 procedure TFABM_Preventa.guardarComprobante;
@@ -1065,6 +1139,12 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
         Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
     end;
    end;
+end;
+
+procedure TFABM_Preventa.BitBtn2Click(Sender: TObject);
+begin
+  PConfirmarVenta.Visible:=False;
+  PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
 end;
 
 end.
