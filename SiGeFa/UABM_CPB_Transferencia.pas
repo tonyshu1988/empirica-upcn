@@ -24,7 +24,6 @@ type
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnBaja: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
@@ -35,19 +34,18 @@ type
     ABuscar: TAction;
     ANuevo: TAction;
     AModificar: TAction;
-    AEliminar: TAction;
     ABaja: TAction;
-    AReactivar: TAction;
+    AConfirmar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
     EKBuscar: TEKBusquedaAvanzada;
     EKVistaPrevia: TEKVistaPreviaQR;
-    RepCuentas: TQuickRep;
+    RepTransf: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
     QRLabel17: TQRLabel;
-    RepCuentas_Subtitulo: TQRLabel;
-    RepCuentas_Titulo: TQRLabel;
+    RepTransf_Subtitulo: TQRLabel;
+    RepTransf_Titulo: TQRLabel;
     QRBand10: TQRBand;
     QRDBText19: TQRDBText;
     QRDBText1: TQRDBText;
@@ -160,54 +158,26 @@ type
     ZQ_NumeroCpbBAJA: TStringField;
     ZQ_VerCpb_Fpago: TZQuery;
     DS_VerCpb_Fpago: TDataSource;
-    ZQ_VerCpb_FpagoID_COMPROB_FP: TIntegerField;
-    ZQ_VerCpb_FpagoID_COMPROBANTE: TIntegerField;
-    ZQ_VerCpb_FpagoID_TIPO_FORMAPAG: TIntegerField;
-    ZQ_VerCpb_FpagoMDCP_FECHA: TDateField;
-    ZQ_VerCpb_FpagoMDCP_BANCO: TStringField;
+    EKDBDateTimePicker1: TEKDBDateTimePicker;
+    StaticTxtBaja: TStaticText;
+    StaticTxtConfirmado: TStaticText;
+    QRLabel4: TQRLabel;
+    QRDBText5: TQRDBText;
+    ZQ_VerCpb_FpagoFECHA: TDateField;
+    ZQ_VerCpb_FpagoNUMERO_CPB: TIntegerField;
     ZQ_VerCpb_FpagoMDCP_CHEQUE: TStringField;
-    ZQ_VerCpb_FpagoIMPORTE: TFloatField;
-    ZQ_VerCpb_FpagoCONCILIADO: TDateField;
-    ZQ_VerCpb_FpagoCUENTA_INGRESO: TIntegerField;
-    ZQ_VerCpb_FpagoCUENTA_EGRESO: TIntegerField;
-    ZQ_VerCpb_FpagoFECHA_FP: TDateTimeField;
-    ZQ_VerCpb_FpagoIMPORTE_REAL: TFloatField;
-    ZQ_VerCpb_FpagoNOMBTR_TIPO: TStringField;
     ZQ_VerCpb_FpagoCTA_EGRESO_CODIGO: TStringField;
     ZQ_VerCpb_FpagoCTA_EGRESO: TStringField;
     ZQ_VerCpb_FpagoCTA_INGRESO_CODIGO: TStringField;
     ZQ_VerCpb_FpagoCTA_INGRESO: TStringField;
-    EKDBDateTimePicker1: TEKDBDateTimePicker;
-    ZQ_VerCpb_FpagoID_SUCURSAL: TIntegerField;
-    ZQ_VerCpb_FpagoID_PROVEEDOR: TIntegerField;
-    ZQ_VerCpb_FpagoID_CLIENTE: TIntegerField;
-    ZQ_VerCpb_FpagoID_TIPO_CPB: TIntegerField;
-    ZQ_VerCpb_FpagoID_VENDEDOR: TIntegerField;
-    ZQ_VerCpb_FpagoID_COMP_ESTADO: TIntegerField;
-    ZQ_VerCpb_FpagoCODIGO: TStringField;
-    ZQ_VerCpb_FpagoFECHA: TDateTimeField;
-    ZQ_VerCpb_FpagoOBSERVACION: TStringField;
-    ZQ_VerCpb_FpagoBASE_IMPONIBLE: TFloatField;
-    ZQ_VerCpb_FpagoSALDO: TFloatField;
     ZQ_VerCpb_FpagoIMPORTE_TOTAL: TFloatField;
-    ZQ_VerCpb_FpagoPORC_IVA: TFloatField;
-    ZQ_VerCpb_FpagoIMPORTE_IVA: TFloatField;
-    ZQ_VerCpb_FpagoPORC_DESCUENTO: TFloatField;
-    ZQ_VerCpb_FpagoIMPORTE_DESCUENTO: TFloatField;
-    ZQ_VerCpb_FpagoENCABEZADO: TStringField;
-    ZQ_VerCpb_FpagoPIE: TStringField;
-    ZQ_VerCpb_FpagoFECHA_COBRADA: TDateField;
-    ZQ_VerCpb_FpagoFECHA_ENVIADA: TDateField;
-    ZQ_VerCpb_FpagoFECHA_IMPRESA: TDateField;
-    ZQ_VerCpb_FpagoFECHA_VENCIMIENTO: TDateField;
-    ZQ_VerCpb_FpagoPUNTO_VENTA: TIntegerField;
-    ZQ_VerCpb_FpagoNUMERO_CPB: TIntegerField;
+    ZQ_VerCpb_FpagoOBSERVACION: TStringField;
+    ZQ_VerCpb_FpagoID_COMP_ESTADO: TIntegerField;
+    ZQ_VerCpb_FpagoID_COMPROBANTE: TIntegerField;
+    btnConfirmar: TdxBarLargeButton;
+    QRDBText6: TQRDBText;
+    QRLabel5: TQRLabel;
     ZQ_VerCpb_FpagoFECHA_ANULADO: TDateField;
-    ZQ_VerCpb_FpagoID_TIPO_IVA: TIntegerField;
-    ZQ_VerCpb_FpagoID_TIPO_MOVIMIENTO: TIntegerField;
-    ZQ_VerCpb_FpagoIMPORTE_VENTA: TFloatField;
-    StaticTxtBaja: TStaticText;
-    StaticTxtConfirmado: TStaticText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -215,7 +185,6 @@ type
     procedure btnBajaClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure btnReactivarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DBGridTransferenciaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -223,7 +192,6 @@ type
     procedure ANuevoExecute(Sender: TObject);
     procedure AModificarExecute(Sender: TObject);
     procedure ABajaExecute(Sender: TObject);
-    procedure AReactivarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -235,6 +203,8 @@ type
     procedure EditCodCtaEgresoExit(Sender: TObject);
     procedure EditCodCtaIngresoExit(Sender: TObject);
     function ValidarCampos():boolean;
+    procedure AConfirmarExecute(Sender: TObject);
+    procedure btnConfirmarClick(Sender: TObject);
   private
   public
     id_comprobante: Integer;
@@ -256,55 +226,55 @@ function TFABM_CPB_Transferencia.ValidarCampos():boolean;
 begin
   result:= true;
 
-//  if ZQ_TransferenciaFECHA.IsNull then
-//   begin
-//     Application.MessageBox('El campo "Fecha" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-//     ISDTPFecha.SetFocus;
-//     result := false;
-//     Exit;
-//   end;
-//
-//  if (ZQ_TransferenciaFECHA.AsDateTime < dm.fecha_limite_desde) or (ZQ_TransferenciaFECHA.AsDateTime > dm.fecha_limite_hasta) then
-//   begin
-//     Application.MessageBox(pchar('El campo "Fecha" excede el rango permitido ('+DateToStr(dm.fecha_limite_desde)+' - '+DateToStr(dm.fecha_limite_hasta)+'), verifique'),'Validar',MB_OK+MB_ICONINFORMATION);
-//     ISDTPFecha.SetFocus;
-//     result := false;
-//     Exit;
-//   end;
-//
-//  if ZQ_Cuentas_MovimientosID_CUENTA_EGRESO.IsNull then
-//   begin
-//     Application.MessageBox('El campo "Cuenta Egreso" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-//     DBLookupCBoxEgreso.SetFocus;
-//     DBLookupCBoxEgreso.perform(WM_LBUTTONDOWN,1,0);
-//     result := false;
-//     Exit;
-//   end;
-//
-//  if ZQ_Cuentas_MovimientosID_CUENTA_INGRESO.IsNull then
-//   begin
-//     Application.MessageBox('El campo "Cuenta Ingreso" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-//     DBLookupCBoxIngreso.SetFocus;
-//     DBLookupCBoxIngreso.perform(WM_LBUTTONDOWN,1,0);
-//     result := false;
-//     Exit;
-//   end;
-//
-//  if ZQ_TransferenciaIMPORTE.IsNull then
-//   begin
-//     Application.MessageBox('El campo "Importe" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-//     DBEditImporte.SetFocus;
-//     result := false;
-//     Exit;
-//   end;
-//
-//  if (ZQ_TransferenciaIMPORTE.AsFloat <= 0) then
-//   begin
-//     Application.MessageBox('El campo "Importe" posee un valor menor o igual a cero, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-//     DBEditImporte.SetFocus;
-//     result := false;
-//     Exit;
-//   end;
+  if ZQ_ComprobanteFECHA.IsNull then
+   begin
+     Application.MessageBox('El campo "Fecha" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
+     EKDBDateTimePicker1.SetFocus;
+     result := false;
+     Exit;
+   end;
+
+  if ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull then
+   begin
+     Application.MessageBox('El campo "Cuenta Egreso" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
+     DBLookupCBoxEgreso.SetFocus;
+     DBLookupCBoxEgreso.perform(WM_LBUTTONDOWN,1,0);
+     result := false;
+     Exit;
+   end;
+
+  if ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull then
+   begin
+     Application.MessageBox('El campo "Cuenta Ingreso" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
+     DBLookupCBoxIngreso.SetFocus;
+     DBLookupCBoxIngreso.perform(WM_LBUTTONDOWN,1,0);
+     result := false;
+     Exit;
+   end;
+
+  if ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger =  ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger then
+   begin
+     Application.MessageBox('La "Cuenta Egreso" es la misma que la "Cuenta Ingreso", verifique','Validar',MB_OK+MB_ICONINFORMATION);
+     DBLookupCBoxEgreso.SetFocus;
+     result := false;
+     Exit;
+   end;
+
+  if ZQ_ComprobanteIMPORTE_TOTAL.IsNull then
+   begin
+     Application.MessageBox('El campo "Importe" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
+     DBEditImporte.SetFocus;
+     result := false;
+     Exit;
+   end;
+
+  if (ZQ_ComprobanteIMPORTE_TOTAL.AsFloat <= 0) then
+   begin
+     Application.MessageBox('El campo "Importe" posee un valor menor o igual a cero, verifique','Validar',MB_OK+MB_ICONINFORMATION);
+     DBEditImporte.SetFocus;
+     result := false;
+     Exit;
+   end;
 end;
 
 
@@ -369,7 +339,7 @@ begin
 
     ZQ_CpbFormaPago.Append;
     ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_comprobante;
-    ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= 14;
+    ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= 10;
     ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
 
     EKDBDateTimePicker1.SetFocus;
@@ -384,128 +354,72 @@ procedure TFABM_CPB_Transferencia.btnModificarClick(Sender: TObject);
 var
   estado: integer;
 begin
-//  estado:= ZQ_VerCpb_FpagoID_COMP_ESTADO.AsInteger;
-//  if ((ZQ_VerCpb_Fpago.IsEmpty) or (estado = ESTADO_CONFIRMADO)) then
-//    exit;
-//
-//  id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
-//
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
-//  begin
-//    DBGridTransferencia.Enabled := false;
-//    PanelEdicion.Visible:= true;
-//
-//    ZQ_Comprobante.Close;
-//    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_Comprobante.Open;
-//
-//    ZQ_CpbFormaPago.Close;
-//    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_CpbFormaPago.Open;
-//
-//    if ZQ_ComprobanteID_CLIENTE.IsNull then
-//    begin
-//      PanelEditar_DatosGralProveedor.BringToFront;
-//      ZQ_Proveedor.Close;
-//      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= ZQ_ComprobanteID_PROVEEDOR.AsInteger;
-//      ZQ_Proveedor.Open;
-//      ZQ_Cliente.Close;
-//    end;
-//
-//    if ZQ_ComprobanteID_PROVEEDOR.IsNull then
-//    begin
-//      PanelEditar_DatosGralCliente.BringToFront;
-//      ZQ_Cliente.Close;
-//      ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_ComprobanteID_CLIENTE.AsInteger;
-//      ZQ_Cliente.Open;
-//      ZQ_Proveedor.Close;
-//    end;
-//
-//    cargarTipoComprobante(tipoComprobante);
-//    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
-//
-//    ZQ_Comprobante.Edit;
-//
-//    EKDBDateEmision.SetFocus;
-//  end;
+  estado:= ZQ_VerCpb_FpagoID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb_Fpago.IsEmpty) or (estado = ESTADO_CONFIRMADO)) then
+    exit;
 
-//  if ZQ_Cuentas.IsEmpty then
-//      exit;
-//
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
-//  begin
-//    DBGridCuentas.Enabled := false;
-//    PanelEdicion.Visible:= true;
-//
-//    ZQ_Cuentas.Edit;
-//    if ZQ_CuentasCODIGO.IsNull then
-//    begin
-//      ZQ_UltimoNro.Close;
-//      ZQ_UltimoNro.Open;
-//      if ZQ_UltimoNro.IsEmpty or (ZQ_UltimoNroCODIGO.AsString = '') then
-//        ZQ_CuentasCODIGO.AsInteger:= 1
-//      else
-//        ZQ_CuentasCODIGO.AsInteger:= ZQ_UltimoNroCODIGO.AsInteger + 1;
-//    end;
-//
-//    DBENombre.SetFocus;
-//    GrupoEditando.Enabled := false;
-//    GrupoGuardarCancelar.Enabled := true;
-//  end;
+  id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
+
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
+  begin
+    DBGridTransferencia.Enabled := false;
+    PanelEdicion.Visible:= true;
+
+    ZQ_Comprobante.Close;
+    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_Comprobante.Open;
+
+    ZQ_CpbFormaPago.Close;
+    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_CpbFormaPago.Open;
+
+    ZQ_Comprobante.Edit;
+    ZQ_CpbFormaPago.Edit;
+
+    EKDBDateTimePicker1.SetFocus;
+
+    GrupoEditando.Enabled := false;
+    GrupoGuardarCancelar.Enabled := true;
+  end;
 end;
 
 
 procedure TFABM_CPB_Transferencia.btnBajaClick(Sender: TObject);
 var
-  recNo: integer;
+  recno, estado: Integer;
 begin
-//  if (ZQ_Cuentas.IsEmpty) OR (ZQ_CuentasBAJA.AsString <> 'N') then
-//    exit;
-//
-//  if (application.MessageBox(pchar('¿Desea dar de baja la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//  begin
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
-//    begin
-//      ZQ_Cuentas.Edit;
-//      ZQ_CuentasBAJA.AsString:='S';
-//    end
-//    else
-//      exit;
-//
-//    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-//      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
-//
-//    recNo:= ZQ_Cuentas.RecNo;
-//    ZQ_Cuentas.Refresh;
-//    ZQ_Cuentas.RecNo:= recNo;
-//  end;
-end;
+  estado:= ZQ_VerCpb_FpagoID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb_Fpago.IsEmpty) or (estado = ESTADO_ANULADO)) then
+    exit;
 
+  id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
 
-procedure TFABM_CPB_Transferencia.btnReactivarClick(Sender: TObject);
-var
-  recNo: integer;
-begin
-//  if (ZQ_Cuentas.IsEmpty) OR (ZQ_CuentasBAJA.AsString <> 'S') then
-//    exit;
-//
-//  if (application.MessageBox(pchar('¿Desea reactivar la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//  begin
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
-//    begin
-//      ZQ_Cuentas.Edit;
-//      ZQ_CuentasBAJA.AsString:='N';
-//    end
-//    else
-//      exit;
-//
-//    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-//      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
-//
-//    recNo:= ZQ_Cuentas.RecNo;
-//    ZQ_Cuentas.Refresh;
-//    ZQ_Cuentas.RecNo:= recNo;
-//  end;
+  if (application.MessageBox(pchar('¿Desea anular la Transferencia seleccionada?'), 'ABM Transferencia', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    begin
+      ZQ_Comprobante.Close;
+      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_Comprobante.Open;
+
+      ZQ_Comprobante.Edit;
+      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
+      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo anular la Transferencia.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_VerCpb_Fpago.RecNo;
+  ZQ_VerCpb_Fpago.Refresh;
+  ZQ_VerCpb_Fpago.RecNo:= recNo;
+  dm.mostrarCantidadRegistro(ZQ_VerCpb_Fpago, lblCantidadRegistros);
 end;
 
 
@@ -582,13 +496,13 @@ end;
 
 procedure TFABM_CPB_Transferencia.btnImprimirClick(Sender: TObject);
 begin
-//  if ZQ_Cuentas.IsEmpty then
-//    exit;
-//
-//  DM.VariablesReportes(RepCuentas);
-//  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-//  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-//  EKVistaPrevia.VistaPrevia;
+  if ZQ_VerCpb_Fpago.IsEmpty then
+    exit;
+
+  DM.VariablesReportes(RepTransf);
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  EKVistaPrevia.VistaPrevia;
 end;
 
 
@@ -637,12 +551,6 @@ begin
     btnBaja.Click;
 end;
 
-procedure TFABM_CPB_Transferencia.AReactivarExecute(Sender: TObject);
-begin
-  if btnReactivar.Enabled then
-    btnReactivar.Click;
-end;
-
 procedure TFABM_CPB_Transferencia.AGuardarExecute(Sender: TObject);
 begin
   if btnGuardar.Enabled then
@@ -659,6 +567,12 @@ procedure TFABM_CPB_Transferencia.ABuscarExecute(Sender: TObject);
 begin
   if btnBuscar.Enabled then
     btnBuscar.Click;
+end;
+
+procedure TFABM_CPB_Transferencia.AConfirmarExecute(Sender: TObject);
+begin
+  if btnConfirmar.Enabled then
+    btnConfirmar.Click;
 end;
 //----------------------------------
 //  FIN TECLAS RAPIDAS
@@ -722,6 +636,46 @@ begin
       EditCodCtaIngreso.Text:= '';
       EditCodCtaIngreso.SetFocus;
     end;
+end;
+
+
+
+procedure TFABM_CPB_Transferencia.btnConfirmarClick(Sender: TObject);
+var
+  recno, estado: Integer;
+begin
+  estado:= ZQ_VerCpb_FpagoID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb_Fpago.IsEmpty) or
+     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
+    exit;
+
+  id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
+
+  if (application.MessageBox(pchar('¿Desea confirmar la Transferencia seleccionada?'), 'ABM Transferencia', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    begin
+      ZQ_Comprobante.Close;
+      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_Comprobante.Open;
+
+      ZQ_Comprobante.Edit;
+      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo confirmar la Transferencia.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_VerCpb_Fpago.RecNo;
+  ZQ_VerCpb_Fpago.Refresh;
+  ZQ_VerCpb_Fpago.RecNo:= recNo;
+  dm.mostrarCantidadRegistro(ZQ_VerCpb_Fpago, lblCantidadRegistros);
 end;
 
 end.

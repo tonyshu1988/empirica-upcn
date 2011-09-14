@@ -12,6 +12,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
   Font.Style = []
   OldCreateOrder = False
   Scaled = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
@@ -19,7 +20,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     Top = 0
     Width = 977
     Height = 553
-    ActivePage = TabSheet4
+    ActivePage = TabSheet6
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -510,7 +511,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object QRDBImage1: TQRDBImage
+          object QRDBLogo2: TQRDBImage
             Left = 24
             Top = 11
             Width = 64
@@ -526,6 +527,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               29.104166666666670000
               169.333333333333300000)
             DataField = 'LOGO'
+            DataSet = DM.ZQ_Sucursal
             Stretch = True
           end
         end
@@ -2267,7 +2269,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object QRDBImage4: TQRDBImage
+          object QRDBLogo3: TQRDBImage
             Left = 24
             Top = 11
             Width = 64
@@ -4120,7 +4122,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object QRDBLogo: TQRDBImage
+          object QRDBLogo1: TQRDBImage
             Left = 24
             Top = 11
             Width = 64
@@ -6025,7 +6027,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object QRDBImage3: TQRDBImage
+          object QRDBLogo4: TQRDBImage
             Left = 24
             Top = 11
             Width = 64
@@ -6041,6 +6043,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               29.104166666666670000
               169.333333333333300000)
             DataField = 'LOGO'
+            DataSet = DM.ZQ_Sucursal
             Stretch = True
           end
           object QRLabel90: TQRLabel
@@ -7703,7 +7706,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object QRDBImage2: TQRDBImage
+          object QRDBLogo5: TQRDBImage
             Left = 24
             Top = 11
             Width = 64
@@ -9530,7 +9533,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object QRDBImage5: TQRDBImage
+          object QRDBLogo6: TQRDBImage
             Left = 70
             Top = 11
             Width = 64
@@ -13386,7 +13389,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
-          object QRDBImage6: TQRDBImage
+          object QRDBLogo7: TQRDBImage
             Left = 24
             Top = 11
             Width = 64

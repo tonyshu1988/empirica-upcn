@@ -249,9 +249,9 @@ type
     QRLabel54: TQRLabel;
     QRDBText17: TQRDBText;
     EKDbSumaProducto: TEKDbSuma;
-    QRDBLogo: TQRDBImage;
-    QRDBImage1: TQRDBImage;
-    QRDBImage3: TQRDBImage;
+    QRDBLogo1: TQRDBImage;
+    QRDBLogo2: TQRDBImage;
+    QRDBLogo4: TQRDBImage;
     QRBand5: TQRBand;
     QRLabel3: TQRLabel;
     QRDBText15: TQRDBText;
@@ -289,7 +289,7 @@ type
     QRDBText6: TQRDBText;
     QRDBText8: TQRDBText;
     QRLabel27: TQRLabel;
-    QRDBImage2: TQRDBImage;
+    QRDBLogo5: TQRDBImage;
     QRBand2: TQRBand;
     QRLabel28: TQRLabel;
     QRLabel29: TQRLabel;
@@ -352,7 +352,7 @@ type
     RepOrdenPago_RENGLON1: TQRLabel;
     QRDBText53: TQRDBText;
     QRLabel71: TQRLabel;
-    QRDBImage4: TQRDBImage;
+    QRDBLogo3: TQRDBImage;
     QRBand17: TQRBand;
     QRLabel77: TQRLabel;
     QRLabel78: TQRLabel;
@@ -411,7 +411,7 @@ type
     QRDBText79: TQRDBText;
     QRDBText80: TQRDBText;
     QRLabel111: TQRLabel;
-    QRDBImage5: TQRDBImage;
+    QRDBLogo6: TQRDBImage;
     QRLabel112: TQRLabel;
     QRLabel113: TQRLabel;
     QRLabel114: TQRLabel;
@@ -534,7 +534,7 @@ type
     QRShape6: TQRShape;
     QRLabel218: TQRLabel;
     RepReciboCtaCte_RENGLON1: TQRLabel;
-    QRDBImage6: TQRDBImage;
+    QRDBLogo7: TQRDBImage;
     QRBand29: TQRBand;
     QRLabel221: TQRLabel;
     QRLabel222: TQRLabel;
@@ -598,6 +598,7 @@ type
     StringField7: TStringField;
     ZQ_FPagoCtaCteFECHA_FP: TDateTimeField;
     EKDbSumaFPagoCtaCte: TEKDbSuma;
+    procedure FormCreate(Sender: TObject);
   private
     reporte: TQuickRep;
     archivoPDF: string;
@@ -819,5 +820,16 @@ begin
   EKVistaPrevia.Reporte:= RepOrdenPago;
 end;
 
+
+procedure TFImpresion_Comprobantes.FormCreate(Sender: TObject);
+begin
+  QRDBLogo1.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo2.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo3.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo4.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo5.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo6.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo7.DataSet:= dm.ZQ_Sucursal;
+end;
 
 end.

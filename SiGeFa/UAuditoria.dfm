@@ -1,8 +1,8 @@
 object FAuditoria: TFAuditoria
-  Left = 310
-  Top = 157
+  Left = 296
+  Top = 129
   Width = 893
-  Height = 547
+  Height = 589
   Caption = 'Auditoria'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,13 +21,13 @@ object FAuditoria: TFAuditoria
     Left = 0
     Top = 0
     Width = 877
-    Height = 457
+    Height = 499
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelGrilla: TPanel
       Left = 0
-      Top = 240
+      Top = 282
       Width = 877
       Height = 217
       Align = alBottom
@@ -106,7 +106,7 @@ object FAuditoria: TFAuditoria
       Left = 0
       Top = 32
       Width = 877
-      Height = 208
+      Height = 250
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -116,7 +116,7 @@ object FAuditoria: TFAuditoria
         Left = 237
         Top = 5
         Width = 635
-        Height = 158
+        Height = 160
         Align = alClient
         Color = 16112578
         DataSource = DS_AudGeneral
@@ -202,7 +202,7 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosTabla: TDBGrid
         Left = 5
-        Top = 163
+        Top = 165
         Width = 867
         Height = 40
         Align = alBottom
@@ -222,7 +222,7 @@ object FAuditoria: TFAuditoria
         Left = 5
         Top = 5
         Width = 232
-        Height = 158
+        Height = 160
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alLeft
         Color = 16112578
@@ -250,6 +250,78 @@ object FAuditoria: TFAuditoria
             Title.Alignment = taCenter
             Title.Caption = 'Tablas del Sistema'
             Width = 220
+            Visible = True
+          end>
+      end
+      object DBGridDatosProducto: TDBGrid
+        Left = 5
+        Top = 205
+        Width = 867
+        Height = 40
+        Align = alBottom
+        Color = 16112578
+        DataSource = DS_DatosProducto
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        ReadOnly = True
+        TabOrder = 3
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridDatosTablaDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'ID_PRODUCTO'
+            Width = 83
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COD_CABECERA'
+            Width = 106
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE'
+            Width = 232
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MEDIDA'
+            Width = 91
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_MARCA'
+            Width = 151
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLOR'
+            Width = 119
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COD_PRODUCTO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CODIGO_BARRA'
+            Width = 173
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ARTICULO'
+            Width = 276
             Visible = True
           end>
       end
@@ -707,8 +779,8 @@ object FAuditoria: TFAuditoria
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 241
-    Top = 296
+    Left = 265
+    Top = 336
     DockControlHeights = (
       0
       0
@@ -799,8 +871,8 @@ object FAuditoria: TFAuditoria
         Name = 'todas_tablas'
         ParamType = ptUnknown
       end>
-    Left = 72
-    Top = 56
+    Left = 52
+    Top = 61
     ParamData = <
       item
         DataType = ftUnknown
@@ -905,8 +977,8 @@ object FAuditoria: TFAuditoria
         Name = 'id_tabla'
         ParamType = ptUnknown
       end>
-    Left = 72
-    Top = 120
+    Left = 52
+    Top = 125
     ParamData = <
       item
         DataType = ftUnknown
@@ -936,24 +1008,24 @@ object FAuditoria: TFAuditoria
   end
   object DS_AudGeneral: TDataSource
     DataSet = ZQ_AudGeneral
-    Left = 176
-    Top = 56
+    Left = 156
+    Top = 61
   end
   object DS_AudDetallada: TDataSource
     DataSet = ZQ_AudDetallada
-    Left = 176
-    Top = 120
+    Left = 156
+    Top = 125
   end
   object ZQ_DatosTabla: TZQuery
     Connection = DM.Conexion
     Params = <>
-    Left = 72
-    Top = 176
+    Left = 52
+    Top = 181
   end
   object DS_DatosTabla: TDataSource
     DataSet = ZQ_DatosTabla
-    Left = 176
-    Top = 176
+    Left = 156
+    Top = 181
   end
   object ZQ_User: TZQuery
     SQL.Strings = (
@@ -963,8 +1035,8 @@ object FAuditoria: TFAuditoria
       'left join aplicaciones a on (p.clave_ap = a.clave)'
       'where a.aplicacion = '#39'ADMINISTRATIVO'#39)
     Params = <>
-    Left = 384
-    Top = 56
+    Left = 376
+    Top = 64
     object ZQ_UserUSUARIO: TStringField
       FieldName = 'USUARIO'
       Required = True
@@ -981,8 +1053,8 @@ object FAuditoria: TFAuditoria
   end
   object DS_User: TDataSource
     DataSet = ZQ_User
-    Left = 472
-    Top = 56
+    Left = 480
+    Top = 64
   end
   object ZQ_ComboUsuario: TZQuery
     SQL.Strings = (
@@ -992,7 +1064,7 @@ object FAuditoria: TFAuditoria
       'left join aplicaciones a on (p.clave_ap = a.clave)'
       'where a.aplicacion = '#39'ADMINISTRATIVO'#39)
     Params = <>
-    Left = 384
+    Left = 376
     Top = 120
   end
   object ZQ_tabla: TZQuery
@@ -1001,8 +1073,8 @@ object FAuditoria: TFAuditoria
       'select distinct lt.table_name'
       'from ibe$log_tables lt')
     Params = <>
-    Left = 72
-    Top = 296
+    Left = 56
+    Top = 336
     object ZQ_tablaTABLE_NAME: TStringField
       FieldName = 'TABLE_NAME'
       Required = True
@@ -1011,16 +1083,16 @@ object FAuditoria: TFAuditoria
   end
   object DS_tabla: TDataSource
     DataSet = CD_Tablas
-    Left = 136
-    Top = 352
+    Left = 160
+    Top = 392
   end
   object CD_Tablas: TClientDataSet
     Aggregates = <>
     PacketRecords = 0
     Params = <>
     AfterScroll = CD_TablasAfterScroll
-    Left = 136
-    Top = 296
+    Left = 160
+    Top = 336
     object CD_Tablas_Tabla: TStringField
       FieldName = '_Tabla'
       Size = 67
@@ -1073,8 +1145,8 @@ object FAuditoria: TFAuditoria
         Name = 'NO_TABLA'
         ParamType = ptUnknown
       end>
-    Left = 240
-    Top = 352
+    Left = 264
+    Top = 392
     ParamData = <
       item
         DataType = ftUnknown
@@ -1122,7 +1194,147 @@ object FAuditoria: TFAuditoria
     combo = cBoxUsuarios
     CampoClave = 'db_usr'
     CampoVer = 'nombre'
-    Left = 472
+    Left = 480
     Top = 120
+  end
+  object ZQ_DatosStock: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select p.id_producto, pc.cod_corto as cod_cabecera, pc.nombre, m' +
+        'e.medida, ma.nombre_marca, c.nombre as color,'
+      
+        '       p.cod_corto as cod_producto, p.codigo_barra, a.descripcio' +
+        'n as articulo'
+      'from stock_producto s'
+      'left join producto p on (s.id_producto = p.id_producto)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera = p.id_pr' +
+        'od_cabecera)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'left join color c on (pc.color = c.id_color)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      'left join medida me on (p.id_medida = me.id_medida)'
+      'where s.id_stock_producto = :id_stock')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_stock'
+        ParamType = ptUnknown
+      end>
+    Left = 528
+    Top = 226
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_stock'
+        ParamType = ptUnknown
+      end>
+    object ZQ_DatosStockCOD_CABECERA: TStringField
+      FieldName = 'COD_CABECERA'
+    end
+    object ZQ_DatosStockNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 100
+    end
+    object ZQ_DatosStockMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_DatosStockNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_DatosStockCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
+    object ZQ_DatosStockCOD_PRODUCTO: TStringField
+      FieldName = 'COD_PRODUCTO'
+    end
+    object ZQ_DatosStockCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_DatosStockARTICULO: TStringField
+      FieldName = 'ARTICULO'
+      Size = 200
+    end
+    object ZQ_DatosStockID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+  end
+  object DS_DatosProducto: TDataSource
+    DataSet = ZQ_DatosStock
+    Left = 432
+    Top = 226
+  end
+  object ZQ_DatosProducto: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select p.id_producto, pc.cod_corto as cod_cabecera, pc.nombre, m' +
+        'e.medida, ma.nombre_marca, c.nombre as color,'
+      
+        '       p.cod_corto as cod_producto, p.codigo_barra, a.descripcio' +
+        'n as articulo'
+      'from producto p'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera = p.id_pr' +
+        'od_cabecera)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'left join color c on (pc.color = c.id_color)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      'left join medida me on (p.id_medida = me.id_medida)'
+      'where (p.id_producto = :id_producto)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_producto'
+        ParamType = ptUnknown
+      end>
+    Left = 632
+    Top = 226
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_producto'
+        ParamType = ptUnknown
+      end>
+    object ZQ_DatosProductoCOD_CABECERA: TStringField
+      FieldName = 'COD_CABECERA'
+    end
+    object ZQ_DatosProductoNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 100
+    end
+    object ZQ_DatosProductoMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_DatosProductoNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_DatosProductoCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
+    object ZQ_DatosProductoCOD_PRODUCTO: TStringField
+      FieldName = 'COD_PRODUCTO'
+    end
+    object ZQ_DatosProductoCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_DatosProductoARTICULO: TStringField
+      FieldName = 'ARTICULO'
+      Size = 200
+    end
+    object ZQ_DatosProductoID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
   end
 end

@@ -1,6 +1,6 @@
 object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
-  Left = 491
-  Top = 226
+  Left = 354
+  Top = 160
   Width = 870
   Height = 500
   Caption = 'ABM Transferencia'
@@ -27,17 +27,18 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object RepCuentas: TQuickRep
+    object RepTransf: TQuickRep
       Tag = 99
-      Left = 28
+      Left = 36
       Top = 44
-      Width = 794
-      Height = 1123
+      Width = 1123
+      Height = 794
       Frame.Color = clBlack
       Frame.DrawTop = False
       Frame.DrawBottom = False
       Frame.DrawLeft = False
       Frame.DrawRight = False
+      DataSet = ZQ_VerCpb_Fpago
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -53,13 +54,13 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         #39#39)
       Options = [FirstPageHeader, LastPageFooter]
       Page.Columns = 1
-      Page.Orientation = poPortrait
+      Page.Orientation = poLandscape
       Page.PaperSize = A4
       Page.Values = (
         100.000000000000000000
-        2970.000000000000000000
-        100.000000000000000000
         2100.000000000000000000
+        100.000000000000000000
+        2970.000000000000000000
         100.000000000000000000
         100.000000000000000000
         0.000000000000000000)
@@ -91,7 +92,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         Tag = 99
         Left = 38
         Top = 38
-        Width = 718
+        Width = 1047
         Height = 72
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -105,7 +106,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         ForceNewPage = False
         Size.Values = (
           190.500000000000000000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageHeader
@@ -128,9 +129,9 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Stretch = True
         end
         object QRLabel17: TQRLabel
-          Left = 316
+          Left = 442
           Top = 47
-          Width = 85
+          Width = 163
           Height = 19
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -139,14 +140,14 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            836.083333333333300000
+            1169.458333333333000000
             124.354166666666700000
-            224.895833333333300000)
+            431.270833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'CUENTAS'
+          Caption = 'TRANSFERENCIAS'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -159,10 +160,10 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           ExportAs = exptText
           FontSize = 12
         end
-        object RepCuentas_Subtitulo: TQRLabel
-          Left = 284
+        object RepTransf_Subtitulo: TQRLabel
+          Left = 454
           Top = 26
-          Width = 150
+          Width = 138
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -171,14 +172,14 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            751.416666666666700000
+            1201.208333333333000000
             68.791666666666670000
-            396.875000000000000000)
+            365.125000000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepCuentas_Subtitulo'
+          Caption = 'RepTransf_Subtitulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -191,10 +192,10 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           ExportAs = exptText
           FontSize = 9
         end
-        object RepCuentas_Titulo: TQRLabel
-          Left = 275
+        object RepTransf_Titulo: TQRLabel
+          Left = 446
           Top = 2
-          Width = 168
+          Width = 154
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -203,14 +204,14 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            727.604166666666700000
+            1180.041666666667000000
             5.291666666666667000
-            444.500000000000000000)
+            407.458333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepCuentas_Titulo'
+          Caption = 'RepTransf_Titulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -228,7 +229,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         Tag = 99
         Left = 38
         Top = 159
-        Width = 718
+        Width = 1047
         Height = 14
         Frame.Color = clSilver
         Frame.DrawTop = False
@@ -248,10 +249,37 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         ParentFont = False
         Size.Values = (
           37.041666666666670000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbDetail
+        object QRDBText4: TQRDBText
+          Left = 538
+          Top = 0
+          Width = 255
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1423.458333333333000000
+            0.000000000000000000
+            674.687500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_VerCpb_Fpago
+          DataField = 'CTA_INGRESO'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
         object QRDBText19: TQRDBText
           Left = 5
           Top = 0
@@ -267,21 +295,22 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
             13.229166666666670000
             0.000000000000000000
             171.979166666666700000)
-          Alignment = taLeftJustify
+          Alignment = taCenter
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataField = 'CODIGO'
+          DataSet = ZQ_VerCpb_Fpago
+          DataField = 'FECHA'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText1: TQRDBText
-          Left = 76
+          Left = 156
           Top = 0
-          Width = 309
+          Width = 62
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -290,24 +319,25 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            201.083333333333300000
+            412.750000000000000000
             0.000000000000000000
-            817.562500000000000000)
-          Alignment = taLeftJustify
+            164.041666666666700000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataField = 'NOMBRE_CUENTA'
+          DataSet = ZQ_VerCpb_Fpago
+          DataField = 'NUMERO_CPB'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText2: TQRDBText
-          Left = 684
+          Left = 936
           Top = 0
-          Width = 30
+          Width = 106
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -316,24 +346,25 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1809.750000000000000000
+            2476.500000000000000000
             0.000000000000000000
-            79.375000000000000000)
-          Alignment = taCenter
+            280.458333333333300000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataField = 'BAJA'
+          DataSet = ZQ_VerCpb_Fpago
+          DataField = 'IMPORTE_TOTAL'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText3: TQRDBText
-          Left = 391
+          Left = 231
           Top = 0
-          Width = 141
+          Width = 298
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -342,24 +373,25 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1034.520833333333000000
+            611.187500000000000000
             0.000000000000000000
-            373.062500000000000000)
+            788.458333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataField = 'NRO_CTA_BANCARIA'
+          DataSet = ZQ_VerCpb_Fpago
+          DataField = 'CTA_EGRESO'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
-        object QRDBText4: TQRDBText
-          Left = 538
+        object QRDBText5: TQRDBText
+          Left = 800
           Top = 0
-          Width = 141
+          Width = 127
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -368,15 +400,43 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1423.458333333333000000
+            2116.666666666667000000
             0.000000000000000000
-            373.062500000000000000)
-          Alignment = taLeftJustify
+            336.020833333333300000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataField = '_medio'
+          DataSet = ZQ_VerCpb_Fpago
+          DataField = 'MDCP_CHEQUE'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText6: TQRDBText
+          Left = 77
+          Top = 0
+          Width = 65
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            203.729166666666700000
+            0.000000000000000000
+            171.979166666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_VerCpb_Fpago
+          DataField = 'FECHA_ANULADO'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -387,7 +447,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         Tag = 99
         Left = 38
         Top = 195
-        Width = 718
+        Width = 1047
         Height = 24
         Frame.Color = clBlack
         Frame.DrawTop = True
@@ -401,7 +461,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         ForceNewPage = False
         Size.Values = (
           63.500000000000000000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageFooter
@@ -438,7 +498,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           FontSize = 7
         end
         object QRLabel43: TQRLabel
-          Left = 629
+          Left = 957
           Top = 3
           Width = 39
           Height = 20
@@ -449,7 +509,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            1664.229166666667000000
+            2532.062500000000000000
             7.937500000000000000
             103.187500000000000000)
           Alignment = taLeftJustify
@@ -470,7 +530,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           FontSize = 7
         end
         object QRSysData1: TQRSysData
-          Left = 671
+          Left = 999
           Top = 3
           Width = 45
           Height = 20
@@ -480,8 +540,8 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666660000
-            1775.354166666667000000
+            52.916666666666670000
+            2643.187500000000000000
             7.937500000000000000
             119.062500000000000000)
           Alignment = taLeftJustify
@@ -504,7 +564,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         Tag = 99
         Left = 38
         Top = 173
-        Width = 718
+        Width = 1047
         Height = 22
         Frame.Color = clBlack
         Frame.DrawTop = True
@@ -518,7 +578,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         ForceNewPage = False
         Size.Values = (
           58.208333333333330000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbSummary
@@ -554,7 +614,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         Tag = 99
         Left = 38
         Top = 110
-        Width = 718
+        Width = 1047
         Height = 31
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -568,7 +628,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         ForceNewPage = False
         Size.Values = (
           82.020833333333330000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbTitle
@@ -641,7 +701,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         Tag = 99
         Left = 38
         Top = 141
-        Width = 718
+        Width = 1047
         Height = 18
         Frame.Color = clBlack
         Frame.DrawTop = True
@@ -655,7 +715,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         ForceNewPage = False
         Size.Values = (
           47.625000000000000000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbColumnHeader
@@ -674,11 +734,11 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
             10.583333333333330000
             5.291666666666667000
             171.979166666666700000)
-          Alignment = taLeftJustify
+          Alignment = taCenter
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'C'#243'digo'
+          Caption = 'Fecha'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -692,9 +752,9 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           FontSize = 8
         end
         object QRLabel30: TQRLabel
-          Left = 76
+          Left = 156
           Top = 2
-          Width = 143
+          Width = 62
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -703,14 +763,14 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            201.083333333333300000
+            412.750000000000000000
             5.291666666666667000
-            378.354166666666700000)
-          Alignment = taLeftJustify
+            164.041666666666700000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Nombre'
+          Caption = 'N'#250'mero'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -724,9 +784,9 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           FontSize = 8
         end
         object QRLabel1: TQRLabel
-          Left = 684
+          Left = 988
           Top = 2
-          Width = 30
+          Width = 54
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -735,14 +795,14 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1809.750000000000000000
+            2614.083333333333000000
             5.291666666666667000
-            79.375000000000000000)
-          Alignment = taLeftJustify
+            142.875000000000000000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
-          Caption = 'Baja'
+          Caption = 'Importe'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -756,7 +816,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           FontSize = 8
         end
         object QRLabel2: TQRLabel
-          Left = 391
+          Left = 231
           Top = 2
           Width = 143
           Height = 14
@@ -767,14 +827,14 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1034.520833333333000000
+            611.187500000000000000
             5.291666666666667000
             378.354166666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Nro. Cta. Bancaria'
+          Caption = 'Cta. Egreso'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -806,7 +866,71 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Medio Cobro/Pago'
+          Caption = 'Cta Ingreso'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel4: TQRLabel
+          Left = 800
+          Top = 2
+          Width = 127
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2116.666666666667000000
+            5.291666666666667000
+            336.020833333333300000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Nro. Transferencia'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel5: TQRLabel
+          Left = 76
+          Top = 2
+          Width = 65
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            201.083333333333300000
+            5.291666666666667000
+            171.979166666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Anulado'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -856,51 +980,81 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         Columns = <
           item
             Expanded = False
-            FieldName = 'FECHA_FP'
+            FieldName = 'FECHA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Fecha'
+            Width = 83
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'NUMERO_CPB'
+            Title.Alignment = taCenter
+            Title.Caption = 'N'#250'mero'
+            Width = 102
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'MDCP_CHEQUE'
-            Width = 214
+            Title.Alignment = taCenter
+            Title.Caption = 'Nro. Transferencia'
+            Width = 129
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'CTA_EGRESO_CODIGO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd.'
+            Width = 43
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'CTA_EGRESO'
-            Width = 133
+            Title.Alignment = taCenter
+            Title.Caption = 'Cta. Egreso'
+            Width = 289
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'CTA_INGRESO_CODIGO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd.'
+            Width = 46
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'CTA_INGRESO'
-            Width = 182
+            Title.Alignment = taCenter
+            Title.Caption = 'Cta. Ingreso'
+            Width = 258
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'IMPORTE_TOTAL'
+            Title.Alignment = taCenter
+            Title.Caption = 'Importe'
+            Width = 123
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'OBSERVACION'
-            Width = 200
+            Title.Alignment = taCenter
+            Title.Caption = 'Descripci'#243'n'
+            Width = 388
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FECHA_ANULADO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Anulado'
             Visible = True
           end>
       end
@@ -1287,12 +1441,12 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
             Visible = True
           end
           item
-            BeginGroup = True
-            Item = btnBaja
+            Item = btnConfirmar
             Visible = True
           end
           item
-            Item = btnReactivar
+            BeginGroup = True
+            Item = btnBaja
             Visible = True
           end
           item
@@ -1662,21 +1816,12 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
-      Caption = 'F5 - Baja'
+      Caption = 'F5 - Anular'
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
       ImageIndex = 25
       OnClick = btnBajaClick
-      AutoGrayScale = False
-    end
-    object btnReactivar: TdxBarLargeButton
-      Caption = 'F6 - Reactivar'
-      Category = 0
-      Hint = 'Reactiva un registro'
-      Visible = ivAlways
-      ImageIndex = 24
-      OnClick = btnReactivarClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
@@ -1717,6 +1862,15 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnConfirmar: TdxBarLargeButton
+      Caption = 'F4 - Confirmar'
+      Category = 0
+      Hint = 'F4 - Confirmar'
+      Visible = ivAlways
+      ImageIndex = 5
+      OnClick = btnConfirmarClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -1725,8 +1879,8 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         'btnVerDetalle'
         'btnBaja'
         'btnSalir'
-        'btnReactivar'
-        'btnImprimir')
+        'btnImprimir'
+        'btnConfirmar')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -1754,19 +1908,15 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       ShortCut = 114
       OnExecute = AModificarExecute
     end
-    object AEliminar: TAction
-      Caption = 'AEliminar'
+    object AConfirmar: TAction
+      Caption = 'AConfirmar'
       ShortCut = 115
+      OnExecute = AConfirmarExecute
     end
     object ABaja: TAction
       Caption = 'ABaja'
       ShortCut = 116
       OnExecute = ABajaExecute
-    end
-    object AReactivar: TAction
-      Caption = 'AReactivar'
-      ShortCut = 117
-      OnExecute = AReactivarExecute
     end
     object AGuardar: TAction
       Caption = 'AGuardar'
@@ -1841,7 +1991,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
     Top = 48
   end
   object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = RepCuentas
+    Reporte = RepTransf
     ShowModal = False
     Left = 48
     Top = 98
@@ -1924,6 +2074,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
     end
     object ZQ_ComprobanteIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
+      currency = True
     end
     object ZQ_ComprobanteIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
@@ -2137,39 +2288,39 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
     Grilla = DBGridTransferencia
     Filtros = <
       item
-        TituloColumna = 'FECHA_FP'
+        TituloColumna = 'Fecha'
         Visible = True
       end
       item
-        TituloColumna = 'NUMERO_CPB'
+        TituloColumna = 'N'#250'mero'
         Visible = True
       end
       item
-        TituloColumna = 'MDCP_CHEQUE'
+        TituloColumna = 'Nro. Transferencia'
         Visible = True
       end
       item
-        TituloColumna = 'CTA_EGRESO_CODIGO'
+        TituloColumna = 'C'#243'd.'
         Visible = True
       end
       item
-        TituloColumna = 'CTA_EGRESO'
+        TituloColumna = 'Cta. Egreso'
         Visible = True
       end
       item
-        TituloColumna = 'CTA_INGRESO_CODIGO'
+        TituloColumna = 'C'#243'd.'
         Visible = True
       end
       item
-        TituloColumna = 'CTA_INGRESO'
+        TituloColumna = 'Cta. Ingreso'
         Visible = True
       end
       item
-        TituloColumna = 'IMPORTE_TOTAL'
+        TituloColumna = 'Importe'
         Visible = True
       end
       item
-        TituloColumna = 'OBSERVACION'
+        TituloColumna = 'Descripci'#243'n'
         Visible = True
       end>
     AltoTituloColumna = 15
@@ -2214,7 +2365,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         ParamType = ptUnknown
       end>
     Left = 333
-    Top = 153
+    Top = 145
     ParamData = <
       item
         DataType = ftUnknown
@@ -2248,14 +2399,19 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
   object ZQ_VerCpb_Fpago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select cpbf.*, tipo.descripcion as nombtr_tipo,'
+      
+        'select cast(c.fecha as Date) as Fecha, c.numero_cpb, cpbf.mdcp_c' +
+        'heque,'
       
         '       egr.codigo as cta_egreso_codigo, egr.nombre_cuenta as cta' +
         '_egreso,'
       
         '       ing.codigo as cta_ingreso_codigo, ing.nombre_cuenta as ct' +
         'a_ingreso,'
-      '       c.*'
+      
+        '       c.importe_total, c.observacion, c.id_comp_estado, c.id_co' +
+        'mprobante,'
+      '       cast(c.fecha_anulado as Date) as fecha_anulado'
       'from comprobante_forma_pago cpbf'
       
         'left join tipo_formapago tipo on (cpbf.id_tipo_formapag = tipo.i' +
@@ -2269,48 +2425,16 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
     Params = <>
     Left = 417
     Top = 52
-    object ZQ_VerCpb_FpagoID_COMPROB_FP: TIntegerField
-      FieldName = 'ID_COMPROB_FP'
-      Required = True
+    object ZQ_VerCpb_FpagoFECHA: TDateField
+      FieldName = 'FECHA'
+      ReadOnly = True
     end
-    object ZQ_VerCpb_FpagoID_COMPROBANTE: TIntegerField
-      FieldName = 'ID_COMPROBANTE'
-    end
-    object ZQ_VerCpb_FpagoID_TIPO_FORMAPAG: TIntegerField
-      FieldName = 'ID_TIPO_FORMAPAG'
-      Required = True
-    end
-    object ZQ_VerCpb_FpagoMDCP_FECHA: TDateField
-      FieldName = 'MDCP_FECHA'
-    end
-    object ZQ_VerCpb_FpagoMDCP_BANCO: TStringField
-      FieldName = 'MDCP_BANCO'
-      Size = 50
+    object ZQ_VerCpb_FpagoNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
+      DisplayFormat = '00000000'
     end
     object ZQ_VerCpb_FpagoMDCP_CHEQUE: TStringField
       FieldName = 'MDCP_CHEQUE'
-      Size = 50
-    end
-    object ZQ_VerCpb_FpagoIMPORTE: TFloatField
-      FieldName = 'IMPORTE'
-    end
-    object ZQ_VerCpb_FpagoCONCILIADO: TDateField
-      FieldName = 'CONCILIADO'
-    end
-    object ZQ_VerCpb_FpagoCUENTA_INGRESO: TIntegerField
-      FieldName = 'CUENTA_INGRESO'
-    end
-    object ZQ_VerCpb_FpagoCUENTA_EGRESO: TIntegerField
-      FieldName = 'CUENTA_EGRESO'
-    end
-    object ZQ_VerCpb_FpagoFECHA_FP: TDateTimeField
-      FieldName = 'FECHA_FP'
-    end
-    object ZQ_VerCpb_FpagoIMPORTE_REAL: TFloatField
-      FieldName = 'IMPORTE_REAL'
-    end
-    object ZQ_VerCpb_FpagoNOMBTR_TIPO: TStringField
-      FieldName = 'NOMBTR_TIPO'
       Size = 50
     end
     object ZQ_VerCpb_FpagoCTA_EGRESO_CODIGO: TStringField
@@ -2329,95 +2453,23 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       FieldName = 'CTA_INGRESO'
       Size = 50
     end
-    object ZQ_VerCpb_FpagoID_SUCURSAL: TIntegerField
-      FieldName = 'ID_SUCURSAL'
-      Required = True
-    end
-    object ZQ_VerCpb_FpagoID_PROVEEDOR: TIntegerField
-      FieldName = 'ID_PROVEEDOR'
-    end
-    object ZQ_VerCpb_FpagoID_CLIENTE: TIntegerField
-      FieldName = 'ID_CLIENTE'
-    end
-    object ZQ_VerCpb_FpagoID_TIPO_CPB: TIntegerField
-      FieldName = 'ID_TIPO_CPB'
-      Required = True
-    end
-    object ZQ_VerCpb_FpagoID_VENDEDOR: TIntegerField
-      FieldName = 'ID_VENDEDOR'
-    end
-    object ZQ_VerCpb_FpagoID_COMP_ESTADO: TIntegerField
-      FieldName = 'ID_COMP_ESTADO'
-    end
-    object ZQ_VerCpb_FpagoCODIGO: TStringField
-      FieldName = 'CODIGO'
-      Size = 50
-    end
-    object ZQ_VerCpb_FpagoFECHA: TDateTimeField
-      FieldName = 'FECHA'
+    object ZQ_VerCpb_FpagoIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+      currency = True
     end
     object ZQ_VerCpb_FpagoOBSERVACION: TStringField
       FieldName = 'OBSERVACION'
       Size = 500
     end
-    object ZQ_VerCpb_FpagoBASE_IMPONIBLE: TFloatField
-      FieldName = 'BASE_IMPONIBLE'
+    object ZQ_VerCpb_FpagoID_COMP_ESTADO: TIntegerField
+      FieldName = 'ID_COMP_ESTADO'
     end
-    object ZQ_VerCpb_FpagoSALDO: TFloatField
-      FieldName = 'SALDO'
-    end
-    object ZQ_VerCpb_FpagoIMPORTE_TOTAL: TFloatField
-      FieldName = 'IMPORTE_TOTAL'
-    end
-    object ZQ_VerCpb_FpagoPORC_IVA: TFloatField
-      FieldName = 'PORC_IVA'
-    end
-    object ZQ_VerCpb_FpagoIMPORTE_IVA: TFloatField
-      FieldName = 'IMPORTE_IVA'
-    end
-    object ZQ_VerCpb_FpagoPORC_DESCUENTO: TFloatField
-      FieldName = 'PORC_DESCUENTO'
-    end
-    object ZQ_VerCpb_FpagoIMPORTE_DESCUENTO: TFloatField
-      FieldName = 'IMPORTE_DESCUENTO'
-    end
-    object ZQ_VerCpb_FpagoENCABEZADO: TStringField
-      FieldName = 'ENCABEZADO'
-      Size = 500
-    end
-    object ZQ_VerCpb_FpagoPIE: TStringField
-      FieldName = 'PIE'
-      Size = 500
-    end
-    object ZQ_VerCpb_FpagoFECHA_COBRADA: TDateField
-      FieldName = 'FECHA_COBRADA'
-    end
-    object ZQ_VerCpb_FpagoFECHA_ENVIADA: TDateField
-      FieldName = 'FECHA_ENVIADA'
-    end
-    object ZQ_VerCpb_FpagoFECHA_IMPRESA: TDateField
-      FieldName = 'FECHA_IMPRESA'
-    end
-    object ZQ_VerCpb_FpagoFECHA_VENCIMIENTO: TDateField
-      FieldName = 'FECHA_VENCIMIENTO'
-    end
-    object ZQ_VerCpb_FpagoPUNTO_VENTA: TIntegerField
-      FieldName = 'PUNTO_VENTA'
-    end
-    object ZQ_VerCpb_FpagoNUMERO_CPB: TIntegerField
-      FieldName = 'NUMERO_CPB'
+    object ZQ_VerCpb_FpagoID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+      Required = True
     end
     object ZQ_VerCpb_FpagoFECHA_ANULADO: TDateField
       FieldName = 'FECHA_ANULADO'
-    end
-    object ZQ_VerCpb_FpagoID_TIPO_IVA: TIntegerField
-      FieldName = 'ID_TIPO_IVA'
-    end
-    object ZQ_VerCpb_FpagoID_TIPO_MOVIMIENTO: TIntegerField
-      FieldName = 'ID_TIPO_MOVIMIENTO'
-    end
-    object ZQ_VerCpb_FpagoIMPORTE_VENTA: TFloatField
-      FieldName = 'IMPORTE_VENTA'
     end
   end
   object DS_VerCpb_Fpago: TDataSource
