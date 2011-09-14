@@ -335,6 +335,9 @@ type
     Label33: TLabel;
     btnConfirmarVenta: TBitBtn;
     btnCancelarVenta: TBitBtn;
+    Label34: TLabel;
+    DBEdit16: TDBEdit;
+    Label35: TLabel;
     procedure btBuscProdClick(Sender: TObject);
     procedure VerLectorCB(sino: Boolean);
     procedure IdentificarCodigo();
@@ -380,6 +383,11 @@ type
     procedure EKDbSuma1SumListChanged(Sender: TObject);
     procedure guardarComprobante();
     procedure btnCancelarVentaClick(Sender: TObject);
+    procedure Prorrateo();
+    procedure grabarDetallesFactura;
+    procedure DBEdit16Exit(Sender: TObject);
+    procedure recalcularBoleta();
+    procedure btnConfirmarVentaClick(Sender: TObject);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -500,7 +508,7 @@ begin
   if (CD_DetalleFactura.State<>dsBrowse) then
    begin
       CD_DetalleFacturaCANTIDAD.AsFloat:=1;
-      CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=descCliente;
+      CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=0;
       CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=0;
    end;
   RelojStock.Enabled:=false;
@@ -656,6 +664,7 @@ begin
   lblMaxVenta.Visible:=False;
   //lblSinStock.Visible:=False;
   EKDbSuma1.SumCollection[0].SumValue := 0;
+  EKDbSuma1.SumCollection[1].SumValue := 0;
 
   CD_Comprobante.EmptyDataSet;
   CD_Comprobante.Append;
@@ -671,6 +680,9 @@ begin
   CD_ComprobanteIMPORTE_TOTAL.AsFloat:=0;
   CD_ComprobantePORC_IVA.AsFloat:=ClienteIVA;
   CD_ComprobanteIMPORTE_IVA.AsInteger:=0;
+
+  if descCliente<0 then descCliente:=descCliente*100;
+
   CD_ComprobantePORC_DESCUENTO.AsFloat:=descCliente/100;
   CD_ComprobanteIMPORTE_DESCUENTO.AsInteger:=0;
   CD_ComprobanteENCABEZADO.AsString:='';
@@ -767,7 +779,7 @@ begin
 
       CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
       CD_ComprobanteID_TIPO_IVA.AsInteger:=IdClienteIVA;
-
+      CD_ComprobantePORC_DESCUENTO.AsFloat:=descCliente;
      end;
      vsel2.Close;
 end;
@@ -856,12 +868,12 @@ begin
         CD_DetalleFactura.Append;
         CD_DetalleFacturaID_PRODUCTO.AsInteger:=prod;
         CD_DetalleFacturaDETALLE.AsString:=detalle;
+        CD_DetalleFacturaCANTIDAD.AsFloat:=1;
         CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=ZQ_ProductosPRECIO_VENTA.AsFloat;
-        CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat*100)+descCliente;
+        CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat*100);
         CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:=ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
         CD_DetalleFacturaPORC_IVA.AsFloat:=ZQ_ProductosIMPUESTO_IVA.AsFloat;
         CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:=(CD_DetalleFacturaCANTIDAD.AsInteger*CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
-        CD_DetalleFacturaCANTIDAD.AsFloat:=1;
         CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
         CD_DetalleFacturaIMPORTE_IVA.AsFloat:=CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
 
@@ -891,6 +903,8 @@ begin
  if ((not(ZQ_Productos.IsEmpty))and(CD_DetalleFacturaCANTIDAD.AsFloat>0)) then
   if (ZQ_ProductosSTOCK_ACTUAL.AsFloat>=CD_DetalleFacturaCANTIDAD.AsFloat) then
    begin
+    CD_DetalleFacturaIMPORTE_VENTA.AsFloat:=CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
+    CD_DetalleFacturaIMPORTE_IVA.AsFloat:=CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
     CD_DetalleFactura.Post;
     lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
     modoLecturaProd();
@@ -1049,10 +1063,7 @@ begin
   dm.centrarPanel(FABM_Preventa, PConfirmarVenta);
   PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
 
-  lblVtaTotal.Caption:= FormatFloat('$ ##,###,##0.00 ', acumulado);
-  lblVtaIVA.Caption:= FormatFloat('$ ##,###,##0.00 ', acumulado*ClienteIVA);
-  lblVtaDesc.Caption:= FormatFloat('$ ##,###,##0.00 ', acumulado*descCliente/100);
-  lblVtaSubtotal.Caption:= FormatFloat('$ ##,###,##0.00 ', acumulado-acumulado*ClienteIVA);
+  recalcularBoleta();
 
 end;
 
@@ -1087,11 +1098,7 @@ begin
 if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
  if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_ComprobanteDetalle]) then
    begin
-      CD_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat;
-      CD_ComprobanteIMPORTE_IVA.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat*CD_ComprobantePORC_IVA.AsFloat;
-      CD_ComprobanteIMPORTE_TOTAL.AsFloat:=CD_ComprobanteBASE_IMPONIBLE.AsFloat+CD_ComprobanteIMPORTE_IVA.AsFloat;
-      CD_ComprobanteSALDO.AsFloat:=0;
-      CD_ComprobanteIMPORTE_VENTA.AsFloat := CD_ComprobanteIMPORTE_TOTAL.AsFloat;
+
       CD_Comprobante.Post;
 
       ZQ_Comprobante.Append;
@@ -1112,7 +1119,7 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
       ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:=CD_ComprobanteIMPORTE_TOTAL.Value;
       ZQ_ComprobantePORC_IVA.AsFloat:=CD_ComprobantePORC_IVA.Value;
       ZQ_ComprobanteIMPORTE_IVA.AsFloat:=CD_ComprobanteIMPORTE_IVA.AsFloat;
-      ZQ_ComprobantePORC_DESCUENTO.AsFloat:=CD_ComprobantePORC_DESCUENTO.AsFloat;
+      ZQ_ComprobantePORC_DESCUENTO.AsFloat:=CD_ComprobantePORC_DESCUENTO.AsFloat/100;
       ZQ_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteIMPORTE_DESCUENTO.AsFloat;
       ZQ_ComprobanteIMPORTE_VENTA.AsFloat := CD_ComprobanteIMPORTE_VENTA.AsFloat;
       ZQ_ComprobanteIMPORTE_IVA.AsFloat := CD_ComprobanteIMPORTE_IVA.AsFloat;
@@ -1125,7 +1132,7 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
       ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
       ZQ_Comprobante.Post;
 
-      //grabarDetallesFactura();
+      grabarDetallesFactura();
    end;
 
    try
@@ -1152,6 +1159,104 @@ end;
 
 procedure TFABM_Preventa.btnCancelarVentaClick(Sender: TObject);
 begin
+  PConfirmarVenta.Visible:=False;
+  PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
+end;
+
+procedure TFABM_Preventa.grabarDetallesFactura;
+begin
+
+    //Prorrateo();
+
+    CD_DetalleFactura.First;
+      while not CD_DetalleFactura.Eof do
+      begin
+        ZQ_ComprobanteDetalle.Open;
+        ZQ_ComprobanteDetalle.Append;
+        ZQ_ComprobanteDetalleID_COMPROBANTE.AsInteger := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+        ZQ_ComprobanteDetalleID_PRODUCTO.AsInteger:=CD_DetalleFacturaID_PRODUCTO.AsInteger;
+        ZQ_ComprobanteDetalleDETALLE.AsString:=CD_DetalleFacturaDETALLE.AsString;
+        ZQ_ComprobanteDetalleCANTIDAD.AsInteger := CD_DetalleFacturaCANTIDAD.AsInteger;
+        ZQ_ComprobanteDetalleIMPORTE_FINAL.AsFloat:=CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
+        ZQ_ComprobanteDetallePORC_DESCUENTO.AsFloat:=CD_DetalleFacturaPORC_DESCUENTO.AsFloat;
+        ZQ_ComprobanteDetalleBASE_IMPONIBLE.AsFloat := CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
+        ZQ_ComprobanteDetalleIMPORTE_UNITARIO.AsFloat:=CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
+        ZQ_ComprobanteDetalleIMPUESTO_INTERNO.AsFloat:=CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat;
+        ZQ_ComprobanteDetallePORC_IVA.AsFloat := CD_DetalleFacturaPORC_IVA.AsFloat;
+        ZQ_ComprobanteDetalleIMPORTE_IVA.AsFloat:= CD_DetalleFacturaIMPORTE_IVA.AsFloat;
+        ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
+        ZQ_ComprobanteDetalle.Post;
+
+        CD_DetalleFactura.Next;
+      end;
+end;
+
+procedure TFABM_Preventa.Prorrateo();
+var
+totalProds,totalFP,coefic,acum:Double;
+cant,i:Integer;
+begin
+//  //Can Productos
+//  cant:=CD_DetalleFactura.RecordCount;
+//  totalProds:=acumulado;
+//  totalFP:=acumFpagoReal;
+//  acum:=0;
+////  CD_Fpago.First;
+////  while not(CD_Fpago.Eof) do
+////   begin
+////      ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
+////      if (ZQ_FormasPagoIF.AsString='S') then
+////       totalFP:=totalFP + CD_FpagoIMPORTE.AsFloat;
+////      CD_Fpago.Next;
+////   end;
+//   coefic:= (totalFP/totalProds);
+//
+//   if (totalFP>0) then
+//    begin
+//      CD_DetalleFactura.First;
+//       i:=1;
+//       while not(CD_DetalleFactura.Eof) do
+//       begin
+//          CD_DetalleFactura.Edit;
+//          //Si es el último
+//          if (i=cant) then
+//              begin
+//                CD_DetalleFacturaIMPORTE_VENTA.AsFloat := totalFP - acum;
+//              end
+//          else
+//              CD_DetalleFacturaIMPORTE_VENTA.AsFloat := CD_DetalleFacturaIMPORTE_FINAL.AsFloat * coefic;
+//
+//          acum:= acum+CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
+//          CD_DetalleFactura.Post;
+//          CD_DetalleFactura.Next;
+//          i:=i+1;
+//
+//       end;
+//    end
+end;
+
+procedure TFABM_Preventa.DBEdit16Exit(Sender: TObject);
+begin
+    recalcularBoleta();
+end;
+
+procedure TFABM_Preventa.recalcularBoleta;
+begin
+  CD_ComprobanteIMPORTE_TOTAL.AsFloat:=acumulado;
+  CD_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteIMPORTE_TOTAL.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100;
+
+  CD_ComprobanteSALDO.AsFloat:=0;
+  CD_ComprobanteIMPORTE_VENTA.AsFloat := CD_ComprobanteIMPORTE_TOTAL.AsFloat-CD_ComprobanteIMPORTE_DESCUENTO.AsFloat;
+  CD_ComprobanteIMPORTE_IVA.AsFloat:=CD_ComprobanteIMPORTE_VENTA.AsFloat*CD_ComprobantePORC_IVA.AsFloat;
+  lblVtaTotal.Caption:= FormatFloat('$ ##,###,##0.00 ', CD_ComprobanteIMPORTE_VENTA.AsFloat);
+  lblVtaIVA.Caption:= FormatFloat('$ ##,###,##0.00 ', CD_ComprobanteIMPORTE_IVA.AsFloat);
+  lblVtaDesc.Caption:= FormatFloat('$ ##,###,##0.00 ',CD_ComprobanteIMPORTE_DESCUENTO.AsFloat);
+  lblVtaSubtotal.Caption:= FormatFloat('$ ##,###,##0.00 ', CD_ComprobanteIMPORTE_TOTAL.AsFloat-CD_ComprobanteIMPORTE_IVA.AsFloat);
+end;
+
+procedure TFABM_Preventa.btnConfirmarVentaClick(Sender: TObject);
+begin
+  guardarComprobante();
   PConfirmarVenta.Visible:=False;
   PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
 end;
