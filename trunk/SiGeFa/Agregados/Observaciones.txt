@@ -1,6 +1,4 @@
 --------------------- PENDIENTE -------------------------------------------
-* Remitos con importe total (Indica el valor total de la mercaderia enviada).
-
 * Levantar presupuesto con el cajero.
 
 * Alerta de dias para la cuenta corriente. Cuando un cliente esta atrasado en una cancelacion de
@@ -19,9 +17,13 @@
 	cuando se guarda se pregunta si se quieren modificar los precios de costo de los productos.
 	Permitir la carga del comprobante del banco de la transeferencia bancaria.
 
+* Registras las transferencias de productos entre sucursales, ya sea creando una tabla nueva o tomando
+  como que es un tipo de comprobante nuevo y usar las tablas COMPROBANTES y COMPROBANTE_DETALLE.
+	
 NO * Nota Pedido apaisada (pedir ejemplo).
 
 --------------------- LISTO -------------------------------------------
+OK * Remitos con importe total (Indica el valor total de la mercaderia enviada).
 
 OK * Descuento para cada tipo de pago (Ej: EFECTIVO -10%, TARJETA +5%, etc).
 
