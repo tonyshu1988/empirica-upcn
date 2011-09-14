@@ -229,7 +229,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_CPB_Recibo, UABM_CPB_OrdenPago, UABM_CPB_Remito,
   UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa,
   UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
-  UConfiguracion;
+  UConfiguracion, UABM_CPB_Transferencia;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -549,7 +549,7 @@ end;
 
 procedure TFPrincipal.ACajeroExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFCajero, FCajero);
+  EKVentanas1.Abrir(Sender, TFABM_CPB_Transferencia, FABM_CPB_Transferencia);
 end;
 
 procedure TFPrincipal.AMovInternosExecute(Sender: TObject);

@@ -128,6 +128,7 @@ Const
   CPB_ORDEN_PAGO     = 18; //OK se entrega al CLIENTE como comprobante de un pago efectuado a este. AUTONUMERADO (comprobante de tercero).
   CPB_RECIBO_COBRO   = 19; //OK se entrega al CLIENTE como comprobante de un pago efectuado por este. AUTONUMERADO
   CPB_REMITO_VENTA   = 20; //se entrega al CLIENTE para documentar la entrega y/o remisión de la mercadería. AUTONUMERADO
+  CPB_TRANSFERENCIA  = 21; //  
   //MOVIMIENTOS INTERNOS
   CPB_OTROS_INGRESOS = 16; //OK Se utilizan en la pantallas Movimientos Internos
   CPB_OTROS_EGRESOS  = 17; //OK Se utilizan en la pantallas Movimientos Internos
