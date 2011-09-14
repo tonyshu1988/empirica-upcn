@@ -27,7 +27,7 @@ object FABM_Preventa: TFABM_Preventa
     BevelInner = bvLowered
     BevelWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 5
+    TabOrder = 4
     Visible = False
     object LeerCodBar: TLabel
       Left = 4
@@ -3232,8 +3232,8 @@ object FABM_Preventa: TFABM_Preventa
     end
   end
   object PConfirmarVenta: TPanel
-    Left = 280
-    Top = 29
+    Left = 320
+    Top = 69
     Width = 513
     Height = 372
     BevelInner = bvLowered
@@ -3717,22 +3717,24 @@ object FABM_Preventa: TFABM_Preventa
         Height = 181
         Align = alRight
         TabOrder = 0
-        object BitBtn1: TBitBtn
-          Left = 39
-          Top = 46
-          Width = 121
-          Height = 33
+        object btnConfirmarVenta: TBitBtn
+          Left = 15
+          Top = 16
+          Width = 162
+          Height = 57
+          BiDiMode = bdRightToLeft
           Caption = 'Aceptar Venta'
+          ParentBiDiMode = False
           TabOrder = 0
         end
-        object BitBtn2: TBitBtn
-          Left = 39
-          Top = 118
-          Width = 121
-          Height = 33
-          Caption = 'Cancelar'
+        object btnCancelarVenta: TBitBtn
+          Left = 15
+          Top = 104
+          Width = 162
+          Height = 55
+          Caption = 'Cancelar Venta'
           TabOrder = 1
-          OnClick = BitBtn2Click
+          OnClick = btnCancelarVentaClick
         end
       end
       object Panel5: TPanel
@@ -3745,7 +3747,7 @@ object FABM_Preventa: TFABM_Preventa
         TabOrder = 1
         object Bevel2: TBevel
           Left = 0
-          Top = 74
+          Top = 78
           Width = 295
           Height = 7
           Align = alTop
@@ -3753,16 +3755,16 @@ object FABM_Preventa: TFABM_Preventa
         end
         object lblVtaDesc: TLabel
           Left = 0
-          Top = 58
+          Top = 60
           Width = 295
-          Height = 16
+          Height = 18
           Align = alTop
           Alignment = taRightJustify
           Caption = '$ 0.00'
           Color = 12566527
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -16
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentColor = False
@@ -3771,16 +3773,16 @@ object FABM_Preventa: TFABM_Preventa
         end
         object lblVtaIVA: TLabel
           Left = 0
-          Top = 94
+          Top = 98
           Width = 295
-          Height = 16
+          Height = 18
           Align = alTop
           Alignment = taRightJustify
           Caption = '$ 0.00'
           Color = 16706765
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -16
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentColor = False
@@ -3789,16 +3791,16 @@ object FABM_Preventa: TFABM_Preventa
         end
         object lblVtaTotal: TLabel
           Left = 0
-          Top = 130
+          Top = 136
           Width = 295
-          Height = 16
+          Height = 18
           Align = alTop
           Alignment = taRightJustify
           Caption = '$ 0.00'
           Color = 9568200
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -16
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentColor = False
@@ -3807,7 +3809,7 @@ object FABM_Preventa: TFABM_Preventa
         end
         object Bevel3: TBevel
           Left = 0
-          Top = 38
+          Top = 40
           Width = 295
           Height = 7
           Align = alTop
@@ -3815,7 +3817,7 @@ object FABM_Preventa: TFABM_Preventa
         end
         object Bevel4: TBevel
           Left = 0
-          Top = 110
+          Top = 116
           Width = 295
           Height = 7
           Align = alTop
@@ -3831,7 +3833,7 @@ object FABM_Preventa: TFABM_Preventa
         end
         object Bevel7: TBevel
           Left = 0
-          Top = 146
+          Top = 154
           Width = 295
           Height = 7
           Align = alTop
@@ -3839,7 +3841,7 @@ object FABM_Preventa: TFABM_Preventa
         end
         object Label37: TLabel
           Left = 0
-          Top = 117
+          Top = 123
           Width = 295
           Height = 13
           Align = alTop
@@ -3856,7 +3858,7 @@ object FABM_Preventa: TFABM_Preventa
         end
         object Label38: TLabel
           Left = 0
-          Top = 81
+          Top = 85
           Width = 295
           Height = 13
           Align = alTop
@@ -3873,7 +3875,7 @@ object FABM_Preventa: TFABM_Preventa
         end
         object Label39: TLabel
           Left = 0
-          Top = 45
+          Top = 47
           Width = 295
           Height = 13
           Align = alTop
@@ -3892,14 +3894,14 @@ object FABM_Preventa: TFABM_Preventa
           Left = 0
           Top = 22
           Width = 295
-          Height = 16
+          Height = 18
           Align = alTop
           Alignment = taRightJustify
           Caption = '$ 0.00'
           Color = 12189625
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -16
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentColor = False
@@ -6922,6 +6924,7 @@ object FABM_Preventa: TFABM_Preventa
       'from tipo_IVA')
     CampoBuscar = 'NOMBRE_TIPO_IVA'
     CampoClave = 'ID_TIPO_IVA'
+    BuscarEnQuery = ZQ_TipoIVA
     TituloVentana = 'Tipo IVA'
     Left = 392
     Top = 352

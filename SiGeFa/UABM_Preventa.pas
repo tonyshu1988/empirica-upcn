@@ -333,8 +333,8 @@ type
     Label39: TLabel;
     lblVtaSubtotal: TLabel;
     Label33: TLabel;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
+    btnConfirmarVenta: TBitBtn;
+    btnCancelarVenta: TBitBtn;
     procedure btBuscProdClick(Sender: TObject);
     procedure VerLectorCB(sino: Boolean);
     procedure IdentificarCodigo();
@@ -379,7 +379,7 @@ type
     procedure BtAceptarPagoClick(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
     procedure guardarComprobante();
-    procedure BitBtn2Click(Sender: TObject);
+    procedure btnCancelarVentaClick(Sender: TObject);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -636,6 +636,9 @@ begin
   DM.ZQ_Sucursal.Close;
   DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:=idSucursal;
   DM.ZQ_Sucursal.Open;
+
+  FPrincipal.Iconos_Menu_32.GetBitmap(1, btnConfirmarVenta.Glyph);
+  FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarVenta.Glyph);
 end;
 
 
@@ -1000,9 +1003,9 @@ end;
 procedure TFABM_Preventa.btIVAClick(Sender: TObject);
 begin
 if (CD_DetalleFactura.State=dsBrowse) then
-if (CD_Comprobante.State=dsInsert) then
-  if EKListadoIVA.Buscar then
-    CD_ComprobanteID_TIPO_IVA.AsInteger:=StrToInt(EKListadoIVA.Resultado);
+  if (CD_Comprobante.State=dsInsert) then
+    if EKListadoIVA.Buscar then
+     CD_ComprobanteID_TIPO_IVA.AsInteger:=StrToInt(EKListadoIVA.Resultado);
 end;
 
 procedure TFABM_Preventa.edImporteFinalExit(Sender: TObject);
@@ -1045,6 +1048,12 @@ begin
   PConfirmarVenta.BringToFront;
   dm.centrarPanel(FABM_Preventa, PConfirmarVenta);
   PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
+
+  lblVtaTotal.Caption:= FormatFloat('$ ##,###,##0.00 ', acumulado);
+  lblVtaIVA.Caption:= FormatFloat('$ ##,###,##0.00 ', acumulado*ClienteIVA);
+  lblVtaDesc.Caption:= FormatFloat('$ ##,###,##0.00 ', acumulado*descCliente/100);
+  lblVtaSubtotal.Caption:= FormatFloat('$ ##,###,##0.00 ', acumulado-acumulado*ClienteIVA);
+
 end;
 
 procedure TFABM_Preventa.EKDbSuma1SumListChanged(Sender: TObject);
@@ -1141,7 +1150,7 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
    end;
 end;
 
-procedure TFABM_Preventa.BitBtn2Click(Sender: TObject);
+procedure TFABM_Preventa.btnCancelarVentaClick(Sender: TObject);
 begin
   PConfirmarVenta.Visible:=False;
   PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
