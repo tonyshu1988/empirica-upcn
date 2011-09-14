@@ -66,6 +66,28 @@ type
     ZQ_EliminarAuditoria: TZQuery;
     btnActivarFecha: TButton;
     EKLlenarCombo1: TEKLlenarCombo;
+    DBGridDatosProducto: TDBGrid;
+    ZQ_DatosStock: TZQuery;
+    DS_DatosProducto: TDataSource;
+    ZQ_DatosStockCOD_CABECERA: TStringField;
+    ZQ_DatosStockNOMBRE: TStringField;
+    ZQ_DatosStockMEDIDA: TStringField;
+    ZQ_DatosStockNOMBRE_MARCA: TStringField;
+    ZQ_DatosStockCOLOR: TStringField;
+    ZQ_DatosStockCOD_PRODUCTO: TStringField;
+    ZQ_DatosStockCODIGO_BARRA: TStringField;
+    ZQ_DatosStockARTICULO: TStringField;
+    ZQ_DatosProducto: TZQuery;
+    ZQ_DatosProductoCOD_CABECERA: TStringField;
+    ZQ_DatosProductoNOMBRE: TStringField;
+    ZQ_DatosProductoMEDIDA: TStringField;
+    ZQ_DatosProductoNOMBRE_MARCA: TStringField;
+    ZQ_DatosProductoCOLOR: TStringField;
+    ZQ_DatosProductoCOD_PRODUCTO: TStringField;
+    ZQ_DatosProductoCODIGO_BARRA: TStringField;
+    ZQ_DatosProductoARTICULO: TStringField;
+    ZQ_DatosProductoID_PRODUCTO: TIntegerField;
+    ZQ_DatosStockID_PRODUCTO: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_AudGeneralAfterScroll(DataSet: TDataSet);
@@ -83,6 +105,7 @@ type
     procedure btnRefrescarClick(Sender: TObject);
     procedure btnEliminarAuditoriaClick(Sender: TObject);
     procedure btnActivarFechaClick(Sender: TObject);
+    procedure buscarProducto();
   private
     { Private declarations }
   public
@@ -109,7 +132,7 @@ begin
 
   TStringGrid(DBGridTabla).Scrollbars:=ssVertical;
   TStringGrid(DBGridDatosTabla).Scrollbars:=ssVertical;
-
+  TStringGrid(DBGridDatosProducto).Scrollbars:=ssVertical;
   DateTimePicker1.Date:= dm.ekModelo.Fecha();
 //  ZQ_User.Close;
 //  ZQ_User.Open;
@@ -147,6 +170,29 @@ begin
 end;
 
 
+procedure TFAuditoria.buscarProducto();
+begin
+  DBGridDatosProducto.Height:= 1;
+  if (ZQ_AudGeneralTABLE_NAME.AsString  = 'STOCK_PRODUCTO') then
+  begin
+    DBGridDatosProducto.Height:= 40;
+    ZQ_DatosStock.Close;
+    ZQ_DatosStock.ParamByName('id_stock').AsInteger:= ZQ_AudGeneralKEY_VALUE.AsInteger;
+    ZQ_DatosStock.Open;
+    DS_DatosProducto.DataSet:= ZQ_DatosStock;
+  end
+  else
+    if (ZQ_AudGeneralTABLE_NAME.AsString  = 'PRODUCTO') then
+    begin
+      DBGridDatosProducto.Height:= 40;
+      ZQ_DatosProducto.Close;
+      ZQ_DatosProducto.ParamByName('id_producto').AsInteger:= ZQ_AudGeneralKEY_VALUE.AsInteger;
+      ZQ_DatosProducto.Open;
+      DS_DatosProducto.DataSet:= ZQ_DatosProducto;
+    end;
+end;
+
+
 procedure TFAuditoria.ZQ_AudGeneralAfterScroll(DataSet: TDataSet);
 var
   sql: string;
@@ -164,6 +210,8 @@ begin
   ZQ_DatosTabla.Close;
   ZQ_DatosTabla.SQL.Text:= sql;
   ZQ_DatosTabla.Open;
+
+  buscarProducto();
 end;
 
 
@@ -305,6 +353,7 @@ begin
   if ((CD_Tablas.IsEmpty) or (CD_Tablas.State = dsInsert)) then
     exit;
 
+  buscarProducto;
   buscarAudotoria;
 end;
 
