@@ -21,8 +21,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 467
+    Width = 854
+    Height = 456
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -30,29 +30,29 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelAsociar: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 457
+      Width = 844
+      Height = 446
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Splitter1: TSplitter
         Left = 423
         Top = 21
-        Height = 436
+        Height = 425
       end
       object PanelAsociar_Producto: TPanel
         Left = 426
         Top = 21
-        Width = 426
-        Height = 436
+        Width = 418
+        Height = 425
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 426
-          Height = 436
+          Width = 418
+          Height = 425
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -149,7 +149,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 21
         Width = 423
-        Height = 436
+        Height = 425
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -157,7 +157,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Left = 0
           Top = 0
           Width = 423
-          Height = 436
+          Height = 425
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
@@ -186,7 +186,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 852
+        Width = 844
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -199,16 +199,16 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 457
+      Width = 844
+      Height = 446
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
       object DBGridStock: TDBGrid
         Left = 0
         Top = 0
-        Width = 852
-        Height = 432
+        Width = 844
+        Height = 421
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
@@ -428,15 +428,15 @@ object FABM_ProductoStock: TFABM_ProductoStock
       end
       object Panel2: TPanel
         Left = 0
-        Top = 432
-        Width = 852
+        Top = 421
+        Width = 844
         Height = 25
         Align = alBottom
         TabOrder = 1
         object lblResumen: TLabel
           Left = 1
           Top = 1
-          Width = 850
+          Width = 842
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -454,7 +454,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1037,7 +1037,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
         'umna, '
-      '       c.nombre as color,'
+      '       c.nombre as color, su.id_sucursal,'
       '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
       '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
       '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
@@ -1070,18 +1070,23 @@ object FABM_ProductoStock: TFABM_ProductoStock
     end
     object ZQ_StockSTOCK_ACTUAL: TFloatField
       FieldName = 'STOCK_ACTUAL'
+      OnChange = validarSucursal
     end
     object ZQ_StockSTOCK_MIN: TFloatField
       FieldName = 'STOCK_MIN'
+      OnChange = validarSucursal
     end
     object ZQ_StockSTOCK_MAX: TFloatField
       FieldName = 'STOCK_MAX'
+      OnChange = validarSucursal
     end
     object ZQ_StockSTOCK_REPEDIDO: TFloatField
       FieldName = 'STOCK_REPEDIDO'
+      OnChange = validarSucursal
     end
     object ZQ_StockSTOCK_MIN_ALARMA: TStringField
       FieldName = 'STOCK_MIN_ALARMA'
+      OnChange = validarSucursal
       Size = 1
     end
     object ZQ_StockNOMBRE: TStringField
@@ -1145,6 +1150,10 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object ZQ_StockCOLOR: TStringField
       FieldName = 'COLOR'
       Size = 30
+    end
+    object ZQ_StockID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
     end
   end
   object ZU_Stock: TZUpdateSQL
@@ -1495,7 +1504,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
         'umna,'
-      '       c.nombre as color,'
+      '       c.nombre as color, su.id_sucursal,'
       '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
       '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
       '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
@@ -1538,7 +1547,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
         'umna,'
-      '       c.nombre as color,'
+      '       c.nombre as color, su.id_sucursal,'
       '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
       '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
       '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
@@ -1759,18 +1768,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
       Caption = 'AModificar'
       ShortCut = 114
       OnExecute = AModificarExecute
-    end
-    object AEliminar: TAction
-      Caption = 'AEliminar'
-      ShortCut = 115
-    end
-    object ABaja: TAction
-      Caption = 'ABaja'
-      ShortCut = 116
-    end
-    object AReactivar: TAction
-      Caption = 'AReactivar'
-      ShortCut = 117
     end
     object AGuardar: TAction
       Caption = 'AGuardar'
