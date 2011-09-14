@@ -22,16 +22,16 @@ object FTransferirStock: TFTransferirStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 479
+    Width = 854
+    Height = 468
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 860
-      Height = 444
-      ActivePage = TabSAsociarNotaPedido
+      Width = 852
+      Height = 433
+      ActivePage = TabSTransferirStock
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -41,8 +41,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 375
+          Width = 844
+          Height = 364
           Align = alClient
           Color = 14606012
           DataSource = DS_Producto
@@ -161,17 +161,17 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 375
-          Width = 852
+          Top = 364
+          Width = 844
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            852
+            844
             41)
           object Label25: TLabel
-            Left = 712
+            Left = 704
             Top = 7
             Width = 99
             Height = 13
@@ -194,7 +194,7 @@ object FTransferirStock: TFTransferirStock
             OnClick = btBorrarLineaClick
           end
           object editTotalProductos: TEdit
-            Left = 712
+            Left = 704
             Top = 21
             Width = 129
             Height = 19
@@ -222,8 +222,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedido: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 375
+          Width = 844
+          Height = 364
           Hint = 
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
@@ -293,8 +293,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedidoDetalle: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 375
+          Width = 844
+          Height = 364
           Align = alClient
           Color = 14606012
           DataSource = DS_Nota_Pedido_Detalle
@@ -442,14 +442,14 @@ object FTransferirStock: TFTransferirStock
         end
         object PanelNotaPedidoDetalle: TPanel
           Left = 0
-          Top = 375
-          Width = 852
+          Top = 364
+          Width = 844
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
-            852
+            844
             41)
           object Label2: TLabel
             Left = 720
@@ -492,7 +492,7 @@ object FTransferirStock: TFTransferirStock
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 852
       Height = 33
       Align = alTop
       TabOrder = 1
@@ -522,7 +522,7 @@ object FTransferirStock: TFTransferirStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

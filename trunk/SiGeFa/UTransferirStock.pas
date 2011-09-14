@@ -290,7 +290,8 @@ procedure TFTransferirStock.btnBuscarClick(Sender: TObject);
 begin
   if not Assigned(vsel) then
     vsel:= TFBuscarProductoStock.Create(nil);
-  vsel.OnSeleccionar := onSelProducto;
+  vsel.usaTransferir:= 'S';
+  vsel.OnSeleccionar:= onSelProducto;
   vsel.OnSeleccionarTodos := onSelTodosProducto;
   vsel.SeleccionarYSalir:= false;
   vsel.btnSeleccionarTodos.Visible:= ivAlways;
