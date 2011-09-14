@@ -22,8 +22,8 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 862
-    Height = 402
+    Width = 854
+    Height = 391
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -139,7 +139,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            836.083333333333400000
+            836.083333333333300000
             124.354166666666700000
             224.895833333333300000)
           Alignment = taCenter
@@ -171,8 +171,8 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            751.416666666666800000
-            68.791666666666680000
+            751.416666666666700000
+            68.791666666666670000
             396.875000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -203,7 +203,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            727.604166666666800000
+            727.604166666666700000
             5.291666666666667000
             444.500000000000000000)
           Alignment = taCenter
@@ -517,7 +517,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -567,7 +567,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -615,7 +615,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -824,8 +824,8 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 862
-      Height = 402
+      Width = 854
+      Height = 391
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -839,8 +839,8 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       object DBGridTransferencia: TDBGrid
         Left = 5
         Top = 5
-        Width = 852
-        Height = 225
+        Width = 844
+        Height = 214
         Align = alClient
         Color = 14606012
         DataSource = DS_VerCpb_Fpago
@@ -906,15 +906,15 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 230
-        Width = 852
+        Top = 219
+        Width = 844
         Height = 167
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
         Visible = False
         DesignSize = (
-          852
+          844
           167)
         object Label3: TLabel
           Left = 74
@@ -1119,7 +1119,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 862
+    Width = 854
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1141,7 +1141,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 752
+      Left = 744
       Top = 1
       Width = 109
       Height = 17
@@ -1155,7 +1155,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 643
+      Left = 635
       Top = 1
       Width = 109
       Height = 17
@@ -1172,7 +1172,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2165,11 +2165,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         Visible = True
       end
       item
-        TituloColumna = 'IMPORTE_REAL'
-        Visible = True
-      end
-      item
-        TituloColumna = 'NOMBTR_TIPO'
+        TituloColumna = 'IMPORTE_TOTAL'
         Visible = True
       end
       item
