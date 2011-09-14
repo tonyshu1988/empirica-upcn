@@ -384,50 +384,50 @@ procedure TFABM_CPB_Transferencia.btnModificarClick(Sender: TObject);
 var
   estado: integer;
 begin
-  estado:= ZQ_VerCpb_FpagoID_COMP_ESTADO.AsInteger;
-  if ((ZQ_VerCpb.IsEmpty) or (estado = ESTADO_CONFIRMADO)) then
-    exit;
-
-  id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
-
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
-  begin
-    DBGridTransferencia.Enabled := false;
-    PanelEdicion.Visible:= true;
-    
-    ZQ_Comprobante.Close;
-    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-    ZQ_Comprobante.Open;
-
-    ZQ_CpbFormaPago.Close;
-    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-    ZQ_CpbFormaPago.Open;
-
-    if ZQ_ComprobanteID_CLIENTE.IsNull then
-    begin
-      PanelEditar_DatosGralProveedor.BringToFront;
-      ZQ_Proveedor.Close;
-      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= ZQ_ComprobanteID_PROVEEDOR.AsInteger;
-      ZQ_Proveedor.Open;
-      ZQ_Cliente.Close;
-    end;
-
-    if ZQ_ComprobanteID_PROVEEDOR.IsNull then
-    begin
-      PanelEditar_DatosGralCliente.BringToFront;
-      ZQ_Cliente.Close;
-      ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_ComprobanteID_CLIENTE.AsInteger;
-      ZQ_Cliente.Open;
-      ZQ_Proveedor.Close;
-    end;
-
-    cargarTipoComprobante(tipoComprobante);
-    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
-
-    ZQ_Comprobante.Edit;
-
-    EKDBDateEmision.SetFocus;
-  end;
+//  estado:= ZQ_VerCpb_FpagoID_COMP_ESTADO.AsInteger;
+//  if ((ZQ_VerCpb_Fpago.IsEmpty) or (estado = ESTADO_CONFIRMADO)) then
+//    exit;
+//
+//  id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
+//
+//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
+//  begin
+//    DBGridTransferencia.Enabled := false;
+//    PanelEdicion.Visible:= true;
+//
+//    ZQ_Comprobante.Close;
+//    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+//    ZQ_Comprobante.Open;
+//
+//    ZQ_CpbFormaPago.Close;
+//    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+//    ZQ_CpbFormaPago.Open;
+//
+//    if ZQ_ComprobanteID_CLIENTE.IsNull then
+//    begin
+//      PanelEditar_DatosGralProveedor.BringToFront;
+//      ZQ_Proveedor.Close;
+//      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= ZQ_ComprobanteID_PROVEEDOR.AsInteger;
+//      ZQ_Proveedor.Open;
+//      ZQ_Cliente.Close;
+//    end;
+//
+//    if ZQ_ComprobanteID_PROVEEDOR.IsNull then
+//    begin
+//      PanelEditar_DatosGralCliente.BringToFront;
+//      ZQ_Cliente.Close;
+//      ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_ComprobanteID_CLIENTE.AsInteger;
+//      ZQ_Cliente.Open;
+//      ZQ_Proveedor.Close;
+//    end;
+//
+//    cargarTipoComprobante(tipoComprobante);
+//    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
+//
+//    ZQ_Comprobante.Edit;
+//
+//    EKDBDateEmision.SetFocus;
+//  end;
 
 //  if ZQ_Cuentas.IsEmpty then
 //      exit;
