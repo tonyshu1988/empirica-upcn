@@ -1238,7 +1238,8 @@ object FBuscarProductoStock: TFBuscarProductoStock
       '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
-        'al,ps.punto_salida'
+        'al,'
+      '        ps.punto_salida, su.id_sucursal'
       ''
       ''
       ''
@@ -1281,7 +1282,8 @@ object FBuscarProductoStock: TFBuscarProductoStock
       '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
-        'al,ps.punto_salida'
+        'al,'
+      '        ps.punto_salida, su.id_sucursal'
       ''
       ''
       '')
@@ -1331,7 +1333,8 @@ object FBuscarProductoStock: TFBuscarProductoStock
       '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
-        'al,ps.punto_salida'
+        'al,'
+      '        ps.punto_salida, su.id_sucursal'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
@@ -1445,6 +1448,10 @@ object FBuscarProductoStock: TFBuscarProductoStock
     object ZQ_StockPUNTO_SALIDA: TStringField
       FieldName = 'PUNTO_SALIDA'
       Size = 1
+    end
+    object ZQ_StockID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
     end
   end
   object DS_Stock: TDataSource

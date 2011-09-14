@@ -53,6 +53,7 @@ type
     ZQ_StockPUNTO_SALIDA: TStringField;
     btnSeleccionarTodos: TdxBarLargeButton;
     ASelTodos: TAction;
+    ZQ_StockID_SUCURSAL: TIntegerField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -74,7 +75,7 @@ type
     OnSeleccionar : procedure() of object;
     OnSeleccionarTodos : procedure() of object;
     SeleccionarYSalir: boolean;
-    usaCajero:String;
+    usaCajero, usaTransferir: String;
   end;
 
 var
@@ -94,21 +95,33 @@ end;
 
 procedure TFBuscarProductoStock.btnBuscarClick(Sender: TObject);
 var
-sql:String;
+  sql: String;
 begin
-  if (usaCajero='S') then
-     begin
-       //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo
-       sql:=Format('where (PUNTO_SALIDA=%s)and(STOCK_ACTUAL>0)',[QuotedStr('S')]);
-       EKBuscarStock.SQL_Where.Text:=sql;
-       ZQ_Stock.Close;
-       ZQ_Stock.SQL[22]:=sql;
-     end
-  else
-    begin
-       ZQ_Stock.SQL[22]:='';
-       EKBuscarStock.SQL_Where.Clear;
+  ZQ_Stock.Close;
+  ZQ_Stock.SQL[22]:= '';
+  EKBuscarStock.SQL_Where.Clear;
+
+  if (usaCajero = 'S') then
+  begin
+   //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo
+   sql:= Format('where (sucursal.id_sucursal = %d) '
+               +' and (posicion_sucursal.PUNTO_SALIDA = %s) '
+               +' and (stock_producto.STOCK_ACTUAL > 0)',[SUCURSAL_LOGUEO, QuotedStr('S')]);
+   EKBuscarStock.SQL_Where.Text:=sql;
+   ZQ_Stock.SQL[22]:=sql;
+  end;
+
+  if (usaTransferir = 'S') then
+  begin
+    //si no tengo permiso para transferir stock pertenecientes a otras sucursales
+    if not dm.EKUsrLogin.PermisoAccion('TRANSF_STOCK_AJENO') then
+    begin   //entonces traigo solamente los productos de mi sucursal
+      sql:= Format('where (sucursal.id_sucursal = %d) ',[SUCURSAL_LOGUEO]);
+      EKBuscarStock.SQL_Where.Text:=sql;
+      ZQ_Stock.SQL[22]:=sql;
     end;
+  end;
+
   EKBuscarStock.Buscar;
 end;
 
