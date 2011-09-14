@@ -145,6 +145,8 @@ type
     Auditoria1: TMenuItem;
     AConfigGral: TAction;
     AConfiguracionGeneral1: TMenuItem;
+    AABM_CPB_Transfer: TAction;
+    ABMTransferencia1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -195,6 +197,7 @@ type
     procedure ACtaCte_ProveedorExecute(Sender: TObject);
     procedure AAuditoriaExecute(Sender: TObject);
     procedure AConfigGralExecute(Sender: TObject);
+    procedure AABM_CPB_TransferExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -549,7 +552,7 @@ end;
 
 procedure TFPrincipal.ACajeroExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFABM_CPB_Transferencia, FABM_CPB_Transferencia);
+  EKVentanas1.Abrir(Sender, TFCajero, FCajero);
 end;
 
 procedure TFPrincipal.AMovInternosExecute(Sender: TObject);
@@ -652,6 +655,11 @@ begin
    Application.CreateForm(TFConfiguracion, FConfiguracion);
    FConfiguracion.ShowModal;
    FConfiguracion.Release;
+end;
+
+procedure TFPrincipal.AABM_CPB_TransferExecute(Sender: TObject);
+begin
+   EKVentanas1.Abrir(Sender, TFABM_CPB_Transferencia, FABM_CPB_Transferencia);
 end;
 
 end.
