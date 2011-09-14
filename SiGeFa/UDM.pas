@@ -389,8 +389,8 @@ end;
 
 procedure TDM.centrarPanel(form: TForm; panel: TPanel);
 begin
-  panel.Left:= (form.Width div 2)  - (panel.Width div 2);
-  panel.Top:=  (form.Height div 2) - (panel.Height);
+  panel.Left:= (screen.Width div 2)  - (panel.Width div 2);
+  panel.Top:=  (screen.Height div 2) - (panel.Height);
 end;
 
 
