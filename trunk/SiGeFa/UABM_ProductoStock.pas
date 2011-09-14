@@ -89,9 +89,6 @@ type
     ABuscar: TAction;
     ANuevo: TAction;
     AModificar: TAction;
-    AEliminar: TAction;
-    ABaja: TAction;
-    AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
     AAsociar: TAction;
@@ -112,6 +109,7 @@ type
     PopUpStock_Desasociar: TMenuItem;
     PopUpStock_DesasociarTodos: TMenuItem;
     ZQ_StockCOLOR: TStringField;
+    ZQ_StockID_SUCURSAL: TIntegerField;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnGuardarClick(Sender: TObject);
@@ -135,20 +133,16 @@ type
     procedure AProcesarExecute(Sender: TObject);
     procedure btnVolverClick(Sender: TObject);
     procedure PopItemProducto_QuitarTodosClick(Sender: TObject);
-    procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure AVolverExecute(Sender: TObject);
     procedure PopUpStock_DesasociarClick(Sender: TObject);
     procedure PopUpStock_DesasociarTodosClick(Sender: TObject);
-    procedure DBGridProductoDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure DBGridSucursalDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridSucursalDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
-    procedure DBGridStockKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure DBGridStockKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure validarSucursal(Sender: TField);
+    procedure validarPermisosUsuario;
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -245,6 +239,8 @@ end;
 
 procedure TFABM_ProductoStock.FormCreate(Sender: TObject);
 begin
+  validarPermisosUsuario;
+
   PanelAsociar.Visible:= false;
   lblResumen.Caption:= '';
 
@@ -474,43 +470,43 @@ end;
 //----------------------------------
 procedure TFABM_ProductoStock.ABuscarExecute(Sender: TObject);
 begin
-  if btnBuscar.Enabled then
+  if btnBuscar.Enabled and (btnBuscar.Visible = ivAlways) then
     btnBuscar.Click;
 end;
 
 procedure TFABM_ProductoStock.AModificarExecute(Sender: TObject);
 begin
-  if btnModificar.Enabled then
+  if btnModificar.Enabled and (btnModificar.Visible = ivAlways) then
     btnModificar.Click;
 end;
 
 procedure TFABM_ProductoStock.AGuardarExecute(Sender: TObject);
 begin
-  if btnGuardar.Enabled then
+  if btnGuardar.Enabled and (btnGuardar.Visible = ivAlways) then
     btnGuardar.Click;
 end;
 
 procedure TFABM_ProductoStock.ACancelarExecute(Sender: TObject);
 begin
-  if btnCancelar.Enabled then
+  if btnCancelar.Enabled and (btnCancelar.Visible = ivAlways) then
     btnCancelar.Click;
 end;
 
 procedure TFABM_ProductoStock.AAsociarExecute(Sender: TObject);
 begin
-  if btnAsociar.Enabled then
+  if btnAsociar.Enabled and (btnAsociar.Visible = ivAlways) then
     btnAsociar.Click;
 end;
 
 procedure TFABM_ProductoStock.AProcesarExecute(Sender: TObject);
 begin
-  if btnProcesar.Enabled then
+  if btnProcesar.Enabled and (btnProcesar.Visible = ivAlways) then
     btnProcesar.Click;
 end;
 
 procedure TFABM_ProductoStock.AVolverExecute(Sender: TObject);
 begin
-  if btnVolver.Enabled then
+  if btnVolver.Enabled and (btnVolver.Visible = ivAlways) then
     btnVolver.Click;
 end;
 //----------------------------------
@@ -642,6 +638,9 @@ procedure TFABM_ProductoStock.DBGridStockKeyDown(Sender: TObject; var Key: Word;
 var
   campo, fila, cantidad: integer;
 begin
+  if ZQ_Stock.IsEmpty then
+    exit;
+
   campo:= GetIndexField(DBGridStock, 'STOCK_ACTUAL') - 1;
   cantidad:= ZQ_Stock.RecordCount;
   fila:= ZQ_Stock.RecNo + 1;
@@ -661,5 +660,47 @@ begin
     end;
   end;
 end;
+
+//veo si el usuario tiene permiso para modificar el stock de otra sucursal
+procedure TFABM_ProductoStock.validarSucursal(Sender: TField);
+var
+  i, suc_prod: integer;
+begin
+  suc_prod:= ZQ_StockID_SUCURSAL.AsInteger; //sucursal a la que pertenece el stock del producto
+  for  i:= 0 to Length(sucursales) - 1 do //Recorro todas las sucursales del usuario seleccionado
+  begin //si el prducto es de la sucursal en la que estoy loqueafo o el usuario tiene permiso en esa sucursal o si es administrador
+    if not ( (suc_prod = SUCURSAL_LOGUEO) or (suc_prod = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0) )  then
+    begin
+      ZQ_Stock.RevertRecord;
+      ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal '+ZQ_StockSUCURSAL.AsString+'.'));
+    end;
+  end;
+end;
+
+//chequear si el usuario tiene permisos para modificar el stock o para asociar productos a una sucursal
+procedure TFABM_ProductoStock.validarPermisosUsuario;
+begin
+  btnModificar.Visible:= ivNever;
+  btnAsociar.Visible:= ivNever;
+  btnProcesar.Visible:= ivNever;
+  btnVolver.Visible:= ivNever;
+  btnGuardar.Visible:= ivNever;
+  btnCancelar.Visible:= ivNever;
+
+  if dm.EKUsrLogin.PermisoAccion('MODIFICAR_STOCK') then
+  begin
+    btnModificar.Visible:= ivAlways;
+    btnGuardar.Visible:= ivAlways;
+    btnCancelar.Visible:= ivAlways;
+  end;
+
+  if dm.EKUsrLogin.PermisoAccion('ASOCIAR_STOCK_SUC') then
+  begin
+    btnAsociar.Visible:= ivAlways;
+    btnProcesar.Visible:= ivAlways;
+    btnVolver.Visible:= ivAlways;
+  end;
+end;
+
 
 end.
