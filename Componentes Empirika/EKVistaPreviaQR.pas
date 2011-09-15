@@ -18,7 +18,7 @@ type
     FCaption : string;
     procedure SetReporte(const Value: TQuickRep);
   protected
-    { Protected declarations }
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -107,7 +107,7 @@ begin
     fvp.imagen.Visible := FVerExpImagen;
     fvp.word.Visible := FVerExpWord;
     fvp.Excel.Visible := FVerExpExel;
-//    fvp.pdf.Visible := VerExpPDF;
+    fvp.pdf.Visible := VerExpPDF;
     fvp.guardar.Visible := FVerGuardar;
     if caption > '' then
       fvp.Caption := caption;
@@ -122,6 +122,23 @@ begin
       Fvp.Show;
       FReporte.Preview;
     end;
+  end;
+end;
+
+
+procedure TEKVistaPreviaQR.Notification(AComponent: TComponent; Operation: TOperation);
+var
+  I: Integer;
+  NeedLayout: Boolean;
+begin
+  inherited Notification(AComponent, Operation);
+
+  if (Operation = opRemove) then
+  begin
+    if (AComponent is TQuickRep) and (AComponent.Name = FReporte.Name) then
+    begin
+      FReporte:= nil;
+    end
   end;
 end;
 

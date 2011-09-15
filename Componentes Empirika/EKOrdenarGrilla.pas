@@ -657,7 +657,7 @@ begin
 
   if (Operation = opRemove) then
   begin
-    if (AComponent is TDBGrid) then
+    if (AComponent is TDBGrid) and (AComponent.Name = FGrilla.Name) then
     begin
       FGrilla:= nil;
     end
