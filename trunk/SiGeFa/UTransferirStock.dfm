@@ -31,7 +31,7 @@ object FTransferirStock: TFTransferirStock
       Top = 34
       Width = 852
       Height = 433
-      ActivePage = TabSTransferirStock
+      ActivePage = TabSAsociarNotaPedido
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -228,7 +228,7 @@ object FTransferirStock: TFTransferirStock
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
           Align = alClient
-          Color = 13431031
+          Color = 14606012
           DataSource = DS_VerCpb
           DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -247,6 +247,14 @@ object FTransferirStock: TFTransferirStock
               Title.Alignment = taCenter
               Title.Caption = 'Fecha'
               Width = 109
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_TIPO_CPB'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo Comprobante'
+              Width = 150
               Visible = True
             end
             item
@@ -297,7 +305,7 @@ object FTransferirStock: TFTransferirStock
           Height = 364
           Align = alClient
           Color = 14606012
-          DataSource = DS_Nota_Pedido_Detalle
+          DataSource = DS_ListaProductos
           DefaultDrawing = False
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 1
@@ -466,7 +474,7 @@ object FTransferirStock: TFTransferirStock
             ParentFont = False
           end
           object editTotalAlmacenar: TEdit
-            Left = 720
+            Left = 704
             Top = 21
             Width = 129
             Height = 19
@@ -1074,7 +1082,7 @@ object FTransferirStock: TFTransferirStock
   object CD_Producto: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 216
+    Left = 224
     Top = 104
     object CD_Producto_idProducto: TIntegerField
       FieldName = 'idProducto'
@@ -1185,7 +1193,7 @@ object FTransferirStock: TFTransferirStock
       Size = 334
     end
   end
-  object ZQ_Nota_Pedido_Detalle: TZQuery
+  object ZQ_Cpb_ListaProd: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       
@@ -1219,7 +1227,7 @@ object FTransferirStock: TFTransferirStock
         'left join tipo_articulo tart on (art.id_tipo_articulo = tart.id_' +
         'tipo_articulo)'
       'left join medida med on (pro.id_medida = med.id_medida)'
-      'where (c.id_comprobante = :ID_COMPROBANTE) ')
+      'where (c.id_comprobante = :ID_COMPROBANTE)')
     Params = <
       item
         DataType = ftUnknown
@@ -1234,108 +1242,108 @@ object FTransferirStock: TFTransferirStock
         Name = 'ID_COMPROBANTE'
         ParamType = ptUnknown
       end>
-    object ZQ_Nota_Pedido_DetalleID_COMPROBANTE_DETALLE: TIntegerField
+    object ZQ_Cpb_ListaProdID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
       Required = True
     end
-    object ZQ_Nota_Pedido_DetalleID_COMPROBANTE: TIntegerField
+    object ZQ_Cpb_ListaProdID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
       Required = True
     end
-    object ZQ_Nota_Pedido_DetalleID_PRODUCTO: TIntegerField
+    object ZQ_Cpb_ListaProdID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
       Required = True
     end
-    object ZQ_Nota_Pedido_DetalleDETALLE: TStringField
+    object ZQ_Cpb_ListaProdDETALLE: TStringField
       FieldName = 'DETALLE'
       Size = 200
     end
-    object ZQ_Nota_Pedido_DetalleCANTIDAD: TFloatField
+    object ZQ_Cpb_ListaProdCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
     end
-    object ZQ_Nota_Pedido_DetalleIMPORTE_FINAL: TFloatField
+    object ZQ_Cpb_ListaProdIMPORTE_FINAL: TFloatField
       FieldName = 'IMPORTE_FINAL'
     end
-    object ZQ_Nota_Pedido_DetallePORC_DESCUENTO: TFloatField
+    object ZQ_Cpb_ListaProdPORC_DESCUENTO: TFloatField
       FieldName = 'PORC_DESCUENTO'
     end
-    object ZQ_Nota_Pedido_DetalleBASE_IMPONIBLE: TFloatField
+    object ZQ_Cpb_ListaProdBASE_IMPONIBLE: TFloatField
       FieldName = 'BASE_IMPONIBLE'
     end
-    object ZQ_Nota_Pedido_DetalleIMPORTE_UNITARIO: TFloatField
+    object ZQ_Cpb_ListaProdIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
     end
-    object ZQ_Nota_Pedido_DetalleIMPUESTO_INTERNO: TFloatField
+    object ZQ_Cpb_ListaProdIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
     end
-    object ZQ_Nota_Pedido_DetallePORC_IVA: TFloatField
+    object ZQ_Cpb_ListaProdPORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
     end
-    object ZQ_Nota_Pedido_DetalleCANTIDAD_RECIBIDA: TFloatField
+    object ZQ_Cpb_ListaProdCANTIDAD_RECIBIDA: TFloatField
       FieldName = 'CANTIDAD_RECIBIDA'
     end
-    object ZQ_Nota_Pedido_DetalleCANTIDAD_ALMACENADA: TFloatField
+    object ZQ_Cpb_ListaProdCANTIDAD_ALMACENADA: TFloatField
       FieldName = 'CANTIDAD_ALMACENADA'
     end
-    object ZQ_Nota_Pedido_DetalleCOD_CABECERA: TStringField
+    object ZQ_Cpb_ListaProdCOD_CABECERA: TStringField
       FieldName = 'COD_CABECERA'
     end
-    object ZQ_Nota_Pedido_DetallePRODUCTO: TStringField
+    object ZQ_Cpb_ListaProdPRODUCTO: TStringField
       FieldName = 'PRODUCTO'
       Size = 100
     end
-    object ZQ_Nota_Pedido_DetalleIMAGEN: TBlobField
+    object ZQ_Cpb_ListaProdIMAGEN: TBlobField
       FieldName = 'IMAGEN'
     end
-    object ZQ_Nota_Pedido_DetalleMEDIDA: TStringField
+    object ZQ_Cpb_ListaProdMEDIDA: TStringField
       FieldName = 'MEDIDA'
       Size = 30
     end
-    object ZQ_Nota_Pedido_DetalleCOLOR: TStringField
+    object ZQ_Cpb_ListaProdCOLOR: TStringField
       FieldName = 'COLOR'
       Size = 30
     end
-    object ZQ_Nota_Pedido_DetalleMARCA: TStringField
+    object ZQ_Cpb_ListaProdMARCA: TStringField
       FieldName = 'MARCA'
       Size = 50
     end
-    object ZQ_Nota_Pedido_DetalleARTICULO: TStringField
+    object ZQ_Cpb_ListaProdARTICULO: TStringField
       FieldName = 'ARTICULO'
       Size = 200
     end
-    object ZQ_Nota_Pedido_DetalleTIPO_ARTICULO: TStringField
+    object ZQ_Cpb_ListaProdTIPO_ARTICULO: TStringField
       FieldName = 'TIPO_ARTICULO'
       Size = 200
     end
-    object ZQ_Nota_Pedido_DetalleCOD_PRODUCTO: TStringField
+    object ZQ_Cpb_ListaProdCOD_PRODUCTO: TStringField
       FieldName = 'COD_PRODUCTO'
     end
-    object ZQ_Nota_Pedido_DetalleCODIGO_BARRA: TStringField
+    object ZQ_Cpb_ListaProdCODIGO_BARRA: TStringField
       FieldName = 'CODIGO_BARRA'
       Size = 40
     end
-    object ZQ_Nota_Pedido_DetallePRECIO_COSTO: TFloatField
+    object ZQ_Cpb_ListaProdPRECIO_COSTO: TFloatField
       FieldName = 'PRECIO_COSTO'
     end
-    object ZQ_Nota_Pedido_DetallePRECIO_VENTA: TFloatField
+    object ZQ_Cpb_ListaProdPRECIO_VENTA: TFloatField
       FieldName = 'PRECIO_VENTA'
     end
-    object ZQ_Nota_Pedido_DetalleCOEF_GANANCIA: TFloatField
+    object ZQ_Cpb_ListaProdCOEF_GANANCIA: TFloatField
       FieldName = 'COEF_GANANCIA'
     end
-    object ZQ_Nota_Pedido_DetalleCOEF_DESCUENTO: TFloatField
+    object ZQ_Cpb_ListaProdCOEF_DESCUENTO: TFloatField
       FieldName = 'COEF_DESCUENTO'
     end
-    object ZQ_Nota_Pedido_DetalleIMPUESTO_INTERNO_1: TFloatField
+    object ZQ_Cpb_ListaProdIMPUESTO_INTERNO_1: TFloatField
       FieldName = 'IMPUESTO_INTERNO_1'
     end
-    object ZQ_Nota_Pedido_DetalleIMPUESTO_IVA: TFloatField
+    object ZQ_Cpb_ListaProdIMPUESTO_IVA: TFloatField
       FieldName = 'IMPUESTO_IVA'
     end
-    object ZQ_Nota_Pedido_DetalleSTOCK_MAX: TFloatField
+    object ZQ_Cpb_ListaProdSTOCK_MAX: TFloatField
       FieldName = 'STOCK_MAX'
     end
-    object ZQ_Nota_Pedido_DetalleSTOCK_MIN: TFloatField
+    object ZQ_Cpb_ListaProdSTOCK_MIN: TFloatField
       FieldName = 'STOCK_MIN'
     end
   end
@@ -1361,14 +1369,21 @@ object FTransferirStock: TFTransferirStock
       
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
         '_comp_estado)'
-      'where (cpb.id_tipo_cpb = :id_tipo_cpb) '
+      
+        'where ((cpb.id_tipo_cpb = :id_tipo_np)  or (cpb.id_tipo_cpb = :i' +
+        'd_tipo_fc) )'
       '    and (cpb.id_comp_estado = :id_estado)'
       'order by cpb.fecha desc'
       '')
     Params = <
       item
         DataType = ftUnknown
-        Name = 'id_tipo_cpb'
+        Name = 'id_tipo_np'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_tipo_fc'
         ParamType = ptUnknown
       end
       item
@@ -1381,7 +1396,12 @@ object FTransferirStock: TFTransferirStock
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'id_tipo_cpb'
+        Name = 'id_tipo_np'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_tipo_fc'
         ParamType = ptUnknown
       end
       item
@@ -1522,93 +1542,102 @@ object FTransferirStock: TFTransferirStock
       FieldName = 'NUMERO_CPB'
       DisplayFormat = '00000000'
     end
+    object ZQ_VerCpbID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_VerCpbID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
+    object ZQ_VerCpbIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
   end
   object DS_VerCpb: TDataSource
     DataSet = ZQ_VerCpb
     Left = 226
     Top = 284
   end
-  object DS_Nota_Pedido_Detalle: TDataSource
-    DataSet = CD_NotaPedidoDetalle
+  object DS_ListaProductos: TDataSource
+    DataSet = CD_ListaProductos
     Left = 357
     Top = 169
   end
-  object CD_NotaPedidoDetalle: TClientDataSet
+  object CD_ListaProductos: TClientDataSet
     Aggregates = <>
     Params = <>
-    AfterInsert = CD_NotaPedidoDetalleAfterInsert
-    OnCalcFields = CD_NotaPedidoDetalleCalcFields
+    AfterInsert = CD_ListaProductosAfterInsert
+    OnCalcFields = CD_ListaProductosCalcFields
     Left = 357
     Top = 105
-    object CD_NotaPedidoDetallecantidad: TFloatField
+    object CD_ListaProductoscantidad: TFloatField
       FieldName = 'cantidad'
     end
-    object CD_NotaPedidoDetallecantidad_recibida: TFloatField
+    object CD_ListaProductoscantidad_recibida: TFloatField
       FieldName = 'cantidad_recibida'
     end
-    object CD_NotaPedidoDetallecantidad_almacenada: TFloatField
+    object CD_ListaProductoscantidad_almacenada: TFloatField
       FieldName = 'cantidad_almacenada'
     end
-    object CD_NotaPedidoDetallealmacenar: TFloatField
+    object CD_ListaProductosalmacenar: TFloatField
       FieldName = 'almacenar'
     end
-    object CD_NotaPedidoDetallecod_cabecera: TStringField
+    object CD_ListaProductoscod_cabecera: TStringField
       FieldName = 'cod_cabecera'
       Size = 50
     end
-    object CD_NotaPedidoDetalleproducto: TStringField
+    object CD_ListaProductosproducto: TStringField
       FieldName = 'producto'
       Size = 100
     end
-    object CD_NotaPedidoDetallemedida: TStringField
+    object CD_ListaProductosmedida: TStringField
       FieldName = 'medida'
       Size = 50
     end
-    object CD_NotaPedidoDetallecolor: TStringField
+    object CD_ListaProductoscolor: TStringField
       FieldName = 'color'
       Size = 50
     end
-    object CD_NotaPedidoDetallemarca: TStringField
+    object CD_ListaProductosmarca: TStringField
       DisplayWidth = 100
       FieldName = 'marca'
       Size = 50
     end
-    object CD_NotaPedidoDetallearticulo: TStringField
+    object CD_ListaProductosarticulo: TStringField
       DisplayWidth = 100
       FieldName = 'articulo'
       Size = 50
     end
-    object CD_NotaPedidoDetalletipo_articulo: TStringField
+    object CD_ListaProductostipo_articulo: TStringField
       FieldName = 'tipo_articulo'
       Size = 100
     end
-    object CD_NotaPedidoDetallecod_producto: TStringField
+    object CD_ListaProductoscod_producto: TStringField
       FieldName = 'cod_producto'
       Size = 50
     end
-    object CD_NotaPedidoDetallecodigo_barra: TStringField
+    object CD_ListaProductoscodigo_barra: TStringField
       FieldName = 'codigo_barra'
       Size = 100
     end
-    object CD_NotaPedidoDetalleid_producto: TIntegerField
+    object CD_ListaProductosid_producto: TIntegerField
       FieldName = 'id_producto'
     end
-    object CD_NotaPedidoDetalleid_comprobante: TIntegerField
+    object CD_ListaProductosid_comprobante: TIntegerField
       FieldName = 'id_comprobante'
     end
-    object CD_NotaPedidoDetallecantidad_a_almacenar: TFloatField
+    object CD_ListaProductoscantidad_a_almacenar: TFloatField
       FieldKind = fkCalculated
       FieldName = 'cantidad_a_almacenar'
       Calculated = True
     end
-    object CD_NotaPedidoDetallestock_max: TFloatField
+    object CD_ListaProductosstock_max: TFloatField
       FieldName = 'stock_max'
     end
-    object CD_NotaPedidoDetallestock_min: TFloatField
+    object CD_ListaProductosstock_min: TFloatField
       FieldName = 'stock_min'
     end
   end
-  object ZQ_NotaPedidoUpdateEstado: TZQuery
+  object ZQ_Cpb_UpdateEstado: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       
@@ -1872,7 +1901,7 @@ object FTransferirStock: TFTransferirStock
         Operacion = goSum
         NombreCampo = 'almacenar'
       end>
-    DataSet = CD_NotaPedidoDetalle
+    DataSet = CD_ListaProductos
     SumListChanged = EKSumaNotaPedidoSumListChanged
     Left = 549
     Top = 210

@@ -215,7 +215,7 @@ type
     ZQ_CpbProducto_CodBarra: TStringField;
     CD_Producto_color: TStringField;
     Panel2: TPanel;
-    DBImage1: TDBImage;
+    DBImageProducto: TDBImage;
     ZQ_VerCpb_ProductoCODIGO_BARRA: TStringField;
     ZQ_VerCpb_ProductoPRECIO_COSTO: TFloatField;
     ZQ_VerCpb_ProductoPRECIO_VENTA: TFloatField;
@@ -424,6 +424,7 @@ type
     btnAplicarActualizar: TBitBtn;
     btnCancelarActualizar: TBitBtn;
     btnActualizarPrecios: TdxBarLargeButton;
+    DBImageSucursal: TDBImage;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -474,6 +475,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure btnAplicarActualizarClick(Sender: TObject);
+    procedure ZQ_VerCpb_ProductoAfterScroll(DataSet: TDataSet);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -1420,6 +1422,21 @@ begin
   panelActualizarPrecio.SendToBack;
   panelActualizarPrecio.Visible:= false;
   GrupoEditando.Enabled:= true;
+end;
+
+procedure TFABM_CPB_FacturaCompra.ZQ_VerCpb_ProductoAfterScroll(
+  DataSet: TDataSet);
+begin
+  if ZQ_VerCpb_ProductoIMAGEN.AsString = '' then
+  begin
+    DBImageProducto.Visible:= false;
+    DBImageSucursal.Visible:= true;
+  end
+  else
+  begin
+    DBImageProducto.Visible:= true;
+    DBImageSucursal.Visible:= false;
+  end
 end;
 
 end.
