@@ -88,6 +88,9 @@ type
     QRDBText1: TQRDBText;
     QRDBText3: TQRDBText;
     QRDBText4: TQRDBText;
+    ZQ_TipoIvaCOEFICIENTE: TFloatField;
+    Label6: TLabel;
+    DBEdit1: TDBEdit;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -180,6 +183,8 @@ procedure TFABM_TipoIVA.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
+if ZQ_TipoIvaCOEFICIENTE.IsNull then ZQ_TipoIvaCOEFICIENTE.AsFloat:=0;
+
   Perform(WM_NEXTDLGCTL, 0, 0);
 
 //  if (trim(DBENombre.Text) = '') then

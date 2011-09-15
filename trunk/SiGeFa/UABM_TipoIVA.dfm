@@ -894,6 +894,13 @@ object FABM_TipoIVA: TFABM_TipoIVA
             Title.Alignment = taCenter
             Title.Caption = 'Fiscal'
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COEFICIENTE'
+            Title.Caption = 'Coef'
+            Width = 40
+            Visible = True
           end>
       end
       object PanelEdicion: TPanel
@@ -934,7 +941,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
           Transparent = True
         end
         object Label3: TLabel
-          Left = 212
+          Left = 140
           Top = 35
           Width = 36
           Height = 13
@@ -948,11 +955,11 @@ object FABM_TipoIVA: TFABM_TipoIVA
           Transparent = True
         end
         object Label4: TLabel
-          Left = 354
-          Top = 35
-          Width = 70
+          Left = 418
+          Top = 17
+          Width = 65
           Height = 13
-          Caption = 'Discriminar:'
+          Caption = 'Discriminar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -962,8 +969,8 @@ object FABM_TipoIVA: TFABM_TipoIVA
           Transparent = True
         end
         object Label5: TLabel
-          Left = 352
-          Top = 11
+          Left = 256
+          Top = 35
           Width = 72
           Height = 13
           Caption = 'Abreviatura:'
@@ -975,10 +982,24 @@ object FABM_TipoIVA: TFABM_TipoIVA
           ParentFont = False
           Transparent = True
         end
+        object Label6: TLabel
+          Left = 500
+          Top = 17
+          Width = 64
+          Height = 13
+          Caption = 'Coeficiente'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
         object DBENombre: TDBEdit
           Left = 60
           Top = 7
-          Width = 261
+          Width = 341
           Height = 21
           CharCase = ecUpperCase
           DataField = 'NOMBRE_TIPO_IVA'
@@ -1005,10 +1026,10 @@ object FABM_TipoIVA: TFABM_TipoIVA
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 1
         end
         object DBEditFiscal: TDBEdit
-          Left = 252
+          Left = 180
           Top = 31
           Width = 69
           Height = 21
@@ -1021,11 +1042,11 @@ object FABM_TipoIVA: TFABM_TipoIVA
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 2
         end
         object DBEditAbreviatura: TDBEdit
-          Left = 428
-          Top = 7
+          Left = 332
+          Top = 31
           Width = 69
           Height = 21
           CharCase = ecUpperCase
@@ -1037,10 +1058,10 @@ object FABM_TipoIVA: TFABM_TipoIVA
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 3
         end
         object DBCBoxDiscriminar: TDBComboBox
-          Left = 428
+          Left = 420
           Top = 31
           Width = 69
           Height = 21
@@ -1052,6 +1073,22 @@ object FABM_TipoIVA: TFABM_TipoIVA
             'S'
             'N')
           TabOrder = 4
+        end
+        object DBEdit1: TDBEdit
+          Left = 500
+          Top = 31
+          Width = 69
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'FISCAL'
+          DataSource = DS_TipoIva
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 5
         end
       end
     end
@@ -1681,6 +1718,9 @@ object FABM_TipoIVA: TFABM_TipoIVA
     object ZQ_TipoIvaFISCAL: TStringField
       FieldName = 'FISCAL'
       Size = 1
+    end
+    object ZQ_TipoIvaCOEFICIENTE: TFloatField
+      FieldName = 'COEFICIENTE'
     end
   end
   object DS_TipoIva: TDataSource
