@@ -657,9 +657,10 @@ begin
 
   if (Operation = opRemove) then
   begin
-    if (AComponent is TDBGrid) and (AComponent.Name = FGrilla.Name) then
+    if (AComponent is TDBGrid) then
     begin
-      FGrilla:= nil;
+      if Assigned(FGrilla) and (AComponent.Name = FGrilla.Name) then
+        FGrilla:= nil;
     end
   end;
 end;
