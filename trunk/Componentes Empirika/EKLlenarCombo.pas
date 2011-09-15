@@ -145,7 +145,7 @@ begin
 
   if (Operation = opRemove) then
   begin
-    if (AComponent is TcomboBox) then
+    if (AComponent is TComboBox) and (AComponent.Name = FCombo.Name) then
     begin
       FCombo:= nil;
     end
