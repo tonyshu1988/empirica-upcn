@@ -1,6 +1,6 @@
 object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
-  Left = 671
-  Top = 242
+  Left = 577
+  Top = 257
   Width = 892
   Height = 590
   Caption = 'ABM Nota de Pedido'
@@ -1836,7 +1836,6 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
                   Height = 83
                   Align = alClient
                   DataField = 'LOGO'
-                  DataSource = DM.DS_Sucursal
                   Stretch = True
                   TabOrder = 1
                 end

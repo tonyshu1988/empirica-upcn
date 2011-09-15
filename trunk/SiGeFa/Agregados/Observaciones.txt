@@ -12,10 +12,9 @@
 	incrementa el stock del zapato q se devolvio y como se decrementa el zapato que se llevo.
 	Tambien ver el tema de los movimientos de las cuentas.
 
-* Orden de compra, igual a la nota de pedido pero que tenga los precios de costo
-	y la asignacion de donde salio la plata para comprar la mercaderia. Productos y Cuentas.
+OK * Factura de compra, igual a la nota de pedido pero que tenga los precios de costo.
 	cuando se guarda se pregunta si se quieren modificar los precios de costo de los productos.
-	Permitir la carga del comprobante del banco de la transeferencia bancaria.
+	Se agregan a la cuenta corriente del proveedor. VER QUE NO GUARDA
 
 * Registras las transferencias de productos entre sucursales, ya sea creando una tabla nueva o tomando
   como que es un tipo de comprobante nuevo y usar las tablas COMPROBANTES y COMPROBANTE_DETALLE.

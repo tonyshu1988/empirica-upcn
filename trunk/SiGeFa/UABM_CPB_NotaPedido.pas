@@ -587,6 +587,10 @@ end;
 
 procedure TFABM_CPB_NotaPedido.FormCreate(Sender: TObject);
 begin
+  btnActualizarPrecios.Visible:= ivNever;
+  if dm.EKUsrLogin.PermisoAccion('UPDATE_PRECIOS_CPB') then
+    btnActualizarPrecios.Visible:= ivAlways;
+
   tipoComprobante:= CPB_NOTA_PEDIDO;
 
   EKOrd_VerCpb.CargarConfigColumnas;
