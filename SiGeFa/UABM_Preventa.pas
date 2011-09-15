@@ -338,6 +338,8 @@ type
     Label34: TLabel;
     DBEdit16: TDBEdit;
     Label35: TLabel;
+    CD_DetalleFacturaID_PROD_STOCK: TIntegerField;
+    ZQ_ProductosID_STOCK_PRODUCTO: TIntegerField;
     procedure btBuscProdClick(Sender: TObject);
     procedure VerLectorCB(sino: Boolean);
     procedure IdentificarCodigo();
@@ -388,6 +390,7 @@ type
     procedure DBEdit16Exit(Sender: TObject);
     procedure recalcularBoleta();
     procedure btnConfirmarVentaClick(Sender: TObject);
+    function validarBoleta():Boolean ;
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -876,7 +879,7 @@ begin
         CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:=(CD_DetalleFacturaCANTIDAD.AsInteger*CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
         CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
         CD_DetalleFacturaIMPORTE_IVA.AsFloat:=CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
-
+        CD_DetalleFacturaID_PROD_STOCK.AsInteger:=ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
         modoEscrituraProd();
         Result:=True;
     end
@@ -1058,12 +1061,18 @@ procedure TFABM_Preventa.BtAceptarPagoClick(Sender: TObject);
 begin
 //if (CD_DetalleFactura.State=dsBrowse) then
 //Guarda la Venta
-  PConfirmarVenta.Visible:=True;
-  PConfirmarVenta.BringToFront;
-  dm.centrarPanel(FABM_Preventa, PConfirmarVenta);
-  PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
 
-  recalcularBoleta();
+  if validarBoleta() then
+  begin
+
+    PConfirmarVenta.Visible:=True;
+    PConfirmarVenta.BringToFront;
+    dm.centrarPanel(FABM_Preventa, PConfirmarVenta);
+    PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
+    GrupoGuardarCancelar.Enabled:=False;
+    grupoVertical.Enabled:=False;
+    recalcularBoleta();
+  end;
 
 end;
 
@@ -1142,7 +1151,10 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
         dm.EKModelo.cancelar_transaccion(abmComprobante);
         Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
         dm.EKModelo.cancelar_transaccion(abmComprobante);
-       end;
+       end
+      else
+        Application.MessageBox(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString]), 'Atención');
+
         CD_DetalleFactura.EmptyDataSet;
         LimpiarCodigo();
         crearComprobante();
@@ -1161,6 +1173,8 @@ procedure TFABM_Preventa.btnCancelarVentaClick(Sender: TObject);
 begin
   PConfirmarVenta.Visible:=False;
   PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
+  GrupoGuardarCancelar.Enabled:=True;
+  grupoVertical.Enabled:=True;
 end;
 
 procedure TFABM_Preventa.grabarDetallesFactura;
@@ -1185,6 +1199,7 @@ begin
         ZQ_ComprobanteDetallePORC_IVA.AsFloat := CD_DetalleFacturaPORC_IVA.AsFloat;
         ZQ_ComprobanteDetalleIMPORTE_IVA.AsFloat:= CD_DetalleFacturaIMPORTE_IVA.AsFloat;
         ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
+        ZQ_ComprobanteDetalleID_STOCK_PRODUCTO.AsInteger:=CD_DetalleFacturaID_PROD_STOCK.AsInteger;
         ZQ_ComprobanteDetalle.Post;
 
         CD_DetalleFactura.Next;
@@ -1259,6 +1274,43 @@ begin
   guardarComprobante();
   PConfirmarVenta.Visible:=False;
   PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
+  GrupoGuardarCancelar.Enabled:=true;
+  grupoVertical.Enabled:=true;
+end;
+
+
+function TFABM_Preventa.validarBoleta: Boolean;
+begin
+    //asas
+    Result:=True;
+
+  if (acumulado<=0) then
+  begin
+    Application.MessageBox('El monto final debe ser superior a $ 0.00, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    result := false;
+    exit;
+  end;
+
+  if (cliente < 0)  then
+  begin
+    Application.MessageBox('Debe seleccionar un Cliente, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    result := false;
+    exit;
+  end;
+
+  if (IdVendedor < 0)  then
+  begin
+    Application.MessageBox('Debe seleccionar un Vendedor, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    result := false;
+    exit;
+   end;
+
+  if CD_DetalleFactura.IsEmpty then
+   begin
+    Application.MessageBox('Debe cargar al menos un Producto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    result := false;
+    exit;
+   end;
 end;
 
 end.
