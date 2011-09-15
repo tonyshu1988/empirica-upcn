@@ -1,6 +1,6 @@
 object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
-  Left = 309
-  Top = 106
+  Left = 586
+  Top = 261
   Width = 892
   Height = 586
   Caption = 'ABM Presupuesto'
@@ -1170,56 +1170,67 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
               Caption = '  Detalle Producto  '
               TabOrder = 0
               object DBMemoCpbActual_Producto: TDBMemo
-                Left = 57
-                Top = 86
-                Width = 462
-                Height = 46
-                Align = alClient
+                Left = 2
+                Top = 98
+                Width = 517
+                Height = 34
+                Align = alBottom
                 DataField = 'DETALLE'
                 DataSource = DS_VerCpb_Producto
                 TabOrder = 0
               end
               object Panel2: TPanel
                 Left = 2
-                Top = 86
-                Width = 55
-                Height = 46
+                Top = 15
+                Width = 87
+                Height = 83
                 Align = alLeft
                 BevelOuter = bvNone
                 TabOrder = 1
-                object DBImage1: TDBImage
+                object DBImageProducto: TDBImage
                   Left = 0
                   Top = 0
-                  Width = 55
-                  Height = 46
+                  Width = 87
+                  Height = 83
                   Align = alClient
                   DataField = 'IMAGEN'
                   DataSource = DS_VerCpb_Producto
                   Stretch = True
                   TabOrder = 0
                 end
+                object DBImageSucursal: TDBImage
+                  Left = 0
+                  Top = 0
+                  Width = 87
+                  Height = 83
+                  Align = alClient
+                  DataField = 'LOGO'
+                  DataSource = DM.DS_Sucursal
+                  Stretch = True
+                  TabOrder = 1
+                end
               end
               object Panel3: TPanel
-                Left = 2
+                Left = 89
                 Top = 15
-                Width = 517
-                Height = 71
-                Align = alTop
+                Width = 430
+                Height = 83
+                Align = alClient
                 BevelOuter = bvNone
                 TabOrder = 2
                 object Panel4: TPanel
                   Left = 0
                   Top = 0
-                  Width = 517
-                  Height = 71
+                  Width = 430
+                  Height = 83
                   Align = alClient
                   BevelOuter = bvNone
                   Color = clScrollBar
                   TabOrder = 0
                   object DBText21: TDBText
-                    Left = 76
+                    Left = 73
                     Top = 5
-                    Width = 105
+                    Width = 336
                     Height = 13
                     DataField = 'CODIGO_BARRA'
                     DataSource = DS_VerCpb_Producto
@@ -1231,7 +1242,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object Label32: TLabel
-                    Left = 7
+                    Left = 4
                     Top = 5
                     Width = 68
                     Height = 13
@@ -1244,8 +1255,8 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object Label33: TLabel
-                    Left = 182
-                    Top = 5
+                    Left = 22
+                    Top = 20
                     Width = 50
                     Height = 13
                     Caption = 'Nombre:'
@@ -1257,9 +1268,9 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object DBText26: TDBText
-                    Left = 233
-                    Top = 5
-                    Width = 281
+                    Left = 73
+                    Top = 20
+                    Width = 352
                     Height = 13
                     DataField = 'PRODUCTO'
                     DataSource = DS_VerCpb_Producto
@@ -1271,8 +1282,8 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object Label34: TLabel
-                    Left = 30
-                    Top = 22
+                    Left = 27
+                    Top = 36
                     Width = 45
                     Height = 13
                     Caption = 'Medida:'
@@ -1284,9 +1295,9 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object DBText27: TDBText
-                    Left = 76
-                    Top = 22
-                    Width = 173
+                    Left = 73
+                    Top = 36
+                    Width = 158
                     Height = 13
                     DataField = 'MEDIDA'
                     DataSource = DS_VerCpb_Producto
@@ -1298,8 +1309,8 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object Label35: TLabel
-                    Left = 270
-                    Top = 22
+                    Left = 246
+                    Top = 36
                     Width = 36
                     Height = 13
                     Caption = 'Color:'
@@ -1311,9 +1322,9 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object DBText28: TDBText
-                    Left = 307
-                    Top = 22
-                    Width = 208
+                    Left = 283
+                    Top = 36
+                    Width = 145
                     Height = 13
                     DataField = 'COLOR'
                     DataSource = DS_VerCpb_Producto
@@ -1325,8 +1336,8 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object Label36: TLabel
-                    Left = 21
-                    Top = 39
+                    Left = 18
+                    Top = 51
                     Width = 54
                     Height = 13
                     Caption = 'Tipo Art.:'
@@ -1338,9 +1349,9 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object DBText29: TDBText
-                    Left = 76
-                    Top = 39
-                    Width = 173
+                    Left = 73
+                    Top = 51
+                    Width = 158
                     Height = 13
                     DataField = 'TIPO_ARTICULO'
                     DataSource = DS_VerCpb_Producto
@@ -1352,8 +1363,8 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object Label37: TLabel
-                    Left = 258
-                    Top = 39
+                    Left = 234
+                    Top = 51
                     Width = 48
                     Height = 13
                     Caption = 'Art'#237'culo:'
@@ -1365,9 +1376,9 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object DBText30: TDBText
-                    Left = 307
-                    Top = 39
-                    Width = 208
+                    Left = 283
+                    Top = 51
+                    Width = 145
                     Height = 13
                     DataField = 'ARTICULO'
                     DataSource = DS_VerCpb_Producto
@@ -1379,8 +1390,8 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object Label38: TLabel
-                    Left = 36
-                    Top = 55
+                    Left = 33
+                    Top = 67
                     Width = 39
                     Height = 13
                     Caption = 'Marca:'
@@ -1392,8 +1403,8 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                     ParentFont = False
                   end
                   object DBText31: TDBText
-                    Left = 77
-                    Top = 55
+                    Left = 73
+                    Top = 67
                     Width = 220
                     Height = 13
                     DataField = 'MARCA'
@@ -3550,6 +3561,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
   end
   object ZQ_VerCpb_Producto: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_VerCpb_ProductoAfterScroll
     SQL.Strings = (
       
         'select cpbd.*, cab.cod_corto as cod_cabecera, cab.nombre as prod' +

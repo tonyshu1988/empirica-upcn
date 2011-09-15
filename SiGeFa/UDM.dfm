@@ -1458,6 +1458,7 @@ object DM: TDM
   object EKUsrLogin: TEKUsrLogin
     OnLogin = LoginLogin
     Coneccion = Conexion
+    Menu = FPrincipal.MainMenuPrincipal
     Aplicacion = 'SIGEFA'
     Estado = 'Ingreso al Sistema'
     Version = 0
@@ -1854,5 +1855,10 @@ object DM: TDM
     object ZQ_Configuracion_VariablesGRAFICO: TBlobField
       FieldName = 'GRAFICO'
     end
+  end
+  object DS_Sucursal: TDataSource
+    DataSet = ZQ_Sucursal
+    Left = 280
+    Top = 200
   end
 end

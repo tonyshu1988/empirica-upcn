@@ -100,8 +100,6 @@ type
     EKOrd_VerCpb_Producto: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
     PanelCpbActual_ProductoDetalle: TPanel;
-    GroupBox2: TGroupBox;
-    DBMemoCpbActual_Producto: TDBMemo;
     lblVerFecha_Cpb_Dev: TLabel;
     DBTxtMonto: TDBText;
     DBText2: TDBText;
@@ -276,8 +274,6 @@ type
     ZQ_CpbProducto_Color: TStringField;
     ZQ_CpbProducto_CodBarra: TStringField;
     CD_Producto_color: TStringField;
-    Panel2: TPanel;
-    DBImage1: TDBImage;
     ZQ_VerCpb_ProductoCODIGO_BARRA: TStringField;
     ZQ_VerCpb_ProductoPRECIO_COSTO: TFloatField;
     ZQ_VerCpb_ProductoPRECIO_VENTA: TFloatField;
@@ -287,22 +283,6 @@ type
     ZQ_Imagen: TZQuery;
     DS_Imagen: TDataSource;
     ZQ_ImagenIMAGEN: TBlobField;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    DBText21: TDBText;
-    Label32: TLabel;
-    Label33: TLabel;
-    DBText26: TDBText;
-    Label34: TLabel;
-    DBText27: TDBText;
-    Label35: TLabel;
-    DBText28: TDBText;
-    Label36: TLabel;
-    DBText29: TDBText;
-    Label37: TLabel;
-    DBText30: TDBText;
-    Label38: TLabel;
-    DBText31: TDBText;
     PopupGridProducto: TPopupMenu;
     PopUpItem_ProductoOcultarDetalle: TMenuItem;
     PanelFechas: TPanel;
@@ -446,6 +426,27 @@ type
     ZQ_ActualizarPrecioIMPUESTO_ADICIONAL1: TFloatField;
     ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2: TFloatField;
     ZU_ActualizarPrecio: TZUpdateSQL;
+    GroupBox2: TGroupBox;
+    DBMemoCpbActual_Producto: TDBMemo;
+    Panel2: TPanel;
+    DBImageProducto: TDBImage;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    DBText21: TDBText;
+    Label32: TLabel;
+    Label33: TLabel;
+    DBText26: TDBText;
+    Label34: TLabel;
+    DBText27: TDBText;
+    Label35: TLabel;
+    DBText28: TDBText;
+    Label36: TLabel;
+    DBText29: TDBText;
+    Label37: TLabel;
+    DBText30: TDBText;
+    Label38: TLabel;
+    DBText31: TDBText;
+    DBImageSucursal: TDBImage;
 
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
@@ -499,6 +500,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure btnAplicarActualizarClick(Sender: TObject);
+    procedure ZQ_VerCpb_ProductoAfterScroll(DataSet: TDataSet);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -1581,6 +1583,22 @@ begin
   panelActualizarPrecio.SendToBack;
   panelActualizarPrecio.Visible:= false;
   GrupoEditando.Enabled:= true;
+end;
+
+
+procedure TFABM_CPB_NotaPedido.ZQ_VerCpb_ProductoAfterScroll(
+  DataSet: TDataSet);
+begin
+  if ZQ_VerCpb_ProductoIMAGEN.AsString = '' then
+  begin
+    DBImageProducto.Visible:= false;
+    DBImageSucursal.Visible:= true;
+  end
+  else
+  begin
+    DBImageProducto.Visible:= true;
+    DBImageSucursal.Visible:= false;
+  end
 end;
 
 end.
