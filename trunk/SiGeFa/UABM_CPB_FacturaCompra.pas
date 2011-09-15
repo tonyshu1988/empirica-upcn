@@ -9,7 +9,7 @@ uses
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona;
+  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, ZSqlUpdate;
 
 type
   TFABM_CPB_FacturaCompra = class(TForm)
@@ -334,6 +334,96 @@ type
     QRLabel4: TQRLabel;
     QRDBText6: TQRDBText;
     EKVistaPrevia: TEKVistaPreviaQR;
+    DS_ActualizarPrecio: TDataSource;
+    ZQ_ActualizarPrecio: TZQuery;
+    ZQ_ActualizarPrecioCOD_CABECERA: TStringField;
+    ZQ_ActualizarPrecioPRODUCTO: TStringField;
+    ZQ_ActualizarPrecioIMAGEN: TBlobField;
+    ZQ_ActualizarPrecioMEDIDA: TStringField;
+    ZQ_ActualizarPrecioCOLOR: TStringField;
+    ZQ_ActualizarPrecioMARCA: TStringField;
+    ZQ_ActualizarPrecioARTICULO: TStringField;
+    ZQ_ActualizarPrecioTIPO_ARTICULO: TStringField;
+    ZQ_ActualizarPrecioCOD_PRODUCTO: TStringField;
+    ZQ_ActualizarPrecioCODIGO_BARRA: TStringField;
+    ZQ_ActualizarPrecioPRECIO_COSTO: TFloatField;
+    ZQ_ActualizarPrecioPRECIO_VENTA: TFloatField;
+    ZQ_ActualizarPrecioCOEF_GANANCIA: TFloatField;
+    ZQ_ActualizarPrecioCOEF_DESCUENTO: TFloatField;
+    ZQ_ActualizarPrecioIMPUESTO_INTERNO: TFloatField;
+    ZQ_ActualizarPrecioIMPUESTO_IVA: TFloatField;
+    ZQ_ActualizarPrecioPRECIO_COSTO_CIMPUESTOS: TFloatField;
+    ZQ_ActualizarPrecioIMPUESTO_ADICIONAL1: TFloatField;
+    ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2: TFloatField;
+    ZQ_ActualizarLista: TZQuery;
+    ZQ_ActualizarListaID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_ActualizarListaID_COMPROBANTE: TIntegerField;
+    ZQ_ActualizarListaID_PRODUCTO: TIntegerField;
+    ZQ_ActualizarListaDETALLE: TStringField;
+    ZQ_ActualizarListaCANTIDAD: TFloatField;
+    ZQ_ActualizarListaIMPORTE_FINAL: TFloatField;
+    ZQ_ActualizarListaPORC_DESCUENTO: TFloatField;
+    ZQ_ActualizarListaBASE_IMPONIBLE: TFloatField;
+    ZQ_ActualizarListaIMPORTE_UNITARIO: TFloatField;
+    ZQ_ActualizarListaIMPUESTO_INTERNO: TFloatField;
+    ZQ_ActualizarListaPORC_IVA: TFloatField;
+    ZQ_ActualizarListaCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_ActualizarListaCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_ActualizarListaID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_ActualizarListaIMPORTE_VENTA: TFloatField;
+    ZQ_ActualizarListaIMPORTE_IVA: TFloatField;
+    ZQ_ActualizarListaCOD_CABECERA: TStringField;
+    ZQ_ActualizarListaPRODUCTO: TStringField;
+    ZQ_ActualizarListaIMAGEN: TBlobField;
+    ZQ_ActualizarListaMEDIDA: TStringField;
+    ZQ_ActualizarListaCOLOR: TStringField;
+    ZQ_ActualizarListaMARCA: TStringField;
+    ZQ_ActualizarListaARTICULO: TStringField;
+    ZQ_ActualizarListaTIPO_ARTICULO: TStringField;
+    ZQ_ActualizarListaCOD_PRODUCTO: TStringField;
+    ZQ_ActualizarListaCODIGO_BARRA: TStringField;
+    ZQ_ActualizarListaPRECIO_COSTO: TFloatField;
+    ZQ_ActualizarListaPRECIO_VENTA: TFloatField;
+    ZQ_ActualizarListaCOEF_GANANCIA: TFloatField;
+    ZQ_ActualizarListaCOEF_DESCUENTO: TFloatField;
+    ZQ_ActualizarListaIMPUESTO_INTERNO_1: TFloatField;
+    ZQ_ActualizarListaIMPUESTO_IVA: TFloatField;
+    DS_ActualizarLista: TDataSource;
+    ZU_ActualizarPrecio: TZUpdateSQL;
+    EKOrd_Actualizar: TEKOrdenarGrilla;
+    panelActualizarPrecio: TPanel;
+    DBGridActualizarPrecio: TDBGrid;
+    Panel6: TPanel;
+    GroupBox1: TGroupBox;
+    Panel7: TPanel;
+    DBImage2: TDBImage;
+    Panel9: TPanel;
+    DBText7: TDBText;
+    Label2: TLabel;
+    Label3: TLabel;
+    DBText8: TDBText;
+    Label4: TLabel;
+    DBText9: TDBText;
+    Label5: TLabel;
+    DBText10: TDBText;
+    Label39: TLabel;
+    DBText35: TDBText;
+    Label40: TLabel;
+    DBText36: TDBText;
+    Label41: TLabel;
+    DBText37: TDBText;
+    Label42: TLabel;
+    DBTxtPrecioCosto: TDBText;
+    Label43: TLabel;
+    DBText39: TDBText;
+    Label44: TLabel;
+    DBText40: TDBText;
+    Label45: TLabel;
+    DBText41: TDBText;
+    Panel5: TPanel;
+    btnAplicarActualizar: TBitBtn;
+    btnCancelarActualizar: TBitBtn;
+    btnActualizarPrecios: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -377,6 +467,13 @@ type
     procedure DBGridCpbActual_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure calcularImporteProducto(Sender: TField);
     procedure btnBajaClick(Sender: TObject);
+    procedure btnActualizarPreciosClick(Sender: TObject);
+    procedure btnCancelarActualizarClick(Sender: TObject);
+    procedure ZQ_ActualizarListaAfterScroll(DataSet: TDataSet);
+    procedure DBGridActualizarPrecioDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure btnAplicarActualizarClick(Sender: TObject);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -468,6 +565,9 @@ begin
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
   ImageListEntidad.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
+
+  FPrincipal.Iconos_Menu_32.GetBitmap(10, btnAplicarActualizar.Glyph);
+  FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarActualizar.Glyph);
 
   //abro todos los recibos del sistema
   EKBuscar.Abrir;
@@ -1208,6 +1308,118 @@ begin
   ZQ_VerCpb.Refresh;
   ZQ_VerCpb.RecNo:= recNo;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+end;
+
+
+procedure TFABM_CPB_FacturaCompra.btnActualizarPreciosClick(Sender: TObject);
+begin
+  if ZQ_VerCpb_Producto.isEmpty then
+    exit;
+
+  ZQ_ActualizarLista.Close;
+  ZQ_ActualizarLista.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+  ZQ_ActualizarLista.Open;
+
+  PanelVer.Enabled:= false;
+  panelActualizarPrecio.BringToFront;
+  panelActualizarPrecio.Visible:= true;
+  dm.centrarPanel(FABM_CPB_FacturaCompra, panelActualizarPrecio);
+  GrupoEditando.Enabled:= false;
+  DBGridActualizarPrecio.SetFocus;
+end;
+
+
+procedure TFABM_CPB_FacturaCompra.btnCancelarActualizarClick(Sender: TObject);
+begin
+  PanelVer.Enabled:= true;
+  panelActualizarPrecio.SendToBack;
+  panelActualizarPrecio.Visible:= false;
+  GrupoEditando.Enabled:= true;
+end;
+
+
+procedure TFABM_CPB_FacturaCompra.ZQ_ActualizarListaAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_ActualizarPrecio.Close;
+  ZQ_ActualizarPrecio.ParamByName('id_producto').AsInteger:= ZQ_ActualizarListaID_PRODUCTO.AsInteger;
+  ZQ_ActualizarPrecio.Open;
+
+  if ZQ_ActualizarPrecioPRECIO_COSTO.AsFloat > ZQ_ActualizarListaIMPORTE_UNITARIO.AsFloat  then
+  begin
+    DBTxtPrecioCosto.Font.Color:= $00009500;
+  end
+  else
+    if ZQ_ActualizarPrecioPRECIO_COSTO.AsFloat < ZQ_ActualizarListaIMPORTE_UNITARIO.AsFloat  then
+    begin
+      DBTxtPrecioCosto.Font.Color:= clRed;
+    end
+end;
+
+
+procedure TFABM_CPB_FacturaCompra.DBGridActualizarPrecioDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridActualizarPrecio, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFABM_CPB_FacturaCompra.btnAplicarActualizarClick(Sender: TObject);
+var
+  costo_neto, costo_con_impuestos, imp_adicional_1,
+  imp_adicional_2, imp_iva, coef_ganancia, precio_venta: double;
+begin
+  DBGridActualizarPrecio.Enabled:= false;
+  ZQ_ActualizarLista.First;
+  while not ZQ_ActualizarLista.Eof do
+  begin
+    if (not ZQ_ActualizarListaIMPORTE_UNITARIO.IsNull) and (ZQ_ActualizarListaIMPORTE_UNITARIO.AsFloat <> 0) and //si el importe final no es null y si no es igual a 0
+       (ZQ_ActualizarPrecioPRECIO_COSTO.AsFloat <> ZQ_ActualizarListaIMPORTE_UNITARIO.AsFloat) then //y si es distincto al precio de costo actual del producto
+      if (application.MessageBox(pchar('¿Desea actualizar el precio de costo del producto seleccionada (Actual: '+
+                                         ZQ_ActualizarPrecioPRECIO_COSTO.AsString+' - Nuevo: '+ZQ_ActualizarListaIMPORTE_UNITARIO.AsString+')?'), 'Actualizar Precio', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+        if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_ActualizarPrecio]) then
+        begin
+          imp_adicional_1:= 0;
+          imp_adicional_2:= 0;
+          imp_iva:= 0;
+          coef_ganancia:= 0;
+
+          costo_neto:= ZQ_ActualizarListaIMPORTE_UNITARIO.AsFloat;
+          if not ZQ_ActualizarPrecioIMPUESTO_ADICIONAL1.IsNull then
+            imp_adicional_1:= ZQ_ActualizarPrecioIMPUESTO_ADICIONAL1.AsFloat;
+          if not ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2.IsNull then
+            imp_adicional_2:= ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2.AsFloat;
+          if not ZQ_ActualizarPrecioIMPUESTO_IVA.IsNull then
+            imp_iva:= ZQ_ActualizarPrecioIMPUESTO_IVA.AsFloat;
+          if not ZQ_ActualizarPrecioCOEF_GANANCIA.IsNull then
+            coef_ganancia:= ZQ_ActualizarPrecioCOEF_GANANCIA.AsFloat;
+
+          costo_con_impuestos:= costo_neto + (costo_neto * (imp_adicional_1/100)) + (costo_neto * (imp_adicional_2/100)) + (costo_neto * (imp_iva/100));
+          precio_venta:= costo_con_impuestos * (1 + coef_ganancia);
+
+          ZQ_ActualizarPrecio.Edit;
+          ZQ_ActualizarPrecioPRECIO_COSTO.AsFloat:= costo_neto;
+          ZQ_ActualizarPrecioPRECIO_COSTO_CIMPUESTOS.AsFloat:= costo_con_impuestos;
+          ZQ_ActualizarPrecioPRECIO_VENTA.AsFloat:= precio_venta;
+          ZQ_ActualizarPrecio.ApplyUpdates;
+
+          try
+            if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+              dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+          except
+            begin
+              Application.MessageBox('No se pudo anular actualizar el precio.', 'Atención',MB_OK+MB_ICONINFORMATION);
+              exit;
+            end
+          end;
+        end;
+
+    ZQ_ActualizarLista.Next;
+  end;
+
+  DBGridActualizarPrecio.Enabled:= true;
+  PanelVer.Enabled:= true;
+  panelActualizarPrecio.SendToBack;
+  panelActualizarPrecio.Visible:= false;
+  GrupoEditando.Enabled:= true;
 end;
 
 end.
