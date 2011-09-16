@@ -942,6 +942,13 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Title.Alignment = taCenter
           Title.Caption = 'Columna'
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PUNTO_SALIDA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Punto Salida'
+          Visible = True
         end>
     end
     object PanelEdicion: TPanel
@@ -1152,6 +1159,20 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       ParentColor = False
       TabOrder = 0
     end
+    object StaticTxtPuntoSalida: TStaticText
+      Left = 746
+      Top = 1
+      Width = 109
+      Height = 17
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'Punto Salida'
+      Color = 8454016
+      ParentColor = False
+      TabOrder = 1
+    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -1277,6 +1298,11 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           end
           item
             Item = btnReactivar
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnPuntoSalida
             Visible = True
           end
           item
@@ -1602,7 +1628,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 696
+    Left = 552
     Top = 160
     DockControlHeights = (
       0
@@ -1616,15 +1642,6 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
-      AutoGrayScale = False
-    end
-    object btnVerDetalle: TdxBarLargeButton
-      Align = iaRight
-      Caption = 'Ver Detalle'
-      Category = 0
-      Hint = 'Ver Detalle'
-      Visible = ivAlways
-      ImageIndex = 69
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
@@ -1701,12 +1718,20 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnPuntoSalida: TdxBarLargeButton
+      Caption = 'Es Punto Salida'
+      Category = 0
+      Hint = 'Es Punto Salida'
+      Visible = ivAlways
+      ImageIndex = 81
+      OnClick = btnPuntoSalidaClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
         'btnModificar'
         'btnBuscar'
-        'btnVerDetalle'
         'btnBaja'
         'btnSalir'
         'btnReactivar'
@@ -1726,7 +1751,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       'from posicion_sucursal ps'
       'order by ps.id_sucursal')
     Params = <>
-    Left = 584
+    Left = 448
     Top = 160
     object ZQ_PosicionSucursalID_POSICION_SUCURSAL: TIntegerField
       FieldName = 'ID_POSICION_SUCURSAL'
@@ -1764,10 +1789,14 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       FieldName = 'COLUMNA'
       Size = 10
     end
+    object ZQ_PosicionSucursalPUNTO_SALIDA: TStringField
+      FieldName = 'PUNTO_SALIDA'
+      Size = 1
+    end
   end
   object DS_PosicionSucursal: TDataSource
     DataSet = ZQ_PosicionSucursal
-    Left = 448
+    Left = 320
     Top = 160
   end
   object ZQ_Sucursal: TZQuery
@@ -1777,7 +1806,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       'from Sucursal s'
       'where s.baja <> '#39'S'#39)
     Params = <>
-    Left = 584
+    Left = 448
     Top = 208
     object ZQ_SucursalID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
@@ -1813,7 +1842,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   end
   object DS_Sucursal: TDataSource
     DataSet = ZQ_Sucursal
-    Left = 448
+    Left = 320
     Top = 208
   end
   object EKBuscar: TEKBusquedaAvanzada
@@ -1909,7 +1938,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       'where s.baja <> '#39'S'#39)
     CampoBuscar = 'nombre'
     CampoClave = 'id_sucursal'
-    Left = 256
+    Left = 192
     Top = 160
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
@@ -1941,7 +1970,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 256
+    Left = 192
     Top = 211
   end
   object ATeclasRapidas: TActionManager
@@ -1993,5 +2022,36 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     ShowModal = False
     Left = 80
     Top = 110
+  end
+  object ZQ_MarcaPSalida: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'execute procedure marcar_punto_salida(:id_sucursal, :id_posicion' +
+        '_sucursal)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_posicion_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 448
+    Top = 267
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_posicion_sucursal'
+        ParamType = ptUnknown
+      end>
   end
 end
