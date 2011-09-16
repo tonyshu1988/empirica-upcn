@@ -56,7 +56,8 @@ uses
   UABM_CPB_FacturaCompra in 'UABM_CPB_FacturaCompra.pas' {FABM_CPB_FacturaCompra},
   UAuditoria in 'UAuditoria.pas' {FAuditoria},
   UConfiguracion in 'UConfiguracion.pas' {FConfiguracion},
-  UABM_CPB_Transferencia in 'UABM_CPB_Transferencia.pas' {FABM_CPB_Transferencia};
+  UABM_CPB_Transferencia in 'UABM_CPB_Transferencia.pas' {FABM_CPB_Transferencia},
+  UVerImagen in 'UVerImagen.pas' {FVerImagen};
 
 {$R *.res}
 

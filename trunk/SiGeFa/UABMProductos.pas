@@ -892,54 +892,60 @@ end;
 
 procedure TFABMProductos.CargaImagenProporcionado(Archivo: string);
 var
-  imagen: TGraphic; //contiene la imagen, es del tipo TGraphic poque puede ser jpg o bmp
-  auxBmp: TBitmap;
+  imagenArchivo: TGraphic; //contiene la imagen, es del tipo TGraphic poque puede ser jpg o bmp
+  imagenJPG : TJPEGImage;
   Rectangulo: TRect;
   EscalaX,
   EscalaY,
   Escala: Single;
 begin
-  auxBMP:= TBitMap.Create;
-
   //creo el tipo correcto dependiendo de la extencion del archivo
   if pos('.jpg', archivo) > 0 then
-    imagen:= TJPEGImage.Create
+    imagenArchivo:= TJPEGImage.Create
   else
     if pos('.jpeg', archivo) > 0 then
-      imagen:= TJPEGImage.Create
+      imagenArchivo:= TJPEGImage.Create
     else
       if pos('.bmp', archivo) > 0 then
-        imagen:= TBitmap.Create;
+        imagenArchivo:= TBitmap.Create;
 
   try
     //cargo la imagen
-    imagen.LoadFromFile(Archivo);
+    imagenArchivo.LoadFromFile(Archivo);
 
-//    //comprimo la imagen
-    auxBMP.Assign(imagen);
-//    TJPEGImage (imagen).Palette:= TIcon(FPrincipal.Iconos_Menu_32.Components[1]).Palette;
-    TJPEGImage (imagen).CompressionQuality:= 50;
-    TJPEGImage (imagen).Compress;
+    //comprimo la imagen
+    imagenJPG:= TJPEGImage.Create;
+    imagenJPG.CompressionQuality:= 50;
+    imagenJPG.Compress;
+
+    if pos('.bmp', archivo) > 0 then
+    begin
+      imagenJPG.Assign(TBitmap(imagenArchivo))
+    end
+    else
+    begin
+      imagenJPG.Assign(imagenArchivo);
+    end;
 
     //Por defecto, escala 1:1
     EscalaX := 1.0;
     EscalaY := 1.0;
 
     //Hallamos la escala de reducción Horizontal
-    if edImagen.Width < imagen.Width then
-      EscalaX := edImagen.Width / imagen.Width;
+    if edImagen.Width < imagenJPG.Width then
+      EscalaX := edImagen.Width / imagenJPG.Width;
 
     //La escala vertical
-    if edImagen.Height < imagen.Height then
-      EscalaY := edImagen.Height / imagen.Height;
+    if edImagen.Height < imagenJPG.Height then
+      EscalaY := edImagen.Height / imagenJPG.Height;
 
     //Escogemos la menor de las 2
     if EscalaY < EscalaX then Escala := EscalaY else Escala := EscalaX;
 
     //Y la usamos para reducir el rectangulo destino
     with Rectangulo do begin
-      Right := Trunc(imagen.Width * Escala);
-      Bottom := Trunc(imagen.Height * Escala);
+      Right := Trunc(imagenJPG.Width * Escala);
+      Bottom := Trunc(imagenJPG.Height * Escala);
       Left := 0;
       Top := 0;
     end;
@@ -948,12 +954,12 @@ begin
     with edImagen.Picture.Bitmap do begin
       Width := Rectangulo.Right;
       Height := Rectangulo.Bottom;
-      Canvas.StretchDraw(Rectangulo, imagen);
+      Canvas.StretchDraw(Rectangulo, imagenJPG);
     end;
 
   finally
-    imagen.Free;
-    auxBmp.Free;
+    imagenArchivo.Free;
+    imagenJPG.Free;
   end;
 end;
 

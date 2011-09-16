@@ -1,6 +1,6 @@
 object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
-  Left = 608
-  Top = 239
+  Left = 309
+  Top = 142
   Width = 870
   Height = 586
   Caption = 'ABM Factura Compra'
@@ -5816,8 +5816,8 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     UpdateObject = ZU_ActualizarPrecio
     SQL.Strings = (
       
-        'select cab.cod_corto as cod_cabecera, cab.nombre as producto, ca' +
-        'b.imagen,'
+        'select pro.id_producto, cab.cod_corto as cod_cabecera, cab.nombr' +
+        'e as producto, cab.imagen,'
       
         '       med.medida, color.nombre as color, marca.nombre_marca as ' +
         'marca,'
@@ -5851,7 +5851,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         ParamType = ptUnknown
       end>
     Left = 752
-    Top = 91
+    Top = 88
     ParamData = <
       item
         DataType = ftUnknown
@@ -5924,6 +5924,9 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     end
     object ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2: TFloatField
       FieldName = 'IMPUESTO_ADICIONAL2'
+    end
+    object ZQ_ActualizarPrecioID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
     end
   end
   object ZQ_ActualizarLista: TZQuery

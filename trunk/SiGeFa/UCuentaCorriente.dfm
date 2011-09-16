@@ -1294,74 +1294,6 @@ object FCuentaCorriente: TFCuentaCorriente
       Visible = False
     end
   end
-  object PanelFiltroFechas: TPanel
-    Left = 360
-    Top = 184
-    Width = 173
-    Height = 105
-    TabOrder = 6
-    object Label18: TLabel
-      Left = 1
-      Top = 1
-      Width = 171
-      Height = 13
-      Align = alTop
-      Alignment = taCenter
-      Caption = 'FILTRAR POR FECHA'
-    end
-    object Label19: TLabel
-      Left = 5
-      Top = 25
-      Width = 44
-      Height = 13
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = 'Desde:'
-    end
-    object Label20: TLabel
-      Left = 5
-      Top = 53
-      Width = 44
-      Height = 13
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = 'Hasta:'
-    end
-    object EKDBDateTime_FiltroDesde: TEKDBDateTimePicker
-      Left = 52
-      Top = 20
-      Width = 115
-      Height = 22
-      Date = 40767.409336585650000000
-      Time = 40767.409336585650000000
-      TabOrder = 0
-    end
-    object EKDBDateTime_FiltroHasta: TEKDBDateTimePicker
-      Left = 52
-      Top = 48
-      Width = 115
-      Height = 22
-      Date = 40767.409336585650000000
-      Time = 40767.409336585650000000
-      TabOrder = 1
-    end
-    object btnFiltroFecha_Aceptar: TBitBtn
-      Left = 8
-      Top = 75
-      Width = 40
-      Height = 25
-      TabOrder = 2
-      OnClick = btnFiltroFecha_AceptarClick
-    end
-    object btnFiltroFecha_Cancelar: TBitBtn
-      Left = 124
-      Top = 75
-      Width = 40
-      Height = 25
-      TabOrder = 3
-      OnClick = btnFiltroFecha_CancelarClick
-    end
-  end
   object PanelCliente: TPanel
     Left = 0
     Top = 0
@@ -3963,6 +3895,75 @@ object FCuentaCorriente: TFCuentaCorriente
         Layout = blGlyphBottom
         OnClick = AplicarFiltro
       end
+    end
+  end
+  object PanelFiltroFechas: TPanel
+    Left = 360
+    Top = 184
+    Width = 173
+    Height = 105
+    BevelInner = bvLowered
+    TabOrder = 6
+    object Label18: TLabel
+      Left = 2
+      Top = 2
+      Width = 169
+      Height = 13
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'FILTRAR POR FECHA'
+    end
+    object Label19: TLabel
+      Left = 5
+      Top = 25
+      Width = 44
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Desde:'
+    end
+    object Label20: TLabel
+      Left = 5
+      Top = 53
+      Width = 44
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Hasta:'
+    end
+    object EKDBDateTime_FiltroDesde: TEKDBDateTimePicker
+      Left = 52
+      Top = 20
+      Width = 115
+      Height = 22
+      Date = 40767.409336585650000000
+      Time = 40767.409336585650000000
+      TabOrder = 0
+    end
+    object EKDBDateTime_FiltroHasta: TEKDBDateTimePicker
+      Left = 52
+      Top = 48
+      Width = 115
+      Height = 22
+      Date = 40767.409336585650000000
+      Time = 40767.409336585650000000
+      TabOrder = 1
+    end
+    object btnFiltroFecha_Aceptar: TBitBtn
+      Left = 8
+      Top = 75
+      Width = 40
+      Height = 25
+      TabOrder = 2
+      OnClick = btnFiltroFecha_AceptarClick
+    end
+    object btnFiltroFecha_Cancelar: TBitBtn
+      Left = 124
+      Top = 75
+      Width = 40
+      Height = 25
+      TabOrder = 3
+      OnClick = btnFiltroFecha_CancelarClick
     end
   end
   object dxBarABM: TdxBarManager
