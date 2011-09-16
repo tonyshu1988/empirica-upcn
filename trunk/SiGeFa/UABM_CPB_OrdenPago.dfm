@@ -1062,10 +1062,10 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           Height = 115
           DataField = 'IMAGEN'
           DataSource = DS_Comprobante
+          PopupMenu = PopupMenuImagen
           Stretch = True
           TabOrder = 4
-          OnClick = edImagenClick
-          OnDblClick = edImagenDblClick
+          OnDblClick = cargarImagen
         end
       end
       object PanelEditar_FPago: TPanel
@@ -4263,7 +4263,19 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
   end
   object buscarImagen: TOpenPictureDialog
     Filter = 'Bitmaps (*.bmp)|*.bmp|Jpg (*.jpg)|*.jpg'
-    Left = 776
-    Top = 120
+    Left = 768
+    Top = 144
+  end
+  object PopupMenuImagen: TPopupMenu
+    Left = 773
+    Top = 96
+    object popUp_VerImagen1: TMenuItem
+      Caption = 'Ver Imagen'
+      OnClick = popUp_VerImagen1Click
+    end
+    object popUp_CargarImagen1: TMenuItem
+      Caption = 'Cargar Imagen'
+      OnClick = cargarImagen
+    end
   end
 end

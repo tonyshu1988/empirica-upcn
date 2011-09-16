@@ -25,7 +25,6 @@ type
     DBEdit5: TDBEdit;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btnVerDetalle: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnBaja: TdxBarLargeButton;
@@ -103,6 +102,10 @@ type
     ZQ_PosicionSucursalFILA: TStringField;
     ZQ_PosicionSucursalCOLUMNA: TStringField;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    ZQ_PosicionSucursalPUNTO_SALIDA: TStringField;
+    btnPuntoSalida: TdxBarLargeButton;
+    StaticTxtPuntoSalida: TStaticText;
+    ZQ_MarcaPSalida: TZQuery;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -125,6 +128,7 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure btnPuntoSalidaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -153,6 +157,7 @@ begin
 
     ZQ_PosicionSucursal.Append;
     ZQ_PosicionSucursalBAJA.AsString:= 'N';
+    ZQ_PosicionSucursalPUNTO_SALIDA.AsString:= 'N';    
     DBLookupCBoxSuc.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -290,6 +295,13 @@ procedure TFABM_SucursalPosicion.DBGridPosicionSucursalDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
+  if (ZQ_PosicionSucursalPUNTO_SALIDA.AsString = 'S') then
+  begin
+    DBGridPosicionSucursal.Canvas.Brush.Color:= StaticTxtPuntoSalida.Color;
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridPosicionSucursal.Canvas.Font.Style := DBGridPosicionSucursal.Canvas.Font.Style + [fsBold];
+  end;
+
   FPrincipal.PintarFilasGrillasConBajas(DBGridPosicionSucursal, ZQ_PosicionSucursalBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
@@ -376,6 +388,33 @@ begin
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
+end;
+
+procedure TFABM_SucursalPosicion.btnPuntoSalidaClick(Sender: TObject);
+var
+  recNo: integer;
+begin
+  if (ZQ_PosicionSucursal.IsEmpty) OR (ZQ_PosicionSucursalPUNTO_SALIDA.AsString = 'S') then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea marcar la "Posición Sucursal" seleccionada como punto de salida de la sucursal '+ZQ_PosicionSucursalsucursal.AsString+'?'), 'ABM Posición Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  begin
+    if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc, []) then
+    begin
+
+      ZQ_MarcaPSalida.close;
+      ZQ_MarcaPSalida.ParamByName('id_sucursal').AsInteger:= ZQ_PosicionSucursalID_SUCURSAL.AsInteger;
+      ZQ_MarcaPSalida.ParamByName('id_posicion_sucursal').AsInteger:= ZQ_PosicionSucursalID_POSICION_SUCURSAL.AsInteger;
+      ZQ_MarcaPSalida.ExecSQL;
+
+      if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABMPosicionSuc)) then
+        dm.EKModelo.cancelar_transaccion(Transaccion_ABMPosicionSuc);
+    end;
+
+    recNo:= ZQ_PosicionSucursal.RecNo;
+    ZQ_PosicionSucursal.Refresh;
+    ZQ_PosicionSucursal.RecNo:= recNo;
+  end;
 end;
 
 end.

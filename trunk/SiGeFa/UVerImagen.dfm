@@ -1,10 +1,9 @@
 object FVerImagen: TFVerImagen
   Left = 419
   Top = 207
-  BorderStyle = bsDialog
+  Width = 540
+  Height = 495
   Caption = 'Ver Imagen'
-  ClientHeight = 457
-  ClientWidth = 515
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -18,7 +17,7 @@ object FVerImagen: TFVerImagen
   object edImagen: TDBImage
     Left = 0
     Top = 0
-    Width = 515
+    Width = 524
     Height = 457
     Align = alClient
     DataField = 'IMAGEN'

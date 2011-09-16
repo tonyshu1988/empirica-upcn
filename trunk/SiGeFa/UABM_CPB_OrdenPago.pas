@@ -304,6 +304,9 @@ type
     ZQ_ComprobanteIMAGEN: TBlobField;
     buscarImagen: TOpenPictureDialog;
     edImagen: TDBImage;
+    PopupMenuImagen: TPopupMenu;
+    popUp_VerImagen1: TMenuItem;
+    popUp_CargarImagen1: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -346,9 +349,9 @@ type
       State: TGridDrawState);
     procedure btnNuevoClick(Sender: TObject);
     procedure btnBajaClick(Sender: TObject);
-    procedure edImagenDblClick(Sender: TObject);
     procedure CargaImagen(Archivo: string);
-    procedure edImagenClick(Sender: TObject);
+    procedure popUp_VerImagen1Click(Sender: TObject);
+    procedure cargarImagen(Sender: TObject);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -1171,7 +1174,7 @@ begin
 end;
 
 
-procedure TFABM_CPB_OrdenPago.edImagenDblClick(Sender: TObject);
+procedure TFABM_CPB_OrdenPago.cargarImagen(Sender: TObject);
 var
   jpg: TJpegImage;
 begin
@@ -1262,12 +1265,13 @@ begin
 end;
 
 
-procedure TFABM_CPB_OrdenPago.edImagenClick(Sender: TObject);
+procedure TFABM_CPB_OrdenPago.popUp_VerImagen1Click(Sender: TObject);
 begin
    Application.CreateForm(TFVerImagen, FVerImagen);
    FVerImagen.cargarImagenComprobante(ZQ_ComprobanteID_COMPROBANTE.AsInteger);
    FVerImagen.ShowModal;
    FVerImagen.Release;
 end;
+
 
 end.

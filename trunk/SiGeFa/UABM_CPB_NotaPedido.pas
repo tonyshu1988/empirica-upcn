@@ -1512,6 +1512,7 @@ begin
   ZQ_ActualizarPrecio.ParamByName('id_producto').AsInteger:= ZQ_ActualizarListaID_PRODUCTO.AsInteger;
   ZQ_ActualizarPrecio.Open;
 
+  DBTxtPrecioCosto.Font.Color:= clBlue;
   if ZQ_ActualizarPrecioPRECIO_COSTO.AsFloat > ZQ_ActualizarListaIMPORTE_UNITARIO.AsFloat  then
   begin
     DBTxtPrecioCosto.Font.Color:= $00009500;
