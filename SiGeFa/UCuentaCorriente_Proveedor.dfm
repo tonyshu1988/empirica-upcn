@@ -25,11 +25,12 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
     Top = 184
     Width = 173
     Height = 105
+    BevelInner = bvLowered
     TabOrder = 6
     object Label18: TLabel
-      Left = 1
-      Top = 1
-      Width = 171
+      Left = 2
+      Top = 2
+      Width = 169
       Height = 13
       Align = alTop
       Alignment = taCenter

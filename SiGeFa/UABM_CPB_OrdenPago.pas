@@ -8,8 +8,8 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
-  ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona;
+  ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure, jpeg,
+  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, ExtDlgs;
 
 type
   TFABM_CPB_OrdenPago = class(TForm)
@@ -190,8 +190,6 @@ type
     DBText24: TDBText;
     DBText25: TDBText;
     Label12: TLabel;
-    LblCPB_PuntoVenta: TLabel;
-    LblCPB_Numero: TLabel;
     Label26: TLabel;
     DBTxtCPB_PuntoVenta: TDBText;
     DBTxtCPB_Numero: TDBText;
@@ -303,6 +301,9 @@ type
     DBText33: TDBText;
     StaticTxtConfirmado: TStaticText;
     EKBuscar: TEKBusquedaAvanzada;
+    ZQ_ComprobanteIMAGEN: TBlobField;
+    buscarImagen: TOpenPictureDialog;
+    edImagen: TDBImage;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -345,6 +346,9 @@ type
       State: TGridDrawState);
     procedure btnNuevoClick(Sender: TObject);
     procedure btnBajaClick(Sender: TObject);
+    procedure edImagenDblClick(Sender: TObject);
+    procedure CargaImagen(Archivo: string);
+    procedure edImagenClick(Sender: TObject);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -376,7 +380,8 @@ const
 
 implementation
 
-uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar;
+uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar,
+  UVerImagen;
 
 {$R *.dfm}
 
@@ -1163,6 +1168,106 @@ begin
   ZQ_VerCpb.Refresh;
   ZQ_VerCpb.RecNo:= recNo;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+end;
+
+
+procedure TFABM_CPB_OrdenPago.edImagenDblClick(Sender: TObject);
+var
+  jpg: TJpegImage;
+begin
+  try
+   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    //si esta activa la transaccion
+    if buscarImagen.Execute then //abro para buscar la imagen
+     begin
+      CargaImagen(buscarImagen.FileName);
+     end
+  except
+    showmessage('Formato de Imagen no soportado (debe bajar la resolución).');
+  end;
+end;
+
+
+procedure TFABM_CPB_OrdenPago.CargaImagen(Archivo: string);
+var
+  imagenArchivo: TGraphic; //contiene la imagen, es del tipo TGraphic poque puede ser jpg o bmp
+  imagenJPG : TJPEGImage;
+  Rectangulo: TRect;
+  EscalaX,
+  EscalaY,
+  Escala: Single;
+begin
+  //creo el tipo correcto dependiendo de la extencion del archivo
+  if pos('.jpg', archivo) > 0 then
+    imagenArchivo:= TJPEGImage.Create
+  else
+    if pos('.jpeg', archivo) > 0 then
+      imagenArchivo:= TJPEGImage.Create
+    else
+      if pos('.bmp', archivo) > 0 then
+        imagenArchivo:= TBitmap.Create;
+
+  try
+    //cargo la imagen
+    imagenArchivo.LoadFromFile(Archivo);
+
+    //comprimo la imagen
+    imagenJPG:= TJPEGImage.Create;
+    imagenJPG.CompressionQuality:= 50;
+    imagenJPG.Compress;
+
+    if pos('.bmp', archivo) > 0 then
+    begin
+      imagenJPG.Assign(TBitmap(imagenArchivo))
+    end
+    else
+    begin
+      imagenJPG.Assign(imagenArchivo);
+    end;
+
+    //Por defecto, escala 1:1
+    EscalaX := 1.0;
+    EscalaY := 1.0;
+
+//    //Hallamos la escala de reducción Horizontal
+//    if edImagen.Width < imagenJPG.Width then
+//      EscalaX := edImagen.Width / imagenJPG.Width;
+//
+//    //La escala vertical
+//    if edImagen.Height < imagenJPG.Height then
+//      EscalaY := edImagen.Height / imagenJPG.Height;
+
+    //Escogemos la menor de las 2
+    if EscalaY < EscalaX then Escala := EscalaY else Escala := EscalaX;
+
+    //Y la usamos para reducir el rectangulo destino
+    with Rectangulo do begin
+      Right := Trunc(imagenJPG.Width * Escala);
+      Bottom := Trunc(imagenJPG.Height * Escala);
+      Left := 0;
+      Top := 0;
+    end;
+
+    //Dibujamos el bitmap con el nuevo tamaño en el TImage destino
+    with edImagen.Picture.Bitmap do begin
+      Width := Rectangulo.Right;
+      Height := Rectangulo.Bottom;
+      Canvas.StretchDraw(Rectangulo, imagenJPG);
+    end;
+
+  finally
+    imagenArchivo.Free;
+    imagenJPG.Free;
+  end;
+end;
+
+
+procedure TFABM_CPB_OrdenPago.edImagenClick(Sender: TObject);
+begin
+   Application.CreateForm(TFVerImagen, FVerImagen);
+   FVerImagen.cargarImagenComprobante(ZQ_ComprobanteID_COMPROBANTE.AsInteger);
+   FVerImagen.ShowModal;
+   FVerImagen.Release;
 end;
 
 end.

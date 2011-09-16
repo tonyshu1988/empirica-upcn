@@ -425,6 +425,7 @@ type
     btnCancelarActualizar: TBitBtn;
     btnActualizarPrecios: TdxBarLargeButton;
     DBImageSucursal: TDBImage;
+    ZQ_ActualizarPrecioID_PRODUCTO: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1401,7 +1402,7 @@ begin
           ZQ_ActualizarPrecioPRECIO_COSTO.AsFloat:= costo_neto;
           ZQ_ActualizarPrecioPRECIO_COSTO_CIMPUESTOS.AsFloat:= costo_con_impuestos;
           ZQ_ActualizarPrecioPRECIO_VENTA.AsFloat:= precio_venta;
-          ZQ_ActualizarPrecio.ApplyUpdates;
+          ZQ_ActualizarPrecio.Post;
 
           try
             if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
