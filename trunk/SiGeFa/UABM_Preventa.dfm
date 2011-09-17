@@ -1,6 +1,6 @@
 object FABM_Preventa: TFABM_Preventa
-  Left = 224
-  Top = 97
+  Left = 199
+  Top = 93
   Width = 1024
   Height = 650
   Caption = 'Venta de Mostrador'
@@ -2675,7 +2675,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'LOGO'
         DataSource = DS_Sucursal
         Stretch = True
-        TabOrder = 0
+        TabOrder = 6
       end
       object edImagen: TDBImage
         Left = 0
@@ -2686,7 +2686,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'IMAGEN'
         DataSource = DS_Productos
         QuickDraw = False
-        TabOrder = 1
+        TabOrder = 7
         Visible = False
       end
       object DBEdit1: TDBEdit
@@ -2700,7 +2700,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'DETALLE_PROD'
         DataSource = DS_Productos
         ReadOnly = True
-        TabOrder = 2
+        TabOrder = 3
       end
       object DBEdit2: TDBEdit
         Left = 154
@@ -2713,7 +2713,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'COD_CORTO'
         DataSource = DS_Productos
         ReadOnly = True
-        TabOrder = 3
+        TabOrder = 0
       end
       object DBEdit3: TDBEdit
         Left = 154
@@ -2726,7 +2726,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'NOMBRE_MARCA'
         DataSource = DS_Productos
         ReadOnly = True
-        TabOrder = 4
+        TabOrder = 1
       end
       object DBEdit4: TDBEdit
         Left = 398
@@ -2739,20 +2739,27 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'ARTICULO'
         DataSource = DS_Productos
         ReadOnly = True
-        TabOrder = 5
+        TabOrder = 4
       end
       object DBEdit5: TDBEdit
         Left = 154
         Top = 47
         Width = 135
         Height = 21
+        AutoSize = False
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16771302
         DataField = 'STOCK_ACTUAL'
         DataSource = DS_Productos
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
         ReadOnly = True
-        TabOrder = 6
+        TabOrder = 2
       end
       object DBEdit6: TDBEdit
         Left = 398
@@ -2765,7 +2772,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'TIPO_ARTICULO'
         DataSource = DS_Productos
         ReadOnly = True
-        TabOrder = 7
+        TabOrder = 5
       end
     end
     object PanelDetalleProducto: TPanel
@@ -3162,7 +3169,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'pers_nombre'
         DataSource = DS_Comprobante
         ReadOnly = True
-        TabOrder = 0
+        TabOrder = 1
       end
       object DBEdit10: TDBEdit
         Left = 66
@@ -3175,7 +3182,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'pers_codigo'
         DataSource = DS_Comprobante
         ReadOnly = True
-        TabOrder = 1
+        TabOrder = 0
       end
       object DBEdit11: TDBEdit
         Left = 458
@@ -3188,7 +3195,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'pers_cuit'
         DataSource = DS_Comprobante
         ReadOnly = True
-        TabOrder = 2
+        TabOrder = 4
       end
       object DBEdit12: TDBEdit
         Left = 458
@@ -3201,7 +3208,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'pers_desc'
         DataSource = DS_Comprobante
         ReadOnly = True
-        TabOrder = 3
+        TabOrder = 5
       end
       object DBEdit13: TDBEdit
         Left = 66
@@ -3214,7 +3221,7 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'pers_direccion'
         DataSource = DS_Comprobante
         ReadOnly = True
-        TabOrder = 4
+        TabOrder = 2
       end
       object DBEdit14: TDBEdit
         Left = 458
@@ -3227,13 +3234,13 @@ object FABM_Preventa: TFABM_Preventa
         DataField = 'pers_iva'
         DataSource = DS_Comprobante
         ReadOnly = True
-        TabOrder = 5
+        TabOrder = 3
       end
     end
   end
   object PConfirmarVenta: TPanel
-    Left = 288
-    Top = 29
+    Left = 296
+    Top = 93
     Width = 513
     Height = 364
     BevelInner = bvLowered
@@ -3245,7 +3252,7 @@ object FABM_Preventa: TFABM_Preventa
       Left = 8
       Top = 32
       Width = 297
-      Height = 121
+      Height = 145
     end
     object Image1: TImage
       Left = 310
@@ -3492,7 +3499,7 @@ object FABM_Preventa: TFABM_Preventa
       DataField = 'nVendedor'
       DataSource = DS_Comprobante
       ReadOnly = True
-      TabOrder = 0
+      TabOrder = 1
     end
     object DBEdit8: TDBEdit
       Left = 14
@@ -3505,7 +3512,7 @@ object FABM_Preventa: TFABM_Preventa
       DataField = 'NOMBRE'
       DataSource = DS_Sucursal
       ReadOnly = True
-      TabOrder = 1
+      TabOrder = 0
     end
     object DBEdit15: TDBEdit
       Left = 14
@@ -3526,13 +3533,14 @@ object FABM_Preventa: TFABM_Preventa
       Width = 497
       Height = 183
       Align = alBottom
-      TabOrder = 3
+      TabOrder = 4
       object Panel4: TPanel
         Left = 296
         Top = 1
         Width = 200
         Height = 181
         Align = alRight
+        BevelOuter = bvNone
         TabOrder = 0
         object btnConfirmarVenta: TBitBtn
           Left = 15
@@ -3761,7 +3769,7 @@ object FABM_Preventa: TFABM_Preventa
       Font.Name = 'Verdana'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 3
       OnExit = DBEdit16Exit
     end
   end
@@ -6432,6 +6440,7 @@ object FABM_Preventa: TFABM_Preventa
         'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'join configuracion c on (c.id_sucursal=su.id_sucursal)'
       'where (ps.punto_salida='#39'S'#39')'
       'order by 2')
     CampoBuscar = 'posicSucursal'
@@ -7103,7 +7112,6 @@ object FABM_Preventa: TFABM_Preventa
     end
   end
   object DS_Sucursal: TDataSource
-    DataSet = DM.ZQ_Sucursal
     Left = 659
     Top = 249
   end
