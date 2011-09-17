@@ -383,7 +383,7 @@ type
     procedure BtCancelarPagoClick(Sender: TObject);
     procedure BtAceptarPagoClick(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
-    procedure guardarComprobante();
+    function guardarComprobante():Boolean;
     procedure btnCancelarVentaClick(Sender: TObject);
     procedure Prorrateo();
     procedure grabarDetallesFactura;
@@ -405,7 +405,7 @@ type
 
 var
   FABM_Preventa: TFABM_Preventa;
-  importeacob, punitoriosacob, acumulado,ClienteIVA,descCliente,acumuladoIVA: double;
+  importeacob, punitoriosacob, acumulado,ClienteIVA,descCliente,acumuladoIVA,acumFpagoReal: double;
   IdProd:String;
   cliente,IdVendedor,cajero,IDClienteIVA,idSucursal:Integer;
 
@@ -1099,15 +1099,14 @@ begin
     end
 end;
 
-procedure TFABM_Preventa.guardarComprobante;
+function TFABM_Preventa.guardarComprobante():Boolean;
 begin
-
+Result:=False;
 //Hacer las validaciones correspondientes
 
 if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
  if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_ComprobanteDetalle]) then
    begin
-
       CD_Comprobante.Post;
 
       ZQ_Comprobante.Append;
@@ -1153,14 +1152,14 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
         dm.EKModelo.cancelar_transaccion(abmComprobante);
        end
       else
-        Application.MessageBox(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString]), 'Atención');
+        Application.MessageBox(PChar(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString])),'Atención');
 
         CD_DetalleFactura.EmptyDataSet;
         LimpiarCodigo();
         crearComprobante();
         CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
         CD_ComprobanteID_TIPO_IVA.AsInteger:=IDClienteIVA;
-
+        Result:=True;
      end
    except
     begin
@@ -1180,8 +1179,8 @@ end;
 procedure TFABM_Preventa.grabarDetallesFactura;
 begin
 
-    //Prorrateo();
-
+    acumFpagoReal:=acumulado;
+    Prorrateo();
     CD_DetalleFactura.First;
       while not CD_DetalleFactura.Eof do
       begin
@@ -1211,43 +1210,42 @@ var
 totalProds,totalFP,coefic,acum:Double;
 cant,i:Integer;
 begin
-//  //Can Productos
-//  cant:=CD_DetalleFactura.RecordCount;
-//  totalProds:=acumulado;
-//  totalFP:=acumFpagoReal;
-//  acum:=0;
-////  CD_Fpago.First;
-////  while not(CD_Fpago.Eof) do
-////   begin
-////      ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
-////      if (ZQ_FormasPagoIF.AsString='S') then
-////       totalFP:=totalFP + CD_FpagoIMPORTE.AsFloat;
-////      CD_Fpago.Next;
-////   end;
-//   coefic:= (totalFP/totalProds);
-//
-//   if (totalFP>0) then
-//    begin
-//      CD_DetalleFactura.First;
-//       i:=1;
-//       while not(CD_DetalleFactura.Eof) do
-//       begin
-//          CD_DetalleFactura.Edit;
-//          //Si es el último
-//          if (i=cant) then
-//              begin
-//                CD_DetalleFacturaIMPORTE_VENTA.AsFloat := totalFP - acum;
-//              end
-//          else
-//              CD_DetalleFacturaIMPORTE_VENTA.AsFloat := CD_DetalleFacturaIMPORTE_FINAL.AsFloat * coefic;
-//
-//          acum:= acum+CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
-//          CD_DetalleFactura.Post;
-//          CD_DetalleFactura.Next;
-//          i:=i+1;
-//
-//       end;
-//    end
+  //Cant Productos
+  cant:=CD_DetalleFactura.RecordCount;
+  totalProds:=acumulado;
+  totalFP:=CD_ComprobanteIMPORTE_VENTA.AsFloat;
+  acum:=0;
+//  CD_Fpago.First;
+//  while not(CD_Fpago.Eof) do
+//   begin
+//      ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
+//      if (ZQ_FormasPagoIF.AsString='S') then
+//       totalFP:=totalFP + CD_FpagoIMPORTE.AsFloat;
+//      CD_Fpago.Next;
+//   end;
+   coefic:= (totalFP/totalProds);
+
+   if (totalFP>0) then
+    begin
+      CD_DetalleFactura.First;
+       i:=1;
+       while not(CD_DetalleFactura.Eof) do
+       begin
+          CD_DetalleFactura.Edit;
+          //Si es el último
+          if (i=cant) then
+              begin
+                CD_DetalleFacturaIMPORTE_VENTA.AsFloat := totalFP - acum;
+              end
+          else
+              CD_DetalleFacturaIMPORTE_VENTA.AsFloat := CD_DetalleFacturaIMPORTE_FINAL.AsFloat * coefic;
+
+          acum:= acum+CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
+          CD_DetalleFactura.Post;
+          CD_DetalleFactura.Next;
+          i:=i+1;
+       end;
+    end
 end;
 
 procedure TFABM_Preventa.DBEdit16Exit(Sender: TObject);
@@ -1271,11 +1269,13 @@ end;
 
 procedure TFABM_Preventa.btnConfirmarVentaClick(Sender: TObject);
 begin
-  guardarComprobante();
-  PConfirmarVenta.Visible:=False;
-  PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
-  GrupoGuardarCancelar.Enabled:=true;
-  grupoVertical.Enabled:=true;
+ if guardarComprobante() then
+  begin
+    PConfirmarVenta.Visible:=False;
+    PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
+    GrupoGuardarCancelar.Enabled:=true;
+    grupoVertical.Enabled:=true;
+  end;
 end;
 
 
