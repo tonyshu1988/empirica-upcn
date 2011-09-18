@@ -543,21 +543,21 @@ begin
      if id='C' then
       begin
         ZQ_Productos.Close;
-        ZQ_Productos.sql[11]:=Format('and(p.cod_corto=%s)',[IdProd]);
+        ZQ_Productos.sql[12]:=Format('and(p.cod_corto=%s)',[IdProd]);
         ZQ_Productos.Open;
       end;
 
      if id='I' then
       begin
         ZQ_Productos.Close;
-        ZQ_Productos.sql[11]:=Format('and(p.id_producto=%s)',[IdProd]);
+        ZQ_Productos.sql[12]:=Format('and(p.id_producto=%s)',[IdProd]);
         ZQ_Productos.Open;
       end;
      //Codigo de Barras
      if id='B' then
        begin
         ZQ_Productos.Close;
-        ZQ_Productos.sql[11]:=Format('and(p.codigo_barra=%s)',[cod]);
+        ZQ_Productos.sql[12]:=Format('and(p.codigo_barra=%s)',[cod]);
         ZQ_Productos.Open;
        end;
 
@@ -693,7 +693,7 @@ begin
   CD_ComprobanteFECHA_COBRADA.Clear;
   CD_ComprobanteFECHA_ENVIADA.Clear;
   CD_ComprobanteFECHA_IMPRESA.Clear;
-  CD_ComprobanteFECHA_VENCIMIENTO.Clear;
+  CD_ComprobanteFECHA_VENCIMIENTO.AsDateTime:=dm.EKModelo.Fecha();
 
   lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
 end;
@@ -911,6 +911,7 @@ begin
     CD_DetalleFactura.Post;
     lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
     modoLecturaProd();
+    DBGridListadoProductos.SetFocus;
    end
   else
    begin
@@ -923,9 +924,10 @@ end;
 
 procedure TFABM_Preventa.btnCancelarProdClick(Sender: TObject);
 begin
- // if (CD_DetalleFactura.State=dsInsert) then
+ if (CD_DetalleFactura.State in [dsInsert,dsEdit]) then
   CD_DetalleFactura.Cancel;
   modoLecturaProd();
+  DBGridListadoProductos.SetFocus;
 end;
 
 procedure TFABM_Preventa.modoLecturaProd();
