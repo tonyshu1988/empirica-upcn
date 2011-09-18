@@ -68,7 +68,7 @@ object FPreventa: TFPreventa
         end
         item
           Expanded = False
-          FieldName = 'IMPORTETOTAL'
+          FieldName = 'IMPORTE_VENTA'
           Title.Caption = 'Importe'
           Width = 92
           Visible = True
@@ -906,43 +906,113 @@ object FPreventa: TFPreventa
     Connection = DM.Conexion
     SortedFields = 'FECHA'
     SQL.Strings = (
-      
-        'select c.codigo,c.id_comprobante,c.fecha,c.porc_iva,s.nombre as ' +
-        'suc_,'
+      'select c.*,s.nombre as suc_,'
       
         'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
-        'ente_,'
-      'sum(cd.importe_final) as ImporteTotal'
+        'ente_'
       'from comprobante c'
       'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
       'left join persona p1 on (p1.id_persona=c.id_vendedor)'
       'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
       'left join persona p2 on (p2.id_persona=c.id_cliente)'
-      
-        'left join comprobante_detalle cd on (cd.id_comprobante=c.id_comp' +
-        'robante)'
-      
-        'where (c.id_tipo_cpb=14)and(c.fecha_cobrada is null)and(c.fecha_' +
-        'vencimiento<=current_date)'
-      
-        'group by c.codigo,c.id_comprobante,c.fecha,c.porc_iva,s.nombre,p' +
-        '1.nombre,iva.abreviatura,p2.nombre')
+      'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)')
     Params = <>
     Left = 210
     Top = 130
-    object ZQ_ComprobanteCODIGO: TStringField
-      FieldName = 'CODIGO'
-      Size = 50
-    end
     object ZQ_ComprobanteID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
       Required = True
     end
+    object ZQ_ComprobanteID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
+    end
+    object ZQ_ComprobanteID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_ComprobanteID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object ZQ_ComprobanteID_TIPO_CPB: TIntegerField
+      FieldName = 'ID_TIPO_CPB'
+      Required = True
+    end
+    object ZQ_ComprobanteID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object ZQ_ComprobanteID_COMP_ESTADO: TIntegerField
+      FieldName = 'ID_COMP_ESTADO'
+    end
+    object ZQ_ComprobanteCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
     object ZQ_ComprobanteFECHA: TDateTimeField
       FieldName = 'FECHA'
     end
+    object ZQ_ComprobanteOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
+    end
+    object ZQ_ComprobanteBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_ComprobanteSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
+    object ZQ_ComprobanteIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+    end
     object ZQ_ComprobantePORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
+    end
+    object ZQ_ComprobanteIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_ComprobantePORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_ComprobanteIMPORTE_DESCUENTO: TFloatField
+      FieldName = 'IMPORTE_DESCUENTO'
+    end
+    object ZQ_ComprobanteENCABEZADO: TStringField
+      FieldName = 'ENCABEZADO'
+      Size = 500
+    end
+    object ZQ_ComprobantePIE: TStringField
+      FieldName = 'PIE'
+      Size = 500
+    end
+    object ZQ_ComprobanteFECHA_COBRADA: TDateField
+      FieldName = 'FECHA_COBRADA'
+    end
+    object ZQ_ComprobanteFECHA_ENVIADA: TDateField
+      FieldName = 'FECHA_ENVIADA'
+    end
+    object ZQ_ComprobanteFECHA_IMPRESA: TDateField
+      FieldName = 'FECHA_IMPRESA'
+    end
+    object ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField
+      FieldName = 'FECHA_VENCIMIENTO'
+    end
+    object ZQ_ComprobantePUNTO_VENTA: TIntegerField
+      FieldName = 'PUNTO_VENTA'
+    end
+    object ZQ_ComprobanteNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
+    end
+    object ZQ_ComprobanteFECHA_ANULADO: TDateField
+      FieldName = 'FECHA_ANULADO'
+    end
+    object ZQ_ComprobanteID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
+    object ZQ_ComprobanteIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ComprobanteSUC_: TStringField
       FieldName = 'SUC_'
@@ -959,11 +1029,6 @@ object FPreventa: TFPreventa
     object ZQ_ComprobanteCLIENTE_: TStringField
       FieldName = 'CLIENTE_'
       Size = 200
-    end
-    object ZQ_ComprobanteIMPORTETOTAL: TFloatField
-      FieldName = 'IMPORTETOTAL'
-      ReadOnly = True
-      DisplayFormat = '$ ##,###,##0.00'
     end
   end
   object DS_Comprobante: TDataSource
@@ -988,14 +1053,6 @@ object FPreventa: TFPreventa
       end
       item
         TituloColumna = 'Importe'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'IVA'
         Visible = True
       end
       item
