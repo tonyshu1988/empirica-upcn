@@ -145,9 +145,10 @@ begin
 
   if (Operation = opRemove) then
   begin
-    if (AComponent is TComboBox) and (AComponent.Name = FCombo.Name) then
+    if (AComponent is TComboBox) then
     begin
-      FCombo:= nil;
+      if Assigned(FCombo) and (AComponent.Name = FCombo.Name) then
+        FCombo:= nil;
     end
   end;
 end;

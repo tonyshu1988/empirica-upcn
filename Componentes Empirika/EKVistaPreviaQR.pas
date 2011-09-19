@@ -135,9 +135,10 @@ begin
 
   if (Operation = opRemove) then
   begin
-    if (AComponent is TQuickRep) and (AComponent.Name = FReporte.Name) then
+    if (AComponent is TQuickRep) then
     begin
-      FReporte:= nil;
+      if Assigned(FReporte) and (AComponent.Name = FReporte.Name) then
+        FReporte:= nil;
     end
   end;
 end;
