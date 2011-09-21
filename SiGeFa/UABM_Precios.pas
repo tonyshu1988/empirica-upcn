@@ -58,8 +58,8 @@ type
     QRBand5: TQRBand;
     QRDBImage1: TQRDBImage;
     QRLabel11: TQRLabel;
-    RepCtas_Reporte_Titulo_2: TQRLabel;
-    RepCtas_Reporte_Titulo_1: TQRLabel;
+    RepListaPrecios_Subtitulo: TQRLabel;
+    RepListaPrecios_Titulo: TQRLabel;
     QRBandDetalle: TQRBand;
     QRDBTextCoefGanancia: TQRDBText;
     QRDBText1: TQRDBText;
@@ -686,6 +686,7 @@ begin
 
     QRChildBandCleinte.Enabled := true;
 
+    DM.VariablesReportes(RepListaPrecios);
     EKVistaPreviaListaPrecios.VistaPrevia;
   end
   else
@@ -699,6 +700,7 @@ begin
 
     QRChildBandCleinte.Enabled := false;
 
+    DM.VariablesReportes(RepListaPrecios);
     EKVistaPreviaListaPrecios.VistaPrevia;
   end;
 
