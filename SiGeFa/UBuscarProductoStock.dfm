@@ -20,15 +20,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 722
-    Height = 342
+    Width = 714
+    Height = 336
     Align = alClient
     TabOrder = 0
     object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 720
-      Height = 340
+      Width = 712
+      Height = 334
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -243,7 +243,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1315,6 +1315,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
   end
   object ZQ_Stock: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_StockAfterScroll
     SQL.Strings = (
       
         'select sp.id_posicion_sucursal , c.nombre as color, sp.id_produc' +
@@ -1461,5 +1462,110 @@ object FBuscarProductoStock: TFBuscarProductoStock
     DataSet = ZQ_Stock
     Left = 120
     Top = 160
+  end
+  object ZQ_Producto: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select pc.nombre, pc.cod_corto, pr.id_producto, pr.cod_corto, pr' +
+        '.codigo_barra,'
+      '       pr.llevar_stock, md.medida, mc.nombre_marca, pc.baja,'
+      
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      
+        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
+        'ef_descuento,'
+      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
+      'from producto pr'
+      
+        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
+        'rod_cabecera)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      'left join color co on (pc.color = co.id_color)'
+      'where pr.id_producto = :id_producto'
+      'order by pc.nombre, ta.descripcion, ar.descripcion')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_producto'
+        ParamType = ptUnknown
+      end>
+    Left = 120
+    Top = 216
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_producto'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ProductoNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 100
+    end
+    object ZQ_ProductoCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_ProductoID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+    object ZQ_ProductoCOD_CORTO_1: TStringField
+      FieldName = 'COD_CORTO_1'
+    end
+    object ZQ_ProductoCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ProductoLLEVAR_STOCK: TStringField
+      FieldName = 'LLEVAR_STOCK'
+      Size = 1
+    end
+    object ZQ_ProductoMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_ProductoNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_ProductoBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_ProductoNOMBRE_ARTICULO: TStringField
+      FieldName = 'NOMBRE_ARTICULO'
+      Size = 200
+    end
+    object ZQ_ProductoTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object ZQ_ProductoPRECIO_COSTO: TFloatField
+      FieldName = 'PRECIO_COSTO'
+    end
+    object ZQ_ProductoPRECIO_VENTA: TFloatField
+      FieldName = 'PRECIO_VENTA'
+    end
+    object ZQ_ProductoCOEF_GANANCIA: TFloatField
+      FieldName = 'COEF_GANANCIA'
+    end
+    object ZQ_ProductoCOEF_DESCUENTO: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+    end
+    object ZQ_ProductoIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_ProductoIMPUESTO_IVA: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+    object ZQ_ProductoCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
   end
 end
