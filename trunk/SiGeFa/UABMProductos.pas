@@ -275,6 +275,12 @@ type
     GroupBox1: TGroupBox;
     btnGrupoAceptar: TBitBtn;
     btnGrupoCancelar: TBitBtn;
+    ZQ_DetalleProductoBAJA: TStringField;
+    BajaDetalle1: TMenuItem;
+    N1: TMenuItem;
+    VerBajas1: TMenuItem;
+    VerActivos1: TMenuItem;
+    ReactivarDetalle1: TMenuItem;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -333,6 +339,10 @@ type
     procedure btnGrupoAceptarClick(Sender: TObject);
     procedure HabilitarCampos;
     procedure btnGrupoCancelarClick(Sender: TObject);
+    procedure BajaDetalle1Click(Sender: TObject);
+    procedure VerBajas1Click(Sender: TObject);
+    procedure VerActivos1Click(Sender: TObject);
+    procedure ReactivarDetalle1Click(Sender: TObject);
   private
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
   public
@@ -637,7 +647,7 @@ begin
     exit;
   end;
 
-   if (CDMedidas.IsEmpty) then
+  if (CDMedidas.IsEmpty) then
   begin
     Application.MessageBox('El campo Medida se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
     tabs.ActivePageIndex:= 1;
@@ -666,6 +676,7 @@ begin
       tabs.Enabled:= true;
       PProducto.Enabled:=False;
       PEdicion.Visible:=False;
+      VerActivos1.Click;
     end
   except
     begin
@@ -688,6 +699,7 @@ begin
       tabs.Enabled:= true;
       PProducto.Enabled:=False;
       PEdicion.Visible:=False;
+      VerActivos1.Click;
     end;
 end;
 
@@ -1263,7 +1275,8 @@ procedure TFABMProductos.grillaDetalleDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  FPrincipal.PintarFilasGrillas(grillaDetalle, Rect, DataCol, Column, State);
+
+  FPrincipal.PintarFilasGrillasConBajas(grillaDetalle, ZQ_DetalleProductoBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
 procedure TFABMProductos.btnGrupoAceptarClick(Sender: TObject);
@@ -1354,6 +1367,22 @@ begin
         ZQ_DetalleProductoID_MEDIDA.AsInteger:=CDMedidasid_medida.AsInteger;
         ZQ_DetalleProductoDESCRIPCION.AsString:=descr;
 
+        if ZQ_DetalleProductoPRECIO1.AsFloat = 0 then
+          ZQ_DetalleProductoPRECIO1.AsFloat :=pv;
+
+        if ZQ_DetalleProductoPRECIO2.AsFloat = 0 then
+          ZQ_DetalleProductoPRECIO2.AsFloat :=pv;
+
+        if ZQ_DetalleProductoPRECIO3.AsFloat = 0 then
+          ZQ_DetalleProductoPRECIO3.AsFloat :=pv;
+
+        if ZQ_DetalleProductoPRECIO4.AsFloat = 0 then
+          ZQ_DetalleProductoPRECIO4.AsFloat :=pv;
+
+        if ZQ_DetalleProductoPRECIO5.AsFloat = 0 then
+          ZQ_DetalleProductoPRECIO5.AsFloat :=pv;
+
+
        //Si inserto uno nuevo genero un id nuevo
        if (ZQ_DetalleProducto.State=dsInsert) then
        begin
@@ -1394,6 +1423,22 @@ else
   if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
      ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
 
+
+  if ZQ_DetalleProductoPRECIO1.AsFloat = 0 then
+    ZQ_DetalleProductoPRECIO1.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+
+  if ZQ_DetalleProductoPRECIO2.AsFloat = 0 then
+    ZQ_DetalleProductoPRECIO2.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+
+  if ZQ_DetalleProductoPRECIO3.AsFloat = 0 then
+    ZQ_DetalleProductoPRECIO3.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+
+  if ZQ_DetalleProductoPRECIO4.AsFloat = 0 then
+    ZQ_DetalleProductoPRECIO4.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+
+  if ZQ_DetalleProductoPRECIO5.AsFloat = 0 then
+    ZQ_DetalleProductoPRECIO5.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+
    ZQ_DetalleProducto.Post;
   end;
 
@@ -1412,6 +1457,44 @@ begin
   GrupoEditando.Enabled :=true;
   grillaDetalle.Enabled:=True;
   PEdicion.Visible:=false;
+end;
+
+procedure TFABMProductos.BajaDetalle1Click(Sender: TObject);
+begin
+  ZQ_DetalleProducto.Edit;
+  ZQ_DetalleProductoBAJA.AsString := 'S';
+  ZQ_DetalleProducto.Post;
+end;
+
+procedure TFABMProductos.VerBajas1Click(Sender: TObject);
+begin
+ZQ_DetalleProducto.Filtered := false;
+ZQ_DetalleProducto.Filter := 'baja <> ''N''';
+ZQ_DetalleProducto.Filtered := true;
+
+VerBajas1.Visible := false;
+BajaDetalle1.Visible := false;
+VerActivos1.Visible := true;
+ReactivarDetalle1.Visible := true;
+end;
+
+procedure TFABMProductos.VerActivos1Click(Sender: TObject);
+begin
+ZQ_DetalleProducto.Filtered := false;
+ZQ_DetalleProducto.Filter := 'baja <> ''S''';
+ZQ_DetalleProducto.Filtered := true;
+
+VerBajas1.Visible := true;
+BajaDetalle1.Visible := true;
+VerActivos1.Visible := false;
+ReactivarDetalle1.Visible := false;
+end;
+
+procedure TFABMProductos.ReactivarDetalle1Click(Sender: TObject);
+begin
+  ZQ_DetalleProducto.Edit;
+  ZQ_DetalleProductoBAJA.AsString := 'N';
+  ZQ_DetalleProducto.Post;
 end;
 
 end.

@@ -20,15 +20,15 @@ object FBuscarProducto: TFBuscarProducto
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 342
     Align = alClient
     TabOrder = 0
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 712
-      Height = 334
+      Width = 720
+      Height = 340
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -47,6 +47,15 @@ object FBuscarProducto: TFBuscarProducto
       OnDrawColumnCell = DBGridDrawColumnCell
       OnDblClick = btnSeleccionarClick
       Columns = <
+        item
+          Alignment = taRightJustify
+          Expanded = False
+          FieldName = 'COD_CORTO_1'
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd. Producto'
+          Width = 87
+          Visible = True
+        end
         item
           Alignment = taRightJustify
           Expanded = False
@@ -114,15 +123,6 @@ object FBuscarProducto: TFBuscarProducto
           Visible = True
         end
         item
-          Alignment = taRightJustify
-          Expanded = False
-          FieldName = 'COD_CORTO_1'
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Producto'
-          Width = 87
-          Visible = True
-        end
-        item
           Expanded = False
           FieldName = 'LLEVAR_STOCK'
           Title.Alignment = taCenter
@@ -143,7 +143,7 @@ object FBuscarProducto: TFBuscarProducto
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -845,7 +845,7 @@ object FBuscarProducto: TFBuscarProducto
         'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
         'articulo)'
       'left join color co on (pc.color = co.id_color)'
-      'where pc.baja = '#39'N'#39
+      'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     Params = <>
     Left = 136
@@ -978,8 +978,8 @@ object FBuscarProducto: TFBuscarProducto
   object EKBuscarProducto: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'C'#243'd. Barra'
-        Campo = 'codigo_barra'
+        Titulo = 'C'#243'd. Corto'
+        Campo = 'cod_corto'
         Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
@@ -996,8 +996,8 @@ object FBuscarProducto: TFBuscarProducto
         ItemIndex = -1
       end
       item
-        Titulo = 'C'#243'd. Detalle'
-        Campo = 'cod_corto'
+        Titulo = 'C'#243'd. Barra'
+        Campo = 'codigo_barra'
         Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
@@ -1100,7 +1100,7 @@ object FBuscarProducto: TFBuscarProducto
         'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
         'articulo)'
       'left join color co on (pc.color = co.id_color)'
-      'where pc.baja = '#39'N'#39
+      'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     SQL_Select.Strings = (
       
@@ -1127,7 +1127,7 @@ object FBuscarProducto: TFBuscarProducto
         'articulo)'
       'left join color co on (pc.color = co.id_color)')
     SQL_Where.Strings = (
-      'where pc.baja = '#39'N'#39)
+      'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')')
     SQL_Orden.Strings = (
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     UsarWhereOriginal = EK_Con_Where
@@ -1184,7 +1184,7 @@ object FBuscarProducto: TFBuscarProducto
         'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
         'articulo)'
       'left join color co on (pc.color = co.id_color)'
-      'where pc.baja = '#39'N'#39
+      'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
       '  and emk.id_empresa = :id_empresa'
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     Params = <
@@ -1268,6 +1268,15 @@ object FBuscarProducto: TFBuscarProducto
   object EKBusquedaProductoEmpresa: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'C'#243'd. Corto'
+        Campo = 'cod_corto'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
         Titulo = 'C'#243'd. Barra'
         Campo = 'codigo_barra'
         Tabla = 'producto'
@@ -1280,15 +1289,6 @@ object FBuscarProducto: TFBuscarProducto
         Titulo = 'C'#243'd. Cabecera'
         Campo = 'cod_corto'
         Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'C'#243'd. Detalle'
-        Campo = 'cod_corto'
-        Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -1391,7 +1391,7 @@ object FBuscarProducto: TFBuscarProducto
         'articulo)'
       'left join color co on (pc.color = co.id_color)'
       'left join empresa_marca emk on (mc.id_marca = emk.id_marca)'
-      'where pc.baja = '#39'N'#39
+      'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
       'and emk.id_empresa = '
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     SQL_Select.Strings = (
@@ -1420,7 +1420,7 @@ object FBuscarProducto: TFBuscarProducto
       'left join color co on (pc.color = co.id_color)'
       'left join empresa_marca emk on (mc.id_marca = emk.id_marca)')
     SQL_Where.Strings = (
-      'where pc.baja = '#39'N'#39
+      'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
       'and emk.id_empresa = ')
     SQL_Orden.Strings = (
       'order by pc.nombre, ta.descripcion, ar.descripcion')

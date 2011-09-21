@@ -21,8 +21,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 456
+    Width = 862
+    Height = 462
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -30,29 +30,29 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelAsociar: TPanel
       Left = 5
       Top = 5
-      Width = 844
-      Height = 446
+      Width = 852
+      Height = 452
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Splitter1: TSplitter
         Left = 423
         Top = 21
-        Height = 425
+        Height = 431
       end
       object PanelAsociar_Producto: TPanel
         Left = 426
         Top = 21
-        Width = 418
-        Height = 425
+        Width = 426
+        Height = 431
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 418
-          Height = 425
+          Width = 426
+          Height = 431
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -149,7 +149,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 21
         Width = 423
-        Height = 425
+        Height = 431
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -157,7 +157,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Left = 0
           Top = 0
           Width = 423
-          Height = 425
+          Height = 431
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
@@ -186,7 +186,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 844
+        Width = 852
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -199,16 +199,16 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 844
-      Height = 446
+      Width = 852
+      Height = 452
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
       object DBGridStock: TDBGrid
         Left = 0
         Top = 0
-        Width = 844
-        Height = 421
+        Width = 852
+        Height = 427
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
@@ -428,15 +428,15 @@ object FABM_ProductoStock: TFABM_ProductoStock
       end
       object Panel2: TPanel
         Left = 0
-        Top = 421
-        Width = 844
+        Top = 427
+        Width = 852
         Height = 25
         Align = alBottom
         TabOrder = 1
         object lblResumen: TLabel
           Left = 1
           Top = 1
-          Width = 842
+          Width = 850
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -454,7 +454,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1061,6 +1061,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'left join color c on (pc.color = c.id_color)'
+      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')'
+      ''
       '')
     Params = <>
     Left = 152
@@ -1319,7 +1321,9 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Titulo = 'C'#243'd. Corto'
         Campo = 'cod_corto'
         Tabla = 'producto'
-        TipoCampoIndiceVer = 'Contiene'
+        TipoCampo = EK_Numero
+        TipoCampoIndice = 6
+        TipoCampoIndiceVer = 'Desde - Hasta'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -1532,7 +1536,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'left join color c on (pc.color = c.id_color)'
       ''
-      '')
+      ''
+      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')')
     SQL_Select.Strings = (
       
         'select sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.s' +
@@ -1577,6 +1582,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
       'left join color c on (pc.color = c.id_color)'
       ''
       '')
+    SQL_Where.Strings = (
+      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')')
     UsarWhereOriginal = EK_Con_Where
     Left = 56
     Top = 192
