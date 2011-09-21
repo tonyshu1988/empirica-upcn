@@ -1767,7 +1767,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       Left = 96
       Top = 32
       Width = 729
-      Height = 393
+      Height = 436
       BevelInner = bvLowered
       BevelWidth = 2
       BorderWidth = 2
@@ -1775,9 +1775,9 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       TabOrder = 2
       object DBGridActualizarPrecio: TDBGrid
         Left = 6
-        Top = 6
+        Top = 30
         Width = 713
-        Height = 160
+        Height = 179
         Align = alClient
         BorderStyle = bsNone
         Color = 14606012
@@ -1827,7 +1827,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       end
       object Panel6: TPanel
         Left = 6
-        Top = 166
+        Top = 209
         Width = 713
         Height = 165
         Align = alBottom
@@ -2173,7 +2173,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       end
       object Panel5: TPanel
         Left = 6
-        Top = 331
+        Top = 374
         Width = 713
         Height = 52
         Align = alBottom
@@ -2201,6 +2201,29 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
           Caption = 'Cancelar'
           TabOrder = 1
           OnClick = btnCancelarActualizarClick
+        end
+      end
+      object Panel8: TPanel
+        Left = 6
+        Top = 6
+        Width = 713
+        Height = 24
+        Align = alTop
+        TabOrder = 3
+        object lblActualizarPrecio_Titulo: TLabel
+          Left = 1
+          Top = 2
+          Width = 711
+          Height = 19
+          Align = alCustom
+          Alignment = taCenter
+          AutoSize = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clHotLight
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
       end
     end
