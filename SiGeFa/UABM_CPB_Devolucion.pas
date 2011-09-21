@@ -1560,8 +1560,8 @@ begin
 
   final:= cantidad * precio_unitario;
 
-  ZQ_CpbDevolucionBASE_IMPONIBLE.AsFloat:= final;
-  ZQ_CpbDevolucionIMPORTE_VENTA.AsFloat:= final;
+  ZQ_CpbDevolucionBASE_IMPONIBLE.AsFloat:= abs(final) * -1;
+  ZQ_CpbDevolucionIMPORTE_VENTA.AsFloat:= abs(final) * -1;
 end;
 
 
