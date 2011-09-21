@@ -88,8 +88,8 @@ type
     { Private declarations }
   public
     { Public declarations }
-    OnSeleccionar : procedure() of object;
-    OnSeleccionarTodos : procedure() of object;
+    OnSeleccionar: procedure() of object;
+    OnSeleccionarTodos: procedure() of object;
     SeleccionarYSalir: boolean;
     buscarDeEmpresas: boolean;
   end;
