@@ -2695,7 +2695,7 @@ object FABM_Precios: TFABM_Precios
         'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'where pc.baja <> '#39'S'#39)
+      'where (pc.baja <> '#39'S'#39') and (p.Baja <> '#39'S'#39')')
     Params = <>
     Left = 168
     Top = 120
@@ -2881,7 +2881,7 @@ object FABM_Precios: TFABM_Precios
         'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'where pc.baja <> '#39'S'#39)
+      'where (pc.baja <> '#39'S'#39')  and  (p.Baja <> '#39'S'#39')')
     SQL_Select.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
@@ -2903,7 +2903,7 @@ object FABM_Precios: TFABM_Precios
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)')
     SQL_Where.Strings = (
-      'where pc.baja <> '#39'S'#39)
+      'where (pc.baja <> '#39'S'#39')  and  (p.Baja <> '#39'S'#39')')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 56
@@ -3100,6 +3100,14 @@ object FABM_Precios: TFABM_Precios
         Visible = True
       end
       item
+        TituloColumna = 'Imp. Adicional 1'
+        Visible = False
+      end
+      item
+        TituloColumna = 'Imp. Adicional 2'
+        Visible = False
+      end
+      item
         TituloColumna = 'Precio Costo c/Imp.'
         Visible = True
       end
@@ -3114,6 +3122,26 @@ object FABM_Precios: TFABM_Precios
       item
         TituloColumna = 'Precio Venta'
         Visible = True
+      end
+      item
+        TituloColumna = 'PRECIO1'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO2'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO3'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO4'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO5'
+        Visible = False
       end>
     NombreGuardar = 'ABM_Precios'
     AltoTituloColumna = 15

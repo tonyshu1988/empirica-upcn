@@ -99,12 +99,13 @@ var
 begin
   ZQ_Stock.Close;
   ZQ_Stock.SQL[22]:= '';
-  EKBuscarStock.SQL_Where.Clear;
+
 
   if (usaCajero = 'S') then
   begin
+   EKBuscarStock.SQL_Where.Clear;
    //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo
-   sql:= Format('where (sucursal.id_sucursal = %d) '
+   sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) '
                +' and (posicion_sucursal.PUNTO_SALIDA = %s) '
                +' and (stock_producto.STOCK_ACTUAL > 0)',[SUCURSAL_LOGUEO, QuotedStr('S')]);
    EKBuscarStock.SQL_Where.Text:=sql;
@@ -116,7 +117,8 @@ begin
     //si no tengo permiso para transferir stock pertenecientes a otras sucursales
     if not dm.EKUsrLogin.PermisoAccion('TRANSF_STOCK_AJENO') then
     begin   //entonces traigo solamente los productos de mi sucursal
-      sql:= Format('where (sucursal.id_sucursal = %d) ',[SUCURSAL_LOGUEO]);
+      EKBuscarStock.SQL_Where.Clear;
+      sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) ',[SUCURSAL_LOGUEO]);
       EKBuscarStock.SQL_Where.Text:=sql;
       ZQ_Stock.SQL[22]:=sql;
     end;

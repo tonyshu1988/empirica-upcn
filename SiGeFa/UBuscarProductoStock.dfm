@@ -20,15 +20,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 342
     Align = alClient
     TabOrder = 0
     object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 712
-      Height = 334
+      Width = 720
+      Height = 340
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -243,7 +243,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1043,6 +1043,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object EKBuscarStock: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'C'#243'd. Corto'
+        Campo = 'cod_corto'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
         Titulo = 'C'#243'd. Barra'
         Campo = 'codigo_barra'
         Tabla = 'producto'
@@ -1055,15 +1064,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
         Titulo = 'C'#243'd. Cabecera'
         Campo = 'cod_corto'
         Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'C'#243'd. Detalle'
-        Campo = 'cod_corto'
-        Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -1260,7 +1260,8 @@ object FBuscarProductoStock: TFBuscarProductoStock
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'left join color c on (pc.color = c.id_color)'
       ''
-      '')
+      ''
+      'where (pc.baja <> '#39'S'#39') and (pr.baja <> '#39'S'#39')')
     SQL_Select.Strings = (
       
         'select sp.id_posicion_sucursal , c.nombre as color, sp.id_produc' +
@@ -1306,6 +1307,8 @@ object FBuscarProductoStock: TFBuscarProductoStock
       'left join color c on (pc.color = c.id_color)'
       ''
       '')
+    SQL_Where.Strings = (
+      'where (pc.baja <> '#39'S'#39') and (pr.baja <> '#39'S'#39')')
     UsarWhereOriginal = EK_Con_Where
     Left = 32
     Top = 216
@@ -1351,7 +1354,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'left join color c on (pc.color = c.id_color)'
-      '')
+      'where (pc.baja <> '#39'S'#39') and (pr.baja <> '#39'S'#39')')
     Params = <>
     Left = 120
     Top = 96
