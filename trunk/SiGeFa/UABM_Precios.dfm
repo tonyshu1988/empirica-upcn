@@ -159,10 +159,10 @@ object FABM_Precios: TFABM_Precios
           ExportAs = exptText
           FontSize = 12
         end
-        object RepCtas_Reporte_Titulo_2: TQRLabel
-          Left = 433
+        object RepListaPrecios_Subtitulo: TQRLabel
+          Left = 435
           Top = 36
-          Width = 181
+          Width = 176
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -171,14 +171,14 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            1145.645833333333000000
+            1150.937500000000000000
             95.250000000000000000
-            478.895833333333400000)
+            465.666666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepCtas_Reporte_Titulo_2'
+          Caption = 'RepListaPrecios_Subtitulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -191,10 +191,10 @@ object FABM_Precios: TFABM_Precios
           ExportAs = exptText
           FontSize = 9
         end
-        object RepCtas_Reporte_Titulo_1: TQRLabel
-          Left = 403
+        object RepListaPrecios_Titulo: TQRLabel
+          Left = 423
           Top = 12
-          Width = 240
+          Width = 201
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -203,14 +203,14 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            1066.270833333333000000
+            1119.187500000000000000
             31.750000000000000000
-            635.000000000000000000)
+            531.812500000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepCtas_Reporte_Titulo_1'
+          Caption = 'RepListaPrecios_Titulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -1842,9 +1842,9 @@ object FABM_Precios: TFABM_Precios
           Visible = False
         end
         object lblPrecio5: TLabel
-          Left = 576
+          Left = 583
           Top = 20
-          Width = 120
+          Width = 113
           Height = 13
           Alignment = taRightJustify
           AutoSize = False
