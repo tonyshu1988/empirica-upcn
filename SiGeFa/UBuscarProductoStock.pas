@@ -83,8 +83,7 @@ type
     procedure btnSeleccionarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnSeleccionarTodosClick(Sender: TObject);
     procedure ASelTodosExecute(Sender: TObject);
   private
@@ -94,7 +93,7 @@ type
     OnSeleccionar : procedure() of object;
     OnSeleccionarTodos : procedure() of object;
     SeleccionarYSalir: boolean;
-    usaCajero, usaTransferir, usaDevolucion: String;
+    usaCajero, usaTransferir, abrirZQ_Producto: String;
   end;
 
 var
@@ -197,7 +196,7 @@ procedure TFBuscarProductoStock.btnSeleccionarClick(Sender: TObject);
 begin
   if ((not(DBGridStock.SelectedRows.Count > 0)) and (not(ZQ_Stock.IsEmpty))) then
   begin
-    if usaDevolucion = 'S' then //se usa en la pantalla de devolucion de productos
+    if abrirZQ_Producto = 'S' then //se usa en la pantalla de devolucion de productos
     begin
       ZQ_Producto.Close;
       ZQ_Producto.ParamByName('id_producto').AsInteger:= ZQ_StockID_PRODUCTO.AsInteger;
