@@ -1,8 +1,8 @@
 object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
-  Left = 341
-  Top = 141
+  Left = 284
+  Top = 113
   Width = 892
-  Height = 586
+  Height = 609
   Caption = 'ABM Devoluci'#243'n'
   Color = clBtnFace
   Constraints.MinHeight = 586
@@ -23,63 +23,11 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object PanelTipoCpb: TPanel
-    Left = 295
-    Top = 172
-    Width = 265
-    Height = 163
-    BorderWidth = 4
-    TabOrder = 2
-    Visible = False
-    object RadioGroupTipoComprobante: TRadioGroup
-      Left = 5
-      Top = 5
-      Width = 255
-      Height = 124
-      Align = alClient
-      Caption = '  Seleccione el Tipo de Comprobante  '
-      ItemIndex = 0
-      Items.Strings = (
-        'PRESUPUESTO'
-        'NOTA DE PEDIDO'
-        'REMITO DE VENTA'
-        'RECIBO DE COBRO'
-        'ORDEN DE PAGO')
-      TabOrder = 0
-    end
-    object Panel16: TPanel
-      Left = 5
-      Top = 129
-      Width = 255
-      Height = 29
-      Align = alBottom
-      BevelOuter = bvNone
-      TabOrder = 1
-      object btnTipoCpb_Aceptar: TButton
-        Left = 33
-        Top = 3
-        Width = 75
-        Height = 25
-        Caption = 'Aceptar'
-        TabOrder = 0
-        OnClick = btnTipoCpb_AceptarClick
-      end
-      object btnTipoCpb_Cancelar: TButton
-        Left = 145
-        Top = 3
-        Width = 75
-        Height = 25
-        Caption = 'Cancelar'
-        TabOrder = 1
-        OnClick = btnTipoCpb_CancelarClick
-      end
-    end
-  end
   object PanelFondo: TPanel
     Left = 0
-    Top = 43
+    Top = 19
     Width = 876
-    Height = 453
+    Height = 500
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -87,7 +35,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       Left = 0
       Top = 0
       Width = 876
-      Height = 453
+      Height = 500
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -102,14 +50,14 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Left = 340
         Top = 5
         Width = 6
-        Height = 443
+        Height = 490
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
         Width = 335
-        Height = 443
+        Height = 490
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -117,7 +65,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           Left = 0
           Top = 0
           Width = 335
-          Height = 443
+          Height = 490
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -137,14 +85,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               Title.Alignment = taCenter
               Title.Caption = 'Fecha'
               Width = 87
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NOMBRE_TIPO_CPB'
-              Title.Alignment = taCenter
-              Title.Caption = 'Tipo Cpb.'
-              Width = 107
               Visible = True
             end
             item
@@ -193,46 +133,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               Title.Alignment = taCenter
               Title.Caption = 'Importe'
               Visible = True
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA_COBRADA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Cobro'
-              Visible = True
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA_ENVIADA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Envio'
-              Visible = True
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA_IMPRESA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Impreso'
-              Visible = True
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA_VENCIMIENTO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha Vencim.'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VENDEDOR'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vendedor'
-              Width = 300
-              Visible = True
             end>
         end
       end
@@ -240,7 +140,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Left = 346
         Top = 5
         Width = 525
-        Height = 443
+        Height = 490
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -249,18 +149,18 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           Left = 0
           Top = 0
           Width = 525
-          Height = 181
+          Height = 228
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
-          object DBGridCpbActual_Producto: TDBGrid
+          object DBGridCpbActual_Devolucion: TDBGrid
             Left = 0
             Top = 0
             Width = 525
-            Height = 43
+            Height = 116
             Align = alClient
             Color = 14606012
-            DataSource = DS_VerCpb_Producto
+            DataSource = DS_VerCpb_Devolucion
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             PopupMenu = PopupGridProducto
             TabOrder = 0
@@ -313,265 +213,76 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           end
           object PanelCpbActual_ProductoDetalle: TPanel
             Left = 0
-            Top = 43
+            Top = 116
             Width = 525
-            Height = 138
+            Height = 112
             Align = alBottom
             BevelOuter = bvNone
             BorderWidth = 2
             TabOrder = 1
-            object GroupBox2: TGroupBox
+            object DBGridCpbActual_Entrega: TDBGrid
               Left = 2
               Top = 2
               Width = 521
-              Height = 134
+              Height = 108
               Align = alClient
-              Caption = '  Detalle Producto  '
+              Color = 14606012
+              DataSource = DS_VerCpb_Entrega
+              Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+              PopupMenu = PopupGridProducto
               TabOrder = 0
-              object DBMemoCpbActual_Producto: TDBMemo
-                Left = 57
-                Top = 86
-                Width = 462
-                Height = 46
-                Align = alClient
-                DataField = 'DETALLE'
-                DataSource = DS_VerCpb_Producto
-                TabOrder = 0
-              end
-              object Panel2: TPanel
-                Left = 2
-                Top = 86
-                Width = 55
-                Height = 46
-                Align = alLeft
-                BevelOuter = bvNone
-                TabOrder = 1
-                object DBImage1: TDBImage
-                  Left = 0
-                  Top = 0
-                  Width = 55
-                  Height = 46
-                  Align = alClient
-                  DataField = 'IMAGEN'
-                  DataSource = DS_VerCpb_Producto
-                  Stretch = True
-                  TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Verdana'
+              TitleFont.Style = []
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'CODIGO_BARRA'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'C'#243'd. Barra'
+                  Width = 84
+                  Visible = True
                 end
-              end
-              object Panel3: TPanel
-                Left = 2
-                Top = 15
-                Width = 517
-                Height = 71
-                Align = alTop
-                BevelOuter = bvNone
-                TabOrder = 2
-                object Panel4: TPanel
-                  Left = 0
-                  Top = 0
-                  Width = 517
-                  Height = 71
-                  Align = alClient
-                  BevelOuter = bvNone
-                  Color = clScrollBar
-                  TabOrder = 0
-                  object DBText21: TDBText
-                    Left = 76
-                    Top = 5
-                    Width = 105
-                    Height = 13
-                    DataField = 'CODIGO_BARRA'
-                    DataSource = DS_VerCpb_Producto
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = [fsBold]
-                    ParentFont = False
-                  end
-                  object Label32: TLabel
-                    Left = 7
-                    Top = 5
-                    Width = 68
-                    Height = 13
-                    Caption = 'C'#243'd. Barra:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object Label33: TLabel
-                    Left = 182
-                    Top = 5
-                    Width = 50
-                    Height = 13
-                    Caption = 'Nombre:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object DBText26: TDBText
-                    Left = 233
-                    Top = 5
-                    Width = 281
-                    Height = 13
-                    DataField = 'PRODUCTO'
-                    DataSource = DS_VerCpb_Producto
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = [fsBold]
-                    ParentFont = False
-                  end
-                  object Label34: TLabel
-                    Left = 30
-                    Top = 22
-                    Width = 45
-                    Height = 13
-                    Caption = 'Medida:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object DBText27: TDBText
-                    Left = 76
-                    Top = 22
-                    Width = 173
-                    Height = 13
-                    DataField = 'MEDIDA'
-                    DataSource = DS_VerCpb_Producto
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = [fsBold]
-                    ParentFont = False
-                  end
-                  object Label35: TLabel
-                    Left = 270
-                    Top = 22
-                    Width = 36
-                    Height = 13
-                    Caption = 'Color:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object DBText28: TDBText
-                    Left = 307
-                    Top = 22
-                    Width = 208
-                    Height = 13
-                    DataField = 'COLOR'
-                    DataSource = DS_VerCpb_Producto
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = [fsBold]
-                    ParentFont = False
-                  end
-                  object Label36: TLabel
-                    Left = 21
-                    Top = 39
-                    Width = 54
-                    Height = 13
-                    Caption = 'Tipo Art.:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object DBText29: TDBText
-                    Left = 76
-                    Top = 39
-                    Width = 173
-                    Height = 13
-                    DataField = 'TIPO_ARTICULO'
-                    DataSource = DS_VerCpb_Producto
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = [fsBold]
-                    ParentFont = False
-                  end
-                  object Label37: TLabel
-                    Left = 258
-                    Top = 39
-                    Width = 48
-                    Height = 13
-                    Caption = 'Art'#237'culo:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object DBText30: TDBText
-                    Left = 307
-                    Top = 39
-                    Width = 208
-                    Height = 13
-                    DataField = 'ARTICULO'
-                    DataSource = DS_VerCpb_Producto
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = [fsBold]
-                    ParentFont = False
-                  end
-                  object Label38: TLabel
-                    Left = 36
-                    Top = 55
-                    Width = 39
-                    Height = 13
-                    Caption = 'Marca:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object DBText31: TDBText
-                    Left = 77
-                    Top = 55
-                    Width = 220
-                    Height = 13
-                    DataField = 'MARCA'
-                    DataSource = DS_VerCpb_Producto
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = [fsBold]
-                    ParentFont = False
-                  end
+                item
+                  Expanded = False
+                  FieldName = 'PRODUCTO'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Producto'
+                  Width = 217
+                  Visible = True
                 end
-              end
+                item
+                  Expanded = False
+                  FieldName = 'MEDIDA'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Medida'
+                  Width = 51
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'CANTIDAD'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Cantidad'
+                  Width = 58
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'IMPORTE_FINAL'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Importe Final'
+                  Width = 95
+                  Visible = True
+                end>
             end
           end
         end
         object PanelCpbActual_FPago: TPanel
           Left = 0
-          Top = 181
+          Top = 228
           Width = 525
           Height = 100
           Align = alBottom
@@ -668,7 +379,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 281
+          Top = 328
           Width = 525
           Height = 162
           Align = alBottom
@@ -686,43 +397,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             DesignSize = (
               521
               158)
-            object lblVerFecha_Ven_Ejec: TLabel
-              Left = 381
-              Top = 19
-              Width = 51
-              Height = 13
-              Alignment = taRightJustify
-              Caption = 'F. Venc.:'
-            end
-            object lblVerFecha_Cpb_Dev: TLabel
-              Left = 189
-              Top = 19
-              Width = 67
-              Height = 13
-              Alignment = taRightJustify
-              Caption = 'F. Impreso:'
-            end
-            object Label28: TLabel
-              Left = 213
-              Top = 38
-              Width = 43
-              Height = 13
-              Caption = 'Estado:'
-            end
-            object Label27: TLabel
-              Left = 8
-              Top = 38
-              Width = 50
-              Height = 13
-              Caption = 'F.Cobro:'
-            end
-            object Label24: TLabel
-              Left = 8
-              Top = 19
-              Width = 50
-              Height = 13
-              Caption = 'F. Envio:'
-            end
             object DBTxtMonto: TDBText
               Left = 332
               Top = 130
@@ -739,84 +413,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               Font.Style = [fsBold]
               ParentFont = False
             end
-            object DBText5: TDBText
-              Left = 257
-              Top = 38
-              Width = 256
-              Height = 13
-              DataField = 'ESTADO'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object DBText4: TDBText
-              Left = 59
-              Top = 38
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA_COBRADA'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object DBText3: TDBText
-              Left = 433
-              Top = 19
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA_VENCIMIENTO'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object DBText2: TDBText
-              Left = 257
-              Top = 19
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA_IMPRESA'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object DBText1: TDBText
-              Left = 59
-              Top = 19
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA_ENVIADA'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
             object Label1: TLabel
               Left = 463
               Top = 118
@@ -824,6 +420,75 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               Height = 13
               Alignment = taRightJustify
               Caption = 'Importe'
+            end
+            object lblDatos_Proveedor: TLabel
+              Left = 8
+              Top = 19
+              Width = 64
+              Height = 13
+              Caption = 'Proveedor:'
+            end
+            object DBTxtDatos_Proveedor: TDBText
+              Left = 78
+              Top = 19
+              Width = 427
+              Height = 13
+              Color = 14342874
+              DataField = 'PROVEEDOR'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object lblDatos_Cliente: TLabel
+              Left = 27
+              Top = 19
+              Width = 45
+              Height = 13
+              Caption = 'Cliente:'
+            end
+            object DBTxtDatos_Cliente: TDBText
+              Left = 78
+              Top = 19
+              Width = 427
+              Height = 13
+              Color = 14342874
+              DataField = 'CLIENTE'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label30: TLabel
+              Left = 18
+              Top = 36
+              Width = 54
+              Height = 13
+              Caption = 'F. Carga:'
+            end
+            object DBText33: TDBText
+              Left = 78
+              Top = 36
+              Width = 80
+              Height = 13
+              Color = 14342874
+              DataField = 'FECHA'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
             end
             object DBMemoCpbActual_Info: TDBMemo
               Left = 8
@@ -843,7 +508,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       Left = 0
       Top = 0
       Width = 876
-      Height = 453
+      Height = 500
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -858,15 +523,15 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Left = 5
         Top = 5
         Width = 866
-        Height = 177
+        Height = 154
         Align = alTop
         TabOrder = 0
         DesignSize = (
           866
-          177)
+          154)
         object DBTxtCPB_PuntoVenta: TDBText
           Left = 709
-          Top = 33
+          Top = 28
           Width = 44
           Height = 18
           Alignment = taRightJustify
@@ -883,7 +548,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object DBTxtCPB_Numero: TDBText
           Left = 766
-          Top = 33
+          Top = 28
           Width = 88
           Height = 18
           Alignment = taRightJustify
@@ -900,7 +565,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object btnBuscarEmpresa: TSpeedButton
           Left = 7
-          Top = 11
+          Top = 3
           Width = 50
           Height = 50
           Hint = 'Buscar una empresa para asociar al comprobante'
@@ -909,7 +574,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object btnBuscarPersona: TSpeedButton
           Left = 7
-          Top = 62
+          Top = 54
           Width = 50
           Height = 50
           Hint = 'Buscar una persona para asociar al comprobante'
@@ -918,7 +583,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object Label12: TLabel
           Left = 709
-          Top = 12
+          Top = 10
           Width = 145
           Height = 15
           Alignment = taCenter
@@ -937,7 +602,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object LblCPB_PuntoVenta: TLabel
           Left = 709
-          Top = 33
+          Top = 28
           Width = 44
           Height = 18
           Alignment = taRightJustify
@@ -956,7 +621,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object LblCPB_Numero: TLabel
           Left = 766
-          Top = 33
+          Top = 28
           Width = 88
           Height = 18
           Anchors = [akRight]
@@ -974,7 +639,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object Label26: TLabel
           Left = 755
-          Top = 33
+          Top = 28
           Width = 8
           Height = 18
           Alignment = taCenter
@@ -990,9 +655,182 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           ParentFont = False
           Transparent = True
         end
+        object PanelFechas: TPanel
+          Left = 64
+          Top = 76
+          Width = 637
+          Height = 42
+          BevelOuter = bvNone
+          TabOrder = 2
+          object PanelFechaVencimiento: TPanel
+            Left = 508
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 4
+            object lblTituloFecha_Vencimiento: TLabel
+              Left = 11
+              Top = 0
+              Width = 70
+              Height = 13
+              Caption = 'Vencimiento'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateVencimiento: TEKDBDateTimePicker
+              Left = 11
+              Top = 13
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA_VENCIMIENTO'
+              DataSource = DS_Comprobante
+            end
+          end
+          object PanelFechaImpreso: TPanel
+            Left = 381
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 3
+            object lblTituloFecha_Impreso: TLabel
+              Left = 11
+              Top = 0
+              Width = 48
+              Height = 13
+              Caption = 'Impreso'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateImpreso: TEKDBDateTimePicker
+              Left = 11
+              Top = 13
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA_IMPRESA'
+              DataSource = DS_Comprobante
+            end
+          end
+          object PanelFechaEnviado: TPanel
+            Left = 254
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 2
+            object lblTituloFecha_Enviado: TLabel
+              Left = 11
+              Top = 0
+              Width = 45
+              Height = 13
+              Caption = 'Enviado'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateEnviado: TEKDBDateTimePicker
+              Left = 11
+              Top = 13
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA_ENVIADA'
+              DataSource = DS_Comprobante
+            end
+          end
+          object PanelFechaCobrado: TPanel
+            Left = 127
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 1
+            object lblTituloFecha_Cobrado: TLabel
+              Left = 11
+              Top = 0
+              Width = 49
+              Height = 13
+              Caption = 'Cobrado'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateCobrado: TEKDBDateTimePicker
+              Left = 11
+              Top = 13
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA_COBRADA'
+              DataSource = DS_Comprobante
+            end
+          end
+          object PanelFechaEmision: TPanel
+            Left = 0
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 0
+            object lblTituloFecha_Emision: TLabel
+              Left = 12
+              Top = 0
+              Width = 44
+              Height = 13
+              Caption = 'Emisi'#243'n'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateEmision: TEKDBDateTimePicker
+              Left = 11
+              Top = 13
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA'
+              DataSource = DS_Comprobante
+            end
+          end
+        end
         object PanelEditar_DatosGralProveedor: TPanel
           Left = 66
-          Top = 7
+          Top = -3
           Width = 633
           Height = 74
           Anchors = [akLeft]
@@ -1245,7 +1083,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object PanelEditar_DatosGralCliente: TPanel
           Left = 66
-          Top = 7
+          Top = -3
           Width = 633
           Height = 74
           Anchors = [akLeft]
@@ -1525,204 +1363,31 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object DBMemoCPB_Observacion: TDBMemo
           Left = 66
-          Top = 126
+          Top = 115
           Width = 633
-          Height = 46
+          Height = 35
           DataField = 'OBSERVACION'
           DataSource = DS_Comprobante
           ScrollBars = ssVertical
           TabOrder = 3
         end
-        object PanelFechas: TPanel
-          Left = 64
-          Top = 82
-          Width = 637
-          Height = 42
-          BevelOuter = bvNone
-          TabOrder = 2
-          object PanelFechaVencimiento: TPanel
-            Left = 508
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 4
-            object lblTituloFecha_Vencimiento: TLabel
-              Left = 11
-              Top = 1
-              Width = 70
-              Height = 13
-              Caption = 'Vencimiento'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateVencimiento: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_VENCIMIENTO'
-              DataSource = DS_Comprobante
-            end
-          end
-          object PanelFechaImpreso: TPanel
-            Left = 381
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 3
-            object lblTituloFecha_Impreso: TLabel
-              Left = 11
-              Top = 1
-              Width = 48
-              Height = 13
-              Caption = 'Impreso'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateImpreso: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_IMPRESA'
-              DataSource = DS_Comprobante
-            end
-          end
-          object PanelFechaEnviado: TPanel
-            Left = 254
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 2
-            object lblTituloFecha_Enviado: TLabel
-              Left = 11
-              Top = 1
-              Width = 45
-              Height = 13
-              Caption = 'Enviado'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateEnviado: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_ENVIADA'
-              DataSource = DS_Comprobante
-            end
-          end
-          object PanelFechaCobrado: TPanel
-            Left = 127
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 1
-            object lblTituloFecha_Cobrado: TLabel
-              Left = 11
-              Top = 1
-              Width = 49
-              Height = 13
-              Caption = 'Cobrado'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateCobrado: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_COBRADA'
-              DataSource = DS_Comprobante
-            end
-          end
-          object PanelFechaEmision: TPanel
-            Left = 0
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 0
-            object lblTituloFecha_Emision: TLabel
-              Left = 12
-              Top = 1
-              Width = 44
-              Height = 13
-              Caption = 'Emisi'#243'n'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateEmision: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA'
-              DataSource = DS_Comprobante
-            end
-          end
-        end
       end
-      object PanelEditar_Producto: TPanel
+      object PanelEditar_Entrega: TPanel
         Left = 5
-        Top = 182
+        Top = 268
         Width = 866
-        Height = 112
-        Align = alClient
+        Height = 109
+        Align = alBottom
         TabOrder = 1
-        object PanelEditar_ProductoInfo: TPanel
+        object PanelEditar_EntregaInfo: TPanel
           Left = 1
-          Top = 91
+          Top = 88
           Width = 864
           Height = 20
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
-          object lblCantidadProductos: TLabel
+          object lblCantidadEntrega: TLabel
             Left = 320
             Top = 3
             Width = 544
@@ -1732,7 +1397,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             Anchors = [akTop, akRight]
             AutoSize = False
             BiDiMode = bdLeftToRight
-            Caption = 'Cantidad Productos: 0.00 '
+            Caption = 'Cantidad Productos Entregados: 0.00 '
             Color = cl3DLight
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -1743,35 +1408,35 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             ParentColor = False
             ParentFont = False
           end
-          object btnEliminarProducto: TButton
-            Left = 164
+          object btnEliminarEntrega: TButton
+            Left = 4
             Top = 1
             Width = 145
             Height = 18
             Caption = 'Quitar (Ctrl+Delete)'
             TabOrder = 0
-            OnClick = btnEliminarProductoClick
+            OnClick = btnEliminarEntregaClick
           end
         end
-        object DBGridEditar_Producto: TDBGrid
-          Left = 164
+        object DBGridEditar_Entrega: TDBGrid
+          Left = 1
           Top = 1
-          Width = 701
-          Height = 90
+          Width = 864
+          Height = 87
           Align = alClient
           Color = 14606012
-          DataSource = DS_CpbProducto
+          DataSource = DS_CpbEntrega
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          PopupMenu = Popup_Producto
+          PopupMenu = Popup_Devolucion
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
-          OnDrawColumnCell = DBGridEditar_ProductoDrawColumnCell
-          OnKeyDown = DBGridEditar_ProductoKeyDown
-          OnKeyUp = DBGridEditar_ProductoKeyUp
+          OnDrawColumnCell = DBGridEditar_EntregaDrawColumnCell
+          OnKeyDown = DBGridEditar_EntregaKeyDown
+          OnKeyUp = DBGridEditar_EntregaKeyUp
           Columns = <
             item
               Expanded = False
@@ -1806,15 +1471,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               ReadOnly = True
               Title.Alignment = taCenter
               Title.Caption = 'Color'
-              Width = 118
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DETALLE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Detalle'
-              Width = 309
+              Width = 119
               Visible = True
             end
             item
@@ -1827,89 +1484,39 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             end
             item
               Expanded = False
-              FieldName = 'CANTIDAD_RECIBIDA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Recibido'
-              Width = 61
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'IMPORTE_UNITARIO'
               Title.Alignment = taCenter
               Title.Caption = 'Precio Unitario'
-              Width = 100
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'BASE_IMPONIBLE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Base Imponible'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PORC_DESCUENTO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Desc.'
-              Width = 40
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PORC_IVA'
-              Title.Alignment = taCenter
-              Title.Caption = 'IVA'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_FINAL'
+              FieldName = 'IMPORTE_VENTA'
               Title.Alignment = taCenter
               Title.Caption = 'Precio Final'
               Width = 100
               Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DETALLE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Detalle'
+              Width = 309
+              Visible = True
             end>
-        end
-        object Panel1: TPanel
-          Left = 1
-          Top = 1
-          Width = 163
-          Height = 90
-          Align = alLeft
-          BevelOuter = bvNone
-          Caption = 'Panel1'
-          TabOrder = 2
-          DesignSize = (
-            163
-            90)
-          object edImagen: TDBImage
-            Left = 3
-            Top = -11
-            Width = 156
-            Height = 112
-            Anchors = []
-            DataField = 'IMAGEN'
-            DataSource = DS_Imagen
-            Stretch = True
-            TabOrder = 0
-            TabStop = False
-          end
         end
       end
       object PanelEditar_FPago: TPanel
         Left = 5
-        Top = 294
+        Top = 377
         Width = 866
-        Height = 154
+        Height = 118
         Align = alBottom
         TabOrder = 2
         object PanelEditar_FPagoInfo: TPanel
           Left = 1
-          Top = 133
+          Top = 97
           Width = 864
           Height = 20
           Align = alBottom
@@ -1950,7 +1557,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           Left = 1
           Top = 1
           Width = 864
-          Height = 132
+          Height = 96
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbFormaPago
@@ -1962,13 +1569,12 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           OnColExit = DBGridEditar_FpagoColExit
-          OnKeyPress = DBGridEditar_FpagoKeyPress
           OnKeyUp = DBGridEditar_FpagoKeyUp
           Columns = <
             item
               Alignment = taRightJustify
               Expanded = False
-              FieldName = '_CuentaIngreso_Codigo'
+              FieldName = '_CodCuenta'
               Title.Alignment = taCenter
               Title.Caption = 'C'#243'digo'
               Width = 55
@@ -1976,24 +1582,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             end
             item
               Expanded = False
-              FieldName = '_CuentaIngreso_Nombre'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cuenta'
-              Width = 205
-              Visible = True
-            end
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = '_CuentaEgreso_Codigo'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'digo'
-              Width = 55
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = '_CuentaEgreso_Nombre'
+              FieldName = '_NombreCuenta'
               Title.Alignment = taCenter
               Title.Caption = 'Cuenta'
               Width = 205
@@ -2001,7 +1590,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             end
             item
               Expanded = False
-              FieldName = '_TipoFormaPago'
+              FieldName = '_TipoFormaCP'
               Title.Alignment = taCenter
               Title.Caption = 'Medio'
               Width = 131
@@ -2009,7 +1598,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             end
             item
               Expanded = False
-              FieldName = 'MDCP_FECHA'
+              FieldName = '_MCPFecha'
               Title.Alignment = taCenter
               Title.Caption = 'Fecha Medio'
               Width = 111
@@ -2017,14 +1606,14 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             end
             item
               Expanded = False
-              FieldName = 'MDCP_BANCO'
+              FieldName = '_MCPBanco'
               Title.Alignment = taCenter
               Title.Caption = 'Banco Medio'
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'MDCP_CHEQUE'
+              FieldName = '_MCPNumero'
               Title.Alignment = taCenter
               Title.Caption = 'N'#250'mero Medio'
               Width = 122
@@ -2032,10 +1621,145 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             end
             item
               Expanded = False
-              FieldName = 'IMPORTE'
+              FieldName = '_Importe'
               Title.Alignment = taCenter
               Title.Caption = 'Importe'
               Width = 95
+              Visible = True
+            end>
+        end
+      end
+      object PanelEditar_Devolucion: TPanel
+        Left = 5
+        Top = 159
+        Width = 866
+        Height = 109
+        Align = alClient
+        TabOrder = 3
+        object PanelEditar_DevolucionInfo: TPanel
+          Left = 1
+          Top = 88
+          Width = 864
+          Height = 20
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 1
+          object lblCantidadDevolucion: TLabel
+            Left = 320
+            Top = 3
+            Width = 544
+            Height = 14
+            Align = alCustom
+            Alignment = taRightJustify
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BiDiMode = bdLeftToRight
+            Caption = 'Cantidad Productos Devueltos: 0.00 '
+            Color = cl3DLight
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentColor = False
+            ParentFont = False
+          end
+          object btnEliminarDevolucion: TButton
+            Left = 4
+            Top = 1
+            Width = 145
+            Height = 18
+            Caption = 'Quitar (Ctrl+Delete)'
+            TabOrder = 0
+            OnClick = btnEliminarDevolucionClick
+          end
+        end
+        object DBGridEditar_Devolucion: TDBGrid
+          Left = 1
+          Top = 1
+          Width = 864
+          Height = 87
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_CpbDevolucion
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Devolucion
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridEditar_DevolucionDrawColumnCell
+          OnKeyDown = DBGridEditar_DevolucionKeyDown
+          OnKeyUp = DBGridEditar_DevolucionKeyUp
+          Columns = <
+            item
+              Expanded = False
+              FieldName = '_CodBarra'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Barra'
+              Width = 76
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = '_Nombre'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Nombre'
+              Width = 192
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = '_Medida'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Width = 84
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = '_Color'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Color'
+              Width = 118
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cantidad'
+              Width = 61
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_UNITARIO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Precio Unitario'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_VENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Precio Final'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DETALLE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Detalle'
+              Width = 309
               Visible = True
             end>
         end
@@ -2060,7 +1784,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       Alignment = taCenter
       Anchors = [akLeft, akRight]
       AutoSize = False
-      Caption = 'PRESUPUESTO'
+      Caption = 'DEVOLUCIONES'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clHotLight
       Font.Height = -15
@@ -2096,83 +1820,19 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       ParentColor = False
       TabOrder = 0
     end
-  end
-  object PanelFiltro: TPanel
-    Left = 0
-    Top = 19
-    Width = 876
-    Height = 24
-    Align = alTop
-    ParentShowHint = False
-    ShowHint = False
-    TabOrder = 7
-    object BtnFiltro_Todos: TSpeedButton
-      Left = 55
-      Top = 3
-      Width = 94
-      Height = 18
-      GroupIndex = 1
-      Down = True
-      Caption = 'Todos'
-      Layout = blGlyphBottom
-      OnClick = AplicarFiltro
-    end
-    object BtnFiltro_Presupuesto: TSpeedButton
-      Left = 151
-      Top = 3
-      Width = 94
-      Height = 18
-      GroupIndex = 1
-      Caption = 'Presupuestos'
-      Layout = blGlyphBottom
-      OnClick = AplicarFiltro
-    end
-    object BtnFiltro_NotaPedido: TSpeedButton
-      Left = 247
-      Top = 3
-      Width = 94
-      Height = 18
-      GroupIndex = 1
-      Caption = 'Notas Pedido'
-      Layout = blGlyphBottom
-      OnClick = AplicarFiltro
-    end
-    object BtnFiltro_OrdenPago: TSpeedButton
-      Left = 439
-      Top = 3
-      Width = 94
-      Height = 18
-      GroupIndex = 1
-      Caption = 'Ordenes Pago'
-      Layout = blGlyphBottom
-      OnClick = AplicarFiltro
-    end
-    object BtnFiltro_Remito: TSpeedButton
-      Left = 343
-      Top = 3
-      Width = 94
-      Height = 18
-      GroupIndex = 1
-      Caption = 'Remitos'
-      Layout = blGlyphBottom
-      OnClick = AplicarFiltro
-    end
-    object BtnFiltro_Recibo: TSpeedButton
-      Left = 535
-      Top = 3
-      Width = 94
-      Height = 18
-      GroupIndex = 1
-      Caption = 'Recibos'
-      Layout = blGlyphBottom
-      OnClick = AplicarFiltro
-    end
-    object Label39: TLabel
-      Left = 19
-      Top = 5
-      Width = 33
-      Height = 13
-      Caption = 'Filtro:'
+    object StaticTxtConfirmado: TStaticText
+      Left = 657
+      Top = 1
+      Width = 109
+      Height = 17
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'CONFIRMADO'
+      Color = 10025203
+      ParentColor = False
+      TabOrder = 1
     end
   end
   object dxBarABM: TdxBarManager
@@ -2629,8 +2289,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 796
-    Top = 394
+    Left = 732
+    Top = 450
     DockControlHeights = (
       0
       0
@@ -2680,7 +2340,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       Hint = 'Da de baja un registro'
       Visible = ivAlways
       ImageIndex = 25
-      OnClick = btnBajaClick
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
@@ -2689,7 +2348,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       Hint = 'Reactiva un registro'
       Visible = ivAlways
       ImageIndex = 24
-      OnClick = btnReactivarClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
@@ -2736,7 +2394,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       Hint = 'Confirmar el comprobante seleccionado'
       Visible = ivNever
       ImageIndex = 5
-      OnClick = btnConfirmarClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -2759,8 +2416,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     end
   end
   object ATeclasRapidas: TActionManager
-    Left = 796
-    Top = 444
+    Left = 652
+    Top = 450
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -2806,8 +2463,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   object ImageListEntidad: TImageList
     Height = 48
     Width = 48
-    Left = 707
-    Top = 394
+    Left = 649
+    Top = 400
     Bitmap = {
       494C010102000400040030003000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C00000003000000001002000000000000090
@@ -4013,27 +3670,19 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       
         '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
         'iente_cuil,'
-      
-        '        ven.nombre as vendedor, tcpb.nombre_tipo_cpb, est.descri' +
-        'pcion as estado'
+      '        est.descripcion as estado'
       'from comprobante cpb'
       'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
       'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
       'left join persona cli on (cpb.id_cliente = cli.id_persona)'
-      'left join persona ven on (cpb.id_vendedor = ven.id_persona)'
-      
-        'left join tipo_comprobante tcpb on (cpb.id_tipo_cpb = tcpb.id_ti' +
-        'po_cpb)'
       
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
         '_comp_estado)'
-      
-        'where ((cpb.id_tipo_cpb <> 11) and (cpb.id_tipo_cpb <> 16) and (' +
-        'cpb.id_tipo_cpb <> 17))'
+      'where (cpb.id_tipo_cpb = 12)'
       'order by cpb.fecha desc')
     Params = <>
-    Left = 34
-    Top = 52
+    Left = 50
+    Top = 24
     object ZQ_VerCpbID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
@@ -4055,13 +3704,37 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object ZQ_VerCpbID_COMP_ESTADO: TIntegerField
       FieldName = 'ID_COMP_ESTADO'
     end
+    object ZQ_VerCpbCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_VerCpbFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
     object ZQ_VerCpbOBSERVACION: TStringField
       FieldName = 'OBSERVACION'
       Size = 500
     end
+    object ZQ_VerCpbBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_VerCpbSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
     object ZQ_VerCpbIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
-      currency = True
+    end
+    object ZQ_VerCpbPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_VerCpbIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_VerCpbPORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_VerCpbIMPORTE_DESCUENTO: TFloatField
+      FieldName = 'IMPORTE_DESCUENTO'
     end
     object ZQ_VerCpbENCABEZADO: TStringField
       FieldName = 'ENCABEZADO'
@@ -4071,29 +3744,38 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       FieldName = 'PIE'
       Size = 500
     end
-    object ZQ_VerCpbFECHA: TDateTimeField
-      FieldName = 'FECHA'
-      DisplayFormat = 'dd/MM/yyyy'
-    end
     object ZQ_VerCpbFECHA_COBRADA: TDateField
       FieldName = 'FECHA_COBRADA'
-      DisplayFormat = 'dd/MM/yyyy'
     end
     object ZQ_VerCpbFECHA_ENVIADA: TDateField
       FieldName = 'FECHA_ENVIADA'
-      DisplayFormat = 'dd/MM/yyyy'
     end
     object ZQ_VerCpbFECHA_IMPRESA: TDateField
       FieldName = 'FECHA_IMPRESA'
-      DisplayFormat = 'dd/MM/yyyy'
     end
     object ZQ_VerCpbFECHA_VENCIMIENTO: TDateField
       FieldName = 'FECHA_VENCIMIENTO'
-      DisplayFormat = 'dd/MM/yyyy'
+    end
+    object ZQ_VerCpbPUNTO_VENTA: TIntegerField
+      FieldName = 'PUNTO_VENTA'
+    end
+    object ZQ_VerCpbNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
     end
     object ZQ_VerCpbFECHA_ANULADO: TDateField
       FieldName = 'FECHA_ANULADO'
-      DisplayFormat = 'dd/MM/yyyy'
+    end
+    object ZQ_VerCpbID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_VerCpbID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
+    object ZQ_VerCpbIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_VerCpbIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
     end
     object ZQ_VerCpbSUCURSAL: TStringField
       FieldName = 'SUCURSAL'
@@ -4119,25 +3801,9 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       FieldName = 'CLIENTE_CUIL'
       Size = 30
     end
-    object ZQ_VerCpbVENDEDOR: TStringField
-      FieldName = 'VENDEDOR'
-      Size = 200
-    end
-    object ZQ_VerCpbNOMBRE_TIPO_CPB: TStringField
-      FieldName = 'NOMBRE_TIPO_CPB'
-      Size = 50
-    end
     object ZQ_VerCpbESTADO: TStringField
       FieldName = 'ESTADO'
       Size = 50
-    end
-    object ZQ_VerCpbPUNTO_VENTA: TIntegerField
-      FieldName = 'PUNTO_VENTA'
-      DisplayFormat = '0000'
-    end
-    object ZQ_VerCpbNUMERO_CPB: TIntegerField
-      FieldName = 'NUMERO_CPB'
-      DisplayFormat = '00000000'
     end
   end
   object ZQ_VerCpb_Fpago: TZQuery
@@ -4163,8 +3829,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 769
-    Top = 196
+    Left = 817
+    Top = 24
     ParamData = <
       item
         DataType = ftUnknown
@@ -4231,7 +3897,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       FieldName = 'IMPORTE_REAL'
     end
   end
-  object ZQ_VerCpb_Producto: TZQuery
+  object ZQ_VerCpb_Devolucion: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       
@@ -4260,147 +3926,144 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         'left join tipo_articulo tart on (art.id_tipo_articulo = tart.id_' +
         'tipo_articulo)'
       'left join medida med on (pro.id_medida = med.id_medida)'
-      'where cpbd.id_comprobante = :id_comprobante')
+      'where cpbd.id_comprobante = :id_comprobante'
+      '  and cpbd.cantidad < 0 ')
     Params = <
       item
         DataType = ftUnknown
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 769
-    Top = 35
+    Left = 593
+    Top = 24
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    object ZQ_VerCpb_ProductoID_COMPROBANTE_DETALLE: TIntegerField
+    object ZQ_VerCpb_DevolucionID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
     end
-    object ZQ_VerCpb_ProductoID_COMPROBANTE: TIntegerField
+    object ZQ_VerCpb_DevolucionID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
-    object ZQ_VerCpb_ProductoID_PRODUCTO: TIntegerField
+    object ZQ_VerCpb_DevolucionID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
     end
-    object ZQ_VerCpb_ProductoDETALLE: TStringField
+    object ZQ_VerCpb_DevolucionDETALLE: TStringField
       FieldName = 'DETALLE'
       Size = 200
     end
-    object ZQ_VerCpb_ProductoCANTIDAD: TFloatField
+    object ZQ_VerCpb_DevolucionCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
     end
-    object ZQ_VerCpb_ProductoIMPORTE_FINAL: TFloatField
+    object ZQ_VerCpb_DevolucionIMPORTE_FINAL: TFloatField
       FieldName = 'IMPORTE_FINAL'
       currency = True
     end
-    object ZQ_VerCpb_ProductoPORC_DESCUENTO: TFloatField
+    object ZQ_VerCpb_DevolucionPORC_DESCUENTO: TFloatField
       FieldName = 'PORC_DESCUENTO'
     end
-    object ZQ_VerCpb_ProductoBASE_IMPONIBLE: TFloatField
+    object ZQ_VerCpb_DevolucionBASE_IMPONIBLE: TFloatField
       FieldName = 'BASE_IMPONIBLE'
       currency = True
     end
-    object ZQ_VerCpb_ProductoIMPORTE_UNITARIO: TFloatField
+    object ZQ_VerCpb_DevolucionIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
       currency = True
     end
-    object ZQ_VerCpb_ProductoPORC_IVA: TFloatField
+    object ZQ_VerCpb_DevolucionPORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
     end
-    object ZQ_VerCpb_ProductoCOD_CABECERA: TStringField
+    object ZQ_VerCpb_DevolucionCOD_CABECERA: TStringField
       FieldName = 'COD_CABECERA'
     end
-    object ZQ_VerCpb_ProductoPRODUCTO: TStringField
+    object ZQ_VerCpb_DevolucionPRODUCTO: TStringField
       FieldName = 'PRODUCTO'
       Size = 100
     end
-    object ZQ_VerCpb_ProductoIMAGEN: TBlobField
+    object ZQ_VerCpb_DevolucionIMAGEN: TBlobField
       FieldName = 'IMAGEN'
     end
-    object ZQ_VerCpb_ProductoMEDIDA: TStringField
+    object ZQ_VerCpb_DevolucionMEDIDA: TStringField
       FieldName = 'MEDIDA'
       Size = 30
     end
-    object ZQ_VerCpb_ProductoCOLOR: TStringField
+    object ZQ_VerCpb_DevolucionCOLOR: TStringField
       FieldName = 'COLOR'
       Size = 30
     end
-    object ZQ_VerCpb_ProductoMARCA: TStringField
+    object ZQ_VerCpb_DevolucionMARCA: TStringField
       FieldName = 'MARCA'
       Size = 50
     end
-    object ZQ_VerCpb_ProductoARTICULO: TStringField
+    object ZQ_VerCpb_DevolucionARTICULO: TStringField
       FieldName = 'ARTICULO'
       Size = 200
     end
-    object ZQ_VerCpb_ProductoTIPO_ARTICULO: TStringField
+    object ZQ_VerCpb_DevolucionTIPO_ARTICULO: TStringField
       FieldName = 'TIPO_ARTICULO'
       Size = 200
     end
-    object ZQ_VerCpb_ProductoCOD_PRODUCTO: TStringField
+    object ZQ_VerCpb_DevolucionCOD_PRODUCTO: TStringField
       FieldName = 'COD_PRODUCTO'
     end
-    object ZQ_VerCpb_ProductoCODIGO_BARRA: TStringField
+    object ZQ_VerCpb_DevolucionCODIGO_BARRA: TStringField
       FieldName = 'CODIGO_BARRA'
       Size = 40
     end
-    object ZQ_VerCpb_ProductoPRECIO_COSTO: TFloatField
+    object ZQ_VerCpb_DevolucionPRECIO_COSTO: TFloatField
       FieldName = 'PRECIO_COSTO'
     end
-    object ZQ_VerCpb_ProductoPRECIO_VENTA: TFloatField
+    object ZQ_VerCpb_DevolucionPRECIO_VENTA: TFloatField
       FieldName = 'PRECIO_VENTA'
     end
-    object ZQ_VerCpb_ProductoCOEF_GANANCIA: TFloatField
+    object ZQ_VerCpb_DevolucionCOEF_GANANCIA: TFloatField
       FieldName = 'COEF_GANANCIA'
     end
-    object ZQ_VerCpb_ProductoCOEF_DESCUENTO: TFloatField
+    object ZQ_VerCpb_DevolucionCOEF_DESCUENTO: TFloatField
       FieldName = 'COEF_DESCUENTO'
     end
-    object ZQ_VerCpb_ProductoIMPUESTO_IVA: TFloatField
+    object ZQ_VerCpb_DevolucionIMPUESTO_IVA: TFloatField
       FieldName = 'IMPUESTO_IVA'
     end
-    object ZQ_VerCpb_ProductoIMPUESTO_INTERNO: TFloatField
+    object ZQ_VerCpb_DevolucionIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
     end
-    object ZQ_VerCpb_ProductoCANTIDAD_RECIBIDA: TFloatField
+    object ZQ_VerCpb_DevolucionCANTIDAD_RECIBIDA: TFloatField
       FieldName = 'CANTIDAD_RECIBIDA'
     end
-    object ZQ_VerCpb_ProductoCANTIDAD_ALMACENADA: TFloatField
+    object ZQ_VerCpb_DevolucionCANTIDAD_ALMACENADA: TFloatField
       FieldName = 'CANTIDAD_ALMACENADA'
     end
-    object ZQ_VerCpb_ProductoID_STOCK_PRODUCTO: TIntegerField
+    object ZQ_VerCpb_DevolucionID_STOCK_PRODUCTO: TIntegerField
       FieldName = 'ID_STOCK_PRODUCTO'
     end
-    object ZQ_VerCpb_ProductoIMPORTE_VENTA: TFloatField
+    object ZQ_VerCpb_DevolucionIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
     end
   end
   object DS_VerCpb: TDataSource
     DataSet = ZQ_VerCpb
-    Left = 34
-    Top = 100
+    Left = 50
+    Top = 72
   end
   object DS_VerCpb_Fpago: TDataSource
     DataSet = ZQ_VerCpb_Fpago
-    Left = 769
-    Top = 244
+    Left = 817
+    Top = 72
   end
-  object DS_VerCpb_Producto: TDataSource
-    DataSet = ZQ_VerCpb_Producto
-    Left = 769
-    Top = 83
+  object DS_VerCpb_Devolucion: TDataSource
+    DataSet = ZQ_VerCpb_Devolucion
+    Left = 593
+    Top = 72
   end
   object EKOrd_VerCpb: TEKOrdenarGrilla
     Grilla = DBGridListaCpb
     Filtros = <
       item
         TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo Cpb.'
         Visible = True
       end
       item
@@ -4426,26 +4089,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       item
         TituloColumna = 'Importe'
         Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Cobro'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Envio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Impreso'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Vencim.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Vendedor'
-        Visible = True
       end>
     NombreGuardar = 'ABM_Cpb_VerCpb'
     AltoTituloColumna = 15
@@ -4453,8 +4096,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 34
-    Top = 152
+    Left = 50
+    Top = 120
   end
   object EKOrd_VerCpb_Fpago: TEKOrdenarGrilla
     Grilla = DBGridCpbActual_FPago
@@ -4501,11 +4144,11 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 769
-    Top = 296
+    Left = 817
+    Top = 120
   end
-  object EKOrd_VerCpb_Producto: TEKOrdenarGrilla
-    Grilla = DBGridCpbActual_Producto
+  object EKOrd_VerCpb_Devolucion: TEKOrdenarGrilla
+    Grilla = DBGridCpbActual_Devolucion
     Filtros = <
       item
         TituloColumna = 'C'#243'd. Barra'
@@ -4527,22 +4170,22 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         TituloColumna = 'Importe Final'
         Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_VerProductos'
+    NombreGuardar = 'ABM_Cpb_VerDevolucion'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 769
-    Top = 132
+    Left = 593
+    Top = 120
   end
   object EKListadoEntidad: TEKListadoSQL
     Modelo = DM.EKModelo
     CampoBuscar = 'busqueda'
     CampoClave = 'id'
     TituloVentana = 'Buscar'
-    Left = 469
-    Top = 32
+    Left = 269
+    Top = 72
   end
   object ZQ_Proveedor: TZQuery
     Connection = DM.Conexion
@@ -4567,7 +4210,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         ParamType = ptUnknown
       end>
     Left = 125
-    Top = 32
+    Top = 24
     ParamData = <
       item
         DataType = ftUnknown
@@ -4672,8 +4315,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Name = 'id_persona'
         ParamType = ptUnknown
       end>
-    Left = 613
-    Top = 32
+    Left = 197
+    Top = 24
     ParamData = <
       item
         DataType = ftUnknown
@@ -4765,13 +4408,13 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   end
   object DS_Proveedor: TDataSource
     DataSet = ZQ_Proveedor
-    Left = 197
-    Top = 32
+    Left = 125
+    Top = 72
   end
   object DS_Cliente: TDataSource
     DataSet = ZQ_Cliente
-    Left = 677
-    Top = 32
+    Left = 197
+    Top = 72
   end
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
@@ -4785,8 +4428,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 112
-    Top = 217
+    Left = 248
+    Top = 136
     ParamData = <
       item
         DataType = ftUnknown
@@ -4889,8 +4532,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   end
   object DS_Comprobante: TDataSource
     DataSet = ZQ_Comprobante
-    Left = 109
-    Top = 265
+    Left = 349
+    Top = 136
   end
   object ZQ_NumeroCpb: TZQuery
     Connection = DM.Conexion
@@ -4904,8 +4547,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Name = 'id_tipo'
         ParamType = ptUnknown
       end>
-    Left = 381
-    Top = 33
+    Left = 269
+    Top = 24
     ParamData = <
       item
         DataType = ftUnknown
@@ -4948,8 +4591,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 245
-    Top = 369
+    Left = 258
+    Top = 404
     ParamData = <
       item
         DataType = ftUnknown
@@ -4990,56 +4633,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object ZQ_CpbFormaPagoCUENTA_EGRESO: TIntegerField
       FieldName = 'CUENTA_EGRESO'
     end
-    object ZQ_CpbFormaPago_CuentaIngreso_Nombre: TStringField
-      FieldKind = fkLookup
-      FieldName = '_CuentaIngreso_Nombre'
-      LookupDataSet = ZQ_Cuenta
-      LookupKeyFields = 'ID_CUENTA'
-      LookupResultField = 'NOMBRE_CUENTA'
-      KeyFields = 'CUENTA_INGRESO'
-      Size = 50
-      Lookup = True
-    end
-    object ZQ_CpbFormaPago_CuentaIngreso_Codigo: TStringField
-      FieldKind = fkLookup
-      FieldName = '_CuentaIngreso_Codigo'
-      LookupDataSet = ZQ_Cuenta
-      LookupKeyFields = 'ID_CUENTA'
-      LookupResultField = 'CODIGO'
-      KeyFields = 'CUENTA_INGRESO'
-      Size = 10
-      Lookup = True
-    end
-    object ZQ_CpbFormaPago_CuentaEgreso_Nombre: TStringField
-      FieldKind = fkLookup
-      FieldName = '_CuentaEgreso_Nombre'
-      LookupDataSet = ZQ_Cuenta
-      LookupKeyFields = 'ID_CUENTA'
-      LookupResultField = 'NOMBRE_CUENTA'
-      KeyFields = 'CUENTA_EGRESO'
-      Size = 50
-      Lookup = True
-    end
-    object ZQ_CpbFormaPago_CuentaEgreso_Codigo: TStringField
-      FieldKind = fkLookup
-      FieldName = '_CuentaEgreso_Codigo'
-      LookupDataSet = ZQ_Cuenta
-      LookupKeyFields = 'ID_CUENTA'
-      LookupResultField = 'CODIGO'
-      KeyFields = 'CUENTA_EGRESO'
-      Size = 10
-      Lookup = True
-    end
-    object ZQ_CpbFormaPago_TipoFormaPago: TStringField
-      FieldKind = fkLookup
-      FieldName = '_TipoFormaPago'
-      LookupDataSet = ZQ_TipoFPago
-      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
-      LookupResultField = 'DESCRIPCION'
-      KeyFields = 'ID_TIPO_FORMAPAG'
-      Size = 50
-      Lookup = True
-    end
     object ZQ_CpbFormaPagoFECHA_FP: TDateTimeField
       FieldName = 'FECHA_FP'
     end
@@ -5048,13 +4641,12 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     end
   end
   object DS_CpbFormaPago: TDataSource
-    DataSet = ZQ_CpbFormaPago
-    Left = 245
-    Top = 417
+    DataSet = CD_FormaPago
+    Left = 157
+    Top = 449
   end
-  object ZQ_CpbProducto: TZQuery
+  object ZQ_CpbDevolucion: TZQuery
     Connection = DM.Conexion
-    AfterScroll = ZQ_CpbProductoAfterScroll
     SQL.Strings = (
       'select pr.*'
       'from comprobante_detalle pr'
@@ -5065,188 +4657,110 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 201
-    Top = 217
+    Left = 41
+    Top = 185
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    object ZQ_CpbProductoID_COMPROBANTE_DETALLE: TIntegerField
+    object ZQ_CpbDevolucionID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
     end
-    object ZQ_CpbProductoID_COMPROBANTE: TIntegerField
+    object ZQ_CpbDevolucionID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
-    object ZQ_CpbProductoID_PRODUCTO: TIntegerField
+    object ZQ_CpbDevolucionID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
     end
-    object ZQ_CpbProducto_CodBarra: TStringField
+    object ZQ_CpbDevolucion_CodBarra: TStringField
       FieldKind = fkLookup
       FieldName = '_CodBarra'
-      LookupDataSet = CD_Producto
+      LookupDataSet = CD_Devolucion
       LookupKeyFields = 'idProducto'
       LookupResultField = 'codigoBarra'
       KeyFields = 'ID_PRODUCTO'
       Size = 40
       Lookup = True
     end
-    object ZQ_CpbProducto_Nombre: TStringField
+    object ZQ_CpbDevolucion_Nombre: TStringField
       FieldKind = fkLookup
       FieldName = '_Nombre'
-      LookupDataSet = CD_Producto
+      LookupDataSet = CD_Devolucion
       LookupKeyFields = 'idProducto'
       LookupResultField = 'producto'
       KeyFields = 'ID_PRODUCTO'
       Size = 100
       Lookup = True
     end
-    object ZQ_CpbProducto_Medida: TStringField
+    object ZQ_CpbDevolucion_Medida: TStringField
       FieldKind = fkLookup
       FieldName = '_Medida'
-      LookupDataSet = CD_Producto
+      LookupDataSet = CD_Devolucion
       LookupKeyFields = 'idProducto'
       LookupResultField = 'medida'
       KeyFields = 'ID_PRODUCTO'
       Size = 30
       Lookup = True
     end
-    object ZQ_CpbProducto_Color: TStringField
+    object ZQ_CpbDevolucion_Color: TStringField
       FieldKind = fkLookup
       FieldName = '_Color'
-      LookupDataSet = CD_Producto
+      LookupDataSet = CD_Devolucion
       LookupKeyFields = 'idProducto'
       LookupResultField = 'color'
       KeyFields = 'ID_PRODUCTO'
       Size = 30
       Lookup = True
     end
-    object ZQ_CpbProductoDETALLE: TStringField
+    object ZQ_CpbDevolucionDETALLE: TStringField
       FieldName = 'DETALLE'
       Size = 200
     end
-    object ZQ_CpbProductoCANTIDAD: TFloatField
+    object ZQ_CpbDevolucionCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
-      OnChange = calcularImporteProducto
+      OnChange = calcularImporteDevolucion
     end
-    object ZQ_CpbProductoIMPORTE_UNITARIO: TFloatField
+    object ZQ_CpbDevolucionIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
-      OnChange = calcularImporteProducto
+      OnChange = calcularImporteDevolucion
     end
-    object ZQ_CpbProductoBASE_IMPONIBLE: TFloatField
+    object ZQ_CpbDevolucionBASE_IMPONIBLE: TFloatField
       FieldName = 'BASE_IMPONIBLE'
     end
-    object ZQ_CpbProductoPORC_DESCUENTO: TFloatField
+    object ZQ_CpbDevolucionPORC_DESCUENTO: TFloatField
       FieldName = 'PORC_DESCUENTO'
-      OnChange = calcularImporteProducto
     end
-    object ZQ_CpbProductoPORC_IVA: TFloatField
+    object ZQ_CpbDevolucionPORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
-      OnChange = calcularImporteProducto
     end
-    object ZQ_CpbProductoIMPORTE_FINAL: TFloatField
+    object ZQ_CpbDevolucionCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_CpbDevolucionIMPORTE_FINAL: TFloatField
       FieldName = 'IMPORTE_FINAL'
     end
-    object ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField
-      FieldName = 'CANTIDAD_RECIBIDA'
-      OnChange = ZQ_CpbProductoCANTIDAD_RECIBIDAChange
-    end
-    object ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField
+    object ZQ_CpbDevolucionCANTIDAD_ALMACENADA: TFloatField
       FieldName = 'CANTIDAD_ALMACENADA'
     end
-    object ZQ_CpbProductoIMPUESTO_INTERNO: TFloatField
+    object ZQ_CpbDevolucionIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
     end
-    object ZQ_CpbProductoID_STOCK_PRODUCTO: TIntegerField
+    object ZQ_CpbDevolucionID_STOCK_PRODUCTO: TIntegerField
       FieldName = 'ID_STOCK_PRODUCTO'
     end
-    object ZQ_CpbProductoIMPORTE_VENTA: TFloatField
+    object ZQ_CpbDevolucionIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
     end
-  end
-  object DS_CpbProducto: TDataSource
-    DataSet = ZQ_CpbProducto
-    Left = 201
-    Top = 265
-  end
-  object ZQ_Cuenta: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select cta.*, tipo.descripcion,'
-      
-        '       cta.nombre_cuenta||'#39' - '#39'||coalesce('#39'N'#176': '#39'||cta.nro_cta_ba' +
-        'ncaria, '#39'N'#176': S/N'#39') as Busqueda'
-      'from cuenta cta'
-      
-        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
-        'po_formapago)'
-      'where cta.baja = '#39'N'#39)
-    Params = <>
-    Left = 373
-    Top = 369
-    object ZQ_CuentaID_CUENTA: TIntegerField
-      FieldName = 'ID_CUENTA'
-    end
-    object ZQ_CuentaMEDIO_DEFECTO: TIntegerField
-      FieldName = 'MEDIO_DEFECTO'
-    end
-    object ZQ_CuentaCODIGO: TStringField
-      FieldName = 'CODIGO'
-      Size = 10
-    end
-    object ZQ_CuentaNOMBRE_CUENTA: TStringField
-      FieldName = 'NOMBRE_CUENTA'
-      Size = 50
-    end
-    object ZQ_CuentaNRO_CTA_BANCARIA: TStringField
-      FieldName = 'NRO_CTA_BANCARIA'
-      Size = 10
-    end
-    object ZQ_CuentaBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_CuentaDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 50
-    end
-    object ZQ_CuentaBUSQUEDA: TStringField
-      FieldName = 'BUSQUEDA'
-      ReadOnly = True
-      Size = 67
+    object ZQ_CpbDevolucionIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
     end
   end
-  object DS_Cuenta: TDataSource
-    DataSet = ZQ_Cuenta
-    Left = 365
-    Top = 409
-  end
-  object ZQ_TipoFPago: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select fp.*'
-      'from tipo_formapago fp'
-      'where fp.baja = '#39'N'#39)
-    Params = <>
-    Left = 445
-    Top = 369
-    object ZQ_TipoFPagoID_TIPO_FORMAPAGO: TIntegerField
-      FieldName = 'ID_TIPO_FORMAPAGO'
-    end
-    object ZQ_TipoFPagoDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 50
-    end
-    object ZQ_TipoFPagoBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-  end
-  object DS_TipoFPago: TDataSource
-    DataSet = ZQ_TipoFPago
-    Left = 445
-    Top = 417
+  object DS_CpbDevolucion: TDataSource
+    DataSet = ZQ_CpbDevolucion
+    Left = 41
+    Top = 233
   end
   object EKListadoCuenta: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -5263,8 +4777,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     CampoBuscar = 'busqueda'
     CampoClave = 'id_cuenta'
     TituloVentana = 'Buscar Cuenta'
-    Left = 533
-    Top = 369
+    Left = 413
+    Top = 401
   end
   object ZQ_ListadoCuenta: TZQuery
     Connection = DM.Conexion
@@ -5278,8 +4792,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Name = 'id_cuenta'
         ParamType = ptUnknown
       end>
-    Left = 533
-    Top = 417
+    Left = 413
+    Top = 449
     ParamData = <
       item
         DataType = ftUnknown
@@ -5318,8 +4832,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     CampoBuscar = 'descripcion'
     CampoClave = 'id_tipo_formapago'
     TituloVentana = 'Buscar Medio'
-    Left = 621
-    Top = 369
+    Left = 509
+    Top = 401
   end
   object ZQ_ListadoMedio: TZQuery
     Connection = DM.Conexion
@@ -5333,8 +4847,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Name = 'id_tipo'
         ParamType = ptUnknown
       end>
-    Left = 621
-    Top = 417
+    Left = 509
+    Top = 449
     ParamData = <
       item
         DataType = ftUnknown
@@ -5362,8 +4876,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_COMPROBANTE_ID'
-    Left = 30
-    Top = 216
+    Left = 166
+    Top = 136
     ParamData = <
       item
         DataType = ftInteger
@@ -5378,137 +4892,104 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     SumCollection = <
       item
         Operacion = goSum
-        NombreCampo = 'IMPORTE'
+        NombreCampo = '_IMPORTE'
       end>
-    DataSet = ZQ_CpbFormaPago
+    DataSet = CD_FormaPago
     SumListChanged = EKSuma_FPagoSumListChanged
-    Left = 141
-    Top = 369
+    Left = 53
+    Top = 401
   end
-  object DS_Producto: TDataSource
-    DataSet = CD_Producto
-    Left = 280
-    Top = 265
+  object DS_Devolucion: TDataSource
+    DataSet = CD_Devolucion
+    Left = 128
+    Top = 234
   end
-  object CD_Producto: TClientDataSet
+  object CD_Devolucion: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 280
-    Top = 216
-    object CD_Producto_idProducto: TIntegerField
+    Left = 128
+    Top = 185
+    object CD_Devolucion_idProducto: TIntegerField
       FieldName = 'idProducto'
     end
-    object CD_Producto_producto: TStringField
+    object CD_Devolucion_producto: TStringField
       FieldName = 'producto'
       Size = 100
     end
-    object CD_Producto_medida: TStringField
+    object CD_Devolucion_medida: TStringField
       FieldName = 'medida'
       Size = 30
     end
-    object CD_Producto_marca: TStringField
+    object CD_Devolucion_marca: TStringField
       FieldName = 'marca'
       Size = 50
     end
-    object CD_Producto_tipoArticulo: TStringField
+    object CD_Devolucion_tipoArticulo: TStringField
       FieldName = 'tipoArticulo'
       Size = 200
     end
-    object CD_Producto_articulo: TStringField
+    object CD_Devolucion_articulo: TStringField
       FieldName = 'articulo'
       Size = 200
     end
-    object CD_Producto_codigoBarra: TStringField
+    object CD_Devolucion_codigoBarra: TStringField
       FieldName = 'codigoBarra'
       Size = 40
     end
-    object CD_Producto_codProducto: TStringField
+    object CD_Devolucion_codProducto: TStringField
       FieldName = 'codProducto'
     end
-    object CD_Producto_codCabecera: TStringField
+    object CD_Devolucion_codCabecera: TStringField
       FieldName = 'codCabecera'
     end
-    object CD_Producto_precioCosto: TFloatField
+    object CD_Devolucion_precioCosto: TFloatField
       FieldName = 'precioCosto'
     end
-    object CD_Producto_precioVenta: TFloatField
+    object CD_Devolucion_precioVenta: TFloatField
       FieldName = 'precioVenta'
     end
-    object CD_Producto_coefGanancia: TFloatField
+    object CD_Devolucion_coefGanancia: TFloatField
       FieldName = 'coefGanancia'
     end
-    object CD_Producto_coefDescuento: TFloatField
+    object CD_Devolucion_coefDescuento: TFloatField
       FieldName = 'coefDescuento'
     end
-    object CD_Producto_impuestoIVA: TFloatField
+    object CD_Devolucion_impuestoIVA: TFloatField
       FieldName = 'impuestoIVA'
     end
-    object CD_Producto_color: TStringField
+    object CD_Devolucion_color: TStringField
       FieldName = 'color'
       Size = 30
     end
   end
-  object Popup_Producto: TPopupMenu
+  object Popup_Devolucion: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
-    Left = 360
-    Top = 215
-    object PopItemProducto_Agregar: TMenuItem
+    Left = 224
+    Top = 185
+    object PopItemDevolucion_Agregar: TMenuItem
       Caption = 'Agregar Producto (F1)'
       ImageIndex = 14
-      OnClick = PopItemProducto_AgregarClick
+      OnClick = PopItemDevolucion_AgregarClick
     end
-    object PopItemProducto_Quitar: TMenuItem
+    object PopItemDevolucion_Quitar: TMenuItem
       Caption = 'Quitar Producto'
       ImageIndex = 15
-      OnClick = PopItemProducto_QuitarClick
+      OnClick = PopItemDevolucion_QuitarClick
     end
-  end
-  object ZQ_Imagen: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select Pc.imagen'
-      'from PRODUCTO_CABECERA Pc'
-      
-        'left join producto pr on (pc.id_prod_cabecera = pr.id_prod_cabec' +
-        'era)'
-      'where pr.id_producto = :id_producto')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_producto'
-        ParamType = ptUnknown
-      end>
-    Left = 445
-    Top = 215
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_producto'
-        ParamType = ptUnknown
-      end>
-    object ZQ_ImagenIMAGEN: TBlobField
-      FieldName = 'IMAGEN'
-    end
-  end
-  object DS_Imagen: TDataSource
-    DataSet = ZQ_Imagen
-    Left = 445
-    Top = 265
   end
   object PopupGridFpago: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
-    Left = 552
-    Top = 263
+    Left = 480
+    Top = 23
     object PopUpItem_FPagoAgrandar: TMenuItem
       Caption = 'Agrandar'
       ImageIndex = 14
-      OnClick = PopUpItem_FPagoAgrandarClick
     end
   end
   object PopupGridProducto: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
-    Left = 656
-    Top = 263
+    Left = 480
+    Top = 71
     object PopUpItem_ProductoOcultarDetalle: TMenuItem
       Caption = 'Ocultar Detalle'
       OnClick = PopUpItem_ProductoOcultarDetalleClick
@@ -5520,14 +5001,14 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       'select e.email'
       'from empresa e')
     Params = <>
-    Left = 37
-    Top = 369
+    Left = 733
+    Top = 400
     object ZQ_BuscarMailEMAIL: TStringField
       FieldName = 'EMAIL'
       Size = 100
     end
   end
-  object EKSuma_Productos: TEKDbSuma
+  object EKSuma_Devolucion: TEKDbSuma
     SumCollection = <
       item
         Operacion = goSum
@@ -5535,15 +5016,15 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       end
       item
         Operacion = goSum
-        NombreCampo = 'IMPORTE_FINAL'
+        NombreCampo = 'IMPORTE_VENTA'
       end>
-    DataSet = ZQ_CpbProducto
-    SumListChanged = EKSuma_ProductosSumListChanged
-    Left = 549
-    Top = 216
+    DataSet = ZQ_CpbDevolucion
+    SumListChanged = EKSuma_DevolucionSumListChanged
+    Left = 328
+    Top = 185
   end
-  object EKOrd_EditarProducto: TEKOrdenarGrilla
-    Grilla = DBGridEditar_Producto
+  object EKOrd_EditarDevolucion: TEKOrdenarGrilla
+    Grilla = DBGridEditar_Devolucion
     Filtros = <
       item
         TituloColumna = 'C'#243'd. Barra'
@@ -5562,58 +5043,34 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Visible = True
       end
       item
-        TituloColumna = 'Detalle'
-        Visible = True
-      end
-      item
         TituloColumna = 'Cantidad'
         Visible = True
       end
       item
-        TituloColumna = 'Recibido'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Unitario'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Base Imponible'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Desc.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'IVA'
+        TituloColumna = 'IMPORTE_UNITARIO'
         Visible = True
       end
       item
         TituloColumna = 'Precio Final'
         Visible = True
+      end
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
       end>
-    NombreGuardar = 'ABM_Cpb_EditarProductos'
+    NombreGuardar = 'ABM_Cpb_EditarDevolucion'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = False
-    PopUpGrilla = Popup_Producto
-    Left = 653
-    Top = 217
+    PopUpGrilla = Popup_Devolucion
+    Left = 328
+    Top = 235
   end
   object EKOrd_EditarFpago: TEKOrdenarGrilla
     Grilla = DBGridEditar_Fpago
     Filtros = <
-      item
-        TituloColumna = 'C'#243'digo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuenta'
-        Visible = True
-      end
       item
         TituloColumna = 'C'#243'digo'
         Visible = True
@@ -5648,7 +5105,603 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = False
-    Left = 141
-    Top = 416
+    Left = 53
+    Top = 448
+  end
+  object EKBuscar: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Fecha'
+        Campo = 'FECHA'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'PV'
+        Campo = 'PUNTO_VENTA'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'N'#250'mero'
+        Campo = 'NUMERO_CPB'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'nombre'
+        Tabla = 'sucursal'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cliente'
+        Campo = 'nombre'
+        Tabla = 'persona'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Proveedor'
+        Campo = 'nombre'
+        Tabla = 'empresa'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe Final'
+        Campo = 'IMPORTE_TOTAL'
+        Tabla = 'comprobante '
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_VerCpb
+    SQL.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
+      
+        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
+        'iente_cuil,'
+      '        est.descripcion as estado'
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)'
+      'where (cpb.id_tipo_cpb = 12)'
+      'order by cpb.fecha desc')
+    SQL_Select.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
+      
+        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
+        'iente_cuil,'
+      '        est.descripcion as estado')
+    SQL_From.Strings = (
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)')
+    SQL_Where.Strings = (
+      'where (cpb.id_tipo_cpb = 12)')
+    SQL_Orden.Strings = (
+      'order by cpb.fecha desc')
+    UsarWhereOriginal = EK_Con_Where
+    Left = 349
+    Top = 24
+  end
+  object DS_CpbEntrega: TDataSource
+    DataSet = ZQ_CpbEntrega
+    Left = 41
+    Top = 337
+  end
+  object ZQ_CpbEntrega: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select pr.*'
+      'from comprobante_detalle pr'
+      'where pr.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 41
+    Top = 289
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_CpbEntregaID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+    end
+    object ZQ_CpbEntregaID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_CpbEntregaID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+    object ZQ_CpbEntrega_CodBarra: TStringField
+      FieldKind = fkLookup
+      FieldName = '_CodBarra'
+      LookupDataSet = CD_Entrega
+      LookupKeyFields = 'idProducto'
+      LookupResultField = 'codigoBarra'
+      KeyFields = 'ID_PRODUCTO'
+      Size = 40
+      Lookup = True
+    end
+    object ZQ_CpbEntrega_Nombre: TStringField
+      FieldKind = fkLookup
+      FieldName = '_Nombre'
+      LookupDataSet = CD_Entrega
+      LookupKeyFields = 'idProducto'
+      LookupResultField = 'producto'
+      KeyFields = 'ID_PRODUCTO'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_CpbEntrega_Medida: TStringField
+      FieldKind = fkLookup
+      FieldName = '_Medida'
+      LookupDataSet = CD_Entrega
+      LookupKeyFields = 'idProducto'
+      LookupResultField = 'medida'
+      KeyFields = 'ID_PRODUCTO'
+      Size = 30
+      Lookup = True
+    end
+    object ZQ_CpbEntrega_Color: TStringField
+      FieldKind = fkLookup
+      FieldName = '_Color'
+      LookupDataSet = CD_Entrega
+      LookupKeyFields = 'idProducto'
+      LookupResultField = 'color'
+      KeyFields = 'ID_PRODUCTO'
+      Size = 30
+      Lookup = True
+    end
+    object ZQ_CpbEntregaDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object ZQ_CpbEntregaCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+      OnChange = calcularImporteEntrega
+    end
+    object ZQ_CpbEntregaIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+    end
+    object ZQ_CpbEntregaPORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_CpbEntregaBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_CpbEntregaIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+      OnChange = calcularImporteEntrega
+    end
+    object ZQ_CpbEntregaIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_CpbEntregaPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_CpbEntregaCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_CpbEntregaCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+    object ZQ_CpbEntregaID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_CpbEntregaIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_CpbEntregaIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+  end
+  object DS_Entrega: TDataSource
+    DataSet = CD_Entrega
+    Left = 128
+    Top = 338
+  end
+  object CD_Entrega: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 128
+    Top = 289
+    object CD_Entrega_idProducto: TIntegerField
+      FieldName = 'idProducto'
+    end
+    object CD_Entrega_producto: TStringField
+      FieldName = 'producto'
+      Size = 100
+    end
+    object CD_Entrega_medida: TStringField
+      FieldName = 'medida'
+      Size = 30
+    end
+    object CD_Entrega_marca: TStringField
+      FieldName = 'marca'
+      Size = 50
+    end
+    object CD_Entrega_tipoArticulo: TStringField
+      FieldName = 'tipoArticulo'
+      Size = 200
+    end
+    object CD_Entrega_articulo: TStringField
+      FieldName = 'articulo'
+      Size = 200
+    end
+    object CD_Entrega_codigoBarra: TStringField
+      FieldName = 'codigoBarra'
+      Size = 40
+    end
+    object CD_Entrega_codProducto: TStringField
+      FieldName = 'codProducto'
+    end
+    object CD_Entrega_codCabecera: TStringField
+      FieldName = 'codCabecera'
+    end
+    object CD_Entrega_precioCosto: TFloatField
+      FieldName = 'precioCosto'
+    end
+    object CD_Entrega_precioVenta: TFloatField
+      FieldName = 'precioVenta'
+    end
+    object CD_Entrega_coefGanancia: TFloatField
+      FieldName = 'coefGanancia'
+    end
+    object CD_Entrega_coefDescuento: TFloatField
+      FieldName = 'coefDescuento'
+    end
+    object CD_Entrega_impuestoIVA: TFloatField
+      FieldName = 'impuestoIVA'
+    end
+    object CD_Entrega_color: TStringField
+      FieldName = 'color'
+      Size = 30
+    end
+  end
+  object Popup_Entrega: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 224
+    Top = 289
+    object PopItemEntrega_Agregar: TMenuItem
+      Caption = 'Agregar Producto (F1)'
+      ImageIndex = 14
+      OnClick = PopItemEntrega_AgregarClick
+    end
+    object PopItemEntrega_Quitar: TMenuItem
+      Caption = 'Quitar Producto'
+      ImageIndex = 15
+      OnClick = PopItemEntrega_QuitarClick
+    end
+  end
+  object EKOrd_EditarEntrega: TEKOrdenarGrilla
+    Grilla = DBGridEditar_Devolucion
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IMPORTE_UNITARIO'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Final'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_Cpb_EditarEntrega'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = False
+    PopUpGrilla = Popup_Entrega
+    Left = 328
+    Top = 339
+  end
+  object EKSuma_Entrega: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'cantidad'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_VENTA'
+      end>
+    DataSet = ZQ_CpbEntrega
+    SumListChanged = EKSuma_EntregaSumListChanged
+    Left = 328
+    Top = 289
+  end
+  object CD_FormaPago: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 157
+    Top = 404
+    object CD_FormaPago_CodCuenta: TStringField
+      FieldName = '_CodCuenta'
+      Size = 10
+    end
+    object CD_FormaPago_NombreCuenta: TStringField
+      FieldName = '_NombreCuenta'
+      Size = 50
+    end
+    object CD_FormaPago_MCPFecha: TDateField
+      FieldName = '_MCPFecha'
+    end
+    object CD_FormaPago_MCPBanco: TStringField
+      FieldName = '_MCPBanco'
+      Size = 50
+    end
+    object CD_FormaPago_MCPNumero: TStringField
+      FieldName = '_MCPNumero'
+      Size = 50
+    end
+    object CD_FormaPago_Importe: TFloatField
+      FieldName = '_Importe'
+      currency = True
+    end
+    object CD_FormaPago_TipoFormaCP: TStringField
+      FieldName = '_TipoFormaCP'
+      Size = 50
+    end
+    object CD_FormaPago_IdCuenta: TIntegerField
+      FieldName = '_IdCuenta'
+    end
+    object CD_FormaPago_IdTipoForma: TIntegerField
+      FieldName = '_IdTipoForma'
+    end
+    object CD_FormaPago_IdComprobante: TIntegerField
+      FieldName = '_IdComprobante'
+    end
+  end
+  object ZQ_VerCpb_Entrega: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select cpbd.*, cab.cod_corto as cod_cabecera, cab.nombre as prod' +
+        'ucto, cab.imagen,'
+      
+        '       med.medida, color.nombre as color, marca.nombre_marca as ' +
+        'marca,'
+      
+        '       art.descripcion as articulo, tart.descripcion as tipo_art' +
+        'iculo,'
+      '       pro.cod_corto as cod_producto, pro.codigo_barra,'
+      
+        '       pro.precio_costo, pro.precio_venta, pro.coef_ganancia, pr' +
+        'o.coef_descuento,'
+      '       pro.impuesto_interno, pro.impuesto_iva'
+      'from comprobante_detalle cpbd'
+      'left join producto pro on (cpbd.id_producto = pro.id_producto)'
+      
+        'left join producto_cabecera cab on (pro.id_prod_cabecera = cab.i' +
+        'd_prod_cabecera)'
+      'left join marca on (cab.id_marca = marca.id_marca)'
+      'left join color on (cab.color = color.id_color)'
+      'left join articulo art on (cab.id_articulo = art.id_articulo)'
+      
+        'left join tipo_articulo tart on (art.id_tipo_articulo = tart.id_' +
+        'tipo_articulo)'
+      'left join medida med on (pro.id_medida = med.id_medida)'
+      'where cpbd.id_comprobante = :id_comprobante'
+      '  and cpbd.cantidad > 0')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 713
+    Top = 24
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_VerCpb_EntregaID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+    end
+    object ZQ_VerCpb_EntregaID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_VerCpb_EntregaID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+    object ZQ_VerCpb_EntregaDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object ZQ_VerCpb_EntregaCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_VerCpb_EntregaIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+    end
+    object ZQ_VerCpb_EntregaPORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_VerCpb_EntregaBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_VerCpb_EntregaIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+    end
+    object ZQ_VerCpb_EntregaIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_VerCpb_EntregaPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_VerCpb_EntregaCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_VerCpb_EntregaCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+    object ZQ_VerCpb_EntregaID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_VerCpb_EntregaIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_VerCpb_EntregaIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_VerCpb_EntregaCOD_CABECERA: TStringField
+      FieldName = 'COD_CABECERA'
+    end
+    object ZQ_VerCpb_EntregaPRODUCTO: TStringField
+      FieldName = 'PRODUCTO'
+      Size = 100
+    end
+    object ZQ_VerCpb_EntregaIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object ZQ_VerCpb_EntregaMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_VerCpb_EntregaCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
+    object ZQ_VerCpb_EntregaMARCA: TStringField
+      FieldName = 'MARCA'
+      Size = 50
+    end
+    object ZQ_VerCpb_EntregaARTICULO: TStringField
+      FieldName = 'ARTICULO'
+      Size = 200
+    end
+    object ZQ_VerCpb_EntregaTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object ZQ_VerCpb_EntregaCOD_PRODUCTO: TStringField
+      FieldName = 'COD_PRODUCTO'
+    end
+    object ZQ_VerCpb_EntregaCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_VerCpb_EntregaPRECIO_COSTO: TFloatField
+      FieldName = 'PRECIO_COSTO'
+    end
+    object ZQ_VerCpb_EntregaPRECIO_VENTA: TFloatField
+      FieldName = 'PRECIO_VENTA'
+    end
+    object ZQ_VerCpb_EntregaCOEF_GANANCIA: TFloatField
+      FieldName = 'COEF_GANANCIA'
+    end
+    object ZQ_VerCpb_EntregaCOEF_DESCUENTO: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+    end
+    object ZQ_VerCpb_EntregaIMPUESTO_INTERNO_1: TFloatField
+      FieldName = 'IMPUESTO_INTERNO_1'
+    end
+    object ZQ_VerCpb_EntregaIMPUESTO_IVA: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+  end
+  object DS_VerCpb_Entrega: TDataSource
+    DataSet = ZQ_VerCpb_Entrega
+    Left = 713
+    Top = 72
+  end
+  object EKOrd_VerCpb_Entrega: TEKOrdenarGrilla
+    Grilla = DBGridCpbActual_Entrega
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Final'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_Cpb_VerEntrega'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 713
+    Top = 120
   end
 end
