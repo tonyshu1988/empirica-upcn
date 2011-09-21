@@ -128,6 +128,7 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure configRelacion(relacion:Integer);
+    procedure configCtaCte();
     function validarcampos():boolean;
     procedure ABuscarExecute(Sender: TObject);
     procedure ASeleccionarExecute(Sender: TObject);
@@ -320,7 +321,7 @@ end;
 
 procedure TFBuscarPersona.configRelacion(relacion:Integer);
 begin
-  FBuscarPersona.Caption:= 'Buscar Cliente';
+  FBuscarPersona.Caption:= 'Buscar';
   btnCrearPersona.Visible:= ivNever;
   btnGuardar.Visible:= ivNever;
   btnCancelar.Visible:= ivNever;
@@ -330,6 +331,21 @@ begin
   EKBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d)', [QuotedStr('S'), relacion]);
   EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
 end;
+
+
+procedure TFBuscarPersona.configCtaCte();
+begin
+  FBuscarPersona.Caption:= 'Buscar Cliente - Cta. Cte.';
+  btnCrearPersona.Visible:= ivNever;
+  btnGuardar.Visible:= ivNever;
+  btnCancelar.Visible:= ivNever;
+
+  EKBusqueda.SQL_Select.Text:= 'select p.*, cc.*';
+  EKBusqueda.SQL_From.Text:= 'from persona p left join cuenta_corriente cc on (p.id_persona = cc.id_persona)';
+  EKBusqueda.SQL_Where.Text:= 'where cc.id_cta_cte is not null';
+  EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
+end;
+
 
 procedure TFBuscarPersona.ABuscarExecute(Sender: TObject);
 begin
@@ -374,8 +390,6 @@ begin
     DBGridTelMail.Options := DBGridTelMail.Options + [dgEditing];
     ZQ_EntidadTelefono.Append;
   end;
-
-
 
   ZQ_EntidadTelefono.Append;
 end;
