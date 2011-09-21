@@ -54,6 +54,25 @@ type
     btnSeleccionarTodos: TdxBarLargeButton;
     ASelTodos: TAction;
     ZQ_StockID_SUCURSAL: TIntegerField;
+    ZQ_Producto: TZQuery;
+    ZQ_ProductoNOMBRE: TStringField;
+    ZQ_ProductoCOD_CORTO: TStringField;
+    ZQ_ProductoID_PRODUCTO: TIntegerField;
+    ZQ_ProductoCOD_CORTO_1: TStringField;
+    ZQ_ProductoCODIGO_BARRA: TStringField;
+    ZQ_ProductoLLEVAR_STOCK: TStringField;
+    ZQ_ProductoMEDIDA: TStringField;
+    ZQ_ProductoNOMBRE_MARCA: TStringField;
+    ZQ_ProductoBAJA: TStringField;
+    ZQ_ProductoNOMBRE_ARTICULO: TStringField;
+    ZQ_ProductoTIPO_ARTICULO: TStringField;
+    ZQ_ProductoPRECIO_COSTO: TFloatField;
+    ZQ_ProductoPRECIO_VENTA: TFloatField;
+    ZQ_ProductoCOEF_GANANCIA: TFloatField;
+    ZQ_ProductoCOEF_DESCUENTO: TFloatField;
+    ZQ_ProductoIMPUESTO_INTERNO: TFloatField;
+    ZQ_ProductoIMPUESTO_IVA: TFloatField;
+    ZQ_ProductoCOLOR: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -68,6 +87,7 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnSeleccionarTodosClick(Sender: TObject);
     procedure ASelTodosExecute(Sender: TObject);
+    procedure ZQ_StockAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -75,7 +95,7 @@ type
     OnSeleccionar : procedure() of object;
     OnSeleccionarTodos : procedure() of object;
     SeleccionarYSalir: boolean;
-    usaCajero, usaTransferir: String;
+    usaCajero, usaTransferir, usaDevolucion: String;
   end;
 
 var
@@ -214,5 +234,15 @@ begin
 end;
 
 
+
+procedure TFBuscarProductoStock.ZQ_StockAfterScroll(DataSet: TDataSet);
+begin
+  if usaDevolucion = 'S' then
+  begin
+    ZQ_Producto.Close;
+    ZQ_Producto.ParamByName('id_producto').AsInteger:= ZQ_StockID_PRODUCTO.AsInteger;
+    ZQ_Producto.Open;
+  end
+end;
 
 end.
