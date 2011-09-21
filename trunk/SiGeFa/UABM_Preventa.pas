@@ -414,7 +414,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal,strutils, EKModelo, Math, UUtilidades;
+uses UDM, UPrincipal,strutils, EKModelo, Math, UUtilidades, DateUtils;
 
 {$R *.dfm}
 
@@ -1139,7 +1139,7 @@ if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
       ZQ_ComprobanteFECHA_COBRADA.Clear;
       ZQ_ComprobanteFECHA_ENVIADA.Clear;
       ZQ_ComprobanteFECHA_IMPRESA.Clear;
-      ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
+      ZQ_ComprobanteFECHA_VENCIMIENTO.AsDateTime:=IncDay(CD_ComprobanteFECHA.AsDateTime);
       ZQ_Comprobante.Post;
 
       grabarDetallesFactura();
@@ -1217,15 +1217,7 @@ begin
   totalProds:=acumulado;
   totalFP:=CD_ComprobanteIMPORTE_VENTA.AsFloat;
   acum:=0;
-//  CD_Fpago.First;
-//  while not(CD_Fpago.Eof) do
-//   begin
-//      ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
-//      if (ZQ_FormasPagoIF.AsString='S') then
-//       totalFP:=totalFP + CD_FpagoIMPORTE.AsFloat;
-//      CD_Fpago.Next;
-//   end;
-   coefic:= (totalFP/totalProds);
+  coefic:= (totalFP/totalProds);
 
    if (totalFP>0) then
     begin

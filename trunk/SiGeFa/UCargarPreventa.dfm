@@ -44,6 +44,7 @@ object FPreventa: TFPreventa
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGridDrawColumnCell
       Columns = <
         item
           Expanded = False
@@ -723,6 +724,7 @@ object FPreventa: TFPreventa
       Hint = 'Buscar Productos'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
     object btnSeleccionar: TdxBarLargeButton
@@ -763,139 +765,41 @@ object FPreventa: TFPreventa
     end
   end
   object EKBuscarPresupuesto: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'C'#243'd. Barra'
-        Campo = 'codigo_barra'
-        Tabla = 'producto'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Producto'
-        Campo = 'nombre'
-        Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Medida'
-        Campo = 'medida'
-        Tabla = 'Medida'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Color'
-        Campo = 'nombre '
-        Tabla = 'color'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Marca'
-        Campo = 'nombre_marca'
-        Tabla = 'Marca'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Tipo Art'#237'culo'
-        Campo = 'descripcion'
-        Tabla = 'Tipo_Articulo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Art'#237'culo'
-        Campo = 'descripcion'
-        Tabla = 'Articulo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Baja'
-        Campo = 'baja'
-        Tabla = 'producto_cabecera'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboValoresVer.Strings = (
-          'NO'
-          'SI')
-        TipoComboValoresReales.Strings = (
-          'N'
-          'S')
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end>
+    CriteriosBusqueda = <>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
+    DataSet = ZQ_Comprobante
     SQL.Strings = (
+      'select c.*,s.nombre as suc_,'
       
-        'select pc.nombre, pc.cod_corto, pr.id_producto, pr.cod_corto, pr' +
-        '.codigo_barra,'
-      '       pr.llevar_stock, md.medida, mc.nombre_marca, pc.baja,'
+        'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
+        'ente_'
+      'from comprobante c'
+      'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
+      'left join persona p1 on (p1.id_persona=c.id_vendedor)'
+      'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
+      'left join persona p2 on (p2.id_persona=c.id_cliente)'
+      ''
       
-        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
-        '_articulo,'
-      
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
-      'from producto pr'
-      
-        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
-        'rod_cabecera)'
-      'left join medida md on (pr.id_medida = md.id_medida)'
-      'left join marca mc on (pc.id_marca = mc.id_marca)'
-      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
-      
-        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
-        'articulo)'
-      'left join color co on (pc.color = co.id_color)'
-      'where pc.baja = '#39'N'#39
+        'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)and(cast(c.f' +
+        'echa_vencimiento as date) >= current_date)'
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     SQL_Select.Strings = (
+      'select c.*,s.nombre as suc_,'
       
-        'select pc.nombre, pc.cod_corto, pr.id_producto, pr.cod_corto, pr' +
-        '.codigo_barra,'
-      '       pr.llevar_stock, md.medida, mc.nombre_marca, pc.baja,'
-      
-        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
-        '_articulo,'
-      
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color')
+        'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
+        'ente_')
     SQL_From.Strings = (
-      'from producto pr'
-      
-        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
-        'rod_cabecera)'
-      'left join medida md on (pr.id_medida = md.id_medida)'
-      'left join marca mc on (pc.id_marca = mc.id_marca)'
-      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
-      
-        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
-        'articulo)'
-      'left join color co on (pc.color = co.id_color)')
+      'from comprobante c'
+      'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
+      'left join persona p1 on (p1.id_persona=c.id_vendedor)'
+      'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
+      'left join persona p2 on (p2.id_persona=c.id_cliente)'
+      '')
     SQL_Where.Strings = (
-      'where pc.baja = '#39'N'#39)
+      
+        'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)and(cast(c.f' +
+        'echa_vencimiento as date) >= current_date)')
     SQL_Orden.Strings = (
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     UsarWhereOriginal = EK_Con_Where
@@ -915,7 +819,9 @@ object FPreventa: TFPreventa
       'left join persona p1 on (p1.id_persona=c.id_vendedor)'
       'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
       'left join persona p2 on (p2.id_persona=c.id_cliente)'
-      'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)')
+      
+        'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)and(cast(c.f' +
+        'echa_vencimiento as date) >= current_date)')
     Params = <>
     Left = 210
     Top = 130
@@ -1030,6 +936,9 @@ object FPreventa: TFPreventa
       FieldName = 'CLIENTE_'
       Size = 200
     end
+    object ZQ_ComprobanteIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
   end
   object DS_Comprobante: TDataSource
     DataSet = ZQ_Comprobante
@@ -1071,5 +980,40 @@ object FPreventa: TFPreventa
     PermitirFiltrar = True
     Left = 32
     Top = 48
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGrid
+    Filtros = <
+      item
+        TituloColumna = 'Comprobante'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Vendedor'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 312
+    Top = 80
   end
 end

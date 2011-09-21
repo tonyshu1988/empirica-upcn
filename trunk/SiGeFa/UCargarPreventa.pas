@@ -55,10 +55,15 @@ type
     ZQ_ComprobanteVENDEDOR_: TStringField;
     ZQ_ComprobanteTIVA_: TStringField;
     ZQ_ComprobanteCLIENTE_: TStringField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    ZQ_ComprobanteIMAGEN: TBlobField;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnBuscarClick(Sender: TObject);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
 
   private
     { Private declarations }
@@ -72,7 +77,7 @@ var
 
 implementation
 
-uses UDM;
+uses UDM, UPrincipal;
 
 {$R *.dfm}
 
@@ -104,6 +109,18 @@ end;
 procedure TFPreventa.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 EKOrdenarGrilla.GuardarConfigColumnas;
+end;
+
+procedure TFPreventa.btnBuscarClick(Sender: TObject);
+begin
+  EKBuscarPresupuesto.Buscar;
+end;
+
+procedure TFPreventa.DBGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGrid,Rect,DataCol,Column,State);
 end;
 
 end.
