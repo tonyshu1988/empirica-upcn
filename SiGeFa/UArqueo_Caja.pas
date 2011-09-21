@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Buttons, Grids, DBGrids, StdCtrls, ExtCtrls, dxBar,
   dxBarExtItems, ComCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKDbSuma;
+  ZDataset, EKDbSuma, QRCtrls, QuickRpt, EKVistaPreviaQR;
 
 type
   TFArqueo_Caja = class(TForm)
@@ -62,10 +62,42 @@ type
     ZQ_Comprobante_FormaPagoCUENTAEGRESO: TStringField;
     DS_Comprobante_FormaPago: TDataSource;
     EKDbSuma1: TEKDbSuma;
+    RepArqueo: TQuickRep;
+    QRBand14: TQRBand;
+    RepArqueo_Titulo: TQRLabel;
+    RepArqueo_Subtitulo: TQRLabel;
+    QRLabel68: TQRLabel;
+    EKVistaPreviaQR1: TEKVistaPreviaQR;
+    QRSubDetail1: TQRSubDetail;
+    QRSubDetail2: TQRSubDetail;
+    QRSubDetail3: TQRSubDetail;
+    QRDBText33: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRBand1: TQRBand;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel3: TQRLabel;
+    ChildBand1: TQRChildBand;
+    QRLabel5: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRSubDetail4: TQRSubDetail;
+    QRLabelImporteventa: TQRLabel;
+    QRLabelImporteTotal: TQRLabel;
+    EKDbSuma2: TEKDbSuma;
     procedure DateTimePicker1Change(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -105,6 +137,18 @@ end;
 procedure TFArqueo_Caja.btnSalirClick(Sender: TObject);
 begin
 close;
+end;
+
+procedure TFArqueo_Caja.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_ComprobanteDetalle.IsEmpty then
+  exit;
+
+  QRLabelImporteventa.Caption := FormatFloat('Total Venta: $ ##,###,##0.00 ', EKDbSuma2.SumCollection[0].SumValue);
+  QRLabelImporteTotal.Caption := FormatFloat('Total: $ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+
+  DM.VariablesReportes(RepArqueo);
+  EKVistaPreviaQR1.VistaPrevia;
 end;
 
 end.
