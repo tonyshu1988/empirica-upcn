@@ -1466,9 +1466,11 @@ object FBuscarProductoStock: TFBuscarProductoStock
     Connection = DM.Conexion
     SQL.Strings = (
       
-        'select pc.nombre, pc.cod_corto, pr.id_producto, pr.cod_corto, pr' +
-        '.codigo_barra,'
-      '       pr.llevar_stock, md.medida, mc.nombre_marca, pc.baja,'
+        'select pc.nombre, pc.cod_corto as cod_corto_cab, pr.id_producto,' +
+        ' pr.cod_corto as cod_corto_pro,'
+      
+        '       pr.codigo_barra, pr.llevar_stock, md.medida, mc.nombre_ma' +
+        'rca, pc.baja,'
       
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
@@ -1507,14 +1509,8 @@ object FBuscarProductoStock: TFBuscarProductoStock
       FieldName = 'NOMBRE'
       Size = 100
     end
-    object ZQ_ProductoCOD_CORTO: TStringField
-      FieldName = 'COD_CORTO'
-    end
     object ZQ_ProductoID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
-    end
-    object ZQ_ProductoCOD_CORTO_1: TStringField
-      FieldName = 'COD_CORTO_1'
     end
     object ZQ_ProductoCODIGO_BARRA: TStringField
       FieldName = 'CODIGO_BARRA'
@@ -1565,6 +1561,12 @@ object FBuscarProductoStock: TFBuscarProductoStock
     object ZQ_ProductoCOLOR: TStringField
       FieldName = 'COLOR'
       Size = 30
+    end
+    object ZQ_ProductoCOD_CORTO_CAB: TStringField
+      FieldName = 'COD_CORTO_CAB'
+    end
+    object ZQ_ProductoCOD_CORTO_PRO: TStringField
+      FieldName = 'COD_CORTO_PRO'
     end
   end
 end
