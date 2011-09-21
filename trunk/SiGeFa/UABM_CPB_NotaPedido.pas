@@ -448,6 +448,8 @@ type
     DBText31: TDBText;
     DBImageSucursal: TDBImage;
     ZQ_ActualizarPrecioID_PRODUCTO: TIntegerField;
+    Panel8: TPanel;
+    lblActualizarPrecio_Titulo: TLabel;
 
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
@@ -1487,6 +1489,8 @@ begin
   ZQ_ActualizarLista.Close;
   ZQ_ActualizarLista.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   ZQ_ActualizarLista.Open;
+
+  lblActualizarPrecio_Titulo.Caption:= 'ACTUALIZAR PRECIOS - NOTA PEDIDO '+FormatFloat('0000', ZQ_VerCpbPUNTO_VENTA.AsFloat)+'-'+FormatFloat('00000000', ZQ_VerCpbNUMERO_CPB.AsFloat);
 
   PanelVer.Enabled:= false;
   panelActualizarPrecio.BringToFront;
