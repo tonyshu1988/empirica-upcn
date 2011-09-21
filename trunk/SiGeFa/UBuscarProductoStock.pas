@@ -56,9 +56,7 @@ type
     ZQ_StockID_SUCURSAL: TIntegerField;
     ZQ_Producto: TZQuery;
     ZQ_ProductoNOMBRE: TStringField;
-    ZQ_ProductoCOD_CORTO: TStringField;
     ZQ_ProductoID_PRODUCTO: TIntegerField;
-    ZQ_ProductoCOD_CORTO_1: TStringField;
     ZQ_ProductoCODIGO_BARRA: TStringField;
     ZQ_ProductoLLEVAR_STOCK: TStringField;
     ZQ_ProductoMEDIDA: TStringField;
@@ -73,6 +71,8 @@ type
     ZQ_ProductoIMPUESTO_INTERNO: TFloatField;
     ZQ_ProductoIMPUESTO_IVA: TFloatField;
     ZQ_ProductoCOLOR: TStringField;
+    ZQ_ProductoCOD_CORTO_CAB: TStringField;
+    ZQ_ProductoCOD_CORTO_PRO: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
