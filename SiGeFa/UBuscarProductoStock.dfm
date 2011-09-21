@@ -1315,7 +1315,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
   end
   object ZQ_Stock: TZQuery
     Connection = DM.Conexion
-    AfterScroll = ZQ_StockAfterScroll
     SQL.Strings = (
       
         'select sp.id_posicion_sucursal , c.nombre as color, sp.id_produc' +

@@ -87,7 +87,6 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnSeleccionarTodosClick(Sender: TObject);
     procedure ASelTodosExecute(Sender: TObject);
-    procedure ZQ_StockAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -198,6 +197,13 @@ procedure TFBuscarProductoStock.btnSeleccionarClick(Sender: TObject);
 begin
   if ((not(DBGridStock.SelectedRows.Count > 0)) and (not(ZQ_Stock.IsEmpty))) then
   begin
+    if usaDevolucion = 'S' then //se usa en la pantalla de devolucion de productos
+    begin
+      ZQ_Producto.Close;
+      ZQ_Producto.ParamByName('id_producto').AsInteger:= ZQ_StockID_PRODUCTO.AsInteger;
+      ZQ_Producto.Open;
+    end;
+
     if Assigned(OnSeleccionar) then
       OnSeleccionar
   end
@@ -234,15 +240,5 @@ begin
 end;
 
 
-
-procedure TFBuscarProductoStock.ZQ_StockAfterScroll(DataSet: TDataSet);
-begin
-  if usaDevolucion = 'S' then
-  begin
-    ZQ_Producto.Close;
-    ZQ_Producto.ParamByName('id_producto').AsInteger:= ZQ_StockID_PRODUCTO.AsInteger;
-    ZQ_Producto.Open;
-  end
-end;
 
 end.
