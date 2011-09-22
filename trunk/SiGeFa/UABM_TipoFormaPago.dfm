@@ -695,7 +695,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
             FieldName = 'DESCRIPCION'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Medio Pago'
-            Width = 356
+            Width = 246
             Visible = True
           end
           item
@@ -703,6 +703,15 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
             FieldName = 'DESC_REC'
             Title.Alignment = taCenter
             Title.Caption = 'Descuento/Recargo'
+            Width = 128
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLUMNA_PRECIO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Lista Precio'
+            Width = 115
             Visible = True
           end
           item
@@ -710,6 +719,22 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
             FieldName = 'IF'
             Title.Alignment = taCenter
             Width = 27
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'GENERA_VUELTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Genera Vuelto'
+            Width = 99
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MODIFICABLE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Modificable'
+            Width = 83
             Visible = True
           end>
       end
@@ -723,8 +748,8 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
         TabOrder = 1
         Visible = False
         object Label1: TLabel
-          Left = 11
-          Top = 38
+          Left = 171
+          Top = 11
           Width = 50
           Height = 13
           Caption = 'Nombre:'
@@ -751,7 +776,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           Transparent = True
         end
         object Label2: TLabel
-          Left = 467
+          Left = 17
           Top = 38
           Width = 152
           Height = 13
@@ -764,10 +789,38 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           ParentFont = False
           Transparent = True
         end
+        object Label4: TLabel
+          Left = 255
+          Top = 38
+          Width = 87
+          Height = 13
+          Caption = 'Genera Vuelto:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label5: TLabel
+          Left = 416
+          Top = 38
+          Width = 70
+          Height = 13
+          Caption = 'Lista Precio:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
         object DBENombre: TDBEdit
-          Left = 63
-          Top = 33
-          Width = 386
+          Left = 223
+          Top = 6
+          Width = 474
           Height = 21
           CharCase = ecUpperCase
           DataField = 'DESCRIPCION'
@@ -798,7 +851,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           TabOrder = 0
         end
         object DBEditDescRec: TDBEdit
-          Left = 622
+          Left = 172
           Top = 33
           Width = 59
           Height = 21
@@ -815,6 +868,35 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 2
+        end
+        object DBComboBoxVuelto: TDBComboBox
+          Left = 345
+          Top = 33
+          Width = 47
+          Height = 21
+          DataField = 'GENERA_VUELTO'
+          DataSource = DS_TipoFPago
+          ItemHeight = 13
+          Items.Strings = (
+            'N'
+            'S')
+          TabOrder = 3
+        end
+        object DBComboBox1: TDBComboBox
+          Left = 489
+          Top = 33
+          Width = 47
+          Height = 21
+          DataField = 'COLUMNA_PRECIO'
+          DataSource = DS_TipoFPago
+          ItemHeight = 13
+          Items.Strings = (
+            '1'
+            '2'
+            '3'
+            '4'
+            '5')
+          TabOrder = 4
         end
       end
     end
@@ -1454,6 +1536,17 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
     object ZQ_TipoFPagoCOD_CORTO: TIntegerField
       FieldName = 'COD_CORTO'
     end
+    object ZQ_TipoFPagoGENERA_VUELTO: TStringField
+      FieldName = 'GENERA_VUELTO'
+      Size = 1
+    end
+    object ZQ_TipoFPagoCOLUMNA_PRECIO: TIntegerField
+      FieldName = 'COLUMNA_PRECIO'
+    end
+    object ZQ_TipoFPagoMODIFICABLE: TStringField
+      FieldName = 'MODIFICABLE'
+      Size = 1
+    end
   end
   object DS_TipoFPago: TDataSource
     DataSet = ZQ_TipoFPago
@@ -1477,6 +1570,18 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       end
       item
         TituloColumna = 'IF'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Genera Vuelto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Lista Precio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Modificable'
         Visible = True
       end>
     NombreGuardar = 'ABMTipoFPago'

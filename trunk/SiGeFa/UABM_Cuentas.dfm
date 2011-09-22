@@ -889,6 +889,14 @@ object FABM_Cuentas: TFABM_Cuentas
             Title.Caption = 'Medio Cobro/Pago'
             Width = 189
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MODIFICABLE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Modificable'
+            Width = 98
+            Visible = True
           end>
       end
       object PanelEdicion: TPanel
@@ -916,7 +924,7 @@ object FABM_Cuentas: TFABM_Cuentas
         end
         object Label2: TLabel
           Left = 486
-          Top = 36
+          Top = 62
           Width = 110
           Height = 13
           Caption = 'Medio Cobro/Pago:'
@@ -1007,7 +1015,7 @@ object FABM_Cuentas: TFABM_Cuentas
         end
         object DBLookupComboBox1: TDBLookupComboBox
           Left = 599
-          Top = 32
+          Top = 58
           Width = 162
           Height = 21
           DataField = 'MEDIO_DEFECTO'
@@ -1666,6 +1674,21 @@ object FABM_Cuentas: TFABM_Cuentas
       FieldName = 'BAJA'
       Size = 1
     end
+    object ZQ_CuentasID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_CuentasA_CTA_CORRIENTE: TStringField
+      FieldName = 'A_CTA_CORRIENTE'
+      Size = 1
+    end
+    object ZQ_CuentasA_NOTA_CREDITO: TStringField
+      FieldName = 'A_NOTA_CREDITO'
+      Size = 1
+    end
+    object ZQ_CuentasMODIFICABLE: TStringField
+      FieldName = 'MODIFICABLE'
+      Size = 1
+    end
   end
   object DS_Cuentas: TDataSource
     DataSet = ZQ_Cuentas
@@ -1824,6 +1847,10 @@ object FABM_Cuentas: TFABM_Cuentas
       end
       item
         TituloColumna = 'Medio Cobro/Pago'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Modificable'
         Visible = True
       end>
     NombreGuardar = 'ABM_Cuentas'
