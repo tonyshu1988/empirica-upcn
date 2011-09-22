@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 297
-  Top = 161
+  Left = 281
+  Top = 89
   Width = 872
   Height = 654
   Caption = 'Sincronizador SiGeFa'
@@ -216,14 +216,14 @@ object FPrincipal: TFPrincipal
       Align = alClient
       Caption = 'Panel4'
       TabOrder = 1
-      object DBGrid3: TDBGrid
-        Left = 514
+      object DBGrid1: TDBGrid
+        Left = 1
         Top = 1
-        Width = 339
-        Height = 169
-        Align = alRight
+        Width = 852
+        Height = 301
+        Align = alClient
         Color = 15915716
-        DataSource = DataSource1
+        DataSource = DS_SincroTabla
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -236,199 +236,11 @@ object FPrincipal: TFPrincipal
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'KEY_FIELD'
-            Width = 133
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'KEY_VALUE'
-            Width = 124
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'LOG_TABLES_ID'
-            Width = 102
-            Visible = True
-          end>
       end
-      object DBGrid2: TDBGrid
-        Left = 1
-        Top = 170
-        Width = 852
-        Height = 132
-        Align = alBottom
-        Color = 15915716
-        DataSource = DS_SincroCampo
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-        TitleFont.Charset = ANSI_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'LOG_TABLES_ID'
-            Width = 53
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FIELD_NAME'
-            Width = 173
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'OLD_VALUE'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NEW_VALUE'
-            Visible = True
-          end>
-      end
-      object DBGrid1: TDBGrid
-        Left = 1
-        Top = 1
-        Width = 513
-        Height = 169
-        Align = alClient
-        Color = 15915716
-        DataSource = DS_SincroTabla
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 2
-        TitleFont.Charset = ANSI_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'ID'
-            Width = 35
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TABLE_NAME'
-            Width = 151
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'OPERATION'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DATE_TIME'
-            Width = 74
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'USER_NAME'
-            Width = 120
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'LOTE_SINC'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SUCURSAL'
-            Visible = True
-          end>
-      end
-    end
-  end
-  object ZQ_SincroTabla: TZQuery
-    Connection = DM.ZC_Remoto
-    AfterScroll = ZQ_SincroTablaAfterScroll
-    SQL.Strings = (
-      'select st.*'
-      'from z_sinc_tabla st'
-      'where (st.sucursal<>:suc)'
-      'and (st.date_time>=:fecha)'
-      '')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'suc'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'fecha'
-        ParamType = ptUnknown
-      end>
-    Left = 192
-    Top = 48
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'suc'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'fecha'
-        ParamType = ptUnknown
-      end>
-    object ZQ_SincroTablaID: TLargeintField
-      FieldName = 'ID'
-      Required = True
-    end
-    object ZQ_SincroTablaTABLE_NAME: TStringField
-      FieldName = 'TABLE_NAME'
-      Required = True
-      Size = 201
-    end
-    object ZQ_SincroTablaOPERATION: TStringField
-      FieldName = 'OPERATION'
-      Required = True
-      Size = 1
-    end
-    object ZQ_SincroTablaDATE_TIME: TDateTimeField
-      FieldName = 'DATE_TIME'
-      Required = True
-    end
-    object ZQ_SincroTablaUSER_NAME: TStringField
-      FieldName = 'USER_NAME'
-      Required = True
-      Size = 67
-    end
-    object ZQ_SincroTablaLOTE_SINC: TIntegerField
-      FieldName = 'LOTE_SINC'
-    end
-    object ZQ_SincroTablaSUCURSAL: TIntegerField
-      FieldName = 'SUCURSAL'
     end
   end
   object DS_SincroTabla: TDataSource
-    DataSet = ZQ_SincroTabla
-    Left = 320
+    Left = 232
     Top = 48
   end
   object Local: TZQuery
@@ -442,49 +254,6 @@ object FPrincipal: TFPrincipal
     Params = <>
     Left = 608
     Top = 328
-  end
-  object ZQ_SincroCampo: TZQuery
-    Connection = DM.ZC_Remoto
-    SQL.Strings = (
-      'select *'
-      'from z_sinc_campo sc'
-      'where sc.log_tables_id=:id')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    Left = 192
-    Top = 96
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    object ZQ_SincroCampoLOG_TABLES_ID: TLargeintField
-      FieldName = 'LOG_TABLES_ID'
-      Required = True
-    end
-    object ZQ_SincroCampoFIELD_NAME: TStringField
-      FieldName = 'FIELD_NAME'
-      Required = True
-      Size = 201
-    end
-    object ZQ_SincroCampoOLD_VALUE: TStringField
-      FieldName = 'OLD_VALUE'
-      Size = 765
-    end
-    object ZQ_SincroCampoNEW_VALUE: TStringField
-      FieldName = 'NEW_VALUE'
-      Size = 765
-    end
-  end
-  object DS_SincroCampo: TDataSource
-    DataSet = ZQ_SincroCampo
-    Left = 416
-    Top = 48
   end
   object ZQ_SincroTablaPrimary: TZQuery
     Connection = DM.ZC_Remoto
@@ -519,11 +288,6 @@ object FPrincipal: TFPrincipal
       FieldName = 'LOG_TABLES_ID'
       Required = True
     end
-  end
-  object DataSource1: TDataSource
-    DataSet = ZQ_SincroTablaPrimary
-    Left = 320
-    Top = 96
   end
   object inicio: TEKIni
     Archivo = 'configSincro.ini'
@@ -15664,5 +15428,18 @@ object FPrincipal: TFPrincipal
       FieldName = 'NEW_VALUE'
       Size = 765
     end
+  end
+  object IdFTP1: TIdFTP
+    IPVersion = Id_IPv4
+    Host = '174.132.76.2'
+    Password = 'grupo78gua'
+    Username = 'grupogua'
+    NATKeepAlive.UseKeepAlive = False
+    NATKeepAlive.IdleTimeMS = 0
+    NATKeepAlive.IntervalMS = 0
+    ProxySettings.ProxyType = fpcmNone
+    ProxySettings.Port = 0
+    Left = 416
+    Top = 104
   end
 end

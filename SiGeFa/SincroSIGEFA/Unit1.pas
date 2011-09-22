@@ -6,28 +6,20 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, Grids, DBGrids, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, ZConnection, StdCtrls, ZSqlUpdate, EKIni, ExtCtrls, EKEdit,
-  ZStoredProcedure, dxBar, dxBarExtItems, EKIconizacion;
+  ZStoredProcedure, dxBar, dxBarExtItems, EKIconizacion, IdBaseComponent,
+  IdComponent, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
+  IdFTP;
 
 type
   TFPrincipal = class(TForm)
-    ZQ_SincroTabla: TZQuery;
     DBGrid1: TDBGrid;
     DS_SincroTabla: TDataSource;
     Local: TZQuery;
     Remoto: TZQuery;
     Memo1: TMemo;
-    ZQ_SincroCampo: TZQuery;
-    DBGrid2: TDBGrid;
-    DS_SincroCampo: TDataSource;
-    ZQ_SincroCampoLOG_TABLES_ID: TLargeintField;
-    ZQ_SincroCampoFIELD_NAME: TStringField;
-    ZQ_SincroCampoOLD_VALUE: TStringField;
-    ZQ_SincroCampoNEW_VALUE: TStringField;
-    DBGrid3: TDBGrid;
     ZQ_SincroTablaPrimary: TZQuery;
     ZQ_SincroTablaPrimaryKEY_FIELD: TStringField;
     ZQ_SincroTablaPrimaryKEY_VALUE: TStringField;
-    DataSource1: TDataSource;
     ZQ_SincroTablaPrimaryLOG_TABLES_ID: TLargeintField;
     inicio: TEKIni;
     Panel1: TPanel;
@@ -71,13 +63,6 @@ type
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     EKIconizacion1: TEKIconizacion;
-    ZQ_SincroTablaID: TLargeintField;
-    ZQ_SincroTablaTABLE_NAME: TStringField;
-    ZQ_SincroTablaOPERATION: TStringField;
-    ZQ_SincroTablaDATE_TIME: TDateTimeField;
-    ZQ_SincroTablaUSER_NAME: TStringField;
-    ZQ_SincroTablaLOTE_SINC: TIntegerField;
-    ZQ_SincroTablaSUCURSAL: TIntegerField;
     SincronizacionLocal: TZQuery;
     SincronizacionLocalID: TIntegerField;
     SincronizacionLocalFECHA: TDateField;
@@ -106,6 +91,7 @@ type
     ZQ_SincCampoOLD_VALUE: TStringField;
     ZQ_SincCampoNEW_VALUE: TStringField;
     chkTimer: TCheckBox;
+    IdFTP1: TIdFTP;
     procedure ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -126,6 +112,8 @@ type
     procedure subirNovedades();
     procedure btnSubirClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    function subirXML(archivo:String):Boolean ;
+    function bajarXML(archivo:String):Boolean ;
   private
     { Private declarations }
   public
@@ -776,6 +764,85 @@ procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    dm.ZC_Remoto.Disconnect;
    dm.ZC_Local.Disconnect;
+end;
+
+function TFPrincipal.bajarXML(archivo: String): Boolean;
+Var
+F: File of byte;
+begin
+IdFTP1.Username := 'grupogua';
+IdFTP1.Password := 'grupo78gua';
+IdFTP1.Host := 'grupoguadalupe.com.ar';
+
+Try
+IdFTP1.Connect ;
+Except
+Showmessage ('El Archivo no fue Recibido');
+End;
+
+If IdFTP1.Connected then
+    Begin
+      Try
+        begin
+        IdFTP1.ChangeDir( '/tmp/' );
+        archivo:=edArchivo.Text;
+        //ClientDataSet2.SaveToFile(narchivo,dfXMLUTF8);
+        ProgressBar1.Max := IdFTP1.Size( ExtractFileName( archivo ) ) div 1024;
+         if FileExists( archivo ) then
+            DeleteFile( archivo );
+        IdFTP1.Get(ExtractFileName( archivo ),archivo,False,False );
+        IdFTP1.EndWork(wmRead);
+        IdFTP1.Disconnect;
+        ClientDataSet1.LoadFromFile(archivo);
+        ShowMessage
+        ('El Archivo fue Recibido correctamente');
+        end
+      except
+        begin
+          ShowMessage('El Archivo no pudo ser Recibido')
+        end
+      end;
+    End;
+
+end;
+
+function TFPrincipal.subirXML(archivo: String): Boolean;
+Var
+F: File of byte;
+begin
+IdFTP1.Username := 'grupogua';
+IdFTP1.Password := 'grupo78gua';
+IdFTP1.Host := 'grupoguadalupe.com.ar';
+
+Try
+IdFTP1.Connect ;
+Except
+Showmessage ('El Archivo no fue Enviado');
+End;
+
+If IdFTP1.Connected then
+    Begin
+      Try
+        begin
+        IdFTP1.ChangeDir( '/tmp/' );
+        ClientDataSet2.SaveToFile(archivo,dfXMLUTF8);
+        AssignFile( F, archivo );
+        Reset( F );
+        ProgressBar1.Max := FileSize( F ) div 1024;
+        CloseFile( F );
+        IdFTP1.Put( archivo, ExtractFileName( archivo ), False );
+        IdFTP1.EndWork(wmRead);
+        IdFTP1.Disconnect;
+        ShowMessage
+        ('El Archivo fue Enviado correctamente');
+        end
+      except
+        begin
+          ShowMessage('El Archivo no pudo ser Enviado')
+        end
+      end;
+    End;
+
 end;
 
 end.
