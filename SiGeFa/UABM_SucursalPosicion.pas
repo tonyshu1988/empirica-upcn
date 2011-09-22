@@ -321,6 +321,7 @@ end;
 
 procedure TFABM_SucursalPosicion.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   EKOrdenarGrilla1.CargarConfigColumnas;
 
   StaticTxtBaja.Color:= FPrincipal.baja;

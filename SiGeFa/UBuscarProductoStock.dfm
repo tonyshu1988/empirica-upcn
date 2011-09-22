@@ -32,7 +32,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
-      DefaultDrawing = False
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET

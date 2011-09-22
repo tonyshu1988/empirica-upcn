@@ -296,6 +296,7 @@ end;
 
 procedure TFABM_TipoFormaPago.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   EKOrdenarGrilla1.CargarConfigColumnas;
 
   StaticTxtBaja.Color:= FPrincipal.baja;

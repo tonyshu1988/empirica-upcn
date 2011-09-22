@@ -132,6 +132,7 @@ object FABM_Articulo: TFABM_Articulo
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
+          DataSet = DM.ZQ_Sucursal
           Stretch = True
         end
         object QRLabel17: TQRLabel
@@ -811,7 +812,6 @@ object FABM_Articulo: TFABM_Articulo
         Align = alClient
         Color = 14606012
         DataSource = DS_Articulo
-        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -846,7 +846,6 @@ object FABM_Articulo: TFABM_Articulo
         Align = alRight
         Color = 14606012
         DataSource = DS_Medidas
-        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET

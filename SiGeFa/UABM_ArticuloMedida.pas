@@ -370,6 +370,7 @@ end;
 
 procedure TFABM_ArticuloMedida.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   dm.EKModelo.abrir(ZQ_Articulo);

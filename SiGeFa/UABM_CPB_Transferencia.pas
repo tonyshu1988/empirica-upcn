@@ -280,6 +280,7 @@ end;
 
 procedure TFABM_CPB_Transferencia.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   tipoComprobante:= CPB_TRANSFERENCIA;
 
   EKOrdenarGrilla1.CargarConfigColumnas;

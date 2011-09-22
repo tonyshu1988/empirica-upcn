@@ -31,7 +31,6 @@ object FBuscarPersona: TFBuscarPersona
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
-      DefaultDrawing = False
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       ParentShowHint = False
       ReadOnly = True
@@ -478,7 +477,6 @@ object FBuscarPersona: TFBuscarPersona
           Align = alClient
           Color = 14606012
           DataSource = DS_EntidadTelefono
-          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = PopupMenuTelmail
           TabOrder = 0

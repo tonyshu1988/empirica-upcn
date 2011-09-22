@@ -34,7 +34,6 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       Align = alClient
       Color = 14606012
       DataSource = DS_Etiquetas
-      DefaultDrawing = False
       Enabled = False
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0

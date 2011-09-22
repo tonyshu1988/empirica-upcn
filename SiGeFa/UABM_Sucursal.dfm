@@ -777,7 +777,6 @@ object FABM_Sucursal: TFABM_Sucursal
       Align = alClient
       Color = 14606012
       DataSource = DS_Sucursal
-      DefaultDrawing = False
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET
@@ -1334,7 +1333,6 @@ object FABM_Sucursal: TFABM_Sucursal
           Align = alClient
           Color = 14606012
           DataSource = DS_PersonaRelacionVendedor
-          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11

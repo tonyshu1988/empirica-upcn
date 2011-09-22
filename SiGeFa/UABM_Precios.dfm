@@ -1,8 +1,8 @@
 object FABM_Precios: TFABM_Precios
-  Left = 176
-  Top = 0
+  Left = 196
+  Top = 143
   Width = 1024
-  Height = 768
+  Height = 580
   Caption = 'ABM Precios'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -23,14 +23,14 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1016
-    Height = 684
+    Width = 1008
+    Height = 490
     Align = alClient
     TabOrder = 4
     object RepListaPrecios: TQuickRep
       Tag = 99
-      Left = -175
-      Top = 57
+      Left = -31
+      Top = 153
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -93,7 +93,7 @@ object FABM_Precios: TFABM_Precios
         Left = 38
         Top = 38
         Width = 1047
-        Height = 121
+        Height = 72
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
@@ -105,14 +105,14 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333400000
+          190.500000000000000000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageHeader
-        object QRDBImage1: TQRDBImage
-          Left = 78
-          Top = 14
+        object QRDBLogo: TQRDBImage
+          Left = 174
+          Top = 2
           Width = 64
           Height = 64
           Frame.Color = clBlack
@@ -122,14 +122,15 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawRight = False
           Size.Values = (
             169.333333333333300000
-            206.375000000000000000
-            37.041666666666670000
+            460.375000000000000000
+            5.291666666666667000
             169.333333333333300000)
-          DataField = 'GRAFICO'
+          DataField = 'LOGO'
+          DataSet = DM.ZQ_Sucursal
         end
         object QRLabel11: TQRLabel
           Left = 454
-          Top = 60
+          Top = 47
           Width = 138
           Height = 19
           Frame.Color = clBlack
@@ -140,7 +141,7 @@ object FABM_Precios: TFABM_Precios
           Size.Values = (
             50.270833333333330000
             1201.208333333333000000
-            158.750000000000000000
+            124.354166666666700000
             365.125000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -161,7 +162,7 @@ object FABM_Precios: TFABM_Precios
         end
         object RepListaPrecios_Subtitulo: TQRLabel
           Left = 435
-          Top = 36
+          Top = 26
           Width = 176
           Height = 20
           Frame.Color = clBlack
@@ -172,8 +173,8 @@ object FABM_Precios: TFABM_Precios
           Size.Values = (
             52.916666666666670000
             1150.937500000000000000
-            95.250000000000000000
-            465.666666666666800000)
+            68.791666666666670000
+            465.666666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -193,7 +194,7 @@ object FABM_Precios: TFABM_Precios
         end
         object RepListaPrecios_Titulo: TQRLabel
           Left = 423
-          Top = 12
+          Top = 2
           Width = 201
           Height = 20
           Frame.Color = clBlack
@@ -204,7 +205,7 @@ object FABM_Precios: TFABM_Precios
           Size.Values = (
             52.916666666666670000
             1119.187500000000000000
-            31.750000000000000000
+            5.291666666666667000
             531.812500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -227,7 +228,7 @@ object FABM_Precios: TFABM_Precios
       object QRBandDetalle: TQRBand
         Tag = 99
         Left = 38
-        Top = 228
+        Top = 179
         Width = 1047
         Height = 15
         Frame.Color = clBlack
@@ -445,7 +446,7 @@ object FABM_Precios: TFABM_Precios
       object QRChildBandCleinte: TQRChildBand
         Tag = 99
         Left = 38
-        Top = 159
+        Top = 110
         Width = 1047
         Height = 53
         Frame.Color = clBlack
@@ -1185,7 +1186,7 @@ object FABM_Precios: TFABM_Precios
       object QRBand7: TQRBand
         Tag = 99
         Left = 38
-        Top = 261
+        Top = 212
         Width = 1047
         Height = 16
         Frame.Color = clBlack
@@ -1199,7 +1200,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1215,7 +1216,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2532.062500000000000000
             2.645833333333333000
             103.187500000000000000)
@@ -1247,7 +1248,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -1270,7 +1271,7 @@ object FABM_Precios: TFABM_Precios
       object QRBand1: TQRBand
         Tag = 99
         Left = 38
-        Top = 243
+        Top = 194
         Width = 1047
         Height = 18
         Frame.Color = clBlack
@@ -1290,7 +1291,7 @@ object FABM_Precios: TFABM_Precios
         KeepOnOnePage = False
         BandType = rbSummary
         object QRExpr15: TQRExpr
-          Left = -177
+          Left = 855
           Top = 2
           Width = 192
           Height = 14
@@ -1320,7 +1321,7 @@ object FABM_Precios: TFABM_Precios
       object ChildBand1: TQRChildBand
         Tag = 99
         Left = 38
-        Top = 212
+        Top = 163
         Width = 1047
         Height = 16
         Frame.Color = clBlack
@@ -1334,7 +1335,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1569,12 +1570,11 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 19
-      Width = 1014
-      Height = 499
+      Width = 1006
+      Height = 305
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
-      DefaultDrawing = False
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET
@@ -1730,8 +1730,8 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 518
-      Width = 1014
+      Top = 324
+      Width = 1006
       Height = 165
       Hint = '`'
       Align = alBottom
@@ -2052,7 +2052,7 @@ object FABM_Precios: TFABM_Precios
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1014
+      Width = 1006
       Height = 18
       Align = alTop
       ParentShowHint = False
@@ -2077,7 +2077,7 @@ object FABM_Precios: TFABM_Precios
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

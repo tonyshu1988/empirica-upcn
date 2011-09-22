@@ -268,6 +268,7 @@ end;
 
 procedure TFABM_TipoArticulo.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   EKBuscar.Abrir;

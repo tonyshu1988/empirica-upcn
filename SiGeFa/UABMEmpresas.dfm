@@ -1,6 +1,6 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 174
-  Top = 54
+  Left = 216
+  Top = 64
   Width = 1024
   Height = 663
   Caption = 'ABM Empresas'
@@ -28,8 +28,8 @@ object FABMEmpresas: TFABMEmpresas
     TabOrder = 0
     object RepDetalleEmpresa: TQuickRep
       Tag = 99
-      Left = 428
-      Top = 330
+      Left = 100
+      Top = 106
       Width = 794
       Height = 1123
       Frame.Color = clBlack
@@ -92,7 +92,7 @@ object FABMEmpresas: TFABMEmpresas
         Left = 38
         Top = 38
         Width = 718
-        Height = 121
+        Height = 70
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
@@ -104,14 +104,14 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333300000
+          185.208333333333300000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageHeader
-        object QRDBImage2: TQRDBImage
+        object QRDBLogo2: TQRDBImage
           Left = 78
-          Top = 14
+          Top = 2
           Width = 64
           Height = 64
           Frame.Color = clBlack
@@ -122,13 +122,13 @@ object FABMEmpresas: TFABMEmpresas
           Size.Values = (
             169.333333333333300000
             206.375000000000000000
-            37.041666666666670000
+            5.291666666666667000
             169.333333333333300000)
-          DataField = 'GRAFICO'
+          DataField = 'LOGO'
         end
         object QRLabel2: TQRLabel
           Left = 287
-          Top = 60
+          Top = 47
           Width = 144
           Height = 19
           Frame.Color = clBlack
@@ -139,7 +139,7 @@ object FABMEmpresas: TFABMEmpresas
           Size.Values = (
             50.270833333333330000
             759.354166666666700000
-            158.750000000000000000
+            124.354166666666700000
             381.000000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -160,7 +160,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object QRLabel3: TQRLabel
           Left = 268
-          Top = 36
+          Top = 26
           Width = 181
           Height = 20
           Frame.Color = clBlack
@@ -171,7 +171,7 @@ object FABMEmpresas: TFABMEmpresas
           Size.Values = (
             52.916666666666670000
             709.083333333333300000
-            95.250000000000000000
+            68.791666666666670000
             478.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
@@ -192,7 +192,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object QRLabel4: TQRLabel
           Left = 239
-          Top = 12
+          Top = 2
           Width = 240
           Height = 20
           Frame.Color = clBlack
@@ -203,7 +203,7 @@ object FABMEmpresas: TFABMEmpresas
           Size.Values = (
             52.916666666666670000
             632.354166666666700000
-            31.750000000000000000
+            5.291666666666667000
             635.000000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -226,7 +226,7 @@ object FABMEmpresas: TFABMEmpresas
       object QRBand3: TQRBand
         Tag = 99
         Left = 38
-        Top = 323
+        Top = 272
         Width = 718
         Height = 15
         Frame.Color = clBlack
@@ -420,7 +420,7 @@ object FABMEmpresas: TFABMEmpresas
       object QRBand4: TQRBand
         Tag = 99
         Left = 38
-        Top = 356
+        Top = 305
         Width = 718
         Height = 16
         Frame.Color = clBlack
@@ -450,7 +450,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1677.458333333333000000
             2.645833333333333000
             103.187500000000000000)
@@ -505,7 +505,7 @@ object FABMEmpresas: TFABMEmpresas
       object QRBand6: TQRBand
         Tag = 99
         Left = 38
-        Top = 338
+        Top = 287
         Width = 718
         Height = 18
         Frame.Color = clBlack
@@ -555,7 +555,7 @@ object FABMEmpresas: TFABMEmpresas
       object QRChildBand1: TQRChildBand
         Tag = 99
         Left = 38
-        Top = 159
+        Top = 108
         Width = 718
         Height = 146
         Frame.Color = clBlack
@@ -1229,7 +1229,7 @@ object FABMEmpresas: TFABMEmpresas
       object ChildBand1: TQRChildBand
         Tag = 99
         Left = 38
-        Top = 305
+        Top = 254
         Width = 718
         Height = 18
         Frame.Color = clBlack
@@ -1413,8 +1413,8 @@ object FABMEmpresas: TFABMEmpresas
     end
     object RepListaEmpresas: TQuickRep
       Tag = 99
-      Left = 340
-      Top = 137
+      Left = 68
+      Top = 313
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -1477,7 +1477,7 @@ object FABMEmpresas: TFABMEmpresas
         Left = 38
         Top = 38
         Width = 1047
-        Height = 121
+        Height = 72
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
@@ -1489,14 +1489,14 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333300000
+          190.500000000000000000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageHeader
-        object QRDBImage1: TQRDBImage
+        object QRDBLogo: TQRDBImage
           Left = 78
-          Top = 14
+          Top = 2
           Width = 64
           Height = 64
           Frame.Color = clBlack
@@ -1507,13 +1507,13 @@ object FABMEmpresas: TFABMEmpresas
           Size.Values = (
             169.333333333333300000
             206.375000000000000000
-            37.041666666666670000
+            5.291666666666667000
             169.333333333333300000)
-          DataField = 'GRAFICO'
+          DataField = 'LOGO'
         end
         object QRLabel11: TQRLabel
           Left = 457
-          Top = 60
+          Top = 47
           Width = 133
           Height = 19
           Frame.Color = clBlack
@@ -1524,7 +1524,7 @@ object FABMEmpresas: TFABMEmpresas
           Size.Values = (
             50.270833333333330000
             1209.145833333333000000
-            158.750000000000000000
+            124.354166666666700000
             351.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
@@ -1545,7 +1545,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object RepCtas_Reporte_Titulo_2: TQRLabel
           Left = 433
-          Top = 36
+          Top = 26
           Width = 181
           Height = 20
           Frame.Color = clBlack
@@ -1556,7 +1556,7 @@ object FABMEmpresas: TFABMEmpresas
           Size.Values = (
             52.916666666666670000
             1145.645833333333000000
-            95.250000000000000000
+            68.791666666666670000
             478.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
@@ -1577,7 +1577,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object RepCtas_Reporte_Titulo_1: TQRLabel
           Left = 403
-          Top = 12
+          Top = 2
           Width = 240
           Height = 20
           Frame.Color = clBlack
@@ -1588,7 +1588,7 @@ object FABMEmpresas: TFABMEmpresas
           Size.Values = (
             52.916666666666670000
             1066.270833333333000000
-            31.750000000000000000
+            5.291666666666667000
             635.000000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -1611,7 +1611,7 @@ object FABMEmpresas: TFABMEmpresas
       object QRBandDetalle: TQRBand
         Tag = 99
         Left = 38
-        Top = 176
+        Top = 127
         Width = 1047
         Height = 15
         Frame.Color = clBlack
@@ -1871,7 +1871,7 @@ object FABMEmpresas: TFABMEmpresas
       object QRBand7: TQRBand
         Tag = 99
         Left = 38
-        Top = 209
+        Top = 160
         Width = 1047
         Height = 16
         Frame.Color = clBlack
@@ -1956,7 +1956,7 @@ object FABMEmpresas: TFABMEmpresas
       object QRBand1: TQRBand
         Tag = 99
         Left = 38
-        Top = 191
+        Top = 142
         Width = 1047
         Height = 18
         Frame.Color = clBlack
@@ -2006,7 +2006,7 @@ object FABMEmpresas: TFABMEmpresas
       object QRChildBandCleinte: TQRChildBand
         Tag = 99
         Left = 38
-        Top = 159
+        Top = 110
         Width = 1047
         Height = 17
         Frame.Color = clBlack
@@ -2535,7 +2535,6 @@ object FABMEmpresas: TFABMEmpresas
           Align = alClient
           Color = 14606012
           DataSource = DS_EntidadTelefonoEmpresa
-          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -2595,7 +2594,6 @@ object FABMEmpresas: TFABMEmpresas
           Align = alClient
           Color = 14606012
           DataSource = DS_PersonaRelacionContacto
-          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -2658,7 +2656,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label12: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 996
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2691,7 +2689,6 @@ object FABMEmpresas: TFABMEmpresas
           Align = alRight
           Color = 14606012
           DataSource = DS_EntidadTelefonoContacto
-          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -2751,7 +2748,6 @@ object FABMEmpresas: TFABMEmpresas
           Align = alClient
           Color = 14606012
           DataSource = DS_PersonaRelacionViajante
-          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -2826,7 +2822,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label13: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 996
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2841,7 +2837,6 @@ object FABMEmpresas: TFABMEmpresas
           Align = alRight
           Color = 14606012
           DataSource = DS_EntidadTelefonoViajantes
-          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -2894,7 +2889,6 @@ object FABMEmpresas: TFABMEmpresas
           Align = alClient
           Color = 14606012
           DataSource = DS_EmpresaMarca
-          DefaultDrawing = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -2956,7 +2950,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label14: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 996
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -3152,7 +3146,6 @@ object FABMEmpresas: TFABMEmpresas
       Align = alClient
       Color = 14606012
       DataSource = DS_Empresa
-      DefaultDrawing = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11

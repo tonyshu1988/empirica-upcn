@@ -458,6 +458,8 @@ end;
 
 procedure TFABMProductos.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
+  
   FPrincipal.Iconos_Menu_32.GetBitmap(1, btnGrupoAceptar.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnGrupoCancelar.Glyph);
 
