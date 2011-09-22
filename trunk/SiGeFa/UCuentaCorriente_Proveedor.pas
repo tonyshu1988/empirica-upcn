@@ -178,7 +178,7 @@ type
     btnImprimir: TdxBarLargeButton;
     RepProveedor: TQuickRep;
     QRBand1: TQRBand;
-    QRDBImage1: TQRDBImage;
+    QRDBLogo2: TQRDBImage;
     QRLabel1: TQRLabel;
     RepProveedor_Subtitulo: TQRLabel;
     RepProveedor_Titulo: TQRLabel;
@@ -351,6 +351,9 @@ end;
 
 procedure TFCuentaCorriente_Proveedor.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
+  QRDBLogo2.DataSet:= DM.ZQ_Sucursal;  
+
   EKOrdenar_CtaCteGral.CargarConfigColumnas;
   EKOrdenar_CtaCteProveedor.CargarConfigColumnas;
 

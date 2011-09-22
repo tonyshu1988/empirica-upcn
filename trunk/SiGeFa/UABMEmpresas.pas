@@ -201,7 +201,7 @@ type
     DataSetProvider1: TDataSetProvider;
     RepListaEmpresas: TQuickRep;
     QRBand5: TQRBand;
-    QRDBImage1: TQRDBImage;
+    QRDBLogo: TQRDBImage;
     QRLabel11: TQRLabel;
     RepCtas_Reporte_Titulo_2: TQRLabel;
     RepCtas_Reporte_Titulo_1: TQRLabel;
@@ -229,7 +229,7 @@ type
     EKVistaPreviaListaEmpresas: TEKVistaPreviaQR;
     RepDetalleEmpresa: TQuickRep;
     QRBand2: TQRBand;
-    QRDBImage2: TQRDBImage;
+    QRDBLogo2: TQRDBImage;
     QRLabel2: TQRLabel;
     QRLabel3: TQRLabel;
     QRLabel4: TQRLabel;
@@ -681,6 +681,8 @@ end;
 
 procedure TFABMEmpresas.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
+  QRDBLogo2.DataSet:= DM.ZQ_Sucursal;
 
   TabCtaCte.Enabled:= false;
   habilitarCtaCte(false);

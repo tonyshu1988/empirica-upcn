@@ -221,6 +221,7 @@ end;
 
 procedure TFABM_TipoMovimiento.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Visible:= false;
   StaticTxtBaja.Color:= FPrincipal.baja;
 

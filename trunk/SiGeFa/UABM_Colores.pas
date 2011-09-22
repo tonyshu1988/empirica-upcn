@@ -318,6 +318,7 @@ end;
 
 procedure TFABM_Colores.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   EKOrdenarGrilla1.CargarConfigColumnas;
   
   EKBuscar.Abrir;

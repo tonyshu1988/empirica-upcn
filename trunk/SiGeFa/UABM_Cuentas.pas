@@ -313,6 +313,7 @@ end;
 
 procedure TFABM_Cuentas.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   EKOrdenarGrilla1.CargarConfigColumnas;
 
   dm.EKModelo.abrir(ZQ_MedioPago);

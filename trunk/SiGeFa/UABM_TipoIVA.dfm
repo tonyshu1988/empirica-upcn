@@ -850,7 +850,6 @@ object FABM_TipoIVA: TFABM_TipoIVA
         Align = alClient
         Color = 14606012
         DataSource = DS_TipoIva
-        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -1749,6 +1748,10 @@ object FABM_TipoIVA: TFABM_TipoIVA
       end
       item
         TituloColumna = 'Fiscal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Coef'
         Visible = True
       end>
     NombreGuardar = 'ABM_TipoIva'

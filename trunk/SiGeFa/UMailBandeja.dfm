@@ -45,7 +45,7 @@ object FMailBandeja: TFMailBandeja
         Top = 0
         Width = 832
         Height = 501
-        ActivePage = TabBandejaSalida
+        ActivePage = TabBandejaEntrada
         Align = alClient
         TabOrder = 0
         object TabBandejaSalida: TTabSheet
@@ -618,7 +618,7 @@ object FMailBandeja: TFMailBandeja
     Width = 80
     Height = 27
     Caption = 'Cambiar'
-    TabOrder = 5
+    TabOrder = 4
     OnClick = btnCambiarCuentaClick
   end
   object ListView1: TListView

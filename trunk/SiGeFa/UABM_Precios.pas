@@ -56,7 +56,7 @@ type
     ZQ_Clientes: TZQuery;
     RepListaPrecios: TQuickRep;
     QRBand5: TQRBand;
-    QRDBImage1: TQRDBImage;
+    QRDBLogo: TQRDBImage;
     QRLabel11: TQRLabel;
     RepListaPrecios_Subtitulo: TQRLabel;
     RepListaPrecios_Titulo: TQRLabel;
@@ -717,6 +717,8 @@ end;
 
 procedure TFABM_Precios.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
+
   CDSZQ_Productos.CreateDataSet;
   EKOrdenarGrilla1.CargarConfigColumnas;
   lblCantidadRegistros.Caption:= '';

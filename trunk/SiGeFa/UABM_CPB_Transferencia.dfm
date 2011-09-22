@@ -968,7 +968,6 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
         Align = alClient
         Color = 14606012
         DataSource = DS_VerCpb_Fpago
-        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -2321,6 +2320,10 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       end
       item
         TituloColumna = 'Descripci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Anulado'
         Visible = True
       end>
     AltoTituloColumna = 15

@@ -2,6 +2,8 @@ unit UCuentaCorriente;
 
 interface
 
+//VER LO DE FILTRAR POR SUCURSAL
+
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
@@ -212,7 +214,7 @@ type
     btnImprimir: TdxBarLargeButton;
     RepCliente: TQuickRep;
     QRBand1: TQRBand;
-    QRDBImage1: TQRDBImage;
+    QRDBLogo2: TQRDBImage;
     QRLabel1: TQRLabel;
     RepCliente_Subtitulo: TQRLabel;
     RepCliente_Titulo: TQRLabel;
@@ -324,15 +326,16 @@ end;
 
 procedure TFCuentaCorriente.onSelCliente;
 begin
-  if (not (vsel.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
-  begin
-    ZQ_CtaCte_Gral.Close;
-    ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= vsel.ZQ_PersonasID_PERSONA.AsInteger;
-    ZQ_CtaCte_Gral.ParamByName('id_proveedor').clear;
-    ZQ_CtaCte_Gral.Open;
-  end;
-
-  vsel.Close;
+//  if (not (vsel.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
+//  begin
+//    ZQ_CtaCte_Gral.Close;
+//    ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= vsel.ZQ_PersonasID_PERSONA.AsInteger;
+//    ZQ_CtaCte_Gral.ParamByName('id_proveedor').clear;
+//    ZQ_CtaCte_Gral.Open;
+//  end;
+//
+//  vsel.Close;
+//  calcularTotales('GENERAL');
 end;
 
 
@@ -376,6 +379,9 @@ end;
 
 procedure TFCuentaCorriente.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
+  QRDBLogo2.DataSet:= DM.ZQ_Sucursal;  
+
   EKOrdenar_CtaCteGral.CargarConfigColumnas;
   EKOrdenar_CtaCteCliente.CargarConfigColumnas;
 

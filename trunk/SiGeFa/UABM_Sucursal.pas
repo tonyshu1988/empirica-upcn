@@ -384,6 +384,8 @@ end;
 
 procedure TFABM_Sucursal.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
+  
   EKOrdenarSucursal.CargarConfigColumnas;
   EKOrdenarEmpleado.CargarConfigColumnas;
 
@@ -392,7 +394,7 @@ begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   dm.EKModelo.abrir(ZQ_Personas);
-  
+
   EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
   PageControl1.ActivePageIndex:= 0;

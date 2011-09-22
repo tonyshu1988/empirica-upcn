@@ -673,7 +673,6 @@ object FABM_TipoArticulo: TFABM_TipoArticulo
         Align = alClient
         Color = 14606012
         DataSource = DS_TipoArt
-        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET

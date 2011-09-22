@@ -21,198 +21,28 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 462
+    Width = 854
+    Height = 456
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
     TabOrder = 4
-    object PanelAsociar: TPanel
-      Left = 5
-      Top = 5
-      Width = 852
-      Height = 452
-      Align = alClient
-      BevelOuter = bvNone
-      TabOrder = 1
-      object Splitter1: TSplitter
-        Left = 423
-        Top = 21
-        Height = 431
-      end
-      object PanelAsociar_Producto: TPanel
-        Left = 426
-        Top = 21
-        Width = 426
-        Height = 431
-        Align = alClient
-        BevelOuter = bvNone
-        TabOrder = 0
-        object DBGridProducto: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 426
-          Height = 431
-          Align = alClient
-          Color = 13431031
-          DataSource = DS_Producto
-          DefaultDrawing = False
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          PopupMenu = Popup_Producto
-          ReadOnly = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridProductoDrawColumnCell
-          Columns = <
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = 'codProducto'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Producto'
-              Width = 88
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'producto'
-              Title.Alignment = taCenter
-              Title.Caption = 'Producto'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'medida'
-              Title.Alignment = taCenter
-              Title.Caption = 'Medida'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'color'
-              Title.Alignment = taCenter
-              Title.Caption = 'Color'
-              Width = 128
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'marca'
-              Title.Alignment = taCenter
-              Title.Caption = 'Marca'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'tipoArticulo'
-              Title.Alignment = taCenter
-              Title.Caption = 'Tipo Art'#237'culo'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'articulo'
-              Title.Alignment = taCenter
-              Title.Caption = 'Art'#237'culo'
-              Width = 100
-              Visible = True
-            end
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = 'codigoBarra'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Barra'
-              Width = 100
-              Visible = True
-            end
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = 'codCabecera'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Cabecera'
-              Width = 100
-              Visible = True
-            end>
-        end
-      end
-      object PanelAsociar_Sucursal: TPanel
-        Left = 0
-        Top = 21
-        Width = 423
-        Height = 431
-        Align = alLeft
-        BevelOuter = bvNone
-        TabOrder = 1
-        object DBGridSucursal: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 423
-          Height = 431
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_Sucursal
-          DefaultDrawing = False
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          PopupMenu = Popup_Sucursal
-          ReadOnly = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridSucursalDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'nombre'
-              Title.Alignment = taCenter
-              Title.Caption = 'Sucursal'
-              Width = 475
-              Visible = True
-            end>
-        end
-      end
-      object Panel1: TPanel
-        Left = 0
-        Top = 0
-        Width = 852
-        Height = 21
-        Align = alTop
-        BevelOuter = bvNone
-        Caption = 
-          'ASOCIAR LOS PRODUCTOS PERTENECIENTES A CADA UNA DE LAS SUCURSALE' +
-          'S'
-        TabOrder = 2
-      end
-    end
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 452
+      Width = 844
+      Height = 446
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
       object DBGridStock: TDBGrid
         Left = 0
         Top = 0
-        Width = 852
-        Height = 427
+        Width = 844
+        Height = 421
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
-        DefaultDrawing = False
         Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -428,15 +258,15 @@ object FABM_ProductoStock: TFABM_ProductoStock
       end
       object Panel2: TPanel
         Left = 0
-        Top = 427
-        Width = 852
+        Top = 421
+        Width = 844
         Height = 25
         Align = alBottom
         TabOrder = 1
         object lblResumen: TLabel
           Left = 1
           Top = 1
-          Width = 850
+          Width = 842
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -450,11 +280,178 @@ object FABM_ProductoStock: TFABM_ProductoStock
         end
       end
     end
+    object PanelAsociar: TPanel
+      Left = 5
+      Top = 5
+      Width = 844
+      Height = 446
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 1
+      object Splitter1: TSplitter
+        Left = 423
+        Top = 21
+        Height = 425
+      end
+      object PanelAsociar_Producto: TPanel
+        Left = 426
+        Top = 21
+        Width = 418
+        Height = 425
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGridProducto: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 418
+          Height = 425
+          Align = alClient
+          Color = 13431031
+          DataSource = DS_Producto
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Producto
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridProductoDrawColumnCell
+          Columns = <
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codProducto'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Producto'
+              Width = 88
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'producto'
+              Title.Alignment = taCenter
+              Title.Caption = 'Producto'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'medida'
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'color'
+              Title.Alignment = taCenter
+              Title.Caption = 'Color'
+              Width = 128
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'marca'
+              Title.Alignment = taCenter
+              Title.Caption = 'Marca'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'tipoArticulo'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo Art'#237'culo'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'articulo'
+              Title.Alignment = taCenter
+              Title.Caption = 'Art'#237'culo'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codigoBarra'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Barra'
+              Width = 100
+              Visible = True
+            end
+            item
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'codCabecera'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Cabecera'
+              Width = 100
+              Visible = True
+            end>
+        end
+      end
+      object PanelAsociar_Sucursal: TPanel
+        Left = 0
+        Top = 21
+        Width = 423
+        Height = 425
+        Align = alLeft
+        BevelOuter = bvNone
+        TabOrder = 1
+        object DBGridSucursal: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 423
+          Height = 425
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_Sucursal
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Sucursal
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridSucursalDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'nombre'
+              Title.Alignment = taCenter
+              Title.Caption = 'Sucursal'
+              Width = 475
+              Visible = True
+            end>
+        end
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 844
+        Height = 21
+        Align = alTop
+        BevelOuter = bvNone
+        Caption = 
+          'ASOCIAR LOS PRODUCTOS PERTENECIENTES A CADA UNA DE LAS SUCURSALE' +
+          'S'
+        TabOrder = 2
+      end
+    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

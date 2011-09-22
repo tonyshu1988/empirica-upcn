@@ -732,7 +732,6 @@ object FABM_Colores: TFABM_Colores
         Align = alClient
         Color = 14606012
         DataSource = DS_Colores
-        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET

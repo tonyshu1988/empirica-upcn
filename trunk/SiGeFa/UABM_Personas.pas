@@ -122,7 +122,7 @@ type
     btnImprimirListado: TdxBarLargeButton;
     RepPersonaDetalle: TQuickRep;
     QRBand1: TQRBand;
-    QRDBImage1: TQRDBImage;
+    QRDBLogo2: TQRDBImage;
     QRLabel6: TQRLabel;
     RepPersonaDetalle_Subtitulo: TQRLabel;
     RepPersonaDetalle_Titulo: TQRLabel;
@@ -295,7 +295,8 @@ type
     procedure EliminarTelMailClick(Sender: TObject);
     procedure ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
     procedure DBGridTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure DBGridRolDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridRolDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     id_persona: integer;
   public
@@ -318,6 +319,9 @@ uses UDM, UPrincipal, EKModelo;
 
 procedure TFABM_Personas.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
+  QRDBLogo2.DataSet:= DM.ZQ_Sucursal;
+    
   habilitarCtaCte(false);
 
   EKOrdenar.CargarConfigColumnas;
@@ -441,7 +445,7 @@ begin
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
 
-    DBGridTelMail.PopupMenu:=PopupMenuTelmail;
+    DBGridTelMail.PopupMenu:= PopupMenuTelmail;
   end;
 end;
 
@@ -786,8 +790,8 @@ procedure TFABM_Personas.AgregarTelMailClick(Sender: TObject);
 begin
   if not (dgEditing	in DBGridTelMail.Options) then
   begin
-    DBGridTelMail.Options := DBGridTelMail.Options - [dgRowSelect];
     DBGridTelMail.Options := DBGridTelMail.Options + [dgEditing];
+    DBGridTelMail.Options := DBGridTelMail.Options - [dgRowSelect];    
     ZQ_EntidadTelefono.Append;
   end;
 end;
@@ -797,8 +801,8 @@ procedure TFABM_Personas.EditarTelMailClick(Sender: TObject);
 begin
   if not (dgEditing	in DBGridTelMail.Options) then
   begin
-    DBGridTelMail.Options := DBGridTelMail.Options - [dgRowSelect];
     DBGridTelMail.Options := DBGridTelMail.Options + [dgEditing];
+    DBGridTelMail.Options := DBGridTelMail.Options - [dgRowSelect];    
     ZQ_EntidadTelefono.Edit;
   end;
 end;
@@ -814,20 +818,6 @@ end;
 procedure TFABM_Personas.ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
 begin
   ZQ_EntidadTelefonoID_PERSONA.AsInteger := ZQ_PersonaID_PERSONA.AsInteger;
-end;
-
-procedure TFABM_Personas.DBGridTelMailDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  FPrincipal.PintarFilasGrillas(DBGridTelMail, Rect, DataCol, Column, State);
-end;
-
-procedure TFABM_Personas.DBGridRolDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  FPrincipal.PintarFilasGrillas(DBGridTelMail, Rect, DataCol, Column, State);
 end;
 
 
@@ -918,6 +908,18 @@ begin
   ZQ_CtaCte.RevertRecord;
   habilitarCtaCte(false);
   GrupoGuardarCancelar.Enabled:= true;  
+end;
+
+
+procedure TFABM_Personas.DBGridRolDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridRol, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFABM_Personas.DBGridTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridTelMail, Rect, DataCol, Column, State);
 end;
 
 end.

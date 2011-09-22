@@ -1219,7 +1219,6 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
       Align = alClient
       Color = 14606012
       DataSource = DS_CtaCte_Gral
-      DefaultDrawing = False
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
@@ -1441,7 +1440,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageHeader
-        object QRDBImage1: TQRDBImage
+        object QRDBLogo2: TQRDBImage
           Left = 66
           Top = 2
           Width = 64
@@ -3072,7 +3071,6 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
         Align = alClient
         Color = 14606012
         DataSource = DS_CtaCte_Proveedor
-        DefaultDrawing = False
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET

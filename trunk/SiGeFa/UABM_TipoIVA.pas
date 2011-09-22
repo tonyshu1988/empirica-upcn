@@ -232,6 +232,7 @@ end;
 
 procedure TFABM_TipoIVA.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   EKOrdenarGrilla1.CargarConfigColumnas;
 
   StaticTxtBaja.Visible:= false;

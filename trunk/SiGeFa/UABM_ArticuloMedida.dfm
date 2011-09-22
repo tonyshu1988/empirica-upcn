@@ -670,7 +670,6 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Align = alClient
           Color = 14606012
           DataSource = DS_Medida
-          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -785,7 +784,6 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Align = alClient
           Color = 13431031
           DataSource = DSMedidas
-          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
           PopupMenu = PopupMenuMedida
@@ -816,7 +814,6 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Align = alLeft
           Color = 14606012
           DataSource = DSArticulo
-          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
           PopupMenu = PopupMenuArticulo
@@ -885,7 +882,6 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Align = alClient
           Color = 14606012
           DataSource = DS_MedidaArticulo
-          DefaultDrawing = False
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
           PopupMenu = PopupMenuArticuloMedida

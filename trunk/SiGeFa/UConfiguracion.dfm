@@ -24,7 +24,7 @@ object FConfiguracion: TFConfiguracion
     Top = 0
     Width = 539
     Height = 506
-    ActivePage = TabSheetVariables
+    ActivePage = TabSheetGeneral
     Align = alClient
     TabOrder = 4
     object TabSheetGeneral: TTabSheet
