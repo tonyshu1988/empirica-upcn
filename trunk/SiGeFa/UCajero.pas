@@ -1301,6 +1301,18 @@ begin
     coefPrecio4:= acumPrecio4/acumuladoProd;
     coefPrecio5:= acumPrecio5/acumuladoProd;
   end;
+
+  if coefPrecio1<0 then
+     coefPrecio1:= 1;
+  if coefPrecio2<0 then
+     coefPrecio2:= 1;
+  if coefPrecio3<0 then
+     coefPrecio3:= 1;
+  if coefPrecio4<0 then
+     coefPrecio4:= 1;
+  if coefPrecio5<0 then
+     coefPrecio5:= 1;
+
   lblTotAPagar.Caption :='Total Venta: '+ FormatFloat('$ ##,###,##0.00 ', acumulado);
 
 end;
