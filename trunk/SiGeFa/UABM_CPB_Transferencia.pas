@@ -340,7 +340,7 @@ begin
 
     ZQ_CpbFormaPago.Append;
     ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_comprobante;
-    ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= 10;
+    ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= FP_TRANSFERENCIA;
     ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
 
     EKDBDateTimePicker1.SetFocus;
