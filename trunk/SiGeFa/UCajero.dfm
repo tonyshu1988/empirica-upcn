@@ -4098,7 +4098,7 @@ object FCajero: TFCajero
           Expanded = False
           FieldName = '_medioPago'
           Title.Caption = 'Medio Pago'
-          Width = 269
+          Width = 260
           Visible = True
         end
         item
