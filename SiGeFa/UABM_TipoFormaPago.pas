@@ -80,6 +80,13 @@ type
     ZQ_TipoFPagoCOD_CORTO: TIntegerField;
     ZQ_UltimoNro: TZQuery;
     ZQ_UltimoNroCOD_CORTO: TIntegerField;
+    ZQ_TipoFPagoGENERA_VUELTO: TStringField;
+    ZQ_TipoFPagoCOLUMNA_PRECIO: TIntegerField;
+    ZQ_TipoFPagoMODIFICABLE: TStringField;
+    Label4: TLabel;
+    DBComboBoxVuelto: TDBComboBox;
+    Label5: TLabel;
+    DBComboBox1: TDBComboBox;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -151,6 +158,10 @@ begin
 
     ZQ_TipoFPago.Append;
     ZQ_TipoFPagoBAJA.AsString:= 'N';
+    ZQ_TipoFPagoMODIFICABLE.AsString:= 'S';
+    ZQ_TipoFPagoGENERA_VUELTO.AsString:= 'N';
+    ZQ_TipoFPagoCOLUMNA_PRECIO.AsInteger:= 1;    
+
     if ZQ_UltimoNro.IsEmpty then
       ZQ_TipoFPagoCOD_CORTO.AsInteger:= 1
     else
@@ -165,7 +176,7 @@ end;
 
 procedure TFABM_TipoFormaPago.btnModificarClick(Sender: TObject);
 begin
-  if ZQ_TipoFPago.IsEmpty then
+  if (ZQ_TipoFPago.IsEmpty) or (ZQ_TipoFPagoMODIFICABLE.AsString = 'N') then
     exit;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
@@ -195,7 +206,7 @@ procedure TFABM_TipoFormaPago.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_TipoFPago.IsEmpty) OR (ZQ_TipoFPagoBAJA.AsString <> 'N') then
+  if (ZQ_TipoFPago.IsEmpty) OR (ZQ_TipoFPagoBAJA.AsString <> 'N') or (ZQ_TipoFPagoMODIFICABLE.AsString = 'N') then
     exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Medio Pago" seleccionado?'), 'ABM Tipo Medio Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then

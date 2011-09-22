@@ -507,7 +507,7 @@ type
     editTotalFpago: TEdit;
     Label25: TLabel;
     editSaldoFpago: TEdit;
-    Label27: TLabel;
+    lblSaldoFPago: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -562,7 +562,9 @@ type
     procedure tamanioGrillasDevEnt();
     procedure PanelCpbActualResize(Sender: TObject);
     procedure PanelEditarResize(Sender: TObject);
+    procedure guardarFormaPago;    
   private
+    debito, credito: boolean;
     tipoProducto: string;
     estadoPantalla: string;
     tipoComprobante: integer;
@@ -572,7 +574,7 @@ type
     procedure onSelPersona;
     procedure onSelProducto;
   public
-    totalDevuelto, totalEntrega, saldoFormaCobroPago: Double;
+    totalDevuelto, totalEntrega, saldoFormaCobroPago, restaPagar: Double;
   end;
 
 type
@@ -777,6 +779,8 @@ end;
 
 procedure TFABM_CPB_Devolucion.btnNuevoClick(Sender: TObject);
 begin
+  debito:= false;
+  credito:= false;
   totalDevuelto:= 0;
   totalEntrega:= 0;
   saldoFormaCobroPago:= 0;
@@ -912,16 +916,60 @@ begin
 end;
 
 
+procedure TFABM_CPB_Devolucion.guardarFormaPago;
+begin
+  CD_FormaPago.First;
+  while not CD_FormaPago.Eof do  //por cada una de las formas de pago cargadas
+  begin
+    ZQ_CpbFormaPago.Append;
+    ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= CD_FormaPago_IdComprobante.AsInteger;
+    ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= CD_FormaPago_IdTipoForma.AsInteger;
+    if credito then
+      ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= CD_FormaPago_IdCuenta.AsInteger
+    else
+    if debito then
+     ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= CD_FormaPago_IdCuenta.AsInteger;
+    ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+    ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= CD_FormaPago_Importe.AsFloat;
+    ZQ_CpbFormaPagoIMPORTE.AsFloat:= CD_FormaPago_Importe.AsFloat;
+    ZQ_CpbFormaPagoMDCP_FECHA.AsDateTime:= CD_FormaPago_MCPFecha.AsDateTime;
+    ZQ_CpbFormaPagoMDCP_BANCO.AsString:= CD_FormaPago_MCPBanco.AsString;
+    ZQ_CpbFormaPagoMDCP_CHEQUE.AsString:= CD_FormaPago_MCPNumero.AsString;
+
+    CD_FormaPago.Next;
+  end;
+end;
+
+
 procedure TFABM_CPB_Devolucion.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
+  //si no seleccione proveedor o cliente
   if ZQ_ComprobanteID_PROVEEDOR.IsNull and ZQ_ComprobanteID_CLIENTE.IsNull then
   begin
     Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
     EKDBDateEmision.SetFocus;
+    exit;
+  end;
+
+  //si tiene saldo la devolucion y no se cargo ninguna forma de pago
+  if (saldoFormaCobroPago <> 0) and (CD_FormaPago.IsEmpty) then
+  begin
+    Application.MessageBox(pchar('La devolución tiene saldo distinto de cero.'+#13+
+                                 'Debe seleccionar una forma de cobro/pago, por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBGridEditar_Fpago.SetFocus;
+    exit;
+  end;
+
+  //si el saldo de la devolucion es distinto a la forma de pago cargada
+  if (saldoFormaCobroPago <> EKSuma_FPago.SumCollection[0].SumValue) then
+  begin
+    Application.MessageBox(pchar('La devolución tiene saldo distinto de cero.'+#13+
+                                 'Debe seleccionar una forma de cobro/pago, por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+    DBGridEditar_Fpago.SetFocus;
     exit;
   end;
 
@@ -944,18 +992,7 @@ begin
   end;
 
 //---------------FORMA DE PAGO
-//  if not ZQ_CpbFormaPago.IsEmpty then
-//  begin
-//    ZQ_CpbFormaPago.First;
-//    while not ZQ_CpbFormaPago.Eof do  //por cada una de las formas de pago cargadas
-//    begin
-//      ZQ_CpbFormaPago.Edit;
-//      ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat; //pongo el mismo importe cargado al importe_real
-//      ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
-//
-//      ZQ_CpbFormaPago.Next;
-//    end;
-//  end;
+
 
 //---------------DATOS COMPROBANTE
 //  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= 0;
@@ -1262,6 +1299,8 @@ begin
       CD_FormaPago_IdTipoForma.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
       CD_FormaPago_IdComprobante.AsInteger:= id_Comprobante;
 
+      CD_FormaPago_Importe.AsFloat:= restaPagar;
+
       CD_FormaPago_CodCuenta.AsString:= ZQ_ListadoCuentaCODIGO.AsString;
       CD_FormaPago_NombreCuenta.AsString:= ZQ_ListadoCuentaNOMBRE_CUENTA.AsString;
       CD_FormaPago_TipoFormaCP.AsString:= ZQ_ListadoMedioDESCRIPCION.AsString;
@@ -1323,6 +1362,7 @@ end;
 procedure TFABM_CPB_Devolucion.EKSuma_FPagoSumListChanged(Sender: TObject);
 begin
   editTotalFpago.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
+  restaPagar:= abs(saldoFormaCobroPago) - EKSuma_FPago.SumCollection[0].SumValue;
 end;
 
 
@@ -1527,6 +1567,9 @@ begin
 
   ZQ_CpbEntregaBASE_IMPONIBLE.AsFloat:= final;
   ZQ_CpbEntregaIMPORTE_VENTA.AsFloat:= final;
+
+  ZQ_CpbEntrega.Post;
+  ZQ_CpbEntrega.Edit;
 end;
 
 
@@ -1562,6 +1605,9 @@ begin
 
   ZQ_CpbDevolucionBASE_IMPONIBLE.AsFloat:= abs(final) * -1;
   ZQ_CpbDevolucionIMPORTE_VENTA.AsFloat:= abs(final) * -1;
+
+  ZQ_CpbDevolucion.Post;
+  ZQ_CpbDevolucion.Edit;
 end;
 
 
@@ -1649,18 +1695,53 @@ begin
 
   totalDevuelto:= EKSuma_Devolucion.SumCollection[1].SumValue;
   saldoFormaCobroPago:= totalDevuelto + totalEntrega;
-  editSaldoFpago.Text:= FormatFloat('$ ###,###,###,##0.00', saldoFormaCobroPago);
+  editSaldoFpago.Text:= FormatFloat('$ ###,###,###,##0.00', abs(saldoFormaCobroPago));
+
+  debito:= false;
+  credito:= false;
+  if saldoFormaCobroPago < 0 then //si lo que devuelvo es mayor a lo que me llevo
+  begin
+    credito:= true;
+    lblSaldoFPago.Caption:= 'CREDITO:'
+  end
+  else
+  if saldoFormaCobroPago > 0 then //si lo que devuelvo es menor a lo que me llevo
+  begin
+    debito:= true;
+    lblSaldoFPago.Caption:= 'DEBITO:'
+  end;
+
+  restaPagar:= abs(saldoFormaCobroPago) - EKSuma_FPago.SumCollection[0].SumValue;
 end;
 
 
 procedure TFABM_CPB_Devolucion.EKSuma_EntregaSumListChanged(Sender: TObject);
 begin
+  debito:= false;
+  credito:= false;
+
   editCantidadEntregado.Text:= FormatFloat('###,###,###,##0.00', EKSuma_Entrega.SumCollection[0].SumValue);
   editTotalEntregado.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Entrega.SumCollection[1].SumValue);
 
   totalEntrega:= EKSuma_Entrega.SumCollection[1].SumValue;
   saldoFormaCobroPago:= totalDevuelto + totalEntrega;
-  editSaldoFpago.Text:= FormatFloat('$ ###,###,###,##0.00', saldoFormaCobroPago);
+  editSaldoFpago.Text:= FormatFloat('$ ###,###,###,##0.00', abs(saldoFormaCobroPago));
+
+  debito:= false;
+  credito:= false;
+  if saldoFormaCobroPago < 0 then //si lo que devuelvo es mayor a lo que me llevo
+  begin
+    credito:= true;
+    lblSaldoFPago.Caption:= 'CREDITO:'
+  end
+  else
+  if saldoFormaCobroPago > 0 then //si lo que devuelvo es menor a lo que me llevo
+  begin
+    debito:= true;
+    lblSaldoFPago.Caption:= 'DEBITO:'
+  end;
+  
+  restaPagar:= abs(saldoFormaCobroPago) - EKSuma_FPago.SumCollection[0].SumValue;
 end;
 
 

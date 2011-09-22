@@ -94,6 +94,10 @@ type
     ZQ_CuentasBAJA: TStringField;
     ZQ_UltimoNro: TZQuery;
     ZQ_UltimoNroCODIGO: TStringField;
+    ZQ_CuentasID_SUCURSAL: TIntegerField;
+    ZQ_CuentasA_CTA_CORRIENTE: TStringField;
+    ZQ_CuentasA_NOTA_CREDITO: TStringField;
+    ZQ_CuentasMODIFICABLE: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -144,7 +148,7 @@ end;
 
 procedure TFABM_Cuentas.btnModificarClick(Sender: TObject);
 begin
-  if ZQ_Cuentas.IsEmpty then
+  if ZQ_Cuentas.IsEmpty or (ZQ_CuentasMODIFICABLE.AsString = 'N') then
       exit;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
@@ -174,7 +178,7 @@ procedure TFABM_Cuentas.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Cuentas.IsEmpty) OR (ZQ_CuentasBAJA.AsString <> 'N') then
+  if (ZQ_Cuentas.IsEmpty) OR (ZQ_CuentasBAJA.AsString <> 'N') or (ZQ_CuentasMODIFICABLE.AsString = 'N') then
     exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -302,7 +306,11 @@ begin
       ZQ_CuentasCODIGO.AsInteger:= 1
     else
       ZQ_CuentasCODIGO.AsInteger:= ZQ_UltimoNroCODIGO.AsInteger + 1;
+      
     ZQ_CuentasBAJA.AsString:= 'N';
+    ZQ_CuentasMODIFICABLE.AsString:= 'S';
+    ZQ_CuentasA_CTA_CORRIENTE.AsString:= 'N';
+    ZQ_CuentasA_NOTA_CREDITO.AsString:= 'N';
 
     DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
