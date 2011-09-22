@@ -236,8 +236,6 @@ type
     Image2: TImage;
     Label8: TLabel;
     Label10: TLabel;
-    Label15: TLabel;
-    Label18: TLabel;
     Label19: TLabel;
     ZQ_PersonasCOEFIVA: TFloatField;
     grupoVertical: TdxBarGroup;
@@ -336,7 +334,7 @@ type
     btnConfirmarVenta: TBitBtn;
     btnCancelarVenta: TBitBtn;
     Label34: TLabel;
-    DBEdit16: TDBEdit;
+    edDescTotal: TDBEdit;
     Label35: TLabel;
     CD_DetalleFacturaID_PROD_STOCK: TIntegerField;
     ZQ_ProductosID_STOCK_PRODUCTO: TIntegerField;
@@ -387,7 +385,7 @@ type
     procedure btnCancelarVentaClick(Sender: TObject);
     procedure Prorrateo();
     procedure grabarDetallesFactura;
-    procedure DBEdit16Exit(Sender: TObject);
+    procedure edDescTotalExit(Sender: TObject);
     procedure recalcularBoleta();
     procedure btnConfirmarVentaClick(Sender: TObject);
     function validarBoleta():Boolean ;
@@ -1070,9 +1068,10 @@ begin
     PConfirmarVenta.Visible:=True;
     PConfirmarVenta.BringToFront;
     dm.centrarPanel(FABM_Preventa, PConfirmarVenta);
-    PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
+    PanelContenedorDerecha.Enabled:=False;
     GrupoGuardarCancelar.Enabled:=False;
     grupoVertical.Enabled:=False;
+    edDescTotal.SetFocus;
     recalcularBoleta();
   end;
 
@@ -1242,7 +1241,7 @@ begin
     end
 end;
 
-procedure TFABM_Preventa.DBEdit16Exit(Sender: TObject);
+procedure TFABM_Preventa.edDescTotalExit(Sender: TObject);
 begin
     recalcularBoleta();
 end;
