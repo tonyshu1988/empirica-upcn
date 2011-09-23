@@ -52,7 +52,6 @@ type
     PanelEditar_EntregaInfo: TPanel;
     DBGridEditar_Entrega: TDBGrid;
     btnEliminarEntrega: TButton;
-    btnBuscarEmpresa: TSpeedButton;
     ImageListEntidad: TImageList;
     ZQ_VerCpb: TZQuery;
     ZQ_VerCpb_Fpago: TZQuery;
@@ -101,33 +100,10 @@ type
     ZQ_VerCpb_FpagoCTA_INGRESO_CODIGO: TStringField;
     ZQ_VerCpb_FpagoCTA_INGRESO: TStringField;
     lblTipoComprobante: TLabel;
-    EKListadoEntidad: TEKListadoSQL;
     PanelEditar_DatosGralCliente: TPanel;
-    PanelEditar_DatosGralProveedor: TPanel;
-    ZQ_Proveedor: TZQuery;
     ZQ_Cliente: TZQuery;
-    DS_Proveedor: TDataSource;
     DS_Cliente: TDataSource;
     btnBuscarPersona: TSpeedButton;
-    ZQ_ProveedorID: TIntegerField;
-    ZQ_ProveedorID_EMPRESA: TIntegerField;
-    ZQ_ProveedorID_PROVINCIA: TIntegerField;
-    ZQ_ProveedorID_TIPO_IVA: TIntegerField;
-    ZQ_ProveedorID_TIPO_EMPRESA: TIntegerField;
-    ZQ_ProveedorCUIT_CUIL: TStringField;
-    ZQ_ProveedorNOMBRE: TStringField;
-    ZQ_ProveedorDIRECCION: TStringField;
-    ZQ_ProveedorLOCALIDAD: TStringField;
-    ZQ_ProveedorCODIGO_POSTAL: TStringField;
-    ZQ_ProveedorTELEFONO: TStringField;
-    ZQ_ProveedorEMAIL: TStringField;
-    ZQ_ProveedorPAGINA_WEB: TStringField;
-    ZQ_ProveedorBAJA: TStringField;
-    ZQ_ProveedorDESCRIPCION: TStringField;
-    ZQ_ProveedorDESCRIPCION_PRIVADA: TStringField;
-    ZQ_ProveedorNOMBRE_PROVINCIA: TStringField;
-    ZQ_ProveedorNOMBRE_TIPO_IVA: TStringField;
-    ZQ_ProveedorCOD_IVA: TStringField;
     ZQ_ClienteID: TIntegerField;
     ZQ_ClienteID_PERSONA: TIntegerField;
     ZQ_ClienteID_PROVINCIA: TIntegerField;
@@ -150,9 +126,7 @@ type
     ZQ_ClienteNOMBRE_TIPO_IVA: TStringField;
     ZQ_ClienteCOD_IVA: TStringField;
     ZQ_ClienteNOMBRE_TIPO_DOC: TStringField;
-    ZQ_ProveedorTIPO_EMPRESA: TStringField;
     DBText7: TDBText;
-    ZQ_ProveedorCODIGO_CORTO: TIntegerField;
     ZQ_ClienteCODIGO_CORTO: TIntegerField;
     Label2: TLabel;
     Label3: TLabel;
@@ -173,31 +147,12 @@ type
     DBText15: TDBText;
     Label11: TLabel;
     DBText16: TDBText;
-    Label13: TLabel;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
-    Label18: TLabel;
-    Label20: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
-    DBText6: TDBText;
-    DBText17: TDBText;
-    DBText18: TDBText;
-    DBText19: TDBText;
-    DBText20: TDBText;
-    DBText22: TDBText;
-    DBText23: TDBText;
-    DBText24: TDBText;
-    DBText25: TDBText;
     Label12: TLabel;
     LblCPB_PuntoVenta: TLabel;
     LblCPB_Numero: TLabel;
     Label26: TLabel;
     DBTxtCPB_PuntoVenta: TDBText;
     DBTxtCPB_Numero: TDBText;
-    DBMemoCPB_Observacion: TDBMemo;
     ZQ_Comprobante: TZQuery;
     ZQ_ComprobanteID_COMPROBANTE: TIntegerField;
     ZQ_ComprobanteID_SUCURSAL: TIntegerField;
@@ -313,12 +268,9 @@ type
     PopupGridProducto: TPopupMenu;
     PopUpItem_ProductoOcultarDetalle: TMenuItem;
     PanelFechas: TPanel;
-    PanelFechaVencimiento: TPanel;
     PanelFechaEmision: TPanel;
     EKDBDateEmision: TEKDBDateTimePicker;
     lblTituloFecha_Emision: TLabel;
-    EKDBDateVencimiento: TEKDBDateTimePicker;
-    lblTituloFecha_Vencimiento: TLabel;
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
     btnConfirmar: TdxBarLargeButton;
@@ -401,8 +353,6 @@ type
     GroupBoxCpbActual_Info: TGroupBox;
     DBTxtMonto: TDBText;
     Label1: TLabel;
-    lblDatos_Proveedor: TLabel;
-    DBTxtDatos_Proveedor: TDBText;
     lblDatos_Cliente: TLabel;
     DBTxtDatos_Cliente: TDBText;
     Label30: TLabel;
@@ -518,6 +468,18 @@ type
     ZQ_TipoFPagoGENERA_VUELTO: TStringField;
     ZQ_TipoFPagoCOLUMNA_PRECIO: TIntegerField;
     ZQ_TipoFPagoMODIFICABLE: TStringField;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    DBMemoCPB_Observacion: TDBMemo;
+    panelNC_Vencimiento: TPanel;
+    Label13: TLabel;
+    DBText1: TDBText;
+    Label14: TLabel;
+    DBText2: TDBText;
+    Label15: TLabel;
+    DBText3: TDBText;
+    EKDBDateTimePicker1: TEKDBDateTimePicker;
+    Label16: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -539,7 +501,6 @@ type
     procedure ZQ_VerCpbAfterScroll(DataSet: TDataSet);
     procedure modoEdicion(flag: boolean);
     procedure cargarTipoComprobante(tipo: integer);
-    procedure btnBuscarEmpresaClick(Sender: TObject);
     procedure btnBuscarPersonaClick(Sender: TObject);
     procedure DBGridEditar_FpagoColExit(Sender: TObject);
     procedure DBGridEditar_FpagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -574,7 +535,10 @@ type
     procedure PanelEditarResize(Sender: TObject);
     procedure guardarFormaPago;
     procedure guardarComprobante;
-    procedure borrarCuentasEgreso;    
+    procedure borrarCuentasEgreso;
+    procedure borrarCuentasIngreso;
+    procedure btnConfirmarClick(Sender: TObject);
+    procedure btnBajaClick(Sender: TObject);
   private
     debito, credito, finalizarCarga: boolean;
     tipoProducto: string;
@@ -610,29 +574,22 @@ procedure TFABM_CPB_Devolucion.tamanioGrillasDevEnt();
 var
   contenedor, fpago, info, grillas: integer;
 begin
-//  if PanelVer.Visible then
-//  begin
-    contenedor:= PanelCpbActual.Height;
-    fpago:= PanelCpbActual_FPago.Height;
-    info:= PanelCpbActual_Info.Height;
+  contenedor:= PanelCpbActual.Height;
+  fpago:= PanelCpbActual_FPago.Height;
+  info:= PanelCpbActual_Info.Height;
 
-    grillas:= (contenedor - fpago - info) div 2;
+  grillas:= (contenedor - fpago - info) div 2;
 
-    DBGridCpbActual_Entrega.Height:= grillas;
-    DBGridCpbActual_Devolucion.Height:= grillas;
-//  end
-//  else
-//  if PanelEditar.Visible then
-//  begin
-    contenedor:= PanelEditar.Height;
-    fpago:= PanelEditar_FPago.Height;
-    info:= PanelEditar_DatosGral.Height;
+  DBGridCpbActual_Entrega.Height:= grillas;
+  DBGridCpbActual_Devolucion.Height:= grillas;
 
-    grillas:= (contenedor - fpago - info) div 2;
+  contenedor:= PanelEditar.Height;
+  info:= PanelEditar_DatosGral.Height;
 
-    PanelEditar_Devolucion.Height:= grillas;
-    PanelEditar_Entrega.Height:= grillas;
-//  end
+  grillas:= (contenedor - info) div 2;
+
+  PanelEditar_Devolucion.Height:= grillas;
+  PanelEditar_Entrega.Height:= grillas;
 end;
 
 
@@ -688,7 +645,6 @@ begin
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
-  ImageListEntidad.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar empresa
   ImageListEntidad.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar persona
 
   EKBuscar.Abrir;
@@ -742,7 +698,6 @@ end;
 
 procedure TFABM_CPB_Devolucion.cargarTipoComprobante(tipo: integer);
 begin
-  configPanelFechas(PanelFechaVencimiento, true);
   lblTipoComprobante.Caption:= 'DEVOLUCIONES';
 end;
 
@@ -781,7 +736,6 @@ begin
   begin
     modoEdicion(true);
 
-    ZQ_Proveedor.Close;
     ZQ_Cliente.Close;
 
     ZQ_CpbFormaPago.Close;
@@ -839,7 +793,8 @@ var
 begin
   finalizarCarga:= false;
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-  if ((ZQ_VerCpb.IsEmpty) or ((estado = ESTADO_CONFIRMADO))) then
+  if ((ZQ_VerCpb.IsEmpty)
+     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
     exit;
 
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
@@ -872,23 +827,9 @@ begin
       CD_Entrega.EmptyDataSet;
     cargarProductosClienDataset(CD_Entrega, ZQ_VerCpb_Entrega);
 
-    if ZQ_ComprobanteID_CLIENTE.IsNull then
-    begin
-      PanelEditar_DatosGralProveedor.BringToFront;
-      ZQ_Proveedor.Close;
-      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= ZQ_ComprobanteID_PROVEEDOR.AsInteger;
-      ZQ_Proveedor.Open;
-      ZQ_Cliente.Close;
-    end;
-
-    if ZQ_ComprobanteID_PROVEEDOR.IsNull then
-    begin
-      PanelEditar_DatosGralCliente.BringToFront;
-      ZQ_Cliente.Close;
-      ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_ComprobanteID_CLIENTE.AsInteger;
-      ZQ_Cliente.Open;
-      ZQ_Proveedor.Close;
-    end;
+    ZQ_Cliente.Close;
+    ZQ_Cliente.ParamByName('id_persona').AsInteger:= ZQ_ComprobanteID_CLIENTE.AsInteger;
+    ZQ_Cliente.Open;
 
     cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
@@ -904,6 +845,14 @@ procedure TFABM_CPB_Devolucion.borrarCuentasEgreso;
 begin
   ZQ_CpbFormaPago.First;
   if not ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull then
+    ZQ_CpbFormaPago.Delete;
+end;
+
+
+procedure TFABM_CPB_Devolucion.borrarCuentasIngreso;
+begin
+  ZQ_CpbFormaPago.First;
+  if not ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull then
     ZQ_CpbFormaPago.Delete;
 end;
 
@@ -928,6 +877,8 @@ procedure TFABM_CPB_Devolucion.guardarComprobante;
 var
   recNo: integer;
 begin
+  EKSuma_FPago.RecalcAll;
+
   //si tiene saldo la devolucion y no se cargo ninguna forma de pago
   if (saldoFormaCobroPago <> 0) and (ZQ_CpbFormaPago.IsEmpty) then
   begin
@@ -1010,37 +961,55 @@ begin
       exit;
     end;
 
-    PanelEditar.Enabled:= false; //deshabilito el panel del fondo
-    PanelEditar_FPago.Visible:= true; //traigo el panel de forma de pago
-    PanelEditar_FPago.BringToFront;
-    dm.centrarPanel(FABM_CPB_Devolucion, PanelEditar_FPago);
-
-    if credito then //si es una nota de credito
+    if saldoFormaCobroPago <> 0 then
     begin
-      PanelEditar_FPago.Enabled:= false; //no se puede tocar la forma de pago
-      lblTituloVentanaFpago.Caption:= 'NOTA DE CREDITO';
+      PanelEditar.Enabled:= false; //deshabilito el panel del fondo
+      PanelEditar_FPago.Visible:= true; //traigo el panel de forma de pago
+      PanelEditar_FPago.BringToFront;
+      dm.centrarPanel(FABM_CPB_Devolucion, PanelEditar_FPago);
 
-      if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
-        ZQ_CpbFormaPago.Append
-      else
-        ZQ_CpbFormaPago.Edit;
-      ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= CUENTA_NOTA_CREDITO;
-      ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= FP_NOTA_CREDITO;
-      ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-      ZQ_CpbFormaPago_CuentaNombre.AsString:= 'NOTA CREDITO';
-      ZQ_CpbFormaPago_CuentaCodigo.AsString:= 'NOTA CREDITO';
-      ZQ_CpbFormaPagoIMPORTE.AsFloat:= abs(saldoFormaCobroPago);
-      ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= abs(saldoFormaCobroPago);
-      ZQ_CpbFormaPago.Post;
+      if credito then //si es una nota de credito
+      begin
+        PanelEditar_FPagoInfo.Enabled:= false; //no se puede tocar la forma de pago
+        DBGridEditar_Fpago.Enabled:= false; //no se puede tocar la forma de pago
+        panelNC_Vencimiento.Enabled:= true; //no se puede tocar la forma de pago
+        lblTituloVentanaFpago.Caption:= 'NOTA DE CREDITO';
+
+        borrarCuentasIngreso;
+        if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
+          ZQ_CpbFormaPago.Append
+        else
+          ZQ_CpbFormaPago.Edit;
+        ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= CUENTA_NOTA_CREDITO;
+        ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= FP_NOTA_CREDITO;
+        ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+        ZQ_CpbFormaPago_CuentaNombre.AsString:= 'NOTA CREDITO';
+        ZQ_CpbFormaPago_CuentaCodigo.AsString:= 'NOTA CREDITO';
+        ZQ_CpbFormaPagoIMPORTE.AsFloat:= abs(saldoFormaCobroPago);
+        ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= abs(saldoFormaCobroPago);
+        ZQ_CpbFormaPago.Post;
+      end
+      else //si no es una nota de credito
+      if debito then //si es un debito
+      begin
+        ZQ_Comprobante.Edit;
+        ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
+
+        PanelEditar_FPagoInfo.Enabled:= true; //no se puede tocar la forma de pago
+        DBGridEditar_Fpago.Enabled:= true; //no se puede tocar la forma de pago
+        panelNC_Vencimiento.Enabled:= false; //no se puede tocar la forma de pago
+        lblTituloVentanaFpago.Caption:= 'CARGAR FORMA DE PAGO';
+        borrarCuentasEgreso;
+      end;
+
+      finalizarCarga:= true;
     end
     else
     begin
-      PanelEditar_FPago.Enabled:= true; //no se puede tocar la forma de pago
-      lblTituloVentanaFpago.Caption:= 'CARGAR FORMA DE PAGO';
       borrarCuentasEgreso;
-    end;
-
-    finalizarCarga:= true;
+      borrarCuentasIngreso;
+      guardarComprobante;
+    end
   end
   else
   if finalizarCarga = true then
@@ -1144,63 +1113,7 @@ begin
   ZQ_VerCpb_Fpago.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   ZQ_VerCpb_Fpago.Open;
 
-  if ZQ_VerCpbID_CLIENTE.IsNull then
-  begin
-    DBTxtDatos_Proveedor.Visible:= true;
-    lblDatos_Proveedor.Visible:= true;
-    DBTxtDatos_Cliente.Visible:= false;
-    lblDatos_Cliente.Visible:= false;
-  end
-  else
-  begin
-    DBTxtDatos_Proveedor.Visible:= false;
-    lblDatos_Proveedor.Visible:= false;
-    DBTxtDatos_Cliente.Visible:= true;
-    lblDatos_Cliente.Visible:= true;
-  end;
-
   configFormaPago;
-end;
-
-
-procedure TFABM_CPB_Devolucion.btnBuscarEmpresaClick(Sender: TObject);
-var
-  sql: string;
-begin
- sql:= Format('select emp.id_empresa as id, emp.nombre||%s|| coalesce(tipo.descripcion, %s) as busqueda '+
-               'from empresa emp '+
-               'left join tipo_empresa tipo on (emp.id_tipo_empresa = tipo.id_tipo_empresa) '+
-               'where emp.baja = %s '+
-               'order by emp.nombre', [QuotedStr(' - '), QuotedStr(''), QuotedStr('N')]);
-
-  EKListadoEntidad.SQL.Text:= sql;
-
-  if EKListadoEntidad.Buscar then
-  begin
-    if (EKListadoEntidad.Resultado <> '') then
-    begin
-      btnBuscarEmpresa.Down:= true;
-      ZQ_Cliente.Close;
-      PanelEditar_DatosGralProveedor.BringToFront;
-
-      ZQ_Proveedor.Close;
-      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= StrToInt(EKListadoEntidad.Resultado);
-      ZQ_Proveedor.Open;
-
-      if ZQ_Comprobante.State = dsBrowse then
-        ZQ_Comprobante.Edit;
-      ZQ_ComprobanteID_CLIENTE.Clear;
-      ZQ_ComprobanteID_PROVEEDOR.AsInteger:= ZQ_ProveedorID_EMPRESA.AsInteger;
-    end
-    else
-      if not ZQ_ComprobanteID_CLIENTE.IsNull then
-        btnBuscarPersona.Down:= true;
-  end
-  else
-    if not ZQ_ComprobanteID_CLIENTE.IsNull then
-      btnBuscarPersona.Down:= true;
-
-  EKDBDateEmision.SetFocus;
 end;
 
 
@@ -1209,8 +1122,6 @@ begin
   if (not (vselPersona.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
   begin
     btnBuscarPersona.Down:= true;
-    ZQ_Proveedor.Close;
-    PanelEditar_DatosGralCliente.BringToFront;
 
     ZQ_Cliente.Close;
     ZQ_Cliente.ParamByName('id_persona').AsInteger:= vselPersona.ZQ_PersonasID_PERSONA.AsInteger;
@@ -1220,10 +1131,7 @@ begin
       ZQ_Comprobante.Edit;
     ZQ_ComprobanteID_PROVEEDOR.Clear;
     ZQ_ComprobanteID_CLIENTE.AsInteger:= ZQ_ClienteID_PERSONA.AsInteger;
-  end
-  else
-    if not ZQ_ComprobanteID_PROVEEDOR.IsNull then
-      btnBuscarEmpresa.Down:= true;
+  end;
 
   EKDBDateEmision.SetFocus;
   
@@ -1803,9 +1711,89 @@ begin
   tamanioGrillasDevEnt;
 end;
 
+
 procedure TFABM_CPB_Devolucion.PanelEditarResize(Sender: TObject);
 begin
   tamanioGrillasDevEnt;
+end;
+
+
+procedure TFABM_CPB_Devolucion.btnConfirmarClick(Sender: TObject);
+var
+  recno, estado: Integer;
+begin
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or
+     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
+    exit;
+
+  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+
+  if (application.MessageBox(pchar('¿Desea confirmar la Devolución seleccionada?'), 'ABM Devolución', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    begin
+      ZQ_Comprobante.Close;
+      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_Comprobante.Open;
+
+      ZQ_Comprobante.Edit;
+      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
+
+//una vez que se confirma falta que haga el descuento de los productos.
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo confirmar la Devolución.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_VerCpb.RecNo;
+  ZQ_VerCpb.Refresh;
+  ZQ_VerCpb.RecNo:= recNo;
+  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+end;
+
+procedure TFABM_CPB_Devolucion.btnBajaClick(Sender: TObject);
+var
+  recno, estado: Integer;
+begin
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or (estado = ESTADO_ANULADO)) then
+    exit;
+
+  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+
+  if (application.MessageBox(pchar('¿Desea anular la Devolución seleccionada?'), 'ABM Devolución', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    begin
+      ZQ_Comprobante.Close;
+      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_Comprobante.Open;
+
+      ZQ_Comprobante.Edit;
+      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
+      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo anular la Devolución.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_VerCpb.RecNo;
+  ZQ_VerCpb.Refresh;
+  ZQ_VerCpb.RecNo:= recNo;
+  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 end;
 
 end.

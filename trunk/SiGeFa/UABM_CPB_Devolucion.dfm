@@ -1,6 +1,6 @@
 object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
-  Left = 388
-  Top = 227
+  Left = 353
+  Top = 85
   Width = 892
   Height = 609
   Caption = 'ABM Devoluci'#243'n'
@@ -26,16 +26,16 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 884
-    Height = 511
+    Width = 876
+    Height = 500
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 884
-      Height = 511
+      Width = 876
+      Height = 500
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -47,25 +47,25 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 348
+        Left = 340
         Top = 5
         Width = 6
-        Height = 501
+        Height = 490
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 343
-        Height = 501
+        Width = 335
+        Height = 490
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 343
-          Height = 501
+          Width = 335
+          Height = 490
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -113,14 +113,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             end
             item
               Expanded = False
-              FieldName = 'PROVEEDOR'
-              Title.Alignment = taCenter
-              Title.Caption = 'Proveedor'
-              Width = 127
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'CLIENTE'
               Title.Alignment = taCenter
               Title.Caption = 'Cliente'
@@ -137,10 +129,10 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
       end
       object PanelCpbActual: TPanel
-        Left = 354
+        Left = 346
         Top = 5
         Width = 525
-        Height = 501
+        Height = 490
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -150,7 +142,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           Left = 0
           Top = 0
           Width = 525
-          Height = 239
+          Height = 228
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -158,7 +150,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             Left = 0
             Top = 0
             Width = 525
-            Height = 123
+            Height = 112
             Align = alClient
             Color = 14680031
             DataSource = DS_VerCpb_Devolucion
@@ -215,7 +207,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           end
           object DBGridCpbActual_Entrega: TDBGrid
             Left = 0
-            Top = 123
+            Top = 112
             Width = 525
             Height = 116
             Align = alBottom
@@ -275,7 +267,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object PanelCpbActual_FPago: TPanel
           Left = 0
-          Top = 239
+          Top = 228
           Width = 525
           Height = 100
           Align = alBottom
@@ -373,7 +365,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 339
+          Top = 328
           Width = 525
           Height = 162
           Align = alBottom
@@ -414,29 +406,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               Height = 13
               Alignment = taRightJustify
               Caption = 'Importe'
-            end
-            object lblDatos_Proveedor: TLabel
-              Left = 8
-              Top = 19
-              Width = 64
-              Height = 13
-              Caption = 'Proveedor:'
-            end
-            object DBTxtDatos_Proveedor: TDBText
-              Left = 78
-              Top = 19
-              Width = 427
-              Height = 13
-              Color = 14342874
-              DataField = 'PROVEEDOR'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
             end
             object lblDatos_Cliente: TLabel
               Left = 27
@@ -484,6 +453,29 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               ParentColor = False
               ParentFont = False
             end
+            object Label13: TLabel
+              Left = 178
+              Top = 36
+              Width = 89
+              Height = 13
+              Caption = 'F. Vencimiento:'
+            end
+            object DBText1: TDBText
+              Left = 272
+              Top = 36
+              Width = 80
+              Height = 13
+              Color = 14342874
+              DataField = 'FECHA_VENCIMIENTO'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
             object DBMemoCpbActual_Info: TDBMemo
               Left = 8
               Top = 61
@@ -501,8 +493,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 884
-      Height = 511
+      Width = 876
+      Height = 500
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -517,16 +509,16 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 874
-        Height = 154
+        Width = 866
+        Height = 126
         Align = alTop
         TabOrder = 0
         DesignSize = (
-          874
-          154)
+          866
+          126)
         object DBTxtCPB_PuntoVenta: TDBText
           Left = 709
-          Top = 28
+          Top = 21
           Width = 44
           Height = 18
           Alignment = taRightJustify
@@ -543,7 +535,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object DBTxtCPB_Numero: TDBText
           Left = 766
-          Top = 28
+          Top = 21
           Width = 88
           Height = 18
           Alignment = taRightJustify
@@ -558,18 +550,9 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           ParentFont = False
           Transparent = False
         end
-        object btnBuscarEmpresa: TSpeedButton
-          Left = 7
-          Top = 3
-          Width = 50
-          Height = 50
-          Hint = 'Buscar una empresa para asociar al comprobante'
-          GroupIndex = 2
-          OnClick = btnBuscarEmpresaClick
-        end
         object btnBuscarPersona: TSpeedButton
           Left = 7
-          Top = 54
+          Top = 2
           Width = 50
           Height = 50
           Hint = 'Buscar una persona para asociar al comprobante'
@@ -578,7 +561,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object Label12: TLabel
           Left = 709
-          Top = 10
+          Top = 7
           Width = 145
           Height = 15
           Alignment = taCenter
@@ -597,7 +580,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object LblCPB_PuntoVenta: TLabel
           Left = 709
-          Top = 28
+          Top = 21
           Width = 44
           Height = 18
           Alignment = taRightJustify
@@ -616,7 +599,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object LblCPB_Numero: TLabel
           Left = 766
-          Top = 28
+          Top = 21
           Width = 88
           Height = 18
           Anchors = [akRight]
@@ -634,7 +617,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object Label26: TLabel
           Left = 755
-          Top = 28
+          Top = 21
           Width = 8
           Height = 18
           Alignment = taCenter
@@ -652,44 +635,11 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object PanelFechas: TPanel
           Left = 64
-          Top = 76
-          Width = 637
+          Top = 79
+          Width = 635
           Height = 42
           BevelOuter = bvNone
-          TabOrder = 2
-          object PanelFechaVencimiento: TPanel
-            Left = 127
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 1
-            object lblTituloFecha_Vencimiento: TLabel
-              Left = 11
-              Top = 0
-              Width = 70
-              Height = 13
-              Caption = 'Vencimiento'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateVencimiento: TEKDBDateTimePicker
-              Left = 11
-              Top = 13
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_VENCIMIENTO'
-              DataSource = DS_Comprobante
-            end
-          end
+          TabOrder = 1
           object PanelFechaEmision: TPanel
             Left = 0
             Top = 0
@@ -700,7 +650,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             TabOrder = 0
             object lblTituloFecha_Emision: TLabel
               Left = 12
-              Top = 0
+              Top = 6
               Width = 44
               Height = 13
               Caption = 'Emisi'#243'n'
@@ -713,7 +663,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             end
             object EKDBDateEmision: TEKDBDateTimePicker
               Left = 11
-              Top = 13
+              Top = 19
               Width = 105
               Height = 21
               Date = 40717.702273252320000000
@@ -723,268 +673,24 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               DataSource = DS_Comprobante
             end
           end
-        end
-        object PanelEditar_DatosGralProveedor: TPanel
-          Left = 66
-          Top = -3
-          Width = 633
-          Height = 74
-          Anchors = [akLeft]
-          BevelOuter = bvNone
-          Color = clInactiveCaption
-          TabOrder = 1
-          object Label13: TLabel
-            Left = 13
-            Top = 58
-            Width = 62
-            Height = 13
-            Caption = 'Tipo Emp.:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label14: TLabel
-            Left = 438
-            Top = 40
-            Width = 57
-            Height = 13
-            Caption = 'Provincia:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label15: TLabel
-            Left = 142
-            Top = 40
-            Width = 58
-            Height = 13
-            Caption = 'Localidad:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label16: TLabel
-            Left = 5
-            Top = 40
-            Width = 70
-            Height = 13
-            Caption = 'C'#243'd. Postal:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label17: TLabel
-            Left = 17
-            Top = 22
-            Width = 58
-            Height = 13
-            Caption = 'Direcci'#243'n:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label18: TLabel
-            Left = 150
-            Top = 5
-            Width = 50
-            Height = 13
-            Caption = 'Nombre:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label20: TLabel
-            Left = 30
-            Top = 5
-            Width = 45
-            Height = 13
-            Caption = 'C'#243'digo:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label21: TLabel
-            Left = 458
-            Top = 58
-            Width = 55
-            Height = 13
-            Caption = 'Cuit/Cuil:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label22: TLabel
-            Left = 242
-            Top = 58
-            Width = 26
-            Height = 13
-            Caption = 'IVA:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object DBText6: TDBText
-            Left = 76
-            Top = 22
-            Width = 545
-            Height = 13
-            DataField = 'DIRECCION'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText17: TDBText
-            Left = 201
-            Top = 5
-            Width = 420
-            Height = 13
-            DataField = 'NOMBRE'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText18: TDBText
-            Left = 76
-            Top = 5
-            Width = 65
-            Height = 13
-            DataField = 'CODIGO_CORTO'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText19: TDBText
-            Left = 515
-            Top = 58
-            Width = 114
-            Height = 13
-            DataField = 'CUIT_CUIL'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText20: TDBText
-            Left = 269
-            Top = 58
-            Width = 181
-            Height = 13
-            DataField = 'NOMBRE_TIPO_IVA'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText22: TDBText
-            Left = 77
-            Top = 58
-            Width = 161
-            Height = 13
-            DataField = 'TIPO_EMPRESA'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText23: TDBText
-            Left = 496
-            Top = 40
-            Width = 133
-            Height = 13
-            DataField = 'NOMBRE_PROVINCIA'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText24: TDBText
-            Left = 202
-            Top = 40
-            Width = 232
-            Height = 13
-            DataField = 'LOCALIDAD'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText25: TDBText
-            Left = 77
-            Top = 40
-            Width = 57
-            Height = 13
-            DataField = 'CODIGO_POSTAL'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
+          object DBMemoCPB_Observacion: TDBMemo
+            Left = 127
+            Top = 0
+            Width = 508
+            Height = 42
+            Align = alClient
+            DataField = 'OBSERVACION'
+            DataSource = DS_Comprobante
+            ScrollBars = ssVertical
+            TabOrder = 1
           end
         end
         object PanelEditar_DatosGralCliente: TPanel
           Left = 66
-          Top = -3
+          Top = 2
           Width = 633
           Height = 74
-          Anchors = [akLeft]
           BevelOuter = bvNone
-          Color = clScrollBar
           TabOrder = 0
           object DBText7: TDBText
             Left = 76
@@ -1257,34 +963,24 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             ParentFont = False
           end
         end
-        object DBMemoCPB_Observacion: TDBMemo
-          Left = 66
-          Top = 115
-          Width = 633
-          Height = 35
-          DataField = 'OBSERVACION'
-          DataSource = DS_Comprobante
-          ScrollBars = ssVertical
-          TabOrder = 3
-        end
       end
       object PanelEditar_Entrega: TPanel
         Left = 5
-        Top = 397
-        Width = 874
-        Height = 109
+        Top = 326
+        Width = 866
+        Height = 169
         Align = alBottom
         TabOrder = 1
         object PanelEditar_EntregaInfo: TPanel
           Left = 1
-          Top = 86
-          Width = 872
+          Top = 146
+          Width = 864
           Height = 22
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            872
+            864
             22)
           object Label23: TLabel
             Left = 434
@@ -1368,9 +1064,9 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object DBGridEditar_Entrega: TDBGrid
           Left = 1
-          Top = 1
-          Width = 872
-          Height = 85
+          Top = 21
+          Width = 864
+          Height = 125
           Align = alClient
           Color = 13816575
           DataSource = DS_CpbEntrega
@@ -1455,24 +1151,42 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               Visible = True
             end>
         end
+        object Panel3: TPanel
+          Tag = 99
+          Left = 1
+          Top = 1
+          Width = 864
+          Height = 20
+          Align = alTop
+          BevelOuter = bvNone
+          Caption = 'PRODUCTOS A RETIRAR'
+          Color = 8739340
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+        end
       end
       object PanelEditar_Devolucion: TPanel
         Left = 5
-        Top = 159
-        Width = 874
-        Height = 238
+        Top = 131
+        Width = 866
+        Height = 195
         Align = alClient
         TabOrder = 2
         object PanelEditar_DevolucionInfo: TPanel
           Left = 1
-          Top = 215
-          Width = 872
+          Top = 172
+          Width = 864
           Height = 22
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            872
+            864
             22)
           object Label29: TLabel
             Left = 679
@@ -1556,9 +1270,9 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object DBGridEditar_Devolucion: TDBGrid
           Left = 1
-          Top = 1
-          Width = 872
-          Height = 214
+          Top = 21
+          Width = 864
+          Height = 151
           Align = alClient
           Color = 12582847
           DataSource = DS_CpbDevolucion
@@ -1643,13 +1357,31 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               Visible = True
             end>
         end
+        object Panel2: TPanel
+          Tag = 99
+          Left = 1
+          Top = 1
+          Width = 864
+          Height = 20
+          Align = alTop
+          BevelOuter = bvNone
+          Caption = 'PRODUCTOS A DEVOLVER'
+          Color = 8739340
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+        end
       end
     end
   end
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 884
+    Width = 876
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1687,7 +1419,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 774
+      Left = 766
       Top = 1
       Width = 109
       Height = 17
@@ -1701,7 +1433,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 665
+      Left = 657
       Top = 1
       Width = 109
       Height = 17
@@ -1719,14 +1451,14 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     Left = 52
     Top = 206
     Width = 781
-    Height = 187
+    Height = 224
     BevelInner = bvLowered
     BorderWidth = 2
     TabOrder = 6
     Visible = False
     object PanelEditar_FPagoInfo: TPanel
       Left = 4
-      Top = 150
+      Top = 187
       Width = 773
       Height = 33
       Align = alBottom
@@ -1819,9 +1551,9 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     end
     object DBGridEditar_Fpago: TDBGrid
       Left = 4
-      Top = 32
+      Top = 87
       Width = 773
-      Height = 118
+      Height = 100
       Align = alClient
       Color = 14606012
       DataSource = DS_CpbFormaPago
@@ -1898,13 +1630,14 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       Width = 773
       Height = 28
       Align = alTop
+      BevelOuter = bvNone
       Caption = 'Panel1'
       TabOrder = 2
       object lblTituloVentanaFpago: TLabel
-        Left = 1
-        Top = 1
-        Width = 771
-        Height = 26
+        Left = 0
+        Top = 0
+        Width = 773
+        Height = 28
         Align = alClient
         Alignment = taCenter
         AutoSize = False
@@ -1921,11 +1654,98 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Layout = tlCenter
       end
     end
+    object panelNC_Vencimiento: TPanel
+      Left = 4
+      Top = 32
+      Width = 773
+      Height = 55
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 3
+      object Label14: TLabel
+        Left = 6
+        Top = 7
+        Width = 45
+        Height = 13
+        Caption = 'C'#243'digo:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText2: TDBText
+        Left = 52
+        Top = 7
+        Width = 65
+        Height = 13
+        DataField = 'CODIGO_CORTO'
+        DataSource = DS_Cliente
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label15: TLabel
+        Left = 126
+        Top = 7
+        Width = 50
+        Height = 13
+        Caption = 'Nombre:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText3: TDBText
+        Left = 177
+        Top = 7
+        Width = 420
+        Height = 13
+        DataField = 'NOMBRE'
+        DataSource = DS_Cliente
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label16: TLabel
+        Left = 6
+        Top = 33
+        Width = 89
+        Height = 13
+        Caption = 'F. Vencimiento:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
+      object EKDBDateTimePicker1: TEKDBDateTimePicker
+        Left = 98
+        Top = 30
+        Width = 105
+        Height = 21
+        Date = 40717.702273252320000000
+        Time = 40717.702273252320000000
+        TabOrder = 0
+        DataField = 'FECHA_VENCIMIENTO'
+        DataSource = DS_Comprobante
+      end
+    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2427,6 +2247,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       Hint = 'Da de baja un registro'
       Visible = ivAlways
       ImageIndex = 25
+      OnClick = btnBajaClick
       AutoGrayScale = False
     end
     object btnReactivar: TdxBarLargeButton
@@ -2481,6 +2302,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       Hint = 'Confirmar el comprobante seleccionado'
       Visible = ivNever
       ImageIndex = 5
+      OnClick = btnConfirmarClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -4272,122 +4094,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     Left = 593
     Top = 120
   end
-  object EKListadoEntidad: TEKListadoSQL
-    Modelo = DM.EKModelo
-    CampoBuscar = 'busqueda'
-    CampoClave = 'id'
-    TituloVentana = 'Buscar'
-    Left = 269
-    Top = 72
-  end
-  object ZQ_Proveedor: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      
-        'select emp.id_empresa as id, emp.*, pro.nombre_provincia, iva.no' +
-        'mbre_tipo_iva,'
-      
-        '       iva.abreviatura as cod_iva, tipo.descripcion as tipo_Empr' +
-        'esa'
-      'from empresa emp'
-      
-        'left join tipo_empresa tipo on (emp.id_tipo_empresa = tipo.id_ti' +
-        'po_empresa)'
-      'left join tipo_iva iva on (emp.id_tipo_iva = iva.id_tipo_iva)'
-      'left join provincia pro on (emp.id_provincia = pro.id_provincia)'
-      'where emp.id_empresa = :id_empresa')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_empresa'
-        ParamType = ptUnknown
-      end>
-    Left = 125
-    Top = 24
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_empresa'
-        ParamType = ptUnknown
-      end>
-    object ZQ_ProveedorID: TIntegerField
-      FieldName = 'ID'
-    end
-    object ZQ_ProveedorID_EMPRESA: TIntegerField
-      FieldName = 'ID_EMPRESA'
-    end
-    object ZQ_ProveedorID_PROVINCIA: TIntegerField
-      FieldName = 'ID_PROVINCIA'
-    end
-    object ZQ_ProveedorID_TIPO_IVA: TIntegerField
-      FieldName = 'ID_TIPO_IVA'
-    end
-    object ZQ_ProveedorID_TIPO_EMPRESA: TIntegerField
-      FieldName = 'ID_TIPO_EMPRESA'
-    end
-    object ZQ_ProveedorCUIT_CUIL: TStringField
-      FieldName = 'CUIT_CUIL'
-      Size = 30
-    end
-    object ZQ_ProveedorNOMBRE: TStringField
-      FieldName = 'NOMBRE'
-      Size = 200
-    end
-    object ZQ_ProveedorDIRECCION: TStringField
-      FieldName = 'DIRECCION'
-      Size = 200
-    end
-    object ZQ_ProveedorLOCALIDAD: TStringField
-      FieldName = 'LOCALIDAD'
-      Size = 200
-    end
-    object ZQ_ProveedorCODIGO_POSTAL: TStringField
-      FieldName = 'CODIGO_POSTAL'
-    end
-    object ZQ_ProveedorTELEFONO: TStringField
-      FieldName = 'TELEFONO'
-      Size = 100
-    end
-    object ZQ_ProveedorEMAIL: TStringField
-      FieldName = 'EMAIL'
-      Size = 100
-    end
-    object ZQ_ProveedorPAGINA_WEB: TStringField
-      FieldName = 'PAGINA_WEB'
-      Size = 200
-    end
-    object ZQ_ProveedorBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_ProveedorDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 500
-    end
-    object ZQ_ProveedorDESCRIPCION_PRIVADA: TStringField
-      FieldName = 'DESCRIPCION_PRIVADA'
-      Size = 1000
-    end
-    object ZQ_ProveedorNOMBRE_PROVINCIA: TStringField
-      FieldName = 'NOMBRE_PROVINCIA'
-      Size = 50
-    end
-    object ZQ_ProveedorNOMBRE_TIPO_IVA: TStringField
-      FieldName = 'NOMBRE_TIPO_IVA'
-      Size = 50
-    end
-    object ZQ_ProveedorCOD_IVA: TStringField
-      FieldName = 'COD_IVA'
-      Size = 10
-    end
-    object ZQ_ProveedorTIPO_EMPRESA: TStringField
-      FieldName = 'TIPO_EMPRESA'
-      Size = 100
-    end
-    object ZQ_ProveedorCODIGO_CORTO: TIntegerField
-      FieldName = 'CODIGO_CORTO'
-    end
-  end
   object ZQ_Cliente: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -4498,11 +4204,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object ZQ_ClienteCODIGO_CORTO: TIntegerField
       FieldName = 'CODIGO_CORTO'
     end
-  end
-  object DS_Proveedor: TDataSource
-    DataSet = ZQ_Proveedor
-    Left = 125
-    Top = 72
   end
   object DS_Cliente: TDataSource
     DataSet = ZQ_Cliente

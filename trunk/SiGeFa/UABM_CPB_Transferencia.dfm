@@ -1152,7 +1152,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           ListField = 'BUSQUEDA'
           ListSource = DS_Cuenta
           ParentFont = False
-          TabOrder = 0
+          TabOrder = 4
           OnKeyUp = DBLookupCBoxEgresoKeyUp
         end
         object DBMemoDescripcion: TDBMemo
@@ -1188,7 +1188,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           ListField = 'BUSQUEDA'
           ListSource = DS_Cuenta
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 6
           OnKeyUp = DBLookupCBoxIngresoKeyUp
         end
         object DBEditImporte: TDBEdit
@@ -1207,7 +1207,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Font.Style = [fsBold]
           ParentBiDiMode = False
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 7
         end
         object DBEditNroComprobante: TDBEdit
           Left = 120
@@ -1223,7 +1223,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 2
         end
         object EditCodCtaEgreso: TEdit
           Left = 120
@@ -1236,7 +1236,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 3
           OnExit = EditCodCtaEgresoExit
           OnKeyUp = DBLookupCBoxEgresoKeyUp
         end
@@ -1251,7 +1251,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 6
+          TabOrder = 5
           OnExit = EditCodCtaIngresoExit
           OnKeyUp = DBLookupCBoxIngresoKeyUp
         end
@@ -1262,7 +1262,7 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
           Height = 21
           Date = 40799.861256145840000000
           Time = 40799.861256145840000000
-          TabOrder = 7
+          TabOrder = 0
           DataField = 'FECHA'
           DataSource = DS_Comprobante
         end
