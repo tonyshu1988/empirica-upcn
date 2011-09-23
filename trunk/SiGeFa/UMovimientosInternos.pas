@@ -357,6 +357,7 @@ begin
     ZQ_Comprobante.Append;
     ZQ_ComprobanteID_COMPROBANTE.AsInteger:= id_comprobante;
     ZQ_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
     ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
     ZQ_ComprobanteFECHA_COBRADA.Clear;
     ZQ_ComprobanteFECHA_ENVIADA.Clear;
