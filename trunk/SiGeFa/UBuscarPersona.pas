@@ -284,6 +284,8 @@ procedure TFBuscarPersona.btnGuardarClick(Sender: TObject);
 var
   id : integer;
 begin
+    PageControlEdicion.TabIndex := 0;
+
     if not validarcampos then
     exit;
 

@@ -302,7 +302,7 @@ begin
     ZQ_UltimoNro.Open;
 
     ZQ_Cuentas.Append;
-    if ZQ_UltimoNro.IsEmpty then
+    if ZQ_UltimoNro.IsEmpty or ZQ_UltimoNroCODIGO.IsNull then
       ZQ_CuentasCODIGO.AsInteger:= 1
     else
       ZQ_CuentasCODIGO.AsInteger:= ZQ_UltimoNroCODIGO.AsInteger + 1;
