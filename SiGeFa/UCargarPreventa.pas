@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, EKBusquedaAvanzada, dxBar, dxBarExtItems,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla;
+  EKOrdenarGrilla, StdCtrls;
 
 type
   TFPreventa = class(TForm)
@@ -57,6 +57,7 @@ type
     ZQ_ComprobanteCLIENTE_: TStringField;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_ComprobanteIMAGEN: TBlobField;
+    Label29: TLabel;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -64,12 +65,14 @@ type
     procedure btnBuscarClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridDblClick(Sender: TObject);
 
   private
     { Private declarations }
   public
     { Public declarations }
     OnSeleccionar : procedure() of object;
+    vencida:String;
   end;
 
 var
@@ -120,7 +123,17 @@ procedure TFPreventa.DBGridDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  FPrincipal.PintarFilasGrillas(DBGrid,Rect,DataCol,Column,State);
+ if (TDate(ZQ_ComprobanteFECHA_VENCIMIENTO.AsDateTime)>=dm.EKModelo.Fecha)  then
+  vencida:='N'
+ else
+  vencida:='S';
+
+ FPrincipal.PintarFilasGrillasConBajas(DBGrid,vencida,Rect,DataCol,Column,State)
+end;
+
+procedure TFPreventa.DBGridDblClick(Sender: TObject);
+begin
+   btnSeleccionar.Click;
 end;
 
 end.
