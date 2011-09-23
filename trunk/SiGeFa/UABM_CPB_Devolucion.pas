@@ -49,13 +49,9 @@ type
     PanelCpbActual_Info: TPanel;
     PanelEditar_DatosGral: TPanel;
     PanelEditar_Entrega: TPanel;
-    PanelEditar_FPago: TPanel;
-    PanelEditar_FPagoInfo: TPanel;
     PanelEditar_EntregaInfo: TPanel;
     DBGridEditar_Entrega: TDBGrid;
-    DBGridEditar_Fpago: TDBGrid;
     btnEliminarEntrega: TButton;
-    btnEliminarFPago: TButton;
     btnBuscarEmpresa: TSpeedButton;
     ImageListEntidad: TImageList;
     ZQ_VerCpb: TZQuery;
@@ -232,20 +228,9 @@ type
     ZQ_ComprobanteFECHA_ANULADO: TDateField;
     ZQ_NumeroCpb: TZQuery;
     ZQ_NumeroCpbULTIMO_NUMERO: TIntegerField;
-    ZQ_CpbFormaPago: TZQuery;
     DS_CpbFormaPago: TDataSource;
     ZQ_CpbDevolucion: TZQuery;
     DS_CpbDevolucion: TDataSource;
-    ZQ_CpbFormaPagoID_COMPROB_FP: TIntegerField;
-    ZQ_CpbFormaPagoID_COMPROBANTE: TIntegerField;
-    ZQ_CpbFormaPagoID_TIPO_FORMAPAG: TIntegerField;
-    ZQ_CpbFormaPagoMDCP_FECHA: TDateField;
-    ZQ_CpbFormaPagoMDCP_BANCO: TStringField;
-    ZQ_CpbFormaPagoMDCP_CHEQUE: TStringField;
-    ZQ_CpbFormaPagoIMPORTE: TFloatField;
-    ZQ_CpbFormaPagoCONCILIADO: TDateField;
-    ZQ_CpbFormaPagoCUENTA_INGRESO: TIntegerField;
-    ZQ_CpbFormaPagoCUENTA_EGRESO: TIntegerField;
     ZQ_CpbDevolucionID_COMPROBANTE_DETALLE: TIntegerField;
     ZQ_CpbDevolucionID_COMPROBANTE: TIntegerField;
     ZQ_CpbDevolucionID_PRODUCTO: TIntegerField;
@@ -329,19 +314,10 @@ type
     PopUpItem_ProductoOcultarDetalle: TMenuItem;
     PanelFechas: TPanel;
     PanelFechaVencimiento: TPanel;
-    PanelFechaImpreso: TPanel;
-    PanelFechaEnviado: TPanel;
-    PanelFechaCobrado: TPanel;
     PanelFechaEmision: TPanel;
     EKDBDateEmision: TEKDBDateTimePicker;
     lblTituloFecha_Emision: TLabel;
-    EKDBDateCobrado: TEKDBDateTimePicker;
-    EKDBDateEnviado: TEKDBDateTimePicker;
-    EKDBDateImpreso: TEKDBDateTimePicker;
     EKDBDateVencimiento: TEKDBDateTimePicker;
-    lblTituloFecha_Cobrado: TLabel;
-    lblTituloFecha_Enviado: TLabel;
-    lblTituloFecha_Impreso: TLabel;
     lblTituloFecha_Vencimiento: TLabel;
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
@@ -351,8 +327,6 @@ type
     EKSuma_Devolucion: TEKDbSuma;
     EKOrd_EditarDevolucion: TEKOrdenarGrilla;
     EKOrd_EditarFpago: TEKOrdenarGrilla;
-    ZQ_CpbFormaPagoFECHA_FP: TDateTimeField;
-    ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField;
     ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
     ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
@@ -417,17 +391,6 @@ type
     ZQ_VerCpbCLIENTE_DOCUMENTO: TStringField;
     ZQ_VerCpbCLIENTE_CUIL: TStringField;
     ZQ_VerCpbESTADO: TStringField;
-    CD_FormaPago: TClientDataSet;
-    CD_FormaPago_CodCuenta: TStringField;
-    CD_FormaPago_NombreCuenta: TStringField;
-    CD_FormaPago_MCPFecha: TDateField;
-    CD_FormaPago_MCPBanco: TStringField;
-    CD_FormaPago_MCPNumero: TStringField;
-    CD_FormaPago_Importe: TFloatField;
-    CD_FormaPago_TipoFormaCP: TStringField;
-    CD_FormaPago_IdCuenta: TIntegerField;
-    CD_FormaPago_IdTipoForma: TIntegerField;
-    CD_FormaPago_IdComprobante: TIntegerField;
     ZQ_VerCpb_Entrega: TZQuery;
     ZQ_CpbEntrega_CodBarra: TStringField;
     ZQ_CpbEntrega_Nombre: TStringField;
@@ -504,10 +467,57 @@ type
     editCantidadEntregado: TEdit;
     Label24: TLabel;
     editTotalEntregado: TEdit;
-    editTotalFpago: TEdit;
+    PanelEditar_FPago: TPanel;
+    PanelEditar_FPagoInfo: TPanel;
     Label25: TLabel;
-    editSaldoFpago: TEdit;
     lblSaldoFPago: TLabel;
+    btnEliminarFPago: TButton;
+    editTotalFpago: TEdit;
+    editSaldoFpago: TEdit;
+    DBGridEditar_Fpago: TDBGrid;
+    Panel1: TPanel;
+    lblTituloVentanaFpago: TLabel;
+    ZQ_TipoFPago: TZQuery;
+    ZQ_TipoFPagoID_TIPO_FORMAPAGO: TIntegerField;
+    ZQ_TipoFPagoDESCRIPCION: TStringField;
+    ZQ_TipoFPagoBAJA: TStringField;
+    ZQ_Cuenta: TZQuery;
+    ZQ_CuentaID_CUENTA: TIntegerField;
+    ZQ_CuentaMEDIO_DEFECTO: TIntegerField;
+    ZQ_CuentaCODIGO: TStringField;
+    ZQ_CuentaNOMBRE_CUENTA: TStringField;
+    ZQ_CuentaNRO_CTA_BANCARIA: TStringField;
+    ZQ_CuentaBAJA: TStringField;
+    ZQ_CuentaDESCRIPCION: TStringField;
+    ZQ_CuentaBUSQUEDA: TStringField;
+    DS_Cuenta: TDataSource;
+    DS_TipoFPago: TDataSource;
+    ZQ_CpbFormaPago: TZQuery;
+    ZQ_CpbFormaPagoID_COMPROB_FP: TIntegerField;
+    ZQ_CpbFormaPagoID_COMPROBANTE: TIntegerField;
+    ZQ_CpbFormaPagoID_TIPO_FORMAPAG: TIntegerField;
+    ZQ_CpbFormaPagoMDCP_FECHA: TDateField;
+    ZQ_CpbFormaPagoMDCP_BANCO: TStringField;
+    ZQ_CpbFormaPagoMDCP_CHEQUE: TStringField;
+    ZQ_CpbFormaPagoIMPORTE: TFloatField;
+    ZQ_CpbFormaPagoCONCILIADO: TDateField;
+    ZQ_CpbFormaPagoCUENTA_EGRESO: TIntegerField;
+    ZQ_CpbFormaPago_CuentaNombre: TStringField;
+    ZQ_CpbFormaPago_CuentaCodigo: TStringField;
+    ZQ_CpbFormaPago_TipoFormaPago: TStringField;
+    ZQ_CpbFormaPagoFECHA_FP: TDateTimeField;
+    ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField;
+    ZQ_CpbFormaPagoCUENTA_INGRESO: TIntegerField;
+    ZQ_CuentaID_SUCURSAL: TIntegerField;
+    ZQ_CuentaA_CTA_CORRIENTE: TStringField;
+    ZQ_CuentaA_NOTA_CREDITO: TStringField;
+    ZQ_CuentaMODIFICABLE: TStringField;
+    ZQ_TipoFPagoIF: TStringField;
+    ZQ_TipoFPagoDESC_REC: TFloatField;
+    ZQ_TipoFPagoCOD_CORTO: TIntegerField;
+    ZQ_TipoFPagoGENERA_VUELTO: TStringField;
+    ZQ_TipoFPagoCOLUMNA_PRECIO: TIntegerField;
+    ZQ_TipoFPagoMODIFICABLE: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -535,7 +545,7 @@ type
     procedure DBGridEditar_FpagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure DBGridKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnEliminarFPagoClick(Sender: TObject);
-    procedure configFormaPago(tipo: integer; edicion: boolean);
+    procedure configFormaPago();
     procedure EKSuma_FPagoSumListChanged(Sender: TObject);
     procedure PopItemDevolucion_AgregarClick(Sender: TObject);
     procedure PopItemDevolucion_QuitarClick(Sender: TObject);
@@ -562,9 +572,11 @@ type
     procedure tamanioGrillasDevEnt();
     procedure PanelCpbActualResize(Sender: TObject);
     procedure PanelEditarResize(Sender: TObject);
-    procedure guardarFormaPago;    
+    procedure guardarFormaPago;
+    procedure guardarComprobante;
+    procedure borrarCuentasEgreso;    
   private
-    debito, credito: boolean;
+    debito, credito, finalizarCarga: boolean;
     tipoProducto: string;
     estadoPantalla: string;
     tipoComprobante: integer;
@@ -631,6 +643,7 @@ begin
     estadoPantalla:= EDITANDO;
     PanelEditar.BringToFront;
     PanelEditar.Visible:= true;
+    PanelEditar.Enabled:= true;
     PanelVer.Visible:= false;
 
     lblCantidadRegistros.Visible:= false;
@@ -647,6 +660,7 @@ begin
     PanelVer.BringToFront;
     PanelVer.Visible:= true;
     PanelEditar.Visible:= false;
+    PanelEditar_FPago.Visible:= false;    
 
     lblCantidadRegistros.Visible:= true;
     StaticTxtBaja.Visible:= true;
@@ -680,9 +694,11 @@ begin
   EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 
+  dm.EKModelo.abrir(ZQ_Cuenta); //abro las cuentas bancarias
+  dm.EKModelo.abrir(ZQ_TipoFPago); //abro los tipos de forma de pago
+
   CD_Devolucion.CreateDataSet;
   CD_Entrega.CreateDataSet;
-  CD_FormaPago.CreateDataSet;
 end;
 
 
@@ -726,59 +742,35 @@ end;
 
 procedure TFABM_CPB_Devolucion.cargarTipoComprobante(tipo: integer);
 begin
-  configPanelFechas(PanelFechaCobrado, false);
-  configPanelFechas(PanelFechaEnviado, false);
-  configPanelFechas(PanelFechaImpreso, false);
   configPanelFechas(PanelFechaVencimiento, true);
   lblTipoComprobante.Caption:= 'DEVOLUCIONES';
 end;
 
 
-procedure TFABM_CPB_Devolucion.configFormaPago(tipo: integer; edicion: boolean);
+procedure TFABM_CPB_Devolucion.configFormaPago();
 begin
-//  case tipo of
-//    CPB_RECIBO_COBRO: begin //Usa la cuenta de ingreso
-//                        if edicion then
-//                        begin
-//                          DBGridEditar_Fpago.Columns[getColumnIndex(DBGridEditar_Fpago, '_CuentaIngreso_Codigo')].Visible:= true;
-//                          DBGridEditar_Fpago.Columns[getColumnIndex(DBGridEditar_Fpago, '_CuentaIngreso_Nombre')].Visible:= true;
-//
-//                          DBGridEditar_Fpago.Columns[getColumnIndex(DBGridEditar_Fpago, '_CuentaEgreso_Codigo')].Visible:= false;
-//                          DBGridEditar_Fpago.Columns[getColumnIndex(DBGridEditar_Fpago, '_CuentaEgreso_Nombre')].Visible:= false;
-//                        end
-//                        else
-//                        begin
-//                          DBGridCpbActual_FPago.Columns[getColumnIndex(DBGridCpbActual_FPago, 'CTA_INGRESO')].Visible:= true;
-//                          DBGridCpbActual_FPago.Columns[getColumnIndex(DBGridCpbActual_FPago, 'CTA_INGRESO_CODIGO')].Visible:= true;
-//
-//                          DBGridCpbActual_FPago.Columns[getColumnIndex(DBGridCpbActual_FPago, 'CTA_EGRESO')].Visible:= false;
-//                          DBGridCpbActual_FPago.Columns[getColumnIndex(DBGridCpbActual_FPago, 'CTA_EGRESO_CODIGO')].Visible:= false;
-//                        end;
-//                      end;
-//    CPB_ORDEN_PAGO:   begin //Usu la cuenta de egreso
-//                        if edicion then
-//                        begin
-//                          DBGridEditar_Fpago.Columns[getColumnIndex(DBGridEditar_Fpago, '_CuentaIngreso_Codigo')].Visible:= false;
-//                          DBGridEditar_Fpago.Columns[getColumnIndex(DBGridEditar_Fpago, '_CuentaIngreso_Nombre')].Visible:= false;
-//
-//                          DBGridEditar_Fpago.Columns[getColumnIndex(DBGridEditar_Fpago, '_CuentaEgreso_Codigo')].Visible:= true;
-//                          DBGridEditar_Fpago.Columns[getColumnIndex(DBGridEditar_Fpago, '_CuentaEgreso_Nombre')].Visible:= true;
-//                        end
-//                        else
-//                        begin
-//                          DBGridCpbActual_FPago.Columns[getColumnIndex(DBGridCpbActual_FPago, 'CTA_INGRESO')].Visible:= false;
-//                          DBGridCpbActual_FPago.Columns[getColumnIndex(DBGridCpbActual_FPago, 'CTA_INGRESO_CODIGO')].Visible:= false;
-//
-//                          DBGridCpbActual_FPago.Columns[getColumnIndex(DBGridCpbActual_FPago, 'CTA_EGRESO')].Visible:= true;
-//                          DBGridCpbActual_FPago.Columns[getColumnIndex(DBGridCpbActual_FPago, 'CTA_EGRESO_CODIGO')].Visible:= true;
-//                        end;
-//                      end;
-//  end;
+  if ZQ_VerCpb_FpagoCUENTA_INGRESO.IsNull then
+  begin
+    DBGridCpbActual_FPago.Columns[GetIndexField(DBGridCpbActual_FPago, 'CTA_INGRESO')].Visible:= false;
+    DBGridCpbActual_FPago.Columns[GetIndexField(DBGridCpbActual_FPago, 'CTA_INGRESO_CODIGO')].Visible:= false;
+
+    DBGridCpbActual_FPago.Columns[GetIndexField(DBGridCpbActual_FPago, 'CTA_EGRESO')].Visible:= true;
+    DBGridCpbActual_FPago.Columns[GetIndexField(DBGridCpbActual_FPago, 'CTA_EGRESO_CODIGO')].Visible:= true;
+  end
+  else
+  begin
+    DBGridCpbActual_FPago.Columns[GetIndexField(DBGridCpbActual_FPago, 'CTA_INGRESO')].Visible:= true;
+    DBGridCpbActual_FPago.Columns[GetIndexField(DBGridCpbActual_FPago, 'CTA_INGRESO_CODIGO')].Visible:= true;
+
+    DBGridCpbActual_FPago.Columns[GetIndexField(DBGridCpbActual_FPago, 'CTA_EGRESO')].Visible:= false;
+    DBGridCpbActual_FPago.Columns[GetIndexField(DBGridCpbActual_FPago, 'CTA_EGRESO_CODIGO')].Visible:= false;
+  end
 end;
 
 
 procedure TFABM_CPB_Devolucion.btnNuevoClick(Sender: TObject);
 begin
+  finalizarCarga:= false;
   debito:= false;
   credito:= false;
   totalDevuelto:= 0;
@@ -810,11 +802,7 @@ begin
     if not CD_Entrega.IsEmpty then
       CD_Entrega.EmptyDataSet;
 
-    if not CD_FormaPago.IsEmpty then
-      CD_FormaPago.EmptyDataSet;
-
     cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
-    configFormaPago(tipoComprobante, true); //acomodo la grilla de forma de pago segun el tipo de comprobante que es
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - NUEVO';
 
     ZP_CpbID.Active:= false;
@@ -849,6 +837,7 @@ procedure TFABM_CPB_Devolucion.btnModificarClick(Sender: TObject);
 var
   estado: integer;
 begin
+  finalizarCarga:= false;
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
   if ((ZQ_VerCpb.IsEmpty) or ((estado = ESTADO_CONFIRMADO))) then
     exit;
@@ -883,10 +872,6 @@ begin
       CD_Entrega.EmptyDataSet;
     cargarProductosClienDataset(CD_Entrega, ZQ_VerCpb_Entrega);
 
-    if not CD_FormaPago.IsEmpty then
-      CD_FormaPago.EmptyDataSet;
-    cargarFPagoClienDataset(ZQ_VerCpb_Fpago);
-
     if ZQ_ComprobanteID_CLIENTE.IsNull then
     begin
       PanelEditar_DatosGralProveedor.BringToFront;
@@ -906,7 +891,6 @@ begin
     end;
 
     cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
-    configFormaPago(tipoComprobante, true); //acomodo la grilla de forma de pago segun el tipo de comprobante que es
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
 
     ZQ_Comprobante.Edit;
@@ -916,59 +900,46 @@ begin
 end;
 
 
+procedure TFABM_CPB_Devolucion.borrarCuentasEgreso;
+begin
+  ZQ_CpbFormaPago.First;
+  if not ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull then
+    ZQ_CpbFormaPago.Delete;
+end;
+
+
 procedure TFABM_CPB_Devolucion.guardarFormaPago;
 begin
-  CD_FormaPago.First;
-  while not CD_FormaPago.Eof do  //por cada una de las formas de pago cargadas
+  ZQ_CpbFormaPago.First;
+  while not ZQ_CpbFormaPago.Eof do  //por cada una de las formas de pago cargadas
   begin
-    ZQ_CpbFormaPago.Append;
-    ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= CD_FormaPago_IdComprobante.AsInteger;
-    ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= CD_FormaPago_IdTipoForma.AsInteger;
-    if credito then
-      ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= CD_FormaPago_IdCuenta.AsInteger
-    else
-    if debito then
-     ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= CD_FormaPago_IdCuenta.AsInteger;
-    ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
-    ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= CD_FormaPago_Importe.AsFloat;
-    ZQ_CpbFormaPagoIMPORTE.AsFloat:= CD_FormaPago_Importe.AsFloat;
-    ZQ_CpbFormaPagoMDCP_FECHA.AsDateTime:= CD_FormaPago_MCPFecha.AsDateTime;
-    ZQ_CpbFormaPagoMDCP_BANCO.AsString:= CD_FormaPago_MCPBanco.AsString;
-    ZQ_CpbFormaPagoMDCP_CHEQUE.AsString:= CD_FormaPago_MCPNumero.AsString;
+    ZQ_CpbFormaPago.Edit;
+    if ZQ_CpbFormaPagoIMPORTE.IsNull then
+      ZQ_CpbFormaPagoIMPORTE.AsFloat:=0;
+    ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat; //pongo el mismo importe cargado al importe_real
+    ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
 
-    CD_FormaPago.Next;
+    ZQ_CpbFormaPago.Next;
   end;
 end;
 
 
-procedure TFABM_CPB_Devolucion.btnGuardarClick(Sender: TObject);
+procedure TFABM_CPB_Devolucion.guardarComprobante;
 var
   recNo: integer;
 begin
-  Perform(WM_NEXTDLGCTL, 0, 0);
-
-  //si no seleccione proveedor o cliente
-  if ZQ_ComprobanteID_PROVEEDOR.IsNull and ZQ_ComprobanteID_CLIENTE.IsNull then
-  begin
-    Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    EKDBDateEmision.SetFocus;
-    exit;
-  end;
-
   //si tiene saldo la devolucion y no se cargo ninguna forma de pago
-  if (saldoFormaCobroPago <> 0) and (CD_FormaPago.IsEmpty) then
+  if (saldoFormaCobroPago <> 0) and (ZQ_CpbFormaPago.IsEmpty) then
   begin
-    Application.MessageBox(pchar('La devolución tiene saldo distinto de cero.'+#13+
-                                 'Debe seleccionar una forma de cobro/pago, por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox(pchar('Debe seleccionar una forma de pago, por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
     DBGridEditar_Fpago.SetFocus;
     exit;
   end;
 
   //si el saldo de la devolucion es distinto a la forma de pago cargada
-  if (saldoFormaCobroPago <> EKSuma_FPago.SumCollection[0].SumValue) then
+  if (abs(saldoFormaCobroPago) <> EKSuma_FPago.SumCollection[0].SumValue) then
   begin
-    Application.MessageBox(pchar('La devolución tiene saldo distinto de cero.'+#13+
-                                 'Debe seleccionar una forma de cobro/pago, por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox(pchar('Debe seleccionar una forma de pago, por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
     DBGridEditar_Fpago.SetFocus;
     exit;
   end;
@@ -992,24 +963,11 @@ begin
   end;
 
 //---------------FORMA DE PAGO
-
+  guardarFormaPago;
 
 //---------------DATOS COMPROBANTE
-//  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= 0;
-//  ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= 0;
-//  if (tipoComprobante = CPB_PRESUPUESTO) then //si es un presupuesto
-//  begin
-//    EKSuma_Productos.RecalcAll; //el importe del comprobante es igual a la suma del importe de los productos
-//    ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
-//    ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteIMPORTE_TOTAL.AsFloat;
-//  end
-//  else
-//    if (tipoComprobante = CPB_ORDEN_PAGO) or  (tipoComprobante = CPB_RECIBO_COBRO) then
-//    begin
-//      EKSuma_FPago.RecalcAll; //si es un recibo o una orden de pago el importe del comprobante es igual a la
-//      ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue; //suma de las formas de pago
-//      ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteIMPORTE_TOTAL.AsFloat;
-//    end;
+  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= abs(saldoFormaCobroPago);
+  ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= abs(saldoFormaCobroPago);
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
@@ -1031,14 +989,75 @@ begin
 end;
 
 
+procedure TFABM_CPB_Devolucion.btnGuardarClick(Sender: TObject);
+begin
+  Perform(WM_NEXTDLGCTL, 0, 0);
+
+  if finalizarCarga = false then //si solamente falta cargar la forma de pago
+  begin
+    //si no seleccione proveedor o cliente
+    if ZQ_ComprobanteID_PROVEEDOR.IsNull and ZQ_ComprobanteID_CLIENTE.IsNull then
+    begin
+      Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+      EKDBDateEmision.SetFocus;
+      exit;
+    end;
+
+    if CD_Devolucion.IsEmpty then
+    begin
+      Application.MessageBox('No se cargo ningún producto a devolver, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+      DBGridEditar_Devolucion.SetFocus;
+      exit;
+    end;
+
+    PanelEditar.Enabled:= false; //deshabilito el panel del fondo
+    PanelEditar_FPago.Visible:= true; //traigo el panel de forma de pago
+    PanelEditar_FPago.BringToFront;
+    dm.centrarPanel(FABM_CPB_Devolucion, PanelEditar_FPago);
+
+    if credito then //si es una nota de credito
+    begin
+      PanelEditar_FPago.Enabled:= false; //no se puede tocar la forma de pago
+      lblTituloVentanaFpago.Caption:= 'NOTA DE CREDITO';
+
+      if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
+        ZQ_CpbFormaPago.Append
+      else
+        ZQ_CpbFormaPago.Edit;
+      ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= CUENTA_NOTA_CREDITO;
+      ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= FP_NOTA_CREDITO;
+      ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+      ZQ_CpbFormaPago_CuentaNombre.AsString:= 'NOTA CREDITO';
+      ZQ_CpbFormaPago_CuentaCodigo.AsString:= 'NOTA CREDITO';
+      ZQ_CpbFormaPagoIMPORTE.AsFloat:= abs(saldoFormaCobroPago);
+      ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= abs(saldoFormaCobroPago);
+      ZQ_CpbFormaPago.Post;
+    end
+    else
+    begin
+      PanelEditar_FPago.Enabled:= true; //no se puede tocar la forma de pago
+      lblTituloVentanaFpago.Caption:= 'CARGAR FORMA DE PAGO';
+      borrarCuentasEgreso;
+    end;
+
+    finalizarCarga:= true;
+  end
+  else
+  if finalizarCarga = true then
+  begin
+    guardarComprobante;
+  end;
+end;
+
+
 procedure TFABM_CPB_Devolucion.btnCancelarClick(Sender: TObject);
 begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
-    begin
-      modoEdicion(false);
-      DBGridListaCpb.SetFocus;
-    end;
+    if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+      begin
+        modoEdicion(false);
+        DBGridListaCpb.SetFocus;
+      end;
 end;
 
 
@@ -1139,6 +1158,8 @@ begin
     DBTxtDatos_Cliente.Visible:= true;
     lblDatos_Cliente.Visible:= true;
   end;
+
+  configFormaPago;
 end;
 
 
@@ -1225,30 +1246,30 @@ end;
 //----------------------
 procedure TFABM_CPB_Devolucion.cargarFpagoClienDataset(query: TZQuery);
 begin
-  if query.IsEmpty then
-    exit;
-
-  query.First;
-  while not query.Eof do
-  begin
-    CD_FormaPago.Append;
-    if not query.FieldByName('CUENTA_INGRESO').IsNull then
-      CD_FormaPago.FieldByName('_IdCuenta').AsInteger := query.FieldByName('CUENTA_INGRESO').AsInteger;
-    if not query.FieldByName('CUENTA_EGRESO').IsNull then
-      CD_FormaPago.FieldByName('_IdCuenta').AsInteger := query.FieldByName('CUENTA_EGRESO').AsInteger;
-    CD_FormaPago.FieldByName('_IdTipoForma').AsString := query.FieldByName('ID_TIPO_FORMAPAG').AsString;
-    CD_FormaPago.FieldByName('_IdComprobante').AsString := query.FieldByName('ID_COMPROBANTE').AsString;
-    //FALTAN LOS OTROS CAMPOS
-    CD_FormaPago.Post;
-
-    query.Next;
-  end;
+//  if query.IsEmpty then
+//    exit;
+//
+//  query.First;
+//  while not query.Eof do
+//  begin
+//    CD_FormaPago.Append;
+//    if not query.FieldByName('CUENTA_INGRESO').IsNull then
+//      CD_FormaPago.FieldByName('_IdCuenta').AsInteger := query.FieldByName('CUENTA_INGRESO').AsInteger;
+//    if not query.FieldByName('CUENTA_EGRESO').IsNull then
+//      CD_FormaPago.FieldByName('_IdCuenta').AsInteger := query.FieldByName('CUENTA_EGRESO').AsInteger;
+//    CD_FormaPago.FieldByName('_IdTipoForma').AsString := query.FieldByName('ID_TIPO_FORMAPAG').AsString;
+//    CD_FormaPago.FieldByName('_IdComprobante').AsString := query.FieldByName('ID_COMPROBANTE').AsString;
+//    //FALTAN LOS OTROS CAMPOS
+//    CD_FormaPago.Post;
+//
+//    query.Next;
+//  end;
 end;
 
 
 procedure TFABM_CPB_Devolucion.buscarFormaPago();
 begin
-  if not CD_FormaPago_IdTipoForma.IsNull then
+  if not ZQ_CpbFormaPagoID_TIPO_FORMAPAG.IsNull then
     exit;
 
   if EKListadoMedio.Buscar then
@@ -1259,15 +1280,14 @@ begin
       ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= StrToInt(EKListadoMedio.Resultado);
       ZQ_ListadoMedio.Open;
 
-      if CD_FormaPago_IdComprobante.IsNull then
-        CD_FormaPago.Append //pongo en modo edicion
+      if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
+        ZQ_CpbFormaPago.Append //pongo en modo edicion
       else
-        CD_FormaPago.edit; //pongo en modo edicion
+        ZQ_CpbFormaPago.edit; //pongo en modo edicion
 
-      CD_FormaPago_IdTipoForma.AsInteger:= ZQ_ListadoMedioID_TIPO_FORMAPAGO.AsInteger;
-      CD_FormaPago_IdComprobante.AsInteger:= id_Comprobante;
-      CD_FormaPago_TipoFormaCP.AsString:= ZQ_ListadoMedioDESCRIPCION.AsString;
-      CD_FormaPago.Post;
+      ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoMedioID_TIPO_FORMAPAGO.AsInteger;
+      ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
+      ZQ_CpbFormaPago.Post;
     end;
   end;
 end;
@@ -1275,7 +1295,7 @@ end;
 
 procedure TFABM_CPB_Devolucion.buscarCuenta();
 begin
-  if (not CD_FormaPago_IdCuenta.IsNull) then
+  if (not ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull) then
     exit;
 
   if EKListadoCuenta.Buscar then
@@ -1290,21 +1310,16 @@ begin
       ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
       ZQ_ListadoMedio.Open;
 
-      if CD_FormaPago_IdComprobante.IsNull then
-        CD_FormaPago.Append //pongo en modo edicion
+      if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
+        ZQ_CpbFormaPago.Append //pongo en modo edicion
       else
-        CD_FormaPago.edit; //pongo en modo edicion
+        ZQ_CpbFormaPago.edit; //pongo en modo edicion
 
-      CD_FormaPago_IdCuenta.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
-      CD_FormaPago_IdTipoForma.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
-      CD_FormaPago_IdComprobante.AsInteger:= id_Comprobante;
-
-      CD_FormaPago_Importe.AsFloat:= restaPagar;
-
-      CD_FormaPago_CodCuenta.AsString:= ZQ_ListadoCuentaCODIGO.AsString;
-      CD_FormaPago_NombreCuenta.AsString:= ZQ_ListadoCuentaNOMBRE_CUENTA.AsString;
-      CD_FormaPago_TipoFormaCP.AsString:= ZQ_ListadoMedioDESCRIPCION.AsString;
-      CD_FormaPago.Post;
+      ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
+      ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
+      ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
+      ZQ_CpbFormaPagoIMPORTE.AsFloat:= restaPagar;
+      ZQ_CpbFormaPago.Post;
     end;
   end;
 end;
@@ -1314,12 +1329,12 @@ procedure TFABM_CPB_Devolucion.DBGridEditar_FpagoColExit(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then //SI ESTOY DANDO DE ALTA O EDITANDO
   begin
-    if (((sender as tdbgrid).SelectedField.FullName = '_CodCuenta') or ((sender as tdbgrid).SelectedField.FullName = '_NombreCuenta')) then
+    if (((sender as tdbgrid).SelectedField.FullName = '_CuentaCodigo') or ((sender as tdbgrid).SelectedField.FullName = '_CuentaNombre')) then
     begin
       buscarCuenta;
     end;
 
-    if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaCP') then
+    if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
     begin
       buscarFormaPago;
     end;
@@ -1332,12 +1347,12 @@ begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
   begin
     if key = 112 then
-      if (((sender as tdbgrid).SelectedField.FullName = '_CodCuenta') or ((sender as tdbgrid).SelectedField.FullName = '_NombreCuenta')) then
+      if (((sender as tdbgrid).SelectedField.FullName = '_CuentaCodigo') or ((sender as tdbgrid).SelectedField.FullName = '_CuentaNombre')) then
       begin
         buscarCuenta;
       end;
 
-      if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaCP') then
+      if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
       begin
         buscarFormaPago;
       end;
@@ -1349,8 +1364,8 @@ procedure TFABM_CPB_Devolucion.btnEliminarFPagoClick(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
   begin
-    if not CD_FormaPago.IsEmpty then
-      CD_FormaPago.Delete;
+    if not ZQ_CpbFormaPago.IsEmpty then
+      ZQ_CpbFormaPago.Delete;
 
     DBGridEditar_Fpago.SetFocus;
     
