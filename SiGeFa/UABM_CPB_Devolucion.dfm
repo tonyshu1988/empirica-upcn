@@ -26,16 +26,16 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 876
-    Height = 500
+    Width = 884
+    Height = 511
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 876
-      Height = 500
+      Width = 884
+      Height = 511
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -47,25 +47,25 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 340
+        Left = 348
         Top = 5
         Width = 6
-        Height = 490
+        Height = 501
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 335
-        Height = 490
+        Width = 343
+        Height = 501
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 335
-          Height = 490
+          Width = 343
+          Height = 501
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -129,10 +129,10 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
       end
       object PanelCpbActual: TPanel
-        Left = 346
+        Left = 354
         Top = 5
         Width = 525
-        Height = 490
+        Height = 501
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -142,7 +142,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           Left = 0
           Top = 0
           Width = 525
-          Height = 228
+          Height = 239
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -150,7 +150,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             Left = 0
             Top = 0
             Width = 525
-            Height = 112
+            Height = 123
             Align = alClient
             Color = 14680031
             DataSource = DS_VerCpb_Devolucion
@@ -207,7 +207,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           end
           object DBGridCpbActual_Entrega: TDBGrid
             Left = 0
-            Top = 112
+            Top = 123
             Width = 525
             Height = 116
             Align = alBottom
@@ -267,7 +267,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object PanelCpbActual_FPago: TPanel
           Left = 0
-          Top = 228
+          Top = 239
           Width = 525
           Height = 100
           Align = alBottom
@@ -365,7 +365,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 328
+          Top = 339
           Width = 525
           Height = 162
           Align = alBottom
@@ -493,8 +493,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 876
-      Height = 500
+      Width = 884
+      Height = 511
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -509,12 +509,12 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 866
+        Width = 874
         Height = 126
         Align = alTop
         TabOrder = 0
         DesignSize = (
-          866
+          874
           126)
         object DBTxtCPB_PuntoVenta: TDBText
           Left = 709
@@ -966,21 +966,21 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       end
       object PanelEditar_Entrega: TPanel
         Left = 5
-        Top = 326
-        Width = 866
+        Top = 337
+        Width = 874
         Height = 169
         Align = alBottom
         TabOrder = 1
         object PanelEditar_EntregaInfo: TPanel
           Left = 1
           Top = 146
-          Width = 864
+          Width = 872
           Height = 22
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            864
+            872
             22)
           object Label23: TLabel
             Left = 434
@@ -1065,7 +1065,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         object DBGridEditar_Entrega: TDBGrid
           Left = 1
           Top = 21
-          Width = 864
+          Width = 872
           Height = 125
           Align = alClient
           Color = 13816575
@@ -1155,7 +1155,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           Tag = 99
           Left = 1
           Top = 1
-          Width = 864
+          Width = 872
           Height = 20
           Align = alTop
           BevelOuter = bvNone
@@ -1173,20 +1173,20 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       object PanelEditar_Devolucion: TPanel
         Left = 5
         Top = 131
-        Width = 866
-        Height = 195
+        Width = 874
+        Height = 206
         Align = alClient
         TabOrder = 2
         object PanelEditar_DevolucionInfo: TPanel
           Left = 1
-          Top = 172
-          Width = 864
+          Top = 183
+          Width = 872
           Height = 22
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            864
+            872
             22)
           object Label29: TLabel
             Left = 679
@@ -1271,8 +1271,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         object DBGridEditar_Devolucion: TDBGrid
           Left = 1
           Top = 21
-          Width = 864
-          Height = 151
+          Width = 872
+          Height = 162
           Align = alClient
           Color = 12582847
           DataSource = DS_CpbDevolucion
@@ -1361,7 +1361,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           Tag = 99
           Left = 1
           Top = 1
-          Width = 864
+          Width = 872
           Height = 20
           Align = alTop
           BevelOuter = bvNone
@@ -1381,7 +1381,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 876
+    Width = 884
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1419,7 +1419,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 766
+      Left = 774
       Top = 1
       Width = 109
       Height = 17
@@ -1433,7 +1433,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 657
+      Left = 665
       Top = 1
       Width = 109
       Height = 17
@@ -1745,7 +1745,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3991,10 +3991,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       end
       item
         TituloColumna = 'Sucursal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Proveedor'
         Visible = True
       end
       item
