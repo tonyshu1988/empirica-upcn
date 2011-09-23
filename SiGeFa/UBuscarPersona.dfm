@@ -19,15 +19,15 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 853
-    Height = 110
+    Width = 861
+    Height = 116
     Align = alClient
     TabOrder = 0
     object DBGridPersonas: TDBGrid
       Left = 1
       Top = 1
-      Width = 851
-      Height = 108
+      Width = 859
+      Height = 114
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
@@ -119,8 +119,8 @@ object FBuscarPersona: TFBuscarPersona
   end
   object PanelEdicion: TPanel
     Left = 0
-    Top = 162
-    Width = 853
+    Top = 168
+    Width = 861
     Height = 242
     Align = alBottom
     TabOrder = 5
@@ -128,7 +128,7 @@ object FBuscarPersona: TFBuscarPersona
     object PageControlEdicion: TPageControl
       Left = 1
       Top = 0
-      Width = 851
+      Width = 859
       Height = 241
       ActivePage = TabDatosTelMail
       Align = alBottom
@@ -472,7 +472,7 @@ object FBuscarPersona: TFBuscarPersona
         object DBGridTelMail: TDBGrid
           Left = 0
           Top = 0
-          Width = 843
+          Width = 851
           Height = 213
           Align = alClient
           Color = 14606012
@@ -512,7 +512,7 @@ object FBuscarPersona: TFBuscarPersona
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
