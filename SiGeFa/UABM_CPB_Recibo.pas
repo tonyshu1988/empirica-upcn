@@ -180,7 +180,6 @@ type
     Label26: TLabel;
     DBTxtCPB_PuntoVenta: TDBText;
     DBTxtCPB_Numero: TDBText;
-    DBMemoCPB_Observacion: TDBMemo;
     ZQ_Comprobante: TZQuery;
     ZQ_ComprobanteID_COMPROBANTE: TIntegerField;
     ZQ_ComprobanteID_SUCURSAL: TIntegerField;
@@ -264,21 +263,9 @@ type
     ZQ_NumeroCpbBAJA: TStringField;
     EKSuma_FPago: TEKDbSuma;
     PanelFechas: TPanel;
-    PanelFechaVencimiento: TPanel;
-    PanelFechaImpreso: TPanel;
-    PanelFechaEnviado: TPanel;
-    PanelFechaCobrado: TPanel;
     PanelFechaEmision: TPanel;
     EKDBDateEmision: TEKDBDateTimePicker;
     lblTituloFecha_Emision: TLabel;
-    EKDBDateCobrado: TEKDBDateTimePicker;
-    EKDBDateEnviado: TEKDBDateTimePicker;
-    EKDBDateImpreso: TEKDBDateTimePicker;
-    EKDBDateVencimiento: TEKDBDateTimePicker;
-    lblTituloFecha_Cobrado: TLabel;
-    lblTituloFecha_Enviado: TLabel;
-    lblTituloFecha_Impreso: TLabel;
-    lblTituloFecha_Vencimiento: TLabel;
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
     btnConfirmar: TdxBarLargeButton;
@@ -315,6 +302,7 @@ type
     DBText33: TDBText;
     StaticTxtConfirmado: TStaticText;
     EKBuscar: TEKBusquedaAvanzada;
+    DBMemoCPB_Observacion: TDBMemo;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -475,12 +463,6 @@ end;
 
 procedure TFABM_CPB_Recibo.cargarTipoComprobante(tipo: integer);
 begin
-  lblTituloFecha_Impreso.Caption:=  'Impreso';
-  configPanelFechas(PanelFechaCobrado, false);
-  configPanelFechas(PanelFechaEnviado, false);
-  configPanelFechas(PanelFechaImpreso, false);
-  configPanelFechas(PanelFechaVencimiento, false);
-
   lblTipoComprobante.Caption:= 'RECIBO';
 end;
 
@@ -534,7 +516,8 @@ var
   estado: integer;
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-  if ((ZQ_VerCpb.IsEmpty) or (estado = ESTADO_CONFIRMADO)) then
+  if ((ZQ_VerCpb.IsEmpty)
+     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
     exit;
 
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;

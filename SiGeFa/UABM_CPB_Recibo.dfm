@@ -373,16 +373,16 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         Left = 5
         Top = 5
         Width = 866
-        Height = 177
+        Height = 132
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
           866
-          177)
+          132)
         object DBTxtCPB_PuntoVenta: TDBText
           Left = 709
-          Top = 33
+          Top = 22
           Width = 44
           Height = 18
           Alignment = taRightJustify
@@ -399,7 +399,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
         object DBTxtCPB_Numero: TDBText
           Left = 766
-          Top = 33
+          Top = 22
           Width = 88
           Height = 18
           Alignment = taRightJustify
@@ -434,7 +434,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
         object Label12: TLabel
           Left = 709
-          Top = 12
+          Top = 7
           Width = 145
           Height = 15
           Alignment = taCenter
@@ -453,7 +453,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
         object LblCPB_PuntoVenta: TLabel
           Left = 709
-          Top = 33
+          Top = 22
           Width = 44
           Height = 18
           Alignment = taRightJustify
@@ -472,7 +472,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
         object LblCPB_Numero: TLabel
           Left = 766
-          Top = 33
+          Top = 22
           Width = 88
           Height = 18
           Anchors = [akRight]
@@ -490,7 +490,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
         object Label26: TLabel
           Left = 755
-          Top = 33
+          Top = 22
           Width = 8
           Height = 18
           Alignment = taCenter
@@ -511,7 +511,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Top = 7
           Width = 633
           Height = 74
-          Anchors = [akLeft]
           BevelOuter = bvNone
           Color = clInactiveCaption
           TabOrder = 1
@@ -764,7 +763,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Top = 7
           Width = 633
           Height = 74
-          Anchors = [akLeft]
           BevelOuter = bvNone
           Color = clScrollBar
           TabOrder = 0
@@ -1039,155 +1037,13 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             ParentFont = False
           end
         end
-        object DBMemoCPB_Observacion: TDBMemo
-          Left = 66
-          Top = 126
-          Width = 633
-          Height = 46
-          DataField = 'OBSERVACION'
-          DataSource = DS_Comprobante
-          ScrollBars = ssVertical
-          TabOrder = 3
-        end
         object PanelFechas: TPanel
           Left = 64
-          Top = 82
+          Top = 85
           Width = 637
           Height = 42
           BevelOuter = bvNone
           TabOrder = 2
-          object PanelFechaVencimiento: TPanel
-            Left = 508
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 4
-            object lblTituloFecha_Vencimiento: TLabel
-              Left = 11
-              Top = 1
-              Width = 70
-              Height = 13
-              Caption = 'Vencimiento'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateVencimiento: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_VENCIMIENTO'
-              DataSource = DS_Comprobante
-            end
-          end
-          object PanelFechaImpreso: TPanel
-            Left = 381
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 3
-            object lblTituloFecha_Impreso: TLabel
-              Left = 11
-              Top = 1
-              Width = 48
-              Height = 13
-              Caption = 'Impreso'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateImpreso: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_IMPRESA'
-              DataSource = DS_Comprobante
-            end
-          end
-          object PanelFechaEnviado: TPanel
-            Left = 254
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 2
-            object lblTituloFecha_Enviado: TLabel
-              Left = 11
-              Top = 1
-              Width = 45
-              Height = 13
-              Caption = 'Enviado'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateEnviado: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_ENVIADA'
-              DataSource = DS_Comprobante
-            end
-          end
-          object PanelFechaCobrado: TPanel
-            Left = 127
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 1
-            object lblTituloFecha_Cobrado: TLabel
-              Left = 11
-              Top = 1
-              Width = 49
-              Height = 13
-              Caption = 'Cobrado'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateCobrado: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_COBRADA'
-              DataSource = DS_Comprobante
-            end
-          end
           object PanelFechaEmision: TPanel
             Left = 0
             Top = 0
@@ -1198,7 +1054,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             TabOrder = 0
             object lblTituloFecha_Emision: TLabel
               Left = 12
-              Top = 1
+              Top = 3
               Width = 44
               Height = 13
               Caption = 'Emisi'#243'n'
@@ -1211,7 +1067,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             end
             object EKDBDateEmision: TEKDBDateTimePicker
               Left = 11
-              Top = 14
+              Top = 16
               Width = 105
               Height = 21
               Date = 40717.702273252320000000
@@ -1221,19 +1077,30 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               DataSource = DS_Comprobante
             end
           end
+          object DBMemoCPB_Observacion: TDBMemo
+            Left = 127
+            Top = 0
+            Width = 510
+            Height = 42
+            Align = alClient
+            DataField = 'OBSERVACION'
+            DataSource = DS_Comprobante
+            ScrollBars = ssVertical
+            TabOrder = 1
+          end
         end
       end
       object PanelEditar_FPago: TPanel
         Left = 5
-        Top = 182
+        Top = 137
         Width = 866
-        Height = 290
+        Height = 335
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
         object PanelEditar_FPagoInfo: TPanel
           Left = 0
-          Top = 249
+          Top = 294
           Width = 866
           Height = 41
           Align = alBottom
@@ -1291,7 +1158,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Left = 0
           Top = 0
           Width = 866
-          Height = 249
+          Height = 294
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbFormaPago
