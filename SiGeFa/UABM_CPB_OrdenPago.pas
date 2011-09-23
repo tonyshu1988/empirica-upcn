@@ -93,9 +93,7 @@ type
     ZQ_VerCpb_FpagoNOMBTR_TIPO: TStringField;
     ZQ_VerCpb_FpagoCTA_EGRESO_CODIGO: TStringField;
     ZQ_VerCpb_FpagoCTA_EGRESO: TStringField;
-    DBTxtMonto: TDBText;
     DBMemoCpbActual_Info: TDBMemo;
-    Label1: TLabel;
     ZQ_VerCpbPUNTO_VENTA: TIntegerField;
     ZQ_VerCpbNUMERO_CPB: TIntegerField;
     lblTipoComprobante: TLabel;
@@ -307,6 +305,10 @@ type
     PopupMenuImagen: TPopupMenu;
     popUp_VerImagen1: TMenuItem;
     popUp_CargarImagen1: TMenuItem;
+    DBTxtFechaAnulado: TDBText;
+    lblAnulado: TLabel;
+    DBTxtMonto: TDBText;
+    Label1: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -761,6 +763,17 @@ begin
     DBTxtDatos_Cliente.Visible:= true;
     lblDatos_Cliente.Visible:= true;
   end;
+
+  if ZQ_VerCpbFECHA_ANULADO.IsNull then
+  begin
+    DBTxtFechaAnulado.Visible:= false;
+    lblAnulado.Visible:= False;
+  end
+  else
+  begin
+    DBTxtFechaAnulado.Visible:= true;
+    lblAnulado.Visible:= true;
+  end;  
 end;
 
 
