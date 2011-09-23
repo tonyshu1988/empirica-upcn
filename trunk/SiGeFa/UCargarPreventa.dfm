@@ -22,13 +22,33 @@ object FPreventa: TFPreventa
     Height = 321
     Align = alClient
     TabOrder = 0
+    object Label29: TLabel
+      Left = 1
+      Top = 303
+      Width = 694
+      Height = 17
+      Align = alBottom
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Comprobantes Vencidos  '
+      Color = clRed
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+    end
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
       Width = 694
-      Height = 319
+      Height = 302
       Align = alClient
-      Color = 16762303
+      Color = 16112578
       DataSource = DS_Comprobante
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -45,6 +65,7 @@ object FPreventa: TFPreventa
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
       OnDrawColumnCell = DBGridDrawColumnCell
+      OnDblClick = DBGridDblClick
       Columns = <
         item
           Expanded = False
@@ -57,7 +78,14 @@ object FPreventa: TFPreventa
           Expanded = False
           FieldName = 'FECHA'
           Title.Caption = 'Fecha'
-          Width = 88
+          Width = 148
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA_VENCIMIENTO'
+          Title.Caption = 'Fecha Vencimiento'
+          Width = 110
           Visible = True
         end
         item
@@ -765,7 +793,38 @@ object FPreventa: TFPreventa
     end
   end
   object EKBuscarPresupuesto: TEKBusquedaAvanzada
-    CriteriosBusqueda = <>
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'digo'
+        Campo = 'codigo'
+        Tabla = 'comprobante'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Creaci'#243'n'
+        Campo = 'fecha'
+        Tabla = 'comprobante'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Vencimiento'
+        Campo = 'fecha_vencimiento'
+        Tabla = 'comprobante'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
     DataSet = ZQ_Comprobante
@@ -774,22 +833,25 @@ object FPreventa: TFPreventa
       
         'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
         'ente_'
+      ''
+      ''
       'from comprobante c'
       'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
       'left join persona p1 on (p1.id_persona=c.id_vendedor)'
       'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
       'left join persona p2 on (p2.id_persona=c.id_cliente)'
       ''
-      
-        'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)and(cast(c.f' +
-        'echa_vencimiento as date) >= current_date)'
-      'order by pc.nombre, ta.descripcion, ar.descripcion')
+      'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)'
+      ''
+      'order by c.fecha_vencimiento DESC,c.fecha DESC')
     SQL_Select.Strings = (
       'select c.*,s.nombre as suc_,'
       
         'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
-        'ente_')
+        'ente_'
+      '')
     SQL_From.Strings = (
+      ''
       'from comprobante c'
       'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
       'left join persona p1 on (p1.id_persona=c.id_vendedor)'
@@ -797,18 +859,17 @@ object FPreventa: TFPreventa
       'left join persona p2 on (p2.id_persona=c.id_cliente)'
       '')
     SQL_Where.Strings = (
-      
-        'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)and(cast(c.f' +
-        'echa_vencimiento as date) >= current_date)')
+      'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)')
     SQL_Orden.Strings = (
-      'order by pc.nombre, ta.descripcion, ar.descripcion')
+      ''
+      'order by c.fecha_vencimiento DESC,c.fecha DESC')
     UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
     Left = 136
     Top = 160
   end
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
-    SortedFields = 'FECHA'
     SQL.Strings = (
       'select c.*,s.nombre as suc_,'
       
@@ -819,9 +880,8 @@ object FPreventa: TFPreventa
       'left join persona p1 on (p1.id_persona=c.id_vendedor)'
       'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
       'left join persona p2 on (p2.id_persona=c.id_cliente)'
-      
-        'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)and(cast(c.f' +
-        'echa_vencimiento as date) >= current_date)')
+      'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)'
+      'order by c.fecha_vencimiento DESC,c.fecha DESC')
     Params = <>
     Left = 210
     Top = 130

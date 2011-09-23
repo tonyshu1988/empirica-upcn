@@ -1548,13 +1548,19 @@ procedure TFCajero.OnSelPreventa;
 begin
  if not vsel4.ZQ_Comprobante.IsEmpty then
   begin
-      if (CD_DetalleFactura.IsEmpty) then
+  if vsel4.vencida='S' then
+  begin
+    Application.MessageBox('No puede cargar una venta Vencida.','Carga Venta',MB_OK+MB_ICONINFORMATION);
+    exit;
+   end
+  else
+    if (CD_DetalleFactura.IsEmpty) then
       begin
         cargarPreventa();
         DBGridFormaPago.SetFocus;
       end;
-      vsel4.Close;
   end;
+  vsel4.Close;
 end;
 
 procedure TFCajero.btQuitarProductoClick(Sender: TObject);

@@ -1,6 +1,6 @@
 object FABM_Preventa: TFABM_Preventa
-  Left = 454
-  Top = 170
+  Left = 237
+  Top = 92
   Width = 1024
   Height = 650
   Caption = 'Venta de Mostrador'
