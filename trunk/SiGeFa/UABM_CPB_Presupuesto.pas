@@ -564,7 +564,7 @@ var
   estado: integer;
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-  if ((ZQ_VerCpb.IsEmpty)
+  if ((ZQ_VerCpb.IsEmpty) or
      ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
     exit;
 
