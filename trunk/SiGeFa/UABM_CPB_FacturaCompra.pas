@@ -285,8 +285,8 @@ type
     Label26: TLabel;
     Label29: TLabel;
     Label30: TLabel;
-    DBText3: TDBText;
-    Label27: TLabel;
+    DBTxtSaldo: TDBText;
+    lblSaldo: TLabel;
     ZQ_VerCpbSALDO: TFloatField;
     Label28: TLabel;
     DBText4: TDBText;
@@ -428,6 +428,8 @@ type
     ZQ_ActualizarPrecioID_PRODUCTO: TIntegerField;
     Panel8: TPanel;
     lblActualizarPrecio_Titulo: TLabel;
+    lblAnulado: TLabel;
+    DBTxtFechaAnulado: TDBText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -849,6 +851,23 @@ begin
 
   ZQ_VerCpb_Producto.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   ZQ_VerCpb_Producto.Open;
+
+  if ZQ_VerCpbFECHA_ANULADO.IsNull then
+  begin
+    DBTxtFechaAnulado.Visible:= false;
+    lblAnulado.Visible:= False;
+
+    DBTxtSaldo.Visible:= true;
+    lblSaldo.Visible:= true;
+  end
+  else
+  begin
+    DBTxtFechaAnulado.Visible:= true;
+    lblAnulado.Visible:= true;
+
+    DBTxtSaldo.Visible:= false;
+    lblSaldo.Visible:= False;
+  end;
 end;
 
 

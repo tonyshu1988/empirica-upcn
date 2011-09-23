@@ -351,8 +351,6 @@ type
     DS_VerCpb_Entrega: TDataSource;
     EKOrd_VerCpb_Entrega: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
-    DBTxtMonto: TDBText;
-    Label1: TLabel;
     lblDatos_Cliente: TLabel;
     DBTxtDatos_Cliente: TDBText;
     Label30: TLabel;
@@ -480,6 +478,10 @@ type
     DBText3: TDBText;
     EKDBDateTimePicker1: TEKDBDateTimePicker;
     Label16: TLabel;
+    DBTxtFechaAnulado: TDBText;
+    lblAnulado: TLabel;
+    DBTxtMonto: TDBText;
+    Label1: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -590,6 +592,9 @@ begin
 
   PanelEditar_Devolucion.Height:= grillas;
   PanelEditar_Entrega.Height:= grillas;
+
+  if PanelEditar_FPago.Visible then
+    dm.centrarPanel(FABM_CPB_Devolucion, PanelEditar_FPago);
 end;
 
 
@@ -954,7 +959,7 @@ begin
       exit;
     end;
 
-    if CD_Devolucion.IsEmpty then
+    if totalDevuelto = 0 then
     begin
       Application.MessageBox('No se cargo ningún producto a devolver, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
       DBGridEditar_Devolucion.SetFocus;
@@ -1114,6 +1119,17 @@ begin
   ZQ_VerCpb_Fpago.Open;
 
   configFormaPago;
+
+  if ZQ_VerCpbFECHA_ANULADO.IsNull then
+  begin
+    DBTxtFechaAnulado.Visible:= false;
+    lblAnulado.Visible:= False;
+  end
+  else
+  begin
+    DBTxtFechaAnulado.Visible:= true;
+    lblAnulado.Visible:= true;
+  end;
 end;
 
 
@@ -1361,6 +1377,7 @@ begin
     client.FieldByName('coefGanancia').AsFloat := vselProducto.ZQ_ProductoCOEF_GANANCIA.AsFloat;
     client.FieldByName('coefDescuento').AsFloat := vselProducto.ZQ_ProductoCOEF_DESCUENTO.AsFloat;
     client.FieldByName('impuestoIVA').AsFloat := vselProducto.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+    client.Post;
 
     query.Append;
     query.FieldByName('ID_COMPROBANTE').AsInteger:= id_comprobante;
@@ -1369,7 +1386,7 @@ begin
       query.FieldByName('IMPORTE_UNITARIO').AsFloat:= vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat * -1
     else
       query.FieldByName('IMPORTE_UNITARIO').AsFloat:= vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat;
-    query.FieldByName('CANTIDAD').AsFloat:= 0;
+    query.FieldByName('CANTIDAD').AsFloat:= 1;
   end;
 
   vselProducto.Close;

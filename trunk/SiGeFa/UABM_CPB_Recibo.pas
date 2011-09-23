@@ -78,9 +78,7 @@ type
     DBGridCpbActual_FPago: TDBGrid;
     EKOrd_VerCpb: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
-    DBTxtMonto: TDBText;
     DBMemoCpbActual_Info: TDBMemo;
-    Label1: TLabel;
     ZQ_VerCpbPUNTO_VENTA: TIntegerField;
     ZQ_VerCpbNUMERO_CPB: TIntegerField;
     lblTipoComprobante: TLabel;
@@ -303,6 +301,10 @@ type
     StaticTxtConfirmado: TStaticText;
     EKBuscar: TEKBusquedaAvanzada;
     DBMemoCPB_Observacion: TDBMemo;
+    DBTxtFechaAnulado: TDBText;
+    lblAnulado: TLabel;
+    DBTxtMonto: TDBText;
+    Label1: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -740,6 +742,17 @@ begin
     DBTxtDatos_Cliente.Visible:= true;
     lblDatos_Cliente.Visible:= true;
   end;
+
+  if ZQ_VerCpbFECHA_ANULADO.IsNull then
+  begin
+    DBTxtFechaAnulado.Visible:= false;
+    lblAnulado.Visible:= False;
+  end
+  else
+  begin
+    DBTxtFechaAnulado.Visible:= true;
+    lblAnulado.Visible:= true;
+  end;  
 end;
 
 

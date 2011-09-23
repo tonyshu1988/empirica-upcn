@@ -102,9 +102,7 @@ type
     EKOrd_VerCpb_Producto: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
     PanelCpbActual_ProductoDetalle: TPanel;
-    DBTxtMonto: TDBText;
     DBMemoCpbActual_Info: TDBMemo;
-    Label1: TLabel;
     ZQ_VerCpbPUNTO_VENTA: TIntegerField;
     ZQ_VerCpbNUMERO_CPB: TIntegerField;
     lblTipoComprobante: TLabel;
@@ -352,6 +350,10 @@ type
     Label38: TLabel;
     DBText31: TDBText;
     DBImageSucursal: TDBImage;
+    DBTxtFechaAnulado: TDBText;
+    lblAnulado: TLabel;
+    DBTxtMonto: TDBText;
+    Label1: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -800,6 +802,17 @@ begin
     DBTxtDatos_Cliente.Visible:= true;
     lblDatos_Cliente.Visible:= true;
   end;
+
+  if ZQ_VerCpbFECHA_ANULADO.IsNull then
+  begin
+    DBTxtFechaAnulado.Visible:= false;
+    lblAnulado.Visible:= False;
+  end
+  else
+  begin
+    DBTxtFechaAnulado.Visible:= true;
+    lblAnulado.Visible:= true;
+  end;  
 end;
 
 
@@ -984,9 +997,6 @@ begin
   if not Assigned(vselProducto) then
     vselProducto:= TFBuscarProducto.Create(nil);
 
-  //if not ZQ_ComprobanteID_PROVEEDOR.IsNull then
-  //  vselProducto.filtrarEmpresa(ZQ_ComprobanteID_PROVEEDOR.AsInteger);
-
   vselProducto.OnSeleccionar := onSelProducto;
   vselProducto.OnSeleccionarTodos := onSelTodosProducto;
   vselProducto.btnSeleccionarTodos.Visible:= ivAlways;
@@ -1169,12 +1179,6 @@ begin
   begin
     Key := 0; {ignore}
 
-//    if (columna = 'IMPORTE_FINAL') then
-//    begin
-//      DBGridEditar_Producto.SelectedIndex:= 0;//getColumnIndex(DBGridEditar_Producto, '_CodBarra');
-//      ZQ_CpbProducto.Append;
-//    end;
-
     if (columna = 'CANTIDAD') then
     begin
       DBGridEditar_Producto.SelectedIndex:= 0;
@@ -1244,6 +1248,8 @@ begin
 
   FPrincipal.PintarFilasGrillas(DBGridListaCpb, Rect, DataCol, Column, State);
 end;
+
+
 procedure TFABM_CPB_Remito.btnBajaClick(Sender: TObject);
 var
   recno, estado: Integer;
@@ -1281,6 +1287,7 @@ begin
   ZQ_VerCpb.RecNo:= recNo;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 end;
+
 
 procedure TFABM_CPB_Remito.ZQ_VerCpb_ProductoAfterScroll(
   DataSet: TDataSet);

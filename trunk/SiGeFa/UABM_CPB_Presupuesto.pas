@@ -99,9 +99,7 @@ type
     EKOrd_VerCpb_Producto: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
     PanelCpbActual_ProductoDetalle: TPanel;
-    DBTxtMonto: TDBText;
     DBMemoCpbActual_Info: TDBMemo;
-    Label1: TLabel;
     ZQ_VerCpbPUNTO_VENTA: TIntegerField;
     ZQ_VerCpbNUMERO_CPB: TIntegerField;
     lblTipoComprobante: TLabel;
@@ -322,6 +320,10 @@ type
     Label38: TLabel;
     DBText31: TDBText;
     DBImageSucursal: TDBImage;
+    DBTxtFechaAnulado: TDBText;
+    lblAnulado: TLabel;
+    DBTxtMonto: TDBText;
+    Label1: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -757,6 +759,17 @@ begin
 
   ZQ_VerCpb_Producto.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   ZQ_VerCpb_Producto.Open;
+
+  if ZQ_VerCpbFECHA_ANULADO.IsNull then
+  begin
+    DBTxtFechaAnulado.Visible:= false;
+    lblAnulado.Visible:= False;
+  end
+  else
+  begin
+    DBTxtFechaAnulado.Visible:= true;
+    lblAnulado.Visible:= true;
+  end;  
 end;
 
 
