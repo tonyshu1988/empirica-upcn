@@ -15,12 +15,11 @@ type
     DBGrid1: TDBGrid;
     DS_SincroTabla: TDataSource;
     Local: TZQuery;
-    Remoto: TZQuery;
     Memo1: TMemo;
-    ZQ_SincroTablaPrimary: TZQuery;
-    ZQ_SincroTablaPrimaryKEY_FIELD: TStringField;
-    ZQ_SincroTablaPrimaryKEY_VALUE: TStringField;
-    ZQ_SincroTablaPrimaryLOG_TABLES_ID: TLargeintField;
+    ZQ_SincroTabla: TZQuery;
+    ZQ_SincroTablaKEY_FIELD: TStringField;
+    ZQ_SincroTablaKEY_VALUE: TStringField;
+    ZQ_SincroTablaLOG_TABLES_ID: TLargeintField;
     inicio: TEKIni;
     Panel1: TPanel;
     Label7: TLabel;
@@ -30,12 +29,8 @@ type
     Timer1: TTimer;
     cuenta: TEKEdit;
     GroupBox1: TGroupBox;
-    Rbase: TEdit;
+    edPathArchivo: TEdit;
     Label4: TLabel;
-    Label5: TLabel;
-    RUser: TEdit;
-    Label6: TLabel;
-    RPassword: TEdit;
     GroupBox2: TGroupBox;
     LBase: TEdit;
     LUser: TEdit;
@@ -73,25 +68,7 @@ type
     SincronizacionLocalSUCURSAL: TIntegerField;
     ZSP_GenerarLoteSinc: TZStoredProc;
     ZSP_GenerarLoteSincLOTESINC: TIntegerField;
-    ZQ_SincTablaLocal: TZQuery;
-    ZQ_SincPTLocal: TZQuery;
-    ZQ_SincCampo: TZQuery;
-    ZQ_SincTablaLocalID: TLargeintField;
-    ZQ_SincTablaLocalTABLE_NAME: TStringField;
-    ZQ_SincTablaLocalOPERATION: TStringField;
-    ZQ_SincTablaLocalDATE_TIME: TDateTimeField;
-    ZQ_SincTablaLocalUSER_NAME: TStringField;
-    ZQ_SincTablaLocalLOTE_SINC: TIntegerField;
-    ZQ_SincTablaLocalSUCURSAL: TIntegerField;
-    ZQ_SincPTLocalLOG_TABLES_ID: TLargeintField;
-    ZQ_SincPTLocalKEY_FIELD: TStringField;
-    ZQ_SincPTLocalKEY_VALUE: TStringField;
-    ZQ_SincCampoLOG_TABLES_ID: TLargeintField;
-    ZQ_SincCampoFIELD_NAME: TStringField;
-    ZQ_SincCampoOLD_VALUE: TStringField;
-    ZQ_SincCampoNEW_VALUE: TStringField;
     chkTimer: TCheckBox;
-    IdFTP1: TIdFTP;
     procedure ZQ_SincroTablaAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -135,7 +112,6 @@ procedure TFPrincipal.Sincronizar();
 begin
   try
    begin
-     DM.ZC_Remoto.Disconnect;
      DM.ZC_Local.Disconnect;
 
       memo1.Lines.Clear;
@@ -353,19 +329,16 @@ begin
 //  end;
 
   inicio.abrir;
-  DM.ZC_Remoto.HostName:=inicio.Ini.ReadString('bases', 'ipremoto','');
-  DM.ZC_Remoto.Database:=inicio.Ini.ReadString('bases', 'remoto','');
-  DM.ZC_Remoto.User:=inicio.Ini.ReadString('bases', 'remoto_user','');
-  DM.ZC_Remoto.Password:=inicio.Ini.ReadString('bases', 'remoto_password','');
+  DM.IdFTP1.Username :=inicio.Ini.ReadString('servidor', 'usuario','');
+  DM.IdFTP1.Password :=inicio.Ini.ReadString('servidor', 'password','');
+  DM.IdFTP1.Host :=  inicio.Ini.ReadString('servidor', 'direccion','');
 
-  Rbase.Text:=DM.ZC_Remoto.Database;
-  RUser.Text:=DM.ZC_Remoto.User;
-  RPassword.Text:=DM.ZC_Remoto.Password;
+  edPathArchivo.Text:=inicio.Ini.ReadString('servidor', 'path','');
 
-  DM.ZC_Local.HostName:='127.0.0.1';
-  DM.ZC_Local.Database:=inicio.Ini.ReadString('bases', 'local','');
-  DM.ZC_Local.User:=inicio.Ini.ReadString('bases', 'local_user','');
-  DM.ZC_Local.Password:=inicio.Ini.ReadString('bases', 'local_password','');
+  DM.ZC_Local.HostName:=inicio.Ini.ReadString('Base Local', 'direccion','');
+  DM.ZC_Local.Database:=inicio.Ini.ReadString('Base Local', 'base','');
+  DM.ZC_Local.User:=inicio.Ini.ReadString('Base Local', 'usuario','');
+  DM.ZC_Local.Password:=inicio.Ini.ReadString('Base Local', 'password','');
 
   Lbase.Text:=DM.ZC_Local.Database;
   LUser.Text:=DM.ZC_Local.User;
@@ -617,21 +590,21 @@ procedure TFPrincipal.conectar;
 begin
     try
      begin
-        DM.ZC_Remoto.Disconnect;
+        DM.IdFTP1.Disconnect;
         memo1.Lines.Clear;
         memo1.Lines.Add('...### Sincronización SiGeFa ###...');
         DM.ZC_Local.Disconnect;
         memo1.Lines.Add('Conectando Base Local: '+DM.ZC_Local.HostName+':'+DM.ZC_Local.Database);
         DM.ZC_Local.Connect;
         memo1.Lines.Add('...Conectado.');
-        memo1.Lines.Add('Conectando Base Servidor: '+DM.ZC_Remoto.HostName+':'+DM.ZC_Remoto.Database);
-        DM.ZC_Remoto.Connect;
+        memo1.Lines.Add('Conectando al Servidor FTP ... ');
+        DM.IdFTP1.Connect;
         memo1.Lines.Add('...Conectado.');
      end
     except
       on E: Exception do
       begin
-        DM.ZC_Remoto.Disconnect;
+        IdFTP1.Disconnect;
         DM.ZC_Local.Disconnect;
         memo1.Lines.Add(E.Message);
         memo1.Lines.Add('ERROR Sincronización!!...');

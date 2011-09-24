@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 281
-  Top = 89
+  Left = 315
+  Top = 91
   Width = 872
   Height = 654
   Caption = 'Sincronizador SiGeFa'
@@ -82,53 +82,22 @@ object FPrincipal: TFPrincipal
           Width = 334
           Height = 89
           Align = alTop
-          Caption = ' Base Remota '
+          Caption = ' Servidor Remoto '
           TabOrder = 2
           object Label4: TLabel
             Left = 24
-            Top = 14
-            Width = 28
+            Top = 22
+            Width = 109
             Height = 13
-            Caption = 'Base'
+            Caption = 'Directorio Archivos'
           end
-          object Label5: TLabel
+          object edPathArchivo: TEdit
             Left = 24
-            Top = 49
-            Width = 43
-            Height = 13
-            Caption = 'Usuario'
-          end
-          object Label6: TLabel
-            Left = 168
-            Top = 49
-            Width = 54
-            Height = 13
-            Caption = 'Password'
-          end
-          object Rbase: TEdit
-            Left = 24
-            Top = 27
+            Top = 35
             Width = 265
             Height = 21
             TabOrder = 0
-            Text = 'Rbase'
-          end
-          object RUser: TEdit
-            Left = 24
-            Top = 62
-            Width = 121
-            Height = 21
-            TabOrder = 1
-            Text = 'RUser'
-          end
-          object RPassword: TEdit
-            Left = 168
-            Top = 62
-            Width = 121
-            Height = 21
-            PasswordChar = '*'
-            TabOrder = 2
-            Text = 'RPassword'
+            Text = 'dir'
           end
         end
         object GroupBox2: TGroupBox
@@ -249,14 +218,7 @@ object FPrincipal: TFPrincipal
     Left = 608
     Top = 376
   end
-  object Remoto: TZQuery
-    Connection = DM.ZC_Remoto
-    Params = <>
-    Left = 608
-    Top = 328
-  end
-  object ZQ_SincroTablaPrimary: TZQuery
-    Connection = DM.ZC_Remoto
+  object ZQ_SincroTabla: TZQuery
     SQL.Strings = (
       'select sc.*'
       'from z_sinc_clave sc '
@@ -267,24 +229,24 @@ object FPrincipal: TFPrincipal
         Name = 'id'
         ParamType = ptUnknown
       end>
-    Left = 88
-    Top = 48
+    Left = 328
+    Top = 56
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'id'
         ParamType = ptUnknown
       end>
-    object ZQ_SincroTablaPrimaryKEY_FIELD: TStringField
+    object ZQ_SincroTablaKEY_FIELD: TStringField
       FieldName = 'KEY_FIELD'
       Required = True
       Size = 201
     end
-    object ZQ_SincroTablaPrimaryKEY_VALUE: TStringField
+    object ZQ_SincroTablaKEY_VALUE: TStringField
       FieldName = 'KEY_VALUE'
       Size = 765
     end
-    object ZQ_SincroTablaPrimaryLOG_TABLES_ID: TLargeintField
+    object ZQ_SincroTablaLOG_TABLES_ID: TLargeintField
       FieldName = 'LOG_TABLES_ID'
       Required = True
     end
@@ -15289,157 +15251,10 @@ object FPrincipal: TFPrincipal
     Connection = DM.ZC_Local
     Params = <>
     StoredProcName = 'GENERAR_LOTE_SINC'
-    Left = 705
-    Top = 334
+    Left = 721
+    Top = 246
     object ZSP_GenerarLoteSincLOTESINC: TIntegerField
       FieldName = 'LOTESINC'
     end
-  end
-  object ZQ_SincTablaLocal: TZQuery
-    Connection = DM.ZC_Local
-    AfterScroll = ZQ_SincTablaLocalAfterScroll
-    SQL.Strings = (
-      'select st.*'
-      'from z_sinc_tabla st'
-      'where (st.lote_sinc=:lote)and(st.sucursal=:suc)'
-      '')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'lote'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'suc'
-        ParamType = ptUnknown
-      end>
-    Left = 144
-    Top = 208
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'lote'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'suc'
-        ParamType = ptUnknown
-      end>
-    object ZQ_SincTablaLocalID: TLargeintField
-      FieldName = 'ID'
-      Required = True
-    end
-    object ZQ_SincTablaLocalTABLE_NAME: TStringField
-      FieldName = 'TABLE_NAME'
-      Required = True
-      Size = 201
-    end
-    object ZQ_SincTablaLocalOPERATION: TStringField
-      FieldName = 'OPERATION'
-      Required = True
-      Size = 1
-    end
-    object ZQ_SincTablaLocalDATE_TIME: TDateTimeField
-      FieldName = 'DATE_TIME'
-      Required = True
-    end
-    object ZQ_SincTablaLocalUSER_NAME: TStringField
-      FieldName = 'USER_NAME'
-      Required = True
-      Size = 67
-    end
-    object ZQ_SincTablaLocalLOTE_SINC: TIntegerField
-      FieldName = 'LOTE_SINC'
-    end
-    object ZQ_SincTablaLocalSUCURSAL: TIntegerField
-      FieldName = 'SUCURSAL'
-    end
-  end
-  object ZQ_SincPTLocal: TZQuery
-    Connection = DM.ZC_Local
-    SQL.Strings = (
-      'select sc.*'
-      'from z_sinc_clave sc '
-      'where  (:id = sc.log_tables_id)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    Left = 240
-    Top = 208
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    object ZQ_SincPTLocalLOG_TABLES_ID: TLargeintField
-      FieldName = 'LOG_TABLES_ID'
-      Required = True
-    end
-    object ZQ_SincPTLocalKEY_FIELD: TStringField
-      FieldName = 'KEY_FIELD'
-      Required = True
-      Size = 201
-    end
-    object ZQ_SincPTLocalKEY_VALUE: TStringField
-      FieldName = 'KEY_VALUE'
-      Size = 765
-    end
-  end
-  object ZQ_SincCampo: TZQuery
-    Connection = DM.ZC_Local
-    SQL.Strings = (
-      'select *'
-      'from z_sinc_campo sc'
-      'where sc.log_tables_id=:id')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    Left = 328
-    Top = 208
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    object ZQ_SincCampoLOG_TABLES_ID: TLargeintField
-      FieldName = 'LOG_TABLES_ID'
-      Required = True
-    end
-    object ZQ_SincCampoFIELD_NAME: TStringField
-      FieldName = 'FIELD_NAME'
-      Required = True
-      Size = 201
-    end
-    object ZQ_SincCampoOLD_VALUE: TStringField
-      FieldName = 'OLD_VALUE'
-      Size = 765
-    end
-    object ZQ_SincCampoNEW_VALUE: TStringField
-      FieldName = 'NEW_VALUE'
-      Size = 765
-    end
-  end
-  object IdFTP1: TIdFTP
-    IPVersion = Id_IPv4
-    Host = '174.132.76.2'
-    Password = 'grupo78gua'
-    Username = 'grupogua'
-    NATKeepAlive.UseKeepAlive = False
-    NATKeepAlive.IdleTimeMS = 0
-    NATKeepAlive.IntervalMS = 0
-    ProxySettings.ProxyType = fpcmNone
-    ProxySettings.Port = 0
-    Left = 416
-    Top = 104
   end
 end
