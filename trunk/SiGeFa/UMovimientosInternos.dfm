@@ -2301,6 +2301,12 @@ object FMovimientosInternos: TFMovimientosInternos
     object ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_TIPO_MOVIMIENTO'
     end
+    object ZQ_ComprobanteIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_ComprobanteIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
   end
   object DS_Comprobante: TDataSource
     DataSet = ZQ_Comprobante
@@ -2595,7 +2601,8 @@ object FMovimientosInternos: TFMovimientosInternos
     SQL.Strings = (
       'select tipo.*'
       'from tipo_formapago tipo'
-      'where tipo.baja = '#39'N'#39)
+      'where tipo.baja = '#39'N'#39
+      '  and tipo.id_tipo_formapago > 3')
     CampoBuscar = 'descripcion'
     CampoClave = 'id_tipo_formapago'
     TituloVentana = 'Buscar Medio'
@@ -2613,7 +2620,8 @@ object FMovimientosInternos: TFMovimientosInternos
       
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
-      'where cta.baja = '#39'N'#39)
+      'where cta.baja = '#39'N'#39
+      '  and cta.id_cuenta > 2')
     CampoBuscar = 'busqueda'
     CampoClave = 'id_cuenta'
     TituloVentana = 'Buscar Cuenta'

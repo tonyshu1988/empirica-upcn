@@ -21,17 +21,17 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1022
-    Height = 502
+    Width = 1014
+    Height = 496
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object PageControl: TPageControl
       Left = 1
       Top = 1
-      Width = 1020
-      Height = 500
-      ActivePage = TabDetalleMov
+      Width = 1012
+      Height = 494
+      ActivePage = TabParteDiario
       Align = alClient
       TabOrder = 0
       object TabSaldosCuentas: TTabSheet
@@ -149,7 +149,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 50.270833333333330000
-                751.416666666666800000
+                751.416666666666700000
                 124.354166666666700000
                 396.875000000000000000)
               Alignment = taCenter
@@ -181,8 +181,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                775.229166666666800000
-                68.791666666666680000
+                775.229166666666700000
+                68.791666666666670000
                 346.604166666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -213,7 +213,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                759.354166666666800000
+                759.354166666666700000
                 5.291666666666667000
                 381.000000000000000000)
               Alignment = taCenter
@@ -505,7 +505,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              58.208333333333340000
+              58.208333333333330000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -587,7 +587,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333340000
+              82.020833333333330000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -635,7 +635,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawLeft = False
               Frame.DrawRight = False
               Size.Values = (
-                34.395833333333340000
+                34.395833333333330000
                 13.229166666666670000
                 5.291666666666667000
                 333.375000000000000000)
@@ -812,8 +812,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object DBGridSaldoCuentas: TDBGrid
           Left = 0
           Top = 38
-          Width = 1012
-          Height = 412
+          Width = 1004
+          Height = 406
           Align = alClient
           Color = 14606012
           DataSource = DS_SaldosCuentas
@@ -863,15 +863,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object Panel1: TPanel
           Left = 0
           Top = 0
-          Width = 1012
+          Width = 1004
           Height = 38
           Align = alTop
+          BevelOuter = bvNone
           BorderWidth = 4
           TabOrder = 1
           object lblSaldo_Encabezado2: TLabel
-            Left = 5
-            Top = 18
-            Width = 1002
+            Left = 4
+            Top = 17
+            Width = 996
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -883,9 +884,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ParentFont = False
           end
           object lblSaldo_Encabezado1: TLabel
-            Left = 5
-            Top = 5
-            Width = 1002
+            Left = 4
+            Top = 4
+            Width = 996
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -899,8 +900,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         end
         object Panel2: TPanel
           Left = 0
-          Top = 450
-          Width = 1012
+          Top = 444
+          Width = 1004
           Height = 22
           Align = alBottom
           BorderWidth = 4
@@ -908,7 +909,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSaldo_Total: TLabel
             Left = 5
             Top = 5
-            Width = 1002
+            Width = 994
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -925,274 +926,6 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       object TabParteDiario: TTabSheet
         Caption = 'Parte Diario'
         ImageIndex = 3
-        object panel_cerrar: TPanel
-          Left = 0
-          Top = 0
-          Width = 1012
-          Height = 472
-          Align = alClient
-          TabOrder = 0
-          DesignSize = (
-            1012
-            472)
-          object lblEncabezadoParteDiario: TLabel
-            Left = 5
-            Top = 1
-            Width = 100
-            Height = 14
-            Caption = '                         '
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label17: TLabel
-            Left = 8
-            Top = 240
-            Width = 153
-            Height = 13
-            Caption = 'SALDOS DE LAS CUENTAS'
-          end
-          object Label18: TLabel
-            Left = 296
-            Top = 37
-            Width = 212
-            Height = 13
-            Caption = 'INGRESOS Y EGRESOS POR MEDIOS'
-          end
-          object lblSaldo_TotalParteDiario: TLabel
-            Left = 1
-            Top = 458
-            Width = 1010
-            Height = 13
-            Align = alBottom
-            Alignment = taRightJustify
-            Caption = 'lblSaldo_Total'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold, fsItalic]
-            ParentFont = False
-          end
-          object lblSucursal: TLabel
-            Left = 863
-            Top = 1
-            Width = 148
-            Height = 14
-            Alignment = taRightJustify
-            Anchors = [akTop, akRight]
-            Caption = '                                     '
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object lbltotalIngresoEgreso: TLabel
-            Left = 297
-            Top = 233
-            Width = 100
-            Height = 14
-            Caption = '                         '
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object GroupBox3: TGroupBox
-            Left = 9
-            Top = 57
-            Width = 281
-            Height = 175
-            Caption = ' MOVIMIENTOS '
-            Ctl3D = False
-            ParentCtl3D = False
-            TabOrder = 0
-            object Label15: TLabel
-              Left = 13
-              Top = 31
-              Width = 85
-              Height = 13
-              Caption = 'Saldo Inicial:'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object DBText9: TDBText
-              Left = 112
-              Top = 27
-              Width = 129
-              Height = 17
-              Alignment = taRightJustify
-              DataField = 'SALDO_INICIAL'
-              DataSource = DS_estadistica_Parte_Diario
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clNavy
-              Font.Height = -13
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object Label7: TLabel
-              Left = 13
-              Top = 63
-              Width = 55
-              Height = 13
-              Caption = 'Ingresos:'
-            end
-            object DBText10: TDBText
-              Left = 160
-              Top = 63
-              Width = 81
-              Height = 17
-              Alignment = taRightJustify
-              DataField = 'TOTAL_INGRESO'
-              DataSource = DS_estadistica_Parte_Diario
-            end
-            object Label8: TLabel
-              Left = 13
-              Top = 95
-              Width = 50
-              Height = 13
-              Caption = 'Egresos:'
-            end
-            object DBText11: TDBText
-              Left = 160
-              Top = 95
-              Width = 81
-              Height = 17
-              Alignment = taRightJustify
-              DataField = 'TOTAL_EGRESO'
-              DataSource = DS_estadistica_Parte_Diario
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clRed
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object DBText19: TDBText
-              Left = 112
-              Top = 124
-              Width = 129
-              Height = 17
-              Alignment = taRightJustify
-              DataField = 'SALDO'
-              DataSource = DS_estadistica_Parte_Diario
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clNavy
-              Font.Height = -13
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object Label16: TLabel
-              Left = 13
-              Top = 128
-              Width = 100
-              Height = 13
-              Caption = 'Saldo al Cierre:'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-          end
-          object DBGrid4: TDBGrid
-            Left = 296
-            Top = 56
-            Width = 696
-            Height = 177
-            Anchors = [akLeft, akTop, akRight]
-            Color = 14606012
-            DataSource = DS_Estadistica_IE_Medios
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-            TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'DESCRIPCION'
-                Title.Caption = 'Medio'
-                Width = 290
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'TOTAL_INGRESO'
-                Title.Caption = 'Ingresos'
-                Width = 111
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'TOTAL_EGRESO'
-                Title.Caption = 'Egresos'
-                Width = 108
-                Visible = True
-              end>
-          end
-          object DBGrid3: TDBGrid
-            Left = 7
-            Top = 257
-            Width = 986
-            Height = 197
-            Anchors = [akLeft, akTop, akRight, akBottom]
-            Color = 14606012
-            DataSource = DS_SaldosCuentas
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-            TabOrder = 2
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'CODIGO'
-                Title.Caption = 'Codigo'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'NOMBRE_CUENTA'
-                Title.Alignment = taCenter
-                Title.Caption = 'Cuenta'
-                Width = 428
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'NRO_CTA_BANCO'
-                Title.Caption = 'Nro. Cuenta'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'IMPORTE'
-                Title.Alignment = taCenter
-                Title.Caption = 'Saldo'
-                Width = 155
-                Visible = True
-              end>
-          end
-        end
         object RepParteDiario: TQuickRep
           Tag = 99
           Left = 145
@@ -1257,7 +990,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             Left = 38
             Top = 38
             Width = 718
-            Height = 90
+            Height = 72
             Frame.Color = clBlack
             Frame.DrawTop = False
             Frame.DrawBottom = True
@@ -1269,14 +1002,14 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              238.125000000000000000
+              190.500000000000000000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
             BandType = rbPageHeader
             object RepParteDiario_Titulo: TQRLabel
               Left = 260
-              Top = 4
+              Top = 2
               Width = 196
               Height = 20
               Frame.Color = clBlack
@@ -1286,9 +1019,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                687.916666666666800000
-                10.583333333333330000
-                518.583333333333400000)
+                687.916666666666700000
+                5.291666666666667000
+                518.583333333333300000)
               Alignment = taCenter
               AlignToBand = False
               AutoSize = True
@@ -1308,7 +1041,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             end
             object RepParteDiario_Subtitulo: TQRLabel
               Left = 273
-              Top = 28
+              Top = 26
               Width = 171
               Height = 20
               Frame.Color = clBlack
@@ -1319,7 +1052,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Size.Values = (
                 52.916666666666670000
                 722.312500000000000000
-                74.083333333333340000
+                68.791666666666670000
                 452.437500000000000000)
               Alignment = taCenter
               AlignToBand = False
@@ -1340,7 +1073,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             end
             object QRLabel68: TQRLabel
               Left = 315
-              Top = 53
+              Top = 47
               Width = 86
               Height = 18
               Frame.Color = clBlack
@@ -1351,7 +1084,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Size.Values = (
                 47.625000000000000000
                 833.437500000000000000
-                140.229166666666700000
+                124.354166666666700000
                 227.541666666666700000)
               Alignment = taCenter
               AlignToBand = False
@@ -1370,11 +1103,29 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 10
             end
+            object QRDBLogo2: TQRDBImage
+              Left = 66
+              Top = 2
+              Width = 64
+              Height = 64
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                169.333333333333300000
+                174.625000000000000000
+                5.291666666666667000
+                169.333333333333300000)
+              DataField = 'LOGO'
+              Stretch = True
+            end
           end
           object QRSubDetail1: TQRSubDetail
             Tag = 99
             Left = 38
-            Top = 202
+            Top = 184
             Width = 718
             Height = 18
             Frame.Color = clBlack
@@ -1499,7 +1250,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object QRSubDetail2: TQRSubDetail
             Tag = 99
             Left = 38
-            Top = 220
+            Top = 202
             Width = 718
             Height = 22
             Frame.Color = clBlack
@@ -1513,7 +1264,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              58.208333333333340000
+              58.208333333333330000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -1556,7 +1307,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object QRSubDetail3: TQRSubDetail
             Tag = 99
             Left = 38
-            Top = 257
+            Top = 239
             Width = 718
             Height = 17
             Frame.Color = clBlack
@@ -1714,7 +1465,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object QRBand1: TQRBand
             Tag = 99
             Left = 38
-            Top = 185
+            Top = 167
             Width = 718
             Height = 17
             Frame.Color = clBlack
@@ -1833,7 +1584,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object ChildBand1: TQRChildBand
             Tag = 99
             Left = 38
-            Top = 242
+            Top = 224
             Width = 718
             Height = 15
             Frame.Color = clBlack
@@ -1985,7 +1736,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object QRSubDetail4: TQRSubDetail
             Tag = 99
             Left = 38
-            Top = 274
+            Top = 256
             Width = 718
             Height = 23
             Frame.Color = clBlack
@@ -1999,7 +1750,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              60.854166666666680000
+              60.854166666666670000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -2020,7 +1771,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 44.979166666666670000
                 1516.062500000000000000
                 7.937500000000000000
-                375.708333333333400000)
+                375.708333333333300000)
               Alignment = taRightJustify
               AlignToBand = False
               AutoSize = True
@@ -2042,7 +1793,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object ChildBand2: TQRChildBand
             Tag = 99
             Left = 38
-            Top = 128
+            Top = 110
             Width = 718
             Height = 17
             Frame.Color = clBlack
@@ -2076,7 +1827,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 44.979166666666670000
                 10.583333333333330000
                 -2.645833333333333000
-                545.041666666666800000)
+                545.041666666666700000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = True
@@ -2130,7 +1881,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object ChildBand3: TQRChildBand
             Tag = 99
             Left = 38
-            Top = 145
+            Top = 127
             Width = 718
             Height = 40
             Frame.Color = clBlack
@@ -2197,7 +1948,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 39.687500000000000000
                 50.270833333333330000
                 0.000000000000000000
-                232.833333333333400000)
+                232.833333333333300000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = True
@@ -2260,7 +2011,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 39.687500000000000000
-                965.729166666666800000
+                965.729166666666700000
                 0.000000000000000000
                 275.166666666666700000)
               Alignment = taLeftJustify
@@ -2326,7 +2077,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Size.Values = (
                 39.687500000000000000
                 15.875000000000000000
-                42.333333333333340000
+                42.333333333333330000
                 267.229166666666700000)
               Alignment = taLeftJustify
               AlignToBand = False
@@ -2390,8 +2141,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 39.687500000000000000
-                989.541666666666800000
-                42.333333333333340000
+                989.541666666666700000
+                42.333333333333330000
                 251.354166666666700000)
               Alignment = taLeftJustify
               AlignToBand = False
@@ -2412,8 +2163,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             end
           end
           object PageFooterBand1: TQRBand
+            Tag = 99
             Left = 38
-            Top = 297
+            Top = 279
             Width = 718
             Height = 24
             Frame.Color = clBlack
@@ -2494,26 +2246,67 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 7
             end
+            object QRlblRepParteDiario_PieDePagina: TQRLabel
+              Left = 4
+              Top = 3
+              Width = 154
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666670000
+                10.583333333333330000
+                7.937500000000000000
+                407.458333333333300000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'QRlblRepParteDiario_PieDePagina'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -9
+              Font.Name = 'Verdana'
+              Font.Style = [fsItalic]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
           end
         end
-      end
-      object TabDetalleMov: TTabSheet
-        Caption = 'Detalle Movimiento'
-        ImageIndex = 1
-        object Panel4: TPanel
+        object panel_cerrar: TPanel
           Left = 0
           Top = 0
-          Width = 1012
-          Height = 24
-          Align = alTop
-          BorderWidth = 4
+          Width = 1004
+          Height = 466
+          Align = alClient
           TabOrder = 0
           DesignSize = (
-            1012
-            24)
-          object lblEncabezadoDetMov: TLabel
-            Left = 5
-            Top = 1
+            1004
+            466)
+          object Label17: TLabel
+            Left = 8
+            Top = 240
+            Width = 153
+            Height = 13
+            Caption = 'SALDOS DE LAS CUENTAS'
+          end
+          object Label18: TLabel
+            Left = 296
+            Top = 41
+            Width = 212
+            Height = 13
+            Caption = 'INGRESOS Y EGRESOS POR MEDIOS'
+          end
+          object lbltotalIngresoEgreso: TLabel
+            Left = 297
+            Top = 233
             Width = 100
             Height = 14
             Caption = '                         '
@@ -2524,27 +2317,303 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object lblSucursalDetMov: TLabel
-            Left = 863
+          object GroupBox3: TGroupBox
+            Left = 9
+            Top = 57
+            Width = 281
+            Height = 175
+            Caption = ' MOVIMIENTOS '
+            Ctl3D = False
+            ParentCtl3D = False
+            TabOrder = 0
+            object Label15: TLabel
+              Left = 13
+              Top = 31
+              Width = 85
+              Height = 13
+              Caption = 'Saldo Inicial:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object DBText9: TDBText
+              Left = 112
+              Top = 27
+              Width = 129
+              Height = 17
+              Alignment = taRightJustify
+              DataField = 'SALDO_INICIAL'
+              DataSource = DS_estadistica_Parte_Diario
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clNavy
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label7: TLabel
+              Left = 13
+              Top = 63
+              Width = 55
+              Height = 13
+              Caption = 'Ingresos:'
+            end
+            object DBText10: TDBText
+              Left = 160
+              Top = 63
+              Width = 81
+              Height = 17
+              Alignment = taRightJustify
+              DataField = 'TOTAL_INGRESO'
+              DataSource = DS_estadistica_Parte_Diario
+            end
+            object Label8: TLabel
+              Left = 13
+              Top = 95
+              Width = 50
+              Height = 13
+              Caption = 'Egresos:'
+            end
+            object DBText11: TDBText
+              Left = 160
+              Top = 95
+              Width = 81
+              Height = 17
+              Alignment = taRightJustify
+              DataField = 'TOTAL_EGRESO'
+              DataSource = DS_estadistica_Parte_Diario
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object DBText19: TDBText
+              Left = 112
+              Top = 124
+              Width = 129
+              Height = 17
+              Alignment = taRightJustify
+              DataField = 'SALDO'
+              DataSource = DS_estadistica_Parte_Diario
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clNavy
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label16: TLabel
+              Left = 13
+              Top = 128
+              Width = 100
+              Height = 13
+              Caption = 'Saldo al Cierre:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+          end
+          object DBGrid4: TDBGrid
+            Left = 296
+            Top = 56
+            Width = 688
+            Height = 177
+            Anchors = [akLeft, akTop, akRight]
+            Color = 14606012
+            DataSource = DS_Estadistica_IE_Medios
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'DESCRIPCION'
+                Title.Caption = 'Medio'
+                Width = 290
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'TOTAL_INGRESO'
+                Title.Caption = 'Ingresos'
+                Width = 111
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'TOTAL_EGRESO'
+                Title.Caption = 'Egresos'
+                Width = 108
+                Visible = True
+              end>
+          end
+          object DBGrid3: TDBGrid
+            Left = 7
+            Top = 257
+            Width = 978
+            Height = 191
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            Color = 14606012
+            DataSource = DS_SaldosCuentas
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 2
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'CODIGO'
+                Title.Caption = 'Codigo'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOMBRE_CUENTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Cuenta'
+                Width = 428
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NRO_CTA_BANCO'
+                Title.Caption = 'Nro. Cuenta'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Saldo'
+                Width = 155
+                Visible = True
+              end>
+          end
+          object Panel3: TPanel
+            Left = 1
+            Top = 443
+            Width = 1002
+            Height = 22
+            Align = alBottom
+            BorderWidth = 4
+            TabOrder = 3
+            object lblSaldo_TotalParteDiario: TLabel
+              Left = 5
+              Top = 5
+              Width = 992
+              Height = 13
+              Align = alTop
+              Alignment = taRightJustify
+              Caption = 'lblSaldo_Total'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+            end
+          end
+          object Panel7: TPanel
+            Left = 1
             Top = 1
-            Width = 148
-            Height = 14
-            Alignment = taRightJustify
-            Anchors = [akTop, akRight]
-            Caption = '                                     '
+            Width = 1002
+            Height = 38
+            Align = alTop
+            BevelOuter = bvNone
+            BorderWidth = 4
+            TabOrder = 4
+            object lblSucursal: TLabel
+              Left = 4
+              Top = 17
+              Width = 994
+              Height = 13
+              Align = alTop
+              Caption = 'lblSucursal'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+            end
+            object lblEncabezadoParteDiario: TLabel
+              Left = 4
+              Top = 4
+              Width = 994
+              Height = 13
+              Align = alTop
+              Caption = 'lblEncabezadoParteDiario'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+            end
+          end
+        end
+      end
+      object TabDetalleMov: TTabSheet
+        Caption = 'Detalle Movimiento'
+        ImageIndex = 1
+        object Panel4: TPanel
+          Left = 0
+          Top = 0
+          Width = 1004
+          Height = 38
+          Align = alTop
+          BevelOuter = bvNone
+          BorderWidth = 4
+          TabOrder = 0
+          object lblSucursalDetMov: TLabel
+            Left = 4
+            Top = 17
+            Width = 996
+            Height = 13
+            Align = alTop
+            Caption = 'lblTotalSaldo'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -12
+            Font.Height = -11
             Font.Name = 'Verdana'
-            Font.Style = [fsBold]
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+          object lblEncabezadoDetMov: TLabel
+            Left = 4
+            Top = 4
+            Width = 996
+            Height = 13
+            Align = alTop
+            Caption = 'lblTotalSaldo'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
             ParentFont = False
           end
         end
         object DBGridEstadisticaDetMov: TDBGrid
           Left = 0
-          Top = 24
-          Width = 1012
-          Height = 448
+          Top = 38
+          Width = 1004
+          Height = 428
           Align = alClient
           Color = 14606012
           DataSource = DS_Estadistica_Det_Mov
@@ -2558,68 +2627,77 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           Columns = <
             item
               Expanded = False
-              FieldName = 'NUMERO_CPB'
-              Title.Caption = 'Num. Cpb.'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CODIGO'
-              Title.Caption = 'Codigo Cpb.'
-              Width = 86
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PUNTO_VENTA'
-              Title.Caption = 'Pto. Vta.'
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'FECHA'
+              Title.Alignment = taCenter
               Title.Caption = 'Fecha'
               Width = 69
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'NOMBRE_ENTIDAD'
-              Title.Caption = 'Entidad'
-              Width = 114
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'OBSERVACION'
-              Title.Caption = 'Observacion'
-              Width = 97
+              FieldName = 'TIPO_MOVIMIENTO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'TIPO_COMPROBANTE'
+              Title.Alignment = taCenter
               Title.Caption = 'Tipo Comprobante'
               Width = 128
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'TIPO_MOVIMIENTO'
-              Title.Caption = 'Tipo Movimiento'
+              FieldName = 'PUNTO_VENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'PV'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NUMERO_CPB'
+              Title.Alignment = taCenter
+              Title.Caption = 'N'#250'mero'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CODIGO'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'digo'
+              Width = 86
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_ENTIDAD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Entidad'
+              Width = 114
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'IMPORTE_VENTA'
+              Title.Alignment = taCenter
               Title.Caption = 'Importe'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'OBSERVACION'
+              Title.Alignment = taCenter
+              Title.Caption = 'Observaci'#243'n'
+              Width = 97
               Visible = True
             end>
         end
         object RepDetalleMov: TQuickRep
           Tag = 99
           Left = -10
-          Top = 77
+          Top = 85
           Width = 1123
           Height = 794
           Frame.Color = clBlack
@@ -2699,8 +2777,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
             BandType = rbPageHeader
-            object QRDBImage1: TQRDBImage
-              Left = 66
+            object QRDBLogo3: TQRDBImage
+              Left = 194
               Top = 2
               Width = 64
               Height = 64
@@ -2711,7 +2789,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 169.333333333333300000
-                174.625000000000000000
+                513.291666666666700000
                 5.291666666666667000
                 169.333333333333300000)
               DataField = 'LOGO'
@@ -2731,7 +2809,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 50.270833333333330000
                 1150.937500000000000000
                 124.354166666666700000
-                465.666666666666800000)
+                465.666666666666700000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -2762,7 +2840,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Size.Values = (
                 52.916666666666670000
                 1158.875000000000000000
-                68.791666666666680000
+                68.791666666666670000
                 449.791666666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -2817,12 +2895,12 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object QRBand3: TQRBand
             Tag = 99
             Left = 38
-            Top = 172
+            Top = 180
             Width = 1047
-            Height = 14
-            Frame.Color = clSilver
+            Height = 16
+            Frame.Color = clBlack
             Frame.DrawTop = False
-            Frame.DrawBottom = False
+            Frame.DrawBottom = True
             Frame.DrawLeft = False
             Frame.DrawRight = False
             AlignToBottom = False
@@ -2837,15 +2915,15 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewPage = False
             ParentFont = False
             Size.Values = (
-              37.041666666666670000
+              42.333333333333330000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
             BandType = rbDetail
             object QRDBText7: TQRDBText
-              Left = 5
+              Left = 499
               Top = 0
-              Width = 76
+              Width = 92
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -2854,10 +2932,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                13.229166666666670000
+                1320.270833333333000000
                 0.000000000000000000
-                201.083333333333300000)
-              Alignment = taLeftJustify
+                243.416666666666700000)
+              Alignment = taCenter
               AlignToBand = False
               AutoSize = False
               AutoStretch = False
@@ -2870,7 +2948,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 7
             end
             object QRDBText15: TQRDBText
-              Left = 86
+              Left = 412
               Top = 0
               Width = 76
               Height = 14
@@ -2881,10 +2959,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                227.541666666666700000
+                1090.083333333333000000
                 0.000000000000000000
                 201.083333333333300000)
-              Alignment = taLeftJustify
+              Alignment = taCenter
               AlignToBand = False
               AutoSize = False
               AutoStretch = False
@@ -2924,9 +3002,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 7
             end
             object QRDBText17: TQRDBText
-              Left = 167
+              Left = 361
               Top = 0
-              Width = 55
+              Width = 41
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -2935,10 +3013,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                441.854166666666700000
+                955.145833333333300000
                 0.000000000000000000
-                145.520833333333300000)
-              Alignment = taLeftJustify
+                108.479166666666700000)
+              Alignment = taCenter
               AlignToBand = False
               AutoSize = False
               AutoStretch = False
@@ -2951,9 +3029,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 7
             end
             object QRDBText18: TQRDBText
-              Left = 314
+              Left = 604
               Top = 0
-              Width = 295
+              Width = 302
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -2962,9 +3040,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                830.791666666666800000
+                1598.083333333333000000
                 0.000000000000000000
-                780.520833333333400000)
+                799.041666666666700000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = False
@@ -2978,9 +3056,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 7
             end
             object QRDBText20: TQRDBText
-              Left = 228
+              Left = 2
               Top = 0
-              Width = 81
+              Width = 148
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -2989,9 +3067,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                603.250000000000000000
+                5.291666666666667000
                 0.000000000000000000
-                214.312500000000000000)
+                391.583333333333300000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = False
@@ -3005,9 +3083,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 7
             end
             object QRDBText21: TQRDBText
-              Left = 618
+              Left = 162
               Top = 0
-              Width = 177
+              Width = 189
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -3016,9 +3094,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                1635.125000000000000000
+                428.625000000000000000
                 0.000000000000000000
-                468.312500000000100000)
+                500.062500000000000000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = False
@@ -3031,173 +3109,11 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 7
             end
-            object QRDBText22: TQRDBText
-              Left = 800
-              Top = 0
-              Width = 112
-              Height = 14
-              Frame.Color = clBlack
-              Frame.DrawTop = False
-              Frame.DrawBottom = False
-              Frame.DrawLeft = False
-              Frame.DrawRight = False
-              Size.Values = (
-                37.041666666666670000
-                2116.666666666667000000
-                0.000000000000000000
-                296.333333333333400000)
-              Alignment = taLeftJustify
-              AlignToBand = False
-              AutoSize = False
-              AutoStretch = False
-              Color = clWhite
-              DataSet = ZP_Estadistica_Det_Mov
-              DataField = 'TIPO_MOVIMIENTO'
-              Transparent = False
-              WordWrap = True
-              ExportAs = exptText
-              FontSize = 7
-            end
-          end
-          object QRBand4: TQRBand
-            Tag = 99
-            Left = 38
-            Top = 207
-            Width = 1047
-            Height = 24
-            Frame.Color = clBlack
-            Frame.DrawTop = True
-            Frame.DrawBottom = False
-            Frame.DrawLeft = False
-            Frame.DrawRight = False
-            AlignToBottom = False
-            Color = clWhite
-            TransparentBand = False
-            ForceNewColumn = False
-            ForceNewPage = False
-            Size.Values = (
-              63.500000000000000000
-              2770.187500000000000000)
-            PreCaluculateBandHeight = False
-            KeepOnOnePage = False
-            BandType = rbPageFooter
-            object QRLabel19: TQRLabel
-              Left = 957
-              Top = 3
-              Width = 39
-              Height = 20
-              Frame.Color = clBlack
-              Frame.DrawTop = False
-              Frame.DrawBottom = False
-              Frame.DrawLeft = False
-              Frame.DrawRight = False
-              Size.Values = (
-                52.916666666666670000
-                2532.062500000000000000
-                7.937500000000000000
-                103.187500000000000000)
-              Alignment = taLeftJustify
-              AlignToBand = False
-              AutoSize = True
-              AutoStretch = False
-              Caption = 'P'#225'gina:'
-              Color = clWhite
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -9
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-              Transparent = True
-              WordWrap = True
-              ExportAs = exptText
-              FontSize = 7
-            end
-            object QRSysData2: TQRSysData
-              Left = 999
-              Top = 3
-              Width = 45
-              Height = 20
-              Frame.Color = clBlack
-              Frame.DrawTop = False
-              Frame.DrawBottom = False
-              Frame.DrawLeft = False
-              Frame.DrawRight = False
-              Size.Values = (
-                52.916666666666660000
-                2643.187500000000000000
-                7.937500000000000000
-                119.062500000000000000)
-              Alignment = taLeftJustify
-              AlignToBand = False
-              AutoSize = False
-              Color = clWhite
-              Data = qrsPageNumber
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -9
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-              Transparent = True
-              ExportAs = exptText
-              FontSize = 7
-            end
-          end
-          object QRBand5: TQRBand
-            Tag = 99
-            Left = 38
-            Top = 186
-            Width = 1047
-            Height = 21
-            Frame.Color = clBlack
-            Frame.DrawTop = True
-            Frame.DrawBottom = False
-            Frame.DrawLeft = False
-            Frame.DrawRight = False
-            AlignToBottom = False
-            Color = clWhite
-            TransparentBand = False
-            ForceNewColumn = False
-            ForceNewPage = False
-            Size.Values = (
-              55.562500000000000000
-              2770.187500000000000000)
-            PreCaluculateBandHeight = False
-            KeepOnOnePage = False
-            BandType = rbSummary
-            object QRExpr1: TQRExpr
-              Left = 4
-              Top = 4
-              Width = 192
-              Height = 14
-              Frame.Color = clBlack
-              Frame.DrawTop = False
-              Frame.DrawBottom = False
-              Frame.DrawLeft = False
-              Frame.DrawRight = False
-              Size.Values = (
-                37.041666666666670000
-                10.583333333333330000
-                10.583333333333330000
-                508.000000000000000000)
-              Alignment = taLeftJustify
-              AlignToBand = False
-              AutoSize = True
-              AutoStretch = False
-              Color = clWhite
-              ResetAfterPrint = False
-              Transparent = False
-              WordWrap = True
-              Expression = #39'Cantidad de Registros: '#39'+COUNT'
-              ExportAs = exptText
-              FontSize = 8
-            end
           end
           object QRBand6: TQRBand
             Tag = 99
             Left = 38
-            Top = 123
+            Top = 110
             Width = 1047
             Height = 31
             Frame.Color = clBlack
@@ -3211,7 +3127,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333340000
+              82.020833333333330000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -3219,7 +3135,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object QRlblRepDetMov_CritBusqueda: TQRLabel
               Left = 5
               Top = 16
-              Width = 692
+              Width = 916
               Height = 13
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -3230,7 +3146,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 34.395833333333330000
                 13.229166666666670000
                 42.333333333333330000
-                1830.916666666667000000)
+                2423.583333333333000000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = False
@@ -3259,7 +3175,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawLeft = False
               Frame.DrawRight = False
               Size.Values = (
-                34.395833333333340000
+                34.395833333333330000
                 13.229166666666670000
                 5.291666666666667000
                 333.375000000000000000)
@@ -3281,10 +3197,209 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 7
             end
           end
-          object QRBand7: TQRBand
+          object QRGroup1: TQRGroup
             Tag = 99
             Left = 38
-            Top = 154
+            Top = 141
+            Width = 1047
+            Height = 21
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              55.562500000000000000
+              2770.187500000000000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            Expression = 'ZP_Estadistica_Det_Mov.TIPO_MOVIMIENTO'
+            FooterBand = QRGroupFooter
+            Master = RepDetalleMov
+            ReprintOnNewPage = False
+            object QRDBText22: TQRDBText
+              Left = 6
+              Top = 2
+              Width = 146
+              Height = 17
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                44.979166666666670000
+                15.875000000000000000
+                5.291666666666667000
+                386.291666666666700000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZP_Estadistica_Det_Mov
+              DataField = 'TIPO_MOVIMIENTO'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 10
+            end
+          end
+          object QRGroupFooter: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 196
+            Width = 1047
+            Height = 22
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              58.208333333333330000
+              2770.187500000000000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbGroupFooter
+          end
+          object PageFooterBand2: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 218
+            Width = 1047
+            Height = 24
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              63.500000000000000000
+              2770.187500000000000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbPageFooter
+            object QRlblRepDetalleMov_PieDePagina: TQRLabel
+              Left = 4
+              Top = 3
+              Width = 155
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666670000
+                10.583333333333330000
+                7.937500000000000000
+                410.104166666666700000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'QRlblRepDetalleMov_PieDePagina'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -9
+              Font.Name = 'Verdana'
+              Font.Style = [fsItalic]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+            object QRLabel18: TQRLabel
+              Left = 959
+              Top = 3
+              Width = 39
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666670000
+                2537.354166666667000000
+                7.937500000000000000
+                103.187500000000000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'P'#225'gina:'
+              Color = clWhite
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -9
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+            object QRSysData2: TQRSysData
+              Left = 1001
+              Top = 3
+              Width = 45
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666670000
+                2648.479166666667000000
+                7.937500000000000000
+                119.062500000000000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = False
+              Color = clWhite
+              Data = qrsPageNumber
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -9
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+          end
+          object ChildBand4: TQRChildBand
+            Tag = 99
+            Left = 38
+            Top = 162
             Width = 1047
             Height = 18
             Frame.Color = clBlack
@@ -3302,11 +3417,12 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
-            BandType = rbColumnHeader
-            object QRLabel23: TQRLabel
-              Left = 4
+            ParentBand = QRGroup1
+            PrintOrder = cboAfterParent
+            object QRLabel31: TQRLabel
+              Left = 162
               Top = 2
-              Width = 77
+              Width = 120
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -3315,14 +3431,14 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                10.583333333333330000
+                428.625000000000000000
                 5.291666666666667000
-                203.729166666666700000)
+                317.500000000000000000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = True
               AutoStretch = False
-              Caption = 'C'#243'digo Cpb.'
+              Caption = 'Tipo Comprobante'
               Color = clWhite
               Font.Charset = ANSI_CHARSET
               Font.Color = clWindowText
@@ -3335,10 +3451,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 8
             end
-            object QRLabel24: TQRLabel
-              Left = 86
+            object QRLabel28: TQRLabel
+              Left = 604
               Top = 2
-              Width = 66
+              Width = 50
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -3347,14 +3463,78 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                227.541666666666700000
+                1598.083333333333000000
                 5.291666666666667000
-                174.625000000000000000)
+                132.291666666666700000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = True
               AutoStretch = False
-              Caption = 'Num. Cpb.'
+              Caption = 'Entidad'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel27: TQRLabel
+              Left = 2
+              Top = 2
+              Width = 40
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                5.291666666666667000
+                5.291666666666667000
+                105.833333333333300000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Fecha'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel26: TQRLabel
+              Left = 361
+              Top = 2
+              Width = 41
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                955.145833333333300000
+                5.291666666666667000
+                108.479166666666700000)
+              Alignment = taCenter
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'PV'
               Color = clWhite
               Font.Charset = ANSI_CHARSET
               Font.Color = clWindowText
@@ -3399,10 +3579,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 8
             end
-            object QRLabel26: TQRLabel
-              Left = 167
+            object QRLabel24: TQRLabel
+              Left = 412
               Top = 2
-              Width = 55
+              Width = 76
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -3411,14 +3591,14 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                441.854166666666700000
+                1090.083333333333000000
                 5.291666666666667000
-                145.520833333333300000)
-              Alignment = taLeftJustify
+                201.083333333333300000)
+              Alignment = taCenter
               AlignToBand = False
-              AutoSize = True
+              AutoSize = False
               AutoStretch = False
-              Caption = 'Pto. Vta.'
+              Caption = 'N'#250'mero'
               Color = clWhite
               Font.Charset = ANSI_CHARSET
               Font.Color = clWindowText
@@ -3431,10 +3611,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 8
             end
-            object QRLabel27: TQRLabel
-              Left = 228
+            object QRLabel23: TQRLabel
+              Left = 499
               Top = 2
-              Width = 40
+              Width = 92
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -3443,14 +3623,14 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                603.250000000000000000
+                1320.270833333333000000
                 5.291666666666667000
-                105.833333333333300000)
-              Alignment = taLeftJustify
+                243.416666666666700000)
+              Alignment = taCenter
               AlignToBand = False
-              AutoSize = True
+              AutoSize = False
               AutoStretch = False
-              Caption = 'Fecha'
+              Caption = 'C'#243'digo'
               Color = clWhite
               Font.Charset = ANSI_CHARSET
               Font.Color = clWindowText
@@ -3463,125 +3643,6 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 8
             end
-            object QRLabel28: TQRLabel
-              Left = 314
-              Top = 2
-              Width = 50
-              Height = 14
-              Frame.Color = clBlack
-              Frame.DrawTop = False
-              Frame.DrawBottom = False
-              Frame.DrawLeft = False
-              Frame.DrawRight = False
-              Size.Values = (
-                37.041666666666670000
-                830.791666666666800000
-                5.291666666666667000
-                132.291666666666700000)
-              Alignment = taLeftJustify
-              AlignToBand = False
-              AutoSize = True
-              AutoStretch = False
-              Caption = 'Entidad'
-              Color = clWhite
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-              Transparent = True
-              WordWrap = True
-              ExportAs = exptText
-              FontSize = 8
-            end
-            object QRLabel31: TQRLabel
-              Left = 618
-              Top = 2
-              Width = 120
-              Height = 14
-              Frame.Color = clBlack
-              Frame.DrawTop = False
-              Frame.DrawBottom = False
-              Frame.DrawLeft = False
-              Frame.DrawRight = False
-              Size.Values = (
-                37.041666666666670000
-                1635.125000000000000000
-                5.291666666666667000
-                317.500000000000000000)
-              Alignment = taLeftJustify
-              AlignToBand = False
-              AutoSize = True
-              AutoStretch = False
-              Caption = 'Tipo Comprobante'
-              Color = clWhite
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-              Transparent = True
-              WordWrap = True
-              ExportAs = exptText
-              FontSize = 8
-            end
-            object QRLabel32: TQRLabel
-              Left = 800
-              Top = 2
-              Width = 108
-              Height = 14
-              Frame.Color = clBlack
-              Frame.DrawTop = False
-              Frame.DrawBottom = False
-              Frame.DrawLeft = False
-              Frame.DrawRight = False
-              Size.Values = (
-                37.041666666666670000
-                2116.666666666667000000
-                5.291666666666667000
-                285.750000000000000000)
-              Alignment = taLeftJustify
-              AlignToBand = False
-              AutoSize = True
-              AutoStretch = False
-              Caption = 'Tipo Movimiento'
-              Color = clWhite
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-              Transparent = True
-              WordWrap = True
-              ExportAs = exptText
-              FontSize = 8
-            end
-          end
-          object ChildBand4: TQRChildBand
-            Left = 38
-            Top = 110
-            Width = 1047
-            Height = 13
-            Frame.Color = clBlack
-            Frame.DrawTop = True
-            Frame.DrawBottom = True
-            Frame.DrawLeft = False
-            Frame.DrawRight = False
-            AlignToBottom = False
-            Color = clSilver
-            TransparentBand = False
-            ForceNewColumn = False
-            ForceNewPage = False
-            Size.Values = (
-              34.395833333333340000
-              2770.187500000000000000)
-            PreCaluculateBandHeight = False
-            KeepOnOnePage = False
-            ParentBand = QRBand2
-            PrintOrder = cboAfterParent
           end
         end
       end
@@ -3590,16 +3651,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         ImageIndex = 2
         object Panel5: TPanel
           Left = 0
-          Top = 364
-          Width = 893
+          Top = 444
+          Width = 1004
           Height = 22
           Align = alBottom
           BorderWidth = 4
           TabOrder = 0
           object Label4: TLabel
-            Left = 795
+            Left = 5
             Top = 5
-            Width = 93
+            Width = 994
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -3615,15 +3676,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object Panel6: TPanel
           Left = 0
           Top = 0
-          Width = 893
+          Width = 1004
           Height = 38
           Align = alTop
+          BevelOuter = bvNone
           BorderWidth = 4
           TabOrder = 1
           object Label5: TLabel
-            Left = 5
-            Top = 18
-            Width = 85
+            Left = 4
+            Top = 17
+            Width = 996
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -3635,9 +3697,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ParentFont = False
           end
           object Label6: TLabel
-            Left = 5
-            Top = 5
-            Width = 85
+            Left = 4
+            Top = 4
+            Width = 996
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -3652,8 +3714,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object DBGrid2: TDBGrid
           Left = 0
           Top = 38
-          Width = 893
-          Height = 326
+          Width = 1004
+          Height = 406
           Align = alClient
           Color = 14606012
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -3670,7 +3732,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4797,9 +4859,11 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
     end
     object ZP_Estadistica_Det_MovNUMERO_CPB: TIntegerField
       FieldName = 'NUMERO_CPB'
+      DisplayFormat = '00000000'
     end
     object ZP_Estadistica_Det_MovPUNTO_VENTA: TIntegerField
       FieldName = 'PUNTO_VENTA'
+      DisplayFormat = '0000'
     end
     object ZP_Estadistica_Det_MovCODIGO: TStringField
       FieldName = 'CODIGO'
@@ -4870,39 +4934,39 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
     Grilla = DBGridEstadisticaDetMov
     Filtros = <
       item
-        TituloColumna = 'NUMERO_CPB'
+        TituloColumna = 'Fecha'
         Visible = True
       end
       item
-        TituloColumna = 'CODIGO'
+        TituloColumna = 'Tipo'
         Visible = True
       end
       item
-        TituloColumna = 'PUNTO_VENTA'
+        TituloColumna = 'Tipo Comprobante'
         Visible = True
       end
       item
-        TituloColumna = 'FECHA'
+        TituloColumna = 'PV'
         Visible = True
       end
       item
-        TituloColumna = 'NOMBRE_ENTIDAD'
+        TituloColumna = 'N'#250'mero'
         Visible = True
       end
       item
-        TituloColumna = 'OBSERVACION'
+        TituloColumna = 'C'#243'digo'
         Visible = True
       end
       item
-        TituloColumna = 'TIPO_COMPROBANTE'
+        TituloColumna = 'Entidad'
         Visible = True
       end
       item
-        TituloColumna = 'TIPO_MOVIMIENTO'
+        TituloColumna = 'Importe'
         Visible = True
       end
       item
-        TituloColumna = 'IMPORTE_VENTA'
+        TituloColumna = 'Observaci'#243'n'
         Visible = True
       end>
     NombreGuardar = 'EstDispDetMov'
@@ -4917,13 +4981,13 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object EKVista_RepParteDiario: TEKVistaPreviaQR
     Reporte = RepParteDiario
     ShowModal = False
-    Left = 278
-    Top = 390
+    Left = 294
+    Top = 406
   end
   object EKVista_RepDetMov: TEKVistaPreviaQR
     Reporte = RepDetalleMov
     ShowModal = False
-    Left = 469
-    Top = 73
+    Left = 373
+    Top = 65
   end
 end

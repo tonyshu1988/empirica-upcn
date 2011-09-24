@@ -98,7 +98,6 @@ type
     EKVista_RepSaldo: TEKVistaPreviaQR;
     TabParteDiario: TTabSheet;
     panel_cerrar: TPanel;
-    lblEncabezadoParteDiario: TLabel;
     Label17: TLabel;
     Label18: TLabel;
     GroupBox3: TGroupBox;
@@ -124,8 +123,6 @@ type
     DS_estadistica_Parte_Diario: TDataSource;
     DS_Estadistica_IE_Medios: TDataSource;
     DBGrid3: TDBGrid;
-    lblSaldo_TotalParteDiario: TLabel;
-    lblSucursal: TLabel;
     EKDbSuma_ParteDiario: TEKDbSuma;
     lbltotalIngresoEgreso: TLabel;
     ZP_Estadistica_Det_Mov: TZStoredProc;
@@ -140,8 +137,6 @@ type
     ZP_Estadistica_Det_MovTIPO_MOVIMIENTO: TStringField;
     ZP_Estadistica_Det_MovNOMBRE_ENTIDAD: TStringField;
     EKBuscarDetMov: TEKBusquedaAvanzada;
-    lblEncabezadoDetMov: TLabel;
-    lblSucursalDetMov: TLabel;
     EKOrdenarGrillaDetMov: TEKOrdenarGrilla;
     RepParteDiario: TQuickRep;
     QRBand14: TQRBand;
@@ -185,7 +180,7 @@ type
     QRLabelSucursalParteDiario: TQRLabel;
     RepDetalleMov: TQuickRep;
     QRBand2: TQRBand;
-    QRDBImage1: TQRDBImage;
+    QRDBLogo3: TQRDBImage;
     QRLabel8: TQRLabel;
     RepDetalleMov_Subtitulo: TQRLabel;
     RepDetalleMov_Titulo: TQRLabel;
@@ -194,32 +189,40 @@ type
     QRDBText15: TQRDBText;
     QRDBText16: TQRDBText;
     QRDBText17: TQRDBText;
-    QRBand4: TQRBand;
-    QRLabel19: TQRLabel;
-    QRSysData2: TQRSysData;
-    QRBand5: TQRBand;
-    QRExpr1: TQRExpr;
     QRBand6: TQRBand;
     QRlblRepDetMov_CritBusqueda: TQRLabel;
     QRLabel22: TQRLabel;
-    QRBand7: TQRBand;
-    QRLabel23: TQRLabel;
-    QRLabel24: TQRLabel;
-    QRLabel25: TQRLabel;
-    QRLabel26: TQRLabel;
     QRDBText18: TQRDBText;
     QRDBText20: TQRDBText;
-    QRLabel27: TQRLabel;
-    QRLabel28: TQRLabel;
     QRDBText21: TQRDBText;
-    QRLabel31: TQRLabel;
-    QRDBText22: TQRDBText;
-    QRLabel32: TQRLabel;
     EKVista_RepDetMov: TEKVistaPreviaQR;
     PageFooterBand1: TQRBand;
     QRLabel15: TQRLabel;
     QRSysData3: TQRSysData;
+    QRGroup1: TQRGroup;
+    QRDBText22: TQRDBText;
+    QRGroupFooter: TQRBand;
+    PageFooterBand2: TQRBand;
     ChildBand4: TQRChildBand;
+    QRLabel31: TQRLabel;
+    QRLabel28: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRLabel26: TQRLabel;
+    QRLabel25: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRlblRepDetalleMov_PieDePagina: TQRLabel;
+    QRLabel18: TQRLabel;
+    QRSysData2: TQRSysData;
+    QRDBLogo2: TQRDBImage;
+    QRlblRepParteDiario_PieDePagina: TQRLabel;
+    lblEncabezadoDetMov: TLabel;
+    lblSucursalDetMov: TLabel;
+    Panel3: TPanel;
+    lblSaldo_TotalParteDiario: TLabel;
+    Panel7: TPanel;
+    lblSucursal: TLabel;
+    lblEncabezadoParteDiario: TLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -244,6 +247,10 @@ uses UDM, UPrincipal;
 
 procedure TFEstadisticaDisponibilidades.FormCreate(Sender: TObject);
 begin
+  QRDBLogo.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo2.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo3.DataSet:= dm.ZQ_Sucursal;
+
   TabSheet3.TabVisible:= false;
 
   PageControl.ActivePageIndex:= 0;
@@ -252,6 +259,12 @@ begin
   lblSaldo_Total.Caption:= '';
   lblSaldo_Encabezado1.Caption:= '';
   lblSaldo_Encabezado2.Caption:= '';
+  lblEncabezadoParteDiario.Caption := '';
+  lblSaldo_TotalParteDiario.Caption := '';
+  lblSucursal.Caption := '';
+  lbltotalIngresoEgreso.Caption := '';
+  lblEncabezadoDetMov.Caption := '';
+  lblSucursalDetMov.Caption := '';
 
   TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
 
@@ -271,18 +284,12 @@ end;
 
 procedure TFEstadisticaDisponibilidades.btnBuscarClick(Sender: TObject);
 begin
-  lblSaldo_Total.Caption := '';
-  lblSaldo_Encabezado2.Caption := '';
-  lblSaldo_Encabezado1.Caption := '';
-  lblEncabezadoParteDiario.Caption := '';
-  lblSaldo_TotalParteDiario.Caption := '';
-  lblSucursal.Caption := '';
-  lbltotalIngresoEgreso.Caption := '';
-  lblEncabezadoDetMov.Caption := '';
-  lblSucursalDetMov.Caption := '';
-
   if PageControl.ActivePage.Name = 'TabSaldosCuentas' then
   begin
+    lblSaldo_Total.Caption := '';
+    lblSaldo_Encabezado2.Caption := '';
+    lblSaldo_Encabezado1.Caption := '';
+
     if  EKBuscarSaldo.BuscarSinEjecutar then
       if EKBuscarSaldo.ParametrosSeleccionados1[1] = '' then
       begin
@@ -308,6 +315,11 @@ begin
 
   if PageControl.ActivePage.Name = 'TabParteDiario' then
   begin
+    lblEncabezadoParteDiario.Caption := '';
+    lblSaldo_TotalParteDiario.Caption := '';
+    lblSucursal.Caption := '';
+    lbltotalIngresoEgreso.Caption := '';
+
     if  EKBuscarParteDiario.BuscarSinEjecutar then
       if (EKBuscarParteDiario.ParametrosSeleccionados1[0] = '') or (EKBuscarParteDiario.ParametrosSeleccionados1[1] = '') then
       begin
@@ -357,6 +369,9 @@ begin
 
   if PageControl.ActivePage.Name = 'TabDetalleMov' then
   begin
+    lblEncabezadoDetMov.Caption := '';
+    lblSucursalDetMov.Caption := '';
+
     if  EKBuscarDetMov.BuscarSinEjecutar then
       if (EKBuscarDetMov.ParametrosSeleccionados1[0] = '') or (EKBuscarDetMov.ParametrosSeleccionados1[1] = '') then
       begin
@@ -385,7 +400,7 @@ begin
         lblEncabezadoDetMov.Caption:= 'Detalles Movimientos: Desde el '+EKBuscarDetMov.ParametrosSeleccionados1[0]+' al '+EKBuscarDetMov.ParametrosSeleccionados1[1];
       end;
   end;
-  
+
 end;
 
 
@@ -406,6 +421,7 @@ begin
     EKVista_RepSaldo.VistaPrevia;
   end;
 
+
   if PageControl.ActivePage.Name = 'TabParteDiario' then
   begin
     if ZP_SaldosCuentas.IsEmpty or ZP_estadistica_Parte_Diario.IsEmpty or ZP_Estadistica_IE_Medios.IsEmpty then
@@ -421,6 +437,7 @@ begin
     QRLabelEncabezadoParteDiario.Caption:= 'Parte Diario: Desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[0]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[1];
     QRLabelImporteSaldo.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_Saldo.SumCollection.Items[0].SumValue);
     QRLabeltotalIngresoEgreso.Caption:= 'Total Ingresos:  '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[0].SumValue)+'                     Total Egresos:  '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[1].SumValue);
+    QRlblRepParteDiario_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
 
     EKVista_RepParteDiario.VistaPrevia;
   end;
@@ -431,10 +448,15 @@ begin
     if ZP_Estadistica_Det_Mov.IsEmpty then
       exit;
 
+    ZP_Estadistica_Det_Mov.SortedFields:= 'TIPO_MOVIMIENTO, FECHA';
+
     DM.VariablesReportes(RepDetalleMov);
     QRlblRepDetMov_CritBusqueda.Caption := EKBuscarDetMov.ParametrosBuscados;
+    QRlblRepDetalleMov_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
 
     EKVista_RepDetMov.VistaPrevia;
+
+    ZP_Estadistica_Det_Mov.SortedFields:= 'FECHA';    
   end;
 
 end;
