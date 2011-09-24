@@ -234,6 +234,8 @@ type
     Label10: TLabel;
     Label13: TLabel;
     Label14: TLabel;
+    ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
+    ZQ_ComprobanteIMAGEN: TBlobField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -480,6 +482,7 @@ begin
   EKSuma_FPago.RecalcAll;
   ZQ_ComprobanteBASE_IMPONIBLE.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue;
   ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= ZQ_ComprobanteBASE_IMPONIBLE.AsFloat;
+  ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteBASE_IMPONIBLE.AsFloat;
 
   fecha:= FormatDateTime('DD/MM/YYYY' ,ZQ_ComprobanteFECHA.AsDateTime);
   try
