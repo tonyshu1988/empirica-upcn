@@ -2,18 +2,8 @@ object DM: TDM
   OldCreateOrder = False
   Left = 458
   Top = 291
-  Height = 192
-  Width = 320
-  object ZC_Remoto: TZConnection
-    Protocol = 'firebird-1.5'
-    HostName = '127.0.0.1'
-    Database = 'E:\SIGEFA\SIGEFA_SERVER.FDB'
-    User = 'sysdba'
-    Password = 'masterkey'
-    AutoCommit = False
-    Left = 40
-    Top = 8
-  end
+  Height = 294
+  Width = 407
   object ZC_Local: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
@@ -10603,11 +10593,6 @@ object DM: TDM
     Left = 208
     Top = 16
   end
-  object ModeloRemoto: TEKModeloTransaccion
-    Coneccion = ZC_Remoto
-    Left = 208
-    Top = 64
-  end
   object SkinData1: TSkinData
     Active = True
     DisableTag = 99
@@ -12042,5 +12027,18 @@ object DM: TDM
       70CC28F95FA16FA147A9A91E15009405B4BFB3E29C6147E27E95C4651ED4C0E6
       2E0126CEB21FC3E739128FC7FF4B994A3DEC4FC77D7015F8A36202BE954F2425
       3CDED3E6B2DF64A94795F05BBC1C2CD90DD08F9A1478}
+  end
+  object IdFTP1: TIdFTP
+    IPVersion = Id_IPv4
+    Host = '174.132.76.2'
+    Password = 'grupo78gua'
+    Username = 'grupogua'
+    NATKeepAlive.UseKeepAlive = False
+    NATKeepAlive.IdleTimeMS = 0
+    NATKeepAlive.IntervalMS = 0
+    ProxySettings.ProxyType = fpcmNone
+    ProxySettings.Port = 0
+    Left = 172
+    Top = 80
   end
 end
