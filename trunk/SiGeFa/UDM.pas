@@ -10,7 +10,7 @@ uses
   IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage, ExtCtrls,
   IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
   IdSMTPBase, IdExplicitTLSClientServerBase, StdCtrls, EKIni, Graphics,
-  IdIMAP4;
+  IdIMAP4, Grids, DBGrids;
 
 type
   TDM = class(TDataModule)
@@ -87,7 +87,7 @@ type
   public
     colorCampoRequido: TColor;
     provinciaPorDefecto: integer;
-    procedure prepararParaExportar(valor: Boolean);
+    procedure ExportarEXCEL(grilla: TDBGrid);
     procedure mostrarCantidadRegistro(query: TDataSet; var etiqueta: TLabel);
     procedure cargarReporteSucursal(idSucursal: integer);
     procedure configVariables();
@@ -365,20 +365,20 @@ end;
 //PROCEDIMIENTO PARA EJECUTAR ANTES DE EXPORTAR LAS GRILLAS A EXCEL.
 //LO QUE HACE ES SACAR LOS CURRENCIS DE LOS CAMPOS FLOAT Y DESPUES
 //LOS VUELVE A SETEAR
-procedure TDM.prepararParaExportar(valor: Boolean);
+procedure TDM.ExportarEXCEL(grilla: Tdbgrid);
 begin
-  if (valor = true) then  //seteo para exportar a excel
-  begin
-    ThousandSeparator:= #0;
-    CurrencyString:= #0;
-    CurrencyFormat := 0;
-  end
-  else
-  begin //vuelvo a la configuracion original antes de exportar
-    CurrencyString := '$';
-    CurrencyFormat := 2;
-    ThousandSeparator := ',';
-  end;
+  //seteo para exportar a excel
+//  ThousandSeparator:= #0;
+//  CurrencyString:= #0;
+//  CurrencyFormat := 0;
+
+  ExcelExport.DBGrid:= grilla;
+  ExcelExport.Select;
+
+  //vuelvo a la configuracion original antes de exportar
+//  CurrencyString := '$';
+//  CurrencyFormat := 2;
+//  ThousandSeparator := ',';
 end;
 
 

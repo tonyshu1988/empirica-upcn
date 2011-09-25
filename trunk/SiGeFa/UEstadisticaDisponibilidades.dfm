@@ -1072,9 +1072,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 9
             end
             object QRLabel68: TQRLabel
-              Left = 315
+              Left = 307
               Top = 47
-              Width = 86
+              Width = 102
               Height = 18
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -1083,14 +1083,14 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 47.625000000000000000
-                833.437500000000000000
+                812.270833333333300000
                 124.354166666666700000
-                227.541666666666700000)
+                269.875000000000000000)
               Alignment = taCenter
               AlignToBand = False
               AutoSize = True
               AutoStretch = False
-              Caption = 'Parte Diario'
+              Caption = 'PARTE DIARIO'
               Color = clWhite
               Font.Charset = ANSI_CHARSET
               Font.Color = clWindowText
@@ -2553,7 +2553,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 Left = 0
                 Top = 0
                 Width = 700
-                Height = 18
+                Height = 13
                 Align = alTop
                 Caption = 'INGRESOS Y EGRESOS POR MEDIOS'
                 Font.Charset = DEFAULT_CHARSET
@@ -2565,9 +2565,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               end
               object DBGridPD_MediosDePago: TDBGrid
                 Left = 0
-                Top = 18
+                Top = 13
                 Width = 700
-                Height = 178
+                Height = 183
                 Align = alClient
                 Color = 14606012
                 DataSource = DS_Estadistica_IE_Medios
@@ -2822,9 +2822,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Stretch = True
             end
             object QRLabel8: TQRLabel
-              Left = 435
+              Left = 414
               Top = 47
-              Width = 176
+              Width = 218
               Height = 19
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -2833,14 +2833,14 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 50.270833333333330000
-                1150.937500000000000000
+                1095.375000000000000000
                 124.354166666666700000
-                465.666666666666700000)
+                576.791666666666700000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
               AutoStretch = False
-              Caption = 'Detalle Movimientos'
+              Caption = 'DETALLE MOVIMIENTOS'
               Color = clWhite
               Font.Charset = ANSI_CHARSET
               Font.Color = clWindowText
@@ -3832,9 +3832,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           BorderWidth = 4
           TabOrder = 0
           object Label4: TLabel
-            Left = 5
+            Left = 924
             Top = 5
-            Width = 1012
+            Width = 93
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -3859,7 +3859,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Label5: TLabel
             Left = 4
             Top = 17
-            Width = 1014
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -3873,7 +3873,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Label6: TLabel
             Left = 4
             Top = 4
-            Width = 1014
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
