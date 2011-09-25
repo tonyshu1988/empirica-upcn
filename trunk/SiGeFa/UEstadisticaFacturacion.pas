@@ -13,7 +13,7 @@ type
     PanelContenedor: TPanel;
     DS_Comprobante: TDataSource;
     Panel1: TPanel;
-    DBGridProducto: TDBGrid;
+    DBGridComprobantes: TDBGrid;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
@@ -84,8 +84,8 @@ type
     ZQ_Comprobante_FormaPagoIF: TStringField;
     PanelFiltro: TPanel;
     BtnFiltro_Todos: TSpeedButton;
-    BtnFiltro_Hoy: TSpeedButton;
-    BtnFiltro_EstaSemana: TSpeedButton;
+    BtnFiltro_Fiscal: TSpeedButton;
+    BtnFiltro_NoFiscal: TSpeedButton;
     Label39: TLabel;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
@@ -109,10 +109,10 @@ type
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
-    procedure BtnFiltro_TodosClick(Sender: TObject);
-    procedure BtnFiltro_HoyClick(Sender: TObject);
-    procedure BtnFiltro_EstaSemanaClick(Sender: TObject);
     procedure btnExportarXLSClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure AplicarFiltro(Sender: TObject);
   private
     { Private declarations }
   public
@@ -122,89 +122,115 @@ type
 var
   FEstadisticasFacturacion: TFEstadisticasFacturacion;
   where:String;
+
 implementation
 
-uses UDM;
+uses UDM, UPrincipal;
 
 {$R *.dfm}
 
 procedure TFEstadisticasFacturacion.btnSalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
 
 procedure TFEstadisticasFacturacion.btnBuscarClick(Sender: TObject);
 begin
-
-  ZQ_Comprobante.Close;
-  ZQ_Comprobante.SQL[11]:=Format('where (c.ID_TIPO_CPB=11) %s',[where]);
-  EKBuscarComprobantes.SQL_Where[0]:=ZQ_Comprobante.SQL[11];
-
+  EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB=11) %s',[where]);
   EKBuscarComprobantes.Buscar;
 end;
 
-procedure TFEstadisticasFacturacion.ZQ_ComprobanteAfterScroll(
-  DataSet: TDataSet);
+
+procedure TFEstadisticasFacturacion.ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
 var
-filtro:String;
+  filtro: String;
 begin
-  if where<>'' then
-   filtro:=Format('(id_comprobante=%d) and ("IF"=%s)',[ZQ_ComprobanteID_COMPROBANTE.AsInteger,QuotedStr('N')])
+  if where <> '' then
+  begin
+    if BtnFiltro_NoFiscal.Down then
+      filtro:= Format('(id_comprobante = %d) and ("IF" = %s)', [ZQ_ComprobanteID_COMPROBANTE.AsInteger,QuotedStr('N')])
+    else
+      if BtnFiltro_Fiscal.Down then
+        filtro:= Format('(id_comprobante = %d) and ("IF" = %s)', [ZQ_ComprobanteID_COMPROBANTE.AsInteger,QuotedStr('S')]);
+  end
   else
-   filtro:=Format('(id_comprobante=%d)',[ZQ_ComprobanteID_COMPROBANTE.AsInteger]);
-   
+   filtro:= Format('(id_comprobante = %d)',[ZQ_ComprobanteID_COMPROBANTE.AsInteger]);
+
   ZQ_Comprobante_FormaPago.Filtered:=False;
   ZQ_Comprobante_FormaPago.Filter:=filtro;
   ZQ_Comprobante_FormaPago.Filtered:=True;
 
   ZQ_ComprobanteDetalle.Filtered:=False;
-  ZQ_ComprobanteDetalle.Filter:=Format('(id_comprobante=%d)',[ZQ_ComprobanteID_COMPROBANTE.AsInteger]);
+  ZQ_ComprobanteDetalle.Filter:=Format('(id_comprobante = %d)',[ZQ_ComprobanteID_COMPROBANTE.AsInteger]);
   ZQ_ComprobanteDetalle.Filtered:=True;
-
 end;
 
 
 procedure TFEstadisticasFacturacion.FormCreate(Sender: TObject);
 begin
-ZQ_Comprobante_FormaPago.Open;
-ZQ_ComprobanteDetalle.Open;
+  EKOrdenarGrilla1.CargarConfigColumnas;
+  EKOrdenarGrilla2.CargarConfigColumnas;
+  EKOrdenarGrilla3.CargarConfigColumnas;
 
-// Permiso para ver o no los filtros de Fiscal
-//PanelFiltro.Visible:=dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
-BtnFiltro_Hoy.Click;
+  ZQ_Comprobante_FormaPago.Open;
+  ZQ_ComprobanteDetalle.Open;
+
+  //Permiso para ver o no los filtros de Fiscal
+//  PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
+//  BtnFiltro_Fiscal.Click;
 end;
 
-procedure TFEstadisticasFacturacion.EKDbSuma1SumListChanged(
-  Sender: TObject);
+
+procedure TFEstadisticasFacturacion.EKDbSuma1SumListChanged(Sender: TObject);
 begin
-lblComprobantes.Caption := FormatFloat('Total Comprobantes: $ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+  lblComprobantes.Caption := FormatFloat('Total Comprobantes: $ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
 end;
 
-procedure TFEstadisticasFacturacion.BtnFiltro_TodosClick(Sender: TObject);
-begin
-  where:='';
-end;
 
-procedure TFEstadisticasFacturacion.BtnFiltro_HoyClick(Sender: TObject);
+procedure TFEstadisticasFacturacion.AplicarFiltro(Sender: TObject);
 begin
-  where:=Format(' and (tfp."IF"=%s)',[QuotedStr('S')]);
-end;
+  if TSpeedButton (Sender).Name = 'BtnFiltro_Todos' then
+  begin
+    where:='';
+  end;
 
-procedure TFEstadisticasFacturacion.BtnFiltro_EstaSemanaClick(
-  Sender: TObject);
-begin
-  where:=Format(' and (tfp."IF"=%s)',[QuotedStr('N')]);
+  if TSpeedButton (Sender).Name = 'BtnFiltro_Fiscal' then
+  begin
+    where:=Format(' and (tfp."IF" = %s)',[QuotedStr('S')]);
+  end;
+
+  if TSpeedButton (Sender).Name = 'BtnFiltro_NoFiscal' then
+  begin
+    where:=Format(' and (tfp."IF" = %s)',[QuotedStr('N')]);
+  end;
+
+  EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB=11) %s', [where]);
+  EKBuscarComprobantes.Buscar;
 end;
 
 procedure TFEstadisticasFacturacion.btnExportarXLSClick(Sender: TObject);
 begin
-
   if not ZQ_Comprobante.IsEmpty then
   begin
     //dm.prepararParaExportar(true);
     mxDBGridExport.Select;
     //dm.prepararParaExportar(false);
   end
+end;
+
+
+procedure TFEstadisticasFacturacion.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
+  EKOrdenarGrilla2.GuardarConfigColumnas;
+  EKOrdenarGrilla3.GuardarConfigColumnas;
+end;
+
+
+procedure TFEstadisticasFacturacion.DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(TDBGrid(Sender), Rect, DataCol, Column, State);
 end;
 
 end.

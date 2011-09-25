@@ -1,8 +1,8 @@
 object FEstadisticasFacturacion: TFEstadisticasFacturacion
-  Left = 168
-  Top = 57
-  Width = 1061
-  Height = 668
+  Left = 258
+  Top = 140
+  Width = 1011
+  Height = 611
   Caption = 'Estadisticas Facturacion'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,44 +14,45 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   OldCreateOrder = False
   Position = poDefault
   Visible = True
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1045
-    Height = 578
+    Width = 995
+    Height = 521
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object Panel5: TPanel
       Left = 1
       Top = 25
-      Width = 1043
-      Height = 552
+      Width = 993
+      Height = 495
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 697
+        Left = 647
         Top = 1
         Width = 8
-        Height = 550
+        Height = 493
         Align = alRight
       end
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 696
-        Height = 550
+        Width = 646
+        Height = 493
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object lblComprobantes: TLabel
           Left = 1
-          Top = 520
-          Width = 694
+          Top = 463
+          Width = 644
           Height = 29
           Align = alBottom
           Alignment = taRightJustify
@@ -68,13 +69,13 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
           Transparent = False
           Layout = tlCenter
         end
-        object DBGridProducto: TDBGrid
+        object DBGridComprobantes: TDBGrid
           Left = 1
           Top = 1
-          Width = 694
-          Height = 519
+          Width = 644
+          Height = 462
           Align = alClient
-          Color = 16762303
+          Color = 14606012
           DataSource = DS_Comprobante
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -90,10 +91,12 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DrawColumnCell
           Columns = <
             item
               Expanded = False
               FieldName = 'CODIGO'
+              Title.Alignment = taCenter
               Title.Caption = 'C'#243'digo'
               Width = 85
               Visible = True
@@ -101,6 +104,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             item
               Expanded = False
               FieldName = 'FECHA'
+              Title.Alignment = taCenter
               Title.Caption = 'Fecha'
               Width = 72
               Visible = True
@@ -108,6 +112,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             item
               Expanded = False
               FieldName = 'TIPOCOMPR_'
+              Title.Alignment = taCenter
               Title.Caption = 'Tipo'
               Width = 113
               Visible = True
@@ -115,6 +120,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             item
               Expanded = False
               FieldName = 'CLIENTE_'
+              Title.Alignment = taCenter
               Title.Caption = 'Cliente'
               Width = 168
               Visible = True
@@ -122,6 +128,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             item
               Expanded = False
               FieldName = 'IMPORTEVENTA_'
+              Title.Alignment = taCenter
               Title.Caption = 'Importe Venta'
               Width = 95
               Visible = True
@@ -129,6 +136,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             item
               Expanded = False
               FieldName = 'SUC_'
+              Title.Alignment = taCenter
               Title.Caption = 'Sucursal'
               Width = 163
               Visible = True
@@ -136,12 +144,14 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             item
               Expanded = False
               FieldName = 'TIVA_'
+              Title.Alignment = taCenter
               Title.Caption = 'Tipo IVA'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'VENDEDOR_'
+              Title.Alignment = taCenter
               Title.Caption = 'Vendedor'
               Width = 193
               Visible = True
@@ -149,16 +159,16 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         end
       end
       object Panel2: TPanel
-        Left = 705
+        Left = 655
         Top = 1
         Width = 337
-        Height = 550
+        Height = 493
         Align = alRight
         Caption = 'Panel2'
         TabOrder = 1
         object Splitter2: TSplitter
           Left = 1
-          Top = 410
+          Top = 353
           Width = 335
           Height = 8
           Cursor = crVSplit
@@ -168,7 +178,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
           Left = 1
           Top = 1
           Width = 335
-          Height = 409
+          Height = 352
           Align = alClient
           Caption = 'Panel3'
           TabOrder = 0
@@ -176,16 +186,16 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             Left = 1
             Top = 1
             Width = 333
-            Height = 407
+            Height = 350
             Align = alClient
-            Color = 16762303
+            Color = 14606012
             DataSource = DS_ComprobanteDetalle
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'Verdana'
             Font.Style = []
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
@@ -193,10 +203,12 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
+            OnDrawColumnCell = DrawColumnCell
             Columns = <
               item
                 Expanded = False
                 FieldName = 'ID_PRODUCTO'
+                Title.Alignment = taCenter
                 Title.Caption = 'ID'
                 Width = 46
                 Visible = True
@@ -204,6 +216,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
               item
                 Expanded = False
                 FieldName = 'DETALLE_PROD'
+                Title.Alignment = taCenter
                 Title.Caption = 'Producto'
                 Width = 174
                 Visible = True
@@ -211,6 +224,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
               item
                 Expanded = False
                 FieldName = 'CANTIDAD'
+                Title.Alignment = taCenter
                 Title.Caption = 'Cant.'
                 Width = 40
                 Visible = True
@@ -218,18 +232,21 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
               item
                 Expanded = False
                 FieldName = 'IMPORTE_VENTA'
+                Title.Alignment = taCenter
                 Title.Caption = 'Importe Venta'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'IMPORTE_IVA'
+                Title.Alignment = taCenter
                 Title.Caption = 'Importe IVA'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'PORC_DESCUENTO'
+                Title.Alignment = taCenter
                 Title.Caption = 'Desc.'
                 Width = 57
                 Visible = True
@@ -238,7 +255,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         end
         object Panel4: TPanel
           Left = 1
-          Top = 418
+          Top = 361
           Width = 335
           Height = 131
           Align = alBottom
@@ -250,13 +267,14 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             Width = 333
             Height = 129
             Align = alClient
-            Color = 16762303
+            Color = 14606012
             DataSource = DS_Comprobante_FormaPago
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'Verdana'
             Font.Style = []
+            Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
@@ -264,10 +282,12 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
+            OnDrawColumnCell = DrawColumnCell
             Columns = <
               item
                 Expanded = False
                 FieldName = 'TFORMAPAGO_'
+                Title.Alignment = taCenter
                 Title.Caption = 'Forma de Pago'
                 Width = 169
                 Visible = True
@@ -275,24 +295,28 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
               item
                 Expanded = False
                 FieldName = 'IMPORTE_REAL'
+                Title.Alignment = taCenter
                 Title.Caption = 'Importe Venta'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'MDCP_FECHA'
+                Title.Alignment = taCenter
                 Title.Caption = 'MDP Fecha'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'MDCP_BANCO'
+                Title.Alignment = taCenter
                 Title.Caption = 'Banco'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'MDCP_CHEQUE'
+                Title.Alignment = taCenter
                 Title.Caption = 'N'#250'mero'
                 Visible = True
               end>
@@ -303,7 +327,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     object PanelFiltro: TPanel
       Left = 1
       Top = 1
-      Width = 1043
+      Width = 993
       Height = 24
       Align = alTop
       ParentShowHint = False
@@ -315,22 +339,22 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         Width = 94
         Height = 18
         GroupIndex = 1
+        Down = True
         Caption = 'Todos'
         Layout = blGlyphBottom
-        OnClick = BtnFiltro_TodosClick
+        OnClick = AplicarFiltro
       end
-      object BtnFiltro_Hoy: TSpeedButton
+      object BtnFiltro_Fiscal: TSpeedButton
         Left = 151
         Top = 3
         Width = 94
         Height = 18
         GroupIndex = 1
-        Down = True
         Caption = 'Fiscal'
         Layout = blGlyphBottom
-        OnClick = BtnFiltro_HoyClick
+        OnClick = AplicarFiltro
       end
-      object BtnFiltro_EstaSemana: TSpeedButton
+      object BtnFiltro_NoFiscal: TSpeedButton
         Left = 247
         Top = 3
         Width = 94
@@ -338,7 +362,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         GroupIndex = 1
         Caption = 'No Fiscal'
         Layout = blGlyphBottom
-        OnClick = BtnFiltro_EstaSemanaClick
+        OnClick = AplicarFiltro
       end
       object Label39: TLabel
         Left = 19
@@ -351,8 +375,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   end
   object DS_Comprobante: TDataSource
     DataSet = ZQ_Comprobante
-    Left = 213
-    Top = 241
+    Left = 61
+    Top = 169
   end
   object ZQ_Comprobante_FormaPago: TZQuery
     Connection = DM.Conexion
@@ -367,8 +391,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       ''
       '')
     Params = <>
-    Left = 585
-    Top = 337
+    Left = 225
+    Top = 65
     object ZQ_Comprobante_FormaPagoID_COMPROB_FP: TIntegerField
       FieldName = 'ID_COMPROB_FP'
       Required = True
@@ -435,8 +459,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         '_cabecera)'
       '')
     Params = <>
-    Left = 601
-    Top = 153
+    Left = 385
+    Top = 65
     object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
       Required = True
@@ -527,8 +551,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         'c_iva,s.nombre,p1.nombre,iva.abreviatura,tc.nombre_tipo_cpb,p2.n' +
         'ombre')
     Params = <>
-    Left = 210
-    Top = 130
+    Left = 66
+    Top = 114
     object ZQ_ComprobanteCODIGO: TStringField
       FieldName = 'CODIGO'
       Size = 50
@@ -576,13 +600,13 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   end
   object DS_Comprobante_FormaPago: TDataSource
     DataSet = ZQ_Comprobante_FormaPago
-    Left = 325
-    Top = 177
+    Left = 221
+    Top = 113
   end
   object DS_ComprobanteDetalle: TDataSource
     DataSet = ZQ_ComprobanteDetalle
-    Left = 325
-    Top = 241
+    Left = 389
+    Top = 113
   end
   object EKDbSuma1: TEKDbSuma
     SumCollection = <
@@ -592,8 +616,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       end>
     DataSet = ZQ_Comprobante
     SumListChanged = EKDbSuma1SumListChanged
-    Left = 301
-    Top = 329
+    Left = 61
+    Top = 273
   end
   object EKBuscarComprobantes: TEKBusquedaAvanzada
     CriteriosBusqueda = <
@@ -702,8 +726,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         'c_iva,s.nombre,p1.nombre,iva.abreviatura,tc.nombre_tipo_cpb,p2.n' +
         'ombre')
     UsarWhereOriginal = EK_Con_Where
-    Left = 69
-    Top = 161
+    Left = 64
+    Top = 65
   end
   object ZQ_TipoIVA: TZQuery
     Connection = DM.Conexion
@@ -711,8 +735,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       'select *'
       'from tipo_IVA')
     Params = <>
-    Left = 141
-    Top = 322
+    Left = 509
+    Top = 66
     object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True
@@ -742,7 +766,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     end
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridProducto
+    Grilla = DBGridComprobantes
     Filtros = <
       item
         TituloColumna = 'C'#243'digo'
@@ -776,13 +800,14 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         TituloColumna = 'Vendedor'
         Visible = True
       end>
+    NombreGuardar = 'DBGridComprobantes'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 378
-    Top = 106
+    Left = 58
+    Top = 218
   end
   object EKOrdenarGrilla2: TEKOrdenarGrilla
     Grilla = DBGridListadoProductos
@@ -811,13 +836,14 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         TituloColumna = 'Desc.'
         Visible = True
       end>
+    NombreGuardar = 'DBGridListadoProductos'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 858
-    Top = 98
+    Left = 386
+    Top = 162
   end
   object EKOrdenarGrilla3: TEKOrdenarGrilla
     Grilla = DBGridFormaPago
@@ -842,13 +868,14 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         TituloColumna = 'N'#250'mero'
         Visible = True
       end>
+    NombreGuardar = 'DBGridFormaPago'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 850
-    Top = 474
+    Left = 218
+    Top = 162
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -1273,8 +1300,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 384
-    Top = 176
+    Left = 592
+    Top = 160
     DockControlHeights = (
       0
       0
@@ -1498,16 +1525,16 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     EXCEL.RightMargin = 0.300000000000000000
     Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
     Version = '2.37'
-    DBGrid = DBGridProducto
-    Left = 476
-    Top = 122
+    DBGrid = DBGridComprobantes
+    Left = 588
+    Top = 66
   end
   object mxNativeExcel1: TmxNativeExcel
     ActiveFont = 0
     Borders = []
     Shading = False
     Version = '1.24'
-    Left = 472
-    Top = 176
+    Left = 592
+    Top = 112
   end
 end
