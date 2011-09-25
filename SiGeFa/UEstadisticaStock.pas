@@ -56,15 +56,12 @@ type
     Panel2: TPanel;
     lblTotales: TLabel;
     EKDbSuma_Totales: TEKDbSuma;
-    mxDBGridExport: TmxDBGridExport;
-    mxNativeExcel1: TmxNativeExcel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
-    RepEstadisticaStock: TQuickRep;
+    RepStock: TQuickRep;
     QRBand5: TQRBand;
-    QRDBImage1: TQRDBImage;
     QRLabel11: TQRLabel;
-    RepCtas_Reporte_Titulo_2: TQRLabel;
-    RepCtas_Reporte_Titulo_1: TQRLabel;
+    RepStock_Subtitulo: TQRLabel;
+    RepStock_Titulo: TQRLabel;
     QRBandDetalle: TQRBand;
     QRDBTextCoefGanancia: TQRDBText;
     QRDBText1: TQRDBText;
@@ -73,32 +70,36 @@ type
     QRDBText6: TQRDBText;
     QRDBText7: TQRDBText;
     QRDBText5: TQRDBText;
-    QRChildBandCleinte: TQRChildBand;
     QRBand7: TQRBand;
-    QRLabel24: TQRLabel;
-    QRSysData2: TQRSysData;
     QRBand1: TQRBand;
-    ChildBand1: TQRChildBand;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRExpr1: TQRExpr;
+    EKVistaPreviaQR1: TEKVistaPreviaQR;
+    QRLabel8: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRlblPieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    TitleBand2: TQRBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    QRBand2: TQRBand;
+    QRLabel1: TQRLabel;
     QRLabel2: TQRLabel;
     QRLabel3: TQRLabel;
     QRLabel4: TQRLabel;
-    QRLabelimporteVenta: TQRLabel;
-    QRLabel9: TQRLabel;
-    QRLabelmporteCosto: TQRLabel;
-    QRLabelCoefGanancia: TQRLabel;
-    QRLabel1: TQRLabel;
-    QRDBText2: TQRDBText;
     QRLabel5: TQRLabel;
-    QRDBText3: TQRDBText;
-    QRDBText4: TQRDBText;
     QRLabel6: TQRLabel;
-    QRDBText8: TQRDBText;
     QRLabel7: TQRLabel;
-    QRExpr1: TQRExpr;
-    EKVistaPreviaQR1: TEKVistaPreviaQR;
+    QRLabel9: TQRLabel;
+    QRLabelCoefGanancia: TQRLabel;
+    QRLabelimporteVenta: TQRLabel;
+    QRLabelmporteCosto: TQRLabel;
+    QRDBLogo: TQRDBImage;
     QRExpr2: TQRExpr;
-    QRLabel8: TQRLabel;
-    QRLabel10: TQRLabel;
     procedure ZQ_StockCalcFields(DataSet: TDataSet);
     procedure btnBuscarClick(Sender: TObject);
     procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -123,52 +124,61 @@ uses UDM, UPrincipal;
 
 {$R *.dfm}
 
+
 procedure TFEstadisticaStock.ZQ_StockCalcFields(DataSet: TDataSet);
 begin
   ZQ_Stockpreciocostostock.AsFloat := (ZQ_StockPRECIO_COSTO.AsFloat * ZQ_StockSTOCK_ACTUAL.AsFloat);
   ZQ_Stockprecioventastock.AsFloat := (ZQ_StockPRECIO_VENTA.AsFloat * ZQ_StockSTOCK_ACTUAL.AsFloat);
 end;
 
+
 procedure TFEstadisticaStock.btnBuscarClick(Sender: TObject);
 begin
-EKBuscarStock.Buscar;
-lblTotales.Caption:= ' Precio Costo Stock Total: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_Totales.SumCollection.Items[2].SumValue)+'          Precio Venta Stock Total: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_Totales.SumCollection.Items[3].SumValue);
+  EKBuscarStock.Buscar;
+  lblTotales.Caption:= ' Precio Costo Stock Total: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_Totales.SumCollection.Items[2].SumValue)+'          Precio Venta Stock Total: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_Totales.SumCollection.Items[3].SumValue);
 end;
 
-procedure TFEstadisticaStock.DBGridStockDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFEstadisticaStock.DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridStock, Rect, DataCol, Column, State);
 end;
 
+
 procedure TFEstadisticaStock.btnExportarXLSClick(Sender: TObject);
 begin
   if not ZQ_Stock.IsEmpty then
-    mxDBGridExport.Select;
+    dm.ExportarEXCEL(DBGridStock);
 end;
+
 
 procedure TFEstadisticaStock.FormCreate(Sender: TObject);
 begin
-EKOrdenarGrilla1.CargarConfigColumnas;
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
+  EKOrdenarGrilla1.CargarConfigColumnas;
 end;
 
-procedure TFEstadisticaStock.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+
+procedure TFEstadisticaStock.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-EKOrdenarGrilla1.GuardarConfigColumnas;
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
+
 
 procedure TFEstadisticaStock.btnSalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFEstadisticaStock.btImprimirClick(Sender: TObject);
 begin
   if ZQ_Stock.IsEmpty then
-  exit;
-  
+    exit;
+
+  DM.VariablesReportes(RepStock);
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBuscarStock.ParametrosBuscados;
   EKVistaPreviaQR1.VistaPrevia;
 end;
 

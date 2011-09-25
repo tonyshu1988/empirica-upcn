@@ -102,8 +102,6 @@ type
     btImprimirEtiquetas: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
-    mxDBGridExport: TmxDBGridExport;
-    mxNativeExcel1: TmxNativeExcel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -211,11 +209,7 @@ end;
 procedure TFEstadisticasFacturacion.btnExportarXLSClick(Sender: TObject);
 begin
   if not ZQ_Comprobante.IsEmpty then
-  begin
-    //dm.prepararParaExportar(true);
-    mxDBGridExport.Select;
-    //dm.prepararParaExportar(false);
-  end
+    dm.ExportarEXCEL(DBGridComprobantes);
 end;
 
 

@@ -1,6 +1,6 @@
 object FEstadisticaStock: TFEstadisticaStock
-  Left = 264
-  Top = 93
+  Left = 318
+  Top = 219
   Width = 870
   Height = 500
   Caption = 'FEstadisticaStock'
@@ -22,213 +22,14 @@ object FEstadisticaStock: TFEstadisticaStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 416
+    Width = 854
+    Height = 410
     Align = alClient
     TabOrder = 0
-    object DBGridStock: TDBGrid
-      Left = 1
-      Top = 1
-      Width = 860
-      Height = 392
-      Align = alClient
-      Color = 14606012
-      DataSource = DS_Stock
-      DefaultDrawing = False
-      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-      TabOrder = 0
-      TitleFont.Charset = ANSI_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-      OnDrawColumnCell = DBGridStockDrawColumnCell
-      Columns = <
-        item
-          Alignment = taRightJustify
-          Expanded = False
-          FieldName = 'COD_CORTO_PRODUCTO'
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Producto'
-          Width = 94
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE'
-          Title.Alignment = taCenter
-          Title.Caption = 'Producto'
-          Width = 211
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_MARCA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Marca'
-          Width = 150
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TIPO_ARTICULO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Tipo Art'#237'culo'
-          Width = 136
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOMBRE_ARTICULO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Art'#237'culo'
-          Width = 133
-          Visible = True
-        end
-        item
-          Color = 15921894
-          Expanded = False
-          FieldName = 'STOCK_ACTUAL'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          Title.Alignment = taCenter
-          Title.Caption = 'Stock Actual'
-          Width = 100
-          Visible = True
-        end
-        item
-          Color = 11206655
-          Expanded = False
-          FieldName = 'PRECIO_COSTO'
-          Title.Caption = 'Precio Costo'
-          Visible = True
-        end
-        item
-          Color = 11206655
-          Expanded = False
-          FieldName = 'preciocostostock'
-          Title.Caption = 'Precio Costo Stock'
-          Visible = True
-        end
-        item
-          Color = 12320699
-          Expanded = False
-          FieldName = 'PRECIO_VENTA'
-          Title.Caption = 'Precio Venta'
-          Visible = True
-        end
-        item
-          Color = 12320699
-          Expanded = False
-          FieldName = 'precioventastock'
-          Title.Caption = 'Precio Venta Stock'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'MEDIDA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Medida'
-          Width = 113
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COLOR'
-          Title.Alignment = taCenter
-          Title.Caption = 'Color'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SUCURSAL'
-          Title.Alignment = taCenter
-          Title.Caption = 'Sucursal'
-          Width = 138
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SECCION'
-          Title.Caption = 'Secci'#243'n'
-          Width = 108
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SECTOR'
-          Title.Caption = 'Sector'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'FILA'
-          Title.Caption = 'Fila'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'COLUMNA'
-          Title.Caption = 'Columna'
-          Visible = True
-        end
-        item
-          Alignment = taRightJustify
-          Expanded = False
-          FieldName = 'COD_CORTO_CABECERA'
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Cabecera'
-          Visible = True
-        end
-        item
-          Alignment = taRightJustify
-          Expanded = False
-          FieldName = 'CODIGO_BARRA'
-          Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Barra'
-          Width = 100
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'BAJA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Baja'
-          Visible = True
-        end>
-    end
-    object Panel2: TPanel
-      Left = 1
-      Top = 393
-      Width = 860
-      Height = 22
-      Align = alBottom
-      BorderWidth = 4
-      TabOrder = 1
-      object lblTotales: TLabel
-        Left = 5
-        Top = 5
-        Width = 850
-        Height = 13
-        Align = alTop
-        Alignment = taRightJustify
-        Caption = 'Estadistica Stock'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-    end
-    object RepEstadisticaStock: TQuickRep
+    object RepStock: TQuickRep
       Tag = 99
-      Left = 163
-      Top = 110
+      Left = -253
+      Top = 38
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -291,7 +92,7 @@ object FEstadisticaStock: TFEstadisticaStock
         Left = 38
         Top = 38
         Width = 1047
-        Height = 121
+        Height = 72
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
@@ -303,32 +104,15 @@ object FEstadisticaStock: TFEstadisticaStock
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          320.145833333333400000
+          190.500000000000000000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageHeader
-        object QRDBImage1: TQRDBImage
-          Left = 78
-          Top = 14
-          Width = 64
-          Height = 64
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            169.333333333333300000
-            206.375000000000000000
-            37.041666666666670000
-            169.333333333333300000)
-          DataField = 'GRAFICO'
-        end
         object QRLabel11: TQRLabel
-          Left = 415
-          Top = 60
-          Width = 216
+          Left = 429
+          Top = 46
+          Width = 189
           Height = 19
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -337,14 +121,14 @@ object FEstadisticaStock: TFEstadisticaStock
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            1098.020833333333000000
-            158.750000000000000000
-            571.500000000000000000)
+            1135.062500000000000000
+            121.708333333333300000
+            500.062500000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'Estadistica Stock Precios'
+          Caption = 'ESTADISTICA STOCK'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -357,10 +141,10 @@ object FEstadisticaStock: TFEstadisticaStock
           ExportAs = exptText
           FontSize = 12
         end
-        object RepCtas_Reporte_Titulo_2: TQRLabel
-          Left = 433
-          Top = 36
-          Width = 181
+        object RepStock_Subtitulo: TQRLabel
+          Left = 458
+          Top = 27
+          Width = 131
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -369,14 +153,14 @@ object FEstadisticaStock: TFEstadisticaStock
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            1145.645833333333000000
-            95.250000000000000000
-            478.895833333333300000)
+            1211.791666666667000000
+            71.437500000000000000
+            346.604166666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepCtas_Reporte_Titulo_2'
+          Caption = 'RepStock_Subtitulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -389,10 +173,10 @@ object FEstadisticaStock: TFEstadisticaStock
           ExportAs = exptText
           FontSize = 9
         end
-        object RepCtas_Reporte_Titulo_1: TQRLabel
-          Left = 403
-          Top = 12
-          Width = 240
+        object RepStock_Titulo: TQRLabel
+          Left = 451
+          Top = 2
+          Width = 144
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -401,14 +185,14 @@ object FEstadisticaStock: TFEstadisticaStock
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            1066.270833333333000000
-            31.750000000000000000
-            635.000000000000000000)
+            1193.270833333333000000
+            5.291666666666667000
+            381.000000000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepCtas_Reporte_Titulo_1'
+          Caption = 'RepStock_Titulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -421,11 +205,29 @@ object FEstadisticaStock: TFEstadisticaStock
           ExportAs = exptText
           FontSize = 12
         end
+        object QRDBLogo: TQRDBImage
+          Left = 215
+          Top = 2
+          Width = 64
+          Height = 64
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            169.333333333333300000
+            568.854166666666700000
+            5.291666666666667000
+            169.333333333333300000)
+          DataField = 'LOGO'
+          Stretch = True
+        end
       end
       object QRBandDetalle: TQRBand
         Tag = 99
         Left = 38
-        Top = 176
+        Top = 159
         Width = 1047
         Height = 15
         Frame.Color = clBlack
@@ -814,36 +616,12 @@ object FEstadisticaStock: TFEstadisticaStock
           FontSize = 6
         end
       end
-      object QRChildBandCleinte: TQRChildBand
-        Tag = 99
-        Left = 38
-        Top = 159
-        Width = 1047
-        Height = 1
-        Frame.Color = clBlack
-        Frame.DrawTop = True
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        AlignToBottom = False
-        Color = clSilver
-        TransparentBand = False
-        ForceNewColumn = False
-        ForceNewPage = False
-        Size.Values = (
-          2.645833333333333000
-          2770.187500000000000000)
-        PreCaluculateBandHeight = False
-        KeepOnOnePage = False
-        ParentBand = QRBand5
-        PrintOrder = cboAfterParent
-      end
       object QRBand7: TQRBand
         Tag = 99
         Left = 38
-        Top = 209
+        Top = 213
         Width = 1047
-        Height = 16
+        Height = 24
         Frame.Color = clBlack
         Frame.DrawTop = True
         Frame.DrawBottom = False
@@ -855,27 +633,59 @@ object FEstadisticaStock: TFEstadisticaStock
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          63.500000000000000000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageFooter
-        object QRLabel24: TQRLabel
-          Left = 957
-          Top = 1
-          Width = 39
-          Height = 13
+        object QRlblPieDePagina: TQRLabel
+          Left = 4
+          Top = 3
+          Width = 81
+          Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            52.916666666666670000
+            10.583333333333330000
+            7.937500000000000000
+            214.312500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'QRlblPieDePagina'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabel43: TQRLabel
+          Left = 957
+          Top = 3
+          Width = 39
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
             2532.062500000000000000
-            2.645833333333333000
+            7.937500000000000000
             103.187500000000000000)
-          Alignment = taRightJustify
+          Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
@@ -892,23 +702,23 @@ object FEstadisticaStock: TFEstadisticaStock
           ExportAs = exptText
           FontSize = 7
         end
-        object QRSysData2: TQRSysData
-          Left = 1006
-          Top = 1
-          Width = 41
-          Height = 13
+        object QRSysData1: TQRSysData
+          Left = 999
+          Top = 3
+          Width = 45
+          Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            2661.708333333333000000
-            2.645833333333333000
-            108.479166666666700000)
-          Alignment = taRightJustify
-          AlignToBand = True
+            52.916666666666670000
+            2643.187500000000000000
+            7.937500000000000000
+            119.062500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
           AutoSize = False
           Color = clWhite
           Data = qrsPageNumber
@@ -926,27 +736,27 @@ object FEstadisticaStock: TFEstadisticaStock
       object QRBand1: TQRBand
         Tag = 99
         Left = 38
-        Top = 191
+        Top = 174
         Width = 1047
-        Height = 18
+        Height = 39
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         AlignToBottom = False
-        Color = clActiveBorder
+        Color = clWhite
         TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          47.625000000000000000
+          103.187500000000000000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbSummary
         object QRExpr1: TQRExpr
-          Left = 601
+          Left = 881
           Top = 3
           Width = 150
           Height = 14
@@ -957,16 +767,16 @@ object FEstadisticaStock: TFEstadisticaStock
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1590.145833333333000000
+            2330.979166666667000000
             7.937500000000000000
             396.875000000000000000)
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -8
+          Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = []
           Color = clWhite
@@ -974,47 +784,16 @@ object FEstadisticaStock: TFEstadisticaStock
           ResetAfterPrint = False
           Transparent = True
           WordWrap = True
-          Expression = 'FORMATNUMERIC($ ###,###,##0.00, SUM(ZQ_Stock.preciocostostock))'
+          Expression = 
+            'FORMATNUMERIC('#39'$ ###,###,###,##0.00'#39',SUM(ZQ_Stock.preciocostosto' +
+            'ck))'
           ExportAs = exptText
-          FontSize = 6
-        end
-        object QRExpr2: TQRExpr
-          Left = 889
-          Top = 3
-          Width = 150
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            2352.145833333333000000
-            7.937500000000000000
-            396.875000000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Color = clWhite
-          ParentFont = False
-          ResetAfterPrint = False
-          Transparent = True
-          WordWrap = True
-          Expression = 'FORMATNUMERIC($ ###,###,##0.00,SUM(ZQ_Stock.precioventastock))'
-          ExportAs = exptText
-          FontSize = 6
+          FontSize = 8
         end
         object QRLabel8: TQRLabel
-          Left = 470
+          Left = 696
           Top = 3
-          Width = 128
+          Width = 182
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1023,10 +802,10 @@ object FEstadisticaStock: TFEstadisticaStock
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1243.541666666667000000
+            1841.500000000000000000
             7.937500000000000000
-            338.666666666666700000)
-          Alignment = taLeftJustify
+            481.541666666666700000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
@@ -1034,19 +813,19 @@ object FEstadisticaStock: TFEstadisticaStock
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -9
+          Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
           Transparent = True
           WordWrap = True
           ExportAs = exptText
-          FontSize = 7
+          FontSize = 8
         end
         object QRLabel10: TQRLabel
-          Left = 755
-          Top = 3
-          Width = 130
+          Left = 696
+          Top = 21
+          Width = 182
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1055,10 +834,10 @@ object FEstadisticaStock: TFEstadisticaStock
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1997.604166666667000000
-            7.937500000000000000
-            343.958333333333400000)
-          Alignment = taLeftJustify
+            1841.500000000000000000
+            55.562500000000000000
+            481.541666666666700000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
@@ -1066,22 +845,143 @@ object FEstadisticaStock: TFEstadisticaStock
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -9
+          Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
           Transparent = True
           WordWrap = True
           ExportAs = exptText
+          FontSize = 8
+        end
+        object QRExpr2: TQRExpr
+          Left = 881
+          Top = 21
+          Width = 150
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2330.979166666667000000
+            55.562500000000000000
+            396.875000000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Color = clWhite
+          ParentFont = False
+          ResetAfterPrint = False
+          Transparent = True
+          WordWrap = True
+          Expression = 
+            'FORMATNUMERIC('#39'$ ###,###,###,##0.00'#39',SUM(ZQ_Stock.precioventasto' +
+            'ck))'
+          ExportAs = exptText
+          FontSize = 8
+        end
+      end
+      object TitleBand2: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 110
+        Width = 1047
+        Height = 31
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          82.020833333333330000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbTitle
+        object QRLabelCritBusqueda: TQRLabel
+          Left = 5
+          Top = 16
+          Width = 692
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            13.229166666666670000
+            42.333333333333330000
+            1830.916666666667000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = True
+          Caption = 'QRLabelCritBusqueda'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabel48: TQRLabel
+          Left = 5
+          Top = 2
+          Width = 126
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            13.229166666666670000
+            5.291666666666667000
+            333.375000000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Criterios de Busqueda:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = False
+          WordWrap = False
+          ExportAs = exptText
           FontSize = 7
         end
       end
-      object ChildBand1: TQRChildBand
-        Tag = 99
+      object QRBand2: TQRBand
         Left = 38
-        Top = 160
+        Top = 141
         Width = 1047
-        Height = 16
+        Height = 18
         Frame.Color = clBlack
         Frame.DrawTop = True
         Frame.DrawBottom = True
@@ -1093,15 +993,46 @@ object FEstadisticaStock: TFEstadisticaStock
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          47.625000000000000000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
-        ParentBand = QRChildBandCleinte
-        PrintOrder = cboAfterParent
+        BandType = rbColumnHeader
+        object QRLabel1: TQRLabel
+          Left = 642
+          Top = 1
+          Width = 39
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1698.625000000000000000
+            2.645833333333333000
+            103.187500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Stock'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
         object QRLabel2: TQRLabel
           Left = 111
-          Top = 0
+          Top = 1
           Width = 110
           Height = 14
           Frame.Color = clBlack
@@ -1112,7 +1043,7 @@ object FEstadisticaStock: TFEstadisticaStock
           Size.Values = (
             37.041666666666670000
             293.687500000000000000
-            0.000000000000000000
+            2.645833333333333000
             291.041666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -1133,7 +1064,7 @@ object FEstadisticaStock: TFEstadisticaStock
         end
         object QRLabel3: TQRLabel
           Left = 363
-          Top = 0
+          Top = 1
           Width = 120
           Height = 14
           Frame.Color = clBlack
@@ -1143,8 +1074,8 @@ object FEstadisticaStock: TFEstadisticaStock
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            960.437499999999900000
-            0.000000000000000000
+            960.437500000000000000
+            2.645833333333333000
             317.500000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -1165,7 +1096,7 @@ object FEstadisticaStock: TFEstadisticaStock
         end
         object QRLabel4: TQRLabel
           Left = 594
-          Top = 0
+          Top = 1
           Width = 42
           Height = 14
           Frame.Color = clBlack
@@ -1176,7 +1107,7 @@ object FEstadisticaStock: TFEstadisticaStock
           Size.Values = (
             37.041666666666670000
             1571.625000000000000000
-            0.000000000000000000
+            2.645833333333333000
             111.125000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -1195,169 +1126,9 @@ object FEstadisticaStock: TFEstadisticaStock
           ExportAs = exptText
           FontSize = 7
         end
-        object QRLabelimporteVenta: TQRLabel
-          Left = 871
-          Top = 0
-          Width = 66
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            2304.520833333333000000
-            0.000000000000000000
-            174.625000000000000000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Precio Venta'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRLabel9: TQRLabel
-          Left = 490
-          Top = 0
-          Width = 87
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1296.458333333333000000
-            0.000000000000000000
-            230.187500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Articulo'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRLabelmporteCosto: TQRLabel
-          Left = 698
-          Top = 0
-          Width = 66
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1846.791666666667000000
-            0.000000000000000000
-            174.625000000000000000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Precio Costo'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRLabelCoefGanancia: TQRLabel
-          Left = 945
-          Top = 0
-          Width = 96
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            2500.312500000000000000
-            0.000000000000000000
-            254.000000000000000000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Precio Venta Stock'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRLabel1: TQRLabel
-          Left = 642
-          Top = 0
-          Width = 39
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1698.625000000000000000
-            0.000000000000000000
-            103.187500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Stock'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
         object QRLabel5: TQRLabel
           Left = 770
-          Top = 0
+          Top = 1
           Width = 97
           Height = 14
           Frame.Color = clBlack
@@ -1368,8 +1139,8 @@ object FEstadisticaStock: TFEstadisticaStock
           Size.Values = (
             37.041666666666670000
             2037.291666666667000000
-            0.000000000000000000
-            256.645833333333400000)
+            2.645833333333333000
+            256.645833333333300000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
@@ -1389,7 +1160,7 @@ object FEstadisticaStock: TFEstadisticaStock
         end
         object QRLabel6: TQRLabel
           Left = 261
-          Top = 0
+          Top = 1
           Width = 79
           Height = 14
           Frame.Color = clBlack
@@ -1400,7 +1171,7 @@ object FEstadisticaStock: TFEstadisticaStock
           Size.Values = (
             37.041666666666670000
             690.562500000000000000
-            0.000000000000000000
+            2.645833333333333000
             209.020833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -1421,7 +1192,7 @@ object FEstadisticaStock: TFEstadisticaStock
         end
         object QRLabel7: TQRLabel
           Left = 4
-          Top = 0
+          Top = 1
           Width = 102
           Height = 14
           Frame.Color = clBlack
@@ -1432,7 +1203,7 @@ object FEstadisticaStock: TFEstadisticaStock
           Size.Values = (
             37.041666666666670000
             10.583333333333330000
-            0.000000000000000000
+            2.645833333333333000
             269.875000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -1451,13 +1222,340 @@ object FEstadisticaStock: TFEstadisticaStock
           ExportAs = exptText
           FontSize = 7
         end
+        object QRLabel9: TQRLabel
+          Left = 490
+          Top = 1
+          Width = 87
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1296.458333333333000000
+            2.645833333333333000
+            230.187500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Articulo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabelCoefGanancia: TQRLabel
+          Left = 945
+          Top = 1
+          Width = 96
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2500.312500000000000000
+            2.645833333333333000
+            254.000000000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Precio Venta Stock'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabelimporteVenta: TQRLabel
+          Left = 871
+          Top = 1
+          Width = 66
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2304.520833333333000000
+            2.645833333333333000
+            174.625000000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Precio Venta'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabelmporteCosto: TQRLabel
+          Left = 698
+          Top = 1
+          Width = 66
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1846.791666666667000000
+            2.645833333333333000
+            174.625000000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Precio Costo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+      end
+    end
+    object DBGridStock: TDBGrid
+      Left = 1
+      Top = 1
+      Width = 852
+      Height = 386
+      Align = alClient
+      Color = 14606012
+      DataSource = DS_Stock
+      DefaultDrawing = False
+      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      OnDrawColumnCell = DBGridStockDrawColumnCell
+      Columns = <
+        item
+          Alignment = taRightJustify
+          Expanded = False
+          FieldName = 'COD_CORTO_PRODUCTO'
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd. Producto'
+          Width = 94
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Producto'
+          Width = 211
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_MARCA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Marca'
+          Width = 150
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TIPO_ARTICULO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo Art'#237'culo'
+          Width = 136
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE_ARTICULO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Art'#237'culo'
+          Width = 133
+          Visible = True
+        end
+        item
+          Color = 15921894
+          Expanded = False
+          FieldName = 'STOCK_ACTUAL'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Title.Alignment = taCenter
+          Title.Caption = 'Stock Actual'
+          Width = 100
+          Visible = True
+        end
+        item
+          Color = 11206655
+          Expanded = False
+          FieldName = 'PRECIO_COSTO'
+          Title.Caption = 'Precio Costo'
+          Visible = True
+        end
+        item
+          Color = 11206655
+          Expanded = False
+          FieldName = 'preciocostostock'
+          Title.Caption = 'Precio Costo Stock'
+          Visible = True
+        end
+        item
+          Color = 12320699
+          Expanded = False
+          FieldName = 'PRECIO_VENTA'
+          Title.Caption = 'Precio Venta'
+          Visible = True
+        end
+        item
+          Color = 12320699
+          Expanded = False
+          FieldName = 'precioventastock'
+          Title.Caption = 'Precio Venta Stock'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'MEDIDA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Medida'
+          Width = 113
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COLOR'
+          Title.Alignment = taCenter
+          Title.Caption = 'Color'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SUCURSAL'
+          Title.Alignment = taCenter
+          Title.Caption = 'Sucursal'
+          Width = 138
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SECCION'
+          Title.Caption = 'Secci'#243'n'
+          Width = 108
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SECTOR'
+          Title.Caption = 'Sector'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FILA'
+          Title.Caption = 'Fila'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'COLUMNA'
+          Title.Caption = 'Columna'
+          Visible = True
+        end
+        item
+          Alignment = taRightJustify
+          Expanded = False
+          FieldName = 'COD_CORTO_CABECERA'
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd. Cabecera'
+          Visible = True
+        end
+        item
+          Alignment = taRightJustify
+          Expanded = False
+          FieldName = 'CODIGO_BARRA'
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd. Barra'
+          Width = 100
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'BAJA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Baja'
+          Visible = True
+        end>
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 387
+      Width = 852
+      Height = 22
+      Align = alBottom
+      BorderWidth = 4
+      TabOrder = 1
+      object lblTotales: TLabel
+        Left = 5
+        Top = 5
+        Width = 842
+        Height = 13
+        Align = alTop
+        Alignment = taRightJustify
+        Caption = 'Estadistica Stock'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
       end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1881,8 +1979,8 @@ object FEstadisticaStock: TFEstadisticaStock
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 696
-    Top = 336
+    Left = 136
+    Top = 32
     DockControlHeights = (
       0
       0
@@ -2053,7 +2151,7 @@ object FEstadisticaStock: TFEstadisticaStock
       'left join color c on (pc.color = c.id_color)'
       '')
     Params = <>
-    Left = 64
+    Left = 48
     Top = 80
     object ZQ_StockPRECIO_COSTO: TFloatField
       FieldName = 'PRECIO_COSTO'
@@ -2148,8 +2246,8 @@ object FEstadisticaStock: TFEstadisticaStock
   end
   object DS_Stock: TDataSource
     DataSet = ZQ_Stock
-    Left = 64
-    Top = 144
+    Left = 48
+    Top = 128
   end
   object EKBuscarStock: TEKBusquedaAvanzada
     CriteriosBusqueda = <
@@ -2384,8 +2482,8 @@ object FEstadisticaStock: TFEstadisticaStock
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'left join color c on (pc.color = c.id_color)')
     UsarWhereOriginal = EK_Con_Where
-    Left = 56
-    Top = 280
+    Left = 48
+    Top = 32
   end
   object EKDbSuma_Totales: TEKDbSuma
     SumCollection = <
@@ -2406,116 +2504,8 @@ object FEstadisticaStock: TFEstadisticaStock
         NombreCampo = 'precioventastock'
       end>
     DataSet = ZQ_Stock
-    Left = 197
-    Top = 81
-  end
-  object mxDBGridExport: TmxDBGridExport
-    DateFormat = 'dd/MM/yyyy'
-    TimeFormat = 'hh:mm AMPM'
-    DateTimeFormat = 'hh:mm AMPM dd/MM/yyyy'
-    ExportType = xtExcel
-    ExportTypes = [xtHTML, xtExcel, xtWord, xtTXT]
-    ExportStyle = xsView
-    HTML.CustomColors.Background = clWhite
-    HTML.CustomColors.DefaultLink = clRed
-    HTML.CustomColors.DefaultFontFace = 'Arial,Helvetica'
-    HTML.CustomColors.VisitedLink = clAqua
-    HTML.CustomColors.ActiveLink = clBlue
-    HTML.CustomColors.DefaultText = clBlack
-    HTML.CustomColors.TableFontColor = clBlack
-    HTML.CustomColors.TableFontFace = 'Arial,Helvetica'
-    HTML.CustomColors.TableBackground = 16777167
-    HTML.CustomColors.TableOddBackground = clWhite
-    HTML.CustomColors.HeaderBackground = 3368601
-    HTML.CustomColors.HeadersFontColor = clWhite
-    HTML.Options = [hoShowGridLines, hoBoldHeaders, hoAutoLink, hoOddRowColoring, hoDisplayTitle]
-    HTML.Template = ctStandard
-    Messages.Caption = 'Exportar datos'
-    Messages.CopiedToClipboard = 'Data was copied to clipboard!'
-    Messages.CancelCaption = '&Cancelar'
-    Messages.CreatedText = 'Exportando:'
-    Messages.DocumentFilter.HTML = 'HTML Documents'
-    Messages.DocumentFilter.Excel = 'Excel Files'
-    Messages.DocumentFilter.Word = 'Word Documents'
-    Messages.DocumentFilter.Text = 'Text Files'
-    Messages.DocumentFilter.Comma = 'CSV (Comma delimited)'
-    Messages.DocumentFilter.Tab = 'Text (Tab delimited)'
-    Messages.DocumentFilter.RTF = 'Rich Text Format'
-    Messages.DocumentFilter.DIF = 'Data Interchange Format'
-    Messages.DocumentFilter.SYLK = 'SYLK Files'
-    Messages.ExportCaption = '&Aceptar'
-    Messages.ExportToFile = '&Guardar'
-    Messages.FalseText = 'False'
-    Messages.Height = 80
-    Messages.SaveTitle = 'Guardar'
-    Messages.SelectFormat = 'Opciones'
-    Messages.Text = 'Procesando...'
-    Messages.TrueText = 'True'
-    Messages.Width = 300
-    Messages.ViewOnly = '&Ver'
-    TruncateSymbol = '...'
-    RowNumberFormat = '%d'
-    DOC_RTF.Template = rtStandard
-    DOC_RTF.Options = [roShowGridLines, roOddRowColoring]
-    DOC_RTF.CustomSettings.TableBackground = 16777167
-    DOC_RTF.CustomSettings.TableOddBackground = clWhite
-    DOC_RTF.CustomSettings.HeaderBackground = 3368601
-    DOC_RTF.CustomSettings.DefaultFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.DefaultFont.Color = clWindowText
-    DOC_RTF.CustomSettings.DefaultFont.Height = -11
-    DOC_RTF.CustomSettings.DefaultFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.DefaultFont.Style = []
-    DOC_RTF.CustomSettings.HeaderFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.HeaderFont.Color = clWindowText
-    DOC_RTF.CustomSettings.HeaderFont.Height = -11
-    DOC_RTF.CustomSettings.HeaderFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.HeaderFont.Style = [fsBold]
-    DOC_RTF.CustomSettings.TableFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.TableFont.Color = clWindowText
-    DOC_RTF.CustomSettings.TableFont.Height = -11
-    DOC_RTF.CustomSettings.TableFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.TableFont.Style = []
-    DOC_RTF.CellWidth = 1400
-    DOC_RTF.TopMargin = 101
-    DOC_RTF.BottomMargin = 101
-    DOC_RTF.LeftMargin = 461
-    DOC_RTF.RightMargin = 562
-    EXCEL.Options = [reSetColumnWidths, reSetMargins, reUseBorders]
-    EXCEL.ColumnWidth = 30
-    EXCEL.Protected = False
-    EXCEL.Footer = '&P'
-    EXCEL.DefaultFont.Charset = DEFAULT_CHARSET
-    EXCEL.DefaultFont.Color = clWindowText
-    EXCEL.DefaultFont.Height = -11
-    EXCEL.DefaultFont.Name = 'MS Sans Serif'
-    EXCEL.DefaultFont.Style = []
-    EXCEL.HeaderFont.Charset = DEFAULT_CHARSET
-    EXCEL.HeaderFont.Color = clWindowText
-    EXCEL.HeaderFont.Height = -12
-    EXCEL.HeaderFont.Name = 'Verdana'
-    EXCEL.HeaderFont.Style = [fsBold]
-    EXCEL.TableFont.Charset = DEFAULT_CHARSET
-    EXCEL.TableFont.Color = clWindowText
-    EXCEL.TableFont.Height = -11
-    EXCEL.TableFont.Name = 'MS Sans Serif'
-    EXCEL.TableFont.Style = []
-    EXCEL.TopMargin = 0.300000000000000000
-    EXCEL.BottomMargin = 0.300000000000000000
-    EXCEL.LeftMargin = 0.300000000000000000
-    EXCEL.RightMargin = 0.300000000000000000
-    Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
-    Version = '2.37'
-    DBGrid = DBGridStock
-    Left = 476
-    Top = 122
-  end
-  object mxNativeExcel1: TmxNativeExcel
-    ActiveFont = 0
-    Borders = []
-    Shading = False
-    Version = '1.24'
-    Left = 472
-    Top = 176
+    Left = 45
+    Top = 177
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridStock
@@ -2606,13 +2596,13 @@ object FEstadisticaStock: TFEstadisticaStock
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 200
-    Top = 176
+    Left = 48
+    Top = 232
   end
   object EKVistaPreviaQR1: TEKVistaPreviaQR
-    Reporte = RepEstadisticaStock
+    Reporte = RepStock
     ShowModal = False
-    Left = 416
-    Top = 48
+    Left = 48
+    Top = 288
   end
 end
