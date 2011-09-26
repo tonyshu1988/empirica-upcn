@@ -1,6 +1,6 @@
 object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
-  Left = 186
-  Top = 113
+  Left = 220
+  Top = 120
   Width = 1048
   Height = 586
   Caption = 'Estadistica Disponibilidades'
@@ -32,7 +32,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       Top = 1
       Width = 1030
       Height = 494
-      ActivePage = TabDetalleMov
+      ActivePage = TabParteDiario
       Align = alClient
       TabOrder = 0
       object TabSaldosCuentas: TTabSheet
@@ -872,7 +872,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSaldo_Encabezado2: TLabel
             Left = 4
             Top = 17
-            Width = 1014
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -886,7 +886,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSaldo_Encabezado1: TLabel
             Left = 4
             Top = 4
-            Width = 1014
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -907,9 +907,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           BorderWidth = 4
           TabOrder = 2
           object lblSaldo_Total: TLabel
-            Left = 5
+            Left = 924
             Top = 5
-            Width = 1012
+            Width = 93
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -1125,7 +1125,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object QRSubDetail1: TQRSubDetail
             Tag = 99
             Left = 38
-            Top = 196
+            Top = 208
             Width = 718
             Height = 18
             Frame.Color = clBlack
@@ -1150,7 +1150,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object QRDBText33: TQRDBText
               Left = 5
               Top = 1
-              Width = 380
+              Width = 300
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -1161,7 +1161,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 37.041666666666670000
                 13.229166666666670000
                 2.645833333333333000
-                1005.416666666667000000)
+                793.750000000000000000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = False
@@ -1181,9 +1181,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 8
             end
             object QRDBText4: TQRDBText
-              Left = 553
+              Left = 449
               Top = 1
-              Width = 160
+              Width = 130
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -1192,9 +1192,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                1463.145833333333000000
+                1187.979166666667000000
                 2.645833333333333000
-                423.333333333333300000)
+                343.958333333333300000)
               Alignment = taRightJustify
               AlignToBand = False
               AutoSize = False
@@ -1214,9 +1214,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 8
             end
             object QRDBText5: TQRDBText
-              Left = 390
+              Left = 312
               Top = 1
-              Width = 160
+              Width = 130
               Height = 14
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -1225,9 +1225,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                1031.875000000000000000
+                825.500000000000000000
                 2.645833333333333000
-                423.333333333333300000)
+                343.958333333333300000)
               Alignment = taRightJustify
               AlignToBand = False
               AutoSize = False
@@ -1246,13 +1246,46 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 8
             end
+            object QRDBText24: TQRDBText
+              Left = 585
+              Top = 1
+              Width = 130
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1547.812500000000000000
+                2.645833333333333000
+                343.958333333333300000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZP_Estadistica_IE_Medios
+              DataField = 'TOTAL_TRANSFERENCIA'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
           end
           object QRSubDetail2: TQRSubDetail
             Tag = 99
             Left = 38
-            Top = 214
+            Top = 226
             Width = 718
-            Height = 30
+            Height = 29
             Frame.Color = clBlack
             Frame.DrawTop = False
             Frame.DrawBottom = False
@@ -1264,7 +1297,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              79.375000000000000000
+              76.729166666666670000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -1272,9 +1305,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             PrintBefore = False
             PrintIfEmpty = True
             object QRLblPD_TotalIngreso: TQRLabel
-              Left = 390
+              Left = 312
               Top = 1
-              Width = 160
+              Width = 130
               Height = 17
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -1283,9 +1316,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 44.979166666666670000
-                1031.875000000000000000
+                825.500000000000000000
                 2.645833333333333000
-                423.333333333333300000)
+                343.958333333333300000)
               Alignment = taRightJustify
               AlignToBand = False
               AutoSize = False
@@ -1304,9 +1337,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 10
             end
             object QRLblPD_TotalEgreso: TQRLabel
-              Left = 553
+              Left = 449
               Top = 1
-              Width = 160
+              Width = 130
               Height = 17
               Frame.Color = clBlack
               Frame.DrawTop = False
@@ -1315,9 +1348,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 44.979166666666670000
-                1463.145833333333000000
+                1187.979166666667000000
                 2.645833333333333000
-                423.333333333333300000)
+                343.958333333333300000)
               Alignment = taRightJustify
               AlignToBand = False
               AutoSize = False
@@ -1335,11 +1368,43 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 10
             end
+            object QRLblPD_TotalTransfer: TQRLabel
+              Left = 585
+              Top = 1
+              Width = 130
+              Height = 17
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                44.979166666666670000
+                1547.812500000000000000
+                2.645833333333333000
+                343.958333333333300000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'QRLblPD_TotalTransfer'
+              Color = clWhite
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Arial'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 10
+            end
           end
           object QRSubDetail3: TQRSubDetail
             Tag = 99
             Left = 38
-            Top = 261
+            Top = 272
             Width = 718
             Height = 18
             Frame.Color = clBlack
@@ -1497,7 +1562,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object QRBand1: TQRBand
             Tag = 99
             Left = 38
-            Top = 179
+            Top = 191
             Width = 718
             Height = 17
             Frame.Color = clBlack
@@ -1517,7 +1582,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             KeepOnOnePage = False
             BandType = rbTitle
             object QRLabel6: TQRLabel
-              Left = 492
+              Left = 382
               Top = 0
               Width = 59
               Height = 15
@@ -1528,7 +1593,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 39.687500000000000000
-                1301.750000000000000000
+                1010.708333333333000000
                 0.000000000000000000
                 156.104166666666700000)
               Alignment = taLeftJustify
@@ -1581,7 +1646,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 9
             end
             object QRLabel3: TQRLabel
-              Left = 660
+              Left = 525
               Top = 0
               Width = 53
               Height = 15
@@ -1592,7 +1657,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 39.687500000000000000
-                1746.250000000000000000
+                1389.062500000000000000
                 0.000000000000000000
                 140.229166666666700000)
               Alignment = taRightJustify
@@ -1612,11 +1677,43 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 9
             end
+            object QRLabel19: TQRLabel
+              Left = 616
+              Top = 0
+              Width = 99
+              Height = 15
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                39.687500000000000000
+                1629.833333333333000000
+                0.000000000000000000
+                261.937500000000000000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Transferencias'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -12
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 9
+            end
           end
           object ChildBand1: TQRChildBand
             Tag = 99
             Left = 38
-            Top = 244
+            Top = 255
             Width = 718
             Height = 17
             Frame.Color = clBlack
@@ -1768,7 +1865,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object QRSubDetail4: TQRSubDetail
             Tag = 99
             Left = 38
-            Top = 279
+            Top = 290
             Width = 718
             Height = 30
             Frame.Color = clBlack
@@ -1915,7 +2012,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             Left = 38
             Top = 131
             Width = 718
-            Height = 48
+            Height = 60
             Frame.Color = clBlack
             Frame.DrawTop = False
             Frame.DrawBottom = False
@@ -1927,7 +2024,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              127.000000000000000000
+              158.750000000000000000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -2193,11 +2290,76 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 9
             end
+            object QRLabel16: TQRLabel
+              Left = 6
+              Top = 38
+              Width = 141
+              Height = 15
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                39.687500000000000000
+                15.875000000000000000
+                100.541666666666700000
+                373.062500000000000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Total Transferencias:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -12
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 9
+            end
+            object QRDBText23: TQRDBText
+              Left = 150
+              Top = 39
+              Width = 241
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                396.875000000000000000
+                103.187500000000000000
+                637.645833333333300000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZP_estadistica_Parte_Diario
+              DataField = 'TOTAL_TRANSFERENCIA'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
           end
           object PageFooterBand1: TQRBand
             Tag = 99
             Left = 38
-            Top = 309
+            Top = 320
             Width = 718
             Height = 24
             Frame.Color = clBlack
@@ -2415,9 +2577,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               end
               object GroupBox3: TGroupBox
                 Left = 3
-                Top = 36
+                Top = 20
                 Width = 303
-                Height = 139
+                Height = 169
                 Ctl3D = False
                 ParentCtl3D = False
                 TabOrder = 0
@@ -2443,7 +2605,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   DataField = 'SALDO_INICIAL'
                   DataSource = DS_estadistica_Parte_Diario
                   Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clNavy
+                  Font.Color = clBlack
                   Font.Height = -13
                   Font.Name = 'Verdana'
                   Font.Style = [fsBold]
@@ -2507,14 +2669,14 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object DBText19: TDBText
                   Left = 128
-                  Top = 103
+                  Top = 132
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
                   DataField = 'SALDO'
                   DataSource = DS_estadistica_Parte_Diario
                   Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clNavy
+                  Font.Color = clBlack
                   Font.Height = -13
                   Font.Name = 'Verdana'
                   Font.Style = [fsBold]
@@ -2522,7 +2684,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object Label16: TLabel
                   Left = 13
-                  Top = 106
+                  Top = 135
                   Width = 78
                   Height = 14
                   Caption = 'Saldo Final:'
@@ -2535,9 +2697,37 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object Shape1: TShape
                   Left = 6
-                  Top = 101
+                  Top = 130
                   Width = 292
                   Height = 1
+                end
+                object Label2: TLabel
+                  Left = 13
+                  Top = 103
+                  Width = 97
+                  Height = 14
+                  Caption = 'Transferencias:'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'Verdana'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object DBText1: TDBText
+                  Left = 128
+                  Top = 100
+                  Width = 165
+                  Height = 17
+                  Alignment = taRightJustify
+                  DataField = 'TOTAL_TRANSFERENCIA'
+                  DataSource = DS_estadistica_Parte_Diario
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -13
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold]
+                  ParentFont = False
                 end
               end
             end
@@ -2567,7 +2757,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 Left = 0
                 Top = 13
                 Width = 700
-                Height = 183
+                Height = 174
                 Align = alClient
                 Color = 14606012
                 DataSource = DS_Estadistica_IE_Medios
@@ -2603,24 +2793,32 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                     Title.Caption = 'Ingresos'
                     Width = 167
                     Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'TOTAL_TRANSFERENCIA'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Transferencias'
+                    Width = 152
+                    Visible = True
                   end>
               end
               object Panel12: TPanel
                 Left = 0
-                Top = 196
+                Top = 187
                 Width = 700
-                Height = 32
+                Height = 41
                 Align = alBottom
                 BevelOuter = bvNone
                 TabOrder = 1
-                object lblPD_totalIngreso: TLabel
+                object lblPD_totalTransfer: TLabel
                   Left = 0
-                  Top = 13
+                  Top = 26
                   Width = 700
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
-                  Caption = 'lblPD_totalIngreso'
+                  Caption = 'lblPD_totalTransfer'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2636,6 +2834,21 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   Align = alTop
                   Alignment = taRightJustify
                   Caption = 'lblPD_totalEgreso'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold, fsItalic]
+                  ParentFont = False
+                end
+                object lblPD_totalIngreso: TLabel
+                  Left = 0
+                  Top = 13
+                  Width = 700
+                  Height = 13
+                  Align = alTop
+                  Alignment = taRightJustify
+                  Caption = 'lblPD_totalIngreso'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -4795,6 +5008,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       FieldName = 'TOTAL_EGRESO'
       currency = True
     end
+    object ZP_estadistica_Parte_DiarioTOTAL_TRANSFERENCIA: TFloatField
+      FieldName = 'TOTAL_TRANSFERENCIA'
+      currency = True
+    end
   end
   object ZP_Estadistica_IE_Medios: TZStoredProc
     Connection = DM.Conexion
@@ -4863,17 +5080,21 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         Name = 'ID_SUCURSAL'
         ParamType = ptInput
       end>
-    object ZP_Estadistica_IE_MediosTOTAL_EGRESO: TFloatField
-      FieldName = 'TOTAL_EGRESO'
-      currency = True
-    end
     object ZP_Estadistica_IE_MediosTOTAL_INGRESO: TFloatField
       FieldName = 'TOTAL_INGRESO'
+      currency = True
+    end
+    object ZP_Estadistica_IE_MediosTOTAL_EGRESO: TFloatField
+      FieldName = 'TOTAL_EGRESO'
       currency = True
     end
     object ZP_Estadistica_IE_MediosDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       Size = 100
+    end
+    object ZP_Estadistica_IE_MediosTOTAL_TRANSFERENCIA: TFloatField
+      FieldName = 'TOTAL_TRANSFERENCIA'
+      currency = True
     end
   end
   object DS_estadistica_Parte_Diario: TDataSource
@@ -4895,6 +5116,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       item
         Operacion = goSum
         NombreCampo = 'TOTAL_EGRESO'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'TOTAL_TRANSFERENCIA'
       end>
     DataSet = ZP_Estadistica_IE_Medios
     Left = 534

@@ -2243,7 +2243,8 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
-      'where cta.baja = '#39'N'#39)
+      'where cta.baja = '#39'N'#39
+      'and cta.id_cuenta > 2')
     Params = <>
     Left = 333
     Top = 49
