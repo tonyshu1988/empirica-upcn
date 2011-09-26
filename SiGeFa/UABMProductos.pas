@@ -1315,6 +1315,21 @@ begin
     ZSP_GenerarIDProdDeralle.Active:=True;
     ZQ_DetalleProductoID_PRODUCTO.AsInteger:=ZSP_GenerarIDProdDeralleID.AsInteger;
 
+    if ZQ_DetalleProductoPRECIO1.AsFloat = 0 then
+      ZQ_DetalleProductoPRECIO1.AsFloat :=pv;
+
+    if ZQ_DetalleProductoPRECIO2.AsFloat = 0 then
+      ZQ_DetalleProductoPRECIO2.AsFloat :=pv;
+
+    if ZQ_DetalleProductoPRECIO3.AsFloat = 0 then
+      ZQ_DetalleProductoPRECIO3.AsFloat :=pv;
+
+    if ZQ_DetalleProductoPRECIO4.AsFloat = 0 then
+      ZQ_DetalleProductoPRECIO4.AsFloat :=pv;
+
+    if ZQ_DetalleProductoPRECIO5.AsFloat = 0 then
+      ZQ_DetalleProductoPRECIO5.AsFloat :=pv;
+
     if ZQ_DetalleProductoCOD_CORTO.AsString='' then
        ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZSP_GenerarIDProdDeralleID.AsInteger);//rellenar(CDMedidasmedida.AsString,'0',5);
 
@@ -1416,32 +1431,32 @@ begin
  end
 else
   begin
-   if not(validarcamposDetalle) then
-    exit;
+    if not(validarcamposDetalle) then
+      exit;
 
-  if ZQ_DetalleProductoCOD_CORTO.AsString='' then
-     ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
+    if ZQ_DetalleProductoCOD_CORTO.AsString='' then
+       ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
 
-  if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
-     ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
+    if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
+       ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
 
 
-  if ZQ_DetalleProductoPRECIO1.AsFloat = 0 then
-    ZQ_DetalleProductoPRECIO1.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+    if ZQ_DetalleProductoPRECIO1.AsFloat = 0 then
+      ZQ_DetalleProductoPRECIO1.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
 
-  if ZQ_DetalleProductoPRECIO2.AsFloat = 0 then
-    ZQ_DetalleProductoPRECIO2.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+    if ZQ_DetalleProductoPRECIO2.AsFloat = 0 then
+      ZQ_DetalleProductoPRECIO2.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
 
-  if ZQ_DetalleProductoPRECIO3.AsFloat = 0 then
-    ZQ_DetalleProductoPRECIO3.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+    if ZQ_DetalleProductoPRECIO3.AsFloat = 0 then
+      ZQ_DetalleProductoPRECIO3.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
 
-  if ZQ_DetalleProductoPRECIO4.AsFloat = 0 then
-    ZQ_DetalleProductoPRECIO4.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+    if ZQ_DetalleProductoPRECIO4.AsFloat = 0 then
+      ZQ_DetalleProductoPRECIO4.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
 
-  if ZQ_DetalleProductoPRECIO5.AsFloat = 0 then
-    ZQ_DetalleProductoPRECIO5.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
+    if ZQ_DetalleProductoPRECIO5.AsFloat = 0 then
+      ZQ_DetalleProductoPRECIO5.AsFloat :=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
 
-   ZQ_DetalleProducto.Post;
+    ZQ_DetalleProducto.Post;
   end;
 
    PEdicion.Visible:=False;
