@@ -430,6 +430,18 @@ type
     lblActualizarPrecio_Titulo: TLabel;
     lblAnulado: TLabel;
     DBTxtFechaAnulado: TDBText;
+    ZQ_CpbFormaPago: TZQuery;
+    ZQ_CpbFormaPagoID_COMPROB_FP: TIntegerField;
+    ZQ_CpbFormaPagoID_COMPROBANTE: TIntegerField;
+    ZQ_CpbFormaPagoID_TIPO_FORMAPAG: TIntegerField;
+    ZQ_CpbFormaPagoMDCP_FECHA: TDateField;
+    ZQ_CpbFormaPagoMDCP_BANCO: TStringField;
+    ZQ_CpbFormaPagoMDCP_CHEQUE: TStringField;
+    ZQ_CpbFormaPagoIMPORTE: TFloatField;
+    ZQ_CpbFormaPagoCONCILIADO: TDateField;
+    ZQ_CpbFormaPagoCUENTA_EGRESO: TIntegerField;
+    ZQ_CpbFormaPagoFECHA_FP: TDateTimeField;
+    ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -634,13 +646,17 @@ end;
 
 procedure TFABM_CPB_FacturaCompra.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_CpbFormaPago]) then
   begin
     modoEdicion(true);
     confirmarComprobante:= false;
 
     ZQ_Proveedor.Close;
     ZQ_Imagen.Close;
+
+    ZQ_CpbFormaPago.Close;
+    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= -1;
+    ZQ_CpbFormaPago.Open;
 
     ZQ_CpbProducto.Close;
     ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= -1;
@@ -688,7 +704,7 @@ begin
   confirmarComprobante:= false;
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_CpbFormaPago]) then
   begin
     modoEdicion(true);
 
@@ -703,6 +719,10 @@ begin
     ZQ_CpbProducto.Close;
     ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
     ZQ_CpbProducto.Open;
+
+    ZQ_CpbFormaPago.Close;
+    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_CpbFormaPago.Open;
 
     PanelEditar_DatosGralProveedor.BringToFront;
     ZQ_Proveedor.Close;
@@ -743,6 +763,20 @@ begin
     ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO
   else
     ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
+
+  //cargo la forma de pago cuenta corriente al comprobante
+  if ZQ_Comprobante.State = dsInsert then
+  begin
+    ZQ_CpbFormaPago.Append;
+    ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= FP_CTA_CTE;
+    ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= CUENTA_CTA_CTE;
+  end
+  else
+    ZQ_CpbFormaPago.Edit;
+  ZQ_CpbFormaPagoIMPORTE.AsFloat:= ZQ_ComprobanteSALDO.AsFloat;
+  ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_ComprobanteSALDO.AsFloat;
+  ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA_COBRADA.AsDateTime;
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
