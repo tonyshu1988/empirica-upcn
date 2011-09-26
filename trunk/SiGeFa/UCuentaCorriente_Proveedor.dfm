@@ -4464,10 +4464,11 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
       end>
     object ZQ_CtaCte_GralLIMITE_DEUDA: TFloatField
       FieldName = 'LIMITE_DEUDA'
+      currency = True
     end
     object ZQ_CtaCte_GralSALDO: TFloatField
       FieldName = 'SALDO'
-      DisplayFormat = '###,###,##0.00'
+      currency = True
     end
     object ZQ_CtaCte_GralFECHA_ALTA: TDateField
       FieldName = 'FECHA_ALTA'
@@ -4477,11 +4478,11 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
     end
     object ZQ_CtaCte_GralDEBE: TFloatField
       FieldName = 'DEBE'
-      DisplayFormat = '###,###,##0.00'
+      currency = True
     end
     object ZQ_CtaCte_GralHABER: TFloatField
       FieldName = 'HABER'
-      DisplayFormat = '###,###,##0.00'
+      currency = True
     end
     object ZQ_CtaCte_GralNOMBRE: TStringField
       FieldName = 'NOMBRE'
@@ -4626,19 +4627,19 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
     end
     object ZQ_CtaCte_ProveedorDEBE: TFloatField
       FieldName = 'DEBE'
-      DisplayFormat = '###,###,##0.00'
+      currency = True
     end
     object ZQ_CtaCte_ProveedorHABER: TFloatField
       FieldName = 'HABER'
-      DisplayFormat = '###,###,##0.00'
+      currency = True
     end
     object ZQ_CtaCte_ProveedorSALDO_CPB: TFloatField
       FieldName = 'SALDO_CPB'
-      DisplayFormat = '###,###,##0.00'
+      currency = True
     end
     object ZQ_CtaCte_ProveedorSALDO: TFloatField
       FieldName = 'SALDO'
-      DisplayFormat = '###,###,##0.00'
+      currency = True
     end
     object ZQ_CtaCte_ProveedorID_COMPROB_FP: TIntegerField
       FieldName = 'ID_COMPROB_FP'

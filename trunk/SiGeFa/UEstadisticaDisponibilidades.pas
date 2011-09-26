@@ -229,7 +229,7 @@ type
     Label18: TLabel;
     Label1: TLabel;
     Shape1: TShape;
-    lblPD_totalIngreso: TLabel;
+    lblPD_totalTransfer: TLabel;
     Panel3: TPanel;
     lblResumenDetalleMovimiento: TLabel;
     lblPD_totalEgreso: TLabel;
@@ -244,6 +244,16 @@ type
     EKSumaPD_SaldoCta: TEKDbSuma;
     EKOrdenarGrillaSaldos: TEKOrdenarGrilla;
     EKOrdenarGrillaPD_Saldo: TEKOrdenarGrilla;
+    ZP_Estadistica_IE_MediosTOTAL_TRANSFERENCIA: TFloatField;
+    ZP_estadistica_Parte_DiarioTOTAL_TRANSFERENCIA: TFloatField;
+    lblPD_totalIngreso: TLabel;
+    Label2: TLabel;
+    DBText1: TDBText;
+    QRLabel16: TQRLabel;
+    QRDBText23: TQRDBText;
+    QRDBText24: TQRDBText;
+    QRLblPD_TotalTransfer: TQRLabel;
+    QRLabel19: TQRLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -288,6 +298,7 @@ begin
   lblSucursal.Caption := '';
   lblPD_totalIngreso.Caption := '';
   lblPD_totalEgreso.Caption := '';
+  lblPD_totalTransfer.Caption := '';  
   lblEncabezadoDetMov.Caption := '';
   lblSucursalDetMov.Caption := '';
   lblResumenDetalleMovimiento.Caption := '';
@@ -344,6 +355,7 @@ begin
     lblSaldo_TotalParteDiario.Caption := '';
     lblSucursal.Caption := '';
     lblPD_totalIngreso.Caption := '';
+    lblPD_totalTransfer.Caption := '';    
     lblPD_totalEgreso.Caption := '';
 
     if  EKBuscarParteDiario.BuscarSinEjecutar then
@@ -387,6 +399,7 @@ begin
         lblSaldo_TotalParteDiario.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
         lblPD_totalIngreso.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[0].SumValue);
         lblPD_totalEgreso.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[1].SumValue);
+        lblPD_totalTransfer.Caption:= 'Total Transferencias: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[2].SumValue);        
       end;
   end;
 
@@ -443,7 +456,7 @@ begin
 
   if PageControl.ActivePage.Name = 'TabParteDiario' then
   begin
-    if ZP_SaldosCuentas.IsEmpty or ZP_estadistica_Parte_Diario.IsEmpty or ZP_Estadistica_IE_Medios.IsEmpty then
+    if ZP_PD_SaldoCuentas.IsEmpty or ZP_estadistica_Parte_Diario.IsEmpty or ZP_Estadistica_IE_Medios.IsEmpty then
       exit;
 
     DM.VariablesReportes(RepParteDiario);
@@ -457,6 +470,7 @@ begin
     QRLabelImporteSaldo.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
     QRLblPD_TotalIngreso.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[0].SumValue);
     QRLblPD_TotalEgreso.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[1].SumValue);
+    QRLblPD_TotalTransfer.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[2].SumValue);
     QRlblRepParteDiario_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
 
     EKVista_RepParteDiario.VistaPrevia;
