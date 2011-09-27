@@ -4723,6 +4723,9 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       FieldName = 'color'
       Size = 30
     end
+    object CD_Devolucion_idStockProducto: TIntegerField
+      FieldName = 'idStockProducto'
+    end
   end
   object Popup_Devolucion: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
@@ -5157,6 +5160,9 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object CD_Entrega_color: TStringField
       FieldName = 'color'
       Size = 30
+    end
+    object CD_Entrega_idStockProducto: TIntegerField
+      FieldName = 'idStockProducto'
     end
   end
   object Popup_Entrega: TPopupMenu
@@ -5631,5 +5637,36 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object ZQ_CpbFormaPagoCUENTA_INGRESO: TIntegerField
       FieldName = 'CUENTA_INGRESO'
     end
+  end
+  object ZQ_UpdateStock: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'execute procedure devolucion_update_stock(:id_comprobante, :acci' +
+        'on)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'accion'
+        ParamType = ptUnknown
+      end>
+    Left = 149
+    Top = 344
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'accion'
+        ParamType = ptUnknown
+      end>
   end
 end
