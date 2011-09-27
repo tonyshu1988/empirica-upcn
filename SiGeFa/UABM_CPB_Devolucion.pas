@@ -482,6 +482,9 @@ type
     lblAnulado: TLabel;
     DBTxtMonto: TDBText;
     Label1: TLabel;
+    CD_Devolucion_idStockProducto: TIntegerField;
+    CD_Entrega_idStockProducto: TIntegerField;
+    ZQ_UpdateStock: TZQuery;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1382,6 +1385,7 @@ begin
     query.Append;
     query.FieldByName('ID_COMPROBANTE').AsInteger:= id_comprobante;
     query.FieldByName('ID_PRODUCTO').AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    query.FieldByName('ID_STOCK_PRODUCTO').AsInteger:= vselProducto.ZQ_StockID_STOCK_PRODUCTO.AsInteger;    
     if query.Name = 'ZQ_CpbDevolucion' then //si es una devolucion los importes van en negativo
       query.FieldByName('IMPORTE_UNITARIO').AsFloat:= vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat * -1
     else
@@ -1756,7 +1760,11 @@ begin
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
 
-//una vez que se confirma falta que haga el descuento de los productos.
+      //una vez que se confirma falta que haga el descuento de los productos.
+      ZQ_UpdateStock.Close;
+      ZQ_UpdateStock.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_UpdateStock.ParamByName('accion').AsInteger:= 1;
+      ZQ_UpdateStock.ExecSQL;
 
       try
         if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
@@ -1795,6 +1803,15 @@ begin
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
       ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
+
+      //una vez que anulo la devolucion vuelvo el stock como estaba antes, solamente si estaba confirmado
+      if (estado = ESTADO_CONFIRMADO) then
+      begin
+        ZQ_UpdateStock.Close;
+        ZQ_UpdateStock.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+        ZQ_UpdateStock.ParamByName('accion').AsInteger:= 2;
+        ZQ_UpdateStock.ExecSQL;
+      end;
 
       try
         if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
