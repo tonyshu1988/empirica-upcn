@@ -12,16 +12,10 @@ uses
 type
   TFConfiguracion = class(TForm)
     dxBarABM: TdxBarManager;
-    btLiquidacion: TdxBarLargeButton;
     BtModificar: TdxBarLargeButton;
-    btBaja: TdxBarLargeButton;
-    btBuscar: TdxBarLargeButton;
     BtGuardar: TdxBarLargeButton;
     BtCancelar: TdxBarLargeButton;
-    BtImprimir: TdxBarLargeButton;
-    btVariosCat: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    btElimLiq: TdxBarLargeButton;
     btNuevo: TdxBarLargeButton;
     PGeneral: TPanel;
     GrupoVisualizacion: TdxBarGroup;
@@ -126,6 +120,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ZQ_VariablesAfterScroll(DataSet: TDataSet);
     procedure panelColorClick(Sender: TObject);
+    procedure btNuevoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -334,6 +329,12 @@ begin
       ZQ_Variables.Edit;
       ZQ_VariablesTEXTO.AsString:= ColorToString(panelColor.Color);
     end
+end;
+
+procedure TFConfiguracion.btNuevoClick(Sender: TObject);
+begin
+  ZQ_Variables.Append;
+  DBEdit1.SetFocus;
 end;
 
 end.
