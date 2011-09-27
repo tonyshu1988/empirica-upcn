@@ -254,6 +254,15 @@ type
     QRDBText24: TQRDBText;
     QRLblPD_TotalTransfer: TQRLabel;
     QRLabel19: TQRLabel;
+    ZP_estadistica_Parte_DiarioTOTAL_NOTA_CREDITO: TFloatField;
+    ZP_estadistica_Parte_DiarioTOTAL_CTA_CTE_CLIENTE: TFloatField;
+    ZP_estadistica_Parte_DiarioTOTAL_CTA_CTE_PROVEEDOR: TFloatField;
+    Label3: TLabel;
+    DBText2: TDBText;
+    Label9: TLabel;
+    DBText3: TDBText;
+    Label10: TLabel;
+    DBText4: TDBText;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

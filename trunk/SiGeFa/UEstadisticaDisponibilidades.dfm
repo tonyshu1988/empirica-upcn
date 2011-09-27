@@ -2556,7 +2556,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object Panel10: TPanel
               Left = 3
               Top = 3
-              Width = 314
+              Width = 349
               Height = 228
               Align = alLeft
               BevelOuter = bvNone
@@ -2564,7 +2564,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label1: TLabel
                 Left = 0
                 Top = 0
-                Width = 314
+                Width = 349
                 Height = 13
                 Align = alTop
                 Caption = 'RESUMEN'
@@ -2577,15 +2577,15 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               end
               object GroupBox3: TGroupBox
                 Left = 3
-                Top = 20
-                Width = 303
-                Height = 169
+                Top = 13
+                Width = 335
+                Height = 208
                 Ctl3D = False
                 ParentCtl3D = False
                 TabOrder = 0
                 object Label15: TLabel
                   Left = 13
-                  Top = 21
+                  Top = 16
                   Width = 87
                   Height = 14
                   Caption = 'Saldo Inicial:'
@@ -2597,8 +2597,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object DBText9: TDBText
-                  Left = 128
-                  Top = 18
+                  Left = 158
+                  Top = 13
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
@@ -2612,8 +2612,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object Label7: TLabel
-                  Left = 13
-                  Top = 49
+                  Left = 12
+                  Top = 40
                   Width = 61
                   Height = 14
                   Caption = 'Ingresos:'
@@ -2625,8 +2625,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object DBText10: TDBText
-                  Left = 128
-                  Top = 46
+                  Left = 158
+                  Top = 37
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
@@ -2640,11 +2640,11 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object Label8: TLabel
-                  Left = 13
-                  Top = 76
-                  Width = 56
+                  Left = 12
+                  Top = 63
+                  Width = 109
                   Height = 14
-                  Caption = 'Egresos:'
+                  Caption = 'Cta. Cte. Cliente:'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -12
@@ -2653,23 +2653,23 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object DBText11: TDBText
-                  Left = 128
-                  Top = 73
+                  Left = 158
+                  Top = 60
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
-                  DataField = 'TOTAL_EGRESO'
+                  DataField = 'TOTAL_CTA_CTE_CLIENTE'
                   DataSource = DS_estadistica_Parte_Diario
                   Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clRed
+                  Font.Color = 5746176
                   Font.Height = -13
                   Font.Name = 'Verdana'
                   Font.Style = [fsBold]
                   ParentFont = False
                 end
                 object DBText19: TDBText
-                  Left = 128
-                  Top = 132
+                  Left = 158
+                  Top = 181
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
@@ -2684,7 +2684,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object Label16: TLabel
                   Left = 13
-                  Top = 135
+                  Top = 184
                   Width = 78
                   Height = 14
                   Caption = 'Saldo Final:'
@@ -2696,14 +2696,98 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object Shape1: TShape
-                  Left = 6
-                  Top = 130
-                  Width = 292
+                  Left = 5
+                  Top = 179
+                  Width = 324
                   Height = 1
                 end
                 object Label2: TLabel
-                  Left = 13
-                  Top = 103
+                  Left = 12
+                  Top = 86
+                  Width = 51
+                  Height = 14
+                  Caption = 'Egresos'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'Verdana'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object DBText1: TDBText
+                  Left = 158
+                  Top = 83
+                  Width = 165
+                  Height = 17
+                  Alignment = taRightJustify
+                  DataField = 'TOTAL_EGRESO'
+                  DataSource = DS_estadistica_Parte_Diario
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clRed
+                  Font.Height = -13
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object Label3: TLabel
+                  Left = 12
+                  Top = 109
+                  Width = 125
+                  Height = 14
+                  Caption = 'Cta. Cte. Proveedor'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'Verdana'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object DBText2: TDBText
+                  Left = 157
+                  Top = 106
+                  Width = 165
+                  Height = 17
+                  Alignment = taRightJustify
+                  DataField = 'TOTAL_CTA_CTE_PROVEEDOR'
+                  DataSource = DS_estadistica_Parte_Diario
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clRed
+                  Font.Height = -13
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object Label9: TLabel
+                  Left = 12
+                  Top = 132
+                  Width = 89
+                  Height = 14
+                  Caption = 'Nota  Credito:'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'Verdana'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object DBText3: TDBText
+                  Left = 157
+                  Top = 129
+                  Width = 165
+                  Height = 17
+                  Alignment = taRightJustify
+                  DataField = 'TOTAL_NOTA_CREDITO'
+                  DataSource = DS_estadistica_Parte_Diario
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clRed
+                  Font.Height = -13
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
+                object Label10: TLabel
+                  Left = 12
+                  Top = 155
                   Width = 97
                   Height = 14
                   Caption = 'Transferencias:'
@@ -2714,9 +2798,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   Font.Style = []
                   ParentFont = False
                 end
-                object DBText1: TDBText
-                  Left = 128
-                  Top = 100
+                object DBText4: TDBText
+                  Left = 157
+                  Top = 152
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
@@ -2732,9 +2816,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               end
             end
             object Panel11: TPanel
-              Left = 317
+              Left = 352
               Top = 3
-              Width = 700
+              Width = 665
               Height = 228
               Align = alClient
               BevelOuter = bvNone
@@ -2742,7 +2826,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label18: TLabel
                 Left = 0
                 Top = 0
-                Width = 700
+                Width = 665
                 Height = 13
                 Align = alTop
                 Caption = 'INGRESOS Y EGRESOS POR MEDIOS'
@@ -2756,7 +2840,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object DBGridPD_MediosDePago: TDBGrid
                 Left = 0
                 Top = 13
-                Width = 700
+                Width = 665
                 Height = 174
                 Align = alClient
                 Color = 14606012
@@ -2806,7 +2890,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Panel12: TPanel
                 Left = 0
                 Top = 187
-                Width = 700
+                Width = 665
                 Height = 41
                 Align = alBottom
                 BevelOuter = bvNone
@@ -2814,7 +2898,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 object lblPD_totalTransfer: TLabel
                   Left = 0
                   Top = 26
-                  Width = 700
+                  Width = 665
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -2829,7 +2913,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 object lblPD_totalEgreso: TLabel
                   Left = 0
                   Top = 0
-                  Width = 700
+                  Width = 665
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -2844,7 +2928,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 object lblPD_totalIngreso: TLabel
                   Left = 0
                   Top = 13
-                  Width = 700
+                  Width = 665
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3896,7 +3980,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSucursalDetMov: TLabel
             Left = 4
             Top = 17
-            Width = 1014
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -3910,7 +3994,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblEncabezadoDetMov: TLabel
             Left = 4
             Top = 4
-            Width = 1014
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -4017,9 +4101,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           BorderWidth = 4
           TabOrder = 3
           object lblResumenDetalleMovimiento: TLabel
-            Left = 5
+            Left = 924
             Top = 5
-            Width = 1012
+            Width = 93
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -5010,6 +5094,18 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
     end
     object ZP_estadistica_Parte_DiarioTOTAL_TRANSFERENCIA: TFloatField
       FieldName = 'TOTAL_TRANSFERENCIA'
+      currency = True
+    end
+    object ZP_estadistica_Parte_DiarioTOTAL_NOTA_CREDITO: TFloatField
+      FieldName = 'TOTAL_NOTA_CREDITO'
+      currency = True
+    end
+    object ZP_estadistica_Parte_DiarioTOTAL_CTA_CTE_CLIENTE: TFloatField
+      FieldName = 'TOTAL_CTA_CTE_CLIENTE'
+      currency = True
+    end
+    object ZP_estadistica_Parte_DiarioTOTAL_CTA_CTE_PROVEEDOR: TFloatField
+      FieldName = 'TOTAL_CTA_CTE_PROVEEDOR'
       currency = True
     end
   end
