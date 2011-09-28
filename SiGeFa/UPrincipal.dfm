@@ -5095,6 +5095,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 14
       OnExecute = AConfigGralExecute
     end
+    object ADebugging: TAction
+      Caption = 'Debugging'
+      ImageIndex = 14
+      OnExecute = ADebuggingExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5304,6 +5309,9 @@ object FPrincipal: TFPrincipal
       Caption = 'Sistema'
       object Auditoria1: TMenuItem
         Action = AAuditoria
+      end
+      object Debugging1: TMenuItem
+        Action = ADebugging
       end
       object CambiarContrasenia: TMenuItem
         Tag = 1
@@ -28005,8 +28013,8 @@ object FPrincipal: TFPrincipal
     IndiceUsuario = 1
     IndiceTransaccion = 2
     IndiceVersion = 0
-    Left = 400
-    Top = 181
+    Left = 288
+    Top = 253
   end
   object Iconos_Mail: TImageList
     Left = 74
