@@ -147,6 +147,8 @@ type
     AConfiguracionGeneral1: TMenuItem;
     AABM_CPB_Transfer: TAction;
     ABMTransferencia1: TMenuItem;
+    ADebugging: TAction;
+    Debugging1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -198,6 +200,7 @@ type
     procedure AAuditoriaExecute(Sender: TObject);
     procedure AConfigGralExecute(Sender: TObject);
     procedure AABM_CPB_TransferExecute(Sender: TObject);
+    procedure ADebuggingExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -232,7 +235,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_CPB_Recibo, UABM_CPB_OrdenPago, UABM_CPB_Remito,
   UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa,
   UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
-  UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion;
+  UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -515,10 +518,12 @@ begin
   FMailEnviar.ShowModal;
 end;
 
+
 procedure TFPrincipal.AABM_ArticuloExecute(Sender: TObject);
 begin
     EKVentanas1.Abrir(Sender, TFABM_Articulo, FABM_Articulo);
 end;
+
 
 procedure TFPrincipal.AABM_TipoIvaExecute(Sender: TObject);
 begin
@@ -530,125 +535,150 @@ begin
     EKVentanas1.Abrir(Sender, TFABM_TipoComprobante, FABM_TipoComprobante);
 end;
 
+
 procedure TFPrincipal.AABM_TipoMedioPagoExecute(Sender: TObject);
 begin
     EKVentanas1.Abrir(Sender, TFABM_TipoFormaPago, FABM_TipoFormaPago);
 end;
+
 
 procedure TFPrincipal.AABM_CuentaExecute(Sender: TObject);
 begin
     EKVentanas1.Abrir(Sender, TFABM_Cuentas, FABM_Cuentas);
 end;
 
+
 procedure TFPrincipal.AABM_PreciosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_Precios, FABM_Precios);
 end;
+
 
 procedure TFPrincipal.AABM_ComprobanteExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_Comprobantes, FABM_Comprobantes);
 end;
 
+
 procedure TFPrincipal.ACajeroExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFCajero, FCajero);
 end;
+
 
 procedure TFPrincipal.AMovInternosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFMovimientosInternos, FMovimientosInternos);
 end;
 
+
 procedure TFPrincipal.AABM_TipoMovExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_TipoMovimiento, FABM_TipoMovimiento);
 end;
+
 
 procedure TFPrincipal.ATransferirStockExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFTransferirStock, FTransferirStock);
 end;
 
+
 procedure TFPrincipal.ACtaCte_ClienteExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFCuentaCorriente, FCuentaCorriente);
 end;
+
 
 procedure TFPrincipal.AEstad_MovInternosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFEstadisticaMovInternos, FEstadisticaMovInternos);
 end;
 
+
 procedure TFPrincipal.AEstad_FacturacionExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFEstadisticasFacturacion, FEstadisticasFacturacion);
 end;
+
 
 procedure TFPrincipal.AEstad_DisponibExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFEstadisticaDisponibilidades, FEstadisticaDisponibilidades);
 end;
 
+
 procedure TFPrincipal.AArqueo_CajaExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFArqueo_Caja, FArqueo_Caja);
 end;
+
 
 procedure TFPrincipal.AEstad_StockExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFEstadisticaStock, FEstadisticaStock);
 end;
 
+
 procedure TFPrincipal.AABM_CPB_ReciboExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_Recibo, FABM_CPB_Recibo);
 end;
+
 
 procedure TFPrincipal.AABM_CPB_RemitoExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_Remito, FABM_CPB_Remito);
 end;
 
+
 procedure TFPrincipal.AABM_CPB_OrdenPagoExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_OrdenPago, FABM_CPB_OrdenPago);
 end;
+
 
 procedure TFPrincipal.AABM_CPB_PresupuestoExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_Presupuesto, FABM_CPB_Presupuesto);
 end;
 
+
 procedure TFPrincipal.AABM_CPB_NotaPedidoExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_NotaPedido, FABM_CPB_NotaPedido);
 end;
+
 
 procedure TFPrincipal.AABM_CPB_FacturaCompExecute(Sender: TObject);
 begin
    EKVentanas1.Abrir(Sender, TFABM_CPB_FacturaCompra, FABM_CPB_FacturaCompra);
 end;
 
+
 procedure TFPrincipal.AABM_CPB_DevolucionExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_Devolucion, FABM_CPB_Devolucion);
 end;
+
 
 procedure TFPrincipal.APreventaExecute(Sender: TObject);
 begin
    EKVentanas1.Abrir(Sender, TFABM_Preventa, FABM_Preventa);
 end;
 
+
 procedure TFPrincipal.ACtaCte_ProveedorExecute(Sender: TObject);
 begin
    EKVentanas1.Abrir(Sender, TFCuentaCorriente_Proveedor, FCuentaCorriente_Proveedor);
 end;
 
+
 procedure TFPrincipal.AAuditoriaExecute(Sender: TObject);
 begin
    EKVentanas1.Abrir(Sender, TFAuditoria, FAuditoria);
 end;
+
 
 procedure TFPrincipal.AConfigGralExecute(Sender: TObject);
 begin
@@ -657,9 +687,16 @@ begin
    FConfiguracion.Release;
 end;
 
+
 procedure TFPrincipal.AABM_CPB_TransferExecute(Sender: TObject);
 begin
    EKVentanas1.Abrir(Sender, TFABM_CPB_Transferencia, FABM_CPB_Transferencia);
+end;
+
+
+procedure TFPrincipal.ADebuggingExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFDebugging, FDebugging);
 end;
 
 end.
