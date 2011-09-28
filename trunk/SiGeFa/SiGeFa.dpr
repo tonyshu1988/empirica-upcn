@@ -58,7 +58,8 @@ uses
   UConfiguracion in 'UConfiguracion.pas' {FConfiguracion},
   UABM_CPB_Transferencia in 'UABM_CPB_Transferencia.pas' {FABM_CPB_Transferencia},
   UVerImagen in 'UVerImagen.pas' {FVerImagen},
-  UABM_CPB_Devolucion in 'UABM_CPB_Devolucion.pas' {FABM_CPB_Devolucion};
+  UABM_CPB_Devolucion in 'UABM_CPB_Devolucion.pas' {FABM_CPB_Devolucion},
+  UDebugging in 'UDebugging.pas' {FDebugging};
 
 {$R *.res}
 
