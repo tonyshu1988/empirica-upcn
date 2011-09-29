@@ -1614,6 +1614,17 @@ begin
     result := false;
     exit;
   end;
+
+  //Saco las formas de pago que sean con importe=0 (al cuete)
+  CD_Fpago.First;
+  while not(CD_Fpago.Eof) do
+   begin
+     if CD_Fpago_importeVenta.AsFloat<=0 then
+      CD_Fpago.Delete;
+     CD_Fpago.Next;
+   end;
+
+
 end;
 
 procedure TFCajero.RecalcularMontoPago();
@@ -1706,6 +1717,10 @@ if not(CD_DetalleFactura.IsEmpty) then
                     begin
                       CD_Fpago.Edit;
                       CD_FpagoCUENTA_INGRESO.AsInteger:=StrToInt(EKListadoCuenta.Resultado);
+                      ZQ_ListadoCuenta.Locate('id_cuenta',CD_FpagoCUENTA_INGRESO.AsInteger,[]);
+                      if CD_FpagoID_TIPO_FORMAPAG.IsNull then
+                        CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
+                      CD_Fpago_esCtaCorr.AsString:=ZQ_ListadoCuentaA_CTA_CORRIENTE.Asstring;
                       CD_Fpago.Post;
                     end
               end
@@ -1997,6 +2012,7 @@ begin
   cargarClientePorDefecto();
   modoCargaPrevia:=False;
   modoLecturaProd();
+  RecalcularMontoPago();
 end;
 
 end.

@@ -2579,6 +2579,7 @@ object FCajero: TFCajero
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           OnColExit = DBGridFormaPagoColExit
+          OnExit = DBGridFormaPagoColExit
           Columns = <
             item
               Color = 16772332
