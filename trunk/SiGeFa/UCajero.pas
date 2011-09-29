@@ -551,6 +551,7 @@ type
     procedure cargarPreventa();
     procedure edRecibidoExit(Sender: TObject);
     procedure calcularEfectivo();
+    procedure cancelarProducto();
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -1247,11 +1248,7 @@ begin
 if (CD_DetalleFactura.State=dsBrowse) then
  if (application.MessageBox(pchar('Desea Cancelar la Boleta Actual y quitar todos sus Productos?'), 'Borrar Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-   CD_DetalleFactura.EmptyDataSet;
-   CD_Fpago.EmptyDataSet;
-   crearComprobante();
-   lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
-   lblMontoProds.Caption :='Total Productos: '+ FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+   cancelarProducto();
   end
 end;
 
@@ -1403,6 +1400,9 @@ end;
 
 procedure TFCajero.btnCancelarVentaClick(Sender: TObject);
 begin
+  if dm.EKModelo.verificar_transaccion(abmComprobante) then
+     dm.EKModelo.cancelar_transaccion(abmComprobante); 
+  CD_Comprobante.Edit;
   PConfirmarVenta.Visible:=False;
   PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
   GrupoGuardarCancelar.Enabled:=True;
@@ -1517,6 +1517,13 @@ begin
   if CD_DetalleFactura.IsEmpty then
    begin
     Application.MessageBox('Debe cargar al menos un Producto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    result := false;
+    exit;
+   end;
+
+  if CD_ComprobanteID_TIPO_IVA.IsNull then
+   begin
+    Application.MessageBox('Debe cargar el tipo de IVA, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
     result := false;
     exit;
    end;
@@ -1678,6 +1685,8 @@ precio:Double;
 begin
 if not(CD_DetalleFactura.IsEmpty) then
  begin
+
+      // Si elijo una cuenta de Ingreso, pogo el medio por defecto en medio de pago.
       if (((sender as tdbgrid).SelectedField.FullName = 'CUENTA_INGRESO') or
             ((sender as tdbgrid).SelectedField.FullName = '_ctaIngreso')) then
         begin
@@ -1702,6 +1711,7 @@ if not(CD_DetalleFactura.IsEmpty) then
               end
         end;
 
+      // Si elijo un medio de pago, pogo la cuenta por defecto del medio de pago.
       if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
             ((sender as tdbgrid).SelectedField.FullName = 'ID_TIPO_FORMAPAG')) then
         begin
@@ -1738,6 +1748,7 @@ if not(CD_DetalleFactura.IsEmpty) then
           CD_FpagoCUENTA_INGRESO.AsInteger:=StrToInt(EKListadoCuenta.Resultado);
           CD_Fpago.Post;
         end;
+
    if not(CD_Fpago_nroPrecio.IsNull) then
    begin
 
@@ -1966,6 +1977,26 @@ begin
       CD_VentaFinal.Next;
   end;
   lblCambio.Caption:= FormatFloat('$ ##,###,##0.00 ',CD_ComprobantemontoRecibido.AsFloat-acumEfectivo);
+end;
+
+procedure TFCajero.cancelarProducto;
+begin
+  dm.EKModelo.abrir(ZQ_FormasPago);
+  dm.EKModelo.abrir(ZQ_DetalleProd);
+  dm.EKModelo.abrir(ZQ_ListadoCuenta);
+  Cliente:=-1;
+  IdVendedor:=-1;
+  descCliente:=0;
+  ClienteIVA:=0;
+  IDClienteIVA:=0;
+  CD_DetalleFactura.EmptyDataSet;
+  CD_Fpago.EmptyDataSet;
+  crearComprobante();
+  lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
+  lblMontoProds.Caption :='Total Productos: '+ FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+  cargarClientePorDefecto();
+  modoCargaPrevia:=False;
+  modoLecturaProd();
 end;
 
 end.
