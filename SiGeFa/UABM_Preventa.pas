@@ -389,6 +389,7 @@ type
     procedure recalcularBoleta();
     procedure btnConfirmarVentaClick(Sender: TObject);
     function validarBoleta():Boolean ;
+    procedure cancelarProducto();
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -1051,9 +1052,7 @@ begin
 if (CD_DetalleFactura.State=dsBrowse) then
  if (application.MessageBox(pchar('Desea Cancelar la Boleta Actual y quitar todos sus Productos?'), 'Borrar Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-   CD_DetalleFactura.EmptyDataSet;
-
-   lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
+   cancelarProducto();
   end
 end;
 
@@ -1171,6 +1170,8 @@ end;
 
 procedure TFABM_Preventa.btnCancelarVentaClick(Sender: TObject);
 begin
+  if dm.EKModelo.verificar_transaccion(abmComprobante) then
+     dm.EKModelo.cancelar_transaccion(abmComprobante);
   PConfirmarVenta.Visible:=False;
   PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
   GrupoGuardarCancelar.Enabled:=True;
@@ -1304,6 +1305,21 @@ begin
     result := false;
     exit;
    end;
+end;
+
+procedure TFABM_Preventa.cancelarProducto;
+begin
+  dm.EKModelo.abrir(ZQ_DetalleProd);
+  Cliente:=-1;
+  IdVendedor:=-1;
+  descCliente:=0;
+  ClienteIVA:=0;
+  IDClienteIVA:=0;
+  CD_DetalleFactura.EmptyDataSet;
+  crearComprobante();
+  lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
+  cargarClientePorDefecto();
+  modoLecturaProd();
 end;
 
 end.
