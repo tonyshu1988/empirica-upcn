@@ -1615,12 +1615,19 @@ begin
     exit;
   end;
 
-  //Saco las formas de pago que sean con importe=0 (al cuete)
+  //Saco las formas de pago que sean con importe=0 o sale si no tiene cuenta(al cuete)
   CD_Fpago.First;
   while not(CD_Fpago.Eof) do
    begin
      if CD_Fpago_importeVenta.AsFloat<=0 then
       CD_Fpago.Delete;
+     if (CD_FpagoID_TIPO_FORMAPAG.IsNull or CD_FpagoCUENTA_INGRESO.IsNull) then
+       begin
+        Application.MessageBox('El Tipo de Pago y/o Cuenta en las Formas de Pago es incorrecto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+        result := false;
+        exit;
+      end;
+
      CD_Fpago.Next;
    end;
 
