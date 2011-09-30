@@ -572,7 +572,7 @@ const
 implementation
 
 uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar,
-  UUtilidades;
+  UUtilidades, DateUtils;
 
 {$R *.dfm}
 procedure TFABM_CPB_Devolucion.tamanioGrillasDevEnt();
@@ -976,12 +976,16 @@ begin
       PanelEditar_FPago.BringToFront;
       dm.centrarPanel(FABM_CPB_Devolucion, PanelEditar_FPago);
 
-      if credito then //si es una nota de credito
+      if credito then //si es una nota de credito 124 o 203
       begin
+        PanelEditar_FPago.Height:= 124;
+        btnEliminarFPago.Visible:= false;
         PanelEditar_FPagoInfo.Enabled:= false; //no se puede tocar la forma de pago
         DBGridEditar_Fpago.Enabled:= false; //no se puede tocar la forma de pago
         panelNC_Vencimiento.Enabled:= true; //no se puede tocar la forma de pago
         lblTituloVentanaFpago.Caption:= 'NOTA DE CREDITO';
+
+        ZQ_ComprobanteFECHA_VENCIMIENTO.AsDateTime:= IncDay(dm.EKModelo.FechayHora, notaCredito_diasVencimiento);
 
         borrarCuentasIngreso;
         if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
@@ -1003,6 +1007,8 @@ begin
         ZQ_Comprobante.Edit;
         ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
 
+        PanelEditar_FPago.Height:= 204;
+        btnEliminarFPago.Visible:= true;
         PanelEditar_FPagoInfo.Enabled:= true; //no se puede tocar la forma de pago
         DBGridEditar_Fpago.Enabled:= true; //no se puede tocar la forma de pago
         panelNC_Vencimiento.Enabled:= false; //no se puede tocar la forma de pago
@@ -1040,13 +1046,13 @@ end;
 
 procedure TFABM_CPB_Devolucion.btnImprimirClick(Sender: TObject);
 begin
-//  if ZQ_VerCpb.IsEmpty then
-//    exit;
-//
-//  if not Assigned(FImpresion_Comprobantes) then
-//    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
-//  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, false);
-//  FImpresion_Comprobantes.imprimir;
+  if ZQ_VerCpb.IsEmpty then
+    exit;
+
+  if not Assigned(FImpresion_Comprobantes) then
+    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, false);
+  FImpresion_Comprobantes.imprimir;
 end;
 
 
@@ -1385,7 +1391,7 @@ begin
     query.Append;
     query.FieldByName('ID_COMPROBANTE').AsInteger:= id_comprobante;
     query.FieldByName('ID_PRODUCTO').AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
-    query.FieldByName('ID_STOCK_PRODUCTO').AsInteger:= vselProducto.ZQ_StockID_STOCK_PRODUCTO.AsInteger;    
+    query.FieldByName('ID_STOCK_PRODUCTO').AsInteger:= vselProducto.ZQ_StockID_STOCK_PRODUCTO.AsInteger;
     if query.Name = 'ZQ_CpbDevolucion' then //si es una devolucion los importes van en negativo
       query.FieldByName('IMPORTE_UNITARIO').AsFloat:= vselProducto.ZQ_ProductoPRECIO_VENTA.AsFloat * -1
     else
@@ -1429,8 +1435,17 @@ begin
     vselProducto:= TFBuscarProductoStock.Create(nil);
 
   tipoProducto:= tipo;
+  if tipoProducto = 'DEVOLUCION' then
+  begin
+    vselProducto.usaDevolucion:= 'S';
+    vselProducto.usaCajero:= 'N';    
+  end
+  else
+  begin
+    vselProducto.usaDevolucion:= 'N';
+    vselProducto.usaCajero:= 'S';
+  end;
   vselProducto.OnSeleccionar:= onSelProducto;
-  vselProducto.usaCajero:= 'S';
   vselProducto.abrirZQ_Producto:= 'S';
   vselProducto.SeleccionarYSalir:= false;
   vselProducto.ShowModal;

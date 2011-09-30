@@ -1,7 +1,7 @@
 object FMovimientosInternos: TFMovimientosInternos
-  Left = 197
-  Top = 156
-  Width = 1056
+  Left = 299
+  Top = 131
+  Width = 874
   Height = 559
   Caption = 'Movimientos Internos'
   Color = clBtnFace
@@ -15,6 +15,7 @@ object FMovimientosInternos: TFMovimientosInternos
   Position = poScreenCenter
   Scaled = False
   Visible = True
+  WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -816,9 +817,10 @@ object FMovimientosInternos: TFMovimientosInternos
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 1040
+    Width = 858
     Height = 469
     Align = alClient
+    BevelOuter = bvNone
     BorderWidth = 5
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -829,20 +831,20 @@ object FMovimientosInternos: TFMovimientosInternos
     TabOrder = 4
     object PanelCalendario: TPanel
       Tag = 99
-      Left = 6
-      Top = 6
-      Width = 1028
+      Left = 5
+      Top = 5
+      Width = 848
       Height = 25
       Align = alTop
       BevelOuter = bvNone
       Color = clTeal
       TabOrder = 0
       DesignSize = (
-        1028
+        848
         25)
       object PanelManejoCalendario: TPanel
         Tag = 99
-        Left = 326
+        Left = 236
         Top = -1
         Width = 377
         Height = 29
@@ -860,11 +862,12 @@ object FMovimientosInternos: TFMovimientosInternos
         DesignSize = (
           377
           29)
-        object SpeedBtn_AnioAnterior: TSpeedButton
+        object SpeedBtn_MesAnterior: TSpeedButton
           Left = 2
           Top = 2
           Width = 30
           Height = 23
+          Hint = 'Mes Anterior'
           Anchors = []
           Caption = '<<'
           Font.Charset = DEFAULT_CHARSET
@@ -873,13 +876,14 @@ object FMovimientosInternos: TFMovimientosInternos
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
-          OnClick = SpeedBtn_AnioAnteriorClick
+          OnClick = SpeedBtn_MesAnteriorClick
         end
-        object SpeedBtn_MesAnterior: TSpeedButton
+        object SpeedBtn_DiaAnterior: TSpeedButton
           Left = 34
           Top = 2
           Width = 30
           Height = 23
+          Hint = 'D'#237'a Anterior'
           Anchors = []
           Caption = '<'
           Font.Charset = DEFAULT_CHARSET
@@ -888,13 +892,14 @@ object FMovimientosInternos: TFMovimientosInternos
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
-          OnClick = SpeedBtn_MesAnteriorClick
+          OnClick = SpeedBtn_DiaAnteriorClick
         end
-        object SpeedBtn_MesSiguiente: TSpeedButton
+        object SpeedBtn_DiaSiguiente: TSpeedButton
           Left = 312
           Top = 2
           Width = 30
           Height = 23
+          Hint = 'D'#237'a Siguiente'
           Anchors = []
           Caption = '>'
           Font.Charset = DEFAULT_CHARSET
@@ -903,13 +908,14 @@ object FMovimientosInternos: TFMovimientosInternos
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
-          OnClick = SpeedBtn_MesSiguienteClick
+          OnClick = SpeedBtn_DiaSiguienteClick
         end
-        object SpeedBtn_AnioSiguiente: TSpeedButton
+        object SpeedBtn_MesSiguiente: TSpeedButton
           Left = 344
           Top = 2
           Width = 30
           Height = 23
+          Hint = 'Mes Siguiente'
           Anchors = []
           Caption = '>>'
           Font.Charset = DEFAULT_CHARSET
@@ -918,7 +924,7 @@ object FMovimientosInternos: TFMovimientosInternos
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
-          OnClick = SpeedBtn_AnioSiguienteClick
+          OnClick = SpeedBtn_MesSiguienteClick
         end
         object SpeedBtn_Hoy: TSpeedButton
           Left = 66
@@ -937,259 +943,27 @@ object FMovimientosInternos: TFMovimientosInternos
         end
       end
     end
-    object PanelMes: TPanel
-      Left = 682
-      Top = 31
-      Width = 352
-      Height = 432
-      Align = alClient
-      TabOrder = 1
-      object PanelMes_Info: TPanel
-        Left = 1
-        Top = 1
-        Width = 350
-        Height = 20
-        Align = alTop
-        BevelOuter = bvNone
-        TabOrder = 0
-        object lblBalanceMensual: TLabel
-          Left = 0
-          Top = 0
-          Width = 350
-          Height = 20
-          Align = alClient
-          Alignment = taCenter
-          Caption = 'BALANCE DIARIO'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold, fsItalic]
-          ParentFont = False
-        end
-      end
-      object DBGrid_Mes: TDBGrid
-        Left = 1
-        Top = 21
-        Width = 350
-        Height = 323
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_Balance
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGrid_MesDrawColumnCell
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'FECHA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Fecha'
-            Width = 103
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'INGRESO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Total Ingresos'
-            Width = 112
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'EGRESO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Total Egresos'
-            Width = 96
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SALDODIARIO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Saldo Dia'
-            Width = 115
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SALDO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Saldo Total'
-            Width = 114
-            Visible = True
-          end>
-      end
-      object PanelMes_Resumen: TPanel
-        Left = 1
-        Top = 344
-        Width = 350
-        Height = 87
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 2
-        DesignSize = (
-          350
-          87)
-        object Label11: TLabel
-          Left = 110
-          Top = 7
-          Width = 85
-          Height = 16
-          Alignment = taRightJustify
-          Anchors = [akTop, akRight]
-          Caption = 'Saldo Inicial:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label1: TLabel
-          Left = 118
-          Top = 62
-          Width = 77
-          Height = 16
-          Alignment = taRightJustify
-          Anchors = [akTop, akRight]
-          Caption = 'Saldo Final:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label12: TLabel
-          Left = 94
-          Top = 24
-          Width = 101
-          Height = 16
-          Alignment = taRightJustify
-          Anchors = [akTop, akRight]
-          Caption = 'Total Ingresos:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label9: TLabel
-          Left = 99
-          Top = 42
-          Width = 96
-          Height = 16
-          Alignment = taRightJustify
-          Anchors = [akTop, akRight]
-          Caption = 'Total Egresos:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Shape1: TShape
-          Left = 72
-          Top = 60
-          Width = 276
-          Height = 1
-          Anchors = [akTop, akRight]
-          Pen.Color = clGray
-        end
-        object lblTotalIngresos: TLabel
-          Left = 195
-          Top = 24
-          Width = 140
-          Height = 16
-          Alignment = taRightJustify
-          Anchors = [akTop, akRight]
-          AutoSize = False
-          Caption = 'lblTotalIngresos'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clGreen
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object lblTotalEgresos: TLabel
-          Left = 195
-          Top = 42
-          Width = 140
-          Height = 16
-          Alignment = taRightJustify
-          Anchors = [akTop, akRight]
-          AutoSize = False
-          Caption = 'lblTotalEgresos'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clRed
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object lblSaldoFinal: TLabel
-          Left = 195
-          Top = 62
-          Width = 140
-          Height = 16
-          Alignment = taRightJustify
-          Anchors = [akTop, akRight]
-          AutoSize = False
-          Caption = 'lblSaldoFinal'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clNavy
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object lblSaldoInicial: TLabel
-          Left = 195
-          Top = 7
-          Width = 140
-          Height = 16
-          Alignment = taRightJustify
-          Anchors = [akTop, akRight]
-          AutoSize = False
-          Caption = 'lblSaldoInicial'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-      end
-    end
     object PanelDia: TPanel
-      Left = 6
-      Top = 31
-      Width = 676
-      Height = 432
-      Align = alLeft
+      Left = 5
+      Top = 30
+      Width = 848
+      Height = 434
+      Align = alClient
+      BevelOuter = bvNone
       Caption = 'PanelDia'
-      TabOrder = 2
+      TabOrder = 1
       object PanelDia_Lista: TPanel
-        Left = 1
-        Top = 181
-        Width = 674
-        Height = 250
+        Left = 0
+        Top = 180
+        Width = 848
+        Height = 254
         Align = alClient
+        BevelOuter = bvNone
         TabOrder = 0
         object PanelDia_InfoLista: TPanel
-          Left = 1
-          Top = 1
-          Width = 672
+          Left = 0
+          Top = 0
+          Width = 848
           Height = 32
           Align = alTop
           BevelOuter = bvNone
@@ -1197,7 +971,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object lblFechaHoy: TLabel
             Left = 0
             Top = 0
-            Width = 672
+            Width = 848
             Height = 19
             Align = alClient
             Alignment = taCenter
@@ -1212,13 +986,13 @@ object FMovimientosInternos: TFMovimientosInternos
           object Panel2: TPanel
             Left = 0
             Top = 19
-            Width = 672
+            Width = 848
             Height = 13
             Align = alBottom
             BevelOuter = bvNone
             TabOrder = 0
             object Label10: TLabel
-              Left = 528
+              Left = 704
               Top = 0
               Width = 144
               Height = 13
@@ -1236,7 +1010,7 @@ object FMovimientosInternos: TFMovimientosInternos
               ParentFont = False
             end
             object Label13: TLabel
-              Left = 240
+              Left = 416
               Top = 0
               Width = 144
               Height = 13
@@ -1254,7 +1028,7 @@ object FMovimientosInternos: TFMovimientosInternos
               ParentFont = False
             end
             object Label14: TLabel
-              Left = 384
+              Left = 560
               Top = 0
               Width = 144
               Height = 13
@@ -1274,10 +1048,10 @@ object FMovimientosInternos: TFMovimientosInternos
           end
         end
         object DBGrid_Dia: TDBGrid
-          Left = 1
-          Top = 33
-          Width = 672
-          Height = 216
+          Left = 0
+          Top = 32
+          Width = 848
+          Height = 191
           Align = alClient
           Color = 14606012
           DataSource = DS_MovHoy
@@ -1316,25 +1090,73 @@ object FMovimientosInternos: TFMovimientosInternos
             end
             item
               Expanded = False
-              FieldName = 'IMPORTE_TOTAL'
+              FieldName = 'INGRESOS'
               Title.Alignment = taCenter
-              Title.Caption = 'Importe'
+              Title.Caption = 'Ingresos'
               Width = 121
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'EGRESOS'
+              Title.Alignment = taCenter
+              Title.Caption = 'Egresos'
+              Width = 123
               Visible = True
             end>
         end
+        object Panel3: TPanel
+          Left = 0
+          Top = 223
+          Width = 848
+          Height = 31
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 2
+          object lblMov_TotalEgresos: TLabel
+            Left = 0
+            Top = 3
+            Width = 848
+            Height = 14
+            Align = alBottom
+            Alignment = taRightJustify
+            Caption = 'Total: 0.00'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+          object lblMov_TotalIngresos: TLabel
+            Left = 0
+            Top = 17
+            Width = 848
+            Height = 14
+            Align = alBottom
+            Alignment = taRightJustify
+            Caption = 'Total: 0.00'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+        end
       end
       object PanelDia_Movimiento: TPanel
-        Left = 1
-        Top = 1
-        Width = 674
+        Left = 0
+        Top = 0
+        Width = 848
         Height = 180
         Align = alTop
+        BevelOuter = bvNone
         TabOrder = 1
         object PanelDia_InfoMovimiento: TPanel
-          Left = 1
-          Top = 1
-          Width = 672
+          Left = 0
+          Top = 0
+          Width = 848
           Height = 14
           Align = alTop
           BevelOuter = bvNone
@@ -1342,7 +1164,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object Label2: TLabel
             Left = 0
             Top = 0
-            Width = 672
+            Width = 848
             Height = 14
             Align = alClient
             Alignment = taCenter
@@ -1356,15 +1178,12 @@ object FMovimientosInternos: TFMovimientosInternos
           end
         end
         object GroupBox1: TGroupBox
-          Left = 1
-          Top = 15
-          Width = 672
-          Height = 164
+          Left = 0
+          Top = 14
+          Width = 848
+          Height = 166
           Align = alClient
           TabOrder = 0
-          DesignSize = (
-            672
-            164)
           object Label3: TLabel
             Left = 44
             Top = 15
@@ -1396,20 +1215,20 @@ object FMovimientosInternos: TFMovimientosInternos
           object PanelDia_Cuentas: TPanel
             Left = 9
             Top = 62
-            Width = 654
-            Height = 91
+            Width = 830
+            Height = 93
             Align = alCustom
             Anchors = [akLeft, akTop, akRight, akBottom]
             BevelOuter = bvNone
             BorderWidth = 2
             TabOrder = 5
-            object DBGridFormaPago: TDBGrid
+            object DBGridFPago_Egreso: TDBGrid
               Left = 2
               Top = 2
-              Width = 650
-              Height = 74
+              Width = 826
+              Height = 76
               Align = alClient
-              Color = 14606012
+              Color = 14145535
               DataSource = DS_CpbFormaPago
               Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
               TabOrder = 0
@@ -1418,25 +1237,9 @@ object FMovimientosInternos: TFMovimientosInternos
               TitleFont.Height = -11
               TitleFont.Name = 'Verdana'
               TitleFont.Style = []
-              OnExit = DBGridFormaPagoExit
-              OnKeyUp = DBGridFormaPagoKeyUp
+              OnExit = DBGridFPago_EgresoExit
+              OnKeyUp = DBGridFPago_EgresoKeyUp
               Columns = <
-                item
-                  Expanded = False
-                  FieldName = '_CuentaIngreso_Codigo'
-                  Title.Alignment = taCenter
-                  Title.Caption = 'C'#243'digo'
-                  Width = 80
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = '_CuentaIngreso_Nombre'
-                  Title.Alignment = taCenter
-                  Title.Caption = 'Cuenta'
-                  Width = 250
-                  Visible = True
-                end
                 item
                   Expanded = False
                   FieldName = '_CuentaEgreso_Codigo'
@@ -1466,20 +1269,71 @@ object FMovimientosInternos: TFMovimientosInternos
                   FieldName = 'IMPORTE'
                   Title.Alignment = taCenter
                   Title.Caption = 'Importe'
-                  Width = 100
+                  Width = 120
+                  Visible = True
+                end>
+            end
+            object DBGridFPago_Ingreso: TDBGrid
+              Left = 2
+              Top = 2
+              Width = 826
+              Height = 76
+              Align = alClient
+              Color = 14876614
+              DataSource = DS_CpbFormaPago
+              Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+              TabOrder = 2
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Verdana'
+              TitleFont.Style = []
+              OnExit = DBGridFPago_EgresoExit
+              OnKeyUp = DBGridFPago_EgresoKeyUp
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = '_CuentaIngreso_Codigo'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'C'#243'digo'
+                  Width = 80
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = '_CuentaIngreso_Nombre'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Cuenta'
+                  Width = 250
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = '_TipoFormaPago'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Forma Pago'
+                  Width = 166
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'IMPORTE'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Importe'
+                  Width = 120
                   Visible = True
                 end>
             end
             object Panel1: TPanel
               Left = 2
-              Top = 76
-              Width = 650
+              Top = 78
+              Width = 826
               Height = 13
               Align = alBottom
               BevelOuter = bvNone
               TabOrder = 1
               object lblTotalFormaPago: TLabel
-                Left = 610
+                Left = 786
                 Top = 0
                 Width = 40
                 Height = 13
@@ -1510,7 +1364,7 @@ object FMovimientosInternos: TFMovimientosInternos
               object Label7: TLabel
                 Left = 169
                 Top = 0
-                Width = 441
+                Width = 617
                 Height = 13
                 Align = alClient
                 Alignment = taRightJustify
@@ -1538,9 +1392,8 @@ object FMovimientosInternos: TFMovimientosInternos
           object DBEdit1: TDBEdit
             Left = 339
             Top = 34
-            Width = 321
+            Width = 491
             Height = 21
-            Anchors = [akLeft, akTop, akRight]
             DataField = 'OBSERVACION'
             DataSource = DS_Comprobante
             TabOrder = 4
@@ -2026,8 +1879,8 @@ object FMovimientosInternos: TFMovimientosInternos
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 720
-    Top = 261
+    Left = 595
+    Top = 267
     DockControlHeights = (
       0
       0
@@ -2124,8 +1977,8 @@ object FMovimientosInternos: TFMovimientosInternos
     end
   end
   object ATeclasRapidas: TActionManager
-    Left = 720
-    Top = 210
+    Left = 595
+    Top = 216
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -2159,8 +2012,8 @@ object FMovimientosInternos: TFMovimientosInternos
   end
   object EKVistaPrevia: TEKVistaPreviaQR
     ShowModal = False
-    Left = 720
-    Top = 162
+    Left = 595
+    Top = 168
   end
   object ZQ_TipoMovimiento: TZQuery
     Connection = DM.Conexion
@@ -2382,7 +2235,15 @@ object FMovimientosInternos: TFMovimientosInternos
     Connection = DM.Conexion
     AfterScroll = ZQ_MovHoyAfterScroll
     SQL.Strings = (
-      'select c.*'
+      'select c.*,'
+      '        CASE'
+      '            WHEN (c.id_tipo_cpb = 16) THEN c.importe_total'
+      '            WHEN (c.id_tipo_cpb = 17) THEN 0'
+      '        END as Ingresos,'
+      '        CASE'
+      '            WHEN (c.id_tipo_cpb = 16) THEN 0'
+      '            WHEN (c.id_tipo_cpb = 17) THEN c.importe_total'
+      '        END as Egresos'
       'from comprobante c'
       'where ((c.id_tipo_cpb = 16) or (c.id_tipo_cpb = 17))'
       '  and cast(c.fecha as date)= :fecha'
@@ -2455,114 +2316,21 @@ object FMovimientosInternos: TFMovimientosInternos
     object ZQ_MovHoyFECHA_ANULADO: TDateField
       FieldName = 'FECHA_ANULADO'
     end
+    object ZQ_MovHoyINGRESOS: TFloatField
+      FieldName = 'INGRESOS'
+      ReadOnly = True
+      currency = True
+    end
+    object ZQ_MovHoyEGRESOS: TFloatField
+      FieldName = 'EGRESOS'
+      ReadOnly = True
+      currency = True
+    end
   end
   object DS_MovHoy: TDataSource
     DataSet = ZQ_MovHoy
     Left = 73
     Top = 265
-  end
-  object ZS_Balance: TZStoredProc
-    Connection = DM.Conexion
-    AfterScroll = ZS_BalanceAfterScroll
-    Params = <
-      item
-        DataType = ftDate
-        Name = 'FECHA'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'INGRESO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'EGRESO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALDO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALDODIARIO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftInteger
-        Name = 'MES'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ANIO'
-        ParamType = ptInput
-      end>
-    StoredProcName = 'BALANCE_MENSUAL_DETALLE'
-    Left = 826
-    Top = 99
-    ParamData = <
-      item
-        DataType = ftDate
-        Name = 'FECHA'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'INGRESO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'EGRESO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALDO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALDODIARIO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftInteger
-        Name = 'MES'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ANIO'
-        ParamType = ptInput
-      end>
-    object ZS_BalanceFECHA: TDateField
-      FieldName = 'FECHA'
-    end
-    object ZS_BalanceINGRESO: TFloatField
-      FieldName = 'INGRESO'
-      currency = True
-    end
-    object ZS_BalanceEGRESO: TFloatField
-      FieldName = 'EGRESO'
-      currency = True
-    end
-    object ZS_BalanceSALDO: TFloatField
-      FieldName = 'SALDO'
-      currency = True
-    end
-    object ZS_BalanceSALDODIARIO: TFloatField
-      FieldName = 'SALDODIARIO'
-      currency = True
-    end
-  end
-  object DS_Balance: TDataSource
-    DataSet = ZS_Balance
-    Left = 826
-    Top = 151
   end
   object ZQ_ListadoMedio: TZQuery
     Connection = DM.Conexion
@@ -2602,7 +2370,7 @@ object FMovimientosInternos: TFMovimientosInternos
       'select tipo.*'
       'from tipo_formapago tipo'
       'where tipo.baja = '#39'N'#39
-      '  and tipo.id_tipo_formapago > 3')
+      '  and tipo.id_tipo_formapago > 2')
     CampoBuscar = 'descripcion'
     CampoClave = 'id_tipo_formapago'
     TituloVentana = 'Buscar Medio'
@@ -2679,9 +2447,10 @@ object FMovimientosInternos: TFMovimientosInternos
   object ZQ_TipoFPago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select fp.*'
-      'from tipo_formapago fp'
-      'where fp.baja = '#39'N'#39)
+      'select tipo.*'
+      'from tipo_formapago tipo'
+      'where tipo.baja = '#39'N'#39
+      '  and tipo.id_tipo_formapago > 2')
     Params = <>
     Left = 421
     Top = 321
@@ -2702,13 +2471,14 @@ object FMovimientosInternos: TFMovimientosInternos
     SQL.Strings = (
       'select cta.*, tipo.descripcion,'
       
-        '       cta.nombre_cuenta||'#39' - '#39'||coalesce('#39'N'#176': '#39'||cta.nro_cta_ba' +
-        'ncaria, '#39'N'#176': S/N'#39') as Busqueda'
+        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
+        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
       'from cuenta cta'
       
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
-      'where cta.baja = '#39'N'#39)
+      'where cta.baja = '#39'N'#39
+      '  and cta.id_cuenta > 2')
     Params = <>
     Left = 349
     Top = 321
@@ -2876,112 +2646,126 @@ object FMovimientosInternos: TFMovimientosInternos
     Left = 117
     Top = 321
   end
-  object EKSuma_Balance: TEKDbSuma
+  object EKOrdenarGrilla_Dia: TEKOrdenarGrilla
+    Grilla = DBGrid_Dia
+    Filtros = <
+      item
+        TituloColumna = 'Numero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Movimiento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Ingresos'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Egresos'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenarGrilla_Dia'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = False
+    PermitirFiltrar = False
+    Left = 95
+    Top = 372
+  end
+  object EKOrdenarGrillaFPago_Egreso: TEKOrdenarGrilla
+    Grilla = DBGridFPago_Egreso
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Forma Pago'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenarGrillaFPago_Egreso'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = False
+    PermitirMover = False
+    PermitirFiltrar = False
+    Left = 727
+    Top = 316
+  end
+  object EKOrdenarGrillaFPago_Ingreso: TEKOrdenarGrilla
+    Grilla = DBGridFPago_Ingreso
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Forma Pago'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenarGrillaFPago_Ingreso'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = False
+    PermitirMover = False
+    PermitirFiltrar = False
+    Left = 727
+    Top = 372
+  end
+  object EKSuma_Mov: TEKDbSuma
     SumCollection = <
       item
         Operacion = goSum
-        NombreCampo = 'INGRESO'
+        NombreCampo = 'INGRESOS'
       end
       item
         Operacion = goSum
-        NombreCampo = 'EGRESO'
+        NombreCampo = 'EGRESOS'
       end>
-    DataSet = ZS_Balance
-    Left = 826
-    Top = 215
+    DataSet = ZQ_MovHoy
+    SumListChanged = EKSuma_MovSumListChanged
+    Left = 34
+    Top = 319
   end
-  object ZS_CalcSaldos: TZStoredProc
-    Connection = DM.Conexion
-    AfterScroll = ZS_BalanceAfterScroll
-    Params = <
+  object EKBuscar: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
       item
-        DataType = ftDate
-        Name = 'FECHA'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'INGRESO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'EGRESO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALDO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALDODIARIO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftInteger
-        Name = 'MES'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ANIO'
-        ParamType = ptInput
+        Titulo = 'Fecha'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
       end>
-    StoredProcName = 'BALANCE_MENSUAL_DETALLE'
-    Left = 930
-    Top = 99
-    ParamData = <
-      item
-        DataType = ftDate
-        Name = 'FECHA'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'INGRESO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'EGRESO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALDO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'SALDODIARIO'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftInteger
-        Name = 'MES'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ANIO'
-        ParamType = ptInput
-      end>
-    object ZS_CalcSaldosFECHA: TDateField
-      FieldName = 'FECHA'
-    end
-    object ZS_CalcSaldosINGRESO: TFloatField
-      FieldName = 'INGRESO'
-    end
-    object ZS_CalcSaldosEGRESO: TFloatField
-      FieldName = 'EGRESO'
-    end
-    object ZS_CalcSaldosSALDO: TFloatField
-      FieldName = 'SALDO'
-    end
-    object ZS_CalcSaldosSALDODIARIO: TFloatField
-      FieldName = 'SALDODIARIO'
-    end
+    CriteriosLocate = <>
+    UsarWhereOriginal = EK_Sin_Where
+    PantallaReducida = True
+    Left = 68
+    Top = 152
   end
 end

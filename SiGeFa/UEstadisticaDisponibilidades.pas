@@ -7,7 +7,8 @@ uses
   Dialogs, ComCtrls, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZStoredProcedure,
   EKBusquedaAvanzada, StdCtrls, EKDbSuma, QRCtrls, QuickRpt,
-  EKVistaPreviaQR, DBCtrls, EKOrdenarGrilla;
+  EKVistaPreviaQR, DBCtrls, EKOrdenarGrilla, ActnList, XPStyleActnCtrls,
+  ActnMan;
 
 type
   TFEstadisticaDisponibilidades = class(TForm)
@@ -263,12 +264,23 @@ type
     DBText3: TDBText;
     Label10: TLabel;
     DBText4: TDBText;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    QRLabel20: TQRLabel;
+    QRDBText25: TQRDBText;
+    QRLabel21: TQRLabel;
+    QRDBText26: TQRDBText;
+    QRLabel32: TQRLabel;
+    QRDBText27: TQRDBText;
+    QRShape1: TQRShape;
+    Shape2: TShape;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ABuscarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -312,7 +324,7 @@ begin
   lblSucursalDetMov.Caption := '';
   lblResumenDetalleMovimiento.Caption := '';
 
-  TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
+  TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.FechayHora);
 
   TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.Fecha);
   TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.Fecha);
@@ -337,7 +349,7 @@ begin
     lblSaldo_Encabezado1.Caption := '';
 
     if  EKBuscarSaldo.BuscarSinEjecutar then
-      if EKBuscarSaldo.ParametrosSeleccionados1[1] = '' then
+      if EKBuscarSaldo.ParametrosSeleccionados1[0] = '' then
       begin
         Application.MessageBox('No se ha cargado la fecha', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
@@ -345,15 +357,15 @@ begin
       else
       begin
         ZP_SaldosCuentas.Close;
-        if EKBuscarSaldo.ParametrosSeleccionados1[0] = '' then
+        if EKBuscarSaldo.ParametrosSeleccionados1[1] = '' then
           ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= -1
         else
-          ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarSaldo.ParametrosSeleccionados1[0]);
-        ZP_SaldosCuentas.ParamByName('fecha_hasta').AsDate := StrToDate(EKBuscarSaldo.ParametrosSeleccionados1[1]);
+          ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarSaldo.ParametrosSeleccionados1[1]);
+        ZP_SaldosCuentas.ParamByName('fecha_hasta').AsDate := StrToDate(EKBuscarSaldo.ParametrosSeleccionados1[0]);
         ZP_SaldosCuentas.Open;
 
-        lblSaldo_Encabezado1.Caption:= 'Saldo Cuentas al '+EKBuscarSaldo.ParametrosSeleccionados1[1];
-        lblSaldo_Encabezado2.Caption:= 'Sucursal: '+EKBuscarSaldo.ParametrosSelecReales1[0];
+        lblSaldo_Encabezado1.Caption:= 'Saldo Cuentas al '+EKBuscarSaldo.ParametrosSeleccionados1[0];
+        lblSaldo_Encabezado2.Caption:= 'Sucursal: '+EKBuscarSaldo.ParametrosSelecReales1[1];
         lblSaldo_Total.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_Saldo.SumCollection.Items[0].SumValue);
       end;
   end;
@@ -404,7 +416,7 @@ begin
         ZP_Estadistica_IE_Medios.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[1]);
         ZP_Estadistica_IE_Medios.Open;
 
-        lblEncabezadoParteDiario.Caption:= 'Parte Diario: Desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[0]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[1];
+        lblEncabezadoParteDiario.Caption:= 'Parte Diario desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[0]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[1];
         lblSaldo_TotalParteDiario.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
         lblPD_totalIngreso.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[0].SumValue);
         lblPD_totalEgreso.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[1].SumValue);
@@ -442,7 +454,7 @@ begin
         ZP_Estadistica_Det_Mov.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarDetMov.ParametrosSeleccionados1[1]);
         ZP_Estadistica_Det_Mov.Open;
 
-        lblEncabezadoDetMov.Caption:= 'Detalles Movimientos: Desde el '+EKBuscarDetMov.ParametrosSeleccionados1[0]+' al '+EKBuscarDetMov.ParametrosSeleccionados1[1];
+        lblEncabezadoDetMov.Caption:= 'Detalles Movimientos desde el '+EKBuscarDetMov.ParametrosSeleccionados1[0]+' al '+EKBuscarDetMov.ParametrosSeleccionados1[1];
       end;
   end;
 end;
@@ -475,7 +487,7 @@ begin
     else
       QRLabelSucursalParteDiario.Caption:= '';
 
-    QRLabelEncabezadoParteDiario.Caption:= 'Parte Diario: Desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[0]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[1];
+    QRLabelEncabezadoParteDiario.Caption:= 'Parte Diario desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[0]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[1];
     QRLabelImporteSaldo.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
     QRLblPD_TotalIngreso.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[0].SumValue);
     QRLblPD_TotalEgreso.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[1].SumValue);
@@ -514,6 +526,13 @@ begin
   EKOrdenarGrillaDetMov.GuardarConfigColumnas;
   EKOrdenarGrillaSaldos.GuardarConfigColumnas;
   EKOrdenarGrillaPD_Saldo.GuardarConfigColumnas;
+end;
+
+
+procedure TFEstadisticaDisponibilidades.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
 end;
 
 end.

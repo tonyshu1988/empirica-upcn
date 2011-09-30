@@ -101,6 +101,7 @@ var
   TextoPieDePagina: string;
   imp_ad1_nombre: string;  //nombre del label para el impuesto adicional 1 de los productos
   imp_ad2_nombre: string;  //nombre del label para el impuesto adicional 2 de los productos
+  notaCredito_diasVencimiento: integer;
   ctacte_diasVencimiento: integer;
   ctacte_credito: double;
   monto_max_venta: double;
@@ -169,6 +170,7 @@ begin
   configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'monto_max_venta', monto_max_venta);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_diasVencimiento', ctacte_diasVencimiento);
   configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_credito', ctacte_credito);
+  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'notaCredito_diasVencimiento', notaCredito_diasVencimiento);
 
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO1', precio1);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO2', precio2);

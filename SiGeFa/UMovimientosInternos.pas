@@ -62,13 +62,10 @@ type
     QRLabel3: TQRLabel;
     QRDBText4: TQRDBText;
     PanelCalendario: TPanel;
-    PanelMes: TPanel;
     PanelDia_Lista: TPanel;
-    PanelMes_Info: TPanel;
     PanelDia_Movimiento: TPanel;
     PanelDia_InfoMovimiento: TPanel;
     PanelDia_InfoLista: TPanel;
-    lblBalanceMensual: TLabel;
     lblFechaHoy: TLabel;
     Label2: TLabel;
     GroupBox1: TGroupBox;
@@ -76,7 +73,7 @@ type
     Label4: TLabel;
     Label5: TLabel;
     PanelDia_Cuentas: TPanel;
-    DBGridFormaPago: TDBGrid;
+    DBGridFPago_Egreso: TDBGrid;
     EKDBDateTimePicker1: TEKDBDateTimePicker;
     DBEdit1: TDBEdit;
     RadioButtonEgreso: TRadioButton;
@@ -144,10 +141,7 @@ type
     ZQ_MovHoyPUNTO_VENTA: TIntegerField;
     ZQ_MovHoyNUMERO_CPB: TIntegerField;
     DBGrid_Dia: TDBGrid;
-    DBGrid_Mes: TDBGrid;
     ZQ_MovHoy_movimiento: TStringField;
-    ZS_Balance: TZStoredProc;
-    DS_Balance: TDataSource;
     ZQ_ListadoMedio: TZQuery;
     ZQ_ListadoMedioID_TIPO_FORMAPAGO: TIntegerField;
     ZQ_ListadoMedioDESCRIPCION: TStringField;
@@ -198,35 +192,13 @@ type
     Label6: TLabel;
     lblTotalFormaPago: TLabel;
     Label8: TLabel;
-    ZS_BalanceFECHA: TDateField;
-    ZS_BalanceINGRESO: TFloatField;
-    ZS_BalanceEGRESO: TFloatField;
-    ZS_BalanceSALDO: TFloatField;
-    ZS_BalanceSALDODIARIO: TFloatField;
     Label7: TLabel;
     PanelManejoCalendario: TPanel;
-    SpeedBtn_AnioAnterior: TSpeedButton;
     SpeedBtn_MesAnterior: TSpeedButton;
+    SpeedBtn_DiaAnterior: TSpeedButton;
+    SpeedBtn_DiaSiguiente: TSpeedButton;
     SpeedBtn_MesSiguiente: TSpeedButton;
-    SpeedBtn_AnioSiguiente: TSpeedButton;
     SpeedBtn_Hoy: TSpeedButton;
-    PanelMes_Resumen: TPanel;
-    Label11: TLabel;
-    Label1: TLabel;
-    Label12: TLabel;
-    Label9: TLabel;
-    Shape1: TShape;
-    EKSuma_Balance: TEKDbSuma;
-    lblTotalIngresos: TLabel;
-    lblTotalEgresos: TLabel;
-    lblSaldoFinal: TLabel;
-    lblSaldoInicial: TLabel;
-    ZS_CalcSaldos: TZStoredProc;
-    ZS_CalcSaldosFECHA: TDateField;
-    ZS_CalcSaldosINGRESO: TFloatField;
-    ZS_CalcSaldosEGRESO: TFloatField;
-    ZS_CalcSaldosSALDO: TFloatField;
-    ZS_CalcSaldosSALDODIARIO: TFloatField;
     ZQ_CpbFormaPagoFECHA_FP: TDateTimeField;
     ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField;
     ZQ_MovHoyFECHA_ANULADO: TDateField;
@@ -236,6 +208,17 @@ type
     Label14: TLabel;
     ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
     ZQ_ComprobanteIMAGEN: TBlobField;
+    DBGridFPago_Ingreso: TDBGrid;
+    EKOrdenarGrilla_Dia: TEKOrdenarGrilla;
+    EKOrdenarGrillaFPago_Egreso: TEKOrdenarGrilla;
+    EKOrdenarGrillaFPago_Ingreso: TEKOrdenarGrilla;
+    ZQ_MovHoyINGRESOS: TFloatField;
+    ZQ_MovHoyEGRESOS: TFloatField;
+    EKSuma_Mov: TEKDbSuma;
+    Panel3: TPanel;
+    lblMov_TotalEgresos: TLabel;
+    lblMov_TotalIngresos: TLabel;
+    EKBuscar: TEKBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -245,7 +228,6 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridCuentasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure tituloFecha(fecha: Tdate);
     procedure configFormaPago(tipo: integer);
     //------TECLAS RAPIDAS
@@ -259,23 +241,17 @@ type
     procedure ZQ_MovHoyAfterScroll(DataSet: TDataSet);
     procedure RadioButtonIngresoClick(Sender: TObject);
     procedure RadioButtonEgresoClick(Sender: TObject);
-    procedure ZS_BalanceAfterScroll(DataSet: TDataSet);
-    procedure DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure DBGridFPago_EgresoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure EKSuma_FPagoSumListChanged(Sender: TObject);
-    procedure DBGrid_MesDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure DBGrid_DiaDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGrid_DiaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ZQ_ComprobanteID_TIPO_CPBChange(Sender: TField);
-    procedure DBGridFormaPagoExit(Sender: TObject);
+    procedure DBGridFPago_EgresoExit(Sender: TObject);
     procedure SpeedBtn_HoyClick(Sender: TObject);
-    procedure abrirBalance(fecha: TDate);
-    procedure SpeedBtn_AnioAnteriorClick(Sender: TObject);
     procedure SpeedBtn_MesAnteriorClick(Sender: TObject);
+    procedure SpeedBtn_DiaAnteriorClick(Sender: TObject);
+    procedure SpeedBtn_DiaSiguienteClick(Sender: TObject);
     procedure SpeedBtn_MesSiguienteClick(Sender: TObject);
-    procedure SpeedBtn_AnioSiguienteClick(Sender: TObject);
-    procedure calcularResumenBalance(fecha: TDate);
+    procedure EKSuma_MovSumListChanged(Sender: TObject);
   private
     fechaActual: TDate;
     id_comprobante: integer;
@@ -296,7 +272,8 @@ const
 
 implementation
 
-uses UDM, UPrincipal, UUtilidades, DateUtils, UEstadisticaMovInternos;
+uses UDM, UPrincipal, UUtilidades, DateUtils, UEstadisticaMovInternos,
+  EKModelo;
 
 {$R *.dfm}
 
@@ -317,6 +294,10 @@ end;
 
 procedure TFMovimientosInternos.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
+  EKOrdenarGrilla_Dia.GuardarConfigColumnas;
+  EKOrdenarGrillaFPago_Egreso.GuardarConfigColumnas;
+  EKOrdenarGrillaFPago_Ingreso.GuardarConfigColumnas;
+
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
 
@@ -330,7 +311,6 @@ end;
 procedure TFMovimientosInternos.tituloFecha(fecha: Tdate);
 begin
   lblFechaHoy.Caption:= 'Movimientos del '+ FormatDateTime('dddd dd "de" mmmm "de" yyyy', fecha);
-  lblBalanceMensual.Caption:= 'BALANCE '+ UpperCase(FormatDateTime('mmmm yyyy', fecha));
   PanelManejoCalendario.Caption:= UpperCase(FormatDateTime('mmmm yyyy', fecha));
 end;
 
@@ -370,7 +350,6 @@ begin
 
     PanelDia_Movimiento.Enabled:= true;
     PanelDia_Lista.Enabled:= false;
-    panelMes.Enabled:= false;
 
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -389,7 +368,6 @@ begin
   begin
     PanelDia_Movimiento.Enabled:= true;
     PanelDia_Lista.Enabled:= false;
-    panelMes.Enabled:= false;
 
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -419,7 +397,6 @@ begin
     begin
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
-//      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
     end
     else
@@ -427,8 +404,6 @@ begin
 
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
-
-    abrirBalance(fechaActual);
   end;
 end;
 
@@ -449,14 +424,53 @@ begin
 
   if ZQ_CpbFormaPago.IsEmpty then
   begin
-    Application.MessageBox('Debe cargar una forma de pago, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBGridFormaPago.SetFocus;
+    Application.MessageBox('Debe cargar una cuenta de ingreso/egreso, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    case ZQ_ComprobanteID_TIPO_CPB.AsInteger of
+      CPB_OTROS_INGRESOS: begin //Usa la cuenta de ingreso
+                            DBGridFPago_Ingreso.SetFocus;
+                          end;
+      CPB_OTROS_EGRESOS:  begin //Usu la cuenta de egreso
+                            DBGridFPago_Egreso.SetFocus;
+                          end;
+    end;
     exit;
   end;
 
   ZQ_CpbFormaPago.First;
   while not ZQ_CpbFormaPago.Eof do
   begin
+    if ZQ_CpbFormaPagoID_TIPO_FORMAPAG.IsNull or (ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger = 0)  then
+    begin
+      case ZQ_ComprobanteID_TIPO_CPB.AsInteger of
+        CPB_OTROS_INGRESOS: begin //Usa la cuenta de ingreso
+                              Application.MessageBox(pchar('Debe asociar una Forma de Pago para la cuenta '+ZQ_CpbFormaPago_CuentaIngreso_Nombre.AsString+' , por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+                              DBGridFPago_Ingreso.SetFocus;
+                              exit;
+                            end;
+        CPB_OTROS_EGRESOS:  begin //Usu la cuenta de egreso
+                              Application.MessageBox(pchar('Debe asociar una Forma de Pago para la cuenta '+ZQ_CpbFormaPago_CuentaEgreso_Nombre.AsString+' , por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+                              DBGridFPago_Egreso.SetFocus;
+                              exit;
+                            end;
+      end;
+    end;
+
+    if ZQ_CpbFormaPagoIMPORTE.IsNull or (ZQ_CpbFormaPagoIMPORTE.AsInteger = 0)  then
+    begin
+      case ZQ_ComprobanteID_TIPO_CPB.AsInteger of
+        CPB_OTROS_INGRESOS: begin //Usa la cuenta de ingreso
+                              Application.MessageBox(pchar('No se ha cargado el importe de la cuenta '+ZQ_CpbFormaPago_CuentaIngreso_Nombre.AsString+' , por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+                              DBGridFPago_Ingreso.SetFocus;
+                              exit;
+                            end;
+        CPB_OTROS_EGRESOS:  begin //Usu la cuenta de egreso
+                              Application.MessageBox(pchar('No se ha cargado el importe de la cuenta '+ZQ_CpbFormaPago_CuentaEgreso_Nombre.AsString+' , por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+                              DBGridFPago_Egreso.SetFocus;
+                              exit;
+                            end;
+      end;
+    end;
+
     ZQ_CpbFormaPago.Edit;
     ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat;
     ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
@@ -490,16 +504,9 @@ begin
     begin
       PanelDia_Movimiento.Enabled:= false;
       PanelDia_Lista.Enabled:= true;
-      PanelMes.Enabled:= true;
 
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
-
-      ZS_Balance.Refresh;
-      ZS_Balance.Last;
-//      ZS_Balance.Locate('FECHA', VarArrayOf([fecha]), []);
-//      ZS_Balance.Locate('FECHA', DateOf(ZS_BalanceFECHA.AsDateTime), []);
-//      ShowMessage('Variable: '+fecha+' Campo: '+ZS_BalanceFECHA.AsString);
     end
   except
     begin
@@ -519,7 +526,6 @@ begin
   begin
     PanelDia_Movimiento.Enabled:= false;
     PanelDia_Lista.Enabled:= true;
-    PanelMes.Enabled:= true;
 
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
@@ -531,38 +537,48 @@ end;
 
 procedure TFMovimientosInternos.btnBuscarClick(Sender: TObject);
 begin
-ShowMessage('Todavia no disponible');
-//  EKBuscar.Buscar;
+  if  EKBuscar.BuscarSinEjecutar then
+    if (EKBuscar.ParametrosSeleccionados1[0] = '') then
+    begin
+      Application.MessageBox('No se ha cargado la fecha', 'Verifique', MB_OK + MB_ICONINFORMATION);
+      btnBuscar.Click;
+    end
+    else
+    begin
+      fechaActual:= StrToDate(EKBuscar.ParametrosSeleccionados1[0]);
+      tituloFecha(fechaActual);
+      ZQ_MovHoy.Close;
+      ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+      ZQ_MovHoy.Open;
+      ZQ_MovHoy.Refresh;
+    end;
 end;
 
 
 procedure TFMovimientosInternos.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla_Dia.CargarConfigColumnas;
+  EKOrdenarGrillaFPago_Egreso.CargarConfigColumnas;
+  EKOrdenarGrillaFPago_Ingreso.CargarConfigColumnas;
+
+  TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.FechayHora);
+
   configFormaPago(CPB_OTROS_INGRESOS);
   RadioButtonIngreso.Checked:= true;
   RadioButtonEgreso.Checked:= false;
 
   fechaActual:= dm.EKModelo.Fecha;
-  abrirBalance(fechaActual);
 
   PanelDia_Movimiento.Enabled:= false;
   PanelDia_Lista.Enabled:= true;
-  PanelMes.Enabled:= true;
 
   dm.EKModelo.abrir(ZQ_TipoMovimiento);
-//  dm.EKModelo.abrir(ZQ_TipoFPago);
-//  dm.EKModelo.abrir(ZQ_Cuenta);
-end;
 
-
-procedure TFMovimientosInternos.DBGridCuentasDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-//  if ZQ_Cuentas.IsEmpty then
-//    exit;
-//
-//  FPrincipal.PintarFilasGrillasConBajas(DBGridCuentas, ZQ_CuentasBAJA.AsString, Rect, DataCol, Column, State);
+  fechaActual:= dm.EKModelo.FechayHora;
+  tituloFecha(fechaActual);
+  ZQ_MovHoy.Close;
+  ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.Open;
 end;
 
 
@@ -611,7 +627,7 @@ end;
 
 procedure TFMovimientosInternos.btnImprimirClick(Sender: TObject);
 begin
-ShowMessage('Todavia no disponible');
+  ShowMessage('Todavia no disponible');
 
 //  if ZQ_Cuentas.IsEmpty then
 //    exit;
@@ -625,9 +641,6 @@ end;
 
 procedure TFMovimientosInternos.ZQ_MovHoyAfterScroll(DataSet: TDataSet);
 begin
-//  ShowScrollBar(DBGridFormaPago.Handle, SB_VERT, False);
-//  ShowScrollBar(DBGridFormaPago.Handle, SB_HORZ, False);
-
   ZQ_CpbFormaPago.Close;
   ZQ_Comprobante.Close;
 
@@ -664,18 +677,18 @@ begin
 
   case tipo of
     CPB_OTROS_INGRESOS: begin //Usa la cuenta de ingreso
-                          DBGridFormaPago.Columns[getColumnIndex(DBGridFormaPago, '_CuentaIngreso_Nombre')].Visible:= true;
-                          DBGridFormaPago.Columns[getColumnIndex(DBGridFormaPago, '_CuentaIngreso_Codigo')].Visible:= true;
+                          DBGridFPago_Ingreso.Visible:= true;
+                          DBGridFPago_Ingreso.BringToFront;
 
-                          DBGridFormaPago.Columns[getColumnIndex(DBGridFormaPago, '_CuentaEgreso_Nombre')].Visible:= false;
-                          DBGridFormaPago.Columns[getColumnIndex(DBGridFormaPago, '_CuentaEgreso_Codigo')].Visible:= false;
+                          DBGridFPago_Egreso.Visible:= false;
+                          DBGridFPago_Egreso.SendToBack;
                         end;
     CPB_OTROS_EGRESOS:  begin //Usu la cuenta de egreso
-                          DBGridFormaPago.Columns[getColumnIndex(DBGridFormaPago, '_CuentaIngreso_Nombre')].Visible:= false;
-                          DBGridFormaPago.Columns[getColumnIndex(DBGridFormaPago, '_CuentaIngreso_Codigo')].Visible:= false;
+                          DBGridFPago_Ingreso.Visible:= false;
+                          DBGridFPago_Ingreso.SendToBack;
 
-                          DBGridFormaPago.Columns[getColumnIndex(DBGridFormaPago, '_CuentaEgreso_Nombre')].Visible:= true;
-                          DBGridFormaPago.Columns[getColumnIndex(DBGridFormaPago, '_CuentaEgreso_Codigo')].Visible:= true;
+                          DBGridFPago_Egreso.Visible:= true;
+                          DBGridFPago_Egreso.BringToFront;
                         end;
   end;
 end;
@@ -695,23 +708,7 @@ begin
 end;
 
 
-procedure TFMovimientosInternos.ZS_BalanceAfterScroll(DataSet: TDataSet);
-begin
-  ZQ_MovHoy.Close;
-  ZQ_Comprobante.Close;
-  ZQ_CpbFormaPago.Close;
-
-  if ZS_Balance.IsEmpty then
-    exit;
-
-  ZQ_MovHoy.ParamByName('fecha').AsDateTime:= ZS_BalanceFECHA.AsDateTime;
-  ZQ_MovHoy.Open;
-
-  tituloFecha(ZS_BalanceFECHA.AsDateTime);
-end;
-
-
-procedure TFMovimientosInternos.DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TFMovimientosInternos.DBGridFPago_EgresoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
   begin
@@ -798,13 +795,6 @@ begin
 end;
 
 
-procedure TFMovimientosInternos.DBGrid_MesDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  FPrincipal.PintarFilasGrillas(DBGrid_Mes, Rect, DataCol, Column, State);
-end;
-
-
 procedure TFMovimientosInternos.DBGrid_DiaDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;  State: TGridDrawState);
 begin
@@ -872,59 +862,12 @@ begin
 end;
 
 
-procedure TFMovimientosInternos.DBGridFormaPagoExit(Sender: TObject);
+procedure TFMovimientosInternos.DBGridFPago_EgresoExit(Sender: TObject);
 begin
 //  if ((sender as tdbgrid).SelectedField.FullName = 'IMPORTE') then
 //  begin
 //    KeyPress((char)Keys.Enter);
 //  end;
-end;
-
-
-procedure TFMovimientosInternos.abrirBalance(fecha: TDate);
-begin
-  ZS_Balance.Close;
-  ZS_Balance.ParamByName('MES').AsInteger:= MonthOf(fecha);
-  ZS_Balance.ParamByName('ANIO').AsInteger:= YearOf(fecha);
-  ZS_Balance.Open;
-  ZS_Balance.last;
-
-  if ZS_Balance.IsEmpty then
-    tituloFecha(StartOfTheMonth(fecha))
-  else
-    tituloFecha(ZS_BalanceFECHA.AsDateTime);
-
-  calcularResumenBalance(fecha);
-end;
-
-
-procedure TFMovimientosInternos.calcularResumenBalance(fecha: TDate);
-var
-  inicial, final: double;
-  fecha_anterior: tdate;
-begin
-  fecha_anterior:= IncMonth(fecha, -1);
-  ZS_CalcSaldos.Close;
-  ZS_CalcSaldos.ParamByName('MES').AsInteger:= MonthOf(fecha_anterior);
-  ZS_CalcSaldos.ParamByName('ANIO').AsInteger:= YearOf(fecha_anterior);
-  ZS_CalcSaldos.Open;
-  ZS_CalcSaldos.Last;
-  inicial:= ZS_CalcSaldosSALDO.AsFloat;
-
-  ZS_CalcSaldos.Close;
-  ZS_CalcSaldos.ParamByName('MES').AsInteger:= MonthOf(fecha);
-  ZS_CalcSaldos.ParamByName('ANIO').AsInteger:= YearOf(fecha);
-  ZS_CalcSaldos.Open;
-  ZS_CalcSaldos.Last;
-  final:= ZS_CalcSaldosSALDO.AsFloat;
-  ZS_CalcSaldos.Close;
-
-  EKSuma_Balance.RecalcAll;
-
-  lblTotalIngresos.Caption:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Balance.SumCollection[0].SumValue);
-  lblTotalEgresos.Caption:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Balance.SumCollection[1].SumValue);
-  lblSaldoInicial.Caption:= FormatFloat('$ ###,###,###,##0.00', inicial);
-  lblSaldoFinal.Caption:= FormatFloat('$ ###,###,###,##0.00', final);
 end;
 
 
@@ -937,27 +880,11 @@ begin
     exit;
 
   fechaActual:= dm.EKModelo.Fecha;
-  abrirBalance(fechaActual);
-end;
-
-
-procedure TFMovimientosInternos.SpeedBtn_AnioAnteriorClick(Sender: TObject);
-begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
-    exit;
-
-  fechaActual:= IncYear(fechaActual, -1);
-  abrirBalance(fechaActual);
-end;
-
-
-procedure TFMovimientosInternos.SpeedBtn_AnioSiguienteClick(Sender: TObject);
-begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
-    exit;
-
-  fechaActual:= IncYear(fechaActual, 1);
-  abrirBalance(fechaActual);
+  tituloFecha(fechaActual);
+  ZQ_MovHoy.Close;
+  ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.Open;
+  ZQ_MovHoy.Refresh;
 end;
 
 
@@ -967,7 +894,11 @@ begin
     exit;
 
   fechaActual:= IncMonth(fechaActual, -1);
-  abrirBalance(fechaActual);
+  tituloFecha(fechaActual);
+  ZQ_MovHoy.Close;
+  ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.Open;
+  ZQ_MovHoy.Refresh;
 end;
 
 
@@ -977,10 +908,48 @@ begin
     exit;
 
   fechaActual:= IncMonth(fechaActual, 1);
-  abrirBalance(fechaActual);
+  tituloFecha(fechaActual);
+  ZQ_MovHoy.Close;
+  ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.Open;
+  ZQ_MovHoy.Refresh;
+end;
+
+
+procedure TFMovimientosInternos.SpeedBtn_DiaAnteriorClick(Sender: TObject);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    exit;
+
+  fechaActual:= IncDay(fechaActual, -1);
+  tituloFecha(fechaActual);
+  ZQ_MovHoy.Close;
+  ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.Open;
+  ZQ_MovHoy.Refresh;
+end;
+
+
+procedure TFMovimientosInternos.SpeedBtn_DiaSiguienteClick(Sender: TObject);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    exit;
+
+  fechaActual:= IncDay(fechaActual, 1);
+  tituloFecha(fechaActual);
+  ZQ_MovHoy.Close;
+  ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.Open;
+  ZQ_MovHoy.Refresh;
 end;
 
                               
+procedure TFMovimientosInternos.EKSuma_MovSumListChanged(Sender: TObject);
+begin
+  lblMov_TotalIngresos.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,###,##0.00', EKSuma_Mov.SumCollection[0].SumValue);
+  lblMov_TotalEgresos.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,###,##0.00', EKSuma_Mov.SumCollection[1].SumValue);
+end;
+
 end.
 
 

@@ -598,7 +598,85 @@ type
     StringField7: TStringField;
     ZQ_FPagoCtaCteFECHA_FP: TDateTimeField;
     EKDbSumaFPagoCtaCte: TEKDbSuma;
+    TabSheet8: TTabSheet;
+    TabSheet9: TTabSheet;
+    RepNotaCredito: TQuickRep;
+    QRBand33: TQRBand;
+    QRShape7: TQRShape;
+    QRLabel204: TQRLabel;
+    QRLabel207: TQRLabel;
+    QRDBText102: TQRDBText;
+    QRDBText105: TQRDBText;
+    QRDBText113: TQRDBText;
+    QRLabel214: TQRLabel;
+    QRDBLogo8: TQRDBImage;
+    QRLabel215: TQRLabel;
+    QRLabel219: TQRLabel;
+    RepNotaCredito_RENGLON4: TQRLabel;
+    RepNotaCredito_RENGLON3: TQRLabel;
+    RepNotaCredito_RENGLON2: TQRLabel;
+    RepNotaCredito_TITULO: TQRLabel;
+    RepNotaCredito_RENGLON1: TQRLabel;
+    QRLabel244: TQRLabel;
+    QRBand34: TQRBand;
+    QRLabel245: TQRLabel;
+    QRLabel246: TQRLabel;
+    QRLabel247: TQRLabel;
+    QRLabel248: TQRLabel;
+    QRLabel249: TQRLabel;
+    QRLabel250: TQRLabel;
+    QRLabel251: TQRLabel;
+    QRDBText119: TQRDBText;
+    QRDBText120: TQRDBText;
+    QRDBText121: TQRDBText;
+    QRDBText122: TQRDBText;
+    QRDBText123: TQRDBText;
+    QRDBText124: TQRDBText;
+    QRDBText125: TQRDBText;
+    QRBand35: TQRBand;
+    QRChildBand11: TQRChildBand;
+    QRLabel253: TQRLabel;
+    QRDBText127: TQRDBText;
+    QRChildBand12: TQRChildBand;
+    QRLabel254: TQRLabel;
+    QRLabel256: TQRLabel;
+    QRLabel257: TQRLabel;
+    QRLabel258: TQRLabel;
+    QRLabel259: TQRLabel;
+    QRSubDetail8: TQRSubDetail;
+    QRDBText128: TQRDBText;
+    QRDBText130: TQRDBText;
+    QRDBText131: TQRDBText;
+    QRDBText132: TQRDBText;
+    QRDBText133: TQRDBText;
+    QRDBText129: TQRDBText;
+    QRLabel220: TQRLabel;
+    ZQ_ProductoCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_ProductoCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_ProductoID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_ProductoIMPORTE_VENTA: TFloatField;
+    ZQ_ProductoIMPORTE_IVA: TFloatField;
+    ZQ_FpagoFECHA_FP: TDateTimeField;
+    ZQ_FpagoIMPORTE_REAL: TFloatField;
+    ZQ_FPagoCtaCteIMPORTE_REAL: TFloatField;
+    QRBand36: TQRBand;
+    QRLabel230: TQRLabel;
+    QRLabel235: TQRLabel;
+    QRlblNotaCredito_CantidadTotal: TQRLabel;
+    QRBand37: TQRBand;
+    QRlblNotaCredito_PiePagina: TQRLabel;
+    QRLabel243: TQRLabel;
+    QRlblNotaCreditoTipo: TQRLabel;
+    ZQ_ProductoDEVOLUCION: TFloatField;
+    ChildBand8: TQRChildBand;
+    QRDBText126: TQRDBText;
+    QRLabel252: TQRLabel;
+    QRLabel236: TQRLabel;
+    QRLblNotaCredito_ImporteEnLetras: TQRLabel;
+    QRLabel255: TQRLabel;
     procedure FormCreate(Sender: TObject);
+    procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
     reporte: TQuickRep;
     archivoPDF: string;
@@ -610,6 +688,7 @@ type
     procedure configRemito();
     procedure configOrdenPago();
     procedure configReciboCtaCte();
+    procedure configDevolucion();
     procedure imprimir();
     function  generarPDF(): string;
   end;
@@ -676,6 +755,9 @@ begin
                           reporte:= RepOrdenPago;
                           archivoPDF:= 'OrdenPago.pdf';
                         end;
+      CPB_DEVOLUCION:  begin //CPB_DEVOLUCION
+                          configDevolucion;
+                        end;
     end;
   end
   else //si es un comprobante de cuenta corriente
@@ -707,6 +789,27 @@ begin
   aPDF.free;
 
   Result:= archivoPDF;
+end;
+
+
+//DEVOLUCION
+procedure TFImpresion_Comprobantes.configDevolucion();
+var
+  ImporteTotal: double;
+begin
+  if ZQ_Destino.IsEmpty then
+    exit;
+
+  if ZQ_FpagoID_TIPO_FORMAPAG.AsInteger = FP_NOTA_CREDITO then //si es una nota de credito
+  begin
+    ImporteTotal:= EKDbSumaFpago.SumCollection[0].sumvalue;
+    EKNumeroALetras.Numero := ImporteTotal;
+    QRLblNotaCredito_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+    QRlblNotaCredito_CantidadTotal.Caption := 'Total Nota Credito: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
+    QRlblNotaCredito_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    DM.VariablesComprobantes(RepNotaCredito);
+    EKVistaPrevia.Reporte:= RepNotaCredito;
+  end
 end;
 
 
@@ -830,6 +933,16 @@ begin
   QRDBLogo5.DataSet:= dm.ZQ_Sucursal;
   QRDBLogo6.DataSet:= dm.ZQ_Sucursal;
   QRDBLogo7.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo8.DataSet:= dm.ZQ_Sucursal;
+end;
+
+
+procedure TFImpresion_Comprobantes.QRSubDetail8BeforePrint(Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+  QRlblNotaCreditoTipo.Caption:= 'ING';
+  if ZQ_ProductoDEVOLUCION.AsInteger > 0 then
+    QRlblNotaCreditoTipo.Caption:= 'EGR';
+
 end;
 
 end.

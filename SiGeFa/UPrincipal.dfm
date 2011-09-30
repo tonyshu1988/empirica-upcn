@@ -5015,6 +5015,7 @@ object FPrincipal: TFPrincipal
     end
     object AArqueo_Caja: TAction
       Caption = 'Arqueo de Caja'
+      Hint = 'Arqueo de Caja'
       ImageIndex = 31
       OnExecute = AArqueo_CajaExecute
     end
@@ -5025,78 +5026,92 @@ object FPrincipal: TFPrincipal
       OnExecute = AEstad_MovInternosExecute
     end
     object AEstad_Facturacion: TAction
-      Caption = 'Estadistica Facturacion'
-      Hint = 'Estadistica Facturacion'
+      Caption = 'Estadistica Facturaci'#243'n'
+      Hint = 'Estadistica Facturaci'#243'n'
       ImageIndex = 38
       OnExecute = AEstad_FacturacionExecute
     end
     object AEstad_Disponib: TAction
       Caption = 'Estadistica Disponibilidades'
+      Hint = 'Estadistica Disponibilidades'
       ImageIndex = 38
       OnExecute = AEstad_DisponibExecute
     end
-    object APreventa: TAction
-      Caption = 'Venta de Mostrador'
-      ImageIndex = 34
-      OnExecute = APreventaExecute
-    end
     object AEstad_Stock: TAction
       Caption = 'Estadistica Stock'
+      Hint = 'Estadistica Stock'
       ImageIndex = 38
       OnExecute = AEstad_StockExecute
     end
+    object APreventa: TAction
+      Caption = 'Venta de Mostrador'
+      Hint = 'Venta de Mostrador'
+      ImageIndex = 34
+      OnExecute = APreventaExecute
+    end
     object AABM_CPB_Recibo: TAction
       Caption = 'ABM Recibo'
+      Hint = 'ABM Recibo'
       ImageIndex = 44
       OnExecute = AABM_CPB_ReciboExecute
     end
     object AABM_CPB_Remito: TAction
       Caption = 'ABM Remito'
+      Hint = 'ABM Remito'
       ImageIndex = 45
       OnExecute = AABM_CPB_RemitoExecute
     end
     object AABM_CPB_OrdenPago: TAction
       Caption = 'ABM Orden de Pago'
+      Hint = 'ABM Orden de Pago'
       ImageIndex = 42
       OnExecute = AABM_CPB_OrdenPagoExecute
     end
     object AABM_CPB_Presupuesto: TAction
       Caption = 'ABM Presupuesto'
+      Hint = 'ABM Presupuesto'
       ImageIndex = 43
       OnExecute = AABM_CPB_PresupuestoExecute
     end
     object AABM_CPB_NotaPedido: TAction
       Caption = 'ABM Nota de Pedido'
+      Hint = 'ABM Nota de Pedido'
       ImageIndex = 41
       OnExecute = AABM_CPB_NotaPedidoExecute
     end
     object AABM_CPB_FacturaComp: TAction
       Caption = 'ABM Factura Compra'
+      Hint = 'ABM Factura Compra'
       ImageIndex = 40
       OnExecute = AABM_CPB_FacturaCompExecute
     end
     object AABM_CPB_Devolucion: TAction
       Caption = 'ABM Devoluci'#243'n'
+      Hint = 'ABM Devoluci'#243'n'
       ImageIndex = 39
       OnExecute = AABM_CPB_DevolucionExecute
     end
     object AABM_CPB_Transfer: TAction
       Caption = 'ABM Transferencia'
+      Hint = 'ABM Transferencia'
       ImageIndex = 46
       OnExecute = AABM_CPB_TransferExecute
     end
     object AAuditoria: TAction
       Caption = 'Auditoria'
+      Hint = 'Auditoria'
       ImageIndex = 1
       OnExecute = AAuditoriaExecute
     end
     object AConfigGral: TAction
       Caption = 'Configurar Sistema'
+      Hint = 'Configurar Sistema'
       ImageIndex = 14
       OnExecute = AConfigGralExecute
     end
     object ADebugging: TAction
       Caption = 'Debugging'
+      Hint = 'Debugging'
       ImageIndex = 14
       OnExecute = ADebuggingExecute
     end
