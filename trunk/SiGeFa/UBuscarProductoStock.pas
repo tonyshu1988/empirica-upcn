@@ -93,7 +93,7 @@ type
     OnSeleccionar : procedure() of object;
     OnSeleccionarTodos : procedure() of object;
     SeleccionarYSalir: boolean;
-    usaCajero, usaTransferir, abrirZQ_Producto: String;
+    usaCajero, usaDevolucion, usaTransferir, abrirZQ_Producto: String;
   end;
 
 var
@@ -118,6 +118,15 @@ begin
   ZQ_Stock.Close;
   ZQ_Stock.SQL[22]:= '';
 
+  if (usaDevolucion = 'S') then
+  begin
+   EKBuscarStock.SQL_Where.Clear;
+   //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo
+   sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) '
+               +' and (posicion_sucursal.PUNTO_SALIDA = %s)', [SUCURSAL_LOGUEO, QuotedStr('S')]);
+   EKBuscarStock.SQL_Where.Text:=sql;
+   ZQ_Stock.SQL[22]:=sql;
+  end;
 
   if (usaCajero = 'S') then
   begin
@@ -181,16 +190,15 @@ begin
     btnSalir.Click;
 end;
 
+
 procedure TFBuscarProductoStock.DBGridStockDblClick(Sender: TObject);
 begin
-  if ((not(DBGridStock.SelectedRows.Count > 0)) and (not(ZQ_Stock.IsEmpty))) then
-  begin
-    if Assigned(OnSeleccionar) then
-      OnSeleccionar
-  end
+  if SeleccionarYSalir then
+    btnSeleccinarYSalir.Click
   else
-    Application.MessageBox(PChar('Debe seleccionar algún Producto.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
+    btnSeleccionar.Click;
 end;
+
 
 procedure TFBuscarProductoStock.btnSeleccionarClick(Sender: TObject);
 begin
