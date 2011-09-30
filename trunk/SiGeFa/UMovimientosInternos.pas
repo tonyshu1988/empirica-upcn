@@ -411,7 +411,6 @@ end;
 procedure TFMovimientosInternos.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
-  fecha: string;
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
@@ -498,7 +497,7 @@ begin
   ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= ZQ_ComprobanteBASE_IMPONIBLE.AsFloat;
   ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteBASE_IMPONIBLE.AsFloat;
 
-  fecha:= FormatDateTime('DD/MM/YYYY' ,ZQ_ComprobanteFECHA.AsDateTime);
+  fechaActual:= ZQ_ComprobanteFECHA.AsDateTime;
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
@@ -507,6 +506,12 @@ begin
 
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
+
+      tituloFecha(fechaActual);
+      ZQ_MovHoy.Close;
+      ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+      ZQ_MovHoy.Open;
+      ZQ_MovHoy.Refresh;
     end
   except
     begin
@@ -573,6 +578,7 @@ begin
   PanelDia_Lista.Enabled:= true;
 
   dm.EKModelo.abrir(ZQ_TipoMovimiento);
+  EKDBDateTimePicker1.DateTime:= dm.EKModelo.FechayHora;
 
   fechaActual:= dm.EKModelo.FechayHora;
   tituloFecha(fechaActual);
