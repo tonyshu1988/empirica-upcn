@@ -832,8 +832,12 @@ object FPreventa: TFPreventa
       'select c.*,s.nombre as suc_,'
       
         'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
-        'ente_'
-      ''
+        'ente_,'
+      'case'
+      '     when (cast(c.fecha_vencimiento as date)>=current_date)'
+      '        then '#39'N'#39
+      '     else '#39'S'#39
+      'end as Vencida'
       ''
       'from comprobante c'
       'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
@@ -841,15 +845,20 @@ object FPreventa: TFPreventa
       'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
       'left join persona p2 on (p2.id_persona=c.id_cliente)'
       ''
-      'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)'
       ''
+      ''
+      'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)'
       'order by c.fecha_vencimiento DESC,c.fecha DESC')
     SQL_Select.Strings = (
       'select c.*,s.nombre as suc_,'
       
         'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
-        'ente_'
-      '')
+        'ente_,'
+      'case'
+      '     when (cast(c.fecha_vencimiento as date)>=current_date)'
+      '        then '#39'N'#39
+      '     else '#39'S'#39
+      'end as Vencida')
     SQL_From.Strings = (
       ''
       'from comprobante c'
@@ -857,11 +866,12 @@ object FPreventa: TFPreventa
       'left join persona p1 on (p1.id_persona=c.id_vendedor)'
       'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
       'left join persona p2 on (p2.id_persona=c.id_cliente)'
+      ''
       '')
     SQL_Where.Strings = (
+      ''
       'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)')
     SQL_Orden.Strings = (
-      ''
       'order by c.fecha_vencimiento DESC,c.fecha DESC')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
@@ -874,7 +884,12 @@ object FPreventa: TFPreventa
       'select c.*,s.nombre as suc_,'
       
         'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
-        'ente_'
+        'ente_,'
+      'case'
+      '     when (cast(c.fecha_vencimiento as date)>=current_date)'
+      '        then '#39'N'#39
+      '     else '#39'S'#39
+      'end as Vencida'
       'from comprobante c'
       'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
       'left join persona p1 on (p1.id_persona=c.id_vendedor)'
@@ -999,6 +1014,11 @@ object FPreventa: TFPreventa
     object ZQ_ComprobanteIMAGEN: TBlobField
       FieldName = 'IMAGEN'
     end
+    object ZQ_ComprobanteVENCIDA: TStringField
+      FieldName = 'VENCIDA'
+      ReadOnly = True
+      Size = 1
+    end
   end
   object DS_Comprobante: TDataSource
     DataSet = ZQ_Comprobante
@@ -1014,6 +1034,10 @@ object FPreventa: TFPreventa
       end
       item
         TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Vencimiento'
         Visible = True
       end
       item
@@ -1050,6 +1074,10 @@ object FPreventa: TFPreventa
       end
       item
         TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Vencimiento'
         Visible = True
       end
       item

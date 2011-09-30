@@ -1555,7 +1555,7 @@ procedure TFCajero.OnSelPreventa;
 begin
  if not vsel4.ZQ_Comprobante.IsEmpty then
   begin
-  if vsel4.vencida='S' then
+  if vsel4.ZQ_ComprobanteVENCIDA.AsString='S' then
   begin
     Application.MessageBox('No puede cargar una venta Vencida.','Carga Venta',MB_OK+MB_ICONINFORMATION);
     exit;

@@ -58,6 +58,7 @@ type
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_ComprobanteIMAGEN: TBlobField;
     Label29: TLabel;
+    ZQ_ComprobanteVENCIDA: TStringField;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -123,12 +124,8 @@ procedure TFPreventa.DBGridDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
- if (TDate(ZQ_ComprobanteFECHA_VENCIMIENTO.AsDateTime)>=dm.EKModelo.Fecha)  then
-  vencida:='N'
- else
-  vencida:='S';
 
- FPrincipal.PintarFilasGrillasConBajas(DBGrid,vencida,Rect,DataCol,Column,State)
+ FPrincipal.PintarFilasGrillasConBajas(DBGrid,ZQ_ComprobanteVENCIDA.AsString,Rect,DataCol,Column,State)
 end;
 
 procedure TFPreventa.DBGridDblClick(Sender: TObject);
