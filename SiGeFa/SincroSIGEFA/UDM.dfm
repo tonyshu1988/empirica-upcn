@@ -7,10 +7,11 @@ object DM: TDM
   object ZC_Local: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'E:\SIGEFA\SiGeFa.FDB'
+    Database = 'E:\Empirica\SiGeFa\Bases\SiGeFa.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
+    Connected = True
     Left = 40
     Top = 64
   end
