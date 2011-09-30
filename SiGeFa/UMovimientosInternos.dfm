@@ -15,7 +15,6 @@ object FMovimientosInternos: TFMovimientosInternos
   Position = poScreenCenter
   Scaled = False
   Visible = True
-  WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -964,7 +963,7 @@ object FMovimientosInternos: TFMovimientosInternos
           Left = 0
           Top = 0
           Width = 848
-          Height = 32
+          Height = 28
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
@@ -972,7 +971,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Left = 0
             Top = 0
             Width = 848
-            Height = 19
+            Height = 15
             Align = alClient
             Alignment = taCenter
             Caption = 'DIA DE HOY'
@@ -985,7 +984,7 @@ object FMovimientosInternos: TFMovimientosInternos
           end
           object Panel2: TPanel
             Left = 0
-            Top = 19
+            Top = 15
             Width = 848
             Height = 13
             Align = alBottom
@@ -1049,9 +1048,9 @@ object FMovimientosInternos: TFMovimientosInternos
         end
         object DBGrid_Dia: TDBGrid
           Left = 0
-          Top = 32
+          Top = 28
           Width = 848
-          Height = 191
+          Height = 195
           Align = alClient
           Color = 14606012
           DataSource = DS_MovHoy
@@ -1383,8 +1382,8 @@ object FMovimientosInternos: TFMovimientosInternos
             Top = 11
             Width = 206
             Height = 21
-            Date = 40735.843744895840000000
-            Time = 40735.843744895840000000
+            Date = 0.843744895842974100
+            Time = 0.843744895842974100
             TabOrder = 0
             DataField = 'FECHA'
             DataSource = DS_Comprobante
@@ -2370,7 +2369,7 @@ object FMovimientosInternos: TFMovimientosInternos
       'select tipo.*'
       'from tipo_formapago tipo'
       'where tipo.baja = '#39'N'#39
-      '  and tipo.id_tipo_formapago > 2')
+      '  and tipo.id_tipo_formapago > 1')
     CampoBuscar = 'descripcion'
     CampoClave = 'id_tipo_formapago'
     TituloVentana = 'Buscar Medio'
@@ -2389,7 +2388,7 @@ object FMovimientosInternos: TFMovimientosInternos
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
       'where cta.baja = '#39'N'#39
-      '  and cta.id_cuenta > 2')
+      '  and cta.id_cuenta > 1')
     CampoBuscar = 'busqueda'
     CampoClave = 'id_cuenta'
     TituloVentana = 'Buscar Cuenta'
@@ -2450,7 +2449,7 @@ object FMovimientosInternos: TFMovimientosInternos
       'select tipo.*'
       'from tipo_formapago tipo'
       'where tipo.baja = '#39'N'#39
-      '  and tipo.id_tipo_formapago > 2')
+      '  and tipo.id_tipo_formapago > 1')
     Params = <>
     Left = 421
     Top = 321
@@ -2478,7 +2477,7 @@ object FMovimientosInternos: TFMovimientosInternos
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
       'where cta.baja = '#39'N'#39
-      '  and cta.id_cuenta > 2')
+      '  and cta.id_cuenta > 1')
     Params = <>
     Left = 349
     Top = 321

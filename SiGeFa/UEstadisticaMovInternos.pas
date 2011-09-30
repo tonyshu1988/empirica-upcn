@@ -21,7 +21,7 @@ type
     GrupoGuardarCancelar: TdxBarGroup;
     TabMovimientos: TTabSheet;
     TabIngresos_Egresos: TTabSheet;
-    TabResumenDiario: TTabSheet;
+    TabBalanceGrafico: TTabSheet;
     ZQ_Movimientos: TZQuery;
     DS_Movimientos: TDataSource;
     ZQ_MovimientosFECHA: TDateTimeField;
@@ -33,13 +33,7 @@ type
     ZQ_MovimientosINGRESOS: TFloatField;
     ZQ_MovimientosEGRESOS: TFloatField;
     ZQ_Ingresos: TZQuery;
-    ZQ_IngresosID_TIPO_MOVIMIENTO: TIntegerField;
-    ZQ_IngresosNOMBRE_MOVIMIENTO: TStringField;
-    ZQ_IngresosSUM: TFloatField;
     ZQ_Egresos: TZQuery;
-    ZQ_EgresosID_TIPO_MOVIMIENTO: TIntegerField;
-    ZQ_EgresosNOMBRE_MOVIMIENTO: TStringField;
-    ZQ_EgresosSUM: TFloatField;
     DS_Ingresos: TDataSource;
     DS_Egresos: TDataSource;
     PanelMov_Datos: TPanel;
@@ -61,23 +55,7 @@ type
     lblMov_TotalEgresos: TLabel;
     EKDbSuma_Mov: TEKDbSuma;
     lblMov_TotalIngresos: TLabel;
-    DBChartResumen: TDBChart;
-    Series4: TFastLineSeries;
-    Series2: TPointSeries;
-    Series5: TFastLineSeries;
-    Series3: TPointSeries;
-    ZS_Resumen: TZStoredProc;
-    ZS_ResumenFECHA: TDateField;
-    ZS_ResumenINGRESO: TFloatField;
-    ZS_ResumenEGRESO: TFloatField;
-    ZS_ResumenSALDO: TFloatField;
-    ZS_ResumenSALDODIARIO: TFloatField;
-    DS_Resumen: TDataSource;
-    EKSuma_Resumen: TEKDbSuma;
-    DBGridResumen: TDBGrid;
     EKBuscar_Mov: TEKBusquedaAvanzada;
-    EKBuscar_IngEgr: TEKBusquedaAvanzada;
-    EKBuscar_Resumen: TEKBusquedaAvanzada;
     ZQ_Sucursal: TZQuery;
     ZQ_SucursalID_SUCURSAL: TIntegerField;
     ZQ_SucursalNOMBRE: TStringField;
@@ -129,38 +107,20 @@ type
     Panel4: TPanel;
     lblBalanceSucursal: TLabel;
     lblBalanceFecha: TLabel;
-    RepBalance: TQuickRep;
-    QRBand9: TQRBand;
-    QRRepBalanceDBLogo: TQRDBImage;
-    QRLabel17: TQRLabel;
-    RepBalance_Subtitulo: TQRLabel;
-    RepBalance_Titulo: TQRLabel;
-    QRBand10: TQRBand;
-    QRDBText19: TQRDBText;
-    QRDBText1: TQRDBText;
-    QRDBText2: TQRDBText;
-    QRDBText3: TQRDBText;
-    QRBand11: TQRBand;
-    QRlblRepBalance_PieDePagina: TQRLabel;
-    QRLabel43: TQRLabel;
-    QRSysData1: TQRSysData;
-    QRBand12: TQRBand;
-    QRExpr18: TQRExpr;
-    QRlblRepBalance_SaldoIni: TQRLabel;
-    TitleBand2: TQRBand;
-    QRlblRepBalance_CritBusqueda: TQRLabel;
-    QRLabel48: TQRLabel;
-    ColumnHeaderBand2: TQRBand;
-    QRLabel29: TQRLabel;
-    QRLabel30: TQRLabel;
-    QRLabel1: TQRLabel;
-    QRLabel2: TQRLabel;
-    QRDBText4: TQRDBText;
-    QRLabel3: TQRLabel;
     EKVistaBalance: TEKVistaPreviaQR;
-    QRlblRepBalance_Ingresos: TQRLabel;
-    QRlblRepBalance_Egresos: TQRLabel;
-    QRlblRepBalance_SaldoFinal: TQRLabel;
+    EKVistaListado: TEKVistaPreviaQR;
+    DBChartBalance: TDBChart;
+    Series4: TFastLineSeries;
+    Series2: TPointSeries;
+    Series5: TFastLineSeries;
+    Series3: TPointSeries;
+    EKBuscaIngEgr: TEKBusquedaAvanzada;
+    Panel1: TPanel;
+    lblMovSucursal: TLabel;
+    lblMovFecha: TLabel;
+    Panel2: TPanel;
+    lblIngEgrSucursal: TLabel;
+    lblIngEgrFecha: TLabel;
     RepListado: TQuickRep;
     QRBand1: TQRBand;
     QRRepListadoDBLogo: TQRDBImage;
@@ -179,6 +139,7 @@ type
     QRBand4: TQRBand;
     QRExpr1: TQRExpr;
     QRlblRepListado_Ingresos: TQRLabel;
+    QRlblRepListado_Egresos: TQRLabel;
     QRBand5: TQRBand;
     QRlblRepListado_CritBusqueda: TQRLabel;
     QRLabel6: TQRLabel;
@@ -187,13 +148,47 @@ type
     QRLabel8: TQRLabel;
     QRLabel9: TQRLabel;
     QRLabel10: TQRLabel;
-    QRlblRepListado_Egresos: TQRLabel;
-    EKVistaListado: TEKVistaPreviaQR;
+    RepBalance: TQuickRep;
+    QRBand9: TQRBand;
+    QRRepBalanceDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepBalance_Subtitulo: TQRLabel;
+    RepBalance_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRBand11: TQRBand;
+    QRlblRepBalance_PieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    QRlblRepBalance_SaldoIni: TQRLabel;
+    QRlblRepBalance_Ingresos: TQRLabel;
+    QRlblRepBalance_Egresos: TQRLabel;
+    QRlblRepBalance_SaldoFinal: TQRLabel;
+    TitleBand2: TQRBand;
+    QRlblRepBalance_CritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    ZQ_IngresosID_TIPO_MOVIMIENTO: TIntegerField;
+    ZQ_IngresosNOMBRE_MOVIMIENTO: TStringField;
+    ZQ_IngresosSUM: TFloatField;
+    ZQ_EgresosID_TIPO_MOVIMIENTO: TIntegerField;
+    ZQ_EgresosNOMBRE_MOVIMIENTO: TStringField;
+    ZQ_EgresosSUM: TFloatField;
+    Panel3: TPanel;
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_EgresosAfterScroll(DataSet: TDataSet);
-    procedure ZQ_EgresosAfterOpen(DataSet: TDataSet);
-    procedure pintarTortas(Serie: TChartSeries; DataSet: TDataSet);
-    procedure ZQ_IngresosAfterOpen(DataSet: TDataSet);
+    procedure pintarTortas(Serie: TChartSeries; cantidad: integer);
     procedure ZQ_IngresosAfterScroll(DataSet: TDataSet);
     procedure DBChartIngresosMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure FormCreate(Sender: TObject);
@@ -230,47 +225,35 @@ uses UDM, UPrincipal, DateUtils;
 
 procedure TFEstadisticaMovInternos.btnSalirClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 
 procedure TFEstadisticaMovInternos.ZQ_EgresosAfterScroll(DataSet: TDataSet);
 begin
-  if Query_Egresos then
+  if Query_Egresos and (not ZQ_Egresos.IsEmpty) then
   begin
-    pintarTortas(DBChartEgresos.Series[0], DataSet);
-    DBChartEgresos.Series[0].ValueColor[DataSet.RecNo - 1]:= $00404080;
+    pintarTortas(DBChartEgresos.Series[0], ZQ_Egresos.RecordCount);
+    DBChartEgresos.Series[0].ValueColor[ZQ_Egresos.RecNo - 1]:= $00404080;
   end;
 end;
 
 
 procedure TFEstadisticaMovInternos.ZQ_IngresosAfterScroll(DataSet: TDataSet);
 begin
-  if Query_Ingresos then
+  if Query_Ingresos and (not ZQ_Ingresos.IsEmpty) then
   begin
-    pintarTortas(DBChartIngresos.Series[0], DataSet);
-    DBChartIngresos.Series[0].ValueColor[DataSet.RecNo - 1]:= $00404080;
+    pintarTortas(DBChartIngresos.Series[0], ZQ_Ingresos.RecordCount);
+    DBChartIngresos.Series[0].ValueColor[ZQ_Ingresos.RecNo - 1]:= $00404080;
   end;
 end;
 
 
-procedure TFEstadisticaMovInternos.ZQ_EgresosAfterOpen(DataSet: TDataSet);
-begin
-  Query_Egresos:= true;
-end;
-
-
-procedure TFEstadisticaMovInternos.ZQ_IngresosAfterOpen(DataSet: TDataSet);
-begin
-  Query_Ingresos:= true;
-end;
-
-
-procedure TFEstadisticaMovInternos.pintarTortas(Serie: TChartSeries; DataSet: TDataSet);
+procedure TFEstadisticaMovInternos.pintarTortas(Serie: TChartSeries; cantidad: integer);
 var
   i: integer;
 begin
-  for i := 0 to (DataSet.RecordCount-1) do
+  for i := 0 to (cantidad-1) do
     Serie.ValueColor[i]:= clYellow;
 end;
 
@@ -331,12 +314,12 @@ begin
 
   PageControl.ActivePageIndex:= 0;
 
-//  TabMovimientos.TabVisible:= false;
-//  TabIngresos_Egresos.TabVisible:= false;
-//  TabResumenDiario.TabVisible:= false;
-
   lblBalanceFecha.Caption:= '';
   lblBalanceSucursal.Caption:= '';
+  lblIngEgrFecha.Caption:= '';
+  lblIngEgrSucursal.Caption:= '';
+  lblMovFecha.Caption:= '';
+  lblMovSucursal.Caption:= '';
 
   indiceGraficoIngreso:= -1;
   indiceGraficoEgreso:= -1;
@@ -352,13 +335,8 @@ begin
   TEKCriterioBA(EKBuscar_Mov.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
   TEKCriterioBA(EKBuscar_Mov.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
 
-//  ZQ_Ingresos.ParamByName('fecha_desde').AsDate:= EncodeDate(2000,1,1);
-//  ZQ_Ingresos.ParamByName('fecha_hasta').AsDate:= EncodeDate(2020,1,1);
-//  ZQ_Ingresos.Open;
-//
-//  ZQ_Egresos.ParamByName('fecha_desde').AsDate:= EncodeDate(2000,1,1);
-//  ZQ_Egresos.ParamByName('fecha_hasta').AsDate:= EncodeDate(2020,1,1);
-//  ZQ_Egresos.Open;
+  TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
+  TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
 end;
 
 
@@ -393,8 +371,9 @@ end;
 procedure TFEstadisticaMovInternos.btnBuscarClick(Sender: TObject);
 var
   condicionImporte, filtro: string;
+  idSucursal: integer;
 begin
-  if PageControl.ActivePage.Name = 'TabBalance' then
+  if (PageControl.ActivePage.Name = 'TabBalance') or (PageControl.ActivePage.Name = 'TabBalanceGrafico') then
   begin
     lblBalanceFecha.Caption:= '';
     lblBalanceSucursal.Caption:= '';
@@ -417,6 +396,9 @@ begin
 
   if PageControl.ActivePage.Name = 'TabMovimientos' then
   begin
+    lblMovFecha.Caption:= '';
+    lblMovSucursal.Caption:= '';
+
     if  EKBuscar_Mov.BuscarSinEjecutar then
       if (EKBuscar_Mov.ParametrosSeleccionados1[0] = '') or (EKBuscar_Mov.ParametrosSeleccionados1[1] = '') then
       begin
@@ -459,18 +441,54 @@ begin
       end
       else
         ZQ_Movimientos.Filtered:= false;
-
-//        lblSaldo_Encabezado1.Caption:= 'Saldo Cuentas al '+EKBuscarSaldo.ParametrosSeleccionados1[1];
-//        lblSaldo_Encabezado2.Caption:= 'Sucursal: '+EKBuscarSaldo.ParametrosSelecReales1[0];
       end;
+
+      lblMovFecha.Caption:= 'Movimientos Internos desde el '+EKBuscar_Mov.ParametrosSeleccionados1[0]+' al '+EKBuscar_Mov.ParametrosSeleccionados1[1];
+      lblMovSucursal.Caption:= 'Sucursal: '+EKBuscar_Mov.ParametrosSelecReales1[2];
   end;
 
   if PageControl.ActivePage.Name = 'TabIngresos_Egresos' then
   begin
-  end;
+    lblIngEgrFecha.Caption:= '';
+    lblIngEgrSucursal.Caption:= '';
 
-  if PageControl.ActivePage.Name = 'TabResumenDiario' then
-  begin
+    if  EKBuscaIngEgr.BuscarSinEjecutar then
+      if (EKBuscaIngEgr.ParametrosSeleccionados1[0] = '') or (EKBuscaIngEgr.ParametrosSeleccionados1[1] = '') then
+      begin
+        Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
+        btnBuscar.Click;
+      end
+      else
+      begin
+        Query_Egresos:= false;
+        Query_Ingresos:= false;
+
+        idSucursal:= -1;
+        if EKBuscaIngEgr.ParametrosSeleccionados1[2] <> '' then
+          idSucursal:= StrToInt(EKBuscaIngEgr.ParametrosSeleccionados1[2]);
+
+        ZQ_Ingresos.Close;
+        ZQ_Ingresos.ParamByName('fecha_desde').AsDate:= StrToDate(EKBuscaIngEgr.ParametrosSeleccionados1[0]);
+        ZQ_Ingresos.ParamByName('fecha_hasta').AsDate:= StrToDate(EKBuscaIngEgr.ParametrosSeleccionados1[1]);
+        ZQ_Ingresos.ParamByName('id_sucursal').AsInteger:= idSucursal;
+        ZQ_Ingresos.Open;
+
+        ZQ_Egresos.Close;
+        ZQ_Egresos.ParamByName('fecha_desde').AsDate:= StrToDate(EKBuscaIngEgr.ParametrosSeleccionados1[0]);
+        ZQ_Egresos.ParamByName('fecha_hasta').AsDate:= StrToDate(EKBuscaIngEgr.ParametrosSeleccionados1[1]);
+        ZQ_Egresos.ParamByName('id_sucursal').AsInteger:= idSucursal;
+        ZQ_Egresos.Open;
+
+        lblIngEgrFecha.Caption:= 'Ingresos y Egresos desde el '+EKBuscaIngEgr.ParametrosSeleccionados1[0]+' al '+EKBuscaIngEgr.ParametrosSeleccionados1[1];
+        lblIngEgrSucursal.Caption:= 'Sucursal: '+EKBuscaIngEgr.ParametrosSelecReales1[2];
+
+        Query_Egresos:= true;
+        Query_Ingresos:= true;
+        ZQ_Ingresos.First;
+        ZQ_Egresos.First;
+        ZQ_Ingresos.First;
+        ZQ_Egresos.First;
+      end
   end;
 end;
 
@@ -484,7 +502,10 @@ begin
   ZS_Balance.Open;
 
   lblBalanceFecha.Caption:= 'Balance Movimientos Internos desde el '+DateToStr(fecha_desde)+' al '+DateToStr(fecha_hasta);
-  
+  DBChartBalance.Title.Text[0]:= lblBalanceFecha.Caption;
+  if lblBalanceSucursal.Caption <> '' then
+    DBChartBalance.Title.Text[0]:= lblBalanceFecha.Caption+' / '+lblBalanceSucursal.Caption;
+
   calcularResumenBalance(fecha_desde, fecha_hasta, id_sucursal);
 end;
 
@@ -569,5 +590,7 @@ begin
     EKVistaListado.VistaPrevia;
   end;
 end;
+
+
 
 end.
