@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 315
-  Top = 91
+  Left = 486
+  Top = 237
   Width = 872
   Height = 654
   Caption = 'Sincronizador SiGeFa'
@@ -93,7 +93,7 @@ object FPrincipal: TFPrincipal
           end
           object edPathArchivo: TEdit
             Left = 24
-            Top = 35
+            Top = 43
             Width = 265
             Height = 21
             TabOrder = 0
@@ -189,7 +189,7 @@ object FPrincipal: TFPrincipal
         Left = 1
         Top = 1
         Width = 852
-        Height = 301
+        Height = 279
         Align = alClient
         Color = 15915716
         DataSource = DS_SincroTabla
@@ -205,6 +205,14 @@ object FPrincipal: TFPrincipal
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
+      end
+      object ProgressBar1: TProgressBar
+        Left = 1
+        Top = 280
+        Width = 852
+        Height = 22
+        Align = alBottom
+        TabOrder = 1
       end
     end
   end
@@ -252,7 +260,7 @@ object FPrincipal: TFPrincipal
     end
   end
   object inicio: TEKIni
-    Archivo = 'configSincro.ini'
+    Archivo = 'sistema.ini'
     Left = 608
     Top = 432
   end
@@ -15256,5 +15264,17 @@ object FPrincipal: TFPrincipal
     object ZSP_GenerarLoteSincLOTESINC: TIntegerField
       FieldName = 'LOTESINC'
     end
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 377
+    Top = 177
+  end
+  object ClientDataSet2: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 489
+    Top = 177
   end
 end
