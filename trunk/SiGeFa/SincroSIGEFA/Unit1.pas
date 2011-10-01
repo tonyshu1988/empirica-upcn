@@ -72,6 +72,7 @@ type
     ProgressBar1: TProgressBar;
     ClientDataSet1: TClientDataSet;
     ClientDataSet2: TClientDataSet;
+    DataSource1: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
@@ -237,6 +238,8 @@ begin
   if Application.MessageBox('Si apaga el sincronizador dejará de actualizar la BD.', 'Atención', MB_OKCANCEL)= IDOK then
   begin
     EKIconizacion1.Visible:=false;
+    DM.IdFTP1.Disconnect;
+    DM.ZC_Local.Disconnect;
     Application.Terminate;
   end;
 end;
@@ -307,6 +310,7 @@ end;
 
 procedure TFPrincipal.btnBajarClick(Sender: TObject);
 begin
+  bajarXML('')
   //descargaNovedades();
 end;
 

@@ -12031,7 +12031,7 @@ object DM: TDM
   end
   object IdFTP1: TIdFTP
     IPVersion = Id_IPv4
-    Host = '174.132.76.2'
+    Host = 'grupoguadalupe.com.ar'
     Password = 'grupo78gua'
     Username = 'grupogua'
     NATKeepAlive.UseKeepAlive = False
