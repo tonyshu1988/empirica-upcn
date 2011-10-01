@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 486
-  Top = 237
+  Left = 357
+  Top = 188
   Width = 872
   Height = 654
   Caption = 'Sincronizador SiGeFa'
@@ -192,7 +192,7 @@ object FPrincipal: TFPrincipal
         Height = 279
         Align = alClient
         Color = 15915716
-        DataSource = DS_SincroTabla
+        DataSource = DataSource1
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -15276,5 +15276,10 @@ object FPrincipal: TFPrincipal
     Params = <>
     Left = 489
     Top = 177
+  end
+  object DataSource1: TDataSource
+    DataSet = ClientDataSet1
+    Left = 217
+    Top = 169
   end
 end
