@@ -19,13 +19,6 @@ type
     TabSheet3: TTabSheet;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btnVerDetalle: TdxBarLargeButton;
-    btnNuevo: TdxBarLargeButton;
-    btnModificar: TdxBarLargeButton;
-    btnBaja: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
-    btnGuardar: TdxBarLargeButton;
-    btnCancelar: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
@@ -274,6 +267,16 @@ type
     QRDBText27: TQRDBText;
     QRShape1: TQRShape;
     Shape2: TShape;
+    DBGridMovFPago: TDBGrid;
+    Splitter1: TSplitter;
+    ZQ_MovFormaPago: TZQuery;
+    DS_MovFormaPago: TDataSource;
+    ZP_Estadistica_Det_MovID_COMPROBANTE: TIntegerField;
+    ZQ_MovFormaPagoTIPOFORMAPAGO: TStringField;
+    ZQ_MovFormaPagoIMPORTE_REAL: TFloatField;
+    ZQ_MovFormaPagoCUENTA: TStringField;
+    EKOrdenarMovFPago: TEKOrdenarGrilla;
+    btnExcel: TdxBarLargeButton;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -281,6 +284,8 @@ type
     procedure DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ABuscarExecute(Sender: TObject);
+    procedure ZP_Estadistica_Det_MovAfterScroll(DataSet: TDataSet);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -305,6 +310,7 @@ begin
   EKOrdenarGrillaDetMov.CargarConfigColumnas;
   EKOrdenarGrillaSaldos.CargarConfigColumnas;
   EKOrdenarGrillaPD_Saldo.CargarConfigColumnas;
+  EKOrdenarMovFPago.CargarConfigColumnas;  
 
   TabSheet3.TabVisible:= false;
 
@@ -526,6 +532,7 @@ begin
   EKOrdenarGrillaDetMov.GuardarConfigColumnas;
   EKOrdenarGrillaSaldos.GuardarConfigColumnas;
   EKOrdenarGrillaPD_Saldo.GuardarConfigColumnas;
+  EKOrdenarMovFPago.GuardarConfigColumnas;  
 end;
 
 
@@ -533,6 +540,28 @@ procedure TFEstadisticaDisponibilidades.ABuscarExecute(Sender: TObject);
 begin
   if btnBuscar.Enabled then
     btnBuscar.Click;
+end;
+
+procedure TFEstadisticaDisponibilidades.ZP_Estadistica_Det_MovAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_MovFormaPago.Close;
+  ZQ_MovFormaPago.ParamByName('id_comprobante').AsInteger:= ZP_Estadistica_Det_MovID_COMPROBANTE.AsInteger;
+  ZQ_MovFormaPago.open;
+end;
+
+procedure TFEstadisticaDisponibilidades.btnExcelClick(Sender: TObject);
+begin
+  if PageControl.ActivePage.Name = 'TabSaldosCuentas' then
+  begin
+    if not ZP_SaldosCuentas.IsEmpty then
+      dm.ExportarEXCEL(DBGridSaldoCuentas);
+  end;
+
+  if PageControl.ActivePage.Name = 'TabDetalleMov' then
+  begin
+    if not ZP_Estadistica_Det_Mov.IsEmpty then
+      dm.ExportarEXCEL(DBGridEstadisticaDetMov);
+  end;
 end;
 
 end.

@@ -125,6 +125,7 @@ type
     QRLabel29: TQRLabel;
     QRLabel1: TQRLabel;
     EKVistaPrevia: TEKVistaPreviaQR;
+    btnExcel: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -169,6 +170,7 @@ type
     procedure DBGridMedidaDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -745,18 +747,23 @@ begin
   EKVistaPrevia.VistaPrevia;
 end;
 
-procedure TFABM_ArticuloMedida.DBGridArticuloDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFABM_ArticuloMedida.DBGridArticuloDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridArticulo, Rect, DataCol, Column, State);
 end;
 
-procedure TFABM_ArticuloMedida.DBGridMedidaDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFABM_ArticuloMedida.DBGridMedidaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridMedida, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFABM_ArticuloMedida.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_Medida.IsEmpty then
+    dm.ExportarEXCEL(DBGridMedidas);
 end;
 
 end.

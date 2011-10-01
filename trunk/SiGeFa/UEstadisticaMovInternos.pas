@@ -186,6 +186,8 @@ type
     ZQ_EgresosNOMBRE_MOVIMIENTO: TStringField;
     ZQ_EgresosSUM: TFloatField;
     Panel3: TPanel;
+    btnExcel: TdxBarLargeButton;
+    ZQ_MovimientosOBSERVACION: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_EgresosAfterScroll(DataSet: TDataSet);
     procedure pintarTortas(Serie: TChartSeries; cantidad: integer);
@@ -204,6 +206,7 @@ type
     procedure DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -592,5 +595,20 @@ begin
 end;
 
 
+
+procedure TFEstadisticaMovInternos.btnExcelClick(Sender: TObject);
+begin
+  if PageControl.ActivePage.Name = 'TabBalance' then
+  begin
+    if not ZS_Balance.IsEmpty then
+      dm.ExportarEXCEL(DBGridBalance);
+  end;
+
+  if PageControl.ActivePage.Name = 'TabMovimientos' then
+  begin
+    if not ZQ_Movimientos.IsEmpty then
+      dm.ExportarEXCEL(DBGridMovimientos);
+  end;
+end;
 
 end.

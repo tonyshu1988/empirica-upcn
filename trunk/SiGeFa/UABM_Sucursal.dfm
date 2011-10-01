@@ -1,7 +1,7 @@
 object FABM_Sucursal: TFABM_Sucursal
   Left = 258
   Top = 166
-  Width = 877
+  Width = 938
   Height = 573
   Caption = 'ABM Sucursal'
   Color = clBtnFace
@@ -22,7 +22,7 @@ object FABM_Sucursal: TFABM_Sucursal
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 861
+    Width = 922
     Height = 464
     Align = alClient
     BevelOuter = bvNone
@@ -772,7 +772,7 @@ object FABM_Sucursal: TFABM_Sucursal
     object DBGridSucursal: TDBGrid
       Left = 5
       Top = 5
-      Width = 851
+      Width = 912
       Height = 208
       Align = alClient
       Color = 14606012
@@ -837,7 +837,7 @@ object FABM_Sucursal: TFABM_Sucursal
     object PageControl1: TPageControl
       Left = 5
       Top = 213
-      Width = 851
+      Width = 912
       Height = 246
       ActivePage = TabSheetVendedores
       Align = alBottom
@@ -1302,7 +1302,7 @@ object FABM_Sucursal: TFABM_Sucursal
         object Label15: TLabel
           Left = 0
           Top = 105
-          Width = 843
+          Width = 904
           Height = 13
           Align = alBottom
           Caption = 'Datos Adicionales:'
@@ -1310,7 +1310,7 @@ object FABM_Sucursal: TFABM_Sucursal
         object DBMemoVendedor: TDBMemo
           Left = 0
           Top = 118
-          Width = 843
+          Width = 904
           Height = 100
           Align = alBottom
           Color = clWhite
@@ -1327,7 +1327,7 @@ object FABM_Sucursal: TFABM_Sucursal
         object DBGridVendedor: TDBGrid
           Left = 0
           Top = 0
-          Width = 843
+          Width = 904
           Height = 105
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
@@ -1405,7 +1405,7 @@ object FABM_Sucursal: TFABM_Sucursal
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 861
+    Width = 922
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1426,7 +1426,7 @@ object FABM_Sucursal: TFABM_Sucursal
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 751
+      Left = 812
       Top = 1
       Width = 109
       Height = 17
@@ -1583,6 +1583,10 @@ object FABM_Sucursal: TFABM_Sucursal
           item
             BeginGroup = True
             Item = btnImprimir
+            Visible = True
+          end
+          item
+            Item = btnExcel
             Visible = True
           end
           item
@@ -1994,6 +1998,15 @@ object FABM_Sucursal: TFABM_Sucursal
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnExcel: TdxBarLargeButton
+      Caption = 'Excel'
+      Category = 0
+      Hint = 'Exportar a Excel'
+      Visible = ivAlways
+      ImageIndex = 77
+      OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -2003,7 +2016,8 @@ object FABM_Sucursal: TFABM_Sucursal
         'btnBaja'
         'btnSalir'
         'btnReactivar'
-        'btnImprimir')
+        'btnImprimir'
+        'btnExcel')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False

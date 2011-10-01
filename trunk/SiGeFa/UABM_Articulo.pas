@@ -92,6 +92,7 @@ type
     PopupMenuMedida: TPopupMenu;
     QuitarMedida1: TMenuItem;
     ZU_Medidas: TZUpdateSQL;
+    btnExcel: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -118,6 +119,7 @@ type
     procedure DBGridMedidasDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure btnExcelClick(Sender: TObject);
   private
   public
   end;
@@ -415,6 +417,12 @@ procedure TFABM_Articulo.DBGridMedidasDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridMedidas, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_Articulo.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_Articulo.IsEmpty then
+    dm.ExportarEXCEL(DBGridArticulo);
 end;
 
 end.

@@ -55,7 +55,6 @@ type
     QRDBPrecio2: TQRDBText;
     QRDBPrecio3: TQRDBText;
     QRDBPrecio1: TQRDBText;
-    SP_ImprimirEtiquetasCODIGOBARRA: TStringField;
     SP_ImprimirEtiquetasMedida: TStringField;
     ZQ_ProductosPRECIO_VENTA: TFloatField;
     SP_ImprimirEtiquetasPrecio: TFloatField;
@@ -69,6 +68,7 @@ type
     PopItemProducto_Quitar: TMenuItem;
     PopItemProducto_QuitarTodos: TMenuItem;
     EKOrdenarGrilla: TEKOrdenarGrilla;
+    SP_ImprimirEtiquetasCODIGOBARRA: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);

@@ -260,6 +260,7 @@ type
     ZQ_ProveedorVENCIMIENTO_DIAS: TIntegerField;
     ZQ_ProveedorFECHA_ALTA: TDateField;
     ZQ_ProveedorFECHA_BAJA: TDateField;
+    btnExcel: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -278,6 +279,7 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure DBGridProveedor_CtaCteDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridResumen_CtaCtesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnExcelClick(Sender: TObject);
   private
     vsel: TFBuscarPersona;
     viendoResumen: boolean;
@@ -600,6 +602,20 @@ end;
 procedure TFCuentaCorriente_Proveedor.DBGridResumen_CtaCtesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridResumen_CtaCtes, Rect, DataCol, Column, State);
+end;
+
+procedure TFCuentaCorriente_Proveedor.btnExcelClick(Sender: TObject);
+begin
+  if viendoResumen then
+  begin
+    if not ZQ_CtaCte_Gral.IsEmpty then
+      dm.ExportarEXCEL(DBGridResumen_CtaCtes);
+  end
+  else
+  begin
+    if not ZQ_CtaCte_Proveedor.IsEmpty then
+      dm.ExportarEXCEL(DBGridProveedor_CtaCte);
+  end;
 end;
 
 end.

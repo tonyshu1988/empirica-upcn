@@ -24,7 +24,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
     Top = 0
     Width = 854
     Height = 456
-    ActivePage = TabIngresos_Egresos
+    ActivePage = TabMovimientos
     Align = alClient
     TabOrder = 0
     object TabBalance: TTabSheet
@@ -164,7 +164,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 12
           end
           object RepBalance_Subtitulo: TQRLabel
-            Left = -66
+            Left = 285
             Top = 26
             Width = 148
             Height = 20
@@ -196,7 +196,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 9
           end
           object RepBalance_Titulo: TQRLabel
-            Left = -75
+            Left = 276
             Top = 2
             Width = 165
             Height = 20
@@ -1179,7 +1179,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblBalanceSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 836
+            Width = 121
             Height = 13
             Align = alTop
             Caption = 'lblBalanceSucursal'
@@ -1193,7 +1193,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblBalanceFecha: TLabel
             Left = 4
             Top = 4
-            Width = 836
+            Width = 103
             Height = 13
             Align = alTop
             Caption = 'lblBalanceFecha'
@@ -1485,7 +1485,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 12
           end
           object RepListado_Subtitulo: TQRLabel
-            Left = -64
+            Left = 287
             Top = 26
             Width = 143
             Height = 20
@@ -1517,7 +1517,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 9
           end
           object RepListado_Titulo: TQRLabel
-            Left = -72
+            Left = 279
             Top = 2
             Width = 159
             Height = 20
@@ -2229,6 +2229,14 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             end
             item
               Expanded = False
+              FieldName = 'OBSERVACION'
+              Title.Alignment = taCenter
+              Title.Caption = 'Detalle'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
               FieldName = 'INGRESOS'
               Title.Alignment = taCenter
               Title.Caption = 'Ingresos'
@@ -2298,7 +2306,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object Label4: TLabel
           Left = 0
           Top = 0
-          Width = 422
+          Width = 65
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -2313,7 +2321,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object lblTotalIngresos: TLabel
           Left = 0
           Top = 42
-          Width = 422
+          Width = 69
           Height = 13
           Align = alBottom
           Alignment = taCenter
@@ -2441,7 +2449,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object Label3: TLabel
           Left = 0
           Top = 0
-          Width = 420
+          Width = 58
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -2456,7 +2464,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object lblTotalEgresos: TLabel
           Left = 0
           Top = 42
-          Width = 420
+          Width = 69
           Height = 13
           Align = alBottom
           Alignment = taCenter
@@ -2583,7 +2591,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object lblIngEgrSucursal: TLabel
           Left = 4
           Top = 17
-          Width = 838
+          Width = 114
           Height = 13
           Align = alTop
           Caption = 'lblIngEgrSucursal'
@@ -2597,7 +2605,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object lblIngEgrFecha: TLabel
           Left = 4
           Top = 4
-          Width = 838
+          Width = 96
           Height = 13
           Align = alTop
           Caption = 'lblIngEgrFecha'
@@ -2731,6 +2739,10 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           item
             BeginGroup = True
             Item = btnImprimir
+            Visible = True
+          end
+          item
+            Item = btnExcel
             Visible = True
           end
           item
@@ -3076,11 +3088,21 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnExcel: TdxBarLargeButton
+      Caption = 'Excel'
+      Category = 0
+      Hint = 'Exportar a Excel'
+      Visible = ivAlways
+      ImageIndex = 77
+      OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnBuscar'
         'btnSalir'
-        'btnImprimir')
+        'btnImprimir'
+        'btnExcel')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -3092,7 +3114,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       
         'select c.fecha, c.id_comprobante, c.id_tipo_cpb, c.id_tipo_movim' +
         'iento,'
-      '       c.id_sucursal, m.nombre_movimiento,'
+      '       c.id_sucursal, m.nombre_movimiento, c.observacion,'
       '        CASE'
       '            WHEN (c.id_tipo_cpb = 16) THEN c.importe_total'
       '            WHEN (c.id_tipo_cpb = 17) THEN 0'
@@ -3179,6 +3201,10 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       FieldName = 'EGRESOS'
       ReadOnly = True
       currency = True
+    end
+    object ZQ_MovimientosOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
     end
   end
   object DS_Movimientos: TDataSource

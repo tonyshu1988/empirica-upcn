@@ -132,7 +132,6 @@ object FABM_Articulo: TFABM_Articulo
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
-          DataSet = DM.ZQ_Sucursal
           Stretch = True
         end
         object QRLabel17: TQRLabel
@@ -1045,6 +1044,10 @@ object FABM_Articulo: TFABM_Articulo
             Visible = True
           end
           item
+            Item = btnExcel
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -1459,6 +1462,15 @@ object FABM_Articulo: TFABM_Articulo
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnExcel: TdxBarLargeButton
+      Caption = 'Excel'
+      Category = 0
+      Hint = 'Exportar a Excel'
+      Visible = ivAlways
+      ImageIndex = 77
+      OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -1468,7 +1480,8 @@ object FABM_Articulo: TFABM_Articulo
         'btnBaja'
         'btnSalir'
         'btnReactivar'
-        'btnImprimir')
+        'btnImprimir'
+        'btnExcel')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False

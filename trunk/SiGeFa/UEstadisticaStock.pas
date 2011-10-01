@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
   StdCtrls, EKDbSuma, mxNativeExcel, mxExport, EKOrdenarGrilla, QRCtrls,
-  QuickRpt, EKVistaPreviaQR;
+  QuickRpt, EKVistaPreviaQR, ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFEstadisticaStock = class(TForm)
@@ -15,15 +15,7 @@ type
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
     btnExportarXLS: TdxBarLargeButton;
-    btnEditarGrilla: TdxBarLargeButton;
-    btnProcesarImportes: TdxBarLargeButton;
-    btnSeleccionar: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
-    btnGuardar: TdxBarLargeButton;
-    btnCancelar: TdxBarLargeButton;
-    btnImprimir: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    btBuscarGoogle: TdxBarLargeButton;
     btImprimir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
@@ -100,6 +92,8 @@ type
     QRLabelmporteCosto: TQRLabel;
     QRDBLogo: TQRDBImage;
     QRExpr2: TQRExpr;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
     procedure ZQ_StockCalcFields(DataSet: TDataSet);
     procedure btnBuscarClick(Sender: TObject);
     procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -109,6 +103,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnSalirClick(Sender: TObject);
     procedure btImprimirClick(Sender: TObject);
+    procedure ABuscarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -180,6 +175,12 @@ begin
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscarStock.ParametrosBuscados;
   EKVistaPreviaQR1.VistaPrevia;
+end;
+
+procedure TFEstadisticaStock.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
 end;
 
 end.

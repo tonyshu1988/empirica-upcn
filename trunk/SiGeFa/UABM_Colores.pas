@@ -83,6 +83,7 @@ type
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    btnExcel: TdxBarLargeButton;
     procedure ZQ_ColoresAfterScroll(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
@@ -104,6 +105,7 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
   public
   end;
@@ -398,6 +400,12 @@ begin
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
+end;
+
+procedure TFABM_Colores.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_Colores.IsEmpty then
+    dm.ExportarEXCEL(DBGridColor);
 end;
 
 end.

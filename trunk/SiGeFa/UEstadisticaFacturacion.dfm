@@ -1,6 +1,6 @@
 object FEstadisticasFacturacion: TFEstadisticasFacturacion
-  Left = 258
-  Top = 140
+  Left = 261
+  Top = 162
   Width = 1011
   Height = 611
   Caption = 'Estadisticas Facturacion'
@@ -987,7 +987,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
           end
           item
             BeginGroup = True
-            Item = btnExportarXLS
+            Item = btnExcel
             Visible = True
           end
           item
@@ -1308,81 +1308,23 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object btnExportarXLS: TdxBarLargeButton
+    object btnExcel: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Exportar Exel'
+      Caption = 'Exel'
       Category = 0
-      Hint = 'Exportar Exel'
+      Hint = 'Exportar a Exel'
       Visible = ivAlways
       ImageIndex = 77
-      OnClick = btnExportarXLSClick
+      OnClick = btnExcelClick
       AutoGrayScale = False
-    end
-    object btnEditarGrilla: TdxBarLargeButton
-      Caption = 'Editar Grilla'
-      Category = 0
-      Hint = 'Edita Los importes desde la grilla'
-      Visible = ivAlways
-      ImageIndex = 79
-      AutoGrayScale = False
-    end
-    object btnProcesarImportes: TdxBarLargeButton
-      Caption = 'Procesar Precios'
-      Category = 0
-      Hint = 'Comenzar el proceso de actualizacion de importes'
-      Visible = ivAlways
-      ImageIndex = 35
-      AutoGrayScale = False
-    end
-    object btnSeleccionar: TdxBarLargeButton
-      Caption = 'Seleccionar'
-      Category = 0
-      Hint = 'Seleccionar de la grilla los productos a actualizar'
-      Visible = ivAlways
-      ImageIndex = 5
-      AutoGrayScale = False
-    end
-    object btnReactivar: TdxBarLargeButton
-      Caption = 'F6 - Reactivar'
-      Category = 0
-      Hint = 'Reactiva un registro'
-      Visible = ivAlways
-      ImageIndex = 24
-      ShortCut = 117
-      AutoGrayScale = False
-    end
-    object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
-      Category = 0
-      Enabled = False
-      Hint = 'Guarda los cambios'
-      Visible = ivAlways
-      ImageIndex = 3
-      AutoGrayScale = False
-    end
-    object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
-      Category = 0
-      Enabled = False
-      Hint = 'Cancela los cambios'
-      Visible = ivAlways
-      ImageIndex = 4
-      AutoGrayScale = False
-    end
-    object btnImprimir: TdxBarLargeButton
-      Caption = 'Imprimir Lista de Precios'
-      Category = 0
-      Hint = 'Imprimir Lista de Precios'
-      Visible = ivAlways
-      ImageIndex = 28
     end
     object btnSalir: TdxBarLargeButton
       Align = iaRight
@@ -1394,39 +1336,33 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
-    object btBuscarGoogle: TdxBarLargeButton
-      Caption = 'Buscar en Google'
+    object btImprimir: TdxBarLargeButton
+      Caption = 'Imprimir'
       Category = 0
-      Hint = 'Buscar en Google'
-      Visible = ivAlways
-      ImageIndex = 80
-      AutoGrayScale = False
-    end
-    object btImprimirEtiquetas: TdxBarLargeButton
-      Caption = 'Imprimir Etiquetas'
-      Category = 0
-      Hint = 'Imprimir Etiquetas'
+      Hint = 'Imprimir'
       Visible = ivAlways
       ImageIndex = 28
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
       Items = (
-        'btnEditarGrilla'
-        'btnProcesarImportes'
         'btnBuscar'
-        'btnExportarXLS'
-        'btnSeleccionar'
+        'btnExcel'
         'btnSalir'
-        'btnReactivar'
-        'btnImprimir'
-        'btImprimirEtiquetas')
+        'btImprimir')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
-      Items = (
-        'btnGuardar'
-        'btnCancelar')
+    end
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 216
+    Top = 274
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
     end
   end
 end

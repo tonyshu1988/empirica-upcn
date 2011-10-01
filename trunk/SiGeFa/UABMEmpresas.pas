@@ -344,6 +344,7 @@ type
     ZQ_CtaCteVENCIMIENTO_DIAS: TIntegerField;
     DS_CtaCte: TDataSource;
     ZQ_EmpresaCODIGO_CORTO: TIntegerField;
+    btnExcel: TdxBarLargeButton;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -393,6 +394,7 @@ type
     procedure btnCtaCte_AceptarClick(Sender: TObject);
     procedure btnCtaCte_CancelarClick(Sender: TObject);
     procedure btnCtaCte(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     vsel : TFBuscarPersona;
     procedure OnSelPersona;
@@ -1255,6 +1257,12 @@ begin
   ZQ_CtaCte.RevertRecord;
   habilitarCtaCte(false);
   GrupoEditando.Enabled:= true;
+end;
+
+procedure TFABMEmpresas.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_Empresa.IsEmpty then
+    dm.ExportarEXCEL(DBGridEmpresas);
 end;
 
 end.
