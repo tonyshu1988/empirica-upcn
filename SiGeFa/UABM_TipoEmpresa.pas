@@ -70,6 +70,7 @@ type
     ColumnHeaderBand2: TQRBand;
     QRLabel29: TQRLabel;
     QRLabel1: TQRLabel;
+    btnExcel: TdxBarLargeButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -90,6 +91,7 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -341,6 +343,12 @@ begin
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
+end;
+
+procedure TFABM_TipoEmpresa.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_TipoEmpresa.IsEmpty then
+    dm.ExportarEXCEL(DBGridTipoEmpresa);
 end;
 
 end.

@@ -106,6 +106,7 @@ type
     btnPuntoSalida: TdxBarLargeButton;
     StaticTxtPuntoSalida: TStaticText;
     ZQ_MarcaPSalida: TZQuery;
+    btnExcel: TdxBarLargeButton;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -129,6 +130,7 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnPuntoSalidaClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -416,6 +418,12 @@ begin
     ZQ_PosicionSucursal.Refresh;
     ZQ_PosicionSucursal.RecNo:= recNo;
   end;
+end;
+
+procedure TFABM_SucursalPosicion.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_PosicionSucursal.IsEmpty then
+    dm.ExportarEXCEL(DBGridPosicionSucursal);
 end;
 
 end.

@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
-  StdCtrls, EKDbSuma, EKOrdenarGrilla, Buttons, mxNativeExcel, mxExport;
+  StdCtrls, EKDbSuma, EKOrdenarGrilla, Buttons, mxNativeExcel, mxExport,
+  ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFEstadisticasFacturacion = class(TForm)
@@ -89,28 +90,23 @@ type
     Label39: TLabel;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btnExportarXLS: TdxBarLargeButton;
-    btnEditarGrilla: TdxBarLargeButton;
-    btnProcesarImportes: TdxBarLargeButton;
-    btnSeleccionar: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
-    btnGuardar: TdxBarLargeButton;
-    btnCancelar: TdxBarLargeButton;
-    btnImprimir: TdxBarLargeButton;
+    btnExcel: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    btBuscarGoogle: TdxBarLargeButton;
-    btImprimirEtiquetas: TdxBarLargeButton;
+    btImprimir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
-    procedure btnExportarXLSClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure AplicarFiltro(Sender: TObject);
+    procedure ABuscarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -206,7 +202,7 @@ begin
   EKBuscarComprobantes.Buscar;
 end;
 
-procedure TFEstadisticasFacturacion.btnExportarXLSClick(Sender: TObject);
+procedure TFEstadisticasFacturacion.btnExcelClick(Sender: TObject);
 begin
   if not ZQ_Comprobante.IsEmpty then
     dm.ExportarEXCEL(DBGridComprobantes);
@@ -225,6 +221,12 @@ end;
 procedure TFEstadisticasFacturacion.DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(TDBGrid(Sender), Rect, DataCol, Column, State);
+end;
+
+procedure TFEstadisticasFacturacion.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
 end;
 
 end.

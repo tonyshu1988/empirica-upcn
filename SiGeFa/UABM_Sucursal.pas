@@ -159,6 +159,7 @@ type
     DBGridVendedor: TDBGrid;
     Label15: TLabel;
     EKOrdenarEmpleado: TEKOrdenarGrilla;
+    btnExcel: TdxBarLargeButton;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -188,6 +189,7 @@ type
     procedure DBGridVendedorDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure btnExcelClick(Sender: TObject);
   private
     vsel : TFBuscarPersona;
     procedure OnSelVendedor;
@@ -615,6 +617,12 @@ procedure TFABM_Sucursal.DBGridVendedorDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridVendedor, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_Sucursal.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_Sucursal.IsEmpty then
+    dm.ExportarEXCEL(DBGridSucursal);
 end;
 
 end.

@@ -31,7 +31,6 @@ uses
   UABM_TipoComprobante in 'UABM_TipoComprobante.pas' {FABM_TipoComprobante},
   UABM_Cuentas in 'UABM_Cuentas.pas' {FABM_Cuentas},
   UABM_Precios in 'UABM_Precios.pas' {FABM_Precios},
-  UABM_Comprobantes in 'UABM_Comprobantes.pas' {FABM_Comprobantes},
   UCajero in 'UCajero.pas' {FCajero},
   UBuscarProducto in 'UBuscarProducto.pas' {FBuscarProducto},
   UImpresion_Comprobantes in 'UImpresion_Comprobantes.pas' {FImpresion_Comprobantes},

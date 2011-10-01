@@ -77,6 +77,7 @@ type
     ZQ_TipoMovID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_TipoMovBAJA: TStringField;
     ZQ_TipoMovNOMBRE_MOVIMIENTO: TStringField;
+    btnExcel: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -97,6 +98,7 @@ type
     procedure btnReactivarClick(Sender: TObject);
     procedure ABajaExecute(Sender: TObject);
     procedure AReactivarExecute(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -352,6 +354,12 @@ begin
     ZQ_TipoMov.Refresh;
     ZQ_TipoMov.RecNo:= recNo;
   end;
+end;
+
+procedure TFABM_TipoMovimiento.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_TipoMov.IsEmpty then
+    dm.ExportarEXCEL(DBGridTipo);
 end;
 
 end.

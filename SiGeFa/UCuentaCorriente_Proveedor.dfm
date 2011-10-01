@@ -3889,6 +3889,10 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
             Visible = True
           end
           item
+            Item = btnExcel
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -4249,13 +4253,23 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnExcel: TdxBarLargeButton
+      Caption = 'Excel'
+      Category = 0
+      Hint = 'Exportar a Excel'
+      Visible = ivAlways
+      ImageIndex = 77
+      OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnBuscar'
         'btnVerCtaCte'
         'btnImprimir'
         'btnImprimirRecibo'
-        'btnSalir')
+        'btnSalir'
+        'btnExcel')
     end
   end
   object ATeclasRapidas: TActionManager

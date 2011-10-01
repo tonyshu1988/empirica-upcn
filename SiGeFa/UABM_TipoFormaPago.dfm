@@ -1080,7 +1080,10 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
             Visible = True
           end
           item
-            BeginGroup = True
+            Item = btnExcel
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -1488,6 +1491,15 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnExcel: TdxBarLargeButton
+      Caption = 'Excel'
+      Category = 0
+      Hint = 'Exportar a Excel'
+      Visible = ivAlways
+      ImageIndex = 77
+      OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -1497,7 +1509,8 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
         'btnBaja'
         'btnSalir'
         'btnReactivar'
-        'btnImprimir')
+        'btnImprimir'
+        'btnExcel')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -1569,15 +1582,15 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
         Visible = True
       end
       item
+        TituloColumna = 'Lista Precio'
+        Visible = True
+      end
+      item
         TituloColumna = 'IF'
         Visible = True
       end
       item
         TituloColumna = 'Genera Vuelto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Lista Precio'
         Visible = True
       end
       item

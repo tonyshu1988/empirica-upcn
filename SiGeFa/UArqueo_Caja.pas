@@ -12,22 +12,13 @@ type
   TFArqueo_Caja = class(TForm)
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btnExportarXLS: TdxBarLargeButton;
-    btnEditarGrilla: TdxBarLargeButton;
-    btnProcesarImportes: TdxBarLargeButton;
-    btnSeleccionar: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
-    btnGuardar: TdxBarLargeButton;
-    btnCancelar: TdxBarLargeButton;
+    btnExcel: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    btBuscarGoogle: TdxBarLargeButton;
-    btImprimirEtiquetas: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     PanelContenedor: TPanel;
     Panel5: TPanel;
-    Splitter1: TSplitter;
     Panel1: TPanel;
     lblComprobantes: TLabel;
     PanelFiltro: TPanel;
@@ -98,6 +89,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -149,6 +141,12 @@ begin
 
   DM.VariablesReportes(RepArqueo);
   EKVistaPreviaQR1.VistaPrevia;
+end;
+
+procedure TFArqueo_Caja.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_ComprobanteDetalle.IsEmpty then
+    dm.ExportarEXCEL(DBGridListadoProductos);
 end;
 
 end.

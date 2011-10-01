@@ -4357,10 +4357,6 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       FieldName = 'DESCRIPCION'
       Size = 100
     end
-    object SP_ImprimirEtiquetasCODIGOBARRA: TStringField
-      FieldName = 'CODIGOBARRA'
-      Size = 40
-    end
     object SP_ImprimirEtiquetasMedida: TStringField
       FieldKind = fkLookup
       FieldName = 'Medida'
@@ -4380,6 +4376,9 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       KeyFields = 'ID_PRODUCTO'
       currency = True
       Lookup = True
+    end
+    object SP_ImprimirEtiquetasCODIGOBARRA: TStringField
+      FieldName = 'CODIGOBARRA'
     end
   end
   object borrar: TZSQLProcessor

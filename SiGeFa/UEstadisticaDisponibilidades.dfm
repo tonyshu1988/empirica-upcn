@@ -32,123 +32,11 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       Top = 1
       Width = 1030
       Height = 494
-      ActivePage = TabSaldosCuentas
+      ActivePage = TabDetalleMov
       Align = alClient
       TabOrder = 0
       object TabSaldosCuentas: TTabSheet
         Caption = 'Saldo Cuentas'
-        object DBGridSaldoCuentas: TDBGrid
-          Left = 0
-          Top = 38
-          Width = 1022
-          Height = 406
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_SaldosCuentas
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnDrawColumnCell = DrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'CODIGO'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'digo'
-              Width = 135
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NOMBRE_CUENTA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cuenta'
-              Width = 432
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NRO_CTA_BANCO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Nro. Cuenta'
-              Width = 163
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Saldo'
-              Width = 136
-              Visible = True
-            end>
-        end
-        object Panel1: TPanel
-          Left = 0
-          Top = 0
-          Width = 1022
-          Height = 38
-          Align = alTop
-          BevelOuter = bvNone
-          BorderWidth = 4
-          TabOrder = 1
-          object lblSaldo_Encabezado2: TLabel
-            Left = 4
-            Top = 17
-            Width = 1014
-            Height = 13
-            Align = alTop
-            Caption = 'lblTotalSaldo'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold, fsItalic]
-            ParentFont = False
-          end
-          object lblSaldo_Encabezado1: TLabel
-            Left = 4
-            Top = 4
-            Width = 1014
-            Height = 13
-            Align = alTop
-            Caption = 'lblTotalSaldo'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold, fsItalic]
-            ParentFont = False
-          end
-        end
-        object Panel2: TPanel
-          Left = 0
-          Top = 444
-          Width = 1022
-          Height = 22
-          Align = alBottom
-          BorderWidth = 4
-          TabOrder = 2
-          object lblSaldo_Total: TLabel
-            Left = 5
-            Top = 5
-            Width = 1012
-            Height = 13
-            Align = alTop
-            Alignment = taRightJustify
-            Caption = 'lblSaldo_Total'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold, fsItalic]
-            ParentFont = False
-          end
-        end
         object RepSaldo: TQuickRep
           Tag = 99
           Left = 70
@@ -920,6 +808,118 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ExportAs = exptText
               FontSize = 8
             end
+          end
+        end
+        object DBGridSaldoCuentas: TDBGrid
+          Left = 0
+          Top = 38
+          Width = 1022
+          Height = 406
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_SaldosCuentas
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'CODIGO'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'digo'
+              Width = 135
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_CUENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cuenta'
+              Width = 432
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NRO_CTA_BANCO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Nro. Cuenta'
+              Width = 163
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Saldo'
+              Width = 136
+              Visible = True
+            end>
+        end
+        object Panel1: TPanel
+          Left = 0
+          Top = 0
+          Width = 1022
+          Height = 38
+          Align = alTop
+          BevelOuter = bvNone
+          BorderWidth = 4
+          TabOrder = 1
+          object lblSaldo_Encabezado2: TLabel
+            Left = 4
+            Top = 17
+            Width = 1014
+            Height = 13
+            Align = alTop
+            Caption = 'lblTotalSaldo'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+          object lblSaldo_Encabezado1: TLabel
+            Left = 4
+            Top = 4
+            Width = 1014
+            Height = 13
+            Align = alTop
+            Caption = 'lblTotalSaldo'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+        end
+        object Panel2: TPanel
+          Left = 0
+          Top = 444
+          Width = 1022
+          Height = 22
+          Align = alBottom
+          BorderWidth = 4
+          TabOrder = 2
+          object lblSaldo_Total: TLabel
+            Left = 5
+            Top = 5
+            Width = 1012
+            Height = 13
+            Align = alTop
+            Alignment = taRightJustify
+            Caption = 'lblSaldo_Total'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
           end
         end
       end
@@ -3236,10 +3236,17 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       object TabDetalleMov: TTabSheet
         Caption = 'Detalle Movimiento'
         ImageIndex = 1
+        object Splitter1: TSplitter
+          Left = 635
+          Top = 38
+          Width = 5
+          Height = 406
+          Align = alRight
+        end
         object RepDetalleMov: TQuickRep
           Tag = 99
-          Left = -10
-          Top = 85
+          Left = -370
+          Top = 45
           Width = 1123
           Height = 794
           Frame.Color = clBlack
@@ -4228,7 +4235,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object DBGridEstadisticaDetMov: TDBGrid
           Left = 0
           Top = 38
-          Width = 1022
+          Width = 635
           Height = 406
           Align = alClient
           Color = 14606012
@@ -4334,6 +4341,48 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             Font.Style = [fsBold, fsItalic]
             ParentFont = False
           end
+        end
+        object DBGridMovFPago: TDBGrid
+          Left = 640
+          Top = 38
+          Width = 382
+          Height = 406
+          Align = alRight
+          Color = 14606012
+          DataSource = DS_MovFormaPago
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 4
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'CUENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cuenta'
+              Width = 172
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TIPOFORMAPAGO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Forma Cobro/Pago'
+              Width = 118
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_REAL'
+              Title.Alignment = taCenter
+              Title.Caption = 'Importe'
+              Width = 82
+              Visible = True
+            end>
         end
       end
       object TabSheet3: TTabSheet
@@ -4530,6 +4579,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           item
             BeginGroup = True
             Item = btnImprimir
+            Visible = True
+          end
+          item
+            Item = btnExcel
             Visible = True
           end
           item
@@ -4858,71 +4911,6 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object btnVerDetalle: TdxBarLargeButton
-      Align = iaRight
-      Caption = 'Ver Detalle'
-      Category = 0
-      Hint = 'Ver Detalle'
-      Visible = ivAlways
-      ImageIndex = 69
-      AutoGrayScale = False
-    end
-    object btnNuevo: TdxBarLargeButton
-      Caption = 'F2 - Nuevo'
-      Category = 0
-      Hint = 'Inserta un nuevo registro'
-      Visible = ivAlways
-      ImageIndex = 0
-      ShortCut = 113
-      AutoGrayScale = False
-    end
-    object btnModificar: TdxBarLargeButton
-      Caption = 'F3 - Modificar'
-      Category = 0
-      Hint = 'Modifica el registro actual'
-      Visible = ivAlways
-      ImageIndex = 1
-      ShortCut = 114
-      AutoGrayScale = False
-    end
-    object btnBaja: TdxBarLargeButton
-      Caption = 'F5 - Baja'
-      Category = 0
-      Hint = 'Da de baja un registro'
-      Visible = ivAlways
-      ImageIndex = 25
-      ShortCut = 116
-      AutoGrayScale = False
-    end
-    object btnReactivar: TdxBarLargeButton
-      Caption = 'F6 - Reactivar'
-      Category = 0
-      Hint = 'Reactiva un registro'
-      Visible = ivAlways
-      ImageIndex = 24
-      ShortCut = 117
-      AutoGrayScale = False
-    end
-    object btnGuardar: TdxBarLargeButton
-      Caption = 'F11 - Guardar'
-      Category = 0
-      Enabled = False
-      Hint = 'Guarda los cambios'
-      Visible = ivAlways
-      ImageIndex = 3
-      ShortCut = 122
-      AutoGrayScale = False
-    end
-    object btnCancelar: TdxBarLargeButton
-      Caption = 'F12 - Cancelar'
-      Category = 0
-      Enabled = False
-      Hint = 'Cancela los cambios'
-      Visible = ivAlways
-      ImageIndex = 4
-      ShortCut = 123
-      AutoGrayScale = False
-    end
     object btnImprimir: TdxBarLargeButton
       Caption = 'Imprimir'
       Category = 0
@@ -4941,22 +4929,24 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnExcel: TdxBarLargeButton
+      Caption = 'Excel'
+      Category = 0
+      Hint = 'Exportar a Excel'
+      Visible = ivAlways
+      ImageIndex = 77
+      OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
-        'btnNuevo'
-        'btnModificar'
         'btnBuscar'
-        'btnVerDetalle'
-        'btnBaja'
         'btnSalir'
-        'btnReactivar'
-        'btnImprimir')
+        'btnImprimir'
+        'btnExcel')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
-      Items = (
-        'btnGuardar'
-        'btnCancelar')
     end
   end
   object ZP_SaldosCuentas: TZStoredProc
@@ -5442,6 +5432,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   end
   object ZP_Estadistica_Det_Mov: TZStoredProc
     Connection = DM.Conexion
+    AfterScroll = ZP_Estadistica_Det_MovAfterScroll
     Params = <
       item
         DataType = ftFloat
@@ -5600,6 +5591,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
     object ZP_Estadistica_Det_MovNOMBRE_ENTIDAD: TStringField
       FieldName = 'NOMBRE_ENTIDAD'
       Size = 100
+    end
+    object ZP_Estadistica_Det_MovID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
     end
   end
   object DS_Estadistica_Det_Mov: TDataSource
@@ -5881,5 +5875,81 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       ShortCut = 112
       OnExecute = ABuscarExecute
     end
+  end
+  object ZQ_MovFormaPago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select tfp.descripcion as TipoFormaPago, cfp.importe_real,'
+      '       CASE'
+      
+        '           WHEN ((cfp.cuenta_ingreso is not null) and (cfp.cuent' +
+        'a_egreso is null)) THEN ci.nombre_cuenta'
+      
+        '           WHEN ((cfp.cuenta_ingreso is null) and (cfp.cuenta_eg' +
+        'reso is not null)) THEN ce.nombre_cuenta'
+      '       END as cuenta'
+      'from comprobante_forma_pago cfp'
+      
+        'left join tipo_formapago tfp on (cfp.id_tipo_formapag = tfp.id_t' +
+        'ipo_formapago)'
+      'left join cuenta ci on (cfp.cuenta_ingreso = ci.id_cuenta)'
+      'left join cuenta ce on (cfp.cuenta_egreso = ce.id_cuenta)'
+      'where cfp.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 205
+    Top = 353
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_MovFormaPagoTIPOFORMAPAGO: TStringField
+      FieldName = 'TIPOFORMAPAGO'
+      Size = 50
+    end
+    object ZQ_MovFormaPagoIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+      currency = True
+    end
+    object ZQ_MovFormaPagoCUENTA: TStringField
+      FieldName = 'CUENTA'
+      ReadOnly = True
+      Size = 50
+    end
+  end
+  object DS_MovFormaPago: TDataSource
+    DataSet = ZQ_MovFormaPago
+    Left = 205
+    Top = 401
+  end
+  object EKOrdenarMovFPago: TEKOrdenarGrilla
+    Grilla = DBGridMovFPago
+    Filtros = <
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Forma Cobro/Pago'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenarMovFPago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 205
+    Top = 449
   end
 end

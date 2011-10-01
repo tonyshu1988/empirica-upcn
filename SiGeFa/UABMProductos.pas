@@ -38,10 +38,6 @@ type
     btnImprimirListado: TdxBarLargeButton;
     btnReactivar: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    btverbajados: TdxBarLargeButton;
-    BtBusquedaNueva: TdxBarLargeButton;
-    btnSiguiente: TdxBarLargeButton;
-    btnAnterior: TdxBarLargeButton;
     GrupoVisualizando: TdxBarGroup;
     GrupoEditando: TdxBarGroup;
     Panel4: TPanel;
@@ -281,6 +277,7 @@ type
     VerBajas1: TMenuItem;
     VerActivos1: TMenuItem;
     ReactivarDetalle1: TMenuItem;
+    btnExcel: TdxBarLargeButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -343,6 +340,7 @@ type
     procedure VerBajas1Click(Sender: TObject);
     procedure VerActivos1Click(Sender: TObject);
     procedure ReactivarDetalle1Click(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
   public
@@ -1512,6 +1510,12 @@ begin
   ZQ_DetalleProducto.Edit;
   ZQ_DetalleProductoBAJA.AsString := 'N';
   ZQ_DetalleProducto.Post;
+end;
+
+procedure TFABMProductos.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_ProductoCabecera.IsEmpty then
+    dm.ExportarEXCEL(Grilla);
 end;
 
 end.

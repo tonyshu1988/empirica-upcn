@@ -868,7 +868,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             Height = 21
             Style = csDropDownList
             CharCase = ecUpperCase
-            ItemHeight = 13
+            ItemHeight = 0
             TabOrder = 0
             OnKeyUp = CBArticuloKeyUp
           end
@@ -1061,7 +1061,10 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             Visible = True
           end
           item
-            BeginGroup = True
+            Item = btnExcel
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -1507,6 +1510,15 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
       OnClick = btnCancelarCargaClick
       AutoGrayScale = False
     end
+    object btnExcel: TdxBarLargeButton
+      Caption = 'Excel'
+      Category = 0
+      Hint = 'Exportar a Excel'
+      Visible = ivAlways
+      ImageIndex = 77
+      OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -1516,7 +1528,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         'btnBaja'
         'btnSalir'
         'btnReactivar'
-        'btnImprimir')
+        'btnImprimir'
+        'btnExcel')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False

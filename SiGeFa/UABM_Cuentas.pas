@@ -98,6 +98,7 @@ type
     ZQ_CuentasA_CTA_CORRIENTE: TStringField;
     ZQ_CuentasA_NOTA_CREDITO: TStringField;
     ZQ_CuentasMODIFICABLE: TStringField;
+    btnExcel: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -118,6 +119,7 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
   public
   end;
@@ -407,6 +409,12 @@ begin
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
+end;
+
+procedure TFABM_Cuentas.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_Cuentas.IsEmpty then
+    dm.ExportarEXCEL(DBGridCuentas);
 end;
 
 end.

@@ -8,13 +8,13 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
   ZStoredProcedure, ZSqlUpdate, EKOrdenarGrilla, mxNativeExcel, mxExport, UBuscarPersona,
   QRCtrls, QuickRpt, EKVistaPreviaQR, DBClient, Provider, ShellApi,
-  ComCtrls, EKUsrPermisos, EKIni;
+  ComCtrls, EKUsrPermisos, EKIni, ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFABM_Precios = class(TForm)
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btnExportarXLS: TdxBarLargeButton;
+    btnExcel: TdxBarLargeButton;
     btnEditarGrilla: TdxBarLargeButton;
     btnProcesarImportes: TdxBarLargeButton;
     btnSeleccionar: TdxBarLargeButton;
@@ -51,8 +51,6 @@ type
     Label1: TLabel;
     RadioGroupTipoCalculo: TRadioGroup;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
-    mxDBGridExport: TmxDBGridExport;
-    mxNativeExcel1: TmxNativeExcel;
     ZQ_Clientes: TZQuery;
     RepListaPrecios: TQuickRep;
     QRBand5: TQRBand;
@@ -173,6 +171,11 @@ type
     LabelTipoP3: TLabel;
     LabelTipoP4: TLabel;
     LabelTipoP5: TLabel;
+    ZQ_ProductosCOLOR: TStringField;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -181,7 +184,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
     procedure RadioGroupTipoCalculoClick(Sender: TObject);
-    procedure btnExportarXLSClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnImprimirClick(Sender: TObject);
     procedure ZQ_ProductosCalcFields(DataSet: TDataSet);
@@ -202,6 +205,9 @@ type
     procedure DBGridProductosDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure ABuscarExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
   private
     { Private declarations }
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
@@ -339,10 +345,7 @@ begin
     exit;
 
   if not (dgEditing	in DBGridProductos.Options) then
-  begin
-    DBGridProductos.Options := DBGridProductos.Options - [dgRowSelect];
     DBGridProductos.Options := DBGridProductos.Options + [dgEditing];
-  end;
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
   begin
@@ -497,10 +500,7 @@ begin
   if (ZQ_ProductosID_PRODUCTO.AsInteger = 0) then ZQ_Productos.Delete; //Borro los renglones vacios
 
   if (dgEditing	in DBGridProductos.Options) then
-  begin
     DBGridProductos.Options := DBGridProductos.Options - [dgEditing];
-    DBGridProductos.Options := DBGridProductos.Options + [dgRowSelect];
-  end;
 
   if DM.EKModelo.finalizar_transaccion(Transaccion_ABMImportes) then
   begin
@@ -523,7 +523,7 @@ begin
     EditPrecio4.Text:= '0';
     EditPrecio5.Text:= '0';
     ZQ_Productos.Refresh;
-    DBGridProductos.Options:=DBGridProductos.Options - [dgMultiSelect];
+    DBGridProductos.Options:= DBGridProductos.Options - [dgMultiSelect];
     DBGridProductos.SetFocus;
   end;
 end;
@@ -535,10 +535,7 @@ begin
     exit;
 
   if (dgEditing	in DBGridProductos.Options) then
-  begin
     DBGridProductos.Options := DBGridProductos.Options - [dgEditing];
-    DBGridProductos.Options := DBGridProductos.Options + [dgRowSelect];
-  end;
 
   if dm.EKModelo.cancelar_transaccion(Transaccion_ABMImportes) then
   begin
@@ -612,10 +609,10 @@ begin
 end;
 
 
-procedure TFABM_Precios.btnExportarXLSClick(Sender: TObject);
+procedure TFABM_Precios.btnExcelClick(Sender: TObject);
 begin
   if not ZQ_Productos.IsEmpty then
-    mxDBGridExport.Select;
+    dm.ExportarEXCEL(DBGridProductos);
 end;
 
 
@@ -764,6 +761,7 @@ end;
 
 procedure TFABM_Precios.ZQ_ProductosPRECIO_VENTAChange(Sender: TField);
 begin
+  ZQ_ProductosPRECIO1.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
   if campoQueCambia <> 'PRECIO_VENTA' then
     actualizarPrecios('PRECIO_VENTA');
 end;
@@ -819,6 +817,7 @@ begin
     campoQueCambia:= 'PRECIO_VENTA';
 end;
 
+
 procedure TFABM_Precios.RadioGroupImpuestosClick(Sender: TObject);
 begin
   if RadioGroupImpuestos.ItemIndex = 0 then
@@ -830,6 +829,7 @@ begin
     GboxImpuestos.Enabled:= false;
   end;
 end;
+
 
 procedure TFABM_Precios.btImprimirEtiquetasClick(Sender: TObject);
 begin
@@ -853,11 +853,31 @@ begin
   end;
 end;
 
-procedure TFABM_Precios.DBGridProductosDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFABM_Precios.DBGridProductosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridProductos, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFABM_Precios.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
+
+procedure TFABM_Precios.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+
+procedure TFABM_Precios.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
 end;
 
 end.

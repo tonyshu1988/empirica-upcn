@@ -19,207 +19,6 @@ object FArqueo_Caja: TFArqueo_Caja
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object PanelContenedor: TPanel
-    Left = 0
-    Top = 0
-    Width = 862
-    Height = 416
-    Align = alClient
-    Caption = 'PanelContenedor'
-    TabOrder = 4
-    object Panel5: TPanel
-      Left = 1
-      Top = 29
-      Width = 860
-      Height = 386
-      Align = alClient
-      Caption = 'Panel5'
-      TabOrder = 0
-      object Panel1: TPanel
-        Left = 1
-        Top = 1
-        Width = 858
-        Height = 384
-        Align = alClient
-        Caption = 'Panel1'
-        TabOrder = 0
-        object lblComprobantes: TLabel
-          Left = 1
-          Top = 346
-          Width = 856
-          Height = 29
-          Align = alBottom
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Total Ingreso: $ 0.00 '
-          Color = 16729670
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -15
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object Splitter1: TSplitter
-          Left = 1
-          Top = 375
-          Width = 856
-          Height = 8
-          Cursor = crVSplit
-          Align = alBottom
-        end
-        object DBGridListadoProductos: TDBGrid
-          Left = 1
-          Top = 1
-          Width = 856
-          Height = 229
-          Align = alClient
-          Color = 16762303
-          DataSource = DS_ComprobanteDetalle
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'ID_PRODUCTO'
-              Title.Caption = 'ID'
-              Width = 46
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DETALLE_PROD'
-              Title.Caption = 'Producto'
-              Width = 174
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CANTIDAD'
-              Title.Caption = 'Cant.'
-              Width = 40
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PORC_DESCUENTO'
-              Title.Caption = 'Desc.'
-              Width = 57
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_IVA'
-              Title.Caption = 'Importe IVA'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_VENTA'
-              Title.Caption = 'Importe Venta'
-              Visible = True
-            end>
-        end
-        object DBGridFormaPago: TDBGrid
-          Left = 1
-          Top = 230
-          Width = 856
-          Height = 116
-          Align = alBottom
-          Color = 16762303
-          DataSource = DS_Comprobante_FormaPago
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'TFORMAPAGO_'
-              Title.Caption = 'Forma de Pago'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CUENTAINGRESO'
-              Title.Caption = 'Cuenta Ingreso'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SUM'
-              Title.Caption = 'Total'
-              Width = 84
-              Visible = True
-            end>
-        end
-      end
-    end
-    object PanelFiltro: TPanel
-      Left = 1
-      Top = 1
-      Width = 860
-      Height = 28
-      Align = alTop
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = False
-      TabOrder = 1
-      object Label39: TLabel
-        Left = 19
-        Top = 8
-        Width = 38
-        Height = 13
-        Caption = 'Fecha:'
-      end
-      object DateTimePicker1: TDateTimePicker
-        Left = 64
-        Top = 4
-        Width = 121
-        Height = 21
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        Date = 40787.791288229160000000
-        Time = 40787.791288229160000000
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        OnChange = DateTimePicker1Change
-      end
-    end
-  end
   object RepArqueo: TQuickRep
     Tag = 99
     Left = 137
@@ -313,7 +112,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          735.541666666666800000
+          735.541666666666700000
           10.583333333333330000
           423.333333333333300000)
         Alignment = taCenter
@@ -345,8 +144,8 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          759.354166666666800000
-          74.083333333333340000
+          759.354166666666700000
+          74.083333333333330000
           378.354166666666700000)
         Alignment = taCenter
         AlignToBand = False
@@ -377,9 +176,9 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           47.625000000000000000
-          799.041666666666800000
+          799.041666666666700000
           140.229166666666700000
-          296.333333333333400000)
+          296.333333333333300000)
         Alignment = taCenter
         AlignToBand = False
         AutoSize = True
@@ -399,6 +198,7 @@ object FArqueo_Caja: TFArqueo_Caja
       end
     end
     object QRSubDetail1: TQRSubDetail
+      Tag = 99
       Left = 38
       Top = 145
       Width = 718
@@ -589,6 +389,7 @@ object FArqueo_Caja: TFArqueo_Caja
       end
     end
     object QRSubDetail2: TQRSubDetail
+      Tag = 99
       Left = 38
       Top = 163
       Width = 718
@@ -604,7 +405,7 @@ object FArqueo_Caja: TFArqueo_Caja
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        52.916666666666660000
+        52.916666666666670000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -645,6 +446,7 @@ object FArqueo_Caja: TFArqueo_Caja
       end
     end
     object QRSubDetail3: TQRSubDetail
+      Tag = 99
       Left = 38
       Top = 198
       Width = 718
@@ -769,6 +571,7 @@ object FArqueo_Caja: TFArqueo_Caja
       end
     end
     object QRBand1: TQRBand
+      Tag = 99
       Left = 38
       Top = 128
       Width = 718
@@ -803,7 +606,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           1238.250000000000000000
           0.000000000000000000
-          216.958333333333400000)
+          216.958333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -833,7 +636,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          804.333333333333200000
+          804.333333333333300000
           0.000000000000000000
           185.208333333333300000)
         Alignment = taLeftJustify
@@ -867,7 +670,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           658.812500000000000000
           0.000000000000000000
-          92.604166666666680000)
+          92.604166666666670000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -951,6 +754,7 @@ object FArqueo_Caja: TFArqueo_Caja
       end
     end
     object ChildBand1: TQRChildBand
+      Tag = 99
       Left = 38
       Top = 183
       Width = 718
@@ -986,7 +790,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           13.229166666666670000
           -2.645833333333333000
-          264.583333333333400000)
+          264.583333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1016,7 +820,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          664.104166666666800000
+          664.104166666666700000
           -2.645833333333333000
           269.875000000000000000)
         Alignment = taLeftJustify
@@ -1070,6 +874,7 @@ object FArqueo_Caja: TFArqueo_Caja
       end
     end
     object QRSubDetail4: TQRSubDetail
+      Tag = 99
       Left = 38
       Top = 215
       Width = 718
@@ -1085,7 +890,7 @@ object FArqueo_Caja: TFArqueo_Caja
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        52.916666666666660000
+        52.916666666666670000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -1126,10 +931,203 @@ object FArqueo_Caja: TFArqueo_Caja
       end
     end
   end
+  object PanelContenedor: TPanel
+    Left = 0
+    Top = 0
+    Width = 854
+    Height = 410
+    Align = alClient
+    Caption = 'PanelContenedor'
+    TabOrder = 4
+    object Panel5: TPanel
+      Left = 1
+      Top = 29
+      Width = 852
+      Height = 380
+      Align = alClient
+      Caption = 'Panel5'
+      TabOrder = 0
+      object Panel1: TPanel
+        Left = 1
+        Top = 1
+        Width = 850
+        Height = 378
+        Align = alClient
+        Caption = 'Panel1'
+        TabOrder = 0
+        object lblComprobantes: TLabel
+          Left = 1
+          Top = 348
+          Width = 848
+          Height = 29
+          Align = alBottom
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Total Ingreso: $ 0.00 '
+          Color = 16729670
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object DBGridListadoProductos: TDBGrid
+          Left = 1
+          Top = 1
+          Width = 848
+          Height = 231
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_ComprobanteDetalle
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID_PRODUCTO'
+              Title.Caption = 'ID'
+              Width = 46
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DETALLE_PROD'
+              Title.Caption = 'Producto'
+              Width = 174
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Caption = 'Cant.'
+              Width = 40
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PORC_DESCUENTO'
+              Title.Caption = 'Desc.'
+              Width = 57
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_IVA'
+              Title.Caption = 'Importe IVA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_VENTA'
+              Title.Caption = 'Importe Venta'
+              Visible = True
+            end>
+        end
+        object DBGridFormaPago: TDBGrid
+          Left = 1
+          Top = 232
+          Width = 848
+          Height = 116
+          Align = alBottom
+          Color = 14606012
+          DataSource = DS_Comprobante_FormaPago
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'TFORMAPAGO_'
+              Title.Caption = 'Forma de Pago'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CUENTAINGRESO'
+              Title.Caption = 'Cuenta Ingreso'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUM'
+              Title.Caption = 'Total'
+              Width = 84
+              Visible = True
+            end>
+        end
+      end
+    end
+    object PanelFiltro: TPanel
+      Left = 1
+      Top = 1
+      Width = 852
+      Height = 28
+      Align = alTop
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 1
+      object Label39: TLabel
+        Left = 19
+        Top = 8
+        Width = 38
+        Height = 13
+        Caption = 'Fecha:'
+      end
+      object DateTimePicker1: TDateTimePicker
+        Left = 64
+        Top = 4
+        Width = 121
+        Height = 21
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        Date = 40787.791288229160000000
+        Time = 40787.791288229160000000
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        OnChange = DateTimePicker1Change
+      end
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1231,12 +1229,11 @@ object FArqueo_Caja: TFArqueo_Caja
         Font.Style = []
         ItemLinks = <
           item
-            Item = btnExportarXLS
+            Item = btnImprimir
             Visible = True
           end
           item
-            BeginGroup = True
-            Item = btnImprimir
+            Item = btnExcel
             Visible = True
           end
           item
@@ -1548,8 +1545,8 @@ object FArqueo_Caja: TFArqueo_Caja
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 384
-    Top = 176
+    Left = 48
+    Top = 128
     DockControlHeights = (
       0
       0
@@ -1563,64 +1560,14 @@ object FArqueo_Caja: TFArqueo_Caja
       ImageIndex = 29
       AutoGrayScale = False
     end
-    object btnExportarXLS: TdxBarLargeButton
+    object btnExcel: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Exportar Exel'
+      Caption = 'Exel'
       Category = 0
-      Hint = 'Exportar Exel'
+      Hint = 'Exportar a Exel'
       Visible = ivAlways
       ImageIndex = 77
-      AutoGrayScale = False
-    end
-    object btnEditarGrilla: TdxBarLargeButton
-      Caption = 'Editar Grilla'
-      Category = 0
-      Hint = 'Edita Los importes desde la grilla'
-      Visible = ivAlways
-      ImageIndex = 79
-      AutoGrayScale = False
-    end
-    object btnProcesarImportes: TdxBarLargeButton
-      Caption = 'Procesar Precios'
-      Category = 0
-      Hint = 'Comenzar el proceso de actualizacion de importes'
-      Visible = ivAlways
-      ImageIndex = 35
-      AutoGrayScale = False
-    end
-    object btnSeleccionar: TdxBarLargeButton
-      Caption = 'Seleccionar'
-      Category = 0
-      Hint = 'Seleccionar de la grilla los productos a actualizar'
-      Visible = ivAlways
-      ImageIndex = 5
-      AutoGrayScale = False
-    end
-    object btnReactivar: TdxBarLargeButton
-      Caption = 'F6 - Reactivar'
-      Category = 0
-      Hint = 'Reactiva un registro'
-      Visible = ivAlways
-      ImageIndex = 24
-      ShortCut = 117
-      AutoGrayScale = False
-    end
-    object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
-      Category = 0
-      Enabled = False
-      Hint = 'Guarda los cambios'
-      Visible = ivAlways
-      ImageIndex = 3
-      AutoGrayScale = False
-    end
-    object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
-      Category = 0
-      Enabled = False
-      Hint = 'Cancela los cambios'
-      Visible = ivAlways
-      ImageIndex = 4
+      OnClick = btnExcelClick
       AutoGrayScale = False
     end
     object btnImprimir: TdxBarLargeButton
@@ -1641,39 +1588,15 @@ object FArqueo_Caja: TFArqueo_Caja
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
-    object btBuscarGoogle: TdxBarLargeButton
-      Caption = 'Buscar en Google'
-      Category = 0
-      Hint = 'Buscar en Google'
-      Visible = ivAlways
-      ImageIndex = 80
-      AutoGrayScale = False
-    end
-    object btImprimirEtiquetas: TdxBarLargeButton
-      Caption = 'Imprimir Etiquetas'
-      Category = 0
-      Hint = 'Imprimir Etiquetas'
-      Visible = ivAlways
-      ImageIndex = 28
-      AutoGrayScale = False
-    end
     object GrupoEditando: TdxBarGroup
       Items = (
-        'btnEditarGrilla'
-        'btnProcesarImportes'
         'btnBuscar'
-        'btnExportarXLS'
-        'btnSeleccionar'
+        'btnExcel'
         'btnSalir'
-        'btnReactivar'
-        'btnImprimir'
-        'btImprimirEtiquetas')
+        'btnImprimir')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
-      Items = (
-        'btnGuardar'
-        'btnCancelar')
     end
   end
   object ZQ_ComprobanteDetalle: TZQuery
@@ -1695,8 +1618,8 @@ object FArqueo_Caja: TFArqueo_Caja
         Name = 'fecha'
         ParamType = ptUnknown
       end>
-    Left = 601
-    Top = 153
+    Left = 177
+    Top = 65
     ParamData = <
       item
         DataType = ftUnknown
@@ -1782,8 +1705,8 @@ object FArqueo_Caja: TFArqueo_Caja
   end
   object DS_ComprobanteDetalle: TDataSource
     DataSet = ZQ_ComprobanteDetalle
-    Left = 717
-    Top = 153
+    Left = 181
+    Top = 113
   end
   object ZQ_Comprobante_FormaPago: TZQuery
     Connection = DM.Conexion
@@ -1809,8 +1732,8 @@ object FArqueo_Caja: TFArqueo_Caja
         Name = 'fecha'
         ParamType = ptUnknown
       end>
-    Left = 489
-    Top = 313
+    Left = 321
+    Top = 65
     ParamData = <
       item
         DataType = ftUnknown
@@ -1841,8 +1764,8 @@ object FArqueo_Caja: TFArqueo_Caja
   end
   object DS_Comprobante_FormaPago: TDataSource
     DataSet = ZQ_Comprobante_FormaPago
-    Left = 301
-    Top = 305
+    Left = 325
+    Top = 113
   end
   object EKDbSuma1: TEKDbSuma
     SumCollection = <
@@ -1852,14 +1775,14 @@ object FArqueo_Caja: TFArqueo_Caja
       end>
     DataSet = ZQ_Comprobante_FormaPago
     SumListChanged = EKDbSuma1SumListChanged
-    Left = 738
-    Top = 374
+    Left = 322
+    Top = 222
   end
   object EKVistaPreviaQR1: TEKVistaPreviaQR
     Reporte = RepArqueo
     ShowModal = False
-    Left = 42
-    Top = 94
+    Left = 50
+    Top = 70
   end
   object EKDbSuma2: TEKDbSuma
     SumCollection = <
@@ -1869,7 +1792,7 @@ object FArqueo_Caja: TFArqueo_Caja
       end>
     DataSet = ZQ_ComprobanteDetalle
     SumListChanged = EKDbSuma1SumListChanged
-    Left = 626
-    Top = 374
+    Left = 322
+    Top = 166
   end
 end

@@ -110,6 +110,7 @@ type
     PopUpStock_DesasociarTodos: TMenuItem;
     ZQ_StockCOLOR: TStringField;
     ZQ_StockID_SUCURSAL: TIntegerField;
+    btnExcel: TdxBarLargeButton;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnGuardarClick(Sender: TObject);
@@ -143,6 +144,7 @@ type
     procedure DBGridStockKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure validarSucursal(Sender: TField);
     procedure validarPermisosUsuario;
+    procedure btnExcelClick(Sender: TObject);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -702,5 +704,11 @@ begin
   end;
 end;
 
+
+procedure TFABM_ProductoStock.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_Stock.IsEmpty then
+    dm.ExportarEXCEL(DBGridStock);
+end;
 
 end.

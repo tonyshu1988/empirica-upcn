@@ -1011,6 +1011,10 @@ object FABM_Marcas: TFABM_Marcas
             Visible = True
           end
           item
+            Item = btnExcel
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -1418,6 +1422,15 @@ object FABM_Marcas: TFABM_Marcas
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnExcel: TdxBarLargeButton
+      Caption = 'Excel'
+      Category = 0
+      Hint = 'Exportar a Excel'
+      Visible = ivAlways
+      ImageIndex = 77
+      OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -1427,7 +1440,8 @@ object FABM_Marcas: TFABM_Marcas
         'btnBaja'
         'btnSalir'
         'btnReactivar'
-        'btnImprimir')
+        'btnImprimir'
+        'btnExcel')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False

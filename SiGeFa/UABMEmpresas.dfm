@@ -1901,7 +1901,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2532.062500000000000000
             2.645833333333333000
             103.187500000000000000)
@@ -2656,7 +2656,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label12: TLabel
             Left = 1
             Top = 5
-            Width = 996
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2822,7 +2822,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label13: TLabel
             Left = 1
             Top = 5
-            Width = 996
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2950,7 +2950,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label14: TLabel
             Left = 1
             Top = 5
-            Width = 996
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -3645,7 +3645,10 @@ object FABMEmpresas: TFABMEmpresas
             Visible = True
           end
           item
-            BeginGroup = True
+            Item = btnExcel
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -4112,6 +4115,15 @@ object FABMEmpresas: TFABMEmpresas
       ImageIndex = 28
       OnClick = btImprimirDetalleClick
     end
+    object btnExcel: TdxBarLargeButton
+      Caption = 'Excel'
+      Category = 0
+      Hint = 'Exportar a Excel'
+      Visible = ivAlways
+      ImageIndex = 77
+      OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
     object GrupoVisualizando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -4127,7 +4139,9 @@ object FABMEmpresas: TFABMEmpresas
         'btnSkype'
         'bt'
         'btnEnviarMail'
-        'btImprimirDetalle')
+        'btImprimirDetalle'
+        'btnExcel'
+        'btnSalir')
     end
     object GrupoEditando: TdxBarGroup
       Enabled = False

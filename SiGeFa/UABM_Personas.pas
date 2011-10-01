@@ -260,6 +260,7 @@ type
     ZQ_CtaCteVENCIMIENTO_DIAS: TIntegerField;
     EKDBDateTimePicker1: TEKDBDateTimePicker;
     Label4: TLabel;
+    btnExcel: TdxBarLargeButton;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -297,6 +298,7 @@ type
     procedure DBGridTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridRolDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnExcelClick(Sender: TObject);
   private
     id_persona: integer;
   public
@@ -920,6 +922,12 @@ end;
 procedure TFABM_Personas.DBGridTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridTelMail, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_Personas.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_Persona.IsEmpty then
+    dm.ExportarEXCEL(DBGridClientes);
 end;
 
 end.

@@ -272,6 +272,7 @@ type
     QRLabel7: TQRLabel;
     QRDBText8: TQRDBText;
     EKVistaClientes: TEKVistaPreviaQR;
+    btnExcel: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -290,6 +291,7 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure DBGridCliente_CtaCteDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridResumen_CtaCtesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnExcelClick(Sender: TObject);
   private
     vsel: TFBuscarPersona;
     viendoResumen: boolean;
@@ -632,6 +634,20 @@ procedure TFCuentaCorriente.DBGridResumen_CtaCtesDrawColumnCell(
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridResumen_CtaCtes, Rect, DataCol, Column, State);
+end;
+
+procedure TFCuentaCorriente.btnExcelClick(Sender: TObject);
+begin
+  if viendoResumen then
+  begin
+    if not ZQ_CtaCte_Gral.IsEmpty then
+      dm.ExportarEXCEL(DBGridResumen_CtaCtes);
+  end
+  else
+  begin
+    if not ZQ_CtaCte_Cliente.IsEmpty then
+      dm.ExportarEXCEL(DBGridCliente_CtaCte);
+  end;
 end;
 
 end.

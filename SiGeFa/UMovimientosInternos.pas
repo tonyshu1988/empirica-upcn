@@ -219,6 +219,7 @@ type
     lblMov_TotalEgresos: TLabel;
     lblMov_TotalIngresos: TLabel;
     EKBuscar: TEKBusquedaAvanzada;
+    btnExcel: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -252,6 +253,7 @@ type
     procedure SpeedBtn_DiaSiguienteClick(Sender: TObject);
     procedure SpeedBtn_MesSiguienteClick(Sender: TObject);
     procedure EKSuma_MovSumListChanged(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     fechaActual: TDate;
     id_comprobante: integer;
@@ -473,6 +475,7 @@ begin
     ZQ_CpbFormaPago.Edit;
     ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat;
     ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+    ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
 
     ZQ_CpbFormaPago.Next;
   end;
@@ -954,6 +957,12 @@ procedure TFMovimientosInternos.EKSuma_MovSumListChanged(Sender: TObject);
 begin
   lblMov_TotalIngresos.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,###,##0.00', EKSuma_Mov.SumCollection[0].SumValue);
   lblMov_TotalEgresos.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,###,##0.00', EKSuma_Mov.SumCollection[1].SumValue);
+end;
+
+procedure TFMovimientosInternos.btnExcelClick(Sender: TObject);
+begin
+  if not ZQ_MovHoy.IsEmpty then
+    dm.ExportarEXCEL(DBGrid_Dia);
 end;
 
 end.

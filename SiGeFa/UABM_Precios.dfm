@@ -1726,6 +1726,14 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'PRECIO5'
           Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'COLOR'
+          Title.Alignment = taCenter
+          Title.Caption = 'Color'
+          Width = 91
+          Visible = True
         end>
     end
     object PanelEdicion: TPanel
@@ -2188,18 +2196,12 @@ object FABM_Precios: TFABM_Precios
             Visible = True
           end
           item
-            BeginGroup = True
-            Item = btnProcesarImportes
-            Visible = True
-          end
-          item
-            BeginGroup = True
             Item = btnEditarGrilla
             Visible = True
           end
           item
             BeginGroup = True
-            Item = btnExportarXLS
+            Item = btnProcesarImportes
             Visible = True
           end
           item
@@ -2217,8 +2219,11 @@ object FABM_Precios: TFABM_Precios
             Visible = True
           end
           item
-            BeginGroup = True
             Item = btImprimirEtiquetas
+            Visible = True
+          end
+          item
+            Item = btnExcel
             Visible = True
           end
           item
@@ -2543,22 +2548,22 @@ object FABM_Precios: TFABM_Precios
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object btnExportarXLS: TdxBarLargeButton
+    object btnExcel: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Exportar Exel'
+      Caption = 'Excel'
       Category = 0
-      Hint = 'Exportar Exel'
+      Hint = 'Exportar a Excel'
       Visible = ivAlways
       ImageIndex = 77
-      OnClick = btnExportarXLSClick
+      OnClick = btnExcelClick
       AutoGrayScale = False
     end
     object btnEditarGrilla: TdxBarLargeButton
@@ -2598,7 +2603,7 @@ object FABM_Precios: TFABM_Precios
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -2608,7 +2613,7 @@ object FABM_Precios: TFABM_Precios
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -2618,9 +2623,9 @@ object FABM_Precios: TFABM_Precios
       AutoGrayScale = False
     end
     object btnImprimir: TdxBarLargeButton
-      Caption = 'Imprimir Lista de Precios'
+      Caption = 'Lista de Precios'
       Category = 0
-      Hint = 'Imprimir Lista de Precios'
+      Hint = 'Lista de Precios'
       Visible = ivAlways
       ImageIndex = 28
       OnClick = btnImprimirClick
@@ -2636,18 +2641,18 @@ object FABM_Precios: TFABM_Precios
       AutoGrayScale = False
     end
     object btBuscarGoogle: TdxBarLargeButton
-      Caption = 'Buscar en Google'
+      Caption = 'Google'
       Category = 0
-      Hint = 'Buscar en Google'
+      Hint = 'Google'
       Visible = ivAlways
       ImageIndex = 80
       OnClick = btBuscarGoogleClick
       AutoGrayScale = False
     end
     object btImprimirEtiquetas: TdxBarLargeButton
-      Caption = 'Imprimir Etiquetas'
+      Caption = 'Etiquetas'
       Category = 0
-      Hint = 'Imprimir Etiquetas'
+      Hint = 'Etiquetas'
       Visible = ivAlways
       ImageIndex = 28
       OnClick = btImprimirEtiquetasClick
@@ -2658,12 +2663,13 @@ object FABM_Precios: TFABM_Precios
         'btnEditarGrilla'
         'btnProcesarImportes'
         'btnBuscar'
-        'btnExportarXLS'
+        'btnExcel'
         'btnSeleccionar'
         'btnSalir'
         'btnReactivar'
         'btnImprimir'
-        'btImprimirEtiquetas')
+        'btImprimirEtiquetas'
+        'btBuscarGoogle')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -2679,12 +2685,23 @@ object FABM_Precios: TFABM_Precios
     SQL.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
-        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
-        'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
-        'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
-        'p.cod_corto, p.codigo_barra, p.precio_costo_cimpuestos, p.impues' +
-        'to_adicional1, p.impuesto_adicional2, p.precio1, p.precio2, p.pr' +
-        'ecio3, p.precio4, p.precio5'
+        'articulo,'
+      
+        '       ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_pro' +
+        'ducto,'
+      
+        '       p.descripcion, p.precio_costo, p.precio_venta, p.coef_gan' +
+        'ancia,'
+      
+        '       p.coef_descuento, p.impuesto_interno, p.impuesto_iva, p.c' +
+        'od_corto,'
+      
+        '       p.codigo_barra, p.precio_costo_cimpuestos, p.impuesto_adi' +
+        'cional1,'
+      
+        '       p.impuesto_adicional2, p.precio1, p.precio2, p.precio3, p' +
+        '.precio4,'
+      '       p.precio5, co.nombre as Color'
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
       
@@ -2695,7 +2712,11 @@ object FABM_Precios: TFABM_Precios
         'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'where (pc.baja <> '#39'S'#39') and (p.Baja <> '#39'S'#39')')
+      'left join color co on (pc.color = co.id_color)'
+      'where (pc.baja <> '#39'S'#39')'
+      '  and  (p.Baja <> '#39'S'#39')'
+      ''
+      '')
     Params = <>
     Left = 168
     Top = 120
@@ -2797,6 +2818,10 @@ object FABM_Precios: TFABM_Precios
       FieldName = 'PRECIO5'
       currency = True
     end
+    object ZQ_ProductosCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
   end
   object DS_Productos: TDataSource
     DataSet = ZQ_Productos
@@ -2806,9 +2831,18 @@ object FABM_Precios: TFABM_Precios
   object EKBusquedaAvanzada1: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'C'#243'd. Barra'
+        Campo = 'codigo_barra'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Cod. Corto'
         Campo = 'cod_corto'
-        Tabla = 'p'
+        Tabla = 'producto'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -2817,25 +2851,7 @@ object FABM_Precios: TFABM_Precios
       item
         Titulo = 'Nombre Producto'
         Campo = 'nombre'
-        Tabla = 'pc'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Tipo Articulo'
-        Campo = 'descripcion'
-        Tabla = 'ta'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Articulo'
-        Campo = 'descripcion'
-        Tabla = 'a'
+        Tabla = 'producto_cabecera'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -2844,7 +2860,16 @@ object FABM_Precios: TFABM_Precios
       item
         Titulo = 'Medida'
         Campo = 'medida'
-        Tabla = 'm'
+        Tabla = 'medida'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Color'
+        Campo = 'nombre'
+        Tabla = 'color'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -2853,8 +2878,56 @@ object FABM_Precios: TFABM_Precios
       item
         Titulo = 'Marca'
         Campo = 'nombre_marca'
-        Tabla = 'ma'
+        Tabla = 'marca'
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Articulo'
+        Campo = 'descripcion'
+        Tabla = 'tipo_articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Articulo'
+        Campo = 'descripcion'
+        Tabla = 'articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Precio Costo'
+        Campo = 'precio_costo'
+        Tabla = 'producto'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Precio Venta'
+        Campo = 'precio_venta'
+        Tabla = 'producto'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Coef. Ganancia'
+        Campo = 'coef_ganancia'
+        Tabla = 'producto'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -2865,12 +2938,24 @@ object FABM_Precios: TFABM_Precios
     SQL.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
-        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
-        'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
-        'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
-        'p.cod_corto, p.codigo_barra, p.precio_costo_cimpuestos, p.impues' +
-        'to_adicional1, p.impuesto_adicional2, p.precio1, p.precio2, p.pr' +
-        'ecio3, p.precio4, p.precio5'
+        'articulo,'
+      
+        '       ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_pro' +
+        'ducto,'
+      
+        '       p.descripcion, p.precio_costo, p.precio_venta, p.coef_gan' +
+        'ancia,'
+      
+        '       p.coef_descuento, p.impuesto_interno, p.impuesto_iva, p.c' +
+        'od_corto,'
+      
+        '       p.codigo_barra, p.precio_costo_cimpuestos, p.impuesto_adi' +
+        'cional1,'
+      
+        '       p.impuesto_adicional2, p.precio1, p.precio2, p.precio3, p' +
+        '.precio4,'
+      '       p.precio5, co.nombre as Color'
+      ''
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
       
@@ -2881,16 +2966,30 @@ object FABM_Precios: TFABM_Precios
         'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'where (pc.baja <> '#39'S'#39')  and  (p.Baja <> '#39'S'#39')')
+      'left join color co on (pc.color = co.id_color)'
+      'where (pc.baja <> '#39'S'#39')'
+      '  and  (p.Baja <> '#39'S'#39')')
     SQL_Select.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
-        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
-        'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
-        'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
-        'p.cod_corto, p.codigo_barra, p.precio_costo_cimpuestos, p.impues' +
-        'to_adicional1, p.impuesto_adicional2, p.precio1, p.precio2, p.pr' +
-        'ecio3, p.precio4, p.precio5')
+        'articulo,'
+      
+        '       ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_pro' +
+        'ducto,'
+      
+        '       p.descripcion, p.precio_costo, p.precio_venta, p.coef_gan' +
+        'ancia,'
+      
+        '       p.coef_descuento, p.impuesto_interno, p.impuesto_iva, p.c' +
+        'od_corto,'
+      
+        '       p.codigo_barra, p.precio_costo_cimpuestos, p.impuesto_adi' +
+        'cional1,'
+      
+        '       p.impuesto_adicional2, p.precio1, p.precio2, p.precio3, p' +
+        '.precio4,'
+      '       p.precio5, co.nombre as Color'
+      '')
     SQL_From.Strings = (
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
@@ -2901,9 +3000,11 @@ object FABM_Precios: TFABM_Precios
       
         'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
         'rticulo)'
-      'left join marca ma on (pc.id_marca = ma.id_marca)')
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'left join color co on (pc.color = co.id_color)')
     SQL_Where.Strings = (
-      'where (pc.baja <> '#39'S'#39')  and  (p.Baja <> '#39'S'#39')')
+      'where (pc.baja <> '#39'S'#39')'
+      '  and  (p.Baja <> '#39'S'#39')')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 56
@@ -3142,6 +3243,10 @@ object FABM_Precios: TFABM_Precios
       item
         TituloColumna = 'PRECIO5'
         Visible = False
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
       end>
     NombreGuardar = 'ABM_Precios'
     AltoTituloColumna = 15
@@ -3151,114 +3256,6 @@ object FABM_Precios: TFABM_Precios
     PermitirFiltrar = True
     Left = 384
     Top = 120
-  end
-  object mxDBGridExport: TmxDBGridExport
-    DateFormat = 'dd/MM/yyyy'
-    TimeFormat = 'hh:mm AMPM'
-    DateTimeFormat = 'hh:mm AMPM dd/MM/yyyy'
-    ExportType = xtExcel
-    ExportTypes = [xtHTML, xtExcel, xtWord, xtTXT]
-    ExportStyle = xsView
-    HTML.CustomColors.Background = clWhite
-    HTML.CustomColors.DefaultLink = clRed
-    HTML.CustomColors.DefaultFontFace = 'Arial,Helvetica'
-    HTML.CustomColors.VisitedLink = clAqua
-    HTML.CustomColors.ActiveLink = clBlue
-    HTML.CustomColors.DefaultText = clBlack
-    HTML.CustomColors.TableFontColor = clBlack
-    HTML.CustomColors.TableFontFace = 'Arial,Helvetica'
-    HTML.CustomColors.TableBackground = 16777167
-    HTML.CustomColors.TableOddBackground = clWhite
-    HTML.CustomColors.HeaderBackground = 3368601
-    HTML.CustomColors.HeadersFontColor = clWhite
-    HTML.Options = [hoShowGridLines, hoBoldHeaders, hoAutoLink, hoOddRowColoring, hoDisplayTitle]
-    HTML.Template = ctStandard
-    Messages.Caption = 'Exportar datos'
-    Messages.CopiedToClipboard = 'Data was copied to clipboard!'
-    Messages.CancelCaption = '&Cancelar'
-    Messages.CreatedText = 'Exportando:'
-    Messages.DocumentFilter.HTML = 'HTML Documents'
-    Messages.DocumentFilter.Excel = 'Excel Files'
-    Messages.DocumentFilter.Word = 'Word Documents'
-    Messages.DocumentFilter.Text = 'Text Files'
-    Messages.DocumentFilter.Comma = 'CSV (Comma delimited)'
-    Messages.DocumentFilter.Tab = 'Text (Tab delimited)'
-    Messages.DocumentFilter.RTF = 'Rich Text Format'
-    Messages.DocumentFilter.DIF = 'Data Interchange Format'
-    Messages.DocumentFilter.SYLK = 'SYLK Files'
-    Messages.ExportCaption = '&Aceptar'
-    Messages.ExportToFile = '&Guardar'
-    Messages.FalseText = 'False'
-    Messages.Height = 80
-    Messages.SaveTitle = 'Guardar'
-    Messages.SelectFormat = 'Opciones'
-    Messages.Text = 'Procesando...'
-    Messages.TrueText = 'True'
-    Messages.Width = 300
-    Messages.ViewOnly = '&Ver'
-    TruncateSymbol = '...'
-    RowNumberFormat = '%d'
-    DOC_RTF.Template = rtStandard
-    DOC_RTF.Options = [roShowGridLines, roOddRowColoring]
-    DOC_RTF.CustomSettings.TableBackground = 16777167
-    DOC_RTF.CustomSettings.TableOddBackground = clWhite
-    DOC_RTF.CustomSettings.HeaderBackground = 3368601
-    DOC_RTF.CustomSettings.DefaultFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.DefaultFont.Color = clWindowText
-    DOC_RTF.CustomSettings.DefaultFont.Height = -11
-    DOC_RTF.CustomSettings.DefaultFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.DefaultFont.Style = []
-    DOC_RTF.CustomSettings.HeaderFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.HeaderFont.Color = clWindowText
-    DOC_RTF.CustomSettings.HeaderFont.Height = -11
-    DOC_RTF.CustomSettings.HeaderFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.HeaderFont.Style = [fsBold]
-    DOC_RTF.CustomSettings.TableFont.Charset = DEFAULT_CHARSET
-    DOC_RTF.CustomSettings.TableFont.Color = clWindowText
-    DOC_RTF.CustomSettings.TableFont.Height = -11
-    DOC_RTF.CustomSettings.TableFont.Name = 'MS Sans Serif'
-    DOC_RTF.CustomSettings.TableFont.Style = []
-    DOC_RTF.CellWidth = 1400
-    DOC_RTF.TopMargin = 101
-    DOC_RTF.BottomMargin = 101
-    DOC_RTF.LeftMargin = 461
-    DOC_RTF.RightMargin = 562
-    EXCEL.Options = [reSetColumnWidths, reSetMargins, reUseBorders]
-    EXCEL.ColumnWidth = 30
-    EXCEL.Protected = False
-    EXCEL.Footer = '&P'
-    EXCEL.DefaultFont.Charset = DEFAULT_CHARSET
-    EXCEL.DefaultFont.Color = clWindowText
-    EXCEL.DefaultFont.Height = -11
-    EXCEL.DefaultFont.Name = 'MS Sans Serif'
-    EXCEL.DefaultFont.Style = []
-    EXCEL.HeaderFont.Charset = DEFAULT_CHARSET
-    EXCEL.HeaderFont.Color = clWindowText
-    EXCEL.HeaderFont.Height = -12
-    EXCEL.HeaderFont.Name = 'Verdana'
-    EXCEL.HeaderFont.Style = [fsBold]
-    EXCEL.TableFont.Charset = DEFAULT_CHARSET
-    EXCEL.TableFont.Color = clWindowText
-    EXCEL.TableFont.Height = -11
-    EXCEL.TableFont.Name = 'MS Sans Serif'
-    EXCEL.TableFont.Style = []
-    EXCEL.TopMargin = 0.300000000000000000
-    EXCEL.BottomMargin = 0.300000000000000000
-    EXCEL.LeftMargin = 0.300000000000000000
-    EXCEL.RightMargin = 0.300000000000000000
-    Options = [xoClipboardMessage, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
-    Version = '2.37'
-    DBGrid = DBGridProductos
-    Left = 476
-    Top = 122
-  end
-  object mxNativeExcel1: TmxNativeExcel
-    ActiveFont = 0
-    Borders = []
-    Shading = False
-    Version = '1.24'
-    Left = 472
-    Top = 176
   end
   object ZQ_Clientes: TZQuery
     Connection = DM.Conexion
@@ -3343,7 +3340,7 @@ object FABM_Precios: TFABM_Precios
     Params = <>
     ProviderName = 'DataSetProvider1'
     Left = 169
-    Top = 289
+    Top = 65
     object CDSZQ_Productosnombre_producto: TStringField
       FieldName = 'nombre_producto'
       Size = 50
@@ -3378,8 +3375,8 @@ object FABM_Precios: TFABM_Precios
       'select *'
       'from imprimir_etiquetas ie')
     Params = <>
-    Left = 744
-    Top = 328
+    Left = 264
+    Top = 232
     object ZQ_ImprimirEtiquetasID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
     end
@@ -3435,7 +3432,7 @@ object FABM_Precios: TFABM_Precios
       'WHERE'
       '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
     Left = 168
-    Top = 240
+    Top = 232
     ParamData = <
       item
         DataType = ftUnknown
@@ -3512,5 +3509,25 @@ object FABM_Precios: TFABM_Precios
         Name = 'OLD_ID_PRODUCTO'
         ParamType = ptUnknown
       end>
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 56
+    Top = 234
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
+    end
   end
 end
