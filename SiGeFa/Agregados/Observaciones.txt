@@ -1,38 +1,24 @@
-create procedure z_sinc_traer_datos_propios
-returns (
-    id numeric(18,0),
-    table_name varchar(67),
-    operation varchar(1),
-    date_time timestamp,
-    key_field varchar(67),
-    key_value varchar(255),
-    field_name varchar(67),
-    new_value varchar(255),
-    field_name_blob varchar(67),
-    new_blob_value varchar(255))
-as
-declare variable db_suc integer;
-begin
-  select c.db_sucursal
-  from configuracion c
-  into :db_suc;
-
-  for select ta.id, ta.table_name, ta.operation, ta.date_time,
-             cl.key_field, cl.key_value, ca.field_name, ca.new_value,
-             cb.field_name, cb.new_blob_value
-  from z_sinc_campo ca
-  left join z_sinc_tabla ta on (ta.id = ca.log_tables_id)
-  left join z_sinc_clave cl on (ta.id = cl.log_tables_id)
-  left join z_sinc_campo_blob cb on (ta.id = cb.log_tables_id)
-  where cl.key_value like(''||:db_suc||'%')
-    and ta.lote_sinc is null
-  into :id, :table_name,:operation, :date_time, :key_field, :key_value,
-       :field_name, :new_value, :field_name_blob, :new_blob_value
-  do
-    suspend;
-end
+PANTALLAS QUE UTILIZAN PRODUCTO Y QUE HAY QUE CHEQUEAR/MODIFICAR PARA QUE TOME LA TABLA NUEVA DE PRECIOS
+* ABM FACTURA COMPRA 
+* ABM DEVOLUCIONES
+* ABM NOTA PEDIDOS
+* ABM PRESUPUESTO
+* ABM REMITO
+* ABM PRECIOS
+* ABM PREVENTA
+* ABM PRODUCTO
+* BUSCAR PRODUCTO
+* BUSCAR STOCK
+* CAJERO
+* ESTADISTICA STOCK
+* IMPRIMIR ETIQUETAS
 
 --------------------- PENDIENTE -------------------------------------------
+* Ver el tema de la confirmacion y anulacion de los comprobantes.
+
+* Ver como hacer los pagos de las facturas y las facturas de compra, que se disminuya
+la forma de pago cuenta corriente. Ver tambien el tema de la forma de pago nota de credito.
+
 * Levantar presupuesto con el cajero.
 
 * Alerta de dias para la cuenta corriente. Cuando un cliente esta atrasado en una cancelacion de
@@ -42,13 +28,9 @@ end
 * Cuando un cliente se demora en un pago de la cuenta corriente permitir cobrar un porcentaje
 	de recargo por ejemplo debe $50 pero como se atraso le cobro $60. Contemplar esa situacion.
 
-* Ver las notas de creditos y debitos cuando se devuelve mercaderia. Hay que ver como se 
-	incrementa el stock del zapato q se devolvio y como se decrementa el zapato que se llevo.
+* DEVOLUCIONES. ver como se incrementa el stock del producto q se devolvio y como se decrementa 
+	el stock del producto que se llevo.
 	Tambien ver el tema de los movimientos de las cuentas.
-
-OK * Factura de compra, igual a la nota de pedido pero que tenga los precios de costo.
-	cuando se guarda se pregunta si se quieren modificar los precios de costo de los productos.
-	Se agregan a la cuenta corriente del proveedor. VER QUE NO GUARDA
 
 * Registras las transferencias de productos entre sucursales, ya sea creando una tabla nueva o tomando
   como que es un tipo de comprobante nuevo y usar las tablas COMPROBANTES y COMPROBANTE_DETALLE.
@@ -56,6 +38,10 @@ OK * Factura de compra, igual a la nota de pedido pero que tenga los precios de 
 NO * Nota Pedido apaisada (pedir ejemplo).
 
 --------------------- LISTO -------------------------------------------
+OK * Factura de compra, igual a la nota de pedido pero que tenga los precios de costo.
+	cuando se guarda se pregunta si se quieren modificar los precios de costo de los productos.
+	Se agregan a la cuenta corriente del proveedor.
+	
 OK * Remitos con importe total (Indica el valor total de la mercaderia enviada).
 
 OK * Descuento para cada tipo de pago (Ej: EFECTIVO -10%, TARJETA +5%, etc).
