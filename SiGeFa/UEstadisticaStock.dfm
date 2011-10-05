@@ -22,8 +22,8 @@ object FEstadisticaStock: TFEstadisticaStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 416
     Align = alClient
     TabOrder = 0
     object RepStock: TQuickRep
@@ -907,7 +907,7 @@ object FEstadisticaStock: TFEstadisticaStock
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1356,8 +1356,8 @@ object FEstadisticaStock: TFEstadisticaStock
     object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 852
-      Height = 386
+      Width = 860
+      Height = 392
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -1530,8 +1530,8 @@ object FEstadisticaStock: TFEstadisticaStock
     end
     object Panel2: TPanel
       Left = 1
-      Top = 387
-      Width = 852
+      Top = 393
+      Width = 860
       Height = 22
       Align = alBottom
       BorderWidth = 4
@@ -1539,7 +1539,7 @@ object FEstadisticaStock: TFEstadisticaStock
       object lblTotales: TLabel
         Left = 5
         Top = 5
-        Width = 842
+        Width = 850
         Height = 13
         Align = alTop
         Alignment = taRightJustify
@@ -1556,7 +1556,7 @@ object FEstadisticaStock: TFEstadisticaStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2040,8 +2040,8 @@ object FEstadisticaStock: TFEstadisticaStock
     OnCalcFields = ZQ_StockCalcFields
     SQL.Strings = (
       
-        'select pr.precio_costo, pr.precio_venta ,sp.id_stock_producto, s' +
-        'p.stock_actual,'
+        'select p.precio_costo, p.precio_venta ,sp.id_stock_producto, sp.' +
+        'stock_actual,'
       '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
       '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
       '       md.medida, mc.nombre_marca, pc.baja,'
@@ -2061,6 +2061,7 @@ object FEstadisticaStock: TFEstadisticaStock
         'al'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
+      'left join precio p on (pr.id_producto = p.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
@@ -2074,8 +2075,7 @@ object FEstadisticaStock: TFEstadisticaStock
         'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      'left join color c on (pc.color = c.id_color)'
-      '')
+      'left join color c on (pc.color = c.id_color)')
     Params = <>
     Left = 48
     Top = 80
@@ -2334,8 +2334,8 @@ object FEstadisticaStock: TFEstadisticaStock
     DataSet = ZQ_Stock
     SQL.Strings = (
       
-        'select pr.precio_costo, pr.precio_venta ,sp.id_stock_producto, s' +
-        'p.stock_actual,'
+        'select p.precio_costo, p.precio_venta ,sp.id_stock_producto, sp.' +
+        'stock_actual,'
       '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
       '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
       '       md.medida, mc.nombre_marca, pc.baja,'
@@ -2355,6 +2355,7 @@ object FEstadisticaStock: TFEstadisticaStock
         'al'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
+      'left join precio p on (pr.id_producto = p.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
@@ -2371,8 +2372,8 @@ object FEstadisticaStock: TFEstadisticaStock
       'left join color c on (pc.color = c.id_color)')
     SQL_Select.Strings = (
       
-        'select pr.precio_costo, pr.precio_venta ,sp.id_stock_producto, s' +
-        'p.stock_actual,'
+        'select p.precio_costo, p.precio_venta ,sp.id_stock_producto, sp.' +
+        'stock_actual,'
       '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
       '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
       '       md.medida, mc.nombre_marca, pc.baja,'
@@ -2393,6 +2394,7 @@ object FEstadisticaStock: TFEstadisticaStock
     SQL_From.Strings = (
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
+      'left join precio p on (pr.id_producto = p.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +

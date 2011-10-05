@@ -44,9 +44,7 @@ type
     ZQ_ProductosCOD_CORTO: TStringField;
     ZQ_ProductosCODIGO_BARRA: TStringField;
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
-    ZSPActualizarImporte: TZStoredProc;
     ZQ_ProductosID_PRODUCTO: TIntegerField;
-    ZSPActualizarImporteSALIDA: TIntegerField;
     PanelEdicion: TPanel;
     Label1: TLabel;
     RadioGroupTipoCalculo: TRadioGroup;
@@ -176,6 +174,12 @@ type
     ABuscar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
+    ZQ_ProductosNOMBRE: TStringField;
+    ZQ_ProductosID_PRECIO: TIntegerField;
+    ZQ_Sucursal: TZQuery;
+    ZQ_SucursalNOMBRE: TStringField;
+    ZQ_SucursalID_SUCURSAL: TIntegerField;
+    ZSPActualizarImporte: TZStoredProc;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -427,7 +431,7 @@ begin
         begin
           GotoBookmark(pointer(DBGridProductos.SelectedRows.Items[i]));
           ZSPActualizarImporte.Close;
-          ZSPActualizarImporte.ParamByName('ID_PRODUCTO').AsInteger := ZQ_ProductosID_PRODUCTO.AsInteger;
+          ZSPActualizarImporte.ParamByName('ID_PRECIO').AsInteger := ZQ_ProductosID_PRECIO.AsInteger;
           ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat := StrToFloat(EditCosto.Text);
           ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat := StrToFloat(EditVenta.Text);
           ZSPActualizarImporte.ParamByName('PRECIO1').AsFloat := StrToFloat(EditPrecio1.Text);
@@ -459,7 +463,7 @@ begin
       while not(ZQ_Productos.Eof) do
       begin
         ZSPActualizarImporte.Close;
-        ZSPActualizarImporte.ParamByName('ID_PRODUCTO').AsInteger := ZQ_ProductosID_PRODUCTO.AsInteger;
+        ZSPActualizarImporte.ParamByName('ID_PRECIO').AsInteger := ZQ_ProductosID_PRECIO.AsInteger;
         ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat := StrToFloat(EditCosto.Text);
         ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat := StrToFloat(EditVenta.Text);
         ZSPActualizarImporte.ParamByName('PRECIO1').AsFloat := StrToFloat(EditPrecio1.Text);
@@ -722,6 +726,8 @@ begin
   GBoxIncDecImportes.Width := 250;
   GboxImpuestos.Width := 97;
   HabilitarCampos;
+
+  dm.EKModelo.abrir(ZQ_Sucursal);
 end;
 
 

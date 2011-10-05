@@ -23,8 +23,8 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 490
+    Width = 1016
+    Height = 496
     Align = alClient
     TabOrder = 4
     object RepListaPrecios: TQuickRep
@@ -126,7 +126,6 @@ object FABM_Precios: TFABM_Precios
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
-          DataSet = DM.ZQ_Sucursal
         end
         object QRLabel11: TQRLabel
           Left = 454
@@ -173,7 +172,7 @@ object FABM_Precios: TFABM_Precios
           Size.Values = (
             52.916666666666670000
             1150.937500000000000000
-            68.791666666666670000
+            68.791666666666680000
             465.666666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -1200,7 +1199,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1216,7 +1215,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2532.062500000000000000
             2.645833333333333000
             103.187500000000000000)
@@ -1248,7 +1247,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -1335,7 +1334,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1570,8 +1569,8 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 19
-      Width = 1006
-      Height = 305
+      Width = 1014
+      Height = 311
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1734,12 +1733,19 @@ object FABM_Precios: TFABM_Precios
           Title.Caption = 'Color'
           Width = 91
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOMBRE'
+          Title.Caption = 'Sucursal'
+          Width = 100
+          Visible = True
         end>
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 324
-      Width = 1006
+      Top = 330
+      Width = 1014
       Height = 165
       Hint = '`'
       Align = alBottom
@@ -2060,7 +2066,7 @@ object FABM_Precios: TFABM_Precios
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1006
+      Width = 1014
       Height = 18
       Align = alTop
       ParentShowHint = False
@@ -2085,7 +2091,7 @@ object FABM_Precios: TFABM_Precios
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2688,20 +2694,18 @@ object FABM_Precios: TFABM_Precios
         'articulo,'
       
         '       ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_pro' +
-        'ducto,'
+        'ducto, p.cod_corto,'
       
-        '       p.descripcion, p.precio_costo, p.precio_venta, p.coef_gan' +
-        'ancia,'
+        '       p.descripcion, pr.precio_costo, pr.precio_venta, pr.coef_' +
+        'ganancia,'
+      '       pr.coef_descuento, pr.impuesto_interno, pr.impuesto_iva,'
       
-        '       p.coef_descuento, p.impuesto_interno, p.impuesto_iva, p.c' +
-        'od_corto,'
+        '       p.codigo_barra, pr.precio_costo_cimpuestos, pr.impuesto_a' +
+        'dicional1,'
       
-        '       p.codigo_barra, p.precio_costo_cimpuestos, p.impuesto_adi' +
-        'cional1,'
-      
-        '       p.impuesto_adicional2, p.precio1, p.precio2, p.precio3, p' +
-        '.precio4,'
-      '       p.precio5, co.nombre as Color'
+        '       pr.impuesto_adicional2, pr.precio1, pr.precio2, pr.precio' +
+        '3, pr.precio4,'
+      '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio'
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
       
@@ -2713,9 +2717,11 @@ object FABM_Precios: TFABM_Precios
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
       'left join color co on (pc.color = co.id_color)'
+      'left join precio pr on (p.id_producto = pr.id_producto)'
+      'left join sucursal s on (pr.id_sucursal = s.id_sucursal)'
       'where (pc.baja <> '#39'S'#39')'
       '  and  (p.Baja <> '#39'S'#39')'
-      ''
+      'and pr.id_sucursal is not null'
       '')
     Params = <>
     Left = 168
@@ -2822,6 +2828,14 @@ object FABM_Precios: TFABM_Precios
       FieldName = 'COLOR'
       Size = 30
     end
+    object ZQ_ProductosNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_ProductosID_PRECIO: TIntegerField
+      FieldName = 'ID_PRECIO'
+      Required = True
+    end
   end
   object DS_Productos: TDataSource
     DataSet = ZQ_Productos
@@ -2830,6 +2844,19 @@ object FABM_Precios: TFABM_Precios
   end
   object EKBusquedaAvanzada1: TEKBusquedaAvanzada
     CriteriosBusqueda = <
+      item
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        Tabla = 's'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
       item
         Titulo = 'C'#243'd. Barra'
         Campo = 'codigo_barra'
@@ -2941,21 +2968,18 @@ object FABM_Precios: TFABM_Precios
         'articulo,'
       
         '       ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_pro' +
-        'ducto,'
+        'ducto, p.cod_corto,'
       
-        '       p.descripcion, p.precio_costo, p.precio_venta, p.coef_gan' +
-        'ancia,'
+        '       p.descripcion, pr.precio_costo, pr.precio_venta, pr.coef_' +
+        'ganancia,'
+      '       pr.coef_descuento, pr.impuesto_interno, pr.impuesto_iva,'
       
-        '       p.coef_descuento, p.impuesto_interno, p.impuesto_iva, p.c' +
-        'od_corto,'
+        '       p.codigo_barra, pr.precio_costo_cimpuestos, pr.impuesto_a' +
+        'dicional1,'
       
-        '       p.codigo_barra, p.precio_costo_cimpuestos, p.impuesto_adi' +
-        'cional1,'
-      
-        '       p.impuesto_adicional2, p.precio1, p.precio2, p.precio3, p' +
-        '.precio4,'
-      '       p.precio5, co.nombre as Color'
-      ''
+        '       pr.impuesto_adicional2, pr.precio1, pr.precio2, pr.precio' +
+        '3, pr.precio4,'
+      '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio'
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
       
@@ -2967,29 +2991,29 @@ object FABM_Precios: TFABM_Precios
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
       'left join color co on (pc.color = co.id_color)'
+      'left join precio pr on (p.id_producto = pr.id_producto)'
+      'left join sucursal s on (pr.id_sucursal = s.id_sucursal)'
       'where (pc.baja <> '#39'S'#39')'
-      '  and  (p.Baja <> '#39'S'#39')')
+      '  and  (p.Baja <> '#39'S'#39')'
+      '  and pr.id_sucursal is not null')
     SQL_Select.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
         'articulo,'
       
         '       ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_pro' +
-        'ducto,'
+        'ducto, p.cod_corto,'
       
-        '       p.descripcion, p.precio_costo, p.precio_venta, p.coef_gan' +
-        'ancia,'
+        '       p.descripcion, pr.precio_costo, pr.precio_venta, pr.coef_' +
+        'ganancia,'
+      '       pr.coef_descuento, pr.impuesto_interno, pr.impuesto_iva,'
       
-        '       p.coef_descuento, p.impuesto_interno, p.impuesto_iva, p.c' +
-        'od_corto,'
+        '       p.codigo_barra, pr.precio_costo_cimpuestos, pr.impuesto_a' +
+        'dicional1,'
       
-        '       p.codigo_barra, p.precio_costo_cimpuestos, p.impuesto_adi' +
-        'cional1,'
-      
-        '       p.impuesto_adicional2, p.precio1, p.precio2, p.precio3, p' +
-        '.precio4,'
-      '       p.precio5, co.nombre as Color'
-      '')
+        '       pr.impuesto_adicional2, pr.precio1, pr.precio2, pr.precio' +
+        '3, pr.precio4,'
+      '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio')
     SQL_From.Strings = (
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
@@ -3001,165 +3025,17 @@ object FABM_Precios: TFABM_Precios
         'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'left join color co on (pc.color = co.id_color)')
+      'left join color co on (pc.color = co.id_color)'
+      'left join precio pr on (p.id_producto = pr.id_producto)'
+      'left join sucursal s on (pr.id_sucursal = s.id_sucursal)')
     SQL_Where.Strings = (
       'where (pc.baja <> '#39'S'#39')'
-      '  and  (p.Baja <> '#39'S'#39')')
+      '  and  (p.Baja <> '#39'S'#39')'
+      '  and pr.id_sucursal is not null')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 56
     Top = 120
-  end
-  object ZSPActualizarImporte: TZStoredProc
-    Connection = DM.Conexion
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'SALIDA'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'COEF_AUMENTO_COSTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'COEF_AUMENTO_VENTA'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ID_PRODUCTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'TIPOCALCULO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ACTUALIZAR_IMPUESTOS'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'IMPUESTO_IVA'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'IMPUESTO_ADICIONAL1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'IMPUESTO_ADICIONAL2'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'PRECIO1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'PRECIO2'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'PRECIO3'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'PRECIO4'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'PRECIO5'
-        ParamType = ptInput
-      end>
-    StoredProcName = 'ACTUALIZAR_IMPORTES'
-    Left = 264
-    Top = 176
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'SALIDA'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'COEF_AUMENTO_COSTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'COEF_AUMENTO_VENTA'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ID_PRODUCTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'TIPOCALCULO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ACTUALIZAR_IMPUESTOS'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'IMPUESTO_IVA'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'IMPUESTO_ADICIONAL1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'IMPUESTO_ADICIONAL2'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'PRECIO1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'PRECIO2'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'PRECIO3'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'PRECIO4'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftFloat
-        Name = 'PRECIO5'
-        ParamType = ptInput
-      end>
-    object ZSPActualizarImporteSALIDA: TIntegerField
-      FieldName = 'SALIDA'
-    end
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridProductos
@@ -3246,6 +3122,10 @@ object FABM_Precios: TFABM_Precios
       end
       item
         TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
         Visible = True
       end>
     NombreGuardar = 'ABM_Precios'
@@ -3386,24 +3266,23 @@ object FABM_Precios: TFABM_Precios
   end
   object ZU_Productos: TZUpdateSQL
     DeleteSQL.Strings = (
-      'DELETE FROM producto'
+      'DELETE FROM PRECIO'
       'WHERE'
-      '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
+      '  PRECIO.ID_PRECIO = :OLD_ID_PRECIO')
     InsertSQL.Strings = (
-      'INSERT INTO producto'
+      'INSERT INTO PRECIO'
       
-        '  (producto.PRECIO_COSTO, producto.PRECIO_VENTA, producto.COEF_G' +
-        'ANANCIA, '
+        '  (PRECIO.PRECIO_COSTO, PRECIO.PRECIO_VENTA, PRECIO.COEF_GANANCI' +
+        'A, PRECIO.COEF_DESCUENTO, '
       
-        '   producto.COEF_DESCUENTO, producto.IMPUESTO_INTERNO, producto.' +
-        'IMPUESTO_IVA, '
+        '   PRECIO.IMPUESTO_INTERNO, PRECIO.IMPUESTO_IVA, PRECIO.PRECIO_C' +
+        'OSTO_CIMPUESTOS, '
       
-        '   producto.PRECIO_COSTO_CIMPUESTOS, producto.IMPUESTO_ADICIONAL' +
-        '1, producto.IMPUESTO_ADICIONAL2, '
+        '   PRECIO.IMPUESTO_ADICIONAL1, PRECIO.IMPUESTO_ADICIONAL2, PRECI' +
+        'O.PRECIO1, '
       
-        '   producto.PRECIO1, producto.PRECIO2, producto.PRECIO3, product' +
-        'o.PRECIO4, '
-      '   producto.PRECIO5)'
+        '   PRECIO.PRECIO2, PRECIO.PRECIO3, PRECIO.PRECIO4, PRECIO.PRECIO' +
+        '5)'
       'VALUES'
       
         '  (:PRECIO_COSTO, :PRECIO_VENTA, :COEF_GANANCIA, :COEF_DESCUENTO' +
@@ -3413,24 +3292,24 @@ object FABM_Precios: TFABM_Precios
         ', :IMPUESTO_ADICIONAL2, '
       '   :PRECIO1, :PRECIO2, :PRECIO3, :PRECIO4, :PRECIO5)')
     ModifySQL.Strings = (
-      'UPDATE producto SET'
-      '  producto.PRECIO_COSTO = :PRECIO_COSTO,'
-      '  producto.PRECIO_VENTA = :PRECIO_VENTA,'
-      '  producto.COEF_GANANCIA = :COEF_GANANCIA,'
-      '  producto.COEF_DESCUENTO = :COEF_DESCUENTO,'
-      '  producto.IMPUESTO_INTERNO = :IMPUESTO_INTERNO,'
-      '  producto.IMPUESTO_IVA = :IMPUESTO_IVA,'
-      '  producto.PRECIO_COSTO_CIMPUESTOS = '
+      'UPDATE PRECIO SET'
+      '  PRECIO.PRECIO_COSTO = :PRECIO_COSTO,'
+      '  PRECIO.PRECIO_VENTA = :PRECIO_VENTA,'
+      '  PRECIO.COEF_GANANCIA = :COEF_GANANCIA,'
+      '  PRECIO.COEF_DESCUENTO = :COEF_DESCUENTO,'
+      '  PRECIO.IMPUESTO_INTERNO = :IMPUESTO_INTERNO,'
+      '  PRECIO.IMPUESTO_IVA = :IMPUESTO_IVA,'
+      '  PRECIO.PRECIO_COSTO_CIMPUESTOS = '
       ':PRECIO_COSTO_CIMPUESTOS,'
-      '  producto.IMPUESTO_ADICIONAL1 = :IMPUESTO_ADICIONAL1,'
-      '  producto.IMPUESTO_ADICIONAL2 = :IMPUESTO_ADICIONAL2,'
-      '  producto.PRECIO1 = :PRECIO1,'
-      '  producto.PRECIO2 = :PRECIO2,'
-      '  producto.PRECIO3 = :PRECIO3,'
-      '  producto.PRECIO4 = :PRECIO4,'
-      '  producto.PRECIO5 = :PRECIO5'
+      '  PRECIO.IMPUESTO_ADICIONAL1 = :IMPUESTO_ADICIONAL1,'
+      '  PRECIO.IMPUESTO_ADICIONAL2 = :IMPUESTO_ADICIONAL2,'
+      '  PRECIO.PRECIO1 = :PRECIO1,'
+      '  PRECIO.PRECIO2 = :PRECIO2,'
+      '  PRECIO.PRECIO3 = :PRECIO3,'
+      '  PRECIO.PRECIO4 = :PRECIO4,'
+      '  PRECIO.PRECIO5 = :PRECIO5'
       'WHERE'
-      '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
+      '  PRECIO.ID_PRECIO = :OLD_ID_PRECIO')
     Left = 168
     Top = 232
     ParamData = <
@@ -3506,7 +3385,7 @@ object FABM_Precios: TFABM_Precios
       end
       item
         DataType = ftUnknown
-        Name = 'OLD_ID_PRODUCTO'
+        Name = 'OLD_ID_PRECIO'
         ParamType = ptUnknown
       end>
   end
@@ -3529,5 +3408,171 @@ object FABM_Precios: TFABM_Precios
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
+  end
+  object ZQ_Sucursal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select s.nombre, s.id_sucursal'
+      'from sucursal s'
+      'where (s.baja <> '#39'S'#39') and (s.id_sucursal > 0)')
+    Params = <>
+    Left = 560
+    Top = 64
+    object ZQ_SucursalNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_SucursalID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
+    end
+  end
+  object ZSPActualizarImporte: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'SALIDA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'COEF_AUMENTO_COSTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'COEF_AUMENTO_VENTA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PRECIO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TIPOCALCULO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ACTUALIZAR_IMPUESTOS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_IVA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_ADICIONAL1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_ADICIONAL2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO3'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO4'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO5'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'ACTUALIZAR_IMPORTES'
+    Left = 264
+    Top = 184
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'SALIDA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'COEF_AUMENTO_COSTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'COEF_AUMENTO_VENTA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PRECIO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TIPOCALCULO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ACTUALIZAR_IMPUESTOS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_IVA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_ADICIONAL1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPUESTO_ADICIONAL2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO3'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO4'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO5'
+        ParamType = ptInput
+      end>
   end
 end
