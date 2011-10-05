@@ -890,13 +890,18 @@ object FPreventa: TFPreventa
       '        then '#39'N'#39
       '     else '#39'S'#39
       'end as Vencida'
+      ''
       'from comprobante c'
       'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
       'left join persona p1 on (p1.id_persona=c.id_vendedor)'
       'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
       'left join persona p2 on (p2.id_persona=c.id_cliente)'
+      ''
+      ''
+      ''
       'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)'
-      'order by c.fecha_vencimiento DESC,c.fecha DESC')
+      'order by c.fecha_vencimiento DESC,c.fecha DESC'
+      '')
     Params = <>
     Left = 210
     Top = 130
