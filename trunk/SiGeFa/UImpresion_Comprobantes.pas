@@ -67,33 +67,6 @@ type
     ZQ_FpagoCTA_INGRESO_CODIGO: TStringField;
     ZQ_FpagoCTA_INGRESO: TStringField;
     ZQ_Producto: TZQuery;
-    ZQ_ProductoID_COMPROBANTE_DETALLE: TIntegerField;
-    ZQ_ProductoID_COMPROBANTE: TIntegerField;
-    ZQ_ProductoID_PRODUCTO: TIntegerField;
-    ZQ_ProductoDETALLE: TStringField;
-    ZQ_ProductoCANTIDAD: TFloatField;
-    ZQ_ProductoIMPORTE_FINAL: TFloatField;
-    ZQ_ProductoPORC_DESCUENTO: TFloatField;
-    ZQ_ProductoBASE_IMPONIBLE: TFloatField;
-    ZQ_ProductoIMPORTE_UNITARIO: TFloatField;
-    ZQ_ProductoIMPUESTO_INTERNO: TFloatField;
-    ZQ_ProductoPORC_IVA: TFloatField;
-    ZQ_ProductoCOD_CABECERA: TStringField;
-    ZQ_ProductoPRODUCTO: TStringField;
-    ZQ_ProductoIMAGEN: TBlobField;
-    ZQ_ProductoMEDIDA: TStringField;
-    ZQ_ProductoCOLOR: TStringField;
-    ZQ_ProductoMARCA: TStringField;
-    ZQ_ProductoARTICULO: TStringField;
-    ZQ_ProductoTIPO_ARTICULO: TStringField;
-    ZQ_ProductoCOD_PRODUCTO: TStringField;
-    ZQ_ProductoCODIGO_BARRA: TStringField;
-    ZQ_ProductoPRECIO_COSTO: TFloatField;
-    ZQ_ProductoPRECIO_VENTA: TFloatField;
-    ZQ_ProductoCOEF_GANANCIA: TFloatField;
-    ZQ_ProductoCOEF_DESCUENTO: TFloatField;
-    ZQ_ProductoIMPUESTO_INTERNO_1: TFloatField;
-    ZQ_ProductoIMPUESTO_IVA: TFloatField;
     ZQ_Comprobante: TZQuery;
     ZQ_Destino: TZQuery;
     ZQ_DestinoNOMBRE: TStringField;
@@ -651,11 +624,6 @@ type
     QRDBText133: TQRDBText;
     QRDBText129: TQRDBText;
     QRLabel220: TQRLabel;
-    ZQ_ProductoCANTIDAD_RECIBIDA: TFloatField;
-    ZQ_ProductoCANTIDAD_ALMACENADA: TFloatField;
-    ZQ_ProductoID_STOCK_PRODUCTO: TIntegerField;
-    ZQ_ProductoIMPORTE_VENTA: TFloatField;
-    ZQ_ProductoIMPORTE_IVA: TFloatField;
     ZQ_FpagoFECHA_FP: TDateTimeField;
     ZQ_FpagoIMPORTE_REAL: TFloatField;
     ZQ_FPagoCtaCteIMPORTE_REAL: TFloatField;
@@ -667,19 +635,45 @@ type
     QRlblNotaCredito_PiePagina: TQRLabel;
     QRLabel243: TQRLabel;
     QRlblNotaCreditoTipo: TQRLabel;
-    ZQ_ProductoDEVOLUCION: TFloatField;
     ChildBand8: TQRChildBand;
     QRDBText126: TQRDBText;
     QRLabel252: TQRLabel;
     QRLabel236: TQRLabel;
     QRLblNotaCredito_ImporteEnLetras: TQRLabel;
     QRLabel255: TQRLabel;
+    ZQ_ProductoID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_ProductoID_COMPROBANTE: TIntegerField;
+    ZQ_ProductoID_PRODUCTO: TIntegerField;
+    ZQ_ProductoDETALLE: TStringField;
+    ZQ_ProductoCANTIDAD: TFloatField;
+    ZQ_ProductoIMPORTE_FINAL: TFloatField;
+    ZQ_ProductoPORC_DESCUENTO: TFloatField;
+    ZQ_ProductoBASE_IMPONIBLE: TFloatField;
+    ZQ_ProductoIMPORTE_UNITARIO: TFloatField;
+    ZQ_ProductoIMPUESTO_INTERNO: TFloatField;
+    ZQ_ProductoPORC_IVA: TFloatField;
+    ZQ_ProductoCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_ProductoCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_ProductoID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_ProductoIMPORTE_VENTA: TFloatField;
+    ZQ_ProductoIMPORTE_IVA: TFloatField;
+    ZQ_ProductoCOD_CABECERA: TStringField;
+    ZQ_ProductoPRODUCTO: TStringField;
+    ZQ_ProductoIMAGEN: TBlobField;
+    ZQ_ProductoMEDIDA: TStringField;
+    ZQ_ProductoCOLOR: TStringField;
+    ZQ_ProductoMARCA: TStringField;
+    ZQ_ProductoARTICULO: TStringField;
+    ZQ_ProductoTIPO_ARTICULO: TStringField;
+    ZQ_ProductoCOD_PRODUCTO: TStringField;
+    ZQ_ProductoDEVOLUCION: TFloatField;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
   private
     reporte: TQuickRep;
     archivoPDF: string;
+    noImprimir: boolean;
   public
     procedure cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer; cta_cte: boolean);
     procedure configRecibo();
@@ -704,6 +698,8 @@ uses UDM;
 
 procedure TFImpresion_Comprobantes.cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer; cta_cte: boolean);
 begin
+  noImprimir:= false;
+
   ZQ_Destino.Close;
   if id_persona = 0 then
     ZQ_Destino.ParamByName('id_persona').Clear
@@ -776,7 +772,8 @@ end;
 
 procedure TFImpresion_Comprobantes.imprimir();
 begin
-  EKVistaPrevia.VistaPrevia;
+  if not noImprimir then
+    EKVistaPrevia.VistaPrevia;
 end;
 
 
@@ -809,6 +806,10 @@ begin
     QRlblNotaCredito_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
     DM.VariablesComprobantes(RepNotaCredito);
     EKVistaPrevia.Reporte:= RepNotaCredito;
+  end
+  else
+  begin
+    noImprimir:= true;
   end
 end;
 

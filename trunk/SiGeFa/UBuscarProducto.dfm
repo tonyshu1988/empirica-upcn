@@ -829,11 +829,13 @@ object FBuscarProducto: TFBuscarProducto
       
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
+      '       co.nombre as color,'
       
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
+      '       pre.impuesto_iva'
       'from producto pr'
+      'left join precio pre on (pre.id_producto = pr.id_producto)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
@@ -844,11 +846,24 @@ object FBuscarProducto: TFBuscarProducto
         'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
         'articulo)'
       'left join color co on (pc.color = co.id_color)'
-      'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
+      'where (pc.baja = '#39'N'#39')'
+      '  and (pr.baja <> '#39'S'#39')'
+      '  and (pre.id_sucursal = :id_sucursal)'
       'order by pc.nombre, ta.descripcion, ar.descripcion')
-    Params = <>
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
     Left = 136
     Top = 48
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
     object ZQ_ProductoNOMBRE: TStringField
       FieldName = 'NOMBRE'
       Size = 100
@@ -890,6 +905,10 @@ object FBuscarProducto: TFBuscarProducto
       FieldName = 'TIPO_ARTICULO'
       Size = 200
     end
+    object ZQ_ProductoCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
     object ZQ_ProductoPRECIO_COSTO: TFloatField
       FieldName = 'PRECIO_COSTO'
     end
@@ -902,15 +921,8 @@ object FBuscarProducto: TFBuscarProducto
     object ZQ_ProductoCOEF_DESCUENTO: TFloatField
       FieldName = 'COEF_DESCUENTO'
     end
-    object ZQ_ProductoIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
     object ZQ_ProductoIMPUESTO_IVA: TFloatField
       FieldName = 'IMPUESTO_IVA'
-    end
-    object ZQ_ProductoCOLOR: TStringField
-      FieldName = 'COLOR'
-      Size = 30
     end
   end
   object DS_Producto: TDataSource
@@ -1084,11 +1096,14 @@ object FBuscarProducto: TFBuscarProducto
       
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
+      '       co.nombre as color,'
       
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
+      '       pre.impuesto_iva'
+      ''
       'from producto pr'
+      'left join precio pre on (pre.id_producto = pr.id_producto)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
@@ -1100,6 +1115,7 @@ object FBuscarProducto: TFBuscarProducto
         'articulo)'
       'left join color co on (pc.color = co.id_color)'
       'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
+      '  and pre.id_sucursal = '
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     SQL_Select.Strings = (
       
@@ -1109,12 +1125,15 @@ object FBuscarProducto: TFBuscarProducto
       
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
+      '       co.nombre as color,'
       
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color')
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
+      '       pre.impuesto_iva'
+      '')
     SQL_From.Strings = (
       'from producto pr'
+      'left join precio pre on (pre.id_producto = pr.id_producto)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
@@ -1126,7 +1145,8 @@ object FBuscarProducto: TFBuscarProducto
         'articulo)'
       'left join color co on (pc.color = co.id_color)')
     SQL_Where.Strings = (
-      'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')')
+      'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
+      '  and pre.id_sucursal = ')
     SQL_Orden.Strings = (
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     UsarWhereOriginal = EK_Con_Where
@@ -1167,11 +1187,13 @@ object FBuscarProducto: TFBuscarProducto
       
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
+      '       co.nombre as color,'
       
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
+      '       pre.impuesto_iva'
       'from producto pr'
+      'left join precio pre on (pre.id_producto = pr.id_producto)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
@@ -1184,12 +1206,18 @@ object FBuscarProducto: TFBuscarProducto
         'articulo)'
       'left join color co on (pc.color = co.id_color)'
       'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
-      '  and emk.id_empresa = :id_empresa'
+      '  and (emk.id_empresa = :id_empresa)'
+      '  and (pre.id_sucursal = :id_sucursal)'
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     Params = <
       item
         DataType = ftUnknown
         Name = 'id_empresa'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     Left = 248
@@ -1198,6 +1226,11 @@ object FBuscarProducto: TFBuscarProducto
       item
         DataType = ftUnknown
         Name = 'id_empresa'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     object ZQ_ProductosProveedorNOMBRE: TStringField
@@ -1241,6 +1274,10 @@ object FBuscarProducto: TFBuscarProducto
       FieldName = 'TIPO_ARTICULO'
       Size = 200
     end
+    object ZQ_ProductosProveedorCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
     object ZQ_ProductosProveedorPRECIO_COSTO: TFloatField
       FieldName = 'PRECIO_COSTO'
     end
@@ -1253,18 +1290,11 @@ object FBuscarProducto: TFBuscarProducto
     object ZQ_ProductosProveedorCOEF_DESCUENTO: TFloatField
       FieldName = 'COEF_DESCUENTO'
     end
-    object ZQ_ProductosProveedorIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
     object ZQ_ProductosProveedorIMPUESTO_IVA: TFloatField
       FieldName = 'IMPUESTO_IVA'
     end
-    object ZQ_ProductosProveedorCOLOR: TStringField
-      FieldName = 'COLOR'
-      Size = 30
-    end
   end
-  object EKBusquedaProductoEmpresa: TEKBusquedaAvanzada
+  object EKBuscarProductoEmpresa: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
         Titulo = 'C'#243'd. Corto'
@@ -1374,24 +1404,29 @@ object FBuscarProducto: TFBuscarProducto
       
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
+      '       co.nombre as color,'
       
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
+      '       pre.impuesto_iva'
+      ''
+      ''
       'from producto pr'
+      'left join precio pre on (pre.id_producto = pr.id_producto)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
       'left join medida md on (pr.id_medida = md.id_medida)'
       'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join empresa_marca emk on (mc.id_marca = emk.id_marca)'
       'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
       
         'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
         'articulo)'
       'left join color co on (pc.color = co.id_color)'
-      'left join empresa_marca emk on (mc.id_marca = emk.id_marca)'
       'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
-      'and emk.id_empresa = '
+      '  and pre.id_sucursal = '
+      '  and emk.id_empresa = '
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     SQL_Select.Strings = (
       
@@ -1401,26 +1436,31 @@ object FBuscarProducto: TFBuscarProducto
       
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
+      '       co.nombre as color,'
       
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color')
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
+      '       pre.impuesto_iva'
+      ''
+      '')
     SQL_From.Strings = (
       'from producto pr'
+      'left join precio pre on (pre.id_producto = pr.id_producto)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
       'left join medida md on (pr.id_medida = md.id_medida)'
       'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join empresa_marca emk on (mc.id_marca = emk.id_marca)'
       'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
       
         'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
         'articulo)'
-      'left join color co on (pc.color = co.id_color)'
-      'left join empresa_marca emk on (mc.id_marca = emk.id_marca)')
+      'left join color co on (pc.color = co.id_color)')
     SQL_Where.Strings = (
       'where (pc.baja = '#39'N'#39') and (pr.baja <> '#39'S'#39')'
-      'and emk.id_empresa = ')
+      '  and pre.id_sucursal = '
+      '  and emk.id_empresa = ')
     SQL_Orden.Strings = (
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     UsarWhereOriginal = EK_Con_Where

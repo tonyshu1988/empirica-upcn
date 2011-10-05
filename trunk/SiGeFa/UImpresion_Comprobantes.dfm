@@ -527,7 +527,6 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               29.104166666666670000
               169.333333333333300000)
             DataField = 'LOGO'
-            DataSet = DM.ZQ_Sucursal
             Stretch = True
           end
         end
@@ -6043,7 +6042,6 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               29.104166666666670000
               169.333333333333300000)
             DataField = 'LOGO'
-            DataSet = DM.ZQ_Sucursal
             Stretch = True
           end
           object QRLabel90: TQRLabel
@@ -16903,14 +16901,15 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     SQL.Strings = (
       
         'select cpbd.id_comprobante_detalle, cpbd.id_comprobante, cpbd.id' +
-        '_producto, cpbd.detalle, abs(cpbd.cantidad) as cantidad,'
+        '_producto, cpbd.detalle,'
+      '       abs(cpbd.cantidad) as cantidad,'
       
         '       cpbd.importe_final, cpbd.porc_descuento, cpbd.base_imponi' +
         'ble, cpbd.importe_unitario, cpbd.impuesto_interno,'
       
         '       cpbd.porc_iva, cpbd.cantidad_recibida, cpbd.cantidad_alma' +
-        'cenada, cpbd.id_stock_producto, abs(cpbd.importe_venta) as impor' +
-        'te_venta,'
+        'cenada, cpbd.id_stock_producto,'
+      '       abs(cpbd.importe_venta) as importe_venta,'
       
         '       cpbd.importe_iva, cab.cod_corto as cod_cabecera, cab.nomb' +
         're as producto, cab.imagen,'
@@ -16920,13 +16919,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       
         '       art.descripcion as articulo, tart.descripcion as tipo_art' +
         'iculo,'
-      '       pro.cod_corto as cod_producto, pro.codigo_barra,'
       
-        '       pro.precio_costo, pro.precio_venta, pro.coef_ganancia, pr' +
-        'o.coef_descuento,'
-      
-        '       pro.impuesto_interno, pro.impuesto_iva, cpbd.cantidad as ' +
-        'devolucion'
+        '       pro.cod_corto as cod_producto, cpbd.cantidad as devolucio' +
+        'n'
       'from comprobante_detalle cpbd'
       'left join producto pro on (cpbd.id_producto = pro.id_producto)'
       
@@ -16970,16 +16965,11 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     object ZQ_ProductoCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
     end
-    object ZQ_ProductoIMPORTE_FINAL: TFloatField
-      FieldName = 'IMPORTE_FINAL'
-      currency = True
-    end
     object ZQ_ProductoPORC_DESCUENTO: TFloatField
       FieldName = 'PORC_DESCUENTO'
     end
     object ZQ_ProductoBASE_IMPONIBLE: TFloatField
       FieldName = 'BASE_IMPONIBLE'
-      currency = True
     end
     object ZQ_ProductoIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
@@ -16987,9 +16977,31 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     end
     object ZQ_ProductoIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
+      currency = True
+    end
+    object ZQ_ProductoIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+      currency = True
     end
     object ZQ_ProductoPORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
+    end
+    object ZQ_ProductoCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_ProductoCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+    object ZQ_ProductoID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_ProductoIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      currency = True
+    end
+    object ZQ_ProductoIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+      currency = True
     end
     object ZQ_ProductoCOD_CABECERA: TStringField
       FieldName = 'COD_CABECERA'
@@ -17023,45 +17035,6 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     end
     object ZQ_ProductoCOD_PRODUCTO: TStringField
       FieldName = 'COD_PRODUCTO'
-    end
-    object ZQ_ProductoCODIGO_BARRA: TStringField
-      FieldName = 'CODIGO_BARRA'
-      Size = 40
-    end
-    object ZQ_ProductoPRECIO_COSTO: TFloatField
-      FieldName = 'PRECIO_COSTO'
-    end
-    object ZQ_ProductoPRECIO_VENTA: TFloatField
-      FieldName = 'PRECIO_VENTA'
-    end
-    object ZQ_ProductoCOEF_GANANCIA: TFloatField
-      FieldName = 'COEF_GANANCIA'
-    end
-    object ZQ_ProductoCOEF_DESCUENTO: TFloatField
-      FieldName = 'COEF_DESCUENTO'
-    end
-    object ZQ_ProductoIMPUESTO_INTERNO_1: TFloatField
-      FieldName = 'IMPUESTO_INTERNO_1'
-    end
-    object ZQ_ProductoIMPUESTO_IVA: TFloatField
-      FieldName = 'IMPUESTO_IVA'
-    end
-    object ZQ_ProductoCANTIDAD_RECIBIDA: TFloatField
-      FieldName = 'CANTIDAD_RECIBIDA'
-    end
-    object ZQ_ProductoCANTIDAD_ALMACENADA: TFloatField
-      FieldName = 'CANTIDAD_ALMACENADA'
-    end
-    object ZQ_ProductoID_STOCK_PRODUCTO: TIntegerField
-      FieldName = 'ID_STOCK_PRODUCTO'
-    end
-    object ZQ_ProductoIMPORTE_VENTA: TFloatField
-      FieldName = 'IMPORTE_VENTA'
-      currency = True
-    end
-    object ZQ_ProductoIMPORTE_IVA: TFloatField
-      FieldName = 'IMPORTE_IVA'
-      currency = True
     end
     object ZQ_ProductoDEVOLUCION: TFloatField
       FieldName = 'DEVOLUCION'

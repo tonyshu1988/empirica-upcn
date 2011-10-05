@@ -1474,10 +1474,13 @@ object FBuscarProductoStock: TFBuscarProductoStock
         '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
         '_articulo,'
       
-        '       pr.precio_costo, pr.precio_venta, pr.coef_ganancia, pr.co' +
-        'ef_descuento,'
-      '       pr.impuesto_interno, pr.impuesto_iva, co.nombre as color'
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
+      
+        '       pre.impuesto_interno, pre.impuesto_iva, co.nombre as colo' +
+        'r'
       'from producto pr'
+      'left join precio pre on (pr.id_producto = pre.id_producto)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
@@ -1489,11 +1492,17 @@ object FBuscarProductoStock: TFBuscarProductoStock
         'articulo)'
       'left join color co on (pc.color = co.id_color)'
       'where pr.id_producto = :id_producto'
+      '  and pre.id_sucursal = :id_sucursal'
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     Params = <
       item
         DataType = ftUnknown
         Name = 'id_producto'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     Left = 120
@@ -1502,6 +1511,11 @@ object FBuscarProductoStock: TFBuscarProductoStock
       item
         DataType = ftUnknown
         Name = 'id_producto'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     object ZQ_ProductoNOMBRE: TStringField

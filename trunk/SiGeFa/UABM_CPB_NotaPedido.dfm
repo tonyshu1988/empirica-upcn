@@ -1,6 +1,6 @@
 object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
-  Left = 382
-  Top = 178
+  Left = 293
+  Top = 162
   Width = 892
   Height = 590
   Caption = 'ABM Nota de Pedido'
@@ -26,8 +26,8 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 884
-    Height = 492
+    Width = 876
+    Height = 481
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -354,11 +354,11 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
                 ParentFont = False
               end
               object Label43: TLabel
-                Left = 246
+                Left = 244
                 Top = 95
-                Width = 93
+                Width = 95
                 Height = 13
-                Caption = 'Coef. Ganancia:'
+                Caption = 'P. Costo c/Imp.:'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -497,8 +497,8 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 884
-      Height = 492
+      Width = 876
+      Height = 481
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -512,12 +512,12 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 874
+        Width = 866
         Height = 177
         Align = alTop
         TabOrder = 0
         DesignSize = (
-          874
+          866
           177)
         object DBTxtCPB_PuntoVenta: TDBText
           Left = 709
@@ -1299,20 +1299,20 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       object PanelEditar_Producto: TPanel
         Left = 5
         Top = 182
-        Width = 874
-        Height = 305
+        Width = 866
+        Height = 294
         Align = alClient
         TabOrder = 1
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
-          Top = 263
-          Width = 872
+          Top = 252
+          Width = 864
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            872
+            864
             41)
           object Label25: TLabel
             Left = 597
@@ -1397,8 +1397,8 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         object DBGridEditar_Producto: TDBGrid
           Left = 164
           Top = 1
-          Width = 709
-          Height = 262
+          Width = 701
+          Height = 251
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbProducto
@@ -1495,13 +1495,13 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
           Left = 1
           Top = 1
           Width = 163
-          Height = 262
+          Height = 251
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
             163
-            262)
+            251)
           object DBTxtCodBarra: TDBText
             Left = 3
             Top = 120
@@ -1602,8 +1602,8 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 884
-      Height = 492
+      Width = 876
+      Height = 481
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -1615,25 +1615,25 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 348
+        Left = 340
         Top = 5
         Width = 6
-        Height = 482
+        Height = 471
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 343
-        Height = 482
+        Width = 335
+        Height = 471
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 343
-          Height = 482
+          Width = 335
+          Height = 471
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -1713,10 +1713,10 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         end
       end
       object PanelCpbActual: TPanel
-        Left = 354
+        Left = 346
         Top = 5
         Width = 525
-        Height = 482
+        Height = 471
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -1725,7 +1725,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
           Left = 0
           Top = 0
           Width = 525
-          Height = 320
+          Height = 309
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -1733,7 +1733,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
             Left = 0
             Top = 0
             Width = 525
-            Height = 182
+            Height = 171
             Align = alClient
             Color = 14606012
             DataSource = DS_VerCpb_Producto
@@ -1805,7 +1805,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
           end
           object PanelCpbActual_ProductoDetalle: TPanel
             Left = 0
-            Top = 182
+            Top = 171
             Width = 525
             Height = 138
             Align = alBottom
@@ -1856,6 +1856,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
                   Height = 83
                   Align = alClient
                   DataField = 'LOGO'
+                  DataSource = DS_ImagenSuc
                   Stretch = True
                   TabOrder = 1
                 end
@@ -2073,7 +2074,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 320
+          Top = 309
           Width = 525
           Height = 162
           Align = alBottom
@@ -2260,7 +2261,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 884
+    Width = 876
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -2298,7 +2299,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 774
+      Left = 766
       Top = 1
       Width = 109
       Height = 17
@@ -2312,7 +2313,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 665
+      Left = 657
       Top = 1
       Width = 109
       Height = 17
@@ -2326,7 +2327,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       TabOrder = 1
     end
     object StaticTxtAlmacenado: TStaticText
-      Left = 556
+      Left = 548
       Top = 1
       Width = 109
       Height = 17
@@ -2343,7 +2344,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4281,153 +4282,6 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       DisplayFormat = '00000000'
     end
   end
-  object ZQ_VerCpb_Producto: TZQuery
-    Connection = DM.Conexion
-    AfterScroll = ZQ_VerCpb_ProductoAfterScroll
-    SQL.Strings = (
-      
-        'select cpbd.*, cab.cod_corto as cod_cabecera, cab.nombre as prod' +
-        'ucto, cab.imagen,'
-      
-        '       med.medida, color.nombre as color, marca.nombre_marca as ' +
-        'marca,'
-      
-        '       art.descripcion as articulo, tart.descripcion as tipo_art' +
-        'iculo,'
-      '       pro.cod_corto as cod_producto, pro.codigo_barra,'
-      
-        '       pro.precio_costo, pro.precio_venta, pro.coef_ganancia, pr' +
-        'o.coef_descuento,'
-      '       pro.impuesto_interno, pro.impuesto_iva'
-      'from comprobante_detalle cpbd'
-      'left join producto pro on (cpbd.id_producto = pro.id_producto)'
-      
-        'left join producto_cabecera cab on (pro.id_prod_cabecera = cab.i' +
-        'd_prod_cabecera)'
-      'left join marca on (cab.id_marca = marca.id_marca)'
-      'left join color on (cab.color = color.id_color)'
-      'left join articulo art on (cab.id_articulo = art.id_articulo)'
-      
-        'left join tipo_articulo tart on (art.id_tipo_articulo = tart.id_' +
-        'tipo_articulo)'
-      'left join medida med on (pro.id_medida = med.id_medida)'
-      'where cpbd.id_comprobante = :id_comprobante')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_comprobante'
-        ParamType = ptUnknown
-      end>
-    Left = 777
-    Top = 219
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_comprobante'
-        ParamType = ptUnknown
-      end>
-    object ZQ_VerCpb_ProductoID_COMPROBANTE_DETALLE: TIntegerField
-      FieldName = 'ID_COMPROBANTE_DETALLE'
-    end
-    object ZQ_VerCpb_ProductoID_COMPROBANTE: TIntegerField
-      FieldName = 'ID_COMPROBANTE'
-    end
-    object ZQ_VerCpb_ProductoID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-    end
-    object ZQ_VerCpb_ProductoDETALLE: TStringField
-      FieldName = 'DETALLE'
-      Size = 200
-    end
-    object ZQ_VerCpb_ProductoCANTIDAD: TFloatField
-      FieldName = 'CANTIDAD'
-    end
-    object ZQ_VerCpb_ProductoIMPORTE_FINAL: TFloatField
-      FieldName = 'IMPORTE_FINAL'
-      currency = True
-    end
-    object ZQ_VerCpb_ProductoPORC_DESCUENTO: TFloatField
-      FieldName = 'PORC_DESCUENTO'
-    end
-    object ZQ_VerCpb_ProductoBASE_IMPONIBLE: TFloatField
-      FieldName = 'BASE_IMPONIBLE'
-      currency = True
-    end
-    object ZQ_VerCpb_ProductoIMPORTE_UNITARIO: TFloatField
-      FieldName = 'IMPORTE_UNITARIO'
-      currency = True
-    end
-    object ZQ_VerCpb_ProductoPORC_IVA: TFloatField
-      FieldName = 'PORC_IVA'
-    end
-    object ZQ_VerCpb_ProductoCOD_CABECERA: TStringField
-      FieldName = 'COD_CABECERA'
-    end
-    object ZQ_VerCpb_ProductoPRODUCTO: TStringField
-      FieldName = 'PRODUCTO'
-      Size = 100
-    end
-    object ZQ_VerCpb_ProductoIMAGEN: TBlobField
-      FieldName = 'IMAGEN'
-    end
-    object ZQ_VerCpb_ProductoMEDIDA: TStringField
-      FieldName = 'MEDIDA'
-      Size = 30
-    end
-    object ZQ_VerCpb_ProductoCOLOR: TStringField
-      FieldName = 'COLOR'
-      Size = 30
-    end
-    object ZQ_VerCpb_ProductoMARCA: TStringField
-      FieldName = 'MARCA'
-      Size = 50
-    end
-    object ZQ_VerCpb_ProductoARTICULO: TStringField
-      FieldName = 'ARTICULO'
-      Size = 200
-    end
-    object ZQ_VerCpb_ProductoTIPO_ARTICULO: TStringField
-      FieldName = 'TIPO_ARTICULO'
-      Size = 200
-    end
-    object ZQ_VerCpb_ProductoCOD_PRODUCTO: TStringField
-      FieldName = 'COD_PRODUCTO'
-    end
-    object ZQ_VerCpb_ProductoCODIGO_BARRA: TStringField
-      FieldName = 'CODIGO_BARRA'
-      Size = 40
-    end
-    object ZQ_VerCpb_ProductoPRECIO_COSTO: TFloatField
-      FieldName = 'PRECIO_COSTO'
-    end
-    object ZQ_VerCpb_ProductoPRECIO_VENTA: TFloatField
-      FieldName = 'PRECIO_VENTA'
-    end
-    object ZQ_VerCpb_ProductoCOEF_GANANCIA: TFloatField
-      FieldName = 'COEF_GANANCIA'
-    end
-    object ZQ_VerCpb_ProductoCOEF_DESCUENTO: TFloatField
-      FieldName = 'COEF_DESCUENTO'
-    end
-    object ZQ_VerCpb_ProductoIMPUESTO_IVA: TFloatField
-      FieldName = 'IMPUESTO_IVA'
-    end
-    object ZQ_VerCpb_ProductoIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object ZQ_VerCpb_ProductoCANTIDAD_RECIBIDA: TFloatField
-      FieldName = 'CANTIDAD_RECIBIDA'
-    end
-    object ZQ_VerCpb_ProductoCANTIDAD_ALMACENADA: TFloatField
-      FieldName = 'CANTIDAD_ALMACENADA'
-    end
-    object ZQ_VerCpb_ProductoID_STOCK_PRODUCTO: TIntegerField
-      FieldName = 'ID_STOCK_PRODUCTO'
-    end
-    object ZQ_VerCpb_ProductoIMPORTE_VENTA: TFloatField
-      FieldName = 'IMPORTE_VENTA'
-    end
-  end
   object DS_VerCpb: TDataSource
     DataSet = ZQ_VerCpb
     Left = 34
@@ -5388,10 +5242,267 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
     Left = 29
     Top = 320
   end
+  object DS_ActualizarPrecio: TDataSource
+    DataSet = ZQ_ActualizarPrecio
+    Left = 752
+    Top = 139
+  end
+  object DS_ActualizarLista: TDataSource
+    DataSet = ZQ_ActualizarLista
+    Left = 649
+    Top = 139
+  end
+  object EKOrd_Actualizar: TEKOrdenarGrilla
+    Grilla = DBGridActualizarPrecio
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Unitario'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = False
+    PermitirMover = False
+    PermitirFiltrar = False
+    Left = 552
+    Top = 91
+  end
+  object ZU_ActualizarPrecio: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM PRECIO'
+      'WHERE'
+      '  PRECIO.ID_PRECIO = :OLD_ID_PRECIO')
+    InsertSQL.Strings = (
+      'INSERT INTO PRECIO'
+      
+        '  (PRECIO.PRECIO_COSTO, PRECIO.PRECIO_VENTA, PRECIO.IMPUESTO_IVA' +
+        ', PRECIO.PRECIO_COSTO_CIMPUESTOS)'
+      'VALUES'
+      
+        '  (:PRECIO_COSTO, :PRECIO_VENTA, :IMPUESTO_IVA, :PRECIO_COSTO_CI' +
+        'MPUESTOS)')
+    ModifySQL.Strings = (
+      'UPDATE PRECIO SET'
+      '  PRECIO.PRECIO_COSTO = :PRECIO_COSTO,'
+      '  PRECIO.PRECIO_VENTA = :PRECIO_VENTA,'
+      '  PRECIO.IMPUESTO_IVA = :IMPUESTO_IVA,'
+      '  PRECIO.PRECIO_COSTO_CIMPUESTOS = '
+      ':PRECIO_COSTO_CIMPUESTOS'
+      'WHERE'
+      '  PRECIO.ID_PRECIO = :OLD_ID_PRECIO')
+    Left = 552
+    Top = 139
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO_COSTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO_VENTA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPUESTO_IVA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PRECIO_COSTO_CIMPUESTOS'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_ID_PRECIO'
+        ParamType = ptUnknown
+      end>
+  end
+  object ZQ_ActualizarLista: TZQuery
+    Connection = DM.Conexion
+    AfterScroll = ZQ_ActualizarListaAfterScroll
+    SQL.Strings = (
+      
+        'select cpbd.*, cab.cod_corto as cod_cabecera, cab.nombre as prod' +
+        'ucto, cab.imagen,'
+      
+        '       med.medida, color.nombre as color, marca.nombre_marca as ' +
+        'marca,'
+      
+        '       art.descripcion as articulo, tart.descripcion as tipo_art' +
+        'iculo,'
+      '       pro.cod_corto as cod_producto, pro.codigo_barra,'
+      
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
+      
+        '       pre.impuesto_interno, pre.impuesto_iva, cpb.id_sucursal, ' +
+        'pre.id_precio'
+      'from comprobante_detalle cpbd'
+      
+        'left join comprobante cpb on (cpbd.id_comprobante = cpb.id_compr' +
+        'obante)'
+      'left join producto pro on (cpbd.id_producto = pro.id_producto)'
+      
+        'left join precio pre on (pro.id_producto = pre.id_producto) and ' +
+        '(pre.id_sucursal = cpb.id_sucursal)'
+      
+        'left join producto_cabecera cab on (pro.id_prod_cabecera = cab.i' +
+        'd_prod_cabecera)'
+      'left join marca on (cab.id_marca = marca.id_marca)'
+      'left join color on (cab.color = color.id_color)'
+      'left join articulo art on (cab.id_articulo = art.id_articulo)'
+      
+        'left join tipo_articulo tart on (art.id_tipo_articulo = tart.id_' +
+        'tipo_articulo)'
+      'left join medida med on (pro.id_medida = med.id_medida)'
+      'where cpbd.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 649
+    Top = 91
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ActualizarListaID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+      Required = True
+    end
+    object ZQ_ActualizarListaID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_ActualizarListaID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_ActualizarListaDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object ZQ_ActualizarListaCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_ActualizarListaIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+    end
+    object ZQ_ActualizarListaPORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_ActualizarListaBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_ActualizarListaIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+      currency = True
+    end
+    object ZQ_ActualizarListaIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_ActualizarListaPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_ActualizarListaCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_ActualizarListaCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+    object ZQ_ActualizarListaID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_ActualizarListaIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_ActualizarListaIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_ActualizarListaCOD_CABECERA: TStringField
+      FieldName = 'COD_CABECERA'
+    end
+    object ZQ_ActualizarListaPRODUCTO: TStringField
+      FieldName = 'PRODUCTO'
+      Size = 100
+    end
+    object ZQ_ActualizarListaIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object ZQ_ActualizarListaMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_ActualizarListaCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
+    object ZQ_ActualizarListaMARCA: TStringField
+      FieldName = 'MARCA'
+      Size = 50
+    end
+    object ZQ_ActualizarListaARTICULO: TStringField
+      FieldName = 'ARTICULO'
+      Size = 200
+    end
+    object ZQ_ActualizarListaTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object ZQ_ActualizarListaCOD_PRODUCTO: TStringField
+      FieldName = 'COD_PRODUCTO'
+    end
+    object ZQ_ActualizarListaCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ActualizarListaPRECIO_COSTO: TFloatField
+      FieldName = 'PRECIO_COSTO'
+    end
+    object ZQ_ActualizarListaPRECIO_VENTA: TFloatField
+      FieldName = 'PRECIO_VENTA'
+    end
+    object ZQ_ActualizarListaCOEF_GANANCIA: TFloatField
+      FieldName = 'COEF_GANANCIA'
+    end
+    object ZQ_ActualizarListaCOEF_DESCUENTO: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+    end
+    object ZQ_ActualizarListaIMPUESTO_INTERNO_1: TFloatField
+      FieldName = 'IMPUESTO_INTERNO_1'
+    end
+    object ZQ_ActualizarListaIMPUESTO_IVA: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+    object ZQ_ActualizarListaID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
+    end
+    object ZQ_ActualizarListaID_PRECIO: TIntegerField
+      FieldName = 'ID_PRECIO'
+      Required = True
+    end
+  end
   object ZQ_ActualizarPrecio: TZQuery
     Connection = DM.Conexion
     UpdateObject = ZU_ActualizarPrecio
-    CachedUpdates = True
     SQL.Strings = (
       
         'select pro.id_producto, cab.cod_corto as cod_cabecera, cab.nombr' +
@@ -5404,13 +5515,16 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         'iculo,'
       '       pro.cod_corto as cod_producto, pro.codigo_barra,'
       
-        '       pro.precio_costo, pro.precio_venta, pro.coef_ganancia, pr' +
-        'o.coef_descuento,'
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
       
-        '       pro.impuesto_interno, pro.impuesto_iva, pro.precio_costo_' +
+        '       pre.impuesto_interno, pre.impuesto_iva, pre.precio_costo_' +
         'cimpuestos,'
-      '       pro.impuesto_adicional1, pro.impuesto_adicional2'
+      
+        '       pre.impuesto_adicional1, pre.impuesto_adicional2, pre.id_' +
+        'precio'
       'from producto pro'
+      'left join precio pre on (pro.id_producto = pre.id_producto)'
       
         'left join producto_cabecera cab on (pro.id_prod_cabecera = cab.i' +
         'd_prod_cabecera)'
@@ -5421,11 +5535,17 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         'left join tipo_articulo tart on (art.id_tipo_articulo = tart.id_' +
         'tipo_articulo)'
       'left join medida med on (pro.id_medida = med.id_medida)'
-      'where pro.id_producto = :id_producto')
+      'where pro.id_producto = :id_producto'
+      '  and pre.id_sucursal = :id_sucursal')
     Params = <
       item
         DataType = ftUnknown
         Name = 'id_producto'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     Left = 752
@@ -5435,7 +5555,16 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         DataType = ftUnknown
         Name = 'id_producto'
         ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
       end>
+    object ZQ_ActualizarPrecioID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
     object ZQ_ActualizarPrecioCOD_CABECERA: TStringField
       FieldName = 'COD_CABECERA'
     end
@@ -5503,35 +5632,35 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
     object ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2: TFloatField
       FieldName = 'IMPUESTO_ADICIONAL2'
     end
-    object ZQ_ActualizarPrecioID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
+    object ZQ_ActualizarPrecioID_PRECIO: TIntegerField
+      FieldName = 'ID_PRECIO'
+      Required = True
     end
   end
-  object DS_ActualizarPrecio: TDataSource
-    DataSet = ZQ_ActualizarPrecio
-    Left = 752
-    Top = 139
-  end
-  object ZQ_ActualizarLista: TZQuery
+  object ZQ_VerCpb_Producto: TZQuery
     Connection = DM.Conexion
-    AfterScroll = ZQ_ActualizarListaAfterScroll
+    AfterScroll = ZQ_VerCpb_ProductoAfterScroll
     SQL.Strings = (
       
-        'select cpbd.*, cab.cod_corto as cod_cabecera, cab.nombre as prod' +
-        'ucto, cab.imagen,'
-      
-        '       med.medida, color.nombre as color, marca.nombre_marca as ' +
-        'marca,'
+        'select cpbd.id_producto, cab.nombre as producto, med.medida, cpb' +
+        'd.cantidad,'
+      '       color.nombre as color, marca.nombre_marca as marca,'
       
         '       art.descripcion as articulo, tart.descripcion as tipo_art' +
         'iculo,'
-      '       pro.cod_corto as cod_producto, pro.codigo_barra,'
       
-        '       pro.precio_costo, pro.precio_venta, pro.coef_ganancia, pr' +
-        'o.coef_descuento,'
-      '       pro.impuesto_interno, pro.impuesto_iva'
+        '       pro.cod_corto as cod_producto, pro.codigo_barra, cab.cod_' +
+        'corto as cod_cabecera,'
+      
+        '       cpbd.importe_venta, cpbd.importe_final, cab.imagen, cpbd.' +
+        'detalle, pre.precio_costo,'
+      '       cpbd.importe_unitario'
       'from comprobante_detalle cpbd'
+      
+        'left join comprobante cpb on (cpbd.id_comprobante = cpb.id_compr' +
+        'obante)'
       'left join producto pro on (cpbd.id_producto = pro.id_producto)'
+      'left join precio pre on (pro.id_producto = pre.id_producto)'
       
         'left join producto_cabecera cab on (pro.id_prod_cabecera = cab.i' +
         'd_prod_cabecera)'
@@ -5542,207 +5671,84 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         'left join tipo_articulo tart on (art.id_tipo_articulo = tart.id_' +
         'tipo_articulo)'
       'left join medida med on (pro.id_medida = med.id_medida)'
-      'where cpbd.id_comprobante = :id_comprobante')
+      'where cpbd.id_comprobante = :id_comprobante'
+      '  and pre.id_sucursal = cpb.id_sucursal')
     Params = <
       item
         DataType = ftUnknown
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 649
-    Top = 91
+    Left = 769
+    Top = 216
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    object ZQ_ActualizarListaID_COMPROBANTE_DETALLE: TIntegerField
-      FieldName = 'ID_COMPROBANTE_DETALLE'
-      Required = True
-    end
-    object ZQ_ActualizarListaID_COMPROBANTE: TIntegerField
-      FieldName = 'ID_COMPROBANTE'
-    end
-    object ZQ_ActualizarListaID_PRODUCTO: TIntegerField
+    object ZQ_VerCpb_ProductoID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
-      Required = True
     end
-    object ZQ_ActualizarListaDETALLE: TStringField
-      FieldName = 'DETALLE'
-      Size = 200
-    end
-    object ZQ_ActualizarListaCANTIDAD: TFloatField
-      FieldName = 'CANTIDAD'
-    end
-    object ZQ_ActualizarListaIMPORTE_FINAL: TFloatField
-      FieldName = 'IMPORTE_FINAL'
-      currency = True
-    end
-    object ZQ_ActualizarListaPORC_DESCUENTO: TFloatField
-      FieldName = 'PORC_DESCUENTO'
-    end
-    object ZQ_ActualizarListaBASE_IMPONIBLE: TFloatField
-      FieldName = 'BASE_IMPONIBLE'
-      currency = True
-    end
-    object ZQ_ActualizarListaIMPORTE_UNITARIO: TFloatField
-      FieldName = 'IMPORTE_UNITARIO'
-      currency = True
-    end
-    object ZQ_ActualizarListaIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object ZQ_ActualizarListaPORC_IVA: TFloatField
-      FieldName = 'PORC_IVA'
-    end
-    object ZQ_ActualizarListaCANTIDAD_RECIBIDA: TFloatField
-      FieldName = 'CANTIDAD_RECIBIDA'
-    end
-    object ZQ_ActualizarListaCANTIDAD_ALMACENADA: TFloatField
-      FieldName = 'CANTIDAD_ALMACENADA'
-    end
-    object ZQ_ActualizarListaID_STOCK_PRODUCTO: TIntegerField
-      FieldName = 'ID_STOCK_PRODUCTO'
-    end
-    object ZQ_ActualizarListaIMPORTE_VENTA: TFloatField
-      FieldName = 'IMPORTE_VENTA'
-    end
-    object ZQ_ActualizarListaIMPORTE_IVA: TFloatField
-      FieldName = 'IMPORTE_IVA'
-      currency = True
-    end
-    object ZQ_ActualizarListaCOD_CABECERA: TStringField
-      FieldName = 'COD_CABECERA'
-    end
-    object ZQ_ActualizarListaPRODUCTO: TStringField
+    object ZQ_VerCpb_ProductoPRODUCTO: TStringField
       FieldName = 'PRODUCTO'
       Size = 100
     end
-    object ZQ_ActualizarListaIMAGEN: TBlobField
-      FieldName = 'IMAGEN'
-    end
-    object ZQ_ActualizarListaMEDIDA: TStringField
+    object ZQ_VerCpb_ProductoMEDIDA: TStringField
       FieldName = 'MEDIDA'
       Size = 30
     end
-    object ZQ_ActualizarListaCOLOR: TStringField
+    object ZQ_VerCpb_ProductoCOLOR: TStringField
       FieldName = 'COLOR'
       Size = 30
     end
-    object ZQ_ActualizarListaMARCA: TStringField
+    object ZQ_VerCpb_ProductoMARCA: TStringField
       FieldName = 'MARCA'
       Size = 50
     end
-    object ZQ_ActualizarListaARTICULO: TStringField
+    object ZQ_VerCpb_ProductoARTICULO: TStringField
       FieldName = 'ARTICULO'
       Size = 200
     end
-    object ZQ_ActualizarListaTIPO_ARTICULO: TStringField
+    object ZQ_VerCpb_ProductoTIPO_ARTICULO: TStringField
       FieldName = 'TIPO_ARTICULO'
       Size = 200
     end
-    object ZQ_ActualizarListaCOD_PRODUCTO: TStringField
+    object ZQ_VerCpb_ProductoCOD_PRODUCTO: TStringField
       FieldName = 'COD_PRODUCTO'
     end
-    object ZQ_ActualizarListaCODIGO_BARRA: TStringField
+    object ZQ_VerCpb_ProductoCODIGO_BARRA: TStringField
       FieldName = 'CODIGO_BARRA'
       Size = 40
     end
-    object ZQ_ActualizarListaPRECIO_COSTO: TFloatField
+    object ZQ_VerCpb_ProductoCOD_CABECERA: TStringField
+      FieldName = 'COD_CABECERA'
+    end
+    object ZQ_VerCpb_ProductoIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      currency = True
+    end
+    object ZQ_VerCpb_ProductoIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+      currency = True
+    end
+    object ZQ_VerCpb_ProductoIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object ZQ_VerCpb_ProductoDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object ZQ_VerCpb_ProductoCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_VerCpb_ProductoPRECIO_COSTO: TFloatField
       FieldName = 'PRECIO_COSTO'
       currency = True
     end
-    object ZQ_ActualizarListaPRECIO_VENTA: TFloatField
-      FieldName = 'PRECIO_VENTA'
+    object ZQ_VerCpb_ProductoIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
       currency = True
     end
-    object ZQ_ActualizarListaCOEF_GANANCIA: TFloatField
-      FieldName = 'COEF_GANANCIA'
-    end
-    object ZQ_ActualizarListaCOEF_DESCUENTO: TFloatField
-      FieldName = 'COEF_DESCUENTO'
-    end
-    object ZQ_ActualizarListaIMPUESTO_INTERNO_1: TFloatField
-      FieldName = 'IMPUESTO_INTERNO_1'
-    end
-    object ZQ_ActualizarListaIMPUESTO_IVA: TFloatField
-      FieldName = 'IMPUESTO_IVA'
-    end
-  end
-  object DS_ActualizarLista: TDataSource
-    DataSet = ZQ_ActualizarLista
-    Left = 649
-    Top = 139
-  end
-  object EKOrd_Actualizar: TEKOrdenarGrilla
-    Grilla = DBGridActualizarPrecio
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Producto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Unitario'
-        Visible = True
-      end>
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = False
-    PermitirMover = False
-    PermitirFiltrar = False
-    Left = 552
-    Top = 91
-  end
-  object ZU_ActualizarPrecio: TZUpdateSQL
-    DeleteSQL.Strings = (
-      'DELETE FROM PRODUCTO'
-      'WHERE'
-      '  PRODUCTO.ID_PRODUCTO = :OLD_ID_PRODUCTO')
-    InsertSQL.Strings = (
-      'INSERT INTO PRODUCTO'
-      
-        '  (PRODUCTO.PRECIO_COSTO, PRODUCTO.PRECIO_VENTA, PRODUCTO.PRECIO' +
-        '_COSTO_CIMPUESTOS)'
-      'VALUES'
-      '  (:PRECIO_COSTO, :PRECIO_VENTA, :PRECIO_COSTO_CIMPUESTOS)')
-    ModifySQL.Strings = (
-      'UPDATE PRODUCTO SET'
-      '  PRODUCTO.PRECIO_COSTO = :PRECIO_COSTO,'
-      '  PRODUCTO.PRECIO_VENTA = :PRECIO_VENTA,'
-      '  PRODUCTO.PRECIO_COSTO_CIMPUESTOS =  :PRECIO_COSTO_CIMPUESTOS'
-      'WHERE'
-      '  PRODUCTO.ID_PRODUCTO = :OLD_ID_PRODUCTO')
-    Left = 552
-    Top = 139
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'PRECIO_COSTO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'PRECIO_VENTA'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'PRECIO_COSTO_CIMPUESTOS'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_ID_PRODUCTO'
-        ParamType = ptUnknown
-      end>
   end
 end

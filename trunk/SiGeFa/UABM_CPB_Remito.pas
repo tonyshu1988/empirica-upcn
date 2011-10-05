@@ -354,6 +354,8 @@ type
     lblAnulado: TLabel;
     DBTxtMonto: TDBText;
     Label1: TLabel;
+    ZQ_VerCpb_ProductoIMPORTE_IVA: TFloatField;
+    ZQ_VerCpb_ProductoIMPUESTO_INTERNO_1: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);

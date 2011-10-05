@@ -324,6 +324,8 @@ type
     lblAnulado: TLabel;
     DBTxtMonto: TDBText;
     Label1: TLabel;
+    ZQ_VerCpb_ProductoIMPORTE_IVA: TFloatField;
+    ZQ_VerCpb_ProductoIMPUESTO_INTERNO_1: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -646,7 +648,7 @@ begin
   EKSuma_Productos.RecalcAll; //el importe del comprobante es igual a la suma del importe de los productos
   ZQ_ComprobanteBASE_IMPONIBLE.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
   ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_Productos.SumCollection[2].SumValue;
-  ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteIMPORTE_TOTAL.AsFloat;
+  ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteIMPORTE_TOTAL.AsFloat; //EKSuma_Productos.SumCollection[2].SumValue;
   ZQ_ComprobanteIMPORTE_DESCUENTO.AsFloat:= ZQ_ComprobanteBASE_IMPONIBLE.AsFloat - ZQ_ComprobanteIMPORTE_TOTAL.AsFloat;
   if ZQ_ComprobanteBASE_IMPONIBLE.AsFloat <> 0 then
     ZQ_ComprobantePORC_DESCUENTO.AsFloat:= ZQ_ComprobanteIMPORTE_DESCUENTO.AsFloat / ZQ_ComprobanteBASE_IMPONIBLE.AsFloat;
@@ -1031,6 +1033,7 @@ begin
 
   ZQ_CpbProductoBASE_IMPONIBLE.AsFloat:= imponible;
   ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= final;
+  ZQ_CpbProductoIMPORTE_VENTA.AsFloat:= final;  
 end;
 
 
