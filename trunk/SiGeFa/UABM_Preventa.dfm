@@ -6397,7 +6397,9 @@ object FABM_Preventa: TFABM_Preventa
     SQL.Strings = (
       'select sp.id_producto,'
       '       '#39'C'#243'digo: '#39'||pr.cod_corto||'
-      '       COALESCE ('#39' | Producto: '#39' || pc.nombre,'#39#39')||'
+      
+        '       COALESCE ('#39' | Producto: '#39' ||pc.nombre||'#39'  -  M: '#39'||coales' +
+        'ce(m.medida,'#39#39'),'#39#39')||'
       '       COALESCE ('#39' | Stock: '#39' || sp.stock_actual,'#39#39')||'
       '       COALESCE ('#39' | Sucursal: '#39' || su.nombre,'#39#39')||'
       '        COALESCE ('#39' | Secci'#243'n: '#39' || ps.seccion,'#39#39')||'
@@ -6407,6 +6409,7 @@ object FABM_Preventa: TFABM_Preventa
       '         AS posicSucursal'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
+      'left join medida m on (pr.id_medida=m.id_medida)'
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
         'prod_cabecera)'
@@ -6418,8 +6421,7 @@ object FABM_Preventa: TFABM_Preventa
       
         'where (ps.punto_salida='#39'S'#39')and(pr.baja<>'#39'S'#39')and(sp.stock_actual>' +
         '0)'
-      'order by 2'
-      '')
+      'order by 2')
     CampoBuscar = 'posicSucursal'
     CampoClave = 'id_producto'
     BuscarEnQuery = ZQ_Productos
@@ -6433,12 +6435,17 @@ object FABM_Preventa: TFABM_Preventa
     SQL.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
-        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.*,p' +
-        'c.imagen'
+        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,pc.im' +
+        'agen'
       
         ',pc.nombre||'#39'  -  M: '#39'||coalesce(m.medida,'#39#39')||'#39'  -  CB:'#39'||coale' +
         'sce(p.codigo_barra,'#39#39') DETALLE_PROD, sp.stock_actual,sp.id_stock' +
-        '_producto'
+        '_producto,'
+      
+        'pr.*,p.id_producto,p.id_medida,p.id_prod_cabecera,p.descripcion,' +
+        'p.cod_corto,p.codigo_barra,p.stock_max,p.stock_min,p.llevar_stoc' +
+        'k,'
+      'p.baja'
       'from producto p'
       'join stock_producto sp on (sp.id_producto=p.id_producto)'
       
@@ -6454,13 +6461,11 @@ object FABM_Preventa: TFABM_Preventa
         'rticulo)'
       'left join marca ma on (pc.id_marca = ma.id_marca)'
       'join configuracion c on (c.id_sucursal=ps.id_sucursal)'
+      
+        'left join precio pr on ((pr.id_producto=p.id_producto)and(pr.id_' +
+        'sucursal=c.id_sucursal))'
       'where (pc.baja <> '#39'S'#39')and(ps.punto_salida='#39'S'#39')and(p.baja<>'#39'S'#39')'
       'and(p.cod_corto=:prod)'
-      ''
-      ''
-      ''
-      ''
-      ''
       '')
     Params = <
       item

@@ -187,12 +187,6 @@ type
     ZQ_ProductosTIPO_ARTICULO: TStringField;
     ZQ_ProductosNOMBRE_MARCA: TStringField;
     ZQ_ProductosDESCRIPCION: TStringField;
-    ZQ_ProductosPRECIO_COSTO: TFloatField;
-    ZQ_ProductosPRECIO_VENTA: TFloatField;
-    ZQ_ProductosCOEF_GANANCIA: TFloatField;
-    ZQ_ProductosCOEF_DESCUENTO: TFloatField;
-    ZQ_ProductosIMPUESTO_INTERNO: TFloatField;
-    ZQ_ProductosIMPUESTO_IVA: TFloatField;
     ZQ_ProductosCOD_CORTO: TStringField;
     ZQ_ProductosCODIGO_BARRA: TStringField;
     ZQ_ProductosID_PRODUCTO: TIntegerField;
@@ -455,11 +449,6 @@ type
     Label44: TLabel;
     Label45: TLabel;
     edRecibido: TDBEdit;
-    ZQ_ProductosPRECIO1: TFloatField;
-    ZQ_ProductosPRECIO2: TFloatField;
-    ZQ_ProductosPRECIO3: TFloatField;
-    ZQ_ProductosPRECIO4: TFloatField;
-    ZQ_ProductosPRECIO5: TFloatField;
     CD_DetalleFacturaPRECIO1: TFloatField;
     CD_DetalleFacturaPRECIO2: TFloatField;
     CD_DetalleFacturaPRECIO3: TFloatField;
@@ -486,6 +475,21 @@ type
     ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField;
     ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField;
     ZQ_ProductosBAJA: TStringField;
+    ZQ_ProductosID_PRECIO: TIntegerField;
+    ZQ_ProductosID_SUCURSAL: TIntegerField;
+    ZQ_ProductosPRECIO_COSTO: TFloatField;
+    ZQ_ProductosPRECIO_VENTA: TFloatField;
+    ZQ_ProductosCOEF_GANANCIA: TFloatField;
+    ZQ_ProductosCOEF_DESCUENTO: TFloatField;
+    ZQ_ProductosIMPUESTO_INTERNO: TFloatField;
+    ZQ_ProductosIMPUESTO_IVA: TFloatField;
+    ZQ_ProductosPRECIO1: TFloatField;
+    ZQ_ProductosPRECIO2: TFloatField;
+    ZQ_ProductosPRECIO3: TFloatField;
+    ZQ_ProductosPRECIO4: TFloatField;
+    ZQ_ProductosPRECIO5: TFloatField;
+    CD_DetalleFacturaIMPORTE_IF: TFloatField;
+    ZQ_ComprobanteDetalleIMPORTE_IF: TFloatField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -552,6 +556,7 @@ type
     procedure edRecibidoExit(Sender: TObject);
     procedure calcularEfectivo();
     procedure cancelarProducto();
+    procedure ProrrateoFiscal();
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -683,14 +688,14 @@ begin
      if id='C' then
       begin
         ZQ_Productos.Close;
-        ZQ_Productos.sql[12]:=Format('and(p.cod_corto=%s)',[IdProd]);
+        ZQ_Productos.sql[15]:=Format('and(p.cod_corto=%s)',[IdProd]);
         ZQ_Productos.Open;
       end;
 
      if id='I' then
       begin
         ZQ_Productos.Close;
-        ZQ_Productos.sql[12]:=Format('and(p.id_producto=%s)',[IdProd]);
+        ZQ_Productos.sql[15]:=Format('and(p.id_producto=%s)',[IdProd]);
         ZQ_Productos.Open;
       end;
 
@@ -698,7 +703,7 @@ begin
      if id='B' then
        begin
         ZQ_Productos.Close;
-        ZQ_Productos.sql[12]:=Format('and(p.codigo_barra=%s)',[cod]);
+        ZQ_Productos.sql[15]:=Format('and(p.codigo_barra=%s)',[cod]);
         ZQ_Productos.Open;
        end;
 
@@ -1414,6 +1419,7 @@ procedure TFCajero.grabarDetallesFactura;
 begin
 
     Prorrateo();
+    ProrrateoFiscal();
     CD_DetalleFactura.First;
       while not CD_DetalleFactura.Eof do
       begin
@@ -1431,6 +1437,7 @@ begin
         ZQ_ComprobanteDetallePORC_IVA.AsFloat := CD_DetalleFacturaPORC_IVA.AsFloat;
         ZQ_ComprobanteDetalleIMPORTE_IVA.AsFloat:= CD_DetalleFacturaIMPORTE_IVA.AsFloat;
         ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
+        ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_IF.AsFloat;
         ZQ_ComprobanteDetalleID_STOCK_PRODUCTO.AsInteger:=CD_DetalleFacturaID_PROD_STOCK.AsInteger;
         ZQ_ComprobanteDetalle.Post;
 
@@ -1877,6 +1884,51 @@ begin
     end
 end;
 
+procedure TFCajero.ProrrateoFiscal();
+var
+totalProds,totalFP,coefic,acum:Double;
+cant,i:Integer;
+begin
+  //Can Productos
+   cant:=CD_DetalleFactura.RecordCount;
+   totalProds:=acumulado;
+   totalFP:=0;
+   acum:=0;
+
+  CD_Fpago.First;
+  while not(CD_Fpago.Eof) do
+   begin
+      ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
+      if (ZQ_FormasPagoIF.AsString='S') then
+       totalFP:=totalFP + CD_FpagoIMPORTE.AsFloat;
+      CD_Fpago.Next;
+   end;
+
+   coefic:= (totalFP/totalProds);
+
+   if (totalFP>0) then
+    begin
+      CD_DetalleFactura.First;
+       i:=1;
+       while not(CD_DetalleFactura.Eof) do
+       begin
+          CD_DetalleFactura.Edit;
+          //Si es el último
+          if (i=cant) then
+              begin
+                CD_DetalleFacturaIMPORTE_IF.AsFloat := totalFP - acum;
+              end
+          else
+              CD_DetalleFacturaIMPORTE_IF.AsFloat := CD_DetalleFacturaIMPORTE_VENTA.AsFloat * coefic;
+
+          acum:= acum+CD_DetalleFacturaIMPORTE_IF.AsFloat;
+          CD_DetalleFactura.Post;
+          CD_DetalleFactura.Next;
+          i:=i+1;
+       end;
+    end
+end;
+
 procedure TFCajero.APreventaExecute(Sender: TObject);
 begin
   btPreventa.Click;
@@ -1929,7 +1981,7 @@ begin
       begin
 
         ZQ_Productos.Close;
-        ZQ_Productos.sql[12]:=Format('and(p.id_producto=%s)',[ZQ_PreventaProductosID_PRODUCTO.AsString]);
+        ZQ_Productos.sql[15]:=Format('and(p.id_producto=%s)',[ZQ_PreventaProductosID_PRODUCTO.AsString]);
         ZQ_Productos.Open;
 
         CD_DetalleFactura.Append;
