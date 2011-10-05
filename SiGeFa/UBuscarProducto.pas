@@ -21,6 +21,20 @@ type
     DS_Producto: TDataSource;
     EKOrdenarGrilla: TEKOrdenarGrilla;
     EKBuscarProducto: TEKBusquedaAvanzada;
+    btnSeleccinarYSalir: TdxBarLargeButton;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ASeleccionar: TAction;
+    ASalir: TAction;
+    btnSeleccionarTodos: TdxBarLargeButton;
+    ASelTodos: TAction;
+    ZQ_ProductosProveedor: TZQuery;
+    EKBuscarProductoEmpresa: TEKBusquedaAvanzada;
+    ZQ_EmpresaMarca: TZQuery;
+    ZQ_EmpresaMarcaID: TIntegerField;
+    ZQ_EmpresaMarcaID_EMPRESA: TIntegerField;
+    ZQ_EmpresaMarcaID_MARCA: TIntegerField;
+    ZQ_EmpresaMarcaDESCRIPCION: TStringField;
     ZQ_ProductoNOMBRE: TStringField;
     ZQ_ProductoCOD_CORTO: TStringField;
     ZQ_ProductoID_PRODUCTO: TIntegerField;
@@ -32,21 +46,7 @@ type
     ZQ_ProductoBAJA: TStringField;
     ZQ_ProductoNOMBRE_ARTICULO: TStringField;
     ZQ_ProductoTIPO_ARTICULO: TStringField;
-    btnSeleccinarYSalir: TdxBarLargeButton;
-    ZQ_ProductoPRECIO_COSTO: TFloatField;
-    ZQ_ProductoPRECIO_VENTA: TFloatField;
-    ZQ_ProductoCOEF_GANANCIA: TFloatField;
-    ZQ_ProductoCOEF_DESCUENTO: TFloatField;
-    ZQ_ProductoIMPUESTO_INTERNO: TFloatField;
-    ZQ_ProductoIMPUESTO_IVA: TFloatField;
-    ATeclasRapidas: TActionManager;
-    ABuscar: TAction;
-    ASeleccionar: TAction;
-    ASalir: TAction;
     ZQ_ProductoCOLOR: TStringField;
-    btnSeleccionarTodos: TdxBarLargeButton;
-    ASelTodos: TAction;
-    ZQ_ProductosProveedor: TZQuery;
     ZQ_ProductosProveedorNOMBRE: TStringField;
     ZQ_ProductosProveedorCOD_CORTO: TStringField;
     ZQ_ProductosProveedorID_PRODUCTO: TIntegerField;
@@ -58,19 +58,17 @@ type
     ZQ_ProductosProveedorBAJA: TStringField;
     ZQ_ProductosProveedorNOMBRE_ARTICULO: TStringField;
     ZQ_ProductosProveedorTIPO_ARTICULO: TStringField;
+    ZQ_ProductosProveedorCOLOR: TStringField;
+    ZQ_ProductoPRECIO_COSTO: TFloatField;
+    ZQ_ProductoPRECIO_VENTA: TFloatField;
+    ZQ_ProductoCOEF_GANANCIA: TFloatField;
+    ZQ_ProductoCOEF_DESCUENTO: TFloatField;
+    ZQ_ProductoIMPUESTO_IVA: TFloatField;
     ZQ_ProductosProveedorPRECIO_COSTO: TFloatField;
     ZQ_ProductosProveedorPRECIO_VENTA: TFloatField;
     ZQ_ProductosProveedorCOEF_GANANCIA: TFloatField;
     ZQ_ProductosProveedorCOEF_DESCUENTO: TFloatField;
-    ZQ_ProductosProveedorIMPUESTO_INTERNO: TFloatField;
     ZQ_ProductosProveedorIMPUESTO_IVA: TFloatField;
-    ZQ_ProductosProveedorCOLOR: TStringField;
-    EKBusquedaProductoEmpresa: TEKBusquedaAvanzada;
-    ZQ_EmpresaMarca: TZQuery;
-    ZQ_EmpresaMarcaID: TIntegerField;
-    ZQ_EmpresaMarcaID_EMPRESA: TIntegerField;
-    ZQ_EmpresaMarcaID_MARCA: TIntegerField;
-    ZQ_EmpresaMarcaDESCRIPCION: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
@@ -108,6 +106,7 @@ begin
   close;
 end;
 
+
 procedure TFBuscarProducto.filtrarEmpresa(idEmpresa: integer);
 begin
   ZQ_EmpresaMarca.Close;
@@ -121,13 +120,14 @@ begin
   end;
 
   buscarDeEmpresas:= true;
-  EKBusquedaProductoEmpresa.SQL_Where.ValueFromIndex[1]:= IntToStr(idEmpresa)
+  EKBuscarProductoEmpresa.SQL_Where.ValueFromIndex[2]:= IntToStr(idEmpresa);
 end;
+
 
 procedure TFBuscarProducto.btnBuscarClick(Sender: TObject);
 begin
   if buscarDeEmpresas then
-    EKBusquedaProductoEmpresa.Buscar
+    EKBuscarProductoEmpresa.Buscar
   else
     EKBuscarProducto.Buscar;
 end;
@@ -180,6 +180,9 @@ procedure TFBuscarProducto.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla.CargarConfigColumnas;
   buscarDeEmpresas:= false;
+
+  EKBuscarProducto.SQL_Where.ValueFromIndex[1]:= IntToStr(SUCURSAL_LOGUEO);
+  EKBuscarProductoEmpresa.SQL_Where.ValueFromIndex[1]:= IntToStr(SUCURSAL_LOGUEO);
 end;
 
 
@@ -200,9 +203,8 @@ begin
     Application.MessageBox(PChar('No hay ningún producto para seleccionar.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
 end;
 
-procedure TFBuscarProducto.DBGridDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFBuscarProducto.DBGridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGrid, Rect, DataCol, Column, State);
 end;

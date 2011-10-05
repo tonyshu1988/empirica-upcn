@@ -208,6 +208,7 @@ begin
     begin
       ZQ_Producto.Close;
       ZQ_Producto.ParamByName('id_producto').AsInteger:= ZQ_StockID_PRODUCTO.AsInteger;
+      ZQ_Producto.ParamByName('id_sucursal').AsInteger:= ZQ_StockID_SUCURSAL.AsInteger;
       ZQ_Producto.Open;
     end;
 

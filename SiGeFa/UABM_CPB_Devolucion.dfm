@@ -1372,7 +1372,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Width = 866
         Height = 169
         Align = alBottom
-        TabOrder = 1
+        TabOrder = 2
         object PanelEditar_EntregaInfo: TPanel
           Left = 1
           Top = 146
@@ -1473,7 +1473,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           Color = 13816575
           DataSource = DS_CpbEntrega
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          PopupMenu = Popup_Devolucion
+          PopupMenu = Popup_Entrega
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -1578,7 +1578,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Width = 866
         Height = 195
         Align = alClient
-        TabOrder = 2
+        TabOrder = 1
         object PanelEditar_DevolucionInfo: TPanel
           Left = 1
           Top = 172
@@ -3861,11 +3861,15 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         'iculo,'
       '       pro.cod_corto as cod_producto, pro.codigo_barra,'
       
-        '       pro.precio_costo, pro.precio_venta, pro.coef_ganancia, pr' +
-        'o.coef_descuento,'
-      '       pro.impuesto_interno, pro.impuesto_iva'
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
+      '       pre.impuesto_interno, pre.impuesto_iva'
       'from comprobante_detalle cpbd'
+      
+        'left join comprobante cpb on (cpbd.id_comprobante = cpb.id_compr' +
+        'obante)'
       'left join producto pro on (cpbd.id_producto = pro.id_producto)'
+      'left join precio pre on (pro.id_producto = pre.id_producto)'
       
         'left join producto_cabecera cab on (pro.id_prod_cabecera = cab.i' +
         'd_prod_cabecera)'
@@ -3877,7 +3881,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         'tipo_articulo)'
       'left join medida med on (pro.id_medida = med.id_medida)'
       'where cpbd.id_comprobante = :id_comprobante'
-      '  and cpbd.cantidad < 0 ')
+      '  and cpbd.cantidad < 0'
+      '  and pre.id_sucursal = cpb.id_sucursal')
     Params = <
       item
         DataType = ftUnknown
@@ -5187,7 +5192,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     end
   end
   object EKOrd_EditarEntrega: TEKOrdenarGrilla
-    Grilla = DBGridEditar_Devolucion
+    Grilla = DBGridEditar_Entrega
     Filtros = <
       item
         TituloColumna = 'C'#243'd. Barra'
@@ -5260,11 +5265,15 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         'iculo,'
       '       pro.cod_corto as cod_producto, pro.codigo_barra,'
       
-        '       pro.precio_costo, pro.precio_venta, pro.coef_ganancia, pr' +
-        'o.coef_descuento,'
-      '       pro.impuesto_interno, pro.impuesto_iva'
+        '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
+        'e.coef_descuento,'
+      '       pre.impuesto_interno, pre.impuesto_iva'
       'from comprobante_detalle cpbd'
+      
+        'left join comprobante cpb on (cpbd.id_comprobante = cpb.id_compr' +
+        'obante)'
       'left join producto pro on (cpbd.id_producto = pro.id_producto)'
+      'left join precio pre on (pro.id_producto = pre.id_producto)'
       
         'left join producto_cabecera cab on (pro.id_prod_cabecera = cab.i' +
         'd_prod_cabecera)'
@@ -5276,7 +5285,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         'tipo_articulo)'
       'left join medida med on (pro.id_medida = med.id_medida)'
       'where cpbd.id_comprobante = :id_comprobante'
-      '  and cpbd.cantidad > 0')
+      '  and cpbd.cantidad > 0'
+      '  and pre.id_sucursal = cpb.id_sucursal')
     Params = <
       item
         DataType = ftUnknown

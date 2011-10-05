@@ -75,25 +75,6 @@ type
     ZQ_VerCpbESTADO: TStringField;
     DBGridListaCpb: TDBGrid;
     DBGridCpbActual_Producto: TDBGrid;
-    ZQ_VerCpb_ProductoID_COMPROBANTE_DETALLE: TIntegerField;
-    ZQ_VerCpb_ProductoID_COMPROBANTE: TIntegerField;
-    ZQ_VerCpb_ProductoID_PRODUCTO: TIntegerField;
-    ZQ_VerCpb_ProductoDETALLE: TStringField;
-    ZQ_VerCpb_ProductoCANTIDAD: TFloatField;
-    ZQ_VerCpb_ProductoIMPORTE_FINAL: TFloatField;
-    ZQ_VerCpb_ProductoPORC_DESCUENTO: TFloatField;
-    ZQ_VerCpb_ProductoBASE_IMPONIBLE: TFloatField;
-    ZQ_VerCpb_ProductoIMPORTE_UNITARIO: TFloatField;
-    ZQ_VerCpb_ProductoPORC_IVA: TFloatField;
-    ZQ_VerCpb_ProductoCOD_CABECERA: TStringField;
-    ZQ_VerCpb_ProductoPRODUCTO: TStringField;
-    ZQ_VerCpb_ProductoIMAGEN: TBlobField;
-    ZQ_VerCpb_ProductoMEDIDA: TStringField;
-    ZQ_VerCpb_ProductoCOLOR: TStringField;
-    ZQ_VerCpb_ProductoMARCA: TStringField;
-    ZQ_VerCpb_ProductoARTICULO: TStringField;
-    ZQ_VerCpb_ProductoTIPO_ARTICULO: TStringField;
-    ZQ_VerCpb_ProductoCOD_PRODUCTO: TStringField;
     EKOrd_VerCpb: TEKOrdenarGrilla;
     EKOrd_VerCpb_Producto: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
@@ -216,12 +197,6 @@ type
     CD_Producto_color: TStringField;
     Panel2: TPanel;
     DBImageProducto: TDBImage;
-    ZQ_VerCpb_ProductoCODIGO_BARRA: TStringField;
-    ZQ_VerCpb_ProductoPRECIO_COSTO: TFloatField;
-    ZQ_VerCpb_ProductoPRECIO_VENTA: TFloatField;
-    ZQ_VerCpb_ProductoCOEF_GANANCIA: TFloatField;
-    ZQ_VerCpb_ProductoCOEF_DESCUENTO: TFloatField;
-    ZQ_VerCpb_ProductoIMPUESTO_IVA: TFloatField;
     ZQ_Imagen: TZQuery;
     DS_Imagen: TDataSource;
     ZQ_ImagenIMAGEN: TBlobField;
@@ -261,11 +236,6 @@ type
     ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
     ZQ_CpbProductoID_STOCK_PRODUCTO: TIntegerField;
     ZQ_CpbProductoIMPORTE_VENTA: TFloatField;
-    ZQ_VerCpb_ProductoIMPUESTO_INTERNO: TFloatField;
-    ZQ_VerCpb_ProductoCANTIDAD_RECIBIDA: TFloatField;
-    ZQ_VerCpb_ProductoCANTIDAD_ALMACENADA: TFloatField;
-    ZQ_VerCpb_ProductoID_STOCK_PRODUCTO: TIntegerField;
-    ZQ_VerCpb_ProductoIMPORTE_VENTA: TFloatField;
     DBEditPuntoVenta: TDBEdit;
     DBEditNumeroCpb: TDBEdit;
     Label12: TLabel;
@@ -442,6 +412,24 @@ type
     ZQ_CpbFormaPagoCUENTA_EGRESO: TIntegerField;
     ZQ_CpbFormaPagoFECHA_FP: TDateTimeField;
     ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField;
+    ZQ_VerCpb_ProductoID_PRODUCTO: TIntegerField;
+    ZQ_VerCpb_ProductoPRODUCTO: TStringField;
+    ZQ_VerCpb_ProductoMEDIDA: TStringField;
+    ZQ_VerCpb_ProductoCOLOR: TStringField;
+    ZQ_VerCpb_ProductoMARCA: TStringField;
+    ZQ_VerCpb_ProductoARTICULO: TStringField;
+    ZQ_VerCpb_ProductoTIPO_ARTICULO: TStringField;
+    ZQ_VerCpb_ProductoCOD_PRODUCTO: TStringField;
+    ZQ_VerCpb_ProductoCODIGO_BARRA: TStringField;
+    ZQ_VerCpb_ProductoCOD_CABECERA: TStringField;
+    ZQ_VerCpb_ProductoIMPORTE_VENTA: TFloatField;
+    ZQ_VerCpb_ProductoIMPORTE_FINAL: TFloatField;
+    ZQ_VerCpb_ProductoIMAGEN: TBlobField;
+    ZQ_VerCpb_ProductoDETALLE: TStringField;
+    ZQ_ActualizarListaID_SUCURSAL: TIntegerField;
+    ZQ_VerCpb_ProductoCANTIDAD: TFloatField;
+    ZQ_ActualizarListaID_PRECIO: TIntegerField;
+    ZQ_ActualizarPrecioID_PRECIO: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1316,7 +1304,7 @@ begin
     precio_unitario:= ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat;
 
   if not ZQ_CpbProductoPORC_IVA.IsNull then
-    coef_iva:= ZQ_CpbProductoPORC_IVA.AsFloat;
+    coef_iva:= ZQ_CpbProductoPORC_IVA.AsFloat / 100;
 
   imponible:= cantidad * precio_unitario;
   importe_iva:= imponible * coef_iva;
@@ -1403,6 +1391,7 @@ procedure TFABM_CPB_FacturaCompra.ZQ_ActualizarListaAfterScroll(DataSet: TDataSe
 begin
   ZQ_ActualizarPrecio.Close;
   ZQ_ActualizarPrecio.ParamByName('id_producto').AsInteger:= ZQ_ActualizarListaID_PRODUCTO.AsInteger;
+  ZQ_ActualizarPrecio.ParamByName('id_sucursal').AsInteger:= ZQ_ActualizarListaID_SUCURSAL.AsInteger;
   ZQ_ActualizarPrecio.Open;
 
   DBTxtPrecioCosto.Font.Color:= clBlue;  
@@ -1449,8 +1438,11 @@ begin
             imp_adicional_1:= ZQ_ActualizarPrecioIMPUESTO_ADICIONAL1.AsFloat;
           if not ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2.IsNull then
             imp_adicional_2:= ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2.AsFloat;
-          if not ZQ_ActualizarPrecioIMPUESTO_IVA.IsNull then
-            imp_iva:= ZQ_ActualizarPrecioIMPUESTO_IVA.AsFloat;
+          if ZQ_ActualizarListaPORC_IVA.IsNull or (ZQ_ActualizarListaPORC_IVA.AsFloat = 0) then
+          begin
+            if not ZQ_ActualizarPrecioIMPUESTO_IVA.IsNull then imp_iva:= ZQ_ActualizarPrecioIMPUESTO_IVA.AsFloat;
+          end
+          else imp_iva:= ZQ_ActualizarListaPORC_IVA.AsFloat;
           if not ZQ_ActualizarPrecioCOEF_GANANCIA.IsNull then
             coef_ganancia:= ZQ_ActualizarPrecioCOEF_GANANCIA.AsFloat;
 
@@ -1459,6 +1451,7 @@ begin
 
           ZQ_ActualizarPrecio.Edit;
           ZQ_ActualizarPrecioPRECIO_COSTO.AsFloat:= costo_neto;
+          ZQ_ActualizarPrecioIMPUESTO_IVA.AsFloat:= imp_iva;
           ZQ_ActualizarPrecioPRECIO_COSTO_CIMPUESTOS.AsFloat:= costo_con_impuestos;
           ZQ_ActualizarPrecioPRECIO_VENTA.AsFloat:= precio_venta;
           ZQ_ActualizarPrecio.Post;
@@ -1484,8 +1477,7 @@ begin
   GrupoEditando.Enabled:= true;
 end;
 
-procedure TFABM_CPB_FacturaCompra.ZQ_VerCpb_ProductoAfterScroll(
-  DataSet: TDataSet);
+procedure TFABM_CPB_FacturaCompra.ZQ_VerCpb_ProductoAfterScroll(DataSet: TDataSet);
 begin
   if ZQ_VerCpb_ProductoIMAGEN.AsString = '' then
   begin
