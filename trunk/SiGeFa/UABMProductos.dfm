@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 205
-  Top = 55
+  Left = 251
+  Top = 93
   Width = 986
   Height = 654
   Caption = 'FABMProductos'
@@ -23,14 +23,14 @@ object FABMProductos: TFABMProductos
   object Panel4: TPanel
     Left = 0
     Top = 0
-    Width = 970
-    Height = 564
+    Width = 978
+    Height = 570
     Align = alClient
     Caption = 'Panel4'
     TabOrder = 4
     DesignSize = (
-      970
-      564)
+      978
+      570)
     object Label19: TLabel
       Left = 144
       Top = 216
@@ -153,7 +153,7 @@ object FABMProductos: TFABMProductos
             50.270833333333330000
             1232.958333333333000000
             124.354166666666700000
-            304.270833333333300000)
+            304.270833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -184,7 +184,7 @@ object FABMProductos: TFABMProductos
           Size.Values = (
             52.916666666666670000
             1116.541666666667000000
-            68.791666666666670000
+            68.791666666666680000
             537.104166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -217,7 +217,7 @@ object FABMProductos: TFABMProductos
             52.916666666666670000
             1068.916666666667000000
             5.291666666666667000
-            632.354166666666700000)
+            632.354166666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -259,7 +259,7 @@ object FABMProductos: TFABMProductos
         ForceNewPage = False
         ParentFont = False
         Size.Values = (
-          34.395833333333330000
+          34.395833333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -463,7 +463,7 @@ object FABMProductos: TFABMProductos
             52.916666666666670000
             10.583333333333330000
             7.937500000000000000
-            304.270833333333300000)
+            304.270833333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -561,7 +561,7 @@ object FABMProductos: TFABMProductos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -611,7 +611,7 @@ object FABMProductos: TFABMProductos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -659,7 +659,7 @@ object FABMProductos: TFABMProductos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -877,7 +877,7 @@ object FABMProductos: TFABMProductos
             37.041666666666670000
             2000.250000000000000000
             5.291666666666667000
-            92.604166666666670000)
+            92.604166666666680000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1220,7 +1220,7 @@ object FABMProductos: TFABMProductos
             29.104166666666670000
             603.250000000000000000
             2.645833333333333000
-            89.958333333333330000)
+            89.958333333333320000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1438,8 +1438,8 @@ object FABMProductos: TFABMProductos
     object Grilla: TEKDBGrid
       Left = 1
       Top = 20
-      Width = 968
-      Height = 321
+      Width = 976
+      Height = 327
       Align = alClient
       Color = 14606012
       DataSource = DS_ProductoCabecera
@@ -1533,8 +1533,8 @@ object FABMProductos: TFABMProductos
     end
     object tabs: TPageControl
       Left = 1
-      Top = 341
-      Width = 968
+      Top = 347
+      Width = 976
       Height = 222
       ActivePage = tabDetalle
       Align = alBottom
@@ -1548,7 +1548,7 @@ object FABMProductos: TFABMProductos
         object PProducto: TPanel
           Left = 0
           Top = 0
-          Width = 960
+          Width = 968
           Height = 191
           Align = alClient
           TabOrder = 0
@@ -1791,14 +1791,14 @@ object FABMProductos: TFABMProductos
         object PDetalles: TPanel
           Left = 0
           Top = 0
-          Width = 960
+          Width = 968
           Height = 191
           Align = alClient
           TabOrder = 0
           object grillaDetalle: TEKDBGrid
             Left = 793
             Top = 1
-            Width = 166
+            Width = 174
             Height = 189
             Align = alClient
             Color = 14606012
@@ -1873,6 +1873,7 @@ object FABMProductos: TFABMProductos
                 FieldName = 'IMPUESTO_INTERNO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Impuesto Interno'
+                Width = 64
                 Visible = True
               end
               item
@@ -1880,6 +1881,7 @@ object FABMProductos: TFABMProductos
                 FieldName = 'IMPUESTO_IVA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Impuesto IVA'
+                Width = 64
                 Visible = True
               end
               item
@@ -1899,6 +1901,7 @@ object FABMProductos: TFABMProductos
                 FieldName = 'PRECIO_COSTO_CIMPUESTOS'
                 Title.Alignment = taCenter
                 Title.Caption = 'Precio Costo c/Imp.'
+                Width = 64
                 Visible = True
               end
               item
@@ -1906,6 +1909,7 @@ object FABMProductos: TFABMProductos
                 FieldName = 'COEF_GANANCIA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Coef. Ganancia'
+                Width = 64
                 Visible = True
               end
               item
@@ -1913,6 +1917,7 @@ object FABMProductos: TFABMProductos
                 FieldName = 'COEF_DESCUENTO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Coef. Descuento'
+                Width = 64
                 Visible = True
               end
               item
@@ -1920,6 +1925,7 @@ object FABMProductos: TFABMProductos
                 FieldName = 'PRECIO_VENTA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Precio Venta'
+                Width = 64
                 Visible = True
               end
               item
@@ -1927,6 +1933,7 @@ object FABMProductos: TFABMProductos
                 FieldName = 'STOCK_MAX'
                 Title.Alignment = taCenter
                 Title.Caption = 'Stock M'#225'ximo'
+                Width = 64
                 Visible = True
               end
               item
@@ -1934,6 +1941,7 @@ object FABMProductos: TFABMProductos
                 FieldName = 'STOCK_MIN'
                 Title.Alignment = taCenter
                 Title.Caption = 'Stock M'#237'nimo'
+                Width = 64
                 Visible = True
               end
               item
@@ -1942,6 +1950,7 @@ object FABMProductos: TFABMProductos
                 FieldName = 'LLEVAR_STOCK'
                 Title.Alignment = taCenter
                 Title.Caption = 'Llevar Stock'
+                Width = 64
                 Visible = True
               end
               item
@@ -2021,9 +2030,9 @@ object FABMProductos: TFABMProductos
                 object Label27: TLabel
                   Left = 141
                   Top = 40
-                  Width = 100
+                  Width = 111
                   Height = 13
-                  Caption = 'Impuesto Interno'
+                  Caption = 'Impuesto Interno $'
                   FocusControl = DBEditImpuestoInterno
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
@@ -2063,9 +2072,9 @@ object FABMProductos: TFABMProductos
                 object Label28: TLabel
                   Left = 8
                   Top = 40
-                  Width = 79
+                  Width = 95
                   Height = 13
-                  Caption = 'Impuesto IVA'
+                  Caption = 'Impuesto IVA %'
                   FocusControl = DBEditImpuestoIva
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
@@ -2200,7 +2209,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'PRECIO_COSTO'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2216,7 +2225,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'COEF_GANANCIA'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2233,7 +2242,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'IMPUESTO_INTERNO'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2249,7 +2258,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'PRECIO_VENTA'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2266,7 +2275,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'COEF_DESCUENTO'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2282,7 +2291,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'IMPUESTO_IVA'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2298,7 +2307,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'IMPUESTO_ADICIONAL2'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2315,7 +2324,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'IMPUESTO_ADICIONAL1'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2332,7 +2341,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'PRECIO_COSTO_CIMPUESTOS'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2348,7 +2357,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'PRECIO1'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2365,7 +2374,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'PRECIO2'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2382,7 +2391,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'PRECIO3'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2399,7 +2408,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'PRECIO4'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2416,7 +2425,7 @@ object FABMProductos: TFABMProductos
                   Height = 21
                   CharCase = ecUpperCase
                   DataField = 'PRECIO5'
-                  DataSource = DS_DetalleProducto
+                  DataSource = DS_Precios
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
@@ -2512,7 +2521,7 @@ object FABMProductos: TFABMProductos
                   object Label5: TLabel
                     Left = 3
                     Top = 3
-                    Width = 104
+                    Width = 132
                     Height = 13
                     Align = alTop
                     Alignment = taCenter
@@ -2687,7 +2696,7 @@ object FABMProductos: TFABMProductos
     object PanelCabecera: TPanel
       Left = 1
       Top = 1
-      Width = 968
+      Width = 976
       Height = 19
       Align = alTop
       BevelOuter = bvNone
@@ -2707,7 +2716,7 @@ object FABMProductos: TFABMProductos
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 859
+        Left = 867
         Top = 0
         Width = 109
         Height = 19
@@ -2811,7 +2820,7 @@ object FABMProductos: TFABMProductos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3760,62 +3769,69 @@ object FABMProductos: TFABMProductos
     SortedFields = 'COD_CORTO'
     Filter = 'baja <> '#39'S'#39
     Filtered = True
+    UpdateObject = ZUpdateSQL1
     SQL.Strings = (
-      'select p.*'
+      
+        'select  P.ID_PRODUCTO, P.ID_MEDIDA, P.ID_PROD_CABECERA, P.DESCRI' +
+        'PCION, P.COD_CORTO, P.CODIGO_BARRA, P.STOCK_MAX, P.STOCK_MIN, P.' +
+        'LLEVAR_STOCK, P.BAJA,'
+      '        PR.PRECIO_COSTO, PR.PRECIO_VENTA, PR.COEF_GANANCIA,'
+      
+        '        PR.COEF_DESCUENTO, PR.IMPUESTO_INTERNO, PR.IMPUESTO_IVA,' +
+        ' PR.PRECIO_COSTO_CIMPUESTOS, PR.IMPUESTO_ADICIONAL1,'
+      
+        '        PR.IMPUESTO_ADICIONAL2, PR.PRECIO1, PR.PRECIO2, PR.PRECI' +
+        'O3, PR.PRECIO4, PR.PRECIO5'
       'from producto p'
-      'where (p.id_prod_cabecera=:prod) ')
+      
+        'left join precio pr on (p.id_producto = pr.id_producto) and (pr.' +
+        'id_sucursal = :sucursal)'
+      'where (p.id_prod_cabecera=:prod)')
     Params = <
+      item
+        DataType = ftUnknown
+        Name = 'sucursal'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'prod'
         ParamType = ptUnknown
       end>
-    Left = 328
+    Left = 312
     Top = 96
     ParamData = <
       item
         DataType = ftUnknown
+        Name = 'sucursal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
         Name = 'prod'
         ParamType = ptUnknown
       end>
+    object ZQ_DetalleProducto_medida: TStringField
+      FieldKind = fkLookup
+      FieldName = '_medida'
+      LookupDataSet = ZQ_MedidaArticulo
+      LookupKeyFields = 'ID_MEDIDA'
+      LookupResultField = 'MEDIDA'
+      KeyFields = 'ID_MEDIDA'
+      Lookup = True
+    end
     object ZQ_DetalleProductoID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
-    end
-    object ZQ_DetalleProductoID_PROD_CABECERA: TIntegerField
-      FieldName = 'ID_PROD_CABECERA'
     end
     object ZQ_DetalleProductoID_MEDIDA: TIntegerField
       FieldName = 'ID_MEDIDA'
     end
+    object ZQ_DetalleProductoID_PROD_CABECERA: TIntegerField
+      FieldName = 'ID_PROD_CABECERA'
+    end
     object ZQ_DetalleProductoDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       Size = 500
-    end
-    object ZQ_DetalleProductoPRECIO_COSTO: TFloatField
-      FieldName = 'PRECIO_COSTO'
-      OnChange = ZQ_DetalleProductoPRECIO_COSTOChange
-      currency = True
-    end
-    object ZQ_DetalleProductoPRECIO_VENTA: TFloatField
-      FieldName = 'PRECIO_VENTA'
-      OnChange = ZQ_DetalleProductoPRECIO_VENTAChange
-      currency = True
-    end
-    object ZQ_DetalleProductoCOEF_GANANCIA: TFloatField
-      FieldName = 'COEF_GANANCIA'
-      OnChange = ZQ_DetalleProductoCOEF_GANANCIAChange
-      DisplayFormat = '0.0000'
-    end
-    object ZQ_DetalleProductoCOEF_DESCUENTO: TFloatField
-      FieldName = 'COEF_DESCUENTO'
-      DisplayFormat = '0.0000'
-    end
-    object ZQ_DetalleProductoIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object ZQ_DetalleProductoIMPUESTO_IVA: TFloatField
-      FieldName = 'IMPUESTO_IVA'
-      OnChange = ZQ_DetalleProductoIMPUESTO_IVAChange
     end
     object ZQ_DetalleProductoCOD_CORTO: TStringField
       FieldName = 'COD_CORTO'
@@ -3830,59 +3846,62 @@ object FABMProductos: TFABMProductos
     object ZQ_DetalleProductoSTOCK_MIN: TFloatField
       FieldName = 'STOCK_MIN'
     end
-    object ZQ_DetalleProducto_medida: TStringField
-      FieldKind = fkLookup
-      FieldName = '_medida'
-      LookupDataSet = ZQ_MedidaArticulo
-      LookupKeyFields = 'ID_MEDIDA'
-      LookupResultField = 'MEDIDA'
-      KeyFields = 'ID_MEDIDA'
-      Lookup = True
-    end
     object ZQ_DetalleProductoLLEVAR_STOCK: TStringField
       FieldName = 'LLEVAR_STOCK'
       Size = 1
-    end
-    object ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS: TFloatField
-      FieldName = 'PRECIO_COSTO_CIMPUESTOS'
-      ReadOnly = True
-    end
-    object ZQ_DetalleProductoIMPUESTO_ADICIONAL1: TFloatField
-      FieldName = 'IMPUESTO_ADICIONAL1'
-      OnChange = ZQ_DetalleProductoIMPUESTO_ADICIONAL1Change
-    end
-    object ZQ_DetalleProductoIMPUESTO_ADICIONAL2: TFloatField
-      FieldName = 'IMPUESTO_ADICIONAL2'
-      OnChange = ZQ_DetalleProductoIMPUESTO_ADICIONAL2Change
-    end
-    object ZQ_DetalleProductoPRECIO1: TFloatField
-      FieldName = 'PRECIO1'
-      currency = True
-    end
-    object ZQ_DetalleProductoPRECIO2: TFloatField
-      FieldName = 'PRECIO2'
-      currency = True
-    end
-    object ZQ_DetalleProductoPRECIO3: TFloatField
-      FieldName = 'PRECIO3'
-      currency = True
-    end
-    object ZQ_DetalleProductoPRECIO4: TFloatField
-      FieldName = 'PRECIO4'
-      currency = True
-    end
-    object ZQ_DetalleProductoPRECIO5: TFloatField
-      FieldName = 'PRECIO5'
-      currency = True
     end
     object ZQ_DetalleProductoBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
     end
+    object ZQ_DetalleProductoPRECIO_COSTO: TFloatField
+      FieldName = 'PRECIO_COSTO'
+    end
+    object ZQ_DetalleProductoPRECIO_VENTA: TFloatField
+      FieldName = 'PRECIO_VENTA'
+    end
+    object ZQ_DetalleProductoCOEF_GANANCIA: TFloatField
+      FieldName = 'COEF_GANANCIA'
+      DisplayFormat = '0.0000'
+    end
+    object ZQ_DetalleProductoCOEF_DESCUENTO: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+      DisplayFormat = '0.0000'
+    end
+    object ZQ_DetalleProductoIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_DetalleProductoIMPUESTO_IVA: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+    object ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS: TFloatField
+      FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+    end
+    object ZQ_DetalleProductoIMPUESTO_ADICIONAL1: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL1'
+    end
+    object ZQ_DetalleProductoIMPUESTO_ADICIONAL2: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL2'
+    end
+    object ZQ_DetalleProductoPRECIO1: TFloatField
+      FieldName = 'PRECIO1'
+    end
+    object ZQ_DetalleProductoPRECIO2: TFloatField
+      FieldName = 'PRECIO2'
+    end
+    object ZQ_DetalleProductoPRECIO3: TFloatField
+      FieldName = 'PRECIO3'
+    end
+    object ZQ_DetalleProductoPRECIO4: TFloatField
+      FieldName = 'PRECIO4'
+    end
+    object ZQ_DetalleProductoPRECIO5: TFloatField
+      FieldName = 'PRECIO5'
+    end
   end
   object DS_DetalleProducto: TDataSource
     DataSet = ZQ_DetalleProducto
-    Left = 336
+    Left = 312
     Top = 152
   end
   object ZQ_Articulo: TZQuery
@@ -3898,7 +3917,7 @@ object FABMProductos: TFABMProductos
         'iculo)'
       'where a.baja = '#39'N'#39)
     Params = <>
-    Left = 453
+    Left = 461
     Top = 96
     object ZQ_ArticuloID_ARTICULO: TIntegerField
       FieldName = 'ID_ARTICULO'
@@ -4430,14 +4449,6 @@ object FABMProductos: TFABMProductos
         Visible = True
       end
       item
-        TituloColumna = 'IMPUESTO_ADICIONAL1'
-        Visible = False
-      end
-      item
-        TituloColumna = 'IMPUESTO_ADICIONAL2'
-        Visible = False
-      end
-      item
         TituloColumna = 'Precio Costo c/Imp.'
         Visible = True
       end
@@ -4464,26 +4475,6 @@ object FABMProductos: TFABMProductos
       item
         TituloColumna = 'Llevar Stock'
         Visible = True
-      end
-      item
-        TituloColumna = 'PRECIO1'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO2'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO3'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO4'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO5'
-        Visible = False
       end>
     NombreGuardar = 'ABMProductos_Detalles'
     AltoTituloColumna = 15
@@ -4494,5 +4485,200 @@ object FABMProductos: TFABMProductos
     PopUpGrilla = PopupMenuDetalleProd
     Left = 488
     Top = 280
+  end
+  object ZQ_Precios: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select pr.*'
+      'from precio pr'
+      
+        'where (pr.id_producto = :id_producto) and (pr.id_sucursal = :suc' +
+        'ursal)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_producto'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 400
+    Top = 96
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_producto'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'sucursal'
+        ParamType = ptUnknown
+      end>
+    object ZQ_PreciosID_PRECIO: TIntegerField
+      FieldName = 'ID_PRECIO'
+    end
+    object ZQ_PreciosID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+    object ZQ_PreciosID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_PreciosPRECIO_COSTO: TFloatField
+      FieldName = 'PRECIO_COSTO'
+      OnChange = ZQ_PreciosPRECIO_COSTOChange
+      currency = True
+    end
+    object ZQ_PreciosPRECIO_VENTA: TFloatField
+      FieldName = 'PRECIO_VENTA'
+      OnChange = ZQ_PreciosPRECIO_VENTAChange
+      currency = True
+    end
+    object ZQ_PreciosCOEF_GANANCIA: TFloatField
+      FieldName = 'COEF_GANANCIA'
+      OnChange = ZQ_PreciosCOEF_GANANCIAChange
+      DisplayFormat = '0.0000'
+    end
+    object ZQ_PreciosCOEF_DESCUENTO: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+      DisplayFormat = '0.0000'
+    end
+    object ZQ_PreciosIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_PreciosIMPUESTO_IVA: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+      OnChange = ZQ_PreciosIMPUESTO_IVAChange
+    end
+    object ZQ_PreciosPRECIO_COSTO_CIMPUESTOS: TFloatField
+      FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+      currency = True
+    end
+    object ZQ_PreciosIMPUESTO_ADICIONAL1: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL1'
+      OnChange = ZQ_PreciosIMPUESTO_ADICIONAL1Change
+    end
+    object ZQ_PreciosIMPUESTO_ADICIONAL2: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL2'
+      OnChange = ZQ_PreciosIMPUESTO_ADICIONAL2Change
+    end
+    object ZQ_PreciosPRECIO1: TFloatField
+      FieldName = 'PRECIO1'
+      currency = True
+    end
+    object ZQ_PreciosPRECIO2: TFloatField
+      FieldName = 'PRECIO2'
+      currency = True
+    end
+    object ZQ_PreciosPRECIO3: TFloatField
+      FieldName = 'PRECIO3'
+      currency = True
+    end
+    object ZQ_PreciosPRECIO4: TFloatField
+      FieldName = 'PRECIO4'
+      currency = True
+    end
+    object ZQ_PreciosPRECIO5: TFloatField
+      FieldName = 'PRECIO5'
+      currency = True
+    end
+  end
+  object DS_Precios: TDataSource
+    DataSet = ZQ_Precios
+    Left = 392
+    Top = 152
+  end
+  object ZUpdateSQL1: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM producto'
+      'WHERE'
+      '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
+    InsertSQL.Strings = (
+      'INSERT INTO producto'
+      '  (producto.ID_PRODUCTO, producto.ID_MEDIDA, '
+      'producto.ID_PROD_CABECERA, '
+      '   producto.DESCRIPCION, producto.COD_CORTO, '
+      'producto.CODIGO_BARRA, producto.STOCK_MAX, '
+      '   producto.STOCK_MIN, producto.LLEVAR_STOCK, producto.BAJA)'
+      'VALUES'
+      '  (:ID_PRODUCTO, :ID_MEDIDA, :ID_PROD_CABECERA, '
+      ':DESCRIPCION, :COD_CORTO, '
+      '   :CODIGO_BARRA, :STOCK_MAX, :STOCK_MIN, :LLEVAR_STOCK, '
+      ':BAJA)')
+    ModifySQL.Strings = (
+      'UPDATE producto SET'
+      '  producto.ID_PRODUCTO = :ID_PRODUCTO,'
+      '  producto.ID_MEDIDA = :ID_MEDIDA,'
+      '  producto.ID_PROD_CABECERA = :ID_PROD_CABECERA,'
+      '  producto.DESCRIPCION = :DESCRIPCION,'
+      '  producto.COD_CORTO = :COD_CORTO,'
+      '  producto.CODIGO_BARRA = :CODIGO_BARRA,'
+      '  producto.STOCK_MAX = :STOCK_MAX,'
+      '  producto.STOCK_MIN = :STOCK_MIN,'
+      '  producto.LLEVAR_STOCK = :LLEVAR_STOCK,'
+      '  producto.BAJA = :BAJA'
+      'WHERE'
+      '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
+    Left = 312
+    Top = 48
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PRODUCTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_MEDIDA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_PROD_CABECERA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DESCRIPCION'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'COD_CORTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CODIGO_BARRA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'STOCK_MAX'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'STOCK_MIN'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'LLEVAR_STOCK'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BAJA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_ID_PRODUCTO'
+        ParamType = ptUnknown
+      end>
   end
 end
