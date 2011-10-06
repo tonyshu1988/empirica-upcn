@@ -73,6 +73,7 @@ type
     ClientDataSet1: TClientDataSet;
     ClientDataSet2: TClientDataSet;
     DataSource1: TDataSource;
+    lblCantidad: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
@@ -90,6 +91,9 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     function subirXML(archivo:String):Boolean ;
     function bajarXML(archivo:String):Boolean ;
+    procedure cargarSXML(archivo:String;cds,cds2:TClientDataSet);
+    procedure procesarXMLaLocal(cds:TClientDataSet);
+
   private
     { Private declarations }
   public
@@ -247,6 +251,7 @@ end;
 procedure TFPrincipal.btnSincronizarClick(Sender: TObject);
 begin
  // Sincronizar;
+    cargarSXML(edPathArchivo.Text,ClientDataSet1,ClientDataSet2);
 end;
 
 procedure TFPrincipal.btnBorrarLogClick(Sender: TObject);
@@ -401,6 +406,57 @@ If DM.IdFTP1.Connected then
         end
       end;
     End;
+
+end;
+
+procedure TFPrincipal.cargarSXML(archivo: String; cds,cds2: TClientDataSet);
+var
+xml:String;
+begin
+    cds2.LoadFromFile(archivo);
+    cds.AppendData(cds2.Data,false);
+    lblcantidad.Caption:=Format('%d registros encontrados.',[cds.RecordCount]);
+end;
+
+
+
+procedure TFPrincipal.procesarXMLaLocal(cds: TClientDataSet);
+begin
+  if not(cds.IsEmpty) then
+   begin
+      //cds. ordenar segun algun criterio
+      cds.First;
+      while not(cds.Eof) do
+      begin
+
+
+//          Local.SQL.Clear;
+//          Local.SQL.Add(
+//            'select * from '+ZQ_SincroTablaTABLE_NAME.AsString+
+//            ' where '+ZQ_SincroTablaPrimaryKEY_FIELD.AsString+'='+ZQ_SincroTablaPrimaryKEY_VALUE.AsString);
+//          Local.Open;
+//          if (ZQ_SincroTablaOPERATION.AsString='I') then
+//            Local.Append
+//          else
+//            if (ZQ_SincroTablaOPERATION.AsString='U') then
+//              Local.Edit;
+//
+//          while not ZQ_SincroCampo.Eof do
+//          begin
+//            Local.FieldByName(ZQ_SincroCampoFIELD_NAME.AsString).value:=ZQ_SincroCampoNEW_VALUE.value;
+//            ZQ_SincroCampo.Next;
+//          end;
+//
+//
+//          if ZQ_SincroTablaOPERATION.AsString='D' then
+//          begin
+//            if Local.RecordCount=1 then
+//              Local.Delete;
+//          end;
+
+          cds.Next;
+      end;
+   end
 
 end;
 
