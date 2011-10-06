@@ -811,6 +811,7 @@ begin
   CD_Comprobante.CreateDataSet;
   CD_DetalleFactura.CreateDataSet;
   CD_Fpago.CreateDataSet;
+  CD_VentaFinal.CreateDataSet;
   dm.EKModelo.abrir(ZQ_FormasPago);
   dm.EKModelo.abrir(ZQ_DetalleProd);
   dm.EKModelo.abrir(ZQ_Cuentas);
