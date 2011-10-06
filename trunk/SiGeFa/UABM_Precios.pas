@@ -61,8 +61,6 @@ type
     QRDBText1: TQRDBText;
     QRChildBandCleinte: TQRChildBand;
     QRBand7: TQRBand;
-    QRLabel24: TQRLabel;
-    QRSysData2: TQRSysData;
     QRBand1: TQRBand;
     QRExpr15: TQRExpr;
     ChildBand1: TQRChildBand;
@@ -182,6 +180,9 @@ type
     ZSPActualizarImporte: TZStoredProc;
     ZQ_ProductosID_SUCURSAL: TIntegerField;
     ZQ_ImprimirEtiquetasID_PRECIO: TIntegerField;
+    QRlblPieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -360,14 +361,11 @@ begin
     DBGridProductos.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
+
     RadioGroupTipoCalculo.Enabled := false;
-    EditCosto.Enabled := false;
-    EditVenta.Enabled := false;
-    EditPrecio1.Enabled:= false;
-    EditPrecio2.Enabled:= false;
-    EditPrecio3.Enabled:= false;
-    EditPrecio4.Enabled:= false;
-    EditPrecio5.Enabled:= false;
+    RadioGroupImpuestos.Enabled := false;
+    GBoxIncDecImportes.Enabled := false;
+    GboxImpuestos.Enabled := false;
   end;
 end;
 
@@ -379,6 +377,7 @@ begin
   if ZQ_Productos.IsEmpty then
     exit;
 
+  //verifico que todos los datos ingresados sean numeros
   try
     StrToFloat(EditCosto.Text);
     StrToFloat(EditVenta.Text);
@@ -399,33 +398,12 @@ begin
   begin
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
-    RadioGroupTipoCalculo.Enabled := false;
-    EditCosto.Enabled := false;
-    EditVenta.Enabled := false;
-    EditPrecio1.Enabled:= false;
-    EditPrecio2.Enabled:= false;
-    EditPrecio3.Enabled:= false;
-    EditPrecio4.Enabled:= false;
-    EditPrecio5.Enabled:= false;    
 
-//    ZSPActualizarImporte.Close;
-//    ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat := StrToFloat(EditCosto.Text);
-//    ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat := StrToFloat(EditVenta.Text);
-//
-//    if RadioGroupTipoCalculo.ItemIndex = 0 then
-//      ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger := 1
-//    else
-//      ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger := 0;
-//    if RadioGroupImpuestos.ItemIndex = 0 then
-//
-//    begin
-//      ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 1;
-//      ZSPActualizarImporte.ParamByName('IMPUESTO_IVA').AsFloat := StrToFloat(EditIVA.Text);
-//      ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL1').AsFloat := StrToFloat(EditImpAdicional1.Text);
-//      ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL2').AsFloat := StrToFloat(EditImpAdicional2.Text);
-//    end
-//    else
-//      ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 0;
+    //deshabilito los groupbox
+    RadioGroupTipoCalculo.Enabled := false;
+    RadioGroupImpuestos.Enabled := false;
+    GBoxIncDecImportes.Enabled := false;
+    GboxImpuestos.Enabled := false;
 
     if DBGridProductos.SelectedRows.Count > 0 then
     begin
@@ -463,6 +441,7 @@ begin
     end
     else
     begin
+      ZQ_Productos.first;
       while not(ZQ_Productos.Eof) do
       begin
         ZSPActualizarImporte.Close;
@@ -482,13 +461,13 @@ begin
 
         if RadioGroupImpuestos.ItemIndex = 0 then
         begin
-          ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 1;
+          ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 1; //1 se actualizan los impuestos
           ZSPActualizarImporte.ParamByName('IMPUESTO_IVA').AsFloat := StrToFloat(EditIVA.Text);
           ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL1').AsFloat := StrToFloat(EditImpAdicional1.Text);
           ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL2').AsFloat := StrToFloat(EditImpAdicional2.Text);
         end
         else
-          ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 0;
+          ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 0; //0 no se actualizan los impuestos
 
         ZSPActualizarImporte.Open;
 
@@ -514,14 +493,12 @@ begin
     DBGridProductos.Enabled := true;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
+
     RadioGroupTipoCalculo.Enabled := true;
-    EditCosto.Enabled := true;
-    EditVenta.Enabled := true;
-    EditPrecio1.Enabled:= true;
-    EditPrecio2.Enabled:= true;
-    EditPrecio3.Enabled:= true;
-    EditPrecio4.Enabled:= true;
-    EditPrecio5.Enabled:= true;
+    RadioGroupImpuestos.Enabled := true;
+    GBoxIncDecImportes.Enabled := true;
+    GboxImpuestos.Enabled := true;
+
     EditCosto.Text:= '0';
     EditVenta.Text:= '0';
     EditPrecio1.Text:= '0';
@@ -529,6 +506,7 @@ begin
     EditPrecio3.Text:= '0';
     EditPrecio4.Text:= '0';
     EditPrecio5.Text:= '0';
+
     ZQ_Productos.Refresh;
     DBGridProductos.Options:= DBGridProductos.Options - [dgMultiSelect];
     DBGridProductos.SetFocus;
@@ -549,14 +527,12 @@ begin
     DBGridProductos.Enabled := true;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
+
     RadioGroupTipoCalculo.Enabled := true;
-    EditCosto.Enabled := true;
-    EditVenta.Enabled := true;
-    EditPrecio1.Enabled:= true;
-    EditPrecio2.Enabled:= true;
-    EditPrecio3.Enabled:= true;
-    EditPrecio4.Enabled:= true;
-    EditPrecio5.Enabled:= true;    
+    RadioGroupImpuestos.Enabled := true;
+    GBoxIncDecImportes.Enabled := true;
+    GboxImpuestos.Enabled := true;
+
     EditCosto.Text:= '0';
     EditVenta.Text:= '0';
     EditPrecio1.Text:= '0';
@@ -564,6 +540,7 @@ begin
     EditPrecio3.Text:= '0';
     EditPrecio4.Text:= '0';
     EditPrecio5.Text:= '0';
+
     ZQ_Productos.Refresh;
     DBGridProductos.SetFocus;
   end;
@@ -687,7 +664,6 @@ begin
     QRLabelimporteVenta.Left := 942;
     QRDBTextPrecioVenta.Left := 942;
 
-
     QRChildBandCleinte.Enabled := true;
 
     DM.VariablesReportes(RepListaPrecios);
@@ -705,6 +681,7 @@ begin
     QRChildBandCleinte.Enabled := false;
 
     DM.VariablesReportes(RepListaPrecios);
+    QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
     EKVistaPreviaListaPrecios.VistaPrevia;
   end;
 
