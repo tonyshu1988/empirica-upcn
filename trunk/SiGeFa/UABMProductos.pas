@@ -298,6 +298,10 @@ type
     ZQ_DetalleProductoPRECIO3: TFloatField;
     ZQ_DetalleProductoPRECIO4: TFloatField;
     ZQ_DetalleProductoPRECIO5: TFloatField;
+    ZQ_TodasMedidas: TZQuery;
+    ZQ_TodasMedidasID_MEDIDA: TIntegerField;
+    ZQ_TodasMedidasMEDIDA: TStringField;
+    ZQ_TodasMedidasBAJA: TStringField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -384,7 +388,7 @@ procedure TFABMProductos.HabilitarCampos();
 begin
   if (imp_ad1_nombre <> '') then
   begin
-    lblImpuesto_Adicional1.Caption := imp_ad1_nombre;
+    lblImpuesto_Adicional1.Caption := imp_ad1_nombre + ' (%)';
     lblImpuesto_Adicional1.Visible := true;
     DBEditImpuestoAdicional1.Visible := true;
     grillaDetalle.Columns[GetIndexField(grillaDetalle, 'IMPUESTO_ADICIONAL1')].Title.Caption:= imp_ad1_nombre;
@@ -393,7 +397,7 @@ begin
 
   if (imp_ad2_nombre <> '') then
   begin
-    lblImpuesto_Adicional2.Caption := imp_ad2_nombre;
+    lblImpuesto_Adicional2.Caption := imp_ad2_nombre + ' (%)';
     lblImpuesto_Adicional2.Visible := true;
     DBEditImpuestoAdicional2.Visible := true;
     grillaDetalle.Columns[GetIndexField(grillaDetalle, 'IMPUESTO_ADICIONAL2')].Title.Caption:= imp_ad2_nombre;
@@ -493,6 +497,7 @@ begin
   dm.EKModelo.abrir(ZQ_Marca);
   dm.EKModelo.abrir(ZQ_Color);
   dm.EKModelo.abrir(ZQ_MedidaArticulo);
+  dm.EKModelo.abrir(ZQ_TodasMedidas);  
 
   EKOrdenarDetalle.PopUpGrilla:= nil;
   tabs.ActivePageIndex:= 0;
@@ -820,15 +825,6 @@ begin
 
   ZQ_DetalleProducto.Append;
   ZQ_DetalleProductoLLEVAR_STOCK.AsString:= 'S';
-//  ZQ_DetalleProductoPRECIO_COSTO.AsFloat:= 0;
-//  ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS.AsFloat:= 0;
-//  ZQ_DetalleProductoPRECIO_VENTA.AsFloat:= 0;
-//  ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:= 0;
-//  ZQ_DetalleProductoCOEF_DESCUENTO.AsFloat:= 0;
-//  ZQ_DetalleProductoIMPUESTO_INTERNO.AsFloat:= 0;
-//  ZQ_DetalleProductoIMPUESTO_IVA.AsFloat:= 0;
-//  ZQ_DetalleProductoIMPUESTO_ADICIONAL1.AsFloat:= 0;
-//  ZQ_DetalleProductoIMPUESTO_ADICIONAL2.AsFloat:= 0;
   ZQ_DetalleProductoSTOCK_MIN.AsFloat:= 0;
   ZQ_DetalleProductoSTOCK_MAX.AsFloat:= 0;
   ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
@@ -874,11 +870,10 @@ begin
   campoQueCambia:= '';
 
   ZQ_Precios.Close;
-  ZQ_Precios.ParamByName('id_producto').AsInteger:=ZQ_DetalleProductoID_PRODUCTO.AsInteger;
-  ZQ_Precios.ParamByName('sucursal').AsInteger:=SUCURSAL_LOGUEO;
+  ZQ_Precios.ParamByName('id_producto').AsInteger:= ZQ_DetalleProductoID_PRODUCTO.AsInteger;
+  ZQ_Precios.ParamByName('sucursal').AsInteger:= SUCURSAL_LOGUEO;
   dm.EKModelo.abrir(ZQ_Precios);
   ZQ_Precios.Edit;
-
 end;
 
 
@@ -1276,10 +1271,12 @@ begin
   campoQueCambia:= 'PRECIO_VENTA';
 end;
 
+
 procedure TFABMProductos.DBEditPrecioVentaEnter(Sender: TObject);
 begin
   campoQueCambia:= 'COEF_GANANCIA';
 end;
+
 
 procedure TFABMProductos.grillaDetalleDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -1289,14 +1286,14 @@ begin
   FPrincipal.PintarFilasGrillasConBajas(grillaDetalle, ZQ_DetalleProductoBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
-procedure TFABMProductos.btnGrupoAceptarClick(Sender: TObject);
-  var
-codc,codb,descr,llevarStock:String;
-pc,pv,cg,cd,iint,iiva,smin,smax, iad1, iad2, pci:Real;
-begin
 
+procedure TFABMProductos.btnGrupoAceptarClick(Sender: TObject);
+var
+  codc,codb,descr,llevarStock:String;
+  pc,pv,cg,cd,iint,iiva,smin,smax, iad1, iad2, pci:Real;
+begin
  //Si inserto uno nuevo genero un id nuevo y meto las medidas
- if (ZQ_DetalleProducto.State=dsInsert) then
+ if (ZQ_DetalleProducto.State = dsInsert) then
  begin
   CDMedidas.First;
   if not(validarcamposDetalle2) then
@@ -1305,21 +1302,9 @@ begin
     llevarStock:=ZQ_DetalleProductoLLEVAR_STOCK.AsString;
     codc:=ZQ_DetalleProductoCOD_CORTO.AsString;
     codb:=ZQ_DetalleProductoCODIGO_BARRA.AsString;
-//    pc:=ZQ_DetalleProductoPRECIO_COSTO.AsFloat;
-//    pci:=ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS.AsFloat;
-//    pv:=ZQ_DetalleProductoPRECIO_VENTA.AsFloat;
-//    cg:=ZQ_DetalleProductoCOEF_GANANCIA.AsFloat;
-//    cd:=ZQ_DetalleProductoCOEF_DESCUENTO.AsFloat;
-//    iint:=ZQ_DetalleProductoIMPUESTO_INTERNO.AsFloat;
-//    iiva:=ZQ_DetalleProductoIMPUESTO_IVA.AsFloat;
-//    iad1:=ZQ_DetalleProductoIMPUESTO_ADICIONAL1.AsFloat;
-//    iad2:=ZQ_DetalleProductoIMPUESTO_ADICIONAL2.AsFloat;
     smin:=ZQ_DetalleProductoSTOCK_MIN.AsFloat;
     smax:=ZQ_DetalleProductoSTOCK_MAX.AsFloat;
     descr:=ZQ_DetalleProductoDESCRIPCION.AsString;
-    ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
-    ZQ_DetalleProductoID_MEDIDA.AsInteger:=CDMedidasid_medida.AsInteger;
-
     pc:=ZQ_preciosPRECIO_COSTO.AsFloat;
     pci:=ZQ_preciosPRECIO_COSTO_CIMPUESTOS.AsFloat;
     pv:=ZQ_preciosPRECIO_VENTA.AsFloat;
@@ -1330,158 +1315,140 @@ begin
     iad1:=ZQ_preciosIMPUESTO_ADICIONAL1.AsFloat;
     iad2:=ZQ_preciosIMPUESTO_ADICIONAL2.AsFloat;
 
+    //genero el id_producto y guardo los del detalle
     ZSP_GenerarIDProdDeralle.Active:=False;
     ZSP_GenerarIDProdDeralle.Active:=True;
-    ZQ_DetalleProductoID_PRODUCTO.AsInteger:=ZSP_GenerarIDProdDeralleID.AsInteger;
-    ZQ_preciosID_PRODUCTO.AsInteger := ZSP_GenerarIDProdDeralleID.AsInteger;
-    ZQ_preciosID_SUCURSAL.AsInteger := SUCURSAL_LOGUEO;
+    ZQ_DetalleProductoID_PRODUCTO.AsInteger:= ZSP_GenerarIDProdDeralleID.AsInteger;
+    ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
+    ZQ_DetalleProductoID_MEDIDA.AsInteger:=CDMedidasid_medida.AsInteger;
+    ZQ_preciosID_PRODUCTO.AsInteger:= ZSP_GenerarIDProdDeralleID.AsInteger;
+    ZQ_preciosID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
 
+    //guardo los distintos precios
     if ZQ_preciosPRECIO1.AsFloat = 0 then
       ZQ_preciosPRECIO1.AsFloat :=pv;
-
     if ZQ_preciosPRECIO2.AsFloat = 0 then
       ZQ_preciosPRECIO2.AsFloat :=pv;
-
     if ZQ_preciosPRECIO3.AsFloat = 0 then
       ZQ_preciosPRECIO3.AsFloat :=pv;
-
     if ZQ_preciosPRECIO4.AsFloat = 0 then
       ZQ_preciosPRECIO4.AsFloat :=pv;
-
     if ZQ_preciosPRECIO5.AsFloat = 0 then
       ZQ_preciosPRECIO5.AsFloat :=pv;
 
+    //si no tiene codigo corto el producto, le pongo el id_producto
     if ZQ_DetalleProductoCOD_CORTO.AsString='' then
        ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZSP_GenerarIDProdDeralleID.AsInteger);//rellenar(CDMedidasmedida.AsString,'0',5);
 
+    //si no tiene codigo de barra el producto, le pongo el id_producto rellenado con ceros adelante (20)
     if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
       ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZSP_GenerarIDProdDeralleID.AsString,'0',20);//armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
 
     ZQ_precios.post;
-
     ZQ_DetalleProducto.Post;
+
     ZQ_DetalleProducto.Filtered := false;
     ZQ_DetalleProducto.Filter:= Format('id_medida = %d',[CDMedidasid_medida.AsInteger]);
     ZQ_DetalleProducto.Filtered := true;
 
     //Si existe cancelo el registro actual
-
-    if (ZQ_DetalleProducto.RecordCount>1) then
-     begin
-      ZQ_precios.Locate('ID_PRODUCTO',ZSP_GenerarIDProdDeralleID.AsInteger,[]);
+    if (ZQ_DetalleProducto.RecordCount > 1) then
+    begin
+      ZQ_precios.Locate('ID_PRODUCTO', ZSP_GenerarIDProdDeralleID.AsInteger,[]);
       ZQ_Precios.Delete;
       ZQ_DetalleProducto.Locate('ID_PRODUCTO',ZSP_GenerarIDProdDeralleID.AsInteger,[]);
       ZQ_DetalleProducto.Delete;
       Application.MessageBox('Esta medida ya fue cargada','Carga medida',MB_OK+MB_ICONINFORMATION);
-     end;
-
-
-
+    end;
     ZQ_DetalleProducto.Filtered:=False;
+
 
     //Recorro las medidas (a partir de la segunda, la 1era ya la guardé)y creo los detalles uno a uno.
     CDMedidas.Next;
+    while not(CDMedidas.Eof) do
+    begin
+      ZQ_DetalleProducto.Filtered := false;
+      ZQ_DetalleProducto.Filter:= Format('id_medida = %d',[CDMedidasid_medida.AsInteger]);
+      ZQ_DetalleProducto.Filtered := true;
 
-  while not(CDMedidas.Eof) do
-  begin
-    ZQ_DetalleProducto.Filtered := false;
-    ZQ_DetalleProducto.Filter:= Format('id_medida = %d',[CDMedidasid_medida.AsInteger]);
-    ZQ_DetalleProducto.Filtered := true;
-
-    if (ZQ_DetalleProducto.IsEmpty) then
-     begin
-        //Cada detalle tiene los mismos datos precargados
-
-        ZQ_Precios.Append;
-        ZQ_PreciosPRECIO_COSTO.AsFloat:=pc;
-        ZQ_PreciosPRECIO_COSTO_CIMPUESTOS.AsFloat:=pci;
-        ZQ_PreciosPRECIO_VENTA.AsFloat:=pv;
-        ZQ_PreciosCOEF_GANANCIA.AsFloat:=cg;
-        ZQ_PreciosCOEF_DESCUENTO.AsFloat:=cd;
-        ZQ_PreciosIMPUESTO_INTERNO.AsFloat:=iint;
-        ZQ_PreciosIMPUESTO_IVA.AsFloat:=iiva;
-        ZQ_PreciosIMPUESTO_ADICIONAL1.AsFloat:=iad1;
-        ZQ_PreciosIMPUESTO_ADICIONAL2.AsFloat:=iad2;
-
-        ZQ_DetalleProducto.Append;
-        ZQ_DetalleProductoLLEVAR_STOCK.AsString:=llevarStock;
-        ZQ_DetalleProductoSTOCK_MIN.AsFloat:=smin;
-        ZQ_DetalleProductoSTOCK_MAX.AsFloat:=smax;
-        ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
-        ZQ_DetalleProductoID_MEDIDA.AsInteger:=CDMedidasid_medida.AsInteger;
-        ZQ_DetalleProductoDESCRIPCION.AsString:=descr;
-        //ZQ_DetalleProductoCOD_CORTO.AsString:=codc;
-        //ZQ_DetalleProductoCODIGO_BARRA.AsString:=codb;
-//        ZQ_DetalleProductoPRECIO_COSTO.AsFloat:=pc;
-//        ZQ_DetalleProductoPRECIO_COSTO_CIMPUESTOS.AsFloat:=pci;
-//        ZQ_DetalleProductoPRECIO_VENTA.AsFloat:=pv;
-//        ZQ_DetalleProductoCOEF_GANANCIA.AsFloat:=cg;
-//        ZQ_DetalleProductoCOEF_DESCUENTO.AsFloat:=cd;
-//        ZQ_DetalleProductoIMPUESTO_INTERNO.AsFloat:=iint;
-//        ZQ_DetalleProductoIMPUESTO_IVA.AsFloat:=iiva;
-//        ZQ_DetalleProductoIMPUESTO_ADICIONAL1.AsFloat:=iad1;
-//        ZQ_DetalleProductoIMPUESTO_ADICIONAL2.AsFloat:=iad2;
-
-        if ZQ_PreciosPRECIO1.AsFloat = 0 then
-          ZQ_PreciosPRECIO1.AsFloat :=pv;
-
-        if ZQ_PreciosPRECIO2.AsFloat = 0 then
-          ZQ_PreciosPRECIO2.AsFloat :=pv;
-
-        if ZQ_PreciosPRECIO3.AsFloat = 0 then
-          ZQ_PreciosPRECIO3.AsFloat :=pv;
-
-        if ZQ_PreciosPRECIO4.AsFloat = 0 then
-          ZQ_PreciosPRECIO4.AsFloat :=pv;
-
-        if ZQ_PreciosPRECIO5.AsFloat = 0 then
-          ZQ_PreciosPRECIO5.AsFloat :=pv;
-
-
-       //Si inserto uno nuevo genero un id nuevo
-       if (ZQ_DetalleProducto.State=dsInsert) then
+      if (ZQ_DetalleProducto.IsEmpty) then
        begin
-        ZSP_GenerarIDProdDeralle.Active:=False;
-        ZSP_GenerarIDProdDeralle.Active:=True;
-        ZQ_DetalleProductoID_PRODUCTO.AsInteger:=ZSP_GenerarIDProdDeralleID.AsInteger;
-        ZQ_PreciosID_PRODUCTO.AsInteger := ZSP_GenerarIDProdDeralleID.AsInteger;
-        ZQ_PreciosID_SUCURSAL.AsInteger := SUCURSAL_LOGUEO;
+          //Cada detalle tiene los mismos datos precargados
+          ZQ_DetalleProducto.Append;
+          ZQ_DetalleProductoID_PROD_CABECERA.AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
+          ZQ_DetalleProductoID_MEDIDA.AsInteger:=CDMedidasid_medida.AsInteger;
+          ZQ_DetalleProductoLLEVAR_STOCK.AsString:=llevarStock;
+          ZQ_DetalleProductoSTOCK_MIN.AsFloat:=smin;
+          ZQ_DetalleProductoSTOCK_MAX.AsFloat:=smax;
+          ZQ_DetalleProductoDESCRIPCION.AsString:=descr;
 
-        if ZQ_DetalleProductoCOD_CORTO.AsString='' then
-           ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
+          ZQ_Precios.Append;
+          ZQ_PreciosPRECIO_COSTO.AsFloat:=pc;
+          ZQ_PreciosPRECIO_COSTO_CIMPUESTOS.AsFloat:=pci;
+          ZQ_PreciosPRECIO_VENTA.AsFloat:=pv;
+          ZQ_PreciosCOEF_GANANCIA.AsFloat:=cg;
+          ZQ_PreciosCOEF_DESCUENTO.AsFloat:=cd;
+          ZQ_PreciosIMPUESTO_INTERNO.AsFloat:=iint;
+          ZQ_PreciosIMPUESTO_IVA.AsFloat:=iiva;
+          ZQ_PreciosIMPUESTO_ADICIONAL1.AsFloat:=iad1;
+          ZQ_PreciosIMPUESTO_ADICIONAL2.AsFloat:=iad2;
 
-        if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
-           ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
-       end;
-        ZQ_Precios.Post;
+          if ZQ_PreciosPRECIO1.AsFloat = 0 then
+            ZQ_PreciosPRECIO1.AsFloat :=pv;
+          if ZQ_PreciosPRECIO2.AsFloat = 0 then
+            ZQ_PreciosPRECIO2.AsFloat :=pv;
+          if ZQ_PreciosPRECIO3.AsFloat = 0 then
+            ZQ_PreciosPRECIO3.AsFloat :=pv;
+          if ZQ_PreciosPRECIO4.AsFloat = 0 then
+            ZQ_PreciosPRECIO4.AsFloat :=pv;
+          if ZQ_PreciosPRECIO5.AsFloat = 0 then
+            ZQ_PreciosPRECIO5.AsFloat :=pv;
 
-        ZQ_DetalleProducto.Post;
-        ZQ_DetalleProducto.Filtered := false;
-        ZQ_DetalleProducto.Filter:= Format('id_medida = %d',[CDMedidasid_medida.AsInteger]);
-        ZQ_DetalleProducto.Filtered := true;
-        //Si existe cancelo el registro actual
-
-        if (ZQ_DetalleProducto.RecordCount>1) then
+         //Si inserto uno nuevo genero un id nuevo
+         if (ZQ_DetalleProducto.State = dsInsert) then
          begin
-          ZQ_Precios.Locate('ID_PRODUCTO',ZSP_GenerarIDProdDeralleID.AsInteger,[]);
-          ZQ_Precios.Delete;
-          ZQ_DetalleProducto.Locate('ID_PRODUCTO',ZSP_GenerarIDProdDeralleID.AsInteger,[]);
-          ZQ_DetalleProducto.Delete;
-          Application.MessageBox('Esta medida ya fue cargada','Carga medida',MB_OK+MB_ICONINFORMATION);
-         end;
-     end;
-     ZQ_DetalleProducto.Filtered:=False;
+          ZSP_GenerarIDProdDeralle.Active:= False;
+          ZSP_GenerarIDProdDeralle.Active:= True;
+          ZQ_DetalleProductoID_PRODUCTO.AsInteger:= ZSP_GenerarIDProdDeralleID.AsInteger;
+          ZQ_PreciosID_PRODUCTO.AsInteger:= ZSP_GenerarIDProdDeralleID.AsInteger;
+          ZQ_PreciosID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
 
-     CDMedidas.Next;
-  end;
- end
-else
+          if ZQ_DetalleProductoCOD_CORTO.AsString='' then
+             ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
+
+          if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
+             ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
+          end;
+
+          ZQ_Precios.Post;
+          ZQ_DetalleProducto.Post;
+
+          ZQ_DetalleProducto.Filtered := false;
+          ZQ_DetalleProducto.Filter:= Format('id_medida = %d',[CDMedidasid_medida.AsInteger]);
+          ZQ_DetalleProducto.Filtered := true;
+
+          //Si existe cancelo el registro actual
+          if (ZQ_DetalleProducto.RecordCount>1) then
+          begin
+            ZQ_Precios.Locate('ID_PRODUCTO',ZSP_GenerarIDProdDeralleID.AsInteger,[]);
+            ZQ_Precios.Delete;
+            ZQ_DetalleProducto.Locate('ID_PRODUCTO',ZSP_GenerarIDProdDeralleID.AsInteger,[]);
+            ZQ_DetalleProducto.Delete;
+            Application.MessageBox('Esta medida ya fue cargada','Carga medida',MB_OK+MB_ICONINFORMATION);
+          end;
+       end;
+
+       ZQ_DetalleProducto.Filtered:=False;
+       CDMedidas.Next;
+    end;
+  end
+  else //si estoy modificando un producto
   begin
     if not(validarcamposDetalle) then
       exit;
 
-    ZQ_PreciosID_PRODUCTO.AsInteger := ZQ_DetalleProductoID_PRODUCTO.AsInteger;
-    ZQ_PreciosID_SUCURSAL.AsInteger := SUCURSAL_LOGUEO;
+    ZQ_PreciosID_PRODUCTO.AsInteger:= ZQ_DetalleProductoID_PRODUCTO.AsInteger;
+    ZQ_PreciosID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
 
     if ZQ_DetalleProductoCOD_CORTO.AsString='' then
        ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
@@ -1489,33 +1456,25 @@ else
     if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
        ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
 
-
     if zq_preciosPRECIO1.AsFloat = 0 then
       zq_preciosPRECIO1.AsFloat :=zq_preciosPRECIO_VENTA.AsFloat;
-
     if zq_preciosPRECIO2.AsFloat = 0 then
       zq_preciosPRECIO2.AsFloat :=zq_preciosPRECIO_VENTA.AsFloat;
-
     if zq_preciosPRECIO3.AsFloat = 0 then
       zq_preciosPRECIO3.AsFloat :=zq_preciosPRECIO_VENTA.AsFloat;
-
     if zq_preciosPRECIO4.AsFloat = 0 then
       zq_preciosPRECIO4.AsFloat :=zq_preciosPRECIO_VENTA.AsFloat;
-
     if zq_preciosPRECIO5.AsFloat = 0 then
       zq_preciosPRECIO5.AsFloat :=zq_preciosPRECIO_VENTA.AsFloat;
 
-    ZQ_DetalleProducto.Post;
-
     zq_precios.Post;
+    ZQ_DetalleProducto.Post;
   end;
 
-   PEdicion.Visible:=False;
-   EKOrdenarDetalle.PopUpGrilla:=PopupMenuDetalleProd;
-   grillaDetalle.Enabled:=True;
-   GrupoEditando.Enabled :=true;
-
-
+  PEdicion.Visible:=False;
+  EKOrdenarDetalle.PopUpGrilla:= PopupMenuDetalleProd;
+  grillaDetalle.Enabled:= True;
+  GrupoEditando.Enabled:= true;
 end;
 
 procedure TFABMProductos.btnGrupoCancelarClick(Sender: TObject);

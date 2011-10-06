@@ -7,8 +7,8 @@ uses
   Dialogs, dxBar, dxBarExtItems, jpeg, QRCtrls, QuickRpt, StdCtrls,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Grids, DBGrids, ZStoredProcedure, UBuscarProducto,
-  ZSqlProcessor, EKVistaPreviaQR, EKListadoSQL, EKCodigoBarra,
-  EKOrdenarGrilla, Menus;
+  ZSqlProcessor, EKVistaPreviaQR, EKCodigoBarra,
+  EKOrdenarGrilla, Menus, EKListadoSQL, ZSqlUpdate;
 
 type
   TFImprimirEtiquetas = class(TForm)
@@ -20,30 +20,13 @@ type
     GrupoEditando: TdxBarGroup;
     ZQ_Etiquetas: TZQuery;
     DBGridEtiquetas: TDBGrid;
-    ZQ_Productos: TZQuery;
     DS_Etiquetas: TDataSource;
     SP_ImprimirEtiquetas: TZStoredProc;
     borrar: TZSQLProcessor;
     btnEliminarLinea: TdxBarLargeButton;
-    btnVacia: TdxBarLargeButton;
+    btnCancelar: TdxBarLargeButton;
     btnConPrecio: TdxBarLargeButton;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
-    EKListado: TEKListadoSQL;
-    ZQ_EtiquetasID_PRODUCTO: TIntegerField;
-    ZQ_EtiquetasCANTIDAD: TIntegerField;
-    ZQ_ProductosID_PRODUCTO: TIntegerField;
-    ZQ_ProductosNOMBRE: TStringField;
-    ZQ_ProductosMEDIDA: TStringField;
-    ZQ_ProductosCOD_CORTO_PRO: TStringField;
-    ZQ_ProductosCODIGO_BARRA: TStringField;
-    ZQ_ProductosCOD_CORTO_CAB: TStringField;
-    SP_ImprimirEtiquetasID_PRODUCTO: TIntegerField;
-    SP_ImprimirEtiquetasDESCRIPCION: TStringField;
-    ZQ_EtiquetasProducto: TStringField;
-    ZQ_EtiquetasMedida: TStringField;
-    ZQ_EtiquetasCodCortoProd: TStringField;
-    ZQ_EtiquetasCodCortoCab: TStringField;
-    ZQ_EtiquetasCodBarra: TStringField;
     QRBand1: TQRBand;
     QRShapeTapa: TQRShape;
     QRCodigoBarra1: TQRImage;
@@ -55,9 +38,6 @@ type
     QRDBPrecio2: TQRDBText;
     QRDBPrecio3: TQRDBText;
     QRDBPrecio1: TQRDBText;
-    SP_ImprimirEtiquetasMedida: TStringField;
-    ZQ_ProductosPRECIO_VENTA: TFloatField;
-    SP_ImprimirEtiquetasPrecio: TFloatField;
     Label1: TLabel;
     EKCodigoBarra1: TEKCodigoBarra;
     EKCodigoBarra2: TEKCodigoBarra;
@@ -68,7 +48,26 @@ type
     PopItemProducto_Quitar: TMenuItem;
     PopItemProducto_QuitarTodos: TMenuItem;
     EKOrdenarGrilla: TEKOrdenarGrilla;
+    EKListado_Sucursal: TEKListadoSQL;
+    btnEliminarTodos: TdxBarLargeButton;
+    ZU_Etiquetas: TZUpdateSQL;
+    ZQ_EtiquetasID_PRODUCTO: TIntegerField;
+    ZQ_EtiquetasCANTIDAD: TIntegerField;
+    ZQ_EtiquetasID_PRECIO: TIntegerField;
+    ZQ_EtiquetasNOMBRE: TStringField;
+    ZQ_EtiquetasMEDIDA: TStringField;
+    ZQ_EtiquetasCOD_CORTO_PRO: TStringField;
+    ZQ_EtiquetasCODIGO_BARRA: TStringField;
+    ZQ_EtiquetasCOD_CORTO_CAB: TStringField;
+    ZQ_EtiquetasPRECIO_VENTA: TFloatField;
     SP_ImprimirEtiquetasCODIGOBARRA: TStringField;
+    SP_ImprimirEtiquetasID_PRODUCTO: TIntegerField;
+    SP_ImprimirEtiquetasDESCRIPCION: TStringField;
+    SP_ImprimirEtiquetasID_PRECIO: TIntegerField;
+    SP_ImprimirEtiquetasMEDIDA: TStringField;
+    SP_ImprimirEtiquetasCOLOR: TStringField;
+    SP_ImprimirEtiquetasPRECIO: TFloatField;
+    SP_ImprimirEtiquetasNOMBRE_PRO: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -78,7 +77,7 @@ type
     procedure DetailBand1BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
     procedure btnEliminarLineaClick(Sender: TObject);
-    procedure btnVaciaClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
     procedure btnConPrecioClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -90,12 +89,13 @@ type
     procedure DBGridEtiquetasDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure btnEliminarTodosClick(Sender: TObject);
   private
     vselProducto: TFBuscarProducto;
     procedure onSelProducto;
     procedure onSelTodosProducto;
   public
-    { Public declarations }
+    id_sucursal: integer;
   end;
 
 var
@@ -116,7 +116,7 @@ begin
   GrupoEditando.Enabled:= False;
   GrupoVisualizando.Enabled:= True;
 
-  ZQ_Productos.Open;
+//  ZQ_Productos.Open;
 end;
 
 
@@ -154,6 +154,13 @@ begin
   begin
     ZQ_Etiquetas.Append;
     ZQ_EtiquetasID_PRODUCTO.AsInteger := vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+    ZQ_EtiquetasID_PRECIO.AsInteger := vselProducto.ZQ_ProductoID_PRECIO.AsInteger;
+    ZQ_EtiquetasCANTIDAD.AsFloat := 1;
+    ZQ_EtiquetasNOMBRE.AsString := vselProducto.ZQ_ProductoNOMBRE.AsString;
+    ZQ_EtiquetasMEDIDA.AsString := vselProducto.ZQ_ProductoMEDIDA.AsString;
+    ZQ_EtiquetasCOD_CORTO_PRO.AsString := vselProducto.ZQ_ProductoCOD_CORTO.AsString;
+    ZQ_EtiquetasCOD_CORTO_CAB.AsString := vselProducto.ZQ_ProductoCOD_CORTO_1.AsString;
+    ZQ_EtiquetasCODIGO_BARRA.AsString := vselProducto.ZQ_ProductoCODIGO_BARRA.AsString;
   end;
 
   if vselProducto.SeleccionarYSalir then
@@ -168,7 +175,13 @@ begin
   begin
     ZQ_Etiquetas.Append;
     ZQ_EtiquetasID_PRODUCTO.AsInteger := vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
-    ZQ_Etiquetas.Post;
+    ZQ_EtiquetasID_PRECIO.AsInteger := vselProducto.ZQ_ProductoID_PRECIO.AsInteger;
+    ZQ_EtiquetasCANTIDAD.AsFloat := 1;
+    ZQ_EtiquetasNOMBRE.AsString := vselProducto.ZQ_ProductoNOMBRE.AsString;
+    ZQ_EtiquetasMEDIDA.AsString := vselProducto.ZQ_ProductoMEDIDA.AsString;
+    ZQ_EtiquetasCOD_CORTO_PRO.AsString := vselProducto.ZQ_ProductoCOD_CORTO.AsString;
+    ZQ_EtiquetasCOD_CORTO_CAB.AsString := vselProducto.ZQ_ProductoCOD_CORTO_1.AsString;
+    ZQ_EtiquetasCODIGO_BARRA.AsString := vselProducto.ZQ_ProductoCODIGO_BARRA.AsString;
 
     vselProducto.ZQ_Producto.Next;
   end;
@@ -193,15 +206,18 @@ begin
   if ZQ_Etiquetas.IsEmpty then
     exit;
 
-  fila := InputBox('Configurar Pagina','Indique la fila de la pagina desde donde empezar:','0');
+  fila := InputBox('Configurar Pagina','Indique la fila de la pagina desde donde empezar:','1');
   try
     filan := StrToInt(fila);
   except
-    filan := 0;
+    begin
+      ShowMessage('valor incorrecto, intente de nuevo.');
+      exit;
+    end;
   end;
 
   dm.EKModelo.aplicar_modificaciones(transaccion_Etiquetas);
-  
+
   SP_ImprimirEtiquetas.Active := false;
   SP_ImprimirEtiquetas.ParamByName('desde_renglon').AsInteger := Filan;
   SP_ImprimirEtiquetas.Active := true;
@@ -220,8 +236,7 @@ begin
 end;
 
 
-procedure TFImprimirEtiquetas.DetailBand1BeforePrint(Sender: TQRCustomBand;
-  var PrintBand: Boolean);
+procedure TFImprimirEtiquetas.DetailBand1BeforePrint(Sender: TQRCustomBand; var PrintBand: Boolean);
 begin
   if SP_ImprimirEtiquetasID_PRODUCTO.AsInteger = 0 then
   begin
@@ -237,16 +252,15 @@ end;
 
 procedure TFImprimirEtiquetas.btnEliminarLineaClick(Sender: TObject);
 begin
-  if ZQ_Etiquetas.IsEmpty then
-    exit;
-    
-  ZQ_Etiquetas.Delete;
+  if not ZQ_Etiquetas.IsEmpty then
+    ZQ_Etiquetas.Delete;
 end;
 
 
-procedure TFImprimirEtiquetas.btnVaciaClick(Sender: TObject);
+procedure TFImprimirEtiquetas.btnCancelarClick(Sender: TObject);
 begin
   borrar.Execute;
+  btnEliminarTodos.click;
 
   if dm.EKModelo.finalizar_transaccion(transaccion_Etiquetas) then
   begin
@@ -263,8 +277,9 @@ end;
 
 
 procedure TFImprimirEtiquetas.btnConPrecioClick(Sender: TObject);
-var Fila: string;
-    Filan : integer;
+var
+  Fila: string;
+  Filan : integer;
 begin
   if ZQ_Etiquetas.IsEmpty then
     exit;
@@ -307,12 +322,14 @@ end;
 
 procedure TFImprimirEtiquetas.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
+  if not ZQ_Etiquetas.IsEmpty then
+    btnCancelar.Click;
+
   CanClose:= FPrincipal.cerrar_ventana(transaccion_Etiquetas);
 end;
 
 
-procedure TFImprimirEtiquetas.PopItemProducto_AgregarClick(
-  Sender: TObject);
+procedure TFImprimirEtiquetas.PopItemProducto_AgregarClick(Sender: TObject);
 begin
   agregarProducto;
 end;
@@ -320,13 +337,23 @@ end;
 
 procedure TFImprimirEtiquetas.PopItemProducto_QuitarClick(Sender: TObject);
 begin
-  if not ZQ_Etiquetas.IsEmpty then
-    ZQ_Etiquetas.Delete;
+  btnEliminarLinea.Click
 end;
 
 
-procedure TFImprimirEtiquetas.PopItemProducto_QuitarTodosClick(
-  Sender: TObject);
+procedure TFImprimirEtiquetas.PopItemProducto_QuitarTodosClick(Sender: TObject);
+begin
+  btnEliminarTodos.Click
+end;
+
+
+procedure TFImprimirEtiquetas.DBGridEtiquetasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridEtiquetas, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFImprimirEtiquetas.btnEliminarTodosClick(Sender: TObject);
 begin
   if ZQ_Etiquetas.IsEmpty then
     exit;
@@ -337,13 +364,6 @@ begin
   ZQ_Etiquetas.First;
   while not ZQ_Etiquetas.Eof do
    ZQ_Etiquetas.Delete;
-end;
-
-procedure TFImprimirEtiquetas.DBGridEtiquetasDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  FPrincipal.PintarFilasGrillas(DBGridEtiquetas, Rect, DataCol, Column, State);
 end;
 
 end.

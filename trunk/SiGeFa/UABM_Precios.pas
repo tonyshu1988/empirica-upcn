@@ -180,6 +180,8 @@ type
     ZQ_SucursalNOMBRE: TStringField;
     ZQ_SucursalID_SUCURSAL: TIntegerField;
     ZSPActualizarImporte: TZStoredProc;
+    ZQ_ProductosID_SUCURSAL: TIntegerField;
+    ZQ_ImprimirEtiquetasID_PRECIO: TIntegerField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -212,6 +214,7 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
+    procedure EditVentaExit(Sender: TObject);
   private
     { Private declarations }
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
@@ -712,7 +715,6 @@ end;
 procedure TFABM_Precios.ZQ_ProductosCalcFields(DataSet: TDataSet);
 begin
   ZQ_Productosimporte_venta_cliente.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat-(ZQ_ProductosPRECIO_VENTA.AsFloat*DescuentoCliente);
-
 end;
 
 
@@ -838,16 +840,23 @@ end;
 
 
 procedure TFABM_Precios.btImprimirEtiquetasClick(Sender: TObject);
+var
+  id_suc: integer;
+  suc: string;
 begin
   if dm.EKModelo.iniciar_transaccion(Transaccion_ImprimirEtiquetas, [ZQ_ImprimirEtiquetas]) then
   begin
     ZQ_Productos.First;
+    id_suc:= ZQ_ProductosID_SUCURSAL.AsInteger;
+    suc:= 'Sucursal: '+ZQ_ProductosNOMBRE.AsString;
     while not(ZQ_Productos.Eof) do
     begin
       ZQ_ImprimirEtiquetas.Append;
       ZQ_ImprimirEtiquetasID_PRODUCTO.AsInteger:= ZQ_ProductosID_PRODUCTO.AsInteger;
+      ZQ_ImprimirEtiquetasID_PRECIO.AsInteger:= ZQ_ProductosID_PRECIO.AsInteger;
       ZQ_ImprimirEtiquetasCANTIDAD.AsInteger:= 1;
       ZQ_ImprimirEtiquetas.Post;
+      
       ZQ_Productos.Next;
     end;
 
@@ -855,6 +864,7 @@ begin
     begin
       FPrincipal.AImprimirEtiqueta.Execute;
       FImprimirEtiquetas.btnEditar.Click;
+      FImprimirEtiquetas.ZQ_Etiquetas.Refresh;
     end;
   end;
 end;
@@ -884,6 +894,12 @@ procedure TFABM_Precios.ACancelarExecute(Sender: TObject);
 begin
   if btnCancelar.Enabled then
     btnCancelar.Click;
+end;
+
+
+procedure TFABM_Precios.EditVentaExit(Sender: TObject);
+begin
+  EditPrecio1.Text:= EditVenta.Text;
 end;
 
 end.

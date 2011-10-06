@@ -1337,4 +1337,47 @@ object FAuditoria: TFAuditoria
       Required = True
     end
   end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridAudGeneral
+    Filtros = <
+      item
+        TituloColumna = 'Tabla'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Operacion'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Usuario DB'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Usuario'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Campo Clave'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Valor Clave'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 576
+    Top = 64
+  end
 end

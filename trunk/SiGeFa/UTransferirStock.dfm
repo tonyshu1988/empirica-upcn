@@ -31,7 +31,7 @@ object FTransferirStock: TFTransferirStock
       Top = 34
       Width = 852
       Height = 433
-      ActivePage = TabSAsociarNotaPedido
+      ActivePage = TabSTransferirStock
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -155,6 +155,46 @@ object FTransferirStock: TFTransferirStock
               Title.Alignment = taCenter
               Title.Caption = 'C'#243'd. Cabecera'
               Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'sucursal'
+              Title.Alignment = taCenter
+              Title.Caption = 'Sucursal'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'seccion'
+              Title.Alignment = taCenter
+              Title.Caption = 'Secci'#243'n'
+              Width = 92
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'sector'
+              Title.Alignment = taCenter
+              Title.Caption = 'Sector'
+              Width = 60
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'fila'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fila'
+              Width = 58
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'columna'
+              Title.Alignment = taCenter
+              Title.Caption = 'Columna'
+              Width = 58
               Visible = True
             end>
         end
@@ -1139,6 +1179,26 @@ object FTransferirStock: TFTransferirStock
     object CD_Productocantidad: TFloatField
       FieldName = 'cantidad'
     end
+    object CD_Productosucursal: TStringField
+      FieldName = 'sucursal'
+      Size = 200
+    end
+    object CD_Productoseccion: TStringField
+      FieldName = 'seccion'
+      Size = 50
+    end
+    object CD_Productosector: TStringField
+      FieldName = 'sector'
+      Size = 10
+    end
+    object CD_Productofila: TStringField
+      FieldName = 'fila'
+      Size = 10
+    end
+    object CD_Productocolumna: TStringField
+      FieldName = 'columna'
+      Size = 10
+    end
   end
   object DS_Producto: TDataSource
     DataSet = CD_Producto
@@ -1802,6 +1862,26 @@ object FTransferirStock: TFTransferirStock
       end
       item
         TituloColumna = 'C'#243'd. Cabecera'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Secci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sector'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fila'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Columna'
         Visible = True
       end>
     NombreGuardar = 'TransferirStock_Productos'
