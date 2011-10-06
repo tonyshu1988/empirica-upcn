@@ -185,11 +185,20 @@ object FPrincipal: TFPrincipal
       Align = alClient
       Caption = 'Panel4'
       TabOrder = 1
+      object lblCantidad: TLabel
+        Left = 1
+        Top = 267
+        Width = 852
+        Height = 13
+        Align = alBottom
+        Alignment = taRightJustify
+        Layout = tlCenter
+      end
       object DBGrid1: TDBGrid
         Left = 1
         Top = 1
         Width = 852
-        Height = 279
+        Height = 266
         Align = alClient
         Color = 15915716
         DataSource = DataSource1
