@@ -23,8 +23,8 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1016
-    Height = 496
+    Width = 1008
+    Height = 490
     Align = alClient
     TabOrder = 4
     object RepListaPrecios: TQuickRep
@@ -172,7 +172,7 @@ object FABM_Precios: TFABM_Precios
           Size.Values = (
             52.916666666666670000
             1150.937500000000000000
-            68.791666666666680000
+            68.791666666666670000
             465.666666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -1199,7 +1199,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1215,7 +1215,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2532.062500000000000000
             2.645833333333333000
             103.187500000000000000)
@@ -1247,7 +1247,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -1334,7 +1334,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1569,8 +1569,8 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 19
-      Width = 1014
-      Height = 311
+      Width = 1006
+      Height = 305
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1737,6 +1737,7 @@ object FABM_Precios: TFABM_Precios
         item
           Expanded = False
           FieldName = 'NOMBRE'
+          Title.Alignment = taCenter
           Title.Caption = 'Sucursal'
           Width = 100
           Visible = True
@@ -1744,8 +1745,8 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 330
-      Width = 1014
+      Top = 324
+      Width = 1006
       Height = 165
       Hint = '`'
       Align = alBottom
@@ -1772,8 +1773,8 @@ object FABM_Precios: TFABM_Precios
         Caption = ' Tipo  '
         ItemIndex = 0
         Items.Strings = (
-          'Porcentaje'
-          'Dinero')
+          'Porcentaje (%)'
+          'Dinero ($)')
         TabOrder = 0
         OnClick = RadioGroupTipoCalculoClick
       end
@@ -1803,14 +1804,14 @@ object FABM_Precios: TFABM_Precios
         end
         object LabelTipo2: TLabel
           Left = 105
-          Top = 47
+          Top = 46
           Width = 12
           Height = 13
           Caption = '%'
         end
         object LabelTipo1: TLabel
           Left = 105
-          Top = 21
+          Top = 20
           Width = 12
           Height = 13
           Caption = '%'
@@ -1869,7 +1870,7 @@ object FABM_Precios: TFABM_Precios
         end
         object LabelTipoP2: TLabel
           Left = 308
-          Top = 47
+          Top = 46
           Width = 12
           Height = 13
           Caption = '%'
@@ -1877,7 +1878,7 @@ object FABM_Precios: TFABM_Precios
         end
         object LabelTipoP1: TLabel
           Left = 307
-          Top = 21
+          Top = 20
           Width = 12
           Height = 13
           Caption = '%'
@@ -1885,7 +1886,7 @@ object FABM_Precios: TFABM_Precios
         end
         object LabelTipoP3: TLabel
           Left = 502
-          Top = 21
+          Top = 20
           Width = 12
           Height = 13
           Caption = '%'
@@ -1893,7 +1894,7 @@ object FABM_Precios: TFABM_Precios
         end
         object LabelTipoP4: TLabel
           Left = 502
-          Top = 47
+          Top = 46
           Width = 12
           Height = 13
           Caption = '%'
@@ -1901,7 +1902,7 @@ object FABM_Precios: TFABM_Precios
         end
         object LabelTipoP5: TLabel
           Left = 697
-          Top = 21
+          Top = 20
           Width = 12
           Height = 13
           Caption = '%'
@@ -1926,6 +1927,7 @@ object FABM_Precios: TFABM_Precios
           AutoSize = False
           TabOrder = 1
           Text = '0'
+          OnExit = EditVentaExit
         end
         object EditPrecio1: TEdit
           Left = 321
@@ -2066,7 +2068,7 @@ object FABM_Precios: TFABM_Precios
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1014
+      Width = 1006
       Height = 18
       Align = alTop
       ParentShowHint = False
@@ -2091,7 +2093,7 @@ object FABM_Precios: TFABM_Precios
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2705,7 +2707,9 @@ object FABM_Precios: TFABM_Precios
       
         '       pr.impuesto_adicional2, pr.precio1, pr.precio2, pr.precio' +
         '3, pr.precio4,'
-      '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio'
+      
+        '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio, p' +
+        'r.id_sucursal'
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
       
@@ -2835,6 +2839,9 @@ object FABM_Precios: TFABM_Precios
     object ZQ_ProductosID_PRECIO: TIntegerField
       FieldName = 'ID_PRECIO'
       Required = True
+    end
+    object ZQ_ProductosID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
     end
   end
   object DS_Productos: TDataSource
@@ -2979,7 +2986,9 @@ object FABM_Precios: TFABM_Precios
       
         '       pr.impuesto_adicional2, pr.precio1, pr.precio2, pr.precio' +
         '3, pr.precio4,'
-      '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio'
+      
+        '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio, p' +
+        'r.id_sucursal'
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
       
@@ -3013,7 +3022,9 @@ object FABM_Precios: TFABM_Precios
       
         '       pr.impuesto_adicional2, pr.precio1, pr.precio2, pr.precio' +
         '3, pr.precio4,'
-      '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio')
+      
+        '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio, p' +
+        'r.id_sucursal')
     SQL_From.Strings = (
       'from producto p'
       'left join medida m on (p.id_medida = m.id_medida)'
@@ -3262,6 +3273,9 @@ object FABM_Precios: TFABM_Precios
     end
     object ZQ_ImprimirEtiquetasCANTIDAD: TIntegerField
       FieldName = 'CANTIDAD'
+    end
+    object ZQ_ImprimirEtiquetasID_PRECIO: TIntegerField
+      FieldName = 'ID_PRECIO'
     end
   end
   object ZU_Productos: TZUpdateSQL

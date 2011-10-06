@@ -162,6 +162,11 @@ type
     ZQ_VerCpbID_TIPO_IVA: TIntegerField;
     ZQ_VerCpbID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_VerCpbIMPORTE_VENTA: TFloatField;
+    CD_Productosucursal: TStringField;
+    CD_Productoseccion: TStringField;
+    CD_Productosector: TStringField;
+    CD_Productofila: TStringField;
+    CD_Productocolumna: TStringField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAsociarClick(Sender: TObject);
@@ -237,6 +242,11 @@ begin
     CD_ProductostockMin.AsFloat := vsel.ZQ_StockSTOCK_MIN.AsFloat;
     CD_ProductostockMax.AsFloat := vsel.ZQ_StockSTOCK_MAX.AsFloat;
     CD_ProductostockRepedido.AsFloat := vsel.ZQ_StockSTOCK_REPEDIDO.AsFloat;
+    CD_Productosucursal.AsString := vsel.ZQ_StockSUCURSAL.AsString;
+    CD_Productoseccion.AsString := vsel.ZQ_StockSECCION.AsString;
+    CD_Productosector.AsString := vsel.ZQ_StockSECTOR.AsString;
+    CD_Productofila.AsString := vsel.ZQ_StockFILA.AsString;
+    CD_Productocolumna.AsString := vsel.ZQ_StockCOLUMNA.AsString;
     CD_Producto.Post;    
   end;
 
@@ -278,6 +288,11 @@ begin
       CD_ProductostockMin.AsFloat := vsel.ZQ_StockSTOCK_MIN.AsFloat;
       CD_ProductostockMax.AsFloat := vsel.ZQ_StockSTOCK_MAX.AsFloat;
       CD_ProductostockRepedido.AsFloat := vsel.ZQ_StockSTOCK_REPEDIDO.AsFloat;
+      CD_Productosucursal.AsString := vsel.ZQ_StockSUCURSAL.AsString;
+      CD_Productoseccion.AsString := vsel.ZQ_StockSECCION.AsString;
+      CD_Productosector.AsString := vsel.ZQ_StockSECTOR.AsString;
+      CD_Productofila.AsString := vsel.ZQ_StockFILA.AsString;
+      CD_Productocolumna.AsString := vsel.ZQ_StockCOLUMNA.AsString;
 
       vsel.ZQ_Stock.Next;
     end;

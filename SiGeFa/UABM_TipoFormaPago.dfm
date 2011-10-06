@@ -817,6 +817,20 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           ParentFont = False
           Transparent = True
         end
+        object Label6: TLabel
+          Left = 568
+          Top = 38
+          Width = 16
+          Height = 13
+          Caption = 'IF:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
         object DBENombre: TDBEdit
           Left = 223
           Top = 6
@@ -870,11 +884,11 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           TabOrder = 2
         end
         object DBComboBoxVuelto: TDBComboBox
-          Left = 345
+          Left = 586
           Top = 33
           Width = 47
           Height = 21
-          DataField = 'GENERA_VUELTO'
+          DataField = 'IF'
           DataSource = DS_TipoFPago
           ItemHeight = 13
           Items.Strings = (
@@ -897,6 +911,19 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
             '4'
             '5')
           TabOrder = 4
+        end
+        object DBComboBox2: TDBComboBox
+          Left = 353
+          Top = 35
+          Width = 47
+          Height = 21
+          DataField = 'GENERA_VUELTO'
+          DataSource = DS_TipoFPago
+          ItemHeight = 13
+          Items.Strings = (
+            'N'
+            'S')
+          TabOrder = 5
         end
       end
     end

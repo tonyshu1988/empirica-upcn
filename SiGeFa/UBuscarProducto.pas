@@ -69,6 +69,8 @@ type
     ZQ_ProductosProveedorCOEF_GANANCIA: TFloatField;
     ZQ_ProductosProveedorCOEF_DESCUENTO: TFloatField;
     ZQ_ProductosProveedorIMPUESTO_IVA: TFloatField;
+    ZQ_ProductoID_PRECIO: TIntegerField;
+    ZQ_ProductosProveedorID_PRECIO: TIntegerField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);

@@ -88,6 +88,8 @@ type
     Label5: TLabel;
     DBComboBox1: TDBComboBox;
     btnExcel: TdxBarLargeButton;
+    Label6: TLabel;
+    DBComboBox2: TDBComboBox;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -162,6 +164,7 @@ begin
     ZQ_TipoFPagoBAJA.AsString:= 'N';
     ZQ_TipoFPagoMODIFICABLE.AsString:= 'S';
     ZQ_TipoFPagoGENERA_VUELTO.AsString:= 'N';
+    ZQ_TipoFPagoIF.AsString:= 'S';    
     ZQ_TipoFPagoCOLUMNA_PRECIO.AsInteger:= 1;    
 
     if ZQ_UltimoNro.IsEmpty then

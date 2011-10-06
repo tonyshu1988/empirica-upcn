@@ -833,7 +833,7 @@ object FBuscarProducto: TFBuscarProducto
       
         '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
         'e.coef_descuento,'
-      '       pre.impuesto_iva'
+      '       pre.impuesto_iva, pre.id_precio'
       'from producto pr'
       'left join precio pre on (pre.id_producto = pr.id_producto)'
       
@@ -923,6 +923,10 @@ object FBuscarProducto: TFBuscarProducto
     end
     object ZQ_ProductoIMPUESTO_IVA: TFloatField
       FieldName = 'IMPUESTO_IVA'
+    end
+    object ZQ_ProductoID_PRECIO: TIntegerField
+      FieldName = 'ID_PRECIO'
+      Required = True
     end
   end
   object DS_Producto: TDataSource
@@ -1100,7 +1104,7 @@ object FBuscarProducto: TFBuscarProducto
       
         '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
         'e.coef_descuento,'
-      '       pre.impuesto_iva'
+      '       pre.impuesto_iva, pre.id_precio'
       ''
       'from producto pr'
       'left join precio pre on (pre.id_producto = pr.id_producto)'
@@ -1129,7 +1133,7 @@ object FBuscarProducto: TFBuscarProducto
       
         '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
         'e.coef_descuento,'
-      '       pre.impuesto_iva'
+      '       pre.impuesto_iva, pre.id_precio'
       '')
     SQL_From.Strings = (
       'from producto pr'
@@ -1191,7 +1195,7 @@ object FBuscarProducto: TFBuscarProducto
       
         '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
         'e.coef_descuento,'
-      '       pre.impuesto_iva'
+      '       pre.impuesto_iva, pre.id_precio'
       'from producto pr'
       'left join precio pre on (pre.id_producto = pr.id_producto)'
       
@@ -1292,6 +1296,10 @@ object FBuscarProducto: TFBuscarProducto
     end
     object ZQ_ProductosProveedorIMPUESTO_IVA: TFloatField
       FieldName = 'IMPUESTO_IVA'
+    end
+    object ZQ_ProductosProveedorID_PRECIO: TIntegerField
+      FieldName = 'ID_PRECIO'
+      Required = True
     end
   end
   object EKBuscarProductoEmpresa: TEKBusquedaAvanzada
@@ -1408,7 +1416,7 @@ object FBuscarProducto: TFBuscarProducto
       
         '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
         'e.coef_descuento,'
-      '       pre.impuesto_iva'
+      '       pre.impuesto_iva, pre.id_precio'
       ''
       ''
       'from producto pr'
@@ -1440,7 +1448,7 @@ object FBuscarProducto: TFBuscarProducto
       
         '       pre.precio_costo, pre.precio_venta, pre.coef_ganancia, pr' +
         'e.coef_descuento,'
-      '       pre.impuesto_iva'
+      '       pre.impuesto_iva, pre.id_precio'
       ''
       '')
     SQL_From.Strings = (

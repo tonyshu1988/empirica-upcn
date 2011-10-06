@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, DBCtrls, Mask, ExtCtrls, dxBar,
   dxBarExtItems, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKLlenarCombo, DBClient, ComCtrls, ZSqlUpdate, StrUtils;
+  EKLlenarCombo, DBClient, ComCtrls, ZSqlUpdate, StrUtils, EKOrdenarGrilla;
 
 type
   TFAuditoria = class(TForm)
@@ -88,6 +88,7 @@ type
     ZQ_DatosProductoARTICULO: TStringField;
     ZQ_DatosProductoID_PRODUCTO: TIntegerField;
     ZQ_DatosStockID_PRODUCTO: TIntegerField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_AudGeneralAfterScroll(DataSet: TDataSet);
