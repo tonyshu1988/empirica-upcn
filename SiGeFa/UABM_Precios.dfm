@@ -29,8 +29,8 @@ object FABM_Precios: TFABM_Precios
     TabOrder = 4
     object RepListaPrecios: TQuickRep
       Tag = 99
-      Left = -31
-      Top = 153
+      Left = 25
+      Top = 161
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -126,6 +126,7 @@ object FABM_Precios: TFABM_Precios
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
+          Stretch = True
         end
         object QRLabel11: TQRLabel
           Left = 454
@@ -1187,7 +1188,7 @@ object FABM_Precios: TFABM_Precios
         Left = 38
         Top = 212
         Width = 1047
-        Height = 16
+        Height = 24
         Frame.Color = clBlack
         Frame.DrawTop = True
         Frame.DrawBottom = False
@@ -1199,27 +1200,59 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          63.500000000000000000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageFooter
-        object QRLabel24: TQRLabel
-          Left = 957
-          Top = 1
-          Width = 39
-          Height = 13
+        object QRlblPieDePagina: TQRLabel
+          Left = 4
+          Top = 3
+          Width = 81
+          Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            52.916666666666670000
+            10.583333333333330000
+            7.937500000000000000
+            214.312500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'QRlblPieDePagina'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabel43: TQRLabel
+          Left = 957
+          Top = 3
+          Width = 39
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
             2532.062500000000000000
-            2.645833333333333000
+            7.937500000000000000
             103.187500000000000000)
-          Alignment = taRightJustify
+          Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
@@ -1236,23 +1269,23 @@ object FABM_Precios: TFABM_Precios
           ExportAs = exptText
           FontSize = 7
         end
-        object QRSysData2: TQRSysData
-          Left = 1006
-          Top = 1
-          Width = 41
-          Height = 13
+        object QRSysData1: TQRSysData
+          Left = 999
+          Top = 3
+          Width = 45
+          Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            2661.708333333333000000
-            2.645833333333333000
-            108.479166666666700000)
-          Alignment = taRightJustify
-          AlignToBand = True
+            52.916666666666670000
+            2643.187500000000000000
+            7.937500000000000000
+            119.062500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
           AutoSize = False
           Color = clWhite
           Data = qrsPageNumber
