@@ -1595,8 +1595,16 @@ end;
 
 
 procedure TFCajero.btnConfirmarVentaClick(Sender: TObject);
+var
+comprobante : integer;
 begin
-  guardarComprobante()
+ comprobante := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+
+ if guardarComprobante() then
+ begin
+    //ShellExecute(FPrincipal.Handle, nil, pchar(Ruta),
+     //pchar(' -l '+IntToStr(comprobante)+' -i '+Impresora+' -c '+'F'), nil, SW_SHOWNORMAL);
+  end;
 end;
 
 
