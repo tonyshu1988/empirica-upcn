@@ -1,8 +1,8 @@
 object FPrincipal: TFPrincipal
-  Left = 357
-  Top = 188
+  Left = 492
+  Top = 213
   Width = 872
-  Height = 654
+  Height = 671
   Caption = 'Sincronizador SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -19,12 +19,12 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 0
     Width = 856
-    Height = 564
+    Height = 581
     Align = alClient
     TabOrder = 0
     object Splitter1: TSplitter
       Left = 1
-      Top = 304
+      Top = 321
       Width = 854
       Height = 6
       Cursor = crVSplit
@@ -32,7 +32,7 @@ object FPrincipal: TFPrincipal
     end
     object Panel3: TPanel
       Left = 1
-      Top = 310
+      Top = 327
       Width = 854
       Height = 253
       Align = alBottom
@@ -181,13 +181,13 @@ object FPrincipal: TFPrincipal
       Left = 1
       Top = 1
       Width = 854
-      Height = 303
+      Height = 320
       Align = alClient
       Caption = 'Panel4'
       TabOrder = 1
       object lblCantidad: TLabel
         Left = 1
-        Top = 267
+        Top = 284
         Width = 852
         Height = 13
         Align = alBottom
@@ -198,7 +198,7 @@ object FPrincipal: TFPrincipal
         Left = 1
         Top = 1
         Width = 852
-        Height = 266
+        Height = 283
         Align = alClient
         Color = 15915716
         DataSource = DataSource1
@@ -217,11 +217,29 @@ object FPrincipal: TFPrincipal
       end
       object ProgressBar1: TProgressBar
         Left = 1
-        Top = 280
+        Top = 297
         Width = 852
         Height = 22
         Align = alBottom
         TabOrder = 1
+      end
+      object Button1: TButton
+        Left = 704
+        Top = 72
+        Width = 97
+        Height = 25
+        Caption = 'Cargar XML'
+        TabOrder = 2
+        OnClick = Button1Click
+      end
+      object Button2: TButton
+        Left = 704
+        Top = 104
+        Width = 97
+        Height = 25
+        Caption = 'Guardar XML'
+        TabOrder = 3
+        OnClick = Button2Click
       end
     end
   end
