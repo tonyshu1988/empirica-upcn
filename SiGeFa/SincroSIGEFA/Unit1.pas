@@ -74,6 +74,8 @@ type
     ClientDataSet2: TClientDataSet;
     DataSource1: TDataSource;
     lblCantidad: TLabel;
+    Button1: TButton;
+    Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
@@ -91,9 +93,11 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     function subirXML(archivo:String):Boolean ;
     function bajarXML(archivo:String):Boolean ;
-    procedure cargarSXML(archivo:String;cds,cds2:TClientDataSet);
+    procedure cargarXML(archivo:String;cds,cds2:TClientDataSet);
     procedure procesarXMLaLocal(cds:TClientDataSet);
-
+    procedure generarXML(archivo:String);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -121,7 +125,7 @@ begin
   ZQ_SincroTabla.close;
 
   dir:=Application.ExeName;
-
+  edPathArchivo.Text:=ExtractFilePath(Application.ExeName);
 //  if ParamCount=0 then
 //  begin
 //    if IsProcess('Sincronizador.exe') then
@@ -136,7 +140,7 @@ begin
   DM.IdFTP1.Password :=inicio.Ini.ReadString('servidor', 'password','');
   DM.IdFTP1.Host :=  inicio.Ini.ReadString('servidor', 'direccion','');
 
-  edPathArchivo.Text:=inicio.Ini.ReadString('servidor', 'path','');
+  //edPathArchivo.Text:=inicio.Ini.ReadString('servidor', 'path','');
 
   DM.ZC_Local.HostName:=inicio.Ini.ReadString('Base Local', 'direccion','');
   DM.ZC_Local.Database:=inicio.Ini.ReadString('Base Local', 'base','');
@@ -251,7 +255,7 @@ end;
 procedure TFPrincipal.btnSincronizarClick(Sender: TObject);
 begin
  // Sincronizar;
-    cargarSXML(edPathArchivo.Text,ClientDataSet1,ClientDataSet2);
+    cargarXML(edPathArchivo.Text,ClientDataSet1,ClientDataSet2);
 end;
 
 procedure TFPrincipal.btnBorrarLogClick(Sender: TObject);
@@ -326,8 +330,7 @@ end;
 
 procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-
-   dm.ZC_Local.Disconnect;
+  dm.ZC_Local.Disconnect;
 end;
 
 function TFPrincipal.bajarXML(archivo: String): Boolean;
@@ -409,7 +412,7 @@ If DM.IdFTP1.Connected then
 
 end;
 
-procedure TFPrincipal.cargarSXML(archivo: String; cds,cds2: TClientDataSet);
+procedure TFPrincipal.cargarXML(archivo: String; cds,cds2: TClientDataSet);
 var
 xml:String;
 begin
@@ -428,8 +431,6 @@ begin
       cds.First;
       while not(cds.Eof) do
       begin
-
-
 //          Local.SQL.Clear;
 //          Local.SQL.Add(
 //            'select * from '+ZQ_SincroTablaTABLE_NAME.AsString+
@@ -447,17 +448,33 @@ begin
 //            ZQ_SincroCampo.Next;
 //          end;
 //
-//
 //          if ZQ_SincroTablaOPERATION.AsString='D' then
 //          begin
 //            if Local.RecordCount=1 then
 //              Local.Delete;
 //          end;
 
-          cds.Next;
+            cds.Next;
       end;
    end
 
+end;
+
+
+
+procedure TFPrincipal.generarXML(archivo: String);
+begin
+ clientDataSet1.SaveToFile(archivo,dfXMLUTF8);
+end;
+
+procedure TFPrincipal.Button1Click(Sender: TObject);
+begin
+ cargarXML(edPathArchivo.Text,ClientDataSet1,ClientDataSet2);
+end;
+
+procedure TFPrincipal.Button2Click(Sender: TObject);
+begin
+ generarXML(edPathArchivo.Text);
 end;
 
 end.
