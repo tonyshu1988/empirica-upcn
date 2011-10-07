@@ -1999,7 +1999,7 @@ begin
    begin
       ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
       if (ZQ_FormasPagoIF.AsString='S') then
-       totalFP:=totalFP + CD_FpagoIMPORTE.AsFloat;
+       totalFP:=totalFP + CD_Fpago_importeVenta.AsFloat;
       CD_Fpago.Next;
    end;
 
