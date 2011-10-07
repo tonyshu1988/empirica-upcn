@@ -1,8 +1,8 @@
 object FEstadisticasFacturacion: TFEstadisticasFacturacion
-  Left = 261
-  Top = 162
-  Width = 1011
-  Height = 611
+  Left = 253
+  Top = 122
+  Width = 1012
+  Height = 581
   Caption = 'Estadisticas Facturacion'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -13,6 +13,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Position = poDefault
+  Scaled = False
   Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
@@ -21,43 +22,909 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 995
-    Height = 521
+    Width = 996
+    Height = 491
     Align = alClient
+    BevelOuter = bvNone
     Caption = 'PanelContenedor'
     TabOrder = 0
+    object RepDetalleMov: TQuickRep
+      Tag = 99
+      Left = -114
+      Top = 57
+      Width = 1123
+      Height = 794
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      DataSet = ZQ_Comprobante
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      Functions.Strings = (
+        'PAGENUMBER'
+        'COLUMNNUMBER'
+        'REPORTTITLE')
+      Functions.DATA = (
+        '0'
+        '0'
+        #39#39)
+      Options = [FirstPageHeader, LastPageFooter]
+      Page.Columns = 1
+      Page.Orientation = poLandscape
+      Page.PaperSize = A4
+      Page.Values = (
+        100.000000000000000000
+        2100.000000000000000000
+        100.000000000000000000
+        2970.000000000000000000
+        100.000000000000000000
+        100.000000000000000000
+        0.000000000000000000)
+      PrinterSettings.Copies = 1
+      PrinterSettings.OutputBin = Auto
+      PrinterSettings.Duplex = False
+      PrinterSettings.FirstPage = 0
+      PrinterSettings.LastPage = 0
+      PrinterSettings.UseStandardprinter = False
+      PrinterSettings.UseCustomBinCode = False
+      PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
+      PrinterSettings.UseCustomPaperCode = False
+      PrinterSettings.CustomPaperCode = 0
+      PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
+      PrintIfEmpty = True
+      ReportTitle = '+'
+      SnapToGrid = True
+      Units = MM
+      Zoom = 100
+      PrevFormStyle = fsNormal
+      PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
+      object QRBand2: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 38
+        Width = 1047
+        Height = 72
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          190.500000000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbPageHeader
+        object QRDBLogo: TQRDBImage
+          Left = 194
+          Top = 2
+          Width = 64
+          Height = 64
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            169.333333333333300000
+            513.291666666666700000
+            5.291666666666667000
+            169.333333333333300000)
+          DataField = 'LOGO'
+          Stretch = True
+        end
+        object QRLabel8: TQRLabel
+          Left = 475
+          Top = 47
+          Width = 96
+          Height = 19
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            50.270833333333330000
+            1256.770833333333000000
+            124.354166666666700000
+            254.000000000000000000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'FACTURAS'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 12
+        end
+        object RepDetalleMov_Subtitulo: TQRLabel
+          Left = 438
+          Top = 26
+          Width = 170
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            1158.875000000000000000
+            68.791666666666670000
+            449.791666666666700000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'RepDetalleMov_Subtitulo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic, fsUnderline]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 9
+        end
+        object RepDetalleMov_Titulo: TQRLabel
+          Left = 427
+          Top = 2
+          Width = 193
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            1129.770833333333000000
+            5.291666666666667000
+            510.645833333333300000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'RepDetalleMov_Titulo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsUnderline]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 12
+        end
+      end
+      object QRBand3: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 159
+        Width = 1047
+        Height = 16
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = True
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -9
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ForceNewColumn = False
+        ForceNewPage = False
+        ParentFont = False
+        Size.Values = (
+          42.333333333333330000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbDetail
+        object QRDBText18: TQRDBText
+          Left = 172
+          Top = 0
+          Width = 302
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            455.083333333333300000
+            0.000000000000000000
+            799.041666666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Comprobante
+          DataField = 'CLIENTE_'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText7: TQRDBText
+          Left = 481
+          Top = 0
+          Width = 224
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1272.645833333333000000
+            0.000000000000000000
+            592.666666666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Comprobante
+          DataField = 'SUC_'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText16: TQRDBText
+          Left = 918
+          Top = 0
+          Width = 126
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2428.875000000000000000
+            0.000000000000000000
+            333.375000000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Comprobante
+          DataField = 'IMPORTEVENTA_'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText17: TQRDBText
+          Left = 713
+          Top = 0
+          Width = 200
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1886.479166666667000000
+            0.000000000000000000
+            529.166666666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Comprobante
+          DataField = 'NOMBRE_TIPO_IVA'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText20: TQRDBText
+          Left = 2
+          Top = 0
+          Width = 80
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            5.291666666666667000
+            0.000000000000000000
+            211.666666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Comprobante
+          DataField = 'FECHA'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText21: TQRDBText
+          Left = 88
+          Top = 0
+          Width = 80
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            232.833333333333300000
+            0.000000000000000000
+            211.666666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Comprobante
+          DataField = 'CODIGO'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+      end
+      object QRBand6: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 110
+        Width = 1047
+        Height = 31
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          82.020833333333330000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbTitle
+        object QRlblRepDetMov_CritBusqueda: TQRLabel
+          Left = 5
+          Top = 16
+          Width = 973
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            13.229166666666670000
+            42.333333333333330000
+            2574.395833333333000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = True
+          Caption = 'QRlblRepDetMov_CritBusqueda'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabel22: TQRLabel
+          Left = 5
+          Top = 2
+          Width = 126
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            13.229166666666670000
+            5.291666666666667000
+            333.375000000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Criterios de Busqueda:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = False
+          WordWrap = False
+          ExportAs = exptText
+          FontSize = 7
+        end
+      end
+      object PageFooterBand2: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 201
+        Width = 1047
+        Height = 24
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          63.500000000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbPageFooter
+        object QRlblRepDetalleMov_PieDePagina: TQRLabel
+          Left = 4
+          Top = 3
+          Width = 155
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            10.583333333333330000
+            7.937500000000000000
+            410.104166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'QRlblRepDetalleMov_PieDePagina'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabel18: TQRLabel
+          Left = 959
+          Top = 3
+          Width = 39
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            2537.354166666667000000
+            7.937500000000000000
+            103.187500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'P'#225'gina:'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRSysData2: TQRSysData
+          Left = 1001
+          Top = 3
+          Width = 45
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            2648.479166666667000000
+            7.937500000000000000
+            119.062500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          Color = clWhite
+          Data = qrsPageNumber
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+      end
+      object ColumnHeaderBand1: TQRBand
+        Left = 38
+        Top = 141
+        Width = 1047
+        Height = 18
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = True
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clSilver
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          47.625000000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbColumnHeader
+        object QRLabel25: TQRLabel
+          Left = 930
+          Top = 2
+          Width = 114
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2460.625000000000000000
+            5.291666666666667000
+            301.625000000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Importe'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel28: TQRLabel
+          Left = 172
+          Top = 2
+          Width = 46
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            455.083333333333300000
+            5.291666666666667000
+            121.708333333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Cliente'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel23: TQRLabel
+          Left = 713
+          Top = 2
+          Width = 92
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1886.479166666667000000
+            5.291666666666667000
+            243.416666666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Tipo Iva'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel26: TQRLabel
+          Left = 481
+          Top = 2
+          Width = 80
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1272.645833333333000000
+            5.291666666666667000
+            211.666666666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Sucursal'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel31: TQRLabel
+          Left = 88
+          Top = 2
+          Width = 80
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            232.833333333333300000
+            5.291666666666667000
+            211.666666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'C'#243'digo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel27: TQRLabel
+          Left = 2
+          Top = 2
+          Width = 80
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            5.291666666666667000
+            5.291666666666667000
+            211.666666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Fecha'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+      end
+      object QRBand1: TQRBand
+        Left = 38
+        Top = 175
+        Width = 1047
+        Height = 26
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          68.791666666666670000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbSummary
+        object QRlblImporteTotal: TQRLabel
+          Left = 706
+          Top = 4
+          Width = 338
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1867.958333333333000000
+            10.583333333333330000
+            894.291666666666700000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Importe Total: XXX'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+      end
+    end
     object Panel5: TPanel
-      Left = 1
-      Top = 25
-      Width = 993
-      Height = 495
+      Left = 0
+      Top = 21
+      Width = 996
+      Height = 470
       Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 2
       Caption = 'Panel5'
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 647
-        Top = 1
-        Width = 8
-        Height = 493
-        Align = alRight
+        Left = 2
+        Top = 340
+        Width = 992
+        Height = 6
+        Cursor = crVSplit
+        Align = alBottom
       end
-      object Panel1: TPanel
-        Left = 1
-        Top = 1
-        Width = 646
-        Height = 493
+      object PanelComprobante: TPanel
+        Left = 2
+        Top = 2
+        Width = 992
+        Height = 338
         Align = alClient
-        Caption = 'Panel1'
+        BevelOuter = bvNone
         TabOrder = 0
-        object lblComprobantes: TLabel
-          Left = 1
-          Top = 463
-          Width = 644
-          Height = 29
+        object lblTotalComprobantes: TLabel
+          Left = 0
+          Top = 317
+          Width = 992
+          Height = 21
           Align = alBottom
           Alignment = taRightJustify
           AutoSize = False
-          Caption = 'Total Comprobantes: $ 0.00 '
+          Caption = 'Total Comprobante: $ 0.00 '
           Color = 16729670
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
@@ -70,10 +937,10 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
           Layout = tlCenter
         end
         object DBGridComprobantes: TDBGrid
-          Left = 1
-          Top = 1
-          Width = 644
-          Height = 462
+          Left = 0
+          Top = 0
+          Width = 992
+          Height = 317
           Align = alClient
           Color = 14606012
           DataSource = DS_Comprobante
@@ -158,35 +1025,54 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
             end>
         end
       end
-      object Panel2: TPanel
-        Left = 655
-        Top = 1
-        Width = 337
-        Height = 493
-        Align = alRight
-        Caption = 'Panel2'
+      object PanelFPagoYProd: TPanel
+        Left = 2
+        Top = 346
+        Width = 992
+        Height = 122
+        Align = alBottom
+        BevelOuter = bvNone
         TabOrder = 1
         object Splitter2: TSplitter
-          Left = 1
-          Top = 353
-          Width = 335
-          Height = 8
-          Cursor = crVSplit
-          Align = alBottom
+          Left = 607
+          Top = 0
+          Width = 6
+          Height = 122
         end
-        object Panel3: TPanel
-          Left = 1
-          Top = 1
-          Width = 335
-          Height = 352
+        object PanelProducto: TPanel
+          Left = 613
+          Top = 0
+          Width = 379
+          Height = 122
           Align = alClient
-          Caption = 'Panel3'
+          BevelOuter = bvNone
+          Caption = 'PanelProducto'
           TabOrder = 0
+          object lblTotalProducto: TLabel
+            Left = 0
+            Top = 101
+            Width = 379
+            Height = 21
+            Align = alBottom
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Total Producto: $ 0.00 '
+            Color = 16729670
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
           object DBGridListadoProductos: TDBGrid
-            Left = 1
-            Top = 1
-            Width = 333
-            Height = 350
+            Left = 0
+            Top = 0
+            Width = 379
+            Height = 101
             Align = alClient
             Color = 14606012
             DataSource = DS_ComprobanteDetalle
@@ -209,8 +1095,8 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
                 Expanded = False
                 FieldName = 'ID_PRODUCTO'
                 Title.Alignment = taCenter
-                Title.Caption = 'ID'
-                Width = 46
+                Title.Caption = 'Id'
+                Width = 64
                 Visible = True
               end
               item
@@ -218,7 +1104,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
                 FieldName = 'DETALLE_PROD'
                 Title.Alignment = taCenter
                 Title.Caption = 'Producto'
-                Width = 174
+                Width = 240
                 Visible = True
               end
               item
@@ -226,46 +1112,77 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
                 FieldName = 'CANTIDAD'
                 Title.Alignment = taCenter
                 Title.Caption = 'Cant.'
-                Width = 40
+                Width = 53
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'IMPORTE_VENTA'
                 Title.Alignment = taCenter
-                Title.Caption = 'Importe Venta'
+                Title.Caption = 'Importe'
+                Width = 101
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'IMPORTE_IVA'
+                FieldName = 'CODIGO_BARRA'
                 Title.Alignment = taCenter
-                Title.Caption = 'Importe IVA'
+                Title.Caption = 'C'#243'd. Barra'
+                Width = 80
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'PORC_DESCUENTO'
+                FieldName = 'COLOR'
                 Title.Alignment = taCenter
-                Title.Caption = 'Desc.'
-                Width = 57
+                Title.Caption = 'Color'
+                Width = 67
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MEDIDA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Medida'
+                Width = 75
                 Visible = True
               end>
           end
         end
-        object Panel4: TPanel
-          Left = 1
-          Top = 361
-          Width = 335
-          Height = 131
-          Align = alBottom
-          Caption = 'Panel4'
+        object PanelFpago: TPanel
+          Left = 0
+          Top = 0
+          Width = 607
+          Height = 122
+          Align = alLeft
+          BevelOuter = bvNone
+          Caption = 'PanelFpago'
           TabOrder = 1
+          object lblTotalFPago: TLabel
+            Left = 0
+            Top = 101
+            Width = 607
+            Height = 21
+            Align = alBottom
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Total Forma Pago: $ 0.00 '
+            Color = 16729670
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
           object DBGridFormaPago: TDBGrid
-            Left = 1
-            Top = 1
-            Width = 333
-            Height = 129
+            Left = 0
+            Top = 0
+            Width = 607
+            Height = 101
             Align = alClient
             Color = 14606012
             DataSource = DS_Comprobante_FormaPago
@@ -289,14 +1206,15 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
                 FieldName = 'TFORMAPAGO_'
                 Title.Alignment = taCenter
                 Title.Caption = 'Forma de Pago'
-                Width = 169
+                Width = 149
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'IMPORTE_REAL'
                 Title.Alignment = taCenter
-                Title.Caption = 'Importe Venta'
+                Title.Caption = 'Importe'
+                Width = 81
                 Visible = True
               end
               item
@@ -304,6 +1222,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
                 FieldName = 'MDCP_FECHA'
                 Title.Alignment = taCenter
                 Title.Caption = 'MDP Fecha'
+                Width = 105
                 Visible = True
               end
               item
@@ -311,6 +1230,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
                 FieldName = 'MDCP_BANCO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Banco'
+                Width = 188
                 Visible = True
               end
               item
@@ -318,6 +1238,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
                 FieldName = 'MDCP_CHEQUE'
                 Title.Alignment = taCenter
                 Title.Caption = 'N'#250'mero'
+                Width = 113
                 Visible = True
               end>
           end
@@ -325,11 +1246,12 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       end
     end
     object PanelFiltro: TPanel
-      Left = 1
-      Top = 1
-      Width = 993
-      Height = 24
+      Left = 0
+      Top = 0
+      Width = 996
+      Height = 21
       Align = alTop
+      BevelOuter = bvNone
       ParentShowHint = False
       ShowHint = False
       TabOrder = 1
@@ -380,19 +1302,38 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   end
   object ZQ_Comprobante_FormaPago: TZQuery
     Connection = DM.Conexion
-    Filter = 'id_comprobante=-1'
-    Filtered = True
     SQL.Strings = (
       'select cfp.*, tfp.descripcion as tFormaPago_,tfp."IF"'
       'from comprobante_forma_pago cfp'
       
         'left join tipo_formapago tfp on (tfp.id_tipo_formapago=cfp.id_ti' +
         'po_formapag)'
-      ''
-      '')
-    Params = <>
+      'where (cfp.id_comprobante = :id_comprobante)'
+      '  and ((tfp."IF" = :fiscal) or (:fiscal = '#39'T'#39'))')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fiscal'
+        ParamType = ptUnknown
+      end>
     Left = 225
     Top = 65
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fiscal'
+        ParamType = ptUnknown
+      end>
     object ZQ_Comprobante_FormaPagoID_COMPROB_FP: TIntegerField
       FieldName = 'ID_COMPROB_FP'
       Required = True
@@ -417,7 +1358,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     end
     object ZQ_Comprobante_FormaPagoIMPORTE: TFloatField
       FieldName = 'IMPORTE'
-      DisplayFormat = '$ #,###,##0.00'
+      currency = True
     end
     object ZQ_Comprobante_FormaPagoCONCILIADO: TDateField
       FieldName = 'CONCILIADO'
@@ -433,7 +1374,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     end
     object ZQ_Comprobante_FormaPagoIMPORTE_REAL: TFloatField
       FieldName = 'IMPORTE_REAL'
-      DisplayFormat = '$ #,###,##0.00'
+      currency = True
     end
     object ZQ_Comprobante_FormaPagoTFORMAPAGO_: TStringField
       FieldName = 'TFORMAPAGO_'
@@ -446,31 +1387,45 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
   end
   object ZQ_ComprobanteDetalle: TZQuery
     Connection = DM.Conexion
-    Filter = 'id_comprobante=-1'
-    Filtered = True
     SQL.Strings = (
       
-        'select cd.*,pc.nombre||'#39' - COD: '#39'||coalesce(p.cod_corto,'#39#39') DETA' +
-        'LLE_PROD'
+        'select cd.*, pc.nombre||'#39' - COD: '#39'||coalesce(p.cod_corto,'#39#39') DET' +
+        'ALLE_PROD,'
+      '       p.codigo_barra, c.nombre as color, m.medida,'
+      '       (cd.importe_venta - cd.importe_if) as importe_noFiscal'
       'from comprobante_detalle cd'
       'left join producto p on (cd.id_producto=p.id_producto)'
       
         'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
         '_cabecera)'
-      '')
-    Params = <>
+      'left join color c on (pc.color = c.id_color)'
+      'left join medida m on (p.id_medida = m.id_medida)'
+      'where (cd.id_comprobante = :id_comprobante)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
     Left = 385
     Top = 65
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
     object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
-      Required = True
     end
     object ZQ_ComprobanteDetalleID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
     object ZQ_ComprobanteDetalleID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
-      Required = True
+    end
+    object ZQ_ComprobanteDetalleID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
     end
     object ZQ_ComprobanteDetalleDETALLE: TStringField
       FieldName = 'DETALLE'
@@ -479,46 +1434,65 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     object ZQ_ComprobanteDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
     end
-    object ZQ_ComprobanteDetalleIMPORTE_FINAL: TFloatField
-      FieldName = 'IMPORTE_FINAL'
-      DisplayFormat = '$ #,###,##0.00'
-    end
-    object ZQ_ComprobanteDetallePORC_DESCUENTO: TFloatField
-      FieldName = 'PORC_DESCUENTO'
-    end
-    object ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField
-      FieldName = 'BASE_IMPONIBLE'
-    end
-    object ZQ_ComprobanteDetalleIMPORTE_UNITARIO: TFloatField
-      FieldName = 'IMPORTE_UNITARIO'
-    end
-    object ZQ_ComprobanteDetalleIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object ZQ_ComprobanteDetallePORC_IVA: TFloatField
-      FieldName = 'PORC_IVA'
-    end
     object ZQ_ComprobanteDetalleCANTIDAD_RECIBIDA: TFloatField
       FieldName = 'CANTIDAD_RECIBIDA'
     end
     object ZQ_ComprobanteDetalleCANTIDAD_ALMACENADA: TFloatField
       FieldName = 'CANTIDAD_ALMACENADA'
     end
-    object ZQ_ComprobanteDetalleID_STOCK_PRODUCTO: TIntegerField
-      FieldName = 'ID_STOCK_PRODUCTO'
-    end
-    object ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField
-      FieldName = 'IMPORTE_VENTA'
-      DisplayFormat = '$ #,###,##0.00'
-    end
     object ZQ_ComprobanteDetalleDETALLE_PROD: TStringField
       FieldName = 'DETALLE_PROD'
-      ReadOnly = True
       Size = 128
+    end
+    object ZQ_ComprobanteDetalleCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ComprobanteDetalleCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
+    object ZQ_ComprobanteDetalleMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+      currency = True
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+      DisplayFormat = '$ #,###,##0.00'
+      currency = True
     end
     object ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField
       FieldName = 'IMPORTE_IVA'
       DisplayFormat = '$ #,###,##0.00'
+      currency = True
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_IF: TFloatField
+      FieldName = 'IMPORTE_IF'
+      currency = True
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      currency = True
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_NOFISCAL: TFloatField
+      FieldName = 'IMPORTE_NOFISCAL'
+      currency = True
+    end
+    object ZQ_ComprobanteDetallePORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_ComprobanteDetallePORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_ComprobanteDetalleIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
     end
   end
   object ZQ_Comprobante: TZQuery
@@ -527,29 +1501,29 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     AfterScroll = ZQ_ComprobanteAfterScroll
     SQL.Strings = (
       
-        'select c.codigo,c.id_comprobante,c.fecha,c.porc_iva,sum(cfp.impo' +
-        'rte_real) as importeVenta_,'
+        'select c.codigo, c.id_comprobante, cast(c.fecha as date) as Fech' +
+        'a, c.porc_iva,'
       
-        's.nombre as suc_,p1.nombre as Vendedor_,iva.abreviatura as tiva_' +
-        ','
-      'tc.nombre_tipo_cpb as tipoCompr_,p2.nombre as cliente_'
+        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
+        ' p1.nombre as Vendedor_,'
+      '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
       'from comprobante c'
       
-        'join comprobante_forma_pago cfp on (cfp.id_comprobante=c.id_comp' +
-        'robante)'
+        'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
+        'mprobante)'
       
-        'join tipo_formapago tfp on (tfp.id_tipo_formapago=cfp.id_tipo_fo' +
-        'rmapag)'
-      'join sucursal s on (c.id_sucursal=s.id_sucursal)'
-      'join persona p1 on (p1.id_persona=c.id_vendedor)'
-      'join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
-      'join tipo_comprobante tc on (tc.id_tipo_cpb=c.id_tipo_cpb)'
-      'join persona p2 on (p2.id_persona=c.id_cliente)'
-      'where (c.ID_TIPO_CPB=11)'
-      
-        'group by c.codigo,c.id_comprobante,c.fecha,c.importe_total,c.por' +
-        'c_iva,s.nombre,p1.nombre,iva.abreviatura,tc.nombre_tipo_cpb,p2.n' +
-        'ombre')
+        'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
+        'formapag)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
+      'join persona p2 on (p2.id_persona = c.id_cliente)'
+      'where (c.id_tipo_cpb = 11)'
+      'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
+      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
+      '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     Params = <>
     Left = 66
     Top = 114
@@ -570,7 +1544,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     object ZQ_ComprobanteIMPORTEVENTA_: TFloatField
       FieldName = 'IMPORTEVENTA_'
       ReadOnly = True
-      DisplayFormat = '$ #,###,##0.00'
+      currency = True
     end
     object ZQ_ComprobanteSUC_: TStringField
       FieldName = 'SUC_'
@@ -597,6 +1571,11 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       ReadOnly = True
       Size = 200
     end
+    object ZQ_ComprobanteNOMBRE_TIPO_IVA: TStringField
+      FieldName = 'NOMBRE_TIPO_IVA'
+      ReadOnly = True
+      Size = 50
+    end
   end
   object DS_Comprobante_FormaPago: TDataSource
     DataSet = ZQ_Comprobante_FormaPago
@@ -608,26 +1587,30 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     Left = 389
     Top = 113
   end
-  object EKDbSuma1: TEKDbSuma
+  object EKDbSumaComprobante: TEKDbSuma
     SumCollection = <
       item
         Operacion = goSum
         NombreCampo = 'importeVenta_'
       end>
     DataSet = ZQ_Comprobante
-    SumListChanged = EKDbSuma1SumListChanged
+    SumListChanged = EKDbSumaComprobanteSumListChanged
     Left = 61
     Top = 273
   end
   object EKBuscarComprobantes: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'C'#243'digo'
-        Campo = 'codigo'
-        Tabla = 'comprobante'
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        Tabla = 'sucursal'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
-        TipoComboAncho = 200
+        TipoComboAncho = 350
         ItemIndex = -1
       end
       item
@@ -642,12 +1625,25 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         ItemIndex = -1
       end
       item
-        Titulo = 'Tipo Comprobante'
-        Campo = 'nombre_tipo_cpb'
-        Tabla = 'tipo_comprobante'
+        Titulo = 'C'#243'digo'
+        Campo = 'codigo'
+        Tabla = 'comprobante'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Iva'
+        Campo = 'ID_TIPO_IVA'
+        Tabla = 'tipo_iva'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = ZQ_TipoIVA
+        TipoComboSQLCampoVer = 'NOMBRE_TIPO_IVA'
+        TipoComboSQLCampoReal = 'ID_TIPO_IVA'
+        TipoComboEditable = False
+        TipoComboAncho = 350
         ItemIndex = -1
       end
       item
@@ -660,7 +1656,16 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         ItemIndex = -1
       end
       item
-        Titulo = 'Importe Venta'
+        Titulo = 'Vendedor'
+        Campo = 'nombre'
+        Tabla = 'p1'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe'
         Campo = 'importe_venta'
         Tabla = 'comprobante'
         TipoCampo = EK_Numero
@@ -674,57 +1679,57 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     DataSet = ZQ_Comprobante
     SQL.Strings = (
       
-        'select c.codigo,c.id_comprobante,c.fecha,c.porc_iva,sum(cfp.impo' +
-        'rte_real) as importeVenta_,'
+        'select c.codigo, c.id_comprobante, cast(c.fecha as date) as Fech' +
+        'a, c.porc_iva,'
       
-        's.nombre as suc_,p1.nombre as Vendedor_,iva.abreviatura as tiva_' +
-        ','
-      'tc.nombre_tipo_cpb as tipoCompr_,p2.nombre as cliente_'
+        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
+        ' p1.nombre as Vendedor_,'
+      '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
       'from comprobante c'
       
-        'join comprobante_forma_pago cfp on (cfp.id_comprobante=c.id_comp' +
-        'robante)'
+        'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
+        'mprobante)'
       
-        'join tipo_formapago tfp on (tfp.id_tipo_formapago=cfp.id_tipo_fo' +
-        'rmapag)'
-      'join sucursal s on (c.id_sucursal=s.id_sucursal)'
-      'join persona p1 on (p1.id_persona=c.id_vendedor)'
-      'join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
-      'join tipo_comprobante tc on (tc.id_tipo_cpb=c.id_tipo_cpb)'
-      'join persona p2 on (p2.id_persona=c.id_cliente)'
-      'where (c.ID_TIPO_CPB=11)'
-      
-        'group by c.codigo,c.id_comprobante,c.fecha,c.importe_total,c.por' +
-        'c_iva,s.nombre,p1.nombre,iva.abreviatura,tc.nombre_tipo_cpb,p2.n' +
-        'ombre')
+        'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
+        'formapag)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
+      'join persona p2 on (p2.id_persona = c.id_cliente)'
+      'where (c.id_tipo_cpb = 11)'
+      'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
+      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
+      '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     SQL_Select.Strings = (
       
-        'select c.codigo,c.id_comprobante,c.fecha,c.porc_iva,sum(cfp.impo' +
-        'rte_real) as importeVenta_,'
+        'select c.codigo, c.id_comprobante, cast(c.fecha as date) as Fech' +
+        'a, c.porc_iva,'
       
-        's.nombre as suc_,p1.nombre as Vendedor_,iva.abreviatura as tiva_' +
-        ','
-      'tc.nombre_tipo_cpb as tipoCompr_,p2.nombre as cliente_')
+        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
+        ' p1.nombre as Vendedor_,'
+      '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_')
     SQL_From.Strings = (
       'from comprobante c'
       
-        'join comprobante_forma_pago cfp on (cfp.id_comprobante=c.id_comp' +
-        'robante)'
+        'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
+        'mprobante)'
       
-        'join tipo_formapago tfp on (tfp.id_tipo_formapago=cfp.id_tipo_fo' +
-        'rmapag)'
-      'join sucursal s on (c.id_sucursal=s.id_sucursal)'
-      'join persona p1 on (p1.id_persona=c.id_vendedor)'
-      'join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
-      'join tipo_comprobante tc on (tc.id_tipo_cpb=c.id_tipo_cpb)'
-      'join persona p2 on (p2.id_persona=c.id_cliente)')
+        'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
+        'formapag)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
+      'join persona p2 on (p2.id_persona = c.id_cliente)')
     SQL_Where.Strings = (
-      'where (c.ID_TIPO_CPB=11)')
+      'where (c.id_tipo_cpb = 11)')
     SQL_Orden.Strings = (
-      
-        'group by c.codigo,c.id_comprobante,c.fecha,c.importe_total,c.por' +
-        'c_iva,s.nombre,p1.nombre,iva.abreviatura,tc.nombre_tipo_cpb,p2.n' +
-        'ombre')
+      'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
+      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
+      '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     UsarWhereOriginal = EK_Con_Where
     Left = 64
     Top = 65
@@ -765,7 +1770,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       FieldName = 'COEFICIENTE'
     end
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
+  object EKOrdenarFacturas: TEKOrdenarGrilla
     Grilla = DBGridComprobantes
     Filtros = <
       item
@@ -809,11 +1814,11 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     Left = 58
     Top = 218
   end
-  object EKOrdenarGrilla2: TEKOrdenarGrilla
+  object EKOrdenarProducto: TEKOrdenarGrilla
     Grilla = DBGridListadoProductos
     Filtros = <
       item
-        TituloColumna = 'ID'
+        TituloColumna = 'Id'
         Visible = True
       end
       item
@@ -825,15 +1830,19 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         Visible = True
       end
       item
-        TituloColumna = 'Importe Venta'
+        TituloColumna = 'Importe'
         Visible = True
       end
       item
-        TituloColumna = 'Importe IVA'
+        TituloColumna = 'C'#243'd. Barra'
         Visible = True
       end
       item
-        TituloColumna = 'Desc.'
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
         Visible = True
       end>
     NombreGuardar = 'DBGridListadoProductos'
@@ -845,7 +1854,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
     Left = 386
     Top = 162
   end
-  object EKOrdenarGrilla3: TEKOrdenarGrilla
+  object EKOrdenarFPago: TEKOrdenarGrilla
     Grilla = DBGridFormaPago
     Filtros = <
       item
@@ -853,7 +1862,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
         Visible = True
       end
       item
-        TituloColumna = 'Importe Venta'
+        TituloColumna = 'Importe'
         Visible = True
       end
       item
@@ -987,6 +1996,10 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
           end
           item
             BeginGroup = True
+            Item = btImprimir
+            Visible = True
+          end
+          item
             Item = btnExcel
             Visible = True
           end
@@ -1342,6 +2355,7 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       Hint = 'Imprimir'
       Visible = ivAlways
       ImageIndex = 28
+      OnClick = btImprimirClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -1364,5 +2378,111 @@ object FEstadisticasFacturacion: TFEstadisticasFacturacion
       ShortCut = 112
       OnExecute = ABuscarExecute
     end
+  end
+  object EKDbSumaFpago: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_REAL'
+      end>
+    DataSet = ZQ_Comprobante_FormaPago
+    Left = 218
+    Top = 215
+  end
+  object EKDbSumaProducto: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_VENTA'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_IF'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_NOFISCAL'
+      end>
+    DataSet = ZQ_ComprobanteDetalle
+    Left = 386
+    Top = 224
+  end
+  object ZQ_Sucursal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from Sucursal s'
+      'where s.id_sucursal > 0'
+      'order by s.nombre')
+    Params = <>
+    Left = 508
+    Top = 176
+    object ZQ_SucursalID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_SucursalNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_SucursalDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_SucursalLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_SucursalCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_SucursalTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_SucursalEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_SucursalBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_SucursalLOGO: TBlobField
+      FieldName = 'LOGO'
+    end
+    object ZQ_SucursalREPORTE_TITULO: TStringField
+      FieldName = 'REPORTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalREPORTE_SUBTITULO: TStringField
+      FieldName = 'REPORTE_SUBTITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_TITULO: TStringField
+      FieldName = 'COMPROBANTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField
+      FieldName = 'COMPROBANTE_RENGLON1'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField
+      FieldName = 'COMPROBANTE_RENGLON2'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField
+      FieldName = 'COMPROBANTE_RENGLON3'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField
+      FieldName = 'COMPROBANTE_RENGLON4'
+      Size = 50
+    end
+  end
+  object EKVistaPrevia: TEKVistaPreviaQR
+    Reporte = RepDetalleMov
+    ShowModal = False
+    Left = 62
+    Top = 321
   end
 end
