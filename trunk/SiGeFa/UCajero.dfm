@@ -1,8 +1,8 @@
 object FCajero: TFCajero
-  Left = 274
-  Top = 71
+  Left = 375
+  Top = 215
   Width = 1022
-  Height = 674
+  Height = 675
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -2243,7 +2243,7 @@ object FCajero: TFCajero
     Left = 88
     Top = 0
     Width = 918
-    Height = 584
+    Height = 585
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 2
@@ -2419,7 +2419,7 @@ object FCajero: TFCajero
       Left = 1
       Top = 203
       Width = 916
-      Height = 380
+      Height = 381
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 2
@@ -2427,7 +2427,7 @@ object FCajero: TFCajero
         Left = 1
         Top = 1
         Width = 914
-        Height = 218
+        Height = 219
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -2442,7 +2442,7 @@ object FCajero: TFCajero
           Left = 1
           Top = 1
           Width = 912
-          Height = 162
+          Height = 163
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -2516,7 +2516,7 @@ object FCajero: TFCajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 163
+          Top = 164
           Width = 912
           Height = 54
           Align = alBottom
@@ -2586,7 +2586,7 @@ object FCajero: TFCajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 219
+        Top = 220
         Width = 914
         Height = 89
         Align = alBottom
@@ -2684,7 +2684,7 @@ object FCajero: TFCajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 308
+        Top = 309
         Width = 914
         Height = 71
         Align = alBottom
@@ -4296,6 +4296,9 @@ object FCajero: TFCajero
       LookupResultField = 'COLUMNA_PRECIO'
       KeyFields = 'ID_TIPO_FORMAPAG'
       Lookup = True
+    end
+    object CD_Fpago_fiscal: TStringField
+      FieldName = '_fiscal'
     end
   end
   object DSFpago: TDataSource
@@ -7594,6 +7597,12 @@ object FCajero: TFCajero
       FieldName = 'IMPORTE_IF'
       DisplayFormat = '$ ##,###,##0.00'
     end
+    object CD_DetalleFacturaIMPORTE_IF_SINIVA: TFloatField
+      FieldName = 'IMPORTE_IF_SINIVA'
+    end
+    object CD_DetalleFacturaIMPORTE_IVA_IF: TFloatField
+      FieldName = 'IMPORTE_IVA_IF'
+    end
   end
   object ZQ_DetalleProd: TZQuery
     Connection = DM.Conexion
@@ -8089,6 +8098,12 @@ object FCajero: TFCajero
     object ZQ_ComprobanteDetalleIMPORTE_IF: TFloatField
       FieldName = 'IMPORTE_IF'
     end
+    object ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA: TFloatField
+      FieldName = 'IMPORTE_IF_SINIVA'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_IVA_IF: TFloatField
+      FieldName = 'IMPORTE_IVA_IF'
+    end
   end
   object RelojStock: TTimer
     Enabled = False
@@ -8315,6 +8330,9 @@ object FCajero: TFCajero
       FieldName = 'genera_vuelto'
       Size = 1
     end
+    object CD_VentaFinalfiscal: TStringField
+      FieldName = 'fiscal'
+    end
   end
   object DS_VentaFinal: TDataSource
     DataSet = CD_VentaFinal
@@ -8364,6 +8382,27 @@ object FCajero: TFCajero
     end
     object ZQ_BuscarMedioPagoBAJA: TStringField
       FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_BuscarMedioPagoIF: TStringField
+      FieldName = 'IF'
+      Size = 1
+    end
+    object ZQ_BuscarMedioPagoDESC_REC: TFloatField
+      FieldName = 'DESC_REC'
+    end
+    object ZQ_BuscarMedioPagoCOD_CORTO: TIntegerField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_BuscarMedioPagoGENERA_VUELTO: TStringField
+      FieldName = 'GENERA_VUELTO'
+      Size = 1
+    end
+    object ZQ_BuscarMedioPagoCOLUMNA_PRECIO: TIntegerField
+      FieldName = 'COLUMNA_PRECIO'
+    end
+    object ZQ_BuscarMedioPagoMODIFICABLE: TStringField
+      FieldName = 'MODIFICABLE'
       Size = 1
     end
   end
