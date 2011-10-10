@@ -37,7 +37,7 @@ type
     CD_FpagoCONCILIADO: TDateField;
     CD_FpagoCUENTA_INGRESO: TIntegerField;
     CD_FpagoCUENTA_EGRESO: TIntegerField;
-    ZQ_FormasPago: TZQuery;       
+    ZQ_FormasPago: TZQuery;
     ZQ_FormasPagoID_TIPO_FORMAPAGO: TIntegerField;
     ZQ_FormasPagoDESCRIPCION: TStringField;
     ZQ_FormasPagoBAJA: TStringField;
@@ -509,6 +509,18 @@ type
     ZQ_BuscarCuentaA_CTA_CORRIENTE: TStringField;
     ZQ_BuscarCuentaA_NOTA_CREDITO: TStringField;
     ZQ_BuscarCuentaMODIFICABLE: TStringField;
+    CD_DetalleFacturaIMPORTE_IF_SINIVA: TFloatField;
+    CD_DetalleFacturaIMPORTE_IVA_IF: TFloatField;
+    ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA: TFloatField;
+    ZQ_ComprobanteDetalleIMPORTE_IVA_IF: TFloatField;
+    ZQ_BuscarMedioPagoIF: TStringField;
+    ZQ_BuscarMedioPagoDESC_REC: TFloatField;
+    ZQ_BuscarMedioPagoCOD_CORTO: TIntegerField;
+    ZQ_BuscarMedioPagoGENERA_VUELTO: TStringField;
+    ZQ_BuscarMedioPagoCOLUMNA_PRECIO: TIntegerField;
+    ZQ_BuscarMedioPagoMODIFICABLE: TStringField;
+    CD_Fpago_fiscal: TStringField;
+    CD_VentaFinalfiscal: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -586,6 +598,7 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure AVendedorExecute(Sender: TObject);
     procedure ANuevoProdExecute(Sender: TObject);
+    function imprimirFiscal(comprob:Integer):Boolean ;
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -604,13 +617,14 @@ type
 
 var
   FCajero: TFCajero;
-  importeacob, punitoriosacob, acumulado,ClienteIVA,descCliente,acumuladoIVA,
-  acumFpagoReal,acumFpago,acumEfectivo,acumuladoProd : double;
+  punitoriosacob, acumulado,ClienteIVA,descCliente,acumuladoIVA,
+  acumFpagoReal,acumFpago,acumEfectivo,acumuladoProd,totFiscal : double;
   acumPrecio1,acumPrecio2,acumPrecio3,acumPrecio4,acumPrecio5:double;
   coefPrecio1,coefPrecio2,coefPrecio3,coefPrecio4,coefPrecio5:double;
   IdProd:String;
   cliente,IdVendedor,cajero,IDClienteIVA,idSucursal:Integer;
   modoCargaPrevia:Boolean;
+  importeVenta,importeIF:Double;
 const
   abmComprobante='ABM Factura-Cajero';
 
@@ -684,7 +698,6 @@ end;
 procedure TFCajero.LimpiarCodigo;
 begin
   ZQ_Productos.Close;
-  importeacob := 0;
   codBarras.Clear;
   if (CD_DetalleFactura.State<>dsBrowse) then
    begin
@@ -850,7 +863,6 @@ end;
 
 procedure TFCajero.crearComprobante;
 begin
-  importeacob:=0;
   punitoriosacob:=0;
   acumulado:=0;
   acumuladoIVA:=0;
@@ -863,7 +875,7 @@ begin
   acumPrecio4:=  0;
   acumPrecio5:=  0;
   IdProd:='';
-
+  totFiscal:=0;
   RelojStock.Enabled:=false;
   lblMaxVenta.Visible:=False;
 
@@ -1424,7 +1436,10 @@ end;
 
 
 function TFCajero.guardarComprobante():Boolean;
+var
+comprobante : integer;
 begin
+
   Result:=False;
   //Hacer las validaciones correspondientes
 
@@ -1438,6 +1453,7 @@ begin
       ZQ_ComprobanteID_COMPROBANTE.AsInteger:=ZSP_ComprobanteID.AsInteger;
       ZQ_ComprobanteCODIGO.AsString:=ZSP_ComprobanteCODIGO.AsString;
       ZSP_Comprobante.Active:=False;
+      comprobante := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
       ZQ_ComprobanteID_SUCURSAL.Value:=CD_ComprobanteID_SUCURSAL.Value;
       ZQ_ComprobanteID_PROVEEDOR.Clear;
       ZQ_ComprobanteID_CLIENTE.AsInteger:=CD_ComprobanteID_CLIENTE.AsInteger;
@@ -1486,6 +1502,14 @@ begin
       else
         begin
           Application.MessageBox(PChar(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString])),'Atención');
+
+          // Si se guarda ok el comprobante OK y hay formas de pago que van a la fiscal
+          // llamo al proc que imprime en fiscal, sino solo guarda el comprob.
+          if (totFiscal>0) then
+          begin
+           imprimirFiscal(comprobante);
+          end;
+
           CD_Fpago.EmptyDataSet;
           CD_DetalleFactura.EmptyDataSet;
           PanelContenedorDerecha.Enabled:=True;
@@ -1543,6 +1567,8 @@ begin
         ZQ_ComprobanteDetalleIMPORTE_IVA.AsFloat:= CD_DetalleFacturaIMPORTE_IVA.AsFloat;
         ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
         ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_IF.AsFloat;
+        ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:=ZQ_ComprobantePORC_IVA.AsFloat * ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat;
+        ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat-ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat;
         ZQ_ComprobanteDetalleID_STOCK_PRODUCTO.AsInteger:=CD_DetalleFacturaID_PROD_STOCK.AsInteger;
         ZQ_ComprobanteDetalle.Post;
 
@@ -1585,27 +1611,23 @@ begin
      CD_VentaFinalimporteDescuento.AsFloat:=CD_VentaFinalimporteVenta.AsFloat-(CD_VentaFinalimporteVenta.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100);
      CD_VentaFinalid.AsInteger:=CD_FpagoID_COMPROB_FP.AsInteger;
      CD_VentaFinalgenera_vuelto.AsString:=CD_Fpago_efectivo.AsString;
+     CD_VentaFinalfiscal.AsString:=CD_Fpago_fiscal.AsString;
      CD_VentaFinal.Post;
 
      CD_Fpago.Next;
    end;
+
+  RecalcularMontoPago();
+
   EKDbSuma3.RecalcAll;
   calcularEfectivo();
-
+  importeVenta:=CD_ComprobanteIMPORTE_VENTA.AsFloat;
 end;
 
 
 procedure TFCajero.btnConfirmarVentaClick(Sender: TObject);
-var
-comprobante : integer;
 begin
- comprobante := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-
- if guardarComprobante() then
- begin
-    //ShellExecute(FPrincipal.Handle, nil, pchar(Ruta),
-     //pchar(' -l '+IntToStr(comprobante)+' -i '+Impresora+' -c '+'F'), nil, SW_SHOWNORMAL);
-  end;
+  guardarComprobante()
 end;
 
 
@@ -1804,9 +1826,9 @@ begin
        ZQ_Comprobante_FormaPagoMDCP_FECHA.AsDateTime:= CD_FpagoMDCP_FECHA.AsDateTime;
     ZQ_Comprobante_FormaPagoMDCP_BANCO.AsString:= CD_FpagoMDCP_BANCO.AsString;
     ZQ_Comprobante_FormaPagoMDCP_CHEQUE.AsString:= CD_FpagoMDCP_CHEQUE.AsString;
-    ZQ_Comprobante_FormaPagoIMPORTE.AsFloat:= CD_FpagoIMPORTE.AsFloat;
+    ZQ_Comprobante_FormaPagoIMPORTE.AsFloat:= CD_FpagoIMPORTE.AsFloat-(CD_FpagoIMPORTE.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100);
     ZQ_Comprobante_FormaPagoCUENTA_INGRESO.AsInteger:= CD_FpagoCUENTA_INGRESO.AsInteger;
-    ZQ_Comprobante_FormaPagoIMPORTE_REAL.AsFloat:= CD_Fpago_importeVenta.AsFloat;
+    ZQ_Comprobante_FormaPagoIMPORTE_REAL.AsFloat:= CD_Fpago_importeVenta.AsFloat-(CD_Fpago_importeVenta.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100);
     ZQ_Comprobante_FormaPago.Post;
     CD_Fpago.Next;
   end;
@@ -1828,6 +1850,7 @@ begin
 
       CD_Fpago.edit; //pongo en modo edicion
       CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_BuscarMedioPagoID_TIPO_FORMAPAGO.AsInteger;
+      CD_Fpago_fiscal.AsString:=ZQ_BuscarMedioPagoIF.AsString;
       CD_Fpago.Post;
     end;
   end;
@@ -1855,6 +1878,7 @@ begin
       CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_BuscarCuentaID_CUENTA.AsInteger;
       CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_BuscarCuentaMEDIO_DEFECTO.AsInteger;
       CD_Fpago_esCtaCorr.AsString:= ZQ_BuscarCuentaA_CTA_CORRIENTE.Asstring;
+      CD_Fpago_fiscal.AsString:=ZQ_BuscarMedioPagoIF.AsString;
       CD_Fpago.Post;
     end;
   end;
@@ -1946,7 +1970,7 @@ begin
   //Can Productos
    cant:=CD_DetalleFactura.RecordCount;
    totalProds:=acumulado;
-   totalFP:=acumFpagoReal;
+   totalFP:=importeVenta;
    acum:=0;
 //  CD_Fpago.First;
 //  while not(CD_Fpago.Eof) do
@@ -1994,14 +2018,18 @@ begin
    totalFP:=0;
    acum:=0;
 
-  CD_Fpago.First;
-  while not(CD_Fpago.Eof) do
+  totFiscal:=0;
+
+  CD_VentaFinal.First;
+  while not(CD_VentaFinal.Eof) do
    begin
-      ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
-      if (ZQ_FormasPagoIF.AsString='S') then
-       totalFP:=totalFP + CD_Fpago_importeVenta.AsFloat;
-      CD_Fpago.Next;
+      //ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
+      if (CD_VentaFinalfiscal.AsString='S') then
+       totalFP:=totalFP + CD_VentaFinalimporteDescuento.AsFloat;
+      CD_VentaFinal.Next;
    end;
+
+   totFiscal:=totalFP;
 
    coefic:= (totalFP/totalProds);
 
@@ -2277,5 +2305,21 @@ begin
     BtAgregarPago.Click;
 end;
 
+
+function TFCajero.imprimirFiscal(comprob:Integer): Boolean;
+begin
+  Result:=True;
+
+  //ShellExecute(FPrincipal.Handle, nil, pchar(Ruta),
+  //pchar(' -l '+IntToStr(comprob)+' -i '+Impresora+' -c '+'F'), nil, SW_SHOWNORMAL);
+
+//  if (acumulado<=0) then
+//  begin
+//    Application.MessageBox('El monto final debe ser superior a $0,00, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+//    result := false;
+//    exit;
+//  end;
+
+end;
 
 end.
