@@ -9,7 +9,7 @@ uses
   EKEdit,UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
   XPStyleActnCtrls, ActnMan, EKListadoSQL, EKDbSuma,
   ZStoredProcedure,UBuscarPersona, Buttons, jpeg, Menus,UCargarPreventa,
-  ComCtrls;
+  ComCtrls, IniFiles, ShellAPI;
 
 type
   TFCajero = class(TForm)
@@ -598,7 +598,8 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure AVendedorExecute(Sender: TObject);
     procedure ANuevoProdExecute(Sender: TObject);
-    function imprimirFiscal(comprob:Integer):Boolean ;
+    function imprimirFiscal(comprob:Integer; tipoAccion: string):Boolean ;
+    procedure leerSistemaIni;
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -625,6 +626,10 @@ var
   cliente,IdVendedor,cajero,IDClienteIVA,idSucursal:Integer;
   modoCargaPrevia:Boolean;
   importeVenta,importeIF:Double;
+
+  //----Fiscal--------
+  Impresora : string;
+  Ruta : String;
 const
   abmComprobante='ABM Factura-Cajero';
 
@@ -634,6 +639,15 @@ uses UDM, UPrincipal,strutils, EKModelo, Math, UUtilidades;
 
 {$R *.dfm}
 
+procedure TFCajero.leerSistemaIni;
+var
+  Ini : TIniFile;
+begin
+  Ini := TIniFile.Create( '.\SISTEMA.INI' );
+  Ruta := Ini.ReadString('IMPRESORA', 'RutaImpresora', '');
+  Impresora := Ini.ReadString('IMPRESORA', 'TipoImpresora', '');
+  Ini.Free;
+end;
 
 procedure TFCajero.VerLectorCB(sino: Boolean);
 begin
@@ -1507,7 +1521,7 @@ begin
           // llamo al proc que imprime en fiscal, sino solo guarda el comprob.
           if (totFiscal>0) then
           begin
-           imprimirFiscal(comprobante);
+           imprimirFiscal(comprobante, 'F');
           end;
 
           CD_Fpago.EmptyDataSet;
@@ -2298,7 +2312,7 @@ begin
   end
 end;
 
-
+                                               
 procedure TFCajero.ANuevoProdExecute(Sender: TObject);
 begin
   if BtAgregarPago.Enabled then
@@ -2306,12 +2320,15 @@ begin
 end;
 
 
-function TFCajero.imprimirFiscal(comprob:Integer): Boolean;
+function TFCajero.imprimirFiscal(comprob:Integer; tipoAccion: string): Boolean;
 begin
   Result:=True;
 
-  //ShellExecute(FPrincipal.Handle, nil, pchar(Ruta),
-  //pchar(' -l '+IntToStr(comprob)+' -i '+Impresora+' -c '+'F'), nil, SW_SHOWNORMAL);
+  if tipoAccion = 'F' then
+    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l '+IntToStr(comprob)+' -i '+Impresora+' -c '+tipoAccion), nil, SW_SHOWNORMAL)
+  else
+    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -i '+Impresora+' -c '+tipoAccion), nil, SW_SHOWNORMAL);
+
 
 //  if (acumulado<=0) then
 //  begin
