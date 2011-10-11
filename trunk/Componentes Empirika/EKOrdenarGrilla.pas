@@ -268,7 +268,7 @@ begin
       aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
       aplicacion:= LeftStr(aplicacion, (Length(aplicacion)-4));
       Registro:= TRegistry.Create;
-      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\FiltrarGrilla\'+FGrilla.Name, TRUE);
+      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\FiltrarGrilla\'+FNombreGuardar, TRUE);
                     //Ej: \Software\EmpiriKa\Sigefa\FiltrarGrilla\DBGridComprobante\
 
       for F:= 0 to FFiltros.Count - 1 do //Por cada uno de los filtros cargados
@@ -301,7 +301,7 @@ begin
       aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
       aplicacion:= LeftStr(aplicacion, (Length(aplicacion)-4));
       Registro:= TRegistry.Create;
-      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\FiltrarGrilla\'+FGrilla.Name, TRUE);
+      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\FiltrarGrilla\'+FNombreGuardar, TRUE);
 
       for F:= 0 to FFiltros.Count - 1 do //Por cada uno de los filtros cargados
       begin
@@ -343,7 +343,7 @@ begin
       aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
       aplicacion:= LeftStr(aplicacion, (Length(aplicacion)-4));
       Registro:= TRegistry.Create;
-      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\OrdenarGrilla\'+FGrilla.Name, TRUE);
+      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\OrdenarGrilla\'+FNombreGuardar, TRUE);
                   //Ej: \Software\EmpiriKa\Sigefa\OrdenarGrilla\DBGridComprobante\
 
       for F:=0 to FGrilla.Columns.Count-1 do //por cada una de las columnas de la grilla
@@ -374,7 +374,7 @@ begin
       aplicacion:= ExtractFileName(Application.Exename); //guardo el nombre de la aplicacion
       aplicacion:= LeftStr(aplicacion, (Length(aplicacion)-4));
       Registro:= TRegistry.Create;
-      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\OrdenarGrilla\'+FGrilla.Name, TRUE);
+      Registro.OpenKey('\Software\EmpiriKa\'+aplicacion+'\OrdenarGrilla\'+FNombreGuardar, TRUE);
                   //Ej: \Software\EmpiriKa\Sigefa\OrdenarGrilla\DBGridComprobante\
 
       //para cargar el tamaño de la columna
