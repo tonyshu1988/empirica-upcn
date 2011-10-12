@@ -75,8 +75,8 @@ end;
 
 procedure TEKVistaPreviaQR.dopreview(sender: TObject);
 begin
-    FReporte.PrinterSettings.PrinterIndex := printer.PrinterIndex;
-    Fvp.QRPreview1.QRPrinter := TQRPrinter(sender);
+  FReporte.PrinterSettings.PrinterIndex:= printer.PrinterIndex;
+  Fvp.QRPreview1.QRPrinter:= TQRPrinter(sender);
 end;
 
 
@@ -84,11 +84,11 @@ procedure TEKVistaPreviaQR.SetReporte(const Value: TQuickRep);
 var
   i : integer;
 begin
-  FReporte := Value;
-  FReporte.Visible := false;
+  FReporte:= Value;
+  FReporte.Visible:= false;
   FReporte.Tag := 99;
   if caption > '' then
-    FReporte.ReportTitle := caption;
+    FReporte.ReportTitle:= caption;
   for i := 0 to FReporte.BandList.Count-1 do
     TQRBand(FReporte.BandList.Items[i]).Tag := 99;
 end;
@@ -100,18 +100,21 @@ begin
     showmessage('TEKVistaPreviaQR: Error, No se definió el Reporte.')
   else
   begin
+    if Assigned (FReporte.DataSet) then
+      FReporte.DataSet.DisableControls;
+
     Fvp := TEKVistaPreviaQRForm.Create(nil);
-    fvp.BorderIcons := FBorderIcons;
-    fvp.Imprimir.Visible := FVerImprimir;
-    fvp.Conf_impresora.Visible := FVerConfImpresora;
-    fvp.imagen.Visible := FVerExpImagen;
-    fvp.word.Visible := FVerExpWord;
-    fvp.Excel.Visible := FVerExpExel;
-    fvp.pdf.Visible := VerExpPDF;
-    fvp.guardar.Visible := FVerGuardar;
+    fvp.BorderIcons:= FBorderIcons;
+    fvp.AImprimir.Visible:= FVerImprimir;
+    fvp.AConf_impresora.Visible:= FVerConfImpresora;
+    fvp.AExportar_WMF.Visible:= FVerExpImagen;
+    fvp.AExportar_WORD.Visible:= FVerExpWord;
+    fvp.AExportar_EXCEL.Visible:= FVerExpExel;
+    fvp.AExportar_PDF.Visible:= VerExpPDF;
+    fvp.AGuardar.Visible:= FVerGuardar;
     if caption > '' then
-      fvp.Caption := caption;
-    FReporte.OnPreview := dopreview;
+      fvp.Caption:= caption;
+    FReporte.OnPreview:= dopreview;
     if FShowModal then
     begin
       FReporte.PreviewModal;
@@ -122,7 +125,15 @@ begin
       Fvp.Show;
       FReporte.Preview;
     end;
+
+    if Assigned (FReporte.DataSet) then
+    begin
+      FReporte.DataSet.First;
+      FReporte.DataSet.EnableControls;
+    end;
   end;
+  
+  Application.ProcessMessages;
 end;
 
 
