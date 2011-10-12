@@ -5020,7 +5020,7 @@ object FPrincipal: TFPrincipal
       OnExecute = AArqueo_CajaExecute
     end
     object AEstad_MovInternos: TAction
-      Caption = 'Estadisticas Mov. Internos'
+      Caption = 'Estadistica Mov. Internos'
       Hint = 'Estadisticas Movimientos Internos'
       ImageIndex = 52
       OnExecute = AEstad_MovInternosExecute

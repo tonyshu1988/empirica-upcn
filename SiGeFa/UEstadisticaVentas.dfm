@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
   Left = 253
-  Top = 122
+  Top = 153
   Width = 1012
   Height = 581
   Caption = 'Estadisticas Ventas'
@@ -24,10 +24,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 996
     Height = 491
-    ActivePage = TabSheet1
+    ActivePage = TabHorarioGrafico
     Align = alClient
     TabOrder = 4
-    object TabSheet1: TTabSheet
+    object TabFacturacion: TTabSheet
       Caption = 'Facturaci'#243'n'
       object PanelContenedor: TPanel
         Left = 0
@@ -1305,19 +1305,221 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
       end
     end
-    object TabSheet2: TTabSheet
-      Caption = 'TabSheet2'
+    object TabHorarioVentas: TTabSheet
+      Caption = 'Horario Ventas'
       ImageIndex = 1
+      object PanelMes: TPanel
+        Left = 0
+        Top = 0
+        Width = 988
+        Height = 463
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGridHorario: TDBGrid
+          Left = 0
+          Top = 46
+          Width = 988
+          Height = 417
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_Horario
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          OnDrawColumnCell = DrawColumnCell
+          Columns = <
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'HORA_DESDE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Desde'
+              Width = 142
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'HORA_HASTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Hasta'
+              Width = 125
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cantidad Ventas'
+              Width = 256
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Importe Total'
+              Width = 151
+              Visible = True
+            end>
+        end
+        object Panel5: TPanel
+          Left = 0
+          Top = 0
+          Width = 988
+          Height = 46
+          Align = alTop
+          BevelOuter = bvNone
+          BorderWidth = 4
+          TabOrder = 1
+          object lblHorarioFecha: TLabel
+            Left = 4
+            Top = 4
+            Width = 980
+            Height = 13
+            Align = alTop
+            Caption = 'lblHorarioFecha'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+          object lblHorarioSucursal: TLabel
+            Left = 4
+            Top = 17
+            Width = 980
+            Height = 13
+            Align = alTop
+            Caption = 'lblHorarioSucursal'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+          object lblHorarioIntervalo: TLabel
+            Left = 4
+            Top = 30
+            Width = 980
+            Height = 13
+            Align = alTop
+            Caption = 'lblHorarioIntervalo'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+        end
+      end
     end
-    object TabSheet3: TTabSheet
-      Caption = 'TabSheet3'
+    object TabHorarioGrafico: TTabSheet
+      Caption = 'Horario Ventas (Grafico)'
       ImageIndex = 2
+      object DBChartHorario: TDBChart
+        Left = 0
+        Top = 0
+        Width = 988
+        Height = 463
+        BackWall.Brush.Color = clWhite
+        BackWall.Brush.Style = bsClear
+        BackWall.Color = clSilver
+        Gradient.EndColor = 14737632
+        Gradient.StartColor = 4473924
+        Gradient.Visible = True
+        LeftWall.Brush.Color = clWhite
+        Title.Brush.Color = clWhite
+        Title.Brush.Style = bsClear
+        Title.Color = clWhite
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clBlack
+        Title.Font.Height = -15
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = []
+        Title.Text.Strings = (
+          'Horario Ventas')
+        BackColor = clSilver
+        LeftAxis.Grid.Color = 13290186
+        LeftAxis.MinorTickLength = 1
+        LeftAxis.Ticks.Color = clSilver
+        LeftAxis.TicksInner.Color = clSilver
+        Legend.Alignment = laBottom
+        Legend.Frame.Visible = False
+        Legend.ResizeChart = False
+        Legend.ShadowSize = 1
+        Legend.TextStyle = ltsPlain
+        Legend.TopPos = 11
+        Legend.Visible = False
+        View3D = False
+        View3DOptions.Elevation = 315
+        View3DOptions.Perspective = 0
+        View3DOptions.Rotation = 360
+        View3DWalls = False
+        Align = alClient
+        BevelOuter = bvNone
+        BevelWidth = 0
+        TabOrder = 0
+        object Series5: TFastLineSeries
+          Marks.ArrowLength = 8
+          Marks.Style = smsValue
+          Marks.Visible = False
+          DataSource = ZP_Horario
+          SeriesColor = clBlue
+          ShowInLegend = False
+          Title = 'horario linea'
+          LinePen.Color = clBlue
+          LinePen.Width = 2
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'HORA_HASTA'
+          YValues.DateTime = False
+          YValues.Name = 'Y'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'CANTIDAD'
+        end
+        object Series3: TPointSeries
+          Marks.ArrowLength = 8
+          Marks.Style = smsValue
+          Marks.Visible = False
+          DataSource = ZP_Horario
+          SeriesColor = clLime
+          ShowInLegend = False
+          Title = 'horario ptos'
+          Pointer.Brush.Color = clBlue
+          Pointer.Draw3D = False
+          Pointer.InflateMargins = True
+          Pointer.Style = psRectangle
+          Pointer.Visible = True
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'HORA_HASTA'
+          YValues.DateTime = False
+          YValues.Name = 'Y'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'CANTIDAD'
+        end
+      end
     end
   end
   object DS_Comprobante: TDataSource
     DataSet = ZQ_Comprobante
     Left = 61
-    Top = 169
+    Top = 199
   end
   object ZQ_Comprobante_FormaPago: TZQuery
     Connection = DM.Conexion
@@ -1341,7 +1543,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         ParamType = ptUnknown
       end>
     Left = 225
-    Top = 65
+    Top = 95
     ParamData = <
       item
         DataType = ftUnknown
@@ -1427,7 +1629,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         ParamType = ptUnknown
       end>
     Left = 385
-    Top = 65
+    Top = 95
     ParamData = <
       item
         DataType = ftUnknown
@@ -1545,7 +1747,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     Params = <>
     Left = 66
-    Top = 114
+    Top = 144
     object ZQ_ComprobanteCODIGO: TStringField
       FieldName = 'CODIGO'
       Size = 50
@@ -1599,12 +1801,12 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object DS_Comprobante_FormaPago: TDataSource
     DataSet = ZQ_Comprobante_FormaPago
     Left = 221
-    Top = 113
+    Top = 143
   end
   object DS_ComprobanteDetalle: TDataSource
     DataSet = ZQ_ComprobanteDetalle
     Left = 389
-    Top = 113
+    Top = 143
   end
   object EKDbSumaComprobante: TEKDbSuma
     SumCollection = <
@@ -1615,7 +1817,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     DataSet = ZQ_Comprobante
     SumListChanged = EKDbSumaComprobanteSumListChanged
     Left = 61
-    Top = 273
+    Top = 303
   end
   object EKBuscarComprobantes: TEKBusquedaAvanzada
     CriteriosBusqueda = <
@@ -1751,7 +1953,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     UsarWhereOriginal = EK_Con_Where
     Left = 64
-    Top = 65
+    Top = 95
   end
   object ZQ_TipoIVA: TZQuery
     Connection = DM.Conexion
@@ -1760,7 +1962,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       'from tipo_IVA')
     Params = <>
     Left = 509
-    Top = 66
+    Top = 96
     object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True
@@ -1831,7 +2033,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     PermitirMover = True
     PermitirFiltrar = True
     Left = 58
-    Top = 218
+    Top = 248
   end
   object EKOrdenarProducto: TEKOrdenarGrilla
     Grilla = DBGridListadoProductos
@@ -1871,7 +2073,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     PermitirMover = True
     PermitirFiltrar = True
     Left = 386
-    Top = 162
+    Top = 192
   end
   object EKOrdenarFPago: TEKOrdenarGrilla
     Grilla = DBGridFormaPago
@@ -1903,7 +2105,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     PermitirMover = True
     PermitirFiltrar = True
     Left = 218
-    Top = 162
+    Top = 192
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -2333,7 +2535,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     UseF10ForMenu = False
     UseSystemFont = False
     Left = 512
-    Top = 120
+    Top = 150
     DockControlHeights = (
       0
       0
@@ -2390,7 +2592,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
   end
   object ATeclasRapidas: TActionManager
     Left = 216
-    Top = 274
+    Top = 304
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -2406,7 +2608,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       end>
     DataSet = ZQ_Comprobante_FormaPago
     Left = 218
-    Top = 215
+    Top = 245
   end
   object EKDbSumaProducto: TEKDbSuma
     SumCollection = <
@@ -2424,7 +2626,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       end>
     DataSet = ZQ_ComprobanteDetalle
     Left = 386
-    Top = 224
+    Top = 254
   end
   object ZQ_Sucursal: TZQuery
     Connection = DM.Conexion
@@ -2435,7 +2637,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       'order by s.nombre')
     Params = <>
     Left = 508
-    Top = 176
+    Top = 206
     object ZQ_SucursalID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
     end
@@ -2502,6 +2704,161 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Reporte = RepDetalleMov
     ShowModal = False
     Left = 62
-    Top = 321
+    Top = 351
+  end
+  object ZP_Horario: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftTime
+        Name = 'HORA_DESDE'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftTime
+        Name = 'HORA_HASTA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'CANTIDAD'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPORTE'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'INTERVALO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_DESDE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_HASTA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_SUCURSAL'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'ESTADISTICA_VENTAS_POR_HORA'
+    Left = 708
+    Top = 96
+    ParamData = <
+      item
+        DataType = ftTime
+        Name = 'HORA_DESDE'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftTime
+        Name = 'HORA_HASTA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'CANTIDAD'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPORTE'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'INTERVALO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_DESDE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_HASTA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_SUCURSAL'
+        ParamType = ptInput
+      end>
+    object ZP_HorarioHORA_DESDE: TTimeField
+      FieldName = 'HORA_DESDE'
+    end
+    object ZP_HorarioHORA_HASTA: TTimeField
+      FieldName = 'HORA_HASTA'
+    end
+    object ZP_HorarioCANTIDAD: TIntegerField
+      FieldName = 'CANTIDAD'
+    end
+    object ZP_HorarioIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+      currency = True
+    end
+  end
+  object DS_Horario: TDataSource
+    DataSet = ZP_Horario
+    Left = 708
+    Top = 152
+  end
+  object EKBuscarHorario: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Fecha Desde'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fechas Hasta'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Intervalo (Min)'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 710
+    Top = 209
   end
 end

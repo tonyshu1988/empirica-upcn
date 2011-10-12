@@ -2294,9 +2294,9 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         BevelOuter = bvNone
         TabOrder = 0
         object lblMov_TotalEgresos: TLabel
-          Left = 0
+          Left = 808
           Top = 429
-          Width = 950
+          Width = 142
           Height = 14
           Align = alBottom
           Alignment = taRightJustify
@@ -2309,9 +2309,9 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           ParentFont = False
         end
         object lblMov_TotalIngresos: TLabel
-          Left = 0
+          Left = 801
           Top = 443
-          Width = 950
+          Width = 149
           Height = 14
           Align = alBottom
           Alignment = taRightJustify
@@ -2394,7 +2394,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblMovSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 942
+            Width = 97
             Height = 13
             Align = alTop
             Caption = 'lblMovSucursal'
@@ -2408,7 +2408,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblMovFecha: TLabel
             Left = 4
             Top = 4
-            Width = 942
+            Width = 79
             Height = 13
             Align = alTop
             Caption = 'lblMovFecha'
@@ -2436,7 +2436,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object Label4: TLabel
           Left = 0
           Top = 0
-          Width = 422
+          Width = 65
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -2451,7 +2451,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object lblTotalIngresos: TLabel
           Left = 0
           Top = 71
-          Width = 422
+          Width = 69
           Height = 13
           Align = alBottom
           Alignment = taCenter
@@ -2579,7 +2579,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object Label3: TLabel
           Left = 0
           Top = 0
-          Width = 524
+          Width = 58
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -2594,7 +2594,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object lblTotalEgresos: TLabel
           Left = 0
           Top = 71
-          Width = 524
+          Width = 69
           Height = 13
           Align = alBottom
           Alignment = taCenter
@@ -2721,7 +2721,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object lblIngEgrSucursal: TLabel
           Left = 4
           Top = 17
-          Width = 942
+          Width = 114
           Height = 13
           Align = alTop
           Caption = 'lblIngEgrSucursal'
@@ -2735,7 +2735,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object lblIngEgrFecha: TLabel
           Left = 4
           Top = 4
-          Width = 942
+          Width = 96
           Height = 13
           Align = alTop
           Caption = 'lblIngEgrFecha'

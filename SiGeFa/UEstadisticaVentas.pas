@@ -7,7 +7,8 @@ uses
   Dialogs, ComCtrls, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
   StdCtrls, EKDbSuma, EKOrdenarGrilla, Buttons, mxNativeExcel, mxExport,
-  ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls, EKVistaPreviaQR;
+  ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls, EKVistaPreviaQR,
+  ZStoredProcedure, Series, TeEngine, TeeProcs, Chart, DbChart;
 
 type
   TFEstadisticaVentas = class(TForm)
@@ -155,9 +156,25 @@ type
     QRlblImporteTotal: TQRLabel;
     ZQ_ComprobanteNOMBRE_TIPO_IVA: TStringField;
     PageControl: TPageControl;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
-    TabSheet3: TTabSheet;
+    TabFacturacion: TTabSheet;
+    TabHorarioVentas: TTabSheet;
+    PanelMes: TPanel;
+    DBGridHorario: TDBGrid;
+    Panel5: TPanel;
+    lblHorarioFecha: TLabel;
+    lblHorarioSucursal: TLabel;
+    lblHorarioIntervalo: TLabel;
+    ZP_Horario: TZStoredProc;
+    ZP_HorarioHORA_DESDE: TTimeField;
+    ZP_HorarioHORA_HASTA: TTimeField;
+    ZP_HorarioCANTIDAD: TIntegerField;
+    ZP_HorarioIMPORTE: TFloatField;
+    DS_Horario: TDataSource;
+    EKBuscarHorario: TEKBusquedaAvanzada;
+    TabHorarioGrafico: TTabSheet;
+    DBChartHorario: TDBChart;
+    Series5: TFastLineSeries;
+    Series3: TPointSeries;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -183,11 +200,13 @@ var
 
 implementation
 
-uses UDM, UPrincipal, UUtilidades;
+uses UDM, UPrincipal, UUtilidades, DateUtils;
 
 {$R *.dfm}
 
 procedure TFEstadisticaVentas.FormCreate(Sender: TObject);
+var
+  anio, mes: integer;
 begin
   QRDBLogo.DataSet:= dm.ZQ_Sucursal;
 
@@ -196,9 +215,21 @@ begin
   EKOrdenarProducto.CargarConfigColumnas;
   cargarConfigPanel;
 
+  PageControl.ActivePageIndex:= 0;
+
   ZQ_TipoIVA.Open;
   ZQ_Sucursal.Open;
   where:= '';
+
+  lblHorarioFecha.Caption := '';
+  lblHorarioSucursal.Caption := '';
+  lblHorarioIntervalo.Caption := '';
+
+  mes:= MonthOf(dm.EKModelo.Fecha);
+  anio:= YearOf(dm.EKModelo.Fecha);
+
+  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
+  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.Fecha);
 
 //Permiso para ver o no los filtros de Fiscal
 //  PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
@@ -257,14 +288,6 @@ begin
 end;
 
 
-procedure TFEstadisticaVentas.btnBuscarClick(Sender: TObject);
-begin
-  EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
-  EKBuscarComprobantes.Buscar;
-  ZQ_Comprobante.First;
-end;
-
-
 procedure TFEstadisticaVentas.AplicarFiltro(Sender: TObject);
 begin
   if TSpeedButton(Sender).Name = 'BtnFiltro_Todos' then
@@ -286,13 +309,6 @@ begin
   end;
 
   btnBuscar.Click;
-end;
-
-
-procedure TFEstadisticaVentas.btnExcelClick(Sender: TObject);
-begin
-  if not ZQ_Comprobante.IsEmpty then
-    dm.ExportarEXCEL(DBGridComprobantes);
 end;
 
 
@@ -348,16 +364,94 @@ begin
     PanelProducto.Width:= aux;
 end;
 
+
+procedure TFEstadisticaVentas.btnBuscarClick(Sender: TObject);
+begin
+//FACTURACION
+  if PageControl.ActivePage = TabFacturacion then
+  begin
+    EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
+    EKBuscarComprobantes.Buscar;
+    ZQ_Comprobante.First;
+  end;
+
+//HORARIO VENTA
+  if (PageControl.ActivePage = TabHorarioVentas) or (PageControl.ActivePage = TabHorarioGrafico
+  ) then
+  begin
+    lblHorarioFecha.Caption := '';
+    lblHorarioSucursal.Caption := '';
+    lblHorarioIntervalo.Caption := '';
+
+    if  EKBuscarHorario.BuscarSinEjecutar then
+      if (EKBuscarHorario.ParametrosSeleccionados1[0] = '') or (EKBuscarHorario.ParametrosSeleccionados1[1] = '') then
+      begin
+        Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
+        btnBuscar.Click;
+      end
+      else
+      begin
+        ZP_Horario.Close;
+
+        if EKBuscarHorario.ParametrosSeleccionados1[2] = '' then
+        begin
+          ZP_Horario.ParamByName('ID_SUCURSAL').AsInteger:= -1;
+        end
+        else
+        begin
+          lblHorarioSucursal.Caption:= 'Sucursal: '+EKBuscarHorario.ParametrosSelecReales1[2];
+          ZP_Horario.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(EKBuscarHorario.ParametrosSeleccionados1[2]);
+        end;
+
+        ZP_Horario.ParamByName('fecha_desde').AsDate :=StrToDate(EKBuscarHorario.ParametrosSeleccionados1[0]);
+        ZP_Horario.ParamByName('fecha_hasta').AsDate :=StrToDate(EKBuscarHorario.ParametrosSeleccionados1[1]);
+        ZP_Horario.ParamByName('intervalo').AsInteger :=StrToInt(EKBuscarHorario.ParametrosSeleccionados1[3]);
+        ZP_Horario.Open;
+
+        lblHorarioFecha.Caption:= 'Ventas desde el '+EKBuscarHorario.ParametrosSeleccionados1[0]+' al '+EKBuscarHorario.ParametrosSeleccionados1[1];
+        lblHorarioIntervalo.Caption:= 'Intervalo '+EKBuscarHorario.ParametrosSeleccionados1[3]+' minutos';
+      end;
+  end;
+end;
+
+
 procedure TFEstadisticaVentas.btImprimirClick(Sender: TObject);
 begin
-  if ZQ_Comprobante.IsEmpty then
-    exit;
+//FACTURACION
+  if PageControl.ActivePage = TabFacturacion then
+  begin
+    if ZQ_Comprobante.IsEmpty then
+      exit;
 
-  DM.VariablesReportes(RepDetalleMov);
-  QRlblRepDetMov_CritBusqueda.Caption := EKBuscarComprobantes.ParametrosBuscados;
-  QRlblRepDetalleMov_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRlblImporteTotal.Caption:= lblTotalComprobantes.Caption;
-  EKVistaPrevia.VistaPrevia;
+    DM.VariablesReportes(RepDetalleMov);
+    QRlblRepDetMov_CritBusqueda.Caption := EKBuscarComprobantes.ParametrosBuscados;
+    QRlblRepDetalleMov_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    QRlblImporteTotal.Caption:= lblTotalComprobantes.Caption;
+    EKVistaPrevia.VistaPrevia;
+  end;
+
+//HORARIO VENTA
+  if PageControl.ActivePage = TabHorarioVentas then
+  begin
+
+  end;
+end;
+
+
+procedure TFEstadisticaVentas.btnExcelClick(Sender: TObject);
+begin
+//FACTURACION
+  if PageControl.ActivePage = TabFacturacion then
+  begin
+    if not ZQ_Comprobante.IsEmpty then
+      dm.ExportarEXCEL(DBGridComprobantes);
+  end;
+
+//HORARIO VENTA
+  if PageControl.ActivePage = TabHorarioVentas then
+  begin
+
+  end;
 end;
 
 end.

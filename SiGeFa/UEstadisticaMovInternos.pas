@@ -380,7 +380,8 @@ var
   condicionImporte, filtro: string;
   idSucursal: integer;
 begin
-  if (PageControl.ActivePage.Name = 'TabBalance') or (PageControl.ActivePage.Name = 'TabBalanceGrafico') then
+//BALANCE
+  if (PageControl.ActivePage = TabBalance) or (PageControl.ActivePage = TabBalanceGrafico) then
   begin
     lblBalanceFecha.Caption:= '';
     lblBalanceSucursal.Caption:= '';
@@ -401,7 +402,8 @@ begin
       end;
   end;
 
-  if PageControl.ActivePage.Name = 'TabMovimientos' then
+//LISTA MOVIMIENTOS
+  if PageControl.ActivePage = TabMovimientos then
   begin
     lblMovFecha.Caption:= '';
     lblMovSucursal.Caption:= '';
@@ -454,7 +456,8 @@ begin
       lblMovSucursal.Caption:= 'Sucursal: '+EKBuscar_Mov.ParametrosSelecReales1[2];
   end;
 
-  if PageControl.ActivePage.Name = 'TabIngresos_Egresos' then
+//INGRESOS VS EGRESOS
+  if PageControl.ActivePage = TabIngresos_Egresos then
   begin
     lblIngEgrFecha.Caption:= '';
     lblIngEgrSucursal.Caption:= '';
@@ -565,7 +568,8 @@ end;
 
 procedure TFEstadisticaMovInternos.btnImprimirClick(Sender: TObject);
 begin
-  if PageControl.ActivePage.Name = 'TabBalance' then
+//BALANCE
+  if PageControl.ActivePage = TabBalance then
   begin
     if ZS_Balance.IsEmpty then
       exit;
@@ -582,7 +586,8 @@ begin
     EKVistaBalance.VistaPrevia;
   end;
 
-  if PageControl.ActivePage.Name = 'TabMovimientos' then
+//LISTA MOVIMIENTOS
+  if PageControl.ActivePage = TabMovimientos then
   begin
     if ZQ_Movimientos.IsEmpty then
       exit;
@@ -602,13 +607,15 @@ end;
 
 procedure TFEstadisticaMovInternos.btnExcelClick(Sender: TObject);
 begin
-  if PageControl.ActivePage.Name = 'TabBalance' then
+//BALANCE
+  if PageControl.ActivePage = TabBalance then
   begin
     if not ZS_Balance.IsEmpty then
       dm.ExportarEXCEL(DBGridBalance);
   end;
 
-  if PageControl.ActivePage.Name = 'TabMovimientos' then
+//LISTA MOVIEMINTOS
+  if PageControl.ActivePage = TabMovimientos then
   begin
     if not ZQ_Movimientos.IsEmpty then
       dm.ExportarEXCEL(DBGridMovimientos);
