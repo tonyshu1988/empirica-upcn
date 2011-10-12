@@ -2,14 +2,15 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
   Tag = 98
   Left = 243
   Top = 169
-  Width = 995
+  Width = 863
   Height = 476
+  Anchors = [akTop]
   Caption = 'Vista Previa'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
   FormStyle = fsStayOnTop
   OldCreateOrder = False
@@ -25,8 +26,8 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
     Tag = 98
     Left = 0
     Top = 42
-    Width = 979
-    Height = 396
+    Width = 847
+    Height = 377
     HorzScrollBar.Tracking = True
     VertScrollBar.Tracking = True
     Align = alClient
@@ -35,17 +36,18 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
+    OnPageAvailable = QRPreview1PageAvailable
     PageNumber = 1
     Zoom = 100
     DesignSize = (
-      975
-      392)
-    object Image2: TImage
-      Left = 942
-      Top = 362
+      843
+      373)
+    object LogoEmpirica: TImage
+      Left = 808
+      Top = 341
       Width = 33
       Height = 30
-      Anchors = [akRight, akBottom]
+      Anchors = []
       Center = True
       Picture.Data = {
         055449636F6E000001000A00000000000100200028200400A600000080800000
@@ -14390,12 +14392,13 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
         F0070000F00F0000F81F0000FC3F0000FC7F0000FEFF0000FFFF0000}
       Stretch = True
       Transparent = True
+      Visible = False
     end
   end
   object Barra: TActionToolBar
     Left = 0
     Top = 0
-    Width = 979
+    Width = 847
     Height = 42
     ActionManager = Acciones
     Caption = 'Barra'
@@ -14405,6 +14408,56 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
     ParentShowHint = False
     ShowHint = True
     Spacing = 0
+  end
+  object StatusBar: TStatusBar
+    Left = 0
+    Top = 419
+    Width = 847
+    Height = 19
+    Panels = <
+      item
+        Alignment = taCenter
+        Width = 120
+      end
+      item
+        Alignment = taCenter
+        Width = 100
+      end
+      item
+        Alignment = taCenter
+        Width = 100
+      end
+      item
+        Width = 50
+      end>
+  end
+  object PanelProcesando: TPanel
+    Left = 311
+    Top = 192
+    Width = 225
+    Height = 53
+    TabOrder = 3
+    Visible = False
+    object Label1: TLabel
+      Left = 55
+      Top = 10
+      Width = 111
+      Height = 14
+      Caption = 'Por favor espere'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object ProgressBar1: TProgressBar
+      Left = 8
+      Top = 27
+      Width = 209
+      Height = 17
+      TabOrder = 0
+    end
   end
   object imagenesx: TImageList
     DrawingStyle = dsTransparent
@@ -17065,30 +17118,30 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
       item
         Items = <
           item
-            Action = zoom_pagina
+            Action = AZoomPagina
             Caption = '&zoom_pagina'
             ImageIndex = 15
             ShowCaption = False
           end
           item
-            Action = zoom_ancho
+            Action = AZoomAncho
             Caption = 'zoo&m_ancho'
             ImageIndex = 12
             ShowCaption = False
           end
           item
-            Action = zomm_100
+            Action = AZoom100
             Caption = 'z&oom_100'
             ImageIndex = 11
             ShowCaption = False
           end
           item
-            Action = zoom_mas
+            Action = AZoomMas
             ImageIndex = 13
             ShowCaption = False
           end
           item
-            Action = zoom_menos
+            Action = AZoomMenos
             Caption = 'zoom_m&enos'
             ImageIndex = 14
             ShowCaption = False
@@ -17097,25 +17150,25 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
             Caption = '-'
           end
           item
-            Action = primero
+            Action = APrimero
             Caption = '&primero'
             ImageIndex = 6
             ShowCaption = False
           end
           item
-            Action = anterior
+            Action = AAnterior
             Caption = '&anterior'
             ImageIndex = 9
             ShowCaption = False
           end
           item
-            Action = siguiente
+            Action = ASiguiente
             Caption = '&siguiente'
             ImageIndex = 0
             ShowCaption = False
           end
           item
-            Action = ultimo
+            Action = AUltimo
             Caption = '&ultimo'
             ImageIndex = 7
             ShowCaption = False
@@ -17124,13 +17177,13 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
             Caption = '-'
           end
           item
-            Action = Conf_impresora
+            Action = AConf_impresora
             Caption = '&Configurar Impresora'
             ImageIndex = 8
             ShowCaption = False
           end
           item
-            Action = Imprimir
+            Action = AImprimir
             Caption = '&Imprimir'
             ImageIndex = 5
             ShowCaption = False
@@ -17139,24 +17192,24 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
             Caption = '-'
           end
           item
-            Action = Pdf
+            Action = AExportar_PDF
             ImageIndex = 16
             ShowCaption = False
           end
           item
-            Action = word
+            Action = AExportar_WORD
             Caption = '&word'
             ImageIndex = 10
             ShowCaption = False
           end
           item
-            Action = Excel
+            Action = AExportar_EXCEL
             Caption = 'E&xcel'
             ImageIndex = 2
             ShowCaption = False
           end
           item
-            Action = imagen
+            Action = AExportar_WMF
             Caption = 'ima&gen'
             ImageIndex = 1
             ShowCaption = False
@@ -17165,7 +17218,7 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
             Caption = '-'
           end
           item
-            Action = guardar
+            Action = AGuardar
             Caption = 'gua&rdar'
             ImageIndex = 4
             ShowCaption = False
@@ -17174,7 +17227,7 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
             Caption = '-'
           end
           item
-            Action = salir
+            Action = ASalir
             Caption = 'Sa&lir'
             ImageIndex = 3
             ShowCaption = False
@@ -17185,107 +17238,114 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
     Left = 32
     Top = 160
     StyleName = 'XP Style'
-    object zoom_pagina: TAction
+    object AZoomPagina: TAction
       Caption = 'zoom_pagina'
       Hint = 'Zoom al tama'#241'o de p'#225'gina'
       ImageIndex = 15
-      OnExecute = zoom_paginaExecute
+      OnExecute = HacerZoom
     end
-    object zomm_100: TAction
-      Caption = 'zoom_100'
-      Hint = 'Zoom al 100 %'
-      ImageIndex = 11
-      OnExecute = zomm_100Execute
-    end
-    object zoom_ancho: TAction
+    object AZoomAncho: TAction
       Caption = 'zoom_ancho'
       Hint = 'Zoom al ancho de p'#225'gina'
       ImageIndex = 12
-      OnExecute = zoom_anchoExecute
+      OnExecute = HacerZoom
     end
-    object primero: TAction
-      Caption = 'primero'
-      Hint = 'Primer p'#225'gina'
-      ImageIndex = 6
-      OnExecute = primeroExecute
+    object AZoom100: TAction
+      Caption = 'zoom_100'
+      Hint = 'Zoom al 100 %'
+      ImageIndex = 11
+      OnExecute = HacerZoom
     end
-    object anterior: TAction
-      Caption = 'anterior'
-      Hint = 'P'#225'gina anterior'
-      ImageIndex = 9
-      OnExecute = anteriorExecute
-    end
-    object siguiente: TAction
-      Caption = 'siguiente'
-      Hint = 'P'#225'gina siguiente'
-      ImageIndex = 0
-      OnExecute = siguienteExecute
-    end
-    object ultimo: TAction
-      Caption = 'ultimo'
-      Hint = #218'ltima p'#225'gina'
-      ImageIndex = 7
-      OnExecute = ultimoExecute
-    end
-    object Imprimir: TAction
-      Caption = 'Imprimir'
-      Hint = 'Imprimir'
-      ImageIndex = 5
-      OnExecute = ImprimirExecute
-    end
-    object word: TAction
-      Caption = 'word'
-      Hint = 'Exportar a Word'
-      ImageIndex = 10
-      OnExecute = wordExecute
-    end
-    object Excel: TAction
-      Caption = 'Excel'
-      Hint = 'Exportar a Excel'
-      ImageIndex = 2
-      OnExecute = ExcelExecute
-    end
-    object imagen: TAction
-      Caption = 'imagen'
-      Hint = 'Exportar a imagen WMF'
-      ImageIndex = 1
-      OnExecute = imagenExecute
-    end
-    object guardar: TAction
-      Caption = 'guardar'
-      Hint = 'Guardar como'
-      ImageIndex = 4
-      OnExecute = guardarExecute
-    end
-    object salir: TAction
-      Caption = 'Salir'
-      Hint = 'Cerrar el reporte'
-      ImageIndex = 3
-      OnExecute = salirExecute
-    end
-    object Conf_impresora: TAction
-      Caption = 'Configurar Impresora'
-      Hint = 'Configurar Impresora'
-      ImageIndex = 8
-      OnExecute = Conf_impresoraExecute
-    end
-    object zoom_mas: TAction
+    object AZoomMas: TAction
       Caption = 'zoom_mas'
       Hint = 'Aumentar'
       ImageIndex = 13
-      OnExecute = zoom_masExecute
+      OnExecute = HacerZoom
     end
-    object zoom_menos: TAction
+    object AZoomMenos: TAction
       Caption = 'zoom_menos'
       Hint = 'Disminuir'
       ImageIndex = 14
-      OnExecute = zoom_menosExecute
+      OnExecute = HacerZoom
     end
-    object Pdf: TAction
+    object APrimero: TAction
+      Caption = 'primero'
+      Hint = 'Primer p'#225'gina'
+      ImageIndex = 6
+      OnExecute = MoverPagina
+    end
+    object AAnterior: TAction
+      Caption = 'anterior'
+      Hint = 'P'#225'gina anterior'
+      ImageIndex = 9
+      OnExecute = MoverPagina
+    end
+    object ASiguiente: TAction
+      Caption = 'siguiente'
+      Hint = 'P'#225'gina siguiente'
+      ImageIndex = 0
+      OnExecute = MoverPagina
+    end
+    object AUltimo: TAction
+      Caption = 'ultimo'
+      Hint = #218'ltima p'#225'gina'
+      ImageIndex = 7
+      OnExecute = MoverPagina
+    end
+    object AConf_impresora: TAction
+      Caption = 'Configurar Impresora'
+      Enabled = False
+      Hint = 'Configurar Impresora'
+      ImageIndex = 8
+      OnExecute = AConf_impresoraExecute
+    end
+    object AImprimir: TAction
+      Caption = 'Imprimir'
+      Enabled = False
+      Hint = 'Imprimir'
+      ImageIndex = 5
+      OnExecute = AImprimirExecute
+    end
+    object AExportar_PDF: TAction
       Caption = 'PDF'
+      Enabled = False
       Hint = 'Exportar a PDF'
       ImageIndex = 16
-      OnExecute = PdfExecute
+      OnExecute = Exportar
+    end
+    object AExportar_WORD: TAction
+      Caption = 'word'
+      Enabled = False
+      Hint = 'Exportar a Word'
+      ImageIndex = 10
+      OnExecute = Exportar
+    end
+    object AExportar_EXCEL: TAction
+      Caption = 'Excel'
+      Enabled = False
+      Hint = 'Exportar a Excel'
+      ImageIndex = 2
+      OnExecute = Exportar
+    end
+    object AExportar_WMF: TAction
+      Caption = 'imagen'
+      Enabled = False
+      Hint = 'Exportar a imagen WMF'
+      ImageIndex = 1
+      OnExecute = Exportar
+    end
+    object AGuardar: TAction
+      Caption = 'guardar'
+      Enabled = False
+      Hint = 'Guardar como'
+      ImageIndex = 4
+      OnExecute = AGuardarExecute
+    end
+    object ASalir: TAction
+      Caption = 'Salir'
+      Hint = 'Cerrar el reporte'
+      ImageIndex = 3
+      OnExecute = ASalirExecute
     end
   end
   object PrintDialog: TPrintDialog
@@ -19504,11 +19564,5 @@ object EKVistaPreviaQRForm: TEKVistaPreviaQRForm
     CompressionOn = False
     Left = 800
     Top = 170
-  end
-  object Timer: TTimer
-    Interval = 500
-    OnTimer = TimerTimer
-    Left = 32
-    Top = 314
   end
 end
