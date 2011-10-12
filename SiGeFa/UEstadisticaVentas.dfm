@@ -1476,13 +1476,13 @@ object FEstadisticaVentas: TFEstadisticaVentas
           SeriesColor = clBlue
           ShowInLegend = False
           Title = 'horario linea'
+          XLabelsSource = 'HORA_HASTA'
           LinePen.Color = clBlue
           LinePen.Width = 2
           XValues.DateTime = False
           XValues.Name = 'X'
           XValues.Multiplier = 1.000000000000000000
           XValues.Order = loAscending
-          XValues.ValueSource = 'HORA_HASTA'
           YValues.DateTime = False
           YValues.Name = 'Y'
           YValues.Multiplier = 1.000000000000000000
@@ -1506,7 +1506,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
           XValues.Name = 'X'
           XValues.Multiplier = 1.000000000000000000
           XValues.Order = loAscending
-          XValues.ValueSource = 'HORA_HASTA'
           YValues.DateTime = False
           YValues.Name = 'Y'
           YValues.Multiplier = 1.000000000000000000
@@ -2795,9 +2794,11 @@ object FEstadisticaVentas: TFEstadisticaVentas
       end>
     object ZP_HorarioHORA_DESDE: TTimeField
       FieldName = 'HORA_DESDE'
+      DisplayFormat = 'hh:mm'
     end
     object ZP_HorarioHORA_HASTA: TTimeField
       FieldName = 'HORA_HASTA'
+      DisplayFormat = 'hh:mm'
     end
     object ZP_HorarioCANTIDAD: TIntegerField
       FieldName = 'CANTIDAD'
