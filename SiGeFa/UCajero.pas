@@ -2326,7 +2326,8 @@ end;
 
 function TFCajero.imprimirFiscal(comprob:Integer; tipoAccion: string): Boolean;
 begin
-  Result:=True;
+  Result:= True;
+  leerSistemaIni;
 
   if tipoAccion = 'F' then
     ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l '+IntToStr(comprob)+' -i '+Impresora+' -c '+tipoAccion), nil, SW_SHOWNORMAL)
@@ -2350,7 +2351,7 @@ end;
 
 procedure TFCajero.BtCierreXClick(Sender: TObject);
 begin
-imprimirFiscal( 0, 'X');
+  imprimirFiscal( 0, 'X');
 end;
 
 end.
