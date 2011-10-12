@@ -427,7 +427,8 @@ end;
 
 procedure TFEstadisticaDisponibilidades.btnBuscarClick(Sender: TObject);
 begin
-  if PageControl.ActivePage.Name = 'TabSaldosCuentas' then
+//SALDO DE CUENTAS
+  if PageControl.ActivePage = TabSaldosCuentas then
   begin
     lblSaldo_Total.Caption := '';
     lblSaldo_Encabezado2.Caption := '';
@@ -455,19 +456,20 @@ begin
       end;
   end;
 
-  if PageControl.ActivePage.Name = 'TabParteDiario' then
+//PARTE DIARIO
+  if PageControl.ActivePage = TabParteDiario then
   begin
     lblEncabezadoParteDiario.Caption := '';
     lblSaldo_TotalParteDiario.Caption := '';
     lblSucursal.Caption := '';
     lblPD_totalIngreso.Caption := '';
-    lblPD_totalTransfer.Caption := '';    
+    lblPD_totalTransfer.Caption := '';
     lblPD_totalEgreso.Caption := '';
 
     if  EKBuscarParteDiario.BuscarSinEjecutar then
       if (EKBuscarParteDiario.ParametrosSeleccionados1[0] = '') or (EKBuscarParteDiario.ParametrosSeleccionados1[1] = '') then
       begin
-        Application.MessageBox('No se ha cargado la fecha', 'Verifique', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
       end
       else
@@ -505,11 +507,12 @@ begin
         lblSaldo_TotalParteDiario.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
         lblPD_totalIngreso.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[0].SumValue);
         lblPD_totalEgreso.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[1].SumValue);
-        lblPD_totalTransfer.Caption:= 'Total Transferencias: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[2].SumValue);        
+        lblPD_totalTransfer.Caption:= 'Total Transferencias: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[2].SumValue);
       end;
   end;
 
-  if PageControl.ActivePage.Name = 'TabDetalleMov' then
+//DETALLE MOVIMIENTOS
+  if PageControl.ActivePage = TabDetalleMov then
   begin
     lblEncabezadoDetMov.Caption := '';
     lblSucursalDetMov.Caption := '';
@@ -518,7 +521,7 @@ begin
     if  EKBuscarDetMov.BuscarSinEjecutar then
       if (EKBuscarDetMov.ParametrosSeleccionados1[0] = '') or (EKBuscarDetMov.ParametrosSeleccionados1[1] = '') then
       begin
-        Application.MessageBox('No se ha cargado la fecha', 'Verifique', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
       end
       else
@@ -543,7 +546,8 @@ begin
       end;
   end;
 
-  if (PageControl.ActivePage.Name = 'TabBalance') or (PageControl.ActivePage.Name = 'TabBalanceGrafico') then
+//BALANCE
+  if (PageControl.ActivePage = TabBalance) or (PageControl.ActivePage = TabBalanceGrafico) then
   begin
     lblBalanceFecha.Caption:= '';
     lblBalanceSucursal.Caption:= '';
@@ -570,7 +574,8 @@ end;
 
 procedure TFEstadisticaDisponibilidades.btnImprimirClick(Sender: TObject);
 begin
-  if PageControl.ActivePage.Name = 'TabSaldosCuentas' then
+//SALDO CUENTAS
+  if PageControl.ActivePage = TabSaldosCuentas then
   begin
     if ZP_SaldosCuentas.IsEmpty then
       exit;
@@ -583,7 +588,8 @@ begin
     EKVista_RepSaldo.VistaPrevia;
   end;
 
-  if PageControl.ActivePage.Name = 'TabParteDiario' then
+//PARTE DIARIO
+  if PageControl.ActivePage = TabParteDiario then
   begin
     if ZP_PD_SaldoCuentas.IsEmpty or ZP_estadistica_Parte_Diario.IsEmpty or ZP_Estadistica_IE_Medios.IsEmpty then
       exit;
@@ -605,7 +611,8 @@ begin
     EKVista_RepParteDiario.VistaPrevia;
   end;
 
-  if PageControl.ActivePage.Name = 'TabDetalleMov' then
+//DETALLE MOVIMIENTOS
+  if PageControl.ActivePage = TabDetalleMov then
   begin
     if ZP_Estadistica_Det_Mov.IsEmpty then
       exit;
@@ -621,7 +628,8 @@ begin
     ZP_Estadistica_Det_Mov.SortedFields:= 'FECHA';
   end;
 
-  if PageControl.ActivePage.Name = 'TabBalance' then
+//BALANCE
+  if PageControl.ActivePage = TabBalance then
   begin
     if ZS_Balance.IsEmpty then
       exit;
@@ -671,19 +679,22 @@ end;
 
 procedure TFEstadisticaDisponibilidades.btnExcelClick(Sender: TObject);
 begin
-  if PageControl.ActivePage.Name = 'TabSaldosCuentas' then
+//SALDO CUENTAS
+  if PageControl.ActivePage = TabSaldosCuentas then
   begin
     if not ZP_SaldosCuentas.IsEmpty then
       dm.ExportarEXCEL(DBGridSaldoCuentas);
   end;
 
-  if PageControl.ActivePage.Name = 'TabDetalleMov' then
+//DETALLE MOVIEMIENTOS
+  if PageControl.ActivePage = TabDetalleMov then
   begin
     if not ZP_Estadistica_Det_Mov.IsEmpty then
       dm.ExportarEXCEL(DBGridEstadisticaDetMov);
   end;
 
-  if PageControl.ActivePage.Name = 'TabBalance' then
+//BALANCE
+  if PageControl.ActivePage = TabBalance then
   begin
     if not ZS_Balance.IsEmpty then
       dm.ExportarEXCEL(DBGridBalance);
@@ -693,7 +704,6 @@ end;
 
 procedure TFEstadisticaDisponibilidades.abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer);
 begin
-//  ShowMessage(IntToStr(tipo)+' - '+DateToStr(fecha_desde)+' - '+DateToStr(fecha_hasta)+' - '+IntToStr(id_sucursal));
   ZS_Balance.Close;
   ZS_Balance.ParamByName('tipo_cpb').AsInteger:= tipo;
   ZS_Balance.ParamByName('fecha_desde').AsDate:= fecha_desde;

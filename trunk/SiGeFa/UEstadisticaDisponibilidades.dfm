@@ -32,7 +32,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       Top = 1
       Width = 976
       Height = 521
-      ActivePage = TabBalance
+      ActivePage = TabBalanceGrafico
       Align = alClient
       TabOrder = 0
       object TabSaldosCuentas: TTabSheet
