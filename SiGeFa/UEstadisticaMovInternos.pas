@@ -95,11 +95,6 @@ type
     DS_Balance: TDataSource;
     EKSuma_Balance: TEKDbSuma;
     ZS_CalcSaldos: TZStoredProc;
-    ZS_CalcSaldosFECHA: TDateField;
-    ZS_CalcSaldosINGRESO: TFloatField;
-    ZS_CalcSaldosEGRESO: TFloatField;
-    ZS_CalcSaldosSALDO: TFloatField;
-    ZS_CalcSaldosSALDODIARIO: TFloatField;
     EKOrdenarGrillaBalance: TEKOrdenarGrilla;
     EKBuscarBalance: TEKBusquedaAvanzada;
     ATeclasRapidas: TActionManager;
@@ -188,6 +183,15 @@ type
     Panel3: TPanel;
     btnExcel: TdxBarLargeButton;
     ZQ_MovimientosOBSERVACION: TStringField;
+    ZS_CalcSaldosFECHA: TDateField;
+    ZS_CalcSaldosINGRESO: TFloatField;
+    ZS_CalcSaldosEGRESO: TFloatField;
+    ZS_CalcSaldosSALDO: TFloatField;
+    ZS_CalcSaldosSALDODIARIO: TFloatField;
+    QRLabel41: TQRLabel;
+    QRLabel42: TQRLabel;
+    QRLabel44: TQRLabel;
+    QRLabel45: TQRLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_EgresosAfterScroll(DataSet: TDataSet);
     procedure pintarTortas(Serie: TChartSeries; cantidad: integer);
@@ -519,7 +523,7 @@ var
   fecha_desde_antes, fecha_hasta_antes: tdate;
 begin
   fecha_desde_antes:= EncodeDate(1900,1,1);
-  fecha_hasta_antes:= IncDay(fecha_desde);
+  fecha_hasta_antes:= IncDay(fecha_desde, -1);
   ZS_CalcSaldos.Close;
   ZS_CalcSaldos.ParamByName('fecha_desde').AsDate:= fecha_desde_antes;
   ZS_CalcSaldos.ParamByName('fecha_hasta').AsDate:= fecha_hasta_antes;
@@ -570,10 +574,10 @@ begin
     QRlblRepBalance_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
     QRlblRepBalance_CritBusqueda.Caption := EKBuscarBalance.ParametrosBuscados;
 
-    QRlblRepBalance_SaldoIni.Caption:= 'Saldo Inicial: '+lblBalanceSaldoInicial.Caption;
-    QRlblRepBalance_SaldoFinal.Caption:= 'Saldo Final: '+lblBalanceSaldoFinal.Caption;
-    QRlblRepBalance_Ingresos.Caption:= 'Ingresos: '+lblBalanceTotalIngresos.Caption;
-    QRlblRepBalance_Egresos.Caption:= 'Egresos: '+lblBalanceTotalEgresos.Caption;
+    QRlblRepBalance_SaldoIni.Caption:= lblBalanceSaldoInicial.Caption;
+    QRlblRepBalance_SaldoFinal.Caption:= lblBalanceSaldoFinal.Caption;
+    QRlblRepBalance_Ingresos.Caption:= lblBalanceTotalIngresos.Caption;
+    QRlblRepBalance_Egresos.Caption:= lblBalanceTotalEgresos.Caption;
 
     EKVistaBalance.VistaPrevia;
   end;

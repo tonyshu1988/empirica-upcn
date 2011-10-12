@@ -8,7 +8,7 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ZStoredProcedure,
   EKBusquedaAvanzada, StdCtrls, EKDbSuma, QRCtrls, QuickRpt,
   EKVistaPreviaQR, DBCtrls, EKOrdenarGrilla, ActnList, XPStyleActnCtrls,
-  ActnMan;
+  ActnMan, Series, TeEngine, TeeProcs, Chart, DbChart;
 
 type
   TFEstadisticaDisponibilidades = class(TForm)
@@ -16,7 +16,6 @@ type
     PageControl: TPageControl;
     TabSaldosCuentas: TTabSheet;
     TabDetalleMov: TTabSheet;
-    TabSheet3: TTabSheet;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
@@ -56,12 +55,6 @@ type
     lblSaldo_Encabezado1: TLabel;
     Panel4: TPanel;
     DBGridEstadisticaDetMov: TDBGrid;
-    Panel5: TPanel;
-    Label4: TLabel;
-    Panel6: TPanel;
-    Label5: TLabel;
-    Label6: TLabel;
-    DBGrid2: TDBGrid;
     EKDbSuma_Saldo: TEKDbSuma;
     RepSaldo: TQuickRep;
     QRBand9: TQRBand;
@@ -277,6 +270,80 @@ type
     ZQ_MovFormaPagoCUENTA: TStringField;
     EKOrdenarMovFPago: TEKOrdenarGrilla;
     btnExcel: TdxBarLargeButton;
+    TabBalance: TTabSheet;
+    PanelMes: TPanel;
+    DBGridBalance: TDBGrid;
+    PanelMes_Resumen: TPanel;
+    Label11: TLabel;
+    Label4: TLabel;
+    Label12: TLabel;
+    Label5: TLabel;
+    Shape3: TShape;
+    lblBalanceTotalIngresos: TLabel;
+    lblBalanceTotalEgresos: TLabel;
+    lblBalanceSaldoFinal: TLabel;
+    lblBalanceSaldoInicial: TLabel;
+    Panel5: TPanel;
+    lblBalanceTipoComprobante: TLabel;
+    lblBalanceFecha: TLabel;
+    RepBalance: TQuickRep;
+    QRBand4: TQRBand;
+    QRDBLogo4: TQRDBImage;
+    QRLabel33: TQRLabel;
+    RepBalance_Subtitulo: TQRLabel;
+    RepBalance_Titulo: TQRLabel;
+    QRBand5: TQRBand;
+    QRDBText28: TQRDBText;
+    QRDBText29: TQRDBText;
+    QRDBText30: TQRDBText;
+    QRDBText31: TQRDBText;
+    QRDBText32: TQRDBText;
+    QRBand7: TQRBand;
+    QRlblRepBalance_PieDePagina: TQRLabel;
+    QRLabel34: TQRLabel;
+    QRSysData4: TQRSysData;
+    QRBand8: TQRBand;
+    QRExpr1: TQRExpr;
+    QRlblRepBalance_SaldoIni: TQRLabel;
+    QRlblRepBalance_Ingresos: TQRLabel;
+    QRlblRepBalance_Egresos: TQRLabel;
+    QRlblRepBalance_SaldoFinal: TQRLabel;
+    QRBand13: TQRBand;
+    QRlblRepBalance_CritBusqueda: TQRLabel;
+    QRLabel35: TQRLabel;
+    QRBand15: TQRBand;
+    QRLabel36: TQRLabel;
+    QRLabel37: TQRLabel;
+    QRLabel38: TQRLabel;
+    QRLabel39: TQRLabel;
+    QRLabel40: TQRLabel;
+    lblBalanceSucursal: TLabel;
+    ZS_Balance: TZStoredProc;
+    ZS_BalanceFECHA: TDateField;
+    ZS_BalanceINGRESO: TFloatField;
+    ZS_BalanceEGRESO: TFloatField;
+    ZS_BalanceSALDO: TFloatField;
+    ZS_BalanceSALDODIARIO: TFloatField;
+    DS_Balance: TDataSource;
+    EKSuma_Balance: TEKDbSuma;
+    EKBuscarBalance: TEKBusquedaAvanzada;
+    EKVistaBalance: TEKVistaPreviaQR;
+    TabBalanceGrafico: TTabSheet;
+    DBChartBalance: TDBChart;
+    Series4: TFastLineSeries;
+    Series2: TPointSeries;
+    Series5: TFastLineSeries;
+    Series3: TPointSeries;
+    ZS_CalcSaldos: TZStoredProc;
+    ZS_CalcSaldosFECHA: TDateField;
+    ZS_CalcSaldosINGRESO: TFloatField;
+    ZS_CalcSaldosEGRESO: TFloatField;
+    ZS_CalcSaldosSALDO: TFloatField;
+    ZS_CalcSaldosSALDODIARIO: TFloatField;
+    QRLabel41: TQRLabel;
+    QRLabel42: TQRLabel;
+    QRLabel44: TQRLabel;
+    QRLabel45: TQRLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -286,6 +353,8 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure ZP_Estadistica_Det_MovAfterScroll(DataSet: TDataSet);
     procedure btnExcelClick(Sender: TObject);
+    procedure abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer);
+    procedure calcularResumenBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer);
   private
     { Private declarations }
   public
@@ -297,22 +366,23 @@ var
 
 implementation
 
-uses UDM, UPrincipal;
+uses UDM, UPrincipal, DateUtils;
 
 {$R *.dfm}
 
 procedure TFEstadisticaDisponibilidades.FormCreate(Sender: TObject);
+var
+  anio, mes: integer;
 begin
   QRDBLogo.DataSet:= dm.ZQ_Sucursal;
   QRDBLogo2.DataSet:= dm.ZQ_Sucursal;
   QRDBLogo3.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo4.DataSet:= dm.ZQ_Sucursal;  
 
   EKOrdenarGrillaDetMov.CargarConfigColumnas;
   EKOrdenarGrillaSaldos.CargarConfigColumnas;
   EKOrdenarGrillaPD_Saldo.CargarConfigColumnas;
   EKOrdenarMovFPago.CargarConfigColumnas;  
-
-  TabSheet3.TabVisible:= false;
 
   PageControl.ActivePageIndex:= 0;
   dm.EKModelo.abrir(ZQ_Sucursal);
@@ -329,6 +399,12 @@ begin
   lblEncabezadoDetMov.Caption := '';
   lblSucursalDetMov.Caption := '';
   lblResumenDetalleMovimiento.Caption := '';
+  lblBalanceFecha.Caption:= '';
+  lblBalanceSucursal.Caption:= '';
+  lblBalanceTipoComprobante.Caption:= '';
+
+  mes:= MonthOf(dm.EKModelo.Fecha);
+  anio:= YearOf(dm.EKModelo.Fecha);
 
   TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.FechayHora);
 
@@ -337,6 +413,9 @@ begin
 
   TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.Fecha);
   TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.Fecha);
+
+  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[1]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
+  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.FechayHora);
 end;
 
 
@@ -463,6 +542,29 @@ begin
         lblEncabezadoDetMov.Caption:= 'Detalles Movimientos desde el '+EKBuscarDetMov.ParametrosSeleccionados1[0]+' al '+EKBuscarDetMov.ParametrosSeleccionados1[1];
       end;
   end;
+
+  if (PageControl.ActivePage.Name = 'TabBalance') or (PageControl.ActivePage.Name = 'TabBalanceGrafico') then
+  begin
+    lblBalanceFecha.Caption:= '';
+    lblBalanceSucursal.Caption:= '';
+    lblBalanceTipoComprobante.Caption:= '';
+
+    if  EKBuscarBalance.BuscarSinEjecutar then
+      if (EKBuscarBalance.ParametrosSeleccionados1[1] = '') or (EKBuscarBalance.ParametrosSeleccionados1[2] = '') then
+      begin
+        Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
+        btnBuscar.Click;
+      end
+      else
+      begin
+        lblBalanceTipoComprobante.Caption:= 'Tipo Comprobante: '+EKBuscarBalance.ParametrosSelecReales1[0];
+        lblBalanceSucursal.Caption:= 'Sucursal: '+EKBuscarBalance.ParametrosSelecReales1[3];
+        if EKBuscarBalance.ParametrosSeleccionados1[3] = '' then
+          abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[0]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), -1)
+        else
+          abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[0]) ,StrToDate(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), StrToInt(EKBuscarBalance.ParametrosSeleccionados1[2]));
+      end;
+  end;
 end;
 
 
@@ -518,6 +620,23 @@ begin
 
     ZP_Estadistica_Det_Mov.SortedFields:= 'FECHA';
   end;
+
+  if PageControl.ActivePage.Name = 'TabBalance' then
+  begin
+    if ZS_Balance.IsEmpty then
+      exit;
+
+    DM.VariablesReportes(RepBalance);
+    QRlblRepBalance_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    QRlblRepBalance_CritBusqueda.Caption := EKBuscarBalance.ParametrosBuscados;
+
+    QRlblRepBalance_SaldoIni.Caption:= lblBalanceSaldoInicial.Caption;
+    QRlblRepBalance_SaldoFinal.Caption:= lblBalanceSaldoFinal.Caption;
+    QRlblRepBalance_Ingresos.Caption:= lblBalanceTotalIngresos.Caption;
+    QRlblRepBalance_Egresos.Caption:= lblBalanceTotalEgresos.Caption;
+
+    EKVistaBalance.VistaPrevia;
+  end;
 end;
 
 
@@ -549,6 +668,7 @@ begin
   ZQ_MovFormaPago.open;
 end;
 
+
 procedure TFEstadisticaDisponibilidades.btnExcelClick(Sender: TObject);
 begin
   if PageControl.ActivePage.Name = 'TabSaldosCuentas' then
@@ -562,6 +682,67 @@ begin
     if not ZP_Estadistica_Det_Mov.IsEmpty then
       dm.ExportarEXCEL(DBGridEstadisticaDetMov);
   end;
+
+  if PageControl.ActivePage.Name = 'TabBalance' then
+  begin
+    if not ZS_Balance.IsEmpty then
+      dm.ExportarEXCEL(DBGridBalance);
+  end;
+end;
+
+
+procedure TFEstadisticaDisponibilidades.abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer);
+begin
+//  ShowMessage(IntToStr(tipo)+' - '+DateToStr(fecha_desde)+' - '+DateToStr(fecha_hasta)+' - '+IntToStr(id_sucursal));
+  ZS_Balance.Close;
+  ZS_Balance.ParamByName('tipo_cpb').AsInteger:= tipo;
+  ZS_Balance.ParamByName('fecha_desde').AsDate:= fecha_desde;
+  ZS_Balance.ParamByName('fecha_hasta').AsDate:= fecha_hasta;
+  ZS_Balance.ParamByName('id_sucursal').AsInteger:= id_sucursal;
+  ZS_Balance.Open;
+
+  lblBalanceFecha.Caption:= 'Balance desde el '+DateToStr(fecha_desde)+' al '+DateToStr(fecha_hasta);
+    DBChartBalance.Title.Text[0]:= lblBalanceFecha.Caption;
+  if lblBalanceSucursal.Caption <> '' then
+    DBChartBalance.Title.Text[0]:= lblBalanceFecha.Caption+' / '+lblBalanceSucursal.Caption;
+  if lblBalanceTipoComprobante.Caption <> '' then
+    DBChartBalance.Title.Text[0]:= lblBalanceFecha.Caption+' / '+lblBalanceSucursal.Caption+' / '+lblBalanceTipoComprobante.Caption;
+  calcularResumenBalance(tipo, fecha_desde, fecha_hasta, id_sucursal);
+end;
+
+
+procedure TFEstadisticaDisponibilidades.calcularResumenBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer);
+var
+  inicial, final: double;
+  fecha_desde_antes, fecha_hasta_antes: tdate;
+begin
+  fecha_desde_antes:= EncodeDate(1900,1,1);
+  fecha_hasta_antes:= IncDay(fecha_desde, -1);
+  ZS_CalcSaldos.Close;
+  ZS_CalcSaldos.ParamByName('tipo_cpb').AsInteger:= tipo;
+  ZS_CalcSaldos.ParamByName('fecha_desde').AsDate:= fecha_desde_antes;
+  ZS_CalcSaldos.ParamByName('fecha_hasta').AsDate:= fecha_hasta_antes;
+  ZS_CalcSaldos.ParamByName('id_sucursal').AsInteger:= id_sucursal;
+  ZS_CalcSaldos.Open;
+  ZS_CalcSaldos.Last;
+  inicial:= ZS_CalcSaldosSALDO.AsFloat;
+
+  ZS_CalcSaldos.Close;
+  ZS_CalcSaldos.ParamByName('tipo_cpb').AsInteger:= tipo;
+  ZS_CalcSaldos.ParamByName('fecha_desde').AsDate:= fecha_desde;
+  ZS_CalcSaldos.ParamByName('fecha_hasta').AsDate:= fecha_hasta;
+  ZS_CalcSaldos.ParamByName('id_sucursal').AsInteger:= id_sucursal;
+  ZS_CalcSaldos.Open;
+  ZS_CalcSaldos.Last;
+  final:= ZS_CalcSaldosSALDO.AsFloat;
+  ZS_CalcSaldos.Close;
+
+  EKSuma_Balance.RecalcAll;
+
+  lblBalanceTotalIngresos.Caption:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Balance.SumCollection[0].SumValue);
+  lblBalanceTotalEgresos.Caption:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Balance.SumCollection[1].SumValue);
+  lblBalanceSaldoInicial.Caption:= FormatFloat('$ ###,###,###,##0.00', inicial);
+  lblBalanceSaldoFinal.Caption:= FormatFloat('$ ###,###,###,##0.00', final);
 end;
 
 end.
