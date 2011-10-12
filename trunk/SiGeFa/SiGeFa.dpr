@@ -40,7 +40,6 @@ uses
   UBuscarProductoStock in 'UBuscarProductoStock.pas' {FBuscarProductoStock},
   UEstadisticaMovInternos in 'UEstadisticaMovInternos.pas' {FEstadisticaMovInternos},
   UCuentaCorriente in 'UCuentaCorriente.pas' {FCuentaCorriente},
-  UEstadisticaFacturacion in 'UEstadisticaFacturacion.pas' {FEstadisticasFacturacion},
   UEstadisticaDisponibilidades in 'UEstadisticaDisponibilidades.pas' {FEstadisticaDisponibilidades},
   UArqueo_Caja in 'UArqueo_Caja.pas' {FArqueo_Caja},
   UCargarPreventa in 'UCargarPreventa.pas' {FPreventa},
@@ -58,7 +57,8 @@ uses
   UABM_CPB_Transferencia in 'UABM_CPB_Transferencia.pas' {FABM_CPB_Transferencia},
   UVerImagen in 'UVerImagen.pas' {FVerImagen},
   UABM_CPB_Devolucion in 'UABM_CPB_Devolucion.pas' {FABM_CPB_Devolucion},
-  UDebugging in 'UDebugging.pas' {FDebugging};
+  UDebugging in 'UDebugging.pas' {FDebugging},
+  UEstadisticaVentas in 'UEstadisticaVentas.pas' {FEstadisticaVentas};
 
 {$R *.res}
 

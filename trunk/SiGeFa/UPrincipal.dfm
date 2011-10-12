@@ -5025,11 +5025,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 52
       OnExecute = AEstad_MovInternosExecute
     end
-    object AEstad_Facturacion: TAction
-      Caption = 'Estadistica Facturaci'#243'n'
-      Hint = 'Estadistica Facturaci'#243'n'
+    object AEstad_Ventas: TAction
+      Caption = 'Estadistica Ventas'
+      Hint = 'Estadistica Ventas'
       ImageIndex = 48
-      OnExecute = AEstad_FacturacionExecute
+      OnExecute = AEstad_VentasExecute
     end
     object AEstad_Disponib: TAction
       Caption = 'Estadistica Disponibilidades'
@@ -5218,7 +5218,7 @@ object FPrincipal: TFPrincipal
         Action = AEstad_MovInternos
       end
       object EstadisticaFacturacion1: TMenuItem
-        Action = AEstad_Facturacion
+        Action = AEstad_Ventas
       end
       object EstadisticaDisponibilidades1: TMenuItem
         Action = AEstad_Disponib
