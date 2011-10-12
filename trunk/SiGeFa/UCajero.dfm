@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 375
-  Top = 215
+  Left = 129
+  Top = 52
   Width = 1022
   Height = 675
   Caption = 'Cajero SiGeFa'
@@ -5084,6 +5084,15 @@ object FCajero: TFCajero
             BeginGroup = True
             Item = btPreventa
             Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btCierreZ
+            Visible = True
+          end
+          item
+            Item = BtCierreX
+            Visible = True
           end>
         Name = 'vertical'
         OneOnRow = True
@@ -6988,6 +6997,20 @@ object FCajero: TFCajero
       Visible = ivAlways
       ImageIndex = 57
       AutoGrayScale = False
+    end
+    object btCierreZ: TdxBarLargeButton
+      Caption = 'Cierre Z'
+      Category = 0
+      Hint = 'Cierre Z'
+      Visible = ivAlways
+      OnClick = btCierreZClick
+    end
+    object BtCierreX: TdxBarLargeButton
+      Caption = 'Cierre X'
+      Category = 0
+      Hint = 'Cierre X'
+      Visible = ivAlways
+      OnClick = BtCierreXClick
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Items = (
