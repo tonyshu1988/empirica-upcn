@@ -1,4 +1,4 @@
-unit UEstadisticaFacturacion;
+unit UEstadisticaVentas;
 
 interface
 
@@ -10,7 +10,7 @@ uses
   ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls, EKVistaPreviaQR;
 
 type
-  TFEstadisticasFacturacion = class(TForm)
+  TFEstadisticaVentas = class(TForm)
     PanelContenedor: TPanel;
     DS_Comprobante: TDataSource;
     PanelComprobante: TPanel;
@@ -53,7 +53,7 @@ type
     ZQ_TipoIVALETRA: TStringField;
     ZQ_TipoIVAFISCAL: TStringField;
     ZQ_TipoIVACOEFICIENTE: TFloatField;
-    Panel5: TPanel;
+    PanelFacturacion: TPanel;
     ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField;
     ZQ_ComprobanteDetalleDETALLE_PROD: TStringField;
     EKOrdenarFacturas: TEKOrdenarGrilla;
@@ -154,6 +154,10 @@ type
     QRBand1: TQRBand;
     QRlblImporteTotal: TQRLabel;
     ZQ_ComprobanteNOMBRE_TIPO_IVA: TStringField;
+    PageControl: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -174,7 +178,7 @@ type
   end;
 
 var
-  FEstadisticasFacturacion: TFEstadisticasFacturacion;
+  FEstadisticaVentas: TFEstadisticaVentas;
   where:String;
 
 implementation
@@ -183,7 +187,7 @@ uses UDM, UPrincipal, UUtilidades;
 
 {$R *.dfm}
 
-procedure TFEstadisticasFacturacion.FormCreate(Sender: TObject);
+procedure TFEstadisticaVentas.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= dm.ZQ_Sucursal;
 
@@ -202,13 +206,13 @@ begin
 end;
 
 
-procedure TFEstadisticasFacturacion.btnSalirClick(Sender: TObject);
+procedure TFEstadisticaVentas.btnSalirClick(Sender: TObject);
 begin
   close;
 end;
 
 
-procedure TFEstadisticasFacturacion.ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
+procedure TFEstadisticaVentas.ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
 var
   fiscal: String;
   indice: integer;
@@ -247,13 +251,13 @@ begin
 end;
 
 
-procedure TFEstadisticasFacturacion.EKDbSumaComprobanteSumListChanged(Sender: TObject);
+procedure TFEstadisticaVentas.EKDbSumaComprobanteSumListChanged(Sender: TObject);
 begin
   lblTotalComprobantes.Caption := FormatFloat('Total Comprobante: $ ##,###,##0.00 ', EKDbSumaComprobante.SumCollection[0].SumValue);
 end;
 
 
-procedure TFEstadisticasFacturacion.btnBuscarClick(Sender: TObject);
+procedure TFEstadisticaVentas.btnBuscarClick(Sender: TObject);
 begin
   EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
   EKBuscarComprobantes.Buscar;
@@ -261,7 +265,7 @@ begin
 end;
 
 
-procedure TFEstadisticasFacturacion.AplicarFiltro(Sender: TObject);
+procedure TFEstadisticaVentas.AplicarFiltro(Sender: TObject);
 begin
   if TSpeedButton(Sender).Name = 'BtnFiltro_Todos' then
   begin
@@ -285,14 +289,14 @@ begin
 end;
 
 
-procedure TFEstadisticasFacturacion.btnExcelClick(Sender: TObject);
+procedure TFEstadisticaVentas.btnExcelClick(Sender: TObject);
 begin
   if not ZQ_Comprobante.IsEmpty then
     dm.ExportarEXCEL(DBGridComprobantes);
 end;
 
 
-procedure TFEstadisticasFacturacion.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFEstadisticaVentas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrdenarFacturas.GuardarConfigColumnas;
   EKOrdenarProducto.GuardarConfigColumnas;
@@ -301,20 +305,20 @@ begin
 end;
 
 
-procedure TFEstadisticasFacturacion.DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure TFEstadisticaVentas.DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(TDBGrid(Sender), Rect, DataCol, Column, State);
 end;
 
 
-procedure TFEstadisticasFacturacion.ABuscarExecute(Sender: TObject);
+procedure TFEstadisticaVentas.ABuscarExecute(Sender: TObject);
 begin
   if btnBuscar.Enabled then
     btnBuscar.Click;
 end;
 
 
-procedure TFEstadisticasFacturacion.guardarConfigPanel();
+procedure TFEstadisticaVentas.guardarConfigPanel();
 begin
   dm.EKIni.EsribirRegEntero('UEstadisticaFacturacion\PanelComprobante.height', PanelComprobante.height);
   dm.EKIni.EsribirRegEntero('UEstadisticaFacturacion\PanelFPagoYProd.height', PanelFPagoYProd.height);
@@ -323,7 +327,7 @@ begin
 end;
 
 
-procedure TFEstadisticasFacturacion.cargarConfigPanel();
+procedure TFEstadisticaVentas.cargarConfigPanel();
 var
   aux: Integer;
 begin
@@ -344,7 +348,7 @@ begin
     PanelProducto.Width:= aux;
 end;
 
-procedure TFEstadisticasFacturacion.btImprimirClick(Sender: TObject);
+procedure TFEstadisticaVentas.btImprimirClick(Sender: TObject);
 begin
   if ZQ_Comprobante.IsEmpty then
     exit;

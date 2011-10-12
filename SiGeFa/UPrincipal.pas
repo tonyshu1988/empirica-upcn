@@ -90,7 +90,7 @@ type
     ransferirStock1: TMenuItem;
     ACtaCte_Cliente: TAction;
     AEstad_MovInternos: TAction;
-    AEstad_Facturacion: TAction;
+    AEstad_Ventas: TAction;
     Estadisticas1: TMenuItem;
     EstadisticaMovimientosInt1: TMenuItem;
     EstadisticaFacturacion1: TMenuItem;
@@ -184,7 +184,7 @@ type
     procedure ATransferirStockExecute(Sender: TObject);
     procedure ACtaCte_ClienteExecute(Sender: TObject);
     procedure AEstad_MovInternosExecute(Sender: TObject);
-    procedure AEstad_FacturacionExecute(Sender: TObject);
+    procedure AEstad_VentasExecute(Sender: TObject);
     procedure AEstad_DisponibExecute(Sender: TObject);
     procedure AArqueo_CajaExecute(Sender: TObject);
     procedure AEstad_StockExecute(Sender: TObject);
@@ -230,12 +230,13 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UMailEnviar, UABM_Colores, UABM_TipoIVA, UABM_TipoFormaPago,
   UABM_Cuentas, UABM_TipoComprobante, UABM_Precios, UABM_Comprobantes,
   UCajero, UMovimientosInternos, UABM_TipoMovimiento, UTransferirStock,
-  UCuentaCorriente, UEstadisticaMovInternos, UEstadisticaFacturacion,
+  UCuentaCorriente, UEstadisticaMovInternos,
   UEstadisticaDisponibilidades, UArqueo_Caja, Types, UEstadisticaStock,
   UABM_CPB_Recibo, UABM_CPB_OrdenPago, UABM_CPB_Remito,
   UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa,
   UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
-  UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging;
+  UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
+  UEstadisticaVentas;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -596,9 +597,9 @@ begin
 end;
 
 
-procedure TFPrincipal.AEstad_FacturacionExecute(Sender: TObject);
+procedure TFPrincipal.AEstad_VentasExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFEstadisticasFacturacion, FEstadisticasFacturacion);
+  EKVentanas1.Abrir(Sender, TFEstadisticaVentas, FEstadisticaVentas);
 end;
 
 
