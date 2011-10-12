@@ -1,8 +1,8 @@
 object FEstadisticaMovInternos: TFEstadisticaMovInternos
-  Left = 326
-  Top = 160
-  Width = 870
-  Height = 546
+  Left = 257
+  Top = 151
+  Width = 974
+  Height = 575
   Caption = 'Estadistica Movimientos Internos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,18 +22,18 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 854
-    Height = 456
-    ActivePage = TabMovimientos
+    Width = 958
+    Height = 485
+    ActivePage = TabBalance
     Align = alClient
     TabOrder = 0
     object TabBalance: TTabSheet
-      Caption = 'Balance (Datos)'
+      Caption = 'Balance'
       ImageIndex = 3
       object RepBalance: TQuickRep
         Tag = 99
-        Left = -20
-        Top = -695
+        Left = 68
+        Top = -79
         Width = 794
         Height = 1123
         Frame.Color = clBlack
@@ -559,9 +559,9 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 8
           end
           object QRlblRepBalance_SaldoIni: TQRLabel
-            Left = 376
+            Left = 600
             Top = 2
-            Width = 338
+            Width = 115
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -570,14 +570,14 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              994.833333333333200000
+              1587.500000000000000000
               5.291666666666667000
-              894.291666666666800000)
+              304.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'Saldo Total: XXXXX'
+            Caption = '$ 999,999,990.00'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -591,9 +591,9 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 8
           end
           object QRlblRepBalance_Ingresos: TQRLabel
-            Left = 376
+            Left = 600
             Top = 18
-            Width = 338
+            Width = 115
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -602,14 +602,14 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              994.833333333333300000
+              1587.500000000000000000
               47.625000000000000000
-              894.291666666666700000)
+              304.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'Saldo Total: XXXXX'
+            Caption = '$ 999,999,990.00'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -623,9 +623,9 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 8
           end
           object QRlblRepBalance_Egresos: TQRLabel
-            Left = 376
+            Left = 600
             Top = 34
-            Width = 338
+            Width = 115
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -634,14 +634,14 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              994.833333333333300000
+              1587.500000000000000000
               89.958333333333330000
-              894.291666666666700000)
+              304.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'Saldo Total: XXXXX'
+            Caption = '$ 999,999,990.00'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -655,9 +655,9 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 8
           end
           object QRlblRepBalance_SaldoFinal: TQRLabel
-            Left = 488
+            Left = 600
             Top = 50
-            Width = 226
+            Width = 115
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = True
@@ -666,14 +666,142 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1291.166666666667000000
+              1587.500000000000000000
               132.291666666666700000
-              597.958333333333300000)
+              304.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
             AutoStretch = False
-            Caption = 'Saldo Total: XXXXX'
+            Caption = '$ 999,999,990.00'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRLabel41: TQRLabel
+            Left = 500
+            Top = 2
+            Width = 100
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1322.916666666667000000
+              5.291666666666667000
+              264.583333333333300000)
+            Alignment = taRightJustify
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Caption = 'Saldo Inicial:'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRLabel42: TQRLabel
+            Left = 500
+            Top = 18
+            Width = 100
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1322.916666666667000000
+              47.625000000000000000
+              264.583333333333300000)
+            Alignment = taRightJustify
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Caption = 'Ingresos:'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRLabel44: TQRLabel
+            Left = 500
+            Top = 34
+            Width = 100
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1322.916666666667000000
+              89.958333333333330000
+              264.583333333333300000)
+            Alignment = taRightJustify
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Caption = 'Egresos:'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRLabel45: TQRLabel
+            Left = 500
+            Top = 50
+            Width = 100
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = True
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1322.916666666667000000
+              132.291666666666700000
+              264.583333333333300000)
+            Alignment = taRightJustify
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Caption = 'Saldo Final:'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -961,15 +1089,16 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       object PanelMes: TPanel
         Left = 0
         Top = 0
-        Width = 846
-        Height = 428
+        Width = 950
+        Height = 457
         Align = alClient
+        BevelOuter = bvNone
         TabOrder = 0
         object DBGridBalance: TDBGrid
-          Left = 1
-          Top = 34
-          Width = 844
-          Height = 306
+          Left = 0
+          Top = 33
+          Width = 950
+          Height = 337
           Align = alClient
           Color = 14606012
           DataSource = DS_Balance
@@ -1024,18 +1153,18 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             end>
         end
         object PanelMes_Resumen: TPanel
-          Left = 1
-          Top = 340
-          Width = 844
+          Left = 0
+          Top = 370
+          Width = 950
           Height = 87
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            844
+            950
             87)
           object Label11: TLabel
-            Left = 614
+            Left = 720
             Top = 7
             Width = 85
             Height = 16
@@ -1050,7 +1179,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object Label1: TLabel
-            Left = 622
+            Left = 728
             Top = 62
             Width = 77
             Height = 16
@@ -1065,7 +1194,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object Label12: TLabel
-            Left = 598
+            Left = 704
             Top = 24
             Width = 101
             Height = 16
@@ -1080,7 +1209,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object Label9: TLabel
-            Left = 603
+            Left = 709
             Top = 42
             Width = 96
             Height = 16
@@ -1095,7 +1224,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object Shape1: TShape
-            Left = 576
+            Left = 682
             Top = 60
             Width = 276
             Height = 1
@@ -1103,7 +1232,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             Pen.Color = clGray
           end
           object lblBalanceTotalIngresos: TLabel
-            Left = 699
+            Left = 805
             Top = 24
             Width = 140
             Height = 16
@@ -1119,7 +1248,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object lblBalanceTotalEgresos: TLabel
-            Left = 699
+            Left = 805
             Top = 42
             Width = 140
             Height = 16
@@ -1135,7 +1264,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object lblBalanceSaldoFinal: TLabel
-            Left = 699
+            Left = 805
             Top = 62
             Width = 140
             Height = 16
@@ -1151,7 +1280,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object lblBalanceSaldoInicial: TLabel
-            Left = 699
+            Left = 805
             Top = 7
             Width = 140
             Height = 16
@@ -1168,9 +1297,9 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           end
         end
         object Panel4: TPanel
-          Left = 1
-          Top = 1
-          Width = 844
+          Left = 0
+          Top = 0
+          Width = 950
           Height = 33
           Align = alTop
           BevelOuter = bvNone
@@ -1179,7 +1308,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblBalanceSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 121
+            Width = 942
             Height = 13
             Align = alTop
             Caption = 'lblBalanceSucursal'
@@ -1193,7 +1322,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblBalanceFecha: TLabel
             Left = 4
             Top = 4
-            Width = 103
+            Width = 942
             Height = 13
             Align = alTop
             Caption = 'lblBalanceFecha'
@@ -2159,14 +2288,15 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       object PanelMov_Datos: TPanel
         Left = 0
         Top = 0
-        Width = 846
-        Height = 428
+        Width = 950
+        Height = 457
         Align = alClient
+        BevelOuter = bvNone
         TabOrder = 0
         object lblMov_TotalEgresos: TLabel
-          Left = 1
-          Top = 399
-          Width = 844
+          Left = 0
+          Top = 429
+          Width = 950
           Height = 14
           Align = alBottom
           Alignment = taRightJustify
@@ -2179,9 +2309,9 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           ParentFont = False
         end
         object lblMov_TotalIngresos: TLabel
-          Left = 1
-          Top = 413
-          Width = 844
+          Left = 0
+          Top = 443
+          Width = 950
           Height = 14
           Align = alBottom
           Alignment = taRightJustify
@@ -2194,10 +2324,10 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           ParentFont = False
         end
         object DBGridMovimientos: TDBGrid
-          Left = 1
-          Top = 34
-          Width = 844
-          Height = 365
+          Left = 0
+          Top = 33
+          Width = 950
+          Height = 396
           Align = alClient
           Color = 14606012
           DataSource = DS_Movimientos
@@ -2253,9 +2383,9 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             end>
         end
         object Panel1: TPanel
-          Left = 1
-          Top = 1
-          Width = 844
+          Left = 0
+          Top = 0
+          Width = 950
           Height = 33
           Align = alTop
           BevelOuter = bvNone
@@ -2264,7 +2394,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblMovSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 836
+            Width = 942
             Height = 13
             Align = alTop
             Caption = 'lblMovSucursal'
@@ -2278,7 +2408,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblMovFecha: TLabel
             Left = 4
             Top = 4
-            Width = 836
+            Width = 942
             Height = 13
             Align = alTop
             Caption = 'lblMovFecha'
@@ -2296,17 +2426,17 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       Caption = 'Ingresos vs. Egresos'
       ImageIndex = 1
       object PanelIngresos: TPanel
-        Left = 424
+        Left = 528
         Top = 33
         Width = 422
-        Height = 395
+        Height = 424
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 0
         object Label4: TLabel
           Left = 0
           Top = 0
-          Width = 65
+          Width = 422
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -2320,8 +2450,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         end
         object lblTotalIngresos: TLabel
           Left = 0
-          Top = 42
-          Width = 69
+          Top = 71
+          Width = 422
           Height = 13
           Align = alBottom
           Alignment = taCenter
@@ -2337,7 +2467,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           Left = 0
           Top = 13
           Width = 422
-          Height = 29
+          Height = 58
           Align = alClient
           Color = 14606012
           DataSource = DS_Ingresos
@@ -2370,7 +2500,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         end
         object DBChartIngresos: TDBChart
           Left = 0
-          Top = 55
+          Top = 84
           Width = 422
           Height = 340
           AllowPanning = pmNone
@@ -2441,15 +2571,15 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       object PanelEgresos: TPanel
         Left = 0
         Top = 33
-        Width = 420
-        Height = 395
+        Width = 524
+        Height = 424
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
         object Label3: TLabel
           Left = 0
           Top = 0
-          Width = 58
+          Width = 524
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -2463,8 +2593,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         end
         object lblTotalEgresos: TLabel
           Left = 0
-          Top = 42
-          Width = 69
+          Top = 71
+          Width = 524
           Height = 13
           Align = alBottom
           Alignment = taCenter
@@ -2479,8 +2609,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object DBGridEgresos: TDBGrid
           Left = 0
           Top = 13
-          Width = 420
-          Height = 29
+          Width = 524
+          Height = 58
           Align = alClient
           Color = 14606012
           DataSource = DS_Egresos
@@ -2513,8 +2643,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         end
         object DBChartEgresos: TDBChart
           Left = 0
-          Top = 55
-          Width = 420
+          Top = 84
+          Width = 524
           Height = 340
           AllowPanning = pmNone
           AllowZoom = False
@@ -2582,7 +2712,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 846
+        Width = 950
         Height = 33
         Align = alTop
         BevelOuter = bvNone
@@ -2591,7 +2721,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object lblIngEgrSucursal: TLabel
           Left = 4
           Top = 17
-          Width = 114
+          Width = 942
           Height = 13
           Align = alTop
           Caption = 'lblIngEgrSucursal'
@@ -2605,7 +2735,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object lblIngEgrFecha: TLabel
           Left = 4
           Top = 4
-          Width = 96
+          Width = 942
           Height = 13
           Align = alTop
           Caption = 'lblIngEgrFecha'
@@ -2618,10 +2748,10 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         end
       end
       object Panel3: TPanel
-        Left = 420
+        Left = 524
         Top = 33
         Width = 4
-        Height = 395
+        Height = 424
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 3
@@ -3584,7 +3714,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         Name = 'ID_SUCURSAL'
         ParamType = ptInput
       end>
-    StoredProcName = 'BALANCE_MENSUAL_DETALLE'
+    StoredProcName = 'ESTADISTICA_DIARIA_MOV_INTERNOS'
     Left = 586
     Top = 67
     ParamData = <
@@ -3710,7 +3840,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         Name = 'ID_SUCURSAL'
         ParamType = ptInput
       end>
-    StoredProcName = 'BALANCE_MENSUAL_DETALLE'
+    StoredProcName = 'ESTADISTICA_DIARIA_MOV_INTERNOS'
     Left = 674
     Top = 67
     ParamData = <

@@ -355,7 +355,7 @@ begin
 
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
-
+    RadioButtonIngreso.Checked:= true;
     EKDBDateTimePicker1.SetFocus;
   end;
 end;

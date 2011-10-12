@@ -1,8 +1,8 @@
 object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
-  Left = 220
-  Top = 120
-  Width = 1048
-  Height = 586
+  Left = 248
+  Top = 125
+  Width = 994
+  Height = 613
   Caption = 'Estadistica Disponibilidades'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,17 +22,17 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1032
-    Height = 496
+    Width = 978
+    Height = 523
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object PageControl: TPageControl
       Left = 1
       Top = 1
-      Width = 1030
-      Height = 494
-      ActivePage = TabDetalleMov
+      Width = 976
+      Height = 521
+      ActivePage = TabBalance
       Align = alClient
       TabOrder = 0
       object TabSaldosCuentas: TTabSheet
@@ -813,7 +813,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object DBGridSaldoCuentas: TDBGrid
           Left = 0
           Top = 38
-          Width = 1022
+          Width = 1018
           Height = 406
           Align = alClient
           Color = 14606012
@@ -863,7 +863,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object Panel1: TPanel
           Left = 0
           Top = 0
-          Width = 1022
+          Width = 1018
           Height = 38
           Align = alTop
           BevelOuter = bvNone
@@ -872,7 +872,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSaldo_Encabezado2: TLabel
             Left = 4
             Top = 17
-            Width = 1014
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -886,7 +886,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSaldo_Encabezado1: TLabel
             Left = 4
             Top = 4
-            Width = 1014
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -901,15 +901,15 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object Panel2: TPanel
           Left = 0
           Top = 444
-          Width = 1022
+          Width = 1018
           Height = 22
           Align = alBottom
           BorderWidth = 4
           TabOrder = 2
           object lblSaldo_Total: TLabel
-            Left = 5
+            Left = 920
             Top = 5
-            Width = 1012
+            Width = 93
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -2703,9 +2703,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             BorderWidth = 4
             TabOrder = 0
             object lblSaldo_TotalParteDiario: TLabel
-              Left = 5
+              Left = 922
               Top = 5
-              Width = 1010
+              Width = 93
               Height = 13
               Align = alTop
               Alignment = taRightJustify
@@ -2730,7 +2730,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblSucursal: TLabel
               Left = 4
               Top = 17
-              Width = 1012
+              Width = 71
               Height = 13
               Align = alTop
               Caption = 'lblSucursal'
@@ -2744,7 +2744,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblEncabezadoParteDiario: TLabel
               Left = 4
               Top = 4
-              Width = 1012
+              Width = 166
               Height = 13
               Align = alTop
               Caption = 'lblEncabezadoParteDiario'
@@ -2777,7 +2777,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label1: TLabel
                 Left = 0
                 Top = 0
-                Width = 349
+                Width = 58
                 Height = 13
                 Align = alTop
                 Caption = 'RESUMEN'
@@ -3045,7 +3045,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label18: TLabel
                 Left = 0
                 Top = 0
-                Width = 665
+                Width = 320
                 Height = 13
                 Align = alTop
                 Caption = 'INGRESOS Y EGRESOS POR MEDIO DE COBRO/PAGO'
@@ -3115,9 +3115,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 BevelOuter = bvNone
                 TabOrder = 1
                 object lblPD_totalTransfer: TLabel
-                  Left = 0
+                  Left = 538
                   Top = 26
-                  Width = 665
+                  Width = 127
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3130,9 +3130,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object lblPD_totalEgreso: TLabel
-                  Left = 0
+                  Left = 550
                   Top = 0
-                  Width = 665
+                  Width = 115
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3145,9 +3145,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object lblPD_totalIngreso: TLabel
-                  Left = 0
+                  Left = 543
                   Top = 13
-                  Width = 665
+                  Width = 122
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3173,7 +3173,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object Label17: TLabel
               Left = 0
               Top = 0
-              Width = 1020
+              Width = 153
               Height = 13
               Align = alTop
               Caption = 'SALDOS DE LAS CUENTAS'
@@ -3237,7 +3237,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         Caption = 'Detalle Movimiento'
         ImageIndex = 1
         object Splitter1: TSplitter
-          Left = 635
+          Left = 631
           Top = 38
           Width = 5
           Height = 406
@@ -4197,7 +4197,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object Panel4: TPanel
           Left = 0
           Top = 0
-          Width = 1022
+          Width = 1018
           Height = 38
           Align = alTop
           BevelOuter = bvNone
@@ -4206,7 +4206,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSucursalDetMov: TLabel
             Left = 4
             Top = 17
-            Width = 1014
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -4220,7 +4220,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblEncabezadoDetMov: TLabel
             Left = 4
             Top = 4
-            Width = 1014
+            Width = 85
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -4235,7 +4235,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object DBGridEstadisticaDetMov: TDBGrid
           Left = 0
           Top = 38
-          Width = 635
+          Width = 631
           Height = 406
           Align = alClient
           Color = 14606012
@@ -4321,15 +4321,15 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object Panel3: TPanel
           Left = 0
           Top = 444
-          Width = 1022
+          Width = 1018
           Height = 22
           Align = alBottom
           BorderWidth = 4
           TabOrder = 3
           object lblResumenDetalleMovimiento: TLabel
-            Left = 5
+            Left = 920
             Top = 5
-            Width = 1012
+            Width = 93
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -4343,7 +4343,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           end
         end
         object DBGridMovFPago: TDBGrid
-          Left = 640
+          Left = 636
           Top = 38
           Width = 382
           Height = 406
@@ -4385,85 +4385,1468 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             end>
         end
       end
-      object TabSheet3: TTabSheet
-        Caption = 'TabSheet3'
-        ImageIndex = 2
-        object Panel5: TPanel
-          Left = 0
-          Top = 444
-          Width = 1022
-          Height = 22
-          Align = alBottom
-          BorderWidth = 4
-          TabOrder = 0
-          object Label4: TLabel
-            Left = 924
-            Top = 5
-            Width = 93
-            Height = 13
-            Align = alTop
-            Alignment = taRightJustify
-            Caption = 'lblSaldo_Total'
-            Font.Charset = DEFAULT_CHARSET
+      object TabBalance: TTabSheet
+        Caption = 'Balance'
+        ImageIndex = 3
+        object RepBalance: TQuickRep
+          Tag = 99
+          Left = 108
+          Top = 41
+          Width = 794
+          Height = 1123
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          DataSet = ZS_Balance
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Functions.Strings = (
+            'PAGENUMBER'
+            'COLUMNNUMBER'
+            'REPORTTITLE')
+          Functions.DATA = (
+            '0'
+            '0'
+            #39#39)
+          Options = [FirstPageHeader, LastPageFooter]
+          Page.Columns = 1
+          Page.Orientation = poPortrait
+          Page.PaperSize = A4
+          Page.Values = (
+            100.000000000000000000
+            2970.000000000000000000
+            100.000000000000000000
+            2100.000000000000000000
+            100.000000000000000000
+            100.000000000000000000
+            0.000000000000000000)
+          PrinterSettings.Copies = 1
+          PrinterSettings.OutputBin = Auto
+          PrinterSettings.Duplex = False
+          PrinterSettings.FirstPage = 0
+          PrinterSettings.LastPage = 0
+          PrinterSettings.UseStandardprinter = False
+          PrinterSettings.UseCustomBinCode = False
+          PrinterSettings.CustomBinCode = 0
+          PrinterSettings.ExtendedDuplex = 0
+          PrinterSettings.UseCustomPaperCode = False
+          PrinterSettings.CustomPaperCode = 0
+          PrinterSettings.PrintMetaFile = False
+          PrinterSettings.PrintQuality = 0
+          PrinterSettings.Collate = 0
+          PrinterSettings.ColorOption = 0
+          PrintIfEmpty = True
+          ReportTitle = '+'
+          SnapToGrid = True
+          Units = MM
+          Zoom = 100
+          PrevFormStyle = fsNormal
+          PreviewInitialState = wsNormal
+          PrevInitialZoom = qrZoomToFit
+          PreviewDefaultSaveType = stQRP
+          object QRBand4: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 38
+            Width = 718
+            Height = 72
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              190.500000000000000000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbPageHeader
+            object QRDBLogo4: TQRDBImage
+              Left = 66
+              Top = 2
+              Width = 64
+              Height = 64
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                169.333333333333300000
+                174.625000000000000000
+                5.291666666666667000
+                169.333333333333300000)
+              DataField = 'LOGO'
+              Stretch = True
+            end
+            object QRLabel33: TQRLabel
+              Left = 317
+              Top = 47
+              Width = 83
+              Height = 19
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                50.270833333333330000
+                838.729166666666700000
+                124.354166666666700000
+                219.604166666666700000)
+              Alignment = taCenter
+              AlignToBand = True
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'BALANCE'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 12
+            end
+            object RepBalance_Subtitulo: TQRLabel
+              Left = 285
+              Top = 26
+              Width = 148
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666670000
+                754.062500000000000000
+                68.791666666666670000
+                391.583333333333300000)
+              Alignment = taCenter
+              AlignToBand = True
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'RepBalance_Subtitulo'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -12
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsItalic, fsUnderline]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 9
+            end
+            object RepBalance_Titulo: TQRLabel
+              Left = 276
+              Top = 2
+              Width = 165
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666670000
+                730.250000000000000000
+                5.291666666666667000
+                436.562500000000000000)
+              Alignment = taCenter
+              AlignToBand = True
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'RepBalance_Titulo'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsUnderline]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 12
+            end
+          end
+          object QRBand5: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 159
+            Width = 718
+            Height = 14
+            Frame.Color = clSilver
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
+            Font.Height = -9
             Font.Name = 'Verdana'
-            Font.Style = [fsBold, fsItalic]
+            Font.Style = []
+            ForceNewColumn = False
+            ForceNewPage = False
             ParentFont = False
+            Size.Values = (
+              37.041666666666670000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbDetail
+            object QRDBText28: TQRDBText
+              Left = 5
+              Top = 0
+              Width = 92
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                13.229166666666670000
+                0.000000000000000000
+                243.416666666666700000)
+              Alignment = taCenter
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZS_Balance
+              DataField = 'FECHA'
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+            object QRDBText29: TQRDBText
+              Left = 102
+              Top = 0
+              Width = 150
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                269.875000000000000000
+                0.000000000000000000
+                396.875000000000000000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZS_Balance
+              DataField = 'INGRESO'
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+            object QRDBText30: TQRDBText
+              Left = 564
+              Top = 0
+              Width = 150
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1492.250000000000000000
+                0.000000000000000000
+                396.875000000000000000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZS_Balance
+              DataField = 'SALDO'
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+            object QRDBText31: TQRDBText
+              Left = 256
+              Top = 0
+              Width = 150
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                677.333333333333300000
+                0.000000000000000000
+                396.875000000000000000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZS_Balance
+              DataField = 'EGRESO'
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+            object QRDBText32: TQRDBText
+              Left = 410
+              Top = 0
+              Width = 150
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1084.791666666667000000
+                0.000000000000000000
+                396.875000000000000000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZS_Balance
+              DataField = 'SALDODIARIO'
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+          end
+          object QRBand7: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 240
+            Width = 718
+            Height = 24
+            Frame.Color = clBlack
+            Frame.DrawTop = True
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              63.500000000000000000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbPageFooter
+            object QRlblRepBalance_PieDePagina: TQRLabel
+              Left = 4
+              Top = 3
+              Width = 139
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666670000
+                10.583333333333330000
+                7.937500000000000000
+                367.770833333333300000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'QRlblRepBalance_PieDePagina'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -9
+              Font.Name = 'Verdana'
+              Font.Style = [fsItalic]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+            object QRLabel34: TQRLabel
+              Left = 629
+              Top = 3
+              Width = 39
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666670000
+                1664.229166666667000000
+                7.937500000000000000
+                103.187500000000000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'P'#225'gina:'
+              Color = clWhite
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -9
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+            object QRSysData4: TQRSysData
+              Left = 671
+              Top = 3
+              Width = 45
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666660000
+                1775.354166666667000000
+                7.937500000000000000
+                119.062500000000000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = False
+              Color = clWhite
+              Data = qrsPageNumber
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -9
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+          end
+          object QRBand8: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 173
+            Width = 718
+            Height = 67
+            Frame.Color = clBlack
+            Frame.DrawTop = True
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              177.270833333333300000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbSummary
+            object QRExpr1: TQRExpr
+              Left = 4
+              Top = 4
+              Width = 186
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                10.583333333333330000
+                10.583333333333330000
+                492.125000000000000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Color = clWhite
+              ResetAfterPrint = False
+              Transparent = False
+              WordWrap = True
+              Expression = #39'Cantidad de Cuentas: '#39'+COUNT'
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRlblRepBalance_SaldoIni: TQRLabel
+              Left = 600
+              Top = 2
+              Width = 115
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1587.500000000000000000
+                5.291666666666667000
+                304.270833333333300000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = '$ 999,999,990.00'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRlblRepBalance_Ingresos: TQRLabel
+              Left = 600
+              Top = 18
+              Width = 115
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1587.500000000000000000
+                47.625000000000000000
+                304.270833333333300000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = '$ 999,999,990.00'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRlblRepBalance_Egresos: TQRLabel
+              Left = 600
+              Top = 34
+              Width = 115
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1587.500000000000000000
+                89.958333333333330000
+                304.270833333333300000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = '$ 999,999,990.00'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRlblRepBalance_SaldoFinal: TQRLabel
+              Left = 600
+              Top = 50
+              Width = 115
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = True
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1587.500000000000000000
+                132.291666666666700000
+                304.270833333333300000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = '$ 999,999,990.00'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel41: TQRLabel
+              Left = 500
+              Top = 2
+              Width = 100
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1322.916666666667000000
+                5.291666666666667000
+                264.583333333333300000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Saldo Inicial:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel42: TQRLabel
+              Left = 500
+              Top = 18
+              Width = 100
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1322.916666666667000000
+                47.625000000000000000
+                264.583333333333300000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Ingresos:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel44: TQRLabel
+              Left = 500
+              Top = 34
+              Width = 100
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1322.916666666667000000
+                89.958333333333330000
+                264.583333333333300000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Egresos:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel45: TQRLabel
+              Left = 500
+              Top = 50
+              Width = 100
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = True
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1322.916666666667000000
+                132.291666666666700000
+                264.583333333333300000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Saldo Final:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+          end
+          object QRBand13: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 110
+            Width = 718
+            Height = 31
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              82.020833333333330000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbTitle
+            object QRlblRepBalance_CritBusqueda: TQRLabel
+              Left = 5
+              Top = 16
+              Width = 692
+              Height = 13
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                34.395833333333330000
+                13.229166666666670000
+                42.333333333333330000
+                1830.916666666667000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = True
+              Caption = 'QRlblRepBalance_CritBusqueda'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -9
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 7
+            end
+            object QRLabel35: TQRLabel
+              Left = 5
+              Top = 2
+              Width = 126
+              Height = 13
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                34.395833333333330000
+                13.229166666666670000
+                5.291666666666667000
+                333.375000000000000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Criterios de Busqueda:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -9
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+              Transparent = False
+              WordWrap = False
+              ExportAs = exptText
+              FontSize = 7
+            end
+          end
+          object QRBand15: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 141
+            Width = 718
+            Height = 18
+            Frame.Color = clBlack
+            Frame.DrawTop = True
+            Frame.DrawBottom = True
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clSilver
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              47.625000000000000000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbColumnHeader
+            object QRLabel36: TQRLabel
+              Left = 5
+              Top = 2
+              Width = 92
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                13.229166666666670000
+                5.291666666666667000
+                243.416666666666700000)
+              Alignment = taCenter
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Fecha'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel37: TQRLabel
+              Left = 102
+              Top = 2
+              Width = 150
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                269.875000000000000000
+                5.291666666666667000
+                396.875000000000000000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Total Ingresos'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel38: TQRLabel
+              Left = 564
+              Top = 2
+              Width = 150
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1492.250000000000000000
+                5.291666666666667000
+                396.875000000000000000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Saldo Total'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel39: TQRLabel
+              Left = 256
+              Top = 2
+              Width = 150
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                677.333333333333300000
+                5.291666666666667000
+                396.875000000000000000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Total Egresos'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel40: TQRLabel
+              Left = 410
+              Top = 2
+              Width = 150
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1084.791666666667000000
+                5.291666666666667000
+                396.875000000000000000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Saldo D'#237'a'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
           end
         end
-        object Panel6: TPanel
+        object PanelMes: TPanel
           Left = 0
           Top = 0
-          Width = 1022
-          Height = 38
-          Align = alTop
+          Width = 968
+          Height = 493
+          Align = alClient
           BevelOuter = bvNone
-          BorderWidth = 4
-          TabOrder = 1
-          object Label5: TLabel
-            Left = 4
-            Top = 17
-            Width = 85
-            Height = 13
-            Align = alTop
-            Caption = 'lblTotalSaldo'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold, fsItalic]
-            ParentFont = False
+          TabOrder = 0
+          object DBGridBalance: TDBGrid
+            Left = 0
+            Top = 46
+            Width = 968
+            Height = 360
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_Balance
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            OnDrawColumnCell = DrawColumnCell
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'FECHA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fecha'
+                Width = 112
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'INGRESO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Total Ingresos'
+                Width = 153
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'EGRESO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Total Egresos'
+                Width = 137
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'SALDODIARIO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Saldo Dia'
+                Width = 153
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'SALDO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Saldo Total'
+                Width = 143
+                Visible = True
+              end>
           end
-          object Label6: TLabel
-            Left = 4
-            Top = 4
-            Width = 85
-            Height = 13
+          object PanelMes_Resumen: TPanel
+            Left = 0
+            Top = 406
+            Width = 968
+            Height = 87
+            Align = alBottom
+            BevelOuter = bvNone
+            TabOrder = 1
+            DesignSize = (
+              968
+              87)
+            object Label11: TLabel
+              Left = 738
+              Top = 7
+              Width = 85
+              Height = 16
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              Caption = 'Saldo Inicial:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object Label4: TLabel
+              Left = 746
+              Top = 62
+              Width = 77
+              Height = 16
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              Caption = 'Saldo Final:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object Label12: TLabel
+              Left = 722
+              Top = 24
+              Width = 101
+              Height = 16
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              Caption = 'Total Ingresos:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object Label5: TLabel
+              Left = 727
+              Top = 42
+              Width = 96
+              Height = 16
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              Caption = 'Total Egresos:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object Shape3: TShape
+              Left = 700
+              Top = 60
+              Width = 276
+              Height = 1
+              Anchors = [akTop, akRight]
+              Pen.Color = clGray
+            end
+            object lblBalanceTotalIngresos: TLabel
+              Left = 823
+              Top = 24
+              Width = 140
+              Height = 16
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              AutoSize = False
+              Caption = '$ 0.00'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lblBalanceTotalEgresos: TLabel
+              Left = 823
+              Top = 42
+              Width = 140
+              Height = 16
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              AutoSize = False
+              Caption = '$ 0.00'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lblBalanceSaldoFinal: TLabel
+              Left = 823
+              Top = 62
+              Width = 140
+              Height = 16
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              AutoSize = False
+              Caption = '$ 0.00'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clNavy
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lblBalanceSaldoInicial: TLabel
+              Left = 823
+              Top = 7
+              Width = 140
+              Height = 16
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              AutoSize = False
+              Caption = '$ 0.00'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+          end
+          object Panel5: TPanel
+            Left = 0
+            Top = 0
+            Width = 968
+            Height = 46
             Align = alTop
-            Caption = 'lblTotalSaldo'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold, fsItalic]
-            ParentFont = False
+            BevelOuter = bvNone
+            BorderWidth = 4
+            TabOrder = 2
+            object lblBalanceTipoComprobante: TLabel
+              Left = 4
+              Top = 4
+              Width = 960
+              Height = 13
+              Align = alTop
+              Caption = 'lblBalanceTipoComprobante'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+            end
+            object lblBalanceFecha: TLabel
+              Left = 4
+              Top = 17
+              Width = 960
+              Height = 13
+              Align = alTop
+              Caption = 'lblBalanceFecha'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+            end
+            object lblBalanceSucursal: TLabel
+              Left = 4
+              Top = 30
+              Width = 960
+              Height = 13
+              Align = alTop
+              Caption = 'lblBalanceSucursal'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+            end
           end
         end
-        object DBGrid2: TDBGrid
+      end
+      object TabBalanceGrafico: TTabSheet
+        Caption = 'Balance (Grafico)'
+        ImageIndex = 4
+        object DBChartBalance: TDBChart
           Left = 0
-          Top = 38
-          Width = 1022
-          Height = 406
+          Top = 0
+          Width = 968
+          Height = 493
+          BackWall.Brush.Color = clWhite
+          BackWall.Brush.Style = bsClear
+          BackWall.Color = clSilver
+          Gradient.EndColor = 14737632
+          Gradient.StartColor = 4473924
+          Gradient.Visible = True
+          LeftWall.Brush.Color = clWhite
+          Title.Brush.Color = clWhite
+          Title.Brush.Style = bsClear
+          Title.Color = clWhite
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -15
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = []
+          Title.Text.Strings = (
+            'Balance Movimientos Internos')
+          BackColor = clSilver
+          LeftAxis.Grid.Color = 13290186
+          LeftAxis.MinorTickLength = 1
+          LeftAxis.Ticks.Color = clSilver
+          LeftAxis.TicksInner.Color = clSilver
+          Legend.Alignment = laBottom
+          Legend.Frame.Visible = False
+          Legend.ResizeChart = False
+          Legend.ShadowSize = 1
+          Legend.TextStyle = ltsPlain
+          Legend.TopPos = 11
+          Legend.Visible = False
+          View3D = False
+          View3DOptions.Elevation = 315
+          View3DOptions.Perspective = 0
+          View3DOptions.Rotation = 360
+          View3DWalls = False
           Align = alClient
-          Color = 14606012
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 2
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
+          BevelOuter = bvNone
+          BevelWidth = 0
+          TabOrder = 0
+          object Series4: TFastLineSeries
+            Marks.ArrowLength = 8
+            Marks.Visible = False
+            DataSource = ZS_Balance
+            SeriesColor = clRed
+            ShowInLegend = False
+            Title = 'Egresos linea'
+            LinePen.Color = clRed
+            LinePen.Width = 2
+            XValues.DateTime = True
+            XValues.Name = 'X'
+            XValues.Multiplier = 1.000000000000000000
+            XValues.Order = loAscending
+            XValues.ValueSource = 'FECHA'
+            YValues.DateTime = False
+            YValues.Name = 'Y'
+            YValues.Multiplier = 1.000000000000000000
+            YValues.Order = loNone
+            YValues.ValueSource = 'EGRESO'
+          end
+          object Series2: TPointSeries
+            Marks.Arrow.Visible = False
+            Marks.ArrowLength = 6
+            Marks.Font.Charset = DEFAULT_CHARSET
+            Marks.Font.Color = clBlack
+            Marks.Font.Height = -8
+            Marks.Font.Name = 'Arial'
+            Marks.Font.Style = []
+            Marks.Style = smsValue
+            Marks.Visible = False
+            DataSource = ZS_Balance
+            SeriesColor = clRed
+            ShowInLegend = False
+            Title = 'Egresos ptos'
+            Pointer.Draw3D = False
+            Pointer.InflateMargins = True
+            Pointer.Style = psRectangle
+            Pointer.Visible = True
+            XValues.DateTime = True
+            XValues.Name = 'X'
+            XValues.Multiplier = 1.000000000000000000
+            XValues.Order = loAscending
+            XValues.ValueSource = 'FECHA'
+            YValues.DateTime = False
+            YValues.Name = 'Y'
+            YValues.Multiplier = 1.000000000000000000
+            YValues.Order = loNone
+            YValues.ValueSource = 'EGRESO'
+          end
+          object Series5: TFastLineSeries
+            Marks.ArrowLength = 8
+            Marks.Style = smsValue
+            Marks.Visible = False
+            DataSource = ZS_Balance
+            SeriesColor = clLime
+            ShowInLegend = False
+            Title = 'Ingresos linea'
+            LinePen.Color = clLime
+            LinePen.Width = 2
+            XValues.DateTime = True
+            XValues.Name = 'X'
+            XValues.Multiplier = 1.000000000000000000
+            XValues.Order = loAscending
+            XValues.ValueSource = 'FECHA'
+            YValues.DateTime = False
+            YValues.Name = 'Y'
+            YValues.Multiplier = 1.000000000000000000
+            YValues.Order = loNone
+            YValues.ValueSource = 'INGRESO'
+          end
+          object Series3: TPointSeries
+            Marks.ArrowLength = 8
+            Marks.Style = smsValue
+            Marks.Visible = False
+            DataSource = ZS_Balance
+            SeriesColor = clLime
+            ShowInLegend = False
+            Title = 'Ingresos ptos'
+            Pointer.Draw3D = False
+            Pointer.InflateMargins = True
+            Pointer.Style = psRectangle
+            Pointer.Visible = True
+            XValues.DateTime = True
+            XValues.Name = 'X'
+            XValues.Multiplier = 1.000000000000000000
+            XValues.Order = loAscending
+            XValues.ValueSource = 'FECHA'
+            YValues.DateTime = False
+            YValues.Name = 'Y'
+            YValues.Multiplier = 1.000000000000000000
+            YValues.Order = loNone
+            YValues.ValueSource = 'INGRESO'
+          end
         end
       end
     end
@@ -5951,5 +7334,331 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
     PermitirFiltrar = True
     Left = 205
     Top = 449
+  end
+  object ZS_Balance: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftDate
+        Name = 'FECHA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'INGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'EGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDODIARIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_DESDE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_HASTA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_SUCURSAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TIPO_CPB'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'ESTADISTICA_DIARIA_GLOBAL'
+    Left = 850
+    Top = 83
+    ParamData = <
+      item
+        DataType = ftDate
+        Name = 'FECHA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'INGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'EGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDODIARIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_DESDE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_HASTA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_SUCURSAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TIPO_CPB'
+        ParamType = ptInput
+      end>
+    object ZS_BalanceFECHA: TDateField
+      FieldName = 'FECHA'
+    end
+    object ZS_BalanceINGRESO: TFloatField
+      FieldName = 'INGRESO'
+      currency = True
+    end
+    object ZS_BalanceEGRESO: TFloatField
+      FieldName = 'EGRESO'
+      currency = True
+    end
+    object ZS_BalanceSALDO: TFloatField
+      FieldName = 'SALDO'
+      currency = True
+    end
+    object ZS_BalanceSALDODIARIO: TFloatField
+      FieldName = 'SALDODIARIO'
+      currency = True
+    end
+  end
+  object DS_Balance: TDataSource
+    DataSet = ZS_Balance
+    Left = 850
+    Top = 135
+  end
+  object EKSuma_Balance: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'INGRESO'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'EGRESO'
+      end>
+    DataSet = ZS_Balance
+    Left = 850
+    Top = 199
+  end
+  object EKBuscarBalance: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Tipo Comprobante'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'TODOS'
+          'FACTURA'
+          'DEVOLUCION'
+          'FACTURA COMPRA'
+          'ORDEN PAGO'
+          'RECIBO'
+          'OTROS INGRESOS'
+          'OTROS EGRESOS')
+        TipoComboValoresReales.Strings = (
+          '-1'
+          '11'
+          '12'
+          '13'
+          '18'
+          '19'
+          '16'
+          '17')
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = 0
+        VaciarValor = False
+      end
+      item
+        Titulo = 'Fecha Desde'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
+      end
+      item
+        Titulo = 'Fecha Hasta'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
+      end
+      item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    UsarWhereOriginal = EK_Sin_Where
+    PantallaReducida = True
+    Left = 852
+    Top = 256
+  end
+  object EKVistaBalance: TEKVistaPreviaQR
+    Reporte = RepBalance
+    ShowModal = False
+    Left = 856
+    Top = 305
+  end
+  object ZS_CalcSaldos: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftDate
+        Name = 'FECHA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'INGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'EGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDODIARIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_DESDE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_HASTA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_SUCURSAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TIPO_CPB'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'ESTADISTICA_DIARIA_GLOBAL'
+    Left = 922
+    Top = 83
+    ParamData = <
+      item
+        DataType = ftDate
+        Name = 'FECHA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'INGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'EGRESO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'SALDODIARIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_DESDE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_HASTA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_SUCURSAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TIPO_CPB'
+        ParamType = ptInput
+      end>
+    object ZS_CalcSaldosFECHA: TDateField
+      FieldName = 'FECHA'
+    end
+    object ZS_CalcSaldosINGRESO: TFloatField
+      FieldName = 'INGRESO'
+    end
+    object ZS_CalcSaldosEGRESO: TFloatField
+      FieldName = 'EGRESO'
+    end
+    object ZS_CalcSaldosSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
+    object ZS_CalcSaldosSALDODIARIO: TFloatField
+      FieldName = 'SALDODIARIO'
+    end
   end
 end
