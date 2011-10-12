@@ -521,6 +521,8 @@ type
     ZQ_BuscarMedioPagoMODIFICABLE: TStringField;
     CD_Fpago_fiscal: TStringField;
     CD_VentaFinalfiscal: TStringField;
+    btCierreZ: TdxBarLargeButton;
+    BtCierreX: TdxBarLargeButton;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -600,6 +602,8 @@ type
     procedure ANuevoProdExecute(Sender: TObject);
     function imprimirFiscal(comprob:Integer; tipoAccion: string):Boolean ;
     procedure leerSistemaIni;
+    procedure btCierreZClick(Sender: TObject);
+    procedure BtCierreXClick(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -2337,6 +2341,16 @@ begin
 //    exit;
 //  end;
 
+end;
+
+procedure TFCajero.btCierreZClick(Sender: TObject);
+begin
+   imprimirFiscal( 0, 'Z'); 
+end;
+
+procedure TFCajero.BtCierreXClick(Sender: TObject);
+begin
+imprimirFiscal( 0, 'X');
 end;
 
 end.
