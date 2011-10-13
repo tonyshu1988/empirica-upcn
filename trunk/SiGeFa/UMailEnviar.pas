@@ -7,7 +7,8 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   IdBaseComponent, IdMessage, IdException, ComCtrls, Buttons, EKListadoSQL,
-  ZStoredProcedure, cxClasses, IdAttachmentFile, ImgList;
+  ZStoredProcedure, cxClasses, IdAttachmentFile, ImgList, ActnList,
+  XPStyleActnCtrls, ActnMan;
 
 type
   TFMailEnviar = class(TForm)
@@ -91,6 +92,17 @@ type
     BitBtnBuscarCC: TBitBtn;
     BitBtnBuscarBCC: TBitBtn;
     EKListadoMail: TEKListadoSQL;
+    ZQ_ListaMails: TZQuery;
+    ZQ_ListaMailsID_ENTIDAD_TELEFONO: TIntegerField;
+    ZQ_ListaMailsID_ENTIDAD: TIntegerField;
+    ZQ_ListaMailsID_PERSONA: TIntegerField;
+    ZQ_ListaMailsTELEFONO: TStringField;
+    ZQ_ListaMailsMAIL: TStringField;
+    ZQ_ListaMailsDESCRIPCION: TStringField;
+    ActionManager1: TActionManager;
+    ABuscar_Para: TAction;
+    ABuscar_CC: TAction;
+    ABuscar_BCC: TAction;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -116,6 +128,9 @@ type
     procedure BitBtnBuscarParaClick(Sender: TObject);
     procedure BitBtnBuscarCCClick(Sender: TObject);
     procedure BitBtnBuscarBCCClick(Sender: TObject);
+    procedure ABuscar_ParaExecute(Sender: TObject);
+    procedure ABuscar_CCExecute(Sender: TObject);
+    procedure ABuscar_BCCExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -132,7 +147,7 @@ const
 
 implementation
 
-uses UPrincipal, UDM, UUtilidades, UPanelNotificacion;
+uses UPrincipal, UDM, UUtilidades, UPanelNotificacion, RegExpr;
 
 {$R *.dfm}
 
@@ -224,6 +239,8 @@ begin
   conectado:= false;
   id_mensaje:= -1;
 
+  dm.EKModelo.abrir(ZQ_ListaMails);
+  
   //busco todas las cuentas de la sucursal
   ZQ_Cuentas.Close;
   ZQ_Cuentas.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
@@ -567,16 +584,21 @@ begin
   end;
 end;
 
+
 procedure TFMailEnviar.BitBtnBuscarParaClick(Sender: TObject);
 begin
   if EKListadoMail.Buscar then
   begin
     if EKListadoMail.Resultado <> '' then
     begin
-      EditPara.Text:= EditPara.Text+EKListadoMail.Resultado+'; ';
+      if ExecRegExpr ('^[A-Za-z][A-Za-z0-9_.\-]*@[A-Za-z0-9_\-]+\.[A-Za-z0-9_.]+[A-za-z]', ZQ_ListaMailsMAIL.AsString) then
+        EditPara.Text:= EditPara.Text+ZQ_ListaMailsMAIL.AsString+'; '
+      else
+        ShowMessage('El mail seleccionado es invalido, verifique');
     end;
   end;
 end;
+
 
 procedure TFMailEnviar.BitBtnBuscarCCClick(Sender: TObject);
 begin
@@ -584,10 +606,14 @@ begin
   begin
     if EKListadoMail.Resultado <> '' then
     begin
-      EditCC.Text:= EditCC.Text+EKListadoMail.Resultado+'; ';
+      if ExecRegExpr ('^[A-Za-z][A-Za-z0-9_.\-]*@[A-Za-z0-9_\-]+\.[A-Za-z0-9_.]+[A-za-z]', ZQ_ListaMailsMAIL.AsString) then
+        EditCC.Text:= EditCC.Text+ZQ_ListaMailsMAIL.AsString+'; '
+      else
+        ShowMessage('El mail seleccionado es invalido, verifique');
     end;
   end;
 end;
+
 
 procedure TFMailEnviar.BitBtnBuscarBCCClick(Sender: TObject);
 begin
@@ -595,9 +621,28 @@ begin
   begin
     if EKListadoMail.Resultado <> '' then
     begin
-      EditBCC.Text:= EditBCC.Text+EKListadoMail.Resultado+'; ';
+      if ExecRegExpr ('^[A-Za-z][A-Za-z0-9_.\-]*@[A-Za-z0-9_\-]+\.[A-Za-z0-9_.]+[A-za-z]', ZQ_ListaMailsMAIL.AsString) then
+        EditBCC.Text:= EditBCC.Text+ZQ_ListaMailsMAIL.AsString+'; '
+      else
+        ShowMessage('El mail seleccionado es invalido, verifique');
     end;
   end;
+end;
+
+
+procedure TFMailEnviar.ABuscar_ParaExecute(Sender: TObject);
+begin
+  BitBtnBuscarPara.Click;
+end;
+
+procedure TFMailEnviar.ABuscar_CCExecute(Sender: TObject);
+begin
+  BitBtnBuscarCC.Click;
+end;
+
+procedure TFMailEnviar.ABuscar_BCCExecute(Sender: TObject);
+begin
+  BitBtnBuscarBCC.Click;
 end;
 
 end.
