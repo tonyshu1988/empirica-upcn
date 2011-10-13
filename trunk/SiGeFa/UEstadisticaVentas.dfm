@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 253
-  Top = 153
+  Left = 433
+  Top = 254
   Width = 1012
   Height = 581
   Caption = 'Estadisticas Ventas'
@@ -24,7 +24,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 996
     Height = 491
-    ActivePage = TabHorarioGrafico
+    ActivePage = TabFacturacion
     Align = alClient
     TabOrder = 4
     object TabFacturacion: TTabSheet
