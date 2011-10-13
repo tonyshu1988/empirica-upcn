@@ -149,6 +149,8 @@ type
     ABMTransferencia1: TMenuItem;
     ADebugging: TAction;
     Debugging1: TMenuItem;
+    AReimpresionComprob: TAction;
+    ReimpresindeComprobantes1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -201,6 +203,7 @@ type
     procedure AConfigGralExecute(Sender: TObject);
     procedure AABM_CPB_TransferExecute(Sender: TObject);
     procedure ADebuggingExecute(Sender: TObject);
+    procedure AReimpresionComprobExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -236,7 +239,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa,
   UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
   UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
-  UEstadisticaVentas;
+  UEstadisticaVentas, UReimpresionComprobantes;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -698,6 +701,11 @@ end;
 procedure TFPrincipal.ADebuggingExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFDebugging, FDebugging);
+end;
+
+procedure TFPrincipal.AReimpresionComprobExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFReimpresionComprobantes, FReimpresionComprobantes);
 end;
 
 end.

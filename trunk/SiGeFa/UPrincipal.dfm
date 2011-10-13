@@ -5097,6 +5097,12 @@ object FPrincipal: TFPrincipal
       ImageIndex = 46
       OnExecute = AABM_CPB_TransferExecute
     end
+    object AReimpresionComprob: TAction
+      Caption = 'Reimpresi'#243'n de Comprobantes'
+      Hint = 'Auditoria'
+      ImageIndex = 4
+      OnExecute = AReimpresionComprobExecute
+    end
     object AAuditoria: TAction
       Caption = 'Auditoria'
       Hint = 'Auditoria'
@@ -5127,6 +5133,10 @@ object FPrincipal: TFPrincipal
       end
       object VentadeMostrador1: TMenuItem
         Action = APreventa
+      end
+      object ReimpresindeComprobantes1: TMenuItem
+        Tag = 1
+        Action = AReimpresionComprob
       end
     end
     object Productos1: TMenuItem
@@ -17944,7 +17954,7 @@ object FPrincipal: TFPrincipal
     Left = 72
     Top = 138
     Bitmap = {
-      494C010155005900040020002000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010155005900040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000080000000E0020000010020000000000000C0
       0500000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -30092,7 +30102,8 @@ object FPrincipal: TFPrincipal
       E00001FFF00000FFE00003FFE00003FFE00003FFF00001FFE00003FFE00003FF
       F00007FFF80003FFF00007FFF00007FFFC000FFFFC0007FFFC001FFFFC001FFF
       FF003FFFFF803FFFFF007FFFFF007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
   object EKInformacion1: TEKInformacion
     StatusBar = StatusBar1

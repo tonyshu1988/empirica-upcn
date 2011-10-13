@@ -175,7 +175,7 @@ type
     Bt_Imprimir_convenio: TdxBarLargeButton;
     BtLeerCodigo: TdxBarLargeButton;
     btIVA: TdxBarLargeButton;
-    btLiquidar: TdxBarLargeButton;
+    btReimprimirComprob: TdxBarLargeButton;
     Bt_imprimir_listadoFP: TdxBarLargeButton;
     bt_cierre_X: TdxBarLargeButton;
     GrupoGuardarCancelar: TdxBarGroup;
