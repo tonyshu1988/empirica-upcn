@@ -175,6 +175,9 @@ type
     DBChartHorario: TDBChart;
     Series5: TFastLineSeries;
     Series3: TPointSeries;
+    ZP_HorarioHORA_PERIODO: TTimeField;
+    ZP_HorarioPERIODO: TIntegerField;
+    Series1: TFastLineSeries;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -372,8 +375,8 @@ begin
   if PageControl.ActivePage = TabFacturacion then
   begin
     EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
-    EKBuscarComprobantes.Buscar;
-    ZQ_Comprobante.First;
+    if EKBuscarComprobantes.Buscar then
+      ZQ_Comprobante.First;
   end;
 
 //HORARIO VENTA
