@@ -198,6 +198,7 @@ object FMailEnviar: TFMailEnviar
           Anchors = [akTop, akRight]
           Caption = '...'
           TabOrder = 6
+          OnClick = BitBtnBuscarParaClick
         end
         object BitBtnBuscarCC: TBitBtn
           Left = 549
@@ -207,8 +208,9 @@ object FMailEnviar: TFMailEnviar
           Anchors = [akTop, akRight]
           Caption = '...'
           TabOrder = 7
+          OnClick = BitBtnBuscarCCClick
         end
-        object BitBtnBuscarCCO: TBitBtn
+        object BitBtnBuscarBCC: TBitBtn
           Left = 549
           Top = 61
           Width = 25
@@ -216,6 +218,7 @@ object FMailEnviar: TFMailEnviar
           Anchors = [akTop, akRight]
           Caption = '...'
           TabOrder = 8
+          OnClick = BitBtnBuscarBCCClick
         end
       end
     end
@@ -1571,5 +1574,26 @@ object FMailEnviar: TFMailEnviar
       000380000001E00F0007C0018003C007000FE003C007C007003FF007C00FC007
       80FFF80FE07FF83FC3FFFFFFF03FF83F00000000000000000000000000000000
       000000000000}
+  end
+  object EKListadoMail: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select case'
+      '         when (m.id_entidad is null) then '#39'PERSONA'#39
+      '         when (m.id_persona is null) then '#39'EMPRESA'#39
+      '       end as clave,'
+      
+        '       coalesce(p.nombre, e.nombre) || '#39' (E-Mail: '#39' || m.mail ||' +
+        ' '#39')'#39' as busqueda'
+      'from entidad_telefonos m'
+      'left join persona p on (m.id_persona = p.id_persona)'
+      'left join empresa e on (m.id_entidad = e.id_empresa)  '
+      'where m.mail <> '#39#39
+      'order by 1,2')
+    CampoBuscar = 'Busqueda'
+    CampoClave = 'clave'
+    TituloVentana = 'Seleccionar eMail'
+    Left = 64
+    Top = 251
   end
 end
