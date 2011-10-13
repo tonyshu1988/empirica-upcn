@@ -2608,6 +2608,7 @@ object FCajero: TFCajero
           TitleFont.Style = []
           OnColExit = DBGridFormaPagoColExit
           OnExit = DBGridFormaPagoColExit
+          OnKeyUp = DBGridFormaPagoKeyUp
           Columns = <
             item
               Color = 16772332
@@ -4213,6 +4214,7 @@ object FCajero: TFCajero
     object CD_FpagoID_TIPO_FORMAPAG: TIntegerField
       DisplayWidth = 50
       FieldName = 'ID_TIPO_FORMAPAG'
+      OnChange = CD_FpagoID_TIPO_FORMAPAGChange
     end
     object CD_FpagomedioPago: TStringField
       FieldKind = fkLookup
@@ -4246,6 +4248,7 @@ object FCajero: TFCajero
     end
     object CD_FpagoCUENTA_INGRESO: TIntegerField
       FieldName = 'CUENTA_INGRESO'
+      OnChange = CD_FpagoCUENTA_INGRESOChange
     end
     object CD_FpagoCUENTA_EGRESO: TIntegerField
       FieldName = 'CUENTA_EGRESO'
