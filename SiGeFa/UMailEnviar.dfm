@@ -1,6 +1,6 @@
 object FMailEnviar: TFMailEnviar
-  Left = 289
-  Top = 129
+  Left = 279
+  Top = 89
   BorderStyle = bsDialog
   Caption = 'Enviar Mail'
   ClientHeight = 562
@@ -189,34 +189,35 @@ object FMailEnviar: TFMailEnviar
           Height = 17
           Caption = 'Acuse de Recibo'
           TabOrder = 5
+          Visible = False
         end
         object BitBtnBuscarPara: TBitBtn
-          Left = 549
-          Top = 10
-          Width = 25
-          Height = 17
+          Left = 546
+          Top = 6
+          Width = 30
+          Height = 21
           Anchors = [akTop, akRight]
-          Caption = '...'
+          Caption = '(F1)'
           TabOrder = 6
           OnClick = BitBtnBuscarParaClick
         end
         object BitBtnBuscarCC: TBitBtn
-          Left = 549
-          Top = 35
-          Width = 25
-          Height = 17
+          Left = 546
+          Top = 31
+          Width = 30
+          Height = 21
           Anchors = [akTop, akRight]
-          Caption = '...'
+          Caption = '(F2)'
           TabOrder = 7
           OnClick = BitBtnBuscarCCClick
         end
         object BitBtnBuscarBCC: TBitBtn
-          Left = 549
-          Top = 61
-          Width = 25
-          Height = 17
+          Left = 546
+          Top = 57
+          Width = 30
+          Height = 21
           Anchors = [akTop, akRight]
-          Caption = '...'
+          Caption = '(F3)'
           TabOrder = 8
           OnClick = BitBtnBuscarBCCClick
         end
@@ -1583,17 +1584,71 @@ object FMailEnviar: TFMailEnviar
       '         when (m.id_persona is null) then '#39'EMPRESA'#39
       '       end as clave,'
       
-        '       coalesce(p.nombre, e.nombre) || '#39' (E-Mail: '#39' || m.mail ||' +
-        ' '#39')'#39' as busqueda'
+        '       coalesce(p.nombre, e.nombre)||'#39' '#171#39'||m.mail||'#39#187#39'||coalesce' +
+        '('#39' ['#39'||m.descripcion||'#39']'#39','#39#39') as busqueda,'
+      '       m.id_entidad_telefono'
       'from entidad_telefonos m'
       'left join persona p on (m.id_persona = p.id_persona)'
       'left join empresa e on (m.id_entidad = e.id_empresa)  '
       'where m.mail <> '#39#39
-      'order by 1,2')
+      'order by 1, 2')
     CampoBuscar = 'Busqueda'
-    CampoClave = 'clave'
+    CampoClave = 'ID_ENTIDAD_TELEFONO'
+    BuscarEnQuery = ZQ_ListaMails
     TituloVentana = 'Seleccionar eMail'
     Left = 64
     Top = 251
+  end
+  object ZQ_ListaMails: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from entidad_telefonos m'
+      'where m.mail <> '#39#39)
+    Params = <>
+    Left = 64
+    Top = 307
+    object ZQ_ListaMailsID_ENTIDAD_TELEFONO: TIntegerField
+      FieldName = 'ID_ENTIDAD_TELEFONO'
+      Required = True
+    end
+    object ZQ_ListaMailsID_ENTIDAD: TIntegerField
+      FieldName = 'ID_ENTIDAD'
+    end
+    object ZQ_ListaMailsID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+    object ZQ_ListaMailsTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_ListaMailsMAIL: TStringField
+      FieldName = 'MAIL'
+      Size = 100
+    end
+    object ZQ_ListaMailsDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
+    end
+  end
+  object ActionManager1: TActionManager
+    Left = 64
+    Top = 363
+    StyleName = 'XP Style'
+    object ABuscar_Para: TAction
+      Caption = 'ABuscar_Para'
+      ShortCut = 112
+      OnExecute = ABuscar_ParaExecute
+    end
+    object ABuscar_CC: TAction
+      Caption = 'ABuscar_CC'
+      ShortCut = 113
+      OnExecute = ABuscar_CCExecute
+    end
+    object ABuscar_BCC: TAction
+      Caption = 'ABuscar_BCC'
+      ShortCut = 114
+      OnExecute = ABuscar_BCCExecute
+    end
   end
 end
