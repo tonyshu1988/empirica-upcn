@@ -1452,13 +1452,11 @@ object FEstadisticaVentas: TFEstadisticaVentas
         LeftAxis.MinorTickLength = 1
         LeftAxis.Ticks.Color = clSilver
         LeftAxis.TicksInner.Color = clSilver
-        Legend.Alignment = laBottom
         Legend.Frame.Visible = False
         Legend.ResizeChart = False
         Legend.ShadowSize = 1
         Legend.TextStyle = ltsPlain
         Legend.TopPos = 11
-        Legend.Visible = False
         View3D = False
         View3DOptions.Elevation = 315
         View3DOptions.Perspective = 0
@@ -1468,6 +1466,26 @@ object FEstadisticaVentas: TFEstadisticaVentas
         BevelOuter = bvNone
         BevelWidth = 0
         TabOrder = 0
+        object Series1: TFastLineSeries
+          Marks.ArrowLength = 8
+          Marks.Visible = False
+          DataSource = ZP_Horario
+          SeriesColor = clRed
+          ShowInLegend = False
+          XLabelsSource = 'HORA_DESDE'
+          LinePen.Color = clRed
+          LinePen.Visible = False
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          XValues.ValueSource = 'HORA_DESDE'
+          YValues.DateTime = False
+          YValues.Name = 'Y'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+          YValues.ValueSource = 'CANTIDAD'
+        end
         object Series5: TFastLineSeries
           Marks.ArrowLength = 8
           Marks.Style = smsValue
@@ -1476,13 +1494,13 @@ object FEstadisticaVentas: TFEstadisticaVentas
           SeriesColor = clBlue
           ShowInLegend = False
           Title = 'horario linea'
-          XLabelsSource = 'HORA_HASTA'
           LinePen.Color = clBlue
           LinePen.Width = 2
           XValues.DateTime = False
           XValues.Name = 'X'
           XValues.Multiplier = 1.000000000000000000
           XValues.Order = loAscending
+          XValues.ValueSource = 'HORA_PERIODO'
           YValues.DateTime = False
           YValues.Name = 'Y'
           YValues.Multiplier = 1.000000000000000000
@@ -1491,7 +1509,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object Series3: TPointSeries
           Marks.ArrowLength = 8
-          Marks.Style = smsValue
+          Marks.Style = smsXValue
           Marks.Visible = False
           DataSource = ZP_Horario
           SeriesColor = clLime
@@ -1506,6 +1524,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           XValues.Name = 'X'
           XValues.Multiplier = 1.000000000000000000
           XValues.Order = loAscending
+          XValues.ValueSource = 'HORA_PERIODO'
           YValues.DateTime = False
           YValues.Name = 'Y'
           YValues.Multiplier = 1.000000000000000000
@@ -2806,6 +2825,12 @@ object FEstadisticaVentas: TFEstadisticaVentas
     object ZP_HorarioIMPORTE: TFloatField
       FieldName = 'IMPORTE'
       currency = True
+    end
+    object ZP_HorarioHORA_PERIODO: TTimeField
+      FieldName = 'HORA_PERIODO'
+    end
+    object ZP_HorarioPERIODO: TIntegerField
+      FieldName = 'PERIODO'
     end
   end
   object DS_Horario: TDataSource
