@@ -634,6 +634,7 @@ var
   cliente,IdVendedor,cajero,IDClienteIVA,idSucursal:Integer;
   modoCargaPrevia:Boolean;
   importeVenta,importeIF:Double;
+  permitirOnChangeFPAGO: boolean;
 
   //----Fiscal--------
   Impresora : string;
@@ -1012,9 +1013,7 @@ end;
 
 procedure TFCajero.bt_BuscarClienteClick(Sender: TObject);
 begin
-//  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
-//    exit;
-    
+   
   if modoCargaPrevia then
   begin
     Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
@@ -1136,9 +1135,6 @@ end;
 
 procedure TFCajero.BtVendedorClick(Sender: TObject);
 begin
-//  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
-//    exit;
-    
   if (CD_DetalleFactura.State=dsBrowse) then
   begin
     if not Assigned(vsel3) then
@@ -1288,9 +1284,6 @@ end;
 
 procedure TFCajero.BtBuscarProductoClick(Sender: TObject);
 begin
-//  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
-//    exit;
-
   if modoCargaPrevia then
   begin
     Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
@@ -1341,9 +1334,6 @@ end;
 
 procedure TFCajero.btIVAClick(Sender: TObject);
 begin
-//  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
-//    exit;
-    
   if modoCargaPrevia then
   begin
     Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
@@ -1382,9 +1372,6 @@ end;
 
 procedure TFCajero.BtCancelarPagoClick(Sender: TObject);
 begin
-//  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
-//    exit;
-    
   if (CD_DetalleFactura.State=dsBrowse) then
     if (application.MessageBox(pchar('Desea Cancelar la Boleta Actual y quitar todos sus Productos?'), 'Borrar Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
       cancelarProducto();
@@ -1393,9 +1380,6 @@ end;
 
 procedure TFCajero.BtAceptarPagoClick(Sender: TObject);
 begin
-//  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
-//    exit;
-
   if not(validarFPago()) then
     exit;
 
@@ -1697,9 +1681,6 @@ end;
 
 procedure TFCajero.btPreventaClick(Sender: TObject);
 begin
-//  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
-//    exit;
-    
   if modoCargaPrevia then
   begin
     Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
@@ -2035,6 +2016,17 @@ begin
 end;
 
 
+//cuando se cambia la forma de pago con la flecha del loockup seteo si es va la fiscal o no
+procedure TFCajero.CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
+begin
+  ZQ_BuscarMedioPago.Close;
+  ZQ_BuscarMedioPago.ParamByName('id_tipo').AsInteger:= CD_FpagoID_TIPO_FORMAPAG.AsInteger;
+  ZQ_BuscarMedioPago.Open;
+
+  CD_Fpago_fiscal.AsString:= ZQ_BuscarMedioPagoIF.AsString;
+end;
+
+
 function TFCajero.calcularSaldoCtaCorr(): Double;
 var
 acum:Double;
@@ -2148,9 +2140,6 @@ end;
 
 procedure TFCajero.btBuscProdClick(Sender: TObject);
 begin
-//  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
-//    exit;
-
   if modoCargaPrevia then
   begin
     Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
@@ -2430,12 +2419,9 @@ end;
 
 procedure TFCajero.CD_FpagoCUENTA_INGRESOChange(Sender: TField);
 begin
-ShowMessage('hola cuenta');
+//ShowMessage('hola cuenta');
 end;
 
-procedure TFCajero.CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
-begin
-ShowMessage('hola fpago');
-end;
+
 
 end.
