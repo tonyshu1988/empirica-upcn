@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 187
-  Top = 59
+  Left = 392
+  Top = 206
   Width = 1022
   Height = 675
   Caption = 'Cajero SiGeFa'
@@ -6975,13 +6975,12 @@ object FCajero: TFCajero
       OnClick = btIVAClick
       AutoGrayScale = False
     end
-    object btLiquidar: TdxBarLargeButton
-      Caption = 'Buscar Cuota'
+    object btReimprimirComprob: TdxBarLargeButton
+      Caption = 'Reimpresion'
       Category = 0
-      Enabled = False
-      Hint = 'Buscar Cuota'
+      Hint = 'Reimpresion'
       Visible = ivAlways
-      ImageIndex = 62
+      ImageIndex = 28
       AutoGrayScale = False
     end
     object Bt_imprimir_listadoFP: TdxBarLargeButton
