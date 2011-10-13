@@ -58,7 +58,8 @@ uses
   UVerImagen in 'UVerImagen.pas' {FVerImagen},
   UABM_CPB_Devolucion in 'UABM_CPB_Devolucion.pas' {FABM_CPB_Devolucion},
   UDebugging in 'UDebugging.pas' {FDebugging},
-  UEstadisticaVentas in 'UEstadisticaVentas.pas' {FEstadisticaVentas};
+  UEstadisticaVentas in 'UEstadisticaVentas.pas' {FEstadisticaVentas},
+  RegExpr in 'RegExpr.pas';
 
 {$R *.res}
 
