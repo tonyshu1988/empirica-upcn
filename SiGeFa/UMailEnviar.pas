@@ -89,7 +89,8 @@ type
     ImageList: TImageList;
     BitBtnBuscarPara: TBitBtn;
     BitBtnBuscarCC: TBitBtn;
-    BitBtnBuscarCCO: TBitBtn;
+    BitBtnBuscarBCC: TBitBtn;
+    EKListadoMail: TEKListadoSQL;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -112,6 +113,9 @@ type
     procedure btnCambiarCuentaClick(Sender: TObject);
     procedure responder(destinatario, cc, cco, asunto: string; id_cuenta: integer);
     procedure enviarConAdjunto(destinatario, asunto, archivo: string);
+    procedure BitBtnBuscarParaClick(Sender: TObject);
+    procedure BitBtnBuscarCCClick(Sender: TObject);
+    procedure BitBtnBuscarBCCClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -560,6 +564,39 @@ begin
   if EKListadoCuentas.Buscar then
   begin
     dm.configMail('CUENTA', StrToInt(EKListadoCuentas.Resultado));
+  end;
+end;
+
+procedure TFMailEnviar.BitBtnBuscarParaClick(Sender: TObject);
+begin
+  if EKListadoMail.Buscar then
+  begin
+    if EKListadoMail.Resultado <> '' then
+    begin
+      EditPara.Text:= EditPara.Text+EKListadoMail.Resultado+'; ';
+    end;
+  end;
+end;
+
+procedure TFMailEnviar.BitBtnBuscarCCClick(Sender: TObject);
+begin
+  if EKListadoMail.Buscar then
+  begin
+    if EKListadoMail.Resultado <> '' then
+    begin
+      EditCC.Text:= EditCC.Text+EKListadoMail.Resultado+'; ';
+    end;
+  end;
+end;
+
+procedure TFMailEnviar.BitBtnBuscarBCCClick(Sender: TObject);
+begin
+  if EKListadoMail.Buscar then
+  begin
+    if EKListadoMail.Resultado <> '' then
+    begin
+      EditBCC.Text:= EditBCC.Text+EKListadoMail.Resultado+'; ';
+    end;
   end;
 end;
 
