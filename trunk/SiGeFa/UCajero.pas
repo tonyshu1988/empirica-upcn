@@ -604,6 +604,10 @@ type
     procedure leerSistemaIni;
     procedure btCierreZClick(Sender: TObject);
     procedure BtCierreXClick(Sender: TObject);
+    procedure DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure CD_FpagoCUENTA_INGRESOChange(Sender: TField);
+    procedure CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -1855,9 +1859,6 @@ end;
 
 procedure TFCajero.buscarFormaPago();
 begin
-  if not CD_FpagoID_TIPO_FORMAPAG.IsNull then
-    exit;
-
   if EKListadoMedCobroPago.Buscar then
   begin
     if EKListadoMedCobroPago.Resultado <> '' then
@@ -1877,9 +1878,6 @@ end;
 
 procedure TFCajero.buscarCuenta();
 begin
-  if (not CD_FpagoCUENTA_INGRESO.IsNull) then
-    exit;
-
   if EKListadoCuenta.Buscar then
   begin
     if EKListadoCuenta.Resultado <> '' then
@@ -1908,17 +1906,25 @@ var
 begin
   if not(CD_DetalleFactura.IsEmpty) then
   begin
-    // Si elijo una cuenta de Ingreso, pogo el medio por defecto en medio de pago.
+    //si estoy en la columan de cuenta
     if (((sender as tdbgrid).SelectedField.FullName = 'CUENTA_INGRESO') or
         ((sender as tdbgrid).SelectedField.FullName = '_ctaIngreso')) then
     begin
+      //si ya hay cargada una cuenta salgo
+      if (not CD_FpagoCUENTA_INGRESO.IsNull) then
+        exit;
+
       buscarCuenta;
     end;
 
-    // Si elijo un medio de pago, pogo la cuenta por defecto del medio de pago.
+    //si estoy en la columan de forma de pago
     if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
        ((sender as tdbgrid).SelectedField.FullName = 'ID_TIPO_FORMAPAG')) then
     begin
+      //si ya hay cargada una forma de pago salgo
+      if not CD_FpagoID_TIPO_FORMAPAG.IsNull then
+        exit;
+
       buscarFormaPago;
     end;
 
@@ -1961,6 +1967,71 @@ begin
 
     RecalcularMontoPago();
  end;
+end;
+
+
+procedure TFCajero.DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  precio:Double;
+begin
+  if not(CD_DetalleFactura.IsEmpty) then
+  begin
+    if key = 118 then //si presione F7
+    begin
+      //si estoy en la columan de cuenta
+      if (((sender as tdbgrid).SelectedField.FullName = 'CUENTA_INGRESO') or
+          ((sender as tdbgrid).SelectedField.FullName = '_ctaIngreso')) then
+      begin
+        buscarCuenta;
+      end;
+
+      //si estoy en la columan de forma de pago
+      if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
+         ((sender as tdbgrid).SelectedField.FullName = 'ID_TIPO_FORMAPAG')) then
+      begin
+        buscarFormaPago;
+      end;
+
+      //Si es una sola forma de pago le pongo el valor del total por defecto
+      if ((acumulado > 0) and ((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat = 0)))
+         and not(CD_FpagoID_TIPO_FORMAPAG.IsNull and CD_FpagoCUENTA_INGRESO.IsNull) then
+      begin
+        CD_Fpago.edit;
+        CD_FpagoIMPORTE.AsFloat:=acumulado - acumFpago;
+        CD_Fpago.Post;
+      end;
+
+      if not(CD_Fpago_nroPrecio.IsNull) then
+      begin
+        CD_Fpago.Edit;
+        case CD_Fpago_nroPrecio.AsInteger of
+        0:begin
+            precio:=CD_FpagoIMPORTE.AsFloat;
+          end;
+        1:begin
+            precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio1;
+          end;
+        2:begin
+            precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio2;
+          end;
+        3:begin
+            precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio3;
+          end;
+        4:begin
+            precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio4;
+          end;
+        5:begin
+            precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio5;
+          end;
+        end;
+
+        CD_Fpago_importeVenta.AsFloat:= precio + (precio *  CD_Fpago_desc_rec.AsFloat);
+        CD_Fpago.Post;
+      end;
+
+      RecalcularMontoPago();
+    end;
+  end;
 end;
 
 
@@ -2308,12 +2379,13 @@ begin
   if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
     exit;
 
-  if (CD_Comprobante.State in [dsInsert,dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
-  begin
-    DBGridFormaPago.SetFocus;
-    DBGridFormaPago.SelectedField:= DBGridFormaPago.Fields[0]; //sigo en la misma columna
-    CD_Fpago.Append;
-  end
+  if not DBGridFormaPago.Focused then  //si no estoy en la grilla de forma de pago
+    if (CD_Comprobante.State in [dsInsert,dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
+    begin
+      DBGridFormaPago.SetFocus;
+      DBGridFormaPago.SelectedField:= DBGridFormaPago.Fields[0]; //sigo en la misma columna
+      CD_Fpago.Append;
+    end
 end;
 
                                                
@@ -2341,17 +2413,29 @@ begin
 //    result := false;
 //    exit;
 //  end;
-
 end;
+
 
 procedure TFCajero.btCierreZClick(Sender: TObject);
 begin
-   imprimirFiscal( 0, 'Z'); 
+  imprimirFiscal( 0, 'Z');
 end;
+
 
 procedure TFCajero.BtCierreXClick(Sender: TObject);
 begin
   imprimirFiscal( 0, 'X');
+end;
+
+
+procedure TFCajero.CD_FpagoCUENTA_INGRESOChange(Sender: TField);
+begin
+ShowMessage('hola cuenta');
+end;
+
+procedure TFCajero.CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
+begin
+ShowMessage('hola fpago');
 end;
 
 end.
