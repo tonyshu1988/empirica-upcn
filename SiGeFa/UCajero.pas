@@ -1574,10 +1574,12 @@ begin
         ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
         ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_IF.AsFloat;
 
-        //Se guarda el total fiscal sin iva repetido en todos(lo toma asi la impr fiscal)
-        //ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:=ZQ_ComprobantePORC_IVA.AsFloat * ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat;
-        ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:=ZQ_ComprobantePORC_IVA.AsFloat * totFiscal;
+
+        ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:=ZQ_ComprobantePORC_IVA.AsFloat * ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat;
+
         ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat-ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat;
+        //Se guarda el total fiscal sin iva repetido en todos(lo toma asi la impr fiscal)
+        ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:=ZQ_ComprobantePORC_IVA.AsFloat * totFiscal;
         ZQ_ComprobanteDetalleID_STOCK_PRODUCTO.AsInteger:=CD_DetalleFacturaID_PROD_STOCK.AsInteger;
         ZQ_ComprobanteDetalle.Post;
 
