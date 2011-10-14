@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, EKBusquedaAvanzada, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Buttons, ExtCtrls, Grids, DBGrids, StdCtrls, dxBar,
-  dxBarExtItems, EKDbSuma, EKOrdenarGrilla;
+  dxBarExtItems, EKDbSuma, EKOrdenarGrilla,ComCtrls, IniFiles, ShellAPI;
 
 type
   TFReimpresionComprobantes = class(TForm)
@@ -122,6 +122,8 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
+    ZQ_ComprobantePUNTO_VENTA: TIntegerField;
+    ZQ_ComprobanteNUMERO_CPB: TIntegerField;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
@@ -131,6 +133,11 @@ type
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure guardarConfigPanel();
+    procedure btnImprimirClick(Sender: TObject);
+    procedure DBGridComprobantesDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure leerSistemaIni;
   private
     { Private declarations }
   public
@@ -140,11 +147,25 @@ type
 var
   FReimpresionComprobantes: TFReimpresionComprobantes;
   where:String;
+  //----Fiscal--------
+  Impresora : string;
+  Ruta : String;
+
 implementation
 
-uses UDM, UPrincipal, UUtilidades, DateUtils;
+uses UDM, UPrincipal,strutils, EKModelo, Math, UUtilidades, DateUtils;
 
 {$R *.dfm}
+
+procedure TFReimpresionComprobantes.leerSistemaIni;
+var
+  Ini : TIniFile;
+begin
+  Ini := TIniFile.Create( '.\SISTEMA.INI' );
+  Ruta := Ini.ReadString('IMPRESORA', 'RutaImpresora', '');
+  Impresora := Ini.ReadString('IMPRESORA', 'TipoImpresora', '');
+  Ini.Free;
+end;
 
 procedure TFReimpresionComprobantes.EKDbSumaComprobanteSumListChanged(
   Sender: TObject);
@@ -201,7 +222,7 @@ begin
 
 //Permiso para ver o no los filtros de Fiscal
 //  PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
-//  BtnFiltro_Fiscal.Click;
+  BtnFiltro_Fiscal.Click;
 end;
 
 procedure TFReimpresionComprobantes.cargarConfigPanel();
@@ -287,5 +308,21 @@ begin
   dm.EKIni.EsribirRegEntero('UEstadisticaFacturacion\PanelProducto.width', PanelProducto.Width);
 end;
 
+
+procedure TFReimpresionComprobantes.btnImprimirClick(Sender: TObject);
+begin
+if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:'+ZQ_ComprobanteCODIGO.AsString+' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l '+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -i '+Impresora+' -c '+'F'), nil, SW_SHOWNORMAL)
+end;
+
+procedure TFReimpresionComprobantes.DBGridComprobantesDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+ var
+  vencida:String;
+  begin
+ if ZQ_ComprobantePUNTO_VENTA.IsNull then vencida:='N' else vencida:='S';
+ FPrincipal.PintarFilasGrillasConBajas(DBGridComprobantes,vencida,Rect,DataCol,Column,State)
+end;
 
 end.

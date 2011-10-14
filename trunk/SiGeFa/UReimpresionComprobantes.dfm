@@ -100,6 +100,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
+            OnDrawColumnCell = DBGridComprobantesDrawColumnCell
             Columns = <
               item
                 Expanded = False
@@ -115,6 +116,19 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                 Title.Alignment = taCenter
                 Title.Caption = 'Fecha'
                 Width = 72
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NUMERO_CPB'
+                Title.Caption = 'N'#250'mero'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'PUNTO_VENTA'
+                Title.Caption = 'Pto. Venta'
+                Width = 78
                 Visible = True
               end
               item
@@ -398,7 +412,6 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             Width = 94
             Height = 18
             GroupIndex = 1
-            Down = True
             Caption = 'Todos'
             Layout = blGlyphBottom
             OnClick = BtnFiltro_TodosClick
@@ -409,6 +422,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             Width = 94
             Height = 18
             GroupIndex = 1
+            Down = True
             Caption = 'Fiscal'
             Layout = blGlyphBottom
             OnClick = BtnFiltro_TodosClick
@@ -886,6 +900,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       Hint = 'Reimprimir Comprobante'
       Visible = ivAlways
       ImageIndex = 28
+      OnClick = btnImprimirClick
     end
     object btnSalir: TdxBarLargeButton
       Align = iaRight
@@ -920,7 +935,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
+      
+        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_,c' +
+        '.punto_venta,c.numero_cpb'
       'from comprobante c'
       
         'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
@@ -936,7 +953,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'where (c.id_tipo_cpb = 11)'
       'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
-      '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
+      
+        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
+        'nto_venta,c.numero_cpb')
     Params = <>
     Left = 282
     Top = 128
@@ -988,6 +1007,12 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       FieldName = 'NOMBRE_TIPO_IVA'
       ReadOnly = True
       Size = 50
+    end
+    object ZQ_ComprobantePUNTO_VENTA: TIntegerField
+      FieldName = 'PUNTO_VENTA'
+    end
+    object ZQ_ComprobanteNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
     end
   end
   object DS_Comprobante: TDataSource
@@ -1236,6 +1261,24 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         ItemIndex = -1
       end
       item
+        Titulo = 'Nro Comprobante'
+        Campo = 'numero_cpb'
+        Tabla = 'comprobante'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Punto de Venta'
+        Campo = 'punto_venta'
+        Tabla = 'comprobante'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Tipo Iva'
         Campo = 'ID_TIPO_IVA'
         Tabla = 'tipo_iva'
@@ -1287,7 +1330,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
+      
+        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_,c' +
+        '.punto_venta,c.numero_cpb'
       'from comprobante c'
       
         'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
@@ -1303,7 +1348,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'where (c.id_tipo_cpb = 11)'
       'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
-      '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
+      
+        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
+        'nto_venta,c.numero_cpb')
     SQL_Select.Strings = (
       
         'select c.codigo, c.id_comprobante, cast(c.fecha as date) as Fech' +
@@ -1312,7 +1359,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_')
+      
+        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_,c' +
+        '.punto_venta,c.numero_cpb')
     SQL_From.Strings = (
       'from comprobante c'
       
@@ -1331,7 +1380,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     SQL_Orden.Strings = (
       'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
-      '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
+      
+        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
+        'nto_venta,c.numero_cpb')
     UsarWhereOriginal = EK_Con_Where
     Left = 96
     Top = 95
