@@ -1699,7 +1699,7 @@ begin
     exit;
   end;
 
-  if not Assigned(vsel) then
+  if not Assigned(vsel4) then
     vsel4:= TFPreventa.Create(nil);
   vsel4.OnSeleccionar := OnSelPreventa;
   vsel4.ShowModal;
