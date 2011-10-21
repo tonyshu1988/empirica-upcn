@@ -29,8 +29,8 @@ object FABM_Precios: TFABM_Precios
     TabOrder = 4
     object RepListaPrecios: TQuickRep
       Tag = 99
-      Left = 25
-      Top = 161
+      Left = -23
+      Top = 89
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -283,7 +283,7 @@ object FABM_Precios: TFABM_Precios
         object QRDBText1: TQRDBText
           Left = 4
           Top = 0
-          Width = 184
+          Width = 140
           Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -291,17 +291,17 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             10.583333333333330000
             0.000000000000000000
-            486.833333333333400000)
+            370.416666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
           DataSet = CDSZQ_Productos
-          DataField = 'NOMBRE_PRODUCTO'
+          DataField = 'cod_corto'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -362,9 +362,9 @@ object FABM_Precios: TFABM_Precios
           FontSize = 7
         end
         object QRDBText6: TQRDBText
-          Left = 653
+          Left = 604
           Top = 0
-          Width = 80
+          Width = 128
           Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -372,10 +372,10 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            1727.729166666667000000
+            34.395833333333330000
+            1598.083333333333000000
             0.000000000000000000
-            211.666666666666700000)
+            338.666666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -389,9 +389,9 @@ object FABM_Precios: TFABM_Precios
           FontSize = 7
         end
         object QRDBText7: TQRDBText
-          Left = 418
+          Left = 393
           Top = 0
-          Width = 231
+          Width = 205
           Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -399,10 +399,10 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            1105.958333333333000000
+            34.395833333333330000
+            1039.812500000000000000
             0.000000000000000000
-            611.187500000000000000)
+            542.395833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -416,9 +416,9 @@ object FABM_Precios: TFABM_Precios
           FontSize = 7
         end
         object QRDBText5: TQRDBText
-          Left = 195
+          Left = 150
           Top = 0
-          Width = 219
+          Width = 235
           Height = 13
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -426,17 +426,17 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            515.937500000000000000
+            34.395833333333330000
+            396.875000000000000000
             0.000000000000000000
-            579.437500000000000000)
+            621.770833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
           DataSet = CDSZQ_Productos
-          DataField = 'TIPO_ARTICULO'
+          DataField = 'nombre_producto'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -1376,7 +1376,7 @@ object FABM_Precios: TFABM_Precios
         object QRLabel2: TQRLabel
           Left = 4
           Top = 0
-          Width = 185
+          Width = 140
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1387,7 +1387,39 @@ object FABM_Precios: TFABM_Precios
             37.041666666666670000
             10.583333333333330000
             0.000000000000000000
-            489.479166666666600000)
+            370.416666666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'C'#243'd. Corto'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel3: TQRLabel
+          Left = 150
+          Top = 0
+          Width = 220
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            396.875000000000000000
+            0.000000000000000000
+            582.083333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -1405,40 +1437,8 @@ object FABM_Precios: TFABM_Precios
           ExportAs = exptText
           FontSize = 8
         end
-        object QRLabel3: TQRLabel
-          Left = 194
-          Top = 0
-          Width = 220
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            513.291666666666800000
-            0.000000000000000000
-            582.083333333333400000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Tipo Articulo'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
         object QRLabel4: TQRLabel
-          Left = 652
+          Left = 604
           Top = 0
           Width = 81
           Height = 14
@@ -1449,7 +1449,7 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1725.083333333334000000
+            1598.083333333333000000
             0.000000000000000000
             214.312500000000000000)
           Alignment = taLeftJustify
@@ -1502,9 +1502,9 @@ object FABM_Precios: TFABM_Precios
           FontSize = 8
         end
         object QRLabel9: TQRLabel
-          Left = 418
+          Left = 393
           Top = 0
-          Width = 231
+          Width = 205
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1513,9 +1513,9 @@ object FABM_Precios: TFABM_Precios
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1105.958333333333000000
+            1039.812500000000000000
             0.000000000000000000
-            611.187500000000000000)
+            542.395833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -1682,7 +1682,7 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'IMPUESTO_IVA'
           Title.Alignment = taCenter
-          Title.Caption = 'I.V.A.'
+          Title.Caption = 'I.V.A. (%)'
           Visible = True
         end
         item
@@ -1773,6 +1773,13 @@ object FABM_Precios: TFABM_Precios
           Title.Alignment = taCenter
           Title.Caption = 'Sucursal'
           Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CODIGO_BARRA'
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd. Barra'
           Visible = True
         end>
     end
@@ -2796,7 +2803,6 @@ object FABM_Precios: TFABM_Precios
     end
     object ZQ_ProductosID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
-      Required = True
     end
     object ZQ_Productosimporte_venta_cliente: TFloatField
       FieldKind = fkCalculated
@@ -2806,13 +2812,13 @@ object FABM_Precios: TFABM_Precios
     end
     object ZQ_ProductosCOEF_DESCUENTO: TFloatField
       FieldName = 'COEF_DESCUENTO'
+      OnChange = ZQ_ProductosCOEF_DESCUENTOChange
     end
     object ZQ_ProductosIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
     end
     object ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField
       FieldName = 'PRECIO_COSTO_CIMPUESTOS'
-      ReadOnly = True
       currency = True
     end
     object ZQ_ProductosPRECIO_VENTA: TFloatField
@@ -2871,7 +2877,6 @@ object FABM_Precios: TFABM_Precios
     end
     object ZQ_ProductosID_PRECIO: TIntegerField
       FieldName = 'ID_PRECIO'
-      Required = True
     end
     object ZQ_ProductosID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
@@ -3113,7 +3118,7 @@ object FABM_Precios: TFABM_Precios
         Visible = True
       end
       item
-        TituloColumna = 'I.V.A.'
+        TituloColumna = 'I.V.A. (%)'
         Visible = True
       end
       item
@@ -3170,6 +3175,10 @@ object FABM_Precios: TFABM_Precios
       end
       item
         TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
         Visible = True
       end>
     NombreGuardar = 'ABM_Precios'
@@ -3292,6 +3301,9 @@ object FABM_Precios: TFABM_Precios
     object CDSZQ_Productoscoef_ganancia: TFloatField
       FieldName = 'coef_ganancia'
     end
+    object CDSZQ_Productoscod_corto: TStringField
+      FieldName = 'cod_corto'
+    end
   end
   object ZQ_ImprimirEtiquetas: TZQuery
     Connection = DM.Conexion
@@ -3357,6 +3369,7 @@ object FABM_Precios: TFABM_Precios
       '  PRECIO.PRECIO5 = :PRECIO5'
       'WHERE'
       '  PRECIO.ID_PRECIO = :OLD_ID_PRECIO')
+    UseSequenceFieldForRefreshSQL = False
     Left = 168
     Top = 232
     ParamData = <
