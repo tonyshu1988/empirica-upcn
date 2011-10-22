@@ -236,8 +236,8 @@ begin
   TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[3]).Valor:= IntToStr(30);
 
 //Permiso para ver o no los filtros de Fiscal
-//  PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
-//  BtnFiltro_Fiscal.Click;
+  PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
+  BtnFiltro_Fiscal.Click;
 end;
 
 
