@@ -122,7 +122,7 @@ type
     edCantidad: TDBEdit;
     edDesc: TDBEdit;
     edImporteFinal: TDBEdit;
-    Panel7: TPanel;
+    PanelDeralles: TPanel;
     PanelCabeceraFactura: TPanel;
     Label12: TLabel;
     Label13: TLabel;
@@ -606,7 +606,6 @@ type
     procedure BtCierreXClick(Sender: TObject);
     procedure DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure CD_FpagoCUENTA_INGRESOChange(Sender: TField);
     procedure CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
   private
     vsel: TFBuscarProductoStock;
@@ -842,6 +841,7 @@ begin
   DateSeparator := '/';
   ShortDateFormat := 'dd/MM/yyyy';
   dm.ZQ_Configuracion.Close;
+
   dm.ZQ_Configuracion.Open;
   idSucursal:=dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger;
   CD_Comprobante.CreateDataSet;
@@ -849,8 +849,8 @@ begin
   CD_Fpago.CreateDataSet;
   CD_VentaFinal.CreateDataSet;
   dm.EKModelo.abrir(ZQ_FormasPago);
-  dm.EKModelo.abrir(ZQ_DetalleProd);
   dm.EKModelo.abrir(ZQ_Cuentas);
+  dm.EKModelo.abrir(ZQ_DetalleProd);
   Cliente:=-1;
   IdVendedor:=-1;
   descCliente:=0;
@@ -870,16 +870,29 @@ begin
   edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
   DBImage1.Visible:=True;
   DBImage1.BringToFront;
-  
+
   FPrincipal.Iconos_Menu_32.GetBitmap(1, btnConfirmarVenta.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarVenta.Glyph);
 
   PanelCambiarFecha.Visible:= false;
   CheckBoxCambiarFecha.Checked:= false;
-  if dm.EKUsrLogin.PermisoAccion('CAMBIAR_FECHA_CAJERO') then
+  if dm.EKUsrLogin.PermisoAccion('CAJA_CAMBIAR_FECHA') then
   begin
     PanelCambiarFecha.Visible:= true;
     DateTimePicker_FechaCarga.DateTime:= dm.EKModelo.FechayHora;
+  end;
+
+ if not(dm.EKUsrLogin.PermisoAccion('NO_FISCAL')) then
+  begin
+     ZQ_FormasPago.Filtered:=False;
+     ZQ_FormasPago.Filter:=Format('IF=%s',[QuotedStr('S')]);
+     ZQ_FormasPago.Filtered:=True;
+  end
+ else
+  begin
+     ZQ_FormasPago.Filtered:=False;
+     ZQ_FormasPago.Filter:='';
+     ZQ_FormasPago.Filtered:=True;
   end
 end;
 
@@ -1094,7 +1107,8 @@ end;
 
 procedure TFCajero.edImporteExit(Sender: TObject);
 begin
-  edCantidad.SetFocus;
+if edCantidad.Enabled then
+   edCantidad.SetFocus;
 end;
 
 
@@ -1129,7 +1143,8 @@ begin
   modoLecturaProd();
   VerLectorCB(true);
   LimpiarCodigo();
-  codBarras.SetFocus;
+  if codBarras.Enabled then
+     codBarras.SetFocus;
 end;
 
 
@@ -1195,7 +1210,8 @@ begin
    if CD_DetalleFacturaIMPORTE_FINAL.AsFloat<=0 then
     begin
        Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
-       edImporteFinal.SetFocus;
+       if edImporteFinal.Enabled then
+          edImporteFinal.SetFocus;
        exit;
     end;
 
@@ -1208,12 +1224,14 @@ begin
     lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
     lblMontoProds.Caption :='Total Productos: '+ FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
     modoLecturaProd();
-    DBGridListadoProductos.SetFocus;
+    if DBGridListadoProductos.Enabled then
+       DBGridListadoProductos.SetFocus;
    end
   else
    begin
     Application.MessageBox('El stock actual del producto es insuficiente para la cantidad ingresada.', 'Atención');
-    edCantidad.SetFocus;
+    if edCantidad.Enabled then
+       edCantidad.SetFocus;
     exit;
    end;
 
@@ -1225,7 +1243,8 @@ begin
   if (CD_DetalleFactura.State in [dsInsert,dsEdit]) then
     CD_DetalleFactura.Cancel;
   modoLecturaProd();
-  DBGridListadoProductos.SetFocus;
+  if DBGridListadoProductos.Enabled then
+     DBGridListadoProductos.SetFocus;
 end;
 
 
@@ -1233,6 +1252,7 @@ procedure TFCajero.modoLecturaProd();
 begin
    VerLectorCB(false);
    PanelProductosYFPago.Enabled:=True;
+   PanelDeralles.Enabled:=True;
    grupoVertical.Enabled:=True;
    PanelDetalleProducto.Enabled:=False;
    PanelDetalleProducto.Color:=PanelProductosYFPago.Color;
@@ -1244,9 +1264,15 @@ begin
    VerLectorCB(false);
    PanelDetalleProducto.Enabled:=True;
    PanelProductosYFPago.Enabled:=False;
+   PanelDeralles.Enabled:=False;
    grupoVertical.Enabled:=False;
    PanelDetalleProducto.Color:=$0080FFFF;
-   edCantidad.SetFocus;
+   if edCantidad.Enabled then
+      edCantidad.SetFocus;
+
+   //Permisos para modif el importe directo o dar un descuento
+   edDesc.Enabled:=dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
+   edImporteFinal.Enabled:=dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
 end;
 
 
@@ -1276,7 +1302,8 @@ if modoCargaPrevia then
    begin
    CD_DetalleFactura.Edit;
    modoEscrituraProd();
-   edCantidad.SetFocus;
+   if edCantidad.Enabled then
+      edCantidad.SetFocus;
    end
 
 end;
@@ -1324,7 +1351,8 @@ begin
       begin
         codBarras.Text:='I'+vsel.ZQ_StockID_PRODUCTO.AsString;
         IdentificarCodigo;
-        edCantidad.SetFocus;
+        if edCantidad.Enabled then
+           edCantidad.SetFocus;
       end;
       vsel.ZQ_Stock.Filtered:=False;
       vsel.Close;
@@ -1350,7 +1378,8 @@ end;
 procedure TFCajero.edImporteFinalExit(Sender: TObject);
 begin
 if CD_DetalleFactura.State in [dsInsert,dsEdit] then
-    edCantidad.SetFocus;
+   if edCantidad.Enabled then
+      edCantidad.SetFocus;
 end;
 
 
@@ -1393,7 +1422,8 @@ begin
     grupoVertical.Enabled:=False;
     CD_ComprobantemontoRecibido.AsFloat:=0;
     recalcularBoleta();
-    edPorcDctoTotal.SetFocus;
+    if edPorcDctoTotal.Enabled then
+       edPorcDctoTotal.SetFocus;
   end;
 end;
 
@@ -1519,7 +1549,8 @@ begin
           CD_Fpago.EmptyDataSet;
           CD_DetalleFactura.EmptyDataSet;
           PanelContenedorDerecha.Enabled:=True;
-          DBGridListadoProductos.SetFocus;
+          if DBGridListadoProductos.Enabled then
+             DBGridListadoProductos.SetFocus;
           PConfirmarVenta.Visible:=False;
           GrupoGuardarCancelar.Enabled:=true;
           grupoVertical.Enabled:=true;
@@ -1547,7 +1578,8 @@ begin
   PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
   GrupoGuardarCancelar.Enabled:=True;
   grupoVertical.Enabled:=True;
-  DBGridListadoProductos.SetFocus;
+  if DBGridListadoProductos.Enabled then
+     DBGridListadoProductos.SetFocus;
 end;
 
 
@@ -1591,7 +1623,8 @@ end;
 procedure TFCajero.edPorcDctoTotalExit(Sender: TObject);
 begin
     recalcularBoleta();
-    edRecibido.SetFocus;
+    if edRecibido.Enabled then
+       edRecibido.SetFocus;
 end;
 
 
@@ -1719,7 +1752,8 @@ begin
     if (CD_DetalleFactura.IsEmpty) then
       begin
         cargarPreventa();
-        DBGridFormaPago.SetFocus;
+        if DBGridFormaPago.Enabled then
+           DBGridFormaPago.SetFocus;
       end;
   end;
   vsel4.Close;
@@ -2376,7 +2410,8 @@ begin
   if not DBGridFormaPago.Focused then  //si no estoy en la grilla de forma de pago
     if (CD_Comprobante.State in [dsInsert,dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
     begin
-      DBGridFormaPago.SetFocus;
+      if DBGridFormaPago.Enabled then
+         DBGridFormaPago.SetFocus;
       DBGridFormaPago.SelectedField:= DBGridFormaPago.Fields[0]; //sigo en la misma columna
       CD_Fpago.Append;
     end
@@ -2412,21 +2447,26 @@ end;
 
 procedure TFCajero.btCierreZClick(Sender: TObject);
 begin
-  imprimirFiscal( 0, 'Z');
+if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
+  begin
+     if (application.MessageBox(pchar('Desea Realizar el Cierre Z en la Impresora Fiscal ?'), 'Cierre Z', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+      imprimirFiscal( 0, 'Z');
+  end
+else
+  Application.MessageBox('No tiene permisos para realizar esta Acción.','Cierre Z',MB_OK+MB_ICONINFORMATION);
 end;
 
 
 procedure TFCajero.BtCierreXClick(Sender: TObject);
 begin
-  imprimirFiscal( 0, 'X');
+if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
+  begin
+  if (application.MessageBox(pchar('Desea Realizar el Cierre X en la Impresora Fiscal ?'), 'Cierre X', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    imprimirFiscal( 0, 'X');
+  end
+  else
+    Application.MessageBox('No tiene permisos para realizar esta Acción.','Cierre X',MB_OK+MB_ICONINFORMATION);
 end;
-
-
-procedure TFCajero.CD_FpagoCUENTA_INGRESOChange(Sender: TField);
-begin
-//ShowMessage('hola cuenta');
-end;
-
 
 
 end.
