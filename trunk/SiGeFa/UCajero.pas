@@ -1251,6 +1251,7 @@ end;
 procedure TFCajero.modoLecturaProd();
 begin
    VerLectorCB(false);
+   PProducto.Visible:=False;
    PanelProductosYFPago.Enabled:=True;
    PanelDeralles.Enabled:=True;
    grupoVertical.Enabled:=True;
@@ -1262,6 +1263,7 @@ end;
 procedure TFCajero.modoEscrituraProd();
 begin
    VerLectorCB(false);
+   PProducto.Visible:=True;
    PanelDetalleProducto.Enabled:=True;
    PanelProductosYFPago.Enabled:=False;
    PanelDeralles.Enabled:=False;
