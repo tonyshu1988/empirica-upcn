@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 127
-  Top = 139
+  Left = 524
+  Top = 283
   Width = 1012
   Height = 581
   Caption = 'Estadisticas Ventas'
@@ -1764,6 +1764,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     Params = <>
+    IndexFieldNames = 'FECHA Asc'
     Left = 66
     Top = 144
     object ZQ_ComprobanteCODIGO: TStringField

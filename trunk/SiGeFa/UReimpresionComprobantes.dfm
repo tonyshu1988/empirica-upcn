@@ -14,6 +14,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   OldCreateOrder = False
   Position = poDefault
   Visible = True
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -957,6 +958,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
         'nto_venta,c.numero_cpb')
     Params = <>
+    IndexFieldNames = 'FECHA Asc'
     Left = 282
     Top = 128
     object ZQ_ComprobanteCODIGO: TStringField
@@ -1435,6 +1437,14 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       end
       item
         TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Pto. Venta'
         Visible = True
       end
       item
