@@ -348,6 +348,8 @@ begin
     ZQ_ComprobanteFECHA_IMPRESA.Clear;
     ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
     ZQ_ComprobanteFECHA_ANULADO.Clear;
+    ZQ_ComprobanteID_CLIENTE.Clear;
+    ZQ_ComprobanteID_PROVEEDOR.Clear;
     RadioButtonIngresoClick(Sender);
 
     PanelDia_Movimiento.Enabled:= true;

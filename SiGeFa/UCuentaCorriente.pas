@@ -273,6 +273,16 @@ type
     QRDBText8: TQRDBText;
     EKVistaClientes: TEKVistaPreviaQR;
     btnExcel: TdxBarLargeButton;
+    btnSaldoInicial: TdxBarLargeButton;
+    ZQ_Insert_SaldoIni: TZQuery;
+    PanelSaldoInicial: TPanel;
+    lblTituloVentanaFpago: TLabel;
+    Label14: TLabel;
+    Label29: TLabel;
+    DateTimePicker_FechaSaldo: TDateTimePicker;
+    EditSaldiIni_Importe: TEdit;
+    btnSaldoInicial_Aceptar: TBitBtn;
+    btnSaldoInicial_Cancelar: TBitBtn;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -292,6 +302,9 @@ type
     procedure DBGridCliente_CtaCteDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridResumen_CtaCtesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnExcelClick(Sender: TObject);
+    procedure btnSaldoInicialClick(Sender: TObject);
+    procedure btnSaldoInicial_CancelarClick(Sender: TObject);
+    procedure btnSaldoInicial_AceptarClick(Sender: TObject);
   private
     vsel: TFBuscarPersona;
     viendoResumen: boolean;
@@ -354,6 +367,7 @@ begin
   begin
     PanelCliente.BringToFront;
     viendoResumen:= false;
+    btnSaldoInicial.Enabled:= true;
     btnVerCtaCte.Caption:= 'F2 - Ver Resumen';
     btnVerCtaCte.Hint:= 'Ver el resumen de cuenta corriente de todos los clientes';
     btnBuscar.Enabled:= false;
@@ -370,6 +384,7 @@ begin
   begin
     PanelResumen.BringToFront;
     viendoResumen:= true;
+    btnSaldoInicial.Enabled:= false;
     btnVerCtaCte.Caption:= 'F2 - Ver Cta Cte';
     btnVerCtaCte.Hint:= 'Ver la cuenta corriente del cliente seleccionado';
     btnBuscar.Enabled:= true;
@@ -390,11 +405,15 @@ begin
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnFiltroFecha_Cancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnFiltroFecha_Aceptar.Glyph);
 
+  FPrincipal.Iconos_Menu_16.GetBitmap(0, btnSaldoInicial_Cancelar.Glyph);
+  FPrincipal.Iconos_Menu_16.GetBitmap(1, btnSaldoInicial_Aceptar.Glyph);
+
   EKDBDateTime_FiltroDesde.Date:= dm.EKModelo.Fecha;
   EKDBDateTime_FiltroHasta.Date:= dm.EKModelo.Fecha;
 
   PanelResumen.BringToFront;
   viendoResumen:= true;
+  btnSaldoInicial.Enabled:= false;
 
   ZQ_CtaCte_Gral.Close;
   ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= -1;
@@ -578,6 +597,9 @@ procedure TFCuentaCorriente.FormResize(Sender: TObject);
 begin
   if PanelFiltroFechas.Visible then
     dm.centrarPanel(FCuentaCorriente, PanelFiltroFechas);
+
+  if PanelSaldoInicial.Visible then
+    dm.centrarPanel(FCuentaCorriente, PanelSaldoInicial);
 end;
 
 
@@ -647,6 +669,62 @@ begin
   begin
     if not ZQ_CtaCte_Cliente.IsEmpty then
       dm.ExportarEXCEL(DBGridCliente_CtaCte);
+  end;
+end;
+
+
+procedure TFCuentaCorriente.btnSaldoInicialClick(Sender: TObject);
+begin
+  GrupoEditando.Enabled:= false;
+  PanelCliente.Enabled:= false;
+  dm.centrarPanel(FCuentaCorriente, PanelSaldoInicial);
+
+  PanelSaldoInicial.BringToFront;
+  PanelSaldoInicial.Visible:= true;
+
+  DateTimePicker_FechaSaldo.DateTime:= dm.EKModelo.FechayHora;
+  DateTimePicker_FechaSaldo.SetFocus;
+end;
+
+
+procedure TFCuentaCorriente.btnSaldoInicial_CancelarClick(Sender: TObject);
+begin
+  PanelSaldoInicial.Visible:= false;
+  PanelCliente.Enabled:= true;
+  GrupoEditando.Enabled:= true;
+end;
+
+
+procedure TFCuentaCorriente.btnSaldoInicial_AceptarClick(Sender: TObject);
+var
+  saldo_ini: Double;
+begin
+  try
+    saldo_ini:= StrToFloat(EditSaldiIni_Importe.Text);
+
+    if dm.EKModelo.iniciar_transaccion(transaccion, []) then
+    begin
+      ZQ_Insert_SaldoIni.Close;
+      ZQ_Insert_SaldoIni.ParamByName('id_cliente').AsInteger:= ZQ_ClienteID_PERSONA.AsInteger;
+      ZQ_Insert_SaldoIni.ParamByName('id_proveedor').Clear;
+      ZQ_Insert_SaldoIni.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
+      ZQ_Insert_SaldoIni.ParamByName('saldo_inicial').AsFloat:= saldo_ini;
+      ZQ_Insert_SaldoIni.ParamByName('fecha').AsDateTime:= DateTimePicker_FechaSaldo.DateTime;
+      ZQ_Insert_SaldoIni.ExecSQL;
+
+      if not DM.EKModelo.finalizar_transaccion(transaccion) then
+        DM.EKModelo.cancelar_transaccion(transaccion)
+    end;
+
+    PanelSaldoInicial.Visible:= false;
+    PanelCliente.Enabled:= true;
+    GrupoEditando.Enabled:= true;
+    ZQ_CtaCte_Cliente.Refresh;
+  except
+    begin
+      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
+      exit;
+    end
   end;
 end;
 

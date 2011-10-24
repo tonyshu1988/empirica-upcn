@@ -32,7 +32,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       Top = 1
       Width = 976
       Height = 521
-      ActivePage = TabBalanceGrafico
+      ActivePage = TabDetalleMov
       Align = alClient
       TabOrder = 0
       object TabSaldosCuentas: TTabSheet
@@ -3237,10 +3237,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         Caption = 'Detalle Movimiento'
         ImageIndex = 1
         object Splitter1: TSplitter
-          Left = 631
+          Left = 581
           Top = 38
           Width = 5
-          Height = 406
+          Height = 433
           Align = alRight
         end
         object RepDetalleMov: TQuickRep
@@ -4197,7 +4197,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object Panel4: TPanel
           Left = 0
           Top = 0
-          Width = 1018
+          Width = 968
           Height = 38
           Align = alTop
           BevelOuter = bvNone
@@ -4206,7 +4206,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSucursalDetMov: TLabel
             Left = 4
             Top = 17
-            Width = 85
+            Width = 960
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -4220,7 +4220,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblEncabezadoDetMov: TLabel
             Left = 4
             Top = 4
-            Width = 85
+            Width = 960
             Height = 13
             Align = alTop
             Caption = 'lblTotalSaldo'
@@ -4235,8 +4235,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object DBGridEstadisticaDetMov: TDBGrid
           Left = 0
           Top = 38
-          Width = 631
-          Height = 406
+          Width = 581
+          Height = 433
           Align = alClient
           Color = 14606012
           DataSource = DS_Estadistica_Det_Mov
@@ -4320,16 +4320,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         end
         object Panel3: TPanel
           Left = 0
-          Top = 444
-          Width = 1018
+          Top = 471
+          Width = 968
           Height = 22
           Align = alBottom
           BorderWidth = 4
           TabOrder = 3
           object lblResumenDetalleMovimiento: TLabel
-            Left = 920
+            Left = 5
             Top = 5
-            Width = 93
+            Width = 958
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -4343,10 +4343,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           end
         end
         object DBGridMovFPago: TDBGrid
-          Left = 636
+          Left = 586
           Top = 38
           Width = 382
-          Height = 406
+          Height = 433
           Align = alRight
           Color = 14606012
           DataSource = DS_MovFormaPago
@@ -5666,7 +5666,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblBalanceTipoComprobante: TLabel
               Left = 4
               Top = 4
-              Width = 960
+              Width = 180
               Height = 13
               Align = alTop
               Caption = 'lblBalanceTipoComprobante'
@@ -5680,7 +5680,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblBalanceFecha: TLabel
               Left = 4
               Top = 17
-              Width = 960
+              Width = 103
               Height = 13
               Align = alTop
               Caption = 'lblBalanceFecha'
@@ -5694,7 +5694,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblBalanceSucursal: TLabel
               Left = 4
               Top = 30
-              Width = 960
+              Width = 121
               Height = 13
               Align = alTop
               Caption = 'lblBalanceSucursal'
