@@ -825,7 +825,8 @@ end;
 
 procedure TFABM_Preventa.edImporteExit(Sender: TObject);
 begin
-edCantidad.SetFocus;
+if edCantidad.Enabled then
+      edCantidad.SetFocus;
 end;
 
 procedure TFABM_Preventa.BtAgregarPagoClick(Sender: TObject);
@@ -847,7 +848,8 @@ if IdVendedor<0 then
 
   modoLecturaProd();
   VerLectorCB(true);
-  LimpiarCodigo();      
+  LimpiarCodigo();
+if codBarras.Enabled then
   codBarras.SetFocus;
 end;
 
@@ -899,7 +901,8 @@ begin
    if CD_DetalleFacturaIMPORTE_FINAL.AsFloat<=0 then
     begin
        Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
-       edImporteFinal.SetFocus;
+       if edImporteFinal.Enabled then
+          edImporteFinal.SetFocus;
        exit;
     end;
 
@@ -911,11 +914,13 @@ begin
     CD_DetalleFactura.Post;
     lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
     modoLecturaProd();
+    if DBGridListadoProductos.Enabled then
     DBGridListadoProductos.SetFocus;
    end
   else
    begin
     Application.MessageBox('El stock actual del producto es insuficiente para la cantidad ingresada.', 'Atención');
+    if edCantidad.Enabled then
     edCantidad.SetFocus;
     exit;
    end;
@@ -927,6 +932,7 @@ begin
  if (CD_DetalleFactura.State in [dsInsert,dsEdit]) then
   CD_DetalleFactura.Cancel;
   modoLecturaProd();
+  if DBGridListadoProductos.Enabled then
   DBGridListadoProductos.SetFocus;
 end;
 
@@ -946,7 +952,12 @@ begin
    Panel1.Enabled:=False;
    grupoVertical.Enabled:=False;
    PanelDetalleProducto.Color:=$0080FFFF;
-   edCantidad.SetFocus;
+   if edCantidad.Enabled then
+      edCantidad.SetFocus;
+
+   //Permisos para modif el importe directo o dar un descuento
+   edDesc.Enabled:=dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
+   edImporteFinal.Enabled:=dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
 end;
 procedure TFABM_Preventa.btQuitarProductoClick(Sender: TObject);
 begin
@@ -973,7 +984,8 @@ begin
    begin
    CD_DetalleFactura.Edit;
    modoEscrituraProd();
-   edCantidad.SetFocus;
+   if edCantidad.Enabled then
+      edCantidad.SetFocus;
    end
 
 end;
@@ -1012,7 +1024,8 @@ begin
       begin
         codBarras.Text:='I'+vsel.ZQ_StockID_PRODUCTO.AsString;
         IdentificarCodigo;
-        edCantidad.SetFocus;
+        if edCantidad.Enabled then
+           edCantidad.SetFocus;
       end;
       vsel.ZQ_Stock.Filtered:=False;
       vsel.Close;
@@ -1030,6 +1043,7 @@ end;
 procedure TFABM_Preventa.edImporteFinalExit(Sender: TObject);
 begin
 if CD_DetalleFactura.State in [dsInsert,dsEdit] then
+ if edCantidad.Enabled then
     edCantidad.SetFocus;
 end;
 
@@ -1071,7 +1085,8 @@ begin
     PanelContenedorDerecha.Enabled:=False;
     GrupoGuardarCancelar.Enabled:=False;
     grupoVertical.Enabled:=False;
-    edDescTotal.SetFocus;
+    if edDescTotal.Enabled then
+       edDescTotal.SetFocus;
     recalcularBoleta();
   end;
 

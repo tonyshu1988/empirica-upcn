@@ -221,7 +221,7 @@ begin
   ZQ_Sucursal.Open;
 
 //Permiso para ver o no los filtros de Fiscal
-//  PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
+  PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
   BtnFiltro_Fiscal.Click;
 end;
 
