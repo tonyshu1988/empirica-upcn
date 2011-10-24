@@ -391,7 +391,8 @@ end;
 
 
 procedure TFPrincipal.CambiarContraseniaClick(Sender: TObject);
-var i:integer;
+var
+  i:integer;
 begin
   dm.EKUsrLogin.CambiarClave;
 end;
@@ -525,30 +526,30 @@ end;
 
 procedure TFPrincipal.AABM_ArticuloExecute(Sender: TObject);
 begin
-    EKVentanas1.Abrir(Sender, TFABM_Articulo, FABM_Articulo);
+  EKVentanas1.Abrir(Sender, TFABM_Articulo, FABM_Articulo);
 end;
 
 
 procedure TFPrincipal.AABM_TipoIvaExecute(Sender: TObject);
 begin
-    EKVentanas1.Abrir(Sender, TFABM_TipoIVA, FABM_TipoIVA);
+  EKVentanas1.Abrir(Sender, TFABM_TipoIVA, FABM_TipoIVA);
 end;
 
 procedure TFPrincipal.AABM_TipoComprobanteExecute(Sender: TObject);
 begin
-    EKVentanas1.Abrir(Sender, TFABM_TipoComprobante, FABM_TipoComprobante);
+  EKVentanas1.Abrir(Sender, TFABM_TipoComprobante, FABM_TipoComprobante);
 end;
 
 
 procedure TFPrincipal.AABM_TipoMedioPagoExecute(Sender: TObject);
 begin
-    EKVentanas1.Abrir(Sender, TFABM_TipoFormaPago, FABM_TipoFormaPago);
+  EKVentanas1.Abrir(Sender, TFABM_TipoFormaPago, FABM_TipoFormaPago);
 end;
 
 
 procedure TFPrincipal.AABM_CuentaExecute(Sender: TObject);
 begin
-    EKVentanas1.Abrir(Sender, TFABM_Cuentas, FABM_Cuentas);
+  EKVentanas1.Abrir(Sender, TFABM_Cuentas, FABM_Cuentas);
 end;
 
 
@@ -656,7 +657,7 @@ end;
 
 procedure TFPrincipal.AABM_CPB_FacturaCompExecute(Sender: TObject);
 begin
-   EKVentanas1.Abrir(Sender, TFABM_CPB_FacturaCompra, FABM_CPB_FacturaCompra);
+  EKVentanas1.Abrir(Sender, TFABM_CPB_FacturaCompra, FABM_CPB_FacturaCompra);
 end;
 
 
@@ -680,21 +681,21 @@ end;
 
 procedure TFPrincipal.AAuditoriaExecute(Sender: TObject);
 begin
-   EKVentanas1.Abrir(Sender, TFAuditoria, FAuditoria);
+  EKVentanas1.Abrir(Sender, TFAuditoria, FAuditoria);
 end;
 
 
 procedure TFPrincipal.AConfigGralExecute(Sender: TObject);
 begin
-   Application.CreateForm(TFConfiguracion, FConfiguracion);
-   FConfiguracion.ShowModal;
-   FConfiguracion.Release;
+  Application.CreateForm(TFConfiguracion, FConfiguracion);
+  FConfiguracion.ShowModal;
+  FConfiguracion.Release;
 end;
 
 
 procedure TFPrincipal.AABM_CPB_TransferExecute(Sender: TObject);
 begin
-   EKVentanas1.Abrir(Sender, TFABM_CPB_Transferencia, FABM_CPB_Transferencia);
+  EKVentanas1.Abrir(Sender, TFABM_CPB_Transferencia, FABM_CPB_Transferencia);
 end;
 
 
