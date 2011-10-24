@@ -395,6 +395,7 @@ type
     procedure btnCtaCte_CancelarClick(Sender: TObject);
     procedure btnCtaCte(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
+    procedure permisosUsuario();
   private
     vsel : TFBuscarPersona;
     procedure OnSelPersona;
@@ -469,6 +470,7 @@ begin
     DBGridEmpresas.Enabled:= false;
     ZQ_Empresa.Append;
     ZQ_EmpresaBAJA.AsString := 'N';
+    ZQ_EmpresaID_PROVINCIA.AsInteger:= DM.provinciaPorDefecto;
     ZPID_Empresa.Active := false;
     ZPID_Empresa.Active := true;
     ZQ_EmpresaID_EMPRESA.AsInteger := ZPID_EmpresaID.AsInteger;    
@@ -681,6 +683,23 @@ begin
 end;
 
 
+procedure TFABMEmpresas.permisosUsuario();
+begin
+  PageControlEdicion.Pages[5].TabVisible:= true;
+  PageControlEdicion.Pages[6].TabVisible:= true;
+
+  if not dm.EKUsrLogin.PermisoAccion('EMPRESA_DETALLE') then
+  begin
+    PageControlEdicion.Pages[5].TabVisible:= false;
+  end;
+
+  if not dm.EKUsrLogin.PermisoAccion('EMPRESA_CTA_CTE') then
+  begin
+    PageControlEdicion.Pages[6].TabVisible:= false;
+  end;
+end;
+
+
 procedure TFABMEmpresas.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
@@ -704,6 +723,7 @@ begin
 
   EKBusquedaAvanzadaEmpresas.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Empresa, lblCantidadRegistros);
+  permisosUsuario;
 end;
 
 
@@ -851,17 +871,17 @@ begin
   case PageControlEdicion.TabIndex of
   1:  begin
         if ZQ_EntidadTelefonoEmpresa.IsEmpty then
-        exit;
+          exit;
 
         Telefono:= '"callto://+'+ZQ_EntidadTelefonoEmpresaTELEFONO.AsString+'"';
 
         if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
-        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+          Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
     end;
 
    2: begin
         if ZQ_EntidadTelefonoContacto.IsEmpty then
-        exit;
+          exit;
 
         if DBMemoContactos.SelText <> '' then
         begin
@@ -872,12 +892,12 @@ begin
           Telefono:= '"callto://+'+ZQ_EntidadTelefonoContactoTELEFONO.AsString+'"';
 
         if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
-        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+          Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
       end;
 
    3: begin
         if ZQ_EntidadTelefonoViajantes.IsEmpty then
-        exit;
+          exit;
 
         if DBMemoViajantes.SelText <> '' then
         begin
@@ -888,17 +908,17 @@ begin
           Telefono:= '"callto://+'+ZQ_EntidadTelefonoViajantesTELEFONO.AsString+'"';
 
         if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
-        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+          Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
       end;
 
    5: begin
         if ZQ_Empresa.IsEmpty then
-        exit;
+          exit;
 
         Telefono:= '"callto://+'+DBMemoDescripcion.SelText+'"';
 
         if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
-        Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+          Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
       end;
   end;
 end;
@@ -961,7 +981,6 @@ begin
   end;
 
   FMailEnviar.ShowModal;
-
 end;
 
 

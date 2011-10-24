@@ -2538,22 +2538,6 @@ object FABM_Personas: TFABM_Personas
         end
         item
           Expanded = False
-          FieldName = 'TELEFONO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Telefonos'
-          Width = 159
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'EMAIL'
-          Title.Alignment = taCenter
-          Title.Caption = 'E-Mail'
-          Width = 146
-          Visible = True
-        end
-        item
-          Expanded = False
           FieldName = 'FECHA_NACIMIENTO'
           Title.Alignment = taCenter
           Title.Caption = 'Fecha Nac.'
@@ -2615,7 +2599,7 @@ object FABM_Personas: TFABM_Personas
         Top = 0
         Width = 903
         Height = 200
-        ActivePage = TabSheetcTel
+        ActivePage = TabSheetDetalle
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet
@@ -2745,7 +2729,7 @@ object FABM_Personas: TFABM_Personas
             ListField = 'NOMBRE_PROVINCIA'
             ListSource = DS_Provincia
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 5
           end
           object DBLCBoxCondIva: TDBLookupComboBox
             Left = 550
@@ -2763,7 +2747,7 @@ object FABM_Personas: TFABM_Personas
             ListField = 'NOMBRE_TIPO_IVA'
             ListSource = DS_Iva
             ParentFont = False
-            TabOrder = 9
+            TabOrder = 11
           end
           object DBEApellidoNombre: TDBEdit
             Left = 120
@@ -2779,7 +2763,7 @@ object FABM_Personas: TFABM_Personas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 0
+            TabOrder = 1
           end
           object DBENroDocumento: TDBEdit
             Left = 669
@@ -2795,7 +2779,7 @@ object FABM_Personas: TFABM_Personas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 8
+            TabOrder = 10
           end
           object DBELocalidad: TDBEdit
             Left = 120
@@ -2811,7 +2795,7 @@ object FABM_Personas: TFABM_Personas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 3
           end
           object DBEDireccion: TDBEdit
             Left = 120
@@ -2827,7 +2811,7 @@ object FABM_Personas: TFABM_Personas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 2
           end
           object DBECodPostal: TDBEdit
             Left = 323
@@ -2843,7 +2827,7 @@ object FABM_Personas: TFABM_Personas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 3
+            TabOrder = 4
           end
           object DBCBoxSexo: TDBComboBox
             Left = 325
@@ -2864,7 +2848,7 @@ object FABM_Personas: TFABM_Personas
               'F'
               'N')
             ParentFont = False
-            TabOrder = 6
+            TabOrder = 7
           end
           object EKDBFechaNacimiento: TEKDBDateTimePicker
             Left = 120
@@ -2879,7 +2863,7 @@ object FABM_Personas: TFABM_Personas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 5
+            TabOrder = 6
             DataField = 'FECHA_NACIMIENTO'
             DataSource = DS_Persona
           end
@@ -2899,7 +2883,7 @@ object FABM_Personas: TFABM_Personas
             ListField = 'NOMBRE_TIPO_DOC'
             ListSource = DS_Documento
             ParentFont = False
-            TabOrder = 7
+            TabOrder = 9
           end
           object DBECuit_Cuil: TDBEdit
             Left = 550
@@ -2914,7 +2898,7 @@ object FABM_Personas: TFABM_Personas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 10
+            TabOrder = 12
           end
           object RadioGroupRelacionCliente: TRadioGroup
             Left = 438
@@ -2927,7 +2911,7 @@ object FABM_Personas: TFABM_Personas
             Items.Strings = (
               'No Es Cliente'
               'Es Cliente')
-            TabOrder = 11
+            TabOrder = 8
             OnClick = RadioGroupRelacionClienteClick
           end
           object DBEditCodigo: TDBEdit
@@ -2944,9 +2928,9 @@ object FABM_Personas: TFABM_Personas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 12
+            TabOrder = 0
           end
-          object DBEdit1: TDBEdit
+          object DBEDescuento: TDBEdit
             Left = 550
             Top = 142
             Width = 270
@@ -2962,7 +2946,7 @@ object FABM_Personas: TFABM_Personas
             TabOrder = 13
           end
         end
-        object TabSheetcTel: TTabSheet
+        object TabSheetTelMail: TTabSheet
           Caption = 'Telefonos/Mail'
           ImageIndex = 4
           object DBGridTelMail: TDBGrid
@@ -3009,7 +2993,7 @@ object FABM_Personas: TFABM_Personas
           object DBMemoDetalle: TDBMemo
             Left = 0
             Top = 0
-            Width = 820
+            Width = 887
             Height = 164
             Align = alClient
             DataField = 'DESCRIPCION'
@@ -3023,7 +3007,7 @@ object FABM_Personas: TFABM_Personas
           object DBGridRol: TDBGrid
             Left = 0
             Top = 0
-            Width = 828
+            Width = 895
             Height = 172
             Align = alClient
             Color = 14606012
@@ -3404,6 +3388,15 @@ object FABM_Personas: TFABM_Personas
           end
           item
             Item = btnExcel
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = dxBarLargeButton1
+            Visible = True
+          end
+          item
+            Item = btnEMail
             Visible = True
           end
           item
@@ -3832,6 +3825,24 @@ object FABM_Personas: TFABM_Personas
       OnClick = btnExcelClick
       AutoGrayScale = False
     end
+    object btnEMail: TdxBarLargeButton
+      Caption = 'Enviar Mail'
+      Category = 0
+      Hint = 'Enviar Mail'
+      Visible = ivAlways
+      ImageIndex = 76
+      OnClick = btnEMailClick
+      AutoGrayScale = False
+    end
+    object dxBarLargeButton1: TdxBarLargeButton
+      Caption = 'Skype'
+      Category = 0
+      Hint = 'Llamar por Skype'
+      Visible = ivAlways
+      ImageIndex = 72
+      OnClick = dxBarLargeButton1Click
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -4248,14 +4259,6 @@ object FABM_Personas: TFABM_Personas
         Visible = True
       end
       item
-        TituloColumna = 'Telefonos'
-        Visible = True
-      end
-      item
-        TituloColumna = 'E-Mail'
-        Visible = True
-      end
-      item
         TituloColumna = 'Fecha Nac.'
         Visible = True
       end
@@ -4361,6 +4364,7 @@ object FABM_Personas: TFABM_Personas
       '  persona.CODIGO_CORTO = :CODIGO_CORTO'
       'WHERE'
       '  persona.ID_PERSONA = :OLD_ID_PERSONA')
+    UseSequenceFieldForRefreshSQL = False
     Left = 64
     Top = 176
     ParamData = <

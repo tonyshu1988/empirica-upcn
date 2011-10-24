@@ -2257,7 +2257,7 @@ object FABMEmpresas: TFABMEmpresas
       Top = 291
       Width = 1006
       Height = 281
-      ActivePage = TabCtaCte
+      ActivePage = TabEmpresa
       Align = alBottom
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -2656,7 +2656,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label12: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 996
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2822,7 +2822,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label13: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 996
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2950,7 +2950,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label14: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 996
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2959,7 +2959,7 @@ object FABMEmpresas: TFABMEmpresas
       end
       object TabDescripcion: TTabSheet
         BorderWidth = 10
-        Caption = 'Descripci'#243'n'
+        Caption = 'Detalle'
         ImageIndex = 3
         object DBMemoDescripcion: TDBMemo
           Left = 0
@@ -3173,14 +3173,6 @@ object FABMEmpresas: TFABMEmpresas
         end
         item
           Expanded = False
-          FieldName = 'TELEFONO'
-          Title.Alignment = taCenter
-          Title.Caption = 'Tel'#233'fono'
-          Width = 258
-          Visible = True
-        end
-        item
-          Expanded = False
           FieldName = 'DIRECCION'
           Title.Alignment = taCenter
           Title.Caption = 'Direcci'#243'n'
@@ -3189,10 +3181,10 @@ object FABMEmpresas: TFABMEmpresas
         end
         item
           Expanded = False
-          FieldName = 'EMAIL'
+          FieldName = 'tipo_IVA'
           Title.Alignment = taCenter
-          Title.Caption = 'Email'
-          Width = 197
+          Title.Caption = 'Tipo I.V.A'
+          Width = 50
           Visible = True
         end
         item
@@ -3201,14 +3193,6 @@ object FABMEmpresas: TFABMEmpresas
           Title.Alignment = taCenter
           Title.Caption = 'Cuit/Cuil'
           Width = 82
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'PAGINA_WEB'
-          Title.Alignment = taCenter
-          Title.Caption = 'Pag.Web'
-          Width = 176
           Visible = True
         end
         item
@@ -3237,18 +3221,18 @@ object FABMEmpresas: TFABMEmpresas
         end
         item
           Expanded = False
-          FieldName = 'tipo_empresa'
+          FieldName = 'PAGINA_WEB'
           Title.Alignment = taCenter
-          Title.Caption = 'Tipo Empresa'
-          Width = 92
+          Title.Caption = 'Pag.Web'
+          Width = 176
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'tipo_IVA'
+          FieldName = 'tipo_empresa'
           Title.Alignment = taCenter
-          Title.Caption = 'Tipo I.V.A'
-          Width = 50
+          Title.Caption = 'Tipo Empresa'
+          Width = 92
           Visible = True
         end>
     end
@@ -4426,23 +4410,15 @@ object FABMEmpresas: TFABMEmpresas
         Visible = True
       end
       item
-        TituloColumna = 'Tel'#233'fono'
-        Visible = True
-      end
-      item
         TituloColumna = 'Direcci'#243'n'
         Visible = True
       end
       item
-        TituloColumna = 'Email'
+        TituloColumna = 'Tipo I.V.A'
         Visible = True
       end
       item
         TituloColumna = 'Cuit/Cuil'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Pag.Web'
         Visible = True
       end
       item
@@ -4458,11 +4434,11 @@ object FABMEmpresas: TFABMEmpresas
         Visible = True
       end
       item
-        TituloColumna = 'Tipo Empresa'
+        TituloColumna = 'Pag.Web'
         Visible = True
       end
       item
-        TituloColumna = 'Tipo I.V.A'
+        TituloColumna = 'Tipo Empresa'
         Visible = True
       end>
     NombreGuardar = 'ABM_Empresa'

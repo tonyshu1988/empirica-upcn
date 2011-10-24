@@ -9,7 +9,7 @@ uses
   EKOrdenarGrilla, ZStoredProcedure, ComCtrls, EKDBDateTimePicker,
   StdCtrls, DBCtrls, Mask, ZSqlUpdate, EKFiltrarColumna, ActnList,
   XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons,
-  Menus;
+  Menus, ShellAPI;
 
 type
   TFABM_Personas = class(TForm)
@@ -215,7 +215,7 @@ type
     ZQ_PersonaDESCUENTO_ESPECIAL: TFloatField;
     ZQ_PersonaCODIGO_CORTO: TIntegerField;
     Label11: TLabel;
-    DBEdit1: TDBEdit;
+    DBEDescuento: TDBEdit;
     ZQ_TipoRelacion: TZQuery;
     ZQ_TipoRelacionID_TIPO_RELACION: TIntegerField;
     ZQ_TipoRelacionDESCRIPCION: TStringField;
@@ -238,7 +238,7 @@ type
     btnCtaCte_Aceptar: TBitBtn;
     btnCtaCte_Cancelar: TBitBtn;
     btnCtaCte_Modificar: TButton;
-    TabSheetcTel: TTabSheet;
+    TabSheetTelMail: TTabSheet;
     DBGridTelMail: TDBGrid;
     ZQ_EntidadTelefono: TZQuery;
     DS_EntidadTelefono: TDataSource;
@@ -261,6 +261,8 @@ type
     EKDBDateTimePicker1: TEKDBDateTimePicker;
     Label4: TLabel;
     btnExcel: TdxBarLargeButton;
+    btnEMail: TdxBarLargeButton;
+    dxBarLargeButton1: TdxBarLargeButton;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -296,9 +298,11 @@ type
     procedure EliminarTelMailClick(Sender: TObject);
     procedure ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
     procedure DBGridTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure DBGridRolDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridRolDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnExcelClick(Sender: TObject);
+    procedure permisosUsuario();
+    procedure btnEMailClick(Sender: TObject);
+    procedure dxBarLargeButton1Click(Sender: TObject);
   private
     id_persona: integer;
   public
@@ -314,10 +318,26 @@ const
 
 implementation
 
-uses UDM, UPrincipal, EKModelo;
+uses UDM, UPrincipal, EKModelo, RegExpr, UUtilidades, UMailEnviar;
 
 {$R *.dfm}
 
+
+procedure TFABM_Personas.permisosUsuario();
+begin
+  PageControl.Pages[2].TabVisible:= true;
+  PageControl.Pages[4].TabVisible:= true;
+
+  if not dm.EKUsrLogin.PermisoAccion('PERSONA_DETALLE') then
+  begin
+    PageControl.Pages[2].TabVisible:= false;
+  end;
+
+  if not dm.EKUsrLogin.PermisoAccion('PERSONA_CTA_CTE') then
+  begin
+    PageControl.Pages[4].TabVisible:= false;
+  end;
+end;
 
 procedure TFABM_Personas.FormCreate(Sender: TObject);
 begin
@@ -344,6 +364,7 @@ begin
 
   EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Persona, lblCantidadRegistros);
+  permisosUsuario;
 end;
 
 
@@ -618,7 +639,6 @@ end;
 function TFABM_Personas.validarcampos():boolean;
 var
   mensaje: string;
-  color: TColor;
 begin
   PageControl.ActivePageIndex:= 0;
   result:= true;
@@ -654,6 +674,15 @@ begin
     mensaje:= mensaje+#13+'El campo Condición IVA se encuentra vacío, Verifique';
     result := false;
   end;
+
+//  DBECuit_Cuil.Color:= clWindow;
+//  if not ((ZQ_PersonaCUIT_CUIL.IsNull) or (ZQ_PersonaCUIT_CUIL.AsString = '')) then
+//    if not EsCUITValido(ZQ_PersonaCUIT_CUIL.AsString) then
+//    begin
+//      mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido, Verifique';
+//      result := false;
+//      DBECuit_Cuil.Color:= dm.colorCampoRequido;
+//    end;
 
   if Result = False then
   begin
@@ -924,10 +953,58 @@ begin
   FPrincipal.PintarFilasGrillas(DBGridTelMail, Rect, DataCol, Column, State);
 end;
 
+
 procedure TFABM_Personas.btnExcelClick(Sender: TObject);
 begin
   if not ZQ_Persona.IsEmpty then
     dm.ExportarEXCEL(DBGridClientes);
+end;
+
+
+procedure TFABM_Personas.btnEMailClick(Sender: TObject);
+begin
+  Application.CreateForm(TFMailEnviar, FMailEnviar);
+  if PageControl.ActivePage = TabSheetTelMail then
+  begin
+    if ZQ_EntidadTelefono.IsEmpty then
+      exit;
+
+    FMailEnviar.cargarDestinatario(ZQ_EntidadTelefonoMAIL.AsString+';');
+  end;
+  FMailEnviar.ShowModal;
+end;
+
+
+procedure TFABM_Personas.dxBarLargeButton1Click(Sender: TObject);
+var
+  Telefono: string;
+begin
+  if PageControl.ActivePage = TabSheetTelMail then
+  begin
+    if ZQ_EntidadTelefono.IsEmpty then
+      exit;
+
+    Telefono:= '"callto://+'+ZQ_EntidadTelefonoTELEFONO.AsString+'"';
+
+    if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
+      Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+  end;
+
+  
+  if PageControl.ActivePage = TabSheetDetalle then
+  begin
+    if (ZQ_PersonaDESCRIPCION.IsNull) or (ZQ_PersonaDESCRIPCION.AsString = '') then
+      exit;
+
+    if DBMemoDetalle.SelText <> '' then
+    begin
+      Telefono:= '"callto://+'+DBMemoDetalle.SelText+'"';
+      DBMemoDetalle.SetFocus;
+    end;
+
+    if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
+      Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+  end;
 end;
 
 end.
