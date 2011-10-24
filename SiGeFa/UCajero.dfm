@@ -3048,7 +3048,7 @@ object FCajero: TFCajero
       Left = 1
       Top = 146
       Width = 916
-      Height = 18
+      Height = 41
       Align = alTop
       Color = 12648448
       Font.Charset = ANSI_CHARSET
@@ -3062,14 +3062,14 @@ object FCajero: TFCajero
         Left = 353
         Top = 1
         Width = 64
-        Height = 16
+        Height = 15
         Align = alLeft
         AutoSize = False
         Caption = 'Cantidad'
         Color = 12648448
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -12
+        Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentColor = False
@@ -3081,7 +3081,7 @@ object FCajero: TFCajero
         Left = 1
         Top = 1
         Width = 352
-        Height = 16
+        Height = 15
         Align = alLeft
         Alignment = taCenter
         AutoSize = False
@@ -3089,7 +3089,7 @@ object FCajero: TFCajero
         Color = 12648448
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -12
+        Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentColor = False
@@ -3101,14 +3101,14 @@ object FCajero: TFCajero
         Left = 417
         Top = 1
         Width = 89
-        Height = 16
+        Height = 15
         Align = alLeft
         AutoSize = False
         Caption = 'Descuento'
         Color = 12648448
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -12
+        Font.Height = -11
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentColor = False
@@ -3120,11 +3120,258 @@ object FCajero: TFCajero
         Left = 506
         Top = 1
         Width = 119
-        Height = 16
+        Height = 15
         Align = alLeft
         Alignment = taCenter
         AutoSize = False
         Caption = 'Importe Final'
+        Color = 12648448
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+      end
+      object PanelDetalleProducto: TPanel
+        Tag = 99
+        Left = 1
+        Top = 16
+        Width = 914
+        Height = 24
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = 8454143
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        object Label5: TLabel
+          Left = 482
+          Top = 4
+          Width = 14
+          Height = 13
+          Caption = '%'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object SpeedButton1: TSpeedButton
+          Tag = 99
+          Left = 3
+          Top = 1
+          Width = 27
+          Height = 19
+          Hint = 'F6 Leer C'#243'digo Producto'
+          Flat = True
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            18000000000000030000C40E0000C40E00000000000000000000FDFDFDFDFDFD
+            FDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFEFEFEFFFFFFFFFFFFFFFFFFFDFDFDFDFD
+            FDFDFDFDFFFFFFFFFFFFFBFBFBFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFB
+            FBFBE6E1D8E0DACFEEEDE9FFFFFFFFFFFFFFFFFFF4F4F4D9D7D7FCFCFCDEDEDE
+            D3D3D3D4D4D4D4D4D4D4D4D4D5D6D6C9BFABC3B083DFD5BDE3DDD6D7D2CEB1AD
+            AC88847F7D7672938D8BFCFCFCDEDEDEE8E8E8E5E5E5E1E1E0DEDFE0D6D3D0D7
+            CDB9E4D9B7EEE8CEF2EEDEC8BDB0A29D9B9E9C9AB3B2B1E9E9E9FCFCFCEAEAEA
+            D9D9D9DDDDDDE1E1E1D7D8D9D4D1CEEEE8E1FAF9EFE7E0C3D2C498BDB29DB9BC
+            BEB9BABAB8B8B8EDEDEDFFFFFFE1E1E1A7A7A7C3C3C3D0D0D0C2C2C2C3C2C2CF
+            C9C2EFECE6E8E0D0BCAC8FAAA79DA7A8AA9999999D9D9DEDEDEDFEFEFEE6E6E6
+            A2A2A28B8B8BAAAAAA8C8C8C9B9B9B979696918D88B4AEAB8382808C8D8D8787
+            87707070A6A6A6EEEEEEFFFFFFE8E8E8A7A7A77D7D7D9A9A9A7979798C8C8C8E
+            8E8E7373749596977070718686867D7D7D666666ABABABF1F1F1FEFEFEE4E4E4
+            AAAAAA919191A7A7A7828282939393969696808080A1A1A17A7A7A8E8E8E8787
+            876E6E6EB0B0B0F2F2F2FFFFFFE5E5E5AAAAAA959595AFAFAF8E8E8E9D9D9D9E
+            9E9E858585A5A5A57E7E7E919191898989737373B6B6B6F4F4F4FFFFFFE4E4E4
+            A7A7A7939393AEAEAE8F8F8F9E9E9E9E9E9E868686A7A7A78282829595958B8B
+            8B727272B8B8B8F4F4F4FEFEFEE2E2E2ADADAD9D9D9DB6B6B69E9E9EACACACAD
+            ADAD9A9A9AB7B7B7999999ABABABA0A0A0878787C1C1C1F5F5F5FDFDFDE6E6E6
+            E4E4E4E2E2E2E7E7E7E5E5E5EAEAEAECECECE9E9E9EEEEEEEBEBEBECECECE9E9
+            E9E2E2E2E5E5E5F5F5F5FCFCFCF1F1F1F3F3F3F4F4F4F3F3F3F4F4F4F3F3F3F4
+            F4F4F4F4F4F3F3F3F5F5F5F4F4F4F4F4F4F4F4F4F1F1F1F7F7F7FCFCFCFDFDFD
+            FCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFC
+            FCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFC
+            FCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFC}
+          Spacing = 0
+          OnClick = SpeedButton1Click
+        end
+        object btnAceptarProd: TSpeedButton
+          Tag = 99
+          Left = 627
+          Top = 1
+          Width = 22
+          Height = 20
+          Hint = 'Guardar'
+          Flat = True
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFF8F8F8CFCFCFB2B2B2ADADADB0AFB0B2B2B2BBBBBBDCDCDCFBFB
+            FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F3F3979797747474949294B5
+            B1B4BEBABDB4B1B37E7C7D7A7A7ABBBBBBFBFBFBFFFFFFFFFFFFFFFFFFFFFFFF
+            EFEFEF929292949193E1D8DEEAE7E8D0DAD2C0CEC4C3C9C3C4BDC0B5ADB2B0AE
+            AFD4D4D4FCFCFCFFFFFFFFFFFFF5F5F5A1A2A1C3BDC2EAECEA93D1A33EB16123
+            AC5228B25933B05E4EAE6F82A88EBFBABDCBC7C9D7D8D7FEFEFEFFFFFFBDBDBD
+            C7C1C6DBEDE03CBD6306A63D569F6F63AC811DBF6A17CE7118C86D15BC6354B2
+            7DD4D5D4D3CFD1E8E9E8F6F6F6BFBBBEE2E9E32EBB5C00B33E7EB094E7D8E2EA
+            D9E281B6A113C48015D68B16D48804C76C63C38FF0E8ECDBD9D9E3E2E3E5DDE2
+            77CB9000AB3073AD8CF1E2ECECECECE8E8E8EBDDE277B69F08C4800CD3880BD0
+            7D07BD62B3DAC2EFE7EBEDEBECE4E7E528AF515AB176F8E6F2F0EBEE5CCA9857
+            CA9AEBE9EBF5E5EB71B89D01BB7009C47200BA5762BF88FAF1F7F6F2F5DBE4DD
+            3DB25E69C283E4F4E97FCE9F00AD4F00B15A5FC194F1E9ECF0E3E963AF8B00A9
+            5000AD4540AF68F2EEEFF9F7F9DBE2DC71C08546B7662FAB55009B34009C3A02
+            A148009F456CBB8FF6EDF3E8DFE356A07400912841A560F1ECEFFCFBFCE3E3E2
+            9AC7A476C08964B97A38A457109437008B2E008A2C00892A7DBB92FFF7FEEBE3
+            E8328E4B60A36FF5EEF3FFFFFFE7E4E6C6D4C992C69D8EC69B8BC39876B88651
+            A7662F954B1588340A82279CC7A6E5EFE6529860ACBDAEF7F3F6FFFFFFF4F3F4
+            D5D4D5BFD6C2A2CCAB9ECAA79CC8A699C6A28EC29B7FB98C6AAE7965AC7377B2
+            82A1BEA7EAE4E8FEFEFDFFFFFFFFFFFFE8E8E8D7D6D7D0DFD4B8D7BFADD2B4A7
+            CFAFA1CCAA9BC8A599C6A29BC6A4BED0C2E8E5E8FAFAFAFFFFFFFFFFFFFFFFFF
+            FFFFFFF0F0F0E9E7E9EAECEBDBEADED1E4D3CBE0CFCCE1CFD4E2D7E1E3E2EDEA
+            ECFBFAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEF7F6F7F5F2F4F5
+            F2F4F6F3F5F5F3F5F0EDEFF7F5F6FFFFFFFFFFFFFFFFFFFFFFFF}
+          OnClick = btnAceptarProdClick
+        end
+        object btnCancelarProd: TSpeedButton
+          Tag = 99
+          Left = 648
+          Top = 1
+          Width = 19
+          Height = 20
+          Hint = 'Cancelar'
+          Flat = True
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+            FFFFFFEDEDEDCDC9CAB6AEAFACA6A4ADA7A4AEA8A5ACA7A4B0A9A8C1BABCE0DD
+            DDFAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F7C4C3C0989694807F8A73
+            728A6F6F89797A8C8D8C8FB1AFAAE4E3E1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            F9F9F9C0C0BC82829146487E2C2E7C26267D26257F28287D36377D636387A8A7
+            A8E3E3E1FFFFFFFFFFFFFFFFFFFDFDFDC3C3BF6F708727277B1B1B8427279030
+            30953131972E2D9520208A191A7C45467EA1A1A4ECEBEAFFFFFFFFFFFFE1E1DD
+            85859229287F3A38938687AE55559D2828972C2B9B3130957B7BA96969A41F1E
+            85525083BDBDBAFCFCFBFFFFFFB8B8B54C4C841A1A8F7372A9ECE9D7C3C1C451
+            529E2C2B998987ABE7E3D5C5C1C537369A242384848495E9EBE5FAF9F693939B
+            2E2F872829A14140A6A3A0B4CDC7BAACA9B1938FABC2BEB7C5C1BA7371AB2D2F
+            A5242496575686D4D4CFEAEAE57D7D92252691302EAB2A27AA3D3BA99E99B3C1
+            BBB4C0BBB4BAB6B56E6DAF2928A82D2DAC2527A1413F83C2C1BEE8E8E27F7F95
+            3939A03D3CB63433B53233B0A19FC5D4D2CAD1CFC8CDCBCC6262BB2A29B03C3A
+            B63D3CB14F4D8EBDBDBAF5F6F292929F5352A95959C75B5CC5ADADD2EEECE4DF
+            DDDDCFCED7ECE9E4DCDAE0807FC95D5CC95D5EC1666696CBCAC6FFFFFFB1B2B2
+            615FA15756C69998CFFFFFF0EEEDE89897CF706FCAC5C6DAFFFFF2DCDBE47170
+            CD5D5DBB7B7C96E2E2DEFFFFFFDCDCD780819B5A5ABB8585D0CCCDDE9C9CD267
+            67D26968D67877CFC1C3DBB4B4D77070CE6463A4A9A7A9FAFAF9FFFFFFFBFBFA
+            BBBDB96F709B6565C47173D27373DA7778DE7979DE7777DE7676D87374D36566
+            AE898895E3E3E0FFFFFFFFFFFFFFFFFFF4F4F3B6B6B478789A6969B87574D17C
+            7CD87D7DDB7B7CD77272C7676AA4898B97D8D7D3FFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFF9F9F7CDCDC99A9AA47F7FA07978A57978A77978A286869AADADAEE5E5
+            E2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F7F4DAD9D2C3
+            C1BABBBAB4CAC9C3E8E8E3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+          OnClick = btnCancelarProdClick
+        end
+        object edProducto: TDBEdit
+          Tag = 99
+          Left = 32
+          Top = 1
+          Width = 317
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 12581119
+          DataField = 'producto'
+          DataSource = DS_DetalleFactura
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object edCantidad: TDBEdit
+          Tag = 99
+          Left = 354
+          Top = 1
+          Width = 56
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 12581119
+          DataField = 'CANTIDAD'
+          DataSource = DS_DetalleFactura
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+          OnExit = edCantidadExit
+        end
+        object edDesc: TDBEdit
+          Tag = 99
+          Left = 418
+          Top = 1
+          Width = 63
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 12581119
+          DataField = 'PORC_DESCUENTO'
+          DataSource = DS_DetalleFactura
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+          OnExit = edDescExit
+        end
+        object edImporteFinal: TDBEdit
+          Tag = 99
+          Left = 520
+          Top = 1
+          Width = 105
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 12581119
+          DataField = 'IMPORTE_FINAL'
+          DataSource = DS_DetalleFactura
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 3
+          OnExit = edImporteFinalExit
+          OnKeyDown = edImporteFinalKeyDown
+        end
+      end
+    end
+    object PanelProductosYFPago: TPanel
+      Left = 1
+      Top = 187
+      Width = 916
+      Height = 397
+      Align = alClient
+      Caption = 'PanelProductosYFPago'
+      TabOrder = 2
+      object Label11: TLabel
+        Left = 1
+        Top = 1
+        Width = 914
+        Height = 14
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Listado de Productos a Cobrar'
         Color = 12648448
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
@@ -3136,20 +3383,11 @@ object FCajero: TFCajero
         Transparent = False
         Layout = tlCenter
       end
-    end
-    object PanelProductosYFPago: TPanel
-      Left = 1
-      Top = 203
-      Width = 916
-      Height = 381
-      Align = alClient
-      Caption = 'PanelProductosYFPago'
-      TabOrder = 2
       object PanelListadoProducto: TPanel
         Left = 1
-        Top = 1
+        Top = 15
         Width = 914
-        Height = 219
+        Height = 221
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3164,7 +3402,7 @@ object FCajero: TFCajero
           Left = 1
           Top = 1
           Width = 912
-          Height = 163
+          Height = 165
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -3238,7 +3476,7 @@ object FCajero: TFCajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 164
+          Top = 166
           Width = 912
           Height = 54
           Align = alBottom
@@ -3308,7 +3546,7 @@ object FCajero: TFCajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 220
+        Top = 236
         Width = 914
         Height = 89
         Align = alBottom
@@ -3407,7 +3645,7 @@ object FCajero: TFCajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 309
+        Top = 325
         Width = 914
         Height = 71
         Align = alBottom
@@ -3462,251 +3700,13 @@ object FCajero: TFCajero
         end
       end
     end
-    object PanelDetalleProducto: TPanel
-      Tag = 99
-      Left = 1
-      Top = 164
-      Width = 916
-      Height = 39
-      Align = alTop
-      BevelOuter = bvNone
-      Color = 8454143
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 3
-      object Label5: TLabel
-        Left = 482
-        Top = 4
-        Width = 14
-        Height = 13
-        Caption = '%'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label11: TLabel
-        Left = 0
-        Top = 25
-        Width = 916
-        Height = 14
-        Align = alBottom
-        Alignment = taCenter
-        Caption = 'Listado de Productos a Cobrar'
-        Color = 12648448
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
-        Layout = tlCenter
-      end
-      object SpeedButton1: TSpeedButton
-        Tag = 99
-        Left = 3
-        Top = 1
-        Width = 27
-        Height = 19
-        Hint = 'F6 Leer C'#243'digo Producto'
-        Flat = True
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          18000000000000030000C40E0000C40E00000000000000000000FDFDFDFDFDFD
-          FDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFEFEFEFFFFFFFFFFFFFFFFFFFDFDFDFDFD
-          FDFDFDFDFFFFFFFFFFFFFBFBFBFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFB
-          FBFBE6E1D8E0DACFEEEDE9FFFFFFFFFFFFFFFFFFF4F4F4D9D7D7FCFCFCDEDEDE
-          D3D3D3D4D4D4D4D4D4D4D4D4D5D6D6C9BFABC3B083DFD5BDE3DDD6D7D2CEB1AD
-          AC88847F7D7672938D8BFCFCFCDEDEDEE8E8E8E5E5E5E1E1E0DEDFE0D6D3D0D7
-          CDB9E4D9B7EEE8CEF2EEDEC8BDB0A29D9B9E9C9AB3B2B1E9E9E9FCFCFCEAEAEA
-          D9D9D9DDDDDDE1E1E1D7D8D9D4D1CEEEE8E1FAF9EFE7E0C3D2C498BDB29DB9BC
-          BEB9BABAB8B8B8EDEDEDFFFFFFE1E1E1A7A7A7C3C3C3D0D0D0C2C2C2C3C2C2CF
-          C9C2EFECE6E8E0D0BCAC8FAAA79DA7A8AA9999999D9D9DEDEDEDFEFEFEE6E6E6
-          A2A2A28B8B8BAAAAAA8C8C8C9B9B9B979696918D88B4AEAB8382808C8D8D8787
-          87707070A6A6A6EEEEEEFFFFFFE8E8E8A7A7A77D7D7D9A9A9A7979798C8C8C8E
-          8E8E7373749596977070718686867D7D7D666666ABABABF1F1F1FEFEFEE4E4E4
-          AAAAAA919191A7A7A7828282939393969696808080A1A1A17A7A7A8E8E8E8787
-          876E6E6EB0B0B0F2F2F2FFFFFFE5E5E5AAAAAA959595AFAFAF8E8E8E9D9D9D9E
-          9E9E858585A5A5A57E7E7E919191898989737373B6B6B6F4F4F4FFFFFFE4E4E4
-          A7A7A7939393AEAEAE8F8F8F9E9E9E9E9E9E868686A7A7A78282829595958B8B
-          8B727272B8B8B8F4F4F4FEFEFEE2E2E2ADADAD9D9D9DB6B6B69E9E9EACACACAD
-          ADAD9A9A9AB7B7B7999999ABABABA0A0A0878787C1C1C1F5F5F5FDFDFDE6E6E6
-          E4E4E4E2E2E2E7E7E7E5E5E5EAEAEAECECECE9E9E9EEEEEEEBEBEBECECECE9E9
-          E9E2E2E2E5E5E5F5F5F5FCFCFCF1F1F1F3F3F3F4F4F4F3F3F3F4F4F4F3F3F3F4
-          F4F4F4F4F4F3F3F3F5F5F5F4F4F4F4F4F4F4F4F4F1F1F1F7F7F7FCFCFCFDFDFD
-          FCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFC
-          FCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFC
-          FCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFC}
-        Spacing = 0
-        OnClick = SpeedButton1Click
-      end
-      object btnAceptarProd: TSpeedButton
-        Tag = 99
-        Left = 627
-        Top = 1
-        Width = 22
-        Height = 20
-        Hint = 'Guardar'
-        Flat = True
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFF8F8F8CFCFCFB2B2B2ADADADB0AFB0B2B2B2BBBBBBDCDCDCFBFB
-          FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F3F3979797747474949294B5
-          B1B4BEBABDB4B1B37E7C7D7A7A7ABBBBBBFBFBFBFFFFFFFFFFFFFFFFFFFFFFFF
-          EFEFEF929292949193E1D8DEEAE7E8D0DAD2C0CEC4C3C9C3C4BDC0B5ADB2B0AE
-          AFD4D4D4FCFCFCFFFFFFFFFFFFF5F5F5A1A2A1C3BDC2EAECEA93D1A33EB16123
-          AC5228B25933B05E4EAE6F82A88EBFBABDCBC7C9D7D8D7FEFEFEFFFFFFBDBDBD
-          C7C1C6DBEDE03CBD6306A63D569F6F63AC811DBF6A17CE7118C86D15BC6354B2
-          7DD4D5D4D3CFD1E8E9E8F6F6F6BFBBBEE2E9E32EBB5C00B33E7EB094E7D8E2EA
-          D9E281B6A113C48015D68B16D48804C76C63C38FF0E8ECDBD9D9E3E2E3E5DDE2
-          77CB9000AB3073AD8CF1E2ECECECECE8E8E8EBDDE277B69F08C4800CD3880BD0
-          7D07BD62B3DAC2EFE7EBEDEBECE4E7E528AF515AB176F8E6F2F0EBEE5CCA9857
-          CA9AEBE9EBF5E5EB71B89D01BB7009C47200BA5762BF88FAF1F7F6F2F5DBE4DD
-          3DB25E69C283E4F4E97FCE9F00AD4F00B15A5FC194F1E9ECF0E3E963AF8B00A9
-          5000AD4540AF68F2EEEFF9F7F9DBE2DC71C08546B7662FAB55009B34009C3A02
-          A148009F456CBB8FF6EDF3E8DFE356A07400912841A560F1ECEFFCFBFCE3E3E2
-          9AC7A476C08964B97A38A457109437008B2E008A2C00892A7DBB92FFF7FEEBE3
-          E8328E4B60A36FF5EEF3FFFFFFE7E4E6C6D4C992C69D8EC69B8BC39876B88651
-          A7662F954B1588340A82279CC7A6E5EFE6529860ACBDAEF7F3F6FFFFFFF4F3F4
-          D5D4D5BFD6C2A2CCAB9ECAA79CC8A699C6A28EC29B7FB98C6AAE7965AC7377B2
-          82A1BEA7EAE4E8FEFEFDFFFFFFFFFFFFE8E8E8D7D6D7D0DFD4B8D7BFADD2B4A7
-          CFAFA1CCAA9BC8A599C6A29BC6A4BED0C2E8E5E8FAFAFAFFFFFFFFFFFFFFFFFF
-          FFFFFFF0F0F0E9E7E9EAECEBDBEADED1E4D3CBE0CFCCE1CFD4E2D7E1E3E2EDEA
-          ECFBFAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEF7F6F7F5F2F4F5
-          F2F4F6F3F5F5F3F5F0EDEFF7F5F6FFFFFFFFFFFFFFFFFFFFFFFF}
-        OnClick = btnAceptarProdClick
-      end
-      object btnCancelarProd: TSpeedButton
-        Tag = 99
-        Left = 648
-        Top = 1
-        Width = 19
-        Height = 20
-        Hint = 'Cancelar'
-        Flat = True
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
-          FFFFFFEDEDEDCDC9CAB6AEAFACA6A4ADA7A4AEA8A5ACA7A4B0A9A8C1BABCE0DD
-          DDFAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F7C4C3C0989694807F8A73
-          728A6F6F89797A8C8D8C8FB1AFAAE4E3E1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          F9F9F9C0C0BC82829146487E2C2E7C26267D26257F28287D36377D636387A8A7
-          A8E3E3E1FFFFFFFFFFFFFFFFFFFDFDFDC3C3BF6F708727277B1B1B8427279030
-          30953131972E2D9520208A191A7C45467EA1A1A4ECEBEAFFFFFFFFFFFFE1E1DD
-          85859229287F3A38938687AE55559D2828972C2B9B3130957B7BA96969A41F1E
-          85525083BDBDBAFCFCFBFFFFFFB8B8B54C4C841A1A8F7372A9ECE9D7C3C1C451
-          529E2C2B998987ABE7E3D5C5C1C537369A242384848495E9EBE5FAF9F693939B
-          2E2F872829A14140A6A3A0B4CDC7BAACA9B1938FABC2BEB7C5C1BA7371AB2D2F
-          A5242496575686D4D4CFEAEAE57D7D92252691302EAB2A27AA3D3BA99E99B3C1
-          BBB4C0BBB4BAB6B56E6DAF2928A82D2DAC2527A1413F83C2C1BEE8E8E27F7F95
-          3939A03D3CB63433B53233B0A19FC5D4D2CAD1CFC8CDCBCC6262BB2A29B03C3A
-          B63D3CB14F4D8EBDBDBAF5F6F292929F5352A95959C75B5CC5ADADD2EEECE4DF
-          DDDDCFCED7ECE9E4DCDAE0807FC95D5CC95D5EC1666696CBCAC6FFFFFFB1B2B2
-          615FA15756C69998CFFFFFF0EEEDE89897CF706FCAC5C6DAFFFFF2DCDBE47170
-          CD5D5DBB7B7C96E2E2DEFFFFFFDCDCD780819B5A5ABB8585D0CCCDDE9C9CD267
-          67D26968D67877CFC1C3DBB4B4D77070CE6463A4A9A7A9FAFAF9FFFFFFFBFBFA
-          BBBDB96F709B6565C47173D27373DA7778DE7979DE7777DE7676D87374D36566
-          AE898895E3E3E0FFFFFFFFFFFFFFFFFFF4F4F3B6B6B478789A6969B87574D17C
-          7CD87D7DDB7B7CD77272C7676AA4898B97D8D7D3FFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFF9F9F7CDCDC99A9AA47F7FA07978A57978A77978A286869AADADAEE5E5
-          E2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F7F4DAD9D2C3
-          C1BABBBAB4CAC9C3E8E8E3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        OnClick = btnCancelarProdClick
-      end
-      object edProducto: TDBEdit
-        Tag = 99
-        Left = 32
-        Top = 1
-        Width = 317
-        Height = 21
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        Color = 12581119
-        DataField = 'producto'
-        DataSource = DS_DetalleFactura
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 0
-      end
-      object edCantidad: TDBEdit
-        Tag = 99
-        Left = 354
-        Top = 1
-        Width = 56
-        Height = 21
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        Color = 12581119
-        DataField = 'CANTIDAD'
-        DataSource = DS_DetalleFactura
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-        OnExit = edCantidadExit
-      end
-      object edDesc: TDBEdit
-        Tag = 99
-        Left = 418
-        Top = 1
-        Width = 63
-        Height = 21
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        Color = 12581119
-        DataField = 'PORC_DESCUENTO'
-        DataSource = DS_DetalleFactura
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 2
-        OnExit = edDescExit
-      end
-      object edImporteFinal: TDBEdit
-        Tag = 99
-        Left = 520
-        Top = 1
-        Width = 105
-        Height = 21
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        Color = 12581119
-        DataField = 'IMPORTE_FINAL'
-        DataSource = DS_DetalleFactura
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 3
-        OnExit = edImporteFinalExit
-        OnKeyDown = edImporteFinalKeyDown
-      end
-    end
     object PanelDeralles: TPanel
       Left = 1
       Top = 31
       Width = 916
       Height = 115
       Align = alTop
-      TabOrder = 4
+      TabOrder = 3
       object PanelCabeceraFactura: TPanel
         Left = 526
         Top = 1
