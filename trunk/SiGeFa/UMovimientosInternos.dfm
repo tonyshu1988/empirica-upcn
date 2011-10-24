@@ -2260,6 +2260,7 @@ object FMovimientosInternos: TFMovimientosInternos
       'from comprobante c'
       'where ((c.id_tipo_cpb = 16) or (c.id_tipo_cpb = 17))'
       '  and cast(c.fecha as date)= :fecha'
+      '  and ((c.id_proveedor is null) and (c.id_cliente is null))'
       'order by c.fecha desc')
     Params = <
       item

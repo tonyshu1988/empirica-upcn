@@ -3265,6 +3265,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         '  and ((c.fecha_anulado is null) or (c.fecha_anulado > :fecha_ha' +
         'sta))'
       '  and ((c.id_sucursal = :id_sucursal) or (:id_sucursal = -1))'
+      '  and ((c.id_proveedor is null) and (c.id_cliente is null))'
       'order by c.fecha')
     Params = <
       item
@@ -3361,6 +3362,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         '  and ((c.fecha_anulado is null) or (c.fecha_anulado > :fecha_ha' +
         'sta))'
       '  and ((c.id_sucursal = :id_sucursal) or (:id_sucursal = -1))'
+      '  and ((c.id_proveedor is null) and (c.id_cliente is null))'
       'group by c.id_tipo_movimiento, m.nombre_movimiento'
       'order by c.id_tipo_movimiento, m.nombre_movimiento')
     Params = <
@@ -3429,6 +3431,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         '  and ((c.fecha_anulado is null) or (c.fecha_anulado > :fecha_ha' +
         'sta))'
       '  and ((c.id_sucursal = :id_sucursal) or (:id_sucursal = -1))'
+      '  and ((c.id_proveedor is null) and (c.id_cliente is null))'
       'group by c.id_tipo_movimiento, m.nombre_movimiento'
       'order by c.id_tipo_movimiento, m.nombre_movimiento')
     Params = <
