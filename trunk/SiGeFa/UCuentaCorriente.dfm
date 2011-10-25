@@ -1,6 +1,6 @@
 object FCuentaCorriente: TFCuentaCorriente
-  Left = 274
-  Top = 156
+  Left = 287
+  Top = 164
   Width = 950
   Height = 597
   Caption = 'Cta. Cte. Cliente'
@@ -3946,6 +3946,8 @@ object FCuentaCorriente: TFCuentaCorriente
       Top = 59
       Width = 130
       Height = 21
+      BiDiMode = bdLeftToRight
+      ParentBiDiMode = False
       TabOrder = 1
       Text = '0'
     end
@@ -3972,7 +3974,7 @@ object FCuentaCorriente: TFCuentaCorriente
     Width = 173
     Height = 105
     BevelInner = bvLowered
-    TabOrder = 6
+    TabOrder = 5
     Visible = False
     object Label18: TLabel
       Left = 2
@@ -5293,5 +5295,36 @@ object FCuentaCorriente: TFCuentaCorriente
         Name = 'fecha'
         ParamType = ptUnknown
       end>
+  end
+  object ZQ_SaldoIni: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select c.fecha, c.fecha_cobrada, c.importe_total'
+      'from comprobante c'
+      'where c.id_cliente = :id_cliente'
+      '  and c.id_tipo_cpb = 17')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    Left = 691
+    Top = 238
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    object ZQ_SaldoIniFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_SaldoIniFECHA_COBRADA: TDateField
+      FieldName = 'FECHA_COBRADA'
+    end
+    object ZQ_SaldoIniIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+    end
   end
 end

@@ -2254,9 +2254,9 @@ object FABMEmpresas: TFABMEmpresas
     end
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 291
+      Top = 366
       Width = 1006
-      Height = 281
+      Height = 206
       ActivePage = TabEmpresa
       Align = alBottom
       Font.Charset = ANSI_CHARSET
@@ -2269,17 +2269,17 @@ object FABMEmpresas: TFABMEmpresas
       object TabEmpresa: TTabSheet
         Caption = 'Empresa'
         object Label10: TLabel
-          Left = 33
-          Top = 129
+          Left = 22
+          Top = 113
           Width = 89
           Height = 13
           Caption = 'Observaciones:'
         end
         object DBMemoEmpresa: TDBMemo
-          Left = 32
-          Top = 144
-          Width = 825
-          Height = 107
+          Left = 112
+          Top = 113
+          Width = 741
+          Height = 63
           Hint = 'Seleccione un Telefono/Mail y haga click derecho'
           DataField = 'DESCRIPCION'
           DataSource = DS_Empresa
@@ -2293,79 +2293,79 @@ object FABMEmpresas: TFABMEmpresas
           TabOrder = 1
         end
         object PanelEdicion: TPanel
-          Left = 0
-          Top = 4
-          Width = 877
-          Height = 125
+          Left = 2
+          Top = 2
+          Width = 856
+          Height = 109
           BevelOuter = bvNone
           Enabled = False
           TabOrder = 0
           object Label5: TLabel
             Left = 5
-            Top = 12
+            Top = 5
             Width = 104
             Height = 13
             Caption = 'Nombre Empresa:'
           end
           object Label2: TLabel
             Left = 52
-            Top = 96
+            Top = 89
             Width = 57
             Height = 13
             Caption = 'Provincia:'
           end
           object Label11: TLabel
-            Left = 581
-            Top = 12
+            Left = 580
+            Top = 5
             Width = 55
             Height = 13
             Caption = 'Cuit/Cuil:'
           end
           object Label1: TLabel
-            Left = 582
-            Top = 68
+            Left = 581
+            Top = 61
             Width = 54
             Height = 13
             Caption = 'Tipo IVA:'
           end
           object Label3: TLabel
-            Left = 553
-            Top = 40
+            Left = 552
+            Top = 33
             Width = 83
             Height = 13
             Caption = 'Tipo Empresa:'
           end
           object Label4: TLabel
             Left = 51
-            Top = 68
+            Top = 61
             Width = 58
             Height = 13
             Caption = 'Direcci'#243'n:'
           end
           object Label6: TLabel
-            Left = 331
-            Top = 96
+            Left = 335
+            Top = 89
             Width = 58
             Height = 13
             Caption = 'Localidad:'
           end
           object Label7: TLabel
             Left = 690
-            Top = 96
+            Top = 89
             Width = 66
             Height = 13
             Caption = 'Cod.Postal:'
           end
           object Label9: TLabel
-            Left = 53
-            Top = 41
+            Left = 54
+            Top = 34
             Width = 55
             Height = 13
             Caption = 'Pag.Web:'
           end
           object dbNombre: TDBEdit
             Left = 110
-            Top = 8
+            Top = 1
             Width = 433
             Height = 22
             CharCase = ecUpperCase
@@ -2381,7 +2381,7 @@ object FABMEmpresas: TFABMEmpresas
           end
           object DBCBoxProvincia: TDBLookupComboBox
             Left = 110
-            Top = 92
+            Top = 85
             Width = 215
             Height = 22
             DataField = 'ID_PROVINCIA'
@@ -2398,9 +2398,9 @@ object FABMEmpresas: TFABMEmpresas
             TabOrder = 6
           end
           object DBEditCuitCuil: TDBEdit
-            Left = 640
-            Top = 8
-            Width = 212
+            Left = 636
+            Top = 1
+            Width = 215
             Height = 22
             CharCase = ecUpperCase
             DataField = 'CUIT_CUIL'
@@ -2414,8 +2414,8 @@ object FABMEmpresas: TFABMEmpresas
             TabOrder = 1
           end
           object DBCBoxTipoIva: TDBLookupComboBox
-            Left = 640
-            Top = 64
+            Left = 636
+            Top = 57
             Width = 215
             Height = 22
             DataField = 'ID_TIPO_IVA'
@@ -2432,8 +2432,8 @@ object FABMEmpresas: TFABMEmpresas
             TabOrder = 5
           end
           object DBCBoxTipoEmpresa: TDBLookupComboBox
-            Left = 640
-            Top = 36
+            Left = 636
+            Top = 29
             Width = 215
             Height = 22
             DataField = 'ID_TIPO_EMPRESA'
@@ -2451,7 +2451,7 @@ object FABMEmpresas: TFABMEmpresas
           end
           object DBEditDireccion: TDBEdit
             Left = 110
-            Top = 64
+            Top = 57
             Width = 432
             Height = 22
             CharCase = ecUpperCase
@@ -2467,7 +2467,7 @@ object FABMEmpresas: TFABMEmpresas
           end
           object DBEditLocalidad: TDBEdit
             Left = 395
-            Top = 92
+            Top = 85
             Width = 288
             Height = 22
             CharCase = ecUpperCase
@@ -2483,8 +2483,8 @@ object FABMEmpresas: TFABMEmpresas
           end
           object DBEditCodPostal: TDBEdit
             Left = 762
-            Top = 92
-            Width = 95
+            Top = 85
+            Width = 89
             Height = 22
             CharCase = ecUpperCase
             DataField = 'CODIGO_POSTAL'
@@ -2499,7 +2499,7 @@ object FABMEmpresas: TFABMEmpresas
           end
           object DBEditWeb: TDBEdit
             Left = 110
-            Top = 37
+            Top = 30
             Width = 432
             Height = 22
             DataField = 'PAGINA_WEB'
@@ -2512,15 +2512,16 @@ object FABMEmpresas: TFABMEmpresas
             ParentFont = False
             TabOrder = 2
           end
-        end
-        object btIrWeb: TButton
-          Left = 8
-          Top = 43
-          Width = 40
-          Height = 19
-          Caption = 'Ir'
-          TabOrder = 2
-          OnClick = btIrWebClick
+          object btIrWeb: TButton
+            Left = 7
+            Top = 30
+            Width = 40
+            Height = 19
+            Caption = 'Ir'
+            TabOrder = 9
+            TabStop = False
+            OnClick = btIrWebClick
+          end
         end
       end
       object TabTelMail: TTabSheet
@@ -2530,7 +2531,7 @@ object FABMEmpresas: TFABMEmpresas
           Left = 0
           Top = 0
           Width = 998
-          Height = 253
+          Height = 178
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
           Color = 14606012
@@ -2582,14 +2583,14 @@ object FABMEmpresas: TFABMEmpresas
           Left = 536
           Top = 0
           Width = 8
-          Height = 134
+          Height = 104
           Align = alRight
         end
         object DBGridContactos: TDBGrid
           Left = 0
           Top = 0
           Width = 536
-          Height = 134
+          Height = 104
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
           Color = 14606012
@@ -2646,7 +2647,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object Panel1: TPanel
           Left = 0
-          Top = 134
+          Top = 104
           Width = 998
           Height = 19
           Align = alBottom
@@ -2664,9 +2665,9 @@ object FABMEmpresas: TFABMEmpresas
         end
         object DBMemoContactos: TDBMemo
           Left = 0
-          Top = 153
+          Top = 123
           Width = 998
-          Height = 100
+          Height = 55
           Align = alBottom
           Color = clWhite
           DataField = 'descripcion'
@@ -2684,7 +2685,7 @@ object FABMEmpresas: TFABMEmpresas
           Left = 544
           Top = 0
           Width = 454
-          Height = 134
+          Height = 104
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alRight
           Color = 14606012
@@ -2709,6 +2710,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'DESCRIPCION'
+              Title.Alignment = taCenter
               Title.Caption = 'Descripcion'
               Width = 150
               Visible = True
@@ -2716,6 +2718,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'TELEFONO'
+              Title.Alignment = taCenter
               Title.Caption = 'Tel'#233'fono'
               Width = 150
               Visible = True
@@ -2723,6 +2726,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'MAIL'
+              Title.Alignment = taCenter
               Title.Caption = 'Mail'
               Width = 150
               Visible = True
@@ -2736,14 +2740,14 @@ object FABMEmpresas: TFABMEmpresas
           Left = 528
           Top = 0
           Width = 8
-          Height = 134
+          Height = 104
           Align = alRight
         end
         object DBGridViajantes: TDBGrid
           Left = 0
           Top = 0
           Width = 528
-          Height = 134
+          Height = 104
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
           Color = 14606012
@@ -2800,9 +2804,9 @@ object FABMEmpresas: TFABMEmpresas
         end
         object DBMemoViajantes: TDBMemo
           Left = 0
-          Top = 153
+          Top = 123
           Width = 998
-          Height = 100
+          Height = 55
           Align = alBottom
           Color = clWhite
           DataField = 'descripcion'
@@ -2812,7 +2816,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object Panel2: TPanel
           Left = 0
-          Top = 134
+          Top = 104
           Width = 998
           Height = 19
           Align = alBottom
@@ -2832,7 +2836,7 @@ object FABMEmpresas: TFABMEmpresas
           Left = 536
           Top = 0
           Width = 462
-          Height = 134
+          Height = 104
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alRight
           Color = 14606012
@@ -2857,6 +2861,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'DESCRIPCION'
+              Title.Alignment = taCenter
               Title.Caption = 'Descripcion'
               Width = 150
               Visible = True
@@ -2864,6 +2869,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'TELEFONO'
+              Title.Alignment = taCenter
               Title.Caption = 'Tel'#233'fono'
               Width = 150
               Visible = True
@@ -2871,6 +2877,7 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = 'MAIL'
+              Title.Alignment = taCenter
               Title.Caption = 'Mail'
               Width = 150
               Visible = True
@@ -2884,7 +2891,7 @@ object FABMEmpresas: TFABMEmpresas
           Left = 0
           Top = 0
           Width = 998
-          Height = 134
+          Height = 104
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
           Color = 14606012
@@ -2909,22 +2916,24 @@ object FABMEmpresas: TFABMEmpresas
             item
               Expanded = False
               FieldName = '_codMarca'
+              Title.Alignment = taCenter
               Title.Caption = 'C'#243'digo'
-              Width = 101
+              Width = 146
               Visible = True
             end
             item
               Expanded = False
               FieldName = '_marca'
+              Title.Alignment = taCenter
               Title.Caption = 'Nombre'
               Visible = True
             end>
         end
         object DBMemo1: TDBMemo
           Left = 0
-          Top = 153
+          Top = 123
           Width = 998
-          Height = 100
+          Height = 55
           Align = alBottom
           Color = clWhite
           DataField = 'DESCRIPCION'
@@ -2940,7 +2949,7 @@ object FABMEmpresas: TFABMEmpresas
         end
         object Panel3: TPanel
           Left = 0
-          Top = 134
+          Top = 104
           Width = 998
           Height = 19
           Align = alBottom
@@ -2958,14 +2967,14 @@ object FABMEmpresas: TFABMEmpresas
         end
       end
       object TabDescripcion: TTabSheet
-        BorderWidth = 10
+        BorderWidth = 3
         Caption = 'Detalle'
         ImageIndex = 3
         object DBMemoDescripcion: TDBMemo
           Left = 0
           Top = 0
-          Width = 978
-          Height = 233
+          Width = 992
+          Height = 172
           Align = alClient
           DataField = 'DESCRIPCION_PRIVADA'
           DataSource = DS_Empresa
@@ -3141,7 +3150,7 @@ object FABMEmpresas: TFABMEmpresas
       Left = 1
       Top = 20
       Width = 1006
-      Height = 271
+      Height = 346
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012

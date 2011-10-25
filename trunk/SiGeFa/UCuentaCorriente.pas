@@ -283,6 +283,10 @@ type
     EditSaldiIni_Importe: TEdit;
     btnSaldoInicial_Aceptar: TBitBtn;
     btnSaldoInicial_Cancelar: TBitBtn;
+    ZQ_SaldoIni: TZQuery;
+    ZQ_SaldoIniFECHA: TDateTimeField;
+    ZQ_SaldoIniFECHA_COBRADA: TDateField;
+    ZQ_SaldoIniIMPORTE_TOTAL: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -675,6 +679,10 @@ end;
 
 procedure TFCuentaCorriente.btnSaldoInicialClick(Sender: TObject);
 begin
+  ZQ_SaldoIni.Close;
+  ZQ_SaldoIni.ParamByName('id_cliente').AsInteger:= ZQ_ClienteID_PERSONA.AsInteger;
+  ZQ_SaldoIni.Open;
+
   GrupoEditando.Enabled:= false;
   PanelCliente.Enabled:= false;
   dm.centrarPanel(FCuentaCorriente, PanelSaldoInicial);
@@ -682,7 +690,17 @@ begin
   PanelSaldoInicial.BringToFront;
   PanelSaldoInicial.Visible:= true;
 
-  DateTimePicker_FechaSaldo.DateTime:= dm.EKModelo.FechayHora;
+  if ZQ_SaldoIni.IsEmpty then
+  begin
+    DateTimePicker_FechaSaldo.DateTime:= dm.EKModelo.FechayHora;
+    EditSaldiIni_Importe.Text:= '0';
+  end
+  else
+  begin
+    DateTimePicker_FechaSaldo.DateTime:= ZQ_SaldoIniFECHA.AsDateTime;
+    EditSaldiIni_Importe.Text:=  ZQ_SaldoIniIMPORTE_TOTAL.AsString;
+  end;
+
   DateTimePicker_FechaSaldo.SetFocus;
 end;
 
@@ -698,6 +716,7 @@ end;
 procedure TFCuentaCorriente.btnSaldoInicial_AceptarClick(Sender: TObject);
 var
   saldo_ini: Double;
+  recNo: integer;  
 begin
   try
     saldo_ini:= StrToFloat(EditSaldiIni_Importe.Text);
@@ -719,7 +738,12 @@ begin
     PanelSaldoInicial.Visible:= false;
     PanelCliente.Enabled:= true;
     GrupoEditando.Enabled:= true;
-    ZQ_CtaCte_Cliente.Refresh;
+
+    recno:= ZQ_CtaCte_Gral.RecNo;
+    ZQ_CtaCte_Gral.Refresh;
+    ZQ_CtaCte_Gral.RecNo:= recNo;
+
+    AplicarFiltro(BtnFiltro_Todos);
   except
     begin
       Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
