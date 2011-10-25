@@ -3766,6 +3766,82 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
       end
     end
   end
+  object PanelSaldoInicial: TPanel
+    Left = 424
+    Top = 232
+    Width = 233
+    Height = 121
+    BevelInner = bvLowered
+    TabOrder = 7
+    Visible = False
+    object lblTituloVentanaFpago: TLabel
+      Left = 2
+      Top = 2
+      Width = 229
+      Height = 23
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'SALDO INICIAL'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+    end
+    object Label14: TLabel
+      Left = 34
+      Top = 35
+      Width = 38
+      Height = 13
+      Caption = 'Fecha:'
+    end
+    object Label29: TLabel
+      Left = 21
+      Top = 64
+      Width = 51
+      Height = 13
+      Caption = 'Importe:'
+    end
+    object DateTimePicker_FechaSaldo: TDateTimePicker
+      Left = 75
+      Top = 31
+      Width = 130
+      Height = 21
+      Date = 40821.813995381940000000
+      Time = 40821.813995381940000000
+      TabOrder = 0
+    end
+    object EditSaldiIni_Importe: TEdit
+      Left = 75
+      Top = 59
+      Width = 130
+      Height = 21
+      TabOrder = 1
+      Text = '0'
+    end
+    object btnSaldoInicial_Aceptar: TBitBtn
+      Left = 8
+      Top = 90
+      Width = 41
+      Height = 25
+      TabOrder = 2
+      OnClick = btnSaldoInicial_AceptarClick
+    end
+    object btnSaldoInicial_Cancelar: TBitBtn
+      Left = 185
+      Top = 90
+      Width = 40
+      Height = 25
+      TabOrder = 3
+      OnClick = btnSaldoInicial_CancelarClick
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
@@ -3877,6 +3953,11 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
           item
             BeginGroup = True
             Item = btnVerCtaCte
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnSaldoInicial
             Visible = True
           end
           item
@@ -4260,6 +4341,15 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
       Visible = ivAlways
       ImageIndex = 77
       OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
+    object btnSaldoInicial: TdxBarLargeButton
+      Caption = 'Saldo Inicial'
+      Category = 0
+      Hint = 'Agregar/Modificar Saldo Inicial '
+      Visible = ivAlways
+      ImageIndex = 33
+      OnClick = btnSaldoInicialClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -4932,5 +5022,97 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
     ShowModal = False
     Left = 384
     Top = 208
+  end
+  object ZQ_Insert_SaldoIni: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'execute procedure insertar_saldo_inicia_cta_cte(:id_cliente, :id' +
+        '_proveedor, :id_sucursal, :saldo_inicial, :fecha)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_proveedor'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'saldo_inicial'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fecha'
+        ParamType = ptUnknown
+      end>
+    Left = 611
+    Top = 238
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_proveedor'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'saldo_inicial'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fecha'
+        ParamType = ptUnknown
+      end>
+  end
+  object ZQ_SaldoIni: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select c.fecha, c.fecha_cobrada, c.importe_total'
+      'from comprobante c'
+      'where c.id_proveedor = :id_proveedor'
+      '  and c.id_tipo_cpb = 16')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_proveedor'
+        ParamType = ptUnknown
+      end>
+    Left = 691
+    Top = 238
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_proveedor'
+        ParamType = ptUnknown
+      end>
+    object ZQ_SaldoIniFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_SaldoIniFECHA_COBRADA: TDateField
+      FieldName = 'FECHA_COBRADA'
+    end
+    object ZQ_SaldoIniIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+    end
   end
 end
