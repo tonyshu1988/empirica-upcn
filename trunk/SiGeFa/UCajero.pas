@@ -2305,7 +2305,7 @@ begin
   dm.EKModelo.abrir(ZQ_DetalleProd);
   dm.EKModelo.abrir(ZQ_Cuentas);
   Cliente:=-1;
-  //IdVendedor:=-1;
+  IdVendedor:=-1;
   descCliente:=0;
   ClienteIVA:=0;
   IDClienteIVA:=0;

@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 524
-  Top = 283
+  Left = 249
+  Top = 133
   Width = 1012
   Height = 581
   Caption = 'Estadisticas Ventas'
@@ -15,6 +15,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
   Position = poDefault
   Scaled = False
   Visible = True
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -1380,7 +1381,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 102
+            Width = 980
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1394,7 +1395,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 120
+            Width = 980
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1408,7 +1409,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 126
+            Width = 980
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -1764,7 +1765,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     Params = <>
-    IndexFieldNames = 'FECHA Asc'
     Left = 66
     Top = 144
     object ZQ_ComprobanteCODIGO: TStringField
