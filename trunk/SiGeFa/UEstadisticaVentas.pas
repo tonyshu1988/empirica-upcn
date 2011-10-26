@@ -175,35 +175,30 @@ type
     Series1: TFastLineSeries;
     TabVentasDiarias: TTabSheet;
     Panel1: TPanel;
-    QuickRep1: TQuickRep;
+    RepVentasDiarias: TQuickRep;
     QRBand4: TQRBand;
     QRDBImage1: TQRDBImage;
     QRLabel1: TQRLabel;
-    QRLabel2: TQRLabel;
-    QRLabel3: TQRLabel;
+    RepVentasDiarias_Subtitulo: TQRLabel;
+    RepVentasDiarias_Titulo: TQRLabel;
     QRBand5: TQRBand;
     QRDBText1: TQRDBText;
-    QRDBText2: TQRDBText;
     QRDBText3: TQRDBText;
     QRDBText4: TQRDBText;
     QRDBText5: TQRDBText;
-    QRDBText6: TQRDBText;
     QRBand7: TQRBand;
-    QRLabel4: TQRLabel;
+    QRlbRepVentasDiarias_CritBusqueda: TQRLabel;
     QRLabel5: TQRLabel;
     QRBand8: TQRBand;
-    QRLabel6: TQRLabel;
+    QRlblRepVentasDiarias_PieDePagina: TQRLabel;
     QRLabel7: TQRLabel;
     QRSysData1: TQRSysData;
     QRBand9: TQRBand;
     QRLabel9: TQRLabel;
     QRLabel10: TQRLabel;
     QRLabel11: TQRLabel;
-    QRLabel12: TQRLabel;
-    QRLabel13: TQRLabel;
     QRLabel14: TQRLabel;
     QRBand10: TQRBand;
-    QRLabel15: TQRLabel;
     Panel2: TPanel;
     Panel3: TPanel;
     lblProdsVendidos: TLabel;
@@ -227,6 +222,11 @@ type
     Splitter3: TSplitter;
     DBChart1: TDBChart;
     FastLineSeries2: TBarSeries;
+    EKVistaPrevia2: TEKVistaPreviaQR;
+    QRExpr1: TQRExpr;
+    QRExpr2: TQRExpr;
+    QRLabel4: TQRLabel;
+    Splitter4: TSplitter;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -497,16 +497,25 @@ begin
   begin
     if ZQ_Comprobante.IsEmpty then
       exit;
-
     DM.VariablesReportes(RepDetalleMov);
     QRlblRepDetMov_CritBusqueda.Caption := EKBuscarComprobantes.ParametrosBuscados;
     QRlblRepDetalleMov_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
     QRlblImporteTotal.Caption:= lblTotalComprobantes.Caption;
     EKVistaPrevia.VistaPrevia;
   end;
+ //Ventas Diarias
+  if PageControl.ActivePage = TabVentasDiarias then
+  begin
+      if ZQ_ProductosVendidos.IsEmpty then
+        exit;
+      DM.VariablesReportes(RepVentasDiarias);
+      QRlbRepVentasDiarias_CritBusqueda.Caption := EKBuscarProductos.ParametrosBuscados;
+      QRlblRepVentasDiarias_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+      EKVistaPrevia2.VistaPrevia;
+  end;
 
-//HORARIO VENTA
-  if PageControl.ActivePage = TabHorarioVentas then
+    //HORARIO VENTA
+      if PageControl.ActivePage = TabHorarioVentas then
   begin
 
   end;
@@ -522,7 +531,14 @@ begin
       dm.ExportarEXCEL(DBGridComprobantes);
   end;
 
-//HORARIO VENTA
+//Ventas Diarias
+  if PageControl.ActivePage = TabVentasDiarias then
+  begin
+    if not ZQ_ProductosVendidos.IsEmpty then
+      dm.ExportarEXCEL(DBGridProdVendidos);
+  end;
+
+  //HORARIO VENTA
   if PageControl.ActivePage = TabHorarioVentas then
   begin
     if not ZP_Horario.IsEmpty then
