@@ -84,11 +84,6 @@ type
     ZQ_ComprobanteTIPOCOMPR_: TStringField;
     ZQ_ComprobanteCLIENTE_: TStringField;
     ZQ_Comprobante_FormaPagoIF: TStringField;
-    PanelFiltro: TPanel;
-    BtnFiltro_Todos: TSpeedButton;
-    BtnFiltro_Fiscal: TSpeedButton;
-    BtnFiltro_NoFiscal: TSpeedButton;
-    Label39: TLabel;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
     btnExcel: TdxBarLargeButton;
@@ -178,6 +173,60 @@ type
     ZP_HorarioHORA_PERIODO: TTimeField;
     ZP_HorarioPERIODO: TIntegerField;
     Series1: TFastLineSeries;
+    TabVentasDiarias: TTabSheet;
+    Panel1: TPanel;
+    QuickRep1: TQuickRep;
+    QRBand4: TQRBand;
+    QRDBImage1: TQRDBImage;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRBand5: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRBand7: TQRBand;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRBand8: TQRBand;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand9: TQRBand;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRBand10: TQRBand;
+    QRLabel15: TQRLabel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    lblProdsVendidos: TLabel;
+    DBGridProdVendidos: TDBGrid;
+    ZQ_ProductosVendidos: TZQuery;
+    EKBuscarProductos: TEKBusquedaAvanzada;
+    DS_ProductosVendidos: TDataSource;
+    ZQ_ProductosVendidosID_PRODUCTO: TIntegerField;
+    ZQ_ProductosVendidosCANTIDAD: TIntegerField;
+    ZQ_ProductosVendidosSUMAVENTA: TFloatField;
+    ZQ_ProductosVendidosSUMAIF: TFloatField;
+    ZQ_ProductosVendidosFECHAC: TDateField;
+    ZQ_ProductosVendidosDETALLE_PROD: TStringField;
+    PanelFiltro: TPanel;
+    BtnFiltro_Todos: TSpeedButton;
+    BtnFiltro_Fiscal: TSpeedButton;
+    BtnFiltro_NoFiscal: TSpeedButton;
+    Label39: TLabel;
+    EKOrdenarProdVendidos: TEKOrdenarGrilla;
+    EKDbSumaProdsVendidos: TEKDbSuma;
+    Splitter3: TSplitter;
+    DBChart1: TDBChart;
+    FastLineSeries2: TBarSeries;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -191,6 +240,7 @@ type
     procedure cargarConfigPanel();
     procedure guardarConfigPanel();
     procedure btImprimirClick(Sender: TObject);
+    procedure EKDbSumaProdsVendidosSumListChanged(Sender: TObject);
   private
     { Private declarations }
   public
@@ -235,9 +285,11 @@ begin
   TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
   TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[3]).Valor:= IntToStr(30);
 
+  TEKCriterioBA(EKBuscarProductos.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
+  
 //Permiso para ver o no los filtros de Fiscal
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
-  BtnFiltro_Fiscal.Click;
+//  BtnFiltro_Fiscal.Click;
 end;
 
 
@@ -379,6 +431,14 @@ begin
       ZQ_Comprobante.First;
   end;
 
+//Ventas Diarias
+  if PageControl.ActivePage = TabVentasDiarias then
+  begin
+    //EKBuscarProductos.SQL_Where[0]:= Format('where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null) %s', [where]);
+    if EKBuscarProductos.Buscar then
+      ZQ_ProductosVendidos.First;
+  end;
+
 //HORARIO VENTA
   if (PageControl.ActivePage = TabHorarioVentas) or (PageControl.ActivePage = TabHorarioGrafico) then
   begin
@@ -468,6 +528,12 @@ begin
     if not ZP_Horario.IsEmpty then
       dm.ExportarEXCEL(DBGridHorario);
   end;
+end;
+
+procedure TFEstadisticaVentas.EKDbSumaProdsVendidosSumListChanged(
+  Sender: TObject);
+begin
+  lblProdsVendidos.Caption :=Format('Total Productos/Servicios vendidos: %s',[FormatFloat(' $ ##,###,##0.00 ', EKDbSumaProdsVendidos.SumCollection[0].SumValue)]);
 end;
 
 end.
