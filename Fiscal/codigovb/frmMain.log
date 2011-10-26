@@ -1,0 +1,4 @@
+Línea 16: la clase EPSON_Impresora_Fiscal.PrinterFiscal del control EPSON_Printer_Fiscal no era una clase de control cargada.
+Línea 22: la clase MSComctlLib.TreeView del control trvPrincipal no era una clase de control cargada.
+Línea 37: la clase MSComctlLib.ImageList del control imgPrincipal no era una clase de control cargada.
+Línea 55: la clase MSComctlLib.StatusBar del control sbStatusBar no era una clase de control cargada.
