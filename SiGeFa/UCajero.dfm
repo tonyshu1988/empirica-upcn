@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 237
-  Top = 68
+  Left = 348
+  Top = 238
   Width = 1022
   Height = 675
   Caption = 'Cajero SiGeFa'
@@ -3276,11 +3276,12 @@ object FCajero: TFCajero
         object edProducto: TDBEdit
           Tag = 99
           Left = 32
-          Top = 1
+          Top = 5
           Width = 317
-          Height = 21
+          Height = 15
           BevelInner = bvNone
           BevelOuter = bvNone
+          BorderStyle = bsNone
           Color = 12581119
           DataField = 'producto'
           DataSource = DS_DetalleFactura
@@ -3290,8 +3291,10 @@ object FCajero: TFCajero
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
+          ParentShowHint = False
           ReadOnly = True
-          TabOrder = 0
+          ShowHint = False
+          TabOrder = 3
         end
         object edCantidad: TDBEdit
           Tag = 99
@@ -3310,8 +3313,9 @@ object FCajero: TFCajero
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 0
           OnExit = edCantidadExit
+          OnKeyDown = edCantidadKeyDown
         end
         object edDesc: TDBEdit
           Tag = 99
@@ -3330,7 +3334,7 @@ object FCajero: TFCajero
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 1
           OnExit = edDescExit
         end
         object edImporteFinal: TDBEdit
@@ -3350,7 +3354,7 @@ object FCajero: TFCajero
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 2
           OnExit = edImporteFinalExit
           OnKeyDown = edImporteFinalKeyDown
         end
