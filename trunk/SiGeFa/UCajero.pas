@@ -682,13 +682,13 @@ begin
           LimpiarCodigo;
           exit;
         end;
-        if MidStr(Cod, 1, 1) = 'C' then
+        if UpperCase(MidStr(Cod, 1, 1)) = 'C' then
         begin
           LeerCodigo('C',Cod);
           exit;
         end;
 
-        if MidStr(Cod, 1, 1) = 'I' then
+        if UpperCase(MidStr(Cod, 1, 1)) = 'I' then
         begin
           LeerCodigo('I',Cod);
           exit;
