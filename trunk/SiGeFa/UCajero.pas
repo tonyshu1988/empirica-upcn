@@ -607,6 +607,9 @@ type
     procedure DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
+    function completarCodBar(cod:String):String ;
+    procedure edCantidadKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -694,10 +697,10 @@ begin
         // POR CODIGO DE BARRAS PRODUCTO
         if (Length(cod) <= LONG_COD_BARRAS) then
         begin
-          LeerCodigo('B',Cod);
+          LeerCodigo('B',completarCodBar(Cod));
           exit;
-        end;
-
+        end
+        else
         if (Length(cod) > LONG_COD_BARRAS) then
         begin
           Application.MessageBox('Longitud de código incorrecta', 'Código incorrecto');
@@ -2470,5 +2473,19 @@ if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
     Application.MessageBox('No tiene permisos para realizar esta Acción.','Cierre X',MB_OK+MB_ICONINFORMATION);
 end;
 
+
+function TFCajero.completarCodBar(cod: String): String;
+begin
+  Result:=StringOfChar('0', 20-Length(cod))+cod;;
+end;
+
+procedure TFCajero.edCantidadKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if not(dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE')) then
+  begin
+     edImporteFinalKeyDown(Sender,Key,Shift);
+  end
+end;
 
 end.
