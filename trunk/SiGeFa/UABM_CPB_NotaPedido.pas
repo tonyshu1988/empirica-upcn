@@ -1571,7 +1571,7 @@ begin
           if not ZQ_ActualizarPrecioCOEF_GANANCIA.IsNull then
             coef_ganancia:= ZQ_ActualizarPrecioCOEF_GANANCIA.AsFloat;
 
-          costo_con_impuestos:= costo_neto + (costo_neto * (imp_adicional_1/100)) + (costo_neto * (imp_adicional_2/100)) + (costo_neto * (imp_iva/100));
+          costo_con_impuestos:= costo_neto + (costo_neto * imp_adicional_1) + (costo_neto * imp_adicional_2) + (costo_neto * imp_iva);
           precio_venta:= costo_con_impuestos * (1 + coef_ganancia);
 
           ZQ_ActualizarPrecio.Edit;

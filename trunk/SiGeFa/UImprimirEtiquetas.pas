@@ -90,6 +90,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure btnEliminarTodosClick(Sender: TObject);
+    procedure centrarCodigo;
   private
     vselProducto: TFBuscarProducto;
     procedure onSelProducto;
@@ -195,6 +196,62 @@ begin
   EKCodigoBarra1.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
   EKCodigoBarra2.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
   EKCodigoBarra3.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+
+  centrarCodigo;
+end;
+
+
+procedure TFImprimirEtiquetas.btnSalirClick(Sender: TObject);
+begin
+  close;
+end;
+
+
+procedure TFImprimirEtiquetas.DetailBand1BeforePrint(Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+  if SP_ImprimirEtiquetasID_PRODUCTO.AsInteger = 0 then
+  begin
+    QRShapeTapa.BringToFront;
+    QRShapeTapa.Enabled := true;
+  end
+  else
+  Begin
+    QRShapeTapa.Enabled := false;
+  end;
+end;
+
+
+procedure TFImprimirEtiquetas.centrarCodigo;
+begin
+  QRCodigoBarra1.Left:= (QRDBPrecio1.Left) + ((245-EKCodigoBarra1.Width) div 2);
+  QRCodigoBarra2.Left:= (QRDBPrecio2.Left) + ((245-EKCodigoBarra2.Width) div 2);
+  QRCodigoBarra3.Left:= (QRDBPrecio3.Left) + ((245-EKCodigoBarra3.Width) div 2);
+end;
+
+
+procedure TFImprimirEtiquetas.btnEliminarLineaClick(Sender: TObject);
+begin
+  if not ZQ_Etiquetas.IsEmpty then
+    ZQ_Etiquetas.Delete;
+end;
+
+
+procedure TFImprimirEtiquetas.btnCancelarClick(Sender: TObject);
+begin
+  borrar.Execute;
+  btnEliminarTodos.click;
+
+  if dm.EKModelo.finalizar_transaccion(transaccion_Etiquetas) then
+  begin
+    EKOrdenarGrilla.PopUpGrilla:= nil;
+
+    DBGridEtiquetas.Enabled:= false;
+
+    GrupoEditando.Enabled:= false;
+    GrupoVisualizando.Enabled:= True;
+
+    ZQ_Etiquetas.Refresh;
+  end;
 end;
 
 
@@ -230,52 +287,6 @@ begin
 end;
 
 
-procedure TFImprimirEtiquetas.btnSalirClick(Sender: TObject);
-begin
-  close;
-end;
-
-
-procedure TFImprimirEtiquetas.DetailBand1BeforePrint(Sender: TQRCustomBand; var PrintBand: Boolean);
-begin
-  if SP_ImprimirEtiquetasID_PRODUCTO.AsInteger = 0 then
-  begin
-    QRShapeTapa.BringToFront;
-    QRShapeTapa.Enabled := true;
-  end
-  else
-  Begin
-    QRShapeTapa.Enabled := false;
-  end;
-end;
-
-
-procedure TFImprimirEtiquetas.btnEliminarLineaClick(Sender: TObject);
-begin
-  if not ZQ_Etiquetas.IsEmpty then
-    ZQ_Etiquetas.Delete;
-end;
-
-
-procedure TFImprimirEtiquetas.btnCancelarClick(Sender: TObject);
-begin
-  borrar.Execute;
-  btnEliminarTodos.click;
-
-  if dm.EKModelo.finalizar_transaccion(transaccion_Etiquetas) then
-  begin
-    EKOrdenarGrilla.PopUpGrilla:= nil;
-
-    DBGridEtiquetas.Enabled:= false;
-
-    GrupoEditando.Enabled:= false;
-    GrupoVisualizando.Enabled:= True;
-
-    ZQ_Etiquetas.Refresh;
-  end;
-end;
-
-
 procedure TFImprimirEtiquetas.btnConPrecioClick(Sender: TObject);
 var
   Fila: string;
@@ -284,11 +295,14 @@ begin
   if ZQ_Etiquetas.IsEmpty then
     exit;
 
-  fila := InputBox('Configurar Pagina','Indique la fila de la pagina desde donde empezar:','0');
+  fila := InputBox('Configurar Pagina','Indique la fila de la pagina desde donde empezar:','1');
   try
     filan := StrToInt(fila);
   except
-    filan := 0;
+    begin
+      ShowMessage('valor incorrecto, intente de nuevo.');
+      exit;
+    end;
   end;
 
   dm.EKModelo.aplicar_modificaciones(transaccion_Etiquetas);
@@ -365,5 +379,7 @@ begin
   while not ZQ_Etiquetas.Eof do
    ZQ_Etiquetas.Delete;
 end;
+
+
 
 end.

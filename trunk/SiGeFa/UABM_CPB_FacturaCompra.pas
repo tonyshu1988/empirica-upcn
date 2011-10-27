@@ -1304,7 +1304,7 @@ begin
     precio_unitario:= ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat;
 
   if not ZQ_CpbProductoPORC_IVA.IsNull then
-    coef_iva:= ZQ_CpbProductoPORC_IVA.AsFloat / 100;
+    coef_iva:= ZQ_CpbProductoPORC_IVA.AsFloat;
 
   imponible:= cantidad * precio_unitario;
   importe_iva:= imponible * coef_iva;
@@ -1436,17 +1436,23 @@ begin
           costo_neto:= ZQ_ActualizarListaIMPORTE_UNITARIO.AsFloat;
           if not ZQ_ActualizarPrecioIMPUESTO_ADICIONAL1.IsNull then
             imp_adicional_1:= ZQ_ActualizarPrecioIMPUESTO_ADICIONAL1.AsFloat;
+
           if not ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2.IsNull then
             imp_adicional_2:= ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2.AsFloat;
-          if ZQ_ActualizarListaPORC_IVA.IsNull or (ZQ_ActualizarListaPORC_IVA.AsFloat = 0) then
+
+          //si el porcentaje de iva cargado es nulo o cero
+          if (ZQ_ActualizarListaPORC_IVA.IsNull) or (ZQ_ActualizarListaPORC_IVA.AsFloat = 0) then
           begin
-            if not ZQ_ActualizarPrecioIMPUESTO_IVA.IsNull then imp_iva:= ZQ_ActualizarPrecioIMPUESTO_IVA.AsFloat;
+            if not ZQ_ActualizarPrecioIMPUESTO_IVA.IsNull then //si entro por nulo le clavo el que tiene el producto
+              imp_iva:= ZQ_ActualizarPrecioIMPUESTO_IVA.AsFloat;
           end
-          else imp_iva:= ZQ_ActualizarListaPORC_IVA.AsFloat;
+          else
+            imp_iva:= ZQ_ActualizarListaPORC_IVA.AsFloat;
+
           if not ZQ_ActualizarPrecioCOEF_GANANCIA.IsNull then
             coef_ganancia:= ZQ_ActualizarPrecioCOEF_GANANCIA.AsFloat;
 
-          costo_con_impuestos:= costo_neto + (costo_neto * (imp_adicional_1/100)) + (costo_neto * (imp_adicional_2/100)) + (costo_neto * (imp_iva/100));
+          costo_con_impuestos:= costo_neto + (costo_neto * imp_adicional_1) + (costo_neto * imp_adicional_2) + (costo_neto * imp_iva);
           precio_venta:= costo_con_impuestos * (1 + coef_ganancia);
 
           ZQ_ActualizarPrecio.Edit;
@@ -1476,6 +1482,7 @@ begin
   panelActualizarPrecio.Visible:= false;
   GrupoEditando.Enabled:= true;
 end;
+
 
 procedure TFABM_CPB_FacturaCompra.ZQ_VerCpb_ProductoAfterScroll(DataSet: TDataSet);
 begin

@@ -245,21 +245,21 @@ procedure TFABM_Precios.HabilitarCampos();
 begin
   if (imp_ad1_nombre <> '') then
   begin
-    lblImpAdicional1.Caption := imp_ad1_nombre+':';
+    lblImpAdicional1.Caption := 'Coef. '+imp_ad1_nombre+':';
     lblImpAdicional1.Visible := true;
     EditImpAdicional1.Visible := true;
-    GboxImpuestos.Width := 257;
-    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL1')].Title.Caption:= imp_ad1_nombre+' (%)';
+    GboxImpuestos.Width := 369;
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL1')].Title.Caption:= 'Coef. '+imp_ad1_nombre;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL1')].Visible := true;
   end;
 
   if (imp_ad2_nombre <> '') then
   begin
-    lblImpAdicional2.Caption := imp_ad2_nombre+':';
+    lblImpAdicional2.Caption := 'Coef. '+imp_ad2_nombre+':';
     lblImpAdicional2.Visible := true;
-    GboxImpuestos.Width := 422;
+    GboxImpuestos.Width := 589;
     EditImpAdicional2.Visible := true;
-    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL2')].Title.Caption:= imp_ad2_nombre+' (%)';
+    DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL2')].Title.Caption:= 'Coef. '+imp_ad2_nombre;
     DBGridProductos.Columns[GetIndexField(DBGridProductos, 'IMPUESTO_ADICIONAL2')].Visible := true;
   end;
 
@@ -392,7 +392,7 @@ begin
     StrToFloat(EditImpAdicional1.Text);
     StrToFloat(EditImpAdicional2.Text);
   except
-    Application.MessageBox('Se ingresaron datos no validos'+#13+'Verifique que no haya campos numéricos mal ingresados','Validar',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('Se ingresaron datos no validos'+#13+'Verifique que no haya campos numéricos mal ingresados o vacios','Validar',MB_OK+MB_ICONINFORMATION);
     exit;
   end;
 
@@ -787,7 +787,7 @@ begin
   if llamador <> 'PRECIO_VENTA' then
   begin
     campoQueCambia:= 'PRECIO_VENTA';
-    costo_con_impuestos:= costo_neto + (costo_neto * (imp_adicional_1/100)) + (costo_neto * (imp_adicional_2/100)) + (costo_neto * (imp_iva/100));
+    costo_con_impuestos:= costo_neto + (costo_neto * imp_adicional_1) + (costo_neto * imp_adicional_2) + (costo_neto * imp_iva);
     precio_venta:= costo_con_impuestos * (1 + coef_ganancia);
     precio_venta:= precio_venta - (precio_venta * coef_descuento);
 

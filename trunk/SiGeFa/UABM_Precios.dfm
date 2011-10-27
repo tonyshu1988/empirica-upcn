@@ -1682,7 +1682,7 @@ object FABM_Precios: TFABM_Precios
           Expanded = False
           FieldName = 'IMPUESTO_IVA'
           Title.Alignment = taCenter
-          Title.Caption = 'I.V.A. (%)'
+          Title.Caption = 'Coef. IVA'
           Visible = True
         end
         item
@@ -2028,7 +2028,7 @@ object FABM_Precios: TFABM_Precios
       object GboxImpuestos: TGroupBox
         Left = 200
         Top = 117
-        Width = 422
+        Width = 589
         Height = 44
         Caption = ' Impuestos  '
         Enabled = False
@@ -2036,14 +2036,14 @@ object FABM_Precios: TFABM_Precios
         object Label4: TLabel
           Left = 7
           Top = 22
-          Width = 24
+          Width = 61
           Height = 13
-          Caption = 'Iva:'
+          Caption = 'Coef. IVA:'
         end
         object lblImpAdicional1: TLabel
-          Left = 79
+          Left = 135
           Top = 22
-          Width = 125
+          Width = 162
           Height = 13
           Alignment = taRightJustify
           AutoSize = False
@@ -2051,9 +2051,9 @@ object FABM_Precios: TFABM_Precios
           Visible = False
         end
         object lblImpAdicional2: TLabel
-          Left = 247
+          Left = 368
           Top = 22
-          Width = 125
+          Width = 162
           Height = 13
           Alignment = taRightJustify
           AutoSize = False
@@ -2061,18 +2061,18 @@ object FABM_Precios: TFABM_Precios
           Visible = False
         end
         object EditIVA: TEdit
-          Left = 33
+          Left = 69
           Top = 18
-          Width = 35
+          Width = 50
           Height = 21
           AutoSize = False
           TabOrder = 0
           Text = '0'
         end
         object EditImpAdicional1: TEdit
-          Left = 206
+          Left = 298
           Top = 18
-          Width = 35
+          Width = 50
           Height = 21
           AutoSize = False
           TabOrder = 1
@@ -2080,9 +2080,9 @@ object FABM_Precios: TFABM_Precios
           Visible = False
         end
         object EditImpAdicional2: TEdit
-          Left = 374
+          Left = 531
           Top = 18
-          Width = 35
+          Width = 50
           Height = 21
           AutoSize = False
           TabOrder = 2
@@ -3118,20 +3118,12 @@ object FABM_Precios: TFABM_Precios
         Visible = True
       end
       item
-        TituloColumna = 'I.V.A. (%)'
+        TituloColumna = 'Coef. IVA'
         Visible = True
       end
       item
         TituloColumna = 'Imp. Interno'
         Visible = True
-      end
-      item
-        TituloColumna = 'Imp. Adicional 1'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Imp. Adicional 2'
-        Visible = False
       end
       item
         TituloColumna = 'Precio Costo c/Imp.'
@@ -3148,26 +3140,6 @@ object FABM_Precios: TFABM_Precios
       item
         TituloColumna = 'Precio Venta'
         Visible = True
-      end
-      item
-        TituloColumna = 'PRECIO1'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO2'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO3'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO4'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO5'
-        Visible = False
       end
       item
         TituloColumna = 'Color'
