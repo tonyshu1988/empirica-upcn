@@ -5302,6 +5302,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       ':PRECIO_COSTO_CIMPUESTOS'
       'WHERE'
       '  PRECIO.ID_PRECIO = :OLD_ID_PRECIO')
+    UseSequenceFieldForRefreshSQL = False
     Left = 552
     Top = 139
     ParamData = <
