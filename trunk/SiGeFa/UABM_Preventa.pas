@@ -390,6 +390,7 @@ type
     procedure btnConfirmarVentaClick(Sender: TObject);
     function validarBoleta():Boolean ;
     procedure cancelarProducto();
+    function completarCodBar(cod: String): String;
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -480,7 +481,7 @@ begin
         // POR CODIGO DE BARRAS PRODUCTO
         if (Length(cod) <= LONG_COD_BARRAS) then
         begin
-          LeerCodigo('B',Cod);
+          LeerCodigo('B',completarCodBar(Cod));
           exit;
         end;
 
@@ -1336,6 +1337,11 @@ begin
   lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
   cargarClientePorDefecto();
   modoLecturaProd();
+end;
+
+function TFABM_Preventa.completarCodBar(cod: String): String;
+begin
+  Result:=StringOfChar('0', 20-Length(cod))+cod;;
 end;
 
 end.

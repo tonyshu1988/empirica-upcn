@@ -2730,6 +2730,7 @@ object FABMProductos: TFABMProductos
       'select *'
       'from producto_cabecera')
     Params = <>
+    IndexFieldNames = 'ID_MARCA Asc'
     Left = 192
     Top = 96
     object ZQ_ProductoCabeceraID_PROD_CABECERA: TIntegerField
@@ -3789,6 +3790,7 @@ object FABMProductos: TFABMProductos
         Name = 'prod'
         ParamType = ptUnknown
       end>
+    IndexFieldNames = 'COD_CORTO Asc'
     Left = 312
     Top = 96
     ParamData = <
@@ -4047,6 +4049,7 @@ object FABMProductos: TFABMProductos
         Name = 'artic'
         ParamType = ptUnknown
       end>
+    IndexFieldNames = 'MEDIDA Asc'
     Left = 650
     Top = 152
     ParamData = <
@@ -4651,6 +4654,7 @@ object FABMProductos: TFABMProductos
       '  producto.BAJA = :BAJA'
       'WHERE'
       '  producto.ID_PRODUCTO = :OLD_ID_PRODUCTO')
+    UseSequenceFieldForRefreshSQL = False
     Left = 312
     Top = 48
     ParamData = <
@@ -4717,6 +4721,7 @@ object FABMProductos: TFABMProductos
       'select id_medida, medida, baja'
       'from medida')
     Params = <>
+    IndexFieldNames = 'MEDIDA Asc'
     Left = 34
     Top = 272
     object ZQ_TodasMedidasID_MEDIDA: TIntegerField

@@ -1,6 +1,6 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 272
-  Top = 159
+  Left = 417
+  Top = 271
   Width = 870
   Height = 546
   Caption = 'ABM Producto Stock'
@@ -1194,6 +1194,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       'WHERE'
       '  STOCK_PRODUCTO.ID_STOCK_PRODUCTO = '
       ':OLD_ID_STOCK_PRODUCTO')
+    UseSequenceFieldForRefreshSQL = False
     Left = 152
     Top = 136
     ParamData = <

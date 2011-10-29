@@ -7069,8 +7069,8 @@ object FCajero: TFCajero
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'join configuracion c on (c.id_sucursal=su.id_sucursal)'
       
-        'where (ps.punto_salida='#39'S'#39')and(pr.baja<>'#39'S'#39')and(sp.stock_actual>' +
-        '0)'
+        'where (ps.punto_salida='#39'S'#39')and(pr.baja<>'#39'S'#39')and(pc.baja<>'#39'S'#39')and' +
+        '(sp.stock_actual>0)'
       'order by 2')
     CampoBuscar = 'posicSucursal'
     CampoClave = 'id_producto'

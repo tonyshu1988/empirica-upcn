@@ -1381,6 +1381,7 @@ begin
           ZQ_DetalleProductoSTOCK_MIN.AsFloat:=smin;
           ZQ_DetalleProductoSTOCK_MAX.AsFloat:=smax;
           ZQ_DetalleProductoDESCRIPCION.AsString:=descr;
+          ZQ_DetalleProductoBAJA.AsString:='N';
 
           ZQ_Precios.Append;
           ZQ_PreciosPRECIO_COSTO.AsFloat:=pc;
