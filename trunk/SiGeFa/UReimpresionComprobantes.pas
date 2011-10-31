@@ -293,7 +293,7 @@ end;
 procedure TFReimpresionComprobantes.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
- EKOrdenarFacturas.GuardarConfigColumnas;
+  EKOrdenarFacturas.GuardarConfigColumnas;
   EKOrdenarProducto.GuardarConfigColumnas;
   EKOrdenarFPago.GuardarConfigColumnas;
   guardarConfigPanel;
@@ -311,6 +311,7 @@ end;
 
 procedure TFReimpresionComprobantes.btnImprimirClick(Sender: TObject);
 begin
+leerSistemaIni();
 if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:'+ZQ_ComprobanteCODIGO.AsString+' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
     ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l '+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -i '+Impresora+' -c '+'F'), nil, SW_SHOWNORMAL)
 end;
