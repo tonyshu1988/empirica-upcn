@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 281
-  Top = 55
+  Left = 245
+  Top = 53
   Width = 1016
   Height = 719
   Caption = 'Cajero SiGeFa'
@@ -4151,9 +4151,9 @@ object FCajero: TFCajero
     end
   end
   object PABM_FormaPago: TPanel
-    Left = 125
-    Top = 441
-    Width = 832
+    Left = 120
+    Top = 425
+    Width = 833
     Height = 144
     BevelInner = bvLowered
     BevelOuter = bvSpace
@@ -4163,7 +4163,7 @@ object FCajero: TFCajero
     object Label18: TLabel
       Left = 4
       Top = 4
-      Width = 820
+      Width = 821
       Height = 16
       Align = alTop
       Alignment = taCenter
@@ -4266,6 +4266,7 @@ object FCajero: TFCajero
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
+      OnExit = edCodCuentaExit
     end
     object edMDPFecha: TDBEdit
       Left = 323
@@ -4337,6 +4338,7 @@ object FCajero: TFCajero
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
+      OnExit = edCodCuentaExit
     end
     object edCuenta: TDBLookupComboBox
       Left = 67
@@ -4353,6 +4355,7 @@ object FCajero: TFCajero
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
+      OnExit = edCodCuentaExit
     end
     object edImporteVenta: TDBEdit
       Left = 152
@@ -4385,6 +4388,7 @@ object FCajero: TFCajero
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
+      OnExit = edCodCuentaExit
     end
     object btnGrupoAceptar: TBitBtn
       Left = 198
@@ -4471,7 +4475,6 @@ object FCajero: TFCajero
     object CD_FpagoID_TIPO_FORMAPAG: TIntegerField
       DisplayWidth = 50
       FieldName = 'ID_TIPO_FORMAPAG'
-      OnChange = CD_FpagoID_TIPO_FORMAPAGChange
     end
     object CD_FpagomedioPago: TStringField
       FieldKind = fkLookup

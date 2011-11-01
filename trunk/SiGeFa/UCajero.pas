@@ -614,7 +614,7 @@ type
     procedure btnGrupoCancelarClick(Sender: TObject);
     procedure btnFormaPagoClick(Sender: TObject);
     procedure CD_FpagoCUENTA_INGRESOChange(Sender: TField);
-    procedure CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
+    procedure edCodCuentaExit(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -2304,7 +2304,7 @@ begin
     end
 end;
 
-                                               
+
 procedure TFCajero.ANuevoProdExecute(Sender: TObject);
 begin
   if BtLeerCB.Enabled then
@@ -2395,21 +2395,19 @@ end;
 procedure TFCajero.CD_FpagoCUENTA_INGRESOChange(Sender: TField);
 begin
 if CD_Fpago.State in [dsInsert,dsEdit] then
-if CD_FpagoID_TIPO_FORMAPAG.IsNull then
   begin
    ZQ_FormasPago.Locate('ID_TIPO_FORMAPAGO',ZQ_CuentasMEDIO_DEFECTO.AsInteger,[]);
    CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
-   calcularFP();
   end
 end;
 
-procedure TFCajero.CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
+procedure TFCajero.edCodCuentaExit(Sender: TObject);
 begin
-if CD_Fpago.State in [dsInsert,dsEdit] then
-if CD_FpagoID_TIPO_FORMAPAG.IsNull then
- begin
-     calcularFP();
- end;
+  if not((CD_Fpago_ctaIngreso.AsString='') or (CD_FpagomedioPago.AsString='')) then
+   begin
+      calcularFP();
+   end
+
 end;
 
 end.
