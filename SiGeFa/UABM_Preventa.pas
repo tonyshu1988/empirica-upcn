@@ -760,7 +760,7 @@ begin
 if (CD_DetalleFactura.State=dsBrowse) then
 if not Assigned(vsel2) then
   vsel2:= TFBuscarPersona.Create(nil);
-  vsel2.configRelacion(RELACION_CLIENTE);
+  vsel2.configRelacion(RELACION_CLIENTE,True);
   vsel2.EKBusqueda.Abrir;
   vsel2.OnSeleccionar := OnSelPers;
   vsel2.ShowModal;
@@ -859,7 +859,7 @@ begin
 if (CD_DetalleFactura.State=dsBrowse) then
  if not Assigned(vsel3) then
   vsel3:= TFBuscarPersona.Create(nil);
-  vsel3.configRelacion(RELACION_EMPLEADO);
+  vsel3.configRelacion(RELACION_EMPLEADO,True);
   vsel3.EKBusqueda.Abrir;
   vsel3.OnSeleccionar := OnSelVendedor;
   vsel3.ShowModal;

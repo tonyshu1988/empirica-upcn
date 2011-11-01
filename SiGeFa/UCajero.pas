@@ -519,7 +519,6 @@ type
     Label61: TLabel;
     edCodMDP: TDBEdit;
     btnGrupoAceptar: TBitBtn;
-    btnGrupoCancelar: TBitBtn;
     PopupFP: TPopupMenu;
     menuEditarFP: TMenuItem;
     menuQuitarFP: TMenuItem;
@@ -528,6 +527,7 @@ type
     ZQ_CuentasMODIFICABLE: TStringField;
     CD_Fpago_fiscal: TStringField;
     CD_Fpago_esCtaCorr: TStringField;
+    CD_DetalleFacturaimporte_original: TFloatField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -611,10 +611,10 @@ type
     procedure edCantidadKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnGrupoAceptarClick(Sender: TObject);
-    procedure btnGrupoCancelarClick(Sender: TObject);
     procedure btnFormaPagoClick(Sender: TObject);
     procedure CD_FpagoCUENTA_INGRESOChange(Sender: TField);
     procedure edCodCuentaExit(Sender: TObject);
+    procedure menuEditarFPClick(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -905,7 +905,7 @@ begin
 
   PABM_FormaPago.Visible:=False;
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnGrupoAceptar.Glyph);
-  FPrincipal.Iconos_Menu_16.GetBitmap(0, btnGrupoCancelar.Glyph);
+
 end;
 
 
@@ -1052,7 +1052,7 @@ begin
     if not Assigned(vsel2) then
       vsel2:= TFBuscarPersona.Create(nil);
 
-    vsel2.configRelacion(RELACION_CLIENTE);
+    vsel2.configRelacion(RELACION_CLIENTE,True);
     vsel2.EKBusqueda.Abrir;
     vsel2.OnSeleccionar := OnSelPers;
     vsel2.ShowModal;
@@ -1064,6 +1064,7 @@ procedure TFCajero.OnSelPers;
 begin
  if not(vsel2.ZQ_Personas.IsEmpty) then
       begin
+      ZQ_Personas.Refresh;
       ZQ_Personas.Locate('id_persona',vsel2.ZQ_PersonasID_PERSONA.AsInteger,[]);
       Cliente:=ZQ_PersonasID_PERSONA.AsInteger;
       IdClienteIVA:=ZQ_PersonasID_TIPO_IVA.AsInteger;
@@ -1169,7 +1170,7 @@ begin
     if not Assigned(vsel3) then
       vsel3:= TFBuscarPersona.Create(nil);
 
-    vsel3.configRelacion(RELACION_EMPLEADO);
+    vsel3.configRelacion(RELACION_EMPLEADO,True);
     vsel3.EKBusqueda.Abrir;
     vsel3.OnSeleccionar := OnSelVendedor;
     vsel3.ShowModal;
@@ -1232,6 +1233,7 @@ begin
  if ((not(ZQ_Productos.IsEmpty))and(CD_DetalleFacturaCANTIDAD.AsFloat>0)) then
   if (ZQ_ProductosSTOCK_ACTUAL.AsFloat>=CD_DetalleFacturaCANTIDAD.AsFloat) then
    begin
+    CD_DetalleFacturaimporte_original.AsFloat:=CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
     CD_DetalleFacturaIMPORTE_VENTA.AsFloat:=CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
     CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=CD_DetalleFacturaIMPORTE_VENTA.AsFloat/CD_DetalleFacturaCANTIDAD.AsFloat;
     CD_DetalleFacturaIMPORTE_IVA.AsFloat:=CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
@@ -2299,8 +2301,13 @@ begin
     //PABM_FormaPago.Top:=FCajero.Height-300;
     PABM_FormaPago.Visible:=true;
     PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
-    edCodCuenta.SetFocus;
+    grupoVertical.Enabled:=false;
+    GrupoGuardarCancelar.Enabled:=false;
     CD_Fpago.Append;
+    edImporte.SetFocus;
+    edCodCuenta.SetFocus;
+    ZQ_Cuentas.First;
+    CD_FpagoCUENTA_INGRESO.AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
     end
 end;
 
@@ -2376,14 +2383,8 @@ begin
      CD_Fpago.Post;
   PABM_FormaPago.Visible:=False;
   PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
-end;
-
-procedure TFCajero.btnGrupoCancelarClick(Sender: TObject);
-begin
- if CD_Fpago.State in [dsInsert,dsEdit] then
-    CD_Fpago.Cancel;
- PABM_FormaPago.Visible:=False;
- PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
+  grupoVertical.Enabled:=true;
+  GrupoGuardarCancelar.Enabled:=true;
 end;
 
 procedure TFCajero.btnFormaPagoClick(Sender: TObject);
@@ -2408,6 +2409,25 @@ begin
       calcularFP();
    end
 
+end;
+
+procedure TFCajero.menuEditarFPClick(Sender: TObject);
+begin
+   if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
+    exit;
+
+  if (CD_Comprobante.State in [dsInsert,dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
+    begin
+    dm.centrarPanel(FCajero, PABM_FormaPago);
+    //PABM_FormaPago.Top:=FCajero.Height-300;
+    PABM_FormaPago.Visible:=true;
+    PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
+    grupoVertical.Enabled:=false;
+    GrupoGuardarCancelar.Enabled:=false;
+    CD_Fpago.Edit;
+    edCodCuenta.SetFocus;
+    edImporte.SetFocus;
+    end
 end;
 
 end.
