@@ -262,7 +262,7 @@ type
     Label4: TLabel;
     btnExcel: TdxBarLargeButton;
     btnEMail: TdxBarLargeButton;
-    dxBarLargeButton1: TdxBarLargeButton;
+    btnSkype: TdxBarLargeButton;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -302,7 +302,7 @@ type
     procedure btnExcelClick(Sender: TObject);
     procedure permisosUsuario();
     procedure btnEMailClick(Sender: TObject);
-    procedure dxBarLargeButton1Click(Sender: TObject);
+    procedure btnSkypeClick(Sender: TObject);
   private
     id_persona: integer;
   public
@@ -325,19 +325,20 @@ uses UDM, UPrincipal, EKModelo, RegExpr, UUtilidades, UMailEnviar;
 
 procedure TFABM_Personas.permisosUsuario();
 begin
-  PageControl.Pages[2].TabVisible:= true;
-  PageControl.Pages[4].TabVisible:= true;
+  TabSheetCtaCte.TabVisible:= true;
+  TabSheetDetalle.TabVisible:= true;
 
   if not dm.EKUsrLogin.PermisoAccion('PERSONA_DETALLE') then
   begin
-    PageControl.Pages[2].TabVisible:= false;
+    TabSheetDetalle.TabVisible:= false;
   end;
 
   if not dm.EKUsrLogin.PermisoAccion('PERSONA_CTA_CTE') then
   begin
-    PageControl.Pages[4].TabVisible:= false;
+    TabSheetCtaCte.TabVisible:= false;
   end;
 end;
+
 
 procedure TFABM_Personas.FormCreate(Sender: TObject);
 begin
@@ -433,7 +434,10 @@ begin
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
 
-    DBGridTelMail.PopupMenu:=PopupMenuTelmail;    
+    DBGridTelMail.PopupMenu:=PopupMenuTelmail;
+
+    RadioGroupRelacionCliente.ItemIndex:= 1;
+    permisosUsuario;
   end;
 end;
 
@@ -726,10 +730,11 @@ begin
   if not ZQ_CtaCte.IsEmpty then
     tieneCuentaCorriente:= true;
 
-  if tieneCuentaCorriente or existeRelacionCliente then
+  if existeRelacionCliente then
     TabSheetCtaCte.TabVisible:= true
   else
     TabSheetCtaCte.TabVisible:= false;
+  permisosUsuario;    
 
   ZQ_EntidadTelefono.Close;
   ZQ_EntidadTelefono.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
@@ -793,6 +798,7 @@ begin
     TabSheetCtaCte.TabVisible:= true
   else
     TabSheetCtaCte.TabVisible:= false;
+  permisosUsuario;
 end;
 
 
@@ -938,7 +944,7 @@ begin
 
   ZQ_CtaCte.RevertRecord;
   habilitarCtaCte(false);
-  GrupoGuardarCancelar.Enabled:= true;  
+  GrupoGuardarCancelar.Enabled:= true;
 end;
 
 
@@ -975,7 +981,7 @@ begin
 end;
 
 
-procedure TFABM_Personas.dxBarLargeButton1Click(Sender: TObject);
+procedure TFABM_Personas.btnSkypeClick(Sender: TObject);
 var
   Telefono: string;
 begin
@@ -990,7 +996,7 @@ begin
       Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
   end;
 
-  
+
   if PageControl.ActivePage = TabSheetDetalle then
   begin
     if (ZQ_PersonaDESCRIPCION.IsNull) or (ZQ_PersonaDESCRIPCION.AsString = '') then

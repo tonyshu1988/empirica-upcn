@@ -1,7 +1,7 @@
 object FABM_Personas: TFABM_Personas
-  Left = 317
-  Top = 113
-  Width = 929
+  Left = 287
+  Top = 102
+  Width = 972
   Height = 631
   Caption = 'ABM Personas'
   Color = clBtnFace
@@ -23,7 +23,7 @@ object FABM_Personas: TFABM_Personas
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 913
+    Width = 956
     Height = 541
     Align = alClient
     BevelOuter = bvNone
@@ -2475,7 +2475,7 @@ object FABM_Personas: TFABM_Personas
     object DBGridClientes: TDBGrid
       Left = 5
       Top = 20
-      Width = 903
+      Width = 946
       Height = 316
       Align = alClient
       Color = 14606012
@@ -2588,7 +2588,7 @@ object FABM_Personas: TFABM_Personas
     object PanelEdicion: TPanel
       Left = 5
       Top = 336
-      Width = 903
+      Width = 946
       Height = 200
       Align = alBottom
       BevelOuter = bvNone
@@ -2597,9 +2597,9 @@ object FABM_Personas: TFABM_Personas
       object PageControl: TPageControl
         Left = 0
         Top = 0
-        Width = 903
+        Width = 946
         Height = 200
-        ActivePage = TabSheetDetalle
+        ActivePage = TabSheetDatos
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet
@@ -2952,7 +2952,7 @@ object FABM_Personas: TFABM_Personas
           object DBGridTelMail: TDBGrid
             Left = 0
             Top = 0
-            Width = 895
+            Width = 938
             Height = 172
             Align = alClient
             Color = 14606012
@@ -2993,7 +2993,7 @@ object FABM_Personas: TFABM_Personas
           object DBMemoDetalle: TDBMemo
             Left = 0
             Top = 0
-            Width = 887
+            Width = 930
             Height = 164
             Align = alClient
             DataField = 'DESCRIPCION'
@@ -3202,7 +3202,7 @@ object FABM_Personas: TFABM_Personas
     object PanelCabecera: TPanel
       Left = 5
       Top = 5
-      Width = 903
+      Width = 946
       Height = 15
       Align = alTop
       BevelOuter = bvNone
@@ -3222,7 +3222,7 @@ object FABM_Personas: TFABM_Personas
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 794
+        Left = 837
         Top = 0
         Width = 109
         Height = 15
@@ -3392,7 +3392,7 @@ object FABM_Personas: TFABM_Personas
           end
           item
             BeginGroup = True
-            Item = dxBarLargeButton1
+            Item = btnSkype
             Visible = True
           end
           item
@@ -3834,13 +3834,13 @@ object FABM_Personas: TFABM_Personas
       OnClick = btnEMailClick
       AutoGrayScale = False
     end
-    object dxBarLargeButton1: TdxBarLargeButton
+    object btnSkype: TdxBarLargeButton
       Caption = 'Skype'
       Category = 0
       Hint = 'Llamar por Skype'
       Visible = ivAlways
       ImageIndex = 72
-      OnClick = dxBarLargeButton1Click
+      OnClick = btnSkypeClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -3854,7 +3854,9 @@ object FABM_Personas: TFABM_Personas
         'btnReactivar'
         'btnImprimirDetalle'
         'btnImprimirListado'
-        'btnExcel')
+        'btnExcel'
+        'btnEMail'
+        'btnSkype')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
