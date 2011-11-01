@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 324
-  Top = 126
+  Left = 281
+  Top = 55
   Width = 1016
   Height = 719
   Caption = 'Cajero SiGeFa'
@@ -2934,7 +2934,6 @@ object FCajero: TFCajero
       TitleFont.Height = -11
       TitleFont.Name = 'Verdana'
       TitleFont.Style = []
-      OnColExit = DBGridFormaPagoColExit
       Columns = <
         item
           Color = 16772332
@@ -4152,10 +4151,10 @@ object FCajero: TFCajero
     end
   end
   object PABM_FormaPago: TPanel
-    Left = 117
-    Top = 449
+    Left = 125
+    Top = 441
     Width = 832
-    Height = 142
+    Height = 144
     BevelInner = bvLowered
     BevelOuter = bvSpace
     BevelWidth = 2
@@ -4186,7 +4185,7 @@ object FCajero: TFCajero
       Width = 83
       Height = 13
       Caption = 'Medio de Pago'
-      FocusControl = DBLookupComboBox1
+      FocusControl = edDetalleMDP
     end
     object Label48: TLabel
       Left = 323
@@ -4194,7 +4193,7 @@ object FCajero: TFCajero
       Width = 62
       Height = 13
       Caption = 'MDP Fecha'
-      FocusControl = DBEdit20
+      FocusControl = edMDPFecha
     end
     object Label49: TLabel
       Left = 435
@@ -4202,15 +4201,15 @@ object FCajero: TFCajero
       Width = 64
       Height = 13
       Caption = 'MDP Banco'
-      FocusControl = DBEdit21
+      FocusControl = edMDPBanco
     end
     object Label50: TLabel
-      Left = 632
+      Left = 634
       Top = 62
       Width = 74
       Height = 13
       Caption = 'MDP N'#250'mero'
-      FocusControl = DBEdit22
+      FocusControl = edMDPNro
     end
     object Label51: TLabel
       Left = 16
@@ -4218,7 +4217,7 @@ object FCajero: TFCajero
       Width = 46
       Height = 13
       Caption = 'Importe'
-      FocusControl = DBEdit23
+      FocusControl = edImporte
     end
     object Label53: TLabel
       Left = 16
@@ -4226,7 +4225,7 @@ object FCajero: TFCajero
       Width = 40
       Height = 13
       Caption = 'C'#243'digo'
-      FocusControl = DBEdit25
+      FocusControl = edCodCuenta
     end
     object Label55: TLabel
       Left = 68
@@ -4234,7 +4233,7 @@ object FCajero: TFCajero
       Width = 85
       Height = 13
       Caption = 'Cuenta Detalle'
-      FocusControl = DBLookupComboBox2
+      FocusControl = edCuenta
     end
     object Label58: TLabel
       Left = 152
@@ -4242,7 +4241,7 @@ object FCajero: TFCajero
       Width = 101
       Height = 13
       Caption = 'Importe de Venta'
-      FocusControl = DBEdit28
+      FocusControl = edImporteVenta
     end
     object Label61: TLabel
       Left = 435
@@ -4250,9 +4249,9 @@ object FCajero: TFCajero
       Width = 40
       Height = 13
       Caption = 'C'#243'digo'
-      FocusControl = DBEdit29
+      FocusControl = edCodMDP
     end
-    object DBLookupComboBox1: TDBLookupComboBox
+    object edDetalleMDP: TDBLookupComboBox
       Left = 482
       Top = 40
       Width = 329
@@ -4260,36 +4259,60 @@ object FCajero: TFCajero
       Color = 16772332
       DataField = 'medioPago'
       DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 3
     end
-    object DBEdit20: TDBEdit
+    object edMDPFecha: TDBEdit
       Left = 323
       Top = 76
       Width = 94
       Height = 21
       DataField = 'MDCP_FECHA'
       DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 6
     end
-    object DBEdit21: TDBEdit
+    object edMDPBanco: TDBEdit
       Left = 435
       Top = 76
       Width = 164
       Height = 21
       DataField = 'MDCP_BANCO'
       DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 7
     end
-    object DBEdit22: TDBEdit
+    object edMDPNro: TDBEdit
       Left = 634
       Top = 76
       Width = 177
       Height = 21
       DataField = 'MDCP_CHEQUE'
       DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 8
     end
-    object DBEdit23: TDBEdit
+    object edImporte: TDBEdit
       Left = 16
       Top = 76
       Width = 134
@@ -4299,7 +4322,7 @@ object FCajero: TFCajero
       Enabled = False
       TabOrder = 4
     end
-    object DBEdit25: TDBEdit
+    object edCodCuenta: TDBEdit
       Left = 16
       Top = 40
       Width = 41
@@ -4307,9 +4330,15 @@ object FCajero: TFCajero
       Color = 16772332
       DataField = 'CUENTA_INGRESO'
       DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 0
     end
-    object DBLookupComboBox2: TDBLookupComboBox
+    object edCuenta: TDBLookupComboBox
       Left = 67
       Top = 40
       Width = 350
@@ -4317,9 +4346,15 @@ object FCajero: TFCajero
       Color = 16772332
       DataField = '_ctaIngreso'
       DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 1
     end
-    object DBEdit28: TDBEdit
+    object edImporteVenta: TDBEdit
       Left = 152
       Top = 76
       Width = 134
@@ -4327,9 +4362,15 @@ object FCajero: TFCajero
       Color = 16772332
       DataField = '_importeVenta'
       DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 5
     end
-    object DBEdit29: TDBEdit
+    object edCodMDP: TDBEdit
       Left = 435
       Top = 40
       Width = 41
@@ -4337,6 +4378,12 @@ object FCajero: TFCajero
       Color = 16772332
       DataField = 'ID_TIPO_FORMAPAG'
       DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 2
     end
     object btnGrupoAceptar: TBitBtn
@@ -4458,6 +4505,7 @@ object FCajero: TFCajero
     end
     object CD_FpagoCUENTA_INGRESO: TIntegerField
       FieldName = 'CUENTA_INGRESO'
+      OnChange = CD_FpagoCUENTA_INGRESOChange
     end
     object CD_FpagoCUENTA_EGRESO: TIntegerField
       FieldName = 'CUENTA_EGRESO'
@@ -4471,10 +4519,6 @@ object FCajero: TFCajero
       KeyFields = 'CUENTA_INGRESO'
       Size = 100
       Lookup = True
-    end
-    object CD_Fpago_esCtaCorr: TStringField
-      FieldName = '_esCtaCorr'
-      Size = 1
     end
     object CD_Fpago_desc_rec: TFloatField
       FieldKind = fkLookup
@@ -4510,7 +4554,22 @@ object FCajero: TFCajero
       Lookup = True
     end
     object CD_Fpago_fiscal: TStringField
+      FieldKind = fkLookup
       FieldName = '_fiscal'
+      LookupDataSet = ZQ_FormasPago
+      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
+      LookupResultField = 'IF'
+      KeyFields = 'ID_TIPO_FORMAPAG'
+      Lookup = True
+    end
+    object CD_Fpago_esCtaCorr: TStringField
+      FieldKind = fkLookup
+      FieldName = '_esCtaCorr'
+      LookupDataSet = ZQ_Cuentas
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'A_CTA_CORRIENTE'
+      KeyFields = 'CUENTA_INGRESO'
+      Lookup = True
     end
   end
   object DSFpago: TDataSource
@@ -4524,8 +4583,8 @@ object FCajero: TFCajero
       'select *'
       'from tipo_formapago')
     Params = <>
-    Left = 773
-    Top = 242
+    Left = 749
+    Top = 442
     object ZQ_FormasPagoID_TIPO_FORMAPAGO: TIntegerField
       FieldName = 'ID_TIPO_FORMAPAGO'
       Required = True
@@ -4555,6 +4614,10 @@ object FCajero: TFCajero
     object ZQ_FormasPagoCOLUMNA_PRECIO: TIntegerField
       FieldName = 'COLUMNA_PRECIO'
     end
+    object ZQ_FormasPagoMODIFICABLE: TStringField
+      FieldName = 'MODIFICABLE'
+      Size = 1
+    end
   end
   object EKDbSuma2: TEKDbSuma
     SumCollection = <
@@ -4570,42 +4633,6 @@ object FCajero: TFCajero
     SumListChanged = EKDbSuma2SumListChanged
     Left = 316
     Top = 434
-  end
-  object EKListadoMedCobroPago: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'SELECT tf.id_tipo_formapago,tf.descripcion||'#39' '#39'||'
-      '       COALESCE ('#39'| C'#243'digo: '#39' || tf.cod_corto,'#39#39')||'#39' '#39'||'
-      
-        '       COALESCE ('#39'| Desc/Rec: '#39' || (tf.desc_rec*100)||'#39'% '#39','#39#39') A' +
-        'S descr,tf.cod_corto'
-      'FROM TIPO_FORMAPAGO tf'
-      'where tf.baja<>'#39'S'#39
-      'order by tf.cod_corto,tf.descripcion')
-    CampoBuscar = 'descr'
-    CampoClave = 'id_tipo_formapago'
-    TituloVentana = 'Forma de Pago'
-    Left = 616
-    Top = 433
-  end
-  object EKListadoCuenta: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select cta.*, tipo.descripcion,'
-      
-        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
-        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
-      'from cuenta cta'
-      
-        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
-        'po_formapago)'
-      'where (cta.baja = '#39'N'#39')'
-      'order by cta.nombre_cuenta,cta.codigo')
-    CampoBuscar = 'busqueda'
-    CampoClave = 'id_cuenta'
-    TituloVentana = 'Buscar Cuenta'
-    Left = 733
-    Top = 433
   end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
@@ -4644,6 +4671,14 @@ object FCajero: TFCajero
     end
     object ZQ_CuentasID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_CuentasA_NOTA_CREDITO: TStringField
+      FieldName = 'A_NOTA_CREDITO'
+      Size = 1
+    end
+    object ZQ_CuentasMODIFICABLE: TStringField
+      FieldName = 'MODIFICABLE'
+      Size = 1
     end
   end
   object dxBarABM: TdxBarManager
@@ -8559,8 +8594,8 @@ object FCajero: TFCajero
   object CD_VentaFinal: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 170
-    Top = 308
+    Left = 138
+    Top = 292
     object CD_VentaFinal_medioPago: TStringField
       FieldName = '_medioPago'
       Size = 50
@@ -8603,131 +8638,18 @@ object FCajero: TFCajero
     Left = 808
     Top = 344
   end
-  object ZQ_BuscarMedioPago: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select tipo.*'
-      'from tipo_formapago tipo'
-      'where tipo.id_tipo_formapago = :id_tipo')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_tipo'
-        ParamType = ptUnknown
-      end>
-    Left = 621
-    Top = 481
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_tipo'
-        ParamType = ptUnknown
-      end>
-    object ZQ_BuscarMedioPagoID_TIPO_FORMAPAGO: TIntegerField
-      FieldName = 'ID_TIPO_FORMAPAGO'
-    end
-    object ZQ_BuscarMedioPagoDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 50
-    end
-    object ZQ_BuscarMedioPagoBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_BuscarMedioPagoIF: TStringField
-      FieldName = 'IF'
-      Size = 1
-    end
-    object ZQ_BuscarMedioPagoDESC_REC: TFloatField
-      FieldName = 'DESC_REC'
-    end
-    object ZQ_BuscarMedioPagoCOD_CORTO: TIntegerField
-      FieldName = 'COD_CORTO'
-    end
-    object ZQ_BuscarMedioPagoGENERA_VUELTO: TStringField
-      FieldName = 'GENERA_VUELTO'
-      Size = 1
-    end
-    object ZQ_BuscarMedioPagoCOLUMNA_PRECIO: TIntegerField
-      FieldName = 'COLUMNA_PRECIO'
-    end
-    object ZQ_BuscarMedioPagoMODIFICABLE: TStringField
-      FieldName = 'MODIFICABLE'
-      Size = 1
-    end
-  end
-  object ZQ_BuscarCuenta: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select cta.*'
-      'from cuenta cta'
-      'where cta.id_cuenta = :id_cuenta')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_cuenta'
-        ParamType = ptUnknown
-      end>
-    Left = 733
-    Top = 481
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_cuenta'
-        ParamType = ptUnknown
-      end>
-    object ZQ_BuscarCuentaID_CUENTA: TIntegerField
-      FieldName = 'ID_CUENTA'
-    end
-    object ZQ_BuscarCuentaMEDIO_DEFECTO: TIntegerField
-      FieldName = 'MEDIO_DEFECTO'
-    end
-    object ZQ_BuscarCuentaCODIGO: TStringField
-      FieldName = 'CODIGO'
-      Size = 10
-    end
-    object ZQ_BuscarCuentaNOMBRE_CUENTA: TStringField
-      FieldName = 'NOMBRE_CUENTA'
-      Size = 50
-    end
-    object ZQ_BuscarCuentaNRO_CTA_BANCARIA: TStringField
-      FieldName = 'NRO_CTA_BANCARIA'
-      Size = 10
-    end
-    object ZQ_BuscarCuentaBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_BuscarCuentaID_SUCURSAL: TIntegerField
-      FieldName = 'ID_SUCURSAL'
-    end
-    object ZQ_BuscarCuentaA_CTA_CORRIENTE: TStringField
-      FieldName = 'A_CTA_CORRIENTE'
-      Size = 1
-    end
-    object ZQ_BuscarCuentaA_NOTA_CREDITO: TStringField
-      FieldName = 'A_NOTA_CREDITO'
-      Size = 1
-    end
-    object ZQ_BuscarCuentaMODIFICABLE: TStringField
-      FieldName = 'MODIFICABLE'
-      Size = 1
-    end
-  end
-  object PopupMenu1: TPopupMenu
+  object PopupFP: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
-    Left = 824
-    Top = 472
-    object MenuItem1: TMenuItem
-      Caption = 'Editar Producto'
+    Left = 592
+    Top = 440
+    object menuEditarFP: TMenuItem
+      Caption = 'Editar FP'
       ImageIndex = 10
-      OnClick = EditarProdClick
     end
-    object MenuItem2: TMenuItem
-      Caption = 'Quitar Producto'
+    object menuQuitarFP: TMenuItem
+      Caption = 'Quitar FP'
       ImageIndex = 12
-      OnClick = btQuitarProductoClick
     end
   end
 end
