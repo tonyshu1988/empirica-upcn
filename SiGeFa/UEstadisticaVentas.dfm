@@ -25,7 +25,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 1201
     Height = 691
-    ActivePage = TabHorarioGrafico
+    ActivePage = TabRanking
     Align = alClient
     TabOrder = 4
     object TabFacturacion: TTabSheet
@@ -1382,7 +1382,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 102
+            Width = 1185
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1396,7 +1396,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 120
+            Width = 1185
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1410,7 +1410,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 126
+            Width = 1185
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -2467,17 +2467,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Transparent = False
               Layout = tlCenter
             end
-            object Splitter3: TSplitter
-              Left = 1181
-              Top = 0
-              Width = 8
-              Height = 638
-              Align = alRight
-            end
             object DBGridProdVendidos: TDBGrid
               Left = 0
               Top = 0
-              Width = 1181
+              Width = 1189
               Height = 638
               Align = alClient
               Color = 14606012
@@ -2529,6 +2522,112 @@ object FEstadisticaVentas: TFEstadisticaVentas
             end
           end
         end
+      end
+    end
+    object TabRanking: TTabSheet
+      Caption = 'Ranking Ventas'
+      ImageIndex = 4
+      object Panel4: TPanel
+        Left = 0
+        Top = 0
+        Width = 1193
+        Height = 33
+        Align = alTop
+        BevelOuter = bvNone
+        ParentShowHint = False
+        ShowHint = False
+        TabOrder = 0
+        object SpeedButton1: TSpeedButton
+          Left = 97
+          Top = 7
+          Width = 94
+          Height = 18
+          GroupIndex = 1
+          Down = True
+          Caption = 'Productos'
+          Layout = blGlyphBottom
+          OnClick = AplicarFiltro
+        end
+        object SpeedButton2: TSpeedButton
+          Left = 193
+          Top = 7
+          Width = 94
+          Height = 18
+          GroupIndex = 1
+          Caption = 'Clientes'
+          Layout = blGlyphBottom
+          OnClick = AplicarFiltro
+        end
+        object SpeedButton3: TSpeedButton
+          Left = 289
+          Top = 7
+          Width = 94
+          Height = 18
+          GroupIndex = 1
+          Caption = 'Vendedores'
+          Layout = blGlyphBottom
+          OnClick = AplicarFiltro
+        end
+        object Label1: TLabel
+          Left = 19
+          Top = 9
+          Width = 75
+          Height = 13
+          Caption = 'Ranking seg'#250'n:'
+        end
+      end
+      object DBGrid1: TDBGrid
+        Left = 0
+        Top = 33
+        Width = 1193
+        Height = 630
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_ProductosVendidos
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'FECHAC'
+            Title.Caption = 'Fecha'
+            Width = 96
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DETALLE_PROD'
+            Title.Caption = 'Producto/Servicio'
+            Width = 469
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CANTIDAD'
+            Title.Caption = 'Cantidad'
+            Width = 69
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SUMAVENTA'
+            Title.Caption = 'Importe'
+            Width = 111
+            Visible = True
+          end>
       end
     end
   end

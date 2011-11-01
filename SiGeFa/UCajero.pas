@@ -159,7 +159,7 @@ type
     BtBuscarProducto: TdxBarLargeButton;
     BtModificar: TdxBarLargeButton;
     btBuscProd: TdxBarLargeButton;
-    BtAgregarPago: TdxBarLargeButton;
+    BtLeerCB: TdxBarLargeButton;
     BtAceptarPago: TdxBarLargeButton;
     BtCancelarPago: TdxBarLargeButton;
     BtVendedor: TdxBarLargeButton;
@@ -175,7 +175,7 @@ type
     Bt_Imprimir_convenio: TdxBarLargeButton;
     BtLeerCodigo: TdxBarLargeButton;
     btIVA: TdxBarLargeButton;
-    btReimprimirComprob: TdxBarLargeButton;
+    btnFormaPago: TdxBarLargeButton;
     Bt_imprimir_listadoFP: TdxBarLargeButton;
     bt_cierre_X: TdxBarLargeButton;
     GrupoGuardarCancelar: TdxBarGroup;
@@ -523,10 +523,35 @@ type
     CD_VentaFinalfiscal: TStringField;
     btCierreZ: TdxBarLargeButton;
     BtCierreX: TdxBarLargeButton;
+    PABM_FormaPago: TPanel;
+    Label18: TLabel;
+    Label47: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Label48: TLabel;
+    DBEdit20: TDBEdit;
+    Label49: TLabel;
+    DBEdit21: TDBEdit;
+    Label50: TLabel;
+    DBEdit22: TDBEdit;
+    Label51: TLabel;
+    DBEdit23: TDBEdit;
+    Label53: TLabel;
+    DBEdit25: TDBEdit;
+    Label55: TLabel;
+    DBLookupComboBox2: TDBLookupComboBox;
+    Label58: TLabel;
+    DBEdit28: TDBEdit;
+    Label61: TLabel;
+    DBEdit29: TDBEdit;
+    btnGrupoAceptar: TBitBtn;
+    btnGrupoCancelar: TBitBtn;
+    PopupMenu1: TPopupMenu;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
-    procedure BtAgregarPagoClick(Sender: TObject);
+    procedure BtLeerCBClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btQuitarProductoClick(Sender: TObject);
     procedure codBarrasEnter(Sender: TObject);
@@ -610,6 +635,9 @@ type
     function completarCodBar(cod:String):String ;
     procedure edCantidadKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btnGrupoAceptarClick(Sender: TObject);
+    procedure btnGrupoCancelarClick(Sender: TObject);
+    procedure btnFormaPagoClick(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -896,7 +924,11 @@ begin
      ZQ_FormasPago.Filtered:=False;
      ZQ_FormasPago.Filter:='';
      ZQ_FormasPago.Filtered:=True;
-  end
+  end;
+
+
+  FPrincipal.Iconos_Menu_16.GetBitmap(1, btnGrupoAceptar.Glyph);
+  FPrincipal.Iconos_Menu_16.GetBitmap(0, btnGrupoCancelar.Glyph);
 end;
 
 
@@ -937,10 +969,12 @@ begin
   CD_ComprobanteID_TIPO_CPB.AsInteger:=11; //Factura
   CD_ComprobanteID_VENDEDOR.AsInteger:=IdVendedor;
   CD_ComprobanteID_COMP_ESTADO.AsInteger:=ESTADO_SIN_CONFIRMAR;
+
   if CheckBoxCambiarFecha.Checked then
     CD_ComprobanteFECHA.AsDateTime:= DateTimePicker_FechaCarga.DateTime
   else
     CD_ComprobanteFECHA.AsDateTime:=dm.EKModelo.FechayHora();
+
   CD_ComprobanteOBSERVACION.AsString:='';
   CD_ComprobanteBASE_IMPONIBLE.AsFloat:=0;
   CD_ComprobanteSALDO.AsFloat:=0;
@@ -1029,7 +1063,7 @@ end;
 
 procedure TFCajero.bt_BuscarClienteClick(Sender: TObject);
 begin
-   
+
   if modoCargaPrevia then
   begin
     Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
@@ -1040,7 +1074,7 @@ begin
   begin
     if not Assigned(vsel2) then
       vsel2:= TFBuscarPersona.Create(nil);
-      
+
     vsel2.configRelacion(RELACION_CLIENTE);
     vsel2.EKBusqueda.Abrir;
     vsel2.OnSeleccionar := OnSelPers;
@@ -1115,7 +1149,7 @@ if edCantidad.Enabled then
 end;
 
 
-procedure TFCajero.BtAgregarPagoClick(Sender: TObject);
+procedure TFCajero.BtLeerCBClick(Sender: TObject);
 begin
 //  if PConfirmarVenta.Visible then
 //    exit;
@@ -1125,7 +1159,7 @@ begin
     Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
     exit;
   end;
- 
+
   if (CD_DetalleFactura.State<>dsBrowse) then
     exit;
 
@@ -1198,7 +1232,7 @@ end;
 
 procedure TFCajero.SpeedButton1Click(Sender: TObject);
 begin
-  BtAgregarPago.Click;
+  BtLeerCB.Click;
 end;
 
 
@@ -1222,6 +1256,7 @@ begin
   if (ZQ_ProductosSTOCK_ACTUAL.AsFloat>=CD_DetalleFacturaCANTIDAD.AsFloat) then
    begin
     CD_DetalleFacturaIMPORTE_VENTA.AsFloat:=CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
+    CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=CD_DetalleFacturaIMPORTE_VENTA.AsFloat/CD_DetalleFacturaCANTIDAD.AsFloat;
     CD_DetalleFacturaIMPORTE_IVA.AsFloat:=CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
     CD_DetalleFactura.Post;
     lblCantProductos.Caption:='Cantidad Productos: '+inttostr(CD_DetalleFactura.RecordCount);
@@ -1246,6 +1281,7 @@ begin
   if (CD_DetalleFactura.State in [dsInsert,dsEdit]) then
     CD_DetalleFactura.Cancel;
   modoLecturaProd();
+
   if DBGridListadoProductos.Enabled then
      DBGridListadoProductos.SetFocus;
 end;
@@ -1260,6 +1296,9 @@ begin
    grupoVertical.Enabled:=True;
    PanelDetalleProducto.Enabled:=False;
    PanelDetalleProducto.Color:=PanelProductosYFPago.Color;
+   //No trae productos si se cancela
+   edImagen.Visible:=False;
+   ZQ_Productos.Close;
 end;
 
 
@@ -1302,9 +1341,13 @@ if modoCargaPrevia then
     Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
     exit;
  end;
- 
+
   if not(CD_DetalleFactura.IsEmpty) then
    begin
+   ZQ_Productos.Close;
+   ZQ_Productos.sql[15]:=Format('and(p.id_producto=%s)',[CD_DetalleFacturaID_PRODUCTO.AsString]);
+   ZQ_Productos.Open;
+
    CD_DetalleFactura.Edit;
    modoEscrituraProd();
    if edCantidad.Enabled then
@@ -1785,7 +1828,7 @@ end;
 
 procedure TFCajero.APagoExecute(Sender: TObject);
 begin
-  BtAgregarPago.Click;
+  BtLeerCB.Click;
 end;
 
 
@@ -2412,21 +2455,20 @@ begin
   if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
     exit;
 
-  if not DBGridFormaPago.Focused then  //si no estoy en la grilla de forma de pago
-    if (CD_Comprobante.State in [dsInsert,dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
+  if (CD_Comprobante.State in [dsInsert,dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
     begin
-      if DBGridFormaPago.Enabled then
-         DBGridFormaPago.SetFocus;
-      DBGridFormaPago.SelectedField:= DBGridFormaPago.Fields[0]; //sigo en la misma columna
-      CD_Fpago.Append;
+    dm.centrarPanel(FCajero, PABM_FormaPago);
+    //PABM_FormaPago.Top:=FCajero.Height-300;
+    PABM_FormaPago.Visible:=true;
+    CD_Fpago.Append;
     end
 end;
 
                                                
 procedure TFCajero.ANuevoProdExecute(Sender: TObject);
 begin
-  if BtAgregarPago.Enabled then
-    BtAgregarPago.Click;
+  if BtLeerCB.Enabled then
+    BtLeerCB.Click;
 end;
 
 
@@ -2486,6 +2528,23 @@ begin
   begin
      edImporteFinalKeyDown(Sender,Key,Shift);
   end
+end;
+
+procedure TFCajero.btnGrupoAceptarClick(Sender: TObject);
+begin
+  CD_Fpago.Post;
+  PABM_FormaPago.Visible:=False;
+end;
+
+procedure TFCajero.btnGrupoCancelarClick(Sender: TObject);
+begin
+  CD_Fpago.Cancel;
+  PABM_FormaPago.Visible:=False;
+end;
+
+procedure TFCajero.btnFormaPagoClick(Sender: TObject);
+begin
+  ANuevaFormaPago.Execute;
 end;
 
 end.

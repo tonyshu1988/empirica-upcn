@@ -219,7 +219,6 @@ type
     Label39: TLabel;
     EKOrdenarProdVendidos: TEKOrdenarGrilla;
     EKDbSumaProdsVendidos: TEKDbSuma;
-    Splitter3: TSplitter;
     DBChart1: TDBChart;
     FastLineSeries2: TBarSeries;
     EKVistaPrevia2: TEKVistaPreviaQR;
@@ -227,6 +226,13 @@ type
     QRExpr2: TQRExpr;
     QRLabel4: TQRLabel;
     Splitter4: TSplitter;
+    TabRanking: TTabSheet;
+    Panel4: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    Label1: TLabel;
+    DBGrid1: TDBGrid;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
