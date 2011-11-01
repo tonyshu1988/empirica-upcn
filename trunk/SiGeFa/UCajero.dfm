@@ -1,8 +1,8 @@
 object FCajero: TFCajero
-  Left = 194
-  Top = 30
-  Width = 1022
-  Height = 675
+  Left = 324
+  Top = 126
+  Width = 1016
+  Height = 719
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -2964,15 +2964,15 @@ object FCajero: TFCajero
   object PanelContenedorDerecha: TPanel
     Left = 88
     Top = 0
-    Width = 918
-    Height = 585
+    Width = 912
+    Height = 629
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 2
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 916
+      Width = 910
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -2996,7 +2996,7 @@ object FCajero: TFCajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 576
+        Left = 570
         Top = 1
         Width = 339
         Height = 28
@@ -3017,7 +3017,7 @@ object FCajero: TFCajero
       object PanelCambiarFecha: TPanel
         Left = 345
         Top = 1
-        Width = 231
+        Width = 225
         Height = 28
         Align = alClient
         BevelOuter = bvNone
@@ -3047,7 +3047,7 @@ object FCajero: TFCajero
       Tag = 99
       Left = 1
       Top = 146
-      Width = 916
+      Width = 910
       Height = 41
       Align = alTop
       Color = 12648448
@@ -3140,7 +3140,7 @@ object FCajero: TFCajero
         Tag = 99
         Left = 1
         Top = 16
-        Width = 914
+        Width = 908
         Height = 24
         Align = alBottom
         BevelOuter = bvNone
@@ -3363,15 +3363,15 @@ object FCajero: TFCajero
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 187
-      Width = 916
-      Height = 397
+      Width = 910
+      Height = 441
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 2
       object Label11: TLabel
         Left = 1
         Top = 1
-        Width = 914
+        Width = 908
         Height = 14
         Align = alTop
         Alignment = taCenter
@@ -3390,8 +3390,8 @@ object FCajero: TFCajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 15
-        Width = 914
-        Height = 221
+        Width = 908
+        Height = 265
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3405,8 +3405,8 @@ object FCajero: TFCajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 912
-          Height = 165
+          Width = 906
+          Height = 209
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -3480,8 +3480,8 @@ object FCajero: TFCajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 166
-          Width = 912
+          Top = 210
+          Width = 906
           Height = 54
           Align = alBottom
           BevelOuter = bvLowered
@@ -3489,7 +3489,7 @@ object FCajero: TFCajero
           object Label36: TLabel
             Left = 1
             Top = 37
-            Width = 910
+            Width = 904
             Height = 16
             Align = alBottom
             Alignment = taCenter
@@ -3508,7 +3508,7 @@ object FCajero: TFCajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 1
-            Width = 910
+            Width = 904
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3524,7 +3524,7 @@ object FCajero: TFCajero
           object lblMontoProds: TLabel
             Left = 1
             Top = 16
-            Width = 910
+            Width = 904
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3550,8 +3550,8 @@ object FCajero: TFCajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 236
-        Width = 914
+        Top = 280
+        Width = 908
         Height = 89
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -3559,20 +3559,18 @@ object FCajero: TFCajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 912
+          Width = 906
           Height = 87
           Align = alClient
           Color = 16762303
           DataSource = DSFpago
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
           TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
-          OnColExit = DBGridFormaPagoColExit
-          OnExit = DBGridFormaPagoColExit
-          OnKeyUp = DBGridFormaPagoKeyUp
           Columns = <
             item
               Color = 16772332
@@ -3649,8 +3647,8 @@ object FCajero: TFCajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 325
-        Width = 914
+        Top = 369
+        Width = 908
         Height = 71
         Align = alBottom
         BevelOuter = bvLowered
@@ -3658,7 +3656,7 @@ object FCajero: TFCajero
         object lblTotAPagar: TLabel
           Left = 1
           Top = 37
-          Width = 912
+          Width = 906
           Height = 33
           Align = alBottom
           Alignment = taRightJustify
@@ -3678,7 +3676,7 @@ object FCajero: TFCajero
         object lblMaxVenta: TLabel
           Left = 1
           Top = 1
-          Width = 912
+          Width = 906
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -3707,14 +3705,14 @@ object FCajero: TFCajero
     object PanelDeralles: TPanel
       Left = 1
       Top = 31
-      Width = 916
+      Width = 910
       Height = 115
       Align = alTop
       TabOrder = 3
       object PanelCabeceraFactura: TPanel
         Left = 526
         Top = 1
-        Width = 389
+        Width = 383
         Height = 113
         Align = alClient
         BevelOuter = bvLowered
@@ -3728,7 +3726,7 @@ object FCajero: TFCajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 387
+          Width = 381
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -4048,6 +4046,7 @@ object FCajero: TFCajero
           DataField = 'IMAGEN'
           DataSource = DS_Productos
           QuickDraw = False
+          Stretch = True
           TabOrder = 8
           Visible = False
         end
@@ -4150,6 +4149,213 @@ object FCajero: TFCajero
           TabOrder = 6
         end
       end
+    end
+  end
+  object PABM_FormaPago: TPanel
+    Left = 117
+    Top = 449
+    Width = 832
+    Height = 142
+    BevelInner = bvLowered
+    BevelOuter = bvSpace
+    BevelWidth = 2
+    BorderStyle = bsSingle
+    TabOrder = 7
+    object Label18: TLabel
+      Left = 4
+      Top = 4
+      Width = 820
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Forma de Pago'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label47: TLabel
+      Left = 482
+      Top = 24
+      Width = 83
+      Height = 13
+      Caption = 'Medio de Pago'
+      FocusControl = DBLookupComboBox1
+    end
+    object Label48: TLabel
+      Left = 323
+      Top = 62
+      Width = 62
+      Height = 13
+      Caption = 'MDP Fecha'
+      FocusControl = DBEdit20
+    end
+    object Label49: TLabel
+      Left = 435
+      Top = 62
+      Width = 64
+      Height = 13
+      Caption = 'MDP Banco'
+      FocusControl = DBEdit21
+    end
+    object Label50: TLabel
+      Left = 632
+      Top = 62
+      Width = 74
+      Height = 13
+      Caption = 'MDP N'#250'mero'
+      FocusControl = DBEdit22
+    end
+    object Label51: TLabel
+      Left = 16
+      Top = 62
+      Width = 46
+      Height = 13
+      Caption = 'Importe'
+      FocusControl = DBEdit23
+    end
+    object Label53: TLabel
+      Left = 16
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'C'#243'digo'
+      FocusControl = DBEdit25
+    end
+    object Label55: TLabel
+      Left = 68
+      Top = 24
+      Width = 85
+      Height = 13
+      Caption = 'Cuenta Detalle'
+      FocusControl = DBLookupComboBox2
+    end
+    object Label58: TLabel
+      Left = 152
+      Top = 62
+      Width = 101
+      Height = 13
+      Caption = 'Importe de Venta'
+      FocusControl = DBEdit28
+    end
+    object Label61: TLabel
+      Left = 435
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'C'#243'digo'
+      FocusControl = DBEdit29
+    end
+    object DBLookupComboBox1: TDBLookupComboBox
+      Left = 482
+      Top = 40
+      Width = 329
+      Height = 21
+      Color = 16772332
+      DataField = 'medioPago'
+      DataSource = DSFpago
+      TabOrder = 3
+    end
+    object DBEdit20: TDBEdit
+      Left = 323
+      Top = 76
+      Width = 94
+      Height = 21
+      DataField = 'MDCP_FECHA'
+      DataSource = DSFpago
+      TabOrder = 6
+    end
+    object DBEdit21: TDBEdit
+      Left = 435
+      Top = 76
+      Width = 164
+      Height = 21
+      DataField = 'MDCP_BANCO'
+      DataSource = DSFpago
+      TabOrder = 7
+    end
+    object DBEdit22: TDBEdit
+      Left = 634
+      Top = 76
+      Width = 177
+      Height = 21
+      DataField = 'MDCP_CHEQUE'
+      DataSource = DSFpago
+      TabOrder = 8
+    end
+    object DBEdit23: TDBEdit
+      Left = 16
+      Top = 76
+      Width = 134
+      Height = 21
+      DataField = 'IMPORTE'
+      DataSource = DSFpago
+      Enabled = False
+      TabOrder = 4
+    end
+    object DBEdit25: TDBEdit
+      Left = 16
+      Top = 40
+      Width = 41
+      Height = 21
+      Color = 16772332
+      DataField = 'CUENTA_INGRESO'
+      DataSource = DSFpago
+      TabOrder = 0
+    end
+    object DBLookupComboBox2: TDBLookupComboBox
+      Left = 67
+      Top = 40
+      Width = 350
+      Height = 21
+      Color = 16772332
+      DataField = '_ctaIngreso'
+      DataSource = DSFpago
+      TabOrder = 1
+    end
+    object DBEdit28: TDBEdit
+      Left = 152
+      Top = 76
+      Width = 134
+      Height = 21
+      Color = 16772332
+      DataField = '_importeVenta'
+      DataSource = DSFpago
+      TabOrder = 5
+    end
+    object DBEdit29: TDBEdit
+      Left = 435
+      Top = 40
+      Width = 41
+      Height = 21
+      Color = 16772332
+      DataField = 'ID_TIPO_FORMAPAG'
+      DataSource = DSFpago
+      TabOrder = 2
+    end
+    object btnGrupoAceptar: TBitBtn
+      Left = 198
+      Top = 104
+      Width = 88
+      Height = 24
+      Caption = 'Aceptar'
+      TabOrder = 9
+      OnClick = btnGrupoAceptarClick
+    end
+    object btnGrupoCancelar: TBitBtn
+      Left = 511
+      Top = 104
+      Width = 88
+      Height = 24
+      Caption = 'Cancelar'
+      TabOrder = 10
+      OnClick = btnGrupoCancelarClick
     end
   end
   object ZQ_Comprobante_FormaPago: TZQuery
@@ -4745,7 +4951,12 @@ object FCajero: TFCajero
         Font.Style = []
         ItemLinks = <
           item
-            Item = BtAgregarPago
+            Item = BtLeerCB
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnFormaPago
             Visible = True
           end
           item
@@ -6808,8 +7019,8 @@ object FCajero: TFCajero
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 136
-    Top = 296
+    Left = 888
+    Top = 400
     DockControlHeights = (
       88
       0
@@ -6844,13 +7055,13 @@ object FCajero: TFCajero
       OnClick = btBuscProdClick
       AutoGrayScale = False
     end
-    object BtAgregarPago: TdxBarLargeButton
+    object BtLeerCB: TdxBarLargeButton
       Caption = 'F6 Leer C'#243'digo Producto'
       Category = 0
       Hint = 'F6 Leer C'#243'digo Producto'
       Visible = ivAlways
       ImageIndex = 85
-      OnClick = BtAgregarPagoClick
+      OnClick = BtLeerCBClick
       AutoGrayScale = False
     end
     object BtAceptarPago: TdxBarLargeButton
@@ -6980,12 +7191,12 @@ object FCajero: TFCajero
       OnClick = btIVAClick
       AutoGrayScale = False
     end
-    object btReimprimirComprob: TdxBarLargeButton
-      Caption = 'Reimpresion'
+    object btnFormaPago: TdxBarLargeButton
+      Caption = 'F7 Forma de Pago'
       Category = 0
-      Hint = 'Reimpresion'
       Visible = ivAlways
-      ImageIndex = 28
+      ImageIndex = 30
+      OnClick = btnFormaPagoClick
       AutoGrayScale = False
     end
     object Bt_imprimir_listadoFP: TdxBarLargeButton
@@ -7035,11 +7246,12 @@ object FCajero: TFCajero
         'BtVendedor'
         'btIVA'
         'bt_BuscarCliente'
-        'BtAgregarPago'
+        'BtLeerCB'
         'btsalir'
         'btPreventa'
         'btCierreZ'
-        'BtCierreX')
+        'BtCierreX'
+        'btnFormaPago')
     end
   end
   object EKListadoProducto: TEKListadoSQL
@@ -7583,6 +7795,7 @@ object FCajero: TFCajero
     object CD_DetalleFacturaIMPORTE_FINAL: TFloatField
       FieldName = 'IMPORTE_FINAL'
       currency = True
+      Precision = 4
     end
     object CD_DetalleFacturaPORC_DESCUENTO: TFloatField
       FieldName = 'PORC_DESCUENTO'
@@ -7596,6 +7809,7 @@ object FCajero: TFCajero
       FieldName = 'IMPORTE_UNITARIO'
       DisplayFormat = '$ ##,###,##0.00'
       EditFormat = '$ ##,###,##0.00'
+      Precision = 2
     end
     object CD_DetalleFacturaIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
@@ -8498,6 +8712,22 @@ object FCajero: TFCajero
     object ZQ_BuscarCuentaMODIFICABLE: TStringField
       FieldName = 'MODIFICABLE'
       Size = 1
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    MenuAnimation = [maLeftToRight]
+    Left = 824
+    Top = 472
+    object MenuItem1: TMenuItem
+      Caption = 'Editar Producto'
+      ImageIndex = 10
+      OnClick = EditarProdClick
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Quitar Producto'
+      ImageIndex = 12
+      OnClick = btQuitarProductoClick
     end
   end
 end
