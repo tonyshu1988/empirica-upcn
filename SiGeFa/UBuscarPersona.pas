@@ -8,7 +8,7 @@ uses
   StdCtrls, Mask, DBCtrls, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKDBDateTimePicker,
-  Menus;
+  Menus, Buttons;
 
 type
   TFBuscarPersona = class(TForm)
@@ -74,39 +74,7 @@ type
     ASalir: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    PageControlEdicion: TPageControl;
-    TabDatosPersonas: TTabSheet;
-    TabDatosTelMail: TTabSheet;
     PanelEdicion: TPanel;
-    Label5: TLabel;
-    Label4: TLabel;
-    Label2: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label18: TLabel;
-    Label1: TLabel;
-    Label3: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label11: TLabel;
-    Label9: TLabel;
-    dbcSexo: TDBComboBox;
-    dblkTipoDoc: TDBLookupComboBox;
-    dbNombre: TDBEdit;
-    dbNroDocu: TDBEdit;
-    DBEdit1: TDBEdit;
-    DBLookupComboBox1: TDBLookupComboBox;
-    DBLookupComboBox2: TDBLookupComboBox;
-    DBEDireccion: TDBEdit;
-    DBEdit4: TDBEdit;
-    DBEdit5: TDBEdit;
-    DBEdit2: TDBEdit;
-    DBEdit6: TDBEdit;
-    DBMemo1: TDBMemo;
-    EKDBDateTimePicker1: TEKDBDateTimePicker;
-    DBGridTelMail: TDBGrid;
     PopupMenuTelmail: TPopupMenu;
     AgregarTelMail: TMenuItem;
     EditarTelMail: TMenuItem;
@@ -119,6 +87,75 @@ type
     ZQ_EntidadTelefonoID_PERSONA: TIntegerField;
     ZQ_EntidadTelefonoDESCRIPCION: TStringField;
     DS_EntidadTelefono: TDataSource;
+    PageControl: TPageControl;
+    TabSheetDatos: TTabSheet;
+    Label9: TLabel;
+    Label8: TLabel;
+    Label6: TLabel;
+    Label5: TLabel;
+    Label16: TLabel;
+    Label10: TLabel;
+    Label1: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label2: TLabel;
+    Label7: TLabel;
+    Label11: TLabel;
+    DBLCBoxProvincia: TDBLookupComboBox;
+    DBLCBoxCondIva: TDBLookupComboBox;
+    DBEApellidoNombre: TDBEdit;
+    DBENroDocumento: TDBEdit;
+    DBELocalidad: TDBEdit;
+    DBEDireccion: TDBEdit;
+    DBECodPostal: TDBEdit;
+    DBCBoxSexo: TDBComboBox;
+    EKDBFechaNacimiento: TEKDBDateTimePicker;
+    DBLCBoxTipoDoc: TDBLookupComboBox;
+    DBECuit_Cuil: TDBEdit;
+    DBEditCodigo: TDBEdit;
+    DBEDescuento: TDBEdit;
+    TabSheetTelMail: TTabSheet;
+    DBGridTelMail: TDBGrid;
+    TabSheetDetalle: TTabSheet;
+    DBMemoDetalle: TDBMemo;
+    TabSheetCtaCte: TTabSheet;
+    gBoxCuentaCorriente: TGroupBox;
+    Label15: TLabel;
+    Label12: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    EKDBFechaCtaCte: TEKDBDateTimePicker;
+    DBEditLimiteDeuda: TDBEdit;
+    btnCtaCte_Aceptar: TBitBtn;
+    btnCtaCte_Cancelar: TBitBtn;
+    DBEditVencimDia: TDBEdit;
+    EKDBDateTimePicker1: TEKDBDateTimePicker;
+    btnCtaCte_Alta: TButton;
+    btnCtaCte_Modificar: TButton;
+    btnCtaCte_Reactivar: TButton;
+    btnCtaCte_Baja: TButton;
+    ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField;
+    ZQ_PersonasCODIGO_CORTO: TIntegerField;
+    ZQ_UltimoNro: TZQuery;
+    ZQ_UltimoNroCODIGO_CORTO: TIntegerField;
+    ZQ_RelacionCliente: TZQuery;
+    ZQ_RelacionClienteID_PERSONA_RELACION: TIntegerField;
+    ZQ_RelacionClienteID_PERSONA: TIntegerField;
+    ZQ_RelacionClienteID_RELACION: TIntegerField;
+    ZQ_RelacionClienteID_EMPRESA: TIntegerField;
+    ZQ_RelacionClienteID_SUCURSAL: TIntegerField;
+    RadioGroupRelacionCliente: TRadioGroup;
+    ZQ_CtaCte: TZQuery;
+    ZQ_CtaCteID_CTA_CTE: TIntegerField;
+    ZQ_CtaCteID_PERSONA: TIntegerField;
+    ZQ_CtaCteSALDO: TFloatField;
+    ZQ_CtaCteLIMITE_DEUDA: TFloatField;
+    ZQ_CtaCteFECHA_ALTA: TDateField;
+    ZQ_CtaCteFECHA_BAJA: TDateField;
+    ZQ_CtaCteBAJA: TStringField;
+    ZQ_CtaCteID_PROVEEDOR: TIntegerField;
+    ZQ_CtaCteVENCIMIENTO_DIAS: TIntegerField;
+    DS_CtaCte: TDataSource;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -127,7 +164,7 @@ type
     procedure btnCrearPersonaClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure configRelacion(relacion:Integer);
+    procedure configRelacion(relacion: Integer; permitirAlta: boolean);
     procedure configCtaCte();
     function validarcampos():boolean;
     procedure ABuscarExecute(Sender: TObject);
@@ -140,16 +177,19 @@ type
     procedure EditarTelMailClick(Sender: TObject);
     procedure EliminarTelMailClick(Sender: TObject);
     procedure ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
-    procedure DBGridPersonasDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure DBGridTelMailDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridPersonasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnCtaCte(Sender: TObject);
+    procedure habilitarCtaCte(flag: boolean);
+    procedure btnCtaCte_AceptarClick(Sender: TObject);
+    procedure btnCtaCte_CancelarClick(Sender: TObject);
+    procedure RadioGroupRelacionClienteClick(Sender: TObject);
   private
     { Private declarations }
   public
     id_persona: integer;
+    id_relacion: integer;
+    tieneCuentaCorriente, altaCtaCte: boolean;
     OnSeleccionar : procedure() of object;
   end;
 
@@ -171,9 +211,9 @@ var
   mensaje: string;
   color: TColor;
 begin
+  PageControl.ActivePageIndex:= 0;
   result:= true;
   mensaje:= '';
-  dbNombre.SetFocus;
 
   if (ZQ_PersonasNOMBRE.IsNull) then
   begin
@@ -200,8 +240,17 @@ begin
       result := false;
     end;
 
+  if (ZQ_PersonasID_TIPO_IVA.IsNull) then
+  begin
+    mensaje:= mensaje+#13+'El campo Condición IVA se encuentra vacío, Verifique';
+    result := false;
+  end;
+
   if Result = False then
+  begin
     Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
+    DBEApellidoNombre.SetFocus;
+  end;
 end;
 
 
@@ -239,33 +288,41 @@ procedure TFBuscarPersona.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla1.CargarConfigColumnas;
 
-  FBuscarPersona.Caption:= 'Buscar Persona';
-
   EKBusqueda.SQL_Select.Text:= 'select p.*';
   EKBusqueda.SQL_From.Text:= 'from persona p';
   EKBusqueda.SQL_Where.Text:= format('where p.baja <> %s', [QuotedStr('S')]);
   EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
 
   PanelEdicion.Visible:= false;
+
   DM.EKModelo.abrir(ZQ_Provincia);
   DM.EKModelo.abrir(ZQ_TipoIVA);
   DM.EKModelo.abrir(ZQ_TipoDoc);
 
-  dbNombre.Color:= dm.colorCampoRequido;
+  DBEApellidoNombre.Color:= dm.colorCampoRequido;
   DBEDireccion.Color:= dm.colorCampoRequido;
-  dblkTipoDoc.Color:= dm.colorCampoRequido;
-  dbNroDocu.Color:= dm.colorCampoRequido;
+  DBLCBoxTipoDoc.Color:= dm.colorCampoRequido;
+  DBENroDocumento.Color:= dm.colorCampoRequido;
+  DBLCBoxCondIva.Color:= dm.colorCampoRequido;
+
+  id_relacion:= -1;
+  RadioGroupRelacionCliente.Enabled:= true;
+  RadioGroupRelacionCliente.ItemIndex:= 0;
+  tieneCuentaCorriente:= false;
+  altaCtaCte:= false;
+  habilitarCtaCte(false);
 end;
 
 
 procedure TFBuscarPersona.btnCrearPersonaClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(Transaccion_CrearPersona,[ZQ_Personas, ZQ_EntidadTelefono]) then
+  if dm.EKModelo.iniciar_transaccion(Transaccion_CrearPersona,[ZQ_Personas, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono]) then
   begin
     GrupoVisualizando.Enabled:=false;
     GrupoEditando.Enabled:=true;
+
     DBGridPersonas.Enabled:= false;
-    PageControlEdicion.TabIndex := 0;
+    PageControl.TabIndex:= 0;
 
     Nro_Persona.Active:= True;
     id_persona:= Nro_PersonaID.AsInteger;
@@ -273,9 +330,18 @@ begin
 
     ZQ_Personas.Append;
     ZQ_PersonasID_PERSONA.AsInteger:= id_persona;
-    ZQ_PersonasBAJA.AsString := 'N';
-    PanelEdicion.Visible := true;
-    dbNombre.SetFocus;
+    ZQ_PersonasID_PROVINCIA.AsInteger:= dm.provinciaPorDefecto;  //por defecto santa fe
+    ZQ_PersonasBAJA.AsString:= 'N';
+
+    ZQ_UltimoNro.Close;
+    ZQ_UltimoNro.Open;
+    if ZQ_UltimoNro.IsEmpty then
+      ZQ_PersonasCODIGO_CORTO.AsInteger:= 1
+    else
+      ZQ_PersonasCODIGO_CORTO.AsInteger:= ZQ_UltimoNroCODIGO_CORTO.AsInteger + 1;
+
+    PanelEdicion.Visible:= true;
+    DBEApellidoNombre.SetFocus;
   end;
 end;
 
@@ -284,49 +350,93 @@ procedure TFBuscarPersona.btnGuardarClick(Sender: TObject);
 var
   id : integer;
 begin
-    PageControlEdicion.TabIndex := 0;
+  PageControl.TabIndex := 0;
 
-    if not validarcampos then
+  if id_relacion = RELACION_CLIENTE then //si estoy dando de alta un cliente
+  begin
+    ZQ_RelacionCliente.Append;
+    ZQ_RelacionClienteID_PERSONA.AsInteger:= id_persona;
+    ZQ_RelacionClienteID_RELACION.AsInteger:= RELACION_CLIENTE; //cliente
+    ZQ_RelacionClienteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+    ZQ_RelacionClienteID_EMPRESA.Clear;
+  end
+  else //si no estoy dando de alta un cliente, pregunto si quiero que la persona sea cliente
+  if (RadioGroupRelacionCliente.ItemIndex = 1) then //si esta marcado como que es cliente
+  begin
+    ZQ_RelacionCliente.Append;
+    ZQ_RelacionClienteID_PERSONA.AsInteger:= id_persona;
+    ZQ_RelacionClienteID_RELACION.AsInteger:= RELACION_CLIENTE; //cliente
+    ZQ_RelacionClienteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+    ZQ_RelacionClienteID_EMPRESA.Clear;
+  end;
+
+  if not validarcampos then
     exit;
 
-    id:= ZQ_PersonasID_PERSONA.AsInteger;
-    if DM.EKModelo.finalizar_transaccion(Transaccion_CrearPersona) then
-    begin
-      DBGridPersonas.Enabled:=true;
-      GrupoVisualizando.Enabled:=true;
-      GrupoEditando.Enabled:=false;
-      DBGridPersonas.SetFocus;
-      PanelEdicion.Visible := false;
+  id:= ZQ_PersonasID_PERSONA.AsInteger;
+  if DM.EKModelo.finalizar_transaccion(Transaccion_CrearPersona) then
+  begin
+    DBGridPersonas.Enabled:=true;
+    GrupoVisualizando.Enabled:=true;
+    GrupoEditando.Enabled:=false;
+    DBGridPersonas.SetFocus;
 
-      ZQ_Personas.Refresh;
-      ZQ_Personas.Locate('ID_PERSONA',id,[]);
-      
-      if Assigned(OnSeleccionar) then
-        OnSeleccionar
-    end;
+    PanelEdicion.Visible := false;
+
+    ZQ_Personas.Refresh;
+    ZQ_Personas.Locate('ID_PERSONA', id, []);
+
+    if Assigned(OnSeleccionar) then
+      OnSeleccionar
+  end;
 end;
 
 
 procedure TFBuscarPersona.btnCancelarClick(Sender: TObject);
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
-  
-  if dm.EKModelo.cancelar_transaccion(Transaccion_CrearPersona) then
-  begin
-    DBGridPersonas.Enabled:=true;
-    GrupoVisualizando.Enabled:=true;
-    GrupoEditando.Enabled:=false;
-    DBGridPersonas.SetFocus;
-    PanelEdicion.Visible := false;
-  end;
+
+  if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Personas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.cancelar_transaccion(Transaccion_CrearPersona) then
+    begin
+      DBGridPersonas.Enabled:=true;
+      GrupoVisualizando.Enabled:=true;
+      GrupoEditando.Enabled:=false;
+      DBGridPersonas.SetFocus;
+      PanelEdicion.Visible := false;
+    end;
 end;
 
-procedure TFBuscarPersona.configRelacion(relacion:Integer);
+
+procedure TFBuscarPersona.configRelacion(relacion: Integer; permitirAlta: boolean);
 begin
-  FBuscarPersona.Caption:= 'Buscar';
   btnCrearPersona.Visible:= ivNever;
   btnGuardar.Visible:= ivNever;
   btnCancelar.Visible:= ivNever;
+  if permitirAlta then
+  begin
+    btnCrearPersona.Visible:= ivAlways;
+    btnGuardar.Visible:= ivAlways;
+    btnCancelar.Visible:= ivAlways;
+  end;
+
+  id_relacion:= relacion;
+  case relacion of
+  RELACION_CLIENTE: begin
+                      FBuscarPersona.Caption:= 'Buscar Cliente';
+                      RadioGroupRelacionCliente.Enabled:= false;
+                      RadioGroupRelacionCliente.ItemIndex:= 1;
+                    end;
+  RELACION_EMPLEADO:begin
+                      FBuscarPersona.Caption:= 'Buscar Empleado';
+                    end;
+  RELACION_VIAJANTE:begin
+                      FBuscarPersona.Caption:= 'Buscar Viejante';
+                    end;
+  RELACION_CONTACTO:begin
+                      FBuscarPersona.Caption:= 'Buscar Contacto';
+                    end;
+  end;
 
   EKBusqueda.SQL_Select.Text:= 'select p.*';
   EKBusqueda.SQL_From.Text:= 'from persona p left join persona_relacion pr on (p.id_persona = pr.id_persona)';
@@ -379,10 +489,12 @@ begin
     btnCancelar.Click;
 end;
 
+
 procedure TFBuscarPersona.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
+
 
 procedure TFBuscarPersona.AgregarTelMailClick(Sender: TObject);
 begin
@@ -396,6 +508,7 @@ begin
   ZQ_EntidadTelefono.Append;
 end;
 
+
 procedure TFBuscarPersona.EditarTelMailClick(Sender: TObject);
 begin
   if not (dgEditing	in DBGridTelMail.Options) then
@@ -406,6 +519,7 @@ begin
   end;
 end;
 
+
 procedure TFBuscarPersona.EliminarTelMailClick(Sender: TObject);
 begin
  if not ZQ_EntidadTelefono.IsEmpty then
@@ -414,23 +528,142 @@ begin
  end
 end;
 
+
 procedure TFBuscarPersona.ZQ_EntidadTelefonoBeforePost(DataSet: TDataSet);
 begin
-ZQ_EntidadTelefonoID_PERSONA.AsInteger := ZQ_PersonasID_PERSONA.AsInteger;
+  ZQ_EntidadTelefonoID_PERSONA.AsInteger := ZQ_PersonasID_PERSONA.AsInteger;
 end;
 
-procedure TFBuscarPersona.DBGridPersonasDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFBuscarPersona.DBGridPersonasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridPersonas, Rect, DataCol, Column, State);
 end;
 
-procedure TFBuscarPersona.DBGridTelMailDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFBuscarPersona.DBGridTelMailDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridTelMail, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFBuscarPersona.btnCtaCte(Sender: TObject);
+var
+  btn: TButton;
+begin
+  altaCtaCte:= false;
+  btn:= Sender as TButton;
+
+  if btn.Caption = 'Alta' then
+  begin
+    if tieneCuentaCorriente then
+      exit;
+
+    altaCtaCte:= true;
+    habilitarCtaCte(true);
+
+    ZQ_CtaCte.Append;
+    ZQ_CtaCteID_PERSONA.AsInteger:= id_persona;
+    ZQ_CtaCteID_PROVEEDOR.Clear;
+    ZQ_CtaCteFECHA_ALTA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_CtaCteFECHA_BAJA.Clear;
+    ZQ_CtaCteLIMITE_DEUDA.AsFloat:= ctacte_credito; //por defecto lo de la configuracion
+    ZQ_CtaCteVENCIMIENTO_DIAS.AsInteger:= ctacte_diasVencimiento; //por defecto lo de la configuracion
+    ZQ_CtaCteSALDO.AsFloat:= 0;
+    ZQ_CtaCteBAJA.AsString:= 'N';
+
+    EKDBFechaCtaCte.SetFocus;
+    GrupoEditando.Enabled:= false;
+  end;
+
+  if btn.Caption = 'Modificar' then
+  begin
+    if not tieneCuentaCorriente then
+      exit;
+
+    habilitarCtaCte(true);
+    ZQ_CtaCte.Edit;
+    EKDBFechaCtaCte.SetFocus;
+    GrupoEditando.Enabled:= false;
+  end;
+
+  if btn.Caption = 'Baja' then
+  begin
+    if (not tieneCuentaCorriente) or (ZQ_CtaCteBAJA.AsString = 'S') then
+      exit;
+
+    if (application.MessageBox(pchar('¿Desea dar de baja la "Cuenta Corriente"?'), 'ABM Persona', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    begin
+      ZQ_CtaCte.Edit;
+      ZQ_CtaCteBAJA.AsString:= 'S';
+      ZQ_CtaCteFECHA_BAJA.AsDateTime:= dm.EKModelo.FechayHora;
+    end;
+  end;
+
+  if btn.Caption = 'Reactivar' then
+  begin
+    if (not tieneCuentaCorriente) or (ZQ_CtaCteBAJA.AsString = 'N') then
+      exit;
+
+    if (application.MessageBox(pchar('¿Desea reactivar la "Cuenta Corriente"?'), 'ABM Persona', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    begin
+      ZQ_CtaCte.Edit;
+      ZQ_CtaCteBAJA.AsString:= 'N';
+      ZQ_CtaCteFECHA_BAJA.clear;
+    end;
+  end;
+end;
+
+
+procedure TFBuscarPersona.habilitarCtaCte(flag: boolean);
+begin
+  gBoxCuentaCorriente.Enabled:= flag;
+  if flag then
+  begin
+    FPrincipal.Iconos_Menu_16.GetBitmap(0, btnCtaCte_Cancelar.Glyph);
+    FPrincipal.Iconos_Menu_16.GetBitmap(1, btnCtaCte_Aceptar.Glyph);
+  end
+  else
+  begin
+    btnCtaCte_Aceptar.Glyph:= nil;
+    btnCtaCte_Cancelar.Glyph:= nil;
+  end;
+
+  btnCtaCte_Alta.Enabled:= not flag;
+  btnCtaCte_Modificar.Enabled:= not flag;
+  btnCtaCte_Baja.Enabled:= not flag;
+  btnCtaCte_Reactivar.Enabled:= not flag;
+end;
+
+
+procedure TFBuscarPersona.btnCtaCte_AceptarClick(Sender: TObject);
+begin
+  if altaCtaCte then
+    tieneCuentaCorriente:= true;
+
+  ZQ_CtaCte.Post;
+  habilitarCtaCte(false);
+  GrupoEditando.Enabled:= true;
+end;
+
+
+procedure TFBuscarPersona.btnCtaCte_CancelarClick(Sender: TObject);
+begin
+  if altaCtaCte then
+    tieneCuentaCorriente:= false;
+
+  ZQ_CtaCte.RevertRecord;
+  habilitarCtaCte(false);
+  GrupoEditando.Enabled:= true;
+end;
+
+
+procedure TFBuscarPersona.RadioGroupRelacionClienteClick(Sender: TObject);
+begin
+  if RadioGroupRelacionCliente.ItemIndex = 1 then
+    TabSheetCtaCte.TabVisible:= true
+  else
+    TabSheetCtaCte.TabVisible:= false;
 end;
 
 end.
