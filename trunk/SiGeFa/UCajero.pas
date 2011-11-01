@@ -43,8 +43,6 @@ type
     ZQ_FormasPagoBAJA: TStringField;
     CD_FpagomedioPago: TStringField;
     EKDbSuma2: TEKDbSuma;
-    EKListadoMedCobroPago: TEKListadoSQL;
-    EKListadoCuenta: TEKListadoSQL;
     ZQ_Cuentas: TZQuery;
     ZQ_CuentasID_CUENTA: TIntegerField;
     ZQ_CuentasMEDIO_DEFECTO: TIntegerField;
@@ -53,7 +51,6 @@ type
     ZQ_CuentasNRO_CTA_BANCARIA: TStringField;
     ZQ_CuentasBAJA: TStringField;
     CD_Fpago_ctaIngreso: TStringField;
-    CD_Fpago_esCtaCorr: TStringField;
     ZQ_CuentasA_CTA_CORRIENTE: TStringField;
     ZQ_FormasPagoIF: TStringField;
     ZQ_FormasPagoDESC_REC: TFloatField;
@@ -494,60 +491,43 @@ type
     PanelCambiarFecha: TPanel;
     DateTimePicker_FechaCarga: TDateTimePicker;
     CheckBoxCambiarFecha: TCheckBox;
-    ZQ_BuscarMedioPago: TZQuery;
-    ZQ_BuscarMedioPagoID_TIPO_FORMAPAGO: TIntegerField;
-    ZQ_BuscarMedioPagoDESCRIPCION: TStringField;
-    ZQ_BuscarMedioPagoBAJA: TStringField;
-    ZQ_BuscarCuenta: TZQuery;
-    ZQ_BuscarCuentaID_CUENTA: TIntegerField;
-    ZQ_BuscarCuentaMEDIO_DEFECTO: TIntegerField;
-    ZQ_BuscarCuentaCODIGO: TStringField;
-    ZQ_BuscarCuentaNOMBRE_CUENTA: TStringField;
-    ZQ_BuscarCuentaNRO_CTA_BANCARIA: TStringField;
-    ZQ_BuscarCuentaBAJA: TStringField;
-    ZQ_BuscarCuentaID_SUCURSAL: TIntegerField;
-    ZQ_BuscarCuentaA_CTA_CORRIENTE: TStringField;
-    ZQ_BuscarCuentaA_NOTA_CREDITO: TStringField;
-    ZQ_BuscarCuentaMODIFICABLE: TStringField;
     CD_DetalleFacturaIMPORTE_IF_SINIVA: TFloatField;
     CD_DetalleFacturaIMPORTE_IVA_IF: TFloatField;
     ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA: TFloatField;
     ZQ_ComprobanteDetalleIMPORTE_IVA_IF: TFloatField;
-    ZQ_BuscarMedioPagoIF: TStringField;
-    ZQ_BuscarMedioPagoDESC_REC: TFloatField;
-    ZQ_BuscarMedioPagoCOD_CORTO: TIntegerField;
-    ZQ_BuscarMedioPagoGENERA_VUELTO: TStringField;
-    ZQ_BuscarMedioPagoCOLUMNA_PRECIO: TIntegerField;
-    ZQ_BuscarMedioPagoMODIFICABLE: TStringField;
-    CD_Fpago_fiscal: TStringField;
     CD_VentaFinalfiscal: TStringField;
     btCierreZ: TdxBarLargeButton;
     BtCierreX: TdxBarLargeButton;
     PABM_FormaPago: TPanel;
     Label18: TLabel;
     Label47: TLabel;
-    DBLookupComboBox1: TDBLookupComboBox;
+    edDetalleMDP: TDBLookupComboBox;
     Label48: TLabel;
-    DBEdit20: TDBEdit;
+    edMDPFecha: TDBEdit;
     Label49: TLabel;
-    DBEdit21: TDBEdit;
+    edMDPBanco: TDBEdit;
     Label50: TLabel;
-    DBEdit22: TDBEdit;
+    edMDPNro: TDBEdit;
     Label51: TLabel;
-    DBEdit23: TDBEdit;
+    edImporte: TDBEdit;
     Label53: TLabel;
-    DBEdit25: TDBEdit;
+    edCodCuenta: TDBEdit;
     Label55: TLabel;
-    DBLookupComboBox2: TDBLookupComboBox;
+    edCuenta: TDBLookupComboBox;
     Label58: TLabel;
-    DBEdit28: TDBEdit;
+    edImporteVenta: TDBEdit;
     Label61: TLabel;
-    DBEdit29: TDBEdit;
+    edCodMDP: TDBEdit;
     btnGrupoAceptar: TBitBtn;
     btnGrupoCancelar: TBitBtn;
-    PopupMenu1: TPopupMenu;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
+    PopupFP: TPopupMenu;
+    menuEditarFP: TMenuItem;
+    menuQuitarFP: TMenuItem;
+    ZQ_FormasPagoMODIFICABLE: TStringField;
+    ZQ_CuentasA_NOTA_CREDITO: TStringField;
+    ZQ_CuentasMODIFICABLE: TStringField;
+    CD_Fpago_fiscal: TStringField;
+    CD_Fpago_esCtaCorr: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -576,7 +556,6 @@ type
     procedure btVendedorClick(Sender: TObject);
     procedure edImporteExit(Sender: TObject);
     function ProductoYaCargado(id:Integer):Boolean ;
-    procedure DBGridFormaPagoColExit(Sender: TObject);
     function calcularSaldoCtaCorr():Double;
     procedure ZQ_ProductosAfterScroll(DataSet: TDataSet);
     procedure ANuevaFormaPagoExecute(Sender: TObject);
@@ -614,8 +593,6 @@ type
     procedure ProrrateoFiscal();
     procedure DateTimePicker_FechaCargaChange(Sender: TObject);
     procedure CheckBoxCambiarFechaClick(Sender: TObject);
-    procedure buscarFormaPago();
-    procedure buscarCuenta();
     procedure ABuscarExecute(Sender: TObject);
     procedure ANuevoExecute(Sender: TObject);
     procedure ATipoIVAExecute(Sender: TObject);
@@ -629,15 +606,15 @@ type
     procedure leerSistemaIni;
     procedure btCierreZClick(Sender: TObject);
     procedure BtCierreXClick(Sender: TObject);
-    procedure DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
+    procedure calcularFP();
     function completarCodBar(cod:String):String ;
     procedure edCantidadKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnGrupoAceptarClick(Sender: TObject);
     procedure btnGrupoCancelarClick(Sender: TObject);
     procedure btnFormaPagoClick(Sender: TObject);
+    procedure CD_FpagoCUENTA_INGRESOChange(Sender: TField);
+    procedure CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -926,7 +903,7 @@ begin
      ZQ_FormasPago.Filtered:=True;
   end;
 
-
+  PABM_FormaPago.Visible:=False;
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnGrupoAceptar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnGrupoCancelar.Glyph);
 end;
@@ -1925,76 +1902,12 @@ begin
 end;
 
 
-procedure TFCajero.buscarFormaPago();
-begin
-  if EKListadoMedCobroPago.Buscar then
-  begin
-    if EKListadoMedCobroPago.Resultado <> '' then
-    begin
-      ZQ_BuscarMedioPago.Close;
-      ZQ_BuscarMedioPago.ParamByName('id_tipo').AsInteger:= StrToInt(EKListadoMedCobroPago.Resultado);
-      ZQ_BuscarMedioPago.Open;
-
-      CD_Fpago.edit; //pongo en modo edicion
-      CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_BuscarMedioPagoID_TIPO_FORMAPAGO.AsInteger;
-      CD_Fpago_fiscal.AsString:=ZQ_BuscarMedioPagoIF.AsString;
-      CD_Fpago.Post;
-    end;
-  end;
-end;
-
-
-procedure TFCajero.buscarCuenta();
-begin
-  if EKListadoCuenta.Buscar then
-  begin
-    if EKListadoCuenta.Resultado <> '' then
-    begin
-      ZQ_BuscarCuenta.Close;
-      ZQ_BuscarCuenta.ParamByName('id_cuenta').AsInteger:= StrToInt(EKListadoCuenta.Resultado);
-      ZQ_BuscarCuenta.Open;
-
-      ZQ_BuscarMedioPago.Close;
-      ZQ_BuscarMedioPago.ParamByName('id_tipo').AsInteger:= ZQ_BuscarCuentaMEDIO_DEFECTO.AsInteger;
-      ZQ_BuscarMedioPago.Open;
-
-      CD_Fpago.edit; //pongo en modo edicion
-      CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_BuscarCuentaID_CUENTA.AsInteger;
-      CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_BuscarCuentaMEDIO_DEFECTO.AsInteger;
-      CD_Fpago_esCtaCorr.AsString:= ZQ_BuscarCuentaA_CTA_CORRIENTE.Asstring;
-      CD_Fpago_fiscal.AsString:=ZQ_BuscarMedioPagoIF.AsString;
-      CD_Fpago.Post;
-    end;
-  end;
-end;
-
-procedure TFCajero.DBGridFormaPagoColExit(Sender: TObject);
+procedure TFCajero.calcularFP();
 var
   precio:Double;
 begin
   if not(CD_DetalleFactura.IsEmpty) then
   begin
-    //si estoy en la columan de cuenta
-    if (((sender as tdbgrid).SelectedField.FullName = 'CUENTA_INGRESO') or
-        ((sender as tdbgrid).SelectedField.FullName = '_ctaIngreso')) then
-    begin
-      //si ya hay cargada una cuenta salgo
-      if (not CD_FpagoCUENTA_INGRESO.IsNull) then
-        exit;
-
-      buscarCuenta;
-    end;
-
-    //si estoy en la columan de forma de pago
-    if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
-       ((sender as tdbgrid).SelectedField.FullName = 'ID_TIPO_FORMAPAG')) then
-    begin
-      //si ya hay cargada una forma de pago salgo
-      if not CD_FpagoID_TIPO_FORMAPAG.IsNull then
-        exit;
-
-      buscarFormaPago;
-    end;
 
     //Si es una sola forma de pago le pongo el valor del total por defecto
     if ((acumulado > 0) and ((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat = 0)))
@@ -2038,82 +1951,7 @@ begin
 end;
 
 
-procedure TFCajero.DBGridFormaPagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-var
-  precio:Double;
-begin
-  if not(CD_DetalleFactura.IsEmpty) then
-  begin
-    if key = 118 then //si presione F7
-    begin
-      //si estoy en la columan de cuenta
-      if (((sender as tdbgrid).SelectedField.FullName = 'CUENTA_INGRESO') or
-          ((sender as tdbgrid).SelectedField.FullName = '_ctaIngreso')) then
-      begin
-        buscarCuenta;
-      end;
-
-      //si estoy en la columan de forma de pago
-      if (((sender as tdbgrid).SelectedField.FullName = 'medioPago') or
-         ((sender as tdbgrid).SelectedField.FullName = 'ID_TIPO_FORMAPAG')) then
-      begin
-        buscarFormaPago;
-      end;
-
-      //Si es una sola forma de pago le pongo el valor del total por defecto
-      if ((acumulado > 0) and ((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat = 0)))
-         and not(CD_FpagoID_TIPO_FORMAPAG.IsNull and CD_FpagoCUENTA_INGRESO.IsNull) then
-      begin
-        CD_Fpago.edit;
-        CD_FpagoIMPORTE.AsFloat:=acumulado - acumFpago;
-        CD_Fpago.Post;
-      end;
-
-      if not(CD_Fpago_nroPrecio.IsNull) then
-      begin
-        CD_Fpago.Edit;
-        case CD_Fpago_nroPrecio.AsInteger of
-        0:begin
-            precio:=CD_FpagoIMPORTE.AsFloat;
-          end;
-        1:begin
-            precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio1;
-          end;
-        2:begin
-            precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio2;
-          end;
-        3:begin
-            precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio3;
-          end;
-        4:begin
-            precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio4;
-          end;
-        5:begin
-            precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio5;
-          end;
-        end;
-
-        CD_Fpago_importeVenta.AsFloat:= precio + (precio *  CD_Fpago_desc_rec.AsFloat);
-        CD_Fpago.Post;
-      end;
-
-      RecalcularMontoPago();
-    end;
-  end;
-end;
-
-
 //cuando se cambia la forma de pago con la flecha del loockup seteo si es va la fiscal o no
-procedure TFCajero.CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
-begin
-  ZQ_BuscarMedioPago.Close;
-  ZQ_BuscarMedioPago.ParamByName('id_tipo').AsInteger:= CD_FpagoID_TIPO_FORMAPAG.AsInteger;
-  ZQ_BuscarMedioPago.Open;
-
-  CD_Fpago_fiscal.AsString:= ZQ_BuscarMedioPagoIF.AsString;
-end;
-
-
 function TFCajero.calcularSaldoCtaCorr(): Double;
 var
 acum:Double;
@@ -2460,6 +2298,8 @@ begin
     dm.centrarPanel(FCajero, PABM_FormaPago);
     //PABM_FormaPago.Top:=FCajero.Height-300;
     PABM_FormaPago.Visible:=true;
+    PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
+    edCodCuenta.SetFocus;
     CD_Fpago.Append;
     end
 end;
@@ -2532,19 +2372,44 @@ end;
 
 procedure TFCajero.btnGrupoAceptarClick(Sender: TObject);
 begin
-  CD_Fpago.Post;
+  if CD_Fpago.State in [dsInsert,dsEdit] then
+     CD_Fpago.Post;
   PABM_FormaPago.Visible:=False;
+  PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
 end;
 
 procedure TFCajero.btnGrupoCancelarClick(Sender: TObject);
 begin
-  CD_Fpago.Cancel;
-  PABM_FormaPago.Visible:=False;
+ if CD_Fpago.State in [dsInsert,dsEdit] then
+    CD_Fpago.Cancel;
+ PABM_FormaPago.Visible:=False;
+ PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
 end;
 
 procedure TFCajero.btnFormaPagoClick(Sender: TObject);
 begin
   ANuevaFormaPago.Execute;
+
+end;
+
+procedure TFCajero.CD_FpagoCUENTA_INGRESOChange(Sender: TField);
+begin
+if CD_Fpago.State in [dsInsert,dsEdit] then
+if CD_FpagoID_TIPO_FORMAPAG.IsNull then
+  begin
+   ZQ_FormasPago.Locate('ID_TIPO_FORMAPAGO',ZQ_CuentasMEDIO_DEFECTO.AsInteger,[]);
+   CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
+   calcularFP();
+  end
+end;
+
+procedure TFCajero.CD_FpagoID_TIPO_FORMAPAGChange(Sender: TField);
+begin
+if CD_Fpago.State in [dsInsert,dsEdit] then
+if CD_FpagoID_TIPO_FORMAPAG.IsNull then
+ begin
+     calcularFP();
+ end;
 end;
 
 end.
