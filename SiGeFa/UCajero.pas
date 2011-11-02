@@ -528,6 +528,7 @@ type
     CD_Fpago_fiscal: TStringField;
     CD_Fpago_esCtaCorr: TStringField;
     CD_DetalleFacturaimporte_original: TFloatField;
+    ZQ_TipoIVACOEFICIENTE: TFloatField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -615,6 +616,7 @@ type
     procedure CD_FpagoCUENTA_INGRESOChange(Sender: TField);
     procedure edCodCuentaExit(Sender: TObject);
     procedure menuEditarFPClick(Sender: TObject);
+    procedure menuQuitarFPClick(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -1741,6 +1743,14 @@ begin
     result := false;
     exit;
    end;
+
+
+  if ((ZQ_TipoIVALETRA.AsString='A')and(CD_Comprobantepers_cuit.AsString='')) then
+   begin
+    Application.MessageBox('Debe cargar el CUIT/CUIL al cliente seleccionado, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    result := false;
+    exit;
+   end;
 end;
 
 
@@ -2292,13 +2302,15 @@ end;
 
 procedure TFCajero.ANuevaFormaPagoExecute(Sender: TObject);
 begin
+  if not(btnFormaPago.Enabled) then
+  exit;
   if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
     exit;
 
   if (CD_Comprobante.State in [dsInsert,dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
     begin
     dm.centrarPanel(FCajero, PABM_FormaPago);
-    //PABM_FormaPago.Top:=FCajero.Height-300;
+    PABM_FormaPago.Top:=FCajero.Height-300;
     PABM_FormaPago.Visible:=true;
     PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
     grupoVertical.Enabled:=false;
@@ -2390,7 +2402,6 @@ end;
 procedure TFCajero.btnFormaPagoClick(Sender: TObject);
 begin
   ANuevaFormaPago.Execute;
-
 end;
 
 procedure TFCajero.CD_FpagoCUENTA_INGRESOChange(Sender: TField);
@@ -2428,6 +2439,11 @@ begin
     edCodCuenta.SetFocus;
     edImporte.SetFocus;
     end
+end;
+
+procedure TFCajero.menuQuitarFPClick(Sender: TObject);
+begin
+  btnQuitarPago.Click;
 end;
 
 end.
