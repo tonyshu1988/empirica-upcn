@@ -23,14 +23,14 @@ object FABMProductos: TFABMProductos
   object Panel4: TPanel
     Left = 0
     Top = 0
-    Width = 970
-    Height = 564
+    Width = 978
+    Height = 570
     Align = alClient
     Caption = 'Panel4'
     TabOrder = 4
     DesignSize = (
-      970
-      564)
+      978
+      570)
     object Label19: TLabel
       Left = 144
       Top = 216
@@ -153,7 +153,7 @@ object FABMProductos: TFABMProductos
             50.270833333333330000
             1232.958333333333000000
             124.354166666666700000
-            304.270833333333300000)
+            304.270833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -184,7 +184,7 @@ object FABMProductos: TFABMProductos
           Size.Values = (
             52.916666666666670000
             1116.541666666667000000
-            68.791666666666670000
+            68.791666666666680000
             537.104166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -217,7 +217,7 @@ object FABMProductos: TFABMProductos
             52.916666666666670000
             1068.916666666667000000
             5.291666666666667000
-            632.354166666666700000)
+            632.354166666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -259,7 +259,7 @@ object FABMProductos: TFABMProductos
         ForceNewPage = False
         ParentFont = False
         Size.Values = (
-          34.395833333333330000
+          34.395833333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -463,7 +463,7 @@ object FABMProductos: TFABMProductos
             52.916666666666670000
             10.583333333333330000
             7.937500000000000000
-            304.270833333333300000)
+            304.270833333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -561,7 +561,7 @@ object FABMProductos: TFABMProductos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -611,7 +611,7 @@ object FABMProductos: TFABMProductos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -659,7 +659,7 @@ object FABMProductos: TFABMProductos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -877,7 +877,7 @@ object FABMProductos: TFABMProductos
             37.041666666666670000
             2000.250000000000000000
             5.291666666666667000
-            92.604166666666670000)
+            92.604166666666680000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1220,7 +1220,7 @@ object FABMProductos: TFABMProductos
             29.104166666666670000
             603.250000000000000000
             2.645833333333333000
-            89.958333333333330000)
+            89.958333333333340000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1438,8 +1438,8 @@ object FABMProductos: TFABMProductos
     object Grilla: TEKDBGrid
       Left = 1
       Top = 20
-      Width = 968
-      Height = 321
+      Width = 976
+      Height = 327
       Align = alClient
       Color = 14606012
       DataSource = DS_ProductoCabecera
@@ -1533,10 +1533,10 @@ object FABMProductos: TFABMProductos
     end
     object tabs: TPageControl
       Left = 1
-      Top = 341
-      Width = 968
+      Top = 347
+      Width = 976
       Height = 222
-      ActivePage = tabDetalle
+      ActivePage = tabCabecera
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -1548,7 +1548,7 @@ object FABMProductos: TFABMProductos
         object PProducto: TPanel
           Left = 0
           Top = 0
-          Width = 960
+          Width = 968
           Height = 191
           Align = alClient
           TabOrder = 0
@@ -1791,14 +1791,14 @@ object FABMProductos: TFABMProductos
         object PDetalles: TPanel
           Left = 0
           Top = 0
-          Width = 960
+          Width = 968
           Height = 191
           Align = alClient
           TabOrder = 0
           object grillaDetalle: TEKDBGrid
             Left = 793
             Top = 1
-            Width = 166
+            Width = 174
             Height = 189
             Align = alClient
             Color = 14606012
@@ -2512,7 +2512,7 @@ object FABMProductos: TFABMProductos
                   object Label5: TLabel
                     Left = 3
                     Top = 3
-                    Width = 132
+                    Width = 104
                     Height = 13
                     Align = alTop
                     Alignment = taCenter
@@ -2687,7 +2687,7 @@ object FABMProductos: TFABMProductos
     object PanelCabecera: TPanel
       Left = 1
       Top = 1
-      Width = 968
+      Width = 976
       Height = 19
       Align = alTop
       BevelOuter = bvNone
@@ -2707,7 +2707,7 @@ object FABMProductos: TFABMProductos
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 859
+        Left = 867
         Top = 0
         Width = 109
         Height = 19
@@ -2726,9 +2726,13 @@ object FABMProductos: TFABMProductos
     Connection = DM.Conexion
     SortedFields = 'ID_MARCA'
     AfterScroll = ZQ_ProductoCabeceraAfterScroll
+    UpdateObject = ZUpdateSQL2
     SQL.Strings = (
-      'select *'
-      'from producto_cabecera')
+      'select distinct pc.*'
+      'from producto_cabecera pc'
+      
+        'left join producto p on (pc.id_prod_cabecera = p.id_prod_cabecer' +
+        'a)')
     Params = <>
     IndexFieldNames = 'ID_MARCA Asc'
     Left = 192
@@ -2812,7 +2816,7 @@ object FABMProductos: TFABMProductos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3599,6 +3603,26 @@ object FABMProductos: TFABMProductos
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'Cod. Barra'
+        Campo = 'codigo_barra'
+        Tabla = 'producto'
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo Corto'
+        Campo = 'cod_corto'
+        Tabla = 'producto'
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
         Titulo = 'C'#243'digo Cabecera'
         Campo = 'cod_corto'
         Tabla = 'producto_cabecera'
@@ -3686,25 +3710,24 @@ object FABMProductos: TFABMProductos
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
-      end
-      item
-        Titulo = 'Sin Titulo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
     DataSet = ZQ_ProductoCabecera
     SQL.Strings = (
-      'select *'
-      'from producto_cabecera'
+      'select distinct pc.*'
+      'from producto_cabecera pc'
+      
+        'left join producto p on (pc.id_prod_cabecera = p.id_prod_cabecer' +
+        'a)'
       '')
     SQL_Select.Strings = (
-      'select *')
+      'select distinct pc.*')
     SQL_From.Strings = (
-      'from producto_cabecera')
+      'from producto_cabecera pc'
+      
+        'left join producto p on (pc.id_prod_cabecera = p.id_prod_cabecer' +
+        'a)')
     SQL_Orden.Strings = (
       '')
     UsarWhereOriginal = EK_Sin_Where
@@ -4736,5 +4759,90 @@ object FABMProductos: TFABMProductos
       FieldName = 'BAJA'
       Size = 1
     end
+  end
+  object ZUpdateSQL2: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM producto_cabecera'
+      'WHERE'
+      '  producto_cabecera.ID_PROD_CABECERA = :OLD_ID_PROD_CABECERA')
+    InsertSQL.Strings = (
+      'INSERT INTO producto_cabecera'
+      
+        '  (ID_PROD_CABECERA, ID_MARCA, ID_ARTICULO, COLOR, COD_CORTO, NO' +
+        'MBRE, DESCRIPCION, '
+      '   IMAGEN, BAJA)'
+      'VALUES'
+      
+        '  (:ID_PROD_CABECERA, :ID_MARCA, :ID_ARTICULO, :COLOR, :COD_CORT' +
+        'O, :NOMBRE, '
+      '   :DESCRIPCION, :IMAGEN, :BAJA)')
+    ModifySQL.Strings = (
+      'UPDATE producto_cabecera SET'
+      '  ID_PROD_CABECERA = :ID_PROD_CABECERA,'
+      '  ID_MARCA = :ID_MARCA,'
+      '  ID_ARTICULO = :ID_ARTICULO,'
+      '  COLOR = :COLOR,'
+      '  COD_CORTO = :COD_CORTO,'
+      '  NOMBRE = :NOMBRE,'
+      '  DESCRIPCION = :DESCRIPCION,'
+      '  IMAGEN = :IMAGEN,'
+      '  BAJA = :BAJA'
+      'WHERE'
+      '  producto_cabecera.ID_PROD_CABECERA = '
+      ':OLD_ID_PROD_CABECERA')
+    UseSequenceFieldForRefreshSQL = False
+    Left = 192
+    Top = 48
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_PROD_CABECERA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_MARCA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_ARTICULO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'COLOR'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'COD_CORTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NOMBRE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DESCRIPCION'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMAGEN'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BAJA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_ID_PROD_CABECERA'
+        ParamType = ptUnknown
+      end>
   end
 end
