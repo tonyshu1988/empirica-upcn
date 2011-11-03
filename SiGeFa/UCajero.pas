@@ -1305,6 +1305,8 @@ procedure TFCajero.btnQuitarPagoClick(Sender: TObject);
 begin
     if not(CD_Fpago.IsEmpty) then
        CD_Fpago.Delete;
+    EKDbSuma2.RecalcAll;
+
 end;
 
 
@@ -1566,7 +1568,7 @@ begin
        end
       else
         begin
-          Application.MessageBox(PChar(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString])),'Atención');
+          //Application.MessageBox(PChar(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString])),'Atención');
 
           // Si se guarda ok el comprobante OK y hay formas de pago que van a la fiscal
           // llamo al proc que imprime en fiscal, sino solo guarda el comprob.
