@@ -112,7 +112,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          735.541666666666700000
+          735.541666666666800000
           10.583333333333330000
           423.333333333333300000)
         Alignment = taCenter
@@ -144,8 +144,8 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          759.354166666666700000
-          74.083333333333330000
+          759.354166666666800000
+          74.083333333333340000
           378.354166666666700000)
         Alignment = taCenter
         AlignToBand = False
@@ -176,9 +176,9 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           47.625000000000000000
-          799.041666666666700000
+          799.041666666666800000
           140.229166666666700000
-          296.333333333333300000)
+          296.333333333333400000)
         Alignment = taCenter
         AlignToBand = False
         AutoSize = True
@@ -606,7 +606,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           1238.250000000000000000
           0.000000000000000000
-          216.958333333333300000)
+          216.958333333333400000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -636,7 +636,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          804.333333333333300000
+          804.333333333333200000
           0.000000000000000000
           185.208333333333300000)
         Alignment = taLeftJustify
@@ -670,7 +670,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           658.812500000000000000
           0.000000000000000000
-          92.604166666666670000)
+          92.604166666666680000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -790,7 +790,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           13.229166666666670000
           -2.645833333333333000
-          264.583333333333300000)
+          264.583333333333400000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -820,7 +820,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          664.104166666666700000
+          664.104166666666800000
           -2.645833333333333000
           269.875000000000000000)
         Alignment = taLeftJustify
@@ -934,31 +934,31 @@ object FArqueo_Caja: TFArqueo_Caja
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 416
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
     object Panel5: TPanel
       Left = 1
       Top = 29
-      Width = 852
-      Height = 380
+      Width = 860
+      Height = 386
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 850
-        Height = 378
+        Width = 858
+        Height = 384
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object lblComprobantes: TLabel
           Left = 1
-          Top = 348
-          Width = 848
+          Top = 354
+          Width = 856
           Height = 29
           Align = alBottom
           Alignment = taRightJustify
@@ -978,8 +978,8 @@ object FArqueo_Caja: TFArqueo_Caja
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 848
-          Height = 231
+          Width = 856
+          Height = 237
           Align = alClient
           Color = 14606012
           DataSource = DS_ComprobanteDetalle
@@ -1040,8 +1040,8 @@ object FArqueo_Caja: TFArqueo_Caja
         end
         object DBGridFormaPago: TDBGrid
           Left = 1
-          Top = 232
-          Width = 848
+          Top = 238
+          Width = 856
           Height = 116
           Align = alBottom
           Color = 14606012
@@ -1085,7 +1085,7 @@ object FArqueo_Caja: TFArqueo_Caja
     object PanelFiltro: TPanel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 860
       Height = 28
       Align = alTop
       Font.Charset = ANSI_CHARSET
@@ -1127,7 +1127,7 @@ object FArqueo_Caja: TFArqueo_Caja
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1721,7 +1721,9 @@ object FArqueo_Caja: TFArqueo_Caja
         'po_formapag)'
       'left join cuenta c1 on (cfp.cuenta_ingreso=c1.id_cuenta)'
       'left join cuenta c2 on (cfp.cuenta_egreso=c2.id_cuenta)'
-      'where (extractdate(cfp.fecha_fp)=:fecha)'
+      
+        'where (extractdate(cfp.fecha_fp)=:fecha) and ((cfp.cuenta_ingres' +
+        'o is not null) and (cfp.cuenta_egreso is null) )'
       
         'group by tfp.descripcion,tfp."IF",c1.nombre_cuenta,c2.nombre_cue' +
         'nta'

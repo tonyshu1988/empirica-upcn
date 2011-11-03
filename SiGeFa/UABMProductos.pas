@@ -302,6 +302,7 @@ type
     ZQ_TodasMedidasID_MEDIDA: TIntegerField;
     ZQ_TodasMedidasMEDIDA: TStringField;
     ZQ_TodasMedidasBAJA: TStringField;
+    ZUpdateSQL2: TZUpdateSQL;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
