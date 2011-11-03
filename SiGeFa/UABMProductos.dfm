@@ -153,7 +153,7 @@ object FABMProductos: TFABMProductos
             50.270833333333330000
             1232.958333333333000000
             124.354166666666700000
-            304.270833333333400000)
+            304.270833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -184,7 +184,7 @@ object FABMProductos: TFABMProductos
           Size.Values = (
             52.916666666666670000
             1116.541666666667000000
-            68.791666666666680000
+            68.791666666666660000
             537.104166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -217,7 +217,7 @@ object FABMProductos: TFABMProductos
             52.916666666666670000
             1068.916666666667000000
             5.291666666666667000
-            632.354166666666800000)
+            632.354166666666600000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -463,7 +463,7 @@ object FABMProductos: TFABMProductos
             52.916666666666670000
             10.583333333333330000
             7.937500000000000000
-            304.270833333333400000)
+            304.270833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -659,7 +659,7 @@ object FABMProductos: TFABMProductos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -877,7 +877,7 @@ object FABMProductos: TFABMProductos
             37.041666666666670000
             2000.250000000000000000
             5.291666666666667000
-            92.604166666666680000)
+            92.604166666666660000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -3651,32 +3651,20 @@ object FABMProductos: TFABMProductos
       end
       item
         Titulo = 'Art'#237'culo'
-        Campo = 'id_articulo'
-        Tabla = 'producto_cabecera'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndice = 1
-        TipoCampoIndiceVer = 'Igual'
-        TipoComboSQL = ZQ_Articulo
-        TipoComboSQLCampoVer = 'BUSQUEDA'
-        TipoComboSQLCampoReal = 'ID_ARTICULO'
+        Campo = 'descripcion'
+        Tabla = 'a'
+        TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
-        CambiarCondicion = False
         ItemIndex = -1
       end
       item
         Titulo = 'Marca'
-        Campo = 'id_marca'
-        Tabla = 'producto_cabecera'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndice = 1
-        TipoCampoIndiceVer = 'Igual'
-        TipoComboSQL = ZQ_Marca
-        TipoComboSQLCampoVer = 'NOMBRE_MARCA'
-        TipoComboSQLCampoReal = 'ID_MARCA'
+        Campo = 'nombre_marca'
+        Tabla = 'm'
+        TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
-        CambiarCondicion = False
         ItemIndex = -1
       end
       item
@@ -3715,19 +3703,23 @@ object FABMProductos: TFABMProductos
     Modelo = DM.EKModelo
     DataSet = ZQ_ProductoCabecera
     SQL.Strings = (
-      'select distinct pc.*'
+      'select distinct pc.*, a.descripcion, m.nombre_marca'
       'from producto_cabecera pc'
       
         'left join producto p on (pc.id_prod_cabecera = p.id_prod_cabecer' +
         'a)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      'left join marca m on (pc.id_marca = m.id_marca)'
       '')
     SQL_Select.Strings = (
-      'select distinct pc.*')
+      'select distinct pc.*, a.descripcion, m.nombre_marca')
     SQL_From.Strings = (
       'from producto_cabecera pc'
       
         'left join producto p on (pc.id_prod_cabecera = p.id_prod_cabecer' +
-        'a)')
+        'a)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      'left join marca m on (pc.id_marca = m.id_marca)')
     SQL_Orden.Strings = (
       '')
     UsarWhereOriginal = EK_Sin_Where
