@@ -1,0 +1,22 @@
+01-11
+
+----Se puede hacer que al cargar el producto en abm producto me lo asocie directamente al deposito ???
+**--- Sigo viendo los productos en el cajero cuando estan dado de baja
+**----Como Conviene introducir los numero de telefonos para mas adelante usar el SKYPe (0342 o sin prefijo) ???
+//----Que en la parte de estadisticas de venta en fecha me permita desplegar un calendario (para seleccionar mas facil la fecha)
+**----En (cajero)Cuando modifico el precio final del producto NO INDEXA el precio unitario.
+----Estadisticas por VENDEDOR
+//----OJO en ticket de Z me dio 847.25 y en la pantalla de estadisticas de fiscal me dio 762.25 ????
+
+---En el buscador de estadisticas agregar el campo de venta con tarjetas (TIPO DE PAGO?????)
+
+---Cuando cargo el producto en ABM producto puedo ingresar el STOCK ?? y asociarlo directamente a la sucursal o al deposito
+
+---Como puedo hacer para que al transferir dinero de la caja chica se me descuente al final del dia en el cierre de caja
+
+**---no anda el porcentaje de descuento en el cajero
+
+**---Diferencia entre cierre de Z y la estadistica de venta de FISCAL.
+**---cuando asocio los productos en ABMN Productos se me duplica
+**---Sacar el mensaje final de """SE CREO COMPROBANTE"" PAra hacerlo mas agil
+**---En el buscador de ABM producto incorporar codigo corto
