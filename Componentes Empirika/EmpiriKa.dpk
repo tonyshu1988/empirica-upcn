@@ -1,7 +1,6 @@
 package EmpiriKa;
 
 {$R *.res}
-{$R 'recursos.res'}
 {$ALIGN 8}
 {$ASSERTIONS ON}
 {$BOOLEVAL OFF}
@@ -36,12 +35,7 @@ requires
   vclx,
   visualclx,
   vcldb,
-  ZComponent,
   designide,
-  ZParseSql,
-  ZCore,
-  ZDbc,
-  ZPlain,
   bdertl,
   dxBarD7,
   cxLibraryVCLD7,

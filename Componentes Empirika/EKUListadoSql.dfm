@@ -358,8 +358,8 @@ object FListadoSQL: TFListadoSQL
       end
       item
         Expanded = False
-        Title.Caption = 'Campo de Busqueda'
-        Width = 1000
+        Title.Caption = 'Campo de B'#250'squeda'
+        Width = 2500
         Visible = True
       end>
   end
@@ -385,7 +385,7 @@ object FListadoSQL: TFListadoSQL
     Tag = 98
     Left = 72
     Top = 8
-    Width = 489
+    Width = 577
     Height = 21
     CharCase = ecUpperCase
     Color = 13828095
