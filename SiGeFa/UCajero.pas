@@ -617,6 +617,7 @@ type
     procedure edCodCuentaExit(Sender: TObject);
     procedure menuEditarFPClick(Sender: TObject);
     procedure menuQuitarFPClick(Sender: TObject);
+    function FPYaCargado(id:Integer):Boolean ;
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -1920,21 +1921,19 @@ procedure TFCajero.calcularFP();
 var
   precio:Double;
 begin
-  if not(CD_DetalleFactura.IsEmpty) then
+if not(CD_DetalleFactura.IsEmpty) then
+ if CD_Fpago.State in [dsInsert,dsEdit] then
   begin
 
     //Si es una sola forma de pago le pongo el valor del total por defecto
     if ((acumulado > 0) and ((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat = 0)))
        and not(CD_FpagoID_TIPO_FORMAPAG.IsNull and CD_FpagoCUENTA_INGRESO.IsNull) then
     begin
-      CD_Fpago.edit;
       CD_FpagoIMPORTE.AsFloat:=acumulado - acumFpago;
-      CD_Fpago.Post;
     end;
 
     if not(CD_Fpago_nroPrecio.IsNull) then
     begin
-      CD_Fpago.Edit;
       case CD_Fpago_nroPrecio.AsInteger of
       0:begin
           precio:=CD_FpagoIMPORTE.AsFloat;
@@ -1957,7 +1956,6 @@ begin
       end;
 
       CD_Fpago_importeVenta.AsFloat:= precio + (precio *  CD_Fpago_desc_rec.AsFloat);
-      CD_Fpago.Post;
     end;
 
     RecalcularMontoPago();
@@ -2393,12 +2391,20 @@ end;
 
 procedure TFCajero.btnGrupoAceptarClick(Sender: TObject);
 begin
-  if CD_Fpago.State in [dsInsert,dsEdit] then
-     CD_Fpago.Post;
-  PABM_FormaPago.Visible:=False;
-  PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
-  grupoVertical.Enabled:=true;
-  GrupoGuardarCancelar.Enabled:=true;
+
+if CD_Fpago.State in [dsInsert,dsEdit] then
+  if FPYaCargado(CD_FpagoID_TIPO_FORMAPAG.AsInteger) then
+    begin
+     CD_FpagoID_TIPO_FORMAPAG.Clear;
+    end
+  else
+   begin
+    CD_Fpago.Post;
+    PABM_FormaPago.Visible:=False;
+    PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
+    grupoVertical.Enabled:=true;
+    GrupoGuardarCancelar.Enabled:=true;
+   end
 end;
 
 procedure TFCajero.btnFormaPagoClick(Sender: TObject);
@@ -2446,6 +2452,22 @@ end;
 procedure TFCajero.menuQuitarFPClick(Sender: TObject);
 begin
   btnQuitarPago.Click;
+end;
+
+function TFCajero.FPYaCargado(id:Integer):Boolean ;
+begin
+    Result:=False;
+//    CD_Fpago.Filtered := false;
+//    CD_Fpago.Filter:= Format('ID_TIPO_FORMAPAG = %d ',[id]);
+//    CD_Fpago.Filtered := true;
+//    if not(CD_Fpago.IsEmpty) then
+//    begin
+//      CD_Fpago.Filtered := false;
+//      Result:=True;
+//      Application.MessageBox('La Forma de Pago seleccionada ya existe, verifique por favor.','Carga Forma de Pago',MB_OK+MB_ICONINFORMATION);
+//      exit;
+//    end;
+//    CD_Fpago.Filtered := false;
 end;
 
 end.
