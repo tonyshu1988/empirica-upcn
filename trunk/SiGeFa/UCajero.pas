@@ -529,6 +529,11 @@ type
     CD_Fpago_esCtaCorr: TStringField;
     CD_DetalleFacturaimporte_original: TFloatField;
     ZQ_TipoIVACOEFICIENTE: TFloatField;
+    CD_VentaFinalidTipoPago: TIntegerField;
+    CD_VentaFinalidCta: TIntegerField;
+    CD_VentaFinalmdpFecha: TDateField;
+    CD_VentaFinalmdpBanco: TStringField;
+    CD_VentaFinalmdpNro: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -617,7 +622,7 @@ type
     procedure edCodCuentaExit(Sender: TObject);
     procedure menuEditarFPClick(Sender: TObject);
     procedure menuQuitarFPClick(Sender: TObject);
-    function FPYaCargado(id:Integer):Boolean ;
+    procedure sacarRepetidosFP();
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -1679,19 +1684,8 @@ begin
 
   EKDbSuma3.SumCollection[1].SumValue:=0;
 
-  while not(CD_Fpago.Eof) do
-   begin
-     CD_VentaFinal.Append;
-     CD_VentaFinal_medioPago.AsString:=CD_FpagomedioPago.AsString;
-     CD_VentaFinalimporteVenta.AsFloat:=CD_Fpago_importeVenta.AsFloat;
-     CD_VentaFinalimporteDescuento.AsFloat:=CD_VentaFinalimporteVenta.AsFloat-(CD_VentaFinalimporteVenta.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100);
-     CD_VentaFinalid.AsInteger:=CD_FpagoID_COMPROB_FP.AsInteger;
-     CD_VentaFinalgenera_vuelto.AsString:=CD_Fpago_efectivo.AsString;
-     CD_VentaFinalfiscal.AsString:=CD_Fpago_fiscal.AsString;
-     CD_VentaFinal.Post;
-
-     CD_Fpago.Next;
-   end;
+  //Agrupo las formas de Pago iguales
+  sacarRepetidosFP();
 
   RecalcularMontoPago();
 
@@ -1863,8 +1857,6 @@ begin
 
      CD_Fpago.Next;
    end;
-
-
 end;
 
 
@@ -2393,18 +2385,13 @@ procedure TFCajero.btnGrupoAceptarClick(Sender: TObject);
 begin
 
 if CD_Fpago.State in [dsInsert,dsEdit] then
-  if FPYaCargado(CD_FpagoID_TIPO_FORMAPAG.AsInteger) then
-    begin
-     CD_FpagoID_TIPO_FORMAPAG.Clear;
-    end
-  else
-   begin
+  begin
     CD_Fpago.Post;
     PABM_FormaPago.Visible:=False;
     PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
     grupoVertical.Enabled:=true;
     GrupoGuardarCancelar.Enabled:=true;
-   end
+  end
 end;
 
 procedure TFCajero.btnFormaPagoClick(Sender: TObject);
@@ -2454,20 +2441,47 @@ begin
   btnQuitarPago.Click;
 end;
 
-function TFCajero.FPYaCargado(id:Integer):Boolean ;
+procedure TFCajero.sacarRepetidosFP() ;
 begin
-    Result:=False;
-//    CD_Fpago.Filtered := false;
-//    CD_Fpago.Filter:= Format('ID_TIPO_FORMAPAG = %d ',[id]);
-//    CD_Fpago.Filtered := true;
-//    if not(CD_Fpago.IsEmpty) then
-//    begin
-//      CD_Fpago.Filtered := false;
-//      Result:=True;
-//      Application.MessageBox('La Forma de Pago seleccionada ya existe, verifique por favor.','Carga Forma de Pago',MB_OK+MB_ICONINFORMATION);
-//      exit;
-//    end;
-//    CD_Fpago.Filtered := false;
+   CD_Fpago.First;
+   while not(CD_Fpago.Eof) do
+   begin
+
+     CD_VentaFinal.Filtered := false;
+     CD_VentaFinal.Filter:= Format('IdTipoPago=%d and idCta=%d and mdpBanco=%s and mdpNro=%s',
+                                   [CD_FpagoID_TIPO_FORMAPAG.AsInteger,CD_FpagoCUENTA_INGRESO.AsInteger,
+                                    QuotedStr(CD_FpagoMDCP_BANCO.AsString),QuotedStr(CD_FpagoMDCP_CHEQUE.AsString)]);
+     CD_VentaFinal.Filtered := true;
+
+     if CD_VentaFinal.IsEmpty then
+      begin
+       CD_VentaFinal.Append;
+       CD_VentaFinal_medioPago.AsString:=CD_FpagomedioPago.AsString;
+       CD_VentaFinalimporteVenta.AsFloat:=CD_Fpago_importeVenta.AsFloat;
+       CD_VentaFinalimporteDescuento.AsFloat:=CD_VentaFinalimporteVenta.AsFloat-(CD_VentaFinalimporteVenta.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100);
+       CD_VentaFinalid.AsInteger:=CD_FpagoID_COMPROB_FP.AsInteger;
+       CD_VentaFinalgenera_vuelto.AsString:=CD_Fpago_efectivo.AsString;
+       CD_VentaFinalfiscal.AsString:=CD_Fpago_fiscal.AsString;
+
+       CD_VentaFinalidTipoPago.AsInteger:=CD_FpagoID_TIPO_FORMAPAG.AsInteger;
+       CD_VentaFinalidCta.AsInteger:=CD_FpagoCUENTA_INGRESO.AsInteger;
+       CD_VentaFinalmdpFecha.AsDateTime:=CD_FpagoMDCP_FECHA.AsDateTime;
+       CD_VentaFinalmdpBanco.AsString:=CD_FpagoMDCP_BANCO.AsString;
+       CD_VentaFinalmdpNro.AsString:=CD_FpagoMDCP_CHEQUE.AsString;
+      end
+     else
+      begin
+        CD_VentaFinal.Locate('id',CD_FpagoID_COMPROB_FP.AsInteger,[]);
+        CD_VentaFinal.Edit;
+        CD_VentaFinalimporteVenta.AsFloat:=CD_VentaFinalimporteVenta.AsFloat+CD_Fpago_importeVenta.AsFloat;
+        CD_VentaFinalimporteDescuento.AsFloat:=CD_VentaFinalimporteVenta.AsFloat-(CD_VentaFinalimporteVenta.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100);
+      end;
+     CD_VentaFinal.Post;
+     CD_VentaFinal.Filtered:=false;
+
+     CD_Fpago.Next;
+   end;
+
 end;
 
 end.
