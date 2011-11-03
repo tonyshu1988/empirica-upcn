@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 225
-  Top = 56
+  Left = 158
+  Top = 67
   Width = 1016
   Height = 714
   Caption = 'Cajero SiGeFa'
@@ -3029,6 +3029,7 @@ object FCajero: TFCajero
           Date = 40821.813995381940000000
           Time = 40821.813995381940000000
           TabOrder = 0
+          TabStop = False
           OnChange = DateTimePicker_FechaCargaChange
         end
         object CheckBoxCambiarFecha: TCheckBox
@@ -4165,7 +4166,7 @@ object FCajero: TFCajero
       Left = 4
       Top = 4
       Width = 893
-      Height = 16
+      Height = 18
       Align = alTop
       Alignment = taCenter
       AutoSize = False
@@ -7307,17 +7308,15 @@ object FCajero: TFCajero
       '        COALESCE ('#39' | Fila: '#39' || ps.fila,'#39#39')||'
       '        COALESCE ('#39' | Columna: '#39' || ps.columna,'#39#39')'
       '         AS posicSucursal'
-      'from stock_producto sp'
-      'left join producto pr on (sp.id_producto =  pr.id_producto)'
-      'left join medida m on (pr.id_medida=m.id_medida)'
+      'from producto_cabecera pc'
+      'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
+      'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
       
-        'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
-        'prod_cabecera)'
-      
-        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
-        'id_posicion_sucursal)'
-      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
+        'sicion_sucursal)'
+      'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'join configuracion c on (c.id_sucursal=su.id_sucursal)'
+      'left join medida m on (pr.id_medida=m.id_medida)'
       
         'where (ps.punto_salida='#39'S'#39')and(pr.baja<>'#39'S'#39')and(pc.baja<>'#39'S'#39')and' +
         '(sp.stock_actual>0)'
@@ -7346,15 +7345,13 @@ object FCajero: TFCajero
         'p.cod_corto,p.codigo_barra,p.stock_max,p.stock_min,p.llevar_stoc' +
         'k,'
       'p.baja'
-      'from producto p'
+      'from producto_cabecera pc'
+      'join producto p on (p.id_prod_cabecera = pc.id_prod_cabecera)'
       'join stock_producto sp on (sp.id_producto=p.id_producto)'
       
         'join posicion_sucursal ps on (ps.id_posicion_sucursal=sp.id_posi' +
         'cion_sucursal)'
       'left join medida m on (p.id_medida = m.id_medida)'
-      
-        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
-        'od_cabecera)'
       'left join articulo a on (pc.id_articulo = a.id_articulo)'
       
         'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
