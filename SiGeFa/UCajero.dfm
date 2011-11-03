@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 381
-  Top = 234
+  Left = 225
+  Top = 56
   Width = 1016
   Height = 714
   Caption = 'Cajero SiGeFa'
@@ -8628,6 +8628,22 @@ object FCajero: TFCajero
     end
     object CD_VentaFinalfiscal: TStringField
       FieldName = 'fiscal'
+    end
+    object CD_VentaFinalidTipoPago: TIntegerField
+      FieldName = 'idTipoPago'
+    end
+    object CD_VentaFinalidCta: TIntegerField
+      FieldName = 'idCta'
+    end
+    object CD_VentaFinalmdpFecha: TDateField
+      FieldName = 'mdpFecha'
+    end
+    object CD_VentaFinalmdpBanco: TStringField
+      FieldName = 'mdpBanco'
+      Size = 50
+    end
+    object CD_VentaFinalmdpNro: TStringField
+      FieldName = 'mdpNro'
     end
   end
   object DS_VentaFinal: TDataSource
