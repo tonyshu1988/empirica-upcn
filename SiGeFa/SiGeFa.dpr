@@ -60,7 +60,8 @@ uses
   UDebugging in 'UDebugging.pas' {FDebugging},
   UEstadisticaVentas in 'UEstadisticaVentas.pas' {FEstadisticaVentas},
   RegExpr in 'RegExpr.pas',
-  UReimpresionComprobantes in 'UReimpresionComprobantes.pas' {FReimpresionComprobantes};
+  UReimpresionComprobantes in 'UReimpresionComprobantes.pas' {FReimpresionComprobantes},
+  UBuscarComprobante in 'UBuscarComprobante.pas' {FBuscarComprobante};
 
 {$R *.res}
 
