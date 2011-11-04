@@ -1,8 +1,8 @@
 object FCajero: TFCajero
-  Left = 274
-  Top = 192
-  Width = 1016
-  Height = 714
+  Left = 183
+  Top = 85
+  Width = 1032
+  Height = 691
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -2950,15 +2950,15 @@ object FCajero: TFCajero
   object PanelContenedorDerecha: TPanel
     Left = 88
     Top = 0
-    Width = 912
-    Height = 624
+    Width = 928
+    Height = 601
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 2
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 910
+      Width = 926
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -2982,7 +2982,7 @@ object FCajero: TFCajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 570
+        Left = 586
         Top = 1
         Width = 339
         Height = 28
@@ -3003,7 +3003,7 @@ object FCajero: TFCajero
       object PanelCambiarFecha: TPanel
         Left = 345
         Top = 1
-        Width = 225
+        Width = 241
         Height = 28
         Align = alClient
         BevelOuter = bvNone
@@ -3034,7 +3034,7 @@ object FCajero: TFCajero
       Tag = 99
       Left = 1
       Top = 146
-      Width = 910
+      Width = 926
       Height = 41
       Align = alTop
       Color = 12648448
@@ -3145,7 +3145,7 @@ object FCajero: TFCajero
         Tag = 99
         Left = 1
         Top = 16
-        Width = 908
+        Width = 924
         Height = 24
         Align = alBottom
         BevelOuter = bvNone
@@ -3352,15 +3352,15 @@ object FCajero: TFCajero
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 187
-      Width = 910
-      Height = 436
+      Width = 926
+      Height = 413
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 2
       object Label11: TLabel
         Left = 1
         Top = 1
-        Width = 908
+        Width = 924
         Height = 14
         Align = alTop
         Alignment = taCenter
@@ -3379,8 +3379,8 @@ object FCajero: TFCajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 15
-        Width = 908
-        Height = 260
+        Width = 924
+        Height = 237
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3394,8 +3394,8 @@ object FCajero: TFCajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 906
-          Height = 204
+          Width = 922
+          Height = 181
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -3469,8 +3469,8 @@ object FCajero: TFCajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 205
-          Width = 906
+          Top = 182
+          Width = 922
           Height = 54
           Align = alBottom
           BevelOuter = bvLowered
@@ -3478,7 +3478,7 @@ object FCajero: TFCajero
           object Label36: TLabel
             Left = 1
             Top = 37
-            Width = 904
+            Width = 920
             Height = 16
             Align = alBottom
             Alignment = taCenter
@@ -3497,7 +3497,7 @@ object FCajero: TFCajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 1
-            Width = 904
+            Width = 920
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3513,7 +3513,7 @@ object FCajero: TFCajero
           object lblMontoProds: TLabel
             Left = 1
             Top = 16
-            Width = 904
+            Width = 920
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3539,8 +3539,8 @@ object FCajero: TFCajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 275
-        Width = 908
+        Top = 252
+        Width = 924
         Height = 89
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -3548,7 +3548,7 @@ object FCajero: TFCajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 906
+          Width = 922
           Height = 87
           Align = alClient
           Color = 16762303
@@ -3637,8 +3637,8 @@ object FCajero: TFCajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 364
-        Width = 908
+        Top = 341
+        Width = 924
         Height = 71
         Align = alBottom
         BevelOuter = bvLowered
@@ -3646,7 +3646,7 @@ object FCajero: TFCajero
         object lblTotAPagar: TLabel
           Left = 1
           Top = 37
-          Width = 906
+          Width = 922
           Height = 33
           Align = alBottom
           Alignment = taRightJustify
@@ -3666,7 +3666,7 @@ object FCajero: TFCajero
         object lblMaxVenta: TLabel
           Left = 1
           Top = 1
-          Width = 906
+          Width = 922
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -3695,14 +3695,14 @@ object FCajero: TFCajero
     object PanelDeralles: TPanel
       Left = 1
       Top = 31
-      Width = 910
+      Width = 926
       Height = 115
       Align = alTop
       TabOrder = 3
       object PanelCabeceraFactura: TPanel
         Left = 526
         Top = 1
-        Width = 383
+        Width = 399
         Height = 113
         Align = alClient
         BevelOuter = bvLowered
@@ -3716,7 +3716,7 @@ object FCajero: TFCajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 381
+          Width = 397
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -7837,7 +7837,7 @@ object FCajero: TFCajero
     object CD_DetalleFacturaIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
       DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
       Precision = 2
     end
     object CD_DetalleFacturaIMPUESTO_INTERNO: TFloatField
@@ -8331,8 +8331,8 @@ object FCajero: TFCajero
       'select *'
       'from comprobante_detalle')
     Params = <>
-    Left = 769
-    Top = 289
+    Left = 809
+    Top = 249
     object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
     end
@@ -8639,8 +8639,8 @@ object FCajero: TFCajero
   end
   object DS_VentaFinal: TDataSource
     DataSet = CD_VentaFinal
-    Left = 762
-    Top = 244
+    Left = 810
+    Top = 292
   end
   object EKDbSuma3: TEKDbSuma
     SumCollection = <
