@@ -9,18 +9,20 @@ type
   TGroupOperation = (goSum,goCount);
 
   TEKDBSumaItem = class(TCollectionItem)
+  private
+   function GetDisplayName : string; override;
   protected
-   FGroupOperation:TGroupOperation;
-   FFieldName:String;
-   Value:Currency;
+   FGroupOperation: TGroupOperation;
+   FFieldName: String;
+   ValorAnterior: Currency;
   public
-   SumValue:Currency;
+   SumValue: Currency;
    procedure Assign(Source: TPersistent); override;
-
   published
    property Operacion:TGroupOperation read FGroupOperation write FGroupOperation;
    property NombreCampo:String read FFieldName write FFieldName;
   end;
+
 
   TEKDBSumaItems = class(TCollection)
   protected
@@ -32,24 +34,24 @@ type
     property Items[Index: Integer]: TEKDBSumaItem read GetItem write SetItem; default;
   end;
 
+
   TEKDbSuma = class(TComponent)
   private
-    { Private declarations }
   protected
-    FSumCollection:TEKDBSumaItems;
-    FDataSet:TDataSet;
-    FSumListChanged:TNotifyEvent;
+    FSumCollection: TEKDBSumaItems;
+    FDataSet: TDataSet;
+    FSumListChanged: TNotifyEvent;
 
-    Filtered:Boolean;
-    Changing:Boolean;
+    Filtered: Boolean;
+    Changing: Boolean;
 
-    OldAfterEdit :TDataSetNotifyEvent;
-    OldAfterInsert :TDataSetNotifyEvent;
-    OldAfterOpen :TDataSetNotifyEvent;
-    OldAfterPost :TDataSetNotifyEvent;
-    OldAfterScroll :TDataSetNotifyEvent;
-    OldBeforeDelete :TDataSetNotifyEvent;
-    OldAfterClose :TDataSetNotifyEvent;
+    OldAfterEdit: TDataSetNotifyEvent;
+    OldAfterInsert: TDataSetNotifyEvent;
+    OldAfterOpen: TDataSetNotifyEvent;
+    OldAfterPost: TDataSetNotifyEvent;
+    OldAfterScroll: TDataSetNotifyEvent;
+    OldBeforeDelete: TDataSetNotifyEvent;
+    OldAfterClose: TDataSetNotifyEvent;
 
     procedure DataSetAfterEdit(DataSet: TDataSet);
     procedure DataSetAfterInsert(DataSet: TDataSet);
@@ -62,19 +64,14 @@ type
     procedure SetDataSet(Value:TDataSet);
     procedure Loaded; override;
     procedure SetSumCollection(const Value: TEKDBSumaItems);
-    { Protected declarations }
   public
-
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure RecalcAll;
-    { Public declarations }
   published
-    property SumCollection:TEKDBSumaItems read FSumCollection write SetSumCollection;
-
+    property SumCollection: TEKDBSumaItems read FSumCollection write SetSumCollection;
     property DataSet: TDataSet read FDataSet write SetDataSet;
     property SumListChanged: TNotifyEvent read FSumListChanged write FSumListChanged;
-    { Published declarations }
   end;
 
 procedure Register;
@@ -86,12 +83,16 @@ begin
   RegisterComponents('EmpiriKa', [TEKDbSuma]);
 end;
 
+//-----------------------------------------------------------------
+//      TEKDBSumaItem
+//-----------------------------------------------------------------
 constructor TEKDbSuma.Create(AOwner: TComponent);
 begin
   inherited;
-  FSumCollection := TEKDBSumaItems.Create(TEKDBSumaItem);
-  FSumCollection.FOwner := Self;
+  FSumCollection:= TEKDBSumaItems.Create(TEKDBSumaItem);
+  FSumCollection.FOwner:= Self;
 end;
+
 
 destructor TEKDbSuma.Destroy;
 begin
@@ -99,241 +100,280 @@ begin
   FSumCollection.Free;
 end;
 
+
 procedure TEKDbSuma.SetDataSet(Value:TDataSet);
 begin
   if (csDesigning in ComponentState) or (csLoading in ComponentState) then
-    FDataSet := Value
+    FDataSet:= Value
   else
-    Raise Exception.Create(' Assigning DataSet at runtime not available ');
+    Raise Exception.Create('No se puede asignar el DataSet en Tiempo de Ejecución');
 end;
+
 
 procedure TEKDbSuma.Loaded;
 begin
   inherited;
-  if not (csDesigning in ComponentState) and Assigned(FDataSet) then begin
-    OldAfterEdit := FDataSet.AfterEdit;
-    OldAfterInsert := FDataSet.AfterInsert;
-    OldAfterOpen := FDataSet.AfterOpen;
-    OldAfterPost := FDataSet.AfterPost;
-    OldAfterScroll := FDataSet.AfterScroll;
-    OldBeforeDelete := FDataSet.BeforeDelete;
-    OldAfterClose := FDataSet.AfterClose;
+  if not (csDesigning in ComponentState) and Assigned(FDataSet) then
+  begin
+    OldAfterEdit:= FDataSet.AfterEdit;
+    OldAfterInsert:= FDataSet.AfterInsert;
+    OldAfterOpen:= FDataSet.AfterOpen;
+    OldAfterPost:= FDataSet.AfterPost;
+    OldAfterScroll:= FDataSet.AfterScroll;
+    OldBeforeDelete:= FDataSet.BeforeDelete;
+    OldAfterClose:= FDataSet.AfterClose;
 
-    FDataSet.AfterEdit := DataSetAfterEdit;
-    FDataSet.AfterInsert := DataSetAfterInsert;
-    FDataSet.AfterOpen := DataSetAfterOpen;
-    FDataSet.AfterPost := DataSetAfterPost;
-    FDataSet.AfterScroll := DataSetAfterScroll;
-    FDataSet.BeforeDelete := DataSetBeforeDelete;
-    FDataSet.AfterClose := DataSetAfterClose;
+    FDataSet.AfterEdit:= DataSetAfterEdit;
+    FDataSet.AfterInsert:= DataSetAfterInsert;
+    FDataSet.AfterOpen:= DataSetAfterOpen;
+    FDataSet.AfterPost:= DataSetAfterPost;
+    FDataSet.AfterScroll:= DataSetAfterScroll;
+    FDataSet.BeforeDelete:= DataSetBeforeDelete;
+    FDataSet.AfterClose:= DataSetAfterClose;
 
-    if (FDataSet.Active = True) then RecalcAll;
-    if Assigned(SumListChanged) then SumListChanged(Self);
+    if (FDataSet.Active = True) then
+      RecalcAll;
 
+    if Assigned(SumListChanged) then
+      SumListChanged(Self);
   end;
 end;
 
-procedure TEKDbSuma.RecalcAll;
-var i: Integer;
-    item:TEKDBSumaItem;
-begin
 
+procedure TEKDbSuma.RecalcAll;
+var
+  i: Integer;
+  item:TEKDBSumaItem;
+begin
   FDataSet.DisableControls;
-  for i := 0 to FSumCollection.Count - 1 do
-    TEKDBSumaItem(FSumCollection.Items[i]).SumValue := 0;
+  for i := 0 to FSumCollection.Count - 1 do //pongo en cero cada uno de los items
+    TEKDBSumaItem(FSumCollection.Items[i]).SumValue:= 0;
 
   Changing := True;
 
-  FDataSet.First;
-  while FDataSet.Eof = False do begin
-    for i := 0 to FSumCollection.Count - 1 do begin
-      item := TEKDBSumaItem(FSumCollection.Items[i]);
-      if (item.FGroupOperation = goCount) or (item.FFieldName <> '') then begin
+  FDataSet.First; //me paro en el primer registro de la query
+  while FDataSet.Eof = False do //mientas no sea el ultimo
+  begin
+    for i := 0 to FSumCollection.Count - 1 do //recorro uno por uno los items cargados
+    begin
+      item:= TEKDBSumaItem(FSumCollection.Items[i]);
+      if (item.FGroupOperation = goCount) or (item.FFieldName <> '') then //si es una cuenta
+      begin
         case Item.FGroupOperation of
-          goSum:
-          begin
-            if (FDataSet.FieldByName(Item.FFieldName).IsNull = False) then
-              Item.SumValue := Item.SumValue + FDataSet.FieldByName(Item.FFieldName).AsFloat;
-          end;
-          goCount: Item.SumValue := Item.SumValue + 1;
+          goSum:    begin //si es sumar
+                      if (FDataSet.FieldByName(Item.FFieldName).IsNull = False) then //si el campo a sumar no es null
+                        Item.SumValue:= Item.SumValue + FDataSet.FieldByName(Item.FFieldName).AsFloat;
+                    end;
+          goCount:  begin //si es contar
+                      Item.SumValue:= Item.SumValue + 1;
+                    end;
         end;
       end;
     end;
+
     FDataSet.Next;
   end;
+
   FDataSet.First;
-
   FDataSet.EnableControls;
-//  Form1.Edit1.Text := FormatFloat('#,##0.0',cur);
-//  SumValue := Cur;
-  Filtered := FDataSet.Filtered;
-  Changing := False;
-
+  Filtered:= FDataSet.Filtered; //VER QUE HACE ACA
+  Changing:= False;
 end;
 
+//DESPUES DE EDITAR
 procedure TEKDbSuma.DataSetAfterEdit(DataSet: TDataSet);
-var i: Integer;
-    item:TEKDBSumaItem;
+var
+  i: Integer;
+  item:TEKDBSumaItem;
 begin
   if (Assigned(OldAfterEdit)) then
-   OldAfterEdit(DataSet);
+    OldAfterEdit(DataSet);
 
-  for i := 0 to FSumCollection.Count - 1 do begin
-    item := TEKDBSumaItem(FSumCollection.Items[i]);
+  for i := 0 to FSumCollection.Count - 1 do
+  begin
+    item:= TEKDBSumaItem(FSumCollection.Items[i]);
     if (item.FGroupOperation = goCount) or (item.FFieldName <> '') then begin
       case Item.FGroupOperation of
-        goSum:
-          if (FDataSet.FieldByName(Item.FFieldName).IsNull = False) then
-            Item.Value := FDataSet.FieldByName(Item.FFieldName).AsFloat
-          else
-            Item.Value := 0;
-        goCount: Item.Value := 0;
+        goSum:  begin
+                  if (FDataSet.FieldByName(Item.FFieldName).IsNull = False) then //si el campo a sumar no es null
+                    Item.ValorAnterior:= FDataSet.FieldByName(Item.FFieldName).AsFloat
+                  else
+                    Item.ValorAnterior:= 0;
+                end;
+        goCount: Item.ValorAnterior := 0;
       end;
     end;
   end;
-
 end;
 
+//DESPUES DE INSERTAR
 procedure TEKDbSuma.DataSetAfterInsert(DataSet: TDataSet);
-var i: Integer;
-    item:TEKDBSumaItem;
+var
+  i: Integer;
+  item:TEKDBSumaItem;
 begin
   if (Assigned(OldAfterInsert)) then
-   OldAfterInsert(DataSet);
+    OldAfterInsert(DataSet);
 
-  for i := 0 to FSumCollection.Count - 1 do begin
+  for i := 0 to FSumCollection.Count - 1 do
+  begin
     item := TEKDBSumaItem(FSumCollection.Items[i]);
     if (item.FGroupOperation = goCount) or (item.FFieldName <> '') then begin
       case Item.FGroupOperation of
-        goSum: Item.Value := 0;
-        goCount: Item.Value := 1;
+        goSum: Item.ValorAnterior:= 0;
+        goCount: Item.ValorAnterior:= 1;
       end;
     end;
   end;
-
 end;
 
+//DESPUES DE ABRIR
 procedure TEKDbSuma.DataSetAfterOpen(DataSet: TDataSet);
 begin
   if (Assigned(OldAfterOpen)) then
-   OldAfterOpen(DataSet);
+    OldAfterOpen(DataSet);
 
   RecalcAll;
-  if Assigned(SumListChanged) then SumListChanged(Self);
-
+  if Assigned(SumListChanged) then
+    SumListChanged(Self);
 end;
 
+//DESPUES DE POSTEAR
 procedure TEKDbSuma.DataSetAfterPost(DataSet: TDataSet);
-var i: Integer;
-    item:TEKDBSumaItem;
+var
+  i: Integer;
+  item:TEKDBSumaItem;
 begin
   if (Assigned(OldAfterPost)) then
-   OldAfterPost(DataSet);
+    OldAfterPost(DataSet);
 
-  for i := 0 to FSumCollection.Count - 1 do begin
+  for i := 0 to FSumCollection.Count - 1 do
+  begin
     item := TEKDBSumaItem(FSumCollection.Items[i]);
     if (item.FGroupOperation = goCount) or (item.FFieldName <> '') then begin
       case Item.FGroupOperation of
-        goSum:
-          if (FDataSet.FieldByName(Item.FFieldName).IsNull = False) then
-            Item.SumValue := Item.SumValue - Item.Value + FDataSet.FieldByName(Item.FFieldName).AsFloat
-          else
-            Item.SumValue := Item.SumValue - Item.Value;
-        goCount:
-          Item.SumValue := Item.SumValue + Item.Value;
+        goSum:  begin
+                  if (FDataSet.FieldByName(Item.FFieldName).IsNull = False) then
+                    Item.SumValue := Item.SumValue - Item.ValorAnterior + FDataSet.FieldByName(Item.FFieldName).AsFloat
+                  else
+                    Item.SumValue := Item.SumValue - Item.ValorAnterior;
+                end;
+        goCount: Item.SumValue := Item.SumValue + Item.ValorAnterior;
       end;
     end;
   end;
 
-  if Assigned(SumListChanged) then SumListChanged(Self);
-
+  if Assigned(SumListChanged) then
+    SumListChanged(Self);
 end;
 
+//DESPUES DE MOVERSE
 procedure TEKDbSuma.DataSetAfterScroll(DataSet: TDataSet);
 begin
   if (Assigned(OldAfterScroll)) then
-   OldAfterScroll(DataSet);
+    OldAfterScroll(DataSet);
 
-  if (Filtered <> DataSet.Filtered) and (Changing = False) then  begin
+  if (Filtered <> DataSet.Filtered) and (Changing = False) then
+  begin
     RecalcAll;
-    if Assigned(SumListChanged) then SumListChanged(Self);
+    if Assigned(SumListChanged) then
+      SumListChanged(Self);
   end;
 end;
 
+//DESPUES DE BORRAR
 procedure TEKDbSuma.DataSetBeforeDelete(DataSet: TDataSet);
-var i: Integer;
-    item:TEKDBSumaItem;
+var
+  i: Integer;
+  item:TEKDBSumaItem;
 begin
   if (Assigned(OldBeforeDelete)) then
-   OldBeforeDelete(DataSet);
+    OldBeforeDelete(DataSet);
 
-  for i := 0 to FSumCollection.Count - 1 do begin
+  for i := 0 to FSumCollection.Count - 1 do
+  begin
     item := TEKDBSumaItem(FSumCollection.Items[i]);
-    if (item.FGroupOperation = goCount) or (item.FFieldName <> '') then begin
+    if (item.FGroupOperation = goCount) or (item.FFieldName <> '') then
+    begin
       case Item.FGroupOperation of
-        goSum: Item.SumValue := Item.SumValue - FDataSet.FieldByName(Item.FFieldName).AsFloat;
-        goCount: Item.SumValue := Item.SumValue - 1;
+        goSum:   Item.SumValue:= Item.SumValue - FDataSet.FieldByName(Item.FFieldName).AsFloat;
+        goCount: Item.SumValue:= Item.SumValue - 1;
       end;
     end;
   end;
 
-  if Assigned(SumListChanged) then SumListChanged(Self);
-
+  if Assigned(SumListChanged) then
+    SumListChanged(Self);
 end;
 
+//DESPUES DE CERRAR
 procedure TEKDbSuma.DataSetAfterClose(DataSet: TDataSet);
-var i: Integer;
-    item:TEKDBSumaItem;
+var
+  i: Integer;
+  item:TEKDBSumaItem;
 begin
   if (Assigned(OldAfterClose)) then
-   OldAfterClose(DataSet);
+    OldAfterClose(DataSet);
 
-  for i := 0 to FSumCollection.Count - 1 do begin
-    item := TEKDBSumaItem(FSumCollection.Items[i]);
+  for i := 0 to FSumCollection.Count - 1 do
+  begin
+    item:= TEKDBSumaItem(FSumCollection.Items[i]);
     item.SumValue := 0;
-    item.Value := 0;
+    item.ValorAnterior := 0;
   end;
 
-  if Assigned(SumListChanged) then SumListChanged(Self);
+  if Assigned(SumListChanged) then
+    SumListChanged(Self);
 
-  Changing := False;
+  Changing:= False;
 end;
+
 
 procedure TEKDbSuma.SetSumCollection(const Value: TEKDBSumaItems);
 begin
-   FSumCollection.Assign(Value);
+  FSumCollection.Assign(Value);
 end;
 
 
-//
-//  TDBSum
-//
-
+//-----------------------------------------------------------------
+//      TEKDBSumaItem
+//-----------------------------------------------------------------
 procedure TEKDBSumaItem.Assign(Source: TPersistent);
 begin
   if Source is TCheckConstraint then
   begin
-   FGroupOperation := TEKDBSumaItem(Source).FGroupOperation;
-   FFieldName := TEKDBSumaItem(Source).FFieldName;
-   Value := TEKDBSumaItem(Source).Value;
-   SumValue := TEKDBSumaItem(Source).SumValue;
+   FGroupOperation:= TEKDBSumaItem(Source).FGroupOperation;
+   FFieldName:= TEKDBSumaItem(Source).FFieldName;
+   ValorAnterior:= TEKDBSumaItem(Source).ValorAnterior;
+   SumValue:= TEKDBSumaItem(Source).SumValue;
   end;
+  
   inherited Assign(Source);
 end;
 
-//
-//  TDBSumCollection
-//
+//Procedimento para mostrar el nombre que se carga en la lista de filtros
+function TEKDBSumaItem.GetDisplayName: string;
+begin
+  result:= FFieldName;
+  if Result = '' then
+    Result := inherited GetDisplayName;
+end;
 
+
+//-----------------------------------------------------------------
+//      TEKDBSumaItems
+//-----------------------------------------------------------------
 function TEKDBSumaItems.GetOwner:TPersistent;
 begin
   Result := FOwner;
 end;
 
+
 function TEKDBSumaItems.GetItem(Index: Integer): TEKDBSumaItem;
 begin
  Result := TEKDBSumaItem(inherited GetItem(Index));
 end;
+
 
 procedure TEKDBSumaItems.SetItem(Index: Integer; Value: TEKDBSumaItem);
 begin
