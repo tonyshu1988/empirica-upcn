@@ -206,12 +206,6 @@ type
     ZQ_ProductosVendidos: TZQuery;
     EKBuscarProductos: TEKBusquedaAvanzada;
     DS_ProductosVendidos: TDataSource;
-    ZQ_ProductosVendidosID_PRODUCTO: TIntegerField;
-    ZQ_ProductosVendidosCANTIDAD: TIntegerField;
-    ZQ_ProductosVendidosSUMAVENTA: TFloatField;
-    ZQ_ProductosVendidosSUMAIF: TFloatField;
-    ZQ_ProductosVendidosFECHAC: TDateField;
-    ZQ_ProductosVendidosDETALLE_PROD: TStringField;
     PanelFiltro: TPanel;
     BtnFiltro_Todos: TSpeedButton;
     BtnFiltro_Fiscal: TSpeedButton;
@@ -232,7 +226,17 @@ type
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     Label1: TLabel;
-    DBGrid1: TDBGrid;
+    grillaRanking: TDBGrid;
+    ZQ_ProductosVendidosSUMAVENTA: TFloatField;
+    ZQ_ProductosVendidosSUMAIF: TFloatField;
+    ZQ_ProductosVendidosFECHAC: TDateField;
+    ZQ_ProductosVendidosAGRUPAM: TIntegerField;
+    ZQ_ProductosVendidosCANTIDAD: TIntegerField;
+    ZQ_ProductosVendidosDETALLE_PROD: TStringField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    PanelCambiarFecha: TPanel;
+    dtpFechaRanking: TDateTimePicker;
+    CheckBoxCambiarFecha: TCheckBox;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -247,6 +251,11 @@ type
     procedure guardarConfigPanel();
     procedure btImprimirClick(Sender: TObject);
     procedure EKDbSumaProdsVendidosSumListChanged(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure dtpFechaRankingChange(Sender: TObject);
+    procedure CheckBoxCambiarFechaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -292,7 +301,9 @@ begin
   TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[3]).Valor:= IntToStr(30);
 
   TEKCriterioBA(EKBuscarProductos.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
-  
+
+  dtpFechaRanking.DateTime:=dm.EKModelo.Fecha;
+
 //Permiso para ver o no los filtros de Fiscal
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
 //  BtnFiltro_Fiscal.Click;
@@ -550,12 +561,68 @@ begin
     if not ZP_Horario.IsEmpty then
       dm.ExportarEXCEL(DBGridHorario);
   end;
+
+  //Ranking
+  if PageControl.ActivePage = TabRanking then
+  begin
+    if not ZQ_ProductosVendidos.IsEmpty then
+      dm.ExportarEXCEL(grillaRanking);
+  end;
 end;
 
 procedure TFEstadisticaVentas.EKDbSumaProdsVendidosSumListChanged(
   Sender: TObject);
 begin
   lblProdsVendidos.Caption :=Format('Total Productos/Servicios vendidos: %s',[FormatFloat(' $ ##,###,##0.00 ', EKDbSumaProdsVendidos.SumCollection[0].SumValue)]);
+end;
+
+procedure TFEstadisticaVentas.SpeedButton1Click(Sender: TObject);
+begin
+ZQ_ProductosVendidos.Close;
+ZQ_ProductosVendidos.SQL[2]:=Format('(%s) as agrupam,count(cd.id_producto) as cantidad,%s',
+                            ['cd.id_producto','(pc.nombre) DETALLE_PROD']);
+//showmessage(ZQ_ProductosVendidos.SQL.Text);
+ZQ_ProductosVendidos.Open;
+end;
+
+procedure TFEstadisticaVentas.SpeedButton3Click(Sender: TObject);
+begin
+ZQ_ProductosVendidos.Close;
+ZQ_ProductosVendidos.SQL[2]:=Format('(%s) as agrupam,count(cd.id_producto) as cantidad,%s',
+                            ['c.id_vendedor','(vend.nombre) as DETALLE_PROD']);
+//showmessage(ZQ_ProductosVendidos.SQL.Text);
+ZQ_ProductosVendidos.Open;
+end;
+
+procedure TFEstadisticaVentas.SpeedButton2Click(Sender: TObject);
+begin
+ZQ_ProductosVendidos.Close;
+ZQ_ProductosVendidos.SQL[2]:=Format('(%s) as agrupam,count(cd.id_producto) as cantidad,%s',
+                            ['c.id_cliente','(cli.nombre) as DETALLE_PROD']);
+ZQ_ProductosVendidos.Open;
+end;
+
+procedure TFEstadisticaVentas.dtpFechaRankingChange(Sender: TObject);
+begin
+
+//ZQ_ProductosVendidos.Close;
+//if CheckBoxCambiarFecha.Checked then
+// begin
+//    ZQ_ProductosVendidos.SQL[11]:=format('where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)and(cast(c.fecha_cobrada as date)=%s)',[quotedStr(dateTostr(dtpFechaRanking.Date))]);
+// end
+//else
+// begin
+//    ZQ_ProductosVendidos.SQL[11]:='where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)';
+// end;
+// ZQ_ProductosVendidos.Open;
+
+ end;
+
+procedure TFEstadisticaVentas.CheckBoxCambiarFechaClick(Sender: TObject);
+begin
+// if (CheckBoxCambiarFecha.Checked) then
+//    dtpFechaRankingChange(self);
+
 end;
 
 end.

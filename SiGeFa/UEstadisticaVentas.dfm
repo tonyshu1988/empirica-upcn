@@ -2546,7 +2546,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Down = True
           Caption = 'Productos'
           Layout = blGlyphBottom
-          OnClick = AplicarFiltro
+          OnClick = SpeedButton1Click
         end
         object SpeedButton2: TSpeedButton
           Left = 193
@@ -2556,7 +2556,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           GroupIndex = 1
           Caption = 'Clientes'
           Layout = blGlyphBottom
-          OnClick = AplicarFiltro
+          OnClick = SpeedButton2Click
         end
         object SpeedButton3: TSpeedButton
           Left = 289
@@ -2566,7 +2566,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           GroupIndex = 1
           Caption = 'Vendedores'
           Layout = blGlyphBottom
-          OnClick = AplicarFiltro
+          OnClick = SpeedButton3Click
         end
         object Label1: TLabel
           Left = 19
@@ -2575,8 +2575,40 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Height = 13
           Caption = 'Ranking seg'#250'n:'
         end
+        object PanelCambiarFecha: TPanel
+          Left = 936
+          Top = 0
+          Width = 257
+          Height = 33
+          Align = alRight
+          BevelOuter = bvNone
+          TabOrder = 0
+          Visible = False
+          object dtpFechaRanking: TDateTimePicker
+            Left = 8
+            Top = 4
+            Width = 105
+            Height = 21
+            Date = 40821.813995381940000000
+            Time = 40821.813995381940000000
+            TabOrder = 0
+            TabStop = False
+            OnChange = dtpFechaRankingChange
+          end
+          object CheckBoxCambiarFecha: TCheckBox
+            Left = 119
+            Top = 6
+            Width = 109
+            Height = 17
+            Caption = 'Filtrar por Fecha'
+            Checked = True
+            State = cbChecked
+            TabOrder = 1
+            OnClick = CheckBoxCambiarFechaClick
+          end
+        end
       end
-      object DBGrid1: TDBGrid
+      object grillaRanking: TDBGrid
         Left = 0
         Top = 33
         Width = 1193
@@ -2610,7 +2642,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           item
             Expanded = False
             FieldName = 'DETALLE_PROD'
-            Title.Caption = 'Producto/Servicio'
+            Title.Caption = 'Detalle'
             Width = 469
             Visible = True
           end
@@ -3666,7 +3698,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     end
     object btnExcel: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Exel'
+      Caption = 'Excel'
       Category = 0
       Hint = 'Exportar a Exel'
       Visible = ivAlways
@@ -3985,40 +4017,32 @@ object FEstadisticaVentas: TFEstadisticaVentas
   end
   object ZQ_ProductosVendidos: TZQuery
     Connection = DM.Conexion
-    SortedFields = 'FECHAC'
     SQL.Strings = (
-      
-        'select cd.id_producto,count(cd.id_producto) as cantidad,sum(cd.i' +
-        'mporte_venta) as sumaVenta,'
+      'select sum(cd.importe_venta) as sumaVenta,'
       
         'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
         'chaC,'
       
-        'pc.cod_corto||'#39' '#39'||pc.nombre||coalesce('#39'  -  M: '#39'||m.medida,'#39#39')|' +
-        '|coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.c' +
-        'odigo_barra,'#39#39') DETALLE_PROD'
+        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
+        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
+        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
+        'digo_barra,'#39#39') DETALLE_PROD'
       'from comprobante_detalle cd'
       'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
       'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona vend on (c.id_vendedor=vend.id_persona)'
+      'join persona cli on (c.id_cliente=cli.id_persona)'
       'left join producto p on (cd.id_producto=p.id_producto)'
       'left join medida m on (p.id_medida=m.id_medida)'
       
         'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
         '_cabecera)'
       'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)'
-      'group by cd.id_producto,5,6')
+      'group by 4,3,6'
+      'order by 3 desc,5 desc,1 desc,2 desc')
     Params = <>
-    IndexFieldNames = 'FECHAC Asc'
     Left = 506
     Top = 304
-    object ZQ_ProductosVendidosID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-      Required = True
-    end
-    object ZQ_ProductosVendidosCANTIDAD: TIntegerField
-      FieldName = 'CANTIDAD'
-      ReadOnly = True
-    end
     object ZQ_ProductosVendidosSUMAVENTA: TFloatField
       FieldName = 'SUMAVENTA'
       ReadOnly = True
@@ -4033,10 +4057,18 @@ object FEstadisticaVentas: TFEstadisticaVentas
       FieldName = 'FECHAC'
       ReadOnly = True
     end
+    object ZQ_ProductosVendidosAGRUPAM: TIntegerField
+      FieldName = 'AGRUPAM'
+      ReadOnly = True
+    end
+    object ZQ_ProductosVendidosCANTIDAD: TIntegerField
+      FieldName = 'CANTIDAD'
+      ReadOnly = True
+    end
     object ZQ_ProductosVendidosDETALLE_PROD: TStringField
       FieldName = 'DETALLE_PROD'
       ReadOnly = True
-      Size = 128
+      Size = 237
     end
   end
   object EKBuscarProductos: TEKBusquedaAvanzada
@@ -4171,5 +4203,32 @@ object FEstadisticaVentas: TFEstadisticaVentas
     ShowModal = False
     Left = 158
     Top = 375
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = grillaRanking
+    Filtros = <
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = False
+    PermitirFiltrar = True
+    Left = 636
+    Top = 336
   end
 end

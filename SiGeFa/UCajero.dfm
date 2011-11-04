@@ -7057,8 +7057,8 @@ object FCajero: TFCajero
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 888
-    Top = 400
+    Left = 904
+    Top = 352
     DockControlHeights = (
       88
       0
@@ -8473,7 +8473,7 @@ object FCajero: TFCajero
   object DataSetProvider1: TDataSetProvider
     DataSet = ZQ_PreventaProductos
     Left = 898
-    Top = 308
+    Top = 300
   end
   object ZQ_ComprobPreventa: TZQuery
     Connection = DM.Conexion
