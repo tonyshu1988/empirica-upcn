@@ -533,7 +533,7 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
 
     LStockActual.Visible := true;
     EditStockActual.Visible := true;
-    EditStockActual.Text := 0;
+    EditStockActual.Text := '0';
 
     //Es medio obvio pero si o si hay q ponerlo aca, para el id q vá en detalle prod
      if (ZQ_ProductoCabecera.State=dsinsert) then
