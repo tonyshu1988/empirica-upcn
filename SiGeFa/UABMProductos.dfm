@@ -153,7 +153,7 @@ object FABMProductos: TFABMProductos
             50.270833333333330000
             1232.958333333333000000
             124.354166666666700000
-            304.270833333333300000)
+            304.270833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -184,7 +184,7 @@ object FABMProductos: TFABMProductos
           Size.Values = (
             52.916666666666670000
             1116.541666666667000000
-            68.791666666666660000
+            68.791666666666680000
             537.104166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -217,7 +217,7 @@ object FABMProductos: TFABMProductos
             52.916666666666670000
             1068.916666666667000000
             5.291666666666667000
-            632.354166666666600000)
+            632.354166666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -463,7 +463,7 @@ object FABMProductos: TFABMProductos
             52.916666666666670000
             10.583333333333330000
             7.937500000000000000
-            304.270833333333300000)
+            304.270833333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -659,7 +659,7 @@ object FABMProductos: TFABMProductos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -877,7 +877,7 @@ object FABMProductos: TFABMProductos
             37.041666666666670000
             2000.250000000000000000
             5.291666666666667000
-            92.604166666666660000)
+            92.604166666666680000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1536,7 +1536,7 @@ object FABMProductos: TFABMProductos
       Top = 347
       Width = 976
       Height = 222
-      ActivePage = tabCabecera
+      ActivePage = tabDetalle
       Align = alBottom
       MultiLine = True
       Style = tsFlatButtons
@@ -2500,6 +2500,20 @@ object FABMProductos: TFABMProductos
                   Font.Style = []
                   ParentFont = False
                 end
+                object LStockActual: TLabel
+                  Left = 385
+                  Top = 1
+                  Width = 71
+                  Height = 13
+                  Caption = 'Stock Actual'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Verdana'
+                  Font.Style = []
+                  ParentFont = False
+                  Visible = False
+                end
                 object PMedidas: TPanel
                   Left = 526
                   Top = 0
@@ -2512,7 +2526,7 @@ object FABMProductos: TFABMProductos
                   object Label5: TLabel
                     Left = 3
                     Top = 3
-                    Width = 104
+                    Width = 132
                     Height = 13
                     Align = alTop
                     Alignment = taCenter
@@ -2641,6 +2655,21 @@ object FABMProductos: TFABMProductos
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
                   WordWrap = True
+                end
+                object EditStockActual: TEdit
+                  Left = 385
+                  Top = 17
+                  Width = 81
+                  Height = 21
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                  TabOrder = 7
+                  Visible = False
+                  OnExit = EditStockActualExit
                 end
               end
             end
@@ -4835,6 +4864,54 @@ object FABMProductos: TFABMProductos
         DataType = ftUnknown
         Name = 'OLD_ID_PROD_CABECERA'
         ParamType = ptUnknown
+      end>
+  end
+  object Asociar_producto_pto_salida: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUCTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'STOCK_ACTUAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'STOCK_MIN'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'STOCK_MAX'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'ASOCIAR_PRODUCTO_PTO_SALIDA'
+    Left = 656
+    Top = 272
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUCTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'STOCK_ACTUAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'STOCK_MIN'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'STOCK_MAX'
+        ParamType = ptInput
       end>
   end
 end
