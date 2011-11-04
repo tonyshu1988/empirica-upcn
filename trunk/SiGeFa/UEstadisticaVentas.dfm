@@ -25,7 +25,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 1201
     Height = 691
-    ActivePage = TabRanking
+    ActivePage = TabFacturacion
     Align = alClient
     TabOrder = 4
     object TabFacturacion: TTabSheet
