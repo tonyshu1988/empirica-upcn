@@ -303,6 +303,9 @@ type
     ZQ_TodasMedidasMEDIDA: TStringField;
     ZQ_TodasMedidasBAJA: TStringField;
     ZUpdateSQL2: TZUpdateSQL;
+    Asociar_producto_pto_salida: TZStoredProc;
+    EditStockActual: TEdit;
+    LStockActual: TLabel;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -366,6 +369,7 @@ type
     procedure ZQ_PreciosIMPUESTO_IVAChange(Sender: TField);
     procedure ZQ_PreciosIMPUESTO_ADICIONAL1Change(Sender: TField);
     procedure ZQ_PreciosIMPUESTO_ADICIONAL2Change(Sender: TField);
+    procedure EditStockActualExit(Sender: TObject);
   private
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
   public
@@ -527,7 +531,9 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     GrupoEditando.Enabled := true;
     GrupoVisualizando.Enabled := false;
 
-  
+    LStockActual.Visible := true;
+    EditStockActual.Visible := true;
+    EditStockActual.Text := 0;
 
     //Es medio obvio pero si o si hay q ponerlo aca, para el id q vá en detalle prod
      if (ZQ_ProductoCabecera.State=dsinsert) then
@@ -706,13 +712,41 @@ begin
       PEdicion.Visible:=False;
       VerActivos1.Click;
       ZQ_DetalleProducto.Refresh;
+
+      LStockActual.Visible := false;
+      EditStockActual.Visible := false;
     end
   except
     begin
       Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
       exit;
     end
-  end
+  end;
+
+
+  if (asociar_pto_salida = 'SI') then // Asociamos el producto con el pto de salida de forma automatica, de esta manera ya esta asociado a producto_stock
+  begin
+    if dm.EKModelo.iniciar_transaccion('ASOCIAR', []) then
+    begin
+      ZQ_DetalleProducto.First;
+      while not ZQ_DetalleProducto.Eof do
+      begin
+        Asociar_producto_pto_salida.Close;
+        Asociar_producto_pto_salida.ParamByName('ID_PRODUCTO').AsInteger := ZQ_DetalleProductoID_PRODUCTO.AsInteger;
+        Asociar_producto_pto_salida.ParamByName('STOCK_MIN').AsFloat := ZQ_DetalleProductoSTOCK_MIN.AsInteger;
+        Asociar_producto_pto_salida.ParamByName('STOCK_MAX').AsFloat := ZQ_DetalleProductoSTOCK_MAX.AsInteger;
+        Asociar_producto_pto_salida.ParamByName('STOCK_ACTUAL').AsFloat := StrToFloat(EditStockActual.Text);
+        Asociar_producto_pto_salida.ExecProc;
+
+        ZQ_DetalleProducto.Next;
+      end;
+
+      if not (dm.EKModelo.finalizar_transaccion('ASOCIAR')) then
+        dm.EKModelo.cancelar_transaccion('ASOCIAR');
+    end;
+  end;
+
+  
 end;
 
 
@@ -729,6 +763,9 @@ begin
       PProducto.Enabled:=False;
       PEdicion.Visible:=False;
       VerActivos1.Click;
+
+      LStockActual.Visible := false;
+      EditStockActual.Visible := false;      
     end;
 end;
 
@@ -1564,6 +1601,22 @@ procedure TFABMProductos.ZQ_PreciosIMPUESTO_ADICIONAL2Change(
   Sender: TField);
 begin
 actualizarPrecios('IMP_ADICIONAL2');
+end;
+
+procedure TFABMProductos.EditStockActualExit(Sender: TObject);
+var
+control : real;
+begin
+  try
+    control := StrToFloat(EditStockActual.Text);
+
+  Except
+    begin
+        Application.MessageBox('No se permiten simbolos ni letras en el campo STOCK ACTUAL. VERIFIQUE', '', MB_OK+MB_ICONINFORMATION);
+        EditStockActual.SetFocus;
+    end
+  end;
+
 end;
 
 end.
