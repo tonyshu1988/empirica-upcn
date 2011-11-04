@@ -93,12 +93,10 @@ Dim strsql As String
                        "cd.impuesto_interno, " & _
                        "pro.codigo_barra , cab.nombre as descripcion " & _
                 "from comprobante cpb " & _
-                "left join comprobante_detalle cd on (cpb.id_comprobante = cd.id_comprobante) " & _
-                "left join comprobante_forma_pago cfp on (cpb.id_comprobante = cfp.id_comprobante) " & _
+                "left join comprobante_detalle cd on (cpb.id_comprobante = cd.id_comprobante) " & _                
                 "left join producto pro on (cd.id_producto = pro.id_producto) " & _
                 "left join producto_cabecera cab on (pro.id_prod_cabecera = cab.id_prod_cabecera) " & _
-                "left join persona cli on (cpb.id_cliente = cli.id_persona) " & _
-                "left join tipo_formapago tfp on (cfp.id_tipo_formapag = tfp.id_tipo_formapago) " & _
+                "left join persona cli on (cpb.id_cliente = cli.id_persona) " & _                
                 "left join tipo_iva iva on (cpb.id_tipo_iva = iva.id_tipo_iva) " & _
                 "left join tipo_documento doc on (cli.id_tipo_doc = doc.id_tipo_doc) " & _
                 "where (cpb.id_comprobante = " & pIdComprobante & ") " & _
