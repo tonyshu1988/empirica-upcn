@@ -1,6 +1,7 @@
 package EmpiriKa;
 
 {$R *.res}
+{$R 'recursos.res'}
 {$ALIGN 8}
 {$ASSERTIONS ON}
 {$BOOLEVAL OFF}
@@ -43,7 +44,7 @@ requires
   dxComnD7,
   dxBarExtItemsD7,
   QR5RunD7,
-  InterSol;
+  ZComponentDesign;
 
 contains
   EKAppEvnts in 'EKAppEvnts.pas',
