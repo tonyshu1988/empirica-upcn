@@ -149,7 +149,7 @@ Const
   ESTADO_ALMACENADO    = 2;
   ESTADO_ANULADO       = 3;
 
-  LONG_COD_BARRAS       = 40;
+  LONG_COD_BARRAS       = 20;
   LONG_CODIGO           = 14;
 implementation
 
