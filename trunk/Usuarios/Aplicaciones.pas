@@ -10,17 +10,12 @@ uses
 type
   TFAplicaciones = class(TForm)
     Aplicaciones: TZQuery;
-    DBGridPermisos: TDBGrid;
     AplicacionesAPLICACION: TStringField;
     AplicacionesCLAVE: TIntegerField;
     AplicacionesACCION: TStringField;
     AplicacionesCAPTION: TStringField;
     AplicacionesDESCRIPCION: TBlobField;
     DSAplicaciones: TDataSource;
-    DBMemoDescripcion: TDBMemo;
-    NAplicacion: TLabel;
-    Label4: TLabel;
-    Label1: TLabel;
     PanelFondo: TPanel;
     dxBarABM: TdxBarManager;
     btnGuardar: TdxBarLargeButton;
@@ -31,6 +26,15 @@ type
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnEliminar: TdxBarLargeButton;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Label4: TLabel;
+    NAplicacion: TLabel;
+    DBGridPermisos: TDBGrid;
+    Panel3: TPanel;
+    Label1: TLabel;
+    DBMemoDescripcion: TDBMemo;
+    Label2: TLabel;
     procedure AplicacionesAfterInsert(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);

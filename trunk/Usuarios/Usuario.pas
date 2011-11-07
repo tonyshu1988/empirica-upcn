@@ -43,7 +43,7 @@ type
     lee_roleRDBOBJECT_TYPE: TSmallintField;
     DSRole: TDataSource;
     borrar_role: TZReadOnlyQuery;
-    ROLE: TZReadOnlyQuery;
+    agregar_role: TZReadOnlyQuery;
     ConfirmarContrasenia: TEdit;
     Label3: TLabel;
     Label7: TLabel;
@@ -52,7 +52,6 @@ type
     DBCheckBoxHabilitado: TDBCheckBox;
     DBCheckBoxEsGrupo: TDBCheckBox;
     TabSheetPermismos: TTabSheet;
-    DBGridPermisosHeredados: TDBGrid;
     Permisos: TZQuery;
     DSPermisos: TDataSource;
     PermisosUSUARIO: TStringField;
@@ -85,10 +84,7 @@ type
     PanelContenedor: TPanel;
     PanelDatosUsuario: TPanel;
     PanelRoles: TPanel;
-    Label4: TLabel;
-    database: TLabel;
     DBGridRoles: TDBGrid;
-    BtnAsignarRol: TButton;
     CBoxUsuariosCopia: TComboBox;
     EKLlenarCBoxUsuarios: TEKLlenarCombo;
     ZQ_UsuariosCopia: TZQuery;
@@ -105,6 +101,14 @@ type
     ZQ_UsuariosCopiaGRUPO: TStringField;
     ZQ_UsuariosCopiaHABILITADO: TStringField;
     ZQ_UsuariosCopiaNIVEL: TIntegerField;
+    Panel2: TPanel;
+    Label4: TLabel;
+    database: TLabel;
+    Panel3: TPanel;
+    BtnAsignarRol: TButton;
+    Panel4: TPanel;
+    DBGridPermisosHeredados: TDBGrid;
+    Label6: TLabel;
     procedure BtnAsignarRolClick(Sender: TObject);
     procedure UsuarioAfterOpen(DataSet: TDataSet);
     procedure TabSheetPermismosShow(Sender: TObject);
@@ -209,9 +213,6 @@ begin
   if not dm.EKUsrLogin.PermisoAccion('AGREGARPERMISOS') then
     BtnAsignarRol.Visible:=false;
 
-//  if (btnNuevo.Enabled = false) and (btnModificar.Enabled = false) then
-//    ABMUsuario.visible:=false;
-
   if FPrincipal.Usuarios.ParamByName('nivel').AsInteger = 0 then
     DBEditNivel.ReadOnly:= false;
 end;
@@ -266,24 +267,28 @@ end;
 
 
 procedure TFUsuario.btnEliminarClick(Sender: TObject);
+var
+  auxUser: string;
 begin
+  auxUser:= UpperCase(lee_role.ParamByName('usr').AsString);
+
+  if dm.EKUsrLogin.usuariodb = auxUser then
+    exit;
+
   if (application.MessageBox(pchar('¿Esta seguro que desea Eliminar el Usuario '+UsuarioNOMBRE.AsString+'?'+#13+#13), 'Eliminar Permiso', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
     if dm.EKModelo.iniciar_transaccion(transaccion_usuario, [Usuario]) then
     begin
       estado:= 'Baja';
-      GrupoEditando.Enabled:= false;
-      GrupoGuardarCancelar.Enabled:= true;
-
       SecurityService:= FPrincipal.IBSecurityService;
       with SecurityService do
       begin
         Active := false;
         ServerName:= dm.Conexion.HostName;
         LoginPrompt:= False;
-        //Params.Clear;
-        Params.Add('user_name='+dm.EKUsrLogin.usuariodb);
-        Params.Add('password='+dm.EKUsrLogin.passworddb);
+        Params.Clear;
+        Params.Add('user_name=SYSDBA');
+        Params.Add('password=masterkey');
         Active:= True;
         try
           UserName:= UsuarioDB_USR.AsString;
@@ -293,9 +298,10 @@ begin
         end;
       end;
 
-      borrar_role.ParamByName('usr').AsString:= FUsuario.lee_role.ParamByName('usr').AsString;
+      borrar_role.ParamByName('usr').AsString:= auxUser;
       borrar_role.ParamByName('role').AsString:= 'BASE';
       borrar_role.ExecSQL;
+
       ConfirmarContrasenia.Text:='';
       Usuario.Delete;
     end
@@ -303,7 +309,9 @@ begin
       exit;
 
     try
-      if not (dm.EKModelo.finalizar_transaccion(transaccion_usuario)) then
+      if dm.EKModelo.finalizar_transaccion(transaccion_usuario) then
+        close
+      else
         dm.EKModelo.cancelar_transaccion(transaccion_usuario);
     except
       begin
@@ -316,14 +324,20 @@ end;
 
 
 procedure TFUsuario.BtnAsignarRolClick(Sender: TObject);
+var
+  auxUser: string;
 begin
-  borrar_role.ParamByName('usr').AsString := FUsuario.lee_role.ParamByName('usr').AsString;
-  borrar_role.ParamByName('role').AsString := 'BASE';
+  auxUser:= UpperCase(lee_role.ParamByName('usr').AsString);
+
+  borrar_role.ParamByName('usr').AsString:= auxUser;
+  borrar_role.ParamByName('role').AsString:= 'BASE';
   borrar_role.ExecSQL;
 
-  role.ParamByName('usr').AsString := FUsuario.lee_role.ParamByName('usr').AsString;
-  role.ParamByName('role').AsString := 'BASE';
-  role.ExecSQL;
+  agregar_role.ParamByName('usr').AsString:= auxUser;
+  agregar_role.ParamByName('role').AsString:= 'BASE';
+  agregar_role.ExecSQL;
+
+  dm.ConexionDB.Commit;
 
   lee_role.Close;
   lee_role.Open;
@@ -378,8 +392,8 @@ begin
       ServerName:= dm.Conexion.HostName;
       LoginPrompt:= False;
       Params.Clear;
-      Params.Add('user_name='+dm.EKUsrLogin.usuariodb);
-      Params.Add('password='+dm.EKUsrLogin.passworddb);
+      Params.Add('user_name=SYSDBA');
+      Params.Add('password=masterkey');
       Active := True;
       UserName:= UsuarioDB_USR.AsString;
       FirstName:= UsuarioNOMBRE.AsString;
@@ -390,14 +404,12 @@ begin
         AddUser
       else
         ModifyUser;
-
       Active := false;
 
-      FUsuario.lee_role.ParamByName('usr').AsString:=UsuarioDB_USR.AsString;
+      lee_role.ParamByName('usr').AsString:= UsuarioDB_USR.AsString;
       BtnAsignarRol.Click;
     end;
   end;
-
   Usuario.ApplyUpdates;
 
   if (estado <> 'Baja') and (EKLlenarCBoxUsuarios.SelectClave <> '') then
