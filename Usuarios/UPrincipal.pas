@@ -108,15 +108,14 @@ type
     EKOrdenarPermisos: TEKOrdenarGrilla;
     EKOrdenarUsuarios: TEKOrdenarGrilla;
     EKOrdenarGrupos: TEKOrdenarGrilla;
+    Label2: TLabel;
+    Label3: TLabel;
     procedure EKLlenarAplicacionCambio(valor: String);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridUsuariosDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
     procedure btnSalirClick(Sender: TObject);
-    procedure DBGridGruposDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridUsuariosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridGruposDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridPermisosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure RadioGrupoClick(Sender: TObject);
     procedure ZPermisosCalcFields(DataSet: TDataSet);
     procedure PermisosBeforeClose(DataSet: TDataSet);
@@ -128,9 +127,6 @@ type
     procedure CambioVerUsuario;
     procedure DBGridPermisosDblClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
-    procedure DBGridPermisosDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
     procedure bntValorClick(Sender: TObject);
     procedure UsuariosBeforeScroll(DataSet: TDataSet);
     procedure aceptar_cancelar;
@@ -147,7 +143,7 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    normalFocus, conPermiso, conPermisoFocus, deshabilitado: TColor;
   end;
 
 var
@@ -166,89 +162,130 @@ end;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
+  normalFocus:= $00FFC488;
+  conPermiso:= $0088BD88;
+  conPermisoFocus:= $005AA55A;
+  deshabilitado:= $006666FF;
+
   try
-      nivel.ParamByName('usu').AsString:=dm.EKUsrLogin.usuariosis;
-      nivel.Open;
-      Usuarios.ParamByName('nivel').AsInteger:= NivelNIVEL.AsInteger;
-      GruposP.ParamByName('nivel').AsInteger:= NivelNIVEL.AsInteger;
-      nivel.close;
+    nivel.ParamByName('usu').AsString:=dm.EKUsrLogin.usuariosis;
+    nivel.Open;
+    Usuarios.ParamByName('nivel').AsInteger:= NivelNIVEL.AsInteger;
+    GruposP.ParamByName('nivel').AsInteger:= NivelNIVEL.AsInteger;
+    nivel.close;
 
-      dm.EKModelo.abrir(Usuarios);
-      EKLlenarAplicacion.CargarCombo;
-      EKLlenarGrupo.CargarCombo;
-      EKUsrPermisos.Validar;
+    dm.EKModelo.abrir(Usuarios);
+    EKLlenarAplicacion.CargarCombo;
+    EKLlenarGrupo.CargarCombo;
+    EKUsrPermisos.Validar;
 
-      DBGridPermisos.OnDblClick:= nil; //le saco el doble click a la grilla de permisos
+    DBGridPermisos.OnDblClick:= nil; //le saco el doble click a la grilla de permisos
 
-      GrupoEditando.Enabled:= true;
-      GrupoGuardarCancelar.Enabled:= false;
-      GrupoAsignacion.Enabled:= false;
+    GrupoEditando.Enabled:= true;
+    GrupoGuardarCancelar.Enabled:= false;
+    GrupoAsignacion.Enabled:= false;
 
-      RadioBtnTodos.Checked:= true;
-      RadioGrupo.ItemIndex:=1;
+    RadioBtnTodos.Checked:= true;
+    RadioGrupo.ItemIndex:=1;
 
-      EKLlenarAplicacion.SetItem(0);
+    EKLlenarAplicacion.SetItem(0);
 
-      EKOrdenarPermisos.CargarConfigColunmas;
-      EKOrdenarUsuarios.CargarConfigColunmas;
-      EKOrdenarGrupos.CargarConfigColunmas;
+    EKOrdenarPermisos.CargarConfigColumnas;
+    EKOrdenarUsuarios.CargarConfigColumnas;
+    EKOrdenarGrupos.CargarConfigColumnas;
   Except
     begin
       ShowMessage('El usuario no tiene permisos para ingresar al sistema');
       Application.Terminate;
     end;
   end;
-
 end;
 
 
-procedure TFPrincipal.DBGridUsuariosDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure TFPrincipal.DBGridUsuariosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
+  DBGridUsuarios.Canvas.Font.Color:= clBlack;
+
   if usuarios.FieldByName('HABILITADO').AsString = 'N' then
   begin
-    DBGridUsuarios.Canvas.Brush.Color := clred;
-    //DBGridUsuarios.Canvas.Font.Color := clblue;
-    DBGridUsuarios.Canvas.Font.Style := DBGridUsuarios.Canvas.Font.Style + [fsBold];
+    DBGridUsuarios.Canvas.Brush.Color:= deshabilitado;
+    DBGridUsuarios.Canvas.Font.Style:= DBGridUsuarios.Canvas.Font.Style + [fsBold];
+
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridUsuarios.Canvas.Brush.Color:= clRed;
+  end
+  else
+  begin
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      DBGridUsuarios.Canvas.Brush.Color:= normalFocus;
+      DBGridUsuarios.Canvas.Font.Style:= DBGridUsuarios.Canvas.Font.Style + [fsBold];
+    end;
   end;
 
   DBGridUsuarios.DefaultDrawColumnCell(rect,datacol,column,state);
 end;
 
 
-procedure TFPrincipal.DBGridPermisosDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFPrincipal.DBGridPermisosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
+  DBGridPermisos.Canvas.Font.Color:= clBlack;
+
   if not ((Permisos.FieldByName('USUARIO').IsNull) or (Permisos.FieldByName('USUARIO').AsString= 'BORRADO')) then
   begin
-    DBGridPermisos.Canvas.Brush.Color := clMoneyGreen;
-    //DBGridPermisos.Canvas.Font.Color := clBlack;
-    DBGridPermisos.Canvas.Font.Style := DBGridPermisos.Canvas.Font.Style + [fsBold];
+    DBGridPermisos.Canvas.Brush.Color:= conPermiso;
+    DBGridPermisos.Canvas.Font.Style:= DBGridPermisos.Canvas.Font.Style + [fsBold];
+
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      DBGridPermisos.Canvas.Brush.Color:= conPermisoFocus;
+      DBGridPermisos.Canvas.Font.Color:= clWhite;
+    end;
+  end
+  else
+  begin
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      DBGridPermisos.Canvas.Brush.Color:= normalFocus;
+      DBGridPermisos.Canvas.Font.Style:= DBGridPermisos.Canvas.Font.Style + [fsBold];
+    end;
   end;
 
-  DBGridPermisos.DefaultDrawColumnCell(Rect,datacol,column,state);
+  DBGridPermisos.DefaultDrawColumnCell(rect,datacol,column,state);
+end;
+
+
+procedure TFPrincipal.DBGridGruposDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  DBGridGrupos.Canvas.Font.Color:= clBlack;
+
+  if not ((GruposP.FieldByName('USUARIO').IsNull) or (GruposP.FieldByName('USUARIO').AsString='BORRADO')) then
+  begin
+    DBGridGrupos.Canvas.Brush.Color:= conPermiso;
+    DBGridGrupos.Canvas.Font.Style:= DBGridGrupos.Canvas.Font.Style + [fsBold];
+
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      DBGridGrupos.Canvas.Brush.Color:= conPermisoFocus;
+      DBGridGrupos.Canvas.Font.Color:= clWhite;
+    end;
+  end
+  else
+  begin
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      DBGridGrupos.Canvas.Brush.Color:= normalFocus;
+      DBGridGrupos.Canvas.Font.Style:= DBGridGrupos.Canvas.Font.Style + [fsBold];
+    end;
+  end;
+
+  DBGridGrupos.DefaultDrawColumnCell(rect,datacol,column,state);
 end;
 
 
 procedure TFPrincipal.btnSalirClick(Sender: TObject);
 begin
   Application.Terminate;
-end;
-
-
-procedure TFPrincipal.DBGridGruposDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  if not ((GruposP.FieldByName('USUARIO').IsNull) or (GruposP.FieldByName('USUARIO').AsString='BORRADO')) then
-  begin
-    DBGridGrupos.Canvas.Brush.Color := clMoneyGreen;
-    DBGridGrupos.Canvas.Font.Color := clblue;
-    DBGridGrupos.Canvas.Font.Style := DBGridGrupos.Canvas.Font.Style + [fsBold];
-  end;
-
-  DBGridGrupos.DefaultDrawColumnCell(rect,datacol,column,state);
 end;
 
 
@@ -565,11 +602,6 @@ begin
     exit;
   end;
 
-  FUsuario := TFUsuario.Create(nil);
-
-//  if BtnVerGrupos.Caption='Ver Permisos de Usuarios' then
-//    FUsuario.DBEditUsuario.CharCase:= ecNormal;
-
   if dm.EKModelo.verificar_transaccion(transaccion_usuario) then
   begin
     Application.MessageBox('Existe una Alta o Modificacion de Usuario activa', 'Atención', MB_OK);
@@ -577,15 +609,23 @@ begin
     FUsuario.BringToFront;
     exit;
   end;
+  FUsuario := TFUsuario.Create(nil);
 
-  Aplicacion.First;
-  Aplicacion.MoveBy(cBoxAplicacion.ItemIndex);
-  DM.ConexionDB.User:= dm.EKUsrLogin.usuariodb;
-  DM.ConexionDB.Password:= dm.EKUsrLogin.passworddb;
-  DM.ConexionDB.HostName:= dm.EKUsrLogin.ip;
-  DM.ConexionDB.Database:= AplicacionALIAS_DB.AsString;
-  DM.ConexionDB.Disconnect;
-  DM.ConexionDB.Connect;
+  try
+    Aplicacion.First;
+    Aplicacion.MoveBy(cBoxAplicacion.ItemIndex);
+    DM.ConexionDB.User:= dm.EKUsrLogin.usuariodb;
+    DM.ConexionDB.Password:= dm.EKUsrLogin.passworddb;
+    DM.ConexionDB.HostName:= dm.EKUsrLogin.ip;
+    DM.ConexionDB.Database:= AplicacionALIAS_DB.AsString;
+    DM.ConexionDB.Disconnect;
+    DM.ConexionDB.Connect;
+  except
+    begin
+      Application.MessageBox(pchar('No se puede conectar a la base de datos '+AplicacionALIAS_DB.AsString), 'Atención', MB_OK);
+      exit;
+    end;
+  end;
 
   FUsuario.Usuario.Close;
   FUsuario.Usuario.ParamByName('usr').AsString:= UsuariosUSUARIO.AsString;
@@ -593,7 +633,7 @@ begin
 
   FUsuario.database.Caption:= AplicacionALIAS_DB.AsString;
   FUsuario.lee_role.Close;
-  FUsuario.lee_role.ParamByName('usr').AsString:=UsuariosDB_USR.AsString;
+  FUsuario.lee_role.ParamByName('usr').AsString:= UpperCase(UsuariosDB_USR.AsString);
   FUsuario.lee_role.Open;
 
   FUsuario.ShowModal;
@@ -653,6 +693,7 @@ begin
   end;
   Usuarios.Open;
 end;
+
 
 procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
