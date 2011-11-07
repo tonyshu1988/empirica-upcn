@@ -2117,7 +2117,7 @@ begin
         CD_DetalleFacturaPRECIO3.AsFloat:=ZQ_ProductosPRECIO3.AsFloat;
         CD_DetalleFacturaPRECIO4.AsFloat:=ZQ_ProductosPRECIO4.AsFloat;
         CD_DetalleFacturaPRECIO5.AsFloat:=ZQ_ProductosPRECIO5.AsFloat;
-        CD_DetalleFacturaimporte_original.AsFloat:=CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
+        CD_DetalleFacturaimporte_original.AsFloat:=ZQ_ProductosPRECIO_VENTA.AsFloat;
 
         CD_DetalleFactura.Post;
 
