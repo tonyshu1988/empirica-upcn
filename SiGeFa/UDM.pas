@@ -106,6 +106,8 @@ var
   ctacte_credito: double;
   monto_max_venta: double;
   confirmarNotaPedido: string;
+  asociar_pto_salida: string;
+
   precio1 : string;
   precio2 : string;
   precio3 : string;
@@ -171,6 +173,7 @@ begin
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_diasVencimiento', ctacte_diasVencimiento);
   configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_credito', ctacte_credito);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'notaCredito_diasVencimiento', notaCredito_diasVencimiento);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'asociar_pto_salida', asociar_pto_salida);
 
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO1', precio1);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO2', precio2);
