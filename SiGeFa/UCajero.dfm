@@ -1,9 +1,9 @@
 object FCajero: TFCajero
-  Left = 217
-  Top = 17
+  Left = 409
+  Top = 109
   Width = 1032
   Height = 691
-  VertScrollBar.Position = 101
+  VertScrollBar.Position = 100
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,7 +22,7 @@ object FCajero: TFCajero
   TextHeight = 13
   object PABM_FormaPago: TPanel
     Left = 93
-    Top = 332
+    Top = 333
     Width = 905
     Height = 116
     BevelInner = bvLowered
@@ -288,7 +288,7 @@ object FCajero: TFCajero
   end
   object PLeerCodigo: TPanel
     Left = 336
-    Top = 75
+    Top = 76
     Width = 385
     Height = 145
     BevelInner = bvLowered
@@ -2495,7 +2495,7 @@ object FCajero: TFCajero
   end
   object PanelContenedorDerecha: TPanel
     Left = 88
-    Top = -101
+    Top = -100
     Width = 911
     Height = 713
     Align = alClient
@@ -3689,7 +3689,7 @@ object FCajero: TFCajero
   end
   object PConfirmarVenta: TPanel
     Left = 248
-    Top = 139
+    Top = 140
     Width = 513
     Height = 473
     BevelInner = bvLowered
