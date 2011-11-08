@@ -124,6 +124,7 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
     ZQ_ComprobantePUNTO_VENTA: TIntegerField;
     ZQ_ComprobanteNUMERO_CPB: TIntegerField;
+    btVer: TdxBarLargeButton;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
@@ -138,6 +139,8 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure leerSistemaIni;
+    procedure btVerClick(Sender: TObject);
+    procedure DBGridComprobantesDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -150,7 +153,7 @@ var
   //----Fiscal--------
   Impresora : string;
   Ruta : String;
-
+  puede:Boolean;
 implementation
 
 uses UDM, UPrincipal,strutils, EKModelo, Math, UUtilidades, DateUtils;
@@ -175,9 +178,16 @@ end;
 
 procedure TFReimpresionComprobantes.btnBuscarClick(Sender: TObject);
 begin
- EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
+ if FReimpresionComprobantes.Active then
+ begin
+  EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
+
+  if PanelFPagoYProd.Visible then
+     btVer.Click;
+
     if EKBuscarComprobantes.Buscar then
       ZQ_Comprobante.First;
+ end
 end;
 
 procedure TFReimpresionComprobantes.BtnFiltro_TodosClick(Sender: TObject);
@@ -214,13 +224,15 @@ begin
   cargarConfigPanel;
 
   where:= '';
-
+  PanelFPagoYProd.Visible:=False;
   mes:= MonthOf(dm.EKModelo.Fecha);
   anio:= YearOf(dm.EKModelo.Fecha);
   ZQ_TipoIVA.Open;
   ZQ_Sucursal.Open;
 
-//Permiso para ver o no los filtros de Fiscal
+  TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
+
+  //Permiso para ver o no los filtros de Fiscal
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
   BtnFiltro_Fiscal.Click;
 end;
@@ -274,20 +286,23 @@ begin
         fiscal:= 'N';
         indice:= 2;
       end;
+ if PanelFPagoYProd.Visible then
+ begin
+    ZQ_Comprobante_FormaPago.Close;
+    ZQ_Comprobante_FormaPago.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_Comprobante_FormaPago.ParamByName('fiscal').AsString:= fiscal;
+    ZQ_Comprobante_FormaPago.Open;
 
-  ZQ_Comprobante_FormaPago.Close;
-  ZQ_Comprobante_FormaPago.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-  ZQ_Comprobante_FormaPago.ParamByName('fiscal').AsString:= fiscal;
-  ZQ_Comprobante_FormaPago.Open;
+    ZQ_ComprobanteDetalle.Close;
+    ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_ComprobanteDetalle.Open;
 
-  ZQ_ComprobanteDetalle.Close;
-  ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-  ZQ_ComprobanteDetalle.Open;
-
-  EKDbSumaFpago.RecalcAll;
-  EKDbSumaProducto.RecalcAll;
-  lblTotalFPago.Caption := FormatFloat('Total Forma Pago: $ ##,###,##0.00 ', EKDbSumaFpago.SumCollection[0].SumValue);
-  lblTotalProducto.Caption := FormatFloat('Total Producto: $ ##,###,##0.00 ', EKDbSumaProducto.SumCollection[indice].SumValue);
+    EKDbSumaFpago.RecalcAll;
+    EKDbSumaProducto.RecalcAll;
+    lblTotalFPago.Caption := FormatFloat('Total Forma Pago: $ ##,###,##0.00 ', EKDbSumaFpago.SumCollection[0].SumValue);
+    lblTotalProducto.Caption := FormatFloat('Total Producto: $ ##,###,##0.00 ', EKDbSumaProducto.SumCollection[indice].SumValue);
+ end;
+  Application.ProcessMessages;
 end;
 
 procedure TFReimpresionComprobantes.FormClose(Sender: TObject;
@@ -324,6 +339,18 @@ procedure TFReimpresionComprobantes.DBGridComprobantesDrawColumnCell(
   begin
  if ZQ_ComprobantePUNTO_VENTA.IsNull then vencida:='N' else vencida:='S';
  FPrincipal.PintarFilasGrillasConBajas(DBGridComprobantes,vencida,Rect,DataCol,Column,State)
+end;
+
+procedure TFReimpresionComprobantes.btVerClick(Sender: TObject);
+begin
+PanelFPagoYProd.Visible:=not(PanelFPagoYProd.Visible);
+ZQ_ComprobanteAfterScroll(nil);
+end;
+
+procedure TFReimpresionComprobantes.DBGridComprobantesDblClick(
+  Sender: TObject);
+begin
+  btVer.Click;
 end;
 
 end.
