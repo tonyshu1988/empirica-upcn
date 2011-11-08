@@ -295,7 +295,6 @@ type
     //------TECLAS RAPIDAS
     procedure AVerCtaCteExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
-    procedure btnImprimirReciboClick(Sender: TObject);
     procedure DBGridResumen_CtaCtesDblClick(Sender: TObject);
     procedure AplicarFiltro(Sender: TObject);
     procedure btnFiltroFecha_CancelarClick(Sender: TObject);
@@ -445,18 +444,6 @@ end;
 //----------------------------------
 //  FIN TECLAS RAPIDAS
 //----------------------------------
-
-
-procedure TFCuentaCorriente.btnImprimirReciboClick(Sender: TObject);
-begin
-  if ZQ_CtaCte_Cliente.IsEmpty or ZQ_CtaCte_ClienteID_COMPROB_FP.IsNull then
-    exit;
-
-  if not Assigned(FImpresion_Comprobantes) then
-    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
-  FImpresion_Comprobantes.cargarDatos(ZQ_CtaCte_ClienteID_COMPROB_FP.AsInteger, ZQ_ClienteID_PERSONA.AsInteger, 0, true);
-  FImpresion_Comprobantes.imprimir;
-end;
 
 
 procedure TFCuentaCorriente.DBGridResumen_CtaCtesDblClick(Sender: TObject);

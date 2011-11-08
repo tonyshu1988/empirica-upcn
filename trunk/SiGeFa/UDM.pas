@@ -80,6 +80,7 @@ type
     procedure VariablesComprobantes(Reporte: TQuickRep);
     procedure configMail(Tipo: String; id: integer);
     procedure centrarPanel(form: TForm; panel: TPanel);
+    procedure centrarPanelConAjuste(form: TForm; panel: TPanel; ajusteTop: integer);
   private
     auxDecimalSeparator, auxThousandSeparator: Char;
     auxCurrencyDecimals: Integer;
@@ -411,6 +412,12 @@ begin
   panel.Top:=  (screen.Height div 2) - (panel.Height div 2)-40;
 end;
 
+
+procedure TDM.centrarPanelConAjuste(form: TForm; panel: TPanel; ajusteTop: integer);
+begin
+  panel.Left:= (screen.Width div 2)  - (panel.Width div 2);
+  panel.Top:=  (screen.Height div 2) - (panel.Height div 2)-ajusteTop;
+end;
 
 end.
 

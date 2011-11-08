@@ -20,75 +20,6 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
   OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
-  object PanelFiltroFechas: TPanel
-    Left = 360
-    Top = 184
-    Width = 173
-    Height = 105
-    BevelInner = bvLowered
-    TabOrder = 6
-    object Label18: TLabel
-      Left = 2
-      Top = 2
-      Width = 169
-      Height = 13
-      Align = alTop
-      Alignment = taCenter
-      Caption = 'FILTRAR POR FECHA'
-    end
-    object Label19: TLabel
-      Left = 5
-      Top = 25
-      Width = 44
-      Height = 13
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = 'Desde:'
-    end
-    object Label20: TLabel
-      Left = 5
-      Top = 53
-      Width = 44
-      Height = 13
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = 'Hasta:'
-    end
-    object EKDBDateTime_FiltroDesde: TEKDBDateTimePicker
-      Left = 52
-      Top = 20
-      Width = 115
-      Height = 22
-      Date = 40767.409336585650000000
-      Time = 40767.409336585650000000
-      TabOrder = 0
-    end
-    object EKDBDateTime_FiltroHasta: TEKDBDateTimePicker
-      Left = 52
-      Top = 48
-      Width = 115
-      Height = 22
-      Date = 40767.409336585650000000
-      Time = 40767.409336585650000000
-      TabOrder = 1
-    end
-    object btnFiltroFecha_Aceptar: TBitBtn
-      Left = 8
-      Top = 75
-      Width = 40
-      Height = 25
-      TabOrder = 2
-      OnClick = btnFiltroFecha_AceptarClick
-    end
-    object btnFiltroFecha_Cancelar: TBitBtn
-      Left = 124
-      Top = 75
-      Width = 40
-      Height = 25
-      TabOrder = 3
-      OnClick = btnFiltroFecha_CancelarClick
-    end
-  end
   object PanelResumen: TPanel
     Left = 0
     Top = 0
@@ -3783,7 +3714,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
       Alignment = taCenter
       AutoSize = False
       Caption = 'SALDO INICIAL'
-      Color = 12648448
+      Color = clBlue
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -12
@@ -3840,6 +3771,83 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
       Height = 25
       TabOrder = 3
       OnClick = btnSaldoInicial_CancelarClick
+    end
+  end
+  object PanelFiltroFechas: TPanel
+    Left = 360
+    Top = 184
+    Width = 173
+    Height = 105
+    BevelInner = bvLowered
+    TabOrder = 5
+    object Label18: TLabel
+      Left = 2
+      Top = 2
+      Width = 169
+      Height = 15
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'FILTRAR POR FECHA'
+      Color = clBlue
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label19: TLabel
+      Left = 5
+      Top = 25
+      Width = 44
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Desde:'
+    end
+    object Label20: TLabel
+      Left = 5
+      Top = 53
+      Width = 44
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Hasta:'
+    end
+    object EKDBDateTime_FiltroDesde: TEKDBDateTimePicker
+      Left = 52
+      Top = 20
+      Width = 115
+      Height = 22
+      Date = 40767.409336585650000000
+      Time = 40767.409336585650000000
+      TabOrder = 0
+    end
+    object EKDBDateTime_FiltroHasta: TEKDBDateTimePicker
+      Left = 52
+      Top = 48
+      Width = 115
+      Height = 22
+      Date = 40767.409336585650000000
+      Time = 40767.409336585650000000
+      TabOrder = 1
+    end
+    object btnFiltroFecha_Aceptar: TBitBtn
+      Left = 8
+      Top = 75
+      Width = 40
+      Height = 25
+      TabOrder = 2
+      OnClick = btnFiltroFecha_AceptarClick
+    end
+    object btnFiltroFecha_Cancelar: TBitBtn
+      Left = 124
+      Top = 75
+      Width = 40
+      Height = 25
+      TabOrder = 3
+      OnClick = btnFiltroFecha_CancelarClick
     end
   end
   object dxBarABM: TdxBarManager

@@ -497,82 +497,7 @@ type
     QRLabel206: TQRLabel;
     QRLabel202: TQRLabel;
     QRLabel203: TQRLabel;
-    RepReciboCtaCte: TQuickRep;
-    QRBand28: TQRBand;
-    RepReciboCtaCte_RENGLON4: TQRLabel;
-    RepReciboCtaCte_RENGLON3: TQRLabel;
-    RepReciboCtaCte_RENGLON2: TQRLabel;
-    QRDBText101: TQRDBText;
-    RepReciboCtaCte_TITULO: TQRLabel;
-    QRShape6: TQRShape;
-    QRLabel218: TQRLabel;
-    RepReciboCtaCte_RENGLON1: TQRLabel;
-    QRDBLogo7: TQRDBImage;
-    QRBand29: TQRBand;
-    QRLabel221: TQRLabel;
-    QRLabel222: TQRLabel;
-    QRLabel223: TQRLabel;
-    QRLabel224: TQRLabel;
-    QRLabel225: TQRLabel;
-    QRLabel226: TQRLabel;
-    QRLabel227: TQRLabel;
-    QRDBText106: TQRDBText;
-    QRDBText107: TQRDBText;
-    QRDBText108: TQRDBText;
-    QRDBText109: TQRDBText;
-    QRDBText110: TQRDBText;
-    QRDBText111: TQRDBText;
-    QRDBText112: TQRDBText;
-    QRLabel228: TQRLabel;
-    QRChildBand8: TQRChildBand;
-    QRLabel229: TQRLabel;
-    QRLblReciboCtaCte_ImporteEnLetras: TQRLabel;
-    QRBand30: TQRBand;
-    QRLabel231: TQRLabel;
-    QRChildBand9: TQRChildBand;
-    QRLabel232: TQRLabel;
-    QRSubDetail7: TQRSubDetail;
-    QRDBText114: TQRDBText;
-    QRDBText115: TQRDBText;
-    QRDBText116: TQRDBText;
-    QRDBText117: TQRDBText;
-    QRDBText118: TQRDBText;
-    QRBand31: TQRBand;
-    QRLabel233: TQRLabel;
-    QRLabel234: TQRLabel;
-    QRlblReciboCtaCte_ImporteTotal: TQRLabel;
-    QRBand32: TQRBand;
-    QRlblReciboCtaCte_PiePagina: TQRLabel;
-    QRChildBand10: TQRChildBand;
-    QRLabel237: TQRLabel;
-    QRLabel238: TQRLabel;
-    QRLabel239: TQRLabel;
-    QRLabel240: TQRLabel;
-    QRLabel241: TQRLabel;
-    QRLabel216: TQRLabel;
-    QRLabel242: TQRLabel;
-    QRLabel217: TQRLabel;
-    QRLblReciboCtaCte_ConceptoPago: TQRLabel;
-    ZQ_FPagoCtaCte: TZQuery;
-    IntegerField1: TIntegerField;
-    IntegerField2: TIntegerField;
-    IntegerField3: TIntegerField;
-    DateField1: TDateField;
-    StringField1: TStringField;
-    StringField2: TStringField;
-    FloatField1: TFloatField;
-    DateField2: TDateField;
-    IntegerField4: TIntegerField;
-    IntegerField5: TIntegerField;
-    StringField3: TStringField;
-    StringField4: TStringField;
-    StringField5: TStringField;
-    StringField6: TStringField;
-    StringField7: TStringField;
-    ZQ_FPagoCtaCteFECHA_FP: TDateTimeField;
-    EKDbSumaFPagoCtaCte: TEKDbSuma;
     TabSheet8: TTabSheet;
-    TabSheet9: TTabSheet;
     RepNotaCredito: TQuickRep;
     QRBand33: TQRBand;
     QRShape7: TQRShape;
@@ -626,7 +551,6 @@ type
     QRLabel220: TQRLabel;
     ZQ_FpagoFECHA_FP: TDateTimeField;
     ZQ_FpagoIMPORTE_REAL: TFloatField;
-    ZQ_FPagoCtaCteIMPORTE_REAL: TFloatField;
     QRBand36: TQRBand;
     QRLabel230: TQRLabel;
     QRLabel235: TQRLabel;
@@ -667,6 +591,103 @@ type
     ZQ_ProductoTIPO_ARTICULO: TStringField;
     ZQ_ProductoCOD_PRODUCTO: TStringField;
     ZQ_ProductoDEVOLUCION: TFloatField;
+    TabSheet9: TTabSheet;
+    RepReciboCtaCte: TQuickRep;
+    SummaryBand_Firmas: TQRBand;
+    QRLabel262: TQRLabel;
+    QRLabel263: TQRLabel;
+    QRBand38: TQRBand;
+    QRBand39: TQRBand;
+    QRLabel221: TQRLabel;
+    QRLabel222: TQRLabel;
+    QRLabel223: TQRLabel;
+    QRLabel224: TQRLabel;
+    QRLabel225: TQRLabel;
+    QRLabel226: TQRLabel;
+    QRLabel227: TQRLabel;
+    QRDBText106: TQRDBText;
+    QRDBText107: TQRDBText;
+    QRDBText108: TQRDBText;
+    QRDBText109: TQRDBText;
+    QRDBText110: TQRDBText;
+    QRDBText111: TQRDBText;
+    QRDBText112: TQRDBText;
+    QRLabel228: TQRLabel;
+    QRChildBand13: TQRChildBand;
+    QRSubDetail9: TQRSubDetail;
+    QRSubDetail10: TQRSubDetail;
+    QRSubDetail11: TQRSubDetail;
+    QRDBText142: TQRDBText;
+    QRDBText144: TQRDBText;
+    QRDBText145: TQRDBText;
+    QRChildBand14: TQRChildBand;
+    QRLabel268: TQRLabel;
+    QRSubDetail12: TQRSubDetail;
+    QRlblReciboCtaCte_ImporteFacturas: TQRLabel;
+    ChildBandTitulosFormaPago: TQRChildBand;
+    QRLabel270: TQRLabel;
+    QRSubDetail13: TQRSubDetail;
+    QRDBText114: TQRDBText;
+    QRDBText115: TQRDBText;
+    QRDBText116: TQRDBText;
+    QRDBText117: TQRDBText;
+    QRDBText118: TQRDBText;
+    QRBand40: TQRBand;
+    QRlblReciboCtaCte_PiePagina: TQRLabel;
+    QRSubDetailFormaPago: TQRSubDetail;
+    QRlblReciboCtaCte_ImporteFPago: TQRLabel;
+    ChildBandTitleCpbSaldo: TQRChildBand;
+    QRLabel275: TQRLabel;
+    QRLabel277: TQRLabel;
+    QRLabel278: TQRLabel;
+    QRShape11: TQRShape;
+    QRShape12: TQRShape;
+    QRLblObservacionSaldo: TQRLabel;
+    QRSubDetailCpbSaldo: TQRSubDetail;
+    QRDBText150: TQRDBText;
+    QRDBText153: TQRDBText;
+    QRDBText154: TQRDBText;
+    PageHeaderBand1: TQRBand;
+    RepReciboCtaCte_RENGLON4: TQRLabel;
+    RepReciboCtaCte_RENGLON3: TQRLabel;
+    RepReciboCtaCte_RENGLON2: TQRLabel;
+    RepReciboCtaCte_TITULO: TQRLabel;
+    QRShape6: TQRShape;
+    RepReciboCtaCte_RENGLON1: TQRLabel;
+    QRDBLogo7: TQRDBImage;
+    QRLabel216: TQRLabel;
+    QRLabel242: TQRLabel;
+    QRLabel217: TQRLabel;
+    QRDBText101: TQRDBText;
+    QRLabel218: TQRLabel;
+    QRLabel260: TQRLabel;
+    QRDBText134: TQRDBText;
+    QRDBText135: TQRDBText;
+    QRLabel261: TQRLabel;
+    QRChildBand15: TQRChildBand;
+    QRLabel280: TQRLabel;
+    QRLabel281: TQRLabel;
+    QRLabel282: TQRLabel;
+    QRChildBand16: TQRChildBand;
+    QRLabel241: TQRLabel;
+    QRLabel240: TQRLabel;
+    QRLabel239: TQRLabel;
+    QRLabel238: TQRLabel;
+    QRLabel237: TQRLabel;
+    ChildBand9: TQRChildBand;
+    QRLblReciboCtaCte_ImporteEnLetras: TQRLabel;
+    QRLabel229: TQRLabel;
+    ZQ_PagosFactura: TZQuery;
+    ZQ_PagosFacturaID_PAGO_FACTURAS: TIntegerField;
+    ZQ_PagosFacturaID_COMPROBANTE: TIntegerField;
+    ZQ_PagosFacturaID_FACTURA: TIntegerField;
+    ZQ_PagosFacturaID_TIPO_COMPROBANTE: TIntegerField;
+    ZQ_PagosFacturaIMPORTE: TFloatField;
+    ZQ_PagosFacturaFECHA: TDateTimeField;
+    ZQ_PagosFacturaIMPORTE_VENTA: TFloatField;
+    ZQ_PagosFacturaDESCRIPCION: TStringField;
+    ZQ_PagosFacturaIMPORTE_REAL: TFloatField;
+    EKDbSuma_Factura: TEKDbSuma;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
@@ -711,7 +732,7 @@ begin
     ZQ_Destino.ParamByName('id_empresa').AsInteger:= id_empresa;
   ZQ_Destino.Open;
 
-  if not cta_cte then //si no es un comprobante de cuenta corriente
+  //if not cta_cte then //si no es un comprobante de cuenta corriente
   begin
     ZQ_Comprobante.Close;
     ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
@@ -753,19 +774,13 @@ begin
                         end;
       CPB_DEVOLUCION:  begin //CPB_DEVOLUCION
                           configDevolucion;
-                        end;
+                       end;
+      CPB_RECIBO_CTA_CTE: begin //CPB_RECIBO_COBRO
+                            configReciboCtaCte;
+                            reporte:= RepReciboCtaCte;
+                            archivoPDF:= 'ReciboCuentaCorriente.pdf';
+                          end;
     end;
-  end
-  else //si es un comprobante de cuenta corriente
-  begin
-    //para los recibos de cuenta corriente el id_comprobante hace referencia al id_comprob_fp
-    ZQ_FPagoCtaCte.Close;
-    ZQ_FPagoCtaCte.ParamByName('id_forma_pago').AsInteger:= id_comprobante;
-    ZQ_FPagoCtaCte.Open;
-
-    configReciboCtaCte;
-    reporte:= RepReciboCtaCte;
-    archivoPDF:= 'ReciboCuentaCorriente.pdf';
   end
 end;
 
@@ -817,17 +832,21 @@ end;
 //RECIBOS CUENTA CORRIENTE
 procedure TFImpresion_Comprobantes.configReciboCtaCte();
 var
-  ImporteTotal: double;
+  ImporteFPago, ImporteFactura: double;
 begin
   if ZQ_Destino.IsEmpty then
     exit;
 
-  ImporteTotal:= EKDbSumaFPagoCtaCte.SumCollection[0].sumvalue;
-  EKNumeroALetras.Numero := ImporteTotal;
-  QRLblReciboCtaCte_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
-  QRlblReciboCtaCte_ImporteTotal.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
+  ZQ_PagosFactura.Close;
+  ZQ_PagosFactura.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+  ZQ_PagosFactura.Open;
 
-  QRLblReciboCtaCte_ConceptoPago.Caption := '';
+  ImporteFPago:= EKDbSumaFpago.SumCollection[0].sumvalue;
+  ImporteFactura:= EKDbSuma_Factura.SumCollection[0].sumvalue;
+  EKNumeroALetras.Numero := ImporteFPago;
+  QRLblReciboCtaCte_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+  QRlblReciboCtaCte_ImporteFacturas.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteFactura);
+  QRlblReciboCtaCte_ImporteFPago.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteFPago);
 
   QRlblReciboCtaCte_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   DM.VariablesComprobantes(RepReciboCtaCte);
@@ -937,13 +956,12 @@ begin
   QRDBLogo8.DataSet:= dm.ZQ_Sucursal;
 end;
 
-
+//REPORTE DEVOLUCION
 procedure TFImpresion_Comprobantes.QRSubDetail8BeforePrint(Sender: TQRCustomBand; var PrintBand: Boolean);
 begin
   QRlblNotaCreditoTipo.Caption:= 'ING';
   if ZQ_ProductoDEVOLUCION.AsInteger > 0 then
     QRlblNotaCreditoTipo.Caption:= 'EGR';
-
 end;
 
 end.
