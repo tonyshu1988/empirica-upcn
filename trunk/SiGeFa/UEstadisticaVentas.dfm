@@ -25,7 +25,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 1004
     Height = 595
-    ActivePage = TabFacturacion
+    ActivePage = TabRanking
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 4
@@ -1669,59 +1669,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Caption = 'Ranking seg'#250'n:'
         end
       end
-      object grillaRanking: TDBGrid
-        Left = 0
-        Top = 33
-        Width = 631
-        Height = 531
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_ProductosVendidos
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DrawColumnCell
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'FECHAC'
-            Title.Caption = 'Fecha'
-            Width = 70
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DETALLE_PROD'
-            Title.Caption = 'Detalle'
-            Width = 436
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'CANTIDAD'
-            Title.Caption = 'Cant'
-            Width = 32
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SUMAVENTA'
-            Title.Caption = 'Importe'
-            Width = 96
-            Visible = True
-          end>
-      end
       object Panel6: TPanel
         Left = 640
         Top = 33
@@ -1729,16 +1676,16 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Height = 531
         Align = alRight
         BevelOuter = bvNone
-        TabOrder = 2
+        TabOrder = 1
         object Label2: TLabel
           Left = 0
           Top = 0
           Width = 356
-          Height = 21
+          Height = 20
           Align = alTop
           Alignment = taCenter
           AutoSize = False
-          Caption = 'Top 20 Ventas [unid.]'
+          Caption = 'Total Ventas [unid.]'
           Color = 16729670
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
@@ -1750,11 +1697,31 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Transparent = False
           Layout = tlCenter
         end
+        object lblTotales: TLabel
+          Left = 0
+          Top = 273
+          Width = 356
+          Height = 20
+          Align = alBottom
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = '$ 0.00'
+          Color = 16729670
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
         object grillaTop20: TDBGrid
           Left = 0
-          Top = 21
+          Top = 20
           Width = 356
-          Height = 272
+          Height = 253
           Align = alClient
           Color = 14606012
           DataSource = DS_Top20
@@ -1808,14 +1775,14 @@ object FEstadisticaVentas: TFEstadisticaVentas
           LeftWall.Brush.Color = clWhite
           Title.Brush.Color = clWhite
           Title.Brush.Style = bsClear
-          Title.Color = clWhite
+          Title.Color = clBlue
           Title.Font.Charset = ANSI_CHARSET
           Title.Font.Color = clBlack
           Title.Font.Height = -15
-          Title.Font.Name = 'Arial'
-          Title.Font.Style = []
+          Title.Font.Name = 'Verdana'
+          Title.Font.Style = [fsBold]
           Title.Text.Strings = (
-            'Top 20 Ventas [$]')
+            'Total Ventas [$]')
           BackColor = clSilver
           LeftAxis.Grid.Color = 13290186
           LeftAxis.MinorTickLength = 1
@@ -1852,7 +1819,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             Marks.Font.Name = 'Verdana'
             Marks.Font.Style = []
             Marks.Visible = False
-            DataSource = ZQ_Top20
+            DataSource = ZQ_Totales
             SeriesColor = clRed
             ShowInLegend = False
             XLabelsSource = 'DETALLE_PROD'
@@ -1868,6 +1835,108 @@ object FEstadisticaVentas: TFEstadisticaVentas
             YValues.Multiplier = 1.000000000000000000
             YValues.Order = loAscending
           end
+        end
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 33
+        Width = 631
+        Height = 531
+        Align = alClient
+        Caption = 'Panel1'
+        TabOrder = 2
+        object Label3: TLabel
+          Left = 1
+          Top = 1
+          Width = 629
+          Height = 20
+          Align = alTop
+          Alignment = taCenter
+          AutoSize = False
+          Caption = 'Total Ventas por Fecha'
+          Color = 16729670
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object lblProdsVendidos: TLabel
+          Left = 1
+          Top = 510
+          Width = 629
+          Height = 20
+          Align = alBottom
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = '$ 0.00'
+          Color = 16729670
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object grillaRanking: TDBGrid
+          Left = 1
+          Top = 21
+          Width = 629
+          Height = 489
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_ProductosVendidos
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'FECHAC'
+              Title.Caption = 'Fecha'
+              Width = 70
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DETALLE_PROD'
+              Title.Caption = 'Detalle'
+              Width = 436
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Caption = 'Cant'
+              Width = 32
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUMAVENTA'
+              Title.Caption = 'Importe'
+              Width = 96
+              Visible = True
+            end>
         end
       end
     end
@@ -1935,7 +2004,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     end
     object ZQ_Comprobante_FormaPagoIMPORTE: TFloatField
       FieldName = 'IMPORTE'
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_Comprobante_FormaPagoCONCILIADO: TDateField
       FieldName = 'CONCILIADO'
@@ -1951,7 +2020,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     end
     object ZQ_Comprobante_FormaPagoIMPORTE_REAL: TFloatField
       FieldName = 'IMPORTE_REAL'
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_Comprobante_FormaPagoTFORMAPAGO_: TStringField
       FieldName = 'TFORMAPAGO_'
@@ -2035,32 +2104,31 @@ object FEstadisticaVentas: TFEstadisticaVentas
     end
     object ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField
       FieldName = 'BASE_IMPONIBLE'
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ComprobanteDetalleIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ComprobanteDetalleIMPORTE_FINAL: TFloatField
       FieldName = 'IMPORTE_FINAL'
-      DisplayFormat = '$ #,###,##0.00'
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField
       FieldName = 'IMPORTE_IVA'
-      DisplayFormat = '$ #,###,##0.00'
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ComprobanteDetalleIMPORTE_IF: TFloatField
       FieldName = 'IMPORTE_IF'
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ComprobanteDetalleIMPORTE_NOFISCAL: TFloatField
       FieldName = 'IMPORTE_NOFISCAL'
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ComprobanteDetallePORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
@@ -2070,6 +2138,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     end
     object ZQ_ComprobanteDetalleIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
+      DisplayFormat = '$ ##,###,##0.00'
     end
   end
   object ZQ_Comprobante: TZQuery
@@ -2123,7 +2192,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     object ZQ_ComprobanteIMPORTEVENTA_: TFloatField
       FieldName = 'IMPORTEVENTA_'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ComprobanteSUC_: TStringField
       FieldName = 'SUC_'
@@ -3182,7 +3251,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     end
     object ZP_HorarioIMPORTE: TFloatField
       FieldName = 'IMPORTE'
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZP_HorarioHORA_PERIODO: TTimeField
       FieldName = 'HORA_PERIODO'
@@ -3297,12 +3366,12 @@ object FEstadisticaVentas: TFEstadisticaVentas
     object ZQ_ProductosVendidosSUMAVENTA: TFloatField
       FieldName = 'SUMAVENTA'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ProductosVendidosSUMAIF: TFloatField
       FieldName = 'SUMAIF'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_ProductosVendidosFECHAC: TDateField
       FieldName = 'FECHAC'
@@ -3321,86 +3390,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
       ReadOnly = True
       Size = 237
     end
-  end
-  object EKBuscarProductos: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Sucursal'
-        Campo = 'id_sucursal'
-        Tabla = 'sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Sucursal
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 350
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Fecha'
-        Campo = 'fecha_cobrada'
-        Tabla = 'comprobante'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_ProductosVendidos
-    SQL.Strings = (
-      
-        'select cd.id_producto,count(cd.id_producto) as cantidad,sum(cd.i' +
-        'mporte_venta) as sumaVenta,'
-      
-        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
-        'chaC,'
-      
-        'pc.cod_corto||'#39' '#39'||pc.nombre||coalesce('#39'  -  M: '#39'||m.medida,'#39#39')|' +
-        '|coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.c' +
-        'odigo_barra,'#39#39') DETALLE_PROD'
-      'from comprobante_detalle cd'
-      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
-      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'left join producto p on (cd.id_producto=p.id_producto)'
-      'left join medida m on (p.id_medida=m.id_medida)'
-      
-        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
-        '_cabecera)'
-      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)'
-      'group by cd.id_producto,5,6'
-      '')
-    SQL_Select.Strings = (
-      
-        'select cd.id_producto,count(cd.id_producto) as cantidad,sum(cd.i' +
-        'mporte_venta) as sumaVenta,'
-      
-        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
-        'chaC,'
-      
-        'pc.cod_corto||'#39' '#39'||pc.nombre||coalesce('#39'  -  M: '#39'||m.medida,'#39#39')|' +
-        '|coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.c' +
-        'odigo_barra,'#39#39') DETALLE_PROD')
-    SQL_From.Strings = (
-      'from comprobante_detalle cd'
-      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
-      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'left join producto p on (cd.id_producto=p.id_producto)'
-      'left join medida m on (p.id_medida=m.id_medida)'
-      
-        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
-        '_cabecera)')
-    SQL_Where.Strings = (
-      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)')
-    SQL_Orden.Strings = (
-      'group by cd.id_producto,5,6'
-      '')
-    UsarWhereOriginal = EK_Con_Where
-    Left = 384
-    Top = 311
   end
   object DS_ProductosVendidos: TDataSource
     DataSet = ZQ_ProductosVendidos
@@ -3438,12 +3427,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
       item
         Operacion = goSum
         NombreCampo = 'SUMAVENTA'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'cantidad'
       end>
     DataSet = ZQ_ProductosVendidos
+    SumListChanged = EKDbSumaProdsVendidosSumListChanged
     Left = 506
     Top = 358
   end
@@ -3557,10 +3543,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
       'order by 3 desc,5 desc,1 desc,2 desc')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
-    Left = 318
+    Left = 302
     Top = 433
   end
-  object ZQ_Top20: TZQuery
+  object ZQ_Totales: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       'select first 20 sum(cd.importe_venta) as sumaVenta,'
@@ -3607,32 +3593,32 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Name = 'f2'
         ParamType = ptUnknown
       end>
-    object ZQ_Top20SUMAVENTA: TFloatField
+    object ZQ_TotalesSUMAVENTA: TFloatField
       FieldName = 'SUMAVENTA'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
-    object ZQ_Top20SUMAIF: TFloatField
+    object ZQ_TotalesSUMAIF: TFloatField
       FieldName = 'SUMAIF'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
-    object ZQ_Top20AGRUPAM: TIntegerField
+    object ZQ_TotalesAGRUPAM: TIntegerField
       FieldName = 'AGRUPAM'
       ReadOnly = True
     end
-    object ZQ_Top20CANTIDAD: TIntegerField
+    object ZQ_TotalesCANTIDAD: TIntegerField
       FieldName = 'CANTIDAD'
       ReadOnly = True
     end
-    object ZQ_Top20DETALLE_PROD: TStringField
+    object ZQ_TotalesDETALLE_PROD: TStringField
       FieldName = 'DETALLE_PROD'
       ReadOnly = True
       Size = 186
     end
   end
   object DS_Top20: TDataSource
-    DataSet = ZQ_Top20
+    DataSet = ZQ_Totales
     Left = 572
     Top = 432
   end
@@ -3658,5 +3644,16 @@ object FEstadisticaVentas: TFEstadisticaVentas
     PermitirFiltrar = True
     Left = 716
     Top = 248
+  end
+  object EKDbSumaTotales: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'SUMAVENTA'
+      end>
+    DataSet = ZQ_Totales
+    SumListChanged = EKDbSumaTotalesSumListChanged
+    Left = 770
+    Top = 150
   end
 end
