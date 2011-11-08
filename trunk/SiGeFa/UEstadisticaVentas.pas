@@ -217,6 +217,7 @@ type
     DBChart2: TDBChart;
     Splitter5: TSplitter;
     Series2: THorizBarSeries;
+    btVer: TdxBarLargeButton;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -233,6 +234,9 @@ type
     procedure btRankingProdsClick(Sender: TObject);
     procedure btRankingVendedClick(Sender: TObject);
     procedure btRankingClientesClick(Sender: TObject);
+    procedure btVerClick(Sender: TObject);
+    procedure DBGridComprobantesDblClick(Sender: TObject);
+    procedure PageControlChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -261,7 +265,7 @@ begin
   cargarConfigPanel;
 
   PageControl.ActivePageIndex:= 0;
-
+  PanelFPagoYProd.Visible:=False;
   ZQ_TipoIVA.Open;
   ZQ_Sucursal.Open;
   where:= '';
@@ -276,6 +280,9 @@ begin
   TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[0]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
   TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
   TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[3]).Valor:= IntToStr(30);
+
+
+  TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
 
   TEKCriterioBA(EKBuscarProductos.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
 
@@ -318,19 +325,23 @@ begin
         indice:= 2;
       end;
 
-  ZQ_Comprobante_FormaPago.Close;
-  ZQ_Comprobante_FormaPago.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-  ZQ_Comprobante_FormaPago.ParamByName('fiscal').AsString:= fiscal;
-  ZQ_Comprobante_FormaPago.Open;
+  if PanelFPagoYProd.Visible then
+ begin
+    ZQ_Comprobante_FormaPago.Close;
+    ZQ_Comprobante_FormaPago.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_Comprobante_FormaPago.ParamByName('fiscal').AsString:= fiscal;
+    ZQ_Comprobante_FormaPago.Open;
 
-  ZQ_ComprobanteDetalle.Close;
-  ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-  ZQ_ComprobanteDetalle.Open;
+    ZQ_ComprobanteDetalle.Close;
+    ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_ComprobanteDetalle.Open;
 
-  EKDbSumaFpago.RecalcAll;
-  EKDbSumaProducto.RecalcAll;
-  lblTotalFPago.Caption := FormatFloat('Total Forma Pago: $ ##,###,##0.00 ', EKDbSumaFpago.SumCollection[0].SumValue);
-  lblTotalProducto.Caption := FormatFloat('Total Producto: $ ##,###,##0.00 ', EKDbSumaProducto.SumCollection[indice].SumValue);
+    EKDbSumaFpago.RecalcAll;
+    EKDbSumaProducto.RecalcAll;
+    lblTotalFPago.Caption := FormatFloat('Total Forma Pago: $ ##,###,##0.00 ', EKDbSumaFpago.SumCollection[0].SumValue);
+    lblTotalProducto.Caption := FormatFloat('Total Producto: $ ##,###,##0.00 ', EKDbSumaProducto.SumCollection[indice].SumValue);
+ end;
+   Application.ProcessMessages;
 end;
 
 
@@ -423,6 +434,10 @@ begin
   if PageControl.ActivePage = TabFacturacion then
   begin
     EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
+
+    if PanelFPagoYProd.Visible then
+     btVer.Click;
+
     if EKBuscarComprobantes.Buscar then
       ZQ_Comprobante.First;
   end;
@@ -594,6 +609,22 @@ ZQ_Top20.Close;
 ZQ_Top20.SQL[2]:=Format('(%s) as agrupam,count(cd.id_producto) as cantidad,%s',
                             ['c.id_cliente','(cli.nombre) as DETALLE_PROD']);
 
+end;
+
+procedure TFEstadisticaVentas.btVerClick(Sender: TObject);
+begin
+PanelFPagoYProd.Visible:=not(PanelFPagoYProd.Visible);
+ZQ_ComprobanteAfterScroll(nil);
+end;
+
+procedure TFEstadisticaVentas.DBGridComprobantesDblClick(Sender: TObject);
+begin
+  btVer.Click;
+end;
+
+procedure TFEstadisticaVentas.PageControlChange(Sender: TObject);
+begin
+ btVer.Enabled:=PageControl.ActivePage = TabFacturacion;
 end;
 
 end.

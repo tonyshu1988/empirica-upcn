@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 186
-  Top = 45
+  Left = 410
+  Top = 254
   Width = 966
   Height = 656
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -102,6 +102,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
             OnDrawColumnCell = DBGridComprobantesDrawColumnCell
+            OnDblClick = DBGridComprobantesDblClick
             Columns = <
               item
                 Expanded = False
@@ -558,6 +559,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             Visible = True
           end
           item
+            Item = btVer
+            Visible = True
+          end
+          item
             Item = btnImprimir
             Visible = True
           end
@@ -913,12 +918,23 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btVer: TdxBarLargeButton
+      Caption = 'Ver Detalle'
+      Category = 0
+      Hint = 'Ver Detalle'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      ImageIndex = 7
+      OnClick = btVerClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnBuscar'
         'btnExcel'
         'btnSalir'
-        'btnImprimir')
+        'btnImprimir'
+        'btVer')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -927,11 +943,12 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
     SortedFields = 'FECHA'
+    SortType = stDescending
     AfterScroll = ZQ_ComprobanteAfterScroll
     SQL.Strings = (
       
-        'select c.codigo, c.id_comprobante, cast(c.fecha as date) as Fech' +
-        'a, c.porc_iva,'
+        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
+        ' as Fecha, c.porc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
@@ -952,13 +969,15 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
       'join persona p2 on (p2.id_persona = c.id_cliente)'
       'where (c.id_tipo_cpb = 11)'
-      'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
+      
+        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
+        'total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
         'nto_venta,c.numero_cpb')
     Params = <>
-    IndexFieldNames = 'FECHA Asc'
+    IndexFieldNames = 'FECHA Desc'
     Left = 282
     Top = 128
     object ZQ_ComprobanteCODIGO: TStringField
@@ -1326,8 +1345,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     DataSet = ZQ_Comprobante
     SQL.Strings = (
       
-        'select c.codigo, c.id_comprobante, cast(c.fecha as date) as Fech' +
-        'a, c.porc_iva,'
+        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
+        ' as Fecha, c.porc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
@@ -1348,15 +1367,17 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
       'join persona p2 on (p2.id_persona = c.id_cliente)'
       'where (c.id_tipo_cpb = 11)'
-      'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
+      
+        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
+        'total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
         'nto_venta,c.numero_cpb')
     SQL_Select.Strings = (
       
-        'select c.codigo, c.id_comprobante, cast(c.fecha as date) as Fech' +
-        'a, c.porc_iva,'
+        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
+        ' as Fecha, c.porc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
@@ -1380,7 +1401,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     SQL_Where.Strings = (
       'where (c.id_tipo_cpb = 11)')
     SQL_Orden.Strings = (
-      'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
+      
+        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
+        'total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +

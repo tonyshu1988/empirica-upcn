@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 233
-  Top = 60
+  Left = 335
+  Top = 257
   Width = 1020
   Height = 685
   Caption = 'Estadisticas Ventas'
@@ -25,16 +25,18 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 1004
     Height = 595
-    ActivePage = TabRanking
+    ActivePage = TabFacturacion
     Align = alClient
+    Style = tsFlatButtons
     TabOrder = 4
+    OnChange = PageControlChange
     object TabFacturacion: TTabSheet
       Caption = 'Facturaci'#243'n'
       object PanelContenedor: TPanel
         Left = 0
         Top = 33
         Width = 996
-        Height = 534
+        Height = 531
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -907,14 +909,14 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Left = 0
           Top = 0
           Width = 996
-          Height = 534
+          Height = 531
           Align = alClient
           BevelOuter = bvNone
           BorderWidth = 2
           TabOrder = 0
           object Splitter1: TSplitter
             Left = 2
-            Top = 404
+            Top = 401
             Width = 992
             Height = 6
             Cursor = crVSplit
@@ -924,13 +926,13 @@ object FEstadisticaVentas: TFEstadisticaVentas
             Left = 2
             Top = 2
             Width = 992
-            Height = 402
+            Height = 399
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 0
             object lblTotalComprobantes: TLabel
               Left = 0
-              Top = 381
+              Top = 378
               Width = 992
               Height = 21
               Align = alBottom
@@ -952,7 +954,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Left = 0
               Top = 0
               Width = 992
-              Height = 381
+              Height = 378
               Align = alClient
               Color = 14606012
               DataSource = DS_Comprobante
@@ -971,6 +973,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               TitleFont.Name = 'Verdana'
               TitleFont.Style = []
               OnDrawColumnCell = DrawColumnCell
+              OnDblClick = DBGridComprobantesDblClick
               Columns = <
                 item
                   Expanded = False
@@ -1039,7 +1042,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           end
           object PanelFPagoYProd: TPanel
             Left = 2
-            Top = 410
+            Top = 407
             Width = 992
             Height = 122
             Align = alBottom
@@ -1314,7 +1317,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Left = 0
         Top = 0
         Width = 996
-        Height = 567
+        Height = 564
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -1322,7 +1325,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Left = 0
           Top = 46
           Width = 996
-          Height = 521
+          Height = 518
           Align = alClient
           Color = 14606012
           DataSource = DS_Horario
@@ -1357,7 +1360,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Expanded = False
               FieldName = 'CANTIDAD'
               Title.Alignment = taCenter
-              Title.Caption = 'Cantidad Ventas'
+              Title.Caption = 'Cantidad Ventas [unid.]'
               Width = 256
               Visible = True
             end
@@ -1431,7 +1434,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Left = 0
         Top = 0
         Width = 996
-        Height = 288
+        Height = 285
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         BackWall.Color = clSilver
@@ -1448,7 +1451,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Title.Font.Name = 'Arial'
         Title.Font.Style = []
         Title.Text.Strings = (
-          'Horario Ventas')
+          'Horario Ventas [unid.]')
         BackColor = clSilver
         LeftAxis.Grid.Color = 13290186
         LeftAxis.MinorTickLength = 1
@@ -1470,7 +1473,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         TabOrder = 0
         object Splitter4: TSplitter
           Left = 0
-          Top = 284
+          Top = 281
           Width = 996
           Height = 4
           Cursor = crVSplit
@@ -1544,7 +1547,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       end
       object DBChart1: TDBChart
         Left = 0
-        Top = 288
+        Top = 285
         Width = 996
         Height = 279
         BackWall.Brush.Color = clWhite
@@ -1563,7 +1566,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Title.Font.Name = 'Arial'
         Title.Font.Style = []
         Title.Text.Strings = (
-          'Totales Ventas')
+          'Totales Ventas [$]')
         BackColor = clSilver
         LeftAxis.AxisValuesFormat = '$ #,##0.###'
         LeftAxis.Grid.Color = 13290186
@@ -1614,7 +1617,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Left = 631
         Top = 33
         Width = 9
-        Height = 534
+        Height = 531
         Align = alRight
       end
       object Panel4: TPanel
@@ -1670,7 +1673,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Left = 0
         Top = 33
         Width = 631
-        Height = 534
+        Height = 531
         Align = alClient
         Color = 14606012
         DataSource = DS_ProductosVendidos
@@ -1723,7 +1726,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Left = 640
         Top = 33
         Width = 356
-        Height = 534
+        Height = 531
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 2
@@ -1735,7 +1738,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Align = alTop
           Alignment = taCenter
           AutoSize = False
-          Caption = 'Top 20 Ventas'
+          Caption = 'Top 20 Ventas [unid.]'
           Color = 16729670
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
@@ -1751,7 +1754,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Left = 0
           Top = 21
           Width = 356
-          Height = 275
+          Height = 272
           Align = alClient
           Color = 14606012
           DataSource = DS_Top20
@@ -1793,7 +1796,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object DBChart2: TDBChart
           Left = 0
-          Top = 296
+          Top = 293
           Width = 356
           Height = 238
           BackWall.Brush.Color = clWhite
@@ -1812,7 +1815,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Title.Font.Name = 'Arial'
           Title.Font.Style = []
           Title.Text.Strings = (
-            'Top 20 Importe Ventas')
+            'Top 20 Ventas [$]')
           BackColor = clSilver
           LeftAxis.Grid.Color = 13290186
           LeftAxis.MinorTickLength = 1
@@ -2071,6 +2074,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
   end
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
+    SortedFields = 'FECHA'
+    SortType = stDescending
     AfterScroll = ZQ_ComprobanteAfterScroll
     SQL.Strings = (
       
@@ -2098,6 +2103,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     Params = <>
+    IndexFieldNames = 'FECHA Desc'
     Left = 66
     Top = 144
     object ZQ_ComprobanteCODIGO: TStringField
@@ -2252,13 +2258,14 @@ object FEstadisticaVentas: TFEstadisticaVentas
     DataSet = ZQ_Comprobante
     SQL.Strings = (
       
-        'select c.codigo, c.id_comprobante, cast(c.fecha as date) as Fech' +
-        'a, c.porc_iva,'
+        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
+        ' as Fecha, c.porc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
       '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
+      ''
       'from comprobante c'
       
         'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
@@ -2272,18 +2279,21 @@ object FEstadisticaVentas: TFEstadisticaVentas
       'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
       'join persona p2 on (p2.id_persona = c.id_cliente)'
       'where (c.id_tipo_cpb = 11)'
-      'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
+      
+        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
+        'total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     SQL_Select.Strings = (
       
-        'select c.codigo, c.id_comprobante, cast(c.fecha as date) as Fech' +
-        'a, c.porc_iva,'
+        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
+        ' as Fecha, c.porc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_')
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
+      '')
     SQL_From.Strings = (
       'from comprobante c'
       
@@ -2300,7 +2310,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
     SQL_Where.Strings = (
       'where (c.id_tipo_cpb = 11)')
     SQL_Orden.Strings = (
-      'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
+      
+        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
+        'total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     UsarWhereOriginal = EK_Con_Where
@@ -2568,7 +2580,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
             Visible = True
           end
           item
-            BeginGroup = True
+            Item = btVer
+            Visible = True
+          end
+          item
             Item = btImprimir
             Visible = True
           end
@@ -2929,6 +2944,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
       Visible = ivAlways
       ImageIndex = 28
       OnClick = btImprimirClick
+      AutoGrayScale = False
+    end
+    object btVer: TdxBarLargeButton
+      Caption = 'Ver Detalle'
+      Category = 0
+      Hint = 'Ver Detalle'
+      Visible = ivAlways
+      ImageIndex = 7
+      OnClick = btVerClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -3440,7 +3464,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Visible = True
       end
       item
-        TituloColumna = 'Cantidad'
+        TituloColumna = 'Cant'
         Visible = True
       end
       item
