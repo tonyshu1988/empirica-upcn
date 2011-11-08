@@ -145,6 +145,9 @@ Const
   //MOVIMIENTOS INTERNOS
   CPB_OTROS_INGRESOS = 16; //OK Se utilizan en la pantallas Movimientos Internos
   CPB_OTROS_EGRESOS  = 17; //OK Se utilizan en la pantallas Movimientos Internos
+  //CUENTA CORRIENTE
+  CPB_RECIBO_CTA_CTE = 22; //
+  CPB_OP_CTA_CTE     = 23; //  
 
   ESTADO_SIN_CONFIRMAR = 0;
   ESTADO_CONFIRMADO    = 1;
