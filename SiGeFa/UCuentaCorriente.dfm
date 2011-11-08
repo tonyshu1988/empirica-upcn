@@ -3907,7 +3907,7 @@ object FCuentaCorriente: TFCuentaCorriente
       Alignment = taCenter
       AutoSize = False
       Caption = 'SALDO INICIAL'
-      Color = 12648448
+      Color = clBlue
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -12
@@ -3974,16 +3974,24 @@ object FCuentaCorriente: TFCuentaCorriente
     Width = 173
     Height = 105
     BevelInner = bvLowered
-    TabOrder = 5
+    TabOrder = 4
     Visible = False
     object Label18: TLabel
       Left = 2
       Top = 2
       Width = 169
-      Height = 13
+      Height = 15
       Align = alTop
       Alignment = taCenter
       Caption = 'FILTRAR POR FECHA'
+      Color = clBlue
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
     object Label19: TLabel
       Left = 5
@@ -4159,10 +4167,6 @@ object FCuentaCorriente: TFCuentaCorriente
           item
             BeginGroup = True
             Item = btnImprimir
-            Visible = True
-          end
-          item
-            Item = btnImprimirRecibo
             Visible = True
           end
           item
@@ -4509,7 +4513,6 @@ object FCuentaCorriente: TFCuentaCorriente
       Hint = 'Recibo'
       Visible = ivAlways
       ImageIndex = 28
-      OnClick = btnImprimirReciboClick
     end
     object btnImprimir: TdxBarLargeButton
       Caption = 'Imprimir'

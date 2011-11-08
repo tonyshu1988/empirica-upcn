@@ -20,15 +20,15 @@ object FBuscarComprobante: TFBuscarComprobante
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 347
     Align = alClient
     TabOrder = 0
     object DBGridFacturas: TDBGrid
       Left = 1
       Top = 1
-      Width = 712
-      Height = 231
+      Width = 720
+      Height = 242
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -47,6 +47,7 @@ object FBuscarComprobante: TFBuscarComprobante
       OnDblClick = btnSeleccionarClick
       Columns = <
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'FECHA'
           Title.Alignment = taCenter
@@ -83,8 +84,8 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object PanelDetalle: TPanel
       Left = 1
-      Top = 232
-      Width = 712
+      Top = 243
+      Width = 720
       Height = 103
       Align = alBottom
       BevelOuter = bvNone
@@ -92,16 +93,16 @@ object FBuscarComprobante: TFBuscarComprobante
       object lblDetalleFactura: TLabel
         Left = 0
         Top = 0
-        Width = 712
-        Height = 14
+        Width = 720
+        Height = 13
         Align = alTop
         Caption = 'Detalle Factura'
       end
       object DBGridDetalle: TDBGrid
         Left = 0
-        Top = 14
-        Width = 712
-        Height = 89
+        Top = 13
+        Width = 720
+        Height = 90
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alClient
         Color = 14606012
@@ -149,7 +150,7 @@ object FBuscarComprobante: TFBuscarComprobante
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -831,8 +832,8 @@ object FBuscarComprobante: TFBuscarComprobante
     AfterScroll = ZQ_Factura_VentaAfterScroll
     SQL.Strings = (
       
-        'select c.id_comprobante, c.id_cliente, c.codigo, c.fecha, c.impo' +
-        'rte_venta,'
+        'select c.id_comprobante, c.id_cliente, c.codigo, cast(c.fecha as' +
+        ' Date) fecha, c.importe_venta,'
       '       cfp.importe_real, '#39'FACTURA '#39'||c.codigo as Descripcion'
       'from comprobante c'
       
@@ -889,47 +890,19 @@ object FBuscarComprobante: TFBuscarComprobante
     Grilla = DBGridFacturas
     Filtros = <
       item
-        TituloColumna = 'C'#243'd. Producto'
+        TituloColumna = 'Fecha'
         Visible = True
       end
       item
-        TituloColumna = 'C'#243'd. Barra'
+        TituloColumna = 'Factura'
         Visible = True
       end
       item
-        TituloColumna = 'Producto'
+        TituloColumna = 'Importe '
         Visible = True
       end
       item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Color'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Marca'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo Articulo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Articulo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Cabecera'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Llevar Stock'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Baja'
+        TituloColumna = 'Saldo'
         Visible = True
       end>
     NombreGuardar = 'BuscarProducto'
@@ -997,8 +970,8 @@ object FBuscarComprobante: TFBuscarComprobante
     DataSet = ZQ_Factura_Venta
     SQL.Strings = (
       
-        'select c.id_comprobante, c.id_cliente, c.codigo, c.fecha, c.impo' +
-        'rte_venta,'
+        'select c.id_comprobante, c.id_cliente, c.codigo, cast(c.fecha as' +
+        ' Date) fecha, c.importe_venta,'
       '       cfp.importe_real, '#39'FACTURA '#39'||c.codigo as Descripcion'
       'from comprobante c'
       
@@ -1019,8 +992,8 @@ object FBuscarComprobante: TFBuscarComprobante
       'order by c.fecha, c.codigo')
     SQL_Select.Strings = (
       
-        'select c.id_comprobante, c.id_cliente, c.codigo, c.fecha, c.impo' +
-        'rte_venta,'
+        'select c.id_comprobante, c.id_cliente, c.codigo, cast(c.fecha as' +
+        ' Date) fecha, c.importe_venta,'
       '       cfp.importe_real, '#39'FACTURA '#39'||c.codigo as Descripcion')
     SQL_From.Strings = (
       'from comprobante c'
@@ -1082,11 +1055,11 @@ object FBuscarComprobante: TFBuscarComprobante
     SQL.Strings = (
       
         'select c.id_comprobante, c.id_proveedor, c.punto_venta||'#39'-'#39'||c.n' +
-        'umero_cpb as codigo, c.fecha, c.importe_venta,'
+        'umero_cpb as codigo, cast(c.fecha as Date) fecha, c.importe_vent' +
+        'a,'
       
-        '       cfp.importe_real, '#39'FACTURA '#39'||c.punto_venta||'#39'-'#39'||c.numer' +
-        'o_cpb as Descripcion'
-      'from comprobante c'
+        '       cfp.importe_real, '#39'FACTURA '#39'||lpad(c.punto_venta,4,'#39'0'#39')||' +
+        #39'-'#39'||lpad(c.numero_cpb,8,'#39'0'#39') as Descripcionfrom comprobante c'
       
         'left join comprobante_forma_pago cfp on (c.id_comprobante = cfp.' +
         'id_comprobante)'
@@ -1265,10 +1238,11 @@ object FBuscarComprobante: TFBuscarComprobante
     SQL.Strings = (
       
         'select c.id_comprobante, c.id_proveedor, c.punto_venta||'#39'-'#39'||c.n' +
-        'umero_cpb as codigo, c.fecha, c.importe_venta,'
+        'umero_cpb as codigo, cast(c.fecha as Date) fecha, c.importe_vent' +
+        'a,'
       
-        '       cfp.importe_real, '#39'FACTURA '#39'||c.punto_venta||'#39'-'#39'||c.numer' +
-        'o_cpb as Descripcion'
+        '       cfp.importe_real, '#39'FACTURA '#39'||lpad(c.punto_venta,4,'#39'0'#39')||' +
+        #39'-'#39'||lpad(c.numero_cpb,8,'#39'0'#39') as Descripcion'
       'from comprobante c'
       
         'left join comprobante_forma_pago cfp on (c.id_comprobante = cfp.' +
@@ -1289,10 +1263,11 @@ object FBuscarComprobante: TFBuscarComprobante
     SQL_Select.Strings = (
       
         'select c.id_comprobante, c.id_proveedor, c.punto_venta||'#39'-'#39'||c.n' +
-        'umero_cpb as codigo, c.fecha, c.importe_venta,'
+        'umero_cpb as codigo, cast(c.fecha as Date) fecha, c.importe_vent' +
+        'a,'
       
-        '       cfp.importe_real, '#39'FACTURA '#39'||c.punto_venta||'#39'-'#39'||c.numer' +
-        'o_cpb as Descripcion')
+        '       cfp.importe_real, '#39'FACTURA '#39'||lpad(c.punto_venta,4,'#39'0'#39')||' +
+        #39'-'#39'||lpad(c.numero_cpb,8,'#39'0'#39') as Descripcion')
     SQL_From.Strings = (
       'from comprobante c'
       
