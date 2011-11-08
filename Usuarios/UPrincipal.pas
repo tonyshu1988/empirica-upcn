@@ -614,8 +614,8 @@ begin
   try
     Aplicacion.First;
     Aplicacion.MoveBy(cBoxAplicacion.ItemIndex);
-    DM.ConexionDB.User:= dm.EKUsrLogin.usuariodb;
-    DM.ConexionDB.Password:= dm.EKUsrLogin.passworddb;
+    DM.ConexionDB.User:= 'SYSDBA';
+    DM.ConexionDB.Password:= 'masterkey';
     DM.ConexionDB.HostName:= dm.EKUsrLogin.ip;
     DM.ConexionDB.Database:= AplicacionALIAS_DB.AsString;
     DM.ConexionDB.Disconnect;
