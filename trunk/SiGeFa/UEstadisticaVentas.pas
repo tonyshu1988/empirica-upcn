@@ -222,6 +222,7 @@ type
     lblProdsVendidos: TLabel;
     EKDbSumaTotales: TEKDbSuma;
     lblTotales: TLabel;
+    Splitter6: TSplitter;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);

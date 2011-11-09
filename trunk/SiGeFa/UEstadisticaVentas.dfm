@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 335
-  Top = 257
+  Left = 207
+  Top = 74
   Width = 1020
   Height = 685
   Caption = 'Estadisticas Ventas'
@@ -25,7 +25,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 1004
     Height = 595
-    ActivePage = TabRanking
+    ActivePage = TabHorarioVentas
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 4
@@ -1699,7 +1699,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object lblTotales: TLabel
           Left = 0
-          Top = 273
+          Top = 264
           Width = 356
           Height = 20
           Align = alBottom
@@ -1717,11 +1717,19 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Transparent = False
           Layout = tlCenter
         end
+        object Splitter6: TSplitter
+          Left = 0
+          Top = 284
+          Width = 356
+          Height = 9
+          Cursor = crVSplit
+          Align = alBottom
+        end
         object grillaTop20: TDBGrid
           Left = 0
           Top = 20
           Width = 356
-          Height = 253
+          Height = 244
           Align = alClient
           Color = 14606012
           DataSource = DS_Top20

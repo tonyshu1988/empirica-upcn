@@ -948,6 +948,12 @@ begin
   EKDbSuma2.SumCollection[0].SumValue := 0;
   EKDbSuma2.SumCollection[1].SumValue := 0;
 
+  Cliente:=-1;
+  IdVendedor:=-1;
+  descCliente:=0;
+  ClienteIVA:=0;
+  IDClienteIVA:=0;
+
   CD_Comprobante.EmptyDataSet;
   CD_Comprobante.Append;
   CD_ComprobanteID_SUCURSAL.AsInteger:=SUCURSAL_LOGUEO;
@@ -1584,8 +1590,7 @@ begin
           grupoVertical.Enabled:=true;
           LimpiarCodigo();
           crearComprobante();
-          CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
-          CD_ComprobanteID_TIPO_IVA.AsInteger:=IDClienteIVA;
+          cargarClientePorDefecto();
           Result:=True;
         end;
      end
