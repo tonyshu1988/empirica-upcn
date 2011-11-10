@@ -214,7 +214,6 @@ type
     Label2: TLabel;
     EKOrdenarGrilla2: TEKOrdenarGrilla;
     DBChart2: TDBChart;
-    Splitter5: TSplitter;
     Series2: THorizBarSeries;
     btVer: TdxBarLargeButton;
     Panel1: TPanel;

@@ -25,7 +25,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 1004
     Height = 595
-    ActivePage = TabHorarioVentas
+    ActivePage = TabRanking
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 4
@@ -1619,6 +1619,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Width = 9
         Height = 531
         Align = alRight
+        Beveled = True
       end
       object Panel4: TPanel
         Left = 0
@@ -1699,7 +1700,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object lblTotales: TLabel
           Left = 0
-          Top = 264
+          Top = 323
           Width = 356
           Height = 20
           Align = alBottom
@@ -1719,17 +1720,18 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object Splitter6: TSplitter
           Left = 0
-          Top = 284
+          Top = 343
           Width = 356
           Height = 9
           Cursor = crVSplit
           Align = alBottom
+          Beveled = True
         end
         object grillaTop20: TDBGrid
           Left = 0
           Top = 20
           Width = 356
-          Height = 244
+          Height = 303
           Align = alClient
           Color = 14606012
           DataSource = DS_Top20
@@ -1752,14 +1754,14 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Expanded = False
               FieldName = 'CANTIDAD'
               Title.Caption = 'Cant'
-              Width = 33
+              Width = 47
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'SUMAVENTA'
               Title.Caption = 'Importe'
-              Width = 66
+              Width = 90
               Visible = True
             end
             item
@@ -1771,9 +1773,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object DBChart2: TDBChart
           Left = 0
-          Top = 293
+          Top = 352
           Width = 356
-          Height = 238
+          Height = 179
           BackWall.Brush.Color = clWhite
           BackWall.Brush.Style = bsClear
           BackWall.Color = clSilver
@@ -1810,14 +1812,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
           BevelOuter = bvNone
           BevelWidth = 0
           TabOrder = 1
-          object Splitter5: TSplitter
-            Left = 0
-            Top = 234
-            Width = 356
-            Height = 4
-            Cursor = crVSplit
-            Align = alBottom
-          end
           object Series2: THorizBarSeries
             ColorEachPoint = True
             Marks.ArrowLength = 20
@@ -1942,7 +1936,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Expanded = False
               FieldName = 'SUMAVENTA'
               Title.Caption = 'Importe'
-              Width = 96
+              Width = 105
               Visible = True
             end>
         end
@@ -3557,7 +3551,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object ZQ_Totales: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select first 20 sum(cd.importe_venta) as sumaVenta,'
+      'select sum(cd.importe_venta) as sumaVenta,'
       'sum(cd.importe_if) as sumaIF,'
       
         '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
@@ -3576,7 +3570,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)and(c.' +
         'fecha_cobrada between :f1 and :f2)'
       'group by 3,5'
-      'order by 4 desc,5')
+      'order by 4 desc,,1,5')
     Params = <
       item
         DataType = ftUnknown
