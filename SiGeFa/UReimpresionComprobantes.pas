@@ -326,6 +326,12 @@ end;
 
 procedure TFReimpresionComprobantes.btnImprimirClick(Sender: TObject);
 begin
+if ZQ_ComprobantePUNTO_VENTA.IsNull then
+ begin
+     Application.MessageBox(PChar('No puede reimprimir un Comprobante no fiscal.'),'Reimpresión de Comprobantes',MB_OK+MB_ICONINFORMATION);
+     Exit;
+ end;
+
 leerSistemaIni();
 if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:'+ZQ_ComprobanteCODIGO.AsString+' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
     ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l '+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -i '+Impresora+' -c '+'F'), nil, SW_SHOWNORMAL)
