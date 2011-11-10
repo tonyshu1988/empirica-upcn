@@ -51,7 +51,7 @@ object FBuscarPersona: TFBuscarPersona
           FieldName = 'NOMBRE'
           Title.Alignment = taCenter
           Title.Caption = 'Apellido y Nombre'
-          Width = 225
+          Width = 233
           Visible = True
         end
         item
@@ -59,7 +59,15 @@ object FBuscarPersona: TFBuscarPersona
           FieldName = 'DIRECCION'
           Title.Alignment = taCenter
           Title.Caption = 'Direcci'#243'n'
-          Width = 100
+          Width = 216
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NUMERO_DOC'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro. Documento'
+          Width = 146
           Visible = True
         end
         item
@@ -67,7 +75,7 @@ object FBuscarPersona: TFBuscarPersona
           FieldName = 'LOCALIDAD'
           Title.Alignment = taCenter
           Title.Caption = 'Localidad'
-          Width = 100
+          Width = 134
           Visible = True
         end
         item
@@ -92,14 +100,6 @@ object FBuscarPersona: TFBuscarPersona
           Title.Alignment = taCenter
           Title.Caption = 'eMail'
           Width = 157
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NUMERO_DOC'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nro. Documento'
-          Width = 146
           Visible = True
         end
         item
