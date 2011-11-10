@@ -10,8 +10,8 @@ function ProductoYaCargado(id:Integer):Boolean ;
 
 implementation
 
-const
-    TablaMul:Array[1..10] of Integer=(5,4,3,2,7,6,5,4,3,2); {Tabla Arbitraria}
+
+
 
 function ProductoYaCargado(id:Integer):Boolean ;
 begin

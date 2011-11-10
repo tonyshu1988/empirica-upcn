@@ -803,17 +803,17 @@ end;
 function TFABM_Preventa.ProductoYaCargado(id:Integer):Boolean ;
 begin
     Result:=False;
-    CD_DetalleFactura.Filtered := false;
-    CD_DetalleFactura.Filter:= Format('id_producto = %d ',[id]);
-    CD_DetalleFactura.Filtered := true;
-    if not CD_DetalleFactura.IsEmpty then
-    begin
-      CD_DetalleFactura.Filtered := false;
-      Result:=True;
-      Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
-      exit;
-    end;
-    CD_DetalleFactura.Filtered := false;
+//    CD_DetalleFactura.Filtered := false;
+//    CD_DetalleFactura.Filter:= Format('id_producto = %d ',[id]);
+//    CD_DetalleFactura.Filtered := true;
+//    if not CD_DetalleFactura.IsEmpty then
+//    begin
+//      CD_DetalleFactura.Filtered := false;
+//      Result:=True;
+//      Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
+//      exit;
+//    end;
+//    CD_DetalleFactura.Filtered := false;
 end;
 
 procedure TFABM_Preventa.edDescExit(Sender: TObject);
