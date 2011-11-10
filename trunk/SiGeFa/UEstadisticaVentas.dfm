@@ -1385,7 +1385,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 988
+            Width = 102
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1399,7 +1399,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 988
+            Width = 120
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1413,7 +1413,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 988
+            Width = 126
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -2150,8 +2150,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
     AfterScroll = ZQ_ComprobanteAfterScroll
     SQL.Strings = (
       
-        'select c.codigo, c.id_comprobante, cast(c.fecha as date) as Fech' +
-        'a, c.porc_iva,'
+        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
+        ' as Fecha, c.porc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
@@ -2170,7 +2170,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
       'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
       'join persona p2 on (p2.id_persona = c.id_cliente)'
       'where (c.id_tipo_cpb = 11)'
-      'group by c.codigo, c.id_comprobante, c.fecha, c.importe_total,'
+      
+        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
+        'total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
     Params = <>
@@ -2284,6 +2286,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
         ItemIndex = -1
       end
       item
+        Titulo = 'Forma de Pago'
+        Campo = 'descripcion'
+        Tabla = 'tipo_formapago'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Tipo Iva'
         Campo = 'ID_TIPO_IVA'
         Tabla = 'tipo_iva'
@@ -2336,7 +2347,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
         ' p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
       '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
-      ''
       'from comprobante c'
       
         'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
@@ -2363,8 +2373,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
-      '')
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_')
     SQL_From.Strings = (
       'from comprobante c'
       
@@ -3570,7 +3579,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)and(c.' +
         'fecha_cobrada between :f1 and :f2)'
       'group by 3,5'
-      'order by 4 desc,,1,5')
+      'order by 4 desc,1,5')
     Params = <
       item
         DataType = ftUnknown
