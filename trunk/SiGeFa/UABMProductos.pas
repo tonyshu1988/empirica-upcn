@@ -1362,17 +1362,6 @@ begin
     ZQ_preciosID_PRODUCTO.AsInteger:= ZSP_GenerarIDProdDeralleID.AsInteger;
     ZQ_preciosID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
 
-    //guardo los distintos precios
-    if ZQ_preciosPRECIO1.AsFloat = 0 then
-      ZQ_preciosPRECIO1.AsFloat :=pv;
-    if ZQ_preciosPRECIO2.AsFloat = 0 then
-      ZQ_preciosPRECIO2.AsFloat :=pv;
-    if ZQ_preciosPRECIO3.AsFloat = 0 then
-      ZQ_preciosPRECIO3.AsFloat :=pv;
-    if ZQ_preciosPRECIO4.AsFloat = 0 then
-      ZQ_preciosPRECIO4.AsFloat :=pv;
-    if ZQ_preciosPRECIO5.AsFloat = 0 then
-      ZQ_preciosPRECIO5.AsFloat :=pv;
 
     //si no tiene codigo corto el producto, le pongo el id_producto
     if ZQ_DetalleProductoCOD_CORTO.AsString='' then
@@ -1432,17 +1421,6 @@ begin
           ZQ_PreciosIMPUESTO_ADICIONAL1.AsFloat:=iad1;
           ZQ_PreciosIMPUESTO_ADICIONAL2.AsFloat:=iad2;
 
-          if ZQ_PreciosPRECIO1.AsFloat = 0 then
-            ZQ_PreciosPRECIO1.AsFloat :=pv;
-          if ZQ_PreciosPRECIO2.AsFloat = 0 then
-            ZQ_PreciosPRECIO2.AsFloat :=pv;
-          if ZQ_PreciosPRECIO3.AsFloat = 0 then
-            ZQ_PreciosPRECIO3.AsFloat :=pv;
-          if ZQ_PreciosPRECIO4.AsFloat = 0 then
-            ZQ_PreciosPRECIO4.AsFloat :=pv;
-          if ZQ_PreciosPRECIO5.AsFloat = 0 then
-            ZQ_PreciosPRECIO5.AsFloat :=pv;
-
          //Si inserto uno nuevo genero un id nuevo
          if (ZQ_DetalleProducto.State = dsInsert) then
          begin
@@ -1494,17 +1472,6 @@ begin
 
     if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
        ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
-
-    if zq_preciosPRECIO1.AsFloat = 0 then
-      zq_preciosPRECIO1.AsFloat :=zq_preciosPRECIO_VENTA.AsFloat;
-    if zq_preciosPRECIO2.AsFloat = 0 then
-      zq_preciosPRECIO2.AsFloat :=zq_preciosPRECIO_VENTA.AsFloat;
-    if zq_preciosPRECIO3.AsFloat = 0 then
-      zq_preciosPRECIO3.AsFloat :=zq_preciosPRECIO_VENTA.AsFloat;
-    if zq_preciosPRECIO4.AsFloat = 0 then
-      zq_preciosPRECIO4.AsFloat :=zq_preciosPRECIO_VENTA.AsFloat;
-    if zq_preciosPRECIO5.AsFloat = 0 then
-      zq_preciosPRECIO5.AsFloat :=zq_preciosPRECIO_VENTA.AsFloat;
 
     zq_precios.Post;
     ZQ_DetalleProducto.Post;

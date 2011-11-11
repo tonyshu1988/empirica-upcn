@@ -1618,11 +1618,18 @@ end;
 
 
 procedure TFCajero.grabarDetallesFactura;
+var
+  redondeo,parcial:Double;
+  i,cant:integer;
 begin
     Prorrateo();
     ProrrateoFiscal();
+    parcial:=0;
+    i:=1;
+    cant:=CD_DetalleFactura.RecordCount;
+
     CD_DetalleFactura.First;
-      while not CD_DetalleFactura.Eof do
+    while not CD_DetalleFactura.Eof do
       begin
         ZQ_ComprobanteDetalle.Open;
         ZQ_ComprobanteDetalle.Append;
@@ -1640,16 +1647,24 @@ begin
         ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
         ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_IF.AsFloat;
 
-
-        //ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat / (1 + ZQ_ComprobantePORC_IVA.AsFloat);
-
         ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat / (1 + ZQ_ComprobantePORC_IVA.AsFloat);
 
-        ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:=ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat * ZQ_ComprobantePORC_IVA.AsFloat;
-        
+        ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:=RoundTo(ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat,-2);
+
+        ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:=RoundTo(ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat * ZQ_ComprobantePORC_IVA.AsFloat,-2);
+
+
+        parcial:=parcial+ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat;
+
+        //Si es el ultimo...
+        if (i=cant) then
+         begin
+            ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:=ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat+(totFiscal-(parcial*(1+ZQ_ComprobantePORC_IVA.AsFloat)));
+         end;
+
         ZQ_ComprobanteDetalleID_STOCK_PRODUCTO.AsInteger:=CD_DetalleFacturaID_PROD_STOCK.AsInteger;
         ZQ_ComprobanteDetalle.Post;
-
+        inc(i);
         CD_DetalleFactura.Next;
       end;
 end;
