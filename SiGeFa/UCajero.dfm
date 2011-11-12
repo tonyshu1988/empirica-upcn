@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 78
-  Top = 40
+  Left = 181
+  Top = 59
   Width = 1032
   Height = 700
   Caption = 'Cajero SiGeFa'
@@ -7832,7 +7832,7 @@ object FCajero: TFCajero
     object CD_DetalleFacturaBASE_IMPONIBLE: TFloatField
       FieldName = 'BASE_IMPONIBLE'
       DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
     end
     object CD_DetalleFacturaIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
@@ -7860,18 +7860,28 @@ object FCajero: TFCajero
     end
     object CD_DetalleFacturaPRECIO1: TFloatField
       FieldName = 'PRECIO1'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
     end
     object CD_DetalleFacturaPRECIO2: TFloatField
       FieldName = 'PRECIO2'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
     end
     object CD_DetalleFacturaPRECIO3: TFloatField
       FieldName = 'PRECIO3'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
     end
     object CD_DetalleFacturaPRECIO4: TFloatField
       FieldName = 'PRECIO4'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
     end
     object CD_DetalleFacturaPRECIO5: TFloatField
       FieldName = 'PRECIO5'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
     end
     object CD_DetalleFacturaIMPORTE_IF: TFloatField
       FieldName = 'IMPORTE_IF'
