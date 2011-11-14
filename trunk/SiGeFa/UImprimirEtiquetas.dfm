@@ -49,35 +49,40 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Expanded = False
           FieldName = 'NOMBRE'
           Title.Alignment = taCenter
-          Width = 249
+          Title.Caption = 'Producto/Servicio'
+          Width = 421
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'MEDIDA'
           Title.Alignment = taCenter
-          Width = 107
+          Title.Caption = 'Medida'
+          Width = 94
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'COD_CORTO_PRO'
           Title.Alignment = taCenter
-          Width = 100
+          Title.Caption = 'C'#243'd. Corto Producto'
+          Width = 132
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'COD_CORTO_CAB'
           Title.Alignment = taCenter
-          Width = 91
+          Title.Caption = 'C'#243'd. Corto Cabecera'
+          Width = 121
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'CODIGO_BARRA'
           Title.Alignment = taCenter
-          Width = 170
+          Title.Caption = 'C'#243'digo Barra'
+          Width = 324
           Visible = True
         end
         item
@@ -85,15 +90,15 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Expanded = False
           FieldName = 'CANTIDAD'
           Title.Alignment = taCenter
-          Title.Caption = 'Cantidad'
-          Width = 74
+          Title.Caption = 'Cantidad Filas'
+          Width = 97
           Visible = True
         end>
     end
-    object RepEtiquetas: TQuickRep
+    object RepOpcion1: TQuickRep
       Tag = 99
-      Left = 10
-      Top = 245
+      Left = 18
+      Top = 77
       Width = 794
       Height = 1153
       Frame.Color = clBlack
@@ -123,7 +128,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       Page.Values = (
         0.000000000000000000
         3050.000000000000000000
-        0.000000000000000000
+        10.000000000000000000
         2100.000000000000000000
         20.000000000000000000
         20.000000000000000000
@@ -159,34 +164,34 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
         Height = 16
         Caption = 'El tama'#241'o del codigo de barra tiene que ser de 20'
       end
-      object QRBand1: TQRBand
+      object QROpcion1_Band: TQRBand
         Tag = 99
         Left = 8
-        Top = 0
+        Top = 4
         Width = 779
-        Height = 90
+        Height = 85
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         AlignToBottom = False
-        BeforePrint = DetailBand1BeforePrint
+        BeforePrint = QRBandBeforePrint
         Color = clWhite
         TransparentBand = False
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          238.125000000000000000
+          224.895833333333300000
           2061.104166666667000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbDetail
-        object QRShapeTapa: TQRShape
-          Left = -1
-          Top = 1
-          Width = 781
-          Height = 84
+        object QROpcion1_ShapeTapa: TQRShape
+          Left = 2
+          Top = 3
+          Width = 774
+          Height = 79
           Enabled = False
           Frame.Color = clWhite
           Frame.DrawTop = False
@@ -195,18 +200,18 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Frame.DrawRight = False
           Frame.Style = psClear
           Size.Values = (
-            222.250000000000000000
-            -2.645833333333333000
-            2.645833333333333000
-            2066.395833333333000000)
+            209.020833333333300000
+            5.291666666666667000
+            7.937500000000000000
+            2047.875000000000000000)
           Pen.Style = psClear
           Shape = qrsRectangle
           VertAdjust = 0
         end
-        object QRCodigoBarra1: TQRImage
-          Left = 3
-          Top = 47
-          Width = 245
+        object QROpcion1_CodigoBarra1: TQRImage
+          Left = 7
+          Top = 50
+          Width = 241
           Height = 32
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -215,9 +220,9 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Frame.DrawRight = False
           Size.Values = (
             84.666666666666670000
-            7.937500000000000000
-            124.354166666666700000
-            648.229166666666700000)
+            18.520833333333330000
+            132.291666666666700000
+            637.645833333333300000)
           Picture.Data = {
             07544269746D6170B67A0000424DB67A0000000000003600000028000000F500
             0000200000000100200000000000807A00000000000000000000000000000000
@@ -1203,10 +1208,10 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
             0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
             FF00}
         end
-        object QRCodigoBarra2: TQRImage
+        object QROpcion1_CodigoBarra2: TQRImage
           Left = 266
-          Top = 47
-          Width = 245
+          Top = 50
+          Width = 241
           Height = 32
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -1216,8 +1221,8 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Size.Values = (
             84.666666666666670000
             703.791666666666700000
-            124.354166666666700000
-            648.229166666666700000)
+            132.291666666666700000
+            637.645833333333300000)
           Picture.Data = {
             07544269746D61704E8D0000424D4E8D00000000000036000000280000000201
             0000230000000100200000000000188D00000000000000000000000000000000
@@ -2351,10 +2356,10 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
         end
-        object QRCodigoBarra3: TQRImage
+        object QROpcion1_CodigoBarra3: TQRImage
           Left = 530
-          Top = 47
-          Width = 245
+          Top = 50
+          Width = 241
           Height = 32
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -2364,8 +2369,8 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Size.Values = (
             84.666666666666670000
             1402.291666666667000000
-            124.354166666666700000
-            648.229166666666700000)
+            132.291666666666700000
+            637.645833333333300000)
           Picture.Data = {
             07544269746D6170BE860000424DBE860000000000003600000028000000F600
             0000230000000100200000000000888600000000000000000000000000000000
@@ -3447,10 +3452,10 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
             FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
             FF00FFFFFF00FFFFFF00}
         end
-        object QRDBArticulo1: TQRDBText
-          Left = 2
-          Top = 8
-          Width = 245
+        object QROpcion1_DBArticulo1: TQRDBText
+          Left = 7
+          Top = 11
+          Width = 241
           Height = 22
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -3459,9 +3464,9 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Frame.DrawRight = False
           Size.Values = (
             58.208333333333330000
-            5.291666666666667000
-            21.166666666666670000
-            648.229166666666700000)
+            18.520833333333330000
+            29.104166666666670000
+            637.645833333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -3471,19 +3476,19 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           DataField = 'DESCRIPCION'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -9
+          Font.Height = -8
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
           Transparent = False
           WordWrap = True
           ExportAs = exptText
-          FontSize = 7
+          FontSize = 6
         end
-        object QRDBArticulo2: TQRDBText
+        object QROpcion1_DBArticulo2: TQRDBText
           Left = 266
-          Top = 8
-          Width = 245
+          Top = 11
+          Width = 241
           Height = 22
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -3493,8 +3498,8 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Size.Values = (
             58.208333333333330000
             703.791666666666700000
-            21.166666666666670000
-            648.229166666666700000)
+            29.104166666666670000
+            637.645833333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -3504,19 +3509,19 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           DataField = 'DESCRIPCION'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -9
+          Font.Height = -8
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
           Transparent = False
           WordWrap = True
           ExportAs = exptText
-          FontSize = 7
+          FontSize = 6
         end
-        object QRDBArticulo3: TQRDBText
+        object QROpcion1_DBArticulo3: TQRDBText
           Left = 530
-          Top = 8
-          Width = 245
+          Top = 11
+          Width = 241
           Height = 22
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -3526,8 +3531,8 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Size.Values = (
             58.208333333333330000
             1402.291666666667000000
-            21.166666666666670000
-            648.229166666666700000)
+            29.104166666666670000
+            637.645833333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -3537,19 +3542,19 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           DataField = 'DESCRIPCION'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -9
+          Font.Height = -8
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
           Transparent = False
           WordWrap = True
           ExportAs = exptText
-          FontSize = 7
+          FontSize = 6
         end
-        object QRDBPrecio2: TQRDBText
+        object QROpcion1_DBPrecio2: TQRDBText
           Left = 266
-          Top = 30
-          Width = 245
+          Top = 33
+          Width = 241
           Height = 16
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -3559,8 +3564,8 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Size.Values = (
             42.333333333333330000
             703.791666666666700000
-            79.375000000000000000
-            648.229166666666700000)
+            87.312500000000000000
+            637.645833333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -3579,10 +3584,10 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ExportAs = exptText
           FontSize = 9
         end
-        object QRDBPrecio3: TQRDBText
+        object QROpcion1_DBPrecio3: TQRDBText
           Left = 530
-          Top = 30
-          Width = 245
+          Top = 33
+          Width = 241
           Height = 16
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -3592,8 +3597,8 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Size.Values = (
             42.333333333333330000
             1402.291666666667000000
-            79.375000000000000000
-            648.229166666666700000)
+            87.312500000000000000
+            637.645833333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -3612,10 +3617,10 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           ExportAs = exptText
           FontSize = 9
         end
-        object QRDBPrecio1: TQRDBText
-          Left = 2
-          Top = 30
-          Width = 245
+        object QROpcion1_DBPrecio1: TQRDBText
+          Left = 7
+          Top = 33
+          Width = 241
           Height = 16
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -3624,9 +3629,9 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           Frame.DrawRight = False
           Size.Values = (
             42.333333333333330000
-            5.291666666666667000
-            79.375000000000000000
-            648.229166666666700000)
+            18.520833333333330000
+            87.312500000000000000
+            637.645833333333300000)
           Alignment = taCenter
           AlignToBand = False
           AutoSize = False
@@ -3644,6 +3649,4821 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
           WordWrap = True
           ExportAs = exptText
           FontSize = 9
+        end
+        object QRShape4: TQRShape
+          Left = 256
+          Top = 0
+          Width = 1
+          Height = 84
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Frame.Style = psDot
+          Size.Values = (
+            222.250000000000000000
+            677.333333333333300000
+            0.000000000000000000
+            2.645833333333333000)
+          Shape = qrsRectangle
+          VertAdjust = 0
+        end
+        object QRShape5: TQRShape
+          Left = 517
+          Top = 0
+          Width = 1
+          Height = 84
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Frame.Style = psDot
+          Size.Values = (
+            222.250000000000000000
+            1367.895833333333000000
+            0.000000000000000000
+            2.645833333333333000)
+          Shape = qrsRectangle
+          VertAdjust = 0
+        end
+      end
+    end
+    object RepOpcion2: TQuickRep
+      Tag = 99
+      Left = 18
+      Top = 221
+      Width = 794
+      Height = 1123
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Frame.Width = 0
+      DataSet = SP_ImprimirEtiquetas
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      Functions.Strings = (
+        'PAGENUMBER'
+        'COLUMNNUMBER'
+        'REPORTTITLE')
+      Functions.DATA = (
+        '0'
+        '0'
+        #39#39)
+      Options = [FirstPageHeader, LastPageFooter]
+      Page.Columns = 1
+      Page.Orientation = poPortrait
+      Page.PaperSize = A4
+      Page.Values = (
+        100.000000000000000000
+        2970.000000000000000000
+        100.000000000000000000
+        2100.000000000000000000
+        100.000000000000000000
+        100.000000000000000000
+        0.000000000000000000)
+      PrinterSettings.Copies = 1
+      PrinterSettings.OutputBin = Auto
+      PrinterSettings.Duplex = False
+      PrinterSettings.FirstPage = 0
+      PrinterSettings.LastPage = 0
+      PrinterSettings.UseStandardprinter = False
+      PrinterSettings.UseCustomBinCode = False
+      PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
+      PrinterSettings.UseCustomPaperCode = False
+      PrinterSettings.CustomPaperCode = 0
+      PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
+      PrintIfEmpty = True
+      ReportTitle = 'Etiquetas'
+      SnapToGrid = True
+      Units = MM
+      Zoom = 100
+      PrevFormStyle = fsNormal
+      PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
+      object Label2: TLabel
+        Left = 256
+        Top = 112
+        Width = 288
+        Height = 16
+        Caption = 'El tama'#241'o del codigo de barra tiene que ser de 20'
+      end
+      object QROpcion2_Band: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 38
+        Width = 718
+        Height = 90
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = True
+        Frame.DrawLeft = True
+        Frame.DrawRight = True
+        Frame.Style = psDot
+        AlignToBottom = False
+        BeforePrint = QRBandBeforePrint
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          238.125000000000000000
+          1899.708333333333000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbDetail
+        object QROpcion2_ShapeTapa: TQRShape
+          Left = 1
+          Top = 1
+          Width = 715
+          Height = 87
+          Enabled = False
+          Frame.Color = clWhite
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Frame.Style = psClear
+          Size.Values = (
+            230.187500000000000000
+            2.645833333333333000
+            2.645833333333333000
+            1891.770833333333000000)
+          Pen.Style = psClear
+          Shape = qrsRectangle
+          VertAdjust = 0
+        end
+        object QROpcion2_DBArticulo4: TQRDBText
+          Left = 545
+          Top = 8
+          Width = 170
+          Height = 22
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            58.208333333333330000
+            1441.979166666667000000
+            21.166666666666670000
+            449.791666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = True
+          Color = clWhite
+          DataSet = SP_ImprimirEtiquetas
+          DataField = 'DESCRIPCION'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QROpcion2_DBArticulo1: TQRDBText
+          Left = 4
+          Top = 8
+          Width = 170
+          Height = 22
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            58.208333333333330000
+            10.583333333333330000
+            21.166666666666670000
+            449.791666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = True
+          Color = clWhite
+          DataSet = SP_ImprimirEtiquetas
+          DataField = 'DESCRIPCION'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QROpcion2_DBArticulo2: TQRDBText
+          Left = 184
+          Top = 8
+          Width = 170
+          Height = 22
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            58.208333333333330000
+            486.833333333333300000
+            21.166666666666670000
+            449.791666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = True
+          Color = clWhite
+          DataSet = SP_ImprimirEtiquetas
+          DataField = 'DESCRIPCION'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QROpcion2_DBArticulo3: TQRDBText
+          Left = 364
+          Top = 8
+          Width = 170
+          Height = 22
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            58.208333333333330000
+            963.083333333333300000
+            21.166666666666670000
+            449.791666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = True
+          Color = clWhite
+          DataSet = SP_ImprimirEtiquetas
+          DataField = 'DESCRIPCION'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QROpcion2_DBPrecio2: TQRDBText
+          Left = 184
+          Top = 30
+          Width = 170
+          Height = 16
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            42.333333333333330000
+            486.833333333333300000
+            79.375000000000000000
+            449.791666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = SP_ImprimirEtiquetas
+          DataField = 'PRECIO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = False
+          ExportAs = exptText
+          FontSize = 9
+        end
+        object QROpcion2_DBPrecio3: TQRDBText
+          Left = 364
+          Top = 30
+          Width = 170
+          Height = 16
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            42.333333333333330000
+            963.083333333333300000
+            79.375000000000000000
+            449.791666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = SP_ImprimirEtiquetas
+          DataField = 'PRECIO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = False
+          ExportAs = exptText
+          FontSize = 9
+        end
+        object QROpcion2_DBPrecio1: TQRDBText
+          Left = 4
+          Top = 30
+          Width = 170
+          Height = 16
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            42.333333333333330000
+            10.583333333333330000
+            79.375000000000000000
+            449.791666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = SP_ImprimirEtiquetas
+          DataField = 'PRECIO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = False
+          ExportAs = exptText
+          FontSize = 9
+        end
+        object QROpcion2_DBPrecio4: TQRDBText
+          Left = 545
+          Top = 30
+          Width = 170
+          Height = 16
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            42.333333333333330000
+            1441.979166666667000000
+            79.375000000000000000
+            449.791666666666700000)
+          Alignment = taCenter
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = SP_ImprimirEtiquetas
+          DataField = 'PRECIO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = False
+          ExportAs = exptText
+          FontSize = 9
+        end
+        object QROpcion2_CodigoBarra4: TQRImage
+          Left = 545
+          Top = 47
+          Width = 170
+          Height = 32
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            84.666666666666670000
+            1441.979166666667000000
+            124.354166666666700000
+            449.791666666666700000)
+          Picture.Data = {
+            07544269746D6170BE860000424DBE860000000000003600000028000000F600
+            0000230000000100200000000000888600000000000000000000000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            0000000000000000000000000000FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            0000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00000000000000
+            00000000000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF000000000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF000000000000000000000000000000
+            000000000000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF000000000000000000000000000000000000000000FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF000000000000000000000000000000000000000000FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF000000000000000000000000000000
+            000000000000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF000000000000000000000000000000
+            000000000000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00}
+        end
+        object QROpcion2_CodigoBarra3: TQRImage
+          Left = 364
+          Top = 47
+          Width = 170
+          Height = 32
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            84.666666666666670000
+            963.083333333333300000
+            124.354166666666700000
+            449.791666666666700000)
+          Picture.Data = {
+            07544269746D6170BE860000424DBE860000000000003600000028000000F600
+            0000230000000100200000000000888600000000000000000000000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            0000000000000000000000000000FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            0000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00000000000000
+            00000000000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF000000000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF000000000000000000000000000000
+            000000000000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF000000000000000000000000000000000000000000FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF000000000000000000000000000000000000000000FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF000000000000000000000000000000
+            000000000000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF000000000000000000000000000000
+            000000000000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00}
+        end
+        object QROpcion2_CodigoBarra2: TQRImage
+          Left = 184
+          Top = 47
+          Width = 170
+          Height = 32
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            84.666666666666670000
+            486.833333333333300000
+            124.354166666666700000
+            449.791666666666700000)
+          Picture.Data = {
+            07544269746D61704E8D0000424D4E8D00000000000036000000280000000201
+            0000230000000100200000000000188D00000000000000000000000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            0000000000000000000000000000FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            0000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF000000000000000000000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00000000000000
+            00000000000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00000000000000
+            00000000000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF000000000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF000000000000000000000000000000
+            000000000000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF000000000000000000000000000000000000000000FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF000000000000000000000000000000000000000000FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF000000000000000000000000000000
+            000000000000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF000000000000000000000000000000
+            000000000000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+        end
+        object QROpcion2_CodigoBarra1: TQRImage
+          Left = 4
+          Top = 47
+          Width = 170
+          Height = 32
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            84.666666666666670000
+            10.583333333333330000
+            124.354166666666700000
+            449.791666666666700000)
+          Picture.Data = {
+            07544269746D6170B67A0000424DB67A0000000000003600000028000000F500
+            0000200000000100200000000000807A00000000000000000000000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000000000000000
+            0000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            000000000000000000000000000000000000FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000000000000000
+            0000FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF000000000000000000000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000000000000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF000000000000000000000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00000000000000
+            00000000000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF0000000000000000000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00000000000000
+            00000000000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00000000000000
+            000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF000000000000000000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF00FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00000000000000000000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000000000000000
+            00000000000000000000FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF000000000000000000000000000000000000000000FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFF
+            FF00FFFFFF000000000000000000000000000000000000000000FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF0000000000000000000000
+            00000000000000000000FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF0000000000000000000000
+            00000000000000000000FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF0000000000FFFF
+            FF0000000000FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFF
+            FF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00000000000000
+            000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000000000000000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF0000000000FFFF
+            FF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFFFF00FFFF
+            FF0000000000FFFFFF0000000000FFFFFF00000000000000000000000000FFFF
+            FF0000000000FFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            0000FFFFFF0000000000FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00000000000000000000000000FFFFFF0000000000000000000000
+            0000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00FFFFFF00FFFFFF00000000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00FFFFFF0000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF000000
+            00000000000000000000FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+            0000FFFFFF00000000000000000000000000FFFFFF0000000000FFFFFF00FFFF
+            FF00}
+        end
+        object QRShape1: TQRShape
+          Left = 179
+          Top = 0
+          Width = 1
+          Height = 89
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Frame.Style = psDot
+          Size.Values = (
+            235.479166666666700000
+            473.604166666666700000
+            0.000000000000000000
+            2.645833333333333000)
+          Shape = qrsRectangle
+          VertAdjust = 0
+        end
+        object QRShape2: TQRShape
+          Left = 359
+          Top = 0
+          Width = 1
+          Height = 89
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Frame.Style = psDot
+          Size.Values = (
+            235.479166666666700000
+            949.854166666666700000
+            0.000000000000000000
+            2.645833333333333000)
+          Shape = qrsRectangle
+          VertAdjust = 0
+        end
+        object QRShape3: TQRShape
+          Left = 539
+          Top = 0
+          Width = 1
+          Height = 89
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Frame.Style = psDot
+          Size.Values = (
+            235.479166666666700000
+            1426.104166666667000000
+            0.000000000000000000
+            2.645833333333333000)
+          Shape = qrsRectangle
+          VertAdjust = 0
         end
       end
     end
@@ -4037,9 +8857,9 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       AutoGrayScale = False
     end
     object btnEliminarLinea: TdxBarLargeButton
-      Caption = 'Eliminar Linea'
+      Caption = 'Eliminar Fila'
       Category = 0
-      Hint = 'Eliminar Linea'
+      Hint = 'Eliminar Fila'
       Visible = ivAlways
       ImageIndex = 2
       OnClick = btnEliminarLineaClick
@@ -4159,6 +8979,11 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
     AfterScroll = SP_ImprimirEtiquetasAfterScroll
     Params = <
       item
+        DataType = ftString
+        Name = 'CODIGOBARRA'
+        ParamType = ptResult
+      end
+      item
         DataType = ftInteger
         Name = 'ID_PRODUCTO'
         ParamType = ptResult
@@ -4170,7 +8995,37 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       end
       item
         DataType = ftInteger
+        Name = 'ID_PRECIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftString
+        Name = 'MEDIDA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftString
+        Name = 'COLOR'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftString
+        Name = 'NOMBRE_PRO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
         Name = 'DESDE_RENGLON'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'LONG_DESCRIPCION'
         ParamType = ptInput
       end>
     StoredProcName = 'SP_IMPRIMIR_ETIQUETAS'
@@ -4178,6 +9033,11 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
     Top = 63
     ParamData = <
       item
+        DataType = ftString
+        Name = 'CODIGOBARRA'
+        ParamType = ptResult
+      end
+      item
         DataType = ftInteger
         Name = 'ID_PRODUCTO'
         ParamType = ptResult
@@ -4189,7 +9049,37 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
       end
       item
         DataType = ftInteger
+        Name = 'ID_PRECIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftString
+        Name = 'MEDIDA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftString
+        Name = 'COLOR'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftFloat
+        Name = 'PRECIO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftString
+        Name = 'NOMBRE_PRO'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
         Name = 'DESDE_RENGLON'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'LONG_DESCRIPCION'
         ParamType = ptInput
       end>
     object SP_ImprimirEtiquetasCODIGOBARRA: TStringField
@@ -4231,12 +9121,12 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
     Left = 347
     Top = 119
   end
-  object EKVistaPreviaQR1: TEKVistaPreviaQR
-    Reporte = RepEtiquetas
+  object EKVistaPrevia_Opcion1: TEKVistaPreviaQR
+    Reporte = RepOpcion1
     ShowModal = False
     Caption = 'Etiquetas'
     Left = 147
-    Top = 63
+    Top = 239
   end
   object EKCodigoBarra1: TEKCodigoBarra
     Height = 50
@@ -4252,7 +9142,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
     ShowTextFont.Name = 'MS Sans Serif'
     ShowTextFont.Style = []
     ShowTextPosition = stpTopCenter
-    QRCodigo = QRCodigoBarra1
+    QRCodigo = QROpcion1_CodigoBarra1
     Left = 635
     Top = 79
   end
@@ -4270,7 +9160,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
     ShowTextFont.Name = 'MS Sans Serif'
     ShowTextFont.Style = []
     ShowTextPosition = stpTopCenter
-    QRCodigo = QRCodigoBarra2
+    QRCodigo = QROpcion1_CodigoBarra2
     Left = 635
     Top = 127
   end
@@ -4288,7 +9178,7 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
     ShowTextFont.Name = 'MS Sans Serif'
     ShowTextFont.Style = []
     ShowTextPosition = stpTopCenter
-    QRCodigo = QRCodigoBarra3
+    QRCodigo = QROpcion1_CodigoBarra3
     Left = 635
     Top = 175
   end
@@ -4405,5 +9295,30 @@ object FImprimirEtiquetas: TFImprimirEtiquetas
         Name = 'ID_PRECIO'
         ParamType = ptUnknown
       end>
+  end
+  object EKVistaPrevia_Opcion2: TEKVistaPreviaQR
+    Reporte = RepOpcion2
+    ShowModal = False
+    Caption = 'Etiquetas'
+    Left = 147
+    Top = 295
+  end
+  object EKCodigoBarra4: TEKCodigoBarra
+    Height = 50
+    Text = '12345678901234567890123456'
+    CTop = 0
+    CLeft = 0
+    Modul = 1
+    Ratio = 3.000000000000000000
+    ShowText = bcoBoth
+    ShowTextFont.Charset = DEFAULT_CHARSET
+    ShowTextFont.Color = clWindowText
+    ShowTextFont.Height = -11
+    ShowTextFont.Name = 'MS Sans Serif'
+    ShowTextFont.Style = []
+    ShowTextPosition = stpTopCenter
+    QRCodigo = QROpcion2_CodigoBarra4
+    Left = 635
+    Top = 231
   end
 end

@@ -26,18 +26,18 @@ type
     btnEliminarLinea: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnConPrecio: TdxBarLargeButton;
-    EKVistaPreviaQR1: TEKVistaPreviaQR;
-    QRBand1: TQRBand;
-    QRShapeTapa: TQRShape;
-    QRCodigoBarra1: TQRImage;
-    QRCodigoBarra2: TQRImage;
-    QRCodigoBarra3: TQRImage;
-    QRDBArticulo1: TQRDBText;
-    QRDBArticulo2: TQRDBText;
-    QRDBArticulo3: TQRDBText;
-    QRDBPrecio2: TQRDBText;
-    QRDBPrecio3: TQRDBText;
-    QRDBPrecio1: TQRDBText;
+    EKVistaPrevia_Opcion1: TEKVistaPreviaQR;
+    QROpcion1_Band: TQRBand;
+    QROpcion1_ShapeTapa: TQRShape;
+    QROpcion1_CodigoBarra1: TQRImage;
+    QROpcion1_CodigoBarra2: TQRImage;
+    QROpcion1_CodigoBarra3: TQRImage;
+    QROpcion1_DBArticulo1: TQRDBText;
+    QROpcion1_DBArticulo2: TQRDBText;
+    QROpcion1_DBArticulo3: TQRDBText;
+    QROpcion1_DBPrecio2: TQRDBText;
+    QROpcion1_DBPrecio3: TQRDBText;
+    QROpcion1_DBPrecio1: TQRDBText;
     Label1: TLabel;
     EKCodigoBarra1: TEKCodigoBarra;
     EKCodigoBarra2: TEKCodigoBarra;
@@ -68,14 +68,36 @@ type
     SP_ImprimirEtiquetasCOLOR: TStringField;
     SP_ImprimirEtiquetasPRECIO: TFloatField;
     SP_ImprimirEtiquetasNOMBRE_PRO: TStringField;
+    RepOpcion1: TQuickRep;
+    RepOpcion2: TQuickRep;
+    Label2: TLabel;
+    QROpcion2_Band: TQRBand;
+    QROpcion2_ShapeTapa: TQRShape;
+    QROpcion2_CodigoBarra1: TQRImage;
+    QROpcion2_CodigoBarra2: TQRImage;
+    QROpcion2_CodigoBarra3: TQRImage;
+    QROpcion2_DBArticulo1: TQRDBText;
+    QROpcion2_DBArticulo2: TQRDBText;
+    QROpcion2_DBArticulo3: TQRDBText;
+    QROpcion2_DBPrecio2: TQRDBText;
+    QROpcion2_DBPrecio3: TQRDBText;
+    QROpcion2_DBPrecio1: TQRDBText;
+    QROpcion2_CodigoBarra4: TQRImage;
+    QROpcion2_DBPrecio4: TQRDBText;
+    QROpcion2_DBArticulo4: TQRDBText;
+    EKVistaPrevia_Opcion2: TEKVistaPreviaQR;
+    EKCodigoBarra4: TEKCodigoBarra;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    QRShape5: TQRShape;
     procedure FormCreate(Sender: TObject);
     procedure DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure SP_ImprimirEtiquetasAfterScroll(DataSet: TDataSet);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
-    procedure DetailBand1BeforePrint(Sender: TQRCustomBand;
-      var PrintBand: Boolean);
     procedure btnEliminarLineaClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnConPrecioClick(Sender: TObject);
@@ -86,17 +108,19 @@ type
     procedure PopItemProducto_AgregarClick(Sender: TObject);
     procedure PopItemProducto_QuitarClick(Sender: TObject);
     procedure PopItemProducto_QuitarTodosClick(Sender: TObject);
-    procedure DBGridEtiquetasDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridEtiquetasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnEliminarTodosClick(Sender: TObject);
     procedure centrarCodigo;
+    procedure QRBandBeforePrint(Sender: TQRCustomBand; var PrintBand: Boolean);
+    procedure mostrarPrecio(flag: boolean);
   private
     vselProducto: TFBuscarProducto;
     procedure onSelProducto;
     procedure onSelTodosProducto;
   public
     id_sucursal: integer;
+    opcion: integer;
+    long_descripcion: integer;
   end;
 
 var
@@ -113,11 +137,12 @@ uses UDM, StrUtils, UPrincipal;
 
 procedure TFImprimirEtiquetas.FormCreate(Sender: TObject);
 begin
+  opcion:= imprimirEtiqueta_opcionReporte;
+  long_descripcion:= 60;
+  
   EKOrdenarGrilla.PopUpGrilla:= nil;
   GrupoEditando.Enabled:= False;
   GrupoVisualizando.Enabled:= True;
-
-//  ZQ_Productos.Open;
 end;
 
 
@@ -127,16 +152,14 @@ begin
 end;
 
 
-procedure TFImprimirEtiquetas.DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TFImprimirEtiquetas.DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_Etiquetas) then
-  begin
     if key = 112 then
       agregarProducto;
-  end;
 end;
 
+                       
 procedure TFImprimirEtiquetas.agregarProducto();
 begin
   if not Assigned(vselProducto) then
@@ -193,9 +216,10 @@ end;
 
 procedure TFImprimirEtiquetas.SP_ImprimirEtiquetasAfterScroll(DataSet: TDataSet);
 begin
-  EKCodigoBarra1.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
-  EKCodigoBarra2.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
-  EKCodigoBarra3.Text := SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  EKCodigoBarra1.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  EKCodigoBarra2.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  EKCodigoBarra3.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  EKCodigoBarra4.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
 
   centrarCodigo;
 end;
@@ -207,25 +231,67 @@ begin
 end;
 
 
-procedure TFImprimirEtiquetas.DetailBand1BeforePrint(Sender: TQRCustomBand; var PrintBand: Boolean);
+procedure TFImprimirEtiquetas.QRBandBeforePrint(Sender: TQRCustomBand; var PrintBand: Boolean);
 begin
-  if SP_ImprimirEtiquetasID_PRODUCTO.AsInteger = 0 then
-  begin
-    QRShapeTapa.BringToFront;
-    QRShapeTapa.Enabled := true;
-  end
-  else
-  Begin
-    QRShapeTapa.Enabled := false;
+  QROpcion2_Band.Height:= 90;
+  case opcion of
+    1:begin
+        if SP_ImprimirEtiquetasID_PRODUCTO.AsInteger = 0 then
+        begin
+          QROpcion1_ShapeTapa.BringToFront;
+          QROpcion1_ShapeTapa.Enabled:= true;
+        end
+        else
+        Begin
+          QROpcion1_ShapeTapa.Enabled:= false;
+        end;
+      end;
+    2:begin
+        if SP_ImprimirEtiquetasID_PRODUCTO.AsInteger = 0 then
+        begin
+          QROpcion2_ShapeTapa.BringToFront;
+          QROpcion2_ShapeTapa.Enabled:= true;
+        end
+        else
+        Begin
+          QROpcion2_ShapeTapa.Enabled:= false;
+        end;
+      end;
   end;
 end;
 
 
 procedure TFImprimirEtiquetas.centrarCodigo;
 begin
-  QRCodigoBarra1.Left:= (QRDBPrecio1.Left) + ((245-EKCodigoBarra1.Width) div 2);
-  QRCodigoBarra2.Left:= (QRDBPrecio2.Left) + ((245-EKCodigoBarra2.Width) div 2);
-  QRCodigoBarra3.Left:= (QRDBPrecio3.Left) + ((245-EKCodigoBarra3.Width) div 2);
+  //left original OPCION 1
+  QROpcion1_CodigoBarra1.Left:= QROpcion1_DBPrecio1.Left;
+  QROpcion1_CodigoBarra2.Left:= QROpcion1_DBPrecio2.Left;
+  QROpcion1_CodigoBarra3.Left:= QROpcion1_DBPrecio3.Left;
+  //left original OPCION 2
+  QROpcion2_CodigoBarra1.Left:= QROpcion2_DBPrecio1.Left;
+  QROpcion2_CodigoBarra2.Left:= QROpcion2_DBPrecio2.Left;
+  QROpcion2_CodigoBarra3.Left:= QROpcion2_DBPrecio3.Left;
+  QROpcion2_CodigoBarra4.Left:= QROpcion2_DBPrecio4.Left;
+
+  case opcion of
+  1: begin
+        if EKCodigoBarra1.Width < 241 then
+        begin
+          QROpcion1_CodigoBarra1.Left:= (QROpcion1_DBPrecio1.Left) + ((241-EKCodigoBarra1.Width) div 2);
+          QROpcion1_CodigoBarra2.Left:= (QROpcion1_DBPrecio2.Left) + ((241-EKCodigoBarra2.Width) div 2);
+          QROpcion1_CodigoBarra3.Left:= (QROpcion1_DBPrecio3.Left) + ((241-EKCodigoBarra3.Width) div 2);
+        end;
+     end;
+  2: begin
+        if EKCodigoBarra1.Width < 170 then
+        begin
+          QROpcion2_CodigoBarra1.Left:= (QROpcion2_DBPrecio1.Left) + ((170-EKCodigoBarra1.Width) div 2);
+          QROpcion2_CodigoBarra2.Left:= (QROpcion2_DBPrecio2.Left) + ((170-EKCodigoBarra2.Width) div 2);
+          QROpcion2_CodigoBarra3.Left:= (QROpcion2_DBPrecio3.Left) + ((170-EKCodigoBarra3.Width) div 2);
+          QROpcion2_CodigoBarra4.Left:= (QROpcion2_DBPrecio4.Left) + ((170-EKCodigoBarra4.Width) div 2);
+        end;
+     end;
+  end;
 end;
 
 
@@ -274,16 +340,17 @@ begin
   end;
 
   dm.EKModelo.aplicar_modificaciones(transaccion_Etiquetas);
-
+  mostrarPrecio(false);
+  
   SP_ImprimirEtiquetas.Active := false;
-  SP_ImprimirEtiquetas.ParamByName('desde_renglon').AsInteger := Filan;
+  SP_ImprimirEtiquetas.ParamByName('desde_renglon').AsInteger:= Filan;
+  SP_ImprimirEtiquetas.ParamByName('long_descripcion').AsInteger:= long_descripcion;
   SP_ImprimirEtiquetas.Active := true;
 
-  QRDBPrecio1.Enabled := false;
-  QRDBPrecio2.Enabled := false;
-  QRDBPrecio3.Enabled := false;
-
-  EKVistaPreviaQR1.VistaPrevia;
+  case opcion of
+    1: EKVistaPrevia_Opcion1.VistaPrevia;
+    2: EKVistaPrevia_Opcion2.VistaPrevia;
+  end
 end;
 
 
@@ -306,16 +373,17 @@ begin
   end;
 
   dm.EKModelo.aplicar_modificaciones(transaccion_Etiquetas);
-  
+  mostrarPrecio(true);
+
   SP_ImprimirEtiquetas.Active := false;
   SP_ImprimirEtiquetas.ParamByName('desde_renglon').AsInteger := Filan;
+  SP_ImprimirEtiquetas.ParamByName('long_descripcion').AsInteger:= long_descripcion;
   SP_ImprimirEtiquetas.Active := true;
 
-  QRDBPrecio1.Enabled := true;
-  QRDBPrecio2.Enabled := true;
-  QRDBPrecio3.Enabled := true;
-
-  EKVistaPreviaQR1.VistaPrevia;
+  case opcion of
+    1: EKVistaPrevia_Opcion1.VistaPrevia;
+    2: EKVistaPrevia_Opcion2.VistaPrevia;
+  end
 end;
 
 
@@ -323,6 +391,8 @@ procedure TFImprimirEtiquetas.btnEditarClick(Sender: TObject);
 begin
   if not dm.EKModelo.iniciar_transaccion(transaccion_Etiquetas, [ZQ_Etiquetas]) then
     exit;
+
+  borrar.Execute;
 
   EKOrdenarGrilla.PopUpGrilla:= Popup_Producto;
 
@@ -377,9 +447,34 @@ begin
 
   ZQ_Etiquetas.First;
   while not ZQ_Etiquetas.Eof do
-   ZQ_Etiquetas.Delete;
+    ZQ_Etiquetas.Delete;
 end;
 
 
+procedure TFImprimirEtiquetas.mostrarPrecio(flag: boolean);
+begin
+  case opcion of
+  1:  begin
+        EKCodigoBarra1.QRCodigo:= QROpcion1_CodigoBarra1;
+        EKCodigoBarra2.QRCodigo:= QROpcion1_CodigoBarra2;
+        EKCodigoBarra3.QRCodigo:= QROpcion1_CodigoBarra3;
+
+        QROpcion1_DBPrecio1.Enabled := flag;
+        QROpcion1_DBPrecio2.Enabled := flag;
+        QROpcion1_DBPrecio3.Enabled := flag;
+      end;
+  2:  begin
+        EKCodigoBarra1.QRCodigo:= QROpcion2_CodigoBarra1;
+        EKCodigoBarra2.QRCodigo:= QROpcion2_CodigoBarra2;
+        EKCodigoBarra3.QRCodigo:= QROpcion2_CodigoBarra3;
+        EKCodigoBarra4.QRCodigo:= QROpcion2_CodigoBarra4;
+
+        QROpcion2_DBPrecio1.Enabled := flag;
+        QROpcion2_DBPrecio2.Enabled := flag;
+        QROpcion2_DBPrecio3.Enabled := flag;
+        QROpcion2_DBPrecio4.Enabled := flag;
+      end;
+  end;
+end;
 
 end.
