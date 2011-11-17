@@ -365,7 +365,7 @@ type
     procedure AModificarExecute(Sender: TObject);
     procedure AConfirmarExecute(Sender: TObject);
     procedure ABajaExecute(Sender: TObject);
-    procedure AReactivarExecute(Sender: TObject);
+    procedure AFSieteExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -376,8 +376,7 @@ type
     procedure btnBuscarEmpresaClick(Sender: TObject);
     procedure DBGridEditar_FpagoColExit(Sender: TObject);
     procedure DBGridEditar_FpagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure btnEliminarFPagoClick(Sender: TObject);    
-    procedure DBGridEditar_FpagoKeyPress(Sender: TObject; var Key: Char);
+    procedure btnEliminarFPagoClick(Sender: TObject);
     procedure EKSuma_FPagoSumListChanged(Sender: TObject); //configuro la pantalla de visualizacion segun el tipo de comprobante
     procedure configPanelFechas(panel: TPanel; Activar: boolean);
     procedure btnEnviarMailClick(Sender: TObject);
@@ -410,9 +409,6 @@ type
   public
     { Public declarations }
   end;
-
-type
-  THackDBGrid = class(TDBGrid);
 
 var
   FABM_CPB_Recibo: TFABM_CPB_Recibo;
@@ -809,49 +805,85 @@ end;
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
 procedure TFABM_CPB_Recibo.ABuscarExecute(Sender: TObject);
-begin
-  if btnBuscar.Enabled then
-    btnBuscar.Click;
+begin //F1
+  if estadoPantalla = VIENDO then
+  begin
+    if btnBuscar.Enabled then
+      btnBuscar.Click
+  end
+  else
+  begin
+    if btnBuscarEmpresa.Enabled then
+      btnBuscarEmpresa.Click;
+  end;
 end;
 
 procedure TFABM_CPB_Recibo.ANuevoExecute(Sender: TObject);
-begin
-  if btnNuevo.Enabled then
-    btnNuevo.Click;
+begin //F2
+  if estadoPantalla = VIENDO then
+  begin
+    if btnNuevo.Enabled then
+      btnNuevo.Click;
+  end
+  else
+  begin
+    if btnBuscarPersona.Enabled then
+      btnBuscarPersona.Click;
+  end;
 end;
 
 procedure TFABM_CPB_Recibo.AModificarExecute(Sender: TObject);
-begin
-  if btnModificar.Enabled then
-    btnModificar.Click;
+begin //F3
+  if estadoPantalla = VIENDO then
+  begin
+    if btnModificar.Enabled then
+      btnModificar.Click;
+  end
+  else
+  begin
+    if btnAgregarFactura.Enabled and (tipoComprobante = CPB_RECIBO_CTA_CTE) then
+      btnAgregarFactura.Click;
+  end;
 end;
 
 procedure TFABM_CPB_Recibo.AConfirmarExecute(Sender: TObject);
-begin
-  if btnConfirmar.Enabled then
-    btnConfirmar.Click;
+begin //F4
+  if estadoPantalla = VIENDO then
+  begin
+    if btnConfirmar.Enabled then
+      btnConfirmar.Click;
+  end
+  else
+  begin
+    if btnQuitarFactura.Enabled and (tipoComprobante = CPB_RECIBO_CTA_CTE) then
+      btnQuitarFactura.Click;
+  end;
 end;
 
 procedure TFABM_CPB_Recibo.ABajaExecute(Sender: TObject);
-begin
+begin //F5
   if btnBaja.Enabled then
     btnBaja.Click;
 end;
 
-procedure TFABM_CPB_Recibo.AReactivarExecute(Sender: TObject);
-begin
-  if btnReactivar.Enabled then
-    btnReactivar.Click;
+procedure TFABM_CPB_Recibo.AFSieteExecute(Sender: TObject);
+begin //F6
+  if estadoPantalla = EDITANDO then
+  begin
+    if not DBGridEditar_Fpago.Focused then
+      ZQ_CpbFormaPago.Append; //pongo en modo edicion
+    DBGridEditar_Fpago.SetFocus;
+  end
 end;
 
 procedure TFABM_CPB_Recibo.AGuardarExecute(Sender: TObject);
-begin
+begin //F11
   if btnGuardar.Enabled then
     btnGuardar.Click;
 end;
 
 procedure TFABM_CPB_Recibo.ACancelarExecute(Sender: TObject);
-begin
+begin //F12
   if btnCancelar.Enabled then
     btnCancelar.Click;
 end;
@@ -862,6 +894,7 @@ end;
 procedure TFABM_CPB_Recibo.ZQ_VerCpbAfterScroll(DataSet: TDataSet);
 begin
   ZQ_VerCpb_Fpago.Close;
+  ZQ_PagosFactura.Close;
 
   if ZQ_VerCpb.IsEmpty then
     exit;
@@ -883,7 +916,6 @@ begin
     DBTxtDatos_Cliente.Visible:= true;
     lblDatos_Cliente.Visible:= true;
 
-    ZQ_PagosFactura.Close;
     ZQ_PagosFactura.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
     ZQ_PagosFactura.Open;
   end;
@@ -1005,10 +1037,9 @@ begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then //SI ESTOY DANDO DE ALTA O EDITANDO
   begin
       //PARA LOS RECIBOS - CUENTA INGRESO
-      if (((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Codigo') or
-          ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre')) then
+      if ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre') then
       begin
-        if (not ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull) then //or (tipoComprobante <> CPB_RECIBO_COBRO) then
+        if (not ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull) then
           exit;
 
         if EKListadoCuenta.Buscar then
@@ -1063,14 +1094,11 @@ procedure TFABM_CPB_Recibo.DBGridEditar_FpagoKeyUp(Sender: TObject; var Key: Wor
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
   begin
-    if key = 112 then
+    if key = 118 then
     begin
       //PARA LOS RECIBOS - CUENTA INGRESO
-      if (((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Codigo') or
-          ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre')) then
+      if ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre') then
       begin
-//        if (tipoComprobante <> CPB_RECIBO_COBRO) then
-//          exit;
 
         if EKListadoCuenta.Buscar then
         begin
@@ -1129,32 +1157,6 @@ begin
     
     EKSuma_FPago.RecalcAll;
   end;
-end;
-
-
-procedure TFABM_CPB_Recibo.DBGridEditar_FpagoKeyPress(Sender: TObject; var Key: Char);
-var
-  columna: string;
-begin
-//  columna:= (sender as tdbgrid).SelectedField.FullName;
-//
-//  if (columna = 'IMPORTE') then
-//  begin
-//    if (Key = #13) or (key = #9) then  { if it's an enter key }
-//    begin
-//      Key := #0;  { eat enter key }
-//      with TStringGrid(DBGridEditar_Fpago) do
-//      begin
-//        if tipoComprobante = CPB_RECIBO_COBRO then
-//          Col := 0
-//        else
-//          if tipoComprobante = CPB_ORDEN_PAGO then
-//            Col := 2;
-//
-//        SetFocus;
-//      end;
-//    end;
-//  end;
 end;
 
 
@@ -1289,6 +1291,7 @@ begin
   EKOrd_EditarFpago.GuardarConfigColumnas;
 end;
 
+
 procedure TFABM_CPB_Recibo.btnBajaClick(Sender: TObject);
 var
   recno, estado: Integer;
@@ -1335,10 +1338,13 @@ end;
 
 procedure TFABM_CPB_Recibo.btnQuitarFacturaClick(Sender: TObject);
 begin
-  if not CD_Facturas.IsEmpty then
+  if CD_Facturas.IsEmpty then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea quitar la factura seleccionada ('+CD_Facturas_descripcion.AsString+')?'), 'ABM Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
     CD_Facturas.Delete;
 
-  DBGridFacturas.SetFocus;    
+  DBGridFacturas.SetFocus;
 end;
 
 

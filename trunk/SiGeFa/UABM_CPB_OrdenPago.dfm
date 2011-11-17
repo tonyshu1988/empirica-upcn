@@ -1,6 +1,6 @@
 object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
-  Left = 378
-  Top = 189
+  Left = 327
+  Top = 119
   Width = 892
   Height = 586
   Caption = 'ABM Orden Pago'
@@ -23,6 +23,82 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object PanelTipoCpb: TPanel
+    Left = 305
+    Top = 192
+    Width = 199
+    Height = 105
+    BevelInner = bvLowered
+    TabOrder = 6
+    Visible = False
+    object Label28: TLabel
+      Left = 2
+      Top = 2
+      Width = 195
+      Height = 13
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'TIPO ORDEN DE PAGO'
+      Color = clBlue
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Panel16: TPanel
+      Left = 2
+      Top = 74
+      Width = 195
+      Height = 29
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 1
+      object btnTipoCpb_Aceptar: TButton
+        Left = 7
+        Top = 6
+        Width = 75
+        Height = 19
+        Caption = 'Aceptar'
+        TabOrder = 0
+        OnClick = btnTipoCpb_AceptarClick
+      end
+      object btnTipoCpb_Cancelar: TButton
+        Left = 114
+        Top = 6
+        Width = 75
+        Height = 19
+        Caption = 'Cancelar'
+        TabOrder = 1
+        OnClick = btnTipoCpb_CancelarClick
+      end
+    end
+    object Panel1: TPanel
+      Left = 2
+      Top = 15
+      Width = 195
+      Height = 59
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 2
+      Caption = 'Panel1'
+      TabOrder = 0
+      object RadioGroupTipoComprobante: TRadioGroup
+        Left = 2
+        Top = 2
+        Width = 191
+        Height = 55
+        Align = alClient
+        ItemIndex = 0
+        Items.Strings = (
+          'ORDEN DE PAGO'
+          'ORDEN DE PAGO CTA. CTE.')
+        TabOrder = 0
+      end
+    end
+  end
   object PanelFondo: TPanel
     Left = 0
     Top = 19
@@ -31,6 +107,443 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    object PanelVer: TPanel
+      Left = 0
+      Top = 0
+      Width = 876
+      Height = 477
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 5
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object Splitter1: TSplitter
+        Left = 340
+        Top = 5
+        Width = 6
+        Height = 467
+        Align = alRight
+      end
+      object PanelListaCpb: TPanel
+        Left = 5
+        Top = 5
+        Width = 335
+        Height = 467
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGridListaCpb: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 335
+          Height = 467
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_VerCpb
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridListaCpbDrawColumnCell
+          Columns = <
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'FECHA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha'
+              Width = 87
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_CPB'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo'
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'PUNTO_VENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'PV'
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'NUMERO_CPB'
+              Title.Alignment = taCenter
+              Title.Caption = 'N'#250'mero'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUCURSAL'
+              Title.Alignment = taCenter
+              Title.Caption = 'Sucursal'
+              Width = 133
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PROVEEDOR'
+              Title.Alignment = taCenter
+              Title.Caption = 'Proveedor'
+              Width = 127
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CLIENTE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cliente'
+              Width = 108
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_TOTAL'
+              Title.Alignment = taCenter
+              Title.Caption = 'Importe'
+              Visible = True
+            end>
+        end
+      end
+      object PanelCpbActual: TPanel
+        Left = 346
+        Top = 5
+        Width = 525
+        Height = 467
+        Align = alRight
+        BevelOuter = bvNone
+        Constraints.MinWidth = 525
+        TabOrder = 1
+        object PanelCpbActual_FPago: TPanel
+          Left = 0
+          Top = 0
+          Width = 525
+          Height = 305
+          Align = alClient
+          BevelOuter = bvNone
+          TabOrder = 0
+          object Label27: TLabel
+            Left = 0
+            Top = 0
+            Width = 525
+            Height = 13
+            Align = alTop
+            Alignment = taCenter
+            Caption = 'FORMA DE PAGO'
+            Color = clBlue
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label25: TLabel
+            Left = 0
+            Top = 104
+            Width = 525
+            Height = 13
+            Align = alBottom
+            Alignment = taCenter
+            Caption = 'FACTURAS PAGADAS'
+            Color = clBlue
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object DBGridCpbActual_FPago: TDBGrid
+            Left = 0
+            Top = 13
+            Width = 525
+            Height = 91
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_VerCpb_Fpago
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            OnDrawColumnCell = DBGridCpbActual_FPagoDrawColumnCell
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'CTA_EGRESO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Cuenta'
+                Width = 170
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOMBTR_TIPO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Medio'
+                Width = 142
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_FECHA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fecha'
+                Width = 115
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_BANCO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Banco'
+                Width = 208
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_CHEQUE'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#250'm. Medio'
+                Width = 103
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Importe'
+                Visible = True
+              end>
+          end
+          object DBGridVerFacturas: TDBGrid
+            Left = 0
+            Top = 117
+            Width = 525
+            Height = 188
+            Align = alBottom
+            Color = 14606012
+            DataSource = DS_PagosFactura
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'FECHA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fecha'
+                Width = 109
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DESCRIPCION'
+                Title.Alignment = taCenter
+                Title.Caption = 'Factura'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_VENTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Importe'
+                Width = 101
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Pagado'
+                Width = 80
+                Visible = True
+              end>
+          end
+        end
+        object PanelCpbActual_Info: TPanel
+          Left = 0
+          Top = 305
+          Width = 525
+          Height = 162
+          Align = alBottom
+          BevelOuter = bvNone
+          BorderWidth = 2
+          TabOrder = 1
+          object GroupBoxCpbActual_Info: TGroupBox
+            Left = 2
+            Top = 2
+            Width = 521
+            Height = 158
+            Align = alClient
+            Caption = '  Datos Comprobante  '
+            TabOrder = 0
+            DesignSize = (
+              521
+              158)
+            object lblDatos_Proveedor: TLabel
+              Left = 8
+              Top = 19
+              Width = 64
+              Height = 13
+              Caption = 'Proveedor:'
+            end
+            object DBTxtDatos_Proveedor: TDBText
+              Left = 78
+              Top = 19
+              Width = 427
+              Height = 13
+              Color = 14342874
+              DataField = 'PROVEEDOR'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object lblDatos_Cliente: TLabel
+              Left = 27
+              Top = 19
+              Width = 45
+              Height = 13
+              Caption = 'Cliente:'
+            end
+            object DBTxtDatos_Cliente: TDBText
+              Left = 78
+              Top = 19
+              Width = 427
+              Height = 13
+              Color = 14342874
+              DataField = 'CLIENTE'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label30: TLabel
+              Left = 18
+              Top = 36
+              Width = 54
+              Height = 13
+              Caption = 'F. Carga:'
+            end
+            object DBText33: TDBText
+              Left = 78
+              Top = 36
+              Width = 80
+              Height = 13
+              Color = 14342874
+              DataField = 'FECHA'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object DBTxtFechaAnulado: TDBText
+              Left = 8
+              Top = 118
+              Width = 130
+              Height = 13
+              AutoSize = True
+              Color = 14342874
+              DataField = 'FECHA_ANULADO'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+              Visible = False
+            end
+            object lblAnulado: TLabel
+              Left = 8
+              Top = 132
+              Width = 105
+              Height = 23
+              Caption = 'ANULADO'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 4868863
+              Font.Height = -19
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Visible = False
+            end
+            object DBTxtMonto: TDBText
+              Left = 336
+              Top = 132
+              Width = 177
+              Height = 23
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              DataField = 'IMPORTE_TOTAL'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clNavy
+              Font.Height = -19
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label1: TLabel
+              Left = 467
+              Top = 118
+              Width = 46
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Importe'
+            end
+            object DBMemoCpbActual_Info: TDBMemo
+              Left = 8
+              Top = 61
+              Width = 505
+              Height = 55
+              Anchors = [akLeft, akTop, akRight]
+              DataField = 'OBSERVACION'
+              DataSource = DS_VerCpb
+              TabOrder = 0
+            end
+          end
+        end
+      end
+    end
     object PanelEditar: TPanel
       Left = 0
       Top = 0
@@ -92,20 +605,20 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           Transparent = False
         end
         object btnBuscarEmpresa: TSpeedButton
-          Left = 7
+          Left = 6
           Top = 11
           Width = 50
           Height = 50
-          Hint = 'Buscar una empresa para asociar al comprobante'
+          Hint = 'F1 - Buscar una empresa para asociar al comprobante'
           GroupIndex = 2
           OnClick = btnBuscarEmpresaClick
         end
         object btnBuscarPersona: TSpeedButton
-          Left = 7
+          Left = 6
           Top = 62
           Width = 50
           Height = 50
-          Hint = 'Buscar una persona para asociar al comprobante'
+          Hint = 'F2 - Buscar una persona para asociar al comprobante'
           GroupIndex = 2
           OnClick = btnBuscarPersonaClick
         end
@@ -745,26 +1258,43 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       end
       object PanelEditar_FPago: TPanel
         Left = 5
-        Top = 182
+        Top = 307
         Width = 866
-        Height = 290
+        Height = 165
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
+        object Label19: TLabel
+          Left = 0
+          Top = 0
+          Width = 866
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'FORMA DE PAGO (F7 = Agregar una Forma de Pago)'
+          Color = clBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
         object PanelEditar_FPagoInfo: TPanel
           Left = 0
-          Top = 249
+          Top = 137
           Width = 866
-          Height = 41
+          Height = 28
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
             866
-            41)
+            28)
           object Label29: TLabel
-            Left = 729
-            Top = 3
+            Left = 707
+            Top = 9
             Width = 28
             Height = 13
             Anchors = [akTop, akRight]
@@ -786,8 +1316,8 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
             OnClick = btnEliminarFPagoClick
           end
           object editTotalFinal: TEdit
-            Left = 728
-            Top = 17
+            Left = 737
+            Top = 6
             Width = 129
             Height = 19
             Anchors = [akTop, akRight]
@@ -809,9 +1339,9 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         end
         object DBGridEditar_Fpago: TDBGrid
           Left = 0
-          Top = 0
+          Top = 13
           Width = 866
-          Height = 249
+          Height = 124
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbFormaPago
@@ -824,18 +1354,8 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           TitleFont.Style = []
           OnColExit = DBGridEditar_FpagoColExit
           OnDrawColumnCell = DBGridEditar_FpagoDrawColumnCell
-          OnKeyPress = DBGridEditar_FpagoKeyPress
           OnKeyUp = DBGridEditar_FpagoKeyUp
           Columns = <
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = '_CuentaEgreso_Codigo'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'digo'
-              Width = 55
-              Visible = True
-            end
             item
               Expanded = False
               FieldName = '_CuentaEgreso_Nombre'
@@ -885,358 +1405,175 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
             end>
         end
       end
-    end
-    object PanelVer: TPanel
-      Left = 0
-      Top = 0
-      Width = 876
-      Height = 477
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 5
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      object Splitter1: TSplitter
-        Left = 340
-        Top = 5
-        Width = 6
-        Height = 467
-        Align = alRight
-      end
-      object PanelListaCpb: TPanel
+      object PanelFacturas: TPanel
         Left = 5
-        Top = 5
-        Width = 335
-        Height = 467
-        Align = alClient
+        Top = 182
+        Width = 866
+        Height = 125
+        Align = alTop
         BevelOuter = bvNone
-        TabOrder = 0
-        object DBGridListaCpb: TDBGrid
+        TabOrder = 2
+        object Label23: TLabel
           Left = 0
           Top = 0
-          Width = 335
-          Height = 467
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_VerCpb
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridListaCpbDrawColumnCell
-          Columns = <
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'FECHA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha'
-              Width = 87
-              Visible = True
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'PUNTO_VENTA'
-              Title.Alignment = taCenter
-              Title.Caption = 'PV'
-              Visible = True
-            end
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'NUMERO_CPB'
-              Title.Alignment = taCenter
-              Title.Caption = 'N'#250'mero'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SUCURSAL'
-              Title.Alignment = taCenter
-              Title.Caption = 'Sucursal'
-              Width = 133
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PROVEEDOR'
-              Title.Alignment = taCenter
-              Title.Caption = 'Proveedor'
-              Width = 127
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CLIENTE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cliente'
-              Width = 108
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_TOTAL'
-              Title.Alignment = taCenter
-              Title.Caption = 'Importe'
-              Visible = True
-            end>
+          Width = 866
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'FACTURAS A PAGAR (F3 = Agregar Factura / F4 = Quitar Factura)'
+          Color = clBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
         end
-      end
-      object PanelCpbActual: TPanel
-        Left = 346
-        Top = 5
-        Width = 525
-        Height = 467
-        Align = alRight
-        BevelOuter = bvNone
-        Constraints.MinWidth = 525
-        TabOrder = 1
-        object PanelCpbActual_FPago: TPanel
+        object PanelFacturasEditar: TPanel
           Left = 0
-          Top = 0
-          Width = 525
-          Height = 305
-          Align = alClient
+          Top = 13
+          Width = 65
+          Height = 112
+          Align = alLeft
           BevelOuter = bvNone
           TabOrder = 0
-          object DBGridCpbActual_FPago: TDBGrid
+          object btnAgregarFactura: TSpeedButton
+            Left = 7
+            Top = 3
+            Width = 50
+            Height = 50
+            Hint = 'F3 - Agregar una factura a cancelar'
+            GroupIndex = 2
+            OnClick = btnAgregarFacturaClick
+          end
+          object btnQuitarFactura: TSpeedButton
+            Left = 7
+            Top = 56
+            Width = 50
+            Height = 50
+            Hint = 'F4 - Quitar la factura seleccionada'
+            GroupIndex = 2
+            OnClick = btnQuitarFacturaClick
+          end
+        end
+        object PanelFacturasDatos: TPanel
+          Left = 65
+          Top = 13
+          Width = 801
+          Height = 112
+          Align = alClient
+          BevelOuter = bvNone
+          TabOrder = 1
+          object PanelFacturasInfo: TPanel
+            Left = 0
+            Top = 88
+            Width = 801
+            Height = 24
+            Align = alBottom
+            BevelOuter = bvNone
+            TabOrder = 0
+            DesignSize = (
+              801
+              24)
+            object Label24: TLabel
+              Left = 573
+              Top = 5
+              Width = 94
+              Height = 13
+              Anchors = [akTop, akRight]
+              Caption = 'Total a Cancelar'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object editTotalFacturas: TEdit
+              Left = 672
+              Top = 2
+              Width = 129
+              Height = 19
+              Anchors = [akTop, akRight]
+              AutoSize = False
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BiDiMode = bdRightToLeft
+              Color = 12189695
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentBiDiMode = False
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 0
+            end
+          end
+          object DBGridFacturas: TDBGrid
             Left = 0
             Top = 0
-            Width = 525
-            Height = 305
+            Width = 801
+            Height = 88
             Align = alClient
             Color = 14606012
-            DataSource = DS_VerCpb_Fpago
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            TabOrder = 0
+            DataSource = DS_Facturas
+            Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 1
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
-            OnDrawColumnCell = DBGridCpbActual_FPagoDrawColumnCell
+            OnDrawColumnCell = DBGridFacturasDrawColumnCell
             Columns = <
               item
+                Alignment = taCenter
                 Expanded = False
-                FieldName = 'CTA_EGRESO_CODIGO'
-                Title.Alignment = taCenter
-                Title.Caption = 'C'#243'd. Cta.'
-                Width = 70
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CTA_EGRESO'
-                Title.Alignment = taCenter
-                Title.Caption = 'Cuenta'
-                Width = 170
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'NOMBTR_TIPO'
-                Title.Alignment = taCenter
-                Title.Caption = 'Medio'
-                Width = 142
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MDCP_FECHA'
+                FieldName = '_fecha'
+                ReadOnly = True
                 Title.Alignment = taCenter
                 Title.Caption = 'Fecha'
-                Width = 115
+                Width = 112
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'MDCP_BANCO'
+                FieldName = '_descripcion'
+                ReadOnly = True
                 Title.Alignment = taCenter
-                Title.Caption = 'Banco'
-                Width = 208
+                Title.Caption = 'Factura'
+                Width = 389
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'MDCP_CHEQUE'
+                FieldName = '_importeComprobante'
+                ReadOnly = True
                 Title.Alignment = taCenter
-                Title.Caption = 'N'#250'm. Medio'
-                Width = 103
+                Title.Caption = 'Importe Factura'
+                Width = 143
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'IMPORTE'
+                FieldName = '_saldoComprobante'
+                ReadOnly = True
                 Title.Alignment = taCenter
-                Title.Caption = 'Importe'
+                Title.Caption = 'Saldo Factura'
+                Width = 155
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = '_importeCancelar'
+                Title.Alignment = taCenter
+                Title.Caption = 'Importe a Cancelar'
+                Width = 136
                 Visible = True
               end>
-          end
-        end
-        object PanelCpbActual_Info: TPanel
-          Left = 0
-          Top = 305
-          Width = 525
-          Height = 162
-          Align = alBottom
-          BevelOuter = bvNone
-          BorderWidth = 2
-          TabOrder = 1
-          object GroupBoxCpbActual_Info: TGroupBox
-            Left = 2
-            Top = 2
-            Width = 521
-            Height = 158
-            Align = alClient
-            Caption = '  Datos Comprobante  '
-            TabOrder = 0
-            DesignSize = (
-              521
-              158)
-            object lblDatos_Proveedor: TLabel
-              Left = 8
-              Top = 19
-              Width = 64
-              Height = 13
-              Caption = 'Proveedor:'
-            end
-            object DBTxtDatos_Proveedor: TDBText
-              Left = 78
-              Top = 19
-              Width = 427
-              Height = 13
-              Color = 14342874
-              DataField = 'PROVEEDOR'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object lblDatos_Cliente: TLabel
-              Left = 27
-              Top = 19
-              Width = 45
-              Height = 13
-              Caption = 'Cliente:'
-            end
-            object DBTxtDatos_Cliente: TDBText
-              Left = 78
-              Top = 19
-              Width = 427
-              Height = 13
-              Color = 14342874
-              DataField = 'CLIENTE'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object Label30: TLabel
-              Left = 18
-              Top = 36
-              Width = 54
-              Height = 13
-              Caption = 'F. Carga:'
-            end
-            object DBText33: TDBText
-              Left = 78
-              Top = 36
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object DBTxtFechaAnulado: TDBText
-              Left = 8
-              Top = 118
-              Width = 130
-              Height = 13
-              AutoSize = True
-              Color = 14342874
-              DataField = 'FECHA_ANULADO'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-              Visible = False
-            end
-            object lblAnulado: TLabel
-              Left = 8
-              Top = 132
-              Width = 105
-              Height = 23
-              Caption = 'ANULADO'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = 4868863
-              Font.Height = -19
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-              Visible = False
-            end
-            object DBTxtMonto: TDBText
-              Left = 336
-              Top = 132
-              Width = 177
-              Height = 23
-              Alignment = taRightJustify
-              Anchors = [akTop, akRight]
-              DataField = 'IMPORTE_TOTAL'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clNavy
-              Font.Height = -19
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object Label1: TLabel
-              Left = 467
-              Top = 118
-              Width = 46
-              Height = 13
-              Alignment = taRightJustify
-              Caption = 'Importe'
-            end
-            object DBMemoCpbActual_Info: TDBMemo
-              Left = 8
-              Top = 61
-              Width = 505
-              Height = 55
-              Anchors = [akLeft, akTop, akRight]
-              DataField = 'OBSERVACION'
-              DataSource = DS_VerCpb
-              TabOrder = 0
-            end
           end
         end
       end
@@ -1923,9 +2260,9 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       OnExecute = ABajaExecute
     end
     object AReactivar: TAction
-      Caption = 'AReactivar'
-      ShortCut = 117
-      OnExecute = AReactivarExecute
+      Caption = 'AFSiete'
+      ShortCut = 118
+      OnExecute = AFSieteExecute
     end
     object AGuardar: TAction
       Caption = 'AGuardar'
@@ -3148,7 +3485,13 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       
         '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
         'iente_cuil,'
-      '        est.descripcion as estado'
+      '        est.descripcion as estado,'
+      '        CASE'
+      '            when (cpb.id_tipo_cpb = 18) then '#39'ORDEN PAGO'#39
+      
+        '            when (cpb.id_tipo_cpb = 23) then '#39'ORDEN PAGO CTA CTE' +
+        #39
+      '        END AS nombre_cpb'
       'from comprobante cpb'
       'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
       'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
@@ -3156,7 +3499,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
         '_comp_estado)'
-      'where (cpb.id_tipo_cpb = 18)'
+      'where ((cpb.id_tipo_cpb = 18) or (cpb.id_tipo_cpb = 23))'
       'order by cpb.fecha desc'
       '')
     Params = <>
@@ -3242,6 +3585,11 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
     object ZQ_VerCpbNUMERO_CPB: TIntegerField
       FieldName = 'NUMERO_CPB'
       DisplayFormat = '00000000'
+    end
+    object ZQ_VerCpbNOMBRE_CPB: TStringField
+      FieldName = 'NOMBRE_CPB'
+      ReadOnly = True
+      Size = 18
     end
   end
   object ZQ_VerCpb_Fpago: TZQuery
@@ -3342,6 +3690,10 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         Visible = True
       end
       item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
         TituloColumna = 'PV'
         Visible = True
       end
@@ -3377,10 +3729,6 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
   object EKOrd_VerCpb_Fpago: TEKOrdenarGrilla
     Grilla = DBGridCpbActual_FPago
     Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Cta.'
-        Visible = True
-      end
       item
         TituloColumna = 'Cuenta'
         Visible = True
@@ -3921,7 +4269,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
-      'where cta.baja = '#39'N'#39)
+      'where cta.baja = '#39'N'#39' and cta.id_cuenta > 2')
     Params = <>
     Left = 365
     Top = 369
@@ -3967,7 +4315,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
     SQL.Strings = (
       'select fp.*'
       'from tipo_formapago fp'
-      'where fp.baja = '#39'N'#39)
+      'where fp.baja = '#39'N'#39' and fp.id_tipo_formapago > 2')
     Params = <>
     Left = 445
     Top = 369
@@ -4056,7 +4404,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       'select tipo.*'
       'from tipo_formapago tipo'
       'where tipo.baja = '#39'N'#39
-      'and tipo.id_tipo_formapago > 3')
+      'and tipo.id_tipo_formapago > 2')
     CampoBuscar = 'descripcion'
     CampoClave = 'id_tipo_formapago'
     TituloVentana = 'Buscar Medio'
@@ -4144,10 +4492,6 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
     Grilla = DBGridEditar_Fpago
     Filtros = <
       item
-        TituloColumna = 'C'#243'digo'
-        Visible = True
-      end
-      item
         TituloColumna = 'Cuenta'
         Visible = True
       end
@@ -4180,8 +4524,210 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
     Left = 141
     Top = 416
   end
+  object buscarImagen: TOpenPictureDialog
+    Filter = 'Bitmaps (*.bmp)|*.bmp|Jpg (*.jpg)|*.jpg'
+    Left = 768
+    Top = 144
+  end
+  object PopupMenuImagen: TPopupMenu
+    Left = 773
+    Top = 96
+    object popUp_VerImagen1: TMenuItem
+      Caption = 'Ver Imagen'
+      OnClick = popUp_VerImagen1Click
+    end
+    object popUp_CargarImagen1: TMenuItem
+      Caption = 'Cargar Imagen'
+      OnClick = cargarImagen
+    end
+  end
+  object CD_Facturas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 302
+    Top = 169
+    object CD_Facturas_idComprobante: TIntegerField
+      FieldName = '_idComprobante'
+    end
+    object CD_Facturas_idFactura: TIntegerField
+      FieldName = '_idFactura'
+    end
+    object CD_Facturas_idTipoComprobante: TIntegerField
+      FieldName = '_idTipoComprobante'
+    end
+    object CD_Facturas_fecha: TDateField
+      FieldName = '_fecha'
+    end
+    object CD_Facturas_descripcion: TStringField
+      FieldName = '_descripcion'
+      Size = 100
+    end
+    object CD_Facturas_importeComprobante: TFloatField
+      FieldName = '_importeComprobante'
+      currency = True
+    end
+    object CD_Facturas_importeCancelar: TFloatField
+      FieldName = '_importeCancelar'
+      OnValidate = CD_Facturas_importeCancelarValidate
+      currency = True
+    end
+    object CD_Facturas_saldoComprobante: TFloatField
+      FieldName = '_saldoComprobante'
+      currency = True
+    end
+  end
+  object DS_Facturas: TDataSource
+    DataSet = CD_Facturas
+    Left = 302
+    Top = 217
+  end
+  object EKSuma_Factura: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = '_importeCancelar'
+      end>
+    DataSet = CD_Facturas
+    SumListChanged = EKSuma_FacturaSumListChanged
+    Left = 390
+    Top = 169
+  end
+  object ZQ_PagosFactura: TZQuery
+    Connection = DM.Conexion
+    UpdateObject = ZU_PagosFactura
+    SQL.Strings = (
+      
+        'select pf.*, cast(c.fecha as Date) fecha, c.importe_venta, fp.im' +
+        'porte_real,'
+      '       '#39'FACTURA '#39'||c.codigo as Descripcion'
+      'from pago_facturas pf'
+      'left join comprobante c on (pf.id_factura = c.id_comprobante)'
+      
+        'left join comprobante_forma_pago fp on (c.id_comprobante = fp.id' +
+        '_comprobante)'
+      'where pf.id_comprobante = :id_comprobante'
+      '  and fp.cuenta_egreso = 1')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 486
+    Top = 169
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_PagosFacturaID_PAGO_FACTURAS: TIntegerField
+      FieldName = 'ID_PAGO_FACTURAS'
+    end
+    object ZQ_PagosFacturaID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_PagosFacturaID_FACTURA: TIntegerField
+      FieldName = 'ID_FACTURA'
+    end
+    object ZQ_PagosFacturaID_TIPO_COMPROBANTE: TIntegerField
+      FieldName = 'ID_TIPO_COMPROBANTE'
+    end
+    object ZQ_PagosFacturaIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+      currency = True
+    end
+    object ZQ_PagosFacturaFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_PagosFacturaIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      currency = True
+    end
+    object ZQ_PagosFacturaDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      ReadOnly = True
+      Size = 31
+    end
+    object ZQ_PagosFacturaIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+      currency = True
+    end
+  end
+  object ZU_PagosFactura: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM PAGO_FACTURAS'
+      'WHERE'
+      '  PAGO_FACTURAS.ID_PAGO_FACTURAS = :OLD_ID_PAGO_FACTURAS')
+    InsertSQL.Strings = (
+      'INSERT INTO PAGO_FACTURAS'
+      '  (ID_COMPROBANTE, ID_FACTURA, ID_TIPO_COMPROBANTE, IMPORTE)'
+      'VALUES'
+      '  (:ID_COMPROBANTE, :ID_FACTURA, :ID_TIPO_COMPROBANTE, :IMPORTE)')
+    ModifySQL.Strings = (
+      'UPDATE PAGO_FACTURAS SET'
+      '  ID_COMPROBANTE = :ID_COMPROBANTE,'
+      '  ID_FACTURA = :ID_FACTURA,'
+      '  ID_TIPO_COMPROBANTE = :ID_TIPO_COMPROBANTE,'
+      '  IMPORTE = :IMPORTE'
+      'WHERE'
+      '  PAGO_FACTURAS.ID_PAGO_FACTURAS = '
+      ':OLD_ID_PAGO_FACTURAS')
+    UseSequenceFieldForRefreshSQL = False
+    Left = 486
+    Top = 217
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_COMPROBANTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_FACTURA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_TIPO_COMPROBANTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPORTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_ID_PAGO_FACTURAS'
+        ParamType = ptUnknown
+      end>
+  end
+  object DS_PagosFactura: TDataSource
+    DataSet = ZQ_PagosFactura
+    Left = 578
+    Top = 169
+  end
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
+      item
+        Titulo = 'Tipo'
+        Campo = 'id_tipo_cpb'
+        Tabla = 'comprobante'
+        TipoCampo = EK_Numero
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'ORDEN PAGO'
+          'ORDEN PAGO CTA. CTE.')
+        TipoComboValoresReales.Strings = (
+          '18'
+          '23')
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
       item
         Titulo = 'Fecha'
         Campo = 'FECHA'
@@ -4259,7 +4805,13 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       
         '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
         'iente_cuil,'
-      '        est.descripcion as estado'
+      '        est.descripcion as estado,'
+      '        CASE'
+      '            when (cpb.id_tipo_cpb = 18) then '#39'ORDEN PAGO'#39
+      
+        '            when (cpb.id_tipo_cpb = 23) then '#39'ORDEN PAGO CTA CTE' +
+        #39
+      '        END AS nombre_cpb'
       'from comprobante cpb'
       'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
       'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
@@ -4267,7 +4819,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
         '_comp_estado)'
-      'where (cpb.id_tipo_cpb = 18)'
+      'where ((cpb.id_tipo_cpb = 18) or (cpb.id_tipo_cpb = 23))'
       'order by cpb.fecha desc')
     SQL_Select.Strings = (
       'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
@@ -4275,7 +4827,13 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       
         '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
         'iente_cuil,'
-      '        est.descripcion as estado')
+      '        est.descripcion as estado,'
+      '        CASE'
+      '            when (cpb.id_tipo_cpb = 18) then '#39'ORDEN PAGO'#39
+      
+        '            when (cpb.id_tipo_cpb = 23) then '#39'ORDEN PAGO CTA CTE' +
+        #39
+      '        END AS nombre_cpb')
     SQL_From.Strings = (
       'from comprobante cpb'
       'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
@@ -4285,28 +4843,49 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
         '_comp_estado)')
     SQL_Where.Strings = (
-      'where (cpb.id_tipo_cpb = 18)')
+      'where ((cpb.id_tipo_cpb = 18) or (cpb.id_tipo_cpb = 23))')
     SQL_Orden.Strings = (
       'order by cpb.fecha desc')
     UsarWhereOriginal = EK_Con_Where
     Left = 29
     Top = 272
   end
-  object buscarImagen: TOpenPictureDialog
-    Filter = 'Bitmaps (*.bmp)|*.bmp|Jpg (*.jpg)|*.jpg'
-    Left = 768
-    Top = 144
-  end
-  object PopupMenuImagen: TPopupMenu
-    Left = 773
+  object ZQ_ConfirmarOPCtaCte: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'execute procedure orden_pago_cta_cte_confirmar(:id_comprobante)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 517
     Top = 96
-    object popUp_VerImagen1: TMenuItem
-      Caption = 'Ver Imagen'
-      OnClick = popUp_VerImagen1Click
-    end
-    object popUp_CargarImagen1: TMenuItem
-      Caption = 'Cargar Imagen'
-      OnClick = cargarImagen
-    end
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+  end
+  object ZQ_AnularOPCtaCte: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'execute procedure orden_pago_cta_cte_anular(:id_comprobante)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 653
+    Top = 96
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
   end
 end

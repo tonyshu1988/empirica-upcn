@@ -688,6 +688,91 @@ type
     ZQ_PagosFacturaDESCRIPCION: TStringField;
     ZQ_PagosFacturaIMPORTE_REAL: TFloatField;
     EKDbSuma_Factura: TEKDbSuma;
+    RepOrdenPagoCtaCte: TQuickRep;
+    QRBand28: TQRBand;
+    QRLabel231: TQRLabel;
+    QRLabel232: TQRLabel;
+    QRBand29: TQRBand;
+    QRBand30: TQRBand;
+    QRChildBand8: TQRChildBand;
+    QRSubDetail7: TQRSubDetail;
+    QRSubDetail14: TQRSubDetail;
+    QRSubDetail15: TQRSubDetail;
+    QRDBText146: TQRDBText;
+    QRDBText147: TQRDBText;
+    QRDBText148: TQRDBText;
+    QRChildBand9: TQRChildBand;
+    QRLabel272: TQRLabel;
+    QRSubDetail16: TQRSubDetail;
+    QRlblOrdenPagoCtaCte_ImporteFacturas: TQRLabel;
+    QRChildBand10: TQRChildBand;
+    QRLabel274: TQRLabel;
+    QRSubDetail17: TQRSubDetail;
+    QRDBText149: TQRDBText;
+    QRDBText151: TQRDBText;
+    QRDBText152: TQRDBText;
+    QRDBText155: TQRDBText;
+    QRDBText156: TQRDBText;
+    QRBand31: TQRBand;
+    QRlblOrdenPagoCtaCte_PiePagina: TQRLabel;
+    QRSubDetail18: TQRSubDetail;
+    QRlblOrdenPagoCtaCte_ImporteFPago: TQRLabel;
+    QRChildBand17: TQRChildBand;
+    QRLabel283: TQRLabel;
+    QRLabel284: TQRLabel;
+    QRLabel285: TQRLabel;
+    QRShape8: TQRShape;
+    QRShape9: TQRShape;
+    QRLabel286: TQRLabel;
+    QRSubDetail19: TQRSubDetail;
+    QRDBText157: TQRDBText;
+    QRDBText158: TQRDBText;
+    QRDBText159: TQRDBText;
+    QRBand32: TQRBand;
+    RepOrdenPagoCtaCte_RENGLON4: TQRLabel;
+    RepOrdenPagoCtaCte_RENGLON3: TQRLabel;
+    RepOrdenPagoCtaCte_RENGLON2: TQRLabel;
+    RepOrdenPagoCtaCte_TITULO: TQRLabel;
+    QRShape10: TQRShape;
+    RepOrdenPagoCtaCte_RENGLON1: TQRLabel;
+    QRDBImage1: TQRDBImage;
+    QRLabel292: TQRLabel;
+    QRLabel293: TQRLabel;
+    QRLabel294: TQRLabel;
+    QRDBText160: TQRDBText;
+    QRLabel295: TQRLabel;
+    QRLabel296: TQRLabel;
+    QRDBText161: TQRDBText;
+    QRDBText162: TQRDBText;
+    QRLabel297: TQRLabel;
+    QRChildBand18: TQRChildBand;
+    QRLabel298: TQRLabel;
+    QRLabel299: TQRLabel;
+    QRLabel300: TQRLabel;
+    QRChildBand19: TQRChildBand;
+    QRLabel301: TQRLabel;
+    QRLabel302: TQRLabel;
+    QRLabel303: TQRLabel;
+    QRLabel304: TQRLabel;
+    QRLabel305: TQRLabel;
+    QRChildBand20: TQRChildBand;
+    QRLblOrdenPagoCtaCte_ImporteEnLetras: TQRLabel;
+    QRLabel307: TQRLabel;
+    QRLabel233: TQRLabel;
+    QRLabel234: TQRLabel;
+    QRLabel264: TQRLabel;
+    QRLabel265: TQRLabel;
+    QRLabel266: TQRLabel;
+    QRLabel267: TQRLabel;
+    QRLabel269: TQRLabel;
+    QRDBText136: TQRDBText;
+    QRDBText137: TQRDBText;
+    QRDBText138: TQRDBText;
+    QRDBText139: TQRDBText;
+    QRDBText140: TQRDBText;
+    QRDBText141: TQRDBText;
+    QRDBText143: TQRDBText;
+    QRLabel271: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
@@ -703,6 +788,7 @@ type
     procedure configRemito();
     procedure configOrdenPago();
     procedure configReciboCtaCte();
+    procedure configOrdenPagoCtaCte();
     procedure configDevolucion();
     procedure imprimir();
     function  generarPDF(): string;
@@ -778,7 +864,12 @@ begin
       CPB_RECIBO_CTA_CTE: begin //CPB_RECIBO_COBRO
                             configReciboCtaCte;
                             reporte:= RepReciboCtaCte;
-                            archivoPDF:= 'ReciboCuentaCorriente.pdf';
+                            archivoPDF:= 'ReciboCtaCte.pdf';
+                          end;
+      CPB_OP_CTA_CTE:     begin //CPB_RECIBO_COBRO
+                            configOrdenPagoCtaCte;
+                            reporte:= RepOrdenPagoCtaCte;
+                            archivoPDF:= 'OrdenPagoCtaCte.pdf';
                           end;
     end;
   end
@@ -837,6 +928,7 @@ begin
   if ZQ_Destino.IsEmpty then
     exit;
 
+  ZQ_PagosFactura.SQL[6]:= '  and fp.cuenta_ingreso = 1';
   ZQ_PagosFactura.Close;
   ZQ_PagosFactura.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
   ZQ_PagosFactura.Open;
@@ -851,6 +943,32 @@ begin
   QRlblReciboCtaCte_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   DM.VariablesComprobantes(RepReciboCtaCte);
   EKVistaPrevia.Reporte:= RepReciboCtaCte;
+end;
+
+
+//ORDEN PAGO CUENTA CORRIENTE
+procedure TFImpresion_Comprobantes.configOrdenPagoCtaCte();
+var
+  ImporteFPago, ImporteFactura: double;
+begin
+  if ZQ_Destino.IsEmpty then
+    exit;
+
+  ZQ_PagosFactura.SQL[6]:= '  and fp.cuenta_egreso = 1';
+  ZQ_PagosFactura.Close;
+  ZQ_PagosFactura.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+  ZQ_PagosFactura.Open;
+
+  ImporteFPago:= EKDbSumaFpago.SumCollection[0].sumvalue;
+  ImporteFactura:= EKDbSuma_Factura.SumCollection[0].sumvalue;
+  EKNumeroALetras.Numero := ImporteFPago;
+  QRLblOrdenPagoCtaCte_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+  QRlblOrdenPagoCtaCte_ImporteFacturas.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteFactura);
+  QRlblOrdenPagoCtaCte_ImporteFPago.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteFPago);
+
+  QRlblOrdenPagoCtaCte_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  DM.VariablesComprobantes(RepOrdenPagoCtaCte);
+  EKVistaPrevia.Reporte:= RepOrdenPagoCtaCte;
 end;
 
 
