@@ -198,7 +198,7 @@ begin
   facturaVenta:= Venta;
   facturaCompra:= Compra;
 
-  if facturaVenta then
+  if facturaVenta then //si es una factura de venta
   begin
     query:= ZQ_Factura_Venta;
     EKBuscarFacturaVenta.SQL_Where[4]:= 'and c.id_cliente = '+IntToStr(id);
@@ -207,7 +207,7 @@ begin
     if facturaCompra then
     begin
       query:= ZQ_Factura_Compra;
-      EKBuscarFacturaVenta.SQL_Where[4]:= 'and c.id_proveedor = '+IntToStr(id);
+      EKBuscarFacturaCompra.SQL_Where[4]:= 'and c.id_proveedor = '+IntToStr(id);
     end;
 
   if idActual <> id then

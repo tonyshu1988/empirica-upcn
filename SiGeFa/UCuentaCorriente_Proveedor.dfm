@@ -3779,12 +3779,12 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
     Width = 173
     Height = 105
     BevelInner = bvLowered
-    TabOrder = 5
+    TabOrder = 4
     object Label18: TLabel
       Left = 2
       Top = 2
       Width = 169
-      Height = 15
+      Height = 13
       Align = alTop
       Alignment = taCenter
       Caption = 'FILTRAR POR FECHA'
@@ -3971,10 +3971,6 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
           item
             BeginGroup = True
             Item = btnImprimir
-            Visible = True
-          end
-          item
-            Item = btnImprimirRecibo
             Visible = True
           end
           item

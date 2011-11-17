@@ -1,6 +1,6 @@
 object FABM_CPB_Recibo: TFABM_CPB_Recibo
-  Left = 249
-  Top = 109
+  Left = 199
+  Top = 137
   Width = 892
   Height = 586
   Caption = 'ABM Recibos'
@@ -23,6 +23,82 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object PanelTipoCpb: TPanel
+    Left = 305
+    Top = 192
+    Width = 197
+    Height = 105
+    BevelInner = bvLowered
+    TabOrder = 6
+    Visible = False
+    object Label28: TLabel
+      Left = 2
+      Top = 2
+      Width = 193
+      Height = 13
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'TIPO RECIBO'
+      Color = clBlue
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Panel16: TPanel
+      Left = 2
+      Top = 74
+      Width = 193
+      Height = 29
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 1
+      object btnTipoCpb_Aceptar: TButton
+        Left = 7
+        Top = 6
+        Width = 75
+        Height = 19
+        Caption = 'Aceptar'
+        TabOrder = 0
+        OnClick = btnTipoCpb_AceptarClick
+      end
+      object btnTipoCpb_Cancelar: TButton
+        Left = 114
+        Top = 6
+        Width = 75
+        Height = 19
+        Caption = 'Cancelar'
+        TabOrder = 1
+        OnClick = btnTipoCpb_CancelarClick
+      end
+    end
+    object Panel1: TPanel
+      Left = 2
+      Top = 15
+      Width = 193
+      Height = 59
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 2
+      Caption = 'Panel1'
+      TabOrder = 0
+      object RadioGroupTipoComprobante: TRadioGroup
+        Left = 2
+        Top = 2
+        Width = 189
+        Height = 55
+        Align = alClient
+        ItemIndex = 0
+        Items.Strings = (
+          'RECIBO DE PAGO'
+          'RECIBO CTA. CTE.')
+        TabOrder = 0
+      end
+    end
+  end
   object PanelFondo: TPanel
     Left = 0
     Top = 19
@@ -212,14 +288,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             TitleFont.Style = []
             OnDrawColumnCell = DBGridCpbActual_FPagoDrawColumnCell
             Columns = <
-              item
-                Expanded = False
-                FieldName = 'CTA_INGRESO_CODIGO'
-                Title.Alignment = taCenter
-                Title.Caption = 'C'#243'd. Cta.'
-                Width = 70
-                Visible = True
-              end
               item
                 Expanded = False
                 FieldName = 'CTA_INGRESO'
@@ -543,7 +611,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Top = 11
           Width = 50
           Height = 50
-          Hint = 'Buscar una empresa para asociar al comprobante'
+          Hint = 'F1 - Buscar una empresa para asociar al comprobante'
           GroupIndex = 2
           OnClick = btnBuscarEmpresaClick
         end
@@ -552,7 +620,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Top = 62
           Width = 50
           Height = 50
-          Hint = 'Buscar una persona para asociar al comprobante'
+          Hint = 'F2 - Buscar una persona para asociar al comprobante'
           GroupIndex = 2
           OnClick = btnBuscarPersonaClick
         end
@@ -1229,7 +1297,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Height = 13
           Align = alTop
           Alignment = taCenter
-          Caption = 'FORMA DE PAGO'
+          Caption = 'FORMA DE PAGO (F7 = Agregar una Forma de Pago)'
           Color = clBlue
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
@@ -1312,18 +1380,8 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           TitleFont.Style = []
           OnColExit = DBGridEditar_FpagoColExit
           OnDrawColumnCell = DBGridEditar_FpagoDrawColumnCell
-          OnKeyPress = DBGridEditar_FpagoKeyPress
           OnKeyUp = DBGridEditar_FpagoKeyUp
           Columns = <
-            item
-              Alignment = taRightJustify
-              Expanded = False
-              FieldName = '_CuentaIngreso_Codigo'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'digo'
-              Width = 55
-              Visible = True
-            end
             item
               Expanded = False
               FieldName = '_CuentaIngreso_Nombre'
@@ -1388,7 +1446,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Height = 13
           Align = alTop
           Alignment = taCenter
-          Caption = 'FACTURAS A PAGAR'
+          Caption = 'FACTURAS A PAGAR (F3 = Agregar Factura / F4 = Quitar Factura)'
           Color = clBlue
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
@@ -1411,7 +1469,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             Top = 3
             Width = 50
             Height = 50
-            Hint = 'Agregar una factura a cancelar'
+            Hint = 'F3 - Agregar una factura a cancelar'
             GroupIndex = 2
             OnClick = btnAgregarFacturaClick
           end
@@ -1420,7 +1478,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             Top = 56
             Width = 50
             Height = 50
-            Hint = 'Quitar la factura seleccionada'
+            Hint = 'F4 - Quitar la factura seleccionada'
             GroupIndex = 2
             OnClick = btnQuitarFacturaClick
           end
@@ -1614,82 +1672,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       Color = 10025203
       ParentColor = False
       TabOrder = 1
-    end
-  end
-  object PanelTipoCpb: TPanel
-    Left = 305
-    Top = 192
-    Width = 197
-    Height = 105
-    BevelInner = bvLowered
-    TabOrder = 6
-    Visible = False
-    object Label28: TLabel
-      Left = 2
-      Top = 2
-      Width = 193
-      Height = 13
-      Align = alTop
-      Alignment = taCenter
-      Caption = 'TIPO RECIBO'
-      Color = clBlue
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindow
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object Panel16: TPanel
-      Left = 2
-      Top = 74
-      Width = 193
-      Height = 29
-      Align = alBottom
-      BevelOuter = bvNone
-      TabOrder = 0
-      object btnTipoCpb_Aceptar: TButton
-        Left = 7
-        Top = 6
-        Width = 75
-        Height = 19
-        Caption = 'Aceptar'
-        TabOrder = 0
-        OnClick = btnTipoCpb_AceptarClick
-      end
-      object btnTipoCpb_Cancelar: TButton
-        Left = 114
-        Top = 6
-        Width = 75
-        Height = 19
-        Caption = 'Cancelar'
-        TabOrder = 1
-        OnClick = btnTipoCpb_CancelarClick
-      end
-    end
-    object Panel1: TPanel
-      Left = 2
-      Top = 15
-      Width = 193
-      Height = 59
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 2
-      Caption = 'Panel1'
-      TabOrder = 1
-      object RadioGroupTipoComprobante: TRadioGroup
-        Left = 2
-        Top = 2
-        Width = 189
-        Height = 55
-        Align = alClient
-        ItemIndex = 0
-        Items.Strings = (
-          'RECIBO DE PAGO'
-          'RECIBO CTA. CTE.')
-        TabOrder = 0
-      end
     end
   end
   object dxBarABM: TdxBarManager
@@ -2304,9 +2286,9 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       OnExecute = ABajaExecute
     end
     object AReactivar: TAction
-      Caption = 'AReactivar'
-      ShortCut = 117
-      OnExecute = AReactivarExecute
+      Caption = 'AFSiete'
+      ShortCut = 118
+      OnExecute = AFSieteExecute
     end
     object AGuardar: TAction
       Caption = 'AGuardar'
@@ -4187,7 +4169,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
-      'where cta.baja = '#39'N'#39)
+      'where cta.baja = '#39'N'#39' and cta.id_cuenta > 2')
     Params = <>
     Left = 373
     Top = 369
@@ -4233,7 +4215,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     SQL.Strings = (
       'select fp.*'
       'from tipo_formapago fp'
-      'where fp.baja = '#39'N'#39)
+      'where fp.baja = '#39'N'#39' and fp.id_tipo_formapago > 2')
     Params = <>
     Left = 445
     Top = 369
@@ -4322,7 +4304,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       'select tipo.*'
       'from tipo_formapago tipo'
       'where tipo.baja = '#39'N'#39
-      'and tipo.id_tipo_formapago > 3')
+      'and tipo.id_tipo_formapago > 2')
     CampoBuscar = 'descripcion'
     CampoClave = 'id_tipo_formapago'
     TituloVentana = 'Buscar Medio'
@@ -4409,10 +4391,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
   object EKOrd_EditarFpago: TEKOrdenarGrilla
     Grilla = DBGridEditar_Fpago
     Filtros = <
-      item
-        TituloColumna = 'C'#243'digo'
-        Visible = True
-      end
       item
         TituloColumna = 'Cuenta'
         Visible = True
@@ -4534,10 +4512,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
   object EKOrd_VerCpb_Fpago: TEKOrdenarGrilla
     Grilla = DBGridCpbActual_FPago
     Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Cta.'
-        Visible = True
-      end
       item
         TituloColumna = 'Cuenta'
         Visible = True

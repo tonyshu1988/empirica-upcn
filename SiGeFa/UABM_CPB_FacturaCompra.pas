@@ -1359,8 +1359,11 @@ end;
 
 
 procedure TFABM_CPB_FacturaCompra.btnActualizarPreciosClick(Sender: TObject);
+var
+  recno, estado: Integer;
 begin
-  if ZQ_VerCpb_Producto.isEmpty then
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ZQ_VerCpb_Producto.isEmpty or (estado = ESTADO_SIN_CONFIRMAR) or (estado = ESTADO_ANULADO) then
     exit;
 
   ZQ_ActualizarLista.Close;
