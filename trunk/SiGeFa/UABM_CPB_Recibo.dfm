@@ -1,6 +1,6 @@
 object FABM_CPB_Recibo: TFABM_CPB_Recibo
-  Left = 199
-  Top = 137
+  Left = 307
+  Top = 170
   Width = 892
   Height = 586
   Caption = 'ABM Recibos'
@@ -612,7 +612,17 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Width = 50
           Height = 50
           Hint = 'F1 - Buscar una empresa para asociar al comprobante'
-          GroupIndex = 2
+          GroupIndex = 1
+          Caption = '(F1)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Layout = blGlyphTop
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           OnClick = btnBuscarEmpresaClick
         end
         object btnBuscarPersona: TSpeedButton
@@ -621,7 +631,17 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Width = 50
           Height = 50
           Hint = 'F2 - Buscar una persona para asociar al comprobante'
-          GroupIndex = 2
+          GroupIndex = 1
+          Caption = '(F2)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Layout = blGlyphTop
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           OnClick = btnBuscarPersonaClick
         end
         object Label12: TLabel
@@ -1471,6 +1491,16 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             Height = 50
             Hint = 'F3 - Agregar una factura a cancelar'
             GroupIndex = 2
+            Caption = '(F3)'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -8
+            Font.Name = 'Verdana'
+            Font.Style = []
+            Layout = blGlyphTop
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
             OnClick = btnAgregarFacturaClick
           end
           object btnQuitarFactura: TSpeedButton
@@ -1480,6 +1510,16 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             Height = 50
             Hint = 'F4 - Quitar la factura seleccionada'
             GroupIndex = 2
+            Caption = '(F4)'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -8
+            Font.Name = 'Verdana'
+            Font.Style = []
+            Layout = blGlyphTop
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
             OnClick = btnQuitarFacturaClick
           end
         end
