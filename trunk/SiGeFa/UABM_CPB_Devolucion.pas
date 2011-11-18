@@ -653,7 +653,7 @@ begin
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
-  ImageListEntidad.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar persona
+  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
 
   EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
@@ -1066,9 +1066,17 @@ begin
 end;
 
 procedure TFABM_CPB_Devolucion.ANuevoExecute(Sender: TObject);
-begin
-  if btnNuevo.Enabled then
-    btnNuevo.Click;
+begin //F2
+  if estadoPantalla = VIENDO then
+  begin
+    if btnNuevo.Enabled then
+      btnNuevo.Click;
+  end
+  else
+  begin
+    if btnBuscarPersona.Enabled then
+      btnBuscarPersona.Click;
+  end;
 end;
 
 procedure TFABM_CPB_Devolucion.AModificarExecute(Sender: TObject);

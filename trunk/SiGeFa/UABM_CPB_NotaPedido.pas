@@ -594,8 +594,8 @@ begin
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
-  ImageListEntidad.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
-  ImageListEntidad.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
 
   FPrincipal.Iconos_Menu_32.GetBitmap(10, btnAplicarActualizar.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarActualizar.Glyph);
@@ -870,15 +870,31 @@ end;
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
 procedure TFABM_CPB_NotaPedido.ABuscarExecute(Sender: TObject);
-begin
-  if btnBuscar.Enabled then
-    btnBuscar.Click;
+begin //F1
+  if estadoPantalla = VIENDO then
+  begin
+    if btnBuscar.Enabled then
+      btnBuscar.Click
+  end
+  else
+  begin
+    if btnBuscarEmpresa.Enabled then
+      btnBuscarEmpresa.Click;
+  end;
 end;
 
 procedure TFABM_CPB_NotaPedido.ANuevoExecute(Sender: TObject);
-begin
-  if btnNuevo.Enabled then
-    btnNuevo.Click;
+begin //F2
+  if estadoPantalla = VIENDO then
+  begin
+    if btnNuevo.Enabled then
+      btnNuevo.Click;
+  end
+  else
+  begin
+    if btnBuscarPersona.Enabled then
+      btnBuscarPersona.Click;
+  end;
 end;
 
 procedure TFABM_CPB_NotaPedido.AModificarExecute(Sender: TObject);

@@ -478,8 +478,8 @@ begin
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
-  ImageListEntidad.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
-  ImageListEntidad.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
 
   //abro todos los recibos del sistema
   EKBuscar.Abrir;
@@ -729,15 +729,31 @@ end;
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
 procedure TFABM_CPB_Remito.ABuscarExecute(Sender: TObject);
-begin
-  if btnBuscar.Enabled then
-    btnBuscar.Click;
+begin //F1
+  if estadoPantalla = VIENDO then
+  begin
+    if btnBuscar.Enabled then
+      btnBuscar.Click
+  end
+  else
+  begin
+    if btnBuscarEmpresa.Enabled then
+      btnBuscarEmpresa.Click;
+  end;
 end;
 
 procedure TFABM_CPB_Remito.ANuevoExecute(Sender: TObject);
-begin
-  if btnNuevo.Enabled then
-    btnNuevo.Click;
+begin //F2
+  if estadoPantalla = VIENDO then
+  begin
+    if btnNuevo.Enabled then
+      btnNuevo.Click;
+  end
+  else
+  begin
+    if btnBuscarPersona.Enabled then
+      btnBuscarPersona.Click;
+  end;
 end;
 
 procedure TFABM_CPB_Remito.AModificarExecute(Sender: TObject);
