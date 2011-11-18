@@ -758,6 +758,14 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Height = 50
           Hint = 'Buscar una persona para asociar al comprobante'
           GroupIndex = 2
+          Caption = '(F2)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Layout = blGlyphTop
+          ParentFont = False
           OnClick = btnBuscarPersonaClick
         end
         object Label12: TLabel

@@ -479,11 +479,11 @@ begin
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
-  ImageListEntidad.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
-  ImageListEntidad.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
 
-  FPrincipal.Iconos_Menu_32.GetBitmap(14, btnAgregarFactura.Glyph); //cargo la imagen del boton buscar entidad
-  FPrincipal.Iconos_Menu_32.GetBitmap(15, btnQuitarFactura.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(2, btnAgregarFactura.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(3, btnQuitarFactura.Glyph); //cargo la imagen del boton buscar entidad
 
   //abro todos los recibos del sistema
   EKBuscar.Abrir;

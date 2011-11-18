@@ -611,6 +611,14 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           Height = 50
           Hint = 'F1 - Buscar una empresa para asociar al comprobante'
           GroupIndex = 2
+          Caption = '(F1)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Layout = blGlyphTop
+          ParentFont = False
           OnClick = btnBuscarEmpresaClick
         end
         object btnBuscarPersona: TSpeedButton
@@ -620,6 +628,14 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           Height = 50
           Hint = 'F2 - Buscar una persona para asociar al comprobante'
           GroupIndex = 2
+          Caption = '(F2)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Layout = blGlyphTop
+          ParentFont = False
           OnClick = btnBuscarPersonaClick
         end
         object Label12: TLabel
@@ -1445,6 +1461,14 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
             Height = 50
             Hint = 'F3 - Agregar una factura a cancelar'
             GroupIndex = 2
+            Caption = '(F3)'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -8
+            Font.Name = 'Verdana'
+            Font.Style = []
+            Layout = blGlyphTop
+            ParentFont = False
             OnClick = btnAgregarFacturaClick
           end
           object btnQuitarFactura: TSpeedButton
@@ -1454,6 +1478,14 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
             Height = 50
             Hint = 'F4 - Quitar la factura seleccionada'
             GroupIndex = 2
+            Caption = '(F4)'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -8
+            Font.Name = 'Verdana'
+            Font.Style = []
+            Layout = blGlyphTop
+            ParentFont = False
             OnClick = btnQuitarFacturaClick
           end
         end

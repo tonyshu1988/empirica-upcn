@@ -493,7 +493,7 @@ end;
 
 procedure TFABM_CPB_Recibo.btnSalirClick(Sender: TObject);
 begin
-  Close;
+  close;
 end;
 
 

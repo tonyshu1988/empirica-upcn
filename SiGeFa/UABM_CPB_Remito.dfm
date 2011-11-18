@@ -738,6 +738,14 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
           Height = 50
           Hint = 'Buscar una empresa para asociar al comprobante'
           GroupIndex = 2
+          Caption = '(F1)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Layout = blGlyphTop
+          ParentFont = False
           OnClick = btnBuscarEmpresaClick
         end
         object btnBuscarPersona: TSpeedButton
@@ -747,6 +755,14 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
           Height = 50
           Hint = 'Buscar una persona para asociar al comprobante'
           GroupIndex = 2
+          Caption = '(F2)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Layout = blGlyphTop
+          ParentFont = False
           OnClick = btnBuscarPersonaClick
         end
         object Label12: TLabel
