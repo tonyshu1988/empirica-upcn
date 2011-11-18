@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 181
-  Top = 59
+  Left = 409
+  Top = 235
   Width = 1032
   Height = 700
   Caption = 'Cajero SiGeFa'
@@ -7721,6 +7721,10 @@ object FCajero: TFCajero
     end
     object ZQ_TipoIVACOEFICIENTE: TFloatField
       FieldName = 'COEFICIENTE'
+    end
+    object ZQ_TipoIVAVERIFICA_CUIT: TStringField
+      FieldName = 'VERIFICA_CUIT'
+      Size = 1
     end
   end
   object EKListadoIVA: TEKListadoSQL
