@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 270
-  Top = 74
+  Left = 448
+  Top = 272
   Width = 966
   Height = 656
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -1581,8 +1581,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'select *'
       'from tipo_IVA')
     Params = <>
-    Left = 525
-    Top = 96
+    Left = 661
+    Top = 200
     object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True
@@ -1681,6 +1681,38 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     object ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField
       FieldName = 'COMPROBANTE_RENGLON4'
       Size = 50
+    end
+  end
+  object ZQ_Fiscal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select'
+      '    (case'
+      '    when sum(cd.importe_if) is Null then 0'
+      '    else sum(cd.importe_if)'
+      '    end ) importe_fiscal'
+      'from comprobante c'
+      
+        'join comprobante_detalle cd on (c.id_comprobante=cd.id_comproban' +
+        'te)'
+      'where (c.id_comprobante=:id)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    Left = 540
+    Top = 294
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object ZQ_FiscalIMPORTE_FISCAL: TFloatField
+      FieldName = 'IMPORTE_FISCAL'
+      ReadOnly = True
     end
   end
 end

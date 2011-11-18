@@ -125,6 +125,8 @@ type
     ZQ_ComprobantePUNTO_VENTA: TIntegerField;
     ZQ_ComprobanteNUMERO_CPB: TIntegerField;
     btVer: TdxBarLargeButton;
+    ZQ_Fiscal: TZQuery;
+    ZQ_FiscalIMPORTE_FISCAL: TFloatField;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
@@ -326,7 +328,11 @@ end;
 
 procedure TFReimpresionComprobantes.btnImprimirClick(Sender: TObject);
 begin
-if ZQ_ComprobantePUNTO_VENTA.IsNull then
+ZQ_Fiscal.Close;
+ZQ_Fiscal.ParamByName('id').AsInteger:=ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+ZQ_Fiscal.open;
+
+if (ZQ_ComprobantePUNTO_VENTA.IsNull)and(ZQ_FiscalIMPORTE_FISCAL.AsFloat<=0) then
  begin
      Application.MessageBox(PChar('No puede reimprimir un Comprobante no fiscal.'),'Reimpresión de Comprobantes',MB_OK+MB_ICONINFORMATION);
      Exit;
@@ -334,7 +340,10 @@ if ZQ_ComprobantePUNTO_VENTA.IsNull then
 
 leerSistemaIni();
 if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:'+ZQ_ComprobanteCODIGO.AsString+' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
-    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l '+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -i '+Impresora+' -c '+'F'), nil, SW_SHOWNORMAL)
+  begin
+    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l '+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -i '+Impresora+' -c '+'F'), nil, SW_SHOWNORMAL);
+    ZQ_Comprobante.Refresh;
+  end
 end;
 
 procedure TFReimpresionComprobantes.DBGridComprobantesDrawColumnCell(
