@@ -538,6 +538,7 @@ type
     ZQ_PreventaProductosIMPORTE_IF: TFloatField;
     ZQ_PreventaProductosIMPORTE_IF_SINIVA: TFloatField;
     ZQ_PreventaProductosIMPORTE_IVA_IF: TFloatField;
+    ZQ_TipoIVAVERIFICA_CUIT: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -1755,9 +1756,9 @@ begin
    end;
 
 
-  if ((ZQ_TipoIVALETRA.AsString='A')and(CD_Comprobantepers_cuit.AsString='')) then
+  if ((ZQ_TipoIVAVERIFICA_CUIT.AsString='S')and(not EsCUITValido(CD_Comprobantepers_cuit.AsString))) then
    begin
-    Application.MessageBox('Debe cargar el CUIT/CUIL al cliente seleccionado, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El CUIT/CUIL del cliente seleccionado es incorrecto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
     result := false;
     exit;
    end;
