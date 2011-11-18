@@ -158,7 +158,7 @@ begin
       UserName := 'login';
       FirstName := 'Usuario de logeo';
 
-      Password := 'jumale03';
+      Password := '354875642';
       AddUser;
     except
     begin
