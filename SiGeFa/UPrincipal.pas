@@ -151,6 +151,7 @@ type
     Debugging1: TMenuItem;
     AReimpresionComprob: TAction;
     ReimpresindeComprobantes1: TMenuItem;
+    EKImage_ABM_Comprobantes: TEKImageList32;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -246,6 +247,7 @@ procedure TFPrincipal.FormCreate(Sender: TObject);
 var
   i: integer;
   pertenece: boolean;
+  cerrarSistema: integer; //si es 1 se cierra el sistema
 begin
   pertenece:= false;
   SUCURSAL_LOGUEO:= -1;
@@ -287,6 +289,23 @@ begin
   activofocus:= colorActivoFocus.Color;  //AZUL OSCURO = color del registro seleccionado activo
   resaltado:= colorResaltado.Color; //
   resaltadofocus:= colorResaltadoFocus.Color; //
+
+  //valido si la demo no esta vencida
+  cerrarSistema:= 0;
+  if dm.EKModelo.iniciar_transaccion('VALIDAR', [dm.ZQ_DemoSistema]) then
+  begin
+    dm.ZQ_DemoSistema.Close;
+    dm.ZQ_DemoSistema.Open;
+    cerrarSistema:= dm.ZQ_DemoSistemaRESULTADO.AsInteger;
+
+    if not (dm.EKModelo.finalizar_transaccion('VALIDAR')) then
+      dm.EKModelo.cancelar_transaccion('VALIDAR');
+  end;
+  if cerrarSistema = 1 then
+  begin
+    ShowMessage('Atención, la DEMO del sistema a vencido. Para seguir utilizandolo contactese a "contacto.empirica@gmail.com"');
+    Application.Terminate;
+  end;
 end;
 
 

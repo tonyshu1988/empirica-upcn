@@ -121,6 +121,7 @@ type
     procedure ZQ_VariablesAfterScroll(DataSet: TDataSet);
     procedure panelColorClick(Sender: TObject);
     procedure btNuevoClick(Sender: TObject);
+    procedure Panel1DblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -243,6 +244,8 @@ begin
   dm.EKModelo.abrir(ZQ_Logo);
 
   dm.EKModelo.abrir(ZQ_Variables);
+  ZQ_Variables.Filter:= format('clave <> %s', [QuotedStr('demoSistema')]);
+  ZQ_Variables.Filtered:= true;
 
   habilitarCarga(false);
 end;
@@ -335,6 +338,11 @@ procedure TFConfiguracion.btNuevoClick(Sender: TObject);
 begin
   ZQ_Variables.Append;
   DBEdit1.SetFocus;
+end;
+
+procedure TFConfiguracion.Panel1DblClick(Sender: TObject);
+begin
+  ZQ_Variables.Filtered:= not ZQ_Variables.Filtered; 
 end;
 
 end.

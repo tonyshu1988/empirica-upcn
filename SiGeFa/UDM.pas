@@ -75,6 +75,8 @@ type
     ZQ_Configuracion_VariablesDESCRIPCION: TStringField;
     ZQ_Configuracion_VariablesGRAFICO: TBlobField;
     DS_Sucursal: TDataSource;
+    ZQ_DemoSistema: TZQuery;
+    ZQ_DemoSistemaRESULTADO: TIntegerField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);

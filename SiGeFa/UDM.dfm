@@ -1,13 +1,13 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 571
-  Top = 279
-  Height = 378
+  Left = 555
+  Top = 171
+  Height = 436
   Width = 350
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFa.FDB'
+    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFa SPECIAL.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -1823,8 +1823,8 @@ object DM: TDM
       'select *'
       'from configuracion_variables')
     Params = <>
-    Left = 238
-    Top = 258
+    Left = 222
+    Top = 266
     object ZQ_Configuracion_VariablesCLAVE: TStringField
       FieldName = 'CLAVE'
       Required = True
@@ -1860,5 +1860,18 @@ object DM: TDM
     DataSet = ZQ_Sucursal
     Left = 280
     Top = 200
+  end
+  object ZQ_DemoSistema: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select resultado'
+      'from validar_demo_sistema')
+    Params = <>
+    Left = 40
+    Top = 328
+    object ZQ_DemoSistemaRESULTADO: TIntegerField
+      FieldName = 'RESULTADO'
+      ReadOnly = True
+    end
   end
 end

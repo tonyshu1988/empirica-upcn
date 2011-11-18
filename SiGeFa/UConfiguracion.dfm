@@ -24,7 +24,7 @@ object FConfiguracion: TFConfiguracion
     Top = 0
     Width = 539
     Height = 506
-    ActivePage = TabSheetGeneral
+    ActivePage = TabSheetVariables
     Align = alClient
     TabOrder = 4
     object TabSheetGeneral: TTabSheet
@@ -657,6 +657,7 @@ object FConfiguracion: TFConfiguracion
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 1
+          OnDblClick = Panel1DblClick
         end
       end
     end
