@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 409
-  Top = 235
+  Left = 178
+  Top = 75
   Width = 1032
   Height = 700
   Caption = 'Cajero SiGeFa'
@@ -7374,8 +7374,8 @@ object FCajero: TFCajero
         Name = 'prod'
         ParamType = ptUnknown
       end>
-    Left = 240
-    Top = 240
+    Left = 216
+    Top = 232
     ParamData = <
       item
         DataType = ftUnknown

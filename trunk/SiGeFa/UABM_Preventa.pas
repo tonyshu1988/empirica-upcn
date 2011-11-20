@@ -338,6 +338,8 @@ type
     edPorcDctoTotal: TDBEdit;
     Label7: TLabel;
     Label11: TLabel;
+    ZQ_TipoIVACOEFICIENTE: TFloatField;
+    ZQ_TipoIVAVERIFICA_CUIT: TStringField;
     procedure btBuscProdClick(Sender: TObject);
     procedure VerLectorCB(sino: Boolean);
     procedure IdentificarCodigo();
@@ -1335,9 +1337,9 @@ begin
    end;
 
 
-  if ((ZQ_TipoIVALETRA.AsString='A')and(CD_Comprobantepers_cuit.AsString='')) then
+  if ((ZQ_TipoIVAVERIFICA_CUIT.AsString='S')and(not EsCUITValido(CD_Comprobantepers_cuit.AsString))) then
    begin
-    Application.MessageBox('Debe cargar el CUIT/CUIL al cliente seleccionado, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El CUIT/CUIL del cliente seleccionado es incorrecto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
     result := false;
     exit;
    end;
