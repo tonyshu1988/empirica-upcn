@@ -6915,6 +6915,13 @@ object FABM_Preventa: TFABM_Preventa
       FieldName = 'FISCAL'
       Size = 1
     end
+    object ZQ_TipoIVACOEFICIENTE: TFloatField
+      FieldName = 'COEFICIENTE'
+    end
+    object ZQ_TipoIVAVERIFICA_CUIT: TStringField
+      FieldName = 'VERIFICA_CUIT'
+      Size = 1
+    end
   end
   object CD_Comprobante: TClientDataSet
     Aggregates = <>
