@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 178
-  Top = 75
+  Left = 248
+  Top = 128
   Width = 1032
   Height = 700
   Caption = 'Cajero SiGeFa'
@@ -8692,6 +8692,18 @@ object FCajero: TFCajero
       Caption = 'Quitar FP'
       ImageIndex = 12
       OnClick = menuQuitarFPClick
+    end
+  end
+  object ZQ_ColsPrecios: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select distinct tfp.columna_precio'
+      'from tipo_formapago tfp')
+    Params = <>
+    Left = 851
+    Top = 441
+    object ZQ_ColsPreciosCOLUMNA_PRECIO: TIntegerField
+      FieldName = 'COLUMNA_PRECIO'
     end
   end
 end

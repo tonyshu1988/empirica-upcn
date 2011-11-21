@@ -539,6 +539,8 @@ type
     ZQ_PreventaProductosIMPORTE_IF_SINIVA: TFloatField;
     ZQ_PreventaProductosIMPORTE_IVA_IF: TFloatField;
     ZQ_TipoIVAVERIFICA_CUIT: TStringField;
+    ZQ_ColsPrecios: TZQuery;
+    ZQ_ColsPreciosCOLUMNA_PRECIO: TIntegerField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -1190,6 +1192,8 @@ end;
 
 
 function TFCajero.agregar(detalle: string;prod:integer):Boolean;
+var
+i:Integer;
 begin
  Result:=False;
  if not(ProductoYaCargado(prod)) then
@@ -1208,11 +1212,21 @@ begin
         CD_DetalleFacturaIMPORTE_IVA.AsFloat:=CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
         CD_DetalleFacturaID_PROD_STOCK.AsInteger:=ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
         CD_DetalleFacturaimporte_original.AsFloat:=CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
-        CD_DetalleFacturaPRECIO1.AsFloat:=ZQ_ProductosPRECIO1.AsFloat;
-        CD_DetalleFacturaPRECIO2.AsFloat:=ZQ_ProductosPRECIO2.AsFloat;
-        CD_DetalleFacturaPRECIO3.AsFloat:=ZQ_ProductosPRECIO3.AsFloat;
-        CD_DetalleFacturaPRECIO4.AsFloat:=ZQ_ProductosPRECIO4.AsFloat;
-        CD_DetalleFacturaPRECIO5.AsFloat:=ZQ_ProductosPRECIO5.AsFloat;
+
+        // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio=0 toma el PRECIO_VENTA)
+        ZQ_ColsPrecios.Close;
+        ZQ_ColsPrecios.Open;
+        for i:=1  to 5 do
+         begin
+            ZQ_ColsPrecios.Filtered:=False;
+            ZQ_ColsPrecios.Filter:=Format('COLUMNA_PRECIO=%d',[i]);
+            ZQ_ColsPrecios.Filtered:=True;
+
+            if ZQ_ColsPreciosCOLUMNA_PRECIO.AsInteger=i then
+             CD_DetalleFactura.FieldByName(Format('PRECIO%d',[i])).AsFloat:= ZQ_Productos.FieldByName(Format('PRECIO%d',[i])).AsFloat
+            else
+             CD_DetalleFactura.FieldByName(Format('PRECIO%d',[i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
+         end;
 
         modoEscrituraProd();
         Result:=True;
@@ -2105,6 +2119,8 @@ end;
 
 
 procedure TFCajero.cargarPreventa;
+var
+i:Integer;
 begin
  ZQ_PreventaProductos.Close;
  ZQ_PreventaProductos.ParamByName('comprob').AsInteger:=vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
@@ -2135,11 +2151,24 @@ begin
         CD_DetalleFacturaID_PROD_STOCK.AsInteger:=ZQ_PreventaProductosID_STOCK_PRODUCTO.AsInteger;
         CD_DetalleFacturaIMPORTE_VENTA.AsFloat:=ZQ_PreventaProductosIMPORTE_VENTA.AsFloat;
         CD_DetalleFacturaID_PROD_STOCK.AsInteger:=ZQ_PreventaProductosID_STOCK_PRODUCTO.AsInteger;
-        CD_DetalleFacturaPRECIO1.AsFloat:=ZQ_ProductosPRECIO1.AsFloat;
-        CD_DetalleFacturaPRECIO2.AsFloat:=ZQ_ProductosPRECIO2.AsFloat;
-        CD_DetalleFacturaPRECIO3.AsFloat:=ZQ_ProductosPRECIO3.AsFloat;
-        CD_DetalleFacturaPRECIO4.AsFloat:=ZQ_ProductosPRECIO4.AsFloat;
-        CD_DetalleFacturaPRECIO5.AsFloat:=ZQ_ProductosPRECIO5.AsFloat;
+
+
+         // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio)
+        ZQ_ColsPrecios.Close;
+        ZQ_ColsPrecios.Open;
+        for i:=1  to 5 do
+         begin
+            ZQ_ColsPrecios.Filtered:=False;
+            ZQ_ColsPrecios.Filter:=Format('COLUMNA_PRECIO=%d',[i]);
+            ZQ_ColsPrecios.Filtered:=True;
+
+            if ZQ_ColsPreciosCOLUMNA_PRECIO.AsInteger=i then
+             CD_DetalleFactura.FieldByName(Format('PRECIO%d',[i])).AsFloat:= ZQ_Productos.FieldByName(Format('PRECIO%d',[i])).AsFloat
+            else
+             CD_DetalleFactura.FieldByName(Format('PRECIO%d',[i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
+         end;
+
+
         CD_DetalleFacturaimporte_original.AsFloat:=ZQ_ProductosPRECIO_VENTA.AsFloat;
 
         CD_DetalleFactura.Post;
