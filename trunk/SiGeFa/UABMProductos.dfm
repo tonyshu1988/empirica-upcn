@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 192
-  Top = 14
+  Left = 363
+  Top = 181
   Width = 1024
   Height = 768
   Caption = 'FABMProductos'
@@ -23,15 +23,15 @@ object FABMProductos: TFABMProductos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1016
-    Height = 684
+    Width = 1008
+    Height = 678
     Align = alClient
     Caption = 'PContenedor'
     TabOrder = 4
     object Splitter1: TSplitter
       Left = 1
-      Top = 222
-      Width = 1014
+      Top = 497
+      Width = 1006
       Height = 16
       Cursor = crVSplit
       Align = alTop
@@ -40,17 +40,66 @@ object FABMProductos: TFABMProductos
     object PCabeceraProducto: TPanel
       Left = 1
       Top = 1
-      Width = 1014
-      Height = 221
+      Width = 1006
+      Height = 496
       Align = alTop
       TabOrder = 0
       DesignSize = (
-        1014
-        221)
+        1006
+        496)
+      object panelImprimirListado: TPanel
+        Left = 386
+        Top = 306
+        Width = 233
+        Height = 121
+        Anchors = []
+        BorderWidth = 6
+        TabOrder = 2
+        object Panel1: TPanel
+          Left = 7
+          Top = 73
+          Width = 219
+          Height = 41
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 0
+          object btnImprimirListado_Aceptar: TButton
+            Left = 24
+            Top = 8
+            Width = 75
+            Height = 25
+            Caption = 'Aceptar'
+            TabOrder = 0
+            OnClick = btnImprimirListado_AceptarClick
+          end
+          object btnImprimirListado_Salir: TButton
+            Left = 120
+            Top = 8
+            Width = 75
+            Height = 25
+            Caption = 'Salir'
+            TabOrder = 1
+            OnClick = btnImprimirListado_SalirClick
+          end
+        end
+        object RadioGroupImprimirListado: TRadioGroup
+          Left = 7
+          Top = 7
+          Width = 219
+          Height = 66
+          Align = alClient
+          Caption = ' Opciones Impresi'#243'n  '
+          ItemIndex = 0
+          Items.Strings = (
+            'Imprimir con medidas'
+            'Imprimir sin medidas')
+          TabOrder = 1
+        end
+      end
       object PanelCabecera: TPanel
         Left = 1
         Top = 1
-        Width = 1012
+        Width = 1004
         Height = 19
         Align = alTop
         BevelOuter = bvNone
@@ -70,7 +119,7 @@ object FABMProductos: TFABMProductos
           ParentFont = False
         end
         object StaticTxtBaja: TStaticText
-          Left = 903
+          Left = 895
           Top = 0
           Width = 109
           Height = 19
@@ -86,9 +135,9 @@ object FABMProductos: TFABMProductos
       end
       object Grilla: TEKDBGrid
         Left = 1
-        Top = 20
-        Width = 1012
-        Height = 200
+        Top = 241
+        Width = 1004
+        Height = 254
         Align = alClient
         Color = 14606012
         DataSource = DS_ProductoCabecera
@@ -179,55 +228,6 @@ object FABMProductos: TFABMProductos
             Width = 381
             Visible = True
           end>
-      end
-      object panelImprimirListado: TPanel
-        Left = 386
-        Top = 103
-        Width = 233
-        Height = 121
-        Anchors = []
-        BorderWidth = 6
-        TabOrder = 2
-        object Panel1: TPanel
-          Left = 7
-          Top = 73
-          Width = 219
-          Height = 41
-          Align = alBottom
-          BevelOuter = bvNone
-          TabOrder = 0
-          object btnImprimirListado_Aceptar: TButton
-            Left = 24
-            Top = 8
-            Width = 75
-            Height = 25
-            Caption = 'Aceptar'
-            TabOrder = 0
-            OnClick = btnImprimirListado_AceptarClick
-          end
-          object btnImprimirListado_Salir: TButton
-            Left = 120
-            Top = 8
-            Width = 75
-            Height = 25
-            Caption = 'Salir'
-            TabOrder = 1
-            OnClick = btnImprimirListado_SalirClick
-          end
-        end
-        object RadioGroupImprimirListado: TRadioGroup
-          Left = 7
-          Top = 7
-          Width = 219
-          Height = 66
-          Align = alClient
-          Caption = ' Opciones Impresi'#243'n  '
-          ItemIndex = 0
-          Items.Strings = (
-            'Imprimir con medidas'
-            'Imprimir sin medidas')
-          TabOrder = 1
-        end
       end
       object RepProductoListado: TQuickRep
         Tag = 99
@@ -344,7 +344,7 @@ object FABMProductos: TFABMProductos
               50.270833333333330000
               1232.958333333333000000
               124.354166666666700000
-              304.270833333333400000)
+              304.270833333333300000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -375,7 +375,7 @@ object FABMProductos: TFABMProductos
             Size.Values = (
               52.916666666666670000
               1116.541666666667000000
-              68.791666666666680000
+              68.791666666666670000
               537.104166666666700000)
             Alignment = taCenter
             AlignToBand = True
@@ -408,7 +408,7 @@ object FABMProductos: TFABMProductos
               52.916666666666670000
               1068.916666666667000000
               5.291666666666667000
-              632.354166666666800000)
+              632.354166666666700000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -450,7 +450,7 @@ object FABMProductos: TFABMProductos
           ForceNewPage = False
           ParentFont = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -752,7 +752,7 @@ object FABMProductos: TFABMProductos
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333340000
+            58.208333333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -802,7 +802,7 @@ object FABMProductos: TFABMProductos
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333340000
+            82.020833333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -1580,14 +1580,14 @@ object FABMProductos: TFABMProductos
       object PProducto: TPanel
         Left = 1
         Top = 20
-        Width = 1012
-        Height = 200
-        Align = alClient
+        Width = 1004
+        Height = 221
+        Align = alTop
         TabOrder = 4
         Visible = False
         object Label1: TLabel
           Left = 14
-          Top = 57
+          Top = 60
           Width = 133
           Height = 13
           Caption = 'Marca (F1 para buscar)'
@@ -1600,7 +1600,7 @@ object FABMProductos: TFABMProductos
         end
         object Label2: TLabel
           Left = 150
-          Top = 17
+          Top = 20
           Width = 45
           Height = 13
           Caption = 'Nombre'
@@ -1614,7 +1614,7 @@ object FABMProductos: TFABMProductos
         end
         object Label3: TLabel
           Left = 14
-          Top = 138
+          Top = 141
           Width = 66
           Height = 13
           Caption = 'Descripci'#243'n'
@@ -1627,7 +1627,7 @@ object FABMProductos: TFABMProductos
         end
         object Label4: TLabel
           Left = 742
-          Top = 15
+          Top = 18
           Width = 44
           Height = 13
           Caption = 'Imagen'
@@ -1649,7 +1649,7 @@ object FABMProductos: TFABMProductos
         end
         object Label18: TLabel
           Left = 350
-          Top = 57
+          Top = 60
           Width = 181
           Height = 13
           Caption = 'Tipo y Art'#237'culo (F1 para buscar)'
@@ -1662,7 +1662,7 @@ object FABMProductos: TFABMProductos
         end
         object Label20: TLabel
           Left = 14
-          Top = 17
+          Top = 20
           Width = 99
           Height = 13
           Caption = 'C'#243'digo Cabecera'
@@ -1670,7 +1670,7 @@ object FABMProductos: TFABMProductos
         end
         object Label6: TLabel
           Left = 14
-          Top = 97
+          Top = 100
           Width = 130
           Height = 13
           Caption = 'Color (F1 para buscar)'
@@ -1683,7 +1683,7 @@ object FABMProductos: TFABMProductos
         end
         object Shape1: TShape
           Left = 350
-          Top = 111
+          Top = 114
           Width = 49
           Height = 21
           Shape = stRoundRect
@@ -1691,7 +1691,7 @@ object FABMProductos: TFABMProductos
         object Label11: TLabel
           Left = 1
           Top = 1
-          Width = 1010
+          Width = 1002
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -1709,7 +1709,7 @@ object FABMProductos: TFABMProductos
         end
         object edImagen: TDBImage
           Left = 743
-          Top = 30
+          Top = 33
           Width = 200
           Height = 167
           DataField = 'IMAGEN'
@@ -1720,7 +1720,7 @@ object FABMProductos: TFABMProductos
         end
         object edNombre: TDBEdit
           Left = 150
-          Top = 32
+          Top = 35
           Width = 579
           Height = 21
           CharCase = ecUpperCase
@@ -1745,7 +1745,7 @@ object FABMProductos: TFABMProductos
         end
         object edDescripcion: TDBMemo
           Left = 14
-          Top = 152
+          Top = 155
           Width = 715
           Height = 45
           DataField = 'DESCRIPCION'
@@ -1760,7 +1760,7 @@ object FABMProductos: TFABMProductos
         end
         object cmbArticulo: TDBLookupComboBox
           Left = 350
-          Top = 71
+          Top = 74
           Width = 379
           Height = 21
           DataField = 'ID_ARTICULO'
@@ -1780,7 +1780,7 @@ object FABMProductos: TFABMProductos
         end
         object cmbMarca: TDBLookupComboBox
           Left = 14
-          Top = 71
+          Top = 74
           Width = 331
           Height = 21
           DataField = 'ID_MARCA'
@@ -1800,7 +1800,7 @@ object FABMProductos: TFABMProductos
         end
         object edCodCorto: TDBEdit
           Left = 14
-          Top = 32
+          Top = 35
           Width = 129
           Height = 21
           CharCase = ecUpperCase
@@ -1817,7 +1817,7 @@ object FABMProductos: TFABMProductos
         end
         object cmbColor: TDBLookupComboBox
           Left = 14
-          Top = 111
+          Top = 114
           Width = 331
           Height = 21
           DataField = 'COLOR'
@@ -1839,16 +1839,16 @@ object FABMProductos: TFABMProductos
     end
     object PanelDetalle: TPanel
       Left = 1
-      Top = 238
-      Width = 1014
-      Height = 445
+      Top = 513
+      Width = 1006
+      Height = 164
       Align = alClient
       TabOrder = 1
       object grillaDetalle: TEKDBGrid
         Left = 1
         Top = 1
-        Width = 1012
-        Height = 94
+        Width = 1004
+        Height = 45
         Align = alClient
         Color = 14606012
         DataSource = DS_DetalleProducto
@@ -2021,59 +2021,31 @@ object FABMProductos: TFABMProductos
       end
       object PDatosdetalle: TPanel
         Left = 1
-        Top = 95
-        Width = 1012
+        Top = -186
+        Width = 1004
         Height = 349
         Align = alBottom
         Caption = 'PDatosdetalle'
         TabOrder = 1
         Visible = False
-        object GroupBox1: TGroupBox
-          Left = 916
-          Top = 1
-          Width = 95
-          Height = 347
-          Align = alRight
-          TabOrder = 0
-          object btnGrupoAceptar: TBitBtn
-            Left = 12
-            Top = 64
-            Width = 75
-            Height = 64
-            Caption = 'Aceptar'
-            TabOrder = 0
-            OnClick = btnGrupoAceptarClick
-            Layout = blGlyphTop
-          end
-          object btnGrupoCancelar: TBitBtn
-            Left = 12
-            Top = 171
-            Width = 75
-            Height = 64
-            Caption = 'Cancelar'
-            TabOrder = 1
-            OnClick = btnGrupoCancelarClick
-            Layout = blGlyphTop
-          end
-        end
         object PContenedorDetalle: TPanel
           Left = 1
           Top = 1
-          Width = 915
+          Width = 903
           Height = 347
           Align = alClient
-          Caption = 'PContenedorDetalle'
-          TabOrder = 1
+          TabOrder = 0
           object PPrecios: TPanel
             Left = 1
-            Top = 5
-            Width = 913
-            Height = 167
+            Top = 192
+            Width = 901
+            Height = 154
             Align = alBottom
+            BevelOuter = bvNone
             TabOrder = 0
             object Label23: TLabel
               Left = 8
-              Top = 18
+              Top = 22
               Width = 102
               Height = 13
               Caption = 'Precio Costo Neto'
@@ -2086,8 +2058,8 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label25: TLabel
-              Left = 141
-              Top = 92
+              Left = 137
+              Top = 64
               Width = 88
               Height = 13
               Caption = 'Coef. Ganancia'
@@ -2100,8 +2072,8 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label27: TLabel
-              Left = 141
-              Top = 56
+              Left = 269
+              Top = 22
               Width = 121
               Height = 13
               Caption = 'Impuesto Interno ($)'
@@ -2114,8 +2086,8 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label24: TLabel
-              Left = 407
-              Top = 92
+              Left = 405
+              Top = 64
               Width = 72
               Height = 13
               Caption = 'Precio Venta'
@@ -2128,8 +2100,8 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label26: TLabel
-              Left = 274
-              Top = 92
+              Left = 269
+              Top = 64
               Width = 95
               Height = 13
               Caption = 'Coef. Descuento'
@@ -2142,8 +2114,8 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object Label28: TLabel
-              Left = 8
-              Top = 56
+              Left = 137
+              Top = 22
               Width = 105
               Height = 13
               Caption = 'Impuesto IVA (%)'
@@ -2156,8 +2128,8 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object lblImpuesto_Adicional2: TLabel
-              Left = 407
-              Top = 56
+              Left = 535
+              Top = 22
               Width = 118
               Height = 13
               Caption = 'impuesto Adicional 2'
@@ -2171,11 +2143,11 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object lblImpuesto_Adicional1: TLabel
-              Left = 274
-              Top = 56
-              Width = 118
+              Left = 405
+              Top = 22
+              Width = 120
               Height = 13
-              Caption = 'impuesto Adicional 1'
+              Caption = 'Impuesto Adicional 1'
               FocusControl = DBEditImpuestoAdicional1
               Font.Charset = ANSI_CHARSET
               Font.Color = clWindowText
@@ -2187,7 +2159,7 @@ object FABMProductos: TFABMProductos
             end
             object Label10: TLabel
               Left = 8
-              Top = 92
+              Top = 64
               Width = 117
               Height = 13
               Caption = 'Precio Costo C/Imp.'
@@ -2200,8 +2172,8 @@ object FABMProductos: TFABMProductos
               ParentFont = False
             end
             object lbPrecio1: TLabel
-              Left = 8
-              Top = 128
+              Left = 535
+              Top = 64
               Width = 42
               Height = 13
               Caption = 'Precio1'
@@ -2215,8 +2187,8 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object lbPrecio2: TLabel
-              Left = 141
-              Top = 128
+              Left = 8
+              Top = 100
               Width = 42
               Height = 13
               Caption = 'Precio2'
@@ -2230,8 +2202,8 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object lbPrecio3: TLabel
-              Left = 274
-              Top = 128
+              Left = 137
+              Top = 100
               Width = 42
               Height = 13
               Caption = 'Precio3'
@@ -2245,8 +2217,8 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object lbPrecio4: TLabel
-              Left = 407
-              Top = 128
+              Left = 269
+              Top = 100
               Width = 42
               Height = 13
               Caption = 'Precio4'
@@ -2260,8 +2232,8 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object lbPrecio5: TLabel
-              Left = 538
-              Top = 128
+              Left = 405
+              Top = 100
               Width = 42
               Height = 13
               Caption = 'Precio5'
@@ -2275,9 +2247,9 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object Label7: TLabel
-              Left = 1
-              Top = 1
-              Width = 911
+              Left = 0
+              Top = 0
+              Width = 901
               Height = 14
               Align = alTop
               Alignment = taCenter
@@ -2295,7 +2267,7 @@ object FABMProductos: TFABMProductos
             end
             object DBEditPrecioCostoNeto: TDBEdit
               Left = 8
-              Top = 33
+              Top = 37
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2310,8 +2282,8 @@ object FABMProductos: TFABMProductos
               TabOrder = 0
             end
             object DBEditCoefGanancia: TDBEdit
-              Left = 141
-              Top = 105
+              Left = 137
+              Top = 77
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2327,8 +2299,8 @@ object FABMProductos: TFABMProductos
               OnEnter = DBEditCoefGananciaEnter
             end
             object DBEditImpuestoInterno: TDBEdit
-              Left = 141
-              Top = 69
+              Left = 269
+              Top = 37
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2343,8 +2315,8 @@ object FABMProductos: TFABMProductos
               TabOrder = 2
             end
             object DBEditPrecioVenta: TDBEdit
-              Left = 408
-              Top = 105
+              Left = 405
+              Top = 77
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2360,8 +2332,8 @@ object FABMProductos: TFABMProductos
               OnEnter = DBEditPrecioVentaEnter
             end
             object DBEditCoefDescuento: TDBEdit
-              Left = 274
-              Top = 105
+              Left = 269
+              Top = 77
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2376,8 +2348,8 @@ object FABMProductos: TFABMProductos
               TabOrder = 7
             end
             object DBEditImpuestoIva: TDBEdit
-              Left = 8
-              Top = 69
+              Left = 137
+              Top = 37
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2392,8 +2364,8 @@ object FABMProductos: TFABMProductos
               TabOrder = 1
             end
             object DBEditImpuestoAdicional2: TDBEdit
-              Left = 407
-              Top = 69
+              Left = 535
+              Top = 37
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2409,8 +2381,8 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object DBEditImpuestoAdicional1: TDBEdit
-              Left = 274
-              Top = 69
+              Left = 405
+              Top = 37
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2427,7 +2399,7 @@ object FABMProductos: TFABMProductos
             end
             object DBEditPrecioCostoCImpuestos: TDBEdit
               Left = 8
-              Top = 105
+              Top = 77
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2442,8 +2414,8 @@ object FABMProductos: TFABMProductos
               TabOrder = 5
             end
             object DBEditPrecio1: TDBEdit
-              Left = 8
-              Top = 142
+              Left = 535
+              Top = 77
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2459,8 +2431,8 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object DBEditPrecio2: TDBEdit
-              Left = 141
-              Top = 142
+              Left = 8
+              Top = 114
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2476,8 +2448,8 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object DBEditPrecio3: TDBEdit
-              Left = 274
-              Top = 142
+              Left = 137
+              Top = 114
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2493,8 +2465,8 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object DBEditPrecio4: TDBEdit
-              Left = 407
-              Top = 142
+              Left = 269
+              Top = 114
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2510,8 +2482,8 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object DBEditPrecio5: TDBEdit
-              Left = 538
-              Top = 142
+              Left = 405
+              Top = 114
               Width = 124
               Height = 21
               CharCase = ecUpperCase
@@ -2529,10 +2501,11 @@ object FABMProductos: TFABMProductos
           end
           object PDetalle_Prod: TPanel
             Left = 1
-            Top = 172
-            Width = 913
+            Top = 1
+            Width = 901
             Height = 174
-            Align = alBottom
+            Align = alTop
+            BevelOuter = bvNone
             TabOrder = 1
             object LabelCodCorto: TLabel
               Left = 8
@@ -2619,9 +2592,9 @@ object FABMProductos: TFABMProductos
               Visible = False
             end
             object Label9: TLabel
-              Left = 1
-              Top = 1
-              Width = 911
+              Left = 0
+              Top = 0
+              Width = 901
               Height = 14
               Align = alTop
               Alignment = taCenter
@@ -2673,7 +2646,7 @@ object FABMProductos: TFABMProductos
             object DBMemo1: TDBMemo
               Left = 8
               Top = 114
-              Width = 508
+              Width = 745
               Height = 55
               DataField = 'DESCRIPCION'
               DataSource = DS_DetalleProducto
@@ -2746,10 +2719,10 @@ object FABMProductos: TFABMProductos
               OnExit = EditStockActualExit
             end
             object PMedidas: TPanel
-              Left = 774
-              Top = 15
+              Left = 763
+              Top = 14
               Width = 138
-              Height = 158
+              Height = 160
               Align = alRight
               BevelOuter = bvSpace
               BevelWidth = 3
@@ -2773,7 +2746,7 @@ object FABMProductos: TFABMProductos
                 Left = 3
                 Top = 16
                 Width = 132
-                Height = 139
+                Height = 141
                 Align = alClient
                 Color = 14606012
                 DataSource = DS_Medidas
@@ -2794,6 +2767,34 @@ object FABMProductos: TFABMProductos
                   end>
               end
             end
+          end
+        end
+        object Panel2: TPanel
+          Left = 904
+          Top = 1
+          Width = 99
+          Height = 347
+          Align = alRight
+          TabOrder = 1
+          object btnGrupoAceptar: TBitBtn
+            Left = 12
+            Top = 64
+            Width = 75
+            Height = 64
+            Caption = 'Aceptar'
+            TabOrder = 0
+            OnClick = btnGrupoAceptarClick
+            Layout = blGlyphTop
+          end
+          object btnGrupoCancelar: TBitBtn
+            Left = 12
+            Top = 171
+            Width = 75
+            Height = 64
+            Caption = 'Cancelar'
+            TabOrder = 1
+            OnClick = btnGrupoCancelarClick
+            Layout = blGlyphTop
           end
         end
       end
@@ -2893,7 +2894,7 @@ object FABMProductos: TFABMProductos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
