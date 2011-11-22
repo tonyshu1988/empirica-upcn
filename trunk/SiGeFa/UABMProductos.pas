@@ -13,11 +13,6 @@ uses
 
 type
   TFABMProductos = class(TForm)
-    tabs: TPageControl;
-    tabCabecera: TTabSheet;
-    tabDetalle: TTabSheet;
-    PProducto: TPanel;
-    PDetalles: TPanel;
     ZQ_ProductoCabecera: TZQuery;
     ZQ_ProductoCabeceraID_PROD_CABECERA: TIntegerField;
     ZQ_ProductoCabeceraID_MARCA: TIntegerField;
@@ -40,37 +35,22 @@ type
     btnSalir: TdxBarLargeButton;
     GrupoVisualizando: TdxBarGroup;
     GrupoEditando: TdxBarGroup;
-    Panel4: TPanel;
-    Label1: TLabel;
-    Label2: TLabel;
-    edNombre: TDBEdit;
-    Label3: TLabel;
-    Label4: TLabel;
-    edImagen: TDBImage;
-    Label8: TLabel;
-    DBEdit7: TDBEdit;
-    edDescripcion: TDBMemo;
     PanelCabecera: TPanel;
     EKBuscar: TEKBusquedaAvanzada;
     EKOrdenar: TEKOrdenarGrilla;
     ZQ_DetalleProducto: TZQuery;
     DS_DetalleProducto: TDataSource;
-    Label18: TLabel;
     ZQ_Articulo: TZQuery;
     ZQ_ArticuloID_ARTICULO: TIntegerField;
     ZQ_ArticuloDESCRIPCION: TStringField;
     ZQ_ArticuloID_TIPO_ARTICULO: TIntegerField;
     ZQ_ProductoCabecera_articulo: TStringField;
-    cmbArticulo: TDBLookupComboBox;
     DS_Articulo: TDataSource;
     ZQ_Marca: TZQuery;
     DS_Marca: TDataSource;
-    cmbMarca: TDBLookupComboBox;
     ZQ_MarcaID_MARCA: TIntegerField;
     ZQ_MarcaNOMBRE_MARCA: TStringField;
     ZQ_ProductoCabecera_marca: TStringField;
-    Label19: TLabel;
-    grillaDetalle: TEKDBGrid;
     PopupMenuDetalleProd: TPopupMenu;
     AgregaDetalle: TMenuItem;
     QuitarDetalle: TMenuItem;
@@ -86,8 +66,6 @@ type
     ZSP_GenerarIDProdCabecera: TZStoredProc;
     ZSP_GenerarIDProdCabeceraID: TIntegerField;
     ZQ_ProductoCabeceraCOD_CORTO: TStringField;
-    Label20: TLabel;
-    edCodCorto: TDBEdit;
     buscarImagen: TOpenPictureDialog;
     StaticTxtBaja: TStaticText;
     lblResultadoBusqueda: TLabel;
@@ -98,7 +76,6 @@ type
     EKListadoArticulo: TEKListadoSQL;
     ZQ_ArticuloTIPO_ARTICULO: TStringField;
     ZQ_ProductoCabecera_tipoArticulo: TStringField;
-    PEdicion: TPanel;
     PopMenuMedidas: TPopupMenu;
     MenuItem1: TMenuItem;
     MenuItem3: TMenuItem;
@@ -107,12 +84,9 @@ type
     CDMedidasmedida: TStringField;
     DS_Medidas: TDataSource;
     EKListadoMedidas: TEKListadoSQL;
-    Label6: TLabel;
-    cmbColor: TDBLookupComboBox;
     ZQ_Color: TZQuery;
     ZQ_ProductoCabeceraCOLOR: TIntegerField;
     DS_Color: TDataSource;
-    Shape1: TShape;
     EKListadoColor: TEKListadoSQL;
     ZQ_MarcaCODIGO_MARCA: TIntegerField;
     ZQ_MarcaBUSQUEDA: TStringField;
@@ -199,55 +173,6 @@ type
     btnImprimirListado_Aceptar: TButton;
     btnImprimirListado_Salir: TButton;
     btBuscarEnGoogle: TdxBarLargeButton;
-    PageControlDetalleProd: TPageControl;
-    TabPrecios: TTabSheet;
-    TabDetalleProd: TTabSheet;
-    Label23: TLabel;
-    Label25: TLabel;
-    Label27: TLabel;
-    Label24: TLabel;
-    Label26: TLabel;
-    Label28: TLabel;
-    lblImpuesto_Adicional2: TLabel;
-    lblImpuesto_Adicional1: TLabel;
-    Label10: TLabel;
-    DBEditPrecioCostoNeto: TDBEdit;
-    DBEditCoefGanancia: TDBEdit;
-    DBEditImpuestoInterno: TDBEdit;
-    DBEditPrecioVenta: TDBEdit;
-    DBEditCoefDescuento: TDBEdit;
-    DBEditImpuestoIva: TDBEdit;
-    DBEditImpuestoAdicional2: TDBEdit;
-    DBEditImpuestoAdicional1: TDBEdit;
-    DBEditPrecioCostoCImpuestos: TDBEdit;
-    PMedidas: TPanel;
-    Label5: TLabel;
-    grillaMedidas: TDBGrid;
-    DBMemo1: TDBMemo;
-    EDDCODBARRAS: TDBEdit;
-    Label30: TLabel;
-    Label22: TLabel;
-    EDDCODCORTO: TDBEdit;
-    LabelCodCorto: TLabel;
-    DBEdit11: TDBEdit;
-    Label32: TLabel;
-    Label31: TLabel;
-    DBEdit10: TDBEdit;
-    DBCheckBox1: TDBCheckBox;
-    DBEditPrecio1: TDBEdit;
-    lbPrecio1: TLabel;
-    DBEditPrecio2: TDBEdit;
-    lbPrecio2: TLabel;
-    DBEditPrecio3: TDBEdit;
-    lbPrecio3: TLabel;
-    DBEditPrecio4: TDBEdit;
-    lbPrecio4: TLabel;
-    DBEditPrecio5: TDBEdit;
-    lbPrecio5: TLabel;
-    PGrupoAceptarCancelar: TPanel;
-    GroupBox1: TGroupBox;
-    btnGrupoAceptar: TBitBtn;
-    btnGrupoCancelar: TBitBtn;
     BajaDetalle1: TMenuItem;
     N1: TMenuItem;
     VerBajas1: TMenuItem;
@@ -304,8 +229,83 @@ type
     ZQ_TodasMedidasBAJA: TStringField;
     ZUpdateSQL2: TZUpdateSQL;
     Asociar_producto_pto_salida: TZStoredProc;
-    EditStockActual: TEdit;
+    grillaDetalle: TEKDBGrid;
+    PanelDetalle: TPanel;
+    PCabeceraProducto: TPanel;
+    PContenedor: TPanel;
+    PProducto: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label8: TLabel;
+    Label18: TLabel;
+    Label20: TLabel;
+    Label6: TLabel;
+    Shape1: TShape;
+    edImagen: TDBImage;
+    edNombre: TDBEdit;
+    DBEdit7: TDBEdit;
+    edDescripcion: TDBMemo;
+    cmbArticulo: TDBLookupComboBox;
+    cmbMarca: TDBLookupComboBox;
+    edCodCorto: TDBEdit;
+    cmbColor: TDBLookupComboBox;
+    PDetalle_Prod: TPanel;
+    LabelCodCorto: TLabel;
+    Label22: TLabel;
+    Label30: TLabel;
+    Label32: TLabel;
+    Label31: TLabel;
     LStockActual: TLabel;
+    EDDCODCORTO: TDBEdit;
+    EDDCODBARRAS: TDBEdit;
+    DBMemo1: TDBMemo;
+    DBEdit11: TDBEdit;
+    DBEdit10: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
+    EditStockActual: TEdit;
+    PMedidas: TPanel;
+    Label5: TLabel;
+    grillaMedidas: TDBGrid;
+    PPrecios: TPanel;
+    Label23: TLabel;
+    Label25: TLabel;
+    Label27: TLabel;
+    Label24: TLabel;
+    Label26: TLabel;
+    Label28: TLabel;
+    lblImpuesto_Adicional2: TLabel;
+    lblImpuesto_Adicional1: TLabel;
+    Label10: TLabel;
+    lbPrecio1: TLabel;
+    lbPrecio2: TLabel;
+    lbPrecio3: TLabel;
+    lbPrecio4: TLabel;
+    lbPrecio5: TLabel;
+    DBEditPrecioCostoNeto: TDBEdit;
+    DBEditCoefGanancia: TDBEdit;
+    DBEditImpuestoInterno: TDBEdit;
+    DBEditPrecioVenta: TDBEdit;
+    DBEditCoefDescuento: TDBEdit;
+    DBEditImpuestoIva: TDBEdit;
+    DBEditImpuestoAdicional2: TDBEdit;
+    DBEditImpuestoAdicional1: TDBEdit;
+    DBEditPrecioCostoCImpuestos: TDBEdit;
+    DBEditPrecio1: TDBEdit;
+    DBEditPrecio2: TDBEdit;
+    DBEditPrecio3: TDBEdit;
+    DBEditPrecio4: TDBEdit;
+    DBEditPrecio5: TDBEdit;
+    GroupBox1: TGroupBox;
+    btnGrupoAceptar: TBitBtn;
+    btnGrupoCancelar: TBitBtn;
+    Splitter1: TSplitter;
+    PDatosdetalle: TPanel;
+    PContenedorDetalle: TPanel;
+    Label7: TLabel;
+    Label9: TLabel;
+    Label11: TLabel;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -370,6 +370,8 @@ type
     procedure ZQ_PreciosIMPUESTO_ADICIONAL1Change(Sender: TField);
     procedure ZQ_PreciosIMPUESTO_ADICIONAL2Change(Sender: TField);
     procedure EditStockActualExit(Sender: TObject);
+    procedure Splitter1CanResize(Sender: TObject; var NewSize: Integer; var Accept: Boolean);
+    Procedure HabilitarPopMenu(bandera:boolean; bandera2:boolean);
   private
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
   public
@@ -385,9 +387,21 @@ const
 
 implementation
 
-uses UDM, UPrincipal, UUtilidades;
+uses UDM, UPrincipal, UUtilidades, Math;
 
 {$R *.dfm}
+
+Procedure TFABMProductos.HabilitarPopMenu(bandera:boolean; bandera2:boolean);
+begin
+    PopupMenuDetalleProd.Items.Items[0].Enabled:= bandera;
+    PopupMenuDetalleProd.Items.Items[1].Enabled:= bandera;
+    PopupMenuDetalleProd.Items.Items[2].Enabled:= bandera;
+    PopupMenuDetalleProd.Items.Items[3].Enabled:= bandera;
+    PopupMenuDetalleProd.Items.Items[4].Enabled:= bandera2;
+    PopupMenuDetalleProd.Items.Items[5].Enabled:= bandera;
+    PopupMenuDetalleProd.Items.Items[6].Enabled:= bandera2;
+    PopupMenuDetalleProd.Items.Items[7].Enabled:= bandera;
+end;
 
 procedure TFABMProductos.HabilitarCampos();
 begin
@@ -472,8 +486,8 @@ end;
 
 procedure TFABMProductos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenar.GuardarConfigColumnas;
-  EKOrdenarDetalle.GuardarConfigColumnas;
+//EKOrdenar.GuardarConfigColumnas;
+//KOrdenarDetalle.GuardarConfigColumnas;
 end;
 
 
@@ -490,8 +504,8 @@ begin
   FPrincipal.Iconos_Menu_32.GetBitmap(1, btnGrupoAceptar.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnGrupoCancelar.Glyph);
 
-  EKOrdenar.CargarConfigColumnas;
-  EKOrdenarDetalle.CargarConfigColumnas;
+  //EKOrdenar.CargarConfigColumnas;
+  //EKOrdenarDetalle.CargarConfigColumnas;
 
   HabilitarCampos;
 
@@ -504,10 +518,7 @@ begin
   dm.EKModelo.abrir(ZQ_MedidaArticulo);
   dm.EKModelo.abrir(ZQ_TodasMedidas);  
 
-  EKOrdenarDetalle.PopUpGrilla:= nil;
-  tabs.ActivePageIndex:= 0;
-  PageControlDetalleProd.ActivePageIndex := 0;
-  PProducto.Enabled:= False;
+  HabilitarPopMenu(false, true);
   lblResultadoBusqueda.Caption:= '';
 end;
 
@@ -516,18 +527,16 @@ procedure TFABMProductos.btnNuevoClick(Sender: TObject);
 begin
 if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera,ZQ_DetalleProducto, ZQ_Precios]) then
   begin
-    EKOrdenarDetalle.PopUpGrilla:=PopupMenuDetalleProd;;
-    grilla.Enabled := false;
-    tabs.Enabled:= true;
-    tabs.ActivePageIndex:= 0;
-    PProducto.Enabled:=True;
+    HabilitarPopMenu(true, true);
+    PCabeceraProducto.Height := 221;
+    PProducto.Visible:=True;
+    grilla.Visible := false;
 
     ZQ_ProductoCabecera.Append;
     ZQ_ProductoCabeceraBAJA.AsString:= 'N';
     ZQ_ProductoCabeceraCOLOR.AsInteger:= 0;
     ZQ_ProductoCabeceraID_MARCA.AsInteger:= 0;
 
-    edCodCorto.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoVisualizando.Enabled := false;
 
@@ -550,19 +559,15 @@ function TFABMProductos.validarcampos():Boolean;
 begin
  result := true;
 
-  if (ZQ_ProductoCabeceraCOD_CORTO.IsNull) then
+  if (ZQ_ProductoCabeceraCOD_CORTO.IsNull) or (trim(ZQ_ProductoCabeceraCOD_CORTO.AsString) = '') then
   begin
-    Application.MessageBox('El campo Código Corto se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 0;
-    edCodCorto.SetFocus;
-    result := false;
+    ZQ_ProductoCabeceraCOD_CORTO.AsString := ZQ_ProductoCabeceraID_PROD_CABECERA.AsString;
     exit;
   end;
 
   if (ZQ_ProductoCabeceraNOMBRE.IsNull) then
   begin
     Application.MessageBox('El campo Nombre se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 0;
     edNombre.SetFocus;
     result := false;
     exit;
@@ -571,7 +576,6 @@ begin
   if (ZQ_ProductoCabeceraID_MARCA.IsNull) then
   begin
     Application.MessageBox('El campo Marca se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 0;
     cmbMarca.SetFocus;
     result := false;
     exit;
@@ -580,7 +584,6 @@ begin
   if (ZQ_ProductoCabeceraID_ARTICULO.IsNull) then
   begin
     Application.MessageBox('El campo Artículo se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 0;
     cmbArticulo.SetFocus;
     result := false;
     exit;
@@ -589,7 +592,6 @@ begin
   if (ZQ_ProductoCabeceraCOLOR.IsNull) then
   begin
     Application.MessageBox('El campo Color se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 0;
     cmbColor.SetFocus;
     result := false;
     exit;
@@ -607,7 +609,6 @@ begin
         exit
       else
       begin
-        tabs.ActivePageIndex:= 0;
         edCodCorto.SetFocus;
         result := false;
         exit;
@@ -623,7 +624,6 @@ begin
   if (ZQ_DetalleProductoCOD_CORTO.IsNull) then
   begin
     Application.MessageBox('El campo Código Corto se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 1;
 //    dpCodCorto.SetFocus;
     result := false;
     exit;
@@ -632,7 +632,6 @@ begin
   if (zq_preciosPRECIO_COSTO.IsNull) then
   begin
     Application.MessageBox('El campo Precio Costo se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 1;
     //dpCosto.SetFocus;
     result := false;
     exit;
@@ -641,7 +640,6 @@ begin
   if (zq_preciosPRECIO_VENTA.IsNull) then
   begin
     Application.MessageBox('El campo Precio Venta se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 1;
     //dpVenta.SetFocus;
     result := false;
     exit;
@@ -650,7 +648,6 @@ begin
    if (ZQ_DetalleProductoID_MEDIDA.IsNull) then
   begin
     Application.MessageBox('El campo Medida se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 1;
 //    dpMedida.SetFocus;
     result := false;
     exit;
@@ -666,7 +663,6 @@ begin
   if (zq_preciosPRECIO_COSTO.IsNull) then
   begin
     Application.MessageBox('El campo Precio Costo se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 1;
     //dpCosto.SetFocus;
     result := false;
     exit;
@@ -675,7 +671,6 @@ begin
   if (zq_preciosPRECIO_VENTA.IsNull) then
   begin
     Application.MessageBox('El campo Precio Venta se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 1;
     //dpVenta.SetFocus;
     result := false;
     exit;
@@ -684,7 +679,6 @@ begin
   if (CDMedidas.IsEmpty) then
   begin
     Application.MessageBox('El campo Medida se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    tabs.ActivePageIndex:= 1;
     grillaMedidas.SetFocus;
     result := false;
     exit;
@@ -702,19 +696,17 @@ begin
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMProductos) then
     begin
-      Grilla.Enabled := true;
-      tabs.Enabled:= false;
-      EKOrdenarDetalle.PopUpGrilla:= nil;
+      HabilitarPopMenu(false, true);
       GrupoEditando.Enabled := false;
       GrupoVisualizando.Enabled := true;
-      tabs.Enabled:= true;
-      PProducto.Enabled:=False;
-      PEdicion.Visible:=False;
       VerActivos1.Click;
       ZQ_DetalleProducto.Refresh;
 
       LStockActual.Visible := false;
       EditStockActual.Visible := false;
+
+      PProducto.Visible:=false;
+      Grilla.Visible := true;
     end
   except
     begin
@@ -755,17 +747,16 @@ begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
    if dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos) then
     begin
-      Grilla.Enabled := true;
-      EKOrdenarDetalle.PopUpGrilla:=nil;
+      HabilitarPopMenu(false, true);
       GrupoVisualizando.Enabled := true;
       GrupoEditando.Enabled := false;
-      tabs.Enabled:= true;
-      PProducto.Enabled:=False;
-      PEdicion.Visible:=False;
       VerActivos1.Click;
 
       LStockActual.Visible := false;
-      EditStockActual.Visible := false;      
+      EditStockActual.Visible := false;
+
+      PProducto.Visible:=false;
+      Grilla.Visible := true;
     end;
 end;
 
@@ -776,16 +767,16 @@ if ZQ_ProductoCabecera.IsEmpty then exit;
 
 if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera,ZQ_DetalleProducto, ZQ_Precios]) then
   begin
-    grilla.Enabled := false;
-    EKOrdenarDetalle.PopUpGrilla:=PopupMenuDetalleProd;
-    tabs.Enabled:= true;
-    tabs.ActivePageIndex:= 0;
-    PProducto.Enabled:=True;
+
+    HabilitarPopMenu(true, true);
     ZQ_ProductoCabecera.edit;
 
-    edNombre.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoVisualizando.Enabled := false;
+
+    PCabeceraProducto.Height := 221;
+    PProducto.Visible:=True;
+    Grilla.Visible := false;
   end;
 end;
 
@@ -799,10 +790,21 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el Producto seleccionado?'), 'ABM Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera, ZQ_DetalleProducto]) then
     begin
       ZQ_ProductoCabecera.Edit;
       ZQ_ProductoCabeceraBAJA.AsString:='S';
+
+      ZQ_DetalleProducto.Filtered := false;
+      ZQ_DetalleProducto.First;
+      while not(ZQ_DetalleProducto.eof) do
+      begin
+       ZQ_DetalleProducto.Edit;
+       ZQ_DetalleProductoBAJA.AsString := 'S';
+       ZQ_DetalleProducto.Post;
+       ZQ_DetalleProducto.Next;
+      end;
+      ZQ_DetalleProducto.Filtered := true;
     end
     else
       exit;
@@ -826,10 +828,25 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el Producto seleccionado?'), 'ABM Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera, ZQ_DetalleProducto]) then
     begin
       ZQ_ProductoCabecera.Edit;
       ZQ_ProductoCabeceraBAJA.AsString:='N';
+
+      if Application.MessageBox('Desea Reactivar el Detalle Producto?', 'ABM Productos', MB_YESNO+MB_ICONQUESTION) = IDYES then
+      begin
+        ZQ_DetalleProducto.Filtered := false;
+        ZQ_DetalleProducto.First;
+        while not(ZQ_DetalleProducto.eof) do
+        begin
+         ZQ_DetalleProducto.Edit;
+         ZQ_DetalleProductoBAJA.AsString := 'N';
+         ZQ_DetalleProducto.Post;
+         ZQ_DetalleProducto.Next;
+        end;
+        ZQ_DetalleProducto.Filtered := true;
+      end;
+
     end
     else
       exit;
@@ -878,11 +895,12 @@ begin
   ZQ_PreciosIMPUESTO_ADICIONAL1.AsFloat:= 0;
   ZQ_PreciosIMPUESTO_ADICIONAL2.AsFloat:= 0;
 
-  PEdicion.Visible:=True;
   PMedidas.Visible:=True;
   EKOrdenarDetalle.PopUpGrilla:=nil;
   grillaDetalle.Enabled:=False;
   GrupoEditando.Enabled:= false;
+
+  PDatosDetalle.Visible := true;
 
   campoQueCambia:= '';
 end;
@@ -896,7 +914,6 @@ begin
   if  (ZQ_ProductoCabecera.State <> dsedit) and (ZQ_ProductoCabecera.State <> dsinsert) then
     exit;
 
-  PEdicion.Visible:=True;
   PMedidas.Visible:=False;
   EKOrdenarDetalle.PopUpGrilla:=nil;
   grillaDetalle.Enabled:=false;
@@ -904,6 +921,8 @@ begin
   ZQ_DetalleProducto.Edit;
   LabelCodCorto.Enabled:= true;
   EDDCODCORTO.Enabled := true;
+
+  PDatosDetalle.Visible := true;
 
   campoQueCambia:= '';
 
@@ -1125,6 +1144,9 @@ end;
 
 procedure TFABMProductos.QuitarDetalleClick(Sender: TObject);
 begin
+  if ZQ_DetalleProducto.IsEmpty then
+  exit;
+
   ZQ_DetalleProducto.Delete;
 end;
 
@@ -1269,7 +1291,7 @@ end;
 procedure TFABMProductos.actualizarPrecios(llamador: string);
 var
   costo_neto, costo_con_impuestos, imp_adicional_1,
-  imp_adicional_2, imp_iva, coef_ganancia, precio_venta: double;
+  imp_adicional_2, imp_iva, coef_ganancia, precio_venta, impuesto_interno: double;
 begin
   costo_neto:= ZQ_PreciosPRECIO_COSTO.AsFloat;
   costo_con_impuestos:= ZQ_PreciosPRECIO_COSTO_CIMPUESTOS.AsFloat;
@@ -1279,11 +1301,13 @@ begin
   coef_ganancia:= ZQ_PreciosCOEF_GANANCIA.AsFloat;
   precio_venta:= ZQ_PreciosPRECIO_VENTA.AsFloat;
 
+
   if llamador <> 'PRECIO_VENTA' then
   begin
     campoQueCambia:= 'PRECIO_VENTA';
-    costo_con_impuestos:= costo_neto + (costo_neto * (imp_adicional_1/100)) + (costo_neto * (imp_adicional_2/100)) + (costo_neto * (imp_iva/100));
-    precio_venta:= costo_con_impuestos * (1 + coef_ganancia);
+    costo_con_impuestos:= costo_neto + (costo_neto * imp_adicional_1) + (costo_neto * imp_adicional_2) + (costo_neto * imp_iva) + impuesto_interno;
+    precio_venta:= RoundTo(costo_con_impuestos * (1 + coef_ganancia), -2);
+
 
     ZQ_PreciosPRECIO_COSTO_CIMPUESTOS.AsFloat:= costo_con_impuestos;
     ZQ_PreciosPRECIO_VENTA.AsFloat:= precio_venta;
@@ -1291,16 +1315,16 @@ begin
   else
   begin
     campoQueCambia:= 'COEF_GANANCIA';
-    
+
     if costo_con_impuestos = 0 then
     begin
-      costo_con_impuestos := costo_neto + (costo_neto * (imp_adicional_1/100)) + (costo_neto * (imp_adicional_2/100)) + (costo_neto * (imp_iva/100));
+      costo_con_impuestos:= costo_neto + (costo_neto * imp_adicional_1) + (costo_neto * imp_adicional_2) + (costo_neto * imp_iva) + impuesto_interno;
       ZQ_PreciosPRECIO_COSTO_CIMPUESTOS.AsFloat:= costo_con_impuestos;
     end;
 
     coef_ganancia:= (precio_venta / costo_con_impuestos) - 1;
     ZQ_PreciosCOEF_GANANCIA.AsFloat:= coef_ganancia;
-  end
+  end;  
 end;
 
 
@@ -1371,6 +1395,46 @@ begin
     if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
       ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZSP_GenerarIDProdDeralleID.AsString,'0',20);//armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
 
+    if (precio1 <> '') then
+    begin
+      if (ZQ_PreciosPRECIO1.IsNull) or (ZQ_PreciosPRECIO1.AsFloat = 0) then
+        ZQ_PreciosPRECIO1.AsFloat := pv;
+    end
+    else
+      ZQ_PreciosPRECIO1.AsFloat := pv;
+
+    if (precio2 <> '') then
+    begin
+      if (ZQ_PreciosPRECIO2.IsNull) or (ZQ_PreciosPRECIO2.AsFloat = 0) then
+        ZQ_PreciosPRECIO2.AsFloat := pv;
+    end
+    else
+      ZQ_PreciosPRECIO2.AsFloat := pv;
+
+    if (precio3 <> '') then
+    begin
+      if (ZQ_PreciosPRECIO3.IsNull) or (ZQ_PreciosPRECIO3.AsFloat = 0) then
+        ZQ_PreciosPRECIO3.AsFloat := pv;
+    end
+    else
+      ZQ_PreciosPRECIO3.AsFloat := pv;
+
+    if (precio4 <> '') then
+    begin
+      if (ZQ_PreciosPRECIO4.IsNull) or (ZQ_PreciosPRECIO4.AsFloat = 0) then
+        ZQ_PreciosPRECIO4.AsFloat := pv;
+    end
+    else
+      ZQ_PreciosPRECIO4.AsFloat := pv;
+
+    if (precio5 <> '') then
+    begin
+      if (ZQ_PreciosPRECIO5.IsNull) or (ZQ_PreciosPRECIO5.AsFloat = 0) then
+        ZQ_PreciosPRECIO5.AsFloat := pv;
+    end
+    else
+      ZQ_PreciosPRECIO5.AsFloat := pv;
+
     ZQ_precios.post;
     ZQ_DetalleProducto.Post;
 
@@ -1420,6 +1484,46 @@ begin
           ZQ_PreciosIMPUESTO_IVA.AsFloat:=iiva;
           ZQ_PreciosIMPUESTO_ADICIONAL1.AsFloat:=iad1;
           ZQ_PreciosIMPUESTO_ADICIONAL2.AsFloat:=iad2;
+
+          if (precio1 <> '') then
+          begin
+            if (ZQ_PreciosPRECIO1.IsNull) or (ZQ_PreciosPRECIO1.AsFloat = 0) then
+              ZQ_PreciosPRECIO1.AsFloat := pv;
+          end
+          else
+            ZQ_PreciosPRECIO1.AsFloat := pv;
+
+          if (precio2 <> '') then
+          begin
+            if (ZQ_PreciosPRECIO2.IsNull) or (ZQ_PreciosPRECIO2.AsFloat = 0) then
+              ZQ_PreciosPRECIO2.AsFloat := pv;
+          end
+          else
+            ZQ_PreciosPRECIO2.AsFloat := pv;
+
+          if (precio3 <> '') then
+          begin
+            if (ZQ_PreciosPRECIO3.IsNull) or (ZQ_PreciosPRECIO3.AsFloat = 0) then
+              ZQ_PreciosPRECIO3.AsFloat := pv;
+          end
+          else
+            ZQ_PreciosPRECIO3.AsFloat := pv;
+
+          if (precio4 <> '') then
+          begin
+            if (ZQ_PreciosPRECIO4.IsNull) or (ZQ_PreciosPRECIO4.AsFloat = 0) then
+              ZQ_PreciosPRECIO4.AsFloat := pv;
+          end
+          else
+            ZQ_PreciosPRECIO4.AsFloat := pv;
+
+          if (precio5 <> '') then
+          begin
+            if (ZQ_PreciosPRECIO5.IsNull) or (ZQ_PreciosPRECIO5.AsFloat = 0) then
+              ZQ_PreciosPRECIO5.AsFloat := pv;
+          end
+          else
+            ZQ_PreciosPRECIO5.AsFloat := pv;
 
          //Si inserto uno nuevo genero un id nuevo
          if (ZQ_DetalleProducto.State = dsInsert) then
@@ -1473,14 +1577,55 @@ begin
     if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
        ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
 
+    if (precio1 <> '') then
+    begin
+      if (ZQ_PreciosPRECIO1.IsNull) or (ZQ_PreciosPRECIO1.AsFloat = 0) then
+        ZQ_PreciosPRECIO1.AsFloat := ZQ_PreciosPRECIO_VENTA.AsFloat;
+    end
+    else
+      ZQ_PreciosPRECIO1.AsFloat := ZQ_PreciosPRECIO_VENTA.AsFloat;
+
+    if (precio2 <> '') then
+    begin
+      if (ZQ_PreciosPRECIO2.IsNull) or (ZQ_PreciosPRECIO2.AsFloat = 0) then
+        ZQ_PreciosPRECIO2.AsFloat := ZQ_PreciosPRECIO_VENTA.AsFloat;
+    end
+    else
+      ZQ_PreciosPRECIO2.AsFloat := ZQ_PreciosPRECIO_VENTA.AsFloat;
+
+    if (precio3 <> '') then
+    begin
+      if (ZQ_PreciosPRECIO3.IsNull) or (ZQ_PreciosPRECIO3.AsFloat = 0) then
+        ZQ_PreciosPRECIO3.AsFloat := ZQ_PreciosPRECIO_VENTA.AsFloat;
+    end
+    else
+      ZQ_PreciosPRECIO3.AsFloat := ZQ_PreciosPRECIO_VENTA.AsFloat;
+
+    if (precio4 <> '') then
+    begin
+      if (ZQ_PreciosPRECIO4.IsNull) or (ZQ_PreciosPRECIO4.AsFloat = 0) then
+        ZQ_PreciosPRECIO4.AsFloat := ZQ_PreciosPRECIO_VENTA.AsFloat;
+    end
+    else
+      ZQ_PreciosPRECIO4.AsFloat := ZQ_PreciosPRECIO_VENTA.AsFloat;
+
+    if (precio5 <> '') then
+    begin
+      if (ZQ_PreciosPRECIO5.IsNull) or (ZQ_PreciosPRECIO5.AsFloat = 0) then
+        ZQ_PreciosPRECIO5.AsFloat := ZQ_PreciosPRECIO_VENTA.AsFloat;
+    end
+    else
+      ZQ_PreciosPRECIO5.AsFloat := ZQ_PreciosPRECIO_VENTA.AsFloat;
+
     zq_precios.Post;
     ZQ_DetalleProducto.Post;
   end;
 
-  PEdicion.Visible:=False;
   EKOrdenarDetalle.PopUpGrilla:= PopupMenuDetalleProd;
   grillaDetalle.Enabled:= True;
   GrupoEditando.Enabled:= true;
+
+  PDatosDetalle.Visible := false;
 end;
 
 procedure TFABMProductos.btnGrupoCancelarClick(Sender: TObject);
@@ -1489,11 +1634,15 @@ begin
   ZQ_DetalleProducto.RevertRecord;
   GrupoEditando.Enabled :=true;
   grillaDetalle.Enabled:=True;
-  PEdicion.Visible:=false;
+
+  PDatosDetalle.Visible := false;  
 end;
 
 procedure TFABMProductos.BajaDetalle1Click(Sender: TObject);
 begin
+  if ZQ_DetalleProducto.IsEmpty then
+  exit;
+
   ZQ_DetalleProducto.Edit;
   ZQ_DetalleProductoBAJA.AsString := 'S';
   ZQ_DetalleProducto.Post;
@@ -1525,6 +1674,16 @@ end;
 
 procedure TFABMProductos.ReactivarDetalle1Click(Sender: TObject);
 begin
+  if ZQ_DetalleProducto.IsEmpty then
+  exit;
+
+  if ZQ_ProductoCabeceraBAJA.AsString = 'S' then
+  begin
+    Application.MessageBox('Debe estar dado de alta el producto cabecera. VERIFIQUE', 'ABM Productos', MB_OK+MB_ICONINFORMATION);
+    exit;
+  end;
+
+
   ZQ_DetalleProducto.Edit;
   ZQ_DetalleProductoBAJA.AsString := 'N';
   ZQ_DetalleProducto.Post;
@@ -1586,4 +1745,15 @@ begin
 
 end;
 
+procedure TFABMProductos.Splitter1CanResize(Sender: TObject;
+  var NewSize: Integer; var Accept: Boolean);
+begin
+ if dm.EKModelo.verificar_transaccion(transaccion_ABMProductos) then
+ Accept := false
+ else
+ Accept := true;
+
+end;
+
 end.
+
