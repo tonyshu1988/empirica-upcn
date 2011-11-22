@@ -297,15 +297,15 @@ type
     DBEditPrecio3: TDBEdit;
     DBEditPrecio4: TDBEdit;
     DBEditPrecio5: TDBEdit;
-    GroupBox1: TGroupBox;
-    btnGrupoAceptar: TBitBtn;
-    btnGrupoCancelar: TBitBtn;
     Splitter1: TSplitter;
     PDatosdetalle: TPanel;
     PContenedorDetalle: TPanel;
     Label7: TLabel;
     Label9: TLabel;
     Label11: TLabel;
+    Panel2: TPanel;
+    btnGrupoAceptar: TBitBtn;
+    btnGrupoCancelar: TBitBtn;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
