@@ -241,6 +241,7 @@ uses UDM, UUtilidades, UPrincipal, UImprimirEtiquetas;
 
 {$R *.dfm}
 
+
 procedure TFABM_Precios.HabilitarCampos();
 begin
   if (imp_ad1_nombre <> '') then
@@ -805,7 +806,48 @@ begin
         coef_ganancia:= (precio_venta / costo_con_impuestos) - 1;
 
       ZQ_ProductosCOEF_GANANCIA.AsFloat:= coef_ganancia;
-    end
+    end;
+
+
+          if (precio1 <> '') then
+          begin
+            if (ZQ_ProductosPRECIO1.IsNull) or (ZQ_ProductosPRECIO1.AsFloat = 0) then
+              ZQ_ProductosPRECIO1.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat;
+          end
+          else
+            ZQ_ProductosPRECIO1.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat;
+
+          if (precio2 <> '') then
+          begin
+            if (ZQ_ProductosPRECIO2.IsNull) or (ZQ_ProductosPRECIO2.AsFloat = 0) then
+              ZQ_ProductosPRECIO2.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat;
+          end
+          else
+            ZQ_ProductosPRECIO2.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat;
+
+          if (precio3 <> '') then
+          begin
+            if (ZQ_ProductosPRECIO3.IsNull) or (ZQ_ProductosPRECIO3.AsFloat = 0) then
+              ZQ_ProductosPRECIO3.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat;
+          end
+          else
+            ZQ_ProductosPRECIO3.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat;
+
+          if (precio4 <> '') then
+          begin
+            if (ZQ_ProductosPRECIO4.IsNull) or (ZQ_ProductosPRECIO4.AsFloat = 0) then
+              ZQ_ProductosPRECIO4.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat;
+          end
+          else
+            ZQ_ProductosPRECIO4.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat;
+
+          if (precio5 <> '') then
+          begin
+            if (ZQ_ProductosPRECIO5.IsNull) or (ZQ_ProductosPRECIO5.AsFloat = 0) then
+              ZQ_ProductosPRECIO5.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat;
+          end
+          else
+            ZQ_ProductosPRECIO5.AsFloat := ZQ_ProductosPRECIO_VENTA.AsFloat;
 end;
 
 

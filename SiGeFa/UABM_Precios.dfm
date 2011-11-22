@@ -23,8 +23,8 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 490
+    Width = 1016
+    Height = 496
     Align = alClient
     TabOrder = 4
     object RepListaPrecios: TQuickRep
@@ -173,7 +173,7 @@ object FABM_Precios: TFABM_Precios
           Size.Values = (
             52.916666666666670000
             1150.937500000000000000
-            68.791666666666670000
+            68.791666666666680000
             465.666666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -429,7 +429,7 @@ object FABM_Precios: TFABM_Precios
             34.395833333333330000
             396.875000000000000000
             0.000000000000000000
-            621.770833333333300000)
+            621.770833333333200000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -1367,7 +1367,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1419,7 +1419,7 @@ object FABM_Precios: TFABM_Precios
             37.041666666666670000
             396.875000000000000000
             0.000000000000000000
-            582.083333333333300000)
+            582.083333333333200000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -1602,8 +1602,8 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 19
-      Width = 1006
-      Height = 305
+      Width = 1014
+      Height = 311
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1785,8 +1785,8 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 324
-      Width = 1006
+      Top = 330
+      Width = 1014
       Height = 165
       Hint = '`'
       Align = alBottom
@@ -2108,7 +2108,7 @@ object FABM_Precios: TFABM_Precios
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1006
+      Width = 1014
       Height = 18
       Align = alTop
       ParentShowHint = False
@@ -2133,7 +2133,7 @@ object FABM_Precios: TFABM_Precios
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3126,6 +3126,14 @@ object FABM_Precios: TFABM_Precios
         Visible = True
       end
       item
+        TituloColumna = 'Imp. Adicional 1'
+        Visible = False
+      end
+      item
+        TituloColumna = 'Imp. Adicional 2'
+        Visible = False
+      end
+      item
         TituloColumna = 'Precio Costo c/Imp.'
         Visible = True
       end
@@ -3140,6 +3148,26 @@ object FABM_Precios: TFABM_Precios
       item
         TituloColumna = 'Precio Venta'
         Visible = True
+      end
+      item
+        TituloColumna = 'PRECIO1'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO2'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO3'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO4'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO5'
+        Visible = False
       end
       item
         TituloColumna = 'Color'
