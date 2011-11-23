@@ -152,6 +152,9 @@ type
     AReimpresionComprob: TAction;
     ReimpresindeComprobantes1: TMenuItem;
     EKImage_ABM_Comprobantes: TEKImageList32;
+    AABM_PersonasPtos: TAction;
+    N7: TMenuItem;
+    ABMPersonasPuntos1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -205,6 +208,7 @@ type
     procedure AABM_CPB_TransferExecute(Sender: TObject);
     procedure ADebuggingExecute(Sender: TObject);
     procedure AReimpresionComprobExecute(Sender: TObject);
+    procedure AABM_PersonasPtosExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -240,7 +244,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa,
   UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
   UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
-  UEstadisticaVentas, UReimpresionComprobantes;
+  UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -726,6 +730,11 @@ end;
 procedure TFPrincipal.AReimpresionComprobExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFReimpresionComprobantes, FReimpresionComprobantes);
+end;
+
+procedure TFPrincipal.AABM_PersonasPtosExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFABM_PersonasPuntos, FABM_PersonasPuntos);
 end;
 
 end.
