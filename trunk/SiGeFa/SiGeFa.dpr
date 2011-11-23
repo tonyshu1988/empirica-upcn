@@ -61,7 +61,8 @@ uses
   UEstadisticaVentas in 'UEstadisticaVentas.pas' {FEstadisticaVentas},
   RegExpr in 'RegExpr.pas',
   UReimpresionComprobantes in 'UReimpresionComprobantes.pas' {FReimpresionComprobantes},
-  UBuscarComprobante in 'UBuscarComprobante.pas' {FBuscarComprobante};
+  UBuscarComprobante in 'UBuscarComprobante.pas' {FBuscarComprobante},
+  UABM_PersonasPuntos in 'UABM_PersonasPuntos.pas' {FABM_PersonasPuntos};
 
 {$R *.res}
 

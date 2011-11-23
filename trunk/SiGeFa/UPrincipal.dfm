@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 855
-    Height = 457
+    Width = 863
+    Height = 463
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 486
-    Width = 855
+    Top = 492
+    Width = 863
     Height = 19
     Panels = <
       item
@@ -4719,7 +4719,7 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 855
+    Width = 863
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 855
-    Height = 457
+    Width = 863
+    Height = 463
     Align = alClient
     Caption = 'DEMO'
     Color = 16053492
@@ -5122,6 +5122,12 @@ object FPrincipal: TFPrincipal
       ImageIndex = 54
       OnExecute = ADebuggingExecute
     end
+    object AABM_PersonasPtos: TAction
+      Caption = 'ABM Personas Puntos'
+      Hint = 'ABM Personas Puntos'
+      ImageIndex = 1
+      OnExecute = AABM_PersonasPtosExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5181,6 +5187,12 @@ object FPrincipal: TFPrincipal
       end
       object CtaCteProveedor1: TMenuItem
         Action = ACtaCte_Proveedor
+      end
+      object N7: TMenuItem
+        Caption = '-'
+      end
+      object ABMPersonasPuntos1: TMenuItem
+        Action = AABM_PersonasPtos
       end
     end
     object Comprobantes1: TMenuItem

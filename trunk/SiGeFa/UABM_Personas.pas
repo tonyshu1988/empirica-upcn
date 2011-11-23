@@ -263,6 +263,7 @@ type
     btnExcel: TdxBarLargeButton;
     btnEMail: TdxBarLargeButton;
     btnSkype: TdxBarLargeButton;
+    ZQ_PersonaCODIGO_BARRA: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -540,6 +541,7 @@ begin
   if not validarcampos() then
     exit;
 
+
   if not existeRelacionCliente then //si la relacion no existe todavia
   begin
     if (RadioGroupRelacionCliente.ItemIndex = 1) then //si esta marcado como que es cliente
@@ -562,6 +564,15 @@ begin
 
       ZQ_RelacionCliente.Delete;
     end
+  end;
+
+  if (ZQ_PersonaCODIGO_BARRA.IsNull) or (ZQ_PersonaCODIGO_BARRA.AsString = '') then
+  begin
+    if ZQ_Persona.State in [dsinsert] then
+      ZQ_PersonaCODIGO_BARRA.AsString := rellenar(Nro_PersonaID.AsString,'0',LONG_COD_BARRAS)
+      else
+        if ZQ_Persona.State in [dsedit] then
+          ZQ_PersonaCODIGO_BARRA.AsString := rellenar(ZQ_PersonaID_PERSONA.AsString,'0',LONG_COD_BARRAS);
   end;
 
   try

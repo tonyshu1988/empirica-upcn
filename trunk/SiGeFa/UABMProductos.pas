@@ -1393,7 +1393,7 @@ begin
 
     //si no tiene codigo de barra el producto, le pongo el id_producto rellenado con ceros adelante (20)
     if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
-      ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZSP_GenerarIDProdDeralleID.AsString,'0',20);//armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
+      ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZSP_GenerarIDProdDeralleID.AsString,'0',LONG_COD_BARRAS);//armarCodBarras(ZQ_ProductoCabeceraCOD_CORTO.AsString,ZQ_ColorCODIGO.AsString,ZQ_DetalleProductoCOD_CORTO.AsString);
 
     if (precio1 <> '') then
     begin
@@ -1538,7 +1538,7 @@ begin
              ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
 
           if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
-             ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
+             ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',LONG_COD_BARRAS);
           end;
 
           ZQ_Precios.Post;
@@ -1575,7 +1575,7 @@ begin
        ZQ_DetalleProductoCOD_CORTO.AsString:=IntToStr(ZQ_DetalleProductoID_PRODUCTO.AsInteger);
 
     if ZQ_DetalleProductoCODIGO_BARRA.AsString='' then
-       ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',20);
+       ZQ_DetalleProductoCODIGO_BARRA.AsString:=rellenar(ZQ_DetalleProductoID_PRODUCTO.AsString,'0',LONG_COD_BARRAS);
 
     if (precio1 <> '') then
     begin
