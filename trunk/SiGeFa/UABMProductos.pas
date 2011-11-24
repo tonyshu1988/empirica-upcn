@@ -1350,6 +1350,7 @@ begin
   imp_iva:= ZQ_PreciosIMPUESTO_IVA.AsFloat;
   coef_ganancia:= ZQ_PreciosCOEF_GANANCIA.AsFloat;
   precio_venta:= ZQ_PreciosPRECIO_VENTA.AsFloat;
+  impuesto_interno := ZQ_PreciosIMPUESTO_INTERNO.AsFloat;
 
 
   if llamador <> 'PRECIO_VENTA' then
