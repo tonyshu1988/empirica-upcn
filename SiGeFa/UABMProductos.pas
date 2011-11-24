@@ -251,6 +251,18 @@ type
     cmbMarca: TDBLookupComboBox;
     edCodCorto: TDBEdit;
     cmbColor: TDBLookupComboBox;
+    Splitter1: TSplitter;
+    PDatosdetalle: TPanel;
+    PContenedorDetalle: TPanel;
+    Label11: TLabel;
+    Panel2: TPanel;
+    btnGrupoAceptar: TBitBtn;
+    btnGrupoCancelar: TBitBtn;
+    Label9: TLabel;
+    PMedidas: TPanel;
+    Label5: TLabel;
+    grillaMedidas: TDBGrid;
+    PContenedorDetallePrecios: TPanel;
     PDetalle_Prod: TPanel;
     LabelCodCorto: TLabel;
     Label22: TLabel;
@@ -265,9 +277,6 @@ type
     DBEdit10: TDBEdit;
     DBCheckBox1: TDBCheckBox;
     EditStockActual: TEdit;
-    PMedidas: TPanel;
-    Label5: TLabel;
-    grillaMedidas: TDBGrid;
     PPrecios: TPanel;
     Label23: TLabel;
     Label25: TLabel;
@@ -283,6 +292,7 @@ type
     lbPrecio3: TLabel;
     lbPrecio4: TLabel;
     lbPrecio5: TLabel;
+    Label7: TLabel;
     DBEditPrecioCostoNeto: TDBEdit;
     DBEditCoefGanancia: TDBEdit;
     DBEditImpuestoInterno: TDBEdit;
@@ -297,15 +307,6 @@ type
     DBEditPrecio3: TDBEdit;
     DBEditPrecio4: TDBEdit;
     DBEditPrecio5: TDBEdit;
-    Splitter1: TSplitter;
-    PDatosdetalle: TPanel;
-    PContenedorDetalle: TPanel;
-    Label7: TLabel;
-    Label9: TLabel;
-    Label11: TLabel;
-    Panel2: TPanel;
-    btnGrupoAceptar: TBitBtn;
-    btnGrupoCancelar: TBitBtn;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -371,7 +372,7 @@ type
     procedure ZQ_PreciosIMPUESTO_ADICIONAL2Change(Sender: TField);
     procedure EditStockActualExit(Sender: TObject);
     procedure Splitter1CanResize(Sender: TObject; var NewSize: Integer; var Accept: Boolean);
-    Procedure HabilitarPopMenu(bandera:boolean; bandera2:boolean);
+    Procedure HabilitarPopMenu(estado:integer);
   private
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
   public
@@ -391,16 +392,65 @@ uses UDM, UPrincipal, UUtilidades, Math;
 
 {$R *.dfm}
 
-Procedure TFABMProductos.HabilitarPopMenu(bandera:boolean; bandera2:boolean);
+Procedure TFABMProductos.HabilitarPopMenu(estado:integer);
 begin
-    PopupMenuDetalleProd.Items.Items[0].Enabled:= bandera;
-    PopupMenuDetalleProd.Items.Items[1].Enabled:= bandera;
-    PopupMenuDetalleProd.Items.Items[2].Enabled:= bandera;
-    PopupMenuDetalleProd.Items.Items[3].Enabled:= bandera;
-    PopupMenuDetalleProd.Items.Items[4].Enabled:= bandera2;
-    PopupMenuDetalleProd.Items.Items[5].Enabled:= bandera;
-    PopupMenuDetalleProd.Items.Items[6].Enabled:= bandera2;
-    PopupMenuDetalleProd.Items.Items[7].Enabled:= bandera;
+  case estado of
+  0:  begin
+      PopupMenuDetalleProd.Items.Items[0].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[1].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[2].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[3].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[4].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[5].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[6].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[7].Enabled:= true;
+      end;
+
+  1:  begin
+      PopupMenuDetalleProd.Items.Items[0].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[1].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[2].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[3].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[4].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[5].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[6].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[7].Enabled:= true;
+      end;
+
+  2:  begin
+      PopupMenuDetalleProd.Items.Items[0].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[1].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[2].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[3].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[4].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[5].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[6].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[7].Enabled:= false;
+      end;
+
+  3:  begin
+      PopupMenuDetalleProd.Items.Items[0].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[1].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[2].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[3].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[4].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[5].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[6].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[7].Enabled:= false;
+      end;
+
+  4:  begin
+      PopupMenuDetalleProd.Items.Items[0].Enabled:= true;
+      PopupMenuDetalleProd.Items.Items[1].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[2].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[3].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[4].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[5].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[6].Enabled:= false;
+      PopupMenuDetalleProd.Items.Items[7].Enabled:= false;
+      end;
+
+  end;
 end;
 
 procedure TFABMProductos.HabilitarCampos();
@@ -518,7 +568,7 @@ begin
   dm.EKModelo.abrir(ZQ_MedidaArticulo);
   dm.EKModelo.abrir(ZQ_TodasMedidas);  
 
-  HabilitarPopMenu(false, true);
+  HabilitarPopMenu(2);
   lblResultadoBusqueda.Caption:= '';
 end;
 
@@ -527,7 +577,7 @@ procedure TFABMProductos.btnNuevoClick(Sender: TObject);
 begin
 if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera,ZQ_DetalleProducto, ZQ_Precios]) then
   begin
-    HabilitarPopMenu(true, true);
+    HabilitarPopMenu(4);
     PCabeceraProducto.Height := 221;
     PProducto.Visible:=True;
     grilla.Visible := false;
@@ -696,7 +746,7 @@ begin
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMProductos) then
     begin
-      HabilitarPopMenu(false, true);
+      HabilitarPopMenu(2);
       GrupoEditando.Enabled := false;
       GrupoVisualizando.Enabled := true;
       VerActivos1.Click;
@@ -747,7 +797,7 @@ begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
    if dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos) then
     begin
-      HabilitarPopMenu(false, true);
+      HabilitarPopMenu(2);
       GrupoVisualizando.Enabled := true;
       GrupoEditando.Enabled := false;
       VerActivos1.Click;
@@ -768,7 +818,7 @@ if ZQ_ProductoCabecera.IsEmpty then exit;
 if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera,ZQ_DetalleProducto, ZQ_Precios]) then
   begin
 
-    HabilitarPopMenu(true, true);
+    HabilitarPopMenu(0);
     ZQ_ProductoCabecera.edit;
 
     GrupoEditando.Enabled := true;
@@ -1626,6 +1676,8 @@ begin
   GrupoEditando.Enabled:= true;
 
   PDatosDetalle.Visible := false;
+
+  HabilitarPopMenu(3);
 end;
 
 procedure TFABMProductos.btnGrupoCancelarClick(Sender: TObject);
@@ -1635,7 +1687,14 @@ begin
   GrupoEditando.Enabled :=true;
   grillaDetalle.Enabled:=True;
 
-  PDatosDetalle.Visible := false;  
+  PDatosDetalle.Visible := false;
+
+  if  (ZQ_ProductoCabecera.State = dsedit) then
+    HabilitarPopMenu(0)
+  else
+   if (ZQ_ProductoCabecera.State = dsinsert) then
+     HabilitarPopMenu(4);
+
 end;
 
 procedure TFABMProductos.BajaDetalle1Click(Sender: TObject);
