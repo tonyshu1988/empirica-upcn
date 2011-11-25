@@ -8,7 +8,8 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
   ZStoredProcedure, ZSqlUpdate, EKOrdenarGrilla, mxNativeExcel, mxExport, UBuscarPersona,
   QRCtrls, QuickRpt, EKVistaPreviaQR, DBClient, Provider, ShellApi,
-  ComCtrls, EKUsrPermisos, EKIni, ActnList, XPStyleActnCtrls, ActnMan;
+  ComCtrls, EKUsrPermisos, EKIni, ActnList, XPStyleActnCtrls, ActnMan,
+  Buttons;
 
 type
   TFABM_Precios = class(TForm)
@@ -184,6 +185,31 @@ type
     ZQ_ImprimirEtiquetasID_PRECIO: TIntegerField;
     QRlblPieDePagina: TQRLabel;
     QRLabel43: TQRLabel;
+    btExpImp: TdxBarLargeButton;
+    CD_Precios: TClientDataSet;
+    PArchivoPrecios: TPanel;
+    LeerCodBar: TLabel;
+    CD_Preciosid_producto: TIntegerField;
+    CD_Preciosprecio_costo: TFloatField;
+    CD_Preciosprecio_venta: TFloatField;
+    CD_Precioscoef_ganancia: TFloatField;
+    CD_Preciosimpuesto_interno: TFloatField;
+    CD_Preciosimpuesto_iva: TFloatField;
+    CD_Preciosprecio_costo_cimpuestos: TFloatField;
+    CD_Preciosimpuesto_adicional2: TFloatField;
+    CD_Preciosprecio1: TFloatField;
+    CD_Preciosprecio2: TFloatField;
+    CD_Preciosprecio3: TFloatField;
+    CD_Preciosprecio4: TFloatField;
+    CD_Preciosprecio5: TFloatField;
+    btnArchivoAceptar: TBitBtn;
+    btnArchivoCancelar: TBitBtn;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    GuardarArchivo: TSaveDialog;
+    AbrirArchivo: TOpenDialog;
+    CD_Precioscoef_descuento: TFloatField;
+    CD_Preciosimpuesto_adicional1: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -218,6 +244,9 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure EditVentaExit(Sender: TObject);
     procedure ZQ_ProductosCOEF_DESCUENTOChange(Sender: TField);
+    procedure btExpImpClick(Sender: TObject);
+    procedure btnArchivoCancelarClick(Sender: TObject);
+    procedure btnArchivoAceptarClick(Sender: TObject);
   private
     { Private declarations }
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
@@ -713,6 +742,10 @@ begin
   HabilitarCampos;
 
   dm.EKModelo.abrir(ZQ_Sucursal);
+
+  FPrincipal.Iconos_Menu_16.GetBitmap(0, btnArchivoCancelar.Glyph);
+  FPrincipal.Iconos_Menu_16.GetBitmap(1, btnArchivoAceptar.Glyph);
+
 end;
 
 
@@ -938,5 +971,97 @@ begin
 end;
 
 
+
+procedure TFABM_Precios.btExpImpClick(Sender: TObject);
+begin
+
+  PArchivoPrecios.Visible:=True;
+  PArchivoPrecios.BringToFront;
+  PanelContenedor.Enabled:=False;
+  dm.centrarPanel(FABM_Precios,PArchivoPrecios);
+
+end;
+
+procedure TFABM_Precios.btnArchivoCancelarClick(Sender: TObject);
+begin
+  PArchivoPrecios.Visible:=False;
+  PanelContenedor.Enabled:=True;
+end;
+
+procedure TFABM_Precios.btnArchivoAceptarClick(Sender: TObject);
+var
+i: integer;
+begin
+  if ZQ_Productos.IsEmpty then
+    exit;
+
+    CD_Precios.EmptyDataSet;
+    if DBGridProductos.SelectedRows.Count > 0 then
+    begin
+      with DBGridProductos.DataSource.DataSet do
+        for i:=0 to DBGridProductos.SelectedRows.Count-1 do
+        begin
+          GotoBookmark(pointer(DBGridProductos.SelectedRows.Items[i]));
+          CD_Precios.Append;
+          CD_Preciosid_producto.Value:=ZQ_ProductosID_PRODUCTO.Value;
+          CD_Preciosprecio_costo.Value:=ZQ_ProductosPRECIO_COSTO.Value;
+          CD_Preciosprecio_venta.Value:=ZQ_ProductosPRECIO_VENTA.Value;
+          CD_Precioscoef_ganancia.Value:=ZQ_ProductosCOEF_GANANCIA.Value;
+          CD_Precioscoef_descuento.Value:=ZQ_ProductosCOEF_DESCUENTO.Value;
+          CD_Preciosimpuesto_interno.Value:=ZQ_ProductosIMPUESTO_INTERNO.Value;
+          CD_Preciosimpuesto_iva.Value:=ZQ_ProductosIMPUESTO_IVA.Value;
+          CD_Preciosprecio_costo_cimpuestos.Value:=ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.Value;
+          CD_Preciosimpuesto_adicional1.Value:=ZQ_ProductosIMPUESTO_ADICIONAL1.Value;
+          CD_Preciosimpuesto_adicional2.Value:=ZQ_ProductosIMPUESTO_ADICIONAL2.Value;
+          CD_Preciosprecio1.Value:=ZQ_ProductosPRECIO1.Value;
+          CD_Preciosprecio2.Value:=ZQ_ProductosPRECIO2.Value;
+          CD_Preciosprecio3.Value:=ZQ_ProductosPRECIO3.Value;
+          CD_Preciosprecio4.Value:=ZQ_ProductosPRECIO4.Value;
+          CD_Preciosprecio5.Value:=ZQ_ProductosPRECIO5.Value;
+
+          CD_Precios.Post;
+        end;
+    end
+    else
+    begin
+      ZQ_Productos.first;
+      while not(ZQ_Productos.Eof) do
+      begin
+        CD_Precios.Append;
+          CD_Preciosid_producto.Value:=ZQ_ProductosID_PRODUCTO.Value;
+          CD_Preciosprecio_costo.Value:=ZQ_ProductosPRECIO_COSTO.Value;
+          CD_Preciosprecio_venta.Value:=ZQ_ProductosPRECIO_VENTA.Value;
+          CD_Precioscoef_ganancia.Value:=ZQ_ProductosCOEF_GANANCIA.Value;
+          CD_Precioscoef_descuento.Value:=ZQ_ProductosCOEF_DESCUENTO.Value;
+          CD_Preciosimpuesto_interno.Value:=ZQ_ProductosIMPUESTO_INTERNO.Value;
+          CD_Preciosimpuesto_iva.Value:=ZQ_ProductosIMPUESTO_IVA.Value;
+          CD_Preciosprecio_costo_cimpuestos.Value:=ZQ_ProductosPRECIO_COSTO_CIMPUESTOS.Value;
+          CD_Preciosimpuesto_adicional1.Value:=ZQ_ProductosIMPUESTO_ADICIONAL1.Value;
+          CD_Preciosimpuesto_adicional2.Value:=ZQ_ProductosIMPUESTO_ADICIONAL2.Value;
+          CD_Preciosprecio1.Value:=ZQ_ProductosPRECIO1.Value;
+          CD_Preciosprecio2.Value:=ZQ_ProductosPRECIO2.Value;
+          CD_Preciosprecio3.Value:=ZQ_ProductosPRECIO3.Value;
+          CD_Preciosprecio4.Value:=ZQ_ProductosPRECIO4.Value;
+          CD_Preciosprecio5.Value:=ZQ_ProductosPRECIO5.Value;
+          CD_Precios.Post;
+
+          ZQ_Productos.Next;
+      end;
+
+     ZQ_Productos.Refresh;
+  end;
+
+  if not(CD_Precios.IsEmpty) then
+   begin
+      if GuardarArchivo.Execute then
+       begin
+         CD_Precios.SaveToFile(ExtractFileName(GuardarArchivo.FileName),dfXMLUTF8);
+         Application.MessageBox(PChar(Format('Se creó con éxito el archivo %s',[ExtractFileName(GuardarArchivo.FileName)])),'Exportación Lista de Precios',MB_OK+MB_ICONINFORMATION);
+       end
+   end;
+  PArchivoPrecios.Visible:=False;
+  PanelContenedor.Enabled:=True;
+
+end;
 
 end.
