@@ -1,6 +1,6 @@
 object FABM_Precios: TFABM_Precios
-  Left = 196
-  Top = 143
+  Left = 230
+  Top = 159
   Width = 1024
   Height = 580
   Caption = 'ABM Precios'
@@ -23,8 +23,8 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1016
-    Height = 496
+    Width = 1008
+    Height = 490
     Align = alClient
     TabOrder = 4
     object RepListaPrecios: TQuickRep
@@ -173,7 +173,7 @@ object FABM_Precios: TFABM_Precios
           Size.Values = (
             52.916666666666670000
             1150.937500000000000000
-            68.791666666666680000
+            68.791666666666670000
             465.666666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -1367,7 +1367,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1602,8 +1602,8 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 19
-      Width = 1014
-      Height = 311
+      Width = 1006
+      Height = 305
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1785,8 +1785,8 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 330
-      Width = 1014
+      Top = 324
+      Width = 1006
       Height = 165
       Hint = '`'
       Align = alBottom
@@ -2108,7 +2108,7 @@ object FABM_Precios: TFABM_Precios
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1014
+      Width = 1006
       Height = 18
       Align = alTop
       ParentShowHint = False
@@ -2130,10 +2130,77 @@ object FABM_Precios: TFABM_Precios
       end
     end
   end
+  object PArchivoPrecios: TPanel
+    Left = 496
+    Top = 168
+    Width = 321
+    Height = 121
+    BevelInner = bvLowered
+    BevelWidth = 2
+    BorderStyle = bsSingle
+    TabOrder = 5
+    Visible = False
+    object LeerCodBar: TLabel
+      Left = 4
+      Top = 4
+      Width = 309
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'Exportar / Importar Lista de Precios'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object btnArchivoAceptar: TBitBtn
+      Left = 16
+      Top = 82
+      Width = 101
+      Height = 25
+      Caption = 'Aceptar'
+      TabOrder = 0
+      OnClick = btnArchivoAceptarClick
+    end
+    object btnArchivoCancelar: TBitBtn
+      Left = 202
+      Top = 82
+      Width = 101
+      Height = 25
+      Caption = 'Cancelar'
+      TabOrder = 1
+      OnClick = btnArchivoCancelarClick
+    end
+    object RadioButton1: TRadioButton
+      Left = 48
+      Top = 35
+      Width = 232
+      Height = 17
+      Caption = ' Exportar Listado a un Archivo'
+      Checked = True
+      TabOrder = 2
+      TabStop = True
+    end
+    object RadioButton2: TRadioButton
+      Left = 48
+      Top = 57
+      Width = 232
+      Height = 17
+      Caption = ' Importar Listado desde un Archivo'
+      TabOrder = 3
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2253,6 +2320,10 @@ object FABM_Precios: TFABM_Precios
             Visible = True
           end
           item
+            Item = btExpImp
+            Visible = True
+          end
+          item
             BeginGroup = True
             Item = btnGuardar
             Visible = True
@@ -2280,6 +2351,7 @@ object FABM_Precios: TFABM_Precios
             Visible = True
           end
           item
+            BeginGroup = True
             Item = btnSalir
             Visible = True
           end>
@@ -2624,7 +2696,7 @@ object FABM_Precios: TFABM_Precios
       AutoGrayScale = False
     end
     object btnProcesarImportes: TdxBarLargeButton
-      Caption = 'Procesar Precios'
+      Caption = 'Procesar'
       Category = 0
       Hint = 'Comenzar el proceso de actualizacion de importes'
       Visible = ivAlways
@@ -2706,6 +2778,15 @@ object FABM_Precios: TFABM_Precios
       OnClick = btImprimirEtiquetasClick
       AutoGrayScale = False
     end
+    object btExpImp: TdxBarLargeButton
+      Caption = 'Exportar/Importar'
+      Category = 0
+      Hint = 'Exportar/Importar Precios'
+      Visible = ivAlways
+      ImageIndex = 45
+      OnClick = btExpImpClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnEditarGrilla'
@@ -2717,7 +2798,8 @@ object FABM_Precios: TFABM_Precios
         'btnReactivar'
         'btnImprimir'
         'btImprimirEtiquetas'
-        'btBuscarGoogle')
+        'btBuscarGoogle'
+        'btExpImp')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -3634,5 +3716,81 @@ object FABM_Precios: TFABM_Precios
         Name = 'PRECIO5'
         ParamType = ptInput
       end>
+  end
+  object CD_Precios: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 648
+    Top = 112
+    Data = {
+      5B0100009619E0BD01000000180000000F0000000000030000005B010B69645F
+      70726F647563746F04000100000000000C70726563696F5F636F73746F080004
+      00000000000C70726563696F5F76656E746108000400000000000D636F65665F
+      67616E616E636961080004000000000010696D70756573746F5F696E7465726E
+      6F08000400000000000C696D70756573746F5F69766108000400000000001770
+      726563696F5F636F73746F5F63696D70756573746F7308000400000000001369
+      6D70756573746F5F61646963696F6E616C320800040000000000077072656369
+      6F3108000400000000000770726563696F320800040000000000077072656369
+      6F3308000400000000000770726563696F340800040000000000077072656369
+      6F3508000400000000000E636F65665F6465736375656E746F08000400000000
+      0013696D70756573746F5F61646963696F6E616C3108000400000000000000}
+    object CD_Preciosid_producto: TIntegerField
+      FieldName = 'id_producto'
+    end
+    object CD_Preciosprecio_costo: TFloatField
+      FieldName = 'precio_costo'
+    end
+    object CD_Preciosprecio_venta: TFloatField
+      FieldName = 'precio_venta'
+    end
+    object CD_Precioscoef_ganancia: TFloatField
+      FieldName = 'coef_ganancia'
+    end
+    object CD_Preciosimpuesto_interno: TFloatField
+      FieldName = 'impuesto_interno'
+    end
+    object CD_Preciosimpuesto_iva: TFloatField
+      FieldName = 'impuesto_iva'
+    end
+    object CD_Preciosprecio_costo_cimpuestos: TFloatField
+      FieldName = 'precio_costo_cimpuestos'
+    end
+    object CD_Preciosimpuesto_adicional2: TFloatField
+      FieldName = 'impuesto_adicional2'
+    end
+    object CD_Preciosprecio1: TFloatField
+      FieldName = 'precio1'
+    end
+    object CD_Preciosprecio2: TFloatField
+      FieldName = 'precio2'
+    end
+    object CD_Preciosprecio3: TFloatField
+      FieldName = 'precio3'
+    end
+    object CD_Preciosprecio4: TFloatField
+      FieldName = 'precio4'
+    end
+    object CD_Preciosprecio5: TFloatField
+      FieldName = 'precio5'
+    end
+    object CD_Precioscoef_descuento: TFloatField
+      FieldName = 'coef_descuento'
+    end
+    object CD_Preciosimpuesto_adicional1: TFloatField
+      FieldName = 'impuesto_adicional1'
+    end
+  end
+  object GuardarArchivo: TSaveDialog
+    DefaultExt = 'xml'
+    Filter = 'XML|*.xml'
+    InitialDir = 'C:\'
+    Title = 'Exportar Lista de Precios'
+    Left = 832
+    Top = 104
+  end
+  object AbrirArchivo: TOpenDialog
+    Left = 896
+    Top = 104
   end
 end
