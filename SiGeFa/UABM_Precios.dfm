@@ -1,6 +1,6 @@
 object FABM_Precios: TFABM_Precios
-  Left = 230
-  Top = 159
+  Left = 167
+  Top = 127
   Width = 1024
   Height = 580
   Caption = 'ABM Precios'
@@ -26,7 +26,7 @@ object FABM_Precios: TFABM_Precios
     Width = 1008
     Height = 490
     Align = alClient
-    TabOrder = 4
+    TabOrder = 3
     object RepListaPrecios: TQuickRep
       Tag = 99
       Left = -23
@@ -2131,8 +2131,8 @@ object FABM_Precios: TFABM_Precios
     end
   end
   object PArchivoPrecios: TPanel
-    Left = 496
-    Top = 168
+    Left = 576
+    Top = 176
     Width = 321
     Height = 121
     BevelInner = bvLowered
@@ -2178,7 +2178,7 @@ object FABM_Precios: TFABM_Precios
       TabOrder = 1
       OnClick = btnArchivoCancelarClick
     end
-    object RadioButton1: TRadioButton
+    object radExportar: TRadioButton
       Left = 48
       Top = 35
       Width = 232
@@ -2188,7 +2188,7 @@ object FABM_Precios: TFABM_Precios
       TabOrder = 2
       TabStop = True
     end
-    object RadioButton2: TRadioButton
+    object radImportar: TRadioButton
       Left = 48
       Top = 57
       Width = 232
@@ -3786,11 +3786,202 @@ object FABM_Precios: TFABM_Precios
     Filter = 'XML|*.xml'
     InitialDir = 'C:\'
     Title = 'Exportar Lista de Precios'
-    Left = 832
-    Top = 104
+    Left = 808
+    Top = 112
   end
   object AbrirArchivo: TOpenDialog
+    DefaultExt = 'xml'
+    Filter = 'XML|*.xml'
+    InitialDir = 'C:\'
+    Title = 'Importar Lista de Precios'
     Left = 896
     Top = 104
+  end
+  object ZQ_ActualizarPrecios: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'update precio p'
+      'set p.id_producto = :id_prod,'
+      '    p.id_sucursal = :id_suc,'
+      '    p.precio_costo = :precio_costo,'
+      '    p.precio_venta = :precio_venta,'
+      '    p.coef_ganancia = :coef_ganancia,'
+      '    p.coef_descuento = :coef_descuento,'
+      '    p.impuesto_interno = :impuesto_interno,'
+      '    p.impuesto_iva = :impuesto_iva,'
+      '    p.precio_costo_cimpuestos = :precio_costo_cimpuestos,'
+      '    p.impuesto_adicional1 = :impuesto_adicional1,'
+      '    p.impuesto_adicional2 = :impuesto_adicional2,'
+      '    p.precio1 = :precio1,'
+      '    p.precio2 = :precio2,'
+      '    p.precio3 = :precio3,'
+      '    p.precio4 = :precio4,'
+      '    p.precio5 = :precio5'
+      'where (p.id_producto = :id_prod)and(p.id_sucursal = :id_suc)'
+      '')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_prod'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_suc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio_costo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio_venta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'coef_ganancia'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'coef_descuento'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'impuesto_interno'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'impuesto_iva'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio_costo_cimpuestos'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'impuesto_adicional1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'impuesto_adicional2'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio2'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio3'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio4'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio5'
+        ParamType = ptUnknown
+      end>
+    Left = 536
+    Top = 128
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_prod'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_suc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio_costo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio_venta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'coef_ganancia'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'coef_descuento'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'impuesto_interno'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'impuesto_iva'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio_costo_cimpuestos'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'impuesto_adicional1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'impuesto_adicional2'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio2'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio3'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio4'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'precio5'
+        ParamType = ptUnknown
+      end>
   end
 end
