@@ -9,7 +9,7 @@ uses
   ZStoredProcedure, ZSqlUpdate, EKOrdenarGrilla, mxNativeExcel, mxExport, UBuscarPersona,
   QRCtrls, QuickRpt, EKVistaPreviaQR, DBClient, Provider, ShellApi,
   ComCtrls, EKUsrPermisos, EKIni, ActnList, XPStyleActnCtrls, ActnMan,
-  Buttons;
+  Buttons, ZSqlProcessor;
 
 type
   TFABM_Precios = class(TForm)
@@ -204,12 +204,13 @@ type
     CD_Preciosprecio5: TFloatField;
     btnArchivoAceptar: TBitBtn;
     btnArchivoCancelar: TBitBtn;
-    RadioButton1: TRadioButton;
-    RadioButton2: TRadioButton;
+    radExportar: TRadioButton;
+    radImportar: TRadioButton;
     GuardarArchivo: TSaveDialog;
     AbrirArchivo: TOpenDialog;
     CD_Precioscoef_descuento: TFloatField;
     CD_Preciosimpuesto_adicional1: TFloatField;
+    ZQ_ActualizarPrecios: TZQuery;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -247,6 +248,8 @@ type
     procedure btExpImpClick(Sender: TObject);
     procedure btnArchivoCancelarClick(Sender: TObject);
     procedure btnArchivoAceptarClick(Sender: TObject);
+    function exportarPrecios():Boolean;
+    function importarPrecios():Boolean;
   private
     { Private declarations }
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
@@ -992,7 +995,28 @@ procedure TFABM_Precios.btnArchivoAceptarClick(Sender: TObject);
 var
 i: integer;
 begin
-  if ZQ_Productos.IsEmpty then
+if radExportar.Checked then
+ begin
+   if exportarPrecios() then ZQ_Productos.Refresh;
+   PArchivoPrecios.Visible:=False;
+   PanelContenedor.Enabled:=True;
+ end
+else
+ begin
+  if radImportar.Checked then
+   begin
+     if importarPrecios() then ZQ_Productos.Refresh;
+     PArchivoPrecios.Visible:=False;
+     PanelContenedor.Enabled:=True;
+   end
+ end;
+end;
+
+function TFABM_Precios.exportarPrecios(): Boolean;
+var
+i:Integer;
+begin
+if ZQ_Productos.IsEmpty then
     exit;
 
     CD_Precios.EmptyDataSet;
@@ -1022,8 +1046,8 @@ begin
           CD_Precios.Post;
         end;
     end
-    else
-    begin
+  else
+   begin
       ZQ_Productos.first;
       while not(ZQ_Productos.Eof) do
       begin
@@ -1049,18 +1073,97 @@ begin
       end;
 
      ZQ_Productos.Refresh;
-  end;
+   end;
 
   if not(CD_Precios.IsEmpty) then
    begin
-      if GuardarArchivo.Execute then
-       begin
-         CD_Precios.SaveToFile(ExtractFileName(GuardarArchivo.FileName),dfXMLUTF8);
-         Application.MessageBox(PChar(Format('Se creó con éxito el archivo %s',[ExtractFileName(GuardarArchivo.FileName)])),'Exportación Lista de Precios',MB_OK+MB_ICONINFORMATION);
-       end
+    if GuardarArchivo.Execute then
+     begin
+       try
+         begin
+           CD_Precios.SaveToFile(ExtractFileName(GuardarArchivo.FileName),dfXMLUTF8);
+           Application.MessageBox(PChar(Format('Se creó con éxito el archivo %s',[ExtractFileName(GuardarArchivo.FileName)])),'Exportación Lista de Precios',MB_OK+MB_ICONINFORMATION);
+           Result:=True;
+         end
+       except
+        begin
+           Application.MessageBox(PChar('Se produjo un error al crear el archivo'),'Exportación Lista de Precios',MB_OK+MB_ICONWARNING);
+           Result:=False;
+           Exit;
+        end
+       end;
+     end
    end;
-  PArchivoPrecios.Visible:=False;
-  PanelContenedor.Enabled:=True;
+end;
+
+function TFABM_Precios.importarPrecios: Boolean;
+var
+cant,idSuc:integer;
+begin
+
+   CD_Precios.EmptyDataSet;
+
+   if AbrirArchivo.Execute then
+   begin
+     try
+       begin
+         CD_Precios.LoadFromFile(ExtractFileName(AbrirArchivo.FileName));
+         cant:=CD_Precios.RecordCount;
+       end
+     except
+      begin
+         Application.MessageBox(PChar('Se produjo un error al importar el archivo'),'Importación Lista de Precios',MB_OK+MB_ICONWARNING);
+         Result:=False;
+         Exit;
+      end
+     end;
+   end;
+
+
+
+  if dm.EKModelo.iniciar_transaccion('Importar Lista Precios',[]) then
+  begin
+   idSuc:=dm.ZQ_SucursalID_SUCURSAL.AsInteger;
+   CD_Precios.First;
+
+   while not(CD_Precios.Eof) do
+   begin
+     ZQ_ActualizarPrecios.Close;
+     ZQ_ActualizarPrecios.ParamByName('id_prod').AsInteger:=CD_Preciosid_producto.AsInteger;
+     ZQ_ActualizarPrecios.ParamByName('id_suc').AsInteger:=idSuc;
+     ZQ_ActualizarPrecios.ParamByName('precio_costo').Value:=CD_Preciosprecio_costo.Value;
+     ZQ_ActualizarPrecios.ParamByName('precio_venta').Value:=CD_Preciosprecio_venta.Value;
+     ZQ_ActualizarPrecios.ParamByName('coef_ganancia').Value:=CD_Precioscoef_ganancia.Value;
+     ZQ_ActualizarPrecios.ParamByName('coef_descuento').Value:=CD_Precioscoef_descuento.Value;
+     ZQ_ActualizarPrecios.ParamByName('impuesto_interno').Value:=CD_Preciosimpuesto_interno.Value;
+     ZQ_ActualizarPrecios.ParamByName('impuesto_iva').Value:=CD_Preciosimpuesto_iva.Value;
+     ZQ_ActualizarPrecios.ParamByName('precio_costo_cimpuestos').Value:=CD_Preciosprecio_costo_cimpuestos.Value;
+     ZQ_ActualizarPrecios.ParamByName('impuesto_adicional1').Value:=CD_Preciosimpuesto_adicional1.Value;
+     ZQ_ActualizarPrecios.ParamByName('impuesto_adicional2').Value:=CD_Preciosimpuesto_adicional2.Value;
+     ZQ_ActualizarPrecios.ParamByName('precio1').Value:=CD_Preciosprecio1.Value;
+     ZQ_ActualizarPrecios.ParamByName('precio2').Value:=CD_Preciosprecio2.Value;
+     ZQ_ActualizarPrecios.ParamByName('precio3').Value:=CD_Preciosprecio3.Value;
+     ZQ_ActualizarPrecios.ParamByName('precio4').Value:=CD_Preciosprecio4.Value;
+     ZQ_ActualizarPrecios.ParamByName('precio5').Value:=CD_Preciosprecio5.Value;
+     ZQ_ActualizarPrecios.ExecSQL;
+
+     CD_Precios.Next;
+   end;
+
+   if dm.EKModelo.finalizar_transaccion('Importar Lista Precios') then
+    begin
+        Application.MessageBox(PChar(Format('Se importaron con éxito %d productos',[cant])),'Importación Lista de Precios',MB_OK+MB_ICONINFORMATION);
+        Result:=True;
+    end
+   else
+      begin
+         Application.MessageBox(PChar('Se produjo un error al importar el archivo'),'Importación Lista de Precios',MB_OK+MB_ICONWARNING);
+         Result:=False;
+         Exit;
+      end
+  end;
+
+
 
 end;
 
