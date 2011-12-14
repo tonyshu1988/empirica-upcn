@@ -3779,7 +3779,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
     Width = 173
     Height = 105
     BevelInner = bvLowered
-    TabOrder = 4
+    TabOrder = 3
     object Label18: TLabel
       Left = 2
       Top = 2
@@ -4544,17 +4544,13 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
         'tal, cc.cuit_cuil,'
       
         '       cc.baja, cc.nombre_provincia, cc.nombre_tipo_iva, cc.cod_' +
-        'iva, cc.codigo_corto'
-      'from ctacte_general(:id_proveedor, :id_cliente) cc')
+        'iva, cc.codigo_corto, cc.deuda_vencida'
+      'from ctacte_general(:id_proveedor, null) cc'
+      'order by cc.nombre')
     Params = <
       item
         DataType = ftUnknown
         Name = 'id_proveedor'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id_cliente'
         ParamType = ptUnknown
       end>
     Left = 141
@@ -4563,11 +4559,6 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
       item
         DataType = ftUnknown
         Name = 'id_proveedor'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id_cliente'
         ParamType = ptUnknown
       end>
     object ZQ_CtaCte_GralLIMITE_DEUDA: TFloatField
@@ -4631,6 +4622,11 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
     end
     object ZQ_CtaCte_GralID_PROVEEDOR_OUT: TIntegerField
       FieldName = 'ID_PROVEEDOR_OUT'
+    end
+    object ZQ_CtaCte_GralDEUDA_VENCIDA: TStringField
+      FieldName = 'DEUDA_VENCIDA'
+      ReadOnly = True
+      Size = 1
     end
   end
   object DS_CtaCte_Gral: TDataSource
@@ -4704,10 +4700,6 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
         Name = 'fecha_hasta'
         ParamType = ptUnknown
       end>
-    object ZQ_CtaCte_ProveedorTIPO_COMPROBANTE: TStringField
-      FieldName = 'TIPO_COMPROBANTE'
-      Size = 30
-    end
     object ZQ_CtaCte_ProveedorID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
@@ -4751,6 +4743,10 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
     end
     object ZQ_CtaCte_ProveedorID_COMPROB_FP: TIntegerField
       FieldName = 'ID_COMPROB_FP'
+    end
+    object ZQ_CtaCte_ProveedorTIPO_COMPROBANTE: TStringField
+      FieldName = 'TIPO_COMPROBANTE'
+      Size = 100
     end
   end
   object DS_CtaCte_Proveedor: TDataSource
@@ -4997,8 +4993,9 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
         'tal, cc.cuit_cuil,'
       
         '       cc.baja, cc.nombre_provincia, cc.nombre_tipo_iva, cc.cod_' +
-        'iva, cc.codigo_corto'
-      'from ctacte_general(:id_proveedor, :id_cliente) cc')
+        'iva, cc.codigo_corto, cc.deuda_vencida'
+      'from ctacte_general(:id_proveedor, null) cc'
+      'order by cc.nombre')
     SQL_Select.Strings = (
       
         'select cc.id_proveedor_out, cc.limite_deuda, cc.vencimiento_dias' +
@@ -5008,9 +5005,11 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
         'tal, cc.cuit_cuil,'
       
         '       cc.baja, cc.nombre_provincia, cc.nombre_tipo_iva, cc.cod_' +
-        'iva, cc.codigo_corto')
+        'iva, cc.codigo_corto, cc.deuda_vencida')
     SQL_From.Strings = (
-      'from ctacte_general(:id_proveedor, :id_cliente) cc')
+      'from ctacte_general(:id_proveedor, null) cc')
+    SQL_Orden.Strings = (
+      'order by cc.nombre')
     UsarWhereOriginal = EK_Sin_Where
     Left = 491
     Top = 158
