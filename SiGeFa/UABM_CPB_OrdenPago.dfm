@@ -1401,6 +1401,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
               FieldName = 'MDCP_BANCO'
               Title.Alignment = taCenter
               Title.Caption = 'Banco Medio'
+              Width = 179
               Visible = True
             end
             item

@@ -153,7 +153,6 @@ type
     EKEditCliente_HaberFiltro: TEKEdit;
     EKEditCliente_DebeFiltro: TEKEdit;
     EKEditCliente_CantidadFiltro: TEKEdit;
-    ZQ_CtaCte_ClienteTIPO_COMPROBANTE: TStringField;
     ZQ_CtaCte_ClienteID_COMPROBANTE: TIntegerField;
     ZQ_CtaCte_ClienteID_CUENTA: TIntegerField;
     ZQ_CtaCte_ClienteID_VENDEDOR: TIntegerField;
@@ -287,6 +286,8 @@ type
     ZQ_SaldoIniFECHA: TDateTimeField;
     ZQ_SaldoIniFECHA_COBRADA: TDateField;
     ZQ_SaldoIniIMPORTE_TOTAL: TFloatField;
+    ZQ_CtaCte_ClienteTIPO_COMPROBANTE: TStringField;
+    ZQ_CtaCte_GralDEUDA_VENCIDA: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -420,7 +421,7 @@ begin
 
   ZQ_CtaCte_Gral.Close;
   ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= -1;
-  ZQ_CtaCte_Gral.ParamByName('id_proveedor').clear;
+//  ZQ_CtaCte_Gral.ParamByName('id_proveedor').clear;
   ZQ_CtaCte_Gral.Open;
 
   calcularTotales('GENERAL');
@@ -646,7 +647,7 @@ procedure TFCuentaCorriente.DBGridResumen_CtaCtesDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  FPrincipal.PintarFilasGrillas(DBGridResumen_CtaCtes, Rect, DataCol, Column, State);
+  FPrincipal.PintarFilasGrillasConBajas(DBGridResumen_CtaCtes, ZQ_CtaCte_GralDEUDA_VENCIDA.AsString, Rect, DataCol, Column, State);
 end;
 
 procedure TFCuentaCorriente.btnExcelClick(Sender: TObject);

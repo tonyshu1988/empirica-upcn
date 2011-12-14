@@ -1431,6 +1431,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               FieldName = 'MDCP_BANCO'
               Title.Alignment = taCenter
               Title.Caption = 'Banco Medio'
+              Width = 210
               Visible = True
             end
             item
