@@ -871,8 +871,12 @@ begin
   while not ZQ_CpbFormaPago.Eof do  //por cada una de las formas de pago cargadas
   begin
     ZQ_CpbFormaPago.Edit;
+    if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
+      ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_comprobante;
+
     if ZQ_CpbFormaPagoIMPORTE.IsNull then
       ZQ_CpbFormaPagoIMPORTE.AsFloat:=0;
+
     ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat; //pongo el mismo importe cargado al importe_real
     ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
 
@@ -969,7 +973,7 @@ begin
       exit;
     end;
 
-    if saldoFormaCobroPago <> 0 then
+    if saldoFormaCobroPago <> 0 then //si es distinto de cero puede ser una nota de credito o debito
     begin
       PanelEditar.Enabled:= false; //deshabilito el panel del fondo
       PanelEditar_FPago.Visible:= true; //traigo el panel de forma de pago
@@ -1018,7 +1022,7 @@ begin
 
       finalizarCarga:= true;
     end
-    else
+    else //si es igual a cero solamente se registra el cambio de producto
     begin
       borrarCuentasEgreso;
       borrarCuentasIngreso;
