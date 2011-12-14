@@ -1,6 +1,6 @@
 object FConfiguracion: TFConfiguracion
-  Left = 444
-  Top = 129
+  Left = 403
+  Top = 118
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Configuraci'#243'n General del Sistema'
@@ -1341,7 +1341,6 @@ object FConfiguracion: TFConfiguracion
     object btNuevo: TdxBarLargeButton
       Caption = 'Agregar'
       Category = 0
-      Enabled = False
       Hint = 'Agregar'
       Visible = ivAlways
       ImageIndex = 0
@@ -1351,13 +1350,13 @@ object FConfiguracion: TFConfiguracion
     object GrupoVisualizacion: TdxBarGroup
       Items = (
         'btnSalir'
-        'BtModificar')
+        'BtModificar'
+        'btNuevo')
     end
     object GrupoEdicion: TdxBarGroup
       Items = (
         'BtGuardar'
-        'BtCancelar'
-        'btNuevo')
+        'BtCancelar')
     end
   end
   object BuscarLogo: TOpenPictureDialog
