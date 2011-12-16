@@ -288,6 +288,8 @@ type
     ZQ_SaldoIniIMPORTE_TOTAL: TFloatField;
     ZQ_CtaCte_ClienteTIPO_COMPROBANTE: TStringField;
     ZQ_CtaCte_GralDEUDA_VENCIDA: TStringField;
+    lblCantidadRegistros: TLabel;
+    StaticTxtBaja: TStaticText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -361,7 +363,10 @@ end;
 procedure TFCuentaCorriente.btnBuscarClick(Sender: TObject);
 begin
   if EKBuscarCliente.Buscar then
+  begin
+    dm.mostrarCantidadRegistro(ZQ_CtaCte_Gral, lblCantidadRegistros);
     calcularTotales('GENERAL');
+  end;
 end;
 
 
@@ -421,8 +426,8 @@ begin
 
   ZQ_CtaCte_Gral.Close;
   ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= -1;
-//  ZQ_CtaCte_Gral.ParamByName('id_proveedor').clear;
   ZQ_CtaCte_Gral.Open;
+  dm.mostrarCantidadRegistro(ZQ_CtaCte_Gral, lblCantidadRegistros);
 
   calcularTotales('GENERAL');
 end;
