@@ -3897,9 +3897,9 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object DBGridResumen_CtaCtes: TDBGrid
       Left = 1
-      Top = 89
+      Top = 20
       Width = 932
-      Height = 350
+      Height = 419
       Align = alClient
       Color = 14606012
       DataSource = DS_CtaCte_Gral
@@ -4040,10 +4040,37 @@ object FCuentaCorriente: TFCuentaCorriente
       Left = 1
       Top = 1
       Width = 932
-      Height = 88
+      Height = 19
       Align = alTop
       TabOrder = 2
-      Visible = False
+      object lblCantidadRegistros: TLabel
+        Left = 1
+        Top = 1
+        Width = 134
+        Height = 17
+        Align = alLeft
+        Caption = 'lblCantidadRegistros'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object StaticTxtBaja: TStaticText
+        Left = 822
+        Top = 1
+        Width = 109
+        Height = 17
+        Align = alRight
+        Alignment = taCenter
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'Deuda Vencida'
+        Color = 6974207
+        ParentColor = False
+        TabOrder = 0
+      end
     end
   end
   object dxBarABM: TdxBarManager
@@ -5187,6 +5214,23 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
         TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Deuda Vencida'
+        Campo = 'DEUDA_VENCIDA'
+        Tabla = 'cc'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'NO'
+          'SI')
+        TipoComboValoresReales.Strings = (
+          'N'
+          'S')
+        TipoComboAncho = 200
+        CambiarCondicion = False
         ItemIndex = -1
       end>
     CriteriosLocate = <>
