@@ -19,8 +19,8 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 861
-    Height = 350
+    Width = 853
+    Height = 344
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -28,8 +28,8 @@ object FBuscarPersona: TFBuscarPersona
     object DBGridPersonas: TDBGrid
       Left = 3
       Top = 3
-      Width = 855
-      Height = 143
+      Width = 847
+      Height = 137
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
@@ -120,8 +120,8 @@ object FBuscarPersona: TFBuscarPersona
     end
     object PanelEdicion: TPanel
       Left = 3
-      Top = 146
-      Width = 855
+      Top = 140
+      Width = 847
       Height = 201
       Align = alBottom
       BevelOuter = bvNone
@@ -130,7 +130,7 @@ object FBuscarPersona: TFBuscarPersona
       object PageControl: TPageControl
         Left = 0
         Top = 0
-        Width = 855
+        Width = 847
         Height = 201
         ActivePage = TabSheetDatos
         Align = alClient
@@ -697,7 +697,7 @@ object FBuscarPersona: TFBuscarPersona
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
