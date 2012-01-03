@@ -353,6 +353,9 @@ var
 begin
   PageControl.TabIndex := 0;
 
+  if not validarcampos then
+    exit;
+
   if id_relacion = RELACION_CLIENTE then //si estoy dando de alta un cliente
   begin
     ZQ_RelacionCliente.Append;
@@ -362,17 +365,14 @@ begin
     ZQ_RelacionClienteID_EMPRESA.Clear;
   end
   else //si no estoy dando de alta un cliente, pregunto si quiero que la persona sea cliente
-  if (RadioGroupRelacionCliente.ItemIndex = 1) then //si esta marcado como que es cliente
-  begin
-    ZQ_RelacionCliente.Append;
-    ZQ_RelacionClienteID_PERSONA.AsInteger:= id_persona;
-    ZQ_RelacionClienteID_RELACION.AsInteger:= RELACION_CLIENTE; //cliente
-    ZQ_RelacionClienteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
-    ZQ_RelacionClienteID_EMPRESA.Clear;
-  end;
-
-  if not validarcampos then
-    exit;
+    if (RadioGroupRelacionCliente.ItemIndex = 1) then //si esta marcado como que es cliente
+    begin
+      ZQ_RelacionCliente.Append;
+      ZQ_RelacionClienteID_PERSONA.AsInteger:= id_persona;
+      ZQ_RelacionClienteID_RELACION.AsInteger:= RELACION_CLIENTE; //cliente
+      ZQ_RelacionClienteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+      ZQ_RelacionClienteID_EMPRESA.Clear;
+    end;
 
   id:= ZQ_PersonasID_PERSONA.AsInteger;
   if DM.EKModelo.finalizar_transaccion(Transaccion_CrearPersona) then
