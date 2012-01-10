@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 248
-  Top = 128
+  Left = 329
+  Top = 200
   Width = 1032
   Height = 700
   Caption = 'Cajero SiGeFa'
@@ -738,272 +738,6 @@ object FCajero: TFCajero
           Width = 93
           Visible = True
         end>
-    end
-  end
-  object PABM_FormaPago: TPanel
-    Left = 93
-    Top = 433
-    Width = 905
-    Height = 116
-    BevelInner = bvLowered
-    BevelOuter = bvSpace
-    BevelWidth = 2
-    BorderStyle = bsSingle
-    TabOrder = 7
-    object Label18: TLabel
-      Left = 4
-      Top = 4
-      Width = 893
-      Height = 16
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Forma de Pago'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Layout = tlCenter
-    end
-    object Label47: TLabel
-      Left = 482
-      Top = 24
-      Width = 83
-      Height = 13
-      Caption = 'Medio de Pago'
-      FocusControl = edDetalleMDP
-    end
-    object Label48: TLabel
-      Left = 323
-      Top = 62
-      Width = 62
-      Height = 13
-      Caption = 'MDP Fecha'
-      FocusControl = edMDPFecha
-    end
-    object Label49: TLabel
-      Left = 435
-      Top = 62
-      Width = 64
-      Height = 13
-      Caption = 'MDP Banco'
-      FocusControl = edMDPBanco
-    end
-    object Label50: TLabel
-      Left = 634
-      Top = 62
-      Width = 74
-      Height = 13
-      Caption = 'MDP N'#250'mero'
-      FocusControl = edMDPNro
-    end
-    object Label51: TLabel
-      Left = 16
-      Top = 62
-      Width = 46
-      Height = 13
-      Caption = 'Importe'
-      FocusControl = edImporte
-    end
-    object Label53: TLabel
-      Left = 16
-      Top = 24
-      Width = 40
-      Height = 13
-      Caption = 'C'#243'digo'
-      FocusControl = edCodCuenta
-    end
-    object Label55: TLabel
-      Left = 68
-      Top = 24
-      Width = 85
-      Height = 13
-      Caption = 'Cuenta Detalle'
-      FocusControl = edCuenta
-    end
-    object Label58: TLabel
-      Left = 152
-      Top = 62
-      Width = 101
-      Height = 13
-      Caption = 'Importe de Venta'
-      FocusControl = edImporteVenta
-    end
-    object Label61: TLabel
-      Left = 435
-      Top = 24
-      Width = 40
-      Height = 13
-      Caption = 'C'#243'digo'
-      FocusControl = edCodMDP
-    end
-    object edDetalleMDP: TDBLookupComboBox
-      Left = 482
-      Top = 40
-      Width = 329
-      Height = 21
-      Color = 16772332
-      DataField = 'medioPago'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 3
-      OnExit = edCodCuentaExit
-    end
-    object edMDPFecha: TDBEdit
-      Left = 323
-      Top = 76
-      Width = 94
-      Height = 21
-      DataField = 'MDCP_FECHA'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 6
-    end
-    object edMDPBanco: TDBEdit
-      Left = 435
-      Top = 76
-      Width = 164
-      Height = 21
-      DataField = 'MDCP_BANCO'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 7
-    end
-    object edMDPNro: TDBEdit
-      Left = 634
-      Top = 76
-      Width = 177
-      Height = 21
-      DataField = 'MDCP_CHEQUE'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 8
-    end
-    object edImporte: TDBEdit
-      Left = 16
-      Top = 76
-      Width = 134
-      Height = 21
-      DataField = 'IMPORTE'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 4
-      OnExit = edCodCuentaExit
-    end
-    object edCodCuenta: TDBEdit
-      Left = 16
-      Top = 40
-      Width = 41
-      Height = 21
-      Color = 16772332
-      DataField = 'CUENTA_INGRESO'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnExit = edCodCuentaExit
-    end
-    object edCuenta: TDBLookupComboBox
-      Left = 67
-      Top = 40
-      Width = 350
-      Height = 21
-      Color = 16772332
-      DataField = '_ctaIngreso'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnExit = edCodCuentaExit
-    end
-    object edImporteVenta: TDBEdit
-      Left = 152
-      Top = 76
-      Width = 134
-      Height = 21
-      Color = 16772332
-      DataField = '_importeVenta'
-      DataSource = DSFpago
-      Enabled = False
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 5
-    end
-    object edCodMDP: TDBEdit
-      Left = 435
-      Top = 40
-      Width = 41
-      Height = 21
-      Color = 16772332
-      DataField = 'ID_TIPO_FORMAPAG'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 2
-      OnExit = edCodCuentaExit
-    end
-    object btFPAceptar: TBitBtn
-      Left = 815
-      Top = 40
-      Width = 79
-      Height = 25
-      Caption = 'Aceptar'
-      TabOrder = 9
-      OnClick = btFPAceptarClick
-    end
-    object btFPCancelar: TBitBtn
-      Left = 815
-      Top = 72
-      Width = 79
-      Height = 25
-      Caption = 'Cancelar'
-      TabOrder = 10
-      OnClick = btFPCancelarClick
     end
   end
   object PLeerCodigo: TPanel
@@ -4405,6 +4139,428 @@ object FCajero: TFCajero
           TabOrder = 6
         end
       end
+    end
+  end
+  object Panel1: TPanel
+    Left = 384
+    Top = 88
+    Width = 481
+    Height = 329
+    BevelInner = bvLowered
+    BevelWidth = 2
+    BorderWidth = 2
+    BorderStyle = bsSingle
+    TabOrder = 8
+    object Label15: TLabel
+      Left = -2
+      Top = 166
+      Width = 475
+      Height = 17
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Seleccione su Forma de Pago'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+    end
+    object Label43: TLabel
+      Left = 14
+      Top = 37
+      Width = 56
+      Height = 13
+      Caption = 'Sucursal'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label46: TLabel
+      Left = 14
+      Top = 117
+      Width = 62
+      Height = 13
+      Caption = 'Vendedor'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label52: TLabel
+      Left = 14
+      Top = 77
+      Width = 45
+      Height = 13
+      Caption = 'Cliente'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label57: TLabel
+      Left = 6
+      Top = 6
+      Width = 465
+      Height = 24
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Venta / Facturaci'#243'n '#193'gil'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+    end
+    object DBEdit16: TDBEdit
+      Left = 14
+      Top = 130
+      Width = 443
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 16771302
+      DataField = 'nVendedor'
+      DataSource = DS_Comprobante
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object DBEdit18: TDBEdit
+      Left = 14
+      Top = 50
+      Width = 443
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 16771302
+      DataField = 'NOMBRE'
+      DataSource = DS_Sucursal
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object DBEdit19: TDBEdit
+      Left = 14
+      Top = 90
+      Width = 443
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 16771302
+      DataField = 'pers_nombre'
+      DataSource = DS_Comprobante
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object BitBtn1: TBitBtn
+      Left = 352
+      Top = 296
+      Width = 121
+      Height = 25
+      Caption = 'Cancelar'
+      TabOrder = 3
+    end
+    object BitBtn2: TBitBtn
+      Left = 104
+      Top = 200
+      Width = 97
+      Height = 73
+      Caption = 'Efectivo'
+      TabOrder = 4
+    end
+    object BitBtn3: TBitBtn
+      Left = 256
+      Top = 200
+      Width = 97
+      Height = 73
+      Caption = 'Efectivo F'
+      TabOrder = 5
+    end
+  end
+  object PABM_FormaPago: TPanel
+    Left = 93
+    Top = 433
+    Width = 905
+    Height = 116
+    BevelInner = bvLowered
+    BevelOuter = bvSpace
+    BevelWidth = 2
+    BorderStyle = bsSingle
+    TabOrder = 7
+    object Label18: TLabel
+      Left = 4
+      Top = 4
+      Width = 893
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Forma de Pago'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label47: TLabel
+      Left = 482
+      Top = 24
+      Width = 83
+      Height = 13
+      Caption = 'Medio de Pago'
+      FocusControl = edDetalleMDP
+    end
+    object Label48: TLabel
+      Left = 323
+      Top = 62
+      Width = 62
+      Height = 13
+      Caption = 'MDP Fecha'
+      FocusControl = edMDPFecha
+    end
+    object Label49: TLabel
+      Left = 435
+      Top = 62
+      Width = 64
+      Height = 13
+      Caption = 'MDP Banco'
+      FocusControl = edMDPBanco
+    end
+    object Label50: TLabel
+      Left = 634
+      Top = 62
+      Width = 74
+      Height = 13
+      Caption = 'MDP N'#250'mero'
+      FocusControl = edMDPNro
+    end
+    object Label51: TLabel
+      Left = 16
+      Top = 62
+      Width = 46
+      Height = 13
+      Caption = 'Importe'
+      FocusControl = edImporte
+    end
+    object Label53: TLabel
+      Left = 16
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'C'#243'digo'
+      FocusControl = edCodCuenta
+    end
+    object Label55: TLabel
+      Left = 68
+      Top = 24
+      Width = 85
+      Height = 13
+      Caption = 'Cuenta Detalle'
+      FocusControl = edCuenta
+    end
+    object Label58: TLabel
+      Left = 152
+      Top = 62
+      Width = 101
+      Height = 13
+      Caption = 'Importe de Venta'
+      FocusControl = edImporteVenta
+    end
+    object Label61: TLabel
+      Left = 435
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'C'#243'digo'
+      FocusControl = edCodMDP
+    end
+    object edDetalleMDP: TDBLookupComboBox
+      Left = 482
+      Top = 40
+      Width = 329
+      Height = 21
+      Color = 16771302
+      DataField = 'medioPago'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnExit = edCodCuentaExit
+    end
+    object edMDPFecha: TDBEdit
+      Left = 323
+      Top = 76
+      Width = 94
+      Height = 21
+      Color = 16771302
+      DataField = 'MDCP_FECHA'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 6
+    end
+    object edMDPBanco: TDBEdit
+      Left = 435
+      Top = 76
+      Width = 164
+      Height = 21
+      Color = 16771302
+      DataField = 'MDCP_BANCO'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 7
+    end
+    object edMDPNro: TDBEdit
+      Left = 634
+      Top = 76
+      Width = 177
+      Height = 21
+      Color = 16771302
+      DataField = 'MDCP_CHEQUE'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 8
+    end
+    object edImporte: TDBEdit
+      Left = 16
+      Top = 76
+      Width = 134
+      Height = 21
+      Color = 16771302
+      DataField = 'IMPORTE'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      OnExit = edCodCuentaExit
+    end
+    object edCodCuenta: TDBEdit
+      Left = 16
+      Top = 40
+      Width = 41
+      Height = 21
+      Color = 16771302
+      DataField = 'CUENTA_INGRESO'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnExit = edCodCuentaExit
+    end
+    object edCuenta: TDBLookupComboBox
+      Left = 67
+      Top = 40
+      Width = 350
+      Height = 21
+      Color = 16771302
+      DataField = '_ctaIngreso'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnExit = edCodCuentaExit
+    end
+    object edImporteVenta: TDBEdit
+      Left = 152
+      Top = 76
+      Width = 134
+      Height = 21
+      Color = 16771302
+      DataField = '_importeVenta'
+      DataSource = DSFpago
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+    end
+    object edCodMDP: TDBEdit
+      Left = 435
+      Top = 40
+      Width = 41
+      Height = 21
+      Color = 16771302
+      DataField = 'ID_TIPO_FORMAPAG'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnExit = edCodCuentaExit
+    end
+    object btFPAceptar: TBitBtn
+      Left = 815
+      Top = 40
+      Width = 79
+      Height = 25
+      Caption = 'Aceptar'
+      TabOrder = 9
+      OnClick = btFPAceptarClick
+    end
+    object btFPCancelar: TBitBtn
+      Left = 815
+      Top = 72
+      Width = 79
+      Height = 25
+      Caption = 'Cancelar'
+      TabOrder = 10
+      OnClick = btFPCancelarClick
     end
   end
   object ZQ_Comprobante_FormaPago: TZQuery

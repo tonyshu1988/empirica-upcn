@@ -541,6 +541,18 @@ type
     ZQ_TipoIVAVERIFICA_CUIT: TStringField;
     ZQ_ColsPrecios: TZQuery;
     ZQ_ColsPreciosCOLUMNA_PRECIO: TIntegerField;
+    Panel1: TPanel;
+    Label15: TLabel;
+    Label43: TLabel;
+    Label46: TLabel;
+    Label52: TLabel;
+    Label57: TLabel;
+    DBEdit16: TDBEdit;
+    DBEdit18: TDBEdit;
+    DBEdit19: TDBEdit;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -695,12 +707,12 @@ begin
      cod := codBarras.Text;
      try
       begin
-        if not(sonTodosNumeros(MidStr(cod,2,Length(cod)-1))) then
-        begin
-          Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
-          LimpiarCodigo;
-          exit;
-        end;
+//        if not(sonTodosNumeros(MidStr(cod,2,Length(cod)-1))) then
+//        begin
+//          Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
+//          LimpiarCodigo;
+//          exit;
+//        end;
         if UpperCase(MidStr(Cod, 1, 1)) = 'C' then
         begin
           LeerCodigo('C',Cod);
