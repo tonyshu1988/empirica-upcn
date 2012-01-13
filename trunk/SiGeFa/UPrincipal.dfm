@@ -22,7 +22,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 29
     Width = 863
-    Height = 463
+    Height = 469
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,7 +4702,7 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 492
+    Top = 498
     Width = 863
     Height = 19
     Panels = <
@@ -4723,9 +4723,9 @@ object FPrincipal: TFPrincipal
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
-    ColorMap.HighlightColor = clWhite
+    ColorMap.HighlightColor = 14410210
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = clWhite
+    ColorMap.UnusedColor = 14410210
     ParentShowHint = False
     ShowHint = True
     Spacing = 0
@@ -4734,7 +4734,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 29
     Width = 863
-    Height = 463
+    Height = 469
     Align = alClient
     Caption = 'DEMO'
     Color = 16053492
@@ -5128,6 +5128,12 @@ object FPrincipal: TFPrincipal
       ImageIndex = 1
       OnExecute = AABM_PersonasPtosExecute
     end
+    object AConsulta_Precios: TAction
+      Caption = 'Consulta Precios'
+      Hint = 'Consulta Precios'
+      ImageIndex = 58
+      OnExecute = AConsulta_PreciosExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5169,6 +5175,13 @@ object FPrincipal: TFPrincipal
       end
       object ImprimirEtiquetas1: TMenuItem
         Action = AImprimirEtiqueta
+      end
+      object N9: TMenuItem
+        Caption = '-'
+      end
+      object ConsultaPrecios1: TMenuItem
+        Tag = 1
+        Action = AConsulta_Precios
       end
     end
     object Clientes1: TMenuItem

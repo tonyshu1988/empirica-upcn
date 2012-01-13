@@ -155,6 +155,9 @@ type
     AABM_PersonasPtos: TAction;
     N7: TMenuItem;
     ABMPersonasPuntos1: TMenuItem;
+    AConsulta_Precios: TAction;
+    ConsultaPrecios1: TMenuItem;
+    N9: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -209,6 +212,7 @@ type
     procedure ADebuggingExecute(Sender: TObject);
     procedure AReimpresionComprobExecute(Sender: TObject);
     procedure AABM_PersonasPtosExecute(Sender: TObject);
+    procedure AConsulta_PreciosExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -244,7 +248,8 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa,
   UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
   UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
-  UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos;
+  UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos,
+  UConsulta_Precios;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -735,6 +740,11 @@ end;
 procedure TFPrincipal.AABM_PersonasPtosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_PersonasPuntos, FABM_PersonasPuntos);
+end;
+
+procedure TFPrincipal.AConsulta_PreciosExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFConsulta_Precios, FConsulta_Precios);
 end;
 
 end.

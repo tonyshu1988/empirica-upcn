@@ -62,7 +62,8 @@ uses
   RegExpr in 'RegExpr.pas',
   UReimpresionComprobantes in 'UReimpresionComprobantes.pas' {FReimpresionComprobantes},
   UBuscarComprobante in 'UBuscarComprobante.pas' {FBuscarComprobante},
-  UABM_PersonasPuntos in 'UABM_PersonasPuntos.pas' {FABM_PersonasPuntos};
+  UABM_PersonasPuntos in 'UABM_PersonasPuntos.pas' {FABM_PersonasPuntos},
+  UConsulta_Precios in 'UConsulta_Precios.pas' {FConsulta_Precios};
 
 {$R *.res}
 
