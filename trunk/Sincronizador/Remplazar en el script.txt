@@ -1,0 +1,9 @@
+buscar: 'CREATE TRIGGER IBE$' reemplazar por: 'CREATE TRIGGER Z_SINC_'
+buscar: 'insert into ibe$log_tables' reemplazar por: 'insert into Z_SINC_TABLA'
+buscar: 'insert into ibe$log_keys' reemplazar por: 'insert into Z_SINC_CLAVE'
+buscar: 'insert into ibe$log_fields' reemplazar por: 'insert into Z_SINC_CAMPO'
+buscar: 'insert into ibe$log_blob_fields' reemplazar por: 'insert into Z_SINC_CAMPO_BLOB'
+buscar: 'tid = gen_id(ibe$log_tables_gen,1);' reemplazar por: 'id_sucursal = null; select c.db_sucursal from configuracion c into :id_sucursal; if (id_sucursal is null) then exception error 'LA BASE DE DATOS NO TIENE ASOCIADA UNA sucursal, VERIFIQUE'; tid = id_sucursal||GEN_ID(z_sinc_tabla_gen,1);'
+buscar: 'declare variable tid integer;' reemplazar por: 'declare variable tid integer; declare variable id_sucursal integer;'
+buscar: 'Z_SINC_COMPROBANTE_FORMA_PAGO' reemplazar por: 'Z_SINC_COMP_FORMA_PAGO';
+buscar: 'Z_SINC_CONFIGURACION_VARIABLES' reemplazar por: 'Z_SINC_CONFIG_VAR';
