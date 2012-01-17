@@ -124,6 +124,7 @@ end;
 procedure TFArqueo_Caja.FormCreate(Sender: TObject);
 begin
   DateTimePicker1.Date:=dm.EKModelo.Fecha();
+  DateTimePicker1Change(self);
 end;
 
 procedure TFArqueo_Caja.btnSalirClick(Sender: TObject);

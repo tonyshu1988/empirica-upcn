@@ -152,7 +152,7 @@ type
     DBEdit17: TDBEdit;
     dxBarABM: TdxBarManager;
     BtBuscarProducto: TdxBarLargeButton;
-    BtModificar: TdxBarLargeButton;
+    btnVentaRapida: TdxBarLargeButton;
     btBuscProd: TdxBarLargeButton;
     BtLeerCB: TdxBarLargeButton;
     BtAceptarPago: TdxBarLargeButton;
@@ -541,7 +541,7 @@ type
     ZQ_TipoIVAVERIFICA_CUIT: TStringField;
     ZQ_ColsPrecios: TZQuery;
     ZQ_ColsPreciosCOLUMNA_PRECIO: TIntegerField;
-    Panel1: TPanel;
+    PVentaDirecta: TPanel;
     Label15: TLabel;
     Label43: TLabel;
     Label46: TLabel;
@@ -551,8 +551,10 @@ type
     DBEdit18: TDBEdit;
     DBEdit19: TDBEdit;
     BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
+    btnEfectivo: TBitBtn;
+    btnEfectivoF: TBitBtn;
+    Image3: TImage;
+    AVentaRapida: TAction;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string;prod:integer):Boolean;
@@ -641,6 +643,11 @@ type
     procedure menuQuitarFPClick(Sender: TObject);
     procedure sacarRepetidosFP();
     procedure btFPCancelarClick(Sender: TObject);
+    procedure btnEfectivoClick(Sender: TObject);
+    procedure btnEfectivoFClick(Sender: TObject);
+    procedure btnVentaRapidaClick(Sender: TObject);
+    procedure AVentaRapidaExecute(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -905,8 +912,7 @@ begin
   edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
   DBImage1.Visible:=True;
   DBImage1.BringToFront;
-  FPrincipal.Iconos_Menu_32.GetBitmap(1, btnConfirmarVenta.Glyph);
-  FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarVenta.Glyph);
+
   PanelCambiarFecha.Visible:= false;
   CheckBoxCambiarFecha.Checked:= false;
   if dm.EKUsrLogin.PermisoAccion('CAJA_CAMBIAR_FECHA') then
@@ -927,9 +933,15 @@ begin
      ZQ_FormasPago.Filtered:=True;
   end;
   PABM_FormaPago.Visible:=False;
+  //Formas de Pago
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btFPAceptar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btFPCancelar.Glyph);
-
+  //Confirmación Venta
+  FPrincipal.Iconos_Menu_32.GetBitmap(1, btnConfirmarVenta.Glyph);
+  FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarVenta.Glyph);
+  //Venta Rápida
+  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivo.Glyph);
+  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivoF.Glyph);
 end;
 
 
@@ -1633,7 +1645,7 @@ end;
 procedure TFCajero.btnCancelarVentaClick(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(abmComprobante) then
-     dm.EKModelo.cancelar_transaccion(abmComprobante); 
+     dm.EKModelo.cancelar_transaccion(abmComprobante);
   CD_Comprobante.Edit;
   PConfirmarVenta.Visible:=False;
   PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
@@ -2546,6 +2558,71 @@ if CD_Fpago.State in [dsInsert,dsEdit] then
     GrupoGuardarCancelar.Enabled:=true;
     DBGridFormaPago.SetFocus;
   end
+end;
+
+procedure TFCajero.btnEfectivoClick(Sender: TObject);
+begin
+
+    calcularFP();
+
+    CD_Fpago.Post;
+
+    BtAceptarPago.Click;
+    btnConfirmarVenta.Click;
+    PVentaDirecta.Visible:=False;
+end;
+
+procedure TFCajero.btnEfectivoFClick(Sender: TObject);
+begin
+
+    //Genera Vuelto y es FISCAL (Efectivo Fiscal)
+    ZQ_FormasPago.Locate('IF;GENERA_VUELTO',VarArrayOf(['S', 'S']),[]);
+    CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
+
+    calcularFP();
+
+    CD_Fpago.Post;
+
+    BtAceptarPago.Click;
+    btnConfirmarVenta.Click;
+    PVentaDirecta.Visible:=False;
+end;
+
+procedure TFCajero.btnVentaRapidaClick(Sender: TObject);
+begin
+   AVentaRapida.Execute;
+end;
+
+procedure TFCajero.AVentaRapidaExecute(Sender: TObject);
+begin
+if (acumFpago>0) then
+ begin
+    Application.MessageBox('Venta Ágil: No deben precargarse Formas de Pago.','Venta Ágil',MB_OK+MB_ICONINFORMATION);
+    exit;
+ end;
+
+ if validarBoleta() then
+  begin
+   PVentaDirecta.Visible:=True;
+   PVentaDirecta.BringToFront;
+   dm.centrarPanel(FCajero, PVentaDirecta);
+   PanelContenedorDerecha.Enabled:=not(PVentaDirecta.Visible);
+   GrupoGuardarCancelar.Enabled:=False;
+   grupoVertical.Enabled:=False;
+
+   CD_Fpago.Append;
+   ZQ_Cuentas.Locate('ID_CUENTA',ctaPorDefecto,[]);
+   CD_FpagoCUENTA_INGRESO.AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
+
+   btnEfectivo.SetFocus;
+  end;
+end;
+
+procedure TFCajero.BitBtn1Click(Sender: TObject);
+begin
+  btnCancelarVenta.Click;
+  PVentaDirecta.Visible:=False;
+  btnQuitarPago.Click;
 end;
 
 end.
