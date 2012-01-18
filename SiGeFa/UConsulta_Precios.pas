@@ -5,23 +5,16 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DBCtrls, DB,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, strutils, Mask;
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, strutils, Mask, UBuscarProductoStock,
+  ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFConsulta_Precios = class(TForm)
     PContenedor: TPanel;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btnVerDetalle: TdxBarLargeButton;
-    btnNuevo: TdxBarLargeButton;
-    btnModificar: TdxBarLargeButton;
-    btnBaja: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
-    btnGuardar: TdxBarLargeButton;
-    btnCancelar: TdxBarLargeButton;
-    btnImprimir: TdxBarLargeButton;
+    btnCodBarra: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
-    btnExcel: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     PCodBarraPrecio: TPanel;
@@ -82,24 +75,36 @@ type
     DBEdit6: TDBEdit;
     DBMemo1: TDBMemo;
     GB_Datos_Empresa: TGroupBox;
-    DBEdit7: TDBEdit;
-    DBEdit8: TDBEdit;
-    DBEdit9: TDBEdit;
-    DBEdit10: TDBEdit;
     DBImage1: TDBImage;
     Label9: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    BotonesRapidos: TActionManager;
+    ABuscarProd: TAction;
+    ACodBarra: TAction;
+    ASalir: TAction;
     procedure codbarrasKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
+    procedure ABuscarProdExecute(Sender: TObject);
+    procedure btnSalirClick(Sender: TObject);
+    procedure ACodBarraExecute(Sender: TObject);
+    procedure btnCodBarraClick(Sender: TObject);
+    procedure ASalirExecute(Sender: TObject);
   private
+    vsel: TFBuscarProductoStock;
     procedure IdentificarCodigo;
     procedure LeerCodigo(id, cod: String);
     function completarCodBar(cod: String): String;
+    procedure OnSelProd;
     { Private declarations }
   public
     { Public declarations }
@@ -115,6 +120,18 @@ uses UDM;
 
 {$R *.dfm}
 
+procedure TFConsulta_Precios.OnSelProd;
+begin
+  if not vsel.ZQ_Stock.IsEmpty then
+  begin
+    codBarras.Text:=vsel.ZQ_StockCODIGO_BARRA.AsString;
+    LeerCodigo('B',codBarras.Text);
+
+    vsel.ZQ_Stock.Filtered:=False;
+    vsel.Close;
+  end;
+end;
+
 procedure TFConsulta_Precios.codbarrasKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
 var
 IdProd : integer;
@@ -126,14 +143,8 @@ begin
     codbarras.Text:= '';
     Application.ProcessMessages;
     codbarras.SetFocus;
-  end
-  else
-    if key = 27 then
-    begin
-      //VerLectorCB(false);
-      //btnCancelarProd.Click;
-    end;
-    
+  end;
+
 end;
 
 procedure TFConsulta_Precios.IdentificarCodigo();
@@ -143,24 +154,6 @@ begin
      cod := codBarras.Text;
      try
       begin
-//        if not(sonTodosNumeros(MidStr(cod,2,Length(cod)-1))) then
-//        begin
-//          Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
-//          LimpiarCodigo;
-//          exit;
-//        end;
-        if UpperCase(MidStr(Cod, 1, 1)) = 'C' then
-        begin
-          LeerCodigo('C',Cod);
-          exit;
-        end;
-
-        if UpperCase(MidStr(Cod, 1, 1)) = 'I' then
-        begin
-          LeerCodigo('I',Cod);
-          exit;
-        end;
-
         // POR CODIGO DE BARRAS PRODUCTO
         if (Length(cod) <= LONG_COD_BARRAS) then
         begin
@@ -172,7 +165,6 @@ begin
         if (Length(cod) > LONG_COD_BARRAS) then
         begin
           Application.MessageBox('Longitud de código incorrecta', 'Código incorrecto');
-          //LimpiarCodigo;
           exit;
         end;
 
@@ -198,25 +190,9 @@ begin
   except
     begin
       Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
-      //LimpiarCodigo;
       exit;
     end
   end;
-  //Codigo Corto
-     if id='C' then
-      begin
-        ZQ_Productos.Close;
-        ZQ_Productos.sql[15]:=Format('and(p.cod_corto=%s)',[QuotedStr(IdProd)]);
-        ZQ_Productos.Open;
-      end;
-
-     if id='I' then
-      begin
-        ZQ_Productos.Close;
-        ZQ_Productos.sql[15]:=Format('and(p.id_producto=%s)',[IdProd]);
-        ZQ_Productos.Open;
-      end;
-
      //Codigo de Barras
      if id='B' then
        begin
@@ -230,7 +206,6 @@ begin
         if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
         begin
           Application.MessageBox('El Stock del Producto es Insuficiente.', 'Stock Producto');
-          //LimpiarCodigo;
           exit;
         end;
 
@@ -239,11 +214,9 @@ begin
           begin
             Application.MessageBox('El código ingresado corresponde a más de un producto'+char(13)+
                                     '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Producto Repetido');
-            //LimpiarCodigo;
             exit;
           end;
 
-        //agregar('',ZQ_ProductosID_PRODUCTO.AsInteger);
       end
       else
       begin
@@ -266,6 +239,45 @@ end;
 procedure TFConsulta_Precios.FormCreate(Sender: TObject);
 begin
 PCodBarraPrecio.BringToFront;
+end;
+
+procedure TFConsulta_Precios.btnBuscarClick(Sender: TObject);
+begin
+  if not Assigned(vsel) then
+    vsel:= TFBuscarProductoStock.Create(nil);
+  vsel.usaCajero:='S';
+  vsel.OnSeleccionar := OnSelProd;
+  vsel.ShowModal;
+  vsel.usaCajero:='N';
+end;
+
+procedure TFConsulta_Precios.ABuscarProdExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
+procedure TFConsulta_Precios.btnSalirClick(Sender: TObject);
+begin
+close;
+end;
+
+procedure TFConsulta_Precios.ACodBarraExecute(Sender: TObject);
+begin
+   if btnCodBarra.Enabled then
+    btnCodBarra.Click;
+end;
+
+procedure TFConsulta_Precios.btnCodBarraClick(Sender: TObject);
+begin
+codbarras.Clear;
+codbarras.SetFocus;
+end;
+
+procedure TFConsulta_Precios.ASalirExecute(Sender: TObject);
+begin
+   if btnSalir.Enabled then
+    btnSalir.Click;
 end;
 
 end.

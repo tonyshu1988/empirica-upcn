@@ -398,69 +398,73 @@ object FConsulta_Precios: TFConsulta_Precios
           Font.Style = []
           ParentFont = False
         end
-        object DBEdit7: TDBEdit
-          Left = 200
-          Top = 43
-          Width = 345
-          Height = 26
+        object DBText1: TDBText
+          Left = 201
+          Top = 47
+          Width = 69
+          Height = 18
+          AutoSize = True
           Color = 16771302
           DataField = 'NOMBRE'
           DataSource = DM.DS_Sucursal
           Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
+          Font.Color = clBlack
           Font.Height = -16
           Font.Name = 'Verdana'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
-          TabOrder = 0
         end
-        object DBEdit8: TDBEdit
-          Left = 622
-          Top = 43
-          Width = 382
-          Height = 26
-          Color = 16771302
-          DataField = 'EMAIL'
-          DataSource = DM.DS_Sucursal
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 1
-        end
-        object DBEdit9: TDBEdit
-          Left = 200
-          Top = 75
-          Width = 345
-          Height = 26
+        object DBText2: TDBText
+          Left = 201
+          Top = 79
+          Width = 69
+          Height = 18
+          AutoSize = True
           Color = 16771302
           DataField = 'DIRECCION'
           DataSource = DM.DS_Sucursal
           Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
+          Font.Color = clBlack
           Font.Height = -16
           Font.Name = 'Verdana'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
-          TabOrder = 2
         end
-        object DBEdit10: TDBEdit
-          Left = 622
-          Top = 75
-          Width = 382
-          Height = 26
+        object DBText3: TDBText
+          Left = 625
+          Top = 47
+          Width = 69
+          Height = 18
+          AutoSize = True
+          Color = 16771302
+          DataField = 'EMAIL'
+          DataSource = DM.DS_Sucursal
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
+        object DBText4: TDBText
+          Left = 625
+          Top = 79
+          Width = 69
+          Height = 18
+          AutoSize = True
           Color = 16771302
           DataField = 'TELEFONO'
           DataSource = DM.DS_Sucursal
           Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
+          Font.Color = clBlack
           Font.Height = -16
           Font.Name = 'Verdana'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
-          TabOrder = 3
         end
         object DBImage1: TDBImage
           Left = 6
@@ -470,7 +474,7 @@ object FConsulta_Precios: TFConsulta_Precios
           DataField = 'LOGO'
           DataSource = DM.DS_Sucursal
           Stretch = True
-          TabOrder = 4
+          TabOrder = 0
         end
       end
     end
@@ -585,6 +589,10 @@ object FConsulta_Precios: TFConsulta_Precios
           end
           item
             BeginGroup = True
+            Item = btnCodBarra
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -906,108 +914,37 @@ object FConsulta_Precios: TFConsulta_Precios
       Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
+      OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object btnVerDetalle: TdxBarLargeButton
+    object btnCodBarra: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Ver Detalle'
+      Caption = 'F2 - Leer C'#243'digo Barra'
       Category = 0
-      Hint = 'Ver Detalle'
+      Hint = 'F2 - Leer C'#243'digo Barra'
       Visible = ivAlways
-      ImageIndex = 69
+      ImageIndex = 85
+      OnClick = btnCodBarraClick
       AutoGrayScale = False
-    end
-    object btnNuevo: TdxBarLargeButton
-      Caption = 'F2 - Nuevo'
-      Category = 0
-      Hint = 'Inserta un nuevo registro'
-      Visible = ivAlways
-      ImageIndex = 0
-      AutoGrayScale = False
-    end
-    object btnModificar: TdxBarLargeButton
-      Caption = 'F3 - Modificar'
-      Category = 0
-      Hint = 'Modifica el registro actual'
-      Visible = ivAlways
-      ImageIndex = 1
-      AutoGrayScale = False
-    end
-    object btnBaja: TdxBarLargeButton
-      Caption = 'F5 - Baja'
-      Category = 0
-      Hint = 'Da de baja un registro'
-      Visible = ivAlways
-      ImageIndex = 25
-      AutoGrayScale = False
-    end
-    object btnReactivar: TdxBarLargeButton
-      Caption = 'F6 - Reactivar'
-      Category = 0
-      Hint = 'Reactiva un registro'
-      Visible = ivAlways
-      ImageIndex = 24
-      AutoGrayScale = False
-    end
-    object btnGuardar: TdxBarLargeButton
-      Caption = 'F11 - Guardar'
-      Category = 0
-      Enabled = False
-      Hint = 'Guarda los cambios'
-      Visible = ivAlways
-      ImageIndex = 3
-      AutoGrayScale = False
-    end
-    object btnCancelar: TdxBarLargeButton
-      Caption = 'F12 - Cancelar'
-      Category = 0
-      Enabled = False
-      Hint = 'Cancela los cambios'
-      Visible = ivAlways
-      ImageIndex = 4
-      AutoGrayScale = False
-    end
-    object btnImprimir: TdxBarLargeButton
-      Caption = 'Imprimir'
-      Category = 0
-      Hint = 'Imprimir'
-      Visible = ivAlways
-      ImageIndex = 28
     end
     object btnSalir: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Salir'
+      Caption = 'F12 - Salir'
       Category = 0
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
       ImageIndex = 6
-      AutoGrayScale = False
-    end
-    object btnExcel: TdxBarLargeButton
-      Caption = 'Excel'
-      Category = 0
-      Hint = 'Exportar a Excel'
-      Visible = ivAlways
-      ImageIndex = 77
+      OnClick = btnSalirClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
       Items = (
-        'btnNuevo'
-        'btnModificar'
         'btnBuscar'
-        'btnVerDetalle'
-        'btnBaja'
-        'btnSalir'
-        'btnReactivar'
-        'btnImprimir'
-        'btnExcel')
+        'btnCodBarra'
+        'btnSalir')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
-      Items = (
-        'btnGuardar'
-        'btnCancelar')
     end
   end
   object ZQ_Productos: TZQuery
@@ -1189,5 +1126,24 @@ object FConsulta_Precios: TFConsulta_Precios
     DataSet = ZQ_Productos
     Left = 128
     Top = 304
+  end
+  object BotonesRapidos: TActionManager
+    Left = 802
+    Top = 58
+    StyleName = 'XP Style'
+    object ABuscarProd: TAction
+      Caption = 'ABuscarProd'
+      ShortCut = 112
+      OnExecute = ABuscarProdExecute
+    end
+    object ACodBarra: TAction
+      Caption = 'ACodBarra'
+      ShortCut = 113
+      OnExecute = ACodBarraExecute
+    end
+    object ASalir: TAction
+      Caption = 'ASalir'
+      OnExecute = ASalirExecute
+    end
   end
 end
