@@ -1,9 +1,9 @@
 object FPrincipal: TFPrincipal
-  Left = 281
-  Top = 116
+  Left = 294
+  Top = 100
   Width = 940
-  Height = 630
-  Caption = 'Sincronizador SiGeFa - CLIENTE'
+  Height = 658
+  Caption = 'Sincronizador SiGeFa '
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -21,34 +21,34 @@ object FPrincipal: TFPrincipal
   object panelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 932
-    Height = 532
+    Width = 924
+    Height = 549
     Align = alClient
     TabOrder = 0
     object Splitter1: TSplitter
       Left = 1
-      Top = 263
-      Width = 930
+      Top = 280
+      Width = 922
       Height = 6
       Cursor = crVSplit
       Align = alBottom
     end
     object panelAbajo: TPanel
       Left = 1
-      Top = 269
-      Width = 930
+      Top = 286
+      Width = 922
       Height = 262
       Align = alBottom
       TabOrder = 0
       object Splitter2: TSplitter
-        Left = 678
+        Left = 670
         Top = 1
         Width = 4
         Height = 260
         Align = alRight
       end
       object panelListaNovedades: TPanel
-        Left = 682
+        Left = 674
         Top = 1
         Width = 247
         Height = 260
@@ -119,7 +119,7 @@ object FPrincipal: TFPrincipal
       object PanelLog: TPanel
         Left = 1
         Top = 1
-        Width = 677
+        Width = 669
         Height = 260
         Align = alClient
         BevelOuter = bvNone
@@ -127,7 +127,7 @@ object FPrincipal: TFPrincipal
         object lblTituloLog: TLabel
           Left = 0
           Top = 0
-          Width = 677
+          Width = 669
           Height = 15
           Align = alTop
           Alignment = taCenter
@@ -145,7 +145,7 @@ object FPrincipal: TFPrincipal
         object memoLog: TMemo
           Left = 0
           Top = 15
-          Width = 677
+          Width = 669
           Height = 245
           Align = alClient
           Color = 10026692
@@ -160,22 +160,22 @@ object FPrincipal: TFPrincipal
     object panelDatos: TPanel
       Left = 1
       Top = 42
-      Width = 930
-      Height = 221
+      Width = 922
+      Height = 238
       Align = alClient
       TabOrder = 1
       object Splitter3: TSplitter
-        Left = 676
+        Left = 668
         Top = 1
         Width = 4
-        Height = 191
+        Height = 208
         Align = alRight
       end
       object PanelTablas: TPanel
-        Left = 680
+        Left = 672
         Top = 1
         Width = 249
-        Height = 191
+        Height = 208
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 0
@@ -201,7 +201,7 @@ object FPrincipal: TFPrincipal
           Left = 0
           Top = 15
           Width = 249
-          Height = 176
+          Height = 193
           Align = alClient
           Color = 13695997
           DataSource = DS_Tablas_Actualizar
@@ -273,8 +273,8 @@ object FPrincipal: TFPrincipal
       object PanelDatosXML: TPanel
         Left = 1
         Top = 1
-        Width = 675
-        Height = 191
+        Width = 667
+        Height = 208
         Align = alClient
         BevelOuter = bvNone
         Caption = 'PanelDatosXML'
@@ -282,7 +282,7 @@ object FPrincipal: TFPrincipal
         object Label5: TLabel
           Left = 0
           Top = 0
-          Width = 675
+          Width = 667
           Height = 15
           Align = alTop
           Alignment = taCenter
@@ -297,14 +297,14 @@ object FPrincipal: TFPrincipal
           ParentColor = False
           ParentFont = False
         end
-        object DBGridNovedadesLocal: TDBGrid
+        object DBGridUpload: TDBGrid
           Left = 0
           Top = 15
-          Width = 675
-          Height = 176
+          Width = 667
+          Height = 193
           Align = alClient
           Color = 15915716
-          DataSource = DS_NovedadesLocal
+          DataSource = DS_NovedadesCliente
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -319,7 +319,7 @@ object FPrincipal: TFPrincipal
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
-          OnDrawColumnCell = DBGridNovedadesLocalDrawColumnCell
+          OnDrawColumnCell = DBGridUploadDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -404,8 +404,8 @@ object FPrincipal: TFPrincipal
         object DBGridDownload: TDBGrid
           Left = 0
           Top = 15
-          Width = 675
-          Height = 176
+          Width = 667
+          Height = 193
           Align = alClient
           Color = 15915716
           DataSource = DS_NovedadesServer
@@ -507,8 +507,8 @@ object FPrincipal: TFPrincipal
       end
       object PanelpBar_Ftp: TPanel
         Left = 1
-        Top = 192
-        Width = 928
+        Top = 209
+        Width = 920
         Height = 14
         Align = alBottom
         BevelOuter = bvNone
@@ -526,7 +526,7 @@ object FPrincipal: TFPrincipal
           Tag = 99
           Left = 40
           Top = 0
-          Width = 888
+          Width = 880
           Height = 14
           Align = alClient
           TabOrder = 0
@@ -534,8 +534,8 @@ object FPrincipal: TFPrincipal
       end
       object PanelpBar_Novedades: TPanel
         Left = 1
-        Top = 206
-        Width = 928
+        Top = 223
+        Width = 920
         Height = 14
         Align = alBottom
         BevelOuter = bvNone
@@ -553,7 +553,7 @@ object FPrincipal: TFPrincipal
           Tag = 99
           Left = 40
           Top = 0
-          Width = 888
+          Width = 880
           Height = 14
           Align = alClient
           TabOrder = 0
@@ -563,7 +563,7 @@ object FPrincipal: TFPrincipal
     object panelTitulo: TPanel
       Left = 1
       Top = 1
-      Width = 930
+      Width = 922
       Height = 41
       Align = alTop
       BevelOuter = bvNone
@@ -597,7 +597,7 @@ object FPrincipal: TFPrincipal
       object lblTituloSincro: TLabel
         Left = 0
         Top = 0
-        Width = 930
+        Width = 922
         Height = 15
         Align = alTop
         Alignment = taCenter
@@ -615,8 +615,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 532
-    Width = 932
+    Top = 601
+    Width = 924
     Height = 19
     Panels = <
       item
@@ -663,7 +663,7 @@ object FPrincipal: TFPrincipal
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -774,7 +774,7 @@ object FPrincipal: TFPrincipal
             Visible = True
           end
           item
-            Item = btnProcesarNovedadesServer
+            Item = btnProcesar
             Visible = True
           end
           item
@@ -1124,13 +1124,13 @@ object FPrincipal: TFPrincipal
       OnClick = btnBajarClick
       AutoGrayScale = False
     end
-    object btnProcesarNovedadesServer: TdxBarLargeButton
+    object btnProcesar: TdxBarLargeButton
       Caption = 'Procesar Descargas'
       Category = 0
       Hint = 'Procesar los archivos descargados del servidor'
       Visible = ivAlways
       ImageIndex = 12
-      OnClick = btnProcesarNovedadesServerClick
+      OnClick = btnProcesarClick
       AutoGrayScale = False
     end
     object btnBorrarLog: TdxBarLargeButton
@@ -1183,7 +1183,7 @@ object FPrincipal: TFPrincipal
       Items = (
         'btnSubir'
         'btnBajar'
-        'btnProcesarNovedadesServer'
+        'btnProcesar'
         'btnBorrarLog'
         'btnOcultar'
         'btnConfig'
@@ -15544,65 +15544,65 @@ object FPrincipal: TFPrincipal
     Left = 72
     Top = 343
   end
-  object CD_NovedadesLocal: TClientDataSet
+  object CD_NovedadesCliente: TClientDataSet
     Aggregates = <>
     Params = <>
-    ProviderName = 'DSProvider_NovedadesLocal'
+    ProviderName = 'DSProvider_NovedadesCliente'
     Left = 46
     Top = 86
-    object CD_NovedadesLocalID: TIntegerField
+    object CD_NovedadesClienteID: TIntegerField
       FieldName = 'ID'
     end
-    object CD_NovedadesLocalOPERATION: TStringField
+    object CD_NovedadesClienteOPERATION: TStringField
       FieldName = 'OPERATION'
       Required = True
       Size = 1
     end
-    object CD_NovedadesLocalDATE_TIME: TDateTimeField
+    object CD_NovedadesClienteDATE_TIME: TDateTimeField
       FieldName = 'DATE_TIME'
       Required = True
     end
-    object CD_NovedadesLocalUSER_NAME: TStringField
+    object CD_NovedadesClienteUSER_NAME: TStringField
       FieldName = 'USER_NAME'
       Required = True
       Size = 67
     end
-    object CD_NovedadesLocalTABLE_NAME: TStringField
+    object CD_NovedadesClienteTABLE_NAME: TStringField
       FieldName = 'TABLE_NAME'
       Required = True
       Size = 67
     end
-    object CD_NovedadesLocalKEY_FIELD: TStringField
+    object CD_NovedadesClienteKEY_FIELD: TStringField
       FieldName = 'KEY_FIELD'
       Required = True
       Size = 67
     end
-    object CD_NovedadesLocalKEY_VALUE: TStringField
+    object CD_NovedadesClienteKEY_VALUE: TStringField
       FieldName = 'KEY_VALUE'
       Size = 255
     end
-    object CD_NovedadesLocalFIELD_NAME: TStringField
+    object CD_NovedadesClienteFIELD_NAME: TStringField
       FieldName = 'FIELD_NAME'
       Required = True
       Size = 67
     end
-    object CD_NovedadesLocalNEW_VALUE: TStringField
+    object CD_NovedadesClienteNEW_VALUE: TStringField
       FieldName = 'NEW_VALUE'
       Size = 255
     end
-    object CD_NovedadesLocalOLD_VALUE: TStringField
+    object CD_NovedadesClienteOLD_VALUE: TStringField
       FieldName = 'OLD_VALUE'
       Size = 255
     end
   end
-  object DS_NovedadesLocal: TDataSource
-    DataSet = CD_NovedadesLocal
+  object DS_NovedadesCliente: TDataSource
+    DataSet = CD_NovedadesCliente
     Left = 46
     Top = 134
   end
-  object ZQ_NovedadesLocal: TZQuery
+  object ZQ_NovedadesCliente: TZQuery
     Connection = DM.ConexionDB
-    AfterScroll = ZQ_NovedadesLocalAfterScroll
+    AfterScroll = ZQ_NovedadesClienteAfterScroll
     SQL.Strings = (
       
         'select cast(ta.id as integer) as ID, ta.operation, ta.date_time,' +
@@ -15614,62 +15614,62 @@ object FPrincipal: TFPrincipal
       'where ta.id_sincro_lote is null'
       '  and ta.user_name <> '#39'SINCRO'#39)
     Params = <>
-    Left = 170
+    Left = 181
     Top = 134
-    object ZQ_NovedadesLocalID: TIntegerField
+    object ZQ_NovedadesClienteID: TIntegerField
       FieldName = 'ID'
       ReadOnly = True
     end
-    object ZQ_NovedadesLocalOPERATION: TStringField
+    object ZQ_NovedadesClienteOPERATION: TStringField
       FieldName = 'OPERATION'
       Required = True
       Size = 1
     end
-    object ZQ_NovedadesLocalDATE_TIME: TDateTimeField
+    object ZQ_NovedadesClienteDATE_TIME: TDateTimeField
       FieldName = 'DATE_TIME'
       Required = True
     end
-    object ZQ_NovedadesLocalUSER_NAME: TStringField
+    object ZQ_NovedadesClienteUSER_NAME: TStringField
       FieldName = 'USER_NAME'
       Required = True
       Size = 67
     end
-    object ZQ_NovedadesLocalTABLE_NAME: TStringField
+    object ZQ_NovedadesClienteTABLE_NAME: TStringField
       FieldName = 'TABLE_NAME'
       Required = True
       Size = 67
     end
-    object ZQ_NovedadesLocalKEY_FIELD: TStringField
+    object ZQ_NovedadesClienteKEY_FIELD: TStringField
       FieldName = 'KEY_FIELD'
       Required = True
       Size = 67
     end
-    object ZQ_NovedadesLocalKEY_VALUE: TStringField
+    object ZQ_NovedadesClienteKEY_VALUE: TStringField
       FieldName = 'KEY_VALUE'
       Size = 255
     end
-    object ZQ_NovedadesLocalFIELD_NAME: TStringField
+    object ZQ_NovedadesClienteFIELD_NAME: TStringField
       FieldName = 'FIELD_NAME'
       Required = True
       Size = 67
     end
-    object ZQ_NovedadesLocalNEW_VALUE: TStringField
+    object ZQ_NovedadesClienteNEW_VALUE: TStringField
       FieldName = 'NEW_VALUE'
       Size = 255
     end
-    object ZQ_NovedadesLocalOLD_VALUE: TStringField
+    object ZQ_NovedadesClienteOLD_VALUE: TStringField
       FieldName = 'OLD_VALUE'
       Size = 255
     end
   end
-  object DSProvider_NovedadesLocal: TDataSetProvider
-    DataSet = ZQ_NovedadesLocal
-    Left = 173
+  object DSProvider_NovedadesCliente: TDataSetProvider
+    DataSet = ZQ_NovedadesCliente
+    Left = 181
     Top = 86
   end
-  object ZQ_NovedadesLocalCant: TZQuery
+  object ZQ_NovedadesClienteCant: TZQuery
     Connection = DM.ConexionDB
-    AfterScroll = ZQ_NovedadesLocalAfterScroll
+    AfterScroll = ZQ_NovedadesClienteAfterScroll
     SQL.Strings = (
       'select count(ta.id)'
       'from z_sinc_tabla ta'
@@ -15678,9 +15678,9 @@ object FPrincipal: TFPrincipal
       'where ta.id_sincro_lote is null'
       '  and ta.user_name <> '#39'SINCRO'#39)
     Params = <>
-    Left = 170
+    Left = 181
     Top = 182
-    object ZQ_NovedadesLocalCantCOUNT: TIntegerField
+    object ZQ_NovedadesClienteCantCOUNT: TIntegerField
       FieldName = 'COUNT'
       ReadOnly = True
     end
@@ -15690,7 +15690,7 @@ object FPrincipal: TFPrincipal
     SQL.Strings = (
       'execute procedure z_sinc_generar_lote')
     Params = <>
-    Left = 281
+    Left = 305
     Top = 86
   end
   object ZQ_UltimoLote: TZQuery
@@ -15700,7 +15700,7 @@ object FPrincipal: TFPrincipal
       'from z_sincro_lote z'
       'order by ultimo_lote desc')
     Params = <>
-    Left = 281
+    Left = 305
     Top = 134
     object ZQ_UltimoLoteULTIMO_LOTE: TIntegerField
       FieldName = 'ULTIMO_LOTE'
@@ -15830,7 +15830,7 @@ object FPrincipal: TFPrincipal
     Aggregates = <>
     Params = <>
     Left = 178
-    Top = 294
+    Top = 296
     object CD_ListaNovedades_NombreArchivo: TStringField
       FieldName = '_NombreArchivo'
       Size = 100
@@ -15842,7 +15842,7 @@ object FPrincipal: TFPrincipal
   object DS_ListaNovedades: TDataSource
     DataSet = CD_ListaNovedades
     Left = 178
-    Top = 342
+    Top = 344
   end
   object EKOrdenarDBGridDownload: TEKOrdenarGrilla
     Grilla = DBGridDownload
@@ -15893,8 +15893,8 @@ object FPrincipal: TFPrincipal
     PermitirOrdenar = False
     PermitirMover = False
     PermitirFiltrar = False
-    Left = 402
-    Top = 307
+    Left = 786
+    Top = 350
   end
   object EKOrdenarDBGridListaNovedades: TEKOrdenarGrilla
     Grilla = DBGridListaNovedades
@@ -15913,11 +15913,11 @@ object FPrincipal: TFPrincipal
     PermitirOrdenar = False
     PermitirMover = False
     PermitirFiltrar = False
-    Left = 402
-    Top = 358
+    Left = 786
+    Top = 398
   end
-  object EKOrdenarDBGridNovedadesLocal: TEKOrdenarGrilla
-    Grilla = DBGridNovedadesLocal
+  object EKOrdenarDBGridUpload: TEKOrdenarGrilla
+    Grilla = DBGridUpload
     Filtros = <
       item
         TituloColumna = 'ID'
@@ -15959,14 +15959,14 @@ object FPrincipal: TFPrincipal
         TituloColumna = 'Valor Viejo'
         Visible = True
       end>
-    NombreGuardar = 'DBGridNovedadesLocal'
+    NombreGuardar = 'DBGridUpload'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = False
     PermitirMover = False
     PermitirFiltrar = False
-    Left = 402
-    Top = 414
+    Left = 786
+    Top = 302
   end
   object EKOrdenarDBGridTablasActualizar: TEKOrdenarGrilla
     Grilla = DBGridTablasActualizar
@@ -16001,7 +16001,7 @@ object FPrincipal: TFPrincipal
     PermitirOrdenar = False
     PermitirMover = False
     PermitirFiltrar = False
-    Left = 402
-    Top = 470
+    Left = 786
+    Top = 446
   end
 end

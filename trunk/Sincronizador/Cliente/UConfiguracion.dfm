@@ -1,10 +1,10 @@
 object FConfiguracion: TFConfiguracion
-  Left = 303
-  Top = 172
+  Left = 298
+  Top = 122
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'FConfiguracion'
-  ClientHeight = 461
+  Caption = 'Configuraci'#243'n Sistema'
+  ClientHeight = 507
   ClientWidth = 788
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,13 +21,13 @@ object FConfiguracion: TFConfiguracion
     Left = 1
     Top = 4
     Width = 369
-    Height = 453
+    Height = 498
     TabStop = False
     TabOrder = 0
   end
   object btnCargarIni: TButton
     Left = 376
-    Top = 429
+    Top = 477
     Width = 129
     Height = 25
     Caption = 'Cargar'
@@ -36,7 +36,7 @@ object FConfiguracion: TFConfiguracion
   end
   object btnGuardarYSalir: TButton
     Left = 515
-    Top = 429
+    Top = 477
     Width = 129
     Height = 25
     Caption = 'Guardar y Salir'
@@ -45,7 +45,7 @@ object FConfiguracion: TFConfiguracion
   end
   object btnCancelarYSalir: TButton
     Left = 654
-    Top = 429
+    Top = 477
     Width = 129
     Height = 25
     Caption = 'Cancelar y Salir'
@@ -54,7 +54,7 @@ object FConfiguracion: TFConfiguracion
   end
   object GroupBoxDirectorios: TGroupBox
     Left = 374
-    Top = 168
+    Top = 216
     Width = 408
     Height = 125
     Caption = ' Config Base Datos '
@@ -143,7 +143,7 @@ object FConfiguracion: TFConfiguracion
   end
   object GroupBoxHora: TGroupBox
     Left = 673
-    Top = 301
+    Top = 349
     Width = 110
     Height = 78
     Caption = ' Intervalo '
@@ -213,7 +213,7 @@ object FConfiguracion: TFConfiguracion
   end
   object GroupBoxBases: TGroupBox
     Left = 374
-    Top = 301
+    Top = 349
     Width = 294
     Height = 78
     Caption = '  Archivos de Sincronizaci'#243'n  '
@@ -257,7 +257,7 @@ object FConfiguracion: TFConfiguracion
   end
   object GroupBoxDias: TGroupBox
     Left = 374
-    Top = 385
+    Top = 433
     Width = 409
     Height = 37
     Caption = '  Dias  '
@@ -313,7 +313,7 @@ object FConfiguracion: TFConfiguracion
   end
   object GroupBoxDatosEquipo: TGroupBox
     Left = 374
-    Top = 3
+    Top = 51
     Width = 409
     Height = 162
     Caption = ' Config Servidor FTP '
@@ -413,6 +413,19 @@ object FConfiguracion: TFConfiguracion
       TabOrder = 4
       Text = 'editFTP_DirPublic'
     end
+  end
+  object RadioGroupModo: TRadioGroup
+    Left = 374
+    Top = 4
+    Width = 409
+    Height = 44
+    Caption = ' Modo Funcionamiento Sistema '
+    Columns = 2
+    ItemIndex = 0
+    Items.Strings = (
+      'CLIENTE'
+      'SERVIDOR')
+    TabOrder = 9
   end
   object EKInicio: TEKIni
     Archivo = 'configSincro.ini'
