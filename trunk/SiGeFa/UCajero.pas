@@ -1547,7 +1547,7 @@ end;
 
 function TFCajero.guardarComprobante():Boolean;
 var
-comprobante : integer;
+comprobante,vendedor : integer;
 begin
 
   Result:=False;
@@ -1569,6 +1569,7 @@ begin
       ZQ_ComprobanteID_CLIENTE.AsInteger:=CD_ComprobanteID_CLIENTE.AsInteger;
       ZQ_ComprobanteID_TIPO_CPB.value:=CD_ComprobanteID_TIPO_CPB.Value;
       ZQ_ComprobanteID_VENDEDOR.Value:=CD_ComprobanteID_VENDEDOR.Value;
+      vendedor:=ZQ_ComprobanteID_VENDEDOR.Value;
       ZQ_ComprobanteID_COMP_ESTADO.Value:=CD_ComprobanteID_COMP_ESTADO.Value;;
       ZQ_ComprobanteFECHA.AsDateTime:=CD_ComprobanteFECHA.AsDateTime;
       ZQ_ComprobanteFECHA_COBRADA.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //antes tenia la del DM.EKMODELO
@@ -1631,6 +1632,9 @@ begin
           LimpiarCodigo();
           crearComprobante();
           cargarClientePorDefecto();
+          // Mantengo el vendedor dpes de una venta
+          IdVendedor:=vendedor;
+          CD_ComprobanteID_VENDEDOR.Value:=IdVendedor;
           Result:=True;
         end;
      end

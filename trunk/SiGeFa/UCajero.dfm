@@ -4391,7 +4391,7 @@ object FCajero: TFCajero
       DataField = 'nVendedor'
       DataSource = DS_Comprobante
       ReadOnly = True
-      TabOrder = 2
+      TabOrder = 5
     end
     object DBEdit18: TDBEdit
       Left = 14
@@ -4405,7 +4405,7 @@ object FCajero: TFCajero
       DataField = 'NOMBRE'
       DataSource = DS_Sucursal
       ReadOnly = True
-      TabOrder = 0
+      TabOrder = 3
     end
     object DBEdit19: TDBEdit
       Left = 14
@@ -4419,7 +4419,7 @@ object FCajero: TFCajero
       DataField = 'pers_nombre'
       DataSource = DS_Comprobante
       ReadOnly = True
-      TabOrder = 1
+      TabOrder = 4
     end
     object BitBtn1: TBitBtn
       Left = 390
@@ -4428,7 +4428,7 @@ object FCajero: TFCajero
       Height = 25
       Cancel = True
       Caption = 'Cancelar'
-      TabOrder = 5
+      TabOrder = 2
       TabStop = False
       OnClick = BitBtn1Click
     end
@@ -4438,7 +4438,7 @@ object FCajero: TFCajero
       Width = 97
       Height = 65
       Caption = 'Efectivo'
-      TabOrder = 3
+      TabOrder = 0
       OnClick = btnEfectivoClick
       Layout = blGlyphTop
     end
@@ -4448,7 +4448,7 @@ object FCajero: TFCajero
       Width = 97
       Height = 65
       Caption = 'Efectivo F'
-      TabOrder = 4
+      TabOrder = 1
       OnClick = btnEfectivoFClick
       Layout = blGlyphTop
     end
@@ -4462,7 +4462,7 @@ object FCajero: TFCajero
     BevelOuter = bvSpace
     BevelWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 6
+    TabOrder = 5
     object Label18: TLabel
       Left = 4
       Top = 4
