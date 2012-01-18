@@ -5,7 +5,7 @@ interface
 uses
   Forms,SysUtils, Classes, ZConnection, ImgList, Controls, EKModelo,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, WinSkinData,
-  IdExplicitTLSClientServerBase, IdFTP, Graphics, MidasLib;
+  IdExplicitTLSClientServerBase, IdFTP, Graphics, MidasLib, EKIconizacion;
 
 type
   TDM = class(TDataModule)
@@ -16,8 +16,10 @@ type
     IdFTP: TIdFTP;
     ConexionLogin: TZConnection;
     ModeloLogin: TEKModeloTransaccion;
+    EKIconizar: TEKIconizacion;
     procedure IdFTPWork(ASender: TObject; AWorkMode: TWorkMode;
       AWorkCount: Int64);
+    procedure EKIconizarDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,6 +59,12 @@ procedure TDM.IdFTPWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int6
 begin
   FPrincipal.pBar_Ftp.Position:= AWorkCount div 1024;
   Application.ProcessMessages;
+end;
+
+
+procedure TDM.EKIconizarDblClick(Sender: TObject);
+begin
+  FPrincipal.Visible:= true;
 end;
 
 end.
