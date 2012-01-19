@@ -637,8 +637,8 @@ object FPrincipal: TFPrincipal
   object ZQ_ActualizarBase: TZQuery
     Connection = DM.ConexionEscritura
     Params = <>
-    Left = 48
-    Top = 414
+    Left = 664
+    Top = 446
   end
   object EKInicio: TEKIni
     Archivo = 'configSincro.ini'
@@ -1349,8 +1349,8 @@ object FPrincipal: TFPrincipal
     SQL.Strings = (
       'execute procedure z_sinc_generar_lote')
     Params = <>
-    Left = 49
-    Top = 310
+    Left = 665
+    Top = 342
   end
   object ZQ_UltimoLote: TZQuery
     Connection = DM.ConexionLectura
@@ -1359,8 +1359,8 @@ object FPrincipal: TFPrincipal
       'from z_sincro_lote z'
       'order by ultimo_lote desc')
     Params = <>
-    Left = 49
-    Top = 358
+    Left = 665
+    Top = 390
     object ZQ_UltimoLoteULTIMO_LOTE: TIntegerField
       FieldName = 'ULTIMO_LOTE'
       ReadOnly = True
@@ -1384,8 +1384,8 @@ object FPrincipal: TFPrincipal
   object CD_Tablas_Actualizar: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 145
-    Top = 310
+    Left = 761
+    Top = 342
     object CD_Tablas_Actualizar_Tabla: TStringField
       FieldName = '_Tabla'
       Size = 67
@@ -1467,8 +1467,8 @@ object FPrincipal: TFPrincipal
   end
   object DS_Tablas_Actualizar: TDataSource
     DataSet = CD_Tablas_Actualizar
-    Left = 145
-    Top = 358
+    Left = 761
+    Top = 390
   end
   object ZQ_GrabarUltimoArchivoServer: TZQuery
     Connection = DM.ConexionEscritura
@@ -1684,7 +1684,7 @@ object FPrincipal: TFPrincipal
       'select id_sincro_cliente, nombre_cliente, id_cliente'
       'from z_sincro_cliente')
     Params = <>
-    Left = 306
+    Left = 429
     Top = 310
     object ZQ_ListadoClientesID_SINCRO_CLIENTE: TIntegerField
       FieldName = 'ID_SINCRO_CLIENTE'
@@ -1713,7 +1713,7 @@ object FPrincipal: TFPrincipal
         Name = 'id_sincro_cliente'
         ParamType = ptUnknown
       end>
-    Left = 306
+    Left = 429
     Top = 358
     ParamData = <
       item
@@ -1741,8 +1741,8 @@ object FPrincipal: TFPrincipal
       'select *'
       'from z_sinc_tabla')
     Params = <>
-    Left = 474
-    Top = 310
+    Left = 551
+    Top = 309
     object ZQ_Sinc_TablaID: TLargeintField
       FieldName = 'ID'
     end
@@ -1771,8 +1771,8 @@ object FPrincipal: TFPrincipal
       'select *'
       'from z_sinc_clave')
     Params = <>
-    Left = 474
-    Top = 359
+    Left = 551
+    Top = 358
     object ZQ_Sinc_ClaveLOG_TABLES_ID: TLargeintField
       FieldName = 'LOG_TABLES_ID'
     end
@@ -1791,8 +1791,8 @@ object FPrincipal: TFPrincipal
       'select *'
       'from z_sinc_campo')
     Params = <>
-    Left = 474
-    Top = 415
+    Left = 551
+    Top = 414
     object ZQ_Sinc_CampoLOG_TABLES_ID: TLargeintField
       FieldName = 'LOG_TABLES_ID'
     end
@@ -1815,8 +1815,8 @@ object FPrincipal: TFPrincipal
       'select *'
       'from z_sinc_campo_blob')
     Params = <>
-    Left = 474
-    Top = 463
+    Left = 551
+    Top = 462
     object ZQ_Sinc_BlobLOG_TABLES_ID: TLargeintField
       FieldName = 'LOG_TABLES_ID'
     end
@@ -1845,7 +1845,7 @@ object FPrincipal: TFPrincipal
       'select *'
       'from z_sincro_cliente_archivos')
     Params = <>
-    Left = 306
+    Left = 429
     Top = 414
     object ZQ_GrabarUltimoArchivoClienteID_SINCRO_CLI_ARCHIVO: TIntegerField
       FieldName = 'ID_SINCRO_CLI_ARCHIVO'
@@ -1859,6 +1859,149 @@ object FPrincipal: TFPrincipal
     object ZQ_GrabarUltimoArchivoClienteULTIMO_ARCHIVO: TStringField
       FieldName = 'ULTIMO_ARCHIVO'
       Size = 100
+    end
+  end
+  object ZQ_NovedadesServer: TZQuery
+    Connection = DM.ConexionLectura
+    AfterScroll = ZQ_NovedadesServerAfterScroll
+    SQL.Strings = (
+      
+        'select id, operation, date_time, user_name, table_name, key_fiel' +
+        'd, key_value, field_name, new_value, old_value,'
+      
+        '       fblob_name, fblob_old_char_value, fblob_new_char_value, f' +
+        'blob_old_blob_value, fblob_new_blob_value'
+      'from z_sinc_generar_archivo_server')
+    Params = <>
+    Left = 202
+    Top = 310
+    object ZQ_NovedadesServerID: TIntegerField
+      FieldName = 'ID'
+    end
+    object ZQ_NovedadesServerOPERATION: TStringField
+      FieldName = 'OPERATION'
+      Size = 1
+    end
+    object ZQ_NovedadesServerDATE_TIME: TDateTimeField
+      FieldName = 'DATE_TIME'
+    end
+    object ZQ_NovedadesServerUSER_NAME: TStringField
+      FieldName = 'USER_NAME'
+      Size = 67
+    end
+    object ZQ_NovedadesServerTABLE_NAME: TStringField
+      FieldName = 'TABLE_NAME'
+      Size = 67
+    end
+    object ZQ_NovedadesServerKEY_FIELD: TStringField
+      FieldName = 'KEY_FIELD'
+      Size = 67
+    end
+    object ZQ_NovedadesServerKEY_VALUE: TStringField
+      FieldName = 'KEY_VALUE'
+      Size = 255
+    end
+    object ZQ_NovedadesServerFIELD_NAME: TStringField
+      FieldName = 'FIELD_NAME'
+      Size = 67
+    end
+    object ZQ_NovedadesServerNEW_VALUE: TStringField
+      FieldName = 'NEW_VALUE'
+      Size = 255
+    end
+    object ZQ_NovedadesServerOLD_VALUE: TStringField
+      FieldName = 'OLD_VALUE'
+      Size = 255
+    end
+    object ZQ_NovedadesServerFBLOB_NAME: TStringField
+      FieldName = 'FBLOB_NAME'
+      Size = 67
+    end
+    object ZQ_NovedadesServerFBLOB_OLD_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_OLD_CHAR_VALUE'
+      Size = 8000
+    end
+    object ZQ_NovedadesServerFBLOB_NEW_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_NEW_CHAR_VALUE'
+      Size = 8000
+    end
+    object ZQ_NovedadesServerFBLOB_OLD_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_OLD_BLOB_VALUE'
+    end
+    object ZQ_NovedadesServerFBLOB_NEW_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_NEW_BLOB_VALUE'
+    end
+  end
+  object ZQ_NovedadesServerCant: TZQuery
+    Connection = DM.ConexionLectura
+    SQL.Strings = (
+      'select count(id)'
+      'from z_sinc_generar_archivo_server')
+    Params = <>
+    Left = 202
+    Top = 358
+    object ZQ_NovedadesServerCantCOUNT: TIntegerField
+      FieldName = 'COUNT'
+    end
+  end
+  object DS_NovedadesServer: TDataSource
+    Left = 58
+    Top = 359
+  end
+  object DSP_NovedadesServer: TDataSetProvider
+    DataSet = ZQ_NovedadesServer
+    Left = 58
+    Top = 415
+  end
+  object CD_NovedadesServer: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP_NovedadesServer'
+    Left = 58
+    Top = 310
+    object CD_NovedadesServerID: TIntegerField
+      FieldName = 'ID'
+    end
+    object CD_NovedadesServerOPERATION: TStringField
+      FieldName = 'OPERATION'
+      Required = True
+      Size = 1
+    end
+    object CD_NovedadesServerDATE_TIME: TDateTimeField
+      FieldName = 'DATE_TIME'
+      Required = True
+    end
+    object CD_NovedadesServerUSER_NAME: TStringField
+      FieldName = 'USER_NAME'
+      Required = True
+      Size = 67
+    end
+    object CD_NovedadesServerTABLE_NAME: TStringField
+      FieldName = 'TABLE_NAME'
+      Required = True
+      Size = 67
+    end
+    object CD_NovedadesServerKEY_FIELD: TStringField
+      FieldName = 'KEY_FIELD'
+      Required = True
+      Size = 67
+    end
+    object CD_NovedadesServerKEY_VALUE: TStringField
+      FieldName = 'KEY_VALUE'
+      Size = 255
+    end
+    object CD_NovedadesServerFIELD_NAME: TStringField
+      FieldName = 'FIELD_NAME'
+      Required = True
+      Size = 67
+    end
+    object CD_NovedadesServerNEW_VALUE: TStringField
+      FieldName = 'NEW_VALUE'
+      Size = 255
+    end
+    object CD_NovedadesServerOLD_VALUE: TStringField
+      FieldName = 'OLD_VALUE'
+      Size = 255
     end
   end
 end
