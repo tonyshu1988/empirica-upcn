@@ -171,6 +171,37 @@ type
     ZQ_GrabarUltimoArchivoClienteULTIMO_ARCHIVO: TStringField;
     CD_ListaNovedades_idCliente: TIntegerField;
     CD_Tablas_Actualizar_Usuario: TStringField;
+    ZQ_NovedadesServer: TZQuery;
+    ZQ_NovedadesServerCant: TZQuery;
+    DS_NovedadesServer: TDataSource;
+    DSP_NovedadesServer: TDataSetProvider;
+    CD_NovedadesServer: TClientDataSet;
+    CD_NovedadesServerID: TIntegerField;
+    CD_NovedadesServerOPERATION: TStringField;
+    CD_NovedadesServerDATE_TIME: TDateTimeField;
+    CD_NovedadesServerUSER_NAME: TStringField;
+    CD_NovedadesServerTABLE_NAME: TStringField;
+    CD_NovedadesServerKEY_FIELD: TStringField;
+    CD_NovedadesServerKEY_VALUE: TStringField;
+    CD_NovedadesServerFIELD_NAME: TStringField;
+    CD_NovedadesServerNEW_VALUE: TStringField;
+    CD_NovedadesServerOLD_VALUE: TStringField;
+    ZQ_NovedadesServerCantCOUNT: TIntegerField;
+    ZQ_NovedadesServerID: TIntegerField;
+    ZQ_NovedadesServerOPERATION: TStringField;
+    ZQ_NovedadesServerDATE_TIME: TDateTimeField;
+    ZQ_NovedadesServerUSER_NAME: TStringField;
+    ZQ_NovedadesServerTABLE_NAME: TStringField;
+    ZQ_NovedadesServerKEY_FIELD: TStringField;
+    ZQ_NovedadesServerKEY_VALUE: TStringField;
+    ZQ_NovedadesServerFIELD_NAME: TStringField;
+    ZQ_NovedadesServerNEW_VALUE: TStringField;
+    ZQ_NovedadesServerOLD_VALUE: TStringField;
+    ZQ_NovedadesServerFBLOB_NAME: TStringField;
+    ZQ_NovedadesServerFBLOB_OLD_CHAR_VALUE: TStringField;
+    ZQ_NovedadesServerFBLOB_NEW_CHAR_VALUE: TStringField;
+    ZQ_NovedadesServerFBLOB_OLD_BLOB_VALUE: TBlobField;
+    ZQ_NovedadesServerFBLOB_NEW_BLOB_VALUE: TBlobField;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridTablasActualizarDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridListaNovedadesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -217,16 +248,17 @@ type
     procedure procesarNovedadesServer();
     function  actualizar_base_local(archivo: string):boolean;
     //MODO SERVIDOR------------------------------------------
-    //procedimientos para subir novedades del cliente al servidor FTP
-//    procedure buscarNovedadesServer();
+    //procedimientos para subir novedades del servidor al servidor FTP
+    procedure buscarNovedadesServer();
     procedure subirNovedadesServer();
-//    procedure ZQ_NovedadesClienteAfterScroll(DataSet: TDataSet);
+    procedure ZQ_NovedadesServerAfterScroll(DataSet: TDataSet);
     //procedimientos bajar novedades de los clientes desde el servidor FTP al servidor
     function  buscarNovedadesClientes(): boolean;
     procedure bajarNovedadesClientes();
     //procedimientos para procesar los archivos de novedades de los clientes descargados desde el servidor FTP
     procedure procesarNovedadesClientes();
     function  actualizar_base_server(id_cliente: integer; archivo: string):boolean;
+
 
   private
     { Private declarations }
@@ -343,6 +375,7 @@ begin
   dm.ConexionEscritura.Disconnect;
   DM.IdFTP.Disconnect;
   CD_NovedadesCliente.CreateDataSet;
+  CD_NovedadesServer.CreateDataSet;  
   CD_ProcesarNovedades.CreateDataSet;
   CD_Tablas_Actualizar.CreateDataSet;
   CD_ListaNovedades.CreateDataSet;
@@ -539,6 +572,7 @@ begin
   pBar_Ftp.Position:= 0;
 
   CD_NovedadesCliente.EmptyDataSet;
+  CD_NovedadesServer.EmptyDataSet;
   CD_ListaNovedades.EmptyDataSet;
   CD_Tablas_Actualizar.EmptyDataSet;
   CD_ProcesarNovedades.EmptyDataSet;
@@ -974,6 +1008,7 @@ begin
   conectarDBEscritura;
   memoLog.Lines.Add(getFechayHoraString+' - Buscando Novedades');
   DBGridUpload.BringToFront;
+  DBGridUpload.DataSource:= DS_NovedadesCliente;
   posicion_PBar:= 0;
   //obtengo la cantidad del novedades encontradas (todas las modif. mias, <> SINCRO, q no tiene lote asignado)
   ZQ_NovedadesClienteCant.Close;
@@ -1134,35 +1169,35 @@ begin
       pBar_Novedades.Max:= CD_Tablas_Actualizar.RecordCount;
       memoLog.Lines.Add(getFechayHoraString+' - Procesando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
       //actualizo la base de datos local con el contenido del archivo
-      if not actualizar_base_local(CD_ListaNovedades_NombreArchivo.AsString) then //si se produjo un error mientras actualizaba salgo
-      begin
-        if CD_Tablas_Actualizar.IsEmpty then
-        begin
-          memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' no tiene datos de otras sucursales para actualizar');
-          CD_ListaNovedades.edit;
-          CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
-          CD_ListaNovedades.Post;
-        end
-        else
-        begin
-          memoLog.Lines.Add(getFechayHoraString+' - Se produjo un error mientras se procesaba el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
-          memoLog.Lines.Add('--------------------------------------------------------------');
-          memoLog.Lines.Add('           FIN PROCESAR NOVEDADES SERVIDOR                    ');
-          memoLog.Lines.Add('--------------------------------------------------------------');
-          memoLog.Lines.Add('');
-          GrupoEditando.Enabled:= true;
-          panelContenedor.Enabled:= true;
-          exit;
-        end;
-      end
-      else //si se actualizo correctamente
-      begin
-        memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' se proceso correctamente');
-        //edito la lista de archivos de novedades y marco el archivo como que se proceso correctamente
-        CD_ListaNovedades.edit;
-        CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
-        CD_ListaNovedades.Post;
-      end;
+//      if not actualizar_base_local(CD_ListaNovedades_NombreArchivo.AsString) then //si se produjo un error mientras actualizaba salgo
+//      begin
+//        if CD_Tablas_Actualizar.IsEmpty then
+//        begin
+//          memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' no tiene datos de otras sucursales para actualizar');
+//          CD_ListaNovedades.edit;
+//          CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
+//          CD_ListaNovedades.Post;
+//        end
+//        else
+//        begin
+//          memoLog.Lines.Add(getFechayHoraString+' - Se produjo un error mientras se procesaba el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
+//          memoLog.Lines.Add('--------------------------------------------------------------');
+//          memoLog.Lines.Add('           FIN PROCESAR NOVEDADES SERVIDOR                    ');
+//          memoLog.Lines.Add('--------------------------------------------------------------');
+//          memoLog.Lines.Add('');
+//          GrupoEditando.Enabled:= true;
+//          panelContenedor.Enabled:= true;
+//          exit;
+//        end;
+//      end
+//      else //si se actualizo correctamente
+//      begin
+//        memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' se proceso correctamente');
+//        //edito la lista de archivos de novedades y marco el archivo como que se proceso correctamente
+//        CD_ListaNovedades.edit;
+//        CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
+//        CD_ListaNovedades.Post;
+//      end;
     end;
     CD_ListaNovedades.Next;
   end;
@@ -1518,12 +1553,99 @@ begin
 end;
 
 
-procedure TFPrincipal.subirNovedadesServer;
+//buscar novedades en el servidor
+procedure TFPrincipal.buscarNovedadesServer;
 begin
-//
+  //ejecuto el procedimiento que busca los datos para generar el archivo de actualizacion del servidor
+  CD_NovedadesServer.Close;
+  CD_NovedadesServer.Open;
+end;
+
+//reflejo el progreso de la carga de novedades encontrada en el progress bar correspondiente
+procedure TFPrincipal.ZQ_NovedadesServerAfterScroll(DataSet: TDataSet);
+begin
+  pBar_Novedades.Position:= posicion_PBar;
+  posicion_PBar:= posicion_PBar + 1;
+  Application.ProcessMessages;
 end;
 
 
+procedure TFPrincipal.subirNovedadesServer;
+var
+  archivo: string;
+begin
+  ponerTodoEnCero;
+  GrupoEditando.Enabled:= false;
+  pBar_Ftp.Position:= 0;
+  pBar_Novedades.Position:= 0;
+
+  memoLog.Lines.Add('--------------------------------------------------------------');
+  memoLog.Lines.Add('        INICIO SUBIR NOVEDADES SERVIDOR                       ');
+  memoLog.Lines.Add('--------------------------------------------------------------');
+  //si no estoy conectado a la base me conecto
+  conectarDBLectura;
+  conectarDBEscritura;
+  memoLog.Lines.Add(getFechayHoraString+' - Buscando Novedades');
+  DBGridUpload.BringToFront;
+  DBGridUpload.DataSource:= DS_NovedadesServer;
+  posicion_PBar:= 0;
+  //obtengo la cantidad del novedades encontradas
+  ZQ_NovedadesServerCant.Close;
+  ZQ_NovedadesServerCant.Open;
+  //si no se encontraron novedades no hago nada y salgo
+  if ZQ_NovedadesServerCantCOUNT.AsInteger = 0 then
+  begin
+    memoLog.Lines.Add(getFechayHoraString+' - No hay Novedades para Subir');
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    memoLog.Lines.Add('        FIN SUBIR NOVEDADES SERVIDOR                          ');
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    memoLog.Lines.Add('');
+    GrupoEditando.Enabled:= true;
+    exit;
+  end;
+  //seteo el maximo del progress bar
+  pBar_Novedades.Max:= ZQ_NovedadesServerCantCOUNT.AsInteger;
+  //cargo el client dataset de novedades con todas las novedades encontradas
+  buscarNovedadesServer;
+  //obtengo el numero de lote que voy a subir
+  nserie_server:= nro_lote_actual();
+  //establezco en nombre del archivo a subir al servidor FTP
+  archivo:= archivo_server+'_'+FormatFloat('00000', nserie_server)+'.xml';
+  //si el archivo existe lo borro para crearlo nuevamente
+  if FileExists(dirLocal+archivo) then
+    DeleteFile(dirLocal+archivo);
+  memoLog.Lines.Add(getFechayHoraString+' - Creando Archivo Novedades ('+archivo+')');
+  //creo el archivo para subir
+  CD_NovedadesServer.SaveToFile(dirLocal+archivo, dfXMLUTF8);
+  memoLog.Lines.Add(getFechayHoraString+' - Enviando Archivo Novedades ('+archivo+') al Servidor FTP');
+  //inicio subida del archivo al directorio asignado a los clientes en el servidor FTP
+  if FTP_SubirArchivo(dirFTP_Server, archivo) then //si el archivo se subio correctamente
+  begin
+    memoLog.Lines.Add(getFechayHoraString+' - Fin Envio Archivo Novedades ('+archivo+') al Servidor FTP');
+    memoLog.Lines.Add(getFechayHoraString+' - Guardando Lote Sincronizacion '+IntToStr(nserie_server));
+    //comienzo el guardado del lote de sincronizacion
+    if guardar_lote then //si el lote se guardo correctamente
+      memoLog.Lines.Add(getFechayHoraString+' - Fin Guardar Lote Sincronizacion '+IntToStr(nserie_server))
+    else //si no pude guardar el lote entonces borro el archivo que subi al servidor
+    begin
+      memoLog.Lines.Add(getFechayHoraString+' - Error en Guardar Lote Sincronizacion '+IntToStr(nserie_server));
+      memoLog.Lines.Add(getFechayHoraString+' - Borrando Archivo Novedades ('+archivo+') del Servidor FTP');
+      if FTP_BorrarArchivo(dirFTP_Server,archivo) then
+        memoLog.Lines.Add(getFechayHoraString+' - Fin Borrar Archivo Novedades ('+archivo+') del Servidor FTP')
+      else
+        memoLog.Lines.Add(getFechayHoraString+' - No se pudo Borrar Archivo Novedades ('+archivo+') del Servidor FTP');
+    end;
+  end
+  else //si el archivo no se pudo subir al servidor
+  begin
+    memoLog.Lines.Add(getFechayHoraString+' - Error en el Envio Archivo Novedades ('+archivo+') al Servidor FTP');
+  end;
+  memoLog.Lines.Add('--------------------------------------------------------------');
+  memoLog.Lines.Add('        FIN SUBIR NOVEDADES CLIENTE                           ');
+  memoLog.Lines.Add('--------------------------------------------------------------');
+  memoLog.Lines.Add('');
+  GrupoEditando.Enabled:= true;
+end;
 
 end.
 
