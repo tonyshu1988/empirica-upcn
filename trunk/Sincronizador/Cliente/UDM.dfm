@@ -2,16 +2,15 @@ object DM: TDM
   OldCreateOrder = False
   Left = 458
   Top = 291
-  Height = 291
+  Height = 254
   Width = 234
-  object ConexionDB: TZConnection
+  object ConexionLectura: TZConnection
     Protocol = 'firebird-1.5'
     HostName = '127.0.0.1'
-    Database = 'D:\PROYECTOS\EMPIRIKA\Sincronizador\SIGEFA CLIENTE 1.FDB'
+    Database = 'D:\PROYECTOS\EMPIRIKA\Sincronizador\SIGEFA SERVER.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
-    Connected = True
     Left = 32
     Top = 8
   end
@@ -10590,7 +10589,7 @@ object DM: TDM
       000000000000}
   end
   object ModeloDB: TEKModeloTransaccion
-    Coneccion = ConexionDB
+    Coneccion = ConexionLectura
     Left = 32
     Top = 56
   end
@@ -12043,18 +12042,19 @@ object DM: TDM
     Left = 32
     Top = 107
   end
-  object ConexionLogin: TZConnection
+  object ConexionEscritura: TZConnection
     Protocol = 'firebird-1.5'
     HostName = '127.0.0.1'
-    Database = 'C:\SISTEMAS\SiGeFa\SINCRO MATIAS\SIGEFA CLIENTE 1.FDB'
-    User = 'sincro'
-    Password = 'sincro'
+    Database = 'D:\PROYECTOS\EMPIRIKA\Sincronizador\SIGEFA SERVER.FDB'
+    User = 'sysdba'
+    Password = 'masterkey'
     AutoCommit = False
+    Connected = True
     Left = 144
     Top = 8
   end
   object ModeloLogin: TEKModeloTransaccion
-    Coneccion = ConexionLogin
+    Coneccion = ConexionEscritura
     Left = 144
     Top = 56
   end

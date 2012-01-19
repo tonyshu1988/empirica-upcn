@@ -1,5 +1,5 @@
 object FPrincipal: TFPrincipal
-  Left = 246
+  Left = 250
   Top = 110
   Width = 1027
   Height = 658
@@ -416,7 +416,7 @@ object FPrincipal: TFPrincipal
           Height = 193
           Align = alClient
           Color = 15915716
-          DataSource = DS_NovedadesServer
+          DataSource = DS_ProcesarNovedades
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -635,7 +635,7 @@ object FPrincipal: TFPrincipal
       end>
   end
   object ZQ_ActualizarBase: TZQuery
-    Connection = DM.ConexionLogin
+    Connection = DM.ConexionEscritura
     Params = <>
     Left = 48
     Top = 414
@@ -651,7 +651,7 @@ object FPrincipal: TFPrincipal
     Top = 131
   end
   object ZQ_Configuracion: TZQuery
-    Connection = DM.ConexionDB
+    Connection = DM.ConexionLectura
     SQL.Strings = (
       'select *'
       'from configuracion')
@@ -1174,7 +1174,6 @@ object FPrincipal: TFPrincipal
       Category = 0
       Visible = ivAlways
       ImageIndex = 5
-      OnClick = btnConectarClick
       AutoGrayScale = False
     end
     object btnSalir: TdxBarLargeButton
@@ -1199,8 +1198,8 @@ object FPrincipal: TFPrincipal
         'btnSalir')
     end
   end
-  object DS_NovedadesServer: TDataSource
-    DataSet = CD_NovedadesServer
+  object DS_ProcesarNovedades: TDataSource
+    DataSet = CD_ProcesarNovedades
     Left = 522
     Top = 134
   end
@@ -1261,7 +1260,7 @@ object FPrincipal: TFPrincipal
     Top = 134
   end
   object ZQ_NovedadesCliente: TZQuery
-    Connection = DM.ConexionDB
+    Connection = DM.ConexionLectura
     AfterScroll = ZQ_NovedadesClienteAfterScroll
     SQL.Strings = (
       
@@ -1328,7 +1327,7 @@ object FPrincipal: TFPrincipal
     Top = 182
   end
   object ZQ_NovedadesClienteCant: TZQuery
-    Connection = DM.ConexionDB
+    Connection = DM.ConexionLectura
     AfterScroll = ZQ_NovedadesClienteAfterScroll
     SQL.Strings = (
       'select count(ta.id)'
@@ -1346,7 +1345,7 @@ object FPrincipal: TFPrincipal
     end
   end
   object ZQ_CrearLote: TZQuery
-    Connection = DM.ConexionDB
+    Connection = DM.ConexionLectura
     SQL.Strings = (
       'execute procedure z_sinc_generar_lote')
     Params = <>
@@ -1354,7 +1353,7 @@ object FPrincipal: TFPrincipal
     Top = 310
   end
   object ZQ_UltimoLote: TZQuery
-    Connection = DM.ConexionDB
+    Connection = DM.ConexionLectura
     SQL.Strings = (
       'select first 1 ultimo_lote'
       'from z_sincro_lote z'
@@ -1368,7 +1367,7 @@ object FPrincipal: TFPrincipal
     end
   end
   object ZQ_UltimoArchivoServer: TZQuery
-    Connection = DM.ConexionDB
+    Connection = DM.ConexionLectura
     SQL.Strings = (
       'select first 1 z.ultimo_archivo'
       'from z_sincro_server z'
@@ -1411,53 +1410,57 @@ object FPrincipal: TFPrincipal
       FieldName = '_Id'
       Size = 40
     end
+    object CD_Tablas_Actualizar_Usuario: TStringField
+      FieldName = '_Usuario'
+      Size = 67
+    end
   end
-  object CD_NovedadesServer: TClientDataSet
+  object CD_ProcesarNovedades: TClientDataSet
     Aggregates = <>
     Params = <>
     Left = 521
     Top = 86
-    object CD_NovedadesServerID: TIntegerField
+    object CD_ProcesarNovedadesID: TIntegerField
       FieldName = 'ID'
     end
-    object CD_NovedadesServerOPERATION: TStringField
+    object CD_ProcesarNovedadesOPERATION: TStringField
       FieldName = 'OPERATION'
       Required = True
       Size = 1
     end
-    object CD_NovedadesServerDATE_TIME: TDateTimeField
+    object CD_ProcesarNovedadesDATE_TIME: TDateTimeField
       FieldName = 'DATE_TIME'
       Required = True
     end
-    object CD_NovedadesServerUSER_NAME: TStringField
+    object CD_ProcesarNovedadesUSER_NAME: TStringField
       FieldName = 'USER_NAME'
       Required = True
       Size = 67
     end
-    object CD_NovedadesServerTABLE_NAME: TStringField
+    object CD_ProcesarNovedadesTABLE_NAME: TStringField
       FieldName = 'TABLE_NAME'
       Required = True
       Size = 67
     end
-    object CD_NovedadesServerKEY_FIELD: TStringField
+    object CD_ProcesarNovedadesKEY_FIELD: TStringField
       FieldName = 'KEY_FIELD'
       Required = True
       Size = 67
     end
-    object CD_NovedadesServerKEY_VALUE: TStringField
+    object CD_ProcesarNovedadesKEY_VALUE: TStringField
       FieldName = 'KEY_VALUE'
       Size = 255
     end
-    object CD_NovedadesServerFIELD_NAME: TStringField
+    object CD_ProcesarNovedadesFIELD_NAME: TStringField
       FieldName = 'FIELD_NAME'
       Required = True
       Size = 67
     end
-    object CD_NovedadesServerNEW_VALUE: TStringField
+    object CD_ProcesarNovedadesNEW_VALUE: TStringField
       FieldName = 'NEW_VALUE'
       Size = 255
     end
-    object CD_NovedadesServerOLD_VALUE: TStringField
+    object CD_ProcesarNovedadesOLD_VALUE: TStringField
       FieldName = 'OLD_VALUE'
       Size = 255
     end
@@ -1468,7 +1471,7 @@ object FPrincipal: TFPrincipal
     Top = 358
   end
   object ZQ_GrabarUltimoArchivoServer: TZQuery
-    Connection = DM.ConexionLogin
+    Connection = DM.ConexionEscritura
     SQL.Strings = (
       'select z.*'
       'from z_sincro_server z')
@@ -1501,6 +1504,9 @@ object FPrincipal: TFPrincipal
     end
     object CD_ListaNovedades_Estado: TStringField
       FieldName = '_Estado'
+    end
+    object CD_ListaNovedades_idCliente: TIntegerField
+      FieldName = '_idCliente'
     end
   end
   object DS_ListaNovedades: TDataSource
@@ -1563,6 +1569,10 @@ object FPrincipal: TFPrincipal
   object EKOrdGridListaNovedades: TEKOrdenarGrilla
     Grilla = DBGridListaNovedades
     Filtros = <
+      item
+        TituloColumna = 'Origen'
+        Visible = True
+      end
       item
         TituloColumna = 'Archivo'
         Visible = True
@@ -1669,13 +1679,13 @@ object FPrincipal: TFPrincipal
     Top = 478
   end
   object ZQ_ListadoClientes: TZQuery
-    Connection = DM.ConexionDB
+    Connection = DM.ConexionLectura
     SQL.Strings = (
       'select id_sincro_cliente, nombre_cliente, id_cliente'
       'from z_sincro_cliente')
     Params = <>
     Left = 306
-    Top = 327
+    Top = 310
     object ZQ_ListadoClientesID_SINCRO_CLIENTE: TIntegerField
       FieldName = 'ID_SINCRO_CLIENTE'
       Required = True
@@ -1689,7 +1699,7 @@ object FPrincipal: TFPrincipal
     end
   end
   object ZQ_UltimoArchivoCliente: TZQuery
-    Connection = DM.ConexionDB
+    Connection = DM.ConexionLectura
     SQL.Strings = (
       
         'select first 1 id_sincro_cli_archivo, id_sincro_cliente, fecha_y' +
@@ -1704,7 +1714,7 @@ object FPrincipal: TFPrincipal
         ParamType = ptUnknown
       end>
     Left = 306
-    Top = 375
+    Top = 358
     ParamData = <
       item
         DataType = ftUnknown
@@ -1721,6 +1731,132 @@ object FPrincipal: TFPrincipal
       FieldName = 'FECHA_Y_HORA'
     end
     object ZQ_UltimoArchivoClienteULTIMO_ARCHIVO: TStringField
+      FieldName = 'ULTIMO_ARCHIVO'
+      Size = 100
+    end
+  end
+  object ZQ_Sinc_Tabla: TZQuery
+    Connection = DM.ConexionEscritura
+    SQL.Strings = (
+      'select *'
+      'from z_sinc_tabla')
+    Params = <>
+    Left = 474
+    Top = 310
+    object ZQ_Sinc_TablaID: TLargeintField
+      FieldName = 'ID'
+    end
+    object ZQ_Sinc_TablaTABLE_NAME: TStringField
+      FieldName = 'TABLE_NAME'
+      Size = 67
+    end
+    object ZQ_Sinc_TablaOPERATION: TStringField
+      FieldName = 'OPERATION'
+      Size = 1
+    end
+    object ZQ_Sinc_TablaDATE_TIME: TDateTimeField
+      FieldName = 'DATE_TIME'
+    end
+    object ZQ_Sinc_TablaUSER_NAME: TStringField
+      FieldName = 'USER_NAME'
+      Size = 67
+    end
+    object ZQ_Sinc_TablaID_SINCRO_LOTE: TIntegerField
+      FieldName = 'ID_SINCRO_LOTE'
+    end
+  end
+  object ZQ_Sinc_Clave: TZQuery
+    Connection = DM.ConexionEscritura
+    SQL.Strings = (
+      'select *'
+      'from z_sinc_clave')
+    Params = <>
+    Left = 474
+    Top = 359
+    object ZQ_Sinc_ClaveLOG_TABLES_ID: TLargeintField
+      FieldName = 'LOG_TABLES_ID'
+    end
+    object ZQ_Sinc_ClaveKEY_FIELD: TStringField
+      FieldName = 'KEY_FIELD'
+      Size = 67
+    end
+    object ZQ_Sinc_ClaveKEY_VALUE: TStringField
+      FieldName = 'KEY_VALUE'
+      Size = 255
+    end
+  end
+  object ZQ_Sinc_Campo: TZQuery
+    Connection = DM.ConexionEscritura
+    SQL.Strings = (
+      'select *'
+      'from z_sinc_campo')
+    Params = <>
+    Left = 474
+    Top = 415
+    object ZQ_Sinc_CampoLOG_TABLES_ID: TLargeintField
+      FieldName = 'LOG_TABLES_ID'
+    end
+    object ZQ_Sinc_CampoFIELD_NAME: TStringField
+      FieldName = 'FIELD_NAME'
+      Size = 67
+    end
+    object ZQ_Sinc_CampoOLD_VALUE: TStringField
+      FieldName = 'OLD_VALUE'
+      Size = 255
+    end
+    object ZQ_Sinc_CampoNEW_VALUE: TStringField
+      FieldName = 'NEW_VALUE'
+      Size = 255
+    end
+  end
+  object ZQ_Sinc_Blob: TZQuery
+    Connection = DM.ConexionEscritura
+    SQL.Strings = (
+      'select *'
+      'from z_sinc_campo_blob')
+    Params = <>
+    Left = 474
+    Top = 463
+    object ZQ_Sinc_BlobLOG_TABLES_ID: TLargeintField
+      FieldName = 'LOG_TABLES_ID'
+    end
+    object ZQ_Sinc_BlobFIELD_NAME: TStringField
+      FieldName = 'FIELD_NAME'
+      Size = 67
+    end
+    object ZQ_Sinc_BlobOLD_CHAR_VALUE: TStringField
+      FieldName = 'OLD_CHAR_VALUE'
+      Size = 8000
+    end
+    object ZQ_Sinc_BlobNEW_CHAR_VALUE: TStringField
+      FieldName = 'NEW_CHAR_VALUE'
+      Size = 8000
+    end
+    object ZQ_Sinc_BlobOLD_BLOB_VALUE: TBlobField
+      FieldName = 'OLD_BLOB_VALUE'
+    end
+    object ZQ_Sinc_BlobNEW_BLOB_VALUE: TBlobField
+      FieldName = 'NEW_BLOB_VALUE'
+    end
+  end
+  object ZQ_GrabarUltimoArchivoCliente: TZQuery
+    Connection = DM.ConexionEscritura
+    SQL.Strings = (
+      'select *'
+      'from z_sincro_cliente_archivos')
+    Params = <>
+    Left = 306
+    Top = 414
+    object ZQ_GrabarUltimoArchivoClienteID_SINCRO_CLI_ARCHIVO: TIntegerField
+      FieldName = 'ID_SINCRO_CLI_ARCHIVO'
+    end
+    object ZQ_GrabarUltimoArchivoClienteID_SINCRO_CLIENTE: TIntegerField
+      FieldName = 'ID_SINCRO_CLIENTE'
+    end
+    object ZQ_GrabarUltimoArchivoClienteFECHA_Y_HORA: TDateTimeField
+      FieldName = 'FECHA_Y_HORA'
+    end
+    object ZQ_GrabarUltimoArchivoClienteULTIMO_ARCHIVO: TStringField
       FieldName = 'ULTIMO_ARCHIVO'
       Size = 100
     end
