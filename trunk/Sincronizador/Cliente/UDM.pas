@@ -11,11 +11,11 @@ type
   TDM = class(TDataModule)
     ConexionLectura: TZConnection;
     Iconos_Barra_32: TImageList;
-    ModeloDB: TEKModeloTransaccion;
+    ModeloLectura: TEKModeloTransaccion;
     SkinData1: TSkinData;
     IdFTP: TIdFTP;
     ConexionEscritura: TZConnection;
-    ModeloLogin: TEKModeloTransaccion;
+    ModeloEscritura: TEKModeloTransaccion;
     EKIconizar: TEKIconizacion;
     procedure IdFTPWork(ASender: TObject; AWorkMode: TWorkMode;
       AWorkCount: Int64);

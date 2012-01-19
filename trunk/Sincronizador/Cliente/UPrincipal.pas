@@ -171,7 +171,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure TimerTimer(Sender: TObject);
     procedure cargarIni();
-    function  get_FechayHora: string ;
+    function  getFechayHoraString: string;
+    function  getFechayHora: TDateTime;    
     procedure guardarArchivoLog();
     procedure conectarDBLectura();
     procedure conectarDBEscritura;
@@ -195,6 +196,7 @@ type
     //procedientos compartidos modo CLIENTE y SERVIDOR
     function  guardar_lote: boolean;
     function  nro_lote_actual: integer;
+    procedure obtener_tablas_actualizar();
     //MODO CLIENTE------------------------------------------
     //procedimientos para subir novedades del cliente al servidor FTP
     procedure buscarNovedadesCliente();
@@ -204,7 +206,6 @@ type
     procedure bajarNovedadesServer();
     //procedimientos para procesar los archivos de novedades del servidor descargados desde el servidor FTP
     procedure procesarNovedadesServer();
-    procedure obtener_tablas_actualizar();
     function  actualizar_base_local(archivo: string):boolean;
     //MODO SERVIDOR------------------------------------------
     //procedimientos para subir novedades del cliente al servidor FTP
@@ -217,7 +218,6 @@ type
     //procedimientos para procesar los archivos de novedades de los clientes descargados desde el servidor FTP
     procedure procesarNovedadesClientes();
     function  actualizar_base_server(id_cliente: integer; archivo: string):boolean;
-//    procedure obtener_tablas_actualizar();
 
   private
     { Private declarations }
@@ -253,7 +253,8 @@ const
 
 implementation
 
-uses UUtil_Procesos, UDM, UConfiguracion, IniFiles, DateUtils, StrUtils;
+uses UUtil_Procesos, UDM, UConfiguracion, IniFiles, DateUtils, StrUtils,
+  EKModelo;
 
 {$R *.dfm}
 
@@ -393,8 +394,8 @@ begin
   //configuro base para guardar las novedades bajadas del servidor
   DM.ConexionEscritura.HostName:= db_host;
   DM.ConexionEscritura.Database:= db_name;
-  DM.ConexionEscritura.User:= 'sincro';
-  DM.ConexionEscritura.Password:= 'sincro';
+  DM.ConexionEscritura.User:= 'sincro';      //para indicar que las modificaciones
+  DM.ConexionEscritura.Password:= 'sincro';  //se realizaron con el sincronizador
 
   //configuro ftp
   DM.IdFTP.Host:= ftp_host;
@@ -411,7 +412,7 @@ begin
   domingo:= EKInicio.Ini.ReadInteger('CRONOGRAMA', 'DOMINGO', -1);
 
   //obtengo el numero del dia de hoy
-  dia_hoy:= DayOfTheWeek(dm.ModeloDB.FechayHora);
+  dia_hoy:= DayOfTheWeek(getFechayHora);
 
   //Activo o desactivo el timmer de sincronizacion
   Timer.Enabled:= false;
@@ -455,9 +456,15 @@ begin
 end;
 
 
-function TFPrincipal.get_FechayHora: string;
+function TFPrincipal.getFechayHora: TDateTime;
 begin
-  result:= DateTimeToStr(dm.ModeloDB.FechayHora)
+  result:= dm.ModeloLectura.FechayHora;
+end;
+
+
+function TFPrincipal.getFechayHoraString: string;
+begin
+  result:= DateTimeToStr(dm.ModeloLectura.FechayHora);
 end;
 
 
@@ -492,7 +499,7 @@ var
   archivoLog: String;
 begin
   try
-    archivoLog:= Format('LOG_%s.TXT',[FormatDateTime('dd-mm-yyyy(hh.nn.ss)', dm.ModeloDB.FechayHora)]);
+    archivoLog:= Format('LOG_%s.TXT',[FormatDateTime('dd-mm-yyyy(hh.nn.ss)', getFechayHora)]);
     memoLog.Lines.SaveToFile(dirLog+archivoLog);
   except
     Application.MessageBox('Se produjo un error al crear el archivo de Log.','Atención',MB_OK+MB_ICONINFORMATION);
@@ -547,16 +554,16 @@ begin
   try
    begin
       DM.ConexionLectura.Disconnect;
-      memoLog.Lines.Add(get_FechayHora+' - Conectando DB Local: '+db_host+':'+db_name+' modo lectura');
+      memoLog.Lines.Add(getFechayHoraString+' - Conectando DB Local: '+db_host+':'+db_name+' modo lectura');
       DM.ConexionLectura.Connect;
-      memoLog.Lines.Add(get_FechayHora+' - Conectado.');
+      memoLog.Lines.Add(getFechayHoraString+' - Conectado.');
    end
   except
     on E: Exception do
     begin
       DM.ConexionLectura.Disconnect;
-      memoLog.Lines.Add(get_FechayHora+' - '+E.Message);
-      memoLog.Lines.Add(get_FechayHora+' - ERROR Conexión DB Local'+db_host+':'+db_name+' modo lectura');
+      memoLog.Lines.Add(getFechayHoraString+' - '+E.Message);
+      memoLog.Lines.Add(getFechayHoraString+' - ERROR Conexión DB Local'+db_host+':'+db_name+' modo lectura');
     end;
   end;
 end;
@@ -567,16 +574,16 @@ begin
   try
    begin
       DM.ConexionEscritura.Disconnect;
-      memoLog.Lines.Add(get_FechayHora+' - Conectando DB Local: '+db_host+':'+db_name+' modo escritura');
+      memoLog.Lines.Add(getFechayHoraString+' - Conectando DB Local: '+db_host+':'+db_name+' modo escritura');
       DM.ConexionEscritura.Connect;
-      memoLog.Lines.Add(get_FechayHora+' - Conectado.');
+      memoLog.Lines.Add(getFechayHoraString+' - Conectado.');
    end
   except
     on E: Exception do
     begin
       DM.ConexionEscritura.Disconnect;
-      memoLog.Lines.Add(get_FechayHora+' - '+E.Message);
-      memoLog.Lines.Add(get_FechayHora+' - ERROR Conexión DB Local'+db_host+':'+db_name+' modo escritura');
+      memoLog.Lines.Add(getFechayHoraString+' - '+E.Message);
+      memoLog.Lines.Add(getFechayHoraString+' - ERROR Conexión DB Local'+db_host+':'+db_name+' modo escritura');
     end;
   end;
 end;
@@ -839,15 +846,15 @@ begin
 
   Result:= false;
 
-  if dm.ModeloDB.iniciar_transaccion(transaccion, []) then
+  if dm.ModeloEscritura.iniciar_transaccion(transaccion, []) then
   begin
     ZQ_CrearLote.Close;
     ZQ_CrearLote.ExecSQL;
 
-    if dm.ModeloDB.finalizar_transaccion(transaccion) then
+    if dm.ModeloEscritura.finalizar_transaccion(transaccion) then
       Result:= true
     else
-      dm.ModeloDB.cancelar_transaccion(transaccion);
+      dm.ModeloEscritura.cancelar_transaccion(transaccion);
   end;
 end;
 
@@ -947,7 +954,7 @@ begin
   //si no estoy conectado a la base me conecto
   conectarDBLectura;
   conectarDBEscritura;
-  memoLog.Lines.Add(get_FechayHora+' - Buscando Novedades');
+  memoLog.Lines.Add(getFechayHoraString+' - Buscando Novedades');
   DBGridUpload.BringToFront;
   posicion_PBar:= 0;
   //obtengo la cantidad del novedades encontradas (todas las modif. mias, <> SINCRO, q no tiene lote asignado)
@@ -956,7 +963,7 @@ begin
   //si no se encontraron novedades no hago nada y salgo
   if ZQ_NovedadesClienteCantCOUNT.AsInteger = 0 then
   begin
-    memoLog.Lines.Add(get_FechayHora+' - No hay Novedades para Subir');
+    memoLog.Lines.Add(getFechayHoraString+' - No hay Novedades para Subir');
     memoLog.Lines.Add('--------------------------------------------------------------');
     memoLog.Lines.Add('        FIN SUBIR NOVEDADES CLIENTE                           ');
     memoLog.Lines.Add('--------------------------------------------------------------');
@@ -975,31 +982,31 @@ begin
   //si el archivo existe lo borro para crearlo nuevamente
   if FileExists(dirLocal+archivo) then
     DeleteFile(dirLocal+archivo);
-  memoLog.Lines.Add(get_FechayHora+' - Creando Archivo Novedades ('+archivo+')');
+  memoLog.Lines.Add(getFechayHoraString+' - Creando Archivo Novedades ('+archivo+')');
   //creo el archivo para subir
   CD_NovedadesCliente.SaveToFile(dirLocal+archivo, dfXMLUTF8);
-  memoLog.Lines.Add(get_FechayHora+' - Enviando Archivo Novedades ('+archivo+') al Servidor FTP');
+  memoLog.Lines.Add(getFechayHoraString+' - Enviando Archivo Novedades ('+archivo+') al Servidor FTP');
   //inicio subida del archivo al directorio asignado a los clientes en el servidor FTP
   if FTP_SubirArchivo(dirFTP_Cliente, archivo) then //si el archivo se subio correctamente
   begin
-    memoLog.Lines.Add(get_FechayHora+' - Fin Envio Archivo Novedades ('+archivo+') al Servidor FTP');
-    memoLog.Lines.Add(get_FechayHora+' - Guardando Lote Sincronizacion '+IntToStr(nserie_cliente));
+    memoLog.Lines.Add(getFechayHoraString+' - Fin Envio Archivo Novedades ('+archivo+') al Servidor FTP');
+    memoLog.Lines.Add(getFechayHoraString+' - Guardando Lote Sincronizacion '+IntToStr(nserie_cliente));
     //comienzo el guardado del lote de sincronizacion
     if guardar_lote then //si el lote se guardo correctamente
-      memoLog.Lines.Add(get_FechayHora+' - Fin Guardar Lote Sincronizacion '+IntToStr(nserie_cliente))
+      memoLog.Lines.Add(getFechayHoraString+' - Fin Guardar Lote Sincronizacion '+IntToStr(nserie_cliente))
     else //si no pude guardar el lote entonces borro el archivo que subi al servidor
     begin
-      memoLog.Lines.Add(get_FechayHora+' - Error en Guardar Lote Sincronizacion '+IntToStr(nserie_cliente));
-      memoLog.Lines.Add(get_FechayHora+' - Borrando Archivo Novedades ('+archivo+') del Servidor FTP');
+      memoLog.Lines.Add(getFechayHoraString+' - Error en Guardar Lote Sincronizacion '+IntToStr(nserie_cliente));
+      memoLog.Lines.Add(getFechayHoraString+' - Borrando Archivo Novedades ('+archivo+') del Servidor FTP');
       if FTP_BorrarArchivo(dirFTP_Cliente,archivo) then
-        memoLog.Lines.Add(get_FechayHora+' - Fin Borrar Archivo Novedades ('+archivo+') del Servidor FTP')
+        memoLog.Lines.Add(getFechayHoraString+' - Fin Borrar Archivo Novedades ('+archivo+') del Servidor FTP')
       else
-        memoLog.Lines.Add(get_FechayHora+' - No se pudo Borrar Archivo Novedades ('+archivo+') del Servidor FTP');
+        memoLog.Lines.Add(getFechayHoraString+' - No se pudo Borrar Archivo Novedades ('+archivo+') del Servidor FTP');
     end;
   end
   else //si el archivo no se pudo subir al servidor
   begin
-    memoLog.Lines.Add(get_FechayHora+' - Error en el Envio Archivo Novedades ('+archivo+') al Servidor FTP');
+    memoLog.Lines.Add(getFechayHoraString+' - Error en el Envio Archivo Novedades ('+archivo+') al Servidor FTP');
   end;
   memoLog.Lines.Add('--------------------------------------------------------------');
   memoLog.Lines.Add('        FIN SUBIR NOVEDADES CLIENTE                           ');
@@ -1033,7 +1040,7 @@ begin
   id_base_local:= ZQ_ConfiguracionID_SUCURSAL.AsString;
   ZQ_Configuracion.Close;
   //busco el ultimo archivo que se bajo del servidor
-  memoLog.Lines.Add(get_FechayHora+' - Buscando Novedades del Servidor en el Servidor FTP');
+  memoLog.Lines.Add(getFechayHoraString+' - Buscando Novedades del Servidor en el Servidor FTP');
   DBGridDownload.BringToFront;
   ZQ_UltimoArchivoServer.Close;
   ZQ_UltimoArchivoServer.Open;
@@ -1046,25 +1053,25 @@ begin
   CD_ListaNovedades.EmptyDataSet;
   cantidad_archivos_encontrados:= FTP_BuscarListaArchivos(dirFTP_Server, archivo_server, ultimo_archivo, 'SERVIDOR');
   if cantidad_archivos_encontrados = -1 then  //si devuelve -1 es porque no me puedo conectar
-    memoLog.Lines.Add(get_FechayHora+' - No se pudo conectar al servidor FTP')
+    memoLog.Lines.Add(getFechayHoraString+' - No se pudo conectar al servidor FTP')
   else //si me puedo conectar
   begin
     if cantidad_archivos_encontrados > 0 then
-      memoLog.Lines.Add(get_FechayHora+' - Se encontraron '+IntToStr(cantidad_archivos_encontrados)+' archivos de novedades en el Servidor FTP')
+      memoLog.Lines.Add(getFechayHoraString+' - Se encontraron '+IntToStr(cantidad_archivos_encontrados)+' archivos de novedades en el Servidor FTP')
     else
-      memoLog.Lines.Add(get_FechayHora+' - No se encontraron archivos de novedades en el Servidor FTP');
+      memoLog.Lines.Add(getFechayHoraString+' - No se encontraron archivos de novedades en el Servidor FTP');
     Application.ProcessMessages;
     CD_ListaNovedades.First;
     while not CD_ListaNovedades.Eof do //por cada una de las novedades encontradas, las bajo una por una
     begin
-      memoLog.Lines.Add(get_FechayHora+' - Descargando el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
+      memoLog.Lines.Add(getFechayHoraString+' - Descargando el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
       pBar_Ftp.Position:= 0;
       Application.ProcessMessages;
       //bajo el archivo de novedades
       if FTP_BajarArchivo(dirFTP_Server, CD_ListaNovedades_NombreArchivo.AsString) then
-        memoLog.Lines.Add(get_FechayHora+' - Archivo '+CD_ListaNovedades_NombreArchivo.AsString+' descargado con exito')
+        memoLog.Lines.Add(getFechayHoraString+' - Archivo '+CD_ListaNovedades_NombreArchivo.AsString+' descargado con exito')
       else
-        memoLog.Lines.Add(get_FechayHora+' - Error al descargar el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
+        memoLog.Lines.Add(getFechayHoraString+' - Error al descargar el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
       CD_ListaNovedades.Next;
     end;
   end;
@@ -1100,27 +1107,27 @@ begin
   begin
     if CD_ListaNovedades_Estado.AsString = ESTADO_SIN_PROCESAR then //si todavia no se proceso el archivo
     begin
-      memoLog.Lines.Add(get_FechayHora+' - Cargando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
+      memoLog.Lines.Add(getFechayHoraString+' - Cargando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
       //cargo el archivo en el client dataset
       CD_ProcesarNovedades.LoadFromFile(dirLocal+CD_ListaNovedades_NombreArchivo.AsString);
       pBar_Novedades.Position:= 0;
       //obtengo el listado de todas las tablas a actualizar
       obtener_tablas_actualizar();
       pBar_Novedades.Max:= CD_Tablas_Actualizar.RecordCount;
-      memoLog.Lines.Add(get_FechayHora+' - Procesando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
+      memoLog.Lines.Add(getFechayHoraString+' - Procesando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
       //actualizo la base de datos local con el contenido del archivo
       if not actualizar_base_local(CD_ListaNovedades_NombreArchivo.AsString) then //si se produjo un error mientras actualizaba salgo
       begin
         if CD_Tablas_Actualizar.IsEmpty then
         begin
-          memoLog.Lines.Add(get_FechayHora+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' no tiene datos de otras sucursales para actualizar');
+          memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' no tiene datos de otras sucursales para actualizar');
           CD_ListaNovedades.edit;
           CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
           CD_ListaNovedades.Post;
         end
         else
         begin
-          memoLog.Lines.Add(get_FechayHora+' - Se produjo un error mientras se procesaba el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
+          memoLog.Lines.Add(getFechayHoraString+' - Se produjo un error mientras se procesaba el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
           memoLog.Lines.Add('--------------------------------------------------------------');
           memoLog.Lines.Add('           FIN PROCESAR NOVEDADES SERVIDOR                    ');
           memoLog.Lines.Add('--------------------------------------------------------------');
@@ -1132,7 +1139,7 @@ begin
       end
       else //si se actualizo correctamente
       begin
-        memoLog.Lines.Add(get_FechayHora+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' se proceso correctamente');
+        memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' se proceso correctamente');
         //edito la lista de archivos de novedades y marco el archivo como que se proceso correctamente
         CD_ListaNovedades.edit;
         CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
@@ -1160,7 +1167,7 @@ begin
 
   try
     //inicio transaccion
-    if dm.ModeloLogin.iniciar_transaccion(transaccion_actualizar_base, [ZQ_GrabarUltimoArchivoServer]) then
+    if dm.ModeloEscritura.iniciar_transaccion(transaccion_actualizar_base, [ZQ_GrabarUltimoArchivoServer]) then
     begin
       CD_Tablas_Actualizar.First;
       while not CD_Tablas_Actualizar.Eof do //por cada una de las tablas que se tienen que tocar
@@ -1211,20 +1218,20 @@ begin
       ZQ_GrabarUltimoArchivoServer.Close;
       ZQ_GrabarUltimoArchivoServer.Open;
       ZQ_GrabarUltimoArchivoServer.Append;
-      ZQ_GrabarUltimoArchivoServerFECHA_Y_HORA.AsDateTime:= dm.ModeloDB.FechayHora;
+      ZQ_GrabarUltimoArchivoServerFECHA_Y_HORA.AsDateTime:= getFechayHora;
       ZQ_GrabarUltimoArchivoServerULTIMO_ARCHIVO.AsString:= archivo;
       ZQ_GrabarUltimoArchivoServer.Post;
 
       //finalizo transaccion
-      if dm.ModeloLogin.finalizar_transaccion(transaccion_actualizar_base) then
+      if dm.ModeloEscritura.finalizar_transaccion(transaccion_actualizar_base) then
         Result:= true
       else
-        dm.ModeloLogin.cancelar_transaccion(transaccion_actualizar_base);
+        dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
     end;
   except //si se produce una excepcion en el proceso cancelo el mismo
     begin
       CD_ProcesarNovedades.Filtered:= false;
-      dm.ModeloLogin.cancelar_transaccion(transaccion_actualizar_base);
+      dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
       Result:= false;
     end
   end;
@@ -1272,9 +1279,9 @@ begin
     else
     begin
       if cantidad_archivos_encontrados > 0 then
-        memoLog.Lines.Add(get_FechayHora+' - Se encontraron '+IntToStr(cantidad_archivos_encontrados)+' archivos de novedades del cliente '+ZQ_ListadoClientesNOMBRE_CLIENTE.AsString+' en el Servidor FTP')
+        memoLog.Lines.Add(getFechayHoraString+' - Se encontraron '+IntToStr(cantidad_archivos_encontrados)+' archivos de novedades del cliente '+ZQ_ListadoClientesNOMBRE_CLIENTE.AsString+' en el Servidor FTP')
       else
-        memoLog.Lines.Add(get_FechayHora+' - No se encontraron archivos de novedades del cliente '+ZQ_ListadoClientesNOMBRE_CLIENTE.AsString+' en el Servidor FTP');
+        memoLog.Lines.Add(getFechayHoraString+' - No se encontraron archivos de novedades del cliente '+ZQ_ListadoClientesNOMBRE_CLIENTE.AsString+' en el Servidor FTP');
     end;
 
     ZQ_ListadoClientes.Next;
@@ -1299,28 +1306,28 @@ begin
   conectarDBLectura;
   conectarDBEscritura;
   //busco el ultimo archivo que se bajo del servidor
-  memoLog.Lines.Add(get_FechayHora+' - Buscando Novedades de los Clientes en el Servidor FTP');
+  memoLog.Lines.Add(getFechayHoraString+' - Buscando Novedades de los Clientes en el Servidor FTP');
   if not buscarNovedadesClientes then  //si devuelve falso es porque no me puedo conectar
-    memoLog.Lines.Add(get_FechayHora+' - No se pudo conectar al servidor FTP')
+    memoLog.Lines.Add(getFechayHoraString+' - No se pudo conectar al servidor FTP')
   else //si me puedo conectar
   begin
     cantidad_archivos_encontrados:= CD_ListaNovedades.RecordCount;
     if cantidad_archivos_encontrados > 0 then
-      memoLog.Lines.Add(get_FechayHora+' - Se encontraron en total '+IntToStr(cantidad_archivos_encontrados)+' archivos de novedades en el Servidor FTP')
+      memoLog.Lines.Add(getFechayHoraString+' - Se encontraron en total '+IntToStr(cantidad_archivos_encontrados)+' archivos de novedades en el Servidor FTP')
     else
-      memoLog.Lines.Add(get_FechayHora+' - No se encontraron archivos de novedades en el Servidor FTP');
+      memoLog.Lines.Add(getFechayHoraString+' - No se encontraron archivos de novedades en el Servidor FTP');
     Application.ProcessMessages;
     CD_ListaNovedades.First;
     while not CD_ListaNovedades.Eof do //por cada una de las novedades encontradas, las bajo una por una
     begin
-      memoLog.Lines.Add(get_FechayHora+' - Descargando el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
+      memoLog.Lines.Add(getFechayHoraString+' - Descargando el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
       pBar_Ftp.Position:= 0;
       Application.ProcessMessages;
       //bajo el archivo de novedades
       if FTP_BajarArchivo(dirFTP_Cliente, CD_ListaNovedades_NombreArchivo.AsString) then
-        memoLog.Lines.Add(get_FechayHora+' - Archivo '+CD_ListaNovedades_NombreArchivo.AsString+' descargado con exito')
+        memoLog.Lines.Add(getFechayHoraString+' - Archivo '+CD_ListaNovedades_NombreArchivo.AsString+' descargado con exito')
       else
-        memoLog.Lines.Add(get_FechayHora+' - Error al descargar el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
+        memoLog.Lines.Add(getFechayHoraString+' - Error al descargar el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
       CD_ListaNovedades.Next;
     end;
   end;
@@ -1356,27 +1363,27 @@ begin
   begin
     if CD_ListaNovedades_Estado.AsString = ESTADO_SIN_PROCESAR then //si todavia no se proceso el archivo
     begin
-      memoLog.Lines.Add(get_FechayHora+' - Cargando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
+      memoLog.Lines.Add(getFechayHoraString+' - Cargando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
       //cargo el archivo en el client dataset
       CD_ProcesarNovedades.LoadFromFile(dirLocal+CD_ListaNovedades_NombreArchivo.AsString);
       pBar_Novedades.Position:= 0;
       //obtengo el listado de todas las tablas a actualizar
       obtener_tablas_actualizar();
       pBar_Novedades.Max:= CD_ProcesarNovedades.RecordCount;
-      memoLog.Lines.Add(get_FechayHora+' - Procesando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
+      memoLog.Lines.Add(getFechayHoraString+' - Procesando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
       //actualizo la base de datos local con el contenido del archivo
       if not actualizar_base_server(-1, CD_ListaNovedades_NombreArchivo.AsString) then //si se produjo un error mientras actualizaba salgo
       begin
         if CD_Tablas_Actualizar.IsEmpty then
         begin
-          memoLog.Lines.Add(get_FechayHora+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' no tiene datos de para actualizar');
+          memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' no tiene datos de para actualizar');
           CD_ListaNovedades.edit;
           CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
           CD_ListaNovedades.Post;
         end
         else
         begin
-          memoLog.Lines.Add(get_FechayHora+' - Se produjo un error mientras se procesaba el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
+          memoLog.Lines.Add(getFechayHoraString+' - Se produjo un error mientras se procesaba el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
           memoLog.Lines.Add('--------------------------------------------------------------');
           memoLog.Lines.Add('           FIN PROCESAR NOVEDADES CLIENTES                    ');
           memoLog.Lines.Add('--------------------------------------------------------------');
@@ -1388,7 +1395,7 @@ begin
       end
       else //si se actualizo correctamente
       begin
-        memoLog.Lines.Add(get_FechayHora+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' se proceso correctamente');
+        memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' se proceso correctamente');
         //edito la lista de archivos de novedades y marco el archivo como que se proceso correctamente
         CD_ListaNovedades.edit;
         CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
@@ -1409,10 +1416,6 @@ end;
 
 function TFPrincipal.actualizar_base_server(id_cliente: integer; archivo: string): boolean;
 begin
-  ZQ_Sinc_Tabla.Close;
-  ZQ_Sinc_Clave.Close;
-  ZQ_Sinc_Campo.Close;
-
   Result:= false;
 
   if CD_Tablas_Actualizar.Eof then
@@ -1420,11 +1423,17 @@ begin
 
   try
     //inicio transaccion
-    if dm.ModeloLogin.iniciar_transaccion(transaccion_actualizar_base, [ZQ_GrabarUltimoArchivoCliente, ZQ_Sinc_Tabla, ZQ_Sinc_Clave, ZQ_Sinc_Campo, ZQ_Sinc_Blob]) then
+    if dm.ModeloEscritura.iniciar_transaccion(transaccion_actualizar_base, [ZQ_GrabarUltimoArchivoCliente, ZQ_Sinc_Tabla, ZQ_Sinc_Clave, ZQ_Sinc_Campo, ZQ_Sinc_Blob]) then
     begin
-      CD_ProcesarNovedades.First;
-      while not CD_ProcesarNovedades.Eof do //recorro todos los campos que cambian y actualizo la query
+      CD_Tablas_Actualizar.First;
+      while not CD_Tablas_Actualizar.Eof do //por cada una de las tablas que se tienen que tocar
       begin
+        //filtro las acciones a realizar para la tabla que estoy recorriendo en este momento
+        CD_ProcesarNovedades.Filter:= format('ID = %s', [QuotedStr(CD_Tablas_Actualizar_Id.AsString)]);
+        CD_ProcesarNovedades.Filtered:= true;
+        CD_ProcesarNovedades.First;
+
+        //agrego el registro a la tabla Z_SINC_TABLA
         ZQ_Sinc_Tabla.Append;
         ZQ_Sinc_TablaID.AsInteger:= CD_ProcesarNovedadesID.AsInteger;
         ZQ_Sinc_TablaTABLE_NAME.AsString:= CD_ProcesarNovedadesTABLE_NAME.AsString;
@@ -1433,44 +1442,52 @@ begin
         ZQ_Sinc_TablaUSER_NAME.AsString:= CD_ProcesarNovedadesUSER_NAME.AsString;
         ZQ_Sinc_TablaID_SINCRO_LOTE.Clear;
 
+        //agrego el registro a la tabla Z_SINC_CLAVE
         ZQ_Sinc_Clave.Append;
         ZQ_Sinc_ClaveLOG_TABLES_ID.AsInteger:= CD_ProcesarNovedadesID.AsInteger;
         ZQ_Sinc_ClaveKEY_FIELD.AsString:= CD_ProcesarNovedadesKEY_FIELD.AsString;
         ZQ_Sinc_ClaveKEY_VALUE.AsString:= CD_ProcesarNovedadesKEY_VALUE.AsString;
 
-        ZQ_Sinc_Campo.Append;
-        ZQ_Sinc_CampoLOG_TABLES_ID.AsInteger:= CD_ProcesarNovedadesID.AsInteger;
-        ZQ_Sinc_CampoFIELD_NAME.AsString:= CD_ProcesarNovedadesFIELD_NAME.AsString;
-        ZQ_Sinc_CampoOLD_VALUE.AsString:= CD_ProcesarNovedadesOLD_VALUE.AsString;
-        ZQ_Sinc_CampoNEW_VALUE.AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
+        while not CD_ProcesarNovedades.Eof do //recorro todos los campos que cambian y actualizo la query
+        begin
+          //agrego uno por uno los registro a la tabla Z_SINC_CAMPO
+          ZQ_Sinc_Campo.Append;
+          ZQ_Sinc_CampoLOG_TABLES_ID.AsInteger:= CD_ProcesarNovedadesID.AsInteger;
+          ZQ_Sinc_CampoFIELD_NAME.AsString:= CD_ProcesarNovedadesFIELD_NAME.AsString;
+          ZQ_Sinc_CampoOLD_VALUE.AsString:= CD_ProcesarNovedadesOLD_VALUE.AsString;
+          ZQ_Sinc_CampoNEW_VALUE.AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
+
+          CD_ProcesarNovedades.Next;
+        end;
+        //aplico las actualizaciones de las tablas
+        ZQ_Sinc_Tabla.ApplyUpdates;
+        ZQ_Sinc_Clave.ApplyUpdates;
+        ZQ_Sinc_Campo.ApplyUpdates;
 
         pBar_Novedades.Position:= pBar_Novedades.Position + 1;
-        CD_ProcesarNovedades.Next;
+        CD_Tablas_Actualizar.next;
       end;
-
-      //actualizo las tablas
-      ZQ_Sinc_Tabla.ApplyUpdates;
-      ZQ_Sinc_Clave.ApplyUpdates;
-      ZQ_Sinc_Campo.ApplyUpdates;
+      //saco el filro
+      CD_ProcesarNovedades.Filtered:= false;
 
       //grabo en la base de datos local el nombre del archivo procesado con fecha y hora actual
       ZQ_GrabarUltimoArchivoCliente.Close;
       ZQ_GrabarUltimoArchivoCliente.Open;
       ZQ_GrabarUltimoArchivoCliente.Append;
       ZQ_GrabarUltimoArchivoClienteID_SINCRO_CLIENTE.AsInteger:= 1;//id_cliente;
-      ZQ_GrabarUltimoArchivoClienteFECHA_Y_HORA.AsDateTime:= dm.ModeloDB.FechayHora;
+      ZQ_GrabarUltimoArchivoClienteFECHA_Y_HORA.AsDateTime:= getFechayHora;
       ZQ_GrabarUltimoArchivoClienteULTIMO_ARCHIVO.AsString:= archivo;
       ZQ_GrabarUltimoArchivoCliente.Post;
 
       //finalizo transaccion
-      if dm.ModeloLogin.finalizar_transaccion(transaccion_actualizar_base) then
+      if dm.ModeloEscritura.finalizar_transaccion(transaccion_actualizar_base) then
         Result:= true
       else
-        dm.ModeloLogin.cancelar_transaccion(transaccion_actualizar_base);
+        dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
     end;
   except //si se produce una excepcion en el proceso cancelo el mismo
     begin
-      dm.ModeloLogin.cancelar_transaccion(transaccion_actualizar_base);
+      dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
       Result:= false;
     end
   end;
@@ -1481,6 +1498,8 @@ procedure TFPrincipal.subirNovedadesServer;
 begin
 //
 end;
+
+
 
 end.
 
