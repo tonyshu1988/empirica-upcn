@@ -9,12 +9,12 @@ uses
 
 type
   TDM = class(TDataModule)
-    ConexionDB: TZConnection;
+    ConexionLectura: TZConnection;
     Iconos_Barra_32: TImageList;
     ModeloDB: TEKModeloTransaccion;
     SkinData1: TSkinData;
     IdFTP: TIdFTP;
-    ConexionLogin: TZConnection;
+    ConexionEscritura: TZConnection;
     ModeloLogin: TEKModeloTransaccion;
     EKIconizar: TEKIconizacion;
     procedure IdFTPWork(ASender: TObject; AWorkMode: TWorkMode;
