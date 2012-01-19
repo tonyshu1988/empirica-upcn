@@ -10588,7 +10588,7 @@ object DM: TDM
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
   end
-  object ModeloDB: TEKModeloTransaccion
+  object ModeloLectura: TEKModeloTransaccion
     Coneccion = ConexionLectura
     Left = 32
     Top = 56
@@ -12045,15 +12045,14 @@ object DM: TDM
   object ConexionEscritura: TZConnection
     Protocol = 'firebird-1.5'
     HostName = '127.0.0.1'
-    Database = 'D:\PROYECTOS\EMPIRIKA\Sincronizador\SIGEFA SERVER.FDB'
+    Database = 'C:\SISTEMAS\Sincronizador\SIGEFA SERVER.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
-    Connected = True
     Left = 144
     Top = 8
   end
-  object ModeloLogin: TEKModeloTransaccion
+  object ModeloEscritura: TEKModeloTransaccion
     Coneccion = ConexionEscritura
     Left = 144
     Top = 56
