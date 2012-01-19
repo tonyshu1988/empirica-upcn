@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, ShlObj, EKIni, ExtCtrls;
+  Dialogs, StdCtrls, ComCtrls, ShlObj, EKIni, ExtCtrls, Buttons;
 
 type
   TFConfiguracion = class(TForm)
@@ -14,7 +14,6 @@ type
     GroupBoxDirectorios: TGroupBox;
     Label4: TLabel;
     editDB_Name: TEdit;
-    btnDestinoBases: TButton;
     GroupBoxHora: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -54,6 +53,9 @@ type
     Label13: TLabel;
     editFILE_Download: TEdit;
     RadioGroupModo: TRadioGroup;
+    btnDestinoBases: TSpeedButton;
+    OpenDialog: TOpenDialog;
+    Panel1: TPanel;
     procedure btnCargarIniClick(Sender: TObject);
     procedure btnCancelarYSalirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -61,6 +63,8 @@ type
     procedure cargarIni();
     procedure editHoraExit(Sender: TObject);
     procedure editMinutosExit(Sender: TObject);
+    procedure btnDestinoBasesClick(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -279,6 +283,36 @@ procedure TFConfiguracion.editMinutosExit(Sender: TObject);
 begin
   if (StrToInt(editMinutos.Text) < 0) or (StrToInt(editMinutos.Text) > 59) then
     editMinutos.SetFocus;
+end;
+
+
+procedure TFConfiguracion.btnDestinoBasesClick(Sender: TObject);
+var
+  cp: string;
+begin
+  cp:= GetCurrentDir;
+  OpenDialog.InitialDir:= cp;
+  OpenDialog.Filter := 'Base de Datos Firebird (*.FDB)|*.fdb|All Files (*.*)|*.*';
+
+  if (ExtractFilePath(editDB_Name.Text)) <> '' then
+    OpenDialog.InitialDir:= (ExtractFilePath(editDB_Name.text));
+
+  if OpenDialog.Execute then
+    editDB_Name.Text:= OpenDialog.FileName;
+end;
+
+
+procedure TFConfiguracion.Panel1Click(Sender: TObject);
+begin
+  if editFTP_Pass.PasswordChar = '*' then
+    editFTP_Pass.PasswordChar:= char(0)
+  else
+    editFTP_Pass.PasswordChar:= '*';
+
+  if editDB_Pass.PasswordChar = '*' then
+    editDB_Pass.PasswordChar:= char(0)
+  else
+    editDB_Pass.PasswordChar:= '*';
 end;
 
 end.

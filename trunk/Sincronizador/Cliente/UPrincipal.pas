@@ -1,5 +1,14 @@
 unit UPrincipal;
 
+{------------- OBSERVACIONES -------------------------------------------
+* HACER UNA VALIDACION PARA EL CAMBIO DE MODO, PQ SI ESTA EN MODO CLIENTE CON LA BASE
+  DEL SERVIDOR VA A EXPLOTAR.
+* VER EL TEMA DE LOS NOMBRE DE ARCHIVO PARA EL CLIENTE Y EL SERVIDOR EN LA CONFIGURACION
+  EN MODO CLIENTE TIENE QUE TENER EL MISMO NOMBRE QUE EL QUE FIGURA EN LA BASE DEL SERVIDOR
+  PARA ESE CLIENTE, SINO EN MODO SERVIDOR NUNCA VA ENCONTRAR LOS ARCHIVOS SUBIDO POR ESTE CLIENTE.
+*   
+}
+
 interface
 
 uses
@@ -486,11 +495,20 @@ end;
 
 //abrir la pantalla de configuracion
 procedure TFPrincipal.btnConfigClick(Sender: TObject);
+var
+  clave: string;
 begin
-  Application.CreateForm(TFConfiguracion,FConfiguracion);
-  FConfiguracion.ShowModal;
-  FConfiguracion.Release;
-  cargarIni;
+  clave:= InputBox('Clave de Ingreso','Clave','');
+  if clave = 'jumale03' then
+  begin
+    Application.CreateForm(TFConfiguracion,FConfiguracion);
+    FConfiguracion.ShowModal;
+    FConfiguracion.Release;
+    cargarIni;
+  end
+  else
+    if clave <> '' then
+      ShowMessage('La clave ingresada es incorrecta.');
 end;
 
 //guara el log en un archivo
@@ -1342,6 +1360,8 @@ end;
 
 //proceso los archivos de novedades de los clientes que descargue del servidor FTP
 procedure TFPrincipal.procesarNovedadesClientes;
+var
+  id_cliente: integer;
 begin
   if CD_ListaNovedades.IsEmpty then
     exit;
@@ -1371,8 +1391,12 @@ begin
       obtener_tablas_actualizar();
       pBar_Novedades.Max:= CD_ProcesarNovedades.RecordCount;
       memoLog.Lines.Add(getFechayHoraString+' - Procesando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
+      //busco el id_cliente del cliente que subio el archivo
+      id_cliente:= 1;
+      if ZQ_ListadoClientes.Locate('NOMBRE_CLIENTE', CD_ListaNovedades_Origen.AsString, []) then
+        id_cliente:= ZQ_ListadoClientesID_SINCRO_CLIENTE.AsInteger;
       //actualizo la base de datos local con el contenido del archivo
-      if not actualizar_base_server(-1, CD_ListaNovedades_NombreArchivo.AsString) then //si se produjo un error mientras actualizaba salgo
+      if not actualizar_base_server(id_cliente, CD_ListaNovedades_NombreArchivo.AsString) then //si se produjo un error mientras actualizaba salgo
       begin
         if CD_Tablas_Actualizar.IsEmpty then
         begin
@@ -1474,7 +1498,7 @@ begin
       ZQ_GrabarUltimoArchivoCliente.Close;
       ZQ_GrabarUltimoArchivoCliente.Open;
       ZQ_GrabarUltimoArchivoCliente.Append;
-      ZQ_GrabarUltimoArchivoClienteID_SINCRO_CLIENTE.AsInteger:= 1;//id_cliente;
+      ZQ_GrabarUltimoArchivoClienteID_SINCRO_CLIENTE.AsInteger:= id_cliente;
       ZQ_GrabarUltimoArchivoClienteFECHA_Y_HORA.AsDateTime:= getFechayHora;
       ZQ_GrabarUltimoArchivoClienteULTIMO_ARCHIVO.AsString:= archivo;
       ZQ_GrabarUltimoArchivoCliente.Post;
