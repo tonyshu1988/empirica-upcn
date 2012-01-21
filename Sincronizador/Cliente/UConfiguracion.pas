@@ -11,24 +11,24 @@ type
     btnCargarIni: TButton;
     btnGuardarYSalir: TButton;
     btnCancelarYSalir: TButton;
-    GroupBoxDirectorios: TGroupBox;
+    GroupBoxBD: TGroupBox;
     Label4: TLabel;
     editDB_Name: TEdit;
-    GroupBoxHora: TGroupBox;
+    GroupBoxIntervalo: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
     editHora: TEdit;
     UpDownHora: TUpDown;
     editMinutos: TEdit;
     UpDownMinuto: TUpDown;
-    GroupBoxBases: TGroupBox;
+    GroupBoxArchivos: TGroupBox;
     GroupBoxDias: TGroupBox;
     CheckBoxLunes: TCheckBox;
     CheckBoxJueves: TCheckBox;
     CheckBoxMiercoles: TCheckBox;
     CheckBoxViernes: TCheckBox;
     CheckBoxMartes: TCheckBox;
-    GroupBoxDatosEquipo: TGroupBox;
+    GroupBoxFTP: TGroupBox;
     memoConfiguracion: TMemo;
     Label7: TLabel;
     editFTP_Host: TEdit;
@@ -56,6 +56,8 @@ type
     btnDestinoBases: TSpeedButton;
     OpenDialog: TOpenDialog;
     Panel1: TPanel;
+    GroupBoxConfigPassword: TGroupBox;
+    editConfig_Pass: TEdit;
     procedure btnCargarIniClick(Sender: TObject);
     procedure btnCancelarYSalirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -171,6 +173,9 @@ begin
   else
     EKInicio.Ini.WriteString('SINCRONIZADOR', 'MODO', modo_servidor);
 
+  //Guardo la clave de ingreso a la pantalla de configuracion
+  EKInicio.Ini.WriteString('SINCRONIZADOR', 'CONFIG_PASS', EKInicio.Encripta(editConfig_Pass.Text));
+
   //Guardo los datos de la base de datos
   EKInicio.Ini.WriteString('BASE', 'DB_HOST', editDB_Host.Text);
   EKInicio.Ini.WriteString('BASE', 'DB_NAME', editDB_Name.Text);
@@ -254,8 +259,10 @@ begin
   else
     RadioGroupModo.ItemIndex:= 1; //SERVIDOR
 
+  editConfig_Pass.Text:= EKInicio.Desencripta(EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
+
   editDB_Host.Text:= EKInicio.Ini.ReadString('BASE', 'DB_HOST', '');
-  editDB_Name.Text:= EKInicio.Ini.ReadString('BASE', 'DB_NAME', ''); 
+  editDB_Name.Text:= EKInicio.Ini.ReadString('BASE', 'DB_NAME', '');
   editDB_User.Text:= EKInicio.Desencripta(EKInicio.Ini.ReadString('BASE', 'DB_USER', ''));
   editDB_Pass.Text:= EKInicio.Desencripta(EKInicio.Ini.ReadString('BASE', 'DB_PASS', ''));
 
@@ -304,6 +311,11 @@ end;
 
 procedure TFConfiguracion.Panel1Click(Sender: TObject);
 begin
+  if editConfig_Pass.PasswordChar = '*' then
+    editConfig_Pass.PasswordChar:= char(0)
+  else
+    editConfig_Pass.PasswordChar:= '*';
+
   if editFTP_Pass.PasswordChar = '*' then
     editFTP_Pass.PasswordChar:= char(0)
   else

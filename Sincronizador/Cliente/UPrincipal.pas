@@ -19,6 +19,9 @@ uses
   IdComponent, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
   IdFTP, DBClient, ComCtrls, Buttons, Provider, DBCtrls, EKOrdenarGrilla;
 
+const
+  InputBoxMessage = WM_USER + 200; //para que hacer el imputBox con password
+
 type
   TFPrincipal = class(TForm)
     ZQ_ActualizarBase: TZQuery;
@@ -202,6 +205,21 @@ type
     ZQ_NovedadesServerFBLOB_NEW_CHAR_VALUE: TStringField;
     ZQ_NovedadesServerFBLOB_OLD_BLOB_VALUE: TBlobField;
     ZQ_NovedadesServerFBLOB_NEW_BLOB_VALUE: TBlobField;
+    CD_NovedadesServerFBLOB_NAME: TStringField;
+    CD_NovedadesServerFBLOB_OLD_CHAR_VALUE: TStringField;
+    CD_NovedadesServerFBLOB_NEW_CHAR_VALUE: TStringField;
+    CD_NovedadesServerFBLOB_OLD_BLOB_VALUE: TBlobField;
+    CD_NovedadesServerFBLOB_NEW_BLOB_VALUE: TBlobField;
+    CD_NovedadesClienteFBLOB_NAME: TStringField;
+    CD_NovedadesClienteFBLOB_OLD_CHAR_VALUE: TStringField;
+    CD_NovedadesClienteFBLOB_NEW_CHAR_VALUE: TStringField;
+    CD_NovedadesClienteFBLOB_OLD_BLOB_VALUE: TBlobField;
+    CD_NovedadesClienteFBLOB_NEW_BLOB_VALUE: TBlobField;
+    CD_ProcesarNovedadesFBLOB_NAME: TStringField;
+    CD_ProcesarNovedadesFBLOB_OLD_CHAR_VALUE: TStringField;
+    CD_ProcesarNovedadesFBLOB_NEW_CHAR_VALUE: TStringField;
+    CD_ProcesarNovedadesFBLOB_OLD_BLOB_VALUE: TBlobField;
+    CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE: TBlobField;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridTablasActualizarDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridListaNovedadesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -258,10 +276,8 @@ type
     //procedimientos para procesar los archivos de novedades de los clientes descargados desde el servidor FTP
     procedure procesarNovedadesClientes();
     function  actualizar_base_server(id_cliente: integer; archivo: string):boolean;
-
-
   private
-    { Private declarations }
+    procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
   public
     modo: string;
     lunes, martes, miercoles, jueves, viernes, sabado, domingo,
@@ -277,6 +293,7 @@ type
     ultFecha: TDate;
     lote_commit, loteGenerado, ultLoteR, ultLoteL, ultSuc, idSucursal : integer;
     id_base_local: string;
+    password_configuracion: string;
   end;
 
 var
@@ -349,6 +366,25 @@ end;
 //*********************************************************************
 //                PROCEDIMIENTOS GENERALES
 //*********************************************************************
+//paras utilizar el InputBox con los caracteres como password
+procedure TFPrincipal.InputBoxSetPasswordChar(var Msg: TMessage);
+var
+  hInputForm, hEdit, hButton: HWND;
+begin
+  hInputForm := Screen.Forms[0].Handle;
+  if (hInputForm <> 0) then
+  begin
+    hEdit := FindWindowEx(hInputForm, 0, 'TEdit', nil);
+    {
+      // Change button text:
+      hButton := FindWindowEx(hInputForm, 0, 'TButton', nil);
+      SendMessage(hButton, WM_SETTEXT, 0, Integer(PChar('Cancel')));
+    }
+    SendMessage(hEdit, EM_SETPASSWORDCHAR, Ord('*'), 0);
+  end;
+end;
+
+
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
   configGrillas(0); //cargo la config de las grillas
@@ -403,6 +439,8 @@ procedure TFPrincipal.cargarIni();
 begin
   EKInicio.abrir;
   modo:= EKInicio.Ini.ReadString('SINCRONIZADOR', 'MODO', 'CLIENTE'); //cargo el modo, si no esta por defecto es CLIENTE
+
+  password_configuracion:= EKInicio.Desencripta(EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
 
   db_host:= EKInicio.Ini.ReadString('BASE', 'DB_HOST', '');
   db_name:= EKInicio.Ini.ReadString('BASE', 'DB_NAME', '');
@@ -465,17 +503,6 @@ begin
   intervalo:= EKInicio.Ini.ReadInteger('CRONOGRAMA', 'HORA', 1)*3600 + EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MINUTOS', 0)*60;
   tiempo_restante:= intervalo;
   lblTiempoRestante.Caption:= FormatDateTime('hh:nn:ss', tiempo_restante/SecsPerDay);
-  
-//  lote_commit:= strtoint(inicio.Ini.ReadString('SINCRO', 'lote_commit', '100'));
-//  encendido:= inicio.Ini.ReadString('SINCRO', 'encendido', 'SI');
-//  chkTimer.Checked:= (encendido = 'SI');
-//  cuenta.Text:= inttostr(intervalo);
-//  if unidad_tpo = 'segundos' then
-//    rGroupTiempo.ItemIndex:= 0
-//  else
-//    rGroupTiempo.ItemIndex:= 1;
-//
-//  rGroupTiempoClick(self);
 
   EKInicio.cerrar;
   lblTituloSincro.Caption:= db_name;
@@ -531,8 +558,9 @@ procedure TFPrincipal.btnConfigClick(Sender: TObject);
 var
   clave: string;
 begin
+  PostMessage(Handle, InputBoxMessage, 0, 0);
   clave:= InputBox('Clave de Ingreso','Clave','');
-  if clave = 'jumale03' then
+  if clave = password_configuracion then
   begin
     Application.CreateForm(TFConfiguracion,FConfiguracion);
     FConfiguracion.ShowModal;
@@ -950,8 +978,8 @@ begin
         CD_Tablas_Actualizar.Append;
         CD_Tablas_Actualizar_Id.AsString:= IntToStr(CD_ProcesarNovedadesID.AsInteger);
         CD_Tablas_Actualizar_Tabla.AsString:= CD_ProcesarNovedadesTABLE_NAME.AsString;
-        CD_Tablas_Actualizar_Clave.AsString:= CD_ProcesarNovedadesKEY_FIELD.AsString;
-        CD_Tablas_Actualizar_CampoClave.AsString:= CD_ProcesarNovedadesKEY_VALUE.AsString;
+        CD_Tablas_Actualizar_Clave.AsString:= CD_ProcesarNovedadesKEY_VALUE.AsString;
+        CD_Tablas_Actualizar_CampoClave.AsString:= CD_ProcesarNovedadesKEY_FIELD.AsString;
 //        if modo = modo_cliente then
 //          CD_Tablas_Actualizar_Usuario.AsString:= CD_ProcesarNovedadesUSER_NAME.AsString
 //        else
@@ -1090,7 +1118,7 @@ begin
   //obtengo el id generador de mi base para luego descartar las modificaciones del archivo del server hechas localmente
   ZQ_Configuracion.Close;
   ZQ_Configuracion.Open;
-  id_base_local:= ZQ_ConfiguracionID_SUCURSAL.AsString;
+  id_base_local:= ZQ_ConfiguracionDB_SUCURSAL.AsString;
   ZQ_Configuracion.Close;
   //busco el ultimo archivo que se bajo del servidor
   memoLog.Lines.Add(getFechayHoraString+' - Buscando Novedades del Servidor en el Servidor FTP');
@@ -1169,35 +1197,35 @@ begin
       pBar_Novedades.Max:= CD_Tablas_Actualizar.RecordCount;
       memoLog.Lines.Add(getFechayHoraString+' - Procesando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
       //actualizo la base de datos local con el contenido del archivo
-//      if not actualizar_base_local(CD_ListaNovedades_NombreArchivo.AsString) then //si se produjo un error mientras actualizaba salgo
-//      begin
-//        if CD_Tablas_Actualizar.IsEmpty then
-//        begin
-//          memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' no tiene datos de otras sucursales para actualizar');
-//          CD_ListaNovedades.edit;
-//          CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
-//          CD_ListaNovedades.Post;
-//        end
-//        else
-//        begin
-//          memoLog.Lines.Add(getFechayHoraString+' - Se produjo un error mientras se procesaba el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
-//          memoLog.Lines.Add('--------------------------------------------------------------');
-//          memoLog.Lines.Add('           FIN PROCESAR NOVEDADES SERVIDOR                    ');
-//          memoLog.Lines.Add('--------------------------------------------------------------');
-//          memoLog.Lines.Add('');
-//          GrupoEditando.Enabled:= true;
-//          panelContenedor.Enabled:= true;
-//          exit;
-//        end;
-//      end
-//      else //si se actualizo correctamente
-//      begin
-//        memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' se proceso correctamente');
-//        //edito la lista de archivos de novedades y marco el archivo como que se proceso correctamente
-//        CD_ListaNovedades.edit;
-//        CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
-//        CD_ListaNovedades.Post;
-//      end;
+      if not actualizar_base_local(CD_ListaNovedades_NombreArchivo.AsString) then //si se produjo un error mientras actualizaba salgo
+      begin
+        if CD_Tablas_Actualizar.IsEmpty then
+        begin
+          memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' no tiene datos de otras sucursales para actualizar');
+          CD_ListaNovedades.edit;
+          CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
+          CD_ListaNovedades.Post;
+        end
+        else
+        begin
+          memoLog.Lines.Add(getFechayHoraString+' - Se produjo un error mientras se procesaba el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
+          memoLog.Lines.Add('--------------------------------------------------------------');
+          memoLog.Lines.Add('           FIN PROCESAR NOVEDADES SERVIDOR                    ');
+          memoLog.Lines.Add('--------------------------------------------------------------');
+          memoLog.Lines.Add('');
+          GrupoEditando.Enabled:= true;
+          panelContenedor.Enabled:= true;
+          exit;
+        end;
+      end
+      else //si se actualizo correctamente
+      begin
+        memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' se proceso correctamente');
+        //edito la lista de archivos de novedades y marco el archivo como que se proceso correctamente
+        CD_ListaNovedades.edit;
+        CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
+        CD_ListaNovedades.Post;
+      end;
     end;
     CD_ListaNovedades.Next;
   end;
@@ -1646,6 +1674,8 @@ begin
   memoLog.Lines.Add('');
   GrupoEditando.Enabled:= true;
 end;
+
+
 
 end.
 

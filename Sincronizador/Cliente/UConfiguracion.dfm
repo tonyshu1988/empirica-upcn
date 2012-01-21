@@ -23,7 +23,7 @@ object FConfiguracion: TFConfiguracion
     Width = 25
     Height = 12
     BevelOuter = bvNone
-    TabOrder = 10
+    TabOrder = 11
     OnClick = Panel1Click
   end
   object memoConfiguracion: TMemo
@@ -40,7 +40,7 @@ object FConfiguracion: TFConfiguracion
     Width = 129
     Height = 25
     Caption = 'Cargar'
-    TabOrder = 6
+    TabOrder = 8
     OnClick = btnCargarIniClick
   end
   object btnGuardarYSalir: TButton
@@ -49,7 +49,7 @@ object FConfiguracion: TFConfiguracion
     Width = 129
     Height = 25
     Caption = 'Guardar y Salir'
-    TabOrder = 7
+    TabOrder = 9
     OnClick = btnGuardarYSalirClick
   end
   object btnCancelarYSalir: TButton
@@ -57,17 +57,18 @@ object FConfiguracion: TFConfiguracion
     Top = 477
     Width = 129
     Height = 25
+    Cancel = True
     Caption = 'Cancelar y Salir'
-    TabOrder = 8
+    TabOrder = 10
     OnClick = btnCancelarYSalirClick
   end
-  object GroupBoxDirectorios: TGroupBox
+  object GroupBoxBD: TGroupBox
     Left = 374
     Top = 216
     Width = 408
     Height = 125
     Caption = ' Config Base Datos '
-    TabOrder = 2
+    TabOrder = 4
     object Label4: TLabel
       Left = 11
       Top = 16
@@ -195,13 +196,13 @@ object FConfiguracion: TFConfiguracion
       Text = 'editDB_Pass'
     end
   end
-  object GroupBoxHora: TGroupBox
+  object GroupBoxIntervalo: TGroupBox
     Left = 673
     Top = 349
     Width = 110
     Height = 78
     Caption = ' Intervalo '
-    TabOrder = 4
+    TabOrder = 6
     object Label1: TLabel
       Left = 25
       Top = 24
@@ -265,7 +266,7 @@ object FConfiguracion: TFConfiguracion
       Wrap = True
     end
   end
-  object GroupBoxBases: TGroupBox
+  object GroupBoxArchivos: TGroupBox
     Left = 374
     Top = 349
     Width = 294
@@ -315,7 +316,7 @@ object FConfiguracion: TFConfiguracion
     Width = 409
     Height = 37
     Caption = '  Dias  '
-    TabOrder = 3
+    TabOrder = 7
     object CheckBoxLunes: TCheckBox
       Left = 4
       Top = 16
@@ -365,13 +366,13 @@ object FConfiguracion: TFConfiguracion
       TabOrder = 5
     end
   end
-  object GroupBoxDatosEquipo: TGroupBox
+  object GroupBoxFTP: TGroupBox
     Left = 374
     Top = 51
     Width = 409
     Height = 162
     Caption = ' Config Servidor FTP '
-    TabOrder = 1
+    TabOrder = 3
     object Label7: TLabel
       Left = 11
       Top = 16
@@ -471,7 +472,7 @@ object FConfiguracion: TFConfiguracion
   object RadioGroupModo: TRadioGroup
     Left = 374
     Top = 4
-    Width = 409
+    Width = 203
     Height = 44
     Caption = ' Modo Funcionamiento Sistema '
     Columns = 2
@@ -479,7 +480,27 @@ object FConfiguracion: TFConfiguracion
     Items.Strings = (
       'CLIENTE'
       'SERVIDOR')
-    TabOrder = 9
+    TabOrder = 1
+  end
+  object GroupBoxConfigPassword: TGroupBox
+    Left = 582
+    Top = 4
+    Width = 201
+    Height = 44
+    Caption = ' Password Configurac'#243'n '
+    TabOrder = 2
+    object editConfig_Pass: TEdit
+      Left = 8
+      Top = 16
+      Width = 185
+      Height = 21
+      Hint = 'Password de ingreso a la pantalla de Configuraci'#243'n'
+      ParentShowHint = False
+      PasswordChar = '*'
+      ShowHint = True
+      TabOrder = 0
+      Text = 'editConfig_Pass'
+    end
   end
   object EKInicio: TEKIni
     Archivo = 'configSincro.ini'
