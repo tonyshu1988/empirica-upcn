@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 250
-  Top = 110
+  Left = 249
+  Top = 114
   Width = 1027
   Height = 658
   Caption = 'Sincronizador SiGeFa '
@@ -102,7 +102,7 @@ object FPrincipal: TFPrincipal
               FieldName = '_Origen'
               Title.Alignment = taCenter
               Title.Caption = 'Origen'
-              Width = 143
+              Width = 131
               Visible = True
             end
             item
@@ -110,7 +110,7 @@ object FPrincipal: TFPrincipal
               FieldName = '_NombreArchivo'
               Title.Alignment = taCenter
               Title.Caption = 'Archivo'
-              Width = 160
+              Width = 170
               Visible = True
             end
             item
@@ -119,7 +119,7 @@ object FPrincipal: TFPrincipal
               FieldName = '_Estado'
               Title.Alignment = taCenter
               Title.Caption = 'Procesado'
-              Width = 68
+              Width = 67
               Visible = True
             end>
         end
@@ -173,16 +173,16 @@ object FPrincipal: TFPrincipal
       Align = alClient
       TabOrder = 1
       object Splitter3: TSplitter
-        Left = 755
+        Left = 617
         Top = 1
         Width = 4
         Height = 208
         Align = alRight
       end
       object PanelTablas: TPanel
-        Left = 759
+        Left = 621
         Top = 1
-        Width = 249
+        Width = 387
         Height = 208
         Align = alRight
         BevelOuter = bvNone
@@ -190,7 +190,7 @@ object FPrincipal: TFPrincipal
         object Label4: TLabel
           Left = 0
           Top = 0
-          Width = 249
+          Width = 387
           Height = 15
           Align = alTop
           Alignment = taCenter
@@ -208,7 +208,7 @@ object FPrincipal: TFPrincipal
         object DBGridTablasActualizar: TDBGrid
           Left = 0
           Top = 15
-          Width = 249
+          Width = 387
           Height = 193
           Align = alClient
           Color = 13695997
@@ -233,7 +233,7 @@ object FPrincipal: TFPrincipal
               FieldName = '_Id'
               Title.Alignment = taCenter
               Title.Caption = 'Id'
-              Width = 69
+              Width = 52
               Visible = True
             end
             item
@@ -257,15 +257,14 @@ object FPrincipal: TFPrincipal
               FieldName = '_Clave'
               Title.Alignment = taCenter
               Title.Caption = 'Valor Clave'
-              Width = 96
+              Width = 75
               Visible = True
             end
             item
               Expanded = False
               FieldName = '_Operacion'
               Title.Alignment = taCenter
-              Title.Caption = 'Operacion'
-              Width = 71
+              Title.Caption = 'Op.'
               Visible = True
             end
             item
@@ -273,7 +272,7 @@ object FPrincipal: TFPrincipal
               FieldName = '_Fecha'
               Title.Alignment = taCenter
               Title.Caption = 'Fecha'
-              Width = 126
+              Width = 140
               Visible = True
             end>
         end
@@ -281,7 +280,7 @@ object FPrincipal: TFPrincipal
       object PanelDatosXML: TPanel
         Left = 1
         Top = 1
-        Width = 754
+        Width = 616
         Height = 208
         Align = alClient
         BevelOuter = bvNone
@@ -290,7 +289,7 @@ object FPrincipal: TFPrincipal
         object Label5: TLabel
           Left = 0
           Top = 0
-          Width = 754
+          Width = 616
           Height = 15
           Align = alTop
           Alignment = taCenter
@@ -305,14 +304,14 @@ object FPrincipal: TFPrincipal
           ParentColor = False
           ParentFont = False
         end
-        object DBGridUpload: TDBGrid
+        object DBGridDownload: TDBGrid
           Left = 0
           Top = 15
-          Width = 754
+          Width = 616
           Height = 193
           Align = alClient
           Color = 15915716
-          DataSource = DS_NovedadesCliente
+          DataSource = DS_ProcesarNovedades
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -320,14 +319,13 @@ object FPrincipal: TFPrincipal
           Font.Style = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
-          ReadOnly = True
-          TabOrder = 0
+          TabOrder = 1
           TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
-          OnDrawColumnCell = DBGridUploadDrawColumnCell
+          OnDrawColumnCell = DBGridDownloadDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -340,8 +338,8 @@ object FPrincipal: TFPrincipal
               Expanded = False
               FieldName = 'OPERATION'
               Title.Alignment = taCenter
-              Title.Caption = 'Operaci'#243'n'
-              Width = 66
+              Title.Caption = 'Op.'
+              Width = 39
               Visible = True
             end
             item
@@ -357,7 +355,7 @@ object FPrincipal: TFPrincipal
               FieldName = 'USER_NAME'
               Title.Alignment = taCenter
               Title.Caption = 'Usuario'
-              Width = 129
+              Width = 106
               Visible = True
             end
             item
@@ -365,7 +363,7 @@ object FPrincipal: TFPrincipal
               FieldName = 'TABLE_NAME'
               Title.Alignment = taCenter
               Title.Caption = 'Tabla'
-              Width = 161
+              Width = 130
               Visible = True
             end
             item
@@ -373,7 +371,7 @@ object FPrincipal: TFPrincipal
               FieldName = 'KEY_FIELD'
               Title.Alignment = taCenter
               Title.Caption = 'Campo Clave'
-              Width = 164
+              Width = 115
               Visible = True
             end
             item
@@ -409,14 +407,14 @@ object FPrincipal: TFPrincipal
               Visible = True
             end>
         end
-        object DBGridDownload: TDBGrid
+        object DBGridUpload: TDBGrid
           Left = 0
           Top = 15
-          Width = 754
+          Width = 616
           Height = 193
           Align = alClient
           Color = 15915716
-          DataSource = DS_ProcesarNovedades
+          DataSource = DS_NovedadesCliente
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -424,13 +422,14 @@ object FPrincipal: TFPrincipal
           Font.Style = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
-          TabOrder = 1
+          ReadOnly = True
+          TabOrder = 0
           TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
-          OnDrawColumnCell = DBGridDownloadDrawColumnCell
+          OnDrawColumnCell = DBGridUploadDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -443,7 +442,7 @@ object FPrincipal: TFPrincipal
               Expanded = False
               FieldName = 'OPERATION'
               Title.Alignment = taCenter
-              Title.Caption = 'Operaci'#243'n'
+              Title.Caption = 'Op.'
               Width = 66
               Visible = True
             end
@@ -1253,6 +1252,24 @@ object FPrincipal: TFPrincipal
       FieldName = 'OLD_VALUE'
       Size = 255
     end
+    object CD_NovedadesClienteFBLOB_NAME: TStringField
+      FieldName = 'FBLOB_NAME'
+      Size = 67
+    end
+    object CD_NovedadesClienteFBLOB_OLD_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_OLD_CHAR_VALUE'
+      Size = 8000
+    end
+    object CD_NovedadesClienteFBLOB_NEW_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_NEW_CHAR_VALUE'
+      Size = 8000
+    end
+    object CD_NovedadesClienteFBLOB_OLD_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_OLD_BLOB_VALUE'
+    end
+    object CD_NovedadesClienteFBLOB_NEW_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_NEW_BLOB_VALUE'
+    end
   end
   object DS_NovedadesCliente: TDataSource
     DataSet = CD_NovedadesCliente
@@ -1463,6 +1480,24 @@ object FPrincipal: TFPrincipal
     object CD_ProcesarNovedadesOLD_VALUE: TStringField
       FieldName = 'OLD_VALUE'
       Size = 255
+    end
+    object CD_ProcesarNovedadesFBLOB_NAME: TStringField
+      FieldName = 'FBLOB_NAME'
+      Size = 67
+    end
+    object CD_ProcesarNovedadesFBLOB_OLD_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_OLD_CHAR_VALUE'
+      Size = 8000
+    end
+    object CD_ProcesarNovedadesFBLOB_NEW_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_NEW_CHAR_VALUE'
+      Size = 8000
+    end
+    object CD_ProcesarNovedadesFBLOB_OLD_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_OLD_BLOB_VALUE'
+    end
+    object CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_NEW_BLOB_VALUE'
     end
   end
   object DS_Tablas_Actualizar: TDataSource
@@ -2002,6 +2037,24 @@ object FPrincipal: TFPrincipal
     object CD_NovedadesServerOLD_VALUE: TStringField
       FieldName = 'OLD_VALUE'
       Size = 255
+    end
+    object CD_NovedadesServerFBLOB_NAME: TStringField
+      FieldName = 'FBLOB_NAME'
+      Size = 67
+    end
+    object CD_NovedadesServerFBLOB_OLD_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_OLD_CHAR_VALUE'
+      Size = 8000
+    end
+    object CD_NovedadesServerFBLOB_NEW_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_NEW_CHAR_VALUE'
+      Size = 8000
+    end
+    object CD_NovedadesServerFBLOB_OLD_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_OLD_BLOB_VALUE'
+    end
+    object CD_NovedadesServerFBLOB_NEW_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_NEW_BLOB_VALUE'
     end
   end
 end
