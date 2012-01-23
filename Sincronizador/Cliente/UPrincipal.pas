@@ -225,7 +225,6 @@ type
     ZQ_NovedadesClienteFBLOB_NEW_CHAR_VALUE: TStringField;
     ZQ_NovedadesClienteFBLOB_OLD_BLOB_VALUE: TBlobField;
     ZQ_NovedadesClienteFBLOB_NEW_BLOB_VALUE: TBlobField;
-    DBImage1: TDBImage;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridTablasActualizarDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridListaNovedadesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -1285,9 +1284,31 @@ begin
           CD_ProcesarNovedades.First;
           while not CD_ProcesarNovedades.Eof do //recorro todos los campos que cambian y actualizo la query
           begin
-            //si el campo no es null o vacio entonces le seteo su valor
+            //PARA LOS CAMPOS NO BLOB
             if not ((CD_ProcesarNovedadesFIELD_NAME.IsNull) or (CD_ProcesarNovedadesFIELD_NAME.AsString = '')) then
-              ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.value;
+            begin
+                   //pregunto si el campo esta definido como FLOAT
+              if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftFloat then
+                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= CD_ProcesarNovedadesNEW_VALUE.AsFloat
+              else //pregunto si el campo esta definido como INTEGER
+              if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftInteger then
+                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsInteger:= CD_ProcesarNovedadesNEW_VALUE.AsInteger
+              else //pregunto si el campo esta definido como STRING
+              if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftString	then
+                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString
+              else //pregunto si el campo esta definido como DATETIME
+              if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDateTime	 then
+                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime
+              else //pregunto si el campo esta definido como DATE
+              if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDate	 then
+                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime
+              else //si es cualquier otro tipo de campo
+                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.value;
+            end;
+
+            //PARA LOS CAMPOS BLOB
+            if not ((CD_ProcesarNovedadesFBLOB_NAME.IsNull) or (CD_ProcesarNovedadesFBLOB_NAME.AsString = '')) then
+              ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFBLOB_NAME.AsString).value:= CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE.value;
             CD_ProcesarNovedades.Next;
           end;
         end;
