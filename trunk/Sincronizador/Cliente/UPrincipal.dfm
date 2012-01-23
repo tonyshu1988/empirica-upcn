@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 249
-  Top = 114
+  Left = 255
+  Top = 99
   Width = 1027
   Height = 658
   Caption = 'Sincronizador SiGeFa '
@@ -410,26 +410,41 @@ object FPrincipal: TFPrincipal
             item
               Expanded = False
               FieldName = 'FBLOB_NAME'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FBLOB_OLD_CHAR_VALUE'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FBLOB_NEW_CHAR_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Campo Blob'
+              Width = 200
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'FBLOB_OLD_BLOB_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Blob Viejo'
+              Width = 200
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'FBLOB_NEW_BLOB_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Blob Nuevo'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_OLD_CHAR_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Char Viejo'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_NEW_CHAR_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Char Nuevo'
+              Width = 200
               Visible = True
             end>
         end
@@ -538,26 +553,41 @@ object FPrincipal: TFPrincipal
             item
               Expanded = False
               FieldName = 'FBLOB_NAME'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FBLOB_OLD_CHAR_VALUE'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FBLOB_NEW_CHAR_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Campo Blob'
+              Width = 200
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'FBLOB_OLD_BLOB_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Blob Viejo'
+              Width = 200
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'FBLOB_NEW_BLOB_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Blob Nuevo'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_OLD_CHAR_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Char Viejo'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_NEW_CHAR_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Char Nuevo'
+              Width = 200
               Visible = True
             end>
         end
