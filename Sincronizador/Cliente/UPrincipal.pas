@@ -519,7 +519,19 @@ procedure TFPrincipal.TimerTimer(Sender: TObject);
 begin
   if tiempo_restante = 0 then
   begin
-    //sincronizar
+    if modo = modo_cliente then
+    begin
+      bajarNovedadesServer;
+      procesarNovedadesServer;
+      subirNovedadesCliente;
+    end
+    else
+    begin
+      bajarNovedadesClientes;
+      procesarNovedadesClientes;
+      subirNovedadesServer;
+    end;
+
     tiempo_restante:= intervalo;
   end
   else
@@ -1245,6 +1257,9 @@ end;
 
 //Actualizo la base local con el archivo descargado del servidor FTP y que se pasa como parametro
 function TFPrincipal.actualizar_base_local(archivo: string):boolean;
+var
+  es_query_vacia: boolean;
+  operacion: string;
 begin
   Result:= false;
 
@@ -1268,17 +1283,22 @@ begin
                                  ' where '+CD_ProcesarNovedadesKEY_FIELD.AsString+'='+CD_ProcesarNovedadesKEY_VALUE.AsString);
         ZQ_ActualizarBase.Open;
 
-        if CD_ProcesarNovedadesOPERATION.AsString = 'D' then //si la operacion es un delete
+        es_query_vacia:= false;
+        if ZQ_ActualizarBase.IsEmpty then //pregunto si la query esta vacia
+          es_query_vacia:= True;
+        operacion:= CD_ProcesarNovedadesOPERATION.AsString;
+
+        if operacion = 'D' then //si la operacion es un delete
         begin
           if ZQ_ActualizarBase.RecordCount = 1 then //si existe el registro lo borro
             ZQ_ActualizarBase.Delete;
         end
         else
         begin
-          if (CD_ProcesarNovedadesOPERATION.AsString = 'I') then //si la operacion es un insert, pongo en modo insercion la query
+          if operacion = 'I' then //si la operacion es un insert, pongo en modo insercion la query
             ZQ_ActualizarBase.Append
           else
-            if (CD_ProcesarNovedadesOPERATION.AsString = 'U') then //si la operacion es un update, pongo en modo edicion la query
+            if operacion = 'U' then //si la operacion es un update, pongo en modo edicion la query
               ZQ_ActualizarBase.Edit;
 
           CD_ProcesarNovedades.First;
@@ -1299,9 +1319,6 @@ begin
               else //pregunto si el campo esta definido como DATETIME
               if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDateTime	 then
                 ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime
-              else //pregunto si el campo esta definido como DATE
-              if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDate	 then
-                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime
               else //si es cualquier otro tipo de campo
                 ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.value;
             end;
@@ -1314,8 +1331,10 @@ begin
         end;
         pBar_Novedades.Position:= pBar_Novedades.Position + 1;
 
-        //aplico los cambios
-        ZQ_ActualizarBase.ApplyUpdates;
+        //si la query no esta vacia o si la query es vacia pero es una operacion de Insert aplico los cambios
+        if (es_query_vacia = false) or ((es_query_vacia = true) and (operacion = 'I')) then
+          ZQ_ActualizarBase.ApplyUpdates; //aplico los cambios
+
         //paso a la tabla siguiente
         CD_Tablas_Actualizar.next;
       end;
