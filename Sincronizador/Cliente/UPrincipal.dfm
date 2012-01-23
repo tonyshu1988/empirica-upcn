@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
   Left = 249
-  Top = 114
+  Top = 173
   Width = 1027
   Height = 658
   Caption = 'Sincronizador SiGeFa '
@@ -21,34 +21,34 @@ object FPrincipal: TFPrincipal
   object panelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1011
-    Height = 549
+    Width = 1019
+    Height = 560
     Align = alClient
     TabOrder = 0
     object Splitter1: TSplitter
       Left = 1
-      Top = 280
-      Width = 1009
+      Top = 291
+      Width = 1017
       Height = 6
       Cursor = crVSplit
       Align = alBottom
     end
     object panelAbajo: TPanel
       Left = 1
-      Top = 286
-      Width = 1009
+      Top = 297
+      Width = 1017
       Height = 262
       Align = alBottom
       TabOrder = 0
       object Splitter2: TSplitter
-        Left = 617
+        Left = 625
         Top = 1
         Width = 4
         Height = 260
         Align = alRight
       end
       object panelListaNovedades: TPanel
-        Left = 621
+        Left = 629
         Top = 1
         Width = 387
         Height = 260
@@ -127,7 +127,7 @@ object FPrincipal: TFPrincipal
       object PanelLog: TPanel
         Left = 1
         Top = 1
-        Width = 616
+        Width = 624
         Height = 260
         Align = alClient
         BevelOuter = bvNone
@@ -135,7 +135,7 @@ object FPrincipal: TFPrincipal
         object lblTituloLog: TLabel
           Left = 0
           Top = 0
-          Width = 616
+          Width = 624
           Height = 15
           Align = alTop
           Alignment = taCenter
@@ -153,7 +153,7 @@ object FPrincipal: TFPrincipal
         object memoLog: TMemo
           Left = 0
           Top = 15
-          Width = 616
+          Width = 624
           Height = 245
           Align = alClient
           Color = 10026692
@@ -163,27 +163,36 @@ object FPrincipal: TFPrincipal
           ScrollBars = ssBoth
           TabOrder = 0
         end
+        object DBImage1: TDBImage
+          Left = 408
+          Top = 128
+          Width = 105
+          Height = 105
+          DataField = 'FBLOB_NEW_BLOB_VALUE'
+          DataSource = DS_NovedadesCliente
+          TabOrder = 1
+        end
       end
     end
     object panelDatos: TPanel
       Left = 1
       Top = 42
-      Width = 1009
-      Height = 238
+      Width = 1017
+      Height = 249
       Align = alClient
       TabOrder = 1
       object Splitter3: TSplitter
-        Left = 617
+        Left = 625
         Top = 1
         Width = 4
-        Height = 208
+        Height = 219
         Align = alRight
       end
       object PanelTablas: TPanel
-        Left = 621
+        Left = 629
         Top = 1
         Width = 387
-        Height = 208
+        Height = 219
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 0
@@ -209,7 +218,7 @@ object FPrincipal: TFPrincipal
           Left = 0
           Top = 15
           Width = 387
-          Height = 193
+          Height = 204
           Align = alClient
           Color = 13695997
           DataSource = DS_Tablas_Actualizar
@@ -280,8 +289,8 @@ object FPrincipal: TFPrincipal
       object PanelDatosXML: TPanel
         Left = 1
         Top = 1
-        Width = 616
-        Height = 208
+        Width = 624
+        Height = 219
         Align = alClient
         BevelOuter = bvNone
         Caption = 'PanelDatosXML'
@@ -289,7 +298,7 @@ object FPrincipal: TFPrincipal
         object Label5: TLabel
           Left = 0
           Top = 0
-          Width = 616
+          Width = 624
           Height = 15
           Align = alTop
           Alignment = taCenter
@@ -304,114 +313,11 @@ object FPrincipal: TFPrincipal
           ParentColor = False
           ParentFont = False
         end
-        object DBGridDownload: TDBGrid
-          Left = 0
-          Top = 15
-          Width = 616
-          Height = 193
-          Align = alClient
-          Color = 15915716
-          DataSource = DS_ProcesarNovedades
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          TabOrder = 1
-          TitleFont.Charset = ANSI_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridDownloadDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'ID'
-              Title.Alignment = taCenter
-              Width = 76
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'OPERATION'
-              Title.Alignment = taCenter
-              Title.Caption = 'Op.'
-              Width = 39
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DATE_TIME'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha y Hora'
-              Width = 116
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'USER_NAME'
-              Title.Alignment = taCenter
-              Title.Caption = 'Usuario'
-              Width = 106
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'TABLE_NAME'
-              Title.Alignment = taCenter
-              Title.Caption = 'Tabla'
-              Width = 130
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'KEY_FIELD'
-              Title.Alignment = taCenter
-              Title.Caption = 'Campo Clave'
-              Width = 115
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'KEY_VALUE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Valor Clave'
-              Width = 99
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FIELD_NAME'
-              Title.Alignment = taCenter
-              Title.Caption = 'Campo'
-              Width = 139
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NEW_VALUE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Valor Nuevo'
-              Width = 211
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'OLD_VALUE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Valor Viejo'
-              Width = 189
-              Visible = True
-            end>
-        end
         object DBGridUpload: TDBGrid
           Left = 0
           Top = 15
-          Width = 616
-          Height = 193
+          Width = 624
+          Height = 204
           Align = alClient
           Color = 15915716
           DataSource = DS_NovedadesCliente
@@ -509,13 +415,166 @@ object FPrincipal: TFPrincipal
               Title.Caption = 'Valor Viejo'
               Width = 189
               Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_NAME'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_OLD_CHAR_VALUE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_NEW_CHAR_VALUE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_OLD_BLOB_VALUE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_NEW_BLOB_VALUE'
+              Visible = True
+            end>
+        end
+        object DBGridDownload: TDBGrid
+          Left = 0
+          Top = 15
+          Width = 624
+          Height = 204
+          Align = alClient
+          Color = 15915716
+          DataSource = DS_ProcesarNovedades
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          TabOrder = 1
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridDownloadDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Title.Alignment = taCenter
+              Width = 76
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'OPERATION'
+              Title.Alignment = taCenter
+              Title.Caption = 'Op.'
+              Width = 39
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATE_TIME'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha y Hora'
+              Width = 116
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'USER_NAME'
+              Title.Alignment = taCenter
+              Title.Caption = 'Usuario'
+              Width = 106
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TABLE_NAME'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tabla'
+              Width = 130
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'KEY_FIELD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Campo Clave'
+              Width = 115
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'KEY_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Clave'
+              Width = 99
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FIELD_NAME'
+              Title.Alignment = taCenter
+              Title.Caption = 'Campo'
+              Width = 139
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NEW_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Nuevo'
+              Width = 211
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'OLD_VALUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor Viejo'
+              Width = 189
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_NAME'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_OLD_CHAR_VALUE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_NEW_CHAR_VALUE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_OLD_BLOB_VALUE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FBLOB_NEW_BLOB_VALUE'
+              Visible = True
             end>
         end
       end
       object PanelpBar_Ftp: TPanel
         Left = 1
-        Top = 209
-        Width = 1007
+        Top = 220
+        Width = 1015
         Height = 14
         Align = alBottom
         BevelOuter = bvNone
@@ -533,7 +592,7 @@ object FPrincipal: TFPrincipal
           Tag = 99
           Left = 40
           Top = 0
-          Width = 967
+          Width = 975
           Height = 14
           Align = alClient
           TabOrder = 0
@@ -541,8 +600,8 @@ object FPrincipal: TFPrincipal
       end
       object PanelpBar_Novedades: TPanel
         Left = 1
-        Top = 223
-        Width = 1007
+        Top = 234
+        Width = 1015
         Height = 14
         Align = alBottom
         BevelOuter = bvNone
@@ -560,7 +619,7 @@ object FPrincipal: TFPrincipal
           Tag = 99
           Left = 40
           Top = 0
-          Width = 967
+          Width = 975
           Height = 14
           Align = alClient
           TabOrder = 0
@@ -570,7 +629,7 @@ object FPrincipal: TFPrincipal
     object panelTitulo: TPanel
       Left = 1
       Top = 1
-      Width = 1009
+      Width = 1017
       Height = 41
       Align = alTop
       BevelOuter = bvNone
@@ -604,7 +663,7 @@ object FPrincipal: TFPrincipal
       object lblTituloSincro: TLabel
         Left = 0
         Top = 0
-        Width = 1009
+        Width = 1017
         Height = 15
         Align = alTop
         Alignment = taCenter
@@ -622,8 +681,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 601
-    Width = 1011
+    Top = 612
+    Width = 1019
     Height = 19
     Panels = <
       item
@@ -670,7 +729,7 @@ object FPrincipal: TFPrincipal
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1281,43 +1340,35 @@ object FPrincipal: TFPrincipal
     AfterScroll = ZQ_NovedadesClienteAfterScroll
     SQL.Strings = (
       
-        'select cast(ta.id as integer) as ID, ta.operation, ta.date_time,' +
-        ' ta.user_name, ta.table_name, cl.key_field, cl.key_value,'
-      '       ca.field_name, ca.new_value, ca.old_value'
-      'from z_sinc_tabla ta'
-      'left join z_sinc_clave cl on (ta.id = cl.log_tables_id)'
-      'left join z_sinc_campo ca on (ta.id = ca.log_tables_id)'
-      'where ta.id_sincro_lote is null'
-      '  and ta.user_name <> '#39'SINCRO'#39)
+        'select ID, OPERATION, DATE_TIME, USER_NAME, TABLE_NAME, KEY_FIEL' +
+        'D, KEY_VALUE, FIELD_NAME, NEW_VALUE, OLD_VALUE,'
+      
+        '       FBLOB_NAME, FBLOB_OLD_CHAR_VALUE, FBLOB_NEW_CHAR_VALUE, F' +
+        'BLOB_OLD_BLOB_VALUE, FBLOB_NEW_BLOB_VALUE'
+      'from Z_SINC_GENERAR_ARCHIVO_CLIENTE')
     Params = <>
     Left = 197
-    Top = 86
+    Top = 88
     object ZQ_NovedadesClienteID: TIntegerField
       FieldName = 'ID'
-      ReadOnly = True
     end
     object ZQ_NovedadesClienteOPERATION: TStringField
       FieldName = 'OPERATION'
-      Required = True
       Size = 1
     end
     object ZQ_NovedadesClienteDATE_TIME: TDateTimeField
       FieldName = 'DATE_TIME'
-      Required = True
     end
     object ZQ_NovedadesClienteUSER_NAME: TStringField
       FieldName = 'USER_NAME'
-      Required = True
       Size = 67
     end
     object ZQ_NovedadesClienteTABLE_NAME: TStringField
       FieldName = 'TABLE_NAME'
-      Required = True
       Size = 67
     end
     object ZQ_NovedadesClienteKEY_FIELD: TStringField
       FieldName = 'KEY_FIELD'
-      Required = True
       Size = 67
     end
     object ZQ_NovedadesClienteKEY_VALUE: TStringField
@@ -1326,7 +1377,6 @@ object FPrincipal: TFPrincipal
     end
     object ZQ_NovedadesClienteFIELD_NAME: TStringField
       FieldName = 'FIELD_NAME'
-      Required = True
       Size = 67
     end
     object ZQ_NovedadesClienteNEW_VALUE: TStringField
@@ -1336,6 +1386,24 @@ object FPrincipal: TFPrincipal
     object ZQ_NovedadesClienteOLD_VALUE: TStringField
       FieldName = 'OLD_VALUE'
       Size = 255
+    end
+    object ZQ_NovedadesClienteFBLOB_NAME: TStringField
+      FieldName = 'FBLOB_NAME'
+      Size = 67
+    end
+    object ZQ_NovedadesClienteFBLOB_OLD_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_OLD_CHAR_VALUE'
+      Size = 8000
+    end
+    object ZQ_NovedadesClienteFBLOB_NEW_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_NEW_CHAR_VALUE'
+      Size = 8000
+    end
+    object ZQ_NovedadesClienteFBLOB_OLD_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_OLD_BLOB_VALUE'
+    end
+    object ZQ_NovedadesClienteFBLOB_NEW_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_NEW_BLOB_VALUE'
     end
   end
   object DSP_NovedadesCliente: TDataSetProvider
@@ -1347,12 +1415,8 @@ object FPrincipal: TFPrincipal
     Connection = DM.ConexionLectura
     AfterScroll = ZQ_NovedadesClienteAfterScroll
     SQL.Strings = (
-      'select count(ta.id)'
-      'from z_sinc_tabla ta'
-      'left join z_sinc_clave cl on (ta.id = cl.log_tables_id)'
-      'left join z_sinc_campo ca on (ta.id = ca.log_tables_id)'
-      'where ta.id_sincro_lote is null'
-      '  and ta.user_name <> '#39'SINCRO'#39)
+      'select count(id)'
+      'from Z_SINC_GENERAR_ARCHIVO_CLIENTE')
     Params = <>
     Left = 197
     Top = 134
@@ -1557,7 +1621,7 @@ object FPrincipal: TFPrincipal
         Visible = True
       end
       item
-        TituloColumna = 'Operaci'#243'n'
+        TituloColumna = 'Op.'
         Visible = True
       end
       item
@@ -1590,6 +1654,26 @@ object FPrincipal: TFPrincipal
       end
       item
         TituloColumna = 'Valor Viejo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_NAME'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_OLD_CHAR_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_NEW_CHAR_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_OLD_BLOB_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_NEW_BLOB_VALUE'
         Visible = True
       end>
     NombreGuardar = 'DBGridDownload'
@@ -1633,7 +1717,7 @@ object FPrincipal: TFPrincipal
         Visible = True
       end
       item
-        TituloColumna = 'Operaci'#243'n'
+        TituloColumna = 'Op.'
         Visible = True
       end
       item
@@ -1667,6 +1751,26 @@ object FPrincipal: TFPrincipal
       item
         TituloColumna = 'Valor Viejo'
         Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_NAME'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_OLD_CHAR_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_NEW_CHAR_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_OLD_BLOB_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_NEW_BLOB_VALUE'
+        Visible = True
       end>
     NombreGuardar = 'DBGridUpload'
     AltoTituloColumna = 15
@@ -1697,7 +1801,7 @@ object FPrincipal: TFPrincipal
         Visible = True
       end
       item
-        TituloColumna = 'Operacion'
+        TituloColumna = 'Op.'
         Visible = True
       end
       item
