@@ -54,15 +54,6 @@ type
     Label1: TLabel;
     lblTiempoRestante: TLabel;
     DSP_NovedadesCliente: TDataSetProvider;
-    ZQ_NovedadesClienteOPERATION: TStringField;
-    ZQ_NovedadesClienteDATE_TIME: TDateTimeField;
-    ZQ_NovedadesClienteUSER_NAME: TStringField;
-    ZQ_NovedadesClienteTABLE_NAME: TStringField;
-    ZQ_NovedadesClienteKEY_FIELD: TStringField;
-    ZQ_NovedadesClienteKEY_VALUE: TStringField;
-    ZQ_NovedadesClienteFIELD_NAME: TStringField;
-    ZQ_NovedadesClienteNEW_VALUE: TStringField;
-    ZQ_NovedadesClienteOLD_VALUE: TStringField;
     CD_NovedadesClienteOPERATION: TStringField;
     CD_NovedadesClienteDATE_TIME: TDateTimeField;
     CD_NovedadesClienteUSER_NAME: TStringField;
@@ -107,7 +98,6 @@ type
     CD_Tablas_Actualizar_Id: TStringField;
     CD_NovedadesClienteID: TIntegerField;
     CD_ProcesarNovedadesID: TIntegerField;
-    ZQ_NovedadesClienteID: TIntegerField;
     Splitter3: TSplitter;
     Label4: TLabel;
     PanelDatosXML: TPanel;
@@ -220,6 +210,22 @@ type
     CD_ProcesarNovedadesFBLOB_NEW_CHAR_VALUE: TStringField;
     CD_ProcesarNovedadesFBLOB_OLD_BLOB_VALUE: TBlobField;
     CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE: TBlobField;
+    ZQ_NovedadesClienteID: TIntegerField;
+    ZQ_NovedadesClienteOPERATION: TStringField;
+    ZQ_NovedadesClienteDATE_TIME: TDateTimeField;
+    ZQ_NovedadesClienteUSER_NAME: TStringField;
+    ZQ_NovedadesClienteTABLE_NAME: TStringField;
+    ZQ_NovedadesClienteKEY_FIELD: TStringField;
+    ZQ_NovedadesClienteKEY_VALUE: TStringField;
+    ZQ_NovedadesClienteFIELD_NAME: TStringField;
+    ZQ_NovedadesClienteNEW_VALUE: TStringField;
+    ZQ_NovedadesClienteOLD_VALUE: TStringField;
+    ZQ_NovedadesClienteFBLOB_NAME: TStringField;
+    ZQ_NovedadesClienteFBLOB_OLD_CHAR_VALUE: TStringField;
+    ZQ_NovedadesClienteFBLOB_NEW_CHAR_VALUE: TStringField;
+    ZQ_NovedadesClienteFBLOB_OLD_BLOB_VALUE: TBlobField;
+    ZQ_NovedadesClienteFBLOB_NEW_BLOB_VALUE: TBlobField;
+    DBImage1: TDBImage;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridTablasActualizarDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridListaNovedadesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -1538,11 +1544,26 @@ begin
         while not CD_ProcesarNovedades.Eof do //recorro todos los campos que cambian y actualizo la query
         begin
           //agrego uno por uno los registro a la tabla Z_SINC_CAMPO
-          ZQ_Sinc_Campo.Append;
-          ZQ_Sinc_CampoLOG_TABLES_ID.AsInteger:= CD_ProcesarNovedadesID.AsInteger;
-          ZQ_Sinc_CampoFIELD_NAME.AsString:= CD_ProcesarNovedadesFIELD_NAME.AsString;
-          ZQ_Sinc_CampoOLD_VALUE.AsString:= CD_ProcesarNovedadesOLD_VALUE.AsString;
-          ZQ_Sinc_CampoNEW_VALUE.AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
+          if CD_ProcesarNovedadesFIELD_NAME.AsString <> '' then
+          begin
+            ZQ_Sinc_Campo.Append;
+            ZQ_Sinc_CampoLOG_TABLES_ID.AsInteger:= CD_ProcesarNovedadesID.AsInteger;
+            ZQ_Sinc_CampoFIELD_NAME.AsString:= CD_ProcesarNovedadesFIELD_NAME.AsString;
+            ZQ_Sinc_CampoOLD_VALUE.AsString:= CD_ProcesarNovedadesOLD_VALUE.AsString;
+            ZQ_Sinc_CampoNEW_VALUE.AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
+          end;
+
+          //agrego uno por uno los registro a la tabla Z_SINC_BLOB
+          if CD_ProcesarNovedadesFBLOB_NAME.AsString <> '' then
+          begin
+            ZQ_Sinc_Blob.Append;
+            ZQ_Sinc_BlobLOG_TABLES_ID.AsInteger:= CD_ProcesarNovedadesID.AsInteger;
+            ZQ_Sinc_BlobFIELD_NAME.AsString:= CD_ProcesarNovedadesFBLOB_NAME.AsString;
+            ZQ_Sinc_BlobOLD_CHAR_VALUE.Value:= CD_ProcesarNovedadesFBLOB_OLD_CHAR_VALUE.Value;
+            ZQ_Sinc_BlobNEW_CHAR_VALUE.Value:= CD_ProcesarNovedadesFBLOB_NEW_CHAR_VALUE.Value;
+            ZQ_Sinc_BlobOLD_BLOB_VALUE.Value:= CD_ProcesarNovedadesFBLOB_OLD_BLOB_VALUE.Value;
+            ZQ_Sinc_BlobNEW_BLOB_VALUE.Value:= CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE.Value;
+          end;
 
           CD_ProcesarNovedades.Next;
         end;
