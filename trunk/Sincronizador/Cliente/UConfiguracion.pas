@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, ShlObj, EKIni, ExtCtrls, Buttons;
+  Dialogs, StdCtrls, ComCtrls, ShlObj, EKIni, ExtCtrls, Buttons, DB,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset;
 
 type
   TFConfiguracion = class(TForm)
@@ -58,6 +59,8 @@ type
     Panel1: TPanel;
     GroupBoxConfigPassword: TGroupBox;
     editConfig_Pass: TEdit;
+    ZQ_VerificarBase: TZQuery;
+    ZQ_VerificarBaseID_COMPROBANTE: TIntegerField;
     procedure btnCargarIniClick(Sender: TObject);
     procedure btnCancelarYSalirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -67,6 +70,8 @@ type
     procedure editMinutosExit(Sender: TObject);
     procedure btnDestinoBasesClick(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
+    function verificarConexionDB(): boolean;
+    function verificarBaseCliente(): boolean;
   private
     { Private declarations }
   public
@@ -134,20 +139,42 @@ begin
   if (editFTP_Host.Text = '') or (editFTP_User.Text = '') or (editFTP_Pass.Text = '')
       or (editFTP_DirServer.Text = '') or (editFTP_DirPublic.Text = '') then
   begin
-    ShowMessage('Verifique la configuración de los datos del Servidor FTP.');
+    ShowMessage('Verifique la configuración del Servidor FTP.');
     exit;
   end;
 
   if (editDB_Name.Text = '') or (editDB_Host.Text = '') or (editDB_User.Text = '')
       or (editDB_Pass.Text = '') then
   begin
-    ShowMessage('Verifique la configuración de los datos de la Base de Datos.');
+    ShowMessage('Verifique la configuración de la Base de Datos.');
     exit;
   end;
 
+  if not verificarConexionDB then
+  begin
+    ShowMessage('Erro de conexión a la base de datos, Verifique la configuración de la  misma.');
+    exit;
+  end;
+
+  if verificarBaseCliente then //si es la base cliente pregunto si esta en modo servidor
+  begin
+    if (RadioGroupModo.ItemIndex = 1) then
+    begin
+      ShowMessage('El modo seleccionado no corresponde para la base de datos configurada.');
+      exit;
+    end;
+  end
+  else //si es la base servidor pregunto si esta en modo cliente
+    if (RadioGroupModo.ItemIndex = 0) then
+    begin
+      ShowMessage('El modo seleccionado no corresponde para la base de datos configurada.');
+      exit;
+    end;
+
+
   if (editFILE_Upload.Text = '') or (editFILE_Upload.Text = '') then
   begin
-    ShowMessage('Verifique la configuración Archivos de Sincronización.');
+    ShowMessage('Verifique la configuración de los Archivos de Sincronización.');
     exit;
   end;
 
@@ -325,6 +352,52 @@ begin
     editDB_Pass.PasswordChar:= char(0)
   else
     editDB_Pass.PasswordChar:= '*';
+end;
+
+
+function TFConfiguracion.verificarConexionDB: boolean;
+begin
+  result:= true;
+  try
+   begin
+      //configuro base
+      DM.ConexionLectura.HostName:= editDB_Host.Text;
+      DM.ConexionLectura.Database:= editDB_Name.Text;
+      DM.ConexionLectura.User:= editDB_User.Text;
+      DM.ConexionLectura.Password:= editDB_Pass.Text;
+
+      DM.ConexionLectura.Disconnect;
+      DM.ConexionLectura.Connect;
+      DM.ConexionLectura.Disconnect;      
+   end
+  except
+    on E: Exception do
+    begin
+      result:= false;
+      DM.ConexionLectura.Disconnect;
+    end;
+  end;
+end;
+
+
+function TFConfiguracion.verificarBaseCliente: boolean;
+begin
+  result:= true;
+  try
+   begin
+      DM.ConexionLectura.Disconnect;
+      DM.ConexionLectura.Connect;
+
+      ZQ_VerificarBase.Open;
+      ZQ_VerificarBase.close;
+   end
+  except
+    on E: Exception do
+    begin
+      result:= false;
+      DM.ConexionLectura.Disconnect;
+    end;
+  end;
 end;
 
 end.

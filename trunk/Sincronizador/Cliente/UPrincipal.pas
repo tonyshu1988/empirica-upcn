@@ -237,8 +237,8 @@ type
     function  getFechayHoraString: string;
     function  getFechayHora: TDateTime;    
     procedure guardarArchivoLog();
-    procedure conectarDBLectura();
-    procedure conectarDBEscritura;
+    function conectarDBLectura(): boolean;
+    function conectarDBEscritura(): boolean;
     procedure configGrillas(opcion: integer); //0 = Cargar configuracion; 1 = Guardar configuracion
     procedure FormActivate(Sender: TObject);
     procedure ponerTodoEnCero();
@@ -257,7 +257,7 @@ type
     procedure btnConfigClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     //procedientos compartidos modo CLIENTE y SERVIDOR
-    function  guardar_lote: boolean;
+    function  guardar_lote(archivo: string): boolean;
     function  nro_lote_actual: integer;
     procedure obtener_tablas_actualizar();
     //MODO CLIENTE------------------------------------------
@@ -646,41 +646,43 @@ end;
 //                PROCEDIMIENTOS DE CONEXION A LA BASE DE DATOS
 //*********************************************************************
 //Conectarse en modo lectura, para buscar novedades
-procedure TFPrincipal.conectarDBLectura;
+function TFPrincipal.conectarDBLectura(): boolean;
 begin
+  result:= true;
   try
    begin
       DM.ConexionLectura.Disconnect;
-      memoLog.Lines.Add(getFechayHoraString+' - Conectando DB Local: '+db_host+':'+db_name+' modo lectura');
+      memoLog.Lines.Add(getFechayHoraString+' - Conectando DB Local: '+db_host+':'+db_name+' modo lectura.');
       DM.ConexionLectura.Connect;
       memoLog.Lines.Add(getFechayHoraString+' - Conectado.');
    end
   except
     on E: Exception do
     begin
+      result:= false;
       DM.ConexionLectura.Disconnect;
-      memoLog.Lines.Add(getFechayHoraString+' - '+E.Message);
-      memoLog.Lines.Add(getFechayHoraString+' - ERROR Conexión DB Local'+db_host+':'+db_name+' modo lectura');
+      memoLog.Lines.Add(' ERROR Conexión DB Local '+db_host+':'+db_name+' modo lectura.');
     end;
   end;
 end;
 
 //Conectarse en modo escritura, para guardar las novedades
-procedure TFPrincipal.conectarDBEscritura;
+function TFPrincipal.conectarDBEscritura(): boolean;
 begin
+  result:= true;
   try
    begin
       DM.ConexionEscritura.Disconnect;
-      memoLog.Lines.Add(getFechayHoraString+' - Conectando DB Local: '+db_host+':'+db_name+' modo escritura');
+      memoLog.Lines.Add(getFechayHoraString+' - Conectando DB Local: '+db_host+':'+db_name+' modo escritura.');
       DM.ConexionEscritura.Connect;
       memoLog.Lines.Add(getFechayHoraString+' - Conectado.');
    end
   except
     on E: Exception do
     begin
+      result:= false;
       DM.ConexionEscritura.Disconnect;
-      memoLog.Lines.Add(getFechayHoraString+' - '+E.Message);
-      memoLog.Lines.Add(getFechayHoraString+' - ERROR Conexión DB Local'+db_host+':'+db_name+' modo escritura');
+      memoLog.Lines.Add(' ERROR Conexión DB Local '+db_host+':'+db_name+' modo escritura');
     end;
   end;
 end;
@@ -932,26 +934,63 @@ end;
 //      PROCEDIMIENTOS COMPARTIDOS POR EL MODO CLIENTE Y SERVIDOR
 //*********************************************************************
 //procedimiento que crea el lote en la base de datos, devuelve falso si no se pudo crear
-function TFPrincipal.guardar_lote: boolean;
+function TFPrincipal.guardar_lote(archivo: string): boolean;
 var
   transaccion: string;
 begin
-  if modo = modo_cliente then
-    transaccion:= transaccion_cliente
-  else
+  Result:= false;
+  if modo = modo_cliente then //si estoy en modo cliente
+  begin
+    transaccion:= transaccion_cliente;
+
+    if dm.ModeloEscritura.iniciar_transaccion(transaccion, [ZQ_GrabarUltimoArchivoCliente]) then
+    begin
+      //ejectuto el procedimiento que genera el nuevo lote y graba el nro de lote generado en
+      //la tabla z_zinc_tabla en el campo id_sincro_lote para reflejar q esos registros ya se
+      //subieron
+      ZQ_CrearLote.Close;
+      ZQ_CrearLote.ExecSQL;
+
+      //grabo en la base de datos del cliente el nombre del archivo que se acaba de subir al servidor FTP
+      ZQ_GrabarUltimoArchivoCliente.Close;
+      ZQ_GrabarUltimoArchivoCliente.Open;
+      ZQ_GrabarUltimoArchivoCliente.Append;
+      ZQ_GrabarUltimoArchivoClienteID_SINCRO_CLIENTE.AsInteger:= 0;
+      ZQ_GrabarUltimoArchivoClienteFECHA_Y_HORA.AsDateTime:= getFechayHora;
+      ZQ_GrabarUltimoArchivoClienteULTIMO_ARCHIVO.AsString:= archivo;
+      ZQ_GrabarUltimoArchivoCliente.Post;
+
+      if dm.ModeloEscritura.finalizar_transaccion(transaccion) then
+        Result:= true
+      else
+        dm.ModeloEscritura.cancelar_transaccion(transaccion);
+    end;
+  end
+  else //si estoy en modo servidor
+  begin
     transaccion:= transaccion_sertver;
 
-  Result:= false;
+    if dm.ModeloEscritura.iniciar_transaccion(transaccion, [ZQ_GrabarUltimoArchivoServer]) then
+    begin
+      //ejectuto el procedimiento que genera el nuevo lote y graba el nro de lote generado en
+      //la tabla z_zinc_tabla en el campo id_sincro_lote para reflejar q esos registros ya se
+      //subieron
+      ZQ_CrearLote.Close;
+      ZQ_CrearLote.ExecSQL;
 
-  if dm.ModeloEscritura.iniciar_transaccion(transaccion, []) then
-  begin
-    ZQ_CrearLote.Close;
-    ZQ_CrearLote.ExecSQL;
+      //grabo en la base de datos del servidor el nombre del archivo que se acaba de subir al servidor FTP
+      ZQ_GrabarUltimoArchivoServer.Close;
+      ZQ_GrabarUltimoArchivoServer.Open;
+      ZQ_GrabarUltimoArchivoServer.Append;
+      ZQ_GrabarUltimoArchivoServerFECHA_Y_HORA.AsDateTime:= getFechayHora;
+      ZQ_GrabarUltimoArchivoServerULTIMO_ARCHIVO.AsString:= archivo;
+      ZQ_GrabarUltimoArchivoServer.Post;
 
-    if dm.ModeloEscritura.finalizar_transaccion(transaccion) then
-      Result:= true
-    else
-      dm.ModeloEscritura.cancelar_transaccion(transaccion);
+      if dm.ModeloEscritura.finalizar_transaccion(transaccion) then
+        Result:= true
+      else
+        dm.ModeloEscritura.cancelar_transaccion(transaccion);
+    end;
   end;
 end;
 
@@ -1090,7 +1129,7 @@ begin
     memoLog.Lines.Add(getFechayHoraString+' - Fin Envio Archivo Novedades ('+archivo+') al Servidor FTP');
     memoLog.Lines.Add(getFechayHoraString+' - Guardando Lote Sincronizacion '+IntToStr(nserie_cliente));
     //comienzo el guardado del lote de sincronizacion
-    if guardar_lote then //si el lote se guardo correctamente
+    if guardar_lote(archivo) then //si el lote se guardo correctamente
       memoLog.Lines.Add(getFechayHoraString+' - Fin Guardar Lote Sincronizacion '+IntToStr(nserie_cliente))
     else //si no pude guardar el lote entonces borro el archivo que subi al servidor
     begin
@@ -1268,7 +1307,7 @@ begin
 
   try
     //inicio transaccion
-    if dm.ModeloEscritura.iniciar_transaccion(transaccion_actualizar_base, [ZQ_GrabarUltimoArchivoServer]) then
+    if dm.ModeloEscritura.iniciar_transaccion(transaccion_actualizar_base, []) then
     begin
       CD_Tablas_Actualizar.First;
       while not CD_Tablas_Actualizar.Eof do //por cada una de las tablas que se tienen que tocar
@@ -1713,7 +1752,7 @@ begin
     memoLog.Lines.Add(getFechayHoraString+' - Fin Envio Archivo Novedades ('+archivo+') al Servidor FTP');
     memoLog.Lines.Add(getFechayHoraString+' - Guardando Lote Sincronizacion '+IntToStr(nserie_server));
     //comienzo el guardado del lote de sincronizacion
-    if guardar_lote then //si el lote se guardo correctamente
+    if guardar_lote(archivo) then //si el lote se guardo correctamente
       memoLog.Lines.Add(getFechayHoraString+' - Fin Guardar Lote Sincronizacion '+IntToStr(nserie_server))
     else //si no pude guardar el lote entonces borro el archivo que subi al servidor
     begin

@@ -101,7 +101,7 @@ object FConfiguracion: TFConfiguracion
       Left = 373
       Top = 27
       Width = 23
-      Height = 21
+      Height = 22
       Hint = 'Buscar base de datos'
       Glyph.Data = {
         36050000424D3605000000000000360400002800000010000000100000000100
@@ -511,5 +511,17 @@ object FConfiguracion: TFConfiguracion
     Filter = 'InterBase Databases (*.GDB)|*.gdb|All Files (*.*)|*.*'
     Left = 32
     Top = 69
+  end
+  object ZQ_VerificarBase: TZQuery
+    Connection = DM.ConexionLectura
+    SQL.Strings = (
+      'select first 1 id_comprobante'
+      'from comprobante')
+    Params = <>
+    Left = 32
+    Top = 128
+    object ZQ_VerificarBaseID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
   end
 end
