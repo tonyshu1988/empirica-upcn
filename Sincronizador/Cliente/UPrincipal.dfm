@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 255
-  Top = 99
+  Left = 237
+  Top = 100
   Width = 1027
   Height = 658
   Caption = 'Sincronizador SiGeFa '
@@ -725,6 +725,7 @@ object FPrincipal: TFPrincipal
     Top = 83
   end
   object Timer: TTimer
+    Enabled = False
     OnTimer = TimerTimer
     Left = 839
     Top = 131
@@ -1678,23 +1679,23 @@ object FPrincipal: TFPrincipal
         Visible = True
       end
       item
-        TituloColumna = 'FBLOB_NAME'
+        TituloColumna = 'Campo Blob'
         Visible = True
       end
       item
-        TituloColumna = 'FBLOB_OLD_CHAR_VALUE'
+        TituloColumna = 'Valor Blob Viejo'
         Visible = True
       end
       item
-        TituloColumna = 'FBLOB_NEW_CHAR_VALUE'
+        TituloColumna = 'Valor Blob Nuevo'
         Visible = True
       end
       item
-        TituloColumna = 'FBLOB_OLD_BLOB_VALUE'
+        TituloColumna = 'Valor Char Viejo'
         Visible = True
       end
       item
-        TituloColumna = 'FBLOB_NEW_BLOB_VALUE'
+        TituloColumna = 'Valor Char Nuevo'
         Visible = True
       end>
     NombreGuardar = 'DBGridDownload'
@@ -1774,23 +1775,23 @@ object FPrincipal: TFPrincipal
         Visible = True
       end
       item
-        TituloColumna = 'FBLOB_NAME'
+        TituloColumna = 'Campo Blob'
         Visible = True
       end
       item
-        TituloColumna = 'FBLOB_OLD_CHAR_VALUE'
+        TituloColumna = 'Valor Blob Viejo'
         Visible = True
       end
       item
-        TituloColumna = 'FBLOB_NEW_CHAR_VALUE'
+        TituloColumna = 'Valor Blob Nuevo'
         Visible = True
       end
       item
-        TituloColumna = 'FBLOB_OLD_BLOB_VALUE'
+        TituloColumna = 'Valor Char Viejo'
         Visible = True
       end
       item
-        TituloColumna = 'FBLOB_NEW_BLOB_VALUE'
+        TituloColumna = 'Valor Char Nuevo'
         Visible = True
       end>
     NombreGuardar = 'DBGridUpload'
