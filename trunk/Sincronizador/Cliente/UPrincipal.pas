@@ -225,6 +225,8 @@ type
     ZQ_NovedadesClienteFBLOB_NEW_CHAR_VALUE: TStringField;
     ZQ_NovedadesClienteFBLOB_OLD_BLOB_VALUE: TBlobField;
     ZQ_NovedadesClienteFBLOB_NEW_BLOB_VALUE: TBlobField;
+    ZQ_VerificarUpdate: TZQuery;
+    ZQ_VerificarUpdateID: TLargeintField;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridTablasActualizarDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridListaNovedadesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -544,13 +546,17 @@ end;
 
 function TFPrincipal.getFechayHora: TDateTime;
 begin
-  result:= dm.ModeloLectura.FechayHora;
+  result:= -1;
+  if dm.ConexionLectura.Connected then
+    result:= dm.ModeloLectura.FechayHora;
 end;
 
 
 function TFPrincipal.getFechayHoraString: string;
 begin
-  result:= DateTimeToStr(dm.ModeloLectura.FechayHora);
+  result:= '';
+  if dm.ConexionLectura.Connected then
+    result:= DateTimeToStr(dm.ModeloLectura.FechayHora);
 end;
 
 
@@ -1316,63 +1322,73 @@ begin
         CD_ProcesarNovedades.Filter:= format('ID = %s', [QuotedStr(CD_Tablas_Actualizar_Id.AsString)]);
         CD_ProcesarNovedades.Filtered:= true;
 
-        //creo la query correspondiente y la ejecuto
-        ZQ_ActualizarBase.SQL.Clear;
-        ZQ_ActualizarBase.SQL.Add('select * from '+CD_ProcesarNovedadesTABLE_NAME.AsString+
-                                 ' where '+CD_ProcesarNovedadesKEY_FIELD.AsString+'='+CD_ProcesarNovedadesKEY_VALUE.AsString);
-        ZQ_ActualizarBase.Open;
-
-        es_query_vacia:= false;
-        if ZQ_ActualizarBase.IsEmpty then //pregunto si la query esta vacia
-          es_query_vacia:= True;
-        operacion:= CD_ProcesarNovedadesOPERATION.AsString;
-
-        if operacion = 'D' then //si la operacion es un delete
+        //buscar si hay un registro mas nuevo en la base local, si es asi no actualizar, sino proceso el dato
+        ZQ_VerificarUpdate.Close;
+        ZQ_VerificarUpdate.ParamByName('table_name').AsString:= CD_ProcesarNovedadesTABLE_NAME.AsString;
+        ZQ_VerificarUpdate.ParamByName('date_time').AsDateTime:= CD_ProcesarNovedadesDATE_TIME.AsDateTime;
+        ZQ_VerificarUpdate.ParamByName('key_field').AsString:= CD_ProcesarNovedadesKEY_FIELD.AsString;
+        ZQ_VerificarUpdate.ParamByName('key_value').AsString:= CD_ProcesarNovedadesKEY_VALUE.AsString;
+        ZQ_VerificarUpdate.Open;
+        if ZQ_VerificarUpdate.IsEmpty then
         begin
-          if ZQ_ActualizarBase.RecordCount = 1 then //si existe el registro lo borro
-            ZQ_ActualizarBase.Delete;
-        end
-        else
-        begin
-          if operacion = 'I' then //si la operacion es un insert, pongo en modo insercion la query
-            ZQ_ActualizarBase.Append
-          else
-            if operacion = 'U' then //si la operacion es un update, pongo en modo edicion la query
-              ZQ_ActualizarBase.Edit;
+          //creo la query correspondiente y la ejecuto
+          ZQ_ActualizarBase.SQL.Clear;
+          ZQ_ActualizarBase.SQL.Add('select * from '+CD_ProcesarNovedadesTABLE_NAME.AsString+
+                                   ' where '+CD_ProcesarNovedadesKEY_FIELD.AsString+'='+CD_ProcesarNovedadesKEY_VALUE.AsString);
+          ZQ_ActualizarBase.Open;
 
-          CD_ProcesarNovedades.First;
-          while not CD_ProcesarNovedades.Eof do //recorro todos los campos que cambian y actualizo la query
+          es_query_vacia:= false;
+          if ZQ_ActualizarBase.IsEmpty then //pregunto si la query esta vacia
+            es_query_vacia:= True;
+          operacion:= CD_ProcesarNovedadesOPERATION.AsString;
+
+          if operacion = 'D' then //si la operacion es un delete
           begin
-            //PARA LOS CAMPOS NO BLOB
-            if not ((CD_ProcesarNovedadesFIELD_NAME.IsNull) or (CD_ProcesarNovedadesFIELD_NAME.AsString = '')) then
+            if ZQ_ActualizarBase.RecordCount = 1 then //si existe el registro lo borro
+              ZQ_ActualizarBase.Delete;
+          end
+          else
+          begin
+            if operacion = 'I' then //si la operacion es un insert, pongo en modo insercion la query
+              ZQ_ActualizarBase.Append
+            else
+              if operacion = 'U' then //si la operacion es un update, pongo en modo edicion la query
+                ZQ_ActualizarBase.Edit;
+
+            CD_ProcesarNovedades.First;
+            while not CD_ProcesarNovedades.Eof do //recorro todos los campos que cambian y actualizo la query
             begin
-                   //pregunto si el campo esta definido como FLOAT
-              if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftFloat then
-                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= CD_ProcesarNovedadesNEW_VALUE.AsFloat
-              else //pregunto si el campo esta definido como INTEGER
-              if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftInteger then
-                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsInteger:= CD_ProcesarNovedadesNEW_VALUE.AsInteger
-              else //pregunto si el campo esta definido como STRING
-              if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftString	then
-                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString
-              else //pregunto si el campo esta definido como DATETIME
-              if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDateTime	 then
-                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime
-              else //si es cualquier otro tipo de campo
-                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.value;
+              //PARA LOS CAMPOS NO BLOB
+              if not ((CD_ProcesarNovedadesFIELD_NAME.IsNull) or (CD_ProcesarNovedadesFIELD_NAME.AsString = '')) then
+              begin
+                     //pregunto si el campo esta definido como FLOAT
+                if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftFloat then
+                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= CD_ProcesarNovedadesNEW_VALUE.AsFloat
+                else //pregunto si el campo esta definido como INTEGER
+                if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftInteger then
+                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsInteger:= CD_ProcesarNovedadesNEW_VALUE.AsInteger
+                else //pregunto si el campo esta definido como STRING
+                if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftString	then
+                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString
+                else //pregunto si el campo esta definido como DATETIME
+                if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDateTime	 then
+                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime
+                else //si es cualquier otro tipo de campo
+                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.value;
+              end;
+
+              //PARA LOS CAMPOS BLOB
+              if not ((CD_ProcesarNovedadesFBLOB_NAME.IsNull) or (CD_ProcesarNovedadesFBLOB_NAME.AsString = '')) then
+                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFBLOB_NAME.AsString).value:= CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE.value;
+              CD_ProcesarNovedades.Next;
             end;
-
-            //PARA LOS CAMPOS BLOB
-            if not ((CD_ProcesarNovedadesFBLOB_NAME.IsNull) or (CD_ProcesarNovedadesFBLOB_NAME.AsString = '')) then
-              ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFBLOB_NAME.AsString).value:= CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE.value;
-            CD_ProcesarNovedades.Next;
           end;
-        end;
-        pBar_Novedades.Position:= pBar_Novedades.Position + 1;
+          pBar_Novedades.Position:= pBar_Novedades.Position + 1;
 
-        //si la query no esta vacia o si la query es vacia pero es una operacion de Insert aplico los cambios
-        if (es_query_vacia = false) or ((es_query_vacia = true) and (operacion = 'I')) then
-          ZQ_ActualizarBase.ApplyUpdates; //aplico los cambios
+          //si la query no esta vacia o si la query es vacia pero es una operacion de Insert aplico los cambios
+          if (es_query_vacia = false) or ((es_query_vacia = true) and (operacion = 'I')) then
+            ZQ_ActualizarBase.ApplyUpdates; //aplico los cambios
+        end;
 
         //paso a la tabla siguiente
         CD_Tablas_Actualizar.next;
