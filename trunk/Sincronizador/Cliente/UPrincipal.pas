@@ -6,7 +6,7 @@ unit UPrincipal;
 * VER EL TEMA DE LOS NOMBRE DE ARCHIVO PARA EL CLIENTE Y EL SERVIDOR EN LA CONFIGURACION
   EN MODO CLIENTE TIENE QUE TENER EL MISMO NOMBRE QUE EL QUE FIGURA EN LA BASE DEL SERVIDOR
   PARA ESE CLIENTE, SINO EN MODO SERVIDOR NUNCA VA ENCONTRAR LOS ARCHIVOS SUBIDO POR ESTE CLIENTE.
-*   
+*
 }
 
 interface
@@ -17,7 +17,7 @@ uses
   ZDataset, ZConnection, StdCtrls, ZSqlUpdate, EKIni, ExtCtrls, EKEdit,
   ZStoredProcedure, dxBar, dxBarExtItems, EKIconizacion, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
-  IdFTP, DBClient, ComCtrls, Buttons, Provider, DBCtrls, EKOrdenarGrilla;
+  IdFTP, DBClient, ComCtrls, Buttons, Provider, DBCtrls, EKOrdenarGrilla, SqlTimSt;
 
 const
   InputBoxMessage = WM_USER + 200; //para que hacer el imputBox con password
@@ -301,6 +301,7 @@ type
     lote_commit, loteGenerado, ultLoteR, ultLoteL, ultSuc, idSucursal : integer;
     id_base_local: string;
     password_configuracion: string;
+    estado_sincronizando: boolean;
   end;
 
 var
@@ -394,6 +395,7 @@ end;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
+  estado_sincronizando:= false;
   configGrillas(0); //cargo la config de las grillas
 
   nserie_cliente:= 0;
@@ -521,6 +523,8 @@ procedure TFPrincipal.TimerTimer(Sender: TObject);
 begin
   if tiempo_restante = 0 then
   begin
+    Timer.Enabled:= false;
+
     if modo = modo_cliente then
     begin
       bajarNovedadesServer;
@@ -534,6 +538,7 @@ begin
       subirNovedadesServer;
     end;
 
+    Timer.Enabled:= true;
     tiempo_restante:= intervalo;
   end
   else
@@ -1305,6 +1310,8 @@ function TFPrincipal.actualizar_base_local(archivo: string):boolean;
 var
   es_query_vacia: boolean;
   operacion: string;
+  fechaDateTime: TDateTime;
+  fechaString: string;
 begin
   Result:= false;
 
@@ -1372,9 +1379,25 @@ begin
                   ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString
                 else //pregunto si el campo esta definido como DATETIME
                 if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDateTime	 then
-                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime
+                begin
+                  try
+                    begin
+                      fechaDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime;
+                    end
+                  except
+                    begin                                                //123456789012345678901234
+                      //tengo que convertit el dato que viene de la forma '2012-01-24 18:46:37.0000' a un date time
+                      fechaString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
+                      fechaDateTime:= EncodeDateTime(StrToInt(Copy(fechaString, 1, 4)),StrToInt(Copy(fechaString, 6, 2)),StrToInt(Copy(fechaString, 9, 2)),
+                      StrToInt(Copy(fechaString, 12, 2)),StrToInt(Copy(fechaString, 15, 2)),StrToInt(Copy(fechaString, 18, 2)),StrToInt(Copy(fechaString, 21, 4)));
+
+                    end;
+                  end;
+                  //ShowMessage();
+                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= fechaDateTime;
+                end
                 else //si es cualquier otro tipo de campo
-                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.value;
+                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.Value;
               end;
 
               //PARA LOS CAMPOS BLOB
