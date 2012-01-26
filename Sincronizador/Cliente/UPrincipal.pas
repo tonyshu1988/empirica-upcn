@@ -1,12 +1,33 @@
 unit UPrincipal;
 
 {------------- OBSERVACIONES -------------------------------------------
+* PARA QUE FUNCIONE:
+  * VERIFICAR QUE EXISTA EL USUARIO SINCRO EN LAS BASES DE DATOS CON EL PASSWORD ´sincro´ Y TENGA TODOS LOS PERMISOS.
+  * VERIFICAR QUE EN LA TABLA DEL SERVIDOR ESTEN BIEN CONFIGURADOS LOS CLIENTES, TIENE QUE TENER EL MISMO NOMBRE
+    QUE FIGURA EN LA PARTE DE LA CONFIGURACION PARA EL NOMBRE DE ARCHIVO DEL CLINTE.
+  * EN LA CONFIGURACION VER QUE EL NOMBRE DE ARCHIVO DEL SERVIDOR SE IGUAL AL ARCHIVO QUE SUBE EL SERVIDOR.
+
+  REVISAR EL TEMA DE ESTOS TRIGGERS:
+    COMPROBANTE_CTACTE_SALDO
+    COMPROBANTE_DETALLE_AIU0
+    COMPROBANTE_FPAGO_CALC_SALDO
+
+
 * HACER UNA VALIDACION PARA EL CAMBIO DE MODO, PQ SI ESTA EN MODO CLIENTE CON LA BASE
   DEL SERVIDOR VA A EXPLOTAR.
 * VER EL TEMA DE LOS NOMBRE DE ARCHIVO PARA EL CLIENTE Y EL SERVIDOR EN LA CONFIGURACION
   EN MODO CLIENTE TIENE QUE TENER EL MISMO NOMBRE QUE EL QUE FIGURA EN LA BASE DEL SERVIDOR
   PARA ESE CLIENTE, SINO EN MODO SERVIDOR NUNCA VA ENCONTRAR LOS ARCHIVOS SUBIDO POR ESTE CLIENTE.
 *
+
+* Cuando estoy subiendo un archivo al ftp, subirlo con un nombre distinto al que deberia ser
+y cuando este subido por completo renombrarlo al nombre original, porque sino bajaria un archivo
+que esta po la mitad.
+
+* Ver que cuando hago algo a pata que se detenga el timmer.
+
+* Ver el tema de los tringuer que se disparan con las inserciones de otra tabla, por ejemplo
+el de las ventas que actualiza el stock y el stock tambien se actualiza por auditoria.
 }
 
 interface
@@ -505,7 +526,7 @@ begin
 
   //Activo o desactivo el timmer de sincronizacion
   Timer.Enabled:= false;
-  if (dia_hoy = lunes) or (dia_hoy = martes) or (dia_hoy = miercoles) or (dia_hoy = jueves) or (dia_hoy = viernes) or (dia_hoy = sabado) then
+  if (dia_hoy = lunes) or (dia_hoy = martes) or (dia_hoy = miercoles) or (dia_hoy = jueves) or (dia_hoy = viernes) or (dia_hoy = sabado) or (dia_hoy = domingo) then
     Timer.Enabled:= true;
 
   //configuro el timmer con el intervalo de la configuracion
@@ -593,7 +614,6 @@ begin
     Application.CreateForm(TFConfiguracion,FConfiguracion);
     FConfiguracion.ShowModal;
     FConfiguracion.Release;
-    cargarIni;
   end
   else
     if clave <> '' then
@@ -701,27 +721,33 @@ end;
 
 procedure TFPrincipal.btnSubirClick(Sender: TObject);
 begin
+  Timer.Enabled:= false;
   if modo = modo_cliente then
     subirNovedadesCliente
   else
     subirNovedadesServer;
+  Timer.Enabled:= true;    
 end;
 
 
 procedure TFPrincipal.btnBajarClick(Sender: TObject);
 begin
+  Timer.Enabled:= false;
   if modo = modo_cliente then
     bajarNovedadesServer
   else
     bajarNovedadesClientes;
+  Timer.Enabled:= true;
 end;
 
 procedure TFPrincipal.btnProcesarClick(Sender: TObject);
 begin
+  Timer.Enabled:= false;
   if modo = modo_cliente then
     procesarNovedadesServer
   else
     procesarNovedadesClientes;
+  Timer.Enabled:= true;
 end;
 
 //*********************************************************************
@@ -732,8 +758,10 @@ function TFPrincipal.FTP_SubirArchivo(directorio, archivo: String): Boolean;
 Var
   F: File of byte;
   size_archivo: integer;
+  archivo_temp: string;
 begin
   Result:= false;
+  archivo_temp:= 'temp'+archivo;
 
   //si no estoy conectado al ftp me conecto
   If not DM.IdFTP.Connected then
@@ -757,7 +785,8 @@ begin
       //me ubico en el directorio correspondiente en el ftp y subo el archivo
       DM.IdFTP.BeginWork(wmWrite, 0);
       DM.IdFTP.ChangeDir(directorio); //cambio al directorio pasado como parametro
-      DM.IdFTP.Put(dirLocal+archivo, ExtractFileName(archivo), False);
+      DM.IdFTP.Put(dirLocal+archivo, ExtractFileName(archivo_temp), False); //subo el archivo con un nombre temporal
+      DM.IdFTP.Rename(archivo_temp, archivo); //luego que termino de subirlo lo renombro al nombre original
       DM.IdFTP.EndWork(wmWrite);
       DM.IdFTP.Disconnect;
 

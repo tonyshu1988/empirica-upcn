@@ -61,6 +61,7 @@ type
     editConfig_Pass: TEdit;
     ZQ_VerificarBase: TZQuery;
     ZQ_VerificarBaseID_COMPROBANTE: TIntegerField;
+    CheckBoxDomingo: TCheckBox;
     procedure btnCargarIniClick(Sender: TObject);
     procedure btnCancelarYSalirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -251,16 +252,17 @@ begin
   else
     EKInicio.Ini.DeleteKey('CRONOGRAMA', 'SABADO');
 
-//    if CheckBoxDomingo.Checked then
-//      EKInicio.Ini.WriteString('CRONOGRAMA', 'DOMINGO', IntToStr(DOMINGO))
-//    else
-//      EKInicio.Ini.DeleteKey('CRONOGRAMA', 'DOMINGO');
+  if CheckBoxDomingo.Checked then
+    EKInicio.Ini.WriteString('CRONOGRAMA', 'DOMINGO', IntToStr(DOMINGO))
+  else
+    EKInicio.Ini.DeleteKey('CRONOGRAMA', 'DOMINGO');
 
   //Guardo la hora y los minutos del intervalo de sincronizacion
   EKInicio.Ini.WriteInteger('CRONOGRAMA', 'HORA', StrToInt(editHora.Text));
   EKInicio.Ini.WriteInteger('CRONOGRAMA', 'MINUTOS', StrToInt(editMinutos.Text));
 
   EKInicio.cerrar;
+  FPrincipal.cargarIni;
   Close;
 end;
 
@@ -275,7 +277,7 @@ begin
   CheckBoxJueves.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'JUEVES');
   CheckBoxViernes.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'VIERNES');
   CheckBoxSabado.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'SABADO');
-//  CheckBoxDomingo.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'DOMINGO');
+  CheckBoxDomingo.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'DOMINGO');
 
   editHora.Text:= IntToStr(EKInicio.Ini.ReadInteger('CRONOGRAMA', 'HORA', 0));
   editMinutos.Text:= IntToStr(EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MINUTOS', 0));
