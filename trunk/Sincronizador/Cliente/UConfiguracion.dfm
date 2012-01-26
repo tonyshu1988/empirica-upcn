@@ -4,7 +4,7 @@ object FConfiguracion: TFConfiguracion
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Configuraci'#243'n Sistema'
-  ClientHeight = 507
+  ClientHeight = 515
   ClientWidth = 788
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -30,13 +30,13 @@ object FConfiguracion: TFConfiguracion
     Left = 1
     Top = 4
     Width = 369
-    Height = 498
+    Height = 509
     TabStop = False
     TabOrder = 0
   end
   object btnCargarIni: TButton
     Left = 376
-    Top = 477
+    Top = 488
     Width = 129
     Height = 25
     Caption = 'Cargar'
@@ -45,7 +45,7 @@ object FConfiguracion: TFConfiguracion
   end
   object btnGuardarYSalir: TButton
     Left = 515
-    Top = 477
+    Top = 488
     Width = 129
     Height = 25
     Caption = 'Guardar y Salir'
@@ -54,7 +54,7 @@ object FConfiguracion: TFConfiguracion
   end
   object btnCancelarYSalir: TButton
     Left = 654
-    Top = 477
+    Top = 488
     Width = 129
     Height = 25
     Cancel = True
@@ -293,10 +293,11 @@ object FConfiguracion: TFConfiguracion
       Width = 175
       Height = 21
       Hint = 'Nombre de inicio de los archivos generados por el cliente'
+      CharCase = ecUpperCase
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      Text = 'editFILE_Upload'
+      Text = 'EDITFILE_UPLOAD'
     end
     object editFILE_Download: TEdit
       Left = 106
@@ -304,66 +305,75 @@ object FConfiguracion: TFConfiguracion
       Width = 175
       Height = 21
       Hint = 'Nombre de inicio de los archivos generados por el servidor'
+      CharCase = ecUpperCase
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
-      Text = 'editFILE_Download'
+      Text = 'EDITFILE_DOWNLOAD'
     end
   end
   object GroupBoxDias: TGroupBox
     Left = 374
     Top = 433
     Width = 409
-    Height = 37
+    Height = 52
     Caption = '  Dias  '
     TabOrder = 7
     object CheckBoxLunes: TCheckBox
-      Left = 4
-      Top = 16
+      Left = 36
+      Top = 14
       Width = 66
       Height = 15
       Caption = 'Lunes'
       TabOrder = 0
     end
     object CheckBoxJueves: TCheckBox
-      Left = 204
-      Top = 16
+      Left = 316
+      Top = 14
       Width = 66
       Height = 15
       Caption = 'Jueves'
       TabOrder = 3
     end
     object CheckBoxMiercoles: TCheckBox
-      Left = 133
-      Top = 16
+      Left = 222
+      Top = 14
       Width = 66
       Height = 15
       Caption = 'Miercoles'
       TabOrder = 2
     end
     object CheckBoxViernes: TCheckBox
-      Left = 271
-      Top = 16
+      Left = 36
+      Top = 32
       Width = 66
       Height = 15
       Caption = 'Viernes'
       TabOrder = 4
     end
     object CheckBoxMartes: TCheckBox
-      Left = 66
-      Top = 16
+      Left = 129
+      Top = 14
       Width = 66
       Height = 15
       Caption = 'Martes'
       TabOrder = 1
     end
     object CheckBoxSabado: TCheckBox
-      Left = 339
-      Top = 16
+      Left = 176
+      Top = 32
       Width = 66
       Height = 15
       Caption = 'Sabado'
       TabOrder = 5
+    end
+    object CheckBoxDomingo: TCheckBox
+      Left = 316
+      Top = 32
+      Width = 66
+      Height = 15
+      Caption = 'Domingo'
+      TabOrder = 6
     end
   end
   object GroupBoxFTP: TGroupBox
