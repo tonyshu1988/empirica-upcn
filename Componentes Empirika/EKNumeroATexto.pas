@@ -70,6 +70,7 @@ type
     FSeparador: Char;   //Innecesario pero no molesta.
     FMoneda: String;    //Especifica la moneda Ej: Euros, Pesetas, Pesos, etc.
     FCentavos: String;  //Especifica los centavos Ej: ctvs.
+    FTextoDecimal: string; //Ver los decimales como texto
     function NumeroATexto: String;
     function GetCentimos: String;
 
@@ -84,6 +85,7 @@ type
     property Separador:Char read FSeparador Write FSeparador;
     property Moneda: String read FMoneda Write FMoneda;
     property Centavos: String read FCentavos Write FCentavos;
+    property TextoDecimal: Boolean read FTextoDecimal write FTextoDecimal default true;
   end;
 
 procedure Register;
@@ -99,6 +101,7 @@ begin
   FMoneda    := '';
   FCentavos  := '';
   FSeparador := DecimalSeparator;  //El separador decimal de su P.C.
+  FTextoDecimal:= true;
 end;
 
 (*** Optimizada ***)
@@ -307,8 +310,20 @@ function TEKNumeroALetras.NumeroATexto: String;
        end;
      end;
 
+     function CorregirUn(texto: String; tipo: string): String;
+     begin
+      Result:= texto;
+      if tipo = '' then
+      begin
+        Result:= TrimRight(Result);
+        if RightStr(Result, 2) = 'un' then
+          Result:= Result + 'o ';
+      end;
+     end;
+
 var
-  S: String;
+  entero: String;
+  decimal: String;
   Num_Ctvs  : Integer;
   Num_Largo : Extended;
 begin
@@ -318,25 +333,38 @@ begin
   //si es menor que mil billones... tomamos en cuenta los decimales,
   //de lo contrario no podemos tomarlos en cuenta... por aquello de
   //las cifras significativas... uds. saben...
-  if Num_Largo < 1000000000000000.0 then begin
-    S:= FormatFloat('0.00', FNumero);
-    Num_Ctvs := StrToInt(Copy(S, Length(S)-1, 2));
-  end else
+  if Num_Largo < 1000000000000000.0 then
+  begin
+    entero:= FormatFloat('0.00', FNumero);
+    Num_Ctvs := StrToInt(Copy(entero, Length(entero)-1, 2));
+  end
+  else
     Num_Ctvs := 0;
 
   //Se traduce la cifra sin decimales
-  S:= Trillones(Num_Largo);
+  entero:= Trillones(Num_Largo);
 
   //Se traducen los decimales
-  if (Num_Ctvs > 0)
-  then Result:= Decenas(Num_Ctvs)+' '+FCentavos
-  else Result:= '';
+  if (Num_Ctvs > 0) then
+    decimal:= Decenas(Num_Ctvs)+' '+FCentavos
+  else
+    decimal:= '';
+
+  entero:= CorregirUn(entero, FMoneda);
+  decimal:= CorregirUn(decimal, FCentavos);
 
   //Compactamos en un solo texto
-  if (Trim(S) <> '') then begin
-    if (Result <> '')
-    then Result:= Trim(S) +' ' +FMoneda +' con '+ Result
-    else Result:= Trim(S) +' ' +FMoneda;
+  if (Trim(entero) <> '') then
+  begin
+    if (decimal <> '') then
+    begin
+      if not FTextoDecimal then
+        Result:= Trim(entero) +' ' +FMoneda +' con '+ FormatFloat('00', Num_Ctvs)+'/100'+' '+FCentavos
+      else
+        Result:= Trim(entero) +' ' +FMoneda +' con '+ decimal;
+    end
+    else
+      Result:= Trim(entero) +' ' +FMoneda;
   end;
 
   //quitamos los caracteres [espacio] junto a otros caracteres [espacio]
