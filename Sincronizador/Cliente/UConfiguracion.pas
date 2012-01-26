@@ -62,6 +62,9 @@ type
     ZQ_VerificarBase: TZQuery;
     ZQ_VerificarBaseID_COMPROBANTE: TIntegerField;
     CheckBoxDomingo: TCheckBox;
+    GroupBoxGeneral: TGroupBox;
+    CheckBoxMinimizar: TCheckBox;
+    CheckBoxWindows: TCheckBox;
     procedure btnCargarIniClick(Sender: TObject);
     procedure btnCancelarYSalirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -204,6 +207,18 @@ begin
   //Guardo la clave de ingreso a la pantalla de configuracion
   EKInicio.Ini.WriteString('SINCRONIZADOR', 'CONFIG_PASS', EKInicio.Encripta(editConfig_Pass.Text));
 
+  //Inicializar Minimizado
+  if CheckBoxMinimizar.Checked then
+    EKInicio.Ini.WriteString('GENERAL', 'INICIAR_MINIMIZADO', 'SI')
+  else
+    EKInicio.Ini.DeleteKey('GENERAL', 'INICIAR_MINIMIZADO');
+
+  //Inicializar con windows
+  if CheckBoxWindows.Checked then
+    EKInicio.Ini.WriteString('GENERAL', 'INICIAR_CON_WINDOWS', 'SI')
+  else
+    EKInicio.Ini.DeleteKey('GENERAL', 'INICIAR_CON_WINDOWS');
+
   //Guardo los datos de la base de datos
   EKInicio.Ini.WriteString('BASE', 'DB_HOST', editDB_Host.Text);
   EKInicio.Ini.WriteString('BASE', 'DB_NAME', editDB_Name.Text);
@@ -281,6 +296,9 @@ begin
 
   editHora.Text:= IntToStr(EKInicio.Ini.ReadInteger('CRONOGRAMA', 'HORA', 0));
   editMinutos.Text:= IntToStr(EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MINUTOS', 0));
+
+  CheckBoxMinimizar.Checked:= EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_MINIMIZADO');
+  CheckBoxWindows.Checked:= EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_CON_WINDOWS');
 
   //si el esta modo cliente, o todavia no se guardo el modo, lo cargo como cliente
   if EKInicio.Ini.ReadString('SINCRONIZADOR', 'MODO', 'CLIENTE') = modo_cliente then

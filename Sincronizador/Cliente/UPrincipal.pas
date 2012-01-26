@@ -34,7 +34,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, DB, Grids, DBGrids, ZAbstractRODataset, ZAbstractDataset,
+  Dialogs, DB, Grids, DBGrids, ZAbstractRODataset, ZAbstractDataset, Registry,
   ZDataset, ZConnection, StdCtrls, ZSqlUpdate, EKIni, ExtCtrls, EKEdit,
   ZStoredProcedure, dxBar, dxBarExtItems, EKIconizacion, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
@@ -265,6 +265,8 @@ type
     procedure configGrillas(opcion: integer); //0 = Cargar configuracion; 1 = Guardar configuracion
     procedure FormActivate(Sender: TObject);
     procedure ponerTodoEnCero();
+    procedure QuitarProgramaInicio;
+    procedure PonerProgramaInicio;
     //procedimientos con el servidor FTP
     function  FTP_SubirArchivo(directorio, archivo: String): Boolean;
     function  FTP_BajarArchivo(directorio, archivo: String): Boolean;
@@ -323,6 +325,7 @@ type
     id_base_local: string;
     password_configuracion: string;
     estado_sincronizando: boolean;
+    ini_windows, ini_minimizar: boolean;
   end;
 
 var
@@ -344,6 +347,46 @@ uses UUtil_Procesos, UDM, UConfiguracion, IniFiles, DateUtils, StrUtils,
   EKModelo;
 
 {$R *.dfm}
+
+//*********************************************************************
+//                PROCEDIMIENTOS AGREGAR Y QUITAR ARRANQUE CON WINDOWS
+//*********************************************************************
+procedure TFPrincipal.PonerProgramaInicio;
+var
+  Registro: TRegistry;
+begin
+  Registro:= TRegistry.Create;
+  Registro.RootKey:= HKEY_CURRENT_USER; //HKEY_LOCAL_MACHINE;
+
+  if Registro.OpenKey('Software\Microsoft\Windows\CurrentVersion\Run', true) then
+  begin
+    Registro.WriteString('EKSincronizador', ExtractFilePath(Application.ExeName)+ExtractFileName(Application.ExeName));
+    Registro.CloseKey;
+  end;
+
+  Registro.Free;
+end;
+
+
+procedure TFPrincipal.QuitarProgramaInicio;
+var
+  Registro: TRegistry;
+begin
+  Registro:= TRegistry.Create;
+  Registro.RootKey:= HKEY_CURRENT_USER; //HKEY_LOCAL_MACHINE;
+
+  if Registro.OpenKey('Software\Microsoft\Windows\CurrentVersion\Run', true) then
+  begin
+    // ¿Existe el valor que vamos a borrar?
+    if Registro.ValueExists('EKSincronizador') then
+      Registro.DeleteValue('EKSincronizador');
+
+    Registro.CloseKey;
+  end;
+
+  Registro.Free;
+end;
+
 
 //*********************************************************************
 //                PROCEDIMIENTOS DE PINTADO DE GRILLAS
@@ -432,22 +475,29 @@ begin
     if IsProcess(nameAplica) then
     begin
       Application.MessageBox('Ya hay una instancia del programa ejecutándose.','Atención');
-//      ExitProcess(0);
+      ExitProcess(0);
     end;
   end;
 
   cargarIni;
+
   dm.ConexionLectura.Disconnect;
   dm.ConexionEscritura.Disconnect;
   DM.IdFTP.Disconnect;
   CD_NovedadesCliente.CreateDataSet;
-  CD_NovedadesServer.CreateDataSet;  
+  CD_NovedadesServer.CreateDataSet;
   CD_ProcesarNovedades.CreateDataSet;
   CD_Tablas_Actualizar.CreateDataSet;
   CD_ListaNovedades.CreateDataSet;
 
   memoLog.Lines.Clear;
   memoLog.Lines.Add('...### Sincronización SiGeFa ###...');
+
+  if ini_minimizar then
+  begin
+    Visible:= False;
+    Application.ShowMainForm:= False;
+  end
 end;
 
 
@@ -468,6 +518,10 @@ end;
 procedure TFPrincipal.cargarIni();
 begin
   EKInicio.abrir;
+  //Cargo la configuracion general
+  ini_minimizar:= EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_MINIMIZADO');
+  ini_windows:= EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_CON_WINDOWS');
+
   modo:= EKInicio.Ini.ReadString('SINCRONIZADOR', 'MODO', 'CLIENTE'); //cargo el modo, si no esta por defecto es CLIENTE
 
   password_configuracion:= EKInicio.Desencripta(EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
@@ -537,6 +591,11 @@ begin
   EKInicio.cerrar;
   lblTituloSincro.Caption:= db_name;
   FPrincipal.Caption:= 'Sincronizador en Modo '+modo;
+
+  if ini_windows then
+    PonerProgramaInicio
+  else
+    QuitarProgramaInicio;
 end;
 
 
