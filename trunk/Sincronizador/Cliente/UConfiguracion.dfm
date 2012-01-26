@@ -1,10 +1,10 @@
 object FConfiguracion: TFConfiguracion
-  Left = 298
-  Top = 122
+  Left = 283
+  Top = 52
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Configuraci'#243'n Sistema'
-  ClientHeight = 515
+  ClientHeight = 544
   ClientWidth = 788
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,52 +23,52 @@ object FConfiguracion: TFConfiguracion
     Width = 25
     Height = 12
     BevelOuter = bvNone
-    TabOrder = 11
+    TabOrder = 12
     OnClick = Panel1Click
   end
   object memoConfiguracion: TMemo
     Left = 1
     Top = 4
     Width = 369
-    Height = 509
+    Height = 533
     TabStop = False
     TabOrder = 0
   end
   object btnCargarIni: TButton
-    Left = 376
-    Top = 488
+    Left = 375
+    Top = 512
     Width = 129
     Height = 25
     Caption = 'Cargar'
-    TabOrder = 8
+    TabOrder = 9
     OnClick = btnCargarIniClick
   end
   object btnGuardarYSalir: TButton
-    Left = 515
-    Top = 488
+    Left = 514
+    Top = 512
     Width = 129
     Height = 25
     Caption = 'Guardar y Salir'
-    TabOrder = 9
+    TabOrder = 10
     OnClick = btnGuardarYSalirClick
   end
   object btnCancelarYSalir: TButton
-    Left = 654
-    Top = 488
+    Left = 653
+    Top = 512
     Width = 129
     Height = 25
     Cancel = True
     Caption = 'Cancelar y Salir'
-    TabOrder = 10
+    TabOrder = 11
     OnClick = btnCancelarYSalirClick
   end
   object GroupBoxBD: TGroupBox
     Left = 374
-    Top = 216
+    Top = 251
     Width = 408
     Height = 125
     Caption = ' Config Base Datos '
-    TabOrder = 4
+    TabOrder = 5
     object Label4: TLabel
       Left = 11
       Top = 16
@@ -198,11 +198,11 @@ object FConfiguracion: TFConfiguracion
   end
   object GroupBoxIntervalo: TGroupBox
     Left = 673
-    Top = 349
+    Top = 377
     Width = 110
     Height = 78
     Caption = ' Intervalo '
-    TabOrder = 6
+    TabOrder = 7
     object Label1: TLabel
       Left = 25
       Top = 24
@@ -268,11 +268,11 @@ object FConfiguracion: TFConfiguracion
   end
   object GroupBoxArchivos: TGroupBox
     Left = 374
-    Top = 349
+    Top = 377
     Width = 294
     Height = 78
     Caption = '  Archivos de Sincronizaci'#243'n  '
-    TabOrder = 5
+    TabOrder = 6
     object Label12: TLabel
       Left = 26
       Top = 26
@@ -314,11 +314,11 @@ object FConfiguracion: TFConfiguracion
   end
   object GroupBoxDias: TGroupBox
     Left = 374
-    Top = 433
+    Top = 456
     Width = 409
     Height = 52
     Caption = '  Dias  '
-    TabOrder = 7
+    TabOrder = 8
     object CheckBoxLunes: TCheckBox
       Left = 36
       Top = 14
@@ -378,11 +378,11 @@ object FConfiguracion: TFConfiguracion
   end
   object GroupBoxFTP: TGroupBox
     Left = 374
-    Top = 51
+    Top = 88
     Width = 409
     Height = 162
     Caption = ' Config Servidor FTP '
-    TabOrder = 3
+    TabOrder = 4
     object Label7: TLabel
       Left = 11
       Top = 16
@@ -510,6 +510,30 @@ object FConfiguracion: TFConfiguracion
       ShowHint = True
       TabOrder = 0
       Text = 'editConfig_Pass'
+    end
+  end
+  object GroupBoxGeneral: TGroupBox
+    Left = 374
+    Top = 48
+    Width = 409
+    Height = 40
+    Caption = '  Configuraci'#243'n General  '
+    TabOrder = 3
+    object CheckBoxMinimizar: TCheckBox
+      Left = 14
+      Top = 18
+      Width = 132
+      Height = 15
+      Caption = 'Minimizar al iniciar'
+      TabOrder = 0
+    end
+    object CheckBoxWindows: TCheckBox
+      Left = 174
+      Top = 18
+      Width = 137
+      Height = 15
+      Caption = 'Iniciar con Windows'
+      TabOrder = 1
     end
   end
   object EKInicio: TEKIni
