@@ -473,7 +473,7 @@ begin
     if IsProcess(nameAplica) then
     begin
       Application.MessageBox('Ya hay una instancia del programa ejecutándose.','Atención');
-      ExitProcess(0);
+      //ExitProcess(0);
     end;
   end;
 
@@ -589,6 +589,7 @@ begin
   EKInicio.cerrar;
   lblTituloSincro.Caption:= db_name;
   FPrincipal.Caption:= 'Sincronizador en Modo '+modo;
+  Application.Title := 'Sincronizador '+modo;
 
   if ini_windows then
     PonerProgramaInicio
@@ -645,7 +646,7 @@ end;
 
 procedure TFPrincipal.btnSalirClick(Sender: TObject);
 begin
-//  if Application.MessageBox('Si apaga el sincronizador dejará de actualizar la BD.', 'Atención', MB_OKCANCEL)= IDOK then
+  if Application.MessageBox('Si apaga el sincronizador dejará de actualizar la Base de Datos.', 'Atención', MB_OKCANCEL)= IDOK then
   begin
     guardarArchivoLog;
     dm.EKIconizar.Visible:=false;
