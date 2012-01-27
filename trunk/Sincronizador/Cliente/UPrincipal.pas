@@ -7,27 +7,25 @@ unit UPrincipal;
     QUE FIGURA EN LA PARTE DE LA CONFIGURACION PARA EL NOMBRE DE ARCHIVO DEL CLINTE.
   * EN LA CONFIGURACION VER QUE EL NOMBRE DE ARCHIVO DEL SERVIDOR SE IGUAL AL ARCHIVO QUE SUBE EL SERVIDOR.
 
-  REVISAR EL TEMA DE ESTOS TRIGGERS:
-    COMPROBANTE_CTACTE_SALDO
-    COMPROBANTE_DETALLE_AIU0
-    COMPROBANTE_FPAGO_CALC_SALDO
-
+  * REVISAR EL TEMA DE ESTOS TRIGGERS:
+     - COMPROBANTE_CTACTE_SALDO
+     - COMPROBANTE_DETALLE_AIU0
+     - COMPROBANTE_FPAGO_CALC_SALDO
 
 * HACER UNA VALIDACION PARA EL CAMBIO DE MODO, PQ SI ESTA EN MODO CLIENTE CON LA BASE
   DEL SERVIDOR VA A EXPLOTAR.
 * VER EL TEMA DE LOS NOMBRE DE ARCHIVO PARA EL CLIENTE Y EL SERVIDOR EN LA CONFIGURACION
   EN MODO CLIENTE TIENE QUE TENER EL MISMO NOMBRE QUE EL QUE FIGURA EN LA BASE DEL SERVIDOR
   PARA ESE CLIENTE, SINO EN MODO SERVIDOR NUNCA VA ENCONTRAR LOS ARCHIVOS SUBIDO POR ESTE CLIENTE.
-*
 
 * Cuando estoy subiendo un archivo al ftp, subirlo con un nombre distinto al que deberia ser
-y cuando este subido por completo renombrarlo al nombre original, porque sino bajaria un archivo
-que esta po la mitad.
+  y cuando este subido por completo renombrarlo al nombre original, porque sino bajaria un archivo
+  que esta po la mitad.
 
 * Ver que cuando hago algo a pata que se detenga el timmer.
 
 * Ver el tema de los tringuer que se disparan con las inserciones de otra tabla, por ejemplo
-el de las ventas que actualiza el stock y el stock tambien se actualiza por auditoria.
+  el de las ventas que actualiza el stock y el stock tambien se actualiza por auditoria.
 }
 
 interface
@@ -456,7 +454,7 @@ begin
   end;
 end;
 
-
+//OnCreate
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
   estado_sincronizando:= false;
@@ -500,7 +498,7 @@ begin
   end
 end;
 
-
+//OnClose
 procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   configGrillas(1); //guardo la config de las grillas
@@ -508,13 +506,13 @@ begin
   dm.ConexionEscritura.Disconnect;
 end;
 
-
+//OnActivte
 procedure TFPrincipal.FormActivate(Sender: TObject);
 begin
   panelTitulo.SetFocus;
 end;
 
-
+//Cargar los datos del archivo ini
 procedure TFPrincipal.cargarIni();
 begin
   EKInicio.abrir;
@@ -598,7 +596,7 @@ begin
     QuitarProgramaInicio;
 end;
 
-
+//Timer para que realice la sincronizacion automaticamente
 procedure TFPrincipal.TimerTimer(Sender: TObject);
 begin
   if tiempo_restante = 0 then
@@ -628,7 +626,7 @@ begin
   end
 end;
 
-
+//devuelve la fecha y hora como un dateTime
 function TFPrincipal.getFechayHora: TDateTime;
 begin
   result:= -1;
@@ -636,7 +634,7 @@ begin
     result:= dm.ModeloLectura.FechayHora;
 end;
 
-
+//devuelve la fecha y hora como un string
 function TFPrincipal.getFechayHoraString: string;
 begin
   result:= '';
@@ -699,7 +697,6 @@ begin
   memoLog.Lines.Clear;
 end;
 
-
 //Limpia los progress bar y todos los client dataset
 procedure TFPrincipal.ponerTodoEnCero;
 begin
@@ -713,7 +710,7 @@ begin
   CD_ProcesarNovedades.EmptyDataSet;
 end;
 
-
+//Configurar las grillas, grabar o cargar la configuracion
 procedure TFPrincipal.configGrillas(opcion: integer); //0 = Cargar configuracion; 1 = Guardar configuracion
 begin
   if opcion = 0 then
@@ -777,7 +774,6 @@ begin
   end;
 end;
 
-
 procedure TFPrincipal.btnSubirClick(Sender: TObject);
 begin
   Timer.Enabled:= false;
@@ -787,7 +783,6 @@ begin
     subirNovedadesServer;
   Timer.Enabled:= true;    
 end;
-
 
 procedure TFPrincipal.btnBajarClick(Sender: TObject);
 begin
@@ -808,6 +803,7 @@ begin
     procesarNovedadesClientes;
   Timer.Enabled:= true;
 end;
+
 
 //*********************************************************************
 //                PROCEDIMIENTOS CON EL SERVIDOR FTP
@@ -947,7 +943,6 @@ begin
   End;
 end;
 
-
 //cheque que el archivo pasado como parametro exista en el servidor ftp
 function TFPrincipal.FTP_ExisteArchivo(directorio, archivo: string): boolean;
 begin
@@ -978,7 +973,6 @@ begin
     end;
   End;
 end;
-
 
 //busca las novedades subidas por el servidor al FTP
 function TFPrincipal.FTP_BuscarListaArchivos(directorio, inicio_nombre_archivo, ultimo_archivo, origen_archivo: string): integer;
@@ -1105,7 +1099,6 @@ begin
     Result:= ZQ_UltimoLoteULTIMO_LOTE.AsInteger + 1;
 end;
 
-
 //obtengo el listados de las tablas que se van a insertar/actualizar/eliminar
 procedure TFPrincipal.obtener_tablas_actualizar();
 var
@@ -1149,6 +1142,7 @@ begin
   CD_ProcesarNovedades.EnableControls;
 end;
 
+
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
 //          ----------------------------  MODO    -------------------------
@@ -1163,7 +1157,6 @@ begin
   CD_NovedadesCliente.Open;
 end;
 
-
 //reflejo el progreso de la carga de novedades encontrada en el progress bar correspondiente
 procedure TFPrincipal.ZQ_NovedadesClienteAfterScroll(DataSet: TDataSet);
 begin
@@ -1171,7 +1164,6 @@ begin
   posicion_PBar:= posicion_PBar + 1;
   Application.ProcessMessages;
 end;
-
 
 //procedimiento que realiza la subida de las novedades del cliente al FTP
 procedure TFPrincipal.subirNovedadesCliente;
@@ -1251,7 +1243,6 @@ begin
   GrupoEditando.Enabled:= true;
 end;
 
-
 //Bajo todos los archivos subidos por el servidor para poder procesarlos y actualizar la base del cliente
 procedure TFPrincipal.bajarNovedadesServer();
 var
@@ -1318,7 +1309,6 @@ begin
   GrupoEditando.Enabled:= true;
   panelListaNovedades.Enabled:= true;
 end;
-
 
 //procesar los archivos descargados del servidor FTP
 procedure TFPrincipal.procesarNovedadesServer;
@@ -1456,36 +1446,43 @@ begin
               //PARA LOS CAMPOS NO BLOB
               if not ((CD_ProcesarNovedadesFIELD_NAME.IsNull) or (CD_ProcesarNovedadesFIELD_NAME.AsString = '')) then
               begin
-                     //pregunto si el campo esta definido como FLOAT
-                if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftFloat then
-                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= CD_ProcesarNovedadesNEW_VALUE.AsFloat
-                else //pregunto si el campo esta definido como INTEGER
-                if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftInteger then
-                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsInteger:= CD_ProcesarNovedadesNEW_VALUE.AsInteger
-                else //pregunto si el campo esta definido como STRING
-                if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftString	then
-                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString
-                else //pregunto si el campo esta definido como DATETIME
-                if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDateTime	 then
+                //Si el campo que tengo que agregar es insert_manual lo agrego como 'N' para que no se disparen
+                //los triggers de las tablas COMPROBANTE_DETALLE, COMPROBANTE_FORMA_PAGO, COMPROBANTE
+                if (CD_ProcesarNovedadesFIELD_NAME.AsString = 'insert_manual') then
+                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= 'N'
+                else
                 begin
-                  try
-                    begin
-                      fechaDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime;
-                    end
-                  except
-                    begin                                                //123456789012345678901234
-                      //tengo que convertit el dato que viene de la forma '2012-01-24 18:46:37.0000' a un date time
-                      fechaString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
-                      fechaDateTime:= EncodeDateTime(StrToInt(Copy(fechaString, 1, 4)),StrToInt(Copy(fechaString, 6, 2)),StrToInt(Copy(fechaString, 9, 2)),
-                      StrToInt(Copy(fechaString, 12, 2)),StrToInt(Copy(fechaString, 15, 2)),StrToInt(Copy(fechaString, 18, 2)),StrToInt(Copy(fechaString, 21, 4)));
+                       //pregunto si el campo esta definido como FLOAT
+                  if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftFloat then
+                    ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= CD_ProcesarNovedadesNEW_VALUE.AsFloat
+                  else //pregunto si el campo esta definido como INTEGER
+                  if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftInteger then
+                    ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsInteger:= CD_ProcesarNovedadesNEW_VALUE.AsInteger
+                  else //pregunto si el campo esta definido como STRING
+                  if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftString	then
+                    ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString
+                  else //pregunto si el campo esta definido como DATETIME
+                  if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDateTime	 then
+                  begin
+                    try
+                      begin
+                        fechaDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime;
+                      end
+                    except
+                      begin                                                
+                        //tengo que convertit el dato que viene de la forma '2012-01-24 18:46:37.0000' a un date time
+                        fechaString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
+                        fechaDateTime:= EncodeDateTime(StrToInt(Copy(fechaString, 1, 4)),StrToInt(Copy(fechaString, 6, 2)),StrToInt(Copy(fechaString, 9, 2)),
+                        StrToInt(Copy(fechaString, 12, 2)),StrToInt(Copy(fechaString, 15, 2)),StrToInt(Copy(fechaString, 18, 2)),StrToInt(Copy(fechaString, 21, 4)));
 
+                      end;
                     end;
-                  end;
-                  //ShowMessage();
-                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= fechaDateTime;
-                end
-                else //si es cualquier otro tipo de campo
-                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.Value;
+                    //ShowMessage();
+                    ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= fechaDateTime;
+                  end
+                  else //si es cualquier otro tipo de campo
+                    ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.Value;
+                end;
               end;
 
               //PARA LOS CAMPOS BLOB
@@ -1632,7 +1629,6 @@ begin
   panelListaNovedades.Enabled:= true;
 end;
 
-
 //proceso los archivos de novedades de los clientes que descargue del servidor FTP
 procedure TFPrincipal.procesarNovedadesClientes;
 var
@@ -1712,7 +1708,7 @@ begin
   panelListaNovedades.Enabled:= true;
 end;
 
-
+//Actualizar Base de datos del servidor
 function TFPrincipal.actualizar_base_server(id_cliente: integer; archivo: string): boolean;
 begin
   Result:= false;
@@ -1807,7 +1803,6 @@ begin
   end;
 end;
 
-
 //buscar novedades en el servidor
 procedure TFPrincipal.buscarNovedadesServer;
 begin
@@ -1824,7 +1819,7 @@ begin
   Application.ProcessMessages;
 end;
 
-
+//Subir novedades del servidor al servidor FTP
 procedure TFPrincipal.subirNovedadesServer;
 var
   archivo: string;
