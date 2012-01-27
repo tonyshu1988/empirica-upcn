@@ -60,7 +60,7 @@ ATENCIÓN:
 interface
 
 uses
-  SysUtils, Classes;
+  SysUtils, Classes, strutils;
 
 type
   TEKNumeroALetras = class(TComponent)
@@ -70,15 +70,13 @@ type
     FSeparador: Char;   //Innecesario pero no molesta.
     FMoneda: String;    //Especifica la moneda Ej: Euros, Pesetas, Pesos, etc.
     FCentavos: String;  //Especifica los centavos Ej: ctvs.
-    FTextoDecimal: string; //Ver los decimales como texto
+    FTextoDecimal: boolean; //Ver los decimales como texto
     function NumeroATexto: String;
     function GetCentimos: String;
-
   public
     constructor Create(AOwner:TComponent);override;
     property AsString: String read NumeroATexto;
     property Centimos: String read GetCentimos;
-
   published
     property Masculino: Boolean read FMasculino write FMasculino default true;
     property Numero: Extended read FNumero Write FNumero;
