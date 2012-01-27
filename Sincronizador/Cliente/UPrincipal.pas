@@ -1449,7 +1449,7 @@ begin
               begin
                 //Si el campo que tengo que agregar es insert_manual lo agrego como 'N' para que no se disparen
                 //los triggers de las tablas COMPROBANTE_DETALLE, COMPROBANTE_FORMA_PAGO, COMPROBANTE
-                if (CD_ProcesarNovedadesFIELD_NAME.AsString = 'insert_manual') then
+                if (CD_ProcesarNovedadesFIELD_NAME.AsString = 'INSERT_MANUAL') then
                   ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= 'N'
                 else
                 begin
