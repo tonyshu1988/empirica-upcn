@@ -198,6 +198,13 @@ object FAuditoria: TFAuditoria
             Title.Caption = 'Valor Clave'
             Width = 63
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_SINCRO_LOTE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Lote Sincro'
+            Visible = True
           end>
       end
       object DBGridDatosTabla: TDBGrid
@@ -373,7 +380,7 @@ object FAuditoria: TFAuditoria
         Font.Style = []
         ParentFont = False
       end
-      object DateTimePicker1: TDateTimePicker
+      object DateTimeFecha: TDateTimePicker
         Left = 56
         Top = 7
         Width = 137
@@ -387,7 +394,7 @@ object FAuditoria: TFAuditoria
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
-        OnChange = DateTimePicker1Change
+        OnChange = DateTimeFechaChange
       end
       object cBoxAccion: TComboBox
         Left = 365
@@ -826,8 +833,8 @@ object FAuditoria: TFAuditoria
     AfterScroll = ZQ_AudGeneralAfterScroll
     SQL.Strings = (
       'select t.*, k.*'
-      'from ibe$log_tables t'
-      'left join ibe$log_keys k on (t.id = k.log_tables_id)'
+      'from z_sinc_tabla t'
+      'left join z_sinc_clave k on (t.id = k.log_tables_id)'
       
         'where ((cast(t.date_time as date) = :fecha) or (:todas_fecha = '#39 +
         'SI'#39'))'
@@ -965,6 +972,9 @@ object FAuditoria: TFAuditoria
       FieldName = 'KEY_VALUE'
       Size = 765
     end
+    object ZQ_AudGeneralID_SINCRO_LOTE: TIntegerField
+      FieldName = 'ID_SINCRO_LOTE'
+    end
   end
   object ZQ_AudDetallada: TZQuery
     Connection = DM.Conexion
@@ -1071,7 +1081,7 @@ object FAuditoria: TFAuditoria
     Connection = DM.Conexion
     SQL.Strings = (
       'select distinct lt.table_name'
-      'from ibe$log_tables lt')
+      'from z_sinc_tabla lt')
     Params = <>
     Left = 56
     Top = 336
@@ -1102,8 +1112,8 @@ object FAuditoria: TFAuditoria
     Connection = DM.Conexion
     SQL.Strings = (
       
-        'execute procedure AA_VACIAR_AUDITORIA(:USUARIO, :FECHA, :OPERACI' +
-        'ON, :TABLA, :NO_FECHA, :NO_USUARIO, :NO_OPERACION, :NO_TABLA)')
+        'execute procedure VACIAR_AUDITORIA(:USUARIO, :FECHA, :OPERACION,' +
+        ' :TABLA, :NO_FECHA, :NO_USUARIO, :NO_OPERACION, :NO_TABLA)')
     Params = <
       item
         DataType = ftUnknown

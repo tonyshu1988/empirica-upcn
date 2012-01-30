@@ -49,7 +49,7 @@ type
     ZQ_AudDetalladaVALOR_REF_NUEVO: TStringField;
     Panel2: TPanel;
     Label1: TLabel;
-    DateTimePicker1: TDateTimePicker;
+    DateTimeFecha: TDateTimePicker;
     Label2: TLabel;
     cBoxAccion: TComboBox;
     Label3: TLabel;
@@ -89,13 +89,14 @@ type
     ZQ_DatosProductoID_PRODUCTO: TIntegerField;
     ZQ_DatosStockID_PRODUCTO: TIntegerField;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    ZQ_AudGeneralID_SINCRO_LOTE: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_AudGeneralAfterScroll(DataSet: TDataSet);
     procedure DBGridAudGeneralDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure cBoxAccionChange(Sender: TObject);
     procedure buscarAudotoria();
-    procedure DateTimePicker1Change(Sender: TObject);
+    procedure DateTimeFechaChange(Sender: TObject);
     procedure btnTodosUsuariosClick(Sender: TObject);
     procedure ISLlenarCombo1Cambio(valor: String);
     procedure CD_TablasAfterScroll(DataSet: TDataSet);
@@ -128,13 +129,17 @@ uses UPrincipal, UDM;
 
 procedure TFAuditoria.FormCreate(Sender: TObject);
 begin
+  btnEliminarAuditoria.Visible:= ivNever;
+  if dm.EKUsrLogin.PermisoAccion('AUDITORIA_ELIMINAR') then
+    btnEliminarAuditoria.Visible:= ivAlways;
+
 //  ZQ_User.Connection:= dm.Conexion_User;
 //  ZQ_ComboUsuario.Connection:= dm.Conexion_User;
 
   TStringGrid(DBGridTabla).Scrollbars:=ssVertical;
   TStringGrid(DBGridDatosTabla).Scrollbars:=ssVertical;
   TStringGrid(DBGridDatosProducto).Scrollbars:=ssVertical;
-  DateTimePicker1.Date:= dm.ekModelo.Fecha();
+  DateTimeFecha.Date:= dm.ekModelo.Fecha();
 //  ZQ_User.Close;
 //  ZQ_User.Open;
 //  EKLlenarCombo1.CargarCombo;
@@ -262,7 +267,7 @@ begin
 end;
 
 
-procedure TFAuditoria.DateTimePicker1Change(Sender: TObject);
+procedure TFAuditoria.DateTimeFechaChange(Sender: TObject);
 begin
   buscarAudotoria();
 end;
@@ -276,9 +281,9 @@ begin
   ZQ_AudGeneral.Close;
 
   //FECHA
-  if DateTimePicker1.Enabled then //si la fecha esta habilitada
+  if DateTimeFecha.Enabled then //si la fecha esta habilitada
   begin
-    ZQ_AudGeneral.ParamByName('fecha').AsDate:= DateTimePicker1.Date;
+    ZQ_AudGeneral.ParamByName('fecha').AsDate:= DateTimeFecha.Date;
     ZQ_AudGeneral.ParamByName('todas_fecha').Clear;
   end
   else
@@ -449,10 +454,10 @@ begin
       end;
 
       //Parametro FECHA
-      if DateTimePicker1.Enabled then //si la fecha esta habilitada
+      if DateTimeFecha.Enabled then //si la fecha esta habilitada
       begin
         ZQ_EliminarAuditoria.ParamByName('no_fecha').Clear;
-        ZQ_EliminarAuditoria.ParamByName('fecha').AsDate:= DateTimePicker1.Date;
+        ZQ_EliminarAuditoria.ParamByName('fecha').AsDate:= DateTimeFecha.Date;
       end
       else
       begin
@@ -478,11 +483,17 @@ end;
 
 procedure TFAuditoria.btnActivarFechaClick(Sender: TObject);
 begin
-  DateTimePicker1.Enabled:= not DateTimePicker1.Enabled;
-  if DateTimePicker1.Enabled then
-    btnActivarFecha.Caption:= 'Desactivar Fecha'
+  DateTimeFecha.Enabled:= not DateTimeFecha.Enabled;
+  if DateTimeFecha.Enabled then
+  begin
+    btnActivarFecha.Caption:= 'Desactivar Fecha';
+    DateTimeFecha.color:= clWindow;
+  end
   else
+  begin
     btnActivarFecha.Caption:= 'Activar Fecha';
+    DateTimeFecha.color:= clSilver;
+  end;
 
   buscarAudotoria;
 end;
