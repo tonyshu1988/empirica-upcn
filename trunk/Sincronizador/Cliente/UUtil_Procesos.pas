@@ -38,14 +38,14 @@ function ProcessFirst; external 'kernel32.dll' name 'Process32First';
 function ProcessNext; external 'kernel32.dll' name 'Process32Next';
 procedure CloseHandle; external 'kernel32.dll';
 
-function IsProcess(ExeName: string): Boolean;
+
 (*
 ** This routine examines Windows processes currently running to see if a
 ** certain program is running.
-**
 ** sExe  : The executable name of the program to check.
 ** Result: True if the program is running, False otherwise.
 *)
+function IsProcess(ExeName: string): Boolean;
 var
   lI, lSnapShot: Longint;
   rProcess: TProcessEntry32;
@@ -75,13 +75,13 @@ begin
   end;
 end;
 
-procedure GetProcesses(var ProcessList: TStringList);
-(* This procedure will retrieve a list of Windows processes currently running.
-**
+
+(*
+** This procedure will retrieve a list of Windows processes currently running.
 ** ProcessList: TStringList variable to fill with the running process names.
-**
 ** !!Note: ProcessList will be empty if an error occurs
 *)
+procedure GetProcesses(var ProcessList: TStringList);
 var
   lI, lSnapShot: Longint;
   rProcess     : TProcessEntry32;
