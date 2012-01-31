@@ -445,11 +445,6 @@ begin
   if (hInputForm <> 0) then
   begin
     hEdit := FindWindowEx(hInputForm, 0, 'TEdit', nil);
-    {
-      // Change button text:
-      hButton := FindWindowEx(hInputForm, 0, 'TButton', nil);
-      SendMessage(hButton, WM_SETTEXT, 0, Integer(PChar('Cancel')));
-    }
     SendMessage(hEdit, EM_SETPASSWORDCHAR, Ord('*'), 0);
   end;
 end;
@@ -472,7 +467,7 @@ begin
   begin
     if IsProcess(nameAplica) then
     begin
-      Application.MessageBox('Ya hay una instancia del programa ejecutándose.','Atención');
+      //Application.MessageBox('Ya hay una instancia del programa ejecutándose.','Atención');
       //ExitProcess(0);
     end;
   end;
