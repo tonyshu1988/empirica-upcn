@@ -156,6 +156,7 @@ begin
   Result:= StrPas(FIconData.szTip);
 end;
 
+
 procedure TEKIconizacion.SetHint(const Value: TSysTrayHint);
 begin
   if Value <> GetHint then
@@ -166,6 +167,7 @@ begin
   end;
 end;
 
+
 procedure TEKIconizacion.MouseDown(Button: TMouseButton; Shift: TShiftState; X,
   Y: Integer);
 begin
@@ -173,11 +175,13 @@ begin
     FOnMouseDown(Self, Button, Shift, X, Y);
 end;
 
+
 procedure TEKIconizacion.MouseMove(Shift: TShiftState; X, Y: Integer);
 begin
   if Assigned(FOnMouseMove) then
     FOnMouseMove(Self, Shift, X, Y);
 end;
+
 
 procedure TEKIconizacion.MouseUp(Button: TMouseButton; Shift: TShiftState; X,
   Y: Integer);
@@ -186,17 +190,20 @@ begin
     FOnMouseUp(Self, Button, Shift, X, Y);
 end;
 
+
 procedure TEKIconizacion.Click;
 begin
   if Assigned(FOnClick) then
     FOnClick(Self);
 end;
 
+
 procedure TEKIconizacion.DblClick;
 begin
   if Assigned(FOnDblClick) then
     FOnDblClick(Self);
 end;
+
 
 procedure TEKIconizacion.SetPopupMenu(Value: TPopupMenu);
 begin
@@ -207,6 +214,7 @@ begin
   end;
 end;
 
+
 procedure TEKIconizacion.Notification(AComponent: TComponent; Operation: TOperation);
 begin
   inherited Notification(AComponent, Operation);
@@ -214,6 +222,7 @@ begin
     if AComponent = PopupMenu then
       PopupMenu := nil;
 end;
+
 
 procedure TEKIconizacion.SetVisible(const Value: Boolean);
 begin
@@ -240,15 +249,18 @@ begin
   FVisible := Value;
 end;
 
+
 function TEKIconizacion.IsIconStored: Boolean;
 begin
   Result := fIcon.Handle <> 0;
 end;
 
+
 procedure TEKIconizacion.SetIcon(const Value: TIcon);
 begin
   FIcon.Assign(Value);
 end;
+
 
 function TEKIconizacion.GetIconHandle: HICON;
 begin
@@ -256,6 +268,7 @@ begin
   if Result = 0 then
     Result := Application.Icon.Handle;
 end;
+
 
 procedure TEKIconizacion.IconChanged(Sender: TObject);
 begin
