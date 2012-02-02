@@ -2245,4 +2245,16 @@ object FPrincipal: TFPrincipal
       FieldName = 'ID'
     end
   end
+  object PopupMenu: TPopupMenu
+    Left = 202
+    Top = 415
+    object popUpItemMostrarOcultar: TMenuItem
+      Caption = 'Mostrar/Ocultar'
+      OnClick = popUpItemMostrarOcultarClick
+    end
+    object popUpItemSalir: TMenuItem
+      Caption = 'Salir'
+      OnClick = popUpItemSalirClick
+    end
+  end
 end

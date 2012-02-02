@@ -137,4 +137,5 @@ Comments=
 [Excluded Packages]
 c:\program files (x86)\borland\delphi7\Bin\dcldss70.bpl=Borland Decision Cube Components
 c:\program files (x86)\borland\delphi7\Projects\Bpl\InterSol.bpl=InterSol utilidades ver: 2006
-c:\program files (x86)\borland\delphi7\Projects\Bpl\InterSolQR.bpl=(untitled)
+c:\program files (x86)\borland\delphi7\Projects\Bpl\InterSolQR.bpl=InterSol - Impresion
+c:\program files (x86)\borland\delphi7\Projects\Bpl\ComparerZeosD7.bpl=Database Comparer VCL ZEOS
