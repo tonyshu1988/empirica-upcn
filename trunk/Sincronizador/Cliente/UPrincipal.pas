@@ -1644,7 +1644,7 @@ procedure TFPrincipal.bajarNovedadesClientes;
 var
   cantidad_archivos_encontrados: integer;
 begin
-  resultado_ProcesarNovedades:= false;
+  resultado_BajarNovedades:= false;
   ponerTodoEnCero;
   GrupoEditando.Enabled:= false;
   pBar_Ftp.Position:= 0;
@@ -1698,7 +1698,7 @@ begin
   memoLog.Lines.Add('');
   GrupoEditando.Enabled:= true;
   panelListaNovedades.Enabled:= true;
-  resultado_ProcesarNovedades:= true; //indico que se bajaron todos los archivos con exito
+  resultado_BajarNovedades:= true; //indico que se bajaron todos los archivos con exito
 end;
 
 //proceso los archivos de novedades de los clientes que descargue del servidor FTP
