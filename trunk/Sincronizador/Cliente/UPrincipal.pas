@@ -36,7 +36,8 @@ uses
   ZDataset, ZConnection, StdCtrls, ZSqlUpdate, EKIni, ExtCtrls, EKEdit,
   ZStoredProcedure, dxBar, dxBarExtItems, EKIconizacion, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
-  IdFTP, DBClient, ComCtrls, Buttons, Provider, DBCtrls, EKOrdenarGrilla, SqlTimSt;
+  IdFTP, DBClient, ComCtrls, Buttons, Provider, DBCtrls, EKOrdenarGrilla, SqlTimSt,
+  Menus;
 
 const
   InputBoxMessage = WM_USER + 200; //para que hacer el imputBox con password
@@ -246,6 +247,9 @@ type
     ZQ_NovedadesClienteFBLOB_NEW_BLOB_VALUE: TBlobField;
     ZQ_VerificarUpdate: TZQuery;
     ZQ_VerificarUpdateID: TLargeintField;
+    PopupMenu: TPopupMenu;
+    popUpItemSalir: TMenuItem;
+    popUpItemMostrarOcultar: TMenuItem;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridTablasActualizarDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridListaNovedadesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -304,6 +308,8 @@ type
     //procedimientos para procesar los archivos de novedades de los clientes descargados desde el servidor FTP
     procedure procesarNovedadesClientes();
     function  actualizar_base_server(id_cliente: integer; archivo: string):boolean;
+    procedure popUpItemSalirClick(Sender: TObject);
+    procedure popUpItemMostrarOcultarClick(Sender: TObject);
   private
     procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
   public
@@ -324,6 +330,7 @@ type
     password_configuracion: string;
     estado_sincronizando: boolean;
     ini_windows, ini_minimizar: boolean;
+    resultado_SubirNovedades, resultado_BajarNovedades, resultado_ProcesarNovedades: boolean; 
   end;
 
 var
@@ -490,6 +497,7 @@ begin
   begin
     Visible:= False;
     Application.ShowMainForm:= False;
+    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Iniciando sincronizador, doble click para maximizar.');
   end
 end;
 
@@ -653,6 +661,7 @@ end;
 procedure TFPrincipal.btnOcultarClick(Sender: TObject);
 begin
   Visible:= False;
+  dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Doble click sobre el icono para maximizar.');
 end;
 
 //abrir la pantalla de configuracion
@@ -770,34 +779,61 @@ begin
   end;
 end;
 
+
 procedure TFPrincipal.btnSubirClick(Sender: TObject);
 begin
+  dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio subir novedades.');
   Timer.Enabled:= false;
   if modo = modo_cliente then
     subirNovedadesCliente
   else
     subirNovedadesServer;
-  Timer.Enabled:= true;    
+  Timer.Enabled:= true;
+  dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Fin subir novedades.');
+
+  if resultado_BajarNovedades then
+    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'La subida de novedades finalizó correctamente.')
+  else
+    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Se produjo un error en la subida de las novedades.')
 end;
+
 
 procedure TFPrincipal.btnBajarClick(Sender: TObject);
 begin
+  dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio descargar novedades.');
   Timer.Enabled:= false;
   if modo = modo_cliente then
     bajarNovedadesServer
   else
     bajarNovedadesClientes;
   Timer.Enabled:= true;
+  dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Fin descargar novedades.');
+
+  if resultado_BajarNovedades then
+    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'La descargadas de novedades finalizó correctamente.')
+  else
+    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Se produjo un error en la descarga de las novedades.')
 end;
+
 
 procedure TFPrincipal.btnProcesarClick(Sender: TObject);
 begin
+  //si no pude bajar correctamente las novedades salgo
+  if not resultado_BajarNovedades then
+    exit;
+
+  dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio procesar novedades.');
   Timer.Enabled:= false;
   if modo = modo_cliente then
     procesarNovedadesServer
   else
     procesarNovedadesClientes;
   Timer.Enabled:= true;
+
+  if resultado_ProcesarNovedades then
+    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'El proceso de las novedades descargadas finalizó correctamente.')
+  else
+    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Se produjo un error en el proceso de las novedades descargadas.')
 end;
 
 
@@ -819,7 +855,7 @@ begin
   try
     DM.IdFTP.Connect;
   except
-    ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
+    //ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
     exit;
   end;
 
@@ -860,7 +896,7 @@ begin
   try
     DM.IdFTP.Connect;
   except
-    ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
+    //ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
     exit;
   end;
 
@@ -918,7 +954,7 @@ begin
   try
     DM.IdFTP.Connect;
   except
-    ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
+    //ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
     exit;
   end;
 
@@ -949,7 +985,7 @@ begin
   try
     DM.IdFTP.Connect;
   except
-    ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
+    //ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
     exit;
   end;
 
@@ -984,7 +1020,7 @@ begin
   try
     DM.IdFTP.Connect;
   except
-    ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
+    //ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
     exit;
   end;
 
@@ -1166,6 +1202,7 @@ procedure TFPrincipal.subirNovedadesCliente;
 var
   archivo: string;
 begin
+  resultado_SubirNovedades:= false;
   ponerTodoEnCero;
   GrupoEditando.Enabled:= false;
   pBar_Ftp.Position:= 0;
@@ -1187,6 +1224,7 @@ begin
   //si no se encontraron novedades no hago nada y salgo
   if ZQ_NovedadesClienteCantCOUNT.AsInteger = 0 then
   begin
+    resultado_SubirNovedades:= true;
     memoLog.Lines.Add(getFechayHoraString+' - No hay Novedades para Subir');
     memoLog.Lines.Add('--------------------------------------------------------------');
     memoLog.Lines.Add('        FIN SUBIR NOVEDADES CLIENTE                           ');
@@ -1217,7 +1255,10 @@ begin
     memoLog.Lines.Add(getFechayHoraString+' - Guardando Lote Sincronizacion '+IntToStr(nserie_cliente));
     //comienzo el guardado del lote de sincronizacion
     if guardar_lote(archivo) then //si el lote se guardo correctamente
-      memoLog.Lines.Add(getFechayHoraString+' - Fin Guardar Lote Sincronizacion '+IntToStr(nserie_cliente))
+    begin
+      memoLog.Lines.Add(getFechayHoraString+' - Fin Guardar Lote Sincronizacion '+IntToStr(nserie_cliente));
+      resultado_SubirNovedades:= true;
+    end
     else //si no pude guardar el lote entonces borro el archivo que subi al servidor
     begin
       memoLog.Lines.Add(getFechayHoraString+' - Error en Guardar Lote Sincronizacion '+IntToStr(nserie_cliente));
@@ -1245,6 +1286,7 @@ var
   ultimo_archivo: string;
   cantidad_archivos_encontrados: integer;
 begin
+  resultado_BajarNovedades:= false;
   ponerTodoEnCero;
   GrupoEditando.Enabled:= false;
   pBar_Ftp.Position:= 0;
@@ -1276,7 +1318,16 @@ begin
   CD_ListaNovedades.EmptyDataSet;
   cantidad_archivos_encontrados:= FTP_BuscarListaArchivos(dirFTP_Server, archivo_server, ultimo_archivo, 'SERVIDOR');
   if cantidad_archivos_encontrados = -1 then  //si devuelve -1 es porque no me puedo conectar
-    memoLog.Lines.Add(getFechayHoraString+' - No se pudo conectar al servidor FTP')
+  begin
+    memoLog.Lines.Add(getFechayHoraString+' - No se pudo conectar al servidor FTP');
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    memoLog.Lines.Add('        FIN BAJAR NOVEDADES SERVIDOR                          ');
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    memoLog.Lines.Add('');
+    GrupoEditando.Enabled:= true;
+    panelListaNovedades.Enabled:= true;
+    exit;
+  end
   else //si me puedo conectar
   begin
     if cantidad_archivos_encontrados > 0 then
@@ -1294,7 +1345,16 @@ begin
       if FTP_BajarArchivo(dirFTP_Server, CD_ListaNovedades_NombreArchivo.AsString) then
         memoLog.Lines.Add(getFechayHoraString+' - Archivo '+CD_ListaNovedades_NombreArchivo.AsString+' descargado con exito')
       else
+      begin
         memoLog.Lines.Add(getFechayHoraString+' - Error al descargar el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
+        memoLog.Lines.Add('--------------------------------------------------------------');
+        memoLog.Lines.Add('        FIN BAJAR NOVEDADES SERVIDOR                          ');
+        memoLog.Lines.Add('--------------------------------------------------------------');
+        memoLog.Lines.Add('');
+        GrupoEditando.Enabled:= true;
+        panelListaNovedades.Enabled:= true;
+        exit;
+      end;
       CD_ListaNovedades.Next;
     end;
   end;
@@ -1304,13 +1364,18 @@ begin
   memoLog.Lines.Add('');
   GrupoEditando.Enabled:= true;
   panelListaNovedades.Enabled:= true;
+  resultado_BajarNovedades:= true;
 end;
 
 //procesar los archivos descargados del servidor FTP
 procedure TFPrincipal.procesarNovedadesServer;
 begin
+  resultado_ProcesarNovedades:= false;
   if CD_ListaNovedades.IsEmpty then
+  begin
+    resultado_ProcesarNovedades:= true;  
     exit;
+  end;
 
   panelContenedor.Enabled:= false;
   GrupoEditando.Enabled:= false;
@@ -1377,6 +1442,7 @@ begin
   GrupoEditando.Enabled:= true;
   panelContenedor.Enabled:= true;
   panelListaNovedades.Enabled:= true;
+  resultado_ProcesarNovedades:= true;
 end;
 
 //Actualizo la base local con el archivo descargado del servidor FTP y que se pasa como parametro
@@ -1473,7 +1539,6 @@ begin
 
                       end;
                     end;
-                    //ShowMessage();
                     ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= fechaDateTime;
                   end
                   else //si es cualquier otro tipo de campo
@@ -1579,6 +1644,7 @@ procedure TFPrincipal.bajarNovedadesClientes;
 var
   cantidad_archivos_encontrados: integer;
 begin
+  resultado_ProcesarNovedades:= false;
   ponerTodoEnCero;
   GrupoEditando.Enabled:= false;
   pBar_Ftp.Position:= 0;
@@ -1613,7 +1679,16 @@ begin
       if FTP_BajarArchivo(dirFTP_Cliente, CD_ListaNovedades_NombreArchivo.AsString) then
         memoLog.Lines.Add(getFechayHoraString+' - Archivo '+CD_ListaNovedades_NombreArchivo.AsString+' descargado con exito')
       else
+      begin
         memoLog.Lines.Add(getFechayHoraString+' - Error al descargar el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
+        memoLog.Lines.Add('--------------------------------------------------------------');
+        memoLog.Lines.Add('        FIN BAJAR NOVEDADES CLIENTES                          ');
+        memoLog.Lines.Add('--------------------------------------------------------------');
+        memoLog.Lines.Add('');
+        GrupoEditando.Enabled:= true;
+        panelListaNovedades.Enabled:= true;
+        exit;
+      end;
       CD_ListaNovedades.Next;
     end;
   end;
@@ -1623,6 +1698,7 @@ begin
   memoLog.Lines.Add('');
   GrupoEditando.Enabled:= true;
   panelListaNovedades.Enabled:= true;
+  resultado_ProcesarNovedades:= true; //indico que se bajaron todos los archivos con exito
 end;
 
 //proceso los archivos de novedades de los clientes que descargue del servidor FTP
@@ -1630,8 +1706,12 @@ procedure TFPrincipal.procesarNovedadesClientes;
 var
   id_cliente: integer;
 begin
+  resultado_ProcesarNovedades:= false;
   if CD_ListaNovedades.IsEmpty then
+  begin
+    resultado_ProcesarNovedades:= true;
     exit;
+  end;
 
   panelContenedor.Enabled:= false;
   GrupoEditando.Enabled:= false;
@@ -1702,6 +1782,7 @@ begin
   GrupoEditando.Enabled:= true;
   panelContenedor.Enabled:= true;
   panelListaNovedades.Enabled:= true;
+  resultado_ProcesarNovedades:= true;
 end;
 
 //Actualizar Base de datos del servidor
@@ -1820,6 +1901,7 @@ procedure TFPrincipal.subirNovedadesServer;
 var
   archivo: string;
 begin
+  resultado_SubirNovedades:= false;
   ponerTodoEnCero;
   GrupoEditando.Enabled:= false;
   pBar_Ftp.Position:= 0;
@@ -1841,6 +1923,7 @@ begin
   //si no se encontraron novedades no hago nada y salgo
   if ZQ_NovedadesServerCantCOUNT.AsInteger = 0 then
   begin
+    resultado_SubirNovedades:= true;
     memoLog.Lines.Add(getFechayHoraString+' - No hay Novedades para Subir');
     memoLog.Lines.Add('--------------------------------------------------------------');
     memoLog.Lines.Add('        FIN SUBIR NOVEDADES SERVIDOR                          ');
@@ -1871,7 +1954,10 @@ begin
     memoLog.Lines.Add(getFechayHoraString+' - Guardando Lote Sincronizacion '+IntToStr(nserie_server));
     //comienzo el guardado del lote de sincronizacion
     if guardar_lote(archivo) then //si el lote se guardo correctamente
-      memoLog.Lines.Add(getFechayHoraString+' - Fin Guardar Lote Sincronizacion '+IntToStr(nserie_server))
+    begin
+      resultado_SubirNovedades:= true;
+      memoLog.Lines.Add(getFechayHoraString+' - Fin Guardar Lote Sincronizacion '+IntToStr(nserie_server));
+    end
     else //si no pude guardar el lote entonces borro el archivo que subi al servidor
     begin
       memoLog.Lines.Add(getFechayHoraString+' - Error en Guardar Lote Sincronizacion '+IntToStr(nserie_server));
@@ -1894,6 +1980,16 @@ begin
 end;
 
 
+procedure TFPrincipal.popUpItemSalirClick(Sender: TObject);
+begin
+  btnSalir.Click;
+end;
+
+
+procedure TFPrincipal.popUpItemMostrarOcultarClick(Sender: TObject);
+begin
+  Visible:= not Visible;
+end;
 
 end.
 
