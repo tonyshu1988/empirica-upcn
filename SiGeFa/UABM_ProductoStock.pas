@@ -8,7 +8,8 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZStoredProcedure, ZSqlUpdate,
   ZDataset, EKDBGrid, EKOrdenarGrilla, EKBusquedaAvanzada, Menus,
   EKListadoSQL, DBClient, UBuscarProducto, ZSqlProcessor, ActnList,
-  XPStyleActnCtrls, ActnMan, StdCtrls, EKDbSuma;
+  XPStyleActnCtrls, ActnMan, StdCtrls, EKDbSuma, QRCtrls, QuickRpt,
+  EKVistaPreviaQR;
 
 type
   TFABM_ProductoStock = class(TForm)
@@ -111,6 +112,41 @@ type
     ZQ_StockCOLOR: TStringField;
     ZQ_StockID_SUCURSAL: TIntegerField;
     btnExcel: TdxBarLargeButton;
+    RepProductoStock: TQuickRep;
+    QRBand9: TQRBand;
+    QRDBLogo: TQRDBImage;
+    QRLblTituloListado: TQRLabel;
+    RepProductoStock_Subtitulo: TQRLabel;
+    RepProductoStock_Titulo: TQRLabel;
+    QRBand10: TQRBand;
+    QRDBText19: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRBand11: TQRBand;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand12: TQRBand;
+    QRExpr18: TQRExpr;
+    TitleBand2: TQRBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    ColumnHeaderBand2: TQRBand;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRDBText6: TQRDBText;
+    QRLabel6: TQRLabel;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRLabel1: TQRLabel;
+    QRLabel7: TQRLabel;
+    EKVistaPreviaQR1: TEKVistaPreviaQR;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnGuardarClick(Sender: TObject);
@@ -145,6 +181,7 @@ type
     procedure validarSucursal(Sender: TField);
     procedure validarPermisosUsuario;
     procedure btnExcelClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -709,6 +746,17 @@ procedure TFABM_ProductoStock.btnExcelClick(Sender: TObject);
 begin
   if not ZQ_Stock.IsEmpty then
     dm.ExportarEXCEL(DBGridStock);
+end;
+
+procedure TFABM_ProductoStock.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_Stock.IsEmpty then
+  exit;
+
+
+DM.VariablesReportes(RepProductoStock);
+QRLabelCritBusqueda.Caption := EKBuscarStock.ParametrosBuscados;
+EKVistaPreviaQR1.VistaPrevia;
 end;
 
 end.
