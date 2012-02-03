@@ -11,14 +11,56 @@ uses
 
 const
   WM_SYSTRAY = WM_USER + 299;
+  NIF_INFO = $10;
+  NIF_MESSAGE = 1;
+  NIF_ICON = 2;
+  NOTIFYICON_VERSION = 3;
+  NIF_TIP = 4;
+  NIM_SETVERSION = $00000004;
+  NIM_SETFOCUS = $00000003;
+  NIIF_INFO = $00000001;
+  NIIF_WARNING = $00000002;
+  NIIF_ERROR = $00000003;
+  NIN_BALLOONSHOW = WM_USER + 2;
+  NIN_BALLOONHIDE = WM_USER + 3;
+  NIN_BALLOONTIMEOUT = WM_USER + 4;
+  NIN_BALLOONUSERCLICK = WM_USER + 5;
+  NIN_SELECT = WM_USER + 0;
+  NINF_KEY = $1;
+  NIN_KEYSELECT = NIN_SELECT or NINF_KEY;
+  TRAY_CALLBACK = WM_USER + $7258;
 
 type
   TSysTrayHint = string[63];
 
+type
+  PNewNotifyIconData = ^TNewNotifyIconData;
+  TDUMMYUNIONNAME    = record
+    case Integer of
+      0: (uTimeout: UINT);
+      1: (uVersion: UINT);
+  end;
+
+  TNewNotifyIconData = record
+    cbSize: DWORD;
+    Wnd: HWND;
+    uID: UINT;
+    uFlags: UINT;
+    uCallbackMessage: UINT;
+    hIcon: HICON;
+    szTip: array [0..127] of Char;
+    dwState: DWORD;
+    dwStateMask: DWORD;
+    szInfo: array [0..255] of Char;
+    DUMMYUNIONNAME: TDUMMYUNIONNAME; 
+    szInfoTitle: array [0..63] of Char;
+    dwInfoFlags: DWORD;   
+  end;
+
   TEKIconizacion = class(TComponent)
   private
     FWindowHandle: HWND;
-    FIconData: TNotifyIconData;
+    FIconData: TNewNotifyIconData;
     FOnMouseDown: TMouseEvent;
     FOnMouseMove: TMouseMoveEvent;
     FOnMouseUp: TMouseEvent;
@@ -28,27 +70,26 @@ type
     NT351: Boolean;
     FVisible: Boolean;
     FIcon: TIcon;
-    function GetHint: TSysTrayHint;
+    function  GetHint: TSysTrayHint;
     procedure SetHint(const Value: TSysTrayHint);
     procedure WndProc(var Msg: TMessage);
-    function GetIconHandle: hIcon;
+    function  GetIconHandle: hIcon;
     procedure SetPopupMenu(Value: TPopupMenu);
     procedure SetVisible(const Value: Boolean);
-    function IsIconStored: Boolean;
+    function  IsIconStored: Boolean;
     procedure SetIcon(const Value: TIcon);
     procedure IconChanged(Sender: TObject);
   protected
-    procedure MouseDown(Button: TMouseButton; Shift: TShiftState;
-      X, Y: Integer); dynamic;
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); dynamic;
     procedure MouseMove(Shift: TShiftState; X, Y: Integer); dynamic;
-    procedure MouseUp(Button: TMouseButton; Shift: TShiftState;
-      X, Y: Integer); dynamic;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); dynamic;
     procedure Click; dynamic;
     procedure DblClick; dynamic;
     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
     constructor Create(aOwner: TComponent); override;
-    destructor Destroy; override;
+    destructor  Destroy; override;
+    procedure mostrarGlobo(titulo : string; contenido : string);
   published
     property Visible: Boolean read FVisible write SetVisible;
     property PopupMenu: TPopupMenu read FPopupMenu write SetPopupMenu;
@@ -81,6 +122,7 @@ begin
   FWindowHandle := AllocateHWnd(WndProc);
 end;
 
+
 destructor TEKIconizacion.Destroy;
 begin
   Visible:= False;
@@ -88,6 +130,7 @@ begin
   FIcon.Free;
   inherited;
 end;
+
 
 procedure TEKIconizacion.WndProc(var Msg: TMessage);
 var
@@ -274,6 +317,24 @@ procedure TEKIconizacion.IconChanged(Sender: TObject);
 begin
   fIconData.hIcon:= GetIconHandle;
   Shell_NotifyIcon(NIM_Modify, @FIconData);
+end;
+
+
+procedure TEKIconizacion.mostrarGlobo(titulo, contenido: string);
+var
+  TipInfo, TipTitle: string;
+begin
+  FIconData.cbSize := SizeOf(FIconData);
+  FIconData.uFlags := NIF_INFO;
+  TipInfo:= contenido;
+  strPLCopy(FIconData.szInfo, TipInfo, SizeOf(FIconData.szInfo) - 1);
+  TipTitle := titulo;
+  strPLCopy(FIconData.szInfoTitle, TipTitle, SizeOf(FIconData.szInfoTitle) - 1);
+  FIconData.dwInfoFlags := NIIF_INFO;
+  FIconData.DUMMYUNIONNAME.uTimeout := 2;
+  Shell_NotifyIcon(NIM_MODIFY, @FIconData);
+  FIconData.DUMMYUNIONNAME.uVersion := NOTIFYICON_VERSION;
+  Shell_NotifyIcon(NIM_SETVERSION, @FIconData);
 end;
 
 end.
