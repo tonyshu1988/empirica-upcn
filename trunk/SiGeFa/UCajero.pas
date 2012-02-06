@@ -672,7 +672,7 @@ var
   coefPrecio1,coefPrecio2,coefPrecio3,coefPrecio4,coefPrecio5:double;
   IdProd:String;
   cliente,IdVendedor,cajero,IDClienteIVA,idSucursal:Integer;
-  modoCargaPrevia:Boolean;
+  modoCargaPrevia,borrarVendedor:Boolean;
   importeVenta,importeIF:Double;
   permitirOnChangeFPAGO: boolean;
   ctaPorDefecto:Integer;
@@ -904,6 +904,10 @@ begin
   ctaPorDefecto:=-1;
   if not(dm.ZQ_Configuracion_VariablesNUMERO.IsNull) then
       ctaPorDefecto:=dm.ZQ_Configuracion_VariablesNUMERO.AsInteger;
+
+  dm.ZQ_Configuracion_Variables.Locate('CLAVE','borrarVendedor',[]);
+  borrarVendedor:= dm.ZQ_Configuracion_VariablesTEXTO.AsString = 'SI';
+
   modoLecturaProd();
   PConfirmarVenta.Visible:=False;
   DM.ZQ_Sucursal.Close;
@@ -1275,7 +1279,8 @@ begin
     end;
 
  if ((not(ZQ_Productos.IsEmpty))and(CD_DetalleFacturaCANTIDAD.AsFloat>0)) then
-  if (ZQ_ProductosSTOCK_ACTUAL.AsFloat>=CD_DetalleFacturaCANTIDAD.AsFloat) then
+
+  if ((ZQ_ProductosLLEVAR_STOCK.AsString<>'S')or(ZQ_ProductosSTOCK_ACTUAL.AsFloat>=CD_DetalleFacturaCANTIDAD.AsFloat)) then
    begin
     CD_DetalleFacturaIMPORTE_VENTA.AsFloat:=CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
     CD_DetalleFacturaIMPORTE_IVA.AsFloat:=CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
@@ -1633,7 +1638,8 @@ begin
           crearComprobante();
           cargarClientePorDefecto();
           // Mantengo el vendedor dpes de una venta
-          IdVendedor:=vendedor;
+          if not(borrarVendedor) then
+             IdVendedor:=vendedor;
           CD_ComprobanteID_VENDEDOR.Value:=IdVendedor;
           Result:=True;
         end;

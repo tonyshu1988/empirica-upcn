@@ -942,7 +942,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   end
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
-    SortedFields = 'FECHA'
+    SortedFields = 'FECHA;CODIGO'
     SortType = stDescending
     AfterScroll = ZQ_ComprobanteAfterScroll
     SQL.Strings = (
@@ -975,9 +975,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
-        'nto_venta,c.numero_cpb')
+        'nto_venta,c.numero_cpb'
+      'order by c.codigo ASC')
     Params = <>
-    IndexFieldNames = 'FECHA Desc'
+    IndexFieldNames = 'FECHA Desc;CODIGO Desc'
     Left = 282
     Top = 128
     object ZQ_ComprobanteCODIGO: TStringField
@@ -1373,7 +1374,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
-        'nto_venta,c.numero_cpb')
+        'nto_venta,c.numero_cpb'
+      'order by c.codigo ASC')
     SQL_Select.Strings = (
       
         'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
@@ -1407,7 +1409,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
-        'nto_venta,c.numero_cpb')
+        'nto_venta,c.numero_cpb'
+      'order by c.codigo ASC')
     UsarWhereOriginal = EK_Con_Where
     Left = 96
     Top = 95
