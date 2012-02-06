@@ -1,6 +1,6 @@
 object FConfiguracion: TFConfiguracion
-  Left = 283
-  Top = 52
+  Left = 324
+  Top = 196
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Configuraci'#243'n Sistema'
@@ -536,14 +536,9 @@ object FConfiguracion: TFConfiguracion
       TabOrder = 1
     end
   end
-  object EKInicio: TEKIni
-    Archivo = 'configSincro.ini'
-    Left = 32
-    Top = 16
-  end
   object OpenDialog: TOpenDialog
     Filter = 'InterBase Databases (*.GDB)|*.gdb|All Files (*.*)|*.*'
-    Left = 32
+    Left = 64
     Top = 69
   end
   object ZQ_VerificarBase: TZQuery
@@ -552,7 +547,7 @@ object FConfiguracion: TFConfiguracion
       'select first 1 id_comprobante'
       'from comprobante')
     Params = <>
-    Left = 32
+    Left = 64
     Top = 128
     object ZQ_VerificarBaseID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'

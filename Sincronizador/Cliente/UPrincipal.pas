@@ -45,7 +45,6 @@ const
 type
   TFPrincipal = class(TForm)
     ZQ_ActualizarBase: TZQuery;
-    EKInicio: TEKIni;
     panelContenedor: TPanel;
     panelAbajo: TPanel;
     Timer: TTimer;
@@ -262,8 +261,8 @@ type
     function  getFechayHoraString: string;
     function  getFechayHora: TDateTime;    
     procedure guardarArchivoLog();
-    function conectarDBLectura(): boolean;
-    function conectarDBEscritura(): boolean;
+    function  conectarDBLectura(): boolean;
+    function  conectarDBEscritura(): boolean;
     procedure configGrillas(opcion: integer); //0 = Cargar configuracion; 1 = Guardar configuracion
     procedure FormActivate(Sender: TObject);
     procedure ponerTodoEnCero();
@@ -310,6 +309,7 @@ type
     function  actualizar_base_server(id_cliente: integer; archivo: string):boolean;
     procedure popUpItemSalirClick(Sender: TObject);
     procedure popUpItemMostrarOcultarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
   public
@@ -459,6 +459,7 @@ end;
 //OnCreate
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
+//  ShowMessage('create');
   estado_sincronizando:= false;
   configGrillas(0); //cargo la config de las grillas
 
@@ -479,6 +480,7 @@ begin
     end;
   end;
 
+//  Application.ProcessMessages;
   cargarIni;
 
   dm.ConexionLectura.Disconnect;
@@ -498,7 +500,7 @@ begin
     Visible:= False;
     Application.ShowMainForm:= False;
     dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Iniciando sincronizador, doble click para maximizar.');
-  end
+  end;
 end;
 
 //OnClose
@@ -515,29 +517,35 @@ begin
   panelTitulo.SetFocus;
 end;
 
+procedure TFPrincipal.FormShow(Sender: TObject);
+begin
+//
+end;
+
 //Cargar los datos del archivo ini
 procedure TFPrincipal.cargarIni();
 begin
-  EKInicio.abrir;
+//  Application.ProcessMessages;
+  dm.EKInicio.abrir;
   //Cargo la configuracion general
-  ini_minimizar:= EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_MINIMIZADO');
-  ini_windows:= EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_CON_WINDOWS');
+  ini_minimizar:= dm.EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_MINIMIZADO');
+  ini_windows:= dm.EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_CON_WINDOWS');
 
-  modo:= EKInicio.Ini.ReadString('SINCRONIZADOR', 'MODO', 'CLIENTE'); //cargo el modo, si no esta por defecto es CLIENTE
+  modo:= dm.EKInicio.Ini.ReadString('SINCRONIZADOR', 'MODO', 'CLIENTE'); //cargo el modo, si no esta por defecto es CLIENTE
 
-  password_configuracion:= EKInicio.Desencripta(EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
+  password_configuracion:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
 
-  db_host:= EKInicio.Ini.ReadString('BASE', 'DB_HOST', '');
-  db_name:= EKInicio.Ini.ReadString('BASE', 'DB_NAME', '');
-  db_user:= EKInicio.Desencripta(EKInicio.Ini.ReadString('BASE', 'DB_USER', ''));
-  db_pass:= EKInicio.Desencripta(EKInicio.Ini.ReadString('BASE', 'DB_PASS', ''));
+  db_host:= dm.EKInicio.Ini.ReadString('BASE', 'DB_HOST', '');
+  db_name:= dm.EKInicio.Ini.ReadString('BASE', 'DB_NAME', '');
+  db_user:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('BASE', 'DB_USER', ''));
+  db_pass:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('BASE', 'DB_PASS', ''));
 
-  ftp_host:= EKInicio.Ini.ReadString('FTP', 'FTP_HOST','');
-  ftp_user:= EKInicio.Desencripta(EKInicio.Ini.ReadString('FTP', 'FTP_USER', ''));
-  ftp_pass:= EKInicio.Desencripta(EKInicio.Ini.ReadString('FTP', 'FTP_PASS', ''));
+  ftp_host:= dm.EKInicio.Ini.ReadString('FTP', 'FTP_HOST','');
+  ftp_user:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('FTP', 'FTP_USER', ''));
+  ftp_pass:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('FTP', 'FTP_PASS', ''));
 
-  dirFTP_Server:= EKInicio.Ini.ReadString('FTP', 'FTP_DIR_SERVER', '');
-  dirFTP_Cliente:= EKInicio.Ini.ReadString('FTP', 'FTP_DIR_PUBLIC', '');
+  dirFTP_Server:= dm.EKInicio.Ini.ReadString('FTP', 'FTP_DIR_SERVER', '');
+  dirFTP_Cliente:= dm.EKInicio.Ini.ReadString('FTP', 'FTP_DIR_PUBLIC', '');
 
   dirLocal:= dirAplica+'Archivos\';
   if not DirectoryExists(dirLocal) then
@@ -547,8 +555,8 @@ begin
   if not DirectoryExists(dirLog) then
     CreateDir(dirLog);
 
-  archivo_cliente:= EKInicio.Ini.ReadString('FILE', 'FILE_UPLOAD', 'sucursal_');;
-  archivo_server:= EKInicio.Ini.ReadString('FILE', 'FILE_DOWNLOAD', 'server_');;
+  archivo_cliente:= dm.EKInicio.Ini.ReadString('FILE', 'FILE_UPLOAD', 'sucursal_');;
+  archivo_server:= dm.EKInicio.Ini.ReadString('FILE', 'FILE_DOWNLOAD', 'server_');;
 
   //configuro base
   DM.ConexionLectura.HostName:= db_host;
@@ -568,13 +576,13 @@ begin
   DM.IdFTP.Password:= ftp_pass;
 
   //configuro los dias en que se sincronizq
-  lunes:= EKInicio.Ini.ReadInteger('CRONOGRAMA', 'LUNES', -1);
-  martes:= EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MARTES', -1);
-  miercoles:= EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MIERCOLES', -1);
-  jueves:= EKInicio.Ini.ReadInteger('CRONOGRAMA', 'JUEVES', -1);
-  viernes:= EKInicio.Ini.ReadInteger('CRONOGRAMA', 'VIERNES', -1);
-  sabado:= EKInicio.Ini.ReadInteger('CRONOGRAMA', 'SABADO', -1);
-  domingo:= EKInicio.Ini.ReadInteger('CRONOGRAMA', 'DOMINGO', -1);
+  lunes:= dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'LUNES', -1);
+  martes:= dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MARTES', -1);
+  miercoles:= dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MIERCOLES', -1);
+  jueves:= dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'JUEVES', -1);
+  viernes:= dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'VIERNES', -1);
+  sabado:= dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'SABADO', -1);
+  domingo:= dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'DOMINGO', -1);
 
   //obtengo el numero del dia de hoy
   dia_hoy:= DayOfTheWeek(getFechayHora);
@@ -585,11 +593,13 @@ begin
     Timer.Enabled:= true;
 
   //configuro el timmer con el intervalo de la configuracion
-  intervalo:= EKInicio.Ini.ReadInteger('CRONOGRAMA', 'HORA', 1)*3600 + EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MINUTOS', 0)*60;
+  intervalo:= dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'HORA', 1)*3600 + dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MINUTOS', 0)*60;
   tiempo_restante:= intervalo;
   lblTiempoRestante.Caption:= FormatDateTime('hh:nn:ss', tiempo_restante/SecsPerDay);
 
-  EKInicio.cerrar;
+  dm.EKInicio.cerrar;
+//  Application.ProcessMessages;
+
   lblTituloSincro.Caption:= db_name;
   FPrincipal.Caption:= 'Sincronizador en Modo '+modo;
   Application.Title := 'Sincronizador '+modo;
@@ -1536,7 +1546,6 @@ begin
                         fechaString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
                         fechaDateTime:= EncodeDateTime(StrToInt(Copy(fechaString, 1, 4)),StrToInt(Copy(fechaString, 6, 2)),StrToInt(Copy(fechaString, 9, 2)),
                         StrToInt(Copy(fechaString, 12, 2)),StrToInt(Copy(fechaString, 15, 2)),StrToInt(Copy(fechaString, 18, 2)),StrToInt(Copy(fechaString, 21, 4)));
-
                       end;
                     end;
                     ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= fechaDateTime;
@@ -1990,6 +1999,8 @@ procedure TFPrincipal.popUpItemMostrarOcultarClick(Sender: TObject);
 begin
   Visible:= not Visible;
 end;
+
+
 
 end.
 

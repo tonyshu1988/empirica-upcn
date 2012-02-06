@@ -5,7 +5,8 @@ interface
 uses
   Forms,SysUtils, Classes, ZConnection, ImgList, Controls, EKModelo,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, WinSkinData,
-  IdExplicitTLSClientServerBase, IdFTP, Graphics, MidasLib, EKIconizacion;
+  IdExplicitTLSClientServerBase, IdFTP, Graphics, MidasLib, EKIconizacion,
+  EKIni;
 
 type
   TDM = class(TDataModule)
@@ -17,6 +18,7 @@ type
     ConexionEscritura: TZConnection;
     ModeloEscritura: TEKModeloTransaccion;
     EKIconizar: TEKIconizacion;
+    EKInicio: TEKIni;
     procedure IdFTPWork(ASender: TObject; AWorkMode: TWorkMode;
       AWorkCount: Int64);
     procedure EKIconizarDblClick(Sender: TObject);

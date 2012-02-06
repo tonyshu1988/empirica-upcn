@@ -47,7 +47,6 @@ type
     editDB_User: TEdit;
     Label11: TLabel;
     editDB_Pass: TEdit;
-    EKInicio: TEKIni;
     CheckBoxSabado: TCheckBox;
     Label12: TLabel;
     editFILE_Upload: TEdit;
@@ -67,7 +66,6 @@ type
     CheckBoxWindows: TCheckBox;
     procedure btnCargarIniClick(Sender: TObject);
     procedure btnCancelarYSalirClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure btnGuardarYSalirClick(Sender: TObject);
     procedure cargarIni();
     procedure editHoraExit(Sender: TObject);
@@ -76,6 +74,7 @@ type
     procedure Panel1Click(Sender: TObject);
     function verificarConexionDB(): boolean;
     function verificarBaseCliente(): boolean;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -120,7 +119,7 @@ end;
 
 procedure TFConfiguracion.btnCargarIniClick(Sender: TObject);
 begin
-  memoConfiguracion.Lines.LoadFromFile(pchar(EKInicio.Path+EKInicio.Archivo));
+  memoConfiguracion.Lines.LoadFromFile(pchar(dm.EKInicio.Path+dm.EKInicio.Archivo));
   cargarIni;
 end;
 
@@ -128,13 +127,6 @@ end;
 procedure TFConfiguracion.btnCancelarYSalirClick(Sender: TObject);
 begin
   close;
-end;
-
-
-procedure TFConfiguracion.FormShow(Sender: TObject);
-begin
-  memoConfiguracion.Lines.LoadFromFile(pchar(EKInicio.Path+EKInicio.Archivo));
-  cargarIni;
 end;
 
 
@@ -196,87 +188,87 @@ begin
     exit;
   end;
 
-  EKInicio.abrir;
+  dm.EKInicio.abrir;
 
   //Guardo el modo de funcionamiento del sistema CLIENTE o SERVIDOR
   if RadioGroupModo.ItemIndex = 0 then
-    EKInicio.Ini.WriteString('SINCRONIZADOR', 'MODO', modo_cliente)
+    dm.EKInicio.Ini.WriteString('SINCRONIZADOR', 'MODO', modo_cliente)
   else
-    EKInicio.Ini.WriteString('SINCRONIZADOR', 'MODO', modo_servidor);
+    dm.EKInicio.Ini.WriteString('SINCRONIZADOR', 'MODO', modo_servidor);
 
   //Guardo la clave de ingreso a la pantalla de configuracion
-  EKInicio.Ini.WriteString('SINCRONIZADOR', 'CONFIG_PASS', EKInicio.Encripta(editConfig_Pass.Text));
+  dm.EKInicio.Ini.WriteString('SINCRONIZADOR', 'CONFIG_PASS', dm.EKInicio.Encripta(editConfig_Pass.Text));
 
   //Inicializar Minimizado
   if CheckBoxMinimizar.Checked then
-    EKInicio.Ini.WriteString('GENERAL', 'INICIAR_MINIMIZADO', 'SI')
+    dm.EKInicio.Ini.WriteString('GENERAL', 'INICIAR_MINIMIZADO', 'SI')
   else
-    EKInicio.Ini.DeleteKey('GENERAL', 'INICIAR_MINIMIZADO');
+    dm.EKInicio.Ini.DeleteKey('GENERAL', 'INICIAR_MINIMIZADO');
 
   //Inicializar con windows
   if CheckBoxWindows.Checked then
-    EKInicio.Ini.WriteString('GENERAL', 'INICIAR_CON_WINDOWS', 'SI')
+    dm.EKInicio.Ini.WriteString('GENERAL', 'INICIAR_CON_WINDOWS', 'SI')
   else
-    EKInicio.Ini.DeleteKey('GENERAL', 'INICIAR_CON_WINDOWS');
+    dm.EKInicio.Ini.DeleteKey('GENERAL', 'INICIAR_CON_WINDOWS');
 
   //Guardo los datos de la base de datos
-  EKInicio.Ini.WriteString('BASE', 'DB_HOST', editDB_Host.Text);
-  EKInicio.Ini.WriteString('BASE', 'DB_NAME', editDB_Name.Text);
-  EKInicio.Ini.WriteString('BASE', 'DB_USER', EKInicio.Encripta(editDB_User.Text));
-  EKInicio.Ini.WriteString('BASE', 'DB_PASS', EKInicio.Encripta(editDB_Pass.Text));
+  dm.EKInicio.Ini.WriteString('BASE', 'DB_HOST', editDB_Host.Text);
+  dm.EKInicio.Ini.WriteString('BASE', 'DB_NAME', editDB_Name.Text);
+  dm.EKInicio.Ini.WriteString('BASE', 'DB_USER', dm.EKInicio.Encripta(editDB_User.Text));
+  dm.EKInicio.Ini.WriteString('BASE', 'DB_PASS', dm.EKInicio.Encripta(editDB_Pass.Text));
 
   //Guardo los datos del servidor ftp
-  EKInicio.Ini.WriteString('FTP', 'FTP_HOST', editFTP_Host.Text);
-  EKInicio.Ini.WriteString('FTP', 'FTP_USER', EKInicio.Encripta(editFTP_User.Text));
-  EKInicio.Ini.WriteString('FTP', 'FTP_PASS', EKInicio.Encripta(editFTP_Pass.Text));
-  EKInicio.Ini.WriteString('FTP', 'FTP_DIR_SERVER', editFTP_DirServer.Text);
-  EKInicio.Ini.WriteString('FTP', 'FTP_DIR_PUBLIC', editFTP_DirPublic.Text);
+  dm.EKInicio.Ini.WriteString('FTP', 'FTP_HOST', editFTP_Host.Text);
+  dm.EKInicio.Ini.WriteString('FTP', 'FTP_USER', dm.EKInicio.Encripta(editFTP_User.Text));
+  dm.EKInicio.Ini.WriteString('FTP', 'FTP_PASS', dm.EKInicio.Encripta(editFTP_Pass.Text));
+  dm.EKInicio.Ini.WriteString('FTP', 'FTP_DIR_SERVER', editFTP_DirServer.Text);
+  dm.EKInicio.Ini.WriteString('FTP', 'FTP_DIR_PUBLIC', editFTP_DirPublic.Text);
 
   //Guardo los datos de los archivos de sincronizacion
-  EKInicio.Ini.WriteString('FILE', 'FILE_UPLOAD', editFILE_Upload.Text);
-  EKInicio.Ini.WriteString('FILE', 'FILE_DOWNLOAD', editFILE_Download.Text);
+  dm.EKInicio.Ini.WriteString('FILE', 'FILE_UPLOAD', editFILE_Upload.Text);
+  dm.EKInicio.Ini.WriteString('FILE', 'FILE_DOWNLOAD', editFILE_Download.Text);
 
   //Guardo los dias en los que se hara el backup
   if CheckBoxLunes.Checked then
-    EKInicio.Ini.WriteString('CRONOGRAMA', 'LUNES', IntToStr(LUNES))
+    dm.EKInicio.Ini.WriteString('CRONOGRAMA', 'LUNES', IntToStr(LUNES))
   else
-    EKInicio.Ini.DeleteKey('CRONOGRAMA', 'LUNES');
+    dm.EKInicio.Ini.DeleteKey('CRONOGRAMA', 'LUNES');
 
   if CheckBoxMartes.Checked then
-    EKInicio.Ini.WriteString('CRONOGRAMA', 'MARTES', IntToStr(MARTES))
+    dm.EKInicio.Ini.WriteString('CRONOGRAMA', 'MARTES', IntToStr(MARTES))
   else
-    EKInicio.Ini.DeleteKey('CRONOGRAMA', 'MARTES');
+    dm.EKInicio.Ini.DeleteKey('CRONOGRAMA', 'MARTES');
 
   if CheckBoxMiercoles.Checked then
-    EKInicio.Ini.WriteString('CRONOGRAMA', 'MIERCOLES', IntToStr(MIERCOLES))
+    dm.EKInicio.Ini.WriteString('CRONOGRAMA', 'MIERCOLES', IntToStr(MIERCOLES))
   else
-    EKInicio.Ini.DeleteKey('CRONOGRAMA', 'MIERCOLES');
+    dm.EKInicio.Ini.DeleteKey('CRONOGRAMA', 'MIERCOLES');
 
   if CheckBoxJueves.Checked then
-    EKInicio.Ini.WriteString('CRONOGRAMA', 'JUEVES', IntToStr(JUEVES))
+    dm.EKInicio.Ini.WriteString('CRONOGRAMA', 'JUEVES', IntToStr(JUEVES))
   else
-    EKInicio.Ini.DeleteKey('CRONOGRAMA', 'JUEVES');
+    dm.EKInicio.Ini.DeleteKey('CRONOGRAMA', 'JUEVES');
 
   if CheckBoxViernes.Checked then
-    EKInicio.Ini.WriteString('CRONOGRAMA', 'VIERNES', IntToStr(VIERNES))
+    dm.EKInicio.Ini.WriteString('CRONOGRAMA', 'VIERNES', IntToStr(VIERNES))
   else
-    EKInicio.Ini.DeleteKey('CRONOGRAMA', 'VIERNES');
+    dm.EKInicio.Ini.DeleteKey('CRONOGRAMA', 'VIERNES');
 
   if CheckBoxSabado.Checked then
-    EKInicio.Ini.WriteString('CRONOGRAMA', 'SABADO', IntToStr(SABADO))
+    dm.EKInicio.Ini.WriteString('CRONOGRAMA', 'SABADO', IntToStr(SABADO))
   else
-    EKInicio.Ini.DeleteKey('CRONOGRAMA', 'SABADO');
+    dm.EKInicio.Ini.DeleteKey('CRONOGRAMA', 'SABADO');
 
   if CheckBoxDomingo.Checked then
-    EKInicio.Ini.WriteString('CRONOGRAMA', 'DOMINGO', IntToStr(DOMINGO))
+    dm.EKInicio.Ini.WriteString('CRONOGRAMA', 'DOMINGO', IntToStr(DOMINGO))
   else
-    EKInicio.Ini.DeleteKey('CRONOGRAMA', 'DOMINGO');
+    dm.EKInicio.Ini.DeleteKey('CRONOGRAMA', 'DOMINGO');
 
   //Guardo la hora y los minutos del intervalo de sincronizacion
-  EKInicio.Ini.WriteInteger('CRONOGRAMA', 'HORA', StrToInt(editHora.Text));
-  EKInicio.Ini.WriteInteger('CRONOGRAMA', 'MINUTOS', StrToInt(editMinutos.Text));
+  dm.EKInicio.Ini.WriteInteger('CRONOGRAMA', 'HORA', StrToInt(editHora.Text));
+  dm.EKInicio.Ini.WriteInteger('CRONOGRAMA', 'MINUTOS', StrToInt(editMinutos.Text));
 
-  EKInicio.cerrar;
+  dm.EKInicio.cerrar;
   FPrincipal.cargarIni;
   Close;
 end;
@@ -284,45 +276,46 @@ end;
 
 procedure TFConfiguracion.cargarIni();
 begin
-  EKInicio.abrir;
+//  Application.ProcessMessages;
+  dm.EKInicio.abrir;
 
-  CheckBoxLunes.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'LUNES');
-  CheckBoxMartes.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'MARTES');
-  CheckBoxMiercoles.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'MIERCOLES');
-  CheckBoxJueves.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'JUEVES');
-  CheckBoxViernes.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'VIERNES');
-  CheckBoxSabado.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'SABADO');
-  CheckBoxDomingo.Checked:= EKInicio.Ini.ValueExists('CRONOGRAMA', 'DOMINGO');
+  CheckBoxLunes.Checked:= dm.EKInicio.Ini.ValueExists('CRONOGRAMA', 'LUNES');
+  CheckBoxMartes.Checked:= dm.EKInicio.Ini.ValueExists('CRONOGRAMA', 'MARTES');
+  CheckBoxMiercoles.Checked:= dm.EKInicio.Ini.ValueExists('CRONOGRAMA', 'MIERCOLES');
+  CheckBoxJueves.Checked:= dm.EKInicio.Ini.ValueExists('CRONOGRAMA', 'JUEVES');
+  CheckBoxViernes.Checked:= dm.EKInicio.Ini.ValueExists('CRONOGRAMA', 'VIERNES');
+  CheckBoxSabado.Checked:= dm.EKInicio.Ini.ValueExists('CRONOGRAMA', 'SABADO');
+  CheckBoxDomingo.Checked:= dm.EKInicio.Ini.ValueExists('CRONOGRAMA', 'DOMINGO');
 
-  editHora.Text:= IntToStr(EKInicio.Ini.ReadInteger('CRONOGRAMA', 'HORA', 0));
-  editMinutos.Text:= IntToStr(EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MINUTOS', 0));
+  editHora.Text:= IntToStr(dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'HORA', 0));
+  editMinutos.Text:= IntToStr(dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MINUTOS', 0));
 
-  CheckBoxMinimizar.Checked:= EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_MINIMIZADO');
-  CheckBoxWindows.Checked:= EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_CON_WINDOWS');
+  CheckBoxMinimizar.Checked:= dm.EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_MINIMIZADO');
+  CheckBoxWindows.Checked:= dm.EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_CON_WINDOWS');
 
   //si el esta modo cliente, o todavia no se guardo el modo, lo cargo como cliente
-  if EKInicio.Ini.ReadString('SINCRONIZADOR', 'MODO', 'CLIENTE') = modo_cliente then
+  if dm.EKInicio.Ini.ReadString('SINCRONIZADOR', 'MODO', 'CLIENTE') = modo_cliente then
     RadioGroupModo.ItemIndex:= 0  //CLIENTE
   else
     RadioGroupModo.ItemIndex:= 1; //SERVIDOR
 
-  editConfig_Pass.Text:= EKInicio.Desencripta(EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
+  editConfig_Pass.Text:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
 
-  editDB_Host.Text:= EKInicio.Ini.ReadString('BASE', 'DB_HOST', '');
-  editDB_Name.Text:= EKInicio.Ini.ReadString('BASE', 'DB_NAME', '');
-  editDB_User.Text:= EKInicio.Desencripta(EKInicio.Ini.ReadString('BASE', 'DB_USER', ''));
-  editDB_Pass.Text:= EKInicio.Desencripta(EKInicio.Ini.ReadString('BASE', 'DB_PASS', ''));
+  editDB_Host.Text:= dm.EKInicio.Ini.ReadString('BASE', 'DB_HOST', '');
+  editDB_Name.Text:= dm.EKInicio.Ini.ReadString('BASE', 'DB_NAME', '');
+  editDB_User.Text:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('BASE', 'DB_USER', ''));
+  editDB_Pass.Text:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('BASE', 'DB_PASS', ''));
 
-  editFTP_Host.Text:= EKInicio.Ini.ReadString('FTP', 'FTP_HOST','');
-  editFTP_User.Text:= EKInicio.Desencripta(EKInicio.Ini.ReadString('FTP', 'FTP_USER', ''));
-  editFTP_Pass.Text:= EKInicio.Desencripta(EKInicio.Ini.ReadString('FTP', 'FTP_PASS', ''));
-  editFTP_DirServer.Text:= EKInicio.Ini.ReadString('FTP', 'FTP_DIR_SERVER', '');
-  editFTP_DirPublic.Text:= EKInicio.Ini.ReadString('FTP', 'FTP_DIR_PUBLIC', '');
+  editFTP_Host.Text:= dm.EKInicio.Ini.ReadString('FTP', 'FTP_HOST','');
+  editFTP_User.Text:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('FTP', 'FTP_USER', ''));
+  editFTP_Pass.Text:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('FTP', 'FTP_PASS', ''));
+  editFTP_DirServer.Text:= dm.EKInicio.Ini.ReadString('FTP', 'FTP_DIR_SERVER', '');
+  editFTP_DirPublic.Text:= dm.EKInicio.Ini.ReadString('FTP', 'FTP_DIR_PUBLIC', '');
 
-  editFILE_Upload.Text:= EKInicio.Ini.ReadString('FILE', 'FILE_UPLOAD', 'sucursal_');
-  editFILE_Download.Text:= EKInicio.Ini.ReadString('FILE', 'FILE_DOWNLOAD', 'server_');
+  editFILE_Upload.Text:= dm.EKInicio.Ini.ReadString('FILE', 'FILE_UPLOAD', 'sucursal_');
+  editFILE_Download.Text:= dm.EKInicio.Ini.ReadString('FILE', 'FILE_DOWNLOAD', 'server_');
 
-  EKInicio.cerrar;
+  dm.EKInicio.cerrar;
 end;
 
 
@@ -418,6 +411,13 @@ begin
       DM.ConexionLectura.Disconnect;
     end;
   end;
+end;
+
+
+procedure TFConfiguracion.FormShow(Sender: TObject);
+begin
+  memoConfiguracion.Lines.LoadFromFile(pchar(dm.EKInicio.Path+dm.EKInicio.Archivo));
+  cargarIni;
 end;
 
 end.

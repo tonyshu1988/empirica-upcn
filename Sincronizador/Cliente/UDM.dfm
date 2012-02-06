@@ -2,8 +2,8 @@ object DM: TDM
   OldCreateOrder = False
   Left = 458
   Top = 291
-  Height = 254
-  Width = 234
+  Height = 302
+  Width = 232
   object ConexionLectura: TZConnection
     Protocol = 'firebird-1.5'
     HostName = '127.0.0.1'
@@ -14426,5 +14426,10 @@ object DM: TDM
     OnDblClick = EKIconizarDblClick
     Left = 144
     Top = 157
+  end
+  object EKInicio: TEKIni
+    Archivo = 'configSincro.ini'
+    Left = 31
+    Top = 211
   end
 end
