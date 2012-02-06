@@ -23,7 +23,7 @@ object FEstadisticaStock: TFEstadisticaStock
     Left = 0
     Top = 0
     Width = 862
-    Height = 416
+    Height = 421
     Align = alClient
     TabOrder = 0
     object RepStock: TQuickRep
@@ -1357,7 +1357,7 @@ object FEstadisticaStock: TFEstadisticaStock
       Left = 1
       Top = 1
       Width = 860
-      Height = 392
+      Height = 397
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -1376,7 +1376,7 @@ object FEstadisticaStock: TFEstadisticaStock
           Expanded = False
           FieldName = 'COD_CORTO_PRODUCTO'
           Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Producto'
+          Title.Caption = 'C'#243'd. Corto'
           Width = 94
           Visible = True
         end
@@ -1530,7 +1530,7 @@ object FEstadisticaStock: TFEstadisticaStock
     end
     object Panel2: TPanel
       Left = 1
-      Top = 393
+      Top = 398
       Width = 860
       Height = 22
       Align = alBottom
