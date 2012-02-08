@@ -227,7 +227,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             FieldName = 'COD_CORTO_PRODUCTO'
             ReadOnly = True
             Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Producto'
+            Title.Caption = 'C'#243'd. Corto'
             Width = 94
             Visible = True
           end
@@ -2339,9 +2339,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Titulo = 'C'#243'd. Corto'
         Campo = 'cod_corto'
         Tabla = 'producto'
-        TipoCampo = EK_Numero
-        TipoCampoIndice = 6
-        TipoCampoIndiceVer = 'Desde - Hasta'
+        TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
