@@ -34,9 +34,9 @@ object FConsulta_Precios: TFConsulta_Precios
       TabOrder = 0
       object GB_Datos_Producto: TGroupBox
         Left = 1
-        Top = 209
+        Top = 221
         Width = 1012
-        Height = 329
+        Height = 317
         Align = alClient
         Caption = 'Datos Producto'
         Font.Charset = ANSI_CHARSET
@@ -48,7 +48,7 @@ object FConsulta_Precios: TFConsulta_Precios
         TabOrder = 0
         DesignSize = (
           1012
-          329)
+          317)
         object Label2: TLabel
           Left = 306
           Top = 19
@@ -116,7 +116,7 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object Label7: TLabel
           Left = 306
-          Top = 249
+          Top = 247
           Width = 121
           Height = 23
           Caption = 'Descripci'#243'n:'
@@ -129,7 +129,7 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object Label8: TLabel
           Left = 16
-          Top = 244
+          Top = 242
           Width = 93
           Height = 32
           Caption = 'Precio:'
@@ -247,7 +247,7 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object DBEdit6: TDBEdit
           Left = 16
-          Top = 276
+          Top = 274
           Width = 249
           Height = 40
           BevelInner = bvNone
@@ -266,9 +266,9 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object DBMemo1: TDBMemo
           Left = 306
-          Top = 277
+          Top = 275
           Width = 679
-          Height = 36
+          Height = 33
           Anchors = [akLeft, akTop, akBottom]
           Color = 16771302
           DataField = 'DESCRIPCION'
@@ -286,15 +286,15 @@ object FConsulta_Precios: TFConsulta_Precios
         Left = 1
         Top = 129
         Width = 1012
-        Height = 80
+        Height = 92
         Align = alTop
         TabOrder = 1
         DesignSize = (
           1012
-          80)
+          92)
         object Label1: TLabel
           Left = 355
-          Top = 10
+          Top = 15
           Width = 234
           Height = 32
           Alignment = taCenter
@@ -309,14 +309,14 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object codbarras: TEdit
           Left = 144
-          Top = 47
+          Top = 48
           Width = 697
-          Height = 27
+          Height = 28
           Anchors = [akLeft, akRight, akBottom]
           Color = 11534037
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -24
+          Font.Height = -21
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
