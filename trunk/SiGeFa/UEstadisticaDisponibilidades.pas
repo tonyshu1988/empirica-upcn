@@ -48,12 +48,12 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
-    Panel1: TPanel;
-    Panel2: TPanel;
+    PanelTituloSaldo: TPanel;
+    PanelResumenSaldo: TPanel;
     lblSaldo_Total: TLabel;
     lblSaldo_Encabezado2: TLabel;
     lblSaldo_Encabezado1: TLabel;
-    Panel4: TPanel;
+    PanelTituloDetalleMov: TPanel;
     DBGridEstadisticaDetMov: TDBGrid;
     EKDbSuma_Saldo: TEKDbSuma;
     RepSaldo: TQuickRep;
@@ -217,7 +217,7 @@ type
     Label1: TLabel;
     Shape1: TShape;
     lblPD_totalTransfer: TLabel;
-    Panel3: TPanel;
+    PanelResumenDetalleMov: TPanel;
     lblResumenDetalleMovimiento: TLabel;
     lblPD_totalEgreso: TLabel;
     QRLblPD_TotalEgreso: TQRLabel;
@@ -344,6 +344,15 @@ type
     QRLabel42: TQRLabel;
     QRLabel44: TQRLabel;
     QRLabel45: TQRLabel;
+    TabSheet1: TTabSheet;
+    DBGridDetalleCuentasFPago: TDBGrid;
+    PanelResumenDetalleCta: TPanel;
+    lblResumenDetalleCta: TLabel;
+    DBGridDetalleCuentas: TDBGrid;
+    PanelTituloDetalleCta: TPanel;
+    lblTituloDetalleCta2: TLabel;
+    lblTituloDetalleCta1: TLabel;
+    Splitter2: TSplitter;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -382,7 +391,7 @@ begin
   EKOrdenarGrillaDetMov.CargarConfigColumnas;
   EKOrdenarGrillaSaldos.CargarConfigColumnas;
   EKOrdenarGrillaPD_Saldo.CargarConfigColumnas;
-  EKOrdenarMovFPago.CargarConfigColumnas;  
+  EKOrdenarMovFPago.CargarConfigColumnas;
 
   PageControl.ActivePageIndex:= 0;
   dm.EKModelo.abrir(ZQ_Sucursal);
