@@ -289,6 +289,7 @@ begin
     Application.Terminate;      //usuario no tiene asignada ninguna salgo del sistema
   end;
 
+  dm.buscarSucursalesVisibles;
   dm.configMail('SUCURSAL', SUCURSAL_LOGUEO);
   dm.cargarReporteSucursal(SUCURSAL_LOGUEO);
   StatusBar1.Panels[0].text:= 'SUCURSAL: '+inttostr(SUCURSAL_LOGUEO);

@@ -90,10 +90,10 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 490
+    Width = 1016
+    Height = 501
     Align = alClient
-    TabOrder = 2
+    TabOrder = 1
     object RepListaPrecios: TQuickRep
       Tag = 99
       Left = -23
@@ -240,7 +240,7 @@ object FABM_Precios: TFABM_Precios
           Size.Values = (
             52.916666666666670000
             1150.937500000000000000
-            68.791666666666670000
+            68.791666666666680000
             465.666666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -1434,7 +1434,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1669,8 +1669,8 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 19
-      Width = 1006
-      Height = 268
+      Width = 1014
+      Height = 279
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1829,6 +1829,7 @@ object FABM_Precios: TFABM_Precios
         item
           Expanded = False
           FieldName = 'COLOR'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Color'
           Width = 91
@@ -1837,6 +1838,7 @@ object FABM_Precios: TFABM_Precios
         item
           Expanded = False
           FieldName = 'NOMBRE'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Sucursal'
           Width = 100
@@ -1845,6 +1847,7 @@ object FABM_Precios: TFABM_Precios
         item
           Expanded = False
           FieldName = 'CODIGO_BARRA'
+          ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Barra'
           Visible = True
@@ -1852,8 +1855,8 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 287
-      Width = 1006
+      Top = 298
+      Width = 1014
       Height = 202
       Hint = '`'
       Align = alBottom
@@ -1861,7 +1864,7 @@ object FABM_Precios: TFABM_Precios
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 1004
+        Width = 1012
         Height = 53
         Align = alTop
         BevelOuter = bvNone
@@ -1870,7 +1873,7 @@ object FABM_Precios: TFABM_Precios
         object Label1: TLabel
           Left = 4
           Top = 4
-          Width = 996
+          Width = 1004
           Height = 13
           Align = alTop
           Caption = 'Seleccione el tipo de calculo para actualizar los precio:'
@@ -1878,7 +1881,7 @@ object FABM_Precios: TFABM_Precios
         object RadioGroupTipoUpdate: TRadioGroup
           Left = 4
           Top = 17
-          Width = 996
+          Width = 1004
           Height = 32
           Align = alClient
           Columns = 2
@@ -1893,7 +1896,7 @@ object FABM_Precios: TFABM_Precios
       object Panel2: TPanel
         Left = 1
         Top = 132
-        Width = 1004
+        Width = 1012
         Height = 69
         Align = alBottom
         BevelOuter = bvNone
@@ -1902,16 +1905,16 @@ object FABM_Precios: TFABM_Precios
         object Label5: TLabel
           Left = 4
           Top = 4
-          Width = 996
-          Height = 16
+          Width = 1004
+          Height = 13
           Align = alTop
           Caption = 'Seleccione si desea actualizar los diferentes impuestos:'
         end
         object RadioGroupImpuestos: TRadioGroup
           Left = 4
-          Top = 20
+          Top = 17
           Width = 188
-          Height = 45
+          Height = 48
           Align = alLeft
           Caption = ' Tipo  '
           Columns = 2
@@ -1924,9 +1927,9 @@ object FABM_Precios: TFABM_Precios
         end
         object GboxImpuestos: TGroupBox
           Left = 192
-          Top = 20
-          Width = 808
-          Height = 45
+          Top = 17
+          Width = 816
+          Height = 48
           Align = alClient
           Caption = ' Impuestos  '
           Enabled = False
@@ -1992,7 +1995,7 @@ object FABM_Precios: TFABM_Precios
       object Panel3: TPanel
         Left = 1
         Top = 54
-        Width = 1004
+        Width = 1012
         Height = 78
         Align = alClient
         BevelOuter = bvNone
@@ -2015,7 +2018,7 @@ object FABM_Precios: TFABM_Precios
         object GBoxIncDecImportes: TGroupBox
           Left = 189
           Top = 4
-          Width = 811
+          Width = 819
           Height = 70
           Align = alClient
           Caption = ' Precios  '
@@ -2225,7 +2228,7 @@ object FABM_Precios: TFABM_Precios
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1006
+      Width = 1014
       Height = 18
       Align = alTop
       ParentShowHint = False
@@ -2246,7 +2249,7 @@ object FABM_Precios: TFABM_Precios
         ParentFont = False
       end
       object lblModoSeleccion: TLabel
-        Left = 909
+        Left = 917
         Top = 1
         Width = 96
         Height = 16
@@ -2264,7 +2267,7 @@ object FABM_Precios: TFABM_Precios
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3714,6 +3717,11 @@ object FABM_Precios: TFABM_Precios
         DataType = ftFloat
         Name = 'PRECIO5'
         ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TIPO_UPDATE'
+        ParamType = ptInput
       end>
     StoredProcName = 'ACTUALIZAR_IMPORTES'
     Left = 264
@@ -3787,6 +3795,11 @@ object FABM_Precios: TFABM_Precios
       item
         DataType = ftFloat
         Name = 'PRECIO5'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TIPO_UPDATE'
         ParamType = ptInput
       end>
   end
