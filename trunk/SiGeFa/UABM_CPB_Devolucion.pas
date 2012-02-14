@@ -423,7 +423,7 @@ type
     editTotalFpago: TEdit;
     editSaldoFpago: TEdit;
     DBGridEditar_Fpago: TDBGrid;
-    Panel1: TPanel;
+    PanelTituloVentana: TPanel;
     lblTituloVentanaFpago: TLabel;
     ZQ_TipoFPago: TZQuery;
     ZQ_TipoFPagoID_TIPO_FORMAPAGO: TIntegerField;
@@ -901,11 +901,16 @@ begin
 
   //si el saldo de la devolucion es distinto a la forma de pago cargada
   if (abs(saldoFormaCobroPago) <> EKSuma_FPago.SumCollection[0].SumValue) then
-  begin
-    Application.MessageBox(pchar('Debe seleccionar una forma de pago, por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBGridEditar_Fpago.SetFocus;
-    exit;
-  end;
+    //aviso de esta situacion y pregunto si se quiere continuar
+    if Application.MessageBox(pchar('El Monto a abonar es diferente al Saldo de la devolución'+#13+
+                              '(Saldo: '+FloatToStr(abs(saldoFormaCobroPago))+' <> Monto: '+FloatToStr(EKSuma_FPago.SumCollection[0].SumValue)+')'+#13+
+                              '¿Desea continuar con la devolución?')
+                              ,'Atención', MB_YESNO ) = IDNO then
+    begin
+      DBGridEditar_Fpago.SetFocus;
+      exit;
+    end;
+
 
   if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante
   begin
@@ -986,12 +991,14 @@ begin
         btnEliminarFPago.Visible:= false;
         PanelEditar_FPagoInfo.Enabled:= false; //no se puede tocar la forma de pago
         DBGridEditar_Fpago.Enabled:= false; //no se puede tocar la forma de pago
-        panelNC_Vencimiento.Enabled:= true; //no se puede tocar la forma de pago
+        panelNC_Vencimiento.Enabled:= true; //se puede tocar el vencimiento
+        EKDBDateTimePicker1.SetFocus;
         lblTituloVentanaFpago.Caption:= 'NOTA DE CREDITO';
 
         ZQ_ComprobanteFECHA_VENCIMIENTO.AsDateTime:= IncDay(dm.EKModelo.FechayHora, notaCredito_diasVencimiento);
 
-        borrarCuentasIngreso;
+        borrarCuentasIngreso; //borro las cuentas de ingresos cargadas
+        //agrego una sola forma de pago por el total del credito
         if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
           ZQ_CpbFormaPago.Append
         else
@@ -1006,16 +1013,17 @@ begin
         ZQ_CpbFormaPago.Post;
       end
       else //si no es una nota de credito
-      if debito then //si es un debito
+      if debito then //y es un debito
       begin
         ZQ_Comprobante.Edit;
         ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
 
         PanelEditar_FPago.Height:= 204;
         btnEliminarFPago.Visible:= true;
-        PanelEditar_FPagoInfo.Enabled:= true; //no se puede tocar la forma de pago
-        DBGridEditar_Fpago.Enabled:= true; //no se puede tocar la forma de pago
-        panelNC_Vencimiento.Enabled:= false; //no se puede tocar la forma de pago
+        PanelEditar_FPagoInfo.Enabled:= true; //se puede tocar la forma de pago
+        DBGridEditar_Fpago.Enabled:= true; //se puede tocar la forma de pago
+        DBGridEditar_Fpago.SetFocus;
+        panelNC_Vencimiento.Enabled:= false; //no se puede tocar el vencimiento
         lblTituloVentanaFpago.Caption:= 'CARGAR FORMA DE PAGO';
         borrarCuentasEgreso;
       end;

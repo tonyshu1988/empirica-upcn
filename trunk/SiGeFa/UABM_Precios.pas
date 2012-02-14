@@ -530,6 +530,11 @@ begin
 
       ZQ_Productos.Refresh;
       DBGridProductos.Options:= DBGridProductos.Options - [dgMultiSelect];
+      btnSeleccionar.Caption:= 'Seleccionar';
+      btnSeleccionar.Hint:= 'Seleccionar de la grilla los productos a actualizar';
+      btnSeleccionar.ImageIndex:= 5;
+      lblModoSeleccion.Caption:= 'Modo selección Desactivado';
+
       DBGridProductos.SetFocus;
     end                                                 
   except
@@ -741,6 +746,8 @@ begin
   HabilitarCampos;
 
   dm.EKModelo.abrir(ZQ_Sucursal);
+  if ZQ_Sucursal.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBusquedaAvanzada1.CriteriosBusqueda.Items[0]).ItemIndex:= ZQ_Sucursal.RecNo - 1;
 
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnArchivoCancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnArchivoAceptar.Glyph);
@@ -800,6 +807,7 @@ end;
 
 procedure TFABM_Precios.ZQ_ProductosCOEF_DESCUENTOChange(Sender: TField);
 begin
+  ShowMessage( Sender.FieldName);
   if campoQueCambia <> 'COEF_GAN_DESC' then
     actualizarPrecios('COEF_DESCUENTO');
 end;
@@ -1170,7 +1178,7 @@ begin
   btnModificar.Visible:= ivNever;
   if flag = false then //oculto todos los botones de la modificacion
   begin
-    if dm.EKUsrLogin.PermisoAccion('MODIFICAR_PRECIO') then
+    if dm.EKUsrLogin.PermisoAccion('MODIFIC_PRECIO') then
     begin
       btnModificar.Visible:= ivAlways;
     end;
@@ -1245,14 +1253,15 @@ procedure TFABM_Precios.validarSucursal(Sender: TField);
 var
   i, suc_prod: integer;
 begin
-//  suc_prod:= ZQ_StockID_SUCURSAL.AsInteger; //sucursal a la que pertenece el stock del producto
+//  suc_prod:= ZQ_ProductosID_SUCURSAL.AsInteger; //sucursal a la que pertenece el precio
 //  for  i:= 0 to Length(sucursales) - 1 do //Recorro todas las sucursales del usuario seleccionado
-//  begin //si el prducto es de la sucursal en la que estoy loqueafo o el usuario tiene permiso en esa sucursal o si es administrador
+//  begin //si el prducto es de la sucursal en la que estoy loqueado o el usuario tiene permiso en esa sucursal o si es administrador
 //    if not ( (suc_prod = SUCURSAL_LOGUEO) or (suc_prod = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0) )  then
 //    begin
-//      ZQ_Stock.RevertRecord;
-//      ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal '+ZQ_StockSUCURSAL.AsString+'.'));
+//      ZQ_Productos.RevertRecord;
+//      ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal '+ZQ_ProductosNOMBRE.AsString+'.'));
 //    end;
 //  end;
 end;
+
 end.

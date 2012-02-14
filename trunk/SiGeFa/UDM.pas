@@ -77,12 +77,30 @@ type
     DS_Sucursal: TDataSource;
     ZQ_DemoSistema: TZQuery;
     ZQ_DemoSistemaRESULTADO: TIntegerField;
+    ZQ_SucursalesVisibles: TZQuery;
+    ZQ_SucursalesVisiblesID_SUCURSAL: TIntegerField;
+    ZQ_SucursalesVisiblesNOMBRE: TStringField;
+    ZQ_SucursalesVisiblesDIRECCION: TStringField;
+    ZQ_SucursalesVisiblesLOCALIDAD: TStringField;
+    ZQ_SucursalesVisiblesCODIGO_POSTAL: TStringField;
+    ZQ_SucursalesVisiblesTELEFONO: TStringField;
+    ZQ_SucursalesVisiblesEMAIL: TStringField;
+    ZQ_SucursalesVisiblesBAJA: TStringField;
+    ZQ_SucursalesVisiblesLOGO: TBlobField;
+    ZQ_SucursalesVisiblesREPORTE_TITULO: TStringField;
+    ZQ_SucursalesVisiblesREPORTE_SUBTITULO: TStringField;
+    ZQ_SucursalesVisiblesCOMPROBANTE_TITULO: TStringField;
+    ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON1: TStringField;
+    ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON2: TStringField;
+    ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON3: TStringField;
+    ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON4: TStringField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
     procedure configMail(Tipo: String; id: integer);
     procedure centrarPanel(form: TForm; panel: TPanel);
     procedure centrarPanelConAjuste(form: TForm; panel: TPanel; ajusteTop: integer);
+    procedure buscarSucursalesVisibles();
   private
     auxDecimalSeparator, auxThousandSeparator: Char;
     auxCurrencyDecimals: Integer;
@@ -423,6 +441,35 @@ procedure TDM.centrarPanelConAjuste(form: TForm; panel: TPanel; ajusteTop: integ
 begin
   panel.Left:= (screen.Width div 2)  - (panel.Width div 2);
   panel.Top:=  (screen.Height div 2) - (panel.Height div 2)-ajusteTop;
+end;
+
+
+procedure TDM.buscarSucursalesVisibles;
+var
+  i: integer;
+  where: string;
+  salir: boolean;
+begin
+  //por defecto traigo la sucursal del logueo
+  where:= 'where s.id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
+  salir:= false;
+  for  i:= 0 to Length(sucursales) - 1 do //Recorro todas las sucursales del usuario seleccionado
+  begin
+    if not salir then
+    begin
+      if (StrToInt(sucursales[i].valor) = 0) then //si tengo permisos para todas las sucursales
+      begin
+        where:= 'where s.id_sucursal <> 0';
+        salir:= true;
+      end
+      else
+        where:= ' or s.id_sucursal = '+sucursales[i].valor;
+    end;
+  end;
+
+  ZQ_SucursalesVisibles.SQL.Text:= 'select s.* from sucursal s '+where;
+  ZQ_SucursalesVisibles.Close;
+  ZQ_SucursalesVisibles.Open;
 end;
 
 end.

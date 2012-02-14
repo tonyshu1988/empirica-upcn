@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFa SPECIAL.FDB'
+    Database = 'C:\SISTEMAS\SiGeFa\Bases\SIGEFA LOPEZ.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -1824,7 +1824,7 @@ object DM: TDM
       'from configuracion_variables')
     Params = <>
     Left = 222
-    Top = 266
+    Top = 263
     object ZQ_Configuracion_VariablesCLAVE: TStringField
       FieldName = 'CLAVE'
       Required = True
@@ -1872,6 +1872,76 @@ object DM: TDM
     object ZQ_DemoSistemaRESULTADO: TIntegerField
       FieldName = 'RESULTADO'
       ReadOnly = True
+    end
+  end
+  object ZQ_SucursalesVisibles: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select s.* from sucursal s ')
+    Params = <>
+    Left = 152
+    Top = 328
+    object ZQ_SucursalesVisiblesID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
+    end
+    object ZQ_SucursalesVisiblesNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_SucursalesVisiblesDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_SucursalesVisiblesLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_SucursalesVisiblesCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_SucursalesVisiblesTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_SucursalesVisiblesEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_SucursalesVisiblesBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_SucursalesVisiblesLOGO: TBlobField
+      FieldName = 'LOGO'
+    end
+    object ZQ_SucursalesVisiblesREPORTE_TITULO: TStringField
+      FieldName = 'REPORTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalesVisiblesREPORTE_SUBTITULO: TStringField
+      FieldName = 'REPORTE_SUBTITULO'
+      Size = 50
+    end
+    object ZQ_SucursalesVisiblesCOMPROBANTE_TITULO: TStringField
+      FieldName = 'COMPROBANTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON1: TStringField
+      FieldName = 'COMPROBANTE_RENGLON1'
+      Size = 50
+    end
+    object ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON2: TStringField
+      FieldName = 'COMPROBANTE_RENGLON2'
+      Size = 50
+    end
+    object ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON3: TStringField
+      FieldName = 'COMPROBANTE_RENGLON3'
+      Size = 50
+    end
+    object ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON4: TStringField
+      FieldName = 'COMPROBANTE_RENGLON4'
+      Size = 50
     end
   end
 end
