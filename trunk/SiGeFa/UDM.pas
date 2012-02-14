@@ -459,7 +459,7 @@ begin
     begin
       if (StrToInt(sucursales[i].valor) = 0) then //si tengo permisos para todas las sucursales
       begin
-        where:= 'where s.id_sucursal <> 0';
+        where:= '';
         salir:= true;
       end
       else

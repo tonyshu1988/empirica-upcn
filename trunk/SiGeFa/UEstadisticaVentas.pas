@@ -283,20 +283,23 @@ begin
   mes:= MonthOf(dm.EKModelo.Fecha);
   anio:= YearOf(dm.EKModelo.Fecha);
 
-  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[0]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
-  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
+  //busqueda por horario
+  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[1]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
+  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[2]).Valor:= DateToStr(dm.EKModelo.Fecha);
   TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[3]).Valor:= IntToStr(30);
 
-
+  //busqueda por comprobante
+  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
   TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
 
+  //busqueda por ranking
   TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[0]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
   TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
 
-
-//Permiso para ver o no los filtros de Fiscal
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
-//  BtnFiltro_Fiscal.Click;
 end;
 
 
@@ -434,7 +437,7 @@ end;
 
 procedure TFEstadisticaVentas.btnBuscarClick(Sender: TObject);
 begin
-//FACTURACION
+  //FACTURACION
   if PageControl.ActivePage = TabFacturacion then
   begin
     EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
@@ -446,7 +449,7 @@ begin
       ZQ_Comprobante.First;
   end;
 
-  //Ventas Ranking
+  //RANKING DE VENTA
   if PageControl.ActivePage = TabRanking then
   begin
     //EKBuscarProductos.SQL_Where[0]:= Format('where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null) %s', [where]);
@@ -471,7 +474,7 @@ begin
       end;
   end;
 
-//HORARIO VENTA
+  //HORARIO VENTA
   if (PageControl.ActivePage = TabHorarioVentas) or (PageControl.ActivePage = TabHorarioGrafico) then
   begin
     lblHorarioFecha.Caption := '';
@@ -480,7 +483,7 @@ begin
 
     if  EKBuscarHorario.BuscarSinEjecutar then
     begin
-      if (EKBuscarHorario.ParametrosSeleccionados1[0] = '') or (EKBuscarHorario.ParametrosSeleccionados1[1] = '') then
+      if (EKBuscarHorario.ParametrosSeleccionados1[1] = '') or (EKBuscarHorario.ParametrosSeleccionados1[2] = '') then
       begin
         Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
@@ -495,21 +498,21 @@ begin
       end;
 
       ZP_Horario.Close;
-      if EKBuscarHorario.ParametrosSeleccionados1[2] = '' then
+      if EKBuscarHorario.ParametrosSeleccionados1[0] = '0' then
       begin
         ZP_Horario.ParamByName('ID_SUCURSAL').AsInteger:= -1;
       end
       else
       begin
-        lblHorarioSucursal.Caption:= 'Sucursal: '+EKBuscarHorario.ParametrosSelecReales1[2];
-        ZP_Horario.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(EKBuscarHorario.ParametrosSeleccionados1[2]);
+        lblHorarioSucursal.Caption:= 'Sucursal: '+EKBuscarHorario.ParametrosSelecReales1[0];
+        ZP_Horario.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(EKBuscarHorario.ParametrosSeleccionados1[0]);
       end;
-      ZP_Horario.ParamByName('fecha_desde').AsDate :=StrToDate(EKBuscarHorario.ParametrosSeleccionados1[0]);
-      ZP_Horario.ParamByName('fecha_hasta').AsDate :=StrToDate(EKBuscarHorario.ParametrosSeleccionados1[1]);
+      ZP_Horario.ParamByName('fecha_desde').AsDate :=StrToDate(EKBuscarHorario.ParametrosSeleccionados1[1]);
+      ZP_Horario.ParamByName('fecha_hasta').AsDate :=StrToDate(EKBuscarHorario.ParametrosSeleccionados1[2]);
       ZP_Horario.ParamByName('intervalo').AsInteger :=StrToInt(EKBuscarHorario.ParametrosSeleccionados1[3]);
       ZP_Horario.Open;
 
-      lblHorarioFecha.Caption:= 'Ventas desde el '+EKBuscarHorario.ParametrosSeleccionados1[0]+' al '+EKBuscarHorario.ParametrosSeleccionados1[1];
+      lblHorarioFecha.Caption:= 'Ventas desde el '+EKBuscarHorario.ParametrosSeleccionados1[1]+' al '+EKBuscarHorario.ParametrosSeleccionados1[2];
       lblHorarioIntervalo.Caption:= 'Intervalo '+EKBuscarHorario.ParametrosSeleccionados1[3]+' minutos';
 
       DBChartHorario.Title.Text[0]:= lblHorarioFecha.Caption;
