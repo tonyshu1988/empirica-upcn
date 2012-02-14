@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 207
-  Top = 74
+  Left = 262
+  Top = 126
   Width = 1020
   Height = 685
   Caption = 'Estadisticas Ventas'
@@ -23,9 +23,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 1004
-    Height = 595
-    ActivePage = TabRanking
+    Width = 1012
+    Height = 606
+    ActivePage = TabHorarioVentas
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 4
@@ -175,7 +175,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               FontSize = 12
             end
             object RepDetalleMov_Subtitulo: TQRLabel
-              Left = 438
+              Left = -77
               Top = 26
               Width = 170
               Height = 20
@@ -262,7 +262,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewPage = False
             ParentFont = False
             Size.Values = (
-              42.333333333333330000
+              42.333333333333340000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -447,7 +447,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333330000
+              82.020833333333340000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -1316,16 +1316,16 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object PanelMes: TPanel
         Left = 0
         Top = 0
-        Width = 996
-        Height = 564
+        Width = 1004
+        Height = 575
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridHorario: TDBGrid
           Left = 0
           Top = 46
-          Width = 996
-          Height = 518
+          Width = 1004
+          Height = 529
           Align = alClient
           Color = 14606012
           DataSource = DS_Horario
@@ -1376,7 +1376,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object Panel5: TPanel
           Left = 0
           Top = 0
-          Width = 996
+          Width = 1004
           Height = 46
           Align = alTop
           BevelOuter = bvNone
@@ -1385,7 +1385,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 102
+            Width = 996
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1399,7 +1399,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 120
+            Width = 996
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1413,7 +1413,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 126
+            Width = 996
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -1614,17 +1614,17 @@ object FEstadisticaVentas: TFEstadisticaVentas
       Caption = 'Ranking Ventas'
       ImageIndex = 4
       object Splitter3: TSplitter
-        Left = 631
+        Left = 639
         Top = 33
         Width = 9
-        Height = 531
+        Height = 542
         Align = alRight
         Beveled = True
       end
       object Panel4: TPanel
         Left = 0
         Top = 0
-        Width = 996
+        Width = 1004
         Height = 33
         Align = alTop
         BevelOuter = bvNone
@@ -1671,10 +1671,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
       end
       object Panel6: TPanel
-        Left = 640
+        Left = 648
         Top = 33
         Width = 356
-        Height = 531
+        Height = 542
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 1
@@ -1700,7 +1700,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object lblTotales: TLabel
           Left = 0
-          Top = 323
+          Top = 334
           Width = 356
           Height = 20
           Align = alBottom
@@ -1720,7 +1720,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object Splitter6: TSplitter
           Left = 0
-          Top = 343
+          Top = 354
           Width = 356
           Height = 9
           Cursor = crVSplit
@@ -1731,7 +1731,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Left = 0
           Top = 20
           Width = 356
-          Height = 303
+          Height = 314
           Align = alClient
           Color = 14606012
           DataSource = DS_Top20
@@ -1773,7 +1773,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object DBChart2: TDBChart
           Left = 0
-          Top = 352
+          Top = 363
           Width = 356
           Height = 179
           BackWall.Brush.Color = clWhite
@@ -1842,15 +1842,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object Panel1: TPanel
         Left = 0
         Top = 33
-        Width = 631
-        Height = 531
+        Width = 639
+        Height = 542
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 2
         object Label3: TLabel
           Left = 1
           Top = 1
-          Width = 629
+          Width = 637
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -1869,8 +1869,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object lblProdsVendidos: TLabel
           Left = 1
-          Top = 510
-          Width = 629
+          Top = 521
+          Width = 637
           Height = 20
           Align = alBottom
           Alignment = taRightJustify
@@ -1890,8 +1890,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object grillaRanking: TDBGrid
           Left = 1
           Top = 21
-          Width = 629
-          Height = 489
+          Width = 637
+          Height = 500
           Align = alClient
           Color = 14606012
           DataSource = DS_ProductosVendidos
@@ -2258,7 +2258,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Tabla = 'sucursal'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQL = DM.ZQ_SucursalesVisibles
         TipoComboSQLCampoVer = 'nombre'
         TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
@@ -2554,7 +2554,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3279,6 +3279,18 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object EKBuscarHorario: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = DM.ZQ_SucursalesVisibles
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Fecha Desde'
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
@@ -3293,18 +3305,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Sucursal
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
         TipoComboAncho = 200
         CambiarCondicion = False
