@@ -147,6 +147,23 @@ type
     QRLabel1: TQRLabel;
     QRLabel7: TQRLabel;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
+    ZQ_Sucursal: TZQuery;
+    ZQ_SucursalID_SUCURSAL: TIntegerField;
+    ZQ_SucursalNOMBRE: TStringField;
+    ZQ_SucursalDIRECCION: TStringField;
+    ZQ_SucursalLOCALIDAD: TStringField;
+    ZQ_SucursalCODIGO_POSTAL: TStringField;
+    ZQ_SucursalTELEFONO: TStringField;
+    ZQ_SucursalEMAIL: TStringField;
+    ZQ_SucursalBAJA: TStringField;
+    ZQ_SucursalLOGO: TBlobField;
+    ZQ_SucursalREPORTE_TITULO: TStringField;
+    ZQ_SucursalREPORTE_SUBTITULO: TStringField;
+    ZQ_SucursalCOMPROBANTE_TITULO: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnGuardarClick(Sender: TObject);
@@ -288,6 +305,11 @@ begin
 
   CD_Sucursal.CreateDataSet;
   CD_Producto.CreateDataSet;
+
+  ZQ_Sucursal.Close;
+  ZQ_Sucursal.Open;
+  if ZQ_Sucursal.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBuscarStock.CriteriosBusqueda.Items[13]).ItemIndex:= ZQ_Sucursal.RecNo - 1;
 end;
 
 

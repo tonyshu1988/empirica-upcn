@@ -421,6 +421,11 @@ begin
     btnCancelar.Visible:= ivAlways;
   end;
 
+  EKBusqueda.SQL_Select.Text:= 'select p.*';
+  EKBusqueda.SQL_From.Text:= 'from persona p left join persona_relacion pr on (p.id_persona = pr.id_persona)';
+  EKBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d)', [QuotedStr('S'), relacion]);
+  EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
+
   id_relacion:= relacion;
   case relacion of
   RELACION_CLIENTE: begin
@@ -430,6 +435,7 @@ begin
                     end;
   RELACION_EMPLEADO:begin
                       FBuscarPersona.Caption:= 'Buscar Empleado';
+                      EKBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d) and (pr.id_sucursal = %d)', [QuotedStr('S'), relacion, SUCURSAL_LOGUEO]);
                     end;
   RELACION_VIAJANTE:begin
                       FBuscarPersona.Caption:= 'Buscar Viejante';
@@ -438,11 +444,6 @@ begin
                       FBuscarPersona.Caption:= 'Buscar Contacto';
                     end;
   end;
-
-  EKBusqueda.SQL_Select.Text:= 'select p.*';
-  EKBusqueda.SQL_From.Text:= 'from persona p left join persona_relacion pr on (p.id_persona = pr.id_persona)';
-  EKBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d)', [QuotedStr('S'), relacion]);
-  EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
 end;
 
 

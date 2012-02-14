@@ -19,7 +19,7 @@ type
     btnEditarGrilla: TdxBarLargeButton;
     btnProcesarImportes: TdxBarLargeButton;
     btnSeleccionar: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
+    btnModificar: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
@@ -47,8 +47,6 @@ type
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     ZQ_ProductosID_PRODUCTO: TIntegerField;
     PanelEdicion: TPanel;
-    Label1: TLabel;
-    RadioGroupTipoCalculo: TRadioGroup;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_Clientes: TZQuery;
     RepListaPrecios: TQuickRep;
@@ -121,29 +119,13 @@ type
     CDSZQ_Productoscoef_ganancia: TFloatField;
     CDSZQ_Productoscod_corto: TStringField;
     QRSysData1: TQRSysData;
-    btBuscarGoogle: TdxBarLargeButton;
+    btnBuscarGoogle: TdxBarLargeButton;
     ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField;
     ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField;
     ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
-    GBoxIncDecImportes: TGroupBox;
-    Label2: TLabel;
-    Label3: TLabel;
-    LabelTipo2: TLabel;
-    LabelTipo1: TLabel;
-    EditCosto: TEdit;
-    EditVenta: TEdit;
-    GboxImpuestos: TGroupBox;
-    Label4: TLabel;
-    lblImpAdicional1: TLabel;
-    EditIVA: TEdit;
-    EditImpAdicional1: TEdit;
-    lblImpAdicional2: TLabel;
-    EditImpAdicional2: TEdit;
-    Label5: TLabel;
-    RadioGroupImpuestos: TRadioGroup;
-    btImprimirEtiquetas: TdxBarLargeButton;
+    btnImprimirEtiquetas: TdxBarLargeButton;
     ZQ_ImprimirEtiquetas: TZQuery;
     ZQ_ImprimirEtiquetasID_PRODUCTO: TIntegerField;
     ZQ_ImprimirEtiquetasCANTIDAD: TIntegerField;
@@ -155,21 +137,6 @@ type
     ZQ_ProductosPRECIO4: TFloatField;
     ZQ_ProductosPRECIO5: TFloatField;
     ZU_Productos: TZUpdateSQL;
-    lblPrecio1: TLabel;
-    EditPrecio1: TEdit;
-    lblPrecio2: TLabel;
-    EditPrecio2: TEdit;
-    lblPrecio3: TLabel;
-    EditPrecio3: TEdit;
-    lblPrecio4: TLabel;
-    EditPrecio4: TEdit;
-    lblPrecio5: TLabel;
-    EditPrecio5: TEdit;
-    LabelTipoP2: TLabel;
-    LabelTipoP1: TLabel;
-    LabelTipoP3: TLabel;
-    LabelTipoP4: TLabel;
-    LabelTipoP5: TLabel;
     ZQ_ProductosCOLOR: TStringField;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
@@ -185,7 +152,7 @@ type
     ZQ_ImprimirEtiquetasID_PRECIO: TIntegerField;
     QRlblPieDePagina: TQRLabel;
     QRLabel43: TQRLabel;
-    btExpImp: TdxBarLargeButton;
+    btnExpImp: TdxBarLargeButton;
     CD_Precios: TClientDataSet;
     PArchivoPrecios: TPanel;
     LeerCodBar: TLabel;
@@ -211,6 +178,45 @@ type
     CD_Precioscoef_descuento: TFloatField;
     CD_Preciosimpuesto_adicional1: TFloatField;
     ZQ_ActualizarPrecios: TZQuery;
+    lblModoSeleccion: TLabel;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Panel2: TPanel;
+    RadioGroupImpuestos: TRadioGroup;
+    GboxImpuestos: TGroupBox;
+    Label4: TLabel;
+    lblImpAdicional1: TLabel;
+    lblImpAdicional2: TLabel;
+    EditIVA: TEdit;
+    EditImpAdicional1: TEdit;
+    EditImpAdicional2: TEdit;
+    Label5: TLabel;
+    Panel3: TPanel;
+    RadioGroupTipoCalculo: TRadioGroup;
+    GBoxIncDecImportes: TGroupBox;
+    Label2: TLabel;
+    Label3: TLabel;
+    LabelTipo2: TLabel;
+    LabelTipo1: TLabel;
+    lblPrecio1: TLabel;
+    lblPrecio2: TLabel;
+    lblPrecio3: TLabel;
+    lblPrecio4: TLabel;
+    lblPrecio5: TLabel;
+    LabelTipoP2: TLabel;
+    LabelTipoP1: TLabel;
+    LabelTipoP3: TLabel;
+    LabelTipoP4: TLabel;
+    LabelTipoP5: TLabel;
+    EditCosto: TEdit;
+    EditVenta: TEdit;
+    EditPrecio1: TEdit;
+    EditPrecio2: TEdit;
+    EditPrecio3: TEdit;
+    EditPrecio4: TEdit;
+    EditPrecio5: TEdit;
+    RadioGroupTipoUpdate: TRadioGroup;
+    AModificar: TAction;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -224,7 +230,7 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure ZQ_ProductosCalcFields(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
-    procedure btBuscarGoogleClick(Sender: TObject);
+    procedure btnBuscarGoogleClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ZQ_ProductosIMPUESTO_IVAChange(Sender: TField);
     procedure ZQ_ProductosIMPUESTO_ADICIONAL1Change(Sender: TField);
@@ -235,21 +241,25 @@ type
     procedure ZQ_ProductosCOEF_GANANCIAChange(Sender: TField);
     procedure DBGridProductosColEnter(Sender: TObject);
     procedure RadioGroupImpuestosClick(Sender: TObject);
-    procedure btImprimirEtiquetasClick(Sender: TObject);
+    procedure btnImprimirEtiquetasClick(Sender: TObject);
     procedure HabilitarCampos();
-    procedure DBGridProductosDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridProductosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ABuscarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure EditVentaExit(Sender: TObject);
     procedure ZQ_ProductosCOEF_DESCUENTOChange(Sender: TField);
-    procedure btExpImpClick(Sender: TObject);
+    procedure btnExpImpClick(Sender: TObject);
     procedure btnArchivoCancelarClick(Sender: TObject);
     procedure btnArchivoAceptarClick(Sender: TObject);
     function exportarPrecios():Boolean;
     function importarPrecios():Boolean;
+    procedure habilitarModificar(flag: boolean);
+    procedure btnModificarClick(Sender: TObject);
+    procedure RadioGroupTipoUpdateClick(Sender: TObject);
+    procedure ejecutarActualizacion(id_precio: integer);
+    procedure AModificarExecute(Sender: TObject);
+    procedure validarSucursal(Sender: TField);
   private
     { Private declarations }
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
@@ -390,18 +400,51 @@ begin
   if not (dgEditing	in DBGridProductos.Options) then
     DBGridProductos.Options := DBGridProductos.Options + [dgEditing];
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
+//  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
   begin
     ZQ_Productos.Edit;
     DBGridProductos.SetFocus;
     GrupoEditando.Enabled := false;
-    GrupoGuardarCancelar.Enabled := true;
+    btnGuardar.Enabled:= true;
 
-    RadioGroupTipoCalculo.Enabled := false;
-    RadioGroupImpuestos.Enabled := false;
-    GBoxIncDecImportes.Enabled := false;
-    GboxImpuestos.Enabled := false;
+    PanelEdicion.Enabled:= false;
   end;
+end;
+
+
+procedure TFABM_Precios.ejecutarActualizacion(id_precio: integer);
+begin
+  ZSPActualizarImporte.Close;
+  ZSPActualizarImporte.ParamByName('ID_PRECIO').AsInteger:= id_precio;
+  ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat:= StrToFloat(EditCosto.Text);
+  ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat:= StrToFloat(EditVenta.Text);
+  ZSPActualizarImporte.ParamByName('PRECIO1').AsFloat:= StrToFloat(EditPrecio1.Text);
+  ZSPActualizarImporte.ParamByName('PRECIO2').AsFloat:= StrToFloat(EditPrecio2.Text);
+  ZSPActualizarImporte.ParamByName('PRECIO3').AsFloat:= StrToFloat(EditPrecio3.Text);
+  ZSPActualizarImporte.ParamByName('PRECIO4').AsFloat:= StrToFloat(EditPrecio4.Text);
+  ZSPActualizarImporte.ParamByName('PRECIO5').AsFloat:= StrToFloat(EditPrecio5.Text);
+
+  if RadioGroupTipoUpdate.ItemIndex = 0 then
+    ZSPActualizarImporte.ParamByName('tipo_update').AsInteger:= 0 //reemplazo todos los valores
+  else
+    ZSPActualizarImporte.ParamByName('tipo_update').AsInteger:= 1; //actualizo segun lo ingresado
+
+  if RadioGroupTipoCalculo.ItemIndex = 0 then
+    ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger:= 0
+  else
+    ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger:= 1;
+
+  if RadioGroupImpuestos.ItemIndex = 0 then
+  begin
+    ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger:= 1;
+    ZSPActualizarImporte.ParamByName('IMPUESTO_IVA').AsFloat:= StrToFloat(EditIVA.Text);
+    ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL1').AsFloat:= StrToFloat(EditImpAdicional1.Text);
+    ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL2').AsFloat:= StrToFloat(EditImpAdicional2.Text);
+  end
+  else
+    ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 0;
+
+  ZSPActualizarImporte.Open;
 end;
 
 
@@ -429,16 +472,13 @@ begin
     exit;
   end;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, []) then
+//  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, []) then
   begin
     GrupoEditando.Enabled := false;
-    GrupoGuardarCancelar.Enabled := true;
+    btnGuardar.Enabled:= true;
 
     //deshabilito los groupbox
-    RadioGroupTipoCalculo.Enabled:= false;
-    RadioGroupImpuestos.Enabled:= false;
-    GBoxIncDecImportes.Enabled:= false;
-    GboxImpuestos.Enabled:= false;
+    PanelEdicion.Enabled:= false;
 
     if DBGridProductos.SelectedRows.Count > 0 then
     begin
@@ -446,32 +486,7 @@ begin
         for i:=0 to DBGridProductos.SelectedRows.Count-1 do
         begin
           GotoBookmark(pointer(DBGridProductos.SelectedRows.Items[i]));
-          ZSPActualizarImporte.Close;
-          ZSPActualizarImporte.ParamByName('ID_PRECIO').AsInteger:= ZQ_ProductosID_PRECIO.AsInteger;
-          ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat:= StrToFloat(EditCosto.Text);
-          ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat:= StrToFloat(EditVenta.Text);
-          ZSPActualizarImporte.ParamByName('PRECIO1').AsFloat:= StrToFloat(EditPrecio1.Text);
-          ZSPActualizarImporte.ParamByName('PRECIO2').AsFloat:= StrToFloat(EditPrecio2.Text);
-          ZSPActualizarImporte.ParamByName('PRECIO3').AsFloat:= StrToFloat(EditPrecio3.Text);
-          ZSPActualizarImporte.ParamByName('PRECIO4').AsFloat:= StrToFloat(EditPrecio4.Text);
-          ZSPActualizarImporte.ParamByName('PRECIO5').AsFloat:= StrToFloat(EditPrecio5.Text);
-
-          if RadioGroupTipoCalculo.ItemIndex = 0 then
-            ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger:= 1
-          else
-            ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger:= 0;
-
-          if RadioGroupImpuestos.ItemIndex = 0 then
-          begin
-            ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger:= 1;
-            ZSPActualizarImporte.ParamByName('IMPUESTO_IVA').AsFloat:= StrToFloat(EditIVA.Text);
-            ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL1').AsFloat:= StrToFloat(EditImpAdicional1.Text);
-            ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL2').AsFloat:= StrToFloat(EditImpAdicional2.Text);
-          end
-          else
-            ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger := 0;
-
-          ZSPActualizarImporte.Open;
+          ejecutarActualizacion(ZQ_ProductosID_PRECIO.AsInteger);
         end;
     end
     else
@@ -479,33 +494,7 @@ begin
       ZQ_Productos.first;
       while not(ZQ_Productos.Eof) do
       begin
-        ZSPActualizarImporte.Close;
-        ZSPActualizarImporte.ParamByName('ID_PRECIO').AsInteger:= ZQ_ProductosID_PRECIO.AsInteger;
-        ZSPActualizarImporte.ParamByName('COEF_AUMENTO_COSTO').AsFloat:= StrToFloat(EditCosto.Text);
-        ZSPActualizarImporte.ParamByName('COEF_AUMENTO_VENTA').AsFloat:= StrToFloat(EditVenta.Text);
-        ZSPActualizarImporte.ParamByName('PRECIO1').AsFloat:= StrToFloat(EditPrecio1.Text);
-        ZSPActualizarImporte.ParamByName('PRECIO2').AsFloat:= StrToFloat(EditPrecio2.Text);
-        ZSPActualizarImporte.ParamByName('PRECIO3').AsFloat:= StrToFloat(EditPrecio3.Text);
-        ZSPActualizarImporte.ParamByName('PRECIO4').AsFloat:= StrToFloat(EditPrecio4.Text);
-        ZSPActualizarImporte.ParamByName('PRECIO5').AsFloat:= StrToFloat(EditPrecio5.Text);
-
-        if RadioGroupTipoCalculo.ItemIndex = 0 then
-          ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger:= 1
-        else
-          ZSPActualizarImporte.ParamByName('TIPOCALCULO').AsInteger:= 0;
-
-        if RadioGroupImpuestos.ItemIndex = 0 then
-        begin
-          ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger:= 1; //1 se actualizan los impuestos
-          ZSPActualizarImporte.ParamByName('IMPUESTO_IVA').AsFloat:= StrToFloat(EditIVA.Text);
-          ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL1').AsFloat:= StrToFloat(EditImpAdicional1.Text);
-          ZSPActualizarImporte.ParamByName('IMPUESTO_ADICIONAL2').AsFloat:= StrToFloat(EditImpAdicional2.Text);
-        end
-        else
-          ZSPActualizarImporte.ParamByName('ACTUALIZAR_IMPUESTOS').AsInteger:= 0; //0 no se actualizan los impuestos
-
-        ZSPActualizarImporte.Open;
-
+        ejecutarActualizacion(ZQ_ProductosID_PRECIO.AsInteger);
         ZQ_Productos.Next;
       end;
     end;
@@ -524,29 +513,33 @@ begin
   if (dgEditing	in DBGridProductos.Options) then
     DBGridProductos.Options := DBGridProductos.Options - [dgEditing];
 
-  if DM.EKModelo.finalizar_transaccion(Transaccion_ABMImportes) then
-  begin
-    DBGridProductos.Enabled:= true;
-    GrupoEditando.Enabled:= true;
-    GrupoGuardarCancelar.Enabled:= false;
+  try
+    if DM.EKModelo.finalizar_transaccion(Transaccion_ABMImportes) then
+    begin
+      DBGridProductos.Enabled:= true;
+      GrupoEditando.Enabled:= true;
+      btnGuardar.Enabled:= false;
 
-    RadioGroupTipoCalculo.Enabled:= true;
-    RadioGroupImpuestos.Enabled:= true;
-    GBoxIncDecImportes.Enabled:= true;
-    GboxImpuestos.Enabled:= true;
+      EditCosto.Text:= '0';
+      EditVenta.Text:= '0';
+      EditPrecio1.Text:= '0';
+      EditPrecio2.Text:= '0';
+      EditPrecio3.Text:= '0';
+      EditPrecio4.Text:= '0';
+      EditPrecio5.Text:= '0';
 
-    EditCosto.Text:= '0';
-    EditVenta.Text:= '0';
-    EditPrecio1.Text:= '0';
-    EditPrecio2.Text:= '0';
-    EditPrecio3.Text:= '0';
-    EditPrecio4.Text:= '0';
-    EditPrecio5.Text:= '0';
-
-    ZQ_Productos.Refresh;
-    DBGridProductos.Options:= DBGridProductos.Options - [dgMultiSelect];
-    DBGridProductos.SetFocus;
+      ZQ_Productos.Refresh;
+      DBGridProductos.Options:= DBGridProductos.Options - [dgMultiSelect];
+      DBGridProductos.SetFocus;
+    end                                                 
+  except
+    begin
+      dm.EKModelo.cancelar_transaccion(Transaccion_ABMImportes);
+      Application.MessageBox('No se pudo finalizar la modificación de precios.', 'Atención',MB_OK+MB_ICONINFORMATION);
+    end
   end;
+
+  habilitarModificar(false);
 end;
 
 
@@ -558,27 +551,27 @@ begin
   if (dgEditing	in DBGridProductos.Options) then
     DBGridProductos.Options:= DBGridProductos.Options - [dgEditing];
 
-  if dm.EKModelo.cancelar_transaccion(Transaccion_ABMImportes) then
-  begin
-    DBGridProductos.Enabled:= true;
-    GrupoEditando.Enabled:= true;
-    GrupoGuardarCancelar.Enabled:= false;
+  try
+    if dm.EKModelo.cancelar_transaccion(Transaccion_ABMImportes) then
+    begin
+      DBGridProductos.Enabled:= true;
+      GrupoEditando.Enabled:= true;
+      btnGuardar.Enabled:= false;
 
-    RadioGroupTipoCalculo.Enabled:= true;
-    RadioGroupImpuestos.Enabled:= true;
-    GBoxIncDecImportes.Enabled:= true;
-    GboxImpuestos.Enabled:= true;
+      EditCosto.Text:= '0';
+      EditVenta.Text:= '0';
+      EditPrecio1.Text:= '0';
+      EditPrecio2.Text:= '0';
+      EditPrecio3.Text:= '0';
+      EditPrecio4.Text:= '0';
+      EditPrecio5.Text:= '0';
 
-    EditCosto.Text:= '0';
-    EditVenta.Text:= '0';
-    EditPrecio1.Text:= '0';
-    EditPrecio2.Text:= '0';
-    EditPrecio3.Text:= '0';
-    EditPrecio4.Text:= '0';
-    EditPrecio5.Text:= '0';
+      ZQ_Productos.Refresh;
+      DBGridProductos.SetFocus;
 
-    ZQ_Productos.Refresh;
-    DBGridProductos.SetFocus;
+      habilitarModificar(false);
+    end;
+  Except
   end;
 end;
 
@@ -591,6 +584,7 @@ begin
     btnSeleccionar.Caption:= 'Seleccionar';
     btnSeleccionar.Hint:= 'Seleccionar de la grilla los productos a actualizar';
     btnSeleccionar.ImageIndex:= 5;
+    lblModoSeleccion.Caption:= 'Modo selección Desactivado';
   end
   else
   begin
@@ -598,6 +592,7 @@ begin
     btnSeleccionar.Caption:= 'Todos';
     btnSeleccionar.Hint:= 'Se actualizan todos los productos de la grilla';
     btnSeleccionar.ImageIndex:= 78;
+    lblModoSeleccion.Caption:= 'Modo selección Activado';
   end;
 
   DBGridProductos.SetFocus;
@@ -606,7 +601,7 @@ end;
 
 procedure TFABM_Precios.RadioGroupTipoCalculoClick(Sender: TObject);
 begin
-  if RadioGroupTipoCalculo.ItemIndex = 0 then
+  if RadioGroupTipoCalculo.ItemIndex = 1 then
   begin
     LabelTipo1.Caption:= '%';
     LabelTipo2.Caption:= '%';
@@ -740,6 +735,7 @@ begin
   CDSZQ_Productos.CreateDataSet;
   EKOrdenarGrilla1.CargarConfigColumnas;
   lblCantidadRegistros.Caption:= '';
+  lblModoSeleccion.Caption:= '';
   GBoxIncDecImportes.Width:= 250;
   GboxImpuestos.Width:= 97;
   HabilitarCampos;
@@ -749,10 +745,12 @@ begin
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnArchivoCancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnArchivoAceptar.Glyph);
 
+  RadioGroupTipoCalculo.Width:= 1;
+  habilitarModificar(false);
 end;
 
 
-procedure TFABM_Precios.btBuscarGoogleClick(Sender: TObject);
+procedure TFABM_Precios.btnBuscarGoogleClick(Sender: TObject);
 begin
   if ZQ_Productos.IsEmpty then
   exit;
@@ -910,7 +908,7 @@ begin
 end;
 
 
-procedure TFABM_Precios.btImprimirEtiquetasClick(Sender: TObject);
+procedure TFABM_Precios.btnImprimirEtiquetasClick(Sender: TObject);
 var
   id_suc: integer;
   suc: string;
@@ -949,22 +947,26 @@ end;
 
 procedure TFABM_Precios.ABuscarExecute(Sender: TObject);
 begin
-  if btnBuscar.Enabled then
+  if btnBuscar.Enabled and (btnBuscar.Visible = ivAlways) then
     btnBuscar.Click;
 end;
 
-
 procedure TFABM_Precios.AGuardarExecute(Sender: TObject);
 begin
-  if btnGuardar.Enabled then
+  if btnGuardar.Enabled and (btnGuardar.Visible = ivAlways) then
     btnGuardar.Click;
 end;
 
-
 procedure TFABM_Precios.ACancelarExecute(Sender: TObject);
 begin
-  if btnCancelar.Enabled then
+  if btnCancelar.Enabled and (btnCancelar.Visible = ivAlways) then
     btnCancelar.Click;
+end;
+
+procedure TFABM_Precios.AModificarExecute(Sender: TObject);
+begin
+  if btnModificar.Enabled and (btnModificar.Visible = ivAlways) then
+    btnModificar.Click;
 end;
 
 
@@ -974,16 +976,14 @@ begin
 end;
 
 
-
-procedure TFABM_Precios.btExpImpClick(Sender: TObject);
+procedure TFABM_Precios.btnExpImpClick(Sender: TObject);
 begin
-
   PArchivoPrecios.Visible:=True;
   PArchivoPrecios.BringToFront;
   PanelContenedor.Enabled:=False;
   dm.centrarPanel(FABM_Precios,PArchivoPrecios);
-
 end;
+
 
 procedure TFABM_Precios.btnArchivoCancelarClick(Sender: TObject);
 begin
@@ -991,9 +991,10 @@ begin
   PanelContenedor.Enabled:=True;
 end;
 
+
 procedure TFABM_Precios.btnArchivoAceptarClick(Sender: TObject);
 var
-i: integer;
+  i: integer;
 begin
 if radExportar.Checked then
  begin
@@ -1012,11 +1013,12 @@ else
  end;
 end;
 
+
 function TFABM_Precios.exportarPrecios(): Boolean;
 var
-i:Integer;
+  i:Integer;
 begin
-if ZQ_Productos.IsEmpty then
+  if ZQ_Productos.IsEmpty then
     exit;
 
     CD_Precios.EmptyDataSet;
@@ -1096,11 +1098,11 @@ if ZQ_Productos.IsEmpty then
    end;
 end;
 
+
 function TFABM_Precios.importarPrecios: Boolean;
 var
-cant,idSuc:integer;
+  cant,idSuc:integer;
 begin
-
    CD_Precios.EmptyDataSet;
 
    if AbrirArchivo.Execute then
@@ -1118,8 +1120,6 @@ begin
       end
      end;
    end;
-
-
 
   if dm.EKModelo.iniciar_transaccion('Importar Lista Precios',[]) then
   begin
@@ -1162,9 +1162,97 @@ begin
          Exit;
       end
   end;
-
-
-
 end;
 
+
+procedure TFABM_Precios.habilitarModificar(flag: boolean);
+begin
+  btnModificar.Visible:= ivNever;
+  if flag = false then //oculto todos los botones de la modificacion
+  begin
+    if dm.EKUsrLogin.PermisoAccion('MODIFICAR_PRECIO') then
+    begin
+      btnModificar.Visible:= ivAlways;
+    end;
+
+    btnBuscar.Visible:= ivAlways;
+    btnExpImp.Visible:= ivAlways;
+    btnImprimir.Visible:= ivAlways;
+    btnImprimirEtiquetas.Visible:= ivAlways;
+    btnExcel.Visible:= ivAlways;
+    btnBuscarGoogle.Visible:= ivAlways;
+
+    btnSeleccionar.Visible:= ivNever;
+    btnEditarGrilla.Visible:= ivNever;
+    btnProcesarImportes.Visible:= ivNever;
+    btnGuardar.Visible:= ivNever;
+    btnCancelar.Visible:= ivNever;
+
+    PanelEdicion.Visible:= false;
+    PanelEdicion.Enabled:= false;
+    lblModoSeleccion.Caption:= '';
+  end
+  else //muestro todos los botones de la modificacion
+  begin
+    btnBuscar.Visible:= ivNever;
+    btnModificar.Visible:= ivNever;
+    btnExpImp.Visible:= ivNever;
+    btnImprimir.Visible:= ivNever;
+    btnImprimirEtiquetas.Visible:= ivNever;
+    btnExcel.Visible:= ivNever;
+    btnBuscarGoogle.Visible:= ivNever;
+
+    btnSeleccionar.Visible:= ivAlways;
+    btnEditarGrilla.Visible:= ivAlways;
+    btnProcesarImportes.Visible:= ivAlways;
+    btnGuardar.Visible:= ivAlways;
+    btnCancelar.Visible:= ivAlways;
+
+    PanelEdicion.Visible:= true;
+    PanelEdicion.Enabled:= true;
+    lblModoSeleccion.Caption:= 'Modo selección Desactivado';
+  end
+end;
+
+
+procedure TFABM_Precios.btnModificarClick(Sender: TObject);
+begin
+  if ZQ_Productos.IsEmpty then
+    exit;
+
+  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
+  begin
+    habilitarModificar(true);
+    RadioGroupTipoUpdate.ItemIndex:= 0;
+  end;
+end;
+
+
+procedure TFABM_Precios.RadioGroupTipoUpdateClick(Sender: TObject);
+begin
+  if RadioGroupTipoUpdate.ItemIndex = 0 then
+  begin
+    RadioGroupTipoCalculo.Width:= 1;
+  end
+  else
+  begin
+    RadioGroupTipoCalculo.Width:= 185;
+  end;
+end;
+
+
+procedure TFABM_Precios.validarSucursal(Sender: TField);
+var
+  i, suc_prod: integer;
+begin
+//  suc_prod:= ZQ_StockID_SUCURSAL.AsInteger; //sucursal a la que pertenece el stock del producto
+//  for  i:= 0 to Length(sucursales) - 1 do //Recorro todas las sucursales del usuario seleccionado
+//  begin //si el prducto es de la sucursal en la que estoy loqueafo o el usuario tiene permiso en esa sucursal o si es administrador
+//    if not ( (suc_prod = SUCURSAL_LOGUEO) or (suc_prod = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0) )  then
+//    begin
+//      ZQ_Stock.RevertRecord;
+//      ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal '+ZQ_StockSUCURSAL.AsString+'.'));
+//    end;
+//  end;
+end;
 end.

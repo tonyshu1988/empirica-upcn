@@ -1153,12 +1153,34 @@ object FBuscarProductoStock: TFBuscarProductoStock
         ItemIndex = -1
       end
       item
-        Titulo = 'Sucursal'
-        Campo = 'nombre'
-        Tabla = 'sucursal'
+        Titulo = 'Llevar Stock'
+        Campo = 'llevar_stock'
+        Tabla = 'producto'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'S'
+          'N')
+        TipoComboValoresReales.Strings = (
+          'SI'
+          'NO')
         TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        Tabla = 'sucursal'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
         ItemIndex = -1
       end
       item
@@ -1211,6 +1233,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
           'N'
           'S')
         TipoComboAncho = 200
+        CambiarCondicion = False
         ItemIndex = -1
       end>
     CriteriosLocate = <>
@@ -1238,10 +1261,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
         'al,'
-      '        ps.punto_salida, su.id_sucursal'
-      ''
-      ''
-      ''
+      '        ps.punto_salida, su.id_sucursal, pr.llevar_stock'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
@@ -1258,8 +1278,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'left join color c on (pc.color = c.id_color)'
-      ''
-      ''
       'where (pc.baja <> '#39'S'#39') and (pr.baja <> '#39'S'#39')')
     SQL_Select.Strings = (
       
@@ -1283,10 +1301,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
         'al,'
-      '        ps.punto_salida, su.id_sucursal'
-      ''
-      ''
-      '')
+      '        ps.punto_salida, su.id_sucursal, pr.llevar_stock')
     SQL_From.Strings = (
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
@@ -1303,9 +1318,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      'left join color c on (pc.color = c.id_color)'
-      ''
-      '')
+      'left join color c on (pc.color = c.id_color)')
     SQL_Where.Strings = (
       'where (pc.baja <> '#39'S'#39') and (pr.baja <> '#39'S'#39')')
     UsarWhereOriginal = EK_Con_Where
@@ -1336,7 +1349,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
         'al,'
-      '        ps.punto_salida, su.id_sucursal'
+      '        ps.punto_salida, su.id_sucursal, pr.llevar_stock'
       'from stock_producto sp'
       'left join producto pr on (sp.id_producto =  pr.id_producto)'
       'left join medida md on (pr.id_medida = md.id_medida)'
@@ -1454,6 +1467,10 @@ object FBuscarProductoStock: TFBuscarProductoStock
     object ZQ_StockID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
       Required = True
+    end
+    object ZQ_StockLLEVAR_STOCK: TStringField
+      FieldName = 'LLEVAR_STOCK'
+      Size = 1
     end
   end
   object DS_Stock: TDataSource
@@ -1580,6 +1597,78 @@ object FBuscarProductoStock: TFBuscarProductoStock
     end
     object ZQ_ProductoCOD_CORTO_PRO: TStringField
       FieldName = 'COD_CORTO_PRO'
+    end
+  end
+  object ZQ_Sucursal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from Sucursal s'
+      'where s.id_sucursal > 0'
+      'order by s.nombre')
+    Params = <>
+    Left = 200
+    Top = 216
+    object ZQ_SucursalID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_SucursalNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_SucursalDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_SucursalLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_SucursalCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_SucursalTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_SucursalEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_SucursalBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_SucursalLOGO: TBlobField
+      FieldName = 'LOGO'
+    end
+    object ZQ_SucursalREPORTE_TITULO: TStringField
+      FieldName = 'REPORTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalREPORTE_SUBTITULO: TStringField
+      FieldName = 'REPORTE_SUBTITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_TITULO: TStringField
+      FieldName = 'COMPROBANTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField
+      FieldName = 'COMPROBANTE_RENGLON1'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField
+      FieldName = 'COMPROBANTE_RENGLON2'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField
+      FieldName = 'COMPROBANTE_RENGLON3'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField
+      FieldName = 'COMPROBANTE_RENGLON4'
+      Size = 50
     end
   end
 end

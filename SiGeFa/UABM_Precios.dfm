@@ -1,6 +1,6 @@
 object FABM_Precios: TFABM_Precios
-  Left = 167
-  Top = 127
+  Left = 200
+  Top = 124
   Width = 1024
   Height = 580
   Caption = 'ABM Precios'
@@ -20,13 +20,80 @@ object FABM_Precios: TFABM_Precios
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object PArchivoPrecios: TPanel
+    Left = 576
+    Top = 176
+    Width = 321
+    Height = 121
+    BevelInner = bvLowered
+    BevelWidth = 2
+    BorderStyle = bsSingle
+    TabOrder = 5
+    Visible = False
+    object LeerCodBar: TLabel
+      Left = 4
+      Top = 4
+      Width = 309
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'Exportar / Importar Lista de Precios'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object btnArchivoAceptar: TBitBtn
+      Left = 16
+      Top = 82
+      Width = 101
+      Height = 25
+      Caption = 'Aceptar'
+      TabOrder = 0
+      OnClick = btnArchivoAceptarClick
+    end
+    object btnArchivoCancelar: TBitBtn
+      Left = 202
+      Top = 82
+      Width = 101
+      Height = 25
+      Caption = 'Cancelar'
+      TabOrder = 1
+      OnClick = btnArchivoCancelarClick
+    end
+    object radExportar: TRadioButton
+      Left = 48
+      Top = 35
+      Width = 232
+      Height = 17
+      Caption = ' Exportar Listado a un Archivo'
+      Checked = True
+      TabOrder = 2
+      TabStop = True
+    end
+    object radImportar: TRadioButton
+      Left = 48
+      Top = 57
+      Width = 232
+      Height = 17
+      Caption = ' Importar Listado desde un Archivo'
+      TabOrder = 3
+    end
+  end
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
     Width = 1008
     Height = 490
     Align = alClient
-    TabOrder = 3
+    TabOrder = 2
     object RepListaPrecios: TQuickRep
       Tag = 99
       Left = -23
@@ -1603,7 +1670,7 @@ object FABM_Precios: TFABM_Precios
       Left = 1
       Top = 19
       Width = 1006
-      Height = 305
+      Height = 268
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1785,324 +1852,374 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 324
+      Top = 287
       Width = 1006
-      Height = 165
+      Height = 202
       Hint = '`'
       Align = alBottom
       TabOrder = 1
-      object Label1: TLabel
-        Left = 8
-        Top = 5
-        Width = 317
-        Height = 13
-        Caption = 'Seleccione el tipo de calculo para actualizar sus precio:'
-      end
-      object Label5: TLabel
-        Left = 8
-        Top = 99
-        Width = 319
-        Height = 13
-        Caption = 'Seleccione si desea actualizar los diferentes impuestos:'
-      end
-      object RadioGroupTipoCalculo: TRadioGroup
-        Left = 8
-        Top = 23
-        Width = 188
-        Height = 73
-        Caption = ' Tipo  '
-        ItemIndex = 0
-        Items.Strings = (
-          'Porcentaje (%)'
-          'Dinero ($)')
+      object Panel1: TPanel
+        Left = 1
+        Top = 1
+        Width = 1004
+        Height = 53
+        Align = alTop
+        BevelOuter = bvNone
+        BorderWidth = 4
         TabOrder = 0
-        OnClick = RadioGroupTipoCalculoClick
+        object Label1: TLabel
+          Left = 4
+          Top = 4
+          Width = 996
+          Height = 13
+          Align = alTop
+          Caption = 'Seleccione el tipo de calculo para actualizar los precio:'
+        end
+        object RadioGroupTipoUpdate: TRadioGroup
+          Left = 4
+          Top = 17
+          Width = 996
+          Height = 32
+          Align = alClient
+          Columns = 2
+          ItemIndex = 0
+          Items.Strings = (
+            'Reemplazar Precios'
+            'Actualizar Precios')
+          TabOrder = 0
+          OnClick = RadioGroupTipoUpdateClick
+        end
       end
-      object GBoxIncDecImportes: TGroupBox
-        Left = 199
-        Top = 23
-        Width = 785
-        Height = 74
-        Caption = ' Incrementar/Decrementar Precios  '
+      object Panel2: TPanel
+        Left = 1
+        Top = 132
+        Width = 1004
+        Height = 69
+        Align = alBottom
+        BevelOuter = bvNone
+        BorderWidth = 4
         TabOrder = 1
-        object Label2: TLabel
-          Left = 13
+        object Label5: TLabel
+          Left = 4
+          Top = 4
+          Width = 996
+          Height = 16
+          Align = alTop
+          Caption = 'Seleccione si desea actualizar los diferentes impuestos:'
+        end
+        object RadioGroupImpuestos: TRadioGroup
+          Left = 4
           Top = 20
-          Width = 90
-          Height = 13
-          Caption = 'S/Precio Costo:'
-        end
-        object Label3: TLabel
-          Left = 13
-          Top = 46
-          Width = 90
-          Height = 13
-          Alignment = taRightJustify
-          BiDiMode = bdLeftToRight
-          Caption = 'S/Precio Venta:'
-          ParentBiDiMode = False
-        end
-        object LabelTipo2: TLabel
-          Left = 105
-          Top = 46
-          Width = 12
-          Height = 13
-          Caption = '%'
-        end
-        object LabelTipo1: TLabel
-          Left = 105
-          Top = 20
-          Width = 12
-          Height = 13
-          Caption = '%'
-        end
-        object lblPrecio1: TLabel
-          Left = 186
-          Top = 20
-          Width = 120
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'S/Precio Venta:'
-          Visible = False
-        end
-        object lblPrecio2: TLabel
-          Left = 186
-          Top = 47
-          Width = 120
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'S/Precio Venta:'
-          Visible = False
-        end
-        object lblPrecio3: TLabel
-          Left = 380
-          Top = 20
-          Width = 120
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'S/Precio Venta:'
-          Visible = False
-        end
-        object lblPrecio4: TLabel
-          Left = 380
-          Top = 44
-          Width = 120
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'S/Precio Venta:'
-          Visible = False
-        end
-        object lblPrecio5: TLabel
-          Left = 583
-          Top = 20
-          Width = 113
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          BiDiMode = bdLeftToRight
-          Caption = 'S/Precio Venta:'
-          ParentBiDiMode = False
-          Visible = False
-        end
-        object LabelTipoP2: TLabel
-          Left = 308
-          Top = 46
-          Width = 12
-          Height = 13
-          Caption = '%'
-          Visible = False
-        end
-        object LabelTipoP1: TLabel
-          Left = 307
-          Top = 20
-          Width = 12
-          Height = 13
-          Caption = '%'
-          Visible = False
-        end
-        object LabelTipoP3: TLabel
-          Left = 502
-          Top = 20
-          Width = 12
-          Height = 13
-          Caption = '%'
-          Visible = False
-        end
-        object LabelTipoP4: TLabel
-          Left = 502
-          Top = 46
-          Width = 12
-          Height = 13
-          Caption = '%'
-          Visible = False
-        end
-        object LabelTipoP5: TLabel
-          Left = 697
-          Top = 20
-          Width = 12
-          Height = 13
-          Caption = '%'
-          Visible = False
-        end
-        object EditCosto: TEdit
-          Left = 121
-          Top = 16
-          Width = 60
-          Height = 21
-          Hint = 'Valor con el que se incrementa/decrementa el precio de costo'
-          AutoSize = False
+          Width = 188
+          Height = 45
+          Align = alLeft
+          Caption = ' Tipo  '
+          Columns = 2
+          ItemIndex = 1
+          Items.Strings = (
+            'SI'
+            'NO')
           TabOrder = 0
-          Text = '0'
+          OnClick = RadioGroupImpuestosClick
         end
-        object EditVenta: TEdit
-          Left = 121
-          Top = 42
-          Width = 60
-          Height = 21
-          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
-          AutoSize = False
+        object GboxImpuestos: TGroupBox
+          Left = 192
+          Top = 20
+          Width = 808
+          Height = 45
+          Align = alClient
+          Caption = ' Impuestos  '
+          Enabled = False
           TabOrder = 1
-          Text = '0'
-          OnExit = EditVentaExit
-        end
-        object EditPrecio1: TEdit
-          Left = 321
-          Top = 16
-          Width = 60
-          Height = 21
-          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
-          AutoSize = False
-          TabOrder = 2
-          Text = '0'
-          Visible = False
-        end
-        object EditPrecio2: TEdit
-          Left = 321
-          Top = 41
-          Width = 60
-          Height = 21
-          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
-          AutoSize = False
-          TabOrder = 3
-          Text = '0'
-          Visible = False
-        end
-        object EditPrecio3: TEdit
-          Left = 516
-          Top = 16
-          Width = 60
-          Height = 21
-          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
-          AutoSize = False
-          TabOrder = 4
-          Text = '0'
-          Visible = False
-        end
-        object EditPrecio4: TEdit
-          Left = 516
-          Top = 40
-          Width = 60
-          Height = 21
-          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
-          AutoSize = False
-          TabOrder = 5
-          Text = '0'
-          Visible = False
-        end
-        object EditPrecio5: TEdit
-          Left = 712
-          Top = 16
-          Width = 60
-          Height = 21
-          Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
-          AutoSize = False
-          TabOrder = 6
-          Text = '0'
-          Visible = False
+          object Label4: TLabel
+            Left = 7
+            Top = 22
+            Width = 61
+            Height = 13
+            Caption = 'Coef. IVA:'
+          end
+          object lblImpAdicional1: TLabel
+            Left = 135
+            Top = 22
+            Width = 162
+            Height = 13
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Impuesto Adicional 1:'
+            Visible = False
+          end
+          object lblImpAdicional2: TLabel
+            Left = 368
+            Top = 22
+            Width = 162
+            Height = 13
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Impuesto Adicional 2:'
+            Visible = False
+          end
+          object EditIVA: TEdit
+            Left = 69
+            Top = 18
+            Width = 50
+            Height = 21
+            AutoSize = False
+            TabOrder = 0
+            Text = '0'
+          end
+          object EditImpAdicional1: TEdit
+            Left = 298
+            Top = 18
+            Width = 50
+            Height = 21
+            AutoSize = False
+            TabOrder = 1
+            Text = '0'
+            Visible = False
+          end
+          object EditImpAdicional2: TEdit
+            Left = 531
+            Top = 18
+            Width = 50
+            Height = 21
+            AutoSize = False
+            TabOrder = 2
+            Text = '0'
+            Visible = False
+          end
         end
       end
-      object GboxImpuestos: TGroupBox
-        Left = 200
-        Top = 117
-        Width = 589
-        Height = 44
-        Caption = ' Impuestos  '
-        Enabled = False
-        TabOrder = 3
-        object Label4: TLabel
-          Left = 7
-          Top = 22
-          Width = 61
-          Height = 13
-          Caption = 'Coef. IVA:'
-        end
-        object lblImpAdicional1: TLabel
-          Left = 135
-          Top = 22
-          Width = 162
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Impuesto Adicional 1:'
-          Visible = False
-        end
-        object lblImpAdicional2: TLabel
-          Left = 368
-          Top = 22
-          Width = 162
-          Height = 13
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Impuesto Adicional 2:'
-          Visible = False
-        end
-        object EditIVA: TEdit
-          Left = 69
-          Top = 18
-          Width = 50
-          Height = 21
-          AutoSize = False
-          TabOrder = 0
-          Text = '0'
-        end
-        object EditImpAdicional1: TEdit
-          Left = 298
-          Top = 18
-          Width = 50
-          Height = 21
-          AutoSize = False
-          TabOrder = 1
-          Text = '0'
-          Visible = False
-        end
-        object EditImpAdicional2: TEdit
-          Left = 531
-          Top = 18
-          Width = 50
-          Height = 21
-          AutoSize = False
-          TabOrder = 2
-          Text = '0'
-          Visible = False
-        end
-      end
-      object RadioGroupImpuestos: TRadioGroup
-        Left = 9
-        Top = 117
-        Width = 188
-        Height = 44
-        Caption = ' Tipo  '
-        Columns = 2
-        ItemIndex = 1
-        Items.Strings = (
-          'SI'
-          'NO')
+      object Panel3: TPanel
+        Left = 1
+        Top = 54
+        Width = 1004
+        Height = 78
+        Align = alClient
+        BevelOuter = bvNone
+        BorderWidth = 4
         TabOrder = 2
-        OnClick = RadioGroupImpuestosClick
+        object RadioGroupTipoCalculo: TRadioGroup
+          Left = 4
+          Top = 4
+          Width = 185
+          Height = 70
+          Align = alLeft
+          Caption = ' Tipo Actualizaci'#243'n '
+          ItemIndex = 0
+          Items.Strings = (
+            'Dinero ($)'
+            'Porcentaje (%)')
+          TabOrder = 0
+          OnClick = RadioGroupTipoCalculoClick
+        end
+        object GBoxIncDecImportes: TGroupBox
+          Left = 189
+          Top = 4
+          Width = 811
+          Height = 70
+          Align = alClient
+          Caption = ' Precios  '
+          TabOrder = 1
+          object Label2: TLabel
+            Left = 13
+            Top = 20
+            Width = 90
+            Height = 13
+            Caption = 'S/Precio Costo:'
+          end
+          object Label3: TLabel
+            Left = 13
+            Top = 46
+            Width = 90
+            Height = 13
+            Alignment = taRightJustify
+            BiDiMode = bdLeftToRight
+            Caption = 'S/Precio Venta:'
+            ParentBiDiMode = False
+          end
+          object LabelTipo2: TLabel
+            Left = 105
+            Top = 46
+            Width = 7
+            Height = 13
+            Caption = '$'
+          end
+          object LabelTipo1: TLabel
+            Left = 105
+            Top = 20
+            Width = 7
+            Height = 13
+            Caption = '$'
+          end
+          object lblPrecio1: TLabel
+            Left = 186
+            Top = 20
+            Width = 120
+            Height = 13
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'S/Precio Venta:'
+            Visible = False
+          end
+          object lblPrecio2: TLabel
+            Left = 186
+            Top = 47
+            Width = 120
+            Height = 13
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'S/Precio Venta:'
+            Visible = False
+          end
+          object lblPrecio3: TLabel
+            Left = 385
+            Top = 20
+            Width = 120
+            Height = 13
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'S/Precio Venta:'
+            Visible = False
+          end
+          object lblPrecio4: TLabel
+            Left = 385
+            Top = 44
+            Width = 120
+            Height = 13
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'S/Precio Venta:'
+            Visible = False
+          end
+          object lblPrecio5: TLabel
+            Left = 583
+            Top = 20
+            Width = 113
+            Height = 13
+            Alignment = taRightJustify
+            AutoSize = False
+            BiDiMode = bdLeftToRight
+            Caption = 'S/Precio Venta:'
+            ParentBiDiMode = False
+            Visible = False
+          end
+          object LabelTipoP2: TLabel
+            Left = 308
+            Top = 46
+            Width = 7
+            Height = 13
+            Caption = '$'
+            Visible = False
+          end
+          object LabelTipoP1: TLabel
+            Left = 307
+            Top = 20
+            Width = 7
+            Height = 13
+            Caption = '$'
+            Visible = False
+          end
+          object LabelTipoP3: TLabel
+            Left = 507
+            Top = 20
+            Width = 7
+            Height = 13
+            Caption = '$'
+            Visible = False
+          end
+          object LabelTipoP4: TLabel
+            Left = 507
+            Top = 46
+            Width = 7
+            Height = 13
+            Caption = '$'
+            Visible = False
+          end
+          object LabelTipoP5: TLabel
+            Left = 697
+            Top = 20
+            Width = 7
+            Height = 13
+            Caption = '$'
+            Visible = False
+          end
+          object EditCosto: TEdit
+            Left = 121
+            Top = 16
+            Width = 60
+            Height = 21
+            Hint = 'Valor con el que se incrementa/decrementa el precio de costo'
+            AutoSize = False
+            TabOrder = 0
+            Text = '0'
+          end
+          object EditVenta: TEdit
+            Left = 121
+            Top = 42
+            Width = 60
+            Height = 21
+            Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+            AutoSize = False
+            TabOrder = 1
+            Text = '0'
+            OnExit = EditVentaExit
+          end
+          object EditPrecio1: TEdit
+            Left = 321
+            Top = 16
+            Width = 60
+            Height = 21
+            Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+            AutoSize = False
+            TabOrder = 2
+            Text = '0'
+            Visible = False
+          end
+          object EditPrecio2: TEdit
+            Left = 321
+            Top = 41
+            Width = 60
+            Height = 21
+            Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+            AutoSize = False
+            TabOrder = 3
+            Text = '0'
+            Visible = False
+          end
+          object EditPrecio3: TEdit
+            Left = 521
+            Top = 16
+            Width = 60
+            Height = 21
+            Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+            AutoSize = False
+            TabOrder = 4
+            Text = '0'
+            Visible = False
+          end
+          object EditPrecio4: TEdit
+            Left = 521
+            Top = 40
+            Width = 60
+            Height = 21
+            Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+            AutoSize = False
+            TabOrder = 5
+            Text = '0'
+            Visible = False
+          end
+          object EditPrecio5: TEdit
+            Left = 712
+            Top = 16
+            Width = 60
+            Height = 21
+            Hint = 'Valor con el que se incrementa/decrementa el precio de venta'
+            AutoSize = False
+            TabOrder = 6
+            Text = '0'
+            Visible = False
+          end
+        end
       end
     end
     object PBusqueda: TPanel
@@ -2128,73 +2245,20 @@ object FABM_Precios: TFABM_Precios
         Font.Style = [fsBold, fsItalic]
         ParentFont = False
       end
-    end
-  end
-  object PArchivoPrecios: TPanel
-    Left = 576
-    Top = 176
-    Width = 321
-    Height = 121
-    BevelInner = bvLowered
-    BevelWidth = 2
-    BorderStyle = bsSingle
-    TabOrder = 5
-    Visible = False
-    object LeerCodBar: TLabel
-      Left = 4
-      Top = 4
-      Width = 309
-      Height = 16
-      Align = alTop
-      Alignment = taCenter
-      Caption = 'Exportar / Importar Lista de Precios'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -13
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Transparent = False
-      Layout = tlCenter
-      WordWrap = True
-    end
-    object btnArchivoAceptar: TBitBtn
-      Left = 16
-      Top = 82
-      Width = 101
-      Height = 25
-      Caption = 'Aceptar'
-      TabOrder = 0
-      OnClick = btnArchivoAceptarClick
-    end
-    object btnArchivoCancelar: TBitBtn
-      Left = 202
-      Top = 82
-      Width = 101
-      Height = 25
-      Caption = 'Cancelar'
-      TabOrder = 1
-      OnClick = btnArchivoCancelarClick
-    end
-    object radExportar: TRadioButton
-      Left = 48
-      Top = 35
-      Width = 232
-      Height = 17
-      Caption = ' Exportar Listado a un Archivo'
-      Checked = True
-      TabOrder = 2
-      TabStop = True
-    end
-    object radImportar: TRadioButton
-      Left = 48
-      Top = 57
-      Width = 232
-      Height = 17
-      Caption = ' Importar Listado desde un Archivo'
-      TabOrder = 3
+      object lblModoSeleccion: TLabel
+        Left = 909
+        Top = 1
+        Width = 96
+        Height = 16
+        Align = alRight
+        Caption = 'modoSeleccion'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
     end
   end
   object dxBarABM: TdxBarManager
@@ -2307,6 +2371,11 @@ object FABM_Precios: TFABM_Precios
           end
           item
             BeginGroup = True
+            Item = btnModificar
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnSeleccionar
             Visible = True
           end
@@ -2320,7 +2389,7 @@ object FABM_Precios: TFABM_Precios
             Visible = True
           end
           item
-            Item = btExpImp
+            Item = btnExpImp
             Visible = True
           end
           item
@@ -2338,7 +2407,7 @@ object FABM_Precios: TFABM_Precios
             Visible = True
           end
           item
-            Item = btImprimirEtiquetas
+            Item = btnImprimirEtiquetas
             Visible = True
           end
           item
@@ -2347,7 +2416,7 @@ object FABM_Precios: TFABM_Precios
           end
           item
             BeginGroup = True
-            Item = btBuscarGoogle
+            Item = btnBuscarGoogle
             Visible = True
           end
           item
@@ -2676,14 +2745,22 @@ object FABM_Precios: TFABM_Precios
       OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object btnExcel: TdxBarLargeButton
-      Align = iaRight
-      Caption = 'Excel'
+    object btnModificar: TdxBarLargeButton
+      Caption = 'F3 - Modificar'
       Category = 0
-      Hint = 'Exportar a Excel'
+      Hint = 'Modificar el precio de los productos'
       Visible = ivAlways
-      ImageIndex = 77
-      OnClick = btnExcelClick
+      ImageIndex = 1
+      OnClick = btnModificarClick
+      AutoGrayScale = False
+    end
+    object btnSeleccionar: TdxBarLargeButton
+      Caption = 'Seleccionar'
+      Category = 0
+      Hint = 'Seleccionar de la grilla los productos a actualizar'
+      Visible = ivAlways
+      ImageIndex = 5
+      OnClick = btnSeleccionarClick
       AutoGrayScale = False
     end
     object btnEditarGrilla: TdxBarLargeButton
@@ -2704,22 +2781,23 @@ object FABM_Precios: TFABM_Precios
       OnClick = btnProcesarImportesClick
       AutoGrayScale = False
     end
-    object btnSeleccionar: TdxBarLargeButton
-      Caption = 'Seleccionar'
+    object btnExpImp: TdxBarLargeButton
+      Caption = 'Exportar/Importar'
       Category = 0
-      Hint = 'Seleccionar de la grilla los productos a actualizar'
+      Hint = 'Exportar/Importar Precios'
       Visible = ivAlways
-      ImageIndex = 5
-      OnClick = btnSeleccionarClick
+      ImageIndex = 45
+      OnClick = btnExpImpClick
       AutoGrayScale = False
     end
-    object btnReactivar: TdxBarLargeButton
-      Caption = 'F6 - Reactivar'
+    object btnExcel: TdxBarLargeButton
+      Align = iaRight
+      Caption = 'Excel'
       Category = 0
-      Hint = 'Reactiva un registro'
+      Hint = 'Exportar a Excel'
       Visible = ivAlways
-      ImageIndex = 24
-      ShortCut = 117
+      ImageIndex = 77
+      OnClick = btnExcelClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
@@ -2735,7 +2813,6 @@ object FABM_Precios: TFABM_Precios
     object btnCancelar: TdxBarLargeButton
       Caption = 'F12 - Cancelar'
       Category = 0
-      Enabled = False
       Hint = 'Cancela los cambios'
       Visible = ivAlways
       ImageIndex = 4
@@ -2750,6 +2827,24 @@ object FABM_Precios: TFABM_Precios
       ImageIndex = 28
       OnClick = btnImprimirClick
     end
+    object btnImprimirEtiquetas: TdxBarLargeButton
+      Caption = 'Etiquetas'
+      Category = 0
+      Hint = 'Etiquetas'
+      Visible = ivAlways
+      ImageIndex = 28
+      OnClick = btnImprimirEtiquetasClick
+      AutoGrayScale = False
+    end
+    object btnBuscarGoogle: TdxBarLargeButton
+      Caption = 'Google'
+      Category = 0
+      Hint = 'Google'
+      Visible = ivAlways
+      ImageIndex = 80
+      OnClick = btnBuscarGoogleClick
+      AutoGrayScale = False
+    end
     object btnSalir: TdxBarLargeButton
       Align = iaRight
       Caption = 'Salir'
@@ -2760,33 +2855,6 @@ object FABM_Precios: TFABM_Precios
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
-    object btBuscarGoogle: TdxBarLargeButton
-      Caption = 'Google'
-      Category = 0
-      Hint = 'Google'
-      Visible = ivAlways
-      ImageIndex = 80
-      OnClick = btBuscarGoogleClick
-      AutoGrayScale = False
-    end
-    object btImprimirEtiquetas: TdxBarLargeButton
-      Caption = 'Etiquetas'
-      Category = 0
-      Hint = 'Etiquetas'
-      Visible = ivAlways
-      ImageIndex = 28
-      OnClick = btImprimirEtiquetasClick
-      AutoGrayScale = False
-    end
-    object btExpImp: TdxBarLargeButton
-      Caption = 'Exportar/Importar'
-      Category = 0
-      Hint = 'Exportar/Importar Precios'
-      Visible = ivAlways
-      ImageIndex = 45
-      OnClick = btExpImpClick
-      AutoGrayScale = False
-    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnEditarGrilla'
@@ -2795,11 +2863,11 @@ object FABM_Precios: TFABM_Precios
         'btnExcel'
         'btnSeleccionar'
         'btnSalir'
-        'btnReactivar'
+        'btnModificar'
         'btnImprimir'
-        'btImprimirEtiquetas'
-        'btBuscarGoogle'
-        'btExpImp')
+        'btnImprimirEtiquetas'
+        'btnBuscarGoogle'
+        'btnExpImp')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -3549,6 +3617,11 @@ object FABM_Precios: TFABM_Precios
       Caption = 'ACancelar'
       ShortCut = 123
       OnExecute = ACancelarExecute
+    end
+    object AModificar: TAction
+      Caption = 'AModificar'
+      ShortCut = 114
+      OnExecute = AModificarExecute
     end
   end
   object ZQ_Sucursal: TZQuery
