@@ -714,8 +714,11 @@ end;
 
 
 procedure TFABM_CPB_Remito.btnImprimirClick(Sender: TObject);
+var
+  estado: Integer;
 begin
-  if ZQ_VerCpb.IsEmpty then
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or (estado = ESTADO_ANULADO)) then
     exit;
 
   if not Assigned(FImpresion_Comprobantes) then

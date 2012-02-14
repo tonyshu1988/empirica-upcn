@@ -1,6 +1,6 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 291
-  Top = 152
+  Left = 295
+  Top = 166
   Width = 870
   Height = 546
   Caption = 'ABM Producto Stock'
@@ -22,8 +22,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 467
+    Width = 854
+    Height = 456
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -31,29 +31,29 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelAsociar: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 457
+      Width = 844
+      Height = 446
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Splitter1: TSplitter
         Left = 423
         Top = 21
-        Height = 436
+        Height = 425
       end
       object PanelAsociar_Producto: TPanel
         Left = 426
         Top = 21
-        Width = 426
-        Height = 436
+        Width = 418
+        Height = 425
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 426
-          Height = 436
+          Width = 418
+          Height = 425
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -149,7 +149,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 21
         Width = 423
-        Height = 436
+        Height = 425
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -157,7 +157,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Left = 0
           Top = 0
           Width = 423
-          Height = 436
+          Height = 425
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
@@ -185,7 +185,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 852
+        Width = 844
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -198,255 +198,11 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 457
+      Width = 844
+      Height = 446
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      object DBGridStock: TDBGrid
-        Left = 0
-        Top = 0
-        Width = 852
-        Height = 432
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_Stock
-        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridStockDrawColumnCell
-        OnKeyDown = DBGridStockKeyDown
-        Columns = <
-          item
-            Alignment = taRightJustify
-            Expanded = False
-            FieldName = 'COD_CORTO_PRODUCTO'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Corto'
-            Width = 94
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Producto'
-            Width = 211
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'MEDIDA'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Medida'
-            Width = 113
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE_MARCA'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Marca'
-            Width = 150
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TIPO_ARTICULO'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Tipo Art'#237'culo'
-            Width = 136
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE_ARTICULO'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Art'#237'culo'
-            Width = 133
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'COLOR'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Color'
-            Visible = True
-          end
-          item
-            Color = 15921894
-            Expanded = False
-            FieldName = 'STOCK_ACTUAL'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            Title.Alignment = taCenter
-            Title.Caption = 'Actual'
-            Width = 100
-            Visible = True
-          end
-          item
-            Color = 11140856
-            Expanded = False
-            FieldName = 'STOCK_MIN'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            Title.Alignment = taCenter
-            Title.Caption = 'Minimo'
-            Width = 100
-            Visible = True
-          end
-          item
-            Color = 11796403
-            Expanded = False
-            FieldName = 'STOCK_MAX'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            Title.Alignment = taCenter
-            Title.Caption = 'Maximo'
-            Width = 100
-            Visible = True
-          end
-          item
-            Color = 5197823
-            Expanded = False
-            FieldName = 'STOCK_REPEDIDO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            Title.Alignment = taCenter
-            Title.Caption = 'Pto Repedido'
-            Width = 100
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'STOCK_MIN_ALARMA'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            PickList.Strings = (
-              'S'
-              'N')
-            Title.Alignment = taCenter
-            Title.Caption = 'Alarma'
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SUCURSAL'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Sucursal'
-            Width = 138
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SECCION'
-            ReadOnly = True
-            Title.Caption = 'Secci'#243'n'
-            Width = 108
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SECTOR'
-            ReadOnly = True
-            Title.Caption = 'Sector'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FILA'
-            ReadOnly = True
-            Title.Caption = 'Fila'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'COLUMNA'
-            ReadOnly = True
-            Title.Caption = 'Columna'
-            Visible = True
-          end
-          item
-            Alignment = taRightJustify
-            Expanded = False
-            FieldName = 'COD_CORTO_CABECERA'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Cabecera'
-            Visible = True
-          end
-          item
-            Alignment = taRightJustify
-            Expanded = False
-            FieldName = 'CODIGO_BARRA'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Barra'
-            Width = 100
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'BAJA'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Baja'
-            Visible = True
-          end>
-      end
-      object Panel2: TPanel
-        Left = 0
-        Top = 432
-        Width = 852
-        Height = 25
-        Align = alBottom
-        TabOrder = 1
-        object lblResumen: TLabel
-          Left = 1
-          Top = 1
-          Width = 850
-          Height = 14
-          Align = alTop
-          Alignment = taCenter
-          Caption = 'lblResumen'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-      end
       object RepProductoStock: TQuickRep
         Tag = 99
         Left = 57
@@ -562,7 +318,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               50.270833333333330000
               1232.958333333333000000
               124.354166666666700000
-              304.270833333333400000)
+              304.270833333333300000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -593,7 +349,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Size.Values = (
               52.916666666666670000
               1132.416666666667000000
-              68.791666666666680000
+              68.791666666666670000
               505.354166666666700000)
             Alignment = taCenter
             AlignToBand = True
@@ -626,7 +382,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               52.916666666666670000
               1087.437500000000000000
               5.291666666666667000
-              592.666666666666800000)
+              592.666666666666700000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -668,7 +424,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewPage = False
           ParentFont = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -1019,7 +775,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333340000
+            58.208333333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -1069,7 +825,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333340000
+            82.020833333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -1117,7 +873,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               13.229166666666670000
               5.291666666666667000
               333.375000000000000000)
@@ -1269,7 +1025,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              923.395833333333400000
+              923.395833333333300000
               5.291666666666667000
               105.833333333333300000)
             Alignment = taLeftJustify
@@ -1367,7 +1123,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               37.041666666666670000
               1939.395833333333000000
               5.291666666666667000
-              92.604166666666680000)
+              92.604166666666670000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -1451,12 +1207,256 @@ object FABM_ProductoStock: TFABM_ProductoStock
           end
         end
       end
+      object DBGridStock: TDBGrid
+        Left = 0
+        Top = 0
+        Width = 844
+        Height = 421
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_Stock
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridStockDrawColumnCell
+        OnKeyDown = DBGridStockKeyDown
+        Columns = <
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'COD_CORTO_PRODUCTO'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Corto'
+            Width = 94
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Producto'
+            Width = 211
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MEDIDA'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Medida'
+            Width = 113
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_MARCA'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Marca'
+            Width = 150
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TIPO_ARTICULO'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Tipo Art'#237'culo'
+            Width = 136
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_ARTICULO'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Art'#237'culo'
+            Width = 133
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLOR'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Color'
+            Visible = True
+          end
+          item
+            Color = 15921894
+            Expanded = False
+            FieldName = 'STOCK_ACTUAL'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            Title.Alignment = taCenter
+            Title.Caption = 'Actual'
+            Width = 100
+            Visible = True
+          end
+          item
+            Color = 11140856
+            Expanded = False
+            FieldName = 'STOCK_MIN'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            Title.Alignment = taCenter
+            Title.Caption = 'Minimo'
+            Width = 100
+            Visible = True
+          end
+          item
+            Color = 11796403
+            Expanded = False
+            FieldName = 'STOCK_MAX'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            Title.Alignment = taCenter
+            Title.Caption = 'Maximo'
+            Width = 100
+            Visible = True
+          end
+          item
+            Color = 5197823
+            Expanded = False
+            FieldName = 'STOCK_REPEDIDO'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            Title.Alignment = taCenter
+            Title.Caption = 'Pto Repedido'
+            Width = 100
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'STOCK_MIN_ALARMA'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            PickList.Strings = (
+              'S'
+              'N')
+            Title.Alignment = taCenter
+            Title.Caption = 'Alarma'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SUCURSAL'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal'
+            Width = 138
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SECCION'
+            ReadOnly = True
+            Title.Caption = 'Secci'#243'n'
+            Width = 108
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SECTOR'
+            ReadOnly = True
+            Title.Caption = 'Sector'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FILA'
+            ReadOnly = True
+            Title.Caption = 'Fila'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLUMNA'
+            ReadOnly = True
+            Title.Caption = 'Columna'
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'COD_CORTO_CABECERA'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Cabecera'
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'CODIGO_BARRA'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Barra'
+            Width = 100
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'BAJA'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Baja'
+            Visible = True
+          end>
+      end
+      object Panel2: TPanel
+        Left = 0
+        Top = 421
+        Width = 844
+        Height = 25
+        Align = alBottom
+        TabOrder = 1
+        object lblResumen: TLabel
+          Left = 1
+          Top = 1
+          Width = 842
+          Height = 14
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'lblResumen'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+      end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2244,7 +2244,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
     Grilla = DBGridStock
     Filtros = <
       item
-        TituloColumna = 'C'#243'd. Producto'
+        TituloColumna = 'C'#243'd. Corto'
         Visible = True
       end
       item
@@ -2447,10 +2447,30 @@ object FABM_ProductoStock: TFABM_ProductoStock
         ItemIndex = -1
       end
       item
-        Titulo = 'Sucursal'
-        Campo = 'nombre'
-        Tabla = 'sucursal'
+        Titulo = 'Llevar Stock'
+        Campo = 'llevar_stock'
+        Tabla = 'producto'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'SI'
+          'NO')
+        TipoComboValoresReales.Strings = (
+          'S'
+          'N')
+        TipoComboAncho = 200
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        Tabla = 'sucursal'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -2898,5 +2918,77 @@ object FABM_ProductoStock: TFABM_ProductoStock
     ShowModal = False
     Left = 685
     Top = 37
+  end
+  object ZQ_Sucursal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from Sucursal s'
+      'where s.id_sucursal > 0'
+      'order by s.nombre')
+    Params = <>
+    Left = 56
+    Top = 304
+    object ZQ_SucursalID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_SucursalNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_SucursalDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_SucursalLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_SucursalCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_SucursalTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_SucursalEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_SucursalBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_SucursalLOGO: TBlobField
+      FieldName = 'LOGO'
+    end
+    object ZQ_SucursalREPORTE_TITULO: TStringField
+      FieldName = 'REPORTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalREPORTE_SUBTITULO: TStringField
+      FieldName = 'REPORTE_SUBTITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_TITULO: TStringField
+      FieldName = 'COMPROBANTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField
+      FieldName = 'COMPROBANTE_RENGLON1'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField
+      FieldName = 'COMPROBANTE_RENGLON2'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField
+      FieldName = 'COMPROBANTE_RENGLON3'
+      Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField
+      FieldName = 'COMPROBANTE_RENGLON4'
+      Size = 50
+    end
   end
 end

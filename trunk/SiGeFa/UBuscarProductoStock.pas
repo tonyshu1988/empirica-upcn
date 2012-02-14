@@ -73,6 +73,24 @@ type
     ZQ_ProductoCOLOR: TStringField;
     ZQ_ProductoCOD_CORTO_CAB: TStringField;
     ZQ_ProductoCOD_CORTO_PRO: TStringField;
+    ZQ_StockLLEVAR_STOCK: TStringField;
+    ZQ_Sucursal: TZQuery;
+    ZQ_SucursalID_SUCURSAL: TIntegerField;
+    ZQ_SucursalNOMBRE: TStringField;
+    ZQ_SucursalDIRECCION: TStringField;
+    ZQ_SucursalLOCALIDAD: TStringField;
+    ZQ_SucursalCODIGO_POSTAL: TStringField;
+    ZQ_SucursalTELEFONO: TStringField;
+    ZQ_SucursalEMAIL: TStringField;
+    ZQ_SucursalBAJA: TStringField;
+    ZQ_SucursalLOGO: TBlobField;
+    ZQ_SucursalREPORTE_TITULO: TStringField;
+    ZQ_SucursalREPORTE_SUBTITULO: TStringField;
+    ZQ_SucursalCOMPROBANTE_TITULO: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON1: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
+    ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -227,6 +245,11 @@ end;
 procedure TFBuscarProductoStock.FormCreate(Sender: TObject);
 begin
   EKOrdenarGrilla.CargarConfigColumnas;
+  
+  ZQ_Sucursal.Close;
+  ZQ_Sucursal.Open;
+  if ZQ_Sucursal.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBuscarStock.CriteriosBusqueda.Items[13]).ItemIndex:= ZQ_Sucursal.RecNo - 1;
 end;
 
 procedure TFBuscarProductoStock.DBGridStockDrawColumnCell(Sender: TObject;

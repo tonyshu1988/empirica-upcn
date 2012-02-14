@@ -803,8 +803,11 @@ end;
 
 
 procedure TFABM_CPB_OrdenPago.btnImprimirClick(Sender: TObject);
+var
+  estado: Integer;
 begin
-  if (ZQ_VerCpb.IsEmpty) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger <> ESTADO_CONFIRMADO) then
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or (estado <> ESTADO_CONFIRMADO)) then
     exit;
 
   if not Assigned(FImpresion_Comprobantes) then
