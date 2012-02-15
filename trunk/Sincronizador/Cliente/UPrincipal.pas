@@ -310,6 +310,10 @@ type
     procedure popUpItemSalirClick(Sender: TObject);
     procedure popUpItemMostrarOcultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    //
+    procedure subirNovedades();
+    procedure bajarNovedades();
+    procedure procesarNovedades();
   private
     procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
   public
@@ -330,7 +334,8 @@ type
     password_configuracion: string;
     estado_sincronizando: boolean;
     ini_windows, ini_minimizar: boolean;
-    resultado_SubirNovedades, resultado_BajarNovedades, resultado_ProcesarNovedades: boolean; 
+    resultado_SubirNovedades, resultado_BajarNovedades, resultado_ProcesarNovedades: boolean;
+    error:string;
   end;
 
 var
@@ -617,18 +622,22 @@ begin
   begin
     Timer.Enabled:= false;
 
-    if modo = modo_cliente then
-    begin
-      bajarNovedadesServer;
-      procesarNovedadesServer;
-      subirNovedadesCliente;
-    end
-    else
-    begin
-      bajarNovedadesClientes;
-      procesarNovedadesClientes;
-      subirNovedadesServer;
-    end;
+//    if modo = modo_cliente then
+//    begin
+//      bajarNovedadesServer;
+//      procesarNovedadesServer;
+//      subirNovedadesCliente;
+//    end
+//    else
+//    begin
+//      bajarNovedadesClientes;
+//      procesarNovedadesClientes;
+//      subirNovedadesServer;
+//    end;
+
+    bajarNovedades;
+    procesarNovedades;
+    subirNovedades;
 
     Timer.Enabled:= true;
     tiempo_restante:= intervalo;
@@ -794,17 +803,18 @@ procedure TFPrincipal.btnSubirClick(Sender: TObject);
 begin
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio subir novedades.');
   Timer.Enabled:= false;
-  if modo = modo_cliente then
-    subirNovedadesCliente
-  else
-    subirNovedadesServer;
+  subirNovedades;
+//  if modo = modo_cliente then
+//    subirNovedadesCliente
+//  else
+//    subirNovedadesServer;
   Timer.Enabled:= true;
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Fin subir novedades.');
 
-  if resultado_BajarNovedades then
-    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'La subida de novedades finalizó correctamente.')
-  else
-    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Se produjo un error en la subida de las novedades.')
+//  if resultado_BajarNovedades then
+//    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'La subida de novedades finalizó correctamente.')
+//  else
+//    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Se produjo un error en la subida de las novedades.')
 end;
 
 
@@ -812,10 +822,11 @@ procedure TFPrincipal.btnBajarClick(Sender: TObject);
 begin
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio descargar novedades.');
   Timer.Enabled:= false;
-  if modo = modo_cliente then
-    bajarNovedadesServer
-  else
-    bajarNovedadesClientes;
+  bajarNovedades;
+//  if modo = modo_cliente then
+//    bajarNovedadesServer
+//  else
+//    bajarNovedadesClientes;
   Timer.Enabled:= true;
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Fin descargar novedades.');
 
@@ -834,10 +845,11 @@ begin
 
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio procesar novedades.');
   Timer.Enabled:= false;
-  if modo = modo_cliente then
-    procesarNovedadesServer
-  else
-    procesarNovedadesClientes;
+  procesarNovedades;
+//  if modo = modo_cliente then
+//    procesarNovedadesServer
+//  else
+//    procesarNovedadesClientes;
   Timer.Enabled:= true;
 
   if resultado_ProcesarNovedades then
@@ -1383,7 +1395,7 @@ begin
   resultado_ProcesarNovedades:= false;
   if CD_ListaNovedades.IsEmpty then
   begin
-    resultado_ProcesarNovedades:= true;  
+    resultado_ProcesarNovedades:= true;
     exit;
   end;
 
@@ -1425,6 +1437,7 @@ begin
         else
         begin
           memoLog.Lines.Add(getFechayHoraString+' - Se produjo un error mientras se procesaba el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
+          memoLog.Lines.Add(getFechayHoraString+' - '+error);
           memoLog.Lines.Add('--------------------------------------------------------------');
           memoLog.Lines.Add('           FIN PROCESAR NOVEDADES SERVIDOR                    ');
           memoLog.Lines.Add('--------------------------------------------------------------');
@@ -1588,8 +1601,10 @@ begin
       else
         dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
     end;
-  except //si se produce una excepcion en el proceso cancelo el mismo
+  except  //si se produce una excepcion en el proceso cancelo el mismo
+    on E: Exception do
     begin
+      error:= CD_ProcesarNovedadesTABLE_NAME.AsString+': '+e.Message;
       CD_ProcesarNovedades.Filtered:= false;
       dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
       Result:= false;
@@ -2001,6 +2016,58 @@ begin
 end;
 
 
+procedure TFPrincipal.bajarNovedades;
+begin
+  if modo = modo_cliente then
+    bajarNovedadesServer
+  else
+    bajarNovedadesClientes;
+end;
+
+
+procedure TFPrincipal.procesarNovedades;
+begin
+  if modo = modo_cliente then
+    procesarNovedadesServer
+  else
+    procesarNovedadesClientes;
+end;
+
+
+procedure TFPrincipal.subirNovedades;
+var
+  salir: boolean;
+begin
+  salir:= false;
+  if modo = modo_cliente then
+  begin
+    while not salir do
+    begin
+      //conectarDBLectura;
+      ZQ_NovedadesServerCant.Close;
+      ZQ_NovedadesServerCant.Open;
+      //si se encontraron novedades las subo
+      if ZQ_NovedadesServerCantCOUNT.AsInteger > 0 then
+        subirNovedadesServer
+      else //si no hay mas novedades salgo
+        salir:= true;
+    end;
+  end
+  else
+  begin
+    while not salir do
+    begin
+      conectarDBLectura;
+      ZQ_NovedadesClienteCant.Close;
+      ZQ_NovedadesClienteCant.Open;
+      //si se encontraron novedades las subo
+      if ZQ_NovedadesClienteCantCOUNT.AsInteger > 0 then
+        subirNovedadesCliente
+      else //si no hay mas novedades salgo
+        salir:= true;
+    end;
+  end;
+end;
 
 end.
 
