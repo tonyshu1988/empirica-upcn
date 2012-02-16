@@ -64,6 +64,7 @@ type
     FTipoCampoIndice : integer;
     FTipoCampoIndiceTxt : string;
     FVaciarValor : Boolean;
+    FVaciarValorDespues : Boolean;
     FAnchoComboBox : integer;
 
   public
@@ -92,6 +93,7 @@ type
     Property Valor : string read  FBacTexto1 write FBacTexto1;
     Property ItemIndex : integer read FBacTextoCombo1 write FBacTextoCombo1;
     property VaciarValor: Boolean read FVaciarValor write FVaciarValor default true;
+    property VaciarValorDespues: Boolean read FVaciarValorDespues write FVaciarValorDespues default true;
   end;
 
   TEKCriterioLocate = class(TCollectionItem)
@@ -199,7 +201,7 @@ type
     Consulta : TStrings;
     FPantalla_reducida : boolean;
     FMostrar_vaciar_valores : boolean;
-
+    FVaciarValorDespues:boolean;
     FLimite : Integer;
     FAlInicio : EKEventoAlInicio;
     FAlFinal : EKEventoAlFinal;
@@ -294,6 +296,8 @@ type
       MostrarVaciarvalores : boolean read FMostrar_vaciar_valores write FMostrar_vaciar_valores default true;
     Property
       ParametrosBuscados : String read FParametrosBuscados write FParametrosBuscados;
+    Property
+      VaciarValorDespues : boolean read FVaciarValorDespues write FVaciarValorDespues default false;
     Property
       ParametrosSelecCondicion1 : TStrings read FParametrosSelecCondicion1 write setsql;   // pongo SETSql esto porque es para todo lo mismo de solo lectura
     Property
@@ -710,6 +714,8 @@ begin
           else
             InfoRegistros.Caption := 'Total de Registros: '+inttostr(FRegistrosTotal);
         end;
+
+
       result := true;
     end
     else
@@ -1107,7 +1113,8 @@ begin
       end
       else
         result := true;
-
+      if FVaciarValorDespues then
+         BlanquearDatosBusqueda(self);
     end
     else
       result := false;
