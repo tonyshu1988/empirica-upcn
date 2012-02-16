@@ -20,15 +20,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 347
     Align = alClient
     TabOrder = 0
     object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 712
-      Height = 334
+      Width = 720
+      Height = 345
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -242,7 +242,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1049,6 +1049,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Barra'
@@ -1058,6 +1059,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Cabecera'
@@ -1067,6 +1069,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nombre Producto'
@@ -1076,6 +1079,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Medida'
@@ -1085,6 +1089,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Marca'
@@ -1094,6 +1099,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo Art'#237'culo'
@@ -1103,6 +1109,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Art'#237'culo'
@@ -1112,6 +1119,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Color'
@@ -1121,6 +1129,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Stock Actual'
@@ -1131,6 +1140,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Stock Minimo'
@@ -1141,6 +1151,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Stock Maximo'
@@ -1151,6 +1162,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Llevar Stock'
@@ -1168,6 +1180,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sucursal'
@@ -1182,6 +1195,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Secci'#243'n'
@@ -1191,6 +1205,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sector'
@@ -1200,6 +1215,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fila'
@@ -1209,6 +1225,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Columna'
@@ -1218,6 +1235,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -1235,6 +1253,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1322,6 +1341,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
     SQL_Where.Strings = (
       'where (pc.baja <> '#39'S'#39') and (pr.baja <> '#39'S'#39')')
     UsarWhereOriginal = EK_Con_Where
+    VaciarValorDespues = True
     Left = 32
     Top = 216
   end

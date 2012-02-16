@@ -19,8 +19,8 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 853
-    Height = 344
+    Width = 861
+    Height = 355
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -28,8 +28,8 @@ object FBuscarPersona: TFBuscarPersona
     object DBGridPersonas: TDBGrid
       Left = 3
       Top = 3
-      Width = 847
-      Height = 137
+      Width = 855
+      Height = 148
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
@@ -120,8 +120,8 @@ object FBuscarPersona: TFBuscarPersona
     end
     object PanelEdicion: TPanel
       Left = 3
-      Top = 140
-      Width = 847
+      Top = 151
+      Width = 855
       Height = 201
       Align = alBottom
       BevelOuter = bvNone
@@ -130,7 +130,7 @@ object FBuscarPersona: TFBuscarPersona
       object PageControl: TPageControl
         Left = 0
         Top = 0
-        Width = 847
+        Width = 855
         Height = 201
         ActivePage = TabSheetDatos
         Align = alClient
@@ -697,7 +697,7 @@ object FBuscarPersona: TFBuscarPersona
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1646,6 +1646,7 @@ object FBuscarPersona: TFBuscarPersona
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Direcci'#243'n'
@@ -1655,6 +1656,7 @@ object FBuscarPersona: TFBuscarPersona
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Email'
@@ -1664,6 +1666,7 @@ object FBuscarPersona: TFBuscarPersona
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tel'#233'fono'
@@ -1673,6 +1676,7 @@ object FBuscarPersona: TFBuscarPersona
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha Nacimiento'
@@ -1684,6 +1688,7 @@ object FBuscarPersona: TFBuscarPersona
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -1700,6 +1705,7 @@ object FBuscarPersona: TFBuscarPersona
           'N')
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1719,6 +1725,7 @@ object FBuscarPersona: TFBuscarPersona
       'order by p.nombre')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
+    VaciarValorDespues = True
     Left = 112
     Top = 69
   end
