@@ -37,7 +37,7 @@ uses
   ZStoredProcedure, dxBar, dxBarExtItems, EKIconizacion, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
   IdFTP, DBClient, ComCtrls, Buttons, Provider, DBCtrls, EKOrdenarGrilla, SqlTimSt,
-  Menus;
+  Menus, midas;
 
 const
   InputBoxMessage = WM_USER + 200; //para que hacer el imputBox con password
@@ -115,8 +115,6 @@ type
     DBGridDownload: TDBGrid;
     DBGridTablasActualizar: TDBGrid;
     CD_Tablas_Actualizar_Id: TStringField;
-    CD_NovedadesClienteID: TIntegerField;
-    CD_ProcesarNovedadesID: TIntegerField;
     Splitter3: TSplitter;
     Label4: TLabel;
     PanelDatosXML: TPanel;
@@ -188,7 +186,6 @@ type
     DS_NovedadesServer: TDataSource;
     DSP_NovedadesServer: TDataSetProvider;
     CD_NovedadesServer: TClientDataSet;
-    CD_NovedadesServerID: TIntegerField;
     CD_NovedadesServerOPERATION: TStringField;
     CD_NovedadesServerDATE_TIME: TDateTimeField;
     CD_NovedadesServerUSER_NAME: TStringField;
@@ -199,7 +196,6 @@ type
     CD_NovedadesServerNEW_VALUE: TStringField;
     CD_NovedadesServerOLD_VALUE: TStringField;
     ZQ_NovedadesServerCantCOUNT: TIntegerField;
-    ZQ_NovedadesServerID: TIntegerField;
     ZQ_NovedadesServerOPERATION: TStringField;
     ZQ_NovedadesServerDATE_TIME: TDateTimeField;
     ZQ_NovedadesServerUSER_NAME: TStringField;
@@ -229,7 +225,6 @@ type
     CD_ProcesarNovedadesFBLOB_NEW_CHAR_VALUE: TStringField;
     CD_ProcesarNovedadesFBLOB_OLD_BLOB_VALUE: TBlobField;
     CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE: TBlobField;
-    ZQ_NovedadesClienteID: TIntegerField;
     ZQ_NovedadesClienteOPERATION: TStringField;
     ZQ_NovedadesClienteDATE_TIME: TDateTimeField;
     ZQ_NovedadesClienteUSER_NAME: TStringField;
@@ -249,10 +244,15 @@ type
     PopupMenu: TPopupMenu;
     popUpItemSalir: TMenuItem;
     popUpItemMostrarOcultar: TMenuItem;
+    ZQ_NovedadesClienteID: TIntegerField;
     ZQ_NovedadesClienteCantMIN: TIntegerField;
     ZQ_NovedadesClienteCantMAX: TIntegerField;
+    ZQ_NovedadesServerID: TIntegerField;
     ZQ_NovedadesServerCantMIN: TIntegerField;
     ZQ_NovedadesServerCantMAX: TIntegerField;
+    CD_NovedadesClienteID: TIntegerField;
+    CD_NovedadesServerID: TIntegerField;
+    CD_ProcesarNovedadesID: TIntegerField;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridTablasActualizarDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridListaNovedadesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -313,7 +313,6 @@ type
     function  actualizar_base_server(id_cliente: integer; archivo: string):boolean;
     procedure popUpItemSalirClick(Sender: TObject);
     procedure popUpItemMostrarOcultarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure subirNovedades();
   private
     procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
@@ -326,7 +325,7 @@ type
     ftp_host, ftp_user, ftp_pass: string;
     dirFTP_Server, dirFTP_Cliente, dirLocal, dirLog: string;
     archivo_cliente, archivo_server: string;
-    nserie_cliente, nserie_server: integer;
+    nserie_cliente, nserie_server, rango_Novedades: integer;
     posicion_PBar: integer;
     encendido: string;
     ultFecha: TDate;
@@ -465,7 +464,6 @@ end;
 //OnCreate
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
-//  ShowMessage('create');
   estado_sincronizando:= false;
   configGrillas(0); //cargo la config de las grillas
 
@@ -486,7 +484,6 @@ begin
     end;
   end;
 
-//  Application.ProcessMessages;
   cargarIni;
 
   dm.ConexionLectura.Disconnect;
@@ -510,6 +507,7 @@ begin
   Application.Title := 'Sincronizador '+modo;
 end;
 
+
 //OnClose
 procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -518,21 +516,17 @@ begin
   dm.ConexionEscritura.Disconnect;
 end;
 
+
 //OnActivte
 procedure TFPrincipal.FormActivate(Sender: TObject);
 begin
   panelTitulo.SetFocus;
 end;
 
-procedure TFPrincipal.FormShow(Sender: TObject);
-begin
-//
-end;
 
 //Cargar los datos del archivo ini
 procedure TFPrincipal.cargarIni();
 begin
-//  Application.ProcessMessages;
   dm.EKInicio.abrir;
   //Cargo la configuracion general
   ini_minimizar:= dm.EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_MINIMIZADO');
@@ -541,6 +535,8 @@ begin
   modo:= dm.EKInicio.Ini.ReadString('SINCRONIZADOR', 'MODO', 'CLIENTE'); //cargo el modo, si no esta por defecto es CLIENTE
 
   password_configuracion:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
+
+  rango_Novedades:= dm.EKInicio.Ini.ReadInteger('SINCRONIZADOR', 'TAMANIO_LOTE', 500);
 
   db_host:= dm.EKInicio.Ini.ReadString('BASE', 'DB_HOST', '');
   db_name:= dm.EKInicio.Ini.ReadString('BASE', 'DB_NAME', '');
@@ -605,7 +601,6 @@ begin
   lblTiempoRestante.Caption:= FormatDateTime('hh:nn:ss', tiempo_restante/SecsPerDay);
 
   dm.EKInicio.cerrar;
-//  Application.ProcessMessages;
 
   lblTituloSincro.Caption:= db_name;
   FPrincipal.Caption:= 'Sincronizador en Modo '+modo;
@@ -616,6 +611,7 @@ begin
   else
     QuitarProgramaInicio;
 end;
+
 
 //Timer para que realice la sincronizacion automaticamente
 procedure TFPrincipal.TimerTimer(Sender: TObject);
@@ -646,23 +642,30 @@ begin
   end
 end;
 
+
 //devuelve la fecha y hora como un dateTime
 function TFPrincipal.getFechayHora: TDateTime;
 begin
   result:= -1;
   if dm.ConexionLectura.Connected then
-    result:= dm.ModeloLectura.FechayHora;
+    result:= dm.ModeloLectura.FechayHora
+  else
+    result:= Now;
 end;
+
 
 //devuelve la fecha y hora como un string
 function TFPrincipal.getFechayHoraString: string;
 begin
   result:= '';
   if dm.ConexionLectura.Connected then
-    result:= DateTimeToStr(dm.ModeloLectura.FechayHora);
+    result:= DateTimeToStr(dm.ModeloLectura.FechayHora)
+  else
+    result:= DateTimeToStr(Now);
 end;
 
 
+//boton salir
 procedure TFPrincipal.btnSalirClick(Sender: TObject);
 begin
   if Application.MessageBox('Si apaga el sincronizador dejará de actualizar la Base de Datos.', 'Atención', MB_OKCANCEL)= IDOK then
@@ -673,12 +676,14 @@ begin
   end;
 end;
 
+
 //minimizar la aplicacion a la bandeja de sistema
 procedure TFPrincipal.btnOcultarClick(Sender: TObject);
 begin
   Visible:= False;
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Doble click sobre el icono para maximizar.');
 end;
+
 
 //abrir la pantalla de configuracion
 procedure TFPrincipal.btnConfigClick(Sender: TObject);
@@ -698,6 +703,7 @@ begin
       ShowMessage('La clave ingresada es incorrecta.');
 end;
 
+
 //guara el log en un archivo
 procedure TFPrincipal.guardarArchivoLog();
 var
@@ -711,12 +717,14 @@ begin
   end
 end;
 
+
 //borro el log, pero primero creo un archivo
 procedure TFPrincipal.btnBorrarLogClick(Sender: TObject);
 begin
   guardarArchivoLog;
   memoLog.Lines.Clear;
 end;
+
 
 //Limpia los progress bar y todos los client dataset
 procedure TFPrincipal.ponerTodoEnCero;
@@ -730,6 +738,7 @@ begin
   CD_Tablas_Actualizar.EmptyDataSet;
   CD_ProcesarNovedades.EmptyDataSet;
 end;
+
 
 //Configurar las grillas, grabar o cargar la configuracion
 procedure TFPrincipal.configGrillas(opcion: integer); //0 = Cargar configuracion; 1 = Guardar configuracion
@@ -749,6 +758,7 @@ begin
     EKOrdGridTablasActualizar.GuardarConfigColumnas;
   end
 end;
+
 
 //*********************************************************************
 //                PROCEDIMIENTOS DE CONEXION A LA BASE DE DATOS
@@ -774,6 +784,7 @@ begin
   end;
 end;
 
+
 //Conectarse en modo escritura, para guardar las novedades
 function TFPrincipal.conectarDBEscritura(): boolean;
 begin
@@ -796,80 +807,105 @@ begin
 end;
 
 
-
-//var
-//  salir: boolean;
-//begin
-//  salir:= false;
-//  if modo = modo_cliente then
-//  begin
-//    while not salir do
-//    begin
-//      //conectarDBLectura;
-//      ZQ_NovedadesServerCant.Close;
-//      ZQ_NovedadesServerCant.Open;
-//      //si se encontraron novedades las subo
-//      if ZQ_NovedadesServerCantCOUNT.AsInteger > 0 then
-//        subirNovedadesServer
-//      else //si no hay mas novedades salgo
-//        salir:= true;
-//    end;
-//  end
-//  else
-//  begin
-//    while not salir do
-//    begin
-//      conectarDBLectura;
-//      ZQ_NovedadesClienteCant.Close;
-//      ZQ_NovedadesClienteCant.Open;
-//      //si se encontraron novedades las subo
-//      if ZQ_NovedadesClienteCantCOUNT.AsInteger > 0 then
-//        subirNovedadesCliente
-//      else //si no hay mas novedades salgo
-//        salir:= true;
-//    end;
-//  end;
-
+//Subir novedades Generico (cliente - servidor)
 procedure TFPrincipal.subirNovedades;
 var
-  salir: boolean
+  salir: boolean;
 begin
+  GrupoEditando.Enabled:= false;
+  DBGridUpload.BringToFront;
   if modo = modo_cliente then
-  begin //MODO CLIENTE
-
-
-    subirNovedadesCliente;
-
-
+  begin //-------------MODO CLIENTE
+    DBGridUpload.DataSource:= DS_NovedadesCliente;
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    memoLog.Lines.Add('        INICIO SUBIR NOVEDADES CLIENTE                        ');
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    salir:= false;
+    while not salir do
+    begin
+      ponerTodoEnCero;
+      posicion_PBar:= 0;
+      //obtengo la cantidad del novedades encontradas (todas las modif. mias, <> SINCRO, q no tiene lote asignado)
+      conectarDBLectura;
+      conectarDBEscritura;
+      ZQ_NovedadesClienteCant.Close;
+      ZQ_NovedadesClienteCant.ParamByName('RANGO_NOVEDADES').AsInteger:= rango_Novedades;
+      ZQ_NovedadesClienteCant.Open;
+      idMinNovedades:= ZQ_NovedadesClienteCantMIN.AsInteger;
+      idMaxNovedades:= ZQ_NovedadesClienteCantMAX.AsInteger;
+      cantidadNovedades:= ZQ_NovedadesClienteCantCOUNT.AsInteger;
+      //si se encontraron novedades las subo
+      if cantidadNovedades > 0 then
+      begin
+        pBar_Novedades.Max:= cantidadNovedades;
+        subirNovedadesCliente;
+        //si se produjo un error en la subida salgo
+        if resultado_SubirNovedades = false then
+          salir:= true;
+      end
+      else  //si no hay mas novedades salgo
+        salir:= true;
+    end;
+    memoLog.Lines.Add(getFechayHoraString+' - No hay Novedades para Subir');
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    memoLog.Lines.Add('        FIN SUBIR NOVEDADES CLIENTE                           ');
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    memoLog.Lines.Add('');
   end
   else
-  begin //MODO SERVIDOR
-
-
-    subirNovedadesServer;
-
-    
+  begin //-------------MODO SERVIDOR
+    DBGridUpload.DataSource:= DS_NovedadesServer;
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    memoLog.Lines.Add('        INICIO SUBIR NOVEDADES SERVER                         ');
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    salir:= false;
+    while not salir do
+    begin
+      ponerTodoEnCero;
+      posicion_PBar:= 0;
+      //obtengo la cantidad del novedades encontradas (todas las modif. mias, <> SINCRO, q no tiene lote asignado)
+      conectarDBLectura;
+      conectarDBEscritura;
+      ZQ_NovedadesServerCant.Close;
+      ZQ_NovedadesServerCant.ParamByName('RANGO_NOVEDADES').AsInteger:= rango_Novedades;      
+      ZQ_NovedadesServerCant.Open;
+      idMinNovedades:= ZQ_NovedadesServerCantMIN.AsInteger;
+      idMaxNovedades:= ZQ_NovedadesServerCantMAX.AsInteger;
+      cantidadNovedades:= ZQ_NovedadesServerCantCOUNT.AsInteger;
+      //si se encontraron novedades las subo
+      if cantidadNovedades > 0 then
+      begin
+        pBar_Novedades.Max:= cantidadNovedades;
+        subirNovedadesServer;
+        //si se produjo un error en la subida salgo        
+        if resultado_SubirNovedades = false then
+          salir:= true;
+      end
+      else  //si no hay mas novedades salgo
+        salir:= true;
+    end;
+    memoLog.Lines.Add(getFechayHoraString+' - No hay Novedades para Subir');
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    memoLog.Lines.Add('        FIN SUBIR NOVEDADES SERVER                            ');
+    memoLog.Lines.Add('--------------------------------------------------------------');
+    memoLog.Lines.Add('');
   end;
+  GrupoEditando.Enabled:= true;
 end;
 
 
+//Boton subir novedades
 procedure TFPrincipal.btnSubirClick(Sender: TObject);
 begin
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio subir novedades.');
   Timer.Enabled:= false;
-
   subirNovedades();
-
   Timer.Enabled:= true;
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Fin subir novedades.');
-
-//  if resultado_BajarNovedades then
-//    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'La subida de novedades finalizó correctamente.')
-//  else
-//    dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Se produjo un error en la subida de las novedades.')
 end;
 
 
+//Boton bajar novedades
 procedure TFPrincipal.btnBajarClick(Sender: TObject);
 begin
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio descargar novedades.');
@@ -888,6 +924,7 @@ begin
 end;
 
 
+//Boton procesar novedades
 procedure TFPrincipal.btnProcesarClick(Sender: TObject);
 begin
   //si no pude bajar correctamente las novedades salgo
@@ -956,6 +993,7 @@ begin
   End;
 end;
 
+
 //Bajar un archivo de un directorio especifico del servidor FTP
 function TFPrincipal.FTP_BajarArchivo(directorio, archivo: String): Boolean;
 Var
@@ -1016,6 +1054,7 @@ begin
   end;
 end;
 
+
 //Borrar un archivo en un directorio especifico en el servidor FTP
 function TFPrincipal.FTP_BorrarArchivo(directorio, archivo: String): Boolean;
 begin
@@ -1047,6 +1086,7 @@ begin
   End;
 end;
 
+
 //cheque que el archivo pasado como parametro exista en el servidor ftp
 function TFPrincipal.FTP_ExisteArchivo(directorio, archivo: string): boolean;
 begin
@@ -1077,6 +1117,7 @@ begin
     end;
   End;
 end;
+
 
 //busca las novedades subidas por el servidor al FTP
 function TFPrincipal.FTP_BuscarListaArchivos(directorio, inicio_nombre_archivo, ultimo_archivo, origen_archivo: string): integer;
@@ -1146,6 +1187,8 @@ begin
       //la tabla z_zinc_tabla en el campo id_sincro_lote para reflejar q esos registros ya se
       //subieron
       ZQ_CrearLote.Close;
+      ZQ_CrearLote.ParamByName('id_min').AsInteger:= idMinNovedades;
+      ZQ_CrearLote.ParamByName('id_max').AsInteger:= idMaxNovedades;
       ZQ_CrearLote.ExecSQL;
 
       //grabo en la base de datos del cliente el nombre del archivo que se acaba de subir al servidor FTP
@@ -1173,6 +1216,8 @@ begin
       //la tabla z_zinc_tabla en el campo id_sincro_lote para reflejar q esos registros ya se
       //subieron
       ZQ_CrearLote.Close;
+      ZQ_CrearLote.ParamByName('id_min').AsInteger:= idMinNovedades;
+      ZQ_CrearLote.ParamByName('id_max').AsInteger:= idMaxNovedades;      
       ZQ_CrearLote.ExecSQL;
 
       //grabo en la base de datos del servidor el nombre del archivo que se acaba de subir al servidor FTP
@@ -1191,6 +1236,7 @@ begin
   end;
 end;
 
+
 //devuelve el numero del lote con el que se van a subir los datos
 function TFPrincipal.nro_lote_actual: integer;
 begin
@@ -1202,6 +1248,7 @@ begin
   if not ZQ_UltimoLote.IsEmpty then
     Result:= ZQ_UltimoLoteULTIMO_LOTE.AsInteger + 1;
 end;
+
 
 //obtengo el listados de las tablas que se van a insertar/actualizar/eliminar
 procedure TFPrincipal.obtener_tablas_actualizar();
@@ -1257,9 +1304,11 @@ end;
 procedure TFPrincipal.buscarNovedadesCliente();
 begin
   //ejecuto la query que busca los cambio realizados en la base de datos por todos los usuarios distintos de SINCRO
+  ZQ_NovedadesCliente.ParamByName('RANGO_NOVEDADES').AsInteger:= rango_Novedades;
   CD_NovedadesCliente.Close;
   CD_NovedadesCliente.Open;
 end;
+
 
 //reflejo el progreso de la carga de novedades encontrada en el progress bar correspondiente
 procedure TFPrincipal.ZQ_NovedadesClienteAfterScroll(DataSet: TDataSet);
@@ -1269,48 +1318,14 @@ begin
   Application.ProcessMessages;
 end;
 
+
 //procedimiento que realiza la subida de las novedades del cliente al FTP
 procedure TFPrincipal.subirNovedadesCliente;
 var
   archivo: string;
 begin
   resultado_SubirNovedades:= false;
-  ponerTodoEnCero;
-  GrupoEditando.Enabled:= false;
-  pBar_Ftp.Position:= 0;
-  pBar_Novedades.Position:= 0;
-
-  memoLog.Lines.Add('--------------------------------------------------------------');
-  memoLog.Lines.Add('        INICIO SUBIR NOVEDADES CLIENTE                        ');
-  memoLog.Lines.Add('--------------------------------------------------------------');
-  //si no estoy conectado a la base me conecto
-  conectarDBLectura;
-  conectarDBEscritura;
   memoLog.Lines.Add(getFechayHoraString+' - Buscando Novedades');
-  DBGridUpload.BringToFront;
-  DBGridUpload.DataSource:= DS_NovedadesCliente;
-
-  ////////////////////////////////////////////////////////////
-  posicion_PBar:= 0;
-  //obtengo la cantidad del novedades encontradas (todas las modif. mias, <> SINCRO, q no tiene lote asignado)
-  ZQ_NovedadesClienteCant.Close;
-  ZQ_NovedadesClienteCant.Open;
-  //si no se encontraron novedades no hago nada y salgo
-  if ZQ_NovedadesClienteCantCOUNT.AsInteger = 0 then
-  begin
-    resultado_SubirNovedades:= true;
-    memoLog.Lines.Add(getFechayHoraString+' - No hay Novedades para Subir');
-    memoLog.Lines.Add('--------------------------------------------------------------');
-    memoLog.Lines.Add('        FIN SUBIR NOVEDADES CLIENTE                           ');
-    memoLog.Lines.Add('--------------------------------------------------------------');
-    memoLog.Lines.Add('');
-    GrupoEditando.Enabled:= true;
-    exit;
-  end;
-  //seteo el maximo del progress bar
-  pBar_Novedades.Max:= ZQ_NovedadesClienteCantCOUNT.AsInteger;
-  ////////////////////////////////////////////////////////////
-
   //cargo el client dataset de novedades con todas las novedades encontradas
   buscarNovedadesCliente;
   //obtengo el numero de lote que voy a subir
@@ -1349,12 +1364,8 @@ begin
   begin
     memoLog.Lines.Add(getFechayHoraString+' - Error en el Envio Archivo Novedades ('+archivo+') al Servidor FTP');
   end;
-  memoLog.Lines.Add('--------------------------------------------------------------');
-  memoLog.Lines.Add('        FIN SUBIR NOVEDADES CLIENTE                           ');
-  memoLog.Lines.Add('--------------------------------------------------------------');
-  memoLog.Lines.Add('');
-  GrupoEditando.Enabled:= true;
 end;
+
 
 //Bajo todos los archivos subidos por el servidor para poder procesarlos y actualizar la base del cliente
 procedure TFPrincipal.bajarNovedadesServer();
@@ -1443,6 +1454,7 @@ begin
   resultado_BajarNovedades:= true;
 end;
 
+
 //procesar los archivos descargados del servidor FTP
 procedure TFPrincipal.procesarNovedadesServer;
 begin
@@ -1520,6 +1532,7 @@ begin
   panelListaNovedades.Enabled:= true;
   resultado_ProcesarNovedades:= true;
 end;
+
 
 //Actualizo la base local con el archivo descargado del servidor FTP y que se pasa como parametro
 function TFPrincipal.actualizar_base_local(archivo: string):boolean;
@@ -1714,6 +1727,7 @@ begin
   end;
 end;
 
+
 //bajo todos los archivos de novedades de los diferentes clientes de la aplicacion
 procedure TFPrincipal.bajarNovedadesClientes;
 var
@@ -1775,6 +1789,7 @@ begin
   panelListaNovedades.Enabled:= true;
   resultado_BajarNovedades:= true; //indico que se bajaron todos los archivos con exito
 end;
+
 
 //proceso los archivos de novedades de los clientes que descargue del servidor FTP
 procedure TFPrincipal.procesarNovedadesClientes;
@@ -1859,6 +1874,7 @@ begin
   panelListaNovedades.Enabled:= true;
   resultado_ProcesarNovedades:= true;
 end;
+
 
 //Actualizar Base de datos del servidor
 function TFPrincipal.actualizar_base_server(id_cliente: integer; archivo: string): boolean;
@@ -1955,13 +1971,16 @@ begin
   end;
 end;
 
+
 //buscar novedades en el servidor
 procedure TFPrincipal.buscarNovedadesServer;
 begin
   //ejecuto el procedimiento que busca los datos para generar el archivo de actualizacion del servidor
+  ZQ_NovedadesServer.ParamByName('RANGO_NOVEDADES').AsInteger:= rango_Novedades;
   CD_NovedadesServer.Close;
   CD_NovedadesServer.Open;
 end;
+
 
 //reflejo el progreso de la carga de novedades encontrada en el progress bar correspondiente
 procedure TFPrincipal.ZQ_NovedadesServerAfterScroll(DataSet: TDataSet);
@@ -1971,44 +1990,14 @@ begin
   Application.ProcessMessages;
 end;
 
+
 //Subir novedades del servidor al servidor FTP
 procedure TFPrincipal.subirNovedadesServer;
 var
   archivo: string;
 begin
   resultado_SubirNovedades:= false;
-  ponerTodoEnCero;
-  GrupoEditando.Enabled:= false;
-  pBar_Ftp.Position:= 0;
-  pBar_Novedades.Position:= 0;
-
-  memoLog.Lines.Add('--------------------------------------------------------------');
-  memoLog.Lines.Add('        INICIO SUBIR NOVEDADES SERVIDOR                       ');
-  memoLog.Lines.Add('--------------------------------------------------------------');
-  //si no estoy conectado a la base me conecto
-  conectarDBLectura;
-  conectarDBEscritura;
   memoLog.Lines.Add(getFechayHoraString+' - Buscando Novedades');
-  DBGridUpload.BringToFront;
-  DBGridUpload.DataSource:= DS_NovedadesServer;
-  posicion_PBar:= 0;
-  //obtengo la cantidad del novedades encontradas
-  ZQ_NovedadesServerCant.Close;
-  ZQ_NovedadesServerCant.Open;
-  //si no se encontraron novedades no hago nada y salgo
-  if ZQ_NovedadesServerCantCOUNT.AsInteger = 0 then
-  begin
-    resultado_SubirNovedades:= true;
-    memoLog.Lines.Add(getFechayHoraString+' - No hay Novedades para Subir');
-    memoLog.Lines.Add('--------------------------------------------------------------');
-    memoLog.Lines.Add('        FIN SUBIR NOVEDADES SERVIDOR                          ');
-    memoLog.Lines.Add('--------------------------------------------------------------');
-    memoLog.Lines.Add('');
-    GrupoEditando.Enabled:= true;
-    exit;
-  end;
-  //seteo el maximo del progress bar
-  pBar_Novedades.Max:= ZQ_NovedadesServerCantCOUNT.AsInteger;
   //cargo el client dataset de novedades con todas las novedades encontradas
   buscarNovedadesServer;
   //obtengo el numero de lote que voy a subir
@@ -2047,11 +2036,6 @@ begin
   begin
     memoLog.Lines.Add(getFechayHoraString+' - Error en el Envio Archivo Novedades ('+archivo+') al Servidor FTP');
   end;
-  memoLog.Lines.Add('--------------------------------------------------------------');
-  memoLog.Lines.Add('        FIN SUBIR NOVEDADES CLIENTE                           ');
-  memoLog.Lines.Add('--------------------------------------------------------------');
-  memoLog.Lines.Add('');
-  GrupoEditando.Enabled:= true;
 end;
 
 

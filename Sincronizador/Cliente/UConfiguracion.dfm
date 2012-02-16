@@ -274,23 +274,30 @@ object FConfiguracion: TFConfiguracion
     Caption = '  Archivos de Sincronizaci'#243'n  '
     TabOrder = 6
     object Label12: TLabel
-      Left = 26
+      Left = 12
       Top = 26
-      Width = 74
+      Width = 54
       Height = 13
-      Caption = 'Archivo Cliente:'
+      Caption = 'File Cliente:'
     end
     object Label13: TLabel
-      Left = 19
+      Left = 5
       Top = 53
-      Width = 81
+      Width = 61
       Height = 13
-      Caption = 'Archivo Servidor:'
+      Caption = 'File Servidor:'
+    end
+    object Label14: TLabel
+      Left = 215
+      Top = 26
+      Width = 63
+      Height = 13
+      Caption = 'Tama'#241'o Lote'
     end
     object editFILE_Upload: TEdit
-      Left = 106
+      Left = 68
       Top = 20
-      Width = 175
+      Width = 132
       Height = 21
       Hint = 'Nombre de inicio de los archivos generados por el cliente'
       CharCase = ecUpperCase
@@ -300,9 +307,9 @@ object FConfiguracion: TFConfiguracion
       Text = 'EDITFILE_UPLOAD'
     end
     object editFILE_Download: TEdit
-      Left = 106
+      Left = 68
       Top = 47
-      Width = 175
+      Width = 132
       Height = 21
       Hint = 'Nombre de inicio de los archivos generados por el servidor'
       CharCase = ecUpperCase
@@ -310,6 +317,14 @@ object FConfiguracion: TFConfiguracion
       ShowHint = True
       TabOrder = 1
       Text = 'EDITFILE_DOWNLOAD'
+    end
+    object editTamanioLote: TEdit
+      Left = 215
+      Top = 39
+      Width = 63
+      Height = 21
+      TabOrder = 2
+      Text = 'editTamanioLote'
     end
   end
   object GroupBoxDias: TGroupBox

@@ -7,7 +7,7 @@ object DM: TDM
   object ConexionLectura: TZConnection
     Protocol = 'firebird-1.5'
     HostName = '127.0.0.1'
-    Database = 'D:\PROYECTOS\EMPIRIKA\Sincronizador\SIGEFA CLIENTE 1.FDB'
+    Database = 'C:\SISTEMAS\Sincronizador\SIGEFA CLIENTE 1.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
