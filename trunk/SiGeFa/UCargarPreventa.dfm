@@ -19,14 +19,14 @@ object FPreventa: TFPreventa
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 696
-    Height = 321
+    Width = 704
+    Height = 332
     Align = alClient
     TabOrder = 0
     object Label29: TLabel
       Left = 1
-      Top = 303
-      Width = 694
+      Top = 314
+      Width = 702
       Height = 17
       Align = alBottom
       Alignment = taRightJustify
@@ -46,8 +46,8 @@ object FPreventa: TFPreventa
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 694
-      Height = 302
+      Width = 702
+      Height = 313
       Align = alClient
       Color = 16112578
       DataSource = DS_Comprobante
@@ -122,7 +122,7 @@ object FPreventa: TFPreventa
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -803,6 +803,7 @@ object FPreventa: TFPreventa
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha Creaci'#243'n'
@@ -814,6 +815,7 @@ object FPreventa: TFPreventa
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha Vencimiento'
@@ -825,6 +827,7 @@ object FPreventa: TFPreventa
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -876,6 +879,7 @@ object FPreventa: TFPreventa
       'order by c.fecha_vencimiento DESC,c.fecha DESC')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
+    VaciarValorDespues = True
     Left = 136
     Top = 160
   end
