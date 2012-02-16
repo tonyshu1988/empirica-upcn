@@ -64,6 +64,8 @@ type
     GroupBoxGeneral: TGroupBox;
     CheckBoxMinimizar: TCheckBox;
     CheckBoxWindows: TCheckBox;
+    Label14: TLabel;
+    editTamanioLote: TEdit;
     procedure btnCargarIniClick(Sender: TObject);
     procedure btnCancelarYSalirClick(Sender: TObject);
     procedure btnGuardarYSalirClick(Sender: TObject);
@@ -196,6 +198,9 @@ begin
   else
     dm.EKInicio.Ini.WriteString('SINCRONIZADOR', 'MODO', modo_servidor);
 
+  //Guardo el Tamaño del lote de sincronizacion
+  dm.EKInicio.Ini.WriteInteger('SINCRONIZADOR', 'TAMANIO_LOTE', StrToInt(EditTamanioLote.Text));
+
   //Guardo la clave de ingreso a la pantalla de configuracion
   dm.EKInicio.Ini.WriteString('SINCRONIZADOR', 'CONFIG_PASS', dm.EKInicio.Encripta(editConfig_Pass.Text));
 
@@ -300,6 +305,8 @@ begin
     RadioGroupModo.ItemIndex:= 1; //SERVIDOR
 
   editConfig_Pass.Text:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
+
+  editTamanioLote.Text:= IntToStr(dm.EKInicio.Ini.ReadInteger('SINCRONIZADOR', 'TAMANIO_LOTE', 500));
 
   editDB_Host.Text:= dm.EKInicio.Ini.ReadString('BASE', 'DB_HOST', '');
   editDB_Name.Text:= dm.EKInicio.Ini.ReadString('BASE', 'DB_NAME', '');
