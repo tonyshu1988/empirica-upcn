@@ -14,7 +14,6 @@ begin
   Application.Initialize;
   DecimalSeparator := '.';
   ThousandSeparator := ',';
-  Application.Title := 'Sincronizador SiGeFa';
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFPrincipal, FPrincipal);
   Application.Run;

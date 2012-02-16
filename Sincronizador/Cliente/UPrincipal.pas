@@ -249,6 +249,10 @@ type
     PopupMenu: TPopupMenu;
     popUpItemSalir: TMenuItem;
     popUpItemMostrarOcultar: TMenuItem;
+    ZQ_NovedadesClienteCantMIN: TIntegerField;
+    ZQ_NovedadesClienteCantMAX: TIntegerField;
+    ZQ_NovedadesServerCantMIN: TIntegerField;
+    ZQ_NovedadesServerCantMAX: TIntegerField;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridTablasActualizarDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridListaNovedadesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -310,10 +314,7 @@ type
     procedure popUpItemSalirClick(Sender: TObject);
     procedure popUpItemMostrarOcultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    //
     procedure subirNovedades();
-    procedure bajarNovedades();
-    procedure procesarNovedades();
   private
     procedure InputBoxSetPasswordChar(var Msg: TMessage); message InputBoxMessage;
   public
@@ -335,7 +336,7 @@ type
     estado_sincronizando: boolean;
     ini_windows, ini_minimizar: boolean;
     resultado_SubirNovedades, resultado_BajarNovedades, resultado_ProcesarNovedades: boolean;
-    error:string;
+    cantidadNovedades, idMinNovedades, idMaxNovedades: integer;
   end;
 
 var
@@ -506,6 +507,7 @@ begin
     Application.ShowMainForm:= False;
     dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Iniciando sincronizador, doble click para maximizar.');
   end;
+  Application.Title := 'Sincronizador '+modo;
 end;
 
 //OnClose
@@ -622,21 +624,16 @@ begin
   begin
     Timer.Enabled:= false;
 
-//    if modo = modo_cliente then
-//    begin
-//      bajarNovedadesServer;
-//      procesarNovedadesServer;
-//      subirNovedadesCliente;
-//    end
-//    else
-//    begin
-//      bajarNovedadesClientes;
-//      procesarNovedadesClientes;
-//      subirNovedadesServer;
-//    end;
-
-    bajarNovedades;
-    procesarNovedades;
+    if modo = modo_cliente then
+    begin
+      bajarNovedadesServer;
+      procesarNovedadesServer;
+    end
+    else
+    begin
+      bajarNovedadesClientes;
+      procesarNovedadesClientes;
+    end;
     subirNovedades;
 
     Timer.Enabled:= true;
@@ -799,15 +796,70 @@ begin
 end;
 
 
+
+//var
+//  salir: boolean;
+//begin
+//  salir:= false;
+//  if modo = modo_cliente then
+//  begin
+//    while not salir do
+//    begin
+//      //conectarDBLectura;
+//      ZQ_NovedadesServerCant.Close;
+//      ZQ_NovedadesServerCant.Open;
+//      //si se encontraron novedades las subo
+//      if ZQ_NovedadesServerCantCOUNT.AsInteger > 0 then
+//        subirNovedadesServer
+//      else //si no hay mas novedades salgo
+//        salir:= true;
+//    end;
+//  end
+//  else
+//  begin
+//    while not salir do
+//    begin
+//      conectarDBLectura;
+//      ZQ_NovedadesClienteCant.Close;
+//      ZQ_NovedadesClienteCant.Open;
+//      //si se encontraron novedades las subo
+//      if ZQ_NovedadesClienteCantCOUNT.AsInteger > 0 then
+//        subirNovedadesCliente
+//      else //si no hay mas novedades salgo
+//        salir:= true;
+//    end;
+//  end;
+
+procedure TFPrincipal.subirNovedades;
+var
+  salir: boolean
+begin
+  if modo = modo_cliente then
+  begin //MODO CLIENTE
+
+
+    subirNovedadesCliente;
+
+
+  end
+  else
+  begin //MODO SERVIDOR
+
+
+    subirNovedadesServer;
+
+    
+  end;
+end;
+
+
 procedure TFPrincipal.btnSubirClick(Sender: TObject);
 begin
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio subir novedades.');
   Timer.Enabled:= false;
-  subirNovedades;
-//  if modo = modo_cliente then
-//    subirNovedadesCliente
-//  else
-//    subirNovedadesServer;
+
+  subirNovedades();
+
   Timer.Enabled:= true;
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Fin subir novedades.');
 
@@ -822,11 +874,10 @@ procedure TFPrincipal.btnBajarClick(Sender: TObject);
 begin
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio descargar novedades.');
   Timer.Enabled:= false;
-  bajarNovedades;
-//  if modo = modo_cliente then
-//    bajarNovedadesServer
-//  else
-//    bajarNovedadesClientes;
+  if modo = modo_cliente then
+    bajarNovedadesServer
+  else
+    bajarNovedadesClientes;
   Timer.Enabled:= true;
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Fin descargar novedades.');
 
@@ -845,11 +896,10 @@ begin
 
   dm.EKIconizar.mostrarGlobo('Sincronizador '+modo, 'Inicio procesar novedades.');
   Timer.Enabled:= false;
-  procesarNovedades;
-//  if modo = modo_cliente then
-//    procesarNovedadesServer
-//  else
-//    procesarNovedadesClientes;
+  if modo = modo_cliente then
+    procesarNovedadesServer
+  else
+    procesarNovedadesClientes;
   Timer.Enabled:= true;
 
   if resultado_ProcesarNovedades then
@@ -1239,6 +1289,8 @@ begin
   memoLog.Lines.Add(getFechayHoraString+' - Buscando Novedades');
   DBGridUpload.BringToFront;
   DBGridUpload.DataSource:= DS_NovedadesCliente;
+
+  ////////////////////////////////////////////////////////////
   posicion_PBar:= 0;
   //obtengo la cantidad del novedades encontradas (todas las modif. mias, <> SINCRO, q no tiene lote asignado)
   ZQ_NovedadesClienteCant.Close;
@@ -1257,6 +1309,8 @@ begin
   end;
   //seteo el maximo del progress bar
   pBar_Novedades.Max:= ZQ_NovedadesClienteCantCOUNT.AsInteger;
+  ////////////////////////////////////////////////////////////
+
   //cargo el client dataset de novedades con todas las novedades encontradas
   buscarNovedadesCliente;
   //obtengo el numero de lote que voy a subir
@@ -1395,7 +1449,7 @@ begin
   resultado_ProcesarNovedades:= false;
   if CD_ListaNovedades.IsEmpty then
   begin
-    resultado_ProcesarNovedades:= true;
+    resultado_ProcesarNovedades:= true;  
     exit;
   end;
 
@@ -1437,7 +1491,6 @@ begin
         else
         begin
           memoLog.Lines.Add(getFechayHoraString+' - Se produjo un error mientras se procesaba el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
-          memoLog.Lines.Add(getFechayHoraString+' - '+error);
           memoLog.Lines.Add('--------------------------------------------------------------');
           memoLog.Lines.Add('           FIN PROCESAR NOVEDADES SERVIDOR                    ');
           memoLog.Lines.Add('--------------------------------------------------------------');
@@ -1601,10 +1654,8 @@ begin
       else
         dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
     end;
-  except  //si se produce una excepcion en el proceso cancelo el mismo
-    on E: Exception do
+  except //si se produce una excepcion en el proceso cancelo el mismo
     begin
-      error:= CD_ProcesarNovedadesTABLE_NAME.AsString+': '+e.Message;
       CD_ProcesarNovedades.Filtered:= false;
       dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
       Result:= false;
@@ -2016,58 +2067,6 @@ begin
 end;
 
 
-procedure TFPrincipal.bajarNovedades;
-begin
-  if modo = modo_cliente then
-    bajarNovedadesServer
-  else
-    bajarNovedadesClientes;
-end;
-
-
-procedure TFPrincipal.procesarNovedades;
-begin
-  if modo = modo_cliente then
-    procesarNovedadesServer
-  else
-    procesarNovedadesClientes;
-end;
-
-
-procedure TFPrincipal.subirNovedades;
-var
-  salir: boolean;
-begin
-  salir:= false;
-  if modo = modo_cliente then
-  begin
-    while not salir do
-    begin
-      //conectarDBLectura;
-      ZQ_NovedadesServerCant.Close;
-      ZQ_NovedadesServerCant.Open;
-      //si se encontraron novedades las subo
-      if ZQ_NovedadesServerCantCOUNT.AsInteger > 0 then
-        subirNovedadesServer
-      else //si no hay mas novedades salgo
-        salir:= true;
-    end;
-  end
-  else
-  begin
-    while not salir do
-    begin
-      conectarDBLectura;
-      ZQ_NovedadesClienteCant.Close;
-      ZQ_NovedadesClienteCant.Open;
-      //si se encontraron novedades las subo
-      if ZQ_NovedadesClienteCantCOUNT.AsInteger > 0 then
-        subirNovedadesCliente
-      else //si no hay mas novedades salgo
-        salir:= true;
-    end;
-  end;
-end;
 
 end.
 
