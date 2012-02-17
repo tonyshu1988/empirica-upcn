@@ -4925,9 +4925,13 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       end
       item
         Titulo = 'Sucursal'
-        Campo = 'nombre'
+        Campo = 'id_sucursal'
         Tabla = 'sucursal'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = DM.ZQ_SucursalesVisibles
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1

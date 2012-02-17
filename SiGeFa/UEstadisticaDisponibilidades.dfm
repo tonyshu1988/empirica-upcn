@@ -1,8 +1,8 @@
 object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
-  Left = 2
-  Top = 2
-  Width = 638
-  Height = 450
+  Left = 197
+  Top = 65
+  Width = 1001
+  Height = 673
   Caption = 'Estadistica Disponibilidades'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,16 +22,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 630
-    Height = 371
+    Width = 993
+    Height = 594
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object PageControl: TPageControl
       Left = 1
       Top = 1
-      Width = 628
-      Height = 369
+      Width = 991
+      Height = 592
       ActivePage = TabParteDiario
       Align = alClient
       TabOrder = 0
@@ -171,7 +171,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 12
             end
             object RepSaldo_Subtitulo: TQRLabel
-              Left = 293
+              Left = -58
               Top = 26
               Width = 131
               Height = 20
@@ -203,7 +203,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 9
             end
             object RepSaldo_Titulo: TQRLabel
-              Left = 287
+              Left = -64
               Top = 2
               Width = 144
               Height = 20
@@ -2690,14 +2690,14 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object panel_cerrar: TPanel
           Left = 0
           Top = 0
-          Width = 620
-          Height = 341
+          Width = 983
+          Height = 564
           Align = alClient
           TabOrder = 0
           object panelPD_Resumen: TPanel
             Left = 1
-            Top = 318
-            Width = 618
+            Top = 541
+            Width = 981
             Height = 22
             Align = alBottom
             BorderWidth = 4
@@ -2705,7 +2705,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblSaldo_TotalParteDiario: TLabel
               Left = 5
               Top = 5
-              Width = 608
+              Width = 971
               Height = 13
               Align = alTop
               Alignment = taRightJustify
@@ -2721,7 +2721,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object panelPD_InfoBusqueda: TPanel
             Left = 1
             Top = 1
-            Width = 618
+            Width = 981
             Height = 38
             Align = alTop
             BevelOuter = bvNone
@@ -2730,7 +2730,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblSucursal: TLabel
               Left = 4
               Top = 17
-              Width = 610
+              Width = 973
               Height = 13
               Align = alTop
               Caption = 'lblSucursal'
@@ -2744,7 +2744,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblEncabezadoParteDiario: TLabel
               Left = 4
               Top = 4
-              Width = 610
+              Width = 973
               Height = 13
               Align = alTop
               Caption = 'lblEncabezadoParteDiario'
@@ -2759,7 +2759,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Panel8: TPanel
             Left = 1
             Top = 39
-            Width = 618
+            Width = 981
             Height = 234
             Align = alTop
             BevelOuter = bvNone
@@ -3037,7 +3037,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object Panel11: TPanel
               Left = 352
               Top = 3
-              Width = 263
+              Width = 626
               Height = 228
               Align = alClient
               BevelOuter = bvNone
@@ -3045,7 +3045,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label18: TLabel
                 Left = 0
                 Top = 0
-                Width = 263
+                Width = 626
                 Height = 13
                 Align = alTop
                 Caption = 'INGRESOS Y EGRESOS POR MEDIO DE COBRO/PAGO'
@@ -3059,7 +3059,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object DBGridPD_MediosDePago: TDBGrid
                 Left = 0
                 Top = 13
-                Width = 263
+                Width = 626
                 Height = 174
                 Align = alClient
                 Color = 14606012
@@ -3109,7 +3109,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Panel12: TPanel
                 Left = 0
                 Top = 187
-                Width = 263
+                Width = 626
                 Height = 41
                 Align = alBottom
                 BevelOuter = bvNone
@@ -3117,7 +3117,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 object lblPD_totalTransfer: TLabel
                   Left = 0
                   Top = 26
-                  Width = 263
+                  Width = 626
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3132,7 +3132,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 object lblPD_totalEgreso: TLabel
                   Left = 0
                   Top = 0
-                  Width = 263
+                  Width = 626
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3147,7 +3147,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 object lblPD_totalIngreso: TLabel
                   Left = 0
                   Top = 13
-                  Width = 263
+                  Width = 626
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3165,15 +3165,15 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Panel9: TPanel
             Left = 1
             Top = 273
-            Width = 618
-            Height = 45
+            Width = 981
+            Height = 268
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 3
             object Label17: TLabel
               Left = 0
               Top = 0
-              Width = 618
+              Width = 981
               Height = 13
               Align = alTop
               Caption = 'SALDOS DE LAS CUENTAS'
@@ -3187,8 +3187,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object DBGridPD_SaldoCuentas: TDBGrid
               Left = 0
               Top = 13
-              Width = 618
-              Height = 32
+              Width = 981
+              Height = 255
               Align = alClient
               Color = 14606012
               DataSource = DS_ZP_PD_SaldoCuentas
@@ -3485,7 +3485,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 12
             end
             object RepDetalleMov_Subtitulo: TQRLabel
-              Left = 438
+              Left = -77
               Top = 26
               Width = 170
               Height = 20
@@ -5627,10 +5627,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             BevelOuter = bvNone
             TabOrder = 1
             DesignSize = (
-              620
+              983
               87)
             object Label11: TLabel
-              Left = 390
+              Left = 753
               Top = 7
               Width = 85
               Height = 16
@@ -5645,7 +5645,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Label4: TLabel
-              Left = 398
+              Left = 761
               Top = 62
               Width = 77
               Height = 16
@@ -5660,7 +5660,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Label12: TLabel
-              Left = 374
+              Left = 737
               Top = 24
               Width = 101
               Height = 16
@@ -5675,7 +5675,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Label5: TLabel
-              Left = 379
+              Left = 742
               Top = 42
               Width = 96
               Height = 16
@@ -5690,7 +5690,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Shape3: TShape
-              Left = 352
+              Left = 715
               Top = 60
               Width = 276
               Height = 1
@@ -5698,7 +5698,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Pen.Color = clGray
             end
             object lblBalanceTotalIngresos: TLabel
-              Left = 475
+              Left = 838
               Top = 24
               Width = 140
               Height = 16
@@ -5714,7 +5714,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object lblBalanceTotalEgresos: TLabel
-              Left = 475
+              Left = 838
               Top = 42
               Width = 140
               Height = 16
@@ -5730,7 +5730,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object lblBalanceSaldoFinal: TLabel
-              Left = 475
+              Left = 838
               Top = 62
               Width = 140
               Height = 16
@@ -5746,7 +5746,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object lblBalanceSaldoInicial: TLabel
-              Left = 475
+              Left = 838
               Top = 7
               Width = 140
               Height = 16
@@ -5765,7 +5765,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Panel5: TPanel
             Left = 0
             Top = 0
-            Width = 620
+            Width = 983
             Height = 46
             Align = alTop
             BevelOuter = bvNone
