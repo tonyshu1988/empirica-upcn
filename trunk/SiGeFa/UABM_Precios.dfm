@@ -1,7 +1,7 @@
 object FABM_Precios: TFABM_Precios
-  Left = 200
-  Top = 124
-  Width = 1024
+  Left = 115
+  Top = 171
+  Width = 1127
   Height = 580
   Caption = 'ABM Precios'
   Color = clBtnFace
@@ -90,10 +90,10 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1016
+    Width = 1119
     Height = 501
     Align = alClient
-    TabOrder = 1
+    TabOrder = 0
     object RepListaPrecios: TQuickRep
       Tag = 99
       Left = -23
@@ -1669,7 +1669,7 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 19
-      Width = 1014
+      Width = 1117
       Height = 279
       Align = alClient
       Color = 14606012
@@ -1856,7 +1856,7 @@ object FABM_Precios: TFABM_Precios
     object PanelEdicion: TPanel
       Left = 1
       Top = 298
-      Width = 1014
+      Width = 1117
       Height = 202
       Hint = '`'
       Align = alBottom
@@ -1864,7 +1864,7 @@ object FABM_Precios: TFABM_Precios
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 1012
+        Width = 1115
         Height = 53
         Align = alTop
         BevelOuter = bvNone
@@ -1873,7 +1873,7 @@ object FABM_Precios: TFABM_Precios
         object Label1: TLabel
           Left = 4
           Top = 4
-          Width = 1004
+          Width = 1107
           Height = 13
           Align = alTop
           Caption = 'Seleccione el tipo de calculo para actualizar los precio:'
@@ -1881,7 +1881,7 @@ object FABM_Precios: TFABM_Precios
         object RadioGroupTipoUpdate: TRadioGroup
           Left = 4
           Top = 17
-          Width = 1004
+          Width = 1107
           Height = 32
           Align = alClient
           Columns = 2
@@ -1896,7 +1896,7 @@ object FABM_Precios: TFABM_Precios
       object Panel2: TPanel
         Left = 1
         Top = 132
-        Width = 1012
+        Width = 1115
         Height = 69
         Align = alBottom
         BevelOuter = bvNone
@@ -1905,7 +1905,7 @@ object FABM_Precios: TFABM_Precios
         object Label5: TLabel
           Left = 4
           Top = 4
-          Width = 1004
+          Width = 1107
           Height = 13
           Align = alTop
           Caption = 'Seleccione si desea actualizar los diferentes impuestos:'
@@ -1928,7 +1928,7 @@ object FABM_Precios: TFABM_Precios
         object GboxImpuestos: TGroupBox
           Left = 192
           Top = 17
-          Width = 816
+          Width = 919
           Height = 48
           Align = alClient
           Caption = ' Impuestos  '
@@ -1995,7 +1995,7 @@ object FABM_Precios: TFABM_Precios
       object Panel3: TPanel
         Left = 1
         Top = 54
-        Width = 1012
+        Width = 1115
         Height = 78
         Align = alClient
         BevelOuter = bvNone
@@ -2018,7 +2018,7 @@ object FABM_Precios: TFABM_Precios
         object GBoxIncDecImportes: TGroupBox
           Left = 189
           Top = 4
-          Width = 819
+          Width = 922
           Height = 70
           Align = alClient
           Caption = ' Precios  '
@@ -2228,7 +2228,7 @@ object FABM_Precios: TFABM_Precios
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1014
+      Width = 1117
       Height = 18
       Align = alTop
       ParentShowHint = False
@@ -2249,7 +2249,7 @@ object FABM_Precios: TFABM_Precios
         ParentFont = False
       end
       object lblModoSeleccion: TLabel
-        Left = 917
+        Left = 1020
         Top = 1
         Width = 96
         Height = 16
@@ -2393,6 +2393,10 @@ object FABM_Precios: TFABM_Precios
           end
           item
             Item = btnExpImp
+            Visible = True
+          end
+          item
+            Item = btnCopiarPrecios
             Visible = True
           end
           item
@@ -2858,6 +2862,15 @@ object FABM_Precios: TFABM_Precios
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
+    object btnCopiarPrecios: TdxBarLargeButton
+      Caption = 'Copiar Precios'
+      Category = 0
+      Hint = 'Copiar Precios de los productos seleccionados a mi sucursal'
+      Visible = ivAlways
+      ImageIndex = 22
+      OnClick = btnCopiarPreciosClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnEditarGrilla'
@@ -2870,7 +2883,8 @@ object FABM_Precios: TFABM_Precios
         'btnImprimir'
         'btnImprimirEtiquetas'
         'btnBuscarGoogle'
-        'btnExpImp')
+        'btnExpImp'
+        'btnCopiarPrecios')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False

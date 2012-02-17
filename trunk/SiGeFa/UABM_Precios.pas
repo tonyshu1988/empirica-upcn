@@ -217,6 +217,7 @@ type
     EditPrecio5: TEdit;
     RadioGroupTipoUpdate: TRadioGroup;
     AModificar: TAction;
+    btnCopiarPrecios: TdxBarLargeButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -260,6 +261,7 @@ type
     procedure ejecutarActualizacion(id_precio: integer);
     procedure AModificarExecute(Sender: TObject);
     procedure validarSucursal(Sender: TField);
+    procedure btnCopiarPreciosClick(Sender: TObject);
   private
     { Private declarations }
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
@@ -1185,6 +1187,7 @@ begin
 
     btnBuscar.Visible:= ivAlways;
     btnExpImp.Visible:= ivAlways;
+    btnCopiarPrecios.Visible:= ivAlways;
     btnImprimir.Visible:= ivAlways;
     btnImprimirEtiquetas.Visible:= ivAlways;
     btnExcel.Visible:= ivAlways;
@@ -1205,6 +1208,7 @@ begin
     btnBuscar.Visible:= ivNever;
     btnModificar.Visible:= ivNever;
     btnExpImp.Visible:= ivNever;
+    btnCopiarPrecios.Visible:= ivNever;    
     btnImprimir.Visible:= ivNever;
     btnImprimirEtiquetas.Visible:= ivNever;
     btnExcel.Visible:= ivNever;
@@ -1262,6 +1266,12 @@ begin
 //      ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal '+ZQ_ProductosNOMBRE.AsString+'.'));
 //    end;
 //  end;
+end;
+
+
+procedure TFABM_Precios.btnCopiarPreciosClick(Sender: TObject);
+begin
+//
 end;
 
 end.
