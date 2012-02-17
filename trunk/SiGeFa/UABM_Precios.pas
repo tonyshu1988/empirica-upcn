@@ -218,6 +218,7 @@ type
     RadioGroupTipoUpdate: TRadioGroup;
     AModificar: TAction;
     btnCopiarPrecios: TdxBarLargeButton;
+    ZP_UpdateInsert_Precios: TZStoredProc;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -1270,8 +1271,48 @@ end;
 
 
 procedure TFABM_Precios.btnCopiarPreciosClick(Sender: TObject);
+var
+  id_suc_origen, id_suc_destino, id_producto, cant: integer;
 begin
-//
+  if ZQ_Productos.IsEmpty then
+    exit;
+
+  cant:= 0;
+  if MessageDlg('Esta seguro que desea agregar/actualizar los precios buscados en la sucursal '+dm.ZQ_SucursalNOMBRE.AsString+'?', mtConfirmation, [mbYes, mbNo], 0,) = mrYes then
+  begin
+    if dm.EKModelo.iniciar_transaccion('UPDATE/INSERT PRECIOS',[]) then
+    begin
+      id_suc_destino:= SUCURSAL_LOGUEO;
+      ZQ_Productos.First;
+      while not(ZQ_Productos.Eof) do
+      begin
+        id_suc_origen:= ZQ_ProductosID_SUCURSAL.AsInteger;
+        id_producto:= ZQ_ProductosID_PRODUCTO.AsInteger;
+
+        ZP_UpdateInsert_Precios.Close;
+        ZP_UpdateInsert_Precios.ParamByName('ID_SUC_ORIGEN').AsInteger:= id_suc_origen;
+        ZP_UpdateInsert_Precios.ParamByName('ID_SUC_DESTINO').AsInteger:= id_suc_destino;
+        ZP_UpdateInsert_Precios.ParamByName('ID_PRODUCTO_IN').AsInteger:= id_producto;
+        ZP_UpdateInsert_Precios.ExecSQL;
+
+        cant:= cant + 1;
+
+        ZQ_Productos.Next;
+      end;
+
+      try
+        if DM.EKModelo.finalizar_transaccion('UPDATE/INSERT PRECIOS') then
+        begin
+          Application.MessageBox(PChar(Format('Se Agregaron/Actualizaron %d Precios con éxito',[cant])),'Agrega/Actualizar Precios',MB_OK+MB_ICONINFORMATION);
+        end
+      except
+        begin
+          dm.EKModelo.cancelar_transaccion('UPDATE/INSERT PRECIOS');
+          Application.MessageBox(PChar('Se produjo un error al Agrega/Actualizar Precios'),'Agrega/Actualizar Precios',MB_OK+MB_ICONWARNING);
+        end
+      end;
+    end;
+  end;
 end;
 
 end.
