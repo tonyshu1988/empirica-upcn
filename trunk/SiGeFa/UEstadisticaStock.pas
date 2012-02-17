@@ -151,6 +151,10 @@ procedure TFEstadisticaStock.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   EKOrdenarGrilla1.CargarConfigColumnas;
+
+  //busqueda por comprobante
+  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBuscarStock.CriteriosBusqueda.Items[10]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
 end;
 
 

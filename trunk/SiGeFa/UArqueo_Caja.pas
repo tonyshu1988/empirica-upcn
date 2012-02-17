@@ -109,10 +109,12 @@ procedure TFArqueo_Caja.DateTimePicker1Change(Sender: TObject);
 begin
      ZQ_ComprobanteDetalle.Close;
      ZQ_ComprobanteDetalle.ParamByName('fecha').AsDate:=DateTimePicker1.Date;
+     ZQ_ComprobanteDetalle.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
      ZQ_ComprobanteDetalle.Open;
 
      ZQ_Comprobante_FormaPago.Close;
      ZQ_Comprobante_FormaPago.ParamByName('fecha').AsDate:=DateTimePicker1.Date;
+     ZQ_Comprobante_FormaPago.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
      ZQ_Comprobante_FormaPago.Open;
 end;
 

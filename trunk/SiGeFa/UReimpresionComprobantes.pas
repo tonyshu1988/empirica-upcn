@@ -219,7 +219,6 @@ procedure TFReimpresionComprobantes.FormCreate(Sender: TObject);
 var
   anio, mes: integer;
 begin
-
   EKOrdenarFacturas.CargarConfigColumnas;
   EKOrdenarFPago.CargarConfigColumnas;
   EKOrdenarProducto.CargarConfigColumnas;
@@ -233,6 +232,9 @@ begin
   ZQ_Sucursal.Open;
 
   TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
+  //busqueda por comprobante
+  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
 
   //Permiso para ver o no los filtros de Fiscal
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');

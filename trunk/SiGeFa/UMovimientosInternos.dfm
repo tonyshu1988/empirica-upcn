@@ -1,8 +1,8 @@
 object FMovimientosInternos: TFMovimientosInternos
-  Left = 299
-  Top = 131
-  Width = 874
-  Height = 559
+  Left = 284
+  Top = 158
+  Width = 954
+  Height = 655
   Caption = 'Movimientos Internos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -131,7 +131,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           50.270833333333330000
-          836.083333333333300000
+          836.083333333333400000
           124.354166666666700000
           224.895833333333300000)
         Alignment = taCenter
@@ -163,8 +163,8 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          751.416666666666700000
-          68.791666666666670000
+          751.416666666666800000
+          68.791666666666680000
           396.875000000000000000)
         Alignment = taCenter
         AlignToBand = True
@@ -195,7 +195,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          727.604166666666700000
+          727.604166666666800000
           5.291666666666667000
           444.500000000000000000)
         Alignment = taCenter
@@ -509,7 +509,7 @@ object FMovimientosInternos: TFMovimientosInternos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        58.208333333333330000
+        58.208333333333340000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -559,7 +559,7 @@ object FMovimientosInternos: TFMovimientosInternos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        82.020833333333330000
+        82.020833333333340000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -816,8 +816,8 @@ object FMovimientosInternos: TFMovimientosInternos
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 858
-    Height = 469
+    Width = 946
+    Height = 576
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -832,18 +832,18 @@ object FMovimientosInternos: TFMovimientosInternos
       Tag = 99
       Left = 5
       Top = 5
-      Width = 848
+      Width = 936
       Height = 25
       Align = alTop
       BevelOuter = bvNone
       Color = clTeal
       TabOrder = 0
       DesignSize = (
-        848
+        936
         25)
       object PanelManejoCalendario: TPanel
         Tag = 99
-        Left = 236
+        Left = 275
         Top = -1
         Width = 377
         Height = 29
@@ -945,8 +945,8 @@ object FMovimientosInternos: TFMovimientosInternos
     object PanelDia: TPanel
       Left = 5
       Top = 30
-      Width = 848
-      Height = 434
+      Width = 936
+      Height = 541
       Align = alClient
       BevelOuter = bvNone
       Caption = 'PanelDia'
@@ -954,15 +954,15 @@ object FMovimientosInternos: TFMovimientosInternos
       object PanelDia_Lista: TPanel
         Left = 0
         Top = 180
-        Width = 848
-        Height = 254
+        Width = 936
+        Height = 361
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object PanelDia_InfoLista: TPanel
           Left = 0
           Top = 0
-          Width = 848
+          Width = 936
           Height = 28
           Align = alTop
           BevelOuter = bvNone
@@ -970,7 +970,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object lblFechaHoy: TLabel
             Left = 0
             Top = 0
-            Width = 848
+            Width = 936
             Height = 15
             Align = alClient
             Alignment = taCenter
@@ -985,13 +985,13 @@ object FMovimientosInternos: TFMovimientosInternos
           object Panel2: TPanel
             Left = 0
             Top = 15
-            Width = 848
+            Width = 936
             Height = 13
             Align = alBottom
             BevelOuter = bvNone
             TabOrder = 0
             object Label10: TLabel
-              Left = 704
+              Left = 792
               Top = 0
               Width = 144
               Height = 13
@@ -1009,7 +1009,7 @@ object FMovimientosInternos: TFMovimientosInternos
               ParentFont = False
             end
             object Label13: TLabel
-              Left = 416
+              Left = 504
               Top = 0
               Width = 144
               Height = 13
@@ -1027,7 +1027,7 @@ object FMovimientosInternos: TFMovimientosInternos
               ParentFont = False
             end
             object Label14: TLabel
-              Left = 560
+              Left = 648
               Top = 0
               Width = 144
               Height = 13
@@ -1049,8 +1049,8 @@ object FMovimientosInternos: TFMovimientosInternos
         object DBGrid_Dia: TDBGrid
           Left = 0
           Top = 28
-          Width = 848
-          Height = 195
+          Width = 936
+          Height = 302
           Align = alClient
           Color = 14606012
           DataSource = DS_MovHoy
@@ -1063,6 +1063,14 @@ object FMovimientosInternos: TFMovimientosInternos
           TitleFont.Style = []
           OnDrawColumnCell = DBGrid_DiaDrawColumnCell
           Columns = <
+            item
+              Expanded = False
+              FieldName = 'NOMBRE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Sucursal'
+              Width = 165
+              Visible = True
+            end
             item
               Expanded = False
               FieldName = 'NUMERO_CPB'
@@ -1106,8 +1114,8 @@ object FMovimientosInternos: TFMovimientosInternos
         end
         object Panel3: TPanel
           Left = 0
-          Top = 223
-          Width = 848
+          Top = 330
+          Width = 936
           Height = 31
           Align = alBottom
           BevelOuter = bvNone
@@ -1115,7 +1123,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object lblMov_TotalEgresos: TLabel
             Left = 0
             Top = 3
-            Width = 848
+            Width = 936
             Height = 14
             Align = alBottom
             Alignment = taRightJustify
@@ -1130,7 +1138,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object lblMov_TotalIngresos: TLabel
             Left = 0
             Top = 17
-            Width = 848
+            Width = 936
             Height = 14
             Align = alBottom
             Alignment = taRightJustify
@@ -1147,7 +1155,7 @@ object FMovimientosInternos: TFMovimientosInternos
       object PanelDia_Movimiento: TPanel
         Left = 0
         Top = 0
-        Width = 848
+        Width = 936
         Height = 180
         Align = alTop
         BevelOuter = bvNone
@@ -1155,7 +1163,7 @@ object FMovimientosInternos: TFMovimientosInternos
         object PanelDia_InfoMovimiento: TPanel
           Left = 0
           Top = 0
-          Width = 848
+          Width = 936
           Height = 14
           Align = alTop
           BevelOuter = bvNone
@@ -1163,7 +1171,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object Label2: TLabel
             Left = 0
             Top = 0
-            Width = 848
+            Width = 936
             Height = 14
             Align = alClient
             Alignment = taCenter
@@ -1179,7 +1187,7 @@ object FMovimientosInternos: TFMovimientosInternos
         object GroupBox1: TGroupBox
           Left = 0
           Top = 14
-          Width = 848
+          Width = 936
           Height = 166
           Align = alClient
           TabOrder = 0
@@ -1214,7 +1222,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object PanelDia_Cuentas: TPanel
             Left = 9
             Top = 62
-            Width = 830
+            Width = 910
             Height = 93
             Align = alCustom
             Anchors = [akLeft, akTop, akRight, akBottom]
@@ -1224,7 +1232,7 @@ object FMovimientosInternos: TFMovimientosInternos
             object DBGridFPago_Egreso: TDBGrid
               Left = 2
               Top = 2
-              Width = 826
+              Width = 906
               Height = 76
               Align = alClient
               Color = 14145535
@@ -1275,7 +1283,7 @@ object FMovimientosInternos: TFMovimientosInternos
             object DBGridFPago_Ingreso: TDBGrid
               Left = 2
               Top = 2
-              Width = 826
+              Width = 906
               Height = 76
               Align = alClient
               Color = 14876614
@@ -1326,13 +1334,13 @@ object FMovimientosInternos: TFMovimientosInternos
             object Panel1: TPanel
               Left = 2
               Top = 78
-              Width = 826
+              Width = 906
               Height = 13
               Align = alBottom
               BevelOuter = bvNone
               TabOrder = 1
               object lblTotalFormaPago: TLabel
-                Left = 786
+                Left = 866
                 Top = 0
                 Width = 40
                 Height = 13
@@ -1363,7 +1371,7 @@ object FMovimientosInternos: TFMovimientosInternos
               object Label7: TLabel
                 Left = 169
                 Top = 0
-                Width = 617
+                Width = 697
                 Height = 13
                 Align = alClient
                 Alignment = taRightJustify
@@ -1436,7 +1444,7 @@ object FMovimientosInternos: TFMovimientosInternos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2256,16 +2264,23 @@ object FMovimientosInternos: TFMovimientosInternos
       '        CASE'
       '            WHEN (c.id_tipo_cpb = 16) THEN 0'
       '            WHEN (c.id_tipo_cpb = 17) THEN c.importe_total'
-      '        END as Egresos'
+      '        END as Egresos, s.nombre'
       'from comprobante c'
+      'left join sucursal s on (c.id_sucursal = s.id_sucursal)'
       'where ((c.id_tipo_cpb = 16) or (c.id_tipo_cpb = 17))'
       '  and cast(c.fecha as date)= :fecha'
       '  and ((c.id_proveedor is null) and (c.id_cliente is null))'
+      '  and ((c.id_sucursal = :id_sucursal) or (:id_sucursal = -1))'
       'order by c.fecha desc')
     Params = <
       item
         DataType = ftUnknown
         Name = 'fecha'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     Left = 73
@@ -2274,6 +2289,11 @@ object FMovimientosInternos: TFMovimientosInternos
       item
         DataType = ftUnknown
         Name = 'fecha'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     object ZQ_MovHoyID_COMPROBANTE: TIntegerField
@@ -2339,6 +2359,10 @@ object FMovimientosInternos: TFMovimientosInternos
       FieldName = 'EGRESOS'
       ReadOnly = True
       currency = True
+    end
+    object ZQ_MovHoyNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
     end
   end
   object DS_MovHoy: TDataSource
@@ -2664,6 +2688,10 @@ object FMovimientosInternos: TFMovimientosInternos
     Grilla = DBGrid_Dia
     Filtros = <
       item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
         TituloColumna = 'Numero'
         Visible = True
       end
@@ -2765,6 +2793,18 @@ object FMovimientosInternos: TFMovimientosInternos
   end
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
+      item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = DM.ZQ_SucursalesVisibles
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
       item
         Titulo = 'Fecha'
         TipoCampo = EK_Fecha
