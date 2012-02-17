@@ -576,6 +576,9 @@ begin
   FPrincipal.Iconos_Menu_32.GetBitmap(10, btnAplicarActualizar.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarActualizar.Glyph);
 
+  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:=  dm.ZQ_SucursalesVisibles.RecNo - 1;
+
   //abro todos los recibos del sistema
   EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
