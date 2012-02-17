@@ -220,6 +220,7 @@ type
     lblMov_TotalIngresos: TLabel;
     EKBuscar: TEKBusquedaAvanzada;
     btnExcel: TdxBarLargeButton;
+    ZQ_MovHoyNOMBRE: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -256,7 +257,7 @@ type
     procedure btnExcelClick(Sender: TObject);
   private
     fechaActual: TDate;
-    id_comprobante: integer;
+    id_comprobante, id_sucursalBusqueda: integer;
     tipoComprobante: integer;
     tipoMovimiento: integer;
     columnaActual: string;
@@ -515,6 +516,7 @@ begin
       tituloFecha(fechaActual);
       ZQ_MovHoy.Close;
       ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+      ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
       ZQ_MovHoy.Open;
       ZQ_MovHoy.Refresh;
     end
@@ -548,17 +550,22 @@ end;
 procedure TFMovimientosInternos.btnBuscarClick(Sender: TObject);
 begin
   if  EKBuscar.BuscarSinEjecutar then
-    if (EKBuscar.ParametrosSeleccionados1[0] = '') then
+    if (EKBuscar.ParametrosSeleccionados1[1] = '') then
     begin
       Application.MessageBox('No se ha cargado la fecha', 'Verifique', MB_OK + MB_ICONINFORMATION);
       btnBuscar.Click;
     end
     else
     begin
-      fechaActual:= StrToDate(EKBuscar.ParametrosSeleccionados1[0]);
+      fechaActual:= StrToDate(EKBuscar.ParametrosSeleccionados1[1]);
       tituloFecha(fechaActual);
       ZQ_MovHoy.Close;
       ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+      if EKBuscar.ParametrosSeleccionados1[0] = '0' then
+        ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= -1
+      else
+        ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscar.ParametrosSeleccionados1[0]);
+      id_sucursalBusqueda:= ZQ_MovHoy.ParamByName('id_sucursal').AsInteger;
       ZQ_MovHoy.Open;
       ZQ_MovHoy.Refresh;
     end;
@@ -571,7 +578,9 @@ begin
   EKOrdenarGrillaFPago_Egreso.CargarConfigColumnas;
   EKOrdenarGrillaFPago_Ingreso.CargarConfigColumnas;
 
-  TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.FechayHora);
+  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+  TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
 
   configFormaPago(CPB_OTROS_INGRESOS);
   RadioButtonIngreso.Checked:= true;
@@ -589,7 +598,9 @@ begin
   tituloFecha(fechaActual);
   ZQ_MovHoy.Close;
   ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;  
   ZQ_MovHoy.Open;
+  id_sucursalBusqueda:= SUCURSAL_LOGUEO;
 end;
 
 
@@ -894,6 +905,7 @@ begin
   tituloFecha(fechaActual);
   ZQ_MovHoy.Close;
   ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= id_sucursalBusqueda;
   ZQ_MovHoy.Open;
   ZQ_MovHoy.Refresh;
 end;
@@ -908,6 +920,7 @@ begin
   tituloFecha(fechaActual);
   ZQ_MovHoy.Close;
   ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= id_sucursalBusqueda;
   ZQ_MovHoy.Open;
   ZQ_MovHoy.Refresh;
 end;
@@ -922,6 +935,7 @@ begin
   tituloFecha(fechaActual);
   ZQ_MovHoy.Close;
   ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= id_sucursalBusqueda;
   ZQ_MovHoy.Open;
   ZQ_MovHoy.Refresh;
 end;
@@ -936,6 +950,7 @@ begin
   tituloFecha(fechaActual);
   ZQ_MovHoy.Close;
   ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= id_sucursalBusqueda;
   ZQ_MovHoy.Open;
   ZQ_MovHoy.Refresh;
 end;
@@ -950,6 +965,7 @@ begin
   tituloFecha(fechaActual);
   ZQ_MovHoy.Close;
   ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
+  ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= id_sucursalBusqueda;
   ZQ_MovHoy.Open;
   ZQ_MovHoy.Refresh;
 end;

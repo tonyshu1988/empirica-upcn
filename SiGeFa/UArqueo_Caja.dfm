@@ -145,7 +145,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Size.Values = (
           52.916666666666670000
           759.354166666666700000
-          74.083333333333330000
+          74.083333333333340000
           378.354166666666700000)
         Alignment = taCenter
         AlignToBand = False
@@ -178,7 +178,7 @@ object FArqueo_Caja: TFArqueo_Caja
           47.625000000000000000
           799.041666666666700000
           140.229166666666700000
-          296.333333333333300000)
+          296.333333333333400000)
         Alignment = taCenter
         AlignToBand = False
         AutoSize = True
@@ -606,7 +606,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           1238.250000000000000000
           0.000000000000000000
-          216.958333333333300000)
+          216.958333333333400000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -790,7 +790,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           13.229166666666670000
           -2.645833333333333000
-          264.583333333333300000)
+          264.583333333333400000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -934,31 +934,31 @@ object FArqueo_Caja: TFArqueo_Caja
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 421
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
     object Panel5: TPanel
       Left = 1
       Top = 29
-      Width = 852
-      Height = 380
+      Width = 860
+      Height = 391
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 850
-        Height = 378
+        Width = 858
+        Height = 389
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object lblComprobantes: TLabel
           Left = 1
-          Top = 348
-          Width = 848
+          Top = 359
+          Width = 856
           Height = 29
           Align = alBottom
           Alignment = taRightJustify
@@ -978,8 +978,8 @@ object FArqueo_Caja: TFArqueo_Caja
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 848
-          Height = 231
+          Width = 856
+          Height = 242
           Align = alClient
           Color = 14606012
           DataSource = DS_ComprobanteDetalle
@@ -1040,8 +1040,8 @@ object FArqueo_Caja: TFArqueo_Caja
         end
         object DBGridFormaPago: TDBGrid
           Left = 1
-          Top = 232
-          Width = 848
+          Top = 243
+          Width = 856
           Height = 116
           Align = alBottom
           Color = 14606012
@@ -1085,7 +1085,7 @@ object FArqueo_Caja: TFArqueo_Caja
     object PanelFiltro: TPanel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 860
       Height = 28
       Align = alTop
       Font.Charset = ANSI_CHARSET
@@ -1127,7 +1127,7 @@ object FArqueo_Caja: TFArqueo_Caja
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1611,11 +1611,18 @@ object FArqueo_Caja: TFArqueo_Caja
       
         'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
         '_cabecera)'
-      'where (extractdate(c.fecha)=:fecha)and (c.ID_TIPO_CPB=11)')
+      'where (extractdate(c.fecha)=:fecha)'
+      '    and (c.ID_TIPO_CPB=11)'
+      '    and c.id_sucursal = :id_sucursal')
     Params = <
       item
         DataType = ftUnknown
         Name = 'fecha'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     Left = 177
@@ -1624,6 +1631,11 @@ object FArqueo_Caja: TFArqueo_Caja
       item
         DataType = ftUnknown
         Name = 'fecha'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
@@ -1711,27 +1723,37 @@ object FArqueo_Caja: TFArqueo_Caja
   object ZQ_Comprobante_FormaPago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
+      'select sum(cfp.importe_real), tfp.descripcion as tFormaPago_,'
       
-        'select sum(cfp.importe_real), tfp.descripcion as tFormaPago_,tfp' +
-        '."IF",c1.nombre_cuenta as CuentaIngreso,c2.nombre_cuenta as Cuen' +
-        'taEgreso'
+        '       tfp."IF", c1.nombre_cuenta as CuentaIngreso, c2.nombre_cu' +
+        'enta as CuentaEgreso'
       'from comprobante_forma_pago cfp'
+      
+        'left join comprobante c on (c.id_comprobante = cfp.id_comprobant' +
+        'e)'
       
         'left join tipo_formapago tfp on (tfp.id_tipo_formapago=cfp.id_ti' +
         'po_formapag)'
       'left join cuenta c1 on (cfp.cuenta_ingreso=c1.id_cuenta)'
       'left join cuenta c2 on (cfp.cuenta_egreso=c2.id_cuenta)'
+      'where (extractdate(cfp.fecha_fp) = :fecha)'
       
-        'where (extractdate(cfp.fecha_fp)=:fecha) and ((cfp.cuenta_ingres' +
-        'o is not null) and (cfp.cuenta_egreso is null) )'
+        '  and ( (cfp.cuenta_ingreso is not null) and (cfp.cuenta_egreso ' +
+        'is null) )'
+      '  and c.id_sucursal = :id_sucursal'
+      '  and c.id_tipo_cpb = 11'
       
         'group by tfp.descripcion,tfp."IF",c1.nombre_cuenta,c2.nombre_cue' +
-        'nta'
-      '')
+        'nta')
     Params = <
       item
         DataType = ftUnknown
         Name = 'fecha'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     Left = 321
@@ -1740,6 +1762,11 @@ object FArqueo_Caja: TFArqueo_Caja
       item
         DataType = ftUnknown
         Name = 'fecha'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     object ZQ_Comprobante_FormaPagoSUM: TFloatField

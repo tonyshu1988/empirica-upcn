@@ -381,7 +381,7 @@ uses UDM, UPrincipal, DateUtils;
 
 procedure TFEstadisticaDisponibilidades.FormCreate(Sender: TObject);
 var
-  anio, mes: integer;
+  anio, mes, indice_suc: integer;
 begin
   QRDBLogo.DataSet:= dm.ZQ_Sucursal;
   QRDBLogo2.DataSet:= dm.ZQ_Sucursal;
@@ -415,16 +415,25 @@ begin
   mes:= MonthOf(dm.EKModelo.Fecha);
   anio:= YearOf(dm.EKModelo.Fecha);
 
+  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    indice_suc:= dm.ZQ_SucursalesVisibles.RecNo - 1
+  else
+    indice_suc:= 0;
+
   TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.FechayHora);
+  TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[1]).ItemIndex:= indice_suc;
 
   TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.Fecha);
   TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.Fecha);
+  TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
 
   TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.Fecha);
   TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.Fecha);
+  TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
 
   TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[1]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
   TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.FechayHora);
+  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[3]).ItemIndex:= indice_suc;
 end;
 
 
@@ -452,7 +461,7 @@ begin
       else
       begin
         ZP_SaldosCuentas.Close;
-        if EKBuscarSaldo.ParametrosSeleccionados1[1] = '' then
+        if EKBuscarSaldo.ParametrosSeleccionados1[1] = '0' then
           ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= -1
         else
           ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarSaldo.ParametrosSeleccionados1[1]);
@@ -487,7 +496,7 @@ begin
         ZP_estadistica_Parte_Diario.Close;
         ZP_Estadistica_IE_Medios.Close;
 
-        if EKBuscarParteDiario.ParametrosSeleccionados1[2] = '' then
+        if EKBuscarParteDiario.ParametrosSeleccionados1[2] = '0' then
         begin
           ZP_PD_SaldoCuentas.ParamByName('id_sucursal').AsInteger:= -1;
           ZP_estadistica_Parte_Diario.ParamByName('id_sucursal').AsInteger:= -1;
@@ -537,7 +546,7 @@ begin
       begin
         ZP_Estadistica_Det_Mov.Close;
 
-        if EKBuscarDetMov.ParametrosSeleccionados1[2] = '' then
+        if EKBuscarDetMov.ParametrosSeleccionados1[2] = '0' then
         begin
           ZP_Estadistica_Det_Mov.ParamByName('ID_SUCURSAL_INGRESO').AsInteger:= -1;
         end
@@ -572,7 +581,7 @@ begin
       begin
         lblBalanceTipoComprobante.Caption:= 'Tipo Comprobante: '+EKBuscarBalance.ParametrosSelecReales1[0];
         lblBalanceSucursal.Caption:= 'Sucursal: '+EKBuscarBalance.ParametrosSelecReales1[3];
-        if EKBuscarBalance.ParametrosSeleccionados1[3] = '' then
+        if EKBuscarBalance.ParametrosSeleccionados1[3] = '0' then
           abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[0]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), -1)
         else
           abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[0]) ,StrToDate(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), StrToInt(EKBuscarBalance.ParametrosSeleccionados1[2]));

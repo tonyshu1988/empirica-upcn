@@ -314,7 +314,7 @@ end;
 
 procedure TFEstadisticaMovInternos.FormCreate(Sender: TObject);
 var
-  anio, mes: integer;
+  anio, mes, indice_suc: integer;
 begin
   QRRepListadoDBLogo.DataSet:= dm.ZQ_Sucursal;
   QRRepBalanceDBLogo.DataSet:= dm.ZQ_Sucursal;
@@ -336,14 +336,22 @@ begin
   mes:= MonthOf(dm.EKModelo.Fecha);
   anio:= YearOf(dm.EKModelo.Fecha);
 
+  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    indice_suc:= dm.ZQ_SucursalesVisibles.RecNo - 1
+  else
+    indice_suc:= 0;
+
   TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
   TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
+  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
 
   TEKCriterioBA(EKBuscar_Mov.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
   TEKCriterioBA(EKBuscar_Mov.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
+  TEKCriterioBA(EKBuscar_Mov.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
 
   TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
   TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
+  TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
 end;
 
 
@@ -395,7 +403,7 @@ begin
       else
       begin
         lblBalanceSucursal.Caption:= 'Sucursal: '+EKBuscarBalance.ParametrosSelecReales1[2];
-        if EKBuscarBalance.ParametrosSeleccionados1[2] = '' then
+        if EKBuscarBalance.ParametrosSeleccionados1[2] = '0' then
           abrirBalance(StrToDate(EKBuscarBalance.ParametrosSeleccionados1[0]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[1]), -1)
         else
           abrirBalance(StrToDate(EKBuscarBalance.ParametrosSeleccionados1[0]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToInt(EKBuscarBalance.ParametrosSeleccionados1[2]));
@@ -419,41 +427,41 @@ begin
         ZQ_Movimientos.Close;
         ZQ_Movimientos.ParamByName('fecha_desde').AsDate:= StrToDate(EKBuscar_Mov.ParametrosSeleccionados1[0]);
         ZQ_Movimientos.ParamByName('fecha_hasta').AsDate:= StrToDate(EKBuscar_Mov.ParametrosSeleccionados1[1]);
-        if EKBuscar_Mov.ParametrosSeleccionados1[2] = '' then
+        if EKBuscar_Mov.ParametrosSeleccionados1[2] = '0' then
           ZQ_Movimientos.ParamByName('id_sucursal').AsInteger:= -1
         else
           ZQ_Movimientos.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscar_Mov.ParametrosSeleccionados1[2]);
         ZQ_Movimientos.Open;
 
-      filtro:= '(1 = 1)';
-      if EKBuscar_Mov.ParametrosSelecReales1[3] <> '' then
-        filtro:= filtro + ' and NOMBRE_MOVIMIENTO LIKE ''*'+UpperCase(EKBuscar_Mov.ParametrosSelecReales1[3])+'*''';
+        filtro:= '(1 = 1)';
+        if EKBuscar_Mov.ParametrosSelecReales1[3] <> '' then
+          filtro:= filtro + ' and NOMBRE_MOVIMIENTO LIKE ''*'+UpperCase(EKBuscar_Mov.ParametrosSelecReales1[3])+'*''';
 
-      if EKBuscar_Mov.ParametrosSelecReales1[4] <> '' then
-        filtro:= filtro + ' and ID_TIPO_CPB = '+EKBuscar_Mov.ParametrosSeleccionados1[4];
+        if EKBuscar_Mov.ParametrosSelecReales1[4] <> '' then
+          filtro:= filtro + ' and ID_TIPO_CPB = '+EKBuscar_Mov.ParametrosSeleccionados1[4];
 
-      condicionImporte:= EKBuscar_Mov.ParametrosSelecCondicion1[5];
-      if EKBuscar_Mov.ParametrosSelecReales1[5] <> '' then
-        if EKBuscar_Mov.ParametrosSelecReales1[4] = '' then //si no filtro por tipo
-          filtro:= filtro + ' and ((ingresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+') or '+
-                    '(egresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+'))'
-        else //si filtre por tipo
-          if EKBuscar_Mov.ParametrosSeleccionados1[4] = '16' then //si no filtro por tipo
-            filtro:= filtro + ' and (ingresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+')'
-          else
-            filtro:= filtro + ' and (egresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+')';
+        condicionImporte:= EKBuscar_Mov.ParametrosSelecCondicion1[5];
+        if EKBuscar_Mov.ParametrosSelecReales1[5] <> '' then
+          if EKBuscar_Mov.ParametrosSelecReales1[4] = '' then //si no filtro por tipo
+            filtro:= filtro + ' and ((ingresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+') or '+
+                      '(egresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+'))'
+          else //si filtre por tipo
+            if EKBuscar_Mov.ParametrosSeleccionados1[4] = '16' then //si no filtro por tipo
+              filtro:= filtro + ' and (ingresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+')'
+            else
+              filtro:= filtro + ' and (egresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+')';
 
-      if filtro <> '(1 = 1)' then
-      begin
-        ZQ_Movimientos.Filter:= filtro;
-        ZQ_Movimientos.Filtered:= true;
-      end
-      else
-        ZQ_Movimientos.Filtered:= false;
+        if filtro <> '(1 = 1)' then
+        begin
+          ZQ_Movimientos.Filter:= filtro;
+          ZQ_Movimientos.Filtered:= true;
+        end
+        else
+          ZQ_Movimientos.Filtered:= false;
+
+        lblMovFecha.Caption:= 'Movimientos Internos desde el '+EKBuscar_Mov.ParametrosSeleccionados1[0]+' al '+EKBuscar_Mov.ParametrosSeleccionados1[1];
+        lblMovSucursal.Caption:= 'Sucursal: '+EKBuscar_Mov.ParametrosSelecReales1[2];
       end;
-
-      lblMovFecha.Caption:= 'Movimientos Internos desde el '+EKBuscar_Mov.ParametrosSeleccionados1[0]+' al '+EKBuscar_Mov.ParametrosSeleccionados1[1];
-      lblMovSucursal.Caption:= 'Sucursal: '+EKBuscar_Mov.ParametrosSelecReales1[2];
   end;
 
 //INGRESOS VS EGRESOS
@@ -474,7 +482,7 @@ begin
         Query_Ingresos:= false;
 
         idSucursal:= -1;
-        if EKBuscaIngEgr.ParametrosSeleccionados1[2] <> '' then
+        if EKBuscaIngEgr.ParametrosSeleccionados1[2] <> '0' then
           idSucursal:= StrToInt(EKBuscaIngEgr.ParametrosSeleccionados1[2]);
 
         ZQ_Ingresos.Close;

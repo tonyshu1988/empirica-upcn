@@ -2270,9 +2270,13 @@ object FEstadisticaStock: TFEstadisticaStock
       end
       item
         Titulo = 'Sucursal'
-        Campo = 'nombre'
+        Campo = 'id_sucursal'
         Tabla = 'sucursal'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = DM.ZQ_SucursalesVisibles
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -2439,7 +2443,7 @@ object FEstadisticaStock: TFEstadisticaStock
     Grilla = DBGridStock
     Filtros = <
       item
-        TituloColumna = 'C'#243'd. Producto'
+        TituloColumna = 'C'#243'd. Corto'
         Visible = True
       end
       item
