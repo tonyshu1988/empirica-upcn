@@ -1547,6 +1547,8 @@ begin
   if CD_Tablas_Actualizar.Eof then
     exit;
 
+  CD_ProcesarNovedades.DisableControls;
+
   try
     //inicio transaccion
     if dm.ModeloEscritura.iniciar_transaccion(transaccion_actualizar_base, []) then
@@ -1640,7 +1642,6 @@ begin
               CD_ProcesarNovedades.Next;
             end;
           end;
-          pBar_Novedades.Position:= pBar_Novedades.Position + 1;
 
           //si la query no esta vacia o si la query es vacia pero es una operacion de Insert aplico los cambios
           if (es_query_vacia = false) or ((es_query_vacia = true) and (operacion = 'I')) then
@@ -1649,6 +1650,8 @@ begin
 
         //paso a la tabla siguiente
         CD_Tablas_Actualizar.next;
+        Application.ProcessMessages;
+        pBar_Novedades.Position:= pBar_Novedades.Position + 1;
       end;
       //saco el filro
       CD_ProcesarNovedades.Filtered:= false;
@@ -1661,6 +1664,8 @@ begin
       ZQ_GrabarUltimoArchivoServerULTIMO_ARCHIVO.AsString:= archivo;
       ZQ_GrabarUltimoArchivoServer.Post;
 
+      CD_ProcesarNovedades.EnableControls;
+
       //finalizo transaccion
       if dm.ModeloEscritura.finalizar_transaccion(transaccion_actualizar_base) then
         Result:= true
@@ -1669,6 +1674,7 @@ begin
     end;
   except //si se produce una excepcion en el proceso cancelo el mismo
     begin
+      CD_ProcesarNovedades.EnableControls;
       CD_ProcesarNovedades.Filtered:= false;
       dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
       Result:= false;
@@ -1826,7 +1832,7 @@ begin
       pBar_Novedades.Position:= 0;
       //obtengo el listado de todas las tablas a actualizar
       obtener_tablas_actualizar();
-      pBar_Novedades.Max:= CD_ProcesarNovedades.RecordCount;
+      pBar_Novedades.Max:= CD_Tablas_Actualizar.RecordCount;
       memoLog.Lines.Add(getFechayHoraString+' - Procesando el archivo de novedades '+CD_ListaNovedades_NombreArchivo.AsString);
       //busco el id_cliente del cliente que subio el archivo
       id_cliente:= 1;
@@ -1883,6 +1889,8 @@ begin
 
   if CD_Tablas_Actualizar.Eof then
     exit;
+
+  CD_ProcesarNovedades.DisableControls;
 
   try
     //inicio transaccion
@@ -1942,8 +1950,9 @@ begin
         ZQ_Sinc_Clave.ApplyUpdates;
         ZQ_Sinc_Campo.ApplyUpdates;
 
+        CD_Tablas_Actualizar.next;        
         pBar_Novedades.Position:= pBar_Novedades.Position + 1;
-        CD_Tablas_Actualizar.next;
+        Application.ProcessMessages;
       end;
       //saco el filro
       CD_ProcesarNovedades.Filtered:= false;
@@ -1957,6 +1966,8 @@ begin
       ZQ_GrabarUltimoArchivoClienteULTIMO_ARCHIVO.AsString:= archivo;
       ZQ_GrabarUltimoArchivoCliente.Post;
 
+      CD_ProcesarNovedades.EnableControls;
+
       //finalizo transaccion
       if dm.ModeloEscritura.finalizar_transaccion(transaccion_actualizar_base) then
         Result:= true
@@ -1965,6 +1976,8 @@ begin
     end;
   except //si se produce una excepcion en el proceso cancelo el mismo
     begin
+      CD_ProcesarNovedades.EnableControls;
+      CD_ProcesarNovedades.Filtered:= false;
       dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
       Result:= false;
     end
