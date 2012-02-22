@@ -1,8 +1,8 @@
 object FArqueo_Caja: TFArqueo_Caja
-  Left = 289
-  Top = 179
-  Width = 870
-  Height = 500
+  Left = 361
+  Top = 170
+  Width = 871
+  Height = 599
   Caption = 'Arqueo de Caja'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,10 +19,203 @@ object FArqueo_Caja: TFArqueo_Caja
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object PanelContenedor: TPanel
+    Left = 0
+    Top = 0
+    Width = 863
+    Height = 520
+    Align = alClient
+    Caption = 'PanelContenedor'
+    TabOrder = 4
+    object Panel5: TPanel
+      Left = 1
+      Top = 29
+      Width = 861
+      Height = 490
+      Align = alClient
+      Caption = 'Panel5'
+      TabOrder = 0
+      object Panel1: TPanel
+        Left = 1
+        Top = 1
+        Width = 859
+        Height = 488
+        Align = alClient
+        Caption = 'Panel1'
+        TabOrder = 0
+        object lblComprobantes: TLabel
+          Left = 1
+          Top = 458
+          Width = 857
+          Height = 29
+          Align = alBottom
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Total Ingreso: $ 0.00 '
+          Color = 16729670
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object DBGridListadoProductos: TDBGrid
+          Left = 1
+          Top = 1
+          Width = 857
+          Height = 341
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_ComprobanteDetalle
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID_PRODUCTO'
+              Title.Caption = 'ID'
+              Width = 46
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DETALLE_PROD'
+              Title.Caption = 'Producto'
+              Width = 174
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Caption = 'Cant.'
+              Width = 40
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PORC_DESCUENTO'
+              Title.Caption = 'Desc.'
+              Width = 57
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_IVA'
+              Title.Caption = 'Importe IVA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_VENTA'
+              Title.Caption = 'Importe Venta'
+              Visible = True
+            end>
+        end
+        object DBGridFormaPago: TDBGrid
+          Left = 1
+          Top = 342
+          Width = 857
+          Height = 116
+          Align = alBottom
+          Color = 14606012
+          DataSource = DS_Comprobante_FormaPago
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'TFORMAPAGO_'
+              Title.Caption = 'Forma de Pago'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CUENTAINGRESO'
+              Title.Caption = 'Cuenta Ingreso'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUM'
+              Title.Caption = 'Total'
+              Width = 84
+              Visible = True
+            end>
+        end
+      end
+    end
+    object PanelFiltro: TPanel
+      Left = 1
+      Top = 1
+      Width = 861
+      Height = 28
+      Align = alTop
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 1
+      object Label39: TLabel
+        Left = 19
+        Top = 8
+        Width = 38
+        Height = 13
+        Caption = 'Fecha:'
+      end
+      object DateTimePicker1: TDateTimePicker
+        Left = 64
+        Top = 4
+        Width = 121
+        Height = 21
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        Date = 40787.791288229160000000
+        Time = 40787.791288229160000000
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        OnChange = DateTimePicker1Change
+      end
+    end
+  end
   object RepArqueo: TQuickRep
     Tag = 99
-    Left = 137
-    Top = 105
+    Left = 41
+    Top = 65
     Width = 794
     Height = 1123
     Frame.Color = clBlack
@@ -112,7 +305,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          735.541666666666700000
+          735.541666666666800000
           10.583333333333330000
           423.333333333333300000)
         Alignment = taCenter
@@ -144,7 +337,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          759.354166666666700000
+          759.354166666666800000
           74.083333333333340000
           378.354166666666700000)
         Alignment = taCenter
@@ -176,7 +369,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           47.625000000000000000
-          799.041666666666700000
+          799.041666666666800000
           140.229166666666700000
           296.333333333333400000)
         Alignment = taCenter
@@ -636,7 +829,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          804.333333333333300000
+          804.333333333333200000
           0.000000000000000000
           185.208333333333300000)
         Alignment = taLeftJustify
@@ -670,7 +863,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           658.812500000000000000
           0.000000000000000000
-          92.604166666666670000)
+          92.604166666666680000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -820,7 +1013,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          664.104166666666700000
+          664.104166666666800000
           -2.645833333333333000
           269.875000000000000000)
         Alignment = taLeftJustify
@@ -928,199 +1121,6 @@ object FArqueo_Caja: TFArqueo_Caja
         WordWrap = True
         ExportAs = exptText
         FontSize = 10
-      end
-    end
-  end
-  object PanelContenedor: TPanel
-    Left = 0
-    Top = 0
-    Width = 862
-    Height = 421
-    Align = alClient
-    Caption = 'PanelContenedor'
-    TabOrder = 4
-    object Panel5: TPanel
-      Left = 1
-      Top = 29
-      Width = 860
-      Height = 391
-      Align = alClient
-      Caption = 'Panel5'
-      TabOrder = 0
-      object Panel1: TPanel
-        Left = 1
-        Top = 1
-        Width = 858
-        Height = 389
-        Align = alClient
-        Caption = 'Panel1'
-        TabOrder = 0
-        object lblComprobantes: TLabel
-          Left = 1
-          Top = 359
-          Width = 856
-          Height = 29
-          Align = alBottom
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Total Ingreso: $ 0.00 '
-          Color = 16729670
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -15
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object DBGridListadoProductos: TDBGrid
-          Left = 1
-          Top = 1
-          Width = 856
-          Height = 242
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_ComprobanteDetalle
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'ID_PRODUCTO'
-              Title.Caption = 'ID'
-              Width = 46
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DETALLE_PROD'
-              Title.Caption = 'Producto'
-              Width = 174
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CANTIDAD'
-              Title.Caption = 'Cant.'
-              Width = 40
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PORC_DESCUENTO'
-              Title.Caption = 'Desc.'
-              Width = 57
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_IVA'
-              Title.Caption = 'Importe IVA'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_VENTA'
-              Title.Caption = 'Importe Venta'
-              Visible = True
-            end>
-        end
-        object DBGridFormaPago: TDBGrid
-          Left = 1
-          Top = 243
-          Width = 856
-          Height = 116
-          Align = alBottom
-          Color = 14606012
-          DataSource = DS_Comprobante_FormaPago
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'TFORMAPAGO_'
-              Title.Caption = 'Forma de Pago'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CUENTAINGRESO'
-              Title.Caption = 'Cuenta Ingreso'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SUM'
-              Title.Caption = 'Total'
-              Width = 84
-              Visible = True
-            end>
-        end
-      end
-    end
-    object PanelFiltro: TPanel
-      Left = 1
-      Top = 1
-      Width = 860
-      Height = 28
-      Align = alTop
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = False
-      TabOrder = 1
-      object Label39: TLabel
-        Left = 19
-        Top = 8
-        Width = 38
-        Height = 13
-        Caption = 'Fecha:'
-      end
-      object DateTimePicker1: TDateTimePicker
-        Left = 64
-        Top = 4
-        Width = 121
-        Height = 21
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        Date = 40787.791288229160000000
-        Time = 40787.791288229160000000
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        OnChange = DateTimePicker1Change
       end
     end
   end
@@ -1740,11 +1740,13 @@ object FArqueo_Caja: TFArqueo_Caja
       
         '  and ( (cfp.cuenta_ingreso is not null) and (cfp.cuenta_egreso ' +
         'is null) )'
-      '  and c.id_sucursal = :id_sucursal'
-      '  and c.id_tipo_cpb = 11'
+      '  and (c.id_sucursal = :id_sucursal)'
+      '  and (c.id_tipo_cpb = 11)'
+      '  and (cfp.id_recibo_op is null)'
       
         'group by tfp.descripcion,tfp."IF",c1.nombre_cuenta,c2.nombre_cue' +
-        'nta')
+        'nta'
+      '')
     Params = <
       item
         DataType = ftUnknown
