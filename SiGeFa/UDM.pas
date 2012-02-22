@@ -170,6 +170,8 @@ Const
   //CUENTA CORRIENTE
   CPB_RECIBO_CTA_CTE = 22; //
   CPB_OP_CTA_CTE     = 23; //  
+  //TRANSFERIR STOCK
+  CPB_TRANSFERIR_STOCK = 24; //Comprobante para hacer la transferencia de stock entre las diferentes posiciones de sucursal
 
   ESTADO_SIN_CONFIRMAR = 0;
   ESTADO_CONFIRMADO    = 1;
@@ -463,7 +465,7 @@ begin
         salir:= true;
       end
       else
-        where:= ' or s.id_sucursal = '+sucursales[i].valor;
+        where:= where + ' or s.id_sucursal = '+sucursales[i].valor;
     end;
   end;
 

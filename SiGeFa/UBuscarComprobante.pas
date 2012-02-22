@@ -201,7 +201,7 @@ begin
   if facturaVenta then //si es una factura de venta
   begin
     query:= ZQ_Factura_Venta;
-    EKBuscarFacturaVenta.SQL_Where[4]:= 'and c.id_cliente = '+IntToStr(id);
+    EKBuscarFacturaVenta.SQL_Where[3]:= 'and c.id_cliente = '+IntToStr(id);
   end
   else
     if facturaCompra then

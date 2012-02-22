@@ -1282,6 +1282,11 @@ begin
   begin
     if dm.EKModelo.iniciar_transaccion('UPDATE/INSERT PRECIOS',[]) then
     begin
+      ZQ_Productos.DisableControls;
+      DBGridProductos.Enabled:= false;
+      GrupoEditando.Enabled:= false;
+      GrupoGuardarCancelar.Enabled:= false;
+
       id_suc_destino:= SUCURSAL_LOGUEO;
       ZQ_Productos.First;
       while not(ZQ_Productos.Eof) do
@@ -1299,6 +1304,11 @@ begin
 
         ZQ_Productos.Next;
       end;
+
+      ZQ_Productos.EnableControls;
+      DBGridProductos.Enabled:= true;
+      GrupoEditando.Enabled:= true;
+      GrupoGuardarCancelar.Enabled:= true;
 
       try
         if DM.EKModelo.finalizar_transaccion('UPDATE/INSERT PRECIOS') then
