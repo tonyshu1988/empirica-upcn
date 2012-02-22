@@ -90,8 +90,8 @@ object FABM_Precios: TFABM_Precios
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1111
-    Height = 490
+    Width = 1119
+    Height = 501
     Align = alClient
     TabOrder = 0
     object RepListaPrecios: TQuickRep
@@ -240,7 +240,7 @@ object FABM_Precios: TFABM_Precios
           Size.Values = (
             52.916666666666670000
             1150.937500000000000000
-            68.791666666666670000
+            68.791666666666680000
             465.666666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -1434,7 +1434,7 @@ object FABM_Precios: TFABM_Precios
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1669,8 +1669,8 @@ object FABM_Precios: TFABM_Precios
     object DBGridProductos: TDBGrid
       Left = 1
       Top = 19
-      Width = 1109
-      Height = 268
+      Width = 1117
+      Height = 279
       Align = alClient
       Color = 14606012
       DataSource = DS_Productos
@@ -1855,8 +1855,8 @@ object FABM_Precios: TFABM_Precios
     end
     object PanelEdicion: TPanel
       Left = 1
-      Top = 287
-      Width = 1109
+      Top = 298
+      Width = 1117
       Height = 202
       Hint = '`'
       Align = alBottom
@@ -1864,7 +1864,7 @@ object FABM_Precios: TFABM_Precios
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 1107
+        Width = 1115
         Height = 53
         Align = alTop
         BevelOuter = bvNone
@@ -1873,7 +1873,7 @@ object FABM_Precios: TFABM_Precios
         object Label1: TLabel
           Left = 4
           Top = 4
-          Width = 1099
+          Width = 1107
           Height = 13
           Align = alTop
           Caption = 'Seleccione el tipo de calculo para actualizar los precio:'
@@ -1881,7 +1881,7 @@ object FABM_Precios: TFABM_Precios
         object RadioGroupTipoUpdate: TRadioGroup
           Left = 4
           Top = 17
-          Width = 1099
+          Width = 1107
           Height = 32
           Align = alClient
           Columns = 2
@@ -1896,7 +1896,7 @@ object FABM_Precios: TFABM_Precios
       object Panel2: TPanel
         Left = 1
         Top = 132
-        Width = 1107
+        Width = 1115
         Height = 69
         Align = alBottom
         BevelOuter = bvNone
@@ -1905,7 +1905,7 @@ object FABM_Precios: TFABM_Precios
         object Label5: TLabel
           Left = 4
           Top = 4
-          Width = 1099
+          Width = 1107
           Height = 13
           Align = alTop
           Caption = 'Seleccione si desea actualizar los diferentes impuestos:'
@@ -1928,7 +1928,7 @@ object FABM_Precios: TFABM_Precios
         object GboxImpuestos: TGroupBox
           Left = 192
           Top = 17
-          Width = 911
+          Width = 919
           Height = 48
           Align = alClient
           Caption = ' Impuestos  '
@@ -1995,7 +1995,7 @@ object FABM_Precios: TFABM_Precios
       object Panel3: TPanel
         Left = 1
         Top = 54
-        Width = 1107
+        Width = 1115
         Height = 78
         Align = alClient
         BevelOuter = bvNone
@@ -2018,7 +2018,7 @@ object FABM_Precios: TFABM_Precios
         object GBoxIncDecImportes: TGroupBox
           Left = 189
           Top = 4
-          Width = 914
+          Width = 922
           Height = 70
           Align = alClient
           Caption = ' Precios  '
@@ -2228,7 +2228,7 @@ object FABM_Precios: TFABM_Precios
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1109
+      Width = 1117
       Height = 18
       Align = alTop
       ParentShowHint = False
@@ -2249,7 +2249,7 @@ object FABM_Precios: TFABM_Precios
         ParentFont = False
       end
       object lblModoSeleccion: TLabel
-        Left = 1012
+        Left = 1020
         Top = 1
         Width = 96
         Height = 16
@@ -2267,7 +2267,7 @@ object FABM_Precios: TFABM_Precios
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3068,6 +3068,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Barra'
@@ -3077,6 +3078,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Cod. Corto'
@@ -3086,6 +3088,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nombre Producto'
@@ -3095,6 +3098,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Medida'
@@ -3104,6 +3108,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Color'
@@ -3113,6 +3118,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Marca'
@@ -3122,6 +3128,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo Articulo'
@@ -3131,6 +3138,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Articulo'
@@ -3140,6 +3148,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Precio Costo'
@@ -3150,6 +3159,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Precio Venta'
@@ -3160,6 +3170,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Coef. Ganancia'
@@ -3170,6 +3181,7 @@ object FABM_Precios: TFABM_Precios
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

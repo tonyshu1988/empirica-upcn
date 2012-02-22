@@ -20,15 +20,15 @@ object FBuscarComprobante: TFBuscarComprobante
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 347
     Align = alClient
     TabOrder = 0
     object DBGridFacturas: TDBGrid
       Left = 1
       Top = 1
-      Width = 712
-      Height = 231
+      Width = 720
+      Height = 242
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -84,8 +84,8 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object PanelDetalle: TPanel
       Left = 1
-      Top = 232
-      Width = 712
+      Top = 243
+      Width = 720
       Height = 103
       Align = alBottom
       BevelOuter = bvNone
@@ -93,7 +93,7 @@ object FBuscarComprobante: TFBuscarComprobante
       object lblDetalleFactura: TLabel
         Left = 0
         Top = 0
-        Width = 712
+        Width = 720
         Height = 13
         Align = alTop
         Caption = 'Detalle Factura'
@@ -101,7 +101,7 @@ object FBuscarComprobante: TFBuscarComprobante
       object DBGridDetalle: TDBGrid
         Left = 0
         Top = 13
-        Width = 712
+        Width = 720
         Height = 90
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alClient
@@ -150,7 +150,7 @@ object FBuscarComprobante: TFBuscarComprobante
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -926,6 +926,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Factura'
@@ -935,6 +936,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Producto/Servicio'
@@ -944,6 +946,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Barra'
@@ -953,6 +956,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Saldo'
@@ -964,6 +968,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -972,7 +977,11 @@ object FBuscarComprobante: TFBuscarComprobante
       
         'select distinct c.id_comprobante, c.id_cliente, c.codigo, cast(c' +
         '.fecha as Date) fecha, c.importe_venta,'
-      '       cfp.importe_real, '#39'FACTURA '#39'||c.codigo as Descripcion'
+      '       cfp.importe_real,'
+      '       case'
+      '        when (c.id_tipo_cpb = 11) then '#39'FACTURA '#39'||c.codigo'
+      '        when (c.id_tipo_cpb = 17) then c.observacion'
+      '       end as Descripcion'
       'from comprobante c'
       
         'left join comprobante_forma_pago cfp on (c.id_comprobante = cfp.' +
@@ -984,8 +993,9 @@ object FBuscarComprobante: TFBuscarComprobante
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
-      'where c.id_tipo_cpb = 11'
-      '  and cfp.cuenta_ingreso = 1'
+      
+        'where ((c.id_tipo_cpb = 11 and cfp.cuenta_ingreso = 1) or (c.id_' +
+        'tipo_cpb = 17))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
       '  and c.id_cliente = :id_cliente'
@@ -994,7 +1004,11 @@ object FBuscarComprobante: TFBuscarComprobante
       
         'select distinct c.id_comprobante, c.id_cliente, c.codigo, cast(c' +
         '.fecha as Date) fecha, c.importe_venta,'
-      '       cfp.importe_real, '#39'FACTURA '#39'||c.codigo as Descripcion')
+      '       cfp.importe_real,'
+      '       case'
+      '        when (c.id_tipo_cpb = 11) then '#39'FACTURA '#39'||c.codigo'
+      '        when (c.id_tipo_cpb = 17) then c.observacion'
+      '       end as Descripcion')
     SQL_From.Strings = (
       'from comprobante c'
       
@@ -1008,8 +1022,9 @@ object FBuscarComprobante: TFBuscarComprobante
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)')
     SQL_Where.Strings = (
-      'where c.id_tipo_cpb = 11'
-      '  and cfp.cuenta_ingreso = 1'
+      
+        'where ((c.id_tipo_cpb = 11 and cfp.cuenta_ingreso = 1) or (c.id_' +
+        'tipo_cpb = 17))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
       '  and c.id_cliente = :id_cliente')
@@ -1181,6 +1196,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Punto Venta'
@@ -1192,6 +1208,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'N'#250'mero Factura'
@@ -1203,6 +1220,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Producto/Servicio'
@@ -1212,6 +1230,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Barra'
@@ -1221,6 +1240,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Saldo'
@@ -1232,6 +1252,7 @@ object FBuscarComprobante: TFBuscarComprobante
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
