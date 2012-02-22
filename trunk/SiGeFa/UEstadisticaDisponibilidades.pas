@@ -420,20 +420,20 @@ begin
   else
     indice_suc:= 0;
 
-  TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.FechayHora);
-  TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[1]).ItemIndex:= indice_suc;
+  TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[0]).ItemIndex:= indice_suc;
+  TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
 
-  TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.Fecha);
+  TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[0]).ItemIndex:= indice_suc;
   TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.Fecha);
-  TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
+  TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.Fecha);
 
-  TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[0]).Valor := DateToStr(dm.EKModelo.Fecha);
+  TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[0]).ItemIndex:= indice_suc;
   TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.Fecha);
-  TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
+  TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.Fecha);
 
-  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[1]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
-  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[2]).Valor := DateToStr(dm.EKModelo.FechayHora);
-  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[3]).ItemIndex:= indice_suc;
+  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[0]).ItemIndex:= indice_suc;
+  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[2]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
+  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[3]).Valor := DateToStr(dm.EKModelo.FechayHora);
 end;
 
 
@@ -453,7 +453,7 @@ begin
     lblSaldo_Encabezado1.Caption := '';
 
     if  EKBuscarSaldo.BuscarSinEjecutar then
-      if EKBuscarSaldo.ParametrosSeleccionados1[0] = '' then
+      if EKBuscarSaldo.ParametrosSeleccionados1[1] = '' then
       begin
         Application.MessageBox('No se ha cargado la fecha', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
@@ -461,15 +461,15 @@ begin
       else
       begin
         ZP_SaldosCuentas.Close;
-        if EKBuscarSaldo.ParametrosSeleccionados1[1] = '0' then
+        if EKBuscarSaldo.ParametrosSeleccionados1[0] = '0' then
           ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= -1
         else
-          ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarSaldo.ParametrosSeleccionados1[1]);
-        ZP_SaldosCuentas.ParamByName('fecha_hasta').AsDate := StrToDate(EKBuscarSaldo.ParametrosSeleccionados1[0]);
+          ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarSaldo.ParametrosSeleccionados1[0]);
+        ZP_SaldosCuentas.ParamByName('fecha_hasta').AsDate := StrToDate(EKBuscarSaldo.ParametrosSeleccionados1[1]);
         ZP_SaldosCuentas.Open;
 
-        lblSaldo_Encabezado1.Caption:= 'Saldo Cuentas al '+EKBuscarSaldo.ParametrosSeleccionados1[0];
-        lblSaldo_Encabezado2.Caption:= 'Sucursal: '+EKBuscarSaldo.ParametrosSelecReales1[1];
+        lblSaldo_Encabezado1.Caption:= 'Saldo Cuentas al '+EKBuscarSaldo.ParametrosSeleccionados1[1];
+        lblSaldo_Encabezado2.Caption:= 'Sucursal: '+EKBuscarSaldo.ParametrosSelecReales1[0];
         lblSaldo_Total.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_Saldo.SumCollection.Items[0].SumValue);
       end;
   end;
@@ -485,7 +485,7 @@ begin
     lblPD_totalEgreso.Caption := '';
 
     if  EKBuscarParteDiario.BuscarSinEjecutar then
-      if (EKBuscarParteDiario.ParametrosSeleccionados1[0] = '') or (EKBuscarParteDiario.ParametrosSeleccionados1[1] = '') then
+      if (EKBuscarParteDiario.ParametrosSeleccionados1[1] = '') or (EKBuscarParteDiario.ParametrosSeleccionados1[2] = '') then
       begin
         Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
@@ -496,7 +496,7 @@ begin
         ZP_estadistica_Parte_Diario.Close;
         ZP_Estadistica_IE_Medios.Close;
 
-        if EKBuscarParteDiario.ParametrosSeleccionados1[2] = '0' then
+        if EKBuscarParteDiario.ParametrosSeleccionados1[0] = '0' then
         begin
           ZP_PD_SaldoCuentas.ParamByName('id_sucursal').AsInteger:= -1;
           ZP_estadistica_Parte_Diario.ParamByName('id_sucursal').AsInteger:= -1;
@@ -504,24 +504,24 @@ begin
         end
         else
         begin
-          lblSucursal.Caption:= 'Sucursal: '+EKBuscarParteDiario.ParametrosSelecReales1[2];
-          ZP_PD_SaldoCuentas.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
-          ZP_estadistica_Parte_Diario.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
-          ZP_Estadistica_IE_Medios.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
+          lblSucursal.Caption:= 'Sucursal: '+EKBuscarParteDiario.ParametrosSelecReales1[0];
+          ZP_PD_SaldoCuentas.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
+          ZP_estadistica_Parte_Diario.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
+          ZP_Estadistica_IE_Medios.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
         end;
 
-        ZP_PD_SaldoCuentas.ParamByName('fecha_hasta').AsDate := StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[1]);
+        ZP_PD_SaldoCuentas.ParamByName('fecha_hasta').AsDate := StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
         ZP_PD_SaldoCuentas.Open;
 
-        ZP_estadistica_Parte_Diario.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
-        ZP_estadistica_Parte_Diario.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[1]);
+        ZP_estadistica_Parte_Diario.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[1]);
+        ZP_estadistica_Parte_Diario.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
         ZP_estadistica_Parte_Diario.Open;
 
-        ZP_Estadistica_IE_Medios.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
-        ZP_Estadistica_IE_Medios.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[1]);
+        ZP_Estadistica_IE_Medios.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[1]);
+        ZP_Estadistica_IE_Medios.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
         ZP_Estadistica_IE_Medios.Open;
 
-        lblEncabezadoParteDiario.Caption:= 'Parte Diario desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[0]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[1];
+        lblEncabezadoParteDiario.Caption:= 'Parte Diario desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[1]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[2];
         lblSaldo_TotalParteDiario.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
         lblPD_totalIngreso.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[0].SumValue);
         lblPD_totalEgreso.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[1].SumValue);
@@ -537,7 +537,7 @@ begin
     lblResumenDetalleMovimiento.Caption := '';
 
     if  EKBuscarDetMov.BuscarSinEjecutar then
-      if (EKBuscarDetMov.ParametrosSeleccionados1[0] = '') or (EKBuscarDetMov.ParametrosSeleccionados1[1] = '') then
+      if (EKBuscarDetMov.ParametrosSeleccionados1[1] = '') or (EKBuscarDetMov.ParametrosSeleccionados1[2] = '') then
       begin
         Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
@@ -546,21 +546,21 @@ begin
       begin
         ZP_Estadistica_Det_Mov.Close;
 
-        if EKBuscarDetMov.ParametrosSeleccionados1[2] = '0' then
+        if EKBuscarDetMov.ParametrosSeleccionados1[0] = '0' then
         begin
           ZP_Estadistica_Det_Mov.ParamByName('ID_SUCURSAL_INGRESO').AsInteger:= -1;
         end
         else
         begin
-          lblSucursalDetMov.Caption:= 'Sucursal: '+EKBuscarDetMov.ParametrosSelecReales1[2];
-          ZP_Estadistica_Det_Mov.ParamByName('ID_SUCURSAL_INGRESO').AsInteger:= StrToInt(EKBuscarDetMov.ParametrosSeleccionados1[2]);
+          lblSucursalDetMov.Caption:= 'Sucursal: '+EKBuscarDetMov.ParametrosSelecReales1[0];
+          ZP_Estadistica_Det_Mov.ParamByName('ID_SUCURSAL_INGRESO').AsInteger:= StrToInt(EKBuscarDetMov.ParametrosSeleccionados1[0]);
         end;
 
-        ZP_Estadistica_Det_Mov.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarDetMov.ParametrosSeleccionados1[0]);
-        ZP_Estadistica_Det_Mov.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarDetMov.ParametrosSeleccionados1[1]);
+        ZP_Estadistica_Det_Mov.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarDetMov.ParametrosSeleccionados1[1]);
+        ZP_Estadistica_Det_Mov.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarDetMov.ParametrosSeleccionados1[2]);
         ZP_Estadistica_Det_Mov.Open;
 
-        lblEncabezadoDetMov.Caption:= 'Detalles Movimientos desde el '+EKBuscarDetMov.ParametrosSeleccionados1[0]+' al '+EKBuscarDetMov.ParametrosSeleccionados1[1];
+        lblEncabezadoDetMov.Caption:= 'Detalles Movimientos desde el '+EKBuscarDetMov.ParametrosSeleccionados1[1]+' al '+EKBuscarDetMov.ParametrosSeleccionados1[2];
       end;
   end;
 
@@ -572,19 +572,19 @@ begin
     lblBalanceTipoComprobante.Caption:= '';
 
     if  EKBuscarBalance.BuscarSinEjecutar then
-      if (EKBuscarBalance.ParametrosSeleccionados1[1] = '') or (EKBuscarBalance.ParametrosSeleccionados1[2] = '') then
+      if (EKBuscarBalance.ParametrosSeleccionados1[2] = '') or (EKBuscarBalance.ParametrosSeleccionados1[3] = '') then
       begin
         Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
       end
       else
       begin
-        lblBalanceTipoComprobante.Caption:= 'Tipo Comprobante: '+EKBuscarBalance.ParametrosSelecReales1[0];
-        lblBalanceSucursal.Caption:= 'Sucursal: '+EKBuscarBalance.ParametrosSelecReales1[3];
-        if EKBuscarBalance.ParametrosSeleccionados1[3] = '0' then
-          abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[0]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), -1)
+        lblBalanceTipoComprobante.Caption:= 'Tipo Comprobante: '+EKBuscarBalance.ParametrosSelecReales1[1];
+        lblBalanceSucursal.Caption:= 'Sucursal: '+EKBuscarBalance.ParametrosSelecReales1[0];
+        if EKBuscarBalance.ParametrosSeleccionados1[0] = '0' then
+          abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[3]), -1)
         else
-          abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[0]) ,StrToDate(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), StrToInt(EKBuscarBalance.ParametrosSeleccionados1[2]));
+          abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[1]) ,StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[3]), StrToInt(EKBuscarBalance.ParametrosSeleccionados1[0]));
       end;
   end;
 end;
@@ -614,12 +614,12 @@ begin
 
     DM.VariablesReportes(RepParteDiario);
 
-    if EKBuscarParteDiario.ParametrosSelecReales1[2] <> '' then
-      QRLabelSucursalParteDiario.Caption:= 'Sucursal: '+EKBuscarParteDiario.ParametrosSelecReales1[2]
+    if EKBuscarParteDiario.ParametrosSelecReales1[0] <> '' then
+      QRLabelSucursalParteDiario.Caption:= 'Sucursal: '+EKBuscarParteDiario.ParametrosSelecReales1[0]
     else
       QRLabelSucursalParteDiario.Caption:= '';
 
-    QRLabelEncabezadoParteDiario.Caption:= 'Parte Diario desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[0]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[1];
+    QRLabelEncabezadoParteDiario.Caption:= 'Parte Diario desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[1]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[2];
     QRLabelImporteSaldo.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
     QRLblPD_TotalIngreso.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[0].SumValue);
     QRLblPD_TotalEgreso.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[1].SumValue);

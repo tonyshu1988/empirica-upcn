@@ -1,6 +1,6 @@
 object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
-  Left = 197
-  Top = 65
+  Left = 254
+  Top = 146
   Width = 1001
   Height = 673
   Caption = 'Estadistica Disponibilidades'
@@ -32,7 +32,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       Top = 1
       Width = 991
       Height = 592
-      ActivePage = TabParteDiario
+      ActivePage = TabSaldosCuentas
       Align = alClient
       TabOrder = 0
       object TabSaldosCuentas: TTabSheet
@@ -150,7 +150,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 50.270833333333330000
-                751.416666666666700000
+                751.416666666666800000
                 124.354166666666700000
                 396.875000000000000000)
               Alignment = taCenter
@@ -171,7 +171,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 12
             end
             object RepSaldo_Subtitulo: TQRLabel
-              Left = -58
+              Left = 293
               Top = 26
               Width = 131
               Height = 20
@@ -182,8 +182,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                775.229166666666700000
-                68.791666666666670000
+                775.229166666666800000
+                68.791666666666680000
                 346.604166666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -203,7 +203,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 9
             end
             object RepSaldo_Titulo: TQRLabel
-              Left = -64
+              Left = 287
               Top = 2
               Width = 144
               Height = 20
@@ -214,7 +214,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                759.354166666666700000
+                759.354166666666800000
                 5.291666666666667000
                 381.000000000000000000)
               Alignment = taCenter
@@ -636,7 +636,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawLeft = False
               Frame.DrawRight = False
               Size.Values = (
-                34.395833333333330000
+                34.395833333333340000
                 13.229166666666670000
                 5.291666666666667000
                 333.375000000000000000)
@@ -813,8 +813,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object DBGridSaldoCuentas: TDBGrid
           Left = 0
           Top = 38
-          Width = 976
-          Height = 444
+          Width = 983
+          Height = 504
           Align = alClient
           Color = 14606012
           DataSource = DS_SaldosCuentas
@@ -863,7 +863,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object PanelTituloSaldo: TPanel
           Left = 0
           Top = 0
-          Width = 976
+          Width = 983
           Height = 38
           Align = alTop
           BevelOuter = bvNone
@@ -872,7 +872,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSaldo_Encabezado2: TLabel
             Left = 4
             Top = 17
-            Width = 144
+            Width = 975
             Height = 13
             Align = alTop
             Caption = 'lblSaldo_Encabezado2'
@@ -886,7 +886,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSaldo_Encabezado1: TLabel
             Left = 4
             Top = 4
-            Width = 144
+            Width = 975
             Height = 13
             Align = alTop
             Caption = 'lblSaldo_Encabezado1'
@@ -900,16 +900,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         end
         object PanelResumenSaldo: TPanel
           Left = 0
-          Top = 482
-          Width = 976
+          Top = 542
+          Width = 983
           Height = 22
           Align = alBottom
           BorderWidth = 4
           TabOrder = 2
           object lblSaldo_Total: TLabel
-            Left = 878
+            Left = 5
             Top = 5
-            Width = 93
+            Width = 973
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -1019,7 +1019,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                687.916666666666700000
+                687.916666666666800000
                 5.291666666666667000
                 518.583333333333400000)
               Alignment = taCenter
@@ -1052,7 +1052,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Size.Values = (
                 52.916666666666670000
                 722.312500000000000000
-                68.791666666666670000
+                68.791666666666680000
                 452.437500000000000000)
               Alignment = taCenter
               AlignToBand = False
@@ -1297,7 +1297,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              76.729166666666670000
+              76.729166666666680000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -1747,7 +1747,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 39.687500000000000000
                 13.229166666666670000
                 0.000000000000000000
-                121.708333333333400000)
+                121.708333333333300000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = True
@@ -2703,9 +2703,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             BorderWidth = 4
             TabOrder = 0
             object lblSaldo_TotalParteDiario: TLabel
-              Left = 5
+              Left = 809
               Top = 5
-              Width = 971
+              Width = 167
               Height = 13
               Align = alTop
               Alignment = taRightJustify
@@ -2730,7 +2730,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblSucursal: TLabel
               Left = 4
               Top = 17
-              Width = 973
+              Width = 71
               Height = 13
               Align = alTop
               Caption = 'lblSucursal'
@@ -2744,7 +2744,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblEncabezadoParteDiario: TLabel
               Left = 4
               Top = 4
-              Width = 973
+              Width = 166
               Height = 13
               Align = alTop
               Caption = 'lblEncabezadoParteDiario'
@@ -2777,7 +2777,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label1: TLabel
                 Left = 0
                 Top = 0
-                Width = 349
+                Width = 58
                 Height = 13
                 Align = alTop
                 Caption = 'RESUMEN'
@@ -3045,7 +3045,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label18: TLabel
                 Left = 0
                 Top = 0
-                Width = 626
+                Width = 320
                 Height = 13
                 Align = alTop
                 Caption = 'INGRESOS Y EGRESOS POR MEDIO DE COBRO/PAGO'
@@ -3115,9 +3115,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 BevelOuter = bvNone
                 TabOrder = 1
                 object lblPD_totalTransfer: TLabel
-                  Left = 0
+                  Left = 499
                   Top = 26
-                  Width = 626
+                  Width = 127
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3130,9 +3130,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object lblPD_totalEgreso: TLabel
-                  Left = 0
+                  Left = 511
                   Top = 0
-                  Width = 626
+                  Width = 115
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3145,9 +3145,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object lblPD_totalIngreso: TLabel
-                  Left = 0
+                  Left = 504
                   Top = 13
-                  Width = 626
+                  Width = 122
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3173,7 +3173,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object Label17: TLabel
               Left = 0
               Top = 0
-              Width = 981
+              Width = 153
               Height = 13
               Align = alTop
               Caption = 'SALDOS DE LAS CUENTAS'
@@ -3466,7 +3466,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 50.270833333333330000
                 1095.375000000000000000
                 124.354166666666700000
-                576.791666666666700000)
+                576.791666666666800000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -3485,7 +3485,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 12
             end
             object RepDetalleMov_Subtitulo: TQRLabel
-              Left = -77
+              Left = 438
               Top = 26
               Width = 170
               Height = 20
@@ -3497,7 +3497,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Size.Values = (
                 52.916666666666670000
                 1158.875000000000000000
-                68.791666666666670000
+                68.791666666666680000
                 449.791666666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -4609,7 +4609,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 50.270833333333330000
-                838.729166666666700000
+                838.729166666666800000
                 124.354166666666700000
                 219.604166666666700000)
               Alignment = taCenter
@@ -4642,7 +4642,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Size.Values = (
                 52.916666666666670000
                 754.062500000000000000
-                68.791666666666670000
+                68.791666666666680000
                 391.583333333333400000)
               Alignment = taCenter
               AlignToBand = True
@@ -5555,16 +5555,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object PanelMes: TPanel
           Left = 0
           Top = 0
-          Width = 620
-          Height = 341
+          Width = 983
+          Height = 564
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object DBGridBalance: TDBGrid
             Left = 0
             Top = 46
-            Width = 620
-            Height = 208
+            Width = 983
+            Height = 431
             Align = alClient
             Color = 14606012
             DataSource = DS_Balance
@@ -5620,8 +5620,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           end
           object PanelMes_Resumen: TPanel
             Left = 0
-            Top = 254
-            Width = 620
+            Top = 477
+            Width = 983
             Height = 87
             Align = alBottom
             BevelOuter = bvNone
@@ -5630,7 +5630,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               983
               87)
             object Label11: TLabel
-              Left = 753
+              Left = 1116
               Top = 7
               Width = 85
               Height = 16
@@ -5645,7 +5645,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Label4: TLabel
-              Left = 761
+              Left = 1124
               Top = 62
               Width = 77
               Height = 16
@@ -5660,7 +5660,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Label12: TLabel
-              Left = 737
+              Left = 1100
               Top = 24
               Width = 101
               Height = 16
@@ -5675,7 +5675,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Label5: TLabel
-              Left = 742
+              Left = 1105
               Top = 42
               Width = 96
               Height = 16
@@ -5690,7 +5690,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Shape3: TShape
-              Left = 715
+              Left = 1078
               Top = 60
               Width = 276
               Height = 1
@@ -5698,7 +5698,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Pen.Color = clGray
             end
             object lblBalanceTotalIngresos: TLabel
-              Left = 838
+              Left = 1201
               Top = 24
               Width = 140
               Height = 16
@@ -5714,7 +5714,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object lblBalanceTotalEgresos: TLabel
-              Left = 838
+              Left = 1201
               Top = 42
               Width = 140
               Height = 16
@@ -5730,7 +5730,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object lblBalanceSaldoFinal: TLabel
-              Left = 838
+              Left = 1201
               Top = 62
               Width = 140
               Height = 16
@@ -5746,7 +5746,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object lblBalanceSaldoInicial: TLabel
-              Left = 838
+              Left = 1201
               Top = 7
               Width = 140
               Height = 16
@@ -6545,16 +6545,6 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object EKBuscarSaldo: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Fecha'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-      end
-      item
         Titulo = 'Sucursal'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
@@ -6564,6 +6554,18 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fecha'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     UsarWhereOriginal = EK_Con_Where
@@ -6661,6 +6663,18 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object EKBuscarParteDiario: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = DM.ZQ_SucursalesVisibles
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
         Titulo = 'Fecha Desde'
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
@@ -6670,6 +6684,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fechas Hasta'
@@ -6681,17 +6696,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
-      end
-      item
-        Titulo = 'Sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = DM.ZQ_SucursalesVisibles
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     UsarWhereOriginal = EK_Con_Where
@@ -7095,12 +7100,27 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object EKBuscarDetMov: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Fecha Desde'
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = DM.ZQ_SucursalesVisibles
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fecha Desde'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
         TipoComboEditable = False
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha Hasta'
@@ -7111,17 +7131,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
-      end
-      item
-        Titulo = 'Sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = DM.ZQ_SucursalesVisibles
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     UsarWhereOriginal = EK_Con_Where
@@ -7582,6 +7592,20 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object EKBuscarBalance: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoComboSQL = DM.ZQ_SucursalesVisibles
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
         Titulo = 'Tipo Comprobante'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
@@ -7608,6 +7632,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         CambiarCondicion = False
         ItemIndex = 0
         VaciarValor = False
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha Desde'
@@ -7619,6 +7644,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         CambiarCondicion = False
         ItemIndex = -1
         VaciarValor = False
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha Hasta'
@@ -7630,19 +7656,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         CambiarCondicion = False
         ItemIndex = -1
         VaciarValor = False
-      end
-      item
-        Titulo = 'Sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndice = 1
-        TipoCampoIndiceVer = 'Igual'
-        TipoComboSQL = DM.ZQ_SucursalesVisibles
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     UsarWhereOriginal = EK_Sin_Where
