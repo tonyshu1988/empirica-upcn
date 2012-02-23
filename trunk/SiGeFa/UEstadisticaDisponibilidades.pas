@@ -123,7 +123,6 @@ type
     QRSubDetail2: TQRSubDetail;
     QRLblPD_TotalIngreso: TQRLabel;
     QRSubDetail3: TQRSubDetail;
-    QRDBText8: TQRDBText;
     QRDBText9: TQRDBText;
     QRDBText10: TQRDBText;
     QRBand1: TQRBand;
@@ -131,7 +130,6 @@ type
     QRLabel9: TQRLabel;
     QRLabel3: TQRLabel;
     ChildBand1: TQRChildBand;
-    QRLabel5: TQRLabel;
     QRLabel10: TQRLabel;
     QRLabel11: TQRLabel;
     QRSubDetail4: TQRSubDetail;
@@ -221,13 +219,6 @@ type
     lblResumenDetalleMovimiento: TLabel;
     lblPD_totalEgreso: TLabel;
     QRLblPD_TotalEgreso: TQRLabel;
-    ZP_PD_SaldoCuentas: TZStoredProc;
-    IntegerField1: TIntegerField;
-    StringField1: TStringField;
-    StringField2: TStringField;
-    StringField3: TStringField;
-    FloatField1: TFloatField;
-    DS_ZP_PD_SaldoCuentas: TDataSource;
     EKSumaPD_SaldoCta: TEKDbSuma;
     EKOrdenarGrillaSaldos: TEKOrdenarGrilla;
     EKOrdenarGrillaPD_Saldo: TEKOrdenarGrilla;
@@ -344,15 +335,48 @@ type
     QRLabel42: TQRLabel;
     QRLabel44: TQRLabel;
     QRLabel45: TQRLabel;
-    TabSheet1: TTabSheet;
+    TabDetalleCuenta: TTabSheet;
     DBGridDetalleCuentasFPago: TDBGrid;
     PanelResumenDetalleCta: TPanel;
     lblResumenDetalleCta: TLabel;
-    DBGridDetalleCuentas: TDBGrid;
     PanelTituloDetalleCta: TPanel;
     lblTituloDetalleCta2: TLabel;
     lblTituloDetalleCta1: TLabel;
     Splitter2: TSplitter;
+    Label13: TLabel;
+    lblSaldoFinalMenosInicial: TLabel;
+    ZQ_SaldoCuenta_PDiario: TZQuery;
+    ZQ_SaldoCuenta_PDiarioID_CUENTA: TIntegerField;
+    ZQ_SaldoCuenta_PDiarioCODIGO: TStringField;
+    ZQ_SaldoCuenta_PDiarioNOMBRE_CUENTA: TStringField;
+    ZQ_SaldoCuenta_PDiarioNRO_CTA_BANCO: TStringField;
+    ZQ_SaldoCuenta_PDiarioSALDO: TFloatField;
+    DS_SaldoCuenta_PDiario: TDataSource;
+    ZQ_SaldoCuenta_PDiarioDIFERENCIA: TFloatField;
+    ZQ_SaldoCuenta_PDiarioSALDO_ANT: TFloatField;
+    QRLabel46: TQRLabel;
+    QRLabelDiferenciaSaldos: TQRLabel;
+    QRDBText8: TQRDBText;
+    QRLabelDiferenciaCuenta: TQRLabel;
+    QRLabel47: TQRLabel;
+    DBGridDetalleCuentas: TDBGrid;
+    ZQ_Detalle_Cuenta: TZQuery;
+    IntegerField1: TIntegerField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    FloatField1: TFloatField;
+    FloatField2: TFloatField;
+    FloatField3: TFloatField;
+    DS_Detalle_Cuenta: TDataSource;
+    ZP_Detalle_Cuenta_FPago: TZStoredProc;
+    DS_Detalle_Cuenta_FPago: TDataSource;
+    ZP_Detalle_Cuenta_FPagoTOTAL_EGRESO: TFloatField;
+    ZP_Detalle_Cuenta_FPagoTOTAL_INGRESO: TFloatField;
+    ZP_Detalle_Cuenta_FPagoDESCRIPCION: TStringField;
+    ZP_Detalle_Cuenta_FPagoTOTAL_TRANSF_EXTRACCION: TFloatField;
+    ZP_Detalle_Cuenta_FPagoTOTAL_TRANSF_DEPOSITO: TFloatField;
+    EKBuscarDetalleCuenta: TEKBusquedaAvanzada;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -492,26 +516,26 @@ begin
       end
       else
       begin
-        ZP_PD_SaldoCuentas.Close;
+        ZQ_SaldoCuenta_PDiario.Close;
         ZP_estadistica_Parte_Diario.Close;
         ZP_Estadistica_IE_Medios.Close;
 
         if EKBuscarParteDiario.ParametrosSeleccionados1[0] = '0' then
         begin
-          ZP_PD_SaldoCuentas.ParamByName('id_sucursal').AsInteger:= -1;
+          ZQ_SaldoCuenta_PDiario.ParamByName('id_sucursal').AsInteger:= -1;
           ZP_estadistica_Parte_Diario.ParamByName('id_sucursal').AsInteger:= -1;
           ZP_Estadistica_IE_Medios.ParamByName('id_sucursal').AsInteger:= -1;
         end
         else
         begin
           lblSucursal.Caption:= 'Sucursal: '+EKBuscarParteDiario.ParametrosSelecReales1[0];
-          ZP_PD_SaldoCuentas.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
+          ZQ_SaldoCuenta_PDiario.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
           ZP_estadistica_Parte_Diario.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
           ZP_Estadistica_IE_Medios.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
         end;
 
-        ZP_PD_SaldoCuentas.ParamByName('fecha_hasta').AsDate := StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
-        ZP_PD_SaldoCuentas.Open;
+        ZQ_SaldoCuenta_PDiario.ParamByName('fecha_hasta').AsDate := StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
+        ZQ_SaldoCuenta_PDiario.Open;
 
         ZP_estadistica_Parte_Diario.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[1]);
         ZP_estadistica_Parte_Diario.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
@@ -522,10 +546,53 @@ begin
         ZP_Estadistica_IE_Medios.Open;
 
         lblEncabezadoParteDiario.Caption:= 'Parte Diario desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[1]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[2];
-        lblSaldo_TotalParteDiario.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
+        lblSaldo_TotalParteDiario.Caption:= 'Total Saldo Final: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
+        lblSaldo_TotalParteDiario.Caption:= lblSaldo_TotalParteDiario.Caption + '    Total Saldo Anterior: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[1].SumValue);
+        lblSaldo_TotalParteDiario.Caption:= lblSaldo_TotalParteDiario.Caption + '    Total Diferencia: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[2].SumValue);
         lblPD_totalIngreso.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[0].SumValue);
         lblPD_totalEgreso.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[1].SumValue);
         lblPD_totalTransfer.Caption:= 'Total Transferencias: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[2].SumValue);
+
+        lblSaldoFinalMenosInicial.Caption:= FormatFloat('$ ###,###,##0.00', (ZP_estadistica_Parte_DiarioSALDO.AsFloat-ZP_estadistica_Parte_DiarioSALDO_INICIAL.AsFloat));
+      end;
+  end;
+
+//DETALLE CUENTA
+  if PageControl.ActivePage = TabDetalleCuenta then
+  begin
+    lblTituloDetalleCta1.Caption := '';
+    lblTituloDetalleCta2.Caption := '';
+
+    if  EKBuscarDetalleCuenta.BuscarSinEjecutar then
+      if (EKBuscarDetalleCuenta.ParametrosSeleccionados1[1] = '') or (EKBuscarDetalleCuenta.ParametrosSeleccionados1[2] = '') then
+      begin
+        Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
+        btnBuscar.Click;
+      end
+      else
+      begin
+        ZP_Detalle_Cuenta_FPago.Close;
+        ZQ_Detalle_Cuenta.Close;
+
+        if EKBuscarDetalleCuenta.ParametrosSeleccionados1[0] = '0' then
+        begin
+          ZQ_Detalle_Cuenta.ParamByName('ID_SUCURSAL').AsInteger:= -1;
+          ZP_Detalle_Cuenta_FPago.ParamByName('ID_SUCURSAL').AsInteger:= -1;
+        end
+        else
+        begin
+          lblSucursalDetMov.Caption:= 'Sucursal: '+EKBuscarDetalleCuenta.ParametrosSelecReales1[0];
+          ZQ_Detalle_Cuenta.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(EKBuscarDetalleCuenta.ParametrosSeleccionados1[0]);
+          ZP_Detalle_Cuenta_FPago.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(EKBuscarDetalleCuenta.ParametrosSeleccionados1[0]);
+        end;
+
+        ZP_Detalle_Cuenta_FPago.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[1]);
+        ZP_Detalle_Cuenta_FPago.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[2]);
+        ZP_Detalle_Cuenta_FPago.Open;
+
+        ZQ_Detalle_Cuenta.ParamByName('fecha_hasta').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[2]);
+
+        //lblEncabezadoDetMov.Caption:= 'Detalles Movimientos desde el '+EKBuscarDetMov.ParametrosSeleccionados1[1]+' al '+EKBuscarDetMov.ParametrosSeleccionados1[2];
       end;
   end;
 
@@ -609,7 +676,7 @@ begin
 //PARTE DIARIO
   if PageControl.ActivePage = TabParteDiario then
   begin
-    if ZP_PD_SaldoCuentas.IsEmpty or ZP_estadistica_Parte_Diario.IsEmpty or ZP_Estadistica_IE_Medios.IsEmpty then
+    if ZQ_SaldoCuenta_PDiario.IsEmpty or ZP_estadistica_Parte_Diario.IsEmpty or ZP_Estadistica_IE_Medios.IsEmpty then
       exit;
 
     DM.VariablesReportes(RepParteDiario);
@@ -620,12 +687,13 @@ begin
       QRLabelSucursalParteDiario.Caption:= '';
 
     QRLabelEncabezadoParteDiario.Caption:= 'Parte Diario desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[1]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[2];
-    QRLabelImporteSaldo.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
     QRLblPD_TotalIngreso.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[0].SumValue);
     QRLblPD_TotalEgreso.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[1].SumValue);
     QRLblPD_TotalTransfer.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSuma_ParteDiario.SumCollection.Items[2].SumValue);
     QRlblRepParteDiario_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-
+    QRLabelDiferenciaSaldos.Caption:= lblSaldoFinalMenosInicial.Caption;
+    QRLabelImporteSaldo.Caption:= 'Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
+    QRLabelDiferenciaCuenta.Caption:= 'Total: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[2].SumValue);
     EKVista_RepParteDiario.VistaPrevia;
   end;
 

@@ -144,7 +144,7 @@ object FCuentaCorriente: TFCuentaCorriente
             50.270833333333330000
             595.312500000000000000
             124.354166666666700000
-            709.083333333333200000)
+            709.083333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -5148,6 +5148,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nombre'
@@ -5157,6 +5158,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Postal'
@@ -5166,6 +5168,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Localidad'
@@ -5175,6 +5178,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Provincia'
@@ -5184,6 +5188,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha Alta'
@@ -5195,6 +5200,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Saldo'
@@ -5205,6 +5211,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Limite Deuda'
@@ -5215,6 +5222,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Deuda Vencida'
@@ -5232,6 +5240,7 @@ object FCuentaCorriente: TFCuentaCorriente
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

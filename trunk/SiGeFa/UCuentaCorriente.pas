@@ -738,8 +738,9 @@ begin
 
     AplicarFiltro(BtnFiltro_Todos);
   except
+    on E: Exception do
     begin
-      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox(pchar(e.Message), 'Atención',MB_OK+MB_ICONINFORMATION);
       exit;
     end
   end;
