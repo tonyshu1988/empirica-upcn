@@ -207,7 +207,7 @@ begin
     if facturaCompra then
     begin
       query:= ZQ_Factura_Compra;
-      EKBuscarFacturaCompra.SQL_Where[4]:= 'and c.id_proveedor = '+IntToStr(id);
+      EKBuscarFacturaCompra.SQL_Where[3]:= 'and c.id_proveedor = '+IntToStr(id);
     end;
 
   if idActual <> id then

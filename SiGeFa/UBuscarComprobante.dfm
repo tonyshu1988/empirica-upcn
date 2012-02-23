@@ -1276,8 +1276,9 @@ object FBuscarComprobante: TFBuscarComprobante
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
-      'where c.id_tipo_cpb = 13'
-      '  and cfp.cuenta_egreso = 1'
+      
+        'where ((c.id_tipo_cpb = 13 and cfp.cuenta_ingreso = 1) or (c.id_' +
+        'tipo_cpb = 16))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
       '  and c.id_proveedor = :id_proveedor'
@@ -1303,8 +1304,9 @@ object FBuscarComprobante: TFBuscarComprobante
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)')
     SQL_Where.Strings = (
-      'where c.id_tipo_cpb = 13'
-      '  and cfp.cuenta_egreso = 1'
+      
+        'where ((c.id_tipo_cpb = 13 and cfp.cuenta_ingreso = 1) or (c.id_' +
+        'tipo_cpb = 16))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
       '  and c.id_proveedor = :id_proveedor')

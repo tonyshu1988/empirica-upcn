@@ -7,14 +7,14 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB, DBClient, UBuscarProductoStock,
   EKLlenarCombo, ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls,
   EKListadoSQL, ComCtrls, ZSqlUpdate, ZStoredProcedure, EKOrdenarGrilla,
-  EKDbSuma;
+  EKDbSuma, ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFTransferirStock = class(TForm)
     PanelContenedor: TPanel;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
-    btNotaPedido: TdxBarLargeButton;
+    btnNotaPedido: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnProcesar: TdxBarLargeButton;
@@ -216,6 +216,13 @@ type
     ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField;
     ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField;
     ZQ_ComprobanteID_POSICION_SUC_DESTINO: TIntegerField;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    AAbrirNotaPedido: TAction;
+    ATransferir: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
+    ZQ_CpbProductoID_STOCK_PRODUCTO: TIntegerField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnTransferirClick(Sender: TObject);
@@ -224,7 +231,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure btBorrarLineaClick(Sender: TObject);
     procedure DBGridNotaPedidoDblClick(Sender: TObject);
-    procedure btNotaPedidoClick(Sender: TObject);
+    procedure btnNotaPedidoClick(Sender: TObject);
     procedure CD_ListaProductosCalcFields(DataSet: TDataSet);
     procedure PageControlTransferirChange(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -240,6 +247,11 @@ type
     procedure DBGridProductoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure asociarStockProducto();
     procedure asociarNotaPedido();
+    procedure ABuscarExecute(Sender: TObject);
+    procedure AAbrirNotaPedidoExecute(Sender: TObject);
+    procedure ATransferirExecute(Sender: TObject);
+    procedure AGuardarExecute(Sender: TObject);
+    procedure ACancelarExecute(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -370,6 +382,9 @@ end;
 
 procedure TFTransferirStock.FormCreate(Sender: TObject);
 begin
+  //provisorio
+  TabSAsociarNotaPedido.TabVisible:= false;
+
   PageControlTransferir.TabIndex := 0;
   CD_Producto.CreateDataSet;
   CD_ListaProductos.CreateDataSet;
@@ -399,10 +414,10 @@ begin
       CD_Producto.First;
       while not CD_Producto.Eof do
       begin
-        if CD_Producto_idStockProducto.IsNull then
-          CD_Producto.Delete;
-
-        CD_Producto.Next;
+        if ((CD_Producto_idStockProducto.IsNull) or (CD_Producto_cantidad.AsFloat = 0)) then
+          CD_Producto.Delete
+        else
+          CD_Producto.Next;
       end;
 
       if CD_Producto.IsEmpty then
@@ -421,10 +436,10 @@ begin
       CD_ListaProductos.First;
       while not CD_ListaProductos.Eof do
       begin
-        if CD_ListaProductosid_comprobante.IsNull then
-          CD_ListaProductos.Delete;
-
-        CD_ListaProductos.Next;
+        if (CD_ListaProductosid_comprobante.IsNull) or (CD_Producto_cantidad.AsFloat = 0) then
+          CD_ListaProductos.Delete
+        else
+          CD_ListaProductos.Next;
       end;
 
       if CD_ListaProductos.IsEmpty then
@@ -443,27 +458,27 @@ end;
 
 procedure TFTransferirStock.asociarNotaPedido;
 begin
-  CD_ListaProductos.First;
-  while not(CD_ListaProductos.Eof) do
-  begin
-    ZQ_ProcesarStock.Close;
-    ZQ_ProcesarStock.ParamByName('id_stock_prod').Clear;
-    ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_ListaProductosid_producto.AsInteger;
-    ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
-
-    if CD_ListaProductoscantidad_a_almacenar.AsFloat >= 0 then
-      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductosalmacenar.AsFloat
-    else //si lo que deseo almacenar es mayor a lo que puedo almacenar, entonces cargo el resto
-      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat;
-
-    ZQ_ProcesarStock.ParamByName('stock_min').AsFloat:= CD_ListaProductosstock_min.AsFloat;
-    ZQ_ProcesarStock.ParamByName('stock_max').AsFloat:= CD_ListaProductosstock_max.AsFloat;
-    ZQ_ProcesarStock.ParamByName('stock_repedido').Clear;
-    ZQ_ProcesarStock.ParamByName('id_comprobante').AsInteger := CD_ListaProductosid_comprobante.AsInteger;
-    ZQ_ProcesarStock.ExecSQL;
-
-    CD_ListaProductos.Next;
-  end;
+//  CD_ListaProductos.First;
+//  while not(CD_ListaProductos.Eof) do
+//  begin
+//    ZQ_ProcesarStock.Close;
+//    ZQ_ProcesarStock.ParamByName('id_stock_prod').Clear;
+//    ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_ListaProductosid_producto.AsInteger;
+//    ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
+//
+//    if CD_ListaProductoscantidad_a_almacenar.AsFloat >= 0 then
+//      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductosalmacenar.AsFloat
+//    else //si lo que deseo almacenar es mayor a lo que puedo almacenar, entonces cargo el resto
+//      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat;
+//
+//    ZQ_ProcesarStock.ParamByName('stock_min').AsFloat:= CD_ListaProductosstock_min.AsFloat;
+//    ZQ_ProcesarStock.ParamByName('stock_max').AsFloat:= CD_ListaProductosstock_max.AsFloat;
+//    ZQ_ProcesarStock.ParamByName('stock_repedido').Clear;
+//    ZQ_ProcesarStock.ParamByName('id_comprobante').AsInteger := CD_ListaProductosid_comprobante.AsInteger;
+//    ZQ_ProcesarStock.ExecSQL;
+//
+//    CD_ListaProductos.Next;
+//  end;
 end;
 
 
@@ -499,7 +514,7 @@ begin
     ZQ_CpbProducto.Append;
     ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
     ZQ_CpbProductoID_PRODUCTO.AsInteger:= CD_Producto_idProducto.AsInteger;
-    ZQ_CpbProductoID_PRODUCTO.AsInteger:= CD_Producto_idStockProducto.AsInteger;
+    ZQ_CpbProductoID_STOCK_PRODUCTO.AsInteger:= CD_Producto_idStockProducto.AsInteger;
     if CD_Producto_cantidad.AsFloat <= CD_Producto_stockactual.AsFloat then
       ZQ_CpbProductoCANTIDAD.AsFloat:= CD_Producto_cantidad.AsFloat
     else //si lo que deseo transferir es mayor a lo que tengo en stock, entonces cargo todo el stock
@@ -548,9 +563,9 @@ begin
         ZQ_VerCpb.Refresh;
         CD_ListaProductos.EmptyDataSet;
         EKSumaNotaPedido.RecalcAll;
-
-        CD_Producto.EmptyDataSet;        
       end;
+
+      CD_Producto.EmptyDataSet;
     end;
   except
     begin
@@ -590,11 +605,11 @@ end;
 
 procedure TFTransferirStock.DBGridNotaPedidoDblClick(Sender: TObject);
 begin
-  btNotaPedido.Click;
+  btnNotaPedido.Click;
 end;
 
 
-procedure TFTransferirStock.btNotaPedidoClick(Sender: TObject);
+procedure TFTransferirStock.btnNotaPedidoClick(Sender: TObject);
 begin
   if DBGridNotaPedido.Visible then //si estoy viendo las Notas de Pedidos
   begin
@@ -634,7 +649,7 @@ begin
           ZQ_Cpb_ListaProd.Next;
         end;
 
-        btNotaPedido.Caption:= 'Cerrar Nota Pedido';
+        btnNotaPedido.Caption:= 'Cerrar Nota Pedido';
         DBGridNotaPedido.Visible:= false;
         DBGridNotaPedidoDetalle.Visible:= true;
         DBGridNotaPedidoDetalle.SetFocus;
@@ -650,7 +665,7 @@ begin
   end
   else //si estoy examinando la nota de pedido con todos sus productos
   begin
-    btNotaPedido.Caption:= 'Abrir Nota Pedido';
+    btnNotaPedido.Caption:= 'Abrir Nota Pedido';
     DBGridNotaPedido.Visible:= true;
     DBGridNotaPedidoDetalle.Visible:= False;
     PanelNotaPedidoDetalle.Visible:= False;
@@ -671,13 +686,13 @@ begin
   if PageControlTransferir.ActivePage = TabSTransferirStock then
   begin
     btnBuscar.Visible := ivAlways;
-    btNotaPedido.Visible := ivNever;
+    btnNotaPedido.Visible := ivNever;
   end;
 
   if PageControlTransferir.ActivePage = TabSAsociarNotaPedido then
   begin
     btnBuscar.Visible := ivNever;
-    btNotaPedido.Visible := ivAlways;
+    btnNotaPedido.Visible := ivAlways;
 
     ZQ_VerCpb.Refresh;
   end;
@@ -749,6 +764,7 @@ begin
   editTotalAlmacenar.Text:= cantidad;
 end;
 
+
 procedure TFTransferirStock.CD_ListaProductosAfterInsert(DataSet: TDataSet);
 begin
   if not permitirInsertar then
@@ -804,5 +820,34 @@ begin
 end;
 
 
+procedure TFTransferirStock.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
+
+procedure TFTransferirStock.AAbrirNotaPedidoExecute(Sender: TObject);
+begin
+  if btnNotaPedido.Enabled and (btnNotaPedido.Visible = ivAlways) then
+    btnNotaPedido.Click;
+end;
+
+procedure TFTransferirStock.ATransferirExecute(Sender: TObject);
+begin
+  if btnTransferir.Enabled and (btnTransferir.Visible = ivAlways) then
+    btnTransferir.Click;
+end;
+
+procedure TFTransferirStock.AGuardarExecute(Sender: TObject);
+begin
+  if btnGuardar.Enabled then
+    btnGuardar.Click;
+end;
+
+procedure TFTransferirStock.ACancelarExecute(Sender: TObject);
+begin
+  if btnCancelar.Enabled then
+    btnCancelar.Click;
+end;
 
 end.

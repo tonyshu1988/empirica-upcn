@@ -1,6 +1,6 @@
 object FTransferirStock: TFTransferirStock
-  Left = 289
-  Top = 130
+  Left = 329
+  Top = 228
   Width = 870
   Height = 558
   Caption = 'Transferir Stock'
@@ -22,16 +22,16 @@ object FTransferirStock: TFTransferirStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 468
+    Width = 862
+    Height = 479
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 852
-      Height = 433
-      ActivePage = TabSTransferirStock
+      Width = 860
+      Height = 444
+      ActivePage = TabSAsociarNotaPedido
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -41,8 +41,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 364
+          Width = 852
+          Height = 375
           Align = alClient
           Color = 14606012
           DataSource = DS_Producto
@@ -200,14 +200,14 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 364
-          Width = 844
+          Top = 375
+          Width = 852
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            844
+            852
             41)
           object Label25: TLabel
             Left = 704
@@ -261,8 +261,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedido: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 364
+          Width = 852
+          Height = 375
           Hint = 
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
@@ -339,8 +339,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedidoDetalle: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 364
+          Width = 852
+          Height = 375
           Align = alClient
           Color = 14606012
           DataSource = DS_ListaProductos
@@ -351,7 +351,6 @@ object FTransferirStock: TFTransferirStock
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
-          Visible = False
           OnDrawColumnCell = DBGridNotaPedidoDetalleDrawColumnCell
           OnKeyDown = DBGridNotaPedidoDetalleKeyDown
           Columns = <
@@ -487,17 +486,17 @@ object FTransferirStock: TFTransferirStock
         end
         object PanelNotaPedidoDetalle: TPanel
           Left = 0
-          Top = 364
-          Width = 844
+          Top = 375
+          Width = 852
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
-            844
+            852
             41)
           object Label2: TLabel
-            Left = 720
+            Left = 728
             Top = 7
             Width = 104
             Height = 13
@@ -511,7 +510,7 @@ object FTransferirStock: TFTransferirStock
             ParentFont = False
           end
           object editTotalAlmacenar: TEdit
-            Left = 704
+            Left = 712
             Top = 21
             Width = 129
             Height = 19
@@ -537,7 +536,7 @@ object FTransferirStock: TFTransferirStock
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 860
       Height = 33
       Align = alTop
       TabOrder = 1
@@ -567,7 +566,7 @@ object FTransferirStock: TFTransferirStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -674,7 +673,7 @@ object FTransferirStock: TFTransferirStock
           end
           item
             BeginGroup = True
-            Item = btNotaPedido
+            Item = btnNotaPedido
             Visible = True
           end
           item
@@ -1009,22 +1008,22 @@ object FTransferirStock: TFTransferirStock
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F2 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F2 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
       AutoGrayScale = False
     end
-    object btNotaPedido: TdxBarLargeButton
+    object btnNotaPedido: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Abrir Nota Pedido'
+      Caption = 'F3 - Abrir Nota Pedido'
       Category = 0
-      Hint = 'Abrir Nota Pedido'
+      Hint = 'F3 - Abrir Nota Pedido'
       Visible = ivNever
       ImageIndex = 82
-      OnClick = btNotaPedidoClick
+      OnClick = btnNotaPedidoClick
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
@@ -1055,7 +1054,7 @@ object FTransferirStock: TFTransferirStock
       AutoGrayScale = False
     end
     object btnTransferir: TdxBarLargeButton
-      Caption = 'Transferir'
+      Caption = 'F4 - Transferir'
       Category = 0
       Hint = 'Transferir productos'
       Visible = ivAlways
@@ -1064,7 +1063,7 @@ object FTransferirStock: TFTransferirStock
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
-      Caption = 'Guardar'
+      Caption = 'F11 - Guardar'
       Category = 0
       Enabled = False
       Hint = 'Guarda los cambios'
@@ -1074,7 +1073,7 @@ object FTransferirStock: TFTransferirStock
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
-      Caption = 'Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
       Enabled = False
       Hint = 'Cancela los cambios'
@@ -1103,7 +1102,7 @@ object FTransferirStock: TFTransferirStock
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnBuscar'
-        'btNotaPedido'
+        'btnNotaPedido'
         'btnNuevo'
         'btnModificar'
         'btnImprimir'
@@ -2142,6 +2141,9 @@ object FTransferirStock: TFTransferirStock
     object ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField
       FieldName = 'CANTIDAD_ALMACENADA'
     end
+    object ZQ_CpbProductoID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
   end
   object ZP_CpbID: TZStoredProc
     Connection = DM.Conexion
@@ -2206,6 +2208,36 @@ object FTransferirStock: TFTransferirStock
     object ZQ_NumeroCpbBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
+    end
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 224
+    Top = 346
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 113
+      OnExecute = ABuscarExecute
+    end
+    object AAbrirNotaPedido: TAction
+      Caption = 'AAbrirNotaPedido'
+      ShortCut = 114
+      OnExecute = AAbrirNotaPedidoExecute
+    end
+    object ATransferir: TAction
+      Caption = 'ATransferir'
+      ShortCut = 115
+      OnExecute = ATransferirExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AGuardar'
+      ShortCut = 122
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 123
+      OnExecute = ACancelarExecute
     end
   end
 end
