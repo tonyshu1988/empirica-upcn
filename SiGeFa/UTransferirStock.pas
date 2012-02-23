@@ -18,7 +18,7 @@ type
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnProcesar: TdxBarLargeButton;
-    btnAsociar: TdxBarLargeButton;
+    btnTransferir: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
@@ -39,17 +39,17 @@ type
     DS_Producto: TDataSource;
     PanelSeleccionarDeposito: TPanel;
     DBGridProducto: TDBGrid;
-    CD_Productostockactual: TFloatField;
-    CD_Productocantidad: TFloatField;
+    CD_Producto_stockactual: TFloatField;
+    CD_Producto_cantidad: TFloatField;
     EKListado_Sucursal: TEKListadoSQL;
     ZQ_Sucursal: TZQuery;
     ZQ_SucursalID_POSICION_SUCURSAL: TIntegerField;
     ZQ_SucursalBUSQUEDA: TStringField;
-    CD_ProductoidStockProducto: TIntegerField;
-    CD_ProductoidPosicionSucursal: TIntegerField;
-    CD_ProductostockMin: TFloatField;
-    CD_ProductostockMax: TFloatField;
-    CD_ProductostockRepedido: TFloatField;
+    CD_Producto_idStockProducto: TIntegerField;
+    CD_Producto_idPosicionSucursal: TIntegerField;
+    CD_Producto_stockMin: TFloatField;
+    CD_Producto_stockMax: TFloatField;
+    CD_Producto_stockRepedido: TFloatField;
     PageControlTransferir: TPageControl;
     TabSTransferirStock: TTabSheet;
     TabSAsociarNotaPedido: TTabSheet;
@@ -162,14 +162,63 @@ type
     ZQ_VerCpbID_TIPO_IVA: TIntegerField;
     ZQ_VerCpbID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_VerCpbIMPORTE_VENTA: TFloatField;
-    CD_Productosucursal: TStringField;
-    CD_Productoseccion: TStringField;
-    CD_Productosector: TStringField;
-    CD_Productofila: TStringField;
-    CD_Productocolumna: TStringField;
+    CD_Producto_sucursal: TStringField;
+    CD_Producto_seccion: TStringField;
+    CD_Producto_sector: TStringField;
+    CD_Producto_fila: TStringField;
+    CD_Producto_columna: TStringField;
+    ZQ_Comprobante: TZQuery;
+    ZQ_ComprobanteID_COMPROBANTE: TIntegerField;
+    ZQ_ComprobanteID_SUCURSAL: TIntegerField;
+    ZQ_ComprobanteID_PROVEEDOR: TIntegerField;
+    ZQ_ComprobanteID_CLIENTE: TIntegerField;
+    ZQ_ComprobanteID_TIPO_CPB: TIntegerField;
+    ZQ_ComprobanteID_VENDEDOR: TIntegerField;
+    ZQ_ComprobanteID_COMP_ESTADO: TIntegerField;
+    ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
+    ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
+    ZQ_ComprobanteCODIGO: TStringField;
+    ZQ_ComprobanteFECHA: TDateTimeField;
+    ZQ_ComprobanteOBSERVACION: TStringField;
+    ZQ_ComprobanteBASE_IMPONIBLE: TFloatField;
+    ZQ_ComprobanteSALDO: TFloatField;
+    ZQ_ComprobantePORC_IVA: TFloatField;
+    ZQ_ComprobanteIMPORTE_IVA: TFloatField;
+    ZQ_ComprobantePORC_DESCUENTO: TFloatField;
+    ZQ_ComprobanteIMPORTE_DESCUENTO: TFloatField;
+    ZQ_ComprobanteIMPORTE_TOTAL: TFloatField;
+    ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
+    ZQ_ComprobanteENCABEZADO: TStringField;
+    ZQ_ComprobantePIE: TStringField;
+    ZQ_ComprobanteFECHA_COBRADA: TDateField;
+    ZQ_ComprobanteFECHA_ENVIADA: TDateField;
+    ZQ_ComprobanteFECHA_IMPRESA: TDateField;
+    ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField;
+    ZQ_ComprobantePUNTO_VENTA: TIntegerField;
+    ZQ_ComprobanteNUMERO_CPB: TIntegerField;
+    ZQ_ComprobanteFECHA_ANULADO: TDateField;
+    ZQ_CpbProducto: TZQuery;
+    ZQ_CpbProductoID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_CpbProductoID_COMPROBANTE: TIntegerField;
+    ZQ_CpbProductoID_PRODUCTO: TIntegerField;
+    ZQ_CpbProductoDETALLE: TStringField;
+    ZQ_CpbProductoCANTIDAD: TFloatField;
+    ZP_CpbID: TZStoredProc;
+    ZP_CpbIDID: TIntegerField;
+    ZQ_NumeroCpb: TZQuery;
+    ZQ_NumeroCpbULTIMO_NUMERO: TIntegerField;
+    ZQ_NumeroCpbID_TIPO_CPB: TIntegerField;
+    ZQ_NumeroCpbNOMBRE_TIPO_CPB: TStringField;
+    ZQ_NumeroCpbSIGNO_COBRO_PAGO: TIntegerField;
+    ZQ_NumeroCpbSIGNO_STOCK: TIntegerField;
+    ZQ_NumeroCpbSIGNO_CTA_CTE: TIntegerField;
+    ZQ_NumeroCpbBAJA: TStringField;
+    ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_ComprobanteID_POSICION_SUC_DESTINO: TIntegerField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btnAsociarClick(Sender: TObject);
+    procedure btnTransferirClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -189,6 +238,8 @@ type
     procedure CD_ListaProductosAfterInsert(DataSet: TDataSet);
     procedure DBGridNotaPedidoDetalleKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure DBGridProductoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure asociarStockProducto();
+    procedure asociarNotaPedido();
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -225,8 +276,8 @@ begin
 
     CD_Producto.Filtered := false;
     CD_Producto.Append;
-    CD_ProductoidStockProducto.AsInteger := vsel.ZQ_StockID_STOCK_PRODUCTO.AsInteger;
-    CD_ProductoidPosicionSucursal.AsInteger := vsel.ZQ_StockID_POSICION_SUCURSAL.AsInteger;
+    CD_Producto_idStockProducto.AsInteger := vsel.ZQ_StockID_STOCK_PRODUCTO.AsInteger;
+    CD_Producto_idPosicionSucursal.AsInteger := vsel.ZQ_StockID_POSICION_SUCURSAL.AsInteger;
     CD_Producto_idProducto.AsInteger := vsel.ZQ_StockID_PRODUCTO.AsInteger;
     CD_Producto_producto.AsString := vsel.ZQ_StockNOMBRE.AsString;
     CD_Producto_medida.AsString := vsel.ZQ_StockMEDIDA.AsString;
@@ -237,16 +288,16 @@ begin
     CD_Producto_codigoBarra.AsString := vsel.ZQ_StockCODIGO_BARRA.AsString;
     CD_Producto_codCabecera.AsString := vsel.ZQ_StockCOD_CORTO_CABECERA.AsString;
     CD_Producto_codProducto.AsString := vsel.ZQ_StockCOD_CORTO_PRODUCTO.AsString;
-    CD_Productostockactual.AsFloat := vsel.ZQ_StockSTOCK_ACTUAL.AsFloat;
-    CD_Productocantidad.AsFloat := vsel.ZQ_StockSTOCK_ACTUAL.AsFloat;
-    CD_ProductostockMin.AsFloat := vsel.ZQ_StockSTOCK_MIN.AsFloat;
-    CD_ProductostockMax.AsFloat := vsel.ZQ_StockSTOCK_MAX.AsFloat;
-    CD_ProductostockRepedido.AsFloat := vsel.ZQ_StockSTOCK_REPEDIDO.AsFloat;
-    CD_Productosucursal.AsString := vsel.ZQ_StockSUCURSAL.AsString;
-    CD_Productoseccion.AsString := vsel.ZQ_StockSECCION.AsString;
-    CD_Productosector.AsString := vsel.ZQ_StockSECTOR.AsString;
-    CD_Productofila.AsString := vsel.ZQ_StockFILA.AsString;
-    CD_Productocolumna.AsString := vsel.ZQ_StockCOLUMNA.AsString;
+    CD_Producto_stockactual.AsFloat := vsel.ZQ_StockSTOCK_ACTUAL.AsFloat;
+    CD_Producto_cantidad.AsFloat := vsel.ZQ_StockSTOCK_ACTUAL.AsFloat;
+    CD_Producto_stockMin.AsFloat := vsel.ZQ_StockSTOCK_MIN.AsFloat;
+    CD_Producto_stockMax.AsFloat := vsel.ZQ_StockSTOCK_MAX.AsFloat;
+    CD_Producto_stockRepedido.AsFloat := vsel.ZQ_StockSTOCK_REPEDIDO.AsFloat;
+    CD_Producto_sucursal.AsString := vsel.ZQ_StockSUCURSAL.AsString;
+    CD_Producto_seccion.AsString := vsel.ZQ_StockSECCION.AsString;
+    CD_Producto_sector.AsString := vsel.ZQ_StockSECTOR.AsString;
+    CD_Producto_fila.AsString := vsel.ZQ_StockFILA.AsString;
+    CD_Producto_columna.AsString := vsel.ZQ_StockCOLUMNA.AsString;
     CD_Producto.Post;    
   end;
 
@@ -271,8 +322,8 @@ begin
     begin
       CD_Producto.Filtered := false;
       CD_Producto.Append;
-      CD_ProductoidStockProducto.AsInteger := vsel.ZQ_StockID_STOCK_PRODUCTO.AsInteger;
-      CD_ProductoidPosicionSucursal.AsInteger := vsel.ZQ_StockID_POSICION_SUCURSAL.AsInteger;
+      CD_Producto_idStockProducto.AsInteger := vsel.ZQ_StockID_STOCK_PRODUCTO.AsInteger;
+      CD_Producto_idPosicionSucursal.AsInteger := vsel.ZQ_StockID_POSICION_SUCURSAL.AsInteger;
       CD_Producto_idProducto.AsInteger := vsel.ZQ_StockID_PRODUCTO.AsInteger;
       CD_Producto_producto.AsString := vsel.ZQ_StockNOMBRE.AsString;
       CD_Producto_medida.AsString := vsel.ZQ_StockMEDIDA.AsString;
@@ -283,16 +334,16 @@ begin
       CD_Producto_codigoBarra.AsString := vsel.ZQ_StockCODIGO_BARRA.AsString;
       CD_Producto_codCabecera.AsString := vsel.ZQ_StockCOD_CORTO_CABECERA.AsString;
       CD_Producto_codProducto.AsString := vsel.ZQ_StockCOD_CORTO_PRODUCTO.AsString;
-      CD_Productostockactual.AsFloat := vsel.ZQ_StockSTOCK_ACTUAL.AsFloat;
-      CD_Productocantidad.AsFloat := vsel.ZQ_StockSTOCK_ACTUAL.AsFloat;
-      CD_ProductostockMin.AsFloat := vsel.ZQ_StockSTOCK_MIN.AsFloat;
-      CD_ProductostockMax.AsFloat := vsel.ZQ_StockSTOCK_MAX.AsFloat;
-      CD_ProductostockRepedido.AsFloat := vsel.ZQ_StockSTOCK_REPEDIDO.AsFloat;
-      CD_Productosucursal.AsString := vsel.ZQ_StockSUCURSAL.AsString;
-      CD_Productoseccion.AsString := vsel.ZQ_StockSECCION.AsString;
-      CD_Productosector.AsString := vsel.ZQ_StockSECTOR.AsString;
-      CD_Productofila.AsString := vsel.ZQ_StockFILA.AsString;
-      CD_Productocolumna.AsString := vsel.ZQ_StockCOLUMNA.AsString;
+      CD_Producto_stockactual.AsFloat := vsel.ZQ_StockSTOCK_ACTUAL.AsFloat;
+      CD_Producto_cantidad.AsFloat := vsel.ZQ_StockSTOCK_ACTUAL.AsFloat;
+      CD_Producto_stockMin.AsFloat := vsel.ZQ_StockSTOCK_MIN.AsFloat;
+      CD_Producto_stockMax.AsFloat := vsel.ZQ_StockSTOCK_MAX.AsFloat;
+      CD_Producto_stockRepedido.AsFloat := vsel.ZQ_StockSTOCK_REPEDIDO.AsFloat;
+      CD_Producto_sucursal.AsString := vsel.ZQ_StockSUCURSAL.AsString;
+      CD_Producto_seccion.AsString := vsel.ZQ_StockSECCION.AsString;
+      CD_Producto_sector.AsString := vsel.ZQ_StockSECTOR.AsString;
+      CD_Producto_fila.AsString := vsel.ZQ_StockFILA.AsString;
+      CD_Producto_columna.AsString := vsel.ZQ_StockCOLUMNA.AsString;
 
       vsel.ZQ_Stock.Next;
     end;
@@ -334,7 +385,7 @@ begin
 end;
 
 
-procedure TFTransferirStock.btnAsociarClick(Sender: TObject);
+procedure TFTransferirStock.btnTransferirClick(Sender: TObject);
 begin
     if id_pos_sucursal = 0 then
     begin
@@ -342,23 +393,31 @@ begin
       exit;
     end;
 
+    //si estoy en la pestania transferir stock
     if PageControlTransferir.TabIndex = 0 then
     begin
       CD_Producto.First;
       while not CD_Producto.Eof do
       begin
-        if CD_ProductoidStockProducto.IsNull then
+        if CD_Producto_idStockProducto.IsNull then
           CD_Producto.Delete;
 
         CD_Producto.Next;
       end;
 
       if CD_Producto.IsEmpty then
-      exit;
-    end
-    else
-    begin
+        exit;
 
+      if dm.EKModelo.iniciar_transaccion(Transaccion_TransferirStock, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_NumeroCpb]) then
+      begin
+        asociarStockProducto();
+
+        GrupoEditando.Enabled := false;
+        GrupoGuardarCancelar.Enabled := true;
+      end;
+    end
+    else     //si estoy en la pestania asociar nota pedido
+    begin
       CD_ListaProductos.First;
       while not CD_ListaProductos.Eof do
       begin
@@ -369,66 +428,89 @@ begin
       end;
 
       if CD_ListaProductos.IsEmpty then
-      exit;
-    end;
+        exit;
 
-
-    if dm.EKModelo.iniciar_transaccion(Transaccion_TransferirStock, []) then//[ZQ_Stock_Origen, ZQ_Stock_Destino, ZQ_NotaPedidoUpdateAlmacenado]) then
-    begin
-      if PageControlTransferir.TabIndex = 0 then
+      if dm.EKModelo.iniciar_transaccion(Transaccion_TransferirStock, []) then
       begin
-        CD_Producto.First;
-        while not(CD_Producto.Eof) do
-        begin
-          ZQ_ProcesarStock.Close;
-          ZQ_ProcesarStock.ParamByName('id_stock_prod').AsInteger:= CD_ProductoidStockProducto.AsInteger;
-          ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_Producto_idProducto.AsInteger;
-          ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
+        asociarNotaPedido();
 
-          if CD_Productocantidad.AsFloat <= CD_Productostockactual.AsFloat then
-            ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_Productocantidad.AsFloat
-          else //si lo que deseo transferir es mayor a lo que tengo en stock, entonces cargo todo el stock
-            ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_Productostockactual.AsFloat;
-
-          ZQ_ProcesarStock.ParamByName('stock_min').AsFloat:= CD_ProductostockMin.AsFloat;
-          ZQ_ProcesarStock.ParamByName('stock_max').AsFloat:= CD_ProductostockMax.AsFloat;
-          ZQ_ProcesarStock.ParamByName('stock_repedido').AsFloat:= CD_ProductostockRepedido.AsFloat;
-          ZQ_ProcesarStock.ParamByName('id_comprobante').Clear;
-          ZQ_ProcesarStock.ExecSQL;
-
-          CD_Producto.Next;
-        end;
-
-        CD_Producto.EmptyDataSet;
-      end
-      else
-      begin
-        CD_ListaProductos.First;
-        while not(CD_ListaProductos.Eof) do
-        begin
-          ZQ_ProcesarStock.Close;
-          ZQ_ProcesarStock.ParamByName('id_stock_prod').Clear;
-          ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_ListaProductosid_producto.AsInteger;
-          ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
-
-          if CD_ListaProductoscantidad_a_almacenar.AsFloat >= 0 then
-            ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductosalmacenar.AsFloat
-          else //si lo que deseo almacenar es mayor a lo que puedo almacenar, entonces cargo el resto
-            ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat;
-
-          ZQ_ProcesarStock.ParamByName('stock_min').AsFloat:= CD_ListaProductosstock_min.AsFloat;
-          ZQ_ProcesarStock.ParamByName('stock_max').AsFloat:= CD_ListaProductosstock_max.AsFloat;
-          ZQ_ProcesarStock.ParamByName('stock_repedido').Clear;
-          ZQ_ProcesarStock.ParamByName('id_comprobante').AsInteger := CD_ListaProductosid_comprobante.AsInteger;
-          ZQ_ProcesarStock.ExecSQL;
-
-          CD_ListaProductos.Next;
-        end;
+        GrupoEditando.Enabled := false;
+        GrupoGuardarCancelar.Enabled := true;
       end;
-
-      GrupoEditando.Enabled := false;
-      GrupoGuardarCancelar.Enabled := true;
     end;
+end;
+
+
+procedure TFTransferirStock.asociarNotaPedido;
+begin
+  CD_ListaProductos.First;
+  while not(CD_ListaProductos.Eof) do
+  begin
+    ZQ_ProcesarStock.Close;
+    ZQ_ProcesarStock.ParamByName('id_stock_prod').Clear;
+    ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_ListaProductosid_producto.AsInteger;
+    ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
+
+    if CD_ListaProductoscantidad_a_almacenar.AsFloat >= 0 then
+      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductosalmacenar.AsFloat
+    else //si lo que deseo almacenar es mayor a lo que puedo almacenar, entonces cargo el resto
+      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat;
+
+    ZQ_ProcesarStock.ParamByName('stock_min').AsFloat:= CD_ListaProductosstock_min.AsFloat;
+    ZQ_ProcesarStock.ParamByName('stock_max').AsFloat:= CD_ListaProductosstock_max.AsFloat;
+    ZQ_ProcesarStock.ParamByName('stock_repedido').Clear;
+    ZQ_ProcesarStock.ParamByName('id_comprobante').AsInteger := CD_ListaProductosid_comprobante.AsInteger;
+    ZQ_ProcesarStock.ExecSQL;
+
+    CD_ListaProductos.Next;
+  end;
+end;
+
+
+procedure TFTransferirStock.asociarStockProducto;
+var
+  id_comprobante: integer;
+begin
+  //obtengo el id_comprobante
+  ZP_CpbID.Active:= false;
+  ZP_CpbID.Active:= true;
+  id_comprobante:= ZP_CpbIDID.AsInteger;
+  ZP_CpbID.Active:= false;
+
+  //obtengo el ultimo numero de la transferencia de stock
+  ZQ_NumeroCpb.Close;
+  ZQ_NumeroCpb.ParamByName('id_tipo').AsInteger:= CPB_TRANSFERIR_STOCK;
+  ZQ_NumeroCpb.Open;
+
+  //doy de alta el comprobante
+  ZQ_Comprobante.Append;
+  ZQ_ComprobanteID_COMPROBANTE.AsInteger:= id_comprobante;
+  ZQ_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+  ZQ_ComprobanteID_POSICION_SUC_DESTINO.AsInteger:= id_pos_sucursal;
+  ZQ_ComprobanteID_TIPO_CPB.AsInteger:= CPB_TRANSFERIR_STOCK;
+  ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
+  ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
+  ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
+  ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+
+  CD_Producto.First;
+  while not(CD_Producto.Eof) do
+  begin
+    ZQ_CpbProducto.Append;
+    ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
+    ZQ_CpbProductoID_PRODUCTO.AsInteger:= CD_Producto_idProducto.AsInteger;
+    ZQ_CpbProductoID_PRODUCTO.AsInteger:= CD_Producto_idStockProducto.AsInteger;
+    if CD_Producto_cantidad.AsFloat <= CD_Producto_stockactual.AsFloat then
+      ZQ_CpbProductoCANTIDAD.AsFloat:= CD_Producto_cantidad.AsFloat
+    else //si lo que deseo transferir es mayor a lo que tengo en stock, entonces cargo todo el stock
+      ZQ_CpbProductoCANTIDAD.AsFloat:= CD_Producto_stockactual.AsFloat;
+
+    CD_Producto.Next;
+  end;
+
+  //actualizo el ultimo numero
+  ZQ_NumeroCpb.Edit;
+  ZQ_NumeroCpbULTIMO_NUMERO.AsInteger:= ZQ_ComprobanteNUMERO_CPB.AsInteger;
 end;
 
 
@@ -466,6 +548,8 @@ begin
         ZQ_VerCpb.Refresh;
         CD_ListaProductos.EmptyDataSet;
         EKSumaNotaPedido.RecalcAll;
+
+        CD_Producto.EmptyDataSet;        
       end;
     end;
   except
@@ -718,5 +802,7 @@ begin
     end;
   end;
 end;
+
+
 
 end.
