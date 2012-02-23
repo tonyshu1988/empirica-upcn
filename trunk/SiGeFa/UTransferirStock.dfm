@@ -679,7 +679,7 @@ object FTransferirStock: TFTransferirStock
           end
           item
             BeginGroup = True
-            Item = btnAsociar
+            Item = btnTransferir
             Visible = True
           end
           item
@@ -1054,13 +1054,13 @@ object FTransferirStock: TFTransferirStock
       ImageIndex = 50
       AutoGrayScale = False
     end
-    object btnAsociar: TdxBarLargeButton
-      Caption = 'Asociar'
+    object btnTransferir: TdxBarLargeButton
+      Caption = 'Transferir'
       Category = 0
-      Hint = 'Asociar Transferencias de productos'
+      Hint = 'Transferir productos'
       Visible = ivAlways
       ImageIndex = 12
-      OnClick = btnAsociarClick
+      OnClick = btnTransferirClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
@@ -1107,7 +1107,7 @@ object FTransferirStock: TFTransferirStock
         'btnNuevo'
         'btnModificar'
         'btnImprimir'
-        'btnAsociar')
+        'btnTransferir')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -1124,10 +1124,10 @@ object FTransferirStock: TFTransferirStock
     object CD_Producto_idProducto: TIntegerField
       FieldName = 'idProducto'
     end
-    object CD_ProductoidStockProducto: TIntegerField
+    object CD_Producto_idStockProducto: TIntegerField
       FieldName = 'idStockProducto'
     end
-    object CD_ProductoidPosicionSucursal: TIntegerField
+    object CD_Producto_idPosicionSucursal: TIntegerField
       FieldName = 'idPosicionSucursal'
     end
     object CD_Producto_producto: TStringField
@@ -1164,38 +1164,38 @@ object FTransferirStock: TFTransferirStock
       FieldName = 'color'
       Size = 30
     end
-    object CD_ProductostockMin: TFloatField
+    object CD_Producto_stockMin: TFloatField
       FieldName = 'stockMin'
     end
-    object CD_ProductostockMax: TFloatField
+    object CD_Producto_stockMax: TFloatField
       FieldName = 'stockMax'
     end
-    object CD_ProductostockRepedido: TFloatField
+    object CD_Producto_stockRepedido: TFloatField
       FieldName = 'stockRepedido'
     end
-    object CD_Productostockactual: TFloatField
+    object CD_Producto_stockactual: TFloatField
       FieldName = 'stockactual'
     end
-    object CD_Productocantidad: TFloatField
+    object CD_Producto_cantidad: TFloatField
       FieldName = 'cantidad'
     end
-    object CD_Productosucursal: TStringField
+    object CD_Producto_sucursal: TStringField
       FieldName = 'sucursal'
       Size = 200
     end
-    object CD_Productoseccion: TStringField
+    object CD_Producto_seccion: TStringField
       FieldName = 'seccion'
       Size = 50
     end
-    object CD_Productosector: TStringField
+    object CD_Producto_sector: TStringField
       FieldName = 'sector'
       Size = 10
     end
-    object CD_Productofila: TStringField
+    object CD_Producto_fila: TStringField
       FieldName = 'fila'
       Size = 10
     end
-    object CD_Productocolumna: TStringField
+    object CD_Producto_columna: TStringField
       FieldName = 'columna'
       Size = 10
     end
@@ -1238,8 +1238,8 @@ object FTransferirStock: TFTransferirStock
       'LEFT JOIN sucursal s ON (s.id_sucursal=ps.id_sucursal)'
       'WHERE s.id_sucursal <> 0')
     Params = <>
-    Left = 105
-    Top = 321
+    Left = 102
+    Top = 325
     object ZQ_SucursalID_POSICION_SUCURSAL: TIntegerField
       FieldName = 'ID_POSICION_SUCURSAL'
       Required = True
@@ -1982,5 +1982,230 @@ object FTransferirStock: TFTransferirStock
     SumListChanged = EKSumaNotaPedidoSumListChanged
     Left = 549
     Top = 210
+  end
+  object ZQ_Comprobante: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select cpb.*'
+      'from comprobante cpb'
+      'where cpb.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 552
+    Top = 289
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ComprobanteID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_ComprobanteID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_ComprobanteID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_ComprobanteID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object ZQ_ComprobanteID_TIPO_CPB: TIntegerField
+      FieldName = 'ID_TIPO_CPB'
+    end
+    object ZQ_ComprobanteID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object ZQ_ComprobanteID_COMP_ESTADO: TIntegerField
+      FieldName = 'ID_COMP_ESTADO'
+    end
+    object ZQ_ComprobanteID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
+    object ZQ_ComprobanteCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_ComprobanteFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_ComprobanteOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
+    end
+    object ZQ_ComprobanteBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_ComprobanteSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
+    object ZQ_ComprobantePORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_ComprobanteIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_ComprobantePORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_ComprobanteIMPORTE_DESCUENTO: TFloatField
+      FieldName = 'IMPORTE_DESCUENTO'
+    end
+    object ZQ_ComprobanteIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+    end
+    object ZQ_ComprobanteIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_ComprobanteENCABEZADO: TStringField
+      FieldName = 'ENCABEZADO'
+      Size = 500
+    end
+    object ZQ_ComprobantePIE: TStringField
+      FieldName = 'PIE'
+      Size = 500
+    end
+    object ZQ_ComprobanteFECHA_COBRADA: TDateField
+      FieldName = 'FECHA_COBRADA'
+    end
+    object ZQ_ComprobanteFECHA_ENVIADA: TDateField
+      FieldName = 'FECHA_ENVIADA'
+    end
+    object ZQ_ComprobanteFECHA_IMPRESA: TDateField
+      FieldName = 'FECHA_IMPRESA'
+    end
+    object ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField
+      FieldName = 'FECHA_VENCIMIENTO'
+    end
+    object ZQ_ComprobantePUNTO_VENTA: TIntegerField
+      FieldName = 'PUNTO_VENTA'
+      DisplayFormat = '0000'
+    end
+    object ZQ_ComprobanteNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
+      DisplayFormat = '00000000'
+    end
+    object ZQ_ComprobanteFECHA_ANULADO: TDateField
+      FieldName = 'FECHA_ANULADO'
+    end
+    object ZQ_ComprobanteID_POSICION_SUC_DESTINO: TIntegerField
+      FieldName = 'ID_POSICION_SUC_DESTINO'
+    end
+  end
+  object ZQ_CpbProducto: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select pr.*'
+      'from comprobante_detalle pr'
+      'where pr.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 553
+    Top = 345
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_CpbProductoID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+    end
+    object ZQ_CpbProductoID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_CpbProductoID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+    object ZQ_CpbProductoDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object ZQ_CpbProductoCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+  end
+  object ZP_CpbID: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    StoredProcName = 'SP_GEN_COMPROBANTE_ID'
+    Left = 686
+    Top = 144
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    object ZP_CpbIDID: TIntegerField
+      FieldName = 'ID'
+    end
+  end
+  object ZQ_NumeroCpb: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select t.*'
+      'from tipo_comprobante t'
+      'where t.id_tipo_cpb = :id_tipo')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_tipo'
+        ParamType = ptUnknown
+      end>
+    Left = 685
+    Top = 97
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_tipo'
+        ParamType = ptUnknown
+      end>
+    object ZQ_NumeroCpbULTIMO_NUMERO: TIntegerField
+      FieldName = 'ULTIMO_NUMERO'
+    end
+    object ZQ_NumeroCpbID_TIPO_CPB: TIntegerField
+      FieldName = 'ID_TIPO_CPB'
+    end
+    object ZQ_NumeroCpbNOMBRE_TIPO_CPB: TStringField
+      FieldName = 'NOMBRE_TIPO_CPB'
+      Size = 50
+    end
+    object ZQ_NumeroCpbSIGNO_COBRO_PAGO: TIntegerField
+      FieldName = 'SIGNO_COBRO_PAGO'
+    end
+    object ZQ_NumeroCpbSIGNO_STOCK: TIntegerField
+      FieldName = 'SIGNO_STOCK'
+    end
+    object ZQ_NumeroCpbSIGNO_CTA_CTE: TIntegerField
+      FieldName = 'SIGNO_CTA_CTE'
+    end
+    object ZQ_NumeroCpbBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
   end
 end
