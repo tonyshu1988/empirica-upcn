@@ -336,6 +336,7 @@ type
     ini_windows, ini_minimizar: boolean;
     resultado_SubirNovedades, resultado_BajarNovedades, resultado_ProcesarNovedades: boolean;
     cantidadNovedades, idMinNovedades, idMaxNovedades: integer;
+    error_servidor_FTP: string;
   end;
 
 var
@@ -957,6 +958,8 @@ Var
   archivo_temp: string;
 begin
   Result:= false;
+  error_servidor_FTP:= '';
+
   archivo_temp:= 'temp'+archivo;
 
   //si no estoy conectado al ftp me conecto
@@ -964,8 +967,11 @@ begin
   try
     DM.IdFTP.Connect;
   except
-    //ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
-    exit;
+    on E: Exception do
+    begin
+      error_servidor_FTP:= e.Message;
+      exit;
+    end;
   end;
 
   If DM.IdFTP.Connected then //si me pude conectar
@@ -988,7 +994,11 @@ begin
 
       Result:= true;
     except
-      Result:= false;
+      on E: Exception do
+      begin
+        error_servidor_FTP:= e.Message;
+        Result:= false;
+      end
     end;
   End;
 end;
@@ -999,6 +1009,7 @@ function TFPrincipal.FTP_BajarArchivo(directorio, archivo: String): Boolean;
 Var
   size_archivo: integer;
 begin
+  error_servidor_FTP:= '';
   Result:= false;
 
   //si no estoy conectado al ftp me conecto
@@ -1006,8 +1017,11 @@ begin
   try
     DM.IdFTP.Connect;
   except
-    //ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
-    exit;
+    on E: Exception do
+    begin
+      error_servidor_FTP:= e.Message;
+      exit;
+    end;
   end;
 
   //si estoy conectado
@@ -1040,16 +1054,23 @@ begin
           Exit;
         end
       except
-        //si se produjo un error en la bajada me aseguro que se borre el archivo de la pc
-        if FileExists(dirLocal+archivo) then
-          DeleteFile(dirLocal+archivo);
-        DM.IdFTP.EndWork(wmRead);
-        DM.IdFTP.Disconnect;
+        on E: Exception do
+        begin
+          error_servidor_FTP:= e.Message;
+          if FileExists(dirLocal+archivo) then
+            DeleteFile(dirLocal+archivo);
+          DM.IdFTP.EndWork(wmRead);
+          DM.IdFTP.Disconnect;
+        end;
       end;
 
       Result:= true;
     except
-      Result:= false;
+      on E: Exception do
+      begin
+        error_servidor_FTP:= e.Message;
+        Result:= false;
+      end;
     end;
   end;
 end;
@@ -1058,6 +1079,7 @@ end;
 //Borrar un archivo en un directorio especifico en el servidor FTP
 function TFPrincipal.FTP_BorrarArchivo(directorio, archivo: String): Boolean;
 begin
+  error_servidor_FTP:= '';
   Result:= false;
 
   //si no estoy conectado al ftp me conecto
@@ -1065,8 +1087,11 @@ begin
   try
     DM.IdFTP.Connect;
   except
-    //ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
-    exit;
+    on E: Exception do
+    begin
+      error_servidor_FTP:= e.Message;
+      exit;
+    end;
   end;
 
   If DM.IdFTP.Connected then
@@ -1081,7 +1106,11 @@ begin
 
       Result:= true;
     except
-      Result:= false;
+      on E: Exception do
+      begin
+        error_servidor_FTP:= e.Message;
+        Result:= false;
+      end;
     end;
   End;
 end;
@@ -1090,6 +1119,7 @@ end;
 //cheque que el archivo pasado como parametro exista en el servidor ftp
 function TFPrincipal.FTP_ExisteArchivo(directorio, archivo: string): boolean;
 begin
+  error_servidor_FTP:= '';
   Result:= false;
 
   //si no estoy conectado al ftp me conecto
@@ -1097,8 +1127,11 @@ begin
   try
     DM.IdFTP.Connect;
   except
-    //ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
-    exit;
+    on E: Exception do
+    begin
+      error_servidor_FTP:= e.Message;
+      exit;
+    end;
   end;
 
   //si estoy conectado
@@ -1113,7 +1146,11 @@ begin
       DM.IdFTP.EndWork(wmRead);
       DM.IdFTP.Disconnect;
     except
-      Result:= false;
+      on E: Exception do
+      begin
+        error_servidor_FTP:= e.Message;
+        Result:= false;
+      end;
     end;
   End;
 end;
@@ -1125,6 +1162,7 @@ var
   auxLista: TStringList;
   i, cantidad: integer;
 begin
+  error_servidor_FTP:= '';
   result:= -1;
   cantidad:= 0;
 
@@ -1133,8 +1171,11 @@ begin
   try
     DM.IdFTP.Connect;
   except
-    //ShowMessage('No se ha podido conectar con el Servidor FTP '+DM.IdFTP.Host);
-    exit;
+    on E: Exception do
+    begin
+      error_servidor_FTP:= e.Message;
+      exit;
+    end;
   end;
 
   //si estoy conectado
@@ -1162,7 +1203,11 @@ begin
       end;
       result:= cantidad;
     Except
-      exit;
+      on E: Exception do
+      begin
+        error_servidor_FTP:= e.Message;
+        exit;
+      end;
     end;
   end;
 end;
@@ -1363,6 +1408,7 @@ begin
   else //si el archivo no se pudo subir al servidor
   begin
     memoLog.Lines.Add(getFechayHoraString+' - Error en el Envio Archivo Novedades ('+archivo+') al Servidor FTP');
+    memoLog.Lines.Add(getFechayHoraString+' - '+error_servidor_FTP);
   end;
 end;
 
@@ -1407,6 +1453,7 @@ begin
   if cantidad_archivos_encontrados = -1 then  //si devuelve -1 es porque no me puedo conectar
   begin
     memoLog.Lines.Add(getFechayHoraString+' - No se pudo conectar al servidor FTP');
+    memoLog.Lines.Add(getFechayHoraString+' - '+error_servidor_FTP);
     memoLog.Lines.Add('--------------------------------------------------------------');
     memoLog.Lines.Add('        FIN BAJAR NOVEDADES SERVIDOR                          ');
     memoLog.Lines.Add('--------------------------------------------------------------');
@@ -1434,6 +1481,7 @@ begin
       else
       begin
         memoLog.Lines.Add(getFechayHoraString+' - Error al descargar el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
+        memoLog.Lines.Add(getFechayHoraString+' - '+error_servidor_FTP);
         memoLog.Lines.Add('--------------------------------------------------------------');
         memoLog.Lines.Add('        FIN BAJAR NOVEDADES SERVIDOR                          ');
         memoLog.Lines.Add('--------------------------------------------------------------');
@@ -1496,6 +1544,7 @@ begin
         if CD_Tablas_Actualizar.IsEmpty then
         begin
           memoLog.Lines.Add(getFechayHoraString+' - El archivo de de novedades '+CD_ListaNovedades_NombreArchivo.AsString+' no tiene datos de otras sucursales para actualizar');
+          memoLog.Lines.Add(getFechayHoraString+' - '+error_servidor_FTP);
           CD_ListaNovedades.edit;
           CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
           CD_ListaNovedades.Post;
@@ -1543,9 +1592,6 @@ var
   fechaString: string;
 begin
   Result:= false;
-
-  if CD_Tablas_Actualizar.Eof then
-    exit;
 
   CD_ProcesarNovedades.DisableControls;
 
@@ -1623,7 +1669,7 @@ begin
                       end
                     except
                       begin                                                
-                        //tengo que convertit el dato que viene de la forma '2012-01-24 18:46:37.0000' a un date time
+                        //tengo que convertit eno tiene datos de otras sucursales para actualizarl dato que viene de la forma '2012-01-24 18:46:37.0000' a un date time
                         fechaString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
                         fechaDateTime:= EncodeDateTime(StrToInt(Copy(fechaString, 1, 4)),StrToInt(Copy(fechaString, 6, 2)),StrToInt(Copy(fechaString, 9, 2)),
                         StrToInt(Copy(fechaString, 12, 2)),StrToInt(Copy(fechaString, 15, 2)),StrToInt(Copy(fechaString, 18, 2)),StrToInt(Copy(fechaString, 21, 4)));
@@ -1755,7 +1801,10 @@ begin
   //busco el ultimo archivo que se bajo del servidor
   memoLog.Lines.Add(getFechayHoraString+' - Buscando Novedades de los Clientes en el Servidor FTP');
   if not buscarNovedadesClientes then  //si devuelve falso es porque no me puedo conectar
-    memoLog.Lines.Add(getFechayHoraString+' - No se pudo conectar al servidor FTP')
+  begin
+    memoLog.Lines.Add(getFechayHoraString+' - No se pudo conectar al servidor FTP');
+    memoLog.Lines.Add(getFechayHoraString+' - '+error_servidor_FTP);
+  end
   else //si me puedo conectar
   begin
     cantidad_archivos_encontrados:= CD_ListaNovedades.RecordCount;
@@ -1776,6 +1825,7 @@ begin
       else
       begin
         memoLog.Lines.Add(getFechayHoraString+' - Error al descargar el archivo '+CD_ListaNovedades_NombreArchivo.AsString+' del Servidor FTP');
+        memoLog.Lines.Add(getFechayHoraString+' - '+error_servidor_FTP);
         memoLog.Lines.Add('--------------------------------------------------------------');
         memoLog.Lines.Add('        FIN BAJAR NOVEDADES CLIENTES                          ');
         memoLog.Lines.Add('--------------------------------------------------------------');
@@ -2048,6 +2098,7 @@ begin
   else //si el archivo no se pudo subir al servidor
   begin
     memoLog.Lines.Add(getFechayHoraString+' - Error en el Envio Archivo Novedades ('+archivo+') al Servidor FTP');
+    memoLog.Lines.Add(getFechayHoraString+' - '+error_servidor_FTP);     
   end;
 end;
 
