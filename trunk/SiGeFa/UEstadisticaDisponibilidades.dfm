@@ -1,6 +1,6 @@
 object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
-  Left = 254
-  Top = 146
+  Left = 253
+  Top = 71
   Width = 1001
   Height = 673
   Caption = 'Estadistica Disponibilidades'
@@ -22,16 +22,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 993
-    Height = 594
+    Width = 985
+    Height = 583
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object PageControl: TPageControl
       Left = 1
       Top = 1
-      Width = 991
-      Height = 592
+      Width = 983
+      Height = 581
       ActivePage = TabDetalleCuenta
       Align = alClient
       TabOrder = 0
@@ -171,7 +171,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 12
             end
             object RepSaldo_Subtitulo: TQRLabel
-              Left = -58
+              Left = 293
               Top = 26
               Width = 131
               Height = 20
@@ -203,7 +203,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 9
             end
             object RepSaldo_Titulo: TQRLabel
-              Left = -64
+              Left = 287
               Top = 2
               Width = 144
               Height = 20
@@ -506,7 +506,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              58.208333333333340000
+              58.208333333333330000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -588,7 +588,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333340000
+              82.020833333333330000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -2799,9 +2799,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             BorderWidth = 4
             TabOrder = 0
             object lblSaldo_TotalParteDiario: TLabel
-              Left = 5
+              Left = 809
               Top = 5
-              Width = 971
+              Width = 167
               Height = 13
               Align = alTop
               Alignment = taRightJustify
@@ -2826,7 +2826,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblSucursal: TLabel
               Left = 4
               Top = 17
-              Width = 973
+              Width = 71
               Height = 13
               Align = alTop
               Caption = 'lblSucursal'
@@ -2840,7 +2840,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblEncabezadoParteDiario: TLabel
               Left = 4
               Top = 4
-              Width = 973
+              Width = 166
               Height = 13
               Align = alTop
               Caption = 'lblEncabezadoParteDiario'
@@ -2873,7 +2873,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label1: TLabel
                 Left = 0
                 Top = 0
-                Width = 349
+                Width = 58
                 Height = 13
                 Align = alTop
                 Caption = 'RESUMEN'
@@ -3169,7 +3169,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label18: TLabel
                 Left = 0
                 Top = 0
-                Width = 626
+                Width = 320
                 Height = 13
                 Align = alTop
                 Caption = 'INGRESOS Y EGRESOS POR MEDIO DE COBRO/PAGO'
@@ -3239,9 +3239,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 BevelOuter = bvNone
                 TabOrder = 1
                 object lblPD_totalTransfer: TLabel
-                  Left = 0
+                  Left = 499
                   Top = 26
-                  Width = 626
+                  Width = 127
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3254,9 +3254,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object lblPD_totalEgreso: TLabel
-                  Left = 0
+                  Left = 511
                   Top = 0
-                  Width = 626
+                  Width = 115
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3269,9 +3269,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object lblPD_totalIngreso: TLabel
-                  Left = 0
+                  Left = 504
                   Top = 13
-                  Width = 626
+                  Width = 122
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3297,7 +3297,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object Label17: TLabel
               Left = 0
               Top = 0
-              Width = 981
+              Width = 153
               Height = 13
               Align = alTop
               Caption = 'SALDOS DE LAS CUENTAS'
@@ -3379,7 +3379,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object Splitter2: TSplitter
           Left = 0
           Top = 177
-          Width = 983
+          Width = 975
           Height = 5
           Cursor = crVSplit
           Align = alTop
@@ -3387,8 +3387,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object DBGridDetalleCuentasFPago: TDBGrid
           Left = 0
           Top = 182
-          Width = 983
-          Height = 360
+          Width = 975
+          Height = 349
           Align = alClient
           Color = 14606012
           DataSource = DS_Detalle_Cuenta_FPago
@@ -3400,11 +3400,38 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           OnDrawColumnCell = DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Width = 300
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TOTAL_EGRESO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TOTAL_INGRESO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TOTAL_TRANSF_EXTRACCION'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TOTAL_TRANSF_DEPOSITO'
+              Visible = True
+            end>
         end
         object PanelResumenDetalleCta: TPanel
           Left = 0
-          Top = 542
-          Width = 983
+          Top = 531
+          Width = 975
           Height = 22
           Align = alBottom
           BorderWidth = 4
@@ -3412,7 +3439,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblResumenDetalleCta: TLabel
             Left = 5
             Top = 5
-            Width = 973
+            Width = 965
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -3428,7 +3455,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object PanelTituloDetalleCta: TPanel
           Left = 0
           Top = 0
-          Width = 983
+          Width = 975
           Height = 38
           Align = alTop
           BevelOuter = bvNone
@@ -3437,7 +3464,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblTituloDetalleCta2: TLabel
             Left = 4
             Top = 17
-            Width = 975
+            Width = 967
             Height = 13
             Align = alTop
             Caption = 'lblTituloDetalleCta2'
@@ -3451,7 +3478,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblTituloDetalleCta1: TLabel
             Left = 4
             Top = 4
-            Width = 975
+            Width = 967
             Height = 13
             Align = alTop
             Caption = 'lblTituloDetalleCta1'
@@ -3466,7 +3493,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object DBGridDetalleCuentas: TDBGrid
           Left = 0
           Top = 38
-          Width = 983
+          Width = 975
           Height = 139
           Align = alTop
           Color = 14606012
@@ -3479,6 +3506,42 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           OnDrawColumnCell = DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID_CUENTA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CODIGO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_CUENTA'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NRO_CTA_BANCO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SALDO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SALDO_ANT'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DIFERENCIA'
+              Visible = True
+            end>
         end
       end
       object TabDetalleMov: TTabSheet
@@ -3625,7 +3688,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 12
             end
             object RepDetalleMov_Subtitulo: TQRLabel
-              Left = -77
+              Left = 438
               Top = 26
               Width = 170
               Height = 20
@@ -3712,7 +3775,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewPage = False
             ParentFont = False
             Size.Values = (
-              42.333333333333340000
+              42.333333333333330000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -3924,7 +3987,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333340000
+              82.020833333333330000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -4070,7 +4133,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              58.208333333333340000
+              58.208333333333330000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -4454,7 +4517,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSucursalDetMov: TLabel
             Left = 4
             Top = 17
-            Width = 975
+            Width = 119
             Height = 13
             Align = alTop
             Caption = 'lblSucursalDetMov'
@@ -4468,7 +4531,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblEncabezadoDetMov: TLabel
             Left = 4
             Top = 4
-            Width = 975
+            Width = 140
             Height = 13
             Align = alTop
             Caption = 'lblEncabezadoDetMov'
@@ -4575,9 +4638,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           BorderWidth = 4
           TabOrder = 3
           object lblResumenDetalleMovimiento: TLabel
-            Left = 5
+            Left = 781
             Top = 5
-            Width = 973
+            Width = 197
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -4783,7 +4846,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 52.916666666666670000
                 754.062500000000000000
                 68.791666666666670000
-                391.583333333333400000)
+                391.583333333333300000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -4802,7 +4865,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               FontSize = 9
             end
             object RepBalance_Titulo: TQRLabel
-              Left = -75
+              Left = 276
               Top = 2
               Width = 165
               Height = 20
@@ -5438,7 +5501,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333340000
+              82.020833333333330000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -5695,16 +5758,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object PanelMes: TPanel
           Left = 0
           Top = 0
-          Width = 983
-          Height = 564
+          Width = 975
+          Height = 553
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object DBGridBalance: TDBGrid
             Left = 0
             Top = 46
-            Width = 983
-            Height = 431
+            Width = 975
+            Height = 420
             Align = alClient
             Color = 14606012
             DataSource = DS_Balance
@@ -5760,17 +5823,17 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           end
           object PanelMes_Resumen: TPanel
             Left = 0
-            Top = 477
-            Width = 983
+            Top = 466
+            Width = 975
             Height = 87
             Align = alBottom
             BevelOuter = bvNone
             TabOrder = 1
             DesignSize = (
-              983
+              975
               87)
             object Label11: TLabel
-              Left = 1116
+              Left = 1108
               Top = 7
               Width = 85
               Height = 16
@@ -5785,7 +5848,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Label4: TLabel
-              Left = 1124
+              Left = 1116
               Top = 62
               Width = 77
               Height = 16
@@ -5800,7 +5863,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Label12: TLabel
-              Left = 1100
+              Left = 1092
               Top = 24
               Width = 101
               Height = 16
@@ -5815,7 +5878,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Label5: TLabel
-              Left = 1105
+              Left = 1097
               Top = 42
               Width = 96
               Height = 16
@@ -5830,7 +5893,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object Shape3: TShape
-              Left = 1078
+              Left = 1070
               Top = 60
               Width = 276
               Height = 1
@@ -5838,7 +5901,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Pen.Color = clGray
             end
             object lblBalanceTotalIngresos: TLabel
-              Left = 1201
+              Left = 1193
               Top = 24
               Width = 140
               Height = 16
@@ -5854,7 +5917,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object lblBalanceTotalEgresos: TLabel
-              Left = 1201
+              Left = 1193
               Top = 42
               Width = 140
               Height = 16
@@ -5870,7 +5933,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object lblBalanceSaldoFinal: TLabel
-              Left = 1201
+              Left = 1193
               Top = 62
               Width = 140
               Height = 16
@@ -5886,7 +5949,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               ParentFont = False
             end
             object lblBalanceSaldoInicial: TLabel
-              Left = 1201
+              Left = 1193
               Top = 7
               Width = 140
               Height = 16
@@ -5905,7 +5968,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Panel5: TPanel
             Left = 0
             Top = 0
-            Width = 983
+            Width = 975
             Height = 46
             Align = alTop
             BevelOuter = bvNone
@@ -6102,7 +6165,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -7401,7 +7464,15 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         Visible = True
       end
       item
-        TituloColumna = 'Saldo'
+        TituloColumna = 'Saldo Final'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Saldo Anterior'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Diferencia'
         Visible = True
       end>
     NombreGuardar = 'DBGridPD_SaldoCuentas'
@@ -7836,13 +7907,18 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         'select ID_CUENTA, CODIGO, NOMBRE_CUENTA, NRO_CTA_BANCO, sum(SALD' +
         'O) as Saldo, sum(SALDO_ANTERIOR) as Saldo_Ant, (sum(SALDO) - sum' +
         '(SALDO_ANTERIOR)) as diferencia'
-      'from SALDOS_CUENTAS2(:ID_SUCURSAL, :FECHA_HASTA)'
+      'from SALDOS_CUENTAS2(:ID_SUCURSAL, :FECHA_DESDE,  :FECHA_HASTA)'
       'group by ID_CUENTA, CODIGO, NOMBRE_CUENTA, NRO_CTA_BANCO'
       'order by NOMBRE_CUENTA')
     Params = <
       item
         DataType = ftUnknown
         Name = 'ID_SUCURSAL'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FECHA_DESDE'
         ParamType = ptUnknown
       end
       item
@@ -7856,6 +7932,11 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       item
         DataType = ftUnknown
         Name = 'ID_SUCURSAL'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FECHA_DESDE'
         ParamType = ptUnknown
       end
       item
@@ -7905,18 +7986,24 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   end
   object ZQ_Detalle_Cuenta: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_Detalle_CuentaAfterScroll
     SQL.Strings = (
       
         'select ID_CUENTA, CODIGO, NOMBRE_CUENTA, NRO_CTA_BANCO, sum(SALD' +
         'O) as Saldo, sum(SALDO_ANTERIOR) as Saldo_Ant, (sum(SALDO) - sum' +
         '(SALDO_ANTERIOR)) as diferencia'
-      'from SALDOS_CUENTAS2(:ID_SUCURSAL, :FECHA_HASTA)'
+      'from SALDOS_CUENTAS2(:ID_SUCURSAL, :FECHA_DESDE, :FECHA_HASTA)'
       'group by ID_CUENTA, CODIGO, NOMBRE_CUENTA, NRO_CTA_BANCO'
       'order by NOMBRE_CUENTA')
     Params = <
       item
         DataType = ftUnknown
         Name = 'ID_SUCURSAL'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FECHA_DESDE'
         ParamType = ptUnknown
       end
       item
@@ -7934,40 +8021,45 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       end
       item
         DataType = ftUnknown
+        Name = 'FECHA_DESDE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
         Name = 'FECHA_HASTA'
         ParamType = ptUnknown
       end>
-    object IntegerField1: TIntegerField
+    object ZQ_Detalle_CuentaID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
       ReadOnly = True
     end
-    object StringField1: TStringField
+    object ZQ_Detalle_CuentaCODIGO: TStringField
       FieldName = 'CODIGO'
       ReadOnly = True
       Size = 10
     end
-    object StringField2: TStringField
+    object ZQ_Detalle_CuentaNOMBRE_CUENTA: TStringField
       FieldName = 'NOMBRE_CUENTA'
       ReadOnly = True
       Size = 50
     end
-    object StringField3: TStringField
+    object ZQ_Detalle_CuentaNRO_CTA_BANCO: TStringField
       FieldName = 'NRO_CTA_BANCO'
       ReadOnly = True
       Size = 10
     end
-    object FloatField1: TFloatField
+    object ZQ_Detalle_CuentaSALDO: TFloatField
       FieldName = 'SALDO'
       ReadOnly = True
       currency = True
     end
-    object FloatField2: TFloatField
-      FieldName = 'DIFERENCIA'
+    object ZQ_Detalle_CuentaSALDO_ANT: TFloatField
+      FieldName = 'SALDO_ANT'
       ReadOnly = True
       currency = True
     end
-    object FloatField3: TFloatField
-      FieldName = 'SALDO_ANT'
+    object ZQ_Detalle_CuentaDIFERENCIA: TFloatField
+      FieldName = 'DIFERENCIA'
       ReadOnly = True
       currency = True
     end
@@ -8074,26 +8166,30 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         Name = 'ID_CUENTA'
         ParamType = ptInput
       end>
-    object ZP_Detalle_Cuenta_FPagoTOTAL_EGRESO: TFloatField
-      FieldName = 'TOTAL_EGRESO'
-      ReadOnly = True
-    end
-    object ZP_Detalle_Cuenta_FPagoTOTAL_INGRESO: TFloatField
-      FieldName = 'TOTAL_INGRESO'
-      ReadOnly = True
-    end
     object ZP_Detalle_Cuenta_FPagoDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       ReadOnly = True
       Size = 100
     end
-    object ZP_Detalle_Cuenta_FPagoTOTAL_TRANSF_EXTRACCION: TFloatField
-      FieldName = 'TOTAL_TRANSF_EXTRACCION'
+    object ZP_Detalle_Cuenta_FPagoTOTAL_EGRESO: TFloatField
+      FieldName = 'TOTAL_EGRESO'
       ReadOnly = True
+      currency = True
+    end
+    object ZP_Detalle_Cuenta_FPagoTOTAL_INGRESO: TFloatField
+      FieldName = 'TOTAL_INGRESO'
+      ReadOnly = True
+      currency = True
     end
     object ZP_Detalle_Cuenta_FPagoTOTAL_TRANSF_DEPOSITO: TFloatField
       FieldName = 'TOTAL_TRANSF_DEPOSITO'
       ReadOnly = True
+      currency = True
+    end
+    object ZP_Detalle_Cuenta_FPagoTOTAL_TRANSF_EXTRACCION: TFloatField
+      FieldName = 'TOTAL_TRANSF_EXTRACCION'
+      ReadOnly = True
+      currency = True
     end
   end
   object DS_Detalle_Cuenta_FPago: TDataSource
