@@ -37,7 +37,7 @@ uses
   ZStoredProcedure, dxBar, dxBarExtItems, EKIconizacion, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
   IdFTP, DBClient, ComCtrls, Buttons, Provider, DBCtrls, EKOrdenarGrilla, SqlTimSt,
-  Menus, midas;
+  Menus, midas, IdException;
 
 const
   InputBoxMessage = WM_USER + 200; //para que hacer el imputBox con password
@@ -273,10 +273,12 @@ type
     procedure QuitarProgramaInicio;
     procedure PonerProgramaInicio;
     //procedimientos con el servidor FTP
-    function  FTP_SubirArchivo(directorio, archivo: String): Boolean;
-    function  FTP_BajarArchivo(directorio, archivo: String): Boolean;
-    function  FTP_BorrarArchivo(directorio, archivo: String): Boolean;
-    function  FTP_ExisteArchivo(directorio, archivo: string): boolean;
+    function  FTP_conectarse(): integer;
+    function  FTP_desconectarse(): integer;
+    function  FTP_SubirArchivo(directorio, archivo: String): integer;
+    function  FTP_BajarArchivo(directorio, archivo: String): integer;
+    function  FTP_BorrarArchivo(directorio, archivo: String): integer;
+    function  FTP_ExisteArchivo(directorio, archivo: string): integer;
     function  FTP_BuscarListaArchivos(directorio, inicio_nombre_archivo, ultimo_archivo, origen_archivo: string): integer;
     //procedimientos de los botones
     procedure btnSubirClick(Sender: TObject);
@@ -337,6 +339,8 @@ type
     resultado_SubirNovedades, resultado_BajarNovedades, resultado_ProcesarNovedades: boolean;
     cantidadNovedades, idMinNovedades, idMaxNovedades: integer;
     error_servidor_FTP: string;
+    intentos_Conexion_FTP: integer;
+    sincronizador_activado: boolean;
   end;
 
 var
@@ -350,7 +354,11 @@ const
   transaccion_sertver = 'NOVEDADES SERVIDOR';
   transaccion_actualizar_base = 'ACTUALIZANDO BASE';
   modo_cliente = 'CLIENTE';
-  modo_servidor = 'SERVIDOR';  
+  modo_servidor = 'SERVIDOR';
+  FTP_ERROR_GRAL  = -1;
+  FTP_ERROR_CCG   = -2; //Connection closed gracefully
+  FTP_OK          =  0;
+
 
 implementation
 
@@ -465,6 +473,7 @@ end;
 //OnCreate
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
+  intentos_Conexion_FTP:= 3;
   estado_sincronizando:= false;
   configGrillas(0); //cargo la config de las grillas
 
@@ -590,11 +599,14 @@ begin
 
   //obtengo el numero del dia de hoy
   dia_hoy:= DayOfTheWeek(getFechayHora);
-
   //Activo o desactivo el timmer de sincronizacion
   Timer.Enabled:= false;
+  sincronizador_activado:= false;
   if (dia_hoy = lunes) or (dia_hoy = martes) or (dia_hoy = miercoles) or (dia_hoy = jueves) or (dia_hoy = viernes) or (dia_hoy = sabado) or (dia_hoy = domingo) then
+  begin
+    sincronizador_activado:= true;
     Timer.Enabled:= true;
+  end;
 
   //configuro el timmer con el intervalo de la configuracion
   intervalo:= dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'HORA', 1)*3600 + dm.EKInicio.Ini.ReadInteger('CRONOGRAMA', 'MINUTOS', 0)*60;
@@ -617,30 +629,31 @@ end;
 //Timer para que realice la sincronizacion automaticamente
 procedure TFPrincipal.TimerTimer(Sender: TObject);
 begin
-  if tiempo_restante = 0 then
-  begin
-    Timer.Enabled:= false;
-
-    if modo = modo_cliente then
+  if sincronizador_activado then
+    if tiempo_restante = 0 then
     begin
-      bajarNovedadesServer;
-      procesarNovedadesServer;
+      Timer.Enabled:= false;
+
+      if modo = modo_cliente then
+      begin
+        bajarNovedadesServer;
+        procesarNovedadesServer;
+      end
+      else
+      begin
+        bajarNovedadesClientes;
+        procesarNovedadesClientes;
+      end;
+      subirNovedades;
+
+      Timer.Enabled:= true;
+      tiempo_restante:= intervalo;
     end
     else
     begin
-      bajarNovedadesClientes;
-      procesarNovedadesClientes;
-    end;
-    subirNovedades;
-
-    Timer.Enabled:= true;
-    tiempo_restante:= intervalo;
-  end
-  else
-  begin
-    lblTiempoRestante.Caption:= FormatDateTime('hh:nn:ss', tiempo_restante/SecsPerDay);
-    tiempo_restante:= tiempo_restante - 1;
-  end
+      lblTiempoRestante.Caption:= FormatDateTime('hh:nn:ss', tiempo_restante/SecsPerDay);
+      tiempo_restante:= tiempo_restante - 1;
+    end
 end;
 
 
@@ -950,209 +963,216 @@ end;
 //*********************************************************************
 //                PROCEDIMIENTOS CON EL SERVIDOR FTP
 //*********************************************************************
+function TFPrincipal.FTP_conectarse: integer;
+var
+  intentos: integer;
+begin
+  //por defecto tira el error general
+  Result:= FTP_ERROR_GRAL;
+  error_servidor_FTP:= '';
+
+  intentos:= 0;
+  while intentos < intentos_Conexion_FTP do //cantidad de intentos para conectarme
+  begin
+    try
+      DM.IdFTP.Disconnect;
+      Sleep(500);
+      DM.IdFTP.Connect;
+      Result:= FTP_OK;
+      exit;
+    except
+      on E: Exception do
+      begin
+        intentos:= intentos + 1;
+        if intentos = intentos_Conexion_FTP then //si llegue al maximo de intentos de conexion salgo;
+        begin
+          error_servidor_FTP:= e.Message;
+          if E is EIdConnClosedGracefully then //manejo el error "Connection Closed Gracefully"
+            Result:= FTP_ERROR_CCG;
+          exit;
+        end;
+      end;
+    end;
+  end;
+end;
+
+
+function TFPrincipal.FTP_desconectarse: integer;
+var
+  intentos: integer;
+begin
+  //por defecto tira el error general
+  Result:= FTP_ERROR_GRAL;
+  error_servidor_FTP:= '';
+
+  try
+    Sleep(500);
+    DM.IdFTP.Disconnect;
+    Result:= FTP_OK;
+  except
+    on E: Exception do
+    begin
+      error_servidor_FTP:= e.Message;
+      if E is EIdConnClosedGracefully then //manejo el error "Connection Closed Gracefully"
+        Result:= FTP_ERROR_CCG;
+    end;
+  end;
+end;
+
+
 //Subir un archivo al servidor FTP en un directorio especifico
-function TFPrincipal.FTP_SubirArchivo(directorio, archivo: String): Boolean;
+function TFPrincipal.FTP_SubirArchivo(directorio, archivo: String): integer;
 Var
   F: File of byte;
   size_archivo: integer;
   archivo_temp: string;
+  intentos : integer;
 begin
-  Result:= false;
-  error_servidor_FTP:= '';
+  //si no me puedo conectar salgo
+  if FTP_conectarse <> FTP_OK then
+    exit;
 
+  //por defecto tira el error general
+  Result:= FTP_ERROR_GRAL;
+  error_servidor_FTP:= '';
   archivo_temp:= 'temp'+archivo;
 
-  //si no estoy conectado al ftp me conecto
-  If not DM.IdFTP.Connected then
-  try
-    DM.IdFTP.Connect;
+  Try
+    //obtengo el tamaño del archivo a subir para poder reflejar el proceso de subida en el progress bar correspondiente
+    AssignFile(F, dirLocal+archivo);
+    Reset(F);
+    size_archivo:= FileSize(F) div 1024;
+    pBar_Ftp.max:= size_archivo;
+    CloseFile(F);
+
+    //me ubico en el directorio correspondiente en el ftp y subo el archivo
+    DM.IdFTP.BeginWork(wmWrite, 0);
+    DM.IdFTP.ChangeDir(directorio); //cambio al directorio pasado como parametro
+    DM.IdFTP.Put(dirLocal+archivo, ExtractFileName(archivo_temp), False); //subo el archivo con un nombre temporal
+    DM.IdFTP.Rename(archivo_temp, archivo); //luego que termino de subirlo lo renombro al nombre original
+    DM.IdFTP.EndWork(wmWrite);
+    Sleep(500);
+    DM.IdFTP.Disconnect;
+    Result:= FTP_OK;
   except
     on E: Exception do
     begin
       error_servidor_FTP:= e.Message;
-      exit;
-    end;
+      if not (E is EIdConnClosedGracefully) then //manejo el error "Connection Closed Gracefully"
+        Result:= FTP_ERROR_CCG;
+    end
   end;
-
-  If DM.IdFTP.Connected then //si me pude conectar
-  Begin
-    Try
-      //obtengo el tamaño del archivo a subir para poder reflejar el proceso de subida en el progress bar correspondiente
-      AssignFile(F, dirLocal+archivo);
-      Reset(F);
-      size_archivo:= FileSize(F) div 1024;
-      pBar_Ftp.max:= size_archivo;
-      CloseFile(F);
-
-      //me ubico en el directorio correspondiente en el ftp y subo el archivo
-      DM.IdFTP.BeginWork(wmWrite, 0);
-      DM.IdFTP.ChangeDir(directorio); //cambio al directorio pasado como parametro
-      DM.IdFTP.Put(dirLocal+archivo, ExtractFileName(archivo_temp), False); //subo el archivo con un nombre temporal
-      DM.IdFTP.Rename(archivo_temp, archivo); //luego que termino de subirlo lo renombro al nombre original
-      DM.IdFTP.EndWork(wmWrite);
-      DM.IdFTP.Disconnect;
-
-      Result:= true;
-    except
-      on E: Exception do
-      begin
-        error_servidor_FTP:= e.Message;
-        Result:= false;
-      end
-    end;
-  End;
 end;
 
 
 //Bajar un archivo de un directorio especifico del servidor FTP
-function TFPrincipal.FTP_BajarArchivo(directorio, archivo: String): Boolean;
+function TFPrincipal.FTP_BajarArchivo(directorio, archivo: String): integer;
 Var
   size_archivo: integer;
 begin
-  error_servidor_FTP:= '';
-  Result:= false;
+  //si no me puedo conectar salgo
+  if FTP_conectarse <> FTP_OK then
+    exit;
 
-  //si no estoy conectado al ftp me conecto
-  If not DM.IdFTP.Connected then
-  try
-    DM.IdFTP.Connect;
+  //por defecto tira el error general
+  Result:= FTP_ERROR_GRAL;
+  error_servidor_FTP:= '';
+
+  Try
+    //me ubico en el directorio correspondiente en el ftp
+    DM.IdFTP.ChangeDir(directorio);
+    //si el archivo que voy a bajar ya lo tengo en la pc, lo borro
+    if FileExists(dirLocal+archivo) then
+      DeleteFile(dirLocal+archivo);
+    //obtengo el tamaño del archivo para setear el progrees bar
+    size_archivo:= DM.IdFTP.Size(archivo) div 1024;
+    pBar_Ftp.max:= size_archivo;
+    Application.ProcessMessages;
+
+    DM.IdFTP.BeginWork(wmRead, 0);
+    DM.IdFTP.Get(archivo, dirLocal+archivo, False, False);
+    DM.IdFTP.EndWork(wmRead);
+    Sleep(500);
+    DM.IdFTP.Disconnect;
+    Result:= FTP_OK;
   except
     on E: Exception do
     begin
       error_servidor_FTP:= e.Message;
-      exit;
-    end;
-  end;
-
-  //si estoy conectado
-  If DM.IdFTP.Connected then
-  Begin
-    Try
-      //me ubico en el directorio correspondiente en el ftp
-      DM.IdFTP.ChangeDir(directorio);
-
-      //si el archivo que voy a bajar ya lo tengo en la pc, lo borro
       if FileExists(dirLocal+archivo) then
         DeleteFile(dirLocal+archivo);
-      //obtengo el tamaño del archivo para setear el progrees bar
-      size_archivo:= DM.IdFTP.Size(archivo) div 1024;
-      pBar_Ftp.max:= size_archivo;
-      Application.ProcessMessages;
 
-      try
-        if true then//existeArchivoServer(archivo) then
-        begin
-          //bajo el archivo
-          DM.IdFTP.BeginWork(wmRead, 0);
-          DM.IdFTP.Get(archivo, dirLocal+archivo, False, False);
-          DM.IdFTP.EndWork(wmRead);
-          DM.IdFTP.Disconnect;
-        end
-        else
-        begin
-          Result:= false;
-          Exit;
-        end
-      except
-        on E: Exception do
-        begin
-          error_servidor_FTP:= e.Message;
-          if FileExists(dirLocal+archivo) then
-            DeleteFile(dirLocal+archivo);
-          DM.IdFTP.EndWork(wmRead);
-          DM.IdFTP.Disconnect;
-        end;
-      end;
-
-      Result:= true;
-    except
-      on E: Exception do
-      begin
-        error_servidor_FTP:= e.Message;
-        Result:= false;
-      end;
+      if not (E is EIdConnClosedGracefully) then //manejo el error "Connection Closed Gracefully"
+        Result:= FTP_ERROR_CCG;
     end;
   end;
 end;
 
 
 //Borrar un archivo en un directorio especifico en el servidor FTP
-function TFPrincipal.FTP_BorrarArchivo(directorio, archivo: String): Boolean;
+function TFPrincipal.FTP_BorrarArchivo(directorio, archivo: String): integer;
 begin
-  error_servidor_FTP:= '';
-  Result:= false;
+  //si no me puedo conectar salgo
+  if FTP_conectarse <> FTP_OK then
+    exit;
 
-  //si no estoy conectado al ftp me conecto
-  If not DM.IdFTP.Connected then
-  try
-    DM.IdFTP.Connect;
+  //por defecto tira el error general
+  Result:= FTP_ERROR_GRAL;
+  error_servidor_FTP:= '';
+
+  Try
+    //me ubico en el directorio correspondiente en el ftp y borro el archivo
+    DM.IdFTP.BeginWork(wmWrite);
+    DM.IdFTP.ChangeDir(directorio);
+    DM.IdFTP.Delete(archivo);
+    DM.IdFTP.EndWork(wmWrite);
+    Sleep(500);
+    DM.IdFTP.Disconnect;
+    Result:= FTP_OK;
   except
     on E: Exception do
     begin
       error_servidor_FTP:= e.Message;
-      exit;
+      if not (E is EIdConnClosedGracefully) then //manejo el error "Connection Closed Gracefully"
+        Result:= FTP_ERROR_CCG;
     end;
   end;
-
-  If DM.IdFTP.Connected then
-  Begin
-    Try
-      //me ubico en el directorio correspondiente en el ftp y borro el archivo
-      DM.IdFTP.BeginWork(wmWrite);
-      DM.IdFTP.ChangeDir(directorio);
-      DM.IdFTP.Delete(archivo);
-      DM.IdFTP.EndWork(wmWrite);
-      DM.IdFTP.Disconnect;
-
-      Result:= true;
-    except
-      on E: Exception do
-      begin
-        error_servidor_FTP:= e.Message;
-        Result:= false;
-      end;
-    end;
-  End;
 end;
 
 
 //cheque que el archivo pasado como parametro exista en el servidor ftp
-function TFPrincipal.FTP_ExisteArchivo(directorio, archivo: string): boolean;
+function TFPrincipal.FTP_ExisteArchivo(directorio, archivo: string): integer;
+var
+  auxCantidad: integer;
 begin
-  error_servidor_FTP:= '';
-  Result:= false;
+  //si no me puedo conectar salgo
+  result:= FTP_conectarse;
+  if result <> FTP_OK then
+    exit;
 
-  //si no estoy conectado al ftp me conecto
-  If not DM.IdFTP.Connected then
-  try
-    DM.IdFTP.Connect;
+  //por defecto tira el error general
+  Result:= FTP_ERROR_GRAL;
+  error_servidor_FTP:= '';
+
+  Try
+    //me ubico en el directorio correspondiente en el ftp y verifico si existe el archivo
+    DM.IdFTP.ChangeDir(directorio);
+    DM.IdFTP.List(nil, archivo, False);
+    //si la lista obtenida es mayor a cero es porque el archivo existe
+    auxCantidad:= dm.IdFTP.ListResult.Count;
+    DM.IdFTP.EndWork(wmRead);
+    Sleep(500);
+    DM.IdFTP.Disconnect;
+    if auxCantidad > 0 then
+      Result:= FTP_OK;
   except
     on E: Exception do
     begin
       error_servidor_FTP:= e.Message;
-      exit;
+      if not (E is EIdConnClosedGracefully) then //manejo el error "Connection Closed Gracefully"
+        Result:= FTP_ERROR_CCG;
     end;
   end;
-
-  //si estoy conectado
-  If DM.IdFTP.Connected then
-  Begin
-    Try
-      //me ubico en el directorio correspondiente en el ftp y verifico si existe el archivo
-      DM.IdFTP.ChangeDir(directorio);
-      DM.IdFTP.List(nil, archivo, False);
-      //si la lista obtenida es mayor a cero es porque el archivo existe
-      Result:= (dm.IdFTP.ListResult.Count > 0);
-      DM.IdFTP.EndWork(wmRead);
-      DM.IdFTP.Disconnect;
-    except
-      on E: Exception do
-      begin
-        error_servidor_FTP:= e.Message;
-        Result:= false;
-      end;
-    end;
-  End;
 end;
 
 
@@ -1162,52 +1182,44 @@ var
   auxLista: TStringList;
   i, cantidad: integer;
 begin
-  error_servidor_FTP:= '';
+  //si no me puedo conectar salgo
   result:= -1;
   cantidad:= 0;
 
-  //si no estoy conectado al ftp me conecto
-  If not DM.IdFTP.Connected then
-  try
-    DM.IdFTP.Connect;
-  except
+
+  if FTP_conectarse <> FTP_OK then
+    exit;
+
+  error_servidor_FTP:= '';
+
+  Try
+    auxLista:= TStringList.Create;
+    //me ubico en el directorio correspondiente en el ftp
+    DM.IdFTP.ChangeDir(directorio);
+    //obtengo la lista de todos los archivos que existen en el directorio correspondiente del ftp que comiencen con el nombre del archivo del servidor y terminen en xml
+    DM.IdFTP.List(auxLista, inicio_nombre_archivo+'_*.xml', false); //cargar en lista, los archivos que empiezen con el nombre del servidor y terminen en xml, todos los archivos
+    //por cada uno de los nombres de archivo obtenidos
+    for i := 0 to auxLista.Count - 1 do
+    begin
+      if (Length(auxLista.Strings[i]) = Length(ultimo_archivo)) or (ultimo_archivo = '') then //si la longitud del nombre de archivo bajado es igual a la longitud del ultimo archivo procesado
+        if (auxLista.Strings[i]) > ultimo_archivo then //si el archivo es mas reciente que el ultimo procesado lo agrego a la lista (el nombre es esta incrementado en numeros)
+        begin
+          CD_ListaNovedades.Append;
+          CD_ListaNovedades_Origen.AsString:= origen_archivo;
+          CD_ListaNovedades_NombreArchivo.AsString:= auxLista.Strings[i];
+          CD_ListaNovedades_Estado.AsString:= ESTADO_SIN_PROCESAR;
+          CD_ListaNovedades.Post;
+          cantidad:= cantidad + 1;
+        end
+    end;
+    result:= cantidad;
+  Except
     on E: Exception do
     begin
       error_servidor_FTP:= e.Message;
+      if E is EIdConnClosedGracefully then //manejo el error "Connection Closed Gracefully"
+        Result:= FTP_ERROR_CCG;
       exit;
-    end;
-  end;
-
-  //si estoy conectado
-  If DM.IdFTP.Connected then
-  Begin
-    Try
-      auxLista:= TStringList.Create;
-      //me ubico en el directorio correspondiente en el ftp
-      DM.IdFTP.ChangeDir(directorio);
-      //obtengo la lista de todos los archivos que existen en el directorio correspondiente del ftp que comiencen con el nombre del archivo del servidor y terminen en xml
-      DM.IdFTP.List(auxLista, inicio_nombre_archivo+'_*.xml', false); //cargar en lista, los archivos que empiezen con el nombre del servidor y terminen en xml, todos los archivos
-      //por cada uno de los nombres de archivo obtenidos
-      for i := 0 to auxLista.Count - 1 do
-      begin
-        if (Length(auxLista.Strings[i]) = Length(ultimo_archivo)) or (ultimo_archivo = '') then //si la longitud del nombre de archivo bajado es igual a la longitud del ultimo archivo procesado
-          if (auxLista.Strings[i]) > ultimo_archivo then //si el archivo es mas reciente que el ultimo procesado lo agrego a la lista (el nombre es esta incrementado en numeros)
-          begin
-            CD_ListaNovedades.Append;
-            CD_ListaNovedades_Origen.AsString:= origen_archivo;
-            CD_ListaNovedades_NombreArchivo.AsString:= auxLista.Strings[i];
-            CD_ListaNovedades_Estado.AsString:= ESTADO_SIN_PROCESAR;
-            CD_ListaNovedades.Post;
-            cantidad:= cantidad + 1;
-          end
-      end;
-      result:= cantidad;
-    Except
-      on E: Exception do
-      begin
-        error_servidor_FTP:= e.Message;
-        exit;
-      end;
     end;
   end;
 end;
@@ -1385,7 +1397,7 @@ begin
   CD_NovedadesCliente.SaveToFile(dirLocal+archivo, dfXMLUTF8);
   memoLog.Lines.Add(getFechayHoraString+' - Enviando Archivo Novedades ('+archivo+') al Servidor FTP');
   //inicio subida del archivo al directorio asignado a los clientes en el servidor FTP
-  if FTP_SubirArchivo(dirFTP_Cliente, archivo) then //si el archivo se subio correctamente
+  if FTP_SubirArchivo(dirFTP_Cliente, archivo) = FTP_OK then //si el archivo se subio correctamente
   begin
     memoLog.Lines.Add(getFechayHoraString+' - Fin Envio Archivo Novedades ('+archivo+') al Servidor FTP');
     memoLog.Lines.Add(getFechayHoraString+' - Guardando Lote Sincronizacion '+IntToStr(nserie_cliente));
@@ -1399,7 +1411,7 @@ begin
     begin
       memoLog.Lines.Add(getFechayHoraString+' - Error en Guardar Lote Sincronizacion '+IntToStr(nserie_cliente));
       memoLog.Lines.Add(getFechayHoraString+' - Borrando Archivo Novedades ('+archivo+') del Servidor FTP');
-      if FTP_BorrarArchivo(dirFTP_Cliente,archivo) then
+      if FTP_BorrarArchivo(dirFTP_Cliente,archivo) = FTP_OK then
         memoLog.Lines.Add(getFechayHoraString+' - Fin Borrar Archivo Novedades ('+archivo+') del Servidor FTP')
       else
         memoLog.Lines.Add(getFechayHoraString+' - No se pudo Borrar Archivo Novedades ('+archivo+') del Servidor FTP');
@@ -1450,7 +1462,7 @@ begin
   //vacio la lista de novedades y busco todas las novedades que haya en el servidor FTP
   CD_ListaNovedades.EmptyDataSet;
   cantidad_archivos_encontrados:= FTP_BuscarListaArchivos(dirFTP_Server, archivo_server, ultimo_archivo, 'SERVIDOR');
-  if cantidad_archivos_encontrados = -1 then  //si devuelve -1 es porque no me puedo conectar
+  if cantidad_archivos_encontrados <= FTP_ERROR_GRAL then  //si devuelve menor o igual a -1 es porque no me puedo conectar
   begin
     memoLog.Lines.Add(getFechayHoraString+' - No se pudo conectar al servidor FTP');
     memoLog.Lines.Add(getFechayHoraString+' - '+error_servidor_FTP);
@@ -1476,7 +1488,7 @@ begin
       pBar_Ftp.Position:= 0;
       Application.ProcessMessages;
       //bajo el archivo de novedades
-      if FTP_BajarArchivo(dirFTP_Server, CD_ListaNovedades_NombreArchivo.AsString) then
+      if FTP_BajarArchivo(dirFTP_Server, CD_ListaNovedades_NombreArchivo.AsString) = FTP_OK then
         memoLog.Lines.Add(getFechayHoraString+' - Archivo '+CD_ListaNovedades_NombreArchivo.AsString+' descargado con exito')
       else
       begin
@@ -1762,7 +1774,7 @@ begin
     inicio_nombre_archivo:= ZQ_ListadoClientesNOMBRE_CLIENTE.AsString;
 
     cantidad_archivos_encontrados:= FTP_BuscarListaArchivos(dirFTP_Cliente, inicio_nombre_archivo, ultimo_archivo, inicio_nombre_archivo);
-    if cantidad_archivos_encontrados = -1 then //si es -1 es porque no me pude conectar al servidor FTP
+    if cantidad_archivos_encontrados <= FTP_ERROR_GRAL then //si es menor o igual a -1 es porque no me pude conectar al servidor FTP
     begin
       Result:= false;
       exit;
@@ -1820,7 +1832,7 @@ begin
       pBar_Ftp.Position:= 0;
       Application.ProcessMessages;
       //bajo el archivo de novedades
-      if FTP_BajarArchivo(dirFTP_Cliente, CD_ListaNovedades_NombreArchivo.AsString) then
+      if FTP_BajarArchivo(dirFTP_Cliente, CD_ListaNovedades_NombreArchivo.AsString) = FTP_OK then
         memoLog.Lines.Add(getFechayHoraString+' - Archivo '+CD_ListaNovedades_NombreArchivo.AsString+' descargado con exito')
       else
       begin
@@ -2075,7 +2087,7 @@ begin
   CD_NovedadesServer.SaveToFile(dirLocal+archivo, dfXMLUTF8);
   memoLog.Lines.Add(getFechayHoraString+' - Enviando Archivo Novedades ('+archivo+') al Servidor FTP');
   //inicio subida del archivo al directorio asignado a los clientes en el servidor FTP
-  if FTP_SubirArchivo(dirFTP_Server, archivo) then //si el archivo se subio correctamente
+  if FTP_SubirArchivo(dirFTP_Server, archivo) = FTP_OK then //si el archivo se subio correctamente
   begin
     memoLog.Lines.Add(getFechayHoraString+' - Fin Envio Archivo Novedades ('+archivo+') al Servidor FTP');
     memoLog.Lines.Add(getFechayHoraString+' - Guardando Lote Sincronizacion '+IntToStr(nserie_server));
@@ -2089,7 +2101,7 @@ begin
     begin
       memoLog.Lines.Add(getFechayHoraString+' - Error en Guardar Lote Sincronizacion '+IntToStr(nserie_server));
       memoLog.Lines.Add(getFechayHoraString+' - Borrando Archivo Novedades ('+archivo+') del Servidor FTP');
-      if FTP_BorrarArchivo(dirFTP_Server,archivo) then
+      if FTP_BorrarArchivo(dirFTP_Server,archivo) = FTP_OK then
         memoLog.Lines.Add(getFechayHoraString+' - Fin Borrar Archivo Novedades ('+archivo+') del Servidor FTP')
       else
         memoLog.Lines.Add(getFechayHoraString+' - No se pudo Borrar Archivo Novedades ('+archivo+') del Servidor FTP');
@@ -2113,6 +2125,10 @@ procedure TFPrincipal.popUpItemMostrarOcultarClick(Sender: TObject);
 begin
   Visible:= not Visible;
 end;
+
+
+
+
 
 
 

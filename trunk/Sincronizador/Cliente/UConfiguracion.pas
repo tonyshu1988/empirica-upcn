@@ -150,7 +150,7 @@ begin
 
   if not verificarConexionDB then
   begin
-    ShowMessage('Erro de conexión a la base de datos, Verifique la configuración de la  misma.');
+    ShowMessage('Error de conexión a la base de datos, Verifique la configuración de la  misma.');
     exit;
   end;
 
