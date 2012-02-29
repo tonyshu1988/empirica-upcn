@@ -1626,6 +1626,8 @@ begin
            imprimirFiscal(comprobante, 'F');
           end;
 
+          //ShowMessage(inttostr(comprobante)+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
+
           CD_Fpago.EmptyDataSet;
           CD_DetalleFactura.EmptyDataSet;
           PanelContenedorDerecha.Enabled:=True;
@@ -2573,12 +2575,19 @@ end;
 procedure TFCajero.btnEfectivoClick(Sender: TObject);
 begin
 
+    //ZQ_FormasPago.Locate('IF;GENERA_VUELTO',VarArrayOf(['N', 'S']),[]);
+    //CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
+
     calcularFP();
 
     CD_Fpago.Post;
 
+
     BtAceptarPago.Click;
     btnConfirmarVenta.Click;
+
+    //ShowMessage(ZQ_ComprobanteID_COMPROBANTE.AsString+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
+
     PVentaDirecta.Visible:=False;
 end;
 
@@ -2593,8 +2602,12 @@ begin
 
     CD_Fpago.Post;
 
+    recalcularBoleta();
     BtAceptarPago.Click;
     btnConfirmarVenta.Click;
+
+    //ShowMessage(ZQ_ComprobanteID_COMPROBANTE.AsString+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
+
     PVentaDirecta.Visible:=False;
 end;
 

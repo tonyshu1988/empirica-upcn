@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, EKBusquedaAvanzada, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Buttons, ExtCtrls, Grids, DBGrids, StdCtrls, dxBar,
-  dxBarExtItems, EKDbSuma, EKOrdenarGrilla,ComCtrls, IniFiles, ShellAPI;
+  dxBarExtItems, EKDbSuma, EKOrdenarGrilla,ComCtrls, IniFiles, ShellAPI,
+  ZStoredProcedure;
 
 type
   TFReimpresionComprobantes = class(TForm)
@@ -127,6 +128,8 @@ type
     btVer: TdxBarLargeButton;
     ZQ_Fiscal: TZQuery;
     ZQ_FiscalIMPORTE_FISCAL: TFloatField;
+    btEliminarComprob: TdxBarLargeButton;
+    ZSP_EliminarComprob: TZStoredProc;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
@@ -143,6 +146,7 @@ type
     procedure leerSistemaIni;
     procedure btVerClick(Sender: TObject);
     procedure DBGridComprobantesDblClick(Sender: TObject);
+    procedure btEliminarComprobClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -368,6 +372,39 @@ procedure TFReimpresionComprobantes.DBGridComprobantesDblClick(
   Sender: TObject);
 begin
   btVer.Click;
+end;
+
+procedure TFReimpresionComprobantes.btEliminarComprobClick(
+  Sender: TObject);
+begin
+  if ZQ_Comprobante.IsEmpty then exit;
+
+  if dm.EKModelo.iniciar_transaccion('ELIMINAR COMPROBANTE',[]) then
+   begin
+       try
+        begin
+         ZSP_EliminarComprob.Close;
+         ZSP_EliminarComprob.ParamByName('ID_COMPROBANTE').AsInteger:=ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+         ZSP_EliminarComprob.ExecProc;
+         if dm.EKModelo.finalizar_transaccion('ELIMINAR COMPROBANTE') then
+           Application.MessageBox(PChar('Se eliminó el comprobante Nº:'+ZQ_ComprobanteCODIGO.AsString),'Eliminación de Comprobantes',MB_OK+MB_ICONINFORMATION)
+         else
+          dm.EKModelo.cancelar_transaccion('ELIMINAR COMPROBANTE');
+
+          ZQ_Comprobante.Refresh;
+
+        end
+       except
+         begin
+              Application.MessageBox(PChar('No se pudo eliminar el comprobante Nº:'+ZQ_ComprobanteCODIGO.AsString),'Eliminación de Comprobantes',MB_OK+MB_ICONINFORMATION);
+              dm.EKModelo.cancelar_transaccion('ELIMINAR COMPROBANTE');
+              Exit;
+         end
+       end;
+
+   end;
+
+
 end;
 
 end.
