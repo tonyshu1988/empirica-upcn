@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 307
-  Top = 105
+  Left = 230
+  Top = 83
   Width = 966
   Height = 656
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -22,39 +22,39 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 958
-    Height = 577
+    Width = 950
+    Height = 566
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 956
-      Height = 575
+      Width = 948
+      Height = 564
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 954
-        Height = 573
+        Width = 946
+        Height = 562
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object PanelComprobante: TPanel
           Left = 1
           Top = 33
-          Width = 952
-          Height = 417
+          Width = 944
+          Height = 406
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object lblTotalComprobantes: TLabel
             Left = 0
-            Top = 396
-            Width = 952
+            Top = 385
+            Width = 944
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -73,8 +73,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           end
           object Splitter1: TSplitter
             Left = 0
-            Top = 387
-            Width = 952
+            Top = 376
+            Width = 944
             Height = 9
             Cursor = crVSplit
             Align = alBottom
@@ -82,8 +82,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object DBGridComprobantes: TDBGrid
             Left = 0
             Top = 0
-            Width = 952
-            Height = 387
+            Width = 944
+            Height = 376
             Align = alClient
             Color = 14606012
             DataSource = DS_Comprobante
@@ -123,12 +123,14 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
               item
                 Expanded = False
                 FieldName = 'NUMERO_CPB'
+                Title.Alignment = taCenter
                 Title.Caption = 'N'#250'mero'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'PUNTO_VENTA'
+                Title.Alignment = taCenter
                 Title.Caption = 'Pto. Venta'
                 Width = 78
                 Visible = True
@@ -184,8 +186,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         end
         object PanelFPagoYProd: TPanel
           Left = 1
-          Top = 450
-          Width = 952
+          Top = 439
+          Width = 944
           Height = 122
           Align = alBottom
           BevelOuter = bvNone
@@ -199,7 +201,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object PanelProducto: TPanel
             Left = 612
             Top = 0
-            Width = 340
+            Width = 332
             Height = 122
             Align = alClient
             BevelOuter = bvNone
@@ -208,7 +210,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object lblTotalProducto: TLabel
               Left = 0
               Top = 101
-              Width = 340
+              Width = 332
               Height = 21
               Align = alBottom
               Alignment = taRightJustify
@@ -228,7 +230,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object DBGridListadoProductos: TDBGrid
               Left = 0
               Top = 0
-              Width = 340
+              Width = 332
               Height = 101
               Align = alClient
               Color = 14606012
@@ -301,6 +303,14 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                   Title.Caption = 'Medida'
                   Width = 75
                   Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'NOMBRE_MARCA'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Marca'
+                  Width = 146
+                  Visible = True
                 end>
             end
           end
@@ -357,6 +367,14 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
               Columns = <
                 item
                   Expanded = False
+                  FieldName = 'NOMBRE_CUENTA'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Cuenta'
+                  Width = 241
+                  Visible = True
+                end
+                item
+                  Expanded = False
                   FieldName = 'TFORMAPAGO_'
                   Title.Alignment = taCenter
                   Title.Caption = 'Forma de Pago'
@@ -401,7 +419,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         object PanelFiltro: TPanel
           Left = 1
           Top = 1
-          Width = 952
+          Width = 944
           Height = 32
           Align = alTop
           BevelOuter = bvNone
@@ -453,7 +471,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -559,15 +577,18 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             Visible = True
           end
           item
+            BeginGroup = True
             Item = btVer
             Visible = True
           end
           item
-            Item = btnImprimir
+            BeginGroup = True
+            Item = btnEliminarComprob
             Visible = True
           end
           item
-            Item = btEliminarComprob
+            BeginGroup = True
+            Item = btnImprimir
             Visible = True
           end
           item
@@ -879,17 +900,17 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 488
-    Top = 168
+    Left = 56
+    Top = 200
     DockControlHeights = (
       0
       0
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'Buscar'
+      Caption = 'F1 - Buscar'
       Category = 0
-      Hint = 'Buscar'
+      Hint = 'F1 - Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
@@ -905,9 +926,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       AutoGrayScale = False
     end
     object btnImprimir: TdxBarLargeButton
-      Caption = 'Reimprimir Comprobante'
+      Caption = 'Reimprimir Ticket'
       Category = 0
-      Hint = 'Reimprimir Comprobante'
+      Hint = 'Reimprimir Ticket'
       Visible = ivAlways
       ImageIndex = 28
       OnClick = btnImprimirClick
@@ -924,22 +945,22 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       AutoGrayScale = False
     end
     object btVer: TdxBarLargeButton
-      Caption = 'Ver Detalle'
+      Caption = 'F2 - Ver/Ocultar Detalle'
       Category = 0
-      Hint = 'Ver Detalle'
+      Hint = 'F2 - Ver/Ocultar Detalle'
       Visible = ivAlways
       ButtonStyle = bsChecked
       ImageIndex = 7
       OnClick = btVerClick
       AutoGrayScale = False
     end
-    object btEliminarComprob: TdxBarLargeButton
-      Caption = 'Eliminar Comprobante'
+    object btnEliminarComprob: TdxBarLargeButton
+      Caption = 'F3 - Eliminar'
       Category = 0
-      Hint = 'Eliminar Comprobante'
+      Hint = 'F3 - Eliminar'
       Visible = ivAlways
       ImageIndex = 9
-      OnClick = btEliminarComprobClick
+      OnClick = btnEliminarComprobClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -993,8 +1014,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'order by c.codigo ASC')
     Params = <>
     IndexFieldNames = 'FECHA Desc;CODIGO Desc'
-    Left = 282
-    Top = 128
+    Left = 194
+    Top = 80
     object ZQ_ComprobanteCODIGO: TStringField
       FieldName = 'CODIGO'
       Size = 50
@@ -1053,17 +1074,20 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   end
   object DS_Comprobante: TDataSource
     DataSet = ZQ_Comprobante
-    Left = 277
-    Top = 183
+    Left = 197
+    Top = 135
   end
   object ZQ_Comprobante_FormaPago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select cfp.*, tfp.descripcion as tFormaPago_,tfp."IF"'
+      
+        'select cfp.*, tfp.descripcion as tFormaPago_, tfp."IF", cta.nomb' +
+        're_cuenta, cta.codigo, cta.nro_cta_bancaria'
       'from comprobante_forma_pago cfp'
       
-        'left join tipo_formapago tfp on (tfp.id_tipo_formapago=cfp.id_ti' +
-        'po_formapag)'
+        'left join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_' +
+        'tipo_formapag)'
+      'left join cuenta cta on (cfp.cuenta_ingreso = cta.id_cuenta)'
       'where (cfp.id_comprobante = :id_comprobante)'
       '  and ((tfp."IF" = :fiscal) or (:fiscal = '#39'T'#39'))')
     Params = <
@@ -1077,7 +1101,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         Name = 'fiscal'
         ParamType = ptUnknown
       end>
-    Left = 441
+    Left = 329
     Top = 79
     ParamData = <
       item
@@ -1140,10 +1164,22 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       FieldName = 'IF'
       Size = 1
     end
+    object ZQ_Comprobante_FormaPagoNOMBRE_CUENTA: TStringField
+      FieldName = 'NOMBRE_CUENTA'
+      Size = 50
+    end
+    object ZQ_Comprobante_FormaPagoCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 10
+    end
+    object ZQ_Comprobante_FormaPagoNRO_CTA_BANCARIA: TStringField
+      FieldName = 'NRO_CTA_BANCARIA'
+      Size = 10
+    end
   end
   object DS_Comprobante_FormaPago: TDataSource
     DataSet = ZQ_Comprobante_FormaPago
-    Left = 437
+    Left = 325
     Top = 127
   end
   object ZQ_ComprobanteDetalle: TZQuery
@@ -1153,7 +1189,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         'select cd.*, pc.nombre||'#39' - COD: '#39'||coalesce(p.cod_corto,'#39#39') DET' +
         'ALLE_PROD,'
       '       p.codigo_barra, c.nombre as color, m.medida,'
-      '       (cd.importe_venta - cd.importe_if) as importe_noFiscal'
+      
+        '       (cd.importe_venta - cd.importe_if) as importe_noFiscal, m' +
+        'a.nombre_marca'
       'from comprobante_detalle cd'
       'left join producto p on (cd.id_producto=p.id_producto)'
       
@@ -1161,6 +1199,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         '_cabecera)'
       'left join color c on (pc.color = c.id_color)'
       'left join medida m on (p.id_medida = m.id_medida)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
       'where (cd.id_comprobante = :id_comprobante)')
     Params = <
       item
@@ -1168,7 +1207,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 601
+    Left = 489
     Top = 79
     ParamData = <
       item
@@ -1255,10 +1294,14 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     object ZQ_ComprobanteDetalleIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
     end
+    object ZQ_ComprobanteDetalleNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
   end
   object DS_ComprobanteDetalle: TDataSource
     DataSet = ZQ_ComprobanteDetalle
-    Left = 605
+    Left = 493
     Top = 127
   end
   object EKBuscarComprobantes: TEKBusquedaAvanzada
@@ -1269,6 +1312,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         Tabla = 'sucursal'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = DM.ZQ_SucursalesVisibles
         TipoComboSQLCampoVer = 'nombre'
         TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
@@ -1434,8 +1478,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         'nto_venta,c.numero_cpb'
       'order by c.codigo ASC')
     UsarWhereOriginal = EK_Con_Where
-    Left = 96
-    Top = 95
+    Left = 56
+    Top = 79
   end
   object EKDbSumaComprobante: TEKDbSuma
     SumCollection = <
@@ -1445,8 +1489,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       end>
     DataSet = ZQ_Comprobante
     SumListChanged = EKDbSumaComprobanteSumListChanged
-    Left = 61
-    Top = 303
+    Left = 197
+    Top = 247
   end
   object EKDbSumaFpago: TEKDbSuma
     SumCollection = <
@@ -1455,7 +1499,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         NombreCampo = 'IMPORTE_REAL'
       end>
     DataSet = ZQ_Comprobante_FormaPago
-    Left = 218
+    Left = 322
     Top = 245
   end
   object EKDbSumaProducto: TEKDbSuma
@@ -1473,8 +1517,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         NombreCampo = 'IMPORTE_NOFISCAL'
       end>
     DataSet = ZQ_ComprobanteDetalle
-    Left = 386
-    Top = 254
+    Left = 490
+    Top = 246
   end
   object EKOrdenarFacturas: TEKOrdenarGrilla
     Grilla = DBGridComprobantes
@@ -1525,12 +1569,16 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 58
-    Top = 248
+    Left = 194
+    Top = 192
   end
   object EKOrdenarFPago: TEKOrdenarGrilla
     Grilla = DBGridFormaPago
     Filtros = <
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
       item
         TituloColumna = 'Forma de Pago'
         Visible = True
@@ -1557,8 +1605,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 218
-    Top = 192
+    Left = 322
+    Top = 184
   end
   object EKOrdenarProducto: TEKOrdenarGrilla
     Grilla = DBGridListadoProductos
@@ -1590,6 +1638,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       item
         TituloColumna = 'Medida'
         Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
       end>
     NombreGuardar = 'DBGridListadoProductos'
     AltoTituloColumna = 15
@@ -1597,8 +1649,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 386
-    Top = 192
+    Left = 490
+    Top = 184
   end
   object ZQ_TipoIVA: TZQuery
     Connection = DM.Conexion
@@ -1606,8 +1658,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'select *'
       'from tipo_IVA')
     Params = <>
-    Left = 661
-    Top = 200
+    Left = 493
+    Top = 304
     object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True
@@ -1644,8 +1696,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'where s.id_sucursal > 0'
       'order by s.nombre')
     Params = <>
-    Left = 524
-    Top = 206
+    Left = 324
+    Top = 310
     object ZQ_SucursalID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
     end
@@ -1727,8 +1779,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         Name = 'id'
         ParamType = ptUnknown
       end>
-    Left = 540
-    Top = 294
+    Left = 196
+    Top = 310
     ParamData = <
       item
         DataType = ftUnknown
@@ -1749,13 +1801,33 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         ParamType = ptInput
       end>
     StoredProcName = 'ELIMINAR_COMPROBANTE'
-    Left = 235
-    Top = 339
+    Left = 59
+    Top = 139
     ParamData = <
       item
         DataType = ftInteger
         Name = 'ID_COMPROBANTE'
         ParamType = ptInput
       end>
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 56
+    Top = 266
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object AVerDetalle: TAction
+      Caption = 'AVerDetalle'
+      ShortCut = 113
+      OnExecute = AVerDetalleExecute
+    end
+    object AEliminar: TAction
+      Caption = 'AEliminar'
+      ShortCut = 114
+      OnExecute = AEliminarExecute
+    end
   end
 end
