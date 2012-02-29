@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 309
-  Top = 170
+  Left = 307
+  Top = 105
   Width = 966
   Height = 656
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -567,6 +567,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             Visible = True
           end
           item
+            Item = btEliminarComprob
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -907,6 +911,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       Visible = ivAlways
       ImageIndex = 28
       OnClick = btnImprimirClick
+      AutoGrayScale = False
     end
     object btnSalir: TdxBarLargeButton
       Align = iaRight
@@ -926,6 +931,15 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       ButtonStyle = bsChecked
       ImageIndex = 7
       OnClick = btVerClick
+      AutoGrayScale = False
+    end
+    object btEliminarComprob: TdxBarLargeButton
+      Caption = 'Eliminar Comprobante'
+      Category = 0
+      Hint = 'Eliminar Comprobante'
+      Visible = ivAlways
+      ImageIndex = 9
+      OnClick = btEliminarComprobClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -1255,12 +1269,12 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         Tabla = 'sucursal'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = DM.ZQ_SucursalesVisibles
         TipoComboSQLCampoVer = 'nombre'
         TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
         TipoComboAncho = 350
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha'
@@ -1272,6 +1286,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'digo'
@@ -1281,6 +1296,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nro Comprobante'
@@ -1290,6 +1306,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Punto de Venta'
@@ -1299,6 +1316,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo Iva'
@@ -1312,6 +1330,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         TipoComboEditable = False
         TipoComboAncho = 350
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Cliente'
@@ -1321,6 +1340,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Vendedor'
@@ -1330,6 +1350,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Importe'
@@ -1340,6 +1361,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1717,5 +1739,23 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       FieldName = 'IMPORTE_FISCAL'
       ReadOnly = True
     end
+  end
+  object ZSP_EliminarComprob: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_COMPROBANTE'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'ELIMINAR_COMPROBANTE'
+    Left = 235
+    Top = 339
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID_COMPROBANTE'
+        ParamType = ptInput
+      end>
   end
 end
