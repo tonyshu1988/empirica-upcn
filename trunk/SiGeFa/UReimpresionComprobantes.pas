@@ -7,7 +7,7 @@ uses
   Dialogs, EKBusquedaAvanzada, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Buttons, ExtCtrls, Grids, DBGrids, StdCtrls, dxBar,
   dxBarExtItems, EKDbSuma, EKOrdenarGrilla,ComCtrls, IniFiles, ShellAPI,
-  ZStoredProcedure;
+  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFReimpresionComprobantes = class(TForm)
@@ -128,8 +128,16 @@ type
     btVer: TdxBarLargeButton;
     ZQ_Fiscal: TZQuery;
     ZQ_FiscalIMPORTE_FISCAL: TFloatField;
-    btEliminarComprob: TdxBarLargeButton;
+    btnEliminarComprob: TdxBarLargeButton;
     ZSP_EliminarComprob: TZStoredProc;
+    ZQ_Comprobante_FormaPagoNOMBRE_CUENTA: TStringField;
+    ZQ_Comprobante_FormaPagoCODIGO: TStringField;
+    ZQ_Comprobante_FormaPagoNRO_CTA_BANCARIA: TStringField;
+    ZQ_ComprobanteDetalleNOMBRE_MARCA: TStringField;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    AEliminar: TAction;
+    AVerDetalle: TAction;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
@@ -146,7 +154,10 @@ type
     procedure leerSistemaIni;
     procedure btVerClick(Sender: TObject);
     procedure DBGridComprobantesDblClick(Sender: TObject);
-    procedure btEliminarComprobClick(Sender: TObject);
+    procedure btnEliminarComprobClick(Sender: TObject);
+    procedure ABuscarExecute(Sender: TObject);
+    procedure AEliminarExecute(Sender: TObject);
+    procedure AVerDetalleExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -176,11 +187,13 @@ begin
   Ini.Free;
 end;
 
+
 procedure TFReimpresionComprobantes.EKDbSumaComprobanteSumListChanged(
   Sender: TObject);
 begin
   lblTotalComprobantes.Caption := FormatFloat('Total Comprobante: $ ##,###,##0.00 ', EKDbSumaComprobante.SumCollection[0].SumValue);
 end;
+
 
 procedure TFReimpresionComprobantes.btnBuscarClick(Sender: TObject);
 begin
@@ -195,6 +208,7 @@ begin
       ZQ_Comprobante.First;
  end
 end;
+
 
 procedure TFReimpresionComprobantes.BtnFiltro_TodosClick(Sender: TObject);
 begin
@@ -218,6 +232,7 @@ if TSpeedButton(Sender).Name = 'BtnFiltro_Todos' then
 
   btnBuscar.Click;
 end;
+
 
 procedure TFReimpresionComprobantes.FormCreate(Sender: TObject);
 var
@@ -243,7 +258,12 @@ begin
   //Permiso para ver o no los filtros de Fiscal
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
   BtnFiltro_Fiscal.Click;
+
+  btnEliminarComprob.Visible:= ivNever;
+  if dm.EKUsrLogin.PermisoAccion('ELIMINAR_FACTURA') then
+    btnEliminarComprob.Visible:= ivAlways;
 end;
+
 
 procedure TFReimpresionComprobantes.cargarConfigPanel();
 var
@@ -266,10 +286,12 @@ begin
     PanelProducto.Width:= aux;
 end;
 
+
 procedure TFReimpresionComprobantes.btnSalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFReimpresionComprobantes.ZQ_ComprobanteAfterScroll(
   DataSet: TDataSet);
@@ -294,6 +316,7 @@ begin
         fiscal:= 'N';
         indice:= 2;
       end;
+      
  if PanelFPagoYProd.Visible then
  begin
     ZQ_Comprobante_FormaPago.Close;
@@ -312,6 +335,7 @@ begin
  end;
   Application.ProcessMessages;
 end;
+
 
 procedure TFReimpresionComprobantes.FormClose(Sender: TObject;
   var Action: TCloseAction);
@@ -334,77 +358,98 @@ end;
 
 procedure TFReimpresionComprobantes.btnImprimirClick(Sender: TObject);
 begin
-ZQ_Fiscal.Close;
-ZQ_Fiscal.ParamByName('id').AsInteger:=ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-ZQ_Fiscal.open;
+  ZQ_Fiscal.Close;
+  ZQ_Fiscal.ParamByName('id').AsInteger:=ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+  ZQ_Fiscal.open;
 
-if (ZQ_ComprobantePUNTO_VENTA.IsNull)and(ZQ_FiscalIMPORTE_FISCAL.AsFloat<=0) then
- begin
-     Application.MessageBox(PChar('No puede reimprimir un Comprobante no fiscal.'),'Reimpresión de Comprobantes',MB_OK+MB_ICONINFORMATION);
-     Exit;
- end;
+  if (ZQ_ComprobantePUNTO_VENTA.IsNull)and(ZQ_FiscalIMPORTE_FISCAL.AsFloat<=0) then
+  begin
+    Application.MessageBox(PChar('No puede reimprimir un Comprobante no fiscal.'),'Reimpresión de Comprobantes',MB_OK+MB_ICONINFORMATION);
+    Exit;
+  end;
 
-leerSistemaIni();
-if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:'+ZQ_ComprobanteCODIGO.AsString+' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+  leerSistemaIni();
+
+  if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:'+ZQ_ComprobanteCODIGO.AsString+' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
   begin
     ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l '+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -i '+Impresora+' -c '+'F'), nil, SW_SHOWNORMAL);
     ZQ_Comprobante.Refresh;
   end
 end;
 
+
 procedure TFReimpresionComprobantes.DBGridComprobantesDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
- var
+var
   vencida:String;
-  begin
- if ZQ_ComprobantePUNTO_VENTA.IsNull then vencida:='N' else vencida:='S';
- FPrincipal.PintarFilasGrillasConBajas(DBGridComprobantes,vencida,Rect,DataCol,Column,State)
+begin
+  if ZQ_ComprobantePUNTO_VENTA.IsNull then vencida:='N' else vencida:='S';
+    FPrincipal.PintarFilasGrillasConBajas(DBGridComprobantes,vencida,Rect,DataCol,Column,State)
 end;
+
 
 procedure TFReimpresionComprobantes.btVerClick(Sender: TObject);
 begin
-PanelFPagoYProd.Visible:=not(PanelFPagoYProd.Visible);
-ZQ_ComprobanteAfterScroll(nil);
+  PanelFPagoYProd.Visible:=not(PanelFPagoYProd.Visible);
+  ZQ_ComprobanteAfterScroll(nil);
 end;
 
-procedure TFReimpresionComprobantes.DBGridComprobantesDblClick(
-  Sender: TObject);
+
+procedure TFReimpresionComprobantes.DBGridComprobantesDblClick(Sender: TObject);
 begin
   btVer.Click;
 end;
 
-procedure TFReimpresionComprobantes.btEliminarComprobClick(
+
+procedure TFReimpresionComprobantes.btnEliminarComprobClick(
   Sender: TObject);
 begin
-  if ZQ_Comprobante.IsEmpty then exit;
+  if ZQ_Comprobante.IsEmpty then
+    exit;
 
-  if dm.EKModelo.iniciar_transaccion('ELIMINAR COMPROBANTE',[]) then
-   begin
-       try
-        begin
-         ZSP_EliminarComprob.Close;
-         ZSP_EliminarComprob.ParamByName('ID_COMPROBANTE').AsInteger:=ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-         ZSP_EliminarComprob.ExecProc;
-         if dm.EKModelo.finalizar_transaccion('ELIMINAR COMPROBANTE') then
-           Application.MessageBox(PChar('Se eliminó el comprobante Nº:'+ZQ_ComprobanteCODIGO.AsString),'Eliminación de Comprobantes',MB_OK+MB_ICONINFORMATION)
-         else
-          dm.EKModelo.cancelar_transaccion('ELIMINAR COMPROBANTE');
+  if (application.MessageBox(pchar('¿Desea eliminar el comprobante de venta Nº: '+ZQ_ComprobanteCODIGO.AsString+'?'), 'Eliminación de Comprobante', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion('ELIMINAR COMPROBANTE',[]) then
+     begin
+         try
+          begin
+           ZSP_EliminarComprob.Close;
+           ZSP_EliminarComprob.ParamByName('ID_COMPROBANTE').AsInteger:=ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+           ZSP_EliminarComprob.ExecProc;
+           if dm.EKModelo.finalizar_transaccion('ELIMINAR COMPROBANTE') then
+             Application.MessageBox(PChar('Se eliminó el comprobante Nº: '+ZQ_ComprobanteCODIGO.AsString),'Eliminación de Comprobantes',MB_OK+MB_ICONINFORMATION)
+           else
+            dm.EKModelo.cancelar_transaccion('ELIMINAR COMPROBANTE');
 
-          ZQ_Comprobante.Refresh;
+            ZQ_Comprobante.Refresh;
+          end
+         except
+           begin
+                Application.MessageBox(PChar('No se pudo eliminar el comprobante Nº:'+ZQ_ComprobanteCODIGO.AsString),'Eliminación de Comprobantes',MB_OK+MB_ICONINFORMATION);
+                dm.EKModelo.cancelar_transaccion('ELIMINAR COMPROBANTE');
+                Exit;
+           end
+         end;
+     end;
+end;
 
-        end
-       except
-         begin
-              Application.MessageBox(PChar('No se pudo eliminar el comprobante Nº:'+ZQ_ComprobanteCODIGO.AsString),'Eliminación de Comprobantes',MB_OK+MB_ICONINFORMATION);
-              dm.EKModelo.cancelar_transaccion('ELIMINAR COMPROBANTE');
-              Exit;
-         end
-       end;
 
-   end;
+procedure TFReimpresionComprobantes.ABuscarExecute(Sender: TObject);
+begin
+  if btnBuscar.Enabled then
+    btnBuscar.Click;
+end;
 
+procedure TFReimpresionComprobantes.AEliminarExecute(Sender: TObject);
+begin
+  if (btnEliminarComprob.Enabled) and (btnEliminarComprob.Visible = ivAlways) then
+    btnEliminarComprob.Click;
+end;
 
+procedure TFReimpresionComprobantes.AVerDetalleExecute(Sender: TObject);
+begin
+  if btVer.Enabled then
+    btVer.Click;
 end;
 
 end.

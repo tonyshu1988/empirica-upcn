@@ -1,6 +1,6 @@
 object FTransferirStock: TFTransferirStock
-  Left = 329
-  Top = 228
+  Left = 299
+  Top = 152
   Width = 870
   Height = 558
   Caption = 'Transferir Stock'
@@ -22,16 +22,16 @@ object FTransferirStock: TFTransferirStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 479
+    Width = 854
+    Height = 468
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 860
-      Height = 444
-      ActivePage = TabSAsociarNotaPedido
+      Width = 852
+      Height = 433
+      ActivePage = TabSTransferirStock
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -41,8 +41,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 375
+          Width = 844
+          Height = 364
           Align = alClient
           Color = 14606012
           DataSource = DS_Producto
@@ -200,17 +200,17 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 375
-          Width = 852
+          Top = 364
+          Width = 844
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            852
+            844
             41)
           object Label25: TLabel
-            Left = 704
+            Left = 696
             Top = 7
             Width = 99
             Height = 13
@@ -233,7 +233,7 @@ object FTransferirStock: TFTransferirStock
             OnClick = btBorrarLineaClick
           end
           object editTotalProductos: TEdit
-            Left = 704
+            Left = 696
             Top = 21
             Width = 129
             Height = 19
@@ -261,8 +261,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedido: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 375
+          Width = 844
+          Height = 364
           Hint = 
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
@@ -339,8 +339,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedidoDetalle: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 375
+          Width = 844
+          Height = 364
           Align = alClient
           Color = 14606012
           DataSource = DS_ListaProductos
@@ -486,14 +486,14 @@ object FTransferirStock: TFTransferirStock
         end
         object PanelNotaPedidoDetalle: TPanel
           Left = 0
-          Top = 375
-          Width = 852
+          Top = 364
+          Width = 844
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
-            852
+            844
             41)
           object Label2: TLabel
             Left = 728
@@ -536,7 +536,7 @@ object FTransferirStock: TFTransferirStock
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 852
       Height = 33
       Align = alTop
       TabOrder = 1
@@ -563,10 +563,73 @@ object FTransferirStock: TFTransferirStock
       end
     end
   end
+  object PanelHistorico: TPanel
+    Left = 0
+    Top = 0
+    Width = 854
+    Height = 468
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 5
+    object PanelHistorico_Cpb: TPanel
+      Left = 0
+      Top = 0
+      Width = 854
+      Height = 184
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 0
+      object DBGrid_Historico_Cpb: TDBGrid
+        Left = 0
+        Top = 0
+        Width = 854
+        Height = 184
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_Historico_Cpb
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridProductoDrawColumnCell
+        OnKeyDown = DBGridProductoKeyDown
+      end
+    end
+    object PanelHistoric_Detalle: TPanel
+      Left = 0
+      Top = 184
+      Width = 854
+      Height = 284
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 1
+      object DBGrid_Historico_Detalle: TDBGrid
+        Left = 0
+        Top = 0
+        Width = 854
+        Height = 284
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_Historico_Detalle
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridProductoDrawColumnCell
+        OnKeyDown = DBGridProductoKeyDown
+      end
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -688,6 +751,11 @@ object FTransferirStock: TFTransferirStock
           end
           item
             Item = btnCancelar
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnVerTransferencias
             Visible = True
           end
           item
@@ -1097,6 +1165,15 @@ object FTransferirStock: TFTransferirStock
       Visible = ivAlways
       ImageIndex = 6
       OnClick = btnSalirClick
+      AutoGrayScale = False
+    end
+    object btnVerTransferencias: TdxBarLargeButton
+      Caption = 'Ver/Ocultar Historial'
+      Category = 0
+      Hint = 'Ver/Ocultar Historial'
+      Visible = ivAlways
+      ImageIndex = 13
+      OnClick = btnVerTransferenciasClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -2239,5 +2316,135 @@ object FTransferirStock: TFTransferirStock
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
+  end
+  object ZQ_Historico_Cpb: TZQuery
+    Connection = DM.Conexion
+    AfterScroll = ZQ_Historico_CpbAfterScroll
+    SQL.Strings = (
+      
+        'select c.id_comprobante, c.id_sucursal, c.codigo, c.fecha, c.id_' +
+        'posicion_suc_destino,'
+      
+        '       s1.nombre as sucursal_origen, s2.nombre as sucursal_desti' +
+        'no,'
+      '       ps.seccion'
+      'from comprobante c'
+      'left join sucursal s1 on (c.id_sucursal = s1.id_sucursal)'
+      
+        'left join posicion_sucursal ps on (c.id_posicion_suc_destino = p' +
+        's.id_posicion_sucursal)'
+      'left join sucursal s2 on (ps.id_sucursal = s2.id_sucursal)'
+      'where c.id_tipo_cpb = 24'
+      'order by c.fecha desc')
+    Params = <>
+    Left = 712
+    Top = 16
+    object ZQ_Historico_CpbID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+      Required = True
+    end
+    object ZQ_Historico_CpbID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
+    end
+    object ZQ_Historico_CpbCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_Historico_CpbFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_Historico_CpbID_POSICION_SUC_DESTINO: TIntegerField
+      FieldName = 'ID_POSICION_SUC_DESTINO'
+    end
+    object ZQ_Historico_CpbSUCURSAL_ORIGEN: TStringField
+      FieldName = 'SUCURSAL_ORIGEN'
+      Size = 200
+    end
+    object ZQ_Historico_CpbSUCURSAL_DESTINO: TStringField
+      FieldName = 'SUCURSAL_DESTINO'
+      Size = 200
+    end
+    object ZQ_Historico_CpbSECCION: TStringField
+      FieldName = 'SECCION'
+      Size = 50
+    end
+  end
+  object ZQ_Historico_Detalle: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select cd.id_comprobante_detalle, cd.id_producto, pc.nombre, pc.' +
+        'cod_corto, p.codigo_barra,'
+      
+        '       ma.nombre_marca, co.nombre as color, me.medida, cd.cantid' +
+        'ad'
+      'from comprobante_detalle cd'
+      'left join producto p on (cd.id_producto = p.id_producto)'
+      
+        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
+        'od_cabecera)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'left join color co on (pc.color = co.id_color)'
+      'left join medida me on (p.id_medida = me.id_medida)'
+      'where cd.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 712
+    Top = 224
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_Historico_DetalleID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+      Required = True
+    end
+    object ZQ_Historico_DetalleID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_Historico_DetalleNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 100
+    end
+    object ZQ_Historico_DetalleCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_Historico_DetalleCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_Historico_DetalleNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_Historico_DetalleCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
+    object ZQ_Historico_DetalleMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_Historico_DetalleCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+  end
+  object DS_Historico_Cpb: TDataSource
+    DataSet = ZQ_Historico_Cpb
+    Left = 712
+    Top = 72
+  end
+  object DS_Historico_Detalle: TDataSource
+    DataSet = ZQ_Historico_Detalle
+    Left = 704
+    Top = 288
   end
 end

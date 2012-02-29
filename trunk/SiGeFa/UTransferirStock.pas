@@ -223,6 +223,33 @@ type
     AGuardar: TAction;
     ACancelar: TAction;
     ZQ_CpbProductoID_STOCK_PRODUCTO: TIntegerField;
+    btnVerTransferencias: TdxBarLargeButton;
+    PanelHistorico: TPanel;
+    PanelHistorico_Cpb: TPanel;
+    PanelHistoric_Detalle: TPanel;
+    DBGrid_Historico_Detalle: TDBGrid;
+    DBGrid_Historico_Cpb: TDBGrid;
+    ZQ_Historico_Cpb: TZQuery;
+    ZQ_Historico_Detalle: TZQuery;
+    DS_Historico_Cpb: TDataSource;
+    DS_Historico_Detalle: TDataSource;
+    ZQ_Historico_CpbID_COMPROBANTE: TIntegerField;
+    ZQ_Historico_CpbID_SUCURSAL: TIntegerField;
+    ZQ_Historico_CpbCODIGO: TStringField;
+    ZQ_Historico_CpbFECHA: TDateTimeField;
+    ZQ_Historico_CpbID_POSICION_SUC_DESTINO: TIntegerField;
+    ZQ_Historico_CpbSUCURSAL_ORIGEN: TStringField;
+    ZQ_Historico_CpbSUCURSAL_DESTINO: TStringField;
+    ZQ_Historico_CpbSECCION: TStringField;
+    ZQ_Historico_DetalleID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_Historico_DetalleID_PRODUCTO: TIntegerField;
+    ZQ_Historico_DetalleNOMBRE: TStringField;
+    ZQ_Historico_DetalleCOD_CORTO: TStringField;
+    ZQ_Historico_DetalleCODIGO_BARRA: TStringField;
+    ZQ_Historico_DetalleNOMBRE_MARCA: TStringField;
+    ZQ_Historico_DetalleCOLOR: TStringField;
+    ZQ_Historico_DetalleMEDIDA: TStringField;
+    ZQ_Historico_DetalleCANTIDAD: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnTransferirClick(Sender: TObject);
@@ -252,6 +279,8 @@ type
     procedure ATransferirExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
+    procedure btnVerTransferenciasClick(Sender: TObject);
+    procedure ZQ_Historico_CpbAfterScroll(DataSet: TDataSet);
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -394,9 +423,12 @@ begin
 
   ZQ_VerCpb.Close;
   ZQ_VerCpb.ParamByName('id_tipo_np').AsInteger:= CPB_NOTA_PEDIDO;
-  ZQ_VerCpb.ParamByName('id_tipo_fc').AsInteger:= CPB_FACTURA_COMPRA;  
+  ZQ_VerCpb.ParamByName('id_tipo_fc').AsInteger:= CPB_FACTURA_COMPRA;
   ZQ_VerCpb.ParamByName('id_estado').AsInteger:= ESTADO_CONFIRMADO;
   ZQ_VerCpb.Open;
+
+  PanelContenedor.Visible:= true;
+  PanelHistorico.Visible:= false;
 end;
 
 
@@ -844,10 +876,42 @@ begin
     btnGuardar.Click;
 end;
 
+
 procedure TFTransferirStock.ACancelarExecute(Sender: TObject);
 begin
   if btnCancelar.Enabled then
     btnCancelar.Click;
+end;
+
+
+procedure TFTransferirStock.btnVerTransferenciasClick(Sender: TObject);
+begin
+  if PanelContenedor.Visible then
+  begin
+    PanelContenedor.Visible:= false;
+    PanelHistorico.Visible:= true;
+
+    ZQ_Historico_Cpb.Close;
+    ZQ_Historico_Cpb.Open;
+  end
+  else
+  begin
+    PanelContenedor.Visible:= true;
+    PanelHistorico.Visible:= false;
+
+    ZQ_Historico_Cpb.Close;
+  end
+end;
+
+procedure TFTransferirStock.ZQ_Historico_CpbAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_Historico_Detalle.Close;
+
+  if ZQ_Historico_Cpb.IsEmpty then
+    exit;
+
+  ZQ_Historico_Detalle.ParamByName('id_comprobante').AsInteger:= ZQ_Historico_CpbID_COMPROBANTE.AsInteger;
+  ZQ_Historico_Detalle.Open;
 end;
 
 end.
