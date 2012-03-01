@@ -180,11 +180,9 @@ type
     BtnFiltro_Fiscal: TSpeedButton;
     BtnFiltro_NoFiscal: TSpeedButton;
     Label39: TLabel;
-    EKOrdenarProdVendidos: TEKOrdenarGrilla;
     EKDbSumaProdsVendidos: TEKDbSuma;
     DBChart1: TDBChart;
     FastLineSeries2: TBarSeries;
-    EKVistaPrevia2: TEKVistaPreviaQR;
     Splitter4: TSplitter;
     TabRanking: TTabSheet;
     Panel4: TPanel;
@@ -199,7 +197,7 @@ type
     ZQ_ProductosVendidosAGRUPAM: TIntegerField;
     ZQ_ProductosVendidosCANTIDAD: TIntegerField;
     ZQ_ProductosVendidosDETALLE_PROD: TStringField;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    EKOrdenarGrillaRanking: TEKOrdenarGrilla;
     Panel6: TPanel;
     Splitter3: TSplitter;
     grillaTop20: TDBGrid;
@@ -212,7 +210,7 @@ type
     ZQ_TotalesCANTIDAD: TIntegerField;
     ZQ_TotalesDETALLE_PROD: TStringField;
     Label2: TLabel;
-    EKOrdenarGrilla2: TEKOrdenarGrilla;
+    EKOrdenarGrillaTop20: TEKOrdenarGrilla;
     DBChart2: TDBChart;
     Series2: THorizBarSeries;
     btVer: TdxBarLargeButton;
@@ -222,6 +220,13 @@ type
     EKDbSumaTotales: TEKDbSuma;
     lblTotales: TLabel;
     Splitter6: TSplitter;
+    ZQ_Comprobante_FormaPagoNOMBRE_CUENTA: TStringField;
+    ZQ_Comprobante_FormaPagoCODIGO: TStringField;
+    ZQ_Comprobante_FormaPagoNRO_CTA_BANCARIA: TStringField;
+    ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA: TFloatField;
+    ZQ_ComprobanteDetalleIMPORTE_IVA_IF: TFloatField;
+    ZQ_ComprobanteDetalleINSERT_MANUAL: TStringField;
+    ZQ_ComprobanteDetalleNOMBRE_MARCA: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -268,6 +273,9 @@ begin
   EKOrdenarFacturas.CargarConfigColumnas;
   EKOrdenarFPago.CargarConfigColumnas;
   EKOrdenarProducto.CargarConfigColumnas;
+  EKOrdenarGrillaRanking.CargarConfigColumnas;
+  EKOrdenarGrillaTop20.CargarConfigColumnas;
+
   cargarConfigPanel;
 
   PageControl.ActivePageIndex:= 0;
@@ -296,8 +304,10 @@ begin
   TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
 
   //busqueda por ranking
-  TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[0]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
-  TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
+  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+  TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[1]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
+  TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[2]).Valor:= DateToStr(dm.EKModelo.Fecha);
 
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
 end;
@@ -387,6 +397,8 @@ begin
   EKOrdenarFacturas.GuardarConfigColumnas;
   EKOrdenarProducto.GuardarConfigColumnas;
   EKOrdenarFPago.GuardarConfigColumnas;
+  EKOrdenarGrillaRanking.GuardarConfigColumnas;
+  EKOrdenarGrillaTop20.GuardarConfigColumnas;
   guardarConfigPanel;
 end;
 
@@ -452,10 +464,9 @@ begin
   //RANKING DE VENTA
   if PageControl.ActivePage = TabRanking then
   begin
-    //EKBuscarProductos.SQL_Where[0]:= Format('where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null) %s', [where]);
     if EKBusquedaRanking.BuscarSinEjecutar then
       begin
-        if (EKBusquedaRanking.ParametrosSeleccionados1[0] = '') or (EKBusquedaRanking.ParametrosSeleccionados1[1] = '') then
+        if (EKBusquedaRanking.ParametrosSeleccionados1[1] = '') or (EKBusquedaRanking.ParametrosSeleccionados1[2] = '') then
           begin
             Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
             btnBuscar.Click;
@@ -463,13 +474,25 @@ begin
           end;
 
         ZQ_ProductosVendidos.close;
-        ZQ_ProductosVendidos.ParamByName('f1').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[0]);
-        ZQ_ProductosVendidos.ParamByName('f2').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[1]);
+        ZQ_Totales.close;
+        if EKBusquedaRanking.ParametrosSeleccionados1[0] = '0' then
+        begin
+          ZQ_ProductosVendidos.ParamByName('id_sucursal').AsInteger:= -1;
+          ZQ_Totales.ParamByName('id_sucursal').AsInteger:= -1;
+        end
+        else
+        begin
+          ZQ_ProductosVendidos.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBusquedaRanking.ParametrosSeleccionados1[0]);
+          ZQ_Totales.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBusquedaRanking.ParametrosSeleccionados1[0]);
+        end;
+
+        ZQ_ProductosVendidos.ParamByName('f1').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[1]);
+        ZQ_ProductosVendidos.ParamByName('f2').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[2]);
         ZQ_ProductosVendidos.Open;
 
-        ZQ_Totales.close;
-        ZQ_Totales.ParamByName('f1').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[0]);
-        ZQ_Totales.ParamByName('f2').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[1]);
+
+        ZQ_Totales.ParamByName('f1').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[1]);
+        ZQ_Totales.ParamByName('f2').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[2]);
         ZQ_Totales.Open;
       end;
   end;
