@@ -16,6 +16,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
   Scaled = False
   Visible = True
   OnCanResize = FormCanResize
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -176,7 +177,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             Size.Values = (
               52.916666666666670000
               754.062500000000000000
-              68.791666666666680000
+              68.791666666666670000
               391.583333333333400000)
             Alignment = taCenter
             AlignToBand = True
@@ -1342,8 +1343,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       object DBChartBalance: TDBChart
         Left = 0
         Top = 0
-        Width = 846
-        Height = 428
+        Width = 958
+        Height = 468
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         BackWall.Color = clSilver
@@ -1614,7 +1615,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 12
           end
           object RepListado_Subtitulo: TQRLabel
-            Left = -64
+            Left = 287
             Top = 26
             Width = 143
             Height = 20
@@ -1625,8 +1626,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             Frame.DrawRight = False
             Size.Values = (
               52.916666666666670000
-              759.354166666666800000
-              68.791666666666680000
+              759.354166666666700000
+              68.791666666666670000
               378.354166666666700000)
             Alignment = taCenter
             AlignToBand = True
@@ -2379,6 +2380,14 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
               Title.Alignment = taCenter
               Title.Caption = 'Egresos'
               Width = 127
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUCURSAL'
+              Title.Alignment = taCenter
+              Title.Caption = 'Sucursal'
+              Width = 203
               Visible = True
             end>
         end
@@ -3252,11 +3261,12 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       '        CASE'
       '            WHEN (c.id_tipo_cpb = 16) THEN 0'
       '            WHEN (c.id_tipo_cpb = 17) THEN c.importe_total'
-      '        END as Egresos'
+      '        END as Egresos, s.nombre as sucursal'
       'from comprobante c'
       
         'left join tipo_movimiento m on (c.id_tipo_movimiento = m.id_tipo' +
         '_movimiento)'
+      'left join sucursal s on (c.id_sucursal = s.id_sucursal)'
       'where ((c.id_tipo_cpb = 16) or (c.id_tipo_cpb = 17))'
       
         '  and (cast (c.fecha as date) between :fecha_desde and :fecha_ha' +
@@ -3336,6 +3346,10 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
     object ZQ_MovimientosOBSERVACION: TStringField
       FieldName = 'OBSERVACION'
       Size = 500
+    end
+    object ZQ_MovimientosSUCURSAL: TStringField
+      FieldName = 'SUCURSAL'
+      Size = 200
     end
   end
   object DS_Movimientos: TDataSource
@@ -3540,6 +3554,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         CambiarCondicion = False
         ItemIndex = -1
         VaciarValor = False
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha Hasta'
@@ -3551,6 +3566,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         CambiarCondicion = False
         ItemIndex = -1
         VaciarValor = False
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sucursal'
@@ -3564,6 +3580,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Movimiento'
@@ -3572,6 +3589,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo'
@@ -3588,6 +3606,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Importe'
@@ -3596,6 +3615,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     UsarWhereOriginal = EK_Sin_Where
@@ -3932,8 +3952,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = False
-    Left = 52
-    Top = 328
+    Left = 588
+    Top = 344
   end
   object EKBuscarBalance: TEKBusquedaAvanzada
     CriteriosBusqueda = <
@@ -3947,6 +3967,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         CambiarCondicion = False
         ItemIndex = -1
         VaciarValor = False
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha Hasta'
@@ -3958,6 +3979,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         CambiarCondicion = False
         ItemIndex = -1
         VaciarValor = False
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sucursal'
@@ -3971,6 +3993,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     UsarWhereOriginal = EK_Sin_Where
@@ -4012,6 +4035,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         CambiarCondicion = False
         ItemIndex = -1
         VaciarValor = False
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha Hasta'
@@ -4023,6 +4047,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         CambiarCondicion = False
         ItemIndex = -1
         VaciarValor = False
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sucursal'
@@ -4036,11 +4061,48 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     UsarWhereOriginal = EK_Sin_Where
     PantallaReducida = True
     Left = 212
     Top = 224
+  end
+  object EKOrdenarGrillaMovimientos: TEKOrdenarGrilla
+    Grilla = DBGridMovimientos
+    Filtros = <
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Movimiento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Ingresos'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Egresos'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenarGrillaMovimientos'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = False
+    Left = 52
+    Top = 320
   end
 end

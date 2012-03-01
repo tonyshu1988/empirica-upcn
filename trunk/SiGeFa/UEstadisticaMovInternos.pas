@@ -192,6 +192,8 @@ type
     QRLabel42: TQRLabel;
     QRLabel44: TQRLabel;
     QRLabel45: TQRLabel;
+    ZQ_MovimientosSUCURSAL: TStringField;
+    EKOrdenarGrillaMovimientos: TEKOrdenarGrilla;
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_EgresosAfterScroll(DataSet: TDataSet);
     procedure pintarTortas(Serie: TChartSeries; cantidad: integer);
@@ -211,6 +213,7 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -316,6 +319,9 @@ procedure TFEstadisticaMovInternos.FormCreate(Sender: TObject);
 var
   anio, mes, indice_suc: integer;
 begin
+  EKOrdenarGrillaBalance.CargarConfigColumnas;
+  EKOrdenarGrillaMovimientos.CargarConfigColumnas;
+
   QRRepListadoDBLogo.DataSet:= dm.ZQ_Sucursal;
   QRRepBalanceDBLogo.DataSet:= dm.ZQ_Sucursal;
 
@@ -628,6 +634,13 @@ begin
     if not ZQ_Movimientos.IsEmpty then
       dm.ExportarEXCEL(DBGridMovimientos);
   end;
+end;
+
+
+procedure TFEstadisticaMovInternos.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  EKOrdenarGrillaBalance.GuardarConfigColumnas;
+  EKOrdenarGrillaMovimientos.GuardarConfigColumnas;
 end;
 
 end.

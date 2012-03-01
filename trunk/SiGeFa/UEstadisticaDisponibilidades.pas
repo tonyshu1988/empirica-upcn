@@ -377,6 +377,7 @@ type
     ZQ_Detalle_CuentaSALDO: TFloatField;
     ZQ_Detalle_CuentaSALDO_ANT: TFloatField;
     ZQ_Detalle_CuentaDIFERENCIA: TFloatField;
+    ZP_Estadistica_Det_MovSUCURSAL: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
