@@ -1572,7 +1572,7 @@ object FPrincipal: TFPrincipal
     IndexFieldNames = 'ID'
     Params = <>
     Left = 521
-    Top = 86
+    Top = 88
     object CD_ProcesarNovedadesID: TIntegerField
       FieldName = 'ID'
     end
@@ -1662,6 +1662,7 @@ object FPrincipal: TFPrincipal
   end
   object CD_ListaNovedades: TClientDataSet
     Aggregates = <>
+    IndexFieldNames = '_NombreArchivo'
     Params = <>
     Left = 663
     Top = 86
