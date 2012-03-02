@@ -2951,15 +2951,15 @@ object FCajero: TFCajero
   object PanelContenedorDerecha: TPanel
     Left = 88
     Top = 0
-    Width = 936
-    Height = 621
+    Width = 928
+    Height = 610
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 2
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 934
+      Width = 926
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -2983,7 +2983,7 @@ object FCajero: TFCajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 594
+        Left = 586
         Top = 1
         Width = 339
         Height = 28
@@ -3004,7 +3004,7 @@ object FCajero: TFCajero
       object PanelCambiarFecha: TPanel
         Left = 345
         Top = 1
-        Width = 249
+        Width = 241
         Height = 28
         Align = alClient
         BevelOuter = bvNone
@@ -3035,7 +3035,7 @@ object FCajero: TFCajero
       Tag = 99
       Left = 1
       Top = 146
-      Width = 934
+      Width = 926
       Height = 41
       Align = alTop
       Color = 12648448
@@ -3146,7 +3146,7 @@ object FCajero: TFCajero
         Tag = 99
         Left = 1
         Top = 16
-        Width = 932
+        Width = 924
         Height = 24
         Align = alBottom
         BevelOuter = bvNone
@@ -3353,15 +3353,15 @@ object FCajero: TFCajero
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 187
-      Width = 934
-      Height = 433
+      Width = 926
+      Height = 422
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 2
       object Label11: TLabel
         Left = 1
         Top = 1
-        Width = 932
+        Width = 924
         Height = 14
         Align = alTop
         Alignment = taCenter
@@ -3380,8 +3380,8 @@ object FCajero: TFCajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 15
-        Width = 932
-        Height = 257
+        Width = 924
+        Height = 246
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3395,8 +3395,8 @@ object FCajero: TFCajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 930
-          Height = 201
+          Width = 922
+          Height = 190
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -3470,8 +3470,8 @@ object FCajero: TFCajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 202
-          Width = 930
+          Top = 191
+          Width = 922
           Height = 54
           Align = alBottom
           BevelOuter = bvLowered
@@ -3479,7 +3479,7 @@ object FCajero: TFCajero
           object Label36: TLabel
             Left = 1
             Top = 37
-            Width = 928
+            Width = 920
             Height = 16
             Align = alBottom
             Alignment = taCenter
@@ -3498,7 +3498,7 @@ object FCajero: TFCajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 1
-            Width = 928
+            Width = 920
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3514,7 +3514,7 @@ object FCajero: TFCajero
           object lblMontoProds: TLabel
             Left = 1
             Top = 16
-            Width = 928
+            Width = 920
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3540,8 +3540,8 @@ object FCajero: TFCajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 272
-        Width = 932
+        Top = 261
+        Width = 924
         Height = 89
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -3549,7 +3549,7 @@ object FCajero: TFCajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 930
+          Width = 922
           Height = 87
           Align = alClient
           Color = 16762303
@@ -3638,8 +3638,8 @@ object FCajero: TFCajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 361
-        Width = 932
+        Top = 350
+        Width = 924
         Height = 71
         Align = alBottom
         BevelOuter = bvLowered
@@ -3647,7 +3647,7 @@ object FCajero: TFCajero
         object lblTotAPagar: TLabel
           Left = 1
           Top = 37
-          Width = 930
+          Width = 922
           Height = 33
           Align = alBottom
           Alignment = taRightJustify
@@ -3667,7 +3667,7 @@ object FCajero: TFCajero
         object lblMaxVenta: TLabel
           Left = 1
           Top = 1
-          Width = 930
+          Width = 922
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -3696,14 +3696,14 @@ object FCajero: TFCajero
     object PanelDeralles: TPanel
       Left = 1
       Top = 31
-      Width = 934
+      Width = 926
       Height = 115
       Align = alTop
       TabOrder = 3
       object PanelCabeceraFactura: TPanel
         Left = 526
         Top = 1
-        Width = 407
+        Width = 399
         Height = 113
         Align = alClient
         BevelOuter = bvLowered
@@ -3717,7 +3717,7 @@ object FCajero: TFCajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 405
+          Width = 397
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -5004,7 +5004,7 @@ object FCajero: TFCajero
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
