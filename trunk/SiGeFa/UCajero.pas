@@ -2582,7 +2582,7 @@ begin
 
     CD_Fpago.Post;
 
-
+    recalcularBoleta();
     BtAceptarPago.Click;
     btnConfirmarVenta.Click;
 
