@@ -691,13 +691,13 @@ begin
   end;
 
 //  DBECuit_Cuil.Color:= clWindow;
-//  if not ((ZQ_PersonaCUIT_CUIL.IsNull) or (ZQ_PersonaCUIT_CUIL.AsString = '')) then
-//    if not EsCUITValido(ZQ_PersonaCUIT_CUIL.AsString) then
-//    begin
-//      mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido, Verifique';
-//      result := false;
+  if not ((ZQ_PersonaCUIT_CUIL.IsNull) or (ZQ_PersonaCUIT_CUIL.AsString = '')) then
+    if not sonTodosNumeros(ZQ_PersonaCUIT_CUIL.AsString) then
+    begin
+      mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido, Verifique'+char(13)+'(sólo debe ingresar números, sin guiones)';
+      result := false;
 //      DBECuit_Cuil.Color:= dm.colorCampoRequido;
-//    end;
+    end;
 
   if Result = False then
   begin
