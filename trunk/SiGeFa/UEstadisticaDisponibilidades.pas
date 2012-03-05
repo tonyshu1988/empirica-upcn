@@ -850,7 +850,10 @@ procedure TFEstadisticaDisponibilidades.ZQ_Detalle_CuentaAfterScroll(
 begin
   ZP_Detalle_Cuenta_FPago.Close;
   ZP_Detalle_Cuenta_FPago.ParamByName('ID_CUENTA').AsInteger:= ZQ_Detalle_CuentaID_CUENTA.AsInteger;
-  ZP_Detalle_Cuenta_FPago.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(EKBuscarDetalleCuenta.ParametrosSeleccionados1[0]);
+  if EKBuscarDetalleCuenta.ParametrosSeleccionados1[0] = '0' then
+    ZP_Detalle_Cuenta_FPago.ParamByName('ID_SUCURSAL').AsInteger:= -1
+  else
+    ZP_Detalle_Cuenta_FPago.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(EKBuscarDetalleCuenta.ParametrosSeleccionados1[0]);
   ZP_Detalle_Cuenta_FPago.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[1]);
   ZP_Detalle_Cuenta_FPago.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[2]);
   ZP_Detalle_Cuenta_FPago.Open;
