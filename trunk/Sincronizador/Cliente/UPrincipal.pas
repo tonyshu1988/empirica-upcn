@@ -1634,14 +1634,15 @@ begin
                                    ' where '+CD_ProcesarNovedadesKEY_FIELD.AsString+'='+CD_ProcesarNovedadesKEY_VALUE.AsString);
           ZQ_ActualizarBase.Open;
 
+          //pregunto si la query esta vacia
           es_query_vacia:= false;
-          if ZQ_ActualizarBase.IsEmpty then //pregunto si la query esta vacia
+          if ZQ_ActualizarBase.IsEmpty then
             es_query_vacia:= True;
           operacion:= CD_ProcesarNovedadesOPERATION.AsString;
 
           if operacion = 'D' then //si la operacion es un delete
           begin
-            if ZQ_ActualizarBase.RecordCount = 1 then //si existe el registro lo borro
+            if es_query_vacia = false then //si existe el registro lo borro
               ZQ_ActualizarBase.Delete;
           end
           else
@@ -1653,68 +1654,73 @@ begin
                 ZQ_ActualizarBase.Edit;
 
             CD_ProcesarNovedades.First;
-            while not CD_ProcesarNovedades.Eof do //recorro todos los campos que cambian y actualizo la query
+            //si es un insert de un registro que ya existe entonces no hago nada
+            if not ((es_query_vacia = false) and (operacion = 'I')) then
             begin
-              //PARA LOS CAMPOS NO BLOB
-              if not ((CD_ProcesarNovedadesFIELD_NAME.IsNull) or (CD_ProcesarNovedadesFIELD_NAME.AsString = '')) then
+              while not CD_ProcesarNovedades.Eof do //recorro todos los campos que cambian y actualizo la query
               begin
-                if (CD_ProcesarNovedadesNEW_VALUE.IsNull) or (CD_ProcesarNovedadesNEW_VALUE.Value = '') then //si el nuevo valor es null o string vacio
+                //PARA LOS CAMPOS NO BLOB
+                if not ((CD_ProcesarNovedadesFIELD_NAME.IsNull) or (CD_ProcesarNovedadesFIELD_NAME.AsString = '')) then
                 begin
-                  //si el tipo de campo es un string pongo ''
-                  if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftString then
-                      ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= ''
-                  else //para cualquier otro tipo de campo lo pongo en null
-                      ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).Clear;
-                end
-                else //si el nuevo valor es distinto de null y de vacio
-                begin
-                  //Si el campo que tengo que agregar es insert_manual lo agrego como 'N' para que no se disparen
-                  //los triggers de las tablas COMPROBANTE_DETALLE, COMPROBANTE_FORMA_PAGO, COMPROBANTE
-                  if (CD_ProcesarNovedadesFIELD_NAME.AsString = 'INSERT_MANUAL') then
-                    ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= 'N'
-                  else
+                  if (CD_ProcesarNovedadesNEW_VALUE.IsNull) or (CD_ProcesarNovedadesNEW_VALUE.Value = '') then //si el nuevo valor es null o string vacio
                   begin
-                         //pregunto si el campo esta definido como FLOAT
-                    if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftFloat then
-                      ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= CD_ProcesarNovedadesNEW_VALUE.AsFloat
-                    else //pregunto si el campo esta definido como INTEGER
-                    if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftInteger then
-                      ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsInteger:= CD_ProcesarNovedadesNEW_VALUE.AsInteger
-                    else //pregunto si el campo esta definido como STRING
-                    if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftString	then
-                      ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString
-                    else //pregunto si el campo esta definido como DATETIME
-                    if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDateTime	 then
+                    //si el tipo de campo es un string pongo ''
+                    if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftString then
+                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= ''
+                    else //para cualquier otro tipo de campo lo pongo en null
+                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).Clear;
+                  end
+                  else //si el nuevo valor es distinto de null y de vacio
+                  begin
+                    //Si el campo que tengo que agregar es insert_manual lo agrego como 'N' para que no se disparen
+                    //los triggers de las tablas COMPROBANTE_DETALLE, COMPROBANTE_FORMA_PAGO, COMPROBANTE
+                    if (CD_ProcesarNovedadesFIELD_NAME.AsString = 'INSERT_MANUAL') then
+                      ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= 'N'
+                    else
                     begin
-                      try
-                        begin
-                          fechaDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime;
-                        end
-                      except
-                        begin
-                          //tengo que convertit eno tiene datos de otras sucursales para actualizarl dato que viene de la forma '2012-01-24 18:46:37.0000' a un date time
-                          fechaString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
-                          fechaDateTime:= EncodeDateTime(StrToInt(Copy(fechaString, 1, 4)),StrToInt(Copy(fechaString, 6, 2)),StrToInt(Copy(fechaString, 9, 2)),
-                          StrToInt(Copy(fechaString, 12, 2)),StrToInt(Copy(fechaString, 15, 2)),StrToInt(Copy(fechaString, 18, 2)),StrToInt(Copy(fechaString, 21, 4)));
+                           //pregunto si el campo esta definido como FLOAT
+                      if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftFloat then
+                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= CD_ProcesarNovedadesNEW_VALUE.AsFloat
+                      else //pregunto si el campo esta definido como INTEGER
+                      if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftInteger then
+                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsInteger:= CD_ProcesarNovedadesNEW_VALUE.AsInteger
+                      else //pregunto si el campo esta definido como STRING
+                      if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftString	then
+                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= CD_ProcesarNovedadesNEW_VALUE.AsString
+                      else //pregunto si el campo esta definido como DATETIME
+                      if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftDateTime	 then
+                      begin
+                        try
+                          begin
+                            fechaDateTime:= CD_ProcesarNovedadesNEW_VALUE.AsDateTime;
+                          end
+                        except
+                          begin
+                            //tengo que convertit eno tiene datos de otras sucursales para actualizarl dato que viene de la forma '2012-01-24 18:46:37.0000' a un date time
+                            fechaString:= CD_ProcesarNovedadesNEW_VALUE.AsString;
+                            fechaDateTime:= EncodeDateTime(StrToInt(Copy(fechaString, 1, 4)),StrToInt(Copy(fechaString, 6, 2)),StrToInt(Copy(fechaString, 9, 2)),
+                            StrToInt(Copy(fechaString, 12, 2)),StrToInt(Copy(fechaString, 15, 2)),StrToInt(Copy(fechaString, 18, 2)),StrToInt(Copy(fechaString, 21, 4)));
+                          end;
                         end;
-                      end;
-                      ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= fechaDateTime;
-                    end
-                    else //si es cualquier otro tipo de campo
-                      ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.Value;
+                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsDateTime:= fechaDateTime;
+                      end
+                      else //si es cualquier otro tipo de campo
+                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).value:= CD_ProcesarNovedadesNEW_VALUE.Value;
+                    end;
                   end;
                 end;
-              end;
 
-              //PARA LOS CAMPOS BLOB
-              if not ((CD_ProcesarNovedadesFBLOB_NAME.IsNull) or (CD_ProcesarNovedadesFBLOB_NAME.AsString = '')) then
-                ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFBLOB_NAME.AsString).value:= CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE.value;
-              CD_ProcesarNovedades.Next;
+                //PARA LOS CAMPOS BLOB
+                if not ((CD_ProcesarNovedadesFBLOB_NAME.IsNull) or (CD_ProcesarNovedadesFBLOB_NAME.AsString = '')) then
+                  ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFBLOB_NAME.AsString).value:= CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE.value;
+                CD_ProcesarNovedades.Next;
+              end
             end;
           end;
 
-          //si la query no esta vacia o si la query es vacia pero es una operacion de Insert aplico los cambios
-          if (es_query_vacia = false) or ((es_query_vacia = true) and (operacion = 'I')) then
+          //  si la query no esta vacia y es una operacion de Insert
+          //o si la query es vacia pero es una operacion de Insert aplico los cambios
+          if ((es_query_vacia = false) and (operacion <> 'I')) or ((es_query_vacia = true) and (operacion = 'I')) then
             ZQ_ActualizarBase.ApplyUpdates; //aplico los cambios
         end;
 
