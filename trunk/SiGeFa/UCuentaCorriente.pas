@@ -290,6 +290,19 @@ type
     ZQ_CtaCte_GralDEUDA_VENCIDA: TStringField;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
+    DBGridDetalle_Producto: TDBGrid;
+    ZQ_ComprobanteDetalle: TZQuery;
+    DS_ComprobanteDetalle: TDataSource;
+    ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_ComprobanteDetalleID_COMPROBANTE: TIntegerField;
+    ZQ_ComprobanteDetalleDETALLE_PROD: TStringField;
+    ZQ_ComprobanteDetalleCODIGO_BARRA: TStringField;
+    ZQ_ComprobanteDetalleCOLOR: TStringField;
+    ZQ_ComprobanteDetalleMEDIDA: TStringField;
+    ZQ_ComprobanteDetalleNOMBRE_MARCA: TStringField;
+    ZQ_ComprobanteDetalleCANTIDAD: TFloatField;
+    EKOrdenar_DetalleProducto: TEKOrdenarGrilla;
+    btnVerDetalleFactura: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -311,6 +324,8 @@ type
     procedure btnSaldoInicialClick(Sender: TObject);
     procedure btnSaldoInicial_CancelarClick(Sender: TObject);
     procedure btnSaldoInicial_AceptarClick(Sender: TObject);
+    procedure ZQ_CtaCte_ClienteAfterScroll(DataSet: TDataSet);
+    procedure btnVerDetalleFacturaClick(Sender: TObject);
   private
     vsel: TFBuscarPersona;
     viendoResumen: boolean;
@@ -334,6 +349,7 @@ procedure TFCuentaCorriente.FormCloseQuery(Sender: TObject; var CanClose: Boolea
 begin
   EKOrdenar_CtaCteGral.GuardarConfigColumnas;
   EKOrdenar_CtaCteCliente.GuardarConfigColumnas;
+  EKOrdenar_DetalleProducto.GuardarConfigColumnas;  
 
   CanClose:= FPrincipal.cerrar_ventana(transaccion);
 end;
@@ -376,7 +392,6 @@ begin
   begin
     PanelCliente.BringToFront;
     viendoResumen:= false;
-    btnSaldoInicial.Enabled:= true;
     btnVerCtaCte.Caption:= 'F2 - Ver Resumen';
     btnVerCtaCte.Hint:= 'Ver el resumen de cuenta corriente de todos los clientes';
     btnBuscar.Enabled:= false;
@@ -388,17 +403,22 @@ begin
     AplicarFiltro(BtnFiltro_Todos);
 
     DBGridCliente_CtaCte.SetFocus;
+
+    btnSaldoInicial.Visible:= ivAlways;
+    btnVerDetalleFactura.Visible:= ivAlways;
   end
   else
   begin
     PanelResumen.BringToFront;
     viendoResumen:= true;
-    btnSaldoInicial.Enabled:= false;
     btnVerCtaCte.Caption:= 'F2 - Ver Cta Cte';
     btnVerCtaCte.Hint:= 'Ver la cuenta corriente del cliente seleccionado';
     btnBuscar.Enabled:= true;
 
-    DBGridResumen_CtaCtes.SetFocus;    
+    DBGridResumen_CtaCtes.SetFocus;
+
+    btnSaldoInicial.Visible:= ivNever;
+    btnVerDetalleFactura.Visible:= ivNever;
   end;
 end;
 
@@ -410,6 +430,7 @@ begin
 
   EKOrdenar_CtaCteGral.CargarConfigColumnas;
   EKOrdenar_CtaCteCliente.CargarConfigColumnas;
+  EKOrdenar_DetalleProducto.CargarConfigColumnas;
 
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnFiltroFecha_Cancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnFiltroFecha_Aceptar.Glyph);
@@ -422,7 +443,8 @@ begin
 
   PanelResumen.BringToFront;
   viendoResumen:= true;
-  btnSaldoInicial.Enabled:= false;
+  btnSaldoInicial.Visible:= ivNever;
+  btnVerDetalleFactura.Visible:= ivNever;
 
   ZQ_CtaCte_Gral.Close;
   ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= -1;
@@ -430,6 +452,7 @@ begin
   dm.mostrarCantidadRegistro(ZQ_CtaCte_Gral, lblCantidadRegistros);
 
   calcularTotales('GENERAL');
+  btnVerDetalleFactura.Click;
 end;
 
 
@@ -744,6 +767,27 @@ begin
       exit;
     end
   end;
+end;
+
+
+procedure TFCuentaCorriente.ZQ_CtaCte_ClienteAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_ComprobanteDetalle.Close;
+
+  if ZQ_CtaCte_Cliente.IsEmpty then
+    exit;
+
+  ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
+  ZQ_ComprobanteDetalle.Open;
+end;
+
+
+procedure TFCuentaCorriente.btnVerDetalleFacturaClick(Sender: TObject);
+begin
+  if DBGridDetalle_Producto.Height = 1 then
+    DBGridDetalle_Producto.Height:= 140
+  else
+    DBGridDetalle_Producto.Height:= 1;
 end;
 
 end.

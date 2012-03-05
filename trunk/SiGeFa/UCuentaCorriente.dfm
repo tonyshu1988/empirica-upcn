@@ -1861,7 +1861,7 @@ object FCuentaCorriente: TFCuentaCorriente
       Left = 3
       Top = 126
       Width = 936
-      Height = 271
+      Height = 304
       Align = alClient
       BorderWidth = 3
       TabOrder = 0
@@ -1869,7 +1869,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Left = 4
         Top = 4
         Width = 928
-        Height = 263
+        Height = 156
         Align = alClient
         Color = 14606012
         DataSource = DS_CtaCte_Cliente
@@ -1939,6 +1939,76 @@ object FCuentaCorriente: TFCuentaCorriente
             Title.Alignment = taCenter
             Title.Caption = 'Observacion Comprobante'
             Width = 416
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_COMPROBANTE'
+            Visible = True
+          end>
+      end
+      object DBGridDetalle_Producto: TDBGrid
+        Left = 4
+        Top = 160
+        Width = 928
+        Height = 140
+        Align = alBottom
+        Color = 14606012
+        DataSource = DS_ComprobanteDetalle
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'CODIGO_BARRA'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Barra'
+            Width = 120
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DETALLE_PROD'
+            Title.Alignment = taCenter
+            Title.Caption = 'Producto'
+            Width = 273
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_MARCA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Marca'
+            Width = 151
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLOR'
+            Title.Alignment = taCenter
+            Title.Caption = 'Color'
+            Width = 138
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MEDIDA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Medida'
+            Width = 115
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CANTIDAD'
+            Title.Alignment = taCenter
+            Title.Caption = 'Cantidad'
+            Width = 69
             Visible = True
           end>
       end
@@ -2306,14 +2376,14 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object PanelCliente_Resumen: TPanel
       Left = 3
-      Top = 397
+      Top = 430
       Width = 936
-      Height = 118
+      Height = 85
       Align = alBottom
       TabOrder = 2
       DesignSize = (
         936
-        118)
+        85)
       object lblFiltro_Fechas: TLabel
         Left = 1
         Top = 1
@@ -2325,14 +2395,14 @@ object FCuentaCorriente: TFCuentaCorriente
         Caption = 'Viendo Desde: 12/12/2010 - Hasta: 20/12/2010'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clNavy
-        Font.Height = -15
+        Font.Height = -12
         Font.Name = 'Verdana'
         Font.Style = [fsBold]
         ParentFont = False
       end
       object PanelCliente_ResumenFiltro: TPanel
         Left = 165
-        Top = 20
+        Top = 15
         Width = 597
         Height = 45
         Anchors = []
@@ -2340,53 +2410,77 @@ object FCuentaCorriente: TFCuentaCorriente
         TabOrder = 0
         object Label21: TLabel
           Left = 444
-          Top = 4
+          Top = 3
           Width = 145
           Height = 13
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'SALDO (FILTRO)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object Label26: TLabel
           Left = 296
-          Top = 4
+          Top = 3
           Width = 145
           Height = 13
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'HABER (FILTRO)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object Label27: TLabel
           Left = 150
-          Top = 4
+          Top = 3
           Width = 145
           Height = 13
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'DEBE (FILTRO)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object Label28: TLabel
           Left = 2
-          Top = 4
+          Top = 3
           Width = 145
           Height = 13
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'CANTIDAD (FILTRO)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object EKEditCliente_SaldoFiltro: TEKEdit
           Tag = 99
           Left = 444
-          Top = 18
+          Top = 14
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 0
@@ -2395,16 +2489,16 @@ object FCuentaCorriente: TFCuentaCorriente
         object EKEditCliente_HaberFiltro: TEKEdit
           Tag = 99
           Left = 296
-          Top = 18
+          Top = 14
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 1
@@ -2413,16 +2507,16 @@ object FCuentaCorriente: TFCuentaCorriente
         object EKEditCliente_DebeFiltro: TEKEdit
           Tag = 99
           Left = 150
-          Top = 18
+          Top = 14
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 2
@@ -2431,16 +2525,16 @@ object FCuentaCorriente: TFCuentaCorriente
         object EKEditCliente_CantidadFiltro: TEKEdit
           Tag = 99
           Left = 2
-          Top = 18
+          Top = 14
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 3
@@ -2448,53 +2542,71 @@ object FCuentaCorriente: TFCuentaCorriente
         end
       end
       object PanelCliente_ResumenTotales: TPanel
-        Left = 165
-        Top = 65
+        Left = 164
+        Top = 50
         Width = 597
-        Height = 46
+        Height = 32
         Anchors = []
         BevelOuter = bvNone
         TabOrder = 1
         object Label15: TLabel
           Left = 444
-          Top = 4
+          Top = 0
           Width = 145
           Height = 13
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'TOTAL SALDO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object Label16: TLabel
           Left = 296
-          Top = 4
+          Top = 0
           Width = 145
           Height = 13
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'TOTAL HABER'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object Label17: TLabel
           Left = 150
-          Top = 4
+          Top = 0
           Width = 145
           Height = 13
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'TOTAL DEBE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object EKEditCliente_SaldoTotal: TEKEdit
           Tag = 99
           Left = 444
-          Top = 18
+          Top = 11
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 0
@@ -2503,16 +2615,16 @@ object FCuentaCorriente: TFCuentaCorriente
         object EKEditCliente_HaberTotal: TEKEdit
           Tag = 99
           Left = 296
-          Top = 18
+          Top = 11
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 1
@@ -2521,16 +2633,16 @@ object FCuentaCorriente: TFCuentaCorriente
         object EKEditCliente_DebeTotal: TEKEdit
           Tag = 99
           Left = 150
-          Top = 18
+          Top = 11
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 2
@@ -2618,8 +2730,8 @@ object FCuentaCorriente: TFCuentaCorriente
     end
   end
   object PanelSaldoInicial: TPanel
-    Left = 424
-    Top = 232
+    Left = 688
+    Top = 152
     Width = 233
     Height = 121
     BevelInner = bvLowered
@@ -2696,8 +2808,8 @@ object FCuentaCorriente: TFCuentaCorriente
     end
   end
   object PanelFiltroFechas: TPanel
-    Left = 112
-    Top = 176
+    Left = 720
+    Top = 288
     Width = 173
     Height = 105
     BevelInner = bvLowered
@@ -3769,19 +3881,19 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object PanelResumen_Abajo: TPanel
       Left = 1
-      Top = 450
+      Top = 465
       Width = 940
-      Height = 67
+      Height = 52
       Align = alBottom
       TabOrder = 0
       DesignSize = (
         940
-        67)
+        52)
       object Panel1: TPanel
         Left = 170
-        Top = 3
+        Top = 6
         Width = 592
-        Height = 48
+        Height = 42
         Anchors = []
         BevelOuter = bvNone
         TabOrder = 0
@@ -3793,6 +3905,12 @@ object FCuentaCorriente: TFCuentaCorriente
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'TOTAL SALDO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object Label22: TLabel
           Left = 296
@@ -3802,6 +3920,12 @@ object FCuentaCorriente: TFCuentaCorriente
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'TOTAL HABER'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object Label24: TLabel
           Left = 150
@@ -3811,6 +3935,12 @@ object FCuentaCorriente: TFCuentaCorriente
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'TOTAL DEBE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object Label25: TLabel
           Left = 2
@@ -3820,20 +3950,26 @@ object FCuentaCorriente: TFCuentaCorriente
           Alignment = taRightJustify
           AutoSize = False
           Caption = 'CANTIDAD CLIENTES'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
         end
         object EKEditResumen_Saldo: TEKEdit
           Tag = 99
           Left = 444
-          Top = 18
+          Top = 16
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 0
@@ -3842,16 +3978,16 @@ object FCuentaCorriente: TFCuentaCorriente
         object EKEditResumen_Haber: TEKEdit
           Tag = 99
           Left = 296
-          Top = 18
+          Top = 16
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 1
@@ -3860,16 +3996,16 @@ object FCuentaCorriente: TFCuentaCorriente
         object EKEditResumen_Debe: TEKEdit
           Tag = 99
           Left = 150
-          Top = 18
+          Top = 16
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 2
@@ -3878,16 +4014,16 @@ object FCuentaCorriente: TFCuentaCorriente
         object EKEditResumen_Cantidad: TEKEdit
           Tag = 99
           Left = 2
-          Top = 18
+          Top = 16
           Width = 145
-          Height = 26
+          Height = 20
           AutoSize = False
           Color = 12910591
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -16
+          Font.Height = -11
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           ReadOnly = True
           TabOrder = 3
@@ -3899,7 +4035,7 @@ object FCuentaCorriente: TFCuentaCorriente
       Left = 1
       Top = 20
       Width = 940
-      Height = 430
+      Height = 445
       Align = alClient
       Color = 14606012
       DataSource = DS_CtaCte_Gral
@@ -4184,6 +4320,11 @@ object FCuentaCorriente: TFCuentaCorriente
           item
             BeginGroup = True
             Item = btnVerCtaCte
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnVerDetalleFactura
             Visible = True
           end
           item
@@ -4578,6 +4719,15 @@ object FCuentaCorriente: TFCuentaCorriente
       OnClick = btnSaldoInicialClick
       AutoGrayScale = False
     end
+    object btnVerDetalleFactura: TdxBarLargeButton
+      Caption = 'Ver/Ocultar Detalle Factura'
+      Category = 0
+      Hint = 'Ver/Ocultar Detalle Factura'
+      Visible = ivAlways
+      ImageIndex = 12
+      OnClick = btnVerDetalleFacturaClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnBuscar'
@@ -4867,6 +5017,7 @@ object FCuentaCorriente: TFCuentaCorriente
   end
   object ZQ_CtaCte_Cliente: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_CtaCte_ClienteAfterScroll
     SQL.Strings = (
       
         'select cc.tipo_comprobante, cc.id_comprobante, cc.id_cuenta, cc.' +
@@ -5378,5 +5529,109 @@ object FCuentaCorriente: TFCuentaCorriente
     object ZQ_SaldoIniIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
     end
+  end
+  object ZQ_ComprobanteDetalle: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select cd.id_comprobante_detalle, cd.id_comprobante,'
+      
+        '       pc.nombre||'#39' - COD: '#39'||coalesce(p.cod_corto,'#39#39') DETALLE_P' +
+        'ROD,'
+      
+        '       p.codigo_barra, c.nombre as color, m.medida, ma.nombre_ma' +
+        'rca, cd.cantidad'
+      'from comprobante_detalle cd'
+      'left join producto p on (cd.id_producto=p.id_producto)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
+      'left join color c on (pc.color = c.id_color)'
+      'left join medida m on (p.id_medida = m.id_medida)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'where (cd.id_comprobante = :id_comprobante)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 481
+    Top = 159
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+    end
+    object ZQ_ComprobanteDetalleID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_ComprobanteDetalleDETALLE_PROD: TStringField
+      FieldName = 'DETALLE_PROD'
+      Size = 128
+    end
+    object ZQ_ComprobanteDetalleCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ComprobanteDetalleCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 30
+    end
+    object ZQ_ComprobanteDetalleMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_ComprobanteDetalleNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_ComprobanteDetalleCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+  end
+  object DS_ComprobanteDetalle: TDataSource
+    DataSet = ZQ_ComprobanteDetalle
+    Left = 485
+    Top = 207
+  end
+  object EKOrdenar_DetalleProducto: TEKOrdenarGrilla
+    Grilla = DBGridDetalle_Producto
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenar_DetalleProducto'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 483
+    Top = 254
   end
 end
