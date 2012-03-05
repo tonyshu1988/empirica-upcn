@@ -219,6 +219,8 @@ type
     AModificar: TAction;
     btnCopiarPrecios: TdxBarLargeButton;
     ZP_UpdateInsert_Precios: TZStoredProc;
+    ZP_UpdateInsert_PreciosCANT_U: TIntegerField;
+    ZP_UpdateInsert_PreciosCANT_I: TIntegerField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -1272,12 +1274,13 @@ end;
 
 procedure TFABM_Precios.btnCopiarPreciosClick(Sender: TObject);
 var
-  id_suc_origen, id_suc_destino, id_producto, cant: integer;
+  id_suc_origen, id_suc_destino, id_producto, cantU, cantI: integer;
 begin
   if ZQ_Productos.IsEmpty then
     exit;
 
-  cant:= 0;
+  cantU:= 0;
+  cantI:= 0;
   if MessageDlg('Esta seguro que desea agregar/actualizar los precios buscados en la sucursal '+dm.ZQ_SucursalNOMBRE.AsString+'?', mtConfirmation, [mbYes, mbNo], 0,) = mrYes then
   begin
     if dm.EKModelo.iniciar_transaccion('UPDATE/INSERT PRECIOS',[]) then
@@ -1298,9 +1301,10 @@ begin
         ZP_UpdateInsert_Precios.ParamByName('ID_SUC_ORIGEN').AsInteger:= id_suc_origen;
         ZP_UpdateInsert_Precios.ParamByName('ID_SUC_DESTINO').AsInteger:= id_suc_destino;
         ZP_UpdateInsert_Precios.ParamByName('ID_PRODUCTO_IN').AsInteger:= id_producto;
-        ZP_UpdateInsert_Precios.ExecSQL;
+        ZP_UpdateInsert_Precios.Open;
 
-        cant:= cant + 1;
+        cantU:= cantU + ZP_UpdateInsert_PreciosCANT_U.AsInteger;
+        cantI:= cantI + ZP_UpdateInsert_PreciosCANT_I.AsInteger;
 
         ZQ_Productos.Next;
       end;
@@ -1313,7 +1317,7 @@ begin
       try
         if DM.EKModelo.finalizar_transaccion('UPDATE/INSERT PRECIOS') then
         begin
-          Application.MessageBox(PChar(Format('Se Agregaron/Actualizaron %d Precios con éxito',[cant])),'Agrega/Actualizar Precios',MB_OK+MB_ICONINFORMATION);
+          Application.MessageBox(PChar(Format('Se Agregaron %d nuevos precios y se Actualizaron %d Precios existentes',[cantI, cantU])),'Agrega/Actualizar Precios',MB_OK+MB_ICONINFORMATION);
         end
       except
         begin
