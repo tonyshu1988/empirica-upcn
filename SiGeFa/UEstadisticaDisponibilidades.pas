@@ -378,6 +378,9 @@ type
     ZQ_Detalle_CuentaSALDO_ANT: TFloatField;
     ZQ_Detalle_CuentaDIFERENCIA: TFloatField;
     ZP_Estadistica_Det_MovSUCURSAL: TStringField;
+    Label6: TLabel;
+    Label14: TLabel;
+    Label19: TLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -439,6 +442,8 @@ begin
   lblBalanceFecha.Caption:= '';
   lblBalanceSucursal.Caption:= '';
   lblBalanceTipoComprobante.Caption:= '';
+  lblTituloDetalleCta1.Caption := '';
+  lblTituloDetalleCta2.Caption := '';
 
   mes:= MonthOf(dm.EKModelo.Fecha);
   anio:= YearOf(dm.EKModelo.Fecha);
@@ -536,7 +541,6 @@ begin
         end
         else
         begin
-          lblSucursal.Caption:= 'Sucursal: '+EKBuscarParteDiario.ParametrosSelecReales1[0];
           ZQ_SaldoCuenta_PDiario.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
           ZP_estadistica_Parte_Diario.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
           ZP_Estadistica_IE_Medios.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
@@ -554,6 +558,7 @@ begin
         ZP_Estadistica_IE_Medios.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
         ZP_Estadistica_IE_Medios.Open;
 
+        lblSucursal.Caption:= 'Sucursal: '+EKBuscarParteDiario.ParametrosSelecReales1[0];
         lblEncabezadoParteDiario.Caption:= 'Parte Diario desde el '+EKBuscarParteDiario.ParametrosSeleccionados1[1]+' al '+EKBuscarParteDiario.ParametrosSeleccionados1[2];
         lblSaldo_TotalParteDiario.Caption:= 'Total Saldo Final: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[0].SumValue);
         lblSaldo_TotalParteDiario.Caption:= lblSaldo_TotalParteDiario.Caption + '    Total Saldo Anterior: '+FormatFloat('$ ###,###,##0.00', EKSumaPD_SaldoCta.SumCollection.Items[1].SumValue);
@@ -583,20 +588,16 @@ begin
         ZQ_Detalle_Cuenta.Close;
 
         if EKBuscarDetalleCuenta.ParametrosSeleccionados1[0] = '0' then
-        begin
-          ZQ_Detalle_Cuenta.ParamByName('ID_SUCURSAL').AsInteger:= -1;
-        end
+          ZQ_Detalle_Cuenta.ParamByName('ID_SUCURSAL').AsInteger:= -1
         else
-        begin
-          lblSucursalDetMov.Caption:= 'Sucursal: '+EKBuscarDetalleCuenta.ParametrosSelecReales1[0];
           ZQ_Detalle_Cuenta.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(EKBuscarDetalleCuenta.ParametrosSeleccionados1[0]);
-        end;
 
         ZQ_Detalle_Cuenta.ParamByName('fecha_desde').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[1]);
         ZQ_Detalle_Cuenta.ParamByName('fecha_hasta').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[2]);
         ZQ_Detalle_Cuenta.open;
-          
-        //lblEncabezadoDetMov.Caption:= 'Detalles Movimientos desde el '+EKBuscarDetMov.ParametrosSeleccionados1[1]+' al '+EKBuscarDetMov.ParametrosSeleccionados1[2];
+
+        lblTituloDetalleCta1.Caption:= 'Detalle Cuenta desde el '+EKBuscarDetalleCuenta.ParametrosSeleccionados1[1]+' al '+EKBuscarDetalleCuenta.ParametrosSeleccionados1[2];
+        lblTituloDetalleCta2.Caption:= 'Sucursal: '+EKBuscarDetalleCuenta.ParametrosSelecReales1[0];
       end;
   end;
 
@@ -618,19 +619,15 @@ begin
         ZP_Estadistica_Det_Mov.Close;
 
         if EKBuscarDetMov.ParametrosSeleccionados1[0] = '0' then
-        begin
-          ZP_Estadistica_Det_Mov.ParamByName('ID_SUCURSAL_INGRESO').AsInteger:= -1;
-        end
+          ZP_Estadistica_Det_Mov.ParamByName('ID_SUCURSAL_INGRESO').AsInteger:= -1
         else
-        begin
-          lblSucursalDetMov.Caption:= 'Sucursal: '+EKBuscarDetMov.ParametrosSelecReales1[0];
           ZP_Estadistica_Det_Mov.ParamByName('ID_SUCURSAL_INGRESO').AsInteger:= StrToInt(EKBuscarDetMov.ParametrosSeleccionados1[0]);
-        end;
 
         ZP_Estadistica_Det_Mov.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarDetMov.ParametrosSeleccionados1[1]);
         ZP_Estadistica_Det_Mov.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarDetMov.ParametrosSeleccionados1[2]);
         ZP_Estadistica_Det_Mov.Open;
 
+        lblSucursalDetMov.Caption:= 'Sucursal: '+EKBuscarDetMov.ParametrosSelecReales1[0];
         lblEncabezadoDetMov.Caption:= 'Detalles Movimientos desde el '+EKBuscarDetMov.ParametrosSeleccionados1[1]+' al '+EKBuscarDetMov.ParametrosSeleccionados1[2];
       end;
   end;
@@ -650,12 +647,13 @@ begin
       end
       else
       begin
-        lblBalanceTipoComprobante.Caption:= 'Tipo Comprobante: '+EKBuscarBalance.ParametrosSelecReales1[1];
-        lblBalanceSucursal.Caption:= 'Sucursal: '+EKBuscarBalance.ParametrosSelecReales1[0];
         if EKBuscarBalance.ParametrosSeleccionados1[0] = '0' then
           abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[3]), -1)
         else
           abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[1]) ,StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[3]), StrToInt(EKBuscarBalance.ParametrosSeleccionados1[0]));
+
+        lblBalanceTipoComprobante.Caption:= 'Tipo Comprobante: '+EKBuscarBalance.ParametrosSelecReales1[1];
+        lblBalanceSucursal.Caption:= 'Sucursal: '+EKBuscarBalance.ParametrosSelecReales1[0];
       end;
   end;
 end;
