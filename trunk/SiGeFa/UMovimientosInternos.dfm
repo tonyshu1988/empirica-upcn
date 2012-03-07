@@ -163,8 +163,8 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          751.416666666666800000
-          68.791666666666680000
+          751.416666666666700000
+          68.791666666666670000
           396.875000000000000000)
         Alignment = taCenter
         AlignToBand = True
@@ -195,7 +195,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          727.604166666666800000
+          727.604166666666700000
           5.291666666666667000
           444.500000000000000000)
         Alignment = taCenter
@@ -2804,6 +2804,7 @@ object FMovimientosInternos: TFMovimientosInternos
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha'
@@ -2815,6 +2816,7 @@ object FMovimientosInternos: TFMovimientosInternos
         CambiarCondicion = False
         ItemIndex = -1
         VaciarValor = False
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     UsarWhereOriginal = EK_Sin_Where

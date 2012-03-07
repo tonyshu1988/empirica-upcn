@@ -303,6 +303,7 @@ type
     ZQ_ComprobanteDetalleCANTIDAD: TFloatField;
     EKOrdenar_DetalleProducto: TEKOrdenarGrilla;
     btnVerDetalleFactura: TdxBarLargeButton;
+    ZQ_CtaCte_ClienteSUCURSAL: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -491,7 +492,7 @@ begin
 
   ZQ_CtaCte_Cliente.ParamByName('id_cliente').AsInteger:= ZQ_CtaCte_GralID_CLIENTE_OUT.AsInteger;
   ZQ_CtaCte_Cliente.ParamByName('id_proveedor').clear;
-  ZQ_CtaCte_Cliente.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
+  ZQ_CtaCte_Cliente.ParamByName('id_sucursal').AsInteger:= -1;
 
   if TSpeedButton (Sender).Name = 'BtnFiltro_Todos' then
   begin
