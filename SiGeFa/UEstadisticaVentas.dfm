@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 251
-  Top = 147
+  Left = 249
+  Top = 177
   Width = 1020
   Height = 685
   Caption = 'Estadisticas Ventas'
@@ -23,11 +23,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 1012
-    Height = 606
+    Width = 1004
+    Height = 595
     ActivePage = TabRanking
     Align = alClient
-    Style = tsFlatButtons
     TabOrder = 4
     OnChange = PageControlChange
     object TabFacturacion: TTabSheet
@@ -35,8 +34,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object PanelContenedor: TPanel
         Left = 0
         Top = 33
-        Width = 1004
-        Height = 542
+        Width = 996
+        Height = 534
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -262,7 +261,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewPage = False
             ParentFont = False
             Size.Values = (
-              42.333333333333340000
+              42.333333333333330000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -447,7 +446,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333340000
+              82.020833333333330000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -908,16 +907,16 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object PanelFacturacion: TPanel
           Left = 0
           Top = 0
-          Width = 1004
-          Height = 542
+          Width = 996
+          Height = 534
           Align = alClient
           BevelOuter = bvNone
           BorderWidth = 2
           TabOrder = 0
           object Splitter1: TSplitter
             Left = 2
-            Top = 412
-            Width = 1000
+            Top = 404
+            Width = 992
             Height = 6
             Cursor = crVSplit
             Align = alBottom
@@ -925,15 +924,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object PanelComprobante: TPanel
             Left = 2
             Top = 2
-            Width = 1000
-            Height = 410
+            Width = 992
+            Height = 402
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 0
             object lblTotalComprobantes: TLabel
               Left = 0
-              Top = 389
-              Width = 1000
+              Top = 381
+              Width = 992
               Height = 21
               Align = alBottom
               Alignment = taRightJustify
@@ -953,8 +952,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
             object DBGridComprobantes: TDBGrid
               Left = 0
               Top = 0
-              Width = 1000
-              Height = 389
+              Width = 992
+              Height = 381
               Align = alClient
               Color = 14606012
               DataSource = DS_Comprobante
@@ -1042,8 +1041,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
           end
           object PanelFPagoYProd: TPanel
             Left = 2
-            Top = 418
-            Width = 1000
+            Top = 410
+            Width = 992
             Height = 122
             Align = alBottom
             BevelOuter = bvNone
@@ -1057,7 +1056,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             object PanelProducto: TPanel
               Left = 613
               Top = 0
-              Width = 387
+              Width = 379
               Height = 122
               Align = alClient
               BevelOuter = bvNone
@@ -1066,7 +1065,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               object lblTotalProducto: TLabel
                 Left = 0
                 Top = 101
-                Width = 387
+                Width = 379
                 Height = 21
                 Align = alBottom
                 Alignment = taRightJustify
@@ -1086,7 +1085,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               object DBGridListadoProductos: TDBGrid
                 Left = 0
                 Top = 0
-                Width = 387
+                Width = 379
                 Height = 101
                 Align = alClient
                 Color = 14606012
@@ -1278,7 +1277,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object PanelFiltro: TPanel
         Left = 0
         Top = 0
-        Width = 1004
+        Width = 996
         Height = 33
         Align = alTop
         BevelOuter = bvNone
@@ -1331,16 +1330,16 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object PanelMes: TPanel
         Left = 0
         Top = 0
-        Width = 1004
-        Height = 575
+        Width = 996
+        Height = 567
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridHorario: TDBGrid
           Left = 0
           Top = 46
-          Width = 1004
-          Height = 529
+          Width = 996
+          Height = 521
           Align = alClient
           Color = 14606012
           DataSource = DS_Horario
@@ -1391,7 +1390,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object Panel5: TPanel
           Left = 0
           Top = 0
-          Width = 1004
+          Width = 996
           Height = 46
           Align = alTop
           BevelOuter = bvNone
@@ -1400,7 +1399,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 996
+            Width = 988
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1414,7 +1413,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 996
+            Width = 988
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1428,7 +1427,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 996
+            Width = 988
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -1448,8 +1447,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object DBChartHorario: TDBChart
         Left = 0
         Top = 0
-        Width = 1004
-        Height = 296
+        Width = 996
+        Height = 288
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         BackWall.Color = clSilver
@@ -1488,8 +1487,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         TabOrder = 0
         object Splitter4: TSplitter
           Left = 0
-          Top = 292
-          Width = 1004
+          Top = 284
+          Width = 996
           Height = 4
           Cursor = crVSplit
           Align = alBottom
@@ -1562,8 +1561,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
       end
       object DBChart1: TDBChart
         Left = 0
-        Top = 296
-        Width = 1004
+        Top = 288
+        Width = 996
         Height = 279
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
@@ -1629,17 +1628,17 @@ object FEstadisticaVentas: TFEstadisticaVentas
       Caption = 'Ranking Ventas'
       ImageIndex = 4
       object Splitter3: TSplitter
-        Left = 639
+        Left = 631
         Top = 33
         Width = 9
-        Height = 542
+        Height = 534
         Align = alRight
         Beveled = True
       end
       object Panel4: TPanel
         Left = 0
         Top = 0
-        Width = 1004
+        Width = 996
         Height = 33
         Align = alTop
         BevelOuter = bvNone
@@ -1686,10 +1685,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
       end
       object Panel6: TPanel
-        Left = 648
+        Left = 640
         Top = 33
         Width = 356
-        Height = 542
+        Height = 534
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 1
@@ -1715,7 +1714,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object lblTotales: TLabel
           Left = 0
-          Top = 334
+          Top = 326
           Width = 356
           Height = 20
           Align = alBottom
@@ -1735,7 +1734,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object Splitter6: TSplitter
           Left = 0
-          Top = 354
+          Top = 346
           Width = 356
           Height = 9
           Cursor = crVSplit
@@ -1746,7 +1745,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Left = 0
           Top = 20
           Width = 356
-          Height = 314
+          Height = 306
           Align = alClient
           Color = 14606012
           DataSource = DS_Top20
@@ -1788,7 +1787,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object DBChart2: TDBChart
           Left = 0
-          Top = 363
+          Top = 355
           Width = 356
           Height = 179
           BackWall.Brush.Color = clWhite
@@ -1857,15 +1856,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object Panel1: TPanel
         Left = 0
         Top = 33
-        Width = 639
-        Height = 542
+        Width = 631
+        Height = 534
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 2
         object Label3: TLabel
           Left = 1
           Top = 1
-          Width = 637
+          Width = 629
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -1884,8 +1883,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object lblProdsVendidos: TLabel
           Left = 1
-          Top = 521
-          Width = 637
+          Top = 513
+          Width = 629
           Height = 20
           Align = alBottom
           Alignment = taRightJustify
@@ -1905,8 +1904,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object grillaRanking: TDBGrid
           Left = 1
           Top = 21
-          Width = 637
-          Height = 500
+          Width = 629
+          Height = 492
           Align = alClient
           Color = 14606012
           DataSource = DS_ProductosVendidos
@@ -2617,7 +2616,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

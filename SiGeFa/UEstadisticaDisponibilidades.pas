@@ -381,6 +381,21 @@ type
     Label6: TLabel;
     Label14: TLabel;
     Label19: TLabel;
+    ZS_BalanceTRANSF_INGRESO: TFloatField;
+    ZS_BalanceTRANSF_EGRESO: TFloatField;
+    ZS_CalcSaldosTRANSF_INGRESO: TFloatField;
+    ZS_CalcSaldosTRANSF_EGRESO: TFloatField;
+    ZQ_Cuentas: TZQuery;
+    ZQ_CuentasID_CUENTA: TIntegerField;
+    ZQ_CuentasMEDIO_DEFECTO: TIntegerField;
+    ZQ_CuentasCODIGO: TStringField;
+    ZQ_CuentasNOMBRE_CUENTA: TStringField;
+    ZQ_CuentasNRO_CTA_BANCARIA: TStringField;
+    ZQ_CuentasBAJA: TStringField;
+    ZQ_CuentasID_SUCURSAL: TIntegerField;
+    ZQ_CuentasA_CTA_CORRIENTE: TStringField;
+    ZQ_CuentasA_NOTA_CREDITO: TStringField;
+    ZQ_CuentasMODIFICABLE: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -390,8 +405,8 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure ZP_Estadistica_Det_MovAfterScroll(DataSet: TDataSet);
     procedure btnExcelClick(Sender: TObject);
-    procedure abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer);
-    procedure calcularResumenBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer);
+    procedure abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer; id_cuenta: integer);
+    procedure calcularResumenBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer; id_cuenta: integer);
     procedure ZQ_Detalle_CuentaAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
@@ -426,6 +441,10 @@ begin
 
   PageControl.ActivePageIndex:= 0;
   dm.EKModelo.abrir(ZQ_Sucursal);
+  ZQ_Cuentas.Open;
+  ZQ_Cuentas.Append;
+  ZQ_CuentasID_CUENTA.AsInteger:= -1;
+  ZQ_CuentasNOMBRE_CUENTA.AsString:= 'TODAS';
 
   lblSaldo_Total.Caption:= '';
   lblSaldo_Encabezado1.Caption:= '';
@@ -447,6 +466,12 @@ begin
 
   mes:= MonthOf(dm.EKModelo.Fecha);
   anio:= YearOf(dm.EKModelo.Fecha);
+
+  TEKCriterioBA(EKBuscarSaldo.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TEKCriterioBA(EKBuscarParteDiario.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TEKCriterioBA(EKBuscarDetalleCuenta.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TEKCriterioBA(EKBuscarDetMov.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     indice_suc:= dm.ZQ_SucursalesVisibles.RecNo - 1
@@ -481,6 +506,8 @@ end;
 
 
 procedure TFEstadisticaDisponibilidades.btnBuscarClick(Sender: TObject);
+var
+  id_cuenta, id_sucursal: integer;
 begin
 //SALDO DE CUENTAS
   if PageControl.ActivePage = TabSaldosCuentas then
@@ -497,11 +524,12 @@ begin
       end
       else
       begin
+        id_sucursal:= -1;
+        if EKBuscarSaldo.ParametrosSeleccionados1[0] <> '0' then
+          id_sucursal:= StrToInt(EKBuscarSaldo.ParametrosSeleccionados1[0]);
+
         ZP_SaldosCuentas.Close;
-        if EKBuscarSaldo.ParametrosSeleccionados1[0] = '0' then
-          ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= -1
-        else
-          ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarSaldo.ParametrosSeleccionados1[0]);
+        ZP_SaldosCuentas.ParamByName('id_sucursal').AsInteger:= id_sucursal;
         ZP_SaldosCuentas.ParamByName('fecha_hasta').AsDate := StrToDate(EKBuscarSaldo.ParametrosSeleccionados1[1]);
         ZP_SaldosCuentas.Open;
 
@@ -529,31 +557,24 @@ begin
       end
       else
       begin
+        id_sucursal:= -1;
+        if EKBuscarParteDiario.ParametrosSeleccionados1[0] <> '0' then
+          id_sucursal:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
+
         ZQ_SaldoCuenta_PDiario.Close;
-        ZP_estadistica_Parte_Diario.Close;
-        ZP_Estadistica_IE_Medios.Close;
-
-        if EKBuscarParteDiario.ParametrosSeleccionados1[0] = '0' then
-        begin
-          ZQ_SaldoCuenta_PDiario.ParamByName('id_sucursal').AsInteger:= -1;
-          ZP_estadistica_Parte_Diario.ParamByName('id_sucursal').AsInteger:= -1;
-          ZP_Estadistica_IE_Medios.ParamByName('id_sucursal').AsInteger:= -1;
-        end
-        else
-        begin
-          ZQ_SaldoCuenta_PDiario.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
-          ZP_estadistica_Parte_Diario.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
-          ZP_Estadistica_IE_Medios.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscarParteDiario.ParametrosSeleccionados1[0]);
-        end;
-
+        ZQ_SaldoCuenta_PDiario.ParamByName('id_sucursal').AsInteger:= id_sucursal;
         ZQ_SaldoCuenta_PDiario.ParamByName('fecha_desde').AsDate := StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[1]);
         ZQ_SaldoCuenta_PDiario.ParamByName('fecha_hasta').AsDate := StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
         ZQ_SaldoCuenta_PDiario.Open;
 
+        ZP_estadistica_Parte_Diario.Close;
+        ZP_estadistica_Parte_Diario.ParamByName('id_sucursal').AsInteger:= id_sucursal;
         ZP_estadistica_Parte_Diario.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[1]);
         ZP_estadistica_Parte_Diario.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
         ZP_estadistica_Parte_Diario.Open;
 
+        ZP_Estadistica_IE_Medios.Close;
+        ZP_Estadistica_IE_Medios.ParamByName('id_sucursal').AsInteger:= id_sucursal;
         ZP_Estadistica_IE_Medios.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[1]);
         ZP_Estadistica_IE_Medios.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarParteDiario.ParametrosSeleccionados1[2]);
         ZP_Estadistica_IE_Medios.Open;
@@ -585,13 +606,12 @@ begin
       end
       else
       begin
+        id_sucursal:= -1;
+        if EKBuscarDetalleCuenta.ParametrosSeleccionados1[0] <> '0' then
+          id_sucursal:= StrToInt(EKBuscarDetalleCuenta.ParametrosSeleccionados1[0]);
+
         ZQ_Detalle_Cuenta.Close;
-
-        if EKBuscarDetalleCuenta.ParametrosSeleccionados1[0] = '0' then
-          ZQ_Detalle_Cuenta.ParamByName('ID_SUCURSAL').AsInteger:= -1
-        else
-          ZQ_Detalle_Cuenta.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(EKBuscarDetalleCuenta.ParametrosSeleccionados1[0]);
-
+        ZQ_Detalle_Cuenta.ParamByName('ID_SUCURSAL').AsInteger:= id_sucursal;
         ZQ_Detalle_Cuenta.ParamByName('fecha_desde').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[1]);
         ZQ_Detalle_Cuenta.ParamByName('fecha_hasta').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[2]);
         ZQ_Detalle_Cuenta.open;
@@ -616,13 +636,12 @@ begin
       end
       else
       begin
-        ZP_Estadistica_Det_Mov.Close;
-
+        id_sucursal:= -1;
         if EKBuscarDetMov.ParametrosSeleccionados1[0] = '0' then
-          ZP_Estadistica_Det_Mov.ParamByName('ID_SUCURSAL_INGRESO').AsInteger:= -1
-        else
-          ZP_Estadistica_Det_Mov.ParamByName('ID_SUCURSAL_INGRESO').AsInteger:= StrToInt(EKBuscarDetMov.ParametrosSeleccionados1[0]);
+          id_sucursal:= StrToInt(EKBuscarDetMov.ParametrosSeleccionados1[0]);
 
+        ZP_Estadistica_Det_Mov.Close;
+        ZP_Estadistica_Det_Mov.ParamByName('ID_SUCURSAL_INGRESO').AsInteger:= id_sucursal;
         ZP_Estadistica_Det_Mov.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarDetMov.ParametrosSeleccionados1[1]);
         ZP_Estadistica_Det_Mov.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarDetMov.ParametrosSeleccionados1[2]);
         ZP_Estadistica_Det_Mov.Open;
@@ -647,13 +666,19 @@ begin
       end
       else
       begin
-        if EKBuscarBalance.ParametrosSeleccionados1[0] = '0' then
-          abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[3]), -1)
-        else
-          abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[1]) ,StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[3]), StrToInt(EKBuscarBalance.ParametrosSeleccionados1[0]));
+        id_sucursal:= -1;
+        id_cuenta:= -1;
+        if EKBuscarBalance.ParametrosSeleccionados1[0] <> '0' then
+          id_sucursal:= StrToInt(EKBuscarBalance.ParametrosSeleccionados1[0]);
+
+        if EKBuscarBalance.ParametrosSeleccionados1[4] <> '' then
+          id_cuenta:= StrToInt(EKBuscarBalance.ParametrosSeleccionados1[4]);
+
+        abrirBalance(StrToInt(EKBuscarBalance.ParametrosSeleccionados1[1]) ,StrToDate(EKBuscarBalance.ParametrosSeleccionados1[2]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[3]), id_sucursal, id_cuenta);
 
         lblBalanceTipoComprobante.Caption:= 'Tipo Comprobante: '+EKBuscarBalance.ParametrosSelecReales1[1];
         lblBalanceSucursal.Caption:= 'Sucursal: '+EKBuscarBalance.ParametrosSelecReales1[0];
+        lblBalanceSucursal.Caption:= lblBalanceSucursal.Caption+' / Cuenta: '+EKBuscarBalance.ParametrosSelecReales1[4];
       end;
   end;
 end;
@@ -790,13 +815,14 @@ begin
 end;
 
 
-procedure TFEstadisticaDisponibilidades.abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer);
+procedure TFEstadisticaDisponibilidades.abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer; id_cuenta: integer);
 begin
   ZS_Balance.Close;
   ZS_Balance.ParamByName('tipo_cpb').AsInteger:= tipo;
   ZS_Balance.ParamByName('fecha_desde').AsDate:= fecha_desde;
   ZS_Balance.ParamByName('fecha_hasta').AsDate:= fecha_hasta;
   ZS_Balance.ParamByName('id_sucursal').AsInteger:= id_sucursal;
+  ZS_Balance.ParamByName('id_cuenta').AsInteger:= id_cuenta;  
   ZS_Balance.Open;
 
   lblBalanceFecha.Caption:= 'Balance desde el '+DateToStr(fecha_desde)+' al '+DateToStr(fecha_hasta);
@@ -805,11 +831,11 @@ begin
     DBChartBalance.Title.Text[0]:= lblBalanceFecha.Caption+' / '+lblBalanceSucursal.Caption;
   if lblBalanceTipoComprobante.Caption <> '' then
     DBChartBalance.Title.Text[0]:= lblBalanceFecha.Caption+' / '+lblBalanceSucursal.Caption+' / '+lblBalanceTipoComprobante.Caption;
-  calcularResumenBalance(tipo, fecha_desde, fecha_hasta, id_sucursal);
+  calcularResumenBalance(tipo, fecha_desde, fecha_hasta, id_sucursal, id_cuenta);
 end;
 
 
-procedure TFEstadisticaDisponibilidades.calcularResumenBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer);
+procedure TFEstadisticaDisponibilidades.calcularResumenBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer; id_cuenta: integer);
 var
   inicial, final: double;
   fecha_desde_antes, fecha_hasta_antes: tdate;
@@ -821,6 +847,7 @@ begin
   ZS_CalcSaldos.ParamByName('fecha_desde').AsDate:= fecha_desde_antes;
   ZS_CalcSaldos.ParamByName('fecha_hasta').AsDate:= fecha_hasta_antes;
   ZS_CalcSaldos.ParamByName('id_sucursal').AsInteger:= id_sucursal;
+  ZS_CalcSaldos.ParamByName('id_cuenta').AsInteger:= id_cuenta;
   ZS_CalcSaldos.Open;
   ZS_CalcSaldos.Last;
   inicial:= ZS_CalcSaldosSALDO.AsFloat;
@@ -830,6 +857,7 @@ begin
   ZS_CalcSaldos.ParamByName('fecha_desde').AsDate:= fecha_desde;
   ZS_CalcSaldos.ParamByName('fecha_hasta').AsDate:= fecha_hasta;
   ZS_CalcSaldos.ParamByName('id_sucursal').AsInteger:= id_sucursal;
+  ZS_CalcSaldos.ParamByName('id_cuenta').AsInteger:= id_cuenta;  
   ZS_CalcSaldos.Open;
   ZS_CalcSaldos.Last;
   final:= ZS_CalcSaldosSALDO.AsFloat;
