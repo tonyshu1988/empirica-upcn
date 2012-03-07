@@ -172,13 +172,16 @@ Const
   CPB_OP_CTA_CTE     = 23; //  
   //TRANSFERIR STOCK
   CPB_TRANSFERIR_STOCK = 24; //Comprobante para hacer la transferencia de stock entre las diferentes posiciones de sucursal
+  //COMPROBANTES DE SALDO INICIAL DE CTA CTE
+  CPB_SALDO_INI_CLIENTE = 25;
+  CPB_SALDO_INI_PROVEED = 26;
 
   ESTADO_SIN_CONFIRMAR = 0;
   ESTADO_CONFIRMADO    = 1;
   ESTADO_ALMACENADO    = 2;
   ESTADO_ANULADO       = 3;
 
-  LONG_COD_BARRAS       = 20;
+  LONG_COD_BARRAS       = 14;
   LONG_CODIGO           = 14;
 implementation
 
