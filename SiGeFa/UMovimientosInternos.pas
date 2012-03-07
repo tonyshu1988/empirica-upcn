@@ -410,6 +410,8 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
   end;
+
+  ZQ_MovHoy.Refresh;
 end;
 
 
