@@ -1,6 +1,6 @@
 object FTransferirStock: TFTransferirStock
-  Left = 299
-  Top = 152
+  Left = 337
+  Top = 216
   Width = 870
   Height = 558
   Caption = 'Transferir Stock'
@@ -22,15 +22,15 @@ object FTransferirStock: TFTransferirStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 468
+    Width = 862
+    Height = 479
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 852
-      Height = 433
+      Width = 860
+      Height = 444
       ActivePage = TabSTransferirStock
       Align = alClient
       TabOrder = 0
@@ -41,8 +41,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 364
+          Width = 852
+          Height = 375
           Align = alClient
           Color = 14606012
           DataSource = DS_Producto
@@ -200,14 +200,14 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 364
-          Width = 844
+          Top = 375
+          Width = 852
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            844
+            852
             41)
           object Label25: TLabel
             Left = 696
@@ -261,8 +261,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedido: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 364
+          Width = 852
+          Height = 375
           Hint = 
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
@@ -339,8 +339,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedidoDetalle: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 364
+          Width = 852
+          Height = 375
           Align = alClient
           Color = 14606012
           DataSource = DS_ListaProductos
@@ -486,17 +486,17 @@ object FTransferirStock: TFTransferirStock
         end
         object PanelNotaPedidoDetalle: TPanel
           Left = 0
-          Top = 364
-          Width = 844
+          Top = 375
+          Width = 852
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
-            844
+            852
             41)
           object Label2: TLabel
-            Left = 728
+            Left = 736
             Top = 7
             Width = 104
             Height = 13
@@ -510,7 +510,7 @@ object FTransferirStock: TFTransferirStock
             ParentFont = False
           end
           object editTotalAlmacenar: TEdit
-            Left = 712
+            Left = 720
             Top = 21
             Width = 129
             Height = 19
@@ -536,7 +536,7 @@ object FTransferirStock: TFTransferirStock
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 860
       Height = 33
       Align = alTop
       TabOrder = 1
@@ -566,24 +566,46 @@ object FTransferirStock: TFTransferirStock
   object PanelHistorico: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 468
+    Width = 862
+    Height = 479
     Align = alClient
     BevelOuter = bvNone
+    BorderWidth = 2
     TabOrder = 5
     object PanelHistorico_Cpb: TPanel
-      Left = 0
-      Top = 0
-      Width = 854
+      Left = 2
+      Top = 2
+      Width = 858
       Height = 184
       Align = alTop
       BevelOuter = bvNone
+      BorderWidth = 4
       TabOrder = 0
+      object Label3: TLabel
+        Left = 4
+        Top = 4
+        Width = 850
+        Height = 20
+        Align = alTop
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Transferencias Realizadas'
+        Color = 16729670
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -15
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+      end
       object DBGrid_Historico_Cpb: TDBGrid
-        Left = 0
-        Top = 0
-        Width = 854
-        Height = 184
+        Left = 4
+        Top = 24
+        Width = 850
+        Height = 156
         Align = alClient
         Color = 14606012
         DataSource = DS_Historico_Cpb
@@ -594,23 +616,83 @@ object FTransferirStock: TFTransferirStock
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
-        OnDrawColumnCell = DBGridProductoDrawColumnCell
-        OnKeyDown = DBGridProductoKeyDown
+        OnDrawColumnCell = DBGrid_Historico_CpbDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'FECHA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Fecha'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CODIGO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'digo'
+            Width = 108
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SUCURSAL_ORIGEN'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal Origen'
+            Width = 248
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SUCURSAL_DESTINO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal Destino'
+            Width = 229
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SECCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal Destino Secci'#243'n'
+            Width = 246
+            Visible = True
+          end>
       end
     end
     object PanelHistoric_Detalle: TPanel
-      Left = 0
-      Top = 184
-      Width = 854
-      Height = 284
+      Left = 2
+      Top = 186
+      Width = 858
+      Height = 291
       Align = alClient
       BevelOuter = bvNone
+      BorderWidth = 4
       TabOrder = 1
+      object Label4: TLabel
+        Left = 4
+        Top = 4
+        Width = 850
+        Height = 20
+        Align = alTop
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Productos Incluidos en la Transferencia'
+        Color = 16729670
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -15
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+      end
       object DBGrid_Historico_Detalle: TDBGrid
-        Left = 0
-        Top = 0
-        Width = 854
-        Height = 284
+        Left = 4
+        Top = 24
+        Width = 850
+        Height = 263
         Align = alClient
         Color = 14606012
         DataSource = DS_Historico_Detalle
@@ -621,15 +703,71 @@ object FTransferirStock: TFTransferirStock
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
-        OnDrawColumnCell = DBGridProductoDrawColumnCell
-        OnKeyDown = DBGridProductoKeyDown
+        OnDrawColumnCell = DBGrid_Historico_DetalleDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'COD_CORTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Corto'
+            Width = 92
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CODIGO_BARRA'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Barra'
+            Width = 88
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_MARCA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Marca'
+            Width = 177
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Producto'
+            Width = 244
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLOR'
+            Title.Alignment = taCenter
+            Title.Caption = 'Color'
+            Width = 99
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MEDIDA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Medida'
+            Width = 83
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CANTIDAD'
+            Title.Alignment = taCenter
+            Title.Caption = 'Cantidad'
+            Width = 75
+            Visible = True
+          end>
       end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1183,7 +1321,8 @@ object FTransferirStock: TFTransferirStock
         'btnNuevo'
         'btnModificar'
         'btnImprimir'
-        'btnTransferir')
+        'btnTransferir'
+        'btnVerTransferencias')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -2231,7 +2370,7 @@ object FTransferirStock: TFTransferirStock
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_COMPROBANTE_ID'
-    Left = 686
+    Left = 646
     Top = 144
     ParamData = <
       item
@@ -2255,7 +2394,7 @@ object FTransferirStock: TFTransferirStock
         Name = 'id_tipo'
         ParamType = ptUnknown
       end>
-    Left = 685
+    Left = 645
     Top = 97
     ParamData = <
       item
@@ -2337,8 +2476,8 @@ object FTransferirStock: TFTransferirStock
       'where c.id_tipo_cpb = 24'
       'order by c.fecha desc')
     Params = <>
-    Left = 712
-    Top = 16
+    Left = 752
+    Top = 56
     object ZQ_Historico_CpbID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
       Required = True
@@ -2387,15 +2526,16 @@ object FTransferirStock: TFTransferirStock
       'left join marca ma on (pc.id_marca = ma.id_marca)'
       'left join color co on (pc.color = co.id_color)'
       'left join medida me on (p.id_medida = me.id_medida)'
-      'where cd.id_comprobante = :id_comprobante')
+      'where cd.id_comprobante = :id_comprobante'
+      'order by ma.nombre_marca, pc.nombre')
     Params = <
       item
         DataType = ftUnknown
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 712
-    Top = 224
+    Left = 760
+    Top = 232
     ParamData = <
       item
         DataType = ftUnknown
@@ -2439,12 +2579,84 @@ object FTransferirStock: TFTransferirStock
   end
   object DS_Historico_Cpb: TDataSource
     DataSet = ZQ_Historico_Cpb
-    Left = 712
-    Top = 72
+    Left = 752
+    Top = 112
   end
   object DS_Historico_Detalle: TDataSource
     DataSet = ZQ_Historico_Detalle
-    Left = 704
+    Left = 760
     Top = 288
+  end
+  object EKOrdenarHistorico_Cpb: TEKOrdenarGrilla
+    Grilla = DBGrid_Historico_Cpb
+    Filtros = <
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal Origen'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal Destino'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal Destino Secci'#243'n'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenarHistorico_Cpb'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 746
+    Top = 162
+  end
+  object EKOrdenarHistorico_Detalle: TEKOrdenarGrilla
+    Grilla = DBGrid_Historico_Detalle
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Corto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenarHistorico_Detalle'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 762
+    Top = 338
   end
 end
