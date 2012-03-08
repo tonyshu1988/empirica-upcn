@@ -291,6 +291,10 @@ begin
   mes:= MonthOf(dm.EKModelo.Fecha);
   anio:= YearOf(dm.EKModelo.Fecha);
 
+  TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+
   //busqueda por horario
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
@@ -582,13 +586,12 @@ end;
 
 procedure TFEstadisticaVentas.btnExcelClick(Sender: TObject);
 begin
-//FACTURACION
+  //FACTURACION
   if PageControl.ActivePage = TabFacturacion then
   begin
     if not ZQ_Comprobante.IsEmpty then
       dm.ExportarEXCEL(DBGridComprobantes);
   end;
-
 
   //HORARIO VENTA
   if PageControl.ActivePage = TabHorarioVentas then
@@ -605,68 +608,71 @@ begin
   end;
 end;
 
+
 procedure TFEstadisticaVentas.btRankingProdsClick(Sender: TObject);
 begin
-ZQ_ProductosVendidos.Close;
-ZQ_ProductosVendidos.SQL[2]:=Format('(%s) as agrupam,count(cd.id_producto) as cantidad,%s',
-                            ['cd.id_producto','(pc.nombre) DETALLE_PROD']);
-ZQ_Totales.Close;
-ZQ_Totales.SQL[2]:=Format('(%s) as agrupam,count(cd.id_producto) as cantidad,%s',
-                            ['cd.id_producto','(pc.nombre ||'' - M: ''||coalesce(m.medida,'''')) as DETALLE_PROD']);
+  ZQ_ProductosVendidos.Close;
+  ZQ_ProductosVendidos.SQL[1]:= Format('%s as agrupam, ', ['cd.id_producto']);
+  ZQ_ProductosVendidos.SQL[3]:= Format('%s, ', ['[ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')||'')'' as detalle_prod']);
 
-
+  ZQ_Totales.Close;
+  ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['cd.id_producto']);
+  ZQ_Totales.SQL[2]:= Format('%s, ', ['[ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')||'')'' as detalle_prod']);
 end;
+
 
 procedure TFEstadisticaVentas.btRankingVendedClick(Sender: TObject);
 begin
-ZQ_ProductosVendidos.Close;
-ZQ_ProductosVendidos.SQL[2]:=Format('(%s) as agrupam,count(cd.id_producto) as cantidad,%s',
-                            ['c.id_vendedor','(vend.nombre) as DETALLE_PROD']);
+  ZQ_ProductosVendidos.Close;
+  ZQ_ProductosVendidos.SQL[1]:= Format('%s as agrupam, ', ['c.id_vendedor']);
+  ZQ_ProductosVendidos.SQL[3]:= Format('%s, ', ['vend.nombre as DETALLE_PROD']);
 
-ZQ_Totales.Close;
-ZQ_Totales.SQL[2]:=Format('(%s) as agrupam,count(cd.id_producto) as cantidad,%s',
-                            ['c.id_vendedor','(vend.nombre) as DETALLE_PROD']);
-
-
+  ZQ_Totales.Close;
+  ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['c.id_vendedor']);
+  ZQ_Totales.SQL[2]:= Format('%s, ', ['vend.nombre as DETALLE_PROD']);
 end;
+
 
 procedure TFEstadisticaVentas.btRankingClientesClick(Sender: TObject);
 begin
-ZQ_ProductosVendidos.Close;
-ZQ_ProductosVendidos.SQL[2]:=Format('(%s) as agrupam,count(cd.id_producto) as cantidad,%s',
-                            ['c.id_cliente','(cli.nombre) as DETALLE_PROD']);
-ZQ_Totales.Close;
-ZQ_Totales.SQL[2]:=Format('(%s) as agrupam,count(cd.id_producto) as cantidad,%s',
-                            ['c.id_cliente','(cli.nombre) as DETALLE_PROD']);
+  ZQ_ProductosVendidos.Close;
+  ZQ_ProductosVendidos.SQL[1]:= Format('%s as agrupam, ', ['c.id_cliente']);
+  ZQ_ProductosVendidos.SQL[3]:= Format('%s, ', ['cli.nombre as DETALLE_PROD']);
 
+  ZQ_Totales.Close;
+  ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['c.id_cliente']);
+  ZQ_Totales.SQL[2]:= Format('%s, ', ['cli.nombre as DETALLE_PROD']);
 end;
+
 
 procedure TFEstadisticaVentas.btVerClick(Sender: TObject);
 begin
-PanelFPagoYProd.Visible:=not(PanelFPagoYProd.Visible);
-ZQ_ComprobanteAfterScroll(nil);
+  PanelFPagoYProd.Visible:=not(PanelFPagoYProd.Visible);
+  ZQ_ComprobanteAfterScroll(nil);
 end;
+
 
 procedure TFEstadisticaVentas.DBGridComprobantesDblClick(Sender: TObject);
 begin
   btVer.Click;
 end;
 
+
 procedure TFEstadisticaVentas.PageControlChange(Sender: TObject);
 begin
  btVer.Enabled:=PageControl.ActivePage = TabFacturacion;
 end;
 
-procedure TFEstadisticaVentas.EKDbSumaProdsVendidosSumListChanged(
-  Sender: TObject);
+
+procedure TFEstadisticaVentas.EKDbSumaProdsVendidosSumListChanged(Sender: TObject);
 begin
-lblProdsVendidos.Caption:=FormatFloat('$ ##,###,##0.00 ', EKDbSumaProdsVendidos.SumCollection[0].SumValue);
+  lblProdsVendidos.Caption:=FormatFloat('$ ##,###,##0.00 ', EKDbSumaProdsVendidos.SumCollection[0].SumValue);
 end;
 
-procedure TFEstadisticaVentas.EKDbSumaTotalesSumListChanged(
-  Sender: TObject);
+
+procedure TFEstadisticaVentas.EKDbSumaTotalesSumListChanged(Sender: TObject);
 begin
-lblTotales.Caption:=FormatFloat('$ ##,###,##0.00 ', EKDbSumaTotales.SumCollection[0].SumValue);
+  lblTotales.Caption:=FormatFloat('$ ##,###,##0.00 ', EKDbSumaTotales.SumCollection[0].SumValue);
 end;
 
 end.

@@ -250,6 +250,10 @@ type
     ZQ_Historico_DetalleCOLOR: TStringField;
     ZQ_Historico_DetalleMEDIDA: TStringField;
     ZQ_Historico_DetalleCANTIDAD: TFloatField;
+    Label3: TLabel;
+    Label4: TLabel;
+    EKOrdenarHistorico_Cpb: TEKOrdenarGrilla;
+    EKOrdenarHistorico_Detalle: TEKOrdenarGrilla;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnTransferirClick(Sender: TObject);
@@ -281,6 +285,12 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure btnVerTransferenciasClick(Sender: TObject);
     procedure ZQ_Historico_CpbAfterScroll(DataSet: TDataSet);
+    procedure DBGrid_Historico_CpbDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGrid_Historico_DetalleDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -420,6 +430,8 @@ begin
 
   EKOrdenarGrillaProductos.CargarConfigColumnas;
   EKOrdenarGrillaNotaPedidoDetalle.CargarConfigColumnas;
+  EKOrdenarHistorico_Cpb.CargarConfigColumnas;
+  EKOrdenarHistorico_Detalle.CargarConfigColumnas;
 
   ZQ_VerCpb.Close;
   ZQ_VerCpb.ParamByName('id_tipo_np').AsInteger:= CPB_NOTA_PEDIDO;
@@ -735,6 +747,8 @@ procedure TFTransferirStock.FormCloseQuery(Sender: TObject; var CanClose: Boolea
 begin
   EKOrdenarGrillaProductos.GuardarConfigColumnas;
   EKOrdenarGrillaNotaPedidoDetalle.GuardarConfigColumnas;
+  EKOrdenarHistorico_Cpb.GuardarConfigColumnas;
+  EKOrdenarHistorico_Detalle.GuardarConfigColumnas;
 
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_TransferirStock);
 end;
@@ -912,6 +926,18 @@ begin
 
   ZQ_Historico_Detalle.ParamByName('id_comprobante').AsInteger:= ZQ_Historico_CpbID_COMPROBANTE.AsInteger;
   ZQ_Historico_Detalle.Open;
+end;
+
+
+procedure TFTransferirStock.DBGrid_Historico_CpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGrid_Historico_Cpb, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFTransferirStock.DBGrid_Historico_DetalleDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGrid_Historico_Detalle, Rect, DataCol, Column, State);
 end;
 
 end.
