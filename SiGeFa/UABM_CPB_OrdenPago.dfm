@@ -1373,6 +1373,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           OnKeyUp = DBGridEditar_FpagoKeyUp
           Columns = <
             item
+              ButtonStyle = cbsNone
               Expanded = False
               FieldName = '_CuentaEgreso_Nombre'
               Title.Alignment = taCenter
@@ -1381,6 +1382,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
               Visible = True
             end
             item
+              ButtonStyle = cbsNone
               Expanded = False
               FieldName = '_TipoFormaPago'
               Title.Alignment = taCenter
@@ -4760,6 +4762,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha'
@@ -4771,6 +4774,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'PV'
@@ -4781,6 +4785,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'N'#250'mero'
@@ -4791,6 +4796,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sucursal'
@@ -4804,6 +4810,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Cliente'
@@ -4813,6 +4820,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Proveedor'
@@ -4822,6 +4830,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Importe Final'
@@ -4832,6 +4841,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

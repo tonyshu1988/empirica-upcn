@@ -254,6 +254,15 @@ type
     Label4: TLabel;
     EKOrdenarHistorico_Cpb: TEKOrdenarGrilla;
     EKOrdenarHistorico_Detalle: TEKOrdenarGrilla;
+    ZQ_VerificarProducto: TZQuery;
+    ZQ_VerificarProductoID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_VerificarProductoID_PRODUCTO: TIntegerField;
+    ZQ_VerificarProductoID_POSICION_SUCURSAL: TIntegerField;
+    ZQ_VerificarProductoSTOCK_ACTUAL: TFloatField;
+    ZQ_VerificarProductoSTOCK_MIN: TFloatField;
+    ZQ_VerificarProductoSTOCK_MAX: TFloatField;
+    ZQ_VerificarProductoSTOCK_REPEDIDO: TFloatField;
+    ZQ_VerificarProductoSTOCK_MIN_ALARMA: TStringField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnTransferirClick(Sender: TObject);
@@ -285,12 +294,9 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure btnVerTransferenciasClick(Sender: TObject);
     procedure ZQ_Historico_CpbAfterScroll(DataSet: TDataSet);
-    procedure DBGrid_Historico_CpbDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure DBGrid_Historico_DetalleDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGrid_Historico_CpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGrid_Historico_DetalleDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    function  idStockProducto_pertenece_destino(idStock: integer):boolean;
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -458,7 +464,8 @@ begin
       CD_Producto.First;
       while not CD_Producto.Eof do
       begin
-        if ((CD_Producto_idStockProducto.IsNull) or (CD_Producto_cantidad.AsFloat = 0)) then
+           //si el producto no tiene stock    o   si el stock actual es 0           o   si el origen del producto donde hay que descontar es el mismo al destino seleccionado
+        if CD_Producto_idStockProducto.IsNull or (CD_Producto_cantidad.AsFloat = 0) or (idStockProducto_pertenece_destino(CD_Producto_idStockProducto.AsInteger))then
           CD_Producto.Delete
         else
           CD_Producto.Next;
@@ -938,6 +945,20 @@ end;
 procedure TFTransferirStock.DBGrid_Historico_DetalleDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGrid_Historico_Detalle, Rect, DataCol, Column, State);
+end;
+
+
+function TFTransferirStock.idStockProducto_pertenece_destino(idStock: integer): boolean;
+begin
+  Result:= true;
+
+  ZQ_VerificarProducto.Close;
+  ZQ_VerificarProducto.ParamByName('id_stock').AsInteger:= idStock;
+  ZQ_VerificarProducto.ParamByName('id_posicion').AsInteger:= id_pos_sucursal;
+  ZQ_VerificarProducto.open;
+
+  if ZQ_VerificarProducto.IsEmpty then
+    Result:= false;
 end;
 
 end.

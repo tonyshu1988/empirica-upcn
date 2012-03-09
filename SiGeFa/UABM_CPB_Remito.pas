@@ -356,6 +356,7 @@ type
     Label1: TLabel;
     ZQ_VerCpb_ProductoIMPORTE_IVA: TFloatField;
     ZQ_VerCpb_ProductoIMPUESTO_INTERNO_1: TFloatField;
+    Label23: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1047,7 +1048,7 @@ procedure TFABM_CPB_Remito.DBGridEditar_ProductoKeyUp(Sender: TObject; var Key: 
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
   begin
-    if key = 112 then
+    if key = 114 then
       agregarProducto;
   end;
 end;

@@ -442,6 +442,7 @@ type
     ZQ_ActualizarPrecioIMPUESTO_ADICIONAL1: TFloatField;
     ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2: TFloatField;
     ZQ_ActualizarPrecioID_PRECIO: TIntegerField;
+    Label46: TLabel;
 
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
@@ -1188,7 +1189,7 @@ procedure TFABM_CPB_NotaPedido.DBGridEditar_ProductoKeyUp(Sender: TObject;
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
   begin
-    if key = 112 then
+    if key = 114 then
       agregarProducto;
   end;
 end;

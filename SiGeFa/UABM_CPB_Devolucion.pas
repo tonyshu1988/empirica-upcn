@@ -1500,13 +1500,13 @@ begin
 
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
   begin
-    if key = 112 then
+    if key = 114 then
     begin
-      if query.Name = 'ZQ_CpbDevolucion' then
         agregarProducto('DEVOLUCION')
-      else
+    end
+    else
+    if key = 115 then
         agregarProducto('ENTREGA');
-    end;
   end;
 end;
 
