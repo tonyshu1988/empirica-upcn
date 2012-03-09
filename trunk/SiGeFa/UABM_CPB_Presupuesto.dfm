@@ -1213,6 +1213,23 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         Height = 301
         Align = alClient
         TabOrder = 1
+        object Label19: TLabel
+          Left = 1
+          Top = 1
+          Width = 872
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'LISTADO DE PRODUCTOS (F3 = Agregar un Producto)'
+          Color = clBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
           Top = 259
@@ -1376,9 +1393,9 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         end
         object DBGridEditar_Producto: TDBGrid
           Left = 164
-          Top = 1
+          Top = 14
           Width = 709
-          Height = 258
+          Height = 245
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbProducto
@@ -1395,6 +1412,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           OnKeyUp = DBGridEditar_ProductoKeyUp
           Columns = <
             item
+              ButtonStyle = cbsNone
               Expanded = False
               FieldName = '_CodBarra'
               ReadOnly = True
@@ -1404,6 +1422,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
               Visible = True
             end
             item
+              ButtonStyle = cbsNone
               Expanded = False
               FieldName = '_Nombre'
               ReadOnly = True
@@ -1413,6 +1432,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
               Visible = True
             end
             item
+              ButtonStyle = cbsNone
               Expanded = False
               FieldName = '_Medida'
               ReadOnly = True
@@ -1422,6 +1442,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
               Visible = True
             end
             item
+              ButtonStyle = cbsNone
               Expanded = False
               FieldName = '_Color'
               ReadOnly = True
@@ -1481,15 +1502,15 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         end
         object Panel1: TPanel
           Left = 1
-          Top = 1
+          Top = 14
           Width = 163
-          Height = 258
+          Height = 245
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
             163
-            258)
+            245)
           object DBTxtCodBarra: TDBText
             Left = 3
             Top = 120
@@ -4389,7 +4410,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
     Left = 360
     Top = 215
     object PopItemProducto_Agregar: TMenuItem
-      Caption = 'Agregar Producto (F1)'
+      Caption = 'Agregar Producto (F3)'
       ImageIndex = 14
       OnClick = PopItemProducto_AgregarClick
     end
@@ -4541,6 +4562,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Vencimiento'
@@ -4552,6 +4574,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'PV'
@@ -4562,6 +4585,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'N'#250'mero'
@@ -4572,6 +4596,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sucursal'
@@ -4585,6 +4610,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Cliente'
@@ -4594,6 +4620,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Importe Final'
@@ -4604,6 +4631,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

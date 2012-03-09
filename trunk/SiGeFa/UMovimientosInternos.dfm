@@ -152,7 +152,7 @@ object FMovimientosInternos: TFMovimientosInternos
         FontSize = 12
       end
       object RepCuentas_Subtitulo: TQRLabel
-        Left = 284
+        Left = -67
         Top = 26
         Width = 150
         Height = 20
@@ -163,8 +163,8 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          751.416666666666700000
-          68.791666666666670000
+          751.416666666666800000
+          68.791666666666680000
           396.875000000000000000)
         Alignment = taCenter
         AlignToBand = True
@@ -184,7 +184,7 @@ object FMovimientosInternos: TFMovimientosInternos
         FontSize = 9
       end
       object RepCuentas_Titulo: TQRLabel
-        Left = 275
+        Left = -76
         Top = 2
         Width = 168
         Height = 20
@@ -195,7 +195,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          727.604166666666700000
+          727.604166666666800000
           5.291666666666667000
           444.500000000000000000)
         Alignment = taCenter
@@ -1299,6 +1299,7 @@ object FMovimientosInternos: TFMovimientosInternos
               OnKeyUp = DBGridFPago_EgresoKeyUp
               Columns = <
                 item
+                  ButtonStyle = cbsNone
                   Expanded = False
                   FieldName = '_CuentaIngreso_Codigo'
                   Title.Alignment = taCenter
@@ -1307,6 +1308,7 @@ object FMovimientosInternos: TFMovimientosInternos
                   Visible = True
                 end
                 item
+                  ButtonStyle = cbsNone
                   Expanded = False
                   FieldName = '_CuentaIngreso_Nombre'
                   Title.Alignment = taCenter
@@ -1315,6 +1317,7 @@ object FMovimientosInternos: TFMovimientosInternos
                   Visible = True
                 end
                 item
+                  ButtonStyle = cbsNone
                   Expanded = False
                   FieldName = '_TipoFormaPago'
                   Title.Alignment = taCenter
@@ -1357,10 +1360,12 @@ object FMovimientosInternos: TFMovimientosInternos
               object Label8: TLabel
                 Left = 0
                 Top = 0
-                Width = 169
+                Width = 591
                 Height = 13
                 Align = alLeft
-                Caption = 'Ctrl+Del para borrar linea'
+                Caption = 
+                  '(Presione F1: Agregar Forma Pago  /  Presione Ctrl+Del: Borrar F' +
+                  'orma Pago seleccionada)'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -1369,9 +1374,9 @@ object FMovimientosInternos: TFMovimientosInternos
                 ParentFont = False
               end
               object Label7: TLabel
-                Left = 169
+                Left = 591
                 Top = 0
-                Width = 697
+                Width = 275
                 Height = 13
                 Align = alClient
                 Alignment = taRightJustify

@@ -1403,6 +1403,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           OnKeyUp = DBGridEditar_FpagoKeyUp
           Columns = <
             item
+              ButtonStyle = cbsNone
               Expanded = False
               FieldName = '_CuentaIngreso_Nombre'
               Title.Alignment = taCenter
@@ -1411,6 +1412,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               Visible = True
             end
             item
+              ButtonStyle = cbsNone
               Expanded = False
               FieldName = '_TipoFormaPago'
               Title.Alignment = taCenter
@@ -4605,6 +4607,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha'
@@ -4616,6 +4619,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'PV'
@@ -4626,6 +4630,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'N'#250'mero'
@@ -4636,6 +4641,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sucursal'
@@ -4649,6 +4655,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Cliente'
@@ -4658,6 +4665,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Proveedor'
@@ -4667,6 +4675,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Importe Final'
@@ -4677,6 +4686,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

@@ -1,7 +1,6 @@
 unit UMovimientosInternos;
 
 interface
-
 //que ponemos en la fecha de anulacion, la del comprobante o la de hoy?
 //si queremos llevar el historico tendria que ser la de hoy.
 
