@@ -845,7 +845,7 @@ object FABM_Cuentas: TFABM_Cuentas
       object DBGridCuentas: TDBGrid
         Left = 5
         Top = 5
-        Width = 844
+        Width = 524
         Height = 299
         Align = alClient
         Color = 14606012
@@ -872,6 +872,7 @@ object FABM_Cuentas: TFABM_Cuentas
             FieldName = 'NOMBRE_CUENTA'
             Title.Alignment = taCenter
             Title.Caption = 'Nombre'
+            Width = 217
             Visible = True
           end
           item
@@ -879,7 +880,7 @@ object FABM_Cuentas: TFABM_Cuentas
             FieldName = 'NRO_CTA_BANCARIA'
             Title.Alignment = taCenter
             Title.Caption = 'Nro. Cta. Bancaria'
-            Width = 213
+            Width = 139
             Visible = True
           end
           item
@@ -1025,6 +1026,31 @@ object FABM_Cuentas: TFABM_Cuentas
           ListSource = DS_MedioPago
           TabOrder = 3
         end
+      end
+      object DBGridFPago: TDBGrid
+        Left = 529
+        Top = 5
+        Width = 320
+        Height = 299
+        Align = alRight
+        Color = 14606012
+        DataSource = DS_MedioPago
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        PopupMenu = PopupMenu_FPago
+        TabOrder = 2
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'DESCRIPCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Forma de Pago Asociada'
+            Visible = True
+          end>
       end
     end
   end
@@ -1649,6 +1675,7 @@ object FABM_Cuentas: TFABM_Cuentas
   end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_CuentasAfterScroll
     SQL.Strings = (
       'select c.*'
       'from cuenta c'
@@ -1764,6 +1791,7 @@ object FABM_Cuentas: TFABM_Cuentas
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nombre'
@@ -1773,6 +1801,7 @@ object FABM_Cuentas: TFABM_Cuentas
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nro.Cta. Bancaria'
@@ -1782,6 +1811,7 @@ object FABM_Cuentas: TFABM_Cuentas
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Medio Cobro/Pago'
@@ -1797,6 +1827,7 @@ object FABM_Cuentas: TFABM_Cuentas
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1825,12 +1856,27 @@ object FABM_Cuentas: TFABM_Cuentas
   object ZQ_MedioPago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select *'
-      'from tipo_formapago'
+      'select fp.*'
+      'from cuenta_tipo_formapago cfp'
+      
+        'left join tipo_formapago fp on (cfp.id_tipo_formapago = fp.id_ti' +
+        'po_formapago)'
+      'where cfp.id_cuenta = :id_cuenta'
       'order by descripcion')
-    Params = <>
-    Left = 48
-    Top = 235
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
+        ParamType = ptUnknown
+      end>
+    Left = 634
+    Top = 83
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
+        ParamType = ptUnknown
+      end>
     object ZQ_MedioPagoID_TIPO_FORMAPAGO: TIntegerField
       FieldName = 'ID_TIPO_FORMAPAGO'
       Required = True
@@ -1878,8 +1924,8 @@ object FABM_Cuentas: TFABM_Cuentas
   end
   object DS_MedioPago: TDataSource
     DataSet = ZQ_MedioPago
-    Left = 216
-    Top = 235
+    Left = 636
+    Top = 139
   end
   object ZQ_UltimoNro: TZQuery
     Connection = DM.Conexion
@@ -1888,11 +1934,52 @@ object FABM_Cuentas: TFABM_Cuentas
       'from cuenta'
       'order by CODIGO desc')
     Params = <>
-    Left = 216
-    Top = 179
+    Left = 48
+    Top = 235
     object ZQ_UltimoNroCODIGO: TStringField
       FieldName = 'CODIGO'
       Size = 10
+    end
+  end
+  object EKOrdenarGrilla_FPago: TEKOrdenarGrilla
+    Grilla = DBGridFPago
+    Filtros = <
+      item
+        TituloColumna = 'Forma de Pago Asociada'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenarGrilla_FPago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = False
+    Left = 640
+    Top = 203
+  end
+  object EKListadoMedio: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select tipo.*'
+      'from tipo_formapago tipo'
+      'where tipo.baja = '#39'N'#39)
+    CampoBuscar = 'descripcion'
+    CampoClave = 'id_tipo_formapago'
+    TituloVentana = 'Buscar Medio'
+    Left = 741
+    Top = 81
+  end
+  object PopupMenu_FPago: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 744
+    Top = 139
+    object popUpItem_AgregarMedioCobroPago: TMenuItem
+      Caption = 'Agregar Medio Cobro/Pago'
+      ImageIndex = 14
+    end
+    object popUpItem_QuitarMedioCobroPago: TMenuItem
+      Caption = 'Quitar Medio Cobro/Pago'
+      ImageIndex = 15
     end
   end
 end
