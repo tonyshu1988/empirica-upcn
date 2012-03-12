@@ -6,9 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids,
-  EKEdit,UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
+  EKEdit, UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
   XPStyleActnCtrls, ActnMan, EKListadoSQL, EKDbSuma,
-  ZStoredProcedure,UBuscarPersona, Buttons, jpeg, Menus,UCargarPreventa,
+  ZStoredProcedure, UBuscarPersona, Buttons, jpeg, Menus, UCargarPreventa,
   ComCtrls, IniFiles, ShellAPI;
 
 type
@@ -555,9 +555,11 @@ type
     btnEfectivoF: TBitBtn;
     Image3: TImage;
     AVentaRapida: TAction;
+    EKListadoMedio: TEKListadoSQL;
+    EKListadoCuenta: TEKListadoSQL;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
-    function agregar(detalle: string;prod:integer):Boolean;
+    function agregar(detalle: string; prod: integer): Boolean;
     procedure BtLeerCBClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btQuitarProductoClick(Sender: TObject);
@@ -565,7 +567,7 @@ type
     procedure LimpiarCodigo;
     procedure codBarrasKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure IdentificarCodigo();
-    procedure LeerCodigo(id:string;cod:String);
+    procedure LeerCodigo(id: string; cod: string);
     procedure bt_BuscarClienteClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure BtAceptarPagoClick(Sender: TObject);
@@ -575,15 +577,15 @@ type
     procedure APagoExecute(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
     procedure EKDbSuma2SumListChanged(Sender: TObject);
-    function validarFPago():Boolean;
+    function validarFPago(): Boolean;
     procedure grabarPagos();
     procedure grabarDetallesFactura();
     procedure edCantidadExit(Sender: TObject);
     procedure calcularMonto();
     procedure btVendedorClick(Sender: TObject);
     procedure edImporteExit(Sender: TObject);
-    function ProductoYaCargado(id:Integer):Boolean ;
-    function calcularSaldoCtaCorr():Double;
+    function ProductoYaCargado(id: Integer): Boolean;
+    function calcularSaldoCtaCorr(): Double;
     procedure ZQ_ProductosAfterScroll(DataSet: TDataSet);
     procedure ANuevaFormaPagoExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -603,12 +605,12 @@ type
     procedure EditarProdClick(Sender: TObject);
     procedure edImporteFinalExit(Sender: TObject);
     procedure edImporteFinalKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    function guardarComprobante():Boolean;
+    function guardarComprobante(): Boolean;
     procedure btnCancelarVentaClick(Sender: TObject);
     procedure edPorcDctoTotalExit(Sender: TObject);
     procedure recalcularBoleta();
     procedure btnConfirmarVentaClick(Sender: TObject);
-    function validarBoleta():Boolean ;
+    function validarBoleta(): Boolean;
     procedure btnQuitarPagoClick(Sender: TObject);
     procedure btBuscProdClick(Sender: TObject);
     procedure cargarPreventa();
@@ -627,12 +629,12 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure AVendedorExecute(Sender: TObject);
     procedure ANuevoProdExecute(Sender: TObject);
-    function imprimirFiscal(comprob:Integer; tipoAccion: string):Boolean ;
+    function imprimirFiscal(comprob: Integer; tipoAccion: string): Boolean;
     procedure leerSistemaIni;
     procedure btCierreZClick(Sender: TObject);
     procedure BtCierreXClick(Sender: TObject);
     procedure calcularFP();
-    function completarCodBar(cod:String):String ;
+    function completarCodBar(cod: string): string;
     procedure edCantidadKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btFPAceptarClick(Sender: TObject);
@@ -648,7 +650,9 @@ type
     procedure btnVentaRapidaClick(Sender: TObject);
     procedure AVentaRapidaExecute(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
-  private
+    procedure buscarCuenta(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShiftState);
+  Private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
     vsel3: TFBuscarPersona;
@@ -658,7 +662,7 @@ type
     procedure OnSelVendedor;
     procedure OnSelPreventa;
     { Private declarations }
-  public
+  Public
 
 
     { Public declarations }
@@ -666,44 +670,44 @@ type
 
 var
   FCajero: TFCajero;
-  punitoriosacob, acumulado,ClienteIVA,descCliente,acumuladoIVA,
-  acumFpagoReal,acumFpago,acumEfectivo,acumuladoProd,totFiscal : double;
-  acumPrecio1,acumPrecio2,acumPrecio3,acumPrecio4,acumPrecio5:double;
-  coefPrecio1,coefPrecio2,coefPrecio3,coefPrecio4,coefPrecio5:double;
-  IdProd:String;
-  cliente,IdVendedor,cajero,IDClienteIVA,idSucursal:Integer;
-  modoCargaPrevia,borrarVendedor:Boolean;
-  importeVenta,importeIF:Double;
+  punitoriosacob, acumulado, ClienteIVA, descCliente, acumuladoIVA,
+  acumFpagoReal, acumFpago, acumEfectivo, acumuladoProd, totFiscal: double;
+  acumPrecio1, acumPrecio2, acumPrecio3, acumPrecio4, acumPrecio5: double;
+  coefPrecio1, coefPrecio2, coefPrecio3, coefPrecio4, coefPrecio5: double;
+  IdProd: string;
+  cliente, IdVendedor, cajero, IDClienteIVA, idSucursal: Integer;
+  modoCargaPrevia, borrarVendedor: Boolean;
+  importeVenta, importeIF: Double;
   permitirOnChangeFPAGO: boolean;
-  ctaPorDefecto:Integer;
+  ctaPorDefecto: Integer;
   //----Fiscal--------
-  Impresora : string;
-  Ruta : String;
+  Impresora: string;
+  Ruta: string;
 const
-  abmComprobante='ABM Factura-Cajero';
+  abmComprobante = 'ABM Factura-Cajero';
 
 implementation
 
-uses UDM, UPrincipal,strutils, EKModelo, Math, UUtilidades;
+uses UDM, UPrincipal, strutils, EKModelo, Math, UUtilidades;
 
 {$R *.dfm}
 
 procedure TFCajero.leerSistemaIni;
 var
-  Ini : TIniFile;
+  Ini: TIniFile;
 begin
-  Ini := TIniFile.Create( '.\SISTEMA.INI' );
-  Ruta := Ini.ReadString('IMPRESORA', 'RutaImpresora', '');
-  Impresora := Ini.ReadString('IMPRESORA', 'TipoImpresora', '');
+  Ini:= TIniFile.Create('.\SISTEMA.INI');
+  Ruta:= Ini.ReadString('IMPRESORA', 'RutaImpresora', '');
+  Impresora:= Ini.ReadString('IMPRESORA', 'TipoImpresora', '');
   Ini.Free;
 end;
 
 procedure TFCajero.VerLectorCB(sino: Boolean);
 begin
-  PLeerCodigo.Visible:=sino;
+  PLeerCodigo.Visible:= sino;
   PLeerCodigo.BringToFront;
   dm.centrarPanel(FCajero, PLeerCodigo);
-  PanelContenedorDerecha.Enabled:=not(PLeerCodigo.Visible);
+  PanelContenedorDerecha.Enabled:= not (PLeerCodigo.Visible);
 end;
 
 
@@ -711,50 +715,49 @@ procedure TFCajero.IdentificarCodigo();
 var
   cod, num: string;
 begin
-     cod := codBarras.Text;
-     try
+  cod:= codBarras.Text;
+  try
+    begin
+      //        if not(sonTodosNumeros(MidStr(cod,2,Length(cod)-1))) then
+      //        begin
+      //          Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
+      //          LimpiarCodigo;
+      //          exit;
+      //        end;
+      if UpperCase(MidStr(Cod, 1, 1)) = 'C' then
       begin
-//        if not(sonTodosNumeros(MidStr(cod,2,Length(cod)-1))) then
-//        begin
-//          Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
-//          LimpiarCodigo;
-//          exit;
-//        end;
-        if UpperCase(MidStr(Cod, 1, 1)) = 'C' then
-        begin
-          LeerCodigo('C',Cod);
-          exit;
-        end;
+        LeerCodigo('C', Cod);
+        exit;
+      end;
 
-        if UpperCase(MidStr(Cod, 1, 1)) = 'I' then
-        begin
-          LeerCodigo('I',Cod);
-          exit;
-        end;
+      if UpperCase(MidStr(Cod, 1, 1)) = 'I' then
+      begin
+        LeerCodigo('I', Cod);
+        exit;
+      end;
 
-        // POR CODIGO DE BARRAS PRODUCTO
-        if (Length(cod) <= LONG_COD_BARRAS) then
-        begin
-          LeerCodigo('B',completarCodBar(Cod));
-          exit;
-        end
-        else
-        if (Length(cod) > LONG_COD_BARRAS) then
-        begin
-          Application.MessageBox('Longitud de código incorrecta', 'Código incorrecto');
-          LimpiarCodigo;
-          exit;
-        end;
-
-        raise Exception(self);
+      // POR CODIGO DE BARRAS PRODUCTO
+      if (Length(cod) <= LONG_COD_BARRAS) then
+      begin
+        LeerCodigo('B', completarCodBar(Cod));
+        exit;
       end
-     except
+      else if (Length(cod) > LONG_COD_BARRAS) then
       begin
-        Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
+        Application.MessageBox('Longitud de código incorrecta', 'Código incorrecto');
         LimpiarCodigo;
         exit;
       end;
-     end;
+
+      raise Exception(self);
+    end
+  except
+    begin
+      Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
+      LimpiarCodigo;
+      exit;
+    end;
+  end;
 end;
 
 
@@ -762,29 +765,29 @@ procedure TFCajero.LimpiarCodigo;
 begin
   ZQ_Productos.Close;
   codBarras.Clear;
-  if (CD_DetalleFactura.State<>dsBrowse) then
-   begin
-      CD_DetalleFacturaCANTIDAD.AsFloat:=1;
-      CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=0;
-      CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=0;
-   end;
-  RelojStock.Enabled:=false;
+  if (CD_DetalleFactura.State <> dsBrowse) then
+  begin
+    CD_DetalleFacturaCANTIDAD.AsFloat:= 1;
+    CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= 0;
+    CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= 0;
+  end;
+  RelojStock.Enabled:= false;
   //lblSinStock.Visible:=False;
-  lblMaxVenta.Visible:=False;
+  lblMaxVenta.Visible:= False;
 end;
 
 
-procedure TFCajero.LeerCodigo(id:string;cod:String);
+procedure TFCajero.LeerCodigo(id: string; cod: string);
 var
   f1, f2, fecha: tdate;
   punit: double;
   diasm: integer;
 begin
-  RelojStock.Enabled:=false;
-  lblMaxVenta.Visible:=False;
+  RelojStock.Enabled:= false;
+  lblMaxVenta.Visible:= False;
 
   try
-      IdProd:= MidStr(cod, 2, Length(cod) - 1);
+    IdProd:= MidStr(cod, 2, Length(cod) - 1);
   except
     begin
       Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
@@ -793,95 +796,95 @@ begin
     end
   end;
   //Codigo Corto
-     if id='C' then
+  if id = 'C' then
+  begin
+    ZQ_Productos.Close;
+    ZQ_Productos.sql[15]:= Format('and(p.cod_corto=%s)', [QuotedStr(IdProd)]);
+    ZQ_Productos.Open;
+  end;
+
+  if id = 'I' then
+  begin
+    ZQ_Productos.Close;
+    ZQ_Productos.sql[15]:= Format('and(p.id_producto=%s)', [IdProd]);
+    ZQ_Productos.Open;
+  end;
+
+  //Codigo de Barras
+  if id = 'B' then
+  begin
+    ZQ_Productos.Close;
+    ZQ_Productos.sql[15]:= Format('and( lpad(p.codigo_barra,%d,%s)=%s)', [LONG_COD_BARRAS, QuotedStr('0'), QuotedStr(cod)]);
+    ZQ_Productos.Open;
+  end;
+
+  if not (ZQ_Productos.IsEmpty) then
+  begin
+    if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
+    begin
+      Application.MessageBox('El Stock del Producto es Insuficiente.', 'Stock Producto');
+      LimpiarCodigo;
+      exit;
+    end;
+
+    if ((id = 'B') or (id = 'C')) then
+      if ZQ_Productos.RecordCount > 1 then
       begin
-        ZQ_Productos.Close;
-        ZQ_Productos.sql[15]:=Format('and(p.cod_corto=%s)',[QuotedStr(IdProd)]);
-        ZQ_Productos.Open;
-      end;
-
-     if id='I' then
-      begin
-        ZQ_Productos.Close;
-        ZQ_Productos.sql[15]:=Format('and(p.id_producto=%s)',[IdProd]);
-        ZQ_Productos.Open;
-      end;
-
-     //Codigo de Barras
-     if id='B' then
-       begin
-        ZQ_Productos.Close;
-        ZQ_Productos.sql[15]:=Format('and( lpad(p.codigo_barra,%d,%s)=%s)',[LONG_COD_BARRAS,QuotedStr('0'),QuotedStr(cod)]);
-        ZQ_Productos.Open;
-       end;
-
-    if not(ZQ_Productos.IsEmpty) then
-     begin
-        if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
-         begin
-           Application.MessageBox('El Stock del Producto es Insuficiente.', 'Stock Producto');
-           LimpiarCodigo;
-           exit;
-         end;
-
-        if ((id='B') or (id='C')) then
-         if ZQ_Productos.RecordCount>1 then
-          begin
-            Application.MessageBox('El código ingresado corresponde a más de un producto'+char(13)+
-                                    '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Producto Repetido');
-            LimpiarCodigo;
-            exit;
-          end;
-
-        agregar('',ZQ_ProductosID_PRODUCTO.AsInteger);
-     end
-    else
-       begin
-        Application.MessageBox('El producto no pudo ser encontrado.'+char(13)+
-                                  '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Código incorrecto');
+        Application.MessageBox('El código ingresado corresponde a más de un producto' + char(13) +
+          '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Producto Repetido');
         LimpiarCodigo;
         exit;
-       end;
+      end;
+
+    agregar('', ZQ_ProductosID_PRODUCTO.AsInteger);
+  end
+  else
+  begin
+    Application.MessageBox('El producto no pudo ser encontrado.' + char(13) +
+      '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Código incorrecto');
+    LimpiarCodigo;
+    exit;
+  end;
 end;
 
 
 procedure TFCajero.calcularMonto();
 var
-  desc,importe:double;
+  desc, importe: double;
 begin
-  if not(ZQ_Productos.IsEmpty) then
-   begin
-    if (CD_DetalleFacturaCANTIDAD.AsFloat<0) then CD_DetalleFacturaCANTIDAD.AsFloat:=1;
-    if (CD_DetalleFacturaPORC_DESCUENTO.AsFloat<0) then CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=0;
-    desc:=CD_DetalleFacturaPORC_DESCUENTO.AsFloat;
-    CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=CD_DetalleFacturaCANTIDAD.AsFloat*(CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat - (CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat*desc/100) );
-   end
+  if not (ZQ_Productos.IsEmpty) then
+  begin
+    if (CD_DetalleFacturaCANTIDAD.AsFloat < 0) then CD_DetalleFacturaCANTIDAD.AsFloat:= 1;
+    if (CD_DetalleFacturaPORC_DESCUENTO.AsFloat < 0) then CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= 0;
+    desc:= CD_DetalleFacturaPORC_DESCUENTO.AsFloat;
+    CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaCANTIDAD.AsFloat * (CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat - (CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat * desc / 100));
+  end
 end;
 
 
 procedure TFCajero.edCantidadExit(Sender: TObject);
 begin
- if (not(ZQ_Productos.IsEmpty)and(CD_DetalleFactura.State in [dsInsert,dsEdit])) then
+  if (not (ZQ_Productos.IsEmpty) and (CD_DetalleFactura.State in [dsInsert, dsEdit])) then
     calcularMonto();
 end;
 
 
 procedure TFCajero.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
- CanClose:= FPrincipal.cerrar_ventana(abmComprobante);
+  CanClose:= FPrincipal.cerrar_ventana(abmComprobante);
 end;
 
 
 procedure TFCajero.FormCreate(Sender: TObject);
 begin
-  CurrencyDecimals := 2;
-  DecimalSeparator := '.';
-  ThousandSeparator := ',';
-  DateSeparator := '/';
-  ShortDateFormat := 'dd/MM/yyyy';
+  CurrencyDecimals:= 2;
+  DecimalSeparator:= '.';
+  ThousandSeparator:= ',';
+  DateSeparator:= '/';
+  ShortDateFormat:= 'dd/MM/yyyy';
   dm.ZQ_Configuracion.Close;
   dm.ZQ_Configuracion.Open;
-  idSucursal:=dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger;
+  idSucursal:= dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger;
   CD_Comprobante.CreateDataSet;
   CD_DetalleFactura.CreateDataSet;
   CD_Fpago.CreateDataSet;
@@ -889,32 +892,32 @@ begin
   dm.EKModelo.abrir(ZQ_FormasPago);
   dm.EKModelo.abrir(ZQ_Cuentas);
   dm.EKModelo.abrir(ZQ_DetalleProd);
-  Cliente:=-1;
-  IdVendedor:=-1;
-  descCliente:=0;
-  ClienteIVA:=0;
-  IDClienteIVA:=0;
+  Cliente:= -1;
+  IdVendedor:= -1;
+  descCliente:= 0;
+  ClienteIVA:= 0;
+  IDClienteIVA:= 0;
   crearComprobante();
   cargarClientePorDefecto();
-  modoCargaPrevia:=False;
-  DS_Sucursal.DataSet:=dm.ZQ_Sucursal;
-  DBImage1.DataField:='LOGO';
+  modoCargaPrevia:= False;
+  DS_Sucursal.DataSet:= dm.ZQ_Sucursal;
+  DBImage1.DataField:= 'LOGO';
   dm.ZQ_Configuracion_Variables.Open;
-  dm.ZQ_Configuracion_Variables.Locate('CLAVE','cuenta_defecto',[]);
-  ctaPorDefecto:=-1;
-  if not(dm.ZQ_Configuracion_VariablesNUMERO.IsNull) then
-      ctaPorDefecto:=dm.ZQ_Configuracion_VariablesNUMERO.AsInteger;
+  dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'cuenta_defecto', []);
+  ctaPorDefecto:= -1;
+  if not (dm.ZQ_Configuracion_VariablesNUMERO.IsNull) then
+    ctaPorDefecto:= dm.ZQ_Configuracion_VariablesNUMERO.AsInteger;
 
-  dm.ZQ_Configuracion_Variables.Locate('CLAVE','borrarVendedor',[]);
+  dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'borrarVendedor', []);
   borrarVendedor:= dm.ZQ_Configuracion_VariablesTEXTO.AsString = 'SI';
 
   modoLecturaProd();
-  PConfirmarVenta.Visible:=False;
+  PConfirmarVenta.Visible:= False;
   DM.ZQ_Sucursal.Close;
-  DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:=idSucursal;
+  DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:= idSucursal;
   DM.ZQ_Sucursal.Open;
-  edImagen.Visible:=not(ZQ_ProductosIMAGEN.IsNull);
-  DBImage1.Visible:=True;
+  edImagen.Visible:= not (ZQ_ProductosIMAGEN.IsNull);
+  DBImage1.Visible:= True;
   DBImage1.BringToFront;
 
   PanelCambiarFecha.Visible:= false;
@@ -924,19 +927,19 @@ begin
     PanelCambiarFecha.Visible:= true;
     DateTimePicker_FechaCarga.DateTime:= dm.EKModelo.FechayHora;
   end;
- if not(dm.EKUsrLogin.PermisoAccion('NO_FISCAL')) then
+  if not (dm.EKUsrLogin.PermisoAccion('NO_FISCAL')) then
   begin
-     ZQ_FormasPago.Filtered:=False;
-     ZQ_FormasPago.Filter:=Format('IF=%s',[QuotedStr('S')]);
-     ZQ_FormasPago.Filtered:=True;
+    ZQ_FormasPago.Filtered:= False;
+    ZQ_FormasPago.Filter:= Format('IF=%s', [QuotedStr('S')]);
+    ZQ_FormasPago.Filtered:= True;
   end
- else
+  else
   begin
-     ZQ_FormasPago.Filtered:=False;
-     ZQ_FormasPago.Filter:='';
-     ZQ_FormasPago.Filtered:=True;
+    ZQ_FormasPago.Filtered:= False;
+    ZQ_FormasPago.Filter:= '';
+    ZQ_FormasPago.Filtered:= True;
   end;
-  PABM_FormaPago.Visible:=False;
+  PABM_FormaPago.Visible:= False;
   //Formas de Pago
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btFPAceptar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btFPCancelar.Glyph);
@@ -951,95 +954,95 @@ end;
 
 procedure TFCajero.crearComprobante;
 begin
-  punitoriosacob:=0;
-  acumulado:=0;
-  acumuladoIVA:=0;
-  acumuladoProd:=0;
-  acumFpago:=0;
-  acumFpagoReal:=0;
+  punitoriosacob:= 0;
+  acumulado:= 0;
+  acumuladoIVA:= 0;
+  acumuladoProd:= 0;
+  acumFpago:= 0;
+  acumFpagoReal:= 0;
   acumPrecio1:= 0;
-  acumPrecio2:=  0;
-  acumPrecio3:=  0;
-  acumPrecio4:=  0;
-  acumPrecio5:=  0;
-  IdProd:='';
-  totFiscal:=0;
-  RelojStock.Enabled:=false;
-  lblMaxVenta.Visible:=False;
+  acumPrecio2:= 0;
+  acumPrecio3:= 0;
+  acumPrecio4:= 0;
+  acumPrecio5:= 0;
+  IdProd:= '';
+  totFiscal:= 0;
+  RelojStock.Enabled:= false;
+  lblMaxVenta.Visible:= False;
 
-  EKDbSuma1.SumCollection[0].SumValue := 0;
-  EKDbSuma1.SumCollection[1].SumValue := 0;
-  EKDbSuma1.SumCollection[2].SumValue := 0;
-  EKDbSuma1.SumCollection[3].SumValue := 0;
-  EKDbSuma1.SumCollection[4].SumValue := 0;
-  EKDbSuma1.SumCollection[5].SumValue := 0;
-  EKDbSuma1.SumCollection[6].SumValue := 0;
-  EKDbSuma1.SumCollection[7].SumValue := 0;
+  EKDbSuma1.SumCollection[0].SumValue:= 0;
+  EKDbSuma1.SumCollection[1].SumValue:= 0;
+  EKDbSuma1.SumCollection[2].SumValue:= 0;
+  EKDbSuma1.SumCollection[3].SumValue:= 0;
+  EKDbSuma1.SumCollection[4].SumValue:= 0;
+  EKDbSuma1.SumCollection[5].SumValue:= 0;
+  EKDbSuma1.SumCollection[6].SumValue:= 0;
+  EKDbSuma1.SumCollection[7].SumValue:= 0;
 
-  EKDbSuma2.SumCollection[0].SumValue := 0;
-  EKDbSuma2.SumCollection[1].SumValue := 0;
+  EKDbSuma2.SumCollection[0].SumValue:= 0;
+  EKDbSuma2.SumCollection[1].SumValue:= 0;
 
-  Cliente:=-1;
-  IdVendedor:=-1;
-  descCliente:=0;
-  ClienteIVA:=0;
-  IDClienteIVA:=0;
+  Cliente:= -1;
+  IdVendedor:= -1;
+  descCliente:= 0;
+  ClienteIVA:= 0;
+  IDClienteIVA:= 0;
 
   CD_Comprobante.EmptyDataSet;
   CD_Comprobante.Append;
-  CD_ComprobanteID_SUCURSAL.AsInteger:=SUCURSAL_LOGUEO;
-  CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
-  CD_ComprobanteID_TIPO_CPB.AsInteger:=11; //Factura
-  CD_ComprobanteID_VENDEDOR.AsInteger:=IdVendedor;
-  CD_ComprobanteID_COMP_ESTADO.AsInteger:=ESTADO_SIN_CONFIRMAR;
+  CD_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+  CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
+  CD_ComprobanteID_TIPO_CPB.AsInteger:= 11; //Factura
+  CD_ComprobanteID_VENDEDOR.AsInteger:= IdVendedor;
+  CD_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
 
   if CheckBoxCambiarFecha.Checked then
     CD_ComprobanteFECHA.AsDateTime:= DateTimePicker_FechaCarga.DateTime
   else
-    CD_ComprobanteFECHA.AsDateTime:=dm.EKModelo.FechayHora();
+    CD_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora();
 
-  CD_ComprobanteOBSERVACION.AsString:='';
-  CD_ComprobanteBASE_IMPONIBLE.AsFloat:=0;
-  CD_ComprobanteSALDO.AsFloat:=0;
-  CD_ComprobanteIMPORTE_TOTAL.AsFloat:=0;
-  CD_ComprobantePORC_IVA.AsFloat:=ClienteIVA;
-  CD_ComprobanteIMPORTE_IVA.AsInteger:=0;
+  CD_ComprobanteOBSERVACION.AsString:= '';
+  CD_ComprobanteBASE_IMPONIBLE.AsFloat:= 0;
+  CD_ComprobanteSALDO.AsFloat:= 0;
+  CD_ComprobanteIMPORTE_TOTAL.AsFloat:= 0;
+  CD_ComprobantePORC_IVA.AsFloat:= ClienteIVA;
+  CD_ComprobanteIMPORTE_IVA.AsInteger:= 0;
 
-  if descCliente<0 then descCliente:=descCliente*100;
+  if descCliente < 0 then descCliente:= descCliente * 100;
 
-  CD_ComprobantePORC_DESCUENTO.AsFloat:=descCliente/100;
-  CD_ComprobanteIMPORTE_DESCUENTO.AsInteger:=0;
-  CD_ComprobanteENCABEZADO.AsString:='';
-  CD_ComprobantePIE.AsString:='';
+  CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente / 100;
+  CD_ComprobanteIMPORTE_DESCUENTO.AsInteger:= 0;
+  CD_ComprobanteENCABEZADO.AsString:= '';
+  CD_ComprobantePIE.AsString:= '';
   CD_ComprobanteFECHA_COBRADA.Clear;
   CD_ComprobanteFECHA_ENVIADA.Clear;
   CD_ComprobanteFECHA_IMPRESA.Clear;
   CD_ComprobanteFECHA_VENCIMIENTO.Clear;
 
-  lblCantProductos.Caption:='Cantidad Productos/Servicios: '+inttostr(CD_DetalleFactura.RecordCount);
-  lblMontoProds.Caption :='Total Productos/Servicios: '+ FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
-  lblTotAPagar.Caption :='Total Venta: '+ FormatFloat('$ ##,###,##0.00 ', 0);
-  modoCargaPrevia:=False;
+  lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
+  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+  lblTotAPagar.Caption:= 'Total Venta: ' + FormatFloat('$ ##,###,##0.00 ', 0);
+  modoCargaPrevia:= False;
 end;
 
 
 procedure TFCajero.cargarClientePorDefecto();
 begin
   // Cargo Consumidor Final por defecto Id=0
-  ZQ_Personas.Locate('id_persona',0,[]);
-  Cliente:=ZQ_PersonasID_PERSONA.AsInteger;
-  IdClienteIVA:=ZQ_PersonasID_TIPO_IVA.AsInteger;
-  ClienteIVA:=ZQ_PersonasCOEFIVA.AsFloat;
-  CD_ComprobanteID_CLIENTE.AsInteger:=Cliente;
-  CD_ComprobanteID_TIPO_IVA.AsInteger:=IdClienteIVA;
-  CD_ComprobantePORC_IVA.AsFloat:=ClienteIVA;
-  descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat*100;
+  ZQ_Personas.Locate('id_persona', 0, []);
+  Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
+  IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
+  ClienteIVA:= ZQ_PersonasCOEFIVA.AsFloat;
+  CD_ComprobanteID_CLIENTE.AsInteger:= Cliente;
+  CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
+  CD_ComprobantePORC_IVA.AsFloat:= ClienteIVA;
+  descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat * 100;
 end;
 
 
 procedure TFCajero.ZQ_ProductosAfterScroll(DataSet: TDataSet);
 begin
-  edImagen.Visible:=not((ZQ_ProductosIMAGEN.IsNull) or (ZQ_ProductosIMAGEN.AsString=''));
+  edImagen.Visible:= not ((ZQ_ProductosIMAGEN.IsNull) or (ZQ_ProductosIMAGEN.AsString = ''));
   edImagen.BringToFront;
 end;
 
@@ -1053,16 +1056,15 @@ end;
 procedure TFCajero.codBarrasKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if key = 13 then
-   begin
+  begin
     IdentificarCodigo;
 
-   end
-  else
-   if key = 27 then
-    begin
-       VerLectorCB(false);
-       btnCancelarProd.Click;
-    end
+  end
+  else if key = 27 then
+  begin
+    VerLectorCB(false);
+    btnCancelarProd.Click;
+  end
 end;
 
 
@@ -1074,16 +1076,15 @@ end;
 
 procedure TFCajero.FormShow(Sender: TObject);
 begin
-//ANuevoProd.Execute;
+  //ANuevoProd.Execute;
 end;
 
 
 procedure TFCajero.bt_BuscarClienteClick(Sender: TObject);
 begin
-
   if modoCargaPrevia then
   begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
     exit;
   end;
 
@@ -1092,9 +1093,9 @@ begin
     if not Assigned(vsel2) then
       vsel2:= TFBuscarPersona.Create(nil);
 
-    vsel2.configRelacion(RELACION_CLIENTE,True);
+    vsel2.configRelacion(RELACION_CLIENTE, True);
     vsel2.EKBusqueda.Abrir;
-    vsel2.OnSeleccionar := OnSelPers;
+    vsel2.OnSeleccionar:= OnSelPers;
     vsel2.ShowModal;
   end;
 end;
@@ -1102,94 +1103,94 @@ end;
 
 procedure TFCajero.OnSelPers;
 begin
- if not(vsel2.ZQ_Personas.IsEmpty) then
+  if not (vsel2.ZQ_Personas.IsEmpty) then
+  begin
+    ZQ_Personas.Refresh;
+    ZQ_Personas.Locate('id_persona', vsel2.ZQ_PersonasID_PERSONA.AsInteger, []);
+    Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
+    IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
+    descCliente:= 0;
+    if (not ZQ_PersonasDESCUENTO_ESPECIAL.IsNull) or (ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat <> 0) then
+      if (application.MessageBox(pchar('El cliente seleccionado posee un descuento especial del ' + FloatToStr(ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat * 100) + '%.' +
+        #13 + 'Desea aplicar este descuento para todos los productos que se carguen?'), 'Descuento Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
       begin
-      ZQ_Personas.Refresh;
-      ZQ_Personas.Locate('id_persona',vsel2.ZQ_PersonasID_PERSONA.AsInteger,[]);
-      Cliente:=ZQ_PersonasID_PERSONA.AsInteger;
-      IdClienteIVA:=ZQ_PersonasID_TIPO_IVA.AsInteger;
-      descCliente:= 0;
-      if (not ZQ_PersonasDESCUENTO_ESPECIAL.IsNull) or (ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat <> 0) then
-          if (application.MessageBox(pchar('El cliente seleccionado posee un descuento especial del '+FloatToStr(ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat*100)+'%.'+
-              #13+'Desea aplicar este descuento para todos los productos que se carguen?'), 'Descuento Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
-          begin
-            descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat*100;
-          end;
+        descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat * 100;
+      end;
 
-      CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
-      CD_ComprobanteID_TIPO_IVA.AsInteger:=IdClienteIVA;
-      CD_ComprobantePORC_DESCUENTO.AsFloat:=descCliente;
-     end;
-     vsel2.Close;
+    CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
+    CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
+    CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente;
+  end;
+  vsel2.Close;
 end;
 
 
 procedure TFCajero.OnSelVendedor;
 begin
-   if not(vsel3.ZQ_Personas.IsEmpty) then
-      begin
-        ZQ_Personas.Locate('id_persona',vsel3.ZQ_PersonasID_PERSONA.AsInteger,[]);
-        IdVendedor:=vsel3.ZQ_PersonasID_PERSONA.AsInteger;
-        CD_ComprobanteID_VENDEDOR.AsInteger:=IdVendedor;
-      end;
-      vsel3.Close;
+  if not (vsel3.ZQ_Personas.IsEmpty) then
+  begin
+    ZQ_Personas.Locate('id_persona', vsel3.ZQ_PersonasID_PERSONA.AsInteger, []);
+    IdVendedor:= vsel3.ZQ_PersonasID_PERSONA.AsInteger;
+    CD_ComprobanteID_VENDEDOR.AsInteger:= IdVendedor;
+  end;
+  vsel3.Close;
 end;
 
 
-function TFCajero.ProductoYaCargado(id:Integer):Boolean ;
+function TFCajero.ProductoYaCargado(id: Integer): Boolean;
 begin
-    Result:=False;
-// Comentado deja cargar mas de un producto repetido...
-//    CD_DetalleFactura.Filtered := false;
-//    CD_DetalleFactura.Filter:= Format('id_producto = %d ',[id]);
-//    CD_DetalleFactura.Filtered := true;
-//    if not CD_DetalleFactura.IsEmpty then
-//    begin
-//      CD_DetalleFactura.Filtered := false;
-//      Result:=True;
-//      Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
-//      exit;
-//    end;
-//    CD_DetalleFactura.Filtered := false;
+  Result:= False;
+  // Comentado deja cargar mas de un producto repetido...
+  //    CD_DetalleFactura.Filtered := false;
+  //    CD_DetalleFactura.Filter:= Format('id_producto = %d ',[id]);
+  //    CD_DetalleFactura.Filtered := true;
+  //    if not CD_DetalleFactura.IsEmpty then
+  //    begin
+  //      CD_DetalleFactura.Filtered := false;
+  //      Result:=True;
+  //      Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
+  //      exit;
+  //    end;
+  //    CD_DetalleFactura.Filtered := false;
 end;
 
 
 procedure TFCajero.edDescExit(Sender: TObject);
 begin
-if (not(ZQ_Productos.IsEmpty)and(CD_DetalleFactura.State in [dsInsert,dsEdit])) then
+  if (not (ZQ_Productos.IsEmpty) and (CD_DetalleFactura.State in [dsInsert, dsEdit])) then
     calcularMonto();
 end;
 
 
 procedure TFCajero.edImporteExit(Sender: TObject);
 begin
-if edCantidad.Enabled then
-   edCantidad.SetFocus;
+  if edCantidad.Enabled then
+    edCantidad.SetFocus;
 end;
 
 
 procedure TFCajero.BtLeerCBClick(Sender: TObject);
 begin
-//  if PConfirmarVenta.Visible then
-//    exit;
+  //  if PConfirmarVenta.Visible then
+  //    exit;
 
   if modoCargaPrevia then
   begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
     exit;
   end;
 
-  if (CD_DetalleFactura.State<>dsBrowse) then
+  if (CD_DetalleFactura.State <> dsBrowse) then
     exit;
 
-  if cliente<0 then
+  if cliente < 0 then
   begin
     //Application.MessageBox('Debe seleccionar el Cliente.', 'Atención');
     bt_BuscarCliente.Click;
     exit;
   end;
 
-  if IdVendedor<0 then
+  if IdVendedor < 0 then
   begin
     //Application.MessageBox('Debe seleccionar el Vendedor.', 'Atención');
     btVendedorClick(self);
@@ -1200,65 +1201,65 @@ begin
   VerLectorCB(true);
   LimpiarCodigo();
   if codBarras.Enabled then
-     codBarras.SetFocus;
+    codBarras.SetFocus;
 end;
 
 
 procedure TFCajero.BtVendedorClick(Sender: TObject);
 begin
-  if (CD_DetalleFactura.State=dsBrowse) then
+  if (CD_DetalleFactura.State = dsBrowse) then
   begin
     if not Assigned(vsel3) then
       vsel3:= TFBuscarPersona.Create(nil);
 
-    vsel3.configRelacion(RELACION_EMPLEADO,false);
+    vsel3.configRelacion(RELACION_EMPLEADO, false);
     vsel3.EKBusqueda.Abrir;
-    vsel3.OnSeleccionar := OnSelVendedor;
+    vsel3.OnSeleccionar:= OnSelVendedor;
     vsel3.ShowModal;
   end;
 end;
 
 
-function TFCajero.agregar(detalle: string;prod:integer):Boolean;
+function TFCajero.agregar(detalle: string; prod: integer): Boolean;
 var
-i:Integer;
+  i: Integer;
 begin
- Result:=False;
- if not(ProductoYaCargado(prod)) then
+  Result:= False;
+  if not (ProductoYaCargado(prod)) then
+  begin
+    CD_DetalleFactura.Append;
+    CD_DetalleFacturaID_PRODUCTO.AsInteger:= prod;
+    CD_DetalleFacturaproducto.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
+    CD_DetalleFacturaDETALLE.AsString:= detalle;
+    CD_DetalleFacturaCANTIDAD.AsFloat:= 1;
+    CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
+    CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= (ZQ_ProductosCOEF_DESCUENTO.AsFloat * 100);
+    CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
+    CD_DetalleFacturaPORC_IVA.AsFloat:= ZQ_ProductosIMPUESTO_IVA.AsFloat;
+    CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= (CD_DetalleFacturaCANTIDAD.AsInteger * CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
+    CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
+    CD_DetalleFacturaIMPORTE_IVA.AsFloat:= CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
+    CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
+    CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
+
+    // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio=0 toma el PRECIO_VENTA)
+    ZQ_ColsPrecios.Close;
+    ZQ_ColsPrecios.Open;
+    for i:= 1 to 5 do
     begin
-        CD_DetalleFactura.Append;
-        CD_DetalleFacturaID_PRODUCTO.AsInteger:=prod;
-        CD_DetalleFacturaproducto.AsString:=ZQ_ProductosDETALLE_PROD.AsString;
-        CD_DetalleFacturaDETALLE.AsString:=detalle;
-        CD_DetalleFacturaCANTIDAD.AsFloat:=1;
-        CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=ZQ_ProductosPRECIO_VENTA.AsFloat;
-        CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=(ZQ_ProductosCOEF_DESCUENTO.AsFloat*100);
-        CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:=ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
-        CD_DetalleFacturaPORC_IVA.AsFloat:=ZQ_ProductosIMPUESTO_IVA.AsFloat;
-        CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:=(CD_DetalleFacturaCANTIDAD.AsInteger*CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
-        CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
-        CD_DetalleFacturaIMPORTE_IVA.AsFloat:=CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
-        CD_DetalleFacturaID_PROD_STOCK.AsInteger:=ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
-        CD_DetalleFacturaimporte_original.AsFloat:=CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
+      ZQ_ColsPrecios.Filtered:= False;
+      ZQ_ColsPrecios.Filter:= Format('COLUMNA_PRECIO=%d', [i]);
+      ZQ_ColsPrecios.Filtered:= True;
 
-        // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio=0 toma el PRECIO_VENTA)
-        ZQ_ColsPrecios.Close;
-        ZQ_ColsPrecios.Open;
-        for i:=1  to 5 do
-         begin
-            ZQ_ColsPrecios.Filtered:=False;
-            ZQ_ColsPrecios.Filter:=Format('COLUMNA_PRECIO=%d',[i]);
-            ZQ_ColsPrecios.Filtered:=True;
+      if ZQ_ColsPreciosCOLUMNA_PRECIO.AsInteger = i then
+        CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_Productos.FieldByName(Format('PRECIO%d', [i])).AsFloat
+      else
+        CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
+    end;
 
-            if ZQ_ColsPreciosCOLUMNA_PRECIO.AsInteger=i then
-             CD_DetalleFactura.FieldByName(Format('PRECIO%d',[i])).AsFloat:= ZQ_Productos.FieldByName(Format('PRECIO%d',[i])).AsFloat
-            else
-             CD_DetalleFactura.FieldByName(Format('PRECIO%d',[i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
-         end;
-
-        modoEscrituraProd();
-        Result:=True;
-    end
+    modoEscrituraProd();
+    Result:= True;
+  end
 end;
 
 
@@ -1270,120 +1271,118 @@ end;
 
 procedure TFCajero.btnAceptarProdClick(Sender: TObject);
 begin
-   if CD_DetalleFacturaIMPORTE_FINAL.AsFloat<=0 then
-    begin
-       Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
-       if edImporteFinal.Enabled then
-          edImporteFinal.SetFocus;
-       exit;
-    end;
-
- if ((not(ZQ_Productos.IsEmpty))and(CD_DetalleFacturaCANTIDAD.AsFloat>0)) then
-
-  if ((ZQ_ProductosLLEVAR_STOCK.AsString<>'S')or(ZQ_ProductosSTOCK_ACTUAL.AsFloat>=CD_DetalleFacturaCANTIDAD.AsFloat)) then
-   begin
-    CD_DetalleFacturaIMPORTE_VENTA.AsFloat:=CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
-    CD_DetalleFacturaIMPORTE_IVA.AsFloat:=CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
-    CD_DetalleFactura.Post;
-    lblCantProductos.Caption:='Cantidad Productos/Servicios: '+inttostr(CD_DetalleFactura.RecordCount);
-    lblMontoProds.Caption :='Total Productos/Servicios: '+ FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
-    modoLecturaProd();
-    if DBGridListadoProductos.Enabled then
-       DBGridListadoProductos.SetFocus;
-   end
-  else
-   begin
-    Application.MessageBox('El stock actual del producto es insuficiente para la cantidad ingresada.', 'Atención');
-    if edCantidad.Enabled then
-       edCantidad.SetFocus;
+  if CD_DetalleFacturaIMPORTE_FINAL.AsFloat <= 0 then
+  begin
+    Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
+    if edImporteFinal.Enabled then
+      edImporteFinal.SetFocus;
     exit;
-   end;
+  end;
+
+  if ((not (ZQ_Productos.IsEmpty)) and (CD_DetalleFacturaCANTIDAD.AsFloat > 0)) then
+
+    if ((ZQ_ProductosLLEVAR_STOCK.AsString <> 'S') or (ZQ_ProductosSTOCK_ACTUAL.AsFloat >= CD_DetalleFacturaCANTIDAD.AsFloat)) then
+    begin
+      CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
+      CD_DetalleFacturaIMPORTE_IVA.AsFloat:= CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
+      CD_DetalleFactura.Post;
+      lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
+      lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+      modoLecturaProd();
+      if DBGridListadoProductos.Enabled then
+        DBGridListadoProductos.SetFocus;
+    end
+    else
+    begin
+      Application.MessageBox('El stock actual del producto es insuficiente para la cantidad ingresada.', 'Atención');
+      if edCantidad.Enabled then
+        edCantidad.SetFocus;
+      exit;
+    end;
 
 end;
 
 
 procedure TFCajero.btnCancelarProdClick(Sender: TObject);
 begin
-  if (CD_DetalleFactura.State in [dsInsert,dsEdit]) then
+  if (CD_DetalleFactura.State in [dsInsert, dsEdit]) then
     CD_DetalleFactura.Cancel;
   modoLecturaProd();
 
   if DBGridListadoProductos.Enabled then
-     DBGridListadoProductos.SetFocus;
+    DBGridListadoProductos.SetFocus;
 end;
 
 
 procedure TFCajero.modoLecturaProd();
 begin
-   VerLectorCB(false);
-   PProducto.Visible:=False;
-   PanelProductosYFPago.Enabled:=True;
-   PanelDeralles.Enabled:=True;
-   grupoVertical.Enabled:=True;
-   GrupoGuardarCancelar.Enabled:=True;
-   PanelDetalleProducto.Enabled:=False;
-   PanelDetalleProducto.Color:=PanelProductosYFPago.Color;
-   //No trae productos si se cancela
-   edImagen.Visible:=False;
-   ZQ_Productos.Close;
+  VerLectorCB(false);
+  PProducto.Visible:= False;
+  PanelProductosYFPago.Enabled:= True;
+  PanelDeralles.Enabled:= True;
+  grupoVertical.Enabled:= True;
+  GrupoGuardarCancelar.Enabled:= True;
+  PanelDetalleProducto.Enabled:= False;
+  PanelDetalleProducto.Color:= PanelProductosYFPago.Color;
+  //No trae productos si se cancela
+  edImagen.Visible:= False;
+  ZQ_Productos.Close;
 end;
 
 
 procedure TFCajero.modoEscrituraProd();
 begin
-   VerLectorCB(false);
-   PProducto.Visible:=True;
-   PanelDetalleProducto.Enabled:=True;
-   PanelProductosYFPago.Enabled:=False;
-   PanelDeralles.Enabled:=False;
-   grupoVertical.Enabled:=False;
-   GrupoGuardarCancelar.Enabled:=False;
-   PanelDetalleProducto.Color:=$00AFFED5;
-   if edCantidad.Enabled then
-      edCantidad.SetFocus;
+  VerLectorCB(false);
+  PProducto.Visible:= True;
+  PanelDetalleProducto.Enabled:= True;
+  PanelProductosYFPago.Enabled:= False;
+  PanelDeralles.Enabled:= False;
+  grupoVertical.Enabled:= False;
+  GrupoGuardarCancelar.Enabled:= False;
+  PanelDetalleProducto.Color:= $00AFFED5;
+  if edCantidad.Enabled then
+    edCantidad.SetFocus;
 
-   //Permisos para modif el importe directo o dar un descuento
-   edDesc.Enabled:=dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
-   edUnitario.Enabled:=dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
+  //Permisos para modif el importe directo o dar un descuento
+  edDesc.Enabled:= dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
+  edUnitario.Enabled:= dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
 end;
 
 
 procedure TFCajero.btnQuitarPagoClick(Sender: TObject);
 begin
-    if not(CD_Fpago.IsEmpty) then
-       CD_Fpago.Delete;
-    EKDbSuma2.RecalcAll;
-
+  if not (CD_Fpago.IsEmpty) then
+    CD_Fpago.Delete;
+  EKDbSuma2.RecalcAll;
 end;
 
 
 procedure TFCajero.CD_DetalleFacturaAfterScroll(DataSet: TDataSet);
 begin
-lblCantProductos.Caption:='Cantidad Productos/Servicios: '+inttostr(CD_DetalleFactura.RecordCount);
-lblMontoProds.Caption :='Total Productos/Servicios: '+ FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+  lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
+  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
 end;
 
 
 procedure TFCajero.EditarProdClick(Sender: TObject);
 begin
-if modoCargaPrevia then
- begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
+  if modoCargaPrevia then
+  begin
+    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
     exit;
- end;
+  end;
 
-  if not(CD_DetalleFactura.IsEmpty) then
-   begin
-   ZQ_Productos.Close;
-   ZQ_Productos.sql[15]:=Format('and(p.id_producto=%s)',[CD_DetalleFacturaID_PRODUCTO.AsString]);
-   ZQ_Productos.Open;
+  if not (CD_DetalleFactura.IsEmpty) then
+  begin
+    ZQ_Productos.Close;
+    ZQ_Productos.sql[15]:= Format('and(p.id_producto=%s)', [CD_DetalleFacturaID_PRODUCTO.AsString]);
+    ZQ_Productos.Open;
 
-   CD_DetalleFactura.Edit;
-   modoEscrituraProd();
-   if edCantidad.Enabled then
+    CD_DetalleFactura.Edit;
+    modoEscrituraProd();
+    if edCantidad.Enabled then
       edCantidad.SetFocus;
-   end
-
+  end
 end;
 
 
@@ -1391,21 +1390,21 @@ procedure TFCajero.BtBuscarProductoClick(Sender: TObject);
 begin
   if modoCargaPrevia then
   begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
     exit;
   end;
 
-  if (CD_DetalleFactura.State<>dsBrowse) then
+  if (CD_DetalleFactura.State <> dsBrowse) then
     exit;
 
-  if cliente<0 then
+  if cliente < 0 then
   begin
     //Application.MessageBox('Debe seleccionar el Cliente.', 'Atención');
     bt_BuscarCliente.Click;
     exit;
   end;
 
-  if IdVendedor<0 then
+  if IdVendedor < 0 then
   begin
     //Application.MessageBox('Debe seleccionar el Vendedor.', 'Atención');
     btVendedorClick(self);
@@ -1414,27 +1413,27 @@ begin
 
   if not Assigned(vsel) then
     vsel:= TFBuscarProductoStock.Create(nil);
-  vsel.usaCajero:='S';
-  vsel.OnSeleccionar := OnSelProd;
+  vsel.usaCajero:= 'S';
+  vsel.OnSeleccionar:= OnSelProd;
   vsel.ShowModal;
-  vsel.usaCajero:='N';
+  vsel.usaCajero:= 'N';
 end;
 
 
 procedure TFCajero.OnSelProd;
 begin
- if not vsel.ZQ_Stock.IsEmpty then
+  if not vsel.ZQ_Stock.IsEmpty then
   begin
-      if not(ProductoYaCargado(vsel.ZQ_StockID_PRODUCTO.AsInteger)) then
-      begin
-        codBarras.Text:='I'+vsel.ZQ_StockID_PRODUCTO.AsString;
-        //IdentificarCodigo;
-        LeerCodigo('I',codBarras.Text);
-        if edCantidad.Enabled then
-           edCantidad.SetFocus;
-      end;
-      vsel.ZQ_Stock.Filtered:=False;
-      vsel.Close;
+    if not (ProductoYaCargado(vsel.ZQ_StockID_PRODUCTO.AsInteger)) then
+    begin
+      codBarras.Text:= 'I' + vsel.ZQ_StockID_PRODUCTO.AsString;
+      //IdentificarCodigo;
+      LeerCodigo('I', codBarras.Text);
+      if edCantidad.Enabled then
+        edCantidad.SetFocus;
+    end;
+    vsel.ZQ_Stock.Filtered:= False;
+    vsel.Close;
   end;
 end;
 
@@ -1443,44 +1442,45 @@ procedure TFCajero.btIVAClick(Sender: TObject);
 begin
   if modoCargaPrevia then
   begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
     exit;
   end;
 
-  if (CD_DetalleFactura.State=dsBrowse) then
-    if (CD_Comprobante.State=dsInsert) then
+  if (CD_DetalleFactura.State = dsBrowse) then
+    if (CD_Comprobante.State = dsInsert) then
       if EKListadoIVA.Buscar then
-        CD_ComprobanteID_TIPO_IVA.AsInteger:=StrToInt(EKListadoIVA.Resultado);
+        CD_ComprobanteID_TIPO_IVA.AsInteger:= StrToInt(EKListadoIVA.Resultado);
 end;
 
 
 procedure TFCajero.edImporteFinalExit(Sender: TObject);
 begin
-if CD_DetalleFactura.State in [dsInsert,dsEdit] then
-   if edCantidad.Enabled then
+  if CD_DetalleFactura.State in [dsInsert, dsEdit] then
+    if edCantidad.Enabled then
       edCantidad.SetFocus;
 end;
 
 
-procedure TFCajero.edImporteFinalKeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
+procedure TFCajero.edImporteFinalKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-case key of
- 13:begin
-    if (application.MessageBox(pchar('Desea Guardar el Producto?'), 'Venta Producto', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
-      btnAceptarProd.Click;
-    end;
- 27:begin
-    if (application.MessageBox(pchar('Desea Cancelar los cambios en el Producto?'), 'Venta Producto', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
-      btnCancelarProd.Click;
-    end;
-end
+  case key of
+    13:
+      begin
+        if (application.MessageBox(pchar('Desea Guardar el Producto?'), 'Venta Producto', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+          btnAceptarProd.Click;
+      end;
+    27:
+      begin
+        if (application.MessageBox(pchar('Desea Cancelar los cambios en el Producto?'), 'Venta Producto', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+          btnCancelarProd.Click;
+      end;
+  end
 end;
 
 
 procedure TFCajero.BtCancelarPagoClick(Sender: TObject);
 begin
-  if (CD_DetalleFactura.State=dsBrowse) then
+  if (CD_DetalleFactura.State = dsBrowse) then
     if (application.MessageBox(pchar('Desea Cancelar la Boleta Actual y quitar todos sus Productos?'), 'Borrar Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
       cancelarProducto();
 end;
@@ -1488,30 +1488,30 @@ end;
 
 procedure TFCajero.BtAceptarPagoClick(Sender: TObject);
 begin
-  if not(validarFPago()) then
+  if not (validarFPago()) then
     exit;
 
   if validarBoleta() then
   begin
-    PConfirmarVenta.Visible:=True;
+    PConfirmarVenta.Visible:= True;
     PConfirmarVenta.BringToFront;
     dm.centrarPanel(FCajero, PConfirmarVenta);
-    PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
-    GrupoGuardarCancelar.Enabled:=False;
-    grupoVertical.Enabled:=False;
-    CD_ComprobantemontoRecibido.AsFloat:=0;
+    PanelContenedorDerecha.Enabled:= not (PConfirmarVenta.Visible);
+    GrupoGuardarCancelar.Enabled:= False;
+    grupoVertical.Enabled:= False;
+    CD_ComprobantemontoRecibido.AsFloat:= 0;
     recalcularBoleta();
     if edPorcDctoTotal.Enabled then
-       edPorcDctoTotal.SetFocus;
+      edPorcDctoTotal.SetFocus;
   end;
 end;
 
 
 procedure TFCajero.EKDbSuma1SumListChanged(Sender: TObject);
 begin
-  acumulado := EKDbSuma1.SumCollection[0].SumValue;
-  acumuladoProd := EKDbSuma1.SumCollection[7].SumValue;
-  acumuladoIVA := EKDbSuma1.SumCollection[1].SumValue;
+  acumulado:= EKDbSuma1.SumCollection[0].SumValue;
+  acumuladoProd:= EKDbSuma1.SumCollection[7].SumValue;
+  acumuladoIVA:= EKDbSuma1.SumCollection[1].SumValue;
 
   acumPrecio1:= EKDbSuma1.SumCollection[2].SumValue;
   acumPrecio2:= EKDbSuma1.SumCollection[3].SumValue;
@@ -1525,72 +1525,73 @@ begin
   coefPrecio4:= 1;
   coefPrecio5:= 1;
 
-  if acumulado>0 then
+  if acumulado > 0 then
   begin
-    coefPrecio1:= acumPrecio1/acumuladoProd;
-    coefPrecio2:= acumPrecio2/acumuladoProd;
-    coefPrecio3:= acumPrecio3/acumuladoProd;
-    coefPrecio4:= acumPrecio4/acumuladoProd;
-    coefPrecio5:= acumPrecio5/acumuladoProd;
+    coefPrecio1:= acumPrecio1 / acumuladoProd;
+    coefPrecio2:= acumPrecio2 / acumuladoProd;
+    coefPrecio3:= acumPrecio3 / acumuladoProd;
+    coefPrecio4:= acumPrecio4 / acumuladoProd;
+    coefPrecio5:= acumPrecio5 / acumuladoProd;
   end;
 
-  if coefPrecio1<0 then
-     coefPrecio1:= 1;
-  if coefPrecio2<0 then
-     coefPrecio2:= 1;
-  if coefPrecio3<0 then
-     coefPrecio3:= 1;
-  if coefPrecio4<0 then
-     coefPrecio4:= 1;
-  if coefPrecio5<0 then
-     coefPrecio5:= 1;
+  if coefPrecio1 < 0 then
+    coefPrecio1:= 1;
+  if coefPrecio2 < 0 then
+    coefPrecio2:= 1;
+  if coefPrecio3 < 0 then
+    coefPrecio3:= 1;
+  if coefPrecio4 < 0 then
+    coefPrecio4:= 1;
+  if coefPrecio5 < 0 then
+    coefPrecio5:= 1;
 
   //lblTotAPagar.Caption :='Total a Pagar: '+ FormatFloat('$ ##,###,##0.00 ', acumulado);
   //lblTotAPagar.Caption :='Total a Pagar: '+ FormatFloat('$ ##,###,##0.00 ', acumFpagoReal);
 end;
 
 
-function TFCajero.guardarComprobante():Boolean;
+function TFCajero.guardarComprobante(): Boolean;
 var
-comprobante,vendedor : integer;
+  comprobante, vendedor: integer;
 begin
 
-  Result:=False;
+  Result:= False;
   //Hacer las validaciones correspondientes
 
-  if not(dm.EKModelo.verificar_transaccion(abmComprobante)) then
-    if dm.EKModelo.iniciar_transaccion(abmComprobante,[ZQ_Comprobante,ZQ_Comprobante_FormaPago,ZQ_ComprobanteDetalle,ZQ_ComprobPreventa]) then
+  if not (dm.EKModelo.verificar_transaccion(abmComprobante)) then
+    if dm.EKModelo.iniciar_transaccion(abmComprobante, [ZQ_Comprobante, ZQ_Comprobante_FormaPago, ZQ_ComprobanteDetalle, ZQ_ComprobPreventa]) then
     begin
       CD_Comprobante.Post;
 
       ZQ_Comprobante.Append;
-      ZSP_Comprobante.Active:=True;
-      ZQ_ComprobanteID_COMPROBANTE.AsInteger:=ZSP_ComprobanteID.AsInteger;
-      ZQ_ComprobanteCODIGO.AsString:=ZSP_ComprobanteCODIGO.AsString;
-      ZSP_Comprobante.Active:=False;
-      comprobante := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-      ZQ_ComprobanteID_SUCURSAL.Value:=CD_ComprobanteID_SUCURSAL.Value;
+      ZSP_Comprobante.Active:= True;
+      ZQ_ComprobanteID_COMPROBANTE.AsInteger:= ZSP_ComprobanteID.AsInteger;
+      ZQ_ComprobanteCODIGO.AsString:= ZSP_ComprobanteCODIGO.AsString;
+      ZSP_Comprobante.Active:= False;
+      comprobante:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+      ZQ_ComprobanteID_SUCURSAL.Value:= CD_ComprobanteID_SUCURSAL.Value;
       ZQ_ComprobanteID_PROVEEDOR.Clear;
-      ZQ_ComprobanteID_CLIENTE.AsInteger:=CD_ComprobanteID_CLIENTE.AsInteger;
-      ZQ_ComprobanteID_TIPO_CPB.value:=CD_ComprobanteID_TIPO_CPB.Value;
-      ZQ_ComprobanteID_VENDEDOR.Value:=CD_ComprobanteID_VENDEDOR.Value;
-      vendedor:=ZQ_ComprobanteID_VENDEDOR.Value;
-      ZQ_ComprobanteID_COMP_ESTADO.Value:=CD_ComprobanteID_COMP_ESTADO.Value;;
-      ZQ_ComprobanteFECHA.AsDateTime:=CD_ComprobanteFECHA.AsDateTime;
+      ZQ_ComprobanteID_CLIENTE.AsInteger:= CD_ComprobanteID_CLIENTE.AsInteger;
+      ZQ_ComprobanteID_TIPO_CPB.value:= CD_ComprobanteID_TIPO_CPB.Value;
+      ZQ_ComprobanteID_VENDEDOR.Value:= CD_ComprobanteID_VENDEDOR.Value;
+      vendedor:= ZQ_ComprobanteID_VENDEDOR.Value;
+      ZQ_ComprobanteID_COMP_ESTADO.Value:= CD_ComprobanteID_COMP_ESTADO.Value;
+
+      ZQ_ComprobanteFECHA.AsDateTime:= CD_ComprobanteFECHA.AsDateTime;
       ZQ_ComprobanteFECHA_COBRADA.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //antes tenia la del DM.EKMODELO
-      ZQ_ComprobanteOBSERVACION.Value:=CD_ComprobanteOBSERVACION.Value;
-      ZQ_ComprobanteBASE_IMPONIBLE.Value:=CD_ComprobanteBASE_IMPONIBLE.Value;
-      ZQ_ComprobanteSALDO.AsFloat:=CD_ComprobanteSALDO.Value;
-      ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:=CD_ComprobanteIMPORTE_TOTAL.Value;
-      ZQ_ComprobantePORC_IVA.AsFloat:=CD_ComprobantePORC_IVA.Value;
-      ZQ_ComprobanteIMPORTE_IVA.AsFloat:=CD_ComprobanteIMPORTE_IVA.AsFloat;
-      ZQ_ComprobantePORC_DESCUENTO.AsFloat:=CD_ComprobantePORC_DESCUENTO.AsFloat/100;
-      ZQ_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteIMPORTE_DESCUENTO.AsFloat;
-      ZQ_ComprobanteIMPORTE_VENTA.AsFloat := CD_ComprobanteIMPORTE_VENTA.AsFloat;
-      ZQ_ComprobanteIMPORTE_IVA.AsFloat := CD_ComprobanteIMPORTE_IVA.AsFloat;
-      ZQ_ComprobanteENCABEZADO.AsString:=CD_ComprobanteENCABEZADO.AsString;
-      ZQ_ComprobantePIE.AsString:=CD_ComprobantePIE.AsString;
-      ZQ_ComprobanteID_TIPO_IVA.AsInteger:=CD_ComprobanteID_TIPO_IVA.AsInteger;
+      ZQ_ComprobanteOBSERVACION.Value:= CD_ComprobanteOBSERVACION.Value;
+      ZQ_ComprobanteBASE_IMPONIBLE.Value:= CD_ComprobanteBASE_IMPONIBLE.Value;
+      ZQ_ComprobanteSALDO.AsFloat:= CD_ComprobanteSALDO.Value;
+      ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= CD_ComprobanteIMPORTE_TOTAL.Value;
+      ZQ_ComprobantePORC_IVA.AsFloat:= CD_ComprobantePORC_IVA.Value;
+      ZQ_ComprobanteIMPORTE_IVA.AsFloat:= CD_ComprobanteIMPORTE_IVA.AsFloat;
+      ZQ_ComprobantePORC_DESCUENTO.AsFloat:= CD_ComprobantePORC_DESCUENTO.AsFloat / 100;
+      ZQ_ComprobanteIMPORTE_DESCUENTO.AsFloat:= CD_ComprobanteIMPORTE_DESCUENTO.AsFloat;
+      ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= CD_ComprobanteIMPORTE_VENTA.AsFloat;
+      ZQ_ComprobanteIMPORTE_IVA.AsFloat:= CD_ComprobanteIMPORTE_IVA.AsFloat;
+      ZQ_ComprobanteENCABEZADO.AsString:= CD_ComprobanteENCABEZADO.AsString;
+      ZQ_ComprobantePIE.AsString:= CD_ComprobantePIE.AsString;
+      ZQ_ComprobanteID_TIPO_IVA.AsInteger:= CD_ComprobanteID_TIPO_IVA.AsInteger;
       ZQ_ComprobanteFECHA_ENVIADA.Clear;
       ZQ_ComprobanteFECHA_IMPRESA.Clear;
       ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
@@ -1599,154 +1600,154 @@ begin
       if modoCargaPrevia then
       begin
         ZQ_ComprobPreventa.Edit;
-        ZQ_ComprobPreventaFECHA_COBRADA.AsDateTime:=dm.EKModelo.FechayHora();
-        ZQ_ComprobPreventaID_COMP_ESTADO.AsInteger:=ESTADO_CONFIRMADO;
+        ZQ_ComprobPreventaFECHA_COBRADA.AsDateTime:= dm.EKModelo.FechayHora();
+        ZQ_ComprobPreventaID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
       end;
 
       grabarDetallesFactura();
       grabarPagos();
     end;
 
-   try
-     begin
-      if not(dm.EKModelo.finalizar_transaccion(abmComprobante)) then
-       begin
-          dm.EKModelo.cancelar_transaccion(abmComprobante);
-          Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
-          dm.EKModelo.cancelar_transaccion(abmComprobante);
-       end
-      else
-        begin
-          //Application.MessageBox(PChar(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString])),'Atención');
-
-          // Si se guarda ok el comprobante OK y hay formas de pago que van a la fiscal
-          // llamo al proc que imprime en fiscal, sino solo guarda el comprob.
-          if (totFiscal>0) then
-          begin
-           imprimirFiscal(comprobante, 'F');
-          end;
-
-          //ShowMessage(inttostr(comprobante)+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
-
-          CD_Fpago.EmptyDataSet;
-          CD_DetalleFactura.EmptyDataSet;
-          PanelContenedorDerecha.Enabled:=True;
-          if DBGridListadoProductos.Enabled then
-             DBGridListadoProductos.SetFocus;
-          PConfirmarVenta.Visible:=False;
-          GrupoGuardarCancelar.Enabled:=true;
-          grupoVertical.Enabled:=true;
-          LimpiarCodigo();
-          crearComprobante();
-          cargarClientePorDefecto();
-          // Mantengo el vendedor dpes de una venta
-          if not(borrarVendedor) then
-             IdVendedor:=vendedor;
-          CD_ComprobanteID_VENDEDOR.Value:=IdVendedor;
-          Result:=True;
-        end;
-     end
-   except
+  try
     begin
+      if not (dm.EKModelo.finalizar_transaccion(abmComprobante)) then
+      begin
+        dm.EKModelo.cancelar_transaccion(abmComprobante);
         Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
+        dm.EKModelo.cancelar_transaccion(abmComprobante);
+      end
+      else
+      begin
+        //Application.MessageBox(PChar(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString])),'Atención');
+
+        // Si se guarda ok el comprobante OK y hay formas de pago que van a la fiscal
+        // llamo al proc que imprime en fiscal, sino solo guarda el comprob.
+        if (totFiscal > 0) then
+        begin
+          imprimirFiscal(comprobante, 'F');
+        end;
+
+        //ShowMessage(inttostr(comprobante)+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
+
+        CD_Fpago.EmptyDataSet;
+        CD_DetalleFactura.EmptyDataSet;
+        PanelContenedorDerecha.Enabled:= True;
+        if DBGridListadoProductos.Enabled then
+          DBGridListadoProductos.SetFocus;
+        PConfirmarVenta.Visible:= False;
+        GrupoGuardarCancelar.Enabled:= true;
+        grupoVertical.Enabled:= true;
+        LimpiarCodigo();
+        crearComprobante();
+        cargarClientePorDefecto();
+        // Mantengo el vendedor dpes de una venta
+        if not (borrarVendedor) then
+          IdVendedor:= vendedor;
+        CD_ComprobanteID_VENDEDOR.Value:= IdVendedor;
+        Result:= True;
+      end;
+    end
+  except
+    begin
+      Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
     end;
-   end;
+  end;
 end;
 
 
 procedure TFCajero.btnCancelarVentaClick(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(abmComprobante) then
-     dm.EKModelo.cancelar_transaccion(abmComprobante);
+    dm.EKModelo.cancelar_transaccion(abmComprobante);
   CD_Comprobante.Edit;
-  PConfirmarVenta.Visible:=False;
-  PanelContenedorDerecha.Enabled:=not(PConfirmarVenta.Visible);
-  GrupoGuardarCancelar.Enabled:=True;
-  grupoVertical.Enabled:=True;
+  PConfirmarVenta.Visible:= False;
+  PanelContenedorDerecha.Enabled:= not (PConfirmarVenta.Visible);
+  GrupoGuardarCancelar.Enabled:= True;
+  grupoVertical.Enabled:= True;
   if DBGridListadoProductos.Enabled then
-     DBGridListadoProductos.SetFocus;
+    DBGridListadoProductos.SetFocus;
 end;
 
 
 procedure TFCajero.grabarDetallesFactura;
 var
-  redondeo,parcial:Double;
-  i,cant:integer;
+  redondeo, parcial: Double;
+  i, cant: integer;
 begin
-    Prorrateo();
-    ProrrateoFiscal();
-    parcial:=0;
-    i:=1;
-    cant:=CD_DetalleFactura.RecordCount;
+  Prorrateo();
+  ProrrateoFiscal();
+  parcial:= 0;
+  i:= 1;
+  cant:= CD_DetalleFactura.RecordCount;
 
-    CD_DetalleFactura.First;
-    while not CD_DetalleFactura.Eof do
-      begin
-        ZQ_ComprobanteDetalle.Open;
-        ZQ_ComprobanteDetalle.Append;
-        ZQ_ComprobanteDetalleID_COMPROBANTE.AsInteger := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-        ZQ_ComprobanteDetalleID_PRODUCTO.AsInteger:=CD_DetalleFacturaID_PRODUCTO.AsInteger;
-        ZQ_ComprobanteDetalleDETALLE.AsString:=CD_DetalleFacturaDETALLE.AsString;
-        ZQ_ComprobanteDetalleCANTIDAD.AsInteger := CD_DetalleFacturaCANTIDAD.AsInteger;
-        ZQ_ComprobanteDetalleIMPORTE_FINAL.AsFloat:=CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
-        ZQ_ComprobanteDetallePORC_DESCUENTO.AsFloat:=CD_DetalleFacturaPORC_DESCUENTO.AsFloat;
-        ZQ_ComprobanteDetalleBASE_IMPONIBLE.AsFloat := CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
-        ZQ_ComprobanteDetalleIMPORTE_UNITARIO.AsFloat:=CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
-        ZQ_ComprobanteDetalleIMPUESTO_INTERNO.AsFloat:=CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat;
-        ZQ_ComprobanteDetallePORC_IVA.AsFloat := CD_DetalleFacturaPORC_IVA.AsFloat;
-        ZQ_ComprobanteDetalleIMPORTE_IVA.AsFloat:= CD_DetalleFacturaIMPORTE_IVA.AsFloat;
-        ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
-        ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_IF.AsFloat;
+  CD_DetalleFactura.First;
+  while not CD_DetalleFactura.Eof do
+  begin
+    ZQ_ComprobanteDetalle.Open;
+    ZQ_ComprobanteDetalle.Append;
+    ZQ_ComprobanteDetalleID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_ComprobanteDetalleID_PRODUCTO.AsInteger:= CD_DetalleFacturaID_PRODUCTO.AsInteger;
+    ZQ_ComprobanteDetalleDETALLE.AsString:= CD_DetalleFacturaDETALLE.AsString;
+    ZQ_ComprobanteDetalleCANTIDAD.AsInteger:= CD_DetalleFacturaCANTIDAD.AsInteger;
+    ZQ_ComprobanteDetalleIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
+    ZQ_ComprobanteDetallePORC_DESCUENTO.AsFloat:= CD_DetalleFacturaPORC_DESCUENTO.AsFloat;
+    ZQ_ComprobanteDetalleBASE_IMPONIBLE.AsFloat:= CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
+    ZQ_ComprobanteDetalleIMPORTE_UNITARIO.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
+    ZQ_ComprobanteDetalleIMPUESTO_INTERNO.AsFloat:= CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat;
+    ZQ_ComprobanteDetallePORC_IVA.AsFloat:= CD_DetalleFacturaPORC_IVA.AsFloat;
+    ZQ_ComprobanteDetalleIMPORTE_IVA.AsFloat:= CD_DetalleFacturaIMPORTE_IVA.AsFloat;
+    ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
+    ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_IF.AsFloat;
 
-        ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat / (1 + ZQ_ComprobantePORC_IVA.AsFloat);
+    ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat / (1 + ZQ_ComprobantePORC_IVA.AsFloat);
 
-        ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:=RoundTo(ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat,-2);
+    ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= RoundTo(ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat, -2);
 
-        ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:=RoundTo(ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat * ZQ_ComprobantePORC_IVA.AsFloat,-2);
+    ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:= RoundTo(ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat * ZQ_ComprobantePORC_IVA.AsFloat, -2);
 
 
-        parcial:=parcial+ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat;
+    parcial:= parcial + ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat;
 
-        //Si es el ultimo...
-        if (i=cant) then
-         begin
-            ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:=ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat+(totFiscal-(parcial*(1+ZQ_ComprobantePORC_IVA.AsFloat)));
-         end;
+    //Si es el ultimo...
+    if (i = cant) then
+    begin
+      ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat + (totFiscal - (parcial * (1 + ZQ_ComprobantePORC_IVA.AsFloat)));
+    end;
 
-        ZQ_ComprobanteDetalleID_STOCK_PRODUCTO.AsInteger:=CD_DetalleFacturaID_PROD_STOCK.AsInteger;
-        ZQ_ComprobanteDetalle.Post;
-        inc(i);
-        CD_DetalleFactura.Next;
-      end;
+    ZQ_ComprobanteDetalleID_STOCK_PRODUCTO.AsInteger:= CD_DetalleFacturaID_PROD_STOCK.AsInteger;
+    ZQ_ComprobanteDetalle.Post;
+    inc(i);
+    CD_DetalleFactura.Next;
+  end;
 end;
 
 
 procedure TFCajero.edPorcDctoTotalExit(Sender: TObject);
 begin
-    recalcularBoleta();
-    if edRecibido.Enabled then
-       edRecibido.SetFocus;
+  recalcularBoleta();
+  if edRecibido.Enabled then
+    edRecibido.SetFocus;
 end;
 
 
 procedure TFCajero.recalcularBoleta;
 begin
 
-  CD_ComprobanteIMPORTE_TOTAL.AsFloat:=acumFpagoReal;
-  CD_ComprobanteIMPORTE_DESCUENTO.AsFloat:=CD_ComprobanteIMPORTE_TOTAL.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100;
+  CD_ComprobanteIMPORTE_TOTAL.AsFloat:= acumFpagoReal;
+  CD_ComprobanteIMPORTE_DESCUENTO.AsFloat:= CD_ComprobanteIMPORTE_TOTAL.AsFloat * CD_ComprobantePORC_DESCUENTO.AsFloat / 100;
 
-  CD_ComprobanteSALDO.AsFloat:=0;
-  CD_ComprobanteIMPORTE_VENTA.AsFloat := CD_ComprobanteIMPORTE_TOTAL.AsFloat-CD_ComprobanteIMPORTE_DESCUENTO.AsFloat;
-  CD_ComprobanteIMPORTE_IVA.AsFloat:=CD_ComprobanteIMPORTE_VENTA.AsFloat*CD_ComprobantePORC_IVA.AsFloat;
+  CD_ComprobanteSALDO.AsFloat:= 0;
+  CD_ComprobanteIMPORTE_VENTA.AsFloat:= CD_ComprobanteIMPORTE_TOTAL.AsFloat - CD_ComprobanteIMPORTE_DESCUENTO.AsFloat;
+  CD_ComprobanteIMPORTE_IVA.AsFloat:= CD_ComprobanteIMPORTE_VENTA.AsFloat * CD_ComprobantePORC_IVA.AsFloat;
   lblVtaTotal.Caption:= FormatFloat('$ ##,###,##0.00 ', CD_ComprobanteIMPORTE_VENTA.AsFloat);
   lblVtaIVA.Caption:= FormatFloat('$ ##,###,##0.00 ', CD_ComprobanteIMPORTE_IVA.AsFloat);
-  lblVtaDesc.Caption:= FormatFloat('$ ##,###,##0.00 ',CD_ComprobanteIMPORTE_DESCUENTO.AsFloat);
-  lblVtaSubtotal.Caption:= FormatFloat('$ ##,###,##0.00 ', CD_ComprobanteIMPORTE_TOTAL.AsFloat-CD_ComprobanteIMPORTE_IVA.AsFloat);
+  lblVtaDesc.Caption:= FormatFloat('$ ##,###,##0.00 ', CD_ComprobanteIMPORTE_DESCUENTO.AsFloat);
+  lblVtaSubtotal.Caption:= FormatFloat('$ ##,###,##0.00 ', CD_ComprobanteIMPORTE_TOTAL.AsFloat - CD_ComprobanteIMPORTE_IVA.AsFloat);
 
   CD_VentaFinal.EmptyDataSet;
   CD_Fpago.First;
 
-  EKDbSuma3.SumCollection[1].SumValue:=0;
+  EKDbSuma3.SumCollection[1].SumValue:= 0;
 
   //Agrupo las formas de Pago iguales
   sacarRepetidosFP();
@@ -1755,7 +1756,7 @@ begin
 
   EKDbSuma3.RecalcAll;
   calcularEfectivo();
-  importeVenta:=CD_ComprobanteIMPORTE_VENTA.AsFloat;
+  importeVenta:= CD_ComprobanteIMPORTE_VENTA.AsFloat;
 end;
 
 
@@ -1767,51 +1768,51 @@ end;
 
 function TFCajero.validarBoleta: Boolean;
 begin
-    //asas
-    Result:=True;
+  //asas
+  Result:= True;
 
-  if (acumulado<=0) then
+  if (acumulado <= 0) then
   begin
-    Application.MessageBox('El monto final debe ser superior a $ 0.00, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    result := false;
+    Application.MessageBox('El monto final debe ser superior a $ 0.00, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
     exit;
   end;
 
-  if (cliente < 0)  then
+  if (cliente < 0) then
   begin
-    Application.MessageBox('Debe seleccionar un Cliente, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    result := false;
+    Application.MessageBox('Debe seleccionar un Cliente, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
     exit;
   end;
 
-  if (IdVendedor < 0)  then
+  if (IdVendedor < 0) then
   begin
-    Application.MessageBox('Debe seleccionar un Vendedor, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    result := false;
+    Application.MessageBox('Debe seleccionar un Vendedor, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
     exit;
-   end;
+  end;
 
   if CD_DetalleFactura.IsEmpty then
-   begin
-    Application.MessageBox('Debe cargar al menos un Producto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    result := false;
+  begin
+    Application.MessageBox('Debe cargar al menos un Producto, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
     exit;
-   end;
+  end;
 
   if CD_ComprobanteID_TIPO_IVA.IsNull then
-   begin
-    Application.MessageBox('Debe cargar el tipo de IVA, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    result := false;
+  begin
+    Application.MessageBox('Debe cargar el tipo de IVA, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
     exit;
-   end;
+  end;
 
 
-  if ((ZQ_TipoIVAVERIFICA_CUIT.AsString='S')and(not EsCUITValido(CD_Comprobantepers_cuit.AsString))) then
-   begin
-    Application.MessageBox('El CUIT/CUIL del cliente seleccionado es incorrecto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    result := false;
+  if ((ZQ_TipoIVAVERIFICA_CUIT.AsString = 'S') and (not EsCUITValido(CD_Comprobantepers_cuit.AsString))) then
+  begin
+    Application.MessageBox('El CUIT/CUIL del cliente seleccionado es incorrecto, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
     exit;
-   end;
+  end;
 end;
 
 
@@ -1819,40 +1820,39 @@ procedure TFCajero.btPreventaClick(Sender: TObject);
 begin
   if modoCargaPrevia then
   begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
     exit;
   end;
 
-  if not(CD_DetalleFactura.IsEmpty) then
+  if not (CD_DetalleFactura.IsEmpty) then
   begin
-    Application.MessageBox('Debe cargar la Venta en un Comprobante vacio.'+
-                  char(13)+'(Borre los productos previamente cargados).','Carga de PreVenta ',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('Debe cargar la Venta en un Comprobante vacio.' +
+      char(13) + '(Borre los productos previamente cargados).', 'Carga de PreVenta ', MB_OK + MB_ICONINFORMATION);
     exit;
   end;
 
   if not Assigned(vsel4) then
     vsel4:= TFPreventa.Create(nil);
-  vsel4.OnSeleccionar := OnSelPreventa;
+  vsel4.OnSeleccionar:= OnSelPreventa;
   vsel4.ShowModal;
 end;
 
 
 procedure TFCajero.OnSelPreventa;
 begin
- if not vsel4.ZQ_Comprobante.IsEmpty then
+  if not vsel4.ZQ_Comprobante.IsEmpty then
   begin
-  if vsel4.ZQ_ComprobanteVENCIDA.AsString='S' then
-  begin
-    Application.MessageBox('No puede cargar una venta Vencida.','Carga Venta',MB_OK+MB_ICONINFORMATION);
-    exit;
-   end
-  else
-    if (CD_DetalleFactura.IsEmpty) then
-      begin
-        cargarPreventa();
-        if DBGridFormaPago.Enabled then
-           DBGridFormaPago.SetFocus;
-      end;
+    if vsel4.ZQ_ComprobanteVENCIDA.AsString = 'S' then
+    begin
+      Application.MessageBox('No puede cargar una venta Vencida.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+      exit;
+    end
+    else if (CD_DetalleFactura.IsEmpty) then
+    begin
+      cargarPreventa();
+      if DBGridFormaPago.Enabled then
+        DBGridFormaPago.SetFocus;
+    end;
   end;
   vsel4.Close;
 end;
@@ -1860,17 +1860,17 @@ end;
 
 procedure TFCajero.btQuitarProductoClick(Sender: TObject);
 begin
-if modoCargaPrevia then
- begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
+  if modoCargaPrevia then
+  begin
+    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
     exit;
- end;
+  end;
 
-if not(CD_DetalleFactura.IsEmpty) then
+  if not (CD_DetalleFactura.IsEmpty) then
   begin
     CD_DetalleFactura.Delete;
-    lblCantProductos.Caption:='Cantidad Productos/Servicios: '+inttostr(CD_DetalleFactura.RecordCount);
-    lblMontoProds.Caption :='Total Productos/Servicios: '+ FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+    lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
+    lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
   end;
 end;
 
@@ -1890,61 +1890,61 @@ end;
 
 function TFCajero.validarFPago: Boolean;
 begin
-  Result:=True;
+  Result:= True;
 
-  if (acumulado<=0) then
+  if (acumulado <= 0) then
   begin
-    Application.MessageBox('El monto final debe ser superior a $0,00, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    result := false;
+    Application.MessageBox('El monto final debe ser superior a $0,00, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
     exit;
   end;
 
   if (acumFpago <= 0) or (CompareValue(acumulado, acumFpago, 0.001) <> 0) then
   begin
-    Application.MessageBox('El monto en las Formas de Pago es incorrecto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-    result := false;
+    Application.MessageBox('El monto en las Formas de Pago es incorrecto, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
     exit;
   end;
 
   //Saco las formas de pago que sean con importe=0 o sale si no tiene cuenta(al cuete)
   CD_Fpago.First;
-  while not(CD_Fpago.Eof) do
-   begin
-     if CD_Fpago_importeVenta.AsFloat<=0 then
+  while not (CD_Fpago.Eof) do
+  begin
+    if CD_Fpago_importeVenta.AsFloat <= 0 then
       CD_Fpago.Delete;
-     if (CD_FpagoID_TIPO_FORMAPAG.IsNull or CD_FpagoCUENTA_INGRESO.IsNull) then
-       begin
-        Application.MessageBox('El Tipo de Pago y/o Cuenta en las Formas de Pago es incorrecto, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-        result := false;
-        exit;
-      end;
+    if (CD_FpagoID_TIPO_FORMAPAG.IsNull or CD_FpagoCUENTA_INGRESO.IsNull) then
+    begin
+      Application.MessageBox('El Tipo de Pago y/o Cuenta en las Formas de Pago es incorrecto, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+      result:= false;
+      exit;
+    end;
 
-     CD_Fpago.Next;
-   end;
+    CD_Fpago.Next;
+  end;
 end;
 
 
 procedure TFCajero.RecalcularMontoPago();
 begin
-  acumFpago := EKDbSuma2.SumCollection[0].SumValue;
+  acumFpago:= EKDbSuma2.SumCollection[0].SumValue;
 
-  acumFpagoReal :=EKDbSuma2.SumCollection[1].SumValue;
-  lblTotAPagar.Caption :='Total a Pagar: '+ FormatFloat('$ ##,###,##0.00 ', acumFpagoReal);
+  acumFpagoReal:= EKDbSuma2.SumCollection[1].SumValue;
+  lblTotAPagar.Caption:= 'Total a Pagar: ' + FormatFloat('$ ##,###,##0.00 ', acumFpagoReal);
 
-  
-  if (CD_Comprobante.state=dsInsert) then
-    CD_ComprobanteBASE_IMPONIBLE.AsFloat:=acumFpago;
 
-  if acumFpagoReal>MONTO_MAX_VENTA then
-     begin
-       lblTotAPagar.Color:=clRed;
-       lblMaxVenta.Visible:=true;
-     end
+  if (CD_Comprobante.state = dsInsert) then
+    CD_ComprobanteBASE_IMPONIBLE.AsFloat:= acumFpago;
+
+  if acumFpagoReal > MONTO_MAX_VENTA then
+  begin
+    lblTotAPagar.Color:= clRed;
+    lblMaxVenta.Visible:= true;
+  end
   else
-    begin
-    lblTotAPagar.Color:=$00C10000;
-    lblMaxVenta.Visible:=false;
-    end
+  begin
+    lblTotAPagar.Color:= $00C10000;
+    lblMaxVenta.Visible:= false;
+  end
 end;
 
 
@@ -1958,14 +1958,14 @@ begin
     ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
     ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger:= CD_FpagoID_TIPO_FORMAPAG.AsInteger;
     if CD_FpagoMDCP_FECHA.IsNull then
-       ZQ_Comprobante_FormaPagoMDCP_FECHA.Clear
+      ZQ_Comprobante_FormaPagoMDCP_FECHA.Clear
     else
-       ZQ_Comprobante_FormaPagoMDCP_FECHA.AsDateTime:= CD_FpagoMDCP_FECHA.AsDateTime;
+      ZQ_Comprobante_FormaPagoMDCP_FECHA.AsDateTime:= CD_FpagoMDCP_FECHA.AsDateTime;
     ZQ_Comprobante_FormaPagoMDCP_BANCO.AsString:= CD_FpagoMDCP_BANCO.AsString;
     ZQ_Comprobante_FormaPagoMDCP_CHEQUE.AsString:= CD_FpagoMDCP_CHEQUE.AsString;
-    ZQ_Comprobante_FormaPagoIMPORTE.AsFloat:= CD_FpagoIMPORTE.AsFloat-(CD_FpagoIMPORTE.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100);
+    ZQ_Comprobante_FormaPagoIMPORTE.AsFloat:= CD_FpagoIMPORTE.AsFloat - (CD_FpagoIMPORTE.AsFloat * CD_ComprobantePORC_DESCUENTO.AsFloat / 100);
     ZQ_Comprobante_FormaPagoCUENTA_INGRESO.AsInteger:= CD_FpagoCUENTA_INGRESO.AsInteger;
-    ZQ_Comprobante_FormaPagoIMPORTE_REAL.AsFloat:= CD_Fpago_importeVenta.AsFloat-(CD_Fpago_importeVenta.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100);
+    ZQ_Comprobante_FormaPagoIMPORTE_REAL.AsFloat:= CD_Fpago_importeVenta.AsFloat - (CD_Fpago_importeVenta.AsFloat * CD_ComprobantePORC_DESCUENTO.AsFloat / 100);
     ZQ_Comprobante_FormaPago.Post;
     CD_Fpago.Next;
   end;
@@ -1974,150 +1974,157 @@ end;
 
 procedure TFCajero.calcularFP();
 var
-  precio:Double;
+  precio: Double;
 begin
-if not(CD_DetalleFactura.IsEmpty) then
- if CD_Fpago.State in [dsInsert,dsEdit] then
-  begin
-
-    //Si es una sola forma de pago le pongo el valor del total por defecto
-    if ((acumulado > 0) and ((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat = 0)))
-       and not(CD_FpagoID_TIPO_FORMAPAG.IsNull and CD_FpagoCUENTA_INGRESO.IsNull) then
+  if not (CD_DetalleFactura.IsEmpty) then
+    if CD_Fpago.State in [dsInsert, dsEdit] then
     begin
-      CD_FpagoIMPORTE.AsFloat:=acumulado - acumFpago;
-    end;
 
-    if not(CD_Fpago_nroPrecio.IsNull) then
-    begin
-      case CD_Fpago_nroPrecio.AsInteger of
-      0:begin
-          precio:=CD_FpagoIMPORTE.AsFloat;
-        end;
-      1:begin
-          precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio1;
-        end;
-      2:begin
-          precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio2;
-        end;
-      3:begin
-          precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio3;
-        end;
-      4:begin
-          precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio4;
-        end;
-      5:begin
-          precio:=CD_FpagoIMPORTE.AsFloat * coefPrecio5;
-        end;
+      //Si es una sola forma de pago le pongo el valor del total por defecto
+      if ((acumulado > 0) and ((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat = 0)))
+        and not (CD_FpagoID_TIPO_FORMAPAG.IsNull and CD_FpagoCUENTA_INGRESO.IsNull) then
+      begin
+        CD_FpagoIMPORTE.AsFloat:= acumulado - acumFpago;
       end;
 
-      CD_Fpago_importeVenta.AsFloat:= precio + (precio *  CD_Fpago_desc_rec.AsFloat);
-    end;
+      if not (CD_Fpago_nroPrecio.IsNull) then
+      begin
+        case CD_Fpago_nroPrecio.AsInteger of
+          0:
+            begin
+              precio:= CD_FpagoIMPORTE.AsFloat;
+            end;
+          1:
+            begin
+              precio:= CD_FpagoIMPORTE.AsFloat * coefPrecio1;
+            end;
+          2:
+            begin
+              precio:= CD_FpagoIMPORTE.AsFloat * coefPrecio2;
+            end;
+          3:
+            begin
+              precio:= CD_FpagoIMPORTE.AsFloat * coefPrecio3;
+            end;
+          4:
+            begin
+              precio:= CD_FpagoIMPORTE.AsFloat * coefPrecio4;
+            end;
+          5:
+            begin
+              precio:= CD_FpagoIMPORTE.AsFloat * coefPrecio5;
+            end;
+        end;
 
-    RecalcularMontoPago();
- end;
+        CD_Fpago_importeVenta.AsFloat:= precio + (precio * CD_Fpago_desc_rec.AsFloat);
+      end;
+
+      RecalcularMontoPago();
+    end;
 end;
 
 
 //cuando se cambia la forma de pago con la flecha del loockup seteo si es va la fiscal o no
+
 function TFCajero.calcularSaldoCtaCorr(): Double;
 var
-acum:Double;
+  acum: Double;
 begin
-    acum:=0;
-    CD_Fpago.First;
-      while not CD_Fpago.Eof do
-      begin
-       if (CD_Fpago_esCtaCorr.AsString='S') then
-        acum:=acum+CD_Fpago_importeVenta.AsFloat;
-       CD_Fpago.Next;
-      end;
-    Result:=acum;
+  acum:= 0;
+  CD_Fpago.First;
+  while not CD_Fpago.Eof do
+  begin
+    if (CD_Fpago_esCtaCorr.AsString = 'S') then
+      acum:= acum + CD_Fpago_importeVenta.AsFloat;
+    CD_Fpago.Next;
+  end;
+  Result:= acum;
 end;
 
 
 procedure TFCajero.Prorrateo();
 var
-totalProds,totalFP,coefic,acum:Double;
-cant,i:Integer;
+  totalProds, totalFP, coefic, acum: Double;
+  cant, i: Integer;
 begin
   //Can Productos
-   cant:=CD_DetalleFactura.RecordCount;
-   totalProds:=acumulado;
-   totalFP:=importeVenta;
-   acum:=0;
-   coefic:= (totalFP/totalProds);
+  cant:= CD_DetalleFactura.RecordCount;
+  totalProds:= acumulado;
+  totalFP:= importeVenta;
+  acum:= 0;
+  coefic:= (totalFP / totalProds);
 
-   if (totalFP>0) then
+  if (totalFP > 0) then
+  begin
+    CD_DetalleFactura.First;
+    i:= 1;
+    while not (CD_DetalleFactura.Eof) do
     begin
-      CD_DetalleFactura.First;
-       i:=1;
-       while not(CD_DetalleFactura.Eof) do
-       begin
-          CD_DetalleFactura.Edit;
-          //Si es el último
-          if (i=cant) then
-              begin
-                CD_DetalleFacturaIMPORTE_VENTA.AsFloat := totalFP - acum;
-              end
-          else
-              CD_DetalleFacturaIMPORTE_VENTA.AsFloat := CD_DetalleFacturaIMPORTE_FINAL.AsFloat * coefic;
+      CD_DetalleFactura.Edit;
+      //Si es el último
+      if (i = cant) then
+      begin
+        CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= totalFP - acum;
+      end
+      else
+        CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_FINAL.AsFloat * coefic;
 
-          acum:= acum+CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
-          CD_DetalleFactura.Post;
-          CD_DetalleFactura.Next;
-          i:=i+1;
-       end;
-    end
+      acum:= acum + CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
+      CD_DetalleFactura.Post;
+      CD_DetalleFactura.Next;
+      i:= i + 1;
+    end;
+  end
 end;
 
 
 procedure TFCajero.ProrrateoFiscal();
 var
-totalProds,totalFP,coefic,acum:Double;
-cant,i:Integer;
+  totalProds, totalFP, coefic, acum: Double;
+  cant, i: Integer;
 begin
   //Can Productos
-   cant:=CD_DetalleFactura.RecordCount;
-   totalProds:=acumulado;
-   totalFP:=0;
-   acum:=0;
+  cant:= CD_DetalleFactura.RecordCount;
+  totalProds:= acumulado;
+  totalFP:= 0;
+  acum:= 0;
 
-  totFiscal:=0;
+  totFiscal:= 0;
 
   CD_VentaFinal.First;
-  while not(CD_VentaFinal.Eof) do
-   begin
-      //ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
-      if (CD_VentaFinalfiscal.AsString='S') then
-       totalFP:=totalFP + CD_VentaFinalimporteDescuento.AsFloat;
-      CD_VentaFinal.Next;
-   end;
+  while not (CD_VentaFinal.Eof) do
+  begin
+    //ZQ_FormasPago.Locate('id_tipo_formapago',CD_FpagoID_TIPO_FORMAPAG.AsInteger,[]);
+    if (CD_VentaFinalfiscal.AsString = 'S') then
+      totalFP:= totalFP + CD_VentaFinalimporteDescuento.AsFloat;
+    CD_VentaFinal.Next;
+  end;
 
-   totFiscal:=totalFP;
+  totFiscal:= totalFP;
 
-   coefic:= (totalFP/totalProds);
+  coefic:= (totalFP / totalProds);
 
-   if (totalFP>0) then
+  if (totalFP > 0) then
+  begin
+    CD_DetalleFactura.First;
+    i:= 1;
+    while not (CD_DetalleFactura.Eof) do
     begin
-      CD_DetalleFactura.First;
-       i:=1;
-       while not(CD_DetalleFactura.Eof) do
-       begin
-          CD_DetalleFactura.Edit;
-          //Si es el último
-          if (i=cant) then
-              begin
-                CD_DetalleFacturaIMPORTE_IF.AsFloat := totalFP - acum;
-              end
-          else
-              CD_DetalleFacturaIMPORTE_IF.AsFloat := CD_DetalleFacturaIMPORTE_VENTA.AsFloat * coefic;
+      CD_DetalleFactura.Edit;
+      //Si es el último
+      if (i = cant) then
+      begin
+        CD_DetalleFacturaIMPORTE_IF.AsFloat:= totalFP - acum;
+      end
+      else
+        CD_DetalleFacturaIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat * coefic;
 
-          acum:= acum+CD_DetalleFacturaIMPORTE_IF.AsFloat;
-          CD_DetalleFactura.Post;
-          CD_DetalleFactura.Next;
-          i:=i+1;
-       end;
-    end
+      acum:= acum + CD_DetalleFacturaIMPORTE_IF.AsFloat;
+      CD_DetalleFactura.Post;
+      CD_DetalleFactura.Next;
+      i:= i + 1;
+    end;
+  end
 end;
 
 
@@ -2125,19 +2132,19 @@ procedure TFCajero.btBuscProdClick(Sender: TObject);
 begin
   if modoCargaPrevia then
   begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.','Carga Venta',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
     exit;
   end;
 
-  if (CD_DetalleFactura.State<>dsBrowse) then exit;
-    if cliente<0 then
-    begin
-      //Application.MessageBox('Debe seleccionar el Cliente.', 'Atención');
-      bt_BuscarCliente.Click;
-      exit;
-    end;
+  if (CD_DetalleFactura.State <> dsBrowse) then exit;
+  if cliente < 0 then
+  begin
+    //Application.MessageBox('Debe seleccionar el Cliente.', 'Atención');
+    bt_BuscarCliente.Click;
+    exit;
+  end;
 
-  if IdVendedor<0 then
+  if IdVendedor < 0 then
   begin
     //Application.MessageBox('Debe seleccionar el Vendedor.', 'Atención');
     btVendedorClick(self);
@@ -2145,10 +2152,10 @@ begin
   end;
 
   if EKListadoProducto.Buscar then
-    if (EKListadoProducto.Resultado<>'') then
+    if (EKListadoProducto.Resultado <> '') then
     begin
-      codBarras.Text:='I'+EKListadoProducto.Resultado;
-      LeerCodigo('I',codBarras.Text);
+      codBarras.Text:= 'I' + EKListadoProducto.Resultado;
+      LeerCodigo('I', codBarras.Text);
       //IdentificarCodigo;
     end
 end;
@@ -2156,84 +2163,85 @@ end;
 
 procedure TFCajero.cargarPreventa;
 var
-i:Integer;
+  i: Integer;
 begin
- ZQ_PreventaProductos.Close;
- ZQ_PreventaProductos.ParamByName('comprob').AsInteger:=vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
- ZQ_PreventaProductos.Open;
+  ZQ_PreventaProductos.Close;
+  ZQ_PreventaProductos.ParamByName('comprob').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+  ZQ_PreventaProductos.Open;
 
- if not(ZQ_PreventaProductos.IsEmpty) then
+  if not (ZQ_PreventaProductos.IsEmpty) then
   begin
-     CD_DetalleFactura.EmptyDataSet;
-     while not(ZQ_PreventaProductos.Eof) do
+    CD_DetalleFactura.EmptyDataSet;
+    while not (ZQ_PreventaProductos.Eof) do
+    begin
+
+      ZQ_Productos.Close;
+      ZQ_Productos.sql[15]:= Format('and(p.id_producto=%s)', [ZQ_PreventaProductosID_PRODUCTO.AsString]);
+      ZQ_Productos.Open;
+
+      CD_DetalleFactura.Append;
+      CD_DetalleFacturaID_PRODUCTO.AsInteger:= ZQ_PreventaProductosID_PRODUCTO.AsInteger;
+      CD_DetalleFacturaproducto.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
+      CD_DetalleFacturaDETALLE.AsString:= ZQ_PreventaProductosDETALLE.AsString;
+      CD_DetalleFacturaCANTIDAD.AsFloat:= ZQ_PreventaProductosCANTIDAD.AsFloat;
+      CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= ZQ_PreventaProductosIMPORTE_UNITARIO.AsFloat;
+      CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= ZQ_PreventaProductosPORC_DESCUENTO.AsFloat;
+      CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_PreventaProductosIMPUESTO_INTERNO.AsFloat;
+      CD_DetalleFacturaPORC_IVA.AsFloat:= ZQ_PreventaProductosPORC_IVA.AsFloat;
+      CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= ZQ_PreventaProductosBASE_IMPONIBLE.AsFloat;
+      CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= ZQ_PreventaProductosIMPORTE_FINAL.AsFloat;
+      CD_DetalleFacturaIMPORTE_IVA.AsFloat:= ZQ_PreventaProductosIMPORTE_IVA.AsFloat;
+      CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_PreventaProductosID_STOCK_PRODUCTO.AsInteger;
+      CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= ZQ_PreventaProductosIMPORTE_VENTA.AsFloat;
+      CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_PreventaProductosID_STOCK_PRODUCTO.AsInteger;
+
+
+      // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio)
+      ZQ_ColsPrecios.Close;
+      ZQ_ColsPrecios.Open;
+      for i:= 1 to 5 do
       begin
+        ZQ_ColsPrecios.Filtered:= False;
+        ZQ_ColsPrecios.Filter:= Format('COLUMNA_PRECIO=%d', [i]);
+        ZQ_ColsPrecios.Filtered:= True;
 
-        ZQ_Productos.Close;
-        ZQ_Productos.sql[15]:=Format('and(p.id_producto=%s)',[ZQ_PreventaProductosID_PRODUCTO.AsString]);
-        ZQ_Productos.Open;
-
-        CD_DetalleFactura.Append;
-        CD_DetalleFacturaID_PRODUCTO.AsInteger:=ZQ_PreventaProductosID_PRODUCTO.AsInteger;
-        CD_DetalleFacturaproducto.AsString:=ZQ_ProductosDETALLE_PROD.AsString;
-        CD_DetalleFacturaDETALLE.AsString:=ZQ_PreventaProductosDETALLE.AsString;
-        CD_DetalleFacturaCANTIDAD.AsFloat:=ZQ_PreventaProductosCANTIDAD.AsFloat;
-        CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:=ZQ_PreventaProductosIMPORTE_UNITARIO.AsFloat;
-        CD_DetalleFacturaPORC_DESCUENTO.AsFloat:=ZQ_PreventaProductosPORC_DESCUENTO.AsFloat;
-        CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:=ZQ_PreventaProductosIMPUESTO_INTERNO.AsFloat;
-        CD_DetalleFacturaPORC_IVA.AsFloat:=ZQ_PreventaProductosPORC_IVA.AsFloat;
-        CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:=ZQ_PreventaProductosBASE_IMPONIBLE.AsFloat;
-        CD_DetalleFacturaIMPORTE_FINAL.AsFloat:=ZQ_PreventaProductosIMPORTE_FINAL.AsFloat;
-        CD_DetalleFacturaIMPORTE_IVA.AsFloat:=ZQ_PreventaProductosIMPORTE_IVA.AsFloat;
-        CD_DetalleFacturaID_PROD_STOCK.AsInteger:=ZQ_PreventaProductosID_STOCK_PRODUCTO.AsInteger;
-        CD_DetalleFacturaIMPORTE_VENTA.AsFloat:=ZQ_PreventaProductosIMPORTE_VENTA.AsFloat;
-        CD_DetalleFacturaID_PROD_STOCK.AsInteger:=ZQ_PreventaProductosID_STOCK_PRODUCTO.AsInteger;
-
-
-         // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio)
-        ZQ_ColsPrecios.Close;
-        ZQ_ColsPrecios.Open;
-        for i:=1  to 5 do
-         begin
-            ZQ_ColsPrecios.Filtered:=False;
-            ZQ_ColsPrecios.Filter:=Format('COLUMNA_PRECIO=%d',[i]);
-            ZQ_ColsPrecios.Filtered:=True;
-
-            if ZQ_ColsPreciosCOLUMNA_PRECIO.AsInteger=i then
-             CD_DetalleFactura.FieldByName(Format('PRECIO%d',[i])).AsFloat:= ZQ_Productos.FieldByName(Format('PRECIO%d',[i])).AsFloat
-            else
-             CD_DetalleFactura.FieldByName(Format('PRECIO%d',[i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
-         end;
-
-
-        CD_DetalleFacturaimporte_original.AsFloat:=ZQ_ProductosPRECIO_VENTA.AsFloat;
-
-        CD_DetalleFactura.Post;
-
-        ZQ_PreventaProductos.Next;
+        if ZQ_ColsPreciosCOLUMNA_PRECIO.AsInteger = i then
+          CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_Productos.FieldByName(Format('PRECIO%d', [i])).AsFloat
+        else
+          CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
       end;
 
-      //Cargo el mismo Cliente y detalles del comprobante
-      ZQ_Personas.Locate('id_persona',vsel4.ZQ_ComprobanteID_CLIENTE.AsInteger,[]);
-      Cliente:=ZQ_PersonasID_PERSONA.AsInteger;
-      IdClienteIVA:=ZQ_PersonasID_TIPO_IVA.AsInteger;
-      descCliente:= vsel4.ZQ_ComprobantePORC_DESCUENTO.AsFloat*100;;
-      CD_ComprobanteID_CLIENTE.AsInteger:=cliente;
-      CD_ComprobanteID_TIPO_IVA.AsInteger:=IdClienteIVA;
-      CD_ComprobantePORC_DESCUENTO.AsFloat:=descCliente;
-      CD_ComprobanteOBSERVACION.AsString:=Format('Venta de Mostrador, comprobante Nro:%s',[vsel4.ZQ_ComprobanteCODIGO.AsString]);
-      CD_ComprobanteID_TIPO_IVA.AsInteger:=vsel4.ZQ_ComprobanteID_TIPO_IVA.AsInteger;
 
-      CD_ComprobanteID_VENDEDOR.AsInteger:=vsel4.ZQ_ComprobanteID_VENDEDOR.AsInteger;
-      IdVendedor:=CD_ComprobanteID_VENDEDOR.AsInteger;
+      CD_DetalleFacturaimporte_original.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
 
-      ZQ_ComprobPreventa.Close;
-      ZQ_ComprobPreventa.ParamByName('id').AsInteger:=vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-      ZQ_ComprobPreventa.Open;
+      CD_DetalleFactura.Post;
 
-      lblCantProductos.Caption:='Cantidad Productos/Servicios: '+inttostr(CD_DetalleFactura.RecordCount);
-      lblMontoProds.Caption :='Total Productos/Servicios: '+ FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
-      //Permite que no se modifique la venta
-      modoCargaPrevia:=True;
+      ZQ_PreventaProductos.Next;
+    end;
+
+    //Cargo el mismo Cliente y detalles del comprobante
+    ZQ_Personas.Locate('id_persona', vsel4.ZQ_ComprobanteID_CLIENTE.AsInteger, []);
+    Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
+    IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
+    descCliente:= vsel4.ZQ_ComprobantePORC_DESCUENTO.AsFloat * 100;
+    ;
+    CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
+    CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
+    CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente;
+    CD_ComprobanteOBSERVACION.AsString:= Format('Venta de Mostrador, comprobante Nro:%s', [vsel4.ZQ_ComprobanteCODIGO.AsString]);
+    CD_ComprobanteID_TIPO_IVA.AsInteger:= vsel4.ZQ_ComprobanteID_TIPO_IVA.AsInteger;
+
+    CD_ComprobanteID_VENDEDOR.AsInteger:= vsel4.ZQ_ComprobanteID_VENDEDOR.AsInteger;
+    IdVendedor:= CD_ComprobanteID_VENDEDOR.AsInteger;
+
+    ZQ_ComprobPreventa.Close;
+    ZQ_ComprobPreventa.ParamByName('id').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_ComprobPreventa.Open;
+
+    lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
+    lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+    //Permite que no se modifique la venta
+    modoCargaPrevia:= True;
   end
 end;
 
@@ -2246,15 +2254,15 @@ end;
 
 procedure TFCajero.calcularEfectivo();
 begin
-  acumEfectivo:=0;
+  acumEfectivo:= 0;
   CD_VentaFinal.First;
-  while not(CD_VentaFinal.Eof) do
+  while not (CD_VentaFinal.Eof) do
   begin
-      if (CD_VentaFinalgenera_vuelto.AsString='S') then
-          acumEfectivo:=acumEfectivo+CD_VentaFinalimporteDescuento.AsFloat;
-      CD_VentaFinal.Next;
+    if (CD_VentaFinalgenera_vuelto.AsString = 'S') then
+      acumEfectivo:= acumEfectivo + CD_VentaFinalimporteDescuento.AsFloat;
+    CD_VentaFinal.Next;
   end;
-  lblCambio.Caption:= FormatFloat('$ ##,###,##0.00 ',CD_ComprobantemontoRecibido.AsFloat-acumEfectivo);
+  lblCambio.Caption:= FormatFloat('$ ##,###,##0.00 ', CD_ComprobantemontoRecibido.AsFloat - acumEfectivo);
 end;
 
 
@@ -2263,18 +2271,18 @@ begin
   dm.EKModelo.abrir(ZQ_FormasPago);
   dm.EKModelo.abrir(ZQ_DetalleProd);
   dm.EKModelo.abrir(ZQ_Cuentas);
-  Cliente:=-1;
-  IdVendedor:=-1;
-  descCliente:=0;
-  ClienteIVA:=0;
-  IDClienteIVA:=0;
+  Cliente:= -1;
+  IdVendedor:= -1;
+  descCliente:= 0;
+  ClienteIVA:= 0;
+  IDClienteIVA:= 0;
   CD_DetalleFactura.EmptyDataSet;
   CD_Fpago.EmptyDataSet;
   crearComprobante();
-  lblCantProductos.Caption:='Cantidad Productos/Servicios: '+inttostr(CD_DetalleFactura.RecordCount);
-  lblMontoProds.Caption :='Total Productos/Servicios: '+ FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+  lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
+  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
   cargarClientePorDefecto();
-  modoCargaPrevia:=False;
+  modoCargaPrevia:= False;
   modoLecturaProd();
   RecalcularMontoPago();
 end;
@@ -2286,7 +2294,7 @@ begin
   if CheckBoxCambiarFecha.Checked then
     CD_ComprobanteFECHA.AsDateTime:= DateTimePicker_FechaCarga.DateTime
   else
-    CD_ComprobanteFECHA.AsDateTime:=dm.EKModelo.FechayHora();
+    CD_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora();
 end;
 
 
@@ -2296,7 +2304,7 @@ begin
   if CheckBoxCambiarFecha.Checked then
     CD_ComprobanteFECHA.AsDateTime:= DateTimePicker_FechaCarga.DateTime
   else
-    CD_ComprobanteFECHA.AsDateTime:=dm.EKModelo.FechayHora();
+    CD_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora();
 end;
 
 
@@ -2365,27 +2373,28 @@ end;
 
 procedure TFCajero.ANuevaFormaPagoExecute(Sender: TObject);
 begin
-  if not(btnFormaPago.Enabled) then
-  exit;
+  if not (btnFormaPago.Enabled) then
+    exit;
+
   if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
     exit;
 
-  if (CD_Comprobante.State in [dsInsert,dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
-    begin
+  if (CD_Comprobante.State in [dsInsert, dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
+  begin
     dm.centrarPanel(FCajero, PABM_FormaPago);
-    PABM_FormaPago.Top:=FCajero.Height-300;
-    PABM_FormaPago.Visible:=true;
-    PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
+    PABM_FormaPago.Top:= FCajero.Height - 300;
+    PABM_FormaPago.Visible:= true;
+    PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
     PABM_FormaPago.BringToFront;
-    grupoVertical.Enabled:=false;
-    GrupoGuardarCancelar.Enabled:=false;
+    grupoVertical.Enabled:= false;
+    GrupoGuardarCancelar.Enabled:= false;
     CD_Fpago.Append;
     edCodCuenta.SetFocus;
     edImporte.SetFocus;
     edCodCuenta.SetFocus;
-    ZQ_Cuentas.Locate('ID_CUENTA',ctaPorDefecto,[]);
-    CD_FpagoCUENTA_INGRESO.AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-    end
+    ZQ_Cuentas.Locate('ID_CUENTA', ctaPorDefecto, []);
+    CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+  end
 end;
 
 
@@ -2396,256 +2405,294 @@ begin
 end;
 
 
-function TFCajero.imprimirFiscal(comprob:Integer; tipoAccion: string): Boolean;
+function TFCajero.imprimirFiscal(comprob: Integer; tipoAccion: string): Boolean;
 begin
   Result:= True;
   leerSistemaIni;
 
   if tipoAccion = 'F' then
-    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l '+IntToStr(comprob)+' -i '+Impresora+' -c '+tipoAccion), nil, SW_SHOWNORMAL)
+    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l ' + IntToStr(comprob) + ' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL)
   else
-    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -i '+Impresora+' -c '+tipoAccion), nil, SW_SHOWNORMAL);
+    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL);
 
 
-//  if (acumulado<=0) then
-//  begin
-//    Application.MessageBox('El monto final debe ser superior a $0,00, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-//    result := false;
-//    exit;
-//  end;
+  //  if (acumulado<=0) then
+  //  begin
+  //    Application.MessageBox('El monto final debe ser superior a $0,00, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+  //    result := false;
+  //    exit;
+  //  end;
 end;
 
 
 procedure TFCajero.btCierreZClick(Sender: TObject);
 begin
-if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
+  if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
   begin
-     if (application.MessageBox(pchar('Desea Realizar el Cierre Z en la Impresora Fiscal ?'), 'Cierre Z', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-      imprimirFiscal( 0, 'Z');
+    if (application.MessageBox(pchar('Desea Realizar el Cierre Z en la Impresora Fiscal ?'), 'Cierre Z', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+      imprimirFiscal(0, 'Z');
   end
-else
-  Application.MessageBox('No tiene permisos para realizar esta Acción.','Cierre Z',MB_OK+MB_ICONINFORMATION);
+  else
+    Application.MessageBox('No tiene permisos para realizar esta Acción.', 'Cierre Z', MB_OK + MB_ICONINFORMATION);
 end;
 
 
 procedure TFCajero.BtCierreXClick(Sender: TObject);
 begin
-if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
+  if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
   begin
-  if (application.MessageBox(pchar('Desea Realizar el Cierre X en la Impresora Fiscal ?'), 'Cierre X', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    imprimirFiscal( 0, 'X');
+    if (application.MessageBox(pchar('Desea Realizar el Cierre X en la Impresora Fiscal ?'), 'Cierre X', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+      imprimirFiscal(0, 'X');
   end
   else
-    Application.MessageBox('No tiene permisos para realizar esta Acción.','Cierre X',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('No tiene permisos para realizar esta Acción.', 'Cierre X', MB_OK + MB_ICONINFORMATION);
 end;
 
 
-function TFCajero.completarCodBar(cod: String): String;
+function TFCajero.completarCodBar(cod: string): string;
 begin
-  Result:=StringOfChar('0', LONG_COD_BARRAS-Length(cod))+cod;
+  Result:= StringOfChar('0', LONG_COD_BARRAS - Length(cod)) + cod;
 end;
 
 procedure TFCajero.edCantidadKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-   if not(dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE')) then
+  if not (dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE')) then
   begin
-     edImporteFinalKeyDown(Sender,Key,Shift);
+    edImporteFinalKeyDown(Sender, Key, Shift);
   end
 end;
+
 
 procedure TFCajero.btFPAceptarClick(Sender: TObject);
 begin
-
-if CD_Fpago.State in [dsInsert,dsEdit] then
+  if CD_Fpago.State in [dsInsert, dsEdit] then
   begin
     CD_Fpago.Post;
-    PABM_FormaPago.Visible:=False;
-    PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
-    grupoVertical.Enabled:=true;
-    GrupoGuardarCancelar.Enabled:=true;
+    PABM_FormaPago.Visible:= False;
+    PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
+    grupoVertical.Enabled:= true;
+    GrupoGuardarCancelar.Enabled:= true;
     DBGridFormaPago.SetFocus;
   end
 end;
+
 
 procedure TFCajero.btnFormaPagoClick(Sender: TObject);
 begin
   ANuevaFormaPago.Execute;
 end;
 
+
 procedure TFCajero.CD_FpagoCUENTA_INGRESOChange(Sender: TField);
 begin
-if CD_Fpago.State in [dsInsert,dsEdit] then
+  if CD_Fpago.State in [dsInsert, dsEdit] then
   begin
-   ZQ_FormasPago.Locate('ID_TIPO_FORMAPAGO',ZQ_CuentasMEDIO_DEFECTO.AsInteger,[]);
-   CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
+    ZQ_FormasPago.Locate('ID_TIPO_FORMAPAGO', ZQ_CuentasMEDIO_DEFECTO.AsInteger, []);
+    CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
   end
 end;
 
+
 procedure TFCajero.edCodCuentaExit(Sender: TObject);
 begin
-  if not((CD_Fpago_ctaIngreso.AsString='') or (CD_FpagomedioPago.AsString='')) then
-   begin
-      calcularFP();
-   end
-
+  if not ((CD_Fpago_ctaIngreso.AsString = '') or (CD_FpagomedioPago.AsString = '')) then
+    calcularFP();
 end;
+
 
 procedure TFCajero.menuEditarFPClick(Sender: TObject);
 begin
-   if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
+  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
     exit;
 
-  if (CD_Comprobante.State in [dsInsert,dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
-    begin
+  if (CD_Comprobante.State in [dsInsert, dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
+  begin
     dm.centrarPanel(FCajero, PABM_FormaPago);
-    PABM_FormaPago.Top:=FCajero.Height-300;
-    PABM_FormaPago.Visible:=true;
-    PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
-    grupoVertical.Enabled:=false;
-    GrupoGuardarCancelar.Enabled:=false;
+    PABM_FormaPago.Top:= FCajero.Height - 300;
+    PABM_FormaPago.Visible:= true;
+    PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
+    grupoVertical.Enabled:= false;
+    GrupoGuardarCancelar.Enabled:= false;
     CD_Fpago.Edit;
     edCodCuenta.SetFocus;
     edImporte.SetFocus;
-    end
+  end
 end;
+
 
 procedure TFCajero.menuQuitarFPClick(Sender: TObject);
 begin
   btnQuitarPago.Click;
 end;
 
-procedure TFCajero.sacarRepetidosFP() ;
+
+procedure TFCajero.sacarRepetidosFP();
 begin
-   CD_Fpago.First;
-   while not(CD_Fpago.Eof) do
-   begin
+  CD_Fpago.First;
+  while not (CD_Fpago.Eof) do
+  begin
 
-     CD_VentaFinal.Filtered := false;
-     CD_VentaFinal.Filter:= Format('IdTipoPago=%d and idCta=%d and mdpBanco=%s and mdpNro=%s',
-                                   [CD_FpagoID_TIPO_FORMAPAG.AsInteger,CD_FpagoCUENTA_INGRESO.AsInteger,
-                                    QuotedStr(CD_FpagoMDCP_BANCO.AsString),QuotedStr(CD_FpagoMDCP_CHEQUE.AsString)]);
-     CD_VentaFinal.Filtered := true;
+    CD_VentaFinal.Filtered:= false;
+    CD_VentaFinal.Filter:= Format('IdTipoPago=%d and idCta=%d and mdpBanco=%s and mdpNro=%s',
+      [CD_FpagoID_TIPO_FORMAPAG.AsInteger, CD_FpagoCUENTA_INGRESO.AsInteger,
+      QuotedStr(CD_FpagoMDCP_BANCO.AsString), QuotedStr(CD_FpagoMDCP_CHEQUE.AsString)]);
+    CD_VentaFinal.Filtered:= true;
 
-     if CD_VentaFinal.IsEmpty then
-      begin
-       CD_VentaFinal.Append;
-       CD_VentaFinal_medioPago.AsString:=CD_FpagomedioPago.AsString;
-       CD_VentaFinalimporteVenta.AsFloat:=CD_Fpago_importeVenta.AsFloat;
-       CD_VentaFinalimporteDescuento.AsFloat:=CD_VentaFinalimporteVenta.AsFloat-(CD_VentaFinalimporteVenta.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100);
-       CD_VentaFinalid.AsInteger:=CD_FpagoID_COMPROB_FP.AsInteger;
-       CD_VentaFinalgenera_vuelto.AsString:=CD_Fpago_efectivo.AsString;
-       CD_VentaFinalfiscal.AsString:=CD_Fpago_fiscal.AsString;
+    if CD_VentaFinal.IsEmpty then
+    begin
+      CD_VentaFinal.Append;
+      CD_VentaFinal_medioPago.AsString:= CD_FpagomedioPago.AsString;
+      CD_VentaFinalimporteVenta.AsFloat:= CD_Fpago_importeVenta.AsFloat;
+      CD_VentaFinalimporteDescuento.AsFloat:= CD_VentaFinalimporteVenta.AsFloat - (CD_VentaFinalimporteVenta.AsFloat * CD_ComprobantePORC_DESCUENTO.AsFloat / 100);
+      CD_VentaFinalid.AsInteger:= CD_FpagoID_COMPROB_FP.AsInteger;
+      CD_VentaFinalgenera_vuelto.AsString:= CD_Fpago_efectivo.AsString;
+      CD_VentaFinalfiscal.AsString:= CD_Fpago_fiscal.AsString;
 
-       CD_VentaFinalidTipoPago.AsInteger:=CD_FpagoID_TIPO_FORMAPAG.AsInteger;
-       CD_VentaFinalidCta.AsInteger:=CD_FpagoCUENTA_INGRESO.AsInteger;
-       CD_VentaFinalmdpFecha.AsDateTime:=CD_FpagoMDCP_FECHA.AsDateTime;
-       CD_VentaFinalmdpBanco.AsString:=CD_FpagoMDCP_BANCO.AsString;
-       CD_VentaFinalmdpNro.AsString:=CD_FpagoMDCP_CHEQUE.AsString;
-      end
-     else
-      begin
-        CD_VentaFinal.Locate('id',CD_FpagoID_COMPROB_FP.AsInteger,[]);
-        CD_VentaFinal.Edit;
-        CD_VentaFinalimporteVenta.AsFloat:=CD_VentaFinalimporteVenta.AsFloat+CD_Fpago_importeVenta.AsFloat;
-        CD_VentaFinalimporteDescuento.AsFloat:=CD_VentaFinalimporteVenta.AsFloat-(CD_VentaFinalimporteVenta.AsFloat*CD_ComprobantePORC_DESCUENTO.AsFloat/100);
-      end;
-     CD_VentaFinal.Post;
-     CD_VentaFinal.Filtered:=false;
+      CD_VentaFinalidTipoPago.AsInteger:= CD_FpagoID_TIPO_FORMAPAG.AsInteger;
+      CD_VentaFinalidCta.AsInteger:= CD_FpagoCUENTA_INGRESO.AsInteger;
+      CD_VentaFinalmdpFecha.AsDateTime:= CD_FpagoMDCP_FECHA.AsDateTime;
+      CD_VentaFinalmdpBanco.AsString:= CD_FpagoMDCP_BANCO.AsString;
+      CD_VentaFinalmdpNro.AsString:= CD_FpagoMDCP_CHEQUE.AsString;
+    end
+    else
+    begin
+      CD_VentaFinal.Locate('id', CD_FpagoID_COMPROB_FP.AsInteger, []);
+      CD_VentaFinal.Edit;
+      CD_VentaFinalimporteVenta.AsFloat:= CD_VentaFinalimporteVenta.AsFloat + CD_Fpago_importeVenta.AsFloat;
+      CD_VentaFinalimporteDescuento.AsFloat:= CD_VentaFinalimporteVenta.AsFloat - (CD_VentaFinalimporteVenta.AsFloat * CD_ComprobantePORC_DESCUENTO.AsFloat / 100);
+    end;
+    CD_VentaFinal.Post;
+    CD_VentaFinal.Filtered:= false;
 
-     CD_Fpago.Next;
-   end;
-
+    CD_Fpago.Next;
+  end;
 end;
+
 
 procedure TFCajero.btFPCancelarClick(Sender: TObject);
 begin
-
-if CD_Fpago.State in [dsInsert,dsEdit] then
+  if CD_Fpago.State in [dsInsert, dsEdit] then
   begin
     CD_Fpago.Cancel;
-    PABM_FormaPago.Visible:=False;
-    PanelContenedorDerecha.Enabled:=not(PABM_FormaPago.Visible);
-    grupoVertical.Enabled:=true;
-    GrupoGuardarCancelar.Enabled:=true;
+    PABM_FormaPago.Visible:= False;
+    PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
+    grupoVertical.Enabled:= true;
+    GrupoGuardarCancelar.Enabled:= true;
     DBGridFormaPago.SetFocus;
   end
 end;
 
+
 procedure TFCajero.btnEfectivoClick(Sender: TObject);
 begin
+  //ZQ_FormasPago.Locate('IF;GENERA_VUELTO',VarArrayOf(['N', 'S']),[]);
+  //CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
 
-    //ZQ_FormasPago.Locate('IF;GENERA_VUELTO',VarArrayOf(['N', 'S']),[]);
-    //CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
+  calcularFP();
 
-    calcularFP();
+  CD_Fpago.Post;
 
-    CD_Fpago.Post;
+  recalcularBoleta();
+  BtAceptarPago.Click;
+  btnConfirmarVenta.Click;
 
-    recalcularBoleta();
-    BtAceptarPago.Click;
-    btnConfirmarVenta.Click;
+  //ShowMessage(ZQ_ComprobanteID_COMPROBANTE.AsString+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
 
-    //ShowMessage(ZQ_ComprobanteID_COMPROBANTE.AsString+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
-
-    PVentaDirecta.Visible:=False;
+  PVentaDirecta.Visible:= False;
 end;
+
 
 procedure TFCajero.btnEfectivoFClick(Sender: TObject);
 begin
+  //Genera Vuelto y es FISCAL (Efectivo Fiscal)
+  ZQ_FormasPago.Locate('IF;GENERA_VUELTO', VarArrayOf(['S', 'S']), []);
+  CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
 
-    //Genera Vuelto y es FISCAL (Efectivo Fiscal)
-    ZQ_FormasPago.Locate('IF;GENERA_VUELTO',VarArrayOf(['S', 'S']),[]);
-    CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
+  calcularFP();
 
-    calcularFP();
+  CD_Fpago.Post;
 
-    CD_Fpago.Post;
+  recalcularBoleta();
+  BtAceptarPago.Click;
+  btnConfirmarVenta.Click;
 
-    recalcularBoleta();
-    BtAceptarPago.Click;
-    btnConfirmarVenta.Click;
+  //ShowMessage(ZQ_ComprobanteID_COMPROBANTE.AsString+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
 
-    //ShowMessage(ZQ_ComprobanteID_COMPROBANTE.AsString+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
-
-    PVentaDirecta.Visible:=False;
+  PVentaDirecta.Visible:= False;
 end;
+
 
 procedure TFCajero.btnVentaRapidaClick(Sender: TObject);
 begin
-   AVentaRapida.Execute;
+  if (acumFpago > 0) then
+  begin
+    Application.MessageBox('Venta Ágil: No deben precargarse Formas de Pago.', 'Venta Ágil', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if validarBoleta() then
+  begin
+    PVentaDirecta.Visible:= True;
+    PVentaDirecta.BringToFront;
+    dm.centrarPanel(FCajero, PVentaDirecta);
+    PanelContenedorDerecha.Enabled:= not (PVentaDirecta.Visible);
+    GrupoGuardarCancelar.Enabled:= False;
+    grupoVertical.Enabled:= False;
+
+    CD_Fpago.Append;
+    ZQ_Cuentas.Locate('ID_CUENTA', ctaPorDefecto, []);
+    CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+
+    btnEfectivo.SetFocus;
+  end;
 end;
+
 
 procedure TFCajero.AVentaRapidaExecute(Sender: TObject);
 begin
-if (acumFpago>0) then
- begin
-    Application.MessageBox('Venta Ágil: No deben precargarse Formas de Pago.','Venta Ágil',MB_OK+MB_ICONINFORMATION);
-    exit;
- end;
-
- if validarBoleta() then
-  begin
-   PVentaDirecta.Visible:=True;
-   PVentaDirecta.BringToFront;
-   dm.centrarPanel(FCajero, PVentaDirecta);
-   PanelContenedorDerecha.Enabled:=not(PVentaDirecta.Visible);
-   GrupoGuardarCancelar.Enabled:=False;
-   grupoVertical.Enabled:=False;
-
-   CD_Fpago.Append;
-   ZQ_Cuentas.Locate('ID_CUENTA',ctaPorDefecto,[]);
-   CD_FpagoCUENTA_INGRESO.AsInteger:=ZQ_CuentasID_CUENTA.AsInteger;
-
-   btnEfectivo.SetFocus;
-  end;
+  if btnVentaRapida.Enabled then
+    btnVentaRapida.Click;
 end;
+
 
 procedure TFCajero.BitBtn1Click(Sender: TObject);
 begin
   btnCancelarVenta.Click;
-  PVentaDirecta.Visible:=False;
+  PVentaDirecta.Visible:= False;
   btnQuitarPago.Click;
 end;
 
+
+procedure TFCajero.buscarCuenta(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+  begin
+    if EKListadoCuenta.Buscar then
+    begin
+      if EKListadoCuenta.Resultado <> '' then
+      begin
+        ZQ_Cuentas.Locate('ID_CUENTA', StrToInt(EKListadoCuenta.Resultado), []);
+        CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+      end;
+    end;
+  end;
+end;
+
+
+procedure TFCajero.buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+  begin
+    if EKListadoMedio.Buscar then
+    begin
+      if EKListadoMedio.Resultado <> '' then
+      begin
+        CD_FpagoID_TIPO_FORMAPAG.AsInteger:= StrToInt(EKListadoMedio.Resultado);
+      end;
+    end;
+  end;
+end;
+
 end.
+

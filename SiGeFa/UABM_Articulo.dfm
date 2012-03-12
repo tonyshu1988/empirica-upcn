@@ -1565,6 +1565,7 @@ object FABM_Articulo: TFABM_Articulo
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo Articulo'
@@ -1580,6 +1581,7 @@ object FABM_Articulo: TFABM_Articulo
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -1598,6 +1600,7 @@ object FABM_Articulo: TFABM_Articulo
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1763,6 +1766,7 @@ object FABM_Articulo: TFABM_Articulo
       'WHERE'
       '  MEDIDA_ARTICULO.ID_ARTICULO = :OLD_ID_ARTICULO AND'
       '  MEDIDA_ARTICULO.ID_MEDIDA = :OLD_ID_MEDIDA')
+    UseSequenceFieldForRefreshSQL = False
     Left = 136
     Top = 290
     ParamData = <

@@ -154,15 +154,15 @@ begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Articulo, ZQ_Medidas]) then
   begin
     DBGridMedidas.PopupMenu:= PopupMenuMedida;
-    DBGridArticulo.Enabled := false;
+    DBGridArticulo.Enabled:= false;
     PanelEdicion.Visible:= true;
 
     ZQ_Articulo.Append;
     ZQ_ArticuloBAJA.AsString:= 'N';
 
     DBLookupComboBox1.SetFocus;
-    GrupoEditando.Enabled := false;
-    GrupoGuardarCancelar.Enabled := true;
+    GrupoEditando.Enabled:= false;
+    GrupoGuardarCancelar.Enabled:= true;
   end;
 end;
 
@@ -175,14 +175,14 @@ begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Articulo, ZQ_Medidas]) then
   begin
     DBGridMedidas.PopupMenu:= PopupMenuMedida;
-    DBGridArticulo.Enabled := false;
+    DBGridArticulo.Enabled:= false;
     PanelEdicion.Visible:= true;
 
     ZQ_Articulo.Edit;
 
     DBLookupComboBox1.SetFocus;
-    GrupoEditando.Enabled := false;
-    GrupoGuardarCancelar.Enabled := true;
+    GrupoEditando.Enabled:= false;
+    GrupoGuardarCancelar.Enabled:= true;
   end;
 end;
 
@@ -191,7 +191,7 @@ procedure TFABM_Articulo.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Articulo.IsEmpty) OR (ZQ_ArticuloBAJA.AsString <> 'N') then
+  if (ZQ_Articulo.IsEmpty) or (ZQ_ArticuloBAJA.AsString <> 'N') then
     exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja el "Artículo" seleccionado?'), 'ABM Artículo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -199,7 +199,7 @@ begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Articulo]) then
     begin
       ZQ_Articulo.Edit;
-      ZQ_ArticuloBAJA.AsString:='S';
+      ZQ_ArticuloBAJA.AsString:= 'S';
     end
     else
       exit;
@@ -218,7 +218,7 @@ procedure TFABM_Articulo.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Articulo.IsEmpty) OR (ZQ_ArticuloBAJA.AsString <> 'S') then
+  if (ZQ_Articulo.IsEmpty) or (ZQ_ArticuloBAJA.AsString <> 'S') then
     exit;
 
   if (application.MessageBox(pchar('¿Desea reactivar el "Artículo" seleccionado?'), 'ABM Artículo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -226,7 +226,7 @@ begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Articulo]) then
     begin
       ZQ_Articulo.Edit;
-      ZQ_ArticuloBAJA.AsString:='N';
+      ZQ_ArticuloBAJA.AsString:= 'N';
     end
     else
       exit;
@@ -249,14 +249,14 @@ begin
 
   if (DBLookupComboBox1.Text = '') then
   begin
-    Application.MessageBox(pchar('El campo Tipo Artículo se encuentra vacío, Verifique'), 'Validación', MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox(pchar('El campo Tipo Artículo se encuentra vacío, Verifique'), 'Validación', MB_OK + MB_ICONINFORMATION);
     DBLookupComboBox1.SetFocus;
     Exit;
   end;
 
   if (DBEDescripcion.Text = '') then
   begin
-    Application.MessageBox(pchar('El campo Descripción se encuentra vacío, Verifique'), 'Validación', MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox(pchar('El campo Descripción se encuentra vacío, Verifique'), 'Validación', MB_OK + MB_ICONINFORMATION);
     DBEDescripcion.SetFocus;
     Exit;
   end;
@@ -265,23 +265,23 @@ begin
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       DBGridMedidas.PopupMenu:= nil;
-      DBGridArticulo.Enabled := true;
+      DBGridArticulo.Enabled:= true;
       DBGridArticulo.SetFocus;
-      GrupoEditando.Enabled := true;
-      GrupoGuardarCancelar.Enabled := false;
+      GrupoEditando.Enabled:= true;
+      GrupoGuardarCancelar.Enabled:= false;
       recNo:= ZQ_Articulo.RecNo;
       ZQ_Articulo.Refresh;
       ZQ_Articulo.RecNo:= recNo;
-      PanelEdicion.Visible := false;
+      PanelEdicion.Visible:= false;
     end
   except
     begin
-      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención', MB_OK + MB_ICONINFORMATION);
       exit;
     end
   end;
 
-  dm.mostrarCantidadRegistro(ZQ_Articulo, lblCantidadRegistros);  
+  dm.mostrarCantidadRegistro(ZQ_Articulo, lblCantidadRegistros);
 end;
 
 
@@ -289,12 +289,12 @@ procedure TFABM_Articulo.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
-    DBGridMedidas.PopupMenu:= nil;  
-    DBGridArticulo.Enabled := true;
+    DBGridMedidas.PopupMenu:= nil;
+    DBGridArticulo.Enabled:= true;
     DBGridArticulo.SetFocus;
-    GrupoEditando.Enabled := true;
-    GrupoGuardarCancelar.Enabled := false;
-    PanelEdicion.Visible := false;
+    GrupoEditando.Enabled:= true;
+    GrupoGuardarCancelar.Enabled:= false;
+    PanelEdicion.Visible:= false;
   end;
 end;
 
@@ -323,6 +323,7 @@ begin
     dm.mostrarCantidadRegistro(ZQ_Articulo, lblCantidadRegistros);
 end;
 
+
 procedure TFABM_Articulo.DBLookupComboBox1KeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
@@ -330,7 +331,7 @@ begin
     if EKListadoTipo.Buscar then
     begin
       ZQ_Articulo.Edit;
-      ZQ_ArticuloID_TIPO_ARTICULO.AsInteger := StrToInt(EKListadoTipo.Resultado);
+      ZQ_ArticuloID_TIPO_ARTICULO.AsInteger:= StrToInt(EKListadoTipo.Resultado);
       DBLookupComboBox1.SetFocus;
     end;
 end;
@@ -390,8 +391,8 @@ begin
     exit;
 
   DM.VariablesReportes(RepArticulo);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBusquedaAvanzada1.ParametrosBuscados;
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption:= EKBusquedaAvanzada1.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
 end;
 
@@ -412,12 +413,14 @@ begin
   ZQ_Medidas.Delete;
 end;
 
+
 procedure TFABM_Articulo.DBGridMedidasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridMedidas, Rect, DataCol, Column, State);
 end;
+
 
 procedure TFABM_Articulo.btnExcelClick(Sender: TObject);
 begin
@@ -426,3 +429,4 @@ begin
 end;
 
 end.
+

@@ -7,7 +7,7 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla;
+  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, Menus, EKListadoSQL;
 
 type
   TFABM_Cuentas = class(TForm)
@@ -99,6 +99,12 @@ type
     ZQ_CuentasA_NOTA_CREDITO: TStringField;
     ZQ_CuentasMODIFICABLE: TStringField;
     btnExcel: TdxBarLargeButton;
+    DBGridFPago: TDBGrid;
+    EKOrdenarGrilla_FPago: TEKOrdenarGrilla;
+    EKListadoMedio: TEKListadoSQL;
+    PopupMenu_FPago: TPopupMenu;
+    popUpItem_AgregarMedioCobroPago: TMenuItem;
+    popUpItem_QuitarMedioCobroPago: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -120,8 +126,9 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
-  private
-  public
+    procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
+  Private
+  Public
   end;
 
 var
@@ -139,23 +146,24 @@ procedure TFABM_Cuentas.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
   EKOrdenarGrilla1.GuardarConfigColumnas;
+  EKOrdenarGrilla_FPago.GuardarConfigColumnas;
 end;
 
 
 procedure TFABM_Cuentas.btnSalirClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 
 procedure TFABM_Cuentas.btnModificarClick(Sender: TObject);
 begin
   if ZQ_Cuentas.IsEmpty or (ZQ_CuentasMODIFICABLE.AsString = 'N') then
-      exit;
+    exit;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
   begin
-    DBGridCuentas.Enabled := false;
+    DBGridCuentas.Enabled:= false;
     PanelEdicion.Visible:= true;
 
     ZQ_Cuentas.Edit;
@@ -170,8 +178,10 @@ begin
     end;
 
     DBENombre.SetFocus;
-    GrupoEditando.Enabled := false;
-    GrupoGuardarCancelar.Enabled := true;
+    GrupoEditando.Enabled:= false;
+    GrupoGuardarCancelar.Enabled:= true;
+
+    EKOrdenarGrilla_FPago.PopUpGrilla:= PopupMenu_FPago;
   end;
 end;
 
@@ -180,7 +190,7 @@ procedure TFABM_Cuentas.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Cuentas.IsEmpty) OR (ZQ_CuentasBAJA.AsString <> 'N') or (ZQ_CuentasMODIFICABLE.AsString = 'N') then
+  if (ZQ_Cuentas.IsEmpty) or (ZQ_CuentasBAJA.AsString <> 'N') or (ZQ_CuentasMODIFICABLE.AsString = 'N') then
     exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -188,7 +198,7 @@ begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
     begin
       ZQ_Cuentas.Edit;
-      ZQ_CuentasBAJA.AsString:='S';
+      ZQ_CuentasBAJA.AsString:= 'S';
     end
     else
       exit;
@@ -211,21 +221,21 @@ begin
 
   if (trim(DBECodigo.Text) = '') then
   begin
-    Application.MessageBox('El campo "Código" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El campo "Código" se encuentra vacío, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
     DBECodigo.SetFocus;
     exit;
   end;
 
   if (trim(DBENombre.Text) = '') then
   begin
-    Application.MessageBox('El campo "Nombre" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El campo "Nombre" se encuentra vacío, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
     DBENombre.SetFocus;
     exit;
   end;
 
   if (trim(DBLookupComboBox1.Text) = '') then
   begin
-    Application.MessageBox('El campo "Medio Cobro/Pago" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El campo "Medio Cobro/Pago" se encuentra vacío, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
     DBLookupComboBox1.SetFocus;
     exit;
   end;
@@ -235,33 +245,37 @@ begin
     begin
       DBGridCuentas.Enabled:= true;
       DBGridCuentas.SetFocus;
-      GrupoEditando.Enabled := true;
-      GrupoGuardarCancelar.Enabled := false;
-      PanelEdicion.Visible := false;
+      GrupoEditando.Enabled:= true;
+      GrupoGuardarCancelar.Enabled:= false;
+      PanelEdicion.Visible:= false;
       recNo:= ZQ_Cuentas.RecNo;
       ZQ_Cuentas.Refresh;
       ZQ_Cuentas.RecNo:= recNo;
+
+      EKOrdenarGrilla_FPago.PopUpGrilla:= nil;
     end
   except
     begin
-      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención', MB_OK + MB_ICONINFORMATION);
       exit;
     end
   end;
 
-  dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);  
+  dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
 end;
 
 
 procedure TFABM_Cuentas.btnCancelarClick(Sender: TObject);
 begin
- if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
-    DBGridCuentas.Enabled:=true;
+    DBGridCuentas.Enabled:= true;
     DBGridCuentas.SetFocus;
-    GrupoEditando.Enabled := true;
-    GrupoGuardarCancelar.Enabled := false;
-    PanelEdicion.Visible := false;
+    GrupoEditando.Enabled:= true;
+    GrupoGuardarCancelar.Enabled:= false;
+    PanelEdicion.Visible:= false;
+
+    EKOrdenarGrilla_FPago.PopUpGrilla:= nil;
   end;
 end;
 
@@ -270,7 +284,7 @@ procedure TFABM_Cuentas.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Cuentas.IsEmpty) OR (ZQ_CuentasBAJA.AsString <> 'S') then
+  if (ZQ_Cuentas.IsEmpty) or (ZQ_CuentasBAJA.AsString <> 'S') then
     exit;
 
   if (application.MessageBox(pchar('¿Desea reactivar la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -278,7 +292,7 @@ begin
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
     begin
       ZQ_Cuentas.Edit;
-      ZQ_CuentasBAJA.AsString:='N';
+      ZQ_CuentasBAJA.AsString:= 'N';
     end
     else
       exit;
@@ -304,7 +318,7 @@ procedure TFABM_Cuentas.btnNuevoClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
   begin
-    DBGridCuentas.Enabled := false;
+    DBGridCuentas.Enabled:= false;
     PanelEdicion.Visible:= true;
 
     ZQ_UltimoNro.Close;
@@ -315,15 +329,17 @@ begin
       ZQ_CuentasCODIGO.AsInteger:= 1
     else
       ZQ_CuentasCODIGO.AsInteger:= ZQ_UltimoNroCODIGO.AsInteger + 1;
-      
+
     ZQ_CuentasBAJA.AsString:= 'N';
     ZQ_CuentasMODIFICABLE.AsString:= 'S';
     ZQ_CuentasA_CTA_CORRIENTE.AsString:= 'N';
     ZQ_CuentasA_NOTA_CREDITO.AsString:= 'N';
 
     DBENombre.SetFocus;
-    GrupoEditando.Enabled := false;
-    GrupoGuardarCancelar.Enabled := true;
+    GrupoEditando.Enabled:= false;
+    GrupoGuardarCancelar.Enabled:= true;
+
+    EKOrdenarGrilla_FPago.PopUpGrilla:= PopupMenu_FPago;
   end;
 end;
 
@@ -332,8 +348,7 @@ procedure TFABM_Cuentas.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   EKOrdenarGrilla1.CargarConfigColumnas;
-
-  dm.EKModelo.abrir(ZQ_MedioPago);
+  EKOrdenarGrilla_FPago.CargarConfigColumnas;
 
   EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
@@ -354,6 +369,7 @@ end;
 //----------------------------------
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
+
 procedure TFABM_Cuentas.ANuevoExecute(Sender: TObject);
 begin
   if btnNuevo.Enabled then
@@ -406,8 +422,8 @@ begin
     exit;
 
   DM.VariablesReportes(RepCuentas);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
 end;
 
@@ -417,6 +433,17 @@ begin
     dm.ExportarEXCEL(DBGridCuentas);
 end;
 
-end.
 
+procedure TFABM_Cuentas.ZQ_CuentasAfterScroll(DataSet: TDataSet);
+begin
+  ZQ_MedioPago.Close;
+
+  if ZQ_Cuentas.IsEmpty then
+    exit;
+
+  ZQ_MedioPago.ParamByName('id_cuenta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_MedioPago.open;
+end;
+
+end.
 
