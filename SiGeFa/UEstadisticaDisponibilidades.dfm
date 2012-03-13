@@ -1,6 +1,6 @@
 object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
-  Left = 294
-  Top = 210
+  Left = 236
+  Top = 86
   Width = 1001
   Height = 673
   Caption = 'Estadistica Disponibilidades'
@@ -32,7 +32,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       Top = 1
       Width = 983
       Height = 581
-      ActivePage = TabDetalleCuenta
+      ActivePage = TabParteDiario
       Align = alClient
       TabOrder = 0
       object TabSaldosCuentas: TTabSheet
@@ -1033,7 +1033,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                687.916666666666800000
+                687.916666666666700000
                 5.291666666666667000
                 518.583333333333300000)
               Alignment = taCenter
@@ -1066,7 +1066,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Size.Values = (
                 52.916666666666670000
                 722.312500000000000000
-                68.791666666666680000
+                68.791666666666670000
                 452.437500000000000000)
               Alignment = taCenter
               AlignToBand = False
@@ -1097,7 +1097,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 47.625000000000000000
-                812.270833333333200000
+                812.270833333333300000
                 124.354166666666700000
                 269.875000000000000000)
               Alignment = taCenter
@@ -2366,7 +2366,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 39.687500000000000000
-                74.083333333333320000
+                74.083333333333330000
                 304.270833333333300000
                 529.166666666666700000)
               Alignment = taLeftJustify
@@ -2626,7 +2626,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawRight = False
               Size.Values = (
                 39.687500000000000000
-                965.729166666666800000
+                965.729166666666700000
                 240.770833333333300000
                 354.541666666666700000)
               Alignment = taLeftJustify
@@ -2800,22 +2800,22 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object panel_cerrar: TPanel
           Left = 0
           Top = 0
-          Width = 983
-          Height = 564
+          Width = 975
+          Height = 553
           Align = alClient
           TabOrder = 0
           object panelPD_Resumen: TPanel
             Left = 1
-            Top = 541
-            Width = 981
+            Top = 530
+            Width = 973
             Height = 22
             Align = alBottom
             BorderWidth = 4
             TabOrder = 0
             object lblSaldo_TotalParteDiario: TLabel
-              Left = 809
+              Left = 5
               Top = 5
-              Width = 167
+              Width = 963
               Height = 13
               Align = alTop
               Alignment = taRightJustify
@@ -2831,7 +2831,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object panelPD_InfoBusqueda: TPanel
             Left = 1
             Top = 1
-            Width = 981
+            Width = 973
             Height = 38
             Align = alTop
             BevelOuter = bvNone
@@ -2840,7 +2840,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblSucursal: TLabel
               Left = 4
               Top = 17
-              Width = 71
+              Width = 965
               Height = 13
               Align = alTop
               Caption = 'lblSucursal'
@@ -2854,7 +2854,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblEncabezadoParteDiario: TLabel
               Left = 4
               Top = 4
-              Width = 166
+              Width = 965
               Height = 13
               Align = alTop
               Caption = 'lblEncabezadoParteDiario'
@@ -2869,7 +2869,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Panel8: TPanel
             Left = 1
             Top = 39
-            Width = 981
+            Width = 973
             Height = 247
             Align = alTop
             BevelOuter = bvNone
@@ -2887,7 +2887,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label1: TLabel
                 Left = 0
                 Top = 0
-                Width = 62
+                Width = 349
                 Height = 13
                 Align = alTop
                 Caption = ' RESUMEN'
@@ -2964,7 +2964,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object Label8: TLabel
                   Left = 12
-                  Top = 63
+                  Top = 61
                   Width = 109
                   Height = 14
                   Caption = 'Cta. Cte. Cliente:'
@@ -2977,7 +2977,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object DBText11: TDBText
                   Left = 158
-                  Top = 60
+                  Top = 58
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
@@ -2992,7 +2992,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object DBText19: TDBText
                   Left = 158
-                  Top = 153
+                  Top = 184
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
@@ -3007,7 +3007,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object Label16: TLabel
                   Left = 13
-                  Top = 156
+                  Top = 187
                   Width = 78
                   Height = 14
                   Caption = 'Saldo Final:'
@@ -3020,13 +3020,13 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object Shape1: TShape
                   Left = 5
-                  Top = 151
+                  Top = 180
                   Width = 324
                   Height = 1
                 end
                 object Label2: TLabel
                   Left = 12
-                  Top = 86
+                  Top = 82
                   Width = 51
                   Height = 14
                   Caption = 'Egresos'
@@ -3039,7 +3039,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object DBText1: TDBText
                   Left = 158
-                  Top = 83
+                  Top = 79
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
@@ -3054,7 +3054,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object Label3: TLabel
                   Left = 12
-                  Top = 109
+                  Top = 103
                   Width = 125
                   Height = 14
                   Caption = 'Cta. Cte. Proveedor'
@@ -3067,7 +3067,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object DBText2: TDBText
                   Left = 157
-                  Top = 106
+                  Top = 100
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
@@ -3082,7 +3082,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object Label9: TLabel
                   Left = 12
-                  Top = 132
+                  Top = 124
                   Width = 89
                   Height = 14
                   Caption = 'Nota  Credito:'
@@ -3095,7 +3095,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object DBText3: TDBText
                   Left = 157
-                  Top = 129
+                  Top = 121
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
@@ -3110,10 +3110,10 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object Label10: TLabel
                   Left = 12
-                  Top = 178
-                  Width = 123
+                  Top = 143
+                  Width = 131
                   Height = 14
-                  Caption = 'Transf. entre Ctas.:'
+                  Caption = 'Transf. Extracciones:'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -12
@@ -3123,11 +3123,11 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object DBText4: TDBText
                   Left = 157
-                  Top = 175
+                  Top = 140
                   Width = 165
                   Height = 17
                   Alignment = taRightJustify
-                  DataField = 'TOTAL_TRANSFERENCIA'
+                  DataField = 'TOTAL_EXTRACCIONES'
                   DataSource = DS_estadistica_Parte_Diario
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clBlue
@@ -3144,7 +3144,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object Label13: TLabel
                   Left = 13
-                  Top = 204
+                  Top = 209
                   Width = 133
                   Height = 14
                   Caption = 'Saldo Final - Inicial:'
@@ -3157,7 +3157,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                 end
                 object lblSaldoFinalMenosInicial: TLabel
                   Left = 157
-                  Top = 204
+                  Top = 209
                   Width = 165
                   Height = 14
                   Alignment = taRightJustify
@@ -3170,12 +3170,40 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   Font.Style = [fsBold]
                   ParentFont = False
                 end
+                object Label20: TLabel
+                  Left = 11
+                  Top = 163
+                  Width = 108
+                  Height = 14
+                  Caption = 'Transf. Deposito:'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'Verdana'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object DBText5: TDBText
+                  Left = 156
+                  Top = 160
+                  Width = 165
+                  Height = 17
+                  Alignment = taRightJustify
+                  DataField = 'TOTAL_DEPOSITOS'
+                  DataSource = DS_estadistica_Parte_Diario
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlue
+                  Font.Height = -13
+                  Font.Name = 'Verdana'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                end
               end
             end
             object Panel11: TPanel
               Left = 352
               Top = 3
-              Width = 626
+              Width = 618
               Height = 241
               Align = alClient
               BevelOuter = bvNone
@@ -3183,7 +3211,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Label18: TLabel
                 Left = 0
                 Top = 0
-                Width = 320
+                Width = 618
                 Height = 13
                 Align = alTop
                 Caption = 'INGRESOS Y EGRESOS POR MEDIO DE COBRO/PAGO'
@@ -3197,7 +3225,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object DBGridPD_MediosDePago: TDBGrid
                 Left = 0
                 Top = 13
-                Width = 626
+                Width = 618
                 Height = 187
                 Align = alClient
                 Color = 14606012
@@ -3247,15 +3275,15 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               object Panel12: TPanel
                 Left = 0
                 Top = 200
-                Width = 626
+                Width = 618
                 Height = 41
                 Align = alBottom
                 BevelOuter = bvNone
                 TabOrder = 1
                 object lblPD_totalTransfer: TLabel
-                  Left = 499
+                  Left = 0
                   Top = 26
-                  Width = 127
+                  Width = 618
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3268,9 +3296,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object lblPD_totalEgreso: TLabel
-                  Left = 511
+                  Left = 0
                   Top = 0
-                  Width = 115
+                  Width = 618
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3283,9 +3311,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
                   ParentFont = False
                 end
                 object lblPD_totalIngreso: TLabel
-                  Left = 504
+                  Left = 0
                   Top = 13
-                  Width = 122
+                  Width = 618
                   Height = 13
                   Align = alTop
                   Alignment = taRightJustify
@@ -3303,15 +3331,15 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object Panel9: TPanel
             Left = 1
             Top = 286
-            Width = 981
-            Height = 255
+            Width = 973
+            Height = 244
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 3
             object Label17: TLabel
               Left = 0
               Top = 0
-              Width = 111
+              Width = 973
               Height = 13
               Align = alTop
               Caption = ' SALDOS CUENTAS'
@@ -3325,8 +3353,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object DBGridPD_SaldoCuentas: TDBGrid
               Left = 0
               Top = 13
-              Width = 981
-              Height = 242
+              Width = 973
+              Height = 231
               Align = alClient
               Color = 14606012
               DataSource = DS_SaldoCuenta_PDiario
@@ -6068,7 +6096,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblBalanceTipoComprobante: TLabel
               Left = 4
               Top = 4
-              Width = 967
+              Width = 180
               Height = 13
               Align = alTop
               Caption = 'lblBalanceTipoComprobante'
@@ -6082,7 +6110,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblBalanceFecha: TLabel
               Left = 4
               Top = 17
-              Width = 967
+              Width = 103
               Height = 13
               Align = alTop
               Caption = 'lblBalanceFecha'
@@ -6096,7 +6124,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             object lblBalanceSucursal: TLabel
               Left = 4
               Top = 30
-              Width = 967
+              Width = 121
               Height = 13
               Align = alTop
               Caption = 'lblBalanceSucursal'
@@ -7103,6 +7131,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
     end
     object ZP_estadistica_Parte_DiarioTOTAL_CTA_CTE_PROVEEDOR: TFloatField
       FieldName = 'TOTAL_CTA_CTE_PROVEEDOR'
+      currency = True
+    end
+    object ZP_estadistica_Parte_DiarioTOTAL_DEPOSITOS: TFloatField
+      FieldName = 'TOTAL_DEPOSITOS'
+      ReadOnly = True
+      currency = True
+    end
+    object ZP_estadistica_Parte_DiarioTOTAL_EXTRACCIONES: TFloatField
+      FieldName = 'TOTAL_EXTRACCIONES'
+      ReadOnly = True
       currency = True
     end
   end
