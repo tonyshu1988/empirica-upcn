@@ -396,6 +396,10 @@ type
     ZQ_CuentasA_CTA_CORRIENTE: TStringField;
     ZQ_CuentasA_NOTA_CREDITO: TStringField;
     ZQ_CuentasMODIFICABLE: TStringField;
+    ZP_estadistica_Parte_DiarioTOTAL_DEPOSITOS: TFloatField;
+    ZP_estadistica_Parte_DiarioTOTAL_EXTRACCIONES: TFloatField;
+    Label20: TLabel;
+    DBText5: TDBText;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -637,7 +641,7 @@ begin
       else
       begin
         id_sucursal:= -1;
-        if EKBuscarDetMov.ParametrosSeleccionados1[0] = '0' then
+        if EKBuscarDetMov.ParametrosSeleccionados1[0] <> '0' then
           id_sucursal:= StrToInt(EKBuscarDetMov.ParametrosSeleccionados1[0]);
 
         ZP_Estadistica_Det_Mov.Close;
