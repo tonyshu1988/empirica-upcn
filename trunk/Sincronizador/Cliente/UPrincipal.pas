@@ -1740,13 +1740,12 @@ begin
       ZQ_GrabarUltimoArchivoServerULTIMO_ARCHIVO.AsString:= archivo;
       ZQ_GrabarUltimoArchivoServer.Post;
 
-      CD_ProcesarNovedades.EnableControls;
-
       //finalizo transaccion
       if dm.ModeloEscritura.finalizar_transaccion(transaccion_actualizar_base) then
-        Result:= true
+         Result:= true
       else
         dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
+      CD_ProcesarNovedades.EnableControls;
     end;
   except //si se produce una excepcion en el proceso cancelo el mismo
     begin
