@@ -22,8 +22,8 @@ object FABM_Cuentas: TFABM_Cuentas
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 862
-    Height = 402
+    Width = 854
+    Height = 391
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -140,7 +140,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            836.083333333333400000
+            836.083333333333300000
             124.354166666666700000
             224.895833333333300000)
           Alignment = taCenter
@@ -172,8 +172,8 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            751.416666666666800000
-            68.791666666666680000
+            751.416666666666700000
+            68.791666666666670000
             396.875000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -204,7 +204,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            727.604166666666800000
+            727.604166666666700000
             5.291666666666667000
             444.500000000000000000)
           Alignment = taCenter
@@ -523,7 +523,7 @@ object FABM_Cuentas: TFABM_Cuentas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -573,7 +573,7 @@ object FABM_Cuentas: TFABM_Cuentas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -621,7 +621,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -830,8 +830,8 @@ object FABM_Cuentas: TFABM_Cuentas
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 862
-      Height = 402
+      Width = 854
+      Height = 391
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -845,8 +845,8 @@ object FABM_Cuentas: TFABM_Cuentas
       object DBGridCuentas: TDBGrid
         Left = 5
         Top = 5
-        Width = 532
-        Height = 310
+        Width = 524
+        Height = 299
         Align = alClient
         Color = 14606012
         DataSource = DS_Cuentas
@@ -902,8 +902,8 @@ object FABM_Cuentas: TFABM_Cuentas
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 315
-        Width = 852
+        Top = 304
+        Width = 844
         Height = 82
         Align = alBottom
         BevelOuter = bvNone
@@ -926,9 +926,9 @@ object FABM_Cuentas: TFABM_Cuentas
         object Label2: TLabel
           Left = 486
           Top = 62
-          Width = 86
+          Width = 110
           Height = 13
-          Caption = 'Medio Defecto:'
+          Caption = 'Medio Cobro/Pago:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -1015,7 +1015,7 @@ object FABM_Cuentas: TFABM_Cuentas
           TabOrder = 2
         end
         object DBLookupComboBox1: TDBLookupComboBox
-          Left = 578
+          Left = 599
           Top = 58
           Width = 162
           Height = 21
@@ -1028,10 +1028,10 @@ object FABM_Cuentas: TFABM_Cuentas
         end
       end
       object DBGridFPago: TDBGrid
-        Left = 537
+        Left = 529
         Top = 5
         Width = 320
-        Height = 310
+        Height = 299
         Align = alRight
         Color = 14606012
         DataSource = DS_MedioPago
@@ -1049,7 +1049,7 @@ object FABM_Cuentas: TFABM_Cuentas
             FieldName = 'descripcion'
             Title.Alignment = taCenter
             Title.Caption = 'Forma de Pago Asociada'
-            Width = 168
+            Width = 192
             Visible = True
           end>
       end
@@ -1058,7 +1058,7 @@ object FABM_Cuentas: TFABM_Cuentas
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 862
+    Width = 854
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1080,7 +1080,7 @@ object FABM_Cuentas: TFABM_Cuentas
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 752
+      Left = 744
       Top = 1
       Width = 109
       Height = 17
@@ -1097,7 +1097,7 @@ object FABM_Cuentas: TFABM_Cuentas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1687,7 +1687,7 @@ object FABM_Cuentas: TFABM_Cuentas
     object ZQ_Cuentas_medio: TStringField
       FieldKind = fkLookup
       FieldName = '_medio'
-      LookupDataSet = ZQ_MedioPago
+      LookupDataSet = ZQ_TipoFPago
       LookupKeyFields = 'ID_TIPO_FORMAPAGO'
       LookupResultField = 'DESCRIPCION'
       KeyFields = 'MEDIO_DEFECTO'
@@ -1856,19 +1856,24 @@ object FABM_Cuentas: TFABM_Cuentas
   end
   object ZQ_MedioPago: TZQuery
     Connection = DM.Conexion
-    UpdateObject = ZUpdateZQ_MedioPago
     SQL.Strings = (
-      
-        'select cfp.id_cuenta_tipo_formapago, cfp.id_cuenta, cfp.id_tipo_' +
-        'formapago ,fp.descripcion'
+      'select cfp.*'
       'from cuenta_tipo_formapago cfp'
-      
-        'left join tipo_formapago fp on (cfp.id_tipo_formapago = fp.id_ti' +
-        'po_formapago)'
-      'order by descripcion')
-    Params = <>
+      'where cfp.id_cuenta = :id_cuenta')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
+        ParamType = ptUnknown
+      end>
     Left = 634
     Top = 83
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
+        ParamType = ptUnknown
+      end>
     object ZQ_MedioPagoID_CUENTA_TIPO_FORMAPAGO: TIntegerField
       FieldName = 'ID_CUENTA_TIPO_FORMAPAGO'
     end
@@ -1878,9 +1883,15 @@ object FABM_Cuentas: TFABM_Cuentas
     object ZQ_MedioPagoID_TIPO_FORMAPAGO: TIntegerField
       FieldName = 'ID_TIPO_FORMAPAGO'
     end
-    object ZQ_MedioPagoDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
+    object ZQ_MedioPagodescripcion: TStringField
+      FieldKind = fkLookup
+      FieldName = 'descripcion'
+      LookupDataSet = ZQ_TipoFPago
+      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'ID_TIPO_FORMAPAGO'
       Size = 50
+      Lookup = True
     end
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
@@ -1916,7 +1927,7 @@ object FABM_Cuentas: TFABM_Cuentas
     Top = 235
   end
   object DS_MedioPago: TDataSource
-    DataSet = DSMedioPago
+    DataSet = ZQ_MedioPago
     Left = 636
     Top = 139
   end
@@ -1977,96 +1988,46 @@ object FABM_Cuentas: TFABM_Cuentas
       OnClick = popUpItem_QuitarMedioCobroPagoClick
     end
   end
-  object DSMedioPago: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 544
-    Top = 91
-    object DSMedioPagodescripcion: TStringField
-      FieldName = 'descripcion'
-      Size = 50
-    end
-    object DSMedioPagoid_cuenta: TIntegerField
-      FieldName = 'id_cuenta'
-    end
-    object DSMedioPagoid_tipo_formapago: TIntegerField
-      FieldName = 'id_tipo_formapago'
-    end
-  end
-  object ZUpdateZQ_MedioPago: TZUpdateSQL
-    DeleteSQL.Strings = (
-      'DELETE FROM cuenta_tipo_formapago'
-      'WHERE'
-      
-        '  cuenta_tipo_formapago.ID_CUENTA_TIPO_FORMAPAGO = :OLD_ID_CUENT' +
-        'A_TIPO_FORMAPAGO')
-    InsertSQL.Strings = (
-      'INSERT INTO cuenta_tipo_formapago'
-      '  (ID_CUENTA, ID_TIPO_FORMAPAGO)'
-      'VALUES'
-      '  (:ID_CUENTA, :ID_TIPO_FORMAPAGO)')
-    ModifySQL.Strings = (
-      'UPDATE cuenta_tipo_formapago SET'
-      '  ID_CUENTA = :ID_CUENTA,'
-      '  ID_TIPO_FORMAPAGO = :ID_TIPO_FORMAPAGO'
-      'WHERE'
-      '  cuenta_tipo_formapago.ID_CUENTA_TIPO_FORMAPAGO = '
-      ':OLD_ID_CUENTA_TIPO_FORMAPAGO')
-    UseSequenceFieldForRefreshSQL = False
-    Left = 752
-    Top = 203
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_CUENTA'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID_TIPO_FORMAPAGO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_ID_CUENTA_TIPO_FORMAPAGO'
-        ParamType = ptUnknown
-      end>
-  end
-  object Control_MedioPago: TZQuery
+  object ZQ_TipoFPago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select cfp.id_cuenta_tipo_formapago'
-      'from cuenta_tipo_formapago cfp'
-      
-        'where (cfp.id_cuenta = :id_cuenta) and (cfp.id_tipo_formapago = ' +
-        ':id_tipo_formapaago)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_cuenta'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id_tipo_formapaago'
-        ParamType = ptUnknown
-      end>
-    Left = 536
-    Top = 147
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_cuenta'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id_tipo_formapaago'
-        ParamType = ptUnknown
-      end>
-    object Control_MedioPagoID_CUENTA_TIPO_FORMAPAGO: TIntegerField
-      FieldName = 'ID_CUENTA_TIPO_FORMAPAGO'
+      'select *'
+      'from tipo_formapago f')
+    Params = <>
+    Left = 216
+    Top = 75
+    object ZQ_TipoFPagoID_TIPO_FORMAPAGO: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAGO'
       Required = True
+    end
+    object ZQ_TipoFPagoDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 50
+    end
+    object ZQ_TipoFPagoBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_TipoFPagoIF: TStringField
+      FieldName = 'IF'
+      Size = 1
+    end
+    object ZQ_TipoFPagoDESC_REC: TFloatField
+      FieldName = 'DESC_REC'
+    end
+    object ZQ_TipoFPagoCOD_CORTO: TIntegerField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_TipoFPagoGENERA_VUELTO: TStringField
+      FieldName = 'GENERA_VUELTO'
+      Size = 1
+    end
+    object ZQ_TipoFPagoCOLUMNA_PRECIO: TIntegerField
+      FieldName = 'COLUMNA_PRECIO'
+    end
+    object ZQ_TipoFPagoMODIFICABLE: TStringField
+      FieldName = 'MODIFICABLE'
+      Size = 1
     end
   end
 end
