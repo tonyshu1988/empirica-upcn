@@ -7,8 +7,7 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, Menus, EKListadoSQL,
-  ZSqlUpdate, DBClient;
+  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, Menus, EKListadoSQL;
 
 type
   TFABM_Cuentas = class(TForm)
@@ -106,14 +105,17 @@ type
     ZQ_MedioPagoID_CUENTA_TIPO_FORMAPAGO: TIntegerField;
     ZQ_MedioPagoID_CUENTA: TIntegerField;
     ZQ_MedioPagoID_TIPO_FORMAPAGO: TIntegerField;
-    ZQ_MedioPagoDESCRIPCION: TStringField;
-    DSMedioPago: TClientDataSet;
-    DSMedioPagodescripcion: TStringField;
-    DSMedioPagoid_cuenta: TIntegerField;
-    DSMedioPagoid_tipo_formapago: TIntegerField;
-    ZUpdateZQ_MedioPago: TZUpdateSQL;
-    Control_MedioPago: TZQuery;
-    Control_MedioPagoID_CUENTA_TIPO_FORMAPAGO: TIntegerField;
+    ZQ_TipoFPago: TZQuery;
+    ZQ_TipoFPagoID_TIPO_FORMAPAGO: TIntegerField;
+    ZQ_TipoFPagoDESCRIPCION: TStringField;
+    ZQ_TipoFPagoBAJA: TStringField;
+    ZQ_TipoFPagoIF: TStringField;
+    ZQ_TipoFPagoDESC_REC: TFloatField;
+    ZQ_TipoFPagoCOD_CORTO: TIntegerField;
+    ZQ_TipoFPagoGENERA_VUELTO: TStringField;
+    ZQ_TipoFPagoCOLUMNA_PRECIO: TIntegerField;
+    ZQ_TipoFPagoMODIFICABLE: TStringField;
+    ZQ_MedioPagodescripcion: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -136,8 +138,8 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
     procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
-    procedure popUpItem_AgregarMedioCobroPagoClick(Sender: TObject);
     procedure popUpItem_QuitarMedioCobroPagoClick(Sender: TObject);
+    procedure popUpItem_AgregarMedioCobroPagoClick(Sender: TObject);
   Private
   Public
   end;
@@ -246,30 +248,10 @@ begin
 
   if (trim(DBLookupComboBox1.Text) = '') then
   begin
-    Application.MessageBox('El campo "Medio Cobro/Pago por Defecto" se encuentra vacío, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+    Application.MessageBox('El campo "Medio Cobro/Pago" se encuentra vacío, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
     DBLookupComboBox1.SetFocus;
     exit;
   end;
-
-  DSMedioPago.First;
-  while not DSMedioPago.Eof do
-  begin
-    Control_MedioPago.Close;
-    Control_MedioPago.ParamByName('id_cuenta').AsInteger := DSMedioPagoid_cuenta.AsInteger;
-    Control_MedioPago.ParamByName('id_tipo_formapaago').AsInteger := DSMedioPagoid_tipo_formapago.AsInteger;
-    Control_MedioPago.Open;
-
-    if Control_MedioPagoID_CUENTA_TIPO_FORMAPAGO.IsNull then
-    begin
-      ZQ_MedioPago.Append;
-      ZQ_MedioPagoID_CUENTA.AsInteger := DSMedioPagoid_cuenta.AsInteger;
-      ZQ_MedioPagoID_TIPO_FORMAPAGO.AsInteger := DSMedioPagoid_tipo_formapago.AsInteger;
-      ZQ_MedioPago.Post;
-    end;
-
-    DSMedioPago.Next;
-  end;
-
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
@@ -347,7 +329,7 @@ end;
 
 procedure TFABM_Cuentas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas, ZQ_MedioPago]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
   begin
     DBGridCuentas.Enabled:= false;
     PanelEdicion.Visible:= true;
@@ -383,21 +365,6 @@ begin
 
   EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
-
-  ZQ_MedioPago.Open;
-  DSMedioPago.CreateDataSet;
-  ZQ_MedioPago.First;
-  while not ZQ_MedioPago.Eof do
-  begin
-    DSMedioPago.Append;
-    DSMedioPagodescripcion.AsString := ZQ_MedioPagoDESCRIPCION.AsString;
-    DSMedioPagoid_cuenta.AsInteger := ZQ_MedioPagoID_CUENTA.AsInteger;
-    DSMedioPagoid_tipo_formapago.AsInteger := ZQ_MedioPagoID_TIPO_FORMAPAGO.AsInteger;
-    DSMedioPago.Post;
-
-    ZQ_MedioPago.Next;
-  end;
-  ZQ_MedioPago.Close;
 end;
 
 
@@ -482,67 +449,43 @@ end;
 
 procedure TFABM_Cuentas.ZQ_CuentasAfterScroll(DataSet: TDataSet);
 begin
-//  ZQ_MedioPago.Close;
+  ZQ_MedioPago.Close;
 
   if ZQ_Cuentas.IsEmpty then
     exit;
 
-//  ZQ_MedioPago.ParamByName('id_cuenta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
-//  ZQ_MedioPago.open;
-
-    DSMedioPago.Filtered := false;
-    DSMedioPago.Filter:= 'id_cuenta = '+IntToStr(ZQ_CuentasID_CUENTA.AsInteger);
-    DSMedioPago.Filtered := true;
+  ZQ_MedioPago.ParamByName('id_cuenta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+  ZQ_MedioPago.open;
 end;
 
-procedure TFABM_Cuentas.popUpItem_AgregarMedioCobroPagoClick(
-  Sender: TObject);
-begin
 
+procedure TFABM_Cuentas.popUpItem_QuitarMedioCobroPagoClick(Sender: TObject);
+begin
+  if not ZQ_MedioPago.IsEmpty then
+    ZQ_MedioPago.Delete;
+end;
+
+
+procedure TFABM_Cuentas.popUpItem_AgregarMedioCobroPagoClick(Sender: TObject);
+begin
   if EKListadoMedio.Buscar then
   begin
-    DSMedioPago.Filter:= 'id_tipo_formapago = '+EKListadoMedio.Resultado;
-    DSMedioPago.Filtered := true;
-    if not DSMedioPago.IsEmpty then
+    ZQ_MedioPago.Filter:= format('(id_tipo_formapago = %s) ', [EKListadoMedio.Resultado]);
+    ZQ_MedioPago.Filtered:= true;
+    if not ZQ_MedioPago.IsEmpty then
     begin
-      DSMedioPago.Filtered := false;
-      Application.MessageBox('Este Medio ya fue cargado','ABM Cuentas',MB_OK+MB_ICONINFORMATION);
+      ZQ_MedioPago.Filtered:= false;
+      Application.MessageBox('Este Medio ya fue cargado', 'ABM Cuentas', MB_OK + MB_ICONINFORMATION);
       exit;
     end;
 
-    DSMedioPago.Filtered := false;
+    ZQ_MedioPago.Filtered:= false;
 
-    DSMedioPago.Append;
-    DSMedioPagoid_cuenta.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
-    DSMedioPagoid_tipo_formapago.AsInteger := StrToInt(EKListadoMedio.Resultado);
-    DSMedioPagodescripcion.AsString := EKListadoMedio.Seleccion;
-    DSMedioPago.post;
+    ZQ_MedioPago.Append;
+    ZQ_MedioPagoID_CUENTA.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_MedioPagoID_TIPO_FORMAPAGO.AsInteger:= StrToInt(EKListadoMedio.Resultado);
+    ZQ_MedioPago.post;
   end;
-
-end;
-
-procedure TFABM_Cuentas.popUpItem_QuitarMedioCobroPagoClick(
-  Sender: TObject);
-begin
-  if DSMedioPago.IsEmpty then
-  exit;
-
-  if dm.EKModelo.iniciar_transaccion('Transaccion Eliminar', [Control_MedioPago]) then
-  begin
-    Control_MedioPago.Close;
-    Control_MedioPago.ParamByName('id_cuenta').AsInteger := DSMedioPagoid_cuenta.AsInteger;
-    Control_MedioPago.ParamByName('id_tipo_formapaago').AsInteger := DSMedioPagoid_tipo_formapago.AsInteger;
-    Control_MedioPago.Open;
-
-    if not Control_MedioPagoID_CUENTA_TIPO_FORMAPAGO.IsNull then
-      Control_MedioPago.Delete;
-
-    DSMedioPago.Delete;
-  end;
-
-  if not dm.EKModelo.finalizar_transaccion('Transaccion Eliminar') then
-    dm.EKModelo.cancelar_transaccion('Transaccion Eliminar');
-
 end;
 
 end.
