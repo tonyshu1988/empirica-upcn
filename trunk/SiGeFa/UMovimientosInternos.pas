@@ -460,7 +460,7 @@ begin
       end;
     end;
 
-    if ZQ_CpbFormaPagoIMPORTE.IsNull or (ZQ_CpbFormaPagoIMPORTE.AsInteger = 0)  then
+    if ZQ_CpbFormaPagoIMPORTE.IsNull or (ZQ_CpbFormaPagoIMPORTE.AsFloat = 0)  then
     begin
       case ZQ_ComprobanteID_TIPO_CPB.AsInteger of
         CPB_OTROS_INGRESOS: begin //Usa la cuenta de ingreso
