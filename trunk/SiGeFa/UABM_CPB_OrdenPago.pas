@@ -405,7 +405,10 @@ type
     procedure cargarFacturas;
     procedure guardarPagos; //guarda las facturas que se van a pagar con el recibo y la forma de pago
     procedure aplicarPagosCuentaCorriente; //cuando se confirma el recibo aplica todos los pagos realizados a las facturas correspondiente
+    procedure buscarFormaPago();
+    procedure buscarCuenta();
   private
+    id_cuenta_fpago: integer;  
     estadoPantalla: string;
     tipoComprobante: integer;
     id_comprobante: integer;
@@ -1057,49 +1060,21 @@ begin
         if (not ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull) then
           exit;
 
-        if EKListadoCuenta.Buscar then
-        begin
-          if EKListadoCuenta.Resultado <> '' then
-          begin
-            ZQ_ListadoCuenta.Close;
-            ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= StrToInt(EKListadoCuenta.Resultado);
-            ZQ_ListadoCuenta.Open;
-
-            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
-              ZQ_CpbFormaPago.Append //pongo en modo edicion
-            else
-              ZQ_CpbFormaPago.edit; //pongo en modo edicion
-
-            ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
-            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
-            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
-          end;
-        end;
+        buscarCuenta;
       end;
 
       //MEDIO
       if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
       begin
+        //si no hay ninguna cuenta cargada salgo
+        if ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull then
+          exit;
+
+        //si hay algo cargado salgo
         if not ZQ_CpbFormaPagoID_TIPO_FORMAPAG.IsNull then
           exit;
 
-        if EKListadoMedio.Buscar then
-        begin
-          if EKListadoMedio.Resultado <> '' then
-          begin
-            ZQ_ListadoMedio.Close;
-            ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= StrToInt(EKListadoMedio.Resultado);
-            ZQ_ListadoMedio.Open;
-
-            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
-              ZQ_CpbFormaPago.Append //pongo en modo edicion
-            else
-              ZQ_CpbFormaPago.edit; //pongo en modo edicion
-
-            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoMedioID_TIPO_FORMAPAGO.AsInteger;
-            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
-          end;
-        end;
+        buscarFormaPago;
       end;
   end;
 end;
@@ -1114,47 +1089,17 @@ begin
       //ORDEN DE PAGO - CUENTA DE EGRESO
       if ((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Nombre') then
       begin
-
-        if EKListadoCuenta.Buscar then
-        begin
-          if EKListadoCuenta.Resultado <> '' then
-          begin
-            ZQ_ListadoCuenta.Close;
-            ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= StrToInt(EKListadoCuenta.Resultado);
-            ZQ_ListadoCuenta.Open;
-
-            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
-              ZQ_CpbFormaPago.Append //pongo en modo edicion
-            else
-              ZQ_CpbFormaPago.edit; //pongo en modo edicion
-
-            ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
-            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
-            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
-          end;
-        end;
+        buscarCuenta;
       end;
 
       //MEDIO
       if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
       begin
-        if EKListadoMedio.Buscar then
-        begin
-          if EKListadoMedio.Resultado <> '' then
-          begin
-            ZQ_ListadoMedio.Close;
-            ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= StrToInt(EKListadoMedio.Resultado);
-            ZQ_ListadoMedio.Open;
+        //si no hay ninguna cuenta cargada salgo
+        if ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull then
+          exit;
 
-            if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
-              ZQ_CpbFormaPago.Append //pongo en modo edicion
-            else
-              ZQ_CpbFormaPago.edit; //pongo en modo edicion
-
-            ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoMedioID_TIPO_FORMAPAGO.AsInteger;
-            ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
-          end;
-        end;
+        buscarFormaPago;
       end;
     end;
   end;
@@ -1616,6 +1561,68 @@ procedure TFABM_CPB_OrdenPago.CD_Facturas_importeCancelarValidate(Sender: TField
 begin
   if (CD_Facturas_importeCancelar.AsFloat < 0) or (CD_Facturas_importeCancelar.AsFloat > CD_Facturas_saldoComprobante.AsFloat) then
     raise Exception.Create('El "Importe a Cancelar" ingresado es incorrecto, verifique');
+end;
+
+
+procedure TFABM_CPB_OrdenPago.buscarCuenta;
+begin
+  if EKListadoCuenta.Buscar then
+  begin
+    if EKListadoCuenta.Resultado <> '' then
+    begin
+      id_cuenta_fpago:= StrToInt(EKListadoCuenta.Resultado);
+
+      ZQ_ListadoCuenta.Close;
+      ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= id_cuenta_fpago;
+      ZQ_ListadoCuenta.Open;
+
+      ZQ_ListadoMedio.Close;
+      ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
+      ZQ_ListadoMedio.Open;
+
+      if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
+        ZQ_CpbFormaPago.Append //pongo en modo edicion
+      else
+        ZQ_CpbFormaPago.edit; //pongo en modo edicion
+
+      ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
+      ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
+      ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
+      ZQ_CpbFormaPago.Post;
+    end;
+  end;
+end;
+
+
+procedure TFABM_CPB_OrdenPago.buscarFormaPago;
+begin
+  EKListadoMedio.SQL.Clear;
+  EKListadoMedio.SQL.Add(Format('select tipo.* '+
+                                'from tipo_formapago tipo '+
+                                'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) '+
+                                'where tipo.baja = %s ' +
+                                '  and ctfp.id_cuenta = %d ' +
+                                'order by tipo.descripcion',
+                                [QuotedStr('N'), id_cuenta_fpago]));
+
+  if EKListadoMedio.Buscar then
+  begin
+    if EKListadoMedio.Resultado <> '' then
+    begin
+      ZQ_ListadoMedio.Close;
+      ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= StrToInt(EKListadoMedio.Resultado);
+      ZQ_ListadoMedio.Open;
+
+      if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
+        ZQ_CpbFormaPago.Append //pongo en modo edicion
+      else
+        ZQ_CpbFormaPago.edit; //pongo en modo edicion
+
+      ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoMedioID_TIPO_FORMAPAGO.AsInteger;
+      ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
+      ZQ_CpbFormaPago.Post;
+    end;
+  end;
 end;
 
 end.

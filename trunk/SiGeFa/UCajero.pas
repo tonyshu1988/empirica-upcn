@@ -683,6 +683,7 @@ var
   //----Fiscal--------
   Impresora: string;
   Ruta: string;
+  id_cuenta_fpago: integer;
 const
   abmComprobante = 'ABM Factura-Cajero';
 
@@ -2672,7 +2673,8 @@ begin
     begin
       if EKListadoCuenta.Resultado <> '' then
       begin
-        ZQ_Cuentas.Locate('ID_CUENTA', StrToInt(EKListadoCuenta.Resultado), []);
+        id_cuenta_fpago:= StrToInt(EKListadoCuenta.Resultado);
+        ZQ_Cuentas.Locate('ID_CUENTA', id_cuenta_fpago, []);
         CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
       end;
     end;
@@ -2684,6 +2686,15 @@ procedure TFCajero.buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShift
 begin
   if key = 112 then
   begin
+    EKListadoMedio.SQL.Clear;
+    EKListadoMedio.SQL.Add(Format('select tipo.* '+
+                                  'from tipo_formapago tipo '+
+                                  'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) '+
+                                  'where tipo.baja = %s ' +
+                                  '  and ctfp.id_cuenta = %d ' +
+                                  'order by tipo.descripcion',
+                                  [QuotedStr('N'), id_cuenta_fpago]));
+
     if EKListadoMedio.Buscar then
     begin
       if EKListadoMedio.Resultado <> '' then

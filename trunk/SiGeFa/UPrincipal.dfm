@@ -1,8 +1,8 @@
 object FPrincipal: TFPrincipal
-  Left = 2
-  Top = 2
-  Width = 638
-  Height = 450
+  Left = 274
+  Top = 137
+  Width = 929
+  Height = 608
   Caption = 'SiGeFa - Sistema de Gesti'#243'n y Facturaci'#243'n'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 630
-    Height = 356
+    Width = 913
+    Height = 502
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 385
-    Width = 630
+    Top = 531
+    Width = 913
     Height = 19
     Panels = <
       item
@@ -4719,13 +4719,13 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 630
+    Width = 913
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
-    ColorMap.HighlightColor = 14410210
+    ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 14410210
+    ColorMap.UnusedColor = clWhite
     ParentShowHint = False
     ShowHint = True
     Spacing = 0
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 630
-    Height = 356
+    Width = 913
+    Height = 502
     Align = alClient
     Caption = 'DEMO'
     Color = 16053492

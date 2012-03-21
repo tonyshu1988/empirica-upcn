@@ -255,6 +255,7 @@ type
     procedure EKSuma_MovSumListChanged(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
   private
+    id_cuenta_fpago: integer;
     fechaActual: TDate;
     id_comprobante, id_sucursalBusqueda: integer;
     tipoComprobante: integer;
@@ -745,8 +746,9 @@ begin
         begin
           if EKListadoCuenta.Resultado <> '' then
           begin
+            id_cuenta_fpago:= StrToInt(EKListadoCuenta.Resultado);
             ZQ_ListadoCuenta.Close;
-            ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= StrToInt(EKListadoCuenta.Resultado);
+            ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= id_cuenta_fpago;
             ZQ_ListadoCuenta.Open;
 
             if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
@@ -769,8 +771,9 @@ begin
         begin
           if EKListadoCuenta.Resultado <> '' then
           begin
+            id_cuenta_fpago:= StrToInt(EKListadoCuenta.Resultado);
             ZQ_ListadoCuenta.Close;
-            ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= StrToInt(EKListadoCuenta.Resultado);
+            ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= id_cuenta_fpago;
             ZQ_ListadoCuenta.Open;
 
             if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
@@ -788,6 +791,19 @@ begin
       //MEDIO
       if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
       begin
+        //si no hay ninguna cuenta cargada salgo
+        if ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull and ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull then
+          exit;
+
+        EKListadoMedio.SQL.Clear;
+        EKListadoMedio.SQL.Add(Format('select tipo.* '+
+                                      'from tipo_formapago tipo '+
+                                      'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) '+
+                                      'where tipo.baja = %s ' +
+                                      '  and ctfp.id_cuenta = %d ' +
+                                      'order by tipo.descripcion',
+                                      [QuotedStr('N'), id_cuenta_fpago]));
+
         if EKListadoMedio.Buscar then
         begin
           if EKListadoMedio.Resultado <> '' then

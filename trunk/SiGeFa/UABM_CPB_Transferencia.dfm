@@ -1931,60 +1931,128 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'Fecha'
+        Campo = 'Fecha'
+        Tabla = 'comprobante'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
         Titulo = 'C'#243'digo'
-        Campo = 'CODIGO'
-        Tabla = 'CUENTA'
+        Campo = 'numero_cpb'
+        Tabla = 'comprobante'
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
-        Titulo = 'Nombre'
-        Campo = 'NOMBRE_CUENTA'
-        Tabla = 'CUENTA'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Nro.Cta. Bancaria'
-        Campo = 'NRO_CTA_BANCARIA'
-        Tabla = 'CUENTA'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Medio Cobro/Pago'
-        Campo = 'MEDIO_DEFECTO'
-        Tabla = 'CUENTA'
+        Titulo = 'Cta. Ingreso'
+        Campo = 'cuenta_ingreso'
+        Tabla = 'comprobante_forma_pago'
+        TipoCampo = EK_Numero
         TipoCampoIngreso = EK_Combo
-        TipoCampoIndice = 1
-        TipoCampoIndiceVer = 'Igual'
-        TipoComboSQLCampoVer = 'DESCRIPCION'
-        TipoComboSQLCampoReal = 'ID_TIPO_FORMAPAGO'
+        TipoCampoIndiceVer = '='
+        TipoComboSQL = ZQ_ListadoCuenta
+        TipoComboSQLCampoVer = 'NOMBRE_CUENTA'
+        TipoComboSQLCampoReal = 'id_cuenta'
+        TipoComboEditable = False
+        TipoComboAncho = 300
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Cta. Egreso'
+        Campo = 'cuenta_egreso'
+        Tabla = 'comprobante_forma_pago'
+        TipoCampo = EK_Numero
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = '='
+        TipoComboSQL = ZQ_ListadoCuenta
+        TipoComboSQLCampoVer = 'NOMBRE_CUENTA'
+        TipoComboSQLCampoReal = 'id_cuenta'
+        TipoComboEditable = False
+        TipoComboAncho = 300
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Importe'
+        Campo = 'importe_total'
+        Tabla = 'comprobante'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
         TipoComboEditable = False
         TipoComboAncho = 200
-        CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
+    DataSet = ZQ_VerCpb_Fpago
     SQL.Strings = (
-      'select c.*'
-      'from cuenta c'
-      'order by c.nombre_cuenta')
+      
+        'select cast(c.fecha as Date) as Fecha, c.numero_cpb, cpbf.mdcp_c' +
+        'heque,'
+      
+        '       egr.codigo as cta_egreso_codigo, egr.nombre_cuenta as cta' +
+        '_egreso,'
+      
+        '       ing.codigo as cta_ingreso_codigo, ing.nombre_cuenta as ct' +
+        'a_ingreso,'
+      
+        '       c.importe_total, c.observacion, c.id_comp_estado, c.id_co' +
+        'mprobante,'
+      '       cast(c.fecha_anulado as Date) as fecha_anulado'
+      ''
+      'from comprobante_forma_pago cpbf'
+      
+        'left join tipo_formapago tipo on (cpbf.id_tipo_formapag = tipo.i' +
+        'd_tipo_formapago)'
+      'left join cuenta egr on (cpbf.cuenta_egreso  = egr.id_cuenta)'
+      'left join cuenta ing on (cpbf.cuenta_ingreso = ing.id_cuenta)'
+      
+        'left join comprobante c on (cpbf.id_comprobante = c.id_comproban' +
+        'te)'
+      'where c.id_tipo_cpb = 21'
+      'order by 1 desc')
     SQL_Select.Strings = (
-      'select c.*')
+      
+        'select cast(c.fecha as Date) as Fecha, c.numero_cpb, cpbf.mdcp_c' +
+        'heque,'
+      
+        '       egr.codigo as cta_egreso_codigo, egr.nombre_cuenta as cta' +
+        '_egreso,'
+      
+        '       ing.codigo as cta_ingreso_codigo, ing.nombre_cuenta as ct' +
+        'a_ingreso,'
+      
+        '       c.importe_total, c.observacion, c.id_comp_estado, c.id_co' +
+        'mprobante,'
+      '       cast(c.fecha_anulado as Date) as fecha_anulado'
+      '')
     SQL_From.Strings = (
-      'from cuenta c')
+      'from comprobante_forma_pago cpbf'
+      
+        'left join tipo_formapago tipo on (cpbf.id_tipo_formapag = tipo.i' +
+        'd_tipo_formapago)'
+      'left join cuenta egr on (cpbf.cuenta_egreso  = egr.id_cuenta)'
+      'left join cuenta ing on (cpbf.cuenta_ingreso = ing.id_cuenta)'
+      
+        'left join comprobante c on (cpbf.id_comprobante = c.id_comproban' +
+        'te)')
+    SQL_Where.Strings = (
+      'where c.id_tipo_cpb = 21')
     SQL_Orden.Strings = (
-      'order by c.nombre_cuenta')
-    UsarWhereOriginal = EK_Sin_Where
+      'order by 1 desc')
+    UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 48
     Top = 48
