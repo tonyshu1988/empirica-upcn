@@ -464,8 +464,8 @@ begin
       CD_Producto.First;
       while not CD_Producto.Eof do
       begin
-           //si el producto no tiene stock    o   si el stock actual es 0           o   si el origen del producto donde hay que descontar es el mismo al destino seleccionado
-        if CD_Producto_idStockProducto.IsNull or (CD_Producto_cantidad.AsFloat = 0) or (idStockProducto_pertenece_destino(CD_Producto_idStockProducto.AsInteger))then
+           //si el producto no tiene stock    o   si el stock actual es 0           o   si la cantidad a transferir es 0            o   si el origen del producto donde hay que descontar es el mismo al destino seleccionado
+        if CD_Producto_idStockProducto.IsNull or (CD_Producto_stockactual.AsFloat = 0) or (CD_Producto_cantidad.AsFloat = 0) or (idStockProducto_pertenece_destino(CD_Producto_idStockProducto.AsInteger))then
           CD_Producto.Delete
         else
           CD_Producto.Next;
