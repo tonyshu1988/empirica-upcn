@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 191
-  Top = 22
+  Left = 256
+  Top = 63
   Width = 1032
   Height = 700
   Caption = 'Cajero SiGeFa'
@@ -9065,7 +9065,6 @@ object FCajero: TFCajero
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
       'where cta.baja = '#39'N'#39
-      '  and cta.id_cuenta > 1'
       'order by cta.nombre_cuenta')
     CampoBuscar = 'busqueda'
     CampoClave = 'id_cuenta'

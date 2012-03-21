@@ -287,8 +287,7 @@ begin
 
   dm.EKModelo.abrir(ZQ_Cuenta);
 
-//  EKBuscar.Abrir;
-  ZQ_VerCpb_Fpago.Open;
+  EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb_Fpago, lblCantidadRegistros);
 end;
 
@@ -308,8 +307,11 @@ end;
 
 procedure TFABM_CPB_Transferencia.btnBuscarClick(Sender: TObject);
 begin
-//  if EKBuscar.Buscar then
-//    dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
+  if EKbuscar.buscar then
+  begin
+    ZQ_VerCpb_Fpago.Refresh;
+    dm.mostrarCantidadRegistro(ZQ_VerCpb_Fpago, lblCantidadRegistros);
+  end
 end;
 
 

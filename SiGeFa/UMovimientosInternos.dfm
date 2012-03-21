@@ -2412,8 +2412,12 @@ object FMovimientosInternos: TFMovimientosInternos
     SQL.Strings = (
       'select tipo.*'
       'from tipo_formapago tipo'
+      
+        'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago ' +
+        '= ctfp.id_tipo_formapago)'
       'where tipo.baja = '#39'N'#39
-      '  and tipo.id_tipo_formapago > 1')
+      '  and ctfp.id_cuenta = :id_cuenta'
+      'order by tipo.descripcion')
     CampoBuscar = 'descripcion'
     CampoClave = 'id_tipo_formapago'
     TituloVentana = 'Buscar Medio'
@@ -2492,8 +2496,7 @@ object FMovimientosInternos: TFMovimientosInternos
     SQL.Strings = (
       'select tipo.*'
       'from tipo_formapago tipo'
-      'where tipo.baja = '#39'N'#39
-      '  and tipo.id_tipo_formapago > 1')
+      'where tipo.baja = '#39'N'#39)
     Params = <>
     Left = 421
     Top = 321
