@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
   ComCtrls, ImgList, ExtCtrls, jpeg, QPrinters,
-  Grids, DBGrids, EKImageList32, EKVentanas, EKInformacion, DB;
+  Grids, DBGrids, EKImageList32, EKVentanas, EKInformacion, DB, StdCtrls;
 
 type
   TFPrincipal = class(TForm)
@@ -158,6 +158,8 @@ type
     AConsulta_Precios: TAction;
     ConsultaPrecios1: TMenuItem;
     N9: TMenuItem;
+    AShutdown: TAction;
+    Shutdown1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -213,6 +215,7 @@ type
     procedure AReimpresionComprobExecute(Sender: TObject);
     procedure AABM_PersonasPtosExecute(Sender: TObject);
     procedure AConsulta_PreciosExecute(Sender: TObject);
+    procedure AShutdownExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -746,6 +749,14 @@ end;
 procedure TFPrincipal.AConsulta_PreciosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFConsulta_Precios, FConsulta_Precios);
+end;
+
+procedure TFPrincipal.AShutdownExecute(Sender: TObject);
+begin
+//    WinExec(Pchar(
+//            Format('%s -user SYSDBA -password masterkey dbserver:%s -shut -force 0',[ExtractFilePath(Application.ExeName)+'gfix.exe',dm.Conexion.Database]))
+//            ,SW_HIDE);
+  // showmessage(Format('%s -user SYSDBA -password masterkey %s:%s -shut -force 0',[ExtractFilePath(Application.ExeName)+'gfix.exe',dm.Conexion.HostName,dm.Conexion.Database]))
 end;
 
 end.

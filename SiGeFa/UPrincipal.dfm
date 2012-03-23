@@ -5134,6 +5134,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 58
       OnExecute = AConsulta_PreciosExecute
     end
+    object AShutdown: TAction
+      Caption = 'Shutdown'
+      ImageIndex = 8
+      OnExecute = AShutdownExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5355,6 +5360,10 @@ object FPrincipal: TFPrincipal
       end
       object N1: TMenuItem
         Caption = '-'
+      end
+      object Shutdown1: TMenuItem
+        Tag = 1
+        Action = AShutdown
       end
       object ConfigurarImpresora: TMenuItem
         Tag = 1
