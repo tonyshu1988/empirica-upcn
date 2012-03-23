@@ -314,6 +314,14 @@ begin
   TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[2]).Valor:= DateToStr(dm.EKModelo.Fecha);
 
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
+
+  //Caption de los botones de Filtro
+  dm.ZQ_Configuracion_Variables.Open;
+  dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'etiquetaNF', []);
+  BtnFiltro_NoFiscal.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
+
+  dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'etiquetaF', []);
+  BtnFiltro_Fiscal.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
 end;
 
 
