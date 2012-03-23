@@ -262,6 +262,13 @@ begin
   btnEliminarComprob.Visible:= ivNever;
   if dm.EKUsrLogin.PermisoAccion('ELIMINAR_FACTURA') then
     btnEliminarComprob.Visible:= ivAlways;
+
+  //Caption en los filtros
+  dm.ZQ_Configuracion_Variables.Open;
+  dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'etiquetaNF', []);
+  BtnFiltro_NoFiscal.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
+  dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'etiquetaF', []);
+  BtnFiltro_Fiscal.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
 end;
 
 

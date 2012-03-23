@@ -1621,8 +1621,7 @@ begin
       begin
         //Application.MessageBox(PChar(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString])),'Atención');
 
-        // Si se guarda ok el comprobante OK y hay formas de pago que van a la fiscal
-        // llamo al proc que imprime en fiscal, sino solo guarda el comprob.
+        
         if (totFiscal > 0) then
         begin
           imprimirFiscal(comprobante, 'F');
@@ -2024,8 +2023,6 @@ begin
     end;
 end;
 
-
-//cuando se cambia la forma de pago con la flecha del loockup seteo si es va la fiscal o no
 
 function TFCajero.calcularSaldoCtaCorr(): Double;
 var
