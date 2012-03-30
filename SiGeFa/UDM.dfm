@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFa LOPEZ.FDB'
+    Database = 'C:\SISTEMAS\SiGeFa\Bases\SiGeFa.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -1942,6 +1942,43 @@ object DM: TDM
     object ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON4: TStringField
       FieldName = 'COMPROBANTE_RENGLON4'
       Size = 50
+    end
+  end
+  object ZQ_ValidarFecha_Hora: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select first 1 zt.*'
+      'from z_sinc_tabla zt'
+      'where zt.user_name <> '#39'SINCRO'#39
+      'order by zt.id desc')
+    Params = <>
+    Left = 288
+    Top = 320
+    object ZQ_ValidarFecha_HoraID: TLargeintField
+      FieldName = 'ID'
+      Required = True
+    end
+    object ZQ_ValidarFecha_HoraTABLE_NAME: TStringField
+      FieldName = 'TABLE_NAME'
+      Required = True
+      Size = 67
+    end
+    object ZQ_ValidarFecha_HoraOPERATION: TStringField
+      FieldName = 'OPERATION'
+      Required = True
+      Size = 1
+    end
+    object ZQ_ValidarFecha_HoraDATE_TIME: TDateTimeField
+      FieldName = 'DATE_TIME'
+      Required = True
+    end
+    object ZQ_ValidarFecha_HoraUSER_NAME: TStringField
+      FieldName = 'USER_NAME'
+      Required = True
+      Size = 67
+    end
+    object ZQ_ValidarFecha_HoraID_SINCRO_LOTE: TIntegerField
+      FieldName = 'ID_SINCRO_LOTE'
     end
   end
 end

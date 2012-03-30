@@ -94,6 +94,13 @@ type
     ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON2: TStringField;
     ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON3: TStringField;
     ZQ_SucursalesVisiblesCOMPROBANTE_RENGLON4: TStringField;
+    ZQ_ValidarFecha_Hora: TZQuery;
+    ZQ_ValidarFecha_HoraID: TLargeintField;
+    ZQ_ValidarFecha_HoraTABLE_NAME: TStringField;
+    ZQ_ValidarFecha_HoraOPERATION: TStringField;
+    ZQ_ValidarFecha_HoraDATE_TIME: TDateTimeField;
+    ZQ_ValidarFecha_HoraUSER_NAME: TStringField;
+    ZQ_ValidarFecha_HoraID_SINCRO_LOTE: TIntegerField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);

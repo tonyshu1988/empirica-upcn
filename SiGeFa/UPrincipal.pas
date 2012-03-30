@@ -252,7 +252,7 @@ Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
   UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
   UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos,
-  UConsulta_Precios;
+  UConsulta_Precios, DateUtils;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -261,6 +261,30 @@ var
   pertenece: boolean;
   cerrarSistema: integer; //si es 1 se cierra el sistema
 begin
+
+  dm.ZQ_Configuracion_Variables.Close;
+  dm.ZQ_Configuracion_Variables.Open;
+
+ //Chequeo que la hora y fecha del Server Sean Correctas
+  if dm.ZQ_Configuracion_Variables.Locate('CLAVE', vararrayof(['validar_fecha_hora']), []) then
+  begin
+    if (dm.ZQ_Configuracion_Variables.fieldbyname('texto').AsString = 'SI') then
+    begin
+      dm.ZQ_ValidarFecha_Hora.Close;
+      dm.ZQ_ValidarFecha_Hora.Open;
+
+      i := DaysBetween(dm.EKModelo.FechayHora, dm.ZQ_ValidarFecha_HoraDATE_TIME.AsDateTime);
+
+      if (dm.ZQ_ValidarFecha_HoraDATE_TIME.AsDateTime > dm.EKModelo.FechayHora) or (i > dm.ZQ_Configuracion_Variables.fieldbyname('numero').AsInteger) then
+      begin
+          if not(Application.MessageBox('ATENCIÓN!!!'+Char(13)+Char(13)+'El Ultimo ingreso al sistema es mayor al ingreso actual, '+Char(13)+'o pasaron muchos dias sin que el sistema fuese usado.'+Char(13)+'Verifique la fecha y Hora del Servidor.'+Char(13)+Char(13)+'¿Desea Continuar ejecutando el sistema?','',MB_YESNO+MB_ICONWARNING)= IDYES) then
+            Application.Terminate;
+      end;
+
+    end;
+  end;
+
+
   pertenece:= false;
   SUCURSAL_LOGUEO:= -1;
 
