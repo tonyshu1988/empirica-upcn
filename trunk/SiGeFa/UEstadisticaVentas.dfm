@@ -25,7 +25,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 926
     Height = 524
-    ActivePage = TabFacturacion
+    ActivePage = TabRanking
     Align = alClient
     TabOrder = 4
     OnChange = PageControlChange
@@ -1399,7 +1399,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 910
+            Width = 102
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1413,7 +1413,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 910
+            Width = 120
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1427,7 +1427,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 910
+            Width = 126
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -3424,17 +3424,17 @@ object FEstadisticaVentas: TFEstadisticaVentas
       item
         DataType = ftUnknown
         Name = 'f1'
-        ParamType = ptUnknown
+        ParamType = ptInput
       end
       item
         DataType = ftUnknown
         Name = 'f2'
-        ParamType = ptUnknown
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'id_sucursal'
-        ParamType = ptUnknown
+        ParamType = ptInput
       end>
     Left = 738
     Top = 96
@@ -3442,17 +3442,17 @@ object FEstadisticaVentas: TFEstadisticaVentas
       item
         DataType = ftUnknown
         Name = 'f1'
-        ParamType = ptUnknown
+        ParamType = ptInput
       end
       item
         DataType = ftUnknown
         Name = 'f2'
-        ParamType = ptUnknown
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'id_sucursal'
-        ParamType = ptUnknown
+        ParamType = ptInput
       end>
     object ZQ_ProductosVendidosSUMAVENTA: TFloatField
       FieldName = 'SUMAVENTA'
