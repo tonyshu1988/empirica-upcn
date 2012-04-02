@@ -500,6 +500,7 @@ begin
 
         ZQ_ProductosVendidos.ParamByName('f1').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[1]);
         ZQ_ProductosVendidos.ParamByName('f2').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[2]);
+        ZQ_ProductosVendidos.SQL.SaveToFile('TEXT.TXT');
         ZQ_ProductosVendidos.Open;
 
 
@@ -621,11 +622,11 @@ procedure TFEstadisticaVentas.btRankingProdsClick(Sender: TObject);
 begin
   ZQ_ProductosVendidos.Close;
   ZQ_ProductosVendidos.SQL[1]:= Format('%s as agrupam, ', ['cd.id_producto']);
-  ZQ_ProductosVendidos.SQL[3]:= Format('%s, ', ['[ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')||'')'' as detalle_prod']);
+  ZQ_ProductosVendidos.SQL[3]:= Format('%s, ', ['(ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')||'') as detalle_prod']);
 
   ZQ_Totales.Close;
   ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['cd.id_producto']);
-  ZQ_Totales.SQL[2]:= Format('%s, ', ['[ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')||'')'' as detalle_prod']);
+  ZQ_Totales.SQL[2]:= Format('%s, ', ['(ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')||'') as detalle_prod']);
 end;
 
 
