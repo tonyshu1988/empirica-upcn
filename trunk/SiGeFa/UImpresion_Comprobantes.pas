@@ -858,9 +858,12 @@ begin
                           reporte:= RepOrdenPago;
                           archivoPDF:= 'OrdenPago.pdf';
                         end;
-      CPB_DEVOLUCION:  begin //CPB_DEVOLUCION
+      CPB_DEVOL_CREDITO: begin //CPB_DEVOLUCION
                           configDevolucion;
-                       end;
+                         end;
+      CPB_DEVOL_DEBITO:  begin //CPB_DEVOLUCION
+                          configDevolucion;
+                         end;
       CPB_RECIBO_CTA_CTE: begin //CPB_RECIBO_COBRO
                             configReciboCtaCte;
                             reporte:= RepReciboCtaCte;
