@@ -202,11 +202,11 @@ type
       Shift: TShiftState);
     procedure EditCodCtaEgresoExit(Sender: TObject);
     procedure EditCodCtaIngresoExit(Sender: TObject);
-    function ValidarCampos():boolean;
+    function ValidarCampos(): boolean;
     procedure AConfirmarExecute(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
-  private
-  public
+  Private
+  Public
     id_comprobante: Integer;
     tipoComprobante: Integer;
   end;
@@ -222,59 +222,60 @@ implementation
 uses UDM, UPrincipal, UUtilidades;
 
 {$R *.dfm}
-function TFABM_CPB_Transferencia.ValidarCampos():boolean;
+
+function TFABM_CPB_Transferencia.ValidarCampos(): boolean;
 begin
   result:= true;
 
   if ZQ_ComprobanteFECHA.IsNull then
-   begin
-     Application.MessageBox('El campo "Fecha" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-     EKDBDateTimePicker1.SetFocus;
-     result := false;
-     Exit;
-   end;
+  begin
+    Application.MessageBox('El campo "Fecha" se encuentra Vacio, verifique', 'Validar', MB_OK + MB_ICONINFORMATION);
+    EKDBDateTimePicker1.SetFocus;
+    result:= false;
+    Exit;
+  end;
 
   if ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull then
-   begin
-     Application.MessageBox('El campo "Cuenta Egreso" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-     DBLookupCBoxEgreso.SetFocus;
-     DBLookupCBoxEgreso.perform(WM_LBUTTONDOWN,1,0);
-     result := false;
-     Exit;
-   end;
+  begin
+    Application.MessageBox('El campo "Cuenta Egreso" se encuentra Vacio, verifique', 'Validar', MB_OK + MB_ICONINFORMATION);
+    DBLookupCBoxEgreso.SetFocus;
+    DBLookupCBoxEgreso.perform(WM_LBUTTONDOWN, 1, 0);
+    result:= false;
+    Exit;
+  end;
 
   if ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull then
-   begin
-     Application.MessageBox('El campo "Cuenta Ingreso" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-     DBLookupCBoxIngreso.SetFocus;
-     DBLookupCBoxIngreso.perform(WM_LBUTTONDOWN,1,0);
-     result := false;
-     Exit;
-   end;
+  begin
+    Application.MessageBox('El campo "Cuenta Ingreso" se encuentra Vacio, verifique', 'Validar', MB_OK + MB_ICONINFORMATION);
+    DBLookupCBoxIngreso.SetFocus;
+    DBLookupCBoxIngreso.perform(WM_LBUTTONDOWN, 1, 0);
+    result:= false;
+    Exit;
+  end;
 
-  if ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger =  ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger then
-   begin
-     Application.MessageBox('La "Cuenta Egreso" es la misma que la "Cuenta Ingreso", verifique','Validar',MB_OK+MB_ICONINFORMATION);
-     DBLookupCBoxEgreso.SetFocus;
-     result := false;
-     Exit;
-   end;
+  if ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger = ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger then
+  begin
+    Application.MessageBox('La "Cuenta Egreso" es la misma que la "Cuenta Ingreso", verifique', 'Validar', MB_OK + MB_ICONINFORMATION);
+    DBLookupCBoxEgreso.SetFocus;
+    result:= false;
+    Exit;
+  end;
 
   if ZQ_ComprobanteIMPORTE_TOTAL.IsNull then
-   begin
-     Application.MessageBox('El campo "Importe" se encuentra Vacio, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-     DBEditImporte.SetFocus;
-     result := false;
-     Exit;
-   end;
+  begin
+    Application.MessageBox('El campo "Importe" se encuentra Vacio, verifique', 'Validar', MB_OK + MB_ICONINFORMATION);
+    DBEditImporte.SetFocus;
+    result:= false;
+    Exit;
+  end;
 
   if (ZQ_ComprobanteIMPORTE_TOTAL.AsFloat <= 0) then
-   begin
-     Application.MessageBox('El campo "Importe" posee un valor menor o igual a cero, verifique','Validar',MB_OK+MB_ICONINFORMATION);
-     DBEditImporte.SetFocus;
-     result := false;
-     Exit;
-   end;
+  begin
+    Application.MessageBox('El campo "Importe" posee un valor menor o igual a cero, verifique', 'Validar', MB_OK + MB_ICONINFORMATION);
+    DBEditImporte.SetFocus;
+    result:= false;
+    Exit;
+  end;
 end;
 
 
@@ -301,7 +302,7 @@ end;
 
 procedure TFABM_CPB_Transferencia.btnSalirClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 
@@ -319,7 +320,7 @@ procedure TFABM_CPB_Transferencia.btnNuevoClick(Sender: TObject);
 begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb]) then
   begin
-    DBGridTransferencia.Enabled := false;
+    DBGridTransferencia.Enabled:= false;
     PanelEdicion.Visible:= true;
 
     ZP_CpbID.Active:= false;
@@ -347,8 +348,8 @@ begin
 
     EKDBDateTimePicker1.SetFocus;
 
-    GrupoEditando.Enabled := false;
-    GrupoGuardarCancelar.Enabled := true;
+    GrupoEditando.Enabled:= false;
+    GrupoGuardarCancelar.Enabled:= true;
   end;
 end;
 
@@ -359,14 +360,14 @@ var
 begin
   estado:= ZQ_VerCpb_FpagoID_COMP_ESTADO.AsInteger;
   if ((ZQ_VerCpb_Fpago.IsEmpty) or
-     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
+    ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
     exit;
 
   id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
   begin
-    DBGridTransferencia.Enabled := false;
+    DBGridTransferencia.Enabled:= false;
     PanelEdicion.Visible:= true;
 
     ZQ_Comprobante.Close;
@@ -382,8 +383,8 @@ begin
 
     EKDBDateTimePicker1.SetFocus;
 
-    GrupoEditando.Enabled := false;
-    GrupoGuardarCancelar.Enabled := true;
+    GrupoEditando.Enabled:= false;
+    GrupoGuardarCancelar.Enabled:= true;
   end;
 end;
 
@@ -414,7 +415,7 @@ begin
           dm.EKModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
-          Application.MessageBox('No se pudo anular la Transferencia.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          Application.MessageBox('No se pudo anular la Transferencia.', 'Atención', MB_OK + MB_ICONINFORMATION);
           exit;
         end
       end;
@@ -467,15 +468,15 @@ begin
       DBGridTransferencia.Enabled:= true;
       DBGridTransferencia.SetFocus;
 
-      GrupoEditando.Enabled := true;
-      GrupoGuardarCancelar.Enabled := false;
+      GrupoEditando.Enabled:= true;
+      GrupoGuardarCancelar.Enabled:= false;
 
       ZQ_VerCpb_Fpago.Refresh;
-      ZQ_VerCpb_Fpago.Locate('ID_COMPROBANTE', id_comprobante,[]);
+      ZQ_VerCpb_Fpago.Locate('ID_COMPROBANTE', id_comprobante, []);
     end
   except
     begin
-      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención', MB_OK + MB_ICONINFORMATION);
       exit;
     end
   end;
@@ -488,12 +489,12 @@ procedure TFABM_CPB_Transferencia.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
-    PanelEdicion.Visible := false;
-    DBGridTransferencia.Enabled:=true;
+    PanelEdicion.Visible:= false;
+    DBGridTransferencia.Enabled:= true;
     DBGridTransferencia.SetFocus;
 
-    GrupoEditando.Enabled := true;
-    GrupoGuardarCancelar.Enabled := false;
+    GrupoEditando.Enabled:= true;
+    GrupoGuardarCancelar.Enabled:= false;
   end;
 end;
 
@@ -504,31 +505,31 @@ begin
     exit;
 
   DM.VariablesReportes(RepTransf);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
 end;
 
 
 procedure TFABM_CPB_Transferencia.DBGridTransferenciaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  DBGridTransferencia.Canvas.Font.Color := clBlack;
+  DBGridTransferencia.Canvas.Font.Color:= clBlack;
 
   if (ZQ_VerCpb_FpagoID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) then
   begin
     DBGridTransferencia.Canvas.Brush.Color:= StaticTxtConfirmado.Color;
     if (gdFocused in State) or (gdSelected in State) then
-      DBGridTransferencia.Canvas.Font.Style := DBGridTransferencia.Canvas.Font.Style + [fsBold];
+      DBGridTransferencia.Canvas.Font.Style:= DBGridTransferencia.Canvas.Font.Style + [fsBold];
   end;
 
   if (ZQ_VerCpb_FpagoID_COMP_ESTADO.AsInteger = ESTADO_ANULADO) then
   begin
     DBGridTransferencia.Canvas.Brush.Color:= StaticTxtBaja.Color;
     if (gdFocused in State) or (gdSelected in State) then
-      DBGridTransferencia.Canvas.Font.Style := DBGridTransferencia.Canvas.Font.Style + [fsBold];
-  end;  
+      DBGridTransferencia.Canvas.Font.Style:= DBGridTransferencia.Canvas.Font.Style + [fsBold];
+  end;
 
-  DBGridTransferencia.DefaultDrawColumnCell(rect,datacol,column,state);
+  DBGridTransferencia.DefaultDrawColumnCell(rect, datacol, column, state);
 
   FPrincipal.PintarFilasGrillas(DBGridTransferencia, Rect, DataCol, Column, State);
 end;
@@ -537,6 +538,7 @@ end;
 //----------------------------------
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
+
 procedure TFABM_CPB_Transferencia.ANuevoExecute(Sender: TObject);
 begin
   if btnNuevo.Enabled then
@@ -589,7 +591,7 @@ begin
     if EKListadoCuenta.Buscar then
     begin
       ZQ_CpbFormaPago.Edit;
-      ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger := StrToInt(EKListadoCuenta.Resultado);
+      ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= StrToInt(EKListadoCuenta.Resultado);
       EditCodCtaEgreso.Text:= ZQ_CuentaCODIGO.AsString;
       DBLookupCBoxEgreso.setfocus;
     end;
@@ -602,7 +604,7 @@ begin
     if EKListadoCuenta.Buscar then
     begin
       ZQ_CpbFormaPago.Edit;
-      ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger := StrToInt(EKListadoCuenta.Resultado);
+      ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= StrToInt(EKListadoCuenta.Resultado);
       EditCodCtaIngreso.Text:= ZQ_CuentaCODIGO.AsString;
       DBLookupCBoxIngreso.setfocus;
     end;
@@ -650,7 +652,7 @@ var
 begin
   estado:= ZQ_VerCpb_FpagoID_COMP_ESTADO.AsInteger;
   if ((ZQ_VerCpb_Fpago.IsEmpty) or
-     ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
+    ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
     exit;
 
   id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
@@ -670,7 +672,7 @@ begin
           dm.EKModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
-          Application.MessageBox('No se pudo confirmar la Transferencia.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          Application.MessageBox('No se pudo confirmar la Transferencia.', 'Atención', MB_OK + MB_ICONINFORMATION);
           exit;
         end
       end;
@@ -683,5 +685,3 @@ begin
 end;
 
 end.
-
-
