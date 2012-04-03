@@ -407,8 +407,8 @@ type
     procedure aplicarPagosCuentaCorriente; //cuando se confirma el recibo aplica todos los pagos realizados a las facturas correspondiente
     procedure buscarFormaPago();
     procedure buscarCuenta();
-  private
-    id_cuenta_fpago: integer;  
+  Private
+    id_cuenta_fpago: integer;
     estadoPantalla: string;
     tipoComprobante: integer;
     id_comprobante: integer;
@@ -417,7 +417,7 @@ type
     vselFactura: TFBuscarComprobante;
     procedure onSelPersona;
     procedure onSelFactura;
-  public
+  Public
     { Public declarations }
   end;
 
@@ -427,7 +427,7 @@ var
 const
   transaccion_ABM = 'ABM ORDEN PAGO';
   EDITANDO = 'EDITANDO';
-  VIENDO   = 'VIENDO';
+  VIENDO = 'VIENDO';
 
 implementation
 
@@ -436,7 +436,7 @@ uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar,
 
 {$R *.dfm}
 
-procedure TFABM_CPB_OrdenPago.modoEdicion(flag:boolean);
+procedure TFABM_CPB_OrdenPago.modoEdicion(flag: boolean);
 begin
   if flag then //si estoy en modo edicion
   begin
@@ -450,8 +450,8 @@ begin
     StaticTxtConfirmado.Visible:= false;
     lblTipoComprobante.Visible:= true;
 
-    GrupoEditando.Enabled := false;
-    GrupoGuardarCancelar.Enabled := true;
+    GrupoEditando.Enabled:= false;
+    GrupoGuardarCancelar.Enabled:= true;
   end
   else
   begin
@@ -465,8 +465,8 @@ begin
     StaticTxtConfirmado.Visible:= true;
     lblTipoComprobante.Visible:= false;
 
-    GrupoEditando.Enabled := true;
-    GrupoGuardarCancelar.Enabled := false;
+    GrupoEditando.Enabled:= true;
+    GrupoGuardarCancelar.Enabled:= false;
   end;
 end;
 
@@ -489,7 +489,7 @@ begin
   FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(3, btnQuitarFactura.Glyph); //cargo la imagen del boton buscar entidad
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:=  dm.ZQ_SucursalesVisibles.RecNo - 1;
+    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
 
   //abro todos los recibos del sistema
   EKBuscar.Abrir;
@@ -669,7 +669,7 @@ begin
     end;
 
     tipoComprobante:= ZQ_ComprobanteID_TIPO_CPB.AsInteger;
-    cargarTipoComprobante(tipoComprobante); 
+    cargarTipoComprobante(tipoComprobante);
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
 
     ZQ_Comprobante.Edit;
@@ -687,7 +687,7 @@ begin
       ZQ_PagosFactura.Open;
 
       EKSuma_Factura.RecalcAll;
-      editTotalFacturas.Text := FormatFloat('$ ###,###,###,##0.00', 0);
+      editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', 0);
 
       cargarFacturas;
 
@@ -707,7 +707,7 @@ begin
 
   if ZQ_ComprobanteID_PROVEEDOR.IsNull and ZQ_ComprobanteID_CLIENTE.IsNull then
   begin
-    Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
     EKDBDateEmision.SetFocus;
     exit;
   end;
@@ -715,14 +715,14 @@ begin
   if not ZQ_CpbFormaPago.IsEmpty then
   begin
     ZQ_CpbFormaPago.First;
-    while not ZQ_CpbFormaPago.Eof do  //por cada una de las formas de pago cargadas
+    while not ZQ_CpbFormaPago.Eof do //por cada una de las formas de pago cargadas
     begin
       ZQ_CpbFormaPago.Edit;
       if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
         ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_comprobante;
 
       if ZQ_CpbFormaPagoIMPORTE.IsNull then
-        ZQ_CpbFormaPagoIMPORTE.AsFloat:=0;
+        ZQ_CpbFormaPagoIMPORTE.AsFloat:= 0;
 
       ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat; //pongo el mismo importe cargado al importe_real
       ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
@@ -732,7 +732,7 @@ begin
   end
   else
   begin
-    Application.MessageBox('No selecciono ninguna forma de pago, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('No selecciono ninguna forma de pago, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
     DBGridEditar_Fpago.SetFocus;
     exit;
   end;
@@ -769,7 +769,8 @@ begin
 
     if totalCancelarFacturas <> totalFormaPago then
     begin
-      Application.MessageBox(pchar('El monto total a cancelar de las facturas ('+FloatToStr(totalCancelarFacturas)+') es distinto al monto total de la forma de pago ('+FloatToStr(totalFormaPago)+'), por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox(pchar('El monto total a cancelar de las facturas (' + FloatToStr(totalCancelarFacturas) + ') es distinto al monto total de la forma de pago (' + FloatToStr(totalFormaPago) + '), por favor Verifique'), 'Validar Datos', MB_OK
+        + MB_ICONINFORMATION);
       DBGridEditar_Fpago.SetFocus;
       exit;
     end;
@@ -784,11 +785,11 @@ begin
       DBGridListaCpb.SetFocus;
 
       ZQ_VerCpb.Refresh;
-      ZQ_VerCpb.Locate('ID_COMPROBANTE',id_comprobante,[]);
+      ZQ_VerCpb.Locate('ID_COMPROBANTE', id_comprobante, []);
     end
   except
     begin
-      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención', MB_OK + MB_ICONINFORMATION);
       exit;
     end
   end;
@@ -817,7 +818,7 @@ begin
     exit;
 
   if not Assigned(FImpresion_Comprobantes) then
-    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
+    FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
   FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, false);
   FImpresion_Comprobantes.imprimir;
 end;
@@ -826,6 +827,7 @@ end;
 //----------------------------------
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
+
 procedure TFABM_CPB_OrdenPago.ABuscarExecute(Sender: TObject);
 begin //F1
   if estadoPantalla = VIENDO then
@@ -935,7 +937,7 @@ begin
     ZQ_PagosFactura.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
     ZQ_PagosFactura.Open;
   end
-  else  //si es un cliente
+  else //si es un cliente
   begin
     DBTxtDatos_Proveedor.Visible:= false;
     lblDatos_Proveedor.Visible:= false;
@@ -952,20 +954,21 @@ begin
   begin
     DBTxtFechaAnulado.Visible:= true;
     lblAnulado.Visible:= true;
-  end;  
+  end;
 end;
 
 
 //VER ABM RECIBO
+
 procedure TFABM_CPB_OrdenPago.btnBuscarEmpresaClick(Sender: TObject);
 var
   sql: string;
 begin
-  sql:= Format('select emp.id_empresa as id, emp.nombre||%s|| coalesce(tipo.descripcion, %s) as busqueda '+
-               'from empresa emp '+
-               'left join tipo_empresa tipo on (emp.id_tipo_empresa = tipo.id_tipo_empresa) '+
-               'where emp.baja = %s '+
-               'order by emp.nombre', [QuotedStr(' - '), QuotedStr(''), QuotedStr('N')]);
+  sql:= Format('select emp.id_empresa as id, emp.nombre||%s|| coalesce(tipo.descripcion, %s) as busqueda ' +
+    'from empresa emp ' +
+    'left join tipo_empresa tipo on (emp.id_tipo_empresa = tipo.id_tipo_empresa) ' +
+    'where emp.baja = %s ' +
+    'order by emp.nombre', [QuotedStr(' - '), QuotedStr(''), QuotedStr('N')]);
 
   EKListadoEntidad.SQL.Text:= sql;
 
@@ -1009,7 +1012,7 @@ begin
   if not Assigned(vselPersona) then
     vselPersona:= TFBuscarPersona.Create(nil);
   vselPersona.btnBuscar.Click;
-  vselPersona.OnSeleccionar := onSelPersona;
+  vselPersona.OnSeleccionar:= onSelPersona;
   vselPersona.ShowModal;
 end;
 
@@ -1034,7 +1037,7 @@ begin
 
     CD_Facturas.EmptyDataSet;
     EKSuma_Factura.RecalcAll;
-    editTotalFacturas.Text := FormatFloat('$ ###,###,###,##0.00', 0);
+    editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', 0);
     PanelFacturas.Visible:= false;
   end
   else
@@ -1042,7 +1045,7 @@ begin
       btnBuscarEmpresa.Down:= true;
 
   EKDBDateEmision.SetFocus;
-  
+
   vselPersona.Close;
 end;
 
@@ -1050,32 +1053,33 @@ end;
 //----------------------
 //    FORMA DE PAGO
 //----------------------
+
 procedure TFABM_CPB_OrdenPago.DBGridEditar_FpagoColExit(Sender: TObject);
 begin
   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then //SI ESTOY DANDO DE ALTA O EDITANDO
   begin
-      //ORDEN DE PAGO - CUENTA DE EGRESO
-      if ((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Nombre') then
-      begin
-        if (not ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull) then
-          exit;
+    //ORDEN DE PAGO - CUENTA DE EGRESO
+    if ((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Nombre') then
+    begin
+      if (not ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull) then
+        exit;
 
-        buscarCuenta;
-      end;
+      buscarCuenta;
+    end;
 
-      //MEDIO
-      if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
-      begin
-        //si no hay ninguna cuenta cargada salgo
-        if ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull then
-          exit;
+    //MEDIO
+    if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
+    begin
+      //si no hay ninguna cuenta cargada salgo
+      if ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull then
+        exit;
 
-        //si hay algo cargado salgo
-        if not ZQ_CpbFormaPagoID_TIPO_FORMAPAG.IsNull then
-          exit;
+      //si hay algo cargado salgo
+      if not ZQ_CpbFormaPagoID_TIPO_FORMAPAG.IsNull then
+        exit;
 
-        buscarFormaPago;
-      end;
+      buscarFormaPago;
+    end;
   end;
 end;
 
@@ -1122,7 +1126,7 @@ end;
 
 procedure TFABM_CPB_OrdenPago.EKSuma_FPagoSumListChanged(Sender: TObject);
 begin
-  editTotalFinal.Text := FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
+  editTotalFinal.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
 end;
 
 
@@ -1139,14 +1143,14 @@ begin
   ZQ_BuscarMail.Close;
   if ZQ_VerCpbID_PROVEEDOR.IsNull then //si es un CLIENTE
   begin
-      ZQ_BuscarMail.SQL.Text:= Format('select p.email from persona p where p.id_persona = %d',
-                                       [ZQ_VerCpbID_CLIENTE.AsInteger]);
+    ZQ_BuscarMail.SQL.Text:= Format('select p.email from persona p where p.id_persona = %d',
+      [ZQ_VerCpbID_CLIENTE.AsInteger]);
   end
   else
     if ZQ_VerCpbID_CLIENTE.IsNull then //si es un PROVEEDOR
     begin
       ZQ_BuscarMail.SQL.Text:= Format('select e.email from empresa e where e.id_empresa = %d',
-                                       [ZQ_VerCpbID_PROVEEDOR.AsInteger]);
+        [ZQ_VerCpbID_PROVEEDOR.AsInteger]);
     end;
 
   ZQ_BuscarMail.Open;
@@ -1154,17 +1158,18 @@ begin
     destino:= ZQ_BuscarMailEMAIL.AsString;
 
   if not Assigned(FImpresion_Comprobantes) then
-    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
+    FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
   FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, false);
   archivoPDF:= FImpresion_Comprobantes.generarPDF;
 
   //if not Assigned(TFMailEnviar) then
-    Application.CreateForm(TFMailEnviar, FMailEnviar);
+  Application.CreateForm(TFMailEnviar, FMailEnviar);
   FMailEnviar.enviarConAdjunto(destino, dm.ZQ_SucursalNOMBRE.AsString, archivoPDF);
   FMailEnviar.ShowModal;
 end;
 
 //VER EL DEL ABM RECIBO
+
 procedure TFABM_CPB_OrdenPago.btnConfirmarClick(Sender: TObject);
 var
   recno, estado: Integer;
@@ -1186,7 +1191,7 @@ begin
       if ZQ_ComprobanteID_TIPO_CPB.AsInteger = CPB_OP_CTA_CTE then
       begin
         ZQ_ConfirmarOPCtaCte.Close;
-        ZQ_ConfirmarOPCtaCte.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+        ZQ_ConfirmarOPCtaCte.ParamByName('ID_COMPROBANTE').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
         ZQ_ConfirmarOPCtaCte.ExecSQL;
       end;
 
@@ -1195,7 +1200,7 @@ begin
           dm.EKModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
-          Application.MessageBox('No se pudo confirmar la Orden de Pago.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          Application.MessageBox('No se pudo confirmar la Orden de Pago.', 'Atención', MB_OK + MB_ICONINFORMATION);
           exit;
         end
       end;
@@ -1209,6 +1214,7 @@ end;
 
 
 //VER LA BAJA DE ABM RECIBO
+
 procedure TFABM_CPB_OrdenPago.btnBajaClick(Sender: TObject);
 var
   recno, estado: Integer;
@@ -1231,7 +1237,7 @@ begin
       if ZQ_ComprobanteID_TIPO_CPB.AsInteger = CPB_OP_CTA_CTE then
       begin
         ZQ_AnularOPCtaCte.Close;
-        ZQ_AnularOPCtaCte.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+        ZQ_AnularOPCtaCte.ParamByName('ID_COMPROBANTE').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
         ZQ_AnularOPCtaCte.ExecSQL;
       end;
 
@@ -1240,7 +1246,7 @@ begin
           dm.EKModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
-          Application.MessageBox('No se pudo anular la Orden de Pago.', 'Atención',MB_OK+MB_ICONINFORMATION);
+          Application.MessageBox('No se pudo anular la Orden de Pago.', 'Atención', MB_OK + MB_ICONINFORMATION);
           exit;
         end
       end;
@@ -1259,17 +1265,17 @@ begin
   begin
     DBGridListaCpb.Canvas.Brush.Color:= StaticTxtConfirmado.Color;
     if (gdFocused in State) or (gdSelected in State) then
-      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
+      DBGridListaCpb.Canvas.Font.Style:= DBGridListaCpb.Canvas.Font.Style + [fsBold];
   end;
 
   if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ANULADO) then //si el registro esta dado de baja
   begin
     DBGridListaCpb.Canvas.Brush.Color:= StaticTxtBaja.Color;
     if (gdFocused in State) or (gdSelected in State) then
-      DBGridListaCpb.Canvas.Font.Style := DBGridListaCpb.Canvas.Font.Style + [fsBold];
+      DBGridListaCpb.Canvas.Font.Style:= DBGridListaCpb.Canvas.Font.Style + [fsBold];
   end;
 
-  DBGridListaCpb.DefaultDrawColumnCell(rect,datacol,column,state);
+  DBGridListaCpb.DefaultDrawColumnCell(rect, datacol, column, state);
 
   FPrincipal.PintarFilasGrillas(DBGridListaCpb, Rect, DataCol, Column, State);
 end;
@@ -1300,12 +1306,12 @@ var
   jpg: TJpegImage;
 begin
   try
-   if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
-    //si esta activa la transaccion
-    if buscarImagen.Execute then //abro para buscar la imagen
-     begin
-      CargaImagen(buscarImagen.FileName);
-     end
+    if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+      //si esta activa la transaccion
+      if buscarImagen.Execute then //abro para buscar la imagen
+      begin
+        CargaImagen(buscarImagen.FileName);
+      end
   except
     showmessage('Formato de Imagen no soportado (debe bajar la resolución).');
   end;
@@ -1315,11 +1321,11 @@ end;
 procedure TFABM_CPB_OrdenPago.CargaImagen(Archivo: string);
 var
   imagenArchivo: TGraphic; //contiene la imagen, es del tipo TGraphic poque puede ser jpg o bmp
-  imagenJPG : TJPEGImage;
+  imagenJPG: TJPEGImage;
   Rectangulo: TRect;
   EscalaX,
-  EscalaY,
-  Escala: Single;
+    EscalaY,
+    Escala: Single;
 begin
   //creo el tipo correcto dependiendo de la extencion del archivo
   if pos('.jpg', archivo) > 0 then
@@ -1350,32 +1356,32 @@ begin
     end;
 
     //Por defecto, escala 1:1
-    EscalaX := 1.0;
-    EscalaY := 1.0;
+    EscalaX:= 1.0;
+    EscalaY:= 1.0;
 
-//    //Hallamos la escala de reducción Horizontal
-//    if edImagen.Width < imagenJPG.Width then
-//      EscalaX := edImagen.Width / imagenJPG.Width;
-//
-//    //La escala vertical
-//    if edImagen.Height < imagenJPG.Height then
-//      EscalaY := edImagen.Height / imagenJPG.Height;
+    //    //Hallamos la escala de reducción Horizontal
+    //    if edImagen.Width < imagenJPG.Width then
+    //      EscalaX := edImagen.Width / imagenJPG.Width;
+    //
+    //    //La escala vertical
+    //    if edImagen.Height < imagenJPG.Height then
+    //      EscalaY := edImagen.Height / imagenJPG.Height;
 
-    //Escogemos la menor de las 2
-    if EscalaY < EscalaX then Escala := EscalaY else Escala := EscalaX;
+        //Escogemos la menor de las 2
+    if EscalaY < EscalaX then Escala:= EscalaY else Escala:= EscalaX;
 
     //Y la usamos para reducir el rectangulo destino
     with Rectangulo do begin
-      Right := Trunc(imagenJPG.Width * Escala);
-      Bottom := Trunc(imagenJPG.Height * Escala);
-      Left := 0;
-      Top := 0;
+      Right:= Trunc(imagenJPG.Width * Escala);
+      Bottom:= Trunc(imagenJPG.Height * Escala);
+      Left:= 0;
+      Top:= 0;
     end;
 
     //Dibujamos el bitmap con el nuevo tamaño en el TImage destino
     with edImagen.Picture.Bitmap do begin
-      Width := Rectangulo.Right;
-      Height := Rectangulo.Bottom;
+      Width:= Rectangulo.Right;
+      Height:= Rectangulo.Bottom;
       Canvas.StretchDraw(Rectangulo, imagenJPG);
     end;
 
@@ -1388,10 +1394,10 @@ end;
 
 procedure TFABM_CPB_OrdenPago.popUp_VerImagen1Click(Sender: TObject);
 begin
-   Application.CreateForm(TFVerImagen, FVerImagen);
-   FVerImagen.cargarImagenComprobante(ZQ_ComprobanteID_COMPROBANTE.AsInteger);
-   FVerImagen.ShowModal;
-   FVerImagen.Release;
+  Application.CreateForm(TFVerImagen, FVerImagen);
+  FVerImagen.cargarImagenComprobante(ZQ_ComprobanteID_COMPROBANTE.AsInteger);
+  FVerImagen.ShowModal;
+  FVerImagen.Release;
 end;
 
 
@@ -1400,7 +1406,7 @@ begin
   if CD_Facturas.IsEmpty then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea quitar la factura seleccionada ('+CD_Facturas_descripcion.AsString+')?'), 'ABM Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea quitar la factura seleccionada (' + CD_Facturas_descripcion.AsString + ')?'), 'ABM Orden de Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
     CD_Facturas.Delete;
 
   DBGridFacturas.SetFocus;
@@ -1429,15 +1435,15 @@ begin
   begin
     btnAgregarFactura.Down:= true;
 
-    CD_Facturas.Filter:= '_idFactura = '+vselFactura.ZQ_Factura_CompraID_COMPROBANTE.AsString;
+    CD_Facturas.Filter:= '_idFactura = ' + vselFactura.ZQ_Factura_CompraID_COMPROBANTE.AsString;
     CD_Facturas.Filtered:= true;
     if not CD_Facturas.IsEmpty then
-     begin
-      CD_Facturas.Filtered := false;
-      Application.MessageBox('La Factura seleccionada ya fue cargada','Carga Factura',MB_OK+MB_ICONINFORMATION);
+    begin
+      CD_Facturas.Filtered:= false;
+      Application.MessageBox('La Factura seleccionada ya fue cargada', 'Carga Factura', MB_OK + MB_ICONINFORMATION);
       exit;
-     end;
-    CD_Facturas.Filtered := false;
+    end;
+    CD_Facturas.Filtered:= false;
 
     CD_Facturas.Append;
     CD_Facturas_idComprobante.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
@@ -1460,7 +1466,7 @@ end;
 
 procedure TFABM_CPB_OrdenPago.EKSuma_FacturaSumListChanged(Sender: TObject);
 begin
-  editTotalFacturas.Text := FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[0].SumValue);
+  editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[0].SumValue);
 end;
 
 
@@ -1597,13 +1603,13 @@ end;
 procedure TFABM_CPB_OrdenPago.buscarFormaPago;
 begin
   EKListadoMedio.SQL.Clear;
-  EKListadoMedio.SQL.Add(Format('select tipo.* '+
-                                'from tipo_formapago tipo '+
-                                'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) '+
-                                'where tipo.baja = %s ' +
-                                '  and ctfp.id_cuenta = %d ' +
-                                'order by tipo.descripcion',
-                                [QuotedStr('N'), id_cuenta_fpago]));
+  EKListadoMedio.SQL.Add(Format('select tipo.* ' +
+    'from tipo_formapago tipo ' +
+    'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) ' +
+    'where tipo.baja = %s ' +
+    '  and ctfp.id_cuenta = %d ' +
+    'order by tipo.descripcion',
+    [QuotedStr('N'), id_cuenta_fpago]));
 
   if EKListadoMedio.Buscar then
   begin
