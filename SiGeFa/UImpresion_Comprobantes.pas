@@ -773,8 +773,68 @@ type
     QRDBText141: TQRDBText;
     QRDBText143: TQRDBText;
     QRLabel271: TQRLabel;
+    TabSheet10: TTabSheet;
+    RepDevolucion: TQuickRep;
+    QRBand41: TQRBand;
+    QRShape13: TQRShape;
+    QRLabel273: TQRLabel;
+    QRLabel276: TQRLabel;
+    QRDBText163: TQRDBText;
+    QRDBText164: TQRDBText;
+    QRDBText165: TQRDBText;
+    QRLabel279: TQRLabel;
+    QRDBImage2: TQRDBImage;
+    QRLabel287: TQRLabel;
+    QRLabel288: TQRLabel;
+    RepDevolucion_RENGLON4: TQRLabel;
+    RepDevolucion_RENGLON3: TQRLabel;
+    RepDevolucion_RENGLON2: TQRLabel;
+    RepDevolucion_TITULO: TQRLabel;
+    RepDevolucion_RENGLON1: TQRLabel;
+    QRLabel309: TQRLabel;
+    QRBand42: TQRBand;
+    QRLabel310: TQRLabel;
+    QRLabel311: TQRLabel;
+    QRLabel312: TQRLabel;
+    QRLabel313: TQRLabel;
+    QRLabel314: TQRLabel;
+    QRLabel315: TQRLabel;
+    QRLabel316: TQRLabel;
+    QRDBText166: TQRDBText;
+    QRDBText167: TQRDBText;
+    QRDBText168: TQRDBText;
+    QRDBText169: TQRDBText;
+    QRDBText170: TQRDBText;
+    QRDBText171: TQRDBText;
+    QRDBText172: TQRDBText;
+    QRSubDetail20: TQRSubDetail;
+    QRDBText174: TQRDBText;
+    QRDBText175: TQRDBText;
+    QRDBText176: TQRDBText;
+    QRDBText177: TQRDBText;
+    QRDBText178: TQRDBText;
+    QRDBText179: TQRDBText;
+    QRlblDevolucionTipo: TQRLabel;
+    QRBand44: TQRBand;
+    QRBand45: TQRBand;
+    QRlblDevolucion_PiePagina: TQRLabel;
+    QRChildBand23: TQRChildBand;
+    QRDBText180: TQRDBText;
+    QRLabel333: TQRLabel;
+    ChildBand10: TQRChildBand;
+    QRLabel320: TQRLabel;
+    ChildBand11: TQRChildBand;
+    QRLabel327: TQRLabel;
+    QRLabel325: TQRLabel;
+    QRLabel321: TQRLabel;
+    QRLabel322: TQRLabel;
+    QRLabel324: TQRLabel;
+    QRLabel323: TQRLabel;
+    QRLabel326: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRSubDetail20BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
   private
     reporte: TQuickRep;
@@ -789,7 +849,8 @@ type
     procedure configOrdenPago();
     procedure configReciboCtaCte();
     procedure configOrdenPagoCtaCte();
-    procedure configDevolucion();
+    procedure configNotaCredito();
+    procedure configDevolucion();    
     procedure imprimir();
     function  generarPDF(): string;
   end;
@@ -827,6 +888,7 @@ begin
     ZQ_Fpago.Close;
     ZQ_Fpago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
     ZQ_Fpago.Open;
+    zq_fpago.Filtered:= false;
 
     ZQ_Producto.Close;
     ZQ_Producto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
@@ -858,12 +920,15 @@ begin
                           reporte:= RepOrdenPago;
                           archivoPDF:= 'OrdenPago.pdf';
                         end;
-      CPB_DEVOL_CREDITO: begin //CPB_DEVOLUCION
+      CPB_DEVOLUCION:   begin //CPB_DEVOLUCION
                           configDevolucion;
-                         end;
-      CPB_DEVOL_DEBITO:  begin //CPB_DEVOLUCION
-                          configDevolucion;
-                         end;
+                        end;
+      CPB_NOTA_CREDITO: begin //CPB_DEVOLUCION
+                          configNotaCredito;
+                        end;
+      CPB_NOTA_DEBITO:  begin //CPB_DEVOLUCION
+//                          configNotaDebito;
+                        end;
       CPB_RECIBO_CTA_CTE: begin //CPB_RECIBO_COBRO
                             configReciboCtaCte;
                             reporte:= RepReciboCtaCte;
@@ -898,15 +963,18 @@ begin
 end;
 
 
-//DEVOLUCION
-procedure TFImpresion_Comprobantes.configDevolucion();
+//NOTA CREDITO
+procedure TFImpresion_Comprobantes.configNotaCredito();
 var
   ImporteTotal: double;
 begin
   if ZQ_Destino.IsEmpty then
     exit;
 
-  if ZQ_FpagoID_TIPO_FORMAPAG.AsInteger = FP_NOTA_CREDITO then //si es una nota de credito
+  ZQ_Fpago.Filter:= '(CUENTA_EGRESO = 2)';
+  zq_fpago.Filtered:= true;
+
+  if not ZQ_Fpago.IsEmpty then //si es una nota de credito
   begin
     ImporteTotal:= EKDbSumaFpago.SumCollection[0].sumvalue;
     EKNumeroALetras.Numero := ImporteTotal;
@@ -1053,7 +1121,7 @@ var
 begin
   if ZQ_Comprobante.IsEmpty then
     exit;
-
+                              
   ImporteTotal:= EKDbSumaFpago.SumCollection[0].sumvalue;
   EKNumeroALetras.Numero := ImporteTotal;
   QRlblOrdenPago_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
@@ -1083,6 +1151,25 @@ begin
   QRlblNotaCreditoTipo.Caption:= 'ING';
   if ZQ_ProductoDEVOLUCION.AsInteger > 0 then
     QRlblNotaCreditoTipo.Caption:= 'EGR';
+end;
+
+procedure TFImpresion_Comprobantes.QRSubDetail20BeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+  QRlblDevolucionTipo.Caption:= 'ING';
+  if ZQ_ProductoDEVOLUCION.AsInteger > 0 then
+    QRlblDevolucionTipo.Caption:= 'EGR';
+end;
+
+
+procedure TFImpresion_Comprobantes.configDevolucion;
+begin
+  if ZQ_Destino.IsEmpty then
+    exit;
+
+  QRlblDevolucion_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  DM.VariablesComprobantes(RepDevolucion);
+  EKVistaPrevia.Reporte:= RepDevolucion;
 end;
 
 end.

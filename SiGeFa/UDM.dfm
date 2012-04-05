@@ -2,12 +2,12 @@ object DM: TDM
   OldCreateOrder = False
   Left = 556
   Top = 31
-  Height = 436
-  Width = 350
+  Height = 455
+  Width = 396
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'C:\SISTEMAS\SiGeFa\Bases\SiGeFa.FDB'
+    Database = 'D:\PROYECTOS\EMPIRIKA\SiGeFa\Bases\SiGeFa LOPEZ.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -1953,7 +1953,7 @@ object DM: TDM
       'order by zt.id desc')
     Params = <>
     Left = 288
-    Top = 320
+    Top = 328
     object ZQ_ValidarFecha_HoraID: TLargeintField
       FieldName = 'ID'
       Required = True

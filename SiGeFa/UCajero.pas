@@ -498,7 +498,7 @@ type
     PABM_FormaPago: TPanel;
     Label18: TLabel;
     Label47: TLabel;
-    edDetalleMDP: TDBLookupComboBox;
+    edDetalleMDPCbox: TDBLookupComboBox;
     Label48: TLabel;
     edMDPFecha: TDBEdit;
     Label49: TLabel;
@@ -557,6 +557,9 @@ type
     AVentaRapida: TAction;
     EKListadoMedio: TEKListadoSQL;
     EKListadoCuenta: TEKListadoSQL;
+    ZQ_SaldoNotaCredito: TZQuery;
+    ZQ_SaldoNotaCreditoSALDO: TFloatField;
+    edDetalleMDP: TDBEdit;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -652,6 +655,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure buscarCuenta(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShiftState);
+    function verificarSaldoNotaCredito(query: TDataSet; id_cliente: integer): boolean;
   Private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -663,8 +667,6 @@ type
     procedure OnSelPreventa;
     { Private declarations }
   Public
-
-
     { Public declarations }
   end;
 
@@ -995,7 +997,7 @@ begin
   CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
   CD_ComprobanteID_TIPO_CPB.AsInteger:= 11; //Factura
   CD_ComprobanteID_VENDEDOR.AsInteger:= IdVendedor;
-  CD_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
+  CD_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
 
   if CheckBoxCambiarFecha.Checked then
     CD_ComprobanteFECHA.AsDateTime:= DateTimePicker_FechaCarga.DateTime
@@ -1906,6 +1908,14 @@ begin
     exit;
   end;
 
+  //verifico si lo que me paga con Nota de credito es menor o igual al saldo disponible en Nota de credito
+  if (not verificarSaldoNotaCredito(CD_Fpago, CD_ComprobanteID_CLIENTE.AsInteger)) then
+  begin
+    Application.MessageBox(pchar('El total a abonar en Nota de Credito es superior al saldo disponible, por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+    result:= false; 
+    exit;
+  end;
+
   //Saco las formas de pago que sean con importe=0 o sale si no tiene cuenta(al cuete)
   CD_Fpago.First;
   while not (CD_Fpago.Eof) do
@@ -2683,6 +2693,7 @@ procedure TFCajero.buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShift
 begin
   if key = 112 then
   begin
+    id_cuenta_fpago:= CD_FpagoCUENTA_INGRESO.AsInteger;
     EKListadoMedio.SQL.Clear;
     EKListadoMedio.SQL.Add(Format('select tipo.* '+
                                   'from tipo_formapago tipo '+
@@ -2700,6 +2711,38 @@ begin
       end;
     end;
   end;
+end;
+
+
+function TFCajero.verificarSaldoNotaCredito(query: TDataSet; id_cliente: integer): boolean;
+var
+  totalNotaCredito: double;
+begin
+  Result:= true;
+  if query.IsEmpty then
+    exit;
+
+  //obtengo el saldo en nota de credito que tiene el cliente
+  ZQ_SaldoNotaCredito.Close;
+  ZQ_SaldoNotaCredito.ParamByName('id_cliente').AsInteger:= id_cliente;
+  ZQ_SaldoNotaCredito.Open;
+
+  //calculo todo lo que me va a pagar con Nota de Credito
+  totalNotaCredito:= 0;
+  query.First;
+  while not query.Eof do //por cada una de las formas de pago cargadas
+  begin
+    //si la forma de pago es nota de credito
+    if query.FieldByName('CUENTA_INGRESO').AsInteger = 2 then
+      totalNotaCredito:= totalNotaCredito + query.FieldByName('IMPORTE').AsFloat;
+
+    query.Next;
+  end;
+
+  //si lo que esta pagando en Nota de Credito es mayo al saldo que tiene devuelvo False
+  //para que no lo deje cancelar
+  if totalNotaCredito > ZQ_SaldoNotaCreditoSALDO.AsFloat then
+    Result:= false;
 end;
 
 end.

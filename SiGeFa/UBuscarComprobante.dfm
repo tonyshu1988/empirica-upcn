@@ -1,6 +1,6 @@
 object FBuscarComprobante: TFBuscarComprobante
-  Left = 379
-  Top = 257
+  Left = 396
+  Top = 247
   Width = 730
   Height = 426
   Caption = 'Buscar Factura'
@@ -26,9 +26,9 @@ object FBuscarComprobante: TFBuscarComprobante
     TabOrder = 0
     object DBGridFacturas: TDBGrid
       Left = 1
-      Top = 1
+      Top = 26
       Width = 712
-      Height = 231
+      Height = 163
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -84,25 +84,17 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object PanelDetalle: TPanel
       Left = 1
-      Top = 232
+      Top = 210
       Width = 712
-      Height = 103
+      Height = 125
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 1
-      object lblDetalleFactura: TLabel
+      object DBGridDetalle: TDBGrid
         Left = 0
         Top = 0
         Width = 712
-        Height = 13
-        Align = alTop
-        Caption = 'Detalle Factura'
-      end
-      object DBGridDetalle: TDBGrid
-        Left = 0
-        Top = 13
-        Width = 712
-        Height = 90
+        Height = 125
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alClient
         Color = 14606012
@@ -144,6 +136,73 @@ object FBuscarComprobante: TFBuscarComprobante
             Width = 128
             Visible = True
           end>
+      end
+    end
+    object Panel1: TPanel
+      Tag = 99
+      Left = 1
+      Top = 1
+      Width = 712
+      Height = 25
+      Align = alTop
+      BevelOuter = bvNone
+      Color = clRed
+      TabOrder = 2
+      object DBText1: TDBText
+        Left = 115
+        Top = 5
+        Width = 350
+        Height = 13
+        DataField = 'NOMBRE'
+        DataSource = DS_Entidad
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label1: TLabel
+        Left = 7
+        Top = 5
+        Width = 104
+        Height = 13
+        Caption = 'Cuenta Corriente:'
+      end
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 189
+      Width = 712
+      Height = 21
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 3
+      DesignSize = (
+        712
+        21)
+      object lblDetalleFactura: TLabel
+        Left = 3
+        Top = 6
+        Width = 86
+        Height = 13
+        Anchors = [akLeft, akBottom]
+        Caption = 'Detalle Factura'
+      end
+      object lblSaldoTotal: TLabel
+        Left = 623
+        Top = 3
+        Width = 85
+        Height = 13
+        Alignment = taRightJustify
+        Anchors = [akRight, akBottom]
+        Caption = 'lblSaldoTotal'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
       end
     end
   end
@@ -801,7 +860,7 @@ object FBuscarComprobante: TFBuscarComprobante
       Caption = 'F3 - Seleccionar Todos'
       Category = 0
       Hint = 'F3 - Seleccionar Todos'
-      Visible = ivNever
+      Visible = ivAlways
       ImageIndex = 12
       OnClick = btnSeleccionarTodosClick
       AutoGrayScale = False
@@ -976,26 +1035,34 @@ object FBuscarComprobante: TFBuscarComprobante
     SQL.Strings = (
       
         'select distinct c.id_comprobante, c.id_cliente, c.codigo, cast(c' +
-        '.fecha as Date) fecha, c.importe_venta,'
-      '       cfp.importe_real,'
-      '       case'
-      '        when (c.id_tipo_cpb = 11) then '#39'FACTURA '#39'||c.codigo'
-      '        when (c.id_tipo_cpb = 25) then c.observacion'
-      '       end as Descripcion'
+        '.fecha as date) fecha, c.importe_venta,'
+      '                cfp.importe_real,'
+      '                case'
+      
+        '                  when (c.id_tipo_cpb = 11) then '#39'FACTURA '#39' || c' +
+        '.codigo'
+      '                  when (c.id_tipo_cpb = 25) then c.observacion'
+      
+        '                  when (c.id_tipo_cpb = 12) then '#39'DEVOLUCION '#39' |' +
+        '| lpad(c.punto_venta, 4, '#39'0'#39') || '#39'-'#39' || lpad(c.numero_cpb, 8, '#39'0' +
+        #39')'
+      '                end as descripcion'
       'from comprobante c'
       
-        'left join comprobante_forma_pago cfp on (c.id_comprobante = cfp.' +
-        'id_comprobante)'
+        'inner join comprobante_forma_pago cfp on (c.id_comprobante = cfp' +
+        '.id_comprobante)'
       
-        'left join comprobante_detalle cd on (c.id_comprobante = cd.id_co' +
-        'mprobante)'
-      'left join producto pr on (cd.id_producto = pr.id_producto)'
+        'inner join comprobante_detalle cd on (c.id_comprobante = cd.id_c' +
+        'omprobante)'
+      'inner join producto pr on (cd.id_producto = pr.id_producto)'
       
-        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
-        'rod_cabecera)'
+        'inner join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_' +
+        'prod_cabecera)'
+      'where ((c.id_tipo_cpb = 11'
       
-        'where ((c.id_tipo_cpb = 11 and cfp.cuenta_ingreso = 1) or (c.id_' +
-        'tipo_cpb = 25))'
+        '  and cfp.cuenta_ingreso = 1) or (c.id_tipo_cpb = 25) or (c.id_t' +
+        'ipo_cpb = 12'
+      '  and cfp.cuenta_ingreso = 1))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
       '  and c.id_cliente = :id_cliente'
@@ -1003,28 +1070,36 @@ object FBuscarComprobante: TFBuscarComprobante
     SQL_Select.Strings = (
       
         'select distinct c.id_comprobante, c.id_cliente, c.codigo, cast(c' +
-        '.fecha as Date) fecha, c.importe_venta,'
-      '       cfp.importe_real,'
-      '       case'
-      '        when (c.id_tipo_cpb = 11) then '#39'FACTURA '#39'||c.codigo'
-      '        when (c.id_tipo_cpb = 25) then c.observacion'
-      '       end as Descripcion')
+        '.fecha as date) fecha, c.importe_venta,'
+      '                cfp.importe_real,'
+      '                case'
+      
+        '                  when (c.id_tipo_cpb = 11) then '#39'FACTURA '#39' || c' +
+        '.codigo'
+      '                  when (c.id_tipo_cpb = 25) then c.observacion'
+      
+        '                  when (c.id_tipo_cpb = 12) then '#39'DEVOLUCION '#39' |' +
+        '| lpad(c.punto_venta, 4, '#39'0'#39') || '#39'-'#39' || lpad(c.numero_cpb, 8, '#39'0' +
+        #39')'
+      '                end as descripcion')
     SQL_From.Strings = (
       'from comprobante c'
       
-        'left join comprobante_forma_pago cfp on (c.id_comprobante = cfp.' +
-        'id_comprobante)'
+        'inner join comprobante_forma_pago cfp on (c.id_comprobante = cfp' +
+        '.id_comprobante)'
       
-        'left join comprobante_detalle cd on (c.id_comprobante = cd.id_co' +
-        'mprobante)'
-      'left join producto pr on (cd.id_producto = pr.id_producto)'
+        'inner join comprobante_detalle cd on (c.id_comprobante = cd.id_c' +
+        'omprobante)'
+      'inner join producto pr on (cd.id_producto = pr.id_producto)'
       
-        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
-        'rod_cabecera)')
+        'inner join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_' +
+        'prod_cabecera)')
     SQL_Where.Strings = (
+      'where ((c.id_tipo_cpb = 11'
       
-        'where ((c.id_tipo_cpb = 11 and cfp.cuenta_ingreso = 1) or (c.id_' +
-        'tipo_cpb = 25))'
+        '  and cfp.cuenta_ingreso = 1) or (c.id_tipo_cpb = 25) or (c.id_t' +
+        'ipo_cpb = 12'
+      '  and cfp.cuenta_ingreso = 1))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
       '  and c.id_cliente = :id_cliente')
@@ -1037,7 +1112,7 @@ object FBuscarComprobante: TFBuscarComprobante
   end
   object ATeclasRapidas: TActionManager
     Left = 32
-    Top = 162
+    Top = 250
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -1052,6 +1127,7 @@ object FBuscarComprobante: TFBuscarComprobante
     object ASelTodos: TAction
       Caption = 'ASelTodos'
       ShortCut = 114
+      OnExecute = ASelTodosExecute
     end
     object ASalir: TAction
       Caption = 'ASalir'
@@ -1324,5 +1400,55 @@ object FBuscarComprobante: TFBuscarComprobante
     PantallaReducida = True
     Left = 328
     Top = 104
+  end
+  object ZQ_Entidad: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select nombre'
+      'from persona'
+      'where id_persona = :id')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    Left = 472
+    Top = 48
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object ZQ_EntidadNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+  end
+  object DS_Entidad: TDataSource
+    DataSet = ZQ_Entidad
+    Left = 480
+    Top = 104
+  end
+  object EKDbSumaVenta: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_REAL'
+      end>
+    DataSet = ZQ_Factura_Venta
+    Left = 337
+    Top = 250
+  end
+  object EKDbSumaCompra: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_REAL'
+      end>
+    DataSet = ZQ_Factura_Compra
+    Left = 457
+    Top = 250
   end
 end
