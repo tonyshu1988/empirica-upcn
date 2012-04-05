@@ -1546,12 +1546,26 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               801
               24)
             object Label24: TLabel
-              Left = 573
+              Left = 575
               Top = 5
               Width = 94
               Height = 13
               Anchors = [akTop, akRight]
               Caption = 'Total a Cancelar'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object Label31: TLabel
+              Left = 373
+              Top = 5
+              Width = 64
+              Height = 13
+              Anchors = [akTop, akRight]
+              Caption = 'Saldo Total'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -1579,6 +1593,27 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               ParentFont = False
               ReadOnly = True
               TabOrder = 0
+            end
+            object editTotalSaldo: TEdit
+              Left = 440
+              Top = 2
+              Width = 129
+              Height = 19
+              Anchors = [akTop, akRight]
+              AutoSize = False
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BiDiMode = bdRightToLeft
+              Color = 12189695
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentBiDiMode = False
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 1
             end
           end
           object DBGridFacturas: TDBGrid
@@ -4212,7 +4247,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
-      'where cta.baja = '#39'N'#39' and cta.id_cuenta > 2')
+      'where cta.baja = '#39'N'#39' and cta.id_cuenta > 1')
     Params = <>
     Left = 373
     Top = 369
@@ -4258,7 +4293,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     SQL.Strings = (
       'select fp.*'
       'from tipo_formapago fp'
-      'where fp.baja = '#39'N'#39' and fp.id_tipo_formapago > 2')
+      'where fp.baja = '#39'N'#39' and fp.id_tipo_formapago > 1')
     Params = <>
     Left = 445
     Top = 369
@@ -4291,7 +4326,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
       'where cta.baja = '#39'N'#39
-      'and cta.id_cuenta > 2')
+      'and cta.id_cuenta > 1')
     CampoBuscar = 'busqueda'
     CampoClave = 'id_cuenta'
     TituloVentana = 'Buscar Cuenta'
@@ -4347,7 +4382,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       'select tipo.*'
       'from tipo_formapago tipo'
       'where tipo.baja = '#39'N'#39
-      'and tipo.id_tipo_formapago > 2')
+      'and tipo.id_tipo_formapago > 1')
     CampoBuscar = 'descripcion'
     CampoClave = 'id_tipo_formapago'
     TituloVentana = 'Buscar Medio'
@@ -4649,7 +4684,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         Tabla = 'sucursal'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = DM.ZQ_SucursalesVisibles
         TipoComboSQLCampoVer = 'nombre'
         TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
@@ -4783,6 +4817,10 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       item
         Operacion = goSum
         NombreCampo = '_importeCancelar'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = '_saldoComprobante'
       end>
     DataSet = CD_Facturas
     SumListChanged = EKSuma_FacturaSumListChanged
@@ -4942,5 +4980,29 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
+  end
+  object ZQ_SaldoNotaCredito: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select saldo'
+      'from calc_saldo_nota_credito(:id_cliente)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    Left = 37
+    Top = 321
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    object ZQ_SaldoNotaCreditoSALDO: TFloatField
+      FieldName = 'SALDO'
+      ReadOnly = True
+    end
   end
 end

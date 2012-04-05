@@ -216,28 +216,28 @@ type
     procedure AABM_PersonasPtosExecute(Sender: TObject);
     procedure AConsulta_PreciosExecute(Sender: TObject);
     procedure AShutdownExecute(Sender: TObject);
-  private
+  Private
     { Private declarations }
-  public
+  Public
     baja, bajaFocus,
-    activo, activoFocus,
-    resaltado, resaltadoFocus: Tcolor;
+      activo, activoFocus,
+      resaltado, resaltadoFocus: Tcolor;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure PintarFilasGrillasConBajas(grilla: TDBGrid; valor: string; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    function  cerrar_ventana(transaccion: string): boolean;
+    function cerrar_ventana(transaccion: string): boolean;
   end;
 
 var
   FPrincipal: TFPrincipal;
 
 type
-  THackDBGrid = class(TDBGrid);  
+  THackDBGrid = class(TDBGrid);
 
 implementation
 
 {$R *.dfm}
 
-Uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
+uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UABM_Articulo, UABM_TipoArticulo, UABM_Marcas, UABM_ArticuloMedida,
   UABM_TipoEmpresa, UABM_Sucursal, UABM_SucursalPosicion,
   UABM_ProductoStock, UABM_Personas,
@@ -265,25 +265,38 @@ begin
   dm.ZQ_Configuracion_Variables.Close;
   dm.ZQ_Configuracion_Variables.Open;
 
- //Chequeo que la hora y fecha del Server Sean Correctas
+  //Chequeo que la hora y fecha del Server Sean Correctas
+  //pregunto si existe la variable de configuracion
   if dm.ZQ_Configuracion_Variables.Locate('CLAVE', vararrayof(['validar_fecha_hora']), []) then
   begin
+    //si existe, pregunto si esta en SI
     if (dm.ZQ_Configuracion_Variables.fieldbyname('texto').AsString = 'SI') then
     begin
+      //obtengo la ultima fecha y hora del ultimo movimiento registrado en la auditoria
       dm.ZQ_ValidarFecha_Hora.Close;
       dm.ZQ_ValidarFecha_Hora.Open;
 
-      i := DaysBetween(dm.EKModelo.FechayHora, dm.ZQ_ValidarFecha_HoraDATE_TIME.AsDateTime);
+      //calculo la cantidad de dias que pasaron desde el ultimo ingreso y hoy
+      i:= DaysBetween(dm.EKModelo.FechayHora, dm.ZQ_ValidarFecha_HoraDATE_TIME.AsDateTime);
 
-      if (dm.ZQ_ValidarFecha_HoraDATE_TIME.AsDateTime > dm.EKModelo.FechayHora) or (i > dm.ZQ_Configuracion_Variables.fieldbyname('numero').AsInteger) then
+      //si la fecha y hora del ultimo movimiento es mayo a la fecha y hora actual
+      //o si la cantidad de dias transcurridos es mayor al valor establecido en la variable de configuracion
+      //que indica cuantos dias pueden pasar desde el ultimo ingreso
+      if (dm.ZQ_ValidarFecha_HoraDATE_TIME.AsDateTime > dm.EKModelo.FechayHora)
+        or (i > dm.ZQ_Configuracion_Variables.fieldbyname('numero').AsInteger) then
       begin
-          if not(Application.MessageBox('ATENCIÓN!!!'+Char(13)+Char(13)+'El Ultimo ingreso al sistema es mayor al ingreso actual, '+Char(13)+'o pasaron muchos dias sin que el sistema fuese usado.'+Char(13)+'Verifique la fecha y Hora del Servidor.'+Char(13)+Char(13)+'¿Desea Continuar ejecutando el sistema?','',MB_YESNO+MB_ICONWARNING)= IDYES) then
-            Application.Terminate;
+        //muestro un informe para que chequeen la hora del servidor
+        if not (Application.MessageBox('ATENCIÓN!!!' + #13 + #13
+          + 'La Fecha y Hora actual del Servidor es más antigua'
+          + #13 + 'a la Fecha y Hora del último ingreso registrado,'
+          + #13 + 'o pasaron muchos días sin que el sistema fuese utilizado.'
+          + #13 + 'Verifique la Fecha y Hora del Servidor.'
+          + #13 + 'Si continúa ejecutando puede ocasionarse incompatibilidad al sincronizar.'
+          + #13 + #13 + '¿Desea continuar ejecutando el sistema?', '', MB_YESNO + MB_ICONWARNING) = IDYES) then
+          Application.Terminate;
       end;
-
     end;
   end;
-
 
   pertenece:= false;
   SUCURSAL_LOGUEO:= -1;
@@ -291,39 +304,39 @@ begin
   dm.ZQ_Configuracion.Close;
   dm.ZQ_Configuracion.Open;
 
-  if not dm.ZQ_ConfiguracionDB_SUCURSAL.IsNull  then
+  if not dm.ZQ_ConfiguracionDB_SUCURSAL.IsNull then
   begin
     SUCURSAL_LOGUEO:= dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger; //cargo la sucursal a la cual pertenece la base de datos
 
     if DM.EKUsrLogin.PermisoAccionValorGrupo('ACCESO') <> nil then
     begin
       sucursales:= DM.EKUsrLogin.PermisoAccionValorGrupo('ACCESO'); //obtengo todas las sucursales
-    end;                                                            //a las q tiene acceso el usuario
+    end; //a las q tiene acceso el usuario
 
-    for  i:= 0 to Length(sucursales) - 1 do //Recorro todas las sucursales
-    begin                                   //del usuario seleccionado
-      if (SUCURSAL_LOGUEO = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0)then
+    for i:= 0 to Length(sucursales) - 1 do //Recorro todas las sucursales
+    begin //del usuario seleccionado
+      if (SUCURSAL_LOGUEO = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0) then
         pertenece:= true;
     end;
   end;
 
-  if not pertenece then  //si no selecciono ninguna sucursal o el
+  if not pertenece then //si no selecciono ninguna sucursal o el
   begin
     if SUCURSAL_LOGUEO = -1 then
       ShowMessage('La Base de Datos no tiene asociada una sucursal, verifique.')
     else
       ShowMessage('El usuario ingresado no tiene permisos en esta sucursal, verifique.');
-    Application.Terminate;      //usuario no tiene asignada ninguna salgo del sistema
+    Application.Terminate; //usuario no tiene asignada ninguna salgo del sistema
   end;
 
   dm.buscarSucursalesVisibles;
   dm.configMail('SUCURSAL', SUCURSAL_LOGUEO);
   dm.cargarReporteSucursal(SUCURSAL_LOGUEO);
-  StatusBar1.Panels[0].text:= 'SUCURSAL: '+inttostr(SUCURSAL_LOGUEO);
-  baja:= colorBaja.Color;    //ROJO = color de los registros dados de baja
-  bajafocus:= colorBajaFocus.Color;    //ROJO OSCURO = color del registro seleccionado dado de baja
-  activo:= colorActivo.Color;  //AZUL = color de los registro activos
-  activofocus:= colorActivoFocus.Color;  //AZUL OSCURO = color del registro seleccionado activo
+  StatusBar1.Panels[0].text:= 'SUCURSAL: ' + inttostr(SUCURSAL_LOGUEO);
+  baja:= colorBaja.Color; //ROJO = color de los registros dados de baja
+  bajafocus:= colorBajaFocus.Color; //ROJO OSCURO = color del registro seleccionado dado de baja
+  activo:= colorActivo.Color; //AZUL = color de los registro activos
+  activofocus:= colorActivoFocus.Color; //AZUL OSCURO = color del registro seleccionado activo
   resaltado:= colorResaltado.Color; //
   resaltadofocus:= colorResaltadoFocus.Color; //
 
@@ -348,13 +361,13 @@ begin
   cerrarSistema:= 0;
   if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
   begin
-   dm.ZQ_Configuracion_Variables.Open;
-   dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'shutdown', []);
+    dm.ZQ_Configuracion_Variables.Open;
+    dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'shutdown', []);
 
-   if (dm.ZQ_Configuracion_VariablesTEXTO.AsString = 'SI') then
-    cerrarSistema:= 1;
+    if (dm.ZQ_Configuracion_VariablesTEXTO.AsString = 'SI') then
+      cerrarSistema:= 1;
 
-   if not (dm.EKModelo.finalizar_transaccion('shutdown')) then
+    if not (dm.EKModelo.finalizar_transaccion('shutdown')) then
       dm.EKModelo.cancelar_transaccion('shutdown');
   end;
   if cerrarSistema = 1 then
@@ -365,15 +378,15 @@ begin
 end;
 
 
-function cerrar_sistema:boolean;
+function cerrar_sistema: boolean;
 begin
-  result := true;
+  result:= true;
   if dm.EKModelo.hay_transaccion then
   begin
-    if Application.MessageBox('Hay transacciones abiertas, Desea cerrar igualmente la aplicación', 'Atención', MB_YESNO ) = IDYES then
+    if Application.MessageBox('Hay transacciones abiertas, Desea cerrar igualmente la aplicación', 'Atención', MB_YESNO) = IDYES then
       ExitProcess(0)
     else
-      result := false;
+      result:= false;
   end
   else
     ExitProcess(0);
@@ -382,13 +395,14 @@ end;
 
 //FUNCION PARA CERRAR LAS VENTANAS Y UNIFICAR EL MENSAJE.
 //SE LE PASA COMO PARAMETRO LA TRANSACCION QUE HAY QUE VERIFICAR.
-function  TFPrincipal.cerrar_ventana(transaccion: string):boolean;
+
+function TFPrincipal.cerrar_ventana(transaccion: string): boolean;
 begin
   Result:= True;
 
   if DM.EKModelo.verificar_transaccion(transaccion) then
   begin
-    if not (application.MessageBox(pchar('Si continua con el cierre se perderan los cambios realizados.'+#13+#13+'¿Salir de todos modos?'),'Atención', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+    if not (application.MessageBox(pchar('Si continua con el cierre se perderan los cambios realizados.' + #13 + #13 + '¿Salir de todos modos?'), 'Atención', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
       Result:= False
     else
       DM.EKModelo.cancelar_transaccion(transaccion);
@@ -397,13 +411,14 @@ end;
 
 
 //PROCEDURE PARA PINTAR LAS FILAS DE LA GRILLA QUE SE PASA POR PARAMETROS.
+
 procedure TFPrincipal.PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
   a: TRect;
 begin
   if grilla.DataSource.DataSet.IsEmpty then
     exit;
-    
+
   a:= Rect;
 
   if (THackDBGrid(grilla).DataLink.ActiveRecord + 1 = THackDBGrid(grilla).Row) then
@@ -416,17 +431,18 @@ begin
     if (gdFocused in State) or (gdSelected in State) then
     begin
       grilla.Canvas.Brush.Color:= resaltadoFocus;
-      grilla.Canvas.Font.Style := grilla.Canvas.Font.Style + [fsBold];
+      grilla.Canvas.Font.Style:= grilla.Canvas.Font.Style + [fsBold];
     end;
   end;
 
-  grilla.DefaultDrawColumnCell(a,datacol,column,state);
+  grilla.DefaultDrawColumnCell(a, datacol, column, state);
 end;
 
 
 //PROCEDURE PARA PINTAR LAS FILAS DE LA GRILLA QUE SE PASA POR PARAMETROS.
 //Y SI EL PARAMETRO VALOR ES 'S' SE PINTA LA FILA EN ROJO
-procedure TFPrincipal.PintarFilasGrillasConBajas(grilla: TDBGrid; valor:string; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+
+procedure TFPrincipal.PintarFilasGrillasConBajas(grilla: TDBGrid; valor: string; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
   a: TRect;
 begin
@@ -437,13 +453,13 @@ begin
 
   if (valor = 'S') then //si el registro esta dado de baja
   begin
-    grilla.Canvas.Font.Color := clBlack;
+    grilla.Canvas.Font.Color:= clBlack;
     grilla.Canvas.Brush.Color:= baja;
     if (gdFocused in State) or (gdSelected in State) then
     begin
-      grilla.Canvas.Font.Color := clwhite;
+      grilla.Canvas.Font.Color:= clwhite;
       grilla.Canvas.Brush.Color:= bajaFocus;
-      grilla.Canvas.Font.Style := grilla.Canvas.Font.Style + [fsBold];
+      grilla.Canvas.Font.Style:= grilla.Canvas.Font.Style + [fsBold];
     end
   end;
 
@@ -457,17 +473,17 @@ begin
     if (gdFocused in State) or (gdSelected in State) then
     begin
       grilla.Canvas.Brush.Color:= resaltadoFocus;
-      grilla.Canvas.Font.Style := grilla.Canvas.Font.Style + [fsBold];
+      grilla.Canvas.Font.Style:= grilla.Canvas.Font.Style + [fsBold];
     end;
   end;
 
-  grilla.DefaultDrawColumnCell(a,datacol,column,state);
+  grilla.DefaultDrawColumnCell(a, datacol, column, state);
 end;
 
 
 procedure TFPrincipal.CambiarContraseniaClick(Sender: TObject);
 var
-  i:integer;
+  i: integer;
 begin
   dm.EKUsrLogin.CambiarClave;
 end;
@@ -483,7 +499,7 @@ procedure TFPrincipal.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
   if not cerrar_sistema then
-    CanClose := false;
+    CanClose:= false;
 end;
 
 
@@ -495,7 +511,7 @@ end;
 
 procedure TFPrincipal.AAcerca_deExecute(Sender: TObject);
 begin
-  Application.CreateForm(TFAcerca_De,FAcerca_De);
+  Application.CreateForm(TFAcerca_De, FAcerca_De);
   FAcerca_De.ShowModal;
   FAcerca_De.Release;
 end;
@@ -744,13 +760,13 @@ end;
 
 procedure TFPrincipal.APreventaExecute(Sender: TObject);
 begin
-   EKVentanas1.Abrir(Sender, TFABM_Preventa, FABM_Preventa);
+  EKVentanas1.Abrir(Sender, TFABM_Preventa, FABM_Preventa);
 end;
 
 
 procedure TFPrincipal.ACtaCte_ProveedorExecute(Sender: TObject);
 begin
-   EKVentanas1.Abrir(Sender, TFCuentaCorriente_Proveedor, FCuentaCorriente_Proveedor);
+  EKVentanas1.Abrir(Sender, TFCuentaCorriente_Proveedor, FCuentaCorriente_Proveedor);
 end;
 
 
@@ -797,23 +813,24 @@ end;
 procedure TFPrincipal.AShutdownExecute(Sender: TObject);
 begin
 
- if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
+  if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
   begin
-   dm.ZQ_Configuracion_Variables.Open;
-   dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'shutdown', []);
-   dm.ZQ_Configuracion_Variables.Edit;
+    dm.ZQ_Configuracion_Variables.Open;
+    dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'shutdown', []);
+    dm.ZQ_Configuracion_Variables.Edit;
 
-   dm.ZQ_Configuracion_VariablesTEXTO.AsString := 'SI';
-   dm.ZQ_Configuracion_Variables.Post;
+    dm.ZQ_Configuracion_VariablesTEXTO.AsString:= 'SI';
+    dm.ZQ_Configuracion_Variables.Post;
 
-   if not (dm.EKModelo.finalizar_transaccion('shutdown')) then
+    if not (dm.EKModelo.finalizar_transaccion('shutdown')) then
       dm.EKModelo.cancelar_transaccion('shutdown');
   end;
 
   WinExec(Pchar(
-            Format('%s -user SYSDBA -password masterkey %s:%s -shut -force 0',[ExtractFilePath(Application.ExeName)+'gfix.exe',dm.Conexion.HostName,dm.Conexion.Database]))
-            ,SW_HIDE);
+    Format('%s -user SYSDBA -password masterkey %s:%s -shut -force 0', [ExtractFilePath(Application.ExeName) + 'gfix.exe', dm.Conexion.HostName, dm.Conexion.Database]))
+    , SW_HIDE);
 
 end;
 
 end.
+

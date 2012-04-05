@@ -6,8 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, ComCtrls, DBCtrls, StdCtrls,
-  Mask, ZSqlUpdate,DateUtils, EKOrdenarGrilla, EKBusquedaAvanzada,
-  ActnList, XPStyleActnCtrls, ActnMan;
+  Mask, ZSqlUpdate, DateUtils, EKOrdenarGrilla, EKBusquedaAvanzada,
+  ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma;
 
 type
   TFBuscarComprobante = class(TForm)
@@ -38,7 +38,6 @@ type
     ZQ_Factura_VentaDESCRIPCION: TStringField;
     PanelDetalle: TPanel;
     DBGridDetalle: TDBGrid;
-    lblDetalleFactura: TLabel;
     ZQ_Detalle: TZQuery;
     DS_Detalle: TDataSource;
     ZQ_DetalleCODIGO_BARRA: TStringField;
@@ -54,6 +53,17 @@ type
     ZQ_Factura_CompraIMPORTE_VENTA: TFloatField;
     ZQ_Factura_CompraIMPORTE_REAL: TFloatField;
     ZQ_Factura_CompraDESCRIPCION: TStringField;
+    Panel1: TPanel;
+    ZQ_Entidad: TZQuery;
+    ZQ_EntidadNOMBRE: TStringField;
+    DBText1: TDBText;
+    DS_Entidad: TDataSource;
+    Label1: TLabel;
+    Panel2: TPanel;
+    lblDetalleFactura: TLabel;
+    lblSaldoTotal: TLabel;
+    EKDbSumaVenta: TEKDbSuma;
+    EKDbSumaCompra: TEKDbSuma;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
@@ -71,9 +81,10 @@ type
       State: TGridDrawState);
     procedure ZQ_Factura_VentaAfterScroll(DataSet: TDataSet);
     procedure ZQ_Factura_CompraAfterScroll(DataSet: TDataSet);
-  private
+    procedure ASelTodosExecute(Sender: TObject);
+  Private
     { Private declarations }
-  public
+  Public
     { Public declarations }
     OnSeleccionar: procedure() of object;
     OnSeleccionarTodos: procedure() of object;
@@ -101,10 +112,16 @@ end;
 procedure TFBuscarComprobante.btnBuscarClick(Sender: TObject);
 begin
   if facturaVenta then
+  begin
     EKBuscarFacturaVenta.Buscar;
-
-  if facturaCompra then
-    EKBuscarFacturaCompra.Buscar;
+    lblSaldoTotal.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSumaVenta.SumCollection[0].SumValue) + '  ';
+  end
+  else
+    if facturaCompra then
+    begin
+      EKBuscarFacturaCompra.Buscar;
+      lblSaldoTotal.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSumaCompra.SumCollection[0].SumValue) + '  ';
+    end;
 
   query.First;
 end;
@@ -112,23 +129,23 @@ end;
 
 procedure TFBuscarComprobante.btnSeleccionarClick(Sender: TObject);
 begin
-  if ((not(DBGridFacturas.SelectedRows.Count > 0)) and (not(query.IsEmpty))) then
+  if ((not (DBGridFacturas.SelectedRows.Count > 0)) and (not (query.IsEmpty))) then
   begin
     if Assigned(OnSeleccionar) then
       OnSeleccionar
   end
   else
-    Application.MessageBox(PChar('Debe seleccionar algúna Factura.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
+    Application.MessageBox(PChar('Debe seleccionar algúna Factura.'), 'Datos Incompletos', MB_OK + MB_ICONWARNING);
 end;
 
 
 procedure TFBuscarComprobante.FormActivate(Sender: TObject);
 begin
-//  if query.IsEmpty then
-//  begin
-//    Application.ProcessMessages;
-//    btnBuscar.Click;
-//  end;
+  //  if query.IsEmpty then
+  //  begin
+  //    Application.ProcessMessages;
+  //    btnBuscar.Click;
+  //  end;
 end;
 
 
@@ -158,6 +175,7 @@ begin
   idActual:= -1;
   facturaVenta:= false;
   facturaCompra:= false;
+  lblSaldoTotal.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', 0) + '  ';
 
   //EKOrdenarGrilla.CargarConfigColumnas;
 end;
@@ -177,7 +195,7 @@ begin
       OnSeleccionarTodos
   end
   else
-    Application.MessageBox(PChar('No hay ningúna Factura para seleccionar.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
+    Application.MessageBox(PChar('No hay ningúna Factura para seleccionar.'), 'Datos Incompletos', MB_OK + MB_ICONWARNING);
 end;
 
 
@@ -201,20 +219,28 @@ begin
   if facturaVenta then //si es una factura de venta
   begin
     query:= ZQ_Factura_Venta;
-    EKBuscarFacturaVenta.SQL_Where[3]:= 'and c.id_cliente = '+IntToStr(id);
+    EKBuscarFacturaVenta.SQL_Where[5]:= 'and c.id_cliente = ' + IntToStr(id);
+
+    ZQ_Entidad.Close;
+    ZQ_Entidad.SQL.Text:= 'select nombre from persona where id_persona = ' + IntToStr(id);
+    ZQ_Entidad.Open;
   end
   else
     if facturaCompra then
     begin
       query:= ZQ_Factura_Compra;
-      EKBuscarFacturaCompra.SQL_Where[3]:= 'and c.id_proveedor = '+IntToStr(id);
+      EKBuscarFacturaCompra.SQL_Where[3]:= 'and c.id_proveedor = ' + IntToStr(id);
+
+      ZQ_Entidad.Close;
+      ZQ_Entidad.SQL.Text:= 'select nombre from empresa where id_empresa = ' + IntToStr(id);
+      ZQ_Entidad.Open;
     end;
 
   if idActual <> id then
   begin
     idActual:= id;
     query.Close;
-    ZQ_Detalle.Close;    
+    ZQ_Detalle.Close;
   end;
 
   DS_Factura.DataSet:= query;
@@ -230,7 +256,7 @@ begin
   lblDetalleFactura.Caption:= 'Detalle ';
   if not ZQ_Factura_Venta.IsEmpty then
   begin
-    lblDetalleFactura.Caption:= 'Detalle '+ZQ_Factura_VentaDESCRIPCION.AsString;
+    lblDetalleFactura.Caption:= 'Detalle ' + ZQ_Factura_VentaDESCRIPCION.AsString;
     ZQ_Detalle.ParamByName('id_comprobante').AsInteger:= ZQ_Factura_VentaID_COMPROBANTE.AsInteger;
     ZQ_Detalle.Open;
   end;
@@ -246,10 +272,18 @@ begin
   lblDetalleFactura.Caption:= 'Detalle ';
   if not ZQ_Factura_Compra.IsEmpty then
   begin
-    lblDetalleFactura.Caption:= 'Detalle '+ZQ_Factura_CompraDESCRIPCION.AsString;
+    lblDetalleFactura.Caption:= 'Detalle ' + ZQ_Factura_CompraDESCRIPCION.AsString;
     ZQ_Detalle.ParamByName('id_comprobante').AsInteger:= ZQ_Factura_CompraID_COMPROBANTE.AsInteger;
     ZQ_Detalle.Open;
   end;
 end;
 
+
+procedure TFBuscarComprobante.ASelTodosExecute(Sender: TObject);
+begin
+  if btnSeleccionarTodos.Enabled then
+    btnSeleccionarTodos.Click;
+end;
+
 end.
+

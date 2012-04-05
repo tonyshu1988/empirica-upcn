@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 280
-  Top = 199
+  Left = 233
+  Top = 60
   Width = 1032
   Height = 700
   Caption = 'Cajero SiGeFa'
@@ -4177,7 +4177,7 @@ object FCajero: TFCajero
       Width = 83
       Height = 13
       Caption = 'Medio de Pago'
-      FocusControl = edDetalleMDP
+      FocusControl = edDetalleMDPCbox
     end
     object Label48: TLabel
       Left = 323
@@ -4243,7 +4243,7 @@ object FCajero: TFCajero
       Caption = 'C'#243'digo'
       FocusControl = edCodMDP
     end
-    object edDetalleMDP: TDBLookupComboBox
+    object edDetalleMDPCbox: TDBLookupComboBox
       Left = 482
       Top = 40
       Width = 329
@@ -4251,13 +4251,16 @@ object FCajero: TFCajero
       Color = 16771302
       DataField = 'medioPago'
       DataSource = DSFpago
+      DropDownRows = 0
+      Enabled = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 4
+      Visible = False
       OnExit = edCodCuentaExit
       OnKeyUp = buscarFormaPago
     end
@@ -4275,7 +4278,7 @@ object FCajero: TFCajero
       Font.Name = 'Verdana'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 7
     end
     object edMDPBanco: TDBEdit
       Left = 435
@@ -4291,7 +4294,7 @@ object FCajero: TFCajero
       Font.Name = 'Verdana'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 8
     end
     object edMDPNro: TDBEdit
       Left = 634
@@ -4307,7 +4310,7 @@ object FCajero: TFCajero
       Font.Name = 'Verdana'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 8
+      TabOrder = 9
     end
     object edImporte: TDBEdit
       Left = 16
@@ -4323,7 +4326,7 @@ object FCajero: TFCajero
       Font.Name = 'Verdana'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 5
       OnExit = edCodCuentaExit
     end
     object edCodCuenta: TDBEdit
@@ -4352,6 +4355,7 @@ object FCajero: TFCajero
       Color = 16771302
       DataField = '_ctaIngreso'
       DataSource = DSFpago
+      DropDownRows = 0
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -4377,7 +4381,7 @@ object FCajero: TFCajero
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 6
     end
     object edCodMDP: TDBEdit
       Left = 435
@@ -4403,7 +4407,7 @@ object FCajero: TFCajero
       Width = 79
       Height = 25
       Caption = 'Aceptar'
-      TabOrder = 9
+      TabOrder = 10
       OnClick = btFPAceptarClick
     end
     object btFPCancelar: TBitBtn
@@ -4413,8 +4417,26 @@ object FCajero: TFCajero
       Height = 25
       Cancel = True
       Caption = 'Cancelar'
-      TabOrder = 10
+      TabOrder = 11
       OnClick = btFPCancelarClick
+    end
+    object edDetalleMDP: TDBEdit
+      Left = 482
+      Top = 40
+      Width = 329
+      Height = 21
+      Color = 16771302
+      DataField = 'medioPago'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarFormaPago
     end
   end
   object PVentaDirecta: TPanel
@@ -4795,16 +4817,6 @@ object FCajero: TFCajero
       DisplayWidth = 50
       FieldName = 'ID_TIPO_FORMAPAG'
     end
-    object CD_FpagomedioPago: TStringField
-      FieldKind = fkLookup
-      FieldName = 'medioPago'
-      LookupDataSet = ZQ_FormasPago
-      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
-      LookupResultField = 'DESCRIPCION'
-      KeyFields = 'ID_TIPO_FORMAPAG'
-      Size = 50
-      Lookup = True
-    end
     object CD_FpagoMDCP_FECHA: TDateField
       FieldName = 'MDCP_FECHA'
       EditMask = '!99/99/0000;1;_'
@@ -4840,6 +4852,16 @@ object FCajero: TFCajero
       LookupResultField = 'NOMBRE_CUENTA'
       KeyFields = 'CUENTA_INGRESO'
       Size = 100
+      Lookup = True
+    end
+    object CD_FpagomedioPago: TStringField
+      FieldKind = fkLookup
+      FieldName = 'medioPago'
+      LookupDataSet = ZQ_FormasPago
+      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'ID_TIPO_FORMAPAG'
+      Size = 50
       Lookup = True
     end
     object CD_Fpago_desc_rec: TFloatField
@@ -9071,5 +9093,29 @@ object FCajero: TFCajero
     TituloVentana = 'Buscar Cuenta'
     Left = 757
     Top = 489
+  end
+  object ZQ_SaldoNotaCredito: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select saldo'
+      'from calc_saldo_nota_credito(:id_cliente)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    Left = 893
+    Top = 193
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    object ZQ_SaldoNotaCreditoSALDO: TFloatField
+      FieldName = 'SALDO'
+      ReadOnly = True
+    end
   end
 end
