@@ -1,8 +1,8 @@
 object FCuentaCorriente: TFCuentaCorriente
-  Left = 219
-  Top = 99
+  Left = 257
+  Top = 49
   Width = 1009
-  Height = 749
+  Height = 715
   Caption = 'Cta. Cte. Cliente'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,8 +23,8 @@ object FCuentaCorriente: TFCuentaCorriente
   object PanelResumen: TPanel
     Left = 0
     Top = 0
-    Width = 1001
-    Height = 670
+    Width = 993
+    Height = 625
     Align = alClient
     TabOrder = 1
     object RepCtasCtes: TQuickRep
@@ -140,9 +140,9 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            582.083333333333400000
+            582.083333333333300000
             124.354166666666700000
-            735.541666666666800000)
+            735.541666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -173,7 +173,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Size.Values = (
             52.916666666666670000
             746.125000000000000000
-            68.791666666666680000
+            68.791666666666670000
             404.812500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -204,7 +204,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            719.666666666666800000
+            719.666666666666700000
             5.291666666666667000
             460.375000000000000000)
           Alignment = taCenter
@@ -569,7 +569,7 @@ object FCuentaCorriente: TFCuentaCorriente
             37.041666666666670000
             10.583333333333330000
             5.291666666666667000
-            645.583333333333400000)
+            645.583333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -728,7 +728,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -776,7 +776,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -1016,13 +1016,13 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object PanelResumen_Abajo: TPanel
       Left = 1
-      Top = 617
-      Width = 999
+      Top = 572
+      Width = 991
       Height = 52
       Align = alBottom
       TabOrder = 0
       DesignSize = (
-        999
+        991
         52)
       object Panel1: TPanel
         Left = 199
@@ -1169,8 +1169,8 @@ object FCuentaCorriente: TFCuentaCorriente
     object DBGridResumen_CtaCtes: TDBGrid
       Left = 1
       Top = 20
-      Width = 999
-      Height = 597
+      Width = 991
+      Height = 552
       Align = alClient
       Color = 14606012
       DataSource = DS_CtaCte_Gral
@@ -1315,7 +1315,7 @@ object FCuentaCorriente: TFCuentaCorriente
     object PanelResumen_Arriba: TPanel
       Left = 1
       Top = 1
-      Width = 999
+      Width = 991
       Height = 19
       Align = alTop
       TabOrder = 2
@@ -1334,7 +1334,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 889
+        Left = 881
         Top = 1
         Width = 109
         Height = 17
@@ -1352,8 +1352,8 @@ object FCuentaCorriente: TFCuentaCorriente
   object PanelCliente: TPanel
     Left = 0
     Top = 0
-    Width = 1001
-    Height = 670
+    Width = 993
+    Height = 625
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -1473,7 +1473,7 @@ object FCuentaCorriente: TFCuentaCorriente
             50.270833333333330000
             595.312500000000000000
             124.354166666666700000
-            709.083333333333400000)
+            709.083333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1504,8 +1504,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Size.Values = (
             52.916666666666670000
             762.000000000000000000
-            68.791666666666680000
-            375.708333333333400000)
+            68.791666666666670000
+            375.708333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1535,7 +1535,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            743.479166666666800000
+            743.479166666666700000
             5.291666666666667000
             412.750000000000000000)
           Alignment = taCenter
@@ -1873,7 +1873,7 @@ object FCuentaCorriente: TFCuentaCorriente
             37.041666666666670000
             10.583333333333330000
             5.291666666666667000
-            645.583333333333400000)
+            645.583333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -2176,7 +2176,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             338.666666666666700000
             18.520833333333330000
             277.812500000000000000)
@@ -2241,8 +2241,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             63.500000000000000000
             145.520833333333300000)
           Alignment = taLeftJustify
@@ -2339,8 +2339,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             108.479166666666700000
             174.625000000000000000)
           Alignment = taLeftJustify
@@ -2404,8 +2404,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            391.583333333333400000
+            34.395833333333330000
+            391.583333333333300000
             108.479166666666700000
             153.458333333333300000)
           Alignment = taLeftJustify
@@ -2469,8 +2469,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            965.729166666666800000
+            34.395833333333330000
+            965.729166666666700000
             108.479166666666700000
             153.458333333333300000)
           Alignment = taLeftJustify
@@ -2501,8 +2501,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            931.333333333333500000
+            34.395833333333330000
+            931.333333333333300000
             63.500000000000000000
             134.937500000000000000)
           Alignment = taLeftJustify
@@ -2599,8 +2599,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             153.458333333333300000
             238.125000000000000000)
           Alignment = taLeftJustify
@@ -2664,10 +2664,10 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            677.333333333333400000
+            34.395833333333330000
+            677.333333333333300000
             153.458333333333300000
-            288.395833333333400000)
+            288.395833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -2729,8 +2729,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             198.437500000000000000
             214.312500000000000000)
           Alignment = taLeftJustify
@@ -2794,8 +2794,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            783.166666666666800000
+            34.395833333333330000
+            783.166666666666700000
             198.437500000000000000
             161.395833333333300000)
           Alignment = taLeftJustify
@@ -2826,8 +2826,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             18.520833333333330000
             111.125000000000000000)
           Alignment = taLeftJustify
@@ -2891,8 +2891,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
-            42.333333333333340000
+            34.395833333333330000
+            42.333333333333330000
             243.416666666666700000
             203.729166666666700000)
           Alignment = taLeftJustify
@@ -3163,7 +3163,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             0.000000000000000000
             2.645833333333333000
             1897.062500000000000000)
@@ -3189,16 +3189,16 @@ object FCuentaCorriente: TFCuentaCorriente
     object PanelCliente_CtaCte: TPanel
       Left = 3
       Top = 126
-      Width = 995
-      Height = 456
+      Width = 987
+      Height = 411
       Align = alClient
       BorderWidth = 3
       TabOrder = 0
       object DBGridCliente_CtaCte: TDBGrid
         Left = 4
         Top = 4
-        Width = 987
-        Height = 308
+        Width = 979
+        Height = 123
         Align = alClient
         Color = 14606012
         DataSource = DS_CtaCte_Cliente
@@ -3219,14 +3219,6 @@ object FCuentaCorriente: TFCuentaCorriente
             Title.Caption = 'Fecha'
             Width = 134
             Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FECHA_FP'
-            Title.Alignment = taCenter
-            Title.Caption = 'Fecha Pago'
-            Width = -1
-            Visible = False
           end
           item
             Expanded = False
@@ -3293,8 +3285,8 @@ object FCuentaCorriente: TFCuentaCorriente
       end
       object DBGridDetalle_Producto: TDBGrid
         Left = 4
-        Top = 312
-        Width = 987
+        Top = 267
+        Width = 979
         Height = 140
         Align = alBottom
         Color = 14606012
@@ -3356,11 +3348,51 @@ object FCuentaCorriente: TFCuentaCorriente
             Visible = True
           end>
       end
+      object DBGridDetalle_Recibo: TDBGrid
+        Left = 4
+        Top = 127
+        Width = 979
+        Height = 140
+        Align = alBottom
+        Color = 14606012
+        DataSource = DS_ReciboDetalle
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 2
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'FECHA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Fecha'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DESCRIPCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Descripci'#243'n'
+            Width = 454
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'IMPORTE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Importe Pagado'
+            Width = 140
+            Visible = True
+          end>
+      end
     end
     object PanelCliente_Datos: TPanel
       Left = 3
       Top = 3
-      Width = 995
+      Width = 987
       Height = 99
       Align = alTop
       BevelInner = bvRaised
@@ -3720,18 +3752,18 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object PanelCliente_Resumen: TPanel
       Left = 3
-      Top = 582
-      Width = 995
+      Top = 537
+      Width = 987
       Height = 85
       Align = alBottom
       TabOrder = 2
       DesignSize = (
-        995
+        987
         85)
       object lblFiltro_Fechas: TLabel
         Left = 1
         Top = 1
-        Width = 993
+        Width = 985
         Height = 17
         Align = alTop
         Alignment = taCenter
@@ -3997,7 +4029,7 @@ object FCuentaCorriente: TFCuentaCorriente
     object PanelFiltro: TPanel
       Left = 3
       Top = 102
-      Width = 995
+      Width = 987
       Height = 24
       Align = alTop
       ParentShowHint = False
@@ -4232,7 +4264,7 @@ object FCuentaCorriente: TFCuentaCorriente
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4890,6 +4922,10 @@ object FCuentaCorriente: TFCuentaCorriente
     object ZQ_ClienteCODIGO_CORTO: TIntegerField
       FieldName = 'CODIGO_CORTO'
     end
+    object ZQ_ClienteCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
     object ZQ_ClienteNOMBRE_PROVINCIA: TStringField
       FieldName = 'NOMBRE_PROVINCIA'
       Size = 50
@@ -4908,18 +4944,31 @@ object FCuentaCorriente: TFCuentaCorriente
     object ZQ_ClienteID_CTA_CTE: TIntegerField
       FieldName = 'ID_CTA_CTE'
     end
+    object ZQ_ClienteID_PERSONA_1: TIntegerField
+      FieldName = 'ID_PERSONA_1'
+    end
+    object ZQ_ClienteID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
     object ZQ_ClienteSALDO: TFloatField
       FieldName = 'SALDO'
+      currency = True
     end
     object ZQ_ClienteLIMITE_DEUDA: TFloatField
       FieldName = 'LIMITE_DEUDA'
-      currency = True
+    end
+    object ZQ_ClienteVENCIMIENTO_DIAS: TIntegerField
+      FieldName = 'VENCIMIENTO_DIAS'
     end
     object ZQ_ClienteFECHA_ALTA: TDateField
       FieldName = 'FECHA_ALTA'
     end
     object ZQ_ClienteFECHA_BAJA: TDateField
       FieldName = 'FECHA_BAJA'
+    end
+    object ZQ_ClienteBAJA_1: TStringField
+      FieldName = 'BAJA_1'
+      Size = 1
     end
   end
   object DS_Cliente: TDataSource
@@ -4947,7 +4996,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Name = 'id_cliente'
         ParamType = ptUnknown
       end>
-    Left = 141
+    Left = 144
     Top = 158
     ParamData = <
       item
@@ -4955,6 +5004,9 @@ object FCuentaCorriente: TFCuentaCorriente
         Name = 'id_cliente'
         ParamType = ptUnknown
       end>
+    object ZQ_CtaCte_GralID_CLIENTE_OUT: TIntegerField
+      FieldName = 'ID_CLIENTE_OUT'
+    end
     object ZQ_CtaCte_GralLIMITE_DEUDA: TFloatField
       FieldName = 'LIMITE_DEUDA'
       currency = True
@@ -5018,15 +5070,14 @@ object FCuentaCorriente: TFCuentaCorriente
     object ZQ_CtaCte_GralCODIGO_CORTO: TIntegerField
       FieldName = 'CODIGO_CORTO'
     end
-    object ZQ_CtaCte_GralID_CLIENTE_OUT: TIntegerField
-      FieldName = 'ID_CLIENTE_OUT'
-    end
     object ZQ_CtaCte_GralVENCIMIENTO_DIAS: TIntegerField
       FieldName = 'VENCIMIENTO_DIAS'
     end
+    object ZQ_CtaCte_GralID_PROVEEDOR_OUT: TIntegerField
+      FieldName = 'ID_PROVEEDOR_OUT'
+    end
     object ZQ_CtaCte_GralDEUDA_VENCIDA: TStringField
       FieldName = 'DEUDA_VENCIDA'
-      ReadOnly = True
       Size = 1
     end
   end
@@ -5040,12 +5091,9 @@ object FCuentaCorriente: TFCuentaCorriente
     AfterScroll = ZQ_CtaCte_ClienteAfterScroll
     SQL.Strings = (
       
-        'select cc.tipo_comprobante, cc.id_comprobante, cc.id_cuenta, cc.' +
-        'id_vendedor, cc.id_tipo_iva, cc.id_tipo_fp,'
-      
-        '       cc.fecha, cc.observacion, cc.fecha_fp, cc.debe, cc.haber,' +
-        ' cc.saldo_cpb, cc.saldo, cc.id_comprob_fp,'
-      '       s.nombre as Sucursal'
+        'select cc.tipo_comprobante, cc.id_comprobante, cc.id_vendedor, c' +
+        'c.fecha, cc.observacion, cc.debe, cc.haber,'
+      '       cc.saldo_cpb, cc.saldo, s.nombre as sucursal'
       
         'from ctacte_individual(:id_sucursal, :id_cliente, :id_proveedor,' +
         ' :fecha_desde, :fecha_hasta) cc'
@@ -5109,51 +5157,41 @@ object FCuentaCorriente: TFCuentaCorriente
       end>
     object ZQ_CtaCte_ClienteTIPO_COMPROBANTE: TStringField
       FieldName = 'TIPO_COMPROBANTE'
+      ReadOnly = True
       Size = 100
     end
     object ZQ_CtaCte_ClienteID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
-    end
-    object ZQ_CtaCte_ClienteID_CUENTA: TIntegerField
-      FieldName = 'ID_CUENTA'
+      Required = True
     end
     object ZQ_CtaCte_ClienteID_VENDEDOR: TIntegerField
       FieldName = 'ID_VENDEDOR'
     end
-    object ZQ_CtaCte_ClienteID_TIPO_IVA: TIntegerField
-      FieldName = 'ID_TIPO_IVA'
-    end
-    object ZQ_CtaCte_ClienteID_TIPO_FP: TIntegerField
-      FieldName = 'ID_TIPO_FP'
-    end
-    object ZQ_CtaCte_ClienteFECHA: TDateField
+    object ZQ_CtaCte_ClienteFECHA: TDateTimeField
       FieldName = 'FECHA'
     end
     object ZQ_CtaCte_ClienteOBSERVACION: TStringField
       FieldName = 'OBSERVACION'
       Size = 500
     end
-    object ZQ_CtaCte_ClienteFECHA_FP: TDateField
-      FieldName = 'FECHA_FP'
-    end
     object ZQ_CtaCte_ClienteDEBE: TFloatField
       FieldName = 'DEBE'
+      ReadOnly = True
       currency = True
     end
     object ZQ_CtaCte_ClienteHABER: TFloatField
       FieldName = 'HABER'
+      ReadOnly = True
       currency = True
     end
     object ZQ_CtaCte_ClienteSALDO_CPB: TFloatField
       FieldName = 'SALDO_CPB'
+      ReadOnly = True
       currency = True
     end
     object ZQ_CtaCte_ClienteSALDO: TFloatField
       FieldName = 'SALDO'
       currency = True
-    end
-    object ZQ_CtaCte_ClienteID_COMPROB_FP: TIntegerField
-      FieldName = 'ID_COMPROB_FP'
     end
     object ZQ_CtaCte_ClienteSUCURSAL: TStringField
       FieldName = 'SUCURSAL'
@@ -5231,6 +5269,10 @@ object FCuentaCorriente: TFCuentaCorriente
       item
         TituloColumna = 'Baja Cta. Cte.'
         Visible = False
+      end
+      item
+        TituloColumna = 'BAJA'
+        Visible = True
       end>
     NombreGuardar = 'CtaCorriente_General'
     AltoTituloColumna = 15
@@ -5247,10 +5289,6 @@ object FCuentaCorriente: TFCuentaCorriente
       item
         TituloColumna = 'Fecha'
         Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Pago'
-        Visible = False
       end
       item
         TituloColumna = 'Comprobante'
@@ -5273,15 +5311,15 @@ object FCuentaCorriente: TFCuentaCorriente
         Visible = True
       end
       item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
         TituloColumna = 'Observacion Comprobante'
         Visible = True
       end
       item
         TituloColumna = 'ID_COMPROBANTE'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Sucursal'
         Visible = True
       end>
     NombreGuardar = 'CtaCorriente_Cliente'
@@ -5565,6 +5603,7 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object ZQ_SaldoIniIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
+      currency = True
     end
   end
   object ZQ_ComprobanteDetalle: TZQuery
@@ -5670,5 +5709,95 @@ object FCuentaCorriente: TFCuentaCorriente
     PermitirFiltrar = True
     Left = 483
     Top = 254
+  end
+  object DS_ReciboDetalle: TDataSource
+    DataSet = ZQ_ReciboDetalle
+    Left = 490
+    Top = 361
+  end
+  object ZQ_ReciboDetalle: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select pf.*, cast(c.fecha as Date) fecha, c.importe_venta, fp.im' +
+        'porte_real,'
+      '       '#39'FACTURA '#39'||c.codigo as Descripcion'
+      'from pago_facturas pf'
+      'left join comprobante c on (pf.id_factura = c.id_comprobante)'
+      
+        'left join comprobante_forma_pago fp on (c.id_comprobante = fp.id' +
+        '_comprobante)'
+      'where pf.id_comprobante = :id_comprobante'
+      '  and fp.cuenta_ingreso = 1')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 486
+    Top = 313
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ReciboDetalleID_PAGO_FACTURAS: TIntegerField
+      FieldName = 'ID_PAGO_FACTURAS'
+    end
+    object ZQ_ReciboDetalleID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_ReciboDetalleID_FACTURA: TIntegerField
+      FieldName = 'ID_FACTURA'
+    end
+    object ZQ_ReciboDetalleID_TIPO_COMPROBANTE: TIntegerField
+      FieldName = 'ID_TIPO_COMPROBANTE'
+    end
+    object ZQ_ReciboDetalleIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+      currency = True
+    end
+    object ZQ_ReciboDetalleFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_ReciboDetalleIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      currency = True
+    end
+    object ZQ_ReciboDetalleDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      ReadOnly = True
+      Size = 31
+    end
+    object ZQ_ReciboDetalleIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+      currency = True
+    end
+  end
+  object EKOrdenar_DetalleRecibo: TEKOrdenarGrilla
+    Grilla = DBGridDetalle_Recibo
+    Filtros = <
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Descripci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Pagado'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenar_DetalleRecibo'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 488
+    Top = 410
   end
 end
