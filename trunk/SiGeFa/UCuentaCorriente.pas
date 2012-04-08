@@ -62,60 +62,16 @@ type
     PanelCliente_Resumen: TPanel;
     ZQ_Cliente: TZQuery;
     DS_Cliente: TDataSource;
-    ZQ_ClienteID_PERSONA: TIntegerField;
-    ZQ_ClienteID_PROVINCIA: TIntegerField;
-    ZQ_ClienteID_TIPO_DOC: TIntegerField;
-    ZQ_ClienteID_TIPO_IVA: TIntegerField;
-    ZQ_ClienteNOMBRE: TStringField;
-    ZQ_ClienteDIRECCION: TStringField;
-    ZQ_ClienteLOCALIDAD: TStringField;
-    ZQ_ClienteCODIGO_POSTAL: TStringField;
-    ZQ_ClienteTELEFONO: TStringField;
-    ZQ_ClienteEMAIL: TStringField;
-    ZQ_ClienteFECHA_NACIMIENTO: TDateField;
-    ZQ_ClienteNUMERO_DOC: TStringField;
-    ZQ_ClienteSEXO: TStringField;
-    ZQ_ClienteBAJA: TStringField;
-    ZQ_ClienteDESCRIPCION: TStringField;
-    ZQ_ClienteCUIT_CUIL: TStringField;
-    ZQ_ClienteDESCUENTO_ESPECIAL: TFloatField;
-    ZQ_ClienteCODIGO_CORTO: TIntegerField;
-    ZQ_ClienteNOMBRE_PROVINCIA: TStringField;
-    ZQ_ClienteNOMBRE_TIPO_IVA: TStringField;
-    ZQ_ClienteCOD_IVA: TStringField;
-    ZQ_ClienteNOMBRE_TIPO_DOC: TStringField;
-    ZQ_ClienteID_CTA_CTE: TIntegerField;
-    ZQ_ClienteSALDO: TFloatField;
-    ZQ_ClienteLIMITE_DEUDA: TFloatField;
-    ZQ_ClienteFECHA_ALTA: TDateField;
-    ZQ_ClienteFECHA_BAJA: TDateField;
     PanelResumen: TPanel;
     PanelResumen_Abajo: TPanel;
     DBGridResumen_CtaCtes: TDBGrid;
     PanelResumen_Arriba: TPanel;
     ZQ_CtaCte_Gral: TZQuery;
-    ZQ_CtaCte_GralLIMITE_DEUDA: TFloatField;
-    ZQ_CtaCte_GralSALDO: TFloatField;
-    ZQ_CtaCte_GralFECHA_ALTA: TDateField;
-    ZQ_CtaCte_GralFECHA_BAJA: TDateField;
-    ZQ_CtaCte_GralDEBE: TFloatField;
-    ZQ_CtaCte_GralHABER: TFloatField;
-    ZQ_CtaCte_GralNOMBRE: TStringField;
-    ZQ_CtaCte_GralNUMERO_DOC: TStringField;
-    ZQ_CtaCte_GralLOCALIDAD: TStringField;
-    ZQ_CtaCte_GralCODIGO_POSTAL: TStringField;
-    ZQ_CtaCte_GralCUIT_CUIL: TStringField;
-    ZQ_CtaCte_GralBAJA: TStringField;
-    ZQ_CtaCte_GralNOMBRE_PROVINCIA: TStringField;
-    ZQ_CtaCte_GralNOMBRE_TIPO_IVA: TStringField;
-    ZQ_CtaCte_GralCOD_IVA: TStringField;
-    ZQ_CtaCte_GralNOMBRE_TIPO_DOC: TStringField;
     DS_CtaCte_Gral: TDataSource;
     ZQ_CtaCte_Cliente: TZQuery;
     DS_CtaCte_Cliente: TDataSource;
     EKOrdenar_CtaCteGral: TEKOrdenarGrilla;
     EKOrdenar_CtaCteCliente: TEKOrdenarGrilla;
-    ZQ_CtaCte_GralCODIGO_CORTO: TIntegerField;
     PanelFiltro: TPanel;
     BtnFiltro_Todos: TSpeedButton;
     BtnFiltro_Hoy: TSpeedButton;
@@ -153,20 +109,6 @@ type
     EKEditCliente_HaberFiltro: TEKEdit;
     EKEditCliente_DebeFiltro: TEKEdit;
     EKEditCliente_CantidadFiltro: TEKEdit;
-    ZQ_CtaCte_ClienteID_COMPROBANTE: TIntegerField;
-    ZQ_CtaCte_ClienteID_CUENTA: TIntegerField;
-    ZQ_CtaCte_ClienteID_VENDEDOR: TIntegerField;
-    ZQ_CtaCte_ClienteID_TIPO_IVA: TIntegerField;
-    ZQ_CtaCte_ClienteID_TIPO_FP: TIntegerField;
-    ZQ_CtaCte_ClienteFECHA: TDateField;
-    ZQ_CtaCte_ClienteOBSERVACION: TStringField;
-    ZQ_CtaCte_ClienteFECHA_FP: TDateField;
-    ZQ_CtaCte_ClienteDEBE: TFloatField;
-    ZQ_CtaCte_ClienteHABER: TFloatField;
-    ZQ_CtaCte_ClienteSALDO_CPB: TFloatField;
-    ZQ_CtaCte_ClienteSALDO: TFloatField;
-    ZQ_CtaCte_GralID_CLIENTE_OUT: TIntegerField;
-    ZQ_CtaCte_GralVENCIMIENTO_DIAS: TIntegerField;
     PanelCliente_ResumenTotales: TPanel;
     Label15: TLabel;
     Label16: TLabel;
@@ -174,7 +116,6 @@ type
     EKEditCliente_SaldoTotal: TEKEdit;
     EKEditCliente_HaberTotal: TEKEdit;
     EKEditCliente_DebeTotal: TEKEdit;
-    ZQ_CtaCte_ClienteID_COMPROB_FP: TIntegerField;
     EKBuscarCliente: TEKBusquedaAvanzada;
     RepCtasCtes: TQuickRep;
     QRBand9: TQRBand;
@@ -286,8 +227,6 @@ type
     ZQ_SaldoIniFECHA: TDateTimeField;
     ZQ_SaldoIniFECHA_COBRADA: TDateField;
     ZQ_SaldoIniIMPORTE_TOTAL: TFloatField;
-    ZQ_CtaCte_ClienteTIPO_COMPROBANTE: TStringField;
-    ZQ_CtaCte_GralDEUDA_VENCIDA: TStringField;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
     DBGridDetalle_Producto: TDBGrid;
@@ -303,10 +242,85 @@ type
     ZQ_ComprobanteDetalleCANTIDAD: TFloatField;
     EKOrdenar_DetalleProducto: TEKOrdenarGrilla;
     btnVerDetalleFactura: TdxBarLargeButton;
+    ZQ_CtaCte_GralID_CLIENTE_OUT: TIntegerField;
+    ZQ_CtaCte_GralLIMITE_DEUDA: TFloatField;
+    ZQ_CtaCte_GralSALDO: TFloatField;
+    ZQ_CtaCte_GralFECHA_ALTA: TDateField;
+    ZQ_CtaCte_GralFECHA_BAJA: TDateField;
+    ZQ_CtaCte_GralDEBE: TFloatField;
+    ZQ_CtaCte_GralHABER: TFloatField;
+    ZQ_CtaCte_GralNOMBRE: TStringField;
+    ZQ_CtaCte_GralNUMERO_DOC: TStringField;
+    ZQ_CtaCte_GralLOCALIDAD: TStringField;
+    ZQ_CtaCte_GralCODIGO_POSTAL: TStringField;
+    ZQ_CtaCte_GralCUIT_CUIL: TStringField;
+    ZQ_CtaCte_GralBAJA: TStringField;
+    ZQ_CtaCte_GralNOMBRE_PROVINCIA: TStringField;
+    ZQ_CtaCte_GralNOMBRE_TIPO_IVA: TStringField;
+    ZQ_CtaCte_GralCOD_IVA: TStringField;
+    ZQ_CtaCte_GralNOMBRE_TIPO_DOC: TStringField;
+    ZQ_CtaCte_GralCODIGO_CORTO: TIntegerField;
+    ZQ_CtaCte_GralVENCIMIENTO_DIAS: TIntegerField;
+    ZQ_CtaCte_GralID_PROVEEDOR_OUT: TIntegerField;
+    ZQ_CtaCte_GralDEUDA_VENCIDA: TStringField;
+    ZQ_ClienteID_PERSONA: TIntegerField;
+    ZQ_ClienteID_PROVINCIA: TIntegerField;
+    ZQ_ClienteID_TIPO_DOC: TIntegerField;
+    ZQ_ClienteID_TIPO_IVA: TIntegerField;
+    ZQ_ClienteNOMBRE: TStringField;
+    ZQ_ClienteDIRECCION: TStringField;
+    ZQ_ClienteLOCALIDAD: TStringField;
+    ZQ_ClienteCODIGO_POSTAL: TStringField;
+    ZQ_ClienteTELEFONO: TStringField;
+    ZQ_ClienteEMAIL: TStringField;
+    ZQ_ClienteFECHA_NACIMIENTO: TDateField;
+    ZQ_ClienteNUMERO_DOC: TStringField;
+    ZQ_ClienteSEXO: TStringField;
+    ZQ_ClienteBAJA: TStringField;
+    ZQ_ClienteDESCRIPCION: TStringField;
+    ZQ_ClienteCUIT_CUIL: TStringField;
+    ZQ_ClienteDESCUENTO_ESPECIAL: TFloatField;
+    ZQ_ClienteCODIGO_CORTO: TIntegerField;
+    ZQ_ClienteCODIGO_BARRA: TStringField;
+    ZQ_ClienteNOMBRE_PROVINCIA: TStringField;
+    ZQ_ClienteNOMBRE_TIPO_IVA: TStringField;
+    ZQ_ClienteCOD_IVA: TStringField;
+    ZQ_ClienteNOMBRE_TIPO_DOC: TStringField;
+    ZQ_ClienteID_CTA_CTE: TIntegerField;
+    ZQ_ClienteID_PERSONA_1: TIntegerField;
+    ZQ_ClienteID_PROVEEDOR: TIntegerField;
+    ZQ_ClienteSALDO: TFloatField;
+    ZQ_ClienteLIMITE_DEUDA: TFloatField;
+    ZQ_ClienteVENCIMIENTO_DIAS: TIntegerField;
+    ZQ_ClienteFECHA_ALTA: TDateField;
+    ZQ_ClienteFECHA_BAJA: TDateField;
+    ZQ_ClienteBAJA_1: TStringField;
+    ZQ_CtaCte_ClienteTIPO_COMPROBANTE: TStringField;
+    ZQ_CtaCte_ClienteID_COMPROBANTE: TIntegerField;
+    ZQ_CtaCte_ClienteID_VENDEDOR: TIntegerField;
+    ZQ_CtaCte_ClienteFECHA: TDateTimeField;
+    ZQ_CtaCte_ClienteOBSERVACION: TStringField;
+    ZQ_CtaCte_ClienteDEBE: TFloatField;
+    ZQ_CtaCte_ClienteHABER: TFloatField;
+    ZQ_CtaCte_ClienteSALDO_CPB: TFloatField;
+    ZQ_CtaCte_ClienteSALDO: TFloatField;
     ZQ_CtaCte_ClienteSUCURSAL: TStringField;
+    DBGridDetalle_Recibo: TDBGrid;
+    DS_ReciboDetalle: TDataSource;
+    ZQ_ReciboDetalle: TZQuery;
+    ZQ_ReciboDetalleID_PAGO_FACTURAS: TIntegerField;
+    ZQ_ReciboDetalleID_COMPROBANTE: TIntegerField;
+    ZQ_ReciboDetalleID_FACTURA: TIntegerField;
+    ZQ_ReciboDetalleID_TIPO_COMPROBANTE: TIntegerField;
+    ZQ_ReciboDetalleIMPORTE: TFloatField;
+    ZQ_ReciboDetalleFECHA: TDateTimeField;
+    ZQ_ReciboDetalleIMPORTE_VENTA: TFloatField;
+    ZQ_ReciboDetalleDESCRIPCION: TStringField;
+    ZQ_ReciboDetalleIMPORTE_REAL: TFloatField;
+    EKOrdenar_DetalleRecibo: TEKOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
-    procedure btnBuscarClick(Sender: TObject);    
+    procedure btnBuscarClick(Sender: TObject);
     procedure btnVerCtaCteClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     //------TECLAS RAPIDAS
@@ -327,11 +341,10 @@ type
     procedure btnSaldoInicial_AceptarClick(Sender: TObject);
     procedure ZQ_CtaCte_ClienteAfterScroll(DataSet: TDataSet);
     procedure btnVerDetalleFacturaClick(Sender: TObject);
-  private
-    vsel: TFBuscarPersona;
+  Private
     viendoResumen: boolean;
-    procedure onSelCliente;
-  public
+    viendoDetalleCpb: boolean;
+  Public
   end;
 
 var
@@ -350,7 +363,8 @@ procedure TFCuentaCorriente.FormCloseQuery(Sender: TObject; var CanClose: Boolea
 begin
   EKOrdenar_CtaCteGral.GuardarConfigColumnas;
   EKOrdenar_CtaCteCliente.GuardarConfigColumnas;
-  EKOrdenar_DetalleProducto.GuardarConfigColumnas;  
+  EKOrdenar_DetalleProducto.GuardarConfigColumnas;
+  EKOrdenar_DetalleRecibo.GuardarConfigColumnas;  
 
   CanClose:= FPrincipal.cerrar_ventana(transaccion);
 end;
@@ -359,21 +373,6 @@ end;
 procedure TFCuentaCorriente.btnSalirClick(Sender: TObject);
 begin
   Close;
-end;
-
-
-procedure TFCuentaCorriente.onSelCliente;
-begin
-//  if (not (vsel.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
-//  begin
-//    ZQ_CtaCte_Gral.Close;
-//    ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= vsel.ZQ_PersonasID_PERSONA.AsInteger;
-//    ZQ_CtaCte_Gral.ParamByName('id_proveedor').clear;
-//    ZQ_CtaCte_Gral.Open;
-//  end;
-//
-//  vsel.Close;
-//  calcularTotales('GENERAL');
 end;
 
 
@@ -391,8 +390,9 @@ procedure TFCuentaCorriente.btnVerCtaCteClick(Sender: TObject);
 begin
   if viendoResumen then
   begin
-    PanelCliente.BringToFront;
+    //para ver un cliente en especial
     viendoResumen:= false;
+    PanelCliente.BringToFront;
     btnVerCtaCte.Caption:= 'F2 - Ver Resumen';
     btnVerCtaCte.Hint:= 'Ver el resumen de cuenta corriente de todos los clientes';
     btnBuscar.Enabled:= false;
@@ -407,11 +407,16 @@ begin
 
     btnSaldoInicial.Visible:= ivAlways;
     btnVerDetalleFactura.Visible:= ivAlways;
+
+    DBGridDetalle_Producto.Height:= 1;
+    DBGridDetalle_Recibo.Height:= 1;
+    viendoDetalleCpb:= false;
   end
   else
   begin
-    PanelResumen.BringToFront;
+    //para el resumen de los clientes
     viendoResumen:= true;
+    PanelResumen.BringToFront;
     btnVerCtaCte.Caption:= 'F2 - Ver Cta Cte';
     btnVerCtaCte.Hint:= 'Ver la cuenta corriente del cliente seleccionado';
     btnBuscar.Enabled:= true;
@@ -427,11 +432,12 @@ end;
 procedure TFCuentaCorriente.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
-  QRDBLogo2.DataSet:= DM.ZQ_Sucursal;  
+  QRDBLogo2.DataSet:= DM.ZQ_Sucursal;
 
   EKOrdenar_CtaCteGral.CargarConfigColumnas;
   EKOrdenar_CtaCteCliente.CargarConfigColumnas;
   EKOrdenar_DetalleProducto.CargarConfigColumnas;
+  EKOrdenar_DetalleRecibo.CargarConfigColumnas;  
 
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnFiltroFecha_Cancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnFiltroFecha_Aceptar.Glyph);
@@ -494,38 +500,38 @@ begin
   ZQ_CtaCte_Cliente.ParamByName('id_proveedor').clear;
   ZQ_CtaCte_Cliente.ParamByName('id_sucursal').AsInteger:= -1;
 
-  if TSpeedButton (Sender).Name = 'BtnFiltro_Todos' then
+  if TSpeedButton(Sender).Name = 'BtnFiltro_Todos' then
   begin
-    ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= EncodeDate(1000,1,1);
-    ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= EncodeDate(3000,1,1);
+    ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= EncodeDate(1000, 1, 1);
+    ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= EncodeDate(3000, 1, 1);
   end;
 
-  if TSpeedButton (Sender).Name = 'BtnFiltro_Hoy' then
+  if TSpeedButton(Sender).Name = 'BtnFiltro_Hoy' then
   begin
     ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= hoy;
     ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= hoy;
   end;
 
-  if TSpeedButton (Sender).Name = 'BtnFiltro_EstaSemana' then //la semana comienza el lunesa
+  if TSpeedButton(Sender).Name = 'BtnFiltro_EstaSemana' then //la semana comienza el lunesa
   begin
     diasDesdeUltimaSemana:= DayOfTheWeek(hoy) - 1;
     ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= IncDay(hoy, -diasDesdeUltimaSemana);
     ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= hoy;
   end;
 
-  if TSpeedButton (Sender).Name = 'BtnFiltro_EsteMes' then
+  if TSpeedButton(Sender).Name = 'BtnFiltro_EsteMes' then
   begin
     ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= EncodeDate(YearOf(hoy), MonthOf(hoy), 1);
     ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= hoy;
   end;
 
-  if TSpeedButton (Sender).Name = 'BtnFiltro_EsteAnio' then
+  if TSpeedButton(Sender).Name = 'BtnFiltro_EsteAnio' then
   begin
     ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate:= EncodeDate(YearOf(hoy), 1, 1);
     ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate:= hoy;
   end;
 
-  if TSpeedButton (Sender).Name = 'BtnFiltro_PorFecha' then
+  if TSpeedButton(Sender).Name = 'BtnFiltro_PorFecha' then
   begin
     PanelCliente.Enabled:= false;
 
@@ -539,10 +545,10 @@ begin
     exit;
   end;
 
-  if TSpeedButton (Sender).Name = 'BtnFiltro_Todos' then
-    lblFiltro_Fechas.Caption:= 'Viendo Todo'  
+  if TSpeedButton(Sender).Name = 'BtnFiltro_Todos' then
+    lblFiltro_Fechas.Caption:= 'Viendo Todo'
   else
-    lblFiltro_Fechas.Caption:= 'Viendo Desde: '+DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate)+' - Hasta: '+DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate);
+    lblFiltro_Fechas.Caption:= 'Viendo Desde: ' + DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate) + ' - Hasta: ' + DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate);
 
   ZQ_CtaCte_Cliente.Close;
   ZQ_CtaCte_Cliente.Open;
@@ -560,7 +566,7 @@ begin
   begin
     EKDbSumaCtaCte_Gral.RecalcAll;
     EKEditResumen_Cantidad.Text:= IntToStr(ZQ_CtaCte_Gral.RecordCount);
-    EKEditResumen_Debe.Text:=  FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[0].SumValue);
+    EKEditResumen_Debe.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[0].SumValue);
     EKEditResumen_Haber.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[1].SumValue);
     EKEditResumen_Saldo.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[2].SumValue);
   end;
@@ -578,11 +584,11 @@ begin
 
     EKDbSumaCtaCte_Cliente.RecalcAll;
     EKEditCliente_CantidadFiltro.Text:= IntToStr(ZQ_CtaCte_Cliente.RecordCount);
-    EKEditCliente_DebeFiltro.Text:=  FormatFloat('$ ###,###,##0.00', debeFilro);
+    EKEditCliente_DebeFiltro.Text:= FormatFloat('$ ###,###,##0.00', debeFilro);
     EKEditCliente_HaberFiltro.Text:= FormatFloat('$ ###,###,##0.00', haberFiltro);
     EKEditCliente_SaldoFiltro.Text:= FormatFloat('$ ###,###,##0.00', saldoFiltro);
 
-    EKEditCliente_DebeTotal.Text:=  FormatFloat('$ ###,###,##0.00', debeTotal);
+    EKEditCliente_DebeTotal.Text:= FormatFloat('$ ###,###,##0.00', debeTotal);
     EKEditCliente_HaberTotal.Text:= FormatFloat('$ ###,###,##0.00', haberTotal);
     EKEditCliente_SaldoTotal.Text:= FormatFloat('$ ###,###,##0.00', saldoTotal);
   end;
@@ -606,11 +612,11 @@ begin
 
   calcularTotales('CLIENTE');
 
-  lblFiltro_Fechas.Caption:= 'Viendo Desde: '+DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate)+' - Hasta: '+DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate);
+  lblFiltro_Fechas.Caption:= 'Viendo Desde: ' + DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_desde').AsDate) + ' - Hasta: ' + DateToStr(ZQ_CtaCte_Cliente.ParamByName('fecha_hasta').AsDate);
 
   PanelFiltroFechas.Visible:= false;
   PanelCliente.Enabled:= true;
-  GrupoEditando.Enabled:= true; 
+  GrupoEditando.Enabled:= true;
 end;
 
 
@@ -632,12 +638,12 @@ begin
       exit;
 
     DM.VariablesReportes(RepCtasCtes);
-    QRlblPieDePaginaCtasCtes.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-    QRLabelCritBusquedaCtasCtes.Caption := EKBuscarCliente.ParametrosBuscados;
+    QRlblPieDePaginaCtasCtes.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
+    QRLabelCritBusquedaCtasCtes.Caption:= EKBuscarCliente.ParametrosBuscados;
 
-    QRCtasCtes_TotalDebe.Caption:=  FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[0].SumValue);
-    QRCtasCtes_TotalHaber.Caption:=  FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[1].SumValue);
-    QRCtasCtes_TotalSaldo.Caption:=  FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[2].SumValue);
+    QRCtasCtes_TotalDebe.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[0].SumValue);
+    QRCtasCtes_TotalHaber.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[1].SumValue);
+    QRCtasCtes_TotalSaldo.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[2].SumValue);
 
     EKVistaCtasCtes.VistaPrevia;
   end
@@ -647,7 +653,7 @@ begin
       exit;
 
     DM.VariablesReportes(RepCliente);
-    QRlblPieDePaginaCliente.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    QRlblPieDePaginaCliente.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
 
     QRlblClienteFiltro.Caption:= lblFiltro_Fechas.Caption;
 
@@ -715,7 +721,7 @@ begin
   else
   begin
     DateTimePicker_FechaSaldo.DateTime:= ZQ_SaldoIniFECHA.AsDateTime;
-    EditSaldiIni_Importe.Text:=  ZQ_SaldoIniIMPORTE_TOTAL.AsString;
+    EditSaldiIni_Importe.Text:= ZQ_SaldoIniIMPORTE_TOTAL.AsString;
   end;
 
   DateTimePicker_FechaSaldo.SetFocus;
@@ -733,7 +739,7 @@ end;
 procedure TFCuentaCorriente.btnSaldoInicial_AceptarClick(Sender: TObject);
 var
   saldo_ini: Double;
-  recNo: integer;  
+  recNo: integer;
 begin
   try
     saldo_ini:= StrToFloat(EditSaldiIni_Importe.Text);
@@ -764,7 +770,7 @@ begin
   except
     on E: Exception do
     begin
-      Application.MessageBox(pchar(e.Message), 'Atención',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox(pchar(e.Message), 'Atención', MB_OK + MB_ICONINFORMATION);
       exit;
     end
   end;
@@ -774,21 +780,75 @@ end;
 procedure TFCuentaCorriente.ZQ_CtaCte_ClienteAfterScroll(DataSet: TDataSet);
 begin
   ZQ_ComprobanteDetalle.Close;
+  ZQ_ReciboDetalle.Close;
 
   if ZQ_CtaCte_Cliente.IsEmpty then
     exit;
 
-  ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
-  ZQ_ComprobanteDetalle.Open;
+  if viendoDetalleCpb then
+  begin
+  //si el tipo de comprobante es saldo anterior o nota de credito
+    if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0)
+      or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
+    begin
+      DBGridDetalle_Producto.Height:= 1;
+      DBGridDetalle_Recibo.Height:= 1;
+    end
+    else //sino
+    //si el tipo de comprobante es recibo de cta cte
+      if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
+      begin
+        ZQ_ReciboDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
+        ZQ_ReciboDetalle.Open;
+
+        DBGridDetalle_Producto.Height:= 1;
+        DBGridDetalle_Recibo.Height:= 140;
+      end
+      else //sino
+      //si el tipo de comprobante es distinto de nota de credito
+        if AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) = 0 then
+        begin
+          ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
+          ZQ_ComprobanteDetalle.Open;
+
+          DBGridDetalle_Producto.Height:= 140;
+          DBGridDetalle_Recibo.Height:= 1;
+        end;
+  end
 end;
 
 
 procedure TFCuentaCorriente.btnVerDetalleFacturaClick(Sender: TObject);
 begin
-  if DBGridDetalle_Producto.Height = 1 then
-    DBGridDetalle_Producto.Height:= 140
-  else
+  if ZQ_CtaCte_Cliente.IsEmpty then
+    Exit;
+
+  if viendoDetalleCpb = true then
+  begin
+    viendoDetalleCpb:= false;
     DBGridDetalle_Producto.Height:= 1;
+    DBGridDetalle_Recibo.Height:= 1;
+  end
+  else
+  begin
+    viendoDetalleCpb:= true;
+  //si el tipo de comprobante es saldo anterior o nota de credito
+    if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0)
+      or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
+    begin
+      DBGridDetalle_Producto.Height:= 1;
+      DBGridDetalle_Recibo.Height:= 1;
+    end
+    else //sino
+    //si el tipo de comprobante es recibo de cta cte
+      if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
+        DBGridDetalle_Recibo.Height:= 140
+      else //sino
+    //si el tipo de comprobante es distinto de nota de credito
+        if AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) = 0 then
+          DBGridDetalle_Producto.Height:= 140
+  end;
 end;
 
 end.
+
