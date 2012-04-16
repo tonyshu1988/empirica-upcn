@@ -219,7 +219,7 @@ begin
   if facturaVenta then //si es una factura de venta
   begin
     query:= ZQ_Factura_Venta;
-    EKBuscarFacturaVenta.SQL_Where[5]:= 'and c.id_cliente = ' + IntToStr(id);
+    EKBuscarFacturaVenta.SQL_Where[4]:= 'and c.id_cliente = ' + IntToStr(id);
 
     ZQ_Entidad.Close;
     ZQ_Entidad.SQL.Text:= 'select nombre from persona where id_persona = ' + IntToStr(id);
