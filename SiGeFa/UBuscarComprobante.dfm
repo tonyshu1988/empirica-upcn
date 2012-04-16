@@ -20,15 +20,15 @@ object FBuscarComprobante: TFBuscarComprobante
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 347
     Align = alClient
     TabOrder = 0
     object DBGridFacturas: TDBGrid
       Left = 1
       Top = 26
-      Width = 712
-      Height = 163
+      Width = 720
+      Height = 174
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -84,8 +84,8 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object PanelDetalle: TPanel
       Left = 1
-      Top = 210
-      Width = 712
+      Top = 221
+      Width = 720
       Height = 125
       Align = alBottom
       BevelOuter = bvNone
@@ -93,7 +93,7 @@ object FBuscarComprobante: TFBuscarComprobante
       object DBGridDetalle: TDBGrid
         Left = 0
         Top = 0
-        Width = 712
+        Width = 720
         Height = 125
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alClient
@@ -142,7 +142,7 @@ object FBuscarComprobante: TFBuscarComprobante
       Tag = 99
       Left = 1
       Top = 1
-      Width = 712
+      Width = 720
       Height = 25
       Align = alTop
       BevelOuter = bvNone
@@ -172,14 +172,14 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object Panel2: TPanel
       Left = 1
-      Top = 189
-      Width = 712
+      Top = 200
+      Width = 720
       Height = 21
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
       DesignSize = (
-        712
+        720
         21)
       object lblDetalleFactura: TLabel
         Left = 3
@@ -209,7 +209,7 @@ object FBuscarComprobante: TFBuscarComprobante
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -892,19 +892,38 @@ object FBuscarComprobante: TFBuscarComprobante
     SQL.Strings = (
       
         'select distinct c.id_comprobante, c.id_cliente, c.codigo, cast(c' +
-        '.fecha as Date) fecha, c.importe_venta,'
-      '       cfp.importe_real, '#39'FACTURA '#39'||c.codigo as Descripcion'
+        '.fecha as date) fecha, c.importe_venta,'
+      '                cfp.importe_real,'
+      '                case'
+      
+        '                  when (c.id_tipo_cpb = 11) then '#39'FACTURA '#39' || c' +
+        '.codigo'
+      '                  when (c.id_tipo_cpb = 25) then c.observacion'
+      
+        '                  when (c.id_tipo_cpb = 12) then '#39'DEVOLUCION '#39' |' +
+        '| lpad(c.punto_venta, 4, '#39'0'#39') || '#39'-'#39' || lpad(c.numero_cpb, 8, '#39'0' +
+        #39')'
+      '                end as descripcion'
       'from comprobante c'
       
-        'left join comprobante_forma_pago cfp on (c.id_comprobante = cfp.' +
-        'id_comprobante)'
+        'inner join comprobante_forma_pago cfp on (c.id_comprobante = cfp' +
+        '.id_comprobante)'
       
         'left join comprobante_detalle cd on (c.id_comprobante = cd.id_co' +
         'mprobante)'
       'left join producto pr on (cd.id_producto = pr.id_producto)'
-      'where c.id_tipo_cpb = 11'
-      '  and cfp.cuenta_ingreso = 1'
-      '  and c.id_cliente = :id_cliente')
+      
+        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
+        'rod_cabecera)'
+      
+        'where ((c.id_tipo_cpb = 11 and cfp.cuenta_ingreso = 1) or (c.id_' +
+        'tipo_cpb = 25) or'
+      '       (c.id_tipo_cpb = 28 and cfp.cuenta_ingreso = 1))'
+      '  and cfp.importe_real <> 0'
+      '  and c.fecha_anulado is null'
+      '  and c.id_cliente = :id_cliente'
+      '  and cfp.id_recibo_op is null'
+      'order by c.fecha, c.codigo')
     Params = <
       item
         DataType = ftUnknown
@@ -1043,7 +1062,7 @@ object FBuscarComprobante: TFBuscarComprobante
         '.codigo'
       '                  when (c.id_tipo_cpb = 25) then c.observacion'
       
-        '                  when (c.id_tipo_cpb = 12) then '#39'DEVOLUCION '#39' |' +
+        '                  when (c.id_tipo_cpb = 28) then '#39'DEVOLUCION '#39' |' +
         '| lpad(c.punto_venta, 4, '#39'0'#39') || '#39'-'#39' || lpad(c.numero_cpb, 8, '#39'0' +
         #39')'
       '                end as descripcion'
@@ -1052,20 +1071,20 @@ object FBuscarComprobante: TFBuscarComprobante
         'inner join comprobante_forma_pago cfp on (c.id_comprobante = cfp' +
         '.id_comprobante)'
       
-        'inner join comprobante_detalle cd on (c.id_comprobante = cd.id_c' +
-        'omprobante)'
-      'inner join producto pr on (cd.id_producto = pr.id_producto)'
+        'left join comprobante_detalle cd on (c.id_comprobante = cd.id_co' +
+        'mprobante)'
+      'left join producto pr on (cd.id_producto = pr.id_producto)'
       
-        'inner join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_' +
-        'prod_cabecera)'
-      'where ((c.id_tipo_cpb = 11'
+        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
+        'rod_cabecera)'
       
-        '  and cfp.cuenta_ingreso = 1) or (c.id_tipo_cpb = 25) or (c.id_t' +
-        'ipo_cpb = 12'
-      '  and cfp.cuenta_ingreso = 1))'
+        'where ((c.id_tipo_cpb = 11 and cfp.cuenta_ingreso = 1) or (c.id_' +
+        'tipo_cpb = 25) or'
+      '       (c.id_tipo_cpb = 28 and cfp.cuenta_ingreso = 1))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
       '  and c.id_cliente = :id_cliente'
+      '  and cfp.id_recibo_op is null'
       'order by c.fecha, c.codigo')
     SQL_Select.Strings = (
       
@@ -1078,7 +1097,7 @@ object FBuscarComprobante: TFBuscarComprobante
         '.codigo'
       '                  when (c.id_tipo_cpb = 25) then c.observacion'
       
-        '                  when (c.id_tipo_cpb = 12) then '#39'DEVOLUCION '#39' |' +
+        '                  when (c.id_tipo_cpb = 28) then '#39'DEVOLUCION '#39' |' +
         '| lpad(c.punto_venta, 4, '#39'0'#39') || '#39'-'#39' || lpad(c.numero_cpb, 8, '#39'0' +
         #39')'
       '                end as descripcion')
@@ -1088,21 +1107,21 @@ object FBuscarComprobante: TFBuscarComprobante
         'inner join comprobante_forma_pago cfp on (c.id_comprobante = cfp' +
         '.id_comprobante)'
       
-        'inner join comprobante_detalle cd on (c.id_comprobante = cd.id_c' +
-        'omprobante)'
-      'inner join producto pr on (cd.id_producto = pr.id_producto)'
+        'left join comprobante_detalle cd on (c.id_comprobante = cd.id_co' +
+        'mprobante)'
+      'left join producto pr on (cd.id_producto = pr.id_producto)'
       
-        'inner join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_' +
-        'prod_cabecera)')
+        'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
+        'rod_cabecera)')
     SQL_Where.Strings = (
-      'where ((c.id_tipo_cpb = 11'
       
-        '  and cfp.cuenta_ingreso = 1) or (c.id_tipo_cpb = 25) or (c.id_t' +
-        'ipo_cpb = 12'
-      '  and cfp.cuenta_ingreso = 1))'
+        'where ((c.id_tipo_cpb = 11 and cfp.cuenta_ingreso = 1) or (c.id_' +
+        'tipo_cpb = 25) or'
+      '       (c.id_tipo_cpb = 28 and cfp.cuenta_ingreso = 1))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
-      '  and c.id_cliente = :id_cliente')
+      '  and c.id_cliente = :id_cliente'
+      '  and cfp.id_recibo_op is null')
     SQL_Orden.Strings = (
       'order by c.fecha, c.codigo')
     UsarWhereOriginal = EK_Con_Where
