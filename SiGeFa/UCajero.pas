@@ -691,7 +691,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal, strutils, EKModelo, Math, UUtilidades;
+uses UDM, UPrincipal, strutils, EKModelo, Math, UUtilidades, DateUtils;
 
 {$R *.dfm}
 
@@ -1556,6 +1556,7 @@ end;
 function TFCajero.guardarComprobante(): Boolean;
 var
   comprobante, vendedor: integer;
+
 begin
 
   Result:= False;
@@ -1565,7 +1566,6 @@ begin
     if dm.EKModelo.iniciar_transaccion(abmComprobante, [ZQ_Comprobante, ZQ_Comprobante_FormaPago, ZQ_ComprobanteDetalle, ZQ_ComprobPreventa]) then
     begin
       CD_Comprobante.Post;
-
       ZQ_Comprobante.Append;
       ZSP_Comprobante.Active:= True;
       ZQ_ComprobanteID_COMPROBANTE.AsInteger:= ZSP_ComprobanteID.AsInteger;
@@ -1608,11 +1608,14 @@ begin
       end;
 
       grabarDetallesFactura();
+
       grabarPagos();
+
     end;
 
   try
     begin
+
       if not (dm.EKModelo.finalizar_transaccion(abmComprobante)) then
       begin
         dm.EKModelo.cancelar_transaccion(abmComprobante);
@@ -1622,7 +1625,6 @@ begin
       else
       begin
         //Application.MessageBox(PChar(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString])),'Atención');
-
         
         if (totFiscal > 0) then
         begin
@@ -1647,6 +1649,7 @@ begin
           IdVendedor:= vendedor;
         CD_ComprobanteID_VENDEDOR.Value:= IdVendedor;
         Result:= True;
+
       end;
     end
   except
@@ -2593,21 +2596,26 @@ end;
 
 
 procedure TFCajero.btnEfectivoClick(Sender: TObject);
+
 begin
   //ZQ_FormasPago.Locate('IF;GENERA_VUELTO',VarArrayOf(['N', 'S']),[]);
   //CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
+
+
 
   calcularFP();
 
   CD_Fpago.Post;
 
   recalcularBoleta();
-  BtAceptarPago.Click;
-  btnConfirmarVenta.Click;
 
+  BtAceptarPago.Click;
+
+  btnConfirmarVenta.Click;
   //ShowMessage(ZQ_ComprobanteID_COMPROBANTE.AsString+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
 
   PVentaDirecta.Visible:= False;
+
 end;
 
 
