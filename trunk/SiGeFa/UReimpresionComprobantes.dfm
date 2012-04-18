@@ -1,8 +1,8 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 285
-  Top = 175
+  Left = 254
+  Top = 138
   Width = 966
-  Height = 656
+  Height = 634
   Caption = 'Reimpresi'#243'n de Comprobantes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     Left = 0
     Top = 0
     Width = 950
-    Height = 566
+    Height = 544
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
@@ -31,7 +31,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       Left = 1
       Top = 1
       Width = 948
-      Height = 564
+      Height = 542
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
@@ -39,7 +39,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         Left = 1
         Top = 1
         Width = 946
-        Height = 562
+        Height = 540
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
@@ -47,13 +47,13 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           Left = 1
           Top = 33
           Width = 944
-          Height = 406
+          Height = 384
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object lblTotalComprobantes: TLabel
             Left = 0
-            Top = 385
+            Top = 363
             Width = 944
             Height = 21
             Align = alBottom
@@ -73,7 +73,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           end
           object Splitter1: TSplitter
             Left = 0
-            Top = 376
+            Top = 354
             Width = 944
             Height = 9
             Cursor = crVSplit
@@ -83,7 +83,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             Left = 0
             Top = 0
             Width = 944
-            Height = 376
+            Height = 354
             Align = alClient
             Color = 14606012
             DataSource = DS_Comprobante
@@ -186,7 +186,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         end
         object PanelFPagoYProd: TPanel
           Left = 1
-          Top = 439
+          Top = 417
           Width = 944
           Height = 122
           Align = alBottom
@@ -1569,6 +1569,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
+    PopUpGrilla = PopupMenuFacturas
     Left = 194
     Top = 192
   end
@@ -1605,6 +1606,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
+    PopUpGrilla = PopupMenuFPago
     Left = 322
     Top = 184
   end
@@ -1829,5 +1831,107 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       ShortCut = 114
       OnExecute = AEliminarExecute
     end
+  end
+  object PopupMenuFacturas: TPopupMenu
+    Left = 635
+    Top = 147
+    object PopUpItemCambiarCliente1: TMenuItem
+      Caption = 'Cambiar Cliente'
+      OnClick = PopUpItemCambiarCliente1Click
+    end
+  end
+  object PopupMenuFPago: TPopupMenu
+    Left = 771
+    Top = 147
+    object PopUpItemCambiarCuenta: TMenuItem
+      Caption = 'Cambiar Cuenta'
+      OnClick = PopUpItemCambiarCuentaClick
+    end
+  end
+  object ZQ_CambiarCliente: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'update comprobante'
+      'set comprobante.id_cliente = :id_cliente'
+      'where comprobante.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 635
+    Top = 203
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+  end
+  object EKListadoCliente: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select p.id_persona, p.nombre'
+      'from persona p'
+      'where p.baja = '#39'N'#39)
+    CampoBuscar = 'nombre'
+    CampoClave = 'id_persona'
+    TituloVentana = 'Buscar Cliente'
+    Left = 635
+    Top = 259
+  end
+  object ZQ_CambiarCuenta: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'update comprobante_forma_pago'
+      'set comprobante_forma_pago.cuenta_ingreso = :id_cuenta'
+      'where comprobante_forma_pago.id_comprob_fp = :id_comp_fpago')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comp_fpago'
+        ParamType = ptUnknown
+      end>
+    Left = 771
+    Top = 202
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cuenta'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comp_fpago'
+        ParamType = ptUnknown
+      end>
+  end
+  object EKListadoCuenta: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select c.id_cuenta, c.nombre_cuenta'
+      'from cuenta c'
+      'where c.baja = '#39'N'#39)
+    CampoBuscar = 'nombre_cuenta'
+    CampoClave = 'id_cuenta'
+    TituloVentana = 'Buscar Cuenta'
+    Left = 771
+    Top = 258
   end
 end
