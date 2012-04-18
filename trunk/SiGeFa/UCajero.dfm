@@ -4451,9 +4451,9 @@ object FCajero: TFCajero
     TabOrder = 8
     Visible = False
     object Label15: TLabel
-      Left = -2
+      Left = 5
       Top = 166
-      Width = 475
+      Width = 467
       Height = 17
       Alignment = taCenter
       AutoSize = False
