@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 254
-  Top = 138
+  Left = 279
+  Top = 157
   Width = 966
   Height = 634
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -22,39 +22,39 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 950
-    Height = 544
+    Width = 958
+    Height = 555
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 948
-      Height = 542
+      Width = 956
+      Height = 553
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 946
-        Height = 540
+        Width = 954
+        Height = 551
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object PanelComprobante: TPanel
           Left = 1
           Top = 33
-          Width = 944
-          Height = 384
+          Width = 952
+          Height = 395
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object lblTotalComprobantes: TLabel
             Left = 0
-            Top = 363
-            Width = 944
+            Top = 374
+            Width = 952
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -73,8 +73,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           end
           object Splitter1: TSplitter
             Left = 0
-            Top = 354
-            Width = 944
+            Top = 365
+            Width = 952
             Height = 9
             Cursor = crVSplit
             Align = alBottom
@@ -82,8 +82,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object DBGridComprobantes: TDBGrid
             Left = 0
             Top = 0
-            Width = 944
-            Height = 354
+            Width = 952
+            Height = 365
             Align = alClient
             Color = 14606012
             DataSource = DS_Comprobante
@@ -118,6 +118,13 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                 Title.Alignment = taCenter
                 Title.Caption = 'Fecha'
                 Width = 72
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FECHA_HORA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fecha y Hora'
                 Visible = True
               end
               item
@@ -186,8 +193,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         end
         object PanelFPagoYProd: TPanel
           Left = 1
-          Top = 417
-          Width = 944
+          Top = 428
+          Width = 952
           Height = 122
           Align = alBottom
           BevelOuter = bvNone
@@ -201,7 +208,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object PanelProducto: TPanel
             Left = 612
             Top = 0
-            Width = 332
+            Width = 340
             Height = 122
             Align = alClient
             BevelOuter = bvNone
@@ -210,7 +217,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object lblTotalProducto: TLabel
               Left = 0
               Top = 101
-              Width = 332
+              Width = 340
               Height = 21
               Align = alBottom
               Alignment = taRightJustify
@@ -230,7 +237,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object DBGridListadoProductos: TDBGrid
               Left = 0
               Top = 0
-              Width = 332
+              Width = 340
               Height = 101
               Align = alClient
               Color = 14606012
@@ -310,6 +317,13 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                   Title.Alignment = taCenter
                   Title.Caption = 'Marca'
                   Width = 146
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'ID_STOCK_PRODUCTO'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Id Stock Producto'
                   Visible = True
                 end>
             end
@@ -419,7 +433,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         object PanelFiltro: TPanel
           Left = 1
           Top = 1
-          Width = 944
+          Width = 952
           Height = 32
           Align = alTop
           BevelOuter = bvNone
@@ -471,7 +485,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -990,12 +1004,16 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         ' p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
       
-        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_,c' +
-        '.punto_venta,c.numero_cpb'
+        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
+        'c.punto_venta, c.numero_cpb,'
+      '       c.fecha as fecha_hora'
       'from comprobante c'
       
         'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
         'mprobante)'
+      
+        'join comprobante_detalle cd on (cd.id_comprobante = c.id_comprob' +
+        'ante)'
       
         'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
         'formapag)'
@@ -1010,8 +1028,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         'total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       
-        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
-        'nto_venta,c.numero_cpb'
+        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
+        'unto_venta,'
+      '         c.numero_cpb, c.fecha'
       'order by c.codigo ASC')
     Params = <>
     IndexFieldNames = 'FECHA Desc;CODIGO Desc'
@@ -1071,6 +1090,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     end
     object ZQ_ComprobanteNUMERO_CPB: TIntegerField
       FieldName = 'NUMERO_CPB'
+    end
+    object ZQ_ComprobanteFECHA_HORA: TDateTimeField
+      FieldName = 'FECHA_HORA'
     end
   end
   object DS_Comprobante: TDataSource
@@ -1406,6 +1428,36 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         TipoComboAncho = 200
         ItemIndex = -1
         VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Cuenta'
+        Campo = 'nombre_cuenta'
+        Tabla = 'cuenta'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Forma Pago'
+        Campo = 'descripcion'
+        Tabla = 'tipo_formapago'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Producto'
+        Campo = 'nombre'
+        Tabla = 'producto_cabecera'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1419,28 +1471,40 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         ' p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
       
-        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_,c' +
-        '.punto_venta,c.numero_cpb'
+        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
+        'c.punto_venta, c.numero_cpb,'
+      '       c.fecha as fecha_hora'
       'from comprobante c'
       
-        'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
-        'mprobante)'
+        'inner join comprobante_forma_pago cfp on (cfp.id_comprobante = c' +
+        '.id_comprobante)'
       
-        'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
-        'formapag)'
-      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'join persona p1 on (p1.id_persona = c.id_vendedor)'
-      'join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
-      'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
-      'join persona p2 on (p2.id_persona = c.id_cliente)'
+        'inner join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id' +
+        '_tipo_formapag)'
+      'inner join cuenta cta on (cfp.cuenta_ingreso = cta.id_cuenta)'
+      'inner join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'inner join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'inner join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      
+        'inner join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cp' +
+        'b)'
+      'inner join persona p2 on (p2.id_persona = c.id_cliente)'
+      
+        'inner join comprobante_detalle cd on (cd.id_comprobante = c.id_c' +
+        'omprobante)'
+      'inner join producto pr on (cd.id_producto = pr.id_producto)'
+      
+        'inner join producto_cabecera prc on (pr.id_prod_cabecera = prc.i' +
+        'd_prod_cabecera)'
       'where (c.id_tipo_cpb = 11)'
       
         'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
         'total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       
-        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
-        'nto_venta,c.numero_cpb'
+        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
+        'unto_venta,'
+      '         c.numero_cpb, c.fecha'
       'order by c.codigo ASC')
     SQL_Select.Strings = (
       
@@ -1451,21 +1515,32 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         ' p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
       
-        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_,c' +
-        '.punto_venta,c.numero_cpb')
+        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
+        'c.punto_venta, c.numero_cpb,'
+      '       c.fecha as fecha_hora')
     SQL_From.Strings = (
       'from comprobante c'
       
-        'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
-        'mprobante)'
+        'inner join comprobante_forma_pago cfp on (cfp.id_comprobante = c' +
+        '.id_comprobante)'
       
-        'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
-        'formapag)'
-      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'join persona p1 on (p1.id_persona = c.id_vendedor)'
-      'join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
-      'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
-      'join persona p2 on (p2.id_persona = c.id_cliente)')
+        'inner join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id' +
+        '_tipo_formapag)'
+      'inner join cuenta cta on (cfp.cuenta_ingreso = cta.id_cuenta)'
+      'inner join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'inner join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'inner join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      
+        'inner join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cp' +
+        'b)'
+      'inner join persona p2 on (p2.id_persona = c.id_cliente)'
+      
+        'inner join comprobante_detalle cd on (cd.id_comprobante = c.id_c' +
+        'omprobante)'
+      'inner join producto pr on (cd.id_producto = pr.id_producto)'
+      
+        'inner join producto_cabecera prc on (pr.id_prod_cabecera = prc.i' +
+        'd_prod_cabecera)')
     SQL_Where.Strings = (
       'where (c.id_tipo_cpb = 11)')
     SQL_Orden.Strings = (
@@ -1474,8 +1549,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         'total,'
       '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
       
-        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre,c.pu' +
-        'nto_venta,c.numero_cpb'
+        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
+        'unto_venta,'
+      '         c.numero_cpb, c.fecha'
       'order by c.codigo ASC')
     UsarWhereOriginal = EK_Con_Where
     Left = 56
@@ -1529,6 +1605,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       end
       item
         TituloColumna = 'Fecha'
+        Visible = False
+      end
+      item
+        TituloColumna = 'Fecha y Hora'
         Visible = True
       end
       item
@@ -1643,6 +1723,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       end
       item
         TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Id Stock Producto'
         Visible = True
       end>
     NombreGuardar = 'DBGridListadoProductos'

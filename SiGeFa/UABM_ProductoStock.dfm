@@ -1,8 +1,8 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 295
-  Top = 166
-  Width = 870
-  Height = 546
+  Left = 284
+  Top = 162
+  Width = 962
+  Height = 602
   Caption = 'ABM Producto Stock'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,8 +22,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 467
+    Width = 954
+    Height = 523
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -31,29 +31,29 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelAsociar: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 457
+      Width = 944
+      Height = 513
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Splitter1: TSplitter
         Left = 423
         Top = 21
-        Height = 436
+        Height = 492
       end
       object PanelAsociar_Producto: TPanel
         Left = 426
         Top = 21
-        Width = 426
-        Height = 436
+        Width = 518
+        Height = 492
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 426
-          Height = 436
+          Width = 518
+          Height = 492
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -149,7 +149,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 21
         Width = 423
-        Height = 436
+        Height = 492
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -157,7 +157,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Left = 0
           Top = 0
           Width = 423
-          Height = 436
+          Height = 492
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
@@ -185,7 +185,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 852
+        Width = 944
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -198,8 +198,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 852
-      Height = 457
+      Width = 944
+      Height = 513
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
@@ -318,7 +318,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               50.270833333333330000
               1232.958333333333000000
               124.354166666666700000
-              304.270833333333400000)
+              304.270833333333300000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -349,7 +349,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Size.Values = (
               52.916666666666670000
               1132.416666666667000000
-              68.791666666666680000
+              68.791666666666670000
               505.354166666666700000)
             Alignment = taCenter
             AlignToBand = True
@@ -382,7 +382,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               52.916666666666670000
               1087.437500000000000000
               5.291666666666667000
-              592.666666666666800000)
+              592.666666666666700000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -873,7 +873,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               13.229166666666670000
               5.291666666666667000
               333.375000000000000000)
@@ -1025,7 +1025,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              923.395833333333400000
+              923.395833333333300000
               5.291666666666667000
               105.833333333333300000)
             Alignment = taLeftJustify
@@ -1123,7 +1123,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               37.041666666666670000
               1939.395833333333000000
               5.291666666666667000
-              92.604166666666680000)
+              92.604166666666670000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -1210,8 +1210,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object DBGridStock: TDBGrid
         Left = 0
         Top = 0
-        Width = 852
-        Height = 432
+        Width = 944
+        Height = 488
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
@@ -1426,19 +1426,26 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Title.Alignment = taCenter
             Title.Caption = 'Baja'
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_STOCK_PRODUCTO'
+            Title.Alignment = taRightJustify
+            Title.Caption = 'Id Stock Producto'
+            Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
-        Top = 432
-        Width = 852
+        Top = 488
+        Width = 944
         Height = 25
         Align = alBottom
         TabOrder = 1
         object lblResumen: TLabel
           Left = 1
           Top = 1
-          Width = 850
+          Width = 942
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -2322,6 +2329,10 @@ object FABM_ProductoStock: TFABM_ProductoStock
       item
         TituloColumna = 'Baja'
         Visible = True
+      end
+      item
+        TituloColumna = 'Id Stock Producto'
+        Visible = False
       end>
     NombreGuardar = 'ABMProductoStock_Stock'
     AltoTituloColumna = 15
@@ -2343,6 +2354,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Barra'
@@ -2352,6 +2364,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Cabecera'
@@ -2361,6 +2374,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nombre Producto'
@@ -2370,6 +2384,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Medida'
@@ -2379,6 +2394,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Marca'
@@ -2388,6 +2404,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo Art'#237'culo'
@@ -2397,6 +2414,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Art'#237'culo'
@@ -2406,6 +2424,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Color'
@@ -2415,6 +2434,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Stock Actual'
@@ -2425,6 +2445,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Stock Minimo'
@@ -2435,6 +2456,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Stock Maximo'
@@ -2445,6 +2467,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Llevar Stock'
@@ -2461,6 +2484,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           'N')
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sucursal'
@@ -2474,6 +2498,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Secci'#243'n'
@@ -2483,6 +2508,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sector'
@@ -2492,6 +2518,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fila'
@@ -2501,6 +2528,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Columna'
@@ -2510,6 +2538,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -2526,6 +2555,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           'S')
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
