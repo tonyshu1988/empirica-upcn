@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, DBCtrls, Mask, ExtCtrls, dxBar,
   dxBarExtItems, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKLlenarCombo, DBClient, ComCtrls, ZSqlUpdate, StrUtils, EKOrdenarGrilla;
+  EKLlenarCombo, DBClient, ComCtrls, ZSqlUpdate, StrUtils, EKOrdenarGrilla,
+  Menus;
 
 type
   TFAuditoria = class(TForm)
@@ -90,6 +91,14 @@ type
     ZQ_DatosStockID_PRODUCTO: TIntegerField;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_AudGeneralID_SINCRO_LOTE: TIntegerField;
+    PopupMenu: TPopupMenu;
+    EKOrdenarGrilla2: TEKOrdenarGrilla;
+    EKOrdenarGrilla3: TEKOrdenarGrilla;
+    pUpItem_FiltrarClave: TMenuItem;
+    pUpItem_QuitarFiltro: TMenuItem;
+    Panel3: TPanel;
+    lblFiltro: TLabel;
+    lblCantidad: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_AudGeneralAfterScroll(DataSet: TDataSet);
@@ -108,6 +117,8 @@ type
     procedure btnEliminarAuditoriaClick(Sender: TObject);
     procedure btnActivarFechaClick(Sender: TObject);
     procedure buscarProducto();
+    procedure pUpItem_QuitarFiltroClick(Sender: TObject);
+    procedure pUpItem_FiltrarClaveClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -129,6 +140,9 @@ uses UPrincipal, UDM;
 
 procedure TFAuditoria.FormCreate(Sender: TObject);
 begin
+  lblFiltro.Caption:= '';
+  lblCantidad.Caption:= '';  
+
   btnEliminarAuditoria.Visible:= ivNever;
   if dm.EKUsrLogin.PermisoAccion('AUDITORIA_ELIMINAR') then
     btnEliminarAuditoria.Visible:= ivAlways;
@@ -203,17 +217,19 @@ procedure TFAuditoria.ZQ_AudGeneralAfterScroll(DataSet: TDataSet);
 var
   sql: string;
 begin
+  ZQ_AudDetallada.Close;
+  ZQ_DatosTabla.Close;
+  
   if ZQ_AudGeneral.IsEmpty then
   begin
     exit;
   end;
 
-  ZQ_AudDetallada.Close;
+
   ZQ_AudDetallada.ParamByName('id_tabla').AsInteger:= ZQ_AudGeneralID.AsInteger;
   ZQ_AudDetallada.open;
 
   sql:= 'select * from '+ZQ_AudGeneralTABLE_NAME.AsString+' where '+ZQ_AudGeneralKEY_FIELD.AsString+' = '+ZQ_AudGeneralKEY_VALUE.AsString;
-  ZQ_DatosTabla.Close;
   ZQ_DatosTabla.SQL.Text:= sql;
   ZQ_DatosTabla.Open;
 
@@ -498,4 +514,35 @@ begin
   buscarAudotoria;
 end;
 
+
+procedure TFAuditoria.pUpItem_QuitarFiltroClick(Sender: TObject);
+begin
+  ZQ_AudGeneral.Filter:= '';
+  ZQ_AudGeneral.Filtered:= false;
+  lblFiltro.Caption:= '';
+end;
+
+
+procedure TFAuditoria.pUpItem_FiltrarClaveClick(Sender: TObject);
+var
+  clave: string;
+  clave_i: integer;
+begin
+  clave:= InputBox('Filtrar Clave','Ingrese el valor de la clave a filtrar:','0');
+  try
+    clave_i:= StrToInt(clave);
+  except
+    begin
+      ShowMessage('valor incorrecto, intente de nuevo.');
+      exit;
+    end;
+  end;
+
+  ZQ_AudGeneral.Filter:= 'KEY_VALUE = '+clave;
+  ZQ_AudGeneral.Filtered:= true;
+  ZQ_AudGeneral.First;
+  lblFiltro.Caption:= 'Filtro: '+ZQ_AudGeneralKEY_FIELD.AsString+' = '+clave;
+end;
+
 end.
+

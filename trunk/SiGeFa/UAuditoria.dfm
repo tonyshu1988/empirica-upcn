@@ -1,8 +1,8 @@
 object FAuditoria: TFAuditoria
-  Left = 296
-  Top = 129
-  Width = 893
-  Height = 589
+  Left = 299
+  Top = 173
+  Width = 900
+  Height = 629
   Caption = 'Auditoria'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,15 +20,15 @@ object FAuditoria: TFAuditoria
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 877
-    Height = 499
+    Width = 892
+    Height = 550
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelGrilla: TPanel
       Left = 0
-      Top = 282
-      Width = 877
+      Top = 333
+      Width = 892
       Height = 217
       Align = alBottom
       BevelOuter = bvNone
@@ -43,7 +43,7 @@ object FAuditoria: TFAuditoria
       object DBGridAudDetallada: TDBGrid
         Left = 5
         Top = 5
-        Width = 867
+        Width = 882
         Height = 207
         Align = alClient
         Color = 16112578
@@ -105,8 +105,8 @@ object FAuditoria: TFAuditoria
     object Panel1: TPanel
       Left = 0
       Top = 32
-      Width = 877
-      Height = 250
+      Width = 892
+      Height = 301
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -115,8 +115,8 @@ object FAuditoria: TFAuditoria
       object DBGridAudGeneral: TDBGrid
         Left = 237
         Top = 5
-        Width = 635
-        Height = 160
+        Width = 650
+        Height = 195
         Align = alClient
         Color = 16112578
         DataSource = DS_AudGeneral
@@ -209,8 +209,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosTabla: TDBGrid
         Left = 5
-        Top = 165
-        Width = 867
+        Top = 216
+        Width = 882
         Height = 40
         Align = alBottom
         Color = 12779258
@@ -229,7 +229,7 @@ object FAuditoria: TFAuditoria
         Left = 5
         Top = 5
         Width = 232
-        Height = 160
+        Height = 195
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alLeft
         Color = 16112578
@@ -262,8 +262,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosProducto: TDBGrid
         Left = 5
-        Top = 205
-        Width = 867
+        Top = 256
+        Width = 882
         Height = 40
         Align = alBottom
         Color = 16112578
@@ -332,11 +332,41 @@ object FAuditoria: TFAuditoria
             Visible = True
           end>
       end
+      object Panel3: TPanel
+        Left = 5
+        Top = 200
+        Width = 882
+        Height = 16
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 4
+        DesignSize = (
+          882
+          16)
+        object lblFiltro: TLabel
+          Left = 235
+          Top = 1
+          Width = 302
+          Height = 13
+          AutoSize = False
+          Caption = 'lblFiltro'
+        end
+        object lblCantidad: TLabel
+          Left = 577
+          Top = 1
+          Width = 302
+          Height = 13
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          AutoSize = False
+          Caption = 'lblCantidad'
+        end
+      end
     end
     object Panel2: TPanel
       Left = 0
       Top = 0
-      Width = 877
+      Width = 892
       Height = 32
       Align = alTop
       BevelOuter = bvNone
@@ -445,7 +475,7 @@ object FAuditoria: TFAuditoria
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1381,13 +1411,111 @@ object FAuditoria: TFAuditoria
       item
         TituloColumna = 'Valor Clave'
         Visible = True
+      end
+      item
+        TituloColumna = 'Lote Sincro'
+        Visible = True
       end>
+    NombreGuardar = 'DBGridAudGeneral'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = False
+    PopUpGrilla = PopupMenu
+    Left = 576
+    Top = 64
+  end
+  object PopupMenu: TPopupMenu
+    Left = 576
+    Top = 120
+    object pUpItem_FiltrarClave: TMenuItem
+      Caption = 'Filtrar por Valor Clave'
+      OnClick = pUpItem_FiltrarClaveClick
+    end
+    object pUpItem_QuitarFiltro: TMenuItem
+      Caption = 'Quitar Filtro'
+      OnClick = pUpItem_QuitarFiltroClick
+    end
+  end
+  object EKOrdenarGrilla2: TEKOrdenarGrilla
+    Grilla = DBGridAudDetallada
+    Filtros = <
+      item
+        TituloColumna = 'Campo Tabla'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Valor Viejo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Valor Nuevo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Valor Ref Viejo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Valor Ref Nuevo'
+        Visible = True
+      end>
+    NombreGuardar = 'DBGridAudDetallada'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = False
+    Left = 56
+    Top = 389
+  end
+  object EKOrdenarGrilla3: TEKOrdenarGrilla
+    Grilla = DBGridDatosProducto
+    Filtros = <
+      item
+        TituloColumna = 'ID_PRODUCTO'
+        Visible = True
+      end
+      item
+        TituloColumna = 'COD_CABECERA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NOMBRE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'MEDIDA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NOMBRE_MARCA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'COLOR'
+        Visible = True
+      end
+      item
+        TituloColumna = 'COD_PRODUCTO'
+        Visible = True
+      end
+      item
+        TituloColumna = 'CODIGO_BARRA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ARTICULO'
+        Visible = True
+      end>
+    NombreGuardar = 'DBGridDatosProducto'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 576
-    Top = 64
+    Left = 328
+    Top = 225
   end
 end

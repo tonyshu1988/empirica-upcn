@@ -147,6 +147,7 @@ type
     EKListadoCliente: TEKListadoSQL;
     ZQ_CambiarCuenta: TZQuery;
     EKListadoCuenta: TEKListadoSQL;
+    ZQ_ComprobanteFECHA_HORA: TDateTimeField;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
