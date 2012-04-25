@@ -1464,8 +1464,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     DataSet = ZQ_Comprobante
     SQL.Strings = (
       
-        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
-        ' as Fecha, c.porc_iva,'
+        'select distinct c.codigo, c.id_comprobante, cast(c.fecha_cobrada' +
+        ' as date) as Fecha, c.porc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
@@ -1489,13 +1489,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         'inner join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cp' +
         'b)'
       'inner join persona p2 on (p2.id_persona = c.id_cliente)'
-      
-        'inner join comprobante_detalle cd on (cd.id_comprobante = c.id_c' +
-        'omprobante)'
-      'inner join producto pr on (cd.id_producto = pr.id_producto)'
-      
-        'inner join producto_cabecera prc on (pr.id_prod_cabecera = prc.i' +
-        'd_prod_cabecera)'
+      ''
+      ''
+      ''
       'where (c.id_tipo_cpb = 11)'
       
         'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
@@ -1508,8 +1504,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'order by c.codigo ASC')
     SQL_Select.Strings = (
       
-        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
-        ' as Fecha, c.porc_iva,'
+        'select distinct c.codigo, c.id_comprobante, cast(c.fecha_cobrada' +
+        ' as date) as Fecha, c.porc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
@@ -1534,13 +1530,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         'inner join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cp' +
         'b)'
       'inner join persona p2 on (p2.id_persona = c.id_cliente)'
-      
-        'inner join comprobante_detalle cd on (cd.id_comprobante = c.id_c' +
-        'omprobante)'
-      'inner join producto pr on (cd.id_producto = pr.id_producto)'
-      
-        'inner join producto_cabecera prc on (pr.id_prod_cabecera = prc.i' +
-        'd_prod_cabecera)')
+      ''
+      ''
+      '')
     SQL_Where.Strings = (
       'where (c.id_tipo_cpb = 11)')
     SQL_Orden.Strings = (
@@ -1605,7 +1597,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       end
       item
         TituloColumna = 'Fecha'
-        Visible = False
+        Visible = True
       end
       item
         TituloColumna = 'Fecha y Hora'
