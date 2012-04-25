@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ExtCtrls, EKIni, Tlhelp32;
+  Dialogs, StdCtrls, Buttons, ExtCtrls, EKIni, Tlhelp32, shellapi;
 
 type
   TTerminateStatus = (tsError, tsClose, tsTerminate);
@@ -30,6 +30,9 @@ type
     lbTIEMPO: TLabel;
     Label4: TLabel;
     Button2: TButton;
+    Label5: TLabel;
+    ERutaDestino: TEdit;
+    SpeedButton1: TSpeedButton;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -41,6 +44,8 @@ type
     procedure btnDestinoBasesClick(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    function CopiaTodo(Origen,Destino : String) : LongInt;
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,6 +60,27 @@ var
 implementation
 
 {$R *.dfm}
+
+function TFConfiguracion.CopiaTodo(Origen,Destino : String) : LongInt;
+var
+  F : TShFileOpStruct;
+  sOrigen, sDestino : String;
+begin
+  Result := 0;
+  sOrigen := Origen + #0;
+  sDestino := Destino + #0;
+
+  with F do
+  begin
+    Wnd   := Application.Handle;
+    wFunc := FO_COPY;
+    pFrom := @sOrigen[1];
+    pTo   := @sDestino[1];
+    fFlags := FOF_ALLOWUNDO or FOF_NOCONFIRMATION
+  end;
+  
+   Result := ShFileOperation(F);
+end;
 
 Function TFConfiguracion.GetProcessID(Const ExeFileName: string; var ProcessId: integer;
                       Const ProcessNo :Integer = 1): boolean;
@@ -138,6 +164,7 @@ procedure TFConfiguracion.BitBtn1Click(Sender: TObject);
 begin
 EKIni1.Ini.WriteString('TEMPORIZADOR', 'Tiempo', ETiempo.Text);
 EKIni1.Ini.WriteString('BASE', 'SIGEFA', ERutaBase.Text);
+EKIni1.Ini.WriteString('DESTINO', 'SIGEFA', ERutaDestino.Text);
 end;
 
 procedure TFConfiguracion.FormCreate(Sender: TObject);
@@ -147,6 +174,7 @@ EKIni1.Path:= ExtractFilePath(Application.ExeName);
 EKIni1.abrir;
 ETiempo.Text := EKIni1.Ini.ReadString('TEMPORIZADOR', 'Tiempo', '');
 ERutaBase.Text := EKIni1.Ini.ReadString('BASE', 'SIGEFA', '');
+ERutaDestino.Text := EKIni1.Ini.ReadString('DESTINO', 'SIGEFA', '');
 
 Timer1.Interval := 1000*StrToInt(EKIni1.Ini.ReadString('TEMPORIZADOR', 'Tiempo', ''));
 
@@ -173,6 +201,7 @@ procedure TFConfiguracion.Timer1Timer(Sender: TObject);
 var
 PID: Integer;
 RutaBase : string;
+RutaDestino : string;
 begin
 
  PID:= 0;
@@ -205,8 +234,11 @@ begin
   KillProcess(PID);
  end;
 
-
  RutaBase:= EKIni1.Ini.ReadString('BASE', 'SIGEFA', '');
+ RutaDestino:= EKIni1.Ini.ReadString('DESTINO', 'SIGEFA', '');
+
+ CopiaTodo(RutaBase,RutaDestino);
+
  DeleteFile(PChar(RutaBase));
 
 close;
@@ -252,6 +284,21 @@ procedure TFConfiguracion.Button2Click(Sender: TObject);
 begin
 Timer1.Enabled := false;
 Timer2.Enabled := false;
+end;
+
+procedure TFConfiguracion.SpeedButton1Click(Sender: TObject);
+var
+  cp: string;
+begin
+  cp:= GetCurrentDir;
+  OpenDialog.InitialDir:= cp;
+  //OpenDialog.Filter := 'Base de Datos Firebird (*.FDB)|*.fdb|All Files (*.*)|*.*';
+
+  if (ExtractFilePath(ERutaDestino.Text)) <> '' then
+    OpenDialog.InitialDir:= (ExtractFilePath(ERutaDestino.text));
+
+  if OpenDialog.Execute then
+    ERutaDestino.Text:= OpenDialog.FileName;
 end;
 
 end.
