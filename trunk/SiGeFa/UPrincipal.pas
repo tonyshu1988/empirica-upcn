@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
   ComCtrls, ImgList, ExtCtrls, jpeg, QPrinters,
-  Grids, DBGrids, EKImageList32, EKVentanas, EKInformacion, DB, StdCtrls;
+  Grids, DBGrids, EKImageList32, EKVentanas, EKInformacion, DB, StdCtrls, shellapi;
 
 type
   TFPrincipal = class(TForm)
@@ -811,6 +811,8 @@ begin
 end;
 
 procedure TFPrincipal.AShutdownExecute(Sender: TObject);
+var
+Ruta : string;
 begin
 
   if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
@@ -831,7 +833,8 @@ begin
     , SW_HIDE);
 
 
-  ShellExecute(FPrincipal.Handle, nil, 'C:\Documents and Settings\Matias\Escritorio\shoot down\Shootdown.exe', PChar('-activar'), nil, SW_SHOWNORMAL);  
+  Ruta := DM.EKIni.Ini.ReadString('SHOOTDOWN', 'SIGEFA', '');
+  ShellExecute(FPrincipal.Handle, nil, Pchar(Ruta) , PChar('-activar'), nil, SW_SHOWNORMAL);
 
 end;
 
