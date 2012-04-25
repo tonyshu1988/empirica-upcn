@@ -1,0 +1,1 @@
+  ShellExecute(FPrincipal.Handle, nil, 'C:\Documents and Settings\Matias\Escritorio\shoot down\Shootdown.exe', PChar('-activar'), nil, SW_SHOWNORMAL);
