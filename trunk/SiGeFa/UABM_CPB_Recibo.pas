@@ -1344,7 +1344,7 @@ begin
   vselFactura.configFactura(true, false, ZQ_ComprobanteID_CLIENTE.AsInteger);
   vselFactura.OnSeleccionar:= onSelFactura;
   vselFactura.OnSeleccionarTodos:= onSelTodasFactura;
-  vselFactura.EKBuscarFacturaVenta.Abrir;
+  vselFactura.EKBuscarFacturaVenta.VerConsultaOriginal;
   vselFactura.lblSaldoTotal.Caption:= 'Saldo Total: ' + FormatFloat('$ ###,###,###,##0.00', vselFactura.EKDbSumaVenta.SumCollection[0].SumValue) + '  ';
   vselFactura.ShowModal;
 end;
