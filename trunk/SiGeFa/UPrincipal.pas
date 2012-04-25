@@ -830,6 +830,9 @@ begin
     Format('%s -user SYSDBA -password masterkey %s:%s -shut -force 0', [ExtractFilePath(Application.ExeName) + 'gfix.exe', dm.Conexion.HostName, dm.Conexion.Database]))
     , SW_HIDE);
 
+
+  ShellExecute(FPrincipal.Handle, nil, 'C:\Documents and Settings\Matias\Escritorio\shoot down\Shootdown.exe', PChar('-activar'), nil, SW_SHOWNORMAL);  
+
 end;
 
 end.
