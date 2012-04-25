@@ -20,15 +20,15 @@ object FBuscarComprobante: TFBuscarComprobante
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 722
-    Height = 347
+    Width = 714
+    Height = 336
     Align = alClient
     TabOrder = 0
     object DBGridFacturas: TDBGrid
       Left = 1
       Top = 26
-      Width = 720
-      Height = 174
+      Width = 712
+      Height = 163
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -84,8 +84,8 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object PanelDetalle: TPanel
       Left = 1
-      Top = 221
-      Width = 720
+      Top = 210
+      Width = 712
       Height = 125
       Align = alBottom
       BevelOuter = bvNone
@@ -93,7 +93,7 @@ object FBuscarComprobante: TFBuscarComprobante
       object DBGridDetalle: TDBGrid
         Left = 0
         Top = 0
-        Width = 720
+        Width = 712
         Height = 125
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alClient
@@ -142,7 +142,7 @@ object FBuscarComprobante: TFBuscarComprobante
       Tag = 99
       Left = 1
       Top = 1
-      Width = 720
+      Width = 712
       Height = 25
       Align = alTop
       BevelOuter = bvNone
@@ -172,14 +172,14 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object Panel2: TPanel
       Left = 1
-      Top = 200
-      Width = 720
+      Top = 189
+      Width = 712
       Height = 21
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
       DesignSize = (
-        720
+        712
         21)
       object lblDetalleFactura: TLabel
         Left = 3
@@ -209,7 +209,7 @@ object FBuscarComprobante: TFBuscarComprobante
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
