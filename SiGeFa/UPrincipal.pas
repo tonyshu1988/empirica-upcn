@@ -358,23 +358,23 @@ begin
   end;
 
    //valido si DEBE o nó cerrarse por causas anormales (;-P)
-  cerrarSistema:= 0;
-  if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
-  begin
-    dm.ZQ_Configuracion_Variables.Open;
-    dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'shutdown', []);
-
-    if (dm.ZQ_Configuracion_VariablesTEXTO.AsString = 'SI') then
-      cerrarSistema:= 1;
-
-    if not (dm.EKModelo.finalizar_transaccion('shutdown')) then
-      dm.EKModelo.cancelar_transaccion('shutdown');
-  end;
-  if cerrarSistema = 1 then
-  begin
-    AShutdown.Execute;
-    Application.Terminate;
-  end;
+//  cerrarSistema:= 0;
+//  if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
+//  begin
+//    dm.ZQ_Configuracion_Variables.Open;
+//    dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'shutdown', []);
+//
+//    if (dm.ZQ_Configuracion_VariablesTEXTO.AsString = 'SI') then
+//      cerrarSistema:= 1;
+//
+//    if not (dm.EKModelo.finalizar_transaccion('shutdown')) then
+//      dm.EKModelo.cancelar_transaccion('shutdown');
+//  end;
+//  if cerrarSistema = 1 then
+//  begin
+//    AShutdown.Execute;
+//    Application.Terminate;
+//  end;
 end;
 
 
@@ -815,26 +815,30 @@ var
 Ruta : string;
 begin
 
-  if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
-  begin
+//  if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
+//  begin
+//    dm.ZQ_Configuracion_Variables.Open;
+//    dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'shutdown', []);
+//    dm.ZQ_Configuracion_Variables.Edit;
+//
+//    dm.ZQ_Configuracion_VariablesTEXTO.AsString:= 'SI';
+//    dm.ZQ_Configuracion_Variables.Post;
+//
+//    if not (dm.EKModelo.finalizar_transaccion('shutdown')) then
+//      dm.EKModelo.cancelar_transaccion('shutdown');
+//  end;
+//
+//  WinExec(Pchar(
+//    Format('%s -user SYSDBA -password masterkey %s:%s -shut -force 0', [ExtractFilePath(Application.ExeName) + 'gfix.exe', dm.Conexion.HostName, dm.Conexion.Database]))
+//    , SW_HIDE);
+
     dm.ZQ_Configuracion_Variables.Open;
     dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'shutdown', []);
-    dm.ZQ_Configuracion_Variables.Edit;
-
-    dm.ZQ_Configuracion_VariablesTEXTO.AsString:= 'SI';
-    dm.ZQ_Configuracion_Variables.Post;
-
-    if not (dm.EKModelo.finalizar_transaccion('shutdown')) then
-      dm.EKModelo.cancelar_transaccion('shutdown');
-  end;
-
-  WinExec(Pchar(
-    Format('%s -user SYSDBA -password masterkey %s:%s -shut -force 0', [ExtractFilePath(Application.ExeName) + 'gfix.exe', dm.Conexion.HostName, dm.Conexion.Database]))
-    , SW_HIDE);
-
-
-  Ruta := DM.EKIni.Ini.ReadString('SHOOTDOWN', 'SIGEFA', '');
-  ShellExecute(FPrincipal.Handle, nil, Pchar(Ruta) , PChar('-activar'), nil, SW_SHOWNORMAL);
+    if (dm.ZQ_Configuracion_VariablesTEXTO.AsString = 'SI') then
+    begin
+      Ruta := DM.EKIni.Ini.ReadString('SHUTDOWN', 'RUTA', '');
+      ShellExecute(FPrincipal.Handle, nil, Pchar(Ruta) , PChar('-activar'), nil, SW_SHOWNORMAL);
+    end;
 
 end;
 
