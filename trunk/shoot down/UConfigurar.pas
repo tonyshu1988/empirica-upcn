@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ExtCtrls, EKIni, Tlhelp32, shellapi;
+  Dialogs, StdCtrls, Buttons, ExtCtrls, EKIni, Tlhelp32, shellapi, shlobj;
 
 type
   TTerminateStatus = (tsError, tsClose, tsTerminate);
@@ -37,7 +37,8 @@ type
     Label6: TLabel;
     ERutaInstsvc: TEdit;
     btnRutaInstsvc: TSpeedButton;
-    OpenDialog1: TOpenDialog;
+    Panel3: TPanel;
+    BitBtn2: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -50,9 +51,11 @@ type
     procedure Timer2Timer(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     function CopiaTodo(Origen,Destino : String) : LongInt;
-    procedure btnRutaBaseDestinoClick(Sender: TObject);
     procedure ChHacerCopiaClick(Sender: TObject);
     procedure btnRutaInstsvcClick(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    function BuscarDirectorioDialog(const subtitle: string; const newStyle: boolean) : string;
+    procedure btnRutaBaseDestinoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,6 +70,32 @@ var
 implementation
 
 {$R *.dfm}
+
+//Funcion para buscar un directorio
+function TFConfiguracion.BuscarDirectorioDialog(const subtitle: string; const newStyle: boolean) : string;
+var
+  BI: TBrowseInfo;
+  IL: PItemIDList;
+begin
+  Result := '';
+  with BI do begin
+    lpfn:= nil;
+    lParam:= 0;
+    iImage:= 0;
+    pidlRoot:= nil;
+    hwndOwner:= GetActiveWindow;
+    lpszTitle:= PChar(subtitle);
+    GetMem(pszDisplayName, MAX_PATH);
+    ulFlags := BIF_RETURNONLYFSDIRS;
+    if newStyle then
+      ulFlags := BIF_NEWDIALOGSTYLE;
+  end;
+  IL := SHBrowseForFolder(BI);
+  if SHGetPathFromIDList(IL, BI.pszDisplayName)
+    then Result := StrPas(BI.pszDisplayName);
+  FreeMem(BI.pszDisplayName);
+  GlobalFreePtr(IL);
+end;
 
 function TFConfiguracion.CopiaTodo(Origen,Destino : String) : LongInt;
 var
@@ -169,6 +198,14 @@ end;
 
 procedure TFConfiguracion.BitBtn1Click(Sender: TObject);
 begin
+ try
+   strtoint(ETiempo.Text);
+ except
+   ShowMessage('El Campo Tiempo es incorrecto, verifique');
+   exit;
+ end;  
+
+
 EKIni1.Ini.WriteString('FIREBIRD', 'EXE', ERutaInstsvc.Text);
 EKIni1.Ini.WriteString('TEMPORIZADOR', 'Tiempo', ETiempo.Text);
 EKIni1.Ini.WriteString('BASE', 'SIGEFA', ERutaBase.Text);
@@ -325,24 +362,6 @@ Timer1.Enabled := false;
 Timer2.Enabled := false;
 end;
 
-procedure TFConfiguracion.btnRutaBaseDestinoClick(Sender: TObject);
-var
-  cp: string;
-begin
-
-  cp:= GetCurrentDir;
-  OpenDialog1.InitialDir:= cp;
-  //OpenDialog.Filter := 'Base de Datos Firebird (*.FDB)|*.fdb|All Files (*.*)|*.*';
-
-  if (ExtractFilePath(ERutaDestino.Text)) <> '' then
-    OpenDialog1.InitialDir:= (ExtractFilePath(ERutaDestino.text));
-
-  if OpenDialog1.Execute then
-    ERutaDestino.Text:= OpenDialog1.FileName;
-
-
-end;
-
 procedure TFConfiguracion.ChHacerCopiaClick(Sender: TObject);
 begin
   if ChHacerCopia.Checked then
@@ -373,6 +392,19 @@ begin
   if OpenDialog.Execute then
     ERutaInstsvc.Text:= OpenDialog.FileName;
 
+end;
+
+procedure TFConfiguracion.BitBtn2Click(Sender: TObject);
+var
+Rutainstsvc : string;
+begin
+Rutainstsvc:= EKIni1.Ini.ReadString('FIREBIRD', 'EXE', '');
+ShellExecute(0, nil, PChar(Rutainstsvc), '-s start', nil, SW_HIDE);
+end;
+
+procedure TFConfiguracion.btnRutaBaseDestinoClick(Sender: TObject);
+begin
+  ERutaDestino.Text := BuscarDirectorioDialog('Seleccionar Directorio', TRUE);
 end;
 
 end.
