@@ -1,8 +1,8 @@
 object FConfiguracion: TFConfiguracion
   Left = 449
   Top = 255
-  Width = 528
-  Height = 344
+  Width = 514
+  Height = 380
   Caption = 'Configuracion'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -17,7 +17,7 @@ object FConfiguracion: TFConfiguracion
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 520
+    Width = 506
     Height = 179
     Align = alTop
     Caption = 'Configuracion'
@@ -163,7 +163,7 @@ object FConfiguracion: TFConfiguracion
       Caption = 'Ruta Instsvc:'
     end
     object btnRutaInstsvc: TSpeedButton
-      Left = 464
+      Left = 465
       Top = 90
       Width = 20
       Height = 22
@@ -223,21 +223,21 @@ object FConfiguracion: TFConfiguracion
       Text = '10'
     end
     object ERutaBase: TEdit
-      Left = 94
+      Left = 93
       Top = 62
       Width = 361
       Height = 21
       TabOrder = 1
     end
     object ERutaDestino: TEdit
-      Left = 94
+      Left = 93
       Top = 149
       Width = 361
       Height = 21
       TabOrder = 2
     end
     object ChHacerCopia: TCheckBox
-      Left = 94
+      Left = 93
       Top = 129
       Width = 97
       Height = 17
@@ -246,7 +246,7 @@ object FConfiguracion: TFConfiguracion
       OnClick = ChHacerCopiaClick
     end
     object ERutaInstsvc: TEdit
-      Left = 94
+      Left = 93
       Top = 91
       Width = 361
       Height = 21
@@ -256,12 +256,12 @@ object FConfiguracion: TFConfiguracion
   object Panel1: TPanel
     Left = 0
     Top = 179
-    Width = 520
+    Width = 506
     Height = 41
     Align = alTop
     TabOrder = 1
     object BitBtn1: TBitBtn
-      Left = 19
+      Left = 21
       Top = 8
       Width = 121
       Height = 25
@@ -270,7 +270,7 @@ object FConfiguracion: TFConfiguracion
       OnClick = BitBtn1Click
     end
     object Button3: TButton
-      Left = 160
+      Left = 162
       Top = 8
       Width = 75
       Height = 25
@@ -282,7 +282,7 @@ object FConfiguracion: TFConfiguracion
   object Panel2: TPanel
     Left = 0
     Top = 220
-    Width = 520
+    Width = 506
     Height = 92
     Align = alClient
     TabOrder = 2
@@ -316,40 +316,52 @@ object FConfiguracion: TFConfiguracion
       OnClick = Button1Click
     end
     object Button2: TButton
-      Left = 386
-      Top = 16
-      Width = 75
-      Height = 65
-      Caption = 'PARAR'
+      Left = 380
+      Top = 10
+      Width = 114
+      Height = 74
+      Caption = 'Cancelar Acci'#243'n'
       TabOrder = 1
       OnClick = Button2Click
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 312
+    Width = 506
+    Height = 41
+    Align = alBottom
+    TabOrder = 3
+    object BitBtn2: TBitBtn
+      Left = 21
+      Top = 8
+      Width = 160
+      Height = 25
+      Caption = 'Start Base de Datos'
+      TabOrder = 0
+      OnClick = BitBtn2Click
     end
   end
   object Timer1: TTimer
     Enabled = False
     OnTimer = Timer1Timer
-    Left = 368
+    Left = 312
     Top = 16
   end
   object EKIni1: TEKIni
     Archivo = 'sistema.ini'
-    Left = 304
+    Left = 272
     Top = 16
   end
   object OpenDialog: TOpenDialog
     Filter = 'InterBase Databases (*.GDB)|*.gdb|All Files (*.*)|*.*'
-    Left = 424
+    Left = 352
     Top = 13
   end
   object Timer2: TTimer
     Enabled = False
     OnTimer = Timer2Timer
-    Left = 480
-    Top = 18
-  end
-  object OpenDialog1: TOpenDialog
-    Filter = 'All Files (*.*)|*.*'
     Left = 408
-    Top = 109
+    Top = 18
   end
 end
