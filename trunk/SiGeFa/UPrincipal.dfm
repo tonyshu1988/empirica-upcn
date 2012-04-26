@@ -22,7 +22,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 29
     Width = 921
-    Height = 514
+    Height = 508
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,7 +4702,7 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 543
+    Top = 537
     Width = 921
     Height = 19
     Panels = <
@@ -4723,9 +4723,9 @@ object FPrincipal: TFPrincipal
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
-    ColorMap.HighlightColor = 14410210
+    ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 14410210
+    ColorMap.UnusedColor = clWhite
     ParentShowHint = False
     ShowHint = True
     Spacing = 0
@@ -4734,7 +4734,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 29
     Width = 921
-    Height = 514
+    Height = 508
     Align = alClient
     Caption = 'DEMO'
     Color = 16053492
