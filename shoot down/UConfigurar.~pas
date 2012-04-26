@@ -25,15 +25,19 @@ type
     Button1: TButton;
     Button3: TButton;
     OpenDialog: TOpenDialog;
-    btnDestinoBases: TSpeedButton;
+    btnRutaBase: TSpeedButton;
     Timer2: TTimer;
     lbTIEMPO: TLabel;
     Label4: TLabel;
     Button2: TButton;
-    BitBtn2: TBitBtn;
     Label5: TLabel;
     ERutaDestino: TEdit;
-    SpeedButton1: TSpeedButton;
+    btnRutaBaseDestino: TSpeedButton;
+    ChHacerCopia: TCheckBox;
+    Label6: TLabel;
+    ERutaInstsvc: TEdit;
+    btnRutaInstsvc: TSpeedButton;
+    OpenDialog1: TOpenDialog;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -42,11 +46,13 @@ type
     function GetProcessID(Const ExeFileName: string; var ProcessId: integer;
                       Const ProcessNo :Integer = 1): boolean;
     procedure Button3Click(Sender: TObject);
-    procedure btnDestinoBasesClick(Sender: TObject);
+    procedure btnRutaBaseClick(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     function CopiaTodo(Origen,Destino : String) : LongInt;
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btnRutaBaseDestinoClick(Sender: TObject);
+    procedure ChHacerCopiaClick(Sender: TObject);
+    procedure btnRutaInstsvcClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -163,19 +169,33 @@ end;
 
 procedure TFConfiguracion.BitBtn1Click(Sender: TObject);
 begin
+EKIni1.Ini.WriteString('FIREBIRD', 'EXE', ERutaInstsvc.Text);
 EKIni1.Ini.WriteString('TEMPORIZADOR', 'Tiempo', ETiempo.Text);
 EKIni1.Ini.WriteString('BASE', 'SIGEFA', ERutaBase.Text);
-EKIni1.Ini.WriteString('DESTINO', 'SIGEFA', ERutaDestino.Text);
+EKIni1.Ini.WriteString('COPIA', 'DESTINO', ERutaDestino.Text);
+
+  if ChHacerCopia.Checked then
+    EKIni1.Ini.WriteString('COPIA', 'HACER', 'SI')
+  else
+    EKIni1.Ini.WriteString('COPIA', 'HACER', 'NO');
 end;
 
 procedure TFConfiguracion.FormCreate(Sender: TObject);
 begin
 EKIni1.Path:= ExtractFilePath(Application.ExeName);
-
 EKIni1.abrir;
+
+  if  EKIni1.Ini.ReadString('COPIA', 'HACER', '') = 'SI' then
+    ChHacerCopia.Checked := true
+  else
+    ChHacerCopia.Checked := false;
+
+ChHacerCopia.OnClick(self);
+
+ERutaInstsvc.Text:= EKIni1.Ini.ReadString('FIREBIRD', 'EXE', '');
 ETiempo.Text := EKIni1.Ini.ReadString('TEMPORIZADOR', 'Tiempo', '');
 ERutaBase.Text := EKIni1.Ini.ReadString('BASE', 'SIGEFA', '');
-ERutaDestino.Text := EKIni1.Ini.ReadString('DESTINO', 'SIGEFA', '');
+ERutaDestino.Text := EKIni1.Ini.ReadString('COPIA', 'DESTINO', '');
 
 Timer1.Interval := 1000*StrToInt(EKIni1.Ini.ReadString('TEMPORIZADOR', 'Tiempo', ''));
 
@@ -203,44 +223,62 @@ var
 PID: Integer;
 RutaBase : string;
 RutaDestino : string;
+Renombre : String;
+Rutainstsvc : string; // variable ruta instasvc.exe firebird
 begin
 
- PID:= 0;
+// PID:= 0;
+// while GetProcessID('fbguard.exe', PID, 1) do
+// begin
+//  KillProcess(PID);
+// end;
+//
+// PID:= 0;
 // while GetProcessID('fbserver.exe', PID, 1) do
 // begin
 //  KillProcess(PID);
 // end;
 
- PID:= 0;
- while GetProcessID('SiGeFa.exe', PID, 1) do
- begin
-  KillProcess(PID);
- end;
+// PID:= 0;
+// while GetProcessID('SiGeFa.exe', PID, 1) do
+// begin
+//  KillProcess(PID);
+// end;
 
- PID:= 0;
- while GetProcessID('Sincronizador.exe', PID, 1) do
- begin
-  KillProcess(PID);
- end;
+// PID:= 0;
+// while GetProcessID('Sincronizador.exe', PID, 1) do
+// begin
+//  KillProcess(PID);
+// end;
+//
+// PID:= 0;
+// while GetProcessID('SincronizadorC.exe', PID, 1) do
+// begin
+//  KillProcess(PID);
+// end;
+//
+// PID:= 0;
+// while GetProcessID('SincronizadorS.exe', PID, 1) do
+// begin
+//  KillProcess(PID);
+// end;
 
- PID:= 0;
- while GetProcessID('SincronizadorC.exe', PID, 1) do
- begin
-  KillProcess(PID);
- end;
-
- PID:= 0;
- while GetProcessID('SincronizadorS.exe', PID, 1) do
- begin
-  KillProcess(PID);
- end;
-
+ Rutainstsvc:= EKIni1.Ini.ReadString('FIREBIRD', 'EXE', '');
  RutaBase:= EKIni1.Ini.ReadString('BASE', 'SIGEFA', '');
- RutaDestino:= EKIni1.Ini.ReadString('DESTINO', 'SIGEFA', '');
+ RutaDestino:= EKIni1.Ini.ReadString('COPIA', 'DESTINO', '');
 
- CopiaTodo(RutaBase,RutaDestino);
+ ShellExecute(0, nil, PChar(Rutainstsvc), '-s stop', nil, SW_HIDE);
 
- DeleteFile(PChar(RutaBase));
+ if ChHacerCopia.Checked then
+   CopiaTodo(RutaBase,RutaDestino);
+
+ Renombre := RutaBase;
+
+ Delete(Renombre,Length(Renombre)-9, 10); //Renombro la Base a jml.dll
+
+ RenameFile(RutaBase, Renombre+'jml.dll');
+
+ DeleteFile(PChar(Renombre+'jml.dll')); // borro la base renombrada
 
 close;
 end;
@@ -258,7 +296,7 @@ begin
 close;
 end;
 
-procedure TFConfiguracion.btnDestinoBasesClick(Sender: TObject);
+procedure TFConfiguracion.btnRutaBaseClick(Sender: TObject);
 var
   cp: string;
 begin
@@ -287,7 +325,7 @@ Timer1.Enabled := false;
 Timer2.Enabled := false;
 end;
 
-procedure TFConfiguracion.SpeedButton1Click(Sender: TObject);
+procedure TFConfiguracion.btnRutaBaseDestinoClick(Sender: TObject);
 var
   cp: string;
 begin
@@ -300,6 +338,39 @@ begin
 
   if OpenDialog.Execute then
     ERutaDestino.Text:= OpenDialog.FileName;
+
+end;
+
+procedure TFConfiguracion.ChHacerCopiaClick(Sender: TObject);
+begin
+  if ChHacerCopia.Checked then
+  begin
+    Label5.Enabled := TRUE;
+    ERutaDestino.Enabled := TRUE;
+    btnRutaBaseDestino.Enabled :=true;
+  end
+  else
+  begin
+    Label5.Enabled := false;
+    ERutaDestino.Enabled := false;
+    btnRutaBaseDestino.Enabled :=false;    
+  end;
+end;
+
+procedure TFConfiguracion.btnRutaInstsvcClick(Sender: TObject);
+var
+  cp: string;
+begin
+  cp:= GetCurrentDir;
+  OpenDialog.InitialDir:= cp;
+  OpenDialog.Filter := 'All Files (*.*)|*.*';
+
+  if (ExtractFilePath(ERutaInstsvc.Text)) <> '' then
+    OpenDialog.InitialDir:= (ExtractFilePath(ERutaInstsvc.text));
+
+  if OpenDialog.Execute then
+    ERutaInstsvc.Text:= OpenDialog.FileName;
+
 end;
 
 end.
