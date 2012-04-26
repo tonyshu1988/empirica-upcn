@@ -39,6 +39,10 @@ type
     btnRutaInstsvc: TSpeedButton;
     Panel3: TPanel;
     BitBtn2: TBitBtn;
+    Label7: TLabel;
+    ERutaIni: TEdit;
+    btnRutaIni: TSpeedButton;
+    ChBorrarIni: TCheckBox;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -55,6 +59,9 @@ type
     procedure btnRutaInstsvcClick(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     function BuscarDirectorioDialog(const subtitle: string; const newStyle: boolean) : string;
+    procedure btnRutaBaseDestinoClick(Sender: TObject);
+    procedure btnRutaIniClick(Sender: TObject);
+    procedure ChBorrarIniClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -209,11 +216,17 @@ EKIni1.Ini.WriteString('FIREBIRD', 'EXE', ERutaInstsvc.Text);
 EKIni1.Ini.WriteString('TEMPORIZADOR', 'Tiempo', ETiempo.Text);
 EKIni1.Ini.WriteString('BASE', 'SIGEFA', ERutaBase.Text);
 EKIni1.Ini.WriteString('COPIA', 'DESTINO', ERutaDestino.Text);
+EKIni1.Ini.WriteString('INI', 'RUTA', ERutaIni.Text);
 
   if ChHacerCopia.Checked then
     EKIni1.Ini.WriteString('COPIA', 'HACER', 'SI')
   else
     EKIni1.Ini.WriteString('COPIA', 'HACER', 'NO');
+
+  if ChBorrarIni.Checked then
+    EKIni1.Ini.WriteString('INI', 'ELIMINAR', 'SI')
+  else
+    EKIni1.Ini.WriteString('INI', 'ELIMINAR', 'NO');
 end;
 
 procedure TFConfiguracion.FormCreate(Sender: TObject);
@@ -226,12 +239,19 @@ EKIni1.abrir;
   else
     ChHacerCopia.Checked := false;
 
+  if  EKIni1.Ini.ReadString('INI', 'ELIMINAR', '') = 'SI' then
+    ChBorrarIni.Checked := true
+  else
+    ChBorrarIni.Checked := false;
+
 ChHacerCopia.OnClick(self);
+ChBorrarIni.OnClick(self);
 
 ERutaInstsvc.Text:= EKIni1.Ini.ReadString('FIREBIRD', 'EXE', '');
 ETiempo.Text := EKIni1.Ini.ReadString('TEMPORIZADOR', 'Tiempo', '');
 ERutaBase.Text := EKIni1.Ini.ReadString('BASE', 'SIGEFA', '');
 ERutaDestino.Text := EKIni1.Ini.ReadString('COPIA', 'DESTINO', '');
+ERutaIni.Text := EKIni1.Ini.ReadString('INI', 'RUTA', '');
 
 Timer1.Interval := 1000*StrToInt(EKIni1.Ini.ReadString('TEMPORIZADOR', 'Tiempo', ''));
 
@@ -261,6 +281,7 @@ RutaBase : string;
 RutaDestino : string;
 Renombre : String;
 Rutainstsvc : string; // variable ruta instasvc.exe firebird
+RutaIni : string;
 begin
 
 // PID:= 0;
@@ -302,6 +323,7 @@ begin
  Rutainstsvc:= EKIni1.Ini.ReadString('FIREBIRD', 'EXE', '');
  RutaBase:= EKIni1.Ini.ReadString('BASE', 'SIGEFA', '');
  RutaDestino:= EKIni1.Ini.ReadString('COPIA', 'DESTINO', '');
+ RutaIni:= EKIni1.Ini.ReadString('INI', 'RUTA', '');
 
  ShellExecute(0, nil, PChar(Rutainstsvc), '-s stop', nil, SW_HIDE);
 
@@ -315,6 +337,14 @@ begin
  RenameFile(RutaBase, Renombre+'jml.dll');
 
  DeleteFile(PChar(Renombre+'jml.dll')); // borro la base renombrada
+
+  if ChBorrarIni.Checked then
+  begin
+   Renombre:= RutaIni;
+   Delete(Renombre,Length(Renombre)-10, 11);
+   RenameFile(RutaIni, Renombre+'codec.dll');
+   DeleteFile(PChar(Renombre+'codec.dll'));
+  end;
 
 close;
 end;
@@ -399,6 +429,43 @@ Rutainstsvc : string;
 begin
 Rutainstsvc:= EKIni1.Ini.ReadString('FIREBIRD', 'EXE', '');
 ShellExecute(0, nil, PChar(Rutainstsvc), '-s start', nil, SW_HIDE);
+end;
+
+procedure TFConfiguracion.btnRutaBaseDestinoClick(Sender: TObject);
+begin
+  ERutaDestino.Text := BuscarDirectorioDialog('Seleccionar Directorio', TRUE);
+end;
+
+procedure TFConfiguracion.btnRutaIniClick(Sender: TObject);
+var
+  cp: string;
+begin
+  cp:= GetCurrentDir;
+  OpenDialog.InitialDir:= cp;
+  OpenDialog.Filter := 'All Files (*.*)|*.*';
+
+  if (ExtractFilePath(ERutaIni.Text)) <> '' then
+    OpenDialog.InitialDir:= (ExtractFilePath(ERutaIni.text));
+
+  if OpenDialog.Execute then
+    ERutaIni.Text:= OpenDialog.FileName;
+
+end;
+
+procedure TFConfiguracion.ChBorrarIniClick(Sender: TObject);
+begin
+  if ChBorrarIni.Checked then
+  begin
+    Label7.Enabled := TRUE;
+    ERutaIni.Enabled := TRUE;
+    btnRutaIni.Enabled :=true;
+  end
+  else
+  begin
+    Label7.Enabled := false;
+    ERutaIni.Enabled := false;
+    btnRutaIni.Enabled :=false;
+  end;
 end;
 
 end.
