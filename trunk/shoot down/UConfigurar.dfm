@@ -18,7 +18,7 @@ object FConfiguracion: TFConfiguracion
     Left = 0
     Top = 0
     Width = 506
-    Height = 230
+    Height = 229
     Align = alTop
     Caption = 'Configuracion'
     TabOrder = 0
@@ -330,7 +330,7 @@ object FConfiguracion: TFConfiguracion
   end
   object Panel1: TPanel
     Left = 0
-    Top = 230
+    Top = 229
     Width = 506
     Height = 41
     Align = alTop
@@ -356,9 +356,9 @@ object FConfiguracion: TFConfiguracion
   end
   object Panel2: TPanel
     Left = 0
-    Top = 271
+    Top = 270
     Width = 506
-    Height = 94
+    Height = 95
     Align = alClient
     TabOrder = 2
     object lbTIEMPO: TLabel
