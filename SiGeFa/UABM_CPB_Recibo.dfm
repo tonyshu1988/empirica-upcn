@@ -23,82 +23,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object PanelTipoCpb: TPanel
-    Left = 305
-    Top = 192
-    Width = 197
-    Height = 105
-    BevelInner = bvLowered
-    TabOrder = 6
-    Visible = False
-    object Label28: TLabel
-      Left = 2
-      Top = 2
-      Width = 193
-      Height = 13
-      Align = alTop
-      Alignment = taCenter
-      Caption = 'TIPO RECIBO'
-      Color = clBlue
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindow
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object Panel16: TPanel
-      Left = 2
-      Top = 74
-      Width = 193
-      Height = 29
-      Align = alBottom
-      BevelOuter = bvNone
-      TabOrder = 1
-      object btnTipoCpb_Aceptar: TButton
-        Left = 7
-        Top = 6
-        Width = 75
-        Height = 19
-        Caption = 'Aceptar'
-        TabOrder = 0
-        OnClick = btnTipoCpb_AceptarClick
-      end
-      object btnTipoCpb_Cancelar: TButton
-        Left = 114
-        Top = 6
-        Width = 75
-        Height = 19
-        Caption = 'Cancelar'
-        TabOrder = 1
-        OnClick = btnTipoCpb_CancelarClick
-      end
-    end
-    object Panel1: TPanel
-      Left = 2
-      Top = 15
-      Width = 193
-      Height = 59
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 2
-      Caption = 'Panel1'
-      TabOrder = 0
-      object RadioGroupTipoComprobante: TRadioGroup
-        Left = 2
-        Top = 2
-        Width = 189
-        Height = 55
-        Align = alClient
-        ItemIndex = 0
-        Items.Strings = (
-          'RECIBO DE PAGO'
-          'RECIBO CTA. CTE.')
-        TabOrder = 0
-      end
-    end
-  end
   object PanelFondo: TPanel
     Left = 0
     Top = 19
@@ -1750,6 +1674,82 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       Color = 10025203
       ParentColor = False
       TabOrder = 1
+    end
+  end
+  object PanelTipoCpb: TPanel
+    Left = 305
+    Top = 192
+    Width = 197
+    Height = 105
+    BevelInner = bvLowered
+    TabOrder = 6
+    Visible = False
+    object Label28: TLabel
+      Left = 2
+      Top = 2
+      Width = 193
+      Height = 13
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'TIPO RECIBO'
+      Color = clBlue
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Panel16: TPanel
+      Left = 2
+      Top = 74
+      Width = 193
+      Height = 29
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 1
+      object btnTipoCpb_Aceptar: TButton
+        Left = 7
+        Top = 6
+        Width = 75
+        Height = 19
+        Caption = 'Aceptar'
+        TabOrder = 0
+        OnClick = btnTipoCpb_AceptarClick
+      end
+      object btnTipoCpb_Cancelar: TButton
+        Left = 114
+        Top = 6
+        Width = 75
+        Height = 19
+        Caption = 'Cancelar'
+        TabOrder = 1
+        OnClick = btnTipoCpb_CancelarClick
+      end
+    end
+    object Panel1: TPanel
+      Left = 2
+      Top = 15
+      Width = 193
+      Height = 59
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 2
+      Caption = 'Panel1'
+      TabOrder = 0
+      object RadioGroupTipoComprobante: TRadioGroup
+        Left = 2
+        Top = 2
+        Width = 189
+        Height = 55
+        Align = alClient
+        ItemIndex = 0
+        Items.Strings = (
+          'RECIBO DE PAGO'
+          'RECIBO CTA. CTE.')
+        TabOrder = 0
+      end
     end
   end
   object dxBarABM: TdxBarManager

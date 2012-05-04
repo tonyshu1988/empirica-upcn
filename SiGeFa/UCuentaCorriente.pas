@@ -318,6 +318,7 @@ type
     ZQ_ReciboDetalleDESCRIPCION: TStringField;
     ZQ_ReciboDetalleIMPORTE_REAL: TFloatField;
     EKOrdenar_DetalleRecibo: TEKOrdenarGrilla;
+    btnAltaRecibo: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -341,6 +342,7 @@ type
     procedure btnSaldoInicial_AceptarClick(Sender: TObject);
     procedure ZQ_CtaCte_ClienteAfterScroll(DataSet: TDataSet);
     procedure btnVerDetalleFacturaClick(Sender: TObject);
+    procedure btnAltaReciboClick(Sender: TObject);
   Private
     viendoResumen: boolean;
     viendoDetalleCpb: boolean;
@@ -355,7 +357,7 @@ const
 
 implementation
 
-uses UPrincipal, UDM, DateUtils, UImpresion_Comprobantes;
+uses UPrincipal, UDM, DateUtils, UImpresion_Comprobantes, UABM_CPB_Recibo;
 
 {$R *.dfm}
 
@@ -406,6 +408,7 @@ begin
     DBGridCliente_CtaCte.SetFocus;
 
     btnSaldoInicial.Visible:= ivAlways;
+    btnAltaRecibo.Visible:= ivAlways;
     btnVerDetalleFactura.Visible:= ivAlways;
 
     DBGridDetalle_Producto.Height:= 1;
@@ -424,6 +427,7 @@ begin
     DBGridResumen_CtaCtes.SetFocus;
 
     btnSaldoInicial.Visible:= ivNever;
+    btnAltaRecibo.Visible:= ivNever;
     btnVerDetalleFactura.Visible:= ivNever;
   end;
 end;
@@ -451,6 +455,7 @@ begin
   PanelResumen.BringToFront;
   viendoResumen:= true;
   btnSaldoInicial.Visible:= ivNever;
+  btnAltaRecibo.Visible:= ivNever;  
   btnVerDetalleFactura.Visible:= ivNever;
 
   ZQ_CtaCte_Gral.Close;
@@ -848,6 +853,24 @@ begin
         if AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) = 0 then
           DBGridDetalle_Producto.Height:= 140
   end;
+end;
+
+
+procedure TFCuentaCorriente.btnAltaReciboClick(Sender: TObject);
+begin
+  if not Assigned(FABM_CPB_Recibo) then
+  begin
+    FPrincipal.AABM_CPB_Recibo.Execute;
+    FABM_CPB_Recibo.alta_recibo_cta_cte_desde_afuera(ZQ_ClienteID_PERSONA.AsInteger);
+  end
+  else
+  begin
+    FABM_CPB_Recibo.Show;
+    if not dm.EKModelo.verificar_transaccion('ABM RECIBOS') then
+      FABM_CPB_Recibo.alta_recibo_cta_cte_desde_afuera(ZQ_ClienteID_PERSONA.AsInteger)
+    else
+      ShowMessage('Hay un alta de Recibo en curso, verifique');
+  end
 end;
 
 end.
