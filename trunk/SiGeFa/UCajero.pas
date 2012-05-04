@@ -914,6 +914,10 @@ begin
   dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'borrarVendedor', []);
   borrarVendedor:= dm.ZQ_Configuracion_VariablesTEXTO.AsString = 'SI';
 
+  edCuenta.DropDownRows:= 0;
+  if dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'caja_tamanioListadoCtas', []) then
+    edCuenta.DropDownRows:= dm.ZQ_Configuracion_VariablesNUMERO.AsInteger;
+
   modoLecturaProd();
   PConfirmarVenta.Visible:= False;
   DM.ZQ_Sucursal.Close;
