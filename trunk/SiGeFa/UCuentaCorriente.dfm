@@ -4385,6 +4385,10 @@ object FCuentaCorriente: TFCuentaCorriente
             Visible = True
           end
           item
+            Item = btnAltaRecibo
+            Visible = True
+          end
+          item
             BeginGroup = True
             Item = btnImprimir
             Visible = True
@@ -4778,6 +4782,15 @@ object FCuentaCorriente: TFCuentaCorriente
       Visible = ivAlways
       ImageIndex = 12
       OnClick = btnVerDetalleFacturaClick
+      AutoGrayScale = False
+    end
+    object btnAltaRecibo: TdxBarLargeButton
+      Caption = 'ABM Recibo Cta. Cte.'
+      Category = 0
+      Hint = 'ABM Recibo Cta. Cte.'
+      Visible = ivAlways
+      ImageIndex = 86
+      OnClick = btnAltaReciboClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
