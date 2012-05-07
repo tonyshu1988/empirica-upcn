@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ExtCtrls, EKIni, Tlhelp32, shellapi, shlobj;
+  Dialogs, StdCtrls, Buttons, ExtCtrls, EKIni, Tlhelp32, shellapi, shlobj,
+  ComCtrls;
 
 type
   TTerminateStatus = (tsError, tsClose, tsTerminate);
@@ -43,6 +44,9 @@ type
     ERutaIni: TEdit;
     btnRutaIni: TSpeedButton;
     ChBorrarIni: TCheckBox;
+    Label8: TLabel;
+    ESleepStopBase: TEdit;
+    Label9: TLabel;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -62,6 +66,7 @@ type
     procedure btnRutaBaseDestinoClick(Sender: TObject);
     procedure btnRutaIniClick(Sender: TObject);
     procedure ChBorrarIniClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -80,7 +85,6 @@ uses IniFiles;
 {$R *.dfm}
 
 //Funcion para buscar un directorio
-
 function TFConfiguracion.BuscarDirectorioDialog(const subtitle: string; const newStyle: boolean): string;
 var
   BI: TBrowseInfo;
@@ -221,6 +225,7 @@ begin
 
   EKIni1.Ini.WriteString('FIREBIRD', 'EXE', ERutaInstsvc.Text);
   EKIni1.Ini.WriteString('TEMPORIZADOR', 'Tiempo', ETiempo.Text);
+  EKIni1.Ini.WriteString('TEMPORIZADOR', 'sleep_stop_db', ESleepStopBase.Text);
   EKIni1.Ini.WriteString('BASE', 'SIGEFA', ERutaBase.Text);
   EKIni1.Ini.WriteString('COPIA', 'DESTINO', ERutaDestino.Text);
   EKIni1.Ini.WriteString('INI', 'RUTA', ERutaIni.Text);
@@ -257,6 +262,7 @@ begin
 
   ERutaInstsvc.Text:= EKIni1.Ini.ReadString('FIREBIRD', 'EXE', '');
   ETiempo.Text:= EKIni1.Ini.ReadString('TEMPORIZADOR', 'Tiempo', '');
+  ESleepStopBase.Text := EKIni1.Ini.ReadString('TEMPORIZADOR', 'sleep_stop_db', '');
   ERutaBase.Text:= EKIni1.Ini.ReadString('BASE', 'SIGEFA', '');
   ERutaDestino.Text:= EKIni1.Ini.ReadString('COPIA', 'DESTINO', '');
   ERutaIni.Text:= EKIni1.Ini.ReadString('INI', 'RUTA', '');
@@ -337,8 +343,8 @@ begin
 
   if ChHacerCopia.Checked then
   begin
-    CopiaTodo(RutaBase, RutaDestino);
-    Sleep(sleep_copia_db);
+    CopyFile(Pchar(RutaBase),Pchar(RutaDestino+'\'+ExtractFileName(RutaBase)),false);
+    //Sleep(sleep_copia_db);
   end;
 
   Renombre:= RutaBase;
