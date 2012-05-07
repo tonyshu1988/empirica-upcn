@@ -2,7 +2,7 @@ object FConfiguracion: TFConfiguracion
   Left = 449
   Top = 255
   Width = 514
-  Height = 433
+  Height = 469
   Caption = 'Configuracion'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -18,19 +18,19 @@ object FConfiguracion: TFConfiguracion
     Left = 0
     Top = 0
     Width = 506
-    Height = 229
+    Height = 259
     Align = alTop
     Caption = 'Configuracion'
     TabOrder = 0
     object Label1: TLabel
-      Left = 13
+      Left = 42
       Top = 26
       Width = 70
       Height = 13
       Caption = 'Ejecutar en:'
     end
     object Label2: TLabel
-      Left = 173
+      Left = 197
       Top = 26
       Width = 56
       Height = 13
@@ -38,14 +38,14 @@ object FConfiguracion: TFConfiguracion
     end
     object Label3: TLabel
       Left = 20
-      Top = 66
+      Top = 96
       Width = 63
       Height = 13
       Caption = 'Ruta Base:'
     end
     object btnRutaBase: TSpeedButton
       Left = 465
-      Top = 61
+      Top = 91
       Width = 20
       Height = 22
       Hint = 'Buscar base de datos'
@@ -98,14 +98,14 @@ object FConfiguracion: TFConfiguracion
     end
     object Label5: TLabel
       Left = 5
-      Top = 153
+      Top = 183
       Width = 78
       Height = 13
       Caption = 'Ruta Destino:'
     end
     object btnRutaBaseDestino: TSpeedButton
       Left = 465
-      Top = 148
+      Top = 178
       Width = 20
       Height = 22
       Glyph.Data = {
@@ -157,14 +157,14 @@ object FConfiguracion: TFConfiguracion
     end
     object Label6: TLabel
       Left = 7
-      Top = 95
+      Top = 125
       Width = 76
       Height = 13
       Caption = 'Ruta Instsvc:'
     end
     object btnRutaInstsvc: TSpeedButton
       Left = 465
-      Top = 90
+      Top = 120
       Width = 20
       Height = 22
       Glyph.Data = {
@@ -216,14 +216,14 @@ object FConfiguracion: TFConfiguracion
     end
     object Label7: TLabel
       Left = 33
-      Top = 200
+      Top = 230
       Width = 48
       Height = 13
       Caption = 'Ruta ini:'
     end
     object btnRutaIni: TSpeedButton
       Left = 465
-      Top = 195
+      Top = 225
       Width = 20
       Height = 22
       Glyph.Data = {
@@ -273,8 +273,22 @@ object FConfiguracion: TFConfiguracion
       ShowHint = True
       OnClick = btnRutaIniClick
     end
+    object Label8: TLabel
+      Left = 13
+      Top = 53
+      Width = 99
+      Height = 13
+      Caption = 'Sleep Stop Base:'
+    end
+    object Label9: TLabel
+      Left = 197
+      Top = 53
+      Width = 56
+      Height = 13
+      Caption = 'Segundos'
+    end
     object ETiempo: TEdit
-      Left = 93
+      Left = 117
       Top = 22
       Width = 73
       Height = 21
@@ -283,21 +297,21 @@ object FConfiguracion: TFConfiguracion
     end
     object ERutaBase: TEdit
       Left = 93
-      Top = 62
+      Top = 92
       Width = 361
       Height = 21
       TabOrder = 1
     end
     object ERutaDestino: TEdit
       Left = 93
-      Top = 149
+      Top = 179
       Width = 361
       Height = 21
       TabOrder = 2
     end
     object ChHacerCopia: TCheckBox
       Left = 93
-      Top = 129
+      Top = 159
       Width = 97
       Height = 17
       Caption = 'Hacer Copia'
@@ -306,31 +320,39 @@ object FConfiguracion: TFConfiguracion
     end
     object ERutaInstsvc: TEdit
       Left = 93
-      Top = 91
+      Top = 121
       Width = 361
       Height = 21
       TabOrder = 4
     end
     object ERutaIni: TEdit
       Left = 93
-      Top = 196
+      Top = 226
       Width = 361
       Height = 21
       TabOrder = 5
     end
     object ChBorrarIni: TCheckBox
       Left = 93
-      Top = 176
+      Top = 206
       Width = 97
       Height = 17
       Caption = 'Borrar ini'
       TabOrder = 6
       OnClick = ChBorrarIniClick
     end
+    object ESleepStopBase: TEdit
+      Left = 117
+      Top = 49
+      Width = 73
+      Height = 21
+      TabOrder = 7
+      Text = '10'
+    end
   end
   object Panel1: TPanel
     Left = 0
-    Top = 229
+    Top = 259
     Width = 506
     Height = 41
     Align = alTop
@@ -356,9 +378,9 @@ object FConfiguracion: TFConfiguracion
   end
   object Panel2: TPanel
     Left = 0
-    Top = 270
+    Top = 300
     Width = 506
-    Height = 95
+    Height = 101
     Align = alClient
     TabOrder = 2
     object lbTIEMPO: TLabel
@@ -402,7 +424,7 @@ object FConfiguracion: TFConfiguracion
   end
   object Panel3: TPanel
     Left = 0
-    Top = 365
+    Top = 401
     Width = 506
     Height = 41
     Align = alBottom
