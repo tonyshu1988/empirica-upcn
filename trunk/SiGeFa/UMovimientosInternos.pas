@@ -220,6 +220,38 @@ type
     EKBuscar: TEKBusquedaAvanzada;
     btnExcel: TdxBarLargeButton;
     ZQ_MovHoyNOMBRE: TStringField;
+    btImprimirComprobante: TdxBarLargeButton;
+    RepComprobante: TQuickRep;
+    QRBand1: TQRBand;
+    QRDBImage1: TQRDBImage;
+    QRLabel4: TQRLabel;
+    RepComprobante_Subtitulo: TQRLabel;
+    RepComprobante_Titulo: TQRLabel;
+    QRBand2: TQRBand;
+    QRDBCuentaCod: TQRDBText;
+    QRDBCuentaNombre: TQRDBText;
+    QRDBImporte: TQRDBText;
+    QRDBTipoFP: TQRDBText;
+    QRBand4: TQRBand;
+    QRlblRepSaldo_SaldoTotal: TQRLabel;
+    QRBand5: TQRBand;
+    QRBand6: TQRBand;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    EKVistaPreviaRepCpb: TEKVistaPreviaQR;
+    ChildBand1: TQRChildBand;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRLabel6: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRDBText7: TQRDBText;
+    QRLabel12: TQRLabel;
+    ChildBand2: TQRChildBand;
+    QRLabel13: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRExpr1: TQRExpr;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -238,7 +270,6 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
-    procedure btnImprimirClick(Sender: TObject);
     procedure ZQ_MovHoyAfterScroll(DataSet: TDataSet);
     procedure RadioButtonIngresoClick(Sender: TObject);
     procedure RadioButtonEgresoClick(Sender: TObject);
@@ -254,6 +285,7 @@ type
     procedure SpeedBtn_MesSiguienteClick(Sender: TObject);
     procedure EKSuma_MovSumListChanged(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
+    procedure btImprimirComprobanteClick(Sender: TObject);
   private
     id_cuenta_fpago: integer;
     fechaActual: TDate;
@@ -649,20 +681,6 @@ end;
 //----------------------------------
 
 
-procedure TFMovimientosInternos.btnImprimirClick(Sender: TObject);
-begin
-  ShowMessage('Todavia no disponible');
-
-//  if ZQ_Cuentas.IsEmpty then
-//    exit;
-//
-//  DM.VariablesReportes(RepCuentas);
-//  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-//  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-//  EKVistaPrevia.VistaPrevia;
-end;
-
-
 procedure TFMovimientosInternos.ZQ_MovHoyAfterScroll(DataSet: TDataSet);
 begin
   ZQ_CpbFormaPago.Close;
@@ -998,6 +1016,24 @@ procedure TFMovimientosInternos.btnExcelClick(Sender: TObject);
 begin
   if not ZQ_MovHoy.IsEmpty then
     dm.ExportarEXCEL(DBGrid_Dia);
+end;
+
+procedure TFMovimientosInternos.btImprimirComprobanteClick(
+  Sender: TObject);
+begin
+  if (ZQ_MovHoyID_TIPO_CPB.AsInteger = CPB_OTROS_EGRESOS) then
+  begin
+    QRDBCuentaCod.DataField := '_CuentaEgreso_Codigo';
+    QRDBCuentaNombre.DataField := '_CuentaEgreso_Nombre';
+  end
+  else
+  Begin
+    QRDBCuentaCod.DataField := '_CuentaIngreso_Codigo';
+    QRDBCuentaNombre.DataField := '_CuentaIngreso_Nombre';
+  end;
+
+DM.VariablesReportes(RepComprobante);
+EKVistaPreviaRepCpb.VistaPrevia;
 end;
 
 end.
