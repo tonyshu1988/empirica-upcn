@@ -1,0 +1,7 @@
+Instalar el Setup Exe de la carpeta OCX_Epson_TM2000
+
+Instalar el setup exe de la carpeta Paquetes DLL Fiscal
+
+Instalar Firebird_ODBC_2.0.0.148_win32.exe
+
+Configurar Ini
