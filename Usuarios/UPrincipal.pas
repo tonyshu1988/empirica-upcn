@@ -110,6 +110,19 @@ type
     EKOrdenarGrupos: TEKOrdenarGrilla;
     Label2: TLabel;
     Label3: TLabel;
+    btnAbrirAplica: TdxBarLargeButton;
+    aplica: TZQuery;
+    DSAplica: TDataSource;
+    PanelTablaAplica: TPanel;
+    DBGrid_TablaAplica: TDBGrid;
+    PanelTablaAplica_Botones: TPanel;
+    btnTablaAplica_Aceptar: TButton;
+    btnTablaAplica_Cancelar: TButton;
+    aplicaAPLICACION: TStringField;
+    aplicaCLAVE: TIntegerField;
+    aplicaALIAS_DB: TStringField;
+    aplicaIP_DB: TStringField;
+    aplicaIP_ACTUALIZACION: TStringField;
     procedure EKLlenarAplicacionCambio(valor: String);
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -140,6 +153,9 @@ type
     procedure RadioBtnGrupoClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnAbrirAplicaClick(Sender: TObject);
+    procedure btnTablaAplica_CancelarClick(Sender: TObject);
+    procedure btnTablaAplica_AceptarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -700,6 +716,52 @@ begin
   EKOrdenarPermisos.GuardarConfigColumnas;
   EKOrdenarUsuarios.GuardarConfigColumnas;
   EKOrdenarGrupos.GuardarConfigColumnas;
+end;
+
+
+procedure TFPrincipal.btnAbrirAplicaClick(Sender: TObject);
+begin
+  PanelFondo.Enabled:= false;
+  PanelTablaAplica.Visible:= true;
+  PanelTablaAplica.BringToFront;
+
+  DBGrid_TablaAplica.SetFocus;
+
+  Aplica.Close;
+  Aplica.Open;
+
+  GrupoEditando.Enabled:= false;
+  GrupoABM.Enabled:= false;
+end;
+
+
+procedure TFPrincipal.btnTablaAplica_CancelarClick(Sender: TObject);
+begin
+  PanelFondo.Enabled:= true;
+  PanelTablaAplica.Visible:= false;
+
+  DBGridUsuarios.SetFocus;
+
+  Aplica.Close;
+
+  GrupoEditando.Enabled:= true;
+  GrupoABM.Enabled:= true;
+end;
+
+
+procedure TFPrincipal.btnTablaAplica_AceptarClick(Sender: TObject);
+begin
+  PanelFondo.Enabled:= true;
+  PanelTablaAplica.Visible:= false;
+
+  DBGridUsuarios.SetFocus;
+
+  Aplica.Post;
+  dm.Conexion.Commit;
+  Aplica.Close;
+
+  GrupoEditando.Enabled:= true;
+  GrupoABM.Enabled:= true;  
 end;
 
 end.
