@@ -1,8 +1,8 @@
 object FABM_Preventa: TFABM_Preventa
-  Left = 192
-  Top = 77
+  Left = 241
+  Top = 86
   Width = 1027
-  Height = 711
+  Height = 664
   Caption = 'Venta de Mostrador'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -16,7 +16,6 @@ object FABM_Preventa: TFABM_Preventa
   Visible = True
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object PLeerCodigo: TPanel
@@ -2230,7 +2229,7 @@ object FABM_Preventa: TFABM_Preventa
     Left = 88
     Top = 0
     Width = 923
-    Height = 621
+    Height = 574
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 0
@@ -2283,7 +2282,7 @@ object FABM_Preventa: TFABM_Preventa
     object PProducto: TPanel
       Tag = 99
       Left = 1
-      Top = 118
+      Top = 209
       Width = 921
       Height = 41
       Align = alTop
@@ -2601,9 +2600,9 @@ object FABM_Preventa: TFABM_Preventa
     end
     object Panel1: TPanel
       Left = 1
-      Top = 263
+      Top = 250
       Width = 921
-      Height = 357
+      Height = 323
       Align = alClient
       Caption = 'Panel1'
       TabOrder = 2
@@ -2611,7 +2610,7 @@ object FABM_Preventa: TFABM_Preventa
         Left = 1
         Top = 1
         Width = 919
-        Height = 355
+        Height = 321
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -2622,11 +2621,30 @@ object FABM_Preventa: TFABM_Preventa
           Height = 13
           Caption = 'DETALLE'
         end
-        object DBGridListadoProductos: TDBGrid
+        object Label11: TLabel
           Left = 1
           Top = 1
           Width = 917
-          Height = 271
+          Height = 14
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Listado de Productos/Servicios a Cobrar'
+          Color = 12648448
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object DBGridListadoProductos: TDBGrid
+          Left = 1
+          Top = 15
+          Width = 917
+          Height = 223
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -2700,7 +2718,7 @@ object FABM_Preventa: TFABM_Preventa
         end
         object PieGrilla: TPanel
           Left = 1
-          Top = 272
+          Top = 238
           Width = 917
           Height = 82
           Align = alBottom
@@ -2730,7 +2748,7 @@ object FABM_Preventa: TFABM_Preventa
             Align = alBottom
             Alignment = taRightJustify
             AutoSize = False
-            Caption = 'Total Venta: $ 0.00 '
+            Caption = 'Total Pre-Venta: $ 0.00 '
             Color = 12648448
             Font.Charset = ANSI_CHARSET
             Font.Color = clWhite
@@ -2774,14 +2792,14 @@ object FABM_Preventa: TFABM_Preventa
     end
     object Panel3: TPanel
       Left = 1
-      Top = 159
+      Top = 118
       Width = 921
-      Height = 104
+      Height = 91
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 3
       object Label22: TLabel
-        Left = 102
+        Left = 109
         Top = 23
         Width = 48
         Height = 13
@@ -2797,10 +2815,10 @@ object FABM_Preventa: TFABM_Preventa
       object Label23: TLabel
         Left = 107
         Top = 46
-        Width = 43
+        Width = 50
         Height = 13
         Alignment = taRightJustify
-        Caption = 'Marca:'
+        Caption = 'Medida:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -2809,10 +2827,11 @@ object FABM_Preventa: TFABM_Preventa
         ParentFont = False
       end
       object Label24: TLabel
-        Left = 331
+        Left = 352
         Top = 23
         Width = 62
         Height = 13
+        Alignment = taRightJustify
         Caption = 'Producto:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -2822,7 +2841,7 @@ object FABM_Preventa: TFABM_Preventa
         ParentFont = False
       end
       object Label25: TLabel
-        Left = 110
+        Left = 117
         Top = 69
         Width = 40
         Height = 13
@@ -2836,7 +2855,7 @@ object FABM_Preventa: TFABM_Preventa
         ParentFont = False
       end
       object Label26: TLabel
-        Left = 338
+        Left = 359
         Top = 46
         Width = 55
         Height = 13
@@ -2850,12 +2869,12 @@ object FABM_Preventa: TFABM_Preventa
         ParentFont = False
       end
       object Label27: TLabel
-        Left = 306
+        Left = 371
         Top = 70
-        Width = 87
+        Width = 43
         Height = 13
         Alignment = taRightJustify
-        Caption = 'Tipo Art'#237'culo:'
+        Caption = 'Marca:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -2882,30 +2901,11 @@ object FABM_Preventa: TFABM_Preventa
         Transparent = False
         Layout = tlCenter
       end
-      object Label11: TLabel
-        Left = 0
-        Top = 90
-        Width = 921
-        Height = 14
-        Align = alBottom
-        Alignment = taCenter
-        Caption = 'Listado de Productos/Servicios a Cobrar'
-        Color = 12648448
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
-        Layout = tlCenter
-      end
       object DBImage1: TDBImage
         Left = 0
         Top = 14
         Width = 97
-        Height = 76
+        Height = 77
         Align = alLeft
         Color = 14737632
         DataField = 'LOGO'
@@ -2926,7 +2926,7 @@ object FABM_Preventa: TFABM_Preventa
         Visible = False
       end
       object DBEdit1: TDBEdit
-        Left = 398
+        Left = 419
         Top = 19
         Width = 310
         Height = 21
@@ -2939,9 +2939,9 @@ object FABM_Preventa: TFABM_Preventa
         TabOrder = 3
       end
       object DBEdit2: TDBEdit
-        Left = 154
+        Left = 161
         Top = 19
-        Width = 143
+        Width = 181
         Height = 21
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -2952,20 +2952,20 @@ object FABM_Preventa: TFABM_Preventa
         TabOrder = 0
       end
       object DBEdit3: TDBEdit
-        Left = 154
+        Left = 161
         Top = 42
-        Width = 167
+        Width = 181
         Height = 21
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16771302
-        DataField = 'NOMBRE_MARCA'
+        DataField = 'MEDIDA'
         DataSource = DS_Productos
         ReadOnly = True
         TabOrder = 1
       end
       object DBEdit4: TDBEdit
-        Left = 398
+        Left = 419
         Top = 42
         Width = 310
         Height = 21
@@ -2978,9 +2978,9 @@ object FABM_Preventa: TFABM_Preventa
         TabOrder = 4
       end
       object DBEdit5: TDBEdit
-        Left = 154
+        Left = 161
         Top = 65
-        Width = 135
+        Width = 181
         Height = 21
         AutoSize = False
         BevelInner = bvNone
@@ -2998,14 +2998,14 @@ object FABM_Preventa: TFABM_Preventa
         TabOrder = 2
       end
       object DBEdit6: TDBEdit
-        Left = 398
+        Left = 419
         Top = 66
         Width = 310
         Height = 21
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = 16771302
-        DataField = 'TIPO_ARTICULO'
+        DataField = 'NOMBRE_MARCA'
         DataSource = DS_Productos
         ReadOnly = True
         TabOrder = 5
@@ -3218,15 +3218,15 @@ object FABM_Preventa: TFABM_Preventa
     end
   end
   object PConfirmarVenta: TPanel
-    Left = 304
-    Top = 120
+    Left = 257
+    Top = 172
     Width = 513
-    Height = 297
+    Height = 329
     BevelInner = bvLowered
     BevelWidth = 2
     BorderWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 6
+    TabOrder = 5
     object Bevel1: TBevel
       Left = 8
       Top = 32
@@ -3454,7 +3454,7 @@ object FABM_Preventa: TFABM_Preventa
       Align = alTop
       Alignment = taCenter
       AutoSize = False
-      Caption = 'Verifique los datos de su Factura'
+      Caption = 'Verifique los datos de su Pre-Venta'
       Color = 12648448
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
@@ -3507,45 +3507,55 @@ object FABM_Preventa: TFABM_Preventa
     end
     object Panel2: TPanel
       Left = 6
-      Top = 184
+      Top = 191
       Width = 497
-      Height = 103
+      Height = 128
       Align = alBottom
       TabOrder = 4
       object Panel4: TPanel
         Left = 296
         Top = 1
         Width = 200
-        Height = 101
+        Height = 126
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 0
         object btnConfirmarVenta: TBitBtn
           Left = 23
-          Top = 0
+          Top = 30
           Width = 162
           Height = 44
           BiDiMode = bdRightToLeft
-          Caption = 'Aceptar Venta'
+          Caption = 'Aceptar Pre-Venta'
           ParentBiDiMode = False
           TabOrder = 0
           OnClick = btnConfirmarVentaClick
         end
         object btnCancelarVenta: TBitBtn
           Left = 23
-          Top = 48
+          Top = 78
           Width = 162
           Height = 44
-          Caption = 'Cancelar Venta'
+          Cancel = True
+          Caption = 'Cancelar Pre-Venta'
           TabOrder = 1
           OnClick = btnCancelarVentaClick
+        end
+        object btnCargarSenia: TBitBtn
+          Left = 23
+          Top = 2
+          Width = 162
+          Height = 25
+          Caption = 'Cargar Se'#241'a (F7)'
+          TabOrder = 2
+          OnClick = btnCargarSeniaClick
         end
       end
       object Panel5: TPanel
         Left = 1
         Top = 1
         Width = 295
-        Height = 101
+        Height = 126
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -3733,6 +3743,52 @@ object FABM_Preventa: TFABM_Preventa
             Layout = tlCenter
           end
         end
+        object Panel6: TPanel
+          Left = 0
+          Top = 90
+          Width = 295
+          Height = 33
+          Align = alTop
+          BevelOuter = bvNone
+          BorderStyle = bsSingle
+          Caption = 'Panel11'
+          TabOrder = 4
+          object Label15: TLabel
+            Left = 0
+            Top = 0
+            Width = 105
+            Height = 29
+            Align = alLeft
+            Caption = ' Total Se'#241'a:'
+            Color = 12965290
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object lblSeniaTotal: TLabel
+            Left = 105
+            Top = 0
+            Width = 186
+            Height = 29
+            Align = alClient
+            Alignment = taRightJustify
+            Caption = '$ 0.00'
+            Color = 12965290
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+        end
       end
     end
     object edPorcDctoTotal: TDBEdit
@@ -3753,6 +3809,268 @@ object FABM_Preventa: TFABM_Preventa
       ParentFont = False
       TabOrder = 3
       OnExit = edPorcDctoTotalExit
+    end
+  end
+  object PABM_FormaPago: TPanel
+    Left = 85
+    Top = 17
+    Width = 905
+    Height = 116
+    BevelInner = bvLowered
+    BevelOuter = bvSpace
+    BevelWidth = 2
+    BorderStyle = bsSingle
+    TabOrder = 7
+    object Label18: TLabel
+      Left = 4
+      Top = 4
+      Width = 893
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Cargar Se'#241'a (F7 Buscar Cuenta/Medio Pago)'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label47: TLabel
+      Left = 482
+      Top = 24
+      Width = 83
+      Height = 13
+      Caption = 'Medio de Pago'
+      FocusControl = edDetalleMDPCbox
+    end
+    object Label48: TLabel
+      Left = 214
+      Top = 62
+      Width = 62
+      Height = 13
+      Caption = 'MDP Fecha'
+      FocusControl = edMDPFecha
+    end
+    object Label49: TLabel
+      Left = 435
+      Top = 62
+      Width = 64
+      Height = 13
+      Caption = 'MDP Banco'
+      FocusControl = edMDPBanco
+    end
+    object Label50: TLabel
+      Left = 634
+      Top = 62
+      Width = 74
+      Height = 13
+      Caption = 'MDP N'#250'mero'
+      FocusControl = edMDPNro
+    end
+    object Label51: TLabel
+      Left = 16
+      Top = 62
+      Width = 46
+      Height = 13
+      Caption = 'Importe'
+      FocusControl = edImporte
+    end
+    object Label53: TLabel
+      Left = 16
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'C'#243'digo'
+      FocusControl = edCodCuenta
+    end
+    object Label55: TLabel
+      Left = 68
+      Top = 24
+      Width = 85
+      Height = 13
+      Caption = 'Cuenta Detalle'
+    end
+    object Label61: TLabel
+      Left = 435
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'C'#243'digo'
+      FocusControl = edCodMDP
+    end
+    object edDetalleMDPCbox: TDBLookupComboBox
+      Left = 482
+      Top = 40
+      Width = 329
+      Height = 21
+      Color = 16771302
+      DataField = 'medioPago'
+      DropDownRows = 0
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      Visible = False
+    end
+    object edMDPFecha: TDBEdit
+      Left = 214
+      Top = 76
+      Width = 203
+      Height = 21
+      Color = 16771302
+      DataField = 'MDCP_FECHA'
+      DataSource = DS_Comprobante_FormaPago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 6
+    end
+    object edMDPBanco: TDBEdit
+      Left = 435
+      Top = 76
+      Width = 164
+      Height = 21
+      Color = 16771302
+      DataField = 'MDCP_BANCO'
+      DataSource = DS_Comprobante_FormaPago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 7
+    end
+    object edMDPNro: TDBEdit
+      Left = 634
+      Top = 76
+      Width = 177
+      Height = 21
+      Color = 16771302
+      DataField = 'MDCP_CHEQUE'
+      DataSource = DS_Comprobante_FormaPago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 8
+    end
+    object edImporte: TDBEdit
+      Left = 16
+      Top = 76
+      Width = 185
+      Height = 21
+      Color = 16771302
+      DataField = 'IMPORTE'
+      DataSource = DS_Comprobante_FormaPago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+    end
+    object edCodCuenta: TDBEdit
+      Left = 16
+      Top = 40
+      Width = 41
+      Height = 21
+      Color = 16771302
+      DataField = 'CUENTA_INGRESO'
+      DataSource = DS_Comprobante_FormaPago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnKeyUp = buscarCuenta
+    end
+    object edCodMDP: TDBEdit
+      Left = 435
+      Top = 40
+      Width = 41
+      Height = 21
+      Color = 16771302
+      DataField = 'ID_TIPO_FORMAPAG'
+      DataSource = DS_Comprobante_FormaPago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnKeyUp = buscarFormaPago
+    end
+    object btFPAceptar: TBitBtn
+      Left = 815
+      Top = 40
+      Width = 79
+      Height = 25
+      Caption = 'Aceptar'
+      TabOrder = 9
+      OnClick = btFPAceptarClick
+    end
+    object btFPCancelar: TBitBtn
+      Left = 815
+      Top = 72
+      Width = 79
+      Height = 25
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 10
+      OnClick = btFPCancelarClick
+    end
+    object edDetalleMDP: TDBEdit
+      Left = 482
+      Top = 40
+      Width = 329
+      Height = 21
+      Color = 16771302
+      DataField = '_nombreMedio'
+      DataSource = DS_Comprobante_FormaPago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnKeyUp = buscarFormaPago
+    end
+    object edCuenta: TDBEdit
+      Left = 61
+      Top = 40
+      Width = 356
+      Height = 21
+      Color = 16771302
+      DataField = '_nombreCuenta'
+      DataSource = DS_Comprobante_FormaPago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnKeyUp = buscarCuenta
     end
   end
   object dxBarABM: TdxBarManager
@@ -6109,8 +6427,8 @@ object FABM_Preventa: TFABM_Preventa
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 128
-    Top = 296
+    Left = 152
+    Top = 376
     DockControlHeights = (
       88
       0
@@ -6155,8 +6473,9 @@ object FABM_Preventa: TFABM_Preventa
       AutoGrayScale = False
     end
     object BtAceptarPago: TdxBarLargeButton
-      Caption = 'F10 Guardar Venta'
+      Caption = 'F10 Guardar Pre-Venta'
       Category = 0
+      Hint = 'F10 Guardar Pre-Venta'
       Visible = ivAlways
       ImageIndex = 5
       OnClick = BtAceptarPagoClick
@@ -6323,72 +6642,65 @@ object FABM_Preventa: TFABM_Preventa
     end
   end
   object ATeclasRapidas: TActionManager
-    Left = 312
-    Top = 250
+    Left = 336
+    Top = 330
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
       ShortCut = 112
-      OnExecute = btBuscProdClick
+      OnExecute = ABuscarExecute
     end
     object ANuevo: TAction
       Caption = 'ABuscarProd'
       ShortCut = 113
-      OnExecute = BtBuscarProductoClick
-    end
-    object ATipoIVA: TAction
-      Caption = 'ATipoIVA'
-      ShortCut = 115
-      OnExecute = btIVAClick
+      OnExecute = ANuevoExecute
     end
     object ACliente: TAction
       Caption = 'ACliente'
       ShortCut = 114
-      OnExecute = bt_BuscarClienteClick
+      OnExecute = AClienteExecute
     end
-    object APago: TAction
-      Caption = 'APago'
-      ShortCut = 120
-    end
-    object ASalir: TAction
-      Caption = 'ASalir'
-      ShortCut = 123
-      OnExecute = btsalirClick
-    end
-    object AGuardar: TAction
-      Caption = 'AAceptar'
-      ShortCut = 121
-      OnExecute = BtAceptarPagoClick
-    end
-    object ACancelar: TAction
-      Caption = 'ACancelar'
-      ShortCut = 122
-      OnExecute = BtCancelarPagoClick
+    object ATipoIVA: TAction
+      Caption = 'ATipoIVA'
+      ShortCut = 115
+      OnExecute = ATipoIVAExecute
     end
     object AVendedor: TAction
       Caption = 'AVendedor'
       ShortCut = 116
-      OnExecute = BtVendedorClick
+      OnExecute = AVendedorExecute
     end
-    object ANuevoProd: TAction
-      Caption = 'ANuevoProd'
+    object ANuevoProdCBarra: TAction
+      Caption = 'ANuevoProdCBarra'
       ShortCut = 117
-      OnExecute = BtAgregarPagoClick
+      OnExecute = ANuevoProdCBarraExecute
     end
-    object ANuevaFormaPago: TAction
-      Caption = 'ANuevaFormaPago'
+    object AGuardar: TAction
+      Caption = 'AAceptar'
+      ShortCut = 121
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 122
+      OnExecute = ACancelarExecute
+    end
+    object ASalir: TAction
+      Caption = 'ASalir'
+      ShortCut = 123
+      OnExecute = ASalirExecute
+    end
+    object ACargarSenia: TAction
+      Caption = 'ACargarSenia'
       ShortCut = 118
-    end
-    object APreventa: TAction
-      Caption = 'Preventa'
-      ShortCut = 119
+      OnExecute = ACargarSeniaExecute
     end
   end
   object PopUpProductos: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
-    Left = 312
-    Top = 296
+    Left = 336
+    Top = 376
     object EditarProd: TMenuItem
       Caption = 'Editar Producto'
       ImageIndex = 10
@@ -6434,8 +6746,8 @@ object FABM_Preventa: TFABM_Preventa
     CampoBuscar = 'posicSucursal'
     CampoClave = 'id_producto'
     TituloVentana = 'Buscar Producto'
-    Left = 128
-    Top = 248
+    Left = 152
+    Top = 328
   end
   object ZQ_Productos: TZQuery
     Connection = DM.Conexion
@@ -6484,8 +6796,8 @@ object FABM_Preventa: TFABM_Preventa
         Name = 'prod'
         ParamType = ptUnknown
       end>
-    Left = 232
-    Top = 248
+    Left = 256
+    Top = 328
     ParamData = <
       item
         DataType = ftUnknown
@@ -6565,13 +6877,13 @@ object FABM_Preventa: TFABM_Preventa
   end
   object DS_Productos: TDataSource
     DataSet = ZQ_Productos
-    Left = 240
-    Top = 296
+    Left = 264
+    Top = 376
   end
   object RelojStock: TTimer
     Enabled = False
-    Left = 133
-    Top = 356
+    Left = 157
+    Top = 436
   end
   object ZQ_Personas: TZQuery
     Connection = DM.Conexion
@@ -6586,8 +6898,8 @@ object FABM_Preventa: TFABM_Preventa
       'left join tipo_iva ti on (ti.id_tipo_iva=p.id_tipo_iva)'
       '')
     Params = <>
-    Left = 389
-    Top = 242
+    Left = 413
+    Top = 322
     object ZQ_PersonasID_PERSONA: TIntegerField
       FieldName = 'ID_PERSONA'
       Required = True
@@ -6674,15 +6986,15 @@ object FABM_Preventa: TFABM_Preventa
   end
   object DS_Personas: TDataSource
     DataSet = ZQ_Personas
-    Left = 392
-    Top = 296
+    Left = 416
+    Top = 376
   end
   object CD_DetalleFactura: TClientDataSet
     Aggregates = <>
     Params = <>
     AfterScroll = CD_DetalleFacturaAfterScroll
-    Left = 482
-    Top = 251
+    Left = 506
+    Top = 331
     object CD_DetalleFacturaID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
     end
@@ -6747,8 +7059,8 @@ object FABM_Preventa: TFABM_Preventa
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_COMPROBANTE_ID'
-    Left = 489
-    Top = 297
+    Left = 513
+    Top = 377
     ParamData = <
       item
         DataType = ftInteger
@@ -6772,8 +7084,8 @@ object FABM_Preventa: TFABM_Preventa
     CampoClave = 'ID_TIPO_IVA'
     BuscarEnQuery = ZQ_TipoIVA
     TituloVentana = 'Tipo IVA'
-    Left = 392
-    Top = 352
+    Left = 416
+    Top = 432
   end
   object EKDbSuma1: TEKDbSuma
     SumCollection = <
@@ -6787,8 +7099,8 @@ object FABM_Preventa: TFABM_Preventa
       end>
     DataSet = CD_DetalleFactura
     SumListChanged = EKDbSuma1SumListChanged
-    Left = 484
-    Top = 350
+    Left = 508
+    Top = 430
   end
   object ZQ_DetalleProd: TZQuery
     Connection = DM.Conexion
@@ -6817,8 +7129,8 @@ object FABM_Preventa: TFABM_Preventa
       ''
       '')
     Params = <>
-    Left = 584
-    Top = 248
+    Left = 608
+    Top = 328
     object StringField1: TStringField
       FieldName = 'NOMBRE_PRODUCTO'
       Size = 100
@@ -6889,8 +7201,8 @@ object FABM_Preventa: TFABM_Preventa
       'select *'
       'from tipo_IVA')
     Params = <>
-    Left = 309
-    Top = 354
+    Left = 333
+    Top = 434
     object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True
@@ -6927,8 +7239,8 @@ object FABM_Preventa: TFABM_Preventa
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
-    Left = 578
-    Top = 304
+    Left = 602
+    Top = 384
     object CD_ComprobanteID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
@@ -7111,18 +7423,18 @@ object FABM_Preventa: TFABM_Preventa
     end
   end
   object DS_Sucursal: TDataSource
-    Left = 659
-    Top = 249
+    Left = 683
+    Top = 329
   end
   object DS_Comprobante: TDataSource
     DataSet = CD_Comprobante
-    Left = 576
-    Top = 360
+    Left = 600
+    Top = 440
   end
   object DS_DetalleFactura: TDataSource
     DataSet = CD_DetalleFactura
-    Left = 656
-    Top = 304
+    Left = 680
+    Top = 384
   end
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
@@ -7130,8 +7442,8 @@ object FABM_Preventa: TFABM_Preventa
       'select *'
       'from comprobante')
     Params = <>
-    Left = 658
-    Top = 362
+    Left = 682
+    Top = 442
     object ZQ_ComprobanteID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
@@ -7268,8 +7580,8 @@ object FABM_Preventa: TFABM_Preventa
       'select *'
       'from comprobante_detalle')
     Params = <>
-    Left = 769
-    Top = 361
+    Left = 793
+    Top = 441
     object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
     end
@@ -7319,5 +7631,203 @@ object FABM_Preventa: TFABM_Preventa
     object ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField
       FieldName = 'IMPORTE_IVA'
     end
+  end
+  object ZQ_FormasPago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from tipo_formapago'
+      'order by descripcion,cod_corto')
+    Params = <>
+    Left = 789
+    Top = 338
+    object ZQ_FormasPagoID_TIPO_FORMAPAGO: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAGO'
+      Required = True
+    end
+    object ZQ_FormasPagoDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 50
+    end
+    object ZQ_FormasPagoBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_FormasPagoIF: TStringField
+      FieldName = 'IF'
+      Size = 1
+    end
+    object ZQ_FormasPagoDESC_REC: TFloatField
+      FieldName = 'DESC_REC'
+    end
+    object ZQ_FormasPagoCOD_CORTO: TIntegerField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_FormasPagoGENERA_VUELTO: TStringField
+      FieldName = 'GENERA_VUELTO'
+      Size = 1
+    end
+    object ZQ_FormasPagoCOLUMNA_PRECIO: TIntegerField
+      FieldName = 'COLUMNA_PRECIO'
+    end
+    object ZQ_FormasPagoMODIFICABLE: TStringField
+      FieldName = 'MODIFICABLE'
+      Size = 1
+    end
+  end
+  object EKListadoCuenta: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select cta.*, tipo.descripcion,'
+      
+        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
+        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
+      'from cuenta cta'
+      
+        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
+        'po_formapago)'
+      'where cta.baja = '#39'N'#39
+      'and cta.id_cuenta > 2'
+      'order by cta.nombre_cuenta')
+    CampoBuscar = 'busqueda'
+    CampoClave = 'id_cuenta'
+    TituloVentana = 'Buscar Cuenta'
+    Left = 797
+    Top = 385
+  end
+  object EKListadoMedio: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select tipo.*'
+      'from tipo_formapago tipo'
+      'where tipo.baja = '#39'N'#39
+      '  and tipo.id_tipo_formapago > 2'
+      'order by tipo.descripcion')
+    CampoBuscar = 'descripcion'
+    CampoClave = 'id_tipo_formapago'
+    TituloVentana = 'Buscar Medio'
+    Left = 885
+    Top = 385
+  end
+  object ZQ_Cuentas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select cta.*'
+      'from cuenta cta'
+      'where baja='#39'N'#39
+      'order by cta.nombre_cuenta,cta.codigo')
+    Params = <>
+    Left = 885
+    Top = 337
+    object ZQ_CuentasID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+    end
+    object ZQ_CuentasMEDIO_DEFECTO: TIntegerField
+      FieldName = 'MEDIO_DEFECTO'
+    end
+    object ZQ_CuentasCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 10
+    end
+    object ZQ_CuentasNOMBRE_CUENTA: TStringField
+      FieldName = 'NOMBRE_CUENTA'
+      Size = 50
+    end
+    object ZQ_CuentasNRO_CTA_BANCARIA: TStringField
+      FieldName = 'NRO_CTA_BANCARIA'
+      Size = 10
+    end
+    object ZQ_CuentasBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_CuentasA_CTA_CORRIENTE: TStringField
+      FieldName = 'A_CTA_CORRIENTE'
+      Size = 1
+    end
+    object ZQ_CuentasID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_CuentasA_NOTA_CREDITO: TStringField
+      FieldName = 'A_NOTA_CREDITO'
+      Size = 1
+    end
+    object ZQ_CuentasMODIFICABLE: TStringField
+      FieldName = 'MODIFICABLE'
+      Size = 1
+    end
+  end
+  object ZQ_Comprobante_FormaPago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from comprobante_forma_pago'
+      'where id_comprob_fp = -1')
+    Params = <>
+    Left = 969
+    Top = 329
+    object ZQ_Comprobante_FormaPagoID_COMPROB_FP: TIntegerField
+      FieldName = 'ID_COMPROB_FP'
+    end
+    object ZQ_Comprobante_FormaPagoID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAG'
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_FECHA: TDateField
+      FieldName = 'MDCP_FECHA'
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_BANCO: TStringField
+      FieldName = 'MDCP_BANCO'
+      Size = 50
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_CHEQUE: TStringField
+      FieldName = 'MDCP_CHEQUE'
+      Size = 50
+    end
+    object ZQ_Comprobante_FormaPagoIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+    end
+    object ZQ_Comprobante_FormaPagoCONCILIADO: TDateField
+      FieldName = 'CONCILIADO'
+    end
+    object ZQ_Comprobante_FormaPagoCUENTA_INGRESO: TIntegerField
+      FieldName = 'CUENTA_INGRESO'
+    end
+    object ZQ_Comprobante_FormaPagoCUENTA_EGRESO: TIntegerField
+      FieldName = 'CUENTA_EGRESO'
+    end
+    object ZQ_Comprobante_FormaPagoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_Comprobante_FormaPagoIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+    end
+    object ZQ_Comprobante_FormaPago_nombreCuenta: TStringField
+      FieldKind = fkLookup
+      FieldName = '_nombreCuenta'
+      LookupDataSet = ZQ_Cuentas
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'NOMBRE_CUENTA'
+      KeyFields = 'CUENTA_INGRESO'
+      Size = 50
+      Lookup = True
+    end
+    object ZQ_Comprobante_FormaPago_nombreMedio: TStringField
+      FieldKind = fkLookup
+      FieldName = '_nombreMedio'
+      LookupDataSet = ZQ_FormasPago
+      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'ID_TIPO_FORMAPAG'
+      Size = 50
+      Lookup = True
+    end
+  end
+  object DS_Comprobante_FormaPago: TDataSource
+    DataSet = ZQ_Comprobante_FormaPago
+    Left = 977
+    Top = 377
   end
 end
