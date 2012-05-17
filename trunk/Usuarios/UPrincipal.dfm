@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 264
-  Top = 148
+  Left = 250
+  Top = 121
   Width = 949
   Height = 581
   Caption = 'Sistema Usuarios'
@@ -16,6 +16,86 @@ object FPrincipal: TFPrincipal
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object PanelTablaAplica: TPanel
+    Left = 82
+    Top = 91
+    Width = 769
+    Height = 361
+    BorderWidth = 4
+    Caption = 'PanelTablaAplica'
+    TabOrder = 5
+    Visible = False
+    object DBGrid_TablaAplica: TDBGrid
+      Left = 5
+      Top = 5
+      Width = 759
+      Height = 310
+      Align = alClient
+      Color = 16378329
+      DataSource = DSAplica
+      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'APLICACION'
+          ReadOnly = True
+          Title.Alignment = taCenter
+          Title.Caption = 'Aplicaci'#243'n'
+          Width = 161
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ALIAS_DB'
+          Title.Alignment = taCenter
+          Title.Caption = 'Alias BD'
+          Width = 329
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IP_DB'
+          Title.Alignment = taCenter
+          Title.Caption = 'IP BD'
+          Width = 150
+          Visible = True
+        end>
+    end
+    object PanelTablaAplica_Botones: TPanel
+      Left = 5
+      Top = 315
+      Width = 759
+      Height = 41
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 1
+      object btnTablaAplica_Aceptar: TButton
+        Left = 2
+        Top = 8
+        Width = 75
+        Height = 25
+        Caption = 'ACEPTAR'
+        TabOrder = 0
+        OnClick = btnTablaAplica_AceptarClick
+      end
+      object btnTablaAplica_Cancelar: TButton
+        Left = 682
+        Top = 8
+        Width = 75
+        Height = 25
+        Cancel = True
+        Caption = 'CANCELAR'
+        TabOrder = 1
+        OnClick = btnTablaAplica_CancelarClick
+      end
+    end
+  end
   object PanelFondo: TPanel
     Left = 0
     Top = 0
@@ -994,6 +1074,10 @@ object FPrincipal: TFPrincipal
           item
             Item = btnAbmPermisos
             Visible = True
+          end
+          item
+            Item = btnAbrirAplica
+            Visible = True
           end>
         MultiLine = True
         Name = 'barraVertical'
@@ -1408,6 +1492,15 @@ object FPrincipal: TFPrincipal
       OnClick = bntValorClick
       AutoGrayScale = False
     end
+    object btnAbrirAplica: TdxBarLargeButton
+      Caption = 'Abrir Tabla Aplica'
+      Category = 0
+      Hint = 'Abrir Tabla Aplica'
+      Visible = ivAlways
+      ImageIndex = 15
+      OnClick = btnAbrirAplicaClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnEditar')
@@ -1428,7 +1521,8 @@ object FPrincipal: TFPrincipal
       Items = (
         'btnAbmUsuarios'
         'btnAbmGrupos'
-        'btnAbmPermisos')
+        'btnAbmPermisos'
+        'btnAbrirAplica')
     end
   end
   object Aplicacion: TZQuery
@@ -2041,5 +2135,35 @@ object FPrincipal: TFPrincipal
     PermitirFiltrar = True
     Left = 459
     Top = 198
+  end
+  object aplica: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from aplica')
+    Params = <>
+    Left = 616
+    Top = 312
+    object aplicaAPLICACION: TStringField
+      FieldName = 'APLICACION'
+    end
+    object aplicaCLAVE: TIntegerField
+      FieldName = 'CLAVE'
+    end
+    object aplicaALIAS_DB: TStringField
+      FieldName = 'ALIAS_DB'
+      Size = 100
+    end
+    object aplicaIP_DB: TStringField
+      FieldName = 'IP_DB'
+    end
+    object aplicaIP_ACTUALIZACION: TStringField
+      FieldName = 'IP_ACTUALIZACION'
+    end
+  end
+  object DSAplica: TDataSource
+    DataSet = aplica
+    Left = 616
+    Top = 360
   end
 end
