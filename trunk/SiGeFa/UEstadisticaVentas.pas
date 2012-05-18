@@ -242,7 +242,6 @@ type
     ZQ_ConsultasDESCRIPCION: TStringField;
     ZQ_ConsultasSQL: TStringField;
     ZQ_EstadVarias: TZQuery;
-    ZQ_EstadVariasAGRUPAM: TIntegerField;
     ZQ_EstadVariasDESCRIPCION: TStringField;
     ZQ_EstadVariasSUMAVENTA: TFloatField;
     ZQ_EstadVariasSUMAIF: TFloatField;
@@ -251,6 +250,7 @@ type
     ZQ_ConsultasSQL_TABLA_FILTRO: TStringField;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     EKDbSumaVarias: TEKDbSuma;
+    ZQ_EstadVariasAGRUPAM: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
