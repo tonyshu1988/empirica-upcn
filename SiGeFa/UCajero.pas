@@ -9,7 +9,7 @@ uses
   EKEdit, UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
   XPStyleActnCtrls, ActnMan, EKListadoSQL, EKDbSuma,
   ZStoredProcedure, UBuscarPersona, Buttons, jpeg, Menus, UCargarPreventa,
-  ComCtrls, IniFiles, ShellAPI;
+  ComCtrls, IniFiles, ShellAPI, dxBarExtDBItems;
 
 type
   TFCajero = class(TForm)
@@ -560,6 +560,20 @@ type
     ZQ_SaldoNotaCredito: TZQuery;
     ZQ_SaldoNotaCreditoSALDO: TFloatField;
     edDetalleMDP: TDBEdit;
+    dxBarStatic1: TdxBarStatic;
+    dxUltimoId: TdxBarEdit;
+    dxBarListItem1: TdxBarListItem;
+    dxBarContainerItem1: TdxBarContainerItem;
+    dxBarColorCombo1: TdxBarColorCombo;
+    dxBarTreeViewCombo1: TdxBarTreeViewCombo;
+    dxBarToolbarsListItem1: TdxBarToolbarsListItem;
+    dxBarProgressItem1: TdxBarProgressItem;
+    dxBarMRUListItem1: TdxBarMRUListItem;
+    dxBarLookupCombo1: TdxBarLookupCombo;
+    dxBarButton1: TdxBarButton;
+    CustomdxBarCombo1: TCustomdxBarCombo;
+    ZQ_UltimoCPB: TZQuery;
+    ZQ_UltimoCPBNUMERO_CPB: TIntegerField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -956,6 +970,19 @@ begin
   //Venta Rápida
   FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivo.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivoF.Glyph);
+
+  //Ver o no los cierres Fiscales
+  if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
+   begin
+      btCierreZ.Enabled:=True;
+      BtCierreX.Enabled:=True;
+   end
+  else
+   begin
+      btCierreZ.Enabled:=False;
+      BtCierreX.Enabled:=False;
+   end;
+
 end;
 
 
@@ -1030,6 +1057,13 @@ begin
   lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
   lblTotAPagar.Caption:= 'Total Venta: ' + FormatFloat('$ ##,###,##0.00 ', 0);
   modoCargaPrevia:= False;
+
+  //Cargo el último nro de comprobante (para que sepa cual sigue)
+  ZQ_UltimoCPB.Close;
+  ZQ_UltimoCPB.ParamByName('id_sucursal').AsInteger:=idSucursal;
+  dm.EKModelo.abrir(ZQ_UltimoCPB);
+  dxUltimoId.Text:=Format(' Último CPB: %d',[ZQ_UltimoCPBNUMERO_CPB.AsInteger]);
+
 end;
 
 
@@ -2442,25 +2476,15 @@ end;
 
 procedure TFCajero.btCierreZClick(Sender: TObject);
 begin
-  if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
-  begin
     if (application.MessageBox(pchar('Desea Realizar el Cierre Z en la Impresora Fiscal ?'), 'Cierre Z', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
       imprimirFiscal(0, 'Z');
-  end
-  else
-    Application.MessageBox('No tiene permisos para realizar esta Acción.', 'Cierre Z', MB_OK + MB_ICONINFORMATION);
 end;
 
 
 procedure TFCajero.BtCierreXClick(Sender: TObject);
 begin
-  if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
-  begin
     if (application.MessageBox(pchar('Desea Realizar el Cierre X en la Impresora Fiscal ?'), 'Cierre X', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
       imprimirFiscal(0, 'X');
-  end
-  else
-    Application.MessageBox('No tiene permisos para realizar esta Acción.', 'Cierre X', MB_OK + MB_ICONINFORMATION);
 end;
 
 
