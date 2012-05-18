@@ -1,8 +1,8 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 277
-  Top = 178
-  Width = 942
-  Height = 614
+  Left = 322
+  Top = 235
+  Width = 1194
+  Height = 673
   Caption = 'Estadisticas Ventas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,9 +23,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 926
-    Height = 524
-    ActivePage = TabRanking
+    Width = 1178
+    Height = 583
+    ActivePage = TabHorarioVentas
     Align = alClient
     TabOrder = 4
     OnChange = PageControlChange
@@ -34,8 +34,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object PanelContenedor: TPanel
         Left = 0
         Top = 33
-        Width = 918
-        Height = 463
+        Width = 1170
+        Height = 522
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -907,16 +907,16 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object PanelFacturacion: TPanel
           Left = 0
           Top = 0
-          Width = 918
-          Height = 463
+          Width = 1170
+          Height = 522
           Align = alClient
           BevelOuter = bvNone
           BorderWidth = 2
           TabOrder = 0
           object Splitter1: TSplitter
             Left = 2
-            Top = 333
-            Width = 914
+            Top = 392
+            Width = 1166
             Height = 6
             Cursor = crVSplit
             Align = alBottom
@@ -924,15 +924,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object PanelComprobante: TPanel
             Left = 2
             Top = 2
-            Width = 914
-            Height = 331
+            Width = 1166
+            Height = 390
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 0
             object lblTotalComprobantes: TLabel
               Left = 0
-              Top = 310
-              Width = 914
+              Top = 369
+              Width = 1166
               Height = 21
               Align = alBottom
               Alignment = taRightJustify
@@ -952,8 +952,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
             object DBGridComprobantes: TDBGrid
               Left = 0
               Top = 0
-              Width = 914
-              Height = 310
+              Width = 1166
+              Height = 369
               Align = alClient
               Color = 14606012
               DataSource = DS_Comprobante
@@ -1041,8 +1041,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
           end
           object PanelFPagoYProd: TPanel
             Left = 2
-            Top = 339
-            Width = 914
+            Top = 398
+            Width = 1166
             Height = 122
             Align = alBottom
             BevelOuter = bvNone
@@ -1056,7 +1056,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             object PanelProducto: TPanel
               Left = 613
               Top = 0
-              Width = 301
+              Width = 553
               Height = 122
               Align = alClient
               BevelOuter = bvNone
@@ -1065,7 +1065,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               object lblTotalProducto: TLabel
                 Left = 0
                 Top = 101
-                Width = 301
+                Width = 553
                 Height = 21
                 Align = alBottom
                 Alignment = taRightJustify
@@ -1085,7 +1085,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               object DBGridListadoProductos: TDBGrid
                 Left = 0
                 Top = 0
-                Width = 301
+                Width = 553
                 Height = 101
                 Align = alClient
                 Color = 14606012
@@ -1277,7 +1277,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object PanelFiltro: TPanel
         Left = 0
         Top = 0
-        Width = 918
+        Width = 1170
         Height = 33
         Align = alTop
         BevelOuter = bvNone
@@ -1330,16 +1330,16 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object PanelMes: TPanel
         Left = 0
         Top = 0
-        Width = 918
-        Height = 496
+        Width = 1170
+        Height = 555
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridHorario: TDBGrid
           Left = 0
           Top = 46
-          Width = 918
-          Height = 450
+          Width = 1170
+          Height = 509
           Align = alClient
           Color = 14606012
           DataSource = DS_Horario
@@ -1390,7 +1390,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object Panel5: TPanel
           Left = 0
           Top = 0
-          Width = 918
+          Width = 1170
           Height = 46
           Align = alTop
           BevelOuter = bvNone
@@ -1399,7 +1399,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 102
+            Width = 1162
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1413,7 +1413,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 120
+            Width = 1162
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1427,7 +1427,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 126
+            Width = 1162
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -1447,8 +1447,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object DBChartHorario: TDBChart
         Left = 0
         Top = 0
-        Width = 918
-        Height = 217
+        Width = 1170
+        Height = 276
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         BackWall.Color = clSilver
@@ -1487,8 +1487,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         TabOrder = 0
         object Splitter4: TSplitter
           Left = 0
-          Top = 213
-          Width = 918
+          Top = 272
+          Width = 1170
           Height = 4
           Cursor = crVSplit
           Align = alBottom
@@ -1561,8 +1561,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
       end
       object DBChart1: TDBChart
         Left = 0
-        Top = 217
-        Width = 918
+        Top = 276
+        Width = 1170
         Height = 279
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
@@ -1628,17 +1628,17 @@ object FEstadisticaVentas: TFEstadisticaVentas
       Caption = 'Ranking Ventas'
       ImageIndex = 4
       object Splitter3: TSplitter
-        Left = 553
+        Left = 805
         Top = 33
         Width = 9
-        Height = 463
+        Height = 522
         Align = alRight
         Beveled = True
       end
       object Panel4: TPanel
         Left = 0
         Top = 0
-        Width = 918
+        Width = 1170
         Height = 33
         Align = alTop
         BevelOuter = bvNone
@@ -1685,10 +1685,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
       end
       object Panel6: TPanel
-        Left = 562
+        Left = 814
         Top = 33
         Width = 356
-        Height = 463
+        Height = 522
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 1
@@ -1714,7 +1714,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object lblTotales: TLabel
           Left = 0
-          Top = 255
+          Top = 314
           Width = 356
           Height = 20
           Align = alBottom
@@ -1734,7 +1734,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object Splitter6: TSplitter
           Left = 0
-          Top = 275
+          Top = 334
           Width = 356
           Height = 9
           Cursor = crVSplit
@@ -1745,7 +1745,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Left = 0
           Top = 20
           Width = 356
-          Height = 235
+          Height = 294
           Align = alClient
           Color = 14606012
           DataSource = DS_Top20
@@ -1787,7 +1787,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object DBChart2: TDBChart
           Left = 0
-          Top = 284
+          Top = 343
           Width = 356
           Height = 179
           BackWall.Brush.Color = clWhite
@@ -1856,15 +1856,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object Panel1: TPanel
         Left = 0
         Top = 33
-        Width = 553
-        Height = 463
+        Width = 805
+        Height = 522
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 2
         object Label3: TLabel
           Left = 1
           Top = 1
-          Width = 551
+          Width = 803
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -1883,8 +1883,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object lblProdsVendidos: TLabel
           Left = 1
-          Top = 442
-          Width = 551
+          Top = 501
+          Width = 803
           Height = 20
           Align = alBottom
           Alignment = taRightJustify
@@ -1904,8 +1904,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object grillaRanking: TDBGrid
           Left = 1
           Top = 21
-          Width = 551
-          Height = 421
+          Width = 803
+          Height = 480
           Align = alClient
           Color = 14606012
           DataSource = DS_ProductosVendidos
@@ -1953,6 +1953,135 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Width = 105
               Visible = True
             end>
+        end
+      end
+    end
+    object TabVarios: TTabSheet
+      Caption = 'Estad'#237'sticas Varias'
+      ImageIndex = 4
+      object Panel2: TPanel
+        Left = 0
+        Top = 33
+        Width = 1170
+        Height = 522
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object lblTotVarias: TLabel
+          Left = 0
+          Top = 501
+          Width = 1170
+          Height = 21
+          Align = alBottom
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Total Vendido: $ 0.00 '
+          Color = 16729670
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object gridVarias: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 1170
+          Height = 501
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_EstadVarias
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Caption = 'Descripci'#243'n'
+              Width = 511
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUMAVENTA'
+              Title.Caption = 'Importe'
+              Width = 94
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Caption = 'Cantidad'
+              Width = 75
+              Visible = True
+            end>
+        end
+      end
+      object Panel3: TPanel
+        Left = 0
+        Top = 0
+        Width = 1170
+        Height = 33
+        Align = alTop
+        BevelOuter = bvNone
+        ParentShowHint = False
+        ShowHint = False
+        TabOrder = 1
+        Visible = False
+        object SpeedButton1: TSpeedButton
+          Left = 55
+          Top = 7
+          Width = 94
+          Height = 18
+          GroupIndex = 1
+          Down = True
+          Caption = 'Todos'
+          Layout = blGlyphBottom
+          OnClick = AplicarFiltro
+        end
+        object SpeedButton2: TSpeedButton
+          Left = 151
+          Top = 7
+          Width = 94
+          Height = 18
+          GroupIndex = 1
+          Caption = 'Fiscal'
+          Layout = blGlyphBottom
+          OnClick = AplicarFiltro
+        end
+        object SpeedButton3: TSpeedButton
+          Left = 247
+          Top = 7
+          Width = 94
+          Height = 18
+          GroupIndex = 1
+          Caption = 'No Fiscal'
+          Layout = blGlyphBottom
+          OnClick = AplicarFiltro
+        end
+        object Label5: TLabel
+          Left = 19
+          Top = 9
+          Width = 25
+          Height = 13
+          Caption = 'Filtro:'
         end
       end
     end
@@ -3523,8 +3652,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
     PermitirOrdenar = True
     PermitirMover = False
     PermitirFiltrar = True
-    Left = 732
-    Top = 336
+    Left = 740
+    Top = 328
   end
   object EKBusquedaRanking: TEKBusquedaAvanzada
     CriteriosBusqueda = <
@@ -3533,6 +3662,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Campo = 'id_sucursal'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = ZQ_Sucursal
         TipoComboSQLCampoVer = 'nombre'
         TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
@@ -3747,5 +3877,279 @@ object FEstadisticaVentas: TFEstadisticaVentas
     SumListChanged = EKDbSumaTotalesSumListChanged
     Left = 882
     Top = 214
+  end
+  object EKBusquedaVarias: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = ZQ_Sucursal
+        TipoComboSQLCampoVer = 'nombre'
+        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Tipo de Estad'#237'stica'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = ZQ_Consultas
+        TipoComboSQLCampoVer = 'descripcion'
+        TipoComboSQLCampoReal = 'id_consulta'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = 0
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fecha Desde'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = 0
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fechas Hasta'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = 1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Filtro B'#250'squeda'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQLCampoVer = 'descripcion'
+        TipoComboSQLCampoReal = 'descripcion'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select sum(cd.importe_venta) as sumaVenta,'
+      
+        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
+        'chaC,'
+      
+        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
+        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
+        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
+        'digo_barra,'#39#39') DETALLE_PROD'
+      'from comprobante_detalle cd'
+      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona vend on (c.id_vendedor=vend.id_persona)'
+      'join persona cli on (c.id_cliente=cli.id_persona)'
+      'left join producto p on (cd.id_producto=p.id_producto)'
+      'left join medida m on (p.id_medida=m.id_medida)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
+      ''
+      ''
+      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)'
+      'group by 4,3,6'
+      'order by 3 desc,5 desc,1 desc,2 desc')
+    SQL_Select.Strings = (
+      'select sum(cd.importe_venta) as sumaVenta,'
+      
+        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
+        'chaC,'
+      
+        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
+        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
+        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
+        'digo_barra,'#39#39') DETALLE_PROD')
+    SQL_From.Strings = (
+      'from comprobante_detalle cd'
+      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona vend on (c.id_vendedor=vend.id_persona)'
+      'join persona cli on (c.id_cliente=cli.id_persona)'
+      'left join producto p on (cd.id_producto=p.id_producto)'
+      'left join medida m on (p.id_medida=m.id_medida)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
+      ''
+      '')
+    SQL_Where.Strings = (
+      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)'
+      'group by 4,3,6'
+      'order by 3 desc,5 desc,1 desc,2 desc')
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 446
+    Top = 393
+  end
+  object ZQ_Consultas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from consultas')
+    Params = <>
+    Left = 436
+    Top = 334
+    object ZQ_ConsultasID_CONSULTA: TIntegerField
+      FieldName = 'ID_CONSULTA'
+      Required = True
+    end
+    object ZQ_ConsultasDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 100
+    end
+    object ZQ_ConsultasSQL: TStringField
+      FieldName = 'SQL'
+      Size = 1500
+    end
+    object ZQ_ConsultasSQL_TABLA_FILTRO: TStringField
+      FieldName = 'SQL_TABLA_FILTRO'
+      Size = 1000
+    end
+  end
+  object ZQ_EstadVarias: TZQuery
+    Connection = DM.Conexion
+    AfterScroll = ZQ_EstadVariasAfterScroll
+    SQL.Strings = (
+      'select'
+      '       a.id_articulo as agrupam,'
+      '       a.descripcion,'
+      '       sum(cd.importe_venta) as sumaVenta,'
+      '       sum(cd.importe_if) as sumaIF,'
+      '       count(cd.id_producto) as cantidad'
+      'from comprobante_detalle cd'
+      'join comprobante c on (cd.id_comprobante = c.id_comprobante)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona vend on (c.id_vendedor = vend.id_persona)'
+      'join persona cli on (c.id_cliente = cli.id_persona)'
+      'left join producto p on (cd.id_producto = p.id_producto)'
+      'left join medida m on (p.id_medida = m.id_medida)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera = p.id_pr' +
+        'od_cabecera)'
+      'join articulo a on (pc.id_articulo=a.id_articulo)'
+      
+        'join tipo_articulo ta on (a.id_tipo_articulo=ta.id_tipo_articulo' +
+        ')'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'left join color co on (pc.color = co.id_color)'
+      'where (c.id_tipo_cpb = 11)'
+      '  and (c.fecha_cobrada is not null)'
+      '  and (cast(c.fecha_cobrada as date) between :f1 and :f2)'
+      '  and ((c.id_sucursal = :id_sucursal) or (:id_sucursal = -1))'
+      'group by 1, 2'
+      'order by 5 desc, 3 desc, 4 desc')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'f1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'f2'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 540
+    Top = 334
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'f1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'f2'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    object ZQ_EstadVariasAGRUPAM: TIntegerField
+      FieldName = 'AGRUPAM'
+      Required = True
+    end
+    object ZQ_EstadVariasDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 200
+    end
+    object ZQ_EstadVariasSUMAVENTA: TFloatField
+      FieldName = 'SUMAVENTA'
+      ReadOnly = True
+      DisplayFormat = '$ ##,###,##0.00'
+    end
+    object ZQ_EstadVariasSUMAIF: TFloatField
+      FieldName = 'SUMAIF'
+      ReadOnly = True
+      DisplayFormat = '$ ##,###,##0.00'
+    end
+    object ZQ_EstadVariasCANTIDAD: TIntegerField
+      FieldName = 'CANTIDAD'
+      ReadOnly = True
+    end
+  end
+  object DS_EstadVarias: TDataSource
+    DataSet = ZQ_EstadVarias
+    Left = 541
+    Top = 391
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = gridVarias
+    Filtros = <
+      item
+        TituloColumna = 'Descripci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end>
+    NombreGuardar = 'EKOrdenarGrillaVarias'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = False
+    PermitirFiltrar = True
+    Left = 740
+    Top = 400
+  end
+  object EKDbSumaVarias: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'SUMAVENTA'
+      end>
+    DataSet = ZQ_EstadVarias
+    SumListChanged = EKDbSumaVariasSumListChanged
+    Left = 866
+    Top = 390
   end
 end
