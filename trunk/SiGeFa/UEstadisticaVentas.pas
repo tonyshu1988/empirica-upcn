@@ -231,11 +231,6 @@ type
     Panel2: TPanel;
     lblTotVarias: TLabel;
     gridVarias: TDBGrid;
-    Panel3: TPanel;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    Label5: TLabel;
     EKBusquedaVarias: TEKBusquedaAvanzada;
     ZQ_Consultas: TZQuery;
     ZQ_ConsultasID_CONSULTA: TIntegerField;
@@ -251,6 +246,31 @@ type
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     EKDbSumaVarias: TEKDbSuma;
     ZQ_EstadVariasAGRUPAM: TStringField;
+    ReporteEstadVarias: TQuickRep;
+    QRBand4: TQRBand;
+    QRDBImage1: TQRDBImage;
+    qrTipoEstad: TQRLabel;
+    ReporteEstadVarias_Subtitulo: TQRLabel;
+    ReporteEstadVarias_Titulo: TQRLabel;
+    QRBand5: TQRBand;
+    QRDBText3: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRBand7: TQRBand;
+    critbusqueda: TQRLabel;
+    QRBand8: TQRBand;
+    ReporteEstadVarias_PieDePagina: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRBand9: TQRBand;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRBand10: TQRBand;
+    QRExpr1: TQRExpr;
+    QRExpr2: TQRExpr;
+    EKVistaPreviaVarias: TEKVistaPreviaQR;
+    QRLabel4: TQRLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -643,6 +663,7 @@ end;
 
 
 procedure TFEstadisticaVentas.btImprimirClick(Sender: TObject);
+var i:integer;
 begin
 //FACTURACION
   if PageControl.ActivePage = TabFacturacion then
@@ -671,6 +692,22 @@ begin
   begin
 
   end;
+
+  if PageControl.ActivePage=TabVarios then
+  begin
+    if ZQ_EstadVarias.IsEmpty then
+      exit;
+    DM.VariablesReportes(ReporteEstadVarias);
+
+    CritBusqueda.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
+                            EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
+
+    qrTipoEstad.Caption:='Estadística según '+EKBusquedaVarias.ParametrosSelecReales1[1];
+
+    ReporteEstadVarias_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    EKVistaPreviaVarias.VistaPrevia;
+  end;
+
 end;
 
 
