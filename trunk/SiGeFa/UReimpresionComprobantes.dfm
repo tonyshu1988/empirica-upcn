@@ -1031,7 +1031,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
       '         c.numero_cpb, c.fecha'
-      'order by c.codigo ASC')
+      '')
     Params = <>
     IndexFieldNames = 'FECHA Desc;CODIGO Desc'
     Left = 194
@@ -1501,7 +1501,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
       '         c.numero_cpb, c.fecha'
-      'order by c.codigo ASC')
+      '')
     SQL_Select.Strings = (
       
         'select distinct c.codigo, c.id_comprobante, cast(c.fecha_cobrada' +
@@ -1544,7 +1544,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
       '         c.numero_cpb, c.fecha'
-      'order by c.codigo ASC')
+      '')
     UsarWhereOriginal = EK_Con_Where
     Left = 56
     Top = 79

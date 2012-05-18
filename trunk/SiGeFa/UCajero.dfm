@@ -1,8 +1,8 @@
 object FCajero: TFCajero
-  Left = 233
-  Top = 60
+  Left = 275
+  Top = 11
   Width = 1032
-  Height = 700
+  Height = 757
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -19,6 +19,614 @@ object FCajero: TFCajero
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object PABM_FormaPago: TPanel
+    Left = 93
+    Top = 433
+    Width = 905
+    Height = 116
+    BevelInner = bvLowered
+    BevelOuter = bvSpace
+    BevelWidth = 2
+    BorderStyle = bsSingle
+    TabOrder = 3
+    object Label18: TLabel
+      Left = 4
+      Top = 4
+      Width = 893
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Forma de Pago'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label47: TLabel
+      Left = 482
+      Top = 24
+      Width = 308
+      Height = 13
+      Caption = 'Medio de Pago (Presione F1 para Buscar Forma Pago)'
+      FocusControl = edDetalleMDPCbox
+    end
+    object Label48: TLabel
+      Left = 323
+      Top = 62
+      Width = 62
+      Height = 13
+      Caption = 'MDP Fecha'
+      FocusControl = edMDPFecha
+    end
+    object Label49: TLabel
+      Left = 435
+      Top = 62
+      Width = 64
+      Height = 13
+      Caption = 'MDP Banco'
+      FocusControl = edMDPBanco
+    end
+    object Label50: TLabel
+      Left = 634
+      Top = 62
+      Width = 74
+      Height = 13
+      Caption = 'MDP N'#250'mero'
+      FocusControl = edMDPNro
+    end
+    object Label51: TLabel
+      Left = 16
+      Top = 62
+      Width = 46
+      Height = 13
+      Caption = 'Importe'
+      FocusControl = edImporte
+    end
+    object Label53: TLabel
+      Left = 16
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'C'#243'digo'
+      FocusControl = edCodCuenta
+    end
+    object Label55: TLabel
+      Left = 68
+      Top = 24
+      Width = 283
+      Height = 13
+      Caption = 'Cuenta Detalle (Presione F1 para Buscar Cuenta)'
+      FocusControl = edCuenta
+    end
+    object Label58: TLabel
+      Left = 152
+      Top = 62
+      Width = 101
+      Height = 13
+      Caption = 'Importe de Venta'
+      FocusControl = edImporteVenta
+    end
+    object Label61: TLabel
+      Left = 435
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'C'#243'digo'
+      FocusControl = edCodMDP
+    end
+    object edDetalleMDPCbox: TDBLookupComboBox
+      Left = 482
+      Top = 40
+      Width = 329
+      Height = 21
+      Color = 16771302
+      DataField = 'medioPago'
+      DataSource = DSFpago
+      DropDownRows = 0
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      Visible = False
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarFormaPago
+    end
+    object edMDPFecha: TDBEdit
+      Left = 323
+      Top = 76
+      Width = 94
+      Height = 21
+      Color = 16771302
+      DataField = 'MDCP_FECHA'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 7
+    end
+    object edMDPBanco: TDBEdit
+      Left = 435
+      Top = 76
+      Width = 164
+      Height = 21
+      Color = 16771302
+      DataField = 'MDCP_BANCO'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 8
+    end
+    object edMDPNro: TDBEdit
+      Left = 634
+      Top = 76
+      Width = 177
+      Height = 21
+      Color = 16771302
+      DataField = 'MDCP_CHEQUE'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 9
+    end
+    object edImporte: TDBEdit
+      Left = 16
+      Top = 76
+      Width = 134
+      Height = 21
+      Color = 16771302
+      DataField = 'IMPORTE'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+      OnExit = edCodCuentaExit
+    end
+    object edCodCuenta: TDBEdit
+      Left = 16
+      Top = 40
+      Width = 41
+      Height = 21
+      Color = 16771302
+      DataField = 'CUENTA_INGRESO'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarCuenta
+    end
+    object edCuenta: TDBLookupComboBox
+      Left = 67
+      Top = 40
+      Width = 350
+      Height = 21
+      Color = 16771302
+      DataField = '_ctaIngreso'
+      DataSource = DSFpago
+      DropDownRows = 0
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarCuenta
+    end
+    object edImporteVenta: TDBEdit
+      Left = 152
+      Top = 76
+      Width = 134
+      Height = 21
+      Color = 16771302
+      DataField = '_importeVenta'
+      DataSource = DSFpago
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+    end
+    object edCodMDP: TDBEdit
+      Left = 435
+      Top = 40
+      Width = 41
+      Height = 21
+      Color = 16771302
+      DataField = 'ID_TIPO_FORMAPAG'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarFormaPago
+    end
+    object btFPAceptar: TBitBtn
+      Left = 815
+      Top = 40
+      Width = 79
+      Height = 25
+      Caption = 'Aceptar'
+      TabOrder = 10
+      OnClick = btFPAceptarClick
+    end
+    object btFPCancelar: TBitBtn
+      Left = 815
+      Top = 72
+      Width = 79
+      Height = 25
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 11
+      OnClick = btFPCancelarClick
+    end
+    object edDetalleMDP: TDBEdit
+      Left = 482
+      Top = 40
+      Width = 329
+      Height = 21
+      Color = 16771302
+      DataField = 'medioPago'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarFormaPago
+    end
+  end
+  object PVentaDirecta: TPanel
+    Left = 280
+    Top = 112
+    Width = 481
+    Height = 295
+    BevelInner = bvLowered
+    BevelWidth = 2
+    BorderWidth = 2
+    BorderStyle = bsSingle
+    TabOrder = 8
+    Visible = False
+    object Label15: TLabel
+      Left = 5
+      Top = 166
+      Width = 467
+      Height = 17
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Seleccione su Forma de Pago'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+    end
+    object Label43: TLabel
+      Left = 14
+      Top = 37
+      Width = 56
+      Height = 13
+      Caption = 'Sucursal'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label46: TLabel
+      Left = 14
+      Top = 117
+      Width = 62
+      Height = 13
+      Caption = 'Vendedor'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label52: TLabel
+      Left = 14
+      Top = 77
+      Width = 45
+      Height = 13
+      Caption = 'Cliente'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label57: TLabel
+      Left = 6
+      Top = 6
+      Width = 465
+      Height = 24
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Venta / Facturaci'#243'n '#193'gil'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+    end
+    object Image3: TImage
+      Left = 304
+      Top = 38
+      Width = 169
+      Height = 115
+      Center = True
+      Picture.Data = {
+        0A544A504547496D6167652E110000FFD8FFE000104A46494600010101006000
+        600000FFDB00430007050606060507060606080807090B120C0B0A0A0B171011
+        0D121B171C1C1A171A191D212A241D1F2820191A253225282C2D2F302F1D2334
+        38342E372A2E2F2EFFDB0043010808080B0A0B160C0C162E1E1A1E2E2E2E2E2E
+        2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E
+        2E2E2E2E2E2E2E2E2E2E2E2E2EFFC00011080087008703012200021101031101
+        FFC4001F0000010501010101010100000000000000000102030405060708090A
+        0BFFC400B5100002010303020403050504040000017D01020300041105122131
+        410613516107227114328191A1082342B1C11552D1F02433627282090A161718
+        191A25262728292A3435363738393A434445464748494A535455565758595A63
+        6465666768696A737475767778797A838485868788898A92939495969798999A
+        A2A3A4A5A6A7A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6
+        D7D8D9DAE1E2E3E4E5E6E7E8E9EAF1F2F3F4F5F6F7F8F9FAFFC4001F01000301
+        01010101010101010000000000000102030405060708090A0BFFC400B5110002
+        0102040403040705040400010277000102031104052131061241510761711322
+        328108144291A1B1C109233352F0156272D10A162434E125F11718191A262728
+        292A35363738393A434445464748494A535455565758595A636465666768696A
+        737475767778797A82838485868788898A92939495969798999AA2A3A4A5A6A7
+        A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6D7D8D9DAE2E3
+        E4E5E6E7E8E9EAF2F3F4F5F6F7F8F9FAFFDA000C03010002110311003F006F9C
+        693CD355B751BA802D79A690CB5577E28DD40167CD3479B55B751BA802CF9B47
+        9B55B70A370A00B3E6D1E6D5BD3E2B592CCBCB12B49BCAE59CA8E82975082D12
+        D049026D7DC01C31618E73FD295C9E657B14FCDAABA86AD63A642B3EA174B6F1
+        336C0CC8CD96C138C2827A034BBAB8EF1DFDB666B4861D2A7BCB74577731C6C4
+        063803903A800FE74CA3A15F1778698E06B96F9F78661FCD2AE5B6B7A35D3AA5
+        B6B56123B1C2A9982963D800D8C9AF13BEF29563CE9AF6B203F36E66C37E06AD
+        ADE68F0C91CF6B6F709346C24525B21581C8EF4EC4F33EC7B3D95FC17D6B1DDD
+        AC9BE093251B0467071D0F3DAACF9A6B95F05C8BFD8490F7B796588FD4393FD6
+        B7F77BD228B7E69A2AAEEA28022DD46EA6E6933400ECD19A6D04D003B346699C
+        D1CD003F35A3A369D26A5742304AC49CC8F8E83D3EA6B3327D335EA71E952786
+        FC30D3C90EFBB0A0F979DBBE6721553FEFA2AB9FC69C55C4DD8A56BA05A41666
+        105D959B7EF62A4838031C8F6AADA868292406159DA205B3FEA876FA1AB90E91
+        A9DA411C21A6948505DFCC1F339E59BAF7624FE3504B06A91C90C505987567E4
+        CB193B33819E08C7FF005A8B6A65D4C293C34C8AC7EDE98032498F181F9D79AC
+        3E2E4BBBC9ADB4FD2AFAEFCB270F026E2CA0E3763B0E9F9D7A87C4790E8BE11B
+        E926B976FB48FB2C6182E3E71C81803F8431AE3FE13E936CDA5EA1A905CBCB28
+        894A9E76A8C9FF00D0BF4AC3175950A6E654A7CAAE667FC254F0D9DEC33687AE
+        4724D09443F66FBA4F7EA3159CDE30D0F7795776972187044F6EA48FA8C9AF5E
+        96CD1400256E7A9C741F9D7CD7AC49FDA7AC5D5C2BE5AE6725493D013C7E4315
+        CD82C63C4B6AD6B134E7CCDE87AE5B080421EDE248E393F798540B927924E3B9
+        A97355F49124FA5594C4732408DF9A83FD6AD881FF00BB5DE6C373453FC893FB
+        B450057A2B521D3989FBB5762D289FE1FD280300231E80D3D6094F6AEA61D23F
+        D9FD2AFC5A40FEE7E94C0E356D243D8FE5532E9D21EC7F2AEE22D1C607CB56D3
+        4A55192303DE8B08E67C27A446DAED9CB720F930BF9ADEFB791FAE2BD7279EC6
+        E420B88E39046FBD370076B608C8F7E4D70978F0584F1409228B893F80025B9E
+        80E3A7D29D3DD496E40926439E983DBF2AA4AC66CED246B26E8807D0E2A06FB2
+        2B6E41C8EF9AE44EA257869E31E9FBC5FF001A78BD98F67FCB3429A7B059A33F
+        E21784ADBC706DED27D4EE6D22B225C7940157761FC40F7000C7FBC6B8C87E12
+        DFD847E569BE3BBFB68F3908B0103F4907F2AEEEDEFA4DB23B02A5A427078E9F
+        2E7F202A43784FF154C9296E82E79BDCF80BC75123A5AF8E16646054F9EAEB90
+        7FEFAAF39F12780B58F0B590BFD4AEACA5859CC48B6F2397676538C02A3BD7D1
+        66EB3DEBCEFE2262F75BD15256C5B5924B77267A67E5099FC431FC0D4C6118FC
+        2AC38B22F08C8F35FDBE841F78B4D351A6CA8F95C1550011DB1BBAFB5767FD97
+        FECD715F0255B56D67C4FAB48BC7EE117D9497C0FC9457B31B31FDD15459C69D
+        37DA8AEBCD90FEED14C0C9834D1E957E1D3871C56D456A3D2ADC76FED4019115
+        80E38AB71D88F4AD54807153A454580C87822863324870A38FAD73DADEAEB678
+        8E250D78E311C639D83D4FA9F415078BF56BDB5D6E5B3F263920545281890704
+        727208EF9FCAB0D352B7F33CD7D364F37A9759CB1CFF00C0B7534C8722DC318D
+        3D1AF6ED8C979293C8393CF61FA126A917799CCB2B82CF8279C8C7D3B0F4EF52
+        4977A7DCB079BED8AC38F991587FE3BB69CCFA6CBC2DF007D1E364FEAD5855F6
+        951D93B44D232825E6665F21CABB125470A873838EFDB3FE7DEA4D12FAD85EC9
+        66B1C92DC609790321541DC1F9B3D4E09C75A9A4D384E5DA2D42D55C8C232907
+        6FA1C1DBD3F9D4BA4698FA75BB47979DDC92F203B81F400066E2BAE9C28C29B4
+        8C6A55AB2A8ADB220F116AF7564B1C36AB29B898E309BBE51D074EE7F3AA62F7
+        588A726E210608537348FC873D7AEE3C648FC2B59A39D1DA69232E47CDB5814D
+        C7B0E78C0150C85DA48E0485DD73979010413927B1CF279FA122A2ECE99BA692
+        495DF7B91CBA9DEA34719D2966959F695C98CAF38F43CF5E335C7FC5EBFB4B0D
+        3EF608AD93ED332C76A252C49CE0BBE067180AC07AE5ABBD8156DA49EFEE63CA
+        5AC6C403D491D40CFAB0F7CE16BC1FC753CBACF8B61D28386FB3656565E479AC
+        4BCADF9F1F80A977EA65657D11EB1FB3A4305BE85796EE1CDE5E31B9C6DE044B
+        845E7D49663F435ECAD10AF23F80EBF68D475F9D00F26D62B7B68B03A0FDE13F
+        A81FA57B315A0652684668AB457BD1400E8E3F6AB0883D285152A8AA480156A4
+        0A05274C5715F103C79A7786213A7C2AD7DAE5C29582CA06F9D491F798FF0008
+        1D7D4F6E3240F4111FC431A4184DC48E7EDF12050CA7E50B9CE1BF3381D79AF3
+        C8AF6D4F49D3F138FE7586351F11C3621B56BAB6712F2CB2447CB5FF00643807
+        27DFF9F5AA09ABC2F1CB3CFA6C0208865E58AE30147A9CF3EDD39351EEB25AB9
+        DC472AB7DD756FA35585718E63C8F7E6B84B3BFD36EE31288B50B45203069914
+        820F43C7AF5FA568472C61375BEB71803AF98C531FCC52E55DC8E53ACDB6CDCB
+        C2B8FF007714F482C5BA654FAABE3FAD7376D73AAB0CDADD43738C7DC915BDEA
+        6FED4D522389ECF70FFAE6DFFD7A391872B3A45B541CC77D3AFA0DC0D0D6B747
+        EEDF2B8F4923CD738BAFC40E25B32A7FD86C7F855A4D72C5872F3C7FAFF8D169
+        05A45CBF82F22B496411DA388D4B8C71CAF20E31D8806BC0745DF0DA5F6B7704
+        99E76291B1EA493927F3FE46BDA35CD6D23D26E5ED26171232EC119E09DC704E
+        71D8126BCA8D8FDBF55D2FC3968DB54B2C6580CE33D49F5C2F26857EA5C2FD4F
+        5AF84DA6369BE168EE98959AF9CCE71C109D147E593FF02AEDDA491882647240
+        E32C4D450431DBC11410A858A34088A3F8540C01F90A7D51648B7370BF767907
+        FC0CD15151401E82B4FC81924F0064D42F22C51B48E70AA326BE78F897E36F14
+        788565D3F4BD3EEAD345CE18458796E07ABECCED5E3EEFE79ED4DD84767E36F8
+        9734D24BA378264826B90764BA8B30F2E1CFF73FBE7DF91E99AE0740B48B4FBD
+        69AFE3B8B99A76267BA6CC923F7CB75E33DB3F527AD713A55F9D31312C120776
+        24E4ED2BF9FD3F5AEA2DBC4968D6B25CDD432410C63E76C6416ECABEAC7B0FC4
+        E2B3BA93B5C6E2CEBAE7C4365A5DA5CDC1D50CD12007618F62A0E70071D71F9F
+        A75AE42CB4FBCF125EB5F6A16ED6F651B1992DCC6060F5DEE31CB63A2E3001EF
+        D1E8E97AC3EB3792DD5DC68D6B1B010C2EA1847DF3C8E5BDFDBB0E2BAEB4BF54
+        F9ADE74EBBB8380693869A136B10C36A924725CC526D80316DD34243B1CE7249
+        CE7B81E95C9EA936FB858208FED37329658448C70DCE4B37655033923B0C0E49
+        2BD2F89AF51EC967BEBB740CE23444209959B1F281EA3AE79C7520FDD35F41D2
+        6DED657BDBB78EE279C8CB05211101CAC6A09276F009C9393D738CD251696A04
+        5A6685636F1A34EF38BA73B9A77423CD63D58FA0EC076181D724BAFAFEF2C5A4
+        106A4CF1C67E77DDF2A2E092C463B00735D38366D7AD786F2F0315C085DF310E
+        3B28FC7F135C2EBD757975A8086388EEF315625742034980C01E3EEA0FDE376F
+        BA38C914A37B8135A6BBAFCF24996867588E1D278178638C47F2E3E655C16E78
+        670BDB35AB36A4C9B85F787305402ED03608CF41819E7DAA7D174586D7496924
+        B492E640BFBA50C448FF003677E49CE5892C7B525ED9466C5E567BE827619109
+        94673E9F8F14FDA6BA019A753D0EF235096F7B11903946E0A9DA013C9E7A903A
+        77A8FE0EE9ED7DADDFEBD38FF50BB13233F3BF53F82E47FC085731E7A2EA4218
+        D879715B4F82A78216293E6FC58B1CF7056BD9BE1EE93FD8FE13B28197134E3E
+        D12F183B9F9C1F70BB47E1577B8D23A5A0D1494C65FD374E37A1D8C8634538C8
+        1924D15D0E9D6FF67B28A223E6C6E6FA9EB45005E18C608C8EF5F3CDDDBFD96F
+        2E2D4FFCB195A3FC891FD2BE861E95E37E2FD16FE0F105F4B15A4B2433486546
+        41BB3BB93D39EB9A64B39B2A1E3F2E45574FEEB80CBF91AA77FA2E99A8451C77
+        1689FBBCEC31931EDCF5C052073F4F4ABB964628E8558750C30454AACA7A1153
+        626E64DAF876CED6D8C1692CE993925F0F9F6E00A22D0DC3AAB5DA36E6278043
+        0F4C0E9D00EFD7EB5B898FA8A56B75933B98807D3F4A2C83999E737BA6F88AEB
+        C416D25E693711D9C19F252322558D40C8CB2E4649C64F7FA00074B67AAC1040
+        B1CFBF21B6F0BD0F4E4576518E9568C514E009E34971D37A838FCE80E6387835
+        779350103C6A91104990B7DC006493EC0026B3B45D686A5A9DE5E8252CD98C10
+        2B750AA3209F72493F8E3A0AEFEF7C35A3DFC1730CB6CD18B850B21858A9619C
+        E3F302B1A0F8796766A12C7509C229276CCA1F24FB8C7F2A63E642417A4FFC7B
+        DC9E3FBAD8AADADDC4F2E9D70EF361D63622538F90ED3F31F5C75FC2967F0B6B
+        1693092D0C120DC49DAF838C7A11EB8AE5BC65777F65A7FF0067DDA88E7B86E8
+        40C94539CF1EA71F91A56435A95FE1E68A7C41E2299D9445670C44C89F780538
+        411FFDF3919FF64D7D006B85F84BA40D3BC302F2440B3DFBF9A4F7D83841FCCF
+        FC0ABD06C23F3EF61888C82C09FA0EB4CA19F67B829E6082429FDE0A48A9F4BB
+        769EFA35643B54EE6FA0AEBB3494001FAE68A69E3A5140138AAD7D6105E85F37
+        7065E8CBD6AC814F1556039BBAF0D8954A878E553FC32A7FFAEB9FBCF07C7C93
+        63B7FDA85B38FC3A7E95E8C28A2C23C7E7F0C94388AE1D4FF7655FEA3FC2A9BE
+        91A8C3F751641EA873FA1AF699238E518923571E8C01AA3368F6329C88CC67D5
+        0E2958564790812C4712C4EA7FDA522AD4322D7A1CDE1F183E4DC0C63A48BD6B
+        22E3C393264FD911BDE23FD3AD2689E5302271C735386A925D2C44483E646DE8
+        E2A06B5B84FBACADF8D227958AED5E4DF10AC65D5FC6FA3E990FDF9E14427FBA
+        0BB64FE0013F857A84A678FEFC6C3DF1C561E91A6FDAFC6F75ACC88192D6D120
+        8D88E92316248FA29FFC7A82A1B9D8C11456D6F15BC281228942228ECA0600FC
+        AB6FC3B16EB89263D11703EA7FFD46B1ABA7D0A2F2EC43E399189FC3A5334353
+        8A69345266800A29A4D1401705380A28AB10EC52E28A281094868A2801B4D345
+        149948632AB8C3A861E87915467D32C6539308527BA1DBFF00D6A28A90284BA0
+        A1FF00513B2FB3AE7F962B365D1EEA00CEB1C6CB9C96538FE745140144AB6EDB
+        D1B35DA43188A18E31D11428FC28A2801D9A4268A280128A28A00FFFD9}
+      Proportional = True
+      Transparent = True
+    end
+    object DBEdit16: TDBEdit
+      Left = 14
+      Top = 130
+      Width = 294
+      Height = 21
+      TabStop = False
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 16771302
+      DataField = 'nVendedor'
+      DataSource = DS_Comprobante
+      ReadOnly = True
+      TabOrder = 5
+    end
+    object DBEdit18: TDBEdit
+      Left = 14
+      Top = 50
+      Width = 294
+      Height = 21
+      TabStop = False
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 16771302
+      DataField = 'NOMBRE'
+      DataSource = DS_Sucursal
+      ReadOnly = True
+      TabOrder = 3
+    end
+    object DBEdit19: TDBEdit
+      Left = 14
+      Top = 90
+      Width = 294
+      Height = 21
+      TabStop = False
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 16771302
+      DataField = 'pers_nombre'
+      DataSource = DS_Comprobante
+      ReadOnly = True
+      TabOrder = 4
+    end
+    object BitBtn1: TBitBtn
+      Left = 394
+      Top = 259
+      Width = 75
+      Height = 22
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 2
+      TabStop = False
+      OnClick = BitBtn1Click
+    end
+    object btnEfectivo: TBitBtn
+      Left = 108
+      Top = 200
+      Width = 97
+      Height = 65
+      Caption = 'Efectivo'
+      TabOrder = 0
+      OnClick = btnEfectivoClick
+      Layout = blGlyphTop
+    end
+    object btnEfectivoF: TBitBtn
+      Left = 260
+      Top = 200
+      Width = 97
+      Height = 65
+      Caption = 'Efectivo F'
+      TabOrder = 1
+      OnClick = btnEfectivoFClick
+      Layout = blGlyphTop
+    end
+  end
   object PConfirmarVenta: TPanel
     Left = 296
     Top = 0
@@ -2949,17 +3557,17 @@ object FCajero: TFCajero
     end
   end
   object PanelContenedorDerecha: TPanel
-    Left = 88
+    Left = 100
     Top = 0
-    Width = 936
-    Height = 621
+    Width = 924
+    Height = 678
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 2
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 934
+      Width = 922
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -2983,7 +3591,7 @@ object FCajero: TFCajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 594
+        Left = 582
         Top = 1
         Width = 339
         Height = 28
@@ -3004,7 +3612,7 @@ object FCajero: TFCajero
       object PanelCambiarFecha: TPanel
         Left = 345
         Top = 1
-        Width = 249
+        Width = 237
         Height = 28
         Align = alClient
         BevelOuter = bvNone
@@ -3035,7 +3643,7 @@ object FCajero: TFCajero
       Tag = 99
       Left = 1
       Top = 146
-      Width = 934
+      Width = 922
       Height = 41
       Align = alTop
       Color = 12648448
@@ -3146,7 +3754,7 @@ object FCajero: TFCajero
         Tag = 99
         Left = 1
         Top = 16
-        Width = 932
+        Width = 920
         Height = 24
         Align = alBottom
         BevelOuter = bvNone
@@ -3353,15 +3961,15 @@ object FCajero: TFCajero
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 187
-      Width = 934
-      Height = 433
+      Width = 922
+      Height = 490
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 2
       object Label11: TLabel
         Left = 1
         Top = 1
-        Width = 932
+        Width = 920
         Height = 14
         Align = alTop
         Alignment = taCenter
@@ -3380,8 +3988,8 @@ object FCajero: TFCajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 15
-        Width = 932
-        Height = 257
+        Width = 920
+        Height = 314
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3395,8 +4003,8 @@ object FCajero: TFCajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 930
-          Height = 201
+          Width = 918
+          Height = 258
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -3470,8 +4078,8 @@ object FCajero: TFCajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 202
-          Width = 930
+          Top = 259
+          Width = 918
           Height = 54
           Align = alBottom
           BevelOuter = bvLowered
@@ -3479,7 +4087,7 @@ object FCajero: TFCajero
           object Label36: TLabel
             Left = 1
             Top = 37
-            Width = 928
+            Width = 916
             Height = 16
             Align = alBottom
             Alignment = taCenter
@@ -3498,7 +4106,7 @@ object FCajero: TFCajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 1
-            Width = 928
+            Width = 916
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3514,7 +4122,7 @@ object FCajero: TFCajero
           object lblMontoProds: TLabel
             Left = 1
             Top = 16
-            Width = 928
+            Width = 916
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3540,8 +4148,8 @@ object FCajero: TFCajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 272
-        Width = 932
+        Top = 329
+        Width = 920
         Height = 89
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -3549,7 +4157,7 @@ object FCajero: TFCajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 930
+          Width = 918
           Height = 87
           Align = alClient
           Color = 16762303
@@ -3638,8 +4246,8 @@ object FCajero: TFCajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 361
-        Width = 932
+        Top = 418
+        Width = 920
         Height = 71
         Align = alBottom
         BevelOuter = bvLowered
@@ -3647,7 +4255,7 @@ object FCajero: TFCajero
         object lblTotAPagar: TLabel
           Left = 1
           Top = 37
-          Width = 930
+          Width = 918
           Height = 33
           Align = alBottom
           Alignment = taRightJustify
@@ -3667,7 +4275,7 @@ object FCajero: TFCajero
         object lblMaxVenta: TLabel
           Left = 1
           Top = 1
-          Width = 930
+          Width = 918
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -3696,14 +4304,14 @@ object FCajero: TFCajero
     object PanelDeralles: TPanel
       Left = 1
       Top = 31
-      Width = 934
+      Width = 922
       Height = 115
       Align = alTop
       TabOrder = 3
       object PanelCabeceraFactura: TPanel
         Left = 526
         Top = 1
-        Width = 407
+        Width = 395
         Height = 113
         Align = alClient
         BevelOuter = bvLowered
@@ -3717,7 +4325,7 @@ object FCajero: TFCajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 405
+          Width = 393
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -4140,614 +4748,6 @@ object FCajero: TFCajero
           TabOrder = 6
         end
       end
-    end
-  end
-  object PABM_FormaPago: TPanel
-    Left = 93
-    Top = 433
-    Width = 905
-    Height = 116
-    BevelInner = bvLowered
-    BevelOuter = bvSpace
-    BevelWidth = 2
-    BorderStyle = bsSingle
-    TabOrder = 3
-    object Label18: TLabel
-      Left = 4
-      Top = 4
-      Width = 893
-      Height = 16
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Forma de Pago'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Layout = tlCenter
-    end
-    object Label47: TLabel
-      Left = 482
-      Top = 24
-      Width = 308
-      Height = 13
-      Caption = 'Medio de Pago (Presione F1 para Buscar Forma Pago)'
-      FocusControl = edDetalleMDPCbox
-    end
-    object Label48: TLabel
-      Left = 323
-      Top = 62
-      Width = 62
-      Height = 13
-      Caption = 'MDP Fecha'
-      FocusControl = edMDPFecha
-    end
-    object Label49: TLabel
-      Left = 435
-      Top = 62
-      Width = 64
-      Height = 13
-      Caption = 'MDP Banco'
-      FocusControl = edMDPBanco
-    end
-    object Label50: TLabel
-      Left = 634
-      Top = 62
-      Width = 74
-      Height = 13
-      Caption = 'MDP N'#250'mero'
-      FocusControl = edMDPNro
-    end
-    object Label51: TLabel
-      Left = 16
-      Top = 62
-      Width = 46
-      Height = 13
-      Caption = 'Importe'
-      FocusControl = edImporte
-    end
-    object Label53: TLabel
-      Left = 16
-      Top = 24
-      Width = 40
-      Height = 13
-      Caption = 'C'#243'digo'
-      FocusControl = edCodCuenta
-    end
-    object Label55: TLabel
-      Left = 68
-      Top = 24
-      Width = 283
-      Height = 13
-      Caption = 'Cuenta Detalle (Presione F1 para Buscar Cuenta)'
-      FocusControl = edCuenta
-    end
-    object Label58: TLabel
-      Left = 152
-      Top = 62
-      Width = 101
-      Height = 13
-      Caption = 'Importe de Venta'
-      FocusControl = edImporteVenta
-    end
-    object Label61: TLabel
-      Left = 435
-      Top = 24
-      Width = 40
-      Height = 13
-      Caption = 'C'#243'digo'
-      FocusControl = edCodMDP
-    end
-    object edDetalleMDPCbox: TDBLookupComboBox
-      Left = 482
-      Top = 40
-      Width = 329
-      Height = 21
-      Color = 16771302
-      DataField = 'medioPago'
-      DataSource = DSFpago
-      DropDownRows = 0
-      Enabled = False
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 4
-      Visible = False
-      OnExit = edCodCuentaExit
-      OnKeyUp = buscarFormaPago
-    end
-    object edMDPFecha: TDBEdit
-      Left = 323
-      Top = 76
-      Width = 94
-      Height = 21
-      Color = 16771302
-      DataField = 'MDCP_FECHA'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 7
-    end
-    object edMDPBanco: TDBEdit
-      Left = 435
-      Top = 76
-      Width = 164
-      Height = 21
-      Color = 16771302
-      DataField = 'MDCP_BANCO'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 8
-    end
-    object edMDPNro: TDBEdit
-      Left = 634
-      Top = 76
-      Width = 177
-      Height = 21
-      Color = 16771302
-      DataField = 'MDCP_CHEQUE'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 9
-    end
-    object edImporte: TDBEdit
-      Left = 16
-      Top = 76
-      Width = 134
-      Height = 21
-      Color = 16771302
-      DataField = 'IMPORTE'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 5
-      OnExit = edCodCuentaExit
-    end
-    object edCodCuenta: TDBEdit
-      Left = 16
-      Top = 40
-      Width = 41
-      Height = 21
-      Color = 16771302
-      DataField = 'CUENTA_INGRESO'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnExit = edCodCuentaExit
-      OnKeyUp = buscarCuenta
-    end
-    object edCuenta: TDBLookupComboBox
-      Left = 67
-      Top = 40
-      Width = 350
-      Height = 21
-      Color = 16771302
-      DataField = '_ctaIngreso'
-      DataSource = DSFpago
-      DropDownRows = 0
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnExit = edCodCuentaExit
-      OnKeyUp = buscarCuenta
-    end
-    object edImporteVenta: TDBEdit
-      Left = 152
-      Top = 76
-      Width = 134
-      Height = 21
-      Color = 16771302
-      DataField = '_importeVenta'
-      DataSource = DSFpago
-      Enabled = False
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 6
-    end
-    object edCodMDP: TDBEdit
-      Left = 435
-      Top = 40
-      Width = 41
-      Height = 21
-      Color = 16771302
-      DataField = 'ID_TIPO_FORMAPAG'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 2
-      OnExit = edCodCuentaExit
-      OnKeyUp = buscarFormaPago
-    end
-    object btFPAceptar: TBitBtn
-      Left = 815
-      Top = 40
-      Width = 79
-      Height = 25
-      Caption = 'Aceptar'
-      TabOrder = 10
-      OnClick = btFPAceptarClick
-    end
-    object btFPCancelar: TBitBtn
-      Left = 815
-      Top = 72
-      Width = 79
-      Height = 25
-      Cancel = True
-      Caption = 'Cancelar'
-      TabOrder = 11
-      OnClick = btFPCancelarClick
-    end
-    object edDetalleMDP: TDBEdit
-      Left = 482
-      Top = 40
-      Width = 329
-      Height = 21
-      Color = 16771302
-      DataField = 'medioPago'
-      DataSource = DSFpago
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 3
-      OnExit = edCodCuentaExit
-      OnKeyUp = buscarFormaPago
-    end
-  end
-  object PVentaDirecta: TPanel
-    Left = 280
-    Top = 112
-    Width = 481
-    Height = 295
-    BevelInner = bvLowered
-    BevelWidth = 2
-    BorderWidth = 2
-    BorderStyle = bsSingle
-    TabOrder = 8
-    Visible = False
-    object Label15: TLabel
-      Left = 5
-      Top = 166
-      Width = 467
-      Height = 17
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Seleccione su Forma de Pago'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Transparent = False
-      Layout = tlCenter
-    end
-    object Label43: TLabel
-      Left = 14
-      Top = 37
-      Width = 56
-      Height = 13
-      Caption = 'Sucursal'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label46: TLabel
-      Left = 14
-      Top = 117
-      Width = 62
-      Height = 13
-      Caption = 'Vendedor'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label52: TLabel
-      Left = 14
-      Top = 77
-      Width = 45
-      Height = 13
-      Caption = 'Cliente'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label57: TLabel
-      Left = 6
-      Top = 6
-      Width = 465
-      Height = 24
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Venta / Facturaci'#243'n '#193'gil'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Transparent = False
-      Layout = tlCenter
-    end
-    object Image3: TImage
-      Left = 304
-      Top = 38
-      Width = 169
-      Height = 115
-      Center = True
-      Picture.Data = {
-        0A544A504547496D6167652E110000FFD8FFE000104A46494600010101006000
-        600000FFDB00430007050606060507060606080807090B120C0B0A0A0B171011
-        0D121B171C1C1A171A191D212A241D1F2820191A253225282C2D2F302F1D2334
-        38342E372A2E2F2EFFDB0043010808080B0A0B160C0C162E1E1A1E2E2E2E2E2E
-        2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E
-        2E2E2E2E2E2E2E2E2E2E2E2E2EFFC00011080087008703012200021101031101
-        FFC4001F0000010501010101010100000000000000000102030405060708090A
-        0BFFC400B5100002010303020403050504040000017D01020300041105122131
-        410613516107227114328191A1082342B1C11552D1F02433627282090A161718
-        191A25262728292A3435363738393A434445464748494A535455565758595A63
-        6465666768696A737475767778797A838485868788898A92939495969798999A
-        A2A3A4A5A6A7A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6
-        D7D8D9DAE1E2E3E4E5E6E7E8E9EAF1F2F3F4F5F6F7F8F9FAFFC4001F01000301
-        01010101010101010000000000000102030405060708090A0BFFC400B5110002
-        0102040403040705040400010277000102031104052131061241510761711322
-        328108144291A1B1C109233352F0156272D10A162434E125F11718191A262728
-        292A35363738393A434445464748494A535455565758595A636465666768696A
-        737475767778797A82838485868788898A92939495969798999AA2A3A4A5A6A7
-        A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6D7D8D9DAE2E3
-        E4E5E6E7E8E9EAF2F3F4F5F6F7F8F9FAFFDA000C03010002110311003F006F9C
-        693CD355B751BA802D79A690CB5577E28DD40167CD3479B55B751BA802CF9B47
-        9B55B70A370A00B3E6D1E6D5BD3E2B592CCBCB12B49BCAE59CA8E82975082D12
-        D049026D7DC01C31618E73FD295C9E657B14FCDAABA86AD63A642B3EA174B6F1
-        336C0CC8CD96C138C2827A034BBAB8EF1DFDB666B4861D2A7BCB74577731C6C4
-        063803903A800FE74CA3A15F1778698E06B96F9F78661FCD2AE5B6B7A35D3AA5
-        B6B56123B1C2A9982963D800D8C9AF13BEF29563CE9AF6B203F36E66C37E06AD
-        ADE68F0C91CF6B6F709346C24525B21581C8EF4EC4F33EC7B3D95FC17D6B1DDD
-        AC9BE093251B0467071D0F3DAACF9A6B95F05C8BFD8490F7B796588FD4393FD6
-        B7F77BD228B7E69A2AAEEA28022DD46EA6E6933400ECD19A6D04D003B346699C
-        D1CD003F35A3A369D26A5742304AC49CC8F8E83D3EA6B3327D335EA71E952786
-        FC30D3C90EFBB0A0F979DBBE6721553FEFA2AB9FC69C55C4DD8A56BA05A41666
-        105D959B7EF62A4838031C8F6AADA868292406159DA205B3FEA876FA1AB90E91
-        A9DA411C21A6948505DFCC1F339E59BAF7624FE3504B06A91C90C505987567E4
-        CB193B33819E08C7FF005A8B6A65D4C293C34C8AC7EDE98032498F181F9D79AC
-        3E2E4BBBC9ADB4FD2AFAEFCB270F026E2CA0E3763B0E9F9D7A87C4790E8BE11B
-        E926B976FB48FB2C6182E3E71C81803F8431AE3FE13E936CDA5EA1A905CBCB28
-        894A9E76A8C9FF00D0BF4AC3175950A6E654A7CAAE667FC254F0D9DEC33687AE
-        4724D09443F66FBA4F7EA3159CDE30D0F7795776972187044F6EA48FA8C9AF5E
-        96CD1400256E7A9C741F9D7CD7AC49FDA7AC5D5C2BE5AE6725493D013C7E4315
-        CD82C63C4B6AD6B134E7CCDE87AE5B080421EDE248E393F798540B927924E3B9
-        A97355F49124FA5594C4732408DF9A83FD6AD881FF00BB5DE6C373453FC893FB
-        B450057A2B521D3989FBB5762D289FE1FD280300231E80D3D6094F6AEA61D23F
-        D9FD2AFC5A40FEE7E94C0E356D243D8FE5532E9D21EC7F2AEE22D1C607CB56D3
-        4A55192303DE8B08E67C27A446DAED9CB720F930BF9ADEFB791FAE2BD7279EC6
-        E420B88E39046FBD370076B608C8F7E4D70978F0584F1409228B893F80025B9E
-        80E3A7D29D3DD496E40926439E983DBF2AA4AC66CED246B26E8807D0E2A06FB2
-        2B6E41C8EF9AE44EA257869E31E9FBC5FF001A78BD98F67FCB3429A7B059A33F
-        E21784ADBC706DED27D4EE6D22B225C7940157761FC40F7000C7FBC6B8C87E12
-        DFD847E569BE3BBFB68F3908B0103F4907F2AEEEDEFA4DB23B02A5A427078E9F
-        2E7F202A43784FF154C9296E82E79BDCF80BC75123A5AF8E16646054F9EAEB90
-        7FEFAAF39F12780B58F0B590BFD4AEACA5859CC48B6F2397676538C02A3BD7D1
-        66EB3DEBCEFE2262F75BD15256C5B5924B77267A67E5099FC431FC0D4C6118FC
-        2AC38B22F08C8F35FDBE841F78B4D351A6CA8F95C1550011DB1BBAFB5767FD97
-        FECD715F0255B56D67C4FAB48BC7EE117D9497C0FC9457B31B31FDD15459C69D
-        37DA8AEBCD90FEED14C0C9834D1E957E1D3871C56D456A3D2ADC76FED4019115
-        80E38AB71D88F4AD54807153A454580C87822863324870A38FAD73DADEAEB678
-        8E250D78E311C639D83D4FA9F415078BF56BDB5D6E5B3F263920545281890704
-        727208EF9FCAB0D352B7F33CD7D364F37A9759CB1CFF00C0B7534C8722DC318D
-        3D1AF6ED8C979293C8393CF61FA126A917799CCB2B82CF8279C8C7D3B0F4EF52
-        4977A7DCB079BED8AC38F991587FE3BB69CCFA6CBC2DF007D1E364FEAD5855F6
-        951D93B44D232825E6665F21CABB125470A873838EFDB3FE7DEA4D12FAD85EC9
-        66B1C92DC609790321541DC1F9B3D4E09C75A9A4D384E5DA2D42D55C8C232907
-        6FA1C1DBD3F9D4BA4698FA75BB47979DDC92F203B81F400066E2BAE9C28C29B4
-        8C6A55AB2A8ADB220F116AF7564B1C36AB29B898E309BBE51D074EE7F3AA62F7
-        588A726E210608537348FC873D7AEE3C648FC2B59A39D1DA69232E47CDB5814D
-        C7B0E78C0150C85DA48E0485DD73979010413927B1CF279FA122A2ECE99BA692
-        495DF7B91CBA9DEA34719D2966959F695C98CAF38F43CF5E335C7FC5EBFB4B0D
-        3EF608AD93ED332C76A252C49CE0BBE067180AC07AE5ABBD8156DA49EFEE63CA
-        5AC6C403D491D40CFAB0F7CE16BC1FC753CBACF8B61D28386FB3656565E479AC
-        4BCADF9F1F80A977EA65657D11EB1FB3A4305BE85796EE1CDE5E31B9C6DE044B
-        845E7D49663F435ECAD10AF23F80EBF68D475F9D00F26D62B7B68B03A0FDE13F
-        A81FA57B315A0652684668AB457BD1400E8E3F6AB0883D285152A8AA480156A4
-        0A05274C5715F103C79A7786213A7C2AD7DAE5C29582CA06F9D491F798FF0008
-        1D7D4F6E3240F4111FC431A4184DC48E7EDF12050CA7E50B9CE1BF3381D79AF3
-        C8AF6D4F49D3F138FE7586351F11C3621B56BAB6712F2CB2447CB5FF00643807
-        27DFF9F5AA09ABC2F1CB3CFA6C0208865E58AE30147A9CF3EDD39351EEB25AB9
-        DC472AB7DD756FA35585718E63C8F7E6B84B3BFD36EE31288B50B45203069914
-        820F43C7AF5FA568472C61375BEB71803AF98C531FCC52E55DC8E53ACDB6CDCB
-        C2B8FF007714F482C5BA654FAABE3FAD7376D73AAB0CDADD43738C7DC915BDEA
-        6FED4D522389ECF70FFAE6DFFD7A391872B3A45B541CC77D3AFA0DC0D0D6B747
-        EEDF2B8F4923CD738BAFC40E25B32A7FD86C7F855A4D72C5872F3C7FAFF8D169
-        05A45CBF82F22B496411DA388D4B8C71CAF20E31D8806BC0745DF0DA5F6B7704
-        99E76291B1EA493927F3FE46BDA35CD6D23D26E5ED26171232EC119E09DC704E
-        71D8126BCA8D8FDBF55D2FC3968DB54B2C6580CE33D49F5C2F26857EA5C2FD4F
-        5AF84DA6369BE168EE98959AF9CCE71C109D147E593FF02AEDDA491882647240
-        E32C4D450431DBC11410A858A34088A3F8540C01F90A7D51648B7370BF767907
-        FC0CD15151401E82B4FC81924F0064D42F22C51B48E70AA326BE78F897E36F14
-        788565D3F4BD3EEAD345CE18458796E07ABECCED5E3EEFE79ED4DD84767E36F8
-        9734D24BA378264826B90764BA8B30F2E1CFF73FBE7DF91E99AE0740B48B4FBD
-        69AFE3B8B99A76267BA6CC923F7CB75E33DB3F527AD713A55F9D31312C120776
-        24E4ED2BF9FD3F5AEA2DBC4968D6B25CDD432410C63E76C6416ECABEAC7B0FC4
-        E2B3BA93B5C6E2CEBAE7C4365A5DA5CDC1D50CD12007618F62A0E70071D71F9F
-        A75AE42CB4FBCF125EB5F6A16ED6F651B1992DCC6060F5DEE31CB63A2E3001EF
-        D1E8E97AC3EB3792DD5DC68D6B1B010C2EA1847DF3C8E5BDFDBB0E2BAEB4BF54
-        F9ADE74EBBB8380693869A136B10C36A924725CC526D80316DD34243B1CE7249
-        CE7B81E95C9EA936FB858208FED37329658448C70DCE4B37655033923B0C0E49
-        2BD2F89AF51EC967BEBB740CE23444209959B1F281EA3AE79C7520FDD35F41D2
-        6DED657BDBB78EE279C8CB05211101CAC6A09276F009C9393D738CD251696A04
-        5A6685636F1A34EF38BA73B9A77423CD63D58FA0EC076181D724BAFAFEF2C5A4
-        106A4CF1C67E77DDF2A2E092C463B00735D38366D7AD786F2F0315C085DF310E
-        3B28FC7F135C2EBD757975A8086388EEF315625742034980C01E3EEA0FDE376F
-        BA38C914A37B8135A6BBAFCF24996867588E1D278178638C47F2E3E655C16E78
-        670BDB35AB36A4C9B85F787305402ED03608CF41819E7DAA7D174586D7496924
-        B492E640BFBA50C448FF003677E49CE5892C7B525ED9466C5E567BE827619109
-        94673E9F8F14FDA6BA019A753D0EF235096F7B11903946E0A9DA013C9E7A903A
-        77A8FE0EE9ED7DADDFEBD38FF50BB13233F3BF53F82E47FC085731E7A2EA4218
-        D879715B4F82A78216293E6FC58B1CF7056BD9BE1EE93FD8FE13B28197134E3E
-        D12F183B9F9C1F70BB47E1577B8D23A5A0D1494C65FD374E37A1D8C8634538C8
-        1924D15D0E9D6FF67B28A223E6C6E6FA9EB45005E18C608C8EF5F3CDDDBFD96F
-        2E2D4FFCB195A3FC891FD2BE861E95E37E2FD16FE0F105F4B15A4B2433486546
-        41BB3BB93D39EB9A64B39B2A1E3F2E45574FEEB80CBF91AA77FA2E99A8451C77
-        1689FBBCEC31931EDCF5C052073F4F4ABB964628E8558750C30454AACA7A1153
-        626E64DAF876CED6D8C1692CE993925F0F9F6E00A22D0DC3AAB5DA36E6278043
-        0F4C0E9D00EFD7EB5B898FA8A56B75933B98807D3F4A2C83999E737BA6F88AEB
-        C416D25E693711D9C19F252322558D40C8CB2E4649C64F7FA00074B67AAC1040
-        B1CFBF21B6F0BD0F4E4576518E9568C514E009E34971D37A838FCE80E6387835
-        779350103C6A91104990B7DC006493EC0026B3B45D686A5A9DE5E8252CD98C10
-        2B750AA3209F72493F8E3A0AEFEF7C35A3DFC1730CB6CD18B850B21858A9619C
-        E3F302B1A0F8796766A12C7509C229276CCA1F24FB8C7F2A63E642417A4FFC7B
-        DC9E3FBAD8AADADDC4F2E9D70EF361D63622538F90ED3F31F5C75FC2967F0B6B
-        1693092D0C120DC49DAF838C7A11EB8AE5BC65777F65A7FF0067DDA88E7B86E8
-        40C94539CF1EA71F91A56435A95FE1E68A7C41E2299D9445670C44C89F780538
-        411FFDF3919FF64D7D006B85F84BA40D3BC302F2440B3DFBF9A4F7D83841FCCF
-        FC0ABD06C23F3EF61888C82C09FA0EB4CA19F67B829E6082429FDE0A48A9F4BB
-        769EFA35643B54EE6FA0AEBB3494001FAE68A69E3A5140138AAD7D6105E85F37
-        7065E8CBD6AC814F1556039BBAF0D8954A878E553FC32A7FFAEB9FBCF07C7C93
-        63B7FDA85B38FC3A7E95E8C28A2C23C7E7F0C94388AE1D4FF7655FEA3FC2A9BE
-        91A8C3F751641EA873FA1AF699238E518923571E8C01AA3368F6329C88CC67D5
-        0E2958564790812C4712C4EA7FDA522AD4322D7A1CDE1F183E4DC0C63A48BD6B
-        22E3C393264FD911BDE23FD3AD2689E5302271C735386A925D2C44483E646DE8
-        E2A06B5B84FBACADF8D227958AED5E4DF10AC65D5FC6FA3E990FDF9E14427FBA
-        0BB64FE0013F857A84A678FEFC6C3DF1C561E91A6FDAFC6F75ACC88192D6D120
-        8D88E92316248FA29FFC7A82A1B9D8C11456D6F15BC281228942228ECA0600FC
-        AB6FC3B16EB89263D11703EA7FFD46B1ABA7D0A2F2EC43E399189FC3A5334353
-        8A69345266800A29A4D1401705380A28AB10EC52E28A281094868A2801B4D345
-        149948632AB8C3A861E87915467D32C6539308527BA1DBFF00D6A28A90284BA0
-        A1FF00513B2FB3AE7F962B365D1EEA00CEB1C6CB9C96538FE745140144AB6EDB
-        D1B35DA43188A18E31D11428FC28A2801D9A4268A280128A28A00FFFD9}
-      Proportional = True
-      Transparent = True
-    end
-    object DBEdit16: TDBEdit
-      Left = 14
-      Top = 130
-      Width = 294
-      Height = 21
-      TabStop = False
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 16771302
-      DataField = 'nVendedor'
-      DataSource = DS_Comprobante
-      ReadOnly = True
-      TabOrder = 5
-    end
-    object DBEdit18: TDBEdit
-      Left = 14
-      Top = 50
-      Width = 294
-      Height = 21
-      TabStop = False
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 16771302
-      DataField = 'NOMBRE'
-      DataSource = DS_Sucursal
-      ReadOnly = True
-      TabOrder = 3
-    end
-    object DBEdit19: TDBEdit
-      Left = 14
-      Top = 90
-      Width = 294
-      Height = 21
-      TabStop = False
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 16771302
-      DataField = 'pers_nombre'
-      DataSource = DS_Comprobante
-      ReadOnly = True
-      TabOrder = 4
-    end
-    object BitBtn1: TBitBtn
-      Left = 394
-      Top = 259
-      Width = 75
-      Height = 22
-      Cancel = True
-      Caption = 'Cancelar'
-      TabOrder = 2
-      TabStop = False
-      OnClick = BitBtn1Click
-    end
-    object btnEfectivo: TBitBtn
-      Left = 108
-      Top = 200
-      Width = 97
-      Height = 65
-      Caption = 'Efectivo'
-      TabOrder = 0
-      OnClick = btnEfectivoClick
-      Layout = blGlyphTop
-    end
-    object btnEfectivoF: TBitBtn
-      Left = 260
-      Top = 200
-      Width = 97
-      Height = 65
-      Caption = 'Efectivo F'
-      TabOrder = 1
-      OnClick = btnEfectivoFClick
-      Layout = blGlyphTop
     end
   end
   object ZQ_Comprobante_FormaPago: TZQuery
@@ -5697,6 +5697,10 @@ object FCajero: TFCajero
           end
           item
             Item = BtCierreX
+            Visible = True
+          end
+          item
+            Item = dxUltimoId
             Visible = True
           end>
         Name = 'vertical'
@@ -7408,7 +7412,7 @@ object FCajero: TFCajero
     Left = 904
     Top = 352
     DockControlHeights = (
-      88
+      100
       0
       0
       52)
@@ -7620,6 +7624,151 @@ object FCajero: TFCajero
       ImageIndex = 84
       OnClick = BtCierreXClick
       AutoGrayScale = False
+    end
+    object dxBarStatic1: TdxBarStatic
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+    end
+    object dxUltimoId: TdxBarEdit
+      Align = iaRight
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+      Text = #218'ltimo Id: 122'
+      ReadOnly = True
+      Width = 100
+    end
+    object dxBarListItem1: TdxBarListItem
+      Caption = 'New Item'
+      Category = 0
+      Visible = ivAlways
+    end
+    object dxBarContainerItem1: TdxBarContainerItem
+      Caption = 'New Item'
+      Category = 0
+      Visible = ivAlways
+      ItemLinks = <>
+    end
+    object dxBarColorCombo1: TdxBarColorCombo
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+      Glyph.Data = {
+        36050000424D3605000000000000360400002800000010000000100000000100
+        0800000000000001000000000000000000000001000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000C0DCC000F0CA
+        A6000020400000206000002080000020A0000020C0000020E000004000000040
+        20000040400000406000004080000040A0000040C0000040E000006000000060
+        20000060400000606000006080000060A0000060C0000060E000008000000080
+        20000080400000806000008080000080A0000080C0000080E00000A0000000A0
+        200000A0400000A0600000A0800000A0A00000A0C00000A0E00000C0000000C0
+        200000C0400000C0600000C0800000C0A00000C0C00000C0E00000E0000000E0
+        200000E0400000E0600000E0800000E0A00000E0C00000E0E000400000004000
+        20004000400040006000400080004000A0004000C0004000E000402000004020
+        20004020400040206000402080004020A0004020C0004020E000404000004040
+        20004040400040406000404080004040A0004040C0004040E000406000004060
+        20004060400040606000406080004060A0004060C0004060E000408000004080
+        20004080400040806000408080004080A0004080C0004080E00040A0000040A0
+        200040A0400040A0600040A0800040A0A00040A0C00040A0E00040C0000040C0
+        200040C0400040C0600040C0800040C0A00040C0C00040C0E00040E0000040E0
+        200040E0400040E0600040E0800040E0A00040E0C00040E0E000800000008000
+        20008000400080006000800080008000A0008000C0008000E000802000008020
+        20008020400080206000802080008020A0008020C0008020E000804000008040
+        20008040400080406000804080008040A0008040C0008040E000806000008060
+        20008060400080606000806080008060A0008060C0008060E000808000008080
+        20008080400080806000808080008080A0008080C0008080E00080A0000080A0
+        200080A0400080A0600080A0800080A0A00080A0C00080A0E00080C0000080C0
+        200080C0400080C0600080C0800080C0A00080C0C00080C0E00080E0000080E0
+        200080E0400080E0600080E0800080E0A00080E0C00080E0E000C0000000C000
+        2000C0004000C0006000C0008000C000A000C000C000C000E000C0200000C020
+        2000C0204000C0206000C0208000C020A000C020C000C020E000C0400000C040
+        2000C0404000C0406000C0408000C040A000C040C000C040E000C0600000C060
+        2000C0604000C0606000C0608000C060A000C060C000C060E000C0800000C080
+        2000C0804000C0806000C0808000C080A000C080C000C080E000C0A00000C0A0
+        2000C0A04000C0A06000C0A08000C0A0A000C0A0C000C0A0E000C0C00000C0C0
+        2000C0C04000C0C06000C0C08000C0C0A000F0FBFF00A4A0A000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFF000101A6
+        000202B4000404E4FFFFFFFF000101A6000202B4000404E4FFFFFFFF000EF9A7
+        0030FABC00C0FCE4FFFFFFFF0000F9A70000FABC0000FCE4FFFFFFFF000001A7
+        000002BC000004E4FFFFFFFF000001A7000002BC000004E4FFFFFFFF000001A7
+        000002BC000004E4FFFFFFFF000001A7000002BC000004E4FFFFFFFF000001A7
+        000002BC000004E4FFFFFFFF0000F9A70000FABC0000FCE4FFFFFFFF000EF9A7
+        0030FABC00C0FCE4FFFFFFFF000101A6000202B4000404E4FFFFFFFF000101A6
+        000202B4000404E4FFFFFFFF5201F9075202FA075204FC07FFFFFFFF070056FF
+        070072FF0700D2FFFFFFFFFFFF5207FFFF5207FFFF5207FFFFFF}
+      Width = 100
+      Color = clBlack
+    end
+    object dxBarTreeViewCombo1: TdxBarTreeViewCombo
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        0400000000008000000000000000000000001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
+        FFFFFFFFFF000FFFFFFFF0000F0F0FFFFFFFF0FFFF000FFFFFFFF0FFFFFFFFFF
+        FFFFF0FFFFFFFFFF000FF0FFFFF0000F0F0FF0FFFFF0FFFF000FF0FFFFFFFFFF
+        FFFFF0FFFF000FFFFFFFF0000F0F0FFFFFFFF0FFFF000FFFFFFFFFFFFFFFFFFF
+        FFFF000FFFFFFFFFFFFF0F0FFFFFFFFFFFFF000FFFFFFFFFFFFF}
+      Width = 100
+      Indent = 19
+      ShowButtons = True
+      ShowLines = True
+      ShowRoot = True
+      SortType = stNone
+    end
+    object dxBarToolbarsListItem1: TdxBarToolbarsListItem
+      Caption = 'New Item'
+      Category = 0
+      Visible = ivAlways
+    end
+    object dxBarProgressItem1: TdxBarProgressItem
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+    end
+    object dxBarMRUListItem1: TdxBarMRUListItem
+      Caption = 'New Item'
+      Category = 0
+      Visible = ivAlways
+    end
+    object dxBarLookupCombo1: TdxBarLookupCombo
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        0400000000008000000000000000000000001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DDDDDDDDDDDD
+        DDDD000000000000000D0FFFF0FFFFFFFF0D0F77F0F777777F0D0CCCC0CCCCCC
+        CC0D0C77C0C777777C0D0CCCC0CCCCCCCC0D0F77F0F777777F0D0FFFF0FFFFFF
+        FF0D0F77F0F777777F0D0FFFF0FFFFFFFF0D000000000000000D0FFFCCCCFFF0
+        DDDD0F777777FFF0DDDD0FFFCCCCFFF0DDDD000000000000DDDD}
+      Width = 100
+      RowCount = 7
+    end
+    object dxBarButton1: TdxBarButton
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+    end
+    object CustomdxBarCombo1: TCustomdxBarCombo
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+      Width = 100
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Items = (
@@ -8700,7 +8849,7 @@ object FCajero: TFCajero
       'select *'
       'from comprobante_detalle')
     Params = <>
-    Left = 809
+    Left = 793
     Top = 249
     object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
@@ -8778,7 +8927,7 @@ object FCajero: TFCajero
         Name = 'comprob'
         ParamType = ptUnknown
       end>
-    Left = 897
+    Left = 905
     Top = 249
     ParamData = <
       item
@@ -9016,7 +9165,7 @@ object FCajero: TFCajero
   end
   object DS_VentaFinal: TDataSource
     DataSet = CD_VentaFinal
-    Left = 810
+    Left = 802
     Top = 292
   end
   object EKDbSuma3: TEKDbSuma
@@ -9115,6 +9264,35 @@ object FCajero: TFCajero
       end>
     object ZQ_SaldoNotaCreditoSALDO: TFloatField
       FieldName = 'SALDO'
+      ReadOnly = True
+    end
+  end
+  object ZQ_UltimoCPB: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select first 1 c.numero_cpb'
+      'from comprobante c'
+      'where'
+      
+        '(c.ID_TIPO_CPB=11)and(c.id_sucursal=:id_sucursal)and(c.numero_cp' +
+        'b is not null)'
+      'order by c.numero_cpb DESC')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 528
+    Top = 410
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    object ZQ_UltimoCPBNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
       ReadOnly = True
     end
   end
