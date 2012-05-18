@@ -227,6 +227,30 @@ type
     ZQ_ComprobanteDetalleIMPORTE_IVA_IF: TFloatField;
     ZQ_ComprobanteDetalleINSERT_MANUAL: TStringField;
     ZQ_ComprobanteDetalleNOMBRE_MARCA: TStringField;
+    TabVarios: TTabSheet;
+    Panel2: TPanel;
+    lblTotVarias: TLabel;
+    gridVarias: TDBGrid;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    Label5: TLabel;
+    EKBusquedaVarias: TEKBusquedaAvanzada;
+    ZQ_Consultas: TZQuery;
+    ZQ_ConsultasID_CONSULTA: TIntegerField;
+    ZQ_ConsultasDESCRIPCION: TStringField;
+    ZQ_ConsultasSQL: TStringField;
+    ZQ_EstadVarias: TZQuery;
+    ZQ_EstadVariasAGRUPAM: TIntegerField;
+    ZQ_EstadVariasDESCRIPCION: TStringField;
+    ZQ_EstadVariasSUMAVENTA: TFloatField;
+    ZQ_EstadVariasSUMAIF: TFloatField;
+    ZQ_EstadVariasCANTIDAD: TIntegerField;
+    DS_EstadVarias: TDataSource;
+    ZQ_ConsultasSQL_TABLA_FILTRO: TStringField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    EKDbSumaVarias: TEKDbSuma;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -248,6 +272,8 @@ type
     procedure PageControlChange(Sender: TObject);
     procedure EKDbSumaProdsVendidosSumListChanged(Sender: TObject);
     procedure EKDbSumaTotalesSumListChanged(Sender: TObject);
+    procedure EKDbSumaVariasSumListChanged(Sender: TObject);
+    procedure ZQ_EstadVariasAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -312,6 +338,12 @@ begin
     TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
   TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[1]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
   TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[2]).Valor:= DateToStr(dm.EKModelo.Fecha);
+
+  //busqueda varias
+  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
+    TEKCriterioBA(EKBusquedaVarias.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+  TEKCriterioBA(EKBusquedaVarias.CriteriosBusqueda.Items[2]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
+  TEKCriterioBA(EKBusquedaVarias.CriteriosBusqueda.Items[3]).Valor:= DateToStr(dm.EKModelo.Fecha);
 
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
 
@@ -500,7 +532,7 @@ begin
 
         ZQ_ProductosVendidos.ParamByName('f1').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[1]);
         ZQ_ProductosVendidos.ParamByName('f2').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[2]);
-        ZQ_ProductosVendidos.SQL.SaveToFile('TEXT.TXT');
+        //ZQ_ProductosVendidos.SQL.SaveToFile('TEXT.TXT');
         ZQ_ProductosVendidos.Open;
 
 
@@ -558,6 +590,55 @@ begin
         DBChartHorario.Title.Text[0]:= lblHorarioFecha.Caption+' / '+lblHorarioSucursal.Caption+' / '+lblHorarioIntervalo.Caption;
     end;
   end;
+
+  //Estadísticas Varias
+  if (PageControl.ActivePage = TabVarios) then
+  begin
+   dm.EKModelo.abrir(ZQ_Consultas);
+
+   if EKBusquedaVarias.BuscarSinEjecutar then
+    begin
+        if (EKBusquedaVarias.ParametrosSeleccionados1[2] = '') or (EKBusquedaVarias.ParametrosSeleccionados1[3] = '') then
+          begin
+            Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
+            btnBuscar.Click;
+            exit;
+          end;
+
+        if (EKBusquedaVarias.ParametrosSeleccionados1[1] = '')  then
+          begin
+            Application.MessageBox('No se ha seleccionado el Tipo de Estadística', 'Verifique', MB_OK + MB_ICONINFORMATION);
+            btnBuscar.Click;
+            exit;
+          end;
+
+        ZQ_EstadVarias.Close;
+        ZQ_Consultas.Locate('id_consulta',StrToInt(EKBusquedaVarias.ParametrosSeleccionados1[1]),[]);
+        ZQ_EstadVarias.SQL.Text:=ZQ_ConsultasSQL.Value;
+
+        if EKBusquedaVarias.ParametrosSeleccionados1[0] = '0' then
+          begin
+            ZQ_EstadVarias.ParamByName('id_sucursal').AsInteger:= -1;
+          end
+        else
+          begin
+            ZQ_EstadVarias.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBusquedaVarias.ParametrosSeleccionados1[0]);
+          end;
+
+        ZQ_EstadVarias.ParamByName('f1').AsDate:=StrToDate(EKBusquedaVarias.ParametrosSeleccionados1[2]);
+        ZQ_EstadVarias.ParamByName('f2').AsDate:=StrToDate(EKBusquedaVarias.ParametrosSeleccionados1[3]);
+
+        ZQ_EstadVarias.Filtered:=False;
+        if (EKBusquedaVarias.ParametrosSeleccionados1[4]<>'') then
+         begin
+          ZQ_EstadVarias.Filter:=Format('DESCRIPCION = %s',[QuotedStr(UpperCase(EKBusquedaVarias.ParametrosSeleccionados1[4]))]);
+          ZQ_EstadVarias.Filtered:=True;
+         end;
+        dm.EKModelo.abrir(ZQ_EstadVarias);
+
+    end;
+
+  end;
 end;
 
 
@@ -586,7 +667,7 @@ begin
   end;
 
     //HORARIO VENTA
-      if PageControl.ActivePage = TabHorarioVentas then
+  if PageControl.ActivePage = TabHorarioVentas then
   begin
 
   end;
@@ -614,6 +695,17 @@ begin
   begin
     if not ZQ_ProductosVendidos.IsEmpty then
       dm.ExportarEXCEL(grillaRanking);
+  end;
+
+  //Varias
+  if PageControl.ActivePage = TabVarios then
+  begin
+    if not ZQ_EstadVarias.IsEmpty then
+     begin
+      ZQ_EstadVariasSUMAVENTA.DisplayFormat:='';
+      dm.ExportarEXCEL(gridVarias);
+      ZQ_EstadVariasSUMAVENTA.DisplayFormat:='$ ##,###,##0.00';
+     end
   end;
 end;
 
@@ -682,6 +774,17 @@ end;
 procedure TFEstadisticaVentas.EKDbSumaTotalesSumListChanged(Sender: TObject);
 begin
   lblTotales.Caption:=FormatFloat('$ ##,###,##0.00 ', EKDbSumaTotales.SumCollection[0].SumValue);
+end;
+
+procedure TFEstadisticaVentas.EKDbSumaVariasSumListChanged(
+  Sender: TObject);
+begin
+ lblTotVarias.Caption:=FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue);
+end;
+
+procedure TFEstadisticaVentas.ZQ_EstadVariasAfterScroll(DataSet: TDataSet);
+begin
+ lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue);
 end;
 
 end.
