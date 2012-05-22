@@ -106,6 +106,7 @@ begin
  if ZQ_Comprobante.IsEmpty then
   begin
     Application.ProcessMessages;
+    ZQ_Comprobante.Close;
     ZQ_Comprobante.Open;
   end;
 end;

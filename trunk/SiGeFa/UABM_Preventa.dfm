@@ -1,6 +1,6 @@
 object FABM_Preventa: TFABM_Preventa
-  Left = 241
-  Top = 86
+  Left = 379
+  Top = 177
   Width = 1027
   Height = 664
   Caption = 'Venta de Mostrador'
@@ -3218,15 +3218,15 @@ object FABM_Preventa: TFABM_Preventa
     end
   end
   object PConfirmarVenta: TPanel
-    Left = 257
-    Top = 172
+    Left = 265
+    Top = 132
     Width = 513
     Height = 329
     BevelInner = bvLowered
     BevelWidth = 2
     BorderWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 5
+    TabOrder = 4
     object Bevel1: TBevel
       Left = 8
       Top = 32

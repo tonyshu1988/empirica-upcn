@@ -574,6 +574,21 @@ type
     CustomdxBarCombo1: TCustomdxBarCombo;
     ZQ_UltimoCPB: TZQuery;
     ZQ_UltimoCPBNUMERO_CPB: TIntegerField;
+    ZQ_PreventaFP: TZQuery;
+    ZQ_PreventaFPID_COMPROB_FP: TIntegerField;
+    ZQ_PreventaFPID_COMPROBANTE: TIntegerField;
+    ZQ_PreventaFPID_TIPO_FORMAPAG: TIntegerField;
+    ZQ_PreventaFPMDCP_FECHA: TDateField;
+    ZQ_PreventaFPMDCP_BANCO: TStringField;
+    ZQ_PreventaFPMDCP_CHEQUE: TStringField;
+    ZQ_PreventaFPIMPORTE: TFloatField;
+    ZQ_PreventaFPCONCILIADO: TDateField;
+    ZQ_PreventaFPCUENTA_INGRESO: TIntegerField;
+    ZQ_PreventaFPCUENTA_EGRESO: TIntegerField;
+    ZQ_PreventaFPFECHA_FP: TDateTimeField;
+    ZQ_PreventaFPIMPORTE_REAL: TFloatField;
+    ZQ_PreventaFPID_RECIBO_OP: TIntegerField;
+    ZQ_PreventaFPINSERT_MANUAL: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -1215,11 +1230,11 @@ begin
   //  if PConfirmarVenta.Visible then
   //    exit;
 
-  if modoCargaPrevia then
-  begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-    exit;
-  end;
+//  if modoCargaPrevia then
+//  begin
+//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+//    exit;
+//  end;
 
   if (CD_DetalleFactura.State <> dsBrowse) then
     exit;
@@ -1407,11 +1422,11 @@ end;
 
 procedure TFCajero.EditarProdClick(Sender: TObject);
 begin
-  if modoCargaPrevia then
-  begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-    exit;
-  end;
+//  if modoCargaPrevia then
+//  begin
+//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+//    exit;
+//  end;
 
   if not (CD_DetalleFactura.IsEmpty) then
   begin
@@ -1429,11 +1444,11 @@ end;
 
 procedure TFCajero.BtBuscarProductoClick(Sender: TObject);
 begin
-  if modoCargaPrevia then
-  begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-    exit;
-  end;
+//  if modoCargaPrevia then
+//  begin
+//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+//    exit;
+//  end;
 
   if (CD_DetalleFactura.State <> dsBrowse) then
     exit;
@@ -1481,11 +1496,11 @@ end;
 
 procedure TFCajero.btIVAClick(Sender: TObject);
 begin
-  if modoCargaPrevia then
-  begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-    exit;
-  end;
+//  if modoCargaPrevia then
+//  begin
+//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+//    exit;
+//  end;
 
   if (CD_DetalleFactura.State = dsBrowse) then
     if (CD_Comprobante.State = dsInsert) then
@@ -1643,6 +1658,7 @@ begin
         ZQ_ComprobPreventa.Edit;
         ZQ_ComprobPreventaFECHA_COBRADA.AsDateTime:= dm.EKModelo.FechayHora();
         ZQ_ComprobPreventaID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
+        ZQ_ComprobPreventa.Post;
       end;
 
       grabarDetallesFactura();
@@ -1863,7 +1879,7 @@ procedure TFCajero.btPreventaClick(Sender: TObject);
 begin
   if modoCargaPrevia then
   begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+    Application.MessageBox('Ya existe cargada una preventa.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
     exit;
   end;
 
@@ -1878,6 +1894,7 @@ begin
     vsel4:= TFPreventa.Create(nil);
   vsel4.OnSeleccionar:= OnSelPreventa;
   vsel4.ShowModal;
+  vsel4:=nil;
 end;
 
 
@@ -1903,11 +1920,11 @@ end;
 
 procedure TFCajero.btQuitarProductoClick(Sender: TObject);
 begin
-  if modoCargaPrevia then
-  begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-    exit;
-  end;
+//  if modoCargaPrevia then
+//  begin
+//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+//    exit;
+//  end;
 
   if not (CD_DetalleFactura.IsEmpty) then
   begin
@@ -2179,11 +2196,11 @@ end;
 
 procedure TFCajero.btBuscProdClick(Sender: TObject);
 begin
-  if modoCargaPrevia then
-  begin
-    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-    exit;
-  end;
+//  if modoCargaPrevia then
+//  begin
+//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+//    exit;
+//  end;
 
   if (CD_DetalleFactura.State <> dsBrowse) then exit;
   if cliente < 0 then
@@ -2273,7 +2290,7 @@ begin
     Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
     IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
     descCliente:= vsel4.ZQ_ComprobantePORC_DESCUENTO.AsFloat * 100;
-    ;
+
     CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
     CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
     CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente;
@@ -2286,6 +2303,29 @@ begin
     ZQ_ComprobPreventa.Close;
     ZQ_ComprobPreventa.ParamByName('id').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     ZQ_ComprobPreventa.Open;
+
+    //cargo las señas de la preventa como formas de pago!
+    ZQ_PreventaFP.Close;
+    ZQ_PreventaFP.ParamByName('comprob').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_PreventaFP.Open;
+
+    if ZQ_PreventaFP.RecordCount>0 then
+    begin
+      ZQ_PreventaFP.First;
+      while not(ZQ_PreventaFP.Eof) do
+       begin
+         CD_Fpago.Append;
+         CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_PreventaFPID_TIPO_FORMAPAG.AsInteger;
+         CD_FpagoMDCP_FECHA.AsDateTime:=ZQ_PreventaFPMDCP_FECHA.AsDateTime;
+         CD_FpagoMDCP_BANCO.AsString:=ZQ_PreventaFPMDCP_BANCO.AsString;
+         CD_FpagoMDCP_CHEQUE.AsString:=ZQ_PreventaFPMDCP_CHEQUE.AsString;
+         CD_FpagoIMPORTE.AsFloat:=ZQ_PreventaFPIMPORTE.AsFloat;
+         CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_PreventaFPCUENTA_INGRESO.AsInteger;
+         calcularFP();
+         CD_Fpago.Post;
+         ZQ_PreventaFP.Next;
+       end;
+    end;
 
     lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
     lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);

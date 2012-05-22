@@ -1,6 +1,6 @@
 object FPreventa: TFPreventa
-  Left = 433
-  Top = 243
+  Left = 478
+  Top = 331
   Width = 712
   Height = 411
   Caption = 'Cargar Preventa'
@@ -11,7 +11,7 @@ object FPreventa: TFPreventa
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
+  Position = poMainFormCenter
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -19,14 +19,14 @@ object FPreventa: TFPreventa
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 704
-    Height = 332
+    Width = 696
+    Height = 321
     Align = alClient
     TabOrder = 0
     object Label29: TLabel
       Left = 1
-      Top = 314
-      Width = 702
+      Top = 303
+      Width = 694
       Height = 17
       Align = alBottom
       Alignment = taRightJustify
@@ -46,8 +46,8 @@ object FPreventa: TFPreventa
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 702
-      Height = 313
+      Width = 694
+      Height = 302
       Align = alClient
       Color = 16112578
       DataSource = DS_Comprobante
@@ -72,7 +72,7 @@ object FPreventa: TFPreventa
           Expanded = False
           FieldName = 'CODIGO'
           Title.Caption = 'Comprobante'
-          Width = 98
+          Width = 122
           Visible = True
         end
         item
@@ -122,7 +122,7 @@ object FPreventa: TFPreventa
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

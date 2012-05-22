@@ -271,6 +271,11 @@ type
     QRExpr2: TQRExpr;
     EKVistaPreviaVarias: TEKVistaPreviaQR;
     QRLabel4: TQRLabel;
+    PanelFiltroV: TPanel;
+    BtnFiltro_TodosV: TSpeedButton;
+    BtnFiltro_FiscalV: TSpeedButton;
+    BtnFiltro_NoFiscalV: TSpeedButton;
+    Label4: TLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -365,15 +370,18 @@ begin
   TEKCriterioBA(EKBusquedaVarias.CriteriosBusqueda.Items[2]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
   TEKCriterioBA(EKBusquedaVarias.CriteriosBusqueda.Items[3]).Valor:= DateToStr(dm.EKModelo.Fecha);
 
+  //Visibilidad de los paneles de filtro
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
+  PanelFiltroV.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
 
   //Caption de los botones de Filtro
   dm.ZQ_Configuracion_Variables.Open;
   dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'etiquetaNF', []);
   BtnFiltro_NoFiscal.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
-
+  BtnFiltro_FiscalV.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
   dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'etiquetaF', []);
   BtnFiltro_Fiscal.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
+  BtnFiltro_FiscalV.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
 end;
 
 
@@ -434,22 +442,25 @@ end;
 
 procedure TFEstadisticaVentas.AplicarFiltro(Sender: TObject);
 begin
-  if TSpeedButton(Sender).Name = 'BtnFiltro_Todos' then
+  if (TSpeedButton(Sender).Name='BtnFiltro_Todos')or(TSpeedButton(Sender).Name='BtnFiltro_TodosV') then
   begin
     where:= '';
     DBGridListadoProductos.Columns[GetIndexTitle(DBGridListadoProductos, 'Importe')].FieldName:= 'IMPORTE_VENTA';
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe')].FieldName:= 'SUMAVENTA';
   end;
 
-  if TSpeedButton(Sender).Name = 'BtnFiltro_Fiscal' then
+  if (TSpeedButton(Sender).Name = 'BtnFiltro_Fiscal')or(TSpeedButton(Sender).Name='BtnFiltro_FiscalV') then
   begin
     where:= Format(' and (tfp."IF" = %s)',[QuotedStr('S')]);
     DBGridListadoProductos.Columns[GetIndexTitle(DBGridListadoProductos, 'Importe')].FieldName:= 'IMPORTE_IF';
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe')].FieldName:= 'SUMAIF';
   end;
 
-  if TSpeedButton(Sender).Name = 'BtnFiltro_NoFiscal' then
+  if (TSpeedButton(Sender).Name = 'BtnFiltro_NoFiscal')or(TSpeedButton(Sender).Name='BtnFiltro_NoFiscalV') then
   begin
     where:= Format(' and (tfp."IF" = %s)',[QuotedStr('N')]);
     DBGridListadoProductos.Columns[GetIndexTitle(DBGridListadoProductos, 'Importe')].FieldName:= 'IMPORTE_NOFISCAL';
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe')].FieldName:= 'SUMAVENTA';
   end;
 
   btnBuscar.Click;
