@@ -378,7 +378,7 @@ begin
   dm.ZQ_Configuracion_Variables.Open;
   dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'etiquetaNF', []);
   BtnFiltro_NoFiscal.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
-  BtnFiltro_FiscalV.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
+  BtnFiltro_NoFiscalV.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
   dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'etiquetaF', []);
   BtnFiltro_Fiscal.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
   BtnFiltro_FiscalV.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
