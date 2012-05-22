@@ -1399,7 +1399,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 1162
+            Width = 102
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1413,7 +1413,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 1162
+            Width = 120
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1427,7 +1427,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 1162
+            Width = 126
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -2315,7 +2315,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               FontSize = 7
             end
             object QRDBText6: TQRDBText
-              Left = 544
+              Left = 540
               Top = 0
               Width = 40
               Height = 14
@@ -2326,7 +2326,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                1439.333333333333000000
+                1428.750000000000000000
                 0.000000000000000000
                 105.833333333333300000)
               Alignment = taRightJustify
