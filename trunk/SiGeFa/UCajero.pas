@@ -685,6 +685,7 @@ type
     procedure buscarCuenta(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShiftState);
     function verificarSaldoNotaCredito(query: TDataSet; id_cliente: integer): boolean;
+    procedure ultimoIDPago();
   Private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -998,6 +999,7 @@ begin
       BtCierreX.Enabled:=False;
    end;
 
+  ultimoIDPago();
 end;
 
 
@@ -1074,10 +1076,7 @@ begin
   modoCargaPrevia:= False;
 
   //Cargo el último nro de comprobante (para que sepa cual sigue)
-  ZQ_UltimoCPB.Close;
-  ZQ_UltimoCPB.ParamByName('id_sucursal').AsInteger:=idSucursal;
-  dm.EKModelo.abrir(ZQ_UltimoCPB);
-  dxUltimoId.Text:=Format(' Último CPB: %d',[ZQ_UltimoCPBNUMERO_CPB.AsInteger]);
+  ultimoIDPago();
 
 end;
 
@@ -2819,6 +2818,14 @@ begin
   //para que no lo deje cancelar
   if totalNotaCredito > ZQ_SaldoNotaCreditoSALDO.AsFloat then
     Result:= false;
+end;
+
+procedure TFCajero.ultimoIDPago;
+begin
+  ZQ_UltimoCPB.Close;
+  ZQ_UltimoCPB.ParamByName('id_sucursal').AsInteger:=SUCURSAL_LOGUEO;
+  dm.EKModelo.abrir(ZQ_UltimoCPB);
+  dxUltimoId.Text:=Format(' Último CPB: %d',[ZQ_UltimoCPBNUMERO_CPB.AsInteger]);
 end;
 
 end.
