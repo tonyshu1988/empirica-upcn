@@ -105,7 +105,6 @@ type
     PanelFormaPago: TPanel;
     DBGridFormaPago: TDBGrid;
     PieGrilla: TPanel;
-    lblTotAPagar: TLabel;
     lblMaxVenta: TLabel;
     btnQuitarPago: TButton;
     PanelDetalleProducto: TPanel;
@@ -589,6 +588,10 @@ type
     ZQ_PreventaFPIMPORTE_REAL: TFloatField;
     ZQ_PreventaFPID_RECIBO_OP: TIntegerField;
     ZQ_PreventaFPINSERT_MANUAL: TStringField;
+    dxBarEdit1: TdxBarEdit;
+    Panel1: TPanel;
+    lblTotAPagar: TLabel;
+    lblNroCPB: TLabel;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -2825,7 +2828,7 @@ begin
   ZQ_UltimoCPB.Close;
   ZQ_UltimoCPB.ParamByName('id_sucursal').AsInteger:=SUCURSAL_LOGUEO;
   dm.EKModelo.abrir(ZQ_UltimoCPB);
-  dxUltimoId.Text:=Format(' Último CPB: %d',[ZQ_UltimoCPBNUMERO_CPB.AsInteger]);
+  lblNroCPB.Caption:=Format(' Nº CPB: %d',[ZQ_UltimoCPBNUMERO_CPB.AsInteger+1]);
 end;
 
 end.
