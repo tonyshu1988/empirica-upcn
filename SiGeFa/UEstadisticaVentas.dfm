@@ -25,7 +25,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 1178
     Height = 583
-    ActivePage = TabVarios
+    ActivePage = TabFacturacion
     Align = alClient
     TabOrder = 4
     OnChange = PageControlChange
@@ -1399,7 +1399,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 102
+            Width = 1162
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1413,7 +1413,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 120
+            Width = 1162
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1427,7 +1427,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 126
+            Width = 1162
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -1986,52 +1986,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
           ParentFont = False
           Transparent = False
           Layout = tlCenter
-        end
-        object gridVarias: TDBGrid
-          Left = 0
-          Top = 33
-          Width = 1170
-          Height = 501
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_EstadVarias
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnDrawColumnCell = DrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'DESCRIPCION'
-              Title.Caption = 'Descripci'#243'n'
-              Width = 511
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SUMAVENTA'
-              Title.Caption = 'Importe'
-              Width = 94
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CANTIDAD'
-              Title.Caption = 'Cantidad'
-              Width = 75
-              Visible = True
-            end>
         end
         object ReporteEstadVarias: TQuickRep
           Tag = 99
@@ -2755,6 +2709,52 @@ object FEstadisticaVentas: TFEstadisticaVentas
               FontSize = 8
             end
           end
+        end
+        object gridVarias: TDBGrid
+          Left = 0
+          Top = 33
+          Width = 1170
+          Height = 501
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_EstadVarias
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Caption = 'Descripci'#243'n'
+              Width = 511
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUMAVENTA'
+              Title.Caption = 'Importe'
+              Width = 94
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Caption = 'Cantidad'
+              Width = 75
+              Visible = True
+            end>
         end
         object PanelFiltroV: TPanel
           Left = 0

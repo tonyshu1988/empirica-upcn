@@ -9283,8 +9283,8 @@ object FCajero: TFCajero
         Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
-    Left = 528
-    Top = 410
+    Left = 584
+    Top = 386
     ParamData = <
       item
         DataType = ftUnknown
