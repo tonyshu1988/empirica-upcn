@@ -400,6 +400,8 @@ type
     ZP_estadistica_Parte_DiarioTOTAL_EXTRACCIONES: TFloatField;
     Label20: TLabel;
     DBText5: TDBText;
+    ZP_Detalle_Cuenta_FPagodiferencia: TFloatField;
+    EK_SUMA_Detalle_Cuenta_FPago: TEKDbSuma;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -412,6 +414,7 @@ type
     procedure abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer; id_cuenta: integer);
     procedure calcularResumenBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer; id_cuenta: integer);
     procedure ZQ_Detalle_CuentaAfterScroll(DataSet: TDataSet);
+    procedure ZP_Detalle_Cuenta_FPagoCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -887,6 +890,14 @@ begin
   ZP_Detalle_Cuenta_FPago.ParamByName('fechadesde').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[1]);
   ZP_Detalle_Cuenta_FPago.ParamByName('fechahasta').AsDate :=StrToDate(EKBuscarDetalleCuenta.ParametrosSeleccionados1[2]);
   ZP_Detalle_Cuenta_FPago.Open;
+  EK_SUMA_Detalle_Cuenta_FPago.RecalcAll;
+  lblResumenDetalleCta.Caption:= 'Total Diferencia: '+FormatFloat('$ ###,###,###,##0.00',EK_SUMA_Detalle_Cuenta_FPago.SumCollection[0].SumValue);
+end;
+
+procedure TFEstadisticaDisponibilidades.ZP_Detalle_Cuenta_FPagoCalcFields(
+  DataSet: TDataSet);
+begin
+  ZP_Detalle_Cuenta_FPagodiferencia.AsFloat:=ZP_Detalle_Cuenta_FPagoTOTAL_INGRESO.AsFloat - ZP_Detalle_Cuenta_FPagoTOTAL_EGRESO.AsFloat;
 end;
 
 end.
