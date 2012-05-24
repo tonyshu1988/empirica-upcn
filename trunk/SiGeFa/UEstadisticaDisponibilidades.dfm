@@ -1,6 +1,6 @@
 object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
-  Left = 236
-  Top = 86
+  Left = 474
+  Top = 327
   Width = 1001
   Height = 673
   Caption = 'Estadistica Disponibilidades'
@@ -32,7 +32,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       Top = 1
       Width = 983
       Height = 581
-      ActivePage = TabParteDiario
+      ActivePage = TabDetalleCuenta
       Align = alClient
       TabOrder = 0
       object TabSaldosCuentas: TTabSheet
@@ -40,7 +40,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object Label19: TLabel
           Left = 0
           Top = 38
-          Width = 111
+          Width = 975
           Height = 13
           Align = alTop
           Caption = ' SALDOS CUENTAS'
@@ -650,7 +650,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
               Frame.DrawLeft = False
               Frame.DrawRight = False
               Size.Values = (
-                34.395833333333340000
+                34.395833333333330000
                 13.229166666666670000
                 5.291666666666667000
                 333.375000000000000000)
@@ -827,8 +827,8 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object DBGridSaldoCuentas: TDBGrid
           Left = 0
           Top = 51
-          Width = 983
-          Height = 491
+          Width = 975
+          Height = 480
           Align = alClient
           Color = 14606012
           DataSource = DS_SaldosCuentas
@@ -877,7 +877,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         object PanelTituloSaldo: TPanel
           Left = 0
           Top = 0
-          Width = 983
+          Width = 975
           Height = 38
           Align = alTop
           BevelOuter = bvNone
@@ -886,7 +886,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSaldo_Encabezado2: TLabel
             Left = 4
             Top = 17
-            Width = 144
+            Width = 967
             Height = 13
             Align = alTop
             Caption = 'lblSaldo_Encabezado2'
@@ -900,7 +900,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSaldo_Encabezado1: TLabel
             Left = 4
             Top = 4
-            Width = 144
+            Width = 967
             Height = 13
             Align = alTop
             Caption = 'lblSaldo_Encabezado1'
@@ -914,16 +914,16 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
         end
         object PanelResumenSaldo: TPanel
           Left = 0
-          Top = 542
-          Width = 983
+          Top = 531
+          Width = 975
           Height = 22
           Align = alBottom
           BorderWidth = 4
           TabOrder = 2
           object lblSaldo_Total: TLabel
-            Left = 885
+            Left = 5
             Top = 5
-            Width = 93
+            Width = 965
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -3497,6 +3497,12 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             end
             item
               Expanded = False
+              FieldName = 'diferencia'
+              Title.Caption = 'Diferencia'
+              Visible = True
+            end
+            item
+              Expanded = False
               FieldName = 'TOTAL_TRANSF_EXTRACCION'
               Title.Alignment = taCenter
               Title.Caption = 'Total Transf. Extracci'#243'n'
@@ -4612,7 +4618,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblSucursalDetMov: TLabel
             Left = 4
             Top = 17
-            Width = 119
+            Width = 967
             Height = 13
             Align = alTop
             Caption = 'lblSucursalDetMov'
@@ -4626,7 +4632,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           object lblEncabezadoDetMov: TLabel
             Left = 4
             Top = 4
-            Width = 140
+            Width = 967
             Height = 13
             Align = alTop
             Caption = 'lblEncabezadoDetMov'
@@ -4741,9 +4747,9 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
           BorderWidth = 4
           TabOrder = 3
           object lblResumenDetalleMovimiento: TLabel
-            Left = 773
+            Left = 5
             Top = 5
-            Width = 197
+            Width = 965
             Height = 13
             Align = alTop
             Alignment = taRightJustify
@@ -8328,6 +8334,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
   end
   object ZP_Detalle_Cuenta_FPago: TZStoredProc
     Connection = DM.Conexion
+    OnCalcFields = ZP_Detalle_Cuenta_FPagoCalcFields
     Params = <
       item
         DataType = ftFloat
@@ -8448,6 +8455,12 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       ReadOnly = True
       currency = True
     end
+    object ZP_Detalle_Cuenta_FPagodiferencia: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'diferencia'
+      currency = True
+      Calculated = True
+    end
   end
   object DS_Detalle_Cuenta_FPago: TDataSource
     DataSet = ZP_Detalle_Cuenta_FPago
@@ -8543,5 +8556,15 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       FieldName = 'MODIFICABLE'
       Size = 1
     end
+  end
+  object EK_SUMA_Detalle_Cuenta_FPago: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'diferencia'
+      end>
+    DataSet = ZP_Detalle_Cuenta_FPago
+    Left = 661
+    Top = 369
   end
 end
