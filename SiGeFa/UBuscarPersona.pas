@@ -185,6 +185,7 @@ type
     procedure btnCtaCte_AceptarClick(Sender: TObject);
     procedure btnCtaCte_CancelarClick(Sender: TObject);
     procedure RadioGroupRelacionClienteClick(Sender: TObject);
+    procedure permisosUsuario();
   private
     { Private declarations }
   public
@@ -202,7 +203,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal;
+uses UDM, UPrincipal, UUtilidades;
 
 {$R *.dfm}
 
@@ -210,7 +211,6 @@ uses UDM, UPrincipal;
 function TFBuscarPersona.validarcampos():boolean;
 var
   mensaje: string;
-  color: TColor;
 begin
   PageControl.ActivePageIndex:= 0;
   result:= true;
@@ -247,6 +247,13 @@ begin
     result := false;
   end;
 
+  if not ((ZQ_PersonasCUIT_CUIL.IsNull) or (ZQ_PersonasCUIT_CUIL.AsString = '')) then
+    if not sonTodosNumeros(ZQ_PersonasCUIT_CUIL.AsString) then
+    begin
+      mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido, Verifique'+char(13)+'(sólo debe ingresar números, sin guiones)';
+      result := false;
+    end;
+      
   if Result = False then
   begin
     Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
@@ -312,6 +319,7 @@ begin
   tieneCuentaCorriente:= false;
   altaCtaCte:= false;
   habilitarCtaCte(false);
+  permisosUsuario;
 end;
 
 
@@ -666,6 +674,24 @@ begin
     TabSheetCtaCte.TabVisible:= true
   else
     TabSheetCtaCte.TabVisible:= false;
+  permisosUsuario;
+end;
+
+
+procedure TFBuscarPersona.permisosUsuario();
+begin
+  TabSheetCtaCte.TabVisible:= true;
+  TabSheetDetalle.TabVisible:= true;
+
+  if not dm.EKUsrLogin.PermisoAccion('PERSONA_DETALLE') then
+  begin
+    TabSheetDetalle.TabVisible:= false;
+  end;
+
+  if not dm.EKUsrLogin.PermisoAccion('PERSONA_CTA_CTE') then
+  begin
+    TabSheetCtaCte.TabVisible:= false;
+  end;
 end;
 
 end.
