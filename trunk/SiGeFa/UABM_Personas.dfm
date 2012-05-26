@@ -2599,7 +2599,7 @@ object FABM_Personas: TFABM_Personas
         Top = 0
         Width = 946
         Height = 200
-        ActivePage = TabSheetDatos
+        ActivePage = TabSheetCtaCte
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet
@@ -3007,7 +3007,7 @@ object FABM_Personas: TFABM_Personas
           object DBGridRol: TDBGrid
             Left = 0
             Top = 0
-            Width = 895
+            Width = 938
             Height = 172
             Align = alClient
             Color = 14606012
