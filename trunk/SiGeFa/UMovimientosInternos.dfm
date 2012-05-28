@@ -131,7 +131,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           50.270833333333330000
-          836.083333333333400000
+          836.083333333333300000
           124.354166666666700000
           224.895833333333300000)
         Alignment = taCenter
@@ -152,7 +152,7 @@ object FMovimientosInternos: TFMovimientosInternos
         FontSize = 12
       end
       object RepCuentas_Subtitulo: TQRLabel
-        Left = -67
+        Left = 284
         Top = 26
         Width = 150
         Height = 20
@@ -163,8 +163,8 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          751.416666666666800000
-          68.791666666666680000
+          751.416666666666700000
+          68.791666666666670000
           396.875000000000000000)
         Alignment = taCenter
         AlignToBand = True
@@ -184,7 +184,7 @@ object FMovimientosInternos: TFMovimientosInternos
         FontSize = 9
       end
       object RepCuentas_Titulo: TQRLabel
-        Left = -76
+        Left = 275
         Top = 2
         Width = 168
         Height = 20
@@ -195,7 +195,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          727.604166666666800000
+          727.604166666666700000
           5.291666666666667000
           444.500000000000000000)
         Alignment = taCenter
@@ -509,7 +509,7 @@ object FMovimientosInternos: TFMovimientosInternos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        58.208333333333340000
+        58.208333333333330000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -559,7 +559,7 @@ object FMovimientosInternos: TFMovimientosInternos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        82.020833333333340000
+        82.020833333333330000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -816,8 +816,8 @@ object FMovimientosInternos: TFMovimientosInternos
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 946
-    Height = 576
+    Width = 938
+    Height = 565
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -832,14 +832,14 @@ object FMovimientosInternos: TFMovimientosInternos
       Tag = 99
       Left = 5
       Top = 5
-      Width = 936
+      Width = 928
       Height = 25
       Align = alTop
       BevelOuter = bvNone
       Color = clTeal
       TabOrder = 0
       DesignSize = (
-        936
+        928
         25)
       object PanelManejoCalendario: TPanel
         Tag = 99
@@ -945,8 +945,8 @@ object FMovimientosInternos: TFMovimientosInternos
     object PanelDia: TPanel
       Left = 5
       Top = 30
-      Width = 936
-      Height = 541
+      Width = 928
+      Height = 530
       Align = alClient
       BevelOuter = bvNone
       Caption = 'PanelDia'
@@ -954,15 +954,15 @@ object FMovimientosInternos: TFMovimientosInternos
       object PanelDia_Lista: TPanel
         Left = 0
         Top = 180
-        Width = 936
-        Height = 361
+        Width = 928
+        Height = 350
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object PanelDia_InfoLista: TPanel
           Left = 0
           Top = 0
-          Width = 936
+          Width = 928
           Height = 28
           Align = alTop
           BevelOuter = bvNone
@@ -970,7 +970,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object lblFechaHoy: TLabel
             Left = 0
             Top = 0
-            Width = 936
+            Width = 928
             Height = 15
             Align = alClient
             Alignment = taCenter
@@ -985,13 +985,13 @@ object FMovimientosInternos: TFMovimientosInternos
           object Panel2: TPanel
             Left = 0
             Top = 15
-            Width = 936
+            Width = 928
             Height = 13
             Align = alBottom
             BevelOuter = bvNone
             TabOrder = 0
             object Label10: TLabel
-              Left = 792
+              Left = 784
               Top = 0
               Width = 144
               Height = 13
@@ -1009,7 +1009,7 @@ object FMovimientosInternos: TFMovimientosInternos
               ParentFont = False
             end
             object Label13: TLabel
-              Left = 504
+              Left = 496
               Top = 0
               Width = 144
               Height = 13
@@ -1027,7 +1027,7 @@ object FMovimientosInternos: TFMovimientosInternos
               ParentFont = False
             end
             object Label14: TLabel
-              Left = 648
+              Left = 640
               Top = 0
               Width = 144
               Height = 13
@@ -1049,8 +1049,8 @@ object FMovimientosInternos: TFMovimientosInternos
         object DBGrid_Dia: TDBGrid
           Left = 0
           Top = 28
-          Width = 936
-          Height = 302
+          Width = 928
+          Height = 291
           Align = alClient
           Color = 14606012
           DataSource = DS_MovHoy
@@ -1114,8 +1114,8 @@ object FMovimientosInternos: TFMovimientosInternos
         end
         object Panel3: TPanel
           Left = 0
-          Top = 330
-          Width = 936
+          Top = 319
+          Width = 928
           Height = 31
           Align = alBottom
           BevelOuter = bvNone
@@ -1123,7 +1123,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object lblMov_TotalEgresos: TLabel
             Left = 0
             Top = 3
-            Width = 936
+            Width = 928
             Height = 14
             Align = alBottom
             Alignment = taRightJustify
@@ -1138,7 +1138,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object lblMov_TotalIngresos: TLabel
             Left = 0
             Top = 17
-            Width = 936
+            Width = 928
             Height = 14
             Align = alBottom
             Alignment = taRightJustify
@@ -1155,7 +1155,7 @@ object FMovimientosInternos: TFMovimientosInternos
       object PanelDia_Movimiento: TPanel
         Left = 0
         Top = 0
-        Width = 936
+        Width = 928
         Height = 180
         Align = alTop
         BevelOuter = bvNone
@@ -1163,7 +1163,7 @@ object FMovimientosInternos: TFMovimientosInternos
         object PanelDia_InfoMovimiento: TPanel
           Left = 0
           Top = 0
-          Width = 936
+          Width = 928
           Height = 14
           Align = alTop
           BevelOuter = bvNone
@@ -1171,7 +1171,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object Label2: TLabel
             Left = 0
             Top = 0
-            Width = 936
+            Width = 928
             Height = 14
             Align = alClient
             Alignment = taCenter
@@ -1187,7 +1187,7 @@ object FMovimientosInternos: TFMovimientosInternos
         object GroupBox1: TGroupBox
           Left = 0
           Top = 14
-          Width = 936
+          Width = 928
           Height = 166
           Align = alClient
           TabOrder = 0
@@ -1448,8 +1448,8 @@ object FMovimientosInternos: TFMovimientosInternos
   end
   object RepComprobante: TQuickRep
     Tag = 99
-    Left = -242
-    Top = 121
+    Left = 54
+    Top = 97
     Width = 794
     Height = 1123
     Frame.Color = clBlack
@@ -1559,9 +1559,9 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           50.270833333333330000
-          788.458333333333400000
+          788.458333333333300000
           124.354166666666700000
-          320.145833333333400000)
+          320.145833333333300000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
@@ -1591,9 +1591,9 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          703.791666666666800000
-          68.791666666666680000
-          492.124999999999900000)
+          703.791666666666700000
+          68.791666666666670000
+          492.125000000000000000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
@@ -1623,7 +1623,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          664.104166666666800000
+          664.104166666666700000
           5.291666666666667000
           571.500000000000000000)
         Alignment = taCenter
@@ -1863,7 +1863,7 @@ object FMovimientosInternos: TFMovimientosInternos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        58.208333333333340000
+        58.208333333333330000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -1994,9 +1994,9 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           37.041666666666670000
-          947.208333333333400000
+          947.208333333333300000
           5.291666666666667000
-          216.958333333333400000)
+          216.958333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -2167,6 +2167,7 @@ object FMovimientosInternos: TFMovimientosInternos
       end
     end
     object ChildBand1: TQRChildBand
+      Tag = 99
       Left = 38
       Top = 162
       Width = 718
@@ -2182,7 +2183,7 @@ object FMovimientosInternos: TFMovimientosInternos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        42.333333333333340000
+        42.333333333333330000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -2256,6 +2257,7 @@ object FMovimientosInternos: TFMovimientosInternos
       end
     end
     object ChildBand2: TQRChildBand
+      Tag = 99
       Left = 38
       Top = 232
       Width = 718
@@ -2277,56 +2279,24 @@ object FMovimientosInternos: TFMovimientosInternos
       KeepOnOnePage = False
       ParentBand = QRBand4
       PrintOrder = cboAfterParent
-      object QRLabel13: TQRLabel
-        Left = 6
-        Top = 70
-        Width = 281
-        Height = 14
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          37.041666666666670000
-          15.875000000000000000
-          185.208333333333300000
-          743.479166666666800000)
-        Alignment = taLeftJustify
-        AlignToBand = False
-        AutoSize = True
-        AutoStretch = False
-        Caption = '___________________________________'
-        Color = clWhite
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-        WordWrap = True
-        ExportAs = exptText
-        FontSize = 8
-      end
       object QRLabel14: TQRLabel
-        Left = 6
-        Top = 86
-        Width = 39
+        Left = 209
+        Top = 50
+        Width = 299
         Height = 14
         Frame.Color = clBlack
-        Frame.DrawTop = False
+        Frame.DrawTop = True
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
           37.041666666666670000
-          15.875000000000000000
-          227.541666666666700000
-          103.187500000000000000)
-        Alignment = taLeftJustify
+          552.979166666666700000
+          132.291666666666700000
+          791.104166666666700000)
+        Alignment = taCenter
         AlignToBand = False
-        AutoSize = True
+        AutoSize = False
         AutoStretch = False
         Caption = 'Firma'
         Color = clWhite
@@ -2346,7 +2316,7 @@ object FMovimientosInternos: TFMovimientosInternos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2476,7 +2446,7 @@ object FMovimientosInternos: TFMovimientosInternos
           end
           item
             BeginGroup = True
-            Item = btImprimirComprobante
+            Item = btn_ImprimirComprobante
             Visible = True
           end
           item
@@ -2882,13 +2852,13 @@ object FMovimientosInternos: TFMovimientosInternos
       OnClick = btnExcelClick
       AutoGrayScale = False
     end
-    object btImprimirComprobante: TdxBarLargeButton
-      Caption = 'Imprimir Cpb.'
+    object btn_ImprimirComprobante: TdxBarLargeButton
+      Caption = 'Imprimir Comprobante'
       Category = 0
-      Hint = 'Imprimir Cpb.'
+      Hint = 'Imprimir Comprobante'
       Visible = ivAlways
       ImageIndex = 8
-      OnClick = btImprimirComprobanteClick
+      OnClick = btn_ImprimirComprobanteClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -2899,7 +2869,8 @@ object FMovimientosInternos: TFMovimientosInternos
         'btnAnular'
         'btnSalir'
         'btnImprimir'
-        'btnExcel')
+        'btnExcel'
+        'btn_ImprimirComprobante')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -3342,7 +3313,7 @@ object FMovimientosInternos: TFMovimientosInternos
         'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
         'po_formapago)'
       'where cta.baja = '#39'N'#39
-      '  and cta.id_cuenta > 1')
+      '  and cta.id_cuenta > 2')
     CampoBuscar = 'busqueda'
     CampoClave = 'id_cuenta'
     TituloVentana = 'Buscar Cuenta'

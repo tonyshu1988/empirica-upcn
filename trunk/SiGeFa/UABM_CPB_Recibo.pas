@@ -1,5 +1,7 @@
 unit UABM_CPB_Recibo;
 
+// FALTA IMPRESION DEL TICKET, AHI QUE VER QUE PONEMOS COMO PRODUCTO Y HACER TODOS LOS CALCULOS
+
 interface
 
 uses
@@ -356,6 +358,29 @@ type
     editTotalSaldo: TEdit;
     ZQ_SaldoNotaCredito: TZQuery;
     ZQ_SaldoNotaCreditoSALDO: TFloatField;
+    PanelEditar_NotaCredito: TPanel;
+    Label32: TLabel;
+    DBGrid_ANotaCredito: TDBGrid;
+    PanelEditar_NotaCreditoInfo: TPanel;
+    Label33: TLabel;
+    btnEliminarNotaCredito: TButton;
+    EditTotalNotaCredito: TEdit;
+    ZQ_CpbFormaPago_NotaCredito: TZQuery;
+    ZQ_CpbFormaPago_NotaCreditoID_COMPROB_FP: TIntegerField;
+    ZQ_CpbFormaPago_NotaCreditoID_COMPROBANTE: TIntegerField;
+    ZQ_CpbFormaPago_NotaCreditoID_TIPO_FORMAPAG: TIntegerField;
+    ZQ_CpbFormaPago_NotaCreditoMDCP_FECHA: TDateField;
+    ZQ_CpbFormaPago_NotaCreditoMDCP_BANCO: TStringField;
+    ZQ_CpbFormaPago_NotaCreditoMDCP_CHEQUE: TStringField;
+    ZQ_CpbFormaPago_NotaCreditoIMPORTE: TFloatField;
+    ZQ_CpbFormaPago_NotaCreditoCONCILIADO: TDateField;
+    ZQ_CpbFormaPago_NotaCreditoCUENTA_EGRESO: TIntegerField;
+    ZQ_CpbFormaPago_NotaCreditoFECHA_FP: TDateTimeField;
+    ZQ_CpbFormaPago_NotaCreditoIMPORTE_REAL: TFloatField;
+    DS_CpbFormaPago_NotaCredito: TDataSource;
+    ZQ_CpbFormaPago_NotaCreditoNOMBRECUENTA: TStringField;
+    ZQ_CpbFormaPago_NotaCreditoMEDIOPAGO: TStringField;
+    EKSuma_FPagoNCredito: TEKDbSuma;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -406,6 +431,11 @@ type
     procedure buscarCuenta();
     function verificarSaldoNotaCredito(query: TDataSet; id_cliente: integer): boolean;
     procedure alta_recibo_cta_cte_desde_afuera(id_cliente: integer);
+    procedure DBGrid_ANotaCreditoDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGrid_ANotaCreditoColExit(Sender: TObject);
+    procedure btnEliminarNotaCreditoClick(Sender: TObject);
+    procedure EKSuma_FPagoNCreditoSumListChanged(Sender: TObject);
   Private
     id_cuenta_fpago: integer;
     estadoPantalla: string;
@@ -413,6 +443,8 @@ type
     id_comprobante: integer;
     vselPersona: TFBuscarPersona;
     vselFactura: TFBuscarComprobante;
+    pasarANotaCredito: double;
+    totalFormaPago: double;
     procedure onSelPersona;
     procedure onSelFactura;
     procedure onSelTodasFactura;
@@ -546,7 +578,7 @@ end;
 
 procedure TFABM_CPB_Recibo.btnTipoCpb_AceptarClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb, ZQ_PagosFactura]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbFormaPago_NotaCredito, ZQ_NumeroCpb, ZQ_PagosFactura]) then
   begin
     case RadioGroupTipoComprobante.ItemIndex of
       0: tipoComprobante:= CPB_RECIBO_COBRO;
@@ -559,6 +591,10 @@ begin
     modoEdicion(true);
     ZQ_Proveedor.Close;
     ZQ_Cliente.Close;
+
+    ZQ_CpbFormaPago_NotaCredito.Close;
+    ZQ_CpbFormaPago_NotaCredito.ParamByName('id_comprobante').AsInteger:= -1;
+    ZQ_CpbFormaPago_NotaCredito.Open;
 
     ZQ_CpbFormaPago.Close;
     ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= -1;
@@ -635,7 +671,7 @@ begin
 
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_PagosFactura]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbFormaPago_NotaCredito, ZQ_PagosFactura]) then
   begin
     modoEdicion(true);
     PanelFacturas.Visible:= false;
@@ -647,6 +683,10 @@ begin
     ZQ_CpbFormaPago.Close;
     ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
     ZQ_CpbFormaPago.Open;
+
+    ZQ_CpbFormaPago_NotaCredito.Close;
+    ZQ_CpbFormaPago_NotaCredito.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_CpbFormaPago_NotaCredito.Open;
 
     if ZQ_ComprobanteID_CLIENTE.IsNull then
     begin
@@ -740,9 +780,31 @@ begin
   end
   else
   begin
-    Application.MessageBox('No selecciono ninguna forma de pago, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-    DBGridEditar_Fpago.SetFocus;
-    exit;
+//    Application.MessageBox('No selecciono ninguna forma de pago, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+//    DBGridEditar_Fpago.SetFocus;
+//    exit;
+  end;
+
+  //si se cargo nota de credito
+  if not ZQ_CpbFormaPago_NotaCredito.IsEmpty then
+  begin
+    ZQ_CpbFormaPago_NotaCredito.First;
+    while not ZQ_CpbFormaPago_NotaCredito.Eof do //por cada una de las notas de credito
+    begin
+      ZQ_CpbFormaPago_NotaCredito.Edit;
+      if ZQ_CpbFormaPago_NotaCreditoID_COMPROBANTE.IsNull then
+        ZQ_CpbFormaPago_NotaCreditoID_COMPROBANTE.AsInteger:= id_comprobante;
+
+      if (ZQ_CpbFormaPago_NotaCreditoIMPORTE.IsNull) or (ZQ_CpbFormaPago_NotaCreditoIMPORTE.AsInteger = 0) then
+        ZQ_CpbFormaPago_NotaCredito.Delete
+      else
+      begin
+        ZQ_CpbFormaPago_NotaCreditoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPago_NotaCreditoIMPORTE.AsFloat; //pongo el mismo importe cargado al importe_real
+        ZQ_CpbFormaPago_NotaCreditoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
+
+        ZQ_CpbFormaPago_NotaCredito.Next;
+      end;
+    end;
   end;
 
   if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante
@@ -776,12 +838,12 @@ begin
     EKSuma_Factura.RecalcAll;
     totalCancelarFacturas:= EKSuma_Factura.SumCollection[0].SumValue;
 
-//    if totalCancelarFacturas <> totalFormaPago then
-//    begin
-//      Application.MessageBox(pchar('El monto total a cancelar de las facturas ('+FloatToStr(totalCancelarFacturas)+') es distinto al monto total de la forma de pago ('+FloatToStr(totalFormaPago)+'), por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
-//      DBGridEditar_Fpago.SetFocus;
-//      exit;
-//    end;
+    if totalCancelarFacturas <> totalFormaPago then
+    begin
+      Application.MessageBox(pchar('El monto total a cancelar de las facturas ('+FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas)+') es distinto al monto total de la forma de pago ('+FormatFloat('$ ###,###,###,##0.00', totalFormaPago)+'), por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+      DBGridEditar_Fpago.SetFocus;
+      exit;
+    end;
 
     guardarPagos;
   end;
@@ -1332,6 +1394,8 @@ end;
 
 
 procedure TFABM_CPB_Recibo.btnAgregarFacturaClick(Sender: TObject);
+var
+  saldo, notaCredito: string;
 begin
   if ZQ_ComprobanteID_CLIENTE.IsNull then
   begin
@@ -1346,7 +1410,9 @@ begin
   vselFactura.OnSeleccionar:= onSelFactura;
   vselFactura.OnSeleccionarTodos:= onSelTodasFactura;
   vselFactura.EKBuscarFacturaVenta.VerConsultaOriginal;
-  vselFactura.lblSaldoTotal.Caption:= 'Saldo Total: ' + FormatFloat('$ ###,###,###,##0.00', vselFactura.EKDbSumaVenta.SumCollection[0].SumValue) + '  ';
+  saldo:= 'Saldo Total: ' + FormatFloat('$ ###,###,###,##0.00', vselFactura.EKDbSumaVenta.SumCollection[0].SumValue);
+  notaCredito:= 'Nota Credito: '+FormatFloat('$ ###,###,###,##0.00', vselFactura.ZQ_SaldoNotaCreditoSALDO.AsFloat);
+  vselFactura.lblSaldoTotal.Caption:= saldo+' || '+notaCredito+' ';
   vselFactura.ShowModal;
 end;
 
@@ -1545,6 +1611,7 @@ end;
 procedure TFABM_CPB_Recibo.buscarCuenta;
 var
   cargarMonto: boolean;
+  saldoNotaCredito: double;
 begin
   if EKListadoCuenta.Buscar then
   begin
@@ -1560,6 +1627,16 @@ begin
       ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
       ZQ_ListadoMedio.Open;
 
+      //obtengo el saldo en nota de credito que tiene el cliente si se elige nota de credito como forma pago
+      saldoNotaCredito:= 0;
+      if id_cuenta_fpago = 2 then
+      begin
+        ZQ_SaldoNotaCredito.Close;
+        ZQ_SaldoNotaCredito.ParamByName('id_cliente').AsInteger:= ZQ_ComprobanteID_CLIENTE.AsInteger;
+        ZQ_SaldoNotaCredito.Open;
+        saldoNotaCredito:= ZQ_SaldoNotaCreditoSALDO.AsFloat;
+      end;
+
       cargarMonto:= false;
       if ZQ_CpbFormaPago.IsEmpty then
         cargarMonto:= true;
@@ -1572,6 +1649,9 @@ begin
       ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
       ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
       ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
+      if saldoNotaCredito > 0 then
+        ZQ_CpbFormaPagoIMPORTE.AsFloat:= saldoNotaCredito
+      else
       if cargarMonto then
         ZQ_CpbFormaPagoIMPORTE.AsFloat:= EKSuma_Factura.SumCollection[0].SumValue;
 
@@ -1720,6 +1800,44 @@ begin
 
     EKDBDateEmision.SetFocus;
   end;
+end;
+
+procedure TFABM_CPB_Recibo.DBGrid_ANotaCreditoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGrid_ANotaCredito, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_CPB_Recibo.DBGrid_ANotaCreditoColExit(Sender: TObject);
+begin
+  if ZQ_CpbFormaPago_NotaCreditoID_COMPROBANTE.IsNull then
+    ZQ_CpbFormaPago_NotaCredito.Append //pongo en modo edicion
+  else
+    ZQ_CpbFormaPago_NotaCredito.edit; //pongo en modo edicion
+
+  ZQ_CpbFormaPago_NotaCreditoCUENTA_EGRESO.AsInteger:= 2;
+  ZQ_CpbFormaPago_NotaCreditoID_TIPO_FORMAPAG.AsInteger:= 2;
+  ZQ_CpbFormaPago_NotaCreditoID_COMPROBANTE.AsInteger:= id_Comprobante;
+  ZQ_CpbFormaPago_NotaCreditoNOMBRECUENTA.AsString:= 'NOTA CREDITO';
+  ZQ_CpbFormaPago_NotaCreditoMEDIOPAGO.AsString:= 'NOTA CREDITO';
+end;
+
+procedure TFABM_CPB_Recibo.btnEliminarNotaCreditoClick(Sender: TObject);
+begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  begin
+    if not ZQ_CpbFormaPago_NotaCredito.IsEmpty then
+      ZQ_CpbFormaPago_NotaCredito.Delete;
+
+    DBGrid_ANotaCredito.SetFocus;
+
+    EKSuma_FPagoNCredito.RecalcAll;
+  end;
+end;
+
+
+procedure TFABM_CPB_Recibo.EKSuma_FPagoNCreditoSumListChanged(Sender: TObject);
+begin
+  EditTotalNotaCredito.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_FPagoNCredito.SumCollection[0].SumValue);
 end;
 
 end.

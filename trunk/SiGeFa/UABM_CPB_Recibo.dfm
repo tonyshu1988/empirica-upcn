@@ -1230,7 +1230,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         Left = 5
         Top = 262
         Width = 866
-        Height = 210
+        Height = 101
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
@@ -1253,7 +1253,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
         object PanelEditar_FPagoInfo: TPanel
           Left = 0
-          Top = 182
+          Top = 73
           Width = 866
           Height = 28
           Align = alBottom
@@ -1263,12 +1263,13 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             866
             28)
           object Label29: TLabel
-            Left = 707
+            Left = 659
             Top = 9
-            Width = 28
+            Width = 76
             Height = 13
+            Alignment = taRightJustify
             Anchors = [akTop, akRight]
-            Caption = 'Total'
+            Caption = 'Total a Pagar'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -1311,7 +1312,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Left = 0
           Top = 13
           Width = 866
-          Height = 169
+          Height = 60
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbFormaPago
@@ -1602,6 +1603,158 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
                 Width = 136
                 Visible = True
               end>
+          end
+        end
+      end
+      object PanelEditar_NotaCredito: TPanel
+        Left = 5
+        Top = 363
+        Width = 866
+        Height = 109
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 3
+        object Label32: TLabel
+          Left = 0
+          Top = 0
+          Width = 866
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'NOTA DE CREDITO'
+          Color = clBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object DBGrid_ANotaCredito: TDBGrid
+          Left = 0
+          Top = 13
+          Width = 866
+          Height = 68
+          Align = alClient
+          Color = 14410235
+          DataSource = DS_CpbFormaPago_NotaCredito
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnColExit = DBGrid_ANotaCreditoColExit
+          OnDrawColumnCell = DBGrid_ANotaCreditoDrawColumnCell
+          Columns = <
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = 'NOMBRECUENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cuenta'
+              Width = 205
+              Visible = True
+            end
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = 'MEDIOPAGO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Medio'
+              Width = 131
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MDCP_FECHA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha Medio'
+              Width = 111
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MDCP_BANCO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Banco Medio'
+              Width = 210
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MDCP_CHEQUE'
+              Title.Alignment = taCenter
+              Title.Caption = 'N'#250'mero Medio'
+              Width = 122
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Importe'
+              Width = 95
+              Visible = True
+            end>
+        end
+        object PanelEditar_NotaCreditoInfo: TPanel
+          Left = 0
+          Top = 81
+          Width = 866
+          Height = 28
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 1
+          DesignSize = (
+            866
+            28)
+          object Label33: TLabel
+            Left = 631
+            Top = 9
+            Width = 104
+            Height = 13
+            Alignment = taRightJustify
+            Anchors = [akTop, akRight]
+            Caption = 'Total Nota Credito'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object btnEliminarNotaCredito: TButton
+            Left = 4
+            Top = 1
+            Width = 145
+            Height = 18
+            Caption = 'Quitar (Ctrl+Delete)'
+            TabOrder = 0
+            OnClick = btnEliminarNotaCreditoClick
+          end
+          object EditTotalNotaCredito: TEdit
+            Left = 737
+            Top = 6
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 1
           end
         end
       end
@@ -4148,7 +4301,8 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     SQL.Strings = (
       'select fp.*'
       'from comprobante_forma_pago fp'
-      'where fp.id_comprobante = :id_comprobante')
+      'where fp.id_comprobante = :id_comprobante'
+      'and fp.cuenta_ingreso is not null')
     Params = <
       item
         DataType = ftUnknown
@@ -4518,7 +4672,8 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         'd_tipo_formapago)'
       'left join cuenta egr on (cpbf.cuenta_egreso  = egr.id_cuenta)'
       'left join cuenta ing on (cpbf.cuenta_ingreso = ing.id_cuenta)'
-      'where cpbf.id_comprobante = :id_comprobante')
+      'where cpbf.id_comprobante = :id_comprobante'
+      'and cpbf.cuenta_ingreso is not null')
     Params = <
       item
         DataType = ftUnknown
@@ -4992,7 +5147,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         Name = 'id_cliente'
         ParamType = ptUnknown
       end>
-    Left = 37
+    Left = 61
     Top = 321
     ParamData = <
       item
@@ -5004,5 +5159,90 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       FieldName = 'SALDO'
       ReadOnly = True
     end
+  end
+  object ZQ_CpbFormaPago_NotaCredito: TZQuery
+    Connection = DM.Conexion
+    SortType = stIgnored
+    SQL.Strings = (
+      
+        'select fp.*, '#39'NOTA CREDITO'#39' as nombreCuenta, '#39'NOTA CREDITO'#39'  as ' +
+        'medioPago'
+      'from comprobante_forma_pago fp'
+      'where fp.id_comprobante = :id_comprobante'
+      'and fp.cuenta_egreso is not null')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 245
+    Top = 305
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_CpbFormaPago_NotaCreditoID_COMPROB_FP: TIntegerField
+      FieldName = 'ID_COMPROB_FP'
+    end
+    object ZQ_CpbFormaPago_NotaCreditoID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_CpbFormaPago_NotaCreditoID_TIPO_FORMAPAG: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAG'
+    end
+    object ZQ_CpbFormaPago_NotaCreditoMDCP_FECHA: TDateField
+      FieldName = 'MDCP_FECHA'
+    end
+    object ZQ_CpbFormaPago_NotaCreditoMDCP_BANCO: TStringField
+      FieldName = 'MDCP_BANCO'
+      Size = 50
+    end
+    object ZQ_CpbFormaPago_NotaCreditoMDCP_CHEQUE: TStringField
+      FieldName = 'MDCP_CHEQUE'
+      Size = 50
+    end
+    object ZQ_CpbFormaPago_NotaCreditoIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+      currency = True
+    end
+    object ZQ_CpbFormaPago_NotaCreditoCONCILIADO: TDateField
+      FieldName = 'CONCILIADO'
+    end
+    object ZQ_CpbFormaPago_NotaCreditoCUENTA_EGRESO: TIntegerField
+      FieldName = 'CUENTA_EGRESO'
+    end
+    object ZQ_CpbFormaPago_NotaCreditoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_CpbFormaPago_NotaCreditoIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+    end
+    object ZQ_CpbFormaPago_NotaCreditoNOMBRECUENTA: TStringField
+      FieldName = 'NOMBRECUENTA'
+      Size = 50
+    end
+    object ZQ_CpbFormaPago_NotaCreditoMEDIOPAGO: TStringField
+      FieldName = 'MEDIOPAGO'
+      Size = 50
+    end
+  end
+  object DS_CpbFormaPago_NotaCredito: TDataSource
+    DataSet = ZQ_CpbFormaPago_NotaCredito
+    Left = 413
+    Top = 305
+  end
+  object EKSuma_FPagoNCredito: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE'
+      end>
+    DataSet = ZQ_CpbFormaPago_NotaCredito
+    SumListChanged = EKSuma_FPagoNCreditoSumListChanged
+    Left = 557
+    Top = 304
   end
 end

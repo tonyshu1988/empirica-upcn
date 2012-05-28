@@ -2,8 +2,6 @@ unit UCuentaCorriente;
 
 interface
 
-//VER LO DE FILTRAR POR SUCURSAL
-
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
@@ -790,6 +788,12 @@ begin
   if ZQ_CtaCte_Cliente.IsEmpty then
     exit;
 
+  ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
+  ZQ_ComprobanteDetalle.Open;
+
+  ZQ_ReciboDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
+  ZQ_ReciboDetalle.Open;
+
   if viendoDetalleCpb then
   begin
   //si el tipo de comprobante es saldo anterior o nota de credito
@@ -803,9 +807,6 @@ begin
     //si el tipo de comprobante es recibo de cta cte
       if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
       begin
-        ZQ_ReciboDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
-        ZQ_ReciboDetalle.Open;
-
         DBGridDetalle_Producto.Height:= 1;
         DBGridDetalle_Recibo.Height:= 140;
       end
@@ -813,9 +814,6 @@ begin
       //si el tipo de comprobante es distinto de nota de credito
         if AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) = 0 then
         begin
-          ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
-          ZQ_ComprobanteDetalle.Open;
-
           DBGridDetalle_Producto.Height:= 140;
           DBGridDetalle_Recibo.Height:= 1;
         end;

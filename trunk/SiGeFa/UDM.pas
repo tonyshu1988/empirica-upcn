@@ -101,6 +101,8 @@ type
     ZQ_ValidarFecha_HoraDATE_TIME: TDateTimeField;
     ZQ_ValidarFecha_HoraUSER_NAME: TStringField;
     ZQ_ValidarFecha_HoraID_SINCRO_LOTE: TIntegerField;
+    ZQ_VerificarCtaCte: TZQuery;
+    ZQ_VerificarCtaCteID_CTA_CTE: TIntegerField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
@@ -119,6 +121,7 @@ type
     procedure mostrarCantidadRegistro(query: TDataSet; var etiqueta: TLabel);
     procedure cargarReporteSucursal(idSucursal: integer);
     procedure configVariables();
+    function  verificarCuentaCorriente(id_cliente: integer): boolean;
   end;
 
 var
@@ -144,12 +147,12 @@ var
   precio5 : string;
 
 Const
-//FORMA DE PAGO
+//  FORMA DE PAGO
   FP_CTA_CTE       = 1;
   FP_NOTA_CREDITO  = 2;
   FP_TRANSFERENCIA = 3;
 
-//CUENTAS
+//  CUENTAS
   CUENTA_CTA_CTE      = 1;
   CUENTA_NOTA_CREDITO = 2;
 
@@ -486,6 +489,19 @@ begin
   ZQ_SucursalesVisibles.Close;
   ZQ_SucursalesVisibles.Open;
 end;
+
+
+function TDM.verificarCuentaCorriente(id_cliente: integer): boolean;
+begin
+  result:= True;
+
+  ZQ_VerificarCtaCte.Close;
+  ZQ_VerificarCtaCte.ParamByName('id_cliente').AsInteger:= id_cliente;
+  dm.EKModelo.abrir(ZQ_VerificarCtaCte);
+  if ZQ_VerificarCtaCte.IsEmpty then
+    Result:= false;
+end;
+
 
 end.
 
