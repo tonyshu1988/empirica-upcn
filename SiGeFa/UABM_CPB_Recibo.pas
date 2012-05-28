@@ -381,6 +381,25 @@ type
     ZQ_CpbFormaPago_NotaCreditoNOMBRECUENTA: TStringField;
     ZQ_CpbFormaPago_NotaCreditoMEDIOPAGO: TStringField;
     EKSuma_FPagoNCredito: TEKDbSuma;
+    Label34: TLabel;
+    DBGridCpbActual_NCredito: TDBGrid;
+    ZQ_VerCpb_NCredito: TZQuery;
+    DS_VerCpb_NCredito: TDataSource;
+    ZQ_VerCpb_NCreditoID_COMPROB_FP: TIntegerField;
+    ZQ_VerCpb_NCreditoID_COMPROBANTE: TIntegerField;
+    ZQ_VerCpb_NCreditoID_TIPO_FORMAPAG: TIntegerField;
+    ZQ_VerCpb_NCreditoMDCP_FECHA: TDateField;
+    ZQ_VerCpb_NCreditoMDCP_BANCO: TStringField;
+    ZQ_VerCpb_NCreditoMDCP_CHEQUE: TStringField;
+    ZQ_VerCpb_NCreditoIMPORTE: TFloatField;
+    ZQ_VerCpb_NCreditoCONCILIADO: TDateField;
+    ZQ_VerCpb_NCreditoCUENTA_EGRESO: TIntegerField;
+    ZQ_VerCpb_NCreditoFECHA_FP: TDateTimeField;
+    ZQ_VerCpb_NCreditoIMPORTE_REAL: TFloatField;
+    ZQ_VerCpb_NCreditoNOMBTR_TIPO: TStringField;
+    ZQ_VerCpb_NCreditoCTA_EGRESO_CODIGO: TStringField;
+    ZQ_VerCpb_NCreditoCTA_EGRESO: TStringField;
+    EKOrd_VerCpb_NCredito: TEKOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -421,8 +440,7 @@ type
     procedure btnQuitarFacturaClick(Sender: TObject);
     procedure DBGridFacturasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure cargarFacturas;
-    procedure guardarPagos; //guarda las facturas que se van a pagar con el recibo y la forma de pago
-    procedure aplicarPagosCuentaCorriente; //cuando se confirma el recibo aplica todos los pagos realizados a las facturas correspondiente
+    procedure guardarPagos; //cuando se confirma el recibo aplica todos los pagos realizados a las facturas correspondiente
     procedure DBGridVerFacturasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnTipoCpb_AceptarClick(Sender: TObject);
     procedure btnTipoCpb_CancelarClick(Sender: TObject);
@@ -436,6 +454,9 @@ type
     procedure DBGrid_ANotaCreditoColExit(Sender: TObject);
     procedure btnEliminarNotaCreditoClick(Sender: TObject);
     procedure EKSuma_FPagoNCreditoSumListChanged(Sender: TObject);
+    procedure DBGridCpbActual_NCreditoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   Private
     id_cuenta_fpago: integer;
     estadoPantalla: string;
@@ -505,6 +526,7 @@ procedure TFABM_CPB_Recibo.FormCreate(Sender: TObject);
 begin
   EKOrd_VerCpb.CargarConfigColumnas;
   EKOrd_VerCpb_Fpago.CargarConfigColumnas;
+  EKOrd_VerCpb_NCredito.CargarConfigColumnas;  
   EKOrd_EditarFpago.CargarConfigColumnas;
 
   dm.EKModelo.abrir(ZQ_Cuenta); //abro las cuentas bancarias
@@ -986,6 +1008,7 @@ end;
 procedure TFABM_CPB_Recibo.ZQ_VerCpbAfterScroll(DataSet: TDataSet);
 begin
   ZQ_VerCpb_Fpago.Close;
+  ZQ_VerCpb_NCredito.Close;  
   ZQ_PagosFactura.Close;
 
   if ZQ_VerCpb.IsEmpty then
@@ -993,6 +1016,9 @@ begin
 
   ZQ_VerCpb_Fpago.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   ZQ_VerCpb_Fpago.Open;
+
+  ZQ_VerCpb_NCredito.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+  ZQ_VerCpb_NCredito.Open;
 
   if ZQ_VerCpbID_CLIENTE.IsNull then //si es un proveedor
   begin
@@ -1333,6 +1359,7 @@ procedure TFABM_CPB_Recibo.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EKOrd_VerCpb.GuardarConfigColumnas;
   EKOrd_VerCpb_Fpago.GuardarConfigColumnas;
+  EKOrd_VerCpb_NCredito.GuardarConfigColumnas;
   EKOrd_EditarFpago.GuardarConfigColumnas;
 end;
 
@@ -1578,29 +1605,6 @@ begin
 end;
 
 
-procedure TFABM_CPB_Recibo.aplicarPagosCuentaCorriente;
-var
-  restante: double;
-begin
-  if ZQ_PagosFactura.IsEmpty then //si no hay ninguna factura salgo
-    exit;
-
-  ZQ_PagosFactura.First;
-  while not ZQ_PagosFactura.Eof do //recorro todos los comprobantes agregados
-  begin
-    restante:= ZQ_PagosFacturaIMPORTE.AsFloat; //al inicio el restante es el monto toal de la factura a cancelar
-
-    ZQ_VerCpb_Fpago.First; //me paro en la primer forma de pago
-    while not ZQ_VerCpb_Fpago.Eof do //mientras no sea la ultima forma de pago
-    begin
-
-    end;
-
-    ZQ_PagosFactura.Next;
-  end;
-end;
-
-
 procedure TFABM_CPB_Recibo.CD_Facturas_importeCancelarValidate(Sender: TField);
 begin
   if (CD_Facturas_importeCancelar.AsFloat < 0) or (CD_Facturas_importeCancelar.AsFloat > CD_Facturas_saldoComprobante.AsFloat) then
@@ -1838,6 +1842,12 @@ end;
 procedure TFABM_CPB_Recibo.EKSuma_FPagoNCreditoSumListChanged(Sender: TObject);
 begin
   EditTotalNotaCredito.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_FPagoNCredito.SumCollection[0].SumValue);
+end;
+
+
+procedure TFABM_CPB_Recibo.DBGridCpbActual_NCreditoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridCpbActual_NCredito, Rect, DataCol, Column, State);
 end;
 
 end.

@@ -1,8 +1,8 @@
 object FCuentaCorriente: TFCuentaCorriente
-  Left = 257
-  Top = 49
+  Left = 244
+  Top = 63
   Width = 1009
-  Height = 715
+  Height = 698
   Caption = 'Cta. Cte. Cliente'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,11 +20,167 @@ object FCuentaCorriente: TFCuentaCorriente
   OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
+  object PanelFiltroFechas: TPanel
+    Left = 720
+    Top = 288
+    Width = 173
+    Height = 105
+    BevelInner = bvLowered
+    TabOrder = 2
+    Visible = False
+    object Label18: TLabel
+      Left = 2
+      Top = 2
+      Width = 169
+      Height = 13
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'FILTRAR POR FECHA'
+      Color = clBlue
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label19: TLabel
+      Left = 5
+      Top = 25
+      Width = 44
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Desde:'
+    end
+    object Label20: TLabel
+      Left = 5
+      Top = 53
+      Width = 44
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Hasta:'
+    end
+    object EKDBDateTime_FiltroDesde: TEKDBDateTimePicker
+      Left = 52
+      Top = 20
+      Width = 115
+      Height = 22
+      Date = 40767.409336585650000000
+      Time = 40767.409336585650000000
+      TabOrder = 0
+    end
+    object EKDBDateTime_FiltroHasta: TEKDBDateTimePicker
+      Left = 52
+      Top = 48
+      Width = 115
+      Height = 22
+      Date = 40767.409336585650000000
+      Time = 40767.409336585650000000
+      TabOrder = 1
+    end
+    object btnFiltroFecha_Aceptar: TBitBtn
+      Left = 8
+      Top = 75
+      Width = 40
+      Height = 25
+      TabOrder = 2
+      OnClick = btnFiltroFecha_AceptarClick
+    end
+    object btnFiltroFecha_Cancelar: TBitBtn
+      Left = 124
+      Top = 75
+      Width = 40
+      Height = 25
+      TabOrder = 3
+      OnClick = btnFiltroFecha_CancelarClick
+    end
+  end
+  object PanelSaldoInicial: TPanel
+    Left = 688
+    Top = 152
+    Width = 233
+    Height = 121
+    BevelInner = bvLowered
+    TabOrder = 7
+    Visible = False
+    object lblTituloVentanaFpago: TLabel
+      Left = 2
+      Top = 2
+      Width = 229
+      Height = 23
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'SALDO INICIAL'
+      Color = clBlue
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+    end
+    object Label14: TLabel
+      Left = 34
+      Top = 35
+      Width = 38
+      Height = 13
+      Caption = 'Fecha:'
+    end
+    object Label29: TLabel
+      Left = 21
+      Top = 64
+      Width = 51
+      Height = 13
+      Caption = 'Importe:'
+    end
+    object DateTimePicker_FechaSaldo: TDateTimePicker
+      Left = 75
+      Top = 31
+      Width = 130
+      Height = 21
+      Date = 40821.813995381940000000
+      Time = 40821.813995381940000000
+      TabOrder = 0
+    end
+    object EditSaldiIni_Importe: TEdit
+      Left = 75
+      Top = 59
+      Width = 130
+      Height = 21
+      BiDiMode = bdLeftToRight
+      ParentBiDiMode = False
+      TabOrder = 1
+      Text = '0'
+    end
+    object btnSaldoInicial_Aceptar: TBitBtn
+      Left = 8
+      Top = 90
+      Width = 41
+      Height = 25
+      TabOrder = 2
+      OnClick = btnSaldoInicial_AceptarClick
+    end
+    object btnSaldoInicial_Cancelar: TBitBtn
+      Left = 185
+      Top = 90
+      Width = 40
+      Height = 25
+      TabOrder = 3
+      OnClick = btnSaldoInicial_CancelarClick
+    end
+  end
   object PanelResumen: TPanel
     Left = 0
     Top = 0
     Width = 993
-    Height = 625
+    Height = 608
     Align = alClient
     TabOrder = 1
     object RepCtasCtes: TQuickRep
@@ -1016,7 +1172,7 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object PanelResumen_Abajo: TPanel
       Left = 1
-      Top = 572
+      Top = 555
       Width = 991
       Height = 52
       Align = alBottom
@@ -1170,7 +1326,7 @@ object FCuentaCorriente: TFCuentaCorriente
       Left = 1
       Top = 20
       Width = 991
-      Height = 552
+      Height = 535
       Align = alClient
       Color = 14606012
       DataSource = DS_CtaCte_Gral
@@ -1353,7 +1509,7 @@ object FCuentaCorriente: TFCuentaCorriente
     Left = 0
     Top = 0
     Width = 993
-    Height = 625
+    Height = 608
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -3190,7 +3346,7 @@ object FCuentaCorriente: TFCuentaCorriente
       Left = 3
       Top = 126
       Width = 987
-      Height = 411
+      Height = 394
       Align = alClient
       BorderWidth = 3
       TabOrder = 0
@@ -3198,7 +3354,7 @@ object FCuentaCorriente: TFCuentaCorriente
         Left = 4
         Top = 4
         Width = 979
-        Height = 123
+        Height = 252
         Align = alClient
         Color = 14606012
         DataSource = DS_CtaCte_Cliente
@@ -3283,110 +3439,137 @@ object FCuentaCorriente: TFCuentaCorriente
             Visible = True
           end>
       end
-      object DBGridDetalle_Producto: TDBGrid
+      object PanelDetalleMov: TPanel
         Left = 4
-        Top = 267
+        Top = 256
         Width = 979
-        Height = 140
+        Height = 134
         Align = alBottom
-        Color = 14606012
-        DataSource = DS_ComprobanteDetalle
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        BevelOuter = bvNone
+        BorderWidth = 2
         TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'CODIGO_BARRA'
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Barra'
-            Width = 120
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DETALLE_PROD'
-            Title.Alignment = taCenter
-            Title.Caption = 'Producto'
-            Width = 273
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE_MARCA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Marca'
-            Width = 151
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'COLOR'
-            Title.Alignment = taCenter
-            Title.Caption = 'Color'
-            Width = 138
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'MEDIDA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Medida'
-            Width = 115
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'CANTIDAD'
-            Title.Alignment = taCenter
-            Title.Caption = 'Cantidad'
-            Width = 69
-            Visible = True
-          end>
-      end
-      object DBGridDetalle_Recibo: TDBGrid
-        Left = 4
-        Top = 127
-        Width = 979
-        Height = 140
-        Align = alBottom
-        Color = 14606012
-        DataSource = DS_ReciboDetalle
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 2
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'FECHA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Fecha'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DESCRIPCION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Descripci'#243'n'
-            Width = 454
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'IMPORTE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Importe Pagado'
-            Width = 140
-            Visible = True
-          end>
+        Visible = False
+        object lblTitulo_PanelDetalleMov: TLabel
+          Left = 2
+          Top = 2
+          Width = 975
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Color = clBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object DBGridDetalle_Recibo: TDBGrid
+          Left = 2
+          Top = 15
+          Width = 975
+          Height = 117
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_ReciboDetalle
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'FECHA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Alignment = taCenter
+              Title.Caption = 'Descripci'#243'n'
+              Width = 454
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Importe Pagado'
+              Width = 140
+              Visible = True
+            end>
+        end
+        object DBGridDetalle_Producto: TDBGrid
+          Left = 2
+          Top = 15
+          Width = 975
+          Height = 117
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_ComprobanteDetalle
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'CODIGO_BARRA'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Barra'
+              Width = 120
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DETALLE_PROD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Producto'
+              Width = 273
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_MARCA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Marca'
+              Width = 151
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'COLOR'
+              Title.Alignment = taCenter
+              Title.Caption = 'Color'
+              Width = 138
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MEDIDA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Width = 115
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cantidad'
+              Width = 69
+              Visible = True
+            end>
+        end
       end
     end
     object PanelCliente_Datos: TPanel
@@ -3752,7 +3935,7 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object PanelCliente_Resumen: TPanel
       Left = 3
-      Top = 537
+      Top = 520
       Width = 987
       Height = 85
       Align = alBottom
@@ -4103,162 +4286,6 @@ object FCuentaCorriente: TFCuentaCorriente
         Layout = blGlyphBottom
         OnClick = AplicarFiltro
       end
-    end
-  end
-  object PanelSaldoInicial: TPanel
-    Left = 688
-    Top = 152
-    Width = 233
-    Height = 121
-    BevelInner = bvLowered
-    TabOrder = 7
-    Visible = False
-    object lblTituloVentanaFpago: TLabel
-      Left = 2
-      Top = 2
-      Width = 229
-      Height = 23
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'SALDO INICIAL'
-      Color = clBlue
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Transparent = False
-      Layout = tlCenter
-    end
-    object Label14: TLabel
-      Left = 34
-      Top = 35
-      Width = 38
-      Height = 13
-      Caption = 'Fecha:'
-    end
-    object Label29: TLabel
-      Left = 21
-      Top = 64
-      Width = 51
-      Height = 13
-      Caption = 'Importe:'
-    end
-    object DateTimePicker_FechaSaldo: TDateTimePicker
-      Left = 75
-      Top = 31
-      Width = 130
-      Height = 21
-      Date = 40821.813995381940000000
-      Time = 40821.813995381940000000
-      TabOrder = 0
-    end
-    object EditSaldiIni_Importe: TEdit
-      Left = 75
-      Top = 59
-      Width = 130
-      Height = 21
-      BiDiMode = bdLeftToRight
-      ParentBiDiMode = False
-      TabOrder = 1
-      Text = '0'
-    end
-    object btnSaldoInicial_Aceptar: TBitBtn
-      Left = 8
-      Top = 90
-      Width = 41
-      Height = 25
-      TabOrder = 2
-      OnClick = btnSaldoInicial_AceptarClick
-    end
-    object btnSaldoInicial_Cancelar: TBitBtn
-      Left = 185
-      Top = 90
-      Width = 40
-      Height = 25
-      TabOrder = 3
-      OnClick = btnSaldoInicial_CancelarClick
-    end
-  end
-  object PanelFiltroFechas: TPanel
-    Left = 720
-    Top = 288
-    Width = 173
-    Height = 105
-    BevelInner = bvLowered
-    TabOrder = 2
-    Visible = False
-    object Label18: TLabel
-      Left = 2
-      Top = 2
-      Width = 169
-      Height = 13
-      Align = alTop
-      Alignment = taCenter
-      Caption = 'FILTRAR POR FECHA'
-      Color = clBlue
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object Label19: TLabel
-      Left = 5
-      Top = 25
-      Width = 44
-      Height = 13
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = 'Desde:'
-    end
-    object Label20: TLabel
-      Left = 5
-      Top = 53
-      Width = 44
-      Height = 13
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = 'Hasta:'
-    end
-    object EKDBDateTime_FiltroDesde: TEKDBDateTimePicker
-      Left = 52
-      Top = 20
-      Width = 115
-      Height = 22
-      Date = 40767.409336585650000000
-      Time = 40767.409336585650000000
-      TabOrder = 0
-    end
-    object EKDBDateTime_FiltroHasta: TEKDBDateTimePicker
-      Left = 52
-      Top = 48
-      Width = 115
-      Height = 22
-      Date = 40767.409336585650000000
-      Time = 40767.409336585650000000
-      TabOrder = 1
-    end
-    object btnFiltroFecha_Aceptar: TBitBtn
-      Left = 8
-      Top = 75
-      Width = 40
-      Height = 25
-      TabOrder = 2
-      OnClick = btnFiltroFecha_AceptarClick
-    end
-    object btnFiltroFecha_Cancelar: TBitBtn
-      Left = 124
-      Top = 75
-      Width = 40
-      Height = 25
-      TabOrder = 3
-      OnClick = btnFiltroFecha_CancelarClick
     end
   end
   object dxBarABM: TdxBarManager
@@ -4776,9 +4803,9 @@ object FCuentaCorriente: TFCuentaCorriente
       AutoGrayScale = False
     end
     object btnVerDetalleFactura: TdxBarLargeButton
-      Caption = 'Ver/Ocultar Detalle Factura'
+      Caption = 'F3 - Ver/Ocultar Detalle'
       Category = 0
-      Hint = 'Ver/Ocultar Detalle Factura'
+      Hint = 'F3 - Ver/Ocultar Detalle del movimiento seleccionado'
       Visible = ivAlways
       ImageIndex = 12
       OnClick = btnVerDetalleFacturaClick
@@ -4817,9 +4844,10 @@ object FCuentaCorriente: TFCuentaCorriente
       ShortCut = 113
       OnExecute = AVerCtaCteExecute
     end
-    object AModificar: TAction
-      Caption = 'AModificar'
+    object AVerDetalle: TAction
+      Caption = 'AVerDetalle'
       ShortCut = 114
+      OnExecute = AVerDetalleExecute
     end
     object AEliminar: TAction
       Caption = 'AEliminar'

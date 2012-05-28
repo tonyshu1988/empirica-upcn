@@ -20,15 +20,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 722
-    Height = 347
+    Width = 714
+    Height = 336
     Align = alClient
     TabOrder = 0
     object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 720
-      Height = 345
+      Width = 712
+      Height = 334
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -242,7 +242,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1201,7 +1201,11 @@ object FBuscarProductoStock: TFBuscarProductoStock
         Titulo = 'Secci'#243'n'
         Campo = 'Seccion'
         Tabla = 'posicion_sucursal'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboSQL = ZQ_SeccionSuc
+        TipoComboSQLCampoVer = 'seccion'
+        TipoComboSQLCampoReal = 'seccion'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -1690,5 +1694,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
       FieldName = 'COMPROBANTE_RENGLON4'
       Size = 50
     end
+  end
+  object ZQ_SeccionSuc: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select distinct ps.seccion'
+      'from posicion_sucursal ps'
+      'where ps.baja = '#39'N'#39)
+    Params = <>
+    Left = 200
+    Top = 160
   end
 end

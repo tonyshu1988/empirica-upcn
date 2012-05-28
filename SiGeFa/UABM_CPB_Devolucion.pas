@@ -64,25 +64,6 @@ type
     DBGridListaCpb: TDBGrid;
     DBGridCpbActual_Devolucion: TDBGrid;
     DBGridCpbActual_FPago: TDBGrid;
-    ZQ_VerCpb_DevolucionID_COMPROBANTE_DETALLE: TIntegerField;
-    ZQ_VerCpb_DevolucionID_COMPROBANTE: TIntegerField;
-    ZQ_VerCpb_DevolucionID_PRODUCTO: TIntegerField;
-    ZQ_VerCpb_DevolucionDETALLE: TStringField;
-    ZQ_VerCpb_DevolucionCANTIDAD: TFloatField;
-    ZQ_VerCpb_DevolucionIMPORTE_FINAL: TFloatField;
-    ZQ_VerCpb_DevolucionPORC_DESCUENTO: TFloatField;
-    ZQ_VerCpb_DevolucionBASE_IMPONIBLE: TFloatField;
-    ZQ_VerCpb_DevolucionIMPORTE_UNITARIO: TFloatField;
-    ZQ_VerCpb_DevolucionPORC_IVA: TFloatField;
-    ZQ_VerCpb_DevolucionCOD_CABECERA: TStringField;
-    ZQ_VerCpb_DevolucionPRODUCTO: TStringField;
-    ZQ_VerCpb_DevolucionIMAGEN: TBlobField;
-    ZQ_VerCpb_DevolucionMEDIDA: TStringField;
-    ZQ_VerCpb_DevolucionCOLOR: TStringField;
-    ZQ_VerCpb_DevolucionMARCA: TStringField;
-    ZQ_VerCpb_DevolucionARTICULO: TStringField;
-    ZQ_VerCpb_DevolucionTIPO_ARTICULO: TStringField;
-    ZQ_VerCpb_DevolucionCOD_PRODUCTO: TStringField;
     EKOrd_VerCpb: TEKOrdenarGrilla;
     EKOrd_VerCpb_Fpago: TEKOrdenarGrilla;
     EKOrd_VerCpb_Devolucion: TEKOrdenarGrilla;
@@ -259,12 +240,6 @@ type
     ZQ_CpbDevolucion_Medida: TStringField;
     ZQ_CpbDevolucion_Color: TStringField;
     ZQ_CpbDevolucion_CodBarra: TStringField;
-    ZQ_VerCpb_DevolucionCODIGO_BARRA: TStringField;
-    ZQ_VerCpb_DevolucionPRECIO_COSTO: TFloatField;
-    ZQ_VerCpb_DevolucionPRECIO_VENTA: TFloatField;
-    ZQ_VerCpb_DevolucionCOEF_GANANCIA: TFloatField;
-    ZQ_VerCpb_DevolucionCOEF_DESCUENTO: TFloatField;
-    ZQ_VerCpb_DevolucionIMPUESTO_IVA: TFloatField;
     PopupGridFpago: TPopupMenu;
     PopUpItem_FPagoAgrandar: TMenuItem;
     PopupGridProducto: TPopupMenu;
@@ -289,11 +264,6 @@ type
     ZQ_CpbDevolucionIMPUESTO_INTERNO: TFloatField;
     ZQ_CpbDevolucionID_STOCK_PRODUCTO: TIntegerField;
     ZQ_CpbDevolucionIMPORTE_VENTA: TFloatField;
-    ZQ_VerCpb_DevolucionIMPUESTO_INTERNO: TFloatField;
-    ZQ_VerCpb_DevolucionCANTIDAD_RECIBIDA: TFloatField;
-    ZQ_VerCpb_DevolucionCANTIDAD_ALMACENADA: TFloatField;
-    ZQ_VerCpb_DevolucionID_STOCK_PRODUCTO: TIntegerField;
-    ZQ_VerCpb_DevolucionIMPORTE_VENTA: TFloatField;
     PanelEditar_Devolucion: TPanel;
     PanelEditar_DevolucionInfo: TPanel;
     btnEliminarDevolucion: TButton;
@@ -374,38 +344,6 @@ type
     ZQ_CpbEntregaID_STOCK_PRODUCTO: TIntegerField;
     ZQ_CpbEntregaIMPORTE_VENTA: TFloatField;
     ZQ_CpbEntregaIMPORTE_IVA: TFloatField;
-    ZQ_VerCpb_EntregaID_COMPROBANTE_DETALLE: TIntegerField;
-    ZQ_VerCpb_EntregaID_COMPROBANTE: TIntegerField;
-    ZQ_VerCpb_EntregaID_PRODUCTO: TIntegerField;
-    ZQ_VerCpb_EntregaDETALLE: TStringField;
-    ZQ_VerCpb_EntregaCANTIDAD: TFloatField;
-    ZQ_VerCpb_EntregaIMPORTE_FINAL: TFloatField;
-    ZQ_VerCpb_EntregaPORC_DESCUENTO: TFloatField;
-    ZQ_VerCpb_EntregaBASE_IMPONIBLE: TFloatField;
-    ZQ_VerCpb_EntregaIMPORTE_UNITARIO: TFloatField;
-    ZQ_VerCpb_EntregaIMPUESTO_INTERNO: TFloatField;
-    ZQ_VerCpb_EntregaPORC_IVA: TFloatField;
-    ZQ_VerCpb_EntregaCANTIDAD_RECIBIDA: TFloatField;
-    ZQ_VerCpb_EntregaCANTIDAD_ALMACENADA: TFloatField;
-    ZQ_VerCpb_EntregaID_STOCK_PRODUCTO: TIntegerField;
-    ZQ_VerCpb_EntregaIMPORTE_VENTA: TFloatField;
-    ZQ_VerCpb_EntregaIMPORTE_IVA: TFloatField;
-    ZQ_VerCpb_EntregaCOD_CABECERA: TStringField;
-    ZQ_VerCpb_EntregaPRODUCTO: TStringField;
-    ZQ_VerCpb_EntregaIMAGEN: TBlobField;
-    ZQ_VerCpb_EntregaMEDIDA: TStringField;
-    ZQ_VerCpb_EntregaCOLOR: TStringField;
-    ZQ_VerCpb_EntregaMARCA: TStringField;
-    ZQ_VerCpb_EntregaARTICULO: TStringField;
-    ZQ_VerCpb_EntregaTIPO_ARTICULO: TStringField;
-    ZQ_VerCpb_EntregaCOD_PRODUCTO: TStringField;
-    ZQ_VerCpb_EntregaCODIGO_BARRA: TStringField;
-    ZQ_VerCpb_EntregaPRECIO_COSTO: TFloatField;
-    ZQ_VerCpb_EntregaPRECIO_VENTA: TFloatField;
-    ZQ_VerCpb_EntregaCOEF_GANANCIA: TFloatField;
-    ZQ_VerCpb_EntregaCOEF_DESCUENTO: TFloatField;
-    ZQ_VerCpb_EntregaIMPUESTO_INTERNO_1: TFloatField;
-    ZQ_VerCpb_EntregaIMPUESTO_IVA: TFloatField;
     DBGridCpbActual_Entrega: TDBGrid;
     CD_Devolucion_idComp_Detalle: TIntegerField;
     CD_Entrega_idComp_Detalle: TIntegerField;
@@ -494,6 +432,87 @@ type
     ZQ_SaldoNotaCreditoSALDO: TFloatField;
     ZQ_VerCpbINSERT_MANUAL: TStringField;
     ZQ_VerCpbID_POSICION_SUC_DESTINO: TIntegerField;
+    ZQ_BuscarPrecio: TZQuery;
+    ZQ_BuscarPrecioID_PRECIO: TIntegerField;
+    ZQ_BuscarPrecioID_PRODUCTO: TIntegerField;
+    ZQ_BuscarPrecioID_SUCURSAL: TIntegerField;
+    ZQ_BuscarPrecioPRECIO_COSTO: TFloatField;
+    ZQ_BuscarPrecioPRECIO_VENTA: TFloatField;
+    ZQ_BuscarPrecioCOEF_GANANCIA: TFloatField;
+    ZQ_BuscarPrecioCOEF_DESCUENTO: TFloatField;
+    ZQ_BuscarPrecioIMPUESTO_INTERNO: TFloatField;
+    ZQ_BuscarPrecioIMPUESTO_IVA: TFloatField;
+    ZQ_BuscarPrecioPRECIO_COSTO_CIMPUESTOS: TFloatField;
+    ZQ_BuscarPrecioIMPUESTO_ADICIONAL1: TFloatField;
+    ZQ_BuscarPrecioIMPUESTO_ADICIONAL2: TFloatField;
+    ZQ_BuscarPrecioPRECIO1: TFloatField;
+    ZQ_BuscarPrecioPRECIO2: TFloatField;
+    ZQ_BuscarPrecioPRECIO3: TFloatField;
+    ZQ_BuscarPrecioPRECIO4: TFloatField;
+    ZQ_BuscarPrecioPRECIO5: TFloatField;
+    ZQ_BuscarPrecioINSERT_MANUAL: TStringField;
+    ZQ_VerCpb_DevolucionID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_VerCpb_DevolucionID_COMPROBANTE: TIntegerField;
+    ZQ_VerCpb_DevolucionID_PRODUCTO: TIntegerField;
+    ZQ_VerCpb_DevolucionDETALLE: TStringField;
+    ZQ_VerCpb_DevolucionCANTIDAD: TFloatField;
+    ZQ_VerCpb_DevolucionIMPORTE_FINAL: TFloatField;
+    ZQ_VerCpb_DevolucionPORC_DESCUENTO: TFloatField;
+    ZQ_VerCpb_DevolucionBASE_IMPONIBLE: TFloatField;
+    ZQ_VerCpb_DevolucionIMPORTE_UNITARIO: TFloatField;
+    ZQ_VerCpb_DevolucionIMPUESTO_INTERNO: TFloatField;
+    ZQ_VerCpb_DevolucionPORC_IVA: TFloatField;
+    ZQ_VerCpb_DevolucionCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_VerCpb_DevolucionCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_VerCpb_DevolucionID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_VerCpb_DevolucionIMPORTE_VENTA: TFloatField;
+    ZQ_VerCpb_DevolucionIMPORTE_IVA: TFloatField;
+    ZQ_VerCpb_DevolucionIMPORTE_IF: TFloatField;
+    ZQ_VerCpb_DevolucionIMPORTE_IF_SINIVA: TFloatField;
+    ZQ_VerCpb_DevolucionIMPORTE_IVA_IF: TFloatField;
+    ZQ_VerCpb_DevolucionINSERT_MANUAL: TStringField;
+    ZQ_VerCpb_DevolucionCOD_CABECERA: TStringField;
+    ZQ_VerCpb_DevolucionPRODUCTO: TStringField;
+    ZQ_VerCpb_DevolucionIMAGEN: TBlobField;
+    ZQ_VerCpb_DevolucionMEDIDA: TStringField;
+    ZQ_VerCpb_DevolucionCOLOR: TStringField;
+    ZQ_VerCpb_DevolucionMARCA: TStringField;
+    ZQ_VerCpb_DevolucionARTICULO: TStringField;
+    ZQ_VerCpb_DevolucionTIPO_ARTICULO: TStringField;
+    ZQ_VerCpb_DevolucionCOD_PRODUCTO: TStringField;
+    ZQ_VerCpb_DevolucionCODIGO_BARRA: TStringField;
+    ZQ_VerCpb_DevolucionID_SUCURSAL: TIntegerField;
+    ZQ_VerCpb_EntregaID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_VerCpb_EntregaID_COMPROBANTE: TIntegerField;
+    ZQ_VerCpb_EntregaID_PRODUCTO: TIntegerField;
+    ZQ_VerCpb_EntregaDETALLE: TStringField;
+    ZQ_VerCpb_EntregaCANTIDAD: TFloatField;
+    ZQ_VerCpb_EntregaIMPORTE_FINAL: TFloatField;
+    ZQ_VerCpb_EntregaPORC_DESCUENTO: TFloatField;
+    ZQ_VerCpb_EntregaBASE_IMPONIBLE: TFloatField;
+    ZQ_VerCpb_EntregaIMPORTE_UNITARIO: TFloatField;
+    ZQ_VerCpb_EntregaIMPUESTO_INTERNO: TFloatField;
+    ZQ_VerCpb_EntregaPORC_IVA: TFloatField;
+    ZQ_VerCpb_EntregaCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_VerCpb_EntregaCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_VerCpb_EntregaID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_VerCpb_EntregaIMPORTE_VENTA: TFloatField;
+    ZQ_VerCpb_EntregaIMPORTE_IVA: TFloatField;
+    ZQ_VerCpb_EntregaIMPORTE_IF: TFloatField;
+    ZQ_VerCpb_EntregaIMPORTE_IF_SINIVA: TFloatField;
+    ZQ_VerCpb_EntregaIMPORTE_IVA_IF: TFloatField;
+    ZQ_VerCpb_EntregaINSERT_MANUAL: TStringField;
+    ZQ_VerCpb_EntregaCOD_CABECERA: TStringField;
+    ZQ_VerCpb_EntregaPRODUCTO: TStringField;
+    ZQ_VerCpb_EntregaIMAGEN: TBlobField;
+    ZQ_VerCpb_EntregaMEDIDA: TStringField;
+    ZQ_VerCpb_EntregaCOLOR: TStringField;
+    ZQ_VerCpb_EntregaMARCA: TStringField;
+    ZQ_VerCpb_EntregaARTICULO: TStringField;
+    ZQ_VerCpb_EntregaTIPO_ARTICULO: TStringField;
+    ZQ_VerCpb_EntregaCOD_PRODUCTO: TStringField;
+    ZQ_VerCpb_EntregaCODIGO_BARRA: TStringField;
+    ZQ_VerCpb_EntregaID_SUCURSAL: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -653,11 +672,13 @@ end;
 
 procedure TFABM_CPB_Devolucion.FormCreate(Sender: TObject);
 begin
-  //  EKOrd_VerCpb.CargarConfigColumnas;
-  //  EKOrd_VerCpb_Fpago.CargarConfigColumnas;
-  //  EKOrd_VerCpb_Producto.CargarConfigColumnas;
-  //  EKOrd_EditarProducto.CargarConfigColumnas;
-  //  EKOrd_EditarFpago.CargarConfigColumnas;
+  EKOrd_VerCpb.CargarConfigColumnas;
+  EKOrd_VerCpb_Fpago.CargarConfigColumnas;
+  EKOrd_VerCpb_Devolucion.CargarConfigColumnas;
+  EKOrd_VerCpb_Entrega.CargarConfigColumnas;
+  EKOrd_EditarDevolucion.CargarConfigColumnas;
+  EKOrd_EditarEntrega.CargarConfigColumnas;
+  EKOrd_EditarFpago.CargarConfigColumnas;
 
   DBGridEditar_Devolucion.Color:= DBGridCpbActual_Devolucion.Color;
   DBGridEditar_Entrega.Color:= DBGridCpbActual_Entrega.Color;
@@ -794,8 +815,8 @@ begin
     ZQ_ComprobanteID_COMPROBANTE.AsInteger:= id_comprobante;
     ZQ_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
     ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
-    ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
-    ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
+//    ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
+//    ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
     ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
     ZQ_ComprobanteFECHA_COBRADA.Clear;
     ZQ_ComprobanteFECHA_ENVIADA.Clear;
@@ -934,24 +955,24 @@ begin
     end;
 
 
-
-  if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante
-  begin
-    //busco de nuevo cual es el ultimo numero
-    ZQ_NumeroCpb.Close;
-    ZQ_NumeroCpb.ParamByName('id_tipo').AsInteger:= tipoComprobante;
-    ZQ_NumeroCpb.Open;
-
-    //si el ultimo numero es distinto al que cargue al principio lo actualizo
-    if ZQ_ComprobanteNUMERO_CPB.AsInteger <> (ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1) then
-    begin
-      ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
-      ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
-    end;
-
-    ZQ_NumeroCpb.Edit;
-    ZQ_NumeroCpbULTIMO_NUMERO.AsInteger:= ZQ_ComprobanteNUMERO_CPB.AsInteger;
-  end;
+//NO GUARDO MAS EL PV Y NUMERO PORQUE SE TIENE QUE IMPRIMIR POR LA TICKEADORA
+//  if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante
+//  begin
+//    //busco de nuevo cual es el ultimo numero
+//    ZQ_NumeroCpb.Close;
+//    ZQ_NumeroCpb.ParamByName('id_tipo').AsInteger:= tipoComprobante;
+//    ZQ_NumeroCpb.Open;
+//
+//    //si el ultimo numero es distinto al que cargue al principio lo actualizo
+//    if ZQ_ComprobanteNUMERO_CPB.AsInteger <> (ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1) then
+//    begin
+//      ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
+//      ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
+//    end;
+//
+//    ZQ_NumeroCpb.Edit;
+//    ZQ_NumeroCpbULTIMO_NUMERO.AsInteger:= ZQ_ComprobanteNUMERO_CPB.AsInteger;
+//  end;
 
   //---------------FORMA DE PAGO
   guardarFormaPago;
@@ -1197,8 +1218,10 @@ begin
 
   ZQ_VerCpb_Entrega.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   ZQ_VerCpb_Entrega.Open;
+
   ZQ_VerCpb_Devolucion.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   ZQ_VerCpb_Devolucion.Open;
+
   ZQ_VerCpb_Fpago.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   ZQ_VerCpb_Fpago.Open;
 
@@ -1444,6 +1467,11 @@ begin
   query.First;
   while not query.Eof do
   begin
+    ZQ_BuscarPrecio.Close;
+    ZQ_BuscarPrecio.ParamByName('id_sucursal').AsInteger:= query.FieldByName('ID_PRODUCTO').AsInteger;
+    ZQ_BuscarPrecio.ParamByName('id_producto').AsInteger:= query.FieldByName('ID_SUCURSAL').AsInteger;
+    ZQ_BuscarPrecio.Open;
+
     client.Append;
     client.FieldByName('idProducto').AsInteger:= query.FieldByName('ID_PRODUCTO').AsInteger;
     client.FieldByName('idComp_Detalle').AsInteger:= query.FieldByName('ID_COMPROBANTE_DETALLE').AsInteger;
@@ -1456,11 +1484,11 @@ begin
     client.FieldByName('codigoBarra').AsString:= query.FieldByName('CODIGO_BARRA').AsString;
     client.FieldByName('codCabecera').AsString:= query.FieldByName('COD_CABECERA').AsString;
     client.FieldByName('codProducto').AsString:= query.FieldByName('COD_PRODUCTO').AsString;
-    client.FieldByName('precioCosto').AsFloat:= query.FieldByName('PRECIO_COSTO').AsFloat;
-    client.FieldByName('precioVenta').AsFloat:= query.FieldByName('PRECIO_VENTA').AsFloat;
-    client.FieldByName('coefGanancia').AsFloat:= query.FieldByName('COEF_GANANCIA').AsFloat;
-    client.FieldByName('coefDescuento').AsFloat:= query.FieldByName('COEF_DESCUENTO').AsFloat;
-    client.FieldByName('impuestoIVA').AsFloat:= query.FieldByName('IMPUESTO_IVA').AsFloat;
+    client.FieldByName('precioCosto').AsFloat:= ZQ_BuscarPrecioPRECIO_COSTO.AsFloat;
+    client.FieldByName('precioVenta').AsFloat:= ZQ_BuscarPrecioPRECIO_VENTA.AsFloat;
+    client.FieldByName('coefGanancia').AsFloat:= ZQ_BuscarPrecioCOEF_GANANCIA.AsFloat;
+    client.FieldByName('coefDescuento').AsFloat:= ZQ_BuscarPrecioCOEF_DESCUENTO.AsFloat;
+    client.FieldByName('impuestoIVA').AsFloat:= ZQ_BuscarPrecioIMPUESTO_IVA.AsFloat;
     client.Post;
 
     query.Next;
@@ -1830,11 +1858,13 @@ end;
 
 procedure TFABM_CPB_Devolucion.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  //  EKOrd_VerCpb.GuardarConfigColumnas;
-  //  EKOrd_VerCpb_Fpago.GuardarConfigColumnas;
-  //  EKOrd_VerCpb_Producto.GuardarConfigColumnas;
-  //  EKOrd_EditarProducto.GuardarConfigColumnas;
-  //  EKOrd_EditarFpago.GuardarConfigColumnas;
+  EKOrd_VerCpb.GuardarConfigColumnas;
+  EKOrd_VerCpb_Fpago.GuardarConfigColumnas;
+  EKOrd_VerCpb_Devolucion.GuardarConfigColumnas;
+  EKOrd_VerCpb_Entrega.GuardarConfigColumnas;
+  EKOrd_EditarDevolucion.GuardarConfigColumnas;
+  EKOrd_EditarEntrega.GuardarConfigColumnas;
+  EKOrd_EditarFpago.GuardarConfigColumnas;
 end;
 
 

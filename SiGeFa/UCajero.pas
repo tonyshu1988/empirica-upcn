@@ -116,7 +116,7 @@ type
     edCantidad: TDBEdit;
     edDesc: TDBEdit;
     edImporteFinal: TDBEdit;
-    PanelDeralles: TPanel;
+    PanelDetalles: TPanel;
     PanelCabeceraFactura: TPanel;
     Label12: TLabel;
     Label13: TLabel;
@@ -592,6 +592,16 @@ type
     Panel1: TPanel;
     lblTotAPagar: TLabel;
     lblNroCPB: TLabel;
+    PanelDetallePreventa: TPanel;
+    Label54: TLabel;
+    Label56: TLabel;
+    DBEdit20: TDBEdit;
+    Label59: TLabel;
+    DBEdit21: TDBEdit;
+    Label60: TLabel;
+    DBEdit22: TDBEdit;
+    DS_ComprobPreventa: TDataSource;
+    DS_PreventaFP: TDataSource;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -689,6 +699,7 @@ type
     procedure buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShiftState);
     function verificarSaldoNotaCredito(query: TDataSet; id_cliente: integer): boolean;
     procedure ultimoIDPago();
+    procedure panelPreventa(flag: boolean);
   Private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -1003,6 +1014,7 @@ begin
    end;
 
   ultimoIDPago();
+  panelPreventa(false);
 end;
 
 
@@ -1377,7 +1389,7 @@ begin
   VerLectorCB(false);
   PProducto.Visible:= False;
   PanelProductosYFPago.Enabled:= True;
-  PanelDeralles.Enabled:= True;
+  PanelDetalles.Enabled:= True;
   grupoVertical.Enabled:= True;
   GrupoGuardarCancelar.Enabled:= True;
   PanelDetalleProducto.Enabled:= False;
@@ -1394,7 +1406,7 @@ begin
   PProducto.Visible:= True;
   PanelDetalleProducto.Enabled:= True;
   PanelProductosYFPago.Enabled:= False;
-  PanelDeralles.Enabled:= False;
+  PanelDetalles.Enabled:= False;
   grupoVertical.Enabled:= False;
   GrupoGuardarCancelar.Enabled:= False;
   PanelDetalleProducto.Color:= $00AFFED5;
@@ -1705,7 +1717,7 @@ begin
           IdVendedor:= vendedor;
         CD_ComprobanteID_VENDEDOR.Value:= IdVendedor;
         Result:= True;
-
+        panelPreventa(false);
       end;
     end
   except
@@ -2233,6 +2245,8 @@ procedure TFCajero.cargarPreventa;
 var
   i: Integer;
 begin
+  panelPreventa(true);
+
   ZQ_PreventaProductos.Close;
   ZQ_PreventaProductos.ParamByName('comprob').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
   ZQ_PreventaProductos.Open;
@@ -2283,7 +2297,6 @@ begin
       CD_DetalleFacturaimporte_original.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
 
       CD_DetalleFactura.Post;
-
       ZQ_PreventaProductos.Next;
     end;
 
@@ -2311,23 +2324,23 @@ begin
     ZQ_PreventaFP.ParamByName('comprob').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     ZQ_PreventaFP.Open;
 
-    if ZQ_PreventaFP.RecordCount>0 then
-    begin
-      ZQ_PreventaFP.First;
-      while not(ZQ_PreventaFP.Eof) do
-       begin
-         CD_Fpago.Append;
-         CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_PreventaFPID_TIPO_FORMAPAG.AsInteger;
-         CD_FpagoMDCP_FECHA.AsDateTime:=ZQ_PreventaFPMDCP_FECHA.AsDateTime;
-         CD_FpagoMDCP_BANCO.AsString:=ZQ_PreventaFPMDCP_BANCO.AsString;
-         CD_FpagoMDCP_CHEQUE.AsString:=ZQ_PreventaFPMDCP_CHEQUE.AsString;
-         CD_FpagoIMPORTE.AsFloat:=ZQ_PreventaFPIMPORTE.AsFloat;
-         CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_PreventaFPCUENTA_INGRESO.AsInteger;
-         calcularFP();
-         CD_Fpago.Post;
-         ZQ_PreventaFP.Next;
-       end;
-    end;
+//    if ZQ_PreventaFP.RecordCount > 0 then
+//    begin
+//      ZQ_PreventaFP.First;
+//      while not(ZQ_PreventaFP.Eof) do
+//       begin
+//         CD_Fpago.Append;
+//         CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_PreventaFPID_TIPO_FORMAPAG.AsInteger;
+//         CD_FpagoMDCP_FECHA.AsDateTime:=ZQ_PreventaFPMDCP_FECHA.AsDateTime;
+//         CD_FpagoMDCP_BANCO.AsString:=ZQ_PreventaFPMDCP_BANCO.AsString;
+//         CD_FpagoMDCP_CHEQUE.AsString:=ZQ_PreventaFPMDCP_CHEQUE.AsString;
+//         CD_FpagoIMPORTE.AsFloat:=ZQ_PreventaFPIMPORTE.AsFloat;
+//         CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_PreventaFPCUENTA_INGRESO.AsInteger;
+//         calcularFP();
+//         CD_Fpago.Post;
+//         ZQ_PreventaFP.Next;
+//       end;
+//    end;
 
     lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
     lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
@@ -2376,6 +2389,7 @@ begin
   modoCargaPrevia:= False;
   modoLecturaProd();
   RecalcularMontoPago();
+  panelPreventa(false);
 end;
 
 
@@ -2549,6 +2563,32 @@ procedure TFCajero.btFPAceptarClick(Sender: TObject);
 begin
   if CD_Fpago.State in [dsInsert, dsEdit] then
   begin
+    if CD_FpagoCUENTA_INGRESO.AsInteger = 1 then //si se eligio Cuenta Corriente
+    begin
+      if cliente <= 0 then //si es consumidor final
+      begin
+        ShowMessage('No se puede elegir Cuenta Corriente para el cliente CONSUMIDOR FINAL, verifique');
+        exit;
+      end
+      else //si no es consumidor final
+      begin
+        if not dm.verificarCuentaCorriente(cliente) then //si no tiene cuenta corriente en el negocio
+        begin
+          ShowMessage('El cliente '+CD_Comprobantepers_nombre.AsString+' no tiene Cuenta Corriente en el negocio, verifique');
+          exit;
+        end;
+      end;
+    end
+    else
+    if CD_FpagoCUENTA_INGRESO.AsInteger = 2 then //si se eligio Nota Credito
+    begin
+      if cliente <= 0 then //si es consumidor final
+      begin
+        ShowMessage('No se puede elegir Nota Credito para el cliente CONSUMIDOR FINAL, verifique');
+        exit;
+      end
+    end;
+
     CD_Fpago.Post;
     PABM_FormaPago.Visible:= False;
     PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
@@ -2556,6 +2596,16 @@ begin
     GrupoGuardarCancelar.Enabled:= true;
     DBGridFormaPago.SetFocus;
   end
+
+//  if CD_Fpago.State in [dsInsert, dsEdit] then
+//  begin
+//    CD_Fpago.Post;
+//    PABM_FormaPago.Visible:= False;
+//    PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
+//    grupoVertical.Enabled:= true;
+//    GrupoGuardarCancelar.Enabled:= true;
+//    DBGridFormaPago.SetFocus;
+//  end
 end;
 
 
@@ -2829,6 +2879,21 @@ begin
   ZQ_UltimoCPB.ParamByName('id_sucursal').AsInteger:=SUCURSAL_LOGUEO;
   dm.EKModelo.abrir(ZQ_UltimoCPB);
   lblNroCPB.Caption:=Format(' Nº CPB: %d',[ZQ_UltimoCPBNUMERO_CPB.AsInteger+1]);
+end;
+
+
+procedure TFCajero.panelPreventa(flag: boolean);
+begin
+  if flag then
+  begin
+    PanelDetallePreventa.Visible:= true;
+    PanelDetalles.Height:= 160;
+  end
+  else
+  begin
+    PanelDetallePreventa.Visible:= false;
+    PanelDetalles.Height:= 160 - PanelDetallePreventa.Height;
+  end
 end;
 
 end.
