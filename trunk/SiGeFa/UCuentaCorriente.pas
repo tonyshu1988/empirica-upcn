@@ -21,7 +21,7 @@ type
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     AVerCtaCte: TAction;
-    AModificar: TAction;
+    AVerDetalle: TAction;
     AEliminar: TAction;
     ABaja: TAction;
     AReactivar: TAction;
@@ -227,7 +227,6 @@ type
     ZQ_SaldoIniIMPORTE_TOTAL: TFloatField;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
-    DBGridDetalle_Producto: TDBGrid;
     ZQ_ComprobanteDetalle: TZQuery;
     DS_ComprobanteDetalle: TDataSource;
     ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField;
@@ -303,7 +302,6 @@ type
     ZQ_CtaCte_ClienteSALDO_CPB: TFloatField;
     ZQ_CtaCte_ClienteSALDO: TFloatField;
     ZQ_CtaCte_ClienteSUCURSAL: TStringField;
-    DBGridDetalle_Recibo: TDBGrid;
     DS_ReciboDetalle: TDataSource;
     ZQ_ReciboDetalle: TZQuery;
     ZQ_ReciboDetalleID_PAGO_FACTURAS: TIntegerField;
@@ -317,6 +315,10 @@ type
     ZQ_ReciboDetalleIMPORTE_REAL: TFloatField;
     EKOrdenar_DetalleRecibo: TEKOrdenarGrilla;
     btnAltaRecibo: TdxBarLargeButton;
+    PanelDetalleMov: TPanel;
+    DBGridDetalle_Recibo: TDBGrid;
+    DBGridDetalle_Producto: TDBGrid;
+    lblTitulo_PanelDetalleMov: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -341,6 +343,7 @@ type
     procedure ZQ_CtaCte_ClienteAfterScroll(DataSet: TDataSet);
     procedure btnVerDetalleFacturaClick(Sender: TObject);
     procedure btnAltaReciboClick(Sender: TObject);
+    procedure AVerDetalleExecute(Sender: TObject);
   Private
     viendoResumen: boolean;
     viendoDetalleCpb: boolean;
@@ -409,8 +412,7 @@ begin
     btnAltaRecibo.Visible:= ivAlways;
     btnVerDetalleFactura.Visible:= ivAlways;
 
-    DBGridDetalle_Producto.Height:= 1;
-    DBGridDetalle_Recibo.Height:= 1;
+    PanelDetalleMov.Visible:= false;
     viendoDetalleCpb:= false;
   end
   else
@@ -480,6 +482,13 @@ begin
   if btnVerCtaCte.Enabled then
     btnVerCtaCte.Click;
 end;
+
+procedure TFCuentaCorriente.AVerDetalleExecute(Sender: TObject);
+begin
+  if btnVerDetalleFactura.Enabled then
+    btnVerDetalleFactura.Click;
+end;
+
 //----------------------------------
 //  FIN TECLAS RAPIDAS
 //----------------------------------
@@ -800,22 +809,25 @@ begin
     if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0)
       or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
     begin
-      DBGridDetalle_Producto.Height:= 1;
-      DBGridDetalle_Recibo.Height:= 1;
+      PanelDetalleMov.Visible:= false;
     end
     else //sino
     //si el tipo de comprobante es recibo de cta cte
       if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
       begin
-        DBGridDetalle_Producto.Height:= 1;
-        DBGridDetalle_Recibo.Height:= 140;
+        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE '+ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+        PanelDetalleMov.Visible:= true;
+        DBGridDetalle_Producto.SendToBack;
+        DBGridDetalle_Recibo.BringToFront;
       end
       else //sino
       //si el tipo de comprobante es distinto de nota de credito
         if AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) = 0 then
         begin
-          DBGridDetalle_Producto.Height:= 140;
-          DBGridDetalle_Recibo.Height:= 1;
+          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE '+ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+          PanelDetalleMov.Visible:= true;
+          DBGridDetalle_Producto.BringToFront;
+          DBGridDetalle_Recibo.SendToBack;
         end;
   end
 end;
@@ -829,8 +841,7 @@ begin
   if viendoDetalleCpb = true then
   begin
     viendoDetalleCpb:= false;
-    DBGridDetalle_Producto.Height:= 1;
-    DBGridDetalle_Recibo.Height:= 1;
+    PanelDetalleMov.Visible:= false;
   end
   else
   begin
@@ -839,17 +850,26 @@ begin
     if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0)
       or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
     begin
-      DBGridDetalle_Producto.Height:= 1;
-      DBGridDetalle_Recibo.Height:= 1;
+      PanelDetalleMov.Visible:= false;
     end
     else //sino
     //si el tipo de comprobante es recibo de cta cte
       if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
-        DBGridDetalle_Recibo.Height:= 140
+      begin
+        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE '+ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+        PanelDetalleMov.Visible:= true;
+        DBGridDetalle_Producto.SendToBack;
+        DBGridDetalle_Recibo.BringToFront;
+      end
       else //sino
-    //si el tipo de comprobante es distinto de nota de credito
+      //si el tipo de comprobante es distinto de nota de credito
         if AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) = 0 then
-          DBGridDetalle_Producto.Height:= 140
+        begin
+          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE '+ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+          PanelDetalleMov.Visible:= true;
+          DBGridDetalle_Producto.BringToFront;
+          DBGridDetalle_Recibo.SendToBack;
+        end
   end;
 end;
 
@@ -870,6 +890,8 @@ begin
       ShowMessage('Hay un alta de Recibo en curso, verifique');
   end
 end;
+
+
 
 end.
 

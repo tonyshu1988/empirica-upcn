@@ -164,6 +164,7 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
+    ZQ_SeccionSuc: TZQuery;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnGuardarClick(Sender: TObject);
@@ -310,6 +311,9 @@ begin
   ZQ_Sucursal.Open;
   if ZQ_Sucursal.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     TEKCriterioBA(EKBuscarStock.CriteriosBusqueda.Items[13]).ItemIndex:= ZQ_Sucursal.RecNo - 1;
+
+  ZQ_SeccionSuc.Close;
+  ZQ_SeccionSuc.Open;
 end;
 
 
