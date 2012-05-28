@@ -1467,6 +1467,8 @@ object DM: TDM
     Caption = 'SIGEFA'
     Modo = EKLoginAutomatico
     ModoPermiso = EKPermisoAction
+    Titulo_DBAplicacion = 'db_aplicacion'
+    Titulo_DBUsuario = 'db_usuarios'
     Left = 208
     Top = 16
   end
@@ -1823,7 +1825,7 @@ object DM: TDM
       'select *'
       'from configuracion_variables')
     Params = <>
-    Left = 222
+    Left = 206
     Top = 263
     object ZQ_Configuracion_VariablesCLAVE: TStringField
       FieldName = 'CLAVE'
@@ -1979,6 +1981,31 @@ object DM: TDM
     end
     object ZQ_ValidarFecha_HoraID_SINCRO_LOTE: TIntegerField
       FieldName = 'ID_SINCRO_LOTE'
+    end
+  end
+  object ZQ_VerificarCtaCte: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select c.id_cta_cte'
+      'from cuenta_corriente c'
+      'where c.id_persona = :id_cliente'
+      'and c.baja = '#39'N'#39)
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    Left = 282
+    Top = 264
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    object ZQ_VerificarCtaCteID_CTA_CTE: TIntegerField
+      FieldName = 'ID_CTA_CTE'
     end
   end
 end

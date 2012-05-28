@@ -220,7 +220,7 @@ type
     EKBuscar: TEKBusquedaAvanzada;
     btnExcel: TdxBarLargeButton;
     ZQ_MovHoyNOMBRE: TStringField;
-    btImprimirComprobante: TdxBarLargeButton;
+    btn_ImprimirComprobante: TdxBarLargeButton;
     RepComprobante: TQuickRep;
     QRBand1: TQRBand;
     QRDBImage1: TQRDBImage;
@@ -249,7 +249,6 @@ type
     QRDBText7: TQRDBText;
     QRLabel12: TQRLabel;
     ChildBand2: TQRChildBand;
-    QRLabel13: TQRLabel;
     QRLabel14: TQRLabel;
     QRExpr1: TQRExpr;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -285,7 +284,7 @@ type
     procedure SpeedBtn_MesSiguienteClick(Sender: TObject);
     procedure EKSuma_MovSumListChanged(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
-    procedure btImprimirComprobanteClick(Sender: TObject);
+    procedure btn_ImprimirComprobanteClick(Sender: TObject);
   private
     id_cuenta_fpago: integer;
     fechaActual: TDate;
@@ -1018,7 +1017,7 @@ begin
     dm.ExportarEXCEL(DBGrid_Dia);
 end;
 
-procedure TFMovimientosInternos.btImprimirComprobanteClick(
+procedure TFMovimientosInternos.btn_ImprimirComprobanteClick(
   Sender: TObject);
 begin
   if (ZQ_MovHoyID_TIPO_CPB.AsInteger = CPB_OTROS_EGRESOS) then

@@ -12,7 +12,6 @@ object FBuscarComprobante: TFBuscarComprobante
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
-  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -1469,5 +1468,29 @@ object FBuscarComprobante: TFBuscarComprobante
     DataSet = ZQ_Factura_Compra
     Left = 457
     Top = 250
+  end
+  object ZQ_SaldoNotaCredito: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select saldo'
+      'from calc_saldo_nota_credito(:id_cliente)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    Left = 581
+    Top = 49
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    object ZQ_SaldoNotaCreditoSALDO: TFloatField
+      FieldName = 'SALDO'
+      ReadOnly = True
+    end
   end
 end

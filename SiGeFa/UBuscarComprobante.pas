@@ -64,10 +64,11 @@ type
     lblSaldoTotal: TLabel;
     EKDbSumaVenta: TEKDbSuma;
     EKDbSumaCompra: TEKDbSuma;
+    ZQ_SaldoNotaCredito: TZQuery;
+    ZQ_SaldoNotaCreditoSALDO: TFloatField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
     procedure ASeleccionarExecute(Sender: TObject);
     procedure ASalirExecute(Sender: TObject);
@@ -76,16 +77,12 @@ type
     procedure btnSeleccionarTodosClick(Sender: TObject);
     procedure DBGridFacturasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure configFactura(Venta, Compra: boolean; id: integer);
-    procedure DBGridDetalleDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridDetalleDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ZQ_Factura_VentaAfterScroll(DataSet: TDataSet);
     procedure ZQ_Factura_CompraAfterScroll(DataSet: TDataSet);
     procedure ASelTodosExecute(Sender: TObject);
   Private
-    { Private declarations }
   Public
-    { Public declarations }
     OnSeleccionar: procedure() of object;
     OnSeleccionarTodos: procedure() of object;
     facturaVenta, facturaCompra: boolean;
@@ -110,17 +107,25 @@ end;
 
 
 procedure TFBuscarComprobante.btnBuscarClick(Sender: TObject);
+var
+  saldo, notaCredito: string;
 begin
   if facturaVenta then
   begin
-    EKBuscarFacturaVenta.Buscar;
-    lblSaldoTotal.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSumaVenta.SumCollection[0].SumValue) + '  ';
+    if EKBuscarFacturaVenta.Buscar then
+    begin
+      saldo:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSumaVenta.SumCollection[0].SumValue);
+      notaCredito:= 'Nota Credito: '+FormatFloat('$ ###,###,###,##0.00', ZQ_SaldoNotaCreditoSALDO.AsFloat);
+      lblSaldoTotal.Caption:= saldo+' || '+notaCredito+' ';
+    end;
   end
   else
     if facturaCompra then
     begin
-      EKBuscarFacturaCompra.Buscar;
-      lblSaldoTotal.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSumaCompra.SumCollection[0].SumValue) + '  ';
+      if EKBuscarFacturaCompra.Buscar then
+      begin
+        lblSaldoTotal.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSumaCompra.SumCollection[0].SumValue) + '  ';
+      end;
     end;
 
   query.First;
@@ -136,16 +141,6 @@ begin
   end
   else
     Application.MessageBox(PChar('Debe seleccionar algúna Factura.'), 'Datos Incompletos', MB_OK + MB_ICONWARNING);
-end;
-
-
-procedure TFBuscarComprobante.FormActivate(Sender: TObject);
-begin
-  //  if query.IsEmpty then
-  //  begin
-  //    Application.ProcessMessages;
-  //    btnBuscar.Click;
-  //  end;
 end;
 
 
@@ -171,12 +166,16 @@ end;
 
 
 procedure TFBuscarComprobante.FormCreate(Sender: TObject);
+var
+  saldo, notaCredito: string;
 begin
   idActual:= -1;
   facturaVenta:= false;
   facturaCompra:= false;
-  lblSaldoTotal.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', 0) + '  ';
 
+  saldo:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', 0);
+  notaCredito:= 'Nota Credito: '+FormatFloat('$ ###,###,###,##0.00', 0);
+  lblSaldoTotal.Caption:= saldo+' || '+notaCredito+' ';
   //EKOrdenarGrilla.CargarConfigColumnas;
 end;
 
@@ -224,6 +223,11 @@ begin
     ZQ_Entidad.Close;
     ZQ_Entidad.SQL.Text:= 'select nombre from persona where id_persona = ' + IntToStr(id);
     ZQ_Entidad.Open;
+
+    //obtengo el saldo en nota de credito que tiene el cliente
+    ZQ_SaldoNotaCredito.Close;
+    ZQ_SaldoNotaCredito.ParamByName('id_cliente').AsInteger:= id;
+    ZQ_SaldoNotaCredito.Open;
   end
   else
     if facturaCompra then
