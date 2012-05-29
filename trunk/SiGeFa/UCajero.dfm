@@ -3944,6 +3944,13 @@ object FCajero: TFCajero
               Title.Caption = 'N'#250'mero'
               Width = 97
               Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = '_esSenia'
+              Title.Alignment = taCenter
+              Title.Caption = 'Se'#241'a'
+              Visible = True
             end>
         end
       end
@@ -5051,6 +5058,10 @@ object FCajero: TFCajero
       LookupResultField = 'A_CTA_CORRIENTE'
       KeyFields = 'CUENTA_INGRESO'
       Lookup = True
+    end
+    object CD_Fpago_esSenia: TStringField
+      FieldName = '_esSenia'
+      Size = 1
     end
   end
   object DSFpago: TDataSource

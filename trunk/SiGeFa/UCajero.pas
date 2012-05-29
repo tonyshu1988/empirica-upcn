@@ -2,6 +2,8 @@ unit UCajero;
 
 interface
 
+//VER EL TEMA DE DESCONTAR EL STOCK CUANDO ES UNA PREVENTA
+
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DB,
@@ -602,6 +604,7 @@ type
     DBEdit22: TDBEdit;
     DS_ComprobPreventa: TDataSource;
     DS_PreventaFP: TDataSource;
+    CD_Fpago_esSenia: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -717,7 +720,7 @@ type
 var
   FCajero: TFCajero;
   punitoriosacob, acumulado, ClienteIVA, descCliente, acumuladoIVA,
-  acumFpagoReal, acumFpago, acumEfectivo, acumuladoProd, totFiscal: double;
+    acumFpagoReal, acumFpago, acumEfectivo, acumuladoProd, totFiscal: double;
   acumPrecio1, acumPrecio2, acumPrecio3, acumPrecio4, acumPrecio5: double;
   coefPrecio1, coefPrecio2, coefPrecio3, coefPrecio4, coefPrecio5: double;
   IdProd: string;
@@ -973,15 +976,17 @@ begin
 
   PanelCambiarFecha.Visible:= false;
   CheckBoxCambiarFecha.Checked:= false;
+
   if dm.EKUsrLogin.PermisoAccion('CAJA_CAMBIAR_FECHA') then
   begin
     PanelCambiarFecha.Visible:= true;
     DateTimePicker_FechaCarga.DateTime:= dm.EKModelo.FechayHora;
   end;
+
   if not (dm.EKUsrLogin.PermisoAccion('NO_FISCAL')) then
   begin
     ZQ_FormasPago.Filtered:= False;
-    ZQ_FormasPago.Filter:= Format('IF=%s', [QuotedStr('S')]);
+    ZQ_FormasPago.Filter:= Format('IF = %s', [QuotedStr('S')]);
     ZQ_FormasPago.Filtered:= True;
   end
   else
@@ -990,6 +995,7 @@ begin
     ZQ_FormasPago.Filter:= '';
     ZQ_FormasPago.Filtered:= True;
   end;
+
   PABM_FormaPago.Visible:= False;
   //Formas de Pago
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btFPAceptar.Glyph);
@@ -1003,15 +1009,15 @@ begin
 
   //Ver o no los cierres Fiscales
   if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
-   begin
-      btCierreZ.Enabled:=True;
-      BtCierreX.Enabled:=True;
-   end
+  begin
+    btCierreZ.Enabled:= True;
+    BtCierreX.Enabled:= True;
+  end
   else
-   begin
-      btCierreZ.Enabled:=False;
-      BtCierreX.Enabled:=False;
-   end;
+  begin
+    btCierreZ.Enabled:= False;
+    BtCierreX.Enabled:= False;
+  end;
 
   ultimoIDPago();
   panelPreventa(false);
@@ -1241,8 +1247,8 @@ end;
 
 procedure TFCajero.BtLeerCBClick(Sender: TObject);
 begin
-  //  if PConfirmarVenta.Visible then
-  //    exit;
+//  if PConfirmarVenta.Visible then
+//    exit;
 
 //  if modoCargaPrevia then
 //  begin
@@ -1421,8 +1427,10 @@ end;
 
 procedure TFCajero.btnQuitarPagoClick(Sender: TObject);
 begin
-  if not (CD_Fpago.IsEmpty) then
-    CD_Fpago.Delete;
+  if CD_Fpago.IsEmpty or (CD_Fpago_esSenia.AsString = 'S') then
+    exit;
+
+  CD_Fpago.Delete;
   EKDbSuma2.RecalcAll;
 end;
 
@@ -1693,7 +1701,7 @@ begin
       else
       begin
         //Application.MessageBox(PChar(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString])),'Atención');
-        
+
         if (totFiscal > 0) then
         begin
           imprimirFiscal(comprobante, 'F');
@@ -1908,7 +1916,7 @@ begin
     vsel4:= TFPreventa.Create(nil);
   vsel4.OnSeleccionar:= OnSelPreventa;
   vsel4.ShowModal;
-  vsel4:=nil;
+  vsel4:= nil;
 end;
 
 
@@ -1984,7 +1992,7 @@ begin
   if (not verificarSaldoNotaCredito(CD_Fpago, CD_ComprobanteID_CLIENTE.AsInteger)) then
   begin
     Application.MessageBox(pchar('El total a abonar en Nota de Credito es superior al saldo disponible, por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-    result:= false; 
+    result:= false;
     exit;
   end;
 
@@ -2037,7 +2045,10 @@ begin
   begin
     ZQ_Comprobante_FormaPago.Append;
     ZQ_Comprobante_FormaPagoID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-    ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+    if CD_Fpago_esSenia.AsString = 'S' then //si es una seña cambio la fecha de pago a la fecha de la seña por las estadisticas
+      ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime:= ZQ_PreventaFPFECHA_FP.AsDateTime
+    else //si no es una seña la fecha de pago es la misma del comprobante
+      ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
     ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger:= CD_FpagoID_TIPO_FORMAPAG.AsInteger;
     if CD_FpagoMDCP_FECHA.IsNull then
       ZQ_Comprobante_FormaPagoMDCP_FECHA.Clear
@@ -2061,7 +2072,6 @@ begin
   if not (CD_DetalleFactura.IsEmpty) then
     if CD_Fpago.State in [dsInsert, dsEdit] then
     begin
-
       //Si es una sola forma de pago le pongo el valor del total por defecto
       if ((acumulado > 0) and ((CD_FpagoIMPORTE.IsNull) or (CD_FpagoIMPORTE.AsFloat = 0)))
         and not (CD_FpagoID_TIPO_FORMAPAG.IsNull and CD_FpagoCUENTA_INGRESO.IsNull) then
@@ -2277,7 +2287,6 @@ begin
       CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= ZQ_PreventaProductosIMPORTE_VENTA.AsFloat;
       CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_PreventaProductosID_STOCK_PRODUCTO.AsInteger;
 
-
       // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio)
       ZQ_ColsPrecios.Close;
       ZQ_ColsPrecios.Open;
@@ -2293,9 +2302,7 @@ begin
           CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
       end;
 
-
       CD_DetalleFacturaimporte_original.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
-
       CD_DetalleFactura.Post;
       ZQ_PreventaProductos.Next;
     end;
@@ -2324,26 +2331,32 @@ begin
     ZQ_PreventaFP.ParamByName('comprob').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     ZQ_PreventaFP.Open;
 
-//    if ZQ_PreventaFP.RecordCount > 0 then
-//    begin
-//      ZQ_PreventaFP.First;
-//      while not(ZQ_PreventaFP.Eof) do
-//       begin
-//         CD_Fpago.Append;
-//         CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_PreventaFPID_TIPO_FORMAPAG.AsInteger;
-//         CD_FpagoMDCP_FECHA.AsDateTime:=ZQ_PreventaFPMDCP_FECHA.AsDateTime;
-//         CD_FpagoMDCP_BANCO.AsString:=ZQ_PreventaFPMDCP_BANCO.AsString;
-//         CD_FpagoMDCP_CHEQUE.AsString:=ZQ_PreventaFPMDCP_CHEQUE.AsString;
-//         CD_FpagoIMPORTE.AsFloat:=ZQ_PreventaFPIMPORTE.AsFloat;
-//         CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_PreventaFPCUENTA_INGRESO.AsInteger;
-//         calcularFP();
-//         CD_Fpago.Post;
-//         ZQ_PreventaFP.Next;
-//       end;
-//    end;
+    if ZQ_PreventaFP.RecordCount > 0 then
+    begin
+      ZQ_PreventaFP.First;
+      while not (ZQ_PreventaFP.Eof) do
+      begin
+        CD_Fpago.Append;
+        CD_Fpago_esSenia.AsString:= 'S';
+        CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_PreventaFPID_TIPO_FORMAPAG.AsInteger;
+        CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_PreventaFPCUENTA_INGRESO.AsInteger;
+        if ZQ_PreventaFPMDCP_FECHA.IsNull then
+          CD_FpagoMDCP_FECHA.clear
+        else
+          CD_FpagoMDCP_FECHA.AsDateTime:= ZQ_PreventaFPMDCP_FECHA.AsDateTime;
+        CD_FpagoMDCP_BANCO.AsString:= ZQ_PreventaFPMDCP_BANCO.AsString;
+        CD_FpagoMDCP_CHEQUE.AsString:= ZQ_PreventaFPMDCP_CHEQUE.AsString;
+        CD_FpagoIMPORTE.AsFloat:= ZQ_PreventaFPIMPORTE.AsFloat;
+
+        calcularFP();
+        CD_Fpago.Post;
+        ZQ_PreventaFP.Next;
+      end;
+    end;
 
     lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
     lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+
     //Permite que no se modifique la venta
     modoCargaPrevia:= True;
   end
@@ -2532,15 +2545,15 @@ end;
 
 procedure TFCajero.btCierreZClick(Sender: TObject);
 begin
-    if (application.MessageBox(pchar('Desea Realizar el Cierre Z en la Impresora Fiscal ?'), 'Cierre Z', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-      imprimirFiscal(0, 'Z');
+  if (application.MessageBox(pchar('Desea Realizar el Cierre Z en la Impresora Fiscal ?'), 'Cierre Z', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    imprimirFiscal(0, 'Z');
 end;
 
 
 procedure TFCajero.BtCierreXClick(Sender: TObject);
 begin
-    if (application.MessageBox(pchar('Desea Realizar el Cierre X en la Impresora Fiscal ?'), 'Cierre X', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-      imprimirFiscal(0, 'X');
+  if (application.MessageBox(pchar('Desea Realizar el Cierre X en la Impresora Fiscal ?'), 'Cierre X', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    imprimirFiscal(0, 'X');
 end;
 
 
@@ -2574,20 +2587,20 @@ begin
       begin
         if not dm.verificarCuentaCorriente(cliente) then //si no tiene cuenta corriente en el negocio
         begin
-          ShowMessage('El cliente '+CD_Comprobantepers_nombre.AsString+' no tiene Cuenta Corriente en el negocio, verifique');
+          ShowMessage('El cliente ' + CD_Comprobantepers_nombre.AsString + ' no tiene Cuenta Corriente en el negocio, verifique');
           exit;
         end;
       end;
     end
     else
-    if CD_FpagoCUENTA_INGRESO.AsInteger = 2 then //si se eligio Nota Credito
-    begin
-      if cliente <= 0 then //si es consumidor final
+      if CD_FpagoCUENTA_INGRESO.AsInteger = 2 then //si se eligio Nota Credito
       begin
-        ShowMessage('No se puede elegir Nota Credito para el cliente CONSUMIDOR FINAL, verifique');
-        exit;
-      end
-    end;
+        if cliente <= 0 then //si es consumidor final
+        begin
+          ShowMessage('No se puede elegir Nota Credito para el cliente CONSUMIDOR FINAL, verifique');
+          exit;
+        end
+      end;
 
     CD_Fpago.Post;
     PABM_FormaPago.Visible:= False;
@@ -2617,6 +2630,9 @@ end;
 
 procedure TFCajero.CD_FpagoCUENTA_INGRESOChange(Sender: TField);
 begin
+  if CD_Fpago_esSenia.AsString = 'S' then
+    exit;
+
   if CD_Fpago.State in [dsInsert, dsEdit] then
   begin
     ZQ_FormasPago.Locate('ID_TIPO_FORMAPAGO', ZQ_CuentasMEDIO_DEFECTO.AsInteger, []);
@@ -2721,8 +2737,6 @@ begin
   //ZQ_FormasPago.Locate('IF;GENERA_VUELTO',VarArrayOf(['N', 'S']),[]);
   //CD_FpagoID_TIPO_FORMAPAG.AsInteger:=ZQ_FormasPagoID_TIPO_FORMAPAGO.AsInteger;
 
-
-
   calcularFP();
 
   CD_Fpago.Post;
@@ -2735,7 +2749,6 @@ begin
   //ShowMessage(ZQ_ComprobanteID_COMPROBANTE.AsString+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
 
   PVentaDirecta.Visible:= False;
-
 end;
 
 
@@ -2823,13 +2836,13 @@ begin
   begin
     id_cuenta_fpago:= CD_FpagoCUENTA_INGRESO.AsInteger;
     EKListadoMedio.SQL.Clear;
-    EKListadoMedio.SQL.Add(Format('select tipo.* '+
-                                  'from tipo_formapago tipo '+
-                                  'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) '+
-                                  'where tipo.baja = %s ' +
-                                  '  and ctfp.id_cuenta = %d ' +
-                                  'order by tipo.descripcion',
-                                  [QuotedStr('N'), id_cuenta_fpago]));
+    EKListadoMedio.SQL.Add(Format('select tipo.* ' +
+      'from tipo_formapago tipo ' +
+      'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) ' +
+      'where tipo.baja = %s ' +
+      '  and ctfp.id_cuenta = %d ' +
+      'order by tipo.descripcion',
+      [QuotedStr('N'), id_cuenta_fpago]));
 
     if EKListadoMedio.Buscar then
     begin
@@ -2876,9 +2889,9 @@ end;
 procedure TFCajero.ultimoIDPago;
 begin
   ZQ_UltimoCPB.Close;
-  ZQ_UltimoCPB.ParamByName('id_sucursal').AsInteger:=SUCURSAL_LOGUEO;
+  ZQ_UltimoCPB.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
   dm.EKModelo.abrir(ZQ_UltimoCPB);
-  lblNroCPB.Caption:=Format(' Nº CPB: %d',[ZQ_UltimoCPBNUMERO_CPB.AsInteger+1]);
+  lblNroCPB.Caption:= Format(' Nº CPB: %d', [ZQ_UltimoCPBNUMERO_CPB.AsInteger + 1]);
 end;
 
 

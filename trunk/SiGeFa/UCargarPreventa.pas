@@ -55,10 +55,10 @@ type
     ZQ_ComprobanteVENDEDOR_: TStringField;
     ZQ_ComprobanteTIVA_: TStringField;
     ZQ_ComprobanteCLIENTE_: TStringField;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_ComprobanteIMAGEN: TBlobField;
     Label29: TLabel;
     ZQ_ComprobanteVENCIDA: TStringField;
+    ZQ_ComprobanteSENIA_: TFloatField;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -68,12 +68,12 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridDblClick(Sender: TObject);
 
-  private
+  Private
     { Private declarations }
-  public
+  Public
     { Public declarations }
-    OnSeleccionar : procedure() of object;
-    vencida:String;
+    OnSeleccionar: procedure() of object;
+    vencida: string;
   end;
 
 var
@@ -87,23 +87,27 @@ uses UDM, UPrincipal;
 
 procedure TFPreventa.btnSeleccionarClick(Sender: TObject);
 begin
-if ((not(DBGrid.SelectedRows.Count > 0)) and (not(ZQ_Comprobante.IsEmpty))) then
+  if ((not (DBGrid.SelectedRows.Count > 0)) and (not (ZQ_Comprobante.IsEmpty))) then
   begin
     if Assigned(OnSeleccionar) then
       OnSeleccionar
   end
   else
-    Application.MessageBox(PChar('Debe seleccionar algún Comprobante.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
+    Application.MessageBox(PChar('Debe seleccionar algún Comprobante.'), 'Datos Incompletos', MB_OK + MB_ICONWARNING);
 end;
+
 
 procedure TFPreventa.btnSalirClick(Sender: TObject);
 begin
-close;
+  close;
 end;
+
 
 procedure TFPreventa.FormCreate(Sender: TObject);
 begin
- if ZQ_Comprobante.IsEmpty then
+  EKOrdenarGrilla.CargarConfigColumnas;
+
+  if ZQ_Comprobante.IsEmpty then
   begin
     Application.ProcessMessages;
     ZQ_Comprobante.Close;
@@ -111,27 +115,29 @@ begin
   end;
 end;
 
+
 procedure TFPreventa.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-EKOrdenarGrilla.GuardarConfigColumnas;
+  EKOrdenarGrilla.GuardarConfigColumnas;
 end;
+
 
 procedure TFPreventa.btnBuscarClick(Sender: TObject);
 begin
   EKBuscarPresupuesto.Buscar;
 end;
 
-procedure TFPreventa.DBGridDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
 
- FPrincipal.PintarFilasGrillasConBajas(DBGrid,ZQ_ComprobanteVENCIDA.AsString,Rect,DataCol,Column,State)
+procedure TFPreventa.DBGridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillasConBajas(DBGrid, ZQ_ComprobanteVENCIDA.AsString, Rect, DataCol, Column, State)
 end;
+
 
 procedure TFPreventa.DBGridDblClick(Sender: TObject);
 begin
-   btnSeleccionar.Click;
+  btnSeleccionar.Click;
 end;
 
 end.
+
