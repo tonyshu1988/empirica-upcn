@@ -35,27 +35,14 @@ type
     DBEdit14: TDBEdit;
     dxBarABM: TdxBarManager;
     BtBuscarProducto: TdxBarLargeButton;
-    BtModificar: TdxBarLargeButton;
     btBuscProd: TdxBarLargeButton;
     BtAgregarPago: TdxBarLargeButton;
     BtAceptarPago: TdxBarLargeButton;
     BtCancelarPago: TdxBarLargeButton;
     BtVendedor: TdxBarLargeButton;
-    Bt_Cierre_Z: TdxBarLargeButton;
-    btPreventa: TdxBarLargeButton;
     btsalir: TdxBarLargeButton;
-    bt_accion: TdxBarControlContainerItem;
-    bt_motivo_baja: TdxBarControlContainerItem;
-    bt_VerDetalle: TdxBarLargeButton;
     bt_BuscarCliente: TdxBarLargeButton;
-    Bt_Detalle: TdxBarLargeButton;
-    Bt_Imprimir_Arqueo: TdxBarLargeButton;
-    Bt_Imprimir_convenio: TdxBarLargeButton;
-    BtLeerCodigo: TdxBarLargeButton;
     btIVA: TdxBarLargeButton;
-    btLiquidar: TdxBarLargeButton;
-    Bt_imprimir_listadoFP: TdxBarLargeButton;
-    bt_cierre_X: TdxBarLargeButton;
     GrupoGuardarCancelar: TdxBarGroup;
     lblTotAPagar: TLabel;
     PanelStatusBar: TPanel;
@@ -402,6 +389,10 @@ type
     lblSeniaTotal: TLabel;
     btnCargarSenia: TBitBtn;
     ACargarSenia: TAction;
+    PanelHistorico: TPanel;
+    btnHistorial: TdxBarLargeButton;
+    DBGridHistorial_Preventa: TDBGrid;
+    DBGridHistorial_Detalle: TDBGrid;
     procedure btBuscProdClick(Sender: TObject);
     procedure VerLectorCB(sino: Boolean);
     procedure IdentificarCodigo();
@@ -467,6 +458,7 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure ASalirExecute(Sender: TObject);
     procedure ACargarSeniaExecute(Sender: TObject);
+    procedure btnHistorialClick(Sender: TObject);
   Private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -497,7 +489,9 @@ uses UDM, UPrincipal, strutils, EKModelo, Math, UUtilidades, DateUtils;
 
 procedure TFABM_Preventa.btBuscProdClick(Sender: TObject);
 begin
-  if (CD_DetalleFactura.State <> dsBrowse) then exit;
+  if (CD_DetalleFactura.State <> dsBrowse) then
+    exit;
+
   if cliente < 0 then
   begin
     bt_BuscarCliente.Click;
@@ -917,7 +911,9 @@ end;
 
 procedure TFABM_Preventa.BtAgregarPagoClick(Sender: TObject);
 begin
-  if (CD_DetalleFactura.State <> dsBrowse) then exit;
+  if (CD_DetalleFactura.State <> dsBrowse) then
+    exit;
+    
   if cliente < 0 then
   begin
    //Application.MessageBox('Debe seleccionar el Cliente.', 'Atención');
@@ -1095,7 +1091,8 @@ end;
 
 procedure TFABM_Preventa.BtBuscarProductoClick(Sender: TObject);
 begin
-  if (CD_DetalleFactura.State <> dsBrowse) then exit;
+  if (CD_DetalleFactura.State <> dsBrowse) then
+    exit;
 
   if cliente < 0 then
   begin
@@ -1672,6 +1669,16 @@ procedure TFABM_Preventa.ACargarSeniaExecute(Sender: TObject);
 begin
   if PConfirmarVenta.Visible and (not PABM_FormaPago.Visible) then
     btnCargarSenia.Click;
+end;
+
+procedure TFABM_Preventa.btnHistorialClick(Sender: TObject);
+begin
+  if (CD_DetalleFactura.State <> dsBrowse) then
+    exit;
+
+  PanelHistorico.Visible:= not PanelHistorico.Visible;
+  GrupoGuardarCancelar.Enabled:= not GrupoGuardarCancelar.Enabled;
+  grupoVertical.Enabled:= not grupoVertical.Enabled;
 end;
 
 end.

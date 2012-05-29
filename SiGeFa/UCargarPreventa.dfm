@@ -1,6 +1,6 @@
 object FPreventa: TFPreventa
-  Left = 478
-  Top = 331
+  Left = 404
+  Top = 200
   Width = 712
   Height = 411
   Caption = 'Cargar Preventa'
@@ -71,6 +71,7 @@ object FPreventa: TFPreventa
         item
           Expanded = False
           FieldName = 'CODIGO'
+          Title.Alignment = taCenter
           Title.Caption = 'Comprobante'
           Width = 122
           Visible = True
@@ -78,6 +79,7 @@ object FPreventa: TFPreventa
         item
           Expanded = False
           FieldName = 'FECHA'
+          Title.Alignment = taCenter
           Title.Caption = 'Fecha'
           Width = 148
           Visible = True
@@ -85,13 +87,15 @@ object FPreventa: TFPreventa
         item
           Expanded = False
           FieldName = 'FECHA_VENCIMIENTO'
-          Title.Caption = 'Fecha Vencimiento'
+          Title.Alignment = taCenter
+          Title.Caption = 'Vencimiento'
           Width = 110
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'CLIENTE_'
+          Title.Alignment = taCenter
           Title.Caption = 'Cliente'
           Width = 221
           Visible = True
@@ -99,13 +103,23 @@ object FPreventa: TFPreventa
         item
           Expanded = False
           FieldName = 'IMPORTE_VENTA'
+          Title.Alignment = taCenter
           Title.Caption = 'Importe'
           Width = 92
           Visible = True
         end
         item
           Expanded = False
+          FieldName = 'SENIA_'
+          Title.Alignment = taCenter
+          Title.Caption = 'Se'#241'a'
+          Width = 97
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'SUC_'
+          Title.Alignment = taCenter
           Title.Caption = 'Sucursal'
           Width = 254
           Visible = True
@@ -113,6 +127,7 @@ object FPreventa: TFPreventa
         item
           Expanded = False
           FieldName = 'VENDEDOR_'
+          Title.Alignment = taCenter
           Title.Caption = 'Vendedor'
           Width = 245
           Visible = True
@@ -740,7 +755,7 @@ object FPreventa: TFPreventa
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 32
+    Left = 72
     Top = 104
     DockControlHeights = (
       0
@@ -828,87 +843,98 @@ object FPreventa: TFPreventa
         TipoComboAncho = 200
         ItemIndex = -1
         VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Se'#241'a'
+        Campo = 'importe'
+        Tabla = 'comprobante_forma_pago'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
     DataSet = ZQ_Comprobante
     SQL.Strings = (
-      'select c.*,s.nombre as suc_,'
       
-        'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
-        'ente_,'
-      'case'
-      '     when (cast(c.fecha_vencimiento as date)>=current_date)'
-      '        then '#39'N'#39
-      '     else '#39'S'#39
-      'end as Vencida'
-      ''
+        'select c.*, s.nombre as suc_, p1.nombre as vendedor_, iva.abrevi' +
+        'atura as tiva_, p2.nombre as cliente_,'
+      '       case'
+      
+        '         when (cast(c.fecha_vencimiento as date) >= current_date' +
+        ') then '#39'N'#39
+      '         else '#39'S'#39
+      '       end as vencida, fp.importe as senia_'
       'from comprobante c'
-      'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
-      'left join persona p1 on (p1.id_persona=c.id_vendedor)'
-      'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
-      'left join persona p2 on (p2.id_persona=c.id_cliente)'
-      ''
-      ''
-      ''
-      'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)'
-      'order by c.fecha_vencimiento DESC,c.fecha DESC')
+      
+        'left join comprobante_forma_pago fp on (c.id_comprobante = fp.id' +
+        '_comprobante)'
+      'left join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'left join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'left join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      'left join persona p2 on (p2.id_persona = c.id_cliente)'
+      'where c.id_tipo_cpb = 10'
+      '  and c.fecha_cobrada is null'
+      'order by c.fecha_vencimiento desc, c.fecha desc  ')
     SQL_Select.Strings = (
-      'select c.*,s.nombre as suc_,'
       
-        'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
-        'ente_,'
-      'case'
-      '     when (cast(c.fecha_vencimiento as date)>=current_date)'
-      '        then '#39'N'#39
-      '     else '#39'S'#39
-      'end as Vencida')
+        'select c.*, s.nombre as suc_, p1.nombre as vendedor_, iva.abrevi' +
+        'atura as tiva_, p2.nombre as cliente_,'
+      '       case'
+      
+        '         when (cast(c.fecha_vencimiento as date) >= current_date' +
+        ') then '#39'N'#39
+      '         else '#39'S'#39
+      '       end as vencida, fp.importe as senia_')
     SQL_From.Strings = (
-      ''
       'from comprobante c'
-      'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
-      'left join persona p1 on (p1.id_persona=c.id_vendedor)'
-      'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
-      'left join persona p2 on (p2.id_persona=c.id_cliente)'
-      ''
-      '')
+      
+        'left join comprobante_forma_pago fp on (c.id_comprobante = fp.id' +
+        '_comprobante)'
+      'left join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'left join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'left join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      'left join persona p2 on (p2.id_persona = c.id_cliente)')
     SQL_Where.Strings = (
-      ''
-      'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)')
+      'where c.id_tipo_cpb = 10'
+      '  and c.fecha_cobrada is null')
     SQL_Orden.Strings = (
-      'order by c.fecha_vencimiento DESC,c.fecha DESC')
+      'order by c.fecha_vencimiento desc, c.fecha desc  ')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     VaciarValorDespues = True
-    Left = 136
-    Top = 160
+    Left = 72
+    Top = 168
   end
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select c.*,s.nombre as suc_,'
       
-        'p1.nombre as Vendedor_,iva.abreviatura as tiva_,p2.nombre as cli' +
-        'ente_,'
-      'case'
-      '     when (cast(c.fecha_vencimiento as date)>=current_date)'
-      '        then '#39'N'#39
-      '     else '#39'S'#39
-      'end as Vencida'
-      ''
+        'select c.*, s.nombre as suc_, p1.nombre as vendedor_, iva.abrevi' +
+        'atura as tiva_, p2.nombre as cliente_,'
+      '       case'
+      
+        '         when (cast(c.fecha_vencimiento as date) >= current_date' +
+        ') then '#39'N'#39
+      '         else '#39'S'#39
+      '       end as vencida, fp.importe as senia_'
       'from comprobante c'
-      'left join sucursal s on (c.id_sucursal=s.id_sucursal)'
-      'left join persona p1 on (p1.id_persona=c.id_vendedor)'
-      'left join tipo_iva iva on (iva.id_tipo_iva=c.id_tipo_iva)'
-      'left join persona p2 on (p2.id_persona=c.id_cliente)'
-      ''
-      ''
-      ''
-      'where (c.id_tipo_cpb=10)and(c.fecha_cobrada is null)'
-      'order by c.fecha_vencimiento DESC,c.fecha DESC'
+      
+        'left join comprobante_forma_pago fp on (c.id_comprobante = fp.id' +
+        '_comprobante)'
+      'left join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'left join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'left join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      'left join persona p2 on (p2.id_persona = c.id_cliente)'
+      'where c.id_tipo_cpb = 10'
+      '  and c.fecha_cobrada is null'
+      'order by c.fecha_vencimiento desc, c.fecha desc  '
       '')
     Params = <>
-    Left = 210
+    Left = 218
     Top = 130
     object ZQ_ComprobanteID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
@@ -1003,7 +1029,7 @@ object FPreventa: TFPreventa
     end
     object ZQ_ComprobanteIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
-      DisplayFormat = '$ ##,###,##0.00'
+      currency = True
     end
     object ZQ_ComprobanteSUC_: TStringField
       FieldName = 'SUC_'
@@ -1029,6 +1055,10 @@ object FPreventa: TFPreventa
       ReadOnly = True
       Size = 1
     end
+    object ZQ_ComprobanteSENIA_: TFloatField
+      FieldName = 'SENIA_'
+      currency = True
+    end
   end
   object DS_Comprobante: TDataSource
     DataSet = ZQ_Comprobante
@@ -1047,7 +1077,7 @@ object FPreventa: TFPreventa
         Visible = True
       end
       item
-        TituloColumna = 'Fecha Vencimiento'
+        TituloColumna = 'Vencimiento'
         Visible = True
       end
       item
@@ -1056,6 +1086,10 @@ object FPreventa: TFPreventa
       end
       item
         TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Se'#241'a'
         Visible = True
       end
       item
@@ -1072,46 +1106,7 @@ object FPreventa: TFPreventa
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
-    Left = 32
+    Left = 72
     Top = 48
-  end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGrid
-    Filtros = <
-      item
-        TituloColumna = 'Comprobante'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Vencimiento'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cliente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sucursal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Vendedor'
-        Visible = True
-      end>
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 312
-    Top = 80
   end
 end

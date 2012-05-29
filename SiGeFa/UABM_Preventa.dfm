@@ -1,6 +1,6 @@
 object FABM_Preventa: TFABM_Preventa
-  Left = 379
-  Top = 177
+  Left = 223
+  Top = 88
   Width = 1027
   Height = 664
   Caption = 'Venta de Mostrador'
@@ -3226,7 +3226,7 @@ object FABM_Preventa: TFABM_Preventa
     BevelWidth = 2
     BorderWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 4
+    TabOrder = 3
     object Bevel1: TBevel
       Left = 8
       Top = 32
@@ -4073,6 +4073,60 @@ object FABM_Preventa: TFABM_Preventa
       OnKeyUp = buscarCuenta
     end
   end
+  object PanelHistorico: TPanel
+    Left = 88
+    Top = 0
+    Width = 923
+    Height = 574
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 8
+    Visible = False
+    object DBGridHistorial_Preventa: TDBGrid
+      Left = 0
+      Top = 0
+      Width = 923
+      Height = 392
+      Align = alClient
+      Color = 14606012
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+    end
+    object DBGridHistorial_Detalle: TDBGrid
+      Left = 0
+      Top = 392
+      Width = 923
+      Height = 182
+      Align = alBottom
+      Color = 14606012
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
@@ -4719,6 +4773,11 @@ object FABM_Preventa: TFABM_Preventa
           end
           item
             Item = BtVendedor
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnHistorial
             Visible = True
           end>
         Name = 'vertical'
@@ -6434,6 +6493,16 @@ object FABM_Preventa: TFABM_Preventa
       0
       0
       52)
+    object btBuscProd: TdxBarLargeButton
+      Caption = 'F1 Productos'
+      Category = 0
+      Hint = 'F1 Productos'
+      Visible = ivAlways
+      ImageIndex = 7
+      ShortCut = 112
+      OnClick = btBuscProdClick
+      AutoGrayScale = False
+    end
     object BtBuscarProducto: TdxBarLargeButton
       Caption = 'F2 B'#250'squeda'
       Category = 0
@@ -6444,23 +6513,32 @@ object FABM_Preventa: TFABM_Preventa
       OnClick = BtBuscarProductoClick
       AutoGrayScale = False
     end
-    object BtModificar: TdxBarLargeButton
-      Caption = 'Cancelar'
+    object bt_BuscarCliente: TdxBarLargeButton
+      Caption = 'F3 Clientes'
       Category = 0
-      Hint = 'Modifica el registro actual'
+      Hint = 'F3 Clientes'
       Visible = ivAlways
-      ImageIndex = 4
-      ShortCut = 114
+      ImageIndex = 56
+      OnClick = bt_BuscarClienteClick
       AutoGrayScale = False
     end
-    object btBuscProd: TdxBarLargeButton
-      Caption = 'F1 Productos'
+    object btIVA: TdxBarLargeButton
+      Caption = 'F4 Tipo IVA'
       Category = 0
-      Hint = 'F1 Productos'
+      Hint = 'F4 Tipo IVA'
       Visible = ivAlways
-      ImageIndex = 7
-      ShortCut = 112
-      OnClick = btBuscProdClick
+      ImageIndex = 17
+      OnClick = btIVAClick
+      AutoGrayScale = False
+    end
+    object BtVendedor: TdxBarLargeButton
+      Caption = 'F5 Vendedor'
+      Category = 0
+      Hint = 'F5 Vendedor'
+      Visible = ivAlways
+      ImageIndex = 3
+      ShortCut = 116
+      OnClick = BtVendedorClick
       AutoGrayScale = False
     end
     object BtAgregarPago: TdxBarLargeButton
@@ -6489,33 +6567,6 @@ object FABM_Preventa: TFABM_Preventa
       OnClick = BtCancelarPagoClick
       AutoGrayScale = False
     end
-    object BtVendedor: TdxBarLargeButton
-      Caption = 'F5 Vendedor'
-      Category = 0
-      Hint = 'F5 Vendedor'
-      Visible = ivAlways
-      ImageIndex = 3
-      ShortCut = 116
-      OnClick = BtVendedorClick
-      AutoGrayScale = False
-    end
-    object Bt_Cierre_Z: TdxBarLargeButton
-      Align = iaRight
-      Caption = '(Ctrl+Z) Cierre Z'
-      Category = 0
-      Hint = 'Aplica el cierre Z de la impresora Fiscal'
-      Visible = ivAlways
-      ImageIndex = 70
-      AutoGrayScale = False
-    end
-    object btPreventa: TdxBarLargeButton
-      Caption = 'F8 Preventa'
-      Category = 0
-      Hint = 'F8 Preventa'
-      Visible = ivAlways
-      ImageIndex = 79
-      AutoGrayScale = False
-    end
     object btsalir: TdxBarLargeButton
       Align = iaRight
       Caption = 'F12 Salir'
@@ -6526,103 +6577,13 @@ object FABM_Preventa: TFABM_Preventa
       OnClick = btsalirClick
       AutoGrayScale = False
     end
-    object bt_accion: TdxBarControlContainerItem
-      Caption = 'Acci'#243'n: '
+    object btnHistorial: TdxBarLargeButton
+      Caption = 'Historial'
       Category = 0
-      Hint = 'Acci'#243'n: '
+      Hint = 'Historial'
       Visible = ivAlways
-    end
-    object bt_motivo_baja: TdxBarControlContainerItem
-      Caption = 'Motivo: '
-      Category = 0
-      Hint = 'Motivo de la Baja '
-      Visible = ivNever
-    end
-    object bt_VerDetalle: TdxBarLargeButton
-      Caption = 'Ver Detalle'
-      Category = 0
-      Enabled = False
-      Hint = 'Ver Detalle'
-      Visible = ivAlways
-      ImageIndex = 13
-      AutoGrayScale = False
-    end
-    object bt_BuscarCliente: TdxBarLargeButton
-      Caption = 'F3 Clientes'
-      Category = 0
-      Hint = 'F3 Clientes'
-      Visible = ivAlways
-      ImageIndex = 56
-      OnClick = bt_BuscarClienteClick
-      AutoGrayScale = False
-    end
-    object Bt_Detalle: TdxBarLargeButton
-      Caption = 'Detalle'
-      Category = 0
-      Enabled = False
-      Hint = 'Detalle'
-      Visible = ivAlways
-      ImageIndex = 31
-      AutoGrayScale = False
-    end
-    object Bt_Imprimir_Arqueo: TdxBarLargeButton
-      Caption = 'Imprimir Arqueo'
-      Category = 0
-      Hint = 'Imprimir Arqueo'
-      Visible = ivAlways
-      ImageIndex = 20
-      AutoGrayScale = False
-    end
-    object Bt_Imprimir_convenio: TdxBarLargeButton
-      Caption = 'Imprimir Convenio'
-      Category = 0
-      Enabled = False
-      Hint = 'Imprimir Convenio'
-      Visible = ivAlways
-      ImageIndex = 20
-      AutoGrayScale = False
-    end
-    object BtLeerCodigo: TdxBarLargeButton
-      Caption = 'F8 Leer C'#243'digo'
-      Category = 0
-      Hint = 'Leer Codigo'
-      Visible = ivAlways
-      ImageIndex = 1
-      AutoGrayScale = False
-    end
-    object btIVA: TdxBarLargeButton
-      Caption = 'F4 Tipo IVA'
-      Category = 0
-      Hint = 'F4 Tipo IVA'
-      Visible = ivAlways
-      ImageIndex = 17
-      OnClick = btIVAClick
-      AutoGrayScale = False
-    end
-    object btLiquidar: TdxBarLargeButton
-      Caption = 'Buscar Cuota'
-      Category = 0
-      Enabled = False
-      Hint = 'Buscar Cuota'
-      Visible = ivAlways
-      ImageIndex = 62
-      AutoGrayScale = False
-    end
-    object Bt_imprimir_listadoFP: TdxBarLargeButton
-      Caption = 'Imprimir Listado FP'
-      Category = 0
-      Enabled = False
-      Hint = 'Imprimir Listado FP'
-      Visible = ivNever
-      ImageIndex = 20
-      AutoGrayScale = False
-    end
-    object bt_cierre_X: TdxBarLargeButton
-      Caption = '(Ctrl+X) Cierre X'
-      Category = 0
-      Hint = '(Ctrl+X) Cierre X'
-      Visible = ivAlways
-      ImageIndex = 57
+      ImageIndex = 64
+      OnClick = btnHistorialClick
       AutoGrayScale = False
     end
     object GrupoGuardarCancelar: TdxBarGroup
@@ -7764,8 +7725,8 @@ object FABM_Preventa: TFABM_Preventa
       'from comprobante_forma_pago'
       'where id_comprob_fp = -1')
     Params = <>
-    Left = 969
-    Top = 329
+    Left = 241
+    Top = 433
     object ZQ_Comprobante_FormaPagoID_COMPROB_FP: TIntegerField
       FieldName = 'ID_COMPROB_FP'
     end
@@ -7827,7 +7788,7 @@ object FABM_Preventa: TFABM_Preventa
   end
   object DS_Comprobante_FormaPago: TDataSource
     DataSet = ZQ_Comprobante_FormaPago
-    Left = 977
-    Top = 377
+    Left = 249
+    Top = 481
   end
 end
