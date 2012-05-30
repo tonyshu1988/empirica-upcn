@@ -23,8 +23,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 966
-    Height = 496
+    Width = 958
+    Height = 485
     ActivePage = TabMovimientos
     Align = alClient
     TabOrder = 0
@@ -178,7 +178,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
               52.916666666666670000
               754.062500000000000000
               68.791666666666670000
-              391.583333333333400000)
+              391.583333333333300000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -197,7 +197,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 9
           end
           object RepBalance_Titulo: TQRLabel
-            Left = -75
+            Left = 276
             Top = 2
             Width = 165
             Height = 20
@@ -833,7 +833,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333340000
+            82.020833333333330000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -1162,10 +1162,10 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            958
+            950
             87)
           object Label11: TLabel
-            Left = 720
+            Left = 712
             Top = 7
             Width = 85
             Height = 16
@@ -1180,7 +1180,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object Label1: TLabel
-            Left = 728
+            Left = 720
             Top = 62
             Width = 77
             Height = 16
@@ -1195,7 +1195,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object Label12: TLabel
-            Left = 704
+            Left = 696
             Top = 24
             Width = 101
             Height = 16
@@ -1210,7 +1210,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object Label9: TLabel
-            Left = 709
+            Left = 701
             Top = 42
             Width = 96
             Height = 16
@@ -1225,7 +1225,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object Shape1: TShape
-            Left = 682
+            Left = 674
             Top = 60
             Width = 276
             Height = 1
@@ -1233,7 +1233,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             Pen.Color = clGray
           end
           object lblBalanceTotalIngresos: TLabel
-            Left = 805
+            Left = 797
             Top = 24
             Width = 140
             Height = 16
@@ -1249,7 +1249,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object lblBalanceTotalEgresos: TLabel
-            Left = 805
+            Left = 797
             Top = 42
             Width = 140
             Height = 16
@@ -1265,7 +1265,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object lblBalanceSaldoFinal: TLabel
-            Left = 805
+            Left = 797
             Top = 62
             Width = 140
             Height = 16
@@ -1281,7 +1281,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             ParentFont = False
           end
           object lblBalanceSaldoInicial: TLabel
-            Left = 805
+            Left = 797
             Top = 7
             Width = 140
             Height = 16
@@ -1300,7 +1300,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object Panel4: TPanel
           Left = 0
           Top = 0
-          Width = 958
+          Width = 950
           Height = 33
           Align = alTop
           BevelOuter = bvNone
@@ -1309,7 +1309,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblBalanceSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 950
+            Width = 121
             Height = 13
             Align = alTop
             Caption = 'lblBalanceSucursal'
@@ -1323,7 +1323,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblBalanceFecha: TLabel
             Left = 4
             Top = 4
-            Width = 950
+            Width = 103
             Height = 13
             Align = alTop
             Caption = 'lblBalanceFecha'
@@ -1647,7 +1647,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
             FontSize = 9
           end
           object RepListado_Titulo: TQRLabel
-            Left = -72
+            Left = 279
             Top = 2
             Width = 159
             Height = 20
@@ -2064,7 +2064,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333340000
+            82.020833333333330000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -2289,15 +2289,15 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       object PanelMov_Datos: TPanel
         Left = 0
         Top = 0
-        Width = 958
-        Height = 468
+        Width = 950
+        Height = 457
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object lblMov_TotalEgresos: TLabel
           Left = 0
-          Top = 440
-          Width = 958
+          Top = 429
+          Width = 950
           Height = 14
           Align = alBottom
           Alignment = taRightJustify
@@ -2311,8 +2311,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         end
         object lblMov_TotalIngresos: TLabel
           Left = 0
-          Top = 454
-          Width = 958
+          Top = 443
+          Width = 950
           Height = 14
           Align = alBottom
           Alignment = taRightJustify
@@ -2327,8 +2327,8 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object DBGridMovimientos: TDBGrid
           Left = 0
           Top = 33
-          Width = 958
-          Height = 407
+          Width = 950
+          Height = 396
           Align = alClient
           Color = 14606012
           DataSource = DS_Movimientos
@@ -2394,7 +2394,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         object Panel1: TPanel
           Left = 0
           Top = 0
-          Width = 958
+          Width = 950
           Height = 33
           Align = alTop
           BevelOuter = bvNone
@@ -2403,7 +2403,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblMovSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 950
+            Width = 942
             Height = 13
             Align = alTop
             Caption = 'lblMovSucursal'
@@ -2417,7 +2417,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
           object lblMovFecha: TLabel
             Left = 4
             Top = 4
-            Width = 950
+            Width = 942
             Height = 13
             Align = alTop
             Caption = 'lblMovFecha'
@@ -2770,7 +2770,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3573,7 +3573,6 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         TipoCampoIngreso = EK_Combo
         TipoCampoIndice = 1
         TipoCampoIndiceVer = 'Igual'
-        TipoComboSQL = DM.ZQ_SucursalesVisibles
         TipoComboSQLCampoVer = 'nombre'
         TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
@@ -3986,7 +3985,6 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         TipoCampoIngreso = EK_Combo
         TipoCampoIndice = 1
         TipoCampoIndiceVer = 'Igual'
-        TipoComboSQL = DM.ZQ_SucursalesVisibles
         TipoComboSQLCampoVer = 'nombre'
         TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
@@ -4054,7 +4052,6 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         TipoCampoIngreso = EK_Combo
         TipoCampoIndice = 1
         TipoCampoIndiceVer = 'Igual'
-        TipoComboSQL = DM.ZQ_SucursalesVisibles
         TipoComboSQLCampoVer = 'nombre'
         TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False

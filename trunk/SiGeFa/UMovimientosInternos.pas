@@ -606,13 +606,22 @@ end;
 
 
 procedure TFMovimientosInternos.FormCreate(Sender: TObject);
+var
+  indice_suc: integer;
 begin
   EKOrdenarGrilla_Dia.CargarConfigColumnas;
   EKOrdenarGrillaFPago_Egreso.CargarConfigColumnas;
   EKOrdenarGrillaFPago_Ingreso.CargarConfigColumnas;
 
+
+  TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+    indice_suc:= dm.ZQ_SucursalesVisibles.RecNo - 1
+  else
+    indice_suc:= 0;
+
+  TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[0]).ItemIndex:= indice_suc;
   TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
 
   configFormaPago(CPB_OTROS_INGRESOS);

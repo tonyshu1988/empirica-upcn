@@ -342,6 +342,10 @@ begin
   mes:= MonthOf(dm.EKModelo.Fecha);
   anio:= YearOf(dm.EKModelo.Fecha);
 
+  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[2]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TEKCriterioBA(EKBuscar_Mov.CriteriosBusqueda.Items[2]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[2]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     indice_suc:= dm.ZQ_SucursalesVisibles.RecNo - 1
   else
