@@ -1,6 +1,6 @@
 object FCuentaCorriente: TFCuentaCorriente
-  Left = 244
-  Top = 63
+  Left = 238
+  Top = 71
   Width = 1009
   Height = 698
   Caption = 'Cta. Cte. Cliente'
@@ -23,8 +23,8 @@ object FCuentaCorriente: TFCuentaCorriente
   object PanelCliente: TPanel
     Left = 0
     Top = 0
-    Width = 993
-    Height = 608
+    Width = 1001
+    Height = 619
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -176,7 +176,7 @@ object FCuentaCorriente: TFCuentaCorriente
             52.916666666666670000
             762.000000000000000000
             68.791666666666670000
-            375.708333333333300000)
+            375.708333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -544,7 +544,7 @@ object FCuentaCorriente: TFCuentaCorriente
             37.041666666666670000
             10.583333333333330000
             5.291666666666667000
-            645.583333333333300000)
+            645.583333333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -847,9 +847,9 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             338.666666666666700000
-            18.520833333333330000
+            18.520833333333340000
             277.812500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -912,8 +912,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            42.333333333333330000
+            34.395833333333340000
+            42.333333333333340000
             63.500000000000000000
             145.520833333333300000)
           Alignment = taLeftJustify
@@ -1010,8 +1010,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            42.333333333333330000
+            34.395833333333340000
+            42.333333333333340000
             108.479166666666700000
             174.625000000000000000)
           Alignment = taLeftJustify
@@ -1075,8 +1075,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            391.583333333333300000
+            34.395833333333340000
+            391.583333333333400000
             108.479166666666700000
             153.458333333333300000)
           Alignment = taLeftJustify
@@ -1140,7 +1140,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             965.729166666666700000
             108.479166666666700000
             153.458333333333300000)
@@ -1172,8 +1172,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            931.333333333333300000
+            34.395833333333340000
+            931.333333333333500000
             63.500000000000000000
             134.937500000000000000)
           Alignment = taLeftJustify
@@ -1270,8 +1270,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            42.333333333333330000
+            34.395833333333340000
+            42.333333333333340000
             153.458333333333300000
             238.125000000000000000)
           Alignment = taLeftJustify
@@ -1335,10 +1335,10 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            677.333333333333300000
+            34.395833333333340000
+            677.333333333333400000
             153.458333333333300000
-            288.395833333333300000)
+            288.395833333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1400,8 +1400,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            42.333333333333330000
+            34.395833333333340000
+            42.333333333333340000
             198.437500000000000000
             214.312500000000000000)
           Alignment = taLeftJustify
@@ -1465,7 +1465,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             783.166666666666700000
             198.437500000000000000
             161.395833333333300000)
@@ -1497,9 +1497,9 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            42.333333333333330000
-            18.520833333333330000
+            34.395833333333340000
+            42.333333333333340000
+            18.520833333333340000
             111.125000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -1562,8 +1562,8 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            42.333333333333330000
+            34.395833333333340000
+            42.333333333333340000
             243.416666666666700000
             203.729166666666700000)
           Alignment = taLeftJustify
@@ -1834,7 +1834,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             0.000000000000000000
             2.645833333333333000
             1897.062500000000000000)
@@ -1860,16 +1860,16 @@ object FCuentaCorriente: TFCuentaCorriente
     object PanelCliente_CtaCte: TPanel
       Left = 3
       Top = 126
-      Width = 987
-      Height = 394
+      Width = 995
+      Height = 405
       Align = alClient
       BorderWidth = 3
       TabOrder = 0
       object DBGridCliente_CtaCte: TDBGrid
         Left = 4
         Top = 4
-        Width = 979
-        Height = 252
+        Width = 987
+        Height = 263
         Align = alClient
         Color = 14606012
         DataSource = DS_CtaCte_Cliente
@@ -1956,8 +1956,8 @@ object FCuentaCorriente: TFCuentaCorriente
       end
       object PanelDetalleMov: TPanel
         Left = 4
-        Top = 256
-        Width = 979
+        Top = 267
+        Width = 987
         Height = 134
         Align = alBottom
         BevelOuter = bvNone
@@ -1967,7 +1967,7 @@ object FCuentaCorriente: TFCuentaCorriente
         object lblTitulo_PanelDetalleMov: TLabel
           Left = 2
           Top = 2
-          Width = 975
+          Width = 983
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -1983,7 +1983,7 @@ object FCuentaCorriente: TFCuentaCorriente
         object DBGridDetalle_Recibo: TDBGrid
           Left = 2
           Top = 15
-          Width = 975
+          Width = 983
           Height = 117
           Align = alClient
           Color = 14606012
@@ -2023,7 +2023,7 @@ object FCuentaCorriente: TFCuentaCorriente
         object DBGridDetalle_Producto: TDBGrid
           Left = 2
           Top = 15
-          Width = 975
+          Width = 983
           Height = 117
           Align = alClient
           Color = 14606012
@@ -2090,7 +2090,7 @@ object FCuentaCorriente: TFCuentaCorriente
     object PanelCliente_Datos: TPanel
       Left = 3
       Top = 3
-      Width = 987
+      Width = 995
       Height = 99
       Align = alTop
       BevelInner = bvRaised
@@ -2450,18 +2450,18 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object PanelCliente_Resumen: TPanel
       Left = 3
-      Top = 520
-      Width = 987
+      Top = 531
+      Width = 995
       Height = 85
       Align = alBottom
       TabOrder = 2
       DesignSize = (
-        987
+        995
         85)
       object lblFiltro_Fechas: TLabel
         Left = 1
         Top = 1
-        Width = 985
+        Width = 993
         Height = 17
         Align = alTop
         Alignment = taCenter
@@ -2727,7 +2727,7 @@ object FCuentaCorriente: TFCuentaCorriente
     object PanelFiltro: TPanel
       Left = 3
       Top = 102
-      Width = 987
+      Width = 995
       Height = 24
       Align = alTop
       ParentShowHint = False
@@ -2962,8 +2962,8 @@ object FCuentaCorriente: TFCuentaCorriente
   object PanelResumen: TPanel
     Left = 0
     Top = 0
-    Width = 993
-    Height = 608
+    Width = 1001
+    Height = 619
     Align = alClient
     TabOrder = 1
     object RepCtasCtes: TQuickRep
@@ -3079,7 +3079,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            582.083333333333300000
+            582.083333333333400000
             124.354166666666700000
             735.541666666666700000)
           Alignment = taCenter
@@ -3508,7 +3508,7 @@ object FCuentaCorriente: TFCuentaCorriente
             37.041666666666670000
             10.583333333333330000
             5.291666666666667000
-            645.583333333333300000)
+            645.583333333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -3667,7 +3667,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -3715,7 +3715,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -3955,13 +3955,13 @@ object FCuentaCorriente: TFCuentaCorriente
     end
     object PanelResumen_Abajo: TPanel
       Left = 1
-      Top = 555
-      Width = 991
+      Top = 566
+      Width = 999
       Height = 52
       Align = alBottom
       TabOrder = 0
       DesignSize = (
-        991
+        999
         52)
       object Panel1: TPanel
         Left = 199
@@ -4108,8 +4108,8 @@ object FCuentaCorriente: TFCuentaCorriente
     object DBGridResumen_CtaCtes: TDBGrid
       Left = 1
       Top = 20
-      Width = 991
-      Height = 535
+      Width = 999
+      Height = 546
       Align = alClient
       Color = 14606012
       DataSource = DS_CtaCte_Gral
@@ -4254,7 +4254,7 @@ object FCuentaCorriente: TFCuentaCorriente
     object PanelResumen_Arriba: TPanel
       Left = 1
       Top = 1
-      Width = 991
+      Width = 999
       Height = 19
       Align = alTop
       TabOrder = 2
@@ -4273,7 +4273,7 @@ object FCuentaCorriente: TFCuentaCorriente
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 881
+        Left = 889
         Top = 1
         Width = 109
         Height = 17
@@ -4291,7 +4291,7 @@ object FCuentaCorriente: TFCuentaCorriente
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

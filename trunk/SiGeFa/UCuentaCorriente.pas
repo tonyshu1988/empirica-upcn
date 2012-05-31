@@ -344,10 +344,10 @@ type
     procedure btnVerDetalleFacturaClick(Sender: TObject);
     procedure btnAltaReciboClick(Sender: TObject);
     procedure AVerDetalleExecute(Sender: TObject);
-  Private
+  private
     viendoResumen: boolean;
     viendoDetalleCpb: boolean;
-  Public
+  public
   end;
 
 var
@@ -367,7 +367,7 @@ begin
   EKOrdenar_CtaCteGral.GuardarConfigColumnas;
   EKOrdenar_CtaCteCliente.GuardarConfigColumnas;
   EKOrdenar_DetalleProducto.GuardarConfigColumnas;
-  EKOrdenar_DetalleRecibo.GuardarConfigColumnas;  
+  EKOrdenar_DetalleRecibo.GuardarConfigColumnas;
 
   CanClose:= FPrincipal.cerrar_ventana(transaccion);
 end;
@@ -441,7 +441,7 @@ begin
   EKOrdenar_CtaCteGral.CargarConfigColumnas;
   EKOrdenar_CtaCteCliente.CargarConfigColumnas;
   EKOrdenar_DetalleProducto.CargarConfigColumnas;
-  EKOrdenar_DetalleRecibo.CargarConfigColumnas;  
+  EKOrdenar_DetalleRecibo.CargarConfigColumnas;
 
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnFiltroFecha_Cancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnFiltroFecha_Aceptar.Glyph);
@@ -455,7 +455,7 @@ begin
   PanelResumen.BringToFront;
   viendoResumen:= true;
   btnSaldoInicial.Visible:= ivNever;
-  btnAltaRecibo.Visible:= ivNever;  
+  btnAltaRecibo.Visible:= ivNever;
   btnVerDetalleFactura.Visible:= ivNever;
 
   ZQ_CtaCte_Gral.Close;
@@ -471,6 +471,7 @@ end;
 //----------------------------------
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
+
 procedure TFCuentaCorriente.ABuscarExecute(Sender: TObject);
 begin
   if btnBuscar.Enabled then
@@ -815,7 +816,7 @@ begin
     //si el tipo de comprobante es recibo de cta cte
       if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
       begin
-        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE '+ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
         PanelDetalleMov.Visible:= true;
         DBGridDetalle_Producto.SendToBack;
         DBGridDetalle_Recibo.BringToFront;
@@ -824,7 +825,7 @@ begin
       //si el tipo de comprobante es distinto de nota de credito
         if AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) = 0 then
         begin
-          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE '+ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
           PanelDetalleMov.Visible:= true;
           DBGridDetalle_Producto.BringToFront;
           DBGridDetalle_Recibo.SendToBack;
@@ -846,7 +847,7 @@ begin
   else
   begin
     viendoDetalleCpb:= true;
-  //si el tipo de comprobante es saldo anterior o nota de credito
+    //si el tipo de comprobante es saldo anterior o nota de credito
     if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0)
       or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
     begin
@@ -856,7 +857,7 @@ begin
     //si el tipo de comprobante es recibo de cta cte
       if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
       begin
-        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE '+ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
         PanelDetalleMov.Visible:= true;
         DBGridDetalle_Producto.SendToBack;
         DBGridDetalle_Recibo.BringToFront;
@@ -865,7 +866,7 @@ begin
       //si el tipo de comprobante es distinto de nota de credito
         if AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) = 0 then
         begin
-          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE '+ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
           PanelDetalleMov.Visible:= true;
           DBGridDetalle_Producto.BringToFront;
           DBGridDetalle_Recibo.SendToBack;
@@ -876,22 +877,12 @@ end;
 
 procedure TFCuentaCorriente.btnAltaReciboClick(Sender: TObject);
 begin
-  if not Assigned(FABM_CPB_Recibo) then
-  begin
-    FPrincipal.AABM_CPB_Recibo.Execute;
-    FABM_CPB_Recibo.alta_recibo_cta_cte_desde_afuera(ZQ_ClienteID_PERSONA.AsInteger);
-  end
+  FPrincipal.AABM_CPB_Recibo.Execute;
+  if not dm.EKModelo.verificar_transaccion('ABM RECIBOS') then
+    FABM_CPB_Recibo.alta_recibo_cta_cte_desde_afuera(ZQ_ClienteID_PERSONA.AsInteger)
   else
-  begin
-    FABM_CPB_Recibo.Show;
-    if not dm.EKModelo.verificar_transaccion('ABM RECIBOS') then
-      FABM_CPB_Recibo.alta_recibo_cta_cte_desde_afuera(ZQ_ClienteID_PERSONA.AsInteger)
-    else
-      ShowMessage('Hay un alta de Recibo en curso, verifique');
-  end
+    ShowMessage('Hay un alta de Recibo en curso, verifique');
 end;
-
-
-
+                                   
 end.
 

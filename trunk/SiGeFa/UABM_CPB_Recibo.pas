@@ -1731,7 +1731,7 @@ end;
 procedure TFABM_CPB_Recibo.alta_recibo_cta_cte_desde_afuera(
   id_cliente: integer);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb, ZQ_PagosFactura]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbFormaPago_NotaCredito, ZQ_NumeroCpb, ZQ_PagosFactura]) then
   begin
     tipoComprobante:= CPB_RECIBO_CTA_CTE;
 
@@ -1746,6 +1746,10 @@ begin
     ZQ_CpbFormaPago.Close;
     ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= -1;
     ZQ_CpbFormaPago.Open;
+
+    ZQ_CpbFormaPago_NotaCredito.Close;
+    ZQ_CpbFormaPago_NotaCredito.ParamByName('id_comprobante').AsInteger:= -1;
+    ZQ_CpbFormaPago_NotaCredito.Open;
 
     cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
     lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - NUEVO';
