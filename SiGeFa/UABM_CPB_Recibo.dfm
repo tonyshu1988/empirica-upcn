@@ -102,16 +102,16 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 876
-    Height = 477
+    Width = 884
+    Height = 488
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 876
-      Height = 477
+      Width = 884
+      Height = 488
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -125,13 +125,13 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 866
+        Width = 874
         Height = 132
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
-          866
+          874
           132)
         object DBTxtCPB_PuntoVenta: TDBText
           Left = 709
@@ -866,15 +866,15 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       object PanelEditar_FPago: TPanel
         Left = 5
         Top = 262
-        Width = 866
-        Height = 101
+        Width = 874
+        Height = 112
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
         object Label19: TLabel
           Left = 0
           Top = 0
-          Width = 866
+          Width = 874
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -890,14 +890,14 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
         object PanelEditar_FPagoInfo: TPanel
           Left = 0
-          Top = 73
-          Width = 866
+          Top = 84
+          Width = 874
           Height = 28
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            866
+            874
             28)
           object Label29: TLabel
             Left = 659
@@ -948,8 +948,8 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         object DBGridEditar_Fpago: TDBGrid
           Left = 0
           Top = 13
-          Width = 866
-          Height = 60
+          Width = 874
+          Height = 71
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbFormaPago
@@ -1019,7 +1019,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       object PanelFacturas: TPanel
         Left = 5
         Top = 137
-        Width = 866
+        Width = 874
         Height = 125
         Align = alTop
         BevelOuter = bvNone
@@ -1027,7 +1027,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         object Label23: TLabel
           Left = 0
           Top = 0
-          Width = 866
+          Width = 874
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -1091,7 +1091,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         object PanelFacturasDatos: TPanel
           Left = 65
           Top = 13
-          Width = 801
+          Width = 809
           Height = 112
           Align = alClient
           BevelOuter = bvNone
@@ -1099,13 +1099,13 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           object PanelFacturasInfo: TPanel
             Left = 0
             Top = 88
-            Width = 801
+            Width = 809
             Height = 24
             Align = alBottom
             BevelOuter = bvNone
             TabOrder = 0
             DesignSize = (
-              801
+              809
               24)
             object Label24: TLabel
               Left = 575
@@ -1181,7 +1181,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           object DBGridFacturas: TDBGrid
             Left = 0
             Top = 0
-            Width = 801
+            Width = 809
             Height = 88
             Align = alClient
             Color = 14606012
@@ -1245,8 +1245,8 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       end
       object PanelEditar_NotaCredito: TPanel
         Left = 5
-        Top = 363
-        Width = 866
+        Top = 374
+        Width = 874
         Height = 109
         Align = alBottom
         BevelOuter = bvNone
@@ -1254,7 +1254,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         object Label32: TLabel
           Left = 0
           Top = 0
-          Width = 866
+          Width = 874
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -1271,7 +1271,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         object DBGrid_ANotaCredito: TDBGrid
           Left = 0
           Top = 13
-          Width = 866
+          Width = 874
           Height = 68
           Align = alClient
           Color = 14410235
@@ -1340,13 +1340,13 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         object PanelEditar_NotaCreditoInfo: TPanel
           Left = 0
           Top = 81
-          Width = 866
+          Width = 874
           Height = 28
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            866
+            874
             28)
           object Label33: TLabel
             Left = 631
@@ -1399,8 +1399,8 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 876
-      Height = 477
+      Width = 884
+      Height = 488
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -1412,25 +1412,25 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 340
+        Left = 348
         Top = 5
         Width = 6
-        Height = 467
+        Height = 478
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 335
-        Height = 467
+        Width = 343
+        Height = 478
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 335
-          Height = 467
+          Width = 343
+          Height = 478
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -1517,10 +1517,10 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
       end
       object PanelCpbActual: TPanel
-        Left = 346
+        Left = 354
         Top = 5
         Width = 525
-        Height = 467
+        Height = 478
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -1529,13 +1529,13 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           Left = 0
           Top = 0
           Width = 525
-          Height = 305
+          Height = 316
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object Label25: TLabel
             Left = 0
-            Top = 143
+            Top = 154
             Width = 525
             Height = 13
             Align = alBottom
@@ -1569,7 +1569,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           end
           object Label34: TLabel
             Left = 0
-            Top = 66
+            Top = 77
             Width = 525
             Height = 13
             Align = alBottom
@@ -1588,7 +1588,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             Left = 0
             Top = 13
             Width = 525
-            Height = 53
+            Height = 64
             Align = alClient
             Color = 14606012
             DataSource = DS_VerCpb_Fpago
@@ -1651,7 +1651,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           end
           object DBGridVerFacturas: TDBGrid
             Left = 0
-            Top = 156
+            Top = 167
             Width = 525
             Height = 149
             Align = alBottom
@@ -1701,7 +1701,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
           end
           object DBGridCpbActual_NCredito: TDBGrid
             Left = 0
-            Top = 79
+            Top = 90
             Width = 525
             Height = 64
             Align = alBottom
@@ -1767,7 +1767,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 305
+          Top = 316
           Width = 525
           Height = 162
           Align = alBottom
@@ -1928,7 +1928,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 876
+    Width = 884
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1966,7 +1966,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 766
+      Left = 774
       Top = 1
       Width = 109
       Height = 17
@@ -1980,7 +1980,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 657
+      Left = 665
       Top = 1
       Width = 109
       Height = 17
@@ -1997,7 +1997,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
