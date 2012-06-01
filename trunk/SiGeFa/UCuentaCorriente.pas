@@ -347,6 +347,7 @@ type
   private
     viendoResumen: boolean;
     viendoDetalleCpb: boolean;
+    ActivarAfterScroll : boolean;
   public
   end;
 
@@ -418,6 +419,8 @@ begin
   else
   begin
     //para el resumen de los clientes
+    ActivarAfterScroll := false;
+
     viendoResumen:= true;
     PanelResumen.BringToFront;
     btnVerCtaCte.Caption:= 'F2 - Ver Cta Cte';
@@ -465,6 +468,8 @@ begin
 
   calcularTotales('GENERAL');
   btnVerDetalleFactura.Click;
+
+  ActivarAfterScroll := false;
 end;
 
 
@@ -792,6 +797,9 @@ end;
 
 procedure TFCuentaCorriente.ZQ_CtaCte_ClienteAfterScroll(DataSet: TDataSet);
 begin
+  if not ActivarAfterScroll then
+  exit;
+
   ZQ_ComprobanteDetalle.Close;
   ZQ_ReciboDetalle.Close;
 
@@ -843,9 +851,13 @@ begin
   begin
     viendoDetalleCpb:= false;
     PanelDetalleMov.Visible:= false;
+
+    ActivarAfterScroll := false;
   end
   else
   begin
+    ActivarAfterScroll := true;
+
     viendoDetalleCpb:= true;
     //si el tipo de comprobante es saldo anterior o nota de credito
     if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0)
