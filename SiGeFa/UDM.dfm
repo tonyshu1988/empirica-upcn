@@ -1457,7 +1457,6 @@ object DM: TDM
   end
   object EKUsrLogin: TEKUsrLogin
     OnLogin = LoginLogin
-    OnConectar = EKUsrLoginConectar
     Coneccion = Conexion
     Menu = FPrincipal.MainMenuPrincipal
     Aplicacion = 'SIGEFA'

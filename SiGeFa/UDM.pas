@@ -110,7 +110,6 @@ type
     procedure centrarPanel(form: TForm; panel: TPanel);
     procedure centrarPanelConAjuste(form: TForm; panel: TPanel; ajusteTop: integer);
     procedure buscarSucursalesVisibles();
-    procedure EKUsrLoginConectar(status: TStatusBar);
   private
     auxDecimalSeparator, auxThousandSeparator: Char;
     auxCurrencyDecimals: Integer;
@@ -501,12 +500,6 @@ begin
   dm.EKModelo.abrir(ZQ_VerificarCtaCte);
   if ZQ_VerificarCtaCte.IsEmpty then
     Result:= false;
-end;
-
-
-procedure TDM.EKUsrLoginConectar(status: TStatusBar);
-begin
-//
 end;
 
 end.
