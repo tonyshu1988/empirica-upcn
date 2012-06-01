@@ -443,6 +443,8 @@ type
     ZQ_ActualizarPrecioIMPUESTO_ADICIONAL2: TFloatField;
     ZQ_ActualizarPrecioID_PRECIO: TIntegerField;
     Label46: TLabel;
+    ZQ_VerCpb_ProductoCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_VerCpb_ProductoCANTIDAD_ALMACENADA: TFloatField;
 
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
