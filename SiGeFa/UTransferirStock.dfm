@@ -22,8 +22,8 @@ object FTransferirStock: TFTransferirStock
   object PanelHistorico: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 468
+    Width = 862
+    Height = 479
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
@@ -31,7 +31,7 @@ object FTransferirStock: TFTransferirStock
     object PanelHistorico_Cpb: TPanel
       Left = 2
       Top = 2
-      Width = 850
+      Width = 858
       Height = 184
       Align = alTop
       BevelOuter = bvNone
@@ -40,7 +40,7 @@ object FTransferirStock: TFTransferirStock
       object Label3: TLabel
         Left = 4
         Top = 4
-        Width = 842
+        Width = 850
         Height = 20
         Align = alTop
         Alignment = taCenter
@@ -60,7 +60,7 @@ object FTransferirStock: TFTransferirStock
       object DBGrid_Historico_Cpb: TDBGrid
         Left = 4
         Top = 24
-        Width = 842
+        Width = 850
         Height = 156
         Align = alClient
         Color = 14606012
@@ -118,8 +118,8 @@ object FTransferirStock: TFTransferirStock
     object PanelHistoric_Detalle: TPanel
       Left = 2
       Top = 186
-      Width = 850
-      Height = 280
+      Width = 858
+      Height = 291
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 4
@@ -127,7 +127,7 @@ object FTransferirStock: TFTransferirStock
       object Label4: TLabel
         Left = 4
         Top = 4
-        Width = 842
+        Width = 850
         Height = 20
         Align = alTop
         Alignment = taCenter
@@ -147,8 +147,8 @@ object FTransferirStock: TFTransferirStock
       object DBGrid_Historico_Detalle: TDBGrid
         Left = 4
         Top = 24
-        Width = 842
-        Height = 252
+        Width = 850
+        Height = 263
         Align = alClient
         Color = 14606012
         DataSource = DS_Historico_Detalle
@@ -223,16 +223,16 @@ object FTransferirStock: TFTransferirStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 468
+    Width = 862
+    Height = 479
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 852
-      Height = 433
-      ActivePage = TabSTransferirStock
+      Width = 860
+      Height = 444
+      ActivePage = TabSAsociarNotaPedido
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -242,8 +242,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 844
-          Height = 364
+          Width = 852
+          Height = 375
           Align = alClient
           Color = 14606012
           DataSource = DS_Producto
@@ -401,14 +401,14 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 364
-          Width = 844
+          Top = 375
+          Width = 852
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            844
+            852
             41)
           object Label25: TLabel
             Left = 696
@@ -694,7 +694,7 @@ object FTransferirStock: TFTransferirStock
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
-            844
+            852
             41)
           object Label2: TLabel
             Left = 728
@@ -737,7 +737,7 @@ object FTransferirStock: TFTransferirStock
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 860
       Height = 33
       Align = alTop
       TabOrder = 1
@@ -767,7 +767,7 @@ object FTransferirStock: TFTransferirStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
