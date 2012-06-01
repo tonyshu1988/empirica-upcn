@@ -428,7 +428,7 @@ end;
 procedure TFTransferirStock.FormCreate(Sender: TObject);
 begin
   //provisorio
-  TabSAsociarNotaPedido.TabVisible:= false;
+  TabSAsociarNotaPedido.TabVisible:= true;
 
   PageControlTransferir.TabIndex := 0;
   CD_Producto.CreateDataSet;
@@ -487,7 +487,7 @@ begin
       CD_ListaProductos.First;
       while not CD_ListaProductos.Eof do
       begin
-        if (CD_ListaProductosid_comprobante.IsNull) or (CD_Producto_cantidad.AsFloat = 0) then
+        if (CD_ListaProductosid_comprobante.IsNull) or (CD_ListaProductoscantidad.AsFloat = 0) then
           CD_ListaProductos.Delete
         else
           CD_ListaProductos.Next;
@@ -509,27 +509,27 @@ end;
 
 procedure TFTransferirStock.asociarNotaPedido;
 begin
-//  CD_ListaProductos.First;
-//  while not(CD_ListaProductos.Eof) do
-//  begin
-//    ZQ_ProcesarStock.Close;
-//    ZQ_ProcesarStock.ParamByName('id_stock_prod').Clear;
-//    ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_ListaProductosid_producto.AsInteger;
-//    ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
-//
-//    if CD_ListaProductoscantidad_a_almacenar.AsFloat >= 0 then
-//      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductosalmacenar.AsFloat
-//    else //si lo que deseo almacenar es mayor a lo que puedo almacenar, entonces cargo el resto
-//      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat;
-//
-//    ZQ_ProcesarStock.ParamByName('stock_min').AsFloat:= CD_ListaProductosstock_min.AsFloat;
-//    ZQ_ProcesarStock.ParamByName('stock_max').AsFloat:= CD_ListaProductosstock_max.AsFloat;
-//    ZQ_ProcesarStock.ParamByName('stock_repedido').Clear;
-//    ZQ_ProcesarStock.ParamByName('id_comprobante').AsInteger := CD_ListaProductosid_comprobante.AsInteger;
-//    ZQ_ProcesarStock.ExecSQL;
-//
-//    CD_ListaProductos.Next;
-//  end;
+  CD_ListaProductos.First;
+  while not(CD_ListaProductos.Eof) do
+  begin
+    ZQ_ProcesarStock.Close;
+    ZQ_ProcesarStock.ParamByName('id_stock_prod').Clear;
+    ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_ListaProductosid_producto.AsInteger;
+    ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
+
+    if CD_ListaProductoscantidad_a_almacenar.AsFloat >= 0 then
+      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductosalmacenar.AsFloat
+    else //si lo que deseo almacenar es mayor a lo que puedo almacenar, entonces cargo el resto
+      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat;
+
+    ZQ_ProcesarStock.ParamByName('stock_min').AsFloat:= CD_ListaProductosstock_min.AsFloat;
+    ZQ_ProcesarStock.ParamByName('stock_max').AsFloat:= CD_ListaProductosstock_max.AsFloat;
+    ZQ_ProcesarStock.ParamByName('stock_repedido').Clear;
+    ZQ_ProcesarStock.ParamByName('id_comprobante').AsInteger := CD_ListaProductosid_comprobante.AsInteger;
+    ZQ_ProcesarStock.ExecSQL;
+
+    CD_ListaProductos.Next;
+  end;
 end;
 
 
