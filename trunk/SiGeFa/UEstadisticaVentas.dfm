@@ -174,7 +174,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               FontSize = 12
             end
             object RepDetalleMov_Subtitulo: TQRLabel
-              Left = 438
+              Left = -77
               Top = 26
               Width = 170
               Height = 20
@@ -186,7 +186,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Size.Values = (
                 52.916666666666670000
                 1158.875000000000000000
-                68.791666666666670000
+                68.791666666666680000
                 449.791666666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -280,7 +280,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
                 37.041666666666670000
                 455.083333333333300000
                 0.000000000000000000
-                799.041666666666700000)
+                799.041666666666800000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = False
@@ -307,7 +307,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
                 37.041666666666670000
                 1272.645833333333000000
                 0.000000000000000000
-                592.666666666666700000)
+                592.666666666666800000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = False
@@ -865,7 +865,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              68.791666666666670000
+              68.791666666666680000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -884,7 +884,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
                 37.041666666666670000
                 1867.958333333333000000
                 10.583333333333330000
-                894.291666666666700000)
+                894.291666666666800000)
               Alignment = taRightJustify
               AlignToBand = False
               AutoSize = False
@@ -1399,7 +1399,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 1170
+            Width = 102
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1413,7 +1413,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 1170
+            Width = 120
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1427,7 +1427,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 1170
+            Width = 126
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -2101,7 +2101,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 50.270833333333330000
-                701.145833333333300000
+                701.145833333333200000
                 124.354166666666700000
                 494.770833333333400000)
               Alignment = taCenter
@@ -2134,7 +2134,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Size.Values = (
                 52.916666666666670000
                 685.270833333333400000
-                68.791666666666670000
+                68.791666666666680000
                 529.166666666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -2604,7 +2604,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              68.791666666666670000
+              68.791666666666680000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -2744,8 +2744,14 @@ object FEstadisticaVentas: TFEstadisticaVentas
             item
               Expanded = False
               FieldName = 'SUMAVENTA'
-              Title.Caption = 'Importe'
+              Title.Caption = 'Importe Venta'
               Width = 94
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUMACOSTO'
+              Title.Caption = 'Importe Costo'
               Visible = True
             end
             item
@@ -2753,6 +2759,12 @@ object FEstadisticaVentas: TFEstadisticaVentas
               FieldName = 'CANTIDAD'
               Title.Caption = 'Cantidad'
               Width = 75
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'GANANCIA'
+              Title.Caption = 'Ganancia'
               Visible = True
             end>
         end
@@ -4754,6 +4766,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
       '       a.descripcion,'
       '       sum(cd.importe_venta) as sumaVenta,'
       '       sum(cd.importe_if) as sumaIF,'
+      '       sum(cd.importe_costo) as sumaCosto,'
+      '       sum(cd.importe_venta-cd.importe_costo) as ganancia,'
       '       count(cd.id_producto) as cantidad'
       'from comprobante_detalle cd'
       'join comprobante c on (cd.id_comprobante = c.id_comprobante)'
@@ -4833,6 +4847,14 @@ object FEstadisticaVentas: TFEstadisticaVentas
       FieldName = 'AGRUPAM'
       ReadOnly = True
       Size = 50
+    end
+    object ZQ_EstadVariasSUMACOSTO: TFloatField
+      FieldName = 'SUMACOSTO'
+      ReadOnly = True
+    end
+    object ZQ_EstadVariasGANANCIA: TFloatField
+      FieldName = 'GANANCIA'
+      ReadOnly = True
     end
   end
   object DS_EstadVarias: TDataSource

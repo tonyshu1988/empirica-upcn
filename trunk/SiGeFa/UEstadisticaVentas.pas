@@ -276,6 +276,8 @@ type
     BtnFiltro_FiscalV: TSpeedButton;
     BtnFiltro_NoFiscalV: TSpeedButton;
     Label4: TLabel;
+    ZQ_EstadVariasSUMACOSTO: TFloatField;
+    ZQ_EstadVariasGANANCIA: TFloatField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
