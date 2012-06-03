@@ -59,6 +59,9 @@ end;
 procedure TDM.EKIconizarDblClick(Sender: TObject);
 begin
   FPrincipal.Visible:= true;
+
+  FPrincipal.memoLog.SelStart:= Length(FPrincipal.memoLog.Lines.Text);
+  FPrincipal.memoLog.SelLength := 0;
 end;
 
 end.

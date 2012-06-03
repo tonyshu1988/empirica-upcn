@@ -15,6 +15,7 @@ object FPrincipal: TFPrincipal
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -656,7 +657,7 @@ object FPrincipal: TFPrincipal
       BevelOuter = bvNone
       TabOrder = 2
       object Label1: TLabel
-        Left = 8
+        Left = 75
         Top = 18
         Width = 222
         Height = 18
@@ -669,7 +670,7 @@ object FPrincipal: TFPrincipal
         ParentFont = False
       end
       object lblTiempoRestante: TLabel
-        Left = 228
+        Left = 295
         Top = 19
         Width = 78
         Height = 18
@@ -697,6 +698,15 @@ object FPrincipal: TFPrincipal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+      end
+      object btnPararContinuar: TButton
+        Left = 4
+        Top = 17
+        Width = 68
+        Height = 21
+        Caption = 'Continuar'
+        TabOrder = 0
+        OnClick = btnPararContinuarClick
       end
     end
   end

@@ -254,6 +254,7 @@ type
     CD_NovedadesServerID: TIntegerField;
     CD_ProcesarNovedadesID: TIntegerField;
     EKImageListIcono: TEKImageList32;
+    btnPararContinuar: TButton;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridTablasActualizarDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridListaNovedadesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -317,6 +318,8 @@ type
     procedure popUpItemSalirClick(Sender: TObject);
     procedure popUpItemMostrarOcultarClick(Sender: TObject);
     procedure subirNovedades();
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure btnPararContinuarClick(Sender: TObject);
   Private
     procedure InputBoxSetPasswordChar(var Msg: TMessage); Message InputBoxMessage;
   Public
@@ -497,8 +500,8 @@ begin
   begin
     if IsProcess(nameAplica) then
     begin
-      //Application.MessageBox('Ya hay una instancia del programa ejecutándose.','Atención');
-      //ExitProcess(0);
+      Application.MessageBox('Ya hay una instancia del programa ejecutándose.', 'Atención');
+      ExitProcess(0);
     end;
   end;
 
@@ -530,9 +533,7 @@ end;
 
 procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  configGrillas(1); //guardo la config de las grillas
-  dm.ConexionLectura.Disconnect;
-  dm.ConexionEscritura.Disconnect;
+
 end;
 
 
@@ -704,6 +705,10 @@ procedure TFPrincipal.btnSalirClick(Sender: TObject);
 begin
   if Application.MessageBox('Si apaga el sincronizador dejará de actualizar la Base de Datos.', 'Atención', MB_OKCANCEL) = IDOK then
   begin
+    configGrillas(1); //guardo la config de las grillas
+    dm.ConexionLectura.Disconnect;
+    dm.ConexionEscritura.Disconnect;
+
     guardarArchivoLog;
     dm.EKIconizar.Visible:= false;
     ExitProcess(0);
@@ -1668,6 +1673,7 @@ begin
       CD_Tablas_Actualizar.First;
       while not CD_Tablas_Actualizar.Eof do //por cada una de las tablas que se tienen que tocar
       begin
+        error_sql:= '';
         //filtro las acciones a realizar para la tabla que estoy recorriendo en este momento
         CD_ProcesarNovedades.Filter:= format('ID = %s', [QuotedStr(CD_Tablas_Actualizar_Id.AsString)]);
         CD_ProcesarNovedades.Filtered:= true;
@@ -1713,7 +1719,7 @@ begin
               while not CD_ProcesarNovedades.Eof do //recorro todos los campos que cambian y actualizo la query
               begin
                 if error_sql = '' then
-                  error_sql:= CD_ProcesarNovedadesFIELD_NAME.AsString + ': ' + CD_ProcesarNovedadesNEW_VALUE.AsString
+                  error_sql:= 'Error en Tabla '+CD_ProcesarNovedadesTABLE_NAME.AsString+' ('+operacion+') => '+CD_ProcesarNovedadesFIELD_NAME.AsString + ': ' + CD_ProcesarNovedadesNEW_VALUE.AsString
                 else
                   error_sql:= error_sql + ' // ' + CD_ProcesarNovedadesFIELD_NAME.AsString + ': ' + CD_ProcesarNovedadesNEW_VALUE.AsString;
 
@@ -1777,7 +1783,15 @@ begin
           //  si la query no esta vacia y no es una operacion de Insert
           //o si la query es vacia pero es una operacion de Insert aplico los cambios
           if ((es_query_vacia = false) and (operacion <> 'I')) or ((es_query_vacia = true) and (operacion = 'I')) then
+//          try
             ZQ_ActualizarBase.ApplyUpdates; //aplico los cambios
+//          except
+//            begin
+//              memoLog.Lines.Add(error_sql);
+//              memoLog.Lines.Add('');
+//              ZQ_ActualizarBase.RevertRecord; //aplico los cambios
+//            end
+//          end
         end;
 
         //paso a la tabla siguiente
@@ -2210,13 +2224,40 @@ end;
 procedure TFPrincipal.popUpItemMostrarOcultarClick(Sender: TObject);
 begin
   Visible:= not Visible;
+
+  memoLog.SelStart:= Length(memoLog.Lines.Text);
+  memoLog.SelLength := 0;
 end;
 
+procedure TFPrincipal.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  CanClose:= false;
+  if Application.MessageBox('Si apaga el sincronizador dejará de actualizar la Base de Datos.', 'Atención', MB_OKCANCEL) = IDOK then
+  begin
+    CanClose:= true;
+    configGrillas(1); //guardo la config de las grillas
+    dm.ConexionLectura.Disconnect;
+    dm.ConexionEscritura.Disconnect;
 
+    guardarArchivoLog;
+    dm.EKIconizar.Visible:= false;
+  end;
+end;
 
-
-
-
+procedure TFPrincipal.btnPararContinuarClick(Sender: TObject);
+begin
+  if Timer.Enabled then
+  begin
+    Timer.Enabled:= false;
+    btnPararContinuar.Caption:= 'Continuar';
+  end
+  else
+  begin
+    Timer.Enabled:= true;
+    btnPararContinuar.Caption:= 'Parar';    
+  end
+end;
 
 end.
 
